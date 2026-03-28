@@ -22,6 +22,7 @@ availability:
 ---
 
 import {ProductScreenshot} from 'components/ProductScreenshot'
+import CalloutBox from 'components/Docs/CalloutBox'
 export const cohortsPageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/cohorts/cohorts-page-light-mode.png"
 export const cohortsPageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/cohorts/cohorts-page-dark-mode.png"
 
@@ -247,6 +248,43 @@ For a complete list of all available operators, including semver operators for v
 | Started doing event again | Started doing `shared insight` event in the "last 5 days" but had not done it in the "5 days prior" |
 
 You can select `days`, `weeks`, `months` or `years` time ranges here.
+
+### Dynamic (SQL) cohorts
+
+<CalloutBox icon="IconInfo" title="Beta feature" type="caution">
+
+Dynamic (SQL) cohorts require the `cohorts-allow-custom-hogql` feature flag. Contact support if you'd like early access.
+
+</CalloutBox>
+
+Dynamic (SQL) cohorts use a [HogQL](/docs/sql) query to define membership. This is useful for complex behavioral conditions that can't be expressed with the standard filter builder, like:
+
+- Users who completed event A but not event B in the last 30 days
+- Users with more than five pageviews grouped by person
+- Complex combinations of event sequences and properties
+
+To create a Dynamic (SQL) cohort:
+
+1. Go to **People** > **Cohorts** and click **New cohort**.
+2. Select **Dynamic (SQL) · Define with HogQL** from the type dropdown.
+3. Write a HogQL query that returns person IDs in the SQL editor.
+4. Click **Update query** or press **Cmd+Enter** to preview matching persons.
+5. Click **Save** to create the cohort.
+
+Your query must return one of these columns: `person_id`, `actor_id`, `id`, or `distinct_id`. When querying from the events table, use `person.id AS person_id` to get the person identifier.
+
+Here's an example query that creates a cohort of users who viewed a page more than five times in the last 30 days:
+
+```sql
+SELECT person.id AS person_id
+FROM events
+WHERE event = '$pageview'
+  AND timestamp > now() - INTERVAL 30 DAY
+GROUP BY person.id
+HAVING count() > 5
+```
+
+Like other dynamic cohorts, SQL cohorts are recalculated automatically once every 24 hours.
 
 ## FAQ
 
