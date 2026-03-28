@@ -39,12 +39,13 @@ Draft workflows can also be archived, even if they contain invalid configuration
 
 ## Triggers
 
-Every workflow starts with a trigger. Triggers represent actions taken by users that kick off the workflow. There are two types of triggers:
+Every workflow starts with a trigger. Triggers represent actions taken by users that kick off the workflow. There are three types of triggers:
 
 | Trigger type | Description |
 |--------------|-------------|
 | Event trigger | A captured [PostHog event](/docs/data/events) (e.g. `signed up`) |
 | Webhook trigger | Programmatically start a workflow with a webhook |
+| Batch trigger | Run a workflow against a filtered set of persons on a recurring schedule |
 
 ### Event triggers
 
@@ -58,6 +59,42 @@ To filter your events, click on the three lines icon next to the event name and 
     classes="rounded"
     alt="Event trigger filter"
 />
+
+### Batch triggers
+
+Batch triggers run a workflow against a filtered set of persons on a schedule, instead of responding to a real-time event. Examples:
+
+- Weekly digest emails to active users
+- Monthly reports on the 1st of each month
+- Periodic data syncs to external systems
+
+Event triggers run immediately when an event occurs. Batch triggers run at scheduled times and process all persons matching your filters.
+
+To configure a batch trigger:
+
+1. Select **Batch** as the trigger type
+2. Define filters to target persons based on their properties
+3. Configure the schedule (see [Recurring schedules](#recurring-schedules) below)
+
+#### Recurring schedules
+
+Batch triggers support recurring schedules using the RRULE format (RFC 5545) to define patterns like "every Monday at 9 AM" or "the 1st of each month."
+
+When configuring a schedule, set:
+
+| Setting | Description |
+|---------|-------------|
+| **Schedule pattern** | How often the workflow runs (e.g., weekly on Mondays, monthly on the 15th) |
+| **Start date** | When the schedule begins. The first run occurs on or after this date. |
+| **Timezone** | Times like "9 AM" are interpreted in this timezone. Adjusts automatically for daylight saving time. |
+
+Schedules must run at most once per hour. Common patterns include:
+
+- **Weekly** - Every Monday, every weekday, etc.
+- **Monthly** - A specific day (e.g., the 15th) or relative day (e.g., last day of the month)
+- **Daily** - Once per day at a specific time
+
+You can also set an optional end condition to limit how many times a workflow runs or specify an end date.
 
 ## Dispatches
 
