@@ -96,9 +96,9 @@ sendFlagsRequest();
 
 > **Note:** The `groups` key is only required for group-based feature flags. If you use it, replace `group_type` and `group_id` with the values for your group such as `company: "Twitter"`.
 
-#### Using evaluation context tags and runtime filtering without SDKs
+#### Using evaluation contexts and runtime filtering without SDKs
 
-When making direct API calls to the `/flags` endpoint, you can control which flags are evaluated using evaluation context tags and runtime filtering.
+When making direct API calls to the `/flags` endpoint, you can control which flags are evaluated using evaluation contexts and runtime filtering.
 
 ##### Evaluation contexts
 
@@ -150,11 +150,11 @@ const data = await response.json();
 
 </MultiLanguage>
 
-Only flags where at least one evaluation tag matches (or flags with no tags at all) will be returned. For example:
-- Flag with evaluation context tags `["production", "api", "backend"]` + request with `["production", "web"]` = ✅ Flag evaluates ("production" matches)
-- Flag with evaluation context tags `["staging", "api"]` + request with `["production", "web"]` = ❌ Flag doesn't evaluate (no tags match)
-- Flag with evaluation context tags `["web", "mobile"]` + request with `["production", "web"]` = ✅ Flag evaluates ("web" matches)
-- Flag with no evaluation context tags = ✅ Always evaluates (backward compatibility)
+Only flags where at least one evaluation context matches (or flags with no contexts at all) will be returned. For example:
+- Flag with evaluation contexts `["production", "api", "backend"]` + request with `["production", "web"]` = ✅ Flag evaluates ("production" matches)
+- Flag with evaluation contexts `["staging", "api"]` + request with `["production", "web"]` = ❌ Flag doesn't evaluate (no contexts match)
+- Flag with evaluation contexts `["web", "mobile"]` + request with `["production", "web"]` = ✅ Flag evaluates ("web" matches)
+- Flag with no evaluation contexts = ✅ Always evaluates (backward compatibility)
 
 ##### Runtime detection
 
@@ -235,7 +235,7 @@ const response = await fetch("<ph_client_api_host>/flags?v=2", {
 });
 ```
 
-##### Combining evaluation context tags and runtime filtering
+##### Combining evaluation contexts and runtime filtering
 
 Both features work together as sequential filters:
 
@@ -257,7 +257,7 @@ const response = await fetch("<ph_client_api_host>/flags?v=2", {
 // This request will only receive flags that:
 // 1. Have runtime set to "client" OR "all" (due to browser headers)
 // AND
-// 2. Have evaluation context tags matching "production" OR "web" (or no tags)
+// 2. Have evaluation contexts matching "production" OR "web" (or no contexts)
 // Note: You can also use the legacy "evaluation_environments" parameter
 ```
 
