@@ -21,6 +21,19 @@ This will then send alerts to your chosen destination when an issue is created o
 
 ![Slack notification](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_14_02_41_2x_2410295066.png)
 
+## Issue spiking
+
+> **Beta:** Issue spiking alerts require the `ERROR_TRACKING_SPIKE_ALERTING` [feature flag](/docs/feature-flags) to be enabled.
+
+Alert when an issue starts occurring more frequently than usual to catch problems before they impact more users.
+
+To set this up, go to [error tracking's configuration page](https://app.posthog.com/error_tracking/configuration?tab=error-tracking-alerting#selectedSetting=error-tracking-alerting) and click **Alerting**. Click **New notification**, select **Issue spiking** as the trigger, choose your destination, and configure the alert.
+
+The notification includes:
+- The issue name and description
+- The number of exceptions in the last 5 minutes
+- How much higher than baseline (e.g., "3x over baseline")
+
 ## Issue properties and assignments
 
 You can filter an alert based on the properties of an issue. This is useful for notifying a specific team when they have been auto assigned an issue using [auto assignment rules](/docs/error-tracking/managing-issues#auto-assignment-rules).
