@@ -98,4 +98,19 @@ The processing steps are:
 [windowId, event]
 ```
 
+## Rate limits
 
+When using a personal API key, the session recording APIs have the following rate limits:
+
+| Tier | Burst limit | Sustained limit |
+|------|-------------|-----------------|
+| Free | 12 requests/minute | 60 requests/hour |
+| Paid | 60 requests/minute | 300 requests/hour |
+| Enterprise | 100 requests/minute | 400 requests/hour |
+
+These limits apply to:
+
+- **Snapshot API** - fetching snapshot data for individual recordings
+- **Listing API** - listing and searching session recordings
+
+Your tier is determined automatically based on your organization's available features. Rate limits only apply to personal API key requests — session auth and sharing tokens are unaffected. If you need higher limits, [talk to us](/talk-to-a-human).
