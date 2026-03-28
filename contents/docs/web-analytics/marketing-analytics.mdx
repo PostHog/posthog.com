@@ -240,6 +240,33 @@ This is particularly useful when:
 - [LinkedIn Ads](/docs/cdp/sources/linkedin-ads) integration: Allowlist sources `linkedin`, `li`, `linkedin_paid`
 - [Meta Ads](/docs/cdp/sources/meta-ads) integration: Allowlist sources `facebook`, `instagram`, `meta`
 
+### Attribution mode
+
+Attribution mode controls how conversion credit is assigned when a user interacts with multiple campaigns before converting.
+
+#### Single-touch attribution
+
+Single-touch attribution gives 100% of the credit to one touchpoint:
+
+- **First touch** – All credit goes to the first touchpoint. Best for measuring brand awareness and top-of-funnel effectiveness.
+- **Last touch** – All credit goes to the final touchpoint before conversion. Best for measuring bottom-of-funnel effectiveness and what directly drives conversions.
+
+#### Multi-touch attribution
+
+<CalloutBox icon="IconInfo" title="Beta feature" type="caution">
+
+Multi-touch attribution is currently in beta and available behind a feature flag. Contact support if you'd like access.
+
+</CalloutBox>
+
+Multi-touch attribution spreads credit across multiple touchpoints to show which campaigns contribute to conversions:
+
+- **Linear** – Equal credit across all touchpoints. If a user interacts with 4 campaigns, each gets 25%. Good for understanding the full customer journey.
+- **Time decay** – More credit to recent touchpoints. Uses exponential decay with a half-life equal to your attribution window divided by 4. Good when touchpoints closer to conversion have more influence.
+- **Position-based** – 40% to first, 40% to last, and 20% split among middle touchpoints. Good for valuing both discovery and closing.
+
+To configure attribution mode, go to [**Settings** > **Marketing Analytics**](https://app.posthog.com/settings/environment-marketing-analytics).
+
 ### Base currency
 
 <ProductScreenshot
