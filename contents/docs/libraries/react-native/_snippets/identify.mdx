@@ -33,3 +33,18 @@ posthog.identify('distinctID',
 You should call `identify` as soon as you're able to. Typically, this is after your user logs in. This ensures that events sent during your user's sessions are correctly associated with them.
 
 When you call `identify`, all previously tracked [anonymous events](/docs/data/anonymous-vs-identified-events) will be linked to the user.
+
+### Controlling feature flag reload behavior
+
+By default, calling `identify` with a new distinct ID reloads feature flags automatically. This reload happens before the person merge from the `$identify` event propagates server-side, which can cause users to be re-bucketed into different flag variants.
+
+To prevent this, pass `disableFeatureFlagReload: true` as an option:
+
+```react-native
+posthog.identify('authenticated-user-id',
+  { email: 'user@posthog.com' },
+  { disableFeatureFlagReload: true }
+)
+```
+
+When disabled, feature flags refresh on the next session or when you call `posthog.reloadFeatureFlags()`, giving time for the person merge to complete.
