@@ -24,6 +24,10 @@ Instead of the firehose of all your PostHog data, you can construct a query that
 
 ![Filtering destinations](https://res.cloudinary.com/dmukukwp6/image/upload/filter_ui_8c7b1fb3be.png)
 
+> **Note:** Cohort-based filters don't work with destinations because cohorts use batch processing, not real-time streaming. Use person or event property filters instead.
+>
+> **Exception:** If you enable **Filter out internal and test users**, dynamic cohorts using only person properties do work — PostHog converts them to person property filters automatically. Cohorts with behavioral filters, static membership, or nested cohort references won't work, but you'll see an error with instructions.
+
 ## Testing
 
 The hardest part of integrating two services is making sure everything works as you expect. Every destination includes a built-in testing interface, enabling you to send real data from PostHog on-demand to your target service and debug any errors.
