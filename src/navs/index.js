@@ -4989,6 +4989,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Multi-project surveys',
+                    url: '/docs/surveys/multi-project-surveys',
+                    icon: 'IconCopy',
+                    color: 'blue',
+                },
+                {
                     name: 'Concepts',
                 },
                 {

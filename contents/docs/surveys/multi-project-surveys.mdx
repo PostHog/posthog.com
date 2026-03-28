@@ -1,0 +1,29 @@
+---
+title: Multi-project surveys
+sidebar: Docs
+showTitle: true
+availability:
+  free: none
+  selfServe: full
+  enterprise: full
+---
+
+You can copy surveys between PostHog [projects](/docs/settings/projects). This is useful when testing a survey in staging before releasing to production, or when deploying the same NPS survey across multiple products.
+
+## How to copy a survey to another project
+
+To copy a survey:
+
+1. Navigate to the survey you want to copy.
+2. Click the **...** menu at the top of the survey page.
+3. Select **Copy to another project**.
+4. Choose the target project from the list.
+5. Click **Copy**.
+
+When you copy a survey, PostHog also copies any dependent resources:
+
+- Linked insights (if the survey has one)
+- Actions used in display conditions
+- Cohorts referenced in display conditions (dynamic cohorts are fully copied; static cohorts are copied but will be empty since the persons may not exist in the target project)
+
+> **Note:** Feature flag targeting conditions are not copied. If your survey uses a linked feature flag, the `linkedFlagVariant` condition will be removed since the flag doesn't exist in the destination project. You'll need to set up a new feature flag in the target project if you want flag-based targeting.
