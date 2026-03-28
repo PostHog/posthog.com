@@ -193,6 +193,12 @@ The agent will query `system.cohorts` and cross-reference with purchase events t
 
 The agent will use `experiment-create` to set up an experiment with control/test variants and configure a funnel metric measuring pricing page to checkout conversion.
 
+### HogQL insights with chart configuration
+
+**Prompt:** "Create a HogQL insight called 'Daily Active Users' that shows unique users per day as a line chart, with the date on the X-axis"
+
+The agent will create a HogQL insight with your specified chart type (line, bar, or auto) and axis configuration, and return a link to the insight in PostHog.
+
 ### Error investigation
 
 **Prompt:** "What are the top 5 errors in my project this week?"
