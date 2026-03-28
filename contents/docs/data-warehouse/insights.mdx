@@ -55,6 +55,12 @@ For lifecycle insights, `Created at` and `Timestamp` are often different fields.
 
 If the lifecycle should be calculated for something other than people or groups, set the insight aggregation to **Custom aggregation target**. In that case, `Aggregation target` should be a stable identifier or HogQL expression for that entity. PostHog can still calculate lifecycle counts, but clicking through to actors only works when the aggregation target maps back to a person or group.
 
+## Using system tables
+
+You can also visualize data from [system tables](/docs/data-warehouse/sources/posthog#system-tables) in trends. These contain metadata about your PostHog project, like insights, feature flags, dashboards, and cohorts.
+
+To use a system table, click the series, go to the **System tables** tab, hover over the table you want, and click **Select**. Configure the ID, Distinct ID, and Timestamp fields the same way you would for data warehouse tables.
+
 ## Using the same table multiple times
 
 You can add the same data warehouse table multiple times in a single insight, each with different field configurations. This is useful when you want to track different stages of the same data.
