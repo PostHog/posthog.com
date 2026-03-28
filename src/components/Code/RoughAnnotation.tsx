@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
 export type AnnotationType = 'underline' | 'box' | 'circle' | 'highlight' | 'strike-through' | 'crossed-off' | 'bracket'
@@ -137,6 +137,29 @@ export function RoughAnnotation({
         prefersReducedMotion,
         onComplete,
     ])
+
+    // Recalculate position (without animation) when the container resizes.
+    // rough-notation's built-in ResizeObserver only watches the element itself,
+    // which doesn't fire when the PostHog internal window is resized.
+    useEffect(() => {
+        const main = elementRef.current?.closest('main')
+        if (!main) return
+
+        let timeout: ReturnType<typeof setTimeout>
+        const observer = new ResizeObserver(() => {
+            clearTimeout(timeout)
+            timeout = setTimeout(() => {
+                if (annotationRef.current?.isShowing()) {
+                    annotationRef.current.show()
+                }
+            }, 150)
+        })
+        observer.observe(main)
+        return () => {
+            clearTimeout(timeout)
+            observer.disconnect()
+        }
+    }, [])
 
     return (
         <span ref={elementRef} className={`inline ${className}`}>
