@@ -173,6 +173,25 @@ Goals shows your pinned or most recently created actions and the number of conve
   classes="rounded"
 />
 
+## Drilling down into tables
+
+Clicking a row in the channels, UTMs, geography, or devices tables filters the dashboard by that value and automatically navigates to the next level of detail.
+
+The drill-down chains work like this:
+
+| Category | Drill-down path |
+|----------|-----------------|
+| Sources | Channel → Referring Domain → Referring URL |
+| UTMs | Source → Medium → Campaign → Content → Term |
+| Geography | Country → Region → City |
+| Devices | Device Type → Browser → OS → Viewport |
+
+For example, clicking a channel like "Organic Search" filters by that channel and switches to the **Referring Domain** tab. Clicking a referring domain then switches to **Referring URL**.
+
+At the end of a chain (like Referring URL, UTM Term, City, or Viewport), clicking a row applies the filter without switching tabs.
+
+Clicking an already-filtered row removes the filter and stays on the current tab.
+
 ## Filtering your dashboard
 
 Like other dashboards in PostHog, the web analytics dashboard is filterable. This means you can filter for data with certain event or person property values. Options include browser, path name, device type, country, and UTMs. Just click the "Add filter" button next to the date range at the top of the dashboard.
