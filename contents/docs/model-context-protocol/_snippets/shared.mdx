@@ -223,6 +223,32 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+### Data warehouse views
+
+**Prompt:** "List all the views in my data warehouse"
+
+The agent will use `view-list` to return all views with their names, materialization status, and column schemas.
+
+**Prompt:** "Create a view called 'active_users' that shows users who triggered any event in the last 7 days"
+
+The agent will use `view-create` to create a view with the specified HogQL query. You can reference it by name in other HogQL queries.
+
+**Prompt:** "Materialize the 'daily_signups' view so it runs faster"
+
+The agent will use `view-materialize` to enable materialization with a 24-hour sync schedule. Materialized views store pre-computed results for faster queries.
+
+**Prompt:** "Check the run history for my 'revenue_metrics' view"
+
+The agent will use `view-run-history` to show the 5 most recent materialization runs and their statuses.
+
+**Prompt:** "Update the 'active_users' view to only include users from the last 30 days instead of 7 days"
+
+The agent will use `view-update` to modify the view's query. The update includes conflict detection to prevent overwriting changes made by others.
+
+**Prompt:** "Trigger a manual refresh of the 'daily_signups' view"
+
+The agent will use `view-run` to immediately refresh the materialized data instead of waiting for the next scheduled sync.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
