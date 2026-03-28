@@ -71,6 +71,17 @@ You can also block custom user agents by setting the `custom_blocked_useragents`
 
 > **Note:** If you use Ahrefs, you need to switch to use the "Desktop" user agent. In other modes, the user agent doesn't contain information PostHog can use to block their crawl from analytics.
 
+### Filtering by traffic type
+
+You can filter by traffic type properties in insights, dashboards, and Web Analytics to analyze bot traffic or exclude it:
+
+- **Is bot** - Whether the event came from a bot, crawler, or automation tool
+- **Traffic type** - Regular, Bot, AI Agent, or Automation
+- **Traffic category** - More specific categories like llm_crawler, search_crawler, seo_crawler, or regular
+- **Bot name** - The detected bot or crawler (e.g., Googlebot, ChatGPT, Claude)
+
+To filter out bot traffic from a trend insight, add a filter where **Traffic type** does not equal "Bot".
+
 ## Why am I getting a lot of direct traffic?
 
 Direct traffic usually refers to when a user enters the address to your website directly, but it also includes any traffic where the referrer is unknown or impossible to calculate. We use the `document.referrer` property, which might be hidden for a few reasons:
