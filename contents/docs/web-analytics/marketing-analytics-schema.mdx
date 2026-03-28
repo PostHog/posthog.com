@@ -96,7 +96,7 @@ Each advertising platform provides data using different field names. PostHog nor
 | `Reported Conversion Value` | `metrics_conversions_value` | Monetary value of conversions | [Google Ads API - Metrics](https://developers.google.com/google-ads/api/fields/v21/metrics#metrics.conversions_value) |
 | Date field | `segments_date` | Used for date range filtering | |
 
-**Required tables:** `campaign` and `campaign_stats`
+**Required tables:** `campaign` and `campaign_overview_stats`
 
 </Tab.Panel>
 <Tab.Panel>
@@ -135,7 +135,7 @@ arraySum(x -> JSONExtractFloat(x, 'value'),
 | `Reported Conversion Value` | `conversion_value_in_local_currency` | Returns 0 if field not available | [LinkedIn Marketing API - Reporting](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads-reporting/ads-reporting) |
 | Date field | `date_start` | Start date of reporting period | [LinkedIn Marketing API - Reporting](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads-reporting/ads-reporting) |
 
-**Required tables:** `campaigns` and `campaign_stats`
+**Required tables:** `campaign_groups` and `campaign_group_stats`
 
 </Tab.Panel>
 <Tab.Panel>
