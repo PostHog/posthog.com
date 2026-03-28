@@ -194,6 +194,12 @@ You can also select how events are grouped – e.g. by hour, day, week, or mont
 
 Smoothing, where we apply a 7-day or 28-day rolling average, is available when data is grouped by day. This is useful for eliminating excess variability in data, and identifying long-term patterns in very noisy data.
 
+#### Custom relative date ranges
+
+You can set a custom relative date range to exclude recent incomplete data (e.g., "15 days ago to 1 day ago") or analyze specific trailing windows.
+
+Click **Custom relative date range…** in the date picker, set your "from" and "to" values with unit selectors (days, weeks, months, etc.), then click **Apply**. Your range displays as "X days ago to Y days ago".
+
 You can also hide weekend data from your chart by enabling **Hide weekend data** in the **Options** dropdown. See [Insight tips and advanced features](/docs/product-analytics/trends/tips#hide-weekend-data) for details.
 
 > **Note** Setting a very long time range can severely impact query performance, especially for high-volume events. If you find it's taking too long to load, consider reducing your date range.
