@@ -170,13 +170,14 @@ You can view the schema for the sessions model in the configuration form when cr
 Configuring a batch export targeting BigQuery requires the following BigQuery-specific configuration values:
 * **Table ID:** The ID of the destination BigQuery table. This is not the fully-qualified name of a table, so omit the dataset and project IDs. For example for the fully-qualified table name `project-123:dataset:MyExportTable`, use only `MyExportTable` as the table ID.
 * **Dataset ID:** The ID of the BigQuery dataset which contains the destination table. Only the dataset ID is required, so omit the project ID if present. For example for the fully-qualified dataset `project-123:my-dataset`, use only `my-dataset` as the dataset ID.
+* **Integration:** Select a Google Cloud service account integration. Choose **Impersonate service account** for the recommended impersonation method (see [Option 1](#option-1-service-account-impersonation)), or **Upload service account JSON key file** if impersonation isn't available (see [Option 2](#option-2-json-key-file)).
 
 The configuration of a Google Cloud service account integration depends on your authentication method:
 
 * **If using service account impersonation:** Provide the **Service Account Email** and **Project ID**. No key file is needed.
 * **If using a JSON key file:** Upload the **Google Cloud JSON key file** for your Service Account. The project ID and service account information are extracted automatically from the key file.
 
-See the [BigQuery access setup section](#setting-up-bigquery-access) for more information on configuring authentication.
+See [Setting up BigQuery access](#setting-up-bigquery-access) for more information on configuring authentication.
 
 ## Examples
 
