@@ -1,0 +1,47 @@
+---
+title: Analyze error insights
+---
+
+The Insights tab in [Error Tracking](https://app.posthog.com/error_tracking?activeTab=insights) provides high-level analytics to help you understand error patterns and prioritize fixes.
+
+## Overview charts
+
+Three trend charts give you a quick view of your error health:
+
+| Chart | Description |
+| --- | --- |
+| **Exception volume** | Number of exceptions captured per day. Use this to spot spikes or trends. |
+| **Affected users rate** | Percentage of users who experienced at least one exception. |
+| **Crash-free sessions** | Percentage of sessions that completed without any exceptions. Higher is better. |
+
+## Analysis tables
+
+Three tables help you dig deeper into where errors are happening and what's causing them.
+
+### Session-ending issues
+
+Shows issues that caused users to leave – specifically, issues where no activity occurred within 5 seconds after the exception. These are often the most impactful bugs since they directly disrupt the user experience.
+
+Includes the issue name, session count, and a link to view the full issue details.
+
+### Error rate by page
+
+Shows which pages have the highest error rates, calculated as the percentage of page visits that resulted in an exception. Use this to identify problematic pages that need attention.
+
+Includes the page URL, total visits, error count, error rate percentage, and a link to view errors filtered by that page.
+
+### Error rate by feature flag
+
+Shows error rates broken down by active [feature flags](/docs/feature-flags), helping you identify whether specific flags correlate with higher error rates. Useful for catching regressions introduced by new features behind flags.
+
+Includes the flag name, total sessions where the flag was active, sessions with errors, error rate percentage, and a link to view the flag details.
+
+## Filtering
+
+You can filter all insights using the controls at the top of the page:
+
+| Filter | Description |
+| --- | --- |
+| **Date range** | Adjust the time period for all charts and tables |
+| **Test accounts** | Toggle whether to include or exclude internal test accounts |
+| **Property filters** | Narrow down the data by exception properties |

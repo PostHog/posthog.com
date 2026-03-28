@@ -4812,6 +4812,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Analyze error insights',
+                    url: '/docs/error-tracking/insights',
+                    icon: 'IconGraph',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
                     name: 'Manage and resolve issues',
                     url: '/docs/error-tracking/managing-issues',
                     icon: 'IconDashboard',
