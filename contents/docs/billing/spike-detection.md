@@ -29,6 +29,16 @@ Spike detection emails are sent **only to customers that don't have an account o
 
 To avoid notification fatigue, the system consolidates all detected spikes across all products into a single daily email. If an email was sent in the past 7 days, no new spike detection email will be sent, even if new spikes are detected.
 
+## Viewing spike alerts
+
+Go to [**Health** > **Spike alerts**](https://app.posthog.com/health/spike-alerts) to view detected usage spikes from the last 30 days.
+
+The table shows when each spike was detected, which metric spiked (with up/down arrows), the actual value, and the typical weekday average for comparison. Use the search box to filter by metric name.
+
+Click **Explain** on any row to have PostHog AI analyze the spike.
+
+> **Note:** This page is in beta and requires the `spike-alerts-page` feature flag.
+
 ## Related systems
 
 Spike detection complements other billing and usage monitoring features, such as [billing limits](/docs/billing/limits-alerts) and [usage dashboards](/templates/posthog-billable-usage).
