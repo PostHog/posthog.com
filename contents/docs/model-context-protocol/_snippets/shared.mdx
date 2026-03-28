@@ -154,6 +154,38 @@ The agent will use the `create-feature-flag` tool to create the flag with a 20% 
 
 The agent will use the `create-feature-flag` tool with a `multivariate` configuration to create the flag with multiple variants. Variant rollout percentages must be integers that sum to 100.
 
+### Feature flag health and debugging
+
+**Prompt:** "Check the status of my 'beta-pricing' feature flag"
+
+The agent uses the `feature-flags-status-retrieve` tool to check the flag's health and returns whether it's active, stale, deleted, or unknown – plus an explanation why.
+
+**Prompt:** "What flags depend on my 'core-feature-enabled' flag?"
+
+The agent uses the `feature-flags-dependent-flags-retrieve` tool to find other active flags that depend on the specified flag. This helps you understand the impact before modifying or disabling a flag.
+
+**Prompt:** "Why is the 'new-onboarding' flag evaluating to false for user abc123?"
+
+The agent uses the `feature-flags-evaluation-reasons-retrieve` tool to debug the evaluation, showing the flag's value and reason (like `condition_match`, `no_condition_match`, or `disabled`).
+
+### Feature flag impact assessment
+
+**Prompt:** "How many users would be affected if I add a condition that targets users with plan='enterprise'?"
+
+The agent uses the `feature-flags-user-blast-radius-create` tool to calculate how many users would match the condition compared to your total user count.
+
+### Feature flag audit trail
+
+**Prompt:** "Show me the change history for my 'checkout-redesign' feature flag"
+
+The agent uses the `feature-flags-activity-retrieve` tool to get the audit trail – who made changes, what was modified, and when.
+
+### Cross-project flag management
+
+**Prompt:** "Copy my 'holiday-sale' feature flag from the production project to staging and development"
+
+The agent uses the `feature-flags-copy-flags-create` tool to copy the flag configuration to multiple target projects within your organization. You can also include scheduled changes by asking to copy the schedule.
+
 ### Analytics queries
 
 **Prompt:** "How many unique users signed up in the last 7 days, broken down by day?"
