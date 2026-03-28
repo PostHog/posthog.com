@@ -191,6 +191,38 @@ Both features are available in the bottom right corner of the recording player a
     Screen capture and clip capture features in session replay
 </Caption>
 
+## Kiosk mode
+
+Kiosk mode auto-plays session recordings in a continuous loop – great for displaying on a TV or monitor in your office.
+
+To access it, go to [Replay > Kiosk](https://us.posthog.com/replay/kiosk) or select **Kiosk** from the Session Replay menu.
+
+### Filtering recordings
+
+Before playback starts, you can configure which recordings to show:
+
+- **Pages visited (contains)**: Only show recordings where users visited a specific page (e.g., `/welcome`)
+- **Date range**: Last hour, 24 hours, 7 days, 30 days, or 90 days
+- **Minimum active duration**: Only show recordings where users were active for at least this many seconds
+
+Click **Start kiosk** to begin playback. Test accounts are always filtered out.
+
+### Bookmarkable URLs
+
+Filter settings are saved in the URL, so you can bookmark or share specific kiosk configurations. The URL parameters are:
+
+- `visited_page`: Page filter (e.g., `/welcome`)
+- `date_from`: Date range (e.g., `-7d` for last 7 days)
+- `min_duration`: Minimum active duration in seconds
+- `play=1`: Start playback immediately
+
+Example: `/replay/kiosk?visited_page=/pricing&date_from=-24h&min_duration=10&play=1`
+
+### During playback
+
+- Press **Escape** to exit kiosk mode
+- If no recordings match your filters, click **Back to setup** to adjust them
+
 ## Further reading
 
 - [How to use session replays to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)
