@@ -131,13 +131,14 @@ From here, you can create a new backfill by clicking the "Start backfill" button
 
 ![create historic export](https://res.cloudinary.com/dmukukwp6/image/upload/2024_08_09_at_14_54_54_90338968ac.png)
 
-After you start a backfill, PostHog first estimates the total number of records to export and validates the date range.
+After you start a backfill, PostHog first estimates the total number of records to export and validates the date range. You'll see a notification with the row estimate and an option to cancel. If no data matches the selected time range, you'll get a warning that the backfill will complete with nothing to export.
+
+The backfills table includes a **Total rows** column showing how many records are being exported:
+
+- For in-progress backfills, this shows an estimated count (prefixed with `~`) that may change as the backfill progresses.
+- For completed backfills, this shows the final count of exported rows.
 
 The start date of a backfill may be adjusted depending on when the earliest available data is. For example, if you choose a start date of 2026-01-01 but the earliest event captured in PostHog is 2026-01-02, the start date is adjusted to 2026-01-02. On the other hand, the end date of the backfill cannot be set past the current time, as our engineers have yet to figure out time traveling to allow us to export events in the future.
-
-If the estimation finds no matching data to export, the backfill completes immediately rather than creating empty batch runs.
-
-The backfills table includes a **Total rows** column that displays the estimated or final number of rows exported. For in-progress backfills, the count is shown as an approximate value (e.g. `~1,000`). For completed backfills, the final row count is displayed.
 
 ### Cancelling backfills
 
