@@ -6,7 +6,7 @@ The [PostHog MCP server](/docs/model-context-protocol) gives AI agents direct ac
 
 With MCP, your agents can:
 
-- **Search and filter logs** – Query by severity level, service name, date range, and free text.
+- **Search and filter logs** – Query by severity level, service name, date range, and property filters.
 - **Discover log attributes** – List available attributes and their values to build targeted queries.
 - **Debug in context** – Investigate production issues without switching tools.
 - **Correlate with traces** – Use trace IDs and span IDs from log entries to follow request flows across services.
@@ -29,7 +29,7 @@ The MCP server provides three tools for working with logs:
 
 | Tool | Description |
 |------|-------------|
-| `logs-query` | Search and query logs with filters for severity levels (trace, debug, info, warn, error, fatal), service names, date ranges, and free text. Supports pagination for large result sets. |
+| `logs-query` | Search logs with filters for severity level (trace, debug, info, warn, error, fatal), service name, date range, and structured attribute filters. Supports pagination for large result sets. |
 | `logs-list-attributes` | List available log attributes in your project to discover what you can filter on. Supports filtering by attribute type (log or resource). |
 | `logs-list-attribute-values` | Get possible values for a specific log attribute. Find service names, log levels, or other attribute values before querying. |
 
