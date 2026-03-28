@@ -51,6 +51,39 @@ curl -X POST \
   "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
 ```
 
+## Pagination
+
+HogQL endpoints support pagination using `limit` and `offset` parameters. Insight-based endpoints (like Trends or Funnels) don't support `offset`.
+
+| Parameter | Description |
+|-----------|-------------|
+| `limit` | Maximum number of results to return |
+| `offset` | Number of results to skip (must be used with `limit`) |
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"limit": 100, "offset": 0}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+When using pagination, the response includes additional fields:
+
+```json
+{
+  "results": [...],
+  "columns": ["column_a", "column_b"],
+  "hasMore": true,
+  "limit": 100,
+  "offset": 0
+}
+```
+
+- `hasMore` – whether more results are available beyond the current page
+- `limit` – the limit used in the request
+- `offset` – the offset used in the request
+
 ## Response format
 
 A successful response (HTTP 200) includes:
