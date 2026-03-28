@@ -70,6 +70,26 @@ Dispatches are the messages you send, mail, slack, SMS, webhook, or any PostHog 
 | Webhook | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section. |
 | CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an dispatch step to deliver messages to users or other services. |
 
+### Email dispatch options
+
+Email dispatches have the following fields:
+
+| Field | Description |
+|-------|-------------|
+| **From** | Sender name and email address (configured in your email channel) |
+| **To** | Recipient's email address |
+| **Subject** | Email subject line |
+| **Body** | Email content (HTML and plain text) |
+
+Click **Show advanced fields** for more options:
+
+| Advanced field | Description |
+|----------------|-------------|
+| **Reply-To** | Optional reply-to address – comma-separate multiple addresses |
+| **Cc** | Optional CC recipients – comma-separate multiple addresses |
+| **Bcc** | Optional BCC recipients – comma-separate multiple addresses |
+| **Preheader** | Preview text shown in email clients before opening the email |
+
 ## Delays
 
 Delays help you control the timing of your messages. There are 3 types of delays:
