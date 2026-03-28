@@ -35,16 +35,17 @@ When defining your funnel metric, you only specify the events that should occur 
 
 ### Mean
 
-Use this to track metrics like total event count or summed values (e.g., revenue). Here's how it works:
+Use this to track metrics like total event count, summed values (e.g., revenue), or percentiles. Here's how it works:
 
-1. We aggregate the chosen value for each user using your selected method (count, sum, or average).
+1. We aggregate the chosen value for each user using your selected method (count, sum, average, min, max, or a percentile like median, p75, p90, p95, or p99).
 2. We then compute the _mean_ of those values for each variant.
 3. This mean is used to determine the statistical difference between variants.
 
 For example:
 
 - If you choose **sum of revenue**, we calculate total revenue per user, then take the mean across users.
-- If you select **average revenue** (not supported yet, but coming soon), we first compute each user's average (total revenue / number of events), then average those values across users.
+- If you choose **average revenue**, we first compute each user's average (total revenue / number of events), then average those values across users.
+- If you choose **median revenue**, we calculate the median revenue per user, then take the mean of those medians across users. This is useful when you want to reduce the impact of outliers in per-user calculations.
 
 ### Ratio
 
@@ -63,7 +64,7 @@ Common use cases:
 - **Items per session**: Measure engagement by dividing total interactions by unique sessions
 - **Custom conversion rates**: Calculate conversions with a denominator other than exposed users (e.g., conversions per active user)
 
-Both the numerator and denominator support all aggregation methods (count, sum, average, unique values). You can even use the same event with different properties for each part of the ratio, such as dividing total revenue by total quantity sold from purchase events.
+Both the numerator and denominator support all aggregation methods (count, sum, average, min, max, percentiles, unique values). You can even use the same event with different properties for each part of the ratio, such as dividing total revenue by total quantity sold from purchase events.
 
 ### Retention
 
