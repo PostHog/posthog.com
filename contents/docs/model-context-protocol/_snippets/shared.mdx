@@ -160,6 +160,15 @@ The agent will use the `create-feature-flag` tool with a `multivariate` configur
 
 The agent will use the `query-run` tool to execute a trends query and return daily signup counts.
 
+### User flow analysis
+
+**Prompt:** "Show me the paths users take after landing on the homepage"
+
+The agent will use the `query-run` tool with a PathsQuery to visualize user flows from your homepage, showing common navigation paths and drop-off points.
+
+**Prompt:** "What are the most common sequences of LLM tool calls in my AI agent?"
+
+The agent will use `query-run` with a PathsQuery and custom HogQL expression to trace tool call sequences, showing how your AI agent chains tools together.
 
 ### Path analysis
 
