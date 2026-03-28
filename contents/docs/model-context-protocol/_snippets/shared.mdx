@@ -223,6 +223,94 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+### Annotation management
+
+**Prompt:** "Create an annotation for today saying 'Deployed v2.5 with new checkout flow'"
+
+The agent will use the `annotation-create` tool to create an annotation with the content and date, scoped to your current project. Annotations appear on charts to mark deployments, releases, and other significant changes.
+
+**Prompt:** "List all annotations from the last month"
+
+The agent will use the `annotations-list` tool to retrieve annotations, letting you review existing markers on your charts and dashboards.
+
+**Prompt:** "Add an organization-wide annotation for March 15th marking our company rebrand"
+
+The agent will create an annotation with `scope` set to `organization` so it appears across all projects in your organization.
+
+### Activity log queries
+
+**Prompt:** "Show me all recent feature flag changes in the project"
+
+The agent will use the `activity-logs-list` tool with `scope` set to `FeatureFlag` to return recent activity logs showing who created, updated, or deleted feature flags, including the specific fields that changed.
+
+**Prompt:** "Who made changes to dashboard 42?"
+
+The agent will use the `activity-logs-list` tool with `scope` set to `Dashboard` and `item_id` set to `42` to return all modifications to that specific dashboard, including who made each change and when.
+
+**Prompt:** "What has changed in the project recently?"
+
+The agent will use the `activity-logs-list` tool to return all recent activity across the project, ordered by most recent first, including feature flag updates, insight creations, experiment launches, and other changes.
+
+### Alert management
+
+**Prompt:** "Create a daily alert on my pageview insight that fires when the value exceeds 500"
+
+The agent will use the `alert-create` tool to create an alert with an absolute threshold. It will set up the alert to monitor the specified insight and notify subscribed users when the threshold is breached.
+
+**Prompt:** "List all my alerts and show their current state"
+
+The agent will use the `alerts-list` tool to retrieve all alerts in the project, returning their names, thresholds, current state (firing or not), and check intervals.
+
+**Prompt:** "Update my pageview alert to fire when the value increases by more than 50% compared to the previous period"
+
+The agent will use the `alert-update` tool to change the alert condition to a relative increase with a percentage threshold.
+
+**Prompt:** "Snooze my pageview alert for 2 hours"
+
+The agent will use the `alert-update` tool to set `snoozed_until` to temporarily pause notifications.
+
+**Prompt:** "Delete the old weekly report alert"
+
+The agent will use the `alerts-list` tool to find the alert by name, then use `alert-delete` to permanently remove it.
+
+### Notebook management
+
+**Prompt:** "List all notebooks in my project"
+
+The agent will use the `notebooks-list` tool to retrieve all notebooks and return a summary including titles, short IDs, and creation dates.
+
+**Prompt:** "Create a new notebook called 'Q1 Analysis' with some initial content"
+
+The agent will use the `notebooks-create` tool to create a notebook with the specified title and content as a ProseMirror-based JSON document structure.
+
+**Prompt:** "Update the notebook 'abc123' to add a new section about user retention"
+
+The agent will first use `notebooks-retrieve` to get the current content and version, then use `notebooks-partial-update` with the updated content and the correct version number for concurrency control.
+
+**Prompt:** "Delete the notebook with ID 'xyz789'"
+
+The agent will use the `notebooks-destroy` tool to soft-delete the notebook by its short_id.
+
+You can also query notebooks via HogQL using the `system.notebooks` table (see [PostHog system tables](/docs/data-warehouse/sources/posthog#systemnotebooks)).
+
+### Person management
+
+**Prompt:** "Find all persons with email containing 'alice@example.com'"
+
+The agent will use the `persons-list` tool with the `email` parameter to search for matching persons, returning their properties, distinct IDs, and a link to view them in PostHog.
+
+**Prompt:** "Get the details for person ID 42 and show me which cohorts they belong to"
+
+The agent will first use `persons-retrieve` to get the person's full profile, then use `persons-cohorts-retrieve` to list all cohorts the person is a member of.
+
+**Prompt:** "Set the 'plan' property to 'enterprise' on the person with distinct_id 'user_abc123'"
+
+The agent will use `persons-list` to find the person by distinct_id, then use `persons-property-set` to update their plan property. This is an async operation – the change is queued and processed by PostHog.
+
+**Prompt:** "Remove the 'legacy_flag' property from person ID 42"
+
+The agent will use `persons-property-delete` to remove the specified property from the person.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
