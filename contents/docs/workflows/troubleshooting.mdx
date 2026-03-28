@@ -52,6 +52,23 @@ When this error occurs, the workflow's error handling setting determines what ha
 - `on_error: abort` - The workflow exits immediately
 - `on_error: continue` - The workflow skips to the next step
 
+## Workflow automatically disabled?
+
+PostHog automatically disables workflows with high email bounce or complaint rates to protect your sender reputation.
+
+A workflow is disabled when (calculated over a 24-hour rolling window after at least 100 emails sent):
+
+- **Bounce rate exceeds 2%** – the threshold Google and Yahoo use to flag senders
+- **Complaint rate exceeds 0.1%** – the threshold that can trigger account suspension
+
+When disabled, the workflow moves to draft status and you'll receive an email notification.
+
+**To fix this:**
+
+- Clean your email list to remove invalid addresses and unengaged users
+- Check that your email content isn't being flagged as spam
+- Re-enable the workflow once you've addressed the issues
+
 ## Solved community questions
 
 <SolvedQuestions
