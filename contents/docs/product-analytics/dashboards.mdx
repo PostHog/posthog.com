@@ -123,7 +123,7 @@ These options require editor access to the insight.
 
 ### Adding text cards
 
-Click the dropdown on the **Add...** button and select **Text card** to add a text card to your dashboard.
+Click the dropdown on the **Add** button and select **Text card** to add a text card to your dashboard.
 
 Text cards support Markdown formatting for text. You can also drag and drop images.
 
@@ -131,11 +131,16 @@ You can use text cards to annotate your dashboard – useful for adding context 
 
 ### Adding button tiles
 
-Click the dropdown on the **Add...** button and select **Button** to add a clickable button tile to your dashboard.
+Button tiles add clickable links to your dashboard for quick navigation to related dashboards, external tools, or other areas of PostHog.
 
-Button tiles let you link to other pages within PostHog or external URLs. This is useful for creating navigation shortcuts to related dashboards or external resources.
+To add one:
 
-When creating a button tile, you can configure:
+1. Click **Add** and select **Button**.
+2. Enter a URL – either an internal path (like `/dashboards`) or an external URL (like `https://example.com`).
+3. Enter the button text.
+4. Choose placement (left or right) and style (primary or secondary).
+5. Optionally enable **Transparent background** to blend the tile with the dashboard.
+6. Click **Save**.
 
 - **URL** - The destination link. Use a path like `/dashboards` for internal PostHog pages, or a full URL like `https://example.com` for external sites.
 - **Button text** - The label displayed on the button.
@@ -143,10 +148,16 @@ When creating a button tile, you can configure:
 - **Style** - Choose between primary (filled) or secondary (outlined) button styles.
 - **Transparent background** - Toggle to remove the tile's background for a cleaner look.
 
+Internal links open within PostHog. External links open in a new tab.
 
-### Toggling labels and values on insights
+### Copying and moving widgets
 
-You can toggle the visibility of labels or values on insight charts directly from the dashboard without editing the insight. Click the **...** icon on an insight card and select the toggle option. For pie charts, the option is **Show/Hide labels on series**. For other supported chart types (trends, lifecycle, stickiness, and funnel trends), the option is **Show/Hide values on series**. This change is saved to the insight.
+Insights and text cards can appear on multiple dashboards. Click the **...** menu on any widget and select:
+
+- **Move to** - Move the widget to a different dashboard, removing it from the current one
+- **Copy to** - Copy the widget to another dashboard while keeping it here
+
+Both options show a searchable list of dashboards. Dashboards already containing the widget are disabled.
 
 ### Sharing a dashboard
 
