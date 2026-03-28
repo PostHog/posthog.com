@@ -70,6 +70,46 @@ Dispatches are the messages you send, mail, slack, SMS, webhook, or any PostHog 
 | Webhook | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section. |
 | CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an dispatch step to deliver messages to users or other services. |
 
+### Email engagement events
+
+PostHog automatically captures engagement events when you send an email through a workflow. Use these to build insights, trigger follow-up workflows based on email interactions, or create cohorts based on engagement.
+
+#### Event names
+
+| Event | Description |
+|-------|-------------|
+| `$messaging_email_sent` | Email was successfully sent |
+| `$messaging_email_failed` | Email failed to send |
+| `$messaging_email_opened` | Recipient opened the email |
+| `$messaging_email_link_clicked` | Recipient clicked a link in the email |
+| `$messaging_email_bounced` | Email bounced (undeliverable) |
+| `$messaging_email_blocked` | Email was blocked by the recipient's mail server |
+| `$messaging_email_spam` | Email was marked as spam |
+| `$messaging_email_unsubscribed` | Recipient unsubscribed |
+
+#### Event properties
+
+All email engagement events include these properties:
+
+| Property | Description |
+|----------|-------------|
+| `$workflow_id` | ID of the workflow that sent the email |
+| `$messaging_source` | How the event was detected: `direct` (tracking pixel/redirect) or `ses` (SES webhook) |
+
+Some events include additional properties:
+
+| Property | Events | Description |
+|----------|--------|-------------|
+| `$email_to` | `$messaging_email_sent`, bounce/block events | Recipient email address |
+| `$email_subject` | `$messaging_email_sent` | Email subject line |
+| `$link_url` | `$messaging_email_link_clicked` | URL that was clicked |
+
+#### Automatic opt-out on hard bounces
+
+When an email permanently bounces (hard bounce), PostHog automatically opts that person out of future marketing emails. This protects your sender reputation and deliverability by preventing repeated sends to invalid addresses.
+
+Soft bounces (temporary failures like a full mailbox) don't trigger opt-out since these addresses may become deliverable again.
+
 ## Delays
 
 Delays help you control the timing of your messages. There are 3 types of delays:
