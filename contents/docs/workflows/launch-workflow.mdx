@@ -170,12 +170,44 @@ This will publish the workflow and start delivering messages to your users when 
 
 <Step checkpoint title="Monitor the workflow" subtitle="Confirm messages are being delivered">
 
-Once the workflow is enabled, you can monitor your workflow in the **Metrics** and **Logs** tabs of the workflow builder.
+Once the workflow is enabled, monitor it in the **Metrics** and **Logs** tabs.
 
-To confirm your workflow is delivering messages, look for these signs:
-- In the **Metrics** tab, you should see a line chart showing the number of **succeeded** and **triggered** messages.
-- In the **Logs** tab, you can see logs of recently triggered workflows. Confirm that there aren't any errors.
-- See the message delivered in your inbox.
+### Workflow summary metrics
+
+The **Metrics** tab shows summary metrics at the top, plus trend charts showing workflow activity over time.
+
+| Metric | Description |
+|--------|-------------|
+| In progress | Workflow runs currently in progress |
+| Started | Total workflow runs started in the selected time period |
+| Emails sent | Total emails sent by this workflow |
+| Completed | Workflow runs that finished successfully |
+
+### Email metrics
+
+For workflows with email dispatches, the **Metrics** tab also shows detailed email metrics:
+
+| Metric | Description |
+|--------|-------------|
+| Sent | Total emails sent |
+| Failed | Emails that failed to send |
+| Opened | Emails opened by recipients |
+| Link clicked | Links clicked in emails |
+| Bounced | Emails that bounced |
+| Blocked | Emails blocked by recipient servers |
+| Marked as spam | Emails marked as spam |
+
+If your workflow has multiple email dispatches, you'll also see a breakdown table showing metrics per email action (sent, delivered, opened, clicked).
+
+### Logs
+
+The **Logs** tab shows logs of recently triggered workflows. Check for errors here.
+
+To confirm your workflow is delivering messages:
+- Summary metrics show workflow runs starting and completing
+- Email metrics show successful delivery
+- No errors in the logs
+- Messages arrive in your inbox
 
 </Step>
 
