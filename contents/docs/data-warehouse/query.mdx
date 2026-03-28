@@ -45,6 +45,29 @@ Here you can:
 
 </CalloutBox>
 
+## Querying direct connections (beta)
+
+<CalloutBox icon="IconInfo" title="Beta feature" type="fyi">
+
+This feature is in beta and requires the `dwh-postgres-direct-query` feature flag.
+
+</CalloutBox>
+
+If you've linked a [Postgres source](/docs/data-warehouse/sources/postgres) with the **Query directly** access method, you can run SQL queries directly against that database from the SQL editor.
+
+Switch between connections using the dropdown at the top of the database panel:
+
+- **PostHog (ClickHouse)** – Query your synced data warehouse (default)
+- **Your Postgres connections** – Query directly against linked Postgres databases
+
+When you select a direct connection:
+
+- The database tree shows tables from that Postgres source
+- Queries run live against your Postgres database
+- Results can't be joined with PostHog data
+
+To add a new Postgres direct connection, select **+ Add postgres direct connection** from the dropdown.
+
 ## SQL visualizations
 
 SQL queries have multiple different visualization options including:

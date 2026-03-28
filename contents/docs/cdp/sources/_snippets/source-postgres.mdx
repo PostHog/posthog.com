@@ -1,19 +1,59 @@
 The Postgres connector can link your database tables to PostHog.
 
-To link Postgres:
+## Access methods
+
+When linking Postgres, you can choose how PostHog accesses the data.
+
+### Sync to warehouse (default)
+
+PostHog syncs selected tables into its managed ClickHouse storage. Once synced, you can:
+
+- Query the data using HogQL
+- Join with PostHog data (events, persons, etc.)
+- Use the data in insights and dashboards
+
+To link Postgres for syncing:
 
 1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
 2. Click **New source** and select Postgres
 3. Enter your database connection details:
-    - **Host:** The hostname or IP your database server like `db.example.com` or `123.132.1.100`.
-    - **Port:** The port your database server is listening to. The default is `5432`.
-    - **Database:** The name of the database you want like `analytics_db`.
-    - **User:** The username with the necessary permissions to access the database.
-    - **Password:** The password for the user.
-    - **Schema:** The schema for your database where your tables are located. The default is `public`.
+    - **Host** – The hostname or IP of your database server like `db.example.com` or `123.132.1.100`
+    - **Port** – The port your database server is listening to. The default is `5432`
+    - **Database** – The name of the database you want like `analytics_db`
+    - **User** – The username with the necessary permissions to access the database
+    - **Password** – The password for the user
+    - **Schema** – The schema for your database where your tables are located. The default is `public`
 4. Click **Link**
 
 The data warehouse then starts syncing your Postgres data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
+
+### Query directly (beta)
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Beta feature" type="fyi">
+
+This feature is in beta and requires the `dwh-postgres-direct-query` feature flag.
+
+</CalloutBox>
+
+Query your Postgres database directly without syncing data into PostHog. This is useful for real-time access or when you don't want to sync large tables.
+
+To set up a direct connection:
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab
+2. Click **New source** and select **Postgres**
+3. Enter your database connection details
+4. Under **How should PostHog query this source?**, select **Query directly**
+5. Enter a **Name** for this connection (this appears in the SQL editor when selecting connections)
+6. Click **Link**
+
+Once linked, you can query this connection directly from the [SQL editor](/docs/data-warehouse/query#querying-direct-connections-beta).
+
+**Limitations:**
+
+- Data from direct connections can't be joined with PostHog data
+- Queries run against your live database, so consider the performance impact on production systems
 
 <CalloutBox icon="IconWarning" title="SSL/TLS required for new sources" type="caution">
 
