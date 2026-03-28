@@ -39,6 +39,7 @@ import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Popover } from 'components/RadixUI/Popover'
 import Slider from 'components/RadixUI/Slider'
 import { WEBSITE_MODE_CLASSES } from '../../constants'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface EditorProps {
     slug?: string
@@ -578,7 +579,7 @@ export function Editor({
                     <main
                         data-app="Editor"
                         data-scheme="primary"
-                        className="@container flex-1 bg-primary relative h-full flex flex-col"
+                        className="@container/editor flex-1 bg-primary relative h-full flex flex-col"
                     >
                         <SearchBar
                             visible={showSearch}
@@ -673,6 +674,7 @@ export function Editor({
                                 </div>
                             </div>
                         )}
+
                         {hasTabs ? (
                             <div data-scheme="primary" className="bg-accent h-full">
                                 <article

@@ -45,35 +45,84 @@ export function FlowDiagram({ className = '' }: FlowDiagramProps) {
     }, [prefersReducedMotion])
 
     return (
-        <div ref={ref} className={`border border-primary rounded-sm p-4 @2xl:p-5 ${className}`}>
-            <div className="flex flex-col @xl:flex-row @xl:items-start @xl:justify-between gap-2 @xl:gap-0">
+        <div ref={ref} className={`@container border border-primary rounded-sm overflow-hidden ${className}`}>
+            {/* Mobile: stacked list */}
+            <div className="flex flex-col gap-2 p-4 @xl:hidden">
                 {steps.map((step, i) => (
-                    <React.Fragment key={step.label}>
+                    <div
+                        key={step.label}
+                        className="flex items-center gap-2"
+                        style={{
+                            opacity: isVisible ? 1 : 0,
+                            transform: isVisible ? 'translateY(0)' : 'translateY(8px)',
+                            transition: `opacity 0.3s ease ${i * 100}ms, transform 0.3s ease ${i * 100}ms`,
+                        }}
+                    >
+                        <step.icon className="size-5 text-primary shrink-0" />
+                        <span className="text-sm text-primary whitespace-pre-line leading-tight">
+                            {step.label.replace('\n', ' ')}
+                        </span>
+                        <span className={`text-xs font-bold ml-auto ${actorColors[step.actor]}`}>{step.actor}</span>
+                    </div>
+                ))}
+            </div>
+
+            {/* Desktop: 5-col grid, arrows absolutely positioned between cells */}
+            <div className="hidden @xl:block">
+                {/* Icons + labels row */}
+                <div
+                    className="relative grid items-end justify-items-center p-4 @xl:p-5 pb-3"
+                    style={{ gridTemplateColumns: `repeat(${steps.length}, 1fr)` }}
+                >
+                    {steps.map((step, i) => (
                         <div
-                            className="flex @xl:flex-col items-center @xl:items-center gap-2 @xl:gap-1.5 text-center"
+                            key={step.label}
+                            className="flex flex-col items-center gap-1.5 text-center px-2"
                             style={{
                                 opacity: isVisible ? 1 : 0,
                                 transform: isVisible ? 'translateY(0)' : 'translateY(8px)',
                                 transition: `opacity 0.3s ease ${i * 100}ms, transform 0.3s ease ${i * 100}ms`,
                             }}
                         >
-                            <step.icon className="size-5 text-primary shrink-0" />
+                            <step.icon className="size-5 text-primary" />
                             <span className="text-sm text-primary whitespace-pre-line leading-tight">{step.label}</span>
+                        </div>
+                    ))}
+                    {/* Arrows positioned at column boundaries */}
+                    {steps.slice(0, -1).map((_, i) => (
+                        <span
+                            key={`arrow-${i}`}
+                            className="absolute text-lg text-secondary -translate-x-1/2 -translate-y-1/2"
+                            style={{
+                                left: `${((i + 1) / steps.length) * 100}%`,
+                                top: '50%',
+                                opacity: isVisible ? 1 : 0,
+                                transition: `opacity 0.3s ease ${i * 100 + 50}ms`,
+                            }}
+                        >
+                            &rarr;
+                        </span>
+                    ))}
+                </div>
+
+                {/* Actor labels row — same column count, full-bleed gray background */}
+                <div
+                    className="grid justify-items-center bg-accent border-t border-primary py-2 px-4 @xl:px-5"
+                    style={{ gridTemplateColumns: `repeat(${steps.length}, 1fr)` }}
+                >
+                    {steps.map((step, i) => (
+                        <div
+                            key={`actor-${step.label}`}
+                            className="text-center"
+                            style={{
+                                opacity: isVisible ? 1 : 0,
+                                transition: `opacity 0.3s ease ${i * 100 + 150}ms`,
+                            }}
+                        >
                             <span className={`text-xs font-bold ${actorColors[step.actor]}`}>{step.actor}</span>
                         </div>
-                        {i < steps.length - 1 && (
-                            <div
-                                className="hidden @xl:flex items-center self-center text-secondary px-1 pt-0"
-                                style={{
-                                    opacity: isVisible ? 1 : 0,
-                                    transition: `opacity 0.3s ease ${i * 100 + 50}ms`,
-                                }}
-                            >
-                                <span className="text-lg">&rarr;</span>
-                            </div>
-                        )}
-                    </React.Fragment>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     )

@@ -46,7 +46,7 @@ function DownloadButton() {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
     return (
-        <div className="font-serif italic text-secondary text-sm @2xl:text-base @2xl:absolute @2xl:-left-2 @2xl:-translate-x-full @2xl:top-0 mb-3 @2xl:mb-0 @2xl:whitespace-nowrap">
+        <div className="font-squeak text-secondary text-sm mb-3 @4xl/editor:mb-0 @4xl/editor:absolute @4xl/editor:-left-4 @4xl/editor:-translate-x-full @4xl/editor:top-0 @4xl/editor:whitespace-nowrap @4xl/editor:-rotate-3">
             {children}
         </div>
     )
@@ -83,41 +83,53 @@ function KeyBadge({ children }: { children: React.ReactNode }) {
 }
 
 // ─────────────────────────────────────────────
+// AI Model badge with connection point
+// ─────────────────────────────────────────────
+
+function AIModelBadge({ innerRef }: { innerRef: React.RefObject<HTMLSpanElement> }) {
+    return (
+        <span
+            ref={innerRef}
+            className="inline-flex items-center gap-1.5 border border-primary rounded px-2 py-1 text-xs bg-accent align-middle mx-0.5"
+        >
+            <span className="font-semibold">Supports</span>
+            <span className="text-secondary">Opus, Sonnet, Codex</span>
+        </span>
+    )
+}
+
+// ─────────────────────────────────────────────
 // Hero Section
 // ─────────────────────────────────────────────
 
 function HeroSection() {
-    const [revealDone, setRevealDone] = useState(false)
-
     return (
-        <section className="mb-8 @2xl:mb-12">
-            <h1 className="text-2xl @xl:text-3xl @2xl:text-4xl font-bold leading-tight mb-5 !mt-0">
-                <ChoppyReveal wordDelay={40} onComplete={() => setRevealDone(true)}>
+        <section className="mb-8 @2xl:mb-12 grid grid-cols-1 @2xl:grid-cols-[2fr_3fr] gap-6 @2xl:gap-8 items-center">
+            <div>
+                <h1 className="text-xl @xl:text-2xl @2xl:text-3xl font-bold leading-tight mb-5 !mt-0">
                     {'The AI code editor that knows your '}
-                    <RoughAnnotation
-                        type="underline"
-                        color="#F54E00"
-                        strokeWidth={2}
-                        show={revealDone}
-                        animateOnScroll={false}
-                        delay={100}
-                    >
+                    <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={300}>
                         <em className="font-bold">product</em>
                     </RoughAnnotation>
                     {', not just your '}
-                    <RoughAnnotation
-                        type="underline"
-                        color="#F54E00"
-                        strokeWidth={2}
-                        show={revealDone}
-                        animateOnScroll={false}
-                        delay={400}
-                    >
+                    <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
                         <em className="font-bold">codebase</em>
                     </RoughAnnotation>
-                </ChoppyReveal>
-            </h1>
-            <DownloadButton />
+                </h1>
+                <DownloadButton />
+            </div>
+            <div>
+                <img
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
+                    alt="PostHog Code screenshot"
+                    className="w-full rounded shadow-lg dark:hidden"
+                />
+                <img
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_dark_b2a90f3c71.png"
+                    alt="PostHog Code screenshot"
+                    className="w-full rounded shadow-lg hidden dark:block"
+                />
+            </div>
         </section>
     )
 }
@@ -128,7 +140,7 @@ function HeroSection() {
 
 function OldWaySection() {
     return (
-        <section className="relative mb-8 @2xl:mb-12 @2xl:ml-32">
+        <section className="relative mb-8 @2xl:mb-12">
             <SectionLabel>The old way</SectionLabel>
 
             <p className="text-base @xl:text-lg leading-relaxed mb-5">
@@ -177,16 +189,27 @@ function OldWaySection() {
 function PostHogWaySection() {
     const signalsWordRef = useRef<HTMLSpanElement>(null)
     const signalsBoxRef = useRef<HTMLDivElement>(null)
+    const aiModelRef = useRef<HTMLSpanElement>(null)
+    const aiModelBadgeRef = useRef<HTMLSpanElement>(null)
     const sectionRef = useRef<HTMLDivElement>(null)
 
     return (
-        <section ref={sectionRef} className="relative mb-8 @2xl:mb-12 @2xl:ml-32">
+        <section ref={sectionRef} className="relative mb-8 @2xl:mb-12">
             <SectionLabel>The PostHog way</SectionLabel>
 
-            {/* Main text + signals callout side by side */}
-            <div className="flex flex-col @2xl:flex-row @2xl:gap-8 gap-6 relative">
-                <div className="flex-1">
-                    <p className="text-base @xl:text-lg leading-relaxed mb-5">
+            <div className="relative">
+                {/* Signals callout — in DOM before paragraph so float-right works on desktop.
+                    On mobile (no float), it falls in normal flow above the paragraph,
+                    but we use flex + order to push it below the first paragraph. */}
+                <div className="flex flex-col @2xl:block">
+                    <div
+                        ref={signalsBoxRef}
+                        className="order-2 mb-5 @2xl:order-none @2xl:float-right @2xl:ml-6 @2xl:mb-4 @2xl:w-[280px]"
+                    >
+                        <SignalsCallout />
+                    </div>
+
+                    <p className="text-base @xl:text-lg leading-relaxed mb-5 order-1">
                         <ChoppyReveal wordDelay={40}>
                             <InlineIcon icon={IconLogomark} />
                             {' PostHog Code uses '}
@@ -213,35 +236,32 @@ function PostHogWaySection() {
                             <span className="text-secondary text-xs">z</span>
                         </ChoppyReveal>
                     </p>
+                </div>
 
-                    <p className="text-base @xl:text-lg leading-relaxed mb-2">
-                        <ChoppyReveal wordDelay={40}>
-                            {'Run it '}
-                            <InlineIcon icon={IconLaptop} />
-                            {' locally or in the '}
-                            <InlineIcon icon={IconCloud} />
-                            {' cloud — either way, it automatically uses the right '}
+                <p className="text-base @xl:text-lg leading-relaxed mb-2">
+                    <ChoppyReveal wordDelay={40}>
+                        {'Run it '}
+                        <InlineIcon icon={IconLaptop} />
+                        {' locally or in the '}
+                        <InlineIcon icon={IconCloud} />
+                        {' cloud — either way, it automatically uses the right '}
+                        <span ref={aiModelRef}>
                             <RoughAnnotation type="box" color="currentColor" strokeWidth={1} padding={2}>
                                 <strong>AI model</strong>
                             </RoughAnnotation>
-                            {' for the job.'}
-                        </ChoppyReveal>
-                    </p>
+                        </span>
+                        {' for the job.'}
+                    </ChoppyReveal>
+                </p>
 
-                    <p className="text-xs text-secondary border border-primary rounded px-2 py-1 inline-block">
-                        Supports Opus, Sonnet, Codex
-                    </p>
-                </div>
+                <AIModelBadge innerRef={aiModelBadgeRef} />
 
-                {/* Signals callout box */}
-                <div ref={signalsBoxRef} className="@2xl:w-[280px] shrink-0">
-                    <SignalsCallout />
-                </div>
+                {/* Clear float */}
+                <div className="clear-both" />
 
-                {/* Dotted connection line (desktop only) */}
-                <div className="hidden @2xl:block">
-                    <DottedConnection sourceRef={signalsWordRef} targetRef={signalsBoxRef} containerRef={sectionRef} />
-                </div>
+                {/* Dotted connection lines */}
+                <DottedConnection sourceRef={signalsWordRef} targetRef={signalsBoxRef} containerRef={sectionRef} />
+                <DottedConnection sourceRef={aiModelRef} targetRef={aiModelBadgeRef} containerRef={sectionRef} />
             </div>
         </section>
     )
@@ -254,7 +274,7 @@ function PostHogWaySection() {
 function BottomCTASection() {
     return (
         <section className="mb-8">
-            <p className="text-xl @xl:text-2xl @2xl:text-3xl font-bold leading-tight mb-5">
+            <p className="text-base @xl:text-lg leading-relaxed mb-5">
                 <ChoppyReveal wordDelay={40}>
                     {'There are plenty of '}
                     <InlineIcon icon={IconSparkles} />
@@ -282,7 +302,7 @@ export default function CodePage() {
                 title="PostHog Code – The AI code editor that knows your product"
                 description="PostHog Code uses signals from production data to diagnose issues and generate pull requests — before you even know there's a problem."
             />
-            <Editor title="PostHog Code" slug="/code" hideToolbar>
+            <Editor title="PostHog Code" slug="/code">
                 <div className="@container not-prose">
                     <HeroSection />
                     <OldWaySection />

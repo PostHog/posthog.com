@@ -14,7 +14,8 @@ interface DottedConnectionProps {
 
 /**
  * Draws an animated dotted curved line between two elements.
- * Hidden on narrow containers (below @2xl breakpoint — handled by parent).
+ * On desktop: goes up from source, across, then down to top-center of target.
+ * On mobile: goes down from source to top-center of target (straight vertical).
  */
 export function DottedConnection({ sourceRef, targetRef, containerRef, className = '' }: DottedConnectionProps) {
     const svgRef = useRef<SVGSVGElement>(null)
@@ -35,21 +36,44 @@ export function DottedConnection({ sourceRef, targetRef, containerRef, className
         const sourceRect = source.getBoundingClientRect()
         const targetRect = target.getBoundingClientRect()
 
-        // Source: bottom-center of the "signals" word
+        // Source: bottom-center of the word
         const sx = sourceRect.left + sourceRect.width / 2 - containerRect.left
-        const sy = sourceRect.bottom - containerRect.top + 4
+        const sy = sourceRect.bottom - containerRect.top + 2
 
-        // Target: left-center of the callout box
-        const tx = targetRect.left - containerRect.left - 4
-        const ty = targetRect.top + targetRect.height * 0.3 - containerRect.top
+        // Target: top-center of the callout box
+        const tx = targetRect.left + targetRect.width / 2 - containerRect.left
+        const ty = targetRect.top - containerRect.top - 2
 
-        // Cubic bezier curve
-        const cx1 = sx
-        const cy1 = sy + (ty - sy) * 0.5
-        const cx2 = tx - (tx - sx) * 0.3
-        const cy2 = ty
+        const cornerR = 8
 
-        const d = `M ${sx} ${sy} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${tx} ${ty}`
+        let d: string
+
+        // Check if target is to the right (desktop side-by-side layout)
+        const isDesktop = targetRect.left > sourceRect.right
+
+        if (isDesktop) {
+            // Desktop: up from source, across, down to top-center of target
+            const topY = Math.min(sy, ty) - 30
+            d = [
+                `M ${sx} ${sy}`,
+                `L ${sx} ${topY + cornerR}`,
+                `Q ${sx} ${topY}, ${sx + cornerR} ${topY}`,
+                `L ${tx - cornerR} ${topY}`,
+                `Q ${tx} ${topY}, ${tx} ${topY + cornerR}`,
+                `L ${tx} ${ty}`,
+            ].join(' ')
+        } else {
+            // Mobile: straight down from source to top-center of target
+            if (Math.abs(sx - tx) < 4) {
+                // Nearly aligned — just a vertical line
+                d = `M ${sx} ${sy} L ${tx} ${ty}`
+            } else {
+                // Slight horizontal offset — use a smooth S-curve
+                const midY = (sy + ty) / 2
+                d = `M ${sx} ${sy} C ${sx} ${midY}, ${tx} ${midY}, ${tx} ${ty}`
+            }
+        }
+
         setPath(d)
         setDimensions({
             width: containerRect.width,
