@@ -205,6 +205,16 @@ The agent will use the `list-errors` tool to fetch error groups sorted by occurr
 
 The agent will use `logs-query` to search for logs filtered by severity level and service name, returning log entries with timestamps, messages, and trace information.
 
+### LLM Analytics evaluations
+
+**Prompt:** "Create an LLM judge evaluation that checks if my chatbot responses are helpful and on-topic"
+
+The agent will use `evaluation-create` to set up an LLM-as-a-judge evaluation that scores your generations for helpfulness. You can configure the model provider and scoring criteria.
+
+**Prompt:** "List all my active evaluations and show me their pass rates"
+
+The agent will use `evaluations-get` to fetch evaluations filtered by enabled status, returning names, types, and configurations for each.
+
 ### Prompt management
 
 **Prompt:** "List all prompts stored in my project"
@@ -222,6 +232,10 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 **Prompt:** "Update the 'onboarding-guide' prompt to include a section about feature flags"
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
+
+**Prompt:** "Compare versions 1 and 3 of my 'support-assistant' prompt to see what changed"
+
+The agent will use the `prompt-compare` tool to return a unified diff between the two versions, showing additions and deletions along with metadata for each version.
 
 ## Prompts and resources
 
