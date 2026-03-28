@@ -25,6 +25,7 @@ export const activeViewersLight = "https://res.cloudinary.com/dmukukwp6/image/up
 export const activeViewersDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099316/posthog.com/contents/docs/product-analytics/trends/active-viewers-dark.png"
 export const areaLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099337/posthog.com/contents/docs/product-analytics/trends/area-chart-light.png"
 export const areaDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099340/posthog.com/contents/docs/product-analytics/trends/area-chart-dark.png"
+export const boxPlotImg = "https://promptless-customer-doc-assets.s3.amazonaws.com/docs-images/org_2tEBLS11qNiDQzcfVnYxrpDJ61J/trends-box-plot-5e804301.jpg"
 
 There are ten charts and visualization options in trends. They're split into two categories:
 
@@ -83,21 +84,31 @@ Additional series or breakdowns you add to a bar chart will appear stacked, so y
 
 Area charts are a twist on the line chart. When you add a breakdown, or multiple series, area charts behave like a stacked bar chart, but render the data in a line chart showing how each data point contributes to the total.
 
-
 ### Box plot
 
-The box plot displays the statistical distribution of a numeric property's values over time. Each box shows:
+> **Important:** This feature is currently an opt-in beta. You can enable it on the [feature previews settings page](https://app.posthog.com/settings/user-feature-previews#box-plot-insight).
 
-- **Min** – the minimum value
-- **25th percentile (Q1)** – the value below which 25% of observations fall
-- **Median** – the middle value (50th percentile)
-- **Mean** – the average value
-- **75th percentile (Q3)** – the value below which 75% of observations fall
-- **Max** – the maximum value
+<ProductScreenshot
+    imageLight = {boxPlotImg}
+    imageDark = {boxPlotImg}
+    classes="rounded"
+    alt="Box plot showing distribution of values over time"
+/>
 
-Box plots are useful for understanding how the distribution of a metric changes across time intervals and for spotting outliers.
+The box plot shows the statistical distribution of a numeric property over time.
 
-Box plots require you to select a numeric property (such as `$session_duration` or a custom numeric property). Breakdowns and formulas are not available for box plots.
+Each box represents the distribution for one time period:
+
+- **Whiskers** – Minimum to maximum values
+- **Box** – Interquartile range (25th to 75th percentile)
+- **Line inside box** – Median (50th percentile)
+- **Dot** – Mean average
+
+This is useful for understanding how a metric's distribution changes over time – for example, whether purchase amounts are becoming more consistent or if there are more extreme outliers.
+
+Box plots require a numeric property aggregation like **Sum** or **Average** (e.g., `sum of revenue`). They don't support breakdowns or formulas.
+
+When using multiple series, you can enable a legend by toggling **Show legend** in the display settings.
 
 ## Total value 
 
