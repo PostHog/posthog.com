@@ -44,10 +44,10 @@ Event aggregation determines how the number of events within a certain period ar
 
 ## Property value aggregation
 
-Property aggregation enables you to combine and plot the values of a property. Property aggregation only works on properties with numerical values.
+Property aggregation enables you to combine and plot the values of a property. Most options require numerical values, but "Count of distinct values" works with any property type.
 
 | Property aggregation | Description                                                                                            |
-| -------------------- | ------------------------------------------------------------------------------------------------------ |
+| -------------------------- | ------------------------------------------------------------------------------------------------------ |
 | Average              | The average value of a property                                                                        |
 | Sum                  | The sum of values of a property                                                                        |
 | Minimum              | The minimum value of a property                                                                        |
@@ -56,6 +56,7 @@ Property aggregation enables you to combine and plot the values of a property. P
 | 90th percentile      | The 90th percentile of the distribution of values (90% of events have a property value less than this) |
 | 95th percentile      | The 95th percentile of the distribution of values (95% of events have a property value less than this) |
 | 99th percentile      | The 99th percentile of the distribution of values (99% of events have a property value less than this) |
+| Count of distinct values   | The number of unique values for a property across matching events                                      |
 
 ## SQL expressions
 
