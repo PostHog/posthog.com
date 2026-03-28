@@ -2,6 +2,8 @@
 title: Monitor and search issues
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 This guide covers how to find the most relevant, urgent, and impactful issues in your error tracking using the [issues page](https://app.posthog.com/error_tracking).
 
 ## Monitoring issues
@@ -29,13 +31,57 @@ Sorting by **last seen** and **occurrences** are great ways to get a general sen
 
 You can filter issues by the **Assigned to** property to find issues assigned to you. This is especially useful if you configure [automatic issue assignment](/docs/error-tracking/assigning-issues) and configure [alerts](/docs/error-tracking/alerts) to notify you when new issues are created.
 
+## Insights tab
+
+The **Insights** tab shows aggregate metrics and visualizations for your error tracking data. Use it to get a high-level view of exception trends and application health.
+
+<CalloutBox icon="IconInfo" title="Beta feature" type="info">
+
+The Insights tab is in beta. To enable it, turn on the `error-tracking-insights` [feature flag](/docs/feature-flags) in your project.
+
+</CalloutBox>
+
+### Summary stats
+
+The Insights tab displays five key metrics at the top:
+
+| Metric | Description |
+| --- | --- |
+| Total exceptions | Total count of exceptions captured in the selected time period |
+| Affected users | Number of unique users who experienced at least one exception |
+| Total sessions | Total number of unique sessions during the time period |
+| Sessions with crash | Number of sessions that had at least one exception |
+| Crash-free sessions | Percentage of sessions without any exceptions |
+
+### Charts
+
+Three charts help you visualize exception trends over time:
+
+**Exception volume** shows exceptions per day as a bar chart. Use this to spot spikes in error activity or verify that fixes are reducing errors.
+
+**Affected users** shows unique users experiencing exceptions as a line chart. This helps you understand how many users are impacted by errors over time.
+
+**Crash-free sessions** shows the percentage of sessions without exceptions as a line chart. This helps you track overall application stability.
+
+### Filtering
+
+The Insights tab uses the same filtering options as the Issues tab:
+
+- **Date range** to focus on a specific time period
+- **Quick filters** for common scenarios
+- **Custom property filters** for more specific queries
+
+All filters are URL-encoded, so you can bookmark or share filtered views.
+
+### Exporting to Product Analytics
+
+Click **Open as insight** on any chart to export it to the [Product Analytics](/docs/product-analytics) insights editor. The exported insight keeps your date range and filters, and you can add it to dashboards for ongoing monitoring.
+
 ## Finding specific issues
 
 You can use the search bar at the top of the [issue page](https://app.posthog.com/error_tracking) to filter issues based on the properties of the exceptions in that issue.
 
 Search results are matched based on [properties of exception events](/docs/error-tracking/issues-and-exceptions) grouped into the issues. For example, if you search for "TypeError", we show you all issues where *any* exception grouped into the issue has a type of "TypeError".
-
-import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconInfo" title="Unrelated results" type="info">
 
