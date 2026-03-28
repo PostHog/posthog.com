@@ -1,0 +1,38 @@
+<CalloutBox type="info" title="Beta feature">
+
+The Slack source is in beta. Enable the `slack-dwh` [feature flag](/docs/feature-flags) to access it.
+
+</CalloutBox>
+
+The Slack connector can sync channel metadata, user profiles, and channel messages to PostHog.
+
+## What gets synced
+
+- **$channels** – All public and private channels (including archived channels) the bot can access.
+- **$users** – All workspace user profiles.
+- **Per-channel messages** – Each channel you enable becomes its own table containing messages and thread replies.
+
+## Linking Slack to PostHog
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
+2. Click **New source** and select Slack
+3. Select or connect a Slack workspace. If you already have a Slack integration connected, you can reuse it—but you may need to reconnect to grant additional permissions for message history access.
+4. Click **Next**, select the tables you want to sync, and then press **Import**
+
+### Required permissions
+
+The Slack source requires these OAuth scopes:
+
+- `channels:read` and `groups:read` – List public and private channels
+- `channels:history` and `groups:history` – Read message history
+- `users:read` and `users:read.email` – Access user profiles
+- `reactions:read` – Access message reactions
+
+If your existing Slack integration doesn't have these scopes, you'll see a warning during setup. Reconnect the integration to grant the additional permissions.
+
+## How syncing works
+
+- **Channel and user tables** – Full refresh on each sync.
+- **Message tables** – Support incremental sync. Only new messages since the last sync are fetched.
+
+> **Note:** Incremental syncs capture thread replies for messages in the sync window. Replies added to older threads (before the sync window) are not captured during incremental syncs.

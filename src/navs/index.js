@@ -77,6 +77,14 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/sentry',
                 },
                 {
+                    name: 'Slack',
+                    url: '/docs/cdp/sources/slack',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'MySQL',
                     url: '/docs/cdp/sources/mysql',
                 },
@@ -5389,6 +5397,14 @@ export const docsMenu = {
                         {
                             name: 'Sentry',
                             url: '/docs/data-warehouse/sources/sentry',
+                        },
+                        {
+                            name: 'Slack',
+                            url: '/docs/data-warehouse/sources/slack',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'Snowflake',
