@@ -44,10 +44,10 @@ To configure the channel, you need to provide the following details:
 
 This is the address that recipients will see in their inbox.
 
-To maximize deliverability and avoid spam folders, you must verify your domain.
+To improve deliverability and stay out of spam folders, verify your domain.
 
-1. After adding your email address, PostHog shows DNS records for **SPF** and **DKIM**.
-2. Copy these into your domain host (e.g. Cloudflare, GoDaddy).
+1. After adding your email address, PostHog shows DNS records for **SPF**, **DKIM**, and **DMARC**.
+2. Add these to your domain host (e.g., Cloudflare, GoDaddy).
 3. Verification may take a few minutes to propagate.
 
 Once verified, you'll see a green check mark in your settings.
@@ -117,7 +117,7 @@ Once your channel is created, you can use it in a workflow to deliver messages t
 | Issue | Solution |
 | --- | --- |
 | Emails not sending? | Check that your domain is verified and you've added the DNS records correctly. |
-| Spam folder issues? | Ensure SPF/DKIM are valid, and consider setting up DMARC. |
+| Spam folder issues? | Ensure SPF, DKIM, and DMARC records are valid. |
 | Variables not populating? | Confirm the property exists on the person profile (e.g. `person.name`). |
 
 </Step>
