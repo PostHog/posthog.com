@@ -260,3 +260,29 @@ The `system.notebooks` table contains notebook metadata from your project.
 | `version`         | Version number of the notebook                     |
 | `created_at`      | When the notebook was created                      |
 | `last_modified_at`| When the notebook was last modified                |
+
+### `system.support_tickets`
+
+The `system.support_tickets` table contains support ticket data from your project.
+
+| Column               | Description                                              |
+|----------------------|----------------------------------------------------------|
+| `id`                 | Unique identifier for the ticket                         |
+| `team_id`            | Team ID the ticket belongs to                            |
+| `ticket_number`      | Sequential ticket number                                 |
+| `channel_source`     | Channel where the ticket originated                      |
+| `distinct_id`        | Distinct ID of the customer                              |
+| `status`             | Current status of the ticket                             |
+| `priority`           | Priority level of the ticket                             |
+| `anonymous_traits`   | JSON containing anonymous visitor traits                 |
+| `ai_resolved`        | Whether the ticket was resolved by AI (1 = yes, 0 = no)  |
+| `escalation_reason`  | Reason for escalation if applicable                      |
+| `message_count`      | Total number of messages in the ticket                   |
+| `last_message_at`    | When the last message was sent                           |
+| `last_message_text`  | Text content of the last message                         |
+| `unread_customer_count` | Number of unread messages from the customer           |
+| `unread_team_count`  | Number of unread messages from the team                  |
+| `session_id`         | Session ID associated with the ticket                    |
+| `sla_due_at`         | SLA deadline for the ticket                              |
+| `created_at`         | When the ticket was created                              |
+| `updated_at`         | When the ticket was last updated                         |
