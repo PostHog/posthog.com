@@ -223,6 +223,22 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+### Signals queries
+
+Signals are observations PostHog automatically generates by monitoring your data across error tracking, web analytics, experiments, session replay, and more. Each signal describes something noteworthy – like "Error rate spiked 3× on /checkout". You can ask your AI agent to search and analyze these signals.
+
+**Prompt:** "Find signals related to checkout page issues"
+
+The agent runs a semantic search over your project's signals, returning results ranked by relevance with details like description, source product, and timestamp.
+
+**Prompt:** "What types of signals do I have?"
+
+The agent queries your signals and returns a breakdown by source product (error tracking, web analytics, experiments, etc.) and signal type.
+
+**Prompt:** "Show me recent signals from error tracking"
+
+The agent filters signals by source product and returns the latest error tracking observations – like error rate spikes, new exception types, or affected user trends.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
