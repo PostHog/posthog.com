@@ -340,13 +340,13 @@ Note that grouping issues means that all exceptions will be grouped together und
 
 ## Suppressing exceptions
 
-We recommend that you suppress exceptions on the client side for performance and cost reasons.
+You can suppress exceptions at capture time using the `before_send` hook for fine-grained control.
 
 import BeforeSendHook from './_snippets/before-send-hook.mdx'
 
 <BeforeSendHook />
 
-You can also suppress exceptions in PostHog, these rules will be applied client-side.
+You can also configure suppression rules in PostHog settings.
 
 import SuppressionRules from './_snippets/suppression-rules.mdx'
 
