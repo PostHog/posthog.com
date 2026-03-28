@@ -29,7 +29,7 @@ There are separate limits for different kinds of resources.
 
 - For all analytics endpoints (such as calculating insights, retrieving persons, or retrieving session recordings), the rate limits are `240/minute` and `1200/hour`.
 
-- For the `events/values` endpoint, the rate limits are `60/minute` and `300/hour`. When using a personal API key, the `event_name` query parameter is required. For queries without event filters, use the [`query`](/docs/api/queries) endpoint instead.
+- The events values endpoint (`/api/projects/{project_id}/events/values`) has stricter rate limits with a personal API key: `60/minute` and `300/hour`. Requests must include the `event_name` parameter. For queries without event filters, use the [`query`](/docs/api/queries) endpoint instead.
 
 - The [`query`](/docs/api/queries) endpoint has a rate limit of `2400/hour`. For large or regular exports of events, use [batch exports](/docs/cdp/batch-exports). For data-powered APIs or user-facing dashboards, [reach out to us](https://posthog.com/talk-to-a-human).
 
