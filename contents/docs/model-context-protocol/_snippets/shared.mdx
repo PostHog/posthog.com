@@ -165,11 +165,37 @@ The agent will use the `query-run` tool to execute a trends query and return dai
 
 **Prompt:** "What are the most common paths users take after signing up?"
 
-The agent will use the `query-run` tool with a PathsQuery to analyze user journeys, returning the flow of events users follow after signup.
+The agent will use the `query-paths` tool to analyze user journeys, returning the flow of events users follow after signup as a directed graph.
 
 **Prompt:** "Show me the navigation paths from the pricing page to checkout"
 
-The agent will execute a paths query with `startPoint` set to the pricing page and `endPoint` set to checkout, revealing the most common routes users take.
+The agent will run a paths query with `startPoint` set to the pricing page and `endPoint` set to checkout, revealing the most common routes users take and where they drop off.
+
+### Funnel analysis
+
+**Prompt:** "What's the conversion rate from signup to first purchase?"
+
+The agent will use the `query-funnel` tool to run a funnel query with signup and purchase events as steps, returning conversion rates and drop-off points.
+
+**Prompt:** "Show me how users convert through our onboarding flow: signup, profile setup, first project created"
+
+The agent will run a multi-step funnel query analyzing conversion rates between each step and where users drop off.
+
+### Retention analysis
+
+**Prompt:** "What percentage of users who signed up last month came back and used the app in week 2?"
+
+The agent will use the `query-retention` tool to analyze user return rates, showing a cohort-based retention matrix.
+
+**Prompt:** "Show me retention for users who completed onboarding – are they sticking around?"
+
+The agent will run a retention query filtered to users who completed onboarding, returning weekly retention percentages.
+
+### LLM trace inspection
+
+**Prompt:** "Show me the slowest LLM traces from the past hour"
+
+The agent will use the `query-traces-list` tool to fetch LLM traces sorted by latency, returning details including model, token usage, and response times.
 
 ### SQL and HogQL queries
 
