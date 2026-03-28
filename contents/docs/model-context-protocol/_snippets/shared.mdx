@@ -223,6 +223,10 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+**Prompt:** "Duplicate my 'support-assistant' prompt as 'support-assistant-v2'"
+
+The agent will use the `prompt-duplicate` tool to copy the latest version of the source prompt to a new prompt with the specified name. This is useful for forking prompts or as a workaround for renaming since prompt names are immutable after creation.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
