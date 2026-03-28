@@ -13,7 +13,7 @@ Prompt management lets you create and update LLM prompts directly in PostHog. Wh
 - **Update prompts without code deploys** – Change prompts instantly from the PostHog UI
 - **Non-engineers can iterate** – Product and content teams can tweak prompts without touching code
 - **Track prompt usage** – Link prompts to generations to see which prompts drive which outputs
-- **Versioning** – Every change creates an immutable version you can view, compare, or restore
+- **Versioning** – Every change creates an immutable version you can view, restore, or fetch specific versions programmatically
 - **(soon) A/B testing** – Support for testing different prompt variants using Experiments
 
 ## Creating prompts
@@ -35,6 +35,56 @@ When viewing a prompt, markdown rendering is enabled by default, formatting your
 - Names are **immutable** after creation (cannot be changed)
 - Only letters, numbers, hyphens, and underscores allowed (`^[a-zA-Z0-9_-]+$`)
 - Names must be unique within your project
+
+## Versioning
+
+Every time you save a prompt, PostHog creates a new immutable version. This gives you a complete history of changes and lets you fetch specific versions in your code.
+
+- **Immutable versions** – Each save creates a new version (v1, v2, v3, etc.)
+- **Latest version** – By default, SDK fetches return the latest version
+- **Version history** – View all versions and who created them from the prompt detail page
+- **Rollback** – To revert to an older prompt, copy its content into a new version
+
+### Fetching a specific version
+
+By default, the SDK fetches the latest version of a prompt. To pin your code to a specific version (for example, to keep production stable while testing changes), pass the `version` parameter:
+
+<MultiLanguage>
+
+```python
+# Fetch the latest version (default)
+template = prompts.get('support-system-prompt')
+
+# Fetch a specific version
+template = prompts.get('support-system-prompt', version=2)
+```
+
+```typescript
+// Fetch the latest version (default)
+const template = await prompts.get('support-system-prompt')
+
+// Fetch a specific version
+const template = await prompts.get('support-system-prompt', { version: 2 })
+```
+
+</MultiLanguage>
+
+### Publish a new version
+
+1. Open a prompt and click **Edit latest**
+2. Make your changes
+3. Click **Publish version**
+
+If someone else published a new version while you were editing, you'll see a conflict error. Refresh the page to load the latest version and try again.
+
+### Restore a previous version
+
+1. Open a prompt and select a version from the **Version history** sidebar
+2. Click **Use as latest**
+3. Edit the prompt content if needed
+4. Click **Publish version**
+
+This publishes the old content as a new version. The original version remains unchanged.
 
 ## Managing prompts via MCP
 
@@ -60,8 +110,9 @@ You are a helpful assistant for {{company_name}}.
 The user's name is {{user_name}} and their subscription tier is {{tier}}.
 ```
 
-Variable names can include letters, numbers, underscores, hyphens, and dots.
-
+<<<<<<< HEAD
+<<<<<<< HEAD
+||||||| 8d0479676
 ## Versioning
 
 Every prompt change creates a new immutable version. Previous versions are preserved and accessible.
@@ -108,6 +159,185 @@ Unchanged regions are automatically collapsed in the diff view. Click **Compare 
 
 Click **Archive** to remove a prompt from active use. This archives all versions of the prompt. Any code fetching the prompt by name stops resolving it.
 
+=======
+||||||| merged common ancestors
+<<<<<<<<< Temporary merge branch 1
+||||||||| 8d0479676
+## Versioning
+
+Every prompt change creates a new immutable version. Previous versions are preserved and accessible.
+
+### How versioning works
+
+- The first save creates version 1
+- Each subsequent publish increments the version number
+- Previous versions are never modified
+- By default, the SDK fetches the latest version
+
+### Publish a new version
+
+1. Open a prompt and click **Edit latest**
+2. Make your changes
+3. Click **Publish version**
+
+If someone else published a new version while you were editing, you'll see a conflict error. Refresh the page to load the latest version and try again.
+
+### Restore a previous version
+
+1. Open a prompt and select a version from the **Version history** sidebar
+2. Click **Use as latest**
+3. Edit the prompt content if needed
+4. Click **Publish version**
+
+This publishes the old content as a new version. The original version remains unchanged.
+
+### Archive a prompt
+
+Click **Archive** to remove a prompt from active use. This archives all versions of the prompt. Any code fetching the prompt by name stops resolving it.
+
+=========
+=======
+>>>>>>> origin/promptless/llm-prompt-versioning-docs
+Variable names can include letters, numbers, underscores, hyphens, and dots.
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+## Versioning
+
+Every prompt change creates a new immutable version. Previous versions are preserved and accessible.
+
+### How versioning works
+
+- The first save creates version 1
+- Each subsequent publish increments the version number
+- Previous versions are never modified
+- By default, the SDK fetches the latest version
+
+### Publish a new version
+
+1. Open a prompt and click **Edit latest**
+2. Make your changes
+3. Click **Publish version**
+
+If someone else published a new version while you were editing, you'll see a conflict error. Refresh the page to load the latest version and try again.
+
+### Restore a previous version
+
+1. Open a prompt and select a version from the **Version history** sidebar
+2. Click **Use as latest**
+3. Edit the prompt content if needed
+4. Click **Publish version**
+
+This publishes the old content as a new version. The original version remains unchanged.
+
+### Archive a prompt
+
+Click **Archive** to remove a prompt from active use. This archives all versions of the prompt. Any code fetching the prompt by name stops resolving it.
+
+>>>>>>> main
+||||||| merged common ancestors
+## Versioning
+
+Every prompt change creates a new immutable version. Previous versions are preserved and accessible.
+
+### How versioning works
+
+- The first save creates version 1
+- Each subsequent publish increments the version number
+- Previous versions are never modified
+- By default, the SDK fetches the latest version
+
+### Publish a new version
+
+1. Open a prompt and click **Edit latest**
+2. Make your changes
+3. Click **Publish version**
+
+If someone else published a new version while you were editing, you'll see a conflict error. Refresh the page to load the latest version and try again.
+
+### Restore a previous version
+
+1. Open a prompt and select a version from the **Version history** sidebar
+2. Click **Use as latest**
+3. Edit the prompt content if needed
+4. Click **Publish version**
+
+This publishes the old content as a new version. The original version remains unchanged.
+
+### Archive a prompt
+
+Click **Archive** to remove a prompt from active use. This archives all versions of the prompt. Any code fetching the prompt by name stops resolving it.
+
+>>>>>>>>> Temporary merge branch 2
+=======
+>>>>>>> origin/promptless/llm-prompt-versioning-docs
+||||||| merged common ancestors
+=======
+<<<<<<< HEAD
+||||||| 3cf4d98e2
+## Versioning
+
+Every prompt change creates a new immutable version. Previous versions are preserved and accessible.
+
+### How versioning works
+
+- The first save creates version 1
+- Each subsequent publish increments the version number
+- Previous versions are never modified
+- By default, the SDK fetches the latest version
+
+### Publish a new version
+
+1. Open a prompt and click **Edit latest**
+2. Make your changes
+3. Click **Publish version**
+
+If someone else published a new version while you were editing, you'll see a conflict error. Refresh the page to load the latest version and try again.
+
+### Restore a previous version
+
+1. Open a prompt and select a version from the **Version history** sidebar
+2. Click **Use as latest**
+3. Edit the prompt content if needed
+4. Click **Publish version**
+
+This publishes the old content as a new version. The original version remains unchanged.
+
+### Archive a prompt
+
+Click **Archive** to remove a prompt from active use. This archives all versions of the prompt. Any code fetching the prompt by name stops resolving it.
+
+=======
+## Versioning
+
+Every prompt change creates a new immutable version. Previous versions are preserved and accessible.
+
+### How versioning works
+
+- The first save creates version 1
+- Each subsequent publish increments the version number
+- Previous versions are never modified
+- By default, the SDK fetches the latest version
+
+### Publish a new version
+
+1. Open a prompt and click **Edit latest**
+2. Make your changes
+3. Click **Publish version**
+
+If someone else published a new version while you were editing, you'll see a conflict error. Refresh the page to load the latest version and try again.
+
+### Restore a previous version
+
+1. Open a prompt and select a version from the **Version history** sidebar
+2. Click **Use as latest**
+3. Edit the prompt content if needed
+4. Click **Publish version**
+
+This publishes the old content as a new version. The original version remains unchanged.
+
+>>>>>>> origin/promptless/llm-prompt-versioning-docs
+>>>>>>> origin/promptless/llm-prompt-versioning-docs
 ## Using prompts in code
 
 ### Prerequisites
@@ -217,6 +447,18 @@ Prompts are cached on the SDK side to minimize latency and API calls:
 - **Configurable per-request**: Override with `cache_ttl_seconds` (Python) or `cacheTtlSeconds` (JS)
 - **Stale-while-revalidate**: If a fetch fails, the cached value is used (even if expired)
 - **Fallback support**: Provide a fallback value that's used when both fetch and cache fail
+
+## Archiving prompts
+
+Archiving a prompt soft-deletes all its versions. Archived prompts don't appear in the prompt list and can't be fetched via the SDK.
+
+To archive a prompt:
+
+1. Go to **LLM analytics** > **Prompts**
+2. Click the prompt you want to archive
+3. Click **Archive** and confirm
+
+After archiving, you can create a new prompt with the same name – it starts fresh at version 1.
 
 ## Linking prompts to traces
 
