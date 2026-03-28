@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-[SDK doctor](https://app.posthog.com/#panel=sdk-doctor) helps you monitor and maintain your PostHog SDK integrations by automatically detecting version issues, configuration problems, and implementation patterns across your applications.
+[SDK doctor](https://app.posthog.com/health/sdk-doctor) helps you monitor and maintain your PostHog SDK integrations by automatically detecting version issues, configuration problems, and implementation patterns across your applications.
 
 > **Note:** SDK doctor is currently in beta. Give feedback by [raising an issue](https://github.com/PostHog/posthog/issues/new?labels=feature%2Fsdk-doctor).
 
@@ -63,12 +63,7 @@ SDK doctor will also notify you if your SDK version isn't officially "outdated",
 
 ## Accessing SDK doctor
 
-SDK doctor is available in the [right side panel](https://app.posthog.com/#panel=sdk-doctor). The SDK doctor button will be added to the right side panel if you have one or more outdated SDKs in need of an update.
-
-1. Click the three vertical dots in the lower-right corner of any page.
-2. In the resulting menu, click `SDK doctor`
-3. View detected SDKs, their versions, and notes about issues found
-4. Click the provided links to view available versions and documentation
+SDK doctor is available from the **Health** menu in the left sidebar. Navigate to **Health** > **SDK doctor** to view your SDK status.
 
 You can also search for "SDK doctor" in the [command palette](/docs/cmd-k) (`Cmd` + `K` on Mac, `Ctrl` + `K` on Windows/Linux) to quickly navigate to it.
 
@@ -123,6 +118,5 @@ No. SDK doctor analyzes only events that have already been ingested.
 
 SDK doctor is actively being developed. We'd love your feedback:
 
-- [Report bugs](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml) or [request features](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&projects=&template=feature_request.yml) 
-- Use the feedback link at the top of the SDK doctor side panel
+- [Report bugs](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml) or [request features](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&projects=&template=feature_request.yml)
 
