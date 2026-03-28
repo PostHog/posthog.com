@@ -49,12 +49,26 @@ Here you can:
 
 SQL queries have multiple different visualization options including:
 
-- Table (default)
+- Auto (default)
+- Table
 - Big number
 - Line chart
 - Bar chart
 - Stacked bar chart
 - Area chart
+- 2D heatmap
+
+### Auto chart type
+
+When you select **Auto**, PostHog picks the best visualization for your query results:
+
+- **Line chart**: Data with a date/datetime column, a numeric column, and multiple rows
+- **Big number**: A single numeric value
+- **2D heatmap**: Two string columns and a numeric column
+- **Bar chart**: Numeric values without a date/datetime column
+- **Table**: Everything else
+
+The dropdown shows "Auto (Line chart)" or similar so you can see which type was selected. Chart types that require a date/datetime column (like line and area charts) are disabled when your data doesn't include one.
 
 By clicking on the **Visualization** tab below the query, you can customize the X-axis, Y-axis, legend, scale, goal lines, and more. Each visualization type has its own set of customization options.
 
