@@ -29,6 +29,10 @@ Spike detection emails are sent **only to customers that don't have an account o
 
 To avoid notification fatigue, the system consolidates all detected spikes across all products into a single daily email. If an email was sent in the past 7 days, no new spike detection email will be sent, even if new spikes are detected.
 
+### Opting out
+
+To stop receiving spike detection emails, go to [**Settings** > **Notifications**](https://app.posthog.com/settings/user#notifications) and disable **Billing usage change alerts**. This setting applies only to your account – other organization admins and owners continue to receive notifications unless they also opt out.
+
 ## Related systems
 
 Spike detection complements other billing and usage monitoring features, such as [billing limits](/docs/billing/limits-alerts) and [usage dashboards](/templates/posthog-billable-usage).
