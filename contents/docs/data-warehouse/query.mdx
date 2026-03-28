@@ -58,7 +58,26 @@ SQL queries have multiple different visualization options including:
 
 By clicking on the **Visualization** tab below the query, you can customize the X-axis, Y-axis, legend, scale, goal lines, and more. Each visualization type has its own set of customization options.
 
-For example, with tables, you can add conditional formatting rules. These enable you to highlight cells based on their value and are set up in the **Conditional formatting** tab.
+### Number formatting
+
+For chart visualizations (line, bar, stacked bar, area), you can format how numbers appear on the Y-axis. Click the **Visualization** tab, select a Y-axis series, and click the **Formatting** tab. The **Style** dropdown includes:
+
+- **None** - Raw numbers with no formatting
+- **Number** - Locale-aware thousand separators (e.g., 1,234,567)
+- **Short Number** - Abbreviated large values (e.g., 1.2K, 1.5M, 2.3B)
+- **Percentage** - Appends a percent sign (e.g., 45%)
+
+Short Number is useful for large values like revenue or page views where magnitude matters more than exact figures.
+
+### Handling null values
+
+Charts hide null values by default—this creates gaps in line charts or missing bars in bar charts. This is useful when nulls represent genuinely missing data.
+
+To display nulls as zero instead, enable **Show nulls as zero** in the **Display** tab under **General**. This is helpful when you want continuous lines or when nulls should logically be treated as zero (e.g., no sales on a particular day means zero sales).
+
+### Conditional formatting
+
+With tables, you can add conditional formatting rules. These enable you to highlight cells based on their value and are set up in the **Conditional formatting** tab.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_01_00_2x_181ae75d28.png" 
