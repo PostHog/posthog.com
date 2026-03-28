@@ -223,6 +223,24 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+### Early access feature management
+
+**Prompt:** "List all early access features in my project"
+
+The agent will use `early-access-feature-list` to return all features with their names, stages, descriptions, and linked feature flags.
+
+**Prompt:** "Create an early access feature called 'AI Assistant' in beta stage with a description"
+
+The agent will use `early-access-feature-create` to create the feature with a linked feature flag. Active stages (alpha, beta, general-availability) enable the flag for users who opt in.
+
+**Prompt:** "Update my 'Dark Mode' early access feature to move it from draft to beta"
+
+The agent will use `early-access-feature-partial-update` to change the stage. Moving to an active stage updates the linked feature flag so opted-in users can access the feature.
+
+**Prompt:** "Delete the early access feature with ID abc123"
+
+The agent will use `early-access-feature-destroy` to remove the feature. The linked feature flag is preserved but its enrollment conditions are cleared.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
