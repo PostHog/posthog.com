@@ -223,6 +223,16 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+### Dashboard text cards
+
+**Prompt:** "Add a text card to my 'Product Metrics' dashboard explaining what the conversion funnel measures"
+
+The agent uses `dashboard-text-card-create` to add a markdown text card to your dashboard. Text cards let you add context, documentation, or annotations alongside your insights.
+
+**Prompt:** "Update the text card on dashboard ID 123 to include a note about the new onboarding flow changes"
+
+The agent uses `dashboard-get` to retrieve the dashboard, then `dashboard-text-card-update` to modify the content.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
