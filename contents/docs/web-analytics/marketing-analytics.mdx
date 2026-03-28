@@ -56,16 +56,28 @@ The marketing costs chart displays your total advertising spend across all confi
 - **Real-time updates** reflect new cost data as it syncs from your configured marketing sources (based on your source sync configuration)
 - **Currency conversion** automatically converts all monetary values (costs and conversion values) to your configured base currency for consistent reporting
 
-### Campaign breakdown
+### Data breakdown
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/table_white_e64873d2b0.png" 
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/table_white_e64873d2b0.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/table_dark_9c7ba9afdb.png"
-    alt="Campaign costs breakdown table showing detailed performance metrics"
+    alt="Marketing data breakdown table showing performance metrics"
     classes="rounded"
 />
 
-The campaign breakdown table provides detailed performance metrics by individual campaign:
+The breakdown table shows performance metrics for your marketing data. You can switch between different levels of detail using the segmented button:
+
+- **Channel** – Groups data by channel type (e.g., Paid Unknown, Direct, Organic).
+- **Source** – Groups data by traffic source (e.g., google, facebook, pinterest).
+- **Campaign** – Shows individual campaigns with their IDs. This is the most detailed view and the default.
+
+<CalloutBox icon="IconFlag" title="Feature flag" type="fyi">
+
+The drill-down levels feature requires the `MARKETING_ANALYTICS_DRILL_DOWN` feature flag to be enabled. Contact support or enable it via [feature previews](https://app.posthog.com/settings/user-feature-previews) when available.
+
+</CalloutBox>
+
+The table displays the following performance metrics:
 
 - **Campaign**: Campaign identifier from your advertising platform (must match the `utm_campaign` value in your conversion events)
 - **Source**: Ad platform name (e.g., `google`, must match the `utm_source` value in your conversion events)
