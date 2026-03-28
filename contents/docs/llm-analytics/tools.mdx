@@ -54,6 +54,19 @@ Click on any tool name to drill down into the [Generations](/docs/llm-analytics/
 - Examine the inputs and outputs around tool calls
 - Identify patterns in tool usage across users and traces
 
+## Analyzing tool patterns
+
+Each tool row has icons next to the tool name that open insights in a new tab:
+
+- **Trend** – Time series chart of the tool's usage over time
+- **Combinations** – Bar chart of the most common tool call combinations that include this tool
+- **Paths** – Tool call sequences starting from that tool, showing how tools are chained together in your AI workflows
+
+The table toolbar has buttons for aggregate analysis across all tools:
+
+- **Tool trends** – Trends insight with a line per tool (top 10 by usage) for comparing usage over time
+- **Tool co-occurrence** – Heatmap showing how often pairs of tools are called together in the same generation
+
 ## Tools in traces and generations
 
 Tool calls also appear as tags directly in the [Traces](/docs/llm-analytics/traces) and [Generations](/docs/llm-analytics/generations) views, making it easy to spot which conversations involved tool use at a glance.
