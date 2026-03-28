@@ -61,6 +61,15 @@ PostHog provides five pre-built evaluation templates to get you started:
    - **Property filters** (optional): Narrow which generations to evaluate using event or person properties
 6. Enable the evaluation and click **Save**
 
+### Testing in the playground
+
+Test your evaluation prompt in the playground before saving.
+
+1. Open an LLM-as-a-judge evaluation
+2. Click **Open in Playground**
+
+This loads the prompt and model configuration. Click the save icon next to the system prompt to save your changes or create a new evaluation.
+
 ### Writing custom prompts
 
 When creating a custom evaluation, your prompt should instruct the LLM judge to return `true` (pass) or `false` (fail) along with reasoning. The judge receives the generation's input and output for context.
