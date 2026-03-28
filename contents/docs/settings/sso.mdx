@@ -367,6 +367,26 @@ Before setting up SCIM, you need:
 
 6. Assign users and roles to the PostHog application in your IdP, verify that they appear in PostHog.
 
+### Viewing SCIM request logs
+
+SCIM request logs show all requests from your identity provider, which helps when troubleshooting provisioning issues.
+
+To view SCIM request logs:
+
+1. Go to [Authentication domains](https://app.posthog.com/settings/organization-authentication) in Organization settings.
+
+2. Click **(⋯)** next to your domain and select **View SCIM logs**.
+
+3. Use filters to narrow down results:
+   - **Status** – View all requests, successful only, or errors only
+   - **Search** – Search by request path or request body content (e.g., `/Users`, `john@example.com`)
+
+4. Click any row to expand and view full request and response details, including headers and body content.
+
+> **Note:** Sensitive data is automatically masked. Authorization headers are fully redacted, and PII in request bodies (like emails and names) is masked.
+
+SCIM request logs are retained for 180 days.
+
 ### Example: Okta
 
 If you already have a custom SAML app configured for PostHog, you can enable SCIM provisioning directly on it. If not, first set up SAML following the [Okta SAML example](#example-okta), then continue with these steps:
