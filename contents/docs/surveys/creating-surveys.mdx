@@ -262,6 +262,104 @@ Customization enables you to change the look, feel, and timing of your popover s
 
 For hosted surveys, you can only customize colors and placeholders.
 
+### Translations
+
+Surveys support multi-language translations. You can translate survey-level content (like the name and thank you message) and individual question content.
+
+#### Survey-level translations
+
+These fields can be translated at the survey level:
+
+- `name` - Survey name
+- `description` - Survey description
+- `thankYouMessageHeader` - Thank you message header
+- `thankYouMessageDescription` - Thank you message body
+- `thankYouMessageCloseButtonText` - Close button text
+
+#### Question-level translations
+
+Each question can have its own translations:
+
+- `question` - Question text
+- `description` - Question description
+- `buttonText` - Submit button text
+- `choices` - Choice options (single/multiple choice questions)
+- `lowerBoundLabel` - Lower bound label (rating questions)
+- `upperBoundLabel` - Upper bound label (rating questions)
+- `link` - Link URL (link questions)
+
+#### Language codes
+
+PostHog doesn't enforce specific language codes. You can use any string:
+
+- Standard ISO codes: `es`, `fr`, `de`, `ja`
+- Regional variants: `es-MX`, `en-GB`, `pt-BR`
+- Custom identifiers: `english`, `spanish`, `french`
+
+Use whatever language identifiers work best for your app's internationalization setup.
+
+#### Validation rules
+
+- **Choices arrays must match**: Translated `choices` arrays must have the same number of items as the original.
+- **Links are validated**: Translated links must use valid URL schemes (`https` or `mailto`).
+- **HTML is sanitized**: HTML in translations is sanitized to prevent XSS attacks while preserving safe formatting tags.
+
+#### Example
+
+Here's a survey with translations using the API:
+
+```json
+{
+  "name": "Customer Feedback",
+  "description": "Help us improve",
+  "type": "popover",
+  "questions": [
+    {
+      "type": "rating",
+      "question": "How satisfied are you?",
+      "lowerBoundLabel": "Not satisfied",
+      "upperBoundLabel": "Very satisfied",
+      "translations": {
+        "es": {
+          "question": "¿Qué tan satisfecho estás?",
+          "lowerBoundLabel": "No satisfecho",
+          "upperBoundLabel": "Muy satisfecho"
+        },
+        "fr": {
+          "question": "Êtes-vous satisfait?"
+        }
+      }
+    },
+    {
+      "type": "single_choice",
+      "question": "What features do you use?",
+      "choices": ["Analytics", "Feature Flags", "Surveys"],
+      "translations": {
+        "es": {
+          "question": "¿Qué funciones usas?",
+          "choices": ["Analítica", "Feature Flags", "Encuestas"]
+        }
+      }
+    }
+  ],
+  "translations": {
+    "es": {
+      "name": "Comentarios de clientes",
+      "description": "Ayúdanos a mejorar"
+    },
+    "fr": {
+      "name": "Enquête de satisfaction"
+    }
+  }
+}
+```
+
+In this example:
+- Survey-level fields (`name`, `description`) are in the top-level `translations` object
+- Question-specific fields are in each question's `translations` object
+- Spanish (`es`) has more complete translations, while French (`fr`) only translates some fields
+- The `choices` array for Spanish has exactly 3 items to match the original
+
 ### Display conditions
 
 > Display conditions are **not available for hosted surveys**. Any user who visits the link is shown the survey, as long as it is launched and still collecting responses.
