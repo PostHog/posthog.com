@@ -42,9 +42,17 @@ Duplicate profiles inflate counts that rely on person profiles, such as cohort s
 
 To fix existing duplicates, see [how to merge users](/docs/product-analytics/identify#how-to-merge-users).
 
+## Enabling person last seen tracking
+
+PostHog doesn't track when people were last active by default. To enable it, go to [**Settings**](https://app.posthog.com/settings/project-product-analytics#person-properties) > **Project** > **Person properties** and toggle on **Person last seen tracking**. This requires admin access.
+
+Once enabled, PostHog records when each person was last active (updated hourly) and shows it in the **Last seen** column of the People list.
+
 ## The persons list
 
 The [People tab](https://app.posthog.com/persons) displays a list of all people in your project. By default, the list includes the following columns:
+
+> **Note:** The **Last seen** column only appears if you've [enabled person last seen tracking](#enabling-person-last-seen-tracking) in your project settings.
 
 - **Person** - display name for the person
 - **ID** - the person's distinct ID
