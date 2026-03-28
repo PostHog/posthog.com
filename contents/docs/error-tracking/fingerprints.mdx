@@ -10,6 +10,18 @@ Every exception has a fingerprint, whether generated or defined by the user. Eac
 
 Multiple different fingerprints can point to the same issue (a many-to-one relationship) if you [merge issues](/docs/error-tracking/managing-issues#merging-issues). 
 
+## Unmerging fingerprints
+
+If you've merged issues or want to separate fingerprints from an issue, you can unmerge them into individual issues.
+
+To unmerge a fingerprint:
+
+1. Open an issue and click **Fingerprints** in the sidebar.
+2. Click the expand arrow next to a fingerprint to view its stack trace.
+3. Click the **Unmerge** button (branch icon) next to the fingerprint you want to separate.
+
+The fingerprint becomes its own issue. A notification appears with a link to the new issue.
+
 ## How are fingerprints generated?
 
 Fingerprints are built iteratively using components of the exception event. The flowchart below shows how fingerprints are generated.
