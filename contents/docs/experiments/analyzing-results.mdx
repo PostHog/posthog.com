@@ -9,6 +9,7 @@ availability:
 ---
 
 import {ProductScreenshot} from 'components/ProductScreenshot'
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 export const ExposuresPanelLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/exposures_light_04d3ee6606.png"
 export const ExposuresPanelDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/exposures_dark_6cf47da9eb.png"
@@ -166,6 +167,34 @@ If your experiment shows no significant differences:
 - **Verify implementation**: Ensure the variants are actually different and the tracking is working correctly
 - **Consider effect size**: The actual difference might be too small to detect with your current sample size
 - **Learn from it**: Not all experiments win – this is valuable information about what doesn't move the needle
+
+## Significance notifications
+
+<CalloutBox icon="IconFlask" title="Beta" type="info">
+
+This feature requires the `experiment-significance-alerts` feature flag to be enabled.
+
+</CalloutBox>
+
+Set up notifications to get alerted when an experiment metric reaches statistical significance.
+
+To set up significance notifications:
+
+1. Go to your experiment and click the **Settings** tab.
+2. In the **Notifications** section, click **New notification**.
+3. Choose a destination:
+   - **Slack** – Post to a Slack channel when a metric reaches significance. You may need to connect your Slack workspace first.
+   - **HTTP Webhook** – Send a webhook to a custom URL.
+4. Configure the destination settings and click **Create & enable**.
+
+Each notification includes:
+
+- **Winning variant**: The variant that won
+- **Metric name**: The metric that reached significance
+- **Relative change**: The percentage change vs control (e.g., +78%)
+- **Chance to win**: Statistical probability the variant is winning (e.g., 99%)
+- **Goal direction**: Whether the goal is to increase or decrease the metric
+- **View experiment link**: Direct link to the experiment in PostHog
 
 ## Funnel metrics analysis
 
