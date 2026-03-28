@@ -205,6 +205,28 @@ The agent will use the `list-errors` tool to fetch error groups sorted by occurr
 
 The agent will use `logs-query` to search for logs filtered by severity level and service name, returning log entries with timestamps, messages, and trace information.
 
+### Scheduled flag changes
+
+**Prompt:** "Schedule the 'black-friday-sale' flag to enable at midnight on November 29th"
+
+The agent will use the `scheduled-changes-create` tool to create a scheduled change that enables the flag at the specified time.
+
+**Prompt:** "What scheduled changes are pending for the 'new-checkout-flow' flag?"
+
+The agent will use the `scheduled-changes-list` tool to retrieve all pending scheduled changes for the specified flag, showing scheduled times and change types.
+
+**Prompt:** "Set up a recurring schedule to enable the 'maintenance-mode' flag every Sunday at 2am and disable it at 6am"
+
+The agent will create two recurring scheduled changes using `scheduled-changes-create` – one to enable the flag and one to disable it – with weekly recurrence.
+
+**Prompt:** "Push back the scheduled launch of 'new-dashboard' by 2 hours"
+
+The agent will use `scheduled-changes-list` to find the existing schedule, then `scheduled-changes-update` to modify the scheduled time.
+
+**Prompt:** "Cancel the scheduled rollout for the 'beta-features' flag"
+
+The agent will use `scheduled-changes-list` to find the pending schedule, then `scheduled-changes-delete` to remove it.
+
 ### Prompt management
 
 **Prompt:** "List all prompts stored in my project"
