@@ -113,7 +113,7 @@ Tags can also be set automatically via [workflow automation](/docs/support/workf
 |-------------|-------------|
 | **Customer** | Messages sent by the end user via the widget |
 | **Support** | Messages sent by your team from PostHog |
-| **AI** | Messages from AI (reserved for future use) |
+| **AI** | AI-generated suggestions created via **AI Suggest** |
 
 ### Message status
 
@@ -144,6 +144,25 @@ The system tracks unread messages separately for:
 Unread counts reset when:
 - Team views a ticket in PostHog
 - Customer calls the "mark as read" endpoint from the widget
+
+## AI suggestions
+
+AI suggestions generate draft replies based on conversation history, session events, and exceptions to help you respond faster.
+
+<CalloutBox icon="IconFlask" title="AI suggestions is in early access" type="info">
+
+AI suggestions requires the `product-support-ai-suggestion` feature flag. Contact us to request access.
+
+</CalloutBox>
+
+### Using AI suggestions
+
+1. Open a ticket
+2. Click **AI Suggest**
+3. Review and edit the suggestion
+4. Send to the customer
+
+Suggestions appear as private messages – customers won't see them until you send.
 
 ## Ticket detail page
 
