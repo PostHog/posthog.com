@@ -223,6 +223,40 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+### Person management
+
+**Prompt:** "Show me the first 10 persons in my project"
+
+The agent will use `persons-list` to return a paginated list of persons with their properties, distinct IDs, and metadata.
+
+**Prompt:** "Find all persons with an email containing 'alice'"
+
+The agent will use `persons-list` with the search parameter to find matching persons.
+
+**Prompt:** "Get the full details for person with ID 42"
+
+The agent will use `persons-retrieve` to fetch the person's properties, distinct IDs, created timestamp, and last seen timestamp.
+
+**Prompt:** "What are the distinct values for the 'plan' property across all persons?"
+
+The agent will use `persons-values-retrieve` to return all unique values for that property.
+
+**Prompt:** "What cohorts does this person belong to?"
+
+The agent will use `persons-cohorts-retrieve` to list all cohorts the person is a member of.
+
+**Prompt:** "Set the 'plan' property to 'enterprise' on person ID 42"
+
+The agent will use `persons-property-set` to set the property asynchronously via the event pipeline.
+
+**Prompt:** "Remove the 'legacy_flag' property from person ID 42"
+
+The agent will use `persons-property-delete` to delete the property from the person.
+
+**Prompt:** "Delete the persons with UUIDs 'uuid-1' and 'uuid-2', including their events and recordings"
+
+The agent will use `persons-bulk-delete` with the IDs and deletion options. This operation is irreversible, so the agent will warn you before executing.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
