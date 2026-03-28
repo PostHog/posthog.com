@@ -96,17 +96,25 @@ Filters can be accessed in SQL insights through the [`filters` variable](/docs/d
 
 ### Editing the layout
 
-You can move and resize all the insights on a dashboard by entering the 'Edit layout' mode. 
+Move and resize insights on a dashboard by entering 'Edit layout' mode.
 
 You can do this in five ways:
 
 - Tap 'E' on your keyboard
-- Click on the '...' icon at the top of the dashboard and click 'Edit layout'
-- Click on the '...' icon on any insight card and click 'Edit layout'
-- Hover near the edge of any insight card and click when the resize cursor appears
-- Click or start dragging on any insight card, text card, or button tile (outside the interactive chart area)
+- Click the '...' icon at the top of the dashboard and click **Edit layout**
+- Click the '...' icon on any insight card and click **Edit layout**
+- Click or drag from the edge of any card (the cursor changes to a resize icon when hovering near edges)
+- Click or drag on a card to grab it – for insight cards, click on the title bar; for text cards and button tiles, click anywhere on the card (the cursor changes to a grab icon)
 
-Once in edit mode, press 'E' again to save your changes and exit edit mode, or press 'Escape' to discard changes and exit.
+To save your changes and exit edit mode, press 'E' again or click **Save**. To discard changes, press **Escape** or click **Cancel**. A toast notification reminds you of these shortcuts when you enter edit mode.
+
+For busy dashboards with many tiles, you can collapse the view to see more of the layout at once. In edit mode, press 'Z' or click **Collapse view** to shrink tiles, making them easier to rearrange. While collapsed, you can drag tiles to new positions but resizing is disabled. Press 'Z' again or click **Expand view** to return to normal size. The view resets when you exit edit mode.
+
+> **Note:** Layout zoom is in beta and requires the `dashboard-layout-zoom` [feature flag](/docs/feature-flags) to be enabled.
+
+**Auto layout** quickly rearranges your dashboard tiles into 1, 2, or 3 columns. Click it while in edit mode to reset your layout or switch between column views.
+
+> **Note:** Auto layout is in beta and bundled with the grid tiles [feature flag](/docs/feature-flags).
 
 Tapping 'F' enables fullscreen mode.
 
