@@ -111,7 +111,9 @@ By default, release conditions **match by user**, meaning the flag is evaluated 
 - **Device** – Evaluates based on the device ID. Best for flags targeting anonymous users, as it ensures a consistent experience on the device even after the user logs in. See [device bucketing](/docs/feature-flags/device-bucketing) for more details.
 - **Group** (requires [group analytics](/docs/product-analytics/group-analytics)) – Evaluates based on a group key (e.g., company, team, or organization). See [targeting groups](/docs/feature-flags/targeting-groups#targeting-groups-teams-or-organizations) for more details.
 
-Percentage rollouts are available for all flags. More options depend on your PostHog setup:
+Percentage rollouts are available for all flags. Rollout percentages support decimal values with up to two decimal places of precision (minimum 0.01%), which is useful for large-scale rollouts where you need to target less than 1% of users.
+
+More options depend on your PostHog setup:
 
 Rollout percentages support decimal values with up to two decimal places of precision (e.g., 0.15% or 33.33%), down to a minimum of 0.01%. Enter decimal values in the percentage text input — the slider uses whole-number steps.
 
