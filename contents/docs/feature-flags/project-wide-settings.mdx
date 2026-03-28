@@ -20,6 +20,35 @@ When enabled, all new feature flags will have persistence enabled by default. Th
 
 Learn more about flag persistence in our [creating feature flags documentation](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps).
 
+## Default release conditions
+
+Set default release conditions that automatically pre-fill when creating new feature flags.
+
+### How it works
+
+When you enable default release conditions:
+
+1. **Creating a flag from scratch** – Your configured conditions appear pre-filled in the release conditions editor.
+2. **Using a template** – Your default conditions are added first, followed by any conditions from the template.
+
+Default conditions are suggestions, not restrictions. You can modify, add, or remove any conditions before saving.
+
+> **Note:** [Remote config](/docs/feature-flags/remote-config) flags skip default conditions since they use a fixed 100% rollout to all users.
+
+### Setting up defaults
+
+1. Go to **Settings** > **Feature flags**.
+2. Find **Default release conditions**.
+3. Enable the toggle.
+4. Configure your release conditions using the same editor used for individual flags.
+5. Click **Save changes**.
+
+### Common use cases
+
+- **Internal testing** – Pre-fill conditions to target your internal team (e.g., users with `email` containing `@yourcompany.com`) before broader rollout.
+- **Gradual rollouts** – Start all flags with a conservative rollout percentage.
+- **Segment targeting** – Automatically target a specific user segment, like beta users or a particular plan tier.
+
 ## Flag change confirmation
 
 When enabled, editing existing feature flags will show a confirmation modal before saving changes. This helps prevent accidental changes to flag release conditions that could impact your users' experience.
