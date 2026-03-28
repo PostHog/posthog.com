@@ -37,6 +37,45 @@ Validation is only enforced when you enable a workflow. Before enabling, PostHog
 
 Draft workflows can also be archived, even if they contain invalid configurations.
 
+## Auto-save and unpublished changes
+
+Your workflow saves automatically 5 seconds after each edit – no manual save needed.
+
+### How auto-save works
+
+Auto-save behaves differently depending on workflow status:
+
+| Workflow status | Auto-save behavior |
+|-----------------|-------------------|
+| Draft | Changes save directly to the workflow |
+| Enabled | Changes save as unpublished changes, keeping the live version unaffected |
+
+When you edit an enabled workflow, your changes are stored separately. The live workflow keeps running with its original configuration until you publish.
+
+### Visual indicators
+
+The workflow builder shows modified nodes:
+
+| Visual indicator | Meaning |
+|------------------|---------|
+| Dashed orange border, reduced opacity | Node has been added or modified |
+| Dashed red border, strikethrough, reduced opacity | Node has been deleted (but not yet published) |
+
+Deleted nodes appear as "ghost nodes" you can restore before publishing. Click the revert button on a ghost node to restore it.
+
+### Publishing or discarding changes
+
+When an enabled workflow has unpublished changes, an **Unpublished changes** banner appears with two options:
+
+- **Publish** – Apply your draft changes to the live workflow
+- **Discard changes** – Revert to the current live version
+
+The enable/disable toggle is locked while unpublished changes exist. Publish or discard your changes first.
+
+### Name and description
+
+Editing the workflow name or description saves directly to the workflow (not as a draft). These changes take effect immediately, regardless of workflow status.
+
 ## Triggers
 
 Every workflow starts with a trigger. Triggers represent actions taken by users that kick off the workflow. There are two types of triggers:
