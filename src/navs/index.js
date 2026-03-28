@@ -2360,6 +2360,10 @@ export const docsMenu = {
                             url: '/docs/libraries/cloudflare-workers',
                         },
                         {
+                            name: 'Celery',
+                            url: '/docs/libraries/celery',
+                        },
+                        {
                             name: 'Django',
                             url: '/docs/libraries/django',
                         },

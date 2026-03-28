@@ -299,6 +299,10 @@ By default, the library buffers events before sending them to the capture endpoi
 
 See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django. Our library includes a [contexts middleware](/docs/libraries/django#django-contexts-middleware) that can automatically capture distinct IDs, session IDs, and other properties you can set up with tags.
 
+## Celery
+
+See our [Celery docs](/docs/libraries/celery) for how to set up PostHog with Celery background tasks. The Celery integration automatically captures task lifecycle events, exceptions, and propagates context from your web application to workers.
+
 ## Alternative name
 
 As our open source project [PostHog](https://github.com/PostHog/posthog) shares the same module name, we created a special `posthoganalytics` package, mostly for internal use to avoid module collision. It is the exact same.
