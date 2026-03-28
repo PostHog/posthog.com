@@ -1,0 +1,103 @@
+---
+title: Email integration
+sidebar: Docs
+showTitle: true
+---
+
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+<CalloutBox icon="IconFlask" title="Email integration is in beta" type="info">
+
+This feature requires the `product-support-email-channel` feature flag. Contact us to enable it.
+
+</CalloutBox>
+
+The email integration lets you receive customer emails as support tickets and reply directly from PostHog. Customers email your support address, their messages become tickets, and your replies are sent back via email.
+
+This uses a forwarding address that routes emails to Support, separate from your personal or company email.
+
+## Connecting email
+
+1. Go to **Support > Settings** in PostHog
+2. In the **Email** section, enter your **From email** (e.g., support@yourcompany.com)
+3. Enter a **From name** (e.g., "Your Company Support")
+4. Click **Connect**
+5. Copy the forwarding address shown
+
+## Setting up email forwarding
+
+After connecting, you get a unique forwarding address in the format `team-<token>@<your-domain>`. Configure your email provider to forward support emails to this address.
+
+For example, to have support@yourcompany.com create tickets:
+
+1. Set up forwarding in your email provider (Gmail, Outlook, etc.) to send emails to your PostHog forwarding address
+
+Once configured:
+
+- **New emails** - become support tickets automatically
+- **Thread replies** - are added to the original ticket
+
+## Enabling two-way email
+
+To reply to customers via email, verify your sending domain. This lets replies come from your domain (like support@yourcompany.com) instead of a generic PostHog address.
+
+### Adding sending DNS records
+
+After connecting email, you'll see DNS records to add to your domain. These authorize PostHog to send emails on your behalf.
+
+1. Go to **Support > Settings** in PostHog
+2. In the **Email** section, find the **Sending DNS records** panel
+3. Add each record to your domain's DNS settings
+4. Return to PostHog and click **Verify DNS**
+
+Once verified, you can reply to email tickets directly from PostHog.
+
+### Sending a test email
+
+After verifying your domain, click **Send test email** to confirm everything works. The test is sent to your configured email address.
+
+## Replying to email tickets
+
+When you reply to an email ticket in PostHog, your message is sent to the customer via email. The email:
+
+- Comes from your configured **From email** address
+- Uses the ticket subject as the email subject
+- Threads with the original conversation so replies stay grouped
+
+## How tickets are created
+
+When an email arrives at your forwarding address, PostHog:
+
+1. Creates a new ticket with the email subject and sender
+2. Adds the email body as the first message
+3. Sets `channel_source` to `email` on the ticket
+
+The sender's email address becomes the ticket's `distinct_id`, so future emails from the same address can be linked to the same person.
+
+## Email threading
+
+PostHog threads email replies using `In-Reply-To` and `References` headers. When someone replies to an email thread, the reply is matched to the existing ticket.
+
+- Replies stay grouped with the original conversation
+- No duplicate tickets from the same thread
+
+## Viewing email tickets
+
+Email tickets appear in your [inbox](/docs/support/inbox) alongside widget and Slack tickets. Each email ticket shows:
+
+- An email icon indicating the channel source
+- The email subject in the ticket sidebar
+- The sender's email address
+
+You can filter the ticket list by channel source to see only email tickets.
+
+## Disconnecting
+
+To remove the email integration:
+
+1. Go to **Support > Settings**
+2. Click **Disconnect** in the Email section
+
+Existing tickets created from email are not affected — they remain in your inbox.
