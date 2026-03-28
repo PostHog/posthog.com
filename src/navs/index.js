@@ -5720,6 +5720,11 @@ export const docsMenu = {
                             platformLogo: 'cohere',
                         },
                         {
+                            name: 'Convex',
+                            url: '/docs/llm-analytics/installation/convex',
+                            platformLogo: 'convex',
+                        },
+                        {
                             name: 'Hugging Face',
                             url: '/docs/llm-analytics/installation/hugging-face',
                             platformLogo: 'huggingFace',
