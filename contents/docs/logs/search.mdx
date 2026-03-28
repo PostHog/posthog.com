@@ -50,6 +50,22 @@ The logs search accepts multiple tokens and quoted phrases to help you find the 
 - **Multiple negative tokens:** List multiple `!tokens` (e.g., `!debug !trace`) to exclude logs that contain any of those tokens
 - **Punctuation:** Quotes and escapes are handled using shell-like parsing rules, so complex tokens should be quoted if they contain spaces or special characters
 
+## Saved views
+
+Save your current filter configuration as a view to quickly load it later or share it with your team.
+
+To save a view:
+
+1. Set up your filters (severity levels, services, search terms, attribute filters, date range)
+2. Click **Saved views** in the header
+3. Click **Save current view** and give it a name
+
+Date ranges are saved relative to when you load the view – so a "last 24 hours" filter always shows the most recent 24 hours, not a fixed time window.
+
+To load a view, click **Saved views**, find the one you want, and click **Load**. You can see a summary of each view's filters before loading. Loading a view replaces your current filters.
+
+To delete a view, click the three-dot menu next to it and select **Delete**. Deleted views cannot be recovered.
+
 ## Get more from search with structured logs
 
 Search works best when your logs are consistent and structured. Adding key-value context like `user_id`, `endpoint`, and `status_code` to every log line makes filtering faster and more precise. See our [logging best practices guide](/docs/logs/best-practices) for patterns that make logs easier to search and query.
