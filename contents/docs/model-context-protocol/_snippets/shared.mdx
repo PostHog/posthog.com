@@ -68,6 +68,38 @@ Example for Cursor (add to `.cursor/mcp.json`):
 
 <details>
 
+<summary>Enabling read-only mode?</summary>
+
+Read-only mode restricts the MCP server to only expose tools that don't modify data (i.e., tools annotated with `readOnlyHint: true`). This is useful when you want to limit an agent to querying and listing data without the ability to create, update, or delete resources.
+
+You can enable read-only mode using a header or query parameter:
+
+**Header:**
+- `x-posthog-readonly` - Set to `true` or `1`
+
+**Query parameter:**
+- `readonly` - Set to `true` or `1`
+
+Example for Cursor (add to `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here",
+        "x-posthog-readonly": "true"
+      }
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+
 <summary>Filtering available tools by feature?</summary>
 
 You can limit which tools are available by adding a `features` query parameter to the MCP URL. If no features are specified, all tools are available. When features are specified, only tools matching those features are exposed.
@@ -128,7 +160,6 @@ Example for Cursor (add to `.cursor/mcp.json`):
 ```
 
 </details>
-
 
 ## Available tools
 
