@@ -87,7 +87,13 @@ To share an entire dashboard, start by clicking the **Share** button in the top 
 
 Next, toggle ON the option to share the dashboard publicly.
 
-Finally, copy the public link and share with anyone. This link and dashboard won't require authentication to view. 
+You can configure these options:
+
+- **PostHog branding** - Show or hide PostHog branding on the shared dashboard
+- **Show insight details** - Include extra details like who created each insight and applied filters
+- **Theme** - Choose between System (default), Light, or Dark mode for the shared dashboard
+
+Copy the public link to share with anyone. This link and dashboard won't require authentication to view. 
 
 ### Embedding a dashboard
 
@@ -129,4 +135,4 @@ The dashboard fires a `posthog:dimensions` event when it loads and you can use t
 
 ### Refreshing shared dashboards
 
-Shared and embedded dashboards auto-refresh every 30 minutes while the page is open. Auto-refresh pauses when the browser tab is inactive and resumes when the tab becomes visible again.
+Shared and embedded dashboards auto-refresh every 30 minutes while the page is open. The dashboard header shows the refresh interval. Auto-refresh pauses when the browser tab is inactive and resumes when the tab becomes visible again.
