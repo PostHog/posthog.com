@@ -243,6 +243,25 @@ The `system.hog_flows` table contains workflow definitions from your project.
 | `created_at`    | When the workflow was created                  |
 | `updated_at`    | When the workflow was last updated             |
 
+### `system.hog_functions`
+
+The `system.hog_functions` table contains metadata about your CDP destinations, transformations, and other hog functions.
+
+| Column           | Description                                              |
+|------------------|----------------------------------------------------------|
+| `id`             | Unique identifier for the function                       |
+| `name`           | Name of the function                                     |
+| `description`    | Description of what the function does                    |
+| `type`           | Function type (destination, transformation, etc.)        |
+| `enabled`        | Whether the function is active (1 = yes, 0 = no)         |
+| `deleted`        | Whether the function is deleted (1 = yes, 0 = no)        |
+| `template_id`    | ID of the template the function was created from         |
+| `execution_order`| Execution priority for transformations (lower runs first)|
+| `inputs_schema`  | JSON containing the function's input parameter schema    |
+| `filters`        | JSON containing event filters for the function           |
+| `created_at`     | When the function was created                            |
+| `updated_at`     | When the function was last updated                       |
+
 ### `system.notebooks`
 
 The `system.notebooks` table contains notebook metadata from your project.
