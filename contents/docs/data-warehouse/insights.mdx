@@ -89,3 +89,21 @@ After setting up a join to the [`persons` table](/docs/data-warehouse/sources/po
 />
 
 Learn more about how to set this up in our guide on [joining data](/docs/data-warehouse/join).
+
+## Using data warehouse tables in lifecycle insights
+
+You can also use data warehouse tables in [lifecycle](/docs/product-analytics/lifecycle) insights to analyze new, returning, resurrecting, and dormant entities from external data sources.
+
+> **Beta:** This feature requires the `lifecycle-dwh-support` feature flag.
+
+Lifecycle insights require one additional field compared to trends – a **Created at** field. This is because lifecycle needs to distinguish between new entities (created in the current period) and returning or resurrecting entities (created earlier). See the [Lifecycle insights fields section](#lifecycle-insights) above for field configuration details.
+
+Select **Custom entity** from the aggregation dropdown when your data warehouse entities don't map to persons or groups.
+
+### Limitations
+
+Data warehouse lifecycle insights don't support:
+
+- Properties filters
+- Test account filters
+- Sampling
