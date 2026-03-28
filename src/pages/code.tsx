@@ -1,27 +1,26 @@
 import React, { useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
-import {
-    IconApple,
-    IconArrowRight,
-    IconThoughtBubble,
-    IconPause,
-    IconCode,
-    IconPeople,
-    IconGlobe,
-    IconLogomark,
-    IconBug,
-    IconBolt,
-    IconLaptop,
-    IconCloud,
-    IconSparkles,
-} from '@posthog/icons'
+import { IconApple, IconArrowRight } from '@posthog/icons'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
 import { FlowDiagram } from 'components/Code/FlowDiagram'
 import { DottedConnection } from 'components/Code/DottedConnection'
+import {
+    StickerAi,
+    StickerBulb,
+    StickerCloud,
+    StickerCoffee,
+    StickerELearning,
+    StickerMicroscope,
+    StickerPause,
+    StickerPullRequest,
+    StickerTerminal,
+    StickerUsers,
+    StickerWebsite,
+} from 'components/Stickers/Stickers'
 
 // ─────────────────────────────────────────────
 // Download CTA Button
@@ -58,15 +57,20 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 function InlineIcon({
     icon: Icon,
+    children,
     className = '',
 }: {
     icon: React.ComponentType<{ className?: string }>
+    children?: React.ReactNode
     className?: string
 }) {
     return (
-        <IconPop>
-            <Icon className={`size-5 inline-block align-middle mx-0.5 ${className}`} />
-        </IconPop>
+        <span className="inline-flex items-baseline gap-0.5 whitespace-nowrap">
+            <IconPop>
+                <Icon className={`size-7 inline-block align-middle relative top-1.5 ${className}`} />
+            </IconPop>
+            {children}
+        </span>
     )
 }
 
@@ -76,7 +80,7 @@ function InlineIcon({
 
 function KeyBadge({ children }: { children: React.ReactNode }) {
     return (
-        <span className="inline-flex items-center gap-1 border border-primary rounded px-1.5 py-0.5 text-xs font-mono bg-accent align-middle mx-0.5">
+        <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs font-sans align-middle mx-0.5 bg-[#1d1f27] text-white dark:bg-white dark:text-[#1d1f27]">
             {children}
         </span>
     )
@@ -143,13 +147,14 @@ function OldWaySection() {
         <section className="relative mb-8 @2xl:mb-12">
             <SectionLabel>The old way</SectionLabel>
 
-            <p className="text-base @xl:text-lg leading-relaxed mb-5">
+            <p className="text-base leading-relaxed mb-5">
                 <ChoppyReveal wordDelay={40}>
                     {'Most AI code editors '}
-                    <InlineIcon icon={IconThoughtBubble} /> <em>lack context</em>
+                    <InlineIcon icon={StickerBulb}>
+                        <em>lack context</em>
+                    </InlineIcon>
                     {' and '}
-                    <InlineIcon icon={IconPause} />
-                    {' wait for '}
+                    <InlineIcon icon={StickerPause}>{' wait for '}</InlineIcon>
                     <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5}>
                         <em>you</em>
                     </RoughAnnotation>
@@ -161,20 +166,26 @@ function OldWaySection() {
 
             <FlowDiagram className="mb-5" />
 
-            <p className="text-base @xl:text-lg leading-relaxed">
+            <p className="text-base leading-relaxed">
                 <ChoppyReveal wordDelay={40}>
                     {'They use your '}
-                    <InlineIcon icon={IconCode} />{' '}
-                    <RoughAnnotation type="box" color="#1D4AFF" strokeWidth={1.5} padding={2}>
-                        <strong>codebase</strong>
-                    </RoughAnnotation>
+                    <InlineIcon icon={StickerTerminal}>
+                        {' '}
+                        <RoughAnnotation type="box" color="#1D4AFF" strokeWidth={1.5} padding={2}>
+                            <strong>codebase</strong>
+                        </RoughAnnotation>
+                    </InlineIcon>
                     {' as the source of truth, not how '}
-                    <InlineIcon icon={IconPeople} /> <em>people</em>
+                    <InlineIcon icon={StickerUsers}>
+                        <em>people</em>
+                    </InlineIcon>
                     {' use your '}
-                    <InlineIcon icon={IconGlobe} />{' '}
-                    <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
-                        <em>product</em>
-                    </RoughAnnotation>
+                    <InlineIcon icon={StickerWebsite}>
+                        {' '}
+                        <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
+                            <em>product</em>
+                        </RoughAnnotation>
+                    </InlineIcon>
                     {'.'}
                 </ChoppyReveal>
             </p>
@@ -209,10 +220,10 @@ function PostHogWaySection() {
                         <SignalsCallout />
                     </div>
 
-                    <p className="text-base @xl:text-lg leading-relaxed mb-5 order-1">
+                    <p className="text-base leading-relaxed mb-5 order-1">
                         <ChoppyReveal wordDelay={40}>
-                            <InlineIcon icon={IconLogomark} />
-                            {' PostHog Code uses '}
+                            <InlineIcon icon={StickerCoffee}>{' PostHog Code'}</InlineIcon>
+                            {' uses '}
                             <span ref={signalsWordRef}>
                                 <RoughAnnotation
                                     type="highlight"
@@ -227,10 +238,10 @@ function PostHogWaySection() {
                             {' from '}
                             <span className="text-green">&#9679;</span> <strong>production data</strong>
                             {' to '}
-                            <InlineIcon icon={IconBug} />
-                            {' diagnose issues and '}
-                            <InlineIcon icon={IconBolt} />
-                            {' generate pull requests to fix them — '}
+                            <InlineIcon icon={StickerMicroscope}>{' diagnose issues'}</InlineIcon>
+                            {' and '}
+                            <InlineIcon icon={StickerPullRequest}>{' generate pull requests'}</InlineIcon>
+                            {' to fix them — '}
                             <em>before you even know there&apos;s a problem.</em>{' '}
                             <span className="text-secondary text-sm">z</span>
                             <span className="text-secondary text-xs">z</span>
@@ -238,13 +249,13 @@ function PostHogWaySection() {
                     </p>
                 </div>
 
-                <p className="text-base @xl:text-lg leading-relaxed mb-2">
+                <p className="text-base leading-relaxed mb-2">
                     <ChoppyReveal wordDelay={40}>
                         {'Run it '}
-                        <InlineIcon icon={IconLaptop} />
-                        {' locally or in the '}
-                        <InlineIcon icon={IconCloud} />
-                        {' cloud — either way, it automatically uses the right '}
+                        <InlineIcon icon={StickerELearning}>{' locally'}</InlineIcon>
+                        {' or in the '}
+                        <InlineIcon icon={StickerCloud}>{' cloud'}</InlineIcon>
+                        {' — either way, it automatically uses the right '}
                         <span ref={aiModelRef}>
                             <RoughAnnotation type="box" color="currentColor" strokeWidth={1} padding={2}>
                                 <strong>AI model</strong>
@@ -274,16 +285,19 @@ function PostHogWaySection() {
 function BottomCTASection() {
     return (
         <section className="mb-8">
-            <p className="text-base @xl:text-lg leading-relaxed mb-5">
+            <p className="text-base leading-relaxed mb-5">
                 <ChoppyReveal wordDelay={40}>
                     {'There are plenty of '}
-                    <InlineIcon icon={IconSparkles} />
-                    {" AI coding tools. But there's only "}
+                    <InlineIcon icon={StickerAi}>{' AI coding tools.'}</InlineIcon>
+                    {" But there's only "}
                     <RoughAnnotation type="circle" color="#F54E00" strokeWidth={2} padding={4}>
                         <span>one</span>
                     </RoughAnnotation>
                     {' that knows your product like '}
-                    <InlineIcon icon={IconLogomark} /> <strong>PostHog Code.</strong>
+                    <InlineIcon icon={StickerCoffee}>
+                        {' '}
+                        <strong>PostHog Code.</strong>
+                    </InlineIcon>
                 </ChoppyReveal>
             </p>
             <DownloadButton />
