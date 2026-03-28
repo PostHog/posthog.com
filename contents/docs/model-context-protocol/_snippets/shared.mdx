@@ -68,6 +68,16 @@ Example for Cursor (add to `.cursor/mcp.json`):
 
 <details>
 
+<summary>AI-powered tools and organization consent</summary>
+
+Some MCP tools use AI internally to process your data (for example, the HogQL generation tool uses an LLM to convert natural language questions into SQL queries). These tools are only available when your organization has approved AI data processing.
+
+If your organization hasn't approved AI data processing, tools marked as requiring AI consent won't appear in the available tool list. To enable these tools, an organization owner can approve AI data processing in **Settings** > **Organization** > **AI data processing**.
+
+</details>
+
+<details>
+
 <summary>Filtering available tools by feature?</summary>
 
 You can limit which tools are available by adding a `features` query parameter to the MCP URL. If no features are specified, all tools are available. When features are specified, only tools matching those features are exposed.
@@ -128,7 +138,6 @@ Example for Cursor (add to `.cursor/mcp.json`):
 ```
 
 </details>
-
 
 ## Available tools
 
