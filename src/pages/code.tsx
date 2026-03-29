@@ -4,6 +4,7 @@ import Editor from 'components/Editor'
 import { IconArrowRight } from '@posthog/icons'
 import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
+import { Accordion } from 'components/RadixUI/Accordion'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
@@ -145,17 +146,19 @@ function KeyBadge({ children }: { children: React.ReactNode }) {
 
 function WavyDivider() {
     return (
-        <div className="my-8 @2xl:my-12 mx-auto max-w-xs">
-            <svg width="100%" height="20" preserveAspectRatio="none" className="text-muted">
-                <path
-                    d="M0,10 Q25,2 50,10 T100,10 T150,10 T200,10 T250,10 T300,10 T350,10 T400,10 T450,10 T500,10 T550,10 T600,10 T650,10 T700,10 T750,10 T800,10 T850,10 T900,10 T950,10 T1000,10"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={1}
-                    strokeDasharray="8 6"
-                    vectorEffect="non-scaling-stroke"
-                />
-            </svg>
+        <div className="my-8 mx-auto max-w-lg">
+            <div className="max-w-xs">
+                <svg width="100%" height="20" preserveAspectRatio="none" className="text-muted">
+                    <path
+                        d="M0,10 Q25,2 50,10 T100,10 T150,10 T200,10 T250,10 T300,10 T350,10 T400,10 T450,10 T500,10 T550,10 T600,10 T650,10 T700,10 T750,10 T800,10 T850,10 T900,10 T950,10 T1000,10"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={1}
+                        strokeDasharray="8 6"
+                        vectorEffect="non-scaling-stroke"
+                    />
+                </svg>
+            </div>
         </div>
     )
 }
@@ -690,7 +693,13 @@ function HeroSection() {
                 <PostHogCodeLogo />
                 <h1 className="text-xl @xl:text-2xl font-bold leading-tight mb-5 !mt-0">
                     {'The AI code editor that knows your '}
-                    <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={300}>
+                    <RoughAnnotation
+                        type="highlight"
+                        color="rgba(48, 164, 108, 0.2)"
+                        strokeWidth={1}
+                        padding={2}
+                        delay={300}
+                    >
                         <em className="font-bold">product</em>
                     </RoughAnnotation>
                     {', not just your '}
@@ -908,17 +917,7 @@ function PostHogWaySection() {
                     />
                 )}
             </div>
-        </section>
-    )
-}
 
-// ─────────────────────────────────────────────
-// Bottom CTA
-// ─────────────────────────────────────────────
-
-function BottomCTASection() {
-    return (
-        <section className="mb-8">
             <p className="text-base leading-loose mb-5 mx-auto max-w-lg">
                 <ChoppyReveal wordDelay={40}>
                     {'There are plenty of '}
@@ -939,6 +938,140 @@ function BottomCTASection() {
     )
 }
 
+const FAQ_ITEMS = [
+    {
+        trigger: 'Why is PostHog building an AI code editor?',
+        content: (
+            <div className="space-y-3">
+                <p>
+                    The latest generation of AI-powered editors are remarkably capable at writing code. But there's a
+                    problem: they have <em>no idea what your product is or what your users need.</em>
+                </p>
+                <p>
+                    Engineers waste a remarkable amount of time finding and feeding context to orchestrate AI coding
+                    agents.
+                </p>
+                <p>
+                    But <strong>that context already lives in PostHog</strong>. When your product data and AI agents
+                    work together, AI agents can automatically run analysis, fix bugs, and write pull requests so you
+                    can focus on more high-value work
+                </p>
+            </div>
+        ),
+    },
+    {
+        trigger: 'Is my data safe?',
+        content: (
+            <p>
+                Yes. PostHog Code queries your data through the PostHog API using your personal API key. Data is never
+                stored, cached, or sent anywhere other than to PostHog&apos;s servers. The MCP server runs locally on
+                your machine, and you control exactly what the agent can access through your API key&apos;s permissions.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Does it replace Cursor or Claude Code?',
+        content: (
+            <p>
+                Maybe, but not unless you want to. PostHog Code is the missing layer between data and writing code. Keep
+                your editor if you like it, but give PostHog Code a try first.
+            </p>
+        ),
+    },
+    {
+        trigger: 'What AI models does it work with?',
+        content: (
+            <p>
+                {' '}
+                PostHog Code works with any MCP-compatible AI coding agent. Currently supported: Claude Code, Cursor,
+                Windsurf, VS Code with Copilot. The MCP standard is growing fast, so more editors will be supported over
+                time.
+            </p>
+        ),
+    },
+    {
+        trigger: 'How much does it cost?',
+        content: (
+            <>
+                <p> PostHog Code is seat-based subscription and we'll announce pricing soon.</p>
+                <p>
+                    The PostHog MCP server is free and open source. You just need a PostHog account (the generous free
+                    tier works) and an API key from your AI provider. PostHog Code reads from your existing PostHog
+                    data, so you only pay for the PostHog products you already use. There's no additional charge for MCP
+                    access.
+                </p>
+            </>
+        ),
+    },
+    {
+        trigger: 'Can it modify my PostHog configuration?',
+        content: (
+            <>
+                <p>
+                    {' '}
+                    PostHog Code can both read and write to PostHog, depending on your API key permissions. It can
+                    create feature flags, set up experiments, build dashboards, and define actions.
+                </p>
+                <p>
+                    Every write operation requires explicit approval from the agent's permission system – nothing
+                    happens without your confirmation.
+                </p>
+            </>
+        ),
+    },
+    {
+        trigger: "What if I don't use PostHog yet?",
+        content: (
+            <p>
+                {' '}
+                PostHog Code runs on top of PostHog, so you'll need to be on PostHog first. The good news: PostHog is
+                free up to generous limits, and installation takes about 90 seconds with the wizard. This means you can
+                sign up now, download PostHog Code, and have it install PostHog on its own.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can it make bad decisions?',
+        content: (
+            <>
+                <p>Can't we all?</p>
+                <p>
+                    The good news is PostHog Code never merges anything on its own. It presents what it thinks should be
+                    fixed and can propose changes, but you choose which tasks it should pick up and which fixed you want
+                    to merge.
+                </p>
+                <p>You can also set a daily limit for agent actions.</p>
+            </>
+        ),
+    },
+    {
+        trigger: 'Is my code sent to PostHog?',
+        content: (
+            <p>
+                {' '}
+                PostHog Code agents access your GitHub repo to open PRs, similar to any CI/CD integration. Your code
+                stays in GitHub. PostHog Code simply reads your product data (already in PostHog), and other sources you
+                connect to (like Zendesk, Linear, etc.) to direct the agents.
+            </p>
+        ),
+    },
+]
+
+function FAQ() {
+    return (
+        <section className="mb-8 mx-auto max-w-lg">
+            <h2 className="text-2xl m-0 mb-6">FAQ</h2>
+
+            <Accordion
+                type="multiple"
+                triggerClassName="!px-3 !py-2"
+                contentClassName="!px-3 !py-2.5 !text-base !leading-relaxed"
+                items={FAQ_ITEMS}
+            />
+        </section>
+    )
+}
+
 // ─────────────────────────────────────────────
 // Page
 // ─────────────────────────────────────────────
@@ -954,14 +1087,17 @@ export default function CodePage() {
                 <div className="@container not-prose font-rounded">
                     <HeroSection />
 
+                    <WavyDivider />
+
                     <OldWaySection />
+
+                    <WavyDivider />
 
                     <PostHogWaySection />
 
-                    {/* Dotted divider */}
                     <WavyDivider />
 
-                    <BottomCTASection />
+                    <FAQ />
                 </div>
             </Editor>
         </>
