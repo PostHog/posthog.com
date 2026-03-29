@@ -4,42 +4,128 @@ showTitle: true
 sidebar: Docs
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox"
 
 <CalloutBox icon="IconWarning" title="Beta feature" type="action">
 
-Device bucketing is currently in beta. It is supported on **JavaScript web**, **Node.js**, **Python**, and **Go** SDKs, including local evaluation.
+Device bucketing is currently in beta. JavaScript web supports it automatically. Other SDKs support it when you send the device ID as `$device_id` in person properties when evaluating flags, including with local evaluation.
 
 </CalloutBox>
 
-By default, feature flags with a rollout percentage or multiple variants use the user's distinct ID to decide which value to return. This works great for logged-in users, but for anonymous users, the distinct ID could change when logging in. To prevent feature flag values from changing due to the distinct ID changing, PostHog supports [persisting feature flags across authentication steps](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional). However, this feature comes with significant tradeoffs: slower flag evaluations, local evaluation not supported and no support for bootstrapping values.
+Device bucketing keeps feature flag values stable for anonymous and pre-login users. Instead of hashing on the user's `distinct_id`, PostHog hashes on `$device_id`, which stays the same when someone signs up, logs in, or logs out on the same browser or device.
 
-**Device bucketing** uses the device ID instead of the distinct ID to determine the flag value. Since the device ID doesn't change when a user logs in, the flag value stays consistent throughout their session. This is the recommended solution for **feature flags and experiments** targeting anonymous users.
+Use it when a flag is shown before `identify()` runs, such as signup flows, landing page experiments, and onboarding that starts before authentication. If you need the same user to get the same value across multiple devices, keep the default user bucketing instead.
+
+## Why device bucketing exists
+
+By default, release conditions **match by user**. That means PostHog uses `distinct_id` to decide which rollout bucket or variant someone gets.
+
+That works well for identified users, but it can change during the transition from anonymous to identified:
+
+| Step | `distinct_id` | `$device_id` | What happens |
+|---|---|---|---|
+| First anonymous visit | `UUID-A` | `UUID-A` | User and device bucketing return the same value |
+| After `identify("user@example.com")` | `user@example.com` | `UUID-A` | User bucketing may change, device bucketing stays stable |
+| After `reset()` | `UUID-B` | `UUID-A` | Device bucketing still uses the same device |
+| After `reset(true)` | `UUID-C` | `UUID-C` | PostHog treats it as a new device |
+
+When you need consistency during login, device bucketing is the simpler choice than [persisting feature flags across authentication steps](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional). It avoids the tradeoffs of that approach, which disables local evaluation and bootstrapping, and adds extra server-side work.
 
 ## When to use device bucketing
 
-Device bucketing is useful when the flag targets users who aren't yet identified:
+Use device bucketing when the flag targets users who aren't identified yet:
 
-- **Signup and onboarding flows:** A user sees a new signup form before logging in. Device bucketing ensures they continue seeing the same variant after they create an account.
-- **Pre-authentication pages:** Landing pages, pricing pages, or other features shown before a user is identified.
-- **Experiments on anonymous traffic:** When running A/B tests on pages visited by both anonymous and logged-in users, device bucketing prevents users from switching variants mid-experiment.
+- **Signup and onboarding flows:** A user sees a new flow before creating an account, and should keep the same variant after signup.
+- **Pre-authentication pages:** Landing pages, pricing pages, or any experience shown before the user is identified.
+- **Experiments on anonymous traffic:** The experiment starts before login, but continues after login on the same browser or device.
+- **Hybrid anonymous and logged-in journeys:** The same feature is visible both before and after authentication, and you want one stable experience on that device.
+
+Don't use device bucketing when you need cross-device consistency for the same identified user. In that case, keep the default user bucketing.
 
 ## User bucketing vs. device bucketing
 
 | | User bucketing | Device bucketing |
 |---|---|---|
-| **Hashes on** | User's distinct ID | Device ID |
+| **Hashes on** | User's `distinct_id` | `$device_id` |
 | **Best for** | Logged-in, identified users | Anonymous or pre-login experiences |
-| **Behavior when logging in** | May change if distinct ID changes | Stays consistent on the same device |
-| **Behavior when switching devices** | Yes, if user is identified | No, each device is evaluated independently |
+| **Behavior through `identify()`** | Changes if `distinct_id` changes | Stays stable on the same device |
+| **Behavior through `reset()`** | Changes | Stays stable unless you call `reset(true)` |
+| **Behavior across devices** | Stays stable for the same identified user | Changes (each device is evaluated independently) |
 
-## How to set it up
+## How to enable it
 
 When creating or editing a feature flag, change the **Match by** dropdown under **Release conditions** from **User** to **Device**.
 
-That's it. PostHog will now use the device ID to determine the flag value for that release condition.
+This is configured in PostHog, not in SDK code. Once the release condition matches by device, the SDK just needs access to the correct `$device_id`.
 
-The device ID is automatically set by the web SDK (`posthog-js` `v1.307.1` and above), but you can also set it manually if needed.
+### JavaScript web (automatic)
+
+The browser SDK handles device bucketing automatically. On first load, it generates a device ID, stores it as `$device_id`, and includes it in flag evaluation requests.
+
+```js-web
+const variant = posthog.getFeatureFlag("signup-flow-experiment")
+
+// Read the current device ID if your backend also evaluates flags
+const deviceId = posthog.get_property("$device_id")
+
+posthog.identify("user@example.com")
+
+// For device-bucketed flags, this stays the same on the same device
+const sameVariant = posthog.getFeatureFlag("signup-flow-experiment")
+```
+
+If your backend also evaluates feature flags, send `deviceId` with the request so the server uses the same bucketing value as the browser.
+
+### Server-side SDKs
+
+Server-side SDKs are stateless. They don't generate or persist device IDs for you. If you evaluate a device-bucketed flag on the server, pass the browser's device ID with the request and include it in the evaluation call.
+
+In a full-stack app, the usual pattern is:
+
+1. The browser SDK creates and stores `$device_id`.
+2. Your frontend sends that value to your backend in a cookie, header, request body, or per-request context.
+3. Your backend passes it into the PostHog SDK whenever it evaluates a device-bucketed flag.
+
+<MultiLanguage>
+
+```node
+const variant = await posthog.getFeatureFlag(
+    "signup-flow-experiment",
+    "user_123",
+    {
+        personProperties: {
+            $device_id: deviceId,
+        },
+    },
+)
+```
+
+```python
+variant = posthog.get_feature_flag(
+    "signup-flow-experiment",
+    "user_123",
+    device_id=device_id,
+)
+```
+
+</MultiLanguage>
+
+In the JavaScript web SDK, the anonymous `distinct_id` is usually the same value as `$device_id`. After `identify()`, keep sending the user's `distinct_id` and the unchanged `$device_id`.
+
+In Python SDK v7.6.0 and above, you can pass `device_id` directly as shown above. The SDK also supports setting `device_id` once per request context and reusing it for all evaluations in that scope:
+
+```python
+from posthog import get_feature_flag, new_context, set_context_device_id
+
+with new_context():
+    set_context_device_id(device_id)
+    variant = get_feature_flag("signup-flow-experiment", "user_123")
+```
+
+## Shared devices and `reset()`
+
+- `posthog.reset()` keeps `$device_id`. Device-bucketed flags stay stable even after logout.
+- `posthog.reset(true)` creates a new `$device_id`. Use this on shared devices or kiosks when each session should be treated as a new device.
 
 ## Further reading
 
