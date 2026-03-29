@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { IconSearch, IconLightBulb, IconMessage, IconMagicWand, IconRocket } from '@posthog/icons'
+import { IconActivity, IconLightBulb, IconMessage, IconSparkles, IconPullRequest } from '@posthog/icons'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
 const steps = [
-    { label: 'Analyze\nusage', icon: IconSearch, actor: 'Human' as const },
+    { label: 'Analyze\nusage', icon: IconActivity, actor: 'Human' as const },
     { label: 'Decide what\nto build', icon: IconLightBulb, actor: 'Human' as const },
     { label: 'Prompt &\ncontext', icon: IconMessage, actor: 'Human' as const },
-    { label: 'Build', icon: IconMagicWand, actor: 'Machine' as const },
-    { label: 'Ship', icon: IconRocket, actor: 'Human' as const },
+    { label: 'Build', icon: IconSparkles, actor: 'Machine' as const },
+    { label: 'Ship', icon: IconPullRequest, actor: 'Human' as const },
 ]
 
 const actorColors: Record<string, string> = {

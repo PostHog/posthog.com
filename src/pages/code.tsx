@@ -18,9 +18,12 @@ import {
     StickerTombstone,
     StickerPause,
     StickerPullRequest,
+    StickerRobot,
     StickerTerminal,
     StickerUsers,
     StickerWebsite,
+    StickerZZZ,
+    StickerOne,
 } from 'components/Stickers/Stickers'
 import { ZoomImage } from 'components/ZoomImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
@@ -47,7 +50,7 @@ function DownloadButton() {
 // ─────────────────────────────────────────────
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
-    return <div className="font-squeak text-secondary text-2xl uppercase">{children}</div>
+    return <div className="font-squeak text-secondary text-2xl uppercase mx-auto max-w-lg">{children}</div>
 }
 
 // ─────────────────────────────────────────────
@@ -93,10 +96,10 @@ function AIModelBadge({ innerRef }: { innerRef: React.RefObject<HTMLSpanElement>
     return (
         <span
             ref={innerRef}
-            className="inline-flex items-center gap-1.5 border border-primary rounded px-2 py-1 text-xs bg-accent align-middle mx-0.5"
+            className="inline-flex items-center gap-1.5 border border-primary rounded px-2 py-1 text-xs bg-accent align-middle ml-6 mt-0 mb-2"
         >
             <span className="font-semibold">Supports</span>
-            <span className="text-secondary">Opus, Sonnet, Codex</span>
+            <span className="text-secondary">Haiku, Opus, Sonnet, Codex, GPT 5.2</span>
         </span>
     )
 }
@@ -477,7 +480,7 @@ function PostHogCodeLogomark({ className }) {
 
 function HeroSection() {
     return (
-        <section className="my-6 @4xl/editor:mb-12 gap-8 @4xl/editor:gap-4 flex flex-col @4xl/editor:flex-row items-center font-rounded">
+        <section className="my-6 @4xl/editor:mb-16 gap-8 @4xl/editor:gap-4 flex flex-col @4xl/editor:flex-row items-center">
             <div>
                 <PostHogCodeLogo />
                 <h1 className="text-xl @xl:text-2xl font-bold leading-tight mb-5 !mt-0">
@@ -532,12 +535,14 @@ function OldWaySection() {
     return (
         <section className="relative mb-8 @2xl:mb-12">
             <SectionLabel>
+                The{' '}
                 <InlineIcon icon={StickerTombstone} className="!size-10 !top-3 -rotate-1">
-                    The old way to build
-                </InlineIcon>
+                    old way
+                </InlineIcon>{' '}
+                to build
             </SectionLabel>
 
-            <p className="text-base leading-relaxed mb-5">
+            <p className="text-base leading-loose mb-5 mx-auto max-w-lg">
                 <ChoppyReveal wordDelay={40}>
                     {'Most AI code editors '}
                     <InlineIcon icon={StickerBulb}>
@@ -558,20 +563,24 @@ function OldWaySection() {
 
             <FlowDiagram className="mb-5" />
 
-            <p className="text-base leading-relaxed">
+            <p className="text-base leading-loose mx-auto max-w-lg">
                 <ChoppyReveal wordDelay={40}>
                     {'They use your '}
                     <InlineIcon icon={StickerTerminal}>
                         {' '}
-                        <RoughAnnotation type="box" color="#1D4AFF" strokeWidth={1.5} padding={2}>
-                            <strong>codebase</strong>
-                        </RoughAnnotation>
+                        <strong className="font-mono bg-blue/10 border border-blue rounded-sm px-1 leading-normal">
+                            &lt;codebase /&gt;
+                        </strong>
                     </InlineIcon>
                     {' as the source of truth, not how '}
                     <InlineIcon icon={StickerUsers}>
-                        <em>people</em>
+                        <em>humans</em>
+                    </InlineIcon>{' '}
+                    (or{' '}
+                    <InlineIcon icon={StickerRobot}>
+                        <em>agents</em>
                     </InlineIcon>
-                    {' use your '}
+                    ){' use your '}
                     <InlineIcon icon={StickerWebsite}>
                         {' '}
                         <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
@@ -602,19 +611,19 @@ function PostHogWaySection() {
                 The <PostHogCodeLogomark className="inline-block -rotate-2 w-12 relative -top-0.5" /> PostHog way
             </SectionLabel>
 
-            <div className="relative">
+            <div className="relative mx-auto max-w-lg">
                 {/* Signals callout — in DOM before paragraph so float-right works on desktop.
                     On mobile (no float), it falls in normal flow above the paragraph,
                     but we use flex + order to push it below the first paragraph. */}
                 <div className="flex flex-col @2xl:block">
                     <div
                         ref={signalsBoxRef}
-                        className="order-2 mb-5 @2xl:order-none @2xl:float-right @2xl:ml-6 @2xl:mb-4 @2xl:w-[280px]"
+                        className="order-2 mb-5 @2xl:order-none @2xl:float-right @2xl:ml-6 @2xl:my-4 @2xl:w-72 @2xl:-mr-24"
                     >
                         <SignalsCallout />
                     </div>
 
-                    <p className="text-base leading-relaxed mb-5 order-1">
+                    <p className="text-base leading-loose mb-5 mx-auto order-1">
                         <ChoppyReveal wordDelay={40}>
                             <InlineIcon icon={StickerCoffee}>
                                 <strong>{' PostHog Code'}</strong>
@@ -634,18 +643,17 @@ function PostHogWaySection() {
                             {' from '}
                             <span className="text-green text-sm">&#9679;</span> <strong>production data</strong>
                             {' to '}
-                            <InlineIcon icon={StickerMicroscope}>{' diagnose issues'}</InlineIcon>
-                            {' and '}
-                            <InlineIcon icon={StickerPullRequest}>{' generate pull requests'}</InlineIcon>
+                            <InlineIcon icon={StickerMicroscope}>{' diagnose'}</InlineIcon>
+                            {' issues and generate '}
+                            <InlineIcon icon={StickerPullRequest}>{' pull requests'}</InlineIcon>
                             {' to fix them — '}
-                            <em>before you even know there&apos;s a problem.</em>{' '}
-                            <span className="text-secondary text-sm">z</span>
-                            <span className="text-secondary text-xs">z</span>
+                            <em>before you even know there&apos;s a problem.</em>
+                            <InlineIcon icon={StickerZZZ} />
                         </ChoppyReveal>
                     </p>
                 </div>
 
-                <p className="text-base leading-relaxed mb-2">
+                <p className="text-base leading-loose mb-2">
                     <ChoppyReveal wordDelay={40}>
                         {'Run it '}
                         <InlineIcon icon={StickerELearning}>{' locally'}</InlineIcon>
@@ -662,6 +670,8 @@ function PostHogWaySection() {
                 </p>
 
                 <AIModelBadge innerRef={aiModelBadgeRef} />
+
+                <p className="text-base leading-loose mb-2">One subscription, access to all the models you expect.</p>
 
                 {/* Clear float */}
                 <div className="clear-both" />
@@ -681,14 +691,12 @@ function PostHogWaySection() {
 function BottomCTASection() {
     return (
         <section className="mb-8">
-            <p className="text-base leading-relaxed mb-5">
+            <p className="text-base leading-loose mb-5 mx-auto max-w-lg">
                 <ChoppyReveal wordDelay={40}>
                     {'There are plenty of '}
                     <InlineIcon icon={StickerAi}>{' AI coding tools.'}</InlineIcon>
                     {" But there's only "}
-                    <RoughAnnotation type="circle" color="#F54E00" strokeWidth={2} padding={4}>
-                        <span>one</span>
-                    </RoughAnnotation>
+                    <InlineIcon icon={StickerOne}>{' one'}</InlineIcon>
                     {' that knows your product like '}
                     <InlineIcon icon={StickerCoffee}>
                         {' '}
@@ -696,7 +704,9 @@ function BottomCTASection() {
                     </InlineIcon>
                 </ChoppyReveal>
             </p>
-            <DownloadButton />
+            <div className="mx-auto max-w-lg">
+                <DownloadButton />
+            </div>
         </section>
     )
 }
@@ -713,7 +723,7 @@ export default function CodePage() {
                 description="PostHog Code uses signals from production data to diagnose issues and generate pull requests — before you even know there's a problem."
             />
             <Editor slug="/code">
-                <div className="@container not-prose">
+                <div className="@container not-prose font-rounded">
                     <HeroSection />
                     <OldWaySection />
 

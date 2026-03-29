@@ -37,15 +37,17 @@ interface SignalsCalloutProps {
 
 export function SignalsCallout({ className = '' }: SignalsCalloutProps) {
     return (
-        <div className={`relative border border-primary rounded-sm bg-accent/50 py-3 pl-7 pr-4 ${className}`}>
-            {/* Vertical "SIGNALS" label on the left edge */}
-            <div className="absolute -left-0.5 top-1/2 -translate-y-1/2 -translate-x-1/2 -rotate-90 origin-center">
-                <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-red opacity-80">Signals</span>
+        <div
+            data-scheme="secondary"
+            className={`relative border border-primary rounded-sm bg-primary p-1 shadow-2xl rotate-1 ${className}`}
+        >
+            <div className="bg-blue text-center rounded py-1 text-sm font-bold uppercase text-white font-squeak">
+                Signals
             </div>
 
-            <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 p-2">
                 {signals.map(({ label, icon: Icon, color }) => (
-                    <div key={label} className="flex items-center gap-1.5 text-sm text-primary">
+                    <div key={label} className="flex items-center gap-1.5 text-[13px] text-primary">
                         <Icon className={`size-4 shrink-0 ${color}`} />
                         <span className="whitespace-nowrap">{label}</span>
                     </div>
