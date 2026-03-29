@@ -954,9 +954,6 @@ export default function CodePage() {
                 <div className="@container not-prose font-rounded">
                     <HeroSection />
 
-                    {/* Dotted divider */}
-                    <WavyDivider />
-
                     <OldWaySection />
 
                     <PostHogWaySection />
