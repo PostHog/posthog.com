@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
-import { IconApple, IconArrowRight } from '@posthog/icons'
+import { IconArrowRight } from '@posthog/icons'
+import Input from 'components/OSForm/input'
+import OSButton from 'components/OSButton'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
@@ -27,21 +29,70 @@ import {
 } from 'components/Stickers/Stickers'
 import { ZoomImage } from 'components/ZoomImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import usePostHog from '../hooks/usePostHog'
+import useProduct from '../hooks/useProduct'
+import { useApp } from '../context/App'
 
 // ─────────────────────────────────────────────
 // Download CTA Button
 // ─────────────────────────────────────────────
 
 function DownloadButton() {
+    const posthog = usePostHog()
+    const selectedProduct = useProduct({ handle: 'posthog_code' })
+    const { setConfetti } = useApp()
+    const [email, setEmail] = useState('')
+    const [submitted, setSubmitted] = useState(false)
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!email) return
+        posthog?.capture('subscribe_to_product_updates', { email, selectedProduct })
+        setConfetti(true)
+        setSubmitted(true)
+    }
+
+    if (submitted) {
+        return (
+            <p className="text-sm m-0 border border-green rounded-md p-3 bg-green/10">
+                <strong>You're on the list!</strong>
+                <br />
+                We'll let you know when PostHog Code is ready.
+            </p>
+        )
+    }
+
     return (
-        <a
-            href="#"
-            className="inline-flex items-center gap-2 bg-[#1d1f27] dark:bg-white text-white dark:text-[#1d1f27] rounded-full px-5 py-2.5 text-sm font-semibold no-underline hover:opacity-90 transition-opacity"
-        >
-            <IconApple className="size-4" />
-            <span>Download for Mac</span>
-            <IconArrowRight className="size-4" />
-        </a>
+        <div className="bg-accent border border-primary rounded p-4 max-w-sm">
+            <div className="mb-2">
+                <p className="text-base font-bold m-0">Join the waitlist</p>
+                <p className="text-[13px] text-secondary m-0">Launching Spring 2026</p>
+            </div>
+            <form onSubmit={handleSubmit} className="space-y-2">
+                <Input
+                    label="Email"
+                    type="email"
+                    size="md"
+                    direction="column"
+                    showLabel={false}
+                    placeholder="Email address"
+                    value={email}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                    required
+                />
+                <OSButton variant="primary" size="md" width="full" onClick={handleSubmit}>
+                    Get updates
+                </OSButton>
+            </form>
+            {/* <a
+                href="#"
+                className="inline-flex items-center gap-2 bg-[#1d1f27] dark:bg-white text-white dark:text-[#1d1f27] rounded-full px-5 py-2.5 text-sm font-semibold no-underline hover:opacity-90 transition-opacity"
+            >
+                <IconApple className="size-4" />
+                <span>Download for Mac</span>
+                <IconArrowRight className="size-4" />
+            </a> */}
+        </div>
     )
 }
 
@@ -648,7 +699,9 @@ function HeroSection() {
                     </RoughAnnotation>
                 </h1>
 
-                <DownloadButton />
+                <div className="@container">
+                    <DownloadButton />
+                </div>
             </div>
 
             <div className="@4xl/editor:flex-[0_0_475px] @4xl/editor:-mr-24 @5xl/editor:flex-[0_0_550px] @5xl/editor:-mr-36">
@@ -879,7 +932,7 @@ function BottomCTASection() {
                     </InlineIcon>
                 </ChoppyReveal>
             </p>
-            <div className="mx-auto max-w-lg">
+            <div className="mx-auto max-w-lg @container">
                 <DownloadButton />
             </div>
         </section>
