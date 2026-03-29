@@ -64,7 +64,7 @@ function DownloadButton() {
     }
 
     return (
-        <div className="bg-accent border border-primary rounded p-4 max-w-sm">
+        <div className="bg-accent border border-primary rounded p-4 max-w-sm mr-4">
             <div className="mb-2">
                 <p className="text-base font-bold m-0">Join the waitlist</p>
                 <p className="text-[13px] text-secondary m-0">Launching Spring 2026</p>
