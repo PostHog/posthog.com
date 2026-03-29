@@ -71,7 +71,7 @@ export function FlowDiagram({ className = '' }: FlowDiagramProps) {
             <div className="hidden @xl:block">
                 {/* Icons + labels row */}
                 <div
-                    className="relative grid items-end justify-items-center p-4 @xl:p-5 pb-3"
+                    className="relative grid items-start justify-items-center p-4 @xl:p-5 pb-3"
                     style={{ gridTemplateColumns: `repeat(${steps.length}, 1fr)` }}
                 >
                     {steps.map((step, i) => (
