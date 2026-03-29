@@ -8,6 +8,10 @@ interface DottedConnectionProps {
     targetRef: React.RefObject<HTMLElement>
     /** Parent container ref for dimensions and resize observation */
     containerRef: React.RefObject<HTMLElement>
+    /** Hide on mobile (when target is not to the right of source) */
+    desktopOnly?: boolean
+    /** Horizontal offset (px) for the target anchor from its left edge. If set, overrides center alignment. */
+    targetOffsetX?: number
     /** Additional CSS classes for the SVG container */
     className?: string
 }
@@ -21,7 +25,14 @@ interface DottedConnectionProps {
  * coordinate origin. This avoids misalignment when containerRef differs
  * from the SVG's nearest positioned ancestor.
  */
-export function DottedConnection({ sourceRef, targetRef, containerRef, className = '' }: DottedConnectionProps) {
+export function DottedConnection({
+    sourceRef,
+    targetRef,
+    containerRef,
+    desktopOnly = false,
+    targetOffsetX,
+    className = '',
+}: DottedConnectionProps) {
     const svgRef = useRef<SVGSVGElement>(null)
     const [path, setPath] = useState('')
     const [pathLength, setPathLength] = useState(0)
@@ -53,34 +64,46 @@ export function DottedConnection({ sourceRef, targetRef, containerRef, className
         const sx = sourceRect.left + sourceRect.width / 2 - originRect.left
         const sy = isDesktop ? sourceRect.top - originRect.top : sourceRect.bottom - originRect.top
 
-        // Target: top-center of the callout box
-        const tx = targetRect.left + targetRect.width / 2 - originRect.left
+        // Target: top of the callout box — use targetOffsetX from left if set, otherwise center
+        const tx =
+            targetOffsetX !== undefined
+                ? targetRect.left + targetOffsetX - originRect.left
+                : targetRect.left + targetRect.width / 2 - originRect.left
         const ty = targetRect.top - originRect.top
 
         const cornerR = 8
 
-        let d: string
-
-        if (isDesktop) {
-            // Desktop: up from source top, across, down to top of target
-            const topY = Math.min(sy, ty) - 14
-            d = [
-                `M ${sx} ${sy}`,
-                `L ${sx} ${topY + cornerR}`,
-                `Q ${sx} ${topY}, ${sx + cornerR} ${topY}`,
-                `L ${tx - cornerR} ${topY}`,
-                `Q ${tx} ${topY}, ${tx} ${topY + cornerR}`,
-                `L ${tx} ${ty}`,
-            ].join(' ')
-        } else {
-            // Mobile: down from source bottom to top of target
-            if (Math.abs(sx - tx) < 4) {
-                d = `M ${sx} ${sy} L ${tx} ${ty}`
-            } else {
-                const midY = (sy + ty) / 2
-                d = `M ${sx} ${sy} C ${sx} ${midY}, ${tx} ${midY}, ${tx} ${ty}`
-            }
+        // Hide on mobile if desktopOnly
+        if (!isDesktop && desktopOnly) {
+            setPath('')
+            return
         }
+
+        if (!isDesktop) {
+            // Mobile: down from source bottom to top of target
+            const mobileD =
+                Math.abs(sx - tx) < 4
+                    ? `M ${sx} ${sy} L ${tx} ${ty}`
+                    : `M ${sx} ${sy} C ${sx} ${(sy + ty) / 2}, ${tx} ${(sy + ty) / 2}, ${tx} ${ty}`
+
+            setPath(mobileD)
+            setDimensions({
+                width: containerRect.width,
+                height: containerRect.height,
+            })
+            return
+        }
+
+        // Desktop: up from source top, across, down to top of target
+        const topY = Math.min(sy, ty) - 14
+        const d = [
+            `M ${sx} ${sy}`,
+            `L ${sx} ${topY + cornerR}`,
+            `Q ${sx} ${topY}, ${sx + cornerR} ${topY}`,
+            `L ${tx - cornerR} ${topY}`,
+            `Q ${tx} ${topY}, ${tx} ${topY + cornerR}`,
+            `L ${tx} ${ty}`,
+        ].join(' ')
 
         setPath(d)
         setDimensions({

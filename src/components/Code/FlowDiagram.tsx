@@ -46,6 +46,10 @@ export function FlowDiagram({ className = '' }: FlowDiagramProps) {
 
     return (
         <div ref={ref} className={`@container border border-primary rounded-sm overflow-hidden ${className}`}>
+            <div className="py-1 flex items-center justify-between border-b border-secondary mx-4 @xl:mx-5">
+                <span className="text-[13px] uppercase text-primary font-mono">Coding with AI (cir. 2022-2025)</span>
+                <span className="text-[13px] uppercase text-primary font-mono">Exhibit A</span>
+            </div>
             {/* Mobile: stacked list */}
             <div className="flex flex-col gap-2 p-4 @xl:hidden">
                 {steps.map((step, i) => (
@@ -62,7 +66,9 @@ export function FlowDiagram({ className = '' }: FlowDiagramProps) {
                         <span className="text-sm text-primary whitespace-pre-line leading-tight">
                             {step.label.replace('\n', ' ')}
                         </span>
-                        <span className={`text-xs font-bold ml-auto ${actorColors[step.actor]}`}>{step.actor}</span>
+                        <span className={`text-[13px] font-medium uppercase ml-auto ${actorColors[step.actor]}`}>
+                            {step.actor}
+                        </span>
                     </div>
                 ))}
             </div>
@@ -107,7 +113,7 @@ export function FlowDiagram({ className = '' }: FlowDiagramProps) {
 
                 {/* Actor labels row — same column count, full-bleed gray background */}
                 <div
-                    className="grid justify-items-center bg-accent border-t border-primary py-2 px-4 @xl:px-5"
+                    className="grid justify-items-center bg-accent/50 py-1 px-4 @xl:px-5"
                     style={{ gridTemplateColumns: `repeat(${steps.length}, 1fr)` }}
                 >
                     {steps.map((step, i) => (
@@ -119,7 +125,9 @@ export function FlowDiagram({ className = '' }: FlowDiagramProps) {
                                 transition: `opacity 0.3s ease ${i * 100 + 150}ms`,
                             }}
                         >
-                            <span className={`text-xs font-bold ${actorColors[step.actor]}`}>{step.actor}</span>
+                            <span className={`text-[13px] font-semibold uppercase ${actorColors[step.actor]}`}>
+                                {step.actor}
+                            </span>
                         </div>
                     ))}
                 </div>
