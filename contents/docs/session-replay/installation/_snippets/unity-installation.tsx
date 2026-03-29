@@ -109,9 +109,9 @@ const getUnitySteps = (ctx: any) => {
                     </CalloutBox>
                     <CalloutBox type="info" title="Limitations">
                         <Markdown>
-                            The Unity SDK does **not** currently support remote configuration via PostHog project
-                            settings. Options like `CaptureNetworkTelemetry`, `CaptureLogs`, and sampling must be
-                            configured locally in code. All Session Replay settings are applied at initialization time.
+                            The Unity SDK reads the **Record user sessions** toggle from PostHog project settings, but
+                            more granular options like `CaptureNetworkTelemetry`, `CaptureLogs`, and sampling are **not**
+                            remotely configurable and must be set locally in code at initialization time.
                         </Markdown>
                     </CalloutBox>
                 </>
