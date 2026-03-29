@@ -3862,6 +3862,7 @@ export const docsMenu = {
                         { name: 'Android', url: '/docs/session-replay/installation/android' },
                         { name: 'iOS', url: '/docs/session-replay/installation/ios' },
                         { name: 'Flutter', url: '/docs/session-replay/installation/flutter' },
+                        { name: 'Unity', url: '/docs/session-replay/installation/unity' },
                         { name: 'Angular', url: '/docs/session-replay/installation/angular' },
                         { name: 'Astro', url: '/docs/session-replay/installation/astro' },
                         { name: 'Bubble', url: '/docs/session-replay/installation/bubble' },
