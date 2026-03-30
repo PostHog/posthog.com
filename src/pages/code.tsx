@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
-import { IconArrowRight, IconCheck } from '@posthog/icons'
+import { IconArrowRight, IconCheck, IconFlask, IconToggle, IconTrends, IconWarning } from '@posthog/icons'
 import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import TabbedCarousel from 'components/TabbedCarousel'
+import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
@@ -94,7 +95,7 @@ function DownloadButton({ autoFocus = false }: { autoFocus?: boolean }) {
 // ─────────────────────────────────────────────
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
-    return <h2 className="text-secondary text-2xl mb-4">{children}</h2>
+    return <h2 className="text-2xl mb-4">{children}</h2>
 }
 
 // ─────────────────────────────────────────────
@@ -676,7 +677,7 @@ function HeroSection() {
     return (
         <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em] max-w-5xl mx-auto">
             <PostHogCodeLogo />
-            <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-8 !mt-0">
+            <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 @xl:mb-8 !mt-0">
                 The era of{' '}
                 <RoughAnnotation
                     type="highlight"
@@ -792,7 +793,7 @@ function OldWaySection() {
                     {' as the source of truth, not how '}
                     humans (or agents){' '}
                     <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
-                        <em>use your product</em>
+                        <em>actually use your product</em>
                     </RoughAnnotation>
                     {'.'}
                 </ChoppyReveal>
@@ -815,7 +816,7 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
     const sectionRef = useRef<HTMLDivElement>(null)
 
     return (
-        <section ref={sectionRef} className="relative mb-8 @xl:mb-12 px-4 @xl:px-8">
+        <section ref={sectionRef} className="relative mb-8 @xl:mb-20 px-4 @xl:px-8">
             <SectionLabel>
                 The <PostHogCodeLogomark className="-rotate-2 w-12 relative -top-0.5" /> PostHog way
             </SectionLabel>
@@ -824,10 +825,10 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                 {/* Signals callout — in DOM before paragraph so float-right works on desktop.
                     On mobile (no float), it falls in normal flow above the paragraph,
                     but we use flex + order to push it below the first paragraph. */}
-                <div className="flex flex-col @4xl/editor:block">
+                <div className="flex flex-col @2xl/editor:block">
                     <div
                         ref={signalsBoxRef}
-                        className="order-2 mb-5 @4xl/editor:order-none @4xl/editor:float-right @4xl/editor:ml-6 @4xl/editor:my-4 @4xl/editor:w-[400px]"
+                        className="order-2 mb-5 @2xl/editor:order-none @2xl/editor:float-right @2xl/editor:ml-6 @2xl/editor:my-4 @2xl/editor:w-[300px] @4xl/editor:w-[350px]"
                     >
                         <SignalsCallout />
                     </div>
@@ -864,7 +865,7 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                         {' — either way, it automatically uses the right '}
                         <span ref={aiModelRef}>
                             <RoughAnnotation type="box" color="currentColor" strokeWidth={1} padding={2}>
-                                <strong>AI model</strong>
+                                <strong className="inline-block">AI model</strong>
                             </RoughAnnotation>
                         </span>
                         {' for the job.'}
@@ -873,9 +874,13 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
 
                 {p2Done && <AIModelBadge innerRef={aiModelBadgeRef} />}
 
-                <p className="text-base leading-loose mb-2">
-                    <ChoppyReveal wordDelay={40} initialDelay={p2Done ? 0 : 999999} onComplete={onComplete}>
-                        {'One subscription, access to all the models you expect.'}
+                <p className="text-base leading-loose mb-5">
+                    <ChoppyReveal wordDelay={0} initialDelay={p2Done ? 0 : 999999}>
+                        <strong>TL;DR:</strong> There are plenty of AI coding tools, but{' '}
+                        <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5}>
+                            <span className="inline-block">only one that knows your product</span>
+                        </RoughAnnotation>{' '}
+                        like <strong>PostHog Code</strong>.
                     </ChoppyReveal>
                 </p>
 
@@ -897,124 +902,232 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
     )
 }
 
-const featureOptions = [
-    { label: 'Command center', value: 'command-center' },
-    { label: 'Signals inbox', value: 'signals' },
-    { label: 'Plan', value: 'plan' },
-    { label: 'Prompt', value: 'prompt' },
-    { label: 'Review', value: 'review' },
-    { label: 'Skills', value: 'skills' },
+const featureTabs: TabbedCarouselTab[] = [
+    {
+        value: 'command-center',
+        label: 'Command center',
+        color: 'bg-blue',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <div className="p-4 @xl:p-8">
+                <h3 className="text-2xl font-bold mb-2">Manage multiple coding agents in parallel</h3>
+                <>
+                    <p>Split screen presets let you monitor agents side-by-side or in a 2x2 or 3x3 grid.</p>
+                </>
+                <ZoomImage>
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_light_096957d499.png"
+                        alt="Manage multiple coding agents in parallel"
+                        className="w-full rounded border border-primary dark:hidden"
+                    />
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_3712be03b1.png"
+                        alt="Manage multiple coding agents in parallel"
+                        className="w-full rounded border border-primary hidden dark:block"
+                    />
+                </ZoomImage>
+            </div>
+        ),
+    },
+    {
+        value: 'signals',
+        label: 'Signals inbox',
+        color: 'bg-yellow',
+        activeText: 'text-black',
+        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+        content: (
+            <div className="p-4 @xl:p-8">
+                <h3 className="text-2xl font-bold mb-2">Signals inbox</h3>
+                <>
+                    <p>
+                        PostHog Signals are clustered and ranked by impact and urgency to help identify the most
+                        important issues. With one click, you can spin up a new agent to investigate the issue and
+                        generate a pull request to fix it.
+                    </p>
+                </>
+                <ZoomImage>
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_full_light_1ceb88aa2c.png"
+                        alt="Signals inbox"
+                        className="w-full rounded border border-primary dark:hidden"
+                    />
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_full_dark_b1e18be734.png"
+                        alt="Signals inbox"
+                        className="w-full rounded border border-primary hidden dark:block"
+                    />
+                </ZoomImage>
+            </div>
+        ),
+    },
+    {
+        value: 'plan',
+        label: 'Plan',
+        color: 'bg-green',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <div className="p-4 @xl:p-8">
+                <h3 className="text-2xl font-bold mb-2">Plan your work</h3>
+                <>
+                    <p>Create a plan for your coding agents to follow and review it before execution.</p>
+                </>
+                <ZoomImage>
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/plan_light_b34b9ad492.png"
+                        alt="Plan your work"
+                        className="w-full rounded border border-primary dark:hidden"
+                    />
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/plan_dark_d27c25debd.png"
+                        alt="Plan your work"
+                        className="w-full rounded border border-primary hidden dark:block"
+                    />
+                </ZoomImage>
+            </div>
+        ),
+    },
+    {
+        value: 'review',
+        label: 'Review',
+        color: 'bg-orange',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <div className="p-4 @xl:p-8">
+                <h3 className="text-2xl font-bold mb-2">Review code changes</h3>
+                <>
+                    <p>Compare diffs and commit and push changes in a couple clicks.</p>
+                </>
+                <ZoomImage>
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/diff_light_8a0eef0b28.png"
+                        alt="Review code changes"
+                        className="w-full rounded border border-primary dark:hidden"
+                    />
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/diff_dark_7ba60e6ded.png"
+                        alt="Review code changes"
+                        className="w-full rounded border border-primary hidden dark:block"
+                    />
+                </ZoomImage>
+            </div>
+        ),
+    },
+    {
+        value: 'skills',
+        label: 'Skills',
+        color: 'bg-red',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <div className="p-4 @xl:p-8">
+                <h3 className="text-2xl font-bold mb-2">Built-in skills library</h3>
+                <>
+                    <p>
+                        The built-in skills library gives your agents access to a wide range of tools and functions to
+                        help them complete tasks, with the ability to accomplish most PostHog tasks around querying and
+                        analyzing data <em>and</em> instrumentation of PostHog features.
+                    </p>
+                </>
+                <ZoomImage>
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/skills_light_703a30655e.png"
+                        alt="Built-in skills library"
+                        className="w-full rounded border border-primary dark:hidden"
+                    />
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/skills_dark_f09c7fff17.png"
+                        alt="Built-in skills library"
+                        className="w-full rounded border border-primary hidden dark:block"
+                    />
+                </ZoomImage>
+            </div>
+        ),
+    },
 ]
 
-const featureContent: Record<
-    string,
-    { heading: string; description: React.ReactNode; lightImg: string; darkImg: string }
-> = {
-    'command-center': {
-        heading: 'Manage multiple coding agents in parallel',
-        description: (
-            <>
-                <p>Description</p>
-            </>
-        ),
-        lightImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/command_center_light_096957d499.png',
-        darkImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_3712be03b1.png',
-    },
-    signals: {
-        heading: 'Signals inbox',
-        description: (
-            <>
-                <p>
-                    Signals are clustered and ranked by impact and urgency. You see a triaged inbox, not an overwhelming
-                    wall of data.
-                </p>
-            </>
-        ),
-        lightImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_full_light_1ceb88aa2c.png',
-        darkImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_full_dark_b1e18be734.png',
-    },
-    plan: {
-        heading: 'Plan your work',
-        description: (
-            <>
-                <p>Create a plan for your coding agents to follow</p>
-            </>
-        ),
-        lightImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/plan_light_b34b9ad492.png',
-        darkImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/plan_dark_d27c25debd.png',
-    },
-    prompt: {
-        heading: 'Write custom prompts',
-        description: (
-            <>
-                <p>Description</p>
-            </>
-        ),
-        lightImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png',
-        darkImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_dark_b2a90f3c71.png',
-    },
-    review: {
-        heading: 'Review code changes',
-        description: (
-            <>
-                <p>Description</p>
-            </>
-        ),
-        lightImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/diff_light_8a0eef0b28.png',
-        darkImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/diff_dark_7ba60e6ded.png',
-    },
-    skills: {
-        heading: 'Built-in skills library',
-        description: (
-            <>
-                <p>Description</p>
-            </>
-        ),
-        lightImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/skills_light_703a30655e.png',
-        darkImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/skills_dark_f09c7fff17.png',
-    },
-}
-
 const Features = () => {
-    const [selectedFeature, setSelectedFeature] = useState('command-center')
-    const feature = featureContent[selectedFeature]
-
     return (
         <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
-            {/* <SectionLabel>Features</SectionLabel> */}
+            <div className="px-4 @xl:px-8">
+                <div className="max-w-[654px] mx-auto relative">
+                    <CloudinaryImage
+                        src="/>https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
+                        className="dark:hidden"
+                        imgClassName="w-full rounded border border-secondary"
+                    />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_dark_b2a90f3c71.png"
+                        className="hidden dark:block"
+                        imgClassName="w-full rounded border border-secondary"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
+                </div>
 
-            <ToggleGroup
-                hideTitle
-                title="Features"
-                options={featureOptions}
-                onValueChange={(value) => value && setSelectedFeature(value)}
-                value={selectedFeature}
-                className="mb-4"
-            />
+                <h2 className="text-2xl font-bold mb-2 text-center -mt-10 pb-12 relative">
+                    Everything you'd expect in an AI coding tool,{' '}
+                    <span className="block">
+                        but <em className="text-gradient">way more...</em>
+                    </span>
+                </h2>
+            </div>
 
-            <h3 className="text-2xl font-bold mb-2">{feature.heading}</h3>
-            {feature.description}
-            <ZoomImage>
-                <img
-                    src={feature.lightImg}
-                    alt={feature.heading}
-                    className="w-full rounded border border-primary dark:hidden"
-                />
-                <img
-                    src={feature.darkImg}
-                    alt={feature.heading}
-                    className="w-full rounded border border-primary hidden dark:block"
-                />
-            </ZoomImage>
+            <TabbedCarousel tabs={featureTabs} />
         </section>
     )
 }
+
+const instrumentationItems = [
+    {
+        icon: IconTrends,
+        color: 'text-blue',
+        title: 'Event instrumentation',
+        description: "Tracks new features and changes to existing features as they're built",
+    },
+    {
+        icon: IconWarning,
+        color: 'text-yellow',
+        title: 'Error tracking',
+        description: 'Configures exception capture so new code surfaces in PostHog with stack traces',
+    },
+    {
+        icon: IconToggle,
+        color: 'text-seagreen',
+        title: 'Feature flags & rollout conditions',
+        description: (
+            <>
+                Creates the flag, implements <code>isFeatureEnabled</code>, and configures staged rollout conditions
+            </>
+        ),
+    },
+    {
+        icon: IconFlask,
+        color: 'text-purple',
+        title: 'Experiments',
+        description: 'Scaffolds variants, split, and goal metrics',
+    },
+]
 
 const Instrumentation = () => {
     return (
         <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
             <SectionLabel>Automatic PostHog instrumentation</SectionLabel>
-            <p>PostHog Code automatically instruments your product data so your coding agents can use it</p>
+            <p>
+                PostHog Code automatically builds new features with the proper PostHog instrumentation so you can
+                progressively roll out changes and monitor their impact.
+            </p>
+
+            <ul className="grid @xl:grid-cols-2 gap-x-8 gap-y-4 mt-4">
+                {instrumentationItems.map(({ icon: Icon, color, title, description }) => (
+                    <li key={title} className="pl-8 relative">
+                        <Icon className={`size-6 absolute top-0.5 left-0 ${color}`} />
+                        <h3 className="text-lg font-bold mb-0">{title}</h3>
+                        <p className="mt-1">{description}</p>
+                    </li>
+                ))}
+            </ul>
         </section>
     )
 }
@@ -1022,35 +1135,37 @@ const Instrumentation = () => {
 const TableStakes = () => {
     return (
         <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
-            <SectionLabel>Table stakes</SectionLabel>
-
             <div className="grid grid-cols-2 gap-4">
                 <div>
-                    <h3>Models</h3>
-                    <p>
-                        PostHog Code works with any MCP-compatible AI coding agent. Currently supported: Claude Code,
-                        Cursor, Windsurf, VS Code with Copilot. The MCP standard is growing fast, so more editors will
-                        be supported over time.
-                    </p>
+                    <SectionLabel>Models</SectionLabel>
+                    <p>PostHog Code runs on the same models you already use — no markup.</p>
                 </div>
                 <div>
-                    <h3>MCP support</h3>
-                    <p>support here</p>
+                    <SectionLabel>MCP support</SectionLabel>
+                    <p>
+                        Manage MCP servers for your AI agents. Connect external services to extend your agent's
+                        capabilities.
+                    </p>
+
+                    <ul className="grid @xl:grid-cols-2 gap-8 mt-4">
+                        <li className="list-disc pl-4 relative">
+                            <IconTrends className="size-6 absolute top-0.5 left-0 text-blue" />
+                            <h3 className="text-lg font-bold mb-0">MCP server</h3>
+                            <p className="mt-1">
+                                Manage MCP servers for your AI agents. Connect external services to extend your agent's
+                                capabilities.
+                            </p>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
     )
 }
 
-const TLDR = ({ ready }: { ready: boolean }) => {
+const TLDR = () => {
     return (
         <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
-            <SectionLabel>TL;DR:</SectionLabel>
-            <p className="text-base leading-loose mb-5">
-                <ChoppyReveal wordDelay={40} initialDelay={ready ? 0 : 999999}>
-                    {'There are plenty of AI coding tools, but only one that knows your product like PostHog Code.'}
-                </ChoppyReveal>
-            </p>
             <div className="max-w-lg @container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
                 <DownloadButton />
             </div>
@@ -1227,29 +1342,6 @@ export default function CodePage() {
                         <OldWaySection />
 
                         <PostHogWaySection onComplete={() => setPostHogWayDone(true)} />
-
-                        <div className="px-4 @xl:px-8">
-                            <h2 className="text-2xl font-bold mb-2 text-center">
-                                Everything you'd expect in an AI coding tool,{' '}
-                                <span className="block">
-                                    but <em>way more...</em>
-                                </span>
-                            </h2>
-
-                            <div className="max-w-[654px] mx-auto relative">
-                                <CloudinaryImage
-                                    src="/>https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
-                                    className="dark:hidden"
-                                    imgClassName="w-full rounded border border-secondary"
-                                />
-                                <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_dark_b2a90f3c71.png"
-                                    className="hidden dark:block"
-                                    imgClassName="w-full rounded border border-secondary"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
-                            </div>
-                        </div>
 
                         <Features />
 
