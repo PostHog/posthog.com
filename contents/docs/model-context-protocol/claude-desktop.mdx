@@ -3,17 +3,17 @@ title: PostHog MCP for Claude Desktop
 sidebarTitle: Claude Desktop
 ---
 
-import { MCPConfigSnippet } from '../../../src/components/Product/MCP/MCPConfig'
-import SharedContent from "./_snippets/shared.mdx"
+import { MCPConfigSnippet } from "../../../src/components/Product/MCP/MCPConfig";
+import SharedContent from "./_snippets/shared.mdx";
 
 The PostHog [MCP server](https://modelcontextprotocol.io/introduction) enables Claude Desktop to directly interact with your PostHog data – managing feature flags, querying analytics, investigating errors, and more.
 
 ## Server URL
 
-| Region | URL |
-|--------|-----|
-| **US** (default) | `https://mcp.posthog.com/mcp` |
-| **EU** | `https://mcp-eu.posthog.com/mcp` |
+| Region           | URL                              |
+| ---------------- | -------------------------------- |
+| **US** (default) | `https://mcp.posthog.com/mcp`    |
+| **EU**           | `https://mcp-eu.posthog.com/mcp` |
 
 ## Quick install
 
@@ -35,5 +35,11 @@ npx @posthog/wizard mcp add
 5. The MCP server should show as **PostHog** in your list of Connectors found in **Settings > Connectors**
 
 When you first use the MCP server, you'll be prompted to log in to PostHog to authenticate.
+
+<CalloutBox icon="IconInfo" title="Visualization limitations" type="fyi">
+
+Claude Desktop displays analytics results as text and tables. Visual charts and graphs from PostHog insights aren't rendered directly in Claude Desktop. For visual analysis, ask Claude to provide a link to view the insight in PostHog, or use a browser-based MCP client.
+
+</CalloutBox>
 
 <SharedContent />
