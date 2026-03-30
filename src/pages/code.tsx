@@ -701,7 +701,7 @@ function HeroSection() {
                     <ul className="list-none p-0 mb-4 text-[15px] space-y-0.5">
                         <li className="relative pl-5">
                             <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Understands product usage patterns
+                            Identifies product usage patterns
                         </li>
                         <li className="relative pl-5">
                             <IconCheck className="size-4 text-green absolute left-0 top-1" />
