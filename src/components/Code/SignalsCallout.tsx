@@ -45,7 +45,7 @@ export function SignalsCallout({ className = '' }: SignalsCalloutProps) {
                 Signals
             </div>
 
-            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 p-2">
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 p-4">
                 {signals.map(({ label, icon: Icon, color }) => (
                     <div key={label} className="flex items-center gap-1.5 text-[13px] text-primary">
                         <Icon className={`size-4 shrink-0 ${color}`} />

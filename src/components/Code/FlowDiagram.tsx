@@ -3,11 +3,11 @@ import { IconActivity, IconLightBulb, IconMessage, IconSparkles, IconPullRequest
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
 const steps = [
-    { label: 'Analyze\nusage', icon: IconActivity, actor: 'Human' as const },
-    { label: 'Decide what\nto build', icon: IconLightBulb, actor: 'Human' as const },
-    { label: 'Prompt &\ncontext', icon: IconMessage, actor: 'Human' as const },
-    { label: 'Build', icon: IconSparkles, actor: 'Machine' as const },
-    { label: 'Ship', icon: IconPullRequest, actor: 'Human' as const },
+    { label: '1. Analyze\nusage', icon: IconActivity, actor: 'Human' as const },
+    { label: '2. Decide what\nto build', icon: IconLightBulb, actor: 'Human' as const },
+    { label: '3. Prompt &\ncontext', icon: IconMessage, actor: 'Human' as const },
+    { label: '4. Build', icon: IconSparkles, actor: 'Machine' as const },
+    { label: '5. Ship', icon: IconPullRequest, actor: 'Human' as const },
 ]
 
 const actorColors: Record<string, string> = {
@@ -51,7 +51,7 @@ export function FlowDiagram({ className = '' }: FlowDiagramProps) {
                 <span className="text-[13px] uppercase text-primary font-mono">Exhibit A</span>
             </div>
             {/* Mobile: stacked list */}
-            <div className="flex flex-col gap-2 p-4 @xl:hidden">
+            <div className="flex flex-col gap-2 p-4 ">
                 {steps.map((step, i) => (
                     <div
                         key={step.label}
@@ -74,7 +74,7 @@ export function FlowDiagram({ className = '' }: FlowDiagramProps) {
             </div>
 
             {/* Desktop: 5-col grid, arrows absolutely positioned between cells */}
-            <div className="hidden @xl:block">
+            <div className="hidden ">
                 {/* Icons + labels row */}
                 <div
                     className="relative grid items-start justify-items-center p-4 @xl:p-5 pb-3"

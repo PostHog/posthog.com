@@ -93,7 +93,7 @@ function DownloadButton({ autoFocus = false }: { autoFocus?: boolean }) {
 // ─────────────────────────────────────────────
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
-    return <h2 className="text-secondary text-2xl mx-auto max-w-lg">{children}</h2>
+    return <h2 className="text-secondary text-2xl mb-4">{children}</h2>
 }
 
 // ─────────────────────────────────────────────
@@ -137,7 +137,7 @@ function KeyBadge({ children }: { children: React.ReactNode }) {
 
 function WavyDivider() {
     return (
-        <div className="my-8 mx-auto max-w-lg">
+        <div className="my-8 max-w-lg px-4 @xl:px-8">
             <div className="max-w-xs">
                 <svg width="100%" height="20" preserveAspectRatio="none" className="text-muted">
                     <path
@@ -161,7 +161,7 @@ function AIModelBadge({ innerRef }: { innerRef: React.RefObject<HTMLSpanElement>
             className="inline-flex items-center gap-1.5 border border-primary rounded px-2 py-1 text-xs bg-accent align-middle ml-6 mt-0 mb-2"
         >
             <span className="font-semibold">Supports</span>
-            <span className="text-secondary">Haiku, Opus, Sonnet, Codex, GPT 5.2</span>
+            <span className="text-secondary">Haiku, Opus, Sonnet, Codex, GPT 5.4</span>
         </span>
     )
 }
@@ -766,16 +766,18 @@ function OldWaySection() {
     const [p1Done, setP1Done] = useState(false)
 
     return (
-        <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
+        <section className="relative mb-8 @xl:mb-24 px-4 @xl:px-8">
             <SectionLabel>
                 The{' '}
                 <InlineIcon icon={StickerTombstone} className="!size-10 !top-3 -rotate-1">
                     old way
                 </InlineIcon>{' '}
-                to build
+                to build with AI
             </SectionLabel>
 
-            <p className="text-base leading-loose mb-5 mx-auto max-w-lg">
+            <FlowDiagram className="mb-5 hidden @xl:block float-right ml-8 w-[350px]" />
+
+            <p className="text-base leading-loose mb-5">
                 <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
                     {'Most AI code editors '}
                     <InlineIcon icon={StickerBulb}>
@@ -794,9 +796,9 @@ function OldWaySection() {
                 </ChoppyReveal>
             </p>
 
-            <FlowDiagram className="mb-5" />
+            <FlowDiagram className="mb-5 @xl:hidden" />
 
-            <p className="text-base leading-loose mx-auto max-w-lg">
+            <p className="text-base leading-loose">
                 <ChoppyReveal wordDelay={40} initialDelay={p1Done ? 0 : 999999}>
                     {'They use your '}
                     <InlineIcon icon={StickerTerminal}>
@@ -834,7 +836,6 @@ function OldWaySection() {
 function PostHogWaySection() {
     const [p1Done, setP1Done] = useState(false)
     const [p2Done, setP2Done] = useState(false)
-    const [p3Done, setP3Done] = useState(false)
     const signalsWordRef = useRef<HTMLSpanElement>(null)
     const signalsBoxRef = useRef<HTMLDivElement>(null)
     const aiModelRef = useRef<HTMLSpanElement>(null)
@@ -842,24 +843,24 @@ function PostHogWaySection() {
     const sectionRef = useRef<HTMLDivElement>(null)
 
     return (
-        <section ref={sectionRef} className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
+        <section ref={sectionRef} className="relative mb-8 @xl:mb-12 px-4 @xl:px-8">
             <SectionLabel>
                 The <PostHogCodeLogomark className="-rotate-2 w-12 relative -top-0.5" /> PostHog way
             </SectionLabel>
 
-            <div className="relative mx-auto max-w-lg">
+            <div className="relative">
                 {/* Signals callout — in DOM before paragraph so float-right works on desktop.
                     On mobile (no float), it falls in normal flow above the paragraph,
                     but we use flex + order to push it below the first paragraph. */}
-                <div className="flex flex-col @2xl:block">
+                <div className="flex flex-col @xl:block">
                     <div
                         ref={signalsBoxRef}
-                        className="order-2 mb-5 @2xl:order-none @2xl:float-right @2xl:ml-6 @2xl:my-4 @2xl:w-72 @2xl:-mr-24"
+                        className="order-2 mb-5 @xl:order-none @xl:float-right @xl:ml-6 @xl:my-4 @xl:w-[400px]"
                     >
                         <SignalsCallout />
                     </div>
 
-                    <p className="text-base leading-loose mb-5 mx-auto order-1">
+                    <p className="text-base leading-loose mb-5 order-1">
                         <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
                             <InlineIcon icon={StickerCoffee}>
                                 <strong>{' PostHog Code'}</strong>
@@ -908,7 +909,7 @@ function PostHogWaySection() {
                 {p2Done && <AIModelBadge innerRef={aiModelBadgeRef} />}
 
                 <p className="text-base leading-loose mb-2">
-                    <ChoppyReveal wordDelay={40} initialDelay={p2Done ? 0 : 999999} onComplete={() => setP3Done(true)}>
+                    <ChoppyReveal wordDelay={40} initialDelay={p2Done ? 0 : 999999}>
                         {'One subscription, access to all the models you expect.'}
                     </ChoppyReveal>
                 </p>
@@ -932,12 +933,19 @@ function PostHogWaySection() {
                     />
                 )}
             </div>
+        </section>
+    )
+}
 
-            <p className="text-base leading-loose mb-5 mx-auto max-w-lg">
-                <ChoppyReveal wordDelay={40} initialDelay={p3Done ? 0 : 999999}>
+const TLDR = () => {
+    return (
+        <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
+            <SectionLabel>TL;DR:</SectionLabel>
+            <p className="text-base leading-loose mb-5">
+                <ChoppyReveal wordDelay={40}>
                     {'There are plenty of '}
-                    <InlineIcon icon={StickerAi}>{' AI coding tools.'}</InlineIcon>
-                    {" But there's only "}
+                    <InlineIcon icon={StickerAi}>{' AI coding tools,'}</InlineIcon>
+                    {' but only '}
                     <InlineIcon icon={StickerOne}>{' one'}</InlineIcon>
                     {' that knows your product like '}
                     <InlineIcon icon={StickerCoffee}>
@@ -946,7 +954,7 @@ function PostHogWaySection() {
                     </InlineIcon>
                 </ChoppyReveal>
             </p>
-            <div className="mx-auto max-w-lg @container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
+            <div className="max-w-lg @container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
                 <DownloadButton />
             </div>
         </section>
@@ -1074,7 +1082,7 @@ const FAQ_ITEMS = [
 
 function FAQ() {
     return (
-        <section className="mb-8 mx-auto max-w-lg px-4 @xl:px-8">
+        <section className="mb-8 max-w-2xl px-4 @xl:px-8">
             <h2 className="text-2xl m-0 mb-6">FAQ</h2>
 
             <Accordion
@@ -1118,11 +1126,11 @@ export default function CodePage() {
 
                     <OldWaySection />
 
-                    <WavyDivider />
-
                     <PostHogWaySection />
 
                     <WavyDivider />
+
+                    <TLDR />
 
                     <FAQ />
                 </div>
