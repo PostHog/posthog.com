@@ -1,14 +1,13 @@
 ---
 title: Send PostHog conversion events to Google Ads
 templateId:
-    - template-google-ads
+  - template-google-ads
 ---
 
-import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
-import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
+import FeedbackQuestions from "../\_snippets/feedback-questions.mdx"
+import PostHogMaintained from "../\_snippets/posthog-maintained.mdx"
 
 > **IMPORTANT:** This is an experimental destination that we do not provide official support for. Check out [this page](https://github.com/PostHog/posthog/issues/27712#issuecomment-2615849798) for more details on installing the integration.
-
 
 You'll also need access to the relevant Google Ads account.
 
@@ -59,7 +58,19 @@ You'll also need access to the relevant Google Ads account.
 
 ## Why aren't my conversions appearing inside of Google Ads?
 
-Note that it might take around 6-48 hours for Google to process conversions and make them visible inside of Google Ads. Additionally you'll need to wait around 6 hours before new conversion goals will accept incoming data. 
+Note that it might take around 6-48 hours for Google to process conversions and make them visible inside of Google Ads. Additionally you'll need to wait around 6 hours before new conversion goals will accept incoming data.
+
+### Why am I getting a TYPE_DOUBLE or INVALID_ARGUMENT error?
+
+This error occurs when the `conversion_value` field receives a string instead of a number. Template expressions like `{event.properties.purchase_amount_usd}` return strings by default, but Google Ads expects a numeric value for `conversion_value`.
+
+To fix this, use the `toFloat()` [Hog function](/docs/hog#type-conversion) in your template expression to convert the value to a number:
+
+```
+{toFloat(event.properties.purchase_amount_usd)}
+```
+
+This applies to any field in the destination configuration that expects a numeric value.
 
 ### Is the source code for this destination available?
 
