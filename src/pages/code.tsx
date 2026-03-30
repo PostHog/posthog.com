@@ -5,6 +5,7 @@ import { IconArrowRight, IconCheck } from '@posthog/icons'
 import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
@@ -692,8 +693,8 @@ function HeroSection() {
                 </RoughAnnotation>
             </h1>
 
-            <div className="@xl:gap-8 flex flex-col @4xl/editor:flex-row items-start">
-                <div className="flex-[0_0_280px]">
+            <div className="@4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
+                <div className="@4xl/flex-[0_0_280px]">
                     <p>
                         PostHog Code is the only AI devtool that understands your <strong>product,</strong> not just
                         your <strong>codebase</strong>.
@@ -740,18 +741,6 @@ function HeroSection() {
                             className="w-full rounded hidden dark:block"
                         />
                     </ZoomImage>
-                    {/* 
-                <img
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
-                    alt="PostHog Code screenshot"
-                    className="w-full rounded border border-primary dark:hidden"
-                />
-                <img
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_dark_b2a90f3c71.png"
-                    alt="PostHog Code screenshot"
-                    className="w-full rounded border border-primary hidden dark:block"
-                />
-                 */}
                 </div>
             </div>
         </section>
@@ -903,6 +892,151 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                 {p2Done && (
                     <DottedConnection sourceRef={aiModelRef} targetRef={aiModelBadgeRef} containerRef={sectionRef} />
                 )}
+            </div>
+        </section>
+    )
+}
+
+const featureOptions = [
+    { label: 'Command center', value: 'command-center' },
+    { label: 'Signals inbox', value: 'signals' },
+    { label: 'Plan', value: 'plan' },
+    { label: 'Prompt', value: 'prompt' },
+    { label: 'Review', value: 'review' },
+    { label: 'Skills', value: 'skills' },
+]
+
+const featureContent: Record<
+    string,
+    { heading: string; description: React.ReactNode; lightImg: string; darkImg: string }
+> = {
+    'command-center': {
+        heading: 'Manage multiple coding agents in parallel',
+        description: (
+            <>
+                <p>Description</p>
+            </>
+        ),
+        lightImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/command_center_light_096957d499.png',
+        darkImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_3712be03b1.png',
+    },
+    signals: {
+        heading: 'Signals inbox',
+        description: (
+            <>
+                <p>
+                    Signals are clustered and ranked by impact and urgency. You see a triaged inbox, not an overwhelming
+                    wall of data.
+                </p>
+            </>
+        ),
+        lightImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_full_light_1ceb88aa2c.png',
+        darkImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_full_dark_b1e18be734.png',
+    },
+    plan: {
+        heading: 'Plan your work',
+        description: (
+            <>
+                <p>Create a plan for your coding agents to follow</p>
+            </>
+        ),
+        lightImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/plan_light_b34b9ad492.png',
+        darkImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/plan_dark_d27c25debd.png',
+    },
+    prompt: {
+        heading: 'Write custom prompts',
+        description: (
+            <>
+                <p>Description</p>
+            </>
+        ),
+        lightImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png',
+        darkImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_dark_b2a90f3c71.png',
+    },
+    review: {
+        heading: 'Review code changes',
+        description: (
+            <>
+                <p>Description</p>
+            </>
+        ),
+        lightImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/diff_light_8a0eef0b28.png',
+        darkImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/diff_dark_7ba60e6ded.png',
+    },
+    skills: {
+        heading: 'Built-in skills library',
+        description: (
+            <>
+                <p>Description</p>
+            </>
+        ),
+        lightImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/skills_light_703a30655e.png',
+        darkImg: 'https://res.cloudinary.com/dmukukwp6/image/upload/skills_dark_f09c7fff17.png',
+    },
+}
+
+const Features = () => {
+    const [selectedFeature, setSelectedFeature] = useState('command-center')
+    const feature = featureContent[selectedFeature]
+
+    return (
+        <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
+            {/* <SectionLabel>Features</SectionLabel> */}
+
+            <ToggleGroup
+                hideTitle
+                title="Features"
+                options={featureOptions}
+                onValueChange={(value) => value && setSelectedFeature(value)}
+                value={selectedFeature}
+                className="mb-4"
+            />
+
+            <h3 className="text-2xl font-bold mb-2">{feature.heading}</h3>
+            {feature.description}
+            <ZoomImage>
+                <img
+                    src={feature.lightImg}
+                    alt={feature.heading}
+                    className="w-full rounded border border-primary dark:hidden"
+                />
+                <img
+                    src={feature.darkImg}
+                    alt={feature.heading}
+                    className="w-full rounded border border-primary hidden dark:block"
+                />
+            </ZoomImage>
+        </section>
+    )
+}
+
+const Instrumentation = () => {
+    return (
+        <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
+            <SectionLabel>Automatic PostHog instrumentation</SectionLabel>
+            <p>PostHog Code automatically instruments your product data so your coding agents can use it</p>
+        </section>
+    )
+}
+
+const TableStakes = () => {
+    return (
+        <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
+            <SectionLabel>Table stakes</SectionLabel>
+
+            <div className="grid grid-cols-2 gap-4">
+                <div>
+                    <h3>Models</h3>
+                    <p>
+                        PostHog Code works with any MCP-compatible AI coding agent. Currently supported: Claude Code,
+                        Cursor, Windsurf, VS Code with Copilot. The MCP standard is growing fast, so more editors will
+                        be supported over time.
+                    </p>
+                </div>
+                <div>
+                    <h3>MCP support</h3>
+                    <p>support here</p>
+                </div>
             </div>
         </section>
     )
@@ -1093,6 +1227,35 @@ export default function CodePage() {
                         <OldWaySection />
 
                         <PostHogWaySection onComplete={() => setPostHogWayDone(true)} />
+
+                        <div className="px-4 @xl:px-8">
+                            <h2 className="text-2xl font-bold mb-2 text-center">
+                                Everything you'd expect in an AI coding tool,{' '}
+                                <span className="block">
+                                    but <em>way more...</em>
+                                </span>
+                            </h2>
+
+                            <div className="max-w-[654px] mx-auto relative">
+                                <CloudinaryImage
+                                    src="/>https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
+                                    className="dark:hidden"
+                                    imgClassName="w-full rounded border border-secondary"
+                                />
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_dark_b2a90f3c71.png"
+                                    className="hidden dark:block"
+                                    imgClassName="w-full rounded border border-secondary"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
+                            </div>
+                        </div>
+
+                        <Features />
+
+                        <Instrumentation />
+
+                        <TableStakes />
 
                         <TLDR ready={postHogWayDone} />
 
