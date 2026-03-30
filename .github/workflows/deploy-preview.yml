@@ -77,7 +77,7 @@ jobs:
             - name: Build site
               run: pnpm build
               env:
-                  GATSBY_MINIMAL: 'true'
+                  GATSBY_MINIMAL: 'false'
                   CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
                   CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
 
