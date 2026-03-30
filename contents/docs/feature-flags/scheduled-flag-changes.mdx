@@ -27,11 +27,17 @@ This is also useful if your releases fall outside normal working hours. For exam
    - Select **Add condition** to append rollout conditions to your flag at a scheduled time.
    - Select **Update variants** to update the variant keys, descriptions, payloads, or rollouts.
 4. Select the **Date and time** of your scheduled change using the date picker.
+<<<<<<< HEAD
 5. Optionally, use the **Repeats** dropdown to set a recurrence interval:
    - **Daily**, **Weekly**, **Monthly**, or **Yearly** for fixed intervals
    - **Custom (cron)** for advanced scheduling using cron expressions
 
    When a repeat option is selected, an **Ends** date picker appears to set an optional end date for the recurring schedule.
+||||||| f7821f2cb
+5. Optionally, use the **Repeats** dropdown to set a recurrence interval (daily, weekly, monthly, or yearly). When a repeat interval is selected, an **Ends** date picker appears to set an optional end date for the recurring schedule.
+=======
+5. Optionally, use the **Repeats** dropdown to set a recurrence interval. You can choose from **Daily**, **Weekly**, **Monthly**, **Yearly**, or **Custom (cron)** for flexible scheduling with a cron expression. When a repeat option is selected, an **Ends** date picker appears to set an optional end date for the recurring schedule.
+>>>>>>> master
 6. Click **Schedule**.
 
 Scheduled changes appear below the form, grouped into an **Active & upcoming** section and a collapsible **History** section.
@@ -45,6 +51,7 @@ Scheduled changes appear below the form, grouped into an **Active & upcoming** s
 
 ## Recurring schedules
 
+<<<<<<< HEAD
 Recurring schedules repeat a scheduled change at a regular interval. You can choose from daily, weekly, monthly, or yearly intervals – or use a custom cron expression for more precise control. All recurring schedules support an optional end date.
 
 ### Custom cron expressions
@@ -68,6 +75,11 @@ Cron expressions let you define schedules like "every weekday at 9am" or "first 
 | `30 14 * * 0` | Every Sunday at 2:30 PM |
 
 A human-readable preview appears below the input field so you can verify your schedule.
+||||||| f7821f2cb
+Recurring schedules repeat a scheduled change at a regular interval. You can choose from daily, weekly, monthly, or yearly recurrence and optionally set an end date.
+=======
+Recurring schedules repeat a scheduled change at a regular interval. You can choose from daily, weekly, monthly, or yearly recurrence, or use a custom cron expression for more flexible scheduling. You can optionally set an end date for any recurring schedule.
+>>>>>>> master
 
 Recurring schedules are supported for the following change types:
 
@@ -75,6 +87,24 @@ Recurring schedules are supported for the following change types:
 - **Update variants** – replace the variant configuration on each recurrence. Each run overwrites the previous variant setup, so any manual changes made between runs are replaced.
 
 Recurring schedules are **not** supported for the **Add condition** change type because it appends a new condition on each run, which creates duplicates.
+
+### Custom cron expressions
+
+For more flexible scheduling, select **Custom (cron)** from the **Repeats** dropdown and enter a standard 5-field cron expression. A human-readable preview of the schedule is displayed below the input (e.g., "At 09:00 AM, Monday through Friday").
+
+Cron expressions use the format: `minute hour day-of-month month day-of-week`
+
+Here are some common examples:
+
+| Expression    | Description                          |
+| ------------- | ------------------------------------ |
+| `0 9 * * 1-5` | Every weekday at 9:00 AM             |
+| `0 0 * * *`   | Every day at midnight                |
+| `0 9 * * 1`   | Every Monday at 9:00 AM              |
+| `0 18 * * 5`  | Every Friday at 6:00 PM              |
+| `0 0 1 * *`   | First day of every month at midnight |
+
+> **Note:** Only standard 5-field cron expressions are supported. Six-field expressions (with seconds) are not allowed.
 
 ## Copy scheduled changes across projects
 
