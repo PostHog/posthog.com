@@ -24,9 +24,12 @@ import {
 } from 'onboarding/session-replay'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './sr-shared-helpers'
+import { WebsiteJSHtmlSnippet, WebsiteJSInitSnippet } from 'product-analytics/installation/_snippets/js-web-snippets'
 
 const SNIPPETS = {
     SessionReplayFinalSteps,
+    JSHtmlSnippet: WebsiteJSHtmlSnippet,
+    JSInitSnippet: WebsiteJSInitSnippet,
 }
 
 // Web SDK wrappers
@@ -114,6 +117,9 @@ export const SRReactNativeInstallationWrapper = () => (
         <ReactNativeInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
+
+// Game engine wrappers
+export { SRUnityInstallationWrapper } from './unity-wrapper'
 
 // No-code wrappers
 export const SRWebflowInstallationWrapper = () => (

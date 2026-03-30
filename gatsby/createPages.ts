@@ -86,6 +86,26 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     rawBody
                 }
             }
+            productEngineerHandbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/product-engineer/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    parent {
+                        ... on File {
+                            sourceInstanceName
+                        }
+                    }
+                    rawBody
+                }
+            }
             apidocs: allApiEndpoint {
                 nodes {
                     id
@@ -692,6 +712,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     )
     createPosts(engineeringHandbook, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(localHandbook, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
+    createPosts(result.data.productEngineerHandbook.nodes, 'product-engineer', HandbookTemplate, {
+        name: 'Product Engineer Handbook',
+        url: '/product-engineer',
+    })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' }, (node) => ({
         regex: `$${node.url}/`,
@@ -858,23 +882,24 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             const teams = JSON.parse(parent?.customFields?.find(({ title }) => title === 'Teams')?.value || '[]')
             let gitHubIssues = []
             if (issues) {
-                for (const issue of issues) {
-                    if (!issue) continue
-                    const { html_url, number, title, labels } = await fetch(
-                        `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
-                        {
-                            headers: {
-                                Authorization: `token ${process.env.GITHUB_API_KEY}`,
-                            },
-                        }
-                    ).then((res) => res.json())
-                    gitHubIssues.push({
-                        url: html_url,
-                        number,
-                        title,
-                        labels,
-                    })
-                }
+                gitHubIssues = await Promise.all(
+                    issues
+                        .filter((issue) => issue)
+                        .map((issue) =>
+                            fetch(`https://api.github.com/repos/${repo}/issues/${issue.trim()}`, {
+                                headers: {
+                                    Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                                },
+                            })
+                                .then((res) => res.json())
+                                .then(({ html_url, number, title, labels }) => ({
+                                    url: html_url,
+                                    number,
+                                    title,
+                                    labels,
+                                }))
+                        )
+                )
             }
             createPage({
                 path: slug,
@@ -1013,6 +1038,20 @@ async function createMinimalPages({
                     }
                 }
             }
+            productEngineerHandbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/product-engineer/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
             posts: allMdx(
                 filter: {
                     isFuture: { eq: false }
@@ -1116,10 +1155,15 @@ async function createMinimalPages({
     const data = result.data as {
         docs: { nodes: any[] }
         handbook: { nodes: any[] }
+        productEngineerHandbook: { nodes: any[] }
         posts: { nodes: any[] }
     }
 
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
     createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
+    createHandbookPreviewPosts(data.productEngineerHandbook.nodes, 'product-engineer', {
+        name: 'Product Engineer Handbook',
+        url: '/product-engineer',
+    })
     createBlogPreviewPosts(data.posts.nodes)
 }

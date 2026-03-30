@@ -43,7 +43,7 @@ We did this because we want to build [lots of products in one](/handbook/why-doe
 
 ## 1. No design by default
 
-When we started, we felt the best engineers would eventually quit if they felt dictated by product designers. [Product engineers](/blog/what-is-a-product-engineer) need autonomy and freedom to enjoy their work.
+When we started, we felt the best engineers would eventually quit if they felt dictated by product designers. [Product engineers](/product-engineer/what-is-a-product-engineer) need autonomy and freedom to enjoy their work.
 
 As we grew, we realized that engineers can design the UX of a product, especially if we hire people that have this skill set and provide a framework for their work.
 
@@ -61,7 +61,7 @@ The responsibilities of a product manager still exist, but our engineers:
 -   Decide what to build within their product (and sometimes pitch whole new products).
 -   Have complete access to metrics like revenue, hosting costs, and (soon) staff costs, for their product.
 
-The concept internally is a "[product engineer](/blog/what-is-a-product-engineer)" – i.e. an [engineer who is product-minded and autonomous](/blog/product-engineer-vs-software-engineer), rather than mindlessly filing tickets.
+The concept internally is a "[product engineer](/product-engineer/what-is-a-product-engineer)" – i.e. an [engineer who is product-minded and autonomous](/blog/product-engineer-vs-software-engineer), rather than mindlessly filing tickets.
 
 We have one product manager who steps in reactively if a small team needs more support.
 

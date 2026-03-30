@@ -105,6 +105,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/chargebee',
                 },
                 {
+                    name: 'Convex',
+                    url: '/docs/cdp/sources/convex',
+                },
+                {
                     name: 'BigQuery',
                     url: '/docs/cdp/sources/bigquery',
                 },
@@ -147,6 +151,10 @@ export const dataPipelines = {
                 {
                     name: 'Temporal.io',
                     url: '/docs/cdp/sources/temporal',
+                },
+                {
+                    name: 'Typeform',
+                    url: '/docs/cdp/sources/typeform',
                 },
                 {
                     name: 'DoIt',
@@ -1498,33 +1506,33 @@ export const handbookSidebar = [
 
             {
                 name: 'Use-case selling',
-            url: '/handbook/growth/use-case-selling/use-case-selling',
-            children: [
-                {
-                    name: 'Product Intelligence',
-                    url: '/handbook/growth/use-case-selling/product-intelligence',
-                },
-                {
-                    name: 'Release Engineering',
-                    url: '/handbook/growth/use-case-selling/release-engineering',
-                },
-                {
-                    name: 'Observability',
-                    url: '/handbook/growth/use-case-selling/observability',
-                },
-                {
-                    name: 'Growth & Marketing',
-                    url: '/handbook/growth/use-case-selling/growth-and-marketing',
-                },
-                {
-                    name: 'AI/LLM Observability',
-                    url: '/handbook/growth/use-case-selling/ai-llm-observability',
-                },
-                {
-                    name: 'Data Infrastructure',
-                    url: '/handbook/growth/use-case-selling/data-infrastructure',
-                },
-            ],
+                url: '/handbook/growth/use-case-selling/use-case-selling',
+                children: [
+                    {
+                        name: 'Product Intelligence',
+                        url: '/handbook/growth/use-case-selling/product-intelligence',
+                    },
+                    {
+                        name: 'Release Engineering',
+                        url: '/handbook/growth/use-case-selling/release-engineering',
+                    },
+                    {
+                        name: 'Observability',
+                        url: '/handbook/growth/use-case-selling/observability',
+                    },
+                    {
+                        name: 'Growth & Marketing',
+                        url: '/handbook/growth/use-case-selling/growth-and-marketing',
+                    },
+                    {
+                        name: 'AI/LLM Observability',
+                        url: '/handbook/growth/use-case-selling/ai-llm-observability',
+                    },
+                    {
+                        name: 'Data Infrastructure',
+                        url: '/handbook/growth/use-case-selling/data-infrastructure',
+                    },
+                ],
             },
             {
                 name: 'Cross-selling',
@@ -1748,6 +1756,10 @@ export const handbookSidebar = [
                         name: 'Turning knowledge into agent skills',
                         url: '/handbook/growth/sales/turning-knowledge-into-agent-skills',
                     },
+                    {
+                        name: 'Running product training sessions',
+                        url: '/handbook/growth/sales/customer-training',
+                    },
                 ],
             },
             {
@@ -1815,6 +1827,55 @@ export const handbookSidebar = [
                         url: '/handbook/growth/revops/credits',
                     },
                 ],
+            },
+        ],
+    },
+]
+
+export const productEngineerHandbookSidebar = [
+    {
+        name: 'Product Engineer Handbook',
+        icon: 'IconBook',
+        color: 'seagreen',
+        children: [
+            {
+                name: 'Chapters',
+            },
+            {
+                name: '1. What is a product engineer?',
+                url: '/product-engineer/what-is-a-product-engineer',
+            },
+            {
+                name: '2. Traits',
+                url: '/product-engineer/traits',
+            },
+            {
+                name: '3. Skills',
+                url: '/product-engineer/skills',
+            },
+            {
+                name: '4. How they work',
+                url: '/product-engineer/product-teams',
+            },
+            {
+                name: '5. Benefits',
+                url: '/product-engineer/benefits',
+            },
+            {
+                name: '6. Culture',
+                url: '/product-engineer/culture',
+            },
+            {
+                name: '7. Antipatterns',
+                url: '/product-engineer/antipatterns',
+            },
+            {
+                name: '8. Getting started',
+                url: '/product-engineer/getting-started',
+            },
+            {
+                name: '9. Further reading',
+                url: '/product-engineer/further-reading',
             },
         ],
     },
@@ -1933,6 +1994,7 @@ export const communityMenu = {
                 },
             ],
         },
+        ...productEngineerHandbookSidebar,
         {
             name: 'Templates',
             icon: 'IconMagic',
@@ -2691,21 +2753,58 @@ export const docsMenu = {
                         {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
-                        },
-                        {
-                            name: 'Platform integrations',
-                        },
-                        {
-                            name: 'Lovable',
-                            url: '/docs/integrations/lovable',
-                        },
-                        {
-                            name: 'Replit',
-                            url: '/docs/integrations/replit',
-                        },
-                        {
-                            name: 'v0',
-                            url: '/docs/integrations/v0',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/model-context-protocol',
+                                },
+                                {
+                                    name: 'Code editors',
+                                },
+                                {
+                                    name: 'Claude Code',
+                                    url: '/docs/model-context-protocol/claude-code',
+                                },
+                                {
+                                    name: 'Claude Desktop',
+                                    url: '/docs/model-context-protocol/claude-desktop',
+                                },
+                                {
+                                    name: 'Codex',
+                                    url: '/docs/model-context-protocol/codex',
+                                },
+                                {
+                                    name: 'Cursor',
+                                    url: '/docs/model-context-protocol/cursor',
+                                },
+                                {
+                                    name: 'VS Code',
+                                    url: '/docs/model-context-protocol/vscode',
+                                },
+                                {
+                                    name: 'Windsurf',
+                                    url: '/docs/model-context-protocol/windsurf',
+                                },
+                                {
+                                    name: 'Zed',
+                                    url: '/docs/model-context-protocol/zed',
+                                },
+                                {
+                                    name: 'Platforms',
+                                },
+                                {
+                                    name: 'Lovable',
+                                    url: '/docs/integrations/lovable',
+                                },
+                                {
+                                    name: 'Replit',
+                                    url: '/docs/integrations/replit',
+                                },
+                                {
+                                    name: 'v0',
+                                    url: '/docs/integrations/v0',
+                                },
+                            ],
                         },
                         {
                             name: 'LLM Analytics ↗',
@@ -3759,6 +3858,7 @@ export const docsMenu = {
                         { name: 'Android', url: '/docs/session-replay/installation/android' },
                         { name: 'iOS', url: '/docs/session-replay/installation/ios' },
                         { name: 'Flutter', url: '/docs/session-replay/installation/flutter' },
+                        { name: 'Unity', url: '/docs/session-replay/installation/unity' },
                         { name: 'Angular', url: '/docs/session-replay/installation/angular' },
                         { name: 'Astro', url: '/docs/session-replay/installation/astro' },
                         { name: 'Bubble', url: '/docs/session-replay/installation/bubble' },
@@ -4345,6 +4445,12 @@ export const docsMenu = {
                     name: 'Guides',
                 },
                 {
+                    name: 'Tracking long-term metrics',
+                    url: '/docs/experiments/tracking-long-term-metrics',
+                    icon: 'IconClock',
+                    color: 'purple',
+                },
+                {
                     name: 'Changing distribution after rollout',
                     url: '/docs/experiments/changing-distribution-after-rollout',
                     icon: 'IconGraph',
@@ -4557,6 +4663,10 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/error-tracking/installation/flutter',
+                        },
+                        {
+                            name: 'Elixir',
+                            url: '/docs/error-tracking/installation/elixir',
                         },
                         {
                             name: 'Go',
@@ -5174,6 +5284,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/clerk',
                         },
                         {
+                            name: 'Convex',
+                            url: '/docs/data-warehouse/sources/convex',
+                        },
+                        {
                             name: 'DoIt',
                             url: '/docs/data-warehouse/sources/doit',
                         },
@@ -5292,6 +5406,10 @@ export const docsMenu = {
                         {
                             name: 'Temporal.io',
                             url: '/docs/data-warehouse/sources/temporal',
+                        },
+                        {
+                            name: 'Typeform',
+                            url: '/docs/data-warehouse/sources/typeform',
                         },
                         {
                             name: 'Vitally',
@@ -5538,6 +5656,11 @@ export const docsMenu = {
                             platformLogo: 'ollama',
                         },
                         {
+                            name: 'AWS Bedrock',
+                            url: '/docs/llm-analytics/installation/aws-bedrock',
+                            platformLogo: 'awsBedrock',
+                        },
+                        {
                             name: 'Azure OpenAI',
                             url: '/docs/llm-analytics/installation/azure-openai',
                             platformLogo: 'azureOpenAI',
@@ -5650,7 +5773,12 @@ export const docsMenu = {
                         {
                             name: 'OpenClaw',
                             url: '/docs/llm-analytics/installation/openclaw',
-                            icon: 'IconCode',
+                            icon: 'IconOpenClaw',
+                        },
+                        {
+                            name: 'Convex',
+                            url: '/docs/llm-analytics/installation/convex',
+                            platformLogo: 'convex',
                         },
                         {
                             name: 'Pi Coding Agent',
@@ -5776,6 +5904,12 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Prompts as a skills store',
+                    url: '/docs/llm-analytics/skills-store',
+                    icon: 'IconStack',
+                    color: 'blue',
+                },
+                {
                     name: 'PostHog AI',
                 },
                 {
@@ -5859,6 +5993,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Demos & examples',
+                    url: '/docs/llm-analytics/demos',
+                    icon: 'IconFlask',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Troubleshooting',
@@ -6119,6 +6259,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Customer journeys',
+                    url: '/docs/customer-analytics/customer-journeys',
+                    icon: 'IconFunnels',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
                     name: 'Guides',
                 },
                 {
@@ -6133,6 +6280,13 @@ export const docsMenu = {
                     url: '/docs/customer-analytics/create-usage-metrics',
                     icon: 'IconG',
                     color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Create customer journeys',
+                    url: '/docs/customer-analytics/create-customer-journeys',
+                    icon: 'IconFunnels',
+                    color: 'seagreen',
                     featured: true,
                 },
                 {
@@ -6369,6 +6523,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'A/B testing in workflows',
+                    url: '/tutorials/workflows-ab-testing',
+                    icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
                     name: 'Best practices',
                     url: '/docs/workflows/best-practices',
                     icon: 'IconStar',
@@ -6419,6 +6579,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Getting started',
+                },
+                {
+                    name: 'Why you need logs',
+                    url: '/docs/logs/basics',
+                    icon: 'IconBook',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Start here',

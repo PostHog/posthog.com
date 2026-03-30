@@ -5,8 +5,8 @@ icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/vercel_icon_svgrepo_com_b7e78b41f9.svg
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-import Tab from "components/Tab"
+import { CalloutBox } from "components/Docs/CalloutBox";
+import Tab from "components/Tab";
 
 The Vercel Marketplace integration adds PostHog to your Vercel projects. There are two ways to set it up:
 
@@ -36,24 +36,25 @@ If you already have a PostHog account, you can connect it to Vercel instead:
 2. Click **Link Existing Account**
 3. Log in to your PostHog account if prompted
 4. Select the organization you want to link
-5. Click **Connect organization**
+5. Select the project you want to connect
+6. Click **Connect**
 
-You must have admin or owner access to the PostHog organization to link it. Billing stays with PostHog for linked accounts.
+You must have admin or owner access to the PostHog organization to link it. Billing stays with PostHog for linked accounts. When you link an existing account, PostHog automatically syncs your existing feature flags to Vercel and pushes the required environment variables.
 
 ## Environment variables
 
 The integration adds these environment variables to your Vercel project:
 
-- `NEXT_PUBLIC_POSTHOG_KEY` - Your project API key, used to initialize the PostHog SDK
+- `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` - Your project token, used to initialize the PostHog SDK
 - `NEXT_PUBLIC_POSTHOG_HOST` - The PostHog API host URL (either `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
 
 These `NEXT_PUBLIC_*` variable names work automatically in Next.js for both client and server environments. For other frameworks, you may need to copy the values to framework-specific variable names:
 
-| Framework | Rename to |
-|-----------|-----------|
-| Next.js | `NEXT_PUBLIC_POSTHOG_TOKEN`, `NEXT_PUBLIC_POSTHOG_HOST` |
-| Vite/SvelteKit | `VITE_POSTHOG_TOKEN`, `VITE_POSTHOG_HOST` |
-| Nuxt | `NUXT_PUBLIC_POSTHOG_TOKEN`, `NUXT_PUBLIC_POSTHOG_HOST` |
+| Framework      | Rename to                                                       |
+| -------------- | --------------------------------------------------------------- |
+| Next.js        | `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN`, `NEXT_PUBLIC_POSTHOG_HOST` |
+| Vite/SvelteKit | `VITE_POSTHOG_PROJECT_TOKEN`, `VITE_POSTHOG_HOST`               |
+| Nuxt           | `NUXT_PUBLIC_POSTHOG_PROJECT_TOKEN`, `NUXT_PUBLIC_POSTHOG_HOST` |
 
 ## Installing the SDK
 
@@ -67,11 +68,11 @@ The fastest way to add PostHog to your application is using our [installation wi
 By default, you'll also get [session replay](/docs/session-replay) and [event autocapture](/docs/product-analytics/autocapture). If you prefer to use feature flags only, you can opt out:
 
 ```js
-posthog.init('<ph_project_token>', {
-  api_host: '<ph_client_api_host>',
+posthog.init("<ph_project_token>", {
+  api_host: "<ph_client_api_host>",
   autocapture: false,
-  disable_session_recording: true
-})
+  disable_session_recording: true,
+});
 ```
 
 ## Using feature flags
@@ -87,10 +88,10 @@ To use feature flags in your application:
 <Tab.Panel>
 
 ```js
-if (posthog.isFeatureEnabled('new-checkout')) {
-    // Show new checkout
+if (posthog.isFeatureEnabled("new-checkout")) {
+  // Show new checkout
 } else {
-    // Show old checkout
+  // Show old checkout
 }
 ```
 
@@ -98,12 +99,12 @@ if (posthog.isFeatureEnabled('new-checkout')) {
 <Tab.Panel>
 
 ```js
-import { useFeatureFlagEnabled } from '@posthog/react'
+import { useFeatureFlagEnabled } from "@posthog/react";
 
 function App() {
-  const showNewCheckout = useFeatureFlagEnabled('new-checkout')
+  const showNewCheckout = useFeatureFlagEnabled("new-checkout");
 
-  return showNewCheckout ? <NewCheckout /> : <OldCheckout />
+  return showNewCheckout ? <NewCheckout /> : <OldCheckout />;
 }
 ```
 
@@ -120,6 +121,7 @@ Access the PostHog dashboard from your [Vercel project's Integrations tab](https
 Feature flags and experiments you create automatically sync with Vercel's flags dashboard.
 
 For full documentation:
+
 - [Creating feature flags](/docs/feature-flags/creating-feature-flags)
 - [Running experiments](/docs/experiments)
 

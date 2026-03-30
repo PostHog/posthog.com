@@ -60,6 +60,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'SaaS tools',
         },
         {
+            label: 'Convex',
+            url: '/docs/data-warehouse/sources/convex',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/convex_d8dcddcd63.svg',
+            category: 'Databases',
+        },
+        {
             label: 'Cloudflare R2',
             url: '/docs/data-warehouse/sources/r2',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/r2_0d79d88d1f.svg',
@@ -208,6 +214,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             url: '/tutorials/supabase-query',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/supabase_2fbe7c54ee.png',
             category: 'Databases',
+        },
+        {
+            label: 'Typeform',
+            url: '/docs/data-warehouse/sources/typeform',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/typeform_a12822b2db.png',
+            category: 'SaaS tools',
         },
         {
             label: 'Temporal.io',
