@@ -1,6 +1,6 @@
 ---
 title: The best session replay tools for developers, compared
-date: 2025-11-19
+date: 2025-03-30
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -109,7 +109,7 @@ Here's how some of the most popular session replay tools compare:
 
 ### 1. PostHog
 
-PostHog is an all-in-one developer platform that goes beyond session replay by combining [product analytics](/product-analytics), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and even [LLM analytics](/llm-analytics) in one place.
+**PostHog**(/) is an all-in-one developer platform that goes beyond session replay by combining [product analytics](/product-analytics), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and even [LLM analytics](/llm-analytics) in one place.
 
 Each recording gives you the complete context including the related user, events, feature flag variant, and any triggered errors. You can watch what happened, inspect console logs and network calls, identify the issue, ship a fix behind a feature flag, and measure the impact without switching tools.
 
@@ -129,11 +129,11 @@ Developers who want full context behind user behavior, and fast-growing startups
 
 </CalloutBox>
 
----
+<WizardCTA />
 
 ### 2. LogRocket
 
-LogRocket focuses on giving developers a clear, structured view of what happened during a user session. When something breaks, it shows the exact sequence of user actions along with DOM snapshots, console output, JS errors, network calls, and even Redux or Vuex state mutations.
+[LogRocket](/blog/posthog-vs-logrocket) focuses on giving developers a clear, structured view of what happened during a user session. When something breaks, it shows the exact sequence of user actions along with DOM snapshots, console output, JS errors, network calls, and even Redux or Vuex state mutations.
 
 It integrates well with existing systems too. You can open a replay from a Sentry issue, send logs to [Datadog](/blog/best-datadog-alternatives), and attach recordings directly to Jira tickets.
 
@@ -152,11 +152,9 @@ Frontend engineers who want a replay tool packed with granular event data and AI
 
 </CalloutBox>
 
----
-
 ### 3. FullStory
 
-FullStory is a heavyweight in the session replay space and is widely used by enterprise and product teams.
+[FullStory](/blog/posthog-vs-fullstory) is a heavyweight in the session replay space and is widely used by enterprise and product teams.
 
 Its real strength is behavioral analytics: funnels, heatmaps, and journey mapping. Recordings are smooth and polished, though console and network data isn't as deep as developer-focused tools.
 
@@ -175,11 +173,9 @@ Product and UX teams that want visual clarity and deep behavioral insights rathe
 
 </CalloutBox>
 
----
-
 ### 4. Hotjar
 
-Hotjar focuses on qualitative insights and quick wins for UX and conversion optimization. It's easy to set up and gives you heatmaps, scroll maps, and session recordings without developer overhead.
+[Hotjar](/blog/posthog-vs-hotjar) focuses on qualitative insights and quick wins for UX and conversion optimization. It's easy to set up and gives you heatmaps, scroll maps, and session recordings without developer overhead.
 
 You won't get console logs, network requests, or state changes, but you will get a clear sense of where users get stuck or drop off. Hotjar also includes feedback tools (surveys, polls, and widgets) which help teams gather qualitative insights directly from users.
 
@@ -195,8 +191,6 @@ You won't get console logs, network requests, or state changes, but you will get
 Product, UX, and marketing teams focused on understanding user behavior and improving conversion rates.
 
 </CalloutBox>
-
----
 
 ### 5. OpenReplay
 
@@ -218,11 +212,9 @@ Engineering teams that want full control over data collection and self-hosting, 
 
 </CalloutBox>
 
----
-
 ### 6. Microsoft Clarity
 
-Microsoft Clarity is a surprisingly capable free tool with unlimited session recordings. It's incredibly simple to add via script or Tag Manager and works well for high-traffic sites.
+[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) is a surprisingly capable free tool with unlimited session recordings. It's incredibly simple to add via script or Tag Manager and works well for high-traffic sites.
 
 It includes rage click detection, scroll depth, heatmaps, and simple playback. But it's not designed for debugging since there's no console or network capture.
 
@@ -240,8 +232,6 @@ The fact that it's genuinely free with unlimited recordings makes it an attracti
 Small teams and non-technical users who need basic replay and behavior insights without a budget.
 
 </CalloutBox>
-
----
 
 ### 7. Replay.io
 
@@ -298,9 +288,23 @@ Frontend engineers debugging complex async or stateful issues that traditional r
 
 - **Hotjar** for quick UX insights, heatmaps, and user feedback  
 - **Microsoft Clarity** for simple, free behavior analysis at scale  
-- **FullStory** if you need enterprise-grade UX analytics and collaboration features  
+- **FullStory** if you need enterprise-grade UX analytics and collaboration features
 
-## FAQ
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but PostHog is the best choice for session replay if:
+
+- You want replays connected to analytics, feature flags, error tracking, and more – so you can go from a funnel drop-off directly to the session that explains why
+- You value open source and transparent pricing
+- You want to try before you buy with 5,000 web recordings and 2,500 mobile recordings free every months
+
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out our [docs](/docs) to do it yourself.
+
+<WizardCTA />
+
+## Frequently asked questions
 
 <details>
   <summary>Can I use session replay for debugging in production?</summary>
@@ -389,6 +393,4 @@ For a detailed comparison, see our guide to the [best mobile app session replay 
 
 </details>
 
-<br />
-
-<ArrayCTA />
+<NewsletterForm />
