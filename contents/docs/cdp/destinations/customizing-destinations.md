@@ -2,8 +2,8 @@
 title: "Customizing destinations"
 showTitle: true
 ---
-Although we recommend using one of our pre-built destinations, you can also customize them and build your own. 
 
+Although we recommend using one of our pre-built destinations, you can also customize them and build your own.
 
 ## Customizing payload
 
@@ -61,6 +61,26 @@ Or to construct a custom JSON payload that conforms to an existing API specifica
 
 > You can see the full capabilities of templating with our Hog programming language in the [Hog documentation](/docs/hog)
 
+### Type coercion for API fields
+
+Template expressions like `{event.properties.revenue}` return strings by default. Some APIs expect specific types (such as numbers or booleans) and reject string values with type errors.
+
+To fix this, use Hog's [type conversion functions](/docs/hog#type-conversion) inside your template expressions:
+
+- `{toFloat(event.properties.revenue)}` – converts to a float (e.g. `49.99`)
+- `{toInt(event.properties.quantity)}` – converts to an integer (e.g. `3`)
+- `{toString(event.properties.user_id)}` – explicitly converts to a string
+
+For example, if a destination expects a numeric `conversion_value` field:
+
+```
+// ✗ This sends a string and may cause a type error
+{event.properties.purchase_amount_usd}
+
+// ✓ This sends a numeric value
+{toFloat(event.properties.purchase_amount_usd)}
+```
+
 ### Global object
 
 Below is the structure of the global variables available whenever templating a destination.
@@ -110,16 +130,17 @@ For example, to add a "Replay" button to your Slack message, you can add this bl
 
 ```json
 {
-    "url": "{project.url}/replay/{event.properties.$session_id}?t={event.timestamp}",
-    "text": {
-        "text": "Replay",
-        "type": "plain_text"
-    },
-    "type": "button"
+  "url": "{project.url}/replay/{event.properties.$session_id}?t={event.timestamp}",
+  "text": {
+    "text": "Replay",
+    "type": "plain_text"
+  },
+  "type": "button"
 }
 ```
 
 This creates a button in your Slack message that links directly to the session recording at the exact timestamp when the event occurred. The URL is constructed using:
+
 - `{project.url}` - The base URL of your PostHog instance
 - `{event.properties.$session_id}` - The session ID from the event
 - `{event.timestamp}` - The timestamp when the event occurred
@@ -128,7 +149,7 @@ For this to work the event must have the `session_id` as property on the event a
 
 ## Modifying destinations with Hog
 
-For most cases, we recommend using one of the templates. These take care of most logic under the hood, exposing simple inputs for you to configure. 
+For most cases, we recommend using one of the templates. These take care of most logic under the hood, exposing simple inputs for you to configure.
 
 You can, however, modify any destination by clicking `show source code`. From here you can modify the inputs – for example marking an input as secret so that it is encrypted as rest – or changing the implementation of the destination itself.
 
