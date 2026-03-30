@@ -124,6 +124,16 @@ This ensures that only relevant, post-exposure behavior is included in the analy
   alt="Screenshot of conversion window configuration"
 />
 
+### Only count matured users
+
+When you set a time window, a **Only count matured users** checkbox appears. When enabled, users are excluded from metric calculations until their full conversion window has elapsed — meaning a user is only counted once `last_exposure_time + conversion_window` is in the past.
+
+Without this option, every user is added to the denominator the moment they're exposed, even if they were exposed minutes ago and haven't had time to convert. This can deflate conversion rates and make metrics unreliable while the experiment is still running.
+
+This option is available for all metric types (funnel, mean, ratio, and retention). For retention metrics, the maturity window is the conversion window plus the retention window end, since users need time for both windows to elapse.
+
+The checkbox automatically clears when you switch back to **Experiment duration**.
+
 ## Primary and secondary metrics
 
 Each metric can be set as either a **primary** or **secondary** metric. This is just a way of organizing metrics - primary and secondary metrics work the same way.
