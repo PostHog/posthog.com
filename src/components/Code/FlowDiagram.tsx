@@ -47,8 +47,8 @@ export function FlowDiagram({ className = '' }: FlowDiagramProps) {
     return (
         <div ref={ref} className={`@container border border-primary rounded-sm overflow-hidden ${className}`}>
             <div className="py-1 flex items-center justify-between border-b border-secondary mx-4 @xl:mx-5">
-                <span className="text-[13px] uppercase text-primary font-mono">Coding with AI (cir. 2022-2025)</span>
-                <span className="text-[13px] uppercase text-primary font-mono">Exhibit A</span>
+                <span className="text-[13px] uppercase text-primary font-mono">Coding with AI</span>
+                <span className="text-[13px] uppercase text-primary font-mono">(cir. 2022-2025)</span>
             </div>
             {/* Mobile: stacked list */}
             <div className="flex flex-col gap-2 p-4 ">
