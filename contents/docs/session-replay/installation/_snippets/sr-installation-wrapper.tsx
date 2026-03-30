@@ -125,6 +125,9 @@ export const SRReactNativeInstallationWrapper = () => (
     </OnboardingContentWrapper>
 )
 
+// Game engine wrappers
+export { SRUnityInstallationWrapper } from './unity-wrapper'
+
 // No-code wrappers
 export const SRWebflowInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={SNIPPETS}>

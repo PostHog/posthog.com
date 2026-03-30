@@ -105,6 +105,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/chargebee',
                 },
                 {
+                    name: 'Convex',
+                    url: '/docs/cdp/sources/convex',
+                },
+                {
                     name: 'BigQuery',
                     url: '/docs/cdp/sources/bigquery',
                 },
@@ -1752,6 +1756,10 @@ export const handbookSidebar = [
                         name: 'Turning knowledge into agent skills',
                         url: '/handbook/growth/sales/turning-knowledge-into-agent-skills',
                     },
+                    {
+                        name: 'Running product training sessions',
+                        url: '/handbook/growth/sales/customer-training',
+                    },
                 ],
             },
             {
@@ -1819,6 +1827,55 @@ export const handbookSidebar = [
                         url: '/handbook/growth/revops/credits',
                     },
                 ],
+            },
+        ],
+    },
+]
+
+export const productEngineerHandbookSidebar = [
+    {
+        name: 'Product Engineer Handbook',
+        icon: 'IconBook',
+        color: 'seagreen',
+        children: [
+            {
+                name: 'Chapters',
+            },
+            {
+                name: '1. What is a product engineer?',
+                url: '/product-engineer/what-is-a-product-engineer',
+            },
+            {
+                name: '2. Traits',
+                url: '/product-engineer/traits',
+            },
+            {
+                name: '3. Skills',
+                url: '/product-engineer/skills',
+            },
+            {
+                name: '4. How they work',
+                url: '/product-engineer/product-teams',
+            },
+            {
+                name: '5. Benefits',
+                url: '/product-engineer/benefits',
+            },
+            {
+                name: '6. Culture',
+                url: '/product-engineer/culture',
+            },
+            {
+                name: '7. Antipatterns',
+                url: '/product-engineer/antipatterns',
+            },
+            {
+                name: '8. Getting started',
+                url: '/product-engineer/getting-started',
+            },
+            {
+                name: '9. Further reading',
+                url: '/product-engineer/further-reading',
             },
         ],
     },
@@ -1937,6 +1994,7 @@ export const communityMenu = {
                 },
             ],
         },
+        ...productEngineerHandbookSidebar,
         {
             name: 'Templates',
             icon: 'IconMagic',
@@ -3797,6 +3855,9 @@ export const docsMenu = {
                     children: [
                         { name: 'Overview', url: '/docs/session-replay/installation' },
                         { name: 'Android', url: '/docs/session-replay/installation/android' },
+                        { name: 'iOS', url: '/docs/session-replay/installation/ios' },
+                        { name: 'Flutter', url: '/docs/session-replay/installation/flutter' },
+                        { name: 'Unity', url: '/docs/session-replay/installation/unity' },
                         { name: 'Angular', url: '/docs/session-replay/installation/angular' },
                         { name: 'Astro', url: '/docs/session-replay/installation/astro' },
                         { name: 'Bubble', url: '/docs/session-replay/installation/bubble' },
@@ -4397,6 +4458,12 @@ export const docsMenu = {
                     name: 'Guides',
                 },
                 {
+                    name: 'Tracking long-term metrics',
+                    url: '/docs/experiments/tracking-long-term-metrics',
+                    icon: 'IconClock',
+                    color: 'purple',
+                },
+                {
                     name: 'Changing distribution after rollout',
                     url: '/docs/experiments/changing-distribution-after-rollout',
                     icon: 'IconGraph',
@@ -4609,6 +4676,10 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/error-tracking/installation/flutter',
+                        },
+                        {
+                            name: 'Elixir',
+                            url: '/docs/error-tracking/installation/elixir',
                         },
                         {
                             name: 'Go',
@@ -5226,6 +5297,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/clerk',
                         },
                         {
+                            name: 'Convex',
+                            url: '/docs/data-warehouse/sources/convex',
+                        },
+                        {
                             name: 'DoIt',
                             url: '/docs/data-warehouse/sources/doit',
                         },
@@ -5711,7 +5786,7 @@ export const docsMenu = {
                         {
                             name: 'OpenClaw',
                             url: '/docs/llm-analytics/installation/openclaw',
-                            icon: 'IconCode',
+                            icon: 'IconOpenClaw',
                         },
                         {
                             name: 'Convex',
@@ -5931,6 +6006,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Demos & examples',
+                    url: '/docs/llm-analytics/demos',
+                    icon: 'IconFlask',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Troubleshooting',
@@ -6191,6 +6272,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Customer journeys',
+                    url: '/docs/customer-analytics/customer-journeys',
+                    icon: 'IconFunnels',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
                     name: 'Guides',
                 },
                 {
@@ -6205,6 +6293,13 @@ export const docsMenu = {
                     url: '/docs/customer-analytics/create-usage-metrics',
                     icon: 'IconG',
                     color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Create customer journeys',
+                    url: '/docs/customer-analytics/create-customer-journeys',
+                    icon: 'IconFunnels',
+                    color: 'seagreen',
                     featured: true,
                 },
                 {
@@ -6439,6 +6534,12 @@ export const docsMenu = {
                     url: '/docs/workflows/import-customerio-optouts',
                     icon: 'IconDatabase',
                     color: 'blue',
+                },
+                {
+                    name: 'A/B testing in workflows',
+                    url: '/tutorials/workflows-ab-testing',
+                    icon: 'IconDatabase',
+                    color: 'orange',
                 },
                 {
                     name: 'Best practices',

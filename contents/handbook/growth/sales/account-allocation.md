@@ -104,8 +104,8 @@ To help the new owner of a customer hit the ground running, we should make sure 
 
 | Transition | Typical timing | Condition |
 |------------|----------------|-----------|
-| TAE → TAM | 12 months after initial credit pre-purchase | Customer onboarded to 1-2 primary products |
-| TAE → CSM | 12 months after initial credit pre-purchase | Customer onboarded to 3+ primary products |
+| TAE → TAM | When onboarded, typically 3 months after initial credit purchase OR 12 months after initial credit pre-purchase if the account is retained by the TAE | Customer onboarded to 1-2 primary products |
+| TAE → CSM | When onboarded, typically 3 months after initial credit purchase OR 12 months after initial credit pre-purchase if the account is retained by the TAE | Customer onboarded to 3+ primary products |
 | TAM → CSM | After expansion completes | All 3 core products adopted, discount agreement in place, no remaining expansion levers |
 | CSM → TAM | When expansion opportunity identified | Customer not fully expanded and has clear growth potential |
 
