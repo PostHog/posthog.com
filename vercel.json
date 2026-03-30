@@ -1391,6 +1391,11 @@
         { "source": "/apps", "destination": "/cdp", "statusCode": 302 },
         { "source": "/docs/data-warehouse/setup/azure-blob", "destination": "/docs/cdp/sources/azure-blob" },
         { "source": "/docs/data-warehouse/setup/azure-db", "destination": "/docs/cdp/sources/azure-db" },
+        {
+            "source": "/docs/data-warehouse/sources/azure-db",
+            "destination": "/docs/data-warehouse/sources/microsoft-sql-server"
+        },
+        { "source": "/docs/cdp/sources/azure-db", "destination": "/docs/cdp/sources/microsoft-sql-server" },
         { "source": "/docs/data-warehouse/setup/chargebee", "destination": "/docs/cdp/sources/chargebee" },
         { "source": "/docs/data-warehouse/setup/gcs", "destination": "/docs/cdp/sources/gcs" },
         { "source": "/docs/data-warehouse/setup/hubspot", "destination": "/docs/cdp/sources/hubspot" },
