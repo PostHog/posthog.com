@@ -5,6 +5,7 @@ import { IconArrowRight, IconCheck, IconFlask, IconToggle, IconTrends, IconWarni
 import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
+import { LOGOS, type LogoKey } from 'constants/logos'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
@@ -875,7 +876,7 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                 {p2Done && <AIModelBadge innerRef={aiModelBadgeRef} />}
 
                 <p className="text-base leading-loose mb-5">
-                    <ChoppyReveal wordDelay={0} initialDelay={p2Done ? 0 : 999999}>
+                    <ChoppyReveal wordDelay={40} initialDelay={p2Done ? 0 : 999999}>
                         <strong>TL;DR:</strong> There are plenty of AI coding tools, but{' '}
                         <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5}>
                             <span className="inline-block">only one that knows your product</span>
@@ -919,12 +920,12 @@ const featureTabs: TabbedCarouselTab[] = [
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_light_096957d499.png"
                         alt="Manage multiple coding agents in parallel"
-                        className="w-full rounded border border-primary dark:hidden"
+                        className="w-full rounded-md shadow-2xl border border-primary dark:hidden"
                     />
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_3712be03b1.png"
                         alt="Manage multiple coding agents in parallel"
-                        className="w-full rounded border border-primary hidden dark:block"
+                        className="w-full rounded-md shadow-2xl border border-primary hidden dark:block"
                     />
                 </ZoomImage>
             </div>
@@ -950,12 +951,12 @@ const featureTabs: TabbedCarouselTab[] = [
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_full_light_1ceb88aa2c.png"
                         alt="Signals inbox"
-                        className="w-full rounded border border-primary dark:hidden"
+                        className="w-full rounded-md shadow-xl border border-primary dark:hidden"
                     />
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_full_dark_b1e18be734.png"
                         alt="Signals inbox"
-                        className="w-full rounded border border-primary hidden dark:block"
+                        className="w-full rounded-md shadow-xl border border-primary hidden dark:block"
                     />
                 </ZoomImage>
             </div>
@@ -977,12 +978,12 @@ const featureTabs: TabbedCarouselTab[] = [
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/plan_light_b34b9ad492.png"
                         alt="Plan your work"
-                        className="w-full rounded border border-primary dark:hidden"
+                        className="w-full rounded-md shadow-xl border border-primary dark:hidden"
                     />
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/plan_dark_d27c25debd.png"
                         alt="Plan your work"
-                        className="w-full rounded border border-primary hidden dark:block"
+                        className="w-full rounded-md shadow-xl border border-primary hidden dark:block"
                     />
                 </ZoomImage>
             </div>
@@ -1004,12 +1005,12 @@ const featureTabs: TabbedCarouselTab[] = [
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/diff_light_8a0eef0b28.png"
                         alt="Review code changes"
-                        className="w-full rounded border border-primary dark:hidden"
+                        className="w-full rounded-md shadow-xl border border-primary dark:hidden"
                     />
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/diff_dark_7ba60e6ded.png"
                         alt="Review code changes"
-                        className="w-full rounded border border-primary hidden dark:block"
+                        className="w-full rounded-md shadow-xl border border-primary hidden dark:block"
                     />
                 </ZoomImage>
             </div>
@@ -1035,12 +1036,12 @@ const featureTabs: TabbedCarouselTab[] = [
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/skills_light_703a30655e.png"
                         alt="Built-in skills library"
-                        className="w-full rounded border border-primary dark:hidden"
+                        className="w-full rounded-md shadow-xl border border-primary dark:hidden"
                     />
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/skills_dark_f09c7fff17.png"
                         alt="Built-in skills library"
-                        className="w-full rounded border border-primary hidden dark:block"
+                        className="w-full rounded-md shadow-xl border border-primary hidden dark:block"
                     />
                 </ZoomImage>
             </div>
@@ -1050,7 +1051,7 @@ const featureTabs: TabbedCarouselTab[] = [
 
 const Features = () => {
     return (
-        <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <div className="px-4 @xl:px-8">
                 <div className="max-w-[654px] mx-auto relative">
                     <CloudinaryImage
@@ -1112,14 +1113,14 @@ const instrumentationItems = [
 
 const Instrumentation = () => {
     return (
-        <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
+        <section className="relative mb-12 @2xl:mb-20 px-4 @xl:px-8">
             <SectionLabel>Automatic PostHog instrumentation</SectionLabel>
             <p>
                 PostHog Code automatically builds new features with the proper PostHog instrumentation so you can
                 progressively roll out changes and monitor their impact.
             </p>
 
-            <ul className="grid @xl:grid-cols-2 gap-x-8 gap-y-4 mt-4">
+            <ul className="grid @xl:grid-cols-2 gap-x-8 gap-y-4 pt-8">
                 {instrumentationItems.map(({ icon: Icon, color, title, description }) => (
                     <li key={title} className="pl-8 relative">
                         <Icon className={`size-6 absolute top-0.5 left-0 ${color}`} />
@@ -1132,13 +1133,111 @@ const Instrumentation = () => {
     )
 }
 
+const integrationRows: { name: string; logoKey: LogoKey }[] = [
+    { name: 'Linear', logoKey: 'linear' },
+    { name: 'Slack', logoKey: 'slack' },
+    { name: 'GitHub', logoKey: 'github' },
+    { name: 'Granola', logoKey: 'granola' },
+    { name: 'Zendesk', logoKey: 'zendesk' },
+]
+
+interface MCPServerRow {
+    name: string
+    description: string
+    logoKey: LogoKey
+}
+
+const mcpServerRows: MCPServerRow[] = [
+    {
+        name: 'Attio',
+        description: 'Manage Attio CRM contacts, companies, and deals.',
+        logoKey: 'attio',
+    },
+    {
+        name: 'HubSpot',
+        description: 'Sync contacts, companies, and marketing lifecycle for richer agent context.',
+        logoKey: 'hubspot',
+    },
+    {
+        name: 'Stripe',
+        description: 'Look up customers, subscriptions, and invoices from billing.',
+        logoKey: 'stripe',
+    },
+    {
+        name: 'Salesforce',
+        description: 'Query accounts, opportunities, and CRM records your agents need in context.',
+        logoKey: 'salesforce',
+    },
+    {
+        name: 'Sentry',
+        description: 'Pull issues, releases, and stack traces so agents debug against real errors.',
+        logoKey: 'sentry',
+    },
+]
+
 const TableStakes = () => {
     return (
-        <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
-            <div className="grid grid-cols-2 gap-4">
-                <div>
-                    <SectionLabel>Models</SectionLabel>
+        <section className="relative mb-12 px-4 @xl:px-8">
+            <div className="grid @2xl:grid-cols-2 gap-8">
+                <div className="@container">
+                    <SectionLabel>Supported LLMs</SectionLabel>
                     <p>PostHog Code runs on the same models you already use — no markup.</p>
+
+                    <div className="mt-4 grid @xs:grid-cols-2 gap-4 @xs:gap-8 mb-8">
+                        <div>
+                            <p className="m-0 text-xs font-semibold uppercase text-secondary tracking-wide">OpenAI</p>
+                            <ul className="m-0 mt-1 list-none p-0 space-y-2">
+                                <li className="text-sm font-bold text-primary">
+                                    <code>GPT-5.2</code>
+                                </li>
+                                <li className="text-sm font-bold text-primary">
+                                    <code>GPT-5.3-codex</code>
+                                </li>
+                                <li className="text-sm font-bold text-primary">
+                                    <code>GPT-5.4</code>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p className="m-0 text-xs font-semibold uppercase text-secondary tracking-wide">
+                                Anthropic
+                            </p>
+                            <ul className="m-0 mt-1 list-none p-0 space-y-2">
+                                <li className="text-sm font-bold text-primary">
+                                    <code>Claude Sonnet 4.6</code>
+                                </li>
+                                <li className="text-sm font-bold text-primary">
+                                    <code>Claude Opus 4.6</code>
+                                </li>
+                                <li className="text-sm font-bold text-primary">
+                                    <code>Claude Haiku 4.5</code>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <SectionLabel>Integrations</SectionLabel>
+
+                    <div className="relative -mt-2">
+                        <div className="divide-y divide-primary">
+                            {integrationRows.map((row, i) => (
+                                <div
+                                    key={row.logoKey}
+                                    className={`flex min-h-0 flex-1 items-center gap-3 py-2
+                                    }`}
+                                >
+                                    <img
+                                        src={LOGOS[row.logoKey]}
+                                        alt=""
+                                        className="size-7 shrink-0 object-contain"
+                                        aria-hidden
+                                    />
+                                    <p className="m-0 text-base font-bold text-primary">{row.name}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
+                    </div>
                 </div>
                 <div>
                     <SectionLabel>MCP support</SectionLabel>
@@ -1147,16 +1246,31 @@ const TableStakes = () => {
                         capabilities.
                     </p>
 
-                    <ul className="grid @xl:grid-cols-2 gap-8 mt-4">
-                        <li className="list-disc pl-4 relative">
-                            <IconTrends className="size-6 absolute top-0.5 left-0 text-blue" />
-                            <h3 className="text-lg font-bold mb-0">MCP server</h3>
-                            <p className="mt-1">
-                                Manage MCP servers for your AI agents. Connect external services to extend your agent's
-                                capabilities.
-                            </p>
-                        </li>
-                    </ul>
+                    <div className="relative">
+                        {mcpServerRows.map((row, i) => (
+                            <div
+                                key={row.logoKey}
+                                className={`flex min-h-0 flex-1 items-start gap-3 py-3 ${
+                                    i < mcpServerRows.length - 1 ? 'border-b border-primary' : ''
+                                }`}
+                            >
+                                <img
+                                    src={LOGOS[row.logoKey]}
+                                    alt=""
+                                    className="size-7 shrink-0 object-contain"
+                                    aria-hidden
+                                />
+                                <div className="min-w-0 flex-1">
+                                    <p className="m-0 text-base font-bold text-primary">{row.name}</p>
+                                    <p className="m-0 mt-0.5 text-sm text-secondary leading-snug line-clamp-2">
+                                        {row.description}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+
+                        <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1166,6 +1280,8 @@ const TableStakes = () => {
 const TLDR = () => {
     return (
         <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
+            <h2 className="text-2xl font-bold mb-2">Try it</h2>
+            <p>PostHog Code is launching in Spring 2026. Join the waitlist to be the first to try it.</p>
             <div className="max-w-lg @container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
                 <DownloadButton />
             </div>
