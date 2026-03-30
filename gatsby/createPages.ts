@@ -41,7 +41,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
     const DataWarehouseSource = path.resolve(`src/templates/DataWarehouseSource.tsx`)
-    const SourceRedirect = path.resolve(`src/templates/SourceRedirect.tsx`)
     const SdkReferenceTemplate = path.resolve(`src/templates/sdk/SdkReference.tsx`)
     const SdkTypeTemplate = path.resolve(`src/templates/sdk/SdkType.tsx`)
 
