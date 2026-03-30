@@ -1124,42 +1124,46 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     const fetchDataWarehouseSources = async () => {
-        const response = await fetch('https://us.posthog.com/api/public_source_configs')
-        const data = await response.json()
-        if (data?.type === 'invalid_request' || data?.code === 'not_found') {
-            console.warn('Failed to fetch data warehouse sources:', data?.detail || 'unknown error')
-            return
-        }
-        const configs = Array.isArray(data) ? data : Object.values(data)
+        try {
+            const response = await fetch('https://us.posthog.com/api/public_source_configs')
+            const data = await response.json()
+            if (data?.type === 'invalid_request' || data?.code === 'not_found') {
+                console.warn('Failed to fetch data warehouse sources:', data?.detail || 'unknown error')
+                return
+            }
+            const configs = Array.isArray(data) ? data : Object.values(data)
 
-        for (const config of configs) {
-            const displayName = config.label || config.name
-            if (!displayName) continue
-            const slug = displayName
-                .toLowerCase()
-                .replace(/\./g, '')
-                .replace(/\s+/g, '-')
-                .replace(/[^a-z0-9-]/g, '')
+            for (const config of configs) {
+                const displayName = config.label || config.name
+                if (!displayName) continue
+                const slug = displayName
+                    .toLowerCase()
+                    .replace(/\./g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/[^a-z0-9-]/g, '')
 
-            createNode({
-                id: createNodeId(`posthog-source-${config.name}`),
-                internal: {
-                    type: 'PostHogSource',
-                    contentDigest: createContentDigest(config),
-                },
-                sourceId: config.name,
-                slug,
-                name: displayName,
-                icon_url: `https://us.posthog.com${config.iconPath}`,
-                docsUrl: config.docsUrl || null,
-                unreleased: config.unreleasedSource || false,
-                beta: config.betaSource || false,
-                featured: config.featured || false,
-                caption: config.caption || null,
-                sourceFields: config.fields || [],
-                permissionsCaption: config.permissionsCaption || null,
-                featureFlag: config.featureFlag || null,
-            })
+                createNode({
+                    id: createNodeId(`posthog-source-${config.name}`),
+                    internal: {
+                        type: 'PostHogSource',
+                        contentDigest: createContentDigest(config),
+                    },
+                    sourceId: config.name,
+                    slug,
+                    name: displayName,
+                    icon_url: config.iconPath ? `https://us.posthog.com${config.iconPath}` : null,
+                    docsUrl: config.docsUrl || null,
+                    unreleased: config.unreleasedSource || false,
+                    beta: config.betaSource || false,
+                    featured: config.featured || false,
+                    caption: config.caption || null,
+                    sourceFields: config.fields || [],
+                    permissionsCaption: config.permissionsCaption || null,
+                    featureFlag: config.featureFlag || null,
+                })
+            }
+        } catch (error) {
+            console.warn('Failed to fetch data warehouse sources:', error)
         }
     }
 
