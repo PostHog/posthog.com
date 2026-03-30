@@ -692,7 +692,7 @@ function HeroSection() {
                 </RoughAnnotation>
             </h1>
 
-            <div className="gap-4 @4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
+            <div className="@xl:gap-8 flex flex-col @4xl/editor:flex-row items-start">
                 <div className="flex-[0_0_280px]">
                     <p>
                         PostHog Code is the only AI devtool that understands your <strong>product,</strong> not just
@@ -780,11 +780,7 @@ function OldWaySection() {
             <p className="text-base leading-loose mb-5">
                 <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
                     {'Most AI code editors '}
-                    <InlineIcon icon={StickerBulb}>
-                        <em>lack context</em>
-                    </InlineIcon>
-                    {' and '}
-                    <InlineIcon icon={StickerPause}>{' wait for '}</InlineIcon>{' '}
+                    <em>lack context</em> and wait for{' '}
                     <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5}>
                         <em>you</em>
                     </RoughAnnotation>
@@ -800,28 +796,15 @@ function OldWaySection() {
 
             <p className="text-base leading-loose">
                 <ChoppyReveal wordDelay={40} initialDelay={p1Done ? 0 : 999999}>
-                    {'They use your '}
-                    <InlineIcon icon={StickerTerminal}>
-                        {' '}
-                        <strong className="font-mono bg-blue/10 border border-blue rounded-sm px-1 leading-normal">
-                            &lt;codebase /&gt;
-                        </strong>
-                    </InlineIcon>
+                    {'They use your '}{' '}
+                    <strong className="font-mono bg-blue/10 border border-blue rounded-sm px-1 leading-normal inline-block">
+                        &lt;codebase /&gt;
+                    </strong>
                     {' as the source of truth, not how '}
-                    <InlineIcon icon={StickerUsers}>
-                        <em>humans</em>
-                    </InlineIcon>{' '}
-                    (or{' '}
-                    <InlineIcon icon={StickerRobot}>
-                        <em>agents</em>
-                    </InlineIcon>
-                    ){' use your '}
-                    <InlineIcon icon={StickerWebsite}>
-                        {' '}
-                        <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
-                            <em>product</em>
-                        </RoughAnnotation>
-                    </InlineIcon>
+                    <em>humans</em> (or <em>agents</em>){' use your '}{' '}
+                    <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
+                        <em>product</em>
+                    </RoughAnnotation>
                     {'.'}
                 </ChoppyReveal>
             </p>
@@ -852,19 +835,17 @@ function PostHogWaySection() {
                 {/* Signals callout — in DOM before paragraph so float-right works on desktop.
                     On mobile (no float), it falls in normal flow above the paragraph,
                     but we use flex + order to push it below the first paragraph. */}
-                <div className="flex flex-col @xl:block">
+                <div className="flex flex-col @4xl/editor:block">
                     <div
                         ref={signalsBoxRef}
-                        className="order-2 mb-5 @xl:order-none @xl:float-right @xl:ml-6 @xl:my-4 @xl:w-[400px]"
+                        className="order-2 mb-5 @4xl/editor:order-none @4xl/editor:float-right @4xl/editor:ml-6 @4xl/editor:my-4 @4xl/editor:w-[400px]"
                     >
                         <SignalsCallout />
                     </div>
 
                     <p className="text-base leading-loose mb-5 order-1">
                         <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
-                            <InlineIcon icon={StickerCoffee}>
-                                <strong>{' PostHog Code'}</strong>
-                            </InlineIcon>
+                            <strong>{' PostHog Code'}</strong>
                             {' uses '}
                             <span ref={signalsWordRef}>
                                 <RoughAnnotation
@@ -878,14 +859,9 @@ function PostHogWaySection() {
                                 </RoughAnnotation>
                             </span>
                             {' from '}
-                            <span className="text-green text-sm">&#9679;</span> <strong>production data</strong>
-                            {' to '}
-                            <InlineIcon icon={StickerMicroscope}>{' diagnose'}</InlineIcon>
-                            {' issues and generate '}
-                            <InlineIcon icon={StickerPullRequest}>{' pull requests'}</InlineIcon>
-                            {' to fix them — '}
+                            <span className="text-green text-sm">&#9679;</span> <strong>production data</strong> to
+                            diagnose issues and generate pull requests to fix them —
                             <em>before you even know there&apos;s a problem.</em>
-                            <InlineIcon icon={StickerZZZ} />
                         </ChoppyReveal>
                     </p>
                 </div>
@@ -893,9 +869,9 @@ function PostHogWaySection() {
                 <p className="text-base leading-loose mb-2">
                     <ChoppyReveal wordDelay={40} initialDelay={p1Done ? 0 : 999999} onComplete={() => setP2Done(true)}>
                         {'Run it '}
-                        <InlineIcon icon={StickerELearning}>{' locally'}</InlineIcon>
+                        <strong>locally</strong>
                         {' or in the '}
-                        <InlineIcon icon={StickerCloud}>{' cloud'}</InlineIcon>
+                        <strong>cloud</strong>
                         {' — either way, it automatically uses the right '}
                         <span ref={aiModelRef}>
                             <RoughAnnotation type="box" color="currentColor" strokeWidth={1} padding={2}>
@@ -925,12 +901,7 @@ function PostHogWaySection() {
                     desktopOnly
                 />
                 {p2Done && (
-                    <DottedConnection
-                        sourceRef={aiModelRef}
-                        targetRef={aiModelBadgeRef}
-                        containerRef={sectionRef}
-                        targetOffsetX={16}
-                    />
+                    <DottedConnection sourceRef={aiModelRef} targetRef={aiModelBadgeRef} containerRef={sectionRef} />
                 )}
             </div>
         </section>
@@ -943,15 +914,7 @@ const TLDR = () => {
             <SectionLabel>TL;DR:</SectionLabel>
             <p className="text-base leading-loose mb-5">
                 <ChoppyReveal wordDelay={40}>
-                    {'There are plenty of '}
-                    <InlineIcon icon={StickerAi}>{' AI coding tools,'}</InlineIcon>
-                    {' but only '}
-                    <InlineIcon icon={StickerOne}>{' one'}</InlineIcon>
-                    {' that knows your product like '}
-                    <InlineIcon icon={StickerCoffee}>
-                        {' '}
-                        <strong>PostHog Code.</strong>
-                    </InlineIcon>
+                    {'There are plenty of AI coding tools, but only one that knows your product like PostHog Code.'}
                 </ChoppyReveal>
             </p>
             <div className="max-w-lg @container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
@@ -1127,8 +1090,6 @@ export default function CodePage() {
                     <OldWaySection />
 
                     <PostHogWaySection />
-
-                    <WavyDivider />
 
                     <TLDR />
 
