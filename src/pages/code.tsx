@@ -858,7 +858,7 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                 </div>
 
                 <p className="text-base leading-loose mb-2">
-                    <ChoppyReveal wordDelay={40} initialDelay={p1Done ? 0 : 999999} onComplete={() => setP2Done(true)}>
+                    <ChoppyReveal wordDelay={25} initialDelay={p1Done ? 0 : 999999} onComplete={() => setP2Done(true)}>
                         {'Run it '}
                         <strong>locally</strong>
                         {' or in the '}
@@ -876,9 +876,9 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                 {p2Done && <AIModelBadge innerRef={aiModelBadgeRef} />}
 
                 <p className="text-base leading-loose mb-5">
-                    <ChoppyReveal wordDelay={40} initialDelay={p2Done ? 0 : 999999}>
+                    <ChoppyReveal wordDelay={25} initialDelay={p2Done ? 0 : 999999}>
                         <strong>TL;DR:</strong> There are plenty of AI coding tools, but{' '}
-                        <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5}>
+                        <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5} delay={400}>
                             <span className="inline-block">only one that knows your product</span>
                         </RoughAnnotation>{' '}
                         like <strong>PostHog Code</strong>.

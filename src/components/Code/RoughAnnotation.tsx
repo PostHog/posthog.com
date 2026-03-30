@@ -161,6 +161,39 @@ export function RoughAnnotation({
         }
     }, [])
 
+    // Recalculate when sibling styles change (e.g. ChoppyReveal progressively
+    // revealing text by toggling opacity/transform on sibling spans — the parent
+    // doesn't resize, but the annotated element can shift position).
+    useEffect(() => {
+        const el = elementRef.current
+        if (!el) return
+        // Watch the nearest block-level ancestor (the <p>) for subtree style mutations
+        const container = el.closest('p, div, section') || el.parentElement
+        if (!container) return
+
+        let timeout: ReturnType<typeof setTimeout>
+        let lastRect = ''
+        const recheck = () => {
+            const rect = el.getBoundingClientRect()
+            const key = `${rect.top},${rect.left},${rect.width},${rect.height}`
+            if (key !== lastRect) {
+                lastRect = key
+                if (annotationRef.current?.isShowing()) {
+                    annotationRef.current.show()
+                }
+            }
+        }
+        const observer = new MutationObserver(() => {
+            clearTimeout(timeout)
+            timeout = setTimeout(recheck, 30)
+        })
+        observer.observe(container, { attributes: true, subtree: true, attributeFilter: ['style'] })
+        return () => {
+            clearTimeout(timeout)
+            observer.disconnect()
+        }
+    }, [])
+
     return (
         <span ref={elementRef} className={`inline ${className}`}>
             {children}
