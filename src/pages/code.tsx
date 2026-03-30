@@ -673,7 +673,7 @@ function PostHogCodeLogomark({ className }) {
 function HeroSection() {
     const [showForm, setShowForm] = useState(false)
     return (
-        <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em]">
+        <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em] max-w-5xl mx-auto">
             <PostHogCodeLogo />
             <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-8 !mt-0">
                 The era of{' '}
@@ -801,9 +801,9 @@ function OldWaySection() {
                         &lt;codebase /&gt;
                     </strong>
                     {' as the source of truth, not how '}
-                    <em>humans</em> (or <em>agents</em>){' use your '}{' '}
+                    humans (or agents){' '}
                     <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
-                        <em>product</em>
+                        <em>use your product</em>
                     </RoughAnnotation>
                     {'.'}
                 </ChoppyReveal>
@@ -816,7 +816,7 @@ function OldWaySection() {
 // "The PostHog way" Section
 // ─────────────────────────────────────────────
 
-function PostHogWaySection() {
+function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
     const [p1Done, setP1Done] = useState(false)
     const [p2Done, setP2Done] = useState(false)
     const signalsWordRef = useRef<HTMLSpanElement>(null)
@@ -885,7 +885,7 @@ function PostHogWaySection() {
                 {p2Done && <AIModelBadge innerRef={aiModelBadgeRef} />}
 
                 <p className="text-base leading-loose mb-2">
-                    <ChoppyReveal wordDelay={40} initialDelay={p2Done ? 0 : 999999}>
+                    <ChoppyReveal wordDelay={40} initialDelay={p2Done ? 0 : 999999} onComplete={onComplete}>
                         {'One subscription, access to all the models you expect.'}
                     </ChoppyReveal>
                 </p>
@@ -908,12 +908,12 @@ function PostHogWaySection() {
     )
 }
 
-const TLDR = () => {
+const TLDR = ({ ready }: { ready: boolean }) => {
     return (
         <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
             <SectionLabel>TL;DR:</SectionLabel>
             <p className="text-base leading-loose mb-5">
-                <ChoppyReveal wordDelay={40}>
+                <ChoppyReveal wordDelay={40} initialDelay={ready ? 0 : 999999}>
                     {'There are plenty of AI coding tools, but only one that knows your product like PostHog Code.'}
                 </ChoppyReveal>
             </p>
@@ -1063,6 +1063,8 @@ function FAQ() {
 // ─────────────────────────────────────────────
 
 export default function CodePage() {
+    const [postHogWayDone, setPostHogWayDone] = useState(false)
+
     return (
         <>
             <SEO
@@ -1087,13 +1089,15 @@ export default function CodePage() {
                         </div>
                     </header>
 
-                    <OldWaySection />
+                    <div className="max-w-5xl mx-auto">
+                        <OldWaySection />
 
-                    <PostHogWaySection />
+                        <PostHogWaySection onComplete={() => setPostHogWayDone(true)} />
 
-                    <TLDR />
+                        <TLDR ready={postHogWayDone} />
 
-                    <FAQ />
+                        <FAQ />
+                    </div>
                 </div>
             </Editor>
         </>
