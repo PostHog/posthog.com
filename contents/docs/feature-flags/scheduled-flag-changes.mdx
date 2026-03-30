@@ -27,7 +27,11 @@ This is also useful if your releases fall outside normal working hours. For exam
    - Select **Add condition** to append rollout conditions to your flag at a scheduled time.
    - Select **Update variants** to update the variant keys, descriptions, payloads, or rollouts.
 4. Select the **Date and time** of your scheduled change using the date picker.
-5. Optionally, use the **Repeats** dropdown to set a recurrence interval (daily, weekly, monthly, or yearly). When a repeat interval is selected, an **Ends** date picker appears to set an optional end date for the recurring schedule.
+5. Optionally, use the **Repeats** dropdown to set a recurrence interval:
+   - **Daily**, **Weekly**, **Monthly**, or **Yearly** for fixed intervals
+   - **Custom (cron)** for advanced scheduling using cron expressions
+
+   When a repeat option is selected, an **Ends** date picker appears to set an optional end date for the recurring schedule.
 6. Click **Schedule**.
 
 Scheduled changes appear below the form, grouped into an **Active & upcoming** section and a collapsible **History** section.
@@ -41,7 +45,29 @@ Scheduled changes appear below the form, grouped into an **Active & upcoming** s
 
 ## Recurring schedules
 
-Recurring schedules repeat a scheduled change at a regular interval. You can choose from daily, weekly, monthly, or yearly recurrence and optionally set an end date.
+Recurring schedules repeat a scheduled change at a regular interval. You can choose from daily, weekly, monthly, or yearly intervals – or use a custom cron expression for more precise control. All recurring schedules support an optional end date.
+
+### Custom cron expressions
+
+Cron expressions let you define schedules like "every weekday at 9am" or "first day of each month at midnight." Select **Custom (cron)** in the **Repeats** dropdown and enter a standard 5-field cron expression:
+
+```
+┌───────────── minute (0-59)
+│ ┌─────────── hour (0-23)
+│ │ ┌───────── day of month (1-31)
+│ │ │ ┌─────── month (1-12)
+│ │ │ │ ┌───── day of week (0-6, Sunday = 0)
+│ │ │ │ │
+* * * * *
+```
+
+| Example | Description |
+|---------|-------------|
+| `0 9 * * 1-5` | Every weekday at 9:00 AM |
+| `0 0 1 * *` | First day of each month at midnight |
+| `30 14 * * 0` | Every Sunday at 2:30 PM |
+
+A human-readable preview appears below the input field so you can verify your schedule.
 
 Recurring schedules are supported for the following change types:
 
