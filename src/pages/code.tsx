@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
-import { IconArrowRight } from '@posthog/icons'
+import { IconArrowRight, IconCheck } from '@posthog/icons'
 import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
@@ -33,17 +33,19 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import usePostHog from '../hooks/usePostHog'
 import useProduct from '../hooks/useProduct'
 import { useApp } from '../context/App'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 // ─────────────────────────────────────────────
 // Download CTA Button
 // ─────────────────────────────────────────────
 
-function DownloadButton() {
+function DownloadButton({ autoFocus = false }: { autoFocus?: boolean }) {
     const posthog = usePostHog()
     const selectedProduct = useProduct({ handle: 'posthog_code' })
     const { setConfetti } = useApp()
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
+    const inputRef = useRef<HTMLInputElement>(null)
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -56,44 +58,33 @@ function DownloadButton() {
     if (submitted) {
         return (
             <p className="text-sm m-0 border border-green rounded-md p-3 bg-green/10">
-                <strong>You're on the list!</strong>
+                <strong>You&apos;re on the list!</strong>
                 <br />
-                We'll let you know when PostHog Code is ready.
+                We&apos;ll let you know when PostHog Code is ready.
             </p>
         )
     }
 
     return (
-        <div className="bg-accent border border-primary rounded p-4 max-w-sm mr-4">
-            <div className="mb-2">
-                <p className="text-base font-bold m-0">Join the waitlist</p>
-                <p className="text-[13px] text-secondary m-0">Launching Spring 2026</p>
-            </div>
-            <form onSubmit={handleSubmit} className="space-y-2">
-                <Input
-                    label="Email"
-                    type="email"
-                    size="md"
-                    direction="column"
-                    showLabel={false}
-                    placeholder="Email address"
-                    value={email}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                    required
-                />
-                <OSButton variant="primary" size="md" width="full" onClick={handleSubmit}>
-                    Get updates
-                </OSButton>
-            </form>
-            {/* <a
-                href="#"
-                className="inline-flex items-center gap-2 bg-[#1d1f27] dark:bg-white text-white dark:text-[#1d1f27] rounded-full px-5 py-2.5 text-sm font-semibold no-underline hover:opacity-90 transition-opacity"
-            >
-                <IconApple className="size-4" />
-                <span>Download for Mac</span>
-                <IconArrowRight className="size-4" />
-            </a> */}
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-2">
+            <h3 className="text-lg font-bold mb-2">Join the waitlist</h3>
+            <Input
+                ref={inputRef}
+                autoFocus={autoFocus}
+                label="Email"
+                type="email"
+                size="md"
+                direction="column"
+                showLabel={false}
+                placeholder="Email address"
+                value={email}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                required
+            />
+            <OSButton variant="primary" size="md" width="full" onClick={handleSubmit}>
+                Get updates
+            </OSButton>
+        </form>
     )
 }
 
@@ -102,7 +93,7 @@ function DownloadButton() {
 // ─────────────────────────────────────────────
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
-    return <div className="font-squeak text-secondary text-2xl uppercase mx-auto max-w-lg">{children}</div>
+    return <h2 className="text-secondary text-2xl mx-auto max-w-lg">{children}</h2>
 }
 
 // ─────────────────────────────────────────────
@@ -178,14 +169,7 @@ function AIModelBadge({ innerRef }: { innerRef: React.RefObject<HTMLSpanElement>
 function PostHogCodeLogo() {
     return (
         <>
-            <svg
-                width="229"
-                height="28"
-                viewBox="0 0 229 28"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="mb-8 dark:hidden"
-            >
+            <svg viewBox="0 0 229 28" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-8 dark:hidden h-6">
                 <g clipPath="url(#clip0_216_389)">
                     <path
                         d="M50.01 23.3376L49.6723 23.2968C48.6653 23.1688 47.7281 22.7031 47.0179 21.9696L33.2856 7.74258V28.0004H48.9971C50.4757 28.0004 51.669 26.8012 51.669 25.3284V25.2237C51.669 24.2632 50.953 23.454 50.0041 23.3376H50.01ZM39.2 23.5471C38.2162 23.5471 37.4187 22.7496 37.4187 21.7659C37.4187 20.7821 38.2162 19.9846 39.2 19.9846C40.1838 19.9846 40.9813 20.7821 40.9813 21.7659C40.9813 22.7496 40.1838 23.5471 39.2 23.5471Z"
@@ -687,46 +671,76 @@ function PostHogCodeLogomark({ className }) {
 // ─────────────────────────────────────────────
 
 function HeroSection() {
+    const [showForm, setShowForm] = useState(false)
     return (
-        <section className="my-6 @4xl/editor:mb-16 gap-8 @4xl/editor:gap-4 flex flex-col @4xl/editor:flex-row items-center">
-            <div>
-                <PostHogCodeLogo />
-                <h1 className="text-xl @xl:text-2xl font-bold leading-tight mb-5 !mt-0">
-                    {'The AI code editor that knows your '}
-                    <RoughAnnotation
-                        type="highlight"
-                        color="rgba(48, 164, 108, 0.2)"
-                        strokeWidth={1}
-                        padding={2}
-                        delay={300}
-                    >
-                        <em className="font-bold">product</em>
-                    </RoughAnnotation>
-                    {', not just your '}
-                    <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
-                        <em className="font-bold">codebase</em>
-                    </RoughAnnotation>
-                </h1>
+        <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em]">
+            <PostHogCodeLogo />
+            <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-8 !mt-0">
+                The era of{' '}
+                <RoughAnnotation
+                    type="highlight"
+                    color="rgba(48, 164, 108, 0.2)"
+                    strokeWidth={1}
+                    padding={2}
+                    delay={300}
+                >
+                    self-driving development
+                </RoughAnnotation>
+                {' is '}
+                <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
+                    <span className="font-bold">here</span>
+                </RoughAnnotation>
+            </h1>
 
-                <div className="@container">
-                    <DownloadButton />
+            <div className="gap-4 @4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
+                <div className="flex-[0_0_280px]">
+                    <p>
+                        PostHog Code is the only AI devtool that understands your <strong>product,</strong> not just
+                        your <strong>codebase</strong>.
+                    </p>
+                    <ul className="list-none p-0 mb-4 text-[15px] space-y-0.5">
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Understands product usage patterns
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Triages bugs and errors
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Creates pull requests automatically
+                        </li>
+                    </ul>
+
+                    <div className="@container max-w-sm">
+                        {showForm ? (
+                            <DownloadButton autoFocus />
+                        ) : (
+                            <>
+                                <OSButton variant="primary" size="lg" onClick={() => setShowForm(true)}>
+                                    Join the waitlist
+                                </OSButton>
+                                <p className="text-sm text-secondary mt-4">Test drives begin Spring 2026</p>
+                            </>
+                        )}
+                    </div>
                 </div>
-            </div>
 
-            <div className="@4xl/editor:flex-[0_0_475px] @4xl/editor:-mr-24 @5xl/editor:flex-[0_0_550px] @5xl/editor:-mr-36">
-                <ZoomImage>
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_light_4b3440dc2b.png"
-                        alt="PostHog Code screenshot"
-                        className="w-full rounded shadow-xl dark:hidden"
-                    />
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_dark_b29e5ed8f9.png"
-                        alt="PostHog Code screenshot"
-                        className="w-full rounded shadow-xl hidden dark:block"
-                    />
-                </ZoomImage>
-                {/* 
+                <div className="@4xl/flex-1">
+                    <ZoomImage>
+                        <img
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_light_4b3440dc2b.png"
+                            alt="PostHog Code screenshot"
+                            className="w-full rounded shadow dark:hidden"
+                        />
+                        <img
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_dark_b29e5ed8f9.png"
+                            alt="PostHog Code screenshot"
+                            className="w-full rounded hidden dark:block"
+                        />
+                    </ZoomImage>
+                    {/* 
                 <img
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
                     alt="PostHog Code screenshot"
@@ -738,6 +752,7 @@ function HeroSection() {
                     className="w-full rounded border border-primary hidden dark:block"
                 />
                  */}
+                </div>
             </div>
         </section>
     )
@@ -751,7 +766,7 @@ function OldWaySection() {
     const [p1Done, setP1Done] = useState(false)
 
     return (
-        <section className="relative mb-8 @2xl:mb-12">
+        <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
             <SectionLabel>
                 The{' '}
                 <InlineIcon icon={StickerTombstone} className="!size-10 !top-3 -rotate-1">
@@ -819,6 +834,7 @@ function OldWaySection() {
 function PostHogWaySection() {
     const [p1Done, setP1Done] = useState(false)
     const [p2Done, setP2Done] = useState(false)
+    const [p3Done, setP3Done] = useState(false)
     const signalsWordRef = useRef<HTMLSpanElement>(null)
     const signalsBoxRef = useRef<HTMLDivElement>(null)
     const aiModelRef = useRef<HTMLSpanElement>(null)
@@ -826,7 +842,7 @@ function PostHogWaySection() {
     const sectionRef = useRef<HTMLDivElement>(null)
 
     return (
-        <section ref={sectionRef} className="relative mb-8 @2xl:mb-12">
+        <section ref={sectionRef} className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
             <SectionLabel>
                 The <PostHogCodeLogomark className="-rotate-2 w-12 relative -top-0.5" /> PostHog way
             </SectionLabel>
@@ -889,14 +905,13 @@ function PostHogWaySection() {
                     </ChoppyReveal>
                 </p>
 
-                {p2Done && (
-                    <>
-                        <AIModelBadge innerRef={aiModelBadgeRef} />
-                        <p className="text-base leading-loose mb-2">
-                            One subscription, access to all the models you expect.
-                        </p>
-                    </>
-                )}
+                {p2Done && <AIModelBadge innerRef={aiModelBadgeRef} />}
+
+                <p className="text-base leading-loose mb-2">
+                    <ChoppyReveal wordDelay={40} initialDelay={p2Done ? 0 : 999999} onComplete={() => setP3Done(true)}>
+                        {'One subscription, access to all the models you expect.'}
+                    </ChoppyReveal>
+                </p>
 
                 {/* Clear float */}
                 <div className="clear-both" />
@@ -919,7 +934,7 @@ function PostHogWaySection() {
             </div>
 
             <p className="text-base leading-loose mb-5 mx-auto max-w-lg">
-                <ChoppyReveal wordDelay={40}>
+                <ChoppyReveal wordDelay={40} initialDelay={p3Done ? 0 : 999999}>
                     {'There are plenty of '}
                     <InlineIcon icon={StickerAi}>{' AI coding tools.'}</InlineIcon>
                     {" But there's only "}
@@ -931,7 +946,7 @@ function PostHogWaySection() {
                     </InlineIcon>
                 </ChoppyReveal>
             </p>
-            <div className="mx-auto max-w-lg @container">
+            <div className="mx-auto max-w-lg @container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
                 <DownloadButton />
             </div>
         </section>
@@ -1059,7 +1074,7 @@ const FAQ_ITEMS = [
 
 function FAQ() {
     return (
-        <section className="mb-8 mx-auto max-w-lg">
+        <section className="mb-8 mx-auto max-w-lg px-4 @xl:px-8">
             <h2 className="text-2xl m-0 mb-6">FAQ</h2>
 
             <Accordion
@@ -1083,11 +1098,23 @@ export default function CodePage() {
                 title="PostHog Code"
                 description="PostHog Code uses signals from production data to diagnose issues and generate pull requests — before you even know there's a problem."
             />
-            <Editor slug="/code">
+            <Editor slug="/code" maxWidth="100%" hasPadding={false}>
                 <div className="@container not-prose font-rounded">
-                    <HeroSection />
-
-                    <WavyDivider />
+                    <header className="relative mb-12">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_9608fcca70.png"
+                            className="dark:hidden absolute inset-0"
+                            imgClassName="h-full w-full"
+                        />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_dark_a92b0e022d.png"
+                            className="hidden dark:block absolute inset-0"
+                            imgClassName="h-full w-full"
+                        />
+                        <div className="relative flex flex-col items-center w-full px-4 @xl:px-8 py-4">
+                            <HeroSection />
+                        </div>
+                    </header>
 
                     <OldWaySection />
 

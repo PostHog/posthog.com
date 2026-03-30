@@ -48,6 +48,7 @@ interface EditorProps {
     maxWidth?: number | string
     children?: React.ReactNode
     hasTabs?: boolean
+    hasPadding?: boolean
     availableFilters?: {
         label: string
         value?: any
@@ -228,6 +229,7 @@ export function Editor({
     onSortChange,
     defaultSortValue,
     proseSize = 'sm',
+    hasPadding = true,
     cta,
     bookmark,
     extraMenuOptions,
@@ -698,9 +700,9 @@ export function Editor({
                             <ScrollWrapper scrollable={scrollable}>
                                 <article
                                     ref={articleRef ?? undefined}
-                                    className={`${getProseClasses(
-                                        proseSize
-                                    )} py-4 px-4 @xl:px-8 mx-auto transition-all ${
+                                    className={`${getProseClasses(proseSize)} ${
+                                        hasPadding ? 'py-4 px-4 @xl:px-8' : ''
+                                    } mx-auto transition-all ${
                                         fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-3xl'
                                     }`}
                                 >
