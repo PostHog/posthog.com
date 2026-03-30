@@ -62,7 +62,7 @@ This means it's not only an alternative to [Matomo](/blog/posthog-vs-matomo) but
 
 Both PostHog and Matomo are multi-product platforms. The big difference between them is that Matomo focuses on websites and content, while PostHog focuses on apps and products.
 
-Another big difference is pricing. Matomo is only free to self-host. On top of this, features like session replays, heatmaps, and A/B testing are only available as paid add-ons in Matomo, but are free to use in PostHog.
+Another big difference is pricing. Matomo's session replay, heatmaps, and A/B testing are paid add-ons in On-Premise, and heavily capped in Cloud. PostHog includes all of these for free – plus feature flags, error tracking, LLM analytics, and more that Matomo doesn't offer at all.
 
 <p>
 <ProductComparisonTable
@@ -76,12 +76,35 @@ Another big difference is pricing. Matomo is only free to self-host. On top of t
         'web_analytics.features.search_tools',
         'session_replay',
         'heatmaps',
-        'experiments',
+        'experiments.features.ab_testing',
+        'error_tracking',
+        'llm_analytics',
         'platform.deployment.open_source',
         'platform.deployment.eu_hosting',
     ]}
 />
 </p>
+
+<details>
+<summary>Main differences between PostHog and Matomo</summary>
+
+- Matomo has a Google Analytics importer for migrating historical GA3 and GA4 data; PostHog does not have a direct GA importer.
+- PostHog is entirely usage-based with a generous free tier; Matomo Cloud is subscription-based and On-Premise requires paid plugins for most advanced features.
+- PostHog has an official [MCP server](/docs/model-context-protocol) for AI coding tools; Matomo's MCP options are third party community projects, not officially maintained by Matomo. 
+- PostHog is HIPAA-ready on Cloud; Matomo Cloud cannot be made HIPAA compliant, just the self-hosted On-Premise version can.
+- PostHog includes a built-in [data warehouse](/data-stack) for importing and querying data from sources like Stripe, HubSpot, and S3 alongside your analytics. Matomo can export to BigQuery but has no warehouse import or unified query layer.
+
+</details>
+ 
+<details>
+<summary>Main similarities between PostHog and Matomo</summary>
+
+- Both offer EU data hosting for GDPR compliance
+- Both support cookieless tracking
+- Both can replace Google Analytics for standard web analytics use cases
+- Both have strong privacy-first positioning and data ownership guarantees
+
+</details>
 
 ### Why do companies use PostHog?
 
@@ -142,12 +165,37 @@ Since the split, Piwik Pro has grown to focus more on compliance and integration
         'web_analytics.features.search_tools',
         'session_replay',
         'heatmaps',
-        'experiments',
+        'experiments.features.ab_testing',
+        'error_tracking',
+        'llm_analytics',
         'platform.deployment.open_source',
         'platform.deployment.eu_hosting',
     ]}
 />
 </p>
+
+<details>
+<summary>Main differences between Piwik Pro and Matomo</summary>
+
+- Piwik Pro includes built-in tag management and consent management; Matomo requires separate plugins for both.
+- Piwik Pro offers a CDP for audience activation and third-party integrations; Matomo has no equivalent.
+- Matomo includes A/B testing and session recording (as plugins); Piwik Pro has neither.
+- Matomo is open source and fully self-hostable; Piwik Pro is closed-source.
+- Piwik Pro signs a HIPAA BAA on Enterprise plans; Matomo Cloud cannot be made HIPAA compliant.
+
+</details>
+ 
+<details>
+<summary>Main similarities between Piwik Pro and Matomo</summary>
+
+- Both offer EU hosting and GDPR compliance
+- Both have a GA3/Universal Analytics-style interface
+- Both support web and mobile analytics
+- Both integrate with Google Search Console and Google Ads
+
+</details>
+
+> 💡 **Good to know:** Piwik Pro discontinued its free Core plan in February 2026. Paid plans now start at **€35/month** (Business). Enterprise plans start at €4,392/year. There is a 30-day free trial.
 
 ### Why do companies use Piwik Pro?
 
@@ -174,9 +222,9 @@ Based on reviews from [G2](https://www.g2.com/products/piwik-pro/reviews), the f
 
 ### What is Plausible?
 
-Plausible is a lightweight, privacy-friendly, EU-hosted Google Analytics alternative. It helps teams comply with regulations like GDPR and CCPA while still giving them the key traffic metrics they care about.
+[Plausible](/blog/posthog-vs-plausible) is a lightweight, privacy-friendly, EU-hosted Google Analytics alternative. It helps teams comply with regulations like GDPR and CCPA while still giving them the key traffic metrics they care about.
 
-Plausible is also open source and self-hostable. This makes it a popular choice with indiehackers.
+[Plausible](/blog/best-plausible-alternatives) is also open source and self-hostable. This makes it a popular choice with indiehackers.
 
 #### Key features
 
@@ -199,27 +247,41 @@ Plausible focuses entirely on web analytics. It has a simplified, privacy-focuse
         'platform.pricing.free_tier',
         'web_analytics',
         'product_analytics',
-        {
-            path: 'product_analytics.features.autocapture',
-            label: 'Autocapture',
-            description: 'Capture clicks and pageviews without manual instrumentation',
-            values: ['Pageviews', false],
-        },
+        'product_analytics.features.autocapture',
         'product_analytics.features.cohorts',
-        {
-            path: 'web_analytics.features.search_tools',
-            label: 'Search tools',
-            description: 'Get keyword data and track search ad performance',
-            values: ['Keywords', true],
-        },
+        'web_analytics.features.search_tools',
         'session_replay',
         'heatmaps',
-        'experiments',
+        'experiments.features.ab_testing',
+        'error_tracking',
+        'llm_analytics',
         'platform.deployment.open_source',
         'platform.deployment.eu_hosting',
     ]}
 />
 </p>
+
+<details>
+<summary>Main differences between Plausible and Matomo</summary>
+
+- Plausible is cookieless by design; Matomo uses cookies by default (with a cookieless option).
+- Plausible has no free tier – plans start at $9/month; Matomo On-Premise is free to self-host.
+- Plausible has no session replay, heatmaps, or A/B testing; Matomo offers all three (as paid plugins on On-Premise).
+- Plausible has a minimal single-page dashboard; Matomo has a multi-page GA-style interface with deeper reporting.
+- Plausible's script is under 1KB; Matomo's is significantly heavier.
+
+</details>
+ 
+<details>
+<summary>Main similarities between Plausible and Matomo</summary>
+
+- Both are open source and privacy-focused Google Analytics alternatives
+- Both offer EU hosting and GDPR compliance without cookie consent banners
+- Both track pageviews, referrers, UTM campaigns, and conversion goals
+- Both integrate with Google Search Console for SEO keyword data
+- Both support self-hosting for full data ownership
+
+</details>
 
 ### Why do companies use Plausible?
 
@@ -246,9 +308,9 @@ According to social media, users choose Plausible for the following reasons:
 
 ### What is Google Analytics?
 
-Google Analytics has long been the go-to choice for website and app analytics thanks to Google's huge market share, a large amount of informational content, and its connection with the rest of the Google suite.
+[Google Analytics](/blog/posthog-vs-ga4) has long been the go-to choice for website and app analytics thanks to Google's huge market share, a large amount of informational content, and its connection with the rest of the Google suite.
 
-Google Analytics recently switched fully over from session-based Universal Analytics (GA3) to event-based GA4. This also introduced conversion funnels and retention tables that product teams are fans of.
+[Google Analytics](/blog/ga4-alternatives) switched from session-based Universal Analytics (GA3) to event-based GA4 – introducing conversion funnels and retention tables that product teams appreciate, but also a redesigned interface that frustrated many longtime users who preferred the old model.
 
 ### Key features
 
@@ -264,7 +326,7 @@ Google Analytics recently switched fully over from session-based Universal Analy
 
 ### How does Google Analytics compare to Matomo?
 
-Google Analytics that inspired Matomo to be what it is. Matomo has long surpassed Google Analytics in terms of features however, while keeping its focus on control and privacy.
+Matomo was built explicitly as a privacy-respecting alternative to Google Analytics. It matches GA4's core web analytics features while adding full data ownership, no sampling, and stronger GDPR compliance. GA4 wins on Google ecosystem integration; Matomo wins on privacy and data control.
 
 <p>
 <ProductComparisonTable
@@ -278,12 +340,35 @@ Google Analytics that inspired Matomo to be what it is. Matomo has long surpasse
         'web_analytics.features.search_tools',
         'session_replay',
         'heatmaps',
-        'experiments',
+        'experiments.features.ab_testing',
+        'error_tracking',
+        'llm_analytics',
         'platform.deployment.open_source',
         'platform.deployment.eu_hosting',
     ]}
 />
 </p>
+
+<details>
+<summary>Main differences between Google Analytics and Matomo</summary>
+
+- GA4 is event-based; Matomo is session-based like Universal Analytics, making it a more natural migration for UA users.
+- Matomo can import historical data from Google Analytics; GA4 cannot import data from other tools.
+- Matomo can be self-hosted for full data ownership; GA4 is cloud-only.
+- Matomo doesn't sample data on any plan; GA4 applies sampling to large exploration queries.
+- GA4 has a large free tier; Matomo's cloud is paid (free only for self-hosted).
+
+</details>
+ 
+<details>
+<summary>Main similarities between Google Analytics and Matomo</summary>
+
+- Both offer web analytics with traffic breakdown, referrers, and conversion tracking
+- Both support custom event tracking and goal analysis
+- Both support integrations with popular CMS and e-commerce platforms
+- Both track UTM campaigns and marketing attribution
+
+</details>
 
 ### Why do companies use Google Analytics?
 
@@ -312,6 +397,10 @@ According to [G2](https://www.g2.com/products/google-analytics/reviews), users c
 
 [Heap](/blog/posthog-vs-heap) describes itself as a digital insights platform. This means it offers both product analytics and session replay and supports marketing use cases with multi-touch attribution.
 
+It's known for its visual event editor that lets non-technical teams tag and track events without engineering support. 
+
+[Contentsquare](blog/best-contentsquare-alternatives) acquired Heap and has been integrating the two products.
+
 #### Key features
 
 - **Event autocapture:** Product teams don't need to rely on engineers to instrument all events. Heap has a visual editor for teams to tag events directly on-page for analysis.
@@ -326,7 +415,7 @@ According to [G2](https://www.g2.com/products/google-analytics/reviews), users c
 
 ### How does Heap compare to Matomo?
 
-Heap has much more focus on product analytics than Matomo. It lacks a simple web analytics dashboard, but does have autocapture.
+Heap is focused on product analytics. It lacks a simple web analytics dashboard and is weaker on privacy, but stronger on autocapture, user journey analysis, and out-of-the-box data science features.
 
 <p>
 <ProductComparisonTable
@@ -340,12 +429,34 @@ Heap has much more focus on product analytics than Matomo. It lacks a simple web
         'web_analytics.features.search_tools',
         'session_replay',
         'heatmaps',
-        'experiments',
+        'experiments.features.ab_testing',
+        'error_tracking',
+        'llm_analytics',
         'platform.deployment.open_source',
         'platform.deployment.eu_hosting',
     ]}
 />
 </p>
+
+<details>
+<summary>Main differences between Heap and Matomo</summary>
+
+- Heap is focused on product analytics with autocapture and a visual event editor; Matomo is focused on web analytics with optional product analytics add-ons.
+- Matomo is open source and self-hostable with EU hosting; Heap is closed-source with no EU data residency.
+- Matomo includes ecommerce analytics and CMS integrations; Heap focuses on product and app behavior.
+- Heap has no A/B testing or feature flags natively; Matomo has A/B testing.
+
+</details>
+ 
+<details>
+<summary>Main similarities between Heap and Matomo</summary>
+
+- Both offer session replay and heatmaps
+- Both support custom event tracking and funnel analysis
+- Both have cohort analysis for segmenting users
+- Both integrate with data warehouses like Snowflake and BigQuery
+
+</details>
 
 ### Why do companies use Heap?
 
@@ -388,6 +499,8 @@ According to G2 reviews, companies enjoy these three areas of Heap:
 
 ### How does Amplitude compare to Matomo?
 
+Amplitude is a product analytics tool; Matomo is a web analytics tool. They serve very different primary use cases, but there's increasing overlap as both platforms have expanded. Amplitude is stronger on product analytics and experimentation; Matomo is stronger on web analytics, privacy compliance, and data ownership.
+
 <p>
 <ProductComparisonTable
     competitors={['amplitude', 'matomo']}
@@ -400,12 +513,34 @@ According to G2 reviews, companies enjoy these three areas of Heap:
         'web_analytics.features.search_tools',
         'session_replay',
         'heatmaps',
-        'experiments',
+        'experiments.features.ab_testing',
+        'error_tracking',
+        'llm_analytics',
         'platform.deployment.open_source',
         'platform.deployment.eu_hosting',
     ]}
 />
 </p>
+<details>
+<summary>Main differences between Amplitude and Matomo</summary>
+
+- Amplitude has an AI insight builder for natural language queries and predictive analytics; Matomo has no equivalent AI features.
+- Matomo has strong ecommerce and CMS integrations; Amplitude focuses on app and product behavior.
+- Amplitude offers native in-app guides and surveys; Matomo has no equivalent.
+- Amplitude charges per Monthly Tracked User (MTU); Matomo charges per hit volume.
+- Matomo is open source and self-hostable; Amplitude is closed-source and cloud-only.
+
+</details>
+ 
+<details>
+<summary>Main similarities between Amplitude and Matomo</summary>
+
+- Both offer funnels, retention, cohorts, and user journey analysis
+- Both have session replay (Amplitude added this in 2022)
+- Both offer EU data residency options
+- Both integrate with Segment and other CDPs
+
+</details>
 
 ### Why do companies use Amplitude?
 
@@ -454,28 +589,40 @@ Fathom, like Plausible, has a much simpler feature set than Matomo. It focuses o
     rows={[
         'platform.pricing.free_tier',
         'web_analytics',
-        {
-            path: 'product_analytics',
-            label: 'Product analytics',
-            description: 'Custom events, trends, funnels, paths, and retention',
-            values: ['Limited', true],
-        },
-        {
-            path: 'product_analytics.features.autocapture',
-            label: 'Autocapture',
-            description: 'Capture events without manual instrumentation',
-            values: ['Pageviews', false],
-        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
         'product_analytics.features.cohorts',
         'web_analytics.features.search_tools',
         'session_replay',
         'heatmaps',
-        'experiments',
+        'experiments.features.ab_testing',
+        'error_tracking',
+        'llm_analytics',
         'platform.deployment.open_source',
         'platform.deployment.eu_hosting',
     ]}
 />
 </p>
+
+<details>
+<summary>Main differences between Fathom and Matomo</summary>
+
+- Fathom is closed-source and cloud-only; Matomo is open source and self-hostable.
+- Fathom is cookieless by design; Matomo uses cookies by default.
+- Fathom has no session replay, heatmaps, or A/B testing; Matomo offers all three.
+- Fathom has a minimal single-page dashboard; Matomo has GA-style multi-page reporting.
+
+</details>
+ 
+<details>
+<summary>Main similarities between Fathom and Matomo</summary>
+
+- Both are privacy-focused Google Analytics alternatives
+- Both track pageviews, visitors, referrers, UTM campaigns, and conversion goals
+- Both integrate with Google Search Console for SEO data
+- Both support Google Analytics data import for easy migration
+
+</details>
 
 > 💡 **Good to know:** Fathom isn't entirely EU hosted, but instead attempts to stay compliant with European regulation by:
 >
@@ -531,22 +678,40 @@ Umami, like Plausible and Fathom, focuses on web analytics. Unlike those two alt
         'platform.pricing.free_tier',
         'web_analytics',
         'product_analytics',
-        {
-            path: 'product_analytics.features.autocapture',
-            label: 'Autocapture',
-            description: 'Capture events without manual instrumentation',
-            values: ['Pageviews', false],
-        },
+        'product_analytics.features.autocapture',
         'product_analytics.features.cohorts',
         'web_analytics.features.search_tools',
         'session_replay',
         'heatmaps',
-        'experiments',
+        'experiments.features.ab_testing',
+        'error_tracking',
+        'llm_analytics',
         'platform.deployment.open_source',
         'platform.deployment.eu_hosting',
     ]}
 />
 </p>
+
+<details>
+<summary>Main differences between Umami and Matomo</summary>
+
+- Umami has a free cloud tier (3 sites, 100k events/month); Matomo Cloud starts at $29/month.
+- Umami has no session replay, heatmaps, or A/B testing; Matomo offers all three.
+- Umami is simpler to self-host and maintain; Matomo On-Premise requires more setup and plugin management.
+- Matomo has a larger plugin ecosystem and more integrations; Umami is intentionally lean.
+
+</details>
+ 
+<details>
+<summary>Main similarities between Umami and Matomo</summary>
+
+- Both are open source and self-hostable
+- Both use cookieless tracking by default
+- Both track pageviews, referrers, UTM campaigns, and custom events
+- Both are GDPR-compliant
+- Both offer EU hosting options
+
+</details>
 
 ### Why do companies use Umami?
 
@@ -562,6 +727,15 @@ According to its few [G2](https://www.g2.com/products/umami/reviews) reviews and
 >
 > Umami is very similar to other alternatives on this list, with the big upside that it is open source, easy to self-host, and free. This makes it a good choice for privacy-conscious, web analytics users.
 
+## Which Matomo alternative should you choose?
+
+- Need more than web analytics – like [session replay](/session-replay), [A/B testing](/experiments), [feature flags](/feature-flags), and [error tracking](/error-tracking)? **PostHog** goes far beyond pageviews and won't cost you a thing to start.
+- Want a near-identical experience to Matomo with a free cloud tier? **Umami** is the closest match.
+- Looking for simple, privacy-first web analytics with no setup overhead? **Plausible** or **Fathom** keep it minimal.
+- Enterprise team in a regulated industry needing consent management and strict compliance? **Piwik Pro** is built for that.
+- Need GA-style product analytics with autocapture and minimal engineering involvement? **Heap** is worth considering.
+- Heavily invested in Google Ads, BigQuery, and the Google ecosystem? **Google Analytics** is hard to beat for marketing attribution.
+
 ## Is PostHog right for you?
 
 Here's the (short) sales pitch.
@@ -572,4 +746,67 @@ We're biased, obviously, but we think PostHog is the perfect Matomo replacement 
 -   You value transparency. We're open source and open core.
 -   You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
 
-Check out [our product pages](/web-analytics) and [read our docs](/docs) to learn more.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can [check out our docs](/docs) to do it yourself.
+
+<WizardCTA />
+
+## Frequently asked questions
+ 
+<details>
+<summary>What is Matomo used for?</summary>
+
+Matomo is a privacy-first web analytics platform used to track website traffic – pageviews, sessions, referrers, campaigns, and conversions – with full data ownership. It's popular with content publishers, government agencies, universities, and e-commerce sites that need GDPR compliance without using Google Analytics. Advanced features like session recording, heatmaps, and A/B testing are available as paid add-ons.
+
+</details>
+
+<details>
+<summary>Is Matomo really free?</summary>
+
+Matomo On-Premise is free to download and self-host. But "free" comes with caveats: you're responsible for hosting, maintenance, and updates. Most of the features that make Matomo compelling beyond basic web analytics – session recordings, heatmaps, A/B testing, funnels, and cohorts – are premium paid plugins on On-Premise, priced annually per plugin. Matomo Cloud starts at $29/month.
+
+For a broader look at options, see our guide to the [best open-source analytics tools](/blog/best-open-source-analytics-tools).
+
+</details>
+
+<details>
+<summary>What's the best free Matomo alternative?</summary>
+
+**PostHog** offers the most complete free tier: 1 million analytics events, 5,000 session replays, 1 million feature flag requests, 100k error tracking events, and more per month – no credit card required. 
+
+**Umami** offers a free cloud tier for 3 sites and 100k events. 
+
+</details>
+
+<details>
+<summary>What's the best Matomo alternative for privacy?</summary>
+
+**Plausible** and **Fathom** are the strongest options for lightweight, cookieless web analytics with no personal data collection. **PostHog** and **Matomo** itself both support EU hosting, cookieless tracking, and HIPAA compliance for teams with more complex requirements. **Piwik Pro** is the best choice for regulated industries needing built-in consent management.
+
+</details>
+ 
+<details>
+<summary>Can I migrate from Matomo to PostHog?</summary>
+
+Yes. See our [Matomo to PostHog migration guide](/docs/migrate/matomo) for step-by-step instructions.
+
+</details>
+ 
+<details>
+<summary>What are the best web analytics tools in 2026?</summary>
+ 
+The [top web analytics tools in 2026](/blog/best-web-analytics-tools) include PostHog, Matomo, Plausible, Fathom, and Google Analytics 4. 
+
+The right choice depends on your privacy requirements, technical setup, and whether you need standard web metrics or deeper product analytics. See our full guide to the [best web analytics tools](/blog/best-web-analytics-tools).
+ 
+</details>
+ 
+<details>
+<summary>What are the best open-source analytics tools?</summary>
+ 
+The top open-source analytics tools include PostHog (MIT license), Matomo (GPL v3), Plausible (AGPL), and Umami. PostHog is the most feature-complete, combining web analytics, product analytics, session replay, feature flags, and more. 
+
+See our guide to the [best open-source analytics tools](/blog/best-open-source-analytics-tools).
+ 
+</details>
+ 
+<NewsletterForm />
