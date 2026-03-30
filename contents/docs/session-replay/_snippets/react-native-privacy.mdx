@@ -2,7 +2,7 @@
 
 By default all text, inputs, and images are masked. 
 
-Password inputs are always masked no matter your config. For React Native, this relies on the native view properties — your `<TextInput>` must use `secureTextEntry={true}` for the SDK to detect it as a password field. Similarly, fields like email are only auto-detected on iOS if you set the appropriate `textContentType` (e.g. `textContentType="emailAddress"`).
+Password inputs are always masked no matter your config. For React Native, auto-detection of sensitive fields relies on native view properties — so your `<TextInput>` must use `secureTextEntry={true}` for the SDK to recognize it as a password field, and fields like email are only auto-detected on iOS when you set the appropriate `textContentType` (e.g. `textContentType="emailAddress"`). Custom input components that don't render a native `UITextField` (iOS) or `EditText` (Android) under the hood won't be auto-detected at all — use `PostHogMaskView` or `accessibilityLabel="ph-no-capture"` to mask them explicitly.
 
 You can configure masking levels when you initialise PostHog
 
