@@ -259,6 +259,23 @@ You can create anomaly detection alerts using [PostHog AI](/docs/posthog-ai/over
 - "Set up an ensemble alert using Z-score AND Isolation Forest on daily signups"
 - "Simulate a MAD detector on my revenue insight for the last 30 days"
 
+### Breakdown support
+
+Anomaly detection alerts work with breakdown insights. When you create an anomaly detection alert on a trend with a breakdown:
+
+- Each breakdown value is monitored independently (up to 10 values)
+- The alert fires when any breakdown value shows an anomaly
+- Breakdown values with insufficient historical data are skipped
+- The simulation shows per-breakdown results so you can see how the detector performs on each value
+
+This is useful for monitoring metrics like revenue by product line or signups by country, where you want to detect anomalies in any individual segment without creating separate alerts for each.
+
+<CalloutBox icon="IconInfo" title="Note" type="fyi">
+
+The 10-value limit applies to the first 10 breakdown values by volume. If your insight has more than 10 breakdown values, only the top 10 are monitored.
+
+</CalloutBox>
+
 ### Tips
 
 - **Start with Z-score or MAD** — they work well for most time series data and are easy to understand.
@@ -303,7 +320,11 @@ Use this if you want to be alerted right away when the insight value rises/incre
 
 ## Alerts on breakdowns
 
-When you set an alert on a trend with a breakdown, the alert will be triggered when any of the breakdown values breaches the thresholds set.
+When you set an alert on a trend with a breakdown, the alert monitors each breakdown value and fires when any value meets the condition.
+
+**Threshold alerts** fire when any breakdown value breaches your thresholds.
+
+**Anomaly detection alerts** monitor each breakdown value independently (up to 10). The alert fires when any value shows an anomaly. See [Breakdown support](#breakdown-support) for details.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/breakdown_alert_7bd87114cb.png"
