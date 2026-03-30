@@ -1,5 +1,5 @@
 ---
-date: 2024-09-04
+date: 2026-03-30
 title: 'In-depth: PostHog vs Matomo'
 rootPage: /blog
 sidebar: Blog
@@ -10,6 +10,7 @@ featuredImage: >-
 featuredImageType: full
 author:
     - andy-vandervell
+    - natalia-amorim
 category: General
 tags:
     - Comparisons
@@ -20,21 +21,25 @@ seo:
 
 PostHog and Matomo help you understand how your users are using your site and product, but they're very different tools below the surface:
 
-[Matomo](/blog/best-matomo-alternatives) focuses on tracking sessions, making it ideal for running analytics on large content and e-commerce websites. It's designed to look and feel similar to Google Analytics 3, AKA Universal Analytics.
+[Matomo](/blog/best-matomo-alternatives) is a privacy-focused web analytics platform modelled closely on Google Analytics 3 (Universal Analytics). It's popular with content publishers, governments, universities, and e-commerce sites that want full data ownership and GDPR compliance without sacrificing familiar reporting.
 
-PostHog can also replace Google Analytics, but it offers a wider suite of tools for [product analytics](/product-analytics), [web analytics](/web-analytics), [session replays](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [user surveys](/surveys), and much more.
+PostHog [can also replace Google Analytics](/blog/posthog-vs-ga4), but it's built for engineering-led product teams. 
+
+On top of [web analytics](/web-analytics), it includes [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [surveys](/surveys), an [LLM observability suite](/llm-analytics), and a built-in [data warehouse](/data-stack), all in one platform with a shared data model.
 
 ## How is PostHog different from Matomo?
 
 ### 1. It's an all-in-one platform
 
-Matomo charges extra for features like funnel analysis, cohorts, path analysis, A/B testing, and session recording. These are also considered add-ons and are not tightly integrated with the main analytics product. In PostHog, all of these tools work together and each comes with a generous free tier.
+Matomo's core analytics product is strong, but features like funnel analysis, cohorts, A/B testing, and session recording are separate premium add-ons on On-Premise, and heavily capped in Cloud.
+
+In PostHog, every tool shares the same event data, so your analytics, replays, feature flags, and experiments all work together from day one. Each comes with a [generous free tier](/pricing).
 
 ### 2. It's built for engineers
 
 Rather than focusing on marketers like Matomo, PostHog focuses on the tools engineers need to build better products.
 
-On top of product analytics, this includes A/B testing, feature flags, a complete API, direct SQL access, and more. PostHog also includes a data warehouse so you can import and query data from other sources as well as destinations to send your data to external warehouses or other tools.
+On top of analytics, this includes [experimentation](/experiments), [feature flags](/feature-flags),  [error-tracking](/error-tracking), [logs](/logs), direct SQL access via [HogQL](/docs/hogql), an [MCP server](/docs/model-context-protocol), a [full suite of AI engineering products](/docs/ai-engineering) for teams building AI features, a [CDP](/cdp), and [a data warehouse](/data-stack) for querying external data sources.
 
 ### 3. Seamless integrations with the tools you already use
 
@@ -42,12 +47,17 @@ PostHog is built to work with the tools you already use.
 
 That means you can import data and query from sources like Stripe, Hubspot, Zendesk, S3, and more. You can also export data in batches to your data warehouse like Snowflake or BigQuery as well as a range of real time destinations like Google Ads and Slack.
 
+Matomo's integrations are stronger on the CMS and e-commerce side (WooCommerce, WordPress plugins, etc) but thinner on the data infrastructure side.
+
+<WizardCTA />
+
 ## Feature comparison
 
 ### Platform
 
 Both PostHog and Matomo offer a range of tools for tracking and analyzing your site and product. PostHog offers more tools for understanding and improving your product, while Matomo focuses more on marketing analytics.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'matomo']}
     rows={[
@@ -58,6 +68,7 @@ Both PostHog and Matomo offer a range of tools for tracking and analyzing your s
         'experiments',
         'surveys',
         'feature_flags',
+        'error_tracking',
         'platform.pricing.free_tier',
         {
             label: 'Free team members',
@@ -71,13 +82,15 @@ Both PostHog and Matomo offer a range of tools for tracking and analyzing your s
         'platform.developer.api',
     ]}
 />
+</p>
 
-> 💡 **Good to know:** Matomo's first paid tier comes with 1,500 heatmap pageviews and 150 session recordings per month.
+> 💡 **Good to know:** You only get 150 session recordings/month on the base $29 plan. To match PostHog's free tier of 5,000 replays, you'd need Matomo's $1,190/month plan.
 
 ### Web analytics
 
-Both PostHog and Matomo offer all the features you expect from [Google Analytics alternatives](/blog/ga4-alternatives).
+Both PostHog and Matomo cover the core web analytics use case and are solid [Google Analytics alternatives](/blog/ga4-alternatives).
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'matomo']}
     rows={[
@@ -93,11 +106,15 @@ Both PostHog and Matomo offer all the features you expect from [Google Analytics
         'web_analytics.features.snippet_install',
     ]}
 />
+</p>
+
+> 💡 **Good to know:** Matomo's web analytics is more full-featured for traditional marketing use cases – it includes media analytics, form analytics, and multi-channel attribution natively. PostHog's web analytics is more focused, but gives you a fuller picture of your users because it shares data with product analytics, session replay, feature flags, experiments, error tracking, and more.
 
 ### Product analytics
 
 Product analytics reveals the evolution of both tools. While PostHog has always focused on product analytics, Matomo has expanded its offering from a focus on web analytics.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'matomo']}
     rows={[
@@ -115,6 +132,7 @@ Product analytics reveals the evolution of both tools. While PostHog has always 
         'product_analytics.insights.features.sql_editor',
     ]}
 />
+</p>
 
 ### Integrations
 
@@ -125,6 +143,7 @@ A simple way to compare integrations:
 
 But this doesn't mean either lacks those types of integrations.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'matomo']}
     rows={[
@@ -150,17 +169,18 @@ But this doesn't mean either lacks those types of integrations.
         'platform.integrations.sentry',
     ]}
 />
+</p>
 
 > 💡 **Good to know:** Although PostHog doesn't have dedicated integrations for CMS or ecommerce platforms, our script snippet makes it easy to use PostHog with basically any of these including [Shopify](/docs/libraries/shopify), [WordPress](/docs/libraries/wordpress), and [Webflow](/docs/libraries/webflow).
 
 ### Security and compliance
 
-Matomo positions itself as a Google Analytics alternative that protects your data and customer privacy, but PostHog offers all of its privacy and compliance features (and more).
+Matomo positions itself as a [Google Analytics alternative](/blog/ga4-alternatives) that protects your data and customer privacy, but PostHog offers all of its privacy and compliance features (and more).
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'matomo']}
     rows={[
-        'platform.deployment.self_host',
         'platform.security.bot_blocking',
         'platform.deployment.reverse_proxy',
         'platform.security.hipaa_ready',
@@ -170,13 +190,170 @@ Matomo positions itself as a Google Analytics alternative that protects your dat
         'platform.security.two_factor_auth',
         'platform.security.saml_sso',
         'platform.security.history_audit_logs',
+        'platform.deployment.self_host',
     ]}
 />
+</p>
 
 > 💡 **Good to know:**
 >
 > -   Matomo's on-premise offering can be made HIPAA compliant, but not their cloud offering.
-> -   PostHog is self-hostable under a MIT license [without guarantee](/docs/self-host/open-source/disclaimer) or support.
+> -   PostHog is self-hostable under an MIT license, but it's complex to manage at scale and comes [without guarantee or support](/docs/self-host/open-source/disclaimer). 
+
+## Pricing
+
+### Matomo pricing
+
+Matomo Cloud starts at **$29/month** (billed monthly) for the Business plan, which covers up to 50,000 hits per month. Pricing scales with traffic volume up to 5M+ hits/month via a slider; for higher volumes, you contact sales. 
+
+All Cloud plans are hosted in Europe and include heatmaps, session recordings, funnels, cohorts, A/B testing, and custom reports. Session recordings are kept for 3 months on Cloud. Annual billing saves approximately 17%.
+
+Matomo On-Premise is **free to download and self-host** under the GPL v3 license, with unlimited team members and no data limits. However, most of the features included in Matomo Cloud (heatmaps, session recordings, A/B testing, funnels, cohorts, custom reports, and more) are **premium paid plugins** for On-Premise, sold separately on the Matomo Marketplace and priced annually per plugin.
+
+### PostHog pricing
+
+PostHog is **entirely usage-based**. You never pay if you stay under the free limits, and you can set billing limits to prevent surprise charges.
+
+| Feature | Free per month | Paid starts at |
+| --- | :---: | :---: |
+| Product analytics | 1M events | $0.00005/event |
+| Session replay | 5,000 recordings | $0.005/recording |
+| Surveys | 1,500 responses | $0.10/response |
+| Feature flags & A/B testing | 1M API requests | $0.0001/request |
+| Data warehouse | 1M synced rows | $0.000015/row |
+| Error tracking | 100k exceptions | $0.01/error |
+
+Team members are always unlimited. No credit card is required to get started, but adding one unlocks all paid features (billing limits keep you in control).
+
+## When to choose PostHog vs Matomo
+
+- Want a single platform for analytics, session replay, feature flags, experiments, error tracking, and more without stitching tools together? Go with **PostHog**.
+- Need a privacy-first web analytics tool that feels familiar to Google Analytics, with strong CMS and e-commerce integrations, or want to self-host? **Matomo** is built for that.
+
+### Recommendations by team type
+
+**For engineering-led product teams**
+- **PostHog** – SQL access, an [MCP server](/docs/model-context-protocol) for AI coding tools, [SDKs](/docs/libraries) for every major platform, error tracking, LLM analytics, and tight integration between analytics, feature flags, and experiments. Built by engineers, for engineers.
+
+**For marketing and content teams**
+- **Matomo** – Multi-channel attribution, form analytics, media analytics, and a familiar GA-style interface make it a natural fit for teams focused on traffic, campaigns, and conversions.
+
+**For growth and experimentation teams**
+- **PostHog** – Run A/B tests, roll out features incrementally with feature flags, and measure impact on conversion and retention, all in one workflow. Matomo's A/B testing is a paid add-on and isn't connected to your analytics data.
+
+**For teams building AI products**
+- **PostHog** – A [full suite of AI engineering products](/docs/ai-engineering) for tracking model performance, token costs, latency, and user interactions. Matomo has no equivalent.
+
+**For e-commerce and content sites**
+- **Matomo** – Native WooCommerce analytics, form analytics, media tracking, and deep CMS integrations (WordPress, Drupal, Joomla) make it the stronger choice for traditional web properties.
+
+**For privacy-conscious and regulated organizations**
+- Both are SOC 2 certified, GDPR-ready, and open source. **PostHog** adds HIPAA readiness, cookieless tracking, EU hosting, and a built-in data warehouse. **Matomo** On-Premise gives you full data sovereignty with no third-party cloud involved.
+
+**For early-stage startups**
+- **PostHog** – One platform that scales from first users to [product-market fit](/founders/product-market-fit-game) without swapping tools. The [generous free tier](/pricing) includes 1 million events, 5,000 replays, 1 million feature flag requests per month, and a lot more. [Startups can also qualify for $50k in free credits](/startups).
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>Can I migrate from Matomo to PostHog?</summary>
+
+Yes. See our [Matomo to PostHog migration guide](/docs/migrate/matomo) for step-by-step instructions on importing your historical data.
+
+</details>
+
+<details>
+<summary>Can PostHog replace Google Analytics?</summary>
+
+Yes, for many use cases. PostHog includes a dedicated [web analytics](/web-analytics) dashboard covering pageviews, sessions, traffic sources, conversions, bounce rate, and UTM tracking. Our own marketing team [uses PostHog instead of Google Analytics](/blog/posthog-marketing). You can also integrate via Google Tag Manager.
+
+For a detailed comparison, see [PostHog vs Google Analytics 4](/blog/posthog-vs-ga4).
+
+</details>
+
+<details>
+<summary>Is PostHog harder to set up than Matomo?</summary>
+
+Not significantly. Run `npx @posthog/wizard` in your terminal and our AI wizard handles framework detection, SDK config, and instrumentation automatically – faster than manually dropping a snippet. The web analytics dashboard is similar in layout to Matomo's.
+
+The main learning curve comes if you want to go deeper into product analytics, feature flags, or experimentation – but those are opt-in. Many teams start with web analytics and expand from there.
+
+<WizardCTA slim />
+
+</details>
+
+<details>
+<summary>Is PostHog right for you?</summary>
+ 
+PostHog is a great fit if you're:
+ 
+- An engineering-led startup or scale-up that needs a unified platform across analytics, experimentation, and feature management
+- A technical founder who wants one tool instead of five separate subscriptions
+- Building an AI product and need [LLM observability](/llm-analytics) tied to real user behavior
+ 
+PostHog is less ideal if you:
+ 
+- Primarily run a content or e-commerce site and only need session-level web analytics
+- Want a tool that looks and feels exactly like Google Analytics 3
+- Need a warehouse-native analytics layer that sits on top of your existing BigQuery or Snowflake setup
+ 
+</details>
+
+<details>
+<summary>Is PostHog GDPR compliant?</summary>
+
+Yes. PostHog offers EU-hosted cloud with data stored exclusively in Europe, cookieless tracking, data anonymization, and a GDPR-ready data processing agreement. PostHog is also SOC 2 Type II certified and HIPAA-ready. 
+
+See our [privacy documentation](/docs/privacy) for details.
+
+</details>
+
+<details>
+<summary>Is Matomo HIPAA compliant?</summary>
+
+Matomo On-Premise can be configured for HIPAA compliance. Matomo Cloud cannot be made HIPAA compliant. If HIPAA is a hard requirement and you don't want to self-host, PostHog Cloud is an option.
+
+</details>
+
+<details>
+<summary>Does PostHog offer a free trial?</summary>
+
+PostHog doesn't offer a time-limited free trial – instead it has a [free-forever tier](/pricing). No credit card required to start. Adding one unlocks all paid features, with billing limits you control.
+
+</details>
+
+<details>
+<summary>What are the best Matomo alternatives?</summary>
+
+The [best Matomo alternatives](/blog/best-matomo-alternatives) depend on your use case. For web analytics, popular options include PostHog, [Plausible](/blog/posthog-vs-plausible), [Fathom](/blog/posthog-vs-fathom), and [Google Analytics 4](/blog/posthog-vs-ga4). For teams that need product analytics on top of web analytics, PostHog and [Amplitude](/blog/posthog-vs-amplitude) are the most commonly considered.
+
+See our full [Matomo alternatives guide](/blog/best-matomo-alternatives).
+
+</details>
+
+<details>
+<summary>What are the best web analytics tools overall?</summary>
+
+The [top web analytics tools in 2026](/blog/best-web-analytics-tools) include PostHog, Matomo, Plausible, Fathom, Google Analytics 4, and Cloudflare Analytics. The right choice depends on your privacy requirements, technical setup, and whether you need standard web metrics or deeper product analytics. 
+
+See our full guide to the [best web analytics tools](/blog/best-web-analytics-tools).
+
+</details>
+
+---
+
+<NewsletterForm />
+
+
+
+
+
+
+
+
+
 
 ## Frequently asked questions
 
