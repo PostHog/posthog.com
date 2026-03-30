@@ -24,6 +24,7 @@ The MCP server provides these tools for working with Product Analytics:
 | `query-run` | Run any analytics query – trends, funnels, retention, lifecycle, paths, stickiness, or custom HogQL. Returns results directly in your editor. |
 | `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Useful when you want to inspect or modify the query before running it. |
 | `insight-create-from-query` | Create a saved insight from a query and optionally add it to a dashboard. |
+| `insights-create` | Create an insight directly from a query object (JSON dict). Accepts a name, query dict, optional description, favorited flag, and tags. |
 | `insight-get` | Get details for a specific insight by ID. |
 | `insights-get-all` | List all insights in the current project. Filter by name or type. |
 | `insight-query` | Run the query behind a saved insight and return fresh results. |
