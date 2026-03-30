@@ -93,6 +93,49 @@ root.render(
 );
 ```
 
+<details id="slim-entrypoint">
+<summary>Slim entrypoint for smaller bundles (advanced)</summary>
+
+To reduce your bundle size, use the **slim entrypoint** (`@posthog/react/slim`) instead of the standard `@posthog/react`. The slim entrypoint doesn't bundle the full `posthog-js` library, so you can pair it with the tree-shakeable `posthog-js/dist/module.slim` bundle.
+
+This reduces your bundle size from ~180KB to ~94KB.
+
+```react
+// src/index.js
+import { PostHogProvider, usePostHog } from '@posthog/react/slim'
+import posthog from 'posthog-js/dist/module.slim'
+import {
+    SessionReplayExtensions,
+    AnalyticsExtensions,
+} from 'posthog-js/dist/extension-bundles'
+
+posthog.init(process.env.REACT_APP_PUBLIC_POSTHOG_TOKEN, {
+    api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
+    defaults: '<ph_posthog_js_defaults>',
+    __extensionClasses: {
+        ...SessionReplayExtensions,
+        ...AnalyticsExtensions,
+    }
+});
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <React.StrictMode>
+        <PostHogProvider client={posthog}>
+            <App />
+        </PostHogProvider>
+    </React.StrictMode>
+);
+```
+
+**Important notes:**
+
+- The slim entrypoint **only** accepts a pre-initialized `client` prop. The `apiKey` prop is not available.
+- Always import from the same module path throughout your app to avoid duplicate bundles.
+- See the [tree shaking documentation](/docs/integrate#tree-shaking) for the full list of available extension bundles.
+
+</details>
+
 ### Calling PostHog methods
 
 By default, the `posthog-js` library automatically captures pageviews, element clicks, inputs, and more. Autocapture can be tuned in with [the configuration options](/docs/product-analytics/autocapture#configuring-autocapture).
