@@ -34,6 +34,17 @@ Numeric operators work on number-based properties like counts, ages, or amounts.
 | `between` / `not between` | Matches when the value is (or is not) within the specified range |
 | `minimum` / `maximum` | Matches based on the minimum or maximum value |
 
+<CalloutBox icon="IconInfo" title="Feature flag limitations" type="fyi">
+
+When using property filters in [Feature Flags](/docs/feature-flags), some numeric operators have limitations:
+
+- **`between` / `not between`** – Not supported for feature flags. Use `greater than or equal to` combined with `less than or equal to` instead.
+- **`minimum` / `maximum`** – Automatically converted to `greater than or equal to` / `less than or equal to`.
+
+These limitations exist because the feature flag evaluation service uses a different backend than other PostHog features.
+
+</CalloutBox>
+
 ## Presence operators
 
 Presence operators check whether a property exists on a person or event, regardless of its value.
