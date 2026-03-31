@@ -1,0 +1,27 @@
+## Q2 2026 objectives
+
+### Objective 1: Self serve ducklings
+- **Motivation:** It is PostHog's pattern to allow self serve of all features. Be scalable
+- **What we'll ship:**
+  - Multitenant Control Plane deployment of duckgres/duckling
+  - Data pipelines to move PostHog data into customer ducklings
+  - Metrics
+  - UI in PostHog app to allow for provisioning
+  - Pricing scheme for duckling
+  - System for attributing usage costs
+
+### Objective 2: Warehouse used across PostHog
+- **Motivation:** Better experience for modeled/external data across PostHog
+- **What we'll ship:**
+  - Support data modeling
+  - Support API endpoints
+  - UI to select "golden" tables that should be available in Product analytics & experiments
+  - Pipe to copy those "golden tables" from duckling to "vanilla S3 parquet" store that CH can query
+
+### Objective 3: Docs and Dev Rel
+- **Motivation:** Socialize the capabilities, limitations, and features of Ducklings, Duckgres, DuckHog, and DuckLake
+- **What we'll ship:**
+  - Docs for system and usage pattern
+  - Onboard product marketer
+  - Do "talks and demos" for teams inside PostHog
+  - More demos externally as well
