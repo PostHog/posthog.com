@@ -48,6 +48,7 @@ export const LOGOS = {
     gatsby: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/gatsby.svg',
     github: 'https://res.cloudinary.com/dmukukwp6/image/upload/github_mark_903e35d471.svg',
     go: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/go.svg',
+    granola: 'https://www.google.com/s2/favicons?domain=granola.ai&sz=64',
     googleAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/Google_Ads_logo_b59e784792.svg',
     groq: 'https://res.cloudinary.com/dmukukwp6/image/upload/groq_a0ed539e47.png',
     googleCloud: 'https://res.cloudinary.com/dmukukwp6/image/upload/Google_Cloud_14ebf7693d.svg',
