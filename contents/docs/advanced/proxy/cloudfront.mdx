@@ -136,7 +136,12 @@ This behavior routes requests to `/static/*` to your assets origin instead of th
 
 This behavior routes requests to `/array/*` to your assets origin. The `/array` path serves PostHog's remote configuration, which controls Feature flags, session recording settings, and other SDK behavior. Routing this through the assets origin ensures proper cache-control headers are preserved, allowing the SDK to refresh its configuration correctly.
 
-> **Important:** If `/array/*` routes through the main origin instead, config requests will still succeed but cache-control headers will be stripped. Without these headers, browsers fall back to heuristic caching and may cache stale configuration for hours or days. This can cause session recording conditions, Feature flags, and other SDK settings to stop updating.
+<CalloutBox icon="IconWarning" title="Route /array/* to the assets origin" type="caution">
+
+If `/array/*` routes through the main origin instead, config requests will still succeed but cache-control headers will be stripped. Without these headers, browsers fall back to heuristic caching and may cache stale configuration for hours or days. This can cause session recording conditions, feature flags, and other SDK settings to stop updating.
+
+</CalloutBox>
+
 
 If you encounter CORS errors after setup, you may need to create a custom response headers policy with `Access-Control-Allow-Headers` set to `*` for all headers. See [AWS's CORS troubleshooting guide](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web-cors) for details.
 
