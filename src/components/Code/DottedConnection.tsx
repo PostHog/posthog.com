@@ -55,8 +55,6 @@ export function DottedConnection({
         const originRect = svg.getBoundingClientRect()
         const sourceRect = source.getBoundingClientRect()
         const targetRect = target.getBoundingClientRect()
-        const containerRect = container.getBoundingClientRect()
-
         // Check if target is to the right (desktop / @2xl side-by-side layout)
         const isDesktop = targetRect.left > sourceRect.right
 
@@ -79,6 +77,8 @@ export function DottedConnection({
             return
         }
 
+        const margin = 4 // padding for stroke width
+
         if (!isDesktop) {
             // Mobile: down from source bottom to top of target
             const mobileD =
@@ -88,8 +88,8 @@ export function DottedConnection({
 
             setPath(mobileD)
             setDimensions({
-                width: containerRect.width,
-                height: containerRect.height,
+                width: Math.max(sx, tx) + margin,
+                height: Math.max(sy, ty) + margin,
             })
             return
         }
@@ -107,8 +107,8 @@ export function DottedConnection({
 
         setPath(d)
         setDimensions({
-            width: containerRect.width,
-            height: containerRect.height,
+            width: Math.max(sx, tx) + margin,
+            height: Math.max(sy, ty) + margin,
         })
     }, [sourceRef, targetRef, containerRef])
 
