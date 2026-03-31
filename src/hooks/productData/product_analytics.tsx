@@ -391,6 +391,8 @@ export const productAnalytics = {
     ],
     ai: {
         // title: '',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_10367c7399.svg',
+        imageAlt: 'PostHog AI and product analytics',
         description: 'answer product questions faster',
         skills: [
             'Builds dashboards and insights based on what you want visualized',

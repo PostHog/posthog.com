@@ -510,6 +510,8 @@ export const featureFlags = {
         ai: 'The PostHog MCP server lets your AI coding agent create and manage Feature Flags directly from your code editor. Create flags, configure targeting rules, and check rollout status – without switching to the PostHog app.',
     },
     ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/FEATURE_FLAGS_2a5dd8fbf2.svg',
+        imageAlt: 'PostHog AI and feature flags',
         description: 'set up, monitor, and manage feature flags using natural language',
         skills: [
             'Configures and modifies flags with simple prompts – including rollout rules, targeting, and variants',

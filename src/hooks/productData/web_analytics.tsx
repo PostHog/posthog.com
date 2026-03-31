@@ -450,6 +450,8 @@ export const webAnalytics = {
         ai: 'The PostHog MCP server lets your AI coding agent query web analytics data directly from your code editor. Check traffic trends, investigate anomalies, and build dashboards – without switching to the PostHog app.',
     },
     ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/WEB_ANALYTICS_9166800f02.svg',
+        imageAlt: 'PostHog AI and web analytics',
         description: 'surface why traffic changed, what is converting, and how acquisition ties to product usage',
         skills: [
             'Filters web traffic by path, geography, device, or referrer',
