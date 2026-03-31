@@ -23,6 +23,26 @@ There are a few reasons why you might not be seeing any LLM events:
 - There might be a delay in the events being processed. You can check the status of our ingestion on the [PostHog status page](https://status.posthog.com/).
 - If you are in a serverless environment make sure you are calling `posthog.shutdown()` before ending the request.
 
+## Debugging with OpenAI
+
+The [OpenAI](/docs/llm-analytics/installation/openai) and [Azure OpenAI](/docs/llm-analytics/installation/azure-openai) wrappers automatically capture properties that help you correlate events with OpenAI's logging dashboard and support tickets.
+
+| Property | Description | Use case |
+|----------|-------------|----------|
+| `$ai_completion_id` | The OpenAI response ID (e.g., `chatcmpl-xxx` or `resp_xxx`) | Navigate directly to OpenAI's Logs dashboard at `platform.openai.com/logs/{completion_id}` |
+| `$ai_system_fingerprint` | The model version fingerprint from OpenAI's response | Identify which specific model version handled your request |
+| `$ai_request_id` | The `x-request-id` header from OpenAI's response | Reference when filing OpenAI support tickets |
+
+### Correlate events with OpenAI Logs
+
+To investigate a generation in OpenAI's dashboard:
+
+1. Find the generation in PostHog's [**Generations** tab](https://app.posthog.com/llm-analytics/generations)
+2. Copy the `$ai_completion_id` property from the event details
+3. Go to `https://platform.openai.com/logs/{completion_id}` to see OpenAI's detailed log
+
+This lets you see OpenAI's view of the request, including the full prompt/response, token breakdown, and latency metrics.
+
 ## Solved community questions
 
 <SolvedQuestions
