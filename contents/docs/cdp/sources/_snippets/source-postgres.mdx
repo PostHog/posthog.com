@@ -1,5 +1,18 @@
 The Postgres connector can link your database tables to PostHog.
 
+## Access methods
+
+When linking a PostgreSQL source, you choose one of two access methods:
+
+| | Warehouse (default) | Direct query |
+|---|---|---|
+| **How it works** | Syncs data from your PostgreSQL database into PostHog's storage. Queries run against the synced copy. | Queries run directly against your PostgreSQL database without copying data. |
+| **Sync schedule** | Supports scheduled syncs (daily, weekly, etc.) with incremental, append, or full table sync types. | No scheduled syncs – data is always queried live. |
+| **Identifier** | Uses the **Prefix** field to namespace synced tables. | Uses the **Name** field to identify the source. |
+| **Best for** | Large datasets that you query frequently. | Smaller datasets where you always need the latest data. |
+
+> **Note:** Direct query mode is currently only supported for PostgreSQL sources.
+
 To link Postgres:
 
 1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog

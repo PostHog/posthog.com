@@ -21,7 +21,9 @@ To link a source, go to the Integrations tab, and click the **Sources** tab.
 
 ## Managed sources
 
-Provide your credentials and PostHog handles the entire extract and load process. Data syncs automatically from your source to PostHog's storage.
+Provide your credentials and PostHog handles the entire extract and load process. By default, data syncs automatically from your source to PostHog's storage (the **warehouse** access method).
+
+Some managed sources also support a **direct query** access method, where PostHog queries your database directly without syncing any data. This is currently available for [PostgreSQL](/docs/cdp/sources/postgres) sources. See the [PostgreSQL docs](/docs/cdp/sources/postgres) for details on choosing an access method.
 
 <ManagedSources />
 
@@ -89,6 +91,8 @@ This reloads the whole table on every sync. This is great for tables with common
 ## Syncing
 
 Once you add a source, you can see its status, sync frequency, and last successful run in the [sources page](https://app.posthog.com/data-management/sources). You can also reload or delete sources here.
+
+> **Note:** Sync settings only apply to sources using the warehouse access method. Sources using direct query don't sync data – they always query your database live.
 
 When you expand each source, you can see:
 
