@@ -239,7 +239,7 @@ function ActionFigureWallpaper() {
             className="hidden select-none wallpaper-action-figure:flex fixed inset-0 items-center justify-center overflow-hidden bg-[#d4c9b8] dark:bg-[#2a2520]"
         >
             {/* Text + logo */}
-            <div className="absolute inset-x-0 top-[12%] flex justify-center z-10">
+            <div className="absolute right-[90px] top-[12%] flex justify-center z-10">
                 <div className="relative">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_aa13fcacc0.png"
@@ -266,7 +266,7 @@ function ActionFigureWallpaper() {
             </div>
 
             {/* Right James figure */}
-            <div className="absolute -bottom-2 right-0 w-[clamp(220px,50vw,1200px)] z-10">
+            <div className="absolute -bottom-2 right-0 w-[clamp(220px,50vw,500px)] z-10">
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_03_24_at_11_06_31_1_08dd25932a.png"
                     alt=""
@@ -274,7 +274,7 @@ function ActionFigureWallpaper() {
             </div>
 
             {/* Left James figure */}
-            <div className="absolute -bottom-2 left-0 w-[clamp(400px,80vw,1900px)] translate-x-[5%] z-10">
+            <div className="absolute -bottom-2 right-0 w-[clamp(400px,80vw,800px)] z-10">
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_03_24_at_11_06_54_1_99fa60ee4d.png"
                     alt=""
