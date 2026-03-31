@@ -39,7 +39,7 @@ The goal is to:
 * Learn what data the tool may have access to
 * Give others a way to see it in action
 
-**2. Open an pull request in [Company Internal](https://github.com/PostHog/company-internal)**
+**2. Open an pull request in [Company Internal](https://github.com/PostHog/requests-for-comments-internal)**
 
 At the same time open an issue describing why we should adopt the tool. Anyone proposing a new vendor should think about the impact on the *whole* company, not just their team or use case.
 
