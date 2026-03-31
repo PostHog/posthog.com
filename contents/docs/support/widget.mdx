@@ -105,6 +105,119 @@ Support tickets are tied to the browser session by default. If a user switches b
 
 If the page URL contains a `ph_conv_restore` query parameter (from clicking the recovery link), tickets are automatically restored on page load. The parameter is removed from the URL after processing.
 
+## Identity verification
+
+If your app has logged-in users, identity verification works better than email-based recovery. You sign the user's distinct ID on your server, and tickets persist across browsers and devices automatically – no user action required.
+
+### How it works
+
+1. Your server computes an HMAC-SHA256 hash of the user's `distinct_id` using your team's `secret_api_token`
+2. You pass this hash along with the `distinct_id` to the widget
+3. The widget API verifies the signature and uses the `distinct_id` for ticket lookup instead of the browser session
+
+With identity verification enabled, users see all their tickets on any browser or device.
+
+### Server-side implementation
+
+Generate the identity hash on your backend. Never expose your `secret_api_token` in client-side code.
+
+<MultiLanguage>
+
+```python
+import hmac
+import hashlib
+
+def compute_identity_hash(distinct_id: str, secret_api_token: str) -> str:
+    return hmac.new(
+        secret_api_token.encode(),
+        distinct_id.encode(),
+        hashlib.sha256,
+    ).hexdigest()
+```
+
+```node
+const crypto = require('crypto');
+
+function computeIdentityHash(distinctId, secretApiToken) {
+  return crypto
+    .createHmac('sha256', secretApiToken)
+    .update(distinctId)
+    .digest('hex');
+}
+```
+
+```ruby
+require 'openssl'
+
+def compute_identity_hash(distinct_id, secret_api_token)
+  OpenSSL::HMAC.hexdigest('sha256', secret_api_token, distinct_id)
+end
+```
+
+```go
+import (
+    "crypto/hmac"
+    "crypto/sha256"
+    "encoding/hex"
+)
+
+func ComputeIdentityHash(distinctID, secretAPIToken string) string {
+    h := hmac.New(sha256.New, []byte(secretAPIToken))
+    h.Write([]byte(distinctID))
+    return hex.EncodeToString(h.Sum(nil))
+}
+```
+
+```php
+function computeIdentityHash(string $distinctId, string $secretApiToken): string {
+    return hash_hmac('sha256', $distinctId, $secretApiToken);
+}
+```
+
+</MultiLanguage>
+
+### Passing identity to the widget
+
+After computing the hash on your server, pass it to your frontend and include it in widget API calls:
+
+```javascript
+// Your backend returns these values
+const identityDistinctId = 'user_123';
+const identityHash = 'abc123...'; // HMAC hash from server
+
+// Include in API calls
+const response = await fetch('/api/conversations/v1/widget/message', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Conversations-Token': '<widget_public_token>'
+  },
+  body: JSON.stringify({
+    identity_distinct_id: identityDistinctId,
+    identity_hash: identityHash,
+    message: 'Hello, I need help!'
+  })
+});
+```
+
+The same `identity_distinct_id` and `identity_hash` parameters work for all widget API endpoints: sending messages, fetching tickets, and marking messages as read.
+
+<CalloutBox icon="IconWarning" title="Keep your secret API token secure" type="caution">
+
+Your `secret_api_token` must never be exposed in client-side code. Always compute the identity hash on your server and pass only the hash to the frontend.
+
+</CalloutBox>
+
+### When to use identity verification
+
+| Scenario | Recommended approach |
+|----------|---------------------|
+| **Logged-in users** | Use identity verification for seamless cross-device access |
+| **Anonymous visitors** | Use the default widget session (no setup required) |
+| **Mixed audience** | Use identity verification when users are logged in, fall back to widget session for anonymous users |
+
+If your team doesn't have a `secret_api_token` configured, identity verification is ignored and the widget falls back to session-based access control.
+
 ## Email notifications
 
 Configure your team to receive email alerts when new tickets arrive.
