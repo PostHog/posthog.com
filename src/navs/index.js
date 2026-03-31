@@ -687,6 +687,10 @@ export const handbookSidebar = [
                 url: '/handbook/company/brand-assets',
             },
             {
+                name: 'Style guide',
+                url: '/handbook/brand/style-guide',
+            },
+            {
                 name: 'Our design philosophy',
                 url: '/handbook/brand/philosophy',
             },
