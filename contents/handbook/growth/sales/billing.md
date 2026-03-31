@@ -107,13 +107,14 @@ After three consecutive missed payment periods, the customer must provide advanc
 
 ### India-based customers
 - GST: If you're a business, you're required to provide your GSTIN when signing up with PostHog. You would be liable to manage all GST under the Reverse Charge Mechanism.
-- 3DS payment failures: Indian banks require 3DS (one time password) for international card payments. It is your responisbility to complete the 3DS step (our billing system sends you a couple of reminders) - see above for repeated failed payments.
+- 3DS payment failures: Indian banks require 3DS (one time password) for international card payments. It is your responisbility to complete the 3DS step (our billing system sends you a couple of reminders) without which the payments will fail.
 
 
 ### Withholding taxes
 PostHog Inc is a US incorporated company and a US tax resident and we do not claim benefits under any Double Taxation Avoidance Agreements (DTAA). To support this, we provide:
 - Our Tax Residency Certificate
 - Our no PE (Permanent Establishment) Certificate
+Reach out to your Account Executive for these documents, available in the [shared Finance drive](https://drive.google.com/drive/folders/17GjgGr-vJO_azV2yx4PWHaKO0PgdztLN?usp=sharing).
  
 The full invoice amount is due. Any tax withheld will be treated as a short payment and pursued as outstanding.
 
