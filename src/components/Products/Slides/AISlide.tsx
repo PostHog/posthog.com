@@ -1,7 +1,8 @@
 import React from 'react'
-import ZoomHover from 'components/ZoomHover'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
+
+const SLIDE_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_hogs_d4c45b4550.png'
 
 interface AISlideProps {
     ai: any
@@ -13,11 +14,7 @@ export default function AISlide({ ai, productName }: AISlideProps) {
         <div className="bg-[#b8e0d8] h-full p-8 flex flex-col justify-center bg-ai">
             <div className="bg-white/80 backdrop-blur-lg h-full rounded-lg shadow-2xl flex flex-col @2xl:flex-row gap-8 @2xl:gap-12 p-8">
                 <aside className="text-center">
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/max_aeaeca84a3.png"
-                        alt="PostHog AI"
-                        className="max-w-[469px]"
-                    />
+                    <CloudinaryImage src={SLIDE_IMAGE} alt="PostHog AI" className="max-w-[469px]" />
                 </aside>
                 <div className="flex-1 prose">
                     <h2 className="text-5xl font-bold text-primary mb-4">
