@@ -62,6 +62,7 @@ import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
+import JaxxonLogo from 'components/CustomerLogos/JaxxonLogo'
 
 export interface Customer {
     slug: string
@@ -576,6 +577,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 ],
             },
         },
+    },
+    jaxxon: {
+        name: 'Jaxxon',
+        // toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
+        industries: ['Fashion'],
+        // users: ['Engineering', 'Leadership', 'Founders'],
+        notes: "Men's chains & accessories",
+        featured: true,
+        logo: JaxxonLogo,
+        height: 12,
     },
     juicebox: {
         name: 'Juicebox',
