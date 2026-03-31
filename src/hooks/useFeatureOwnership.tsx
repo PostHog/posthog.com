@@ -401,7 +401,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'session-summaries': {
         feature: 'Session summaries',
-        owner: ['signals'],
+        owner: ['replay'],
         label: 'feature/session-summaries',
     },
     signals: {
