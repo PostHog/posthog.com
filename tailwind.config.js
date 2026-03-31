@@ -246,6 +246,7 @@ module.exports = {
                 button: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
                 nav: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
+                rounded: ['Open Runde', 'sans-serif'],
                 squeak: ['Squeak', 'sans-serif'],
                 comic: [
                     'Comic Sans MS',
