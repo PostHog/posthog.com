@@ -1,7 +1,16 @@
 import React, { useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
-import { IconArrowRight, IconCheck, IconFlask, IconToggle, IconTrends, IconWarning } from '@posthog/icons'
+import {
+    IconArrowRight,
+    IconArrowUpRight,
+    IconCheck,
+    IconExternal,
+    IconFlask,
+    IconToggle,
+    IconTrends,
+    IconWarning,
+} from '@posthog/icons'
 import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
@@ -37,6 +46,8 @@ import usePostHog from '../hooks/usePostHog'
 import useProduct from '../hooks/useProduct'
 import { useApp } from '../context/App'
 import CloudinaryImage from 'components/CloudinaryImage'
+import Link from 'components/Link'
+import { IconDiscord } from 'components/OSIcons/Icons'
 
 // ─────────────────────────────────────────────
 // Download CTA Button
@@ -60,10 +71,20 @@ function DownloadButton({ autoFocus = false }: { autoFocus?: boolean }) {
 
     if (submitted) {
         return (
-            <p className="text-sm m-0 border border-green rounded-md p-3 bg-green/10">
+            <p className="text-sm mt-0 mb-4 border border-green rounded-md p-3 bg-green/10">
                 <strong>You&apos;re on the list!</strong>
                 <br />
-                We&apos;ll let you know when PostHog Code is ready.
+                We&apos;ll let you know when <span className="inline-block">PostHog Code</span> is ready.
+                <br />
+                <br />
+                <Link
+                    className="group flex items-center gap-1 text-sm font-medium"
+                    to="https://discord.com/invite/E9xV2WnR98"
+                    externalNoIcon
+                >
+                    <IconDiscord className="size-6 text-secondary group-hover:text-primary" />
+                    <span className="group-hover:underline">Join our Discord</span>
+                </Link>
             </p>
         )
     }
@@ -172,7 +193,7 @@ function AIModelBadge({ innerRef }: { innerRef: React.RefObject<HTMLSpanElement>
 function PostHogCodeLogo() {
     return (
         <>
-            <svg viewBox="0 0 229 28" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-8 dark:hidden h-6">
+            <svg viewBox="0 0 229 28" fill="none" xmlns="http://www.w3.org/2000/svg" className="dark:hidden h-6">
                 <g clipPath="url(#clip0_216_389)">
                     <path
                         d="M50.01 23.3376L49.6723 23.2968C48.6653 23.1688 47.7281 22.7031 47.0179 21.9696L33.2856 7.74258V28.0004H48.9971C50.4757 28.0004 51.669 26.8012 51.669 25.3284V25.2237C51.669 24.2632 50.953 23.454 50.0041 23.3376H50.01ZM39.2 23.5471C38.2162 23.5471 37.4187 22.7496 37.4187 21.7659C37.4187 20.7821 38.2162 19.9846 39.2 19.9846C40.1838 19.9846 40.9813 20.7821 40.9813 21.7659C40.9813 22.7496 40.1838 23.5471 39.2 23.5471Z"
@@ -364,7 +385,7 @@ function PostHogCodeLogo() {
                 viewBox="0 0 229 28"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="mb-8 hidden dark:inline-block"
+                className="hidden dark:inline-block"
             >
                 <g clipPath="url(#clip0_216_389)">
                     <path
@@ -677,7 +698,23 @@ function HeroSection() {
     const [showForm, setShowForm] = useState(false)
     return (
         <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em] max-w-5xl mx-auto">
-            <PostHogCodeLogo />
+            <div className="flex items-center justify-between mb-8">
+                <div>
+                    <PostHogCodeLogo />
+                </div>
+                <div>
+                    <Link
+                        className="group flex items-center gap-1 text-sm font-semibold -mr-4 text-secondary hover:text-primary"
+                        to="https://discord.com/invite/E9xV2WnR98"
+                        externalNoIcon
+                    >
+                        <IconDiscord className="size-6 text-secondary group-hover:text-primary" />
+                        <span className="group-hover:underline">Discord</span>
+                        <IconArrowUpRight className="size-4 inline-block text-secondary invisible group-hover:visible" />
+                    </Link>
+                </div>
+            </div>
+
             <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 @xl:mb-8 !mt-0">
                 The era of{' '}
                 <RoughAnnotation
