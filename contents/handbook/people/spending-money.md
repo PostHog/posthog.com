@@ -156,8 +156,11 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
     - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old or significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
     - Part of `#team-client-libraries` and need to purchase a phone for testing? Talk to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
 
-#### Yubikey
-We enforce the use of hardware security keys wherever we can. Every team member needs two Yubikeys. You can find them on Amazon, and can read more about how to get set up [on the MFA page](https://posthog.com/handbook/company/security#multi-factor-authentication).
+#### Yubikey (for specific roles only)
+
+Passkeys are the preferred way of securing accounts. In some cases Passkeys aren't supported or don't meet the standards needed for particularly sensitive infrastructure accounts.
+
+If you find yourself in a team requiring access to these kinds of tools where a Yubikey is required then you should purchase them as recommended on the [on the MFA page](https://posthog.com/handbook/company/security#multi-factor-authentication). If you aren't sure if you need one then you probably don't and should instead be using Passkeys
 
 #### Other equipment
 - Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items usually work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
