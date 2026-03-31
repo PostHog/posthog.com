@@ -1,18 +1,70 @@
-### Q1 2026 objectives
+### Q2 2026 objectives
 
-* Do everything in the [Query Performance mega-issue](https://github.com/PostHog/posthog/issues/39639) <TeamMember name="Robbie Coomber" photo />
-* Iterate on schema validation <TeamMember name="Sandy Spicer" photo />
-  * Schema in code
-  * Versioning
-* 99.9% uptime for alerts, subscriptions, exports, and query service <TeamMember name="Andy Zhao" photo /><TeamMember name="Vasco de Krijger" photo />
-* Improve query cache stability <TeamMember name="Andy Zhao" photo />
-  * Move to its own redis cluster
-  * Add per-team limits to cache usage and cache warming
-  * Use cluster mode in ElastiCache to enable scaling horizontally
-* Get on top of support / open github issues <TeamMember name="Vasco de Krijger" photo />
-  * Create high priority list of GitHub issues and do them
-* Re-imagine dashboards <FutureTeamMember href="/careers/product-engineer"/>
-  * Let customers define their own dashboard templates
-* Do a hackathon around https://github.com/PostHog/requests-for-comments-internal/pull/941 <TeamMember name="Anna Szell" photo />
-* Terraform provider beta hardening / path to GA <TeamMember name="Vasco de Krijger" photo />
+#### [Dashboard stability and enhancements](https://github.com/PostHog/posthog/issues/51815) <TeamMember name="Matt Pua" photo />
+
+Improve stability of a core product and ensure customers have a good first experience.
+
+- New and expanded tests to prevent unexpected failures
+- Collection of UI/UX changes that make working with dashboards a smoother experience
+- Better controls and components beyond showing just graphs
+
+#### [Improve platform stability and reliability](https://github.com/PostHog/posthog/issues/51810) <TeamMember name="Vasco de Krijger" photo />
+
+Improve the reliability of our system to leave a better experience for our customers.
+
+- A clear definition of "success" for alert checks, subscriptions, exports, and query service
+- Stability improvements to better deal with degraded infrastructure
+- A 99.95% success rate for our background jobs over the last 28 days rolling
+- Anomaly detection to proactively spot regressions
+- Add sensible usage limits to everything we own <TeamMember name="Andy Zhao" photo />
+
+#### [AI-first support for our owned components](https://github.com/PostHog/posthog/issues/51814) <TeamMember name="Vasco de Krijger" photo />
+
+Move along with the market to increase AI adoption and support.
+
+- Signal integration for specific alerts
+- AI suggestions during creation
+- Improved AI onboarding
+- Investigate ways to deal with adjusted usage patterns from AI
+
+#### [Revenue analytics as a platform](https://github.com/PostHog/posthog/issues/51804) <TeamMember name="Arthur Moreira de Deus" photo />
+
+Unlock the value of revenue analytics by making its data more easily available across PostHog.
+
+- Opinionated way of linking revenue data to customers (persons/groups)
+- Fix major accuracy issues (figures not matching Stripe)
+- Build insights from revenue analytics data
+
+#### [Reposition group analytics](https://github.com/PostHog/posthog/issues/48828) <TeamMember name="Arthur Moreira de Deus" photo />
+
+Group analytics pricing is not transparent and the value proposition is frequently misunderstood with cohorts.
+
+- Pricing RFC and actionables (e.g. change billing metric, adjust unit price)
+- Update docs to reflect the product key value driver
+- Announce new pricing (with marketing)
+
+#### Query performance Improvements <TeamMember name="Robbie Coomber" photo />
+
+Query performance across the app needs to improve to support our largest customers.
+
+- Finish backfilling sessions v3 on the new cluster
+- Fix the gaps in our query tagging
+- Ensure that new teams are created with an internal/test user cohort and help big customers migrate onto this
+- Explore person ID sharding and help other teams use preaggregation
+- Improve custom query performance with DMAT columns / and EAV table <TeamMember name="Sandy Spicer" photo />
+- Improve the query codebase <TeamMember name="Sandy Spicer" photo />
+
+#### Event schema <TeamMember name="Sandy Spicer" photo />
+
+Continue improving this feature
+
+- Add support for blocking events that don't match the schema
+
+
+#### Event schema <TeamMember name="Andy Zhao" photo />
+
+The taxonomy filter contributes to posthog feeling slow, and we can also help out posthog-ai by keeping the taxonomy recent, accurate, and fast
+
+- Expand properties-rs to capture property values as well as property names
+- Ensure that posthog-ai has access to a good quality taxonomy
 
