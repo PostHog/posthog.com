@@ -18,7 +18,7 @@ What makes us fad resilient is that you are free (and encouraged) to try new thi
 
 ## What is it *not*?
 
-This doesn't apply to making "cheap decisions". A cheap decision is one that can be easily completed or reversed, or one that only affects your work not other people's; for those types of decisions you should continue to follow the guidance in the [the software section of our spending money page](/handbook/people/spending-money#software). This is about larger scale, broad based adoption of new company-wide tools, or implementation of vendors that are going to be used in the PostHog product. 
+This doesn't apply to making "cheap decisions". A cheap decision is one that can be easily completed or reversed, or one that only affects your work not other people's. For those types of decisions you should continue to follow the guidance in the [the software section of our spending money page](/handbook/people/spending-money#software). This is about the adoption of new company-wide tools, or implementation of vendors that are going to be used in the PostHog product. 
 
 ## How does it work?
 
@@ -39,7 +39,7 @@ The goal is to:
 * Learn what data the tool may have access to
 * Give others a way to see it in action
 
-**2. Open an issue in [Company Internal](https://github.com/PostHog/company-internal)**
+**2. Open an pull request in [Company Internal](https://github.com/PostHog/company-internal)**
 
 At the same time open an issue describing why we should adopt the tool. Anyone proposing a new vendor should think about the impact on the *whole* company, not just their team or use case.
 
@@ -81,7 +81,7 @@ Also consider:
 **Alternatives and competition**
 * Why this tool instead of competitors?
 * What other credible options exist and how do they compare (cost, security, reputation, risk)?
-* What are other companies in our space using?
+* What are other companies in our space using? Checking their list of subprocessors is a good place to start.
   
 **Internal impact**
 * Have other engineers been consulted about technical impact or prior experience?
@@ -93,7 +93,8 @@ Also consider:
 
 **Customer defensibility**
 * If a customer asked why we use this tool/vendor and send data to them, could we clearly and transparently justify the decision?
-* Would a reasonable customer view this as a standard and responsible choice?
+* Would customers that fit our ideal customer profile view this as a standard and responsible choice?
+* How would enterprise-level customers react to this decision if we were selling PostHog to them?
 
 These are guidelines, not a rigid checklist.  The goal is for everyone to be thinking about the overall impact of introducing a new tool, and to allow for a holistic review of the risks against the benefits.
    
