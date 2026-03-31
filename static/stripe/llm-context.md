@@ -8,6 +8,7 @@ After provisioning, you received:
 
 - **api_token** (starts with `phc_`) — Your PostHog project API token. Used to initialize PostHog SDKs. Safe to expose in frontend code.
 - **api_host** — Your PostHog instance URL. Either `https://us.i.posthog.com` (US) or `https://eu.i.posthog.com` (EU).
+- **personal_api_key** (starts with `phx_`) — A Personal API Key for authenticated API access and MCP server configuration. Keep this secret and don't expose it in frontend code.
 
 ## Install PostHog with the wizard
 
@@ -18,6 +19,8 @@ npx @posthog/wizard@latest
 ```
 
 The wizard installs the right SDK, creates provider/config files, and sets up framework-specific configuration. It supports Next.js, React, Vue, Angular, Svelte, Astro, Remix, Django, Flask, and more.
+
+The wizard also reads `POSTHOG_PERSONAL_API_KEY` from your environment to configure the PostHog MCP server automatically — no browser-based OAuth needed.
 
 If the wizard doesn't support your framework, see the full list of SDKs and manual setup guides at https://posthog.com/docs/libraries.
 
