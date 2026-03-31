@@ -36,16 +36,30 @@ If you already have a PostHog account, you can connect it to Vercel instead:
 2. Click **Link Existing Account**
 3. Log in to your PostHog account if prompted
 4. Select the organization you want to link
-5. Select the project you want to connect
+5. Map PostHog projects to Vercel environments:
+   - **Production** - Required. The project used for your production environment.
+   - **Preview** - Optional. The project used for preview deployments. Defaults to production if not set.
+   - **Development** - Optional. The project used for local development. Defaults to production if not set.
 6. Click **Connect**
 
-You must have admin or owner access to the PostHog organization to link it. Billing stays with PostHog for linked accounts. When you link an existing account, PostHog automatically syncs your existing feature flags to Vercel and pushes the required environment variables.
+You must have admin or owner access to the PostHog organization to link it. Billing stays with PostHog for linked accounts. When you link an existing account, PostHog automatically syncs your existing feature flags to Vercel and pushes the required environment variables for each environment.
+
+## Changing environment mappings
+
+To change which PostHog projects are mapped to your Vercel environments after initial setup:
+
+1. Go to [**Organization settings**](https://app.posthog.com/settings/organization-settings) > **Integrations**
+2. Find the Vercel integration and open it
+3. Update the project mappings for Production, Preview, and Development
+4. Click **Save mapping**
+
+PostHog pushes the updated environment variables to Vercel after you save.
 
 ## Environment variables
 
 The integration adds these environment variables to your Vercel project:
 
-- `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` - Your project token, used to initialize the PostHog SDK
+- `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` - Your project token, used to initialize the PostHog SDK. If you configured different PostHog projects for each Vercel environment, this variable contains a different token per environment.
 - `NEXT_PUBLIC_POSTHOG_HOST` - The PostHog API host URL (either `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
 
 These `NEXT_PUBLIC_*` variable names work automatically in Next.js for both client and server environments. For other frameworks, you may need to copy the values to framework-specific variable names:
