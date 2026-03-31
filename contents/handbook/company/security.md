@@ -24,7 +24,9 @@ It is recommended to have most passkeys setup in 1password itself, with 1passwor
 
 ### YubiKeys for infrastructure accounts
 
-YubiKeys are required for certain infrastructure-specific accounts as determined by the security team. If your role requires access to these accounts, the security team will reach out to you directly and provide the necessary YubiKeys. Most commonly you will receive:
+YubiKeys are required for certain infrastructure-specific accounts as determined by the security team. If your role requires access to these accounts you will be told by the team - if in doubt ask in #team-security.
+
+We recommend purchasing:
 
 - One [YubiKey 5C Nano](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nano/) for use with the work computer (can be left plugged in most of the time)
 - One [YubiKey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) (or [YubiKey 5Ci](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5ci/) if you have an older iPhone model) for use with mobile devices, and as backup
