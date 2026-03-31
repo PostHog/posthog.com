@@ -153,7 +153,7 @@ But this doesn't mean either lacks those types of integrations.
             description: 'Export data to warehouses like S3 and BigQuery for storage and analysis',
             values: [true, 'BigQuery'],
         },
-        'platform.integrations.warehouse_import',
+        'platform.integrations.imports',
         {
             label: 'Slack',
             description: 'Send events, reports, and anomalies to Slack',
@@ -276,11 +276,13 @@ For a detailed comparison, see [PostHog vs Google Analytics 4](/blog/posthog-vs-
 <details>
 <summary>Is PostHog harder to set up than Matomo?</summary>
 
-Not significantly. Run `npx @posthog/wizard` in your terminal and our AI wizard handles framework detection, SDK config, and instrumentation automatically – faster than manually dropping a snippet. The web analytics dashboard is similar in layout to Matomo's.
+Not really, setup difficulty is roughly the same. If you're adding PostHog to a WordPress, Webflow, Shopify, or other CMS site, it's the same as Matomo: paste a [snippet](/docs/getting-started/install?tab=snippet) into your site's `<head>` and you're done. 
 
-The main learning curve comes if you want to go deeper into product analytics, feature flags, or experimentation – but those are opt-in. Many teams start with web analytics and expand from there.
+You can also run `npx @posthog/wizard` in your terminal and our AI wizard handles framework detection, SDK config, and instrumentation automatically. 
 
-<WizardCommand slim />
+<WizardCommand />
+
+The web analytics dashboard is similar in layout to Matomo's; the main learning curve comes if you want to go deeper into product analytics, feature flags, or experimentation – but those are opt-in. Many teams start with web analytics and expand from there.
 
 </details>
 
