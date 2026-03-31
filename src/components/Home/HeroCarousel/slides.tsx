@@ -511,7 +511,7 @@ export const TestRolloutSlide = () => {
             </p>
             <p className="text-secondary text-sm">
                 Use{' '}
-                <Link to="/posthog-code" state={{ newWindow: true }} className="font-semibold">
+                <Link to="/code" state={{ newWindow: true }} className="font-semibold">
                     PostHog Code
                 </Link>{' '}
                 for AI product development that writes code based on product data.
