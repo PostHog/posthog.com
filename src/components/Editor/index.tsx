@@ -39,6 +39,7 @@ import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Popover } from 'components/RadixUI/Popover'
 import Slider from 'components/RadixUI/Slider'
 import { WEBSITE_MODE_CLASSES } from '../../constants'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface EditorProps {
     slug?: string
@@ -47,6 +48,7 @@ interface EditorProps {
     maxWidth?: number | string
     children?: React.ReactNode
     hasTabs?: boolean
+    hasPadding?: boolean
     availableFilters?: {
         label: string
         value?: any
@@ -227,6 +229,7 @@ export function Editor({
     onSortChange,
     defaultSortValue,
     proseSize = 'sm',
+    hasPadding = true,
     cta,
     bookmark,
     extraMenuOptions,
@@ -578,7 +581,7 @@ export function Editor({
                     <main
                         data-app="Editor"
                         data-scheme="primary"
-                        className="@container flex-1 bg-primary relative h-full flex flex-col"
+                        className="@container/editor flex-1 bg-primary relative h-full flex flex-col"
                     >
                         <SearchBar
                             visible={showSearch}
@@ -673,6 +676,7 @@ export function Editor({
                                 </div>
                             </div>
                         )}
+
                         {hasTabs ? (
                             <div data-scheme="primary" className="bg-accent h-full">
                                 <article
@@ -696,9 +700,9 @@ export function Editor({
                             <ScrollWrapper scrollable={scrollable}>
                                 <article
                                     ref={articleRef ?? undefined}
-                                    className={`${getProseClasses(
-                                        proseSize
-                                    )} py-4 px-4 @xl:px-8 mx-auto transition-all ${
+                                    className={`${getProseClasses(proseSize)} ${
+                                        hasPadding ? 'py-4 px-4 @xl:px-8' : ''
+                                    } mx-auto transition-all ${
                                         fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-3xl'
                                     }`}
                                 >
