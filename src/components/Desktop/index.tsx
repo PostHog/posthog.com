@@ -221,15 +221,6 @@ const validateIconPositions = (
 
 function ActionFigureWallpaper() {
     const { addWindow } = useApp()
-    const [ready, setReady] = useState(false)
-    const loadedCount = useRef(0)
-
-    const handleImageLoad = useCallback(() => {
-        loadedCount.current += 1
-        if (loadedCount.current >= 4) {
-            setReady(true)
-        }
-    }, [])
 
     const handlePriceClick = () => {
         addWindow(
@@ -250,71 +241,45 @@ function ActionFigureWallpaper() {
             {/* Text + logo */}
             <div className="absolute inset-x-0 top-[12%] flex justify-center z-10">
                 <div className="relative">
-                    <motion.div
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={ready ? { scale: 1, opacity: 1 } : undefined}
-                        transition={{ delay: 1, duration: 0.4, ease: 'backOut' }}
-                    >
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_aa13fcacc0.png"
-                            alt="Introducing James Hawkins — The Ultra-Action Figure"
-                            className="w-[clamp(280px,50vw,600px)]"
-                            onLoad={handleImageLoad}
-                        />
-                    </motion.div>
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_aa13fcacc0.png"
+                        alt="Introducing James Hawkins — The Ultra-Action Figure"
+                        className="w-[clamp(280px,50vw,600px)]"
+                    />
                     <div className="absolute right-0 -bottom-0 translate-y-1/2">
                         <motion.div
-                            initial={{ scale: 0, opacity: 0 }}
-                            animate={ready ? { scale: 1, opacity: 1 } : undefined}
-                            transition={{ delay: 1.4, duration: 0.4, ease: 'linear' }}
+                            animate={{ scale: [1, 1.12, 1] }}
+                            transition={{
+                                duration: 1.2,
+                                repeat: Infinity,
+                                ease: 'easeInOut',
+                            }}
                         >
-                            <motion.div
-                                animate={ready ? { scale: [1, 1.12, 1] } : undefined}
-                                transition={{
-                                    duration: 1.2,
-                                    repeat: Infinity,
-                                    ease: 'easeInOut',
-                                }}
-                            >
-                                <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_143844_23796aaece.png"
-                                    alt="Only $996"
-                                    className="w-[clamp(80px,13vw,160px)]"
-                                    onLoad={handleImageLoad}
-                                />
-                            </motion.div>
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_143844_23796aaece.png"
+                                alt="Only $996"
+                                className="w-[clamp(80px,13vw,160px)]"
+                            />
                         </motion.div>
                     </div>
                 </div>
             </div>
 
             {/* Right James figure */}
-            <motion.div
-                initial={{ x: '100%' }}
-                animate={ready ? { x: 0 } : undefined}
-                transition={{ delay: 0, duration: 0.5, ease: 'easeOut' }}
-                className="absolute -bottom-2 right-0 w-[clamp(220px,50vw,1200px)] z-10"
-            >
+            <div className="absolute -bottom-2 right-0 w-[clamp(220px,50vw,1200px)] z-10">
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_03_24_at_11_06_31_1_08dd25932a.png"
                     alt=""
-                    onLoad={handleImageLoad}
                 />
-            </motion.div>
+            </div>
 
             {/* Left James figure */}
-            <motion.div
-                initial={{ y: '100%' }}
-                animate={ready ? { y: 0 } : undefined}
-                transition={{ delay: 0.4, duration: 0.5, ease: 'easeOut' }}
-                className="absolute -bottom-2 left-0 w-[clamp(400px,80vw,1900px)] translate-x-[5%] z-10"
-            >
+            <div className="absolute -bottom-2 left-0 w-[clamp(400px,80vw,1900px)] translate-x-[5%] z-10">
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_03_24_at_11_06_54_1_99fa60ee4d.png"
                     alt=""
-                    onLoad={handleImageLoad}
                 />
-            </motion.div>
+            </div>
         </button>
     )
 }
