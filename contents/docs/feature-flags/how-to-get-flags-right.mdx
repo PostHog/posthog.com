@@ -1,0 +1,173 @@
+---
+title: How to get flags right
+showTitle: true
+sidebar: Docs
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+## TL;DR
+
+- [Flags are pure functions](#flags-are-pure-functions) – same flag key + same distinct ID = same result. Always.
+- [Unexpected results are almost always input problems](#unexpected-results-are-almost-always-input-problems) – evaluate a flag a million times with the same inputs, get the same result a million times. If the result changed, an input changed.
+- [Resolve identity before evaluating flags](#resolve-identity-before-evaluating-flags) – `identify()` must happen before flag evaluation, or the hash uses the wrong ID. This is the most common input problem.
+- [Evaluate once, not continuously](#evaluate-once-not-continuously) – a flag is a one-time signal. Record the result. Re-evaluate only on meaningful state changes.
+- [Evaluate where the data lives](#evaluate-where-the-data-lives) – if the data is on your server, evaluate there. The further the flag is from the data, the more async complexity.
+- [Server-side local evaluation is the recommended default](#server-side-local-evaluation-is-the-recommended-default) – explicit inputs, your data right there, no workarounds.
+- [Have the value before you need it](#have-the-value-before-you-need-it) – client-side evaluation is async. [Bootstrap](/docs/feature-flags/bootstrapping) to eliminate the gap.
+- [`undefined` is not "flag is off" nor `false`](#undefined-is-not-false) – it means "not evaluated yet."
+- [Choose a flag type intentionally](#choose-a-flag-type-intentionally) – client, server, or both should be a deliberate decision, not a default.
+- [Clean up flags that have done their job](#clean-up-flags-that-have-done-their-job) – a flag at 100% is done. Remove it or archive it.
+- [Disable client-side evaluation for server-side flags](#disable-client-side-evaluation-for-server-side-flags) – don't let the client SDK re-evaluate what your server already decided.
+
+---
+
+## Flags are pure functions
+
+A flag hashes two things – the **flag key** and the **distinct ID** – and returns a deterministic result. Same inputs, same output. Every time.
+
+```
+hash("my-experiment", "user-123") → 0.31 → always 0.31
+```
+
+On top of that, PostHog layers property targeting (does this user match?), rollout percentage (is their position below the threshold?), and variant assignment. But the foundation is the hash: **same flag key + same distinct ID = same result.**
+
+<CalloutBox icon="IconInfo" title="Technically" type="info">
+
+"Pure function" means deterministic given a stable flag definition. The definition (rollout %, targeting rules, variants) is external state. Given the same definition, evaluation is fully deterministic on `flag_key` + `distinct_id`.
+
+</CalloutBox>
+
+### How the hash works
+
+PostHog uses SHA-1:
+
+```
+hash_key = "{flag_key}.{distinct_id}"
+position = parseInt(sha1(hash_key).slice(0, 15), 16) / LONG_SCALE  → float in [0, 1]
+in_rollout = position <= rollout_percentage / 100
+```
+
+For variants, a second hash with salt `"variant"` maps to variant ranges independently. The flag key is included so the same user gets independent assignments across different flags.
+
+If the flag has property targeting, PostHog first checks whether the person matches the conditions. If they don't match, the hash never runs – the flag returns `false`.
+
+<!-- TODO: Link to interactive hash explorer tool once embedded -->
+
+## Unexpected results are almost always input problems
+
+If you evaluate the same flag with the same distinct ID a million times, you will get the same result a million times. It's how the math works. The hash is deterministic. It doesn't drift, it doesn't have off days, and it doesn't return different values on Tuesdays.
+
+So when a flag returns something you didn't expect, **the flag is fine, the problem is in the inputs passed to the flag.** Something about the identity, the properties, or the flag definition wasn't what you assumed. Find what changed, and you've found the problem.
+
+If you keep running into flag issues and they're not [incidents](https://status.posthog.com), the conversation isn't about PostHog's flag behavior – it's about how your application coordinates the data that flags depend on. That's an engineering conversation about identity flows, property syncing, and evaluation architecture. No single config tweak fixes it.
+
+We're here to help with that – this guide, [PostHog AI](/docs/feature-flags/manage-flags-ai), and [professional services](https://posthog.com/professional-services) all exist for exactly this. But the starting point is always the same: **look at the inputs.**
+
+When something goes wrong, in order of likelihood:
+
+1. **Input problems** (most common). Wrong distinct ID, missing properties, changed flag definition. PostHog gives you tools to get the coordination right – [bootstrapping](/docs/feature-flags/bootstrapping), [property overrides](/docs/feature-flags/property-overrides), [server-side evaluation](/docs/feature-flags/local-evaluation).
+2. **Output problems.** The flag returned the right value but your code misread it – `undefined` treated as `false`, no handling for the loading gap, evaluating repeatedly instead of recording the result.
+3. **Actual incidents.** Check [status.posthog.com](https://status.posthog.com). If nothing there, it's #1 or #2. And even here: with [server-side local evaluation](/docs/feature-flags/local-evaluation), the SDK evaluates against cached flag definitions locally. PostHog being unreachable doesn't affect flags that are already cached. Add per-flag safe defaults and even a cold start during an outage returns usable values. An incident only breaks your flags if your implementation depends on PostHog being available at request time – which is itself an implementation gap you can close.
+
+## Resolve identity before evaluating flags
+
+Identity is the most common input problem. The hash takes two inputs: the flag key (stable) and the distinct ID (your responsibility). If the distinct ID is wrong at the moment of evaluation, the hash produces a valid but incorrect result. The flag is working perfectly – it just answered a question about the wrong person.
+
+If you call `identify()` after a flag has already been evaluated, the flag likely used the anonymous ID. The hash produced one result. After `identify()`, the distinct ID changes, the hash changes, and the next evaluation returns a different variant. The user "flipped" – but it's because the input changed.
+
+Call [`identify()`](/docs/product-analytics/identify) before any flag evaluation in auth flows. If you can't guarantee that timing, [bootstrap](/docs/feature-flags/bootstrapping) with the stable ID at init so the distinct ID is correct from the first millisecond. See [keeping flag evaluations stable](/docs/feature-flags/stable-identity-for-flags) for the full picture.
+
+### Don't rely on flag persistence to fix identity gaps
+
+If you've enabled [experience continuity](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional) (flag persistence across authentication), consider what that's telling you: the distinct ID is changing during the user's session, and you need PostHog to paper over it.
+
+That comes at a cost – a database read and write on every evaluation, no support for [local evaluation](/docs/feature-flags/local-evaluation), slower flag responses, and a [known issue](https://github.com/PostHog/posthog-js/issues/2623) where values can still change after `identify()`.
+
+The better fix is to make persistence unnecessary. Use [device bucketing](/docs/feature-flags/device-bucketing) for single-device consistency, or design your identity flow so the distinct ID [never changes](/docs/feature-flags/stable-identity-for-flags). If you need experience continuity, it usually means there's a gap in your identity resolution that's worth closing.
+
+## Evaluation architecture
+
+How you evaluate flags – where, when, and how often – determines the complexity of your implementation. Most workarounds exist because the evaluation happens in the wrong place or at the wrong time.
+
+### Evaluate once, not continuously
+
+A flag is a one-time signal, not a continuous dependency. Evaluate it once, record the result, serve from that recording. Re-evaluate only when something meaningful changes.
+
+Re-evaluating on every request creates cost, latency, and the conditions for "flipping" – you're giving the system repeated chances to return a different answer when inputs shift. That's not a bug. That's the pure function doing its job with different inputs.
+
+- **Feature rollouts** - Evaluate when the user's state changes (upgrades, joins a cohort). Between triggers, your app already knows the answer.
+- **Experiments** - One exposure per user. Evaluate once, record the variant, deliver that experience. If a user flips variants, the app re-asked a question it already had the answer to.
+
+### Evaluate where the data lives
+
+If you target a flag on `plan_type: "pro"`, your app originally told PostHog the user is Pro. Evaluate the flag from the same place that has that knowledge – your server. PostHog does the distribution math; your app provides the targeting data.
+
+If you evaluate client-side instead, the SDK needs to fetch that property from PostHog's servers – a round-trip to look up what you originally sent it. Any flag check before that completes evaluates against incomplete data.
+
+If you must evaluate client-side, use [`setPersonPropertiesForFlags()`](/docs/feature-flags/property-overrides#manual-overrides-with-setpersonpropertiesforflags) to set properties locally before evaluation. This avoids the round-trip when you already have the data in the browser.
+
+Property targeting is fine – just understand that the further the evaluation is from the data, the more async complexity you take on.
+
+### Server-side local evaluation is the recommended default
+
+[Server-side local evaluation](/docs/feature-flags/local-evaluation) is where the pure function model is fully legible:
+
+- **All inputs are explicit.** You pass the distinct ID and properties directly. When something's wrong, you log what you passed.
+- **Your data is right there.** User plan, account type, permissions – it's in your database at request time. No syncing, no fetching.
+- **No workarounds needed.** Client-side evaluation often requires `setPersonPropertiesForFlags()`, `onFeatureFlags()`, and bootstrap to bridge the gap between where the data lives and where the flag evaluates. Server-side eliminates the gap.
+
+Client-side evaluation is right when you need properties only available in the browser, real-time flag changes, or have no server. But you're trading explicit inputs for implicit ones, and every workaround bridges that gap.
+
+### Have the value before you need it
+
+Client-side flag evaluation is async – the SDK needs to fetch values from PostHog. Any flag check before that completes returns `undefined`, not `false`.
+
+**[Bootstrap](/docs/feature-flags/bootstrapping) is the fix.** Evaluate flags server-side and pass values to the client at init. The value exists before the page renders – no gap, no flicker.
+
+If you can't bootstrap, use `onFeatureFlags()` to wait. This means you will need a loading state (spinner, skeleton) until flags arrive – it prevents showing the wrong variant but doesn't prevent a delay.
+
+### `undefined` is not "flag is off" nor `false`
+
+`posthog.getFeatureFlag()` returns `undefined` before flags load. That means "not evaluated yet," not "flag is off."
+
+```javascript
+// Returns undefined before flags load – not false
+if (posthog.getFeatureFlag('my-experiment') === 'test') {
+  // Never runs during the loading gap
+}
+```
+
+Handle it with [bootstrap](/docs/feature-flags/bootstrapping) (preferred) or `onFeatureFlags()` (adds a loading state). You can check the current identity with `posthog.get_distinct_id()`.
+
+## Flag hygiene
+
+Flags are infrastructure. Like any infrastructure, they accumulate cost when left unattended. These are operational practices that keep your flag system clean and efficient.
+
+### Choose a flag type intentionally
+
+Every flag in PostHog is configured as client-side, server-side, or both via [evaluation contexts](/docs/feature-flags/evaluation-contexts). If all your flags are set to both, that usually means the decision was never made deliberately – and you're paying for client-side evaluation on flags that only need to exist on your server.
+
+Pick the type based on where the flag is actually consumed. Server-side flags that drive backend logic don't need client SDKs fetching and evaluating them. Client-side flags for UI variations don't need server-side evaluation. "Both" is a valid choice when a flag genuinely needs to be evaluated in both contexts – but it should be an active decision, not a default.
+
+### Clean up flags that have done their job
+
+A flag set to 100% of all users with no property targeting is a flag that has finished its job. It's always returning the same value – the rollout is complete, the experiment concluded, the feature is live. But the flag is still being evaluated on every request, still included in every SDK payload, and still adding to your bill.
+
+Remove the flag and hardcode the winning path. If you're not ready to remove it from code, at least archive it in PostHog so it stops being evaluated. Stale flags are the most common source of unnecessary flag evaluation cost. See [cutting costs](/docs/feature-flags/cutting-costs) for more.
+
+**An idea worth considering:** design your flag code paths with an escape hatch you control outside of PostHog. For example, a "gate flag" that your server reads once every 30 seconds (not per user) – when it's `true`, the feature is fully rolled out and your code skips the per-user flag evaluation entirely. This means you stop paying for per-user evaluations the moment a rollout is complete, even before you remove the flag from code. And you can dial it back by setting the gate flag to `false`. This is also another application of "evaluate once, not continuously" – if you cache flag results (even for stale flags), your per-evaluation costs drop to near zero while you wait for the code cleanup.
+
+### Disable client-side evaluation for server-side flags
+
+If a flag is evaluated server-side and the result is passed to your frontend through your own application logic, the client SDK doesn't need to evaluate it independently. But unless you explicitly disable the flag on the client, the SDK will still fetch and evaluate it – duplicating work your server already did.
+
+This is the practical extension of "evaluate once, not continuously." Your server evaluates, your application propagates the result, and the client consumes it as application state rather than re-asking PostHog. Disable flags in the client SDK that your server already handles to eliminate redundant evaluation and reduce payload size.
+
+## Further reading
+
+- [Identity resolution](/docs/product-analytics/identity-resolution) – how PostHog resolves who a user is
+- [Keeping flag evaluations stable](/docs/feature-flags/stable-identity-for-flags) – preventing the hash input from changing across auth transitions
+- [Local evaluation](/docs/feature-flags/local-evaluation) – server-side evaluation for explicit input control
+- [Bootstrapping](/docs/feature-flags/bootstrapping) – having flag values before the page renders
+- [Best practices](/docs/feature-flags/best-practices) – operational guidance for flag implementation

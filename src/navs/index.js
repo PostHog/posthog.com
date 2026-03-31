@@ -2153,6 +2153,10 @@ export const docsMenu = {
                             url: '/docs/getting-started/identify-users',
                         },
                         {
+                            name: 'Identity resolution',
+                            url: '/docs/product-analytics/identity-resolution',
+                        },
+                        {
                             name: 'Deploy a proxy',
                             url: '/docs/advanced/proxy',
                         },
@@ -4069,6 +4073,13 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
+                    name: 'How to get flags right',
+                    url: '/docs/feature-flags/how-to-get-flags-right',
+                    icon: 'IconBolt',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
                     name: 'Best practices',
                     url: '/docs/feature-flags/best-practices',
                     icon: 'IconStar',
@@ -4106,6 +4117,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/device-bucketing',
                     icon: 'IconLaptop',
                     color: 'blue',
+                },
+                {
+                    name: 'Keeping flag evaluations stable',
+                    url: '/docs/feature-flags/stable-identity-for-flags',
+                    icon: 'IconPerson',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Guides',
