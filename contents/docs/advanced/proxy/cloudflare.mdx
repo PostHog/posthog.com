@@ -57,14 +57,14 @@ async function handleRequest(request, ctx) {
   const search = url.search
   const pathWithParams = pathname + search
 
-  if (pathname.startsWith("/static/")) {
-    return retrieveStatic(request, pathWithParams, ctx)
+  if (pathname.startsWith("/static/") || pathname.startsWith("/array/")) {
+    return retrieveAsset(request, pathWithParams, ctx)
   } else {
     return forwardRequest(request, pathWithParams)
   }
 }
 
-async function retrieveStatic(request, pathname, ctx) {
+async function retrieveAsset(request, pathname, ctx) {
   let response = await caches.default.match(request)
   if (!response) {
     response = await fetch(`https://${ASSET_HOST}${pathname}`)
@@ -106,14 +106,14 @@ async function handleRequest(request, ctx) {
   const search = url.search
   const pathWithParams = pathname + search
 
-  if (pathname.startsWith("/static/")) {
-    return retrieveStatic(request, pathWithParams, ctx)
+  if (pathname.startsWith("/static/") || pathname.startsWith("/array/")) {
+    return retrieveAsset(request, pathWithParams, ctx)
   } else {
     return forwardRequest(request, pathWithParams)
   }
 }
 
-async function retrieveStatic(request, pathname, ctx) {
+async function retrieveAsset(request, pathname, ctx) {
   let response = await caches.default.match(request)
   if (!response) {
     response = await fetch(`https://${ASSET_HOST}${pathname}`)
@@ -149,8 +149,8 @@ export default {
 
 This code does three things:
 
-- **Routes requests:** The `handleRequest` function checks if the request is for static assets (`/static/*`) or API calls. Static assets go to PostHog's asset server, everything else goes to the main API.
-- **Caches static assets:** The `retrieveStatic` function caches PostHog's JavaScript SDK and other static files in Cloudflare's cache. This improves performance and reduces load on PostHog's servers.
+- **Routes requests:** The `handleRequest` function checks if the request is for static assets (`/static/*`) or remote config (`/array/*`), routing them to PostHog's asset server. Everything else goes to the main API.
+- **Caches assets:** The `retrieveAsset` function caches PostHog's JavaScript SDK, remote config, and other static files in Cloudflare's cache. This improves performance and preserves correct `cache-control` headers that the asset server provides.
 - **Preserves user location:** The `forwardRequest` function captures the real user IP from Cloudflare's `CF-Connecting-IP` header and sets it as `X-Forwarded-For`. This ensures PostHog records accurate user locations instead of showing all users at Cloudflare's data center locations. It also removes cookies for privacy.
 
 </Step>
@@ -335,8 +335,8 @@ function addCorsHeaders(response) {
 Then modify your `handleRequest` to use it:
 
 ```javascript
-const response = pathname.startsWith("/static/") 
-  ? await retrieveStatic(request, pathWithParams, ctx)
+const response = (pathname.startsWith("/static/") || pathname.startsWith("/array/"))
+  ? await retrieveAsset(request, pathWithParams, ctx)
   : await forwardRequest(request, pathWithParams)
 return addCorsHeaders(response)
 ```
