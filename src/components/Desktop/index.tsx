@@ -639,6 +639,74 @@ export default function Desktop() {
                         />
                     </div>
 
+                    {/* Action figure (April Fools) */}
+                    <div className="hidden select-none wallpaper-action-figure:flex fixed inset-0 items-center justify-center overflow-hidden bg-[#d4c9b8] dark:bg-[#2a2520]">
+                        {/* Text + logo */}
+                        <div className="absolute inset-x-0 top-[12%] flex justify-center z-10">
+                            <div className="relative">
+                                <motion.div
+                                    initial={{ scale: 0, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    transition={{ delay: 1, duration: 0.4, ease: 'backOut' }}
+                                >
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_aa13fcacc0.png"
+                                        alt="Introducing James Hawkins — The Ultra-Action Figure"
+                                        className="w-[clamp(280px,50vw,600px)]"
+                                    />
+                                </motion.div>
+                                <div className="absolute right-0 -bottom-0 translate-y-1/2">
+                                    <motion.div
+                                        initial={{ scale: 0, opacity: 0 }}
+                                        animate={{ scale: 1, opacity: 1 }}
+                                        transition={{ delay: 1.4, duration: 0.4, ease: 'linear' }}
+                                    >
+                                        <motion.div
+                                            animate={{ scale: [1, 1.12, 1] }}
+                                            transition={{
+                                                duration: 1.2,
+                                                repeat: Infinity,
+                                                ease: 'easeInOut',
+                                            }}
+                                        >
+                                            <CloudinaryImage
+                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_143844_23796aaece.png"
+                                                alt="Only $996"
+                                                className="w-[clamp(80px,13vw,160px)]"
+                                            />
+                                        </motion.div>
+                                    </motion.div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right James figure — pops in from the right */}
+                        <motion.div
+                            initial={{ x: '100%' }}
+                            animate={{ x: 0 }}
+                            transition={{ delay: 0, duration: 0.5, ease: 'easeOut' }}
+                            className="absolute -bottom-2 right-0 w-[clamp(220px,50vw,1200px)] z-10"
+                        >
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_03_24_at_11_06_31_1_08dd25932a.png"
+                                alt=""
+                            />
+                        </motion.div>
+
+                        {/* Left James figure — pops up from the bottom */}
+                        <motion.div
+                            initial={{ y: '100%' }}
+                            animate={{ y: 0 }}
+                            transition={{ delay: 0.4, duration: 0.5, ease: 'easeOut' }}
+                            className="absolute -bottom-2 left-0 w-[clamp(400px,80vw,1900px)] translate-x-[5%] z-10"
+                        >
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_03_24_at_11_06_54_1_99fa60ee4d.png"
+                                alt=""
+                            />
+                        </motion.div>
+                    </div>
+
                     {!websiteMode && (
                         <nav>
                             <motion.ul

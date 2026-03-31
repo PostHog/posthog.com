@@ -1237,12 +1237,19 @@ export interface SiteSettings {
         | '2001-bliss'
         | 'parade'
         | 'coding-at-night'
+        | 'action-figure'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
+
+const isAprilFirst = () => {
+    return true
+    const now = new Date()
+    return now.getMonth() === 3 && now.getDate() === 1
+}
 
 const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
     const lastReset = typeof window !== 'undefined' ? localStorage.getItem('lastReset') : null
@@ -1258,6 +1265,10 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         screensaverDisabled: true,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
         ...(!lastReset ? { experience: 'posthog' } : {}),
+    }
+
+    if (isAprilFirst()) {
+        siteSettings.wallpaper = 'action-figure'
     }
 
     if (isMobile || compact) {
@@ -1287,7 +1298,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const posthog = usePostHog()
 
     const [windows, setWindows] = useState<AppWindow[]>(
-        (location.key === 'initial' && location.pathname === '/' && isMobile) || !!paramsWindows
+        (location.key === 'initial' && location.pathname === '/' && (isMobile || isAprilFirst())) || !!paramsWindows
             ? []
             : getInitialWindows(element)
     )
@@ -1912,7 +1923,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         if (
-            (location.key === 'initial' && location.pathname === '/' && isMobile) ||
+            (location.key === 'initial' && location.pathname === '/' && (isMobile || isAprilFirst())) ||
             paramsWindows ||
             location.state?.skipPageUpdate
         ) {
