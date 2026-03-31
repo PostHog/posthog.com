@@ -151,6 +151,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Managed warehouse',
         owner: ['managed-warehouse'],
     },
+    'embedding-worker': {
+        feature: 'Embedding worker',
+        owner: ['signals'],
+        label: false,
+    },
     'early-access-features': {
         feature: 'Early access features',
         owner: ['feature-flags'],
@@ -207,7 +212,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'llm-gateway': {
         feature: 'LLM gateway',
         owner: ['posthog-ai'],
-        label: 'feature/llm-gateway',
+        label: false,
     },
     'live-events': {
         feature: 'Live events',
