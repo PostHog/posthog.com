@@ -1,53 +1,5 @@
 ## Q2 2026 objectives
 
-### Agent & Bot Analytics + AEO
-
-<TeamMember name="Lucas Ricoy" photo /> will be focusing on launching agent analytics and building AEO (Answer Engine Optimization) capabilities.
-
-**Motivation:** Users want to distinguish and understand what bot/agent traffic is driving on their sites. On the defensive side, they need to prevent unwanted bots from scraping site content. On the offensive side, they want to ensure their pages are seen by the right bots. AEO gives customers visibility into how AI answer engines reference their content, with Google Search Console and Bing integrations to close the loop.
-
-* Launch agent/bot analytics with full segmentation across web analytics, insights, and session replay
-* Build AEO dashboard with Google Search Console and Bing integration: LLM bot traffic over time, drill-down by bot and URL, folder-level filtering
-* Ship bot activity signals: anomaly detection for drops/spikes on tracked pages
-
-**We'll know we're successful when:** customers can segment agent vs human traffic end-to-end, and the AEO dashboard is adopted by early-access users.
-
-### Marketing Analytics
-
-<TeamMember name="Javier Bahamondes" photo /> will be focusing on finding Marketing Analytics' product-market fit and expanding beyond paid ads.
-
-**Motivation:** 4 of 6 recent sales feature requests were for Marketing Analytics — a direct revenue signal. Expanding beyond paid ads to social, SEO, and other channels makes PostHog more central to how marketing teams work. Adding actionability (pausing campaigns, changing budgets) turns MA into a control surface, not just a BI tool. Integrating with Workflows for campaign management increases stickiness and daily usage.
-
-* Expand channel support beyond paid ads: organic, social, referral, email
-* Explore workflow actions for closing the loop (campaign actions, budget controls, Workflows integration)
-* Run competitor research and customer interviews to define the MA differentiator
-* Explore SEO + AEO inside PostHog (coordinate with Natalia)
-
-**We'll know we're successful when:** Marketing Analytics supports the top organic/social channels and we have a clear, validated positioning for what makes MA different from competitors.
-
-### Live View & Heatmaps
-
-<TeamMember name="Jordan Mryyan" photo /> will be focusing on making live view a compelling real-time experience and improving heatmaps.
-
-**Motivation:** Live view can become a flywheel for PostHog — connecting it to experiments, error tracking, and session replays gives users reasons to come back daily. Heatmaps inherited in Q1 still have trust and UX issues that need to be resolved to unlock a credible premium offering.
-
-* Fix live view performance and ship a stable real-time dashboard with use cases (campaign launches, AB test tracking, milestone celebrations)
-* Cross-product integration: connect live view to experiments, error tracking, and session replays into a unified real-time dashboard
-* Fix heatmaps reliability and UX issues, define pricing strategy for premium features (comparisons, time snapshots)
-
-**We'll know we're successful when:** live view is stable and integrated with other PostHog products, and heatmaps reliability issues are resolved.
-
-### Activation
-
-New team member will be focusing on reversing the decline in Web Analytics activation.
-
-**Motivation:** Web Analytics activation has been declining and we don't fully understand why. Reversing this trend is critical to growth since users who don't activate never retain.
-
-* Investigate activation metric decline and identify what drives retention
-* Ship improved onboarding flows to get new users to value faster
-
-**We'll know we're successful when:** we've identified the root causes of activation decline and shipped onboarding changes that stabilize or reverse the trend.
-
 ### Signals, Skills & MCP
 
 The whole team will contribute to making Web Analytics a first-class citizen in PostHog's AI and automation ecosystem.
@@ -61,52 +13,59 @@ The whole team will contribute to making Web Analytics a first-class citizen in 
 
 **We'll know we're successful when:** PostHog AI reliably answers web analytics questions, and the team is using MCP in daily workflows.
 
+### Agent & Bot Analytics + AEO
+
+<TeamMember name="Lucas Ricoy" photo /> will be focusing on launching agent analytics and building some AEO (Answer Engine Optimization) and SEO tooling.
+
+**Motivation:** Users want to distinguish and understand what bot/agent traffic is driving on their sites. Some because they need to prevent unwanted bots from scraping site content, others want to ensure their pages are seen by the right bots. 
+
+* Launch agent/bot analytics with full segmentation across web analytics, product analytics, SQL/HogQL and MCP.
+* Build AEO tooling that works for founders
+* Ship activity signals: anomaly detection for drops/spikes on tracked pages (bots or not)
+
+**We'll know we're successful when:** customers can segment agent vs human traffic end-to-end, and the AEO dashboard is adopted by early-access users.
+
+### Marketing Analytics
+
+<TeamMember name="Javier Bahamondes" photo /> will be focusing on finding Marketing Analytics' product-market fit and expanding beyond paid ads.
+
+**Motivation:** We're getting many feature requests for Marketing Analytics: a direct revenue signal. Expanding beyond paid ads to social, SEO, and other channels makes PostHog more central to how technical marketing teams work. Adding actionability (pausing campaigns, changing budgets) turns MA into a control surface, not just a BI tool. Integrating with Workflows for campaign management increases stickiness and daily usage.
+
+* Expand channel support beyond paid ads: organic, social, referral, email
+* Explore workflow actions for closing the loop (campaign actions, budget controls, Workflows integration)
+* Run competitor research and customer interviews to define the MA differentiator
+
+**We'll know we're successful when:** Marketing Analytics supports the top organic/social channels and we have a clear, validated positioning for what makes MA different from competitors.
+
+### Live View & Heatmaps
+
+<TeamMember name="Jordan Mryyan" photo /> will be focusing on making live view a compelling real-time experience and improving heatmaps.
+
+**Motivation:** Live view can become a flywheel for PostHog: connecting it to experiments, error tracking, and session replays gives users reasons to come more often. Not to mention that the dopamine hit is so good. 
+
+* Improve live view and ship stable and feature complete real-time dashboard with use cases in mind (campaign launches, AB test tracking, milestone celebrations)
+* Cross-product integration: connect live view to experiments, error tracking, and session replay
+* Integrate real time capabilities into heatmaps
+* (Strecth) Fix heatmaps reliability and UX issues, define pricing strategy for premium features (comparisons, time snapshots)
+
+**We'll know we're successful when:** live view is stable and integrated with other PostHog products, and heatmaps reliability issues are resolved.
+
+### Activation
+
+The whole team will contribute on reversing the decline in Web Analytics activation.
+
+**Motivation:** Web Analytics activation has been declining and we don't fully understand why. Reversing this trend is critical to growth since users who don't activate never retain.
+
+* Investigate activation metric decline and identify what drives retention
+* Ship improved onboarding flows to get new users to value faster
+
+**We'll know we're successful when:** we've identified the root causes of activation decline and shipped onboarding changes that stabilize or reverse the trend.
+
 ### Stretch
 
 * Synthetic monitoring: revive the hackathon project for uptime and performance monitoring
 * Globe visualization: ship the beta globe view as a polished live view feature
 * Comparison date ranges: period vs period and YoY picker across web analytics
-
-## Q1 2026 objectives
-
-### Performance
-
-<TeamMember name="Lucas Ricoy" photo /> will be focusing on performance, reliability, and trust in Web Analytics.
-
-* Fix the current slowests paths (long date ranges, conversion goals)
-* Ship smart cache warming for Web Analytics for all projects
-* Optimize queries to use Sessions on Events/Sessions v3
-* Reuse intermediate query results
-* Ship pre-aggregated tables or incremental materialized views to all teams depending on experiment results
-
-### Marketing Analytics
-
-<TeamMember name="Javier Bahamondes" photo /> will be focusing on turning Marketing Analytics from "GA" to "feature parity".
-
-* Fix MA dashboard performance issues
-* Ship one opinionated default "Marketing Overview" report
-* Improve ROAS & attribution defaults
-* Clarify positioning: who MA is for and what problems it solves best
-* Stretch: Decide whether Marketing Analytics should become its own product surface
-
-### Agent & Bot Analytics
-
-<TeamMember name="Lucas Ricoy" photo /> will be focusing on shipping a beta version of agent/bot analytics.
-
-* Enable basic segmentation: human vs agent/bot in insights, web analytics and session replay
-* Publish documentation explaining detection methods and limitations
-* Ship an beta version of browser-controlled agent detection
-
-### Setup & Diagnostic
-
-<TeamMember name="Jordan Mryyan" photo /> will be focusing on reducing setup friction and misconfiguration pain.
-
-* Ship Installation Health v2 with clear, actionable fixes
-* Ship a setup/debug mode for the wizard that:
-  * Can identify common pitfalls
-  * Evaluate if all required integration is configured
-  * Identify changes on recent commits
-* Experiment with an fully AI-assisted onboarding for Web Analytics
 
 ## Q1 2026 recap
 
