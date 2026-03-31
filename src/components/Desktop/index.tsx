@@ -288,7 +288,8 @@ const ACTION_FIGURE_DISMISSED_KEY = 'action-figure-toast-dismissed'
 
 function ActionFigurePopup() {
     const { addWindow, siteSettings } = useApp()
-    const { addToast } = useToast()
+    const { addToast, removeToast } = useToast()
+    const toastId = useRef<number | null>(null)
     const [hasDismissed, setHasDismissed] = useState(() => {
         try {
             return localStorage.getItem(ACTION_FIGURE_DISMISSED_KEY) === 'true'
@@ -299,11 +300,23 @@ function ActionFigurePopup() {
 
     const isActive = siteSettings.wallpaper === 'action-figure'
 
+    const dismiss = () => {
+        setHasDismissed(true)
+        if (toastId.current) {
+            removeToast(toastId.current!)
+        }
+        try {
+            localStorage.setItem(ACTION_FIGURE_DISMISSED_KEY, 'true')
+        } catch {
+            // localStorage may be unavailable
+        }
+    }
+
     useEffect(() => {
         if (!isActive || hasDismissed) return
 
         const timer = setTimeout(() => {
-            addToast({
+            const newToastId = addToast({
                 title: 'New PostHog Heroes action figures',
                 description: (
                     <button
@@ -316,6 +329,7 @@ function ActionFigurePopup() {
                                     videoId="xxBqKIBBxQw"
                                 />
                             )
+                            dismiss()
                         }}
                         className="relative rounded overflow-hidden group mt-3 w-[calc(100%+15px)]"
                     >
@@ -335,16 +349,10 @@ function ActionFigurePopup() {
                 actionAsIcon: <IconX className="size-4" />,
                 verticalAlign: 'items-start',
                 duration: 999999999,
-                onAction: () => {
-                    setHasDismissed(true)
-                    try {
-                        localStorage.setItem(ACTION_FIGURE_DISMISSED_KEY, 'true')
-                    } catch {
-                        // localStorage may be unavailable
-                    }
-                },
+                onAction: () => dismiss(),
                 actionClassName: '!absolute -top-2 -right-2',
             })
+            toastId.current = newToastId
         }, 1000)
 
         return () => clearTimeout(timer)
