@@ -45,8 +45,6 @@ Some SSO features are add-ons. Please review each section below for details.
 
 SSO configuration mostly occurs in your Organization settings and is based on authentication domains. You need to have a verified authentication domain in order to set Just-in-time provisioning, SSO enforcement, [SAML](#saml) configuration, and [SCIM](#scim) provisioning.
 
-The authentication domains table shows the status of each feature per domain, including **SAML** and **SCIM** columns. These columns indicate whether the feature is enabled, not yet set up, or requires a plan upgrade or domain verification.
-
 Authentication domains need to be verified if you are on PostHog Cloud.
 
 To add an Authentication domain, go to your [Organization settings](https://us.posthog.com/settings/organization-authentication).
@@ -323,8 +321,6 @@ Use this option if you want to add additional configurations to your app that ar
 
 SCIM enables you to automatically sync users and their roles from your identity provider (IdP) into PostHog. This is useful for automatically creating accounts and assigning roles when someone joins your organization, and disabling accounts when they leave.
 
-> SCIM is currently in beta and available on request for customers on the Enterprise plan. [Contact us](https://posthog.com/talk-to-a-human) to enable it for your organization.
-
 ### How SCIM works
 
 - Assigning a user to the SCIM app in your IdP creates them in PostHog with the mapped role.
@@ -342,7 +338,7 @@ Before setting up SCIM, you need:
 
 ### Setting up SCIM
 
-1. In PostHog, navigate to Organization settings and go to [Authentication domains](https://app.posthog.com/settings/organization-authentication). The **SCIM** column in the table shows the current status for each domain – "SCIM enabled", "SCIM not set up", "Upgrade to enable SCIM", or "Verify domain to enable".
+1. In PostHog, navigate to Organization settings and go to [Authentication domains](https://app.posthog.com/settings/organization-authentication).
 
 2. Click the **(⋯)** next to your domain and select **Configure SCIM**.
 
