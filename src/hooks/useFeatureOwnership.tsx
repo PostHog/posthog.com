@@ -294,6 +294,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['posthog-ai'],
         label: 'feature/posthog-ai',
     },
+    'posthog-code': {
+        feature: 'PostHog Code',
+        owner: ['posthog-code'],
+        label: 'feature/posthog-code',
+    },
     'project-homepage': {
         feature: 'Project homepage',
         owner: ['platform-ux'],
