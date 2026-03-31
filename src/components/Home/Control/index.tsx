@@ -25,7 +25,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
 
 import Logo from 'components/Logo'
-import { useApp, isAprilFirst } from '../../../context/App'
+import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
 import MDXEditor from 'components/MDXEditor'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -1442,22 +1442,12 @@ export default function Home() {
         }
     `)
     const { appWindow } = useWindow()
-    const { setWindowTitle, addWindow } = useApp()
+    const { setWindowTitle } = useApp()
     const posthog = usePostHog()
 
     useEffect(() => {
         if (appWindow) {
             setWindowTitle(appWindow, 'home.mdx')
-        }
-        if (isAprilFirst()) {
-            addWindow(
-                <MediaPlayer
-                    newWindow
-                    location={{ pathname: `action-figure` }}
-                    key={`action-figure`}
-                    videoId="xxBqKIBBxQw"
-                />
-            )
         }
     }, [])
 

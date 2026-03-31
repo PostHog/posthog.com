@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { IconRewindPlay, IconX } from '@posthog/icons'
+import { IconPlay, IconRewindPlay, IconX } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import { IconDemoThumb, AppIcon, IconChangelogThumb } from 'components/OSIcons'
@@ -11,7 +11,7 @@ import { Screensaver } from '../Screensaver'
 import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
 import useTheme from '../../hooks/useTheme'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
@@ -281,6 +281,83 @@ function ActionFigureWallpaper() {
                 />
             </div>
         </button>
+    )
+}
+
+function ActionFigurePopup() {
+    const { addWindow, siteSettings } = useApp()
+    const [dismissed, setDismissed] = useState(false)
+    const [visible, setVisible] = useState(false)
+
+    const isActive = siteSettings.wallpaper === 'action-figure'
+
+    useEffect(() => {
+        if (!isActive) {
+            setVisible(false)
+            return
+        }
+        const timer = setTimeout(() => setVisible(true), 1000)
+        return () => clearTimeout(timer)
+    }, [isActive])
+
+    const handlePlay = () => {
+        addWindow(
+            <MediaPlayer
+                newWindow
+                location={{ pathname: `action-figure` }}
+                key={`action-figure`}
+                videoId="xxBqKIBBxQw"
+            />
+        )
+        setDismissed(true)
+    }
+
+    return (
+        <AnimatePresence>
+            {isActive && visible && !dismissed && (
+                <motion.div
+                    initial={{ y: 120, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 120, opacity: 0 }}
+                    transition={{ type: 'spring', damping: 22, stiffness: 260 }}
+                    className="fixed bottom-4 right-4 z-[9999] w-[300px]"
+                >
+                    <div
+                        data-scheme="primary"
+                        className="bg-primary border border-primary rounded-md shadow-xl overflow-hidden relative"
+                    >
+                        <div className="flex items-start justify-between gap-2 px-2.5 py-2">
+                            <div>
+                                <p className="text-sm font-bold text-primary leading-snug m-0 mb-0.5">
+                                    New PostHog Heroes action figures
+                                </p>
+                                <p className="text-xs text-secondary leading-snug m-0">Watch the reveal</p>
+                            </div>
+                            <button
+                                onClick={() => setDismissed(true)}
+                                className="shrink-0 text-secondary hover:text-primary transition-colors absolute top-2 right-2"
+                            >
+                                <IconX className="size-4" />
+                            </button>
+                        </div>
+                        <div className="px-2.5 pb-2.5">
+                            <button onClick={handlePlay} className="relative w-full rounded overflow-hidden group">
+                                <img
+                                    src="https://img.youtube.com/vi/xxBqKIBBxQw/mqdefault.jpg"
+                                    alt="Watch the action figure reveal"
+                                    className="w-full aspect-video object-cover"
+                                />
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                                    <div className="size-11 rounded-full bg-white/90 group-hover:bg-white flex items-center justify-center transition-colors shadow-lg">
+                                        <IconPlay className="size-5 text-black ml-0.5" />
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
     )
 }
 
@@ -742,6 +819,7 @@ export default function Desktop() {
                 {!websiteMode && <HedgeHogModeEmbed />}
             </ContextMenu>
             <NotificationsPanel />
+            <ActionFigurePopup />
             {confetti && (
                 <div className="fixed inset-0">
                     <ReactConfetti
