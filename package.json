@@ -79,7 +79,7 @@
         "@wistia/wistia-player-react": "^0.1.17",
         "ahooks": "^3.7.8",
         "algoliasearch": "^4.14.2",
-        "axios": "^1.12.2",
+        "axios": "^1.13.5",
         "chart.js": "^4.3.3",
         "chrome-aws-lambda": "^10.1.0",
         "cloudinary-react": "^1.8.1",
