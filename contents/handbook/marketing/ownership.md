@@ -84,6 +84,8 @@ Please share in the #merch channel. <TeamMember name="Kendal Hall" /> owns fulfi
 <summary>I have a question / problem / suggestion for the website</summary>
 
 The website is owned by <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" />. Generally, the best place to ask is the `#posthogdotcom` Slack channel.
+
+For larger pieces of work — a new product page, a significant copy overhaul — read [Working with the website team](/handbook/marketing/working-with-website) for the process to follow.
 </details>
 
 <details>
