@@ -1,23 +1,31 @@
-### Q1 2026 Objectives
-This quarter we’re focused on making experiments faster, clearer, and easier to work with by improving performance and results loading, and fixing rough edges in how experiments work. We’re also expanding data and replay support, and starting to use AI to help teams come up with better experiments.
+### Q2 2026 Objectives
+This quarter we're making experiments work great with AI agents, removing feature flag friction, and improving the results experience.
+
+#### AI
+
+##### API layer <TeamMember name="Marcel Poelker" photo />
+Get the API layer ready for AI agents. All experiment operations should be covered, well tested and work the same way whether the caller is our frontend or an agent.
+
+##### Skills <TeamMember name="Marcel Poelker" photo />
+Create experiment skills so PostHog AI knows how to use our MCP tools effectively.
+
+##### MCP <TeamMember name="Rodrigo Iloro" photo />
+External callers like PostHog Code or any other agent can connect via MCP and run experiment operations reliably.
+
+##### Signals <TeamMember name="Juraj Majerik" photo />
+Ship our first signal - notifying users when an experiment reaches significance.
+
+#### Feature flags <TeamMember name="Anders Asheim Hennum" photo />
+There's still a lot of friction with feature flags. Configuration is confusing and rollouts are hard to get right.
+
+##### Per-condition variant configuration
+Let each feature flag rule define its own variant split, so experiments and manual rollouts on the same flag don't interfere with each other.
+
+##### Rule-level exposure attribution
+Tag flag evaluations with the specific rule that triggered the assignment, so experiment analysis only counts traffic from the experiment's targeting rule.
 
 #### Query performance <TeamMember name="Juraj Majerik" photo />
-For large-scale users, experiment queries are timing out or taking many minutes to load. We will build a way to precompute the heavy parts of these queries on a schedule, so that the final computation runs in a reasonable amount of time. This will be enabled for select customers and be easily toggleable. The goal is to use high-scale customers as a testing ground, so we have this solution in place before we onboard more users at this scale.
+Extend precomputation to the main subquery for all metric types. Make precomputation observable - see where it kicked in, how it ran and compare results against direct-scan queries.
 
-#### Anonymous -> Logged in experiments: full support <TeamMember name="Anders Asheim Hennum" photo />
-Last quarter, we implemented support for running reliable experiments across the anonymous-to-authenticated flow, currently available in posthog-js. This quarter, we will extend this support to all libraries and gather user feedback on usability and whether it works well for them in practice.
-
-#### Experiment phases <TeamMember name="Anders Asheim Hennum" photo />
-Currently, changing rollout conditions mid-experiment creates a poor experience, with confusing warnings and potentially invalid statistical analysis. We will introduce experiment phases: distinct periods within an experiment where rollout conditions stay the same. This makes it clear when and how an experiment changed over time, and makes the results easier to reason about.
-
-#### Integrate session replay summaries <TeamMember name="Rodrigo Iloro" photo />
-PostHog now supports session replay summaries via chat. We will integrate replay summaries into experiments so they help explain and add context to the experiment results.
-
-#### Extend data warehouse support <TeamMember name="Rodrigo Iloro" photo />
-We will extend data warehouse experiment support to funnels. We will also improve the overall experience by providing clear guidance on how to run data warehouse experiments, and we will two data warehouse experiments ourselves to build up hands-on knowledge within the team.
-
-#### AI generated experiments <TeamMember name="Juraj Majerik" photo />
-We will help users come up with experiment ideas interactively via chat. We will use existing insights, recordings and "signals" as input, combine them with user-provided context. Then we will generate an experiment idea, set up the experiment with metrics, and recommend how to implement it in code.
-
-#### Experiments for agents <TeamMember name="Marcel Poelker" photo />
-Agents (PostHog AI and MCP) need to create and manage experiments just like users do through the UI. Today, the tooling either bypasses our APIs or reimplements logic that already exists in our serializers. We will clean up the experiment API to make operations explicit and obvious, unify how agents interact with experiments through a single well-defined interface, and make sure anything you can do in the UI, an agent can do too.
+#### Loading experience <TeamMember name="Rodrigo Iloro" photo />
+Loading is painful for our high-volume users. Consolidate query fetching, only re-query when the user asks and set better expectations around loading states.
