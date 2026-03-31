@@ -507,5 +507,19 @@ export const featureFlags = {
             "Release a feature to 10% of users. Filter all analytics by that flag. Notice conversion dropped? Watch session replays of just those users. See the problem, fix it, roll out wider. This workflow only works when everything's actually integrated.",
         'getting-started':
             'One line to install. Create flag in UI. Add to code. Done. Later: add bootstrapping for instant flags, local evaluation for speed, multivariate for tests. Start simple, grow as needed.',
+        ai: 'The PostHog MCP server lets your AI coding agent create and manage Feature Flags directly from your code editor. Create flags, configure targeting rules, and check rollout status – without switching to the PostHog app.',
+    },
+    ai: {
+        description: 'set up, monitor, and manage feature flags using natural language',
+        skills: [
+            'Configures and modifies flags with simple prompts – including rollout rules, targeting, and variants',
+            'Identifies stale flags to remove from your codebase',
+            'Summarizes rollout rules and targeting in plain english',
+        ],
+        prompts: [
+            'Create a new multivariate feature flag for dark mode',
+            'Show me which flags are currently active in production',
+            'Explain how this flag is configured and who receives each variant',
+        ],
     },
 }
