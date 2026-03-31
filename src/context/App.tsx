@@ -867,6 +867,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    'action-figure': {
+        size: {
+            min: {
+                width: 960,
+                height: 682,
+            },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     'ask-max': {
         size: {
             min: {
@@ -1245,7 +1261,7 @@ export interface SiteSettings {
 
 const isLabel = (item: any) => !item?.url && item?.name
 
-const isAprilFirst = () => {
+export const isAprilFirst = () => {
     return true
     const now = new Date()
     return now.getMonth() === 3 && now.getDate() === 1
@@ -1298,7 +1314,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const posthog = usePostHog()
 
     const [windows, setWindows] = useState<AppWindow[]>(
-        (location.key === 'initial' && location.pathname === '/' && (isMobile || isAprilFirst())) || !!paramsWindows
+        (location.key === 'initial' && location.pathname === '/' && isMobile) || !!paramsWindows
             ? []
             : getInitialWindows(element)
     )
@@ -1923,7 +1939,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         if (
-            (location.key === 'initial' && location.pathname === '/' && (isMobile || isAprilFirst())) ||
+            (location.key === 'initial' && location.pathname === '/' && isMobile) ||
             paramsWindows ||
             location.state?.skipPageUpdate
         ) {

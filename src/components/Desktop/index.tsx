@@ -16,6 +16,7 @@ import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
+import MediaPlayer from 'components/MediaPlayer'
 
 declare global {
     interface Window {
@@ -219,6 +220,7 @@ const validateIconPositions = (
 }
 
 function ActionFigureWallpaper() {
+    const { addWindow } = useApp()
     const [ready, setReady] = useState(false)
     const loadedCount = useRef(0)
 
@@ -229,8 +231,22 @@ function ActionFigureWallpaper() {
         }
     }, [])
 
+    const handlePriceClick = () => {
+        addWindow(
+            <MediaPlayer
+                newWindow
+                location={{ pathname: `action-figure` }}
+                key={`action-figure`}
+                videoId="xxBqKIBBxQw"
+            />
+        )
+    }
+
     return (
-        <div className="hidden select-none wallpaper-action-figure:flex fixed inset-0 items-center justify-center overflow-hidden bg-[#d4c9b8] dark:bg-[#2a2520]">
+        <button
+            onClick={handlePriceClick}
+            className="hidden select-none wallpaper-action-figure:flex fixed inset-0 items-center justify-center overflow-hidden bg-[#d4c9b8] dark:bg-[#2a2520]"
+        >
             {/* Text + logo */}
             <div className="absolute inset-x-0 top-[12%] flex justify-center z-10">
                 <div className="relative">
@@ -299,7 +315,7 @@ function ActionFigureWallpaper() {
                     onLoad={handleImageLoad}
                 />
             </motion.div>
-        </div>
+        </button>
     )
 }
 

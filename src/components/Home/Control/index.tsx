@@ -25,7 +25,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
 
 import Logo from 'components/Logo'
-import { useApp } from '../../../context/App'
+import { useApp, isAprilFirst } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
 import MDXEditor from 'components/MDXEditor'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -44,6 +44,7 @@ import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
 import { RenderInClient } from 'components/RenderInClient'
 import WizardCommand from 'components/WizardCommand'
+import MediaPlayer from 'components/MediaPlayer'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -1441,12 +1442,22 @@ export default function Home() {
         }
     `)
     const { appWindow } = useWindow()
-    const { setWindowTitle } = useApp()
+    const { setWindowTitle, addWindow } = useApp()
     const posthog = usePostHog()
 
     useEffect(() => {
         if (appWindow) {
             setWindowTitle(appWindow, 'home.mdx')
+        }
+        if (isAprilFirst()) {
+            addWindow(
+                <MediaPlayer
+                    newWindow
+                    location={{ pathname: `action-figure` }}
+                    key={`action-figure`}
+                    videoId="xxBqKIBBxQw"
+                />
+            )
         }
     }, [])
 
