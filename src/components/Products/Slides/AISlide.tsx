@@ -2,7 +2,10 @@ import React from 'react'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 
-const DEFAULT_SLIDE_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_hogs_d4c45b4550.png'
+type CloudinaryImageSrc = `https://res.cloudinary.com/${string}`
+
+const DEFAULT_SLIDE_IMAGE: CloudinaryImageSrc =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_hogs_d4c45b4550.png'
 
 interface AISlideProductAi {
     title?: string
@@ -20,15 +23,14 @@ interface AISlideProps {
 }
 
 export default function AISlide({ ai, productName }: AISlideProps) {
-    const slideImage = typeof ai?.image === 'string' && ai.image.trim() !== '' ? ai.image.trim() : DEFAULT_SLIDE_IMAGE
+    const slideImage = (
+        typeof ai?.image === 'string' && ai.image.trim() !== '' ? ai.image.trim() : DEFAULT_SLIDE_IMAGE
+    ) as CloudinaryImageSrc
     const slideAlt = typeof ai?.imageAlt === 'string' && ai.imageAlt.trim() !== '' ? ai.imageAlt.trim() : 'PostHog AI'
 
     return (
         <div className="bg-[#b8e0d8] h-full p-8 flex flex-col justify-center bg-ai">
             <div className="bg-white/80 backdrop-blur-lg h-full rounded-lg shadow-2xl flex flex-col gap-8 @2xl:flex-row @2xl:items-center @2xl:gap-12 p-8">
-                <aside className="text-center flex justify-center @2xl:shrink-0">
-                    <CloudinaryImage src={slideImage} alt={slideAlt} className="max-w-[469px]" />
-                </aside>
                 <div className="flex-1 prose">
                     <h2 className="text-5xl font-bold text-primary mb-4">
                         {ai?.title || 'PostHog AI does ' + productName.toLowerCase() + '.'}
@@ -57,6 +59,14 @@ export default function AISlide({ ai, productName }: AISlideProps) {
                         ))}
                     </ul>
                 </div>
+                <aside className="text-center flex justify-center @2xl:shrink-0">
+                    <CloudinaryImage
+                        src={slideImage}
+                        alt={slideAlt}
+                        className="max-w-[469px]"
+                        imgClassName="max-h-[320px] w-full object-contain"
+                    />
+                </aside>
             </div>
         </div>
     )
