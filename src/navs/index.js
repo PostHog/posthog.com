@@ -1231,6 +1231,10 @@ export const handbookSidebar = [
                         name: 'Co-marketing',
                         url: '/handbook/marketing/co-marketing',
                     },
+                    {
+                        name: 'Working with the website team',
+                        url: '/handbook/marketing/working-with-website',
+                    },
                 ],
             },
         ],
