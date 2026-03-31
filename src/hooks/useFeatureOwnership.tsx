@@ -399,6 +399,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['signals'],
         label: 'feature/session-summaries',
     },
+    signals: {
+        feature: 'Signals',
+        owner: ['signals'],
+        label: 'feature/signals',
+    },
     settings: {
         feature: 'Settings structure (personal & project)',
         owner: ['platform-ux'],
