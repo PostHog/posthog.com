@@ -2032,6 +2032,34 @@ li.squeak-left-border {
     animation: fadeIn 0.3s ease-out;
 }
 
+@keyframes shimmer-across {
+    0% {
+        left: -33%;
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes signal-fade-in {
+    from {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .side-modal {
     h2 {
         @apply text-xl;
@@ -2587,6 +2615,17 @@ article.reader-view-content-container:has(.quest-sidebar) {
     @media (max-width: 767px) {
         display: none;
     }
+}
+
+/* PostHog Code MCP preview: mask list bottom using current bg token */
+.ph-code-mcp-list-fade {
+    background: linear-gradient(
+        to top,
+        rgb(var(--bg)) 0%,
+        rgb(var(--bg) / 0.88) 32%,
+        rgb(var(--bg) / 0.35) 68%,
+        transparent 100%
+    );
 }
 
 .reader-content-container {

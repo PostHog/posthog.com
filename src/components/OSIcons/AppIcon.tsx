@@ -111,6 +111,10 @@ const PRODUCT_ICON_MAP = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/script_classic_84c2e01c55.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/script_8454a37bed.png',
     },
+    posthog_code: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Post_Hog_Code_Desktop_Icon_d6a5812a30.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Post_Hog_Code_Desktop_Icon_d6a5812a30.png',
+    },
     ga: {
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/ga3_1651ec493f.png',
     },

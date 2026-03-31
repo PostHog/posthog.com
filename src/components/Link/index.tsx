@@ -163,6 +163,9 @@ export default function Link({
         !internal || !!external || !!externalNoIcon || (url && !url.startsWith('/') && !url.includes('posthog.com'))
     )
 
+    /** Inline text link treatment (underline + icon). Skip when `externalNoIcon` so CTAs keep button styling. */
+    const showExternalDecoration = Boolean(external && !externalNoIcon)
+
     // Create context menu items
     const menuItems =
         contextMenu && url
@@ -212,7 +215,7 @@ export default function Link({
                     className={`${className} group`}
                     target={isSignupUrl || external || externalNoIcon ? '_blank' : ''}
                 >
-                    {external ? (
+                    {showExternalDecoration ? (
                         <span className="inline-flex justify-center items-center group">
                             <span className="font-semibold underline">{children}</span>
                             <IconArrowUpRight
@@ -265,7 +268,7 @@ export default function Link({
                     className={`${className} group`}
                     target={isSignupUrl || external || externalNoIcon ? '_blank' : ''}
                 >
-                    {external ? (
+                    {showExternalDecoration ? (
                         <span className="inline-flex justify-center items-center group">
                             <span className="font-semibold underline">{children}</span>
                             <IconArrowUpRight

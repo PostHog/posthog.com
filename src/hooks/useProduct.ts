@@ -90,8 +90,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'brown',
             colorSecondary: 'brown',
             category: 'automation',
-            // slug: 'posthog-code',
-            status: 'WIP',
+            slug: 'posthog-code',
+            status: 'alpha',
         },
         {
             name: 'Product tours',
