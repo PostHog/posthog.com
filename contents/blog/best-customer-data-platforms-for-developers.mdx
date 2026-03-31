@@ -1,6 +1,6 @@
 ---
 title: The best customer data platforms (CDPs) for developers, compared
-date: 2026-01-23
+date: 2026-03-30
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -106,11 +106,7 @@ Beyond data pipelines, [PostHog's CDP](/cdp) also handles event capture from [cl
 
 PostHog uses simple usage-based pricing with a [generous free tier](/pricing), so you can start collecting and analyzing data before committing to a long-term contract.
 
-<p>
-  <CallToAction to="https://posthog.com/docs/cdp">
-    Get started with PostHog CDP – it's free!
-  </CallToAction>
-</p>
+<WizardCTA />
 
 **Strengths:**
 
@@ -131,8 +127,6 @@ PostHog uses simple usage-based pricing with a [generous free tier](/pricing), s
 Developers who want a CDP that doesn't stop at data plumbing – and teams that want analytics and debugging in one workflow.
 
 </CalloutBox>
-
----
 
 ### 2. Segment
 
@@ -164,8 +158,6 @@ Teams that want a best-in-class data pipeline, comfortable pairing it with separ
 
 </CalloutBox>
 
----
-
 ### 3. RudderStack
 
 RudderStack is an open-source CDP built specifically for developers and data teams. It positions itself as a warehouse-native alternative to Segment, designed for teams that want their data warehouse (Snowflake, BigQuery, Redshift) to be the source of truth – not a vendor's platform.
@@ -195,8 +187,6 @@ RudderStack offers a free tier for up to 250,000 events/month, with paid plans s
 Data-savvy engineering teams who want a Segment alternative that keeps data in their warehouse, supports custom transformations, and doesn't create another data silo.
 
 </CalloutBox>
-
----
 
 ### 4. mParticle
 
@@ -228,8 +218,6 @@ Mobile-first companies and large organizations that need robust identity managem
 
 </CalloutBox>
 
----
-
 ### 5. Hightouch
 
 Hightouch pioneered the "composable CDP" – a fundamentally different architecture where your data warehouse is the CDP. Instead of collecting and storing data in a separate platform, Hightouch sits on top of Snowflake, BigQuery, Databricks, or Redshift and activates the data that's already there.
@@ -258,8 +246,6 @@ The free tier includes basic reverse ETL functionality. Paid plans (Composable C
 Data teams with mature warehouse infrastructure who want to activate existing data without building another silo – especially if marketers need self-service audience access.
 
 </CalloutBox>
-
----
 
 ### 6. Tealium
 
@@ -292,8 +278,6 @@ Pricing is based on events collected and is custom-quoted.
 Mid-to-large enterprise teams with complex martech stacks who need comprehensive data collection, strong compliance features, and the largest integration library in the market.
 
 </CalloutBox>
-
----
 
 ## Which CDP should you choose?
 
@@ -333,9 +317,21 @@ Mid-to-large enterprise teams with complex martech stacks who need comprehensive
 - **Hightouch** if you want to activate existing warehouse data without building a new silo
 - **RudderStack** if you also need event collection and want open-source infrastructure
 
----
+## Is PostHog right for you?
 
-## FAQ
+Here's the (short) sales pitch.
+
+We're biased, obviously, but PostHog is the best choice for a CDP if:
+
+- You want data pipelines connected to analytics, session replay, feature flags, and more – all in one platform instead of stitching tools together
+- You value open source and transparent pricing
+- You want to try before you buy with 1 million events and 10K dispatches free every month
+
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out our [docs](/docs) to do it yourself.
+
+<WizardCTA />
+
+## Frequently asked questions
 
 <details>
   <summary>What is a CDP, actually?</summary>
@@ -469,6 +465,4 @@ The tradeoff is operational complexity – you'll need to maintain the infrastru
 
 </details>
 
-<br />
-
-<ArrayCTA />
+<NewsletterForm />
