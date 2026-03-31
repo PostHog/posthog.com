@@ -47,6 +47,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Annotations',
         owner: ['product-analytics'],
     },
+    'background-agents': {
+        feature: 'Background agents',
+        owner: ['posthog-ai'],
+        label: 'feature/background-agents',
+    },
     'api-structure': {
         feature: 'API structure',
         owner: [],
@@ -198,6 +203,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Internal messaging (email, notifications)',
         owner: ['platform-features'],
         label: 'feature/notifications',
+    },
+    'llm-gateway': {
+        feature: 'LLM gateway',
+        owner: ['posthog-ai'],
+        label: 'feature/llm-gateway',
     },
     'live-events': {
         feature: 'Live events',
