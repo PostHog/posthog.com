@@ -17,6 +17,7 @@ import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
 import MediaPlayer from 'components/MediaPlayer'
+import { CallToAction } from 'components/CallToAction'
 
 declare global {
     interface Window {
@@ -319,31 +320,40 @@ function ActionFigurePopup() {
             const newToastId = addToast({
                 title: 'New PostHog Heroes action figures',
                 description: (
-                    <button
-                        onClick={() => {
-                            addWindow(
-                                <MediaPlayer
-                                    newWindow
-                                    location={{ pathname: `action-figure` }}
-                                    key={`action-figure`}
-                                    videoId="xxBqKIBBxQw"
-                                />
-                            )
-                            dismiss()
-                        }}
-                        className="relative rounded overflow-hidden group mt-3 w-[calc(100%+15px)]"
-                    >
-                        <img
-                            src="https://img.youtube.com/vi/xxBqKIBBxQw/mqdefault.jpg"
-                            alt="Watch the action figure reveal"
-                            className="w-full aspect-video object-cover rounded"
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                            <div className="size-11 rounded-full bg-white/90 group-hover:bg-white flex items-center justify-center transition-colors shadow-lg">
-                                <IconPlay className="size-5 text-black ml-0.5" />
+                    <div>
+                        <button
+                            onClick={() => {
+                                addWindow(
+                                    <MediaPlayer
+                                        newWindow
+                                        location={{ pathname: `action-figure` }}
+                                        key={`action-figure`}
+                                        videoId="xxBqKIBBxQw"
+                                    />
+                                )
+                            }}
+                            className="relative rounded overflow-hidden group w-[calc(100%+15px)] mt-3"
+                        >
+                            <img
+                                src="https://img.youtube.com/vi/xxBqKIBBxQw/mqdefault.jpg"
+                                alt="Watch the action figure reveal"
+                                className="w-full aspect-video object-cover rounded"
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                                <div className="size-11 rounded-full bg-white/90 group-hover:bg-white flex items-center justify-center transition-colors shadow-lg">
+                                    <IconPlay className="size-5 text-black ml-0.5" />
+                                </div>
                             </div>
-                        </div>
-                    </button>
+                        </button>
+                        <CallToAction
+                            size="sm"
+                            className="!w-[calc(100%+15px)] mt-1"
+                            to="/merch?product=james-hawkins-ultra-action-figure"
+                            state={{ newWindow: true }}
+                        >
+                            Preorder now
+                        </CallToAction>
+                    </div>
                 ),
                 actionLabel: 'Close',
                 actionAsIcon: <IconX className="size-4" />,
