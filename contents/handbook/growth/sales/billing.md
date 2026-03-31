@@ -105,6 +105,18 @@ At this point they will be notified about this automatically via the billing ser
 
 After three consecutive missed payment periods, the customer must provide advance payment covering three months of service based on their typical usage before account access is restored. If the customer disagrees or fails to make the advance payment, the account may be reverted to the Free Tier. 
 
+### India-based customers
+- GST: If you're a business, you're required to provide your GSTIN when signing up with PostHog. You would be liable to manage all GST under the Reverse Charge Mechanism.
+- 3DS payment failures: Indian banks require 3DS (one time password) for international card payments. It is your responisbility to complete the 3DS step (our billing system sends you a couple of reminders) - see above for repeated failed payments.
+
+
+### Withholding taxes
+PostHog Inc is a US incorporated company and a US tax resident and we do not claim benefits under any Double Taxation Avoidance Agreements (DTAA). To support this, we provide:
+- Our Tax Residency Certificate
+- Our no PE (Permanent Establishment) Certificate
+ 
+The full invoice amount is due. Any tax withheld will be treated as a short payment and pursued as outstanding.
+
 ### Stripe Products & Prices
 
 > ⚠️ Product and price modifications are restricted and handled exclusively by the <SmallTeam slug="billing" />. These changes are only made in rare cases and require billing team approval and implementation. Do not attempt to modify products or prices directly - contact the billing team for any pricing-related requests.
