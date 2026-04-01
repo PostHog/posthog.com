@@ -5309,6 +5309,11 @@ export const docsMenu = {
                             icon: 'IconAnthropic',
                         },
                         {
+                            name: 'Claude Agent SDK',
+                            url: '/docs/llm-analytics/installation/claude-agent-sdk',
+                            icon: 'IconAnthropic',
+                        },
+                        {
                             name: 'Google',
                             url: '/docs/llm-analytics/installation/google',
                             icon: 'IconGemini',
