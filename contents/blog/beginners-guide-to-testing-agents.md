@@ -1,6 +1,6 @@
 ---
 date: 2026-03-31
-title: "The beginner's guide to testing agents"
+title: "A beginner's guide to testing AI agents"
 author:
   - radu-raicea
 rootPage: /blog
