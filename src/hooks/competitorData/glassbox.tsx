@@ -119,7 +119,7 @@ export const glassbox = {
             features: {
                 issue_management: true,
                 performance_monitoring: true,
-
+                stack_tracing: false,
             },
         },
         dashboards: {
@@ -166,6 +166,9 @@ export const glassbox = {
             data_anonymization: true,
             role_based_access_control: true,
             cookieless_tracking: false,
+        },
+        tools: {
+            ai_assistant: true,
         },
     },
     pricing: {

@@ -131,9 +131,9 @@ If you find yourself overwhelmed, remember:
 
 The key principle: We want to be responsive to our open-source community when we can, but not at the cost of our primary support responsibilities or team sustainability.
 
-## What do I do as a SDK Support Hero?
+## What about SDK support?
 
-See the dedicated [SDK support rotation](/handbook/engineering/sdks/support-rotation) page for details on the (optional) SDK Support Hero rotation, including how to prioritize your time and handle mobile SDK issues.
+The SDK Support Hero rotation is owned by the <SmallTeam slug="client-libraries" />. See the dedicated [SDK support rotation](/handbook/engineering/sdks/support-rotation) page for details on how the rotation works, including how to prioritize time and handle mobile SDK issues.
 
 ## Don't ask users to do work that you can do!
 

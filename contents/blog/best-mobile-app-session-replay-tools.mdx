@@ -1,23 +1,91 @@
 ---
-date: 2024-08-05
-title: 7 best session replay tools for mobile apps (iOS & Android)
+date: 2026-03-27
+title: 7 best session replay tools for mobile apps
 rootPage: /blog
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/v1721983244/posthog.com/contents/hog-mobile-replay.jpg
 featuredImageType: full
 author:
     - lior-neu-ner
+    - natalia-amorim
 category: General
 tags:
-    - Guides
     - Comparisons
+seo:
+    metaTitle: '7 best session replay tools for mobile apps'
+    metaDescription: 'Looking for mobile session replay? Compare the best tools for mobile apps using iOS, Android, Flutter, React Native, and others.'
 ---
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
-## 1. LogRocket
+There are plenty of [session replay tools](/blog/best-session-replay-tools) out there, but not all of them support mobile, and those that do vary significantly in depth, platform support, and what they capture alongside replays.
 
-**Typical users:** Product managers, engineers, support teams
+This guide covers the seven best mobile session replay tools: what they do better, which frameworks they cover (iOS, Android, Flutter, React Native...), where they fall short, and who they're actually for.
+
+## 1. PostHog
+
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_03_26_at_13_19_27_2x_9f924243c4.png)
+
+### What is PostHog?
+
+[PostHog](/) (that's us 👋) is an all-in-one developer platform built to enable engineers to create better products. It includes [session replays](/session-replay) and a whole bunch more, such as [product analytics](/product-analytics), [LLM analytics](/llm-analytics), [error tracking](/error-tracking), [experiments](/experiments), and [feature flags](/feature-flags).
+
+It's designed for product-minded engineers, founders, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
+
+#### Supported features
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog']}
+    rows={[
+        {
+            path: 'session_replay.platform_support',
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native, Flutter, Unity (alpha)'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.conditional_recording',
+        'session_replay.features.privacy_masking',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'experiments',
+        'error_tracking',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+### How much does PostHog cost?
+
+PostHog has [transparent pricing](/pricing) based on usage. It's free to get started and completely free for the first 2,500 mobile recordings and 5,000 web ones per month. 
+
+After this, pricing starts at $0.0100 per mobile recording, and recordings cost progressively less the more you use. This makes PostHog significantly cheaper than all the other companies on this list (apart from [Microsoft Clarity](#3-microsoft-clarity)).
+
+### Why do companies use PostHog?
+
+According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+
+1. **It's many tools in one:** PostHog can replace tools like [Mixpanel](/blog/posthog-vs-mixpanel) (analytics), [UXCam](/blog/best-uxcam-alternatives) (session replay), and [Statsig](/blog/posthog-vs-statsig) (A/B testing and feature flags). This simplifies workflows and ensures all product data is in one place.
+
+2. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and build better products. This means creating funnels to track conversion, watching replays to see where users get stuck, and testing solutions with A/B tests.
+
+3. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
+
+> #### Bottom line
+>
+> PostHog is the best choice for teams who want mobile session replay connected to a complete suite of developer products – [LLM analytics](/docs/llm-analytics) if you're building AI products, [feature flags](/feature-flags), [error tracking](/error-tracking), [experiments](/experiments), [surveys](/surveys), and more. It is especially worth it for startups and scaleups thanks to its generous free tier and powerful offerings.
+
+<WizardCTA />
+
+## 2. LogRocket
 
 ![LogRocket](https://res.cloudinary.com/dmukukwp6/image/upload/v1722525793/posthog.com/contents/logrocket123123.png)
 
@@ -27,32 +95,41 @@ import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 #### Supported features
 
+<p>
 <ProductComparisonTable
     competitors={['logrocket']}
     rows={[
         {
             label: 'Supported platforms',
             description: 'Mobile platforms where session replay is available',
-            values: ['Android, iOS, React Native'],
+            values: ['Android, iOS, React Native, Flutter'],
         },
         'session_replay.analysis.features.console_logs',
         'session_replay.analysis.features.network_monitor',
         'session_replay.targeting.features.filter_by_user_or_event',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.conditional_recording',
+        'session_replay.features.privacy_masking',
         'heatmaps',
         'heatmaps.features.scrollmaps',
         'heatmaps.features.rage_clicks',
         'heatmaps.features.rage_taps',
         'heatmaps.features.dead_taps',
         'session_replay.features.crash_reports',
-        'session_replay.ai.ai_summaries',
+        'experiments',
+        'error_tracking',
+        'platform.deployment.eu_hosting',
     ]}
 />
+</p>
 
 ### How much does LogRocket cost?
 
-Its **Team** plan starts at $199/month for up to 10k sessions and includes most session replay features, but excludes other features such as product analytics and some error tracking features.
+[LogRocket's](/blog/best-logrocket-alternatives) free tier includes 1,000 sessions/month with 1 month data retention.
 
-The **Professional** plan starts at $420/month for up to 10k sessions and includes all their features, but requires an annual commitment.
+Its **Team** plan starts at $69/month for up to 10k sessions and includes most session replay features, but excludes other features such as product analytics, Galileo AI, and some error tracking features.
+
+The **Professional** plan starts at $295/month and includes all their features, but requires an annual commitment.
 
 ### Why do companies use LogRocket?
 
@@ -66,22 +143,21 @@ Reviewers on [G2](https://www.g2.com/products/logrocket/reviews) use LogRocket f
 
 > #### Bottom line
 >
-> LogRocket is great choice for teams whose top priority is identifying and mitigating issues.
+> LogRocket is the best choice for teams building React Native apps who need Redux state capture alongside session replay. Galileo AI also sets it apart by proactively surfacing struggle patterns across sessions, so you're not waiting to discover problems.
 
-## 2. UXCam
-
-**Typical users:** Product managers in enterprise companies
+## 3. UXCam
 
 ![UXCam](https://res.cloudinary.com/dmukukwp6/image/upload/v1722526111/posthog.com/contents/Analyze_event_in_session.jpg)
 
 ### What is UXCam?
 
-[UXCam](/blog/best-uxcam-alternatives) is a platform built solely for mobile apps. It includes a full-suite of analytics features as well as session replays, heatmaps, and crash analytics.
+[UXCam](/blog/best-uxcam-alternatives) is a platform built primarily for mobile apps (although they've recently added web support). It includes a full-suite of analytics features as well as session replays, heatmaps, crash analytics, and an integrated AI analyst.
 
 It's designed to provide deep insights into user behavior, helping product managers understand how users interact with their apps.
 
 #### Supported features
 
+<p>
 <ProductComparisonTable
     competitors={['uxcam']}
     rows={[
@@ -94,19 +170,25 @@ It's designed to provide deep insights into user behavior, helping product manag
         'session_replay.analysis.features.console_logs',
         'session_replay.analysis.features.network_monitor',
         'session_replay.targeting.features.filter_by_user_or_event',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.conditional_recording',
+        'session_replay.features.privacy_masking',
         'heatmaps',
         'heatmaps.features.scrollmaps',
         'heatmaps.features.rage_clicks',
         'heatmaps.features.rage_taps',
         'heatmaps.features.dead_taps',
         'session_replay.features.crash_reports',
-        'session_replay.ai.ai_summaries',
+        'experiments',
+        'error_tracking',
+        'platform.deployment.eu_hosting',
     ]}
 />
+</p>
 
 ### How much does UXCam cost?
 
-UXCam's pricing is sales-driven and completely opaque, so it's not clear how much it costs. The company's sales team will give you a quote after you've spoken to them.
+UXCam's free plan includes 3,000 sessions/month with 6 months of replay retention. Paid plans require a sales conversation – no public pricing is available.
 
 ### Why do companies use UXCam?
 
@@ -122,9 +204,7 @@ Looking at [G2 reviews](https://www.g2.com/products/uxcam/reviews), companies ch
 >
 > UXCam is ideal for product managers who need in-depth insights into user behavior. Despite opaque pricing, its ease of use and actionable insights make it a valuable tool.
 
-## 3. Microsoft Clarity
-
-**Typical users:** Marketing and content teams
+## 4. Microsoft Clarity
 
 ![clarity](https://res.cloudinary.com/dmukukwp6/image/upload/v1722526729/posthog.com/contents/clarity-mobile.png)
 
@@ -136,6 +216,7 @@ It includes most of the session replay features you would expect, but doesn't su
 
 #### Supported features
 
+<p>
 <ProductComparisonTable
     competitors={['clarity']}
     rows={[
@@ -143,24 +224,32 @@ It includes most of the session replay features you would expect, but doesn't su
             path: 'session_replay.platform_support',
             label: 'Supported platforms',
             description: 'Mobile platforms where session replay is available',
-            values: ['Android, iOS, React Native'],
+            values: ['Android, iOS, React Native', 'Flutter'],
         },
         'session_replay.analysis.features.console_logs',
         'session_replay.analysis.features.network_monitor',
         'session_replay.targeting.features.filter_by_user_or_event',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.conditional_recording',
+        'session_replay.features.privacy_masking',
         'heatmaps',
         'heatmaps.features.scrollmaps',
         'heatmaps.features.rage_clicks',
         'heatmaps.features.rage_taps',
         'heatmaps.features.dead_taps',
         'session_replay.features.crash_reports',
-        'session_replay.ai.ai_summaries',
+        'experiments',
+        'error_tracking',
+        'platform.deployment.eu_hosting',
     ]}
 />
+</p>
 
 ### How much does Microsoft Clarity cost?
 
-Clarity is completely free.
+Clarity is completely free – no session limits, no paid tiers, ever. 
+
+The trade-off is worth understanding before you adopt it: Clarity is free because Microsoft uses the anonymized behavioral data it collects to improve its own machine learning models and products. 
 
 ### Why do companies use Microsoft Clarity?
 
@@ -176,72 +265,21 @@ According to [reviews on G2](https://www.g2.com/products/microsoft-microsoft-cla
 >
 > If you only care about session replay and dont need other features, Clarity is the obvious choice - especially if you're already using Google Analytics. On the other hand, software engineers will find Clarity's lack of debug logs disappointing.
 
-## 4. PostHog
-
-**Typical users:** Engineering and product teams
-
-![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1722527045/posthog.com/contents/posthog-mobile-replay.png)
-
-### What is PostHog?
-
-[PostHog](https://posthog.com) (that's us 👋) is an all-in-one platform built to help engineers create better products. It includes [session replays](/session-replay) **and** a whole bunch more, such as [product analytics](/product-analytics), [A/B testing](/experiments), and [feature flags](/feature-flags).
-
-It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
-
-#### Supported features
-
-<ProductComparisonTable
-    competitors={['posthog']}
-    rows={[
-        {
-            path: 'session_replay.platform_support',
-            label: 'Supported platforms',
-            description: 'Mobile platforms where session replay is available',
-            values: ['Android, iOS, React Native, Flutter'],
-        },
-        'session_replay.analysis.features.console_logs',
-        'session_replay.analysis.features.network_monitor',
-        'session_replay.targeting.features.filter_by_user_or_event',
-        'heatmaps',
-        'heatmaps.features.scrollmaps',
-        'heatmaps.features.rage_clicks',
-        'heatmaps.features.rage_taps',
-        'heatmaps.features.dead_taps',
-        'session_replay.features.crash_reports',
-        'session_replay.ai.ai_summaries',
-    ]}
-/>
-
-### How much does PostHog cost?
-
-PostHog has [transparent pricing](/session-replay#pricing) based on usage. It's free to get started and completely free for the first 2,500 mobile recordings and 5,000 web ones per month. After this, pricing starts at $0.0100 per mobile recording, and recordings cost progressively less the more you use. This makes PostHog significantly cheaper than all the other companies on this list (apart from [Microsoft Clarity](#3-microsoft-clarity)).
-
-### Why do companies use PostHog?
-
-According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
-
-1. **It's many tools in one:** PostHog can replace tools like [Mixpanel](/blog/posthog-vs-mixpanel) (analytics), [UXCam](/blog/best-uxcam-alternatives) (session replay), and [Statsig](/blog/posthog-vs-statsig) (A/B testing and feature flags). This simplifies workflows and ensures all product data is in one place.
-
-2. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and build better products. This means creating funnels to track conversion, watching replays to see where users get stuck, and testing solutions with A/B tests.
-
-3. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
-
-> #### Bottom line
->
-> For teams looking for all the tools they need to improve their products, PostHog makes for a great choice. This is especially true for startups and scaleups thanks to it having a generous free tier.
-
 ## 5. Smartlook
-
-**Typical users:** Engineers, business analysts, product managers
 
 ![Smartlook](https://res.cloudinary.com/dmukukwp6/image/upload/v1722526687/posthog.com/contents/smartlook-mobile.webp)
 
 ### What is Smartlook?
 
-Smartlook combines session replays, product analytics, visualizations, and crash reports to generate an overall understanding of user experience. It focuses on mobile apps with specific tools like native rendering and wireframe mode.
+Smartlook combines session replays, product analytics, and crash reports to help teams understand user experience across both web and mobile. 
+
+It supports the broadest range of mobile SDKs on this list, making it one of the few tools that works for game developers as well as traditional app teams. 
+
+Wireframe mode is a standout feature for privacy-sensitive apps, replacing UI elements with abstract representations so you can analyze behavior without capturing sensitive content.
 
 #### Supported features
 
+<p>
 <ProductComparisonTable
     competitors={['smartlook']}
     rows={[
@@ -249,24 +287,30 @@ Smartlook combines session replays, product analytics, visualizations, and crash
             path: 'session_replay.platform_support',
             label: 'Supported platforms',
             description: 'Mobile platforms where session replay is available',
-            values: ['Android, iOS, React Native, Flutter'],
+            values: ['iOS, Android, React Native, Flutter, Unity, Unreal Engine, Cocos, Cordova/Ionic, Xamarin, Harmony OS'],
         },
         'session_replay.analysis.features.console_logs',
         'session_replay.analysis.features.network_monitor',
         'session_replay.targeting.features.filter_by_user_or_event',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.conditional_recording',
+        'session_replay.features.privacy_masking',
         'heatmaps',
         'heatmaps.features.scrollmaps',
         'heatmaps.features.rage_clicks',
         'heatmaps.features.rage_taps',
         'heatmaps.features.dead_taps',
         'session_replay.features.crash_reports',
-        'session_replay.ai.ai_summaries',
+        'experiments',
+        'error_tracking',
+        'platform.deployment.eu_hosting',
     ]}
 />
+</p>
 
 ### How much does Smartlook cost?
 
-Smartlook's free plan records up to 3k sessions and includes most of their replay features. Its pro plan includes all replay features and starts at $69/month for 5k sessions or $99 for 10k sessions. Pricing becomes progressively cheaper with more monthly sessions.
+Smartlook's free plan records up to 3k sessions and includes most of their replay features. Its pro plan includes all replay features and starts at $55/month for 5k sessions, and pricing becomes progressively cheaper with more monthly sessions.
 
 ### Why do companies use Smartlook?
 
@@ -280,20 +324,21 @@ According to [G2](https://www.g2.com/products/smartlook/reviews) reviewers, Smar
 
 > #### Bottom line
 >
-> Smartlook's combination of analytics, session replay, and crash reports make it a good choice for teams who want a full picture of their user experience.
+> Smartlook's broad SDK support makes it the best choice for game developers and teams building on less common frameworks like Unity, Unreal Engine, or Xamarin. For standard iOS/Android teams, the retroactive event tracking and cross-platform journey tracking are the standout reasons to pick it over alternatives.
 
 ## 6. FullStory
-
-**Typical users:** Product managers, customer success, and support
 
 ![FullStory](https://res.cloudinary.com/dmukukwp6/image/upload/v1722526812/posthog.com/contents/fullstory.png)
 
 ### What is FullStory?
 
-[FullStory](/blog/best-fullstory-alternatives) describes itself as behavioral data analytics platform, which is code for session replay and [mobile app analytics](/blog/best-mobile-app-analytics-tools), with a side of product analytics.
+[FullStory](/blog/posthog-vs-fullsotry) describes itself as behavioral data analytics platform, which is code for session replay and [mobile app analytics](/blog/best-mobile-app-analytics-tools), with a side of product analytics.
+
+It uses autocapture to record everything retroactively, and StoryAI to generate session summaries and surface behavioral opportunities automatically.
 
 #### Supported features
 
+<p>
 <ProductComparisonTable
     competitors={['fullstory']}
     rows={[
@@ -306,19 +351,25 @@ According to [G2](https://www.g2.com/products/smartlook/reviews) reviewers, Smar
         'session_replay.analysis.features.console_logs',
         'session_replay.analysis.features.network_monitor',
         'session_replay.targeting.features.filter_by_user_or_event',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.conditional_recording',
+        'session_replay.features.privacy_masking',
         'heatmaps',
         'heatmaps.features.scrollmaps',
         'heatmaps.features.rage_clicks',
         'heatmaps.features.rage_taps',
         'heatmaps.features.dead_taps',
         'session_replay.features.crash_reports',
-        'session_replay.ai.ai_summaries',
+        'experiments',
+        'error_tracking',
+        'platform.deployment.eu_hosting',
     ]}
 />
+</p>
 
 ### How much does FullStory cost?
 
-FullStory doesn't publish pricing publicly. However, according to [Failory](https://www.failory.com/blog/fullstory-pricing), Fullstory will cost you between $250 - $1,000 per month.
+[FullStory's](/blog/best-fullstory-alternatives) free plan (FullStoryFree) includes 30,000 sessions/month with 12 months of data retention (but limited features). Paid plans aren't published publicly and require contacting sales
 
 ### Why do companies use FullStory?
 
@@ -336,16 +387,17 @@ According to reviews on [G2](https://www.g2.com/products/fullstory/reviews), com
 
 ## 7. Contentsquare
 
-**Typical users:** Product managers, ecommerce teams, and marketers
-
 ![contentsquare](https://res.cloudinary.com/dmukukwp6/image/upload/v1722526862/posthog.com/contents/contensquare.webp)
 
 ### What is Contentsquare?
 
-Contentsquare is an analytics platform that combines heatmaps, customer journey analysis, and frustration scoring to help find and fix issues and friction points.
+[Contentsquare](/blog/best-contentsquare-alternatives) is a digital experience analytics platform that combines heatmaps, customer journey analysis, frustration scoring, session replay, and AI-powered insights to help find and fix issues and friction points. 
+
+It acquired [Hotjar](/blog/posthog-vs-hotjar) in 2021 and [Heap](/blog/posthog-vs-heap) in 2023, making it one of the largest DX platforms in the market. It's built for large organizations that need to understand and optimize user behavior at scale across web and mobile.
 
 #### Supported features
 
+<p>
 <ProductComparisonTable
     competitors={['contentsquare']}
     rows={[
@@ -358,19 +410,31 @@ Contentsquare is an analytics platform that combines heatmaps, customer journey 
         'session_replay.analysis.features.console_logs',
         'session_replay.analysis.features.network_monitor',
         'session_replay.targeting.features.filter_by_user_or_event',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.conditional_recording',
+        'session_replay.features.privacy_masking',
         'heatmaps',
         'heatmaps.features.scrollmaps',
         'heatmaps.features.rage_clicks',
         'heatmaps.features.rage_taps',
         'heatmaps.features.dead_taps',
         'session_replay.features.crash_reports',
-        'session_replay.ai.ai_summaries',
+        'experiments',
+        'error_tracking',
+        'platform.deployment.eu_hosting',
     ]}
 />
+</p>
 
 ### How much does Contentsquare cost?
 
-Since Contentsquare caters mostly to enterprise companies, its pricing is not available publicly and you need to speak to its sales team to get a quote. According to [Capterra](https://www.capterra.co.uk/software/161591/contentsquare), pricing starts at $10,000/month, but no further information is given
+Contentsquare offers a free plan that includes 200,000 monthly sessions, replays, heatmaps, funnels, error monitoring, and surveys. Only 5% of sessions are recorded on their free plan though (a max of 10k per month) with 1 month retention and limited features (like filters). 
+
+The Growth plan starts from 7,000 monthly sessions with 13 months of data access and adds zone-based heatmaps, journey analysis, impact quantification, and Sense AI. 
+
+Higher tiers (Pro, Enterprise) are available with custom pricing via sales.
+
+Worth noting: product analytics is a separate add-on, not included in the core plans.
 
 ### Why do companies use Contentsquare?
 
@@ -384,11 +448,95 @@ According to [G2](https://www.g2.com/products/contentsquare/reviews) reviews, pe
 
 > #### Bottom line
 >
-> From data visualizations, to behavior analysis, and detailed session replays, Contentsquare has a lot to offer, especially for larger companies.
+> Contentsquare is purpose-built for large enterprises with high traffic volumes and dedicated analytics teams. For most teams, the cost and complexity are hard to justify – PostHog, Smartlook, or LogRocket offer most of the same capabilities at a fraction of the price.
 
-## Further reading
+## Which mobile session replay tool should you choose?
 
--   For a full breakdown of the top session replay platforms, see our guide to the [best session replay tools for developers](/blog/best-session-replay-tools).
--   [The 9 best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools)
--   [The 7 best mobile app analytics tools](/blog/best-mobile-app-analytics-tools)
--   [The best UXCam alternatives & competitors, compared](/blog/best-uxcam-alternatives)
+- Want replay connected to product analytics, feature flags, error tracking, and more in one platform? **PostHog**.
+- Need powerful debugging tools – console logs, network monitoring, Redux state capture? **LogRocket**.
+- Building a mobile app and need retention, cohort analysis, and crash analytics alongside replay? **UXCam**.
+- Want something completely free with no session limits? **Microsoft Clarity**.
+- Need replay across web and mobile with retroactive event tracking – or building on Unity, Unreal Engine, or Xamarin? **Smartlook**.
+- Want enterprise-grade replay with a generous free tier to evaluate? **FullStory**.
+- Large enterprise needing zone-based heatmaps and impact quantification? **Contentsquare**.
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but PostHog is the best choice for mobile session replay if:
+
+- You want replay connected to analytics, feature flags, error tracking, and more in one platform
+- You value open source and transparent pricing
+- You want to try before you buy – 2,500 mobile replays free every month, no credit card required
+
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out our [docs](/docs) to do it yourself.
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>What should I look for in a mobile session replay tool?</summary>
+
+The key things to evaluate when choosing a mobile session replay tool:
+ 
+- **Platform support:** Does it support your stack? Not all tools support all frameworks.
+- **What's captured alongside replay:** Crash reports, console logs, network requests, and performance data add debugging context that replay alone can't provide.
+- **Heatmaps:** Touch, gesture, and scroll heatmaps help you understand aggregate behavior across users, not just individual sessions.
+- **Privacy controls:** Mobile apps often handle sensitive data. Look for configurable masking, PII detection, and compliance with GDPR and CCPA.
+- **Integration with analytics:** Replay is most powerful when connected to funnels, retention, and event data so you can jump from a metric to the sessions behind it.
+- **Pricing model:** Most tools price by session volume. Check whether mobile replays are counted separately from web replays.
+ 
+</details>
+
+<details>
+<summary>When should you consider a dedicated mobile replay tool?</summary>
+
+You need a dedicated mobile replay tool if:
+
+- You have a native iOS or Android app, not just a mobile website
+- You use cross-platform frameworks like React Native or Flutter
+- You need crash analytics linked to session context
+- You need touch and gesture heatmaps, not just click maps
+
+If you only have a mobile website (not a native app), most web session replay tools will work fine. 
+
+See our guide to the [best session replay tools](/blog/best-session-replay-tools) for web-focused options.
+
+</details>
+
+<details>
+<summary>What is the best free mobile session replay tool?</summary>
+
+**[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives)** is completely free with no session limits. 
+
+**PostHog**'s free tier includes 2,500 mobile recordings/month plus product analytics, feature flags, error tracking and more. 
+
+**FullStory's** free plan includes 30,000 sessions/month with 12-month retention (but limited features). 
+
+**UXCam** and **Smartlook** both offer free plans with 3,000 sessions/month.
+
+</details>
+
+<details>
+<summary>What is the difference between web and mobile session replay?</summary>
+
+**Web session replay** captures DOM changes in a browser – it reconstructs what happened by replaying HTML, CSS, and JavaScript events. 
+
+**Mobile session replay** hooks into the native rendering pipeline of iOS or Android to capture screen state, touch gestures, swipes, and taps. 
+
+The technical approach is fundamentally different, which is why most web replay tools can't simply add mobile support – they need dedicated mobile SDKs and a different capture architecture.
+ 
+</details>
+ 
+<details>
+<summary>Do mobile session replay tools affect app performance?</summary>
+
+All tools on this list are designed to have minimal performance impact. Recording is typically done on a background thread, data is buffered and uploaded when the app goes into the background, and SDKs are lightweight (usually adding less than 1MB to app binary size). 
+
+That said, it's worth testing with your specific app – recording-heavy apps or those with complex animations may see more overhead than simple utility apps.
+ 
+</details>
+
+<NewsletterForm />

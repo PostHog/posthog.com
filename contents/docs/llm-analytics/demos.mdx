@@ -1,0 +1,75 @@
+---
+title: Demos & examples
+sidebar: Docs
+showTitle: true
+---
+
+Explore real-world examples of LLM analytics in action. These projects demonstrate different ways to integrate PostHog's LLM analytics features.
+
+## Example projects
+
+### LLM Analytics Apps
+
+Interactive CLI showcasing PostHog LLM analytics across 13+ AI providers (Anthropic, OpenAI, Google, LangChain, and more). Great for understanding how different SDKs integrate with PostHog. We use this mainly to help with development, debugging, and reproduction of user issues.
+
+- **GitHub:** [PostHog/llm-analytics-apps](https://github.com/PostHog/llm-analytics-apps)
+
+### GitHub Standup Agent
+
+Multi-agent standup summarizer using OpenAI Agents SDK. Demonstrates automatic agent tracing with `posthog.ai.openai_agents.instrument()`.
+
+- **GitHub:** [PostHog/github-standup-agent](https://github.com/PostHog/github-standup-agent)
+- **Integrations:** [OpenAI Agents SDK](/docs/llm-analytics/installation/openai-agents)
+
+### Andy's Daily Factoids
+
+Full-stack AI factoid generator demonstrating [LangChain callbacks](/docs/llm-analytics/installation/langchain), multi-platform observability, cost tracking, and real-time streaming. Also uses [OpenRouter](/docs/llm-analytics/installation/openrouter) for LLM calls.
+
+- **GitHub:** [andrewm4894/andys-daily-factoids](https://github.com/andrewm4894/andys-daily-factoids)
+- **Integrations:** [LangChain](/docs/llm-analytics/installation/langchain), [OpenRouter](/docs/llm-analytics/installation/openrouter)
+
+### Repo Stalker
+
+GitHub PR/issue AI assistant with custom span tracking for different interaction types (chat, summaries, analysis). Built with Lovable using [manual capture](/docs/llm-analytics/installation/manual-capture).
+
+- **GitHub:** [andrewm4894/repo-stalker](https://github.com/andrewm4894/repo-stalker)
+- **Integrations:** [Manual capture](/docs/llm-analytics/installation/manual-capture)
+
+### Plot Agent
+
+AI data visualization assistant using [LangGraph](/docs/llm-analytics/installation/langgraph). Shows PostHog callback integration with conversation session tracking.
+
+- **GitHub:** [andrewm4894/plot-agent](https://github.com/andrewm4894/plot-agent)
+- **Integrations:** [LangChain](/docs/llm-analytics/installation/langchain), [LangGraph](/docs/llm-analytics/installation/langgraph)
+
+### Anomaly Agent
+
+LLM-powered anomaly detection for time series data using [LangGraph](/docs/llm-analytics/installation/langgraph). Demonstrates multi-step AI workflows with verification.
+
+- **GitHub:** [andrewm4894/anomaly-agent](https://github.com/andrewm4894/anomaly-agent)
+- **Integrations:** [LangChain](/docs/llm-analytics/installation/langchain), [LangGraph](/docs/llm-analytics/installation/langgraph)
+
+### HogFlix (PostHog Demo 3000)
+
+Full PostHog feature showcase including LLM chat with both [LangChain](/docs/llm-analytics/installation/langchain) and direct [OpenAI](/docs/llm-analytics/installation/openai) integration patterns.
+
+- **GitHub:** [PostHog/posthog-demo-3000](https://github.com/PostHog/posthog-demo-3000)
+- **Integrations:** [LangChain](/docs/llm-analytics/installation/langchain), [OpenAI](/docs/llm-analytics/installation/openai)
+
+### Emoji Hero
+
+Chat-powered custom emoji generator for Slack. Users describe what emoji they want, and a [Pydantic AI](/docs/llm-analytics/installation/pydantic-ai) agent searches for images, applies customizations (text overlays, cropping), and optimizes them for Slack. Uses OpenRouter as the LLM provider with OpenTelemetry traces sent to PostHog, and links frontend/backend sessions via `posthog-js`.
+
+- **GitHub:** [andrewm4894/emoji-hero](https://github.com/andrewm4894/emoji-hero)
+- **Live:** [emoji-hero.com](https://emoji-hero.com)
+- **Integrations:** [Pydantic AI](/docs/llm-analytics/installation/pydantic-ai), [OpenRouter](/docs/llm-analytics/installation/openrouter)
+
+### Anomstack
+
+Anomaly detection system with LLM-powered analysis. Traditional app with product analytics and agent tracing using LLM analytics.
+
+- **GitHub:** [andrewm4894/anomstack](https://github.com/andrewm4894/anomstack)
+
+## Add your project
+
+Have a project using PostHog LLM analytics? We'd love to feature it here. Open a PR to add it to this page.

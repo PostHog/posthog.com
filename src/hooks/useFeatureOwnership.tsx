@@ -47,6 +47,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Annotations',
         owner: ['product-analytics'],
     },
+    'background-agents': {
+        feature: 'Background agents',
+        owner: ['posthog-ai'],
+        label: 'feature/background-agents',
+    },
     'api-structure': {
         feature: 'API structure',
         owner: [],
@@ -146,6 +151,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Managed warehouse',
         owner: ['managed-warehouse'],
     },
+    'embedding-worker': {
+        feature: 'Embedding worker',
+        owner: ['signals'],
+        label: false,
+    },
     'early-access-features': {
         feature: 'Early access features',
         owner: ['feature-flags'],
@@ -198,6 +208,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Internal messaging (email, notifications)',
         owner: ['platform-features'],
         label: 'feature/notifications',
+    },
+    'llm-gateway': {
+        feature: 'LLM gateway',
+        owner: ['posthog-ai'],
+        label: false,
     },
     'live-events': {
         feature: 'Live events',
@@ -284,6 +299,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['posthog-ai'],
         label: 'feature/posthog-ai',
     },
+    'posthog-code': {
+        feature: 'PostHog Code',
+        owner: ['posthog-code'],
+        label: 'feature/posthog-code',
+    },
     'project-homepage': {
         feature: 'Project homepage',
         owner: ['platform-ux'],
@@ -327,7 +347,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['customer-analytics'],
     },
     sdks: {
-        feature: 'SDKs & client libraries (web, server-side)',
+        feature: 'SDKs & client libraries',
         owner: ['client-libraries'],
         notes: (
             <>
@@ -340,36 +360,14 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                     incident.io schedule
                 </PrivateLink>
                 .
-                <br />
-                <br />
-                <strong>
-                    For Mobile SDK issues, defer to the Mobile folks (@mobile-folks or @client-libraries-folks on Slack)
-                    first.
-                </strong>
             </>
         ),
-        label: 'feature/libraries',
+        label: ['feature/libraries', 'feature/mobile'],
     },
     'sdks-doctor': {
         feature: 'SDK doctor',
         owner: ['growth'],
         label: 'feature/sdk-doctor',
-    },
-    'sdks-mobile': {
-        feature: 'SDKs (mobile)',
-        owner: ['client-libraries'],
-        notes: (
-            <>
-                Shared responsibility, with features owned by the relevant small team, or try{' '}
-                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink>.
-                There is an engineer assigned to SDK support on a rotating schedule. Check the{' '}
-                <PrivateLink url="https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MA3TWXS41E7Y5N4AQ">
-                    incident.io schedule
-                </PrivateLink>
-                .
-            </>
-        ),
-        label: 'feature/mobile',
     },
     search: {
         feature: 'Search',
@@ -403,8 +401,13 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'session-summaries': {
         feature: 'Session summaries',
-        owner: ['signals'],
+        owner: ['replay'],
         label: 'feature/session-summaries',
+    },
+    signals: {
+        feature: 'Signals',
+        owner: ['signals'],
+        label: 'feature/signals',
     },
     settings: {
         feature: 'Settings structure (personal & project)',

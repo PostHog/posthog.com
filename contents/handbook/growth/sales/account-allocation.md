@@ -20,7 +20,7 @@ We track whether a customer is paying for each product in Vitally using the `Pay
 - Customers already paying for all of the primary products are considered expanded to the max and should go to a Customer Success Manager. They should be pretty sticky as a customer so the main focus here is retention.
 - Otherwise, there is room to grow and a Technical Account Manager should be focused on getting them using the three primary products.
 
-> Today we have lots of customers who aren't paying for the three primary products so it might make sense to allocate some customers who are paying for 2 out of the 3 to a CSM whilst we are hiring more TAMs.
+> This allocation may vary depending on team capacity - there may be some accounts who only have 1 or 2 paid products allocated to a CSM rather than a TAM where there is more capacity in the CSM team for example.
 
 ---
 
@@ -104,8 +104,8 @@ To help the new owner of a customer hit the ground running, we should make sure 
 
 | Transition | Typical timing | Condition |
 |------------|----------------|-----------|
-| TAE → TAM | 12 months after initial credit pre-purchase | Customer onboarded to 1-2 primary products |
-| TAE → CSM | 12 months after initial credit pre-purchase | Customer onboarded to 3+ primary products |
+| TAE → TAM | When onboarded, typically 3 months after initial credit purchase OR 12 months after initial credit pre-purchase if the account is retained by the TAE | Customer onboarded to 1-2 primary products |
+| TAE → CSM | When onboarded, typically 3 months after initial credit purchase OR 12 months after initial credit pre-purchase if the account is retained by the TAE | Customer onboarded to 3+ primary products |
 | TAM → CSM | After expansion completes | All 3 core products adopted, discount agreement in place, no remaining expansion levers |
 | CSM → TAM | When expansion opportunity identified | Customer not fully expanded and has clear growth potential |
 
@@ -115,13 +115,11 @@ For handover to take place there should be an Account Plan (saved as a note on t
 
 > All open invoices should also have been paid before handing over. It makes sense to use existing relationships to chase payments, rather than the new owner's first action needing to be chasing payments/suspending access for non-payment.
 
-### Unassign yourself in Vitally
-
-Once the handover is complete, the outgoing owner should unassign themselves from the account in Vitally. This ensures the new owner is the sole point of contact and avoids confusion about who is responsible for the account.
+> For TAE accounts being handed over, set the New Owner to `Ready to move` in Vitally and then flag this with Simon directly.  There's no need to wait for the end of the quarter to do this.  He will review the plan and current state of the customer and then work with TAM or CSM leads to assign a new owner.
 
 ### Account Plan
 
-Every AM Managed account should have an up-to-date [Account Plan](/handbook/growth/sales/risk-mitigation-and-churn-prevention#quarterly-account-planning) saved as a note in Vitally. The existing owner should ensure that this is current and schedule a handover call to walk through it with the new owner. Feel free to push back and ask for it as the new owner if this doesn't happen! Ask your team lead or [Simon](/community/profiles/28895) for help with this if you're not getting the information you need from the previous owner.
+Every account being handed over should have an up-to-date [Account Plan](/handbook/growth/sales/risk-mitigation-and-churn-prevention#quarterly-account-planning) saved as a note in Vitally. The existing owner should ensure that this is current and schedule a handover call to walk through it with the new owner. Feel free to push back and ask for it as the new owner if this doesn't happen! Ask your team lead or [Simon](/community/profiles/28895) for help with this if you're not getting the information you need from the previous owner.
 
 ### Product Onboarding
 
@@ -252,6 +250,10 @@ This is the most valuable part of the handover – relationship context doesn't 
 - **Ask "what would you do next if you were keeping this account?"** This often surfaces the most actionable insight.
 - **Move fast on your intro.** The longer the gap between handover and first contact, the more momentum you lose.
 - **Keep the previous owner in the loop** for the first few weeks if there are open commercial conversations. In some cases they can also serve as a secondary support point for timezone coverage or as an escalation contact.
+
+### Unassign yourself in Vitally
+
+Once the handover is complete, the outgoing owner should unassign themselves from the account in Vitally. This ensures the new owner is the sole point of contact and avoids confusion about who is responsible for the account.
 
 ---
 
