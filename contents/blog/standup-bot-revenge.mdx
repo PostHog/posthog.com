@@ -1,5 +1,5 @@
 ---
-date: 2026-01-22
+date: 2026-04-01
 title: "F*$k youuuu standup bot!"
 author:
   - andy-maguire
@@ -18,11 +18,9 @@ tags:
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-{/*TODO: Replace featured image with something fun - hedgehog vs robot?*/}
-
 ![The standup bot, taunting me](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/standup_bot_taunt_b24351e046.png)
 
-There it is. Starign at me. Sitting there. Goading me.
+There it is. Staring at me. Sitting there. Goading me.
 
 The day is nearly done. I've reviewed PRs, fixed bugs, hopped on quick calls, commanded my agents and smashed that accept button all day!
 
@@ -69,7 +67,7 @@ Let me show you how it all works.
 
 <CalloutBox icon="IconBolt" title="🔥 Hot take" type="action">
 
-**Agents are the new scripts.** We used to write bash scripts and cron jobs to automate tedious tasks. Now we write agents. Scripts follow rigid rules; agents are more flexible and often thats worth it.
+**Agents are the new scripts.** We used to write bash scripts and cron jobs to automate tedious tasks. Now we write agents. Scripts follow rigid rules; agents are more flexible and often that's worth it.
 
 </CalloutBox>
 
@@ -505,6 +503,9 @@ The standup bot still messages me at 6 PM. But now I just smile, run `standup ge
 
 F*$k you, standup bot. I win.
 
----
+## Further reading
 
-*Want to see how your AI features are performing? [Try PostHog LLM analytics](/docs/ai-engineering) - it's free to get started.*
+- **[LLM analytics docs](/docs/ai-engineering)** - Instrument your own AI features with tracing, evals, and cost tracking
+- **[How we built automatic clustering for LLM traces](/blog/llm-analytics-clustering-how-it-works)** - Deep dive into the clustering pipeline
+- **[OpenAI Agents SDK integration](https://github.com/PostHog/posthog-python/pull/408)** - The integration this post helped build
+- **[github-standup-agent](https://github.com/andrewm4894/github-standup-agent)** - The agent itself, open source
