@@ -15,6 +15,7 @@ interface AISlideProductAi {
     /** Full image URL for this product's AI slide. Omit to use default PostHog AI art. */
     image?: string
     imageAlt?: string
+    imageClasses?: string
 }
 
 interface AISlideProps {
@@ -63,8 +64,8 @@ export default function AISlide({ ai, productName }: AISlideProps) {
                     <CloudinaryImage
                         src={slideImage}
                         alt={slideAlt}
-                        className="max-w-[469px]"
-                        imgClassName="max-h-[320px] w-full object-contain"
+                        className="max-w-[400px]"
+                        imgClassName={ai?.imageClasses}
                     />
                 </aside>
             </div>
