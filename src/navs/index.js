@@ -5587,6 +5587,12 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Trace Reviews',
+                    url: '/docs/llm-analytics/trace-reviews',
+                    icon: 'IconCheckCircle',
+                    color: 'green',
+                },
+                {
                     name: 'Prompt management',
                     url: '/docs/llm-analytics/prompts',
                     icon: 'IconPencil',
