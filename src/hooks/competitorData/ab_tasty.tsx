@@ -37,6 +37,9 @@ export const ab_tasty = {
             implementation: {
                 multivariate_testing: true,
             },
+            supported_tests: {
+                multi_armed_bandit: true,
+            },
         },
         product_analytics: {
             available: false,
