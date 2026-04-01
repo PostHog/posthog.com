@@ -6,7 +6,7 @@ export const kameleoon = {
     },
     products: {
         feature_flags: {
-            available: true,
+            available: 'Enterprise',
             implementation: {
                 features: {
                     local_evaluation: true,
@@ -20,15 +20,18 @@ export const kameleoon = {
             },
         },
         experiments: {
-            available: true,
+            available: 'Enterprise',
             features: {
                 funnel_tests: false,
                 no_code_experiments: true,
                 secondary_metrics: true,
             },
             supported_tests: {
-                multi_armed_bandit: true,
+                multi_armed_bandit: 'Enterprise',
                 mutually_exclusive_experiments: false,
+            },
+            implementation: {
+                multivariate_testing: 'Enterprise',
             },
         },
         product_analytics: {
@@ -70,6 +73,7 @@ export const kameleoon = {
         security: {
             history_audit_logs: true,
             role_based_access_control: true,
+            hipaa_ready: 'Enterprise',
         },
     },
     pricing: {
