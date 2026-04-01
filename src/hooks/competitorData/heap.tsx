@@ -226,6 +226,7 @@ export const heap = {
             supported_tests: {
                 features: {
                     holdout_testing: 'n/a',
+                    multi_armed_bandit: false,
                 },
             },
         },

@@ -61,6 +61,9 @@ export const ab_tasty = {
         surveys: {
             available: false,
         },
+        error_tracking: {
+            available: false,
+        },
     },
     platform: {
         deployment: {

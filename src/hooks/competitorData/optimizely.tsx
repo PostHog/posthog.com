@@ -169,6 +169,9 @@ export const optimizely = {
         cdp: {
             available: true,
         },
+        error_tracking: {
+            available: false,
+        },
     },
     platform: {
         deployment: {

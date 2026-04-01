@@ -171,6 +171,11 @@ export const fullstory = {
                     multivariate_testing: false,
                 },
             },
+            supported_tests: {
+                features: {
+                    multi_armed_bandit: false,
+                },
+            },
         },
         error_tracking: {
             available: false,
