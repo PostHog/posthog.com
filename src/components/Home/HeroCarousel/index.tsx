@@ -78,8 +78,10 @@ export default function HeroCarousel() {
                                 <Tabs.Trigger
                                     key={tab.value}
                                     value={tab.value}
-                                    className={`relative flex-1 min-w-[200px] @sm:min-w-0 px-3 py-2.5 text-sm font-semibold cursor-pointer select-none transition-colors text-balance rounded-t-md ${
-                                        isActive ? `${tab.color} ${tab.activeText}` : 'text-secondary'
+                                    className={`relative flex-1 min-w-[200px] @sm:min-w-0 px-3 py-2.5 text-sm font-semibold cursor-pointer select-none @sm:transition-colors text-balance rounded-t-md ${
+                                        isActive
+                                            ? `${tab.color} ${tab.activeText} order-last @sm:order-none`
+                                            : 'text-secondary'
                                     }`}
                                 >
                                     {tab.label}
@@ -103,9 +105,9 @@ export default function HeroCarousel() {
                 </Tabs.List>
 
                 <div
-                    className={`min-h-[300px] @[820px]:min-h-[400px] p-2 rounded-b-md rounded-t-md ${
+                    className={`min-h-[300px] @[820px]:min-h-[400px] p-2 @sm:rounded-b-md @sm:rounded-t-md ${
                         isFirst ? '@sm:rounded-tl-none' : ''
-                    } ${isLast ? '@sm:rounded-tr-none' : ''} relative ${activeColor} flex transition-colors`}
+                    } ${isLast ? '@sm:rounded-tr-none' : ''} relative ${activeColor} flex @sm:transition-colors`}
                 >
                     <div className="flex flex-col bg-light dark:bg-dark flex-1 w-full shadow-2xl rounded">
                         <span className="absolute top-4 right-4 z-10">
@@ -140,23 +142,6 @@ export default function HeroCarousel() {
                     </div>
                 </div>
             </Tabs.Root>
-
-            <style>{`
-                @keyframes hero-carousel-progress {
-                    from { width: 0%; }
-                    to { width: 100%; }
-                }
-                @keyframes hero-carousel-fade-in {
-                    from { opacity: 0; }
-                    to { opacity: 1; }
-                }
-                @keyframes scattered-float {
-                    0%, 100% { transform: translate(-50%, -50%); }
-                    25% { transform: translate(calc(-50% + 2px), calc(-50% - 1.5px)); }
-                    50% { transform: translate(calc(-50% - 1px), calc(-50% + 2px)); }
-                    75% { transform: translate(calc(-50% + 1.5px), calc(-50% + 1px)); }
-                }
-            `}</style>
         </div>
     )
 }

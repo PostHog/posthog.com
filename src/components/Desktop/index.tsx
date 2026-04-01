@@ -831,24 +831,11 @@ export default function Desktop() {
             <NotificationsPanel />
             <ActionFigurePopup />
             {confetti && (
-                <div className="fixed inset-0 pointer-events-none">
+                <div className="fixed inset-0">
                     <ReactConfetti
                         onConfettiComplete={() => setConfetti(false)}
                         recycle={false}
-                        numberOfPieces={1200}
-                        gravity={0.12}
-                        initialVelocityY={20}
-                        initialVelocityX={10}
-                        tweenDuration={200}
-                    />
-                    <ReactConfetti
-                        recycle={false}
-                        numberOfPieces={800}
-                        confettiSource={{ x: 0, y: 0, w: window.innerWidth, h: window.innerHeight }}
-                        initialVelocityY={-8}
-                        initialVelocityX={5}
-                        gravity={0.15}
-                        tweenDuration={1}
+                        numberOfPieces={1000}
                     />
                 </div>
             )}

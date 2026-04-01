@@ -2691,3 +2691,37 @@ div[data-radix-popper-content-wrapper] {
 .dark .ph-mapbox-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
     border-left-color: rgb(30 31 35) !important;
 }
+
+@keyframes hero-carousel-progress {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes hero-carousel-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scattered-float {
+    0%,
+    100% {
+        transform: translate(-50%, -50%);
+    }
+    25% {
+        transform: translate(calc(-50% + 2px), calc(-50% - 1.5px));
+    }
+    50% {
+        transform: translate(calc(-50% - 1px), calc(-50% + 2px));
+    }
+    75% {
+        transform: translate(calc(-50% + 1.5px), calc(-50% + 1px));
+    }
+}
