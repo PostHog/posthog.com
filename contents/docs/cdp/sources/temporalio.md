@@ -1,3 +1,14 @@
+---
+title: Linking Temporal.io as a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+sourceId: TemporalIO
+---
+
 The Temporal.io connector can link workflows and workflow history to PostHog.
 
 To link Temporal.io:
