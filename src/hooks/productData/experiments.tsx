@@ -419,5 +419,20 @@ export const experiments = {
             "PostHog Experiments truly shine when combined with our other products. Start with an experiment on a new feature, then use product analytics to dive deeper than your primary metric—maybe conversion increased but time-to-convert also increased. Watch session recordings of users in each variant to see exactly how they interact differently. If the experiment wins, roll it out gradually using the same feature flag. This integrated workflow means you're not jumping between tools or trying to match user IDs across systems. It's one platform where everything connects.",
         'getting-started':
             "If you don't have a ton of experience running tests, here's an idea to get you going: your first experiment should be something simple with a clear metric. Maybe test a new button color (yes, they can matter especially at scale in B2C apps) or headline text. Create the experiment, which automatically creates a feature flag. Implement the flag check in your code – usually 5-10 lines (and AI is really good at helping with this!). Launch to 50% of users and within days, you'll see initial results with probability estimates.<br /><br />The key is starting simple and building confidence. Once you see how easy it is, you'll naturally progress to more complex experiments. Before long, you'll be testing everything, and your metrics (and investors) will thank you for it.",
+        ai: 'The PostHog MCP server lets your AI coding agent create and manage Experiments directly from your code editor. Set up A/B tests, check results, and manage Experiment lifecycle – without switching to the PostHog app.',
+    },
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/EXPERIMENTS_f9f880f1b2.png',
+        imageAlt: 'PostHog AI and experiments',
+        description: 'set up experiments, interpret results, and connect winners to the rest of your product data',
+        skills: [
+            'Configures experiments and variants from natural language',
+            'Summarizes results, identifies likely winners, and suggests ideas for follow-up tests',
+            'Spots common setup problems that would skew your statistics',
+        ],
+        prompts: [
+            'Set up an A/B test with a 70/30 split for a new red button on the homepage',
+            'Summarize experiment results for my latest feature rollout',
+        ],
     },
 }
