@@ -23,7 +23,7 @@ export const dataPipelines = {
             icon: 'IconBook',
             color: 'blue',
             featured: true,
-            dynamicChildren: 'data-pipeline-source-webhooks',
+            dynamicChildren: 'data-pipeline-sources',
             children: [
                 {
                     name: 'Overview',
@@ -34,153 +34,7 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/incoming-webhooks',
                 },
                 {
-                    name: 'Managed',
-                },
-                {
-                    name: 'Attio',
-                    url: '/docs/cdp/sources/attio',
-                },
-                {
-                    name: 'BuildBetter',
-                    url: '/docs/cdp/sources/buildbetter',
-                },
-                {
-                    name: 'Stripe',
-                    url: '/docs/cdp/sources/stripe',
-                },
-                {
-                    name: 'Hubspot',
-                    url: '/docs/cdp/sources/hubspot',
-                },
-                {
-                    name: 'Klaviyo',
-                    url: '/docs/cdp/sources/klaviyo',
-                },
-                {
-                    name: 'Linear',
-                    url: '/docs/cdp/sources/linear',
-                },
-                {
-                    name: 'Zendesk',
-                    url: '/docs/cdp/sources/zendesk',
-                },
-                {
-                    name: 'Postgres',
-                    url: '/docs/cdp/sources/postgres',
-                },
-                {
-                    name: 'Salesforce',
-                    url: '/docs/cdp/sources/salesforce',
-                },
-                {
-                    name: 'Sentry',
-                    url: '/docs/cdp/sources/sentry',
-                },
-                {
-                    name: 'MySQL',
-                    url: '/docs/cdp/sources/mysql',
-                },
-                {
-                    name: 'MongoDB',
-                    url: '/docs/cdp/sources/mongodb',
-                },
-                {
-                    name: 'Azure SQL Server',
-                    url: '/docs/cdp/sources/azure-db',
-                },
-                {
-                    name: 'Redshift',
-                    url: '/docs/cdp/sources/redshift',
-                },
-                {
-                    name: 'Snowflake',
-                    url: '/docs/cdp/sources/snowflake',
-                },
-                {
-                    name: 'Vitally',
-                    url: '/docs/cdp/sources/vitally',
-                },
-                {
-                    name: 'Chargebee',
-                    url: '/docs/cdp/sources/chargebee',
-                },
-                {
-                    name: 'Convex',
-                    url: '/docs/cdp/sources/convex',
-                },
-                {
-                    name: 'BigQuery',
-                    url: '/docs/cdp/sources/bigquery',
-                },
-                {
-                    name: 'Google Ads',
-                    url: '/docs/cdp/sources/google-ads',
-                },
-                {
-                    name: 'Bing Ads',
-                    url: '/docs/cdp/sources/bing-ads',
-                },
-                {
-                    name: 'LinkedIn Ads',
-                    url: '/docs/cdp/sources/linkedin-ads',
-                },
-                {
-                    name: 'Reddit Ads',
-                    url: '/docs/cdp/sources/reddit-ads',
-                },
-                {
-                    name: 'Meta Ads',
-                    url: '/docs/cdp/sources/meta-ads',
-                },
-                {
-                    name: 'Tiktok Ads',
-                    url: '/docs/cdp/sources/tiktok-ads',
-                },
-                {
-                    name: 'Snapchat Ads',
-                    url: '/docs/cdp/sources/snapchat-ads',
-                },
-                {
-                    name: 'Pinterest Ads',
-                    url: '/docs/cdp/sources/pinterest-ads',
-                },
-                {
-                    name: 'Google Sheets',
-                    url: '/docs/cdp/sources/google-sheets',
-                },
-                {
-                    name: 'Temporal.io',
-                    url: '/docs/cdp/sources/temporal',
-                },
-                {
-                    name: 'Typeform',
-                    url: '/docs/cdp/sources/typeform',
-                },
-                {
-                    name: 'DoIt',
-                    url: '/docs/cdp/sources/doit',
-                },
-                {
-                    name: 'Self-managed',
-                },
-                {
-                    name: 'S3',
-                    url: '/docs/cdp/sources/s3',
-                },
-                {
-                    name: 'Azure Blob',
-                    url: '/docs/cdp/sources/azure-blob',
-                },
-                {
-                    name: 'Cloudflare R2',
-                    url: '/docs/cdp/sources/r2',
-                },
-                {
-                    name: 'Google Cloud Storage',
-                    url: '/docs/cdp/sources/gcs',
-                },
-                {
-                    name: 'Webhooks',
+                    name: 'Sources',
                 },
             ],
         },
@@ -3707,32 +3561,34 @@ export const docsMenu = {
                     url: '/docs/web-analytics/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                    sortChildrenAlpha: true,
                     children: [
                         { name: 'Overview', url: '/docs/web-analytics/installation' },
                         { name: 'AI wizard', url: '/docs/web-analytics/installation/ai-wizard' },
-                        { name: 'Web', url: '/docs/web-analytics/installation/web' },
-                        { name: 'HTML snippet', url: '/docs/web-analytics/installation/html-snippet' },
-                        { name: 'React', url: '/docs/web-analytics/installation/react' },
-                        { name: 'Next.js', url: '/docs/web-analytics/installation/nextjs' },
-                        { name: 'Vue', url: '/docs/web-analytics/installation/vue' },
-                        { name: 'Nuxt', url: '/docs/web-analytics/installation/nuxt' },
-                        { name: 'Angular', url: '/docs/web-analytics/installation/angular' },
-                        { name: 'Svelte', url: '/docs/web-analytics/installation/svelte' },
-                        { name: 'Astro', url: '/docs/web-analytics/installation/astro' },
-                        { name: 'Remix', url: '/docs/web-analytics/installation/remix' },
-                        { name: 'TanStack Start', url: '/docs/web-analytics/installation/tanstack' },
-                        { name: 'iOS', url: '/docs/web-analytics/installation/ios' },
                         { name: 'Android', url: '/docs/web-analytics/installation/android' },
-                        { name: 'React Native', url: '/docs/web-analytics/installation/react-native' },
-                        { name: 'Flutter', url: '/docs/web-analytics/installation/flutter' },
-                        { name: 'GTM', url: '/docs/web-analytics/installation/gtm' },
-                        { name: 'Shopify', url: '/docs/web-analytics/installation/shopify' },
-                        { name: 'WordPress', url: '/docs/web-analytics/installation/wordpress' },
-                        { name: 'Webflow', url: '/docs/web-analytics/installation/webflow' },
-                        { name: 'Framer', url: '/docs/web-analytics/installation/framer' },
+                        { name: 'Angular', url: '/docs/web-analytics/installation/angular' },
+                        { name: 'Astro', url: '/docs/web-analytics/installation/astro' },
                         { name: 'Bubble', url: '/docs/web-analytics/installation/bubble' },
                         { name: 'Docusaurus', url: '/docs/web-analytics/installation/docusaurus' },
+                        { name: 'Flutter', url: '/docs/web-analytics/installation/flutter' },
+                        { name: 'Framer', url: '/docs/web-analytics/installation/framer' },
+                        { name: 'GTM', url: '/docs/web-analytics/installation/gtm' },
+                        { name: 'HTML snippet', url: '/docs/web-analytics/installation/html-snippet' },
+                        { name: 'iOS', url: '/docs/web-analytics/installation/ios' },
+                        { name: 'Next.js', url: '/docs/web-analytics/installation/nextjs' },
+                        { name: 'Nuxt', url: '/docs/web-analytics/installation/nuxt' },
                         { name: 'Phoenix', url: '/docs/web-analytics/installation/phoenix' },
+                        { name: 'React', url: '/docs/web-analytics/installation/react' },
+                        { name: 'React Native', url: '/docs/web-analytics/installation/react-native' },
+                        { name: 'React Router', url: '/docs/web-analytics/installation/react-router' },
+                        { name: 'Remix', url: '/docs/web-analytics/installation/remix' },
+                        { name: 'Shopify', url: '/docs/web-analytics/installation/shopify' },
+                        { name: 'Svelte', url: '/docs/web-analytics/installation/svelte' },
+                        { name: 'TanStack Start', url: '/docs/web-analytics/installation/tanstack' },
+                        { name: 'Vue', url: '/docs/web-analytics/installation/vue' },
+                        { name: 'Web', url: '/docs/web-analytics/installation/web' },
+                        { name: 'Webflow', url: '/docs/web-analytics/installation/webflow' },
+                        { name: 'WordPress', url: '/docs/web-analytics/installation/wordpress' },
                     ],
                 },
                 {
@@ -3853,12 +3709,9 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    sortChildrenAlpha: true,
                     children: [
                         { name: 'Overview', url: '/docs/session-replay/installation' },
-                        { name: 'Web', url: '/docs/session-replay/installation/web' },
-                        { name: 'React', url: '/docs/session-replay/installation/react' },
-                        { name: 'Next.js', url: '/docs/session-replay/installation/nextjs' },
-                        { name: 'React Native', url: '/docs/session-replay/installation/react-native' },
                         { name: 'Android', url: '/docs/session-replay/installation/android' },
                         { name: 'iOS', url: '/docs/session-replay/installation/ios' },
                         { name: 'Flutter', url: '/docs/session-replay/installation/flutter' },
@@ -3866,12 +3719,19 @@ export const docsMenu = {
                         { name: 'Angular', url: '/docs/session-replay/installation/angular' },
                         { name: 'Astro', url: '/docs/session-replay/installation/astro' },
                         { name: 'Bubble', url: '/docs/session-replay/installation/bubble' },
+                        { name: 'Flutter', url: '/docs/session-replay/installation/flutter' },
                         { name: 'Framer', url: '/docs/session-replay/installation/framer' },
                         { name: 'HTML snippet', url: '/docs/session-replay/installation/html-snippet' },
+                        { name: 'iOS', url: '/docs/session-replay/installation/ios' },
+                        { name: 'Next.js', url: '/docs/session-replay/installation/nextjs' },
                         { name: 'Nuxt', url: '/docs/session-replay/installation/nuxt' },
+                        { name: 'React', url: '/docs/session-replay/installation/react' },
+                        { name: 'React Native', url: '/docs/session-replay/installation/react-native' },
+                        { name: 'React Router', url: '/docs/session-replay/installation/react-router' },
                         { name: 'Remix', url: '/docs/session-replay/installation/remix' },
                         { name: 'Svelte', url: '/docs/session-replay/installation/svelte' },
                         { name: 'Vue', url: '/docs/session-replay/installation/vue' },
+                        { name: 'Web', url: '/docs/session-replay/installation/web' },
                         { name: 'Webflow', url: '/docs/session-replay/installation/webflow' },
                     ],
                 },
@@ -4017,24 +3877,26 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    sortChildrenAlpha: true,
                     children: [
                         { name: 'Overview', url: '/docs/feature-flags/installation' },
-                        { name: 'Web', url: '/docs/feature-flags/installation/web' },
-                        { name: 'React', url: '/docs/feature-flags/installation/react' },
-                        { name: 'Node.js', url: '/docs/feature-flags/installation/nodejs' },
-                        { name: 'Python', url: '/docs/feature-flags/installation/python' },
-                        { name: 'PHP', url: '/docs/feature-flags/installation/php' },
-                        { name: 'Ruby', url: '/docs/feature-flags/installation/ruby' },
-                        { name: 'Go', url: '/docs/feature-flags/installation/go' },
-                        { name: 'React Native', url: '/docs/feature-flags/installation/react-native' },
+                        { name: '.NET', url: '/docs/feature-flags/installation/dotnet' },
                         { name: 'Android', url: '/docs/feature-flags/installation/android' },
+                        { name: 'API', url: '/docs/feature-flags/installation/api' },
+                        { name: 'Elixir', url: '/docs/feature-flags/installation/elixir' },
+                        { name: 'Flutter', url: '/docs/feature-flags/installation/flutter' },
+                        { name: 'Go', url: '/docs/feature-flags/installation/go' },
                         { name: 'iOS', url: '/docs/feature-flags/installation/ios' },
                         { name: 'Java', url: '/docs/feature-flags/installation/java' },
-                        { name: 'Flutter', url: '/docs/feature-flags/installation/flutter' },
-                        { name: 'Elixir', url: '/docs/feature-flags/installation/elixir' },
+                        { name: 'Node.js', url: '/docs/feature-flags/installation/nodejs' },
+                        { name: 'PHP', url: '/docs/feature-flags/installation/php' },
+                        { name: 'Python', url: '/docs/feature-flags/installation/python' },
+                        { name: 'React', url: '/docs/feature-flags/installation/react' },
+                        { name: 'React Native', url: '/docs/feature-flags/installation/react-native' },
+                        { name: 'React Router', url: '/docs/feature-flags/installation/react-router' },
+                        { name: 'Ruby', url: '/docs/feature-flags/installation/ruby' },
                         { name: 'Rust', url: '/docs/feature-flags/installation/rust' },
-                        { name: '.NET', url: '/docs/feature-flags/installation/dotnet' },
-                        { name: 'API', url: '/docs/feature-flags/installation/api' },
+                        { name: 'Web', url: '/docs/feature-flags/installation/web' },
                     ],
                 },
                 {
@@ -4249,58 +4111,19 @@ export const docsMenu = {
                     icon: 'IconCode',
                     featured: true,
                     color: 'blue',
+                    sortChildrenAlpha: true,
                     children: [
                         {
                             name: 'Overview',
                             url: '/docs/experiments/installation',
                         },
                         {
-                            name: 'Web',
-                            url: '/docs/experiments/installation/web',
-                        },
-                        {
-                            name: 'React',
-                            url: '/docs/experiments/installation/react',
-                        },
-                        {
-                            name: 'Node.js',
-                            url: '/docs/experiments/installation/node',
-                        },
-                        {
-                            name: 'Python',
-                            url: '/docs/experiments/installation/python',
-                        },
-                        {
-                            name: 'PHP',
-                            url: '/docs/experiments/installation/php',
-                        },
-                        {
-                            name: 'Ruby',
-                            url: '/docs/experiments/installation/ruby',
-                        },
-                        {
-                            name: 'Go',
-                            url: '/docs/experiments/installation/go',
-                        },
-                        {
-                            name: 'React Native',
-                            url: '/docs/experiments/installation/react-native',
-                        },
-                        {
-                            name: 'Android',
-                            url: '/docs/experiments/installation/android',
-                        },
-                        {
-                            name: 'iOS',
-                            url: '/docs/experiments/installation/ios',
-                        },
-                        {
                             name: '.NET',
                             url: '/docs/experiments/installation/dotnet',
                         },
                         {
-                            name: 'Rust',
-                            url: '/docs/experiments/installation/rust',
+                            name: 'Android',
+                            url: '/docs/experiments/installation/android',
                         },
                         {
                             name: 'Angular',
@@ -4327,6 +4150,14 @@ export const docsMenu = {
                             url: '/docs/experiments/installation/framer',
                         },
                         {
+                            name: 'Go',
+                            url: '/docs/experiments/installation/go',
+                        },
+                        {
+                            name: 'iOS',
+                            url: '/docs/experiments/installation/ios',
+                        },
+                        {
                             name: 'Laravel',
                             url: '/docs/experiments/installation/laravel',
                         },
@@ -4335,12 +4166,44 @@ export const docsMenu = {
                             url: '/docs/experiments/installation/nextjs',
                         },
                         {
+                            name: 'Node.js',
+                            url: '/docs/experiments/installation/node',
+                        },
+                        {
                             name: 'Nuxt',
                             url: '/docs/experiments/installation/nuxt',
                         },
                         {
+                            name: 'PHP',
+                            url: '/docs/experiments/installation/php',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/experiments/installation/python',
+                        },
+                        {
+                            name: 'React',
+                            url: '/docs/experiments/installation/react',
+                        },
+                        {
+                            name: 'React Native',
+                            url: '/docs/experiments/installation/react-native',
+                        },
+                        {
+                            name: 'React Router',
+                            url: '/docs/experiments/installation/react-router',
+                        },
+                        {
                             name: 'Remix',
                             url: '/docs/experiments/installation/remix',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/experiments/installation/ruby',
+                        },
+                        {
+                            name: 'Rust',
+                            url: '/docs/experiments/installation/rust',
                         },
                         {
                             name: 'Svelte',
@@ -4349,6 +4212,10 @@ export const docsMenu = {
                         {
                             name: 'Vue',
                             url: '/docs/experiments/installation/vue',
+                        },
+                        {
+                            name: 'Web',
+                            url: '/docs/experiments/installation/web',
                         },
                         {
                             name: 'Webflow',
@@ -5251,6 +5118,7 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/sources',
                     icon: 'IconBook',
                     color: 'blue',
+                    dynamicChildren: 'data-warehouse-sources',
                     children: [
                         {
                             name: 'Overview',
@@ -5261,186 +5129,7 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/posthog',
                         },
                         {
-                            name: 'Managed',
-                        },
-                        {
-                            name: 'Attio',
-                            url: '/docs/data-warehouse/sources/attio',
-                        },
-                        {
-                            name: 'Azure SQL Server',
-                            url: '/docs/data-warehouse/sources/azure-db',
-                        },
-                        {
-                            name: 'BigQuery',
-                            url: '/docs/data-warehouse/sources/bigquery',
-                        },
-                        {
-                            name: 'BuildBetter',
-                            url: '/docs/data-warehouse/sources/buildbetter',
-                        },
-                        {
-                            name: 'Chargebee',
-                            url: '/docs/data-warehouse/sources/chargebee',
-                        },
-                        {
-                            name: 'Clerk',
-                            url: '/docs/data-warehouse/sources/clerk',
-                        },
-                        {
-                            name: 'Convex',
-                            url: '/docs/data-warehouse/sources/convex',
-                        },
-                        {
-                            name: 'DoIt',
-                            url: '/docs/data-warehouse/sources/doit',
-                        },
-                        {
-                            name: 'Google Ads',
-                            url: '/docs/data-warehouse/sources/google-ads',
-                        },
-                        {
-                            name: 'Bing Ads',
-                            url: '/docs/data-warehouse/sources/bing-ads',
-                        },
-                        {
-                            name: 'LinkedIn Ads',
-                            url: '/docs/data-warehouse/sources/linkedin-ads',
-                        },
-                        {
-                            name: 'Reddit Ads',
-                            url: '/docs/data-warehouse/sources/reddit-ads',
-                        },
-                        {
-                            name: 'Meta Ads',
-                            url: '/docs/data-warehouse/sources/meta-ads',
-                        },
-                        {
-                            name: 'Tiktok Ads',
-                            url: '/docs/data-warehouse/sources/tiktok-ads',
-                        },
-                        {
-                            name: 'Snapchat Ads',
-                            url: '/docs/data-warehouse/sources/snapchat-ads',
-                        },
-                        {
-                            name: 'Pinterest Ads',
-                            url: '/docs/data-warehouse/sources/pinterest-ads',
-                        },
-                        {
-                            name: 'Shopify',
-                            url: '/docs/data-warehouse/sources/shopify',
-                        },
-                        {
-                            name: 'Supabase',
-                            url: '/tutorials/supabase-query',
-                        },
-                        {
-                            name: 'Google Sheets',
-                            url: '/docs/data-warehouse/sources/google-sheets',
-                        },
-                        {
-                            name: 'GitHub',
-                            url: '/docs/data-warehouse/sources/github',
-                        },
-                        {
-                            name: 'Hubspot',
-                            url: '/docs/data-warehouse/sources/hubspot',
-                            badge: {
-                                title: 'Popular',
-                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            name: 'Klaviyo',
-                            url: '/docs/data-warehouse/sources/klaviyo',
-                        },
-                        {
-                            name: 'Linear',
-                            url: '/docs/data-warehouse/sources/linear',
-                        },
-                        {
-                            name: 'Mailchimp',
-                            url: '/docs/data-warehouse/sources/mailchimp',
-                        },
-                        {
-                            name: 'MongoDB',
-                            url: '/docs/data-warehouse/sources/mongodb',
-                        },
-                        {
-                            name: 'MySQL',
-                            url: '/docs/data-warehouse/sources/mysql',
-                            badge: {
-                                title: 'Popular',
-                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            name: 'Postgres',
-                            url: '/docs/data-warehouse/sources/postgres',
-                            badge: {
-                                title: 'Popular',
-                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            name: 'Redshift',
-                            url: '/docs/data-warehouse/sources/redshift',
-                        },
-                        {
-                            name: 'Salesforce',
-                            url: '/docs/data-warehouse/sources/salesforce',
-                        },
-                        {
-                            name: 'Sentry',
-                            url: '/docs/data-warehouse/sources/sentry',
-                        },
-                        {
-                            name: 'Snowflake',
-                            url: '/docs/data-warehouse/sources/snowflake',
-                        },
-                        {
-                            name: 'Stripe',
-                            url: '/docs/data-warehouse/sources/stripe',
-                            badge: {
-                                title: 'Popular',
-                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            name: 'Temporal.io',
-                            url: '/docs/data-warehouse/sources/temporal',
-                        },
-                        {
-                            name: 'Typeform',
-                            url: '/docs/data-warehouse/sources/typeform',
-                        },
-                        {
-                            name: 'Vitally',
-                            url: '/docs/data-warehouse/sources/vitally',
-                        },
-                        {
-                            name: 'Zendesk',
-                            url: '/docs/data-warehouse/sources/zendesk',
-                        },
-                        {
-                            name: 'Self-managed',
-                        },
-                        {
-                            name: 'Azure Blob',
-                            url: '/docs/data-warehouse/sources/azure-blob',
-                        },
-                        {
-                            name: 'Cloudflare R2',
-                            url: '/docs/data-warehouse/sources/r2',
-                        },
-                        {
-                            name: 'Google Cloud Storage',
-                            url: '/docs/data-warehouse/sources/gcs',
-                        },
-                        {
-                            name: 'S3',
-                            url: '/docs/data-warehouse/sources/s3',
+                            name: 'Sources',
                         },
                     ],
                 },
