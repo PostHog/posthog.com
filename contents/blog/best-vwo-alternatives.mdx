@@ -1,8 +1,9 @@
 ---
 title: 'The best VWO alternatives & competitors, compared'
-date: 2024-04-15
+date: 2026-01-01
 author:
   - ian-vanagas
+  - natalia-amorim
 rootpage: /blog
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
@@ -10,9 +11,16 @@ featuredImageType: full
 category: General
 tags:
   - Comparisons
+seo:
+  metaTitle: 'The best VWO alternatives, compared'
+  metaDescription: 'Looking for a VWO alternative? Compare PostHog, Optimizely, AB Tasty, and more on features, pricing, and experimentation capabilities.'
 ---
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
+
+VWO is a popular experience optimization platform combining A/B testing, heatmaps, session replay, surveys, feature flags, and personalization in one modular suite. It's widely used by marketing and CRO teams at mid-size to enterprise companies.
+ 
+If you've outgrown VWO, need something more developer-friendly, or want more transparent pricing, here are the best alternatives.
 
 ## 1. PostHog
 
@@ -25,26 +33,31 @@ import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ### What is PostHog?
 
-[PostHog](/) (us 💪) is an open-source suite of dev tools like A/B testing, feature flags, product analytics, session replay, and user surveys. This means it's not only an alternative to VWO but also tools like [Mixpanel](/blog/posthog-vs-mixpanel) and [Hotjar](/blog/posthog-vs-hotjar).
+[PostHog](/) (that's us 💪) is an all-in-one suite of dev tools like [experiments](/experiments), [feature flags](/feature-flags), [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [user surveys](/user-surveys), and more. 
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of April 2024, 5,610 of the top one million websites use PostHog. This is just over half of VWO's 9,183.
+This means it's not only an alternative to VWO but also tools like [Mixpanel](/blog/posthog-vs-mixpanel), [Sentry](/blog/posthog-vs-sentry), and [Hotjar](/blog/posthog-vs-hotjar).
 
 ### Key features
 
-- 🧪 **A/B tests:** Optimize your app and website with up to nine test variations and track impact on primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+- **A/B tests:** Optimize your app and website with up to nine test variations and track impact on primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
 
-- 📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
+- **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
 
-- 🚩 **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
+- **PostHog AI:** A powerful AI layer that sits on top of all your PostHog data. Use natural language to generate insights, build funnels, summarize session replays, and even set up experiments.
 
-- 📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
+- **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
 
-- 💬 **Surveys:** Target surveys by event or person properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+- **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
+
+- **Surveys:** Target surveys by event or person properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+
+- **MCP server:** Connect PostHog to AI coding tools like Cursor and Claude Code via our [official MCP server](/docs/model-context-protocol), so you can work with your product data without leaving your editor.
 
 ### How does PostHog compare to VWO?
 
 PostHog and VWO have very similar feature sets. VWO focuses more on personalization and its visual experiment editor while PostHog has a stronger analytics suite.
 
+<p>
 <ProductComparisonTable
   competitors={['posthog', 'vwo']}
   rows={[
@@ -52,15 +65,43 @@ PostHog and VWO have very similar feature sets. VWO focuses more on personalizat
     'experiments',
     'experiments.features.no_code_experiments',
     'experiments.targeting.features.custom_targeting',
+    'experiments.implementation.multivariate_testing',
+    'experiments.supported_test.multi_armed_bandit',
     'product_analytics',
     'product_analytics.features.autocapture',
     'session_replay',
     'feature_flags',
     'heatmaps',
+    'error_tracking',
     'surveys',
     'platform.deployment.open_source',
+    'platform.pricing.transparent_pricing'
   ]}
 />
+</p>
+
+<details>
+
+<summary>Main differences between PostHog and VWO</summary>
+
+- PostHog has a permanent, generous [free tier](/pricing); VWO has a 30-day free trial only.
+- PostHog includes [error tracking](/error-tracking) and [LLM observability](/llm-analytics); VWO has neither.
+- VWO has a more powerful no-code visual editor for marketers; PostHog is more suited to engineers.
+- VWO has a CDP; PostHog has a built-in [data warehouse](/data-warehouse) and [a CDP](/cdp).
+- PostHog is open source with transparent, usage-based pricing; VWO is closed source with opaque pricing.
+ 
+</details>
+ 
+<details>
+<summary>Main similarities between PostHog and VWO</summary>
+ 
+- Both offer A/B testing, multivariate testing, and feature flags
+- Both include session replay, heatmaps, and surveys
+- Both support custom targeting and audience segmentation for experiments
+- Both integrate with popular tools and data warehouses
+- Both support server-side and client-side experimentation
+ 
+</details>
 
 ### Why do companies use PostHog?
 
@@ -75,6 +116,8 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 > #### Bottom line
 > PostHog most closely matches the functionality of VWO while being free, self-serve, and open source. This makes it a great alternative, especially for product-led startups and scaleups.
 
+<WizardCTA />
+
 ## 2. Optimizely
 
 - **Founded:** 2010
@@ -88,24 +131,23 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 [Optimizely](/blog/posthog-vs-optimizely) is an all-in-one set of tools for marketing. It helps businesses create the best possible digital experiences. It does this through a combination of content management, marketing, web and feature experiments, and ecommerce optimization tools.
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/Optimizely) in April 2024, 5,353 of the top million sites use Optimizely. This is just over half of VWO's 9,183.
-
 ### Key features
 
-- 🕸️ **Web experimentation:** Optimizely's visual editor, on-page previews, and pre-built components help create frontend experiments quickly.
+- **Web experimentation:** Optimizely's visual editor, on-page previews, and pre-built components help create frontend experiments quickly.
 
-- 🧪 **Feature experimentation:** Run targeted experiments anywhere on your stack. Personalize experiences to specific segments and users. View detailed reports on their impact.
+- **Feature experimentation:** Run targeted experiments anywhere on your stack. Personalize experiences to specific segments and users. View detailed reports on their impact.
 
-- 🤹 **Project management:** Idea backlogs, workflows, and design tools to coordinate and collaborate on experiments and content. 
+- **Project management:** Idea backlogs, workflows, and design tools to coordinate and collaborate on experiments and content. 
 
-- 📝 **Content management system:** Manage, deliver, and optimize your content in a centralized location.
+- **Content management system:** Manage, deliver, and optimize your content in a centralized location.
 
-- 💸 **Ecommerce optimization:** Customize checkout workflow along with CMS and experimentation to create the best possible commerce experience.
+- **Ecommerce optimization:** Customize checkout workflow along with CMS and experimentation to create the best possible commerce experience.
 
 ### How does Optimizely compare to VWO?
 
-Both Optimizely and VWO are multi-product platforms with a focus on optimizing user experiences. VWO has more tools for understanding users, like session replays and surveys, while VWO focuses more on content and project management tools.
+Both Optimizely and VWO are multi-product platforms with a focus on optimizing user experiences. VWO has more tools for understanding users, like session replays and surveys, while Optimizely focuses more on content and project management tools.
 
+<p>
 <ProductComparisonTable
   competitors={['optimizely', 'vwo']}
   rows={[
@@ -113,15 +155,40 @@ Both Optimizely and VWO are multi-product platforms with a focus on optimizing u
     'experiments',
     'experiments.features.no_code_experiments',
     'experiments.targeting.features.custom_targeting',
+    'experiments.implementation.multivariate_testing',
+    'experiments.supported_test.multi_armed_bandit',
     'product_analytics',
     'product_analytics.features.autocapture',
     'session_replay',
     'feature_flags',
     'heatmaps',
+    'error_tracking',
     'surveys',
     'platform.deployment.open_source',
+    'platform.pricing.transparent_pricing'
   ]}
 />
+</p>
+
+<details>
+<summary>Main differences between Optimizely and VWO</summary>
+
+- Optimizely includes a full CMS and campaign orchestration suite; VWO focuses on experimentation and behavioral analytics without a CMS.
+- Optimizely targets enterprise teams with complex workflows; VWO is more accessible for mid-market marketing and CRO teams.
+- VWO includes session replay, heatmaps, and on-page surveys natively; Optimizely has no native session replay or heatmaps.
+- Optimizely has Opal AI for content and campaign orchestration; VWO has Copilot AI focused on experiment hypothesis generation.
+
+</details>
+
+<details>
+<summary>Main similarities between Optimizely and VWO</summary>
+
+- Both offer web and feature experimentation with a visual editor
+- Both support multivariate testing and custom audience targeting
+- Both integrate with popular analytics platforms like Google Analytics and Adobe Analytics
+- Both target enterprise and mid-market teams running CRO programs
+ 
+</details>
 
 ### Why do companies use Optimizely?
 
@@ -151,24 +218,23 @@ AB Tasty is a set of tools for optimizing brand and product experiences. This in
 
 It helps teams build better end-to-end digital user experiences that drive ROI, engagement, and loyalty. The company focuses on retail, entertainment, and ecommerce companies
 
-[BuiltWith](https://trends.builtwith.com/analytics/AB-Tasty) says 2,351 of the top one million websites deploy AB Tasty as of April 2024. This is significantly less than VWO's 9,183.
-
 ### Key features
 
-- 🌐 **Web experimentation:** Run A/B and multivariate tests easily with low/no-code tools like a visual editor and pre-built widgets.
+- **Web experimentation:** Run A/B and multivariate tests easily with low/no-code tools like a visual editor and pre-built widgets.
 
-- 🧪 **Feature experimentation:** Test new features on specific users or segments in your server-side or mobile apps.
+- **Feature experimentation:** Test new features on specific users or segments in your server-side or mobile apps.
 
-- 🫂 **Personalization:** Create personalized experiences with audience builder and segmentation tools.
+- **Personalization:** Create personalized experiences with audience builder and segmentation tools.
 
-- 🛼 **Rollouts:** Use feature flags to progressively deliver, manage, and rollback new features.
+- **Rollouts:** Use feature flags to progressively deliver, manage, and rollback new features.
 
-- 🙋‍♂️ **Recommendations:** Show the right products at the right time in customer journeys. Provide unique suggestions to increase conversion. 
+- **Recommendations:** Show the right products at the right time in customer journeys. Provide unique suggestions to increase conversion. 
 
 ### How does AB Tasty compare to VWO?
 
 AB Tasty focuses entirely on experimentation and personalization features. VWO has these along with tools to help you understand users and their behavior.
 
+<p>
 <ProductComparisonTable
   competitors={['ab_tasty', 'vwo']}
   rows={[
@@ -176,15 +242,40 @@ AB Tasty focuses entirely on experimentation and personalization features. VWO h
     'experiments',
     'experiments.features.no_code_experiments',
     'experiments.targeting.features.custom_targeting',
+    'experiments.implementation.multivariate_testing',
+    'experiments.supported_test.multi_armed_bandit',
     'product_analytics',
     'product_analytics.features.autocapture',
     'session_replay',
     'feature_flags',
     'heatmaps',
+    'error_tracking',
     'surveys',
     'platform.deployment.open_source',
+    'platform.pricing.transparent_pricing'
   ]}
 />
+</p>
+
+<details>
+<summary>Main differences between AB Tasty and VWO</summary>
+
+- AB Tasty has no native session replay, heatmaps, or surveys; VWO includes all three.
+- AB Tasty has stronger AI-driven personalization and product recommendation features; VWO's personalization is more rules-based.
+- AB Tasty focuses on web and feature experimentation; VWO is a broader experience optimization platform.
+- Both require a sales call for pricing, neither is self-serve with transparent published pricing.
+
+</details>
+
+<details>
+<summary>Main similarities between AB Tasty and VWO</summary>
+
+- Both offer web and feature experimentation with no-code visual editors
+- Both support multivariate testing and custom audience targeting
+- Both include feature flags for progressive rollouts
+- Both target marketing and CRO teams at mid-size to enterprise companies
+
+</details>
 
 ### Why do companies use AB Tasty?
 
@@ -210,26 +301,27 @@ According to G2 reviews, people choose AB Tasty for the following reasons:
 
 ### What is Amplitude?
 
-[Amplitude](/blog/posthog-vs-amplitude) is one of the original product analytics tools. Many large enterprise customers, like Ford, NBCUniversal, and Walmart rely on it. In recent years, it also added A/B testing, session replay, and a customer data platform to its offering.
-
-Data from [BuiltWith](https://trends.builtwith.com/analytics/Amplitude) says that 10,713 of the top one million websites use Amplitude. This is just above VWO's 9,183.
+[Amplitude](/blog/posthog-vs-amplitude) is one of the original product analytics tools. Many large enterprise customers, like Ford, NBCUniversal, and Walmart rely on it. In recent years, it also added A/B testing, session replay, heatmaps, feature flags, in-app guides & surveys, and a customer data platform to its offering.
 
 ### Key features
 
-- 📈 **Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
+- **Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
 
-- 🧪 **A/B testing:** Test new features on specific targets and analyze with primary, secondary, and counter metrics.
+- **A/B testing:** Test new features on specific targets and analyze with primary, secondary, and counter metrics.
 
-- 💁‍♂️ **Customer data platform:** Combine analytics data with third-party tools for data governance, identity resolution, and data federation.
+- **Customer data platform:** Combine analytics data with third-party tools for data governance, identity resolution, and data federation.
 
-- 🤖 **AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?"
+- **AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?"
 
-- 📹 **Session replay:** Reconstruct user sessions to understand how people interact with your site and app. Visualize the reality behind user journeys and metrics.
+- **Session replay:** Reconstruct user sessions to understand how people interact with your site and app. Visualize the reality behind user journeys and metrics.
 
 ### How does Amplitude compare to VWO?
 
-Amplitude heavily focuses on being an analytics platform. This means it misses out on other [behavioral analytics](/product-engineers/behavioral-analytics) tools like heatmaps and surveys as well as experimentation tools like personalization. VWO has all of these.
+[Amplitude](/blog/best-amplitude-alternatives) started as a product analytics platform and expanded to include experimentation and behavioral tools. VWO is primarily an experimentation and CRO platform with behavioral analytics on the side. 
 
+Amplitude is stronger on product analytics and data infrastructure; VWO is stronger on marketing-focused experimentation and personalization.
+
+<p>
 <ProductComparisonTable
   competitors={['amplitude', 'vwo']}
   rows={[
@@ -237,15 +329,40 @@ Amplitude heavily focuses on being an analytics platform. This means it misses o
     'experiments',
     'experiments.features.no_code_experiments',
     'experiments.targeting.features.custom_targeting',
+    'experiments.implementation.multivariate_testing',
+    'experiments.supported_test.multi_armed_bandit',
     'product_analytics',
     'product_analytics.features.autocapture',
     'session_replay',
     'feature_flags',
     'heatmaps',
+    'error_tracking',
     'surveys',
     'platform.deployment.open_source',
+    'platform.pricing.transparent_pricing'
   ]}
 />
+</p>
+
+<details>
+<summary>Main differences between Amplitude and VWO</summary>
+ 
+- Amplitude has a built-in CDP and warehouse-native analytics; VWO has a CDP but no warehouse query layer.
+- VWO focuses more on marketing CRO use cases with personalization; Amplitude focuses on product and growth teams.
+- VWO has stronger no-code visual experimentation tools for marketers; Amplitude's experimentation is more product and engineering-focused.
+- Amplitude has an official MCP server; VWO's MCP server is scoped to its Feature Experimentation product only.
+ 
+</details>
+ 
+<details>
+<summary>Main similarities between Amplitude and VWO</summary>
+ 
+- Both offer A/B testing, feature flags, session replay, and surveys
+- Both support behavioral cohorts and custom audience targeting for experiments
+- Both have AI features for surfacing insights
+- Both integrate with major CDPs and data warehouses
+ 
+</details>
 
 ### Why do companies use Amplitude?
 
@@ -258,7 +375,7 @@ According to G2 reviews, Amplitude users appreciate three key aspects:
 3. **Become data-driven:** People like how Amplitude helps them become data-driven by making it easy to to add data, visualize it, and make decisions. It makes data accessible to people who might not have a technical background.
 
 > #### Bottom line
-> You likely won't contemplate [Amplitude](/blog/best-amplitude-alternatives) if you're looking at the experimentation side of VWO. For teams mostly looking for an analytics platform with experimentation on the side, the old choice is still a solid one.
+> Amplitude is worth considering if your primary need is product analytics with experimentation as a complement. If you're looking primarily for A/B testing and CRO tools with marketing-friendly workflows, VWO has the edge.
 
 ## 5. Heap
 
@@ -273,26 +390,25 @@ According to G2 reviews, Amplitude users appreciate three key aspects:
 
 [Heap](/blog/posthog-vs-heap) describes itself as a digital insights platform. This means it offers both product analytics and session replay and supports marketing use cases with multi-touch attribution. 
 
-Contentsquare, a marketing and ecommerce analytics firm, acquired Heap in September 2023 and announced plans to integrate the two products. Contentsquare also owns [Hotjar](/blog/best-hotjar-alternatives), another alternative on this list.
-
-According to [BuiltWith](https://trends.builtwith.com/analytics/Heap), as of April 2024, 4,062 of the top one million websites deploy Heap. This is just under half of VWO's 9,183.
+Contentsquare, a marketing and ecommerce analytics firm, acquired Heap in September 2023 and announced plans to integrate the two products. Contentsquare also owns [Hotjar](/blog/best-hotjar-alternatives).
 
 ### Key features
 
-- ✅ **Event autocapture:** Product teams don't need to rely on engineers to instrument all events. Heap has a visual editor for teams to tag events directly on-page for analysis.
+- **Event autocapture:** Product teams don't need to rely on engineers to instrument all events. Heap has a visual editor for teams to tag events directly on-page for analysis.
 
-- 📺 **Session replay:** Get qualitative insights about user behavior by replaying their session – although this lacks the debugging tools typical of most replay tools.
+- **Session replay:** Get qualitative insights about user behavior by replaying their session – although this lacks the debugging tools typical of most replay tools.
 
-- 🔥 **Heatmaps:** See where people click, what point they scroll to, and the areas that get the most attention.
+- **Heatmaps:** See where people click, what point they scroll to, and the areas that get the most attention.
 
-- 🤖 **Analysis suggestions**: Advanced data science capabilities discover hidden interactions, friction points, and knowledge about key paths.
+- **Analysis suggestions**: Advanced data science capabilities discover hidden interactions, friction points, and knowledge about key paths.
 
-- 🔁 **Managed ETL:** Connect to data warehouses, so you can combine your analytics with other sources and get a fuller picture of the entire user journey.
+- **Managed ETL:** Connect to data warehouses, so you can combine your analytics with other sources and get a fuller picture of the entire user journey.
 
 ### How does Heap compare to VWO?
 
 Similar to Amplitude, Heap focuses on analytics and session replay for product teams. This means it misses out on the experimentation features of VWO.
 
+<p>
 <ProductComparisonTable
   competitors={['heap', 'vwo']}
   rows={[
@@ -300,15 +416,40 @@ Similar to Amplitude, Heap focuses on analytics and session replay for product t
     'experiments',
     'experiments.features.no_code_experiments',
     'experiments.targeting.features.custom_targeting',
+    'experiments.implementation.multivariate_testing',
+    'experiments.supported_test.multi_armed_bandit',
     'product_analytics',
     'product_analytics.features.autocapture',
     'session_replay',
     'feature_flags',
     'heatmaps',
+    'error_tracking',
     'surveys',
     'platform.deployment.open_source',
+    'platform.pricing.transparent_pricing'
   ]}
 />
+</p>
+
+<details>
+<summary>Main differences between Heap and VWO</summary>
+ 
+- Heap has no native A/B testing or feature flags; VWO is built around experimentation.
+- Heap's autocapture and visual event editor require no engineering; VWO's visual editor is also no-code but focused on experiments rather than event capture.
+- Heap includes marketing attribution capabilities, including UTM tracking; VWO focuses on on-site conversion optimization and doesn't offer marketing attribution.
+- Heap is owned by Contentsquare and being integrated into a broader behavioral analytics platform; VWO is a standalone product.
+
+</details>
+ 
+<details>
+<summary>Main similarities between Heap and VWO</summary>
+
+- Both offer session replay and heatmaps, but in both cases these are add-ons or higher-tier features rather than included by default (Heap's replay is a paid add-on, and VWO's session replay and heatmaps are part of the separate VWO Insights module)
+- Both support funnel analysis and behavioral cohorts
+- Both integrate with major data warehouses
+- Both are primarily designed for non-technical users
+
+</details>
 
 ### Why do companies use Heap?
 
@@ -336,22 +477,21 @@ According to G2 reviews, people enjoy these three areas of Heap:
 
 [LaunchDarkly](/blog/posthog-vs-launchdarkly) is a feature flag and A/B testing platform helping developers de-risk releases, target experiences, and optimize their product. It provides automation and governance features to ensure enterprises are following [engineering best practices](/docs/feature-flags/best-practices).
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), 1,019 of the top one million sites use LaunchDarkly. This is nearly 10x less than VWO's 9,183 but may undercount mobile and backend usage.
-
 ### Key features
 
-- 🚩 **Feature flags:** Control and target the release of features using multi-variate flags with real-time updates and local evaluation.
+- **Feature flags:** Control and target the release of features using multi-variate flags with real-time updates and local evaluation.
 
-- 🧪 **Experimentations:** Run A/B/n tests against metric groups and segment. Easily roll out winning variants.
+- **Experimentations:** Run A/B/n tests against metric groups and segment. Easily roll out winning variants.
 
-- 🤖 **Automation:** Automate and schedule changes to flag state, progressive rollouts, and trigger workflows.
+- **Automation:** Automate and schedule changes to flag state, progressive rollouts, and trigger workflows.
 
-- 🔍 **Governance:** Audit flag changes. Get visibility into flag state across platforms. Use roles-based access controls to decide who can access and change flag state.
+- **Governance:** Audit flag changes. Get visibility into flag state across platforms. Use roles-based access controls to decide who can access and change flag state.
 
 ### How does LaunchDarkly compare to VWO?
 
-LaunchDarkly focuses on engineers. This means it misses out on the features marketing or product teams choose VWO for, like the visual experiment editor or analytics.
+[LaunchDarkly](/blog/best-launchdarkly-alternatives) focuses on engineers. This means it misses out on the features marketing or product teams choose VWO for, like the visual experiment editor or analytics.
 
+<p>
 <ProductComparisonTable
   competitors={['launchdarkly', 'vwo']}
   rows={[
@@ -359,15 +499,40 @@ LaunchDarkly focuses on engineers. This means it misses out on the features mark
     'experiments',
     'experiments.features.no_code_experiments',
     'experiments.targeting.features.custom_targeting',
+    'experiments.implementation.multivariate_testing',
+    'experiments.supported_test.multi_armed_bandit',
     'product_analytics',
     'product_analytics.features.autocapture',
     'session_replay',
     'feature_flags',
     'heatmaps',
+    'error_tracking',
     'surveys',
     'platform.deployment.open_source',
+    'platform.pricing.transparent_pricing'
   ]}
 />
+</p>
+
+<details>
+<summary>Main differences between LaunchDarkly and VWO</summary>
+
+- LaunchDarkly has no session replay, heatmaps, or surveys; VWO includes all three.
+- LaunchDarkly is built for engineering teams managing releases; VWO is built for marketing and CRO teams optimizing experiences.
+- LaunchDarkly has strong governance features (audit logs, RBAC, stale flag cleanup); VWO doesn't prioritize flag governance.
+- LaunchDarkly supports 25+ SDKs across server-side, client-side, and mobile platforms, with features like local evaluation for low-latency flag decisions; VWO's SDK coverage is narrower and focused on its Feature Experimentation product.
+
+</details>
+
+<details>
+<summary>Main similarities between LaunchDarkly and VWO</summary>
+
+- Both offer feature flags and A/B testing
+- Both support custom targeting and audience segmentation
+- Both support gradual rollouts and percentage-based targeting
+- Both allow non-technical users to manage and toggle features without writing code 
+
+</details>
 
 ### Why do companies use LaunchDarkly?
 
@@ -393,26 +558,27 @@ According to [G2 reviews](https://www.g2.com/products/launchdarkly/reviews#revie
 
 ### What is FullStory?
 
-[FullStory](/blog/best-fullstory-alternatives) describes itself as a "behavioral data platform," which is code for product analytics with a side of session replay and [mobile app analytics](/blog/best-mobile-app-analytics-tools). It focuses on behavioral analytics, and like PostHog and Heap, it supports event autocapture, so you don't have to manually code every event you want to capture.
+[FullStory](/blog/posthog-vs-fullstory) describes itself as a "behavioral data platform," which is code for product analytics with a side of session replay and [mobile app analytics](/blog/best-mobile-app-analytics-tools). It focuses on behavioral analytics, and like PostHog and Heap, it supports event autocapture, so you don't have to manually code every event you want to capture.
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/FullStory), as of April 2024, 8,226 of the top one million websites use FullStory. This is just under VWO's 9,183.
+It has expanded in recent years with AI-powered insights, Guides and Surveys, and Anywhere (data warehouse sync and real-time activation).
 
 ### Key features
 
-- 📺 **Session replay:** Watch and analyze real user sessions on web and mobile apps. Understand the full context of a user's experience.
+- **Session replay:** Watch and analyze real user sessions on web and mobile apps. Understand the full context of a user's experience.
 
-- 📊 **Product analytics:** Understand user paths, funnels, retention, journeys, and struggle points. Combine them all on a dashboard and get notified of changes requiring attention.
+- **Product analytics:** Understand user paths, funnels, retention, journeys, and struggle points. Combine them all on a dashboard and get notified of changes requiring attention.
 
-- 🏷️ **Event autocapture:** Tagless event capture that ensures the tracking of all events. Get the data you need ASAP and discover issues you didn't know existed.
+- **Event autocapture:** Tagless event capture that ensures the tracking of all events. Get the data you need ASAP and discover issues you didn't know existed.
 
-- 🔥 **Heatmaps:** Find out where users click and scroll as well as areas they are frustrated by.
+- **Heatmaps:** Find out where users click and scroll as well as areas they are frustrated by.
 
-- 📱 **Mobile app analytics:** Automatically capture everything from screen recordings to events to crashes to optimize your app.
+- **Mobile app analytics:** Automatically capture everything from screen recordings to events to crashes to optimize your app.
 
 ### How does FullStory compare to VWO?
 
-As already mentioned, FullStory is a behavioral data platform. Although it includes many features of VWO on that front, it will not come as a surprise that it doesn't include the optimization ones. 
+As already mentioned, [FullStory](/blog/best-fullstory-alternatives) is a behavioral data platform. Although it includes many features of VWO on that front, it will not come as a surprise that it doesn't include the optimization ones. 
 
+<p>
 <ProductComparisonTable
   competitors={['fullstory', 'vwo']}
   rows={[
@@ -420,15 +586,39 @@ As already mentioned, FullStory is a behavioral data platform. Although it inclu
     'experiments',
     'experiments.features.no_code_experiments',
     'experiments.targeting.features.custom_targeting',
+    'experiments.implementation.multivariate_testing',
+    'experiments.supported_test.multi_armed_bandit',
     'product_analytics',
     'product_analytics.features.autocapture',
     'session_replay',
     'feature_flags',
     'heatmaps',
+    'error_tracking',
     'surveys',
     'platform.deployment.open_source',
+    'platform.pricing.transparent_pricing'
   ]}
 />
+</p>
+<details>
+<summary>Main differences between FullStory and VWO</summary>
+
+- FullStory has no native A/B testing, feature flags, or personalization; VWO is built around these.
+- FullStory's session replay is stronger than VWO's – it includes frustration signal detection, StoryAI summaries, and more advanced debugging tools.
+- FullStory launched Guides and Surveys in February 2026, adding in-app tours and targeted surveys; VWO has had surveys for longer.
+- FullStory is primarily targeted at UX, product, and customer success teams; VWO targets marketing and CRO teams focused on conversion optimization.
+
+</details>
+
+<details>
+<summary>Main similarities between FullStory and VWO</summary>
+
+- Both offer session replay and heatmaps
+- Both support behavioral cohorts and funnel analysis
+- Both have AI features for surfacing insights from behavioral data
+- Both are SOC 2 certified and GDPR-ready
+
+</details>
 
 ### Why do companies use FullStory?
 
@@ -443,6 +633,16 @@ According to [G2 reviews](https://www.g2.com/products/fullstory/reviews), people
 > #### Bottom line
 > For a complete behavioral analytics suite, FullStory is a solid choice, especially for mobile apps. Users wanting experimentation, feature flags, or personalization should switch to other choices. 
 
+## Which VWO alternative should you choose?
+ 
+- Need a full developer platform covering A/B testing, feature flags, analytics, session replay, error tracking, surveys, and more – all with transparent pricing and a free tier? **PostHog** is the most complete alternative.
+- Running an enterprise marketing program with content management and campaign orchestration? **Optimizely** is built for that.
+- Want a focused, no-code experimentation and personalization tool for marketing and CRO teams? **AB Tasty** is worth considering.
+- Need product analytics with experimentation as a complement, plus a built-in CDP and warehouse-native analytics? **Amplitude** is the strongest option.
+- Want analytics and autocapture without engineering effort, and don't need A/B testing? **Heap** covers that.
+- Engineering team focused on safe, governed feature releases at scale? **LaunchDarkly** is the most reliable option.
+- Want best-in-class session replay with AI-powered frustration detection and no need for A/B testing? **FullStory** leads the pack.
+
 ## Is PostHog right for you?
 
 Here's the (short) sales pitch.
@@ -453,4 +653,62 @@ We're biased, obviously, but we think PostHog is the perfect VWO replacement if:
 - You want tools to help you build a better product – like behavioral analytics, feature flags, and A/B testing.
 - You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
 
-Check out [our product pages](/experiments) and [read our docs](/docs) to learn more.
+It's completely free to get started – no credit card required. Run `npx @posthog/wizard` in your terminal and our AI wizard handles setup in minutes, or check out our [docs](/docs/experiments) to do it yourself.
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>Does VWO have a free tier?</summary>
+
+No. VWO does not offer a permanent free plan – the Starter plan has been sunset. VWO offers a **30-day free trial** with full access to all capabilities, no credit card required. After the trial, you need a paid plan.
+
+If a free tier matters to you, **PostHog** is the only tool on this list with a generous permanent free tier – 1 million events, 5,000 session replays, 1 million feature flag requests per month and a lot more, no credit card required.
+
+</details>
+
+<details>
+<summary>Does VWO have feature flags?</summary>
+
+Yes. VWO Feature Experimentation includes feature flags, server-side testing, and progressive rollouts. It's a separate module from VWO Testing and priced independently.
+
+</details>
+
+<details>
+<summary>Does VWO have error tracking?</summary>
+
+No. VWO does not have native error tracking or crash monitoring. If you need error tracking connected to session replays and experimentation, PostHog includes [error tracking](/error-tracking) natively.
+
+</details>
+
+<details>
+<summary>What's the best free VWO alternative?</summary>
+
+**PostHog** has the most generous free tier: 1 million analytics events, 5,000 session replays, 1 million feature flag requests, and 100k error tracking events per month – no credit card required. 
+
+For a broader look at free options, see our guide to the [best open-source A/B testing tools](/blog/best-open-source-ab-testing-tools).
+
+</details>
+
+<details>
+<summary>What are the best A/B testing tools in 2026?</summary>
+
+The top A/B testing tools in 2026 include PostHog, VWO, Optimizely, AB Tasty, LaunchDarkly, and Amplitude Experiment. 
+
+The right choice depends on whether you're running marketing-focused web experiments (VWO, Optimizely, AB Tasty) or product and engineering-focused experiments (PostHog, LaunchDarkly, Amplitude). 
+
+See our guides to the [best Optimizely alternatives](/blog/best-optimizely-alternatives) and [best LaunchDarkly alternatives](/blog/best-launchdarkly-alternatives) for more options.
+
+</details>
+
+<details>
+<summary>Can I migrate from VWO to PostHog?</summary>
+
+Yes. PostHog supports the same core experimentation workflows as VWO – A/B testing, feature flags, multivariate tests, and custom targeting. You can run both in parallel during a transition period. 
+
+See our [experiments docs](/docs/experiments) and [feature flags docs](/docs/feature-flags) to get started.
+
+</details>
+
+<NewsletterForm />

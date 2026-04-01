@@ -363,7 +363,7 @@ export const posthog = {
                 funnel_tests: true,
                 namespacing: false,
                 native_goal_tracking: true,
-                no_code_experiments: 'Beta',
+                no_code_experiments: true,
                 low_code_experiments: true,
                 ratio_metrics: true,
                 recommended_run_time: true,
