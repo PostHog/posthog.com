@@ -394,14 +394,13 @@ export const surveys = {
     },
     ai: {
         // title: '',
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_aeb8302376.png',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_284d9e66f4.png',
         imageAlt: 'PostHog AI and surveys',
-        description: 'build surveys more efficiently',
+        description: 'collect user feedback and contextualize the results with product data',
         skills: [
-            'Generate complete surveys based on your research goals',
-            'Suggest appropriate question types(freeform text, rating scales, multiple choice, etc.)',
-            'Help you set up display conditions and targeting',
-            'Recommend survey templates for common use cases',
+            'Generates complete surveys with display conditions and targeting',
+            'Suggests appropriate question types (freeform text, rating scales, multiple choice, etc.) based on your research goals',
+            'Analyzes the results and provides insights',
         ],
         prompts: [
             'Create an NPS survey for my mobile app users',
