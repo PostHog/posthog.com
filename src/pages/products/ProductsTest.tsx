@@ -2,12 +2,14 @@ import React, { useMemo } from 'react'
 import { navigate } from 'gatsby'
 import SEO from 'components/seo'
 import useProduct from '../../hooks/useProduct'
-import { IconArrowRight } from '@posthog/icons'
+import { IconArrowRight, IconArrowUpRight } from '@posthog/icons'
 import { IconApple } from 'components/OSIcons'
 import Editor from 'components/Editor'
 import WizardCommand from 'components/WizardCommand'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { CTAs } from 'components/Home/Test'
+import Tooltip from 'components/RadixUI/Tooltip'
 
 const statusDotColor: Record<string, string> = {
     beta: 'bg-yellow',
@@ -20,7 +22,7 @@ const sections = [
         title: 'Data platform',
         description:
             'Having all your product data in one place means you can make more informed decisions. Push all your data to PostHog, then send it anywhere else you need, too.',
-        link: { label: 'Data stack readme.md', url: '/data-stack' },
+        link: { label: 'Data stack README', url: '/data-stack' },
         groups: [
             {
                 label: 'Data I/O',
@@ -39,9 +41,24 @@ const sections = [
     },
     {
         title: 'Automatic tooling',
-        description:
-            "In a previous era of building products, you'd need to configure most of these manually. Now, PostHog just handles it all behind the scenes automatically.",
-        link: { label: 'Tooling readme.md', url: '/docs' },
+        description: (
+            <>
+                In a previous era of building products, you'd need to configure event tracking and feature flags
+                manually. Now, your AI coding agent can use the{' '}
+                <Link to="/docs/model-context-protocol" state={{ newWindow: true }} className="font-semibold">
+                    PostHog MCP
+                </Link>{' '}
+                to configure PostHog without leaving your{' '}
+                <Tooltip trigger={<span className="border-b border-primary border-dotted">ADE</span>}>
+                    <span>AI development environment – like Claude Code, Cursor, and more.</span>
+                </Tooltip>
+                .
+            </>
+        ),
+        link: [
+            { label: 'Tooling README', url: '/tooling' },
+            { label: 'Instructions for LLMs', url: '/docs/ai-engineering/markdown-llms-txt' },
+        ],
         groups: [
             {
                 label: 'Understand product usage',
@@ -105,11 +122,11 @@ const ProductRow = ({ product }: { product: any }) => {
         >
             {product.Icon &&
                 React.createElement(product.Icon, {
-                    className: `size-4 shrink-0 text-${product.color}`,
+                    className: `size-6 shrink-0 text-${product.color}`,
                 })}
             <span
-                className={`text-sm text-primary ${
-                    isWIP ? '' : 'group-hover:text-red group-hover:underline underline-offset-2'
+                className={`text-[15px] font-medium text-primary ${
+                    isWIP ? '' : 'group-hover:underline underline-offset-2'
                 }`}
             >
                 {product.name}
@@ -140,21 +157,24 @@ export default function ProductsTest(): JSX.Element {
                 image="/images/og/default.png"
             />
             <Editor maxWidth={900}>
-                <div className="space-y-10">
+                <div className="space-y-10 font-rounded [&_p]:text-base [&_li]:text-base">
                     {/* Hero */}
-                    <header className="space-y-4">
+                    <header className="space-y-4 text-center @xl:text-left">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/coderhog_80987dd905.png"
-                            className="@xl:float-right @xl:ml-4 w-56"
+                            className="@xl:float-right @xl:ml-4 w-56 @xl:mt-4"
                         />
                         <h1 className="text-2xl @lg:text-3xl font-bold leading-tight">
-                            PostHog is like having a cracked dev team that handles all the stuff you used to have to do
-                            manually
+                            Devtools and product data infrastructure for building successful products
                         </h1>
                         <p className="text-lg leading-relaxed">
-                            Devtools and product data infrastructure for AI agents to build successful products
+                            Humans and AI agents build with PostHog because everything you need to collect and analyze
+                            product usage data – and build and ship new features – lives in one place.
                         </p>
 
+                        <CTAs />
+
+                        {/* 
                         <div className="flex flex-wrap items-center gap-3 not-prose">
                             <Link
                                 to="/download"
@@ -185,110 +205,43 @@ export default function ProductsTest(): JSX.Element {
                                 Try the MCP
                             </Link>
                         </div>
+                         */}
                     </header>
-
-                    <div className="space-y-6 text-lg leading-relaxed">
-                        <h2 className="text-2xl font-bold">How we build things on the internet has changed a lot.</h2>
-
-                        <div className="space-y-4">
-                            <div>
-                                <h3 className="text-lg">Until ~2020: The prehistoric days of software development</h3>
-                                <p>
-                                    Analytics, A/B testing, error tracking, and other dev tools required manual
-                                    implementation using dozens of vendors. (Entire companies were built <em>just</em>{' '}
-                                    around routing data various places!)
-                                </p>
-                            </div>
-
-                            <div>
-                                <h3 className="text-lg">2020-2024: Multi-product SaaS companies</h3>
-                                <p>
-                                    We started seeing consolidation in B2B SaaS. It became more common to have multiple
-                                    tools in the same UI.
-                                </p>
-                            </div>
-
-                            <div>
-                                <h3 className="text-lg">2025+: Just write a prompt</h3>
-                                <p>
-                                    AI now makes it possible to both analyze data <em>and</em> build new features with
-                                    tooling in place.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="space-y-3">
-                            <p>But building with AI still has two major flaws:</p>
-                            <ol className="list-decimal list-inside space-y-2">
-                                <li>
-                                    <strong>AI is prone to yolo-ing.</strong> Sure, Claude can vibe code a lightweight
-                                    analytics stack or a feature flag. But without proper infrastructure, it won't
-                                    scale. And your tokens are better spent on building your core product than the
-                                    tooling to support it.
-                                </li>
-                                <li>
-                                    <strong>Context is key.</strong> Customer data still lives across various point
-                                    solutions (database, CRM, support tool, analytics stack). And if you're asking AI to
-                                    analyze data or write code – its output can only be as good as the context it has.
-                                </li>
-                            </ol>
-                        </div>
-
-                        <div className="space-y-3">
-                            <p>PostHog solves this in a few ways:</p>
-                            <ol className="list-decimal list-inside space-y-2">
-                                <li>
-                                    <strong>Unified data stack.</strong> Your data might originate elsewhere, but{' '}
-                                    <em>everything</em> can be pushed into PostHog where it can be transformed, queried,
-                                    and even exported.
-                                </li>
-                                <li>
-                                    <strong>MCP.</strong> PostHog's dozens of tools are available to your LLM. You no
-                                    longer need to learn a UI to run analysis or perform tasks like creating an
-                                    experiment, survey, or feature flag.
-                                </li>
-                                <li>
-                                    <strong>PostHog Code.</strong> Our AI code editor automatically analyzes signals
-                                    from customer data, proposes improvements, and writes pull requests –{' '}
-                                    <em>automatically</em>.
-                                </li>
-                            </ol>
-                        </div>
-
-                        <hr className="border-border" />
-
-                        <p>
-                            How we run analysis and build software has changed, but what <em>hasn't</em> changed is the
-                            need for good data, good tooling, and a seamless way for them to operate together in
-                            harmony.
-                        </p>
-                    </div>
 
                     {/* Sections */}
                     {sections.map((section) => (
                         <section key={section.title} className="space-y-3">
-                            <h2 className="text-xl font-bold">{section.title}</h2>
-                            <p className="text-[15px] leading-relaxed">
-                                {section.description}
+                            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0">
+                                <h2 className="text-xl font-bold m-0">{section.title}</h2>
                                 {section.link && (
-                                    <>
-                                        {' '}
-                                        <Link
-                                            to={section.link.url}
-                                            state={{ newWindow: true }}
-                                            className="inline-flex items-center gap-1 font-medium whitespace-nowrap"
-                                        >
-                                            {section.link.label} <IconArrowRight className="size-3.5" />
-                                        </Link>
-                                    </>
+                                    <aside className="order-last @xl:order-none">
+                                        {(Array.isArray(section.link) ? section.link : [section.link]).map(
+                                            (link, i, arr) => (
+                                                <React.Fragment key={link.url}>
+                                                    <Link
+                                                        to={link.url}
+                                                        state={{ newWindow: true }}
+                                                        className="group inline-flex items-center gap-1 font-medium whitespace-nowrap"
+                                                    >
+                                                        {link.label}{' '}
+                                                        <IconArrowUpRight className="size-3.5 text-secondary group-hover:text-primary" />
+                                                    </Link>
+                                                    {i < arr.length - 1 && (
+                                                        <span className="text-secondary mx-1"> | </span>
+                                                    )}
+                                                </React.Fragment>
+                                            )
+                                        )}
+                                    </aside>
                                 )}
-                            </p>
+                                <p className="text-[15px] leading-relaxed w-full mb-0">{section.description}</p>
+                            </div>
 
                             <div
                                 className={`grid gap-x-8 gap-y-6 ${
                                     section.groups.length >= 3
-                                        ? 'grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3'
-                                        : 'grid-cols-1 @md:grid-cols-3'
+                                        ? 'grid-cols-1 @lg:grid-cols-2 @2xl:grid-cols-3'
+                                        : 'grid-cols-1 @3xl:grid-cols-3'
                                 }`}
                             >
                                 {section.groups.map((group, gi) => {
@@ -297,23 +250,25 @@ export default function ProductsTest(): JSX.Element {
                                         const spanClass =
                                             group.colSpan === 2
                                                 ? isFirstGroup
-                                                    ? '@md:col-span-2 @2xl:col-span-3'
-                                                    : '@md:col-span-2'
+                                                    ? '@lg:col-span-2 @2xl:col-span-3'
+                                                    : '@lg:col-span-2'
                                                 : ''
                                         return (
                                             <div key={gi} className={spanClass}>
                                                 {group.label && (
-                                                    <h3 className="text-xs font-semibold uppercase tracking-wide text-secondary mb-1.5">
+                                                    <h3 className="text-sm font-semibold uppercase text-secondary mb-1.5">
                                                         {group.label}
                                                     </h3>
                                                 )}
                                                 <div
-                                                    className={`grid gap-x-8 ${
-                                                        isFirstGroup ? 'grid-cols-2 @2xl:grid-cols-3' : 'grid-cols-2'
+                                                    className={`grid gap-x-4 @lg:gap-x-8 gap-y-1 ${
+                                                        isFirstGroup
+                                                            ? '@lg:grid-cols-2 @3xl:grid-cols-3'
+                                                            : '@lg:grid-cols-2'
                                                     }`}
                                                 >
                                                     {group.columns.map((col: string[], ci: number) => (
-                                                        <div key={ci} className="space-y-1">
+                                                        <div key={ci} className="space-y-1.5">
                                                             {col.map((handle: string) => {
                                                                 const product = productsByHandle[handle]
                                                                 if (!product) return null
@@ -342,7 +297,7 @@ export default function ProductsTest(): JSX.Element {
                                                 <Link
                                                     to={group.afterLink.url}
                                                     state={{ newWindow: true }}
-                                                    className="inline-flex items-center gap-1 text-sm font-medium mt-2"
+                                                    className="inline-flex items-center gap-1 text-sm font-bold mt-2"
                                                 >
                                                     {group.afterLink.label} <IconArrowRight className="size-3.5" />
                                                 </Link>

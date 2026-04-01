@@ -31,25 +31,26 @@ import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { Customers, getSharedDescriptors } from '../shared'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const AppCount = () => <span className="text-xs font-normal">{APP_COUNT} apps</span>
 
 const Tagline = () => (
     <>
         <h1 className="!text-2xl pt-4">The new way to build products</h1>
-        <p>
+        <p className="text-balance @xl:text-wrap">
             Product development used to mean manually writing code, running analysis, diagnosing bugs, and rolling out
             changes using dozens of tools.
         </p>
 
-        <p>
+        <p className="text-balance @xl:text-wrap">
             PostHog is the only platform that acts like a co-pilot for you (and your AI agents) to do it all –{' '}
             <em>autonomously</em>.
         </p>
     </>
 )
 
-const CTAs = () => {
+export const CTAs = () => {
     const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
         <div>
@@ -112,7 +113,7 @@ const CTAs = () => {
                 </CallToAction>
             </div>
             */}
-            <p className="text-sm flex items-center gap-2 mt-4">
+            <p className="!text-sm flex items-center gap-2 mt-4 justify-center @xl:justify-start">
                 <Link
                     to="/docs/model-context-protocol"
                     state={{ newWindow: true }}
@@ -267,7 +268,7 @@ function HeroImage(): JSX.Element {
     return (
         <CloudinaryImage
             src="https://res.cloudinary.com/dmukukwp6/image/upload/lazy_a2afd552f7.png"
-            className="w-64 @2xl:float-right @2xl:ml-4"
+            className="w-64 @xl:w-48 @xl:float-right @xl:ml-4 @2xl:w-56 @3xl:w-64 @2xl:float-right -scale-x-100 @xl:mt-16 @3xl:mt-8"
         />
     )
 }
