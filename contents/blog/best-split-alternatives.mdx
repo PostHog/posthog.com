@@ -1,8 +1,9 @@
 ---
 title: 'The best Split.io alternatives & competitors, compared'
-date: 2024-04-18
+date: 2026-04-01
 author:
     - ian-vanagas
+    - natalia-amorim
 rootpage: /blog
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/green-blog-image.jpg
@@ -13,6 +14,8 @@ tags:
 ---
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
+
+Update: Split.io was acquired by Harness and rebranded as **Harness Feature Management & Experimentation (FME)**. If you're a former Split customer evaluating your options, just shopping for a feature flag and experimentation platform – here are the best alternatives.
 
 ## 1. PostHog
 
@@ -25,26 +28,29 @@ import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an open-source suite of dev tools combining A/B testing, feature flags, product analytics, session replay, and surveys. This means it's not only an alternative to Split but also tools like [Mixpanel](/blog/posthog-vs-mixpanel) and [Hotjar](/blog/posthog-vs-hotjar).
+[PostHog](/) (that's us 👋) is an all-in-one suite of dev tools combining [A/B testing](/experiments), [feature flags](/feature-flags), [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [LLM observability](/llm-analytics), [surveys](/surveys), and more. 
 
-PostHog is much more popular than Split. According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), 4,732 of the top one million sites use PostHog, compared to 177 using Split, as of April 2024.
+This means it's not only an alternative to Split but also tools like [Mixpanel](/blog/posthog-vs-mixpanel), [Sentry](/blog/posthog-vs-sentry), [LaunchDarkly](/posthog-vs-launchdarkly), and [Hotjar](/blog/posthog-vs-hotjar).
 
 #### Key features
 
--   🧪 **A/B tests:** Experiment in your app with up to nine test variations and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
+- **A/B tests:** Experiment in your app with up to nine test variations and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
 
--   🚩 **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
+- **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
 
--   📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
+- **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
 
--   📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
+- **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
 
--   💬 **Surveys:** Target surveys by event or person properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+- **Error tracking:** Automatically capture exceptions and link them directly to session replays, feature flags, and user profiles for faster debugging.
+
+- **PostHog AI:** PostHog's AI assistant can create and manage feature flags and experiments using natural language – roll out flags, configure targeting rules, audit stale flags, summarize experiment results, and more.
 
 ### How does PostHog compare to Split?
 
-PostHog has a broader collection of tools, including a full product analytics suite. Split (AKA Split.io) focuses entirely on experimentation and feature flags, which are reflected in some small feature differences here.
+PostHog has a broader collection of tools, including a full product analytics suite. Split focuses entirely on experimentation and feature flags, which are reflected in some small feature differences here.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'split']}
     rows={[
@@ -65,6 +71,7 @@ PostHog has a broader collection of tools, including a full product analytics su
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
 ### Why do companies use PostHog?
 
@@ -78,7 +85,9 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 
 > #### Bottom line
 >
-> PostHog makes for a great alternative to Split as it includes all the key feature flag and experimentation features along with being free, self-serve, and open source. For product-led startups and scaleups, it is an especially good choice as its got a full suite of tools built for them.
+> PostHog makes for a great alternative to Split/ as it includes all the key feature flag and experimentation features along with being free, self-serve, and open source. For product-led startups and scaleups, it is an especially good choice as its got a full suite of tools built for them.
+
+<WizardCTA />
 
 ## 2. LaunchDarkly
 
@@ -93,22 +102,21 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 
 [LaunchDarkly](/blog/posthog-vs-launchdarkly) is an enterprise feature flag and A/B testing platform. It helps developers de-risk releases, target experiences, and optimize their products. It provides automation and governance features to ensure teams are following [engineering best practices](/docs/feature-flags/best-practices).
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), as of April 2024, 1,072 of the top one million websites use LaunchDarkly, significantly more than the 177 who use Split.
-
 #### Key features
 
--   🚩 **Feature flags:** Control and target the release of features using multi-variate flags with real-time updates and local evaluation.
+- **Feature flags:** Control and target the release of features using multi-variate flags with real-time updates and local evaluation.
 
--   🧪 **Experimentations:** Run A/B/n tests against metric groups and segment. Easily roll out winning variants.
+- **Experimentations:** Run A/B/n tests against metric groups and segment. Easily roll out winning variants.
 
--   🤖 **Automation:** Advanced automations enable teams to not only schedule flag states, but do progressive rollouts and trigger workflows.
+- **Automation:** Advanced automations enable teams to not only schedule flag states, but do progressive rollouts and trigger workflows.
 
--   🔍 **Governance:** Audit flag changes. Get visibility into flag state across platforms. Use roles-based access controls to decide who can access and change flag states.
+- **Governance:** Audit flag changes. Get visibility into flag state across platforms. Use roles-based access controls to decide who can access and change flag states.
 
 ### How does LaunchDarkly compare to Split?
 
 LaunchDarkly and Split are nearly identical in their feature sets. LaunchDarkly does have a greater depth in its enterprise feature, but this comes with the downside of not being self-serve.
 
+<p>
 <ProductComparisonTable
     competitors={['launchdarkly', 'split']}
     rows={[
@@ -129,6 +137,7 @@ LaunchDarkly and Split are nearly identical in their feature sets. LaunchDarkly 
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
 ### Why do companies use LaunchDarkly?
 
@@ -154,23 +163,21 @@ According to [G2 reviews](https://www.g2.com/products/launchdarkly/reviews#revie
 
 ### What is VWO?
 
-VWO is a digital experience optimization platform that aims to maximize conversion with tools like A/B testing, personalization, funnels, heatmaps, session replay, and customer analytics. It also has feature flags.
+[VWO](/blog/best-vwo-alternatives) is a digital experience optimization platform that aims to maximize conversion with tools like A/B testing, personalization, funnels, heatmaps, session replay, and customer analytics. It also has feature flags.
 
 The VWO platform includes testing, insights, data, personalize, plan, and web rollouts – and each comes with its own feature sets and pricing.
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/Visual-Website-Optimizer), as of April 2024, 9,183 of the top one million sites use VWO. This is significantly more than Split's 177.
-
 #### Key features
 
--   🧪 **A/B testing:** Improve and optimize experiences with experiments. Run tests to improve web and mobile as well as server-side A/B testing.
+- **A/B testing:** Improve and optimize experiences with experiments. Run tests to improve web and mobile as well as server-side A/B testing.
 
--   💽 **Data platform:** Collect and analyze customer data across your stack using SDKs, third-party integrations, and direct uploads.
+- **Data platform:** Collect and analyze customer data across your stack using SDKs, third-party integrations, and direct uploads.
 
--   🤔 **Insights:** Understand your users with session recordings, heatmaps, analytics, and surveys.
+- **Insights:** Understand your users with session recordings, heatmaps, analytics, and surveys.
 
--   👔 **Personalization:** Create and tailor user journeys and campaigns for specific audiences, locations, and times.
+- **Personalization:** Create and tailor user journeys and campaigns for specific audiences, locations, and times.
 
--   📋 **Planning:** Ideate, prioritize, and plan optimization campaigns in one location and connect them directly to data.
+- **Planning:** Ideate, prioritize, and plan optimization campaigns in one location and connect them directly to data.
 
 ### How does VWO compare to Split?
 
@@ -234,20 +241,21 @@ GrowthBook is open source with 5.5k stars on GitHub. It is self-hostable, but yo
 
 #### Key features
 
--   🔧 **Warehouse-native:** Designed to integrate seamlessly with your existing data tools like Snowflake or Postgres.
+- **Warehouse-native:** Designed to integrate seamlessly with your existing data tools like Snowflake or Postgres.
 
--   🚩 **Feature flags:** Robust feature-flagging capabilities with custom targeting and scheduling.
+- **Feature flags:** Robust feature-flagging capabilities with custom targeting and scheduling.
 
--   🧪 **A/B testing:** Experimentation suite built on feature flags with a visual editor to optimize UI changes.
+- **A/B testing:** Experimentation suite built on feature flags with a visual editor to optimize UI changes.
 
--   📊 **Analysis:** Use either Bayesian or Frequentist engines. Connect your existing data and do retroactive analysis.
+- **Analysis:** Use either Bayesian or Frequentist engines. Connect your existing data and do retroactive analysis.
 
--   🔌 **Integrations:** Connects with data warehouses and analytics tools, but has limited integrations beyond that.
+- **Integrations:** Connects with data warehouses and analytics tools, but has limited integrations beyond that.
 
 ### How does GrowthBook compare to Split?
 
 GrowthBook's biggest plus-points are that it's open source and warehouse-native. Though it does miss some of Split's more advanced features.
 
+<p>
 <ProductComparisonTable
     competitors={['growthbook', 'split']}
     rows={[
@@ -268,6 +276,7 @@ GrowthBook's biggest plus-points are that it's open source and warehouse-native.
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
 ### Why do companies use GrowthBook?
 
@@ -298,24 +307,23 @@ AB Tasty is a set of tools for optimizing brand and product experiences. This in
 
 It helps teams build better end-to-end digital user experiences that drive ROI, engagement, and loyalty. The company focuses on retail, entertainment, and ecommerce companies
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/AB-Tasty), as of April 2024, 2,351 of the top one million sites deploy AB Tasty, while 177 use Split.
-
 #### Key features
 
--   🌐 **Web experimentation:** Run A/B and multivariate tests easily with low/no-code tools like a visual editor and pre-built widgets.
+- **Web experimentation:** Run A/B and multivariate tests easily with low/no-code tools like a visual editor and pre-built widgets.
 
--   🧪 **Feature experimentation:** Test new features on specific users or segments in your server-side or mobile apps.
+- **Feature experimentation:** Test new features on specific users or segments in your server-side or mobile apps.
 
--   🫂 **Personalization:** Create personalized experiences with audience builder and segmentation tools. Make programmatic changes to your site.
+- **Personalization:** Create personalized experiences with audience builder and segmentation tools. Make programmatic changes to your site.
 
--   🛼 **Rollouts:** Use feature flags to progressively deliver, manage, and rollback new features.
+- **Rollouts:** Use feature flags to progressively deliver, manage, and rollback new features.
 
--   🙋‍♂️ **Recommendations:** Show the right products at the right time in customer journeys. Provide unique suggestions to increase conversion.
+- **Recommendations:** Show the right products at the right time in customer journeys. Provide unique suggestions to increase conversion.
 
 ### How does AB Tasty compare to Split?
 
 AB Tasty has the closest feature set of all the listed alternatives to Split, with the bonus of personalization and recommendation tools. This does mean that both miss out on more advanced analytics tools, however.
 
+<p>
 <ProductComparisonTable
     competitors={['ab_tasty', 'split']}
     rows={[
@@ -336,6 +344,7 @@ AB Tasty has the closest feature set of all the listed alternatives to Split, wi
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
 ### Why do companies use AB Tasty?
 
@@ -351,69 +360,7 @@ According to G2 reviews, users choose AB Tasty for the following reasons:
 >
 > For companies needing personalization and recommendations on top of the feature set of Split, you can do worse than AB Tasty. If you want to try before you buy, you should look elsewhere.
 
-## 6. Harness
-
--   **Founded:** 2017
--   **Similar to:** Split, LaunchDarkly
--   **Typical users:** DevOps teams
--   **Typical customers:** Enterprises focused on optimal developer experience
-
-![Harness](https://res.cloudinary.com/dmukukwp6/image/upload/v1713311108/posthog.com/contents/images/blog/best-split-alternatives/harness.png)
-
-### What is Harness?
-
-Harness is a software delivery platform. This means it includes products like GitOps, feature flags, infrastructure as code, and more. It is built for DevOps teams and has features to support engineering best practices and developer experience.
-
-#### Key features
-
--   🚩 **Feature flags:** Confidently release new features protected by guardrails and quality checks.
-
--   💽 **GitOps:** Automate deployment pipelines across clouds, regions, and services.
-
--   😈 **Chaos engineering:** Test the resilience of your application with pre-built and custom experiments like deleting pods or cutting off services.
-
--   🧑‍💻 **Developer experience:** A centralized spot for portals, repos, and engineering insights to support engineering experience.
-
-### How does Harness compare to Split?
-
-Harness has a different feature set than Split. It focuses on DevOps, whereas Split focuses on product and engineering. The key difference is Harness' lack of A/B testing.
-
-<ProductComparisonTable
-    competitors={['harness', 'split']}
-    rows={[
-        'platform.pricing.self_serve',
-        'feature_flags',
-        'feature_flags.implementation.local_evaluation',
-        'experiments',
-        {
-            path: 'product_analytics',
-            label: 'Advanced analytics',
-            description: 'Custom SQL, paths, and retention analysis with flag data and beyond.',
-        },
-        'product_analytics.insights.alerts',
-        'feature_flags.management.multi_environment',
-        'feature_flags.management.flag_scheduling',
-        'platform.security.history_audit_logs',
-        'platform.security.role_based_access_control',
-        'platform.deployment.open_source',
-    ]}
-/>
-
-### Why do companies use Harness?
-
-According to G2 reviews, users choose Harness for:
-
-1. **Customizability:** Harness plugs into many services, architectures, resource types, and deployment methods. Reviewers like that it lets them evolve as their needs change.
-
-2. **Developer-focused:** Harness is a tool built for developers. Users appreciate the experience it provides them.
-
-3. **Simplicity:** Although it is a developer tool, reviewers say how easy it makes many tasks, like feature flags or deployments.
-
-> #### Bottom line
->
-> For companies wanting to follow engineering best practice, and those not needing A/B testing, Harness can be a good choice. Though it's more likely to be an option for companies looking for DevOps tools.
-
-## 7. Kameleoon
+## 6. Kameleoon
 
 -   **Founded:** 2012
 -   **Similar to:** LaunchDarkly, AB Tasty
@@ -430,18 +377,19 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Kameleoon), as o
 
 #### Key features
 
--   🌐 **Web experimentation:** Use their smart graphic editor and widget library to run flicker-free A/B tests on your website.
+- **Web experimentation:** Use their smart graphic editor and widget library to run flicker-free A/B tests on your website.
 
--   🚀 **Feature experimentation:** Do targeted rollouts of features and analyze their impact.
+- **Feature experimentation:** Do targeted rollouts of features and analyze their impact.
 
--   🤖 **AI copilot:** Have AI help with targeting, decision-making, and experiment creation.
+- **AI copilot:** Have AI help with targeting, decision-making, and experiment creation.
 
--   📊 **Stats accuracy:** Provides advanced stats like sample mismatch ratio, cross-campaign analysis, CUPED, and multiple test correlation.
+- **Stats accuracy:** Provides advanced stats like sample mismatch ratio, cross-campaign analysis, CUPED, and multiple test correlation.
 
 ### How does Kameleoon compare to Split?
 
 Although it isn't self-serve and doesn't have local evaluation for feature flags, Kameleoon matches up closely with Split when it comes to feature sets. It also includes a personalization feature that Split doesn't have.
 
+<p>
 <ProductComparisonTable
     competitors={['kameleoon', 'split']}
     rows={[
@@ -462,6 +410,7 @@ Although it isn't self-serve and doesn't have local evaluation for feature flags
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
 ### Why do companies use Kameleoon?
 
@@ -477,6 +426,15 @@ According to [G2 reviews](https://www.g2.com/products/kameleoon/reviews), users 
 >
 > For companies looking for a developer-focused optimization platform, Kameleoon is a good alternative. Though it not being self-serve is a major downside.
 
+## Which Split/Harness alternative should you choose?
+
+- Need a full platform covering feature flags, A/B testing, product analytics, session replay, error tracking, and more – all with transparent pricing and a free tier? **PostHog** is the most complete alternative.
+- Engineering team focused on safe, governed feature releases at scale, with strong audit logs, RBAC, and automation? **LaunchDarkly** is the closest like-for-like replacement for Split.
+- Focused on conversion optimization and want behavioral analytics like heatmaps, session replay, and personalization alongside experimentation? **VWO** is built for that.
+- Need an open-source, warehouse-native option you can self-host and keep all data in-house? **GrowthBook** is the best fit.
+- Want experimentation and personalization with pre-built widgets and strong no-code tooling for marketing teams? **AB Tasty** is worth considering.
+- Looking for a developer-focused platform with advanced statistical tooling and AI-assisted targeting? **Kameleoon** is a strong option.
+
 ## Is PostHog right for you?
 
 Here's the (short) sales pitch.
@@ -484,7 +442,50 @@ Here's the (short) sales pitch.
 We're biased, obviously, but we think PostHog is the perfect Split replacement if:
 
 -   You value transparency. We're open source and open core.
--   You want more than just A/B testing and feature flags. We have a full suite of product analytics, session replays, and surveys.
+-   You want more than just A/B testing and feature flags. We have a full suite of product analytics, session replays, surveys, and more.
 -   You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
 
-Check out [our product pages](/feature-flags) and [read our docs](/docs) to learn more.
+It's completely free to get started – no credit card required. Our [AI setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs/feature-flags) to do it yourself.
+
+## Frequently asked questions
+
+<details>
+<summary>What happened to Split.io?</summary>
+
+Split.io was acquired by Harness in June 2024 and rebranded as **Harness Feature Management & Experimentation (FME)**. The core feature flag and experimentation functionality carries over, but the product is now part of a broader DevOps platform rather than a standalone tool. 
+
+Existing Split customers were migrated to the Harness platform. If you're evaluating alternatives during this transition, the tools on this list are comparable options.
+
+</details>
+
+<details>
+<summary>What is the best free Split.io alternative?</summary>
+
+**PostHog** is the strongest free alternative. It offers 1 million feature flag requests, 1 million analytics events, 5,000 session replays, and 1 million A/B testing requests per month – all free, no credit card required. **GrowthBook** is another strong free option, especially for teams that want a self-hostable, open-source solution.
+
+</details>
+
+<details>
+<summary>What is the best open-source Split.io alternative?</summary>
+
+**GrowthBook** and **PostHog** are both open source. GrowthBook is warehouse-native and particularly well-suited to teams in strict regulatory environments. PostHog is a broader platform that also includes product analytics, session replay, and surveys alongside feature flags and experiments.
+
+</details>
+
+<details>
+<summary>What is the best Split.io alternative for enterprise teams?</summary>
+
+**LaunchDarkly** is the closest enterprise-grade alternative to Split, with a near-identical feature set and strong governance, automation, and audit tooling. **Kameleoon** is also worth considering for teams that prioritize statistical rigor and developer tooling.
+
+</details>
+
+<details>
+<summary>What are the best feature flag tools?</summary>
+
+It depends on your needs. For a full breakdown, see our guides to the [best feature flag software for developers](/blog/best-feature-flag-software-for-developers) and the [best open-source feature flag tools](/blog/best-open-source-feature-flag-tools). 
+
+If you're new to the concept, read our guide to [what feature flags are](/blog/what-is-a-feature-flag) first.
+
+</details>
+
+<NewsletterForm />
