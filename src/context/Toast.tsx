@@ -9,6 +9,7 @@ export interface Toast {
     onUndo?: () => void
     onAction?: () => void
     actionLabel?: string
+    actionClassName?: string
     verticalAlign?: string
     actionAsIcon?: React.ReactNode
     duration?: number
@@ -16,7 +17,7 @@ export interface Toast {
 }
 
 interface ToastContext {
-    addToast: (toast: Toast) => void
+    addToast: (toast: Toast) => number
     toasts: Toast[]
     removeToast: (createdAt: number) => void
 }
@@ -28,6 +29,7 @@ export const Provider = ({ children }: { children: React.ReactNode }): JSX.Eleme
     const addToast = (toast: Toast) => {
         const createdAt = toast.createdAt ?? Date.now()
         setToasts((prevToasts) => [...prevToasts, { ...toast, createdAt }])
+        return createdAt
     }
 
     const removeToast = (createdAt: number) => {
@@ -43,7 +45,7 @@ export const Provider = ({ children }: { children: React.ReactNode }): JSX.Eleme
 }
 export const useToast = (): {
     toasts: Toast[]
-    addToast: (toast: Toast) => void
+    addToast: (toast: Toast) => number
     removeToast: (createdAt: number) => void
 } => {
     const toast = useContext(Context)
