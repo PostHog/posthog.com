@@ -211,6 +211,44 @@ The `system.data_warehouse_tables` table contains metadata about data warehouse 
 | `deleted`                | Whether the table is deleted (1 = yes, 0 = no)  |
 | `deleted_at`             | When the table was deleted                      |
 
+
+### `system.data_modeling_views`
+
+The `system.data_modeling_views` table contains metadata about data modeling views (saved queries) in your project. These are the views you can [materialize](/docs/data-warehouse/views/materialize) in the data warehouse.
+
+| Column           | Description                                          |
+|------------------|------------------------------------------------------|
+| `id`             | Unique identifier for the view                       |
+| `team_id`        | Team ID the view belongs to                          |
+| `name`           | Name of the data modeling view                       |
+| `status`         | Current status of the view                           |
+| `columns`        | JSON containing column definitions                   |
+| `query`          | JSON containing the view's query definition          |
+| `last_run_at`    | When the view was last run                           |
+| `is_materialized`| Whether the view is materialized (1 = yes, 0 = no)  |
+| `deleted`        | Whether the view is deleted (1 = yes, 0 = no)        |
+| `deleted_at`     | When the view was deleted                            |
+| `created_at`     | When the view was created                            |
+| `updated_at`     | When the view was last updated                       |
+
+### `system.data_modeling_jobs`
+
+The `system.data_modeling_jobs` table tracks data modeling job runs, useful for monitoring materialization status and debugging.
+
+| Column                 | Description                                               |
+|------------------------|-----------------------------------------------------------|
+| `id`                   | Unique identifier for the job                             |
+| `team_id`              | Team ID the job belongs to                                |
+| `data_modeling_view_id`| ID of the data modeling view being materialized           |
+| `status`               | Current status of the job                                 |
+| `rows_materialized`    | Number of rows materialized                               |
+| `rows_expected`        | Number of rows expected to be materialized                |
+| `error`                | Error message if the job failed                           |
+| `storage_delta_mib`    | Change in storage size in MiB                             |
+| `last_run_at`          | When the job was last run                                 |
+| `created_at`           | When the job was created                                  |
+| `updated_at`           | When the job was last updated                             |
+
 ### `system.error_tracking_issues`
 
 The `system.error_tracking_issues` table contains error tracking issues from your project.
