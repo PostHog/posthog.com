@@ -48,7 +48,7 @@ One of our most important pricing principles is that it should be free to use Po
 - **10,000 trigger events free** each month  
 - **1 million rows exported free** each month  
 
-That's a lot of [Slack messages](/docs/cdp/destinations/slack), [ad conversions](/docs/cdp/destinations/linkedin-ads), and [data backed up to S3](/docs/cdp/batch-exports/s3). It should be plenty to get started, or even to keep going, depending on your setup. 
+That's a lot of [Slack messages](/docs/cdp/destinations/slack), [ad conversions](https://posthog.com/docs/cdp/destinations/linkedin-ads), and [data backed up to S3](/docs/cdp/batch-exports/s3). It should be plenty to get started, or even to keep going, depending on your setup. 
 
 To learn more about usage-based pricing beyond free tiers and to calculate potential costs, check out our [pricing page and calculator](/pricing).
 
@@ -62,4 +62,4 @@ If you are forecasted an increased bill because of the price change, we will aut
 
 If you've been waiting for a better reason to try data pipelines out, well… this is it.  
 
-[Head to your pipelines dashboard](https://us.posthog.com/pipeline/destinations) and start batch exporting data or sending events to destinations the cheaper, fairer way.
+[Head to your pipelines dashboard](https://app.posthog.com/data-management/destinations) and start batch exporting data or sending events to destinations the cheaper, fairer way.

@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 This page covers troubleshooting for Endpoints. For setup, see the [installation guide](/docs/endpoints/start-here).
 
 ## Have a question? Ask PostHog AI
@@ -35,7 +37,25 @@ If you get `"Version X not found for endpoint"`:
 - SQL endpoints only accept variables explicitly defined in the query
 - Insight endpoints accept the breakdown property name and `date_from`/`date_to` (non-materialized only)
 
-> **Note:** `filters_override` is deprecated and will be removed in a future release. Use `variables` instead. See the [variables documentation](/docs/endpoints/variables) for migration guidance.
+`"Query references undefined variable(s): X, Y"`
+- Your query uses `{variables.X}` placeholder(s) that don't have matching variable definitions
+- Define the variable in the [data management variables page](https://app.posthog.com/data-management/variables) with a `code_name` matching the placeholder name
+- Ensure the variable is linked to your endpoint
+
+`"Variable ID(s) not valid UUIDs"`
+- Variable IDs must be valid UUID format
+- Check that you're using the correct variable ID from [data management variables](https://app.posthog.com/data-management/variables)
+
+`"Variable ID(s) not found"`
+- The variable ID(s) don't exist in your project
+- Create the variable in [data management variables](https://app.posthog.com/data-management/variables)
+- Verify you're using the correct project
+
+<CalloutBox icon="IconInfo" type="fyi" title="Deprecation notice">
+
+`filters_override` is deprecated and will be removed in a future release. Use `variables` instead. See the [variables documentation](/docs/endpoints/variables) for migration guidance.
+
+</CalloutBox>
 
 ## Rate limiting (429)
 
@@ -45,8 +65,8 @@ If you get `"Version X not found for endpoint"`:
 
 ## Materialization errors
 
-**"Cannot materialize endpoint: ..."**
-- The endpoint has variables (not supported with materialization)
+`"Cannot materialize endpoint: ..."`
+- The endpoint has variables that use unsupported operators or aren't in `WHERE` clauses. See [variables and materialization](/docs/endpoints/variables#materialization) for supported configurations
 - The endpoint is inactive
 
 **"Cannot enable materialization on inactive endpoint"**

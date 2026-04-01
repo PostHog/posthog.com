@@ -53,7 +53,8 @@ export const handle: Handle = async ({ event, resolve }) => {
   const { pathname } = event.url
 
   if (pathname.startsWith('/ph')) {
-    const hostname = pathname.startsWith('/ph/static/')
+    const useAssetHost = pathname.startsWith('/ph/static/') || pathname.startsWith('/ph/array/')
+    const hostname = useAssetHost
       ? 'us-assets.i.posthog.com'
       : 'us.i.posthog.com'
 
@@ -95,7 +96,8 @@ export const handle: Handle = async ({ event, resolve }) => {
   const { pathname } = event.url
 
   if (pathname.startsWith('/ph')) {
-    const hostname = pathname.startsWith('/ph/static/')
+    const useAssetHost = pathname.startsWith('/ph/static/') || pathname.startsWith('/ph/array/')
+    const hostname = useAssetHost
       ? 'eu-assets.i.posthog.com'
       : 'eu.i.posthog.com'
 
@@ -135,7 +137,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 Here's what the code does:
 
 - Intercepts requests starting with `/ph`
-- Routes `/static/*` requests to PostHog's asset server and everything else to the main API
+- Routes `/static/*` and `/array/*` requests to PostHog's asset server and everything else to the main API
 - Sets the `host` header so PostHog can route the request correctly
 - Forwards the client's IP address for accurate geolocation
 - Passes non-matching requests to the normal SvelteKit request handler
@@ -158,7 +160,7 @@ import { browser } from '$app/environment'
 export function initPostHog() {
   if (!browser) return
 
-  posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
+  posthog.init(import.meta.env.VITE_POSTHOG_TOKEN, {
     api_host: '/ph',
     ui_host: 'https://us.posthog.com',
     persistence: 'localStorage'
@@ -174,7 +176,7 @@ import { browser } from '$app/environment'
 export function initPostHog() {
   if (!browser) return
 
-  posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
+  posthog.init(import.meta.env.VITE_POSTHOG_TOKEN, {
     api_host: '/ph',
     ui_host: 'https://eu.posthog.com',
     persistence: 'localStorage'

@@ -28,7 +28,7 @@ Afterwards, set up a PostHog instance:
 import { PostHog } from 'posthog-node'
 
 export default function PostHogClient() {
-  const posthogClient = new PostHog('<ph_project_api_key>', {
+  const posthogClient = new PostHog('<ph_project_token>', {
     host: '<ph_client_api_host>',
     flushAt: 1, // flush immediately in serverless environment
     flushInterval: 0 // same
@@ -129,7 +129,7 @@ npm i flags @flags-sdk/posthog
 Next, set up the required environment variables. The adapter uses these values as defaults. You can get both of them in [your project settings](https://us.posthog.com/settings/project). 
 
 ``` file=.env.local
-NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+NEXT_PUBLIC_POSTHOG_TOKEN=<ph_project_token>
 NEXT_PUBLIC_POSTHOG_HOST=<ph_api_client_host>
 ```
 

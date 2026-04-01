@@ -59,7 +59,7 @@ Since version 3.28.0, you can provide a `BeforeSendBlock` function when initiali
 <summary>Redact URLs in event properties</summary>
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_api_client_host>")
 
 config.setBeforeSend { event in
     // Redact URLs
@@ -75,7 +75,7 @@ config.setBeforeSend { event in
 <summary>Redact sensitive information from event properties</summary>
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_api_client_host>")
 
 config.setBeforeSend { event in
     // Redact sensitive information
@@ -93,7 +93,7 @@ config.setBeforeSend { event in
 <summary>Drop events by event name</summary>
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_api_client_host>")
 
 config.setBeforeSend { event in
     // Drop all events named "Stale Event"
@@ -114,7 +114,7 @@ Sampling lets you choose to send only a percentage of events to PostHog. It is a
 <summary>Sample events by event name</summary>
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_api_client_host>")
 
 config.setBeforeSend { event in
     // Sample 10% of Sampled Event events
@@ -138,7 +138,7 @@ config.setBeforeSend { event in
 You can provide an array of `BeforeSendBlock` functions to be called one after the other:
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_api_client_host>")
 
 config.setBeforeSend(
     // First block: Drop all events named "Stale Event"
@@ -166,7 +166,7 @@ config.setBeforeSend(
 2. **Configure PostHog**: Use the same App Group identifier in all targets:
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_api_client_host>")
 config.appGroupIdentifier = "group.com.yourcompany.yourapp"
 PostHogSDK.shared.setup(config)
 ```
@@ -191,7 +191,7 @@ Method swizzling is enabled by default, but can be disabled by setting the relev
 Since version 3.34.0, you can opt out of all swizzling using the `enableSwizzling` configuration option. When you disable swizzling, the SDK disables the features listed above. 
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_api_client_host>")
 config.enableSwizzling = false
 PostHogSDK.shared.setup(config)
 ```

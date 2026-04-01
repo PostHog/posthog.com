@@ -1,38 +1,81 @@
-### Q1 2026 Objectives
+### Q2 2026 Objectives
 
-#### Goal 1: Replay cost control - [parity tracker issue](https://github.com/PostHog/posthog/issues/30889) - (Driver: <TeamMember name="Ioannis Josephides" />)
+#### Goal 1: What makes PostHog more tailored to how you actually use it (Driver: <TeamMember name="Dustin Byrne" />)
 
-* [Programmatically start and stop recordings](https://posthog.com/docs/session-replay/how-to-control-which-sessions-you-record#programmatically-start-and-stop-recordings) (React Native and Flutter)
-* [Min. recording duration](https://posthog.com/docs/session-replay/how-to-control-which-sessions-you-record#minimum-duration) (SDKs TBD)
-* [Sampling rate](https://posthog.com/docs/session-replay/how-to-control-which-sessions-you-record#sampling) (SDKs TBD)
-* Event triggers (SDKs TBD)
+E.g. the default dashboard relies on `$pageview` events, which doesn’t work well for mobile or backend-only use cases.
 
-#### Goal 2: Mobile error tracking v2 - [parity tracker issue](https://github.com/PostHog/posthog/issues/43012) - (Driver: <TeamMember name="Manoel Aranda Neto" />)
+What we'll ship:
 
-* [iOS error tracking](https://github.com/PostHog/posthog-ios/issues/407)
-* [React Native native exceptions support](https://github.com/PostHog/posthog-js/issues/2656)
-* [Flutter native exceptions support](https://github.com/PostHog/posthog-flutter/issues/238)
-* [Flutter web error tracking](https://github.com/PostHog/posthog-flutter/issues/237)
+* Discover where our SDKs and defaults fall short (via dogfooding and conversations with customers)
+  * We don't yet have a clear picture of the gaps, step one is understanding what they are and how big the work is, so we can decide whether to focus on them or pick them up incrementally
 
-#### Goal 3: Wider SDK coverage - (Driver: <TeamMember name="Manoel Aranda Neto" />)
+* Proactive user research
+  * Conduct interviews with mobile-heavy and backend-heavy customers
+  * Don’t rely only on reactive feedback from unhappy users
+  * Run surveys targeting those customers
 
-* [Flutter desktop support](https://github.com/PostHog/posthog-flutter/issues/51) (Windows and Linux)
+* AI improvements
+  * Leverage insights from the wizard team to understand what users are asking from SDKs
+  * Make working with AI to set up and extend SDK usage a smooth and delightful experience
 
-### Goal 4: Make it easier to run the team - (Driver: <TeamMember name="Manoel Aranda Neto" />)
+#### Goal 2: PostHog libraries vNext (Driver: <TeamMember name="Ioannis Josephides" />)
 
-* Internal metrics (e.g. how many mobile SDK users use different products)
-    * feature usage breakdown per SDK
-    * events, flags requests and revenue breakdown per SDK
-* Improve the release process (it's semi-automatic, but can be fully automated)
+What we'll ship:
+
+* Offline-first / async-first `posthog-js` (<TeamMember name="Dustin Byrne" />)
+  * https://github.com/PostHog/posthog-js/issues/2673  
+
+* Distributed tracking headers
+  * https://github.com/PostHog/posthog/issues/20026
+  * Ensure libraries are properly connected end-to-end
+  * Add remote config support for JS tracking headers
+  * Auto-integrate in backend SDKs (similar to Django wrapper)
+    * https://github.com/PostHog/posthog-python/blob/2cac15aa68c34c1fc8a6e436d76bd7c4f7ecca47/posthog/integrations/django.py#L28-L29
+
+* More framework-specific wrappers (<TeamMember name="Dustin Byrne" />)
+  * Expand support for popular frameworks (e.g. Angular, TBD)
+
+* Mobile session replay (<TeamMember name="Ioannis Josephides" />)
+  * https://github.com/PostHog/posthog/issues/30889
+  * Event-based triggers
+    * https://github.com/PostHog/posthog-android/issues/467
+    * React Native
+  * Minimum duration support
+    * https://github.com/PostHog/posthog-android/issues/189
     * Android
-    * iOS
     * Flutter
-    * RN session replay plugin
-* Hire and onboard another SDK engineer
+  * macOS support
+    * https://github.com/PostHog/posthog-ios/issues/200
+    * Ensure compatibility with Flutter and React Native on macOS
+  * iOS performance improvements
+    * https://github.com/PostHog/posthog-ios/issues/321
 
-#### Stretch goal: Improve experience for mobile customers using feature flags - (Driver: <TeamMember name="Ioannis Josephides" />)
+* Mobile error tracking (<TeamMember name="Ioannis Josephides" />)
+  * https://github.com/PostHog/posthog/issues/43012
+  * Native support
+    * React Native
+      * Rename package (current one is session replay specific)
+    * iOS improvements
+      * Line numbers (likely server-side)
+      * Swift error messages (likely requires vendoring PLCrashReporter)
+        * https://github.com/PostHog/posthog-ios/issues/522
+  * Breadcrumbs
+    * Error tracking team to design the approach and coordinate with us on SDK implementation
 
-* [Semantic versioning filters](https://github.com/PostHog/posthog/issues/24485)
-* [Remote config support](https://github.com/PostHog/posthog/issues/26567)
-* [Human readable device models](https://github.com/PostHog/posthog/issues/18025)
-* [Overriding server properties for feature flags](https://github.com/PostHog/posthog-ios/issues/148) (Flutter)
+* Flutter desktop support (Windows/Linux) (<TeamMember name="Ioannis Josephides" />)
+  * https://github.com/PostHog/posthog-flutter/issues/51
+
+#### Goal 3: Maintaining the SDKs (Driver: <TeamMember name="Manoel Aranda Neto" />)
+
+What we'll ship:
+
+* Complete the SDK test harness and integrate it into CI to ensure consistency across SDKs
+  * https://github.com/PostHog/posthog-sdk-test-harness
+  * https://github.com/PostHog/posthog/issues/51493
+* Take ownership of the SDK rotation
+* Align and standardize SDK configuration naming (API token vs API key)
+  * https://github.com/PostHog/posthog/issues/48234
+* Support and contribute to the new ingestion rate limiting project
+  * https://github.com/PostHog/requests-for-comments-internal/pull/1036
+* Migrate and consolidate `/decide`, `/flags`, and `/static/array.js` into a unified remote config (`/static/token/config`)
+* Document SDK design guidelines and best practices under the [SDK handbook page](/handbook/engineering/sdks) to help contributors avoid common pitfalls

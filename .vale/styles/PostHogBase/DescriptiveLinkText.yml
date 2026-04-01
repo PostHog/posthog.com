@@ -1,0 +1,15 @@
+extends: existence
+message: "Use descriptive link text instead of '%s'."
+link: https://posthog.com/handbook/docs-and-wizard/docs-style-guide
+level: warning
+scope: raw
+nonword: true
+tokens:
+    - '\[click here\]'
+    - '\[here\]'
+    - '\[this link\]'
+    - '\[this page\]'
+    - '\[this article\]'
+    - '\[read more\]'
+    - '\[read here\]'
+    - '\[learn more\]'

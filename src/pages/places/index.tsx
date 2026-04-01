@@ -8,9 +8,11 @@ import PlacesMap, { getPlaceIcon } from 'components/HogMap/PlacesMap'
 import PlaceDetail from 'components/HogMap/PlaceDetail'
 import { PlaceType, PlaceItem } from 'components/HogMap/types'
 import { AnimatePresence } from 'framer-motion'
+import { useApp } from '../../context/App'
 
 function Places(): JSX.Element {
     const { isModerator } = useUser()
+    const { websiteMode } = useApp()
     // Initialize with all place types selected
     const [selectedLayers, setSelectedLayers] = useState<string[]>(Object.values(PlaceType))
     const [places, setPlaces] = useState<PlaceItem[]>([])
@@ -137,7 +139,12 @@ function Places(): JSX.Element {
             />
 
             <Explorer template="generic" slug="places" title="Places" fullScreen viewportClasses="[&>div>div]:h-full">
-                <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
+                <div
+                    data-scheme="primary"
+                    className={`flex flex-col @xl:flex-row text-primary h-full ${
+                        websiteMode ? '@xl:h-[calc(100vh-48px)]' : ''
+                    }`}
+                >
                     <aside
                         data-scheme="secondary"
                         className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary h-full flex flex-col"

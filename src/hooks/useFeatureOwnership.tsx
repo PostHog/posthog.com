@@ -47,6 +47,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Annotations',
         owner: ['product-analytics'],
     },
+    'background-agents': {
+        feature: 'Background agents',
+        owner: ['posthog-ai'],
+        label: 'feature/background-agents',
+    },
     'api-structure': {
         feature: 'API structure',
         owner: [],
@@ -127,6 +132,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'data-management': {
         feature: 'Data management',
         owner: ['analytics-platform'],
+        notes: <>Owns Actions, Event definitons, Property definitions</>,
     },
     'data-table': {
         feature: 'Data table',
@@ -134,7 +140,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-visualization': {
         feature: 'Data visualization',
-        owner: ['data-stack'],
+        owner: ['product-analytics'],
     },
     'data-pipelines': {
         feature: 'Data pipelines',
@@ -142,8 +148,13 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/pipeline',
     },
     'data-warehouse': {
-        feature: 'Data warehouse',
-        owner: ['data-stack'],
+        feature: 'Managed warehouse',
+        owner: ['managed-warehouse'],
+    },
+    'embedding-worker': {
+        feature: 'Embedding worker',
+        owner: ['signals'],
+        label: false,
     },
     'early-access-features': {
         feature: 'Early access features',
@@ -152,7 +163,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     endpoints: {
         feature: 'Endpoints',
-        owner: ['data-stack'],
+        owner: ['data-modeling'],
     },
     'error-tracking': {
         feature: 'Error tracking',
@@ -197,6 +208,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Internal messaging (email, notifications)',
         owner: ['platform-features'],
         label: 'feature/notifications',
+    },
+    'llm-gateway': {
+        feature: 'LLM gateway',
+        owner: ['posthog-ai'],
+        label: false,
     },
     'live-events': {
         feature: 'Live events',
@@ -283,6 +299,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['posthog-ai'],
         label: 'feature/posthog-ai',
     },
+    'posthog-code': {
+        feature: 'PostHog Code',
+        owner: ['posthog-code'],
+        label: 'feature/posthog-code',
+    },
     'project-homepage': {
         feature: 'Project homepage',
         owner: ['platform-ux'],
@@ -295,7 +316,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     qaas: {
         feature: 'Queries as a Service',
-        owner: ['data-stack'],
+        owner: ['data-tools'],
         label: 'feature/qaas',
     },
     'query-performance': {
@@ -312,16 +333,21 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Replay',
         owner: ['replay'],
     },
+    'reverse-proxy': {
+        feature: 'Reverse proxy',
+        owner: ['platform-features'],
+        label: 'feature/reverse-proxy',
+    },
     'revenue-analytics': {
         feature: 'Revenue analytics',
-        owner: ['customer-analytics', 'growth'],
+        owner: ['customer-analytics'],
     },
     'revenue-data-management': {
         feature: 'Revenue data management',
-        owner: ['customer-analytics', 'growth'],
+        owner: ['customer-analytics'],
     },
     sdks: {
-        feature: 'SDKs & client libraries (web, server-side)',
+        feature: 'SDKs & client libraries',
         owner: ['client-libraries'],
         notes: (
             <>
@@ -334,36 +360,14 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                     incident.io schedule
                 </PrivateLink>
                 .
-                <br />
-                <br />
-                <strong>
-                    For Mobile SDK issues, defer to the Mobile folks (@mobile-folks or @client-libraries-folks on Slack)
-                    first.
-                </strong>
             </>
         ),
-        label: 'feature/libraries',
+        label: ['feature/libraries', 'feature/mobile'],
     },
     'sdks-doctor': {
         feature: 'SDK doctor',
         owner: ['growth'],
         label: 'feature/sdk-doctor',
-    },
-    'sdks-mobile': {
-        feature: 'SDKs (mobile)',
-        owner: ['client-libraries'],
-        notes: (
-            <>
-                Shared responsibility, with features owned by the relevant small team, or try{' '}
-                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink>.
-                There is an engineer assigned to SDK support on a rotating schedule. Check the{' '}
-                <PrivateLink url="https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MA3TWXS41E7Y5N4AQ">
-                    incident.io schedule
-                </PrivateLink>
-                .
-            </>
-        ),
-        label: 'feature/mobile',
     },
     search: {
         feature: 'Search',
@@ -395,6 +399,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['web-analytics'],
         label: 'feature/session-explorer',
     },
+    'session-summaries': {
+        feature: 'Session summaries',
+        owner: ['replay'],
+        label: 'feature/session-summaries',
+    },
+    signals: {
+        feature: 'Signals',
+        owner: ['signals'],
+        label: 'feature/signals',
+    },
     settings: {
         feature: 'Settings structure (personal & project)',
         owner: ['platform-ux'],
@@ -407,11 +421,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sql-editor': {
         feature: 'SQL editor',
-        owner: ['data-stack'],
+        owner: ['data-tools'],
     },
     'sql-insights': {
         feature: 'SQL insights',
-        owner: ['data-stack'],
+        owner: ['product-analytics'],
         label: false,
     },
     sso: {

@@ -55,7 +55,7 @@ module.exports = {
                 'ai-blue': '#3E6B9E',
             },
             backgroundImage: {
-                ai: 'radial-gradient(at 84% 83%, hsla(354,99%,77%,1) 0px, transparent 50%), radial-gradient(at 66% 38%, hsla(295,67%,67%,1) 0px, transparent 50%), radial-gradient(at 44% 51%, hsla(149,78%,70%,1) 0px, transparent 50%), radial-gradient(at 41% 14%, hsla(257,76%,72%,1) 0px, transparent 50%), radial-gradient(at 75% 97%, hsla(107,92%,67%,1) 0px, transparent 50%), radial-gradient(at 68% 35%, hsla(237,71%,71%,1) 0px, transparent 50%), radial-gradient(at 42% 23%, hsla(64,65%,79%,1) 0px, transparent 50%)',
+                ai: 'radial-gradient(at 84% 83%, hsla(195,45%,75%,1) 0px, transparent 50%), radial-gradient(at 66% 38%, rgb(173, 212, 155) 0px, transparent 50%), radial-gradient(at 44% 51%, rgb(226, 219, 167) 0px, transparent 50%), radial-gradient(at 41% 14%, hsla(180,38%,78%,1) 0px, transparent 50%), radial-gradient(at 75% 97%, hsla(155,42%,68%,1) 0px, transparent 50%), radial-gradient(at 68% 35%, hsla(178,45%,65%,1) 0px, transparent 50%), radial-gradient(at 42% 23%, hsla(200,40%,72%,1) 0px, transparent 50%)',
                 'llm-analytics':
                     'radial-gradient(ellipse 80% 60% at 15% 20%, #DE7AFF 0px, transparent 40%), radial-gradient(ellipse 100% 80% at 85% 15%, #EF7D9B 0px, transparent 35%), radial-gradient(ellipse 70% 100% at 90% 85%, #3795FF 0px, transparent 45%), radial-gradient(ellipse 90% 70% at 10% 90%, #40C8D8 0px, transparent 40%)',
                 'trace-monitoring':
@@ -227,6 +227,7 @@ module.exports = {
                 fairytale: ['Computer Modern', 'sans-serif'],
                 serif: ['Charter', 'MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
+                    'IBM Plex Sans Variable',
                     'IBM Plex Sans',
                     '-apple-system',
                     'BlinkMacSystemFont',
@@ -242,9 +243,10 @@ module.exports = {
                     'sans-serif',
                 ],
                 fancy: ['Zapfino', 'serif'],
-                button: ['IBM Plex Sans', 'sans-serif'],
-                nav: ['IBM Plex Sans', 'sans-serif'],
+                button: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
+                nav: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
+                rounded: ['Open Runde', 'sans-serif'],
                 squeak: ['Squeak', 'sans-serif'],
                 comic: [
                     'Comic Sans MS',
@@ -395,6 +397,14 @@ module.exports = {
                         transform: 'translateY(-10px)',
                     },
                 },
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-6px)' },
+                },
+                breathe: {
+                    '0%, 100%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(1.03)' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
@@ -416,6 +426,8 @@ module.exports = {
                 'gradient-rotate': 'gradient-rotate 3s ease-in-out infinite',
                 'slide-up-fade-in': 'slideUpFadeIn 300ms ease-out forwards',
                 'slide-up-fade-out': 'slideUpFadeOut 300ms ease-in forwards',
+                float: 'float 2s ease-in-out infinite',
+                breathe: 'breathe 3s ease-in-out infinite',
             },
             containers: {
                 '2xs': '16rem',
@@ -467,6 +479,7 @@ module.exports = {
             addVariant('wallpaper-parade', 'body[data-wallpaper="parade"] &')
             addVariant('wallpaper-coding-at-night', 'body[data-wallpaper="coding-at-night"] &')
             addVariant('wallpaper-startup-monopoly', 'body[data-wallpaper="startup-monopoly"] &')
+            addVariant('wallpaper-action-figure', 'body[data-wallpaper="action-figure"] &')
         },
     ],
 }

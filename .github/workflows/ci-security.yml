@@ -29,12 +29,11 @@ jobs:
                       hashicorp/
                       PostHog/
                       tailscale/
-                      inkeep/
 
     semgrep-js:
         runs-on: ubuntu-latest
         container:
-            image: returntocorp/semgrep
+            image: semgrep/semgrep
 
         steps:
             - name: Checkout
@@ -58,7 +57,7 @@ jobs:
     semgrep-general:
         runs-on: ubuntu-latest
         container:
-            image: returntocorp/semgrep
+            image: semgrep/semgrep
 
         steps:
             - name: Checkout

@@ -70,6 +70,8 @@ SDK doctor is available in the [right side panel](https://app.posthog.com/#panel
 3. View detected SDKs, their versions, and notes about issues found
 4. Click the provided links to view available versions and documentation
 
+You can also search for "SDK doctor" in the [command palette](/docs/cmd-k) (`Cmd` + `K` on Mac, `Ctrl` + `K` on Windows/Linux) to quickly navigate to it.
+
 ## Understanding SDK doctor badges
 
 SDK doctor uses badges to quickly communicate SDK status:

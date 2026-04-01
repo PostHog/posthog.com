@@ -79,7 +79,8 @@ export default function proxy({ prefix }) {
     }
 
     const pathname = (request.url ?? '').slice(prefix.length)
-    const posthogHost = pathname.startsWith('/static/') ? ASSET_HOST : API_HOST
+    const useAssetHost = pathname.startsWith('/static/') || pathname.startsWith('/array/')
+    const posthogHost = useAssetHost ? ASSET_HOST : API_HOST
 
     const headers = toHeaders(request.headersDistinct)
     headers.set('host', posthogHost)
@@ -149,7 +150,8 @@ export default function proxy({ prefix }) {
     }
 
     const pathname = (request.url ?? '').slice(prefix.length)
-    const posthogHost = pathname.startsWith('/static/') ? ASSET_HOST : API_HOST
+    const useAssetHost = pathname.startsWith('/static/') || pathname.startsWith('/array/')
+    const posthogHost = useAssetHost ? ASSET_HOST : API_HOST
 
     const headers = toHeaders(request.headersDistinct)
     headers.set('host', posthogHost)
@@ -195,7 +197,7 @@ export default function proxy({ prefix }) {
 
 This module exports middleware that:
 
-- Routes `/static/*` requests to PostHog's asset server and everything else to the main API
+- Routes `/static/*` and `/array/*` requests to PostHog's asset server and everything else to the main API
 - Sets the `host` header so PostHog can route the request correctly
 - Preserves the client's real IP address using `X-Forwarded-For` and `X-Real-IP` headers
 - Removes cookies and connection headers that shouldn't be forwarded
@@ -274,14 +276,14 @@ In your application code, update your PostHog initialization:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'http://localhost:3000/ph',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'http://localhost:3000/ph',
   ui_host: 'https://eu.posthog.com'
 })
@@ -299,7 +301,7 @@ Confirm events are flowing through your proxy:
 
 1. Test the proxy directly:
    ```bash
-   curl -I http://localhost:3000/ph/decide?v=3
+   curl -I http://localhost:3000/ph/flags?v=2
    ```
    You should see a `200 OK` response.
 
@@ -341,7 +343,7 @@ If the proxy returns 502 errors:
 
 1. Verify your server can reach PostHog domains:
    ```bash
-   curl -I https://us.i.posthog.com/decide?v=3
+   curl -I https://us.i.posthog.com/flags?v=2
    ```
 2. Check that the `API_HOST` and `ASSET_HOST` values match your PostHog region
 3. Ensure no firewall is blocking outbound HTTPS traffic

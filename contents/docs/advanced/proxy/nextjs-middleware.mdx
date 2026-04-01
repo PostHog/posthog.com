@@ -63,7 +63,7 @@ import { NextResponse } from 'next/server'
 
 export function proxy(request) {
   const url = request.nextUrl.clone()
-  const hostname = url.pathname.startsWith('/ph/static/')
+  const hostname = url.pathname.startsWith('/ph/static/') || url.pathname.startsWith('/ph/array/')
     ? 'us-assets.i.posthog.com'
     : 'us.i.posthog.com'
 
@@ -90,7 +90,7 @@ import { NextResponse } from 'next/server'
 
 export function proxy(request) {
   const url = request.nextUrl.clone()
-  const hostname = url.pathname.startsWith('/ph/static/')
+  const hostname = url.pathname.startsWith('/ph/static/') || url.pathname.startsWith('/ph/array/')
     ? 'eu-assets.i.posthog.com'
     : 'eu.i.posthog.com'
 
@@ -124,7 +124,7 @@ import { NextResponse } from 'next/server'
 
 export function middleware(request) {
   const url = request.nextUrl.clone()
-  const hostname = url.pathname.startsWith('/ph/static/')
+  const hostname = url.pathname.startsWith('/ph/static/') || url.pathname.startsWith('/ph/array/')
     ? 'us-assets.i.posthog.com'
     : 'us.i.posthog.com'
 
@@ -151,7 +151,7 @@ import { NextResponse } from 'next/server'
 
 export function middleware(request) {
   const url = request.nextUrl.clone()
-  const hostname = url.pathname.startsWith('/ph/static/')
+  const hostname = url.pathname.startsWith('/ph/static/') || url.pathname.startsWith('/ph/array/')
     ? 'eu-assets.i.posthog.com'
     : 'eu.i.posthog.com'
 
@@ -182,7 +182,7 @@ The only differences are the filename (`middleware.js`) and the exported functio
 The proxy does the following:
 
 - The `matcher` config tells Next.js to only run this proxy for requests starting with `/ph`
-- It determines which PostHog host to use: the assets host for `/static/*` requests, the main host for everything else
+- It determines which PostHog host to use: the assets host for `/static/*` and `/array/*` requests (so that cache headers are preserved), the main host for everything else
 - It sets the `host` header so PostHog knows how to route the request. Without this, you'll get 401 errors.
 - It rewrites the URL to PostHog's domain and strips the `/ph` prefix
 
@@ -214,14 +214,14 @@ In your application code, update your PostHog initialization to use your proxy p
 <MultiLanguage>
 
 ```js file=US
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
   api_host: '/ph',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
   api_host: '/ph',
   ui_host: 'https://eu.posthog.com'
 })
@@ -278,7 +278,7 @@ export default authMiddleware({
   beforeAuth(req) {
     if (req.nextUrl.pathname.startsWith('/ph')) {
       const url = req.nextUrl.clone()
-      const hostname = url.pathname.startsWith('/ph/static/')
+      const hostname = url.pathname.startsWith('/ph/static/') || url.pathname.startsWith('/ph/array/')
         ? 'us-assets.i.posthog.com'
         : 'us.i.posthog.com'
 
@@ -304,7 +304,7 @@ export default authMiddleware({
   beforeAuth(req) {
     if (req.nextUrl.pathname.startsWith('/ph')) {
       const url = req.nextUrl.clone()
-      const hostname = url.pathname.startsWith('/ph/static/')
+      const hostname = url.pathname.startsWith('/ph/static/') || url.pathname.startsWith('/ph/array/')
         ? 'eu-assets.i.posthog.com'
         : 'eu.i.posthog.com'
 
@@ -340,7 +340,7 @@ requestHeaders.delete('cookie')
 Alternatively, configure PostHog to use `localStorage` instead of cookies:
 
 ```js
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
   api_host: '/ph',
   persistence: 'localStorage'
 })

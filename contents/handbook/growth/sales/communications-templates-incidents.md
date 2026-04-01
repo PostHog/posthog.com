@@ -34,12 +34,41 @@ Reach out before customers ask, even if it’s just to say, “We’re aware and
 
 | Level | Description | Examples | Channels | Cadence |
 | ----- | ----- | ----- | ----- | ----- |
+| **SEV 0 – Emergency** | Existential service failure; all or most customers impacted with no workaround. CMOC sends immediately via broadcast. Account owners do **not** gate comms. | Full platform outage, data loss, security breach with active customer impact. | Pylon broadcast → Email → DM/SMS | Immediate broadcast, then every 15–30 min; postmortem within 24h |
 | **SEV 1 – Critical** | Major outage or data loss; widespread impact. | API unavailable, ingestion halted, login failures. | Slack → Email → (DM or SMS if needed) | Every 30–60 min; postmortem within 48h |
 | **SEV 2 – Major** | Partial degradation or downtime; workaround available. | Replay or query delays \>30 min, flag evaluation slow. | Slack or Email | Every 1–2 hrs |
 | **SEV 3 – Minor** | Limited impact or slow recovery. | Billing sync delays, isolated org issues. | Slack | Start and close |
 | **SEV 4 – Informational / Planned** | Maintenance or recovered incidents. | DB upgrade, scaling events. | Email or Slack broadcast | Before \+ after window |
 
 ## **Templates**
+
+### **Emergency (SEV 0)**
+
+> **This overrides the standard workflow.** CMOC sends directly to all affected customer channels via Pylon broadcast without waiting for account owners. Account owners follow up individually once online.
+
+**Initial broadcast (Pylon):**
+
+We're investigating a major incident affecting [feature/service]. [Symptom — e.g., "Event ingestion is fully stopped" or "The PostHog app is unreachable."]
+
+Our engineering team is actively working on a fix. We'll post updates here every 15–30 minutes until this is resolved.
+
+**Update template:**
+
+Update on [feature/service]: [Status — e.g., "Root cause identified. Fix is being deployed." or "Still investigating. No ETA yet, but narrowing it down."]
+
+Next update in ~[15/30] minutes.
+
+**Resolution template:**
+
+[Feature/service] is back online as of [time UTC]. 
+
+Root cause: [one-line summary].
+Duration: [start–end].
+Impact: [brief description of what customers experienced].
+
+We're monitoring closely. A full postmortem will follow within 24 hours.
+
+If you experienced data gaps or have concerns about impact to your project, reply here and your account owner will follow up directly.
 
 ### **Critical**
 
@@ -110,17 +139,21 @@ Heads up — maintenance on \[system\] from \[time window\]. No downtime expecte
 | **Regional Backup (Americas / EMEA / APAC)** | Covers accounts when owners are offline. Takes handoff from CMOC, sends comms, and ensures follow-up continuity. |
 | **Engineering Incident Lead** | Owns technical response and provides updates to CMOC for accurate messaging. |
 
+> All coordination between CMOC and Account Owners should happen in [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C) transparently so that everyone who manages customers is in the loop.
+
 ### **Workflow**
 
+> **SEV 0 override:** For SEV 0 incidents, the CMOC skips steps 4–5 and sends the initial message directly via [Pylon broadcast](#using-pylon-for-broadcasts) to all affected customer channels. Account owners are notified in [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C) simultaneously, and take over individual follow-up threads once online. The CMOC continues to own broadcast updates until the incident is resolved or downgraded.
 1. **Incident declared** (Engineering).
 2. **CMOC activated**, notified of impact.
-3. **CMOC drafts the initial message**, shares with the Account Owner.
-4. **AM/AE/CSM sends to accounts**; backup sends if primary is offline.
-5. **Updates** drafted by CMOC (30–60 min for SEV1, 1–2 hrs for SEV2).
-6. **Regional handoffs** coordinated by CMOC.
-7. **Resolution**: CMOC drafts closure; AM/AE/CSM (or backup) sends.
-8. **Post-incident**: CMOC archives thread; GTM logs feedback and follow-ups.
-9. **Postmortem**: Engineering writes technical summary; GTM adds comms learnings.
+3. **Assess customer impact**, this <PrivateLink url="https://us.posthog.com/project/2/insights/EBiXOD91">insight</PrivateLink> (or this <PrivateLink url="https://docs.google.com/spreadsheets/d/1EyV55L0vWTfD4W02j5A3Vx3YZYPUODmQQC1toFPcKXU/edit?gid=1396499197#gid=1396499197">Google Sheet</PrivateLink> as a backup) will help you understand which customers are using which components in which cloud environment.
+4. **CMOC drafts the initial message**, shares with the Account Owners in [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C)
+5. **AM/AE/CSM sends to accounts**; backup sends if primary is offline.
+6. **Updates** drafted by CMOC (30–60 min for SEV1, 1–2 hrs for SEV2).
+7. **Regional handoffs** coordinated by CMOC.
+8. **Resolution**: CMOC drafts closure; AM/AE/CSM (or backup) sends.
+9. **Post-incident**: CMOC archives thread; GTM logs feedback and follow-ups.
+10. **Postmortem**: Engineering writes technical summary; GTM adds comms learnings.
 
 ## **Example Slack workflow (Critical)**
 

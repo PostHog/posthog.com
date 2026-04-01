@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { IconPlay, IconRewindPlay, IconX } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import { IconDemoThumb, AppIcon, IconChangelogThumb } from 'components/OSIcons'
@@ -14,6 +15,9 @@ import { motion } from 'framer-motion'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
+import usePostHog from '../../hooks/usePostHog'
+import MediaPlayer from 'components/MediaPlayer'
+import { CallToAction } from 'components/CallToAction'
 
 declare global {
     interface Window {
@@ -29,7 +33,9 @@ interface Product {
 }
 
 export const useProductLinks = () => {
-    const { posthogInstance, openNewChat } = useApp()
+    const { posthogInstance, openNewChat, siteSettings, updateSiteSettings } = useApp()
+    const { addToast } = useToast()
+    const posthog = usePostHog()
 
     return [
         {
@@ -83,23 +89,43 @@ export const useProductLinks = () => {
         },
         ...(posthogInstance
             ? [
-                {
-                    label: 'Open app ↗',
-                    Icon: <AppIcon name="computerCoffee" />,
-                    url: 'https://app.posthog.com',
-                    external: true,
-                    source: 'desktop',
-                },
-            ]
+                  {
+                      label: 'Open app ↗',
+                      Icon: <AppIcon name="computerCoffee" />,
+                      url: 'https://app.posthog.com',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]
             : [
-                {
-                    label: 'Sign up ↗',
-                    Icon: <AppIcon name="compass" />,
-                    url: 'https://app.posthog.com/signup',
-                    external: true,
+                  {
+                      label: 'Sign up ↗',
+                      Icon: <AppIcon name="compass" />,
+                      url: 'https://app.posthog.com/signup',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]),
+        {
+            label: 'Switch to website mode',
+            Icon: <AppIcon name="switch" />,
+            onClick: () => {
+                updateSiteSettings({ ...siteSettings, experience: 'boring' })
+                posthog?.capture('switched site mode', {
+                    value: 'website',
                     source: 'desktop',
-                },
-            ]),
+                })
+                addToast({
+                    title: 'Switched to website mode',
+                    description: 'Hover the logo to return to OS mode.',
+                    duration: 5000,
+                    onUndo: () => {
+                        updateSiteSettings({ ...siteSettings, experience: 'posthog' })
+                    },
+                })
+            },
+            source: 'desktop',
+        },
     ]
 }
 
@@ -194,6 +220,157 @@ const validateIconPositions = (
     return true
 }
 
+function ActionFigureWallpaper() {
+    const { addWindow } = useApp()
+
+    const handlePriceClick = () => {
+        addWindow(
+            <MediaPlayer
+                newWindow
+                location={{ pathname: `action-figure` }}
+                key={`action-figure`}
+                videoId="xxBqKIBBxQw"
+            />
+        )
+    }
+
+    return (
+        <button
+            onClick={handlePriceClick}
+            className="hidden select-none wallpaper-action-figure:flex fixed inset-0 items-center justify-center overflow-hidden bg-[#d4c9b8] dark:bg-[#2a2520]"
+        >
+            {/* Text + logo */}
+            <div className="absolute right-[90px] top-[10%] flex justify-center z-10">
+                <div className="relative">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_aa13fcacc0.png"
+                        alt="Introducing James Hawkins — The Ultra-Action Figure"
+                        className="w-[clamp(280px,50vw,600px)]"
+                    />
+                    <div className="absolute right-0 -bottom-0 translate-y-1/2">
+                        <motion.div
+                            animate={{ scale: [1, 1.12, 1] }}
+                            transition={{
+                                duration: 1.2,
+                                repeat: Infinity,
+                                ease: 'easeInOut',
+                            }}
+                        >
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_143844_23796aaece.png"
+                                alt="Only $996"
+                                className="w-[clamp(80px,13vw,160px)]"
+                            />
+                        </motion.div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Right James figure */}
+            <div className="absolute -bottom-2 -right-12 w-[clamp(220px,50vw,600px)] z-10">
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_03_24_at_11_06_31_1_08dd25932a.png"
+                    alt=""
+                />
+            </div>
+
+            {/* Left James figure */}
+            <div className="absolute -bottom-2 -right-20 w-[clamp(400px,80vw,1000px)] z-10">
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_03_24_at_11_06_54_1_99fa60ee4d.png"
+                    alt=""
+                />
+            </div>
+        </button>
+    )
+}
+
+const ACTION_FIGURE_DISMISSED_KEY = 'action-figure-toast-dismissed'
+
+function ActionFigurePopup() {
+    const { addWindow, siteSettings } = useApp()
+    const { addToast, removeToast } = useToast()
+    const toastId = useRef<number | null>(null)
+    const [hasDismissed, setHasDismissed] = useState(() => {
+        try {
+            return localStorage.getItem(ACTION_FIGURE_DISMISSED_KEY) === 'true'
+        } catch {
+            return false
+        }
+    })
+
+    const isActive = siteSettings.wallpaper === 'action-figure'
+
+    const dismiss = () => {
+        setHasDismissed(true)
+        if (toastId.current) {
+            removeToast(toastId.current!)
+        }
+        try {
+            localStorage.setItem(ACTION_FIGURE_DISMISSED_KEY, 'true')
+        } catch {
+            // localStorage may be unavailable
+        }
+    }
+
+    useEffect(() => {
+        if (!isActive || hasDismissed) return
+
+        const timer = setTimeout(() => {
+            const newToastId = addToast({
+                title: 'New PostHog Heroes action figures',
+                description: (
+                    <div>
+                        <button
+                            onClick={() => {
+                                addWindow(
+                                    <MediaPlayer
+                                        newWindow
+                                        location={{ pathname: `action-figure` }}
+                                        key={`action-figure`}
+                                        videoId="xxBqKIBBxQw"
+                                    />
+                                )
+                            }}
+                            className="relative rounded overflow-hidden group w-[calc(100%+15px)] mt-3"
+                        >
+                            <img
+                                src="https://img.youtube.com/vi/xxBqKIBBxQw/mqdefault.jpg"
+                                alt="Watch the action figure reveal"
+                                className="w-full aspect-video object-cover rounded"
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                                <div className="size-11 rounded-full bg-white/90 group-hover:bg-white flex items-center justify-center transition-colors shadow-lg">
+                                    <IconPlay className="size-5 text-black ml-0.5" />
+                                </div>
+                            </div>
+                        </button>
+                        <CallToAction
+                            size="sm"
+                            className="!w-[calc(100%+15px)] mt-1"
+                            to="/merch?product=james-hawkins-ultra-action-figure"
+                            state={{ newWindow: true }}
+                        >
+                            Order yours today
+                        </CallToAction>
+                    </div>
+                ),
+                actionLabel: 'Close',
+                actionAsIcon: <IconX className="size-4" />,
+                verticalAlign: 'items-start',
+                duration: 999999999,
+                onAction: () => dismiss(),
+                actionClassName: '!absolute -top-2 -right-2',
+            })
+            toastId.current = newToastId
+        }, 1000)
+
+        return () => clearTimeout(timer)
+    }, [isActive, hasDismissed])
+
+    return null
+}
+
 export default function Desktop() {
     const productLinks = useProductLinks()
     const {
@@ -204,6 +381,8 @@ export default function Desktop() {
         setConfetti,
         confetti,
         compact,
+        windows,
+        websiteMode,
         posthogInstance,
         updateSiteSettings,
     } = useApp()
@@ -212,6 +391,8 @@ export default function Desktop() {
         enabled: !siteSettings.screensaverDisabled,
     })
     const [rendered, setRendered] = useState(false)
+    const [navVisible, setNavVisible] = useState(false)
+    const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const { getWallpaperClasses } = useTheme()
     const { addToast } = useToast()
     function generateInitialPositions(columns = 2): IconPositions {
@@ -320,6 +501,9 @@ export default function Desktop() {
 
         return () => {
             window.removeEventListener('resize', handleResize)
+            if (hoverTimeoutRef.current) {
+                clearTimeout(hoverTimeoutRef.current)
+            }
         }
     }, [posthogInstance])
 
@@ -334,6 +518,20 @@ export default function Desktop() {
         const newPositions = { ...iconPositions, [appLabel]: position }
         setIconPositions(newPositions)
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newPositions))
+    }
+
+    const handleMouseEnter = () => {
+        if (hoverTimeoutRef.current) {
+            clearTimeout(hoverTimeoutRef.current)
+            hoverTimeoutRef.current = null
+        }
+        setNavVisible(true)
+    }
+
+    const handleMouseLeave = () => {
+        hoverTimeoutRef.current = setTimeout(() => {
+            setNavVisible(false)
+        }, 2000)
     }
 
     const allApps = [...productLinks, ...apps]
@@ -417,13 +615,18 @@ export default function Desktop() {
                     },
                 ]}
             >
-                <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
+                <div
+                    data-scheme="primary"
+                    data-app="Desktop"
+                    className={`fixed size-full ${websiteMode ? '-z-10 inset-0' : ''}`}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
                     <div className={`fixed inset-0 -z-10 ${getWallpaperClasses()}`} />
                     {/* Hogzilla */}
                     <div className="hidden select-none wallpaper-hogzilla:flex items-end justify-end absolute inset-0">
                         <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB] dark:opacity-0"></div>
                         <CloudinaryImage
-                            loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
                             alt=""
                             width={2574}
@@ -495,21 +698,44 @@ export default function Desktop() {
                                 backgroundRepeat: 'repeat',
                             }}
                         />
-                        <div className="absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0">
+                        <div
+                            className={`absolute ${
+                                websiteMode
+                                    ? 'bottom-4 -right-4 @[2600px]:right-4'
+                                    : 'bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0'
+                            }`}
+                        >
                             <CloudinaryImage
+                                loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
-                                alt=""
                                 width={1401}
                                 height={1400}
-                                className="size-[300px] md:size-[700px] dark:hidden"
+                                className={`${websiteMode ? '' : 'size-[300px] md:size-[700px]'} dark:hidden`}
+                                style={
+                                    websiteMode
+                                        ? {
+                                              width: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                              height: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                          }
+                                        : undefined
+                                }
+                                draggable={false}
                             />
                             <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_dark_opt_15e213413c.png"
-                                alt=""
                                 width={1401}
                                 height={1400}
-                                className="size-[300px] md:size-[700px] hidden dark:block"
+                                className={`${websiteMode ? '' : 'size-[300px] md:size-[700px]'} hidden dark:block`}
+                                style={
+                                    websiteMode
+                                        ? {
+                                              width: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                              height: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                          }
+                                        : undefined
+                                }
+                                draggable={false}
                             />
                         </div>
                     </div>
@@ -566,36 +792,44 @@ export default function Desktop() {
                         />
                     </div>
 
-                    <nav>
-                        <motion.ul
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: rendered ? 1 : 0 }}
-                            className="list-none m-0 -mt-2 md:mt-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2"
-                        >
-                            {allApps.map((app) => {
-                                const position = iconPositions[app.label] || { x: 0, y: 0 }
+                    {/* Action figure (April Fools) */}
+                    <ActionFigureWallpaper />
 
-                                return (
-                                    <DraggableDesktopIcon
-                                        key={app.label}
-                                        app={app}
-                                        initialPosition={position}
-                                        onPositionChange={(newPosition) => handlePositionChange(app.label, newPosition)}
-                                    />
-                                )
-                            })}
-                        </motion.ul>
-                    </nav>
+                    {!websiteMode && (
+                        <nav>
+                            <motion.ul
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: rendered ? 1 : 0 }}
+                                className="list-none m-0 -mt-2 md:mt-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2"
+                            >
+                                {allApps.map((app) => {
+                                    const position = iconPositions[app.label] || { x: 0, y: 0 }
+
+                                    return (
+                                        <DraggableDesktopIcon
+                                            key={app.label}
+                                            app={app}
+                                            initialPosition={position}
+                                            onPositionChange={(newPosition) =>
+                                                handlePositionChange(app.label, newPosition)
+                                            }
+                                        />
+                                    )
+                                })}
+                            </motion.ul>
+                        </nav>
+                    )}
                 </div>
-                {!compact && (
+                {!compact && !websiteMode && (
                     <Screensaver
                         isActive={isInactive || screensaverPreviewActive}
                         onDismiss={handleScreensaverDismiss}
                     />
                 )}
-                <HedgeHogModeEmbed />
+                {!websiteMode && <HedgeHogModeEmbed />}
             </ContextMenu>
             <NotificationsPanel />
+            <ActionFigurePopup />
             {confetti && (
                 <div className="fixed inset-0">
                     <ReactConfetti

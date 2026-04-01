@@ -4,6 +4,7 @@ import { IconCheck, IconChevronDown } from '@posthog/icons'
 import * as NotProductIcons from '../NotProductIcons'
 import * as NewIcons from '@posthog/icons'
 import * as OSIcons from '../OSIcons/Icons'
+import { useApp } from '../../context/App'
 
 type SelectItem = {
     value: string
@@ -96,10 +97,18 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
     ) => {
         // Use client-only rendering to prevent hydration mismatches
         const [isClient, setIsClient] = React.useState(false)
+        const { websiteMode } = useApp()
+        const [appContainer, setAppContainer] = React.useState<HTMLElement | null>(null)
 
         React.useEffect(() => {
             setIsClient(true)
         }, [])
+
+        React.useEffect(() => {
+            if (websiteMode) {
+                setAppContainer(document.getElementById('app-container'))
+            }
+        }, [websiteMode])
 
         // Find the selected item to get its icon
         const selectedItem = React.useMemo(() => {
@@ -151,7 +160,9 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                             {selectedItem && (
                                 <span className="flex space-x-1 items-center">
                                     <Icon icon={selectedItem.icon} color={selectedItem.color} className="size-4" />
-                                    <span>{selectedItem.label}</span>
+                                    <span className={`${selectedItem.label?.length > 20 ? 'text-xs' : ''}`}>
+                                        {selectedItem.label}
+                                    </span>
                                 </span>
                             )}
                         </RadixSelect.Value>
@@ -161,7 +172,9 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                     </RadixSelect.Trigger>
                     <RadixSelect.Portal>
                         <RadixSelect.Content
-                            className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl"
+                            position={appContainer ? 'popper' : undefined}
+                            collisionBoundary={appContainer}
+                            className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl z-[50]"
                             data-scheme={dataScheme}
                         >
                             <RadixSelect.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center bg-white dark:bg-accent-dark text-secondary">

@@ -106,6 +106,9 @@ export default function ReverseETLExport(): JSX.Element {
                         <strong>Cloud storage:</strong> Direct writes to S3, GCS, Azure Blob
                     </li>
                 </ul>
+
+                <h2 id="integrations-library">Integrations library</h2>
+                <Link to="/data-stack/integrations-library">Explore our integrations library →</Link>
             </ReaderView>
         </>
     )

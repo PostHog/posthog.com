@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-After [linking your source](/docs/cdp/sources), you can use its data in a [trend](/docs/product-analytics/trends) insight like you would event or person data. 
+After [linking your source](/docs/cdp/sources), you can use its data in a [trend](/docs/product-analytics/trends), [funnel](/docs/product-analytics/funnels) or [lifecycle](/docs/product-analytics/lifecycle) insight like you would event or person data. 
 
 > You can also create graphs and visualizations directly [with the SQL editor](/docs/data-warehouse/query#sql-visualizations).
 
@@ -21,15 +21,50 @@ To do this, create a [new insight](https://us.posthog.com/insights/new), click t
   classes="rounded"
 />
 
-The main difference from events is that you must identify 3 fields from the data warehouse data to visualize it:
+## Insight specific fields
+
+For each insight type you need to map a couple of fields in the data warehouse source. We can't reliably auto-map these fields for you, so we pre-fill with a best guess, but allow you to edit them.
+
+### Trend insights
 
 | Field | Description |
 |-------|-------------|
 | ID | A field that corresponds to the ID of the element. |
 | Distinct ID | A field that corresponds to an ID representing the user associated with the element. If none, can match ID. |
-| Timestamp | A timestamp field representing when the element was created. |
- 
-We can't reliably auto-map these fields for you, so we pre-fill with a best guess, but allow you to edit them.
+| Timestamp | A timestamp or date field representing when the element was created. |
+
+### Funnel insights
+
+| Field | Description |
+|-------|-------------|
+| ID | A unique ID for each row in the table. Used to remove duplicates from the data source. |
+| Aggregation target | The value used to match actors across funnel steps. When combining with event data, this should be a person or group identifier. |
+| Timestamp | A timestamp or date field representing when the step happened. PostHog uses this to order steps and apply the funnel's date range and conversion window. |
+
+If your funnel steps don't map cleanly to people or groups, set the insight aggregation to **Custom aggregation target**. In that case, `Aggregation target` can be any stable identifier or HogQL expression shared across steps. PostHog can still calculate funnel counts, but clicking through to actors only works when the aggregation target maps back to a person or group.
+
+### Lifecycle insights
+
+| Field | Description |
+|-------|-------------|
+| Aggregation target | The actor whose lifecycle you want to measure, such as a person ID, group key, or another stable identifier. |
+| Created at | A timestamp or date field representing when that actor was first created, such as when a user signed up or an organization was created. |
+| Timestamp | A timestamp or date field representing when lifecycle activity happened for that actor. PostHog uses this to decide which periods are new, returning, resurrecting, or dormant. |
+
+For lifecycle insights, `Created at` and `Timestamp` are often different fields. For example, in a subscriptions table, `created_at` might be when the customer signed up, while `invoice_paid_at` might be the activity timestamp you want to analyze.
+
+If the lifecycle should be calculated for something other than people or groups, set the insight aggregation to **Custom aggregation target**. In that case, `Aggregation target` should be a stable identifier or HogQL expression for that entity. PostHog can still calculate lifecycle counts, but clicking through to actors only works when the aggregation target maps back to a person or group.
+
+## Using the same table multiple times
+
+You can add the same data warehouse table multiple times in a single insight, each with different field configurations. This is useful when you want to track different stages of the same data.
+
+For example, with a Salesforce `opportunity` table, you can create a funnel that tracks:
+
+- **Opportunity created** - using `created_date` as the timestamp
+- **Opportunity closed** - using `close_date` as the timestamp
+
+Each time you add the same table, you can configure different ID, Distinct ID, and Timestamp fields to represent different stages or events in your data.
 
 ## Filters and breakdowns
 

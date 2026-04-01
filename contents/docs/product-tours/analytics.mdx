@@ -23,7 +23,7 @@ Every tour shows these metrics in the PostHog UI:
 - **Shown** - How many users saw the tour (unique and total)
 - **Completed** - How many users finished all steps
 - **Dismissed** - How many users closed early
-- **Tour funnel** - Shows step-by-step where users drop off
+- **Tour funnel** - Shows step-by-step drop-off starting from step 1
 
 ## Events
 
@@ -37,10 +37,11 @@ Product tours capture these events automatically:
 | `product tour step shown` | A step was displayed |
 | `product tour step completed` | User advanced past a step |
 | `product tour step selector failed` | Element selector didn't find the target |
+| `product tour button clicked` | User clicked tour step button |
 
-All events include `$tour_id`, `$tour_name`, and step events include `$step_id` and `$step_index`.
+All `product tour *` events include `$tour_id`, `$tour_name`, and `product tour step *` events include `$step_id` and `$step_index`.
 
-Tour events work with the rest of the PostHog platform. Integrate tour events with [Product Analytics](/docs/product-analytics), create [funnels](/docs/funnels) to see if tours improve activation, or use [cohorts](/docs/data/cohorts) to target users who haven't completed onboarding.
+Tour events work with the rest of the PostHog platform. Integrate tour events with [Product Analytics](/docs/product-analytics), create [funnels](/docs/product-analytics/funnels) to see if tours improve activation, or use [cohorts](/docs/data/cohorts) to target users who haven't completed onboarding.
 
 ## Person properties
 
@@ -49,5 +50,11 @@ These properties are set when users interact with tours:
 - `$product_tour_shown/{tour_id}` - Set to `true` when shown
 - `$product_tour_completed/{tour_id}` - Set to `true` when completed
 - `$product_tour_dismissed/{tour_id}` - Set to `true` when dismissed
+
+These properties track when each tour type was last shown (used for [wait period targeting](/docs/product-tours/targeting#wait-period)):
+
+- `$product_tour_last_seen_date/tour` - Timestamp when a tour was last shown
+- `$product_tour_last_seen_date/announcement` - Timestamp when an announcement was last shown
+- `$product_tour_last_seen_date/banner` - Timestamp when a banner was last shown
 
 Use these for targeting other tours or creating [cohorts](/docs/data/cohorts).

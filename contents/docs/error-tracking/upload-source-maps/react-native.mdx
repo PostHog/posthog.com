@@ -7,6 +7,12 @@ import CLIDownload from "../_snippets/cli/download.mdx"
 import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
 import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
 
+<CalloutBox icon="IconInfo" title="CLI version requirement" type="action">
+
+A minimum CLI version of [0.7.4](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.7.4) is required, but we recommend [keeping up with the latest CLI version](/docs/error-tracking/upload-source-maps/cli) to ensure you have all of error tracking's features.
+
+</CalloutBox>
+
 <CalloutBox icon="IconInfo" title="React Native Web" type="action">
 
 If you are using React Native Web, ensure source maps are generated
@@ -70,7 +76,7 @@ If you are using [EAS Updates](https://docs.expo.dev/eas-update/introduction/), 
 
 ```bash
 # After running `eas update` or `npx expo export --dump-sourcemap`, upload source maps from the output directory
-posthog-cli exp hermes upload --directory dist
+posthog-cli hermes upload --directory dist
 ```
 
 The `dist` folder is the default output directory for EAS updates.

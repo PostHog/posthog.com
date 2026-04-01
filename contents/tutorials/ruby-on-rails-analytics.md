@@ -214,7 +214,7 @@ To set it up, [copy the code snippet from the PostHog docs](/docs/getting-starte
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <script> // +
         !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]); // +
-        posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>'}) // +
+        posthog.init('<ph_project_token>',{api_host:'<ph_client_api_host>'}) // +
     </script> // +
     <%= javascript_importmap_tags %>
   </head>
@@ -231,28 +231,34 @@ Once you've set this up and clicked around on the server, you should see events 
 
 ### Adding the Ruby library
 
-If you want access to all the features of PostHog, including custom event capture, user identification, and feature flags, you need the Ruby library. 
+If you want access to all the features of PostHog, including custom event capture, user identification, feature flags, and error tracking, you need the Ruby library.
 
-To set this up, first, add PostHog to the `Gemfile`:
+To set this up, add `posthog-ruby` and `posthog-rails` to your `Gemfile`:
 
-```ruby
+```ruby file=Gemfile
 gem 'posthog-ruby'
+gem 'posthog-rails'
 ```
 
-Next, in `config/initializers`, create a `posthog.rb` file and initialize PostHog as a global variable there like this:
+Then install the gems and run the PostHog install generator:
 
-```ruby
-require 'posthog'
-
-# Initialize PostHog client
-$posthog = PostHog::Client.new({
-  api_key: '<ph_project_api_key>',
-  host: '<ph_client_api_host>',
-  on_error: Proc.new { |status, msg| Rails.logger.error "PostHog error: #{status} - #{msg}" }
-})
+```bash
+bundle install
+rails generate posthog:install
 ```
 
-Now, you can call `$posthog` throughout your Ruby on Rails application to access all the features of PostHog.
+This creates `config/initializers/posthog.rb` with sensible defaults. Open it and add your project token and instance URL:
+
+```ruby file=config/initializers/posthog.rb
+PostHog.init do |config|
+  config.api_key = '<ph_project_token>'
+  config.host = '<ph_client_api_host>'
+end
+```
+
+You can find your project token and instance address in [your project settings](https://us.posthog.com/project/settings).
+
+Now, you can call `PostHog` throughout your Ruby on Rails application to access all the features of PostHog.
 
 ## 3. Using PostHog in your Ruby on Rails app
 
@@ -262,7 +268,7 @@ With both the library and snippet set up, we can use both of them to capture eve
 
 The client-side JavaScript snippet provides autocaptures of pageviews, clicks, inputs, and some other events. If you want to capture events which are more nuanced or unique to your product, you must set up custom event capture using the Ruby library.
 
-If you want to capture when someone submits a new article, you can call `$posthog.capture()` with the **author string** and an **event name** you choose. In `app/controllers/articles_controller.rb`, this looks like this:
+If you want to capture when someone submits a new article, you can call `PostHog.capture()` with the **author string** and an **event name** you choose. In `app/controllers/articles_controller.rb`, this looks like this:
 
 ```ruby
 # ...
@@ -270,7 +276,7 @@ def create
     @article = Article.new(article_params)
 
     if @article.save 
-      $posthog.capture( // +
+      PostHog.capture( // +
         distinct_id: @article.author, // +
         event: 'article_created', // +
         properties: { // +
@@ -285,7 +291,7 @@ def create
 # ...
 ```
 
-This creates an `Article created` event with a source from `posthog-ruby`.
+This creates an `article_created` event with a source of `posthog-ruby`.
 
 ### Connecting frontend and backend identities
 
@@ -301,7 +307,7 @@ def create
     @article = Article.new(article_params)
 
     if @article.save
-      $posthog.capture(
+      PostHog.capture(
         distinct_id: @article.author,
         event: 'article_created',
         properties: {
@@ -309,10 +315,10 @@ def create
         }
       )
 
-      @project_api_key = '<ph_project_api_key>' // +
+      @project_api_key = '<ph_project_token>' // +
       @ph_cookie = JSON.parse(cookies["ph_#{@project_api_key}_posthog"]) // +
 
-      $posthog.alias({ // +
+      PostHog.alias({ // +
         distinct_id: @ph_cookie['distinct_id'], // +
         alias: @article.author // +
       }) // +
@@ -337,7 +343,7 @@ You should see an `Alias` event in your PostHog instance, and when you check the
 
 ### Using feature flags
 
-The last feature to set up is [feature flags](/docs/feature-flags). We will set up a feature flag to redirect to the homepage instead of the article details.
+You can also set up [feature flags](/docs/feature-flags). We will set up a feature flag to redirect to the homepage instead of the article details.
 
 First, create the flag in PostHog. You can do so in [**Feature Flags**](https://us.posthog.com/feature_flags). Click **New feature flag**, add a key (I chose `home-redirect`):
 
@@ -354,7 +360,7 @@ Once done, we can check for this flag in our Ruby code and redirect to the home 
     @article = Article.new(article_params)
 
     if @article.save
-      $posthog.capture(
+      PostHog.capture(
         distinct_id: @article.author,
         event: 'article_created',
         properties: {
@@ -362,16 +368,16 @@ Once done, we can check for this flag in our Ruby code and redirect to the home 
         }
       )
       
-      @project_api_key = '<ph_project_api_key>'
+      @project_api_key = '<ph_project_token>'
       @ph_cookie = JSON.parse(cookies["ph_#{@project_api_key}_posthog"])
 
 
-      $posthog.alias({
+      PostHog.alias({
         distinct_id: @ph_cookie['distinct_id'],
         alias: @article.author
       })
 
-      if $posthog.is_feature_enabled(
+      if PostHog.is_feature_enabled(
         'home-redirect',
         @article.author
       )
@@ -386,7 +392,36 @@ Once done, we can check for this flag in our Ruby code and redirect to the home 
 
 You can then turn off the flag to check that it is redirecting back to the article and modify the conditions how you like. Just remember, if you configure the flag to filter by person properties, you must call `identify()` on users with the properties **before** you can use them in your release conditions.
 
-Once done, you have a basic Ruby on Rails app with many of the key features of PostHog setup. You can customize it to your liking. There are also more PostHog features to explore like group analytics, user and event properties, and experiments. Read more in [our Ruby documentation](/docs/integrate/server/ruby).
+## 4. Capturing errors
+
+PostHog can also capture errors from your Ruby on Rails app. There are two approaches: **client-side** and **server-side**.
+
+The **JavaScript snippet** you added earlier automatically captures frontend errors (like uncaught JavaScript exceptions in the browser). No extra setup is needed for this.
+
+For **backend errors** (exceptions raised in your controllers, models, or background jobs), the `posthog-rails` gem you installed earlier provides automatic exception tracking. It hooks into Rails' middleware and error reporter, so crashes in your controllers or ActiveJob workers are captured without any extra code.
+
+Enable exception tracking in your `config/initializers/posthog.rb`:
+
+```ruby file=config/initializers/posthog.rb
+PostHog::Rails.configure do |config|
+  config.auto_capture_exceptions = true
+  config.auto_instrument_active_job = true
+end
+```
+
+With this enabled, unhandled exceptions in your controllers and background jobs are automatically sent to PostHog. You can also capture exceptions manually anywhere in your code:
+
+```ruby
+begin
+  # risky operation
+rescue => e
+  PostHog.capture_exception(e, current_user.id)
+end
+```
+
+For full details, see our [Rails error tracking installation guide](/docs/error-tracking/installation/ruby-on-rails) and the [Rails library docs](/docs/libraries/ruby-on-rails).
+
+Once done, you have a basic Ruby on Rails app with many of the key features of PostHog set up. You can customize it to your liking. There are also more PostHog features to explore like group analytics, user and event properties, and experiments. Read more in [our Ruby documentation](/docs/libraries/ruby).
 
 ## Further reading
 

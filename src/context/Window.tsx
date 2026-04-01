@@ -57,6 +57,9 @@ export interface AppWindow {
     minimal: boolean
     appSettings?: AppSetting
     location?: Location
+    modal?: {
+        type: 'standard' | 'side' | 'floating'
+    }
 }
 
 interface WindowProviderProps {
@@ -69,6 +72,7 @@ interface WindowProviderProps {
     canGoBack: boolean
     canGoForward: boolean
     dragControls?: any
+    pageOptions?: MenuItemType[]
     setPageOptions: (pageOptions: MenuItemType[]) => void
     setActiveInternalMenu: (activeInternalMenu: MenuItem) => void
     internalMenu: MenuItem[]
@@ -89,6 +93,7 @@ interface WindowContextType {
     canGoBack: boolean
     canGoForward: boolean
     dragControls?: any
+    pageOptions?: MenuItemType[]
     setPageOptions: (pageOptions: MenuItemType[]) => void
     setActiveInternalMenu: (activeInternalMenu: MenuItem) => void
     internalMenu: MenuItem[]
@@ -109,6 +114,7 @@ export const Context = createContext<WindowContextType>({
     },
     canGoBack: false,
     canGoForward: false,
+    pageOptions: undefined,
     setPageOptions: () => {
         // No-op default implementation
     },
@@ -145,6 +151,7 @@ export const Provider = ({
     canGoBack,
     canGoForward,
     dragControls,
+    pageOptions,
     setPageOptions,
     setActiveInternalMenu,
     internalMenu,
@@ -166,6 +173,7 @@ export const Provider = ({
                 canGoBack,
                 canGoForward,
                 dragControls,
+                pageOptions,
                 setPageOptions,
                 setActiveInternalMenu,
                 internalMenu,

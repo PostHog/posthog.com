@@ -82,16 +82,16 @@ export const walkme = {
             available: true,
         },
         session_replay: {
-            available: false,
+            available: true,
             pricing: {
                 free_tier: 'None',
             },
             features: {
-                event_timeline: false,
+                event_timeline: true,
             },
             platform_support: {
                 features: {
-                    web_app_recordings: false,
+                    web_app_recordings: true,
                     mobile_app_recordings: false,
                 },
             },
@@ -139,11 +139,11 @@ export const walkme = {
         libraries: {
             features: {
                 android: true,
-                flutter: false,
+                flutter: true,
                 ios: true,
                 javascript: true,
                 react: true,
-                react_native: false,
+                react_native: true,
                 ruby: false,
             },
         },

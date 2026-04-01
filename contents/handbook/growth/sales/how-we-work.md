@@ -100,15 +100,30 @@ If the answer to any of the above questions is 'no' then it's likely that there 
   - For multiyear contracts, we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
     - The way we work this out is by taking the annual credit purchased by the customer and applying the standard 1 year discount to it.
   - Your quota will depend on your OTE
-- Commission is paid out quarterly, and in any case after an invoice is paid
-  - This incentivises securing upfront payment, not just annual contracts with monthly payment every time.
-    - If you close an annual contract with monthly/quarterly payments, you will still get recognized for the full commission amount, but the actual payout of your commission will be quarterly.
-  - We also don't want AEs to throw invoice chasing to a finance person - you should make friends with the finance person on the customer's side too
+- Commission is paid out quarterly, and is subject to clawbacks if the invoices remain unpaid.
+  - We want you to secure upfront payment - which helps PostHog and helps you.
+    - If you close an annual contract with monthly payments, you will still get recognized for the full commission amount, but the actual payout of your commission will be quarterly.
+  - We want you to ensure the customer has paid, and we don't want AEs to throw invoice chasing to a finance person
+    -  This means you should make friends with the finance person on the customer's side, and ensure all payment paperwork is in order to allow for the customer to pay.
   - For monthly customers, commission is only paid after all 3 invoices have been paid
     - Commission is still paid out quarterly even if the customer pays monthly
-  - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
-  - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commission into the above 4 buckets and how you did.
-- In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how qoutas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+  - Overdue invoices from the current quarter will be excluded from commission payouts, with the cutoff being the 14th of the calendar month following the quarter (January, April, July, and October)
+  - Invoices that are issued in the final period of the current quarter, but are due at a date beyond the 14th of the calendar month following the quarter (January, April, July, and October), will be paid on the good faith assumption that the customer will pay on time and you will assist in securing timely payment. If the invoice becomes overdue in a future quarter, it will be subject to a clawback in that quarter. 
+  - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis or via clawback.
+  - Commission payments are made at the end of January, April, July, and October. Fraser will send you an email that breaks down your commission and explains how you did.
+- In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+
+### Performance expectations for Technical Account Executives
+
+There are [cultural](/handbook/company/culture) and [role-based expectations](/handbook/growth/sales/overview) for TAEs at PostHog. We also now have enough data to define minimum performance exceptions for TAEs relative to the annual commmission targets. 
+
+After your ramp period, you should expect to have a performance conversation with your lead and Charles if:
+
+- You are under 80% of your annual quota, _and_
+- You have finished two consecutive quarters under 70% of your quarterly target
+
+These standards are likely to change as the TAE role evolves. Any changes will be reflected in the handbook. We will always consider any relevant context when having these conversations with you - quota does not exist in a vacuum!
+
 
 ## How commission works - Technical Account Managers
 
@@ -130,7 +145,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 - This means you can hit quota by a combo of bringing in new business and expanding existing. Because your target is based on invoiced usage, this means that even if you have an annual customer in your book, you can still expand their usage and get recognized for that.
   - It also means that you are less likely to totally neglect existing customers because if they reduce usage, it hurts your overall ARR figure.
 - We apply a multiplier to each invoice in the calculation based on how many of our primary products they are paying for, to incentivise cross-sell.
-  - Primary products are: Product Analytics, Session Replay, Feature Flags, Surveys, Error Tracking, LLM Analytics, Data Warehouse and PostHog AI.
+  - Primary products are: Product Analytics, Session Replay, Feature Flags, Surveys, Error Tracking, LLM Analytics, Data Warehouse, CDP Destinations, Workflows, Logs, and PostHog AI.
   - We start off at a base of 0.7x for customers with only 1 paid product, as it represents a bigger churn risk.
   - We then apply an additional 0.2x for each paid product above 1 (ie, 3 paid products = 1.1x)
   - A product is counted as paid if the invoice amount for that product is greater than $200
@@ -160,10 +175,11 @@ You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.co
 1. Only accounts with the `AM Managed` segment in Vitally will be counted towards your quota.  Simon adds this manually after reviewing with you and your team lead.
 2. All accounts in the `AM Managed` segment need an account plan in Vitally, which is updated and reviewed with your manager regularly.
 3. If you are assigned an account with no previous owner, you have up to 3 months to figure out whether they should be in your book or not. Don't ask for the `AM Managed` segment to be added until you're happy that there is growth potential there.
-4. If you are assigned an account with a previous owner, work with them on the handover process.  If the customer isn't in a healthy state usage and engagement-wise, feel free to push back and ask for the previous owner's help in getting them to a good state before taking ownership.  If you really can't resolve this, then talk first to your team lead. If you can't resolve it, Simon will be the tie breaker.
+4. If you are assigned an account with a previous owner, work with them on the handover process.  If the customer isn't in a healthy state usage and engagement-wise, feel free to push back and ask for the previous owner's help in getting them to a good state before taking ownership.  If you really can't resolve this, then talk first to your team lead. If you can't resolve it, Simon will be the tie breaker.  It may be that we need you to work on the account regardless but will treat it as a lead with the same rules as point 3 above.
 5. Accounts which you've previously been paid quota on need to stay in your `AM Managed` book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep them in the `AM Managed` segment for quota calculation purposes and then remove them after the quarterly calculations are complete.
 6. Nominally, you should have 15 accounts/around $1.5m in ARR in your `AM Managed` book.  There is some wiggle room here, but if you find yourself with 25+ accounts, it's unlikely that you'll be able to give them the level of focus we expect from a TAM, so you should be prepared to hand some over to another team member.
 7. You can have accounts added to your book at any time, if you are comfortable that there is growth potential there.  Removal of accounts should only happen at the end of the quarter so that quota can be calculated.
+8. If you actively work to reduce a customer's spend with us by optimizing their usage, we may exclude that usage drop from quota calculation.  We will review this on a case by case basis but at the very minimum you'll need documented evidence of the work you did to optimize their usage before it dropped.  This should first be reviewed with your team lead who will then ask for approval from Simon.  To make the process easier, drop the details of your optimizations as a note on the customer record in Vitally.
 
 > We have a bunch of accounts where they are declining for reasons that have nothing to do with a TAM’s actions. We also have a bunch where they are growing in the same way. These even each other out in the bigger picture of hundreds of accounts, if anything in favor of the latter.  If they fit the criteria for having a TAM assigned, you should be prepared to continue to manage both types of customers in your book, as churn prevention is a key part of the TAM role too.
 

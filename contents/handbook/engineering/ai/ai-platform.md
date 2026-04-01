@@ -26,6 +26,40 @@ The AI platform solves these problems by providing:
 3. **Consistent UX**: Standard patterns for AI interactions, loading states, error handling, and result presentation
 4. **Platform-level improvements**: When we improve the core agent (better reasoning, faster responses, cheaper inference), all products benefit automatically
 
+## Vision: Product autonomy
+
+The overarching goal of PostHog's AI direction is **product autonomy** — a closed loop where PostHog data automatically drives product improvements with minimal human intervention.
+
+Here's how the loop works:
+
+1. **Signals**: PostHog collects signals from all products and external sources — error patterns, frustration in session recordings, experiment results, survey responses, insight thresholds, support tickets, Slack threads, and more. These signals represent real problems or opportunities.
+
+2. **Enrichment**: PostHog processes and enriches these signals, deduplicating across data sources and adding context. A vague signal like "users seem frustrated during checkout" becomes a concrete, contextualized finding.
+
+3. **Plans**: The enriched signals are transformed into structured plans — similar to how Claude Code works, but driven by data rather than human prompts. Each plan describes what needs to happen, why, and what evidence supports it.
+
+4. **Execution**: A sandboxed coding agent takes these plans and acts on them. Today, we're focused on automatically creating pull requests. The agent also handles instrumentation automatically — adding tracking events, feature flags, and experiments as part of the code it ships. Better instrumentation produces better signals, making the entire loop smarter over time. In the future, other artifact types will be supported — decks, growth reviews, and more.
+
+5. **Review**: Product engineers review, iterate on, and merge (or decline) the proposed changes.
+
+6. **Feedback**: Once a change ships, a new signal is created so the system can evaluate what happened after the PR was merged. Did the metric improve? Did new errors appear? This feeds back into step 1.
+
+7. **Loop**: The cycle continues until the agent finds an exit condition — low actionability, non-important signals, noisy signals, de-prioritized work, etc.
+
+```mermaid
+graph LR
+    Signals[Signals<br/>Internal: errors, recordings, experiments<br/>External: support tickets, Slack] --> Enrichment[Enrichment<br/>ML & agentic pipelines<br/>deduplicate, contextualize, prioritize]
+    Enrichment --> Plans[Plans<br/>Structured, data-driven<br/>action items]
+    Plans --> Execution[Execution<br/>Coding agent creates<br/>PRs and artifacts]
+    Execution --> Review[Review<br/>Human oversight,<br/>iterate or merge]
+    Review --> Feedback[Feedback<br/>New signal created<br/>from shipped changes]
+    Feedback --> Signals
+```
+
+This vision connects all the individual AI products. PostHog products and external sources (support tickets, Slack) generate signals, ML and agentic pipelines enrich them into structured plans, background and local coding agents execute on those plans, and product engineers review and collaborate on the changes. The loop closes when shipped changes generate new signals that feed back into the cycle.
+
+For how product teams can contribute to this vision, see [Integration vectors for product teams](/handbook/engineering/ai/team-structure#integration-vectors-for-product-teams).
+
 ## Architecture at a glance
 
 The AI platform has three main layers:
@@ -36,7 +70,7 @@ These are the AI features users interact with directly:
 - **[PostHog AI](/handbook/engineering/ai/products#posthog-ai)**: In-app conversational agent for interacting with PostHog
 - **[Deep research](/handbook/engineering/ai/products#deep-research)**: Automated investigative research for complex, open-ended problems
 - **[Session summaries](/handbook/engineering/ai/products#session-summaries)**: Batch analysis of session recordings to find patterns
-- **[Array](/handbook/engineering/ai/products#array)**: Desktop app that turns PostHog signals into shipped code
+- **[PostHog Code](/handbook/engineering/ai/products#posthog-code)**: Agent development environment that gives each task its own isolated workspace
 - **[Wizard](/handbook/engineering/ai/products#wizard)**: CLI tool for automated PostHog installation and setup
 - **[MCP Server](/handbook/engineering/ai/products#mcp)**: Protocol integration for third-party AI tools like Claude Code
 
@@ -52,14 +86,14 @@ The shared components that power all products:
 
 How everything connects together:
 - Products share the same agent features through the MCP server
-- Task generation systems (from Deep Research, Session Summaries, PostHog signals) feed Array
-- The Wizard and Array consume MCP tools to interact with PostHog
+- Task generation systems (from Deep Research, Session Summaries, PostHog signals) feed PostHog Code
+- The Wizard and PostHog Code consume MCP tools to interact with PostHog
 
 For a detailed technical overview, see [AI platform architecture](/handbook/engineering/ai/architecture).
 
 ## Products overview
 
-### PostHog AI [Beta]
+### PostHog AI [General availability]
 Your primary interface for working with PostHog. Instead of clicking through forms and menus, describe what you want in natural language. PostHog AI can create dashboards, write SQL queries, set up surveys, and answer questions about your data — all through conversation.
 
 **Best for**: Quick answers, creating resources, learning PostHog, iterative exploration
@@ -67,7 +101,7 @@ Your primary interface for working with PostHog. Instead of clicking through for
 
 [Learn more →](/handbook/engineering/ai/products#posthog-ai)
 
-### Deep research [Under development]
+### Deep research [Beta]
 When you need to investigate complex, open-ended problems, Deep research digs deep. It systematically explores your data — session recordings, analytics, error logs — and produces comprehensive research reports that would take a human analyst hours to create.
 
 **Best for**: Understanding why metrics changed, investigating user behavior patterns, root cause analysis
@@ -83,13 +117,13 @@ Analyze hundreds of session recordings in minutes instead of hours. Session summ
 
 [Learn more →](/handbook/engineering/ai/products#session-summaries)
 
-### Array [Under development]
-A desktop agent that watches PostHog for signals (errors, frustration patterns, user feedback) and automatically turns them into shipped code. Array handles the entire workflow - from signal detection to task creation to code generation to PR creation - with human oversight at key decision points.
+### PostHog Code [Under development]
+An agent development environment that solves the messy workflow problem of engineering with coding agents. Each task gets its own isolated workspace where an agent works — you can guide the agent, review changes, and switch between workspaces, with everything related to a task in one place instead of across your terminal, editor, and GitHub.
 
-**Best for**: Product engineers who want to automate repetitive fixes and focus on building features
+**Best for**: Product engineers who work on multiple tasks simultaneously and already use agents heavily
 **Status**: Under development | **Pricing**: TBD
 
-[Learn more →](/handbook/engineering/ai/products#array)
+[Learn more →](/handbook/engineering/ai/products#posthog-code)
 
 ### Wizard [General availability]
 Get PostHog set up in minutes instead of hours. The Wizard detects your tech stack, generates integration code, verifies the installation, and gets you collecting data with minimal manual work.
@@ -114,10 +148,11 @@ For a list of key concepts definitions, see the [Glossary](/handbook/engineering
 
 ### For users
 - **Want to try PostHog AI?** Open the chat interface in PostHog and start asking questions. See [user documentation](/docs/posthog-ai).
+- **Prefer working in your editor or coding agent?** Set up the [MCP server](/handbook/engineering/ai/products#mcp) in Claude Code or VS Code.
 - **Need deep investigation?** Toggle to Deep research feature in PostHog AI.
-- **Prefer working in your editor?** Set up the [MCP server](/handbook/engineering/ai/products#mcp) in Claude Code or VS Code.
 
 ### For engineers building AI features
+- **Not sure where to start?** See [Integration vectors for product teams](/handbook/engineering/ai/team-structure#integration-vectors-for-product-teams) for the different ways your team can contribute — MCP tools, skills, signals, and more.
 - **Adding AI to your product?** Start with [Team structure and collaboration](/handbook/engineering/ai/team-structure) to understand the process.
 - **Want to add a new agent mode?** See [Architecture](/handbook/engineering/ai/architecture) for technical details.
 - **Need implementation guidance?** Check [Implementation guide](/handbook/engineering/ai/implementation) for best practices and patterns.
@@ -131,7 +166,7 @@ For a list of key concepts definitions, see the [Glossary](/handbook/engineering
 The AI platform is actively evolving. Major initiatives include:
 
 - **Third-party context integration**: Connect PostHog AI to Slack, Zendesk, and other tools for richer context
-- **Array expansion**: Moving from alpha dogfooding to broader availability
+- **PostHog Code expansion**: Moving from alpha dogfooding to broader availability
 - **Deep research refinement**: Improving research strategies and denoising algorithms
 - **Mode expansion**: Adding more specialized agent modes as product teams identify needs
 

@@ -3,7 +3,13 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 PostHog's managed reverse proxy routes traffic through our infrastructure. We handle SSL certificates, routing, and maintenance automatically.
 
-This option requires our [platforms add-ons](https://posthog.com/platform-packages) and access to your domain's DNS settings.
+This option is free for all PostHog Cloud users. You just need access to your domain's DNS settings.
+
+<CalloutBox icon="IconInfo" title="Setting up during onboarding?" type="fyi">
+
+If you're onboarding a web-based product like Web Analytics, Surveys, or LLM Analytics, you'll be guided through managed proxy setup as part of the onboarding flow. The steps below are for setting it up manually from the organization settings.
+
+</CalloutBox>
 
 <Steps>
 
@@ -15,7 +21,7 @@ This option requires our [platforms add-ons](https://posthog.com/platform-packag
 
 <CalloutBox icon="IconInfo" title="Before you start" type="fyi">
 
-Choose a neutral subdomain that doesn't include words like `analytics`, `tracking`, `telemetry`, or `posthog`. Ad blockers target obvious terms.
+Choose a neutral subdomain that doesn't include words like `analytics`, `tracking`, `telemetry`, `posthog`, or `ph`. Ad blockers target these terms. If ad blockers block your domain, the proxy won't achieve its intended effect.
 
 </CalloutBox>
 
@@ -29,7 +35,11 @@ Go to your DNS provider and create a new **CNAME record**:
 2. Set the **Target** to the proxy domain PostHog generated in the previous step. You'll see it in your proxy settings, it looks like `4854cf84789d8596ad01.proxy-us.posthog.com`
 3. Save the record
 
-> **Note:** If you're using Cloudflare, disable proxying on this CNAME record by clicking the cloud icon and set it to **DNS only**. Cloudflare's proxy interferes with PostHog's SSL certificate provisioning.
+<CalloutBox icon="IconWarning" title="Disable DNS provider proxy features" type="caution">
+
+If you're using a DNS provider like Cloudflare that offers proxy options (orange cloud), make sure the proxy is **disabled** (gray cloud) for this CNAME record. Enabling the proxy at your DNS provider may interfere with PostHog's managed reverse proxy functionality and SSL certificate provisioning.
+
+</CalloutBox>
 
 </Step>
 
@@ -50,14 +60,14 @@ Update your PostHog initialization to use your new subdomain:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yoursubdomain.myapp.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yoursubdomain.myapp.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -65,7 +75,7 @@ posthog.init('<ph_project_api_key>', {
 
 </MultiLanguage>
 
-Replace `yoursubdomain.myapp.com` with your actual subdomain, and provide your **project API key**.
+Replace `yoursubdomain.myapp.com` with your actual subdomain, and provide your **project token**.
 
 Always set both `api_host` (your proxy) and `ui_host` (PostHog's actual domain) so features like the toolbar work correctly.
 
@@ -86,3 +96,17 @@ If you see errors or events aren't appearing, see [troubleshooting](/docs/advanc
 </Step>
 
 </Steps>
+
+## FAQ
+
+### Why does my managed proxy stay in "erroring" state with Cloudflare?
+
+If you're using a **Cloudflare Enterprise** zone with **zone hold** enabled, the managed reverse proxy won't work. Zone holds prevent external services from provisioning SSL certificates or verifying DNS for domains in your zone.
+
+You have two options:
+
+1. **Set up a self-hosted proxy instead:** Use [Cloudflare Workers](/docs/advanced/proxy/cloudflare) to create your own reverse proxy. This works with zone holds enabled since you're configuring everything within your own Cloudflare account.
+
+2. **Disable zone hold** (not recommended): Zone holds are typically enabled for security reasons. Disabling them may expose your domain to certain risks. Only consider this if you understand the security implications for your organization.
+
+For most users with Cloudflare Enterprise, option 1 (setting up your own Cloudflare Worker proxy) is the recommended approach.

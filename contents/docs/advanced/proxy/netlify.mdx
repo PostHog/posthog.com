@@ -26,9 +26,10 @@ Here's the request flow:
 
 This works because ad blockers see requests going to your domain, not PostHog's. The redirect happens server-side, so the browser never sees the PostHog domain.
 
-**Why two redirect rules?** PostHog uses separate domains for API requests and static assets. You need two rules:
+**Why multiple redirect rules?** PostHog uses separate domains for API requests and static assets. The assets domain (`us-assets.i.posthog.com` or `eu-assets.i.posthog.com`) returns proper `cache-control` headers, while the events domain strips them. You need specific rules for asset paths before the catch-all:
 
-- **Static assets:** Routes `/static/*` to `us-assets.i.posthog.com` or `eu-assets.i.posthog.com` for the JavaScript SDK and other static files
+- **Static assets:** Routes `/static/*` to the assets origin for the JavaScript SDK and other static files
+- **Remote config:** Routes `/array/*` to the assets origin for remote config files (e.g., `/array/{token}/config.js`) that benefit from proper cache headers
 - **API requests:** Routes everything else to `us.i.posthog.com` or `eu.i.posthog.com` for event capture, feature flags, and API calls
 
 <CalloutBox icon="IconWarning" title="Custom domains only" type="caution">
@@ -68,6 +69,13 @@ In your project root, add these redirects to your `netlify.toml` file:
   force = true
 
 [[redirects]]
+  from = "/ph/array/*"
+  to = "https://us-assets.i.posthog.com/array/:splat"
+  host = "us-assets.i.posthog.com"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/ph/*"
   to = "https://us.i.posthog.com/:splat"
   host = "us.i.posthog.com"
@@ -85,7 +93,7 @@ Here's what each directive does:
 - `status = 200`: Makes this a proxy (returns content) rather than a redirect (returns a redirect response). This is what makes the browser see your domain instead of PostHog's.
 - `force = true`: Applies this rule even if a file exists at that path. Without this, Netlify might serve a local file instead of proxying to PostHog.
 
-The static assets rule must come first because Netlify evaluates rules in order. If the catch-all rule came first, it would match `/ph/static/*` requests before the static-specific rule could.
+The static assets and remote config rules must come before the catch-all because Netlify evaluates rules in order. If the catch-all rule came first, it would match `/ph/static/*` and `/ph/array/*` requests before the specific rules could route them to the assets origin.
 
 See [Netlify's redirects documentation](https://docs.netlify.com/routing/redirects/) for more details.
 
@@ -106,14 +114,14 @@ In your application code, update your PostHog initialization to use your proxy p
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yourdomain.com/ph',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yourdomain.com/ph',
   ui_host: 'https://eu.posthog.com'
 })
@@ -130,14 +138,14 @@ You can also use a relative path if you prefer:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '/ph',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '/ph',
   ui_host: 'https://eu.posthog.com'
 })
@@ -179,14 +187,15 @@ Add this content:
 
 ```
 /ph/static/*  https://us-assets.i.posthog.com/static/:splat  200!
-/ph/*         https://us.i.posthog.com/:splat  200!
+/ph/array/*   https://us-assets.i.posthog.com/array/:splat   200!
+/ph/*         https://us.i.posthog.com/:splat                200!
 ```
 
 Replace `us` with `eu` for EU region.
 
 The format is `source  destination  status`. The `!` after `200` is equivalent to `force = true` in `netlify.toml` and ensures the redirect applies even if a file exists at that path.
 
-The static assets rule must come first because Netlify evaluates rules in order.
+The static assets and remote config rules must come before the catch-all because Netlify evaluates rules in order.
 
 See [Netlify's redirects file documentation](https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file) for more details.
 
@@ -218,14 +227,14 @@ In your application code, update your PostHog initialization to use your proxy p
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yourdomain.com/ph',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yourdomain.com/ph',
   ui_host: 'https://eu.posthog.com'
 })
@@ -242,14 +251,14 @@ You can also use a relative path:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '/ph',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '/ph',
   ui_host: 'https://eu.posthog.com'
 })
@@ -296,14 +305,14 @@ If you see CORS errors about a missing `Access-Control-Allow-Origin` header, try
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '/ph',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '/ph',
   ui_host: 'https://eu.posthog.com'
 })

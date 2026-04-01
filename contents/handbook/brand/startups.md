@@ -10,8 +10,8 @@ We run two special programs for early-stage teams. The primary place for discuss
 
 | Feature                     | Startups                                              | Y Combinator                                          |
 | --------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| Eligibility                 | <2 years old, <$5M raised                             | Must be in YC (any batch)                             |
-| Credit                      | $50,000 for 12 months                                 | $50k per year, forever                                |
+| Eligibility                 | <2 years old, <$5M raised, not acquired               | Must be in YC, <$25m raised                           |
+| Credit                      | $50,000 for 12 months                                 | $50k per year, whilst eligible                        |
 | Can use credit for add-ons? | ⚠️ Yes, but cannot use credit for BAA in Boost add-on | ✅ Yes, and can use credit for BAA in Boost add-on     |
 | Founder merch               | Welcome pack (max 1)                                  | Different welcome pack (max 4)                        |
 | Community                   | —                                                     | Tim's Whatsapp, priority support                      |
@@ -38,7 +38,7 @@ We track all PostHog for Startups applications in [this Zapier table](http://tab
 
 This program is similar to our startup program but has some key differences for YC teams. Teams can be in any YC batch, with any amount of funding raised, and can claim the following:
 
--   $50,000 per year forever - they only need to register once and it will renew automatically
+-   $50,000 per year - they only need to register once and it will renew automatically while they're eligible (<$25m raised)
    -   If they previously registered for the old deal and it expired, they need to re-register
 -   Up to 4 unique founder merch packs (different from the startup program)
 -   Access to HogPatch for the duration of their time in the batch
@@ -117,10 +117,11 @@ If users run into issues with redemption, we can help liaise — though all offe
 
 Contacts:
 
--   Mintlify: Tiffany Chen
+-   Incident.io: Zain Mobarik
 -   Speakeasy: Nolan Di Mare Sullivan
+-   Chroma: Philip Thomas
 
-We previously offered DigitalOcean credits ($25k), but this was retired in Q2 2025.
+We previously offered DigitalOcean credits ($25k) and a Mintlify partnership, but these were retired in Q2 2025.
 
 ## Program extensions
 

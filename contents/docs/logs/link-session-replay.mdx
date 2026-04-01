@@ -16,6 +16,7 @@ By including session IDs and user identity in your logs, you can:
 - **See the full user journey**: Navigate from a log entry directly to the session replay to see what the user was doing
 - **Debug issues faster**: Quickly find and watch the exact session where an error or issue occurred
 - **Correlate logs with user actions**: Match backend log events with actual user experience
+- **View related errors**: See Error Tracking issues that occurred during the same session directly in the log details
 
 ## Prerequisites
 
@@ -114,14 +115,25 @@ def chat():
 
 Once you've set up session linking, you can navigate from logs to their corresponding session replays:
 
-1. In the [logs view](https://app.posthog.com/logs), find the log entry you're interested in
-2. Click the session replay button to jump directly to the replay
+1. In the [logs view](https://app.posthog.com/logs), click on the log entry you're interested in to open **log details**
+2. In the log details view, click the **View recording** button to open the session replay
 3. Watch the user's interaction in context alongside the backend logs
 
+You can only view recordings for log entries that have an associated session ID.
+
 This linking helps you correlate backend log events with actual frontend user behavior, enabling faster debugging and better understanding of issues as they occur in your application.
+
+## View related errors
+
+When you click on a log entry that has a session ID, you can view related errors in the **Related errors** tab. This tab shows Error Tracking issues that occurred within the same session (within ±6 hours of the log timestamp).
+
+This helps you debug issues by showing errors that happened around the same time as your log entry, giving you a more complete picture of what went wrong.
+
+If no session ID is found in the log entry, the tab displays a message prompting you to link your logs to sessions.
 
 ## See also
 
 - [Session replay installation](/docs/session-replay/installation)
 - [Logs installation](/docs/logs/installation)
 - [Search logs](/docs/logs/search)
+- [Error Tracking](/docs/error-tracking)

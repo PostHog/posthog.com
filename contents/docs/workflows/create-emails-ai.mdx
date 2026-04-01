@@ -1,0 +1,51 @@
+---
+title: Create emails with PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) creates email templates for your [Workflows](/docs/workflows) using natural language. Describe the email you want to send – including the audience, tone, and goal – and PostHog AI generates the content and layout.
+
+## How it works
+
+PostHog AI generates the email content based on your description, structures the layout with headings, body text, and calls to action, includes personalization using user properties (like name, plan, or activity), and adapts the tone to match your description (e.g. "friendly," "urgent," "professional").
+
+You can also provide a URL as inspiration – PostHog AI reads the page content and uses it to inform the email's messaging and structure.
+
+## Email types PostHog AI can create
+
+| Type | Goal | Example prompt |
+|------|------|----------------|
+| **Welcome** | Introduce new users to your product | "Create a welcome email for new signups" |
+| **Onboarding** | Guide users through setup steps | "Create an onboarding drip series for trial users" |
+| **Re-engagement** | Bring back inactive users | "Write an email for users who haven't logged in for 30 days" |
+| **Feature announcement** | Promote new features | "Announce our new dashboard builder" |
+| **Upgrade** | Convert free users to paid | "Write an upgrade email highlighting pro features" |
+| **Churn prevention** | Retain users showing churn signals | "Email users whose usage dropped 50% this month" |
+
+## Personalization with user properties
+
+PostHog AI can include dynamic content based on [person properties](/docs/data/persons) in your project. When you mention personalization in your prompt, PostHog AI adds the right template variables.
+
+For example, "mention their plan name and how many insights they've created" generates personalized content like:
+
+> Hi {first_name}, you've created {insight_count} insights on your {plan_name} plan this month...
+
+## Try it
+
+Select a prompt to try it out in the PostHog app:
+
+- [`Create a welcome email for new users who just signed up`](https://app.posthog.com/#panel=max:Create%20a%20welcome%20email%20for%20new%20users%20who%20just%20signed%20up)
+- [`Write a re-engagement email for users who haven't logged in for 30 days`](https://app.posthog.com/#panel=max:Write%20a%20re-engagement%20email%20for%20users%20who%20haven%27t%20logged%20in%20for%2030%20days)
+- [`Generate an email template for announcing a new feature`](https://app.posthog.com/#panel=max:Generate%20an%20email%20template%20for%20announcing%20a%20new%20feature)
+- [`Create an onboarding drip email series for trial users`](https://app.posthog.com/#panel=max:Create%20an%20onboarding%20drip%20email%20series%20for%20trial%20users)
+
+## Tips for better results
+
+- **Describe the audience** – "for trial users who haven't activated" gives PostHog AI context to write relevant content
+- **Specify the goal** – "to drive feature adoption" or "to reduce churn" helps PostHog AI choose the right messaging
+- **Include personalization hints** – "mention their plan name and usage" tells PostHog AI which user properties to include
+- **Provide a reference** – Sharing a URL or describing an existing email helps PostHog AI match the style and tone
+- **Ask for a series** – "Create a 3-email onboarding drip" generates multiple emails with a logical progression
+
+## Get started
+
+To start creating emails with PostHog AI, [set up PostHog AI](/docs/posthog-ai/start-here).

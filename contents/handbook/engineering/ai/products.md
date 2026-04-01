@@ -228,19 +228,19 @@ Access Session Summaries through PostHog AI, Deep Research, or its dedicated UI 
 
 Session summaries is in alpha. The PostHog AI team owns Session summaries. It's working well for error and frustration detection, and early users report finding issues they would have missed. We're refining the clustering algorithms (sometimes it groups issues too broadly or too narrowly) and integrating video and GIF analysis to support findings with visual confirmation.
 
-## Twig: PostHog in action [Under development]
+## PostHog Code [Under development]
 
-Twig is our most ambitious bet: a desktop agent that automatically turns PostHog data into shipped code. The vision is to free product engineers from distractions so they can focus on what they love — building great features — by automating all the chores that eat up their day.
+PostHog Code is our most ambitious bet: an agent development environment that turns PostHog data into shipped code. The vision is to free product engineers from distractions so they can focus on what they love — building great features — by automating all the chores that eat up their day.
 
 ### The problem we're solving
 
 Today, product engineers spend most of their day managing random inputs: Slack messages, GitHub notifications, tickets, emails, and alerts from various monitoring tools. This work is essential but time-consuming. Experienced AI-native engineers have already evolved a workaround — they practice "structured development," creating PRDs, breaking work into tasks, and shipping incrementally. Tools like [Claude Code](https://www.claude.com/product/claude-code) or [Cursor](https://cursor.com/) only work well when given clean context and well-defined tasks.
 
-Twig aims to productize that discipline, turning chaos into structured, buildable work.
+PostHog Code aims to productize that discipline, turning chaos into structured, buildable work.
 
 ### Who we're building for
 
-Twig is designed for experienced product engineers who already use AI coding tools regularly. We're explicitly not targeting non-technical "vibe coders" or hobbyist users. Our initial customer profile is early-stage startups with 2-10 engineers and hundreds to low thousands of users. We'll expand to larger startups later as internal workflows and scale requirements become more complex.
+PostHog Code is designed for experienced product engineers who already use AI coding tools regularly. We're explicitly not targeting non-technical "vibe coders" or hobbyist users. Our initial customer profile is early-stage startups with 2-10 engineers and hundreds to low thousands of users. We'll expand to larger startups later as internal workflows and scale requirements become more complex.
 
 ### How it works: From Signals to shipped code
 
@@ -248,33 +248,33 @@ The core insight is that PostHog collects massive amounts of data across all our
 
 Here's the flow:
 
-1. **Signal generation**: Something happens in PostHog that indicates work needs to be done. This could be a recurring error pattern, frustration signals from session recordings, a survey response indicating a missing feature, or experiment results suggesting an optimization. The PostHog AI team focuses on surfacing this data in useful ways.
+1. **Signal generation**: Something happens in PostHog that indicates work needs to be done. This could be a recurring error pattern, frustration signals from session recordings, a survey response indicating a missing feature, or experiment results suggesting an optimization. The Signals team focuses on surfacing this data in useful ways.
 
 2. **Task creation**: An LLM-based system receives these signals, deduplicates them across data types, and translates them into concrete tasks with appropriate context. This uses a non-deterministic approach — we use a document store and LLMs to judge how to structure tasks. A vague signal like "users seem frustrated during checkout" becomes a specific task: "Investigate and fix timeout issues in payment processing, affecting 15% of transactions from company X."
 
 3. **Task execution**: Once a task is defined, it gets assigned to a workflow. Different tasks need different approaches — a well-defined bug fix might be a one-shot fix with human QA, while a vague feature request might need definition, breaking into chunks, gradual shipping behind a flag, and automated feedback collection.
 
-4. **Coding**: Twig uses an agent running in a cloud sandbox (though we support local execution too). The agent clones your repo, reads your codebase for context, makes changes, writes tests, and opens a pull request. Changes are automatically wrapped in feature flags when appropriate.
+4. **Coding**: PostHog Code uses an agent running in a cloud sandbox (though we support local execution too). The agent clones your repo, reads your codebase for context, makes changes, writes tests, and opens a pull request. Changes are automatically wrapped in feature flags when appropriate.
 
-5. **Human oversight**: You're always in control. The desktop app shows you what Twig is working on, lets you review and edit tasks, and requires your approval before shipping. This "human-in-the-loop" approach means you can trust Twig to work in the background while you sleep, but nothing ships without your sign-off.
+5. **Human oversight**: You're always in control. The desktop app shows you what PostHog Code is working on, lets you review and edit tasks, and requires your approval before shipping. This "human-in-the-loop" approach means you can trust PostHog Code to work in the background while you sleep, but nothing ships without your sign-off.
 
 ### Why a desktop app?
 
-This is a crucial design decision. We could have built Twig directly into the PostHog web app, and it would work. But it wouldn't generate the adoption we need.
+This is a crucial design decision. We could have built PostHog Code directly into the PostHog web app, and it would work. But it wouldn't generate the adoption we need.
 
-Desktop apps win because of bottom-up adoption. Individual engineers can choose tools that make them more productive in a permissionless, frictionless way. A desktop app feels like a personal tool — like VS Code, Cursor, or your terminal — rather than a team product that requires management buy-in. Engineers already make personal choices about vim vs VSCode, which terminal to use, which AI coding assistant to try. Twig slots into that category.
+Desktop apps win because of bottom-up adoption. Individual engineers can choose tools that make them more productive in a permissionless, frictionless way. A desktop app feels like a personal tool — like VS Code, Cursor, or your terminal — rather than a team product that requires management buy-in. Engineers already make personal choices about vim vs VSCode, which terminal to use, which AI coding assistant to try. PostHog Code slots into that category.
 
-The UX also matters more for tools you use all day, not just a few times a week. Twig is designed to feel like something between Warp, Ghostty, and Cursor: super fast, keyboard-first with lots of shortcuts, easy to navigate with tabs and split windows. Think of it as having the directness of a CLI but with the richness of a UI when you need it.
+The UX also matters more for tools you use all day, not just a few times a week. PostHog Code is designed to feel like something between Warp, Ghostty, and Cursor: super fast, keyboard-first with lots of shortcuts, easy to navigate with tabs and split windows. Think of it as having the directness of a CLI but with the richness of a UI when you need it.
 
 ### The interface
 
-Twig is tab-based with the home tab being a task list. You navigate with arrow keys, click a task to open it in a new tab with a two-pane view: task details on the left (title, description, tags, origin, PR link) and a live log of activities on the right. When a task is in progress, it streams output to this log so you can watch the agent work. There's also a workflow builder view where you can see tasks moving through stages kanban-style.
+PostHog Code is tab-based with the home tab being a task list. You navigate with arrow keys, click a task to open it in a new tab with a two-pane view: task details on the left (title, description, tags, origin, PR link) and a live log of activities on the right. When a task is in progress, it streams output to this log so you can watch the agent work. There's also a workflow builder view where you can see tasks moving through stages kanban-style.
 
 ### Technical architecture
 
-Twig is built as an Electron app for speed, familiarity (React), and cross-platform ease. When a task kicks off, we have two execution options:
+PostHog Code is built as an Electron app for speed, familiarity (React), and cross-platform ease. When a task kicks off, we have two execution options:
 
-**Cloud agent** (preferred): Tasks execute in a cloud sandbox. The agent runs in an isolated environment, clones the repo, does its work, and pushes to a branch. The downside is you need to grant GitHub app access. The upside is truly magical — Twig can work on tasks while you sleep, and you wake up to PRs ready for review.
+**Cloud agent** (preferred): Tasks execute in a cloud sandbox owned by the PostHog AI team. The agent runs in an isolated environment, clones the repo, does its work, and pushes to a branch. The downside is you need to grant GitHub app access. The upside is truly magical — PostHog Code can work on tasks while you sleep, and you wake up to PRs ready for review.
 
 **Local agent** (more permissionless): We spin up Claude Code-like execution in the background on your local filesystem. This is the most permissionless version, closest to how developers use Claude Code today. We still give it access to the MCP and PostHog tools, and we likely need to proxy through our infrastructure to maintain control and provide a smooth experience.
 
@@ -284,7 +284,7 @@ We support both modes, but push for cloud execution as the optimal experience.
 
 ```mermaid
 graph TB
-    subgraph "Twig Desktop App (Electron)"
+    subgraph "PostHog Code Desktop App (Electron)"
         UI[Task List UI]
         Backend[Backend Service]
     end
@@ -323,21 +323,21 @@ graph TB
 
 ### What kinds of tasks?
 
-Twig isn't just for data-driven bug fixes. The system for shipping a fix is the same as the system for shipping any feature. A vague task needs definition, then breaking into chunks, then shipping with proper releases planned. A small, well-defined task just needs a one-shot fix and QA.
+PostHog Code isn't just for data-driven bug fixes. The system for shipping a fix is the same as the system for shipping any feature. A vague task needs definition, then breaking into chunks, then shipping with proper releases planned. A small, well-defined task just needs a one-shot fix and QA.
 
-Even inspiration-driven features (not from user data) benefit from Twig's workflow: add event tracking, ship behind a flag, automatically message users for feedback, set up an experiment to measure impact. Twig productizes best practices for shipping features, not just fixing bugs.
+Even inspiration-driven features (not from user data) benefit from PostHog Code's workflow: add event tracking, ship behind a flag, automatically message users for feedback, set up an experiment to measure impact. PostHog Code productizes best practices for shipping features, not just fixing bugs.
 
 ### Current status
 
-Right now we're focused on dogfooding — getting the <SmallTeam slug="twig" /> to build everything using Twig itself. This lets us refine product quality and identify friction fast. The <SmallTeam slug="posthog-ai" /> is supporting this by focusing on surfacing useful data that can be converted into Twig tasks.
+Right now we're focused on dogfooding — getting the <SmallTeam slug="posthog-code" /> to build everything using PostHog Code itself. This lets us refine product quality and identify friction fast.
 
-### For engineers not using Twig
+### For engineers not using PostHog Code
 
-When Twig isn't the right fit (maybe you don't trust AI to ship code automatically, or your workflow is very particular), we offer "copy prompt" features throughout PostHog. In error tracking, for example, you can generate an AI prompt to fix an error and paste it into your own code editor. This bridges the gap for engineers who want AI assistance but prefer to maintain manual control.
+When PostHog Code isn't the right fit (maybe you don't trust AI to ship code automatically, or your workflow is very particular), we offer "copy prompt" features throughout PostHog. In error tracking, for example, you can generate an AI prompt to fix an error and paste it into your own code editor. This bridges the gap for engineers who want AI assistance but prefer to maintain manual control.
 
 ### Ownership
 
-The dedicated <SmallTeam slug="twig" /> owns the product. See [Team Structure](/handbook/engineering/ai/team-structure) for collaboration details.
+The dedicated <SmallTeam slug="posthog-code" /> owns the product. The <SmallTeam slug="posthog-ai" /> owns the background sandboxed agents. See [Team Structure](/handbook/engineering/ai/team-structure) for collaboration details.
 
 ## Wizard: AI-powered onboarding [General availability]
 
@@ -372,7 +372,7 @@ The Wizard is a CLI tool that runs locally in your development environment. Here
 3. **Code generation**: The Wizard writes the integration code. This includes:
    - Installing the appropriate PostHog SDK via your package manager
    - Adding initialization code in the right location for your framework
-   - Setting up configuration with your project API key
+   - Setting up configuration with your project token
    - Optionally adding example event tracking code
 
 4. **Verification**: The Wizard verifies the integration works by sending a test event to PostHog and confirming it arrives.
@@ -395,15 +395,13 @@ The Wizard's long-term vision is much broader than one-time setup. Imagine:
 - **Continuous instrumentation**: The Wizard could watch your codebase and suggest event tracking for new features. "I noticed you added a new checkout flow — want me to add tracking events?"
 - **Instrumentation improvements**: "Your signup flow isn't tracking all the steps — I can add events to fill the gaps."
 - **Best practices**: "You're tracking events in 5 different ways. I can standardize this for you."
-- **Integration with Twig**: When Twig generates code that needs PostHog instrumentation (feature flags, experiments, custom events), the Wizard could handle that automatically.
+- **Integration with PostHog Code**: The Wizard is already integrated into PostHog Code, handling PostHog instrumentation automatically when generating code (feature flags, experiments, custom events).
 
 This would turn the Wizard from a one-time setup tool into an ongoing assistant that keeps your PostHog instrumentation clean and comprehensive.
 
 ### Current status & ownership
 
 The Wizard is in general availability and actively used during customer onboarding. It's currently [owned](/handbook/engineering/feature-ownership) by the <SmallTeam slug="Content" />.
-
-The Wizard's future direction — particularly whether it should integrate with Twig for continuous instrumentation or remain a standalone onboarding tool — is being evaluated as part of the broader AI platform strategy.
 
 ## MCP: PostHog for third-party tools [General availability]
 

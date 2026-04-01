@@ -48,7 +48,7 @@ If a team at PostHog struggles with revenue operations, we've probably:
 - Made data too hard to access
 - Miss important customer data
 
-For example we built an automated workflow that identifies [product qualified leads](https://posthog.com/handbook/growth/sales/product-led-sales) in real-time. When a company hits key milestones (like having 5+ active users and using multiple products) and matches [our ICP](https://posthog.com/handbook/growth/marketing/icp) they're automatically flagged as a new lead in Salesforce with their usage data so the sales team can now instantly see which customers can benefit from outreach and why instead of having to piece this information together themselves.
+For example we built an automated workflow that identifies [product qualified leads](https://posthog.com/handbook/growth/sales/product-led-sales) in real-time. When a company hits key milestones (like having 5+ active users and using multiple products) and matches [our ICP](https://posthog.com/handbook/growth/sales/lead-scoring) they're automatically flagged as a new lead in Salesforce with their usage data so the sales team can now instantly see which customers can benefit from outreach and why instead of having to piece this information together themselves.
 
 
 ## RevOps vision

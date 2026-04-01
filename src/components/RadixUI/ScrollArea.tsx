@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { ScrollArea as ScrollAreaPrimitive } from 'radix-ui'
+import { useApp } from '../../context/App'
 
 interface ScrollAreaProps {
     children: React.ReactNode
@@ -21,6 +22,7 @@ const ScrollArea = ({
     viewportClasses = '',
 }: ScrollAreaProps) => {
     const fadeHeight = fadeOverflow === true ? 8 : fadeOverflow || 0
+    const { websiteMode } = useApp()
     return (
         <ScrollAreaPrimitive.Root
             data-scheme={dataScheme}
@@ -47,7 +49,7 @@ const ScrollArea = ({
                 <ScrollAreaPrimitive.Thumb className="relative flex-1 rounded-[10px] bg-black/25 hover:bg-black/50 before:absolute before:left-1/2 before:top-1/2 before:size-full before:min-h-[44px] before:min-w-[44px] before:-translate-x-1/2 before:-translate-y-1/2" />
             </ScrollAreaPrimitive.Scrollbar>
             <ScrollAreaPrimitive.Corner className="bg-black/25" />
-            {fadeHeight > 0 && (
+            {fadeHeight > 0 && !websiteMode && (
                 <>
                     <div
                         className={`scrollarea-fade absolute bottom-0 left-0 right-0 h-${fadeHeight} bg-gradient-to-b from-[color-mix(in_srgb,rgb(var(--bg))_0%,transparent)] via-[color-mix(in_srgb,rgb(var(--bg))_75%,transparent)] to-[rgb(var(--bg))]`}

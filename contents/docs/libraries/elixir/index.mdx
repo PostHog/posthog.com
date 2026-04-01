@@ -23,6 +23,12 @@ import ElixirInstall from '../../integrate/_snippets/install-elixir.mdx'
 
 <ElixirInstall />
 
+## Identifying users
+
+import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx'
+
+<IdentifyBackendCallout />
+
 ## Capturing events
 
 import ElixirSendEvents from '../../integrate/send-events/_snippets/send-events-elixir.mdx'
@@ -63,7 +69,7 @@ config :posthog, enable: false
 
 config :my_app, :posthog,
   api_host: "<ph_client_api_host>",
-  api_key: "<ph_project_api_key>"
+  api_key: "<ph_project_token>"
 ```
 
 ```elixir file=application.ex
@@ -91,7 +97,7 @@ In even more advanced cases, you might want to interact with more than one PostH
 ```elixir file=config.exs
 config :posthog,
   api_host: "<ph_client_api_host>",
-  api_key: "<ph_project_api_key>"
+  api_key: "<ph_project_token>"
 
 config :my_app, :another_posthog,
   api_host: "<ph_client_api_host>",

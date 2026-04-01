@@ -81,7 +81,7 @@ jobs:
                   GH_JOB_STATUS: ${{ job.status }}
                   GH_EVENT_NAME: ${{ github.event_name }}
                   GH_ACTOR: ${{ github.actor }}
-                  SLACK_WEBHOOK: ${{ secrets.SLACK_LINKS_CHECK_WEBHOOK }}
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_BROKEN_WEBSITE_INTERNAL_LINKS }}
                   ARTIFACT_ID: ${{ steps.upload-results.outputs.artifact-id }}
               run: |
                   # Default to true for scheduled runs, use input value for manual runs

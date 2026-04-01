@@ -9,7 +9,7 @@ features:
   eventCapture: true
   userIdentification: true
   autoCapture: false
-  sessionRecording: false
+  sessionRecording: true
   featureFlags: true
   groupAnalytics: true
   surveys: false
@@ -74,16 +74,16 @@ By default, the SDK captures identified events. To control whether events create
 ```csharp
 PostHog.Setup(new PostHogConfig
 {
-    ApiKey = "<ph_project_api_key>",
+    ApiKey = "<ph_project_token>",
     Host = "<ph_client_api_host>",
     PersonProfiles = PersonProfiles.IdentifiedOnly // Only create profiles on identify
 });
 ```
 
 Available options:
-- `PersonProfiles.IdentifiedOnly` (default) - Only creates person profiles when `Identify` is called
-- `PersonProfiles.Always` - Creates person profiles for all events
-- `PersonProfiles.Never` - Never creates person profiles (anonymous events only)
+- `PersonProfiles.IdentifiedOnly` (default) – Only creates person profiles when `Identify` is called
+- `PersonProfiles.Always` – Creates person profiles for all events
+- `PersonProfiles.Never` – Never creates person profiles (anonymous events only)
 
 ## Super properties
 
@@ -97,7 +97,7 @@ PostHog.Register("app_version", "1.2.3");
 PostHog.Register("platform", "iOS");
 ```
 
-This ensures that every event sent by the user will include these properties.
+This ensures that every event you send will include these properties.
 
 ### Removing super properties
 
@@ -107,7 +107,7 @@ Super properties are persisted across sessions so you have to explicitly remove 
 PostHog.Unregister("app_version");
 ```
 
-If you are doing this as part of a user logging out you can instead simply use `PostHog.ResetAsync()` which takes care of clearing all stored super properties and more.
+If you are doing this as part of a user logging out you can instead use `PostHog.ResetAsync()` which takes care of clearing all stored super properties and more.
 
 ## Group analytics
 
@@ -134,7 +134,7 @@ PostHog.Group("company", "company_id_in_your_db", new Dictionary<string, object>
 
 The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
-## Feature flags
+## Feature Flags
 
 import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
@@ -146,7 +146,7 @@ import UnityFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/
 
 ## Experiments (A/B tests)
 
-Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+Since [Experiments](/docs/experiments/manual) use Feature Flags, the code for running an experiment is very similar to the Feature Flags code:
 
 ```csharp
 var flag = PostHog.GetFeatureFlag("experiment-feature-flag-key");
@@ -156,9 +156,9 @@ if (flag.GetVariant("control") == "variant-name")
 }
 ```
 
-It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+It's also possible to [run Experiments without using Feature Flags](/docs/experiments/running-experiments-without-feature-flags).
 
-## Error tracking
+## Error Tracking
 
 The Unity SDK automatically captures unhandled exceptions and sends them to PostHog. This is enabled by default.
 
@@ -190,7 +190,7 @@ PostHog.CaptureException(e, new Dictionary<string, object>
 ```csharp
 PostHog.Setup(new PostHogConfig
 {
-    ApiKey = "<ph_project_api_key>",
+    ApiKey = "<ph_project_token>",
 
     // Exception tracking options
     CaptureExceptions = true,              // Enable automatic capture (default: true)
@@ -199,30 +199,30 @@ PostHog.Setup(new PostHogConfig
 });
 ```
 
-### Disabling error tracking
+### Disabling Error Tracking
 
 ```csharp
 PostHog.Setup(new PostHogConfig
 {
-    ApiKey = "<ph_project_api_key>",
+    ApiKey = "<ph_project_token>",
     CaptureExceptions = false  // Disable automatic exception capture
 });
 ```
 
-## Session replay
+## Session Replay
 
-> **Note:** Session replay for Unity is currently **experimental**. Performance impact varies based on your game's complexity and target devices.
+> **Note:** Session Replay for Unity is currently **experimental**. Performance impact varies based on your game's complexity and target devices.
 
-Session replay enables you to record and watch user sessions in your Unity game. It captures screenshots, touch/mouse input, network requests, and console logs. Session replay is **disabled by default** and must be explicitly enabled.
+Session Replay enables you to record and watch user sessions in your Unity game. It captures screenshots, touch/mouse input, network requests, and console logs. Session Replay is **disabled by default** and must be explicitly enabled.
 
 The SDK uses `AsyncGPUReadback` to capture screenshots without blocking the main thread, ensuring minimal performance impact during gameplay.
 
-### Enabling session replay
+### Enabling Session Replay
 
 ```csharp
 PostHog.Setup(new PostHogConfig
 {
-    ApiKey = "<ph_project_api_key>",
+    ApiKey = "<ph_project_token>",
     Host = "<ph_client_api_host>",
     SessionReplay = true
 });
@@ -230,12 +230,12 @@ PostHog.Setup(new PostHogConfig
 
 ### Configuration options
 
-You can customize session replay behavior with `SessionReplayConfig`:
+You can customize Session Replay behavior with `SessionReplayConfig`:
 
 ```csharp
 PostHog.Setup(new PostHogConfig
 {
-    ApiKey = "<ph_project_api_key>",
+    ApiKey = "<ph_project_token>",
     SessionReplay = true,
     SessionReplayConfig = new PostHogSessionReplayConfig
     {
@@ -262,7 +262,7 @@ PostHog.Setup(new PostHogConfig
 You can manually start and stop session recording:
 
 ```csharp
-// Check if session replay is active
+// Check if Session Replay is active
 if (PostHog.IsSessionReplayActive)
 {
     // Stop recording
@@ -287,7 +287,7 @@ PostHog.RecordNetworkRequest(
 );
 ```
 
-### Platform support for session replay
+### Platform support for Session Replay
 
 | Platform | Session Replay Support |
 |----------|------------------------|
@@ -296,11 +296,11 @@ PostHog.RecordNetworkRequest(
 | Android | Full |
 | WebGL | Not supported |
 
-> **Note:** Session replay requires async GPU readback support. On WebGL, session replay is automatically disabled.
+> **Note:** Session Replay requires async GPU readback support. On WebGL, Session Replay is automatically disabled.
 
 ### Performance considerations
 
-Session replay captures screenshots which can impact performance. To optimize:
+Session Replay captures screenshots which can impact performance. To optimize:
 
 - Increase `ThrottleDelaySeconds` to reduce capture frequency
 - Lower `ScreenshotScale` to reduce resolution
@@ -311,10 +311,10 @@ Session replay captures screenshots which can impact performance. To optimize:
 
 When `CaptureApplicationLifecycleEvents` is enabled (default: `true`), these events are captured automatically:
 
-- `Application Installed` - First launch
-- `Application Updated` - Version changed
-- `Application Opened` - App foregrounded
-- `Application Backgrounded` - App backgrounded
+- `Application Installed` – First launch
+- `Application Updated` – Version changed
+- `Application Opened` – App foregrounded
+- `Application Backgrounded` – App backgrounded
 
 ## Opt out of data capture
 
@@ -336,12 +336,12 @@ if (PostHog.IsOptedOut)
 
 ## Debug mode
 
-If you're not seeing the expected events being captured or feature flags being evaluated, enable debug mode to see what's happening:
+If you're not seeing the expected events being captured or Feature Flags being evaluated, enable debug mode to see what's happening:
 
 ```csharp
 PostHog.Setup(new PostHogConfig
 {
-    ApiKey = "<ph_project_api_key>",
+    ApiKey = "<ph_project_token>",
     Host = "<ph_client_api_host>",
     LogLevel = PostHogLogLevel.Debug
 });
@@ -394,4 +394,4 @@ void OnApplicationQuit()
 ### WebGL issues
 
 - Ensure your PostHog instance allows CORS from your domain
-- WebGL has limited storage - consider reducing `MaxQueueSize`
+- WebGL has limited storage – consider reducing `MaxQueueSize`

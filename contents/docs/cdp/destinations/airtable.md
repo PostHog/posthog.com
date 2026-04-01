@@ -33,8 +33,8 @@ You should have these details now:
 
 With them, we’re ready to set up the Airtable destination.
 
-1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=airtable) tab.
+1. In PostHog, click the [Data pipeline](https://app.posthog.com/data-management/destinations) tab in the left sidebar.
+2. Click the [Destinations](https://app.posthog.com/data-management/destinations?search=airtable) tab.
 3. Click **New destination** and choose Airtable's **Create** button.
 
 Now we can plug in the above values.

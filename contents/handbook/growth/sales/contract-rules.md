@@ -4,11 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We get it, nobody likes rules. As we scale the Sales and CS teams we need to be consistent in how we approach contracts to ensure that we are setting ourselves up for future success. If you have a customer situation where you'd like to vary the rules below, get approval from <TeamMember name="Dana Zou" showOnlyFirstName photo />, <TeamMember name="Simon Fisher" showOnlyFirstName photo /> or <TeamMember name="Charles Cook" showOnlyFirstName photo /> first. You should also have them note the approval on the Salesforce opportunity record.
+We are transparent about how we contract with customers, including what discounts are available. It's better for them, and better for us. We are allergic to the phrase 'let me talk to my manager and see what we can do' - we follow a principled approach. 
 
 ## Discounts
 
-> We don't offer discounts to customers paying monthly, irrespective of commitment.
+We don't offer discounts to customers paying monthly, irrespective of commitment.
 
 Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount. We follow the [4 discount levers framework](http://transparentsalesleader.com/), being transparent about what drives our discounting:
 
@@ -28,7 +28,7 @@ In our consumption-based pricing model, the first way for a customer to reduce s
 
 Beyond optimization, we offer discounts based on four levers:
 
-#### 1. Volume discount (based on credit purchase amount)
+#### 1. Volume discount (based on credit purchase amount - Customers **must** qualify for this discount before receiving discounts 2 through 4)
 - **$25-59k:** 20% base discount
 - **$60-99k:** 25% base discount
 - **$100-249k:** 30% base discount
@@ -55,14 +55,14 @@ Beyond optimization, we offer discounts based on four levers:
 - Available when both parties commit to specific, mutually agreed date for contract signature (this is not an end-of-quarter discount)
 - To include the 5% discount on the order form, we require written confirmation by the customer's designated signatory of the customer's intent to sign an order form by a specific, mutually agreed upon date - _this needs to come from the person who will actually sign the order form_
 - This is about creating predictability for both sides, not artificial deadlines
-- This is a one-time discount, which will be offered once during a monthly-to-annual conversion or net new agreement cycle, and is subject to the maximum total discount below
+- This is a one-time discount, which will be offered once during a monthly-to-annual conversion or net new agreement cycle
 
 **For renewals:** +5% additional discount
 - Early renewal commitment (60+ days before expiration)
 
 **If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
 
-> You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with Ben (TAEs), Simon (TAMs or CSMs), or Charles (as backup), you should assume by default that the deal will not count toward your quota.
+> You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with <TeamMember name="Ben Bradley" showOnlyFirstName photo /> (TAEs), <TeamMember name="Simon Fisher" showOnlyFirstName photo /> (TAMs or CSMs), or <TeamMember name="Charles Cook" showOnlyFirstName photo /> (as backup), you should assume by default that the deal will not count toward your quota.
 
 ### Why we require up-front payment for credit purchases
 
@@ -119,16 +119,13 @@ You should follow the same [inbound sales process](https://posthog.com/handbook/
 1. Review the customer's average monthly cost
 2. Estimate the prepaid equivalent for 12 months of coverage (e.g. [monthly cost x 12])
 3. Inform them they can take advantage of this offer, which allows them to:
-   - purchase credits equivalent to ~10 months of usage (expiring 10 months after the contract start date), and
+   - purchase credits equivalent to ~12 months of usage (expiring 12 months after the contract start date), and
    - receive ~2 months of additional usage for free, applied before the contract start date.
-4. Check whether buying [monthly cost x 10] gives them a lower [discount rate](https://posthog.com/handbook/growth/sales/contract-rules#discounts)
-5. If so, you should ALSO present the option to buy [monthly cost x12], and they'll receive [monthly cost x14] AND take advantage of the higher discount.
-   - two months of this free usage should again be applied before the contract start date, unless explicitly priced and included under Special Terms.
-7. If the customer wants to purchase fewer credits than either option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
+4. If the customer wants to purchase fewer credits than the option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
 
-All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional, one-time credit (offered to customers in exchange for rolling off the Startup plan) in the amount of USD XXXXX will be applied upon contract start date with the same expiration date."
+All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional credit in the amount of XXXXX (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date."
 
-For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date.
+For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date. In this case, the credits do not need to be called out in the contract, and the opportunity owner can add these credits as a one time credit in billing admin.
 
 ### Margin negative deals
 

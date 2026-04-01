@@ -46,7 +46,8 @@ export default defineEventHandler(async (event) => {
   const url = getRequestURL(event)
   const search = url.search || ''
 
-  const hostname = path.startsWith('static/')
+  const useAssetHost = path.startsWith('static/') || path.startsWith('array/')
+  const hostname = useAssetHost
     ? 'us-assets.i.posthog.com'
     : 'us.i.posthog.com'
 
@@ -103,7 +104,8 @@ export default defineEventHandler(async (event) => {
   const url = getRequestURL(event)
   const search = url.search || ''
 
-  const hostname = path.startsWith('static/')
+  const useAssetHost = path.startsWith('static/') || path.startsWith('array/')
+  const hostname = useAssetHost
     ? 'eu-assets.i.posthog.com'
     : 'eu.i.posthog.com'
 
@@ -160,7 +162,7 @@ The `[...path]` in the filename is a Nuxt [catch-all route](https://nuxt.com/doc
 
 Here's what the code does:
 
-- Routes `/static/*` requests to PostHog's asset server and everything else to the main API
+- Routes `/static/*` and `/array/*` requests to PostHog's asset server and everything else to the main API
 - Preserves query parameters (like `?compression=gzip-js`) required for compressed requests
 - Forwards relevant headers while excluding ones that shouldn't be proxied
 - Reads the request body as binary to preserve gzip-compressed data
@@ -184,7 +186,7 @@ If you're using the `@posthog/nuxt` module, update your `nuxt.config.ts`:
 export default defineNuxtConfig({
   modules: ['@posthog/nuxt'],
   posthogConfig: {
-    publicKey: '<ph_project_api_key>',
+    publicKey: '<ph_project_token>',
     clientConfig: {
       api_host: '/ph',
       ui_host: 'https://us.posthog.com'
@@ -198,7 +200,7 @@ export default defineNuxtConfig({
 export default defineNuxtConfig({
   modules: ['@posthog/nuxt'],
   posthogConfig: {
-    publicKey: '<ph_project_api_key>',
+    publicKey: '<ph_project_token>',
     clientConfig: {
       api_host: '/ph',
       ui_host: 'https://eu.posthog.com'

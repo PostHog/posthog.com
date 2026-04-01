@@ -7,9 +7,12 @@ availability:
   selfServe: full
   enterprise: full
 ---
-import { ProductScreenshot } from 'components/ProductScreenshot'
-export const ScheduledFlagChangesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/scheduled-flag-changes-light.png"
-export const ScheduledFlagChangesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/scheduled-flag-changes-dark.png"
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+export const ScheduledFlagChangesLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/scheduled-flag-changes-light.png";
+export const ScheduledFlagChangesDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/scheduled-flag-changes-dark.png";
 
 Scheduling feature flag changes enable you to automatically change flag properties at a future point in time. For example, you can schedule an initial release of a flag for internal testing, then enable it to the beta users group 2 days later, and finally, roll it out to 100% of the users in 2 weeks.
 
@@ -18,19 +21,61 @@ This is also useful if your releases fall outside normal working hours. For exam
 ## How to schedule a change:
 
 1. Navigate to the relevant feature flag.
-2. Select the `Schedule` tab.
-3. Under `Change type`:
-    - Select `Change status` if you want to enable or disable your flag at a scheduled time.
-    - Select `Add condition` if you want to specify the rollout conditions of your flag at a scheduled time.
-    - Select `Update variants` if you want to update the variants keys, descriptions, payloads, or rollouts.
-4. Select the `Date and time` of your scheduled change using the date picker.
-5. Click `Schedule`.
+2. Select the **Schedule** tab.
+3. Under **Change type**:
+   - Select **Change status** to enable or disable your flag at a scheduled time.
+   - Select **Add condition** to append rollout conditions to your flag at a scheduled time.
+   - Select **Update variants** to update the variant keys, descriptions, payloads, or rollouts.
+4. Select the **Date and time** of your scheduled change using the date picker.
+5. Optionally, use the **Repeats** dropdown to set a recurrence interval. You can choose from **Daily**, **Weekly**, **Monthly**, **Yearly**, or **Custom (cron)** for flexible scheduling with a cron expression. When a repeat option is selected, an **Ends** date picker appears to set an optional end date for the recurring schedule.
+6. Click **Schedule**.
 
-You can view the scheduled changes in the table at the bottom of the page.
+Scheduled changes appear below the form, grouped into an **Active & upcoming** section and a collapsible **History** section.
 
 <ProductScreenshot
-    imageLight={ScheduledFlagChangesLight}
-    imageDark={ScheduledFlagChangesDark}
-    alt="Scheduled flag changes"
-    classes="rounded"
+  imageLight={ScheduledFlagChangesLight}
+  imageDark={ScheduledFlagChangesDark}
+  alt="Scheduled flag changes"
+  classes="rounded"
 />
+
+## Recurring schedules
+
+Recurring schedules repeat a scheduled change at a regular interval. You can choose from daily, weekly, monthly, or yearly recurrence, or use a custom cron expression for more flexible scheduling. You can optionally set an end date for any recurring schedule.
+
+Recurring schedules are supported for the following change types:
+
+- **Change status** – toggle the flag on or off on each recurrence
+- **Update variants** – replace the variant configuration on each recurrence. Each run overwrites the previous variant setup, so any manual changes made between runs are replaced.
+
+Recurring schedules are **not** supported for the **Add condition** change type because it appends a new condition on each run, which creates duplicates.
+
+### Custom cron expressions
+
+For more flexible scheduling, select **Custom (cron)** from the **Repeats** dropdown and enter a standard 5-field cron expression. A human-readable preview of the schedule is displayed below the input (e.g., "At 09:00 AM, Monday through Friday").
+
+Cron expressions use the format: `minute hour day-of-month month day-of-week`
+
+Here are some common examples:
+
+| Expression    | Description                          |
+| ------------- | ------------------------------------ |
+| `0 9 * * 1-5` | Every weekday at 9:00 AM             |
+| `0 0 * * *`   | Every day at midnight                |
+| `0 9 * * 1`   | Every Monday at 9:00 AM              |
+| `0 18 * * 5`  | Every Friday at 6:00 PM              |
+| `0 0 1 * *`   | First day of every month at midnight |
+
+> **Note:** Only standard 5-field cron expressions are supported. Six-field expressions (with seconds) are not allowed.
+
+## Copy scheduled changes across projects
+
+When [copying feature flags across projects](/docs/feature-flags/multi-project-feature-flags), you can optionally include pending scheduled changes. This is useful when you want to replicate your entire flag configuration, including future automated changes, to another project.
+
+When copying schedules:
+
+- Only **pending** (unexecuted) scheduled changes are copied
+- All schedule properties are preserved, including timing, recurrence, payload, and end dates
+- Schedules that have already executed are not copied to avoid duplicating completed actions
+
+To copy schedules, check the **Copy schedules** option in the Projects tab when copying a flag. The checkbox shows the number of pending schedules available to copy.

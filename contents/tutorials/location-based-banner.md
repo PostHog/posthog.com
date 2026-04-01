@@ -26,7 +26,7 @@ cd banner
 npm i posthog-js
 ```
 
-After installing PostHog, create a `providers.js` file in the `app` folder which contains the PostHog initialization with your project API key and instance address (you can get both in [your project settings](https://app.posthog.com/project/settings))
+After installing PostHog, create a `providers.js` file in the `app` folder which contains the PostHog initialization with your project token and instance address (you can get both in [your project settings](https://app.posthog.com/project/settings))
 
 ```js
 // app/providers.js
@@ -37,7 +37,7 @@ import { useEffect } from 'react'
 
 export default function PHProvider({ children }) {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     })
@@ -71,7 +71,7 @@ Finally, we can run the app with `npm run dev`. When we go to the page running l
 
 ## Set up the banner feature flag
 
-First, make sure that the [GeoIP transformation](https://app.posthog.com/pipeline/transformations?search=GeoIP) is enabled (it should be by default).
+First, make sure that the [GeoIP transformation](https://app.posthog.com/data-management/transformations?search=GeoIP) is enabled (it should be by default).
 
 Once you have confirmed that, we can create our feature flag controlling the site banner. Go to [feature flags](https://app.posthog.com/feature_flags), click "Create new flag," and name the key as "site-banner." For release conditions, match users where the continent code equals NA (or whichever geography you want), roll out to 100% of users, and press save.
 

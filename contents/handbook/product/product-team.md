@@ -29,10 +29,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend><TeamMember name="Anna Szell" photo /></legend>
 
--   <SmallTeam slug="analytics-platform" />
 -   <SmallTeam slug="data-stack" />
--   <SmallTeam slug="product-analytics" />
--   <SmallTeam slug="web-analytics" />
 
 </fieldset>
 
@@ -63,6 +60,15 @@ Here is a overview that shows which of our PMs currently works with which team:
 -   Logs
 
 *light support
+
+</fieldset>
+
+<fieldset>
+<legend><TeamMember name="Mike Warren" photo /></legend>
+
+-   <SmallTeam slug="product-analytics" />
+-   <SmallTeam slug="web-analytics" />
+-   <SmallTeam slug="analytics-platform" />
 
 </fieldset>
 

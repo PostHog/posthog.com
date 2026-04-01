@@ -18,18 +18,32 @@ The Support widget is a chat interface that appears on your website, allowing us
 4. Configure your settings (see below)
 5. Save
 
-The widget appears as a floating button in the bottom-right corner of your site.
+The widget appears as a floating button on your site. By default it appears in the bottom-right corner, but you can customize its position in the settings.
 
 ## Widget configuration
 
 These settings are configured in the **In-app widget** section of Support settings.
 
+| Setting | Description | Options | Default |
+|---------|-------------|---------|--------|
+| **Enable widget** | Show the chat widget on your site | `true`, `false` | `false` |
+| **Button color** | Primary color for the widget (hex) | Any hex color | `#5375ff` |
+| **Widget position** | Position of the widget on screen | `bottom_right`, `bottom_left`, `top_right`, `top_left` | `bottom_right` |
+| **Greeting message** | Welcome text shown when widget opens | Any string | `"Hi! How can we help?"` |
+| **Allowed domains** | Restrict which domains can show the widget | Array of domain strings | `[]` (all domains) |
+
+## Identification form
+
+You can optionally require users to identify themselves before starting a conversation:
+
 | Setting | Description | Default |
 |---------|-------------|---------|
-| **Enable widget** | Show the chat widget on your site | `false` |
-| **Button color** | Primary color for the widget (hex) | `#5375ff` |
-| **Greeting message** | Welcome text shown when widget opens | `"Hi! How can we help?"` |
-| **Allowed domains** | Restrict which domains can show the widget | `[]` (all domains) |
+| **Require email** | Users must enter their email to start chatting | `false` |
+| **Collect name** | Additionally collect the user's name | `false` |
+| **Form title** | Heading shown on the identification form | `"Before we start..."` |
+| **Form description** | Subtext shown below the title | `"Please provide your details so we can help you better."` |
+
+When enabled, the form appears before the user can send their first message. The collected information is used to link the ticket to a person in PostHog.
 
 ## Domain restrictions
 
@@ -71,12 +85,25 @@ This is useful for:
 You can disable conversations entirely via the PostHog init config:
 
 ```javascript
-posthog.init('YOUR_API_KEY', {
+posthog.init('<ph_project_token>', {
   disable_conversations: true  // Prevents loading the conversations module
 })
 ```
 
 This is different from hiding the widget – it completely disables the feature.
+
+## Recover tickets across browsers
+
+Support tickets are tied to the browser session by default. If a user switches browsers or clears their storage, they won't see their previous tickets. The widget includes a **Recover your tickets** link to handle this.
+
+### How recovery works
+
+1. The user clicks **Recover your tickets** in the ticket list
+2. They enter the email address used in previous conversations
+3. A recovery link is sent to that email (expires in one hour)
+4. Clicking the link opens the widget and restores their tickets in the new browser
+
+If the page URL contains a `ph_conv_restore` query parameter (from clicking the recovery link), tickets are automatically restored on page load. The parameter is removed from the URL after processing.
 
 ## Email notifications
 
@@ -96,6 +123,21 @@ Configure your team to receive email alerts when new tickets arrive.
 - Direct link to the ticket
 
 Recipients must have access to the team to receive notifications.
+
+<CalloutBox icon="IconLightBulb" title="Use workflows for advanced notifications" type="info">
+
+For more control over notifications — like sending alerts only for high-priority tickets, routing to specific Slack channels, or notifying different teams based on tags — use [workflow automation](/docs/support/workflows). Workflows let you trigger Slack messages, webhooks, and more based on any ticket event.
+
+</CalloutBox>
+
+## Browser notifications
+
+Individual team members can enable browser notifications for new ticket activity.
+
+1. Go to **Support** in PostHog
+2. Enable **Browser notifications** in the notification settings
+
+When enabled, a desktop notification appears when the unread ticket count increases. This works independently of email notifications — you can use one or both.
 
 ## Public token
 

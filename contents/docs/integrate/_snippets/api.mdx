@@ -2,7 +2,7 @@ Events can be ingested directly using our API and the [`/i/v0/e`](/docs/api/capt
 
 Generally, this isn't something you'll need to use when integrating PostHog, but if you're working with a language or framework that PostHog doesn't support yet, this will allow you to still send events.
 
-> **Note:** For this API, you should use your 'Project API Key' from the 'Project' page in PostHog. This is the same key used in your frontend snippet.
+> **Note:** For this API, you should use your 'Project token' from the 'Project' page in PostHog. This is the same token used in your frontend snippet.
 
 # Sending events
 
@@ -15,7 +15,7 @@ POST https://[your-instance].com/i/v0/e/
 Content-Type: application/json
 Body:
 {
-    "api_key": "<ph_project_api_key>",
+    "token": "<ph_project_token>",
     "event": "event_name",
     "properties": {
         "distinct_id": "distinct_id_of_your_user",
@@ -31,7 +31,7 @@ POST https://[your-instance].com/batch/
 Content-Type: application/json
 Body:
 {
-    "api_key": "<ph_project_api_key>",
+    "token": "<ph_project_token>",
     "batch": [
         {
             "event": "event_name",

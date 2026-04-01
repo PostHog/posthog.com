@@ -63,7 +63,7 @@ A feature is successful at this stage if it solves the issue, isn’t broken, an
 
 Once an MVP of a feature ships, it continues the process of evaluation by rolling out further. More members of our team try out the feature and provide feedback.
 
-For sampling, Yakko added more insights that supported sampling and then started polishing. He asked the team to try out the feature, wrote [docs](/docs/product-analytics/sampling), and discussed with his team what sampling should look and feel like. He also started to take Michael's UI feedback more seriously.
+For sampling, Yakko added more insights that supported sampling and then started polishing. He asked the team to try out the feature, wrote docs, and discussed with his team what sampling should look and feel like. He also started to take Michael's UI feedback more seriously.
 
 If a specific user requested the feature or has a problem potentially solved by it, we might roll it out to them with the expectation that it is a recently built, beta feature. Feature flags enable us to adjust the rollout and do this fast. We communicate with the user through this process, and ideally receive feedback that helps us improve it.
 

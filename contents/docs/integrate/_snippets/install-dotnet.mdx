@@ -21,12 +21,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddPostHog();
 ```
 
-Make sure to configure PostHog with your project API key, instance address, and optional personal API key. For example, in `appsettings.json`:
+Make sure to configure PostHog with your project token, instance address, and optional personal API key. For example, in `appsettings.json`:
 
 ```json
 {
   "PostHog": {
-    "ProjectApiKey": "<ph_project_api_key>",
+    "ProjectApiKey": "<ph_project_token>",
     "HostUrl": "<ph_client_api_host>"
   }
 }
@@ -41,7 +41,7 @@ dotnet user-secrets init
 dotnet user-secrets set "PostHog:PersonalApiKey" "phx_..."
 ```
 
-You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+You can find your project token and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
 
 ## Working with .NET Feature Management
 
@@ -150,7 +150,7 @@ If you're not using dependency injection, you can create a static instance of th
 using PostHog;
 
 public static readonly PostHogClient PostHog = new(new PostHogOptions {
-    ProjectApiKey = "<ph_project_api_key>",
+    ProjectApiKey = "<ph_project_token>",
     HostUrl = new Uri("<ph_client_api_host>"),
     PersonalApiKey = Environment.GetEnvironmentVariable(
       "PostHog__PersonalApiKey")

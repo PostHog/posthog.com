@@ -50,9 +50,9 @@ const ASSET_HOST = "us-assets.i.posthog.com"
 
 const posthogProxy = async (request: Request) => {
   const url = new URL(request.url)
-  const hostname = url.pathname.startsWith("/ph/static/")
-    ? ASSET_HOST
-    : API_HOST
+  const pathname = url.pathname
+  const useAssetHost = pathname.startsWith("/ph/static/") || pathname.startsWith("/ph/array/")
+  const hostname = useAssetHost ? ASSET_HOST : API_HOST
 
   const newUrl = new URL(url)
   newUrl.protocol = "https"
@@ -100,9 +100,9 @@ const ASSET_HOST = "eu-assets.i.posthog.com"
 
 const posthogProxy = async (request: Request) => {
   const url = new URL(request.url)
-  const hostname = url.pathname.startsWith("/ph/static/")
-    ? ASSET_HOST
-    : API_HOST
+  const pathname = url.pathname
+  const useAssetHost = pathname.startsWith("/ph/static/") || pathname.startsWith("/ph/array/")
+  const hostname = useAssetHost ? ASSET_HOST : API_HOST
 
   const newUrl = new URL(url)
   newUrl.protocol = "https"
@@ -146,7 +146,7 @@ export const action: ActionFunction = async ({ request }) =>
 
 Here's what the code does:
 
-- Routes `/static/*` requests to PostHog's asset server and everything else to the main API
+- Routes `/static/*` and `/array/*` requests to PostHog's asset server and everything else to the main API
 - Sets the `host` header so PostHog can route the request correctly
 - Removes `accept-encoding` from the request and `content-encoding` from the response to avoid issues with compressed content
 - Uses `arrayBuffer()` to properly handle binary content like fonts or images
@@ -163,14 +163,14 @@ In your application code, update your PostHog initialization:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '/ph',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '/ph',
   ui_host: 'https://eu.posthog.com'
 })

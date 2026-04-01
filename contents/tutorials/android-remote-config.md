@@ -31,7 +31,7 @@ dependencies {
 }
 ```
 
-Next, in your project's package directory (`PostHogRemoteConfig/app/src/main/java/com/example/posthogremoteconfig`), create a new Kotlin class file called `MyApplication.kt`. This is where we initialize PostHog using your project API key and instance address, both of which you can find in [your project settings](https://us.posthog.com/settings/project).
+Next, in your project's package directory (`PostHogRemoteConfig/app/src/main/java/com/example/posthogremoteconfig`), create a new Kotlin class file called `MyApplication.kt`. This is where we initialize PostHog using your project token and instance address, both of which you can find in [your project settings](https://us.posthog.com/settings/project).
 
 ```kotlin
 package com.example.posthogremoteconfig
@@ -45,7 +45,7 @@ class MyApplication : Application() {
         super.onCreate()
 
         val config = PostHogAndroidConfig(
-            apiKey = "<ph_project_api_key>",
+            apiKey = "<ph_project_token>",
             host = "<ph_client_api_host>"
         )
         PostHogAndroid.setup(this, config)

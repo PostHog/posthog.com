@@ -274,10 +274,10 @@ Once this is working, we have all the functionality we want in our Next.js app a
 
 ## Adding PostHog
 
-At this point, you need a PostHog project (it's [free to sign up](https://app.posthog.com/signup)). Once created, get your project API key and instance address from [your project settings](https://us.posthog.com/settings/project) and add it to your `.env.local` file.
+At this point, you need a PostHog project (it's [free to sign up](https://app.posthog.com/signup)). Once created, get your project token and instance address from [your project settings](https://us.posthog.com/settings/project) and add it to your `.env.local` file.
 
 ```shell file=.env.local
-NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+NEXT_PUBLIC_POSTHOG_TOKEN=<ph_project_token>
 NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 ```
 
@@ -293,18 +293,11 @@ Afterwards, create an `instrumentation-client.js` file in the base `pages-tutori
 // instrumentation-client.js
 import posthog from 'posthog-js'
 
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
   api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-  defaults: '2025-11-30'
+  defaults: '2026-01-30'
 });
 ```
-
-<details>
-<summary>Using Next.js 15.2 or older?</summary>
-
-  Older versions of Next.js don't support `instrumentation-client` so you'll need to set up a `PostHogProvider` manually. See our [Next.js docs](/docs/libraries/next-js?tab=Pages+router) for details on how to do this.
-
-</details>
 
 Once saved, restart your app and click around, you should see pageviews and events start to populate in your PostHog instance.
 
@@ -579,7 +572,7 @@ export async function getServerSideProps(ctx) {
 
   if (session) {
     const client = new PostHog(
-      process.env.NEXT_PUBLIC_POSTHOG_KEY,
+      process.env.NEXT_PUBLIC_POSTHOG_TOKEN,
       { host: process.env.NEXT_PUBLIC_POSTHOG_HOST }
     )
     flags = await client.getAllFlags(session.user.email);

@@ -19,7 +19,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 - Familiarize yourself with [how we work at PostHog](/handbook/company/culture).
 - Meet with [Magda](/community/profiles/33065), who will run through this plan and answer any questions you may have. In addition, come equipped to talk about any nuances around how you prefer to work (e.g., schedules, family time, etc.).
 - Setup relevant [tools](/handbook/growth/sales/sales-and-cs-tools) and check out [tools](https://posthog.com/handbook/onboarding/onboarding-team#tooling) specific for the Onboarding team.
-  - Integrate Gmail with Salesforce and Vitally to enable centralized communication history
+  - Integrate Gmail with Salesforce and Vitally to enable centralized communication history.
 - If you start on a Monday, join your first PostHog All Hands (at 4.30 pm UK/8.30 am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first Onboarding standup.
   - We fill in a GitHub issue every week before this meeting, so we are prepared for the discussion topics. Magda will add your GitHub handle to the template.
@@ -30,7 +30,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
  - Confirm that you have been added as a member to the [PostHog organization in GitHub](https://github.com/PostHog?view_as=member). [Fraser](/community/profiles/30207) can add you if you haven't.
  - Work your way through your GitHub onboarding issue that a member of the <SmallTeam slug="people" /> should have created and sent a link to.
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
- - Check out some [BuildBetter](https://app.buildbetter.app/) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
+ - Check out some [BuildBetter](https://app.buildbetter.app/) and [Gong](https://us-26000.app.gong.io/home?workspace-id=8823646477612786274) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practice a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
    - For familiarization and self-led training, follow the [product curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You work through this with the [HogFlix Demo 3000 project](https://us.posthog.com/project/99423/dashboard), which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
@@ -57,7 +57,7 @@ Ideally, this will happen in Week 2-3, with the company of a few colleagues (dep
 - Toolkit and internal processes.
 - No stupid questions session.
 
-Detailed training plan available in the [new hire onboarding checklist](https://docs.google.com/document/d/1DvZm6o3mBeSxwgMh2X8JAuXCLrOCS8sJAVLjC0K9VT8/edit?tab=t.0).
+Detailed training plan available in the [new hire onboarding checklist](https://docs.google.com/document/d/1DvZm6o3mBeSxwgMh2X8JAuXCLrOCS8sJAVLjC0K9VT8/edit?tab=t.0). This is a checklist for the Manager, you don't have to read it beforehand.
 
 ## Weeks 3-4
 
@@ -74,18 +74,20 @@ Detailed training plan available in the [new hire onboarding checklist](https://
 **By the end of month 1:**
  - You continue learning from the received feedback.
  - You have a good grasp of our internal processes and workflows.
+ - You're the driver, you take initiative, prioritize your time well, and work independently.
  - You lead customer calls on your own.
- - You convert customers to 'Onboarded'.
+ - You should consistently craft a minimum of 10 outreach messages per day, without compromising on quality, style, or accuracy.
+ - You don't let accounts fall through the cracks before their renewal.
  - You pass well-qualified opportunities to Sales via the `Onboarding referral` segment.
 
 **By the end of month 2:**
  - You're a PostHog power user - most questions you raise can only be answered by product engineers rather than the support team.
+ - You should show steady growth in both call volume and outreach activity, with a minimum of 15 outreach emails sent per day.
  - You fully participate in team discussions and contribute to team projects.
 
 **By the end of month 3:**
  - You've implemented process and system-level changes to make your job better/more effective.
- - You're the driver, you take initiative, prioritize your time well, and work independently.
- - The quality of your outreach is up to the company's standard. 
+ - You raise the bar and surface ideas contributing to the growth of the team.
  - Customers are happy after interacting with you, and you meaningfully contribute to their success.
 
 ### General expectations

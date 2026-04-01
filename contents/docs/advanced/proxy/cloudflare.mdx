@@ -57,14 +57,14 @@ async function handleRequest(request, ctx) {
   const search = url.search
   const pathWithParams = pathname + search
 
-  if (pathname.startsWith("/static/")) {
-    return retrieveStatic(request, pathWithParams, ctx)
+  if (pathname.startsWith("/static/") || pathname.startsWith("/array/")) {
+    return retrieveAsset(request, pathWithParams, ctx)
   } else {
     return forwardRequest(request, pathWithParams)
   }
 }
 
-async function retrieveStatic(request, pathname, ctx) {
+async function retrieveAsset(request, pathname, ctx) {
   let response = await caches.default.match(request)
   if (!response) {
     response = await fetch(`https://${ASSET_HOST}${pathname}`)
@@ -106,14 +106,14 @@ async function handleRequest(request, ctx) {
   const search = url.search
   const pathWithParams = pathname + search
 
-  if (pathname.startsWith("/static/")) {
-    return retrieveStatic(request, pathWithParams, ctx)
+  if (pathname.startsWith("/static/") || pathname.startsWith("/array/")) {
+    return retrieveAsset(request, pathWithParams, ctx)
   } else {
     return forwardRequest(request, pathWithParams)
   }
 }
 
-async function retrieveStatic(request, pathname, ctx) {
+async function retrieveAsset(request, pathname, ctx) {
   let response = await caches.default.match(request)
   if (!response) {
     response = await fetch(`https://${ASSET_HOST}${pathname}`)
@@ -149,8 +149,8 @@ export default {
 
 This code does three things:
 
-- **Routes requests:** The `handleRequest` function checks if the request is for static assets (`/static/*`) or API calls. Static assets go to PostHog's asset server, everything else goes to the main API.
-- **Caches static assets:** The `retrieveStatic` function caches PostHog's JavaScript SDK and other static files in Cloudflare's cache. This improves performance and reduces load on PostHog's servers.
+- **Routes requests:** The `handleRequest` function checks if the request is for static assets (`/static/*`) or remote config (`/array/*`), routing them to PostHog's asset server. Everything else goes to the main API.
+- **Caches assets:** The `retrieveAsset` function caches PostHog's JavaScript SDK, remote config, and other static files in Cloudflare's cache. This improves performance and preserves correct `cache-control` headers that the asset server provides.
 - **Preserves user location:** The `forwardRequest` function captures the real user IP from Cloudflare's `CF-Connecting-IP` header and sets it as `X-Forwarded-For`. This ensures PostHog records accurate user locations instead of showing all users at Cloudflare's data center locations. It also removes cookies for privacy.
 
 </Step>
@@ -161,7 +161,7 @@ In the Cloudflare dashboard, follow [Cloudflare's custom domains guide](https://
 
 Using your own domain instead of the default `*.workers.dev` domain makes the proxy less likely to be blocked. Ad blockers recognize and block `*.workers.dev` patterns.
 
-Avoid obvious terms like `tracking`, `analytics`, `posthog`, or `telemetry` in your subdomain name. Use something neutral like `e`, `ph`, or `ingest` instead.
+Avoid obvious terms like `tracking`, `analytics`, `posthog`, `telemetry`, or `ph` in your subdomain name. Use something neutral like `e`, `t`, or `ingest` instead.
 
 </Step>
 
@@ -172,14 +172,14 @@ In your application code, update your PostHog initialization to use your worker'
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -227,21 +227,35 @@ Configure the record:
 
 The CNAME points your subdomain to PostHog's proxy endpoint. The orange cloud means Cloudflare will proxy the traffic instead of just doing DNS resolution.
 
-Avoid obvious terms like `tracking`, `analytics`, `posthog`, or `telemetry` in your subdomain. Use something neutral like `e`, `ph`, or `ingest` instead.
+Avoid obvious terms like `tracking`, `analytics`, `posthog`, `telemetry`, or `ph` in your subdomain. Use something neutral like `e`, `t`, or `ingest` instead.
 
 </Step>
 
-<Step title="Create a Page Rule to rewrite the Host header">
+<Step title="Create Page Rules to rewrite the Host header">
 
-In the Cloudflare dashboard, follow [Cloudflare's Page Rules guide](https://support.cloudflare.com/hc/en-us/articles/206652947) to create a new rule.
+In the Cloudflare dashboard, follow [Cloudflare's Page Rules guide](https://support.cloudflare.com/hc/en-us/articles/206652947) to create three rules. Page Rules are evaluated in order, so create them in this order:
 
-Configure the rule:
+**Rule 1: Static assets**
 
-- **URL pattern:** `e.yourdomain.com/*` (replace with your actual subdomain)
+- **URL pattern:** `e.yourdomain.com/static/*`
+- **Setting:** Host Header Override
+- **Value:** `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`
+
+**Rule 2: Remote config**
+
+- **URL pattern:** `e.yourdomain.com/array/*`
+- **Setting:** Host Header Override
+- **Value:** `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`
+
+**Rule 3: Everything else**
+
+- **URL pattern:** `e.yourdomain.com/*`
 - **Setting:** Host Header Override
 - **Value:** `us-proxy-direct.i.posthog.com` or `eu-proxy-direct.i.posthog.com`
 
-The Host Header Override tells PostHog which domain the request is for. Without this, PostHog won't know how to route your request and you'll get 401 errors.
+Replace `e.yourdomain.com` with your actual subdomain.
+
+The Host Header Override tells PostHog which domain the request is for. Without this, PostHog rejects the request with a 403 error. The static and config rules must come before the catch-all rule so that `/static/*` and `/array/*` requests are routed to the assets origin, which returns proper cache-control headers for SDK configuration.
 
 </Step>
 
@@ -252,14 +266,14 @@ In your application code, update your PostHog initialization to use your CNAME d
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -335,8 +349,8 @@ function addCorsHeaders(response) {
 Then modify your `handleRequest` to use it:
 
 ```javascript
-const response = pathname.startsWith("/static/") 
-  ? await retrieveStatic(request, pathWithParams, ctx)
+const response = (pathname.startsWith("/static/") || pathname.startsWith("/array/"))
+  ? await retrieveAsset(request, pathWithParams, ctx)
   : await forwardRequest(request, pathWithParams)
 return addCorsHeaders(response)
 ```
