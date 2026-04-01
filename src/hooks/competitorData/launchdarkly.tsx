@@ -108,6 +108,7 @@ export const launchdarkly = {
             targeting: {
                 features: {
                     cohort_integration: true,
+                    custom_targeting: true,
                     exclusion_rules: false,
                     geographic_targeting: true,
                     group_level_experiments: true,

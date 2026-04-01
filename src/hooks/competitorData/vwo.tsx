@@ -139,8 +139,7 @@ export const vwo = {
         },
         integrations: {
             datadog: false,
-
-            exports: false,
+            exports: true,
             imports: false,
             microsoft_teams: false,
             sentry: false,
