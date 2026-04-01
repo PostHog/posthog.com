@@ -93,10 +93,12 @@ Clicking on a person in the [People tab](https://app.posthog.com/persons) opens 
 
 - Search for the person via their unique ID. For example, their email.
 - Click on the person's ID
-- Click **Delete person** to remove them and all their associated data. You will be prompted to confirm this action.
+- Click **Delete person** to remove them and all their associated data. You will be prompted to confirm this action. You can also choose to delete their session recordings at this step.
 
 <DistinctIdReuseWarning />
 
 ### Via the API
 
-You can also delete persons data via the API. See the [Data Deletion docs](/docs/privacy/data-deletion) for more information.
+You can also delete persons data via the API. When deleting a person, you can pass `delete_events=true` to delete their events and `delete_recordings=true` to delete their [session recordings](/docs/session-replay). Recording deletion uses crypto-shredding to permanently destroy encryption keys, making the recordings unrecoverable.
+
+See the [data deletion docs](/docs/privacy/data-storage#data-deletion) for more information.

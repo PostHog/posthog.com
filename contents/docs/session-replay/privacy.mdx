@@ -41,3 +41,26 @@ PostHog offers a range of controls to limit what data is captured by session rec
 ## Network capture
 
 Session replay also allows you to capture network requests and responses. Headers and bodies can include sensitive information. We scrub some headers automatically, but if your network requests and responses include sensitive information you can provide a function to scrub them. [Read more in our network capture docs](/docs/session-replay/network-recording#sensitive-information)
+
+
+## Data deletion
+
+On PostHog Cloud, session recordings are encrypted using per-session encryption keys. When a recording is deleted, PostHog permanently destroys the encryption key (a process called crypto-shredding), making the recording data unreadable. This is irreversible.
+
+Deletion is a two-phase process:
+
+1. **Key shredding** – the encryption key is permanently destroyed, making the recording unplayable immediately
+2. **Metadata cleanup** – recording metadata is purged from the database after a 10-day grace period via a nightly scheduled job
+
+### When recordings are deleted
+
+Recording deletion happens automatically when:
+
+- **A person is deleted** via the [Persons API](/docs/api/persons) with the `delete_recordings` parameter set to `true`
+- **A team, project, or organization is deleted** – all recordings for each affected team are queued for deletion
+
+### Viewing deleted recordings
+
+If you open a recording that has been deleted, the Session Replay player displays a notice showing when it was deleted and by whom.
+
+For more information on data deletion in PostHog, see [data storage](/docs/privacy/data-storage#data-deletion).
