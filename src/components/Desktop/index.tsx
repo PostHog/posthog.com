@@ -267,7 +267,7 @@ function ActionFigureWallpaper() {
             </div>
 
             {/* Right James figure */}
-            <div className="absolute -bottom-2 right-0 w-[clamp(220px,50vw,500px)] z-10">
+            <div className="absolute -bottom-2 -right-12 w-[clamp(220px,50vw,600px)] z-10">
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_03_24_at_11_06_31_1_08dd25932a.png"
                     alt=""
@@ -275,7 +275,7 @@ function ActionFigureWallpaper() {
             </div>
 
             {/* Left James figure */}
-            <div className="absolute -bottom-2 right-0 w-[clamp(400px,80vw,800px)] z-10">
+            <div className="absolute -bottom-2 -right-20 w-[clamp(400px,80vw,1000px)] z-10">
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_03_24_at_11_06_54_1_99fa60ee4d.png"
                     alt=""
@@ -351,7 +351,7 @@ function ActionFigurePopup() {
                             to="/merch?product=james-hawkins-ultra-action-figure"
                             state={{ newWindow: true }}
                         >
-                            Preorder now
+                            Order yours today
                         </CallToAction>
                     </div>
                 ),
