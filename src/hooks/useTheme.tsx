@@ -86,6 +86,16 @@ export const themeOptions: ThemeOption[] = [
             classes: 'wallpaper-coding-at-night:bg-[#54618E] dark:wallpaper-coding-at-night:bg-[#54618E]',
         },
     },
+    {
+        label: 'Action figure',
+        value: 'action-figure',
+        background: {
+            thumb: {
+                light: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_200/569883295_75e6f3b8_6f66_451d_a24a_87602c6cc689_8c0315bd89.jpg',
+                dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_200/569883295_75e6f3b8_6f66_451d_a24a_87602c6cc689_8c0315bd89.jpg',
+            },
+        },
+    },
 ]
 
 const generateThemeClasses = (theme: ThemeOption) => {
