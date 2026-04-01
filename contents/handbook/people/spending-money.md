@@ -160,7 +160,7 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
 
 Passkeys are the preferred way of securing accounts. In some cases Passkeys aren't supported by the service provider.
 
-If you find yourself in a team requiring access to these kinds of tools where a Yubikey is required then you should purchase them as recommended on the [on the MFA page](https://posthog.com/handbook/company/security#multi-factor-authentication). If you aren't sure if you need one then you probably don't and should instead be using Passkeys
+If you find yourself in a team requiring access to these kinds of tools where a Yubikey is required then you should purchase them as recommended on the [on the MFA page](https://posthog.com/handbook/company/security#multi-factor-authentication) using your Brex card. If you aren't sure if you need one then you probably don't and should instead be using Passkeys
 
 #### Other equipment
 - Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items usually work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
