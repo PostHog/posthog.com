@@ -491,3 +491,261 @@ If the wizard doesn't support the framework, see the [SDKs and Libraries](https:
     fs.writeFileSync(llmsTxtPath, llmsTxtContent, 'utf8')
     console.log('Generated: llms.txt')
 }
+
+// Function to generate pricing.md file for LLM and human consumption
+export const generatePricingMd = (products: any[]) => {
+    console.log('Generating pricing.md file...')
+
+    const formatVolume = (n: number): string => n.toLocaleString('en-US')
+
+    const formatPrice = (usd: string): string => {
+        const num = parseFloat(usd)
+        if (num === 0) return '**Free**'
+        // Show enough decimal places to be meaningful
+        if (num >= 1) return `$${num.toFixed(2)}`
+        if (num >= 0.01) return `$${num}`
+        // For very small numbers, trim trailing zeros but keep significant digits
+        return `$${num}`
+    }
+
+    const tierTable = (tiers: any[], unit: string): string => {
+        if (!tiers || tiers.length === 0) return ''
+
+        const rows: string[] = []
+        rows.push(`| Monthly volume | Price per ${unit} |`)
+        rows.push('|---|---|')
+
+        for (let i = 0; i < tiers.length; i++) {
+            const tier = tiers[i]
+            const price = formatPrice(tier.unit_amount_usd)
+            const prevUpTo = i > 0 ? tiers[i - 1].up_to : 0
+
+            if (tier.up_to === null) {
+                // Last tier (unlimited)
+                rows.push(`| Above ${formatVolume(prevUpTo)} | ${price} |`)
+            } else if (parseFloat(tier.unit_amount_usd) === 0) {
+                // Free tier
+                rows.push(`| First ${formatVolume(tier.up_to)} | ${price} |`)
+            } else {
+                rows.push(`| ${formatVolume(prevUpTo + 1)} – ${formatVolume(tier.up_to)} | ${price} |`)
+            }
+        }
+
+        return rows.join('\n')
+    }
+
+    // Product descriptions and display order
+    const productMeta: Record<string, { description: string; note?: string }> = {
+        product_analytics: {
+            description:
+                'Track user behavior across your product with funnels, retention, user paths, lifecycle analysis, trends, and more. Autocapture tracks every click and pageview automatically — no manual instrumentation needed.',
+            note: 'Web Analytics is included with Product Analytics at no extra cost.',
+        },
+        session_replay: {
+            description:
+                'Watch real user sessions to debug issues and understand behavior. See clicks, scrolls, network requests, and console logs with full technical context.',
+        },
+        feature_flags: {
+            description:
+                'Ship features safely with targeted rollouts and run statistically rigorous A/B tests. Experiments is bundled with Feature Flags — same billing, same free tier.',
+        },
+        surveys: {
+            description:
+                'Build in-app popups with NPS, CSAT, multiple choice, free text, ratings, and emoji reactions. No code required for popup surveys, or use the API for full control.',
+        },
+        error_tracking: {
+            description:
+                'Capture, investigate, and resolve exceptions across frontend and backend. Integrates with Session Replay so you can see exactly what the user was doing when the error occurred.',
+        },
+        data_warehouse: {
+            description:
+                'Query external data sources (Stripe, Hubspot, Postgres, S3, etc.) alongside PostHog data using SQL. No separate warehouse needed.',
+            note: 'Revenue Analytics is included with Data Warehouse at no extra cost.',
+        },
+        realtime_destinations: {
+            description:
+                'Send data to tools like Slack, Zapier, or Customer.io to trigger notifications, automations, emails, and more in real time.',
+        },
+    }
+
+    const productDisplayOrder = [
+        'product_analytics',
+        'session_replay',
+        'feature_flags',
+        'surveys',
+        'error_tracking',
+        'data_warehouse',
+        'realtime_destinations',
+    ]
+
+    // Separate products from the platform product
+    const platformProduct = products.find((p) => p.type === 'platform_and_support')
+    const billedProducts = products.filter(
+        (p) => p.type !== 'platform_and_support' && !p.legacy_product && !p.inclusion_only
+    )
+
+    // Sort products: known order first, then any new ones from the API
+    const orderedProducts = [
+        ...productDisplayOrder.map((type) => billedProducts.find((p) => p.type === type)).filter(Boolean),
+        ...billedProducts.filter((p) => !productDisplayOrder.includes(p.type)),
+    ]
+
+    // Build product sections
+    const productSections: string[] = []
+    for (const product of orderedProducts) {
+        const meta = productMeta[product.type]
+        const paidPlan = product.plans?.find((plan: any) => plan.tiers)
+        const tiers = paidPlan?.tiers
+        const unit = paidPlan?.unit || product.unit || 'unit'
+
+        let section = `### ${product.name}\n\n`
+        section += `${meta?.description || product.description}\n`
+        if (meta?.note) {
+            section += `\n${meta.note}\n`
+        }
+        section += `\n**Unit: ${unit}** | Prices decrease with volume\n\n`
+
+        if (tiers) {
+            section += tierTable(tiers, unit)
+        } else if (product.contact_support) {
+            section += 'Contact us for pricing.'
+        }
+
+        productSections.push(section)
+    }
+
+    // Build product add-ons section
+    const productAddons: any[] = []
+    for (const product of orderedProducts) {
+        if (product.addons) {
+            for (const addon of product.addons) {
+                if (addon.legacy_product) continue
+                productAddons.push({ ...addon, parentName: product.name })
+            }
+        }
+    }
+
+    let addonsSection = ''
+    if (productAddons.length > 0) {
+        addonsSection += '## Product Add-ons\n\n'
+        addonsSection += 'Optional extras that extend core products. Each add-on has its own pricing.\n\n'
+
+        for (const addon of productAddons) {
+            addonsSection += `### ${addon.name}\n\n`
+            addonsSection += `*Extends ${addon.parentName}*\n\n`
+            addonsSection += `${addon.description}\n\n`
+
+            const paidPlan = addon.plans?.find((plan: any) => plan.tiers)
+            if (paidPlan?.tiers) {
+                const unit = paidPlan.unit || addon.unit || 'unit'
+                addonsSection += `**Unit: ${unit}**\n\n`
+                addonsSection += tierTable(paidPlan.tiers, unit) + '\n'
+            } else if (addon.plans?.length > 0) {
+                const plan = addon.plans[addon.plans.length - 1]
+                if (plan.flat_rate && plan.unit_amount_usd) {
+                    addonsSection += `**$${plan.unit_amount_usd.replace('.00', '')}/mo** flat rate\n`
+                }
+            }
+            addonsSection += '\n'
+        }
+    }
+
+    // Build platform packages section
+    let platformSection = ''
+    if (platformProduct?.addons) {
+        const platformAddons = platformProduct.addons.filter(
+            (addon: any) => !addon.legacy_product && !addon.inclusion_only
+        )
+        if (platformAddons.length > 0) {
+            platformSection += '## Platform Packages\n\n'
+            platformSection +=
+                'Optional packages for teams that need more from the platform. Subscribe via your billing page after signing up.\n\n'
+            platformSection += '| Package | Price | Description |\n'
+            platformSection += '|---|---|---|\n'
+
+            for (const addon of platformAddons) {
+                const plan = addon.plans?.[addon.plans.length - 1]
+                let price = ''
+                if (plan?.flat_rate && plan?.unit_amount_usd) {
+                    price = `$${plan.unit_amount_usd.replace('.00', '')}/mo`
+                }
+                platformSection += `| ${addon.name} | ${price} | ${addon.description} |\n`
+            }
+        }
+    }
+
+    // Assemble the full document
+    const content = `# PostHog Pricing
+
+> PostHog is an open-source product and data tools platform with fully transparent, usage-based pricing.
+> Every product has a generous free tier — no credit card required.
+> You only pay for what you use, and the more you use, the cheaper it gets.
+
+All prices are in USD. Full interactive pricing calculator: https://posthog.com/pricing
+
+## How pricing works
+
+PostHog has two plans:
+
+- **Free** — No credit card required. Generous monthly usage limits on every product. 1 project. 1 year data retention. Community support.
+- **Paid** (pay-as-you-go) — $0/mo base price. You get a free tier on every product, then pay only for what you use above it. The free tier resets every month. 6 projects. 7 year data retention. Email support.
+
+There are no per-seat charges. Your whole team can use PostHog.
+
+## Products
+
+${productSections.join('\n\n')}
+
+${addonsSection}
+${platformSection}
+## Volume discounts for annual commitments
+
+PostHog's standard monthly pricing already gets cheaper at higher volumes (see the tier tables above). For annual credit commitments, additional discounts are available — and they're fully transparent:
+
+| Credit purchase amount | Discount |
+|---|---|
+| $25,000 – $59,999 | 20% |
+| $60,000 – $99,999 | 25% |
+| $100,000 – $249,999 | 30% |
+| $250,000 – $499,999 | 35% |
+| $500,000 – $999,999 | 40% |
+| $1,000,000+ | Contact us |
+
+Additional discounts can stack on top:
+
+- **2-year commitment**: +3%
+- **3-year commitment**: +5%
+- **Upfront payment**: +2.5% per additional year paid upfront
+- **Mutual commitment to timing**: +5% one-time
+
+For full details on how discounts work, see our transparent contract rules: https://posthog.com/handbook/growth/sales/contract-rules
+
+## Other discounts
+
+- **Startups**: $50,000 in free credits for 12 months. Eligible if less than 2 years old and less than $5M raised. Apply at https://posthog.com/startups
+- **Y Combinator**: $50,000 in free credits per year, renewable while eligible (raised less than $25M). Any YC batch. Apply via https://app.posthog.com/startups/yc
+- **Nonprofits**: 15% discount on credit purchases below $25k. Additional 5% on top of standard volume discounts for purchases between $25k–$100k. Sign up, then contact us through the app.
+- **Self-serve annual**: 10% off for qualifying self-serve customers (3+ paid invoices, $280+ average).
+
+## Definitions
+
+- **Event**: Any data point sent to PostHog (pageview, click, custom event, API call, etc.)
+- **Recording**: A single captured user session
+- **Request**: A single feature flag evaluation (client or server-side)
+- **Survey response**: One completed survey submission
+- **Exception**: A single error or exception captured
+- **Row**: A single row synced from an external data source
+- **Trigger event**: A single event sent to a realtime destination
+
+All prices are in USD, excluding taxes.
+`
+
+    const publicPath = path.resolve(__dirname, '../public')
+    const pricingMdPath = path.join(publicPath, 'pricing.md')
+    if (!fs.existsSync(publicPath)) {
+        fs.mkdirSync(publicPath, { recursive: true })
+    }
+
+    fs.writeFileSync(pricingMdPath, content, 'utf8')
+    console.log('Generated: pricing.md')
+}
