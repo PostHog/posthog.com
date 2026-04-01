@@ -4,14 +4,14 @@ sidebar: Docs
 showTitle: true
 ---
 
-The web analytics dashboard provides an overview of your website's traffic. 
+The web analytics dashboard provides an overview of your website's traffic.
 
 For the selected time range, it starts with the number of visitors, views, [sessions](/docs/data/sessions), along with trends for each, as well as average session duration and bounce rate. Each of these is compared with the previous time range, showing how much they increased or decreased.
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_dark_mode_2024_10_6aa6dc9aeb.png"
-  alt="Web analytics dashboard" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_dark_mode_2024_10_6aa6dc9aeb.png"
+  alt="Web analytics dashboard"
   classes="rounded"
 />
 
@@ -27,7 +27,7 @@ You can change the duration threshold in the [web analytics settings](https://ap
 
 ## LCP Score
 
-[Largest contentful paint (LCP)](https://web.dev/articles/lcp) is a web vital metric that measures how long it takes for the largest content element on a page to load. 
+[Largest contentful paint (LCP)](https://web.dev/articles/lcp) is a web vital metric that measures how long it takes for the largest content element on a page to load.
 
 To calculate the score, we take the 75th percentile of the LCP values for the first pageview of each session. A good LCP score is less than 2.5 seconds, and a poor score is more than 4 seconds.
 
@@ -36,9 +36,9 @@ To calculate the score, we take the 75th percentile of the LCP values for the fi
 Top paths drill down into specific pages on your site to show their views, visitors, bounce rate, and scroll depth. You can click on any of the paths to filter the dashboard for that path.
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png" 
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580004/posthog.com/contents/images/docs/web-analytics/dashboard/paths-dark.png"
-  alt="Web analytics dashboard" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580004/posthog.com/contents/images/docs/web-analytics/dashboard/paths-dark.png"
+  alt="Web analytics dashboard"
   classes="rounded"
 />
 
@@ -49,9 +49,9 @@ Entry and end paths show these stats for the first and last pageviews of each se
 To get an idea of where users are visiting your site from, you can see top referrers, [channels](/docs/data/channel-type), and [UTMs](/docs/data/utm-segmentation).
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-light.png" 
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-dark.png"
-  alt="Web analytics referrers" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-dark.png"
+  alt="Web analytics referrers"
   classes="rounded"
 />
 
@@ -62,7 +62,7 @@ You can dive deeper into how your sessions are attributed using the [session att
 Based on UTMs, referring domains, and more, PostHog automatically classifies traffic into specific acquisition channel types such as:
 
 | Channel Type     | Description of where the user came from                                         |
-|------------------|---------------------------------------------------------------------------------|
+| ---------------- | ------------------------------------------------------------------------------- |
 | Direct           | Typed in the URL directly or used a saved link.                                 |
 | Paid Search      | An ad from a search engine, e.g. Google, Bing, or Baidu.                        |
 | Paid Social      | An ad from a social media platform, e.g. Facebook, LinkedIn, or Twitter         |
@@ -84,9 +84,9 @@ Based on UTMs, referring domains, and more, PostHog automatically classifies tra
 | Other            | A link from an unknown source.                                                  |
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580001/posthog.com/contents/images/docs/web-analytics/dashboard/channels-light.png" 
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580003/posthog.com/contents/images/docs/web-analytics/dashboard/channels-dark.png"
-  alt="Web analytics channel types" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580001/posthog.com/contents/images/docs/web-analytics/dashboard/channels-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580003/posthog.com/contents/images/docs/web-analytics/dashboard/channels-dark.png"
+  alt="Web analytics channel types"
   classes="rounded"
 />
 
@@ -94,16 +94,14 @@ Based on UTMs, referring domains, and more, PostHog automatically classifies tra
 
 ### Custom channel type
 
-
-
 If our predefined channel types don't work for you, you can define rules to match incoming events to your own custom channel types in [your project settings](https://us.posthog.com/settings/project-web-analytics). The first matching rule is used, and if no rule matches (or if none are defined) then the default channel type is used.
 
 For example, you could create an **AI** channel type where the referring domain equals `chatgpt.com`, `www.perplexity.ai`, and other AI services.
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_12_04_at_16_48_30_2x_ea594a4d1c.png" 
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_12_04_at_16_48_52_2x_12c92512c1.png"
-  alt="Custom channel types" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_12_04_at_16_48_30_2x_ea594a4d1c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_12_04_at_16_48_52_2x_12c92512c1.png"
+  alt="Custom channel types"
   classes="rounded"
 />
 
@@ -113,7 +111,7 @@ UTMs include source, medium, campaign, content, and term. Each are set as URL pa
 
 `https://posthog.com/?utm_source=twitter&utm_medium=social&utm_campaign=twitter-campaign`
 
-Setting UTMs correctly is crucial for accurately classifying your traffic, not only for UTMs, but for channel types as well. 
+Setting UTMs correctly is crucial for accurately classifying your traffic, not only for UTMs, but for channel types as well.
 
 > **Read more:** [How to capture, customize, and filter UTM parameters](/docs/data/utm-segmentation)
 
@@ -122,20 +120,20 @@ Setting UTMs correctly is crucial for accurately classifying your traffic, not o
 The world map shows where your users are located, but you can also select it to show top countries, regions (like California, England, or Ontario), cities, timezones, or languages.
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579999/posthog.com/contents/images/docs/web-analytics/dashboard/regions-light.png" 
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580000/posthog.com/contents/images/docs/web-analytics/dashboard/regions-dark.png"
-  alt="Web analytics regions" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711579999/posthog.com/contents/images/docs/web-analytics/dashboard/regions-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580000/posthog.com/contents/images/docs/web-analytics/dashboard/regions-dark.png"
+  alt="Web analytics regions"
   classes="rounded"
 />
 
 ## Retention
 
-Retention creates a cohort of unique users who performed any event for the first time in the last week. It then tracks the percentage of users who return to perform any event in the following weeks. 
+Retention creates a cohort of unique users who performed any event for the first time in the last week. It then tracks the percentage of users who return to perform any event in the following weeks.
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579998/posthog.com/contents/images/docs/web-analytics/dashboard/retention-light.png" 
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579997/posthog.com/contents/images/docs/web-analytics/dashboard/retention-dark.png"
-  alt="Web analytics retention" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711579998/posthog.com/contents/images/docs/web-analytics/dashboard/retention-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1711579997/posthog.com/contents/images/docs/web-analytics/dashboard/retention-dark.png"
+  alt="Web analytics retention"
   classes="rounded"
 />
 
@@ -146,6 +144,7 @@ Retention creates a cohort of unique users who performed any event for the first
 The **Active hours** feature displays a heatmap showing either the number of **unique users** or **total pageviews** for **any pageview event**, broken down by hour of the day and day of the week You can switch between these two metrics using the tabs at the top right of the heatmap (**Unique users** or **Total pageviews**).
 
 ### What the heatmap shows:
+
 - Each **cell** represents the number of unique users or total pageviews during a specific hour of a specific day. Numbers are formatted for readability (e.g., 1.73K for 1,730).
 - The **"All" column** on the right aggregates the total for each day across all hours, and is highlighted in a different color.
 - The **bottom row ("All")** aggregates the total for each hour across all days, also highlighted in a different color.
@@ -154,22 +153,28 @@ The **Active hours** feature displays a heatmap showing either the number of **u
 - The displayed time for each cell and the starting day of the week are based on your project's date and time settings. By default, the time is UTC, but you can change the timezone in [your project settings](https://us.posthog.com/settings/project-product-analytics#date-and-time).
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_17_at_11_29_05_AM_b6492fe65e.png" 
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_17_at_11_33_14_AM_653e33a4e7.png"
-  alt="Web analytics active hours" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_17_at_11_29_05_AM_b6492fe65e.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_17_at_11_33_14_AM_653e33a4e7.png"
+  alt="Web analytics active hours"
   classes="rounded"
 />
 
 > **Note:** Selecting a time range longer than 7 days will include additional occurrences of weekdays and hours, potentially increasing the counts in those buckets. For best results, select 7 closed days or a multiple of 7 closed day ranges.
+
+## Live events
+
+The Web Analytics Live dashboard includes a live events feed that displays raw events as they're captured in real time. Each row shows the event type, person distinct ID, URL or screen, and timestamp.
+
+This means you can monitor incoming traffic directly within Web Analytics without switching to the [Activity tab](/docs/activity).
 
 ## Goals
 
 Goals shows your pinned or most recently created actions and the number of conversions they've had. You can set a custom event or action as a [conversion goal](/docs/web-analytics/conversion-goals) at the top of the dashboard for more specific metrics.
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_06_at_16_03_42_2x_bb31331709.png" 
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_06_at_16_03_56_2x_c46b405ffa.png"
-  alt="Web analytics goals" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_06_at_16_03_42_2x_bb31331709.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_06_at_16_03_56_2x_c46b405ffa.png"
+  alt="Web analytics goals"
   classes="rounded"
 />
 
@@ -177,7 +182,7 @@ Goals shows your pinned or most recently created actions and the number of conve
 
 Like other dashboards in PostHog, the web analytics dashboard is filterable. This means you can filter for data with certain event or person property values. Options include browser, path name, device type, country, and UTMs. Just click the "Add filter" button next to the date range at the top of the dashboard.
 
-This enables you to dive into specific stats for regions, parts of the site, and specific marketing campaigns. 
+This enables you to dive into specific stats for regions, parts of the site, and specific marketing campaigns.
 
 For more complex queries, you can still use the product analytics tab as usual.
 
