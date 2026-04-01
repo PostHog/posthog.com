@@ -31,15 +31,20 @@ Once you're ready, you ship your agent to production and start rolling it out to
 
 ## Your first users
 
-Now that you have your first users, you start getting messages and support tickets because nothing works perfectly on the first iteration.
+How you tested the agent locally is a lot different than how people use it in production, and that leads to issues.
 
-You start fixing the issues your users report by replicating the issue, attempting a fix, checking whether it is still there, and repeating that loop until you have fixed it. This works well, but it has a requirement: being able to reproduce the issue. Maybe that isn't too hard in theory, because you would think that you simply need to feed the same input to the agent, but in practice the agent loop makes multiple tool calls fetching or mutating data, and you don't necessarily have the same data in your local environment as you do in production. Furthermore, you don't really know which data was requested or received by the agent.
+Fixing the issues your users report starts by replicating the issue, attempting a fix, checking whether it is still there, and repeating. This works well, but it has a requirement: being able to reproduce the issue. 
+This isn't hard in theory because you just need to feed the same input to the agent, but the reality is different:
 
-You come to the conclusion that you need some sort of observability tool for your agent. That way, when a user complains about something, you can pinpoint the exact agent interaction that led to that complaint. As an added benefit, you can now proactively check every trace your agent generates and see what you can improve.
+1. The agent loop often makes multiple tool calls to fetch or mutate data
+2. You don't have the same data in your local environment as you do in production
+3. You don't really know which data was requested or received by the agent
+
+Capturing this reality requires an observability tool for your agent. That way, when a user complains about something, you can pinpoint the exact agent interaction that led to that complaint. As an added benefit, you can now proactively check every trace your agent generates and see what you can improve.
 
 PostHog's [LLM analytics](/docs/llm-analytics/start-here) is one way to build that observability layer.
 
-With this new tracing mechanism, you can now see how your agent is behaving in the wild. You find bugs proactively and fix them before users start complaining about them. There is, however, a big caveat: you now spend almost all of your working hours looking at traces.
+With the tracing mechanism the observability tool provides, you can now see how your agent is behaving in the wild. You find bugs proactively and fix them before users start complaining about them. There is, however, a big caveat: you now spend almost all of your working hours looking at traces.
 
 ## Your agent has grown
 
@@ -53,7 +58,9 @@ If we think of our agent like an endpoint, it takes an input and returns an outp
 
 So, given this non-determinism, what kinds of things can we expect or evaluate?
 
-## Deterministic evaluators
+### Deterministic evaluators
+
+Here are just a few examples of evaluations you can deterministically run on a set of inputs and outputs from the agent. In this case, the determinism refers to the test evaluation returning the same result for the same set of inputs and outputs.
 
 1. A specific tool call was made, for example a web search
 2. A set of forbidden keywords were not used in the output, think bad words or competitors
@@ -62,9 +69,7 @@ So, given this non-determinism, what kinds of things can we expect or evaluate?
 5. No error was raised
 6. The output of the assistant has a neutral tone, for example through traditional sentiment analysis
 
-These are just a few examples of evaluations you can deterministically run on a set of inputs and outputs from the agent. In this case, the determinism refers to the test evaluation returning the same result for the same set of inputs and outputs.
-
-## Non-deterministic evaluators
+### Non-deterministic evaluators
 
 There are more subjective cases where you can't capture what you're trying to evaluate in a piece of code. As a human, you could immediately tell whether a set of inputs and outputs pass the criterion you're testing for, but you wouldn't be able to write test code to capture that reasoning.
 
@@ -81,7 +86,7 @@ The prompt should be very specific about what it is evaluating. It should also c
 
 LLM-as-a-Judge evaluators have a higher cost than deterministic code-based evaluators because they require an LLM call. For this reason, it is better to use code-based evaluators whenever the test case can be captured through them.
 
-## Putting them all together
+### Creating an evaluation suite
 
 After learning about the types of evaluators that can help you test your agent, similar to how you used to write integration tests, you now write multiple evaluation suites, with a mix of code-based and LLM-as-a-Judge evaluators. You cover your happy paths as well as edge cases and some of the bugs you've been fixing over the past little while.
 
@@ -107,7 +112,7 @@ Once your evaluators are running on live production data, you can either review 
 
 Now we have evaluators running offline during development and online in production. That gets us much closer, but one gap still remains. While you now cover the infinite space of inputs, you still only evaluate the things that you have defined as evaluators. You're probably missing many evaluators that you haven't thought about.
 
-## Going back to manually reviewing single traces
+## Building evaluations by manually reviewing single traces
 
 Our set of evaluators needs to evolve over time. We need to tweak evaluators when needed, but more importantly, we need to add new evaluators over time to catch more potential problems and protect ourselves against regressions. If we were simply able to think hard enough about which evaluators we are missing, we could have defined them already.
 
