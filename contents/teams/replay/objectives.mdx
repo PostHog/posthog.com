@@ -1,33 +1,62 @@
-## 🚀 Goal 1: Get Hayne rocketing
+## 🧠 Goal 1: Nail single-session on-demand summaries
 
-It's great to have Hayne on the team, let's make the time and priority to make it a success!
+Ship a reliable, on-demand AI summary for individual sessions. Users should be able to hit a button and get a useful natural-language summary of what happened in a session — key user actions, errors, frustration signals, and outcomes.
 
-## 👀 Goal 2: Make Replay low-maintenance 🔧
+- Wire up the rasterizer → AI pipeline end-to-end
+- Iterate on summary quality (prompt tuning, frame selection, context enrichment)
+- Configurable customer-specific context (let customers provide their own domain context to make summaries more relevant)
+- Measure latency and cost per summary, set targets for both
 
-* Clean up legacy features and finish outstanding migrations from old to new
-   * Move everyone to PostHog recorder
-   * Remove support for Blobby V1
-   * Remove LTS feature and related Celery tasks
-* Improve fidelity - let's squash the filtering bugs and visual inconsistencies that make Replay seem "rough" to use
-* Improve debugging facilities - it can be hard to reproduce issues locally or get our hands on the data we need, let's build the internal tooling needed to solve that
+## 🎬 Goal 2: Scale video export pipeline
 
-## ⌚ Goal 3: Replay everywhere!
+The rasterizer can render sessions to video — now make it production-ready at scale.
 
-* When a recording doesn't exist, explain why!
-* Make the view recording buttons consistent
-* Make the view recording buttons session aware
-* Out with modals, in with tabs!
-* Where else can we link to recordings from within other products?
-* External integrations - jam.dev? GitHub? ZenDesk? Linear? FreshDesk? Jira? Trello?
+- Harden the Temporal worker for reliability and throughput
+- Optimize resource usage (browser concurrency, memory, CPU)
+- Explore GPU acceleration for further speedup
 
-## 🏎️ Goal 4: Make Replay compliant 
+## 🏷️ Goal 3: Build session categorizer
 
-* Let's shred some recordings 🤘
+Train a binary classifier that can label sessions as "interesting" or not. Use this model to power a categorizer that groups sessions by properties (rage clicks, errors, conversion flows, etc.) but only surfaces the ones the model flags as interesting.
 
-## 💰 Goal 5: How are our unit economics trending?
+- Extend the session summarizer (Goal 1) to also classify sessions as interesting/not — this becomes our training dataset
+- Train and evaluate the binary classifier
+- Build the categorizer layer on top: group by session properties, filter by interestingness
+- Run classifier on a schedule
 
-How have recent infrastructure changes impacted our unit economics? Is our pricing still competitive?
+## 🖥️ Goal 4: Build new AI-native frontend for Replay
 
-## 👨‍🔬 Goal 6. Make "show me something interesting" tangible
+Reimagine the Replay UI around AI-first workflows. Move away from recency as the primary way to rank recordings — instead, leverage the session categorizer (Goal 3) to surface interesting recordings across categories.
 
-Customers want us to highlight interesting moments and sessions, but that means different things to different people. Can we generate a library of what Interesting means to our customers?
+- Replace the chronological recording list with category-driven views
+- Surface AI-generated summaries and labels directly in the list UI
+- Design the UX for exploring sessions by category rather than scrolling by time
+
+## 🔌 Goal 5: Basic MCP for Session Replay
+
+Expose Session Replay as MCP tools so AI agents (Claude Desktop, etc.) can search, retrieve, and summarize sessions programmatically.
+
+## 💰 Goal 6: Business model for AI features
+
+Figure out how to price and sustain AI-powered Replay features.
+
+- Map out costs per session for summaries, categorization, and video export
+- Identify break-even points at different usage tiers
+- Propose a pricing model that works for customers and for us
+
+## 🔒 Goal 7: Map out PII, data retention, and IP concerns
+
+Figure out the compliance, legal, and brand concerns around training future models on recording data.
+
+- What PII risks exist when sending session data to LLMs?
+- How do data retention policies interact with AI-generated artifacts?
+- What are the IP implications of training on customer recordings?
+- What do customers expect and what do we need to communicate?
+
+## 🗂️ Goal 8: Set up data labelling system for replays
+
+Build the infrastructure for labelling replay data at scale — needed to train and evaluate future models on session data.
+
+- Evaluate labelling tools / build internal tooling
+- Design the labelling workflow and quality controls
+- Start building a labelled dataset
