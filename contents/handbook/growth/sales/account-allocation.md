@@ -255,6 +255,45 @@ This is the most valuable part of the handover – relationship context doesn't 
 
 ---
 
+## Receiving an account as a CSM
+
+CSM accounts should generally be in a steady state — they're using the products they need, they're engaged, and there aren't major unresolved issues. When you're taking an account from a TAE or TAM, it's worth looking beyond the surface to make sure that's actually the case. These aren't a rigid checklist. They're things to dig into that can surface problems which are otherwise easy to miss.
+
+### Billing and commercial
+
+- **Open invoices** — verify these have been resolved per the [handover requirements above](#handing-over-customers). You don't want your first interaction with a customer to be chasing payment.
+- **MRR trajectory** — is spend steady, declining, increasing, or swinging around? Declining or volatile MRR is worth digging into before you take over.
+- **Credit purchases** — if they've pre-purchased credits, does the amount actually line up with what they're spending month to month?
+- **Non-standard discounts** — review the contract for anything unusual or undocumented. If discounts exist without clear documentation, get context from the previous owner.
+
+### Product adoption
+
+- **Core product coverage** — see [TAM vs CSM](#tam-vs-csm) for the general criteria. We currently have capacity on the CSM side, so we're okay receiving accounts using only 1 core product if the previous owner has determined there isn't a realistic path to expand.
+- **Deployment health** — if the customer doesn't have basic recommendations in place (e.g. session replay minimum duration, high identify call volume), that's a flag. Check the [customer deployment health check guide](/handbook/cs-and-onboarding/health-checks) and the Metabase dashboard to assess this. The [product onboarding checklist](#product-onboarding) is also a good reference for what "properly set up" looks like.
+- **Unexplained usage changes** — big spikes or drops that aren't documented, or where there's no record of a conversation with the customer about them. These can indicate problems nobody's looked into yet.
+
+### Engagement
+
+- **One-sided relationship** — is there a pattern of outreach from our side with no customer engagement? If it's been a one-sided conversation, understand why before you take over.
+- **User concentration** — is usage concentrated among fewer than 3 users? That's inherently risky. Have there been attempts to engage beyond those users? If so, why haven't they been successful?
+
+### Account documentation
+
+- **Account plan** — one should already exist per the [handover requirements above](#account-plan). Check that it's actually there and current — don't assume.
+
+### Lower priority
+
+Worth being aware of, but less likely to be blockers:
+
+- **Open support tickets** — any unresolved tickets or known frustrations with specific products?
+- **Upcoming features** — anything in the pipeline that's relevant to this customer and worth proactively sharing?
+
+### Pushing back
+
+If you're seeing multiple flags — declining usage, no engagement, concentrated users, missing account plan — push back. An account with several of these signals isn't in steady state and probably needs more work from the previous owner before it's ready for CSM. Talk to [Dana](/community/profiles/52723) if you're unsure whether to accept an account.
+
+---
+
 ## High potential customers
 
 For TAE-led customers who will be landing at $100k+ a year or have high expansion potential into new product areas, we should introduce a TAM earlier on than normal.
