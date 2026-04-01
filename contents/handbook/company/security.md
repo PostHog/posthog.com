@@ -18,9 +18,9 @@ For information about security advisories and CVEs, see our [advisories & CVEs p
 
 All team members are required to enable multi-factor authentication (MFA) on their accounts. **Passkeys are the preferred method** for securing all accounts — they are phishing-resistant, easy to use, and supported by most major services including Google Workspace, GitHub, 1Password, and macOS.
 
-Please set up passkeys for Google Workspace, macOS, 1Password, and GitHub at the very least. If you are new, please do this within your first month so you don't get locked out.
+Please set up passkeys for Google Workspace and GitHub at the very least. If you are new, please do this within your first week so you don't get locked out.
 
-It is recommended to have most passkeys setup in 1password itself, with 1password protected by something like your Apple account passkey.
+It is recommended to have most passkeys saved in 1Password itself, which will allow you to use them from your phone.
 
 ### YubiKeys for infrastructure accounts
 
