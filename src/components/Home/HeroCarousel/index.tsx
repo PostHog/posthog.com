@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { Tabs } from 'radix-ui'
 import { IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import { OnePlaceSlide, UnderstandUsageSlide, DebugFixSlide, TestRolloutSlide } from './slides'
+import Tooltip from 'components/RadixUI/Tooltip'
 
 const SLIDE_DURATION = 5000
 
@@ -107,17 +108,26 @@ export default function HeroCarousel() {
                     } ${isLast ? '@sm:rounded-tr-none' : ''} relative ${activeColor} flex transition-colors`}
                 >
                     <div className="flex flex-col bg-light dark:bg-dark flex-1 w-full shadow-2xl rounded">
-                        <button
-                            onClick={() => setIsPaused((p) => !p)}
-                            className="absolute top-4 right-4 shrink-0 p-2 text-secondary hover:text-primary cursor-pointer z-10 border border-secondary hover:bg-accent rounded bg-light/25 dark:bg-dark/25 backdrop-blur"
-                            aria-label={isPaused ? 'Play carousel' : 'Pause carousel'}
-                        >
-                            {isPaused ? (
-                                <IconPlayFilled className="size-3.5" />
-                            ) : (
-                                <IconPauseFilled className="size-3.5" />
-                            )}
-                        </button>
+                        <span className="absolute top-4 right-4 z-10">
+                            <Tooltip
+                                trigger={
+                                    <button
+                                        onClick={() => setIsPaused((p) => !p)}
+                                        className="shrink-0 p-2 text-secondary hover:text-primary cursor-pointer border border-secondary hover:bg-accent rounded bg-light/25 dark:bg-dark/25 backdrop-blur"
+                                        aria-label={isPaused ? 'Resume carousel' : 'Pause carousel'}
+                                    >
+                                        {isPaused ? (
+                                            <IconPlayFilled className="size-3.5" />
+                                        ) : (
+                                            <IconPauseFilled className="size-3.5" />
+                                        )}
+                                    </button>
+                                }
+                                delay={0}
+                            >
+                                <span>{isPaused ? 'Resume carousel' : 'Pause carousel'}</span>
+                            </Tooltip>
+                        </span>
                         {tabs.map((tab) => (
                             <Tabs.Content
                                 key={tab.value}

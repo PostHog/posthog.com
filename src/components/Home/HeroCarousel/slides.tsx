@@ -131,7 +131,7 @@ export const OnePlaceSlide = () => {
         <div className="rounded p-4 flex flex-col h-full">
             <div className="mb-6">
                 <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/event_pipelines_be7e71e65e.png"
                     className="@lg:float-right @lg:ml-8 mb-4 @lg:mb-0 w-60"
                 />
                 <h2 className="mt-0 mb-2">Build better products with better data</h2>
@@ -498,8 +498,8 @@ export const TestRolloutSlide = () => {
     return (
         <div className="rounded p-4 pb-6">
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/lazy_a2afd552f7.png"
-                className="@lg:float-right @lg:ml-4 mb-4 @lg:mb-0 w-48"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/e_trim/w_500,c_limit,q_auto,f_auto/generated_1772230552078_80c991e813.png"
+                imgClassName="@lg:float-right mb-4 @lg:!ml-2 @lg:!mt-4 @lg:!mr-0 @lg:mb-0 w-48 -scale-x-100"
             />
             <h2 className="mt-0">Ship features safely & get feedback</h2>
             <p className="text-secondary text-sm">
@@ -507,14 +507,15 @@ export const TestRolloutSlide = () => {
             </p>
             <p className="text-secondary text-sm">
                 PostHog helps you roll out features to specific users or groups, then test and validate ideas before you
-                roll them out to everyone.
+                ship them to everyone.
             </p>
             <p className="text-secondary text-sm">
-                Use{' '}
+                And you can build it all with{' '}
                 <Link to="/code" state={{ newWindow: true }} className="font-semibold">
                     PostHog Code
-                </Link>{' '}
-                for AI product development that writes code based on product data.
+                </Link>
+                , our new AI code editor. It builds new features with the proper PostHog instrumentation and lets you
+                manage AI agents in parallel.
             </p>
 
             <div className="grid grid-cols-1 @sm:grid-cols-2 @xl:grid-cols-3 gap-6 clear-both pt-2">

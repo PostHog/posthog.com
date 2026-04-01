@@ -204,7 +204,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             slug: 'platform-packages',
         },
         {
-            name: 'User profiles',
+            name: 'Activity timeline',
             Icon: IconPeople,
             description: 'Full event history for individuals and multi-seat accounts',
             handle: 'profiles',
