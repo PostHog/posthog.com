@@ -26,6 +26,9 @@ export const vwo = {
         surveys: {
             available: true,
         },
+        error_tracking: {
+            available: false,
+        },
         feature_flags: {
             available: true,
             features: {
@@ -91,14 +94,14 @@ export const vwo = {
                     api_access: true,
                     feature_flag_foundation: true,
                     json_payloads: false,
-                    multivariate_testing: false,
+                    multivariate_testing: true,
                 },
             },
             analysis: {
                 features: {
                     results_visualization: true,
                     side_effect_monitoring: false,
-                    statistical_significance: false,
+                    statistical_significance: true,
                     statistics_engine: 'Bayesian',
                 },
             },

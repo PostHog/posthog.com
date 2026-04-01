@@ -34,6 +34,9 @@ export const ab_tasty = {
                     custom_targeting: true,
                 },
             },
+            implementation: {
+                multivariate_testing: true,
+            },
         },
         product_analytics: {
             available: false,
