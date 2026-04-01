@@ -234,6 +234,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/destinations/tiktok-ads',
                 },
                 {
+                    name: 'Trophy',
+                    url: '/docs/cdp/destinations/trophy',
+                },
+                {
                     name: 'Twilio',
                     url: '/docs/cdp/destinations/twilio',
                 },
