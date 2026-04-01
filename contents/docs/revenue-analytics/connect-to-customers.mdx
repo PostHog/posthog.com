@@ -12,6 +12,91 @@ You can connect your revenue data to `persons` and `groups` in the [revenue anal
 
 This is automatically done when you're using revenue events (since we know what person/group an event belongs to) but we need your help to manually map them in case you're using a data warehouse source.
 
+## Automatic person join with Stripe
+
+When you connect Stripe as a revenue data source, PostHog automatically creates a join between your Stripe customers and PostHog persons. This join uses the `metadata.posthog_person_distinct_id` field on your Stripe customers to match them with the corresponding persons in PostHog.
+
+Once this join is created, you can query revenue fields like `$virt_mrr` and `$virt_revenue` directly from the persons table.
+
+## Setting up Stripe customer metadata
+
+To enable the automatic join, store the PostHog distinct ID on each Stripe customer as a metadata field. This lets PostHog match Stripe customers with the right persons.
+
+When creating or updating a customer in Stripe, add a `posthog_person_distinct_id` field to the customer's metadata. The value should be the PostHog distinct ID for that user.
+
+Here are examples using the Stripe SDKs:
+
+<MultiLanguage>
+
+```node
+const stripe = require('stripe')('sk_test_...');
+
+// When creating a new customer
+const customer = await stripe.customers.create({
+  email: 'user@example.com',
+  metadata: {
+    posthog_person_distinct_id: 'user-distinct-id-123'
+  }
+});
+
+// When updating an existing customer
+await stripe.customers.update('cus_123', {
+  metadata: {
+    posthog_person_distinct_id: 'user-distinct-id-123'
+  }
+});
+```
+
+```python
+import stripe
+
+stripe.api_key = "sk_test_..."
+
+# When creating a new customer
+customer = stripe.Customer.create(
+    email="user@example.com",
+    metadata={
+        "posthog_person_distinct_id": "user-distinct-id-123"
+    }
+)
+
+# When updating an existing customer
+stripe.Customer.modify(
+    "cus_123",
+    metadata={
+        "posthog_person_distinct_id": "user-distinct-id-123"
+    }
+)
+```
+
+```ruby
+require 'stripe'
+
+Stripe.api_key = 'sk_test_...'
+
+# When creating a new customer
+customer = Stripe::Customer.create({
+  email: 'user@example.com',
+  metadata: {
+    posthog_person_distinct_id: 'user-distinct-id-123'
+  }
+})
+
+# When updating an existing customer
+Stripe::Customer.update(
+  'cus_123',
+  {
+    metadata: {
+      posthog_person_distinct_id: 'user-distinct-id-123'
+    }
+  }
+)
+```
+
+</MultiLanguage>
+
+Replace `'user-distinct-id-123'` with the actual PostHog distinct ID for each user. You can get this from your PostHog SDK using [`posthog.get_distinct_id()`](/docs/libraries/js#get-the-current-users-distinct-id).
+
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_16_20_38_743c93fff2.png"
   imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_16_20_29_8ec0f4633a.png"
