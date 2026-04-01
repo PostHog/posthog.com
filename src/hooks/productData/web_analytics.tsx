@@ -447,5 +447,22 @@ export const webAnalytics = {
             "See traffic spike? Click through to session replays of those visitors. Run surveys on specific traffic sources. Build custom analytics beyond the dashboard. It all connects because it's one platform.",
         'getting-started':
             "Add our snippet. Data flows immediately. The pre-built dashboard has everything most people need. Later, customize with product analytics if you want deeper insights. But if you're just looking for a web analytics, the defaults are probably enough.",
+        ai: 'The PostHog MCP server lets your AI coding agent query web analytics data directly from your code editor. Check traffic trends, investigate anomalies, and build dashboards – without switching to the PostHog app.',
+    },
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_92791a9d9b.png',
+        imageAlt: 'PostHog AI and web analytics',
+        imageClasses: 'w-96',
+        description: 'surface why traffic changed, what is converting, and how acquisition ties to product usage',
+        skills: [
+            'Filters web traffic by path, geography, device, or referrer',
+            'Investigates traffic spikes, dips, and other anomalies',
+            'Analyzes Core Web Vitals to identify performance bottlenecks',
+        ],
+        prompts: [
+            'Create a dashboard showing web traffic by source and campaign',
+            'Which landing pages have the highest bounce rate this month?',
+            'There was an odd traffic spike yesterday – find the root cause',
+        ],
     },
 }
