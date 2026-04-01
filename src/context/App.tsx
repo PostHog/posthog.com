@@ -878,9 +878,13 @@ const appSettings: AppSettings = {
                 height: 682,
             },
             fixed: false,
+            autoHeight: true,
         },
         position: {
             center: true,
+        },
+        modal: {
+            type: 'standard',
         },
     },
     'ask-max': {

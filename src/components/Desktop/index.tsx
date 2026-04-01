@@ -240,7 +240,7 @@ function ActionFigureWallpaper() {
             className="hidden select-none wallpaper-action-figure:flex fixed inset-0 items-center justify-center overflow-hidden bg-[#d4c9b8] dark:bg-[#2a2520]"
         >
             {/* Text + logo */}
-            <div className="absolute right-[90px] top-[12%] flex justify-center z-10">
+            <div className="absolute right-[90px] top-[10%] flex justify-center z-10">
                 <div className="relative">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_aa13fcacc0.png"
