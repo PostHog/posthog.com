@@ -8,20 +8,233 @@ import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
 
 <RevAnalyticsBetaWarning />
 
-You can connect your revenue data to `persons` and `groups` in the [revenue analytics settings](https://app.posthog.com/data-management/revenue).
+The connection between your revenue data and `persons` and `groups` is automatically done when you're using revenue events (since we know what person/group an event belongs to) but we need your help to map them in case you're using a data warehouse source.
 
-This is automatically done when you're using revenue events (since we know what person/group an event belongs to) but we need your help to manually map them in case you're using a data warehouse source.
+## Step 1: Add metadata when creating new customers
 
-<ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_16_20_38_743c93fff2.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_16_20_29_8ec0f4633a.png"
-  alt="Revenue analytics persons and groups setup" 
-  classes="rounded"
-/>
+Search your codebase for where you create Stripe customers (e.g. `stripe.Customer.create` or equivalent) and add the `posthog_person_distinct_id` metadata field.
+
+<MultiLanguage>
+
+```python
+customer = stripe.Customer.create(
+    email=user.email,
+    metadata={"posthog_person_distinct_id": user.posthog_distinct_id},  # +
+)
+```
+
+```node
+const customer = await stripe.customers.create({
+  email: user.email,
+  metadata: { posthog_person_distinct_id: user.posthogDistinctId },  // +
+});
+```
+
+```ruby
+customer = Stripe::Customer.create({
+  email: user.email,
+  metadata: { posthog_person_distinct_id: user.posthog_distinct_id },  # +
+})
+```
+
+```php
+$customer = $stripe->customers->create([
+    'email' => $user->email,
+    'metadata' => ['posthog_person_distinct_id' => $user->posthogDistinctId],  // +
+]);
+```
+
+```go
+params := &stripe.CustomerParams{
+    Email: stripe.String(user.Email),
+}
+params.AddMetadata("posthog_person_distinct_id", user.PosthogDistinctID)  // +
+cust, err := customer.New(params)
+```
+
+```java
+CustomerCreateParams params = CustomerCreateParams.builder()
+    .setEmail(user.getEmail())
+    .putMetadata("posthog_person_distinct_id", user.getPosthogDistinctId())  // +
+    .build();
+Customer customer = Customer.create(params);
+```
+
+```dotnet
+var options = new CustomerCreateOptions
+{
+    Email = user.Email,
+    Metadata = new Dictionary<string, string>  // +
+    {  // +
+        { "posthog_person_distinct_id", user.PosthogDistinctId },  // +
+    },  // +
+};
+var customer = await customerService.CreateAsync(options);
+```
+
+</MultiLanguage>
+
+## Step 2: Update existing customers before charges
+
+For customers created before you added the metadata, add a `Customer.modify` call before your charge or checkout code. This ensures existing customers get tagged the next time they make a payment.
+
+Search your codebase for any of these patterns:
+- `PaymentIntent.create` — one-off charges
+- `Subscription.create` — new subscriptions
+- `checkout.Session.create` — Stripe Checkout
+- `Invoice.create` — manual invoices
+
+Then add the following **before** that code:
+
+<MultiLanguage>
+
+```python
+stripe.Customer.modify(
+    user.stripe_customer_id,
+    metadata={"posthog_person_distinct_id": user.posthog_distinct_id},
+)
+```
+
+```node
+await stripe.customers.update(
+  user.stripeCustomerId,
+  { metadata: { posthog_person_distinct_id: user.posthogDistinctId } }
+);
+```
+
+```ruby
+Stripe::Customer.update(
+  user.stripe_customer_id,
+  { metadata: { posthog_person_distinct_id: user.posthog_distinct_id } }
+)
+```
+
+```php
+$stripe->customers->update(
+    $user->stripeCustomerId,
+    ['metadata' => ['posthog_person_distinct_id' => $user->posthogDistinctId]]
+);
+```
+
+```go
+params := &stripe.CustomerParams{}
+params.AddMetadata("posthog_person_distinct_id", user.PosthogDistinctID)
+_, err := customer.Update(user.StripeCustomerID, params)
+```
+
+```java
+CustomerUpdateParams params = CustomerUpdateParams.builder()
+    .putMetadata("posthog_person_distinct_id", user.getPosthogDistinctId())
+    .build();
+Customer.retrieve(user.getStripeCustomerId()).update(params);
+```
+
+```dotnet
+var options = new CustomerUpdateOptions
+{
+    Metadata = new Dictionary<string, string>
+    {
+        { "posthog_person_distinct_id", user.PosthogDistinctId },
+    },
+};
+await customerService.UpdateAsync(user.StripeCustomerId, options);
+```
+
+</MultiLanguage>
+
+> **Using Stripe Checkout?** If you use `checkout.Session.create` and let Stripe create customers automatically, you won't have a `Customer.create` call in your code. Instead, handle this in your `checkout.session.completed` webhook:
+
+<MultiLanguage>
+
+```python
+# In your checkout.session.completed webhook handler
+session = event.data.object
+user = get_user_by_client_reference_id(session.client_reference_id)
+
+stripe.Customer.modify(
+    session.customer,
+    metadata={"posthog_person_distinct_id": user.posthog_distinct_id},
+)
+```
+
+```node
+// In your checkout.session.completed webhook handler
+const session = event.data.object;
+const user = await getUserByClientReferenceId(session.client_reference_id);
+
+await stripe.customers.update(
+  session.customer,
+  { metadata: { posthog_person_distinct_id: user.posthogDistinctId } }
+);
+```
+
+```ruby
+# In your checkout.session.completed webhook handler
+session = event.data.object
+user = get_user_by_client_reference_id(session.client_reference_id)
+
+Stripe::Customer.update(
+  session.customer,
+  { metadata: { posthog_person_distinct_id: user.posthog_distinct_id } }
+)
+```
+
+```php
+// In your checkout.session.completed webhook handler
+$session = $event->data->object;
+$user = getUserByClientReferenceId($session->client_reference_id);
+
+$stripe->customers->update(
+    $session->customer,
+    ['metadata' => ['posthog_person_distinct_id' => $user->posthogDistinctId]]
+);
+```
+
+```go
+// In your checkout.session.completed webhook handler
+var session stripe.CheckoutSession
+err := json.Unmarshal(event.Data.Raw, &session)
+
+user := getUserByClientReferenceID(session.ClientReferenceID)
+
+params := &stripe.CustomerParams{}
+params.AddMetadata("posthog_person_distinct_id", user.PosthogDistinctID)
+_, err = customer.Update(session.Customer.ID, params)
+```
+
+```java
+// In your checkout.session.completed webhook handler
+Session session = (Session) event.getData().getObject();
+User user = getUserByClientReferenceId(session.getClientReferenceId());
+
+CustomerUpdateParams params = CustomerUpdateParams.builder()
+    .putMetadata("posthog_person_distinct_id", user.getPosthogDistinctId())
+    .build();
+Customer.retrieve(session.getCustomer()).update(params);
+```
+
+```dotnet
+// In your checkout.session.completed webhook handler
+var session = event.Data.Object as Session;
+var user = await GetUserByClientReferenceId(session.ClientReferenceId);
+
+var options = new CustomerUpdateOptions
+{
+    Metadata = new Dictionary<string, string>
+    {
+        { "posthog_person_distinct_id", user.PosthogDistinctId },
+    },
+};
+await customerService.UpdateAsync(session.Customer, options);
+```
+
+</MultiLanguage>
+
+> **Tip:** Set `client_reference_id` to your internal user ID when creating Checkout Sessions. This lets you look up the user in your database when the webhook fires.
 
 Once this is connected you'll be able to properly see who your top customers are in the [Top customers dashboard](https://app.posthog.com/revenue_analytics#top-customers).
 
-You'll also get access to the `persons_revenue_analytics` and `groups_revenue_analytics` tables in the [data warehouse](https://app.posthog.com/data-warehouse). This is a simple map of `person_id`/`group_key` to what their all-time revenue is. We plan on expanding that soon with more fields and also making that data available on the soon-to-be-released [CRM](/teams/crm) page.
+You'll also get access to the `persons_revenue_analytics` and `groups_revenue_analytics` tables in the [data warehouse](https://app.posthog.com/data-warehouse). This is a simple map of `person_id`/`group_key` to what their all-time revenue is.
 
 ```sql
 -- Count the number of persons with revenue greater than 1,000,000
