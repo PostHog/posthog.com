@@ -145,7 +145,7 @@ Going through this process will help you and your team find new bad interactions
 
 Testing agents is not about finding one perfect benchmark that proves your system is good. It is about building a feedback loop.
 
-First, you observe real behavior with tracing. Then you turn the failures you keep seeing into offline evals you can run during development. Next, you run online evals on sampled production traffic so you can catch the problems your curated datasets will always miss. Finally, you keep reviewing real traces, because manual review is where the next generation of evaluators comes from.
+First, you observe real behavior with tracing. Then you turn the failures you see into offline evals you can run during development. Next, you run online evals on sampled production traffic so you can catch the problems your curated datasets miss. Finally, you keep reviewing real traces, because manual review is where the next generation of evaluators comes from.
 
 That matters because you are never going to cover every possible input. You cannot. The goal is not perfect coverage. The goal is to make sure every bad interaction teaches your system something permanent. Manual review finds the issue. An eval makes it repeatable. CI and production monitoring stop it from quietly coming back.
 
