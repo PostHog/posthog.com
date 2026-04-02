@@ -68,6 +68,7 @@ Example for Cursor (add to `.cursor/mcp.json`):
 
 <details>
 
+<<<<<<< HEAD
 <summary>Enabling read-only mode?</summary>
 
 Read-only mode restricts the MCP server to only expose tools that don't modify data (i.e., tools annotated with `readOnlyHint: true`). This is useful when you want to limit an agent to querying and listing data without the ability to create, update, or delete resources.
@@ -101,8 +102,17 @@ Example for Cursor (add to `.cursor/mcp.json`):
 <details>
 
 <summary>Filtering available tools by feature?</summary>
+||||||| cb5ea0e4a
+<summary>Filtering available tools by feature?</summary>
+=======
+<summary>Filtering available tools?</summary>
+>>>>>>> master
 
-You can limit which tools are available by adding a `features` query parameter to the MCP URL. If no features are specified, all tools are available. When features are specified, only tools matching those features are exposed.
+You can limit which tools are available using two query parameters, individually or together:
+
+### Filter by feature category
+
+The `features` parameter exposes all tools belonging to one or more feature categories:
 
 ```text
 https://mcp.posthog.com/mcp?features=flags,dashboards,insights
@@ -144,13 +154,31 @@ Available features:
 
 > **Note:** Hyphens and underscores are treated as equivalent in feature names (e.g., `error-tracking` and `error_tracking` both work).
 
+### Filter by tool name
+
+The `tools` parameter exposes specific tools by their exact name. Use the [tool list below](#available-tools) to find the names you need:
+
+```text
+https://mcp.posthog.com/mcp?tools=dashboard-get,feature-flag-get-all,execute-sql
+```
+
+### Combining both parameters
+
+When both `features` and `tools` are provided, they act as a union — a tool is exposed if it matches a feature category **or** is listed by name. This lets you select a whole feature group and surgically add individual tools from other categories:
+
+```text
+https://mcp.posthog.com/mcp?features=flags&tools=dashboard-get
+```
+
+If neither parameter is specified, all tools are available.
+
 Example for Cursor (add to `.cursor/mcp.json`):
 
 ```json
 {
   "mcpServers": {
     "posthog": {
-      "url": "https://mcp.posthog.com/mcp?features=flags,experiments,insights",
+      "url": "https://mcp.posthog.com/mcp?features=flags&tools=dashboard-get",
       "headers": {
         "Authorization": "Bearer phx_your_api_key_here"
       }
