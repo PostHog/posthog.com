@@ -23,8 +23,9 @@ The MCP server provides these tools for working with LLM traces:
 |------|-------------|
 | `get-llm-total-costs-for-project` | Get total LLM costs for the project, broken down by model. Useful for monitoring spend and detecting cost anomalies. |
 | `query-run` | Run a custom HogQL query against your LLM trace data. Supports filtering by model, feature, cost, latency, error status, and time range. |
+| `llm-analytics-summarization-create` | Generate an AI-powered summary of a trace or generation by ID. Pass a `trace_id` or `generation_id` to get a human-readable summary without needing the full data. |
 
-A typical workflow starts with `get-llm-total-costs-for-project` to check overall spend and identify which models are most expensive, then uses `query-run` with a HogQL query to drill into specific traces by feature, time range, or cost threshold.
+A typical workflow starts with `get-llm-total-costs-for-project` to check overall spend and identify which models are most expensive, then uses `query-run` with a HogQL query to drill into specific traces by feature, time range, or cost threshold. Once you've identified an interesting trace, use `llm-analytics-summarization-create` to generate a summary.
 
 ## Example prompts
 
@@ -36,6 +37,8 @@ Try these with your MCP-enabled agent:
 - `Compare token usage between GPT-4 and Claude for the search feature.`
 - `How has LLM latency changed over the past 7 days?`
 - `Show me traces where a single call cost more than $0.50.`
+- `Summarize trace abc-123 for me.`
+- `What happened in generation xyz-456?`
 
 ## Install the MCP server
 
