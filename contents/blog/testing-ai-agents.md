@@ -79,7 +79,7 @@ Here are just a few examples of evaluations you can deterministically run on a s
 
 ### Non-deterministic evaluators
 
-There are more subjective cases where you can't capture what you're trying to evaluate in a piece of code. As a human, you could immediately tell whether a set of inputs and outputs pass the criterion you're testing for, but you wouldn't be able to write test code to capture that reasoning.
+There are more subjective cases where you can't capture what you're trying to evaluate in a piece of code. As a human, you could immediately tell whether a set of inputs and outputs pass the criterion, but you can't write test code to capture that reasoning.
 
 For such complex cases, we can use an LLM to act as an evaluator, an [LLM-as-a-Judge](/docs/llm-analytics/evaluations#llm-as-a-judge-evaluations). We can capture things like:
 
