@@ -42,7 +42,7 @@ Once you're ready, you ship your agent to production and start rolling it out to
 How you tested the agent locally is a lot different than how people use it in production, and that leads to issues.
 
 Fixing the issues your users report starts by replicating the issue, attempting a fix, checking whether it is still there, and repeating. This works well, but it has a requirement: being able to reproduce the issue. 
-This isn't hard in theory because you just need to feed the same input to the agent, but the reality is different:
+This isn't hard in theory because you just need to feed the same input to the agent, but the reality is not so kind:
 
 1. The agent loop often makes multiple tool calls to fetch or mutate data
 2. You don't have the same data in your local environment as you do in production
