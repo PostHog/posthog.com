@@ -50,7 +50,7 @@ dayjs.extend(relativeTime)
 // Wrapper component that conditionally renders CopyMarkdownActionsDropdown based on whether the markdown URL exists
 const ConditionalMarkdownDropdown = ({ pageUrl }: { pageUrl: string | undefined }) => {
     // Check if path is in allowed content paths
-    const isAllowedPath = pageUrl && MARKDOWN_CONTENT_PATHS.some((path) => pageUrl.includes(path))
+    const isAllowedPath = pageUrl && MARKDOWN_CONTENT_PATHS.some((p) => pageUrl === p || pageUrl.startsWith(`${p}/`))
     const markdownExists = useMarkdownUrlExists(isAllowedPath ? pageUrl : '')
 
     // Don't render if path is not allowed, during loading, or if markdown doesn't exist

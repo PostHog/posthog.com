@@ -57,7 +57,7 @@ export const SEO = ({
             {seo.description && <meta name="description" content={seo.description} />}
             {seo.image && <meta name="image" content={seo.image} />}
             {<link rel="canonical" href={canonicalUrl ? canonicalUrl : seo.url} />}
-            {MARKDOWN_CONTENT_PATHS.some((p) => pathname.startsWith(p)) && (
+            {MARKDOWN_CONTENT_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`)) && (
                 <link rel="alternate" type="text/markdown" href={`${siteUrl}${pathname.replace(/\/$/, '')}.md`} />
             )}
 
