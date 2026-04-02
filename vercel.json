@@ -5,27 +5,42 @@
             "*": false
         }
     },
+    "headers": [
+        {
+            "source": "/docs/:path*",
+            "headers": [{ "key": "Vary", "value": "Accept" }]
+        },
+        {
+            "source": "/handbook/:path*",
+            "headers": [{ "key": "Vary", "value": "Accept" }]
+        }
+    ],
     "rewrites": [
         {
-            "source": "/community/profiles/:path*",
-            "destination": "/community/profiles/[id]/index.html"
+            "source": "/docs/:path*/",
+            "has": [{ "type": "header", "key": "accept", "value": "(?:.*text/markdown.*)" }],
+            "destination": "/docs/:path*.md"
         },
         {
-            "source": "/next-steps/(.*)",
-            "destination": "/next-steps/index.html"
+            "source": "/docs/:path*",
+            "has": [{ "type": "header", "key": "accept", "value": "(?:.*text/markdown.*)" }],
+            "destination": "/docs/:path*.md"
         },
         {
-            "source": "/questions/:path((?!topic).*)",
-            "destination": "/questions/[permalink]/index.html"
+            "source": "/handbook/:path*/",
+            "has": [{ "type": "header", "key": "accept", "value": "(?:.*text/markdown.*)" }],
+            "destination": "/handbook/:path*.md"
         },
         {
-            "source": "/careers/(.*)",
-            "destination": "/careers"
+            "source": "/handbook/:path*",
+            "has": [{ "type": "header", "key": "accept", "value": "(?:.*text/markdown.*)" }],
+            "destination": "/handbook/:path*.md"
         },
-        {
-            "source": "/posts/:path*",
-            "destination": "/posts/[slug]/index.html"
-        }
+        { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
+        { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
+        { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
+        { "source": "/careers/(.*)", "destination": "/careers" },
+        { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
         {
