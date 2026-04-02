@@ -60,7 +60,7 @@ You have now built an agent that is useful to many users, and while this is grea
 
 You also find yourself causing bugs that you had previously fixed. It is now time to find a better way to detect regressions so you can confidently fix new bugs and ship new functionality for your agent.
 
-You try to think back to what you know about software testing and remember integration tests, where you would spin up a whole service locally, make an HTTP request to the endpoint you're testing, and then check the response and perhaps some other state, such as the database. We can take lessons from this familiar flow and test our agent in a similar way.
+You think back to what you know about software testing and remember integration tests, where you spin up a whole service locally, make an HTTP request to the endpoint you're testing, and then check the response and perhaps some other state, such as the database. We can test our agent in a similar way.
 
 If we think of our agent like an endpoint, it takes an input and returns an output, with many things potentially happening in the middle of the agentic loop. The difference here is that a typical endpoint is deterministic in its response, whereas an agentic loop is not. For this reason, we can't have the same expectations in our tests.
 
