@@ -7,6 +7,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/hero_9791aaf820
 category: Engineering
 tags:
   - Engineering
