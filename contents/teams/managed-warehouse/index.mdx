@@ -21,3 +21,31 @@ template: team
     -   Product engineer
 -   Not a focus but should be usable by:
     -   All other engineers, e.g. they should have access to the data they need, and easily query it
+
+### Feature support by persona
+
+#### Data/Analytics Engineers
+
+**What works today:**
+- Duckling provisioning and event data bootstrapping
+- External source connector data landing in warehouse
+
+**What we need to ship:**
+- Tune compute allotment (scale up/down CPU and memory for workloads)
+- Connect to modern data warehouse tooling
+- Standard SQL interface (JDBC/ODBC drivers) for compatibility with existing pipelines
+- Role-based access control and credential management
+- Query performance monitoring and resource usage dashboards
+- Support for custom materialized views and incremental models
+
+---
+
+#### Data Analysts/Product Managers
+
+**What works today:**
+- SQL querying of PostHog event data in Duckling
+- "Golden tables" available in Product Analytics and Experiments
+
+**What we need to ship:**
+- Connect to BI tools (Metabase, Looker, Tableau, Power BI, Hex)
+- Connect to data modeling tools (dbt)
