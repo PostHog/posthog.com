@@ -41,9 +41,9 @@ export const experiments = {
             imgClasses: 'rounded-t-md shadow-2xl',
         },
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_light_465bac8937.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_04_01_at_14_21_27_96d1375a92.png',
             srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_dark_399c2187ea.png',
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_04_01_at_14_24_58_04e669df5a.png',
             alt: 'Experiment results',
             classes: 'justify-center items-end px-4 @lg:px-6',
             imgClasses: 'rounded-t-md shadow-2xl',
@@ -191,7 +191,7 @@ export const experiments = {
                 'Conversion funnels or trends, secondary metrics, and range for statistical significance. You can also use a primary or secondary metric from a data warehouse table.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_09_at_11_59_57_265b164241.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_04_02_at_09_41_55_b0364113d7.png',
                     alt: 'Customizable metrics',
                     // stylize: true,
                     shadow: true,
