@@ -1283,7 +1283,6 @@ export interface SiteSettings {
 const isLabel = (item: any) => !item?.url && item?.name
 
 export const isAprilFirst = () => {
-    return true
     const now = new Date()
     return now.getMonth() === 3 && now.getDate() === 1
 }
