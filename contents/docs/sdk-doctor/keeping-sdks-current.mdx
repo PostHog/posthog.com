@@ -58,6 +58,7 @@ Even after you've deployed an updated version of `posthog-js`, some users may co
 - **Service workers** that cache your app's assets may continue serving an old bundle until the service worker itself is updated.
 - **ISP and/or corporate proxy caching** can intercept and serve stale responses before they reach the browser.
 - **Browser extensions** may intercept or modify network requests in ways that prevent updates from loading.
+- **An incorrectly configured reverse proxy** can prevent the latest SDK version from being used, by improperly caching it. 
 
 One effective way to prevent CDN and proxy caching from impacting the PostHog web SDK HTML snippet is to [deploy a reverse proxy](/docs/advanced/proxy). Our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) sets a cache header of 60 seconds. You can also [roll your own reverse proxy](/docs/advanced/proxy#deploy-your-own-proxy) for full control.
 
