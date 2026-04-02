@@ -220,6 +220,9 @@ export const launchdarkly = {
         logs: {
             available: true, // https://launchdarkly.com/docs/home/observability/logs
         },
+        web_analytics: {
+            available: false,
+        },
     },
     platform: {
         deployment: {

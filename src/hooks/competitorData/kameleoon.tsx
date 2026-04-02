@@ -20,7 +20,7 @@ export const kameleoon = {
             },
         },
         experiments: {
-            available: 'Enterprise',
+            available: true,
             features: {
                 funnel_tests: false,
                 no_code_experiments: true,
@@ -52,6 +52,9 @@ export const kameleoon = {
         surveys: {
             available: true,
         },
+        web_analytics: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
@@ -61,6 +64,7 @@ export const kameleoon = {
         pricing: {
             self_serve: false,
             transparent_pricing: false,
+            free_tier: false,
         },
         developer: {
             api: true,
