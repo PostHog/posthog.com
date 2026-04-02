@@ -152,6 +152,33 @@ You can then just call the `"next"` URL to get the next set of results.
 
 - By default, the PostHog API returns results from the last project you visited in the UI. To override this behavior, you can pass in your project token as a query parameter in the request like `api/event/?token=my_project_token`.
 
+## OAuth token responses
+
+When you build OAuth integrations with PostHog, the token endpoint (`/oauth/token/`) returns region metadata that helps your application determine the correct API endpoints:
+
+```json
+{
+  "access_token": "pha_...",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "phr_...",
+  "scope": "read write",
+  "posthog_region": "us",
+  "posthog_base_url": "https://us.posthog.com"
+}
+```
+
+| Field | Description |
+|-------|-------------|
+| `posthog_region` | The PostHog cloud region: `us` for US Cloud or `eu` for EU Cloud |
+| `posthog_base_url` | The base URL for API requests (e.g., `https://us.posthog.com` or `https://eu.posthog.com`) |
+
+Use `posthog_base_url` as the base for all API calls to ensure requests go to the correct region.
+
+> These fields are only included for US and EU cloud deployments. Self-hosted instances don't include region metadata since they use a single, known endpoint.
+
+The OAuth authorization server metadata endpoint (`/.well-known/oauth-authorization-server`) also includes `posthog_region` for cloud deployments. This lets clients discover the region before starting the OAuth flow.
+
 ## GitHub secret scanning
 
 PostHog partners with GitHub to automatically detect exposed API keys in public repositories. When GitHub detects a leaked key, we take immediate action:
