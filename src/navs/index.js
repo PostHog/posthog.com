@@ -5604,6 +5604,7 @@ export const docsMenu = {
                     },
                 },
                 {
+<<<<<<< HEAD
                     name: 'Human reviews',
                     url: '/docs/llm-analytics/human-reviews',
                     icon: 'IconPerson',
@@ -5614,6 +5615,15 @@ export const docsMenu = {
                     },
                 },
                 {
+||||||| 8d21fab3f
+=======
+                    name: 'Trace Reviews',
+                    url: '/docs/llm-analytics/trace-reviews',
+                    icon: 'IconCheckCircle',
+                    color: 'green',
+                },
+                {
+>>>>>>> master
                     name: 'Prompt management',
                     url: '/docs/llm-analytics/prompts',
                     icon: 'IconPencil',
