@@ -421,6 +421,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/tooling': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1000,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/code': {
         size: {
             min: {

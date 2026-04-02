@@ -411,7 +411,11 @@ export const UnderstandUsageSlide = () => {
                 </div>
                 <div>
                     <p className="text-secondary text-sm">
-                        Work smarter with <IconSparkles className="size-4 text-purple inline-block" />{' '}
+                        How we analyze data and build products{' '}
+                        <Link to="/tooling" state={{ newWindow: true }} className="font-semibold">
+                            has changed a lot
+                        </Link>
+                        . Work smarter with <IconSparkles className="size-4 text-purple inline-block" />{' '}
                         <Link to="/ai" state={{ newWindow: true }} className="font-semibold">
                             PostHog AI
                         </Link>{' '}
