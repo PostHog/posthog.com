@@ -27,11 +27,17 @@ This is also useful if your releases fall outside normal working hours. For exam
    - Select **Add condition** to append rollout conditions to your flag at a scheduled time.
    - Select **Update variants** to update the variant keys, descriptions, payloads, or rollouts.
 4. Select the **Date and time** of your scheduled change using the date picker.
+<<<<<<< HEAD
 5. Optionally, use the **Repeats** dropdown to set a recurrence interval:
    - **Daily**, **Weekly**, **Monthly**, or **Yearly** for fixed intervals
    - **Custom (cron)** for advanced scheduling using cron expressions
 
    When a repeat option is selected, an **Ends** date picker appears to set an optional end date for the recurring schedule.
+||||||| 9ed93c692
+5. Optionally, use the **Repeats** dropdown to set a recurrence interval. You can choose from **Daily**, **Weekly**, **Monthly**, **Yearly**, or **Custom (cron)** for flexible scheduling with a cron expression. When a repeat option is selected, an **Ends** date picker appears to set an optional end date for the recurring schedule.
+=======
+5. Optionally, use the **Repeats** dropdown to set a recurrence interval. You can choose from **Daily**, **Weekly**, **Monthly**, **Yearly**, or **Custom (cron)** for flexible scheduling with a cron expression. When the change type is **Change status**, the dropdown also includes **Paired schedules** presets (see [below](#paired-schedule-presets)). When a repeat option is selected, an **Ends** date picker appears to set an optional end date for the recurring schedule.
+>>>>>>> master
 6. Click **Schedule**.
 
 Scheduled changes appear below the form, grouped into an **Active & upcoming** section and a collapsible **History** section.
@@ -43,6 +49,18 @@ Scheduled changes appear below the form, grouped into an **Active & upcoming** s
   classes="rounded"
 />
 
+## Edit a scheduled change
+
+To edit an existing scheduled change, click the **pencil icon** on any active schedule card. This opens a modal where you can modify:
+
+- **Date and time** or **next run** for the scheduled change
+- **Repeat interval** – switch between one-time, daily, weekly, monthly, yearly, or custom cron
+- **Cron expression** – when using custom cron scheduling
+- **End date** – for recurring schedules
+- **Enable/disable status** – for **Change status** schedules
+
+Only changed fields are saved. Editing a paused schedule does not automatically resume it.
+
 ## Recurring schedules
 
 Recurring schedules repeat a scheduled change at a regular interval. You can choose from daily, weekly, monthly, or yearly recurrence, or use a custom cron expression for more flexible scheduling. You can optionally set an end date for any recurring schedule.
@@ -53,6 +71,22 @@ Recurring schedules are supported for the following change types:
 - **Update variants** – replace the variant configuration on each recurrence. Each run overwrites the previous variant setup, so any manual changes made between runs are replaced.
 
 Recurring schedules are **not** supported for the **Add condition** change type because it appends a new condition on each run, which creates duplicates.
+
+### Paired schedule presets
+
+When the change type is **Change status**, the **Repeats** dropdown includes a **Paired schedules** option group. Selecting a paired preset creates two complementary cron schedules – one to enable the flag and one to disable it – in a single action.
+
+The available presets are:
+
+| Preset             | Enable schedule                  | Disable schedule                  |
+| ------------------ | -------------------------------- | --------------------------------- |
+| **Business hours** | `0 9 * * 1-5` (9:00 AM, Mon–Fri) | `0 17 * * 1-5` (5:00 PM, Mon–Fri) |
+| **Weekdays only**  | `0 0 * * 1` (midnight Monday)    | `59 23 * * 5` (11:59 PM Friday)   |
+| **Custom pair**    | User-defined cron                | User-defined cron                 |
+
+With **Custom pair**, you provide your own enable and disable cron expressions.
+
+After selecting a preset, click **Schedule pair** to create both schedules. You can optionally set an **Ends** date to limit how long the paired schedules run.
 
 ### Custom cron expressions
 
