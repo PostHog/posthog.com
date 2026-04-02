@@ -210,7 +210,7 @@ const AIDemos = () => {
 
     return (
         <>
-            <h3 className="mt-0">PostHog AI demos</h3>
+            <h3 className="mt-0 mb-4 text-lg">PostHog AI demos</h3>
 
             <div className="flex flex-col @2xl:flex-row gap-8">
                 <div className="@2xl:flex-[0_0_350px]">
@@ -302,7 +302,7 @@ export default function ProductsTest(): JSX.Element {
                 image="/images/og/default.png"
             />
             <Editor maxWidth={900}>
-                <div className="space-y-10 font-rounded [&_p]:text-base [&_li]:text-base">
+                <div className="space-y-10 [&_p]:text-base [&_li]:text-base">
                     {/* Hero */}
                     <header className="space-y-4 text-center @xl:text-left">
                         <CloudinaryImage
@@ -379,7 +379,7 @@ export default function ProductsTest(): JSX.Element {
                                         )}
                                     </aside>
                                 )}
-                                <p className="text-[15px] leading-relaxed w-full mb-0">{section.description}</p>
+                                <p className="text-[15px] leading-relaxed w-full mt-2 mb-0">{section.description}</p>
                             </div>
 
                             <div
