@@ -54,7 +54,7 @@ PostHog's [LLM analytics](/docs/llm-analytics/start-here) is one way to build th
 
 With the tracing mechanism the observability tool provides, you can now see how your agent is behaving in the wild. You find bugs proactively and fix them before users start complaining about them. There is, however, a big caveat: you now spend almost all of your working hours looking at traces.
 
-## Your agent has grown
+## Your agent gets popular, tests get automated
 
 You have now built an agent that is useful to many users, and while this is great, you want to win back some time to work on things other than observing your agent and fixing bugs.
 
