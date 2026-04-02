@@ -120,7 +120,7 @@ Once your evaluators are running on live production data, you can either review 
 
 Now we have evaluators running offline during development and online in production. That gets us much closer, but one gap still remains. While you now cover the infinite space of inputs, you still only evaluate the things that you have defined as evaluators. You're probably missing many evaluators that you haven't thought about.
 
-## Building evaluations by manually reviewing single traces
+## Building evaluations by manually reviewing traces
 
 Our set of evaluators needs to evolve over time. We need to tweak evaluators when needed, but more importantly, we need to add new evaluators over time to catch more potential problems and protect ourselves against regressions. If we were simply able to think hard enough about which evaluators we are missing, we could have defined them already.
 
