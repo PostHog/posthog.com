@@ -110,7 +110,7 @@ That still leaves one major problem. We now have tests for our agent, just like 
 
 The offline evaluations we run while developing our agent and in our CI pipeline only capture the inputs we have defined in our tests. In reality, users can input a near-infinite range of possibilities. We need a way to capture those inputs, check the equivalent outputs, and run our evaluators on them too. This type of evaluation that runs on production traces coming in is known as "online".
 
-Running your evaluators on all production traces sounds expensive, because it is, especially if you depend solely on LLM-as-a-Judge evaluators. This is why it's important to use code-based evaluators where possible. At PostHog, code-based evaluators for online evaluations use [Hog](/docs/llm-analytics/evaluations#code-based-evaluations-hog). You can't, however, only depend on code-based evaluators, so you can also:
+Running your evaluators on all production traces sounds expensive, because it is, especially if you depend on LLM-as-a-Judge evaluators. This is why it's important to use code-based evaluators where possible. At PostHog, code-based evaluators for online evaluations use [Hog](/docs/llm-analytics/evaluations#code-based-evaluations-hog). You can't, however, only depend on code-based evaluators, so you can also:
 
 1. Use a cheaper LLM-as-a-Judge model that can still capture the intricacies of what you're evaluating
 2. Filter the traces on which you run certain evaluators, for example by feature
