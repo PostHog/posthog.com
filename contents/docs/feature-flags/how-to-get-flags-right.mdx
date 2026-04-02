@@ -13,7 +13,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 - [Resolve identity before evaluating flags](#resolve-identity-before-evaluating-flags) – `identify()` must happen before flag evaluation, or the hash uses the wrong ID. This is the most common input problem.
 - [Evaluate once, not continuously](#evaluate-once-not-continuously) – a flag is a one-time signal. Record the result. Re-evaluate only on meaningful state changes.
 - [Evaluate where the data lives](#evaluate-where-the-data-lives) – if the data is on your server, evaluate there. The further the flag is from the data, the more async complexity.
-- [Server-side local evaluation is the recommended default](#server-side-local-evaluation-is-the-recommended-default) – explicit inputs, your data right there, no workarounds.
+- [Server-side local evaluation is the recommended default](#server-side-local-evaluation-is-the-recommended-default).
 - [Have the value before you need it](#have-the-value-before-you-need-it) – client-side evaluation is async. [Bootstrap](/docs/feature-flags/bootstrapping) to eliminate the gap.
 - [`undefined` is not "flag is off" nor `false`](#undefined-is-not-false) – it means "not evaluated yet."
 - [Choose a flag type intentionally](#choose-a-flag-type-intentionally) – client, server, or both should be a deliberate decision, not a default.
