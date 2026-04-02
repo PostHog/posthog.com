@@ -177,6 +177,15 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 }
                 slug = `${config.pathPrefix}${slug}`
             }
+            // Korean landing page: ensure predictable slug for contents/ko/index.mdx
+            if (parent.sourceInstanceName === 'contents' && parent.relativePath === 'ko/index.mdx') {
+                slug = '/ko'
+            }
+        }
+        // Fallback: set /ko slug by file path in case parent.sourceInstanceName is missing
+        const parentFile = parent as { relativePath?: string }
+        if (parentFile?.relativePath === 'ko/index.mdx') {
+            slug = '/ko'
         }
 
         createNodeField({
@@ -184,6 +193,10 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             name: `slug`,
             value: replacePath(slug),
         })
+
+        if (slug === '/ko') {
+            createNodeField({ node, name: 'isKoreanLanding', value: true })
+        }
 
         if (slug) {
             const pageViews = await cache.get(PAGEVIEW_CACHE_KEY)

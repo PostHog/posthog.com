@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import OSTable from 'components/OSTable'
 import { useCustomers } from 'hooks/useCustomers'
 import CTA from 'components/Home/CTA'
-import { IconArrowRight, IconArrowUpRight, IconInfo, IconRefresh } from '@posthog/icons'
+import { IconArrowRight, IconArrowUpRight, IconGlobe, IconInfo, IconRefresh } from '@posthog/icons'
 import {
     Digit0,
     Digit1,
@@ -29,7 +29,7 @@ import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
 import MDXEditor from 'components/MDXEditor'
 import { graphql, useStaticQuery } from 'gatsby'
-import SEO from 'components/seo'
+import SEO, { HOME_KO_LANGUAGE_ALTERNATES } from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { PRODUCT_COUNT, APP_COUNT } from '../../../constants'
@@ -1454,10 +1454,12 @@ export default function Home() {
     return (
         <>
             <SEO
+                lang="en"
                 title="PostHog – We make dev tools for product engineers"
                 updateWindowTitle={false}
                 description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
                 image="/images/og/default.png"
+                languageAlternates={HOME_KO_LANGUAGE_ALTERNATES}
             />
             <MDXEditor
                 jsxComponentDescriptors={jsxComponentDescriptors}
