@@ -90,7 +90,7 @@ For such complex cases, we can use an LLM to act as an evaluator, an [LLM-as-a-J
 
 The possibilities for LLM-as-a-Judge are theoretically infinite. The danger of this type of evaluator is that it is not deterministic and could return different results for the same set of inputs and outputs. It is also sensitive to changes in the judge model. For these reasons, the LLM-as-a-Judge prompt needs to be properly built to remove as much ambiguity as possible.
 
-The prompt should be very specific about what it is evaluating. It should also contain a couple of simple examples that capture different gotchas, if possible. Finally, it is preferable to return a boolean representing the test success instead of a range of numbers, since it reduces ambiguity and leads to a clearer set of test results.
+The prompt should be specific about what it is evaluating. It should contain a couple of simple examples that capture different gotchas, if possible. Finally, it is preferable to return a boolean representing the test success instead of a range of numbers, since it reduces ambiguity and leads to a clearer set of test results.
 
 LLM-as-a-Judge evaluators have a higher cost than deterministic code-based evaluators because they require an LLM call. For this reason, it is better to use code-based evaluators whenever the test case can be captured through them.
 
