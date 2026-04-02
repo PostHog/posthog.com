@@ -223,6 +223,10 @@ export const CodeBlock = ({
     React.useEffect(() => {
         if (posthog?.isFeatureEnabled('direct-to-eu-cloud')) {
             setRegion('eu')
+            const euIndex = languages.findIndex((lang) => lang.file?.toLowerCase() === 'eu')
+            if (euIndex >= 0) {
+                setSelectedIndex(euIndex)
+            }
         }
     }, [posthog])
 
