@@ -57,7 +57,8 @@ Here is a overview that shows which of our PMs currently works with which team:
 -   <SmallTeam slug="workflows" />
 -   <SmallTeam slug="batch-exports" />*
 -   Endpoints
--   Logs
+-   <SmallTeam slug="logs" />
+-   <SmallTeam slug="llm-analytics" />
 
 *light support
 
@@ -76,7 +77,6 @@ Here is a overview that shows which of our PMs currently works with which team:
 <legend>Teams with no PM currently</legend>
 
 -   <SmallTeam slug="customer-analytics" />
--   <SmallTeam slug="llm-analytics" />
 
 </fieldset>
 
