@@ -124,7 +124,7 @@ Now we have evaluators running offline during development and online in producti
 
 Our set of evaluators needs to evolve over time. We need to tweak evaluators when needed, but more importantly, we need to add new evaluators over time to catch more potential problems and protect ourselves against regressions. If we were simply able to think hard enough about which evaluators we are missing, we could have defined them already.
 
-When we can't just think about them out of thin air, we can go back to manually reviewing traces. By now, though, we have way too many to be able to look at all of them, so we need an efficient way to create a strong set of traces to review, and possibly create new evaluators from.
+We sort of go back to the beginning for this by manually reviewing traces. By now, though, we have too many to look at all of them, so we need an efficient way to create a strong set of traces to review, and create new evaluators from.
 
 Here are a few ideas:
 
