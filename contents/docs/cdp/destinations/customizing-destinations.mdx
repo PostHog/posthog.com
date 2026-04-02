@@ -61,6 +61,22 @@ Or to construct a custom JSON payload that conforms to an existing API specifica
 
 > You can see the full capabilities of templating with our Hog programming language in the [Hog documentation](/docs/hog)
 
+### Using Liquid templating
+
+Destination templates also support [Liquid templating](https://liquidjs.com/filters/overview.html). This is useful for transforming values before sending them to a destination.
+
+<CalloutBox icon="IconInfo" title="Tip: Converting strings to numbers" type="fyi">
+
+Some destinations (like Google Ads) expect numeric values. If your value is stored as a string, you can convert it using Liquid's `plus` filter:
+
+```liquid
+{% assign conversionValue = conversionValue | plus: 0 %}{{ conversionValue }}
+```
+
+This forces the value to be treated as a number, which is required when a destination's API rejects string-encoded numeric fields.
+
+</CalloutBox>
+
 ### Global object
 
 Below is the structure of the global variables available whenever templating a destination.
