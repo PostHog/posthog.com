@@ -245,6 +245,7 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+<<<<<<< HEAD
 ### Reverse proxy management
 
 **Prompt:** "Do I have a reverse proxy configured?"
@@ -267,6 +268,23 @@ The agent will use the `proxy-retry` tool to restart DNS verification and certif
 
 The agent will use the `proxy-delete` tool to delete a reverse proxy record and clean up associated DNS and SSL resources.
 
+||||||| ae41412b3
+=======
+### CDP function management
+
+**Prompt:** "Create a Slack destination that sends a message when users sign up"
+
+The agent will use the `cdp-function-templates-list` tool to find the Slack template, then use `cdp-functions-create` to create a destination function with the appropriate inputs and filters for the signup event.
+
+**Prompt:** "List all my destination functions and show which ones are enabled"
+
+The agent will use the `cdp-functions-list` tool with a type filter to return all destinations with their enabled status.
+
+**Prompt:** "Test my webhook destination with a mock purchase event"
+
+The agent will use the `cdp-functions-invocations-create` tool to send a mock event payload to the function and return the execution logs.
+
+>>>>>>> master
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
