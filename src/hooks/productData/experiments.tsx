@@ -191,7 +191,7 @@ export const experiments = {
                 'Conversion funnels or trends, secondary metrics, and range for statistical significance. You can also use a primary or secondary metric from a data warehouse table.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_09_at_11_59_57_265b164241.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_04_02_at_09_41_55_b0364113d7.png',
                     alt: 'Customizable metrics',
                     // stylize: true,
                     shadow: true,
