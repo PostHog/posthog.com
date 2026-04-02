@@ -64,3 +64,27 @@ Here are the common tools the Sales, CS, and Onboarding teams use daily.
 - <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#customer-churn</PrivateLink> - discussion of potential and actual customer churn.
 - <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#changelog</PrivateLink> - product launches.
 - <PrivateLink url='https://posthog.slack.com/archives/C0975UEGHT5'>#today-i-learned</PrivateLink> - where we share our learnings.
+
+### Homemade GTM tools
+
+These are internal tools built by PostHog team members to help with GTM workflows.
+
+| Tool | Description | Source | Owner |
+|------|-------------|--------|-------|
+| [DemoHog](https://demohog.vercel.app/) | Sample data for demo calls | [GitHub](https://github.com/PostHog/demohog) | Sachin |
+| [HogFlix](https://hogflix.dev/) | Demo app | [GitHub](https://github.com/PostHog/hogflix3001) | Sebastian |
+| [Hedgeground](https://github.com/PostHog/hedgeground) | Demo app, LLM focused | [GitHub](https://github.com/PostHog/hedgeground) | Christophe |
+| [Wheel of Names](https://reinvented-won.vercel.app/) | Randomly pick a person | | Chris M |
+| [Academy](https://posthog-academy.vercel.app/) | Training platform | | Andy P |
+| [QuoteHog](https://quotehog.vercel.app) | Create quotes for customers | [GitHub](https://github.com/PostHog/quotehog) | Abhischek |
+| [HogSpy](https://github.com/PostHog/hogspy) | Chrome extension for extra debugging info about PH usage | [GitHub](https://github.com/PostHog/hogspy) | Joshua O |
+| [Learn](https://github.com/PostHog/learn) | Prompts for PostHog Code on how to use PH effectively | [GitHub](https://github.com/PostHog/learn) | Charles |
+| [Yet Another Hog Spy](https://github.com/PostHog/yahe) | Chrome extension to identify SDKs used on a website | [GitHub](https://github.com/PostHog/yahe) | Fernando G |
+| [WatchTower](https://gotwatchtower.com/) | Alerts for your accounts | [GitHub](https://github.com/PostHog/hogtower) | Steven T |
+| [Blake Bot](https://github.com/PostHog/blake-bot) | Slack bot to retrieve customer data | [GitHub](https://github.com/PostHog/blake-bot) | Sean O |
+| [Vitally MCP Server](https://github.com/PostHog/vitally-mcp-server) | Expose Vitally data over MCP (has public version) | [GitHub](https://github.com/PostHog/vitally-mcp-server) | Tyler |
+| [Claude Skills](https://github.com/PostHog/skills) | Misc skills for retrieving data | [GitHub](https://github.com/PostHog/skills) | |
+| [Stakeholder Mapping](https://stakeholdermap.vercel.app) | Visualize accounts from Vitally data | [GitHub](https://github.com/PostHog/tam-stakeholder-map) | Leo |
+| [Forage](https://github.com/PostHog/forage) | Outbound sales tooling | [GitHub](https://github.com/PostHog/forage) | Alex M |
+| [SDK Scanner](https://sdkscanner.posthog.dev/) | Spy on tools used by customers | | Tyler |
+| [MD CRM](https://github.com/PostHog/md-crm) | Markdown CRM | [GitHub](https://github.com/PostHog/md-crm) | Christophe |
