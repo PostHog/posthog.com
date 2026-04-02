@@ -68,15 +68,35 @@ Example for Cursor (add to `.cursor/mcp.json`):
 
 <details>
 
-<summary>Filtering available tools by feature?</summary>
+<summary>Filtering available tools?</summary>
 
-You can limit which tools are available by adding a `features` query parameter to the MCP URL. If no features are specified, all tools are available. When features are specified, only tools matching those features are exposed.
+Add query parameters to the MCP URL to limit which tools are available. Without filtering parameters, all tools are available.
+
+### Filter by feature category
+
+Use the `features` parameter to expose tools from specific feature categories:
 
 ```text
 https://mcp.posthog.com/mcp?features=flags,dashboards,insights
 ```
 
-Available features:
+### Filter by tool name
+
+Use the `tools` parameter to expose specific tools by name:
+
+```text
+https://mcp.posthog.com/mcp?tools=dashboard-get,execute-sql
+```
+
+### Combining features and tools
+
+When you provide both `features` and `tools`, they combine as a union — a tool is exposed if it matches a feature category **or** its name is in the tools list. This lets you select a feature group and add individual tools from other categories:
+
+```text
+https://mcp.posthog.com/mcp?features=flags&tools=dashboard-get,execute-sql
+```
+
+### Available features
 
 | Feature | Description |
 |---------|-------------|
@@ -110,7 +130,7 @@ Available features:
 | `surveys` | [Survey management](/docs/surveys) |
 | `workflows` | [Workflow management](/docs/cdp) |
 
-> **Note:** Hyphens and underscores are treated as equivalent in feature names (e.g., `error-tracking` and `error_tracking` both work).
+> **Note:** Hyphens and underscores are interchangeable in feature and tool names (e.g., `error-tracking` and `error_tracking` both work). Tool names follow the format `{feature}-{action}`, like `dashboard-get`, `feature-flag-create`, or `execute-sql`. See the [Available tools](#available-tools) section for the full list.
 
 Example for Cursor (add to `.cursor/mcp.json`):
 
