@@ -245,7 +245,6 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
-<<<<<<< HEAD
 ### Annotation management
 
 **Prompt:** "Create an annotation for today saying 'Deployed v2.5 with new checkout flow'"
@@ -334,8 +333,6 @@ The agent will use `persons-list` to find the person by distinct_id, then use `p
 
 The agent will use `persons-property-delete` to remove the specified property from the person.
 
-||||||| ae41412b3
-=======
 ### CDP function management
 
 **Prompt:** "Create a Slack destination that sends a message when users sign up"
@@ -350,7 +347,7 @@ The agent will use the `cdp-functions-list` tool with a type filter to return al
 
 The agent will use the `cdp-functions-invocations-create` tool to send a mock event payload to the function and return the execution logs.
 
->>>>>>> master
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
