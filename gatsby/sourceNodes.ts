@@ -718,166 +718,160 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     async function sourceGithubNodes() {
-        const githubHeaders: HeadersInit | undefined = process.env.GITHUB_API_KEY
-            ? { Authorization: `token ${process.env.GITHUB_API_KEY}` }
-            : undefined
+        if (!process.env.GITHUB_API_KEY) return
 
-        if (process.env.GITHUB_API_KEY) {
-            try {
-                const fetchIssuesPromise = fetch(
-                    'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5',
-                    {
-                        headers: githubHeaders,
-                    }
-                ).then((res) => res.json())
+        const githubHeaders: HeadersInit = { Authorization: `token ${process.env.GITHUB_API_KEY}` }
 
-                const fetchPullsPromise = fetch(
-                    'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5',
-                    {
-                        headers: githubHeaders,
-                    }
-                ).then((res) => res.json())
-
-                const fetchIntegrationsPromise = fetch(
-                    'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json',
-                    { headers: githubHeaders }
-                ).then((res) => res.json())
-
-                const createGitHubStatsNode = async (owner, repo) => {
-                    const [repoStats, contributors, commits] = await Promise.all([
-                        fetch(`https://api.github.com/repos/${owner}/${repo}`, {
-                            headers: githubHeaders,
-                        }).then((res) => res.json()),
-                        fetch(`https://api.github.com/repos/${owner}/${repo}/contributors?per_page=1`, {
-                            headers: githubHeaders,
-                        }).then((res) => {
-                            const link = parseLinkHeader(res.headers.get('link'))
-                            const number = link?.last?.page
-                            return number && Number(number)
-                        }),
-                        fetch(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`, {
-                            headers: githubHeaders,
-                        }).then((res) => {
-                            const link = parseLinkHeader(res.headers.get('link'))
-                            const number = link?.last?.page
-                            return number && Number(number)
-                        }),
-                    ])
-                    const { stargazers_count, forks_count } = repoStats
-
-                    const data = {
-                        owner,
-                        repo,
-                        stars: stargazers_count,
-                        forks: forks_count,
-                        commits,
-                        contributors,
-                    }
-
-                    const node = {
-                        id: createNodeId(`github-stats-${repo}`),
-                        parent: null,
-                        children: [],
-                        internal: {
-                            type: `GitHubStats`,
-                            contentDigest: createContentDigest(data),
-                        },
-                        ...data,
-                    }
-                    createNode(node)
-                }
-
-                const [postHogIssues, postHogPulls, integrations] = await Promise.all([
-                    fetchIssuesPromise,
-                    fetchPullsPromise,
-                    fetchIntegrationsPromise,
-                    createGitHubStatsNode('posthog', 'posthog'),
-                    createGitHubStatsNode('posthog', 'posthog.com'),
-                ]).then(([issues, pulls, integrations]) => [issues, pulls, integrations])
-
-                postHogIssues.forEach((issue) => {
-                    const { html_url, title, number, user, comments, reactions, labels, body, updated_at } = issue
-                    const data = {
-                        url: html_url,
-                        title,
-                        number,
-                        comments,
-                        user: {
-                            username: user?.login,
-                            avatar: user?.avatar_url,
-                            url: user?.html_url,
-                        },
-                        reactions,
-                        labels,
-                        body,
-                        updated_at,
-                    }
-                    if (data.reactions) {
-                        data.reactions.plus1 = data.reactions['+1']
-                        data.reactions.minus1 = data.reactions['-1']
-                    }
-                    const node = {
-                        id: createNodeId(`posthog-issue-${title}`),
-                        parent: null,
-                        children: [],
-                        internal: {
-                            type: `PostHogIssue`,
-                            contentDigest: createContentDigest(data),
-                        },
-                        ...data,
-                    }
-                    createNode(node)
-                })
-
-                postHogPulls.forEach((issue) => {
-                    const { html_url, title, number, user, labels, body, updated_at } = issue
-                    const data = {
-                        url: html_url,
-                        title,
-                        number,
-                        user: {
-                            username: user?.login,
-                            avatar: user?.avatar_url,
-                            url: user?.html_url,
-                        },
-                        labels,
-                        body,
-                        updated_at,
-                    }
-
-                    const node = {
-                        id: createNodeId(`posthog-pull-${title}`),
-                        parent: null,
-                        children: [],
-                        internal: {
-                            type: `PostHogPull`,
-                            contentDigest: createContentDigest(data),
-                        },
-                        ...data,
-                    }
-                    createNode(node)
-                })
-
-                integrations.forEach((integration) => {
-                    const { name, url, ...other } = integration
-                    const node = {
-                        id: createNodeId(`integration-${name}`),
-                        parent: null,
-                        children: [],
-                        internal: {
-                            type: `Integration`,
-                            contentDigest: createContentDigest(integration),
-                        },
-                        url: url.replace('https://posthog.com', ''),
-                        name,
-                        ...other,
-                    }
-                    createNode(node)
-                })
-            } catch (error) {
-                console.warn('[sourceGithubNodes] GitHub ingestion failed, continuing without GitHub nodes', error)
+        const fetchIssuesPromise = fetch(
+            'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5',
+            {
+                headers: githubHeaders,
             }
+        ).then((res) => res.json())
+
+        const fetchPullsPromise = fetch(
+            'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5',
+            {
+                headers: githubHeaders,
+            }
+        ).then((res) => res.json())
+
+        const fetchIntegrationsPromise = fetch(
+            'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json',
+            { headers: githubHeaders }
+        ).then((res) => res.json())
+
+        const createGitHubStatsNode = async (owner, repo) => {
+            const [repoStats, contributors, commits] = await Promise.all([
+                fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+                    headers: githubHeaders,
+                }).then((res) => res.json()),
+                fetch(`https://api.github.com/repos/${owner}/${repo}/contributors?per_page=1`, {
+                    headers: githubHeaders,
+                }).then((res) => {
+                    const link = parseLinkHeader(res.headers.get('link'))
+                    const number = link?.last?.page
+                    return number && Number(number)
+                }),
+                fetch(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`, {
+                    headers: githubHeaders,
+                }).then((res) => {
+                    const link = parseLinkHeader(res.headers.get('link'))
+                    const number = link?.last?.page
+                    return number && Number(number)
+                }),
+            ])
+            const { stargazers_count, forks_count } = repoStats
+
+            const data = {
+                owner,
+                repo,
+                stars: stargazers_count,
+                forks: forks_count,
+                commits,
+                contributors,
+            }
+
+            const node = {
+                id: createNodeId(`github-stats-${repo}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `GitHubStats`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(node)
         }
+
+        const [postHogIssues, postHogPulls, integrations] = await Promise.all([
+            fetchIssuesPromise,
+            fetchPullsPromise,
+            fetchIntegrationsPromise,
+            createGitHubStatsNode('posthog', 'posthog'),
+            createGitHubStatsNode('posthog', 'posthog.com'),
+        ]).then(([issues, pulls, integrations]) => [issues, pulls, integrations])
+
+        postHogIssues.forEach((issue) => {
+            const { html_url, title, number, user, comments, reactions, labels, body, updated_at } = issue
+            const data = {
+                url: html_url,
+                title,
+                number,
+                comments,
+                user: {
+                    username: user?.login,
+                    avatar: user?.avatar_url,
+                    url: user?.html_url,
+                },
+                reactions,
+                labels,
+                body,
+                updated_at,
+            }
+            if (data.reactions) {
+                data.reactions.plus1 = data.reactions['+1']
+                data.reactions.minus1 = data.reactions['-1']
+            }
+            const node = {
+                id: createNodeId(`posthog-issue-${title}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `PostHogIssue`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(node)
+        })
+
+        postHogPulls.forEach((issue) => {
+            const { html_url, title, number, user, labels, body, updated_at } = issue
+            const data = {
+                url: html_url,
+                title,
+                number,
+                user: {
+                    username: user?.login,
+                    avatar: user?.avatar_url,
+                    url: user?.html_url,
+                },
+                labels,
+                body,
+                updated_at,
+            }
+
+            const node = {
+                id: createNodeId(`posthog-pull-${title}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `PostHogPull`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(node)
+        })
+
+        integrations.forEach((integration) => {
+            const { name, url, ...other } = integration
+            const node = {
+                id: createNodeId(`integration-${name}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `Integration`,
+                    contentDigest: createContentDigest(integration),
+                },
+                url: url.replace('https://posthog.com', ''),
+                name,
+                ...other,
+            }
+            createNode(node)
+        })
 
         const extractIntroSection = (markdown: string): string => {
             const headingMatch = markdown.match(/^#{1,2}\s+/m)
@@ -914,86 +908,66 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             type: 'transformation' | 'destination' | 'source_webhook',
             generateSlug: (pipeline: any) => string
         ) => {
-            const response = await fetch(
+            const { results } = await fetch(
                 `https://us.posthog.com/api/public_hog_function_templates?type=${type}&limit=350`
-            )
-            if (!response.ok) {
-                console.warn(`[sourceGithubNodes] Failed loading ${type} templates: HTTP ${response.status}`)
-                return
-            }
-
-            const data = await response.json()
-            const results = Array.isArray(data?.results) ? data.results : []
-            if (results.length === 0) {
-                console.warn(`[sourceGithubNodes] No ${type} templates returned from public_hog_function_templates`)
-            } else {
-                console.info(`[sourceGithubNodes] Loaded ${results.length} ${type} templates`)
-            }
-
-            await Promise.allSettled(
+            ).then((res) => res.json())
+            await Promise.all(
                 results.map(async (pipeline) => {
-                    try {
-                        let additionalData = {}
+                    let additionalData = {}
 
-                        if (pipeline.id.startsWith('segment-')) {
-                            const cleanMarkdown = (markdown: string) => {
-                                return markdown
-                                    .replaceAll(/^---[\s\S]*?---/g, '') // Remove frontmatter
-                                    .replaceAll(/{%\s*.*?\s*%}/g, '') // Remove {% ... %}
-                                    .replaceAll(/{:.*?}/g, '') // Remove {: ... }
-                                    .replaceAll(/{{.*?}}/g, '') // Remove {{ ... }}
-                                    .replaceAll('Segment', 'PostHog')
-                                    .replaceAll('Connections > Catalog', 'Data pipelines')
-                                    .replaceAll('Catalog', 'Data pipelines')
-                                    .replaceAll(' (Actions)', '')
-                                    .replaceAll('segmentio', 'posthog')
-                                    .replaceAll(
-                                        /\[([^\]]+)\]\(https?:\/\/[^\/]*segment\.com[^)]*\)(\s*\{:.*?\})?/g,
-                                        '$1'
-                                    ) // Remove segment.com links completely, keeping only the link text
-                                    .replaceAll(/> \w+ ""/g, '')
-                                    .replaceAll(/^.*Both of these destinations receive data from PostHog.*$/gm, '') // Remove banner regarding the Actions-framework
-                                    .replaceAll(
-                                        /^.*(?:maintains this destination|maintained by|contact.*support|support.*team).*$/gm,
-                                        ''
-                                    ) // Remove lines about other companies maintaining destinations or contact support
-                                    .trim()
-                            }
-
-                            const response = await fetch(
-                                `https://raw.githubusercontent.com/posthog/segment-docs/refs/heads/develop/src/connections/destinations/catalog/${pipeline.id.replace(
-                                    'segment-',
+                    if (pipeline.id.startsWith('segment-')) {
+                        const cleanMarkdown = (markdown: string) => {
+                            return markdown
+                                .replaceAll(/^---[\s\S]*?---/g, '') // Remove frontmatter
+                                .replaceAll(/{%\s*.*?\s*%}/g, '') // Remove {% ... %}
+                                .replaceAll(/{:.*?}/g, '') // Remove {: ... }
+                                .replaceAll(/{{.*?}}/g, '') // Remove {{ ... }}
+                                .replaceAll('Segment', 'PostHog')
+                                .replaceAll('Connections > Catalog', 'Data pipelines')
+                                .replaceAll('Catalog', 'Data pipelines')
+                                .replaceAll(' (Actions)', '')
+                                .replaceAll('segmentio', 'posthog')
+                                .replaceAll(/\[([^\]]+)\]\(https?:\/\/[^\/]*segment\.com[^)]*\)(\s*\{:.*?\})?/g, '$1') // Remove segment.com links completely, keeping only the link text
+                                .replaceAll(/> \w+ ""/g, '')
+                                .replaceAll(/^.*Both of these destinations receive data from PostHog.*$/gm, '') // Remove banner regarding the Actions-framework
+                                .replaceAll(
+                                    /^.*(?:maintains this destination|maintained by|contact.*support|support.*team).*$/gm,
                                     ''
-                                )}/index.md`,
-                                { headers: githubHeaders }
-                            )
-                            let markdown = await response.text()
-                            if (response.status !== 200) markdown = ''
-                            markdown = cleanMarkdown(markdown)
-
-                            additionalData = {
-                                introSnippet: extractIntroSection(markdown),
-                                installationSnippet: extractGettingStartedSection(markdown),
-                            }
+                                ) // Remove lines about other companies maintaining destinations or contact support
+                                .trim()
                         }
 
-                        const slug = generateSlug(pipeline)
-                        const node = {
-                            id: createNodeId(`posthog-pipeline-${pipeline.id}`),
-                            internal: {
-                                type: 'PostHogPipeline',
-                                contentDigest: createContentDigest({ pipeline }),
-                            },
-                            pipelineId: pipeline.id,
-                            slug,
-                            type,
-                            ...pipeline,
-                            ...additionalData,
+                        const response = await fetch(
+                            `https://raw.githubusercontent.com/posthog/segment-docs/refs/heads/develop/src/connections/destinations/catalog/${pipeline.id.replace(
+                                'segment-',
+                                ''
+                            )}/index.md`,
+                            { headers: githubHeaders }
+                        )
+                        let markdown = await response.text()
+                        if (response.status !== 200) markdown = ''
+                        markdown = cleanMarkdown(markdown)
+
+                        additionalData = {
+                            introSnippet: extractIntroSection(markdown),
+                            installationSnippet: extractGettingStartedSection(markdown),
                         }
-                        createNode(node)
-                    } catch (error) {
-                        console.warn(`[sourceGithubNodes] Failed to process ${type} template ${pipeline?.id}`, error)
                     }
+
+                    const slug = generateSlug(pipeline)
+                    const node = {
+                        id: createNodeId(`posthog-pipeline-${pipeline.id}`),
+                        internal: {
+                            type: 'PostHogPipeline',
+                            contentDigest: createContentDigest({ pipeline }),
+                        },
+                        pipelineId: pipeline.id,
+                        slug,
+                        type,
+                        ...pipeline,
+                        ...additionalData,
+                    }
+                    createNode(node)
                 })
             )
         }
