@@ -6,7 +6,7 @@ sidebar: Docs
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Feature flags are [pure functions](/docs/feature-flags/how-to-get-flags-right) – same inputs, same outputs. The most common way to break that contract is to change the `distinct_id` between evaluations, which happens naturally when a user transitions from anonymous to identified.
+Feature flags are [pure functions](/docs/feature-flags/production-ready) – same inputs, same outputs. The most common way to break that contract is to change the `distinct_id` between evaluations, which happens naturally when a user transitions from anonymous to identified.
 
 This page covers how to keep the hash input stable so flags don't flip during authentication transitions. If you haven't already, read [identity resolution](/docs/product-analytics/identity-resolution) first – a stable identity strategy eliminates most flag stability problems before they start.
 
@@ -86,7 +86,7 @@ Person properties resolve server-side against the person record. The same person
 
 ## Further reading
 
-- [How to get flags right](/docs/feature-flags/how-to-get-flags-right) – the pure function model that explains why identity matters for flags
+- [Production-ready feature flags](/docs/feature-flags/production-ready) – the pure function model that explains why identity matters for flags
 - [Identity resolution](/docs/product-analytics/identity-resolution) – designing your identity strategy (start here if you haven't)
 - [Device bucketing](/docs/feature-flags/device-bucketing) – setup guide
 - [Bootstrapping](/docs/feature-flags/bootstrapping) – eliminating the async gap

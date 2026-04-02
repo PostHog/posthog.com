@@ -155,7 +155,7 @@ When you call `identify('user-456')`:
 3. Past events from the anonymous ID are attributed to the merged person
 4. Future events use the new `distinct_id`
 
-**The critical constraint:** `identify()` must run before any flag evaluations, conversion events, or other actions that need to be attributed to the right person. If it runs after, those events belong to the anonymous person until the merge pipeline processes them – and for flags, the hash already ran against the wrong ID. See [resolve identity before evaluating flags](/docs/feature-flags/how-flags-work#resolve-identity-before-evaluating-flags) for why this matters.
+**The critical constraint:** `identify()` must run before any flag evaluations, conversion events, or other actions that need to be attributed to the right person. If it runs after, those events belong to the anonymous person until the merge pipeline processes them – and for flags, the hash already ran against the wrong ID. See [resolve identity before evaluating flags](/docs/feature-flags/production-ready#resolve-identity-before-evaluating-flags) for why this matters.
 
 **When this works:** Standard login flows where you can guarantee `identify()` runs early enough.
 
@@ -190,7 +190,7 @@ The symptoms vary by feature, but the root cause is always the same – two dist
 
 | Feature | Symptom | What happened |
 |---|---|---|
-| **Feature flags** | Different values before and after login | [Hash input changed](/docs/feature-flags/how-flags-work#resolve-identity-before-evaluating-flags) |
+| **Feature flags** | Different values before and after login | [Hash input changed](/docs/feature-flags/production-ready#resolve-identity-before-evaluating-flags) |
 | **Experiments** | User in both control and test | Two unlinked persons, each assigned independently |
 | **Experiments** | Exposure exists but conversion missing | Exposure on anonymous ID, conversion on identified ID |
 | **Session replay** | Recording breaks at login | `distinct_id` changed mid-session without linkage |
@@ -220,6 +220,6 @@ If your application generates IDs that could collide with these values (e.g., th
 
 ## Further reading
 
-- [How feature flags work](/docs/feature-flags/how-flags-work) – why identity matters for flags and experiments (the pure function model)
+- [Production-ready feature flags](/docs/feature-flags/production-ready) – why identity matters for flags and experiments (the pure function model)
 - [Keeping flag evaluations stable](/docs/feature-flags/stable-identity-for-flags) – flag-specific mitigations when you can't fully control the identity flow
 - [Identifying users](/docs/product-analytics/identify) – PostHog's `identify()` API reference

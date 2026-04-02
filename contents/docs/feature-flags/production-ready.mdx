@@ -1,24 +1,24 @@
 ---
-title: How to get flags right
+title: Production-ready feature flags
 showTitle: true
 sidebar: Docs
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-## TL;DR
+## Checklist
 
-- [Flags are pure functions](#flags-are-pure-functions) – same flag key + same distinct ID = same result. Always.
-- [Unexpected results are always input problems](#unexpected-results-are-almost-always-input-problems) – evaluate a flag a million times with the same inputs, get the same result a million times. If the result changed, an input changed.
-- [Resolve identity before evaluating flags](#resolve-identity-before-evaluating-flags) – `identify()` must happen before flag evaluation, or the hash uses the wrong ID. This is the most common input problem.
-- [Evaluate once, not continuously](#evaluate-once-not-continuously) – a flag is a one-time signal. Record the result. Re-evaluate only on meaningful state changes.
-- [Evaluate where the data lives](#evaluate-where-the-data-lives) – if the data is on your server, evaluate there. The further the flag is from the data, the more async complexity.
-- [Server-side local evaluation is the recommended default](#server-side-local-evaluation-is-the-recommended-default).
-- [Have the value before you need it](#have-the-value-before-you-need-it) – client-side evaluation is async. [Bootstrap](/docs/feature-flags/bootstrapping) to eliminate the gap.
-- [`undefined` is not "flag is off" nor `false`](#undefined-is-not-false) – it means "not evaluated yet."
-- [Choose a flag type intentionally](#choose-a-flag-type-intentionally) – client, server, or both should be a deliberate decision, not a default.
-- [Clean up flags that have done their job](#clean-up-flags-that-have-done-their-job) – a flag at 100% is done. Remove it or archive it.
-- [Disable client-side evaluation for server-side flags](#disable-client-side-evaluation-for-server-side-flags) – don't let the client SDK re-evaluate what your server already decided.
+- [ ] [Call `identify()` before evaluating flags](#resolve-identity-before-evaluating-flags) – the hash uses the wrong ID otherwise. This is the most common input problem.
+- [ ] [Evaluate flags server-side with local evaluation](#server-side-local-evaluation-is-the-recommended-default) – explicit inputs, your data right there, no workarounds.
+- [ ] [Bootstrap client-side flags](#have-the-value-before-you-need-it) – client-side evaluation is async. [Bootstrap](/docs/feature-flags/bootstrapping) to eliminate the gap.
+- [ ] [Handle `undefined` explicitly](#undefined-is-not-false) – it means "not evaluated yet," not `false`.
+- [ ] [Evaluate once, record the result](#evaluate-once-not-continuously) – a flag is a one-time signal. Re-evaluate only on meaningful state changes.
+- [ ] [Evaluate where the data lives](#evaluate-where-the-data-lives) – if the data is on your server, evaluate there.
+- [ ] [Choose evaluation context deliberately](#choose-a-flag-type-intentionally) – "server and client" is the default for compatibility, not because it's the right choice for your flag.
+- [ ] [Clean up flags that have done their job](#clean-up-flags-that-have-done-their-job) – a flag at 100% is done. Remove it or archive it.
+- [ ] [Disable client-side evaluation for server-side flags](#disable-client-side-evaluation-for-server-side-flags) – don't let the client SDK re-evaluate what your server already decided.
+
+**The mental model:** [Flags are pure functions](#flags-are-pure-functions) – same flag key + same distinct ID = same result. Always. [Unexpected results are almost always input problems](#unexpected-results-are-almost-always-input-problems) – if the result changed, an input changed.
 
 ---
 
@@ -146,9 +146,11 @@ Flags are infrastructure. Like any infrastructure, they accumulate cost when lef
 
 ### Choose a flag type intentionally
 
-Every flag in PostHog is configured as client-side, server-side, or both via [evaluation contexts](/docs/feature-flags/evaluation-contexts). If all your flags are set to both, that usually means the decision was never made deliberately – and you're paying for client-side evaluation on flags that only need to exist on your server.
+Every flag in PostHog is configured as client-side, server-side, or both via [evaluation contexts](/docs/feature-flags/evaluation-contexts). New flags default to "server and client" – this exists for backwards compatibility (it's how all flags worked before we added evaluation contexts) and to avoid blocking users who haven't thought about their implementation yet. It's a safe starting point, not a recommendation.
 
-Pick the type based on where the flag is actually consumed. Server-side flags that drive backend logic don't need client SDKs fetching and evaluating them. Client-side flags for UI variations don't need server-side evaluation. "Both" is a valid choice when a flag genuinely needs to be evaluated in both contexts – but it should be an active decision, not a default.
+If all your flags are set to both, that usually means the decision was never revisited after creation – and you're paying for client-side evaluation on flags that only need to exist on your server.
+
+Pick the context based on where the flag is actually consumed. Server-side flags that drive backend logic don't need client SDKs fetching and evaluating them. Client-side flags for UI variations don't need server-side evaluation. "Both" is valid when a flag genuinely needs to be evaluated in both contexts – but it should be a deliberate choice, not the default you never changed.
 
 ### Clean up flags that have done their job
 

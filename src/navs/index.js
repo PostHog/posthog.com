@@ -4073,13 +4073,6 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
-                    name: 'How to get flags right',
-                    url: '/docs/feature-flags/how-to-get-flags-right',
-                    icon: 'IconBolt',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
                     name: 'Best practices',
                     url: '/docs/feature-flags/best-practices',
                     icon: 'IconStar',
@@ -4126,6 +4119,13 @@ export const docsMenu = {
                 },
                 {
                     name: 'Guides',
+                },
+                {
+                    name: 'Production-ready feature flags',
+                    url: '/docs/feature-flags/production-ready',
+                    icon: 'IconBolt',
+                    color: 'purple',
+                    featured: true,
                 },
                 {
                     name: 'Do a phased rollout',
