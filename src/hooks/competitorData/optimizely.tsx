@@ -140,7 +140,7 @@ export const optimizely = {
             },
         },
         product_analytics: {
-            available: false,
+            available: 'Warehouse-native only',
             features: {
                 autocapture: false,
             },
@@ -168,6 +168,9 @@ export const optimizely = {
         },
         cdp: {
             available: true,
+        },
+        error_tracking: {
+            available: false,
         },
     },
     platform: {
