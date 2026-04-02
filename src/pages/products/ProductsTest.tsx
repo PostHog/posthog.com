@@ -306,8 +306,8 @@ export default function ProductsTest(): JSX.Element {
                     {/* Hero */}
                     <header className="space-y-4 text-center @xl:text-left">
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/coderhog_80987dd905.png"
-                            className="@xl:float-right @xl:ml-4 w-56 @xl:mt-4"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,w_500,c_limit,q_auto,f_auto/deskhog_a3e8841e35.png"
+                            imgClassName="@xl:float-right @xl:!ml-4 w-60 @xl:w-48 @3xl:w-60 @xl:mt-4 @3xl:!ml-8 @3xl:!-mr-4"
                         />
                         <h1 className="text-2xl @lg:text-3xl font-bold leading-tight">
                             Devtools and product data infrastructure for building successful products
