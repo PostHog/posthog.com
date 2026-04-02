@@ -4,7 +4,8 @@ import { IconSparkles } from '@posthog/icons'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { getLogo } from 'constants/logos'
-import usePlatformList from 'hooks/docs/usePlatformList'
+import useSourcePlatforms from 'hooks/useSourcePlatforms'
+import { SELF_HOSTED_SOURCES } from 'constants/sources'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
@@ -87,8 +88,14 @@ const ProductItem = ({ product }: { product: any }) => {
 
 export const OnePlaceSlide = () => {
     const allProducts = useProduct() as any[]
-    const platforms = usePlatformList('docs/data-warehouse/sources', 'as a source')
-    const sourceCount = platforms.length + 1
+    const managedPlatforms = useSourcePlatforms()
+    const selfHosted = SELF_HOSTED_SOURCES.map((s) => ({
+        label: s.name,
+        url: `/docs/data-warehouse/sources/${s.slug}`,
+        image: getLogo(s.logo),
+    }))
+    const platforms = [...managedPlatforms, ...selfHosted].sort((a, b) => a.label.localeCompare(b.label))
+    const sourceCount = platforms.length
 
     const { allDestinations } = useStaticQuery(graphql`
         query HeroDestinationData {
