@@ -34,7 +34,7 @@ On top of that, PostHog layers property targeting (does this user match?), rollo
 
 <CalloutBox icon="IconInfo" title="Technically" type="info">
 
-"Pure function" means deterministic given a stable flag definition. The definition (rollout %, targeting rules, variants) is external state. Given the same definition, evaluation is fully deterministic on `flag_key` + `distinct_id`.
+"Pure function" means deterministic given a stable flag definition. The definition (rollout %, targeting rules, variants) is external state. Given the same definition, evaluation is fully deterministic on `flag_key` + `distinct_id`. Some features like [experience continuity](#dont-rely-on-flag-persistence-to-fix-identity-gaps) add persistence layers that introduce side effects on the server, but from your perspective as the caller, the model holds: same inputs, same output.
 
 </CalloutBox>
 
@@ -82,9 +82,9 @@ Call [`identify()`](/docs/product-analytics/identify) before any flag evaluation
 
 If you've enabled [experience continuity](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional) (flag persistence across authentication), consider what that's telling you: the distinct ID is changing during the user's session, and you need PostHog to paper over it.
 
-That comes at a cost – a database read and write on every evaluation, no support for [local evaluation](/docs/feature-flags/local-evaluation), slower flag responses, and a [known issue](https://github.com/PostHog/posthog-js/issues/2623) where values can still change after `identify()`.
+That comes at a cost. Experience continuity couples flag evaluation with database writes – every evaluation reads and writes to the DB to persist the result. This mixes two concerns (evaluation and storage) that should be separate, and it's the source of [known bugs](https://github.com/PostHog/posthog-js/issues/2623) where values can still change after `identify()`. It also means no support for [local evaluation](/docs/feature-flags/local-evaluation) and slower flag responses.
 
-The better fix is to make persistence unnecessary. Use [device bucketing](/docs/feature-flags/device-bucketing) for single-device consistency, or design your identity flow so the distinct ID [never changes](/docs/feature-flags/stable-identity-for-flags). If you need experience continuity, it usually means there's a gap in your identity resolution that's worth closing.
+The better fix is to make persistence unnecessary. Use [device bucketing](/docs/feature-flags/device-bucketing) for single-device consistency, or design your identity flow so the distinct ID [never changes](/docs/feature-flags/stable-identity-for-flags). If you need experience continuity today, treat it as a migration path toward proper [identity resolution](/docs/product-analytics/identity-resolution), not a permanent solution. The identity gap it papers over is the root cause of the most common flag issues – closing that gap eliminates the need for persistence entirely.
 
 ## Evaluation architecture
 
