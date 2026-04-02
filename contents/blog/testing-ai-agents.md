@@ -31,7 +31,7 @@ In this post, we’ll walk through what testing AI agents well looks like by fol
 
 ## The birth of the agent
 
-It all begins with the classic "Hello World", though now it's wrapped inside an SDK for creating agents, and suddenly we're not saluting the world, but rather being a helpful assistant.
+It all begins with the classic "Hello World", though now it's wrapped inside an SDK for creating agents, and we're not greeting the world, but rather being a helpful assistant.
 
 You work hard tweaking that system prompt, choosing the right model, and changing the available tools and their descriptions until the agent successfully completes your happy paths and edge cases.
 
