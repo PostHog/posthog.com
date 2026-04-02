@@ -146,7 +146,9 @@ export const SingleCodeBlock = ({ label, language, children, ...props }: SingleC
 const tooltipKey = '// TIP:'
 const highlightKey = '// HIGHLIGHT'
 const diffAddKey = '// +'
+const diffAddKeyHash = '# +'
 const diffRemoveKey = '// -'
+const diffRemoveKeyHash = '# -'
 
 const removeQuotes = (str?: string | null): string | null | undefined => {
     return str?.replace(/['"]/g, '')
@@ -157,7 +159,9 @@ const stripAnnotationComments = (code: string): string => {
         .replace(tooltipKey, '//')
         .replace(highlightKey, '')
         .replace(diffAddKey, '')
+        .replace(diffAddKeyHash, '')
         .replace(diffRemoveKey, '')
+        .replace(diffRemoveKeyHash, '')
         .trim()
 }
 
@@ -271,10 +275,10 @@ export const CodeBlock = ({
             if (line.includes(highlightKey)) {
                 highlightLineNumbers.push(index)
             }
-            if (line.includes(diffAddKey)) {
+            if (line.includes(diffAddKey) || line.includes(diffAddKeyHash)) {
                 diffAddLineNumbers.push(index)
             }
-            if (line.includes(diffRemoveKey)) {
+            if (line.includes(diffRemoveKey) || line.includes(diffRemoveKeyHash)) {
                 diffRemoveLineNumbers.push(index)
             }
         })
@@ -581,8 +585,14 @@ export const CodeBlock = ({
                                                         if (token.content.includes(diffAddKey)) {
                                                             token.content = token.content.replace(diffAddKey, '')
                                                         }
+                                                        if (token.content.includes(diffAddKeyHash)) {
+                                                            token.content = token.content.replace(diffAddKeyHash, '')
+                                                        }
                                                         if (token.content.includes(diffRemoveKey)) {
                                                             token.content = token.content.replace(diffRemoveKey, '')
+                                                        }
+                                                        if (token.content.includes(diffRemoveKeyHash)) {
+                                                            token.content = token.content.replace(diffRemoveKeyHash, '')
                                                         }
                                                     })
 
