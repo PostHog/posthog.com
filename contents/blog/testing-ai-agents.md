@@ -15,13 +15,19 @@ tags:
   - LLM analytics
 ---
 
-Agents are becoming increasingly present in our lives and work. We use many agents, directly or indirectly, and as engineers, we're increasingly building them too.
+Software testing used to be relatively straightforward.
 
-Not too long ago, creating software meant writing the business logic and then writing tests, at least to the extent that the software engineer was concerned. Now, the work of engineers building agents has shifted.
+You wrote business logic, defined expected outputs, and verified them with unit, integration, and UI tests. With the same input, your system behaved the same way every time.
 
-This shift has made what we're building much harder to test properly. Before, when business logic was almost always deterministic, you could write a solid set of unit, integration, and UI tests to confidently defend against bugs and regressions. Now, many engineers building agents seem to have lost that testing ability and are resorting to manually testing their agent or depending on users to report bugs, bugs that could have been caught earlier. It seems almost comical to have to argue for automated tests, but it feels necessary.
+AI agents changed this.
 
-The good news is that, as with traditional software testing, there is a way to do it, both when building your agent and when improving it. Let's discover it together by going through the life of an agent.
+Instead of fixed logic, we now build systems powered by models that are probabilistic. The same input can produce different outputs. Behavior depends on prompts, context, tool calls, and external data. The "correct" answer is fuzzy.
+
+And yet, many teams still try to test AI agents the old way, or worse, not at all. Manual testing and bug reports quietly become the default.
+
+The good news is that testing hasn’t become impossible, it’s just changed. Like before, there is a way to systematically test and improve agent behavior. It just requires a different mental model.
+
+In this post, we’ll walk through what testing AI agents well looks like by following the life of an agent, from first build to production and beyond.
 
 ## The birth of the agent
 
