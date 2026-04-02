@@ -42,7 +42,7 @@ Once you’ve configured your Brevo destination, click **Start testing** to veri
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/webhook/template_airtable.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/brevo/template_brevo.py) is available on GitHub.
 
 <PostHogMaintained />
 

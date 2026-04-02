@@ -9,6 +9,7 @@ export const errorTracking = {
     color: 'orange',
     colorSecondary: 'red',
     category: 'product_engineering',
+    wizardSupport: true,
     seo: {
         title: 'Error Tracking – Catch and fix issues faster with PostHog',
         description:
@@ -304,6 +305,21 @@ export const errorTracking = {
             description: 'Roll back features that cause errors, or test fixes with slow rollouts',
         },
     ],
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/ERROR_TRACKING_2f807c123b.png',
+        imageAlt: 'PostHog AI and error tracking',
+        description: 'investigate exceptions with stack traces, session replay, and product context',
+        skills: [
+            'Finds specific errors and affected users with natural language',
+            'Summarizes stack traces, explains likely causes (and likely fixes)',
+            'Surfaces exceptions worth prioritizing based on impact and downstream metrics',
+        ],
+        prompts: [
+            'Find the most common frontend errors this week',
+            'Which errors impact user sign-ups the most?',
+            'Summarize new issues introduced after the latest release',
+        ],
+    },
     presenterNotes: {
         // TODO: hopefully we have issue autofix and revenue analytics ordering by time this launches
         overview:
@@ -328,5 +344,6 @@ export const errorTracking = {
             "Error happens → watch the replay → see the user's journey → check their feature flags → roll back if needed. This workflow is impossible with standalone tools. Everything connects because it's all in one platform.",
         'getting-started':
             'Add our SDK(s) and errors start flowing immediately. Set up Slack alerts for critical errors and start identifying core problems faster – and at a fraction of the cost vs. the big players!',
+        ai: "The PostHog MCP server exposes function calling tools to any MCP client, enabling AI agents to interact with PostHog's API via the MCP protocol. When combining our MCP server with Error Tracking, your AI agents can take actions based on PostHog data which unlocks powerful, autonomous debugging capabilities.",
     },
 }

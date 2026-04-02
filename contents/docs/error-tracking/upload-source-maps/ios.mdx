@@ -1,0 +1,195 @@
+---
+title: Upload dSYMs for iOS
+showStepsToc: true
+---
+
+import CLIDownload from "../_snippets/cli/download.mdx"
+import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
+import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
+
+<CalloutBox icon="IconInfo" title="CLI version requirement" type="action">
+
+A minimum CLI version of [0.7.4](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.7.4) is required, but we recommend [keeping up with the latest CLI version](/docs/error-tracking/upload-source-maps/cli) to ensure you have all of error tracking's features.
+
+</CalloutBox>
+
+<Steps>
+
+<Step title="Download CLI" badge="required">
+
+<CLIDownload/>
+
+</Step>
+
+<Step title="Authenticate" badge="required">
+
+<CLIAuthenticate />
+
+</Step>
+
+<Step title="Configure build settings" badge="required">
+
+In Xcode, configure your build settings to generate dSYMs:
+
+1. Open your project in Xcode
+2. Select your target
+3. Go to **Build Settings**
+4. Search for **Debug Information Format**
+5. Make sure Release configurations have **DWARF with dSYM File**
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/DWARF_and_d_SYM_xcode_settings_light_f6a8bb74c3.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/DWARF_and_d_SYM_xcode_settings_7b2c628b52.png"
+    alt="Xcode dSYM setting"
+    classes="rounded"
+/>
+
+<CalloutBox icon="IconWarning" title="Disable User Script Sandboxing" type="action">
+
+You must disable User Script Sandboxing for the upload script to work:
+
+1. In Build Settings, search for **User Script Sandboxing**(`ENABLE_USER_SCRIPT_SANDBOXING`)
+2. Set `ENABLE_USER_SCRIPT_SANDBOXING` to **No**
+
+**Why is this required?**
+
+When User Script Sandboxing is enabled, Xcode only allows run scripts to access files explicitly specified in the build phase's **Input Files**. 
+The dSYM upload script needs to walk directories to locate and read dSYM bundles, and execute `posthog-cli` which are currently not allowed with User Script Sandboxing enabled.
+
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Add build phase script" badge="required">
+
+To symbolicate crash reports, PostHog needs your project's debug symbol (dSYM) files. The following script automatically processes and uploads dSYMs whenever you build your app.
+
+Add a **Run Script** build phase:
+
+1. In Xcode, select your main app target
+2. Go to **Build Phases** tab
+3. Click the **+** button and select **New Run Script Phase**
+4. Make sure it's set to run last (after "Copy Bundle Resources" or similar)
+5. Add the appropriate script for your package manager:
+
+<MultiLanguage>
+
+```bash file=Swift Package Manager
+${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh
+```
+
+```bash file=CocoaPods
+${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
+```
+
+</MultiLanguage>
+
+</Step>
+
+<Step title="Optional: Include source code context" badge="optional">
+
+By default, only debug symbols are uploaded. To include source code snippets in your stack traces (for better debugging context), set the `POSTHOG_INCLUDE_SOURCE` environment variable:
+
+1. In the Run Script build phase, click the chevron to expand
+2. Set the **environment Variable** when calling the upload script:
+
+
+<MultiLanguage>
+
+```bash file=Swift Package Manager
+POSTHOG_INCLUDE_SOURCE=1 ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh
+```
+
+```bash file=CocoaPods
+POSTHOG_INCLUDE_SOURCE=1 ${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
+```
+
+</MultiLanguage>
+
+**Note**: This increases upload size and build times. Only enable if you need source code context in PostHog's error tracking UI.
+
+</Step>
+
+<Step title="Build and verify" badge="required">
+
+Build your app in Xcode. The dSYM upload script will automatically run and upload symbols to PostHog.
+
+Check the build log output for confirmation.
+
+</Step>
+
+<Step title="Force a test crash" badge="optional">
+
+To verify everything is working end-to-end, force a test crash and confirm it appears in PostHog.
+
+1. Add a crash trigger button to your app:
+
+<MultiLanguage>
+
+```swift file=SwiftUI
+Button("Test Crash") {
+    fatalError("PostHog test crash")
+}
+```
+
+```swift file=UIKit
+let button = UIButton(type: .system)
+button.setTitle("Test Crash", for: .normal)
+button.addTarget(self, action: #selector(testCrash), for: .touchUpInside)
+view.addSubview(button)
+
+@objc func testCrash() {
+    fatalError("PostHog test crash")
+}
+```
+
+</MultiLanguage>
+
+2. Build and run your app in Xcode, 
+    - Make sure the debugger is not attached, since it will intercept the crash and prevent the report from being collected. You can: 
+        - Detach the debugger (click the stop button in Xcode) and run the app directly from the device/simulator home screen
+        - Or uncheck "Debug executable" in the scheme settings before running
+
+3. Reopen the app from your device or simulator's home screen (not from Xcode).
+
+4. Tap the **Test Crash** button. The app will crash. The exception is collected but **not yet sent** to PostHog.
+
+5. Reopen the app once more. This triggers the SDK to send the previously collected crash report to PostHog.
+
+6. Check the [error tracking dashboard](https://us.posthog.com/error_tracking) for your test crash.
+
+<CalloutBox icon="IconInfo" type="info">
+
+Remove the crash trigger button before shipping to production.
+
+</CalloutBox>
+
+</Step>
+
+<StepVerifySymbolSetsUpload symbolType="dSYMs" />
+
+</Steps>
+
+## Troubleshooting
+
+### Script fails with "error: posthog-cli not found"
+
+Install the CLI using one of these methods:
+
+```bash
+# NPM global install
+npm install -g @posthog/cli
+
+# Or download binary
+curl --proto '=https' --tlsv1.2 -LsSf \
+  https://github.com/PostHog/posthog/releases/latest/download/posthog-cli-installer.sh | sh
+```
+
+### Script fails with permission errors
+
+Ensure `ENABLE_USER_SCRIPT_SANDBOXING` is set to `NO` in your build settings.
+
+### dSYMs not being generated
+
+Verify that `DEBUG_INFORMATION_FORMAT` is set to **DWARF with dSYM File** for the configuration you're building (Debug or Release).

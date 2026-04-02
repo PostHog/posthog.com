@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-Improving activation is one of the most impactful things a [product engineer](/blog/what-is-a-product-engineer) can do, but it’s also weirdly hard to define.
+Improving activation is one of the most impactful things a [product engineer](/product-engineer/what-is-a-product-engineer) can do, but it’s also weirdly hard to define.
 
 People often call it your product’s "aha" moment – i.e. when a user experiences your product's value for the first time – but this is vague and subjective.
 
@@ -60,7 +60,7 @@ That leaves **activation** and **retention** as the responsibilities of product 
 
 - For product teams, it shows the impact of product launches and changes.
 
-- For engineers, it clarifies what to work on better than “general usage.”
+- For engineers, it clarifies [what to work on](/newsletter/what-does-a-product-manager-do) better than “general usage.”
 
 - For customer-facing teams, it’s a warning that users aren’t succeeding.
 

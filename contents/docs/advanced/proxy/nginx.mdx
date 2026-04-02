@@ -26,9 +26,10 @@ Here's the request flow:
 
 This works because ad blockers see requests going to your domain, not PostHog's. The proxy is transparent to the browser.
 
-**Why two location blocks?** PostHog uses separate domains for API requests and static assets. Your nginx config needs two location blocks:
+**Why three location blocks?** PostHog uses separate domains for API requests and static assets/config. Your nginx config needs three location blocks:
 
 - **`/static/`:** Routes to `us-assets.i.posthog.com` or `eu-assets.i.posthog.com` for the JavaScript SDK and other static files
+- **`/array/`:** Routes to the same assets origin for SDK remote configuration (recording conditions, Feature flags, sampling rates)
 - **`/`:** Routes everything else to `us.i.posthog.com` or `eu.i.posthog.com` for event capture, feature flags, and API calls
 
 ## Prerequisites
@@ -72,6 +73,13 @@ server {
 
     location /static/ {
         proxy_pass https://us-assets.i.posthog.com/static/;
+        proxy_set_header Host us-assets.i.posthog.com;
+        proxy_ssl_server_name on;
+        proxy_ssl_name us-assets.i.posthog.com;
+    }
+
+    location /array/ {
+        proxy_pass https://us-assets.i.posthog.com/array/;
         proxy_set_header Host us-assets.i.posthog.com;
         proxy_ssl_server_name on;
         proxy_ssl_name us-assets.i.posthog.com;
@@ -225,6 +233,15 @@ http {
 
         location /static/ {
             proxy_pass https://${POSTHOG_CLOUD_REGION}-assets.i.posthog.com/static/;
+            proxy_set_header Host "${POSTHOG_CLOUD_REGION}-assets.i.posthog.com";
+            proxy_ssl_server_name on;
+
+            proxy_hide_header 'Access-Control-Allow-Origin';
+            add_header 'Access-Control-Allow-Origin' '*' always;
+        }
+
+        location /array/ {
+            proxy_pass https://${POSTHOG_CLOUD_REGION}-assets.i.posthog.com/array/;
             proxy_set_header Host "${POSTHOG_CLOUD_REGION}-assets.i.posthog.com";
             proxy_ssl_server_name on;
 

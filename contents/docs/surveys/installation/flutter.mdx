@@ -1,102 +1,19 @@
 ---
 title: Flutter surveys installation
 platformLogo: flutter
-showStepsToc: true
+tableOfContents: []
 ---
 
-import { Steps, Step } from 'components/Docs/Steps'
-import FlutterInstallManual from "../../integrate/_snippets/install-flutter-manual.mdx"
+<!--
+This page imports shared onboarding content from the main PostHog repo.
+Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/surveys/flutter.tsx
+See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
+-->
 
-<Steps>
+import { FlutterSurveysInstallationWrapper } from './_snippets/flutter-surveys-installation-wrapper.tsx'
 
-<Step title="Add PostHog to your app" badge="required">
+<FlutterSurveysInstallationWrapper />
 
-Using it requires PostHog's Flutter SDK version >= 5.8.0, but version 5.14.0 or later is recommended for the latest survey customization features. You can check your current version in PostHog using the [SDK doctor](/docs/sdk-doctor).
-
-> **Note:** For mobile surveys, you must setup the SDK manually.
-
-<FlutterInstallManual />
-
-</Step>
-
-<Step title="Install PosthogObserver" badge="required">
-
-For surveys to be shown, you need to add the `PosthogObserver` to your app. The observer allows PostHog to determine the appropriate context for displaying surveys.
-
-```dart
-import 'package:flutter/material.dart';
-
-import 'package:posthog_flutter/posthog_flutter.dart';
-
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return PostHogWidget(
-      child: MaterialApp(
-        navigatorObservers: [PosthogObserver()],
-        title: 'My App',
-        home: const HomeScreen(),
-      ),
-    );
-  }
-}
-```
-
-If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing-screen-views) to learn how to set up the `PosthogObserver`.
-
-</Step>
-
-</Steps>
-
-## Configuration
-
-> **Important:** For Flutter Web, surveys are powered by the JavaScript Web SDK, so any Flutter-specific survey configuration will be ignored. Please refer to the [Web installation guide](/docs/surveys/installation/web) for proper setup.
-
-Surveys are enabled by default. If you want to disable surveys, you can do so when setting up your SDK instance:
-
-```dart
-final config = PostHogConfig('<ph_project_token>');
-
-config.surveys = false; // Disable surveys
-```
-
-## Supported Features
-
-| Feature                           | Support                |
-| --------------------------------- | ---------------------- |
-| **Questions** | |
-| All question types                | ✅                     |
-| Multi-question surveys            | ✅                     |
-| Confirmation message              | ✅                     |
-| Feedback button presentation      | ❌                     |
-| Conditional questions             | ✅                     |
-| **Customization / Appearance** | |
-| Set colors in PostHog dashboard   | ✅                     |
-| Shuffle questions                 | ❌                     |
-| PostHog branding                  | ❌                     |
-| Delay popup after screen view     | ❌                     |
-| Position config                   | ❌ (always bottom sheet) |
-| HTML content                      | ❌                     |
-| **Display conditions** | |
-| Feature flag & property targeting | ✅                     |
-| Screen/URL targeting              | ❌                     |
-| Device type targeting             | ✅                     |
-| Survey wait period                | ❌                     |
-| Event triggers                    | ✅                     |
-| Action triggers                   | ❌                     |
-| Partial responses                 | ❌                     |
 
 ## Limitations
 

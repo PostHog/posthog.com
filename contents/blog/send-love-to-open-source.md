@@ -54,7 +54,7 @@ Also, getting people who care about open-source projects to star our repo is of 
 1. There's a maximum donation of $50,000 in total 
 2. The total sum of donations shall be divided equally between projects
 3. Donations are at the discretion of PostHog and all decisions are final 
-4. Donations are in addition to [our usual, ongoing open-source sponsorship](https://posthog.com/handbook/growth/marketing/open-source-sponsorship)
+4. Donations are in addition to [our usual, ongoing open-source sponsorship](https://posthog.com/handbook/marketing/open-source-sponsorship)
 
 > Support the projects that make PostHog possible by [heading to the PostHog repo and starring it today!](https://github.com/PostHog/posthog) We'll donate $5 for every star between now and through to the end of Valentine's Day!
 

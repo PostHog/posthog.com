@@ -17,7 +17,7 @@ crosspost:
 
 Here are two important, related facts:
 
-1. [Product engineers](/blog/what-is-a-product-engineer) succeed when they ship quickly, understand if a change is working, and iterate.
+1. [Product engineers](/product-engineer/what-is-a-product-engineer) succeed when they ship quickly, understand if a change is working, and iterate.
 
 2. You need [feature flags](/feature-flags) to do so because they let you ship, deploy, and release software safely, and quickly, at scale.
 

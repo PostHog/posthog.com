@@ -38,7 +38,7 @@ You can create a slider or carousel of images by wrapping them in the `<ImageSli
 
 See an example in our [open-source analytics tools post](/blog/best-open-source-analytics-tools#1-posthog).
 
-## Product videos
+## Videos
 
 Th `<ProductVideo />` component works the same as product screenshots (above) for videos [uploaded to Cloudinary](/handbook/content/posthog-style-guide#adding-media) but supports light and dark videos.
 
@@ -65,6 +65,14 @@ classes="rounded"
 
 _Note: If you don't have a dark video, just leave out the `videoDark` prop and the light video will be used for both color modes._
 
+### Embedding Wistia videos
+
+This can be used in articles like tutorials or blog posts for longer-form videos (where the asset exceeds 20 MB and can't be uploaded to Cloudinary).
+
+```
+<WistiaEmbed mediaId="13hp4af5cc" />
+```
+
 ### Embedding YouTube videos
 
 While not an MDX component, a reminder that when embedding a YouTube video, you should do two things:
@@ -74,6 +82,15 @@ While not an MDX component, a reminder that when embedding a YouTube video, you 
 https://www.youtube-nocookie.com/embed/{VIDEO_ID}
 ```
 2. Add the `allowfullscreen` attribute to the iframe so users have the option to watch the video in fullscreen (useful for reading code snippets).
+
+Example:
+
+```
+<iframe
+    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=375"
+    className="rounded shadow-xl"
+/>
+```
 
 ## Code blocks
 
@@ -471,6 +488,92 @@ Alice->John: See you later!
 </Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
+
+import ProductList from 'components/ProductList'
+
+## Product list
+
+Use `<ProductList />` to render a list of products sourced from `useProduct` hooks. It links each product to `/{slug}` by default using the product's icon, color, and name.
+
+**Auto-source from a product data field** (e.g. every product where `wizardSupport` is set):
+
+<!-- prettier-ignore -->
+```tsx
+<ProductList
+    sourceField="wizardSupport"
+    sourceValues={[true, { value: "In development", color: "red" }, { value: "Coming soon", color: "yellow" }]}
+/>
+```
+
+<ProductList
+    className="grid gap-4 grid-cols-2 not-prose"
+    sourceField="wizardSupport"
+    sourceValues={[true, { value: "In development", color: "red" }, { value: "Coming soon", color: "yellow" }]}
+/>
+
+Products are grouped in `sourceValues` order. Plain values (`true`, `"some string"`) filter without an indicator. Object values (`{ value, color }`) also render a colored dot with tooltip text.
+
+**Manual list of products:**
+
+<!-- prettier-ignore -->
+```tsx
+<ProductList products={["product_analytics", "web_analytics", "session_replay"]} />
+```
+
+<ProductList
+    className="grid gap-4 grid-cols-2 not-prose"
+    products={["product_analytics", "web_analytics", "session_replay"]}
+/>
+
+**Manual list with field-based filtering and indicators:**
+
+<!-- prettier-ignore -->
+```tsx
+<ProductList
+    products={["product_analytics", "web_analytics", "feature_flags", "llm_analytics"]}
+    sourceField="wizardSupport"
+    sourceValues={[true, { value: "Coming soon", color: "yellow" }]}
+/>
+```
+
+<ProductList
+    className="grid gap-4 grid-cols-2 not-prose"
+    products={["product_analytics", "web_analytics", "feature_flags", "llm_analytics"]}
+    sourceField="wizardSupport"
+    sourceValues={[true, { value: "Coming soon", color: "yellow" }]}
+/>
+
+Only the products whose `wizardSupport` value matches a `sourceValues` entry will render. Other props: `urlPrefix` (default `/`), `className`, `itemClassName`, `iconSize`.
+
+## Wizard command
+
+Use `<WizardCommand />` to render a copyable install button for the PostHog wizard CLI. Clicking the button copies the command to the clipboard and shows a toast notification.
+
+<WizardCommand />
+
+The command automatically includes `--region eu` or `--region us` based on the user's feature flags.
+
+**Props:**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `latest` | `boolean` | `true` | Appends `@latest` to the package name |
+| `slim` | `boolean` | `false` | Hides the "Learn more" link below the button |
+| `className` | `string` | `''` | Additional classes for the button element |
+
+**Slim mode** (button only, no "Learn more" link):
+
+<!-- prettier-ignore -->
+```tsx
+<WizardCommand slim />
+```
+
+**Without `@latest`** (used on the homepage and wizard page):
+
+<!-- prettier-ignore -->
+```tsx
+<WizardCommand latest={false} slim />
+```
 
 ## Call to action
 

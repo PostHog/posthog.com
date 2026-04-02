@@ -61,6 +61,10 @@ const nextConfig = {
         destination: 'https://us-assets.i.posthog.com/static/:path*',
       },
       {
+        source: '/ph/array/:path*',
+        destination: 'https://us-assets.i.posthog.com/array/:path*',
+      },
+      {
         source: '/ph/:path*',
         destination: 'https://us.i.posthog.com/:path*',
       },
@@ -77,10 +81,11 @@ Replace `us` with `eu` for EU region.
 Here's what each part does:
 
 - The first rewrite routes static asset requests to PostHog's asset server. This serves the JavaScript SDK and other static files.
-- The second rewrite routes all other requests to PostHog's main API. This handles event capture, feature flags, and session recordings.
+- The second rewrite routes remote config requests (`/array/{token}/config.js`) to the asset server. The asset server returns proper `cache-control` headers for these responses, while the main API server strips them.
+- The third rewrite routes all other requests to PostHog's main API. This handles event capture, Feature flags, and session recordings.
 - `skipTrailingSlashRedirect` prevents Next.js from redirecting URLs with trailing slashes. PostHog's API uses trailing slashes (like `/e/`), and without this setting, Next.js would redirect them and break event capture.
 
-The static rewrite must come first. Next.js evaluates rewrites in order, so if the catch-all rule came first, it would match `/ph/static/*` before the static-specific rule.
+The static and array rewrites must come before the catch-all. Next.js evaluates rewrites in order, so if the catch-all rule came first, it would match `/ph/static/*` and `/ph/array/*` before the specific rules.
 
 See [Next.js rewrites documentation](https://nextjs.org/docs/app/api-reference/next-config-js/rewrites) for more details.
 
@@ -152,7 +157,7 @@ If requests to your proxy path return 404:
 
 1. Verify your `next.config.js` is in the project root
 2. Restart your dev server after changing the config
-3. Check the rewrite order: static assets rule must come before the catch-all
+3. Check the rewrite order: static and array rules must come before the catch-all
 
 ### Trailing slash conflicts with SEO
 

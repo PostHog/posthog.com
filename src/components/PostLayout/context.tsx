@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useMemo, useState } from 'react'
 import { IProps } from './types'
 import { useLayoutData } from 'components/Layout/hooks'
 import useDataPipelinesNav from '../../navs/useDataPipelinesNav'
+import useSourcesNav from '../../navs/useSourcesNav'
 
 export const Context = createContext<IProps | undefined>(undefined)
 
@@ -33,6 +34,8 @@ export const PostProvider: React.FC<ProviderProps> = ({
             'data-pipeline-destinations': useDataPipelinesNav({ type: 'destination' }),
             'data-pipeline-transformations': useDataPipelinesNav({ type: 'transformation' }),
             'data-pipeline-source-webhooks': useDataPipelinesNav({ type: 'source_webhook' }),
+            'data-pipeline-sources': useSourcesNav('/docs/cdp/sources'),
+            'data-warehouse-sources': useSourcesNav('/docs/data-warehouse/sources'),
         }),
         []
     )

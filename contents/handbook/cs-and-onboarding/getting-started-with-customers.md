@@ -53,7 +53,7 @@ Once you've completed your audit, start reaching out. If this is an account that
 - Get introduced in their existing Slack/Teams channel or via email.
 - Coordinate with the previous point of contact to ensure continuity.
 
-If you don't have an established contact, introduce yourself to the widest blast range: org owner, org admin, users who have recently raised tickets, and users who have logged in in the last month. Even if there _seems_ to be a point of contact, things probably changed – multi-thread! 
+If you don't have an established contact, introduce yourself to the widest blast range: org owner, org admin, users who have recently raised tickets, and users who have logged in in the last month. Even if there _seems_ to be a point of contact, things probably changed – multi-thread!
 
 Your intro message should:
 
@@ -98,7 +98,7 @@ Pro tip: If they're not already in Slack, don't ask; add them to Slack by sendin
 
 ### Getting-to-know-you discovery call
 
-This is one of the most effective ways to learn what you need to know about a customer, as you can ask direct questions and spend a lot of time listening to their responses. A quick call upfront is often better than a month of back-and-forth in Slack. 
+This is one of the most effective ways to learn what you need to know about a customer, as you can ask direct questions and spend a lot of time listening to their responses. A quick call upfront is often better than a month of back-and-forth in Slack.
 
 Typically, this is a 15-30 minute conversation aimed at establishing rapport, understanding pain points, and beginning to formulate how you can best assist them.
 
@@ -107,7 +107,7 @@ Your discovery call should help you determine the level of engagement you'll hav
   - Do they need help fixing their current setup?
   - Do they have plans/interest in implementing new PostHog products?
     - If the answer to either is yes, you can be their strategic partner and collaborate on setting up a detailed [success plan](/handbook/cs-and-onboarding/onboarding-success-plan).
-  - Some customers may not want to engage deeply, and that is okay; still, continue to monitor their usage/spend and check in with them when appropriate. 
+  - Some customers may not want to engage deeply, and that is okay; still, continue to monitor their usage/spend and check in with them when appropriate.
 
 ### Preparation before your call
 
@@ -178,6 +178,14 @@ The key places to look for this information:
 - **BuildBetter**: will contain recordings of customer success, sales, or onboarding calls. Once in BuildBetter, you can use the <PrivateLink url="https://app.buildbetter.app/people">"People"</PrivateLink> data section to search for companies or individual contacts and then see the history of calls, or you can do a direct search or AI chat.
 - **Pylon**: will contain the Slack channel history. You can view the <PrivateLink url="https://app.usepylon.com/accounts">"account"</PrivateLink> page, which is linked to Salesforce accounts for any of your accounts that have a Slack channel. You can filter on "Owner", which should also be mapped to the account owner from Salesforce, which lets you view all Slack or Teams interactions from accounts you own.
 - **Vitally**: will contain Zendesk and email conversations under the <PrivateLink url="https://posthog.vitally-eu.io/conversations/active/">"Active Conversations"</PrivateLink> section. This will allow you to see who the key contacts were, which support, sales, or CS individuals they have worked with in the past, and so on. It's also really helpful to see how frequently they raise tickets and what issues they have faced.
+
+## Get notifications
+
+We use [Watch Tower](https://gotwatchtower.com/) to monitor news about companies in our book of business and surface what matters. To get started, create an account with your PostHog email. Once in, you can create a list and select to import your book of business from either Vitally or Salesforce.
+
+Once your book has been imported, it's important to go through and make sure the names are correct, and each entry has the correct domain. Watch Tower uses the domain to understand context about the company you're trying to monitor and both Vitally and Salesforce rarely include domain data accurately.
+
+Finally set up how you like to be notified. Email is the default but you can also set up Slack notifications as well. Once you've ensured your list is updated correctly and notifications are set, every day Watch Tower will scan the news for info relating to any of your companies. If there's a match, you'll get a notification.
 
 ## Recommended approach
 The best recommendation is to find your own rhythm for how you, as an individual, prefer to learn about your customers. There's not a strict playbook. This is a compilation of the most reliable sources of knowledge to use for researching an account.

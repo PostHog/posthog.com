@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import {
     IconThoughtBubble,
+    IconCoffee,
     IconDashboard,
     IconDownload,
     IconNotebook,
@@ -83,15 +84,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'WIP',
         },
         {
-            name: 'Coding agent (Twig)',
-            Icon: IconCode,
-            description: 'AI coding agent that understands your product analytics.',
-            handle: 'twig',
+            name: 'PostHog Code',
+            Icon: IconCoffee,
+            description: 'AI code editor that knows how people use your product',
+            handle: 'posthog_code',
             color: 'brown',
             colorSecondary: 'brown',
             category: 'automation',
-            // slug: 'twig',
-            status: 'WIP',
+            slug: 'code',
+            status: 'beta',
         },
         {
             name: 'Product tours',
@@ -2630,7 +2631,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             seo: {
                 title: 'PostHog AI - PostHog data stack',
                 description:
-                    "Omnicient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
+                    "Omniscient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
             },
         },
         {

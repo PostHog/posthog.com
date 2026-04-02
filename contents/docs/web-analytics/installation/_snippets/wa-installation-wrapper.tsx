@@ -1,9 +1,8 @@
 import React from 'react'
 import {
     // Web SDK installations
-    JSWebInstallation,
+    WebInstallation,
     NextJSInstallation,
-    HTMLSnippetInstallation,
     ReactInstallation,
     VueInstallation,
     AngularInstallation,
@@ -11,6 +10,7 @@ import {
     SvelteInstallation,
     NuxtInstallation,
     RemixInstallation,
+    ReactRouterInstallation,
     TanStackInstallation,
     // Mobile SDK installations
     IOSInstallation,
@@ -31,9 +31,12 @@ import {
 } from 'onboarding/web-analytics'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
+import { WebsiteJSHtmlSnippet, WebsiteJSInitSnippet } from 'product-analytics/installation/_snippets/js-web-snippets'
 
 const WEB_SNIPPETS = {
     WebFinalSteps,
+    JSHtmlSnippet: WebsiteJSHtmlSnippet,
+    JSInitSnippet: WebsiteJSInitSnippet,
 }
 
 const MOBILE_SNIPPETS = {
@@ -43,7 +46,7 @@ const MOBILE_SNIPPETS = {
 // Web SDK wrappers
 export const WAJSWebInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={WEB_SNIPPETS}>
-        <JSWebInstallation modifySteps={addNextStepsStep} />
+        <WebInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 
@@ -55,7 +58,7 @@ export const WANextJSInstallationWrapper = () => (
 
 export const WAHTMLSnippetInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={WEB_SNIPPETS}>
-        <HTMLSnippetInstallation modifySteps={addNextStepsStep} />
+        <WebInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 
@@ -98,6 +101,12 @@ export const WANuxtInstallationWrapper = () => (
 export const WARemixInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={WEB_SNIPPETS}>
         <RemixInstallation modifySteps={addNextStepsStep} />
+    </OnboardingContentWrapper>
+)
+
+export const WAReactRouterInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={WEB_SNIPPETS}>
+        <ReactRouterInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 

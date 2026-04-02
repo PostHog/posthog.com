@@ -37,7 +37,7 @@ Add your PostHog configuration to your `AndroidManifest.xml` file located in the
         <!-- ... other configuration ... -->
         <meta-data android:name="com.posthog.posthog.API_KEY" android:value="<ph_project_token>" />
         <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_client_api_host>" />  <!-- usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com' -->
-        <meta-data android:name="com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="true" />
+        <!-- com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS is enabled by default since version 5.23.0 (previously named TRACK_APPLICATION_LIFECYCLE_EVENTS, which still works as an alias) -->
         <meta-data android:name="com.posthog.posthog.DEBUG" android:value="true" />
     </application>
 </manifest>
@@ -89,8 +89,7 @@ Add your PostHog configuration to the `Info.plist` file located in the `ios/Runn
 	<string><ph_project_token></string>
 	<key>com.posthog.posthog.POSTHOG_HOST</key>
 	<string><ph_client_api_host></string>
-	<key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
-	<true/>
+	<!-- com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS is enabled by default since version 5.23.0 -->
 	<key>com.posthog.posthog.DEBUG</key>
 	<true/>
 </dict>
@@ -136,7 +135,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final config = PostHogConfig('<ph_project_token>');
   config.debug = true;
-  config.captureApplicationLifecycleEvents = true;
+  // captureApplicationLifecycleEvents is enabled by default since version 5.23.0
   config.host = '<ph_client_api_host>';
   await Posthog().setup(config);
   runApp(MyApp());

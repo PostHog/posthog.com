@@ -1,0 +1,104 @@
+---
+title: Customer journeys
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import CustomerAnalyticsBetaWarning from './_snippets/customer-analytics-beta-warning.mdx'
+
+<CustomerAnalyticsBetaWarning />
+
+Customer journeys let you visualize how users move through key conversion steps in your product. They combine [funnels](/docs/product-analytics/funnels) and [paths](/docs/product-analytics/paths) into interactive flow graphs, so you can see both **where** users convert and **what they do** between steps.
+
+## What is a customer journey?
+
+A customer journey is a funnel-based flow graph. Each journey defines a series of conversion steps (like `Pageview → Sign up → Payment`), and PostHog renders them as an interactive visualization showing:
+
+- **Conversion rates** between each step
+- **Drop-off points** where users leave the funnel
+- **Paths users take** between, before, and after funnel steps
+
+This makes it easy to spot friction, discover unexpected user behavior, and find opportunities to improve conversion.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_24_T17_26_33_006_Z_9471df11b2.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_24_T17_25_29_981_Z_c5fd1b3941.png"
+    alt="Customer journey flow graph showing funnel steps, conversion rates, and path nodes"
+    classes="rounded"
+/>
+
+You can also see where individual persons or groups are within your journeys directly from their [customer profiles](/docs/customer-analytics/customer-profiles).
+
+## View your journeys
+
+Navigate to **[Customer analytics](https://app.posthog.com/customer_analytics)** and select **Customer journeys**. Select a saved journey from the journey selector in the header. The flow graph displays your funnel steps with conversion rates and drop-off indicators.
+
+## View journeys for individual customers
+
+Customer profiles include a **Customer journey** node by default. This lets you see where a specific customer is within your defined journeys directly from their profile.
+
+To view a customer's journey:
+
+1. Go to **[Persons](https://app.posthog.com/persons)** or **[Groups](https://app.posthog.com/groups/0)** and open a person or group to view their profile.
+2. Find the **Customer journey** section in the profile.
+3. Select a journey from the dropdown picker.
+
+The journey node displays the funnel steps with visual indicators showing which steps the customer has completed, which are incomplete, and which are optional. This helps you understand where each customer is in their conversion journey.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_24_T17_29_45_513_Z_0cd2a56017.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_24_T17_29_09_759_Z_e179e26516.png"
+    alt="Customer journey node in a profile showing funnel steps with completion indicators"
+    classes="rounded"
+/>
+
+
+<CalloutBox icon="IconInfo" title="Want to create a new journey?" type="fyi">
+    See <a href="/docs/customer-analytics/create-customer-journey">Create customer journeys</a> for step-by-step instructions.
+</CalloutBox>
+
+## Explore paths
+
+Click on any funnel step in the flow graph to explore what users do around that step. You can view:
+
+- **Paths between steps** – See which events users trigger between two consecutive funnel steps.
+- **Paths before a step** – Discover what users do before reaching a specific step.
+- **Paths after drop-off** – Understand what users do after dropping out of the funnel.
+
+Path nodes appear as intermediate nodes in the flow graph, giving you a detailed picture of user behavior between conversion steps.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_24_T17_27_34_425_Z_4dae5b72f1.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_24_T17_28_11_702_Z_607786b71d.png"
+    alt="Path exploration menu showing options to view paths between funnel steps"
+    classes="rounded"
+/>
+
+### Add path events as steps
+
+When exploring paths, you may discover events that are important to your conversion flow. You can add any path event as a new funnel step:
+
+1. Click on a path node in the flow graph.
+2. Choose to add it as a **required** or **optional** step.
+
+This lets you iteratively refine your journey as you learn more about how users actually navigate your product.
+
+## Edit a customer journey
+
+To edit an existing journey:
+
+1. Open the journey you want to modify.
+2. Click **Edit** to open the journey builder.
+3. Add, remove, or reorder funnel steps.
+4. Save your changes.
+
+## Delete a customer journey
+
+To delete a journey you no longer need:
+
+1. Open the journey.
+2. Click the **more options** menu (⋯).
+3. Select **Delete journey** and confirm.
+
+> **Note:** Deleting a journey is permanent and cannot be undone.

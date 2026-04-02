@@ -115,11 +115,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 >
 > Having all the features of Amplitude (and more) while being free, self-serve, and open source makes PostHog a great alternative. This is especially true for engineering-focused startups and scale-ups as it provides the tools to build a great product.
 
-<p>
-  <CallToAction to="https://posthog.com/docs/product-analytics/installation">
-    Get started with PostHog – it's free!
-  </CallToAction>
-</p>
+<WizardCTA />
 
 ## 2. Mixpanel
 
@@ -132,7 +128,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ### What is Mixpanel?
 
-[Mixpanel](/blog/posthog-vs-mixpanel) is one of the most popular product analytics tools on the market. While it previously deprecated features like A/B testing to focus on core analytics, Mixpanel has reversed course and expanded substantially since 2024. The platform now includes session replay (web and mobile), heatmaps, experiments, and feature flags alongside its core analytics. Teams can connect Mixpanel to their data warehouse, CDP, or instrument directly via SDKs.
+[Mixpanel](/blog/posthog-vs-mixpanel) is one of the [most popular product analytics tools](/blog/best-product-analytics-tools-for-startups) on the market. While it previously deprecated features like A/B testing to focus on core analytics, Mixpanel has reversed course and expanded substantially since 2024. The platform now includes session replay (web and mobile), heatmaps, experiments, and feature flags alongside its core analytics. Teams can connect Mixpanel to their data warehouse, CDP, or instrument directly via SDKs.
 
 ### Key features
 
@@ -730,9 +726,9 @@ We're biased, obviously, but we think PostHog is the perfect Amplitude replaceme
 -   You want tools to help you understand users in more depth (we added session replay, surveys, and more on top of Amplitude's feature set)
 -   You want to try before you buy (we're self-serve with a [generous free tier](/pricing))
 
-Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
 
-<ArrayCTA />
+<WizardCTA />
 
 ## Frequently asked questions
 
@@ -760,7 +756,7 @@ For most teams, **PostHog** is the best alternative. It includes everything Ampl
 <details>
 <summary>Which Amplitude alternatives are open source?</summary>
 
-**PostHog** is the only major open-source alternative on this list. Visit [this guide](/blog/best-open-source-product-analytics-tools) for additional open source product analytics options.
+**PostHog** is the only major open-source alternative on this list. Visit [this guide](/blog/best-open-source-analytics-tools) for additional open source product analytics options.
 
 </details>
 
@@ -816,14 +812,27 @@ No. Amplitude does not offer LLM observability or AI analytics features. **PostH
 <details>
 <summary>Can I use Amplitude with my data warehouse?</summary>
 
-Yes. Amplitude offers warehouse-native analytics that can query data directly from Snowflake, BigQuery, and Databricks. **Statsig** and **Mixpanel** also offer strong data warehouse integrations. **PostHog** takes a different approach – it stores data in ClickHouse and lets you export to your warehouse, or query directly via SQL and the API.
+Yes. Amplitude offers warehouse-native analytics that can query data directly from Snowflake, BigQuery, and Databricks. **Statsig** and **Mixpanel** also offer strong data warehouse integrations. 
+
+**PostHog** offers two approaches to using warehouse data: 
+
+1. **Use PostHog as your integrated warehouse**: Data stays in PostHog and is accessible across many PostHog tools. This eliminates the need to stitch together multiple vendors.
+2. **Connect external warehouses as sources**: Sync tables and fields from Snowflake/BigQuery/Databricks into PostHog via our CDP. Queries run on PostHog compute, enabling you to use warehouse data across PostHog tools.
+
+**PostHog is better if:**
+- You want to eliminate tool sprawl (Amplitude is a point solution that requires separate warehouse tools)
+- You value integrated workflows across analytics, experiments, and feature flags
+- You don&apos;t have a data warehouse yet or want to simplify your stack
+- You want transparent, usage-based pricing (1 million synced rows free per month)
+
+**Amplitude&apos;s approach is better if** you have an existing warehouse and need queries to run directly in Snowflake/BigQuery for compliance reasons.
 
 </details>
 
 <details>
 <summary>What other analytics tools are available?</summary>
 
-We've written comparison guides for many analytics categories. See our takes on the best [Mixpanel alternatives](/blog/best-mixpanel-alternatives), [Heap alternatives](/blog/best-heap-alternatives), [Google Analytics alternatives](/blog/ga4-alternatives), and [open source analytics tools](/blog/best-open-source-product-analytics-tools).
+We've written comparison guides for many analytics categories. See our takes on the best [Mixpanel alternatives](/blog/best-mixpanel-alternatives), [Heap alternatives](/blog/best-heap-alternatives), [Google Analytics alternatives](/blog/ga4-alternatives), and [open source analytics tools](/blog/best-open-source-analytics-tools).
 
 </details>
 

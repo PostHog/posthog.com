@@ -13,6 +13,7 @@ import {
     generateApiSpecMarkdown,
     generateLlmsTxt,
     generateSdkReferencesMarkdown,
+    generatePricingMd,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
@@ -367,8 +368,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
         return allStrapiPostCategories.find((category) => category === data)
     }
 
-    await getAllStrapiPosts()
-    await getAllStrapiPostCategories()
+    await Promise.all([getAllStrapiPosts(), getAllStrapiPostCategories()])
     const postsToCreateOrUpdate: any = []
     for (const {
         frontmatter: {
@@ -444,9 +444,11 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
         postsToCreateOrUpdate.push({ data, existingPostId: existingPost?.id })
     }
 
-    for (const { data, existingPostId } of postsToCreateOrUpdate) {
-        await createOrUpdateStrapiPost(data, existingPostId)
-    }
+    await Promise.all(
+        postsToCreateOrUpdate.map(({ data, existingPostId }) =>
+            limit(() => createOrUpdateStrapiPost(data, existingPostId))
+        )
+    )
 
     await Promise.all(
         roadmaps.map(({ title, date: roadmapDate, media, description, cta }) => {
@@ -556,6 +558,17 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     sdkReferencesQuery.data.allSdkReferences.nodes.forEach((node) => {
         generateSdkReferencesMarkdown(node)
     })
+
+    // Generate pricing.md from billing API data
+    try {
+        const billingUrl = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
+        const billingData = await fetch(billingUrl, {
+            headers: { 'Content-Type': 'application/json' },
+        }).then((res) => res.json())
+        generatePricingMd(billingData.products)
+    } catch (error) {
+        console.error('Failed to generate pricing.md:', error)
+    }
 
     // Generate markdown files for llms.txt file and LLM ingestion (after pages are built)
     // Convert HTML files to markdown using turndown

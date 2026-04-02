@@ -70,6 +70,15 @@ To do so, click on 'Options' dropdown next to the chart type and select the one 
 
 Also under the 'Options' dropdown is the ability to enable values on trends, and the legend, like in the screenshot above.
 
+
+## Hide weekend data
+
+You can hide Saturday and Sunday data points from time series charts. This is useful for B2B products where weekend traffic is noise and obscures weekday patterns.
+
+To enable it, click the **Options** dropdown next to the chart type, then check **Hide weekend data** under the **Display** section. When enabled, weekend events are excluded from the query and the corresponding date buckets are removed from the chart's x-axis. A "Weekend data excluded" badge appears below the insight to confirm filtering is active.
+
+This works with day-level intervals. For hour, minute, week, or month intervals, weekend filtering is not applied since those buckets span multiple days or would lose all data on weekend days.
+
 ## Set goal lines
 
 You can add goal lines to any trend line insight by clicking on **Advanced Options**, then **+ Add goal line**, and then entering a value. This is helpful for highlighting quarterly KPIs, limits, and more.

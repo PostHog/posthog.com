@@ -10,6 +10,7 @@ import { User } from 'hooks/useUser'
 import { ChatProvider } from 'hooks/useChat'
 import Start from 'components/Start'
 import useDataPipelinesNav from '../navs/useDataPipelinesNav'
+import useSourcesNav from '../navs/useSourcesNav'
 import initialMenu from '../navs'
 import { useToast } from './Toast'
 import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
@@ -373,6 +374,38 @@ const appSettings: AppSettings = {
             },
         },
     },
+    '/wizard': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/code': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     'home-test': {
         experiment: {
             variant: 'test',
@@ -550,6 +583,22 @@ const appSettings: AppSettings = {
         size: {
             min: {
                 width: 750,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/partnerships': {
+        size: {
+            min: {
+                width: 700,
                 height: 500,
             },
             max: {
@@ -835,6 +884,26 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    'action-figure': {
+        size: {
+            min: {
+                width: 960,
+                height: 682,
+            },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: false,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
     'ask-max': {
         size: {
             min: {
@@ -963,6 +1032,25 @@ const appSettings: AppSettings = {
                 width: 900,
                 height: 800,
             },
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
+    'hedgehog-generator': {
+        size: {
+            min: {
+                width: 550,
+                height: 650,
+            },
+            max: {
+                width: 550,
+                height: 650,
+            },
+            autoHeight: true,
         },
         position: {
             center: true,
@@ -1186,12 +1274,18 @@ export interface SiteSettings {
         | '2001-bliss'
         | 'parade'
         | 'coding-at-night'
+        | 'action-figure'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
+
+export const isAprilFirst = () => {
+    const now = new Date()
+    return now.getMonth() === 3 && now.getDate() === 1
+}
 
 const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
     const lastReset = typeof window !== 'undefined' ? localStorage.getItem('lastReset') : null
@@ -1207,6 +1301,10 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         screensaverDisabled: true,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
         ...(!lastReset ? { experience: 'posthog' } : {}),
+    }
+
+    if (isAprilFirst()) {
+        siteSettings.wallpaper = 'action-figure'
     }
 
     if (isMobile || compact) {
@@ -1262,14 +1360,18 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
     const sourceWebhooksNav = useDataPipelinesNav({ type: 'source_webhook' })
+    const cdpSourcesNav = useSourcesNav('/docs/cdp/sources')
+    const dwSourcesNav = useSourcesNav('/docs/data-warehouse/sources')
 
     const dynamicMenus = useMemo(
         () => ({
             'data-pipeline-destinations': destinationNav,
             'data-pipeline-transformations': transformationNav,
             'data-pipeline-source-webhooks': sourceWebhooksNav,
+            'data-pipeline-sources': cdpSourcesNav,
+            'data-warehouse-sources': dwSourcesNav,
         }),
-        [destinationNav, transformationNav, sourceWebhooksNav]
+        [destinationNav, transformationNav, sourceWebhooksNav, cdpSourcesNav, dwSourcesNav]
     )
 
     const desktopParams = useMemo(() => {

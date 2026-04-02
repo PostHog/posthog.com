@@ -866,7 +866,7 @@ function Terms() {
                         <p>ALL CAPS AGAIN, we’ll get out of the way here. 👀</p>
                     </div>
                     <div>
-                        <h2 id="misc">11. Miscellaneous</h2>
+                        <h2 id="misc">10. Miscellaneous</h2>
                         <p>
                             If any provision of this Agreement is found to be unenforceable or invalid, that provision
                             will be limited or eliminated to the minimum extent necessary so that this Agreement will
@@ -905,7 +905,7 @@ function Terms() {
                         </p>
                     </div>
                     <div className="pb-12">
-                        <h2 id="privacy">12. Data privacy</h2>
+                        <h2 id="privacy">11. Data privacy</h2>
                         <p>
                             Customer shall ensure that any and all information or data, including without limitation,
                             personal data, used by Customer in connection with the Agreement (“Customer Data”) is
@@ -940,7 +940,7 @@ function Terms() {
                         </p>
                     </div>
                     <div className="pb-12">
-                        <h2 id="sla">13. Uptime SLA</h2>
+                        <h2 id="sla">12. Uptime SLA</h2>
                         <p>
                             PostHog will use commercially reasonable efforts to make the Software available with all
                             material features and services operating and available for use, in each calendar month with

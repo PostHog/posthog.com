@@ -49,6 +49,12 @@ e.yourdomain.com {
       header_down -Access-Control-Allow-Origin
     }
   }
+  handle /array/* {
+    reverse_proxy https://us-assets.i.posthog.com:443 {
+      header_up Host us-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
   handle {
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
@@ -61,6 +67,12 @@ e.yourdomain.com {
 ```caddy file=EU
 e.yourdomain.com {
   handle /static/* {
+    reverse_proxy https://eu-assets.i.posthog.com:443 {
+      header_up Host eu-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+  handle /array/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
       header_down -Access-Control-Allow-Origin
@@ -165,6 +177,14 @@ In your working directory, create a file named `Caddyfile`:
     }
   }
 
+  handle_path /ph-proxy/array* {
+    rewrite * /array/{path}
+    reverse_proxy https://us-assets.i.posthog.com:443 {
+      header_up Host us-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+
   handle_path /ph-proxy* {
     rewrite * {path}
     reverse_proxy https://us.i.posthog.com:443 {
@@ -181,6 +201,14 @@ In your working directory, create a file named `Caddyfile`:
 :2015 {
   handle_path /ph-proxy/static* {
     rewrite * /static/{path}
+    reverse_proxy https://eu-assets.i.posthog.com:443 {
+      header_up Host eu-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+
+  handle_path /ph-proxy/array* {
+    rewrite * /array/{path}
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
       header_down -Access-Control-Allow-Origin
@@ -209,7 +237,7 @@ This configuration:
 - Uses `rewrite` to reconstruct the correct path for PostHog
 - Serves local files from the same directory for testing
 
-The `rewrite` directive is necessary because PostHog expects requests like `/static/array.js`, not `/ph-proxy/static/array.js`. The `handle_path` directive strips the prefix, then `rewrite` reconstructs the path.
+The `rewrite` directive is necessary because PostHog expects requests like `/static/array.js` and `/array/{token}/config.js`, not `/ph-proxy/static/array.js`. The `handle_path` directive strips the prefix, then `rewrite` reconstructs the path.
 
 </Step>
 
@@ -320,6 +348,12 @@ e.yourdomain.com {
       header_down -Access-Control-Allow-Origin
     }
   }
+  handle /array/* {
+    reverse_proxy https://us-assets.i.posthog.com:443 {
+      header_up Host us-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
   handle {
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
@@ -336,6 +370,12 @@ e.yourdomain.com {
   }
 
   handle /static/* {
+    reverse_proxy https://eu-assets.i.posthog.com:443 {
+      header_up Host eu-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+  handle /array/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
       header_down -Access-Control-Allow-Origin
@@ -477,6 +517,12 @@ e.yourdomain.com {
       header_down -Access-Control-Allow-Origin
     }
   }
+  handle /array/* {
+    reverse_proxy https://us-assets.i.posthog.com:443 {
+      header_up Host us-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
   handle {
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
@@ -508,6 +554,12 @@ e.yourdomain.com {
       header_down -Access-Control-Allow-Origin
     }
   }
+  handle /array/* {
+    reverse_proxy https://eu-assets.i.posthog.com:443 {
+      header_up Host eu-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
   handle {
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
@@ -521,15 +573,17 @@ e.yourdomain.com {
 
 Replace `https://yourdomain.com` with your application's origin. For multiple origins or testing, use `*` instead, but be aware this is less secure.
 
-### Static assets return 404
+### Static assets or remote config return 404
 
-If the PostHog SDK fails to load or you see 404 errors for `/static/*` requests:
+If the PostHog SDK fails to load or you see 404 errors for `/static/*` or `/array/*` requests:
 
-1. Verify your Caddyfile has a `handle /static/*` block
-2. Check that it points to the correct assets domain, `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`
+1. Verify your Caddyfile has both `handle /static/*` and `handle /array/*` blocks
+2. Check that they point to the correct assets domain, `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`
 3. Confirm the assets domain matches your PostHog region
 
-The `/static/*` route must be defined before the catch-all `handle` block. Caddy evaluates handlers in order, so place specific paths before generic ones.
+The `/static/*` and `/array/*` routes must be defined before the catch-all `handle` block. Caddy evaluates handlers in order, so place specific paths before generic ones.
+
+The `/array/*` route serves PostHog's remote config (e.g., `/array/{token}/config.js`). Routing it through the assets origin ensures proper `cache-control` headers are preserved. Without this, browsers may use heuristic caching and serve stale SDK config for hours or days, causing Feature flags, session recording conditions, and sampling rates to stop updating.
 
 ### Port conflicts
 

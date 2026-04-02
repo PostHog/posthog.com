@@ -161,7 +161,7 @@ def _format_ui_context(self, ui_context: MaxUIContext) -> str:
   return f"User context: {dashboard_context}\n{insight_context}"
 ```
 
-You also need to handle “context” within the workflow (aka state). As the conversation progresses, you don’t want that context to be lost, and this is especially likely to happen when you have multiple sub-agents. To get this right, we store and include context through every part of the workflow like this:
+You also need to handle “context” within the workflow (aka state). As the conversation progresses, you don’t want that context to be lost, and this is especially likely to happen when you have [multiple sub-agents](/newsletter/building-ai-agents). To get this right, we store and include context through every part of the workflow like this:
 
 ```python
 class AssistantState(TypedDict):

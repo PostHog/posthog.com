@@ -1,0 +1,38 @@
+---
+title: PostHog MCP for VS Code
+sidebarTitle: VS Code
+---
+
+import { MCPConfigSnippet } from '../../../src/components/Product/MCP/MCPConfig'
+import SharedContent from "./_snippets/shared.mdx"
+
+The PostHog [MCP server](https://modelcontextprotocol.io/introduction) enables VS Code to directly interact with your PostHog data – managing feature flags, querying analytics, investigating errors, and more.
+
+## Server URL
+
+| Region | URL |
+|--------|-----|
+| **US** (default) | `https://mcp.posthog.com/mcp` |
+| **EU** | `https://mcp-eu.posthog.com/mcp` |
+
+## Quick install
+
+The [PostHog Wizard](https://github.com/PostHog/wizard) can install the MCP server directly into VS Code:
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+## Manual setup
+
+1. Open [Visual Studio Code](https://code.visualstudio.com/). In the command palette, run: `MCP: Open User Configuration` to open the configuration file
+2. Update `mcp.json` with the following configuration:
+
+<MCPConfigSnippet variant="vscode" />
+
+3. **Save** the configuration file
+4. The MCP server will now be available the next time you chat with Copilot
+
+When you first use the MCP server, you'll be prompted to log in to PostHog to authenticate.
+
+<SharedContent />
