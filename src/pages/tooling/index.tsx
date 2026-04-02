@@ -3,8 +3,15 @@ import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import { IconRefresh } from '@posthog/icons'
 import Link from 'components/Link'
-import { StickerCloudCross, StickerMindMap } from 'components/Stickers/Stickers'
+import {
+    StickerCloudCross,
+    StickerFork,
+    StickerMindMap,
+    StickerRun,
+    StickerServers,
+} from 'components/Stickers/Stickers'
 import CloudinaryImage from 'components/CloudinaryImage'
+import WizardCommand from 'components/WizardCommand'
 
 export default function Tooling(): JSX.Element {
     return (
@@ -16,7 +23,7 @@ export default function Tooling(): JSX.Element {
             />
             <Editor>
                 <div className="space-y-6 leading-relaxed">
-                    <h1 className="text-2xl font-bold">How we build things on the internet has changed a lot.</h1>
+                    <h1 className="text-2xl font-bold pt-4">How we build things on the internet has changed a lot.</h1>
 
                     <div className="grid grid-cols-1 @2xl:grid-cols-3 @2xl:gap-x-8">
                         <div className="flex flex-row-reverse @2xl:flex-col gap-8 @2xl:gap-0">
@@ -115,20 +122,37 @@ export default function Tooling(): JSX.Element {
 
                     <div className="space-y-3">
                         <h2 className="text-lg mb-8">PostHog solves this in a few ways:</h2>
-                        <ol className="list-decimal list-inside pl-0 space-y-2">
-                            <li>
-                                <strong>Unified data stack.</strong> Your data might originate elsewhere, but{' '}
-                                <em>everything</em> can be pushed into PostHog where it can be transformed, queried, and
-                                even exported.
+                        <ol className="list-none pl-0 space-y-2">
+                            <li className="relative pl-20">
+                                <StickerServers className="size-16 absolute left-0 -top-2" />
+                                <h3 className="text-base mt-0">1. Unified data stack</h3>
+                                <p>
+                                    Your data might originate elsewhere, but <em>everything</em> can be pushed into
+                                    PostHog where it can be transformed, queried, and even exported.
+                                </p>
                             </li>
-                            <li>
-                                <strong>MCP.</strong> PostHog's dozens of tools are available to your LLM. You no longer
-                                need to learn a UI to run analysis or perform tasks like creating an experiment, survey,
-                                or feature flag.
+
+                            <li className="relative pl-20">
+                                <StickerRun className="size-16 absolute left-0 -top-2" />
+                                <h3 className="text-base mt-0">2. MCP</h3>
+                                <p>
+                                    PostHog's dozens of tools are available to your LLM. You no longer need to learn a
+                                    UI to run analysis or perform tasks like creating an experiment, survey, or feature
+                                    flag.
+                                </p>
                             </li>
-                            <li>
-                                <strong>PostHog Code.</strong> Our AI code editor automatically analyzes signals from
-                                customer data, proposes improvements, and writes pull requests – <em>automatically</em>.
+
+                            <li className="relative pl-20">
+                                <StickerFork className="size-16 absolute left-0 -top-2" />
+                                <h3 className="text-base mt-0">3. PostHog Code</h3>
+                                <p>
+                                    Our{' '}
+                                    <Link to="/code" state={{ newWindow: true }}>
+                                        AI code editor
+                                    </Link>{' '}
+                                    automatically analyzes signals from customer data, proposes improvements, and writes
+                                    pull requests – <em>automatically</em>.
+                                </p>
                             </li>
                         </ol>
                     </div>
@@ -139,6 +163,13 @@ export default function Tooling(): JSX.Element {
                         How we run analysis and build software has changed, but what <em>hasn't</em> changed is the need
                         for good data, good tooling, and a seamless way for them to operate together in harmony.
                     </p>
+
+                    <h2>Try it – free</h2>
+                    <p>
+                        Use the PostHog Wizard to install PostHog automatically. Each product has a generous free tier –
+                        no credit card required.
+                    </p>
+                    <WizardCommand className="border border-primary" />
                 </div>
             </Editor>
         </>
