@@ -1,0 +1,93 @@
+---
+title: Keeping flag evaluations stable
+showTitle: true
+sidebar: Docs
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+Feature flags are [pure functions](/docs/feature-flags/production-ready) – same inputs, same outputs. The most common way to break that contract is to change the `distinct_id` between evaluations, which happens naturally when a user transitions from anonymous to identified.
+
+This page covers how to keep the hash input stable so flags don't flip during authentication transitions. If you haven't already, read [identity resolution](/docs/product-analytics/identity-resolution) first – a stable identity strategy eliminates most flag stability problems before they start.
+
+## Why the hash input changes
+
+When a user starts anonymous and then logs in:
+
+```
+hash("my-experiment", "anon-uuid-123")  → 0.31 → variant "test"
+hash("my-experiment", "user-456")       → 0.72 → variant "control"
+```
+
+Same person, different variant. The hash function worked correctly both times – it received different inputs and produced different outputs.
+
+For experiments, this is data corruption: the user experienced "test" but may now be counted in "control." For feature rollouts, the user sees a feature appear and then disappear on login.
+
+## Start with your identity strategy
+
+The best way to keep flag evaluations stable is to prevent the `distinct_id` from changing in the first place. The [identity resolution guide](/docs/product-analytics/identity-resolution#choosing-your-identity-strategy) covers three approaches:
+
+- **[Golden path: stable ID from first touch](/docs/product-analytics/identity-resolution#golden-path-stable-id-from-first-touch)** – assign a durable ID before any flag evaluation happens. The `distinct_id` never changes, so the hash never changes. This is the recommended approach.
+- **[Common path: anonymous then identify on login](/docs/product-analytics/identity-resolution#common-path-anonymous-then-identify-on-login)** – the SDK generates an anonymous ID, then `identify()` links it to a known user. This changes the `distinct_id`, which changes the hash. The mitigations below exist for this path.
+- **[Server-side bootstrap with a known ID](/docs/product-analytics/identity-resolution#server-side-linking-with-alias)** – if you have server rendering, you know the user before the page loads. Bootstrap with their stable ID and the anonymous-to-identified transition never happens.
+
+If you can use the golden path or server-side bootstrap, the rest of this page is unnecessary. The sections below are for when the `distinct_id` will change and you need to manage that.
+
+## Flag-specific mitigations
+
+When your identity strategy involves a `distinct_id` change (the common path), PostHog offers two mechanisms to keep flag values stable across that transition.
+
+### Device bucketing (recommended)
+
+Hashes on `$device_id` instead of `distinct_id`. Since the device ID doesn't change on `identify()`, the flag value stays consistent across the authentication boundary.
+
+See [Device bucketing](/docs/feature-flags/device-bucketing) for setup.
+
+| | Device bucketing | Experience continuity |
+|---|---|---|
+| Database cost | None | Read on every evaluation, write on first identify |
+| Local evaluation | Supported | Not supported – forces network round-trip |
+| Bootstrapping | Compatible | Not compatible |
+| `person_profiles: 'identified_only'` | Works | Doesn't work |
+| Cross-device consistency | No (per-device) | No (per-person, but only after identify) |
+| Known issues | `$device_id` can be lost on cookie clears | posthog-js [#2623](https://github.com/PostHog/posthog-js/issues/2623): values can change after identify |
+
+### Experience continuity
+
+Pins a stable hash key to a person record in Postgres. Enabled per-flag via `ensure_experience_continuity`. The server remembers which hash key was used for the first evaluation and reuses it on all subsequent evaluations, even after the `distinct_id` changes.
+
+See [Creating feature flags – persisting across authentication](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional) for setup.
+
+Use experience continuity only when device bucketing and the stable ID approaches aren't feasible. It comes at a cost: a database read and write on every evaluation, no support for [local evaluation](/docs/feature-flags/local-evaluation), and a [known issue](https://github.com/PostHog/posthog-js/issues/2623) where values can still change after `identify()`.
+
+## Cross-device consistency
+
+Device-scoped solutions (device bucketing, cookie-based stable IDs) don't span devices. If a user logs in on their phone and laptop, each device hashes independently.
+
+For cross-device consistency, target flags on **person properties** instead of relying on the hash:
+
+```
+Flag condition: where plan = "enterprise" → 100% rollout
+Flag condition: where cohort = "beta-users" → show feature
+```
+
+Person properties resolve server-side against the person record. The same person matches the same conditions regardless of device. This reframes the question: instead of "how do I make the hash stable across devices," ask "how do I target users based on who they are?"
+
+## Choosing the right pattern
+
+| Requirement | Best approach |
+|---|---|
+| Same flag value before and after login (single device) | [Stable ID](/docs/product-analytics/identity-resolution#golden-path-stable-id-from-first-touch) or device bucketing |
+| Same flag value across devices (logged-in users) | Target on person properties |
+| Same flag value across devices (anonymous users) | Not solvable without cross-device identity |
+| Maximum debuggability and control | Server-side local eval with explicit stable ID |
+| Quick fix, minimal code changes | Device bucketing |
+| Can't change identity flow at all | Experience continuity |
+
+## Further reading
+
+- [Production-ready feature flags](/docs/feature-flags/production-ready) – the pure function model that explains why identity matters for flags
+- [Identity resolution](/docs/product-analytics/identity-resolution) – designing your identity strategy (start here if you haven't)
+- [Device bucketing](/docs/feature-flags/device-bucketing) – setup guide
+- [Bootstrapping](/docs/feature-flags/bootstrapping) – eliminating the async gap
+- [Local evaluation](/docs/feature-flags/local-evaluation) – server-side evaluation for explicit input control
