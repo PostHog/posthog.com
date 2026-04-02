@@ -2008,6 +2008,10 @@ export const docsMenu = {
                             url: '/docs/getting-started/identify-users',
                         },
                         {
+                            name: 'Identity resolution',
+                            url: '/docs/product-analytics/identity-resolution',
+                        },
+                        {
                             name: 'Deploy a proxy',
                             url: '/docs/advanced/proxy',
                         },
@@ -3963,7 +3967,20 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Keeping flag evaluations stable',
+                    url: '/docs/feature-flags/stable-identity-for-flags',
+                    icon: 'IconPerson',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Guides',
+                },
+                {
+                    name: 'Production-ready feature flags',
+                    url: '/docs/feature-flags/production-ready',
+                    icon: 'IconBolt',
+                    color: 'purple',
+                    featured: true,
                 },
                 {
                     name: 'Do a phased rollout',
