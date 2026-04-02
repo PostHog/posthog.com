@@ -9,7 +9,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 ## TL;DR
 
 - [Flags are pure functions](#flags-are-pure-functions) – same flag key + same distinct ID = same result. Always.
-- [Unexpected results are almost always input problems](#unexpected-results-are-almost-always-input-problems) – evaluate a flag a million times with the same inputs, get the same result a million times. If the result changed, an input changed.
+- [Unexpected results are always input problems](#unexpected-results-are-almost-always-input-problems) – evaluate a flag a million times with the same inputs, get the same result a million times. If the result changed, an input changed.
 - [Resolve identity before evaluating flags](#resolve-identity-before-evaluating-flags) – `identify()` must happen before flag evaluation, or the hash uses the wrong ID. This is the most common input problem.
 - [Evaluate once, not continuously](#evaluate-once-not-continuously) – a flag is a one-time signal. Record the result. Re-evaluate only on meaningful state changes.
 - [Evaluate where the data lives](#evaluate-where-the-data-lives) – if the data is on your server, evaluate there. The further the flag is from the data, the more async complexity.
