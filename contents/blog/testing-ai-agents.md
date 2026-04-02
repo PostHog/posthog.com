@@ -100,7 +100,7 @@ After learning about the types of evaluators that can help you test your agent, 
 
 Now, every time you make a change to your agent, you can run the agentic loop and regenerate all the outputs with instances of your database and everything else running locally. This feeds into the code-based and LLM-as-a-Judge evaluators and gives you a report of the evaluation results.
 
-You then realize that running these locally means trusting that everyone working on the agent will run those tests locally before shipping changes, but as with unit tests, we don't leave it to chance. You then add a pipeline step in your CI to run all of these evaluation suites. You can, and probably should, limit which PRs these evaluations are run for. If there are no changes in the agent code, perhaps it's not worth spending money on LLM tokens to run the evaluations.
+You then realize that running these locally means trusting that everyone to do that before shipping changes, but as with unit tests, we don't leave it to chance. You add a pipeline step in your CI to run all of these evaluation suites. You can, and probably should, limit which PRs these evaluations are run for. If there are no changes in the agent code it's not worth spending money on LLM tokens to run the evaluations.
 
 There are many open-source libraries that pack great evaluators like Levenshtein distance that you can use. These kinds of evaluations are not run on live production data and so are called "offline" evaluations. PostHog is also starting to support this workflow for better tracking.
 
