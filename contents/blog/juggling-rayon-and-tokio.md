@@ -41,15 +41,15 @@ Tokio and Rayon are two very popular Rust crates (or libs). They may seem kind o
 
 ### Tokio
 
-Tokio is the go-to Rust solution for async operations. It creates a Runtime that manages all your application's async tasks. By default, it will create a Runtime with the same number of worker threads (actual OS level threads) as the number of CPU cores available.
+[Tokio](https://docs.rs/tokio/latest/tokio/) is the go-to Rust solution for async operations. It creates a Runtime that manages all your application's async tasks. By default, it will create a Runtime with the same number of worker threads (actual OS level threads) as the number of CPU cores available.
 
-The management and coordination of tasks and worker threads is abstracted away from users. Tokio does it for us. Think of it as the Rust version of JavaScript's event loop. Tokio's tasks and whole structure is designed around the async model: waiting for a lot of operations at the same time.
+The management and coordination of tasks and worker threads is abstracted away from users. Tokio does it for us. Think of it as the multi-threaded Rust version of JavaScript's event loop. Tokio's tasks and whole structure is designed around the async model: waiting for a lot of operations at the same time.
 
 ### Rayon
 
-Rayon is a data-processing crate. It's main purpose is to "make it drop-dead simple to convert sequential computations into parallel ones.". It can split data, process it in different threads, and glue the pieces back together. Naturally, there is overhead in coordinating this process, making it ideal for big datasets, where the overhead pays off.
+[Rayon](https://docs.rs/rayon/latest/rayon/) is a data-processing crate. Its main purpose is to "make it drop-dead simple to convert sequential computations into parallel ones.". It can split data, process it in different threads, and glue the pieces back together. Naturally, there is overhead in coordinating this process, making it ideal for big datasets, where the overhead pays off.
 
-By default, Rayon will also create a ThreadPool with, as you might have guessed it, the same number of OS-level threads as the number of CPU cores available.
+By default, Rayon will also create a `ThreadPool` with, as you might have guessed it, the same number of OS-level threads as the number of CPU cores available.
 
 ## Our setup
 
