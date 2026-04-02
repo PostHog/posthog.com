@@ -180,6 +180,45 @@ The `system.annotations` table contains annotation data from your project. Annot
 | `created_at`       | When the annotation was created                               |
 | `updated_at`       | When the annotation was last updated                          |
 
+### `system.batch_exports`
+
+The `system.batch_exports` table contains batch export configurations from your project. Use this table to query export settings, schedules, and status. For more on batch exports, see the [batch exports docs](/docs/cdp/batch-exports).
+
+| Column            | Description                                                           |
+|-------------------|-----------------------------------------------------------------------|
+| `id`              | Unique identifier for the batch export                                |
+| `name`            | Human-readable name of the batch export                               |
+| `model`           | Data model being exported: `events`, `persons`, or `sessions`         |
+| `interval`        | Schedule frequency: `hour`, `day`, `week`, `every 5 minutes`, `every 15 minutes` |
+| `paused`          | Whether the export is paused (1 = paused, 0 = active)                 |
+| `deleted`         | Soft-delete flag (1 = deleted, 0 = active)                            |
+| `destination_id`  | Reference to the destination configuration                            |
+| `timezone`        | IANA timezone for scheduling (e.g. `UTC`, `America/New_York`)         |
+| `interval_offset` | Offset in seconds from the default interval start time                |
+| `created_at`      | When the batch export was created                                     |
+| `last_updated_at` | When the batch export was last modified                               |
+| `last_paused_at`  | When the export was last paused                                       |
+| `start_at`        | Earliest time for scheduled runs                                      |
+| `end_at`          | Latest time for scheduled runs                                        |
+
+> **Note:** Filter with `deleted = 0` to exclude soft-deleted exports. Filter with `paused = 0` to find actively running exports. Destination secrets are not exposed through this table.
+
+### `system.batch_export_backfills`
+
+The `system.batch_export_backfills` table tracks [backfill](/docs/cdp/batch-exports#backfills-exporting-historical-data) jobs for batch exports. A backfill is a one-time historical data export for a specific time range.
+
+| Column               | Description                                                     |
+|----------------------|-----------------------------------------------------------------|
+| `id`                 | Unique identifier for the backfill                              |
+| `batch_export_id`    | ID of the parent batch export                                   |
+| `start_at`           | Start of the backfill time range                                |
+| `end_at`             | End of the backfill time range                                  |
+| `status`             | Current status: `Starting`, `Running`, `Completed`, `Failed`, `Cancelled` |
+| `created_at`         | When the backfill was created                                   |
+| `finished_at`        | When the backfill completed                                     |
+| `last_updated_at`    | When the backfill was last modified                             |
+| `total_records_count`| Total records exported (populated after completion)             |
+
 ### `system.cohort_calculation_history`
 
 The `system.cohort_calculation_history` table tracks cohort calculation runs, useful for monitoring cohort computation status and debugging.
