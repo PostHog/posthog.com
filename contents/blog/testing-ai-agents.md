@@ -37,7 +37,7 @@ You work hard tweaking that system prompt, choosing the right model, and changin
 
 Once you're ready, you ship your agent to production and start rolling it out to your users.
 
-## Your first users
+## Reproducing bugs from your agent's first users
 
 How you tested the agent locally is a lot different than how people use it in production, and that leads to issues.
 
