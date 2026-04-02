@@ -52,6 +52,13 @@ Capturing this reality requires an observability tool for your agent. That way, 
 
 PostHog's [LLM analytics](/docs/llm-analytics/start-here) is one way to build that observability layer.
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_traces_25e203aa50.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_traces_dark_dd6ad555dc.png"
+    alt="LLM traces"
+    classes="rounded"
+/>
+
 With the tracing mechanism the observability tool provides, you can now see how your agent is behaving in the wild. You find bugs proactively and fix them before users start complaining about them. There is, however, a big caveat: you now spend a lot of time looking at traces.
 
 ## Your agent gets popular, tests get automated
@@ -68,7 +75,7 @@ So, given this non-determinism, what kinds of things can we expect or evaluate?
 
 ### Deterministic evaluators
 
-Here are just a few examples of evaluations you can deterministically run on a set of inputs and outputs from the agent. In this case, the determinism refers to the test evaluation returning the same result for the same set of inputs and outputs.
+Even though our agent is non-deterministic, you can set up deterministic evaluations. You give an agent an input, have it generate the output, and evaluate that output. Example evaluations include:
 
 1. A specific tool call was made, for example a web search
 2. A set of forbidden keywords were not used in the output, think bad words or competitors
@@ -88,7 +95,14 @@ For such complex cases, we can use an LLM to act as an evaluator. This is known 
 3. The agent failed to protect itself against a jailbreak attempt, for example through prompt injection
 4. The agent leaked personally identifiable information when it shouldn't have
 
-The possibilities for LLM-as-a-Judge are theoretically infinite. The danger of this type of evaluator is that it is not deterministic and could return different results for the same set of inputs and outputs. It is also sensitive to changes in the judge model. For these reasons, the LLM-as-a-Judge prompt needs to be properly built to remove as much ambiguity as possible.
+The possibilities for LLM-as-a-Judge are theoretically infinite. The danger of this type of evaluator is that it is also not deterministic and could return different results for the same set of inputs and outputs. The test is also sensitive to changes in the judge model. For these reasons, the LLM-as-a-Judge prompt needs to be properly built to remove as much ambiguity as possible.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_04_02_at_5_15_06_PM_0dd1fd6f85.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_04_02_at_5_15_32_PM_5f90e21891.png"
+    alt="LLM-as-a-Judge evaluation example"
+    classes="rounded"
+/>
 
 The prompt should be specific about what it is evaluating. It should contain a couple of simple examples that capture different gotchas, if possible. Finally, it is preferable to return a boolean representing the test success instead of a range of numbers, since it reduces ambiguity and leads to a clearer set of test results.
 
@@ -137,7 +151,7 @@ Here are a few ideas:
 
 The PostHog teams working on AI features and agents have a weekly ritual called Traces Hour, where they look at and review traces that have been marked for review throughout the week. They come from all the sources listed above.
 
-PostHog also has Reviews and Review Queues, which help you build these lists of traces and review them one by one.
+PostHog also has [Reviews and Review Queues](/docs/llm-analytics/trace-reviews), which help you build these lists of traces and review them one by one.
 
 Going through this process will help you and your team find new bad interactions and bugs to fix, which in turn leads to the creation of new evaluators to prevent regressions and detect other user inputs that still fail after your fix is live.
 
