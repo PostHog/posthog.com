@@ -33,7 +33,7 @@ In this post, we’ll walk through what testing AI agents well looks like by fol
 
 It all begins with the classic "Hello World", though now it's wrapped inside an SDK for creating agents, and we're not greeting the world, but rather being a helpful assistant.
 
-You work hard tweaking that system prompt, choosing the right model, and changing the available tools and their descriptions until the agent successfully completes your happy paths and edge cases.
+Testing at this stage is manual. You work hard to tweak that system prompt, choose the right model, and change the available tools and their descriptions until the agent successfully completes your happy paths and edge cases. It's just you and the agent locally battling back and forth.
 
 Once you're ready, you ship your agent to production and start rolling it out to your users.
 
