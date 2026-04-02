@@ -210,6 +210,22 @@ The `system.data_warehouse_tables` table contains metadata about data warehouse 
 | `deleted`                | Whether the table is deleted (1 = yes, 0 = no)  |
 | `deleted_at`             | When the table was deleted                      |
 
+
+### `system.early_access_features`
+
+The `system.early_access_features` table contains early access feature definitions from your project.
+
+| Column              | Description                                                        |
+|---------------------|--------------------------------------------------------------------|
+| `id`                | Unique identifier for the early access feature                     |
+| `team_id`           | Team ID the feature belongs to                                     |
+| `feature_flag_id`   | ID of the linked feature flag                                      |
+| `name`              | Name of the early access feature                                   |
+| `description`       | Description of the feature                                         |
+| `stage`             | Current stage (`draft`, `alpha`, `beta`, `general-availability`, `archived`) |
+| `documentation_url` | URL to documentation                                               |
+| `created_at`        | When the feature was created                                       |
+
 ### `system.error_tracking_issues`
 
 The `system.error_tracking_issues` table contains error tracking issues from your project.
