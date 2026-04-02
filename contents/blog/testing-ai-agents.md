@@ -128,7 +128,7 @@ When we can't just think about them out of thin air, we can go back to manually 
 
 Here are a few ideas:
 
-1. Create a thumbs up/down feedback system so that your users can flag bad interactions, and look at the traces that have received feedback
+1. Create a thumbs up/down feedback system so your users can flag bad interactions, and look at the traces that have received feedback
 2. Look for error spikes and the [traces that have those errors](/docs/llm-analytics/errors)
 3. Look at traces that have been flagged as problematic via a support ticket
 4. If you've shipped a new feature, look for traces that are using that feature, for example by looking at the [traces that have called a specific tool](/docs/llm-analytics/tools) belonging to that feature
