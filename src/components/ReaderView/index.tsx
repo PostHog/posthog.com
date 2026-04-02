@@ -33,7 +33,7 @@ import * as OSIcons from '../OSIcons/Icons'
 import { getLogo } from '../../constants/logos'
 import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
-import { getProseClasses, MARKDOWN_CONTENT_PATHS } from '../../constants'
+import { getProseClasses, isMarkdownContentPath } from '../../constants'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
@@ -50,7 +50,7 @@ dayjs.extend(relativeTime)
 // Wrapper component that conditionally renders CopyMarkdownActionsDropdown based on whether the markdown URL exists
 const ConditionalMarkdownDropdown = ({ pageUrl }: { pageUrl: string | undefined }) => {
     // Check if path is in allowed content paths
-    const isAllowedPath = pageUrl && MARKDOWN_CONTENT_PATHS.some((p) => pageUrl === p || pageUrl.startsWith(`${p}/`))
+    const isAllowedPath = pageUrl && isMarkdownContentPath(pageUrl)
     const markdownExists = useMarkdownUrlExists(isAllowedPath ? pageUrl : '')
 
     // Don't render if path is not allowed, during loading, or if markdown doesn't exist

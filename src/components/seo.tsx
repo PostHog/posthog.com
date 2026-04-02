@@ -4,7 +4,7 @@ import { useLocation } from '@reach/router'
 import { useStaticQuery, graphql } from 'gatsby'
 import { useApp } from '../context/App'
 import { useWindow } from '../context/Window'
-import { MARKDOWN_CONTENT_PATHS } from '../constants'
+import { isMarkdownContentPath } from '../constants'
 
 interface SEOProps {
     title: string
@@ -57,7 +57,7 @@ export const SEO = ({
             {seo.description && <meta name="description" content={seo.description} />}
             {seo.image && <meta name="image" content={seo.image} />}
             {<link rel="canonical" href={canonicalUrl ? canonicalUrl : seo.url} />}
-            {MARKDOWN_CONTENT_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`)) && (
+            {isMarkdownContentPath(pathname) && (
                 <link rel="alternate" type="text/markdown" href={`${siteUrl}${pathname.replace(/\/$/, '')}.md`} />
             )}
 
