@@ -34,6 +34,7 @@ import {
     IconTarget,
     IconArrowUpRight,
     IconTrends,
+    IconCursorClick,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -2092,7 +2093,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Heatmaps',
-            Icon: IconClockRewind,
+            Icon: IconCursorClick,
             description: 'See where users click, scroll, and move on your site',
             handle: 'heatmaps',
             color: 'green',

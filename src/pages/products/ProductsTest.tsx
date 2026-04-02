@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { navigate } from 'gatsby'
 import SEO from 'components/seo'
 import useProduct from '../../hooks/useProduct'
@@ -10,6 +10,10 @@ import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CTAs } from 'components/Home/Test'
 import Tooltip from 'components/RadixUI/Tooltip'
+import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
+import TVScreen from 'components/Home/Test/TV'
+import { Accordion } from 'components/RadixUI/Accordion'
+import OSButton from 'components/OSButton'
 
 const statusDotColor: Record<string, string> = {
     beta: 'bg-yellow',
@@ -65,8 +69,8 @@ const sections = [
                 colSpan: 2,
                 columns: [
                     ['web_analytics', 'product_analytics', 'revenue_analytics', 'trends'],
-                    ['funnels', 'user_paths', 'lifecycle', 'llm_traces'],
-                    ['llm_generations', 'llm_evals', 'session_replay', 'heatmaps'],
+                    ['funnels', 'user_paths', 'lifecycle', 'heatmaps'],
+                    ['llm_traces', 'llm_generations', 'llm_evals', 'activity'],
                 ],
             },
             {
@@ -83,26 +87,167 @@ const sections = [
             },
         ],
     },
-    {
-        title: 'Tools',
-        description: (
-            <>
-                <Link to="/ai" state={{ newWindow: true }} className="font-semibold">
-                    PostHog AI
-                </Link>{' '}
-                can answer most questions directly, but dashboards give you at-a-glance metrics, notebooks let you
-                compile insights and replays to support a deep dive, and the activity feed shows a real-time event
-                timeline of what users are doing.
-            </>
-        ),
-        groups: [
-            {
-                label: null,
-                handles: ['dashboards', 'notebooks', 'activity'],
-            },
-        ],
-    },
 ]
+
+const PROMPTS = [
+    { slide: 'analytics', text: 'Why has my traffic decreased?', videoId: 'pmh9dvfgj4' },
+    { slide: 'analytics', text: 'Create an SEO/SEM dashboard for my marketing team', videoId: '79pshye67k' },
+    { slide: 'analytics', text: 'Find issues with page performance', videoId: '1fxx4escag' },
+    { slide: 'replay', text: 'Watch user sessions to find UX issues', videoId: '39pr1b86tw' },
+    { slide: 'replay', text: 'Show me recordings of visitors using a feature', videoId: '1bct5lkhxh' },
+    { slide: 'feature-flags', text: 'Create a feature flag', videoId: 'lqo8v51lw6' },
+    { slide: 'data-warehouse', text: 'Write a SQL query', videoId: 'lw11gbdm03' },
+]
+
+function ProductTrigger({ handle }: { handle: string }) {
+    const product = useProduct({ handle }) as
+        | { Icon?: React.ComponentType<{ className?: string }>; color?: string; name?: string }
+        | undefined
+    const Icon = product?.Icon
+    return (
+        <div className="flex items-center gap-2">
+            {Icon && <Icon className={`size-5 text-${product?.color}`} />}
+            <h2 className="!m-0">{product?.name}</h2>
+        </div>
+    )
+}
+
+const AIDemos = () => {
+    const videoRef = useRef<WistiaVideoRef>(null)
+    const tvScreenRef = useRef<HTMLDivElement>(null)
+    const [activePromptIndex, setActivePromptIndex] = useState(0)
+    const [isPlaying, setIsPlaying] = useState(true)
+
+    const scrollToVideo = () => {
+        if (tvScreenRef.current) {
+            setTimeout(() => {
+                tvScreenRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+            }, 100)
+        }
+    }
+
+    const handlePrev = () => {
+        setActivePromptIndex((prev) => (prev - 1 + PROMPTS.length) % PROMPTS.length)
+    }
+
+    const handlePlayPause = () => {
+        if (isPlaying) {
+            videoRef.current?.pause()
+        } else {
+            videoRef.current?.play()
+        }
+        setIsPlaying(!isPlaying)
+    }
+
+    const handleNext = () => {
+        setActivePromptIndex((prev) => (prev + 1) % PROMPTS.length)
+    }
+
+    useEffect(() => {
+        setIsPlaying(true)
+    }, [activePromptIndex])
+
+    const currentPrompt = PROMPTS[activePromptIndex]
+    const activeAccordion = currentPrompt.slide
+
+    const handleVideoEnd = () => {
+        setActivePromptIndex((prev) => (prev + 1) % PROMPTS.length)
+    }
+
+    const handleAccordionChange = (value: string) => {
+        if (!value) return
+        const firstPromptIndex = PROMPTS.findIndex((p) => p.slide === value)
+        if (firstPromptIndex !== -1) {
+            setActivePromptIndex(firstPromptIndex)
+            scrollToVideo()
+        }
+    }
+
+    const handlePromptClick = (index: number) => {
+        if (index === activePromptIndex) {
+            videoRef.current?.time(0)
+            videoRef.current?.play()
+        } else {
+            setActivePromptIndex(index)
+        }
+        scrollToVideo()
+    }
+
+    const promptsWithIndex = PROMPTS.map((p, i) => ({ ...p, globalIndex: i }))
+
+    const accordionItems = [
+        { handle: 'product_analytics', value: 'analytics' },
+        { handle: 'session_replay', value: 'replay' },
+        { handle: 'feature_flags', value: 'feature-flags' },
+        { handle: 'data_warehouse', value: 'data-warehouse' },
+    ].map(({ handle, value }) => {
+        const slidePrompts = promptsWithIndex.filter((p) => p.slide === value)
+        return {
+            value,
+            trigger: <ProductTrigger handle={handle} />,
+            content: (
+                <div data-scheme="secondary" className="flex flex-col px-6 gap-px">
+                    {slidePrompts.map((prompt) => (
+                        <OSButton
+                            key={prompt.globalIndex}
+                            size="md"
+                            width="full"
+                            align="left"
+                            onClick={() => handlePromptClick(prompt.globalIndex)}
+                            className={`before:opacity-0 hover:!border-transparent before:content-["►"] before:text-base before:absolute before:-left-4 before:top-0.5 before:text-red dark:before:text-yellow active:!bg-transparent focus:!border-transparent ${
+                                activePromptIndex === prompt.globalIndex
+                                    ? 'font-bold before:opacity-100 !text-red dark:!text-yellow'
+                                    : 'hover:underline hover:before:opacity-25 before:!text-primary'
+                            }`}
+                        >
+                            "{prompt.text}"
+                        </OSButton>
+                    ))}
+                </div>
+            ),
+        }
+    })
+
+    return (
+        <>
+            <h3 className="mt-0">PostHog AI demos</h3>
+
+            <div className="flex flex-col @2xl:flex-row gap-8">
+                <div className="@2xl:flex-[0_0_350px]">
+                    <div className="@2xl:max-w-lg">
+                        <Accordion
+                            key={activeAccordion}
+                            items={accordionItems}
+                            defaultValue={activeAccordion}
+                            onValueChange={handleAccordionChange}
+                            triggerClassName="[&_h2]:text-lg !bg-transparent"
+                        />
+                    </div>
+                </div>
+                <div ref={tvScreenRef} className=" flex-1 flex flex-col items-center">
+                    <TVScreen
+                        className="relative w-full"
+                        title={currentPrompt.text}
+                        isPlaying={isPlaying}
+                        videoNumber={activePromptIndex + 1}
+                        onPrev={handlePrev}
+                        onPlayPause={handlePlayPause}
+                        onNext={handleNext}
+                    >
+                        <WistiaVideo
+                            ref={videoRef}
+                            videoId={currentPrompt.videoId}
+                            onEnd={handleVideoEnd}
+                            className="absolute inset-0 [&_.w-chrome]:!rounded-none [&_video]:m-0 [&_.w-vulcan-v2]:!rounded-none [&_.w-chrome]:![clip-path:none]"
+                            hideInitialControls
+                            hideAudioControls
+                        />
+                    </TVScreen>
+                </div>
+            </div>
+        </>
+    )
+}
 
 const ProductRow = ({ product }: { product: any }) => {
     const isWIP = product.status === 'WIP'
@@ -284,7 +429,7 @@ export default function ProductsTest(): JSX.Element {
                                     return (
                                         <div key={gi} className="space-y-1">
                                             {group.label && (
-                                                <h3 className="text-xs font-semibold uppercase tracking-wide text-secondary mb-1.5">
+                                                <h3 className="text-sm font-semibold uppercase text-secondary mb-1.5">
                                                     {group.label}
                                                 </h3>
                                             )}
@@ -308,6 +453,27 @@ export default function ProductsTest(): JSX.Element {
                             </div>
                         </section>
                     ))}
+
+                    <div>
+                        <h2 className="text-xl font-bold m-0">Data exploration</h2>
+                        <p className="text-[15px] leading-relaxed !mt-4">
+                            Instead of building insights from scratch, chat with{' '}
+                            <Link to="/ai" state={{ newWindow: true }} className="font-semibold">
+                                PostHog AI
+                            </Link>{' '}
+                            to have it do the hard work for you. If you want to do a deep dive, try{' '}
+                            <Link to="/notebooks" state={{ newWindow: true }} className="font-semibold">
+                                Notebooks
+                            </Link>{' '}
+                            where you can compile multiple insights and write up your findings on an infinite canvas.
+                            And if you want to monitor metrics over time, save them to{' '}
+                            <Link to="/dashboards" state={{ newWindow: true }} className="font-semibold">
+                                Dashboards
+                            </Link>
+                            .
+                        </p>
+                        <AIDemos />
+                    </div>
                 </div>
             </Editor>
         </>
