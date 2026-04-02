@@ -281,7 +281,6 @@ The agent will use `cdp-function-templates-list` filtered by type "transformatio
 
 The agent will use the `cdp-functions-invocations-create` tool to send a mock event payload to the function and return the execution logs.
 
-<<<<<<< HEAD
 ### Activity log queries
 
 **Prompt:** "Show me all recent feature flag changes in the project"
@@ -354,9 +353,6 @@ The agent will use `persons-list` to find the person by distinct_id, then use `p
 
 The agent will use `persons-property-delete` to remove the specified property from the person.
 
-
-||||||| 4e08895a4
-=======
 ### Early access feature management
 
 **Prompt:** "List all early access features in my project"
@@ -375,7 +371,7 @@ The agent will use the `early-access-feature-partial-update` tool to change the 
 
 The agent will use `query-run` to execute a HogQL query against `system.early_access_features`, filtering by stage to find features in alpha, beta, or general-availability.
 
->>>>>>> master
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
