@@ -5604,26 +5604,12 @@ export const docsMenu = {
                     },
                 },
                 {
-<<<<<<< HEAD
-                    name: 'Human reviews',
-                    url: '/docs/llm-analytics/human-reviews',
-                    icon: 'IconPerson',
-                    color: 'salmon',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-||||||| 8d21fab3f
-=======
                     name: 'Trace Reviews',
                     url: '/docs/llm-analytics/trace-reviews',
                     icon: 'IconCheckCircle',
                     color: 'green',
                 },
                 {
->>>>>>> master
                     name: 'Prompt management',
                     url: '/docs/llm-analytics/prompts',
                     icon: 'IconPencil',
