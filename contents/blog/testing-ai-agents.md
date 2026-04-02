@@ -56,7 +56,7 @@ With the tracing mechanism the observability tool provides, you can now see how 
 
 ## Your agent gets popular, tests get automated
 
-You have now built an agent that is useful to many users, and while this is great, you want to win back some time to work on things other than observing your agent and fixing bugs.
+You have built an agent that is useful to many users, and while this is great, you want to win back some time from reactively fixing bugs to proactively preventing them.
 
 You also find yourself causing bugs that you had previously fixed. It is now time to find a better way to detect regressions so you can confidently fix new bugs and ship new functionality for your agent.
 
