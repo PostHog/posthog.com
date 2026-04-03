@@ -1,5 +1,5 @@
 ---
-date: 2026-03-31
+date: 2026-04-03
 title: "A beginner's guide to testing AI agents"
 author:
   - radu-raicea
