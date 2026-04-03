@@ -2,7 +2,6 @@ import React, { ChangeEvent, useState } from 'react'
 import { Disclosure } from '@headlessui/react'
 import { faqs } from '../../../pages-content/pricing-data'
 import { Plus, Minus } from 'components/Icons/Icons'
-import { motion } from 'framer-motion'
 import Fuse from 'fuse.js'
 
 const fuse = new Fuse(faqs, { keys: ['q', 'a'], includeMatches: true })
@@ -23,30 +22,29 @@ export const FAQs = ({ className = '' }) => {
                 data-scheme="secondary"
                 className="bg-primary border border-primary py-2 px-3 rounded-sm text-[15px] font-semibold w-full"
             />
-            <ul className="list-none m-0 p-0 grid gap-y-6 mt-4">
+            <div className="mt-4 divide-y divide-primary border-y border-primary">
                 {questions &&
                     questions.map((faq, index) => {
-                        const { author, q, a } = faq
+                        const { q, a } = faq
                         return (
-                            <li key={index}>
-                                <div className="flex items-center space-x-2 relative">
-                                    <span className="flex-shrink-0 relative">
-                                        <span className="absolute w-full h-full left-1/2 translate-y-[55%] border-l border-b border-dashed border-primary rounded-sm" />
-                                        <span className="size-[40px] inline-block relative z-10">{author.q.image}</span>
-                                    </span>
-                                    <p className="text-[15px] font-semibold !my-0">{q}</p>
-                                </div>
-                                <div className="flex items-start space-x-2 pt-2 ml-[calc(40px+.5rem)]">
-                                    <span className="flex-shrink-0 size-[25px] inline-block">{author.a.image}</span>
-                                    <span>
-                                        <p className="text-[15px] font-semibold text-red !my-0">{author.a.name}</p>
-                                        <p className="text-[14px] font-normal !my-0">{a}</p>
-                                    </span>
-                                </div>
-                            </li>
+                            <Disclosure key={index}>
+                                {({ open }) => (
+                                    <>
+                                        <Disclosure.Button className="flex w-full items-center justify-between py-3 text-left">
+                                            <span className="text-[15px] font-semibold pr-4">{q}</span>
+                                            <span className="flex-shrink-0">
+                                                {open ? <Minus className="size-4" /> : <Plus className="size-4" />}
+                                            </span>
+                                        </Disclosure.Button>
+                                        <Disclosure.Panel className="pb-4 pr-8">
+                                            <p className="text-[14px] text-secondary m-0">{a}</p>
+                                        </Disclosure.Panel>
+                                    </>
+                                )}
+                            </Disclosure>
                         )
                     })}
-            </ul>
+            </div>
         </section>
     )
 }
