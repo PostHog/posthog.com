@@ -72,13 +72,6 @@ Add a **Run Script** build phase:
 3. Click the **+** button and select **New Run Script Phase**
 4. Make sure it's set to run last (after "Copy Bundle Resources" or similar)
 5. Add the appropriate script for your package manager:
-6. In the **Input Files** section of the Run Script phase, add:
-
-```
-$(DWARF_DSYM_FOLDER_PATH)/$(DWARF_DSYM_FILE_NAME)
-```
-
-This ensures the upload script runs after dSYM generation is complete.
 
 <MultiLanguage>
 
@@ -91,6 +84,14 @@ ${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
 ```
 
 </MultiLanguage>
+
+6. In the **Input Files** section of the Run Script phase, add:
+
+```
+$(DWARF_DSYM_FOLDER_PATH)/$(DWARF_DSYM_FILE_NAME)
+```
+
+This ensures the upload script runs after dSYM generation is complete.
 
 </Step>
 
