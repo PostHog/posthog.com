@@ -37,7 +37,7 @@ OK standup bot, you want a standup update? No problem my friend. You just wait..
 
 Every time I manually copy-paste into our standup thread, a little part of me dies inside.
 
-We just <a href="https://www.reddit.com/r/Futurism/comments/1jpzb8s/an_ai_model_has_officially_passed_the_turing_test/" target="_blank" rel="noopener noreferrer">passed the Turing test</a> and here I am copy-pasting GitHub issue URLs into a Slack thread like it's 2010. I'm pulling up tabs, hunting for PR links, navigating all over GitHub, trying to remember what I (my agents) actually did today, and formatting it all nicely in slack.
+We just [passed the Turing test](https://www.reddit.com/r/Futurism/comments/1jpzb8s/an_ai_model_has_officially_passed_the_turing_test/) and here I am copy-pasting GitHub issue URLs into a Slack thread like it's 2010. I'm pulling up tabs, hunting for PR links, navigating all over GitHub, trying to remember what I (my agents) actually did today, and formatting it all nicely in slack.
 
 After a few months of this, I snapped.
 
@@ -45,7 +45,7 @@ I work on [LLM analytics](/docs/llm-analytics) at PostHog. I spend my days helpi
 
 The irony was too much. I decided to build my own agent to beat the standup bot at its own game.
 
-It helps too that this was also the perfect excuse to learn about and play around a little with the <a href="https://openai.github.io/openai-agents-python/" target="_blank" rel="noopener noreferrer">OpenAI Agents SDK</a>.
+It helps too that this was also the perfect excuse to learn about and play around a little with the [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/).
 
 ## The plan
 
@@ -58,8 +58,8 @@ The idea was simple:
 
 And because I'm a shameless dogfooder, this was the perfect excuse to:
 
-- Learn the <a href="https://github.com/openai/openai-agents-python" target="_blank" rel="noopener noreferrer">OpenAI Agents SDK</a>
-- Build [instrumentation for it](/docs/llm-analytics/installation/openai-agents) in [posthog-python](/docs/libraries/python)
+- Learn the [OpenAI Agents SDK](https://github.com/openai/openai-agents-python)
+- Build [instrumentation for it](/docs/llm-analytics/installation/openai-agents) in [`posthog-python`](/docs/libraries/python)
 - Create something I can actually use every day
 - Write this very blog post
 - But most importantly, use AI even if it actually sometimes takes me longer each day than it did before.
@@ -79,11 +79,11 @@ Let me show you how it all works.
 
 ## The architecture: one agent to rule them all
 
-I'll be honest - I didn't start here. My first version was a <a href="https://github.com/andrewm4894/github-standup-agent/tree/b63e51b/src/github_standup_agent/agents" target="_blank" rel="noopener noreferrer">three-agent system</a>: a <a href="https://github.com/andrewm4894/github-standup-agent/blob/b63e51b/src/github_standup_agent/agents/coordinator.py" target="_blank" rel="noopener noreferrer">Coordinator</a> that orchestrated the workflow, a <a href="https://github.com/andrewm4894/github-standup-agent/blob/b63e51b/src/github_standup_agent/agents/data_gatherer.py" target="_blank" rel="noopener noreferrer">Data Gatherer</a> that pulled from GitHub, and a <a href="https://github.com/andrewm4894/github-standup-agent/blob/b63e51b/src/github_standup_agent/agents/summarizer.py" target="_blank" rel="noopener noreferrer">Summarizer</a> that turned it all into prose. I used the OpenAI Agents SDK's <a href="https://openai.github.io/openai-agents-python/agents-as-tools/" target="_blank" rel="noopener noreferrer">agents-as-tools</a> pattern so the coordinator could delegate to the others.
+I'll be honest - I didn't start here. My first version was a [three-agent system](https://github.com/andrewm4894/github-standup-agent/tree/b63e51b/src/github_standup_agent/agents): a [Coordinator](https://github.com/andrewm4894/github-standup-agent/blob/b63e51b/src/github_standup_agent/agents/coordinator.py) that orchestrated the workflow, a [Data Gatherer](https://github.com/andrewm4894/github-standup-agent/blob/b63e51b/src/github_standup_agent/agents/data_gatherer.py) that pulled from GitHub, and a [Summarizer](https://github.com/andrewm4894/github-standup-agent/blob/b63e51b/src/github_standup_agent/agents/summarizer.py) that turned it all into prose. I used the OpenAI Agents SDK's [agents-as-tools](https://openai.github.io/openai-agents-python/agents-as-tools/) pattern so the coordinator could delegate to the others.
 
 It was a mess. Debugging handoffs between agents was painful. The coordinator would sometimes call the wrong sub-agent, or pass incomplete context. The summarizer couldn't see the raw tool call results - only what the coordinator decided to forward. And I needed three separate prompt templates, three model configs, and an `on_handoff` hook just to wire it all together. Way too much complexity for what is fundamentally a simple task.
 
-So I <a href="https://github.com/andrewm4894/github-standup-agent/commit/45514bafdabd48029dfbd9519fbe54e6ea1b418f" target="_blank" rel="noopener noreferrer">ripped it all out</a> - deleted the coordinator, data gatherer, and summarizer, and collapsed everything into a <a href="https://github.com/andrewm4894/github-standup-agent/blob/main/src/github_standup_agent/agents/standup_agent.py" target="_blank" rel="noopener noreferrer">single agent</a> with all 18 <a href="https://github.com/andrewm4894/github-standup-agent/tree/main/src/github_standup_agent/tools" target="_blank" rel="noopener noreferrer">tools</a> directly. The result was 300 fewer lines of code and something that actually worked reliably.
+So I [ripped it all out](https://github.com/andrewm4894/github-standup-agent/commit/45514bafdabd48029dfbd9519fbe54e6ea1b418f) - deleted the coordinator, data gatherer, and summarizer, and collapsed everything into a [single agent](https://github.com/andrewm4894/github-standup-agent/blob/main/src/github_standup_agent/agents/standup_agent.py) with all 18 [tools](https://github.com/andrewm4894/github-standup-agent/tree/main/src/github_standup_agent/tools) directly. The result was 300 fewer lines of code and something that actually worked reliably.
 
 The agent has various tools organized by what they do:
 
@@ -197,14 +197,13 @@ Events (newest first):
 
 Here's where it gets interesting. Building an agent is one thing. Understanding what it's actually doing? That's where [PostHog LLM analytics](/docs/llm-analytics) comes in.
 
-I instrumented the entire agent with our <a href="https://github.com/PostHog/posthog-python/pull/408" target="_blank" rel="noopener noreferrer">OpenAI Agents SDK integration</a>. Fun fact — it was built during a one-day hackathon at a team onsite in Barcelona, where I also discovered <a href="https://en.wikipedia.org/wiki/Cal%C3%A7ot" target="_blank" rel="noopener noreferrer">Calçots</a> (highly recommend).
+I instrumented the entire agent with our [OpenAI Agents SDK integration](https://github.com/PostHog/posthog-python/pull/408). Fun fact — it was built during a one-day hackathon at a team onsite in Barcelona, where I also discovered [Calçots](https://en.wikipedia.org/wiki/Cal%C3%A7ot) (highly recommend).
 
-The integration was surprisingly quick to build thanks to the <a href="https://openai.github.io/openai-agents-python/tracing/" target="_blank" rel="noopener noreferrer">excellent tracing support</a> that OpenAI baked into the Agents SDK. We just needed to extend their `TracingProcessor` to send spans to PostHog instead of their default backend.
+The integration was surprisingly quick to build thanks to the [excellent tracing support](https://openai.github.io/openai-agents-python/tracing/) that OpenAI baked into the Agents SDK. We just needed to extend their `TracingProcessor` to send spans to PostHog instead of their default backend.
 
-<figure className="flex flex-col items-center">
-    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/team_calcots_295b5fff5e.jpg" alt="Me holding a Calçot in Barcelona" />
-    <figcaption className="text-center text-sm opacity-70 mt-2">That's me holding a Calçot. This is relevant to the blog post, I promise.</figcaption>
-</figure>
+![Me holding a Calçot in Barcelona](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/team_calcots_295b5fff5e.jpg)
+
+<Caption>That's me holding a Calçot. This is relevant to the blog post, I promise.</Caption>
 
 ```python
 from posthog import Posthog
@@ -235,9 +234,7 @@ Every agent run creates a [trace](/docs/llm-analytics/traces) with [spans](/docs
 
 I can see exactly how the agent decided which tools to call, what data it gathered, and how it turned all of that into prose. Each trace also gets an [AI-generated summary](/docs/llm-analytics/summarization) so you can quickly understand what happened without digging into every span:
 
-<div className="flex justify-center">
-    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trace_view_summary_standup_5f1559dc95.png" alt="Trace view showing the full agent workflow with AI-generated summary" />
-</div>
+![Trace view showing the full agent workflow with AI-generated summary](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trace_view_summary_standup_5f1559dc95.png)
 
 ### Prompt management
 
@@ -251,15 +248,13 @@ One thing I quickly realized: hardcoding prompts in source code is a pain when y
 
 This means I can tweak how the agent writes standups without redeploying anything. And because PostHog tracks prompt versions, I can see exactly which version of the instructions produced which standup - useful when something goes weird.
 
-There's also the "prompts are IP" angle. You might have seen the recent <a href="https://www.reddit.com/r/ClaudeCode/comments/1s99j2t/followup_claude_codes_source_confirms_the_system/" target="_blank" rel="noopener noreferrer">Claude Code source map situation</a> — a packaging mishap meant the full system prompts ended up in the npm release. These things happen (shipping is hard!), but it's a good reminder that if your prompts are in the source code, they're one accidental publish away from being public. For my standup agent it doesn't matter (my half-baked vibecoded prompts are open source anyway), but if yours contain real secret sauce, a prompt store with a local cache is a nice safety net.
+There's also the "prompts are IP" angle. You might have seen the recent [Claude Code source map situation](https://www.reddit.com/r/ClaudeCode/comments/1s99j2t/followup_claude_codes_source_confirms_the_system/) — a packaging mishap meant the full system prompts ended up in the npm release. These things happen (shipping is hard!), but it's a good reminder that if your prompts are in the source code, they're one accidental publish away from being public. For my standup agent it doesn't matter (my half-baked vibecoded prompts are open source anyway), but if yours contain real secret sauce, a prompt store with a local cache is a nice safety net.
 
 ### Tool usage
 
 The [tools tab](/docs/llm-analytics/tools) shows me which tools the agent calls most and how long they take. Turns out `get_pr_details` and `get_activity_feed` dominate - you can see `get_pr_details` right at the top with the most calls. That was actually a surprise - the agent was drilling into way more PRs than it needed to. A quick prompt tweak ("only drill into PRs that look significant") cut unnecessary API calls.
 
-<div className="flex justify-center">
-    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/tools_tab_standup_agent_73f8bd6db8.png" alt="Tools tab showing which tools the standup agent calls most" />
-</div>
+![Tools tab showing which tools the standup agent calls most](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/tools_tab_standup_agent_73f8bd6db8.png)
 
 ### Clustering
 
@@ -276,9 +271,8 @@ The [sentiment tab](/docs/llm-analytics/sentiment) is more fun. PostHog analyzes
 
 In fairness, most of these are just me giving the agent iteration feedback ("drop all the merged words its a bit repetitive", "remove the ask, dont need it") rather than genuine rage. But sentiment analysis doesn't know the difference, and that's actually an interesting insight — what looks like negative user sentiment might just be a user who's actively engaged and iterating. The positive ones are more telling: "ok great stuff send that to slack" and "great love it lets publish to slack" tend to mean the agent actually nailed it first time.
 
-<div className="flex justify-center">
-    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/sentiment_tab_standup_agent_8973d72c87.png" alt="Sentiment tab showing positive and negative standup agent interactions" />
-</div>
+
+![Sentiment tab showing positive and negative standup agent interactions](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/sentiment_tab_standup_agent_8973d72c87.png)
 
 ### Evals
 
@@ -286,15 +280,11 @@ Here's where dogfooding gets real. The agent's biggest formatting headache is Sl
 
 The eval results summary tells the whole story. Generations that pass tend to use correct Slack mrkdwn links, simple bullets, and plain text headers. The failures? The agent keeps trying to sneak in `**bold**` headers, `[text](url)` markdown links, and occasionally dumps raw JSON outputs. My favorite failure pattern: the agent would use `<link|text>` syntax for headings (correct for links, completely wrong for headers) — Slack doesn't even have heading syntax, so it just needs to use plain text like `Did:`.
 
-<div className="flex justify-center">
-    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/eval_results_summary_slack_markdown_330573b666.png" alt="Eval results summary showing passing and failing patterns for Slack markdown formatting" />
-</div>
+![Eval results summary showing passing and failing patterns for Slack markdown formatting](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/eval_results_summary_slack_markdown_330573b666.png)
 
 You can also drill into individual runs to scan each generation's result and reasoning:
 
-<div className="flex justify-center">
-    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/eval_runs_tab_standup_agent_4ce3da8be5.png" alt="Eval runs showing individual generation results with pass/fail reasoning" />
-</div>
+![Eval runs showing individual generation results with pass/fail reasoning](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/eval_runs_tab_standup_agent_4ce3da8be5.png)
 
 This is the kind of thing that's nearly impossible to catch systematically without automated evals. I'd notice the odd broken link in Slack, fix the prompt, and think I'd solved it — only for a different formatting issue to pop up the next day. The eval catches all of them and shows me the patterns so I can fix the root cause in the prompt, not just whack-a-mole individual failures.
 
@@ -365,9 +355,7 @@ Agent [Standup Agent] finished
 
 The agent automatically finds the latest standup thread in your configured channel and posts as a reply. No more hunting for the thread. No more copy-paste. Just vibes.
 
-<div className="flex justify-center">
-    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/standup_bot_output_f9eff991f3.png" alt="The final standup posted to Slack" />
-</div>
+![The final standup posted to Slack](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/standup_bot_output_f9eff991f3.png)
 
 Did I save any time compared to just writing the standup myself? Debatable.
 
@@ -386,7 +374,7 @@ And isn't that all that really matters?
 
 ## Try it yourself
 
-The agent is open source: <a href="https://github.com/andrewm4894/github-standup-agent" target="_blank" rel="noopener noreferrer">github.com/andrewm4894/github-standup-agent</a>
+The agent is open source: [github.com/andrewm4894/github-standup-agent](https://github.com/andrewm4894/github-standup-agent)
 
 ```bash
 # Install
@@ -418,7 +406,7 @@ PostHog's [LLM analytics](/docs/llm-analytics) gives you:
 - **[Clustering](/docs/llm-analytics/clusters)** and **[sentiment](/docs/llm-analytics/sentiment)** - Spot patterns in how your agent is used
 - **[User feedback](/docs/llm-analytics/collect-user-feedback)** - Link quality signals to specific traces
 
-The OpenAI Agents SDK integration is <a href="https://github.com/PostHog/posthog-python/pull/408" target="_blank" rel="noopener noreferrer">available in posthog-python</a>. Check out our other integrations for [LangChain](/docs/llm-analytics/installation/langchain), [OpenAI](/docs/llm-analytics/installation/openai), and [many other frameworks](/docs/llm-analytics/installation).
+The OpenAI Agents SDK integration is [available in posthog-python](https://github.com/PostHog/posthog-python/pull/408). Check out our other integrations for [LangChain](/docs/llm-analytics/installation/langchain), [OpenAI](/docs/llm-analytics/installation/openai), and [many other frameworks](/docs/llm-analytics/installation).
 
 ## Stick it to your standup bot
 
@@ -442,4 +430,4 @@ F*$k you, standup bot. I win.
 - [How we built automatic clustering for LLM traces](/blog/llm-analytics-clustering-how-it-works) - Deep dive into the clustering pipeline
 - [8 learnings from 1 year of agents](/blog/8-learnings-from-1-year-of-agents-posthog-ai) - What we've learned building AI at PostHog
 - [OpenAI Agents SDK integration](/docs/llm-analytics/installation/openai-agents) - The integration docs
-- <a href="https://github.com/andrewm4894/github-standup-agent" target="_blank" rel="noopener noreferrer">github-standup-agent</a> - The agent itself, open source
+- [github-standup-agent](https://github.com/andrewm4894/github-standup-agent) - The agent itself, open source
