@@ -23,7 +23,19 @@ The [PostHog Wizard](https://github.com/PostHog/wizard) can install the MCP serv
 npx @posthog/wizard mcp add
 ```
 
-## Manual setup
+## Claude Code plugin
+
+You can also install PostHog as a [Claude Code plugin](https://github.com/PostHog/ai-plugin), which provides the same MCP tools along with built-in slash commands for quick access:
+
+```bash
+claude plugin install posthog
+```
+
+After installing, run `/mcp` in Claude Code and follow the browser prompts to log in to PostHog.
+
+The plugin includes slash commands like `/posthog:flags`, `/posthog:insights`, `/posthog:errors`, `/posthog:experiments`, and more.
+
+## Manual MCP setup
 
 Run the following command in your shell. The next time you run [Claude Code](https://www.anthropic.com/claude-code), it will have access to the PostHog MCP.
 
