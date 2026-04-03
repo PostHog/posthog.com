@@ -1,0 +1,168 @@
+---
+date: 2026-04-03
+title: The best HIPAA-compliant A/B testing tools
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - andy-vandervell
+    - natalia-amorim
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/hipaa.jpeg
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+---
+
+A lot of popular A/B testing tools aren't HIPAA-compliant, and if you work in healthcare, the last thing you want is to realize too late that the tool you're using doesn't sign BAAs.
+
+Skipping experimentation isn't the answer, though. That's like navigating an ocean by sailing roughly in the right direction – you'll probably arrive somewhere, just not where you intended.
+
+The good news is there are solid, privacy-focused options out there. Here are a few HIPAA-compliant A/B testing tools worth considering.
+
+<details>
+<summary>What you need for HIPAA compliance</summary>
+
+You need to comply the [Privacy Rule](https://www.hhs.gov/ocr/privacy/hipaa/administrative/privacyrule/index.html) and the [Security Rule](https://www.hhs.gov/ocr/privacy/hipaa/administrative/securityrule/index.html). Breaching either can result in hefty financial penalties, but for the sake of this guide we're mostly interested in how the Privacy Rule impacts analytics and A/B testing.
+
+There are three ways to comply with the Privacy rule when adopting analytics and testing tools:
+
+1. **Anonymize all PHI and identifiers:** There are two so-called "[De-identification Standards](https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html#standard)" – "Expert Determination," where an expert verifies that data isn't personally identifiable, and "Safe Harbor" where all 18 types of identifier are removed. The former is preferable simply because applying the Safe Harbor approach can render data effectively useless for analytical purposes.
+
+2. **Sign a BAA with a third-party tool:** You must sign a Business Associate Agreement (BAA) with any third-party platform that handles your protected health information (PHI). This can mean signing multiple agreements, though, such as one with your analytical partner, but also any tools you use for importing and exporting data from your [data warehouse](/blog/cdp-vs-data-warehouse).
+
+3. **Self-host and keep control of all your data:** The less common is to self-host tools for analytics and experimentation on your own infrastructure. This reduces the number of BAAs and general legal wrangling needed to generate user insights. The only downside is you'll need the expertise to manage self-hosted instances, or third-party support to do so, and you are wholly liable for any security breaches.
+
+These are the broad principles, but **please consult an expert** before making any final decision on how to implement tools in compliance with HIPAA.
+
+</details>
+
+## The best HIPAA-compliant A/B testing tools
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'kameleoon', 'vwo', 'launchdarkly']}
+    rows={[
+        'platform.security.hipaa_ready',
+        'experiments',
+        'experiments.implementation.multivariate_testing',
+        'experiments.features.no_code_experiments',
+        'product_analytics',
+        'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'surveys',
+        'platform.pricing.free_tier',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+### 1. PostHog
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_02_17_at_08_43_32_2x_aa22220b10.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_02_17_at_08_43_06_2x_49e3ebc85d.png"
+    classes="rounded"
+    alt="PostHog Experiments"
+/>
+
+[PostHog](/) is an all-in-one developer platform that combines [experiments](/experiments) with [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [user surveys](/surveys), and a lot more – everything you need to understand user behavior.
+
+All these tools are seamlessly integrated and, because you get everything in one, you only need to sign one BAA for all your analytics needs.
+
+PostHog offers a BAA on its [platform packages](/platform-packages), which start at $250 and include [generous monthly free allowances](/pricing), such as 1 million feature flag requests (bundled with experiments) and analytics events every month. You can also self-host the open-source edition for free, though this isn't recommended as it's provided without support or guarantee.
+
+<WizardCTA />
+
+### 2. Kameleoon
+
+![kameleoon](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/kameleoon.png)
+
+Kameleoon is an A/B testing and personalization platform. It supports A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples) as well as feature flags for managing the rollout of new features and running tests. In addition to testing, it has a real-time personalization engine that's particularly useful for e-commerce. 
+
+It doesn't have any deeper analytics features, so you'll need to run it alongside another [HIPAA-compliant analytics tool](/blog/best-hipaa-compliant-analytics-tools) to gather deeper user behavior data.
+
+Kameleoon offers a Starter plan starting from $495/month with a 30-day free trial, and an Enterprise plan for larger teams. HIPAA compliance, private cloud hosting, and BAA availability are Enterprise-tier features.
+
+### 3. VWO
+
+![vwo testing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/vwo-testing.png)
+
+[VWO](/blog/best-vwo-alternatives) is best known as an A/B testing platform for e-commerce websites and mobile apps, though it also offers basic session replay and analytics tools as part of its myriad pricing tiers. A/B testing features include support for multi-armed bandit, a visual editor, and advanced targeting options, such as targeting based on screen resolution.
+
+By default, VWO de-identifies all visitor data before storage and does not collect or store PHI. Customers who need to use VWO with PHI must sign a BAA – VWO will enter into one as part of any agreement.
+
+Unlike most tools in this list, VWO charges separately for website and mobile apps based on monthly tracked users (MTUs), so it could get expensive quickly if you need both. Pricing is not published publicly.
+
+### 4. LaunchDarkly
+
+![LaunchDarkly mobile app A/B tests](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-mobile-app-ab-testing-tools/launch-darkly.png)
+
+[LaunchDarkly](/blog/posthog-vs-launchdarkly) is primarily a feature management platform for controlling what users see and when, and managing the rollout of new features. It also offers a full experimentation suite.
+
+As a tool designed for engineers, [LaunchDarkly](/blog/best-launchdarkly-alternatives) supports running experiments on the front and back end. This enables engineers to run experiments to measure the performance impact of API and infrastructure changes, for example.
+
+## Which HIPAA-compliant A/B testing tool should you choose?
+
+- Need an all-in-one platform covering A/B testing, feature flags, analytics, session replay, error tracking, surveys, and more – with a single BAA covering everything? **PostHog** is the most complete option.
+- Running an enterprise ecommerce or marketing program and need A/B testing with personalization and HIPAA compliance without needing deeper analytics? **Kameleoon** is built for that, though it's expensive.
+- Want behavioral analytics (heatmaps, session replay, surveys) alongside A/B testing under one BAA? **VWO** covers that, though pricing is opaque and it requires a sales conversation.
+- Engineering team that needs enterprise-grade feature flag governance and experimentation with HIPAA support? **LaunchDarkly** is the strongest option.
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think PostHog is the perfect HIPAA-compliant A/B testing tool if:
+
+- You want one BAA to cover everything – feature flags, experiments, analytics, session replay, error tracking, surveys, and more – instead of signing multiple agreements with multiple vendors.
+- You want transparent, usage-based pricing with a generous free tier and no surprise bills.
+- You value open source.
+
+It's completely free to get started – no credit card required. Our [AI setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs/experiments) to do it yourself.
+
+## Frequently asked questions
+
+<details>
+<summary>Who does HIPAA apply to?</summary>
+
+HIPAA applies to "covered entities," such as healthcare providers who transmit any health information in electronic form, health plans, and healthcare clearinghouses. Mobile apps fall under HIPAA if they store protected health information (PHI), and share it with any covered entity.
+
+HIPAA also applies to "business associates," which, according to the [US Department of Health and Human Services](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html), are "a subcontractor that creates, receives, maintains, or transmits protected health information on behalf of another business associate."
+
+Under HIPAA, the A/B testing tools in this guide would all be considered business associates.
+
+</details>
+
+<details>
+<summary>What is PHI (Protected Health Information)?</summary>
+
+Protected Health Information (PHI) is any information about health status, provision of healthcare, or payment for healthcare that can be linked to an individual.
+
+This includes medical records, laboratory results, billing information, and any other information that identifies an individual and relates to their past, present, or future physical or mental health condition, treatment, or payment for healthcare services.
+
+</details>
+
+<details>
+<summary>Is self-hosting better than signing a BAA?</summary>
+
+There's no objective correct answer here. In theory, self-hosting is preferable as it means you don't share any data with third-parties (business associates), and thus you don't need to sign a BAA.
+
+But self-hosting also presents additional risks. You're wholly liable for ensuring your A/B testing infrastructure is secure, which can be challenging if you don't have the internal expertise to manage this. If this is the case, it may be better to rely on a HIPAA-compliant business associate who has experience hosting analytics at scale.
+
+</details>
+
+<details>
+<summary>What is the best free HIPAA-compliant A/B testing tool?</summary>
+
+**PostHog** is the only tool on this list with a permanent free tier – 1 million analytics events, 5,000 session replays, and 1 million feature flag and experimentation requests per month, no credit card required. 
+
+Note that a BAA requires subscribing to a paid platform add-on (Boost, Scale, or Enterprise), but you can use PostHog for free and add the BAA when you need it.
+
+</details>
+
+<NewsletterForm />
