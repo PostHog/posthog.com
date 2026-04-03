@@ -286,7 +286,7 @@ Not only can the wrong idea make your product worse, changes in models can negat
 
 There are multiple methods we found work best for evaluating effectiveness:
 
--   **Add evals early.** We found even small golden or synthetic datasets were giving insane performance boosts compared to the typical development cycle. Even at our scale, implementing this was an easier task than expected. This makes building future features faster too.
+-   **Add evals early.** We found even [small golden or synthetic datasets](/blog/testing-ai-agents) were giving insane performance boosts compared to the typical development cycle. Even at our scale, implementing this was an easier task than expected. This makes building future features faster too.
 
 -   **A/B test AI-powered features vs the normal experience** as well as different prompts, contexts, workflows, and more.
 
