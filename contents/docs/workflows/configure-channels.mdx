@@ -24,11 +24,15 @@ Other than the channels shown below, you can also dispatch to any [realtime dest
 <Tab.Group tabs={[
   'Email', 
   'Slack', 
-  'Twilio']}>
+  'Twilio',
+  'APNS',
+  'FCM']}>
 <Tab.List>
   <Tab>Email</Tab>
   <Tab>Slack</Tab>
   <Tab>Twilio</Tab>
+  <Tab>APNS</Tab>
+  <Tab>FCM</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
@@ -81,6 +85,42 @@ Twilio enables you to send SMS messages to your users. To configure the channel,
 Once configured, you'll be able to use the channel in a workflow to send SMS messages to your users.
 
 </Tab.Panel>
+<Tab.Panel>
+
+Apple Push Notification Service (APNS) enables you to send push notifications to iOS and macOS devices.
+
+To configure the channel, you need the following from your [Apple Developer account](https://developer.apple.com/account/resources/authkeys/list):
+
+| Field             | Example                 | Description                                      |
+|-------------------|-------------------------|--------------------------------------------------|
+| **Signing key (.p8)** | Contents of your `.p8` file | The private key used to sign push notification requests. Generate one under **Keys** in your Apple Developer account. |
+| **Key ID**        | `ABC123DEFG`            | The 10-character identifier for your signing key, shown on the key details page. |
+| **Apple team ID** | `ABCDE12345`            | Your Apple Developer team ID, found in the top-right of the Apple Developer portal. |
+| **Bundle ID**     | `com.example.app`       | Your app's bundle identifier, as configured in Xcode. |
+
+Once configured, you can use APNS as a dispatch step in the workflow builder to send push notifications to your iOS users.
+
+<CalloutBox icon="IconInfo" title="iOS SDK setup required" type="fyi">
+
+To deliver push notifications, you need the [PostHog iOS SDK](/docs/libraries/ios) installed in your app. The SDK automatically registers device tokens with PostHog so notifications can be delivered. See the [iOS push notification setup guide](/docs/libraries/ios/usage#push-notifications) for details.
+
+</CalloutBox>
+
+</Tab.Panel>
+<Tab.Panel>
+
+Firebase Cloud Messaging (FCM) enables you to send push notifications to Android devices.
+
+To configure the channel, you need a **service account key** from your Firebase project:
+
+1. Go to the [Firebase Console](https://console.firebase.google.com/).
+2. Select your project, then navigate to **Project settings** > **Service accounts**.
+3. Click **Generate new private key** to download a JSON file.
+4. Paste the contents of this JSON file into the **Service account key** field in PostHog.
+
+Once configured, you can use FCM as a dispatch step in the workflow builder to send push notifications to your Android users.
+
+</Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
 
@@ -88,7 +128,7 @@ Once configured, you'll be able to use the channel in a workflow to send SMS mes
 
 <Step title="Create a template" badge="recommended">
 
-If you plan to send email messages, you can create a template to reuse across your workflows. If you only plan to send Slack and SMS messages, you do not need to create a template.
+If you plan to send email messages, you can create a template to reuse across your workflows. If you only plan to send Slack, SMS, or push notification messages, you do not need to create a template.
 
 Navigate to **Workflows** > **Library** tab > click **New template**.
 

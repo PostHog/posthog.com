@@ -183,6 +183,7 @@ Method swizzling is enabled by default, but can be disabled by setting the relev
 | Element interactions           | Automatically tracks user interactions with UI elements                               | `config.captureElementInteractions` |
 | Session replay                 | Records user sessions                                                                 | `config.sessionReplay`           |
 | Surveys                        | Displays surveys at appropriate times                                                 | `config.surveys`                 |
+| Push notification subscription | Automatically registers device tokens and captures push notification opened events     | `config.capturePushNotificationSubscriptions` |
 | Advanced metrics tracking      | Provides more precise session ID calculation and rotation by detecting user activity and idleness | —                          |
 
 
@@ -237,4 +238,5 @@ The [`PostHogConfig` object](https://github.com/PostHog/posthog.com/pull/13379/f
 | `appGroupIdentifier`<br/><br/>**Type:** String<br/>**Default:** `nil` | The identifier of the App Group that should be used to store shared analytics data. PostHog will try to get the physical location of the App Group's shared container, otherwise fallback to the default location. |
 | `reuseAnonymousId`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Whether the SDK should reuse the anonymous Id between user changes. When enabled, a single Id will be used for all anonymous users on this device. |
 | `surveys`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Enable Surveys. |
+| `capturePushNotificationSubscriptions`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | (iOS/macOS only) When enabled and swizzling is also enabled, the SDK automatically registers device tokens for push notification subscriptions and captures `$push_notification_opened` events when users tap push notifications. See the [push notifications usage guide](/docs/libraries/ios/usage#push-notifications) for more details. |
 | `setBeforeSend`<br/><br/>**Type:** Function<br/>**Default:** `undefined` | Hook that allows for amending, sampling, or dropping events before they are sent to PostHog. |

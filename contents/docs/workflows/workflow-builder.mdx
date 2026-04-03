@@ -16,7 +16,7 @@ Workflows are composed of the following components:
 | Component | Description |
 |-----------|-------------|
 | [Triggers](#triggers) | What starts the workflow. We let you start a workflow when an event is performed (e.g. a user signs up), or programmatically via a webhook. |
-| [Dispatches](#dispatches) | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. |
+| [Dispatches](#dispatches) | The messages you send: email, Slack, SMS, push notifications, webhook, or any PostHog real-time destinations. |
 | [Delays](#delays) | Wait steps such as "wait 2 days" or "wait until condition is true." |
 | [Audience splits](#audience-splits) | Target and split your users so you can automate some action for them or send a message with more specificity. |
 | [PostHog actions](#posthog-actions) | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow. |
@@ -61,14 +61,15 @@ To filter your events, click on the three lines icon next to the event name and 
 
 ## Dispatches
 
-Dispatches are the messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. There are 4 main types of dispatches:
+Dispatches are the messages you send: email, Slack, SMS, push notifications, webhook, or any PostHog real-time destinations. There are 5 main types of dispatches:
 
 | Dispatch type | Description |
 |--------------|-------------|
 | Email | Send an email natively through PostHog. Configured in the [channels](/docs/workflows/configure-channels) section. |
-| Slack | Send a message to a slack channel. Configured in the [channels](/docs/workflows/configure-channels) section. |
+| Slack | Send a message to a Slack channel. Configured in the [channels](/docs/workflows/configure-channels) section. |
+| Push notifications | Send mobile push notifications via Apple Push Notification Service (APNS) or Firebase Cloud Messaging (FCM). Configured in the [channels](/docs/workflows/configure-channels) section. |
 | Webhook | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section. |
-| CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an dispatch step to deliver messages to users or other services. |
+| CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as a dispatch step to deliver messages to users or other services. |
 
 ## Delays
 
