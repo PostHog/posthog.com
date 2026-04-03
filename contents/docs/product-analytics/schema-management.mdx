@@ -120,6 +120,15 @@ The CLI will:
 3. Generate typed definitions and save them to the specified file
 4. Update `posthog.json` with the schema hash
 
+#### Which events are included
+
+The generated file only includes:
+
+- **Verified events** – Events you've marked as verified in [Data Management](/docs/data/events#managing-event-definitions)
+- **Events with schemas** – Events that have property groups attached
+
+This keeps ad-hoc and test events out of your typed definitions. If an event is missing from your generated file, verify it or attach a schema.
+
 When prompted for the output path, choose a location that's accessible from your application code (e.g., `src/lib/posthog-typed.ts` or `app/lib/posthog-typed.ts` for TypeScript).
 
 > **Important:** Commit both `posthog.json` and `posthog-typed.<extension>` to your git repository. This ensures your team has consistent types and tracks schema changes over time.
