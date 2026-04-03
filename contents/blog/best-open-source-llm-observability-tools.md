@@ -221,7 +221,7 @@ If you're building an LLM-powered app and have shipped to real users, you need o
 - You're not sure which prompts or models are causing user drop-off
 - You're spending more on tokens than expected and don't know where the cost is going
 - You have no visibility into latency spikes or failure rates
-- You want to run evals or compare model versions systematically
+- You want to [run evals or compare model versions systematically](/blog/testing-ai-agents)
 
 Most tools on this list are free to start, so there's no reason to wait.
 
