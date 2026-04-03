@@ -43,6 +43,9 @@ export const vwo = {
                 local_evaluation: true,
             },
         },
+        web_analytics: {
+            available: false,
+        },
         experiments: {
             available: true,
             pricing: {
