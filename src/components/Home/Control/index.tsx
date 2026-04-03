@@ -44,6 +44,7 @@ import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
 import { RenderInClient } from 'components/RenderInClient'
 import WizardCommand from 'components/WizardCommand'
+import MediaPlayer from 'components/MediaPlayer'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string

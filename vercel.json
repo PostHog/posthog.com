@@ -5,7 +5,37 @@
             "*": false
         }
     },
+    "headers": [
+        {
+            "source": "/docs/:path*",
+            "headers": [{ "key": "Vary", "value": "Accept" }]
+        },
+        {
+            "source": "/handbook/:path*",
+            "headers": [{ "key": "Vary", "value": "Accept" }]
+        }
+    ],
     "rewrites": [
+        {
+            "source": "/docs/:path*/",
+            "has": [{ "type": "header", "key": "accept", "value": "(?:.*text/markdown.*)" }],
+            "destination": "/docs/:path*.md"
+        },
+        {
+            "source": "/docs/:path*",
+            "has": [{ "type": "header", "key": "accept", "value": "(?:.*text/markdown.*)" }],
+            "destination": "/docs/:path*.md"
+        },
+        {
+            "source": "/handbook/:path*/",
+            "has": [{ "type": "header", "key": "accept", "value": "(?:.*text/markdown.*)" }],
+            "destination": "/handbook/:path*.md"
+        },
+        {
+            "source": "/handbook/:path*",
+            "has": [{ "type": "header", "key": "accept", "value": "(?:.*text/markdown.*)" }],
+            "destination": "/handbook/:path*.md"
+        },
         { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
         { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
         { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
@@ -307,34 +337,73 @@
         { "source": "/docs/user-guides/plugins", "destination": "/docs/apps" },
         { "source": "/support", "destination": "/questions" },
         { "source": "/handbook/company/1-1s", "destination": "/handbook/company/management" },
-        { "source": "/lenny", "destination": "/?utm_source=lenny&?utm_campaign=lenny" },
-        { "source": "/zizyo", "destination": "/?utm_campaign=zizyo" },
-        { "source": "/devopsjourney", "destination": "/?utm_campaign=devopsjourney" },
-        { "source": "/ebenezer", "destination": "/?utm_campaign=ebenezer" },
-        { "source": "/codu", "destination": "/?utm_campaign=codu" },
-        { "source": "/peterelbaum", "destination": "/?utm_campaign=peterelbaum" },
-        { "source": "/theo", "destination": "/?utm_source=theo&utm_campaign=theo" },
-        { "source": "/morningmaker", "destination": "/?utm_source=morningmaker&utm_campaign=morningmaker" },
-        { "source": "/enggirlfriend", "destination": "/?utm_source=enggirlfriend&utm_campaign=enggirlfriend" },
+        { "source": "/lenny", "destination": "/?utm_source=influencer&utm_medium=newsletter&utm_campaign=lenny" },
+        { "source": "/zizyo", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=zizyo" },
+        {
+            "source": "/devopsjourney",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=devopsjourney"
+        },
+        { "source": "/ebenezer", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=ebenezer" },
+        { "source": "/codu", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=codu" },
+        {
+            "source": "/peterelbaum",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=peterelbaum"
+        },
+        { "source": "/theo", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=theo" },
+        {
+            "source": "/morningmaker",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=morningmaker"
+        },
+        {
+            "source": "/enggirlfriend",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=enggirlfriend"
+        },
         {
             "source": "/youraveragetechbro",
-            "destination": "/?utm_source=youraveragetechbro&utm_campaign=youraveragetechbro"
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=youraveragetechbro"
         },
-        { "source": "/simongrimm", "destination": "/?utm_source=simongrimm&utm_campaign=simongrimm" },
-        { "source": "/howtheygrow", "destination": "/?utm_source=howtheygrow&utm_campaign=howtheygrow" },
-        { "source": "/mikebifulco", "destination": "/?utm_source=mikebifulco&utm_campaign=mikebifulco" },
-        { "source": "/kikisbytes", "destination": "/?utm_source=kikisbytes&utm_campaign=kikisbytes" },
-        { "source": "/raroque", "destination": "/?utm_source=raroque&utm_campaign=raroque" },
-        { "source": "/ashishps", "destination": "/?utm_source=ashishps&utm_campaign=ashishps" },
-        { "source": "/codesource", "destination": "/?utm_source=codesource&utm_campaign=codesource" },
-        { "source": "/bytegrad", "destination": "/?utm_source=bytegrad&utm_campaign=bytegrad" },
-        { "source": "/fireship", "destination": "/?utm_source=fireship&utm_campaign=fireship" },
-        { "source": "/jesseshowalter", "destination": "/?utm_source=jesseshowalter&utm_campaign=jesseshowalter" },
-        { "source": "/benjamincode", "destination": "/?utm_source=benjamincode&utm_campaign=benjamincode" },
-        { "source": "/travismedia", "destination": "/?utm_source=travismedia&utm_campaign=travismedia" },
-        { "source": "/viktor", "destination": "/?utm_source=viktor&utm_campaign=viktor" },
-        { "source": "/starterstory", "destination": "/?utm_source=starterstory&utm_campaign=starterstory" },
-        { "source": "/jsmastery", "destination": "/?utm_source=jsmastery&utm_campaign=jsmastery" },
+        {
+            "source": "/simongrimm",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=simongrimm"
+        },
+        {
+            "source": "/howtheygrow",
+            "destination": "/?utm_source=influencer&utm_medium=newsletter&utm_campaign=howtheygrow"
+        },
+        {
+            "source": "/mikebifulco",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=mikebifulco"
+        },
+        {
+            "source": "/kikisbytes",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=kikisbytes"
+        },
+        { "source": "/raroque", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=raroque" },
+        { "source": "/ashishps", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=ashishps" },
+        {
+            "source": "/codesource",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=codesource"
+        },
+        { "source": "/bytegrad", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=bytegrad" },
+        { "source": "/fireship", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=fireship" },
+        {
+            "source": "/jesseshowalter",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=jesseshowalter"
+        },
+        {
+            "source": "/benjamincode",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=benjamincode"
+        },
+        {
+            "source": "/travismedia",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=travismedia"
+        },
+        { "source": "/viktor", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=viktor" },
+        {
+            "source": "/starterstory",
+            "destination": "/?utm_source=influencer&utm_medium=podcast&utm_campaign=starterstory"
+        },
+        { "source": "/jsmastery", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=jsmastery" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
         { "source": "/tutorials/categories/plugins", "destination": "/tutorials/categories/apps" },
         { "source": "/trial", "destination": "/pricing" },
@@ -1392,6 +1461,13 @@
         { "source": "/apps", "destination": "/cdp", "statusCode": 302 },
         { "source": "/docs/data-warehouse/setup/azure-blob", "destination": "/docs/cdp/sources/azure-blob" },
         { "source": "/docs/data-warehouse/setup/azure-db", "destination": "/docs/cdp/sources/azure-db" },
+        {
+            "source": "/docs/data-warehouse/sources/azure-db",
+            "destination": "/docs/data-warehouse/sources/microsoft-sql-server"
+        },
+        { "source": "/docs/cdp/sources/azure-db", "destination": "/docs/cdp/sources/microsoft-sql-server" },
+        { "source": "/docs/data-warehouse/sources/temporal", "destination": "/docs/data-warehouse/sources/temporalio" },
+        { "source": "/docs/cdp/sources/temporal", "destination": "/docs/cdp/sources/temporalio" },
         { "source": "/docs/data-warehouse/setup/chargebee", "destination": "/docs/cdp/sources/chargebee" },
         { "source": "/docs/data-warehouse/setup/gcs", "destination": "/docs/cdp/sources/gcs" },
         { "source": "/docs/data-warehouse/setup/hubspot", "destination": "/docs/cdp/sources/hubspot" },

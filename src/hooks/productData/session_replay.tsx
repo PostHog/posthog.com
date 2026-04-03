@@ -556,6 +556,8 @@ window.posthog.onFeatureFlags(function () {
         },
     ],
     ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/SESSION_REPLAY_a3ca565731.png',
+        imageAlt: 'PostHog AI and session replay',
         description: 'search, summarize, cluster, and debug session recordings',
         skills: [
             'Finds recordings through natural language prompts – describe the behavior you want instead of setting filters',

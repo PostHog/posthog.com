@@ -1,35 +1,23 @@
-### Q4 2025 Objectives
-
-- Build a new “Search / Command palette / Shortcuts / New tab” experience
-	- Move project tree files into the “new tab”
-	- Search can access everything and will replace the existing command palette
-	- Integrate directly with Max
-- PostHog doesn’t feel confusing
-	- Remove right sidebar, move into new tab experience
-	- Clean up the last 20% of the tabs/actions-panel/etc work
-- Bonus: Filters, electron, sparking joy
-	- Improve the taxonomic filter
-	- Electron app now that we have tabs
-
-### Q1 2026 Objectives
+### Q2 2026 Objectives
 
 1. **Ai first-design**
-    1. Take AI chat interface UI/UX to 1000
-    2. Plan/Build new AI-first interface (navigation/channels etc)
-	3. Design products UI in chat UI [Ex: in-chat-approval-flows (approve/edit,deny) or in-chat-feature-flag card that allows you to edit proposed changes by ai, then approve/edit,deny]
-2.  **Everything as a tagged resource** (continued) With our addition of tabs, and links with contextual menus...
-    1. Drag and drop from button/link => nav, nav => tabs, tabs => nav etc
-    2. Each resource can export operations
-        1. Define schema (with help of team for products/apps to so Ai can understand and show ui/perform actions on them (create/edit new flag in an AI chat window) **[Ai first-design related]**
-    3. File explorer
-        1. split search and file explorer apart into different scenes **[Ai first-design related]**
-        2. file explorer interface UI/UX to 1000
-        3. Remove project trees from nav? (simplify navigation) **[Ai first-design related]**
-        4. Release (experiment => analyze => release) **[Ai first-design related]**
-3. **Design system** (nothing will be removed/changed, only new stuff) 
-    1. New color system (Shadcn-style) `bg-muted` `bg-muted-foreground` `text-muted` `text-muted-foreground` etc (this is great for LLMs) **[Ai first-design related]**
-    2. New UI library (Base_ui) **[Ai first-design related]**
-    3. Add kick-ass documentation
-4.  **Continue to own platform UI/UX** (continued)
-    1. Comb through platform and fix issues/spark joy wherever possible 
-5. **New member on-boarding** TBD
+    1. AI homepage 
+		1. Extend the chat first home page with useful links
+		2. Release flag to rest of users
+		3. Handle feedback/ iterate until key issues are resolved (spark joy)
+2. Papercuts no one else can do
+    1. Taxonomic filter
+		1. rebuild
+		2. release experiment
+		3. call winner/iterate
+    2. Calendar
+		1. rebuild
+		2. release experiment
+		3. call winner/iterate
+    3. Continue to help with UX related papercuts
+3. **New UI library "Quill"**
+    1. Work on, merge phase ONE and TWO of [RFC](https://github.com/PostHog/requests-for-comments-internal/blob/98f1114527a84e42b116ba1e6e371d882adcd8bf/engineering/2026-04-07-unified-ui-library.md)
+		1. Colors, Primitives, some useful components
+		2. Storybook with visual regression tracking
+		3. Skills.md "PostHog UI/UX.md" allowing developers to incrementally build with new UI library
+4. Hiring into the team and onboarding that person

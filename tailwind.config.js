@@ -479,6 +479,7 @@ module.exports = {
             addVariant('wallpaper-parade', 'body[data-wallpaper="parade"] &')
             addVariant('wallpaper-coding-at-night', 'body[data-wallpaper="coding-at-night"] &')
             addVariant('wallpaper-startup-monopoly', 'body[data-wallpaper="startup-monopoly"] &')
+            addVariant('wallpaper-action-figure', 'body[data-wallpaper="action-figure"] &')
         },
     ],
 }
