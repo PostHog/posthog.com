@@ -1390,6 +1390,10 @@ export const handbookSidebar = [
                         name: 'Data Infrastructure',
                         url: '/handbook/growth/use-case-selling/data-infrastructure',
                     },
+                    {
+                        name: 'Customer Experience',
+                        url: '/handbook/growth/use-case-selling/customer-experience',
+                    },
                 ],
             },
             {
@@ -5602,6 +5606,12 @@ export const docsMenu = {
                         title: 'Alpha',
                         className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
                     },
+                },
+                {
+                    name: 'Trace Reviews',
+                    url: '/docs/llm-analytics/trace-reviews',
+                    icon: 'IconCheckCircle',
+                    color: 'green',
                 },
                 {
                     name: 'Prompt management',
