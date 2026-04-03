@@ -177,7 +177,7 @@ export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highl
     const mainPlans = platformAndSupportProduct?.plans?.filter((p: BillingV2PlanType) => !p.contact_support)
     const highestSupportPlan = mainPlans?.slice(-1)[0]
     const highestPlanFeatures = highestSupportPlan?.features?.filter(
-        (f: BillingV2FeatureType) => f.entitlement_only !== true
+        (f: BillingV2FeatureType) => f.entitlement_only !== true && f.key !== 'environments'
     )
 
     return (
