@@ -5,10 +5,17 @@ showTitle: true
 ---
 
 import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
+import WizardCommand from 'components/WizardCommand'
 
 <RevAnalyticsBetaWarning />
 
 The connection between your revenue data and `persons` and `groups` is automatically done when you're using revenue events (since we know what person/group an event belongs to) but we need your help to map them in case you're using a data warehouse source.
+
+## The easy way
+
+Let the wizard handle the metadata configuration for you by running this command in your project directory with your terminal:
+
+<WizardCommand command="setup-revenue-analytics"/>
 
 ## Step 1: Add metadata when creating new customers
 
