@@ -315,6 +315,26 @@ Use this option if you want to add additional configurations to your app that ar
    - **X.509 Certificate** needs to be set as SAML X.509 certificate.
 8. You're good to go! Click **Login with SSO** in the login page.
 
+## Multiple domains
+
+If your organization has multiple verified authentication domains (e.g., `company.com` and `company.org`), we recommend setting up a separate Identity Provider app for each domain, with both SAML and SCIM configured on each.
+
+This is because when a user logs in with SAML, PostHog looks up the SAML configuration based on their email domain. A user with an `@company.org` email address can only authenticate through the SAML configuration tied to the `company.org` domain, even if they were provisioned via SCIM through an app connected to a different domain.
+
+For example, if your organization has two domains (`company.com` and `company.org`) but only one IdP app connected to `company.com`:
+- Users with `@company.com` emails will work correctly (SAML login matches their provisioned domain)
+- Users with `@company.org` emails may be provisioned via SCIM, but SAML authentication will fail because there's no SAML configuration for `company.org`
+
+**Recommended setup for multiple domains:**
+
+1. Create a separate IdP app for each verified domain in your organization
+2. Configure both SAML and SCIM on each app
+3. Assign users to the app that matches their email domain:
+   - Users with `@company.com` emails should be in the `company.com` app
+   - Users with `@company.org` emails should be in the `company.org` app
+
+This ensures users are both provisioned and authenticated through the correct domain configuration.
+
 ## SCIM
 
 <FeatureAvailability availability={_frontmatter.availability.features.scim} />
