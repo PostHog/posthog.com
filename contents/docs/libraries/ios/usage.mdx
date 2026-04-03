@@ -212,6 +212,55 @@ Starting with iOS 14, Apple will further restrict apps that track users. Any ref
 
 Hence **starting with posthog-ios version 1.2.0** we have removed all references to Apple's AdSupport framework.
 
+## Push notifications
+
+The PostHog iOS SDK supports push notifications for [Workflows](/docs/workflows). Once configured, the SDK automatically handles device token registration for push notification subscriptions and tracks when users open push notifications.
+
+### Requesting permission and registering for push notifications
+
+Call `requestPushNotificationPermission` to prompt the user for notification permission and automatically register for remote notifications:
+
+```swift
+PostHogSDK.shared.requestPushNotificationPermission()
+```
+
+This method requests notification authorization via `UNUserNotificationCenter` and, if granted, calls `UIApplication.shared.registerForRemoteNotifications()` automatically.
+
+### Automatic device token handling
+
+When swizzling is enabled (the default), the SDK automatically intercepts your app delegate's `application(_:didRegisterForRemoteNotificationsWithDeviceToken:)` method and sends the device token to PostHog. No manual wiring is needed.
+
+If you have swizzling disabled, you need to manually forward the device token:
+
+```swift
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    PostHogSDK.shared.handlePushNotificationDeviceToken(deviceToken)
+}
+```
+
+### Automatic open tracking
+
+When `capturePushNotificationSubscriptions` is enabled (the default) and swizzling is on, the SDK automatically captures a `$push_notification_opened` event when a user taps a push notification. This event includes the following properties:
+
+| Property | Description |
+|----------|-------------|
+| `$notification_title` | The title of the notification |
+| `$notification_subtitle` | The subtitle of the notification |
+| `$notification_body` | The body text of the notification |
+| `$notification_action` | The action identifier, if the user tapped a custom action |
+
+Any key-value pairs in a `posthog` dictionary within the notification's `userInfo` payload are also captured, prefixed with `$notification_`.
+
+### Disabling push notification subscription
+
+To disable automatic push notification subscription and open tracking, set `capturePushNotificationSubscriptions` to `false` in your config:
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_client_api_host>")
+config.capturePushNotificationSubscriptions = false
+PostHogSDK.shared.setup(config)
+```
+
 ## Session replay
 
 > **Note:** Session replay is currently only available on iOS. For future macOS support, please follow and upvote [this GitHub issue](https://github.com/PostHog/posthog-ios/issues/200).
