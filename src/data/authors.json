@@ -557,5 +557,13 @@
         "link_type": "github",
         "link_url": "https://github.com/andrewm4894",
         "profile_id": 37401
+    },
+    {
+        "handle": "radu-raicea",
+        "name": "Radu Raicea",
+        "role": "Product Engineer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/raduraicea/",
+        "profile_id": 34711
     }
 ]
