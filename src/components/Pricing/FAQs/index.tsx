@@ -37,7 +37,11 @@ export const FAQs = ({ className = '' }) => {
                                             </span>
                                         </Disclosure.Button>
                                         <Disclosure.Panel className="pb-4 pr-8">
-                                            <p className="text-[14px] text-secondary m-0">{a}</p>
+                                            <p
+                                                className="text-[14px] text-secondary m-0 [&_a]:text-red [&_a]:font-semibold [&_code]:bg-accent [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[13px]"
+                                                // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - FAQ answer from codebase, not user input
+                                                dangerouslySetInnerHTML={{ __html: a }}
+                                            />
                                         </Disclosure.Panel>
                                     </>
                                 )}
