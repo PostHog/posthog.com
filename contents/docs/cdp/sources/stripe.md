@@ -9,13 +9,30 @@ availability:
 sourceId: Stripe
 ---
 
-The Stripe connector can link charges, customers, invoices, prices, products, subscriptions, and balance transactions to PostHog.
+The Stripe connector links charges, customers, invoices, prices, products, subscriptions, and balance transactions to PostHog.
 
-## Creating a Stripe API key
+You can connect Stripe using OAuth or an API key. OAuth is recommended since it doesn't require manual key setup.
 
-You need a [Stripe API key](https://dashboard.stripe.com/apikeys) to create a connector. Head to your Stripe dashboard > **Developers** > **API keys**, under **Restricted keys**, click [+ Create a restricted key](https://dashboard.stripe.com/apikeys/create).
+## Connecting with OAuth (recommended)
 
-You need to give your API key the following **Read** permissions in the **Permissions** column:
+1. In PostHog, go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and select the **Sources** tab.
+2. Click **+ New source** and select Stripe by clicking the **Link** button.
+3. Select **Connect with OAuth**.
+4. Sign in to your Stripe account when prompted and authorize PostHog.
+5. _Optional:_ Add a prefix to your table names.
+6. Click **Next**.
+
+PostHog handles authentication automatically, including token refreshes.
+
+## Connecting with an API key
+
+If you want more control over permissions, use an API key instead.
+
+### Creating a Stripe API key
+
+You need a [Stripe API key](https://dashboard.stripe.com/apikeys) to use this method. Head to your Stripe dashboard > **Developers** > **API keys**, under **Restricted keys**, click [+ Create a restricted key](https://dashboard.stripe.com/apikeys/create).
+
+Give your API key the following **Read** permissions in the **Permissions** column:
 
 | Resource Type | Required Read Permissions                                                    |
 | ------------- | ---------------------------------------------------------------------------- |
@@ -23,18 +40,19 @@ You need to give your API key the following **Read** permissions in the **Permis
 | Billing       | Credit notes, Invoices, Prices, Subscriptions                                |
 | Connect       | Click **Read** in the **Connect** header                                     |
 
-If you aren't concerned with giving us more permissions than necessary, you can also simply click **Read** on the **Core**, **Billing**, and **Connect** headers to give us the necessary permissions.
+If you aren't concerned with giving more permissions than necessary, you can also click **Read** on the **Core**, **Billing**, and **Connect** headers to give the necessary permissions.
 
 If your Stripe account is in a language other than English, we suggest you update it to English before following the steps above to guarantee the correct permissions are set.
 
-## Adding a data source
+### Adding the data source
 
-1. In PostHog, go to the [Data pipeline page](https://app.posthog.com/data-management/sources) select the **Sources** tab.
-2. Click **+ New source** button and select Stripe by clicking the **Link** button.
-3. In Stripe, get your Account ID by going to **Settings** > **Business**, selecting the [Account details](https://dashboard.stripe.com/settings/account) tab, and clicking your **Account ID** or pressing `⌘` + `I` to copy your ID.
-4. Get your API key from the [previous section](#creating-a-stripe-api-key)
-5. _Optional:_ Add a prefix to your table names
-6. Click **Next**
+1. In PostHog, go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and select the **Sources** tab.
+2. Click **+ New source** and select Stripe by clicking the **Link** button.
+3. Select **Connect with API key**.
+4. In Stripe, get your Account ID by going to **Settings** > **Business**, selecting the [Account details](https://dashboard.stripe.com/settings/account) tab, and clicking your **Account ID** or pressing `⌘` + `I` to copy your ID.
+5. Enter your API key from the [previous section](#creating-a-stripe-api-key).
+6. _Optional:_ Add a prefix to your table names.
+7. Click **Next**.
 
 > For Stripe tables, incremental syncs only sync new records and don't update existing records. This is a limitation of the Stripe API. To get real-time updates including changes to existing records, [set up webhooks](#setting-up-webhooks-for-real-time-syncing).
 
