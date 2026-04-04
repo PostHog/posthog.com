@@ -97,4 +97,12 @@ The impact was noticeable: it halved the memory usage (fewer flags cloned into t
 
 ![Image2](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_04_02_at_16_02_40_7275f7e999.png)
 
-Please notice the differences in the Y-axis scale! The first graph shows 0 to 2.8 seconds, while the second one shows 0 to 650ms. This represents a dramatic change: the mean p99 dropped from ~460ms to ~94ms. The latency spikes are rare, and get to at most to 200ms. We never go beyond 50 pods, and requests bursts and busier hours are not enough to force us to scale or slow down our response times.
+Please notice the differences in the Y-axis scale! The first graph shows 0 to 2.8 seconds, while the second one shows 0 to 650ms. This represents a dramatic change: the mean p99 dropped from ~460ms to ~94ms. The latency spikes are rare throughout the week, and get to at most to 200ms.
+
+The HPA scaling effects are also worth mentioning. Our previous HPA behavior was acting reactively and fighting the symptoms, short CPU usage spikes would trigger HPA scale events, but the problems were already inside the pods. We frequently go to the maximum replica count (100 pods), and that made no difference in our performance, we were effectively wasting resources. Now, we never need to get past the minimum replica count (currently, 50 pods), even during peak traffic. The service doesn't respond to the 2x diurnal traffic swing at all, the p99 is the same at 3am as it is at peak.
+
+The DB connection pool story is also an interesting one, with a satisfying payoff. The initial symptoms pointed towards a database issue (pool utilization maxing at 100% multiple times a day, connection times spiking), but they were only a side effect of runtime starvation. Now pool utilization sits at ~10%, and connection acquire time p99 is steady at ~4ms.
+
+## What we learned from the process
+
+One of the most useful lessons from the whole process was the importance of iterative test cycles, incremental changes and precise instrumentation. When dealing with services that need to balance intensive compute and IO (and a _lot_ of other software engineering problems, really), there is not silver bullet or definitive solutions. To get to a good solution that solved our issues, we had to come up with hypothesis with the information we had in hand, place the correct metrics and test them out, comparing results of different approaches.
