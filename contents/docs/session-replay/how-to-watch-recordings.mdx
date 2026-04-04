@@ -35,7 +35,7 @@ To watch recordings, you can visit the [Replay](https://us.posthog.com/replay) p
 
 3. Add the recording to a collection so you can find it easily in future
 
-4. Open the activity panel to see a list of all the events that happened during the recording. This also lets you see the network waterfall, page performance score, asset breakdown, and more.
+4. Open the activity panel to see a list of all the events that happened during the recording. This also lets you see the network waterfall, page performance score, asset breakdown, console logs, and [backend logs](#viewing-backend-logs).
 
 5. Click **Inspect DOM** to interact with the DOM of the page. It may not be 100% accurate, but should be close enough to help you debug. You can interact with the content below but most things won't work as it is only a snapshot of your app. Use your browser's developer tools (`CMD`+`Opt`+`I` on Mac and `Ctrl`+`Shift`+`I` on PC for Chrome) to inspect the content.
 
@@ -201,6 +201,20 @@ Both features are available in the bottom right corner of the recording player a
 />
 
 <Caption>Screen capture and clip capture features in session replay</Caption>
+
+## Viewing backend logs
+
+If you've set up [PostHog Logs](/docs/logs) and [linked them to Session Replay](/docs/logs/link-session-replay), you can view backend logs directly in the activity panel.
+
+To view backend logs:
+
+1. Open a session replay and click the activity panel on the right
+2. Click **Logs** to filter to backend logs only
+3. Use the mini-filters to narrow down by severity level (info, warn, error)
+
+Each log entry shows severity level, timestamp, and message. Click a log entry to see details like service name, log attributes, and a link to view the full log in [Logs](/docs/logs).
+
+Backend logs differ from console logs. Console logs capture client-side `console.log()` statements from the browser. Backend logs show server-side logs from your application, correlated with the user's session.
 
 ## Further reading
 
