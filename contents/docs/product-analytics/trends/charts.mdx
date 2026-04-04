@@ -86,7 +86,7 @@ Area charts are a twist on the line chart. When you add a breakdown, or multiple
 
 ### Box plot
 
-The box plot displays the statistical distribution of a numeric property's values over time. Each box shows:
+Box plots show the statistical distribution of a numeric property's values over time. Each box displays:
 
 - **Min** – the minimum value
 - **25th percentile (Q1)** – the value below which 25% of observations fall
@@ -95,9 +95,11 @@ The box plot displays the statistical distribution of a numeric property's value
 - **75th percentile (Q3)** – the value below which 75% of observations fall
 - **Max** – the maximum value
 
-Box plots are useful for understanding how the distribution of a metric changes across time intervals and for spotting outliers.
+By default, outliers are hidden to improve chart readability. When outliers are hidden, the min and max whiskers clip to 1.5 times the interquartile range (IQR) below Q1 and above Q3, respectively. To show outliers, enable **Show outliers** in the **Options** menu.
 
-Box plots require you to select a numeric property (such as `$session_duration` or a custom numeric property). Breakdowns and formulas are not available for box plots.
+Box plots help you understand how a metric's distribution changes across time intervals.
+
+Box plots require a numeric property (like `$session_duration` or a custom numeric property). Breakdowns and formulas aren't available for box plots.
 
 ## Total value 
 
