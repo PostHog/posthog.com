@@ -1,6 +1,6 @@
 ---
 date: 2026-04-01
-title: "F*$k youuuu standup bot!"
+title: "I hate the standup bot (so I built an agent to do it for me)"
 author:
   - andy-maguire
 rootPage: /blog
@@ -16,25 +16,17 @@ tags:
   - LLM analytics
 ---
 
-![The standup bot, taunting me](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/standup_bot_slack_hero_955e94601d.png)
-
 There it is. Staring at me. Sitting there. Goading me.
 
-The day is nearly done. I've reviewed PRs, fixed bugs, hopped on quick calls, commanded my agents and smashed that accept button all day!
+![The standup bot, taunting me](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/standup_bot_slack_hero_955e94601d.png)
+
+The day is nearly done. I've reviewed PRs, fixed bugs, hopped on quick calls, commanded my agents, and smashed that accept button all day!
 
 And now I'm expected to fill in some stupid Slack thread with my standup updates?
 
-I'm too good for this. I don't need this corporate nonsense. I'm gonna stick it to the man. I'm not gonna play their silly little games.
-
-I'm going to beat the system.
-
-OK standup bot, you want a standup update? No problem my friend. You just wait...
-
-## The breaking point
-
 Every time I manually copy-paste into our standup thread, a little part of me dies inside.
 
-We just [passed the Turing test](https://www.reddit.com/r/Futurism/comments/1jpzb8s/an_ai_model_has_officially_passed_the_turing_test/) and here I am copy-pasting GitHub issue URLs into a Slack thread like it's 2010. I'm pulling up tabs, hunting for PR links, navigating all over GitHub, trying to remember what I (my agents) actually did today, and formatting it all nicely in slack.
+We just [passed the Turing test](https://www.reddit.com/r/Futurism/comments/1jpzb8s/an_ai_model_has_officially_passed_the_turing_test/) and here I am copy-pasting GitHub issue URLs into a Slack thread like it's 2010. I'm pulling up tabs, hunting for PR links, navigating all over GitHub, trying to remember what I (my agents) actually did today, and formatting it all nicely in Slack.
 
 After a few months of this, I snapped.
 
@@ -56,7 +48,7 @@ The idea was simple:
 And because I'm a shameless dogfooder, this was the perfect excuse to:
 
 - Learn the [OpenAI Agents SDK](https://github.com/openai/openai-agents-python)
-- Build [instrumentation for it](/docs/llm-analytics/installation/openai-agents) in [`posthog-python`](/docs/libraries/python)
+- Dog-food our [OpenAI Agents SDK integration](/docs/llm-analytics/installation/openai-agents) for [`posthog-python`](/docs/libraries/python)
 - Create something I can actually use every day
 - Write this very blog post
 - But most importantly, use AI even if it actually sometimes takes me longer each day than it did before.
@@ -194,11 +186,11 @@ Here's where it gets interesting. Building an agent is one thing. Understanding 
 
 I instrumented the entire agent with our [OpenAI Agents SDK integration](https://github.com/PostHog/posthog-python/pull/408). Fun fact — it was built during a one-day hackathon at a team onsite in Barcelona, where I also discovered [Calçots](https://en.wikipedia.org/wiki/Cal%C3%A7ot) (highly recommend).
 
-The integration was surprisingly quick to build thanks to the [excellent tracing support](https://openai.github.io/openai-agents-python/tracing/) that OpenAI baked into the Agents SDK. We just needed to extend their `TracingProcessor` to send spans to PostHog instead of their default backend.
-
 ![Me holding a Calçot in Barcelona](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/team_calcots_295b5fff5e.jpg)
 
 <Caption>That's me holding a Calçot. This is relevant to the blog post, I promise.</Caption>
+
+The integration was surprisingly quick to build thanks to the [excellent tracing support](https://openai.github.io/openai-agents-python/tracing/) that OpenAI baked into the Agents SDK. We just needed to extend their `TracingProcessor` to send spans to PostHog instead of their default backend.
 
 ```python
 from posthog import Posthog
@@ -243,7 +235,9 @@ One thing I quickly realized: hardcoding prompts in source code is a pain when y
 
 This means I can tweak how the agent writes standups without redeploying anything. And because PostHog tracks prompt versions, I can see exactly which version of the instructions produced which standup - useful when something goes weird.
 
-There's also the "prompts are IP" angle. You might have seen the recent [Claude Code source map situation](https://www.reddit.com/r/ClaudeCode/comments/1s99j2t/followup_claude_codes_source_confirms_the_system/) — a packaging mishap meant the full system prompts ended up in the npm release. These things happen (shipping is hard!), but it's a good reminder that if your prompts are in the source code, they're one accidental publish away from being public. For my standup agent it doesn't matter (my half-baked vibecoded prompts are open source anyway), but if yours contain real secret sauce, a prompt store with a local cache is a nice safety net.
+There's also the "prompts are IP" angle. You might have seen the recent [Claude Code source map situation](https://www.reddit.com/r/ClaudeCode/comments/1s99j2t/followup_claude_codes_source_confirms_the_system/) — a packaging mishap meant the full system prompts ended up in the npm release. These things happen (shipping is hard!), but it's a good reminder that if your prompts are in the source code, they're one accidental publish away from being public. 
+
+For my standup agent it doesn't matter (my half-baked vibecoded prompts are open source anyway), but if yours contain real secret sauce, a prompt store with a local cache is a nice safety net.
 
 ### Tool usage
 
@@ -308,7 +302,7 @@ def capture_feedback_rating(
 
 When I say "ok great stuff send that to slack", the agent infers positive feedback and captures it before publishing. When I say "bad you are not following the examples", it captures negative feedback with my complaint as the comment. I never have to break out of the conversation flow to rate anything — the agent just reads the room.
 
-That feedback is linked to the exact trace, so I can go back and see what went wrong on bad runs. Over time, this builds a dataset for understanding what makes a good standup and which prompt versions produce better results.
+That feedback is linked to the exact trace with `$ai_trace_id`, so I can go back and see what went wrong on bad runs. Over time, this builds a dataset for understanding what makes a good standup and which prompt versions produce better results.
 
 ## The victory lap: posting to Slack
 
@@ -320,7 +314,7 @@ The agent has Slack integration with a two-step confirmation flow (because posti
 You: ok great stuff send that to slack
 
 Agent [Standup Agent] starting...
-  Tool: capture_feedback_rating(rating='good',
+  Tool: capture_feedback_rating(rating='thumbs_up',
         comment='User said: "ok great stuff" before asking to send to Slack.')...
   Tool: publish_standup_to_slack(confirmed=False)...
 Agent [Standup Agent] finished
@@ -343,7 +337,7 @@ Assistant: Published to Slack in today's standup thread.
 You: ok thanks i love u
 
 Agent [Standup Agent] starting...
-  Tool: capture_feedback_rating(rating='good',
+  Tool: capture_feedback_rating(rating='thumbs_up',
         comment='User said: "ok thanks i love u" after successful Slack publish.')...
 Agent [Standup Agent] finished
 ```
@@ -369,7 +363,7 @@ And isn't that all that really matters?
 
 ## Try it yourself
 
-The agent is open source: [github.com/andrewm4894/github-standup-agent](https://github.com/andrewm4894/github-standup-agent)
+The agent is open source, [go check it out](https://github.com/andrewm4894/github-standup-agent) or try it yourself:
 
 ```bash
 # Install
@@ -401,7 +395,7 @@ PostHog's [LLM analytics](/docs/llm-analytics) gives you:
 - **[Clustering](/docs/llm-analytics/clusters)** and **[sentiment](/docs/llm-analytics/sentiment)** - Spot patterns in how your agent is used
 - **[User feedback](/docs/llm-analytics/collect-user-feedback)** - Link quality signals to specific traces
 
-The OpenAI Agents SDK integration is [available in posthog-python](https://github.com/PostHog/posthog-python/pull/408). Check out our other integrations for [LangChain](/docs/llm-analytics/installation/langchain), [OpenAI](/docs/llm-analytics/installation/openai), and [many other frameworks](/docs/llm-analytics/installation).
+The OpenAI Agents SDK integration is [available in `posthog-python`](https://github.com/PostHog/posthog-python/pull/408). Check out our other integrations for [LangChain](/docs/llm-analytics/installation/langchain), [OpenAI](/docs/llm-analytics/installation/openai), and [many other frameworks](/docs/llm-analytics/installation).
 
 ## Stick it to your standup bot
 
@@ -420,9 +414,6 @@ F*$k you, standup bot. I win.
 
 ## Further reading
 
-- [LLM analytics docs](/docs/llm-analytics) - Instrument your own AI features with tracing, evals, and cost tracking
 - [How we caught our AI agent embezzling tokens](/blog/optimizing-agent-cost) - Lessons on tracking and optimizing agent costs
 - [How we built automatic clustering for LLM traces](/blog/llm-analytics-clustering-how-it-works) - Deep dive into the clustering pipeline
 - [8 learnings from 1 year of agents](/blog/8-learnings-from-1-year-of-agents-posthog-ai) - What we've learned building AI at PostHog
-- [OpenAI Agents SDK integration](/docs/llm-analytics/installation/openai-agents) - The integration docs
-- [github-standup-agent](https://github.com/andrewm4894/github-standup-agent) - The agent itself, open source
