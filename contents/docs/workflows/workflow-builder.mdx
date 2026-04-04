@@ -135,6 +135,33 @@ When Conversations is enabled, you can trigger workflows using these events:
 
 All events include the following base properties: `ticket_id`, `ticket_number`, `channel_source`, `status`, and `priority`.
 
+### Feature flag event triggers
+
+Trigger workflows when feature flags are created, updated, or deleted using the `$feature_flag_changed` event. This is useful for automating notifications or CI/CD actions when flag configurations change.
+
+| Event | Description |
+|-------|-------------|
+| `$feature_flag_changed` | A feature flag was created, updated, deleted, or restored |
+
+The event includes the following properties:
+
+| Property | Description |
+|----------|-------------|
+| `flag_key` | The unique key of the feature flag |
+| `flag_name` | The display name of the feature flag |
+| `flag_id` | The internal ID of the feature flag |
+| `active` | Whether the flag is currently enabled (`true` or `false`) |
+| `activity` | The type of change: `created`, `updated`, `deleted`, or `restored` |
+| `changed_by` | The email of the user who made the change |
+| `changes` | A list of field names that were modified (for updates) |
+
+#### Example use cases
+
+- **Notify Slack when flags change** - Send a message to your team's Slack channel whenever a production feature flag is modified
+- **Trigger CI/CD pipelines** - Hit a webhook to trigger deployment workflows when feature flags are updated
+- **Audit logging** - Send flag change events to an external system for compliance tracking
+- **Alert on flag deletion** - Get notified when someone deletes a feature flag so you can clean up related code
+
 ## Output variables
 
 Output variables let you store data from a workflow step's result for use in later steps. This is useful when you need to chain workflow steps together, such as extracting an ID from a webhook response to use in a subsequent API call.
