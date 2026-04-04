@@ -12,7 +12,7 @@ In the PostHog data warehouse, you can save your most used queries as **views** 
 
 ## Creating a view
 
-Query views are created directly inside SQL insights. If the query has valid view characteristics, the **Save as view** button is enabled. When clicked, you are prompted to give the view a name which can then be referenced in other queries. 
+Query views are created directly inside SQL insights. If the query has valid view characteristics, the **Save as view** button is enabled. When clicked, you are prompted to give the view a name which can then be referenced in other queries.
 
 For a query to be a valid view, all fields being accessed must be aliased (with the SQL `as` keyword). The alias names are how you access the fields on the view. This also means that we cannot use `SELECT *...` type SQL syntax for a query we would like to be a view since none of the columns are aliased.
 
@@ -20,9 +20,30 @@ For a query to be a valid view, all fields being accessed must be aliased (with 
 
 ![valid view](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/data-warehouse/valid-view.png)
 
+## Organizing views with folders
+
+You can organize views into folders for easier navigation in the SQL editor sidebar.
+
+### Creating folders
+
+Right-click on the **Views** section in the SQL editor sidebar and select **New folder**. Enter a name for the folder and press **Submit**.
+
+### Assigning views to folders
+
+When saving a new view, select a folder from the **Folder** dropdown in the **Save as view** dialog. You can also create a new folder directly from this dropdown by clicking **+ Add new folder**.
+
+To move existing views, drag and drop them into folders in the sidebar. You can also drag views back to the root level.
+
+### Managing folders
+
+Right-click a folder to access these options:
+
+- **Rename folder** - Change the folder name
+- **Delete folder** - Delete the folder and all views inside it. This cannot be undone.
+
 ## Extending PostHog models with views
 
-Views are a powerful tool for extending existing PostHog models for easier data access. For example, if you wanted to associate your Stripe customer data with product usage data of your users, you would normally need to manually set up a join. With views, you can attach views to PostHog models so that you can directly access those fields on the PostHog table. 
+Views are a powerful tool for extending existing PostHog models for easier data access. For example, if you wanted to associate your Stripe customer data with product usage data of your users, you would normally need to manually set up a join. With views, you can attach views to PostHog models so that you can directly access those fields on the PostHog table.
 
 To link a view to a [PostHog table](/docs/data-warehouse/sources/posthog), go to the [data warehouse section](https://app.posthog.com/data-warehouse/posthog), select the PostHog tab, and click **Link table to view**. Select your tables, keys to join, and press save. Once done, when you query that PostHog table, you can access the data from your view.
 
@@ -31,4 +52,3 @@ To link a view to a [PostHog table](/docs/data-warehouse/sources/posthog), go to
 ## Materializing views
 
 Views can also be materialized and stored in the PostHog data warehouse, offering significant query performance benefits and improvements. You can learn more in the [materializing views](/docs/data-warehouse/views/materialize) guide.
-
