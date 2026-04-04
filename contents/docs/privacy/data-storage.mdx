@@ -187,6 +187,85 @@ print(response.json())
 
 This request will delete all events of the person(s) that have been captured before the deletion request.
 
+### Bulk delete persons
+
+To delete multiple persons at once, use the bulk delete endpoint. Specify persons by their UUIDs or distinct IDs:
+
+<MultiLanguage>
+
+```bash
+curl -X POST "https://us.posthog.com/api/projects/<project_id>/persons/bulk_delete/" \
+     -H "Authorization: Bearer <personal_api_key>" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "ids": ["<person_uuid_1>", "<person_uuid_2>"],
+       "delete_events": true,
+       "delete_recordings": true
+     }'
+```
+
+```javascript
+fetch('https://us.posthog.com/api/projects/<project_id>/persons/bulk_delete/', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer <personal_api_key>',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    ids: ['<person_uuid_1>', '<person_uuid_2>'],
+    delete_events: true,
+    delete_recordings: true
+  })
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+```
+
+```python
+import requests
+
+api_key = "<personal_api_key>"
+project_id = "<project_id>"
+
+url = f"https://us.posthog.com/api/projects/{project_id}/persons/bulk_delete/"
+headers = {
+    "Authorization": f"Bearer {api_key}",
+    "Content-Type": "application/json"
+}
+data = {
+    "ids": ["<person_uuid_1>", "<person_uuid_2>"],
+    "delete_events": True,
+    "delete_recordings": True
+}
+
+response = requests.post(url, headers=headers, json=data)
+print(response.json())
+```
+
+</MultiLanguage>
+
+The bulk delete endpoint accepts the following parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `ids` | array | Person UUIDs to delete (max 1000) |
+| `distinct_ids` | array | Distinct IDs to delete (max 1000). Use either `ids` or `distinct_ids`, not both. |
+| `delete_events` | boolean | Whether to queue event deletion for matched persons |
+| `delete_recordings` | boolean | Whether to queue recording deletion for matched persons |
+| `keep_person` | boolean | If true, keeps the person record but still deletes their events/recordings |
+
+The response tells you what happened:
+
+```json
+{
+  "persons_found": 2,
+  "persons_deleted": 2,
+  "events_queued_for_deletion": true,
+  "recordings_queued_for_deletion": true
+}
+```
+
 ### Manual data deletion
 
 You can manually delete persons and their events in the PostHog UI:
@@ -201,6 +280,79 @@ You can manually delete persons and their events in the PostHog UI:
 While most data in PostHog is deleted instantly, event data is not. Instead data is cleared asynchronously during non-peak usage times (weekends on PostHog Cloud).
 
 This is done because data deletion in [ClickHouse](/docs/how-posthog-works/clickhouse) is expensive and it can impact performance for other users.
+
+#### Checking deletion status
+
+When you delete persons with `delete_events=true`, event deletion happens asynchronously. To check whether deletions are still pending or complete, use the deletion status endpoint:
+
+<MultiLanguage>
+
+```bash
+curl "https://us.posthog.com/api/projects/<project_id>/persons/deletion_status/" \
+     -H "Authorization: Bearer <personal_api_key>"
+```
+
+```javascript
+fetch('https://us.posthog.com/api/projects/<project_id>/persons/deletion_status/', {
+  headers: {
+    'Authorization': 'Bearer <personal_api_key>'
+  }
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+```
+
+```python
+import requests
+
+api_key = "<personal_api_key>"
+project_id = "<project_id>"
+
+url = f"https://us.posthog.com/api/projects/{project_id}/persons/deletion_status/"
+headers = {"Authorization": f"Bearer {api_key}"}
+
+response = requests.get(url, headers=headers)
+print(response.json())
+```
+
+</MultiLanguage>
+
+You can filter results by status (`pending`, `completed`, or `all`) or by a specific person UUID:
+
+```bash
+# Get only pending deletions
+curl "https://us.posthog.com/api/projects/<project_id>/persons/deletion_status/?status=pending" \
+     -H "Authorization: Bearer <personal_api_key>"
+
+# Check status for a specific person
+curl "https://us.posthog.com/api/projects/<project_id>/persons/deletion_status/?person_uuid=<person_uuid>" \
+     -H "Authorization: Bearer <personal_api_key>"
+```
+
+The response includes the status of each queued deletion:
+
+```json
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "person_uuid": "01234567-89ab-cdef-0123-456789abcdef",
+      "created_at": "2024-01-15T10:30:00Z",
+      "status": "pending",
+      "delete_verified_at": null
+    },
+    {
+      "person_uuid": "fedcba98-7654-3210-fedc-ba9876543210",
+      "created_at": "2024-01-14T08:00:00Z",
+      "status": "completed",
+      "delete_verified_at": "2024-01-14T12:00:00Z"
+    }
+  ]
+}
+```
 
 ## Data access control
 
