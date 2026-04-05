@@ -114,6 +114,163 @@ client.Enqueue(exception)
 
 </MultiLanguage>
 
+## Add exception steps
+
+Exception steps are lightweight breadcrumbs you attach to an exception before calling `captureException(...)`. They are buffered in memory, added to the next exception as `$exception_steps`, and shown in the session timeline.
+
+Use them for high-signal checkpoints like:
+
+- Checkout or onboarding milestones
+- API calls and retries
+- Feature flag decisions
+- Validation checkpoints
+- Job state transitions
+
+### How they work
+
+- Steps are buffered locally until an exception is captured.
+- They are attached to the exception under `$exception_steps`.
+- They are not sent as standalone PostHog events.
+- If your SDK supports exception autocapture, buffered steps can also be included on automatically captured exceptions.
+
+On the server, steps should usually be scoped to the current request, job, or execution context. If there is no active scope, the exception can still be sent, but the steps may be missing.
+
+### Example
+
+<MultiLanguage>
+
+```javascript file=Web
+posthog.addExceptionStep('checkout_started', {
+  cart_total: 12900,
+  item_count: 3,
+})
+
+posthog.addExceptionStep('payment_attempted', {
+  provider: 'stripe',
+})
+
+try {
+  await confirmCardPayment(clientSecret)
+} catch (error) {
+  posthog.captureException(error, {
+    checkout_id: 'chk_123',
+  })
+}
+```
+
+```javascript file=Node.js
+await posthog.withContext(
+  {
+    distinctId: 'user_123',
+    sessionId: '<session_id>',
+  },
+  async () => {
+    posthog.addExceptionStep('invoice_generation_started', {
+      invoice_id: 'inv_123',
+    })
+
+    try {
+      await generateInvoicePdf()
+    } catch (error) {
+      posthog.captureException(error, 'user_123', {
+        job_name: 'generate_invoice_pdf',
+      })
+    }
+  }
+)
+```
+
+```python
+import posthog
+from posthog import new_context, identify_context, set_context_session
+
+with new_context():
+    identify_context('user_123')
+    set_context_session('<session_id>')
+
+    posthog.add_exception_step('report_requested', {
+        'report_type': 'weekly_summary',
+    })
+
+    try:
+        generate_report()
+    except Exception as e:
+        posthog.capture_exception(e, properties={
+            'report_id': 'report_123',
+        })
+```
+
+</MultiLanguage>
+
+### Configure limits
+
+If your SDK supports it, you can configure:
+
+- how many recent steps to keep in the circular buffer in memory
+- how many bytes of step data to attach to the final exception event
+
+<MultiLanguage>
+
+```javascript file=Web
+posthog.init('<ph_project_token>', {
+  api_host: '<ph_api_client_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  capture_exceptions: {
+    exception_steps: {
+      enabled: true,
+      max_queue_size: 20,
+      max_bytes: 16384,
+    },
+  },
+})
+```
+
+```javascript file=Node.js
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_api_client_host>',
+  captureExceptions: {
+    exceptionSteps: {
+      enabled: true,
+      maxQueueSize: 20,
+      maxBytes: 16384,
+    },
+  },
+})
+```
+
+```python
+posthog.configure(
+    '<ph_project_token>',
+    host='<ph_api_client_host>',
+    capture_exceptions={
+        'exception_steps': {
+            'enabled': True,
+            'max_queue_size': 20,
+            'max_bytes': 16384,
+        }
+    }
+)
+```
+
+</MultiLanguage>
+
+### Best practices
+
+- Use short step names that describe a checkpoint or action.
+- Keep payloads small and focused.
+- Avoid sensitive data, raw request bodies, and large nested objects.
+- If your SDK supports a `beforeSend`-style callback, use it to redact exception steps before they are sent.
+- Add steps before the risky operation runs.
+
+### Troubleshooting missing steps
+
+If an exception appears in error tracking but not in the timeline with steps:
+
+- Make sure you called `addExceptionStep(...)` before the failure.
+- Use `captureException(...)` or SDK autocapture, not `posthog.capture('$exception', ...)`.
+- On the server, make sure the steps and exception use the same request or job scope.
+- Reduce step payload size if the final event is too large.
+
 ### Error boundaries
 
 Error boundaries let you catch rendering errors in your component tree and report them to PostHog. We currently support error boundaries for:
@@ -359,6 +516,18 @@ import BurstProtection from './_snippets/burst-protection.mdx'
 <BurstProtection />
 
 ## Common problems
+
+### Exception steps don't appear in the session timeline
+
+If you can see the exception in error tracking but not its steps in the timeline, the most common causes are:
+
+- The steps were recorded after the exception was captured.
+- The server-side code didn't have an active request or job scope.
+- The exception wasn't linked to the same user or session as the replay.
+- The step payload was too large and got truncated or dropped.
+
+Start by verifying identification and session linkage, then confirm your steps are being added immediately before the risky operation.
+
 
 ### Don't use `posthog.capture()` for exceptions
 

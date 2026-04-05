@@ -30,7 +30,7 @@ import OSButton from 'components/OSButton'
 
   Exception autocapture can be enabled for most platforms. When enabled, PostHog automatically captures `$exception` events whenever errors are thrown by the client or server application.
 
-  You can also call the capture method `posthog.captureException()` to manually send exceptions to PostHog with custom properties. 
+  You can also call the capture method `posthog.captureException()` to manually send exceptions to PostHog with custom properties. If your SDK supports exception steps, you can add recent checkpoints with `addExceptionStep(...)` and PostHog will attach them to the exception so they appear in the session timeline.
 
   <OSButton variant="primary" asLink to="/docs/error-tracking/installation">
     Install PostHog SDK
