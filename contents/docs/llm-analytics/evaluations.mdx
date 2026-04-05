@@ -239,6 +239,41 @@ The **Evaluations** page shows all your evaluations with their pass rates and re
 
 You can also filter generations by evaluation results or create [insights](/docs/product-analytics/insights) based on evaluation data to build quality monitoring dashboards.
 
+## Scheduled reports
+
+Scheduled reports analyze evaluation metrics over time and deliver summaries to your team via email or Slack. Instead of manually checking pass rates, you get periodic reports with trends, failing traces, and actionable insights.
+
+### Why use scheduled reports?
+
+- **Skip the dashboard** - Get evaluation summaries delivered to your inbox or Slack channel on a schedule you set.
+- **Spot regressions quickly** - Reports highlight quality trends and surface failing traces so you can act before issues compound.
+- **Keep your team informed** - Share LLM output quality with stakeholders who don't have PostHog access.
+
+### Configuring a scheduled report
+
+1. Go to **LLM analytics** > **Evaluations**
+2. Click an evaluation to open its detail page
+3. Go to the **Configuration** tab
+4. Enable **Scheduled reports**
+5. Set your delivery schedule (daily, weekly, etc.)
+6. Choose delivery channels:
+   - **Email** - Enter recipient email addresses
+   - **Slack** - Select a Slack channel (requires Slack integration)
+7. Click **Save**
+
+### Generating a report manually
+
+Click **Generate now** in the Configuration tab to create a report immediately using the same lookback period as your scheduled frequency. This is useful for testing your setup or getting an on-demand snapshot.
+
+### What reports include
+
+Each report analyzes evaluation results over the reporting period and includes:
+
+- **Summary** - Overall pass rate and total evaluations run
+- **Trends** - How pass rates have changed compared to the previous period
+- **Failing traces** - Links to specific generations that failed the evaluation, so you can investigate
+- **Recommendations** - Data-driven suggestions based on the evaluation results
+
 ## Pricing
 
 Each evaluation run counts as one LLM analytics event toward your quota.
