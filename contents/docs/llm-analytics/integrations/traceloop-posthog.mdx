@@ -1,14 +1,30 @@
 ---
-title: Integrating with Traceloop
+title: Traceloop and OpenLLMetry
 availability:
     free: full
     selfServe: full
     enterprise: full
 ---
 
-You can integrate with [Traceloop](https://www.traceloop.com/) and bring data into PostHog for analysis. Additionally, we offer a dashboard template to help you quickly get insights into your LLM product. 
+There are two ways to bring [Traceloop](https://www.traceloop.com/) data into PostHog for analysis:
 
-## How to install the integration
+- **Direct OpenTelemetry** (recommended) – Instrument your app with [OpenLLMetry](https://www.traceloop.com/docs/openllmetry/introduction) and send OTel spans directly to PostHog.
+- **Traceloop's managed platform** – Use Traceloop's cloud product and enable their PostHog integration.
+
+We also offer a dashboard template to help you quickly get insights into your LLM product.
+
+## Option 1: Direct OpenTelemetry (recommended)
+
+PostHog natively supports OTel spans from [OpenLLMetry](https://www.traceloop.com/docs/openllmetry/introduction), Traceloop's open-source instrumentation library. OpenLLMetry provides auto-instrumentation for 20+ LLM libraries including OpenAI, Anthropic, LangChain, Cohere, Bedrock, and VertexAI.
+
+When you send OpenLLMetry spans to PostHog, they are automatically:
+
+- Classified as `$ai_generation` or `$ai_embedding` events based on the request type
+- Normalized so input/output messages, token usage, and tools map to PostHog's standard LLM analytics properties
+
+To get started, configure OpenLLMetry to export traces to PostHog's OTel endpoint. See the [OpenLLMetry documentation](https://www.traceloop.com/docs/openllmetry/introduction) for setup instructions specific to your language and framework.
+
+## Option 2: Via Traceloop's managed platform
 
 1. Sign up for [Traceloop](https://www.traceloop.com/) and add it to your app.
 2. Go to the [integrations page](https://app.traceloop.com/settings/integrations) in your Traceloop dashboard and click on the PostHog card.
