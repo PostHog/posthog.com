@@ -1,5 +1,5 @@
 ---
-title: How to get Slack notifications when feature flags change
+title: How to get Slack notifications when Feature Flags change
 date: 2026-04-06
 author:
   - dylan-martin
@@ -10,7 +10,7 @@ tags:
   - cdp
 ---
 
-When you're managing feature flags across a team, it's important to know when flags are created, updated, or deleted. PostHog's [activity logs](/docs/settings/activity-logs) track these changes, and you can use a custom [data pipeline destination](/docs/cdp/destinations) to forward them to Slack in real time.
+When you're managing Feature Flags across a team, it's important to know when flags are created, updated, or deleted. PostHog's [Activity Logs](/docs/settings/activity-logs) track these changes, and you can use a custom [Data Pipelines](/docs/cdp/destinations) destination to forward them to Slack in real time.
 
 This tutorial walks through setting up a custom Hog function that listens for feature flag changes and posts rich Slack notifications – including release conditions, variant rollouts, payloads, and who made the change.
 
@@ -18,7 +18,7 @@ This tutorial walks through setting up a custom Hog function that listens for fe
 
 You need:
 
-- A PostHog account with [data pipelines](/docs/cdp) enabled
+- A PostHog account with [Data Pipelines](/docs/cdp) enabled
 - A Slack workspace where you can install apps
 - A Slack channel to receive notifications
 
@@ -37,7 +37,7 @@ Under **Match event and actions**, you need to configure the destination to list
 
 This ensures the destination only fires when someone creates, updates, or deletes a feature flag – not for other activity log entries like dashboard or experiment changes.
 
-## Step 3: Add the custom Hog code
+## Step 3: Add the custom Hog Code
 
 Click **Show source code** to open the Hog editor. Replace the default implementation with the following code:
 
@@ -236,7 +236,7 @@ See the [API documentation](https://us.posthog.com/api/schema/swagger-ui/) for t
 
 ## Further reading
 
-- [Activity logs](/docs/settings/activity-logs)
+- [Activity Logs](/docs/settings/activity-logs)
 - [Customizing destinations](/docs/cdp/destinations/customizing-destinations)
 - [How to send survey responses to Slack](/tutorials/slack-surveys)
 
