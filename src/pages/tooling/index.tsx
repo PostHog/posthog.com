@@ -100,11 +100,11 @@ export default function Tooling(): JSX.Element {
                         <ol className="list-none pl-0 space-y-2">
                             <li className="relative pl-20">
                                 <StickerCloudCross className="size-16 absolute left-0 -top-2" />
-                                <h3 className="text-base mt-0">1. AI is prone to yolo-ing</h3>
+                                <h3 className="text-base mt-0">1. AI-built infrastructure works until it doesn't</h3>
                                 <p>
-                                    Sure, Claude can vibe code a lightweight analytics stack or a feature flag. But
-                                    without proper infrastructure, it won't scale. And your tokens are better spent on
-                                    building your core product than the tooling to support it.
+                                    It's easy to vibe code a lightweight analytics stack or feature flag system. But it
+                                    won't scale with any real volume – and querying it gets expensive fast. Your tokens
+                                    are better spent on your product, not on reinventing PostHog.
                                 </p>
                             </li>
                             <li className="relative pl-20">
