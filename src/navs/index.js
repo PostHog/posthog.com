@@ -1357,6 +1357,10 @@ export const handbookSidebar = [
                                 name: 'Expansion, cross-sell & retention',
                                 url: '/handbook/growth/sales/expansion-and-retention',
                             },
+                            {
+                                name: 'Playbooks',
+                                url: '/handbook/growth/sales/playbooks',
+                            },
                         ],
                     },
                 ],
