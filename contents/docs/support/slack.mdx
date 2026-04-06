@@ -62,6 +62,7 @@ React with the configured emoji (default `:ticket:`) on any message to create a 
 All three methods:
 
 - Set `channel_source` to `slack` on the ticket
+- Set `channel_detail` to indicate which method was used (`slack_channel_message`, `slack_bot_mention`, or `slack_emoji_reaction`)
 - Resolve the Slack user's name, email, and avatar
 - Convert Slack message formatting to PostHog's rich text format
 - Download and re-host any image attachments (up to 4 MB per image)
