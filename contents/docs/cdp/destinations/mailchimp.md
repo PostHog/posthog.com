@@ -1,32 +1,39 @@
 ---
 title: Create and update Mailchimp contacts from analytics events
 templateId:
-    - template-mailchimp
+  - template-mailchimp
 ---
 
-import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
-import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
+import FeedbackQuestions from "../\_snippets/feedback-questions.mdx"
+import PostHogMaintained from "../\_snippets/posthog-maintained.mdx"
 
-You can use your PostHog event data to create and update contacts in Mailchimp. Here's everything you need to get started.
+<CalloutBox icon="IconInfo" title="Where to find Mailchimp" type="fyi">
 
+The Mailchimp destination is available in PostHog under [**Data pipelines**](https://app.posthog.com/data-management/destinations) > **Destinations**. Search for "Mailchimp" or [go directly to it](https://app.posthog.com/data-management/destinations?search=mailchimp).
 
-## Configuring Mailchimp
+</CalloutBox>
 
-First, [create](https://mailchimp.com/help/about-api-keys/) a new **API key** in your Mailchimp account.
+Use the Mailchimp destination to automatically create or update contacts in your Mailchimp audience based on PostHog events. This is useful for syncing user data, tagging contacts based on behavior, or triggering email campaigns from product activity.
 
-You'll also need your **[Mailchimp audience ID](https://mailchimp.com/help/find-audience-id/)**.
+## Requirements
 
-Finally, while logged into Mailchimp, check the subdomain of your account. You'll need this to configure the destination, as your `Mailchimp datacenter id`.
+- A Mailchimp account with an existing audience
+- A Mailchimp [API key](https://mailchimp.com/help/about-api-keys/)
+- Your [Mailchimp audience ID](https://mailchimp.com/help/find-audience-id/)
+- Your Mailchimp datacenter ID (the subdomain in your Mailchimp account URL)
 
-## Configuring PostHog’s Mailchimp destination
+## Setup
 
-1. In PostHog, click the **[Data pipeline](https://app.posthog.com/data-management/destinations)** tab in the left sidebar.
-2. Click the [Destinations](https://app.posthog.com/data-management/destinations?search=mailchimp) tab.
-3. Click **New destination** and choose Mailchimp's **Create** button.
+1. In your Mailchimp account, [create a new API key](https://mailchimp.com/help/about-api-keys/).
+2. Find your [audience ID](https://mailchimp.com/help/find-audience-id/) and note the subdomain of your Mailchimp account URL (this is your datacenter ID).
+3. In PostHog, go to the [**Data pipelines**](https://app.posthog.com/data-management/destinations) tab in the left sidebar.
+4. Click [**Destinations**](https://app.posthog.com/data-management/destinations?search=mailchimp) and search for "Mailchimp".
+5. Click **New destination** and choose Mailchimp's **Create** button.
+6. Enter your API key, audience ID, and datacenter ID.
 
-Insert your API key, audience ID, and datacenter ID. You can also choose a different property to use as the contact's email; PostHog will default to `person.properties.email`.
+You can also choose a different property to use as the contact's email. PostHog defaults to `person.properties.email`.
 
-You can additionally forward all event properties to Mailchimp, or select specific ones using the **merge field** section.
+To forward event properties to Mailchimp, use the **merge field** section. You can forward all properties or select specific ones.
 
 <HideOnCDPIndex>
 
@@ -40,7 +47,7 @@ As you'll be collecting or updating contact emails, you should configure the des
 
 Once you’ve configured your Mailchimp destination, click **Start testing** to verify everything works the way you want.
 
-***
+---
 
 <TemplateParameters />
 
