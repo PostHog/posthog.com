@@ -7,14 +7,33 @@ import { TransformImage } from 'react-markdown/lib/ast-to-react'
 import remarkGfm from 'remark-gfm'
 import { cn } from '../../../utils'
 import Link from 'components/Link'
+import { graphql, useStaticQuery } from 'gatsby'
+import { TeamMemberLink } from 'components/TeamMember'
 
 const replaceMentions = (body: string) => {
-    return body.replace(/@([a-zA-Z0-9_-]+\/[0-9]+|max)/g, (match, username) => {
-        if (username === 'max') {
+    return body.replace(/@((?:[^\s@/]+)\/([0-9]+)|max)/g, (match, full, id) => {
+        if (full === 'max') {
             return `[${match}](/community/profiles/${process.env.GATSBY_AI_PROFILE_ID})`
         }
-        return `[${match}](/community/profiles/${username.split('/')[1]})`
+        return `[${match}](/community/profiles/${id})`
     })
+}
+
+interface Profile {
+    avatar?: {
+        formats?: {
+            thumbnail?: {
+                url: string
+            }
+        }
+    }
+    firstName: string
+    lastName: string
+    squeakId: number
+    companyRole?: string
+    location?: string
+    country?: string
+    color?: string
 }
 
 export const Markdown = ({
@@ -32,6 +51,61 @@ export const Markdown = ({
     className?: string
     components?: Partial<Components>
 }) => {
+    const {
+        profiles: { nodes: profiles },
+    } = useStaticQuery<{ profiles: { nodes: Profile[] } }>(graphql`
+        {
+            profiles: allSqueakProfile {
+                nodes {
+                    avatar {
+                        formats {
+                            thumbnail {
+                                url
+                            }
+                        }
+                    }
+                    firstName
+                    lastName
+                    squeakId
+                    companyRole
+                    location
+                    country
+                    color
+                }
+            }
+        }
+    `)
+
+    const MentionLink = ({ href, children: linkChildren }: { href?: string; children?: React.ReactNode }) => {
+        const profileMatch = href?.match(/^\/community\/profiles\/(\d+)$/)
+
+        if (profileMatch) {
+            const profileId = Number(profileMatch[1])
+            const profile = profiles.find((p) => p.squeakId === profileId)
+
+            if (profile?.companyRole) {
+                const { squeakId, avatar, ...rest } = profile
+                return (
+                    <TeamMemberLink
+                        {...rest}
+                        squeakId={String(squeakId)}
+                        avatar={
+                            avatar?.formats?.thumbnail
+                                ? { formats: { thumbnail: avatar.formats.thumbnail } }
+                                : undefined
+                        }
+                    />
+                )
+            }
+        }
+
+        return (
+            <Link rel="nofollow noopener noreferrer" to={href || ''} state={{ newWindow: true }}>
+                {linkChildren}
+            </Link>
+        )
+    }
+
     return (
         // transformImageUri is safe, rehypeSanitize sanitizes all HTML output
         // nosemgrep: typescript.react.security.react-markdown-insecure-html.react-markdown-insecure-html
@@ -72,9 +146,7 @@ export const Markdown = ({
                 code: ({ node, ...props }) => {
                     return <code {...props} className="break-all inline-block" />
                 },
-                a: ({ node, ...props }) => {
-                    return <Link rel="nofollow noopener noreferrer" {...props} state={{ newWindow: true }} />
-                },
+                a: MentionLink,
                 img: ZoomImage,
                 ...components,
             }}
