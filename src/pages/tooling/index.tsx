@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
-import { IconRefresh } from '@posthog/icons'
 import Link from 'components/Link'
 import {
     StickerCloudCross,

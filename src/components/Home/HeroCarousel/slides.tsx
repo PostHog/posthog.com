@@ -8,7 +8,6 @@ import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { SELF_HOSTED_SOURCES } from 'constants/sources'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const pickedSourceSlugs = [
     'postgres',

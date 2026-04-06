@@ -1,6 +1,6 @@
 import React from 'react'
-import ProductsControl from './ProductsControl'
-import ProductsTest from './ProductsTest'
+import ProductsControl from '../../components/Products/ProductsControl'
+import ProductsTest from '../../components/Products/ProductsTest'
 import usePostHog from 'hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
 

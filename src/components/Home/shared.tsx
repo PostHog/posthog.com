@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Link from 'components/Link'
 import OSTable from 'components/OSTable'
 import { useCustomers } from 'hooks/useCustomers'
 import CTA from 'components/Home/CTA'

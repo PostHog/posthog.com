@@ -1,7 +1,6 @@
 import React from 'react'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
-import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { IconCheck } from '@posthog/icons'
 import Link from 'components/Link'
@@ -13,8 +12,6 @@ const LeftSidebarContent = () => {
 }
 
 export default function Profiles() {
-    const profilesProduct = useProduct({ handle: 'profiles' }) as any
-
     return (
         <>
             <SEO

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
-import { IconArrowRight, IconInfo } from '@posthog/icons'
+import { IconArrowRight } from '@posthog/icons'
 import {
     Digit0,
     Digit1,
