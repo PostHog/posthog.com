@@ -6,3 +6,5 @@ posthog-cli sourcemap upload --directory ./path/to/assets --release-name my-app 
 The CLI will create or reuse the [release](/docs/error-tracking/releases) for the detected or supplied release name and version. The CLI will try to detect release name and version information, but you can set them explicitly with `--release-name` and `--release-version`. We recommend setting the release name, and letting the CLI detect the version, if your project is continuously deployed (the version will be the git commit hash at build time).
 
 > **💡 Tip:** You can use `--delete-after` option to clean up sourcemaps after uploading them.
+
+By default, if a symbol set with the same chunk ID already exists on the server with different content, the CLI silently skips the re-upload. This prevents accidental overwrites of production symbol sets.
