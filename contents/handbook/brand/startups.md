@@ -10,7 +10,7 @@ We run two special programs for early-stage teams. The primary place for discuss
 
 | Feature                     | Startups                                              | Y Combinator                                          |
 | --------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| Eligibility                 | <2 years old, <$5M raised                             | Must be in YC, <$25m raised                           |
+| Eligibility                 | <2 years old, <$5M raised, not acquired               | Must be in YC, <$25m raised                           |
 | Credit                      | $50,000 for 12 months                                 | $50k per year, whilst eligible                        |
 | Can use credit for add-ons? | ⚠️ Yes, but cannot use credit for BAA in Boost add-on | ✅ Yes, and can use credit for BAA in Boost add-on     |
 | Founder merch               | Welcome pack (max 1)                                  | Different welcome pack (max 4)                        |

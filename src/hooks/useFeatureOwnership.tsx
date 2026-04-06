@@ -47,6 +47,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Annotations',
         owner: ['product-analytics'],
     },
+    'background-agents': {
+        feature: 'Background agents',
+        owner: ['posthog-ai'],
+        label: 'feature/background-agents',
+    },
     'api-structure': {
         feature: 'API structure',
         owner: [],
@@ -146,6 +151,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Managed warehouse',
         owner: ['managed-warehouse'],
     },
+    'embedding-worker': {
+        feature: 'Embedding worker',
+        owner: ['signals'],
+        label: false,
+    },
     'early-access-features': {
         feature: 'Early access features',
         owner: ['feature-flags'],
@@ -198,6 +208,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Internal messaging (email, notifications)',
         owner: ['platform-features'],
         label: 'feature/notifications',
+    },
+    'llm-gateway': {
+        feature: 'LLM gateway',
+        owner: ['posthog-ai'],
+        label: false,
     },
     'live-events': {
         feature: 'Live events',
@@ -283,6 +298,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'PostHog AI platform',
         owner: ['posthog-ai'],
         label: 'feature/posthog-ai',
+    },
+    'posthog-code': {
+        feature: 'PostHog Code',
+        owner: ['posthog-code'],
+        label: 'feature/posthog-code',
     },
     'project-homepage': {
         feature: 'Project homepage',
@@ -381,8 +401,13 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'session-summaries': {
         feature: 'Session summaries',
-        owner: ['signals'],
+        owner: ['replay'],
         label: 'feature/session-summaries',
+    },
+    signals: {
+        feature: 'Signals',
+        owner: ['signals'],
+        label: 'feature/signals',
     },
     settings: {
         feature: 'Settings structure (personal & project)',
