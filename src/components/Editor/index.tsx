@@ -682,7 +682,7 @@ export function Editor({
                                 <article
                                     data-scheme="primary"
                                     className={`${getProseClasses(proseSize)} h-full mx-auto transition-all ${
-                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-3xl'
+                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-4xl'
                                     }`}
                                 >
                                     {title && (
@@ -703,7 +703,7 @@ export function Editor({
                                     className={`${getProseClasses(proseSize)} ${
                                         hasPadding ? 'py-4 px-4 @xl:px-8' : ''
                                     } mx-auto transition-all ${
-                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-3xl'
+                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-4xl'
                                     }`}
                                 >
                                     {title && (

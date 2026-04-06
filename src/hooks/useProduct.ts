@@ -33,6 +33,8 @@ import {
     IconSparkles,
     IconTarget,
     IconArrowUpRight,
+    IconTrends,
+    IconCursorClick,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -95,7 +97,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'beta',
         },
         {
-            name: 'Product tours',
+            name: 'Product Tours',
             Icon: IconSpotlight,
             description: 'Guide users through your product with interactive tours and announcements.',
             handle: 'product_tours',
@@ -103,7 +105,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'salmon',
             category: 'product_engineering',
             slug: 'docs/product-tours',
-            status: 'WIP',
+            status: 'beta',
         },
         {
             name: 'Traces',
@@ -138,7 +140,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'beta',
         },
         {
-            name: 'No-code A/B testing',
+            name: 'No-code A/B Testing',
             Icon: IconTestTube,
             description: 'Run A/B tests without writing code.',
             handle: 'no_code_ab_testing',
@@ -203,9 +205,9 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             slug: 'platform-packages',
         },
         {
-            name: 'User profiles',
+            name: 'Activity timeline',
             Icon: IconPeople,
-            description: 'Analyze multi-seat accounts and other groups.',
+            description: 'Full event history for individuals and multi-seat accounts',
             handle: 'profiles',
             color: 'blue',
             colorSecondary: 'purple',
@@ -602,7 +604,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Graphs & trends',
-            Icon: IconGraph,
+            Icon: IconTrends,
             handle: 'trends',
             color: 'yellow',
             colorSecondary: 'lilac',
@@ -2091,7 +2093,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Heatmaps',
-            Icon: IconClockRewind,
+            Icon: IconCursorClick,
             description: 'See where users click, scroll, and move on your site',
             handle: 'heatmaps',
             color: 'green',

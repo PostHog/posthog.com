@@ -344,7 +344,7 @@ const appSettings: AppSettings = {
                 height: 500,
             },
             max: {
-                width: 900,
+                width: 960,
                 height: 1000,
             },
             fixed: false,
@@ -360,15 +360,46 @@ const appSettings: AppSettings = {
                 }
 
                 const { x, y } = getDesktopCenterPosition(size)
-                const keyboardGardenImageWidth = 700
-                const keyboardGardenImageLeft = window.innerWidth - keyboardGardenImageWidth
-                const windowRight = x + size.width
-                if (windowRight > keyboardGardenImageLeft) {
-                    const newX = x - (windowRight - keyboardGardenImageLeft)
+                const iconColumnRight = 145
+                const keyboardGardenImageLeft = window.innerWidth - 700
+                if (x + size.width > keyboardGardenImageLeft) {
+                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
+                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
+                    return { x: newX, y }
+                }
+                return { x, y }
+            },
+        },
+    },
+    '/products': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 960,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
+                if (typeof window === 'undefined') {
                     return {
-                        x: newX < 115 ? x : newX,
-                        y,
+                        x: 0,
+                        y: 0,
                     }
+                }
+
+                const { x, y } = getDesktopCenterPosition(size)
+                const iconColumnRight = 145
+                const keyboardGardenImageLeft = window.innerWidth - 700
+                if (x + size.width > keyboardGardenImageLeft) {
+                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
+                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
+                    return { x: newX, y }
                 }
                 return { x, y }
             },
@@ -382,6 +413,22 @@ const appSettings: AppSettings = {
             },
             max: {
                 width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/tooling': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1000,
                 height: 1000,
             },
             fixed: false,
@@ -433,15 +480,12 @@ const appSettings: AppSettings = {
                 }
 
                 const { x, y } = getDesktopCenterPosition(size)
-                const keyboardGardenImageWidth = 700
-                const keyboardGardenImageLeft = window.innerWidth - keyboardGardenImageWidth
-                const windowRight = x + size.width
-                if (windowRight > keyboardGardenImageLeft) {
-                    const newX = x - (windowRight - keyboardGardenImageLeft)
-                    return {
-                        x: newX < 115 ? x : newX,
-                        y,
-                    }
+                const iconColumnRight = 145
+                const keyboardGardenImageLeft = window.innerWidth - 700
+                if (x + size.width > keyboardGardenImageLeft) {
+                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
+                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
+                    return { x: newX, y }
                 }
                 return { x, y }
             },
@@ -470,15 +514,12 @@ const appSettings: AppSettings = {
                 }
 
                 const { x, y } = getDesktopCenterPosition(size)
-                const keyboardGardenImageWidth = 700
-                const keyboardGardenImageLeft = window.innerWidth - keyboardGardenImageWidth
-                const windowRight = x + size.width
-                if (windowRight > keyboardGardenImageLeft) {
-                    const newX = x - (windowRight - keyboardGardenImageLeft)
-                    return {
-                        x: newX < 0 ? x : newX,
-                        y,
-                    }
+                const iconColumnRight = 145
+                const keyboardGardenImageLeft = window.innerWidth - 700
+                if (x + size.width > keyboardGardenImageLeft) {
+                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
+                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
+                    return { x: newX, y }
                 }
                 return { x, y }
             },

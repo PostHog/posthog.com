@@ -46,7 +46,7 @@ export const useProductLinks = () => {
         },
         {
             label: 'Product OS',
-            Icon: <AppIcon name="folder" />,
+            Icon: <AppIcon name={posthog?.getFeatureFlag?.('data-positioning') === 'test' ? 'notebook' : 'folder'} />,
             url: '/products',
             source: 'desktop',
         },

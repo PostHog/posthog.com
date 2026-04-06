@@ -15,7 +15,9 @@ const getUnitySteps = (ctx: any) => {
                         Requires **Unity 2021.3 LTS** or later with **.NET Standard 2.1** API compatibility level.
                     </Markdown>
                     <Markdown>
-{"In the Unity Editor, open **Window > Package Manager**, click the **+** button, select **Add package from git URL**, and enter:"}
+                        {
+                            'In the Unity Editor, open **Window > Package Manager**, click the **+** button, select **Add package from git URL**, and enter:'
+                        }
                     </Markdown>
                     <CodeBlock
                         blocks={[
@@ -50,7 +52,9 @@ const getUnitySteps = (ctx: any) => {
             content: (
                 <>
                     <Markdown>
-{"Add `SessionReplay = true` to your PostHog configuration. You can also configure it via the Unity Inspector in **Edit > Project Settings > PostHog**."}
+                        {
+                            'Add `SessionReplay = true` to your PostHog configuration. You can also configure it via the Unity Inspector in **Edit > Project Settings > PostHog**.'
+                        }
                     </Markdown>
                     <CodeBlock
                         blocks={[
@@ -110,8 +114,8 @@ const getUnitySteps = (ctx: any) => {
                     <CalloutBox type="info" title="Limitations">
                         <Markdown>
                             The Unity SDK reads the **Record user sessions** toggle from PostHog project settings, but
-                            more granular options like `CaptureNetworkTelemetry`, `CaptureLogs`, and sampling are **not**
-                            remotely configurable and must be set locally in code at initialization time.
+                            more granular options like `CaptureNetworkTelemetry`, `CaptureLogs`, and sampling are
+                            **not** remotely configurable and must be set locally in code at initialization time.
                         </Markdown>
                     </CalloutBox>
                 </>
