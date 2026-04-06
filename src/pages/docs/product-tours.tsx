@@ -11,12 +11,14 @@ const ProductTours: React.FC = () => {
         <ReaderView>
             <SEO title="Product Tours - Docs - PostHog" />
             <CalloutBox icon="IconFlask" title="Product tours is in private alpha" type="info">
+                <p>Product Tours has been deprioritized and is no longer accepting new alpha testers.</p>
                 <p>
-                    Product Tours is currently in private alpha.{' '}
-                    <a href="https://us.posthog.com/external_surveys/019af5f5-a50e-0000-b10f-e8c30c0b73a0">
-                        Share your thoughts
-                    </a>{' '}
-                    and we'll reach out with early access.
+                    Existing customers are welcome to continue using the product, but we will be unable to prioritize
+                    support or new features at the moment.
+                </p>
+                <p>
+                    Follow our <a href="https://github.com/PostHog/posthog/issues/25726">GitHub issue</a> for future
+                    status updates.
                 </p>
             </CalloutBox>
             <Intro
