@@ -305,7 +305,16 @@ Both methods return a callback with an array of surveys in this format:
         "No"
       ],
       "question": "Are you enjoying PostHog?",
-      "id": "7ce5b831-dc71-4648-b6b0-b583d48a0c11" // Each question has a UUID
+      "id": "7ce5b831-dc71-4648-b6b0-b583d48a0c11"
+    },
+    {
+      "type": "open_text",
+      "question": "Tell us more about your experience",
+      "id": "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+      "validation": [
+        { "type": "min_length", "value": 10 },
+        { "type": "max_length", "value": 500 }
+      ]
     }
   ],
   "conditions": null,
@@ -314,6 +323,8 @@ Both methods return a callback with an array of surveys in this format:
   "end_date": null
 }]
 ```
+
+Open text questions can include an optional `validation` array with length rules. Each rule has a `type` (`"min_length"` or `"max_length"`) and a `value` (positive integer). If you're building a custom survey UI, enforce these limits client-side before submitting responses.
 
 As an example, we can use `getActiveMatchingSurveys()` to make our Next.js feedback survey more dynamic:
 
