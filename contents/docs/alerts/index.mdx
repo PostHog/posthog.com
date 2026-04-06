@@ -168,6 +168,8 @@ Instead of setting a fixed threshold, anomaly detection uses statistical algorit
 - You want to detect subtle changes that a fixed threshold would miss
 - Your metrics have seasonal patterns that make static thresholds unreliable
 
+Anomaly detection alerts also support [breakdowns](#alerts-on-breakdowns). When your insight has a breakdown, the detector monitors each breakdown value independently and fires on the first anomaly detected.
+
 ### Creating an anomaly detection alert
 
 1. Open an existing [trend insight](/docs/product-analytics/trends) or create a new one.
@@ -184,51 +186,51 @@ PostHog includes 13 anomaly detection algorithms. For most use cases, **Z-score*
 
 #### Statistical detectors
 
-| Detector | Best for | How it works |
-|----------|----------|--------------|
-| **Z-score** | General purpose | Flags points that are many standard deviations from the rolling mean. Uses first-order differencing by default to handle cyclical data. |
-| **MAD** (Median Absolute Deviation) | Data with outliers | Similar to Z-score but uses median instead of mean, making it more robust to existing outliers. Uses first-order differencing by default. |
-| **IQR** (Interquartile Range) | Skewed distributions | Flags values outside the interquartile range. Less sensitive to distribution shape than Z-score. |
+| Detector                            | Best for             | How it works                                                                                                                              |
+| ----------------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **Z-score**                         | General purpose      | Flags points that are many standard deviations from the rolling mean. Uses first-order differencing by default to handle cyclical data.   |
+| **MAD** (Median Absolute Deviation) | Data with outliers   | Similar to Z-score but uses median instead of mean, making it more robust to existing outliers. Uses first-order differencing by default. |
+| **IQR** (Interquartile Range)       | Skewed distributions | Flags values outside the interquartile range. Less sensitive to distribution shape than Z-score.                                          |
 
 #### Machine learning detectors
 
 These use the [PyOD](https://pyod.readthedocs.io/) library and work well for more complex patterns:
 
-| Detector | Best for | How it works |
-|----------|----------|--------------|
-| **Isolation Forest** | General purpose, high-dimensional | Isolates anomalies by randomly partitioning data. Anomalies require fewer partitions to isolate. |
-| **KNN** (K-Nearest Neighbors) | Cluster-based patterns | Flags points that are far from their nearest neighbors. |
-| **LOF** (Local Outlier Factor) | Variable-density data | Compares a point's local density to its neighbors. Good when "normal" varies across different ranges. |
-| **ECOD** | Fast, no tuning needed | Uses empirical cumulative distribution functions. One of the fastest detectors with no hyperparameters beyond threshold and window. |
-| **COPOD** | Multivariate data | Uses copula-based outlier detection. Fast and parameter-light. |
-| **HBOS** (Histogram-Based Outlier Score) | Fast, large datasets | Builds histograms to estimate density. Very fast but assumes feature independence. |
-| **PCA** (Principal Component Analysis) | Correlated metrics | Projects data into lower dimensions and flags points with high reconstruction error. |
-| **OCSVM** (One-Class SVM) | Complex boundaries | Learns a boundary around normal data. Good when normal data forms an irregular shape. |
+| Detector                                 | Best for                          | How it works                                                                                                                        |
+| ---------------------------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Isolation Forest**                     | General purpose, high-dimensional | Isolates anomalies by randomly partitioning data. Anomalies require fewer partitions to isolate.                                    |
+| **KNN** (K-Nearest Neighbors)            | Cluster-based patterns            | Flags points that are far from their nearest neighbors.                                                                             |
+| **LOF** (Local Outlier Factor)           | Variable-density data             | Compares a point's local density to its neighbors. Good when "normal" varies across different ranges.                               |
+| **ECOD**                                 | Fast, no tuning needed            | Uses empirical cumulative distribution functions. One of the fastest detectors with no hyperparameters beyond threshold and window. |
+| **COPOD**                                | Multivariate data                 | Uses copula-based outlier detection. Fast and parameter-light.                                                                      |
+| **HBOS** (Histogram-Based Outlier Score) | Fast, large datasets              | Builds histograms to estimate density. Very fast but assumes feature independence.                                                  |
+| **PCA** (Principal Component Analysis)   | Correlated metrics                | Projects data into lower dimensions and flags points with high reconstruction error.                                                |
+| **OCSVM** (One-Class SVM)                | Complex boundaries                | Learns a boundary around normal data. Good when normal data forms an irregular shape.                                               |
 
 #### Ensemble detector
 
 The **Ensemble** detector combines two or more of the above detectors with AND/OR logic:
 
-- **AND**: Only fires when *all* sub-detectors agree a point is anomalous. Reduces false positives.
-- **OR**: Fires when *any* sub-detector flags an anomaly. Catches more anomalies but may be noisier.
+- **AND**: Only fires when _all_ sub-detectors agree a point is anomalous. Reduces false positives.
+- **OR**: Fires when _any_ sub-detector flags an anomaly. Catches more anomalies but may be noisier.
 
 ### Configuration
 
 All detectors share these core parameters:
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| **Sensitivity** (threshold) | Anomaly probability cutoff between 0 and 1. Higher values mean fewer alerts. | 0.9 |
-| **Window** | Number of historical data points used for training. | Depends on interval (see below) |
+| Parameter                   | Description                                                                  | Default                         |
+| --------------------------- | ---------------------------------------------------------------------------- | ------------------------------- |
+| **Sensitivity** (threshold) | Anomaly probability cutoff between 0 and 1. Higher values mean fewer alerts. | 0.9                             |
+| **Window**                  | Number of historical data points used for training.                          | Depends on interval (see below) |
 
 Default window sizes based on your alert's check interval:
 
 | Interval | Default window | What it covers |
-|----------|---------------|----------------|
-| Hourly | 168 | 7 days |
-| Daily | 90 | ~3 months |
-| Weekly | 26 | ~6 months |
-| Monthly | 12 | 1 year |
+| -------- | -------------- | -------------- |
+| Hourly   | 168            | 7 days         |
+| Daily    | 90             | ~3 months      |
+| Weekly   | 26             | ~6 months      |
+| Monthly  | 12             | 1 year         |
 
 #### Preprocessing
 
@@ -250,6 +252,8 @@ The simulation shows:
 For ensemble detectors, the chart shows individual score lines for each sub-detector so you can see how they interact.
 
 Use the date range dropdown to test the detector over different time periods (e.g., last 24 hours, last 7 days, last 30 days).
+
+When your insight has breakdowns, the simulation displays results for each breakdown value (up to 25) in a scrollable list of mini-charts, with aggregated statistics at the top.
 
 ### Create anomaly detection alerts with PostHog AI
 
@@ -303,7 +307,9 @@ Use this if you want to be alerted right away when the insight value rises/incre
 
 ## Alerts on breakdowns
 
-When you set an alert on a trend with a breakdown, the alert will be triggered when any of the breakdown values breaches the thresholds set.
+Both threshold and anomaly detection alerts support breakdowns. When you set an alert on a trend with a breakdown, the alert fires when any of the breakdown values triggers the alert condition.
+
+For **threshold alerts**, each breakdown value is checked against the thresholds you've set. For **anomaly detection alerts**, each breakdown value (up to 25) is monitored independently by the detector, and the alert fires on the first anomaly detected. Breakdown values with insufficient data for the detector are skipped.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/breakdown_alert_7bd87114cb.png"
