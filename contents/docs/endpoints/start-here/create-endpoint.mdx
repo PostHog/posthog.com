@@ -51,18 +51,21 @@ Once you've selected your insight:
 </Tab.Panel>
 <Tab.Panel>
 
-1. In the SQL editor, click on the **Endpoint** tab in the output pane:
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T12_00_54_246_Z_a8d31a1299.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T12_00_26_709_Z_11f8e467e6.png"
-  alt="Creating an endpoint from a SQL query"
-  classes="rounded"
-/>
+**From the SQL editor:**
 
-2. Give your endpoint a descriptive name and optionally a description
+1. Open the [SQL editor](https://app.posthog.com/sql) and write your query
+2. Click the **Save as** dropdown in the header and select **Save as endpoint**
+3. Give your endpoint a descriptive name and optionally a description
   - **Recommended** - `daily_active_users`, `account_users_activity`, `signup_funnel`
   - **Avoid** - `endpoint1`, `test`, `query`
-3. Create the endpoint
+4. Create the endpoint
+
+**From the Endpoints page:**
+
+1. Go to the [Endpoints page](https://app.posthog.com/endpoints) and click **New endpoint** > **SQL-based endpoint**
+2. Write your SQL query in the embedded SQL editor
+3. Give your endpoint a descriptive name and optionally a description
+4. Create the endpoint
 
 </Tab.Panel>
 </Tab.Panels>
