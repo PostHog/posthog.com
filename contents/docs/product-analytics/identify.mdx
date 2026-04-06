@@ -219,6 +219,60 @@ You can view whether a user can be merged into another user using `alias` when [
 
 > **Note:** When calling `alias` in the frontend SDKs, if you have set any properties onto the anonymous user, they are merged into the user with `distinct_id`. For more details, see the FAQ on [how properties are managed when identifying anonymous users](/docs/data/identify#how-are-properties-managed-when-identifying-anonymous-users).
 
+## Common pitfall: multi-ID authentication flows
+
+A common issue arises when your authentication system uses multiple IDs for the same user — for example, an anonymous browser ID, an OAuth/Firebase UID, and an internal user ID. If not handled carefully, this creates **split persons** where pre-signup and post-signup activity land on different profiles.
+
+### The problem
+
+Consider this flow:
+
+1. A user visits your signup page. The PostHog JavaScript SDK assigns them an anonymous `distinct_id`.
+2. After email verification, the frontend calls `posthog.identify('firebase-uid')`, linking the anonymous ID to the Firebase UID. This works correctly.
+3. Your **server** fires a `signup_completed` event using the user's internal ID (e.g., `user_123`) **before** anything links that ID to the existing person.
+4. PostHog creates a **new, separate person** for `user_123`.
+5. The frontend then starts using `user_123` as the distinct ID. All post-signup activity lands on this new person.
+6. The original person (with the pre-signup journey) is **orphaned**.
+
+The frontend's attempt to call `posthog.identify('user_123')` to link the IDs **fails silently** because the source person (with the Firebase UID) is already identified from step 2. PostHog logs a `cannot_merge_already_identified` [ingestion warning](/manual/data-management#ingestion-warnings).
+
+### The fix: link IDs on the server before sending events
+
+The most reliable fix is to call `alias` on the server to link the new internal ID to the previous ID **before** sending any events with it:
+
+<MultiLanguage selector="tabs">
+
+```node
+// At signup, BEFORE sending any events with the internal user ID:
+client.alias({
+    distinctId: 'user_123',       // your internal user ID
+    alias: 'firebase-uid',        // the previous ID (Firebase UID, OAuth ID, etc.)
+})
+
+// Now it's safe to send events with the internal user ID
+client.capture({
+    distinctId: 'user_123',
+    event: 'signup_completed',
+})
+```
+
+```python
+# At signup, BEFORE sending any events with the internal user ID:
+posthog.alias(
+    previous_id='firebase-uid',  # the previous ID
+    distinct_id='user_123',      # your internal user ID
+)
+
+# Now it's safe to send events with the internal user ID
+posthog.capture('user_123', 'signup_completed')
+```
+
+</MultiLanguage>
+
+This works because `alias` links two distinct IDs without the same merge restrictions as `identify`. The key requirement is that the `alias` ID must not have been previously used as the `distinct_id` of an `identify` or `alias` call.
+
+> **Tip:** If you've already hit this problem and have split persons, you can use [`$merge_dangerously`](#how-to-merge-users) to retroactively merge them.
+
 ## Troubleshooting and FAQs
 
 ### What happens if you call `identify` or `alias` with invalid inputs?
