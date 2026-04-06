@@ -27,13 +27,23 @@ Feature Flags sits in a uniquely latency-sensitive spot compared to most PostHog
 
 ## What looked like a database problem
 
-Although the [Rust rewrite of our feature flag service](/blog/even-faster-more-reliable-flags) resulted in a bunch of performance gains, as we grew to serve twice the traffic, problems arose again. Latency, which the rewrite made up to 10.6x faster, was spiking. Our application was "randomly" freezing up. 
+Although the [Rust rewrite of our feature flag service](/blog/even-faster-more-reliable-flags) resulted in a bunch of performance gains, as we grew to serve twice the traffic, problems arose again. Latency, which the rewrite made up to 10.6x faster, was spiking. Our application was "randomly" freezing up.
 
 ![Image1](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_03_27_at_16_51_46_f3263bd8f6.png)
 
-We invested the most common culprits of this issue, but this didn't give any hints. Request rate and CPU utilization were steady, there wasn't external DB pressure, or significant differences between requests (number of flags, properties, etc.). Our initial thought was that it was a database issue, as pool utilization maxing at 100% multiple times a day and connection times were spiking.
+Our initial thought was that it was a database issue. Connection pools were maxing out at 100% multiple times a day, and connection acquire times were spiking in direct correlation with the p99 latency spikes. That's usually a clear signal. But as we dug deeper, the database turned out to be innocent.
 
-As we dug deeper, we realized it was more to do with how we combined some tools within the Rust application.
+## The database had nothing to do with it
+
+The first thing we checked was Aurora RDS. If connection pools are maxing out and acquire times are spiking, the database is the obvious suspect. But the RDS metrics told a different story: query execution times were fast and stable, CPU utilization was healthy, and there was no sign of external pressure. The database was doing its job fine. Something else was making it _look_ slow from the application's point of view.
+
+We then looked at scaling. The HPA (Horizontal Pod Autoscaler, Kubernetes' mechanism for automatically adding or removing pods based on load) was kicking in during spikes, but always too late. By the time new pods came up, the damage was already done. More importantly, having more or fewer pods didn't change the latency at all. The problem wasn't about capacity, it was inside every single pod.
+
+The hint that shifted our focus was CPU throttling. CFS (Completely Fair Scheduler, Linux's CPU scheduler that caps how much time a container actually gets to run) throttling was spiking in lockstep with the p99 latency, but the _mean_ CPU utilization was low. That's a telling pattern: the pods weren't running out of CPU on average, they were getting throttled in short bursts. 
+
+Something was creating intense, brief CPU demand that the scheduler couldn't smooth out. And the connection pool metrics now made sense too: connection acquire times and pool utilization were spiking together with latency, not because the database was slow, but because the application couldn't even get to the point of _asking_ the database for a connection. The I/O runtime was frozen.
+
+With that, we stopped looking at the database and started looking at what was happening inside the application.
 
 ## Our Rust feature flags service setup
 
@@ -57,7 +67,7 @@ By default, Rayon also creates a `ThreadPool` with—unsurprisingly—the same n
 
 ## The problem with using them together
 
-We used a combination of Tokio and Rayon in an uncoordinated way. Both crates spawned as many threads as the number of CPU cores they detected (based on the K8s CPU limit). That meant **100% thread oversubscription**—we created twice the number of threads we should have, and Linux's CFS (Completely Fair Scheduler—the CPU scheduler that caps how much time a container actually gets to run) had to constantly juggle them.
+We used a combination of Tokio and Rayon in an uncoordinated way. Both crates spawned as many threads as the number of CPU cores they detected (based on the K8s CPU limit). That meant **100% thread oversubscription**—we created twice the number of threads we should have, and CFS had to constantly juggle them.
 
 This was our first hint at the problem, but it wasn't the main issue. Thread oversubscription made things worse (the Linux CPU scheduler throttled harder with more threads fighting for time), but the real culprit was how we were calling Rayon in the first place.
 
@@ -65,7 +75,7 @@ This was our first hint at the problem, but it wasn't the main issue. Thread ove
 
 ### The real culprit of our latency problem
 
-Rayon's `par_iter()` was being called directly in the request handler, managed by Tokio, for every flag evaluation request. This means that the worker thread, which was supposed to be dealing with I/O, parked idle waiting for Rayon to process the flag payload. 
+Rayon's `par_iter()` was being called directly in the request handler, managed by Tokio, for every flag evaluation request. This means that the worker thread, which was supposed to be dealing with I/O, parked idle waiting for Rayon to process the flag payload.
 
 ```rust
 let results: Vec<_> = flags_to_evaluate
@@ -75,7 +85,7 @@ let results: Vec<_> = flags_to_evaluate
 
 Not only that, but since every request tried to use Rayon's thread pool, with no backpressure, the parallel processing was being rendered useless.
 
-Blocking the I/O worker threads is one of the single worst things that can happen to an I/O bound application. 
+Blocking the I/O worker threads is one of the single worst things that can happen to an I/O bound application.
 
 While the workers are blocked, the application won't poll futures. This means no HTTP requests being answered, no DB or cache interaction, so effectively an app-level freeze. When we got unlucky and most workers blocked simultaneously, our p99 and p95 response times would spike up to 2.5 seconds, with a big number of gateway 504 timeouts as well.
 
@@ -87,7 +97,7 @@ When dealing with scenarios where you want to block the thread, like the CPU-bou
 
 Our chosen solution was to dispatch the work to a separate thread pool using Rayon. After setting up a proper thread budget (Tokio gets half the cores for I/O, Rayon gets the full count for compute, accepting mild oversubscription since Tokio threads are mostly parked in `.await`), we call `rayon::spawn` to dispatch the work to Rayon's thread pool, and wait for it to finish up with a `tokio::sync::oneshot` channel. This allows for us to use Rayon while leveraging the async model. The workers don't wait anymore, they effectively run free to deal with I/O.
 
-A semaphore also gates the Rayon thread pool, working as a pressure valve. Without any backpressure, Rayon's internal work queue could grow without limit during traffic bursts, causing queueing delays to snowball. At most N batches are in-flight at once. If the pool is full, the request waits asynchronously.
+A semaphore (essentially a counter that limits how many threads can access a given resource at the same time) also gates the Rayon thread pool, working as a pressure valve. Without any backpressure, Rayon's internal work queue could grow without limit during traffic bursts, causing queueing delays to snowball. At most N batches are in-flight at once. If the pool is full, the request waits asynchronously.
 
 On the infrastructure side, we also bumped the Kubernetes CPU limit to give the combined pools burst headroom, and pinned the thread count to the CPU _request_ rather than the _limit_. This matters because Rust's `available_parallelism()` reads the cgroup limit, not the request, so without the override the pools would silently create more threads than they had guaranteed CPU for.
 
@@ -113,19 +123,17 @@ The impact was noticeable: lower memory usage (fewer flags cloned into the graph
 
 First, notice the differences in the Y-axis scale. This graph shows 0 to 650ms, while the first graph showed 0 to 2.8 seconds. This represents a dramatic change: the mean p99 dropped from ~460ms to ~94ms. The latency spikes are rare throughout the week, and get to at most 200ms.
 
-The HPA scaling effects are also worth mentioning. Our previous HPA behavior was acting reactively and fighting the symptoms, short CPU usage spikes would trigger HPA scale events, but the problems were already inside the pods. We frequently went to the maximum replica count (100 pods), and that made no difference in our performance. We were effectively wasting resources. Now, we never need to get past the minimum replica count (currently, 50 pods), even during peak traffic. The service doesn't respond to the 2x diurnal traffic swing at all, the p99 is the same at 3am as it is at peak.
-
-We also "solved" our database problem from earlier. The pool utilization max outs and connection time spikes were side effects of runtime starvation. Now pool utilization sits at ~10%, and connection acquire time p99 is steady at ~4ms.
+We now never need to get past the minimum replica count (currently, 50 pods), even during peak traffic. The service doesn't respond to the 2x diurnal traffic swing at all, the p99 is the same at 3am as it is at peak.
 
 ## What we learned from the process
 
-One of the most useful lessons from the whole process was the importance of iterative test cycles, incremental changes, and precise instrumentation. 
+One of the most useful lessons from the whole process was the importance of iterative test cycles, incremental changes, and precise instrumentation.
 
 When dealing with services that need to balance intensive compute and IO (and a _lot_ of other software engineering problems, really), there is no silver bullet or definitive solution. To get to a good solution that solved our issues, we had to come up with hypotheses with the information we had in hand, place the correct metrics and test them out, comparing results of different approaches.
 
 This wasn't just a Rust-specific problem. The same class of bug (CPU-heavy work blocking an async I/O runtime) shows up in Node.js event loops, Go goroutine schedulers, and anywhere else cooperative scheduling meets capped compute.
 
-The symptoms told us it was a database problem. It wasn't. The maxed-out connection pools, the spiking acquire times and the timeouts were all a downstream effect of the I/O runtime being starved. If we had just thrown more pods at it (which we did, at first), we'd still be firefighting today.
+The symptoms told us it was a database problem. It wasn't. The maxed-out connection pools, the spiking acquire times and the timeouts were all a downstream effect of the I/O runtime being starved. Pool utilization now sits at ~10%, and connection acquire time p99 is steady at ~4ms. If we had just thrown more pods at it (which we did, at first), we'd still be firefighting today.
 
 Instead, Feature Flags now serves ~13,000 requests per second with a p99 under 100ms, on a flat fleet of 50 pods that doesn't flinch during traffic spikes. That's where we wanted to be: fast enough that flag evaluations are close to invisible to the applications relying on them.
 
