@@ -57,9 +57,11 @@ Each project has a default access level that applies to all organization members
 - **Member** – All organization members have member-level access
 - **Admin** – All organization members have admin-level access
 
-You can override the default access level for specific members or roles. A user's effective access level is the highest level granted from any source.
+You can override the default access level for specific members or roles. A user's effective access level is the highest level granted from any source (project defaults, role assignments, or organization admin status).
 
-Organization owners and admins automatically receive project admin access.
+The **Members** and **Roles** tabs in access control settings display each user's effective access level, not just their explicit override. This helps you see the actual permissions a member or role has. Access levels lower than the inherited level are disabled, and the UI shows a tooltip explaining why (e.g., "User has a role with Editor access" or "Project default is Viewer").
+
+Organization owners and admins automatically receive project admin access, and their permissions can't be overridden to a lower level.
 
 <ProductScreenshot
     imageLight = {projectAccessControlLight} 
