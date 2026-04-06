@@ -1390,6 +1390,10 @@ export const handbookSidebar = [
                         name: 'Data Infrastructure',
                         url: '/handbook/growth/use-case-selling/data-infrastructure',
                     },
+                    {
+                        name: 'Customer Experience',
+                        url: '/handbook/growth/use-case-selling/customer-experience',
+                    },
                 ],
             },
             {
