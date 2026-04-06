@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { cn } from '../../../utils'
 
 type CloudinaryImageSrc = `https://res.cloudinary.com/${string}`
 
@@ -60,12 +61,12 @@ export default function AISlide({ ai, productName }: AISlideProps) {
                         ))}
                     </ul>
                 </div>
-                <aside className="text-center flex justify-center @2xl:shrink-0">
+                <aside className="text-center flex justify-center @2xl:shrink-0 w-full max-w-[400px] mx-auto">
                     <CloudinaryImage
                         src={slideImage}
                         alt={slideAlt}
-                        className="max-w-[400px]"
-                        imgClassName={ai?.imageClasses}
+                        className="w-full max-w-[400px]"
+                        imgClassName={cn('h-auto w-full max-w-full object-contain', ai?.imageClasses)}
                     />
                 </aside>
             </div>
