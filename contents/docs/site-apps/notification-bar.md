@@ -52,14 +52,10 @@ You also need to opt in to the site apps beta by setting `opt_in_site_apps: true
    });
    ```
 
-2. In PostHog, go to the [Data pipeline](https://app.posthog.com/pipeline/destinations) tab in the left sidebar
+2. In PostHog, go to **Data** > **Pipeline** > **Destinations**
 3. Search for **Notification Bar** and click **+ Create**
 4. Configure the bar with your message, colors, and positioning
 5. Click **Save** and enable the destination
-
-## Configuration
-
-<AppParameters />
 
 ## FAQ
 
@@ -73,12 +69,4 @@ We'd like to thank PostHog team member [Marius Andra](https://github.com/mariusa
 
 ### Who maintains this app?
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this app?
-
-We love feature requests and feedback! Please [let us know](http://app.posthog.com/home#supportModal) what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal).
+This app is maintained by PostHog. If you have issues with the app not functioning as intended, have feedback, or your question isn't answered above, please [let us know](http://app.posthog.com/home#supportModal) or ask via [our community forum](/questions).
