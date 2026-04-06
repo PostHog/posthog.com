@@ -1,13 +1,18 @@
 ---
 title: Experiment troubleshooting
 ---
-export const AssignAnOverrideLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-light-mode.mp4"
-export const AssignAnOverrideDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-dark-mode.mp4"
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
-import ReturningUsersExposures from "./snippets/returning-users-exposures.mdx"
-export const ReuseFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-light-mode.png"
-export const ReuseFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-dark-mode.png"
+export const AssignAnOverrideLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-light-mode.mp4";
+export const AssignAnOverrideDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-dark-mode.mp4";
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+import ReturningUsersExposures from "./snippets/returning-users-exposures.mdx";
+export const ReuseFeatureFlagLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-light-mode.png";
+export const ReuseFeatureFlagDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-dark-mode.png";
 
 This page covers troubleshooting for Experiments. For setup, see the [installation guides](/docs/experiments/installation).
 
@@ -26,10 +31,10 @@ However, if you insist on doing this (for example, you don't want to make code c
 3. Name the first variant in your new feature flag 'control'.
 
 <ProductScreenshot
-    imageLight = {ReuseFeatureFlagLight}
-    imageDark = {ReuseFeatureFlagDark}
-    alt = "Reuse an existing feature flag for an experiment"
-    classes = "rounded"
+  imageLight={ReuseFeatureFlagLight}
+  imageDark={ReuseFeatureFlagDark}
+  alt="Reuse an existing feature flag for an experiment"
+  classes="rounded"
 />
 
 > **Note:** Deleting a flag is equivalent to disabling it, so it is off for however long it takes you to create the draft experiment. The flag is enabled as soon as you create the experiment (not launched).
@@ -55,13 +60,13 @@ See our docs on [how to run an experiment without using feature flags](/docs/exp
 Once you create the experiment, go to the feature flag, scroll down to "Release Conditions". For each condition, there is an "Optional Override". This enables you to choose a release condition and force all people in this release condition to have the variant chosen in the optional override.
 
 <ProductVideo
-    videoLight = {AssignAnOverrideLight}
-    videoDark = {AssignAnOverrideDark}
-    alt = "How to assign an experiment override"
-    classes = "rounded"
+  videoLight={AssignAnOverrideLight}
+  videoDark={AssignAnOverrideDark}
+  alt="How to assign an experiment override"
+  classes="rounded"
 />
 
-import FAQFalseOrNoneEvents from "../feature-flags/snippets/faq-false-or-none-events.mdx"
+import FAQFalseOrNoneEvents from "../feature-flags/snippets/faq-false-or-none-events.mdx";
 
 <FAQFalseOrNoneEvents />
 
@@ -109,8 +114,19 @@ You can check your current exposure count on the experiment results page. If you
 - Consider increasing your feature flag's rollout percentage.
 - Ensure your exposure events are firing correctly.
 
+## Why can't I edit metrics on my experiment?
+
+If you see a banner stating "This is a legacy experiment. Metrics can no longer be edited," your experiment was created before January 2025 and uses the legacy experiment format.
+
+Legacy experiments are now read-only. You can't add, edit, or duplicate metrics on these experiments. This includes:
+
+- Adding new primary or secondary metrics
+- Editing existing metrics
+- Duplicating metrics
+- Adding breakdowns to metrics
+
+To make changes to your experiment metrics, recreate the experiment using the current experiment format.
+
 ## Solved community questions
 
-<SolvedQuestions
-    topicLabel="Experiments"
-/>
+<SolvedQuestions topicLabel="Experiments" />
