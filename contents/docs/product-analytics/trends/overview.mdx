@@ -137,6 +137,8 @@ You can combine multiple events into a single series using inline combination, a
 Simply select the events to include, and they will be treated as a single series in your analysis. 
 The combination uses a logical `OR`, so any occurrence of the selected events will count toward the series.
 
+**Note:** Data Warehouse tables cannot be combined inline. To analyze multiple Data Warehouse tables together, create separate series for each table.
+
 <ProductVideo
     videoLight = {TrendsCombineEventsLight} 
     videoDark = {TrendsCombineEventsDark}
