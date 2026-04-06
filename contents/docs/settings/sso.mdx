@@ -317,15 +317,7 @@ Use this option if you want to add additional configurations to your app that ar
 
 ## Multiple domains
 
-If your organization has multiple verified authentication domains, create a separate Identity Provider app for each domain with both SAML and SCIM configured.
-
-PostHog looks up SAML configuration based on the user's email domain. Users can only authenticate through the SAML configuration tied to their email domain, even if they were provisioned via SCIM through a different domain's app.
-
-To set up multiple domains:
-
-1. Create an IdP app for each verified domain
-2. Configure both SAML and SCIM on each app
-3. Assign users to the app matching their email domain
+If your organization has multiple verified authentication domains, create a separate Identity Provider app for each domain with both SAML and SCIM configured. PostHog looks up SAML configuration based on the user's email domain, so assign users to the IdP app that matches their email domain.
 
 ## SCIM
 
