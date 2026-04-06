@@ -4,9 +4,9 @@ hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import OSButton from 'components/OSButton'
-import Alpha from './_snippets/alpha.mdx'
+import { QuestLog, QuestLogItem } from "components/Docs/QuestLog";
+import OSButton from "components/OSButton";
+import Alpha from "./_snippets/alpha.mdx";
 
 <Alpha />
 
@@ -56,6 +56,7 @@ Once enabled, visit your site and look for the chat button in the bottom-right c
 4. Check your PostHog inbox to see the ticket
 
 The widget automatically captures:
+
 - **Session ID** - Links to events and exceptions from the user's session
 - **Session Replay ID** - Links to the user's [session recording](/docs/session-replay) if replay is enabled
 - **Current URL** - The page they were on
@@ -76,6 +77,8 @@ Three ways to create tickets from Slack:
 1. **Support channel** — every message in a dedicated channel becomes a ticket
 2. **Bot mention** — `@SupportHog` in any channel
 3. **Emoji reaction** — react with a configurable emoji (default `:ticket:`)
+
+> **Note:** Connecting Slack requires organization admin permissions.
 
 <OSButton variant="primary" asLink to="/docs/support/slack">
   Set up Slack integration
@@ -139,13 +142,13 @@ Don't want to use the default widget? Use the JavaScript API to build your own s
 // Check if conversations are available
 if (posthog.conversations.isAvailable()) {
   // Send a message
-  const response = await posthog.conversations.sendMessage(
-    'Hello, I need help!',
-    { name: 'John', email: 'john@example.com' }
-  )
-  
+  const response = await posthog.conversations.sendMessage("Hello, I need help!", {
+    name: "John",
+    email: "john@example.com",
+  });
+
   // Fetch messages
-  const messages = await posthog.conversations.getMessages()
+  const messages = await posthog.conversations.getMessages();
 }
 ```
 
