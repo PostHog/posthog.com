@@ -3,26 +3,31 @@ title: Creating feature flags
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
-import { ProductScreenshot } from 'components/ProductScreenshot'
-import { CalloutBox } from 'components/Docs/CalloutBox'
-export const CreateNewFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/create_feature_flags_light_133081fabc.png"
-export const CreateNewFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/create_feature_flags_dark_8aaa86aa47.png"
-export const ReleaseConditionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/release-conditions-light-mode.png"
-export const ReleaseConditionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/release-conditions-dark-mode.png"
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+import { CalloutBox } from "components/Docs/CalloutBox";
+export const CreateNewFeatureFlagLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/create_feature_flags_light_133081fabc.png";
+export const CreateNewFeatureFlagDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/create_feature_flags_dark_8aaa86aa47.png";
+export const ReleaseConditionLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/release-conditions-light-mode.png";
+export const ReleaseConditionDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/release-conditions-dark-mode.png";
 
 Before you can evaluate a feature flag in your application code, you need to create it in PostHog. You need to configure the following for a new flag:
 
-| Step | Configuration | Required? |
-|------|---------------|----------|
-| 1 | [Create a new feature flag](#step-1-create-a-new-feature-flag-required) | Required |
-| 2 | [The key in your code used to evaluate the feature flag](#step-2-add-feature-flag-key-and-description-required) | Required |
-| 3 | [The type of feature flag – boolean, multivariate, or remote config](#step-3-choose-a-feature-flag-type-required) | Required |
-| 4 | [Additional feature flag behaviors](#step-4-configure-feature-flag-behavior-optional) | Optional |
-| 5 | [Evaluation runtime and environments](#step-5-configure-evaluation-runtime-and-environments-optional) | Optional |
+| Step | Configuration                                                                                                     | Required? |
+| ---- | ----------------------------------------------------------------------------------------------------------------- | --------- |
+| 1    | [Create a new feature flag](#step-1-create-a-new-feature-flag-required)                                           | Required  |
+| 2    | [The key in your code used to evaluate the feature flag](#step-2-add-feature-flag-key-and-description-required)   | Required  |
+| 3    | [The type of feature flag – boolean, multivariate, or remote config](#step-3-choose-a-feature-flag-type-required) | Required  |
+| 4    | [Additional feature flag behaviors](#step-4-configure-feature-flag-behavior-optional)                             | Optional  |
+| 5    | [Evaluation runtime and environments](#step-5-configure-evaluation-runtime-and-environments-optional)             | Optional  |
 
 ## Step 1. Create a new feature flag (required)
 
@@ -33,7 +38,6 @@ To create a new feature flag, navigate to the [feature flags tab](https://app.po
 - **Remote config** – Deliver configuration values to your app
 - **Experiment** – Create an A/B test with statistical analysis (links to [experiments](/docs/experiments))
 
-
 <details>
 <summary>Migrate feature flags from another tool</summary>
 
@@ -42,10 +46,10 @@ If you can pull feature flag data from another tool programmatically, you can us
 </details>
 
 <ProductScreenshot
-    imageLight={CreateNewFeatureFlagLight}
-    imageDark={CreateNewFeatureFlagDark}
-    alt="How to create a feature flag in PostHog"
-    classes="rounded"
+  imageLight={CreateNewFeatureFlagLight}
+  imageDark={CreateNewFeatureFlagDark}
+  alt="How to create a feature flag in PostHog"
+  classes="rounded"
 />
 
 ## Step 2. Add feature flag key and description (required)
@@ -53,6 +57,7 @@ If you can pull feature flag data from another tool programmatically, you can us
 This is the _unique_ key you use in your code to evaluate the feature flag. Some examples of feature flag keys are `new-landing-page`, `betaFeature`, or `bigger_callout_button`.
 
 You will later [evaluate the feature flag](/docs/feature-flags/adding-feature-flag-code) in your code using expressions like
+
 - `posthog.isFeatureEnabled('new-landing-page')`
 - `posthog.getFeatureFlag('betaFeature')`
 
@@ -62,11 +67,11 @@ Use a descriptive key that fits your code and is easy to understand. You should 
 
 In the **Served value** section, you can configure the type of feature flag you want to create. There are three types of feature flags:
 
-| Flag type | Description |
-|-----------|-------------|
-| **Release toggle** <br/> <br/> (boolean) | These return `false` if the flag is disabled, `true` if the flag is enabled and has a matching release condition, and `null` or `undefined` if no release condition matches. |
-| **Multiple variants with rollout percentages** <br/> <br/> (A/B/n test) | Instead of indicating enabled vs. disabled, multivariate flags return a key – for example, `control` or `test`.<br/><br/>You can choose the rollout percentage for each variant key, where each is given a specific percentage of the total audience. Users will then be randomly assigned to each variant based on these percentages. |
-| **Remote config** <br/> <br/>(single payload) | While boolean and multivariate flags can be set up to serve different values to different users, remote config flags are meant to pass static configuration values to your applications at runtime. The config value is **always** passed in the flag's payload.<br/><br/>You can use remote config flags to tweak application configs on the fly without deploying code changes. |
+| Flag type                                                               | Description                                                                                                                                                                                                                                                                                                                                                                       |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Release toggle** <br/> <br/> (boolean)                                | These return `false` if the flag is disabled, `true` if the flag is enabled and has a matching release condition, and `null` or `undefined` if no release condition matches.                                                                                                                                                                                                      |
+| **Multiple variants with rollout percentages** <br/> <br/> (A/B/n test) | Instead of indicating enabled vs. disabled, multivariate flags return a key – for example, `control` or `test`.<br/><br/>You can choose the rollout percentage for each variant key, where each is given a specific percentage of the total audience. Users will then be randomly assigned to each variant based on these percentages.                                            |
+| **Remote config** <br/> <br/>(single payload)                           | While boolean and multivariate flags can be set up to serve different values to different users, remote config flags are meant to pass static configuration values to your applications at runtime. The config value is **always** passed in the flag's payload.<br/><br/>You can use remote config flags to tweak application configs on the fly without deploying code changes. |
 
 You can select the type of feature flag by toggling between the selectors. Then, configure the payload and release conditions for the flag if applicable.
 
@@ -93,11 +98,23 @@ For multivariate flags, you can configure **different payloads for each variant*
 4. Retrieve the payload in your code using `getFeatureFlagPayload('flag-key')`
 
 **Example use cases:**
+
 - **A/B testing different pricing structures**: Each variant returns different pricing configuration
-- **Content personalization**: Different variants serve different UI copy, colors, or layouts  
+- **Content personalization**: Different variants serve different UI copy, colors, or layouts
 - **Feature configuration**: Each variant enables different sets of features or functionality
 
 To force specific users or audiences to receive specific variants (and their associated payloads), use [optional overrides](/docs/feature-flags/testing#method-1-assign-a-user-a-specific-flag-value) in your release conditions. This allows you to target different user segments with different configurations while maintaining a single feature flag.
+
+### Reordering variants
+
+You can reorder multivariate flag variants using drag and drop or arrow buttons in the variant header:
+
+- **Drag and drop** – Use the drag handle icon to drag a variant to a new position
+- **Arrow buttons** – Click the up or down arrows to move a variant one position at a time
+
+When you reorder variants, their associated payloads automatically move with them.
+
+Use the **Expand all** and **Collapse all** buttons to show or hide variant details when working with multiple variants.
 
 ### Release conditions
 
@@ -115,7 +132,6 @@ Percentage rollouts are available for all flags. More options depend on your Pos
 
 Rollout percentages support decimal values with up to two decimal places of precision (e.g., 0.15% or 33.33%), down to a minimum of 0.01%. Enter decimal values in the percentage text input — the slider uses whole-number steps.
 
-
 - If GeoIP is enabled, you can target based on geographic location.
 
 - If you capture identified events, you can target based on [person properties](/docs/product-analytics/person-properties) and [cohorts](/docs/data/cohorts).
@@ -123,10 +139,10 @@ Rollout percentages support decimal values with up to two decimal places of prec
 - If you enabled group analytics, you can target based on [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties).
 
 <ProductScreenshot
-    imageLight={ReleaseConditionLight}
-    imageDark={ReleaseConditionDark}
-    alt="Feature flags release conditions"
-    classes="rounded"
+  imageLight={ReleaseConditionLight}
+  imageDark={ReleaseConditionDark}
+  alt="Feature flags release conditions"
+  classes="rounded"
 />
 
 #### Semantic version (semver) targeting
@@ -210,11 +226,11 @@ You can control where your feature flags are evaluated using the **evaluation ru
 
 Feature flags can be configured to evaluate in one of three runtime environments:
 
-| Runtime | Description |
-|---------|-------------|
-| **Both client and server** (default) | Flags are evaluated in both server and client environments |
-| **Client-side only** | Flags are only evaluated on client-side SDKs (JavaScript, React, mobile SDKs) |
-| **Server-side only** | Flags are only evaluated on server-side SDKs (Node.js, Python, Ruby, Go, PHP, etc.) |
+| Runtime                              | Description                                                                         |
+| ------------------------------------ | ----------------------------------------------------------------------------------- |
+| **Both client and server** (default) | Flags are evaluated in both server and client environments                          |
+| **Client-side only**                 | Flags are only evaluated on client-side SDKs (JavaScript, React, mobile SDKs)       |
+| **Server-side only**                 | Flags are only evaluated on server-side SDKs (Node.js, Python, Ruby, Go, PHP, etc.) |
 
 <details>
 <summary>How feature flags determine the current runtime</summary>
@@ -230,6 +246,7 @@ If you override any of these during capture, evaluation may not be accurate.
 </details>
 
 The system then filters which flags are returned based on their configured runtime, ensuring:
+
 - Smaller payload sizes for client applications
 - Reduced evaluation latency by eliminating irrelevant flags
 - Prevention of feature flag bloat and better organization by environment
@@ -292,7 +309,6 @@ We recommend reading the [evaluation contexts documentation](/docs/feature-flags
 Tags are a way to categorize and organize your feature flags. They are purely organizational and do not affect flag evaluation. Use tags to label flags by team, project, or any other grouping that helps you manage flags at scale.
 
 Tags are separate from [evaluation contexts](#evaluation-contexts-optional), which control where flags evaluate at runtime.
-
 
 ## Managing and deleting feature flags
 
