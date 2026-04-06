@@ -118,6 +118,8 @@ PostHog needs up to 64MB per message for session recordings.
 
 You're missing `ui_host` in your SDK config. See [SDK configuration](#sdk-configuration) above.
 
+Without `ui_host`, toolbar authentication redirects to your proxy URL instead of the PostHog app, causing OAuth to fail. When this happens, the toolbar displays a modal with instructions on how to set `ui_host` in your `posthog.init()` configuration.
+
 ## Still having issues?
 
 For self-hosted proxies, check your proxy's logs and documentation, or ask in the [PostHog community](/community). If you're using the [managed reverse proxy](/docs/advanced/proxy), [contact support](https://app.posthog.com/home#supportModal).
