@@ -62,3 +62,18 @@ By default every time a member joins an organization in an [email-enabled PostHo
 
 If you'd rather not get such notifications, you can disable them in the "Notification Preferences" section of organization settings.
 
+### OAuth applications
+
+The **OAuth applications** section in organization settings shows third-party applications that have been authorized to connect to your organization via OAuth. This is a read-only view that provides visibility into which external tools have access.
+
+To view connected OAuth applications, go to [**Settings** > **Organization** > **OAuth applications**](https://app.posthog.com/settings/organization-oauth-apps).
+
+For each connected application, the table displays:
+
+- **Application** - The name of the application, with a "Verified" badge for verified apps
+- **Client ID** - The OAuth client identifier
+- **Redirect URIs** - The registered redirect URIs for the application
+- **Connected** - The date the application was connected
+
+If no applications are connected, this section shows a placeholder message indicating that applications will appear when third-party tools connect to your organization.
+
