@@ -39,11 +39,12 @@ Draft workflows can also be archived, even if they contain invalid configuration
 
 ## Triggers
 
-Every workflow starts with a trigger. Triggers represent actions taken by users that kick off the workflow. There are two types of triggers:
+Every workflow starts with a trigger. Triggers represent actions taken by users that kick off the workflow. There are three types of triggers:
 
 | Trigger type | Description |
 |--------------|-------------|
 | Event trigger | A captured [PostHog event](/docs/data/events) (e.g. `signed up`) |
+| Survey trigger | A [survey](/docs/surveys) response (complete or partial) |
 | Webhook trigger | Programmatically start a workflow with a webhook |
 
 ### Event triggers
@@ -58,6 +59,18 @@ To filter your events, click on the three lines icon next to the event name and 
     classes="rounded"
     alt="Event trigger filter"
 />
+
+### Survey triggers
+
+Survey triggers start a workflow when someone responds to a [survey](/docs/surveys). This is useful for automating follow-up actions based on user feedback.
+
+To configure a survey trigger:
+
+1. Select **Survey response** as the trigger type
+2. Choose a specific survey or select **Any survey** to trigger on all survey responses
+3. Select whether to trigger on **Completed responses only** or **Any response (including partial)**
+
+Survey triggers work by listening for the `survey sent` event and filtering by `$survey_id` and `$survey_completed` properties. The workflow builder handles this configuration automatically when you select a survey.
 
 ## Dispatches
 
