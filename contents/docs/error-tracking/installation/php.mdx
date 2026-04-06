@@ -1,0 +1,94 @@
+---
+title: PHP Error Tracking installation
+platformLogo: php
+showStepsToc: true
+---
+
+import { Steps, Step } from "components/Docs/Steps";
+import { CalloutBox } from "components/Docs/CalloutBox";
+
+<Steps>
+
+<Step title="Install the PHP SDK" badge="required">
+
+Install the [PostHog PHP SDK](/docs/libraries/php) via Composer:
+
+```bash
+composer require posthog/posthog-php
+```
+
+<CalloutBox icon="IconInfo" title="Source context not yet supported" type="fyi">
+
+The PHP SDK captures stack traces with file names, line numbers, and function names, but does not yet support source context (displaying the surrounding lines of code in the error tracking UI). Symbol set uploads for PHP are not currently available.
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Initialize the client" badge="required">
+
+Set your project token and instance address before making any calls:
+
+```php
+PostHog\PostHog::init(
+    '<ph_project_token>',
+    ['host' => '<ph_client_api_host>']
+);
+```
+
+You can find your project token and instance address in the [project settings](https://us.posthog.com/settings/project) page in PostHog.
+
+</Step>
+
+<Step title="Capture exceptions" badge="required">
+
+Use `captureException` to manually capture exceptions and send them to PostHog as `$exception` events with full stack traces.
+
+### Basic usage
+
+```php
+try {
+    // Your code that might throw
+    riskyOperation();
+} catch (\Exception $e) {
+    PostHog\PostHog::captureException($e, 'user_distinct_id');
+}
+```
+
+### With additional properties
+
+You can pass extra properties to include with the exception event:
+
+```php
+try {
+    processOrder($orderId);
+} catch (\Exception $e) {
+    PostHog\PostHog::captureException($e, 'user_distinct_id', [
+        'order_id' => $orderId,
+        'environment' => 'production',
+    ]);
+}
+```
+
+</Step>
+
+<Step checkpoint title="Verify error tracking" badge="recommended">
+
+Trigger a test exception to confirm events are being sent to PostHog. You should see them appear in the [Error Tracking](https://us.posthog.com/error_tracking) tab.
+
+```php
+PostHog\PostHog::init(
+    '<ph_project_token>',
+    ['host' => '<ph_client_api_host>']
+);
+
+try {
+    throw new \Exception('Test exception from PHP');
+} catch (\Exception $e) {
+    PostHog\PostHog::captureException($e, 'test_user');
+}
+```
+
+</Step>
+
+</Steps>
