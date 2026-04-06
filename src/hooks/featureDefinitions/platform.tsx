@@ -183,6 +183,10 @@ export const platformFeatures = {
                 name: 'Zendesk',
                 description: 'Send and receive data from Zendesk',
             },
+            imports: {
+                name: 'Warehouse import',
+                description: 'Import data from external warehouses and sources like Stripe, HubSpot, and S3 for unified analysis',
+            },
         },
     },
     libraries: {
