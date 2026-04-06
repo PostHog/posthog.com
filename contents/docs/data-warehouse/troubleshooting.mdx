@@ -13,20 +13,26 @@ This page covers troubleshooting for Data Warehouse. For setup, see the [install
 From the [source page](https://app.posthog.com/data-management/sources), click the source that's failing, scroll over to the **Status** column and hover over the error message.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_12_23_2x_7ed2ac106d.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_12_23_2x_7ed2ac106d.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_08_29_2x_8b7160e3b9.png"
-  alt="Viewing the error message for a failed sync" 
+  alt="Viewing the error message for a failed sync"
   classes="rounded"
 />
 
 You can also click the **Syncs** tab and expand any failed sync to see all the logs.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_17_09_2x_7da05def87.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_17_09_2x_7da05def87.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_16_50_2x_13222eaa4c.png"
-  alt="Viewing the logs for a failed sync" 
+  alt="Viewing the logs for a failed sync"
   classes="rounded"
 />
+
+## How can I see why my materialization is failing?
+
+From the [SQL editor](https://app.posthog.com/sql), select your materialized view and scroll to the **Materialization Runs** table. Each run shows its status, row count, duration, and any errors.
+
+Click any row to expand it and view detailed logs for that run. Logs include execution progress, timing, and error details to help you debug issues. You can also view materialization logs from the [Models](https://app.posthog.com/models) page by expanding a run in the **Materialization history** table.
 
 ## How do I speed up my SQL queries?
 
@@ -38,14 +44,14 @@ We have other suggestions in our [product analytics docs](/docs/product-analytic
 
 ## How do I run partial SQL queries?
 
-If you want to run a part of your query in the SQL editor, highlight the part you want to run and hit **CMD + Enter** (Mac) or **CTRL + Enter** (Windows). 
+If you want to run a part of your query in the SQL editor, highlight the part you want to run and hit **CMD + Enter** (Mac) or **CTRL + Enter** (Windows).
 
 This is useful if you have a complex query and you want to test parts of it without running the whole query.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_09_02_at_14_24_06_2x_cc350ac9b1.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_09_02_at_14_24_06_2x_cc350ac9b1.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_09_02_at_14_24_23_2x_6dad899bb8.png"
-  alt="Running partial SQL queries" 
+  alt="Running partial SQL queries"
   classes="rounded"
 />
 
@@ -65,11 +71,10 @@ To fix parsing issues, try recreating the table with the other quote handling op
 This error occurs when files in your S3 bucket are stored in S3 Glacier or S3 Intelligent-Tiering archive storage classes. These storage classes are designed for long-term archival and cannot be accessed directly.
 
 To resolve this:
+
 1. Restore the files to Standard storage class in AWS S3.
 2. Or narrow your URL pattern to exclude the archived files.
 
 ## Solved community questions
 
-<SolvedQuestions
-    topicLabel="Data Warehouse"
-/>
+<SolvedQuestions topicLabel="Data Warehouse" />
