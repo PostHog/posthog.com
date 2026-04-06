@@ -155,6 +155,48 @@ To capture a screenshot:
 
 Once saved, these screenshots appear when hovering over events throughout PostHog, such as when selecting events in insights.
 
+
+## Debugging events
+
+The toolbar includes an event debugger that shows events being captured on your website in real time. This helps you verify that events are firing correctly and inspect their properties.
+
+To use the event debugger, click the **Event debugger** button in the toolbar to open the debugger panel. Events appear as they're captured.
+
+### Filtering events
+
+You can filter events by name using the search input. Enter plain text for a case-insensitive substring match, or wrap your pattern in forward slashes for regex (e.g., `/^\$page/` to match events starting with `$page`).
+
+Use the **Showing** menu in the footer to show or hide event categories:
+
+- **PostHog events** (blue dot) - Automatic events captured by PostHog like `$pageview` and `$pageleave`
+- **Custom events** (green dot) - Events you've defined with `posthog.capture()`
+- **Replay events** (amber dot) - Session recording snapshot events
+
+By default, PostHog events and custom events are shown. Replay events are hidden.
+
+The filter shows a count of matching events in each category.
+
+### Inspecting events
+
+Click on any event to expand it and view its properties. From the expanded view, you can:
+
+- **Copy payload** - Copy the event's full JSON payload to your clipboard
+- **Pin event** - Keep important events pinned at the top of the list so new events don't push them away
+
+Use the **Hide** menu in the footer to filter out PostHog-specific properties or feature flag properties from the expanded view.
+
+### Controlling the event stream
+
+- **Pause/resume** - Click the pause button to freeze the event stream. While paused, the debugger shows how many events are buffered. Click play to resume and flush the buffered events.
+- **Clear events** - Click the trash button to reset the event list.
+- **Export** - Click the download button to export the currently visible events as a JSON file.
+
+### Timestamp display
+
+Click the clock icon in the footer to toggle between absolute timestamps (`HH:mm:ss.SSS`) and relative timestamps (e.g., `2 minutes ago`).
+
+The status indicator next to the search input shows a pulsing green dot when live and a muted gray dot when paused.
+
 ## Troubleshooting and FAQ
 
 ### Toolbar not loading or displaying
