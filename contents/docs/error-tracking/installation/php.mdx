@@ -1,0 +1,188 @@
+---
+title: PHP Error Tracking installation
+platformLogo: php
+showStepsToc: true
+---
+
+import { Steps, Step } from "components/Docs/Steps";
+import { CalloutBox } from "components/Docs/CalloutBox";
+
+<Steps>
+
+<Step title="Install the PHP SDK" badge="required">
+
+Add the [PostHog PHP SDK](/docs/libraries/php) to your project using Composer:
+
+```bash
+composer require posthog/posthog-php
+```
+
+</Step>
+
+<Step title="Initialize the client" badge="required">
+
+Configure PostHog with your project token and host:
+
+```php
+use PostHog\PostHog;
+
+PostHog::init(
+    '<ph_project_token>',
+    [
+        'host' => '<ph_client_api_host>'
+    ]
+);
+```
+
+</Step>
+
+<Step title="Capture exceptions" badge="required">
+
+Use the `captureException` method to capture exceptions and send them to PostHog:
+
+```php
+try {
+    // Code that might throw an exception
+    throw new Exception('Something went wrong');
+} catch (Exception $e) {
+    PostHog::captureException(
+        $e,
+        'user_distinct_id',
+        [
+            'custom_property' => 'custom_value'
+        ]
+    );
+}
+```
+
+The `captureException` method accepts the following parameters:
+
+| Parameter    | Type        | Description                                                       |
+| ------------ | ----------- | ----------------------------------------------------------------- |
+| `exception`  | `Throwable` | The exception object to capture (required)                        |
+| `distinctId` | `string`    | The distinct ID of the user (required)                            |
+| `properties` | `array`     | Additional properties to attach to the exception event (optional) |
+
+</Step>
+
+<Step title="Identify users on errors (recommended)" badge="recommended">
+
+To associate errors with specific users, always pass a `distinct_id` when capturing exceptions. This helps you track which users are experiencing errors.
+
+```php
+// After user authentication
+$userId = $currentUser->getId();
+
+try {
+    // Code that might throw an exception
+    processOrder($orderId);
+} catch (Exception $e) {
+    PostHog::captureException(
+        $e,
+        $userId,
+        [
+            'order_id' => $orderId,
+            'action' => 'process_order'
+        ]
+    );
+    throw $e; // Re-throw if needed
+}
+```
+
+</Step>
+
+<Step title="Customize exception fingerprints (optional)" badge="optional">
+
+You can override the [fingerprint](/docs/error-tracking/fingerprints) to customize how exceptions are grouped into [issues](/docs/error-tracking/issues-and-exceptions):
+
+```php
+try {
+    $db->query($sql);
+} catch (PDOException $e) {
+    PostHog::captureException(
+        $e,
+        'user_distinct_id',
+        [
+            '$exception_fingerprint' => 'DatabaseConnectionError',
+            'database' => 'primary',
+            'query_type' => 'select'
+        ]
+    );
+}
+```
+
+This groups all database connection errors together under a single issue, regardless of the specific error message.
+
+</Step>
+
+<Step title="Laravel integration (optional)" badge="optional">
+
+For Laravel applications, you can integrate PostHog error tracking into your exception handler.
+
+Add PostHog to your `app/Exceptions/Handler.php`:
+
+```php
+<?php
+
+namespace App\Exceptions;
+
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use PostHog\PostHog;
+use Throwable;
+
+class Handler extends ExceptionHandler
+{
+    public function register(): void
+    {
+        $this->reportable(function (Throwable $e) {
+            $distinctId = auth()->id() ?? 'anonymous';
+
+            PostHog::captureException(
+                $e,
+                (string) $distinctId,
+                [
+                    'url' => request()->fullUrl(),
+                    'method' => request()->method(),
+                    'user_agent' => request()->userAgent(),
+                ]
+            );
+        });
+    }
+}
+```
+
+<CalloutBox icon="IconInfo" title="Initialize PostHog in a service provider" type="fyi">
+
+Make sure to initialize PostHog in a service provider (e.g., `AppServiceProvider`) so it's available when exceptions are handled:
+
+```php
+// app/Providers/AppServiceProvider.php
+public function boot(): void
+{
+    PostHog::init(
+        config('services.posthog.api_key'),
+        ['host' => config('services.posthog.host')]
+    );
+}
+```
+
+</CalloutBox>
+
+</Step>
+
+<Step checkpoint title="Verify error tracking" badge="recommended">
+
+Trigger a test exception to confirm errors are being sent to PostHog. You should see them appear in the [Error Tracking](https://app.posthog.com/error_tracking) tab.
+
+```php
+// Test route or script
+try {
+    throw new Exception('Test exception from PHP');
+} catch (Exception $e) {
+    PostHog::captureException($e, 'test_user');
+}
+```
+
+</Step>
+
+</Steps>
