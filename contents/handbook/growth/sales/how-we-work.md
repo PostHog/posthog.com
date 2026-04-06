@@ -112,7 +112,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 
 ### Performance Expectations for Technical Account Executives
 
-There are [cultural](handbook/company/culture) and [role-based expectations](/handbook/growth/sales/overview) for TAEs at PostHog. We also now have enough data to define minimum performance expections for TAEs relative to the annual commmission targets. 
+There are [cultural](handbook/company/culture) and [role-based expectations](/handbook/growth/sales/overview) for TAEs at PostHog. We also now have enough data to define minimum performance exceptions for TAEs relative to the annual commmission targets. 
 
 After your ramp period, you should expect to have a performance conversation with your lead and Charles if:
 
