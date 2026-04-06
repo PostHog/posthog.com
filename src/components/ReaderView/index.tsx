@@ -241,17 +241,31 @@ const EditHistoryPopover = ({ commits }: { commits: any[] }) => {
         return null
     }
 
+    const mostRecentCommitDate = commits[0]?.date
+    const isStale =
+        process.env.NODE_ENV === 'development' &&
+        mostRecentCommitDate &&
+        dayjs().diff(dayjs(mostRecentCommitDate), 'month') >= 6
+
     return (
         <Popover
             trigger={
-                <span>
+                <span className="relative">
                     <OSButton icon={<IconClockRewind />} />
+                    {isStale && (
+                        <span className="absolute top-0 right-0 size-2.5 bg-red rounded-full border-2 border-bg-primary" />
+                    )}
                 </span>
             }
             title="Edit history"
             dataScheme="secondary"
             contentClassName="w-[260px]"
         >
+            {isStale && (
+                <p className="text-xs text-red font-semibold m-0 mb-2">
+                    This page hasn't been updated in over 6 months.
+                </p>
+            )}
             <ul className="list-none m-0 p-0 space-y-2 max-h-[200px] overflow-y-auto">
                 {commits
                     .filter((commit) => !!commit.author)
@@ -732,7 +746,7 @@ function ReaderViewContent({
                     {renderLeftSidebar && <LeftSidebar>{leftSidebar || <Menu parent={parent} />}</LeftSidebar>}
                     <ScrollArea
                         dataScheme="primary"
-                        className={`bg-primary border border-primary flex-grow  
+                        className={`bg-primary border border-primary flex-grow
                             ${
                                 !websiteMode
                                     ? renderLeftSidebar && isNavVisible
