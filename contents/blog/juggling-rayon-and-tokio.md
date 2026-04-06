@@ -33,7 +33,7 @@ Although the [Rust rewrite of our feature flag service](/blog/even-faster-more-r
 
 We invested the most common culprits of this issue, but this didn't give any hints. Request rate and CPU utilization were steady, there wasn't external DB pressure, or significant differences between requests (number of flags, properties, etc.). Our initial thought was that it was a database issue, as pool utilization maxing at 100% multiple times a day and connection times were spiking.
 
-As we dug deeper, we realized it was more to do with Rust.
+As we dug deeper, we realized it was more to do with how we combined some tools within the Rust application.
 
 ## Our Rust feature flags service setup
 
