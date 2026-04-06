@@ -8,20 +8,20 @@ const SLIDE_DURATION = 5000
 
 const tabs = [
     {
-        value: 'one-place',
-        label: 'One place for product data',
-        content: <OnePlaceSlide />,
-        color: 'bg-blue',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-    },
-    {
         value: 'understand-usage',
         label: 'Understand product usage',
         content: <UnderstandUsageSlide />,
         color: 'bg-teal',
         activeText: 'text-black',
         progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+    },
+    {
+        value: 'one-place',
+        label: 'One place for product data',
+        content: <OnePlaceSlide />,
+        color: 'bg-blue',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
     },
     {
         value: 'debug-fix',
