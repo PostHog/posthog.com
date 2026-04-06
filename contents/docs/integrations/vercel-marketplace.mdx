@@ -36,10 +36,26 @@ If you already have a PostHog account, you can connect it to Vercel instead:
 2. Click **Link Existing Account**
 3. Log in to your PostHog account if prompted
 4. Select the organization you want to link
-5. Select the project you want to connect
+5. Map your PostHog projects to Vercel environments:
+   - **Production** – Select the PostHog project for production (required)
+   - **Preview** – Select the project for preview deployments (defaults to production if not set)
+   - **Development** – Select the project for the development environment (defaults to production if not set)
 6. Click **Connect**
 
 You must have admin or owner access to the PostHog organization to link it. Billing stays with PostHog for linked accounts. When you link an existing account, PostHog automatically syncs your existing feature flags to Vercel and pushes the required environment variables.
+
+For single-project organizations, all three environments automatically map to the same project.
+
+### Managing environment mapping
+
+After connecting, you can change which PostHog projects map to each Vercel environment:
+
+1. Go to [**Settings** > **Integrations**](https://app.posthog.com/settings/organization-integrations) in PostHog
+2. Find your Vercel integration
+3. Use the environment mapping editor to select different projects for **Production**, **Preview**, or **Development**
+4. Click **Save mapping**
+
+Changes take effect immediately and update the environment variables in Vercel.
 
 ## Environment variables
 
@@ -47,6 +63,8 @@ The integration adds these environment variables to your Vercel project:
 
 - `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` - Your project token, used to initialize the PostHog SDK
 - `NEXT_PUBLIC_POSTHOG_HOST` - The PostHog API host URL (either `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
+
+When using per-environment project mapping, `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` automatically has different values for each Vercel environment (Production, Preview, Development) based on your mapping configuration.
 
 These `NEXT_PUBLIC_*` variable names work automatically in Next.js for both client and server environments. For other frameworks, you may need to copy the values to framework-specific variable names:
 
