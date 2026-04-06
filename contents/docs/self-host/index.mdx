@@ -5,8 +5,8 @@ sidebar: Docs
 showTitle: true
 ---
 
-import Disclaimer from './_snippets/disclaimer.mdx'
-import Sunset from '../self-host/_snippets/sunset-disclaimer.mdx'
+import Disclaimer from "./_snippets/disclaimer.mdx";
+import Sunset from "../self-host/_snippets/sunset-disclaimer.mdx";
 
 PostHog is open-source and freely available for anyone to host themselves. We offer a free Docker Compose deployment under an MIT license. Essentially, self-hosting PostHog means you run or purchase your own infrastructure, manage deployments, choose your own URLs to expose it on, and deal with any scaling issues yourself.
 
@@ -59,9 +59,9 @@ flowchart TD
     start["What makes you interested in <br/>self-hosting PostHog?"] --> diehard["I'm a die-hard self-hoster"] & privacy["I have data privacy requirements / desires"] & worried["I'm worried about cost"]
     diehard --> B["Do you expect to ingest more than 300k events, 1k recordings, 300k /flags API calls into the instance?"]
     worried --> events["Will you have more than 1M events, 5k recordings etc per month?"]
-    events -- No --> cloud_free["`PostHog Cloud is free for 1M events, 
-5k recordings, 1500 survey responses, 
-and more every single month. 
+    events -- No --> cloud_free["`PostHog Cloud is free for 1M events,
+5k recordings, 1500 survey responses,
+and more every single month.
 See posthog.com/pricing for more.`"]
     cloud_free --> better_cloud["You'll probably be better off with PostHog Cloud"]
     privacy --> gdpr["PostHog Cloud has both EU and US regions for GDPR and BAAs available for HIPPA-compliant companies."]
@@ -91,14 +91,14 @@ See posthog.com/pricing for more.`"]
 ```
 
 You can follow the rest of the guide for instructions on how to set up self-hosted PostHog. If you want to use Cloud instead, you can sign up for our
- [US](https://us.posthog.com/signup) or [EU](https://eu.posthog.com/signup) cloud instance.
+[US](https://us.posthog.com/signup) or [EU](https://eu.posthog.com/signup) cloud instance.
 
 ## Requirements
 
--   You have deployed a Linux Ubuntu Virtual Machine.
-    -   You will need something equivalent to a Hetzner VM with 4 vCPU, 16GB RAM, and more than 30GB storage.
--   You have set up an `A` record to connect a custom domain to your instance.
-    -   PostHog will automatically create an SSL certificate for your domain using LetsEncrypt
+- You have deployed a Linux Ubuntu Virtual Machine.
+  - You will need something equivalent to a Hetzner VM with 4 vCPU, 16GB RAM, and more than 30GB storage.
+- You have set up an `A` record to connect a custom domain to your instance.
+  - PostHog will automatically create an SSL certificate for your domain using LetsEncrypt
 
 New deployments of PostHog's paid open source product using Kubernetes are no longer supported.
 
@@ -106,11 +106,11 @@ New deployments of PostHog's paid open source product using Kubernetes are no lo
 
 There are various ways to configure and personalize your PostHog instance to better suit your needs. In this section you will find all the information you need about settings and options you can configure to get what you need out of PostHog.
 
--   [Environment variables](/docs/self-host/configure/environment-variables)
--   [Upgrading PostHog](/docs/runbook/upgrading-posthog)
--   [Securing PostHog](/docs/self-host/configure/securing-posthog)
--   [Running behind proxy](/docs/self-host/configure/running-behind-proxy)
--   [Email configuration](/docs/self-host/configure/email)
+- [Environment variables](/docs/self-host/configure/environment-variables)
+- [Upgrading PostHog](/docs/runbook/upgrading-posthog)
+- [Securing PostHog](/docs/self-host/configure/securing-posthog)
+- [Running behind proxy](/docs/self-host/configure/running-behind-proxy)
+- [Email configuration](/docs/self-host/configure/email)
 
 ## Setting up the stack
 
@@ -184,6 +184,22 @@ docker logs <container_name>
 The best place to start looking is in the `web` container, which runs all the database migrations and will produce an error if any have failed.
 
 > Running into issues with deployment? Ask a [question here](/questions) or check out [our community page](/posts) to get help.
+
+### Disk space and container logs
+
+Docker log rotation is automatically configured for all containers with a maximum size of 50MB per log file and a maximum of three files per container. This prevents container logs – especially from ClickHouse – from filling up your disk.
+
+If you're running low on disk space, check the size of your container logs:
+
+```bash
+sudo du -sh /var/lib/docker/containers/*/*-json.log
+```
+
+To manually clear container logs:
+
+```bash
+sudo truncate -s 0 /var/lib/docker/containers/*/*-json.log
+```
 
 ## Upgrading
 
