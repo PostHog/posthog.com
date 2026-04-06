@@ -3,6 +3,9 @@ import { useRoadmaps } from 'hooks/useRoadmaps'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import removeMarkdown from 'remove-markdown'
+import slugify from 'slugify'
+
+const DEFAULT_MINI_CREST_URL: `https://res.cloudinary.com/${string}` = 'https://res.cloudinary.com/dmukukwp6/image/upload/minicrest_default_4637a5cc4c.png'
 
 interface RoadmapRowProps {
     roadmap: {
@@ -60,7 +63,7 @@ const RoadmapRow: React.FC<RoadmapRowProps> = ({ roadmap }) => {
                                         className="w-6 h-6"
                                         src={
                                             team.miniCrest.data?.attributes?.url ||
-                                            'https://res.cloudinary.com/dmukukwp6/image/upload/crest_mini_default_def12aa14a.png'
+                                            DEFAULT_MINI_CREST_URL as `https://res.cloudinary.com/${string}`
                                         }
                                     />
                                 )}
@@ -94,7 +97,7 @@ const RoadmapRow: React.FC<RoadmapRowProps> = ({ roadmap }) => {
                                     className="w-6 h-6"
                                     src={
                                         team.miniCrest.data?.attributes?.url ||
-                                        'https://res.cloudinary.com/dmukukwp6/image/upload/crest_mini_default_def12aa14a.png'
+                                        DEFAULT_MINI_CREST_URL as `https://res.cloudinary.com/${string}`
                                     }
                                 />
                             )}
