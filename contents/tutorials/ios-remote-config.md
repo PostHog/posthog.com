@@ -74,7 +74,7 @@ Now, let's set up the remote config flag in PostHog to control our welcome messa
 2. Click **New feature flag**
 3. Set the key as `welcome-message`
 4. Under **Served value**, select **Remote config (single payload)**
-5. Set the payload to a string: `"Welcome to our awesome iOS app!"`
+5. Set the payload to a JSON object: `{"message": "Welcome to our awesome iOS app!"}`
 6. Click **Save**
 
 <ProductScreenshot
@@ -124,7 +124,8 @@ struct ContentView: View {
 
   private func loadWelcomeMessage() {
     let result = PostHogSDK.shared.getFeatureFlagResult("welcome-message")
-    if let message = result?.payload as? String {
+    if let payload = result?.payload as? [String: Any],
+       let message = payload["message"] as? String {
       welcomeMessage = message
     } else {
       welcomeMessage = "Welcome to the app!"
