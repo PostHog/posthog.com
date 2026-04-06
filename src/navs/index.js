@@ -1390,6 +1390,10 @@ export const handbookSidebar = [
                         name: 'Data Infrastructure',
                         url: '/handbook/growth/use-case-selling/data-infrastructure',
                     },
+                    {
+                        name: 'Customer Experience',
+                        url: '/handbook/growth/use-case-selling/customer-experience',
+                    },
                 ],
             },
             {
@@ -2005,6 +2009,10 @@ export const docsMenu = {
                         {
                             name: 'Identify users',
                             url: '/docs/getting-started/identify-users',
+                        },
+                        {
+                            name: 'Identity resolution',
+                            url: '/docs/product-analytics/identity-resolution',
                         },
                         {
                             name: 'Deploy a proxy',
@@ -3962,7 +3970,20 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Keeping flag evaluations stable',
+                    url: '/docs/feature-flags/stable-identity-for-flags',
+                    icon: 'IconPerson',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Guides',
+                },
+                {
+                    name: 'Production-ready feature flags',
+                    url: '/docs/feature-flags/production-ready',
+                    icon: 'IconBolt',
+                    color: 'purple',
+                    featured: true,
                 },
                 {
                     name: 'Do a phased rollout',
@@ -5585,6 +5606,12 @@ export const docsMenu = {
                         title: 'Alpha',
                         className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
                     },
+                },
+                {
+                    name: 'Trace Reviews',
+                    url: '/docs/llm-analytics/trace-reviews',
+                    icon: 'IconCheckCircle',
+                    color: 'green',
                 },
                 {
                     name: 'Prompt management',

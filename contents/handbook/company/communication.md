@@ -165,6 +165,7 @@ Slack is used differently in different organizations. Here are some guidelines f
 3. Make use of threads when responding to a post. This allows informal discussion to take place without notifications being sent to everyone in the channel on every reply.
 4. When possible, summarize multiple thoughts into a single message instead of sending multiple messages sequentially.
 5. You don't need to tell people if you're away from your computer, especially on no-meeting days. There's no general expectation people are available to reply to messages in real time, including in Slack.
+6. Keep your Slack profile up to date with the right information, including the appropriate name eg with surname or surname initial if you share a name with a colleauge.
 
 Channel naming conventions so people don't get confused:
 
