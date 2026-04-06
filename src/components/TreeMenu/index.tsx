@@ -144,28 +144,61 @@ function TreeMenuItem({
         }
     }, [pathname])
 
+    const sectionUrl = item.url || item.children?.[0]?.url
+
     return (
         <Collapsible.Root open={open} onOpenChange={handleOpenChange}>
-            <Collapsible.Trigger asChild>
-                <OSButton
-                    align="left"
-                    width="full"
-                    className={index === 0 ? '' : `pl-${2 + index * 4}`}
-                    active={activeItem === item}
-                    to={item.url || item.children?.[0]?.url}
-                    asLink
-                    onClick={() => onClick(item)}
-                    size="md"
-                    hover="background"
-                >
-                    {hasChildren && (
-                        <motion.div animate={{ rotate: open ? 90 : 0 }}>
-                            <IconChevronRight className="size-4" />
-                        </motion.div>
-                    )}
-                    <span className={`${open ? 'font-semibold' : ''}`}>{item.name}</span>
-                </OSButton>
-            </Collapsible.Trigger>
+            <div className="flex items-center">
+                <Collapsible.Trigger asChild>
+                    <OSButton
+                        align="center"
+                        width="auto"
+                        className="shrink-0"
+                        size="md"
+                        hover="background"
+                        aria-label={open ? 'Collapse section' : 'Expand section'}
+                    >
+                        {hasChildren && (
+                            <motion.div animate={{ rotate: open ? 90 : 0 }}>
+                                <IconChevronRight className="size-4" />
+                            </motion.div>
+                        )}
+                    </OSButton>
+                </Collapsible.Trigger>
+                {sectionUrl ? (
+                    <OSButton
+                        align="left"
+                        width="full"
+                        className={index === 0 ? '' : `pl-${2 + index * 4}`}
+                        active={activeItem === item}
+                        to={sectionUrl}
+                        asLink
+                        onClick={() => {
+                            setOpen(!open)
+                            onClick(item)
+                        }}
+                        size="md"
+                        hover="background"
+                    >
+                        <span className={`${open ? 'font-semibold' : ''}`}>{item.name}</span>
+                    </OSButton>
+                ) : (
+                    <OSButton
+                        align="left"
+                        width="full"
+                        className={index === 0 ? '' : `pl-${2 + index * 4}`}
+                        active={activeItem === item}
+                        onClick={() => {
+                            setOpen(!open)
+                            onClick(item)
+                        }}
+                        size="md"
+                        hover="background"
+                    >
+                        <span className={`${open ? 'font-semibold' : ''}`}>{item.name}</span>
+                    </OSButton>
+                )}
+            </div>
 
             {hasChildren && (
                 <Collapsible.Content>
