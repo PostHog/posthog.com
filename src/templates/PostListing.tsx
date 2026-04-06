@@ -110,27 +110,36 @@ export default function Posts({ pageContext }) {
     const [params, setParams] = useState(
         getParams(pageContext.root, pageContext.selectedTag, getSortOption(pageContext.root).sort, selectedAuthor)
     )
-    const allTags = useMemo(
-        () =>
-            allPostCategory.nodes
-                .flatMap((category) => category.attributes.post_tags.data)
-                .sort((a, b) => a.attributes.label.localeCompare(b.attributes.label))
-                .filter(
-                    (tag, index, self) => index === self.findIndex((t) => t.attributes.label === tag.attributes.label)
-                ),
-        []
-    )
+    const allTags = useMemo(() => {
+        const result = allPostCategory.nodes
+            .flatMap((category) => category.attributes.post_tags.data)
+            .filter((tag, index, self) => index === self.findIndex((t) => t.attributes.label === tag.attributes.label))
+            .sort((a, b) => a.attributes.label.localeCompare(b.attributes.label, undefined, { sensitivity: 'base' }))
+
+        return result
+    }, [])
+
     const selectedCategory = useMemo(
         () => allPostCategory.nodes.find((category) => category.attributes.folder === root),
         [root]
     )
-    const tags = root === null ? allTags : selectedCategory?.attributes.post_tags.data
+
+    const tags = useMemo(() => {
+        const rawTags = root === null ? allTags : selectedCategory?.attributes.post_tags.data
+        if (!rawTags) return []
+        return [...rawTags].sort((a, b) =>
+            a.attributes.label.localeCompare(b.attributes.label, undefined, { sensitivity: 'base' })
+        )
+    }, [root, selectedCategory, allTags])
+
     const allCategories = useMemo(
         () =>
-            allPostCategory.nodes.filter(
-                (category, index, self) =>
-                    index === self.findIndex((c) => c.attributes.folder === category.attributes.folder)
-            ),
+            allPostCategory.nodes
+                .filter(
+                    (category, index, self) =>
+                        index === self.findIndex((c) => c.attributes.folder === category.attributes.folder)
+                )
+                .sort((a, b) => a.attributes.label.localeCompare(b.attributes.label)),
         []
     )
 
@@ -257,6 +266,7 @@ export default function Posts({ pageContext }) {
                                   label: 'tags',
                                   value: 'post_tags',
                                   initialValue: selectedTag,
+                                  maxHeight: '800px',
                                   options: [
                                       {
                                           label: 'All',
