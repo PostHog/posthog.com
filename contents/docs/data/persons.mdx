@@ -8,14 +8,16 @@ availability:
   enterprise: full
 ---
 
-import DistinctIdReuseWarning from '../privacy/_snippets/distinct-id-reuse-warning.mdx'
+import DistinctIdReuseWarning from "../privacy/_snippets/distinct-id-reuse-warning.mdx";
 
-export const personProfileLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/data/people/person-profile-light-mode.png"
-export const personProfileDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/data/people/person-profile-dark-mode.png"
+export const personProfileLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/data/people/person-profile-light-mode.png";
+export const personProfileDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/data/people/person-profile-dark-mode.png";
 
 <iframe
-    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=295"
-    className="rounded shadow-xl"
+  src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=295"
+  className="rounded shadow-xl"
 />
 
 People in PostHog represent the users behind your events. You can view them in the [People tab](https://app.posthog.com/persons).
@@ -30,7 +32,40 @@ People have **person profiles** with [properties](/docs/product-analytics/person
 
 ## How to create person profiles
 
-When you capture your first [identified event](/docs/data/anonymous-vs-identified-events) for a user, it creates a **person profile** for them. Then, any future events captured are attributed to this profile. You can also [set properties](/docs/product-analytics/person-properties) for the person.
+Person profile creation depends on how you've configured PostHog and what events you send.
+
+### Default behavior
+
+By default, PostHog creates a person profile when you:
+
+- Call [`posthog.identify()`](/docs/product-analytics/identify) to capture an [identified event](/docs/data/anonymous-vs-identified-events)
+- Set person properties using [`posthog.setPersonProperties()`](/docs/product-analytics/person-properties)
+- Capture events for a user who has already been identified
+
+Anonymous events (before `identify()` is called) are tracked with an anonymous distinct ID. When you later call `identify()`, PostHog merges these anonymous events with the identified profile.
+
+### Identified-only mode
+
+If you set `person_profiles` to `identified_only` in your [PostHog SDK configuration](/docs/data/anonymous-vs-identified-events), PostHog only creates person profiles for users who have been explicitly identified. Anonymous events are still captured but won't have an associated person profile.
+
+This mode is useful for:
+
+- Reducing costs when you only care about logged-in users
+- Privacy-focused implementations where you don't need to track anonymous users
+
+### What happens when there's no person profile?
+
+If an event doesn't have an associated person profile – for example, anonymous events in identified-only mode – the event's distinct ID (a UUID) appears in the UI instead of a person name or email. This is expected behavior. The event data is still captured and queryable, but it isn't linked to a person profile.
+
+To associate these events with a person, call [`posthog.identify('your-user-id')`](/docs/product-analytics/identify) when the user logs in or creates an account. PostHog then merges the anonymous events with the new person profile.
+
+<CalloutBox icon="IconInfo" title="Seeing UUIDs instead of person names in the UI?" type="fyi">
+
+If you see UUIDs (like `018f3e08-d2a1-7856-a14b-1d48ce204482`) instead of recognizable user info in the People tab or event stream, it means those events were captured without a person profile. This typically happens when using `person_profiles: 'identified_only'` for anonymous visitors.
+
+This is normal – call `posthog.identify()` with a known user ID when users log in to create a person profile and link their events.
+
+</CalloutBox>
 
 ## Duplicate person profiles
 
@@ -69,10 +104,10 @@ When enabled:
 Clicking on a person in the [People tab](https://app.posthog.com/persons) opens their profile and shows all their properties.
 
 <ProductScreenshot
-    imageLight={personProfileLight}
-    imageDark = {personProfileDark}
-    alt="Person profile" 
-    classes="rounded"
+  imageLight={personProfileLight}
+  imageDark={personProfileDark}
+  alt="Person profile"
+  classes="rounded"
 />
 
 - **Events** shows all the events a person has triggered, which you can search and filter to find specific events.
