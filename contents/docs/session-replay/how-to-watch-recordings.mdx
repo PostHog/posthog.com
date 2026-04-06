@@ -70,6 +70,30 @@ To watch recordings, you can visit the [Replay](https://us.posthog.com/replay) p
   classes="rounded"
 />
 
+## Session activity view (Inspector)
+
+The sidebar panel gives you a detailed view of everything that happened during a session. Click the sidebar button (point #4 in the screenshot above) to open it.
+
+The sidebar has the following tabs:
+
+| Tab | Description |
+|-----|-------------|
+| **Overview** | Person information, session resolution, and a summary grid of key session details. Also shows who else is watching the recording. |
+| **Inspector** | A timeline of all PostHog events, console logs, network requests, and comments from the session. Use the filter buttons at the top to toggle between Events, Console, Network, and Comments. You can search within the timeline to find specific items. |
+| **Network waterfall** | A dedicated waterfall view of all network requests during the session, including response codes and timing. Useful for identifying slow requests or failed API calls. |
+
+> **Note:** Additional tabs like **AI summary** and **Linked issues** (Linear, GitHub, GitLab, Jira) may appear depending on your project's configuration and integrations.
+
+### Sessions vs Session Replay
+
+A [session](/docs/data/sessions) and a session replay are related but different concepts:
+
+- A **session** is a data model – a set of events grouped by a `$session_id` property. Sessions are used across PostHog in Product Analytics, Web Analytics, and session aggregations. Every event sent from the JavaScript Web SDK or mobile SDKs gets a `$session_id` automatically.
+
+- A **session replay** (or recording) is a visual playback of what happened during a session. It captures DOM snapshots, mouse movements, console logs, and network requests so you can watch exactly what a user did.
+
+Not every session has a recording. Session Replay must be [enabled](/docs/session-replay/installation) for recordings to be captured. You can still query and analyze sessions using [session properties](/docs/data/sessions#session-properties) even without recordings.
+
 ## When watching a filter result or collection:
 
 1. Open the filter panel to find more recordings
