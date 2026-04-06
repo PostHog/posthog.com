@@ -46,8 +46,8 @@ This is the address that recipients will see in their inbox.
 
 To maximize deliverability and avoid spam folders, you must verify your domain.
 
-1. After adding your email address, PostHog shows DNS records for **SPF** and **DKIM**.
-2. Copy these into your domain host (e.g. Cloudflare, GoDaddy).
+1. After adding your email address, PostHog shows DNS records for **SPF**, **DKIM**, and **MX**.
+2. Copy these into your domain host (e.g. Cloudflare, GoDaddy). For MX records, set the priority to `10` as shown in the UI.
 3. Verification may take a few minutes to propagate.
 
 Once verified, you'll see a green check mark in your settings.
