@@ -32,6 +32,65 @@ Here's a quick comparison:
     />
 </ComparisonTable>
 
+## Why do the numbers differ?
+
+You might notice that metrics like unique visitors or pageviews show different numbers in web analytics compared to a similar query in product analytics. This is expected and happens because the two tools count things differently.
+
+### Session-based vs event-based counting
+
+Web analytics groups data by **sessions** and counts metrics based on when the session started. Product analytics counts **events** based on when they occurred.
+
+**Example:** A visitor starts browsing your site at 11:55 PM on December 31st and views 3 pages, with the last pageview at 12:05 AM on January 1st.
+
+- **Web analytics** (for Jan 1-7): The session started on Dec 31st, so this visitor may not be counted in your January range
+- **Product analytics** (for Jan 1-7): The pageview at 12:05 AM is counted because the event occurred on January 1st
+
+### Date boundary handling
+
+Web analytics attributes all metrics to the session start time, not when individual events occurred. To calculate accurate session metrics (like duration and bounce rate), it fetches session data with a 3-day buffer around your selected date range, but only counts sessions that actually started within your range.
+
+**Example with sample data:**
+
+Suppose you're looking at data for **February 1st, 2025** and have these pageviews:
+
+| Session | User | Session start | Pageview time | Path |
+|---------|------|---------------|---------------|------|
+| A | Alice | 2025-01-31 23:50 UTC | 2025-01-31 23:50 UTC | /pricing |
+| A | Alice | 2025-01-31 23:50 UTC | 2025-02-01 00:05 UTC | /docs |
+| A | Alice | 2025-01-31 23:50 UTC | 2025-02-01 00:10 UTC | /signup |
+| B | Alice | 2025-02-01 14:00 UTC | 2025-02-01 14:00 UTC | /dashboard |
+| B | Alice | 2025-02-01 14:00 UTC | 2025-02-01 14:15 UTC | /settings |
+| C | Bob | 2025-02-01 10:00 UTC | 2025-02-01 10:00 UTC | /blog |
+| C | Bob | 2025-02-01 10:00 UTC | 2025-02-01 10:15 UTC | /pricing |
+| C | Bob | 2025-02-01 10:00 UTC | 2025-02-01 10:30 UTC | /demo |
+| D | Carol | 2025-02-01 23:55 UTC | 2025-02-01 23:55 UTC | /home |
+| D | Carol | 2025-02-01 23:55 UTC | 2025-02-02 00:10 UTC | /features |
+
+**Web analytics results** (session-based, for Feb 1):
+
+| Metric | Count | Explanation |
+|--------|-------|-------------|
+| Unique users | 3 | Alice, Bob, Carol. Session A excluded (started Jan 31), but Alice still counted via session B. |
+| Pageviews | 6 | Sessions B (2) + C (3) + D (1). Session A's Feb 1 pageviews excluded because session started Jan 31. |
+
+**Product analytics results** (event-based, for Feb 1):
+
+| Metric | Count | Explanation |
+|--------|-------|-------------|
+| Unique users | 3 | Alice, Bob, Carol—all had events on Feb 1. |
+| Pageviews | 8 | Alice: 4 (2 from session A + 2 from B), Bob: 3, Carol: 1. Counts all Feb 1 events regardless of session start. |
+
+The key difference: web analytics groups by session start time, while product analytics counts events by when they occurred. Alice's pageviews at 00:05 and 00:10 on Feb 1 are counted in product analytics but excluded from web analytics because her session started on Jan 31.
+
+### Which number is "correct"?
+
+Both are correct—they're just measuring different things:
+
+- **Web analytics** answers: "How many sessions happened during this period?"
+- **Product analytics** answers: "How many events occurred during this period?"
+
+For most website metrics, the session-based approach in web analytics gives you a more accurate picture of user behavior. For precise event counting or custom analysis, use product analytics.
+
 ## When should you use web analytics?
 
 Web analytics gives you a single, pre-built [dashboard](https://us.posthog.com/web) for a high-level overview of your site. It's about collecting data in the aggregate, as opposed to tracking specific interactions from specific users.
