@@ -30,6 +30,8 @@ npx @posthog/wizard@latest
 
 The wizard installs the right SDK, creates provider/config files, and sets up framework-specific configuration. It supports Next.js, React, Vue, Angular, Svelte, Astro, Remix, Django, Flask, and more.
 
+The wizard also reads `POSTHOG_PERSONAL_API_KEY` from your environment to configure the PostHog MCP server automatically — no browser-based OAuth needed.
+
 If the wizard doesn't support your framework, see the full list of SDKs and manual setup guides at https://posthog.com/docs/libraries.
 
 ## What PostHog provides
