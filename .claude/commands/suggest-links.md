@@ -46,7 +46,7 @@ Print the suggestions directly to the console, grouped by priority (High → Med
 ### High priority
 
 - **Line X**: "exact text to link"
-  → [anchor text](/relative-url) — Reason this fits here
+  → anchor text (/relative-url) — Reason this fits here
 
 ### Medium priority
 
