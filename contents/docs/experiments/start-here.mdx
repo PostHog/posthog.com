@@ -4,16 +4,18 @@ hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import OSButton from 'components/OSButton'
-import { CalloutBox } from 'components/Docs/CalloutBox'
-import { ProductScreenshot } from 'components/ProductScreenshot'
-import { ProductVideo } from 'components/ProductVideo'
-import { IconRewindPlay, IconToggle, IconFlask, IconGraph } from '@posthog/icons'
-import ExperimentInstallationPlatforms from './installation/_snippets/installation-platforms.tsx'
+import { QuestLog, QuestLogItem } from "components/Docs/QuestLog";
+import OSButton from "components/OSButton";
+import { CalloutBox } from "components/Docs/CalloutBox";
+import { ProductScreenshot } from "components/ProductScreenshot";
+import { ProductVideo } from "components/ProductVideo";
+import { IconRewindPlay, IconToggle, IconFlask, IconGraph } from "@posthog/icons";
+import ExperimentInstallationPlatforms from "./installation/_snippets/installation-platforms.tsx";
 
-export const CreateExperimentLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_light_c7e16a15d1.png"
-export const CreateExperimentDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_dark_ddc4372ce6.png"
+export const CreateExperimentLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_light_c7e16a15d1.png";
+export const CreateExperimentDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_dark_ddc4372ce6.png";
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to start experimenting!">
 
@@ -52,13 +54,14 @@ This opens a guided creation wizard that walks you through three steps:
 When you're done, click **Save as draft** on the final step. You can launch the experiment from its detail page after saving.
 
 <ProductScreenshot
-    imageLight={CreateExperimentLight}
-    imageDark={CreateExperimentDark}
-    alt="How to create an experiment in PostHog"
-    classes="rounded"
+  imageLight={CreateExperimentLight}
+  imageDark={CreateExperimentDark}
+  alt="How to create an experiment in PostHog"
+  classes="rounded"
 />
 
 The following section goes into more detail on each step.
+
 <OSButton variant="primary" asLink to="/docs/experiments/creating-an-experiment">
   Create an experiment
 </OSButton>
@@ -75,12 +78,12 @@ With your experiment created, add the code to check which variant users see. Sim
 
 ```js
 // Example: Testing a new checkout flow
-if (posthog.getFeatureFlag('new-checkout-flow') === 'test') {
-    // Show new checkout experience
-    showNewCheckout()
+if (posthog.getFeatureFlag("new-checkout-flow") === "test") {
+  // Show new checkout experience
+  showNewCheckout();
 } else {
-    // Show current checkout (control)
-    showCurrentCheckout()
+  // Show current checkout (control)
+  showCurrentCheckout();
 }
 ```
 
@@ -144,15 +147,33 @@ When your experiment reaches significance, you can end the experiment and choose
 
 Take your experiments to the next level with advanced PostHog features:
 
-### <IconRewindPlay className="text-yellow w-7 -mt-1 inline-block"/> Session replay  
-See exactly what users experienced in each variant with session recordings tied to your experiment results.
+### <IconRewindPlay className="text-yellow w-7 -mt-1 inline-block"/> Session Replay
 
-### <IconToggle className="text-seagreen w-7 -mt-1 inline-block"/> Feature flags
-Target specific user segments, implement gradual rollouts, or run experiments on user groups instead of individuals.
+Watch real user sessions to understand _how_ users interact with each variant, not just _whether_ they convert. PostHog links session recordings directly to your experiment results – click **View recordings** on any variant in the results panel to see recordings filtered by that variant's participants. You can also use **Summarize session replays** to have PostHog AI identify behavior patterns across variants.
 
-### <IconFlask className="text-red w-7 -mt-1 inline-block"/> Advanced experimentation
-Choose between Bayesian and frequentist statistical approaches, handle multiple variants, and configure outlier detection.
+<OSButton
+  variant="secondary"
+  asLink
+  to="/docs/experiments/analyzing-results#viewing-detailed-results-and-recordings"
+>
+  Learn about recordings in experiments
+</OSButton>
 
+### <IconToggle className="text-seagreen w-7 -mt-1 inline-block"/> Feature Flags and targeting
+
+Experiments are backed by [Feature Flags](/docs/feature-flags), which means you can use release conditions to target specific user segments, properties, or cohorts. You can also adjust [traffic allocation](/docs/experiments/traffic-allocation) to control what percentage of users enter the experiment and how they're split across variants. For long-term impact analysis, set up [holdout groups](/docs/experiments/holdouts) to exclude a percentage of users from experiments entirely.
+
+<OSButton variant="secondary" asLink to="/docs/feature-flags/creating-feature-flags">
+  Learn about Feature Flag targeting
+</OSButton>
+
+### <IconFlask className="text-red w-7 -mt-1 inline-block"/> Statistical methods
+
+PostHog supports both [Bayesian](/docs/experiments/statistics-bayesian) and [frequentist](/docs/experiments/statistics-frequentist) statistical approaches. Bayesian analysis gives you intuitive "chance to win" probabilities, while frequentist analysis uses p-values and confidence intervals. You can also configure [outlier handling](/docs/experiments/metrics#outlier-handling) to prevent extreme values from skewing results, and adjust the confidence level (90%, 95%, or 99%) in your experiment settings.
+
+<OSButton variant="secondary" asLink to="/docs/experiments/analyzing-results">
+  Learn about analyzing results
+</OSButton>
 </QuestLogItem>
 
 <QuestLogItem 
@@ -160,18 +181,17 @@ Choose between Bayesian and frequentist statistical approaches, handle multiple 
   subtitle="Free 1M requests/mo"
   icon="IconPiggyBank">
 
-  PostHog's experiments is built to be cost-effective by default, with a generous free tier and transparent usage-based pricing. Our generous free tier means more than 90% of companies use PostHog for free. 
+PostHog's experiments is built to be cost-effective by default, with a generous free tier and transparent usage-based pricing. Our generous free tier means more than 90% of companies use PostHog for free.
 
-  Experiments are billed with feature flags requests.  
+Experiments are billed with feature flags requests.
 
-  ### TL;DR 💸 
+### TL;DR 💸
 
-  - No credit card required to start
-  - First 1 million feature flag requests per month are free
-  - Above 1 million we have usage-based pricing starting at $0.0001/request with discounts as volume increases
-  - Set billing limits to avoid surprise charges
-  - See our [pricing page](/experiments#pricing) for more up-to-date details
-
+- No credit card required to start
+- First 1 million feature flag requests per month are free
+- Above 1 million we have usage-based pricing starting at $0.0001/request with discounts as volume increases
+- Set billing limits to avoid surprise charges
+- See our [pricing page](/experiments#pricing) for more up-to-date details
 
 ---
 
