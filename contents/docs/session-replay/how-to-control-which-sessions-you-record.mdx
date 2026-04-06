@@ -6,18 +6,22 @@ availability:
   enterprise: full
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
-import Tab from "components/Tab"
-import WebManualReplayControl from "./_snippets/web-manual-replay-control.mdx"
-import IOSManualReplayControl from "./_snippets/ios-manual-replay-control.mdx"
-import AndroidManualReplayControl from "./_snippets/android-manual-replay-control.mdx"
-import ReactNativeManualReplayControl from "./_snippets/react-native-manual-replay-control.mdx"
-import FlutterManualReplayControl from "./_snippets/flutter-manual-replay-control.mdx"
+import { ProductScreenshot } from "components/ProductScreenshot";
+import Tab from "components/Tab";
+import WebManualReplayControl from "./_snippets/web-manual-replay-control.mdx";
+import IOSManualReplayControl from "./_snippets/ios-manual-replay-control.mdx";
+import AndroidManualReplayControl from "./_snippets/android-manual-replay-control.mdx";
+import ReactNativeManualReplayControl from "./_snippets/react-native-manual-replay-control.mdx";
+import FlutterManualReplayControl from "./_snippets/flutter-manual-replay-control.mdx";
 
-export const ImgSampleConfigLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/sampling-config-light-mode.png"
-export const ImgSampleConfigDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/sampling-config-dark-mode.png"
-export const ImgMinDurationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/min-duration-light-mode.png"
-export const ImgMinDurationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/min-duration-dark-mode.png"
+export const ImgSampleConfigLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/sampling-config-light-mode.png";
+export const ImgSampleConfigDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/sampling-config-dark-mode.png";
+export const ImgMinDurationLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/min-duration-light-mode.png";
+export const ImgMinDurationDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/min-duration-dark-mode.png";
 
 There are several ways to control which sessions you record:
 
@@ -25,21 +29,31 @@ There are several ways to control which sessions you record:
 
 Most users should initialize PostHog with the default settings (which starts recording automatically) and use the other options on this page — like [URL triggers](#with-url-trigger-conditions), [event triggers](#with-event-trigger-conditions), [feature flags](#with-feature-flags), or [sampling](#sampling) — to control what gets recorded. Manual control is only needed for advanced use cases where you need to programmatically start and stop recording at specific points in your application.
 
-<Tab.Group tabs={['Web', 'iOS', 'Android', 'React Native', 'Flutter']}>
-    <Tab.List>
-        <Tab>Web</Tab>
-        <Tab>iOS</Tab>
-        <Tab>Android</Tab>
-        <Tab>React Native</Tab>
-        <Tab>Flutter</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel><WebManualReplayControl /></Tab.Panel>
-        <Tab.Panel><IOSManualReplayControl /></Tab.Panel>
-        <Tab.Panel><AndroidManualReplayControl /></Tab.Panel>
-        <Tab.Panel><ReactNativeManualReplayControl /></Tab.Panel>
-        <Tab.Panel><FlutterManualReplayControl /></Tab.Panel>
-    </Tab.Panels>
+<Tab.Group tabs={["Web", "iOS", "Android", "React Native", "Flutter"]}>
+  <Tab.List>
+    <Tab>Web</Tab>
+    <Tab>iOS</Tab>
+    <Tab>Android</Tab>
+    <Tab>React Native</Tab>
+    <Tab>Flutter</Tab>
+  </Tab.List>
+  <Tab.Panels>
+    <Tab.Panel>
+      <WebManualReplayControl />
+    </Tab.Panel>
+    <Tab.Panel>
+      <IOSManualReplayControl />
+    </Tab.Panel>
+    <Tab.Panel>
+      <AndroidManualReplayControl />
+    </Tab.Panel>
+    <Tab.Panel>
+      <ReactNativeManualReplayControl />
+    </Tab.Panel>
+    <Tab.Panel>
+      <FlutterManualReplayControl />
+    </Tab.Panel>
+  </Tab.Panels>
 </Tab.Group>
 
 ## With URL trigger conditions
@@ -48,10 +62,10 @@ You can opt to only start recordings once your user visits a certain page. After
 The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see how they arrived at the page.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/replay_url_trigger_light_bc6130e3d0.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/replay_url_trigger_dark_9c6ebb6c37.png"
-    alt="Adding URL trigger to control session recordings" 
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/replay_url_trigger_light_bc6130e3d0.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/replay_url_trigger_dark_9c6ebb6c37.png"
+  alt="Adding URL trigger to control session recordings"
+  classes="rounded"
 />
 
 ## With Event trigger conditions
@@ -60,10 +74,10 @@ Since posthog-js version 1.186.0, you can opt to only start recordings once your
 The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see activity leading up to that event.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_light_21a531edbb.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_dark_f67b3ffb30.png"
-    alt="Adding event trigger to control session recordings" 
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_light_21a531edbb.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_dark_f67b3ffb30.png"
+  alt="Adding event trigger to control session recordings"
+  classes="rounded"
 />
 
 ### Triggering on exceptions
@@ -71,10 +85,10 @@ The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger
 If you use [error tracking](/docs/error-tracking), exceptions are captured as events. You can select the exception event as an event trigger to start session recording.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_on_exception_light_4a88e6f239.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_on_exception_dark_621ce757d3.png"
-    alt="Triggering session recordings on exceptions"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_on_exception_light_4a88e6f239.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_on_exception_dark_621ce757d3.png"
+  alt="Triggering session recordings on exceptions"
+  classes="rounded"
 />
 
 ### How the trigger buffer works
@@ -86,6 +100,7 @@ When using URL or event triggers, the client buffers recording data in-memory wh
 - This means the buffer contains **up to 1 minute** of activity before the trigger
 
 The actual buffered duration varies depending on timing. For example:
+
 - If a snapshot was taken 45 seconds before the trigger fires, you'll see ~45 seconds of activity before the trigger
 - If a snapshot was taken 5 seconds before the trigger fires, you'll only see ~5 seconds of activity
 
@@ -102,10 +117,10 @@ You can select a [feature flag](/docs/feature-flags) to control whether to recor
 3. Link your newly created flag in the **Enable recordings using feature flag**.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1725441098/posthog.com/contents/Screenshot_2024-09-04_at_10.11.12_AM.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1725441098/posthog.com/contents/Screenshot_2024-09-04_at_10.11.20_AM.png"
-    alt="Selecting a feature flag to control session recordings" 
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1725441098/posthog.com/contents/Screenshot_2024-09-04_at_10.11.12_AM.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1725441098/posthog.com/contents/Screenshot_2024-09-04_at_10.11.20_AM.png"
+  alt="Selecting a feature flag to control session recordings"
+  classes="rounded"
 />
 
 ## Sampling
@@ -120,10 +135,10 @@ Sampling is supported on the following SDKs:
 - **React Native** - 4.37.0+
 
 <ProductScreenshot
-    imageLight={ImgSampleConfigLight} 
-    imageDark={ImgSampleConfigDark}
-    alt="Sampling config shown set to 100% i.e. no sampling" 
-    classes="rounded"
+  imageLight={ImgSampleConfigLight}
+  imageDark={ImgSampleConfigDark}
+  alt="Sampling config shown set to 100% i.e. no sampling"
+  classes="rounded"
 />
 
 Our recommendation is to start with capturing 100% of sessions and decrease it as needed. This helps you get a sense of how many sessions you’re recording and how much data you’re collecting.
@@ -135,6 +150,7 @@ Sampling is deterministic based on the session ID. When a new session starts, Po
 If the generated number is less than the sample rate, the session is recorded. Because the same session ID always produces the same number, the decision to record or not is consistent throughout the session's lifetime.
 
 This means:
+
 - Sessions are selected based on their ID, not by time period or order
 - The same session will always get the same recording decision, even across page refreshes
 - At 20% sampling, roughly 20% of your unique sessions will be recorded, distributed evenly across your traffic
@@ -155,15 +171,36 @@ You'll capture 20% of every session, and any session that has an exception event
 
 You'll capture 20% of any session on the checkout page that has an exception event.
 
+## Trigger groups
+
+Trigger groups let you define multiple independent sets of recording triggers, each with its own sampling rate, minimum duration, and conditions. A recording starts if **any** of the trigger groups match (OR logic between groups).
+
+To configure trigger groups, go to your [replay ingestion settings](https://app.posthog.com/settings/environment-replay#replay-triggers).
+
+Each trigger group has the following options:
+
+- **Name** – A descriptive label for the group (e.g., "Error Tracking", "Feature Testing")
+- **Sample rate (%)** – The percentage of matching sessions to record (0–100)
+- **Minimum duration** – How long a session must last before recording starts
+- **Match type** – Whether **any** or **all** conditions within the group must match
+- **Conditions** – One or more of the following:
+  - **Event triggers** – Start recording when specific events are captured
+  - **URL patterns** – Regex patterns that match the current page URL
+  - **Feature flag** – Start recording when a specific flag is enabled
+
+If a trigger group has no conditions, it matches all sessions (subject to its sample rate and minimum duration).
+
+> **Note:** URL regex patterns are automatically wrapped with anchors (`^` and `$`) if you don't include them. For example, `https://example.com/` becomes `^https://example.com/$` to avoid unexpected matches.
+
 ## Minimum duration
 
-In your [replay ingestion settings](https://us.posthog.com/settings/project-replay#replay-ingestion), you can set a minimum duration for sessions to be recorded. 
+In your [replay ingestion settings](https://us.posthog.com/settings/project-replay#replay-ingestion), you can set a minimum duration for sessions to be recorded.
 
 <ProductScreenshot
-    imageLight={ImgMinDurationLight} 
-    imageDark={ImgMinDurationDark}
-    alt="Minimum duration config shown set to 2 seconds" 
-    classes="rounded"
+  imageLight={ImgMinDurationLight}
+  imageDark={ImgMinDurationDark}
+  alt="Minimum duration config shown set to 2 seconds"
+  classes="rounded"
 />
 
 There are two modes for how minimum duration is enforced, controlled by the `strictMinimumDuration` configuration option. This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
@@ -184,6 +221,7 @@ posthog.init('<ph_project_token>', {
 **Limitation**: If you set a high minimum duration and your user visits multiple pages (causing full page refreshes), the in-memory buffer may be cleared by navigation. When the session reaches the minimum age, we'll start sending data, but you might miss the beginning of the session because the buffer was cleared by the page refresh.
 
 For example, with a 12 second minimum:
+
 - User visits page A for 6 seconds, then navigates to page B
 - After 6 more seconds on page B (12 seconds total session age), we start sending the recording
 - Result: You get 6 seconds of recording from page B, but miss the 6 seconds from page A
@@ -206,6 +244,7 @@ posthog.init('<ph_project_token>', {
 **Key difference**: If the user navigates to a new page before reaching the minimum duration, the buffer is cleared and we start over. The recording will only be sent once we have enough **continuous data** on a single page.
 
 For example, with a 12 second minimum:
+
 - User visits page A for 6 seconds, then navigates to page B
 - The buffer is cleared on navigation
 - User must stay on page B for 12 seconds before we start sending the recording
@@ -222,4 +261,4 @@ This mode is **more accurate** for filtering out short sessions, especially on s
 
 ## Billing Limits
 
-You can set a [billing limit](/docs/billing/limits-alerts). We'll stop ingesting recordings when you reach your limit. 
+You can set a [billing limit](/docs/billing/limits-alerts). We'll stop ingesting recordings when you reach your limit.
