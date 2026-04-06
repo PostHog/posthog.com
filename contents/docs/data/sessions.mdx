@@ -61,6 +61,8 @@ Session properties are data about the session that is autocaptured by PostHog an
 | `$channel_type`        | [Type of channel](/docs/data/channel-type) through which the session was initiated |
 | `$session_duration`    | Total duration of the session                                               |
 | `$is_bounce`           | Indicates if the session was a bounce (single pageview session)             |
+| `$hosts`               | Array of unique hosts (domains) visited during the session                  |
+| `$emails`              | Array of emails associated with the session's person                        |
 
 You can query all of these from the `sessions` table using [SQL insights](/docs/product-analytics/sql).
 
