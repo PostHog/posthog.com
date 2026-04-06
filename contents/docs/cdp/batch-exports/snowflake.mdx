@@ -187,6 +187,18 @@ Once the cause has been identified and the configuration amended, a warehouse ca
 
 See Snowflake's documentation on [managing warehouses](https://docs.snowflake.com/en/user-guide/warehouses-tasks) and [the cost management auto-suspend feature](https://docs.snowflake.com/en/user-guide/cost-controlling#label-cost-control-auto-suspend) for more details.
 
+### Export shows a "missing version key" error for mutable models
+
+When exporting mutable models like persons or sessions, the destination table must include all required version key fields. For the persons model, these are `person_version` and `person_distinct_id_version`. If any of these fields are missing, the export fails with an error like:
+
+> Missing one or more fields from the table's version key, which are required for mutable models: 'person_version'. Please review your batch export configuration.
+
+To fix this:
+
+1. **Let PostHog create the table** - Delete your existing table and let PostHog create it automatically on the next export run. This ensures the correct schema.
+
+2. **Manually add the missing columns** - Add the missing version key columns to match the schema shown in the [Persons model](#persons-model) section above.
+
 ## Examples
 
 These examples illustrate how to use the data from batch exports in Snowflake.
