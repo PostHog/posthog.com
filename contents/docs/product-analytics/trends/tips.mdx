@@ -1,31 +1,43 @@
 ---
 title: Insight tips and advanced features
 ---
-import {ProductScreenshot} from 'components/ProductScreenshot'
-import {ProductVideo} from 'components/ProductVideo'
-export const personsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/persons-light-mode.png"
-export const personsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/persons-dark-mode.png"
-export const insightsSourceLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/insights-source-light-mode.png"
-export const insightsSourceDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/insights-source-dark-mode.png"
-export const insightsLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/notebooks/insights-light-mode.mp4"
-export const insightsDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/notebooks/insights-dark-mode.mp4"
-export const prefixLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/prefixes-light.png"
-export const prefixDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/prefixes-dark.png"
-export const legendLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/legend-light.png"
-export const legendDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/legend-dark.png"
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+import { ProductVideo } from "components/ProductVideo";
+export const personsLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/persons-light-mode.png";
+export const personsDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/persons-dark-mode.png";
+export const insightsSourceLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/insights-source-light-mode.png";
+export const insightsSourceDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/insights-source-dark-mode.png";
+export const insightsLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/notebooks/insights-light-mode.mp4";
+export const insightsDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/notebooks/insights-dark-mode.mp4";
+export const prefixLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/prefixes-light.png";
+export const prefixDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/prefixes-dark.png";
+export const legendLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/legend-light.png";
+export const legendDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/legend-dark.png";
 
 ## Using the persons modal
 
 Clicking on a data point in a trends insight opens the persons modal, which shows you a list of users/groups that performed it during the selected time period.
 
 <ProductScreenshot
-    imageLight = {personsLight} 
-    imageDark = {personsDark}
-    classes="rounded"
-    alt="All persons who performed an event"
+  imageLight={personsLight}
+  imageDark={personsDark}
+  classes="rounded"
+  alt="All persons who performed an event"
 />
 
 From this menu, you can:
+
 - Watch specific session replays where the user performed the selected event
 - Dive deep into the properties of each individual user
 - Save the entire list of users as a cohort
@@ -37,12 +49,7 @@ You can create all of PostHog's insight types natively in [Notebooks](/docs/note
 
 Each of them can be completely customized within notebooks like you would in insights. To do this, click the three-line reverse pyramid icon.
 
-<ProductVideo
-    videoLight={insightsLight} 
-    videoDark={insightsDark}
-    alt="Insight" 
-    classes="rounded"
-/>
+<ProductVideo videoLight={insightsLight} videoDark={insightsDark} alt="Insight" classes="rounded" />
 
 You can also add insights from the insights list by clicking, holding, and dragging the title onto the right-side popover.
 
@@ -53,23 +60,32 @@ You can change the unit of any trends insights, or add custom prefixes/postfixes
 Units include duration (seconds or milliseconds) and percentage.
 
 <ProductScreenshot
-    imageLight = {prefixLight} 
-    imageDark = {prefixDark}
-    classes="rounded"
-    alt="Unit and prefix options"
+  imageLight={prefixLight}
+  imageDark={prefixDark}
+  classes="rounded"
+  alt="Unit and prefix options"
 />
 
 To do so, click on 'Options' dropdown next to the chart type and select the one you want.
 
 <ProductScreenshot
-    imageLight = {legendLight} 
-    imageDark = {legendDark}
-    classes="rounded"
-    alt="Series legend"
+  imageLight={legendLight}
+  imageDark={legendDark}
+  classes="rounded"
+  alt="Series legend"
 />
 
 Also under the 'Options' dropdown is the ability to enable values on trends, and the legend, like in the screenshot above.
 
+## Toggle series visibility in the legend
+
+When the legend is enabled, you can click the checkbox next to any series to toggle its visibility on the chart.
+
+For charts with many series, right-click on a legend item to open a context menu with additional options:
+
+- **Hide other series** – hides all other series and isolates the one you right-clicked
+- **Show all series** – makes all series visible again
+- **Hide all series** – hides every series on the chart
 
 ## Hide weekend data
 
@@ -84,23 +100,23 @@ This works with day-level intervals. For hour, minute, week, or month intervals,
 You can add goal lines to any trend line insight by clicking on **Advanced Options**, then **+ Add goal line**, and then entering a value. This is helpful for highlighting quarterly KPIs, limits, and more.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_16_at_09_28_36_2x_81de2d5ade.png"
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_16_at_09_28_58_2x_e82dfda3e7.png"
-    classes="rounded"
-    alt="Goal line"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_16_at_09_28_36_2x_81de2d5ade.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_16_at_09_28_58_2x_e82dfda3e7.png"
+  classes="rounded"
+  alt="Goal line"
 />
 
 ## View source (Beta)
 
-Insight filters follow a declarative format that you can view and edit. To do so, open the insight editor by clicking on the `{}` icon next to the save insight button and you will see the source for the current insight configuration. 
+Insight filters follow a declarative format that you can view and edit. To do so, open the insight editor by clicking on the `{}` icon next to the save insight button and you will see the source for the current insight configuration.
 
 Using this editor you can copy-and-paste complete or partial insights and understand what is going on under the hood. We admit this is a bit of a power user feature, but if you're so inclined you might even find it easier to edit insights this way.
 
 <ProductScreenshot
-    imageLight = {insightsSourceLight} 
-    imageDark = {insightsSourceDark}
-    classes="rounded"
-    alt="View insight configuration source"
+  imageLight={insightsSourceLight}
+  imageDark={insightsSourceDark}
+  classes="rounded"
+  alt="View insight configuration source"
 />
 
 See our [full list of PostHog tutorials](/tutorials) for more guides and tips.
