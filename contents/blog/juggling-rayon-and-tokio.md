@@ -23,9 +23,11 @@ seo: {
 
 Tokio, Rayon, and a Kubernetes pod walk into a bar. Nobody gets served.
 
-Feature Flags sits in a uniquely latency-sensitive spot compared to most PostHog products. It **needs** to be as close to real time as possible, all the time. A slow flag evaluation means a customer's application is stuck waiting for a response before it can proceed. That’s a tough requirement for a service that also needs to scale well while doing a lot of compute-intensive work.
+Managing compute-intensive work at scale is no easy task. Even though Rust is known for its performance and safety, overlooking the inner workings of the tools being used will often make you shoot yourself in the foot. This is how we discovered a big performance bottleneck in our hot path and unlocked a 4x mean p99 latency reduction, from 2.5 second spikes to a flat 94ms line.
 
 ## What looked like a database problem
+
+Feature Flags sits in a uniquely latency-sensitive spot compared to most PostHog products. It **needs** to be as close to real time as possible, all the time. A slow flag evaluation means a customer's application is stuck waiting for a response before it can proceed. That’s a tough requirement for a service that also needs to scale well while doing a lot of compute-intensive work.
 
 Although the [Rust rewrite of our feature flag service](/blog/even-faster-more-reliable-flags) resulted in a bunch of performance gains, as we grew to serve twice the traffic, problems arose again. Latency, which the rewrite made up to 10.6x faster, was spiking. Our application was "randomly" freezing up.
 
