@@ -10,6 +10,15 @@ Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/feature-f
 See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
 -->
 
-import { FFJSWebInstallationWrapper } from './_snippets/ff-js-web-installation-wrapper.tsx'
+import { FFJSWebInstallationWrapper } from "./_snippets/ff-js-web-installation-wrapper.tsx";
 
 <FFJSWebInstallationWrapper />
+
+## Understanding multivariate flags
+
+For multivariate flags, `getFeatureFlag()` returns the **variant key** the user is assigned to (e.g., `'control'`, `'variant-a'`), not a boolean. This means:
+
+- **Checking for a specific variant** – Compare the result to a variant key: `if (posthog.getFeatureFlag('flag-key') === 'variant-a')`
+- **Checking if the user is in any variant** – Check if the result is truthy: `if (posthog.getFeatureFlag('flag-key'))`
+
+If the flag is disabled for a user or they're not in the rollout, `getFeatureFlag()` returns `undefined` or `false`.

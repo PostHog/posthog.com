@@ -23,6 +23,8 @@ Common examples of noisy URLs:
 
 Path cleaning solves this by using regex to match these patterns and replace them with a readable alias.
 
+> **Note:** If your URLs contain sensitive or personal information (like email addresses or tokens), path cleaning alone isn't sufficient since PostHog still stores the original URL. See the [data collection](/docs/privacy/data-collection) privacy docs for ways to prevent PostHog from capturing personal data in URLs, such as using the `before_send` hook to strip URL properties before they're sent.
+
 ## Configuring path cleaning rules
 
 Path cleaning rules are configured globally in your [project settings](https://us.posthog.com/settings/project-product-analytics#path-cleaning). Once configured, they apply across both web analytics and product analytics.
