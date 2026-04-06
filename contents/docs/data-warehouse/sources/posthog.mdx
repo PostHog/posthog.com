@@ -300,6 +300,25 @@ The `system.hog_flows` table contains workflow definitions from your project.
 | `created_at`     | When the workflow was created         |
 | `updated_at`     | When the workflow was last updated    |
 
+### `system.integrations`
+
+The `system.integrations` table contains third-party service connections configured in your project. Each integration represents a connection to an external service like Slack, GitHub, Salesforce, or an ad platform.
+
+| Column           | Description                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------ |
+| `id`             | Unique identifier for the integration                                                |
+| `team_id`        | Team ID the integration belongs to                                                   |
+| `kind`           | Integration type identifier (e.g., `slack`, `hubspot`, `github`)                     |
+| `integration_id` | Identifier in the external system (e.g., Slack workspace ID, GitHub installation ID) |
+| `config`         | JSON containing non-sensitive, kind-specific configuration                           |
+| `errors`         | Error message if the integration has issues, empty string otherwise                  |
+| `created_at`     | When the integration was created                                                     |
+| `created_by_id`  | User ID of the integration creator                                                   |
+
+Supported integration kinds include: `slack`, `salesforce`, `hubspot`, `google-ads`, `google-sheets`, `linkedin-ads`, `meta-ads`, `github`, `gitlab`, `linear`, `jira`, `intercom`, `twilio`, and more.
+
+> **Note:** Sensitive configuration like credentials and tokens is deliberately excluded from this table for security reasons.
+
 ### `system.notebooks`
 
 The `system.notebooks` table contains notebook metadata from your project.
