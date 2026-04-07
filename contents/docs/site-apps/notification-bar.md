@@ -6,27 +6,56 @@ topics:
   - notification-bar
 ---
 
-The Notification Bar app is a site app which enables you to display a customised banner on your site to notify users about events such as product releases, sales, and events. 
+The Notification Bar site app displays a customizable banner at the top of your website. Use it to announce product updates, promotions, events, or important notices to visitors.
 
-Site apps are a new, big, and currently beta feature which enable you to inject code from PostHog into your website via `posthog-js`.
+## How it works
+
+Once installed and configured, the notification bar injects a banner at the top of every page where `posthog-js` is loaded. It renders inside a [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM) element so its styles don't conflict with your site.
+
+The banner:
+
+- Displays your custom message with support for HTML, including links and bold text
+- Can be styled with custom background, text, and link colors
+- Supports **sticky** (fixed at top of viewport) or **top of page** (scrolls with content) positioning
+- Can be dismissed by clicking anywhere on the bar (outside of links)
+- Optionally remembers when a user dismisses it using `localStorage`, so it won't reappear until you change the message
+- Can be restricted to specific domains using a comma-separated list
+
+<CalloutBox icon="IconInfo" title="Site apps are in beta" type="fyi">
+
+Site apps let you inject code from PostHog into your website via `posthog-js`. You need to opt in by setting `opt_in_site_apps: true` in your posthog-js configuration.
+
+</CalloutBox>
+
+## Use cases
+
+- **Product launches** – Announce new features or product releases
+- **Promotions** – Highlight sales, discounts, or limited-time offers
+- **Events** – Promote upcoming webinars, conferences, or community events
+- **Status updates** – Communicate maintenance windows or known issues
+- **Navigation** – Direct users to important pages like documentation or signup
 
 ## Requirements
 
 The Notification Bar requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.41.0](https://posthog.com/blog/the-posthog-array-1-41-0#one-more-thing-site-apps) or later.
 
-Not running 1.41.0? Find out [how to update your self-hosted PostHog deployment](/docs/runbook/upgrading-posthog)!
-
-You'll also need to manually opt in to the site apps feature, as it's currently in beta.
+You also need to opt in to the site apps beta by setting `opt_in_site_apps: true` in your `posthog-js` initialization.
 
 ## Installation
 
-First, you need to manually opt in to the site apps beta. You can do this by configuring your `posthog-js` initialization to include `opt_in_site_apps: true`. Please be aware you do this at your own risk.
+1. Configure your `posthog-js` initialization to include `opt_in_site_apps: true`:
 
-Once you've opted in, simply visit the 'Apps' page in your PostHog instance, search for 'Notification Bar' and press install. You can then use the blue gear icon to configure the app. 
+   ```js
+   posthog.init("<ph_project_token>", {
+     api_host: "<ph_client_api_host>",
+     opt_in_site_apps: true,
+   });
+   ```
 
-## Configuration
-
-<AppParameters />
+2. In PostHog, go to **Data** > **Pipeline** > **Destinations**
+3. Search for **Notification Bar** and click **+ Create**
+4. Configure the bar with your message, colors, and positioning
+5. Click **Save** and enable the destination
 
 ## FAQ
 
@@ -40,12 +69,4 @@ We'd like to thank PostHog team member [Marius Andra](https://github.com/mariusa
 
 ### Who maintains this app?
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this app?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+This app is maintained by PostHog. If you have issues with the app not functioning as intended, have feedback, or your question isn't answered above, please [let us know](http://app.posthog.com/home#supportModal) or ask via [our community forum](/questions).
