@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This guide documents our semi-automated release process for PostHog SDKs. Each SDK repository uses a GitHub App with restricted permissions to handle releases securely, requiring team approval before any release is published.
+This guide documents our semi-automated release process for PostHog SDKs. Each SDK repository uses a GitHub App with restricted permissions to handle releases securely, requiring team approval before any release is published. SDK repositories also require all commits [to be signed](/handbook/engineering/security#commit-signing) by their author.
 
 <CalloutBox type="fyi">
 
@@ -42,6 +42,9 @@ Create a [new GitHub App](https://github.com/organizations/PostHog/settings/apps
 4. **Webhook:** Disable (uncheck "Active")
 5. **Permissions:** Under "Repository permissions", set only:
    - `Contents`: Read and write
+
+   > **Note:** If your app needs to open PRs in other repositories and assign teams or members as reviewers (e.g., the posthog-js upgrader opens PRs from `posthog-js` to `posthog` and assigns the `client-libraries` and `client-libraries-approvers` teams), you also need to add under "Organization permissions":
+   > - `Members`: Read-only
 6. **Where can this GitHub App be installed?** Keep it restricted to "Only on this account"
 7. Click **Create GitHub App**
 
@@ -72,6 +75,7 @@ In your SDK repository settings:
 1. Go to **Environments** and create a new environment named `Release`
 2. Configure protection rules:
    - **Required reviewers:** Add `PostHog/client-libraries-approvers` and `PostHog/team-client-libraries` as the only teams allowed to approve this release
+   - **Prevent self-review:** **Check** this box
    - **Allow administrators to bypass:** **Uncheck** this box
 
 ![Protection rules]([https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_26_43_879_Z_cee626f86a.png](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_18_T18_21_01_089_Z_2dd8982a33.png))

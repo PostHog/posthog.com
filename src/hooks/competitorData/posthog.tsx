@@ -40,7 +40,7 @@ export const posthog = {
                 mobile_sdk_coverage: true,
                 profiling: false,
                 source_map_support: true,
-                stack_tracing: false,
+                stack_tracing: true,
                 user_device_context: true,
             },
             monitoring: {
@@ -65,6 +65,7 @@ export const posthog = {
                 free_tier: '5,000 web recordings, 2,500 mobile recordings',
             },
             features: {
+                ai_summaries: 'Beta',
                 canvas_recording: true,
                 chat_with_recordings: true,
                 conditional_recording: true,
@@ -115,11 +116,7 @@ export const posthog = {
                     performance_monitoring: true,
                     network_monitor: true,
                     dom_explorer: true,
-                },
-            },
-            ai: {
-                features: {
-                    ai_summaries: 'Beta',
+                    heatmaps: true,
                 },
             },
         },

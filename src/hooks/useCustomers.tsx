@@ -7,6 +7,8 @@ import ArenaLogo from '../components/CustomerLogos/ArenaLogo'
 import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
 import BrainboardLogo from '../components/CustomerLogos/BrainboardLogo'
 import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
+import CloudPeekLogo from '../images/customers/CloudPeek_Final_Logo_Transparent.png'
+import CloudPeekLogoDark from '../images/customers/CloudPeek_Full_Logo_-_White_Transparent.png'
 import ContraLogo from '../components/CustomerLogos/ContraLogo'
 import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
@@ -60,6 +62,7 @@ import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
+import JaxxonLogo from 'components/CustomerLogos/JaxxonLogo'
 
 export interface Customer {
     slug: string
@@ -246,6 +249,34 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: CarVerticalLogo,
         featured: false,
         height: 10,
+    },
+    cloudpeek: {
+        name: 'CloudPeek',
+        toolsUsed: ['logs', 'error_tracking', 'llm_analytics'],
+        industries: ['Cybersecurity'],
+        users: ['Engineering'],
+        notes: 'Agentic AI platform for cybersecurity',
+        featured: false,
+        logo: {
+            light: CloudPeekLogo,
+            dark: CloudPeekLogoDark,
+        },
+        height: 10,
+        quotes: {
+            craig_hollington: {
+                name: 'Craig Hollington',
+                role: 'CTO',
+                image: {
+                    thumb: '/images/customers/craig-hollington.png',
+                },
+                quotes: [
+                    "We're probably five to ten times faster at debugging now, and it's enabled us to collaboratively work on issues as a team in a way we just couldn't before.",
+                    'We spot an exception in Error Tracking and pivot straight into Logs to understand the full context of what went wrong. That link between the two is huge for us.',
+                    "We used to get exception logs come through on PostHog, and then I'd have to log onto the server manually and search our log files which were written locally.",
+                    "We automatically get AI to write triage scripts and fire them to see what works, and then from there we review the log files to see what it did and what it didn't do.",
+                ],
+            },
+        },
     },
     contra: {
         name: 'Contra',
@@ -546,6 +577,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 ],
             },
         },
+    },
+    jaxxon: {
+        name: 'Jaxxon',
+        // toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
+        industries: ['Fashion'],
+        // users: ['Engineering', 'Leadership', 'Founders'],
+        notes: "Men's chains & accessories",
+        featured: true,
+        logo: JaxxonLogo,
+        height: 12,
     },
     juicebox: {
         name: 'Juicebox',

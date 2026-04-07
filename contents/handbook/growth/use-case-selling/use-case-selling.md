@@ -16,34 +16,35 @@ Each use case has a full playbook with discovery questions, competitive position
  
 | Use case | Job to be done | Core buyer | Status |
 |---|---|---|---|
-| [Product Intelligence](/handbook/growth/use-case-selling/product-intelligence) | "Help me understand what users do, why they do it, and what to build next." | PMs, designers, product engineers, founders | *Draft* |
-| [Release Engineering](/handbook/growth/use-case-selling/release-engineering) | "Help me ship faster without breaking things." | Engineering managers, platform teams, developers | *Draft* |
-| [Observability](/handbook/growth/use-case-selling/observability) | "Help me know when things break, understand why, and fix them fast." | SREs, platform engineers, DevOps | *Draft* |
-| [Growth & Marketing](/handbook/growth/use-case-selling/growth-and-marketing) | "Help me understand what drives acquisition, conversion, and revenue." | Growth engineers, marketing leads, CRO, GTM engineers | **Complete** |
-| [AI/LLM Observability](/handbook/growth/use-case-selling/ai-llm-observability) | "Help me understand how my AI features perform, what they cost, and how users interact with them." | AI/ML engineers, AI PMs, AI founders | *Draft* |
-| [Data Infrastructure](/handbook/growth/use-case-selling/data-infrastructure) | "Help me unify product data with business data and get it where it needs to go." | Data engineers, analytics engineers, product ops | *Draft* |
+| [Product Intelligence](/handbook/growth/use-case-selling/product-intelligence) | "Help me understand what users do, why they do it, and what to build next." | PMs, designers, product engineers, founders | 
+| [Release Engineering](/handbook/growth/use-case-selling/release-engineering) | "Help me ship faster without breaking things." | Engineering managers, platform teams, developers | 
+| [Observability](/handbook/growth/use-case-selling/observability) | "Help me know when things break, understand why, and fix them fast." | SREs, platform engineers, DevOps | 
+| [Growth & Marketing](/handbook/growth/use-case-selling/growth-and-marketing) | "Help me understand what drives acquisition, conversion, and revenue." | Growth engineers, marketing leads, CRO, GTM engineers |
+| [AI/LLM Observability](/handbook/growth/use-case-selling/ai-llm-observability) | "Help me understand how my AI features perform, what they cost, and how users interact with them." | AI/ML engineers, AI PMs, AI founders | 
+| [Data Infrastructure](/handbook/growth/use-case-selling/data-infrastructure) | "Help me unify product data with business data and get it where it needs to go." | Data engineers, analytics engineers, product ops | 
+| [Customer Experience](/handbook/growth/use-case-selling/customer-experience) | "Help me quickly understand what happened, identify the problem, and verify a fix." | Support leaders, engineering leads, CS leaders |
  
 ## Product coverage matrix
  
 | Product | Primary use case | Secondary use cases |
 |---|---|---|
-| Product Analytics | Product Intelligence | Growth & Marketing, AI/LLM Obs |
-| Session Replay | Product Intelligence | Release Engineering, Observability, AI/LLM Obs |
+| Product Analytics | Product Intelligence | Growth & Marketing, AI/LLM Obs, Customer Experience |
+| Session Replay | Product Intelligence | Release Engineering, Observability, AI/LLM Obs, Customer Experience |
 | Feature Flags | Release Engineering | |
-| Experiments | Release Engineering | Product Intelligence, AI/LLM Obs, Growth & Marketing |
-| Error Tracking | Observability | AI/LLM Obs |
-| Surveys | Product Intelligence | Growth & Marketing |
+| Experiments | Release Engineering | Product Intelligence, AI/LLM Obs, Growth & Marketing, Customer Experience |
+| Error Tracking | Observability | AI/LLM Obs, Customer Experience |
+| Surveys | Product Intelligence | Growth & Marketing, Customer Experience |
 | Web Analytics | Growth & Marketing | |
 | Marketing Analytics *beta* | Growth & Marketing | |
 | Revenue Analytics | Growth & Marketing | Product Intelligence |
 | Workflows | Growth & Marketing | Product Intelligence |
 | Product Tours *beta* | Growth & Marketing | Product Intelligence |
-| LLM Observability | AI/LLM Obs | |
+| LLM Observability | AI/LLM Obs | Customer Experience |
 | AI Evals | AI/LLM Obs | Product Intelligence, Release Engineering |
 | Data Warehouse | Data Infrastructure | |
 | Data Pipelines / Batch Exports | Data Infrastructure | Growth & Marketing |
 | PostHog AI | Horizontal (all) | |
-| Logging *beta* | Observability | |
+| Logging *beta* | Observability | Customer Experience |
  
 ## Playbook structure
  

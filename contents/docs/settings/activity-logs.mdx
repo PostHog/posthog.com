@@ -380,6 +380,31 @@ For full details on query parameters, request/response formats, and all availabl
 
 Search for "activity_log" to find the relevant endpoints.
 
+## Query with HogQL
+
+You can query activity logs directly using HogQL in the [SQL editor](/docs/data-warehouse/query). The `system.activity_logs` table provides programmatic access to your audit trail data.
+
+```sql
+SELECT
+    activity,
+    scope,
+    item_id,
+    detail,
+    created_at
+FROM system.activity_logs
+WHERE scope = 'FeatureFlag'
+ORDER BY created_at DESC
+LIMIT 50
+```
+
+This is useful for:
+
+- Building custom audit reports
+- Analyzing change patterns across your team
+- Integrating activity data with other PostHog queries
+
+> **Note:** Only team-scoped activity logs are visible via HogQL. Organization-level logs (like membership changes) are not available in this table.
+
 ## Security and privacy considerations
 
 ### Who can view activity logs

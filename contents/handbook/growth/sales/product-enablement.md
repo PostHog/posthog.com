@@ -59,7 +59,7 @@ It's on the SME to schedule a regular (nominally monthly, but this may vary by p
 ### Content storage
 
 - **Handbook**: This page lists SMEs and links to training materials
-- **Video content**: Stored in Loom in a protected folder
+- **Video content**: Stored in <PrivateLink url="https://www.loom.com/spaces/All-Posthog-1314016/folders/Product-Training-e267a336d02b415daa043ba2bcfc3dc0">Loom</PrivateLink>
 - **Written/visual content**: Stored in Pitch or Google Drive
 - **Last updated dates**: Displayed alongside each product area's materials
 
