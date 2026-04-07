@@ -38,10 +38,25 @@ After connecting, configure the integration in **Support > Settings**:
 | **Support channel** | Every top-level message in this channel becomes a ticket. Thread replies sync as ticket messages. | — |
 | **Ticket emoji** | React with this emoji on any message in any channel to create a ticket from it. | `:ticket:` |
 | **Bot mentions** | Always active — `@SupportHog` in any channel creates a ticket from that message. | — |
+| **Bot display name** | Override the name shown when the bot posts messages to Slack. | Bot's default Slack name |
+| **Bot icon URL** | Override the avatar shown when the bot posts messages. Must be an HTTPS URL. | Bot's default Slack icon |
 
 ### Picking a support channel
 
 When you click the channel selector, PostHog lists all public and private channels the SupportHog bot has access to. Select the channel you want to use as your dedicated support inbox.
+
+
+### Bot appearance
+
+You can customize the display name and icon the SupportHog bot uses when posting messages to Slack. These fields are in the **Bot appearance** section of **Support > Settings**.
+
+- Leave both fields blank to use the bot's default Slack name and icon.
+- The icon URL must start with `https://`.
+- The display name must be 200 characters or fewer.
+
+These overrides only apply to bot-authored messages (confirmations, fallback replies). Messages posted on behalf of a team member still show that member's name.
+
+> **Re-authorization required:** If SupportHog was connected before this feature was available, disconnect and reconnect the bot so it receives the additional `chat:write.customize` permission.
 
 ## How tickets are created
 
