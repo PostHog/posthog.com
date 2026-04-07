@@ -9,7 +9,7 @@ If you've been invited to a technical screen at PostHog, here's what to expect a
 
 ## What the technical screen looks like
 
-The technical screen is a 60 minute architecture and design discussion with one of our engineers. No whiteboarding, no brain teasers, no trick questions. You'll work through an open-ended problem together, and there are many reasonable approaches. We're primarily interested in *how* you think.
+The technical screen is a 60 minute architecture and design discussion with one of our engineers. You'll work through an open-ended problem together, and there are many reasonable approaches. We're primarily interested in *how* you think.
 
 ## What we're evaluating
 
