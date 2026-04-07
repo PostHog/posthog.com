@@ -224,7 +224,7 @@ Both platforms capture console logs, but PostHog goes deeper for developer debug
         'session_replay.analysis.performance_monitoring',
         'session_replay.analysis.dom_explorer',
         { label: 'Recording controls' },
-        'session_replay.targeting.conditional_recording',
+        'session_replay.features.conditional_recording',
         'session_replay.privacy.privacy_masking',
         'session_replay.targeting.target_by_sample',
         'session_replay.targeting.target_by_feature_flag',
@@ -425,7 +425,7 @@ The main exception is warehouse-native analytics: Amplitude can run queries dire
 <details>
 <summary>Is PostHog cheaper than Amplitude?</summary>
 
-It depends on your usage pattern. PostHog uses usage-based pricing where you pay per event, replay, or survey response, with generous free tiers (1M events, 5,000 replays, 1,500 survey responses monthly). Amplitude charges per Monthly Tracked User (MTU) with 50K MTUs free. PostHog's pricing is fully transparent and published publicly; Amplitude's Growth and Enterprise pricing requires contacting sales.
+It depends on your usage pattern. PostHog uses usage-based pricing where you pay per event, replay, or survey response, with generous free tiers (1M events, 5,000 replays, 1,500 survey responses monthly). Amplitude charges per Monthly Tracked User (MTU) with 10K MTUs free. PostHog's pricing is fully transparent and published publicly; Amplitude's Growth and Enterprise pricing requires contacting sales.
 
 **When usage-based pricing (PostHog) works best:**
 - You have power users who generate lots of events
