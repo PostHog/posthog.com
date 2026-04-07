@@ -238,4 +238,4 @@ If you are noticing an issue with your BigQuery batch export, it may be useful t
 
 ### How is the BigQuery table partitioned?
 
-When PostHog creates the BigQuery table, it is automatically partitioned by the `timestamp` column. If you need a different partition column or want to configure clustering, you should create the table manually in BigQuery before setting up the batch export. PostHog will use the existing table as long as it has a compatible schema.
+When PostHog creates the BigQuery table, it is automatically partitioned by day using the `timestamp` column. If you need a different partition column or want to configure clustering, you should create the table manually in BigQuery before setting up the batch export. PostHog will use the existing table as long as it has a compatible schema.
