@@ -1,0 +1,225 @@
+---
+title: Identity resolution
+showTitle: true
+sidebar: Docs
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+## TL;DR
+
+- [Identity resolution is your engineering problem](#identity-resolution-is-your-engineering-problem) – PostHog consumes what you give it. If your identity data is incoherent, every downstream feature inherits that incoherence.
+- [Think in layers](#the-identity-layer-model) – stable IDs, authentication IDs, and device IDs serve different purposes. Know which layer you're operating at.
+- [The golden path: assign a stable ID early and never change it](#choosing-your-identity-strategy) – mint it in one place, pass it to every environment. This eliminates an entire class of problems across flags, experiments, session replay, and analytics.
+- [Pass the ID across transitions explicitly](#golden-path-stable-id-from-first-touch) – web to mobile, marketing site to product, client to server. If two environments generate IDs independently, they will diverge.
+- [Link IDs explicitly](#linking-ids) – PostHog can merge what you tell it to merge. It can't infer that two IDs belong to the same person.
+- [Verify your implementation](#how-to-verify-identity-is-correct) – check person profiles, not assumptions.
+
+---
+
+## Identity resolution is your engineering problem
+
+Identity resolution is the problem of coordinating a single, stable representation of a user across every environment your product runs in – browser, mobile, server, third-party integrations – and passing that coordinated data to every system that needs it. PostHog is one of those systems.
+
+PostHog doesn't know your users. It knows **entities** tagged with a `distinct_id` and properties. It can merge what you tell it to merge. It can't resolve identity for you. If the data you send is incoherent – different IDs for the same person across SDKs, IDs that change mid-session, merges that happen too late – every downstream feature inherits that incoherence. Flags flip. Experiments double-count. Funnels misattribute. Session replays fragment. These aren't PostHog bugs. They're input problems.
+
+The fix is designing your identity flow so that every system receives consistent, stable identity data from the moment a user first appears. PostHog's merge pipeline and SDKs do occasionally have real bugs – check [status.posthog.com](https://status.posthog.com) if something looks wrong. But incidents are easy to spot (they affect many customers at once). If you're the only one seeing the problem, look at your inputs.
+
+This guide, [PostHog AI](/docs/feature-flags/manage-flags-ai), and [support](https://posthog.com/questions) exist to help you work through this. But identity across multiple environments and transitions can grow complex. If you'd rather make it our problem, that's what [professional services](https://posthog.com/professional-services) are for.
+
+## The identity layer model
+
+Think of your user's identity as having three layers. Each serves a different purpose, and the problems happen when layers collide.
+
+```
+Layer 0: Stable ID
+  Assigned the moment you first see this human. Never changes.
+  Examples: a UUID minted on first visit, a fingerprint-derived ID, a backend user ID
+  assigned at account creation.
+
+Layer 1: Authentication IDs
+  Assigned when the user proves who they are.
+  Examples: email, user_id from your backend, SSO subject, OAuth sub claim.
+
+Layer 2: Device and session IDs
+  Assigned per device, per browser, per session. Ephemeral by nature.
+  Examples: anonymous_id from the SDK, device_id, session tokens.
+```
+
+Most applications start at Layer 2 – the SDK generates an anonymous ID – and replace it with a Layer 1 ID on login. That replacement is where identity breaks happen. The anonymous ID produced one set of flag evaluations, analytics events, and session recordings. The authenticated ID produces another. Unless you explicitly link them, PostHog treats them as two separate people.
+
+The further your implementation is from Layer 0, the more coordination work you take on. Layer 2 to Layer 1 transitions require `identify()` or `alias()` calls at exactly the right time. Layer 0 eliminates the transition entirely.
+
+## Choosing your identity strategy
+
+There are three common approaches. The golden path is listed first because it eliminates the most problems. The others are valid when constraints prevent the golden path, but each adds coordination complexity.
+
+### Golden path: stable ID from first touch
+
+Assign a durable ID the moment you first see a user. This ID never changes, even across authentication boundaries or devices. The key is to mint the ID in a stable place – ideally your server – and pass it to every environment that needs it.
+
+**Server as source of truth (recommended)**
+
+If you have a server, mint the ID there. It travels to every client via bootstrap, URL parameters, cookies, or your app's own session mechanism. When the user moves from mobile to web, the server already knows who they are and passes the same ID forward.
+
+```javascript
+// Server: mint or retrieve the stable ID
+const stableId = getOrCreateStableId(sessionCookie) // your logic
+
+// Pass to the client at render time via bootstrap
+posthog.init('phc_...', {
+  bootstrap: {
+    distinctID: stableId,
+    featureFlags: preEvaluatedFlags  // optional: skip the /flags call entirely
+  }
+})
+```
+
+No anonymous-to-identified transition ever happens. The hash input is stable from the first millisecond on every device.
+
+**Client-side stable ID**
+
+If you don't have a server (static sites, SPAs without a backend), you can generate and persist the ID on the client:
+
+```javascript
+// On first visit, mint a stable ID and store it
+const stableId = localStorage.getItem('app_user_id') || crypto.randomUUID()
+localStorage.setItem('app_user_id', stableId)
+
+posthog.init('phc_...', {
+  bootstrap: {
+    distinctID: stableId
+  }
+})
+```
+
+Or adopt PostHog's anonymous ID as your canonical identifier:
+
+```javascript
+// First visit: grab PostHog's anonymous ID and persist it
+const canonicalId = posthog.get_distinct_id()
+setCookie('_canonical_uid', canonicalId, { maxAge: 2 * 365 * 24 * 60 * 60 })
+
+// On subsequent visits, bootstrap with the persisted ID
+const savedId = getCookie('_canonical_uid')
+if (savedId) {
+  posthog.init('phc_xxx', { bootstrap: { distinctID: savedId } })
+}
+```
+
+Either way, when the user logs in, you attach authentication properties without changing the ID:
+
+```javascript
+// Login: enrich the identity, don't replace it
+posthog.identify(stableId, {
+  email: user.email,
+  backend_user_id: user.id,
+  plan: user.plan
+})
+```
+
+`identify()` here sets properties on the same identity – the `distinct_id` never changes. No merges needed. No timing dependencies. Flags, experiments, and analytics all operate on a single stable identity from the start.
+
+**Passing the ID across environment transitions**
+
+The stable ID only works if it travels with the user. How it travels depends on the transition:
+
+- **Web to mobile app** - Pass the `distinct_id` as a query parameter in download or deep links. When the app opens, parse the parameter and initialize PostHog with that ID. The mobile team handles the deep link parsing; the web side just appends the ID. See [linking browser and mobile identities](/tutorials/browser-ios-identification) for a full walkthrough with code examples.
+- **Marketing site to product** - If the marketing site and product share a domain (or you can share a cookie across subdomains), the stable ID persists automatically. If they're on different domains, pass the ID as a URL parameter on the handoff link.
+- **Server to client** - Bootstrap the ID at render time (shown above). The client never generates its own ID.
+- **Client to server** - Send the `distinct_id` in your API calls, session cookies, or request headers. Your server uses the same ID when calling PostHog server-side.
+- **Mobile to web** - Same pattern as web to mobile in reverse. The app generates a link containing the `distinct_id`; the web app reads it on load.
+
+The principle is the same in every case: the ID is minted once, stored in one authoritative place, and passed explicitly to every environment that needs it. If two environments are generating IDs independently, they will diverge.
+
+**What if you need identified events to start only after login?** Two options: (1) defer flag evaluation until the user is identified – if flag consistency across auth transitions matters to you, only evaluating after login is the cleanest solution, or (2) use the stable ID for flag evaluation from the start but hold off on sending `identify()` with person properties until login. The stable ID itself doesn't create an identified person profile – that happens when you attach properties.
+
+**When this doesn't work:** Environments where you genuinely cannot persist or coordinate state – no server, no cookies, no local storage (some embedded webviews, strict compliance regimes that prohibit any user tracking before consent). If you're in this situation, the common path with [flag-specific mitigations](/docs/feature-flags/stable-identity-for-flags#flag-specific-mitigations) is the fallback.
+
+### Common path: anonymous then identify on login
+
+This is what most applications do. The SDK generates an anonymous ID on first load. When the user logs in, you call `identify()` to link the anonymous session to a known user.
+
+```javascript
+// After login
+posthog.identify('user-456', {
+  email: 'user@example.com',
+  plan: 'pro'
+})
+```
+
+When you call `identify('user-456')`:
+
+1. The SDK sends a `$identify` event with both the anonymous `distinct_id` and the new one
+2. PostHog's person merge pipeline links both IDs to the same person
+3. Past events from the anonymous ID are attributed to the merged person
+4. Future events use the new `distinct_id`
+
+**The critical constraint:** `identify()` must run before any flag evaluations, conversion events, or other actions that need to be attributed to the right person. If it runs after, those events belong to the anonymous person until the merge pipeline processes them – and for flags, the hash already ran against the wrong ID. See [resolve identity before evaluating flags](/docs/feature-flags/production-ready#resolve-identity-before-evaluating-flags) for why this matters.
+
+**When this works:** Standard login flows where you can guarantee `identify()` runs early enough.
+
+**When it creates problems:** Auth flows where flag evaluations or critical events fire before `identify()` can run – splash screens with feature-gated content, server-side flag checks that happen before the client has identified.
+
+### Server-side linking with alias
+
+`alias()` links two distinct IDs without changing the current session's identity. Use it when your server knows two IDs belong to the same person but the client hasn't identified yet.
+
+```python
+# Server-side: link the anonymous session to the new user ID
+posthog.alias(previous_id='anon-session-abc', distinct_id='user-456')
+```
+
+After the alias, both IDs resolve to the same person. Events captured under either ID are connected.
+
+**When this works:** Server-driven authentication flows, backend systems that create user records before the client knows about them.
+
+## Cross-environment consistency
+
+Identity coordination means the same user resolves to the same person everywhere your product runs. This requires attention to three things:
+
+**Same `distinct_id` string everywhere.** Browser, server, mobile – the exact same string. If your browser SDK uses `"user-456"` and your server SDK uses `"USER-456"`, PostHog treats them as two different people.
+
+**Same person properties available at evaluation time.** If you target a flag on `plan_type: "pro"`, every SDK evaluating that flag needs access to that property. Server-side local evaluation requires you to pass properties explicitly. Client-side evaluation fetches them from PostHog, but only after the SDK initializes.
+
+**GeoIP awareness across environments.** Server-side evaluation uses the server's IP for GeoIP properties, not the user's. If you target by geography, set `$geoip_disable: true` on server-side calls or pass the user's IP explicitly. See [property overrides](/docs/feature-flags/property-overrides) for details.
+
+## When identity goes wrong
+
+The symptoms vary by feature, but the root cause is always the same – two distinct IDs that should be one person aren't linked.
+
+| Feature | Symptom | What happened |
+|---|---|---|
+| **Feature flags** | Different values before and after login | [Hash input changed](/docs/feature-flags/production-ready#resolve-identity-before-evaluating-flags) |
+| **Experiments** | User in both control and test | Two unlinked persons, each assigned independently |
+| **Experiments** | Exposure exists but conversion missing | Exposure on anonymous ID, conversion on identified ID |
+| **Session replay** | Recording breaks at login | `distinct_id` changed mid-session without linkage |
+| **Funnels** | Conversion attributed to wrong user | Events split across unlinked persons |
+| **Error tracking** | Phantom users with one error each | Transient IDs creating a new person per error |
+
+In every case, the fix is upstream: ensure the right identity strategy is in place and that IDs are linked before the events that need to be connected.
+
+## How to verify identity is correct
+
+Pick any user in PostHog. Click into their person profile. You should see:
+
+1. **One person, not multiple** – search for their email. If you find two person records, they haven't been merged.
+2. **All expected distinct IDs on the same person** – check the Distinct IDs tab. Both anonymous and identified IDs should be listed.
+3. **Events from all SDKs** – browser events and server events should appear on the same person timeline.
+4. **The `$identify` event** – should appear with both the anonymous and identified distinct IDs, confirming the merge happened.
+
+If you see two separate persons for the same real user, trace backwards: which `identify()` or `alias()` call is missing or happening too late?
+
+<CalloutBox icon="IconWarning" title="Watch for illegal distinct IDs" type="caution">
+
+PostHog silently rejects certain distinct IDs during person merges. Blocked values include: `null`, `undefined`, `None`, `0`, `anonymous`, `guest`, `distinct_id`, `id`, `email`, `true`, `false`, `[object Object]`, `NaN`, empty strings, and quoted variants of all of these.
+
+If your application generates IDs that could collide with these values (e.g., the string `"null"` as a user ID), person merges will fail silently. You'll end up with split identities and no error message. Use UUIDs or validate IDs against the blocked list before sending.
+
+</CalloutBox>
+
+## Further reading
+
+- [Production-ready feature flags](/docs/feature-flags/production-ready) – why identity matters for flags and experiments (the pure function model)
+- [Keeping flag evaluations stable](/docs/feature-flags/stable-identity-for-flags) – flag-specific mitigations when you can't fully control the identity flow
+- [Identifying users](/docs/product-analytics/identify) – PostHog's `identify()` API reference

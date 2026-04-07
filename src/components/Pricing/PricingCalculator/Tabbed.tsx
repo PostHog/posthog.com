@@ -10,6 +10,7 @@ import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
 import { PricingTiers } from '../Plans'
 import ProductAnalyticsTab, { analyticsSliders, getTotalEnhancedPersonsVolume } from './Tabs/ProductAnalytics'
 import StandaloneAddonsTab from './Tabs/StandaloneAddonsTab'
+import { EXCLUDED_ADDON_TYPES } from '../../../constants/addons'
 import qs from 'qs'
 import { useUser } from 'hooks/useUser'
 import { NumericFormat } from 'react-number-format'
@@ -90,7 +91,7 @@ export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData
             <p className="opacity-70 text-sm m-0">Product add-ons</p>
             <ul className="list-none m-0 p-0 divide-y divide-primary">
                 {activeProduct.billingData.addons
-                    .filter((addon) => !addon.inclusion_only)
+                    .filter((addon) => !addon.inclusion_only && !EXCLUDED_ADDON_TYPES.includes(addon.type))
                     .map((addon) => {
                         return (
                             <li key={addon.type} className="py-2">

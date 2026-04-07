@@ -391,18 +391,18 @@ export const productAnalytics = {
     ],
     ai: {
         // title: '',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_10367c7399.svg',
+        imageAlt: 'PostHog AI and product analytics',
         description: 'answer product questions faster',
         skills: [
-            'Creates insights and applies filters using natural language',
-            'Creates dashboards',
-            'Searches insights',
-            'Researches complex questions with Deep Research mode',
+            'Builds dashboards and insights based on what you want visualized',
+            'Edits filters, sets breakdowns, builds retention curves (and more) with simple prompts',
+            "Writes and edits SQL queries (and debugs them if they don't work)",
         ],
         prompts: [
-            "What's my churn rate?",
-            'Show me user retention by country',
-            'How many people signed up last month?',
-            "What's my most popular feature?",
+            "What's our most popular feature?",
+            'Which events have the highest drop-off rate in the past 7 days?',
+            'Build a retention curve to track user retention over time',
         ],
     },
     questions: [
@@ -585,5 +585,6 @@ export const productAnalytics = {
             "This is where it gets good. See a drop in your funnel? Click to watch those exact users' sessions. Running an A/B test? All your analytics automatically filter by variant. Same user IDs, same properties, same everything. No CSV exports or data matching required.",
         'getting-started':
             "Add one line of code. You're now tracking everything - clicks, pageviews, the works. See data in minutes. As you grow, add custom events or whatever else you need. The whole thing scales with you. And since it's open source, you own your data forever.",
+        ai: 'The PostHog MCP server gives your AI coding agent direct access to PostHog analytics. Query trends, funnels, retention, and custom HogQL – all from your code editor.',
     },
 }
