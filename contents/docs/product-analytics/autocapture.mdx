@@ -381,12 +381,7 @@ posthog.init('<ph_project_token>', {
 
 #### Disabling page navigation autocapture
 
-You can disable `$pageview` and `$pageleave` autocapture in two ways:
-
-- In your [project settings](https://us.posthog.com/project/settings)
-- By setting `capturePageviews: false` and `capture_pageleave: false` in the [config](/docs/libraries/js/config)
-
-For example:
+You can disable `$pageview` and `$pageleave` autocapture by setting `capture_pageview: false` and `capture_pageleave: false` in the [SDK config](/docs/libraries/js/config):
 
 ```js-web
 posthog.init('<ph_project_token>', {
