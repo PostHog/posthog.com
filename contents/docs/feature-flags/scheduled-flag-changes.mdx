@@ -18,6 +18,12 @@ Scheduling feature flag changes enable you to automatically change flag properti
 
 This is also useful if your releases fall outside normal working hours. For example, a ticket sale starting at midnight.
 
+## Timezones
+
+All scheduled times use your **project's timezone** (configured in [project settings](/docs/settings#general)). If no timezone is set, UTC is used as the default. Times are stored internally as UTC but displayed in the project timezone throughout the UI.
+
+This means if your project is set to `America/New_York` and you schedule a change for 9:00 AM, the flag will change at 9:00 AM Eastern Time. Make sure your project timezone is correct before creating schedules.
+
 ## How to schedule a change:
 
 1. Navigate to the relevant feature flag.
