@@ -1449,6 +1449,10 @@
             "destination": "/docs/feature-flags/best-practices"
         },
         {
+            "source": "/docs/feature-flags/production-ready",
+            "destination": "/docs/feature-flags/best-practices"
+        },
+        {
             "source": "/product-engineers/5-ways-to-improve-analytics-data",
             "destination": "/docs/product-analytics/best-practices"
         },

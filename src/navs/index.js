@@ -3927,13 +3927,6 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
-                    name: 'Best practices',
-                    url: '/docs/feature-flags/best-practices',
-                    icon: 'IconStar',
-                    color: 'red',
-                    featured: true,
-                },
-                {
                     name: 'Server-side local evaluation',
                     url: '/docs/feature-flags/local-evaluation',
                     icon: 'IconBolt',
@@ -3975,8 +3968,8 @@ export const docsMenu = {
                     name: 'Guides',
                 },
                 {
-                    name: 'Production-ready feature flags',
-                    url: '/docs/feature-flags/production-ready',
+                    name: 'Best practices',
+                    url: '/docs/feature-flags/best-practices',
                     icon: 'IconBolt',
                     color: 'purple',
                     featured: true,

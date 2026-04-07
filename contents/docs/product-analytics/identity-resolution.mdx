@@ -166,7 +166,7 @@ If you're filtering by a single `distinct_id` in SQL, you'll miss events from ot
 
 </CalloutBox>
 
-**The critical constraint:** `identify()` must run before any flag evaluations, conversion events, or other actions that need to be attributed to the right person. If it runs after, those events belong to the anonymous person until the merge pipeline processes them – and for flags, the hash already ran against the wrong ID. See [resolve identity before evaluating flags](/docs/feature-flags/production-ready#resolve-identity-before-evaluating-flags) for why this matters.
+**The critical constraint:** `identify()` must run before any flag evaluations, conversion events, or other actions that need to be attributed to the right person. If it runs after, those events belong to the anonymous person until the merge pipeline processes them – and for flags, the hash already ran against the wrong ID. See [resolve identity before evaluating flags](/docs/feature-flags/best-practices#resolve-identity-before-evaluating-flags) for why this matters.
 
 **When this works:** Standard login flows where you can guarantee `identify()` runs early enough.
 
@@ -197,7 +197,7 @@ Identity coordination means the same user resolves to the same person everywhere
 
 **One function for `distinct_id` in your backend.** PostHog treats `"user-456"` and `"456"` as different people — there's no type coercion or fuzzy matching. Establish a single helper (e.g., `user.posthog_id`) that returns the canonical `distinct_id` string, and use it at every `capture()` call site. Mixing identifier types across call sites is the most common backend-specific identity problem.
 
-**Link IDs on every platform — the exact timing is secondary.** The goal is for every platform to eventually call `identify()` or `alias()` so all `distinct_id` values end up linked to the same person. Once linked, PostHog aggregates events correctly across all of them — insights, funnels, and timelines all resolve through the merged person, regardless of which `distinct_id` each event was originally captured with. You don't need every platform to identify at the exact same moment. If your iOS app identifies during credential creation and your web app identifies after the SPA mounts, that's fine — the merge still happens. The only case where timing matters is [feature flags](/docs/feature-flags/production-ready#resolve-identity-before-evaluating-flags), where the hash input needs to be stable before evaluation.
+**Link IDs on every platform — the exact timing is secondary.** The goal is for every platform to eventually call `identify()` or `alias()` so all `distinct_id` values end up linked to the same person. Once linked, PostHog aggregates events correctly across all of them — insights, funnels, and timelines all resolve through the merged person, regardless of which `distinct_id` each event was originally captured with. You don't need every platform to identify at the exact same moment. If your iOS app identifies during credential creation and your web app identifies after the SPA mounts, that's fine — the merge still happens. The only case where timing matters is [feature flags](/docs/feature-flags/best-practices#resolve-identity-before-evaluating-flags), where the hash input needs to be stable before evaluation.
 
 ## When identity goes wrong
 
@@ -205,7 +205,7 @@ The symptoms vary by feature, but the root cause is always the same – two dist
 
 | Feature | Symptom | What happened |
 |---|---|---|
-| **Feature flags** | Different values before and after login | [Hash input changed](/docs/feature-flags/production-ready#resolve-identity-before-evaluating-flags) |
+| **Feature flags** | Different values before and after login | [Hash input changed](/docs/feature-flags/best-practices#resolve-identity-before-evaluating-flags) |
 | **Experiments** | User in both control and test | Two unlinked persons, each assigned independently |
 | **Experiments** | Exposure exists but conversion missing | Exposure on anonymous ID, conversion on identified ID |
 | **Session replay** | Recording breaks at login | `distinct_id` changed mid-session without linkage |
@@ -235,6 +235,6 @@ If your application generates IDs that could collide with these values (e.g., th
 
 ## Further reading
 
-- [Production-ready feature flags](/docs/feature-flags/production-ready) – why identity matters for flags and experiments (the pure function model)
+- [Production-ready feature flags](/docs/feature-flags/best-practices) – why identity matters for flags and experiments (the pure function model)
 - [Keeping flag evaluations stable](/docs/feature-flags/stable-identity-for-flags) – flag-specific mitigations when you can't fully control the identity flow
 - [Identifying users](/docs/product-analytics/identify) – PostHog's `identify()` API reference

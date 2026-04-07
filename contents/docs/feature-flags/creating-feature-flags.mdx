@@ -183,7 +183,7 @@ Automatically track how often this flag is called and what values are returned. 
 
 Feature flag values are calculated based on a user's properties. Since it's possible for a user to have different properties before and after login, they may receive different feature flag values before and after logging in.
 
-By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same.
+By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same. Before enabling this, make sure your [identity strategy](/docs/feature-flags/stable-identity-for-flags) is set up correctly — see [how this works internally](/docs/feature-flags/stable-identity-for-flags#how-persist-flags-across-authentication-works-internally) for the full picture.
 
 > **Tip:** If your flag targets anonymous users and you just need the flag value to stay consistent through the login flow on the same device, consider using [device bucketing](/docs/feature-flags/device-bucketing) instead. It achieves this without the performance tradeoffs below.
 
