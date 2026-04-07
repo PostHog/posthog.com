@@ -101,7 +101,7 @@ With PostHog set up, let's create a remote config flags to control a message in 
 1. Go to the [feature flags tab](https://us.posthog.com/feature_flags) in PostHog and click **New feature flag**
 2. Enter `welcome-message` as the key
 3. Under **Served value**, select **Remote config (single payload)**
-4. Set the payload to a string `"Welcome to our awesome app!"`
+4. Set the payload to a JSON object: `{"message": "Welcome to our awesome app!"}`
 5. Click **Save**
 
 <ProductScreenshot
@@ -123,7 +123,8 @@ import { Colors } from '@/constants/Colors';
 
 export default function RemoteConfigDemo() {
   const colorScheme = useColorScheme() ?? 'light';
-  const welcomeMessage = useFeatureFlagWithPayload('welcome-message') || 'Welcome!';
+  const payload = useFeatureFlagWithPayload('welcome-message');
+  const welcomeMessage = payload?.message || 'Welcome!';
 
   return (
     <View style={styles.container}>
