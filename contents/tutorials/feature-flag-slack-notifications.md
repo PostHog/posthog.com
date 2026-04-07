@@ -145,11 +145,11 @@ A successful response returns the created Hog function with an `id` field. The d
 
 ## Step 3: Verify in PostHog
 
-After creating the destination, go to [Data Pipelines > Destinations](https://us.posthog.com/pipeline/destinations) in PostHog. You should see **Feature Flag Change Notifier -> Slack** listed and enabled. You can click into it to test, view logs, or adjust settings.
+After creating the destination, go to [Data Pipelines > Destinations](https://us.posthog.com/pipeline/destinations) in PostHog. You should see **Feature Flag Change Notifier -> Slack** listed and enabled. You can click into it to test, view Logs, or adjust settings.
 
-To trigger a test notification, create or update any feature flag in your project.
+To trigger a test notification, create, update, or delete any feature flag in your project.
 
-## Understanding the Hog code
+## Understanding the Hog Code
 
 The Hog function in the JSON above does the following:
 
@@ -172,9 +172,9 @@ The Hog function in the JSON above does the following:
 
 Once enabled, you'll see Slack messages like:
 
-- **Flag created**: "Jane Doe created feature flag new-checkout-flow" with a link to view the flag
-- **Flag updated**: "Jane Doe updated feature flag new-checkout-flow" with details about release conditions, variant changes, and before/after rollout percentages
-- **Flag deleted**: "Jane Doe deleted feature flag new-checkout-flow" with a timestamp and email
+- **Flag created**: `🚩 Jane Doe created feature flag new-checkout-flow` with a link to view the flag
+- **Flag updated**: `✏️ Jane Doe updated feature flag new-checkout-flow` with details about release conditions, variant changes, and before/after rollout percentages
+- **Flag deleted**: `🗑️ Jane Doe deleted feature flag new-checkout-flow` with a timestamp and email
 
 ## Customizing the destination
 
