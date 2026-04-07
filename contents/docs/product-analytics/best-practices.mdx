@@ -82,13 +82,25 @@ All these differences make it more likely that you'll misinterpret your data. Im
 
   - If the property's value is a date or timestamp, include **_date** or **_timestamp** at the end – e.g., `user_creation_date`, `last_login_timestamp`.
 
-## 4. Version your events
+## 4. Design your distinct IDs carefully
+
+Your `distinct_id` is how PostHog links events to a person. If you get it wrong, you'll either fragment a single user across multiple person profiles or funnel unrelated events into the same one – both of which lead to inaccurate analytics, broken funnels, and potentially increased costs and rate limiting.
+
+The most common mistakes:
+
+- **Using a catch-all ID like `"system"` or `"backend"`** for server-side events that aren't tied to a specific user. This funnels all events into a single person profile, triggering rate limiting and unnecessary costs. Send these events with [person processing disabled](/docs/product-analytics/capture-events#how-to-capture-anonymous-events) instead.
+- **Using different ID formats across platforms** – e.g., `"user-456"` on the web and `"USER-456"` on mobile. PostHog treats these as two separate people.
+- **Not linking anonymous and identified IDs** – if you don't call `identify()` at the right time, pre-login events won't be connected to the logged-in user.
+
+For a full guide on choosing and coordinating distinct IDs across environments, see [identity resolution](/docs/product-analytics/identity-resolution).
+
+## 5. Version your events
 
 As your app evolves, so do the events you track. Implementing a versioning system for events ensures you can easily distinguish between older and newer events, especially when significant changes occur.
 
 For example, if you initially tracked an event as `registration:sign_up_button_click` and later revamped your registration flow, you can introduce a new version of this event `registration_v2:sign_up_button_click`. This way, you preserve historical data on the old event while making it easy to compare the impact of your new changes.
 
-## 5. Prefer backend to frontend tracking
+## 6. Prefer backend to frontend tracking
 
 Backend analytics are more reliable than frontend analytics. There are 3 reasons for this:
 
@@ -107,7 +119,7 @@ Where possible, it's a good idea to log events on your server instead of your cl
   - You need accurate data – e.g., the number of users that signed up in the last week.
   - You want to analyze data alongside other business metrics.
 
-## 6. Filter out internal users
+## 7. Filter out internal users
 
 Apps with few users can inadvertently inflate their own metrics by not filtering out their own usage. This leads to a bias in their data. For this reason, it's important to filter out events sent by your own team. 
 
@@ -120,7 +132,7 @@ There are a few ways to do this:
 
 See our guide on [how to filter out internal users](/tutorials/filter-internal-users) for more details on how to do this in PostHog.
 
-## 7. Use the same project for your website and app
+## 8. Use the same project for your website and app
 
 We recommend to track both your marketing site and app in the same [project](/docs/settings/projects). This enables you to do the following:
 
