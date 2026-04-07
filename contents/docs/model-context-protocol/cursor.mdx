@@ -1,0 +1,39 @@
+---
+title: PostHog MCP for Cursor
+sidebarTitle: Cursor
+---
+
+import { MCPConfigSnippet } from '../../../src/components/Product/MCP/MCPConfig'
+import SharedContent from "./_snippets/shared.mdx"
+
+The PostHog [MCP server](https://modelcontextprotocol.io/introduction) enables Cursor to directly interact with your PostHog data – managing feature flags, querying analytics, investigating errors, and more.
+
+## Server URL
+
+| Region | URL |
+|--------|-----|
+| **US** (default) | `https://mcp.posthog.com/mcp` |
+| **EU** | `https://mcp-eu.posthog.com/mcp` |
+
+## Quick install
+
+The [PostHog Wizard](https://github.com/PostHog/wizard) can install the MCP server directly into Cursor:
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+## Manual setup
+
+1. Open [Cursor](https://cursor.com) and navigate to **Cursor Settings > Tools & Integrations**
+2. Click **New MCP Server**
+3. Update `mcp.json` with the following configuration:
+
+<MCPConfigSnippet variant="cursor" />
+
+4. **Save** the configuration file
+5. You should see **posthog** under **MCP Tools** with a green status
+
+When you first use the MCP server, you'll be prompted to log in to PostHog to authenticate.
+
+<SharedContent />

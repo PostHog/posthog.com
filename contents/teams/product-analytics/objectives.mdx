@@ -1,46 +1,49 @@
-### Q1 2026 objectives
+### Q2 2026 objectives
+
+1. Make product analytics AI-ready
+   - Clean charts in the component library
+   - MCP works with insights
+   - Investigate metric skill
+
+2. Long lasting quality improvements (mostly UI, UX, bugs)
+
+3. Keep building the things people need
+   - Data warehouse in insights
+   - Period over period comparison in funnels
+   - Inline events in all charts
+
+### What we’ll ship
 
 #### <TeamMember name="Thomas Obermüller" />
 
-- [Data warehouse support in all insights](https://github.com/PostHog/posthog/issues/24065)
-- [Funnel aggregation on a per step basis (might be necessary for supporting common DHW use cases)](https://github.com/PostHog/posthog/issues/37252)
-- [Allow multiple conversions per user in a funnel insight](https://github.com/PostHog/posthog/issues/27988)
-
-#### <TeamMember name="Anirudh Pillai" />
-
-- AI analysis 2.0
-  - Costing
-  - Rolled out for everyone
-  - For dashboards and important insights, show things like what has changed since last viewed
-  - Improve prompts, suggestions, and context
-  - Metrics on usage and relevancy, with ability to provide feedback
-  - On click interactions from the UI (for example clicking into insights improves suggestions by narrowing down)
-  - Fallback non AI insight suggestions for non scale add on users
-- Organising dashboards and insights with tags and improvements for the all insights and all dashboards page [1](https://github.com/PostHog/posthog/issues/24210)
-- [Behavioral segments in Insights](https://github.com/PostHog/posthog/issues/2594)
-- Retention property aggregation (e.g. revenue retention)
+- Follow up work on data warehouse insights (#3)
+  - Desired outcome: Data warehouse events "just work" in insights; adopted by customers
+- Period over period comparison in funnels (#3)
+  - Desired outcome: Adopted by customers
 
 #### <TeamMember name="Georgis Andonis" />
 
-- Autoname dashboards and insights using AI
-- Dashboard filtering enhancements
-  - Favourite filters (support saving and applying filters) [1](https://github.com/PostHog/posthog/issues/2895) [2](https://github.com/PostHog/posthog/issues/20314)
-  - [Pinned filters and properties](https://github.com/PostHog/posthog/issues/34958)
-  - Most used filters
-- Reduce noise in retention charts
-  - Plot multiple intervals (for example only Week 1 and Week 2)
-  - [Plot multiple cohorts](https://github.com/PostHog/posthog/issues/39227)
-- Inline events for funnels
+- Inline events adoption in retention, stickiness, and lifecycle (#3)
+  - Desired outcome: Establish a mature inline events feature across all insight types, enabling us to replace Actions and eliminate the back-and-forth associated with them. Support all common actions (rename, duplicate, in a separate popover menu)
+- Add missing MCP data retrieval queries: paths, lifecycle, stickiness, actors queriers, enterprise queriers (#1)
+  - Desired outcome: We want to enable other AI agents to interact with the above queries
+- Implement "Investigate metric" skill (#1)
+  - Desired outcome: Allow agents to analyze a metric and find the root cause behind it
 
 #### <TeamMember name="Sam Pennington" />
 
-
-- Improve quality, reduce frequency of regressions:
-  - e2e tests for all core product analytics user flows
-  - Resolve all small to medium sized improvements identified from [historic bug analysis](https://docs.google.com/spreadsheets/d/1hrtT5Yl7B3Yb22GbXW32lpLzctJ6h9vfVo8z8mFHX6k/edit?gid=1380838612#gid=1380838612)
-- Make dashboards less cluttered, overwhelming and easier to edit
+- Create analytics components (charts, tooltips, etc.) in the UI library and use them (#2)
+  - Desired outcome: We have clearer boundaries between insight logic/UI code and less duplication. Makes things easier to reason with, more testable, reduces bugs/papercuts, and brings consistency across PostHog products
+- Add skills to product analytics: insight CRUD, autocapture events, persons... (#1)
+  - Desired outcome: An agent can reliably perform core product analytics tasks
+- Reduce complexity of insights UI (#2)
+  - Desired outcome: Increase conversion of insight created/saved, activation rate
 
 #### <TeamMember name="Mike Warren" />
 
-- Get started with growth reviews
-- Explore PostHog user personalization (vs. global favorites/pins/projects etc.)
+- Improve our methodology for prioritizing feature requests/ideas and tracking outcomes (#3)
+  - Desired outcome: In next quarterly planning, our team has more metric-based outcomes in our "last quarter reflections" than we did this quarter. And the team feels like it's more clear what to work on next.
+- UI/UX review + improvements for the new insight page (including tab switching) (#2)
+  - Desired outcome: This should improve conversion rate of insight create -> insight save. It should also improve avg. # of insight views within 30 days after creating an insight
+- Fix our internal product analytics event tracking (N/A)
+  - Desired outcome: We have a comprehensive, accurate view of insight creates and saves across sources, and we can tie those to where they were created from
