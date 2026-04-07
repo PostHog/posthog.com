@@ -128,7 +128,7 @@ PostHog guarantees event ordering in these cases:
 
 PostHog's SDKs handle batching and sequencing internally, so for a single client instance using an official SDK, ordering is not a concern.
 
-Beyond that, events are not guaranteed to arrive in the order they occurred. Most web and server-side events are ingested within 60 seconds of capture, but mobile clients can delay events by hours or even days – for example, when the app is backgrounded, the device is offline, or the OS defers network activity to save battery. Events for the same user sent from different clients (e.g., a mobile app and a backend server) can also arrive out of order since there's no coordination between API calls from different clients.
+Beyond that, events are not guaranteed to arrive in the order they occurred. Most web and server-side events are ingested within 60 seconds of capture, but mobile clients can delay events by hours or even days – for example, when the app is in the background, the device is offline, or the OS defers network activity to save battery. Events for the same user sent from different clients (e.g., a mobile app and a backend server) can also arrive out of order since there's no coordination between API calls from different clients.
 
 PostHog's SDKs flush events as quickly as possible, but delivery timing is ultimately constrained by the device and network. PostHog ingests events in roughly the order they arrive at the API – it does not buffer or reorder events to account for late-arriving mobile data. This means:
 
@@ -136,7 +136,7 @@ PostHog's SDKs flush events as quickly as possible, but delivery timing is ultim
 - An event that happened first might be ingested after one that happened later.
 - Person properties set with `$set` reflect the last *ingested* value, not the last value by timestamp. Similarly, `$set_once` is claimed by the first *ingested* event, not the earliest by timestamp.
 
-Design your analytics with this in mind. Use event timestamps for time-based analysis rather than relying on ingestion order. Avoid workflows that assume one event will always be processed before another – if ordering matters, build that logic into your application rather than depending on ingestion sequence.
+Design your analytics with this in mind. Use event timestamps for time-based analysis rather than relying on ingestion order. Avoid building logic that assumes one event will always be processed before another – if ordering matters, build that logic into your application rather than depending on ingestion sequence.
 
 ## 8. Filter out internal users
 
