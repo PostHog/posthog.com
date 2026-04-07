@@ -1,28 +1,38 @@
-## Q1 2026
+## Q2 2026
 
-### Objective 1: Signals & Tasks APIs (for app + Array consumption)
+> **Note:** [Q2 planning doc](https://docs.google.com/document/d/1s8LQVo0UThfDx3VSEMBMp1_nmuENRBaiSDKLcTYuol4/edit?tab=t.0)
+>
+> Ownership will be assigned as we prioritize throughout the quarter.
 
-What we’ll ship:
-- Scheduled summarization creating signal groups, which are then turned into tasks (Alex)  
-- Way to schedule summarization: (Alex)  
-  - let user provide golden paths  
-  - let user provide features they care about
+### Objective 1: 1-PR-merged-a-day
 
-### Objective 2: Video-first session summarization
+- Auto-create PRs
+- Auto-creating PR autonomy slider
+- Make PostHog Code Inbox UX spark joy
 
-What we’ll ship:
-- Re-architect session summarization to analyze full videos (Michael)  
-- Basic evals, and lots of prompt tuning for quality (Michael)  
-- Models iteration (Gemini 3/Claude instead of o3) (Alex)
+### Objective 2: Getting users
 
-### Objective 3: Correlating signals across products
+- Make it work for PostHog team 2
+- Run user interviews with active PH Code users
+- Set up Inbox usage/success/costs dashboard
+- Bring back Traces hour for PH Code launch
+- Reliability is non-optional
 
-What we’ll ship:
-- To experiment with: 1\. Matching signals based on relevant time ranges, 2\. Vector similarity search between signal types, 3\. Agent to run search tools to correlate signal types  
-- Vector search DB (Olly)
+### Objective 3: Prioritization
 
-### Objective 4: Video exports infra for exporting a double-digit % of sessions
+- Making the agent run queries to determine if the problem is in a hot path
+- Micro "analyze part of session visually" tool
+- PostHog org member→GH user mapping needed for assignment
+- Meta: Ability to reingest all signals in prod is key
 
-What we’ll ship:
-- Filter periods of inactivity from Replay and skip them when recording/analyzing (Olly)  
-- Replace Playwright with Puppeteer for better quality/FPS of the videos exported (Olly)
+### Objective 5: Prioritized sources
+
+- Session Replay
+- PostHog Support
+- (Other teams integrating: on pause until we have confidence in core sources)
+
+### Objective 6: Experiments
+
+- "AI PM" - product autonomy → agent "owner" per product feature → run em on a cron to check feature status
+- Memory
+- Allow agent to schedule follow-up (esp. for LLMA + replay)
