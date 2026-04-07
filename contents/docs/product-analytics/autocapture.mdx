@@ -23,17 +23,17 @@ PostHog can automatically capture a variety of events in your app without specif
 
 PostHog can automatically capture these types of data without specific tracking code:
 
-| Type                                                                                        | Description                                                                                                                     |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| [Interaction](/docs/product-analytics/autocapture#interaction-autocapture)                  | Captures clicks, taps, and other user interactions                                                                              |
-| [Navigation](/docs/product-analytics/autocapture#navigation-autocapture)                    | Captures pageviews, pageleaves, and screen views                                                                                |
-| [Clipboard](/docs/product-analytics/autocapture#clipboard-autocapture)                      | Captures copy and paste actions                                                                                                 |
-| [Heatmap](/docs/product-analytics/autocapture#heatmap-autocapture)                          | Shows where users interact with your product the most                                                                           |
-| [Dead clicks](/docs/product-analytics/autocapture#dead-clicks-autocapture)                  | Captures clicks that don't trigger a change to the page                                                                         |
-| [Exception](/docs/error-tracking/start-here)                                                | Captures errors and crashes. See the [error tracking](/docs/error-tracking/start-here) docs for more information.               |
-| [Session](/docs/session-replay/installation)                                                | Records real user behavior for playback. See the [session replay](/docs/session-replay/installation) docs for more information. |
-| [Web vitals](/docs/web-analytics/web-vitals)                                                | Captures largest contentful paint, first input delay, cumulative layout shift, and first contentful paint                       |
-| [Lifecycle](/docs/product-analytics/autocapture#navigation-and-lifecycle-event-autocapture) | Captures app launches, backgrounds, and updates.                                                                                |
+| Type                                                                                         | Description                                                                                                                     |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| [Interaction](/docs/product-analytics/autocapture#interaction-autocapture)                   | Captures clicks, taps, and other user interactions                                                                              |
+| [Navigation](/docs/product-analytics/autocapture#navigation-and-lifecycle-event-autocapture) | Captures pageviews, pageleaves, and screen views                                                                                |
+| [Clipboard](/docs/product-analytics/autocapture#clipboard-autocapture)                       | Captures copy and paste actions                                                                                                 |
+| [Heatmap](/docs/product-analytics/autocapture#heatmap-autocapture)                           | Shows where users interact with your product the most                                                                           |
+| [Dead clicks](/docs/product-analytics/autocapture#dead-clicks-autocapture)                   | Captures clicks that don't trigger a change to the page                                                                         |
+| [Exception](/docs/error-tracking/start-here)                                                 | Captures errors and crashes. See the [error tracking](/docs/error-tracking/start-here) docs for more information.               |
+| [Session](/docs/session-replay/installation)                                                 | Records real user behavior for playback. See the [session replay](/docs/session-replay/installation) docs for more information. |
+| [Web vitals](/docs/web-analytics/web-vitals)                                                 | Captures largest contentful paint, first input delay, cumulative layout shift, and first contentful paint                       |
+| [Lifecycle](/docs/product-analytics/autocapture#navigation-and-lifecycle-event-autocapture)  | Captures app launches, backgrounds, and updates.                                                                                |
 
 ## Supported SDKs
 
@@ -119,10 +119,7 @@ posthog.init('<ph_project_token>', {
 
 #### Disabling interaction autocapture
 
-You can disable interaction autocapture in two ways:
-
-- In your [project settings](https://us.posthog.com/project/settings)
-- By setting `autocapture: false` in the [config](/docs/libraries/js/config)
+You can disable interaction autocapture by setting `autocapture: false` in the [SDK config](/docs/libraries/js/config):
 
 ```js-web
 // Before initialization
@@ -136,9 +133,7 @@ posthog.init('<ph_project_token>', {
 posthog.set_config({ autocapture: false })
 ```
 
-> **Note:** Disabling interaction autocapture in your project settings isn't instant. PostHog will continue to capture interaction events where it is initialized. Instead, autocaptured events will taper off as users trigger reinitialization of PostHog (like when they reload your site).
->
-> Disabling **interaction** autocapture does not disable **navigation** autocapture (pageviews and pageleaves). See [navigation autocapture](#navigation-and-lifecycle-event-autocapture) for how to disable those separately.
+> **Note:** Disabling **interaction** autocapture does not disable **navigation** autocapture (pageviews and pageleaves). See [navigation autocapture](#navigation-and-lifecycle-event-autocapture) for how to disable those separately.
 
 #### Capturing additional properties in autocapture events
 
