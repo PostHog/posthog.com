@@ -85,7 +85,8 @@ export const experiments = {
         {
             title: 'Experiment types',
             headline: 'Choose the right metric for your goal and track side effects across your product.',
-            description: 'Supports conversion funnels, count-based trends, value-based metrics, and custom metrics',
+            description:
+                'Supports conversion funnels, count-based trends, value-based metrics, retention metrics, and ratio metrics',
             features: [
                 {
                     title: 'Funnel metrics',
@@ -123,7 +124,7 @@ export const experiments = {
                 {
                     title: 'A/A testing',
                     description:
-                        'Test identical variants to validate your setup and ensure results aren’t biased by random chance.',
+                        'Run a test with no changes between variants to verify your experiment setup is working correctly and not producing false positives.',
                 },
                 {
                     title: 'A/B/N testing',
@@ -133,7 +134,7 @@ export const experiments = {
                 {
                     title: 'Holdout testing',
                     description:
-                        'Reserve a group of users who don’t see any changes, so you can measure long-term impact against a true baseline.',
+                        "Reserve a group of users who don't see any changes, so you can measure long-term impact against a true baseline.",
                 },
                 {
                     title: 'Fake door testing',
@@ -239,7 +240,7 @@ export const experiments = {
                 {
                     title: 'Feature flag foundation',
                     description:
-                        'Experiments run on PostHog’s battle-tested feature flag infrastructure, with full support across all major SDKs.',
+                        "Experiments run on PostHog's battle-tested feature flag infrastructure, with full support across all major SDKs.",
                 },
                 {
                     title: 'JSON payloads',
@@ -272,7 +273,7 @@ export const experiments = {
             },
             {
                 title: 'A/A tests',
-                description: 'to test one idea against itself',
+                description: 'to verify our experiment setup produces no false positives',
             },
             {
                 title: 'A/B/N tests',
@@ -403,17 +404,17 @@ export const experiments = {
         overview:
             '<strong>Presenter notes:</strong> Test product changes and measure their true impact. Run experiments on funnels like a signup flow, on single events such as revenue, or on advanced metrics like ratios. Track unlimited metrics to see how experiments affect other parts of your app and user journeys. Our Bayesian and frequentist engines provide clear, statistically rigorous results so you can make confident, data-backed decisions.',
         customers:
-            'Y Combinator tested small changes systematically and saw a 40% engagement boost. ResearchGate runs experiments on 25 million users. Vendasta tested "insignificant" ideas and got 30% more registrations. They all move fast because they\'re not waiting weeks for "significance".',
+            'Y Combinator tested small changes systematically and saw a 40% engagement boost. ResearchGate runs experiments on 25 million users. Vendasta tested "insignificant" ideas and got 30% more registrations.',
         features:
-            '<strong>Experiments:</strong> Pick a metric. Test funnels, clicks, revenue, whatever. Add secondary metrics to catch side effects (like signups up but activation down).<br /><br /><strong>Statistical analysis:</strong> Check results day 1, day 3, or day 30 - it won\'t mess up your stats. (Other tools punish you for "peeking".) We let <em>you</em> decide when you have enough evidence.<br /><br /><strong>Bayesian statistical engine:</strong> You can make better data decisions with statistically-significant probability. For example, "95% probability on variant B is better by 5-10%" vs. not null hypothesis rejection nonsense. See the likely impact range so you can weigh improvement vs implementation cost.<br /><br /><strong>Flexible experiment types:</strong> Test anything - conversion rates, average order value, session time, feature depth. Shared metrics library means define once, use them across PostHog.<br /><br /><strong>Smart recommendations:</strong> We analyze your data and give you accurate predictions: "5% improvement with high variance? 6 weeks." "50% improvement on stable metric? 1 week." It also catches sample ratio mismatch (ie: your randomization is broken).<br /><br /><strong>Advanced targeting:</strong> For example, test pricing for US users who joined after Jan 1st. Or enterprise features for 100+ employee companies. B2B? Run group-level experiments so everyone at a company sees the same thing.<br /><br /><strong>Developer-friendly implementation:</strong> Every experiment is just a feature flag but with a powerful engine on top. Same SDKs, same infrastructure. Local evaluation, bootstrapping, JSON payloads - all included.',
+            '<strong>Experiments:</strong> Pick a metric. Test funnels, clicks, revenue, whatever. Add secondary metrics to catch side effects (like signups up but activation down).<br /><br /><strong>Bayesian statistical engine:</strong> Get results as probabilities — e.g. "95% chance variant B improves conversion by 5-10%." See the likely impact range so you can weigh improvement vs implementation cost.<br /><br /><strong>Flexible experiment types:</strong> Test anything - conversion rates, average order value, session time, feature depth. Shared metrics library means define once, use them across PostHog.<br /><br /><strong>Smart recommendations:</strong> We analyze your data and give you accurate predictions: "5% improvement with high variance? 6 weeks." "50% improvement on stable metric? 1 week." It also catches sample ratio mismatch (ie: your randomization is broken).<br /><br /><strong>Advanced targeting:</strong> For example, test pricing for US users who joined after Jan 1st. Or enterprise features for 100+ employee companies. B2B? Run group-level experiments so everyone at a company sees the same thing.<br /><br /><strong>Developer-friendly implementation:</strong> Every experiment is just a feature flag but with a powerful engine on top. Same SDKs, same infrastructure. Local evaluation, bootstrapping, JSON payloads - all included.',
         // answers:
         // "These questions reflect real decisions teams face every day. Testing a new onboarding flow? Set up a funnel experiment measuring completion rates. Geographic differences matter—our automatic IP resolution lets you analyze results by region without manual setup. For B2B products, group-level experiments ensure everyone at a company sees the same experience, avoiding the confusion of user-level randomization. Revenue experiments need special care—make sure you're tracking the full customer journey, not just the purchase event. And yes, you should test that social proof—we've seen it increase conversions by 20-40% for many teams.",
         pricing:
-            'Experiments are billed as feature flag requests since that\'s what they are under the hood. You get 1 million requests free per month, then pay-as-you-go after that. This is radically different from tools like Optimizely that can run 5-figures annually for experimentation. With PostHog, a typical B2C app running 5-10 experiments might use 10-20 million requests per month. That\'s a few hundred dollars, not tens of thousands. And you get all features—no "enterprise" tier needed for basic functionality like API access or custom metrics. And the best part: get it all without "jumping on a quick call with sales!"',
+            'Experiments are billed as feature flag requests since that\'s what they are under the hood. You get 1 million requests free per month, then pay-as-you-go after that. This is radically different from tools like Optimizely that can run 5-figures annually for experimentation. With PostHog, a typical B2C app running 5-10 experiments might use 10-20 million requests per month. That\'s a few hundred dollars, not tens of thousands. And you get all features—no "enterprise" tier needed for basic functionality like API access or advanced metrics. And the best part: get it all without "jumping on a quick call with sales!"',
         'comparison-summary':
-            "The experimentation landscape has three camps: dedicated tools like Optimizely, analytics add-ons like Amplitude, and integrated platforms like PostHog. Optimizely is powerful but expensive and complex. Amplitude requires you to already use Amplitude. PostHog gives you experimentation as part of a complete platform. Our Bayesian engine is genuinely differentiated – most tools still use frequentist statistics that don't let you check results early. We also uniquely support group-level experiments for B2B products and integrate deeply with session replay for qualitative insights.",
+            'The experimentation landscape has three camps: dedicated tools like Optimizely, analytics add-ons like Amplitude, and integrated platforms like PostHog. Optimizely is powerful but expensive and complex. Amplitude requires you to already use Amplitude. PostHog gives you experimentation as part of a complete platform with both Bayesian and frequentist engines. We also support group-level experiments for B2B products and integrate deeply with session replay for qualitative insights.',
         'feature-comparison':
-            "This comparison highlights our unique strengths. PostHog Experiments is the only tool that lets you check results anytime without statistical penalties – a huge advantage for fast-moving teams. Group-level experiments are exclusive to PostHog, critical for B2B products. The integrated session replay means you can watch users in each variant to understand the 'why' behind the numbers. Our shared metrics library ensures consistency across experiments.",
+            "This comparison highlights our unique strengths. Group-level experiments are exclusive to PostHog, critical for B2B products. The integrated session replay means you can watch users in each variant to understand the 'why' behind the numbers. Our shared metrics library ensures consistency across experiments.",
         docs: "Our experimentation docs go deep into the statistical methodology because we believe you should understand the tools you're using. We explain Bayesian vs. frequentist approaches, sequential testing, and why we've made certain choices. But we also keep it practical with guides on common patterns: testing pricing changes, optimizing onboarding funnels, and measuring long-term impact.",
         'pairs-with':
             "PostHog Experiments truly shine when combined with our other products. Start with an experiment on a new feature, then use product analytics to dive deeper than your primary metric—maybe conversion increased but time-to-convert also increased. Watch session recordings of users in each variant to see exactly how they interact differently. If the experiment wins, roll it out gradually using the same feature flag. This integrated workflow means you're not jumping between tools or trying to match user IDs across systems. It's one platform where everything connects.",
