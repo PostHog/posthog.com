@@ -6,9 +6,9 @@ contentMaxWidthClass: max-w-5xl
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import OSButton from 'components/OSButton'
-import Alpha from './_snippets/alpha.mdx'
+import SupportAlpha from './_snippets/alpha.mdx'
 
-<Alpha />
+<SupportAlpha />
 
 <QuestLog firstSpeechBubble="Let's set up customer support!" lastSpeechBubble="You're ready to help your users!">
 
@@ -79,6 +79,26 @@ Three ways to create tickets from Slack:
 
 <OSButton variant="primary" asLink to="/docs/support/slack">
   Set up Slack integration
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Connect Email"
+    subtitle="Optional"
+    icon="IconMail"
+>
+
+Let customers reach you by email. Incoming emails become support tickets in PostHog, and your replies are sent back as emails — keeping the full conversation threaded in both PostHog and the customer's inbox.
+
+1. **Add an email address** — e.g. `support@company.com`
+2. **Set up forwarding** — forward incoming mail to the PostHog forwarding address
+3. **Verify your domain** — add SPF and DKIM DNS records so PostHog can send replies on your behalf
+
+You can connect up to 10 email addresses per project (e.g. `support@`, `billing@`, `sales@`).
+
+<OSButton variant="primary" asLink to="/docs/support/email">
+  Set up email channel
 </OSButton>
 
 </QuestLogItem>
