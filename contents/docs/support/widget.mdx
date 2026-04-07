@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import Alpha from './_snippets/alpha.mdx'
+import Alpha from "./_snippets/alpha.mdx";
 
 <Alpha />
 
@@ -24,24 +24,24 @@ The widget appears as a floating button on your site. By default it appears in t
 
 These settings are configured in the **In-app widget** section of Support settings.
 
-| Setting | Description | Options | Default |
-|---------|-------------|---------|--------|
-| **Enable widget** | Show the chat widget on your site | `true`, `false` | `false` |
-| **Button color** | Primary color for the widget (hex) | Any hex color | `#5375ff` |
-| **Widget position** | Position of the widget on screen | `bottom_right`, `bottom_left`, `top_right`, `top_left` | `bottom_right` |
-| **Greeting message** | Welcome text shown when widget opens | Any string | `"Hi! How can we help?"` |
-| **Allowed domains** | Restrict which domains can show the widget | Array of domain strings | `[]` (all domains) |
+| Setting              | Description                                | Options                                                | Default                  |
+| -------------------- | ------------------------------------------ | ------------------------------------------------------ | ------------------------ |
+| **Enable widget**    | Show the chat widget on your site          | `true`, `false`                                        | `false`                  |
+| **Button color**     | Primary color for the widget (hex)         | Any hex color                                          | `#5375ff`                |
+| **Widget position**  | Position of the widget on screen           | `bottom_right`, `bottom_left`, `top_right`, `top_left` | `bottom_right`           |
+| **Greeting message** | Welcome text shown when widget opens       | Any string                                             | `"Hi! How can we help?"` |
+| **Allowed domains**  | Restrict which domains can show the widget | Array of domain strings                                | `[]` (all domains)       |
 
 ## Identification form
 
 You can optionally require users to identify themselves before starting a conversation:
 
-| Setting | Description | Default |
-|---------|-------------|---------|
-| **Require email** | Users must enter their email to start chatting | `false` |
-| **Collect name** | Additionally collect the user's name | `false` |
-| **Form title** | Heading shown on the identification form | `"Before we start..."` |
-| **Form description** | Subtext shown below the title | `"Please provide your details so we can help you better."` |
+| Setting              | Description                                    | Default                                                    |
+| -------------------- | ---------------------------------------------- | ---------------------------------------------------------- |
+| **Require email**    | Users must enter their email to start chatting | `false`                                                    |
+| **Collect name**     | Additionally collect the user's name           | `false`                                                    |
+| **Form title**       | Heading shown on the identification form       | `"Before we start..."`                                     |
+| **Form description** | Subtext shown below the title                  | `"Please provide your details so we can help you better."` |
 
 When enabled, the form appears before the user can send their first message. The collected information is used to link the ticket to a person in PostHog.
 
@@ -52,10 +52,10 @@ You can restrict which domains the widget appears on for security:
 ```javascript
 // Configured in PostHog settings
 domains: [
-  "example.com",              // Exact match
-  "*.example.com",            // Wildcard: matches sub.example.com
-  "https://app.example.com"   // With protocol (protocol is stripped)
-]
+  "example.com", // Exact match
+  "*.example.com", // Wildcard: matches sub.example.com
+  "https://app.example.com", // With protocol (protocol is stripped)
+];
 ```
 
 If `domains` is empty or not set, the widget shows on all domains.
@@ -66,16 +66,17 @@ Use the JavaScript API to programmatically show or hide the widget:
 
 ```javascript
 // Show the widget (renders it if not already rendered)
-posthog.conversations.show()
+posthog.conversations.show();
 
 // Hide and remove the widget from DOM
-posthog.conversations.hide()
+posthog.conversations.hide();
 
 // Check if widget is currently visible
-const isVisible = posthog.conversations.isVisible()
+const isVisible = posthog.conversations.isVisible();
 ```
 
 This is useful for:
+
 - Showing the widget only on certain pages
 - Triggering the widget from a custom button
 - Hiding the widget during specific user flows
@@ -85,9 +86,9 @@ This is useful for:
 You can disable conversations entirely via the PostHog init config:
 
 ```javascript
-posthog.init('<ph_project_token>', {
-  disable_conversations: true  // Prevents loading the conversations module
-})
+posthog.init("<ph_project_token>", {
+  disable_conversations: true, // Prevents loading the conversations module
+});
 ```
 
 This is different from hiding the widget – it completely disables the feature.
@@ -108,6 +109,12 @@ If the page URL contains a `ph_conv_restore` query parameter (from clicking the 
 ## Email notifications
 
 Configure your team to receive email alerts when new tickets arrive.
+
+<CalloutBox icon="IconInfo" title="Organization admin required" type="action">
+
+Only organization admins can configure email notification settings, including connecting or disconnecting email channels and selecting notification recipients.
+
+</CalloutBox>
 
 ### Setting up notifications
 
