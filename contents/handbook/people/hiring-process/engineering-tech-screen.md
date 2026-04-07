@@ -56,7 +56,7 @@ The best preparation is reflection. More concretely, here's what we recommend:
 - **Think about systems you've built or worked on.** What went well? What would you change? What broke, and why? The ability to reflect honestly on past work is one of the strongest signals we see.
 - **Practice thinking out loud.** Walk through your thought process, even when you're uncertain — especially when you're uncertain. The interviewer can only evaluate reasoning they can hear.
 - **Get comfortable with ambiguity.** The problem will be open-ended on purpose. There is no single correct answer. We want to see how you navigate uncertainty.
-- **Brush up on fundamentals, not trivia.** You should be comfortable with concepts like caching, queueing, database indexing, API design, and data modeling. You don't need to know the exact configuration flags for any particular technology.
+- **Brush up on fundamentals, not trivia.** You should understand how the building blocks of modern systems work and when to reach for them. You don't need to know the exact configuration flags for any particular technology.
 
 ## What not to worry about
 
