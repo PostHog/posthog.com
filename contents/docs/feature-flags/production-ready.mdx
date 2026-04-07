@@ -78,6 +78,8 @@ If you call `identify()` after a flag has already been evaluated, the flag likel
 
 Call [`identify()`](/docs/product-analytics/identify) before any flag evaluation in auth flows. If you can't guarantee that timing, [bootstrap](/docs/feature-flags/bootstrapping) with the stable ID at init so the distinct ID is correct from the first millisecond. See [keeping flag evaluations stable](/docs/feature-flags/stable-identity-for-flags) for the full picture.
 
+**SPA-specific timing.** In single-page applications, `identify()` and event captures often fire from different components during the same navigation in unpredictable order. The SDK updates the `distinct_id` synchronously when `identify()` runs, but if `capture()` was called first in the same execution frame, that event uses the anonymous ID. The fix: call `identify()` before the navigation that mounts post-auth components — in Vue, in `beforeEach` before `next()`; in React, before `navigate()`, not in a `useEffect` inside the target route.
+
 ### Don't rely on flag persistence to fix identity gaps
 
 If you've enabled [experience continuity](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional) (flag persistence across authentication), consider what that's telling you: the distinct ID is changing during the user's session, and you need PostHog to paper over it.
@@ -139,6 +141,8 @@ if (posthog.getFeatureFlag('my-experiment') === 'test') {
 ```
 
 Handle it with [bootstrap](/docs/feature-flags/bootstrapping) (preferred) or `onFeatureFlags()` (adds a loading state). You can check the current identity with `posthog.get_distinct_id()`.
+
+The "not loaded yet" return value varies across SDKs — some return `undefined`/`nil`/`None`, others return `false` or a `defaultValue` you provide. Don't assume that a falsy return means the flag is off. Check your SDK's documentation for the exact return type of `getFeatureFlag()` and `isFeatureEnabled()` when flags haven't loaded, and handle that state explicitly. If your goal is to programmatically check whether a flag exists at all, use the [feature flags API](/docs/api/feature-flags) to query flag definitions directly.
 
 ## Flag hygiene
 

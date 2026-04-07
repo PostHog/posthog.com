@@ -60,6 +60,23 @@ See [Creating feature flags – persisting across authentication](/docs/feature-
 
 Use experience continuity only when device bucketing and the stable ID approaches aren't feasible. It comes at a cost: a database read and write on every evaluation, no support for [local evaluation](/docs/feature-flags/local-evaluation), and a [known issue](https://github.com/PostHog/posthog-js/issues/2623) where values can still change after `identify()`.
 
+<details>
+<summary>How "persist flags across authentication" works internally</summary>
+
+When a flag has this setting enabled (the `ensure_experience_continuity` API field), the flags service uses the original anonymous hash key for evaluations even after the `distinct_id` changes:
+
+1. **Override write.** When the SDK calls `/flags` with both `distinct_id` (the new identified ID) and `$anon_distinct_id` (the previous anonymous ID), the flags service writes a hash key override to the database. The override maps the person to the original anonymous ID for that flag key.
+
+2. **Override read.** On subsequent `/flags` requests for the identified `distinct_id`, the service looks up stored overrides and uses the original anonymous ID as the hash input instead of the current `distinct_id`.
+
+3. **Write timing matters.** Overrides are written during `/flags` requests, not during `identify()` events. The web SDK handles this automatically — after `identify()`, it reloads flags and sends `$anon_distinct_id` along with the request, which triggers the override write. Server-side SDKs must include `$anon_distinct_id` in their flag evaluation calls — either as a top-level field in direct `/flags` HTTP requests, or via `person_properties` (the Rust flags service checks both locations, with top-level taking precedence).
+
+4. **Requires `person_profiles: 'always'`.** The override is stored against a `person_id`. With `identified_only`, no person record exists during anonymous activity, so the write fails silently. The SDK clears `$anon_distinct_id` after the request regardless, so no retry happens.
+
+5. **Optimization for 100% rollout.** Flags at 100% rollout with no multivariate variants return the same value regardless of hash input, so the database lookup is skipped automatically.
+
+</details>
+
 ## Cross-device consistency
 
 Device-scoped solutions (device bucketing, cookie-based stable IDs) don't span devices. If a user logs in on their phone and laptop, each device hashes independently.
@@ -72,6 +89,16 @@ Flag condition: where cohort = "beta-users" → show feature
 ```
 
 Person properties resolve server-side against the person record. The same person matches the same conditions regardless of device. This reframes the question: instead of "how do I make the hash stable across devices," ask "how do I target users based on who they are?"
+
+### Multi-platform consistency
+
+If the same user has flags evaluated on multiple platforms simultaneously (web SDK, mobile SDK, and backend local evaluation), consistency depends on the flag type:
+
+**Property-targeted flags** resolve against the person record, so they're consistent as long as properties are synced across platforms. Ensure every SDK has access to the properties you're targeting on — see [cross-environment consistency](/docs/product-analytics/identity-resolution#cross-environment-consistency) for how to coordinate this.
+
+**Percentage-rollout flags** (including experiments) use the hash of `flag_key + distinct_id`. The hash is deterministic, so if every platform uses the same `distinct_id`, they produce the same result. Ensure your [backend uses the same `distinct_id` string](/docs/product-analytics/identity-resolution#cross-environment-consistency) as your client SDKs.
+
+To guarantee consistency across platforms for experiments, evaluate flags on your server and distribute results to clients via [bootstrap](/docs/feature-flags/bootstrapping) or your own API response — one evaluation, one authoritative result.
 
 ## Choosing the right pattern
 
