@@ -199,6 +199,28 @@ The symptoms vary by feature, but the root cause is always the same – two dist
 
 In every case, the fix is upstream: ensure the right identity strategy is in place and that IDs are linked before the events that need to be connected.
 
+## Catch-all distinct IDs
+
+Some applications send server-side events using a shared distinct ID like `"system"`, `"backend"`, or `"cron"` for events that aren't tied to a specific user – background jobs, system health checks, automated workflows, and similar.
+
+This is a problem when person processing is enabled (the default). PostHog creates a single person profile for that distinct ID, and every event funnels into it. As this profile accumulates thousands or millions of events, it causes:
+
+- **Rate limiting** – PostHog applies per-distinct-ID rate limits to protect the ingestion pipeline. A catch-all ID will hit these limits, causing events to be dropped.
+- **Increased costs** – identified events (with person processing) cost up to 4x more per event than anonymous events. Sending high-volume system events as identified is an unnecessary expense.
+- **Unusable data** – a single person profile containing events from unrelated system processes has no analytical value.
+
+To fix this, disable person processing for these events. Set `$process_person_profile` to `false` and PostHog skips the person lookup entirely. The event is ingested and stored without creating or updating a person profile.
+
+```javascript
+posthog.capture('batch_job_completed', {
+    job_name: 'nightly_sync',
+    duration_ms: 4500,
+    $process_person_profile: false
+})
+```
+
+If you do need these events tied to a real user (e.g., a background job running on behalf of a specific user), use that user's actual distinct ID instead of a shared one.
+
 ## How to verify identity is correct
 
 Pick any user in PostHog. Click into their person profile. You should see:
