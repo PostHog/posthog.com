@@ -1,38 +1,57 @@
 ## Q2 2026
 
-> **Note:** [Q2 planning doc](https://docs.google.com/document/d/1s8LQVo0UThfDx3VSEMBMp1_nmuENRBaiSDKLcTYuol4/edit?tab=t.0)
->
-> Ownership will be assigned as we prioritize throughout the quarter.
+For reference (internal-only): [Q2 planning doc](https://docs.google.com/document/d/1s8LQVo0UThfDx3VSEMBMp1_nmuENRBaiSDKLcTYuol4/edit?tab=t.0)
 
-### Objective 1: 1-PR-merged-a-day
+Going as far as it takes to make users feel Inbox is not just "cool" - but awesome.
 
+Principles:
+- We eat our own dog food - PostHog Inc. has to be a set of happy Inbox users, and we have a path to that
+- Reliabiltity is non-optional - explicitly allocating time to reliability, including devex 
+
+_Ownership will be assigned as we prioritize throughout the quarter. Michael makes sure this happens as team lead._
+
+### Objective 1: One PR merged a day
+
+Self-driving has to deliver concrete code to review and merge:
 - Auto-create PRs
-- Auto-creating PR autonomy slider
-- Make PostHog Code Inbox UX spark joy
+- Allow users to configure the level of confidence for PR creation
+- Make PostHog Code Inbox UX must spark joy
+- Run user interviews
+  - Annika will be running interviews with active PH Code users, we should take part
 
-### Objective 2: Getting users
+### Objective 2: Prioritization
 
-- Make it work for PostHog team 2
-- Run user interviews with active PH Code users
-- Set up Inbox usage/success/costs dashboard
-- Bring back Traces hour for PH Code launch
-- Reliability is non-optional
-
-### Objective 3: Prioritization
-
+Serving "One PR merged a day": 
+Prioritization in the inbox has to always surfaces slam dunks above noise:
 - Making the agent run queries to determine if the problem is in a hot path
-- Micro "analyze part of session visually" tool
-- PostHog org member→GH user mapping needed for assignment
-- Meta: Ability to reingest all signals in prod is key
+- "Analyze part of session visually" tool for research
+- Seamless PostHog org member→GH user mapping (for owner assignment)
+- Ability to reingest all signals in prod
+  - Plus ability fo filter by pipeline version
 
-### Objective 5: Prioritized sources
+### Objective 3: Sources
 
-- Session Replay
+Specific sources have to result in salient inbox items:
+- Error Tracking
+- Linear
+- GitHub Issues
+- Zendesk
 - PostHog Support
-- (Other teams integrating: on pause until we have confidence in core sources)
+- Later in the quarter: Session Replay (much higher-effort w/ Replay team collab)
+  - Michael to write a spec for the person who'll help us ship here
 
-### Objective 6: Experiments
+Other teams integrating: on pause until we have confidence in these core sources.
+
+### Objective 4: Experiments
+
+We're in delivery mode with PostHog Code launch, but when we have solid footing there. We should get back into some experimentation – we think we have some ideas that _may_ take the product to the next level, but they need to be actually tested:
 
 - "AI PM" - product autonomy → agent "owner" per product feature → run em on a cron to check feature status
 - Memory
 - Allow agent to schedule follow-up (esp. for LLMA + replay)
+
+### Non-objective: Pricing
+
+Pricing is not a priority before we feel that the Inbox is indeed _awesome_. We should just keep track of costs to keep an eye:
+
+- Set up Inbox usage/success/costs dashboard
