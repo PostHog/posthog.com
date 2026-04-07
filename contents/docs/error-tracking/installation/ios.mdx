@@ -13,3 +13,8 @@ See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard
 -->
 
 <ErrorTrackingIOSInstallationWrapper />
+
+# Limitations:
+
+ - System symbols and frames are not symbolicated (UIKit, Foundation, etc.) ([issue](https://github.com/PostHog/posthog/issues/50614)).
+ - Swift crashes appear as `SIGTRAP` without the actual error message ([issue](https://github.com/PostHog/posthog-ios/issues/522)).
