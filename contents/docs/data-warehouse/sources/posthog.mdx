@@ -319,6 +319,50 @@ Supported integration kinds include: `slack`, `salesforce`, `hubspot`, `google-a
 
 > **Note:** Sensitive configuration like credentials and tokens is deliberately excluded from this table for security reasons.
 
+### `system.logs_alerts`
+
+The `system.logs_alerts` table contains log alert configurations that monitor log volume and notify when thresholds are breached. Alerts use an N-of-M evaluation model where the alert fires when `datapoints_to_alarm` (N) out of the last `evaluation_periods` (M) checks breach the threshold.
+
+| Column                   | Description                                               |
+| ------------------------ | --------------------------------------------------------- |
+| `id`                     | Unique identifier for the alert                           |
+| `team_id`                | Team ID the alert belongs to                              |
+| `name`                   | Name of the alert                                         |
+| `enabled`                | Whether the alert is actively evaluated (1 = yes, 0 = no) |
+| `filters`                | JSON containing log filter criteria                       |
+| `threshold_count`        | Number of log entries that triggers the alert             |
+| `threshold_operator`     | Threshold direction: `above` or `below`                   |
+| `window_minutes`         | Time window in minutes to evaluate                        |
+| `check_interval_minutes` | How often the alert is checked (minutes)                  |
+| `state`                  | Current alert state (see values below)                    |
+| `evaluation_periods`     | Number of periods in the evaluation window (M in N-of-M)  |
+| `datapoints_to_alarm`    | Breaches needed to fire (N in N-of-M)                     |
+| `cooldown_minutes`       | Minutes to wait after firing before re-evaluating         |
+| `snooze_until`           | Snooze expiry timestamp                                   |
+| `next_check_at`          | When the next evaluation is scheduled                     |
+| `last_notified_at`       | When subscribers were last notified                       |
+| `last_checked_at`        | When the alert was last evaluated                         |
+| `consecutive_failures`   | Number of consecutive evaluation failures                 |
+| `created_at`             | When the alert was created                                |
+| `updated_at`             | When the alert was last updated                           |
+
+State values include `not_firing`, `firing`, `pending_resolve`, `errored`, and `snoozed`.
+
+### `system.logs_views`
+
+The `system.logs_views` table contains saved log views — named filter configurations that users create to quickly access frequently-used log queries.
+
+| Column       | Description                                                   |
+| ------------ | ------------------------------------------------------------- |
+| `id`         | Unique identifier for the log view                            |
+| `team_id`    | Team ID the log view belongs to                               |
+| `short_id`   | URL-friendly short identifier                                 |
+| `name`       | Display name of the log view                                  |
+| `filters`    | JSON containing saved filter criteria                         |
+| `pinned`     | Whether the view is pinned for quick access (1 = yes, 0 = no) |
+| `created_at` | When the log view was created                                 |
+| `updated_at` | When the log view was last updated                            |
+
 ### `system.notebooks`
 
 The `system.notebooks` table contains notebook metadata from your project.
