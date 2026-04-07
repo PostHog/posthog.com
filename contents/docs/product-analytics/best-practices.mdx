@@ -119,7 +119,26 @@ Where possible, it's a good idea to log events on your server instead of your cl
   - You need accurate data – e.g., the number of users that signed up in the last week.
   - You want to analyze data alongside other business metrics.
 
-## 7. Filter out internal users
+## 7. Be aware of client-side event buffering
+
+PostHog guarantees event ordering in these cases:
+
+- Events with the same `distinct_id` within a single API call are processed in order.
+- Events with the same `distinct_id` across sequential API calls are processed in order, as long as you wait for each response before sending the next call.
+
+PostHog's SDKs handle batching and sequencing internally, so for a single client instance using an official SDK, ordering is not a concern.
+
+Beyond that, events are not guaranteed to arrive in the order they occurred. Most web and server-side events are ingested within 60 seconds of capture, but mobile clients can delay events by hours or even days – for example, when the app is backgrounded, the device is offline, or the OS defers network activity to save battery. Events for the same user sent from different clients (e.g., a mobile app and a backend server) can also arrive out of order since there's no coordination between API calls from different clients.
+
+PostHog's SDKs flush events as quickly as possible, but delivery timing is ultimately constrained by the device and network. PostHog ingests events in roughly the order they arrive at the API – it does not buffer or reorder events to account for late-arriving mobile data. This means:
+
+- Events from the same user can arrive out of chronological order.
+- An event that happened first might be ingested after one that happened later.
+- Person properties set with `$set` reflect the last *ingested* value, not the last value by timestamp. Similarly, `$set_once` is claimed by the first *ingested* event, not the earliest by timestamp.
+
+Design your analytics with this in mind. Use event timestamps for time-based analysis rather than relying on ingestion order. Avoid workflows that assume one event will always be processed before another – if ordering matters, build that logic into your application rather than depending on ingestion sequence.
+
+## 8. Filter out internal users
 
 Apps with few users can inadvertently inflate their own metrics by not filtering out their own usage. This leads to a bias in their data. For this reason, it's important to filter out events sent by your own team. 
 
@@ -132,7 +151,7 @@ There are a few ways to do this:
 
 See our guide on [how to filter out internal users](/tutorials/filter-internal-users) for more details on how to do this in PostHog.
 
-## 8. Use the same project for your website and app
+## 9. Use the same project for your website and app
 
 We recommend to track both your marketing site and app in the same [project](/docs/settings/projects). This enables you to do the following:
 
