@@ -3,9 +3,9 @@ title: Upload dSYMs for iOS
 showStepsToc: true
 ---
 
-import CLIDownload from "../_snippets/cli/download.mdx"
-import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
-import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
+import CLIDownload from "../_snippets/cli/download.mdx";
+import CLIAuthenticate from "../_snippets/cli/authenticate.mdx";
+import StepVerifySymbolSetsUpload from "../_snippets/StepVerifySymbolSetsUpload";
 
 <CalloutBox icon="IconInfo" title="CLI version requirement" type="action">
 
@@ -17,7 +17,7 @@ A minimum CLI version of [0.7.5](https://github.com/PostHog/posthog/releases/tag
 
 <Step title="Download CLI" badge="required">
 
-<CLIDownload/>
+<CLIDownload />
 
 </Step>
 
@@ -38,10 +38,10 @@ In Xcode, configure your build settings to generate dSYMs:
 5. Make sure Release configurations have **DWARF with dSYM File**
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/DWARF_and_d_SYM_xcode_settings_light_f6a8bb74c3.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/DWARF_and_d_SYM_xcode_settings_7b2c628b52.png"
-    alt="Xcode dSYM setting"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/DWARF_and_d_SYM_xcode_settings_light_f6a8bb74c3.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/DWARF_and_d_SYM_xcode_settings_7b2c628b52.png"
+  alt="Xcode dSYM setting"
+  classes="rounded"
 />
 
 <CalloutBox icon="IconWarning" title="Disable User Script Sandboxing" type="action">
@@ -53,9 +53,8 @@ You must disable User Script Sandboxing for the upload script to work:
 
 **Why is this required?**
 
-When User Script Sandboxing is enabled, Xcode only allows run scripts to access files explicitly specified in the build phase's **Input Files**. 
+When User Script Sandboxing is enabled, Xcode only allows run scripts to access files explicitly specified in the build phase's **Input Files**.
 The dSYM upload script needs to walk directories to locate and read dSYM bundles, and execute `posthog-cli` which are currently not allowed with User Script Sandboxing enabled.
-
 
 </CalloutBox>
 
@@ -101,7 +100,6 @@ By default, only debug symbols are uploaded. To include source code snippets in 
 
 1. In the Run Script build phase, click the chevron to expand
 2. Set the **environment Variable** when calling the upload script:
-
 
 <MultiLanguage>
 
@@ -154,10 +152,10 @@ view.addSubview(button)
 
 </MultiLanguage>
 
-2. Build and run your app in Xcode, 
-    - Make sure the debugger is not attached, since it will intercept the crash and prevent the report from being collected. You can: 
-        - Detach the debugger (click the stop button in Xcode) and run the app directly from the device/simulator home screen
-        - Or uncheck "Debug executable" in the scheme settings before running
+2. Build and run your app in Xcode,
+   - Make sure the debugger is not attached, since it will intercept the crash and prevent the report from being collected. You can:
+     - Detach the debugger (click the stop button in Xcode) and run the app directly from the device/simulator home screen
+     - Or uncheck "Debug executable" in the scheme settings before running
 
 3. Reopen the app from your device or simulator's home screen (not from Xcode).
 
@@ -205,3 +203,21 @@ Verify that `DEBUG_INFORMATION_FORMAT` is set to **DWARF with dSYM File** for th
 ### Script fails with "content_hash_mismatch"
 
 This happens when the upload script runs before Xcode finishes generating the dSYM files. Leave **Based on dependency analysis** enabled and add `$(DWARF_DSYM_FOLDER_PATH)/$(DWARF_DSYM_FILE_NAME)/Contents/Resources/DWARF/$(EXECUTABLE_NAME)` to the **Input Files** of the Run Script build phase. This makes Xcode wait for the app's dSYM contents before running the upload script.
+
+### Re-uploading dSYMs with different content
+
+By default, if a symbol set with the same UUID already exists on the server, it is not overwritten. To force overwriting existing symbol sets (for example, to add source files to a previously source-less upload), set the `POSTHOG_FORCE` environment variable:
+
+<MultiLanguage>
+
+```bash file=Swift Package Manager
+POSTHOG_FORCE=1 ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh
+```
+
+```bash file=CocoaPods
+POSTHOG_FORCE=1 ${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
+```
+
+</MultiLanguage>
+
+**Note:** When `POSTHOG_INCLUDE_SOURCE=1` is set, the `--force` flag is automatically enabled.
