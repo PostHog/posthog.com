@@ -14,6 +14,7 @@ export const surveys = {
     color: 'salmon',
     colorSecondary: 'red',
     category: 'communication',
+    shortDescription: 'Ask users anything with no-code surveys',
     seo: {
         title: 'Surveys – Collect product feedback with PostHog',
         description:
@@ -394,6 +395,8 @@ export const surveys = {
     },
     ai: {
         // title: '',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_aeb8302376.png',
+        imageAlt: 'PostHog AI and surveys',
         description: 'build surveys more efficiently',
         skills: [
             'Generate complete surveys based on your research goals',

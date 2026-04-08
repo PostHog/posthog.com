@@ -8,7 +8,6 @@ This works in any MCP client – Cursor, Windsurf, Claude Code, VS Code, and oth
 
 ## How it works
 
-
 With MCP, your coding agent can:
 
 - **Run ad-hoc queries** – "How many `purchase_completed` events happened this week?" to quickly check data
@@ -21,28 +20,28 @@ With MCP, your coding agent can:
 
 The MCP server provides these tools for running SQL:
 
-| Tool | Description |
-|------|-------------|
-| `query-run` | Run a HogQL query and return results. Supports any valid HogQL syntax including joins, CTEs, subqueries, and window functions. |
+| Tool                                 | Description                                                                                                                                                                                             |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `query-run`                          | Run a HogQL query and return results. Supports any valid HogQL syntax including joins, CTEs, subqueries, and window functions.                                                                          |
 | `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Returns the query string so you can review or modify it before running. Requires [AI data processing approval](/docs/posthog-ai/allow-access). |
-| `property-definitions` | List all event and person properties in your project. Useful for understanding what data is available before writing a query. |
-| `event-definitions-list` | List all event definitions in your project with volume and usage data. |
+| `property-definitions`               | List all event and person properties in your project. Useful for understanding what data is available before writing a query.                                                                           |
+| `event-definitions-list`             | List all event definitions in your project with volume and usage data.                                                                                                                                  |
 
 ## View management tools
 
 The MCP server also provides tools for managing [Data Warehouse views](/docs/data-warehouse/views):
 
-| Tool | Description |
-|------|-------------|
-| `warehouse-saved-queries-list` | List all saved views in your project with their materialization status, sync frequency, and column schema. |
-| `warehouse-saved-queries-retrieve` | Get full details of a specific view by ID, including its HogQL query and run history. |
-| `warehouse-saved-queries-create` | Create a new view from a HogQL query. Upserts by name if a view with the same name exists. |
-| `warehouse-saved-queries-partial-update` | Update a view's name, HogQL query, or sync frequency. |
-| `warehouse-saved-queries-destroy` | Delete a view (soft delete). |
-| `warehouse-saved-queries-materialize-create` | Enable materialization for a view with a 24-hour refresh schedule. |
-| `warehouse-saved-queries-revert-materialization-create` | Revert a materialized view back to a virtual query. |
-| `warehouse-saved-queries-run-create` | Trigger a manual refresh of a materialized view. |
-| `warehouse-saved-queries-run-history-retrieve` | Get the last 5 materialization run statuses for a view. |
+| Tool                 | Description                                                                                                |
+| -------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `view-list`          | List all saved views in your project with their materialization status, sync frequency, and column schema. |
+| `view-get`           | Get full details of a specific view by ID, including its HogQL query and run history.                      |
+| `view-create`        | Create a new view from a HogQL query. Upserts by name if a view with the same name exists.                 |
+| `view-update`        | Update a view's name, HogQL query, or sync frequency.                                                      |
+| `view-delete`        | Delete a view (soft delete).                                                                               |
+| `view-materialize`   | Enable materialization for a view with a 24-hour refresh schedule.                                         |
+| `view-unmaterialize` | Revert a materialized view back to a virtual query.                                                        |
+| `view-run`           | Trigger a manual refresh of a materialized view.                                                           |
+| `view-run-history`   | Get the last 5 materialization run statuses for a view.                                                    |
 
 ## Example prompts
 
