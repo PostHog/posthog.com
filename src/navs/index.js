@@ -4561,6 +4561,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/go',
                         },
                         {
+                            name: 'PHP',
+                            url: '/docs/error-tracking/installation/php',
+                        },
+                        {
                             name: 'iOS',
                             url: '/docs/error-tracking/installation/ios',
                         },
@@ -5105,6 +5109,12 @@ export const docsMenu = {
                     name: 'Slack integration',
                     url: '/docs/support/slack',
                     icon: 'IconMessage',
+                    color: 'orange',
+                },
+                {
+                    name: 'Email channel',
+                    url: '/docs/support/email',
+                    icon: 'IconMail',
                     color: 'orange',
                 },
                 {
