@@ -1,6 +1,6 @@
 ---
 title: 'Untangling Tokio and Rayon in production: From 2s latency spikes to 94ms flat'
-date: 2026-04-01
+date: 2026-04-08
 rootPage: /blog
 sidebar: Blog
 showTitle: true
