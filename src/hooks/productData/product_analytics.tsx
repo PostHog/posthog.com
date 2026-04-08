@@ -394,7 +394,7 @@ export const productAnalytics = {
             title: 'MCP',
             headline: 'Analyze product usage from your editor',
             description:
-                'Connect any MCP client to PostHog and query your analytics from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+                'Query trends, funnels, retention, and usage metrics from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
             icon: <IconPlug />,
             color: 'blue',
             features: [
