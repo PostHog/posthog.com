@@ -10,6 +10,17 @@ Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/feature-f
 See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
 -->
 
-import { FFJSWebInstallationWrapper } from './_snippets/ff-js-web-installation-wrapper.tsx'
+import { FFJSWebInstallationWrapper } from "./_snippets/ff-js-web-installation-wrapper.tsx";
 
 <FFJSWebInstallationWrapper />
+
+## Understanding flag return values
+
+Boolean and multivariate flags return different values:
+
+- **Boolean flags** – `isFeatureEnabled('flag-key')` returns `true` if the user matches a release condition, `false` otherwise.
+- **Multivariate flags** – `getFeatureFlag('flag-key')` returns the **variant key** the user has been assigned to (e.g., `'control'`, `'variant-a'`), or `false` if the flag is disabled for them.
+
+For multivariate flags, checking if a flag is "enabled" means checking which **specific variant** the user is assigned to — not just whether the flag is active. Use `getFeatureFlag()` and compare the result to the variant key you want to handle.
+
+For more details on flag types, see [creating feature flags](/docs/feature-flags/creating-feature-flags#step-3-choose-a-feature-flag-type-required).
