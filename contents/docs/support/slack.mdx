@@ -4,14 +4,14 @@ sidebar: Docs
 showTitle: true
 ---
 
-import Alpha from './_snippets/alpha.mdx'
+import SupportAlpha from './_snippets/alpha.mdx'
 
-<Alpha />
+<SupportAlpha />
 
 The **SupportHog** Slack bot connects your Slack workspace to PostHog Support, enabling two-way sync between Slack conversations and support tickets.
 
-- **Slack to PostHog** — messages in Slack automatically create support tickets and add comments
-- **PostHog to Slack** — team replies in PostHog are posted back to the Slack thread
+- **Slack to PostHog** – messages in Slack automatically create support tickets and add comments
+- **PostHog to Slack** – team replies in PostHog are posted back to the Slack thread
 
 This is separate from PostHog's main Slack integration (used for alerts and dashboards). SupportHog has its own bot, credentials, and event handling.
 
@@ -20,7 +20,7 @@ This is separate from PostHog's main Slack integration (used for alerts and dash
 1. Go to **Support > Settings** in PostHog
 2. Click **Add SupportHog to Slack**
 3. Authorize the app in your Slack workspace
-4. Select a **support channel** — messages posted there automatically become tickets
+4. Select a **support channel** – messages posted there automatically become tickets
 5. You're redirected back to PostHog settings
 
 <CalloutBox icon="IconInfo" title="One workspace per project" type="fyi">
@@ -35,9 +35,9 @@ After connecting, configure the integration in **Support > Settings**:
 
 | Setting | Description | Default |
 |---------|-------------|---------|
-| **Support channel** | Every top-level message in this channel becomes a ticket. Thread replies sync as ticket messages. | — |
+| **Support channel** | Every top-level message in this channel becomes a ticket. Thread replies sync as ticket messages. | – |
 | **Ticket emoji** | React with this emoji on any message in any channel to create a ticket from it. | `:ticket:` |
-| **Bot mentions** | Always active — `@SupportHog` in any channel creates a ticket from that message. | — |
+| **Bot mentions** | Always active – `@SupportHog` in any channel creates a ticket from that message. | – |
 
 ### Picking a support channel
 
@@ -100,4 +100,4 @@ To remove the Slack integration:
 1. Go to **Support > Settings**
 2. Click **Disconnect** in the Slack section
 
-Existing tickets created from Slack are not affected — they remain in your inbox but will no longer sync new messages.
+Existing tickets created from Slack are not affected – they remain in your inbox but will no longer sync new messages.
