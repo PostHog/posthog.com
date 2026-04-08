@@ -1,0 +1,66 @@
+---
+title: Build insights with MCP
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) gives your AI coding agent direct access to PostHog analytics. Query trends, funnels, retention, and custom HogQL – all from your code editor.
+
+This works in any MCP client – Cursor, Windsurf, Claude Code, VS Code, and others.
+
+## How it works
+
+With MCP, your coding agent can:
+
+- **Check feature performance** before making code changes – "How many users are using the new search feature this week?"
+- **Pull conversion rates** into your workflow – "What's the funnel conversion from signup to first project?"
+- **Investigate metric changes** – "Did the login success rate change after last Tuesday's deploy?"
+- **Build insights on demand** – "Create a trend showing daily active users broken down by plan"
+
+## Analytics tools
+
+The MCP server provides these tools for working with Product Analytics:
+
+| Tool | Description |
+|------|-------------|
+| `query-run` | Run any analytics query – trends, funnels, retention, lifecycle, paths, stickiness, or custom HogQL. Returns results directly in your editor. |
+| `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Useful when you want to inspect or modify the query before running it. |
+| `insight-create-from-query` | Create a saved insight from a query and optionally add it to a dashboard. |
+| `insight-get` | Get details for a specific insight by ID. |
+| `insights-get-all` | List all insights in the current project. Filter by name or type. |
+| `insight-query` | Run the query behind a saved insight and return fresh results. |
+| `insight-update` | Update a saved insight's name, description, or query. |
+| `insight-delete` | Delete a saved insight. |
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `How is the new checkout flow performing compared to last week?`
+- `Show me the top 10 events by volume today.`
+- `Create a funnel from user_signed_up to project_created to insight_viewed.`
+- `What's the retention rate for users who completed onboarding?`
+- `Run a HogQL query to find the most active users by event count this month.`
+
+## Dashboard tools
+
+You can also create and manage dashboards from your editor:
+
+| Tool | Description |
+|------|-------------|
+| `dashboard-create` | Create a new dashboard. |
+| `dashboard-get` | Get a dashboard and its tiles. |
+| `dashboards-get-all` | List all dashboards in the project. |
+| `add-insight-to-dashboard` | Add an existing insight to a dashboard. |
+| `dashboard-update` | Update a dashboard's name or description. |
+| `dashboard-delete` | Delete a dashboard. |
+
+## Install the MCP server
+
+The recommended way to install is with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+The wizard supports Claude, Cursor, Windsurf, VS Code, and more. You can also [configure it manually](/docs/model-context-protocol#manual-install).
+
+See the [MCP server docs](/docs/model-context-protocol) for full setup instructions.

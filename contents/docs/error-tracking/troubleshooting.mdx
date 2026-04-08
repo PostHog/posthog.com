@@ -13,7 +13,7 @@ This page covers troubleshooting for Error Tracking. For setup, see the [install
 If PostHog isn't capturing errors:
 
 1. Use the [SDK Doctor](/docs/sdk-doctor) to verify your SDKs are updated to the latest version
-2. Verify **exception capture** is enabled in [project settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture)
+2. Verify **exception capture** is enabled in the [**Configuration** tab](https://app.posthog.com/project/2/error_tracking?activeTab=configuration#selectedSetting=error-tracking-exception-autocapture) in Error Tracking
 3. Only unhandled exceptions auto-capture. For caught errors, use `posthog.captureException()`:
 
     ```js
@@ -30,7 +30,7 @@ If PostHog isn't capturing errors:
 
 If stack traces show minified code instead of original source:
 
-1. Verify source maps are uploaded to the correct project by navigating to [Error Tracking](https://app.posthog.com/error_tracking) and selecting **Configure** > **Symbol sets**. You'll also see warnings for missing symbol sets
+1. Verify source maps are uploaded to the correct project by navigating to [Error Tracking](https://app.posthog.com/project/2/error_tracking?activeTab=configuration#selectedSetting=error-tracking-symbol-sets). You'll see warnings for missing symbol sets
 2. Source map paths must match your production bundle URLs exactly
 3. Upload source maps *before* deploying code that references them
 
@@ -112,11 +112,11 @@ To debug:
 
 ## Grouping or assignment rules disabled
 
-Rules can become disabled if PostHog encounters a processing error while evaluating the rule during exception ingestion. When a rule is disabled, a banner appears in the [error tracking settings](https://app.posthog.com/error_tracking/configuration) showing the error message.
+Rules can become disabled if PostHog encounters a processing error while evaluating the rule during exception ingestion. When a rule is disabled, a banner appears in the [Error Tracking **Configuration** tab](https://us.posthog.com/error_tracking) showing the error message.
 
 To fix and re-enable a disabled rule:
 
-1. Go to your [custom grouping rules](/docs/error-tracking/grouping-issues#custom-grouping-rule) or [auto assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment) in the error tracking settings
+1. Go to your [custom grouping rules](/docs/error-tracking/grouping-issues#custom-grouping-rule) or [auto assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment) in the **Configuration** tab
 2. Find the rule with the disabled banner and review the error message
 3. Edit the rule to correct the configuration issue
 4. Save the rule – this automatically re-enables it

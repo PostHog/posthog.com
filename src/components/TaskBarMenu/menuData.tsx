@@ -489,6 +489,11 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Product Engineer Handbook',
+                    link: '/product-engineer',
+                },
+                {
+                    type: 'item',
                     label: 'Product engineers hub',
                     link: '/product-engineers',
                 },
@@ -528,6 +533,11 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Roadmap',
                     link: '/roadmap',
+                },
+                {
+                    type: 'item',
+                    label: 'WIP',
+                    link: '/wip',
                 },
                 {
                     type: 'item',
@@ -706,6 +716,11 @@ export function useMenuData(): MenuType[] {
                             type: 'item',
                             label: 'HIPAA',
                             link: '/docs/privacy/hipaa-compliance',
+                        },
+                        {
+                            type: 'item',
+                            label: 'Subprocessors',
+                            link: '/subprocessors',
                         },
                     ],
                 },

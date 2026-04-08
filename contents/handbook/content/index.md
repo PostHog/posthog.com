@@ -92,7 +92,7 @@ Tips for writing a good post:
 
 - Write a brief summary of the post while sharing as much content as possible in it. [Good example](https://x.com/posthog/status/1851571551314825375).
 
-- Attach an image to the post (don't rely on the link's social graph preview). Again, you can use **Add entry** in the [changelog](/changelog/) to create a nice image.
+- Attach an image to the post (don't rely on the link's social graph preview). Again, you can use **Add entry** in the [changelog](/changelog) to create a nice image.
 
 - Do your best not to sound "corporate" or serious. Authenticity is appreciated on Twitter. Have fun with it!
 

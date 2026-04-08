@@ -1,6 +1,6 @@
-**Data Team's Mission at PostHog**
+**ClickHouse Team's Mission at PostHog**
 
-Data Team's mission is to provide a storage and query engine that meets these requirements:
+ClickHouse Team's mission is to provide a storage and query engine that meets these requirements:
 - Continue to meet the needs of the product today now and in the future
 - Maintain and optimize our current ClickHouse deployment
 - Elastically scale our capacity with little effort
@@ -10,26 +10,43 @@ Data Team's mission is to provide a storage and query engine that meets these re
 - Tunable execution performance to allow trade-offs between cost and performance
 - Storage is durable
 
-In service of this mission, our goals are:
+In service of this mission, our objectives for Q2 2026 are:
 
-**Goals for Q1 2026:**
+**Objective 1: Spread load on Clickhouse across purpose driven clusters <TeamMember name="Rory Shanks" />**  
+Motivation: All in one means load cannot be spread to specific workloads or products \- one workload scales all others  
+What we will ship:
 
-**Resharding (P0)** - _Daniel Escribano_, _Rory Shanks_
-- Reshard US cluster to 8 shards
+* OPs cluster for all observability, non customer facing workloads  
+* Sessions cluster  
+* AI “heavy” events cluster  
+* (Insert other appropriate clusters here)   
+* (Zoo|Clickhouse)Keeper migration  
+* Cluster upgrades to get the gains that help us here
 
-**Storage optimizations (P0)** - _Rory Shanks_
-- Tables optimizations (resharding of events_recent, person)
-- Drop unused materialized columns
-- Rewrite `cohortpeople`
-- Track and provide visibility into disk usage cost by team
+**Objective 2: No one customer affects another customer <TeamMember name="Paweł Szczur" />**  
+Motivation: We still have the possibility for a single expensive customer to negatively impact *all* other customers  
+What we will ship:
 
-**Data deletion requests (P0)** - _Jovan Sakovic_
-- Enable event deletion from the app based on user-defined predicates (P1)
+* Every single query is tagged across multiple dimensions  
+* We control the query control plane (API between the app and Clickhouse)  
+* We are able to throttle or drop by team,product,priority,etc.  
+* We will have a manual system and some sort of automated system  
+* Will support Robbie and co on the query performance optimization side of things
 
-**Query cost visibility through Chargeback (P1)** - _Pawel Szczur_
-- Continue work on chargeback reporting to track query costs
-- Provide visibility into expensive queries with tooling to help teams debug and optimize them
+**Objective 3: Operational tooling for managing our clusters is better <TeamMember name="Bryan Ciaraldi" />**  
+Motivation: Normal operations and incidents are intensely time consuming and slow all of us down.   
+What we will ship:
 
-**Workload management (P1)** - _Daniel Escribano_
-- Implement quotas and workload management to prioritize application queries
+* Better standardisation of configs across envs (better, more enforced IaC)  
+* Make sure migrations are possible and ideally delightful in this topology  
+* HouseKeeper \- AI tooling etc. that helps to debug live issues (and any other tooling we can find)  
+* Ship more info into the ops cluster so we can hit it harder and build strong dashboards \-  
+* MCP connection to OPs cluster via AWS bedrock (so we never have to limit ourselves due to data protection)
 
+**Objective 4: Data deletion is self-serve (at least internally) <TeamMember name="Rory Shanks" />**  
+Motivation: This comes up all the time from customers  
+What we will ship:
+
+* Cluster updates to enable part rewriting on demand  
+* A proper concept in place for storing scheduled deletions / being able to visualise / debug this etc.  
+* Some sort of self serve interface (can for starters be internal for support/ops)

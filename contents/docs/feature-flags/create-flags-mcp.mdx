@@ -1,0 +1,51 @@
+---
+title: Create Feature Flags with MCP
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent create and manage [Feature Flags](/docs/feature-flags) directly from your code editor. Create flags, configure targeting rules, and check rollout status – without switching to the PostHog app.
+
+This works in any MCP client – Cursor, Windsurf, Claude Code, VS Code, and others.
+
+## How it works
+
+With MCP, your coding agent can:
+
+- **Create flags while building features** – "Create a flag called `new-search` rolled out to 10% of users" as part of your development workflow
+- **Check flag status before deploying** – "Which feature flags are active in production?" to verify your deploy won't conflict
+- **Clean up stale flags** – "Find flags not evaluated in 90 days" and remove the dead code
+- **Update rollout rules** – "Roll out `dark-mode` to 50%" or "add the beta-testers cohort to the `new-dashboard` flag"
+
+## Feature flag tools
+
+The MCP server provides these tools for working with Feature Flags:
+
+| Tool | Description |
+|------|-------------|
+| `create-feature-flag` | Create a new feature flag with rollout percentage, targeting rules, and optional multivariate variants. |
+| `feature-flag-get-definition` | Get the full definition of a flag, including filters, groups, and payloads. |
+| `feature-flag-get-all` | List all feature flags in the current project. Filter by active/inactive status. |
+| `update-feature-flag` | Update a flag's rollout percentage, targeting rules, or variants. |
+| `delete-feature-flag` | Delete a feature flag. |
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `Create a feature flag called new-checkout-flow rolled out to 20% of users on the pro plan.`
+- `Show me all active feature flags.`
+- `Which flags haven't been modified in the last 90 days?`
+- `Update the dark-mode flag to roll out to 100% of users.`
+- `Create a multivariate flag called button-color with three variants: red, blue, and green.`
+- `Delete the old-pricing-test flag.`
+
+## Install the MCP server
+
+The recommended way to install is with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+The wizard supports Claude, Cursor, Windsurf, VS Code, and more. You can also [configure it manually](/docs/model-context-protocol#manual-install).
+
+See the [MCP server docs](/docs/model-context-protocol) for full setup instructions.
