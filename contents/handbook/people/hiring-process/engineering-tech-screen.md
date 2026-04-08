@@ -13,11 +13,13 @@ The technical screen is a 60 minute architecture and design discussion with one 
 
 ## What we're evaluating
 
+The session is intended to discover where your knowledge is wide and where your knowledge is deep. The best candidates tell us when they're communicating their direct experience, when they're talking about work they were close to but not part of, and when they've not done something but know that's how to solve that type of problem.
+
 ### System design instincts
 
 We want to see well-developed intuition for how systems work in practice – choosing the right tool for the job, understanding where complexity is warranted, and reasoning about what happens as requirements change. This is about technical depth and breadth, not just scale.
 
-For example: how would you design a notification system that needs to reach millions of users without overwhelming downstream services? If you're building a deployment pipeline, where do you put the guardrails so a bad deploy doesn't take down production?
+For example (not from what we'll discuss): how would you design a notification system that needs to reach millions of users without overwhelming downstream services? If you're building a deployment pipeline, where do you put the guardrails so a bad deploy doesn't take down production?
 
 Strong candidates reach for these concepts naturally as part of their design.
 
