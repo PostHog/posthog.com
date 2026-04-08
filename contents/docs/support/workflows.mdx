@@ -4,11 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-import Alpha from './_snippets/alpha.mdx'
+import SupportAlpha from './_snippets/alpha.mdx'
 
-<Alpha />
+<SupportAlpha />
 
-Support integrates with [Workflows](/docs/workflows) to automate ticket management. Tickets emit events that trigger workflows, and workflow actions can update tickets — setting SLAs, changing status, assigning tickets, and more.
+Support integrates with [Workflows](/docs/workflows) to automate ticket management. Tickets emit events that trigger Workflows, and Workflow actions can update tickets – setting SLAs, changing status, assigning tickets, and more.
 
 ```
 Ticket event
@@ -20,7 +20,7 @@ Hog function executes
 Ticket updated
 ```
 
-Updates made by workflows do **not** re-emit ticket events, so you won't get infinite loops.
+Updates made by Workflows do **not** re-emit ticket events, so you won't get infinite loops.
 
 ## Trigger events
 
@@ -144,7 +144,7 @@ Changes one or more fields on a ticket. Only the fields you provide are changed.
 | `priority` | choice | No | `low`, `medium`, `high` |
 | `sla_amount` | string | No | Duration until SLA expires. Use `clear` to remove. |
 | `sla_unit` | choice | No | `minute`, `hour`, or `day` (default: `hour`) |
-| `assignee` | assignee | No | Assign to a user or role. Set to null to unassign. |
+| `assignee` | assignee | No | Assign to a user or role. Set to null to remove assignment. |
 | `tags` | tags | No | Replace all tags on the ticket. |
 
 <CalloutBox icon="IconWarning" title="Tags replace, not append" type="caution">
@@ -332,7 +332,7 @@ Track how many tickets go through the pending state by adding a tag.
 tags = ["awaiting-customer"]
 ```
 
-### 11. Full SLA workflow with priority and channel
+### 11. Full SLA Workflow with priority and channel
 
 A comprehensive example combining multiple conditions for SLA, priority, and assignment.
 
@@ -395,7 +395,7 @@ In the ticket list, SLAs show as one of three states:
 
 ## Important notes
 
-- **No infinite loops** — updates made by workflows (via the external API) do not re-emit ticket events. A workflow that changes a ticket's status will not trigger the "status changed" workflow again.
-- **Event properties vs ticket data** — event properties give you a snapshot at the time of the event. If you need the latest ticket state (e.g. `message_count` or `sla_due_at`), use the **Get ticket** action first.
-- **Tags replace, not append** — the `tags` input on Update ticket replaces all existing tags. Merge manually if you need to preserve existing tags.
-- **Rate limits** — the external API used by workflows is rate-limited to 60 requests/minute and 600 requests/hour per team.
+- **No infinite loops** – updates made by Workflows (via the external API) do not re-emit ticket events. A Workflow that changes a ticket's status will not trigger the "status changed" Workflow again.
+- **Event properties vs ticket data** – event properties give you a snapshot at the time of the event. If you need the latest ticket state (e.g. `message_count` or `sla_due_at`), use the **Get ticket** action first.
+- **Tags replace, not append** – the `tags` input on Update ticket replaces all existing tags. Merge manually if you need to preserve existing tags.
+- **Rate limits** – the external API used by Workflows is rate-limited to 60 requests/minute and 600 requests/hour per team.

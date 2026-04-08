@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-import Alpha from './_snippets/alpha.mdx'
+import SupportAlpha from './_snippets/alpha.mdx'
 
-<Alpha />
+<SupportAlpha />
 
 The JavaScript API at `posthog.conversations` gives you full programmatic control over support conversations. Use it to build custom support interfaces or integrate support into your existing UI.
 
@@ -48,9 +48,9 @@ const response = await posthog.conversations.sendMessage(
 ```
 
 **Parameters:**
-- `message` (string) - The message text to send
-- `userTraits` (optional) - Object with `name` and/or `email` for user identification
-- `newTicket` (optional, boolean) - If `true`, creates a new ticket even if one exists
+- `message` (string) – The message text to send
+- `userTraits` (optional) – Object with `name` and/or `email` for user identification
+- `newTicket` (optional, boolean) – If `true`, creates a new ticket even if one exists
 
 **Response:**
 ```typescript
@@ -179,7 +179,7 @@ Conversations work with both anonymous and identified users.
 
 ### Anonymous users
 
-Messages are associated with the widget session ID. The user maintains access to their conversation across page loads.
+Messages are associated with the widget session ID. Access to the conversation persists across page loads.
 
 ### Identified users
 
@@ -256,7 +256,7 @@ await posthog.conversations.requestRestoreLink('user@example.com')
 This sends an email containing a recovery link to the provided address. The link includes a `ph_conv_restore` token as a query parameter and expires after one hour.
 
 **Parameters:**
-- `email` (string) - The email address used in previous conversations
+- `email` (string) – The email address used in previous conversations
 
 The method is rate limited. If you send too many requests, it throws an error with a 429 status.
 
@@ -297,7 +297,7 @@ In addition to the widget events above, the following server-side events are cap
 
 | Event | Description | Properties |
 |-------|-------------|------------|
-| `$conversation_ticket_created` | A new support ticket was created | — |
+| `$conversation_ticket_created` | A new support ticket was created | – |
 | `$conversation_ticket_status_changed` | Ticket status was updated | `old_status`, `new_status` |
 | `$conversation_ticket_priority_changed` | Ticket priority was updated | `old_priority`, `new_priority` |
 | `$conversation_ticket_assigned` | Ticket was assigned to a team member or AI | `assignee_type`, `assignee_id` |
@@ -310,7 +310,7 @@ These events integrate with the rest of PostHog – use them in funnels, cohorts
 
 ## Persistence
 
-The SDK persists the following data in localStorage:
+The SDK persists the following data in `localStorage`:
 - Widget session ID (for access control)
 - Current ticket ID (to continue conversations)
 - Widget state (open/closed)
@@ -318,7 +318,7 @@ The SDK persists the following data in localStorage:
 
 This data is cleared when:
 - `posthog.reset()` is called
-- The user clears browser storage
+- Browser storage is cleared
 
 ## Error handling
 
