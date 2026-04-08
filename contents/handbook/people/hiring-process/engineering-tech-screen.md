@@ -15,17 +15,17 @@ The technical screen is a 60 minute architecture and design discussion with one 
 
 ### System design instincts
 
-We want to see that you have well-developed intuition for how systems behave at scale — the kind of technical depth and breadth that comes from building real things. You should be able to reason about what happens when things grow, even if you haven't personally operated massive infrastructure.
+We want to see well-developed intuition for how systems work in practice – choosing the right tool for the job, understanding where complexity is warranted, and reasoning about what happens as requirements change. This is about technical depth and breadth, not just scale.
 
 For example: how would you design a notification system that needs to reach millions of users without overwhelming downstream services? If you're building a deployment pipeline, where do you put the guardrails so a bad deploy doesn't take down production?
 
-Strong candidates reach for these concepts naturally as part of their design, rather than waiting to be prompted.
+Strong candidates reach for these concepts naturally as part of their design.
 
 ### The "why" behind your decisions
 
 We want to hear *why* you'd choose a given technology. Saying "I'd use Postgres" is fine. Saying "I'd use Postgres here because the access patterns are relational and consistency matters more than write throughput for this part of the system" is much better.
 
-Every design decision involves tradeoffs. We want to hear you articulate them — even when there isn't a clear winner. Showing that you understand the costs of your choices matters a lot.
+Every design decision involves tradeoffs. We want to hear you articulate them – even when there isn't a clear winner. Knowing when *not* to use a technology is just as valuable as knowing when to reach for it. Showing that you understand the costs of your choices matters a lot.
 
 ### Problem-solving approach
 
@@ -54,7 +54,7 @@ In the interview, this shows up as taking ownership of the problem. Drive the co
 The best preparation is reflection. More concretely, here's what we recommend:
 
 - **Think about systems you've built or worked on.** What went well? What would you change? What broke, and why? The ability to reflect honestly on past work is one of the strongest signals we see.
-- **Practice thinking out loud.** Walk through your thought process, even when you're uncertain — especially when you're uncertain. The interviewer can only evaluate reasoning they can hear.
+- **Practice thinking out loud.** Walk through your thought process, even when you're uncertain – especially when you're uncertain. The interviewer can only evaluate reasoning they can hear.
 - **Get comfortable with ambiguity.** The problem will be open-ended on purpose. There is no single correct answer. We want to see how you navigate uncertainty.
 - **Brush up on fundamentals, not trivia.** You should understand how the building blocks of modern systems work and when to reach for them. You don't need to know the exact configuration flags for any particular technology.
 
@@ -68,6 +68,6 @@ The best preparation is reflection. More concretely, here's what we recommend:
 
 We want this to feel like a working session. The interviewer is there to collaborate with you, ask follow-up questions, and sometimes push back on your ideas. If something isn't clear, ask. If you want to change direction, say so. The best interviews feel like a conversation between two engineers solving a problem together.
 
-After the technical screen, you'll meet one of our co-founders or execs for a short culture and motivation chat, followed by a [PostHog SuperDay](/handbook/people/hiring-process#4-posthog-superday). You can read more about the [full interview process](/handbook/people/hiring-process).
+If you pass the technical screen, you'll meet one of our co-founders or execs for a short culture and motivation chat, followed by a [PostHog SuperDay](/handbook/people/hiring-process#4-posthog-superday). You can read more about the [full interview process](/handbook/people/hiring-process).
 
-Good luck — we're rooting for you.
+Good luck – we're rooting for you.
