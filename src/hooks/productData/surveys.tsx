@@ -4,6 +4,7 @@ import OSButton from 'components/OSButton'
 import { IconJavaScript, IconApple, IconAndroid, IconReactNative, IconFlutter } from 'components/OSIcons'
 import Link from 'components/Link'
 import { Shadow } from '@inkeep/cxkit-react'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const surveys = {
     Icon: IconMessage,
@@ -318,6 +319,30 @@ export const surveys = {
                     ),
                 },
             ],
+        },
+        {
+            title: 'MCP',
+            headline: 'Manage surveys from your editor',
+            description:
+                'Create, update, and analyze surveys from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            features: [
+                {
+                    title: 'Create and configure',
+                    description:
+                        'Generate complete surveys with targeting rules, display conditions, and question types. Set linked feature flags and targeting flags.',
+                },
+                {
+                    title: 'Check results and stats',
+                    description:
+                        'Pull response data, completion rates, and NPS scores. Get global survey stats across your project.',
+                },
+                {
+                    title: 'Update and manage',
+                    description:
+                        'Launch, pause, or archive surveys. Update questions, targeting, and display conditions without leaving your editor.',
+                },
+            ],
+            children: <MCPInstall />,
         },
     ],
     questions: [

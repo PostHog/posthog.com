@@ -2,6 +2,7 @@ import React from 'react'
 import { IconToggle } from '@posthog/icons'
 import CodeBlock from 'components/Home/CodeBlock'
 import Link from 'components/Link'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const featureFlags = {
     Icon: IconToggle,
@@ -344,6 +345,33 @@ export const featureFlags = {
                         'Test flags in local development or staging by using the same flag key across PostHog projects',
                 },
             ],
+        },
+        {
+            title: 'MCP',
+            headline: 'Manage flags from your editor',
+            description:
+                'Create flags, configure targeting rules, and check rollout status from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            features: [
+                {
+                    title: 'Create flags while building features',
+                    description:
+                        'Create a new feature flag with rollout percentage, targeting rules, and optional multivariate variants.',
+                },
+                {
+                    title: 'Check flags before deploying',
+                    description: 'Get the full definition of flags, including filters, groups, and payloads.',
+                },
+                {
+                    title: 'Clean up stale flags',
+                    description:
+                        'List all active/inactive feature flags in the current project and find dead code to remove.',
+                },
+                {
+                    title: 'Update rollout rules',
+                    description: "Update a flag's rollout percentage, targeting rules, or variants.",
+                },
+            ],
+            children: <MCPInstall />,
         },
     ],
     postHogOnPostHog: {

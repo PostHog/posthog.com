@@ -61,13 +61,19 @@ export default function AISlide({ ai, productName }: AISlideProps) {
                         ))}
                     </ul>
                 </div>
-                <aside className="text-center flex justify-center @2xl:shrink-0 w-full max-w-[400px] mx-auto">
+                <aside className="text-center flex flex-col items-center @2xl:shrink-0 w-full max-w-[400px] mx-auto">
                     <CloudinaryImage
                         src={slideImage}
                         alt={slideAlt}
                         className="w-full max-w-[400px]"
                         imgClassName={cn('h-auto w-full max-w-full object-contain', ai?.imageClasses)}
                     />
+                    <p className="text-sm text-secondary mt-6">
+                        Looking for PostHog MCP?{' '}
+                        <Link to="/docs/model-context-protocol" className="font-semibold underline">
+                            Read about headless hedgehog use
+                        </Link>
+                    </p>
                 </aside>
             </div>
         </div>
