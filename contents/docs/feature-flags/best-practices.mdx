@@ -78,15 +78,15 @@ When something goes wrong, in order of likelihood:
 
 Identity is the most common input problem. The hash takes two inputs: the flag key (stable) and the distinct ID (your responsibility). If the distinct ID is wrong at the moment of evaluation, the hash produces a valid but incorrect result. The flag is working perfectly – it just answered a question about the wrong person.
 
-If you call `identify()` after a flag has already been evaluated, the flag likely used the anonymous ID. The hash produced one result. After `identify()`, the distinct ID changes, the hash changes, and the next evaluation returns a different variant. The user "flipped" – but it's because the input changed.
+If you call `identify()` after a flag has already been evaluated, the flag likely used the anonymous ID. The hash produced one result. After `identify()`, the distinct ID changes, the hash changes, and the next evaluation returns a different variant. You see a "flip" – but it's because the input changed.
 
 Call [`identify()`](/docs/product-analytics/identify) before any flag evaluation in auth flows. If you can't guarantee that timing, [bootstrap](/docs/feature-flags/bootstrapping) with the stable ID at init so the distinct ID is correct from the first millisecond. See [keeping flag evaluations stable](/docs/feature-flags/stable-identity-for-flags) for the full picture.
 
-**SPA-specific timing.** In single-page applications, `identify()` and event captures often fire from different components during the same navigation in unpredictable order. The SDK updates the `distinct_id` synchronously when `identify()` runs, but if `capture()` was called first in the same execution frame, that event uses the anonymous ID. The fix: call `identify()` before the navigation that mounts post-auth components — in Vue, in `beforeEach` before `next()`; in React, before `navigate()`, not in a `useEffect` inside the target route.
+**SPA-specific timing.** In single-page applications, `identify()` and event captures often fire from different components during the same navigation in unpredictable order. The SDK updates the `distinct_id` synchronously when `identify()` runs, but if `capture()` was called first in the same execution frame, that event uses the anonymous ID. The fix: call `identify()` before the navigation that mounts post-auth components – in Vue, in `beforeEach` before `next()`; in React, before `navigate()`, not in a `useEffect` inside the target route.
 
 ### Don't rely on flag persistence to fix identity gaps
 
-If you've enabled [experience continuity](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional) (flag persistence across authentication), consider what that's telling you: the distinct ID is changing during the user's session, and you need PostHog to paper over it.
+If you've enabled [experience continuity](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional) (flag persistence across authentication), consider what that's telling you: the distinct ID is changing during your session, and you need PostHog to paper over it.
 
 That comes at a cost. Experience continuity couples flag evaluation with database writes – every evaluation reads and writes to the DB to persist the result. This mixes two concerns (evaluation and storage) that should be separate, and it's the source of [known bugs](https://github.com/PostHog/posthog-js/issues/2623) where values can still change after `identify()`. It also means no support for [local evaluation](/docs/feature-flags/local-evaluation) and slower flag responses.
 
@@ -102,12 +102,12 @@ A flag is a one-time signal, not a continuous dependency. Evaluate it once, reco
 
 Re-evaluating on every request creates cost, latency, and the conditions for "flipping" – you're giving the system repeated chances to return a different answer when inputs shift. That's not a bug. That's the pure function doing its job with different inputs.
 
-- **Feature rollouts** - Evaluate when the user's state changes (upgrades, joins a cohort). Between triggers, your app already knows the answer.
-- **Experiments** - One exposure per user. Evaluate once, record the variant, deliver that experience. If a user flips variants, the app re-asked a question it already had the answer to.
+- **Feature rollouts** – Evaluate when your user's state changes (upgrades, joins a cohort). Between triggers, your app already knows the answer.
+- **Experiments** – One exposure per user. Evaluate once, record the variant, deliver that experience. If a user flips variants, the app re-asked a question it already had the answer to.
 
 ### Evaluate where the data lives
 
-If you target a flag on `plan_type: "pro"`, your app originally told PostHog the user is Pro. Evaluate the flag from the same place that has that knowledge – your server. PostHog does the distribution math; your app provides the targeting data.
+If you target a flag on `plan_type: "pro"`, your app originally told PostHog this person is Pro. Evaluate the flag from the same place that has that knowledge – your server. PostHog does the distribution math; your app provides the targeting data.
 
 If you evaluate client-side instead, the SDK needs to fetch that property from PostHog's servers – a round-trip to look up what you originally sent it. Any flag check before that completes evaluates against incomplete data.
 
@@ -146,7 +146,7 @@ if (posthog.getFeatureFlag('my-experiment') === 'test') {
 
 Handle it with [bootstrap](/docs/feature-flags/bootstrapping) (preferred) or `onFeatureFlags()` (adds a loading state). You can check the current identity with `posthog.get_distinct_id()`.
 
-The "not loaded yet" return value varies across SDKs — some return `undefined`/`nil`/`None`, others return `false` or a `defaultValue` you provide. Don't assume that a falsy return means the flag is off. Check your SDK's documentation for the exact return type of `getFeatureFlag()` and `isFeatureEnabled()` when flags haven't loaded, and handle that state explicitly. If your goal is to programmatically check whether a flag exists at all, use the [feature flags API](/docs/api/feature-flags) to query flag definitions directly.
+The "not loaded yet" return value varies across SDKs – some return `undefined`/`nil`/`None`, others return `false` or a `defaultValue` you provide. Don't assume that a falsy return means the flag is off. Check your SDK's documentation for the exact return type of `getFeatureFlag()` and `isFeatureEnabled()` when flags haven't loaded, and handle that state explicitly. If your goal is to programmatically check whether a flag exists at all, use the [Feature Flags API](/docs/api/feature-flags) to query flag definitions directly.
 
 ## Flag hygiene
 
@@ -176,11 +176,11 @@ This is the practical extension of "evaluate once, not continuously." Your serve
 
 ### Use a reverse proxy
 
-Ad blockers can disable your feature flags, leading to users seeing the wrong version of your app or missing a rollout. Deploy a [reverse proxy](/docs/advanced/proxy) so requests go through your own domain. PostHog offers a free [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy), or you can run your own.
+Ad blockers can disable your Feature Flags, leading to users seeing the wrong version of your app or missing a rollout. Deploy a [reverse proxy](/docs/advanced/proxy) so requests go through your own domain. PostHog offers a free [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy), or you can run your own.
 
 ### Call your flag in as few places as possible
 
-The more locations a flag appears in your code, the more likely it is to cause problems — a developer removes it in one place but forgets another. If you use a flag in multiple places, wrap it in a single function:
+The more locations a flag appears in your code, the more likely it is to cause problems – a developer removes it in one place but forgets another. If you use a flag in multiple places, wrap it in a single function:
 
 ```js
 function useBetaFeature() {
@@ -195,7 +195,7 @@ Good naming makes flags easier to understand and maintain:
 - **Use descriptive names.** `is_v2_billing_dashboard_enabled` is clearer than `is_dashboard_enabled`.
 - **Use name types.** Suffix with the purpose: `new-billing-experiment`, `new-billing-release`.
 - **Reflect the return type.** `is_premium_user` for a boolean, `selected_theme` for a string.
-- **Use positive language for booleans.** `is_premium_user` instead of `is_not_premium_user` — avoids double negatives.
+- **Use positive language for booleans.** `is_premium_user` instead of `is_not_premium_user` – avoids double negatives.
 
 ### Roll out progressively
 
@@ -203,7 +203,7 @@ Start at 5-10% of users, monitor metrics, then gradually increase. This is a [ph
 
 ### Use dependencies for complex rollouts
 
-[Feature flag dependencies](/docs/feature-flags/dependencies) let one flag's activation depend on another flag's state — useful for enabling complex features only after foundational components are active, or running experiments only on users with specific features enabled. Keep dependency chains simple and avoid circular dependencies.
+[Feature flag dependencies](/docs/feature-flags/dependencies) let one flag's activation depend on another flag's state – useful for enabling complex features only after foundational components are active, or running Experiments only on users with specific features enabled. Keep dependency chains simple and avoid circular dependencies.
 
 ### Reducing your bill
 
