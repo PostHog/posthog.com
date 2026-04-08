@@ -2,26 +2,38 @@
 title: VS Code extension
 sidebar: Docs
 showTitle: true
-availability:
-  free: full
-  selfServe: full
-  enterprise: full
 ---
 
 import ConfigurationReference from "./_snippets/configuration-reference.mdx"
 
 The [PostHog VS Code extension](https://marketplace.visualstudio.com/items?itemName=PostHog.posthog-vscode) brings feature flags, experiments, event analytics, and session replay data directly into your editor. It works with JavaScript, TypeScript, Go and Ruby files (`.js`, `.jsx`, `.ts`, `.tsx`, `.go`, `.rb`).
 
-With it, you can see live analytics data inline in your code, manage feature flags without leaving your editor, clean up stale flags with AST-based refactoring, and jump to session replays for events in your codebase.
+With it, you can see live analytics data inline in your code, [manage feature flags](/docs/vscode-extension/flag-management) without leaving your editor, [clean up stale flags](/docs/vscode-extension/stale-flag-cleanup) with AST-based refactoring, and [jump to session replays](/docs/vscode-extension/session-replay) for events in your codebase.
 
 > **Note:** This extension is different from the [PostHog MCP server for VS Code](/docs/model-context-protocol/vscode), which enables AI agents and Copilot to interact with PostHog. The VS Code extension provides direct, visual tooling for developers in the editor. They complement each other.
 
 ## Installation
 
-Install directly from your editor using these links:
+Install directly from your editor:
 
-- [Install in VS Code](vscode:extension/PostHog.posthog-vscode)
-- [Install in Cursor](cursor:extension/PostHog.posthog-vscode)
+<Tab.Group tabs={['VS Code', 'Cursor']}>
+<Tab.List>
+<Tab>VS Code</Tab>
+<Tab>Cursor</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+[Install in VS Code](vscode:extension/PostHog.posthog-vscode)
+
+</Tab.Panel>
+<Tab.Panel>
+
+[Install in Cursor](cursor:extension/PostHog.posthog-vscode)
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
 
 Or install manually:
 
@@ -31,27 +43,31 @@ Or install manually:
 
 The extension is also available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=PostHog.posthog-vscode) and the [Open VSX Registry](https://open-vsx.org/extension/PostHog/posthog-vscode).
 
-![PostHog VS Code extension in the marketplace](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_04_07_T17_17_54_254_Z_0a1811dac8.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_04_07_T17_17_54_254_Z_0a1811dac8.png"
+  alt="PostHog VS Code extension in the marketplace"
+  classes="rounded"
+/>
 
-**Requirements:**
-- VS Code 1.109.0 or later
-- A PostHog account
+> **Requirements:**
+> - VS Code 1.109.0 or later
+> - A PostHog account
 
 ## Authentication
 
 Once installed, authenticate the extension with your PostHog account:
 
 1. Open the command palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
-2. Run **PostHog: Sign In**
+2. Run `PostHog: Sign In`
 3. Click the sign-in button — this opens PostHog in your browser where you authenticate via OAuth
 4. Once authenticated, run **PostHog: Select Project** to choose which project to connect to
 
 After authenticating, the status bar at the bottom of VS Code shows your active project and last sync time.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_04_07_T17_30_26_682_Z_279700c593.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/pasted_image_2026_04_07_T17_30_26_682_Z_279700c593.png"
   alt="PostHog VS Code extension sign-in flow"
-  classes="rounded"
+  classes="rounded max-w-md"
 />
 
 ## Quick start
@@ -72,11 +88,13 @@ Once connected, the extension immediately starts analyzing your code:
 
 For details on each feature, see:
 
-- [Inline code intelligence](/docs/vscode-extension/inline-code-intelligence) — sparklines, flag status, autocomplete, and more
-- [Sidebar dashboard](/docs/vscode-extension/sidebar-dashboard) — flags, experiments, analytics, and X-ray tabs
-- [Flag management](/docs/vscode-extension/flag-management) — toggle, edit, create, and generate types for flags
-- [Stale flag cleanup](/docs/vscode-extension/stale-flag-cleanup) — find and remove outdated flag checks
-- [Session replay](/docs/vscode-extension/session-replay) — see session and user counts, jump to replays
+| Feature | Description |
+|---|---|
+| [Inline code intelligence](/docs/vscode-extension/inline-code-intelligence) | Sparklines, flag status, autocomplete, and more |
+| [Sidebar dashboard](/docs/vscode-extension/sidebar-dashboard) | Flags, experiments, analytics, and X-ray tabs |
+| [Flag management](/docs/vscode-extension/flag-management) | Toggle, edit, create, and generate types for flags |
+| [Stale flag cleanup](/docs/vscode-extension/stale-flag-cleanup) | Find and remove outdated flag checks |
+| [Session replay](/docs/vscode-extension/session-replay) | See session and user counts, jump to replays |
 
 ## Team configuration
 
@@ -154,4 +172,3 @@ Open the command palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) and type "PostHog" to 
 - [PostHog VS Code extension on GitHub](https://github.com/PostHog/posthog-vscode)
 - [PostHog MCP server for VS Code](/docs/model-context-protocol/vscode) — AI agent integration
 - [Feature flags documentation](/docs/feature-flags)
-- [Session replay documentation](/docs/session-replay)

@@ -1849,9 +1849,6 @@
         },
         { "source": "/professional-services", "destination": "/services" },
         { "source": "/posthug", "destination": "/" },
-        { "source": "/mcp", "destination": "/docs/model-context-protocol" },
-        { "source": "/docs/vscode", "destination": "/docs/vscode-extension" },
-        { "source": "/vscode-extension", "destination": "/docs/vscode-extension" },
-        { "source": "/vscode", "destination": "/docs/vscode-extension" }
+        { "source": "/mcp", "destination": "/docs/model-context-protocol" }
     ]
 }

@@ -2,10 +2,6 @@
 title: Stale flag cleanup
 sidebar: Docs
 showTitle: true
-availability:
-  free: full
-  selfServe: full
-  enterprise: full
 ---
 
 Over time, feature flags accumulate in codebases. Flags that were fully rolled out, linked to completed experiments, or simply forgotten can clutter your code and make it harder to reason about. The VS Code extension uses **AST-based scanning** (via tree-sitter) to find stale flag references across your project and help you remove them safely.

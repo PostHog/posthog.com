@@ -1,11 +1,7 @@
 ---
-title: Flag management
+title: Flag management in the VS Code extension
 sidebar: Docs
 showTitle: true
-availability:
-  free: full
-  selfServe: full
-  enterprise: full
 ---
 
 The VS Code extension lets you create, toggle, edit, and manage [feature flags](/docs/feature-flags) without leaving your editor.
@@ -21,7 +17,7 @@ You can toggle a feature flag on or off from multiple places:
 A confirmation dialog appears before the change is applied to prevent accidental toggles. The change takes effect in PostHog immediately.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2026_04_08_T00_01_21_431_Z_8c2c911a53.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_04_08_T00_01_21_431_Z_8c2c911a53.png"
   alt="PostHog VS Code extension showing feature flag state"
   classes="rounded"
 />
@@ -47,7 +43,7 @@ When the extension detects a flag key in your code that doesn't exist in your Po
 This lets you write code with new flags first and create them in PostHog without switching context.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2026_04_08_T00_02_16_887_Z_9563f497ce.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_04_08_T00_02_16_887_Z_9563f497ce.png"
   alt="PostHog VS Code extension quick-fix to create a feature flag from an unrecognized key"
   classes="rounded"
 />
@@ -72,9 +68,9 @@ Select a block of code, then use the context menu or command palette to **wrap i
 
 ## Other flag actions
 
-| Action | How to access |
-|---|---|
-| **Copy flag key** | Right-click context menu, CodeLens, or `PostHog: Copy Flag Key` command |
-| **Open in PostHog** | CodeLens, sidebar, or `PostHog: Open in PostHog` command — opens the flag in your browser |
-| **Find all references** | `PostHog: Find Flag References` — searches your workspace for every usage of a flag key |
-| **View flag detail** | Click a flag in the sidebar or run `PostHog: Show Flag Detail` |
+| Action | How to access | Command |
+|---|---|---|
+| **Copy flag key** | Right-click context menu or CodeLens | `PostHog: Copy Flag Key` |
+| **Open in PostHog** | CodeLens or sidebar — opens the flag in your browser | `PostHog: Open in PostHog` |
+| **Find all references** | Searches your workspace for every usage of a flag key | `PostHog: Find Flag References` |
+| **View flag detail** | Click a flag in the sidebar | `PostHog: Show Flag Detail` |
