@@ -362,6 +362,35 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    counterpress: {
+        name: 'CounterPress',
+        toolsUsed: ['endpoints', 'product_analytics'],
+        industries: ['SaaS', 'Publishing'],
+        users: ['Engineering', 'Product'],
+        notes: 'Publishing platform for sports journalism',
+        featured: false,
+        logo: {
+            light: CounterPressLogoDark,
+            dark: CounterPressLogo,
+        },
+        height: 6,
+        quotes: {
+            jay_collett: {
+                name: 'Jay Collett',
+                role: 'Founder & CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jay_collett_b9f458e7f0.jpeg',
+                },
+                products: {
+                    endpoints:
+                        'The endpoints API has given us a simple and efficient solution to the complicated and daunting prospect of building a platform to consume data and create endpoints.',
+                },
+                quotes: [
+                    'Endpoints has effectively given us the power to keep up with them without spending a penny on analytics.',
+                ],
+            },
+        },
+    },
     suped: {
         name: 'Suped',
         toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
