@@ -32,11 +32,11 @@ If you prefer not to use OAuth, you can connect using a restricted API key inste
 1. Select **Restricted API key** as the authentication type.
 2. Head to your Stripe dashboard > **Developers** > **API keys**, under **Restricted keys**, click [+ Create a restricted key](https://dashboard.stripe.com/apikeys/create). You need to give your API key the following **Read** permissions:
 
-| Resource Type | Required Read Permissions                                                                     |
-| ------------- | --------------------------------------------------------------------------------------------- |
-| Core          | Balance transaction sources, Charges, Customers, Disputes, Payment methods, Payouts, Products |
-| Billing       | Credit notes, Invoices, Prices, Subscriptions                                                 |
-| Connect       | Click **Read** in the **Connect** header                                                      |
+| Resource Type | Required Read Permissions                                                                                 |
+| ------------- | --------------------------------------------------------------------------------------------------------- |
+| Core          | Balance transaction sources, Charges and refunds, Customers, Disputes, Payment methods, Payouts, Products |
+| Billing       | Credit notes, Invoices, Prices, Subscriptions                                                             |
+| Connect       | Click **Read** in the **Connect** header                                                                  |
 
 If you aren't concerned with giving us more permissions than necessary, you can also simply click **Read** on the **Core**, **Billing**, and **Connect** headers to give us the necessary permissions.
 
