@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-import Alpha from './_snippets/alpha.mdx'
+import SupportAlpha from './_snippets/alpha.mdx'
 
-<Alpha />
+<SupportAlpha />
 
 The Support widget is a chat interface that appears on your website, allowing users to start conversations with your team. It loads automatically when enabled and captures session context for each ticket.
 
@@ -39,11 +39,11 @@ You can optionally require users to identify themselves before starting a conver
 | Setting | Description | Default |
 |---------|-------------|---------|
 | **Require email** | Users must enter their email to start chatting | `false` |
-| **Collect name** | Additionally collect the user's name | `false` |
+| **Collect name** | Additionally collect a name | `false` |
 | **Form title** | Heading shown on the identification form | `"Before we start..."` |
 | **Form description** | Subtext shown below the title | `"Please provide your details so we can help you better."` |
 
-When enabled, the form appears before the user can send their first message. The collected information is used to link the ticket to a person in PostHog.
+When enabled, the form appears before they can send their first message. The collected information is used to link the ticket to a person in PostHog.
 
 ## Domain restrictions
 
@@ -98,10 +98,10 @@ Support tickets are tied to the browser session by default. If a user switches b
 
 ### How recovery works
 
-1. The user clicks **Recover your tickets** in the ticket list
-2. They enter the email address used in previous conversations
+1. Click **Recover your tickets** in the ticket list
+2. Enter the email address used in previous conversations
 3. A recovery link is sent to that email (expires in one hour)
-4. Clicking the link opens the widget and restores their tickets in the new browser
+4. Click the link to open the widget and restore tickets in the new browser
 
 If the page URL contains a `ph_conv_restore` query parameter (from clicking the recovery link), tickets are automatically restored on page load. The parameter is removed from the URL after processing.
 
@@ -126,7 +126,7 @@ Recipients must have access to the team to receive notifications.
 
 <CalloutBox icon="IconLightBulb" title="Use workflows for advanced notifications" type="info">
 
-For more control over notifications — like sending alerts only for high-priority tickets, routing to specific Slack channels, or notifying different teams based on tags — use [workflow automation](/docs/support/workflows). Workflows let you trigger Slack messages, webhooks, and more based on any ticket event.
+For more control over notifications – like sending alerts only for high-priority tickets, routing to specific Slack channels, or notifying different teams based on tags – use [workflow automation](/docs/support/workflows). Workflows let you trigger Slack messages, webhooks, and more based on any ticket event.
 
 </CalloutBox>
 
@@ -137,7 +137,7 @@ Individual team members can enable browser notifications for new ticket activity
 1. Go to **Support** in PostHog
 2. Enable **Browser notifications** in the notification settings
 
-When enabled, a desktop notification appears when the unread ticket count increases. This works independently of email notifications — you can use one or both.
+When enabled, a desktop notification appears when the unread ticket count increases. This works independently of email notifications – you can use one or both.
 
 ## Public token
 
