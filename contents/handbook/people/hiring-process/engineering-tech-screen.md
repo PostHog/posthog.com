@@ -70,6 +70,6 @@ The best preparation is reflection. More concretely, here's what we recommend:
 
 We want this to feel like a working session. The interviewer is there to collaborate with you, ask follow-up questions, and sometimes push back on your ideas. If something isn't clear, ask. If you want to change direction, say so. The best interviews feel like a conversation between two engineers solving a problem together.
 
-If you pass the technical screen, you'll meet one of our co-founders or execs for a short culture and motivation chat, followed by a [PostHog SuperDay](/handbook/people/hiring-process#4-posthog-superday). You can read more about the [full interview process](/handbook/people/hiring-process).
+If you pass the technical screen, you'll meet one of our co-founders or execs for a short culture and motivation chat, followed by a [PostHog SuperDay](/handbook/people/hiring-process/engineering-superday). You can read more about the [full interview process](/handbook/people/hiring-process).
 
 Good luck – we're rooting for you.

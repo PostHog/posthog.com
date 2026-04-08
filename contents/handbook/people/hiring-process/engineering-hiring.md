@@ -48,7 +48,7 @@ One of our co-founders or execs – [Tim](/tim) or [James](/james), depending on
 
 #### Engineering SuperDay
 
-The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work, which we can flexibly arrange around the candidate's schedule. 
+The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work, which we can flexibly arrange around the candidate's schedule. We share our [guide to preparing for the engineering SuperDay](/handbook/people/hiring-process/engineering-superday) with candidates so they know what to expect.
 
 For full-stack roles, the task involves building a small web service (both backend and frontend) over a full day. The task is designed to be _too much_ work for one person to complete in a day, in order to get a sense of their ability to prioritize (and ship!). 
 
