@@ -28,6 +28,7 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 
 - Offer to optimize their usage/reduce their billing - if they are pointlessly tracking a bunch of junk, tell them! Otherwise they'll just find out themselves and churn anyway.
 - Tell them about new or upcoming features or products that they may not be aware of which you know could be a great fit for them (and let them try them out for free).
+- Become their dedicated support engineer. Default to always answering technical questions in their Slack channel. Use this as an opportunity to prove your credentials as a technical resource and build trust with them. Focus on being hyper-responsiveness, and on trying to identify the "question behind the question" when you respond to them. You'll  find that this often leads to a better understanding of the core problems they are trying to solve with PostHog, and this mutual understanding makes for a warmer long-term relationship.
 - Use multiple channels - email is usually the worst way to reach our ICP. Slack, in-app Surveys or even Telegram are all usually better. But try email first anyway.
 - Ping everyone in the account individually (don't do group, no one will reply) - start with the most active users first. New users are also good. 
 - Loom videos sharing your observations about their usage/account provide a personalized and human touch which can go a long way to building lasting relationships.  Ask Simon for an invitation to our company account if you don't have access.
