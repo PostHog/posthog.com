@@ -9,7 +9,7 @@ import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
 
 <CalloutBox icon="IconInfo" title="CLI version requirement" type="action">
 
-A minimum CLI version of [0.7.4](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.7.4) is required, but we recommend [keeping up with the latest CLI version](/docs/error-tracking/upload-source-maps/cli) to ensure you have all of error tracking's features.
+A minimum CLI version of [0.7.5](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.7.5) is required, but we recommend [keeping up with the latest CLI version](/docs/error-tracking/upload-source-maps/cli) to ensure you have all of Error Tracking's features.
 
 </CalloutBox>
 
@@ -84,6 +84,14 @@ ${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
 ```
 
 </MultiLanguage>
+
+6. In the **Input Files** section of the Run Script phase, add:
+
+```
+$(DWARF_DSYM_FOLDER_PATH)/$(DWARF_DSYM_FILE_NAME)/Contents/Resources/DWARF/$(EXECUTABLE_NAME)
+```
+
+This makes Xcode wait for the app's dSYM contents before running the upload script.
 
 </Step>
 
@@ -193,3 +201,7 @@ Ensure `ENABLE_USER_SCRIPT_SANDBOXING` is set to `NO` in your build settings.
 ### dSYMs not being generated
 
 Verify that `DEBUG_INFORMATION_FORMAT` is set to **DWARF with dSYM File** for the configuration you're building (Debug or Release).
+
+### Script fails with "content_hash_mismatch"
+
+This happens when the upload script runs before Xcode finishes generating the dSYM files. Leave **Based on dependency analysis** enabled and add `$(DWARF_DSYM_FOLDER_PATH)/$(DWARF_DSYM_FILE_NAME)/Contents/Resources/DWARF/$(EXECUTABLE_NAME)` to the **Input Files** of the Run Script build phase. This makes Xcode wait for the app's dSYM contents before running the upload script.

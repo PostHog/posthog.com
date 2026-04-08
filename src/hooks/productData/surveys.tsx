@@ -14,6 +14,7 @@ export const surveys = {
     color: 'salmon',
     colorSecondary: 'red',
     category: 'communication',
+    shortDescription: 'Ask users anything with no-code surveys',
     seo: {
         title: 'Surveys – Collect product feedback with PostHog',
         description:

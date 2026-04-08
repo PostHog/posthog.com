@@ -1831,7 +1831,8 @@
             "destination": "/product-engineer/what-is-a-product-engineer"
         },
         { "source": "/professional-services", "destination": "/services" },
-        { "source": "/posthug", "destination": "/" }
+        { "source": "/posthug", "destination": "/" },
+        { "source": "/mcp", "destination": "/docs/model-context-protocol" }
     ],
     "headers": [
         {
