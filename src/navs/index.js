@@ -5496,6 +5496,11 @@ export const docsMenu = {
                             icon: 'IconCode',
                         },
                         {
+                            name: 'OpenCode',
+                            url: '/docs/llm-analytics/installation/opencode',
+                            icon: 'IconOpenCode',
+                        },
+                        {
                             name: 'Manual capture',
                             url: '/docs/llm-analytics/installation/manual-capture',
                             icon: 'IconCode',
