@@ -4027,6 +4027,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'User and group targeting',
+                    url: '/docs/feature-flags/user-and-group-targeting',
+                    icon: 'IconPeople',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
                     name: 'Set up remote config',
                     url: '/docs/feature-flags/remote-config',
                     icon: 'IconGear',
