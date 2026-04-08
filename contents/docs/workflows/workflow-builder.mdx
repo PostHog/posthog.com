@@ -59,6 +59,13 @@ To filter your events, click on the three lines icon next to the event name and 
     alt="Event trigger filter"
 />
 
+
+### Conversion goals
+
+Conversion goals let you track when users complete a desired action after entering the workflow. In the trigger configuration, you can optionally define conversion conditions based on [person properties](/docs/product-analytics/person-properties).
+
+All conversion conditions must be met for a user to be considered converted. This uses AND logic, meaning every condition you define must be satisfied, not just one of them.
+
 ## Dispatches
 
 Dispatches are the messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. There are 4 main types of dispatches:
@@ -81,6 +88,14 @@ Delays help you control the timing of your messages. There are 3 types of delays
 | Wait until time window | Wait until a specific time window (e.g. only send on weekdays 9-5). |
 
 You can see an example of a delay in the [email drip campaign](/docs/workflows/email-drip-campaign) tutorial.
+
+### Wait until condition
+
+The **Wait until condition** step pauses the workflow until a specific condition is met. Configure two settings:
+
+- **Conditions to wait for** - The condition that must be satisfied for the workflow to continue. This can be a [person property](/docs/product-analytics/person-properties) or other filter criteria.
+- **Max time to wait for condition** - The maximum time to wait before the workflow continues. If the timeout is reached without the condition being satisfied, the workflow continues down the "no match" branch.
+
 
 ## Audience splits
 
