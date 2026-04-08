@@ -29,13 +29,13 @@ exceptions:
     - Marketing Analytics
     - PostHog AI
     - PostHog Cloud
+    - PostHog Code
     - Product Analytics
     - Product Tours
     - Revenue Analytics
     - Session Replay
     - Surveys
     - surveys # adding because the generic term is too commonly used
-    - Twig
     - Web Analytics
     - Workflows
     - workflows # adding because the generic term is too commonly used

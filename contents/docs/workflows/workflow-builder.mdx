@@ -109,7 +109,7 @@ If you have [Conversations](/docs/support) enabled, two additional actions becom
 | Conversations action | Description | Properties / Options |
 |---------------------|-------------|---------------------|
 | Get ticket | Fetch the current ticket's data into workflow variables | `ticket_id`, `ticket_number`, `status`, `priority`, `channel_source` |
-| Update ticket | Change a ticket's status or priority | Status: `new`, `open`, `pending`, `on_hold`, `resolved`. Priority: `low`, `medium`, `high` |
+| Update ticket | Change a ticket's status, priority, or assignee | Status: `new`, `open`, `pending`, `on_hold`, `resolved`. Priority: `low`, `medium`, `high`. Assignee: user or role |
 
 ### Example use cases
 
@@ -118,6 +118,7 @@ Use these actions together with [conversation events](#conversation-event-trigge
 - **Auto-resolve inactive tickets** - If a customer hasn't replied for 5 days, change the ticket status from `pending` to `resolved`
 - **Escalate priority** - If a message contains the word "refund", update the ticket priority to `high`
 - **Send reminders** - Wait 2 hours after a ticket is created, then send a Slack notification if still unresolved
+- **Route to specialists** - If a ticket contains "billing", assign it to a billing specialist
 
 ### Conversation event triggers
 

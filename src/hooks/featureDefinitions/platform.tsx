@@ -209,6 +209,12 @@ export const platformFeatures = {
             ruby: {
                 name: 'Ruby',
             },
+            python: {
+                name: 'Python',
+            },
+            node: {
+                name: 'Node.js',
+            },
         },
     },
     developer: {

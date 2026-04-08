@@ -63,7 +63,7 @@ import requests
 
 project_key = "default"
 environment_key = "test"
-ld_api_key = "api-1a234567-89ab-cdef-1234-567890abcdef"
+ld_api_key = "fake-1a234567-89ab-cdef-1234-567890abcdef"
 
 # Get LaunchDarkly experiments
 url = "https://app.launchdarkly.com/api/v2/projects/" + project_key + "/environments/" + environment_key + "/experiments"
@@ -91,9 +91,9 @@ You can then convert this data into the PostHog format. This requires:
 
 2. Looping through each flag and converting the variations to PostHog variants, values to payloads, and other details.
 
-3. If the flag is an experiment, format the data to match the PostHog experiment format and create it with the [PostHog API](/docs/api/experiments #post-api-projects-project_id-experiments).
+3. If the flag is an experiment, format the data to match the PostHog experiment format and create it with the [PostHog API](/docs/api/experiments#post-api-projects-project_id-experiments).
 
-4. If the flag is not an experiment, format the data to match the PostHog flag format and create it with the [PostHog API](/docs/api/feature-flags #post-api-projects-project_id-feature_flags).
+4. If the flag is not an experiment, format the data to match the PostHog flag format and create it with the [PostHog API](/docs/api/feature-flags#post-api-projects-project_id-feature_flags).
 
 Including the LaunchDarkly requests, this looks like this:
 
@@ -102,7 +102,7 @@ import requests
 
 project_key = "default"
 environment_key = "test"
-ld_api_key = "api-1a234567-89ab-cdef-1234-567890abcdef"
+ld_api_key = "fake-1a234567-89ab-cdef-1234-567890abcdef"
 ph_api_key = "phx_abc123def456ghi789jkl123mno456pqr789stu123vwx"
 ph_project_id = "12345"
 

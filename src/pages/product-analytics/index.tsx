@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
+import { createSlideConfig, SlidesTemplate, IntegratedWarehouseSlide } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 
 const PRODUCT_HANDLE = 'product_analytics'
@@ -61,11 +61,31 @@ export default function ProductAnalytics(): JSX.Element {
     // Optional: Customize slides
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
-        // order: ['overview', 'pricing', 'features'],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },
         exclude: ['videos'],
+        custom: [
+            {
+                slug: 'integrated-warehouse',
+                name: 'Integrated data warehouse',
+                component: IntegratedWarehouseSlide,
+            },
+        ],
+        order: [
+            'overview',
+            'customers',
+            'features',
+            'posthog-on-posthog',
+            'answers',
+            'pricing',
+            'comparison-summary',
+            'feature-comparison',
+            'docs',
+            'pairs-with',
+            'integrated-warehouse',
+            'getting-started',
+        ],
     })
 
     // Merge content data with product data

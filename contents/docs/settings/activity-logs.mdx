@@ -149,20 +149,19 @@ Here's an example of what a log entry looks like when retrieved via the API:
 
 There are several ways to view activity logs in PostHog.
 
-### Activity sidebar
+### Activity side panel
 
-The **Activity** panel in the right sidebar shows a context-aware feed of changes. What you see depends on where you are in PostHog:
+The **Activity logs** tab in the side panel shows a context-aware feed of changes. The tab appears in the side panel navigation when you're on a page with activity scope — such as insights, dashboards, feature flags, and experiments. It doesn't appear on pages without activity scope, like home or settings.
 
-- **On a specific resource** (e.g., viewing a feature flag): Shows changes to that specific item
-- **On a list page** (e.g., the feature flags list): Shows changes to all items of that type
-- **Elsewhere**: Prompts you to navigate to a supported page
+What you see depends on where you are in PostHog:
 
-The sidebar also has a **My notifications** tab that shows changes relevant to you, such as updates to resources you've created or recently edited.
+- **On a specific resource** (e.g., viewing a feature flag) - Shows changes to that specific item
+- **On a list page** (e.g., the feature flags list) - Shows changes to all items of that type
 
 <ProductScreenshot
     imageLight = {activityLogsSidebarLight}
     imageDark = {activityLogsSidebarDark}
-    alt="Activity sidebar showing recent changes"
+    alt="Activity side panel showing recent changes"
     classes="rounded"
 />
 
@@ -380,6 +379,31 @@ For full details on query parameters, request/response formats, and all availabl
 - **EU region**: [eu.posthog.com/api/schema/swagger-ui/](https://eu.posthog.com/api/schema/swagger-ui/)
 
 Search for "activity_log" to find the relevant endpoints.
+
+## Query with HogQL
+
+You can query activity logs directly using HogQL in the [SQL editor](/docs/data-warehouse/query). The `system.activity_logs` table provides programmatic access to your audit trail data.
+
+```sql
+SELECT
+    activity,
+    scope,
+    item_id,
+    detail,
+    created_at
+FROM system.activity_logs
+WHERE scope = 'FeatureFlag'
+ORDER BY created_at DESC
+LIMIT 50
+```
+
+This is useful for:
+
+- Building custom audit reports
+- Analyzing change patterns across your team
+- Integrating activity data with other PostHog queries
+
+> **Note:** Only team-scoped activity logs are visible via HogQL. Organization-level logs (like membership changes) are not available in this table.
 
 ## Security and privacy considerations
 

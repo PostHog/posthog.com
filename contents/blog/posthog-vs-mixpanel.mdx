@@ -54,11 +54,7 @@ This means you get support from the engineers who _actually build the product_, 
 
 We default to charging as little as possible while still making a profit – we also have a generous free tier on all our products. We can do this because we're efficient. We don't splurge on D-list comedians to host an annual convention you'll never attend. Our [pricing](/pricing) is also 100% transparent.
 
-<p>
-  <CallToAction to="https://posthog.com/docs">
-    Learn more about using PostHog
-  </CallToAction>
-</p>
+<WizardCTA />
 
 ## Comparing PostHog and Mixpanel
 
@@ -498,7 +494,7 @@ Choosing the right product analytics platform depends on your team's needs and t
 | **LLM analytics**                 | 100k events              |
 | **Data warehouse**                | 1 million synced rows    |
 
-<ArrayCTA />
+<WizardCTA />
 
 ## Frequently asked questions
 
@@ -590,14 +586,24 @@ No. Mixpanel doesn't offer AI/LLM observability features. **PostHog** includes [
 <details>
     <summary>Which is easier to set up – PostHog or Mixpanel?</summary>
 
-Both are designed for quick implementation. **PostHog** offers an [AI install wizard](/docs/getting-started/install?tab=wizard) that gets you running in under 90 seconds, plus autocapture that starts collecting events immediately. **Mixpanel** also supports autocapture and has straightforward SDK installation. The main difference is PostHog's broader feature set means there's more to explore, but you can adopt features incrementally.
+Both are designed for quick implementation. **PostHog** offers an [AI install wizard](/wizard) that gets you running in under 90 seconds, plus autocapture that starts collecting events immediately. **Mixpanel** also supports autocapture and has straightforward SDK installation. The main difference is PostHog's broader feature set means there's more to explore, but you can adopt features incrementally.
 
 </details>
 
 <details>
     <summary>Which has better data warehouse integration?</summary>
 
-Different approaches. **Mixpanel** offers warehouse-native analytics – it can sit on top of Snowflake, BigQuery, or Databricks and query your data directly. **PostHog** has a built-in [data warehouse](/data-warehouse) that imports data from external sources (Stripe, Zendesk, Hubspot, or your own warehouse) so you can analyze business and product data together. Mixpanel's approach is better if you want to keep data in your warehouse; PostHog's is better if you want a single platform for analysis.
+Different approaches. **Mixpanel** connects to external warehouses to import data and run queries in Mixpanel. **PostHog** offers an integrated data warehouse approach: you can use PostHog as your warehouse (data stays in PostHog and is accessible across all PostHog tools), or connect external warehouses (like Snowflake or BigQuery) as sources to sync the tables and fields you need into PostHog. Either way, queries run on PostHog compute.
+
+**PostHog is better if:**
+- You want to eliminate tool sprawl (Mixpanel is analytics-focused with warehouse connectivity as an add-on)
+- You value having the warehouse and analytics in one platform
+- You want features Mixpanel doesn&apos;t offer, like surveys
+- You want transparent, usage-based pricing (1 million synced rows free per month)
+
+**Mixpanel&apos;s approach is better if** you have a limited use-case and need to keep data in an existing, external warehouse for compliance reasons.
+
+Companies like [HeadshotPro](/customers/headshotpro) and [Webshare](/customers/webshare) use PostHog&apos;s integrated warehouse as their single source of truth, eliminating the need to stitch together multiple vendors.
 
 </details>
 
