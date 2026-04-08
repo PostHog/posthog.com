@@ -69,21 +69,17 @@ You'll join a live coding environment with an interviewer and work through a ser
 
 You're allowed to use Google for reference, but we ask that you don't use AI tools – we want to see how _you_ think about debugging. Treat the interviewer like a colleague -- you can ask them questions, think out loud, and discuss approaches.
 
-### What we're evaluating
+### How to prepare
 
-We're looking at three things: Can you form a hypothesis before changing things? Can you trace a problem systematically through unfamiliar code? And do you talk through your thinking so we can follow your reasoning? If you do those three things well, you'll do well here.
-
-We also pay attention to what happens after you make a fix -- do you verify it works, and do you check that you haven't broken something else?
-
-### How to prepare for the debugging session
-
-- **Practice reading other people's code.** Pick an open-source project you've never seen, find a bug report, and try to trace the issue through the codebase. Building a mental model of an unfamiliar system is exactly what we're testing.
+- **Practice reading other people's code.** Pick an open-source project you've never seen, find a bug report, and try to trace the issue through the codebase. Building a mental model of an unfamiliar system is the core skill here.
 - **Brush up on debugging fundamentals.** Understand how to trace request flows through a web application. Be comfortable reading error messages, stack traces, and logs. Know how to isolate problems systematically rather than guessing.
 
 ### During the session
 
 - **Read the README first.** Take a few minutes to read the documentation and understand the system before touching anything. Candidates who jump straight into code without understanding the architecture tend to struggle.
-- **Narrate your thinking.** The interviewer can only evaluate reasoning they can hear. Talk through your thought process, even when you're uncertain. Saying "I think the problem might be here because..." goes a long way.
+- **Form a hypothesis before changing things.** Resist the urge to start editing code immediately. Think about what might be going wrong, then go looking for evidence.
+- **Narrate your thinking.** Talk through your thought process, even when you're uncertain. Saying "I think the problem might be here because..." goes a long way. The interviewer can only follow reasoning they can hear.
+- **Verify your fixes.** After making a change, confirm it works and check that you haven't broken something else.
 - **Ask questions.** The interviewer is there to help. Treat them like a colleague you're pairing with.
 
 ## What not to worry about
