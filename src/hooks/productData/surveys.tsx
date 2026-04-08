@@ -327,19 +327,21 @@ export const surveys = {
                 'Create, update, and analyze surveys from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
             features: [
                 {
-                    title: 'Create and configure',
-                    description:
-                        'Generate complete surveys with targeting rules, display conditions, and question types. Set linked feature flags and targeting flags.',
+                    title: 'Create surveys',
+                    description: 'Spin up a new in-app survey without switching to the PostHog UI.',
                 },
                 {
-                    title: 'Check results and stats',
-                    description:
-                        'Pull response data, completion rates, and NPS scores. Get global survey stats across your project.',
+                    title: 'Check survey performance',
+                    description: 'Pull response rates, completion stats, and results for any survey.',
                 },
                 {
-                    title: 'Update and manage',
+                    title: 'Iterate on live surveys',
+                    description: 'Update questions, targeting, or appearance of surveys without leaving your editor.',
+                },
+                {
+                    title: 'Global stats',
                     description:
-                        'Launch, pause, or archive surveys. Update questions, targeting, and display conditions without leaving your editor.',
+                        'Get all surveys in the project, view aggregated response statistics, or apply filters.',
                 },
             ],
             children: <MCPInstall />,
