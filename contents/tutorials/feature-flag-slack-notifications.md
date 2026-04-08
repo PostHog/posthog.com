@@ -12,227 +12,179 @@ tags:
 
 When you're managing Feature Flags across a team, it's important to know when flags are created, updated, or deleted. PostHog's [Activity Logs](/docs/settings/activity-logs) track these changes, and you can use a custom [Data Pipelines](/docs/cdp/destinations) destination to forward them to Slack in real time.
 
-This tutorial walks through setting up a custom Hog function that listens for feature flag changes and posts rich Slack notifications – including release conditions, variant rollouts, payloads, and who made the change.
+This tutorial walks through setting up a custom Hog function via the API that listens for feature flag changes and posts rich Slack notifications – including release conditions, variant rollouts, payloads, and who made the change.
+
+> **Note:** This destination triggers on the internal `$activity_log_entry_created` event, which isn't available in the UI event picker yet. You need to create it using the PostHog API.
 
 ## Prerequisites
 
 You need:
 
 - A PostHog account with [Data Pipelines](/docs/cdp) enabled
-- A Slack workspace where you can install apps
-- A Slack channel to receive notifications
+- A Slack workspace connected to PostHog (see [Slack destination docs](/docs/cdp/destinations/slack) for setup)
+- A [personal API key](https://us.posthog.com/settings/user-api-keys) with write access
+- Your PostHog project ID (found in [project settings](https://us.posthog.com/settings/project))
 
-## Step 1: Create a new destination
+## How it works
 
-Go to the [data pipeline destinations tab](https://us.posthog.com/pipeline/destinations) and click **+ New destination**. Select **Slack** from the list of available destinations and click **Create**.
+The destination listens for the internal `$activity_log_entry_created` event, filtered to the `FeatureFlag` scope. When someone creates, updates, or deletes a feature flag, the Hog function runs and posts a formatted message to Slack using the [Block Kit](https://api.slack.com/block-kit) API.
 
-If you haven't connected your Slack workspace yet, follow the prompts to install the PostHog Slack app and authorize it. Make sure the PostHog app is added to the channel you want to post to.
+The message includes:
 
-## Step 2: Configure the event filter
+- Who made the change and what action they took
+- Release condition details (rollout percentages, targeting rules, variants)
+- Before/after comparisons for variant rollout changes
+- Payload values
+- A direct link to the flag in PostHog
 
-Under **Match event and actions**, you need to configure the destination to listen for the internal `$activity_log_entry_created` event, filtered to only feature flag changes.
+## Step 1: Prepare the API request body
 
-1. Select `$activity_log_entry_created` as the event.
-2. Add a property filter: `scope` **equals** `FeatureFlag`.
+The API request creates a Hog function with type `internal_destination`. You need to customize three values in the JSON below:
 
-This ensures the destination only fires when someone creates, updates, or deletes a feature flag – not for other activity log entries like dashboard or experiment changes.
+1. **`slack_workspace` value** – Your Slack integration ID. Find this in PostHog by going to **Data Pipelines** > **Destinations** > creating a new Slack destination > connecting your workspace. The integration ID appears in the URL or you can find it via the API at `/api/environments/<project_id>/integrations/`.
+2. **`channel` value** – Your Slack channel ID (e.g., `C0NA9JPU2`). You can find this in Slack by right-clicking a channel > **View channel details** > the ID is at the bottom.
+3. **`<project_id>`** in the API URL – Your PostHog project ID.
 
-## Step 3: Add the custom Hog Code
+Save the following JSON to a file called `create_hog_function.json`:
 
-Click **Show source code** to open the Hog editor. Replace the default implementation with the following code:
-
-```hog
-let activity := event.properties.activity
-let flagName := event.properties.detail.name
-let flagId := event.properties.item_id
-let userName := f'{event.properties.user.first_name} {event.properties.user.last_name}'
-let userEmail := event.properties.user.email
-let changes := event.properties.detail.changes
-let timestamp := event.properties.created_at
-
-let flagUrl := f'{project.url}/feature_flags/{flagId}'
-
-let emoji := activity = 'created' ? '🚩' : activity = 'deleted' ? '🗑️' : '✏️'
-let actionText := activity = 'created' ? 'created' : activity = 'deleted' ? 'deleted' : 'updated'
-
-let blocks := [
+```json
+{
+  "type": "internal_destination",
+  "name": "Feature Flag Change Notifier → Slack",
+  "description": "Posts a rich Slack message when a feature flag is created, updated, or deleted.",
+  "enabled": true,
+  "hog": "let activity := event.properties.activity\nlet flagName := event.properties.detail.name\nlet flagId := event.properties.item_id\nlet userName := f'{event.properties.user.first_name} {event.properties.user.last_name}'\nlet userEmail := event.properties.user.email\nlet changes := event.properties.detail.changes\nlet timestamp := event.properties.created_at\n\nlet flagUrl := f'{project.url}/feature_flags/{flagId}'\n\nlet emoji := activity = 'created' ? '🚩' : activity = 'deleted' ? '🗑️' : '✏️'\nlet actionText := activity = 'created' ? 'created' : activity = 'deleted' ? 'deleted' : 'updated'\n\nlet blocks := [\n    {\n        'type': 'section',\n        'text': {\n            'type': 'mrkdwn',\n            'text': f'{emoji} *{userName}* {actionText} feature flag <{flagUrl}|{flagName}>'\n        }\n    }\n]\n\nif (activity = 'updated' and notEmpty(changes)) {\n    let detailLines := []\n\n    for (let change in changes) {\n        if (change.field = 'filters') {\n            let groups := change.after.groups\n            if (notEmpty(groups)) {\n                let groupIndex := 0\n                for (let g in groups) {\n                    groupIndex := groupIndex + 1\n                    let rollout := f'{g.rollout_percentage}%'\n                    let conditionText := 'all users'\n\n                    if (notEmpty(g.properties)) {\n                        let parts := []\n                        for (let prop in g.properties) {\n                            if (prop.type = 'flag') {\n                                parts := arrayPushBack(parts, f'flag `{prop.label}` = `{prop.value}`')\n                            } else {\n                                let valStr := typeof(prop.value) = 'array' ? arrayStringConcat(prop.value, ', ') : toString(prop.value)\n                                parts := arrayPushBack(parts, f'`{prop.key}` {prop.operator} `{valStr}`')\n                            }\n                        }\n                        conditionText := arrayStringConcat(parts, ' AND ')\n                    }\n\n                    let variantText := g.variant != null ? f' → variant `{g.variant}`' : ''\n                    detailLines := arrayPushBack(detailLines, f'• *Set {groupIndex}:* {rollout} rollout — {conditionText}{variantText}')\n                }\n            }\n\n            if (notEmpty(change.after.payloads)) {\n                for (let key, val in change.after.payloads) {\n                    detailLines := arrayPushBack(detailLines, f'• *Payload* `{key}`: `{val}`')\n                }\n            }\n\n            if (change.after.multivariate != null and notEmpty(change.after.multivariate.variants)) {\n                let variantParts := []\n                for (let v in change.after.multivariate.variants) {\n                    let oldPct := ''\n                    if (change.before.multivariate != null and notEmpty(change.before.multivariate.variants)) {\n                        for (let ov in change.before.multivariate.variants) {\n                            if (ov.key = v.key) {\n                                if (ov.rollout_percentage != v.rollout_percentage) {\n                                    oldPct := f' (was {ov.rollout_percentage}%)'\n                                }\n                            }\n                        }\n                    }\n                    variantParts := arrayPushBack(variantParts, f'`{v.key}` {v.rollout_percentage}%{oldPct}')\n                }\n                let variantsSummary := arrayStringConcat(variantParts, ', ')\n                detailLines := arrayPushBack(detailLines, f'• *Variants:* {variantsSummary}')\n            }\n        } else if (change.field = 'version') {\n            detailLines := arrayPushBack(detailLines, f'• *Version:* {change.before} → {change.after}')\n        } else if (change.field = 'name') {\n            detailLines := arrayPushBack(detailLines, f'• *Renamed:* `{change.before}` → `{change.after}`')\n        } else if (change.field = 'active') {\n            let statusText := change.after ? 'enabled' : 'disabled'\n            detailLines := arrayPushBack(detailLines, f'• *Status:* {statusText}')\n        } else if (change.field != 'deleted') {\n            detailLines := arrayPushBack(detailLines, f'• *{change.field}:* changed')\n        }\n    }\n\n    if (notEmpty(detailLines)) {\n        blocks := arrayPushBack(blocks, {'type': 'divider'})\n        let nl := '\\n'\n        blocks := arrayPushBack(blocks, {\n            'type': 'section',\n            'text': {\n                'type': 'mrkdwn',\n                'text': arrayStringConcat(detailLines, nl)\n            }\n        })\n    }\n}\n\nif (activity != 'deleted') {\n    blocks := arrayPushBack(blocks, {\n        'type': 'actions',\n        'elements': [\n            {\n                'type': 'button',\n                'text': {'type': 'plain_text', 'text': '🔗 View Flag in PostHog'},\n                'url': flagUrl\n            }\n        ]\n    })\n}\n\nblocks := arrayPushBack(blocks, {\n    'type': 'context',\n    'elements': [{'type': 'mrkdwn', 'text': f'📅 {timestamp} • {userEmail}'}]\n})\n\nlet res := fetch('https://slack.com/api/chat.postMessage', {\n    'body': {\n        'channel': inputs.channel,\n        'icon_emoji': inputs.icon_emoji,\n        'username': inputs.username,\n        'blocks': blocks,\n        'text': f'{userName} {actionText} feature flag: {flagName}'\n    },\n    'method': 'POST',\n    'headers': {\n        'Authorization': f'Bearer {inputs.slack_workspace.access_token}',\n        'Content-Type': 'application/json'\n    }\n})\n\nif (res.status != 200 or res.body.ok == false) {\n    throw Error(f'Failed to post message to Slack: {res.status}: {res.body}')\n}",
+  "inputs_schema": [
     {
-        'type': 'section',
-        'text': {
-            'type': 'mrkdwn',
-            'text': f'{emoji} *{userName}* {actionText} feature flag <{flagUrl}|{flagName}>'
-        }
-    }
-]
-```
-
-This sets up the header of the Slack message with the actor, the action, and a link to the flag.
-
-### Adding release condition details
-
-Next, add logic to display what changed when a flag is updated. This includes release conditions, variant rollouts, payloads, and status changes:
-
-```hog
-if (activity = 'updated' and notEmpty(changes)) {
-    let detailLines := []
-
-    for (let change in changes) {
-        if (change.field = 'filters') {
-            let groups := change.after.groups
-            if (notEmpty(groups)) {
-                let groupIndex := 0
-                for (let g in groups) {
-                    groupIndex := groupIndex + 1
-                    let rollout := f'{g.rollout_percentage}%'
-                    let conditionText := 'all users'
-
-                    if (notEmpty(g.properties)) {
-                        let parts := []
-                        for (let prop in g.properties) {
-                            if (prop.type = 'flag') {
-                                parts := arrayPushBack(parts, f'flag `{prop.label}` = `{prop.value}`')
-                            } else {
-                                let valStr := typeof(prop.value) = 'array'
-                                    ? arrayStringConcat(prop.value, ', ')
-                                    : toString(prop.value)
-                                parts := arrayPushBack(parts, f'`{prop.key}` {prop.operator} `{valStr}`')
-                            }
-                        }
-                        conditionText := arrayStringConcat(parts, ' AND ')
-                    }
-
-                    let variantText := g.variant != null ? f' → variant `{g.variant}`' : ''
-                    detailLines := arrayPushBack(
-                        detailLines,
-                        f'• *Set {groupIndex}:* {rollout} rollout — {conditionText}{variantText}'
-                    )
-                }
-            }
-
-            if (notEmpty(change.after.payloads)) {
-                for (let key, val in change.after.payloads) {
-                    detailLines := arrayPushBack(detailLines, f'• *Payload* `{key}`: `{val}`')
-                }
-            }
-
-            // Multivariate variants with before/after comparison
-            if (change.after.multivariate != null and notEmpty(change.after.multivariate.variants)) {
-                let variantParts := []
-                for (let v in change.after.multivariate.variants) {
-                    let oldPct := ''
-                    if (change.before.multivariate != null and notEmpty(change.before.multivariate.variants)) {
-                        for (let ov in change.before.multivariate.variants) {
-                            if (ov.key = v.key) {
-                                if (ov.rollout_percentage != v.rollout_percentage) {
-                                    oldPct := f' (was {ov.rollout_percentage}%)'
-                                }
-                            }
-                        }
-                    }
-                    variantParts := arrayPushBack(variantParts, f'`{v.key}` {v.rollout_percentage}%{oldPct}')
-                }
-                let variantsSummary := arrayStringConcat(variantParts, ', ')
-                detailLines := arrayPushBack(detailLines, f'• *Variants:* {variantsSummary}')
-            }
-        } else if (change.field = 'version') {
-            detailLines := arrayPushBack(detailLines, f'• *Version:* {change.before} → {change.after}')
-        } else if (change.field = 'name') {
-            detailLines := arrayPushBack(detailLines, f'• *Renamed:* `{change.before}` → `{change.after}`')
-        } else if (change.field = 'active') {
-            let statusText := change.after ? 'enabled' : 'disabled'
-            detailLines := arrayPushBack(detailLines, f'• *Status:* {statusText}')
-        } else if (change.field != 'deleted') {
-            detailLines := arrayPushBack(detailLines, f'• *{change.field}:* changed')
-        }
-    }
-
-    if (notEmpty(detailLines)) {
-        blocks := arrayPushBack(blocks, {'type': 'divider'})
-        let nl := '\n'
-        blocks := arrayPushBack(blocks, {
-            'type': 'section',
-            'text': {
-                'type': 'mrkdwn',
-                'text': arrayStringConcat(detailLines, nl)
-            }
-        })
-    }
-}
-```
-
-### Adding a link button and footer
-
-Finally, add a button to view the flag in PostHog (for non-deleted flags) and a footer with the timestamp and user email:
-
-```hog
-if (activity != 'deleted') {
-    blocks := arrayPushBack(blocks, {
-        'type': 'actions',
-        'elements': [
-            {
-                'type': 'button',
-                'text': {'type': 'plain_text', 'text': '🔗 View Flag in PostHog'},
-                'url': flagUrl
-            }
-        ]
-    })
-}
-
-blocks := arrayPushBack(blocks, {
-    'type': 'context',
-    'elements': [{'type': 'mrkdwn', 'text': f'📅 {timestamp} • {userEmail}'}]
-})
-
-let res := fetch('https://slack.com/api/chat.postMessage', {
-    'body': {
-        'channel': inputs.channel,
-        'icon_emoji': inputs.icon_emoji,
-        'username': inputs.username,
-        'blocks': blocks,
-        'text': f'{userName} {actionText} feature flag: {flagName}'
+      "type": "integration",
+      "key": "slack_workspace",
+      "label": "Slack workspace",
+      "required": true,
+      "secret": false,
+      "hidden": false,
+      "integration": "slack",
+      "requiredScopes": "channels:read groups:read chat:write chat:write.customize"
     },
-    'method': 'POST',
-    'headers': {
-        'Authorization': f'Bearer {inputs.slack_workspace.access_token}',
-        'Content-Type': 'application/json'
+    {
+      "type": "integration_field",
+      "key": "channel",
+      "label": "Channel to post to",
+      "required": true,
+      "secret": false,
+      "hidden": false,
+      "description": "Select the channel to post to (e.g. #general). The PostHog app must be installed in the workspace.",
+      "integration_key": "slack_workspace",
+      "integration_field": "slack_channel"
+    },
+    {
+      "type": "string",
+      "key": "icon_emoji",
+      "label": "Emoji icon",
+      "required": false,
+      "default": ":hedgehog:",
+      "secret": false,
+      "hidden": false
+    },
+    {
+      "type": "string",
+      "key": "username",
+      "label": "Bot name",
+      "required": false,
+      "default": "PostHog",
+      "secret": false,
+      "hidden": false
     }
-})
-
-if (res.status != 200 or res.body.ok == false) {
-    throw Error(f'Failed to post message to Slack: {res.status}: {res.body}')
+  ],
+  "inputs": {
+    "slack_workspace": {
+      "value": "<your_slack_integration_id>"
+    },
+    "channel": {
+      "value": "<your_slack_channel_id>"
+    },
+    "icon_emoji": null,
+    "username": null
+  },
+  "filters": {
+    "source": "events",
+    "events": [
+      {
+        "id": "$activity_log_entry_created",
+        "type": "events"
+      }
+    ],
+    "filter_test_accounts": false,
+    "properties": [
+      {
+        "key": "scope",
+        "value": ["FeatureFlag"],
+        "operator": "exact",
+        "type": "event"
+      }
+    ]
+  },
+  "icon_url": "/static/services/slack.png",
+  "template_id": "template-slack"
 }
 ```
 
-The `text` field serves as a fallback for notifications and accessibility, while `blocks` provides the rich formatting.
+## Step 2: Create the destination via the API
 
-## Step 4: Configure inputs
+Run the following cURL command, replacing `<your_api_key>` and `<project_id>` with your values:
 
-Make sure the following inputs are configured:
+```bash
+curl -X POST "https://us.posthog.com/api/environments/<project_id>/hog_functions/" \
+  -H "Authorization: Bearer <your_api_key>" \
+  -H "Content-Type: application/json" \
+  -d @create_hog_function.json
+```
 
-| Input | Description |
-| --- | --- |
-| **Slack workspace** | Your connected Slack workspace |
-| **Channel** | The channel to post notifications to (the PostHog app must be a member) |
-| **Emoji icon** | Optional. Defaults to `:hedgehog:` |
-| **Bot name** | Optional. Defaults to `PostHog` |
+> If you're on PostHog EU, use `eu.posthog.com` instead of `us.posthog.com`.
 
-## Step 5: Test and enable
+A successful response returns the created Hog function with an `id` field. The destination is immediately active.
 
-Click **Test** to send a sample notification to your Slack channel. If the message appears correctly, click **Create & enable** to activate the destination.
+## Step 3: Verify in PostHog
+
+After creating the destination, go to [Data Pipelines > Destinations](https://us.posthog.com/pipeline/destinations) in PostHog. You should see **Feature Flag Change Notifier -> Slack** listed and enabled. You can click into it to test, view Logs, or adjust settings.
+
+To trigger a test notification, create, update, or delete any feature flag in your project.
+
+## Understanding the Hog Code
+
+The Hog function in the JSON above does the following:
+
+1. **Parses the activity log event** – Extracts the action type (`created`, `updated`, `deleted`), flag name, actor, and change details from `event.properties`.
+
+2. **Builds the Slack message header** – Shows who did what with an emoji indicator and a link to the flag in PostHog.
+
+3. **Adds change details for updates** – When a flag is updated, the function iterates through each change and formats it:
+   - **Release conditions** – Rollout percentages, targeting rules, and variant assignments for each condition set
+   - **Multivariate variants** – Current rollout percentages with before/after comparison when changed
+   - **Payloads** – Key-value pairs attached to variants
+   - **Status changes** – Whether the flag was enabled or disabled
+   - **Renames** – Old and new flag names
+
+4. **Adds a "View Flag" button** – A direct link to the flag in PostHog (omitted for deleted flags).
+
+5. **Posts to Slack** – Sends the message using the Slack `chat.postMessage` API with Block Kit formatting.
 
 ## What the notifications look like
 
 Once enabled, you'll see Slack messages like:
 
-- **Flag created**: `🚩 Jane Doe created feature flag new-checkout-flow` with a link to view the flag.
-- **Flag updated**: `✏️ Jane Doe updated feature flag new-checkout-flow` with details about the release conditions, variant changes, and a before/after comparison of rollout percentages.
-- **Flag deleted**: `🗑️ Jane Doe deleted feature flag new-checkout-flow` with a timestamp and email.
+- **Flag created**: `🚩 Jane Doe created feature flag new-checkout-flow` with a link to view the flag
+- **Flag updated**: `✏️ Jane Doe updated feature flag new-checkout-flow` with details about release conditions, variant changes, and before/after rollout percentages
+- **Flag deleted**: `🗑️ Jane Doe deleted feature flag new-checkout-flow` with a timestamp and email
 
-## Alternative: Create via the API
+## Customizing the destination
 
-You can also create this destination programmatically using the PostHog API. Send a `POST` request to `/api/environments/<your_project_id>/hog_functions/` with the full configuration as the request body. This is useful if you want to replicate the setup across multiple projects.
+After creating the destination via the API, you can edit it in the PostHog UI. Go to **Data Pipelines** > **Destinations**, click on the destination, and click **Show source code** to modify the Hog code directly.
 
-See the [API documentation](https://us.posthog.com/api/schema/swagger-ui/) for the full schema.
+Common customizations:
+
+- **Filter to specific flags** – Add additional property filters in the `filters` section to only notify for certain flags
+- **Change the message format** – Modify the Slack Block Kit blocks in the Hog code
+- **Add more change details** – Extend the change parsing logic to surface additional fields
 
 ## Further reading
 
