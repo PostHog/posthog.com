@@ -8,7 +8,8 @@ availability:
   enterprise: full
 ---
 
-Alerts enable you to monitor your [insights](/product-analytics) and get notified when the value of the insight breaches a threshold that you've set (for example, the number of unique visitors to your site increased by 5% week over week).
+Alerts enable you to monitor your [insights](/product-analytics) and get notified when something important changes. You can set fixed thresholds (e.g., notify me when unique visitors exceed 5,000) or use [anomaly detection](#anomaly-detection) to automatically flag unusual patterns in your data.
+
 Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
 
 ## How to create an alert
@@ -152,6 +153,119 @@ This will then also enable you to set a percentage threshold.
 
 We support both **absolute value** thresholds (insight value more than or less than a certain number) or **percentage** thresholds (insight value changed by a certain percentage).
 Percentage thresholds are only available for relative alerts (as you need to compare two values to figure out percentage change).
+
+## Anomaly detection
+
+<CalloutBox icon="IconFlask" title="Feature preview" type="info">
+
+Anomaly detection alerts are in **beta**. To enable them, go to [Settings > Feature previews](https://us.posthog.com/settings/user-feature-previews) and toggle on **Anomaly Detection Alerts**.
+
+</CalloutBox>
+
+Instead of setting a fixed threshold, anomaly detection uses statistical algorithms to automatically learn what "normal" looks like for your data and alert you when something unusual happens. This is useful when:
+
+- You don't know what threshold to set (e.g., your traffic varies by time of day)
+- You want to detect subtle changes that a fixed threshold would miss
+- Your metrics have seasonal patterns that make static thresholds unreliable
+
+### Creating an anomaly detection alert
+
+1. Open an existing [trend insight](/docs/product-analytics/trends) or create a new one.
+2. Click **Actions** in the sidebar and select **Alerts**, then click **New alert**.
+3. Under alert type, select **Anomaly detection** instead of a threshold condition.
+4. Choose a **detector** (see [available detectors](#available-detectors) below).
+5. Configure the **sensitivity** and **window size** for your detector.
+6. Use the **Simulate** section to preview how the detector performs on historical data before saving.
+7. Set your notification preferences and click **Create alert**.
+
+### Available detectors
+
+PostHog includes 13 anomaly detection algorithms. For most use cases, **Z-score** or **MAD** are good starting points.
+
+#### Statistical detectors
+
+| Detector | Best for | How it works |
+|----------|----------|--------------|
+| **Z-score** | General purpose | Flags points that are many standard deviations from the rolling mean. Uses first-order differencing by default to handle cyclical data. |
+| **MAD** (Median Absolute Deviation) | Data with outliers | Similar to Z-score but uses median instead of mean, making it more robust to existing outliers. Uses first-order differencing by default. |
+| **IQR** (Interquartile Range) | Skewed distributions | Flags values outside the interquartile range. Less sensitive to distribution shape than Z-score. |
+
+#### Machine learning detectors
+
+These use the [PyOD](https://pyod.readthedocs.io/) library and work well for more complex patterns:
+
+| Detector | Best for | How it works |
+|----------|----------|--------------|
+| **Isolation Forest** | General purpose, high-dimensional | Isolates anomalies by randomly partitioning data. Anomalies require fewer partitions to isolate. |
+| **KNN** (K-Nearest Neighbors) | Cluster-based patterns | Flags points that are far from their nearest neighbors. |
+| **LOF** (Local Outlier Factor) | Variable-density data | Compares a point's local density to its neighbors. Good when "normal" varies across different ranges. |
+| **ECOD** | Fast, no tuning needed | Uses empirical cumulative distribution functions. One of the fastest detectors with no hyperparameters beyond threshold and window. |
+| **COPOD** | Multivariate data | Uses copula-based outlier detection. Fast and parameter-light. |
+| **HBOS** (Histogram-Based Outlier Score) | Fast, large datasets | Builds histograms to estimate density. Very fast but assumes feature independence. |
+| **PCA** (Principal Component Analysis) | Correlated metrics | Projects data into lower dimensions and flags points with high reconstruction error. |
+| **OCSVM** (One-Class SVM) | Complex boundaries | Learns a boundary around normal data. Good when normal data forms an irregular shape. |
+
+#### Ensemble detector
+
+The **Ensemble** detector combines two or more of the above detectors with AND/OR logic:
+
+- **AND**: Only fires when *all* sub-detectors agree a point is anomalous. Reduces false positives.
+- **OR**: Fires when *any* sub-detector flags an anomaly. Catches more anomalies but may be noisier.
+
+### Configuration
+
+All detectors share these core parameters:
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| **Sensitivity** (threshold) | Anomaly probability cutoff between 0 and 1. Higher values mean fewer alerts. | 0.9 |
+| **Window** | Number of historical data points used for training. | Depends on interval (see below) |
+
+Default window sizes based on your alert's check interval:
+
+| Interval | Default window | What it covers |
+|----------|---------------|----------------|
+| Hourly | 168 | 7 days |
+| Daily | 90 | ~3 months |
+| Weekly | 26 | ~6 months |
+| Monthly | 12 | 1 year |
+
+#### Preprocessing
+
+Some detectors support preprocessing options:
+
+- **Differencing** (`diffs_n`): Transforms absolute values into changes between consecutive points. Enabled by default for Z-score and MAD detectors. This prevents normal daily/weekly cycles from being flagged as anomalies.
+- **Lagging** (`lags_n`): Adds lagged values as additional features, giving the detector more temporal context. Useful for ML-based detectors like Isolation Forest or KNN.
+
+### Simulating a detector
+
+Before creating an alert, you can simulate how a detector would perform on your insight's historical data. The simulation section appears below the detector configuration in the alert form.
+
+The simulation shows:
+
+- A chart with your data values and anomaly scores
+- Red dots on points the detector would flag
+- Statistics: total points analyzed, anomalies found, and anomaly rate
+
+For ensemble detectors, the chart shows individual score lines for each sub-detector so you can see how they interact.
+
+Use the date range dropdown to test the detector over different time periods (e.g., last 24 hours, last 7 days, last 30 days).
+
+### Create anomaly detection alerts with PostHog AI
+
+You can create anomaly detection alerts using [PostHog AI](/docs/posthog-ai/overview) or the [MCP server](/docs/model-context-protocol). Example prompts:
+
+- "Create an anomaly detection alert on my pageviews insight using Z-score"
+- "Set up an ensemble alert using Z-score AND Isolation Forest on daily signups"
+- "Simulate a MAD detector on my revenue insight for the last 30 days"
+
+### Tips
+
+- **Start with Z-score or MAD** — they work well for most time series data and are easy to understand.
+- **Use the simulator** — always simulate before saving to see how the detector performs on your data.
+- **Set sensitivity to 0.95 for noisy metrics** — the default of 0.9 may produce too many alerts for high-variance data.
+- **Use ensemble AND to reduce false positives** — combining two detectors with AND logic means both must agree, which cuts down on noise.
+- **Differencing matters** — if your data has regular cycles (e.g., more traffic on weekdays), make sure differencing is enabled. Z-score and MAD enable it by default.
 
 ## Notifications
 

@@ -3,26 +3,30 @@ title: Dashboards
 sidebar: Docs
 showTitle: true
 related:
-    - ../../tutorials/how-to-embed-shared-dashboard.mdx
+  - ../../tutorials/how-to-embed-shared-dashboard.mdx
 availability:
-    free: partial
-    selfServe: partial
-    enterprise: full
+  free: partial
+  selfServe: partial
+  enterprise: full
 ---
 
-import {ProductScreenshot} from 'components/ProductScreenshot'
-import {ProductVideo} from 'components/ProductVideo'
+import { ProductScreenshot } from "components/ProductScreenshot";
+import { ProductVideo } from "components/ProductVideo";
 
-export const dashboardLight = "https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_light_61b3bab3b6.png"
-export const dashboardDark = "https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_dark_5f2002f750.png"
-export const dashboardfiltersLight = "https://res.cloudinary.com/dmukukwp6/video/upload/dashboard_filters_light_b410a86c0b.mp4"
-export const dashboardfiltersDark = "https://res.cloudinary.com/dmukukwp6/video/upload/dashboard_filters_dark_b45d273bae.mp4"
+export const dashboardLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_light_61b3bab3b6.png";
+export const dashboardDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_dark_5f2002f750.png";
+export const dashboardfiltersLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/dashboard_filters_light_b410a86c0b.mp4";
+export const dashboardfiltersDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/dashboard_filters_dark_b45d273bae.mp4";
 
 <iframe
-    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=441"
-    className="rounded shadow-xl"
-    width="600"
-    height="337"
+  src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=441"
+  className="rounded shadow-xl"
+  width="600"
+  height="337"
 />
 
 Dashboards are the easiest way to track all your most important product and performance metrics.
@@ -32,10 +36,10 @@ Unlike [notebooks](/docs/notebooks), which are ideal for adhoc analysis of speci
 You can create a new dashboard from scratch, but we also offer numerous [dashboard templates](/templates) for tracking things like [website metrics](/templates/website-dashboard), [product health metrics](/templates/health-dashboard), and [metrics for large language models](/docs/llm-analytics).
 
 <ProductScreenshot
-    imageLight = {dashboardLight} 
-    imageDark = {dashboardDark}
-    classes="rounded"
-    alt="Example of a dashboard"
+  imageLight={dashboardLight}
+  imageDark={dashboardDark}
+  classes="rounded"
+  alt="Example of a dashboard"
 />
 
 ## Creating a new dashboard
@@ -46,9 +50,15 @@ You can create a new dashboard from scratch, but we also offer numerous [dashboa
 1. Your dashboard will be empty – click **+New insight** to create an insight to add. Dashboards support all the core [product analytics insights](/docs/product-analytics/insights).
 1. Click **Save & add to dashboard** when you've created your insight.
 
-If you already have some insights set up, an alternative approach is to click **Add to dashboard** in any insight. 
+If you already have some insights set up, an alternative approach is to click **Add to dashboard** in any insight.
 
 > **Important:** Insights can appear on multiple dashboards at the same time, so you don't have to create multiple copies of the same insight.
+
+### AI-powered starter prompts
+
+When you create a blank dashboard, the empty state includes a set of AI-powered starter prompts. These cover common use cases like landing page performance, core web metrics, weekly marketing health, full-funnel tracking, and user research ops.
+
+Click any prompt to open [PostHog AI](/docs/posthog-ai) in the side panel with a pre-filled request. PostHog AI then builds the insights and adds them to your dashboard automatically.
 
 ## Organizing dashboards into folders
 
@@ -63,7 +73,7 @@ You can organize dashboards into folders for easier navigation. There are two wa
 
 ### Date range overrides
 
-New dashboards are set to *No date range override* by default. This means all insights use the date range applied in their configuration. 
+New dashboards are set to _No date range override_ by default. This means all insights use the date range applied in their configuration.
 
 Changing the date range on a dashboard forces all the insights to use the same date range, but this doesn't impact the date range that's shown when viewing an individual insight.
 
@@ -80,10 +90,10 @@ Dashboards also support most of the same [filters](/docs/product-analytics/trend
 - **Cohorts:** Filtering by [cohorts](/docs/data/cohorts) of users you've already created.
 
 <ProductVideo
-    videoLight = {dashboardfiltersLight} 
-    videoDark = {dashboardfiltersDark}
-    classes="rounded"
-    alt="Adding a dashboard filter"
+  videoLight={dashboardfiltersLight}
+  videoDark={dashboardfiltersDark}
+  classes="rounded"
+  alt="Adding a dashboard filter"
 />
 
 Using filters on dashboards is a useful way to compare usage between different types of users without recreating insights over and over.
@@ -96,7 +106,7 @@ Filters can be accessed in SQL insights through the [`filters` variable](/docs/d
 
 ### Editing the layout
 
-You can move and resize all the insights on a dashboard by entering the 'Edit layout' mode. 
+You can move and resize all the insights on a dashboard by entering the 'Edit layout' mode.
 
 You can do this in five ways:
 
@@ -143,7 +153,6 @@ When creating a button tile, you can configure:
 - **Style** - Choose between primary (filled) or secondary (outlined) button styles.
 - **Transparent background** - Toggle to remove the tile's background for a cleaner look.
 
-
 ### Toggling labels and values on insights
 
 You can toggle the visibility of labels or values on insight charts directly from the dashboard without editing the insight. Click the **...** icon on an insight card and select the toggle option. For pie charts, the option is **Show/Hide labels on series**. For other supported chart types (trends, lifecycle, stickiness, and funnel trends), the option is **Show/Hide values on series**. This change is saved to the insight.
@@ -152,9 +161,9 @@ You can toggle the visibility of labels or values on insight charts directly fro
 
 By clicking 'Share' in the top right corner you can:
 
--   Restrict edit access to certain members within a project. Dashboards can be shared either by members with administrator privileges or by the dashboard creator ([platforms add-ons](/platform-packages) required).
+- Restrict edit access to certain members within a project. Dashboards can be shared either by members with administrator privileges or by the dashboard creator ([platforms add-ons](/platform-packages) required).
 
--   Create a link to share your dashboard publicly, or embed your dashboard on a website. Read more about this in our [sharing and embedding docs](/docs/product-analytics/sharing).
+- Create a link to share your dashboard publicly, or embed your dashboard on a website. Read more about this in our [sharing and embedding docs](/docs/product-analytics/sharing).
 
 ### Auto refresh
 
@@ -167,7 +176,6 @@ This is useful if you have a PostHog dashboard on a TV screen for others to see.
 **Important:** Auto refresh only works when the browser tab is active.
 
 Shared and embedded dashboards (via public links) auto-refresh every 30 minutes by default. This requires no configuration – it's enabled automatically when the page is open. See the [sharing and embedding docs](/docs/product-analytics/sharing) for more on shared dashboards.
-
 
 ### AI-powered refresh analysis
 
@@ -192,6 +200,7 @@ This enables:
 To get started quickly, you can export your existing dashboards as Terraform code using the **Manage with Terraform** button.
 
 You'll see a **Manage with Terraform** button on:
+
 - **Dashboard pages** - Exports the entire dashboard including all insights, dashboard layouts, alerts, and hog functions
 - **Insight detail pages** - Exports the individual insight with its associated alerts and hog functions
 

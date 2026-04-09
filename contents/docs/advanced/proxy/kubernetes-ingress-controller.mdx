@@ -32,7 +32,7 @@ Here's the request flow:
 **Why two services?** PostHog uses separate domains for API requests and static assets. You need two ExternalName services:
 
 - **Main service:** Points to `us.i.posthog.com` or `eu.i.posthog.com` for event capture, feature flags, and API calls
-- **Assets service:** Points to `us-assets.i.posthog.com` or `eu-assets.i.posthog.com` for the JavaScript SDK and other static files
+- **Assets service:** Points to `us-assets.i.posthog.com` or `eu-assets.i.posthog.com` for the JavaScript SDK, remote config, and other static files
 
 **What's an ExternalName service?** It's a Kubernetes service type that maps a service name to an external DNS name. When your Ingress references the service, Kubernetes resolves the external domain and the Ingress Controller proxies to it.
 
@@ -87,6 +87,13 @@ spec:
       paths:
       - pathType: Prefix
         path: /static
+        backend:
+          service:
+            name: posthog-assets-proxy
+            port:
+              name: https
+      - pathType: Prefix
+        path: /array
         backend:
           service:
             name: posthog-assets-proxy
@@ -263,6 +270,13 @@ spec:
       paths:
       - pathType: Prefix
         path: /static
+        backend:
+          service:
+            name: posthog-assets-proxy
+            port:
+              name: https
+      - pathType: Prefix
+        path: /array
         backend:
           service:
             name: posthog-assets-proxy
@@ -610,7 +624,7 @@ If you see TLS errors like "certificate signed by unknown authority":
 
 ### Static assets return 404
 
-If the PostHog SDK fails to load or you see 404 errors for `/static/*` requests:
+If the PostHog SDK fails to load or you see 404 errors for `/static/*` or `/array/*` requests:
 
 1. Verify you created the `posthog-assets-proxy` service:
 
@@ -624,7 +638,7 @@ If the PostHog SDK fails to load or you see 404 errors for `/static/*` requests:
    kubectl describe service posthog-assets-proxy
 ```
 
-3. Verify your Ingress has a `/static` path rule before the catch-all `/` rule. Ingress path matching is order-dependent.
+3. Verify your Ingress has `/static` and `/array` path rules before the catch-all `/` rule. Ingress path matching is order-dependent.
 
 ### Events aren't reaching PostHog
 

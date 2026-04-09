@@ -21,19 +21,23 @@ availability:
       enterprise: true
 ---
 
-import {ProductScreenshot} from 'components/ProductScreenshot'
-export const cohortsPageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/cohorts/cohorts-page-light-mode.png"
-export const cohortsPageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/cohorts/cohorts-page-dark-mode.png"
+import { ProductScreenshot } from "components/ProductScreenshot";
+export const cohortsPageLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/cohorts/cohorts-page-light-mode.png";
+export const cohortsPageDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/cohorts/cohorts-page-dark-mode.png";
 
-import {ProductVideo} from 'components/ProductVideo'
-export const createCohortLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/features/cohorts/create-cohort-from-trend-light-mode.mp4"
-export const createCohortDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/features/cohorts/create-cohort-from-trend-dark-mode.mp4"
+import { ProductVideo } from "components/ProductVideo";
+export const createCohortLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/features/cohorts/create-cohort-from-trend-light-mode.mp4";
+export const createCohortDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/features/cohorts/create-cohort-from-trend-dark-mode.mp4";
 
 ## What are cohorts?
 
 <iframe
-    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=375"
-    className="rounded shadow-xl"
+  src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=375"
+  className="rounded shadow-xl"
 />
 
 Cohorts enable you to easily create a list of users who have something in common, such as completing an [action](/docs/data/actions) or having the same [property](/docs/product-analytics/person-properties).
@@ -48,7 +52,7 @@ Here are a few examples of the cohorts you can create:
 
 Your cohorts are available in the [People](https://us.posthog.com/persons) page under the [Cohorts](https://us.posthog.com/cohorts) tab.
 
-> **Note:** Cohorts rely on [person properties](/docs/product-analytics/person-properties), so you need to capture identified events to create them. 
+> **Note:** Cohorts rely on [person properties](/docs/product-analytics/person-properties), so you need to capture identified events to create them.
 
 ## Where can you use cohorts?
 
@@ -61,6 +65,9 @@ You can use cohorts in many different ways, such as:
 - To filter the session replay list and create playlists
 - Filter live events on the [activity page](/docs/activity)
 - Filter users on the People page
+- To [filter out internal and test users](/tutorials/filter-internal-users) in test account filters
+
+> **Note:** Cohorts used in [CDP](/docs/cdp) destination filters must contain **exclusively person property filters**. Person-property-only cohorts are automatically inlined and work in real-time CDP destinations. Cohorts with behavioral filters or no properties defined will cause CDP destinations to error. All cohort types work for analytics queries (insights, dashboards).
 
 You can use cohorts to answer questions like:
 
@@ -75,11 +82,10 @@ Cohorts are sometimes confused with [groups](/docs/product-analytics/group-analy
 - **Cohorts** represent a specific set of users – e.g., a list of users whose email contains a certain string (like a company's domain).
 
 - **Groups** aggregate events based on entities, such as organizations or companies, but do not necessarily connect to a user. They enable you to analyze trends, insights, and dashboards at an entity-level (like a company or organization), as opposed to a user-level.
- 
- If your only goal is to create a **list of users** with something in common, we recommend cohorts instead of groups.
 
-Groups require additional code in your app to set up, while cohorts are created in PostHog and don't require additional code. This makes cohorts easier to use and quicker to get started. 
+If your only goal is to create a **list of users** with something in common, we recommend cohorts instead of groups.
 
+Groups require additional code in your app to set up, while cohorts are created in PostHog and don't require additional code. This makes cohorts easier to use and quicker to get started.
 
 ## How to create a cohort
 
@@ -89,7 +95,7 @@ Once you've captured identified events, there are two ways to create a new cohor
 
 You can create cohorts using data from insights such as trends, [funnels](/docs/product-analytics/funnels), [user paths](/docs/product-analytics/paths) and [lifecycles](/docs/product-analytics/lifecycle).
 
-1. Go to [insights](https://us.posthog.com/insights) and open any insight that's aggregated at a user-level, like `unique users` or `weekly active user`. 
+1. Go to [insights](https://us.posthog.com/insights) and open any insight that's aggregated at a user-level, like `unique users` or `weekly active user`.
 
 2. Click a data point in the visualization to view the [persons](/docs/data/persons) represented in the underlying data.
 
@@ -98,10 +104,10 @@ You can create cohorts using data from insights such as trends, [funnels](/docs/
 The video below shows how to create a new cohort from a trend, although you can similarly create a cohort from a funnel, user path, or any other insight.
 
 <ProductVideo
-    videoLight={createCohortLight} 
-    videoDark={createCohortDark}
-    alt="How to create a cohort from a trend" 
-    classes="rounded"
+  videoLight={createCohortLight}
+  videoDark={createCohortDark}
+  alt="How to create a cohort from a trend"
+  classes="rounded"
 />
 
 ### Method 2: Create a new cohort from the cohorts page
@@ -111,10 +117,10 @@ The video below shows how to create a new cohort from a trend, although you can 
 2. Click **+ New Cohort** on the top right.
 
 <ProductScreenshot
-    imageLight={cohortsPageLight} 
-    imageDark={cohortsPageDark}
-    alt="left hand navigation for cohorts" 
-    classes="rounded"
+  imageLight={cohortsPageLight}
+  imageDark={cohortsPageDark}
+  alt="left hand navigation for cohorts"
+  classes="rounded"
 />
 
 ## Static and dynamic cohorts
@@ -129,7 +135,7 @@ You have two options when creating a cohort:
 
 Static cohorts are created from insights, by uploading a CSV of users, or by duplicating a dynamic cohort.
 
-When creating cohorts from CSVs, the [person profile](/docs/data/persons) associated with each row must already exist in PostHog. 
+When creating cohorts from CSVs, the [person profile](/docs/data/persons) associated with each row must already exist in PostHog.
 
 You can identify users using either:
 
@@ -210,12 +216,12 @@ Dynamic cohorts can be based on existing cohorts, and support the following crit
 
 #### Behavioral
 
-| **Event or action** | **Example** |
-| --- | --- |
-| Completed event or action | Completed `user signed up` in the last 30 days |
-| Did not complete event or action | Did not complete `user signed up` in the last 2 months |
-| Completed event or action multiple times | Completed `watched video` 5 times in the last 2 weeks |
-| Completed a sequence of events or actions | Completed `user signed up` in the last 5 days followed by `watched video` within 1 day of the initial event |
+| **Event or action**                              | **Example**                                                                                                        |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| Completed event or action                        | Completed `user signed up` in the last 30 days                                                                     |
+| Did not complete event or action                 | Did not complete `user signed up` in the last 2 months                                                             |
+| Completed event or action multiple times         | Completed `watched video` 5 times in the last 2 weeks                                                              |
+| Completed a sequence of events or actions        | Completed `user signed up` in the last 5 days followed by `watched video` within 1 day of the initial event        |
 | Did not complete a sequence of events or actions | Did not complete `user signed up` in the last 5 days followed by `watched video` within 1 day of the initial event |
 
 You can select `days`, `weeks`, `months` or `years` time ranges here.
@@ -224,27 +230,27 @@ You can select `days`, `weeks`, `months` or `years` time ranges here.
 
 Has or doesn't have a person property with the following operators:
 
-| **Operator** | **Example** |
-| --- | --- |
-| `equals` or `does not equal` | `Pineapple on pizza` property `does not equal` "true" |
-| `contains` or `does not contain` | `email` property `does not contain` "gmail", "yahoo", "hotmail" |
-| `matches regex` or `does not match regex` | `Country code` property `matches regex` "us\|uk\|aus" |
-| `greater than` or `greater than or equal to` | `Age` property `greater than` "21" |
-| `less than` or `less than or equal to` | `Age` property `less than or equal to` "21" |
-| `is set` or `is not set` | `UTM Source` property `is not set` |
-| `between` or `not between` | `Age` property is between "18" and "30" |
-| `minimum` or `maximum` value | `Organization size` property has a `minimum` of "5" |
+| **Operator**                                 | **Example**                                                     |
+| -------------------------------------------- | --------------------------------------------------------------- |
+| `equals` or `does not equal`                 | `Pineapple on pizza` property `does not equal` "true"           |
+| `contains` or `does not contain`             | `email` property `does not contain` "gmail", "yahoo", "hotmail" |
+| `matches regex` or `does not match regex`    | `Country code` property `matches regex` "us\|uk\|aus"           |
+| `greater than` or `greater than or equal to` | `Age` property `greater than` "21"                              |
+| `less than` or `less than or equal to`       | `Age` property `less than or equal to` "21"                     |
+| `is set` or `is not set`                     | `UTM Source` property `is not set`                              |
+| `between` or `not between`                   | `Age` property is between "18" and "30"                         |
+| `minimum` or `maximum` value                 | `Organization size` property has a `minimum` of "5"             |
 
 For a complete list of all available operators, including semver operators for version-based filtering, see the [property filter operators reference](/docs/data/property-filters).
 
 #### Lifecycle
 
-| **Criteria** | **Example** |
-| --- | --- |
-| Completed an event for first time | Completed `shared insight` event for the first time in the "last 30 days" |
-| Completed an event regularly | Completed `shared insight` at least "3 times per week" for at least "3 of the last 5 periods" |
-| Stopped doing an event | Stopped doing `shared insight` event in the "last 5 days" but had done it in the "5 days prior" |
-| Started doing event again | Started doing `shared insight` event in the "last 5 days" but had not done it in the "5 days prior" |
+| **Criteria**                      | **Example**                                                                                         |
+| --------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Completed an event for first time | Completed `shared insight` event for the first time in the "last 30 days"                           |
+| Completed an event regularly      | Completed `shared insight` at least "3 times per week" for at least "3 of the last 5 periods"       |
+| Stopped doing an event            | Stopped doing `shared insight` event in the "last 5 days" but had done it in the "5 days prior"     |
+| Started doing event again         | Started doing `shared insight` event in the "last 5 days" but had not done it in the "5 days prior" |
 
 You can select `days`, `weeks`, `months` or `years` time ranges here.
 
@@ -257,11 +263,11 @@ Dynamic cohorts are updated once every 24 hours.
 ### Can you use a dynamic cohort as a feature flag target?
 
 You cannot use dynamic cohorts that include behavioral or lifecycle criteria as a feature flag target. To target these dynamic cohorts for a feature flag, A/B test, or survey, you must first duplicate them into a static cohort. Dynamic cohorts with only person property criteria can be used.
- 
- ### Can you use groups in cohorts?
- 
- Not yet, but we are working on [rewriting cohort calculations in SQL](/teams/product-analytics#goals) which will unlock your ability to do this. 
- 
+
+### Can you use groups in cohorts?
+
+Not yet, but we are working on [rewriting cohort calculations in SQL](/teams/product-analytics#goals) which will unlock your ability to do this.
+
 ### Further reading
 
 - [How to track new and returning users in PostHog](/tutorials/track-new-returning-users)

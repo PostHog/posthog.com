@@ -6,18 +6,31 @@ PostHog is an open-source product analytics and data platform. After provisionin
 
 After provisioning, you received:
 
-- **api_token** (starts with `phc_`) — Your PostHog project API token. Used to initialize PostHog SDKs. Safe to expose in frontend code.
-- **api_host** — Your PostHog instance URL. Either `https://us.i.posthog.com` (US) or `https://eu.i.posthog.com` (EU).
+- **api_key** (starts with `phc_`) — Your PostHog project API key. Used to initialize PostHog SDKs. Safe to expose in frontend code.
+- **personal_api_key** (starts with `phx_`) — Your PostHog personal API key. Used by the MCP server and API. Do NOT read or log this value directly.
+- **host** — Your PostHog instance URL. Either `https://us.posthog.com` (US) or `https://eu.posthog.com` (EU).
 
-## Install PostHog with the wizard
+## Set up the PostHog MCP server
 
-Run the PostHog setup wizard to automatically install and configure PostHog in your project. It auto-detects your framework and handles everything:
+To give your AI coding agent access to PostHog (feature flags, analytics, error tracking, etc.), run:
+
+```bash
+npx @posthog/wizard@latest mcp add
+```
+
+The wizard auto-detects your MCP clients (Claude Code, Cursor, VS Code, etc.) and configures the MCP server. It reads credentials from your `.env` file automatically.
+
+## Install PostHog in your codebase
+
+The fastest way to integrate PostHog is the setup wizard, which auto-detects your framework and configures everything:
 
 ```bash
 npx @posthog/wizard@latest
 ```
 
 The wizard installs the right SDK, creates provider/config files, and sets up framework-specific configuration. It supports Next.js, React, Vue, Angular, Svelte, Astro, Remix, Django, Flask, and more.
+
+The wizard also reads `POSTHOG_PERSONAL_API_KEY` from your environment to configure the PostHog MCP server automatically — no browser-based OAuth needed.
 
 If the wizard doesn't support your framework, see the full list of SDKs and manual setup guides at https://posthog.com/docs/libraries.
 
