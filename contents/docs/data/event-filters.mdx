@@ -1,0 +1,117 @@
+---
+title: Event filters
+sidebar: Docs
+showTitle: true
+availability:
+  free: none
+  selfServe: none
+  enterprise: full
+---
+
+Event filters let you drop unwanted events at ingestion time before they're stored or processed further. This is the earliest point you can filter events in the [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline), making it the most efficient way to exclude noise from your data.
+
+Common use cases include:
+
+- Dropping events from automated bots or internal tools
+- Filtering out test or staging traffic by `distinct_id`
+- Removing high-volume, low-value events to reduce costs
+- Temporarily filtering buggy data while you roll out a client-side fix
+
+You can find event filters at [**Data management** > **Event filtering**](https://app.posthog.com/data-management/event-filtering).
+
+## How it works
+
+Event filters evaluate each incoming event against a set of conditions you define. If an event matches the filter, PostHog drops it before ingestion. If it doesn't match, it continues through the pipeline as normal.
+
+Filters run **before** [transformations](/docs/cdp/transformations) and [destinations](/docs/cdp/destinations), so dropped events won't trigger any downstream processing.
+
+If your filtering logic can be expressed as an event filter, we recommend using event filters over a [drop events transformation](/docs/cdp/transformations/drop-events). Event filters run earlier in the pipeline and don't require writing custom code.
+
+## Operating modes
+
+Event filters have three modes:
+
+| Mode | Behavior |
+|------|----------|
+| **Disabled** | No filtering is applied. All events are ingested normally. |
+| **Dry run** | Matching events are counted but **not** dropped. Use this to validate your filter before going live. |
+| **Live** | Matching events are dropped from ingestion. |
+
+We recommend starting with **dry run** mode and checking the metrics to confirm your filter is matching the right events before switching to **live**.
+
+## Creating a filter
+
+Filters are built using a visual expression builder that supports nested boolean logic (AND, OR, NOT).
+
+Each condition has three parts:
+
+1. **Field** - what to match on:
+   - `event_name` - the name of the event (e.g., `$pageview`, `signup`)
+   - `distinct_id` - the [distinct ID](/docs/data/persons) attached to the event
+
+2. **Operator** - how to match:
+   - `exact` - the field value equals the specified value exactly
+   - `contains` - the field value contains the specified string
+
+3. **Value** - the string to match against
+
+### Combining conditions
+
+- **AND groups** match when **all** conditions in the group are true.
+- **OR groups** match when **any** condition in the group is true.
+- **NOT** negates a group, matching when the group's conditions are **not** true.
+
+You can nest groups up to 5 levels deep and add up to 20 conditions total. Conditions and groups can be reordered using drag and drop.
+
+**Example:** To drop all `$pageview` events from a bot with distinct ID containing `bot-crawler`:
+
+```
+AND
+├── event_name exact "$pageview"
+└── distinct_id contains "bot-crawler"
+```
+
+**Example:** To drop events from multiple internal tools:
+
+```
+OR
+├── distinct_id contains "internal-tool-a"
+└── distinct_id contains "internal-tool-b"
+```
+
+## Test cases
+
+Events dropped by a filter cannot be recovered, so it's important to verify your filter works correctly before turning it on. Test cases let you do this — they validate the filter against example events and serve as living documentation of what the filter is intended to match.
+
+Each test case specifies:
+
+- An **event name**
+- A **distinct ID**
+- The **expected result** - either "Drop" or "Ingest"
+
+Test cases run locally in your browser and show a pass/fail result. If any test case fails, the filter cannot be set to **live** mode — it will automatically downgrade to **dry run** until all tests pass.
+
+## Metrics
+
+The event filtering page shows approximate counts of:
+
+- **Dropped** - events that were dropped in live mode
+- **Would be dropped** - events that would have been dropped in dry run mode
+
+Use these metrics to validate your filter is matching the right volume and type of events before going live.
+
+> **Note:** Metrics are processed on a best-effort basis and may be off by a small percentage.
+
+## Limits
+
+- Maximum **20 conditions** per filter
+- Maximum **5 levels** of nesting
+- Only `event_name` and `distinct_id` fields are supported
+- Only `exact` and `contains` operators are supported
+- One filter configuration per project
+
+## Further reading
+
+- [How the ingestion pipeline works](/docs/how-posthog-works/ingestion-pipeline)
+- [Ingestion warnings](/docs/data/ingestion-warnings)
+- [Transformations](/docs/cdp/transformations)
