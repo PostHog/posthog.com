@@ -11,14 +11,6 @@ import WizardCommand from 'components/WizardCommand'
 
 PostHog automatically connects revenue data to persons and groups when you use revenue events. For data warehouse sources, you need to map the connection manually.
 
-## The easy way
-
-Let the wizard handle the metadata configuration for you by running this command in your project directory with your terminal:
-
-<!--TODO: Update the command. Maybe reference the skill in the MCP, still TBD-->
-
-<WizardCommand command="setup-revenue-analytics"/>
-
 ## Step 1: Add metadata when creating new customers
 
 Search your codebase for where you create Stripe customers (e.g. `stripe.Customer.create` or equivalent) and add the `posthog_person_distinct_id` metadata field.
