@@ -85,6 +85,12 @@ export const Content = () => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-2">
                     <ResourceItem
                         type="Getting started"
+                        title="Why you need logs"
+                        description="What logs show you that nothing else does, and how AI tools can query them for you"
+                        url="/docs/logs/basics"
+                    />
+                    <ResourceItem
+                        type="Getting started"
                         title="Start here"
                         description="A high-level overview of the integration process for logging"
                         url="/docs/logs/start-here"

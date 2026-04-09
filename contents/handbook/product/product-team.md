@@ -29,10 +29,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend><TeamMember name="Anna Szell" photo /></legend>
 
--   <SmallTeam slug="analytics-platform" />
 -   <SmallTeam slug="data-stack" />
--   <SmallTeam slug="product-analytics" />
--   <SmallTeam slug="web-analytics" />
 
 </fieldset>
 
@@ -60,9 +57,19 @@ Here is a overview that shows which of our PMs currently works with which team:
 -   <SmallTeam slug="workflows" />
 -   <SmallTeam slug="batch-exports" />*
 -   Endpoints
--   Logs
+-   <SmallTeam slug="logs" />
+-   <SmallTeam slug="llm-analytics" />
 
 *light support
+
+</fieldset>
+
+<fieldset>
+<legend><TeamMember name="Mike Warren" photo /></legend>
+
+-   <SmallTeam slug="product-analytics" />
+-   <SmallTeam slug="web-analytics" />
+-   <SmallTeam slug="analytics-platform" />
 
 </fieldset>
 
@@ -70,7 +77,6 @@ Here is a overview that shows which of our PMs currently works with which team:
 <legend>Teams with no PM currently</legend>
 
 -   <SmallTeam slug="customer-analytics" />
--   <SmallTeam slug="llm-analytics" />
 
 </fieldset>
 

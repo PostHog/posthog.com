@@ -27,13 +27,13 @@ Here's what we've learned about marketing for developers.
 
 2. Do something remarkable. Marketing something remarkable is easy.
 
-3. Developers build things because what exists isn't good enough. Tell people that! [Be opinionated](/handbook/growth/marketing#1-be-opinionated), unhappy with the status quo, and take a stand. Don't follow the crowd or dilute your message with a bunch of corporate speak.
+3. Developers build things because what exists isn't good enough. Tell people that! [Be opinionated](/handbook/marketing#1-be-opinionated), unhappy with the status quo, and take a stand. Don't follow the crowd or dilute your message with a bunch of corporate speak.
 
 ![Generic marketing](https://res.cloudinary.com/dmukukwp6/image/upload/generic_eb6bf02734.png)
 
-4. Building a great product and [telling people about it](/handbook/growth/marketing#2-pull-dont-push) is a more sustainable path to success than spamming people with generic content, ads, or emails. Putting in the effort to make what you produce a bit higher quality pays off.
+4. Building a great product and [telling people about it](/handbook/marketing#2-pull-dont-push) is a more sustainable path to success than spamming people with generic content, ads, or emails. Putting in the effort to make what you produce a bit higher quality pays off.
 
-5. Assume your audience is smart. [Don't try to trick them](/handbook/growth/marketing#3-no-sneaky-shit) with tedious, clickbaity, hyperbolic marketing tactics. It's patronizing. Make honest claims about the functionality of your product. Don't unfairly or make false claims about competitors.
+5. Assume your audience is smart. [Don't try to trick them](/handbook/marketing#3-no-sneaky-shit) with tedious, clickbaity, hyperbolic marketing tactics. It's patronizing. Make honest claims about the functionality of your product. Don't unfairly or make false claims about competitors.
 
 6. Marketing lore tells you to focus on the why, but we think the opposite. Focusing on [benefits rather than features](/founders/features-sell) is tired, the language is vague, it makes it harder to understand what something does. Trust that your customers can figure it out and focus on features instead.
 
@@ -43,7 +43,7 @@ Here's what we've learned about marketing for developers.
 
 8. The best way to create your ICP is to start with [your best guess and test it](/newsletter/ideal-customer-profile-framework#3-start-with-your-best-guess-and-test-it). Figure out what your customer needs, what they have, and what they don't need. [Gather intel](/newsletter/ideal-customer-profile-framework#4-gather-intel-every-way-you-can), ask questions, and fill in details from there.
 
-9. Because our ICP is developers, we hire developers to do marketing. This gives us the skills we need to understand developers, speak their language, and create content they find [genuinely useful](/handbook/growth/marketing#4-speak-like-your-users).
+9. Because our ICP is developers, we hire developers to do marketing. This gives us the skills we need to understand developers, speak their language, and create content they find [genuinely useful](/handbook/marketing#4-speak-like-your-users).
 
 10. Speak like your users. Find out the terms and phrases they use and use those. Talking to users is a great way to figure this out. Doing so helps make your product legible to them.
 
@@ -67,7 +67,7 @@ Here's what we've learned about marketing for developers.
 
 18. Video is similarly difficult. It's easy to create mediocre videos, but high-quality ones that capture a ton of attention are hard. Video requires much more planning, coordination, equipment, and time than most marketing does.
 
-19. Identify [what you want to be great at](/newsletter/b2b-startup-marketing-strategy#1-prioritize-what-you-care-about-) and spend your time there. List the areas you [don't want to spend time on too](/handbook/growth/marketing#things-we-dont-want-to-spend-time-on), otherwise you will be distracted by a bunch of random opportunities and never go into the depth you need to succeed in one channel.
+19. Identify [what you want to be great at](/newsletter/b2b-startup-marketing-strategy#1-prioritize-what-you-care-about-) and spend your time there. List the areas you [don't want to spend time on too](/handbook/marketing#things-we-dont-want-to-spend-time-on), otherwise you will be distracted by a bunch of random opportunities and never go into the depth you need to succeed in one channel.
 
 20. Compete on [depth rather than breadth](/newsletter/b2b-startup-marketing-strategy#2-compete-on-depth-not-breadth-). Larger competitors will always be able to do “more” marketing than you are, so you need to focus on quality to stand out. When we choose to spend time on something, we invest a lot more into it than others usually do.
 
@@ -100,7 +100,7 @@ No one has figured out how to improve your visibility on AI platforms (AKA "gene
 
 31. HackerNews is a [double-edged sword](/founders/dev-marketing-for-startups#hacker-news-is-a-double-edged-sword). Although a lot of people see it as the ultimate success for marketing and it provides a huge ego-boost, the actual signup boost you get from it is much lower. It's also unreliable, even if you're great, you'll have a 1 in 10 hit rate (and don't try to game it).
 
-32. You should care a lot about [launches](/handbook/growth/marketing#things-we-want-to-be-brilliant-at). These are opportunities to capitalize on the work people put into building a product or feature and break through the noise. Doing this well gives products momentum to help them succeed.
+32. You should care a lot about [launches](/handbook/marketing#things-we-want-to-be-brilliant-at). These are opportunities to capitalize on the work people put into building a product or feature and break through the noise. Doing this well gives products momentum to help them succeed.
 
 33. Beware the [attribution mirage](/founders/dev-marketing-for-startups#beware-the-attribution-mirage). UTM parameters might tell you users come from one source, but the reality of where they heard about you is likely different. A user could read an article they found, search “posthog,” and click a Google Ad. This would tell us “Google Ads are awesome” when maybe that isn't the case.
 

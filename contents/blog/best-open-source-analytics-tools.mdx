@@ -1,5 +1,5 @@
 ---
-date: 2025-02-26
+date: 2026-03-10
 title: 8 best open source analytics tools you can self-host
 rootPage: /blog
 sidebar: Blog
@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
+  - natalia-amorim
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
@@ -32,7 +33,7 @@ This guide only includes open-source analytics tools that:
 <details>
   <summary>Who maintains this guide?</summary>
 
-This guide is maintained by [PostHog](https://posthog.com/), an open-source developer platform. You can suggest additions to this guide by opening an issue on our [website repo](https://github.com/PostHog/posthog.com).
+This guide is maintained by [PostHog](/), an open-source developer platform. You can suggest additions to this guide by opening an issue on our [website repo](https://github.com/PostHog/posthog.com).
 
 We maintain separate guides on [open-source feature flag tools](/blog/best-open-source-feature-flag-tools),  [open-source AB testing products](/blog/best-open-source-ab-testing-tools), and [open-source session replay tools](/blog/best-open-source-session-replay-tools).
 
@@ -47,12 +48,18 @@ We maintain separate guides on [open-source feature flag tools](/blog/best-open-
   - **Sep 13, 2023:** Added Ackee and Open Web Analytics
   - **Nov 22, 2023:** Added inclusion criteria, removed Ackee
   - **Feb 26, 2025:** Complete guide overhaul.
+  - **Mar 9, 2026:** Content refresh.
 
 </details>
 
-<br/>
 
 ## The best open source analytics tools
+
+You want visibility into what users are doing – but you also want control over where that data lives. Open source analytics tools give you both: insights without handing your data to a third party.
+
+This guide covers the best open source analytics tools you can self-host, from full product analytics platforms to lightweight web analytics and BI tools.
+
+**Looking for cloud product analytics tools instead?** See our guide to the [best product analytics tools for startups](/blog/best-product-analytics-tools-for-startups).
 
 ### 1. PostHog
 
@@ -80,11 +87,11 @@ We maintain separate guides on [open-source feature flag tools](/blog/best-open-
 
 - **Created:** 2020
 - **License:** MIT
-- **GitHub Stars:** 24.2k
+- **GitHub Stars:** 31.9k
 
-[PostHog](https://posthog.com/) is an all-in-one platform that combines product analytics with several other developer-focused tools, such as web analytics, session replay, feature flags, experiments, error tracking, and surveys.
+[PostHog](/) is an all-in-one platform that combines product analytics with several other developer-focused tools, such as [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [surveys](/surveys), [logs](/logs), and more.
 
-Beyond the core [product analytics features](/product-analytics), it also supports creating [custom insights using SQL](/docs/product-analytics/sql), and offers a [built-in data warehouse](/docs/data-warehouse) so you can import data from external sources like Stripe, Hubspot, and Zendesk.
+Beyond the core [product analytics features](/product-analytics), it also supports creating [custom insights using SQL](/docs/data-warehouse/sql), and offers a [built-in data warehouse](/docs/data-warehouse) so you can import data from external sources like Stripe, Hubspot, and Zendesk.
 
 #### Who should use PostHog?
 
@@ -105,9 +112,9 @@ Developers and startups who need an in-depth understanding of what users are doi
 <details>
     <summary>What tools can PostHog replace?</summary>
 
-Several. The built-in product analytics is an [alternative to Mixpanel](/blog/best-mixpanel-alternatives) and [Amplitude](/blog/best-amplitude-alternatives), and it can replace Google Analytics for website and marketing analytics. 
+Several. The built-in product analytics is an alternative to tools such as [Mixpanel](/blog/best-mixpanel-alternatives), [Amplitude](/blog/best-amplitude-alternatives), and [Heap](/blog/best-heap-alternatives) and it can [replace Google Analytics](/blog/posthog-vs-ga4) for website and marketing analytics.
 
-With heatmaps plus session replay for both web and mobile apps, PostHog can replace the likes of [Hotjar](/blog/best-hotjar-alternatives) and [FullStory](/blog/best-fullstory-alternatives). It even includes feature flag and experiment features like those found in [LaunchDarkly](/blog/best-launchdarkly-alternatives).
+With heatmaps plus session replay for both web and mobile apps, PostHog can replace the likes of [Hotjar](/blog/best-hotjar-alternatives) and [FullStory](/blog/best-fullstory-alternatives). It even includes feature flag and experiment features like those found in [LaunchDarkly](/blog/best-launchdarkly-alternatives) or error tracking like [Sentry](/blog/posthog-vs-sentry). 
 
 </details>
 
@@ -142,9 +149,9 @@ Yes. PostHog offers a managed cloud option with a [generous free tier](/pricing)
 
 - **Created:** 2007
 - **License:** AGPLv3
-- **GitHub Stars:** 20.2k
+- **GitHub Stars:** 21.3k
 
-[Matomo](https://github.com/matomo-org/matomo) is an open-source platform for website analytics. The user experience is closely modeled on the previous version of Google Analytics, known as Universal Analytics, which many people prefer to Google's current offering.
+[Matomo](/blog/posthog-vs-matomo) is an open-source platform for website analytics. The user experience is closely modeled on the previous version of Google Analytics, known as Universal Analytics, which many people prefer to Google's current offering.
 
 It looks little dated compared to some tools in this list, but it's a mature and reliable platform used by many large government and non-profit organizations.
 
@@ -168,7 +175,7 @@ Companies that want comprehensive website and marketing analytics without the pr
 <details>
     <summary>What tools can Matomo replace?</summary>
 
-It's mainly pitched as an [alternative to Google Analytics 4](/blog/ga4-alternatives), especially for those looking for ironclad GDPR compliance. Matomo even offers a data import tool for Google Analytics, so you can bring your data with you.
+It's mainly pitched as an [alternative to Google Analytics 4](/blog/ga4-alternatives), especially for those looking for ironclad [GDPR compliance](/blog/best-gdpr-compliant-analytics-tools). Matomo even offers a data import tool for Google Analytics, so you can bring your data with you.
 
 </details>
 
@@ -200,7 +207,7 @@ Yes. Matomo's cloud offering includes all features and charges by "hits per mont
 #### What is Metabase?
 
 - **Created:** 2015
-- **GitHub Stars:** 40.7k
+- **GitHub Stars:** 46.3k
 - **License:** AGPLv3
 
 [Metabase](https://github.com/metabase/metabase) is one of the most popular [open-source BI tools](/blog/best-open-source-business-intelligence-tools). Metabase's visual query builder enables you to create shareable dashboards in just a few minutes with a drag-and-drop interface, and there's a native SQL editor for advanced users.
@@ -217,7 +224,7 @@ Companies that want to analyze product and company data that's already stored in
 |-------------------------------------------------------------|-------------------------------------------------------------|
 | Connects to all popular closed and open-source databases    | Requires separate event collection and storage setup        |
 | Visual query builder for building simple queries            | Less accessible for non-technical users                     |
-| Full SQL editor for advanced users and queries              |                                                             |
+| Full SQL editor for advanced users and queries              | Lacks features beyond BI                                     |
 | Join and query data from multiple sources                   |                                                             |
 | Light hosting requirements                                  |                                                             |
 
@@ -260,9 +267,9 @@ Yes. The Starter plan includes cloud deployment for $85 per month for five users
 
 - **Created:** 2019
 - **License:** AGPLv3
-- **GitHub Stars:** 21.4k
+- **GitHub Stars:** 24.3k
 
-[Plausible Analytics](https://github.com/plausible/analytics/) is a lightweight web analytics tool focused on providing [GDPR-compliant website analytics](/blog/best-gdpr-compliant-analytics-tools) that doesn't infringe on user privacy. This means Plausible doesn't rely on cookies and is compliant with regulations like GDPR out of the box. 
+[Plausible Analytics](/blog/posthog-vs-plausible) is a lightweight web analytics tool focused on providing [GDPR-compliant website analytics](/blog/best-gdpr-compliant-analytics-tools) that doesn't infringe on user privacy. This means Plausible doesn't rely on cookies and is compliant with regulations like GDPR out of the box. 
 
 It's very fast and easy to use, though this comes at the expense of features. It's ideal for anyone who just wants simple web analytics features, like tracking top pages and referrers, but it's less useful for app analytics and understanding user behavior.
 
@@ -276,7 +283,7 @@ Anyone who wants easy-to-use website analytics that doesn't want to use Google A
 |-------------------------------------------------------------|-------------------------------------------------------------|
 | Fast and easy to use                                        | Limited analytics features                                  |
 | Minimal impact on website performance                       | Open-source release only updated twice a year               |
-| Cookieless GDPR-compliance                                  |                                                             |
+| Cookieless GDPR-compliance                                  |  No free tier on hosted version                      |
 | Google Analytics import available                           |                                                             |
 | Will scale to large traffic requirements                    |                                                             |
 
@@ -317,10 +324,10 @@ Yes. There's no free tier, but it's cheap even at high volumes. Pricing starts a
 #### What is OpenPanel?
 
 - **Created:** 2024
-- **GitHub Stars:** 3.7k
+- **GitHub Stars:** 5.4k
 - **License:** AGPLv3
 
-[OpenPanel](https://github.com/Openpanel-dev/openpanel) is inspired by Mixpanel and Plausible. It aims to offer some tools common of a product analytics tools, but with the speed, simplicity, and privacy-friendly features Plausible brings to web analytics.
+**OpenPanel** is inspired by Mixpanel and Plausible. It aims to offer some tools common of a product analytics tools, but with the speed, simplicity, and privacy-friendly features Plausible brings to web analytics.
 
 This means that, unlike Plausible, you can build custom dashboards, as well as build insights that track retention within your app. OpenPanel also creates profiles for individual users that show how often they use your app, events they trigger, and most visited pages.
 
@@ -378,9 +385,9 @@ Yes. There is no free tier, but 100k events a month cost just $20, and 1 million
 
 - **Founded:** 2020
 - **License:** MIT
-- **GitHub Stars:** 23k
+- **GitHub Stars:** 35.6k
 
-[Umami](https://github.com/umami-software/umami) is another popular privacy-first website analytics tool. Like Plausible, it tracks basic website analytics, doesn't collect any personal information, and is extremely fast. Similar to OpenPanel, it's added some product analytics features, such as user journeys, retention, and funnels, though it only supports very basic analysis.
+**Umami** is another popular privacy-first website analytics tool. Like Plausible, it tracks basic website analytics, doesn't collect any personal information, and is extremely fast. Similar to OpenPanel, it's added some product analytics features, such as user journeys, retention, and funnels, though it only supports very basic analysis.
 
 #### Who should use Umami?
 
@@ -436,9 +443,9 @@ Yes and, unlike Plausible, there's a free tier. You can track up to 100k events 
 
 - **Created:** 2016
 - **License:** Apache-2.0
-- **GitHub Stars:** 64.4k
+- **GitHub Stars:** 70.8k
 
-[Superset](https://github.com/apache/superset) is the another of the big open-source business intelligence tools alongside Metabase and Redash. It's also considered the most complex and least accessible for non-technical users, though its range of visualizations and charting options is unmatched. Superset is ideal for enterprises with experienced in-house data teams, or anyone with lots of SQL experience.
+**Superset** is the another of the big open-source business intelligence tools alongside Metabase and Redash. It's also considered the most complex and least accessible for non-technical users, though its range of visualizations and charting options is unmatched. Superset is ideal for enterprises with experienced in-house data teams, or anyone with lots of SQL experience.
 
 #### Who should use Apache Superset?
 
@@ -493,9 +500,9 @@ Not directly, though third-parties offer managed instances.
 
 - **Created:** 2021
 - **License:** AGPLv3
-- **GitHub Stars:** 9.8k
+- **GitHub Stars:** 11.8k
 
-[OpenReplay](https://github.com/openreplay/openreplay) is a session replay suite built for developers to find and eliminate problems. 
+**OpenReplay** is a session replay suite built for developers to find and eliminate problems. 
 
 In addition to session replay, it also includes some product analytics features, such as conversion funnels, user paths, heatmaps, trends, and custom dashboards. These features aren't as developed as dedicated analytics tools like Mixpanel or PostHog, but they're a useful augment to the core replay features.
 
@@ -541,3 +548,101 @@ OpenReplay [typically recommends](https://docs.openreplay.com/en/deployment/) a 
 Yes. There's a free tier that's limited to 1,000 session per month, or you can pay-as-you-go for $5.95 per 1,000 sessions each month.
 
 </details>
+
+## Which open source analytics tool should you choose?
+
+- Want an all-in-one platform that covers product analytics, session replay, feature flags, and more? **[PostHog](/)**
+- Need a privacy-first Google Analytics replacement with GDPR compliance built in? **Matomo**
+- Want to query and visualize data that's already in your warehouse? **Metabase**
+- Just need fast, lightweight web analytics without cookies or tracking? **Plausible**
+- Want basic product analytics with user profiles and retention, without the complexity of PostHog? **OpenPanel**
+- Prefer a clean, simple web analytics tool similar to Plausible? **Umami**
+- Need advanced visualizations and have an experienced data team to run it? **Apache Superset**
+- Looking for a self-hostable session replay tool to replace LogRocket? **OpenReplay**
+
+
+## Frequently Asked Questions
+
+<details>
+  <summary>What are the best open source analytics tools in 2026?</summary>
+
+Based on our research, the best open source analytics tools you can self-host right now are:
+
+1. **[PostHog](/)** – Best all-in-one platform with product analytics, web analytics, session replay, feature flags, and more
+2. **Matomo** – Best open source alternative to Google Analytics for website and marketing analytics
+3. **Metabase** – Best open source BI tool for teams with data already in a warehouse
+4. **Plausible** – Best lightweight, privacy-first web analytics tool
+5. **OpenPanel** – Best simple product analytics for developers who want more than Plausible
+6. **Umami** – Best privacy-first web analytics alternative to Plausible
+7. **Apache Superset** – Best for advanced data teams who need complex visualizations
+8. **OpenReplay** – Best open source session replay tool for developers
+
+</details>
+
+<details>
+  <summary>What's the difference between open source and cloud analytics tools?</summary>
+
+**Open source analytics tools** let you self-host on your own infrastructure, giving you full control over where your data lives. This is useful for GDPR compliance, data sovereignty, or cost management at scale.
+
+**Cloud analytics tools** are managed by the vendor – easier to set up and maintain, but your data lives on their servers. Most tools in this list also offer a cloud-hosted option if you'd rather not manage infrastructure yourself.
+
+For cloud product analytics tools, see our guide to the [best product analytics tools for startups](/blog/best-product-analytics-tools-for-startups).
+
+</details>
+
+<details>
+  <summary>Should I self-host PostHog?</summary>
+
+You can, but for most teams PostHog Cloud is the better choice – even if open source and data control are important to you.
+
+Here's why:
+
+- **Automatic updates:** PostHog Cloud gets continuous updates and new features as soon as they ship. When self-hosting, you'll need to manage these updates yourself or you'll always be running slightly behind.
+- **Generous free tier:** PostHog Cloud includes 1 million events, 5,000 session recordings, 1 million feature flag requests every month, and a lot more at no cost. **Around 90% of PostHog users pay nothing**. It's hard to beat free with zero infrastructure overhead.
+- **Scaling complexity:** PostHog only recommends self-hosting for deployments up to ~300k events per month. Beyond that, managing the infrastructure yourself becomes a real engineering burden.
+- **Easy to get started:** You can be up and running in minutes with no servers to provision. The [PostHog setup wizard](/wizard) detects your framework, installs the right SDK, and configures everything automatically – no manual setup required.
+
+<WizardCommand slim />
+
+The main reason to self-host is strict data residency requirements that can't be met by PostHog's EU Cloud option. If that's your situation, the open source release is a solid starting point. For everyone else, cloud is the faster, easier, and usually cheaper path.
+
+</details>
+
+<details>
+  <summary>Which open source analytics tools are best for GDPR compliance?</summary>
+
+**Plausible** and **Umami** are cookieless by default and collect no personal data, making them the simplest path to GDPR compliance. **Matomo** is widely used by government and enterprise organizations specifically for its GDPR compliance features, including data anonymization and consent management. **PostHog** offers cookieless tracking and EU Cloud hosting if you want a managed option with EU data residency.
+
+For a deeper breakdown, see our guide to the [best GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools).
+
+</details>
+
+<details>
+  <summary>Can I use PostHog for free?</summary>
+
+Yes. PostHog offers both a self-hostable open source release (MIT license) and a cloud-hosted free tier. The cloud free tier includes 1 million events, 5,000 session recordings, and 1 million feature flag requests every month. Around 90% of PostHog users pay nothing. 
+
+See [PostHog's pricing page](/pricing) for full details.
+
+</details>
+
+<details>
+  <summary>What is the best open source alternative to Google Analytics?</summary>
+
+**Matomo** is the most direct open source alternative to Google Analytics – it even supports importing your existing GA data. **Plausible** and **Umami** are better options if you want something simpler and privacy-first. For deeper product analytics beyond website traffic, **PostHog** is the strongest option.
+
+</details>
+
+<details>
+  <summary>How is PostHog different from other open source analytics tools?</summary>
+
+PostHog is more than an analytics tool. It combines everything developers need to build and improve their product in one platform:
+
+- **All-in-one toolkit:** [Product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [error tracking](/error-tracking), and [LLM analytics](/llm-analytics)
+- **Open source:** MIT-licensed and [actively maintained](https://github.com/PostHog/posthog) with 31k+ GitHub stars
+- **Generous free tier:** 1M events, 5K recordings, and 1M flag requests per month at no cost
+- **Developer-first:** Transparent APIs, [SQL access](/docs/product-analytics/sql), and a [public roadmap](/roadmap)
+
+</details>
+
+<NewsletterForm />

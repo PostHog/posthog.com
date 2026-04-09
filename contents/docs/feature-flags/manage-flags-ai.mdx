@@ -1,0 +1,39 @@
+---
+title: Manage Feature Flags with PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) creates and manages [Feature Flags](/docs/feature-flags) using natural language. Describe the flag you want – including rollout percentage, targeting rules, and variants – and PostHog AI sets it up for you.
+
+## How it works
+
+When you ask PostHog AI to create a flag, it creates it with your specified key and rollout percentage, configures targeting rules based on user properties, cohorts, or groups, and sets up variants and payloads for multivariate flags. It can also search your existing flags, identify stale flags not modified recently, and help you plan flag cleanup.
+
+## Manage existing flags
+
+PostHog AI also helps you manage existing flags:
+
+- **Find stale flags** – Ask "which flags not evaluated in 90 days?" to identify flags you should remove
+- **Audit flag usage** – Ask "how many users are seeing the new-checkout flag?" to check rollout status
+- **Generate cleanup prompts** – PostHog AI can generate code search prompts for removing flag references from your codebase
+- **Modify existing flags** – "Roll out `dark-mode` to 50%" or "add the enterprise cohort to the `beta-features` flag"
+
+## Try it
+
+Select a prompt to try it out in the PostHog app:
+
+- [`Create a feature flag for dark mode rolled out to 20% of users`](https://app.posthog.com/#panel=max:Create%20a%20feature%20flag%20for%20dark%20mode%20rolled%20out%20to%2020%25%20of%20users)
+- [`Create a multivariate flag with three button color variants`](https://app.posthog.com/#panel=max:Create%20a%20multivariate%20flag%20with%20three%20button%20color%20variants)
+- [`Show me all active feature flags in production`](https://app.posthog.com/#panel=max:Show%20me%20all%20active%20feature%20flags%20in%20production)
+- [`Which flags not modified in the last 90 days?`](https://app.posthog.com/#panel=max:Which%20flags%20haven%27t%20been%20modified%20in%20the%20last%2090%20days%3F)
+- [`Create a flag targeting only users on the enterprise plan`](https://app.posthog.com/#panel=max:Create%20a%20flag%20targeting%20only%20users%20on%20the%20enterprise%20plan)
+
+## Tips for better results
+
+- **Include the flag key** – "Create a flag called `new-checkout-flow`" saves a step compared to letting PostHog AI generate a name
+- **Describe targeting rules** – "only for users on the pro plan in the US" translates directly into property filters
+- **Specify rollout strategy** – "10% rollout" or "only for the beta-testers cohort" tells PostHog AI exactly how to configure the release
+- **Ask about cleanup** – "Which flags not evaluated in 90 days?" helps you find flags to remove
+
+## Get started
+
+To start managing flags with PostHog AI, [set up PostHog AI](/docs/posthog-ai/start-here).
