@@ -457,7 +457,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 name: 'Michael Ko',
                 role: 'Co-founder & CEO',
                 image: {
-                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/suped/michael-suped.png',
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/michael_suped_7544dceb29.jpeg',
                 },
                 quotes: [
                     "Product data was in PostHog, and messaging logic was somewhere else. Every time we wanted to use a new event or property in a campaign, we had to make sure it was synced properly. It's manageable, but it's extra coordination that doesn't really add value.",

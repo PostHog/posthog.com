@@ -1,5 +1,5 @@
 ---
-title: Creating feature flags
+title: Creating Feature Flags
 sidebar: Docs
 showTitle: true
 availability:
@@ -26,16 +26,16 @@ Before you can evaluate a feature flag in your application code, you need to cre
 
 ## Step 1. Create a new feature flag (required)
 
-To create a new feature flag, navigate to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click the **New** button. You can also click the dropdown menu beside the **New** button to create these pre-configured flags:
+To create a new feature flag, navigate to the [Feature Flags tab](https://app.posthog.com/feature_flags) in PostHog and click the **New** button. You can also click the dropdown menu beside the **New** button to create these pre-configured flags:
 
 - **Boolean flag** – Simple on/off toggle for feature releases
 - **Multivariate flag** – Multiple variants with rollout percentages (for A/B tests)
 - **Remote config** – Deliver configuration values to your app
-- **Experiment** – Create an A/B test with statistical analysis (links to [experiments](/docs/experiments))
+- **Experiment** – Create an A/B test with statistical analysis (links to [Experiments](/docs/experiments))
 
 
 <details>
-<summary>Migrate feature flags from another tool</summary>
+<summary>Migrate Feature Flags from another tool</summary>
 
 If you can pull feature flag data from another tool programmatically, you can use [our API](/docs/api/feature-flags) to migrate them. We even wrote guides for doing this with [LaunchDarkly](/docs/migrate/launchdarkly) and [Statsig](/docs/migrate/statsig).
 
@@ -56,11 +56,11 @@ You will later [evaluate the feature flag](/docs/feature-flags/adding-feature-fl
 - `posthog.isFeatureEnabled('new-landing-page')`
 - `posthog.getFeatureFlag('betaFeature')`
 
-Use a descriptive key that fits your code and is easy to understand. You should also include a **description** to help you and your team understand the purpose of the feature flag.
+Use a descriptive key that fits your code and is straightforward to understand. You should also include a **description** to help you and your team understand the purpose of the feature flag.
 
 ## Step 3. Choose a feature flag type (required)
 
-In the **Served value** section, you can configure the type of feature flag you want to create. There are three types of feature flags:
+In the **Served value** section, you can configure the type of feature flag you want to create. There are three types of Feature Flags:
 
 | Flag type | Description |
 |-----------|-------------|
@@ -76,12 +76,12 @@ A payload is an additional piece of information sent to your app when a flag is 
 
 They enable you to configure functionality related to your flag inside PostHog, instead of having to make code changes or redeploy your app.
 
-#### Boolean and Remote Config Flag Payloads
+#### Boolean and remote config flag payloads
 
 - **Boolean flags**: Can have a single payload that is returned when the flag is enabled
 - **Remote config flags**: Always return the same payload for all users (meant for static configuration)
 
-#### Multivariate Flag Payloads
+#### Multivariate flag payloads
 
 For multivariate flags, you can configure **different payloads for each variant**. This allows you to serve different configurations, content, or parameters based on which variant a user receives.
 
@@ -105,15 +105,15 @@ This specifies the conditions a user must meet to access the feature flag and re
 
 Condition sets are evaluated from **top to bottom**, and the **first** condition set that matches will be used. A condition matches when all property filters pass and the target falls within the rollout percentage.
 
-By default, release conditions **match by user**, meaning the flag is evaluated based on the user's distinct ID. You can change this using the **Match by** dropdown:
+By default, release conditions **match by user**, meaning the flag is evaluated based on your distinct ID. You can change this using the **Match by** dropdown:
 
-- **User** (default) – Evaluates based on the user's distinct ID. Best for in-app features targeting logged-in users.
-- **Device** – Evaluates based on the device ID. Best for flags targeting anonymous users, as it ensures a consistent experience on the device even after the user logs in. See [device bucketing](/docs/feature-flags/device-bucketing) for more details.
+- **User** (default) – Evaluates based on your distinct ID. Best for in-app features targeting logged-in users.
+- **Device** – Evaluates based on the device ID. Best for flags targeting anonymous users, as it ensures a consistent experience on the device even after you log in. See [device bucketing](/docs/feature-flags/device-bucketing) for more details.
 - **Group** (requires [group analytics](/docs/product-analytics/group-analytics)) – Evaluates based on a group key (e.g., company, team, or organization). See [targeting groups](/docs/feature-flags/targeting-groups#targeting-groups-teams-or-organizations) for more details.
 
 Percentage rollouts are available for all flags. More options depend on your PostHog setup:
 
-Rollout percentages support decimal values with up to two decimal places of precision (e.g., 0.15% or 33.33%), down to a minimum of 0.01%. Enter decimal values in the percentage text input — the slider uses whole-number steps.
+Rollout percentages support decimal values with up to two decimal places of precision (e.g., 0.15% or 33.33%), down to a minimum of 0.01%. Enter decimal values in the percentage text input – the slider uses whole-number steps.
 
 
 - If GeoIP is enabled, you can target based on geographic location.
@@ -125,7 +125,7 @@ Rollout percentages support decimal values with up to two decimal places of prec
 <ProductScreenshot
     imageLight={ReleaseConditionLight}
     imageDark={ReleaseConditionDark}
-    alt="Feature flags release conditions"
+    alt="Feature Flags release conditions"
     classes="rounded"
 />
 
@@ -148,7 +148,7 @@ This is especially useful for mobile apps where you want to roll out features to
 For more sophisticated feature rollouts, you can also create **feature flag dependencies** where one flag's activation depends on another flag's state. This enables complex scenarios like:
 
 - Enabling features only for users in beta programs
-- Creating conditional experiments based on other feature participation
+- Creating conditional Experiments based on other feature participation
 - Setting up safety mechanisms where critical flags must be active first
 
 Learn more about [feature flag dependencies](/docs/feature-flags/dependencies).
@@ -175,7 +175,7 @@ This determines whether your flag is enabled on creation. Disabled flags return 
 
 Automatically track how often this flag is called and what values are returned. Creates a dashboard with call volume trends and variant distribution insights.
 
-### Persisting feature flags across authentication steps (optional)
+### Persisting Feature Flags across authentication steps (optional)
 
 > Default: `Disabled`
 >
@@ -183,32 +183,32 @@ Automatically track how often this flag is called and what values are returned. 
 
 Feature flag values are calculated based on a user's properties. Since it's possible for a user to have different properties before and after login, they may receive different feature flag values before and after logging in.
 
-By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same.
+By enabling the option to persist Feature Flags across authentication, you ensure that the flag value remains the same. Before enabling this, make sure your [identity strategy](/docs/feature-flags/stable-identity-for-flags) is set up correctly – see [how this works internally](/docs/feature-flags/stable-identity-for-flags#how-persist-flags-across-authentication-works-internally) for the full picture.
 
 > **Tip:** If your flag targets anonymous users and you just need the flag value to stay consistent through the login flow on the same device, consider using [device bucketing](/docs/feature-flags/device-bucketing) instead. It achieves this without the performance tradeoffs below.
 
 However, this feature comes with limitations and tradeoffs. In our experience, these tradeoffs make it **not worthwhile** for the majority of our users.
 
-<CalloutBox icon="IconWarning" title="Limitations of persisting feature flags" type="caution">
+<CalloutBox icon="IconWarning" title="Limitations of persisting Feature Flags" type="caution">
 
 - **Incompatible with [local evaluation](/docs/feature-flags/local-evaluation):** The additional checks must be performed on PostHog servers, so local evaluation cannot be used.
 - **Incompatible with [bootstrapping](/docs/feature-flags/bootstrapping):** Bootstrapping relies on local evaluation, which cannot correctly calculate persistent flag values.
-- **Only works with Person Profiles:** Requires `person_profiles: 'always'` and calling `posthog.identify` from the JavaScript Web SDK. [Learn more about anonymous vs identified events here](/docs/data/anonymous-vs-identified-events).
-- **Slower feature flag response:** Enabling this introduces additional server-side checks, which can slow down response time when fetching feature flags.
+- **Only works with Person Profiles** – Requires `person_profiles: 'always'` and calling `posthog.identify` from the JavaScript Web SDK. [Learn more about anonymous vs identified events here](/docs/data/anonymous-vs-identified-events).
+- **Slower feature flag response:** Enabling this introduces additional server-side checks, which can slow down response time when fetching Feature Flags.
 
 </CalloutBox>
 
 ## Step 5. Configure evaluation runtime and contexts (optional)
 
-You can control where your feature flags are evaluated using the **evaluation runtime** and **evaluation contexts** sections of the form. You can find a detailed explanation of how evaluation contexts work in the [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts).
+You can control where your Feature Flags are evaluated using the **evaluation runtime** and **evaluation contexts** sections of the form. You can find a detailed explanation of how evaluation contexts work in the [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts).
 
 ### Evaluation runtime (optional)
 
 > Default: `Both client and server`
 >
-> By default, feature flags will be evaluated in all (both client and server) environments.
+> By default, Feature Flags will be evaluated in all (both client and server) environments.
 
-Feature flags can be configured to evaluate in one of three runtime environments:
+Feature Flags can be configured to evaluate in one of three runtime environments:
 
 | Runtime | Description |
 |---------|-------------|
@@ -217,7 +217,7 @@ Feature flags can be configured to evaluate in one of three runtime environments
 | **Server-side only** | Flags are only evaluated on server-side SDKs (Node.js, Python, Ruby, Go, PHP, etc.) |
 
 <details>
-<summary>How feature flags determine the current runtime</summary>
+<summary>How Feature Flags determine the current runtime</summary>
 
 When you specify an evaluation runtime, PostHog automatically detects the requesting environment based on:
 
@@ -243,7 +243,7 @@ If you're not sure which runtime to use, you can use the following guidelines:
    - Internal features or admin capabilities
 
 2. **Use client-only evaluation** for:
-   - UI/UX experiments
+   - UI/UX Experiments
    - Frontend-specific features
    - Visual changes that don't require backend logic
 
@@ -265,7 +265,7 @@ Evaluation contexts control where and when a feature flag evaluates at runtime. 
 Add contexts to describe where the flag is used in your application. Some common examples are:
 
 - Application type (e.g., "main-app", "marketing-site", "docs")
-- Platform (e.g., "web", "mobile", "api")
+- Platform (e.g., "web", "mobile", "API")
 - Product area (e.g., "checkout", "onboarding", "admin")
 
 When evaluation contexts are configured, the feature flag only evaluates when the SDK provides matching contexts in the `/flags` request. You can use evaluation contexts to accomplish:
@@ -289,20 +289,20 @@ We recommend reading the [evaluation contexts documentation](/docs/feature-flags
 
 ### Tags (optional)
 
-Tags are a way to categorize and organize your feature flags. They are purely organizational and do not affect flag evaluation. Use tags to label flags by team, project, or any other grouping that helps you manage flags at scale.
+Tags are a way to categorize and organize your Feature Flags. They are purely organizational and do not affect flag evaluation. Use tags to label flags by team, project, or any other grouping that helps you manage flags at scale.
 
 Tags are separate from [evaluation contexts](#evaluation-contexts-optional), which control where flags evaluate at runtime.
 
 
-## Managing and deleting feature flags
+## Managing and deleting Feature Flags
 
-After creating feature flags, you may need to manage or delete them to keep your project organized. PostHog provides tools to help you clean up flags at scale.
+After creating Feature Flags, you may need to manage or delete them to keep your project organized. PostHog provides tools to help you clean up flags at scale.
 
-### Deleting feature flags in bulk
+### Deleting Feature Flags in bulk
 
-To delete multiple feature flags at once:
+To delete multiple Feature Flags at once:
 
-1. Go to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog.
+1. Go to the [Feature Flags tab](https://app.posthog.com/feature_flags) in PostHog.
 2. Use the checkboxes to select the flags you want to delete.
 3. Click the **Delete** button that appears in the toolbar.
 
