@@ -2,7 +2,7 @@
 title: Linking PostHog as a data warehouse source
 ---
 
-Much of your PostHog data is available in the data warehouse by default. This includes data like [events](/docs/data/events), [persons](/docs/data/persons), [sessions](/docs/data/sessions), [groups](/docs/product-analytics/group-analytics), and the [query log](/docs/data/query-log).
+Much of your PostHog data is available in the data warehouse by default. This includes data like [events](/docs/data/events), [persons](/docs/data/persons), [sessions](/docs/data/sessions), [groups](/docs/product-analytics/group-analytics), [ai_events](/docs/llm-analytics), and the [query log](/docs/data/query-log).
 
 Using our [SDKs](/docs/libraries) or [API](/docs/api/capture) to [capture events](/docs/getting-started/send-events), [identify users](/docs/getting-started/identify-users), create groups, and add properties adds data to these tables, that you can query using the [SQL editor](/docs/data-warehouse/query).
 
@@ -30,7 +30,7 @@ Some products have special event names and properties that can be useful to know
 
 - [Autocaptured events](/tutorials/hogql-autocapture) are named `$autocapture` and have the `elements_chain` property.
 
-- [LLM analytics](/docs/llm-analytics) captures events like `$ai_generation`, `$ai_span`, `$ai_embedding` with properties like `$ai_model`, `$ai_input_tokens`, and `$ai_total_cost_usd`.
+- [LLM analytics](/docs/llm-analytics) captures events like `$ai_generation`, `$ai_span`, `$ai_embedding` with properties like `$ai_model`, `$ai_input_tokens`, and `$ai_total_cost_usd`. For advanced queries, use the dedicated `ai_events` table.
 
 - [Error tracking](/docs/error-tracking) captures `$exception` events with properties like `$exception_list` and `$exception_fingerprint` both with a specific expected schema.
 
@@ -92,6 +92,39 @@ Unlike the other tables, the `sessions` table stores all its properties as separ
 | [View additional session properties](/docs/data/sessions#session-properties) | See [full list](/docs/data/sessions#session-properties) of session properties             |
 
 The `sessions` table is heavily used in [web analytics](/docs/web-analytics). It is also useful for [marketing analytics](/docs/web-analytics/marketing-analytics) and [session-based metrics](/tutorials/session-metrics) more broadly.
+
+### `ai_events`
+
+The `ai_events` table provides queryable access to [LLM analytics](/docs/llm-analytics) data. It's optimized for analyzing AI/LLM usage including model performance, token consumption, costs, and errors.
+
+Some of the columns in the `ai_events` table are:
+
+| Column                | Description                                            |
+| --------------------- | ------------------------------------------------------ |
+| `uuid`                | Unique ID of the event                                 |
+| `event`               | Name of the event (e.g., `$ai_generation`, `$ai_span`) |
+| `timestamp`           | Time the event was captured                            |
+| `distinct_id`         | Unique identifier for the user                         |
+| `trace_id`            | Unique identifier for the trace                        |
+| `span_id`             | Unique identifier for the span                         |
+| `generation_id`       | Unique identifier for the generation                   |
+| `model`               | Model name (e.g., `gpt-4`, `claude-3`)                 |
+| `provider`            | Model provider (e.g., `openai`, `anthropic`)           |
+| `total_tokens`        | Total tokens used                                      |
+| `input_tokens`        | Input tokens used                                      |
+| `output_tokens`       | Output tokens used                                     |
+| `total_cost_usd`      | Total cost in USD                                      |
+| `input_cost_usd`      | Input cost in USD                                      |
+| `output_cost_usd`     | Output cost in USD                                     |
+| `latency`             | Request latency in seconds                             |
+| `time_to_first_token` | Time to first token in seconds                         |
+| `is_error`            | Whether the request resulted in an error               |
+| `error`               | Error message if applicable                            |
+| `input`               | Input payload (JSON)                                   |
+| `output`              | Output payload (JSON)                                  |
+| `tools`               | Tool definitions (JSON)                                |
+
+The `ai_events` table supports person joins, so you can access person properties using `person.properties` just like with the `events` table.
 
 ### `query_log`
 
