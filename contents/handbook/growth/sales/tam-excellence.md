@@ -1,5 +1,5 @@
 ---
-title: TAM Excellence
+title: TAM excellence
 sidebar: Handbook
 showTitle: true
 ---
