@@ -27,7 +27,7 @@ An excellent TAM:
     - Said plainly, congratulate them on product launches, give them feedback on their product, leave them reviews, and back up that sincere interest with really getting to know their product
 
 - Has the technical chops to get their hands dirty and help a customer with their technical questions / issues
-    - As a general rule, we aren't implementing for our customers, but we should be capable of doing so - that demonstrates we understand enough to be genuinely useful
+    - As a general rule, we aren't implementing for our customers, but we should be capable of doing so – that demonstrates we understand enough to be genuinely useful
 
 - Doesn't take "we're good" as an answer from a customer and continues to engage and find those areas where they aren't good and could use our help
     - A customer may say "talk to us again in 6 months" but that is almost always born out of not wanting a sales person to try to upsell them. Don't upsell them, give them concrete suggestions that will reduce cost or help them with issues they face
