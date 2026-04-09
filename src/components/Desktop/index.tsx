@@ -405,6 +405,7 @@ export default function Desktop() {
     const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const { getWallpaperClasses } = useTheme()
     const { addToast } = useToast()
+    const posthog = usePostHog()
     function generateInitialPositions(columns = 2): IconPositions {
         const positions: IconPositions = {}
 
@@ -519,10 +520,16 @@ export default function Desktop() {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            window.__desktopLoaded = true
-            window.dispatchEvent(new CustomEvent('desktopLoaded'))
+            const removeLoadingAnimation = () => {
+                if (window.__desktopLoaded) return
+                window.__desktopLoaded = true
+                window.dispatchEvent(new CustomEvent('desktopLoaded'))
+            }
+            posthog?.onFeatureFlags(removeLoadingAnimation)
+            const timeout = setTimeout(removeLoadingAnimation, 5000)
+            return () => clearTimeout(timeout)
         }
-    }, [])
+    }, [posthog])
 
     const handlePositionChange = (appLabel: string, position: IconPosition) => {
         const newPositions = { ...iconPositions, [appLabel]: position }
