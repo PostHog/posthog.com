@@ -63,6 +63,7 @@ datastores
 datasource
 datasources
 datetime
+debuggability
 dedupe
 deduplicate
 deduplicated
@@ -89,6 +90,7 @@ enum
 enums
 env
 errored
+eval
 evals
 failover
 failovers
@@ -133,6 +135,7 @@ microcontrollers
 microformat
 middleware
 middlewares
+mitigations
 minified
 minify
 misconfigure
@@ -181,6 +184,7 @@ pseudocode
 queryable
 realtime
 rebase
+reframes
 rebased
 rebasing
 refactor
@@ -199,6 +203,7 @@ runbook
 runbooks
 runtime
 runtimes
+semver
 serverless
 sidepanel
 sidepanels
@@ -247,6 +252,7 @@ viewports
 waitlist
 walkthrough
 walkthroughs
+webviews
 webhook
 webhooks
 webserver

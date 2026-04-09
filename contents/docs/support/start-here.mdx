@@ -6,9 +6,9 @@ contentMaxWidthClass: max-w-5xl
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import OSButton from 'components/OSButton'
-import Alpha from './_snippets/alpha.mdx'
+import SupportAlpha from './_snippets/alpha.mdx'
 
-<Alpha />
+<SupportAlpha />
 
 <QuestLog firstSpeechBubble="Let's set up customer support!" lastSpeechBubble="You're ready to help your users!">
 
@@ -56,10 +56,10 @@ Once enabled, visit your site and look for the chat button in the bottom-right c
 4. Check your PostHog inbox to see the ticket
 
 The widget automatically captures:
-- **Session ID** - Links to events and exceptions from the user's session
-- **Session Replay ID** - Links to the user's [session recording](/docs/session-replay) if replay is enabled
-- **Current URL** - The page they were on
-- **User identity** - If they're identified via [`posthog.identify()`](/docs/product-analytics/identify)
+- **Session ID** – Links to events and exceptions from your session
+- **Session Replay ID** – Links to your [session recording](/docs/session-replay) if replay is enabled
+- **Current URL** – The page they were on
+- **User identity** – If they're identified via [`posthog.identify()`](/docs/product-analytics/identify)
 
 </QuestLogItem>
 
@@ -69,16 +69,36 @@ The widget automatically captures:
     icon="IconMessage"
 >
 
-Connect your Slack workspace to turn Slack messages into support tickets. The **SupportHog** bot enables two-way sync — messages in Slack create tickets, and your replies in PostHog are posted back to the Slack thread.
+Connect your Slack workspace to turn Slack messages into support tickets. The **SupportHog** bot enables two-way sync – messages in Slack create tickets, and your replies in PostHog are posted back to the Slack thread.
 
 Three ways to create tickets from Slack:
 
-1. **Support channel** — every message in a dedicated channel becomes a ticket
-2. **Bot mention** — `@SupportHog` in any channel
-3. **Emoji reaction** — react with a configurable emoji (default `:ticket:`)
+1. **Support channel** – every message in a dedicated channel becomes a ticket
+2. **Bot mention** – `@SupportHog` in any channel
+3. **Emoji reaction** – react with a configurable emoji (default `:ticket:`)
 
 <OSButton variant="primary" asLink to="/docs/support/slack">
   Set up Slack integration
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Connect Email"
+    subtitle="Optional"
+    icon="IconMail"
+>
+
+Let customers reach you by email. Incoming emails become support tickets in PostHog, and your replies are sent back as emails – keeping the full conversation threaded in both PostHog and the customer's inbox.
+
+1. **Add an email address** – e.g. `support@company.com`
+2. **Set up forwarding** – forward incoming mail to the PostHog forwarding address
+3. **Verify your domain** – add SPF and DKIM DNS records so PostHog can send replies on your behalf
+
+You can connect up to 10 email addresses per project (e.g. `support@`, `billing@`, `sales@`).
+
+<OSButton variant="primary" asLink to="/docs/support/email">
+  Set up email channel
 </OSButton>
 
 </QuestLogItem>
@@ -93,11 +113,11 @@ All tickets appear in the Support inbox within PostHog.
 
 ### What you'll see for each ticket
 
-- **Chat thread** - The conversation with the customer
-- **Session recording** - Watch what the user was doing (if available)
-- **Recent events** - Events from around when they submitted
-- **Exceptions** - Any errors from their session
-- **Previous tickets** - Other conversations with this user
+- **Chat thread** – The conversation with the customer
+- **Session recording** – Watch what they were doing (if available)
+- **Recent events** – Events from around when they submitted
+- **Exceptions** – Any errors from their session
+- **Previous tickets** – Other conversations with this person
 
 This context helps you understand and resolve issues faster.
 
@@ -113,13 +133,13 @@ This context helps you understand and resolve issues faster.
     icon="IconDecisionTree"
 >
 
-Use [Workflows](/docs/workflows) to automate ticket management. Support emits events that trigger workflows, and workflow actions can update tickets automatically. For example:
+Use [Workflows](/docs/workflows) to automate ticket management. Support emits events that trigger Workflows, and Workflow actions can update tickets automatically. For example:
 
-- **Set SLAs** — automatically set a 4-hour SLA on widget tickets and 24-hour SLA on Slack tickets
-- **Auto-assign** — route tickets to different teams based on channel or customer domain
-- **Status automation** — move tickets to Pending after a team reply, reopen when a customer replies
-- **Tagging** — auto-tag tickets based on customer email domain for prioritization
-- **Escalation** — set tight SLAs and assign to senior support for high-priority tickets
+- **Set SLAs** – automatically set a 4-hour SLA on widget tickets and 24-hour SLA on Slack tickets
+- **Auto-assign** – route tickets to different teams based on channel or customer domain
+- **Status automation** – move tickets to Pending after a team reply, reopen when a customer replies
+- **Tagging** – auto-tag tickets based on customer email domain for prioritization
+- **Escalation** – set tight SLAs and assign to senior support for high-priority tickets
 
 <OSButton variant="primary" asLink to="/docs/support/workflows">
   See all workflow examples

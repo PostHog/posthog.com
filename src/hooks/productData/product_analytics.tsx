@@ -10,9 +10,11 @@ import {
     IconStickiness,
     IconDatabase,
     IconPeople,
+    IconPlug,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import Link from 'components/Link'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const productAnalytics = {
     Icon: IconGraph,
@@ -388,10 +390,38 @@ export const productAnalytics = {
                 },
             ],
         },
+        {
+            title: 'MCP',
+            headline: 'Analyze product usage from your editor',
+            description:
+                'Query trends, funnels, retention, and usage metrics from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            icon: <IconPlug />,
+            color: 'blue',
+            features: [
+                {
+                    title: 'Query any metric from your editor',
+                    description:
+                        'Pull trends, funnels, retention, paths, or custom SQL without switching to a dashboard.',
+                },
+                {
+                    title: 'Investigate metric changes',
+                    description: 'Connect drops or spikes in user behavior to recent code changes.',
+                },
+                {
+                    title: 'Save and share what you find',
+                    description: 'Turn a query into a saved insight and add it to a PostHog dashboard.',
+                },
+                {
+                    title: 'Ship with more context',
+                    description: 'Ground your next PR in actual usage data instead of assumptions.',
+                },
+            ],
+            children: <MCPInstall />,
+        },
     ],
     ai: {
         // title: '',
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_10367c7399.svg',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
         imageAlt: 'PostHog AI and product analytics',
         description: 'answer product questions faster',
         skills: [

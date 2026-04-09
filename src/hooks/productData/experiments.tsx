@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconFlask } from '@posthog/icons'
 import Link from 'components/Link'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const experiments = {
     Icon: IconFlask,
@@ -262,6 +263,32 @@ export const experiments = {
                         'Web, mobile, backend, and server-side SDKs make it easy to run consistent experiments anywhere in your stack.',
                 },
             ],
+        },
+        {
+            title: 'MCP',
+            headline: 'Run experiments from your editor',
+            description:
+                'Create A/B tests, check statistical significance, and manage the full experiment lifecycle from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            features: [
+                {
+                    title: 'Create experiments alongside your code',
+                    description: "Set up an A/B test for a feature you're building without leaving your editor.",
+                },
+                {
+                    title: 'Check results before shipping',
+                    description: 'Ask "what are the results of the checkout experiment?" to decide whether to merge.',
+                },
+                {
+                    title: 'Manage experiment lifecycle',
+                    description: 'Update targeting, adjust traffic splits, or archive completed experiments.',
+                },
+                {
+                    title: 'Validate implementation',
+                    description:
+                        'Check that you correctly configured your feature flag before launching an experiment.',
+                },
+            ],
+            children: <MCPInstall />,
         },
     ],
     postHogOnPostHog: {

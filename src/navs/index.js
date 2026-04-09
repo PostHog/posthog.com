@@ -174,10 +174,6 @@ export const dataPipelines = {
                     },
                 },
                 {
-                    name: 'Mailchimp',
-                    url: '/docs/cdp/destinations/mailchimp',
-                },
-                {
                     name: 'Mailgun',
                     url: '/docs/cdp/destinations/mailgun',
                 },
@@ -2454,6 +2450,14 @@ export const docsMenu = {
                             url: '/docs/api/dashboard-templates',
                         },
                         {
+                            name: 'Dataset items',
+                            url: '/docs/api/dataset-items',
+                        },
+                        {
+                            name: 'Datasets',
+                            url: '/docs/api/datasets',
+                        },
+                        {
                             name: 'Early access features',
                             url: '/docs/api/early-access-feature',
                         },
@@ -2464,6 +2468,14 @@ export const docsMenu = {
                         {
                             name: 'Environments',
                             url: '/docs/api/environments',
+                        },
+                        {
+                            name: 'Evaluation runs',
+                            url: '/docs/api/evaluation-runs',
+                        },
+                        {
+                            name: 'Evaluations',
+                            url: '/docs/api/evaluations',
                         },
                         {
                             name: 'Event definitions',
@@ -2500,6 +2512,14 @@ export const docsMenu = {
                         {
                             name: 'Invites',
                             url: '/docs/api/invites',
+                        },
+                        {
+                            name: 'LLM analytics',
+                            url: '/docs/api/llm-analytics',
+                        },
+                        {
+                            name: 'LLM prompts',
+                            url: '/docs/api/llm-prompts',
                         },
                         {
                             name: 'Members',
@@ -3885,12 +3905,11 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
-                    sortChildrenAlpha: true,
                     children: [
                         { name: 'Overview', url: '/docs/feature-flags/installation' },
+                        { name: 'Web', url: '/docs/feature-flags/installation/web' },
                         { name: '.NET', url: '/docs/feature-flags/installation/dotnet' },
                         { name: 'Android', url: '/docs/feature-flags/installation/android' },
-                        { name: 'API', url: '/docs/feature-flags/installation/api' },
                         { name: 'Elixir', url: '/docs/feature-flags/installation/elixir' },
                         { name: 'Flutter', url: '/docs/feature-flags/installation/flutter' },
                         { name: 'Go', url: '/docs/feature-flags/installation/go' },
@@ -3902,9 +3921,10 @@ export const docsMenu = {
                         { name: 'React', url: '/docs/feature-flags/installation/react' },
                         { name: 'React Native', url: '/docs/feature-flags/installation/react-native' },
                         { name: 'React Router', url: '/docs/feature-flags/installation/react-router' },
+                        { name: 'Remix', url: '/docs/feature-flags/installation/remix' },
                         { name: 'Ruby', url: '/docs/feature-flags/installation/ruby' },
                         { name: 'Rust', url: '/docs/feature-flags/installation/rust' },
-                        { name: 'Web', url: '/docs/feature-flags/installation/web' },
+                        { name: 'API', url: '/docs/feature-flags/installation/api' },
                     ],
                 },
                 {
@@ -3929,13 +3949,6 @@ export const docsMenu = {
                 },
                 {
                     name: 'Concepts',
-                },
-                {
-                    name: 'Best practices',
-                    url: '/docs/feature-flags/best-practices',
-                    icon: 'IconStar',
-                    color: 'red',
-                    featured: true,
                 },
                 {
                     name: 'Server-side local evaluation',
@@ -3979,8 +3992,8 @@ export const docsMenu = {
                     name: 'Guides',
                 },
                 {
-                    name: 'Production-ready feature flags',
-                    url: '/docs/feature-flags/production-ready',
+                    name: 'Best practices',
+                    url: '/docs/feature-flags/best-practices',
                     icon: 'IconBolt',
                     color: 'purple',
                     featured: true,
@@ -4004,6 +4017,13 @@ export const docsMenu = {
                     url: '/docs/feature-flags/targeting-groups',
                     icon: 'IconPeople',
                     color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'User and group targeting',
+                    url: '/docs/feature-flags/user-and-group-targeting',
+                    icon: 'IconPeople',
+                    color: 'blue',
                     featured: true,
                 },
                 {
@@ -4565,6 +4585,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/go',
                         },
                         {
+                            name: 'PHP',
+                            url: '/docs/error-tracking/installation/php',
+                        },
+                        {
                             name: 'iOS',
                             url: '/docs/error-tracking/installation/ios',
                         },
@@ -4856,10 +4880,22 @@ export const docsMenu = {
                     featured: true,
                     children: [
                         { name: 'Overview', url: '/docs/surveys/installation' },
-                        { name: 'Web', url: '/docs/surveys/installation/web' },
-                        { name: 'React Native', url: '/docs/surveys/installation/react-native' },
-                        { name: 'iOS', url: '/docs/surveys/installation/ios' },
+                        { name: 'Angular', url: '/docs/surveys/installation/angular' },
+                        { name: 'Astro', url: '/docs/surveys/installation/astro' },
+                        { name: 'Bubble', url: '/docs/surveys/installation/bubble' },
                         { name: 'Flutter', url: '/docs/surveys/installation/flutter' },
+                        { name: 'Framer', url: '/docs/surveys/installation/framer' },
+                        { name: 'iOS', url: '/docs/surveys/installation/ios' },
+                        { name: 'Next.js', url: '/docs/surveys/installation/nextjs' },
+                        { name: 'Nuxt', url: '/docs/surveys/installation/nuxt' },
+                        { name: 'React', url: '/docs/surveys/installation/react' },
+                        { name: 'React Native', url: '/docs/surveys/installation/react-native' },
+                        { name: 'React Router', url: '/docs/surveys/installation/react-router' },
+                        { name: 'Remix', url: '/docs/surveys/installation/remix' },
+                        { name: 'Svelte', url: '/docs/surveys/installation/svelte' },
+                        { name: 'Vue', url: '/docs/surveys/installation/vue' },
+                        { name: 'Web', url: '/docs/surveys/installation/web' },
+                        { name: 'Webflow', url: '/docs/surveys/installation/webflow' },
                     ],
                 },
                 {
@@ -5097,6 +5133,12 @@ export const docsMenu = {
                     name: 'Slack integration',
                     url: '/docs/support/slack',
                     icon: 'IconMessage',
+                    color: 'orange',
+                },
+                {
+                    name: 'Email channel',
+                    url: '/docs/support/email',
+                    icon: 'IconMail',
                     color: 'orange',
                 },
                 {

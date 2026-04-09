@@ -664,7 +664,8 @@
         { "source": "/blog/tags/startups", "destination": "/blog/categories/startups" },
         { "source": "/docs/integrate/badge", "destination": "/docs/contribute/badge" },
         { "source": "/blog/introduction-to-customer-retention", "destination": "/blog/customer-churn-analysis-guide" },
-        { "source": "/docs/getting-started/cloud", "destination": "/docs/getting-started/start-here" },
+        { "source": "/docs/getting-started/cloud", "destination": "/docs/getting-started/install" },
+        { "source": "/docs/getting-started/start-here", "destination": "/docs/getting-started/install" },
         { "source": "/docs/integrate/ingest-live-data", "destination": "/docs/getting-started/send-events" },
         { "source": "/docs/self-host/open-source/deployment", "destination": "/docs/self-host" },
         { "source": "/docs/integrate/android", "destination": "/docs/libraries/android" },
@@ -1448,6 +1449,10 @@
             "destination": "/docs/feature-flags/best-practices"
         },
         {
+            "source": "/docs/feature-flags/production-ready",
+            "destination": "/docs/feature-flags/best-practices"
+        },
+        {
             "source": "/product-engineers/5-ways-to-improve-analytics-data",
             "destination": "/docs/product-analytics/best-practices"
         },
@@ -1830,7 +1835,8 @@
             "destination": "/product-engineer/what-is-a-product-engineer"
         },
         { "source": "/professional-services", "destination": "/services" },
-        { "source": "/posthug", "destination": "/" }
+        { "source": "/posthug", "destination": "/" },
+        { "source": "/mcp", "destination": "/docs/model-context-protocol" }
     ],
     "headers": [
         {

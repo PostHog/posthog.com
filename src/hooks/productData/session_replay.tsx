@@ -7,6 +7,7 @@ import CodeBlock from 'components/Home/CodeBlock'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SnippetRenderer from 'components/SnippetRenderer'
 import { True } from 'components/ComparisonTable/row'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const sessionReplay = {
     Icon: IconRewindPlay,
@@ -403,6 +404,32 @@ window.posthog.onFeatureFlags(function () {
                         'Restrict the percentage of sessions that will be recorded to reduce data collection or cost',
                 },
             ],
+        },
+        {
+            title: 'MCP',
+            headline: 'Search replays from your editor',
+            description:
+                'Find session recordings from Cursor, Claude Code, VS Code, or any MCP-compatible agent. Filter by events, user properties, and frustration signals.',
+            features: [
+                {
+                    title: 'Investigate bug reports',
+                    description: 'Find session replays where users encountered errors to feed your agent with context.',
+                },
+                {
+                    title: 'Research before coding',
+                    description: 'Summarize current user behavior before making code changes.',
+                },
+                {
+                    title: 'Validate after deploying',
+                    description: 'Monitor how users interact with newly deployed updates.',
+                },
+                {
+                    title: 'Search session replays',
+                    description:
+                        'Filter recordings by events, user properties, time ranges, and specific user behaviors.',
+                },
+            ],
+            children: <MCPInstall />,
         },
     ],
     postHogOnPostHog: {
