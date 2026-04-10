@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import SupportAlpha from './_snippets/alpha.mdx'
+import SupportAlpha from "./_snippets/alpha.mdx";
 
 <SupportAlpha />
 
@@ -24,24 +24,24 @@ The widget appears as a floating button on your site. By default it appears in t
 
 These settings are configured in the **In-app widget** section of Support settings.
 
-| Setting | Description | Options | Default |
-|---------|-------------|---------|--------|
-| **Enable widget** | Show the chat widget on your site | `true`, `false` | `false` |
-| **Button color** | Primary color for the widget (hex) | Any hex color | `#5375ff` |
-| **Widget position** | Position of the widget on screen | `bottom_right`, `bottom_left`, `top_right`, `top_left` | `bottom_right` |
-| **Greeting message** | Welcome text shown when widget opens | Any string | `"Hi! How can we help?"` |
-| **Allowed domains** | Restrict which domains can show the widget | Array of domain strings | `[]` (all domains) |
+| Setting              | Description                                | Options                                                | Default                  |
+| -------------------- | ------------------------------------------ | ------------------------------------------------------ | ------------------------ |
+| **Enable widget**    | Show the chat widget on your site          | `true`, `false`                                        | `false`                  |
+| **Button color**     | Primary color for the widget (hex)         | Any hex color                                          | `#5375ff`                |
+| **Widget position**  | Position of the widget on screen           | `bottom_right`, `bottom_left`, `top_right`, `top_left` | `bottom_right`           |
+| **Greeting message** | Welcome text shown when widget opens       | Any string                                             | `"Hi! How can we help?"` |
+| **Allowed domains**  | Restrict which domains can show the widget | Array of domain strings                                | `[]` (all domains)       |
 
 ## Identification form
 
 You can optionally require users to identify themselves before starting a conversation:
 
-| Setting | Description | Default |
-|---------|-------------|---------|
-| **Require email** | Users must enter their email to start chatting | `false` |
-| **Collect name** | Additionally collect a name | `false` |
-| **Form title** | Heading shown on the identification form | `"Before we start..."` |
-| **Form description** | Subtext shown below the title | `"Please provide your details so we can help you better."` |
+| Setting              | Description                                    | Default                                                    |
+| -------------------- | ---------------------------------------------- | ---------------------------------------------------------- |
+| **Require email**    | Users must enter their email to start chatting | `false`                                                    |
+| **Collect name**     | Additionally collect a name                    | `false`                                                    |
+| **Form title**       | Heading shown on the identification form       | `"Before we start..."`                                     |
+| **Form description** | Subtext shown below the title                  | `"Please provide your details so we can help you better."` |
 
 When enabled, the form appears before they can send their first message. The collected information is used to link the ticket to a person in PostHog.
 
@@ -52,10 +52,10 @@ You can restrict which domains the widget appears on for security:
 ```javascript
 // Configured in PostHog settings
 domains: [
-  "example.com",              // Exact match
-  "*.example.com",            // Wildcard: matches sub.example.com
-  "https://app.example.com"   // With protocol (protocol is stripped)
-]
+  "example.com", // Exact match
+  "*.example.com", // Wildcard: matches sub.example.com
+  "https://app.example.com", // With protocol (protocol is stripped)
+];
 ```
 
 If `domains` is empty or not set, the widget shows on all domains.
@@ -66,16 +66,17 @@ Use the JavaScript API to programmatically show or hide the widget:
 
 ```javascript
 // Show the widget (renders it if not already rendered)
-posthog.conversations.show()
+posthog.conversations.show();
 
 // Hide and remove the widget from DOM
-posthog.conversations.hide()
+posthog.conversations.hide();
 
 // Check if widget is currently visible
-const isVisible = posthog.conversations.isVisible()
+const isVisible = posthog.conversations.isVisible();
 ```
 
 This is useful for:
+
 - Showing the widget only on certain pages
 - Triggering the widget from a custom button
 - Hiding the widget during specific user flows
@@ -85,16 +86,73 @@ This is useful for:
 You can disable conversations entirely via the PostHog init config:
 
 ```javascript
-posthog.init('<ph_project_token>', {
-  disable_conversations: true  // Prevents loading the conversations module
-})
+posthog.init("<ph_project_token>", {
+  disable_conversations: true, // Prevents loading the conversations module
+});
 ```
 
 This is different from hiding the widget – it completely disables the feature.
 
+## Identity verification
+
+By default, support tickets are tied to the browser's `widget_session_id`, which means users lose access to their tickets when switching browsers or devices. Identity verification solves this by using HMAC-based signing to verify a user's `distinct_id`, enabling seamless ticket access across any browser or device.
+
+This is ideal for apps with logged-in users. You compute an HMAC-SHA256 hash of the user's `distinct_id` on your server using your project's secret API token, then pass the hash to the widget. The widget API verifies the signature and uses the `distinct_id` for ticket lookup instead of the browser-specific `widget_session_id`.
+
+### How it works
+
+1. Your server computes an HMAC-SHA256 hash of the user's `distinct_id` using your secret API token
+2. You pass the `identity_distinct_id` and `identity_hash` to the widget API
+3. PostHog verifies the hash server-side
+4. If valid, tickets are looked up by `distinct_id` instead of `widget_session_id`
+
+### Generate the identity hash server-side
+
+Compute the HMAC hash on your server – never expose your secret API token in client-side code.
+
+<MultiLanguage>
+
+```python
+import hmac
+import hashlib
+
+def compute_identity_hash(distinct_id: str, secret_api_token: str) -> str:
+    return hmac.new(
+        secret_api_token.encode(),
+        distinct_id.encode(),
+        hashlib.sha256,
+    ).hexdigest()
+
+identity_hash = compute_identity_hash(user.id, 'your_secret_api_token')
+```
+
+```node
+import crypto from "crypto";
+
+function computeIdentityHash(distinctId, secretApiToken) {
+  return crypto.createHmac("sha256", secretApiToken).update(distinctId).digest("hex");
+}
+
+const identityHash = computeIdentityHash(user.id, "your_secret_api_token");
+```
+
+</MultiLanguage>
+
+Pass the resulting `identity_hash` and the user's `distinct_id` as `identity_distinct_id` to the widget API when sending messages or fetching tickets. See the [JavaScript API reference](/docs/support/javascript-api) for client-side usage.
+
+<CalloutBox icon="IconWarning" title="Keep your secret API token safe" type="caution">
+
+The HMAC hash must be computed server-side. Never expose your secret API token in client-side code. If your token is compromised, rotate it in **Settings > Project settings**.
+
+</CalloutBox>
+
 ## Recover tickets across browsers
 
-Support tickets are tied to the browser session by default. If a user switches browsers or clears their storage, they won't see their previous tickets. The widget includes a **Recover your tickets** link to handle this.
+Support tickets are tied to the browser session by default. If a user switches browsers or clears their storage, they won't see their previous tickets.
+
+For logged-in users, [identity verification](#identity-verification) is the recommended approach – it provides seamless cross-device access without any manual recovery steps. The recovery flow described below is designed for anonymous users who haven't set up identity verification.
+
+The widget includes a **Recover your tickets** link to handle this.
 
 ### How recovery works
 
