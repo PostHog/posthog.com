@@ -343,7 +343,7 @@ export const amplitude = {
                 native_multi_source_revenue_tracking: true,
                 deferred_revenue: false,
                 product_analytics_integration: true,
-                multi_currency_support: false,
+                multi_currency_support: true,
                 revenue_prediction: false,
                 sql_access: 'Add-on',
             },
@@ -355,6 +355,12 @@ export const amplitude = {
             available: false,
         },
         llm_analytics: {
+            available: false,
+        },
+        logs: {
+            available: false,
+        },
+        workflows: {
             available: false,
         },
     },
@@ -406,6 +412,7 @@ export const amplitude = {
             cms: '',
             notebooks: true,
             project_management_tools: '',
+            ai_assistant: true,
         },
     },
     pricing: {

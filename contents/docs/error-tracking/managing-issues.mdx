@@ -67,6 +67,17 @@ You can view a session replay for an exception by:
 Error tracking issues can also be discovered from the [Logs](https://app.posthog.com/logs) viewer. When [logs are linked to sessions](/docs/logs/link-session-replay), related errors can be viewed in the **Related errors** tab of any log entry. This is useful for investigating backend issues where both logs and errors were captured during the same session.
 
 
+## Bulk actions
+
+Select multiple issues using the checkboxes in the issue list to perform bulk actions. A bulk action bar appears at the top of the list with the following options:
+
+- **Open all** - Opens each selected issue in a new tab
+- **Merge** - Merges two or more selected issues into one
+- **Mark as** - Change the status of all selected issues to active, resolved, or suppressed
+- **Assign** - Assign all selected issues to a teammate
+- **Unassign** - Remove assignees from all selected issues (only appears when at least one selected issue has an assignee)
+- **Hide from search** - Exclude selected issues from the current view
+
 ## Assign issues to teammates
 
 Issues can be [assigned to a teammate](/docs/error-tracking/assigning-issues) from the list or issue page. To do this, select the **assignee** option and search for the teammate you want to assign it to, and select them. You can click this dropdown again to remove the assignee.

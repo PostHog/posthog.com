@@ -42,7 +42,7 @@ Beta is when you open up the product to all users who want to opt-in. Betas do n
 
 <CalloutBox icon="IconInfo" title="Moving from Concept to Beta" type="fyi">
 
-Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, simply update the flag state from `concept` to `beta`. This will trigger an automatic notification to all subscribed users letting them know that the beta is available. All users who are subscribed to updates will be immediately opted in to the beta.
+Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, update the stage from `concept` to `beta` (or `alpha`). This triggers an automatic notification to all subscribed users letting them know that the beta is available. Users who registered interest during the Concept stage can then opt in to enable the feature.
 
 Make sure your early access feature flag includes a `product_key` on the payload field to give people access to the product in their sidebar. Check the new product RFC for more details.
 

@@ -27,6 +27,14 @@ Clicking on a trace opens a timeline of the interaction with all the generation 
 <Caption>A trace presents LLM event data in a timeline, tree-structured view </Caption>
 
 
+## Conversation display options
+
+When viewing a trace, you can control how conversation messages are displayed using the display options dropdown. The available options are:
+
+- **Expand all** - Shows the full content of all messages in the conversation
+- **Expand user only** - Expands only user messages, keeping system and assistant messages collapsed for easier scanning of user inputs
+- **Collapse except output and last input** - The default view that shows the model's output and the most recent user input, keeping earlier messages collapsed
+
 ## Tool calls
 
 Traces display any [tools](/docs/llm-analytics/tools) called by the generations within them, shown as tags in the traces list. This makes it easy to see which conversations involved tool use at a glance.

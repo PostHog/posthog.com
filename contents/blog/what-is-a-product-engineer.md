@@ -66,7 +66,7 @@ By being customer-obsessed, product engineers become less principled and dogmati
 
 ### Analysts of usage data and the competitive landscape
 
-Because product engineers own their product, they also often own the data and roadmap for that product. This means doing analysis of usage data and the competitive landscape. They combine this analysis with user feedback and figure out what to do next.
+Because product engineers own their product, they also often own the data and roadmap for that product. This means doing analysis of usage data and the competitive landscape. They combine this analysis with user feedback and [figure out what to do next](/newsletter/what-does-a-product-manager-do).
 
 Product engineers can use tools like PostHog to gain insights about their product. They know what is working and what needs improvement. They are comfortable digging into the data, watching session recordings, and once they’ve gathered insights, communicating future work. [Ashby](https://www.ashbyhq.com/) includes this in the way they work:
 

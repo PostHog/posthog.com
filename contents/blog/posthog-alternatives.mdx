@@ -1,0 +1,526 @@
+---
+title: 'The most popular PostHog alternatives, compared'
+date: 2026-03-16
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+  - andy-vandervell
+  - natalia-amorim
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
+featuredImageType: full
+category: General
+tags:
+  - Comparisons
+seo:
+  metaTitle: The most popular PostHog alternatives, compared
+  metaDescription: Looking for a PostHog alternative? Compare the best options for product analytics, session replay, feature flags, and more.
+---
+
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
+
+PostHog is a developer platform that combines [product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and more. 
+
+As an all-in-one platform, it replaces _a lot_ of legacy tools. PostHog is great if you:
+
+1. Need quantitative _and_ qualitative insights into user behavior
+2. Want easy control over new features roll outs, kill switches, and feature gating
+3. Desire one integrated tool over a complex stack of discrete solutions
+
+This guide covers the most popular PostHog alternatives honestly – what they're good at, where they fall short, and who they're actually for.
+
+<details>
+<summary>What does PostHog actually do?</summary>
+
+PostHog is a product development platform that includes:
+
+- **[PostHog AI](/ai):** Built-in AI tools including an MCP server, natural language querying, AI-powered session summaries, and more.
+- **[Product analytics](/product-analytics):** Funnels, retention, user paths, cohorts, and trends. SQL access for power users.
+- **[Session replay](/session-replay):** Watch real user sessions with console logs, network monitoring, and a DOM explorer.
+- **[Feature flags](/feature-flags):** Roll out features to specific users or groups without redeploying.
+- **[Experiments](/experiments):** Run multivariate experiments tied directly to your analytics data.
+- **[Error tracking](/error-tracking):** Monitor exceptions linked to session replays and user behavior.
+- **[Surveys](/surveys):** Targeted, multi-step surveys with NPS, CSAT, and PMF templates.
+- **[Web analytics](/web-analytics):** Traffic sources, pageviews, UTM tracking, and conversion goals.
+- **[LLM analytics](/docs/llm-analytics):** Track token usage, latency, costs, and user feedback across your AI pipelines.
+- **[Data warehouse](/data-warehouse):** Query your external data sources alongside PostHog data in one place.
+- **[CDP](/cdp):** Send data to and from PostHog with a library of integrations and transformations.
+- **[Logs](/logs):** Capture and search log data alongside your analytics and session replays.
+- **[Workflows](/workflows):** Automate actions and notifications based on product events.
+ 
+It's priced per product with a [generous free tier](/pricing) – 90% of companies use PostHog for free!
+
+PostHog is built by engineers, for engineers. Everything is open source, and the [MCP server](/docs/model-context-protocol) means your AI coding assistant can query your product data without leaving your editor.
+ 
+</details>
+ 
+<details>
+<summary>When should you consider a PostHog alternative?</summary>
+
+PostHog isn't the right fit for everyone. You might want an alternative if:
+
+- **You need product tours or in-app guides** – PostHog has no no-code guide builder for tooltips, walkthroughs, or banners. [Pendo](/blog/posthog-vs-pendo) is the go-to here.
+- **You need multi-touch attribution** – PostHog doesn't have marketing attribution modeling. [Amplitude](/blog/posthog-vs-amplitude) is stronger for growth and marketing teams who need this.
+- **You only need one specific tool for a lightweight use case** – For example, you just want cookieless, privacy-friendly traffic stats with a minimal script and no consent banners, a focused tool like [Plausible](/blog/posthog-vs-plausible) or [Fathom](/blog/best-fathom-alternatives) might be simpler and cheaper than a full platform.
+- **You prefer to fully self-host** – PostHog can be self-hosted, but it's operationally complex at scale. Tools like [Matomo](/blog/posthog-vs-matomo) or [OpenReplay](/blog/best-open-source-session-replay-tools) are designed with self-hosting as the primary deployment model.
+
+</details>
+
+<details>
+<summary>Is it hard to deploy PostHog?</summary>
+
+Not at all for PostHog Cloud. Our [AI setup wizard](/wizard) walks you through installation and configuration in a few minutes – run the command, answer a few questions, and you're tracking events. No credit card required, and you don't need to jump on a sales call. Most teams are up and running within a single session.
+
+<WizardCommand />
+
+If you want to go further, PostHog has [SDKs for every major platform and framework](/docs/libraries), and the docs cover everything from basic pageview tracking to advanced group analytics and feature flag targeting.
+ 
+Self-hosting is a different story – it's more involved and requires managing your own infrastructure. 
+
+For most teams, PostHog Cloud (with US or [EU hosting options](/blog/posthog-cloud-eu)) is the right choice.
+
+</details>
+
+<details>
+<summary>Is PostHog for me?</summary>
+
+If one or more of these sounds like you, yes:
+ 
+- **You're an engineer or technical founder** – PostHog is built for people who like SQL, MCPs, APIs, and open-source code. You'll feel at home.
+- **You're an early-stage startup or solo founder launching your MVP** – The free tier covers most early-stage needs, and [PostHog for Startups](/startups) offers $50k in additional credits. You won't need to swap tools as you scale.
+- **You're building an AI product** – PostHog has first-class support for [LLM analytics](/llm-analytics), error tracking for AI pipelines, and an MCP server that connects your product data to your AI coding tools.
+- **You don't want to pay upfront** – No credit card, no sales call, no minimum contract. You only pay when you exceed the [(very generous) free tier](/pricing).
+- **You want one source of truth** – Instead of stitching together multiple tools (Mixpanel, LaunchDarkly, Sentry, and Hotjar), PostHog gives you the same capabilities and keeps all your product data in one place. Start with one product and expand into others without ever having to migrate your data.
+
+If you're primarily a marketer, a non-technical product manager, or a customer success team that needs in-app guides, PostHog might not be the best fit. 
+
+Keep reading to explore the alternatives.
+
+</details>
+
+<WizardCTA />
+
+## Amplitude
+
+- **Founded:** 2012
+- **Similar to:** Mixpanel, Heap
+- **Best known for:** Product analytics
+- **Useful for:** Product managers, growth and marketing teams
+
+### What is Amplitude?
+
+[Amplitude](/blog/posthog-vs-amplitude) is a product analytics platform with a strong focus on behavioral analytics, retention, and growth. It's well-established in the product analytics space and has built a broader platform that includes a CDP and a separate A/B testing product (Amplitude Experiment). 
+
+[Amplitude](/blog/best-amplitude-alternatives) is particularly strong for marketing and growth teams who need multi-touch attribution and predictive analytics.
+
+### Key features
+ 
+- **Behavioral analytics:** Charts, funnels, user paths, and retention with a polished interface.
+- **Predictive analytics:** AI-powered forecasting and propensity scoring.
+- **Multi-touch attribution:** Track the full marketing funnel and channel impact on conversion.
+- **Guides and Surveys:** Behavior-based in-app tooltips, walkthroughs, NPS surveys, and popups triggered by cohorts and behavioral data.
+- **Amplitude CDP:** Built-in customer data platform for managing user data and identity resolution.
+- **Amplitude Experiment:** Separate A/B testing product with feature flagging.
+- **Amplitude AI:** A suite of AI capabilities including AI Agents, AI Feedback, and an MCP server for querying Amplitude data from Claude, Cursor, and other AI tools.
+
+### How does Amplitude compare to PostHog?
+
+<p>
+<ProductComparisonTable
+    competitors={['amplitude', 'posthog']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+		'product_analytics.group_analytics',
+		'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'error_tracking',
+		'logs',
+		'workflows',
+        'surveys',
+		'platform.tools.ai_assistant',
+		'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+### Key differences
+
+1. **Marketing vs. engineering focus:** Amplitude offers multi-touch attribution, predictive forecasting, a CDP, and AI Visibility (which tracks how your brand appears in LLMs), which PostHog doesn't have. PostHog is designed for engineers and product teams: both have MCP servers, but PostHog adds SQL access, open-source code, error tracking, and logs. It also [ships relentlessly](/changelog) – new features land every week, which tends to matter to engineering teams who want their tools to keep up.
+
+2. **AI capabilities:** Both have AI assistants and MCP servers for querying data from tools like Claude and Cursor. Amplitude's AI Feedback stands out for marketing teams – it aggregates and synthesizes user signals from Zendesk, G2, Reddit, app store reviews, and more into prioritized product insights. PostHog has first-class [LLM analytics](/docs/llm-analytics) for AI product teams – tracking token usage, latency, costs, and user feedback across AI pipelines – something Amplitude doesn't have.
+
+3. **Pricing:** 
+
+  - Amplitude's free Starter plan includes 10K MTUs (up to 10M events), 1,000 session recordings, and unlimited feature flags – enough for early exploration, but teams that need behavioral cohorts, advanced segmentation, or feature experimentation will need to upgrade. Growth and Enterprise pricing requires contacting sales.
+
+  - PostHog's free tier covers 1 million analytics events, 5,000 web session replays, 100k flag requests and more with no MTU cap. Pricing is [transparent and entirely usage-based](/pricing), with discounts for bulk purchases.
+
+> #### Bottom line
+>
+> Amplitude is the better choice for growth and marketing teams who need multi-touch attribution and predictive analytics. PostHog is the better choice for engineering and product teams who want session replay, feature flags, error tracking, LLM analytics, and more alongside their core analytics.
+
+## Mixpanel
+
+![mixpanel posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg)
+
+- **Founded:** 2009
+- **Similar to:** Amplitude, Heap
+- **Best known for:** Product analytics
+- **Useful for:** Product managers and growth teams
+
+### What is Mixpanel?
+
+[Mixpanel](/blog/posthog-vs-mixpanel) is a platform that has expanded significantly beyond its analytics-only roots. It launched a full Experiments product with feature flagging and statistical analysis, and added session replay and heatmaps to their lineup in 2024. 
+
+[Mixpanel](/blog/best-mixpanel-alternatives) is strong on event-based analysis, funnel visualization, and its usage-based pricing model, which makes it popular with startups.
+
+### Key features
+ 
+- **Event analytics:** Trends, funnels, user paths, and retention analysis.
+- **Experiments:** End-to-end A/B testing with feature flags, cohort targeting, sticky bucketing, and statistical significance across primary, secondary, and guardrail metrics.
+- **Session replay:** Available on all plans (10k replays/month free), integrated directly with funnel and cohort analysis.
+- **Heatmaps:** Click and scroll heatmaps built into the same workflow as analytics and replay.
+- **Metric trees:** Interactive, living frameworks that map relationships between metrics, track goals, and connect experiment results to business outcomes.
+- **Warehouse connectors:** Sync data bidirectionally with BigQuery, Snowflake, Redshift, and Databricks.
+- **Spark AI:** Natural language querying across your analytics data.
+ 
+### How does Mixpanel compare to PostHog?
+
+<p>
+<ProductComparisonTable
+    competitors={['mixpanel', 'posthog']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+		'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'error_tracking',
+        'logs',
+        'workflows',
+        'surveys',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+### Key differences
+ 
+1. **Scope:** Mixpanel and PostHog now overlap more than they used to – both have analytics, session replay, A/B testing, and feature flags. Where PostHog pulls ahead is error tracking, surveys, logs, CDP, LLM analytics, and data warehouse. Where Mixpanel stands out: metric trees (interactive frameworks that map relationships between metrics, connect experiment results to business outcomes, and track goals in a living dashboard), and a funnel and path analysis UI that non-technical users might find more approachable than PostHog's.
+
+2. **Developer experience:** PostHog is open source and has an MCP server that lets engineers query their product data directly from AI coding tools like Cursor and Claude. Mixpanel is more accessible to non-technical users but offers less for engineering-led teams who want to inspect the codebase or integrate deeply with their dev tooling.
+
+3. **Pricing:**
+
+  - Mixpanel's free plan includes up to 1M events/month and 10K session replays, but features such as cohorts, custom properties, and feature flags are not available; their startup program gives eligible companies (under 5 years old, under $8M raised) their first year completely free – 1B events, 500k replays, all features unlocked.
+
+  - PostHog's free tier includes 1M analytics events, 5,000 session replays, 1M feature flag requests, [and much more](/pricing); [PostHog for Startups](/startups) offers $50k in credits for qualifying early-stage companies.
+
+> #### Bottom line
+>
+> Mixpanel is a strong choice for teams who want polished product analytics with session replay, A/B testing, and metric trees in one focused tool. Once you also need error tracking, surveys, logs, or a data warehouse, the case for PostHog gets significantly stronger.
+
+## FullStory
+
+- **Founded:** 2014
+- **Similar to:** LogRocket, Hotjar
+- **Best known for:** Session replay
+- **Useful for:** Product managers, UX researchers, customer support
+
+### What is FullStory?
+ 
+[FullStory](/blog/posthog-vs-fullstory) is a digital experience intelligence platform best known for [session replay](/blog/best-session-replay-tools). It captures every user interaction automatically and lets teams search, filter, and analyze sessions without manual event setup. 
+
+[FullStory](/blog/best-fullstory-alternatives) is particularly popular with enterprise UX and customer experience teams who need to diagnose friction, understand user journeys at scale, and share session evidence across product, support, and design.
+
+### Key features
+ 
+- **Session replay:** Full DOM capture with autocapture of all user interactions.
+- **Heatmaps:** Click, scroll, and cursor movement heatmaps.
+- **Frustration signals:** Automatic detection of rage clicks, dead clicks, and error clicks.
+- **DX Data:** FullStory's proprietary behavioral data layer for querying sessions retroactively.
+- **Funnels and journeys:** Visualize user flows and drop-off points.
+- **Guides and Surveys:** No-code product tours, onboarding checklists, banners, smart tips, and in-app NPS surveys triggered based on behavioral data.
+- **StoryAI:** Built-in AI agents that automatically summarize sessions, surface friction points prioritized by conversion impact, and answer behavioral questions in natural language.
+
+### How does FullStory compare to PostHog?
+ 
+<p>
+<ProductComparisonTable
+    competitors={['fullstory', 'posthog']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+        'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'error_tracking',
+        'logs',
+        'workflows',
+        'surveys',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+### Key differences
+
+1. **Session replay depth:** FullStory's replay tooling – frustration signal detection, cursor heatmaps, and DX Data retroactive querying – is more mature than PostHog's for dedicated UX research. PostHog's replay is strong for product and engineering use cases but less focused on pure UX research workflows.
+
+2. **Feature breadth:** PostHog includes feature flags, A/B testing, error tracking, logs, and more. FullStory is primarily a session replay and analytics tool (which also features Guides & Surveys) – teams using it typically need other tools to cover the rest of the stack.
+
+3. **Pricing and access:** PostHog offers 5,000 free session replays per month with [transparent, self-serve pricing](/pricing). FullStory's pricing is opaque – getting started requires a conversation with sales.
+
+> #### Bottom line
+>
+> FullStory is the better choice for dedicated UX research teams who need advanced heatmaps and frustration signal detection and have budget for an enterprise contract. PostHog is the better choice for product and engineering teams who want session replay as part of a broader platform – and who want transparent pricing and a free tier.
+
+## Heap
+
+- **Founded:** 2013
+- **Similar to:** Mixpanel, Amplitude
+- **Best known for:** Product analytics
+- **Useful for:** Product managers, marketing teams
+
+### What is Heap?
+ 
+[Heap](/blog/posthog-vs-heap) was acquired by [Contentsquare](/blog/best-contentsquare-alternatives). Contentsquare is in the process of migrating Heap customers onto its own platform. If you're evaluating Heap as a new tool, it's worth knowing that you may be migrated to Contentsquare rather than Heap long-term.
+ 
+[Heap's](/blog/best-heap-alternatives) key innovation was autocapture combined with retroactive event definition – you capture everything, then define what matters later. This remains genuinely useful for teams who don't know what they'll need to analyze in advance.
+
+### Key features
+ 
+- **Autocapture:** Capture every user interaction automatically, define events retroactively.
+- **Visual labeling:** Tag events through a visual interface without code.
+- **Session replay:** Available through the Heap platform.
+- **Funnels and paths:** Analyze user journeys and drop-off points.
+- **Sense AI:** Chat-based AI analyst that answers plain-language questions about user behavior, builds charts on demand, and suggests follow-up questions.
+- **Illuminate:** A data science layer that automatically surfaces insights from your behavioral data – including top events influencing conversion and group suggestions to identify high-impact segments – without requiring you to know what to look for in advance.
+- **Data connectors:** Sync to data warehouses including BigQuery and Snowflake.
+
+### How does Heap compare to PostHog?
+ 
+<p>
+<ProductComparisonTable
+    competitors={['heap', 'posthog']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+        'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'error_tracking',
+        'logs',
+        'workflows',
+        'surveys',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+### Key differences
+ 
+1. **Retroactive event definition:** Heap's visual labeling is genuinely powerful – you can define and retroactively apply event definitions without code or engineering support. PostHog's autocapture captures everything too, but labeling events requires more technical involvement.
+ 
+2. **Feature breadth:** Heap covers session replay, web analytics, and heatmaps alongside its analytics core – but PostHog goes further with feature flags, experiments, error tracking, surveys, logs, and more. The Contentsquare merger may also eventually give Heap users access to an even broader feature set as the platforms converge.
+ 
+3. **Pricing:** 
+
+  - Heap's free plan covers up to 10k monthly sessions with core analytics and 6 months of data history. Growth and Pro plans are usage-based with custom pricing – you need to install the snippet to get an estimate, and session replay is an add-on rather than included. 
+
+  - PostHog's free tier covers 1M analytics events and 5,000 session replays with [transparent, self-serve pricing](/pricing) and no sales call required.
+
+> #### Bottom line
+>
+> Heap's retroactive event labeling remains genuinely useful for non-technical teams, but, if you're evaluating it today, it's worth understanding the broader Contentsquare platform and how it fits into your needs.
+
+## LogRocket
+
+- **Founded:** 2016
+- **Similar to:** FullStory
+- **Best known for:** Session replay and front-end monitoring
+- **Useful for:** Customer support, engineering teams
+
+### What is LogRocket?
+ 
+[LogRocket](/blog/posthog-vs-logrocket) positions itself between FullStory and [Sentry](/blog/posthog-vs-sentry) – it combines session replay with front-end error monitoring and some product analytics. 
+
+It's popular with engineering teams who want a developer-focused session replay tool with performance monitoring built in. [LogRocket](/blog/best-logrocket-alternatives) has also added Galileo, an AI layer that surfaces issues and recommendations proactively. 
+
+### Key features
+ 
+- **Session replay:** Full DOM replay with console logs, network requests, and Redux state.
+- **Front-end monitoring:** JavaScript error tracking and performance profiling.
+- **Heatmaps:** Click, rage click, and scroll maps.
+- **Product analytics:** Basic funnels, user paths, and conversion tracking.
+- **Galileo AI:** Proactive issue detection and UX recommendations.
+
+### How does LogRocket compare to PostHog?
+
+<p>
+<ProductComparisonTable
+    competitors={['logrocket', 'posthog']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+        'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'error_tracking',
+        'logs',
+        'workflows',
+        'surveys',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+### Key differences
+ 
+1. **Session replay focus:** LogRocket's replay tooling includes Redux/state management capture and Galileo AI proactive issue detection – features aimed squarely at front-end engineers. PostHog's replay is broader, connecting sessions directly to feature flags, experiments, and funnel analysis.
+ 
+2. **Product analytics:** PostHog's product analytics are significantly deeper – cohorts, retention, paths, SQL access, and group analytics. LogRocket's analytics are basic and supplementary to its replay core.
+ 
+3. **Pricing:** 
+
+  - LogRocket's free tier covers 1,000 sessions/month with 1 month of data retention. Paid plans start at $69/month for 10k sessions on a monthly commitment (annual plans are cheaper). Session replay is the core product – analytics, heatmaps, and error tracking are included, but you're primarily paying for session volume. 
+
+  - PostHog's free tier covers 5,000 session replays plus 1M analytics events, feature flags, and more; [pricing is transparent and usage-based](/pricing) across the whole platform.
+
+> #### Bottom line
+>
+> LogRocket is a strong choice for engineering teams who want developer-focused session replay with front-end performance monitoring. PostHog is the better choice if you also need deep product analytics, feature flags, A/B testing, or a single platform for your whole stack.
+
+## Which PostHog alternative should you choose?
+
+Choose...
+
+- **Amplitude** if you're a growth or marketing team that needs multi-touch attribution, predictive analytics, or AI-powered brand visibility in LLMs. Amplitude has built a genuine marketing platform, while PostHog is more geared towards technical users.
+ 
+- **Mixpanel** if you want polished product analytics with session replay, A/B testing, and feature flags but don't need the broader PostHog platform. The free tier is generous and the startup program is excellent.
+ 
+- **FullStory** if dedicated UX research is your primary use case and you have enterprise budget. Its session replay tooling – frustration signals, StoryAI, Guides & Surveys – is more mature than PostHog's for deep qualitative research.
+ 
+- **LogRocket** if you're a front-end engineering team that wants session replay connected to Redux state, console logs, and network monitoring. Strong for debugging workflows, though you'll need other tools alongside it.
+ 
+- **Heap** if autocapture and retroactive event definition appeal to you – it's a solid tool. Just make sure you understand what the full Contentsquare platform looks like before committing.
+
+<details>
+<summary>Honourable mentions</summary>
+
+These tools didn't make the main list but are worth knowing about depending on your use case.
+ 
+**[Pendo](/blog/posthog-vs-pendo)** is the go-to if you need no-code in-app guidance – tooltips, walkthroughs, banners, and onboarding checklists your CS or product team can build without engineering. PostHog has no equivalent. Pricing is enterprise-only and requires a sales call.
+ 
+**[Sentry](/blog/posthog-vs-sentry)** is the standard for application error monitoring – detailed stack traces, source maps, performance profiling, release tracking, and AI-powered Autofix that suggests code fixes. PostHog also has [error tracking](/error-tracking), but Sentry is an undeniable option when it comes to deep engineering observability.
+ 
+**[Hotjar](/blog/posthog-vs-hotjar)** (acquired by ContentSquare) is a lightweight session replay and heatmap tool popular with marketing and UX teams. Good entry point if you just need replay and heatmaps.
+ 
+**[GrowthBook](/blog/posthog-vs-growthbook)** is an open-source A/B testing and feature flagging platform. If experimentation is your primary need and you want full control over your data and infrastructure, GrowthBook is worth evaluating. PostHog's experiments are more integrated but GrowthBook's statistical engine is more flexible.
+
+**[VWO](/blog/best-vwo-alternatives)** and **AB Tasty** are website experimentation platforms aimed at marketing and CRO teams – visual editors, no-code test creation, personalization, and funnel analysis. The two companies are merging soon. PostHog's experiments require more technical setup; these tools are built for non-engineers running conversion optimization programs.
+
+**[Statsig](/blog/posthog-vs-statsig)** is a feature flagging and experimentation platform popular with engineering teams who want rigorous statistical analysis, warehouse-native data pipelines, and scalable flag infrastructure. More technically focused than PostHog's experiments, less of a full analytics platform.
+ 
+**[Plausible](/blog/posthog-vs-plausible) and [Fathom](/blog/best-fathom-alternatives)** are privacy-friendly, cookieless web analytics tools. If all you need is traffic stats – pageviews, referrers, UTMs – without consent banners or complex setup, either is simpler and cheaper than PostHog. Neither has product analytics, session replay, or feature flags.
+ 
+</details>
+
+## Is PostHog right for you?
+ 
+Here's the honest version.
+ 
+PostHog is the best choice if:
+ 
+- You want one platform with a full suite of tools, keeping all your data and user context in one place.
+- You're a startup, an engineer, or a technical product team that values SQL access, an MCP server, and open-source code.
+- You want to try before you commit – PostHog is fully self-serve with a generous free tier and no sales call required.
+
+It's free to get started with no credit card required. Our [AI setup wizard](/wizard) handles configuration in minutes.
+ 
+<WizardCTA />
+
+## Frequently asked questions
+ 
+<details>
+<summary>What is the best free PostHog alternative?</summary>
+
+For product analytics, **Mixpanel** has the most comparable free tier to PostHog. For session replay specifically, **Microsoft Clarity** is free and unlimited (though not open source). For error tracking, **Sentry** has a free tier. 
+
+But PostHog's free tier – 1M analytics events, 5,000 replays, 1M feature flag requests, and more per product – is the most comprehensive single-platform free tier available.
+ 
+</details>
+ 
+<details>
+<summary>Can PostHog replace Mixpanel?</summary>
+
+Yes, for most teams. PostHog covers everything Mixpanel does (funnels, retention, user paths, cohorts) and adds session replay, feature flags, A/B testing, and error tracking.
+
+See our [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) comparison for details or get started with [our managed migration](/migrate/managed-migrations) for an easy switch.
+ 
+</details>
+ 
+<details>
+<summary>Can PostHog replace Amplitude?</summary>
+
+For engineering and product teams, yes. For growth and marketing teams who rely on multi-touch attribution and predictive analytics, Amplitude has capabilities PostHog doesn't. 
+
+See our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparison or get started with [our managed migration](/migrate/managed-migrations) for an easy switch.
+ 
+</details>
+ 
+<details>
+<summary>Can PostHog replace FullStory?</summary>
+
+For most session replay use cases, yes. FullStory has more advanced heatmaps and frustration signal detection, so dedicated UX research teams may find it more powerful. But PostHog's session replay covers most needs – and comes with analytics, feature flags, and error tracking included. 
+
+See our [PostHog vs FullStory](/blog/posthog-vs-fullstory) comparison.
+ 
+</details>
+ 
+<details>
+<summary>Does PostHog have in-app guides like Pendo?</summary>
+
+No. PostHog doesn't have a no-code in-app guide builder for tooltips, walkthroughs, or banners. If in-app guidance is a core requirement, [Pendo](/blog/posthog-vs-pendo) is the better choice. 
+
+PostHog does have surveys for collecting in-app user feedback.
+ 
+</details>
+
+<details>
+<summary>What's the best PostHog alternative for enterprise?</summary>
+
+For enterprise product analytics, **Amplitude** has the most established enterprise track record. For enterprise session replay, **FullStory** has deep enterprise integrations and a mature DX Data layer.
+
+PostHog also has an enterprise plan with SSO, SAML, and a dedicated customer success team.
+
+</details>
+
+<NewsletterForm />
