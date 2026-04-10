@@ -13,6 +13,7 @@ import {
     generateApiSpecMarkdown,
     generateLlmsTxt,
     generateSdkReferencesMarkdown,
+    generatePricingMd,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
@@ -557,6 +558,17 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     sdkReferencesQuery.data.allSdkReferences.nodes.forEach((node) => {
         generateSdkReferencesMarkdown(node)
     })
+
+    // Generate pricing.md from billing API data
+    try {
+        const billingUrl = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
+        const billingData = await fetch(billingUrl, {
+            headers: { 'Content-Type': 'application/json' },
+        }).then((res) => res.json())
+        generatePricingMd(billingData.products)
+    } catch (error) {
+        console.error('Failed to generate pricing.md:', error)
+    }
 
     // Generate markdown files for llms.txt file and LLM ingestion (after pages are built)
     // Convert HTML files to markdown using turndown

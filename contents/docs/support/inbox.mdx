@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-import Alpha from './_snippets/alpha.mdx'
+import SupportAlpha from './_snippets/alpha.mdx'
 
-<Alpha />
+<SupportAlpha />
 
 The Support inbox is where your team views and responds to customer conversations. Each ticket includes rich context from PostHog to help you understand and resolve issues quickly.
 
@@ -43,21 +43,21 @@ Each ticket has the following properties:
 
 The ticket inbox supports filtering by:
 
-- **Status** - Filter by ticket status
-- **Priority** - Filter by priority level
-- **Channel** - Filter by source: widget, Slack, or email
-- **SLA state** - On track, at risk, or breached
-- **Tags** - Filter by tags attached to tickets
-- **Assignee** - Unassigned, specific user, or specific role
-- **Date range** - Filter by creation date
-- **Search** - Search by ticket number, customer name, or email
+- **Status** – Filter by ticket status
+- **Priority** – Filter by priority level
+- **Channel** – Filter by source: widget, Slack, or email
+- **SLA state** – On track, at risk, or breached
+- **Tags** – Filter by tags attached to tickets
+- **Assignee** – Unassigned, specific user, or specific role
+- **Date range** – Filter by creation date
+- **Search** – Search by ticket number, customer name, or email
 
 ## Ticket assignment
 
 Tickets can be assigned to:
 
-1. **Individual users** - A specific team member
-2. **Roles** - A group of users. Assigns to the role, not individual members.
+1. **Individual users** – A specific team member
+2. **Roles** – A group of users. Assigns to the role, not individual members.
 
 ### How to assign a support ticket
 
@@ -75,13 +75,13 @@ Assignment is manual with no automatic routing. Each ticket supports one assigne
 ### Filtering by assignee
 
 In the ticket list, use the assignee filter:
-- **Unassigned** - Show tickets with no assignment
-- **User: [name]** - Show tickets assigned to a specific user
-- **Role: [name]** - Show tickets assigned to a specific role
+- **Unassigned** – Show tickets with no assignment
+- **User: [name]** – Show tickets assigned to a specific user
+- **Role: [name]** – Show tickets assigned to a specific role
 
 ## SLAs
 
-SLA deadlines are set via [workflow automation](/docs/support/workflows) — there's no built-in SLA configuration UI. You create a workflow that triggers on ticket creation (or priority change) and uses the **Update ticket** action to set a deadline.
+SLA deadlines are set via [workflow automation](/docs/support/workflows) – there's no built-in SLA configuration UI. You create a workflow that triggers on ticket creation (or priority change) and uses the **Update ticket** action to set a deadline.
 
 SLA states are derived from the deadline:
 
@@ -99,7 +99,7 @@ See [workflow automation](/docs/support/workflows) for examples of setting SLAs 
 
 Tickets support free-form tags for categorization and filtering.
 
-- Tags are shared across the project — any tag used on one ticket is available on all tickets
+- Tags are shared across the project – any tag used on one ticket is available on all tickets
 - Add or remove tags from the ticket detail sidebar
 - Filter the ticket list by tags
 
@@ -138,8 +138,8 @@ To send a private note, toggle the **Private** option before sending.
 ### Unread tracking
 
 The system tracks unread messages separately for:
-- **Customer** - Messages the customer hasn't seen (from your team)
-- **Team** - Messages your team hasn't seen (from the customer)
+- **Customer** – Messages the customer hasn't seen (from your team)
+- **Team** – Messages your team hasn't seen (from the customer)
 
 Unread counts reset when:
 - Team views a ticket in PostHog
@@ -155,18 +155,18 @@ The main conversation with the customer. Send replies here – they'll appear in
 
 ### Session recording panel
 
-If the user has session replay enabled, you can watch their session directly in the ticket view. This shows what they were doing before and when they reached out.
+If Session Replay is enabled, you can watch their session directly in the ticket view. This shows what they were doing before and when they reached out.
 
 ### Recent events panel
 
 Events from ±5 minutes around when the ticket was created. This helps you understand:
 - What actions led to the support request
-- What the user was trying to accomplish
+- What they were trying to accomplish
 - Any errors or unusual patterns
 
 ### Exceptions panel
 
-Any errors or exceptions from the user's session. If they encountered a bug, you'll see the stack trace here.
+Any errors or exceptions from their session. If they encountered a bug, you'll see the stack trace here.
 
 ### Previous tickets panel
 
@@ -177,12 +177,12 @@ Other tickets from the same person. Useful for:
 
 ### Activity log
 
-A history of all changes made to the ticket — status changes, assignment updates, priority changes, and more. This helps you understand the full timeline of a ticket's lifecycle.
+A history of all changes made to the ticket – status changes, assignment updates, priority changes, and more. This helps you understand the full timeline of a ticket's lifecycle.
 
 ## Tips for efficient support
 
 1. **Use private notes** for internal notes when handing off tickets
-2. **Check [session replay](/docs/session-replay)** before asking the user to describe what happened
+2. **Check [Session Replay](/docs/session-replay)** before asking them to describe what happened
 3. **Look at exceptions** to quickly identify bugs
 4. **Review previous tickets** to avoid asking repeat questions
 5. **Set status to pending** after you respond to track who's waiting for a reply
