@@ -2,7 +2,7 @@
 title: Traces
 ---
 
-import TraceEventSnippet from "./_snippets/trace-event.mdx"
+import TraceEventSnippet from "./_snippets/trace-event.mdx";
 
 Traces are a collection of [generations](/docs/llm-analytics/generations) and [spans](/docs/llm-analytics/spans) that capture a full interaction between a user and an LLM. The [traces tab](https://app.posthog.com/llm-analytics/traces) lists them along with the properties autocaptured by PostHog like the person, total cost, total latency, and more.
 
@@ -26,6 +26,14 @@ Clicking on a trace opens a timeline of the interaction with all the generation 
 
 <Caption>A trace presents LLM event data in a timeline, tree-structured view </Caption>
 
+## Filtering traces
+
+You can filter traces in the [traces tab](https://app.posthog.com/llm-analytics/traces) by `trace_id`, `span_id`, and `duration` in addition to span attributes.
+
+- **trace_id** and **span_id** - Support equals and not equals operators
+- **duration** - Supports equals, not equals, greater than, greater than or equal, less than, and less than or equal operators
+
+When you apply a filter, PostHog searches all spans across traces — not just root spans. It then returns the full trace (root span and sub-spans) for every trace that contains a matching span. Spans that match your filter criteria are visually highlighted in the flame chart, while non-matching spans are dimmed.
 
 ## Conversation display options
 
