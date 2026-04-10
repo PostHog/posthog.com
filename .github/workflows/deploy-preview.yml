@@ -59,7 +59,6 @@ jobs:
               env:
                   BASE_REF: ${{ github.base_ref }}
               run: |
-                  git fetch origin "$BASE_REF" --depth=1
                   CHANGED=$(git diff --name-only "origin/$BASE_REF"...HEAD)
                   echo "Changed files: $CHANGED"
                   if echo "$CHANGED" | grep -qvE '^(contents/docs/|src/navs/index\.js|vercel\.json)'; then
