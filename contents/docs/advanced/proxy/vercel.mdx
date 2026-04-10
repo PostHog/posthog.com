@@ -19,7 +19,7 @@ Vercel rewrites map incoming request paths to different destinations. When you a
 Here's the request flow:
 
 1. User triggers an event in your app
-2. Request goes to your Vercel domain (e.g., `yourdomain.com/ph`)
+2. Request goes to your Vercel domain (e.g., `yourdomain.com/yourpath`)
 3. Vercel matches the request against your rewrite rules
 4. Vercel fetches the response from PostHog's servers
 5. Vercel returns PostHog's response under your domain
@@ -53,15 +53,15 @@ In your project root, create or update `vercel.json`:
 {
   "rewrites": [
     {
-      "source": "/ph/static/:path(.*)",
+      "source": "/yourpath/static/:path(.*)",
       "destination": "https://us-assets.i.posthog.com/static/:path"
     },
     {
-      "source": "/ph/array/:path(.*)",
+      "source": "/yourpath/array/:path(.*)",
       "destination": "https://us-assets.i.posthog.com/array/:path"
     },
     {
-      "source": "/ph/:path(.*)",
+      "source": "/yourpath/:path(.*)",
       "destination": "https://us.i.posthog.com/:path"
     }
   ]
@@ -72,15 +72,15 @@ In your project root, create or update `vercel.json`:
 {
   "rewrites": [
     {
-      "source": "/ph/static/:path(.*)",
+      "source": "/yourpath/static/:path(.*)",
       "destination": "https://eu-assets.i.posthog.com/static/:path"
     },
     {
-      "source": "/ph/array/:path(.*)",
+      "source": "/yourpath/array/:path(.*)",
       "destination": "https://eu-assets.i.posthog.com/array/:path"
     },
     {
-      "source": "/ph/:path(.*)",
+      "source": "/yourpath/:path(.*)",
       "destination": "https://eu.i.posthog.com/:path"
     }
   ]
@@ -91,12 +91,12 @@ In your project root, create or update `vercel.json`:
 
 Here's what each part does:
 
-- The first rewrite routes `/ph/static/*` requests to PostHog's asset server. This serves the JavaScript SDK and other static files.
-- The second rewrite routes `/ph/array/*` requests to PostHog's asset server. This serves the remote config (e.g., `/array/<token>/config.js`) with proper `cache-control` headers. Without this rule, remote config requests fall through to the main API, which strips cache headers and can cause browsers to use stale SDK config.
-- The third rewrite routes all other `/ph/*` requests to PostHog's main API. This handles event capture, Feature flags, and session recordings.
+- The first rewrite routes `/yourpath/static/*` requests to PostHog's asset server. This serves the JavaScript SDK and other static files.
+- The second rewrite routes `/yourpath/array/*` requests to PostHog's asset server. This serves the remote config (e.g., `/array/<token>/config.js`) with proper `cache-control` headers. Without this rule, remote config requests fall through to the main API, which strips cache headers and can cause browsers to use stale SDK config.
+- The third rewrite routes all other `/yourpath/*` requests to PostHog's main API. This handles event capture, Feature flags, and session recordings.
 - The `:path(.*)` syntax captures everything after the matched prefix and passes it to the destination URL.
 
-The specific path rewrites must come before the catch-all. Vercel evaluates rewrites in order, so if the catch-all rule came first, it would match `/ph/static/*` and `/ph/array/*` before the path-specific rules.
+The specific path rewrites must come before the catch-all. Vercel evaluates rewrites in order, so if the catch-all rule came first, it would match `/yourpath/static/*` and `/yourpath/array/*` before the path-specific rules.
 
 See [Vercel's rewrites documentation](https://vercel.com/docs/projects/project-configuration#rewrites) for more details.
 
@@ -110,14 +110,14 @@ In your application code, update your PostHog initialization:
 
 ```js file=US
 posthog.init('<ph_project_token>', {
-  api_host: '/ph',
+  api_host: '/yourpath',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
 posthog.init('<ph_project_token>', {
-  api_host: '/ph',
+  api_host: '/yourpath',
   ui_host: 'https://eu.posthog.com'
 })
 ```
@@ -142,7 +142,7 @@ Confirm events are flowing through your proxy:
 
 1. Open your browser's developer tools and go to the **Network** tab
 2. Navigate to your site or trigger an event
-3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/ph`)
+3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/yourpath`)
 4. Verify the response status is `200 OK`
 5. Check the [PostHog app](https://app.posthog.com) to confirm events appear in your activity feed
 
@@ -187,14 +187,14 @@ If your rewrites aren't matching correctly, ensure you're using Vercel's named p
 
 ```json file=US
 {
-  "source": "/ph/:path(.*)",
+  "source": "/yourpath/:path(.*)",
   "destination": "https://us.i.posthog.com/:path"
 }
 ```
 
 ```json file=EU
 {
-  "source": "/ph/:path(.*)",
+  "source": "/yourpath/:path(.*)",
   "destination": "https://eu.i.posthog.com/:path"
 }
 ```
