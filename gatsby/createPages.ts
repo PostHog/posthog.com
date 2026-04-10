@@ -9,9 +9,10 @@ const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
 const isMinimalBuild = process.env.GATSBY_MINIMAL === 'true'
+const isDocsOnlyBuild = process.env.GATSBY_DOCS_ONLY === 'true'
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
-    if (isMinimalBuild) {
+    if (isMinimalBuild || isDocsOnlyBuild) {
         return createMinimalPages({ createPage, graphql })
     }
 
@@ -1242,10 +1243,13 @@ async function createMinimalPages({
     }
 
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
-    createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
-    createHandbookPreviewPosts(data.productEngineerHandbook.nodes, 'product-engineer', {
-        name: 'Product Engineer Handbook',
-        url: '/product-engineer',
-    })
-    createBlogPreviewPosts(data.posts.nodes)
+
+    if (!isDocsOnlyBuild) {
+        createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
+        createHandbookPreviewPosts(data.productEngineerHandbook.nodes, 'product-engineer', {
+            name: 'Product Engineer Handbook',
+            url: '/product-engineer',
+        })
+        createBlogPreviewPosts(data.posts.nodes)
+    }
 }
