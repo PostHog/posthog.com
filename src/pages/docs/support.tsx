@@ -3,21 +3,11 @@ import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import Intro from 'components/Docs/Intro'
 import ResourceItem from 'components/Docs/ResourceItem'
-import { CalloutBox } from 'components/Docs/CalloutBox'
 
 const Support: React.FC = () => {
     return (
         <ReaderView>
             <SEO title="Support - Docs - PostHog" />
-            <CalloutBox icon="IconFlask" title="Support is in private alpha" type="info">
-                <p>
-                    Support is currently in private alpha.{' '}
-                    <a href="https://us.posthog.com/settings/user-feature-previews#in-app-messenger">
-                        Request early access
-                    </a>{' '}
-                    and we'll invite you when ready.
-                </p>
-            </CalloutBox>
             <Intro
                 subheader="Getting started"
                 title="Support"
