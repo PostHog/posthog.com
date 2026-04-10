@@ -1,5 +1,5 @@
 ---
-title: Event filters
+title: Event ingestion filtering
 sidebar: Docs
 showTitle: true
 availability:
@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-Event filters let you drop unwanted events at ingestion time before they're stored or processed further. This is the earliest point you can filter events in the [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline), making it the most efficient way to exclude noise from your data.
+Event ingestion filtering lets you drop events at ingestion time based on event metadata. Filters are evaluated early in the [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline), before transformations run, making it the most efficient way to exclude unwanted events from your data.
 
 Common use cases include:
 
@@ -17,19 +17,19 @@ Common use cases include:
 - Removing high-volume, low-value events to reduce costs
 - Temporarily filtering buggy data while you roll out a client-side fix
 
-You can find event filters at [**Data management** > **Event filtering**](https://app.posthog.com/data-management/event-filtering).
+You can find it at [**Data management** > **Event filtering**](https://app.posthog.com/data-management/event-filtering).
 
 ## How it works
 
-Event filters evaluate each incoming event against a set of conditions you define. If an event matches the filter, PostHog drops it before ingestion. If it doesn't match, it continues through the pipeline as normal.
+Each incoming event is evaluated against a set of conditions you define. If an event matches the filter, PostHog drops it before ingestion. If it doesn't match, it continues through the pipeline as normal.
 
-Filters run **before** [transformations](/docs/cdp/transformations) and [destinations](/docs/cdp/destinations), so dropped events won't trigger any downstream processing.
+Filters run **before** [transformations](/docs/cdp/transformations) and [destinations](/docs/cdp/destinations), so dropped events don't trigger any downstream processing.
 
-If your filtering logic can be expressed as an event filter, we recommend using event filters over a [drop events transformation](/docs/cdp/transformations/drop-events). Event filters run earlier in the pipeline and don't require writing custom code.
+If your filtering logic can be expressed here, we recommend using event ingestion filtering over a [drop events transformation](/docs/cdp/transformations/drop-events). It runs earlier in the pipeline and doesn't require writing custom code.
 
 ## Operating modes
 
-Event filters have three modes:
+The filter has three modes:
 
 | Mode | Behavior |
 |------|----------|
@@ -50,7 +50,7 @@ Each condition has three parts:
    - `distinct_id` - the [distinct ID](/docs/data/persons) attached to the event
 
 2. **Operator** - how to match:
-   - `exact` - the field value equals the specified value exactly
+   - `equals` - the field value matches the specified value exactly
    - `contains` - the field value contains the specified string
 
 3. **Value** - the string to match against
@@ -61,13 +61,13 @@ Each condition has three parts:
 - **OR groups** match when **any** condition in the group is true.
 - **NOT** negates a group, matching when the group's conditions are **not** true.
 
-You can nest groups up to 5 levels deep and add up to 20 conditions total. Conditions and groups can be reordered using drag and drop.
+You can nest groups up to five levels deep and add up to 20 conditions total. Conditions and groups can be reordered using drag and drop.
 
 **Example:** To drop all `$pageview` events from a bot with distinct ID containing `bot-crawler`:
 
 ```
 AND
-├── event_name exact "$pageview"
+├── event_name equals "$pageview"
 └── distinct_id contains "bot-crawler"
 ```
 
@@ -81,7 +81,7 @@ OR
 
 ## Test cases
 
-Events dropped by a filter cannot be recovered, so it's important to verify your filter works correctly before turning it on. Test cases let you do this — they validate the filter against example events and serve as living documentation of what the filter is intended to match.
+Events dropped by a filter can't be recovered, so verify your filter works correctly before turning it on. Test cases help you do this – they validate the filter against example events and serve as living documentation of what the filter is intended to match.
 
 Each test case specifies:
 
@@ -89,14 +89,14 @@ Each test case specifies:
 - A **distinct ID**
 - The **expected result** - either "Drop" or "Ingest"
 
-Test cases run locally in your browser and show a pass/fail result. If any test case fails, the filter cannot be set to **live** mode — it will automatically downgrade to **dry run** until all tests pass.
+Test cases run locally in your browser and show a pass/fail result. The filter can't be enabled until all tests pass – if you try to save in **live** mode with failing tests, it automatically downgrades to **dry run**.
 
 ## Metrics
 
 The event filtering page shows approximate counts of:
 
-- **Dropped** - events that were dropped in live mode
-- **Would be dropped** - events that would have been dropped in dry run mode
+- **Dropped** - events the filter dropped in live mode
+- **Would be dropped** - events the filter matched in dry run mode (not actually dropped)
 
 Use these metrics to validate your filter is matching the right volume and type of events before going live.
 
@@ -105,9 +105,9 @@ Use these metrics to validate your filter is matching the right volume and type 
 ## Limits
 
 - Maximum **20 conditions** per filter
-- Maximum **5 levels** of nesting
+- Maximum **five levels** of nesting
 - Only `event_name` and `distinct_id` fields are supported
-- Only `exact` and `contains` operators are supported
+- Only `equals` and `contains` operators are supported
 - One filter configuration per project
 
 ## Further reading

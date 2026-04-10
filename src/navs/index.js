@@ -2617,8 +2617,8 @@ export const docsMenu = {
                             url: '/docs/getting-started/data-import-export',
                         },
                         {
-                            name: 'Event filters',
-                            url: '/docs/data/event-filters',
+                            name: 'Event ingestion filtering',
+                            url: '/docs/data/event-filtering',
                         },
                         {
                             name: 'Ingestion warnings',
