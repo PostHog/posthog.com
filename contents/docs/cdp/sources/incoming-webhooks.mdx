@@ -9,7 +9,13 @@ availability:
 ---
 import { ProductScreenshot } from 'components/ProductScreenshot'
 
-Incoming webhooks enable you to send data from external systems directly into PostHog. This is useful for integrating with custom applications, third-party services, or any system that can make HTTP requests. 
+<CalloutBox icon="IconInfo" title="Feature preview" type="caution">
+
+Incoming webhook sources are experimental and available behind a [feature preview](https://us.posthog.com/settings/user-feature-previews#cdp-hog-sources). For most use cases, we recommend using a [workflow with a webhook trigger](/docs/workflows/workflow-builder#webhook-triggers) combined with a **capture event** action instead — it's more flexible, doesn't require code, and gives you access to delays, branching, and other workflow features.
+
+</CalloutBox>
+
+Incoming webhooks enable you to send data from external systems directly into PostHog. This is useful for integrating with custom applications, third-party services, or any system that can make HTTP requests.
 
 In general, we recommend using our [SDKs](/docs/libraries) or [capture API](/docs/api/capture) but this is useful when you don't have control over the sender format and need to perform some transformation to match PostHog's event format.
 
@@ -31,7 +37,7 @@ Incoming webhook requests have a maximum payload size of 500KB. Requests exceedi
 
 ## Transforming the webhook payload
 
-We recommend starting from the default [HTTP incoming webhook template](/docs/cdp/source_webhooks/source-webhook). For most use cases, you can transform the incoming webhook to the required properties simply using our [Hog templating language](/docs/hog).
+We recommend starting from the default [HTTP incoming webhook template](/docs/hog#hog-by-example-webhook). For most use cases, you can transform the incoming webhook to the required properties simply using our [Hog templating language](/docs/hog).
 
 
 ### The request object

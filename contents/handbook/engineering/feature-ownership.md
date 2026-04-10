@@ -4,7 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Each feature at PostHog has an Engineering owner. This owner is responsible for maintaining the feature (keep the lights on), championing any efforts to improve it (e.g. by bringing up improvements in sprint planning), [planning launches](/handbook/words-and-pictures/product-announcements) for new parts of it, and making sure it is well documented.
+Each feature at PostHog has an Engineering owner. This owner is responsible for maintaining the feature (keep the lights on), championing any efforts to improve it (e.g. by bringing up improvements in sprint planning), [planning launches](/handbook/marketing/product-announcements) for new parts of it, and making sure it is well documented.
+
+For shared developer tooling and infrastructure that cuts across product teams (CI, local dev, builds, migrations, etc.), see the [Developer Experience](/handbook/engineering/developer-experience) page.
 
 When a bug or feature request comes in, we tag it with the relevant label (see labels below). The owner is responsible for then prioritizing any bug/request that comes in for each feature. This does not mean working on every bug/request, an owner can make the deliberate decision that working on something is not the best thing to work on, but every request should be looked at.
 

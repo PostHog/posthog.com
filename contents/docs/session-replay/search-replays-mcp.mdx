@@ -1,0 +1,47 @@
+---
+title: Search replays with MCP
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent search [session replays](/docs/session-replay) directly from your code editor. Investigate user-reported bugs, understand how users interact with features, and find specific sessions – without switching to the PostHog app.
+
+This works in any MCP client – Cursor, Windsurf, Claude Code, VS Code, and others.
+
+## How it works
+
+With MCP, your coding agent can:
+
+- **Investigate bug reports** – "Find session replays where users encountered an error on the dashboard page"
+- **Research before coding** – "Show me how users interact with the settings page" to understand current behavior before making changes
+- **Validate after deploying** – "Find replays of users who used the new checkout flow in the last 24 hours"
+- **Search by user properties** – "Show me replays from enterprise users who rage clicked"
+
+## Replay tools
+
+The MCP server uses the `query-run` tool to search session replays. You can filter by:
+
+- **Events** – page views, clicks, custom events, errors
+- **User properties** – plan, cohort, country, or any person property
+- **Replay-specific behaviors** – rage clicks, dead clicks, error events
+- **Time ranges** – last hour, today, specific date ranges
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `Find replays where users hit a JavaScript error on the /checkout page.`
+- `Show me sessions from the last hour where users visited the pricing page.`
+- `Find recordings of users on the enterprise plan who used the bulk import feature.`
+- `Are there any replays showing users stuck in a navigation loop?`
+- `Find the most recent session for user with email user@example.com.`
+
+## Install the MCP server
+
+The recommended way to install is with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+The wizard supports Claude, Cursor, Windsurf, VS Code, and more. You can also [configure it manually](/docs/model-context-protocol#manual-install).
+
+See the [MCP server docs](/docs/model-context-protocol) for full setup instructions.

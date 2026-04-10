@@ -1,20 +1,24 @@
-### Q1 2026 Objectives
+### Q2 2026 Objectives
 
-- *Going deeper on messaging*: 
-  - Messaging is still the most common Workflows use case, and we want to serve it really well before focusing broadly on Workflows features.
-	- What we’ll ship: 
-    - The most-requested features from our users
-    - Broadcasts (aka Batch workflows)
-    - Recurring / cron-job workflows
-    - New native PostHog messaging channels (Push, SMS)
-    - Behavioral targeting (do _X_ only if user has not performed _Y_ event in last _N_ days)
-- *Gear up for Workflows General Availability*:
-	- As we prepare Workflows for a broader release, we’re focusing on reliability and day-to-day usability, especially when things go wrong.
-  - What we'll ship:
-    - Improved observability (clear run history for past and future workflow invocations, logs, and debugging tools)
-    - Better previews for messages on all channels so that users feel confident in their comms
-    - High level insights around email deliverability to allow users to proactively monitor spam reputation
-    - More product documentation for new and existing users
-- *Inter-product triggers*: 
-	- Today, Workflows is powerful, but integrations across PostHog product aren’t yet consistent
-	- What we’ll ship: At least one solid, repeatable integration pattern for triggering workflows from other PostHog products, or letting users configure workflows based on product events
+- **Fit into product autonomy** (Champion: Dan)
+  - Solve the blockers for autonomous workflows by ensuring compatibility with LLM agents.
+  - What we’ll ship:
+    - PostHog AI can reliably create and iterate on workflows and email designs via multi-turn agent threads
+    - Integration with PostHog Signals
+    - LLM workflow node with bring-your-own credentials
+- **Workflows engine scaling** (Champion: Myke)
+  - Strengthen our infrastructure so we can maintain high product velocity going forward.
+  - What we’ll ship:
+    - A job queue we feel confident iterating on
+    - Reduced data throughput to support continued scaling
+    - Product guardrails to protect reliability
+    - Dead letter queue and invocation outcomes store
+    - Message sending rate throttling (follow-up to cron/batch workflows)
+- **Messaging feature depth** (Champion: Haven)
+  - Fill the remaining gaps in our messaging capabilities and polish the end-to-end experience.
+  - What we’ll ship:
+    1. Realtime "wait for event" listeners (wait until event performed, exit early on conversion)
+    2. Behavioral cohort triggers (batch workflows for entire cohorts, trigger on membership changes)
+    3. Additional native channels (push notifications, SMTP relay)
+    4. UX improvements for large workflows (goto/early exit nodes, full-screen mode, general papercuts)
+    5. Iteration on table-stakes features (message previewing, email editor)

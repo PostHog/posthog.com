@@ -29,7 +29,7 @@ Your CloudFront distribution will route two types of requests:
 - **Event and API requests:** Routes to your main origin, `us.i.posthog.com` or `eu.i.posthog.com`. This handles event capture, feature flags, session recordings, and all PostHog API calls.
 - **Static assets:** Routes to your assets origin, `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`. This serves PostHog's JavaScript SDK and other static files.
 
-CloudFront uses "behaviors" to route requests. The `/static/*` behavior routes to your assets origin, while the default behavior routes everything else to your main origin.
+CloudFront uses "behaviors" to route requests. The `/static/*` and `/array/*` behaviors route to your assets origin, while the default behavior routes everything else to your main origin.
 
 ## Set up your CloudFront proxy
 
@@ -112,11 +112,11 @@ Origin request policies control what CloudFront sends to your origin, regardless
 
 </Step>
 
-<Step title="Create a cache behavior for static assets">
+<Step title="Create cache behaviors for static assets and config">
 
-In the CloudFront console, add a new cache behavior to your distribution.
+In the CloudFront console, add two new cache behaviors to your distribution.
 
-Configure this CloudFront behavior:
+**Behavior 1: Static assets**
 
 - **Path pattern:** `/static/*`
 - **Origin:** Your assets origin, `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`
@@ -125,6 +125,23 @@ Configure this CloudFront behavior:
 - **Response headers policy:** `CORS-with-preflight-and-SecurityHeadersPolicy`
 
 This behavior routes requests to `/static/*` to your assets origin instead of the main origin. The response headers policy is built into AWS and adds CORS headers to responses.
+
+**Behavior 2: Remote config**
+
+- **Path pattern:** `/array/*`
+- **Origin:** Your assets origin, `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`
+- **Cache policy:** Your custom `posthog-cache-policy` from step 2
+- **Origin request policy:** Your custom `posthog-origin-request-policy` from step 5
+- **Response headers policy:** `CORS-with-preflight-and-SecurityHeadersPolicy`
+
+This behavior routes requests to `/array/*` to your assets origin. The `/array` path serves PostHog's remote configuration, which controls Feature flags, session recording settings, and other SDK behavior. Routing this through the assets origin ensures proper cache-control headers are preserved, allowing the SDK to refresh its configuration correctly.
+
+<CalloutBox icon="IconWarning" title="Route /array/* to the assets origin" type="caution">
+
+If `/array/*` routes through the main origin instead, config requests will still succeed but cache-control headers will be stripped. Without these headers, browsers fall back to heuristic caching and may cache stale configuration for hours or days. This can cause session recording conditions, feature flags, and other SDK settings to stop updating.
+
+</CalloutBox>
+
 
 If you encounter CORS errors after setup, you may need to create a custom response headers policy with `Access-Control-Allow-Headers` set to `*` for all headers. See [AWS's CORS troubleshooting guide](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web-cors) for details.
 
@@ -215,3 +232,13 @@ If the PostHog SDK fails to load or you see 404 errors for `/static/*` requests:
 3. Check that the assets origin matches your PostHog region (US or EU)
 
 Without the `/static/*` behavior, CloudFront tries to serve static files from your main origin, which will fail.
+
+### Session recording conditions or Feature flags not updating
+
+If session recording ignores your configured conditions (e.g., records everything despite having event triggers or sampling), or Feature flags seem stuck on old values:
+
+1. Verify you created a cache behavior with path pattern `/array/*` pointing to your assets origin (`us-assets.i.posthog.com` or `eu-assets.i.posthog.com`)
+2. Check the response headers for `/array/<your-token>/config.js` by curling your proxy URL — you should see `cache-control: max-age=300` in the response
+3. If `cache-control` is missing, the `/array/*` path is routing through your main origin instead of the assets origin
+
+Without the `/array/*` behavior, config requests route through the main origin. This silently works (returns valid config) but strips cache-control headers. Browsers then fall back to heuristic caching based on `Last-Modified`, which can cache stale configuration for hours or days. This means SDK configuration changes (recording conditions, Feature flags, sampling rates) won't reach users until their browser cache expires.

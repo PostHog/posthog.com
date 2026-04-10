@@ -43,3 +43,18 @@ With your annotation created, it will now be available at the bottom of your cha
     alt="How to create an annotation in PostHog" 
     classes="rounded"
 />
+
+
+## Managing annotations via AI agents
+
+You can manage annotations using AI coding assistants like Cursor, Claude Code, VS Code, or any tool that supports the [Model Context Protocol (MCP)](/docs/model-context-protocol).
+
+With the [PostHog MCP server](/docs/model-context-protocol) connected, you can ask your AI agent to:
+
+- Create annotations to mark deployments, releases, or incidents
+- List existing annotations to review what's been marked
+- Retrieve, update, or delete specific annotations
+
+For example, you might prompt: *"Create an annotation for today saying 'Deployed checkout v2.0'"* and the agent will create it in your project.
+
+This is useful for marking deployments directly from your development workflow without switching to the PostHog app.
