@@ -45,15 +45,15 @@ Filters are built using a visual expression builder that supports nested boolean
 
 Each condition has three parts:
 
-1. **Field** - what to match on:
-   - `event_name` - the name of the event (e.g., `$pageview`, `signup`)
-   - `distinct_id` - the [distinct ID](/docs/data/persons) attached to the event
+1. **Field** – what to match on:
+   - `event_name` – the name of the event (e.g., `$pageview`, `signup`)
+   - `distinct_id` – the [distinct ID](/docs/data/persons) attached to the event
 
-2. **Operator** - how to match:
-   - `equals` - the field value matches the specified value exactly
-   - `contains` - the field value contains the specified string
+2. **Operator** – how to match:
+   - `equals` – the field value matches the specified value exactly
+   - `contains` – the field value contains the specified string
 
-3. **Value** - the string to match against
+3. **Value** – the string to match against
 
 ### Combining conditions
 
@@ -87,7 +87,7 @@ Each test case specifies:
 
 - An **event name**
 - A **distinct ID**
-- The **expected result** - either "Drop" or "Ingest"
+- The **expected result** – either "Drop" or "Ingest"
 
 Test cases run locally in your browser and show a pass/fail result. The filter can't be enabled until all tests pass – if you try to save in **live** mode with failing tests, it automatically downgrades to **dry run**.
 
@@ -95,8 +95,8 @@ Test cases run locally in your browser and show a pass/fail result. The filter c
 
 The event filtering page shows approximate counts of:
 
-- **Dropped** - events the filter dropped in live mode
-- **Would be dropped** - events the filter matched in dry run mode (not actually dropped)
+- **Dropped** – events the filter dropped in live mode
+- **Would be dropped** – events the filter matched in dry run mode (not actually dropped)
 
 Use these metrics to validate your filter is matching the right volume and type of events before going live.
 
