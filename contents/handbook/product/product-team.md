@@ -101,4 +101,19 @@ To keep track of their projects across teams, PMs should track their personal qu
 
 As the PM team, we are usually also pursuing a couple of side projects each quarter with the goal of leveling up how we do Product at PostHog.
 
-In Q4 2025, we are focussing primarily on the teams we work with, and have no big side projects.
+In Q2 2026, we are working on the following themes:
+
+- Ensure our metrics definitions are mature enough for our scale (e.g. inconsistencies in activation & product intent) -> Annika
+    - Investigate ways to make updates to activation definitions sustainable & consistent -> Mike
+- Figure out information flows between product, growth and marketing, so that we get the right exposure for new and mature products -> Abe
+- Make sure our products & tracking are set up for a agent-first world
+    - Tracking human vs agent actions, and defining success for each -> every PM
+    - Make sure each product has use cases and a “reason for being” in an agent-first world -> every product team
+- Think about ideas how to fix the “accountability gap” in growth reviews -> Cory
+    - From product teams, expect more accountability
+    - From PMs, get growth reviews done early in the month
+
+“Business-as-usual” themes:
+
+- Make sure we standardise best practices & share knowledge as a group of 5 (soon to be 7) without central leadership, and without adding bureaucracy & friction
+- Use our PM brownbags to share how we use AI to be more effective
