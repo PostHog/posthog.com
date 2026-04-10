@@ -48,7 +48,7 @@ Every workflow starts with a trigger. Triggers represent actions taken by users 
 
 ### Event triggers
 
-Event triggers are any PostHog event. These can be manually or automatically [autocaptured](/docs/data/autocapture) by our SDKs. They can be filtered by the event properties and persons properties attached to the event. 
+Event triggers are any PostHog event. These can be manually or automatically [autocaptured](/docs/data/autocapture) by our SDKs. They can be filtered by the event properties and persons properties attached to the event.
 
 To filter your events, click on the three lines icon next to the event name and select **Add filter**.
 
@@ -58,6 +58,19 @@ To filter your events, click on the three lines icon next to the event name and 
     classes="rounded"
     alt="Event trigger filter"
 />
+
+### Webhook triggers
+
+Webhook triggers let you start a workflow from an external system by sending an HTTP request to a unique URL. When you select **Webhook** as the trigger type, PostHog generates a URL you can call from any system that can make HTTP requests.
+
+This is the recommended way to create PostHog events from external webhooks. Combine a webhook trigger with a **[Capture Event](#posthog-actions)** action to ingest events when PostHog receives a request to the webhook.
+
+To set this up:
+
+1. Create a new workflow and select **Webhook** as the trigger type.
+2. Add a **Capture Event** action step to create a PostHog event from the incoming data.
+3. Optionally add delays, branching, person property updates, or dispatches.
+4. Enable the workflow and point your external system at the webhook URL which can be copied from the trigger step.
 
 ## Dispatches
 

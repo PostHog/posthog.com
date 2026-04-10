@@ -16,6 +16,7 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 1. Customers with MRR between $500-1,667, employee count > 50, user count > 7, based in ICP country, and has been paying for at least 3 months
 2. Customers who have high ICP score and subscribe to the Scale plan
 3. Customers with MRR >$1K and >50% forecasted spend increase this month
+4. Unmanaged customers with >$20K ARR who raise a support ticket
 
 **New business sales team**
 1. Completed the book a demo form (organic inbound, paid ads campaign, or outbound)
