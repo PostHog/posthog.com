@@ -86,6 +86,7 @@ type UserContextValue = {
     addBookmark: (args: { url: string; title: string; description: string }) => Promise<void>
     removeBookmark: (args: { url: string; title: string; description: string }) => Promise<void>
     reportSpam: (type: 'reply' | 'question', id: number) => Promise<void>
+    deleteAccount: () => Promise<{ success: boolean; error?: string }>
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -113,6 +114,7 @@ export const UserContext = createContext<UserContextValue>({
     addBookmark: async () => undefined,
     removeBookmark: async () => undefined,
     reportSpam: async () => undefined,
+    deleteAccount: async () => ({ success: false }),
 })
 
 type UserProviderProps = {
@@ -731,6 +733,47 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         })
     }
 
+    const deleteAccount = async (): Promise<{ success: boolean; error?: string }> => {
+        const profileID = user?.profile?.id
+        if (!profileID) return { success: false, error: 'No profile found' }
+
+        const token = await getJwt()
+        if (!token) return { success: false, error: 'Not authenticated' }
+
+        try {
+            posthog?.capture('squeak account delete start')
+
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}/delete-account`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+
+            if (res.ok) {
+                posthog?.capture('squeak account delete success')
+                await clearUser()
+                return { success: true }
+            }
+
+            const data = await res.json().catch(() => ({}))
+            const message =
+                res.status === 401
+                    ? 'Not authorized to delete this account'
+                    : res.status === 404
+                    ? 'Profile not found'
+                    : data?.error?.message || 'Something went wrong. Please try again.'
+
+            return { success: false, error: message }
+        } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'useUser.deleteAccount',
+                error: JSON.stringify(error),
+            })
+            return { success: false, error: 'Something went wrong. Please try again.' }
+        }
+    }
+
     const contextValue = {
         user,
         setUser,
@@ -752,6 +795,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         addBookmark,
         removeBookmark,
         reportSpam,
+        deleteAccount,
     }
 
     return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

@@ -51,6 +51,7 @@ import OSButton from 'components/OSButton'
 import { IconNoEntry, IconStrapi } from 'components/OSIcons'
 import Points from 'components/Points'
 import { useWindow } from '../../../context/Window'
+import { navigate } from 'gatsby'
 
 dayjs.extend(relativeTime)
 
@@ -796,6 +797,92 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
     )
 }
 
+const DeleteAccountBlock = () => {
+    const [confirming, setConfirming] = useState(false)
+    const [confirmation, setConfirmation] = useState('')
+    const [isDeleting, setIsDeleting] = useState(false)
+    const [error, setError] = useState<string | null>(null)
+    const { deleteAccount } = useUser()
+    const { addToast } = useToast()
+
+    const confirmed = confirmation.toLowerCase() === 'delete'
+
+    const handleDelete = async () => {
+        if (!confirmed) return
+        setIsDeleting(true)
+        setError(null)
+
+        const result = await deleteAccount()
+
+        if (result.success) {
+            addToast({
+                description: 'Your account has been permanently deleted.',
+                duration: 5000,
+            })
+            navigate('/')
+        } else {
+            setError(result.error || 'Something went wrong.')
+            setIsDeleting(false)
+        }
+    }
+
+    return (
+        <Block title="Danger zone" className="mt-4">
+            {confirming ? (
+                <div className="space-y-2">
+                    <p className="text-xs text-secondary m-0">
+                        This is permanent. Type <span className="text-red font-mono font-bold">delete</span> to confirm.
+                    </p>
+                    <OSInput
+                        size="sm"
+                        label="Confirm"
+                        showLabel={false}
+                        name="delete-confirm"
+                        type="text"
+                        autoComplete="off"
+                        autoFocus
+                        value={confirmation}
+                        onChange={(e) => setConfirmation(e.target.value)}
+                        placeholder="delete"
+                        disabled={isDeleting}
+                        direction="column"
+                    />
+                    {error && <p className="text-red text-xs font-bold m-0">{error}</p>}
+                    <div className="flex gap-2 !mt-2.5">
+                        <OSButton
+                            size="sm"
+                            variant="secondary"
+                            onClick={() => {
+                                setConfirming(false)
+                                setConfirmation('')
+                                setError(null)
+                            }}
+                            disabled={isDeleting}
+                        >
+                            Cancel
+                        </OSButton>
+                        <OSButton
+                            size="sm"
+                            variant="primary"
+                            onClick={handleDelete}
+                            disabled={!confirmed || isDeleting}
+                        >
+                            {isDeleting ? 'Deleting...' : 'Delete forever'}
+                        </OSButton>
+                    </div>
+                </div>
+            ) : (
+                <button
+                    className="text-xs text-secondary hover:underline !text-red font-bold transition-colors"
+                    onClick={() => setConfirming(true)}
+                >
+                    Delete my account
+                </button>
+            )}
+        </Block>
+    )
+}
+
 const ProfileSkeleton = () => {
     return (
         <div data-scheme="secondary" className="h-full bg-primary">
@@ -1469,7 +1556,7 @@ export default function ProfilePage({ params }: PageProps) {
     }
 
     return (
-        <div data-scheme="secondary" className="h-full bg-primary text-primary">
+        <div data-scheme="secondary" className="h-full bg-primary text-primary flex flex-col">
             <SEO title={`${name}'s profile - PostHog`} />
             <div className="border-b border-primary">
                 <HeaderBar
@@ -1740,6 +1827,7 @@ export default function ProfilePage({ params }: PageProps) {
                                     <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />
                                 </Block>
                             )}
+                            {isEditing && isCurrentUser && <DeleteAccountBlock />}
                         </div>
 
                         <div className="flex-grow @container">
