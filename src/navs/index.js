@@ -5544,7 +5544,7 @@ export const docsMenu = {
                         {
                             name: 'Claude Code',
                             url: '/docs/llm-analytics/installation/claude-code',
-                            icon: 'IconAnthropic',
+                            icon: 'IconClaudeCode',
                         },
                         {
                             name: 'Manual capture',
