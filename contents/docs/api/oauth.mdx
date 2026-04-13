@@ -8,22 +8,36 @@ PostHog supports OAuth 2.0 for third-party applications to access PostHog on beh
 
 ## Client-Initiated Metadata Discovery (CIMD)
 
-If you're building an application that needs to integrate with PostHog's OAuth, we recommend using **Client-Initiated Metadata Discovery (CIMD)**. This approach allows your application to discover PostHog's OAuth configuration through our well-known metadata endpoint and register dynamically.
+If you're building an application that needs to integrate with PostHog's OAuth, we recommend using **[Client-Initiated Metadata Discovery (CIMD)](https://www.ietf.org/archive/id/draft-parecki-oauth-client-id-metadata-document-07.html)**. This approach allows you to integrate without pre-registering your application with PostHog.
 
 ### How CIMD works
 
-1. **Discover metadata**: Your application fetches PostHog's OAuth server metadata from the well-known endpoint:
+With CIMD, your application's **domain acts as your `client_id`**. When a user authorizes your app, PostHog fetches metadata about your client from your domain.
+
+1. **Set up your client metadata**: Host a JSON document at `/.well-known/oauth-client` on your domain (e.g., `https://yourapp.com/.well-known/oauth-client`) containing your client information:
+
+   ```json
+   {
+     "client_name": "Your App Name",
+     "logo_uri": "https://yourapp.com/logo.png",
+     "redirect_uris": ["https://yourapp.com/callback"]
+   }
+   ```
+
+   The `client_name` is required. The `logo_uri` is optional but recommended for a better user experience during authorization.
+
+2. **Discover PostHog's OAuth metadata**: Fetch PostHog's OAuth server configuration from the well-known endpoint:
    - Generic: `https://oauth.posthog.com/.well-known/oauth-authorization-server` (recommended - handles US/EU routing transparently)
    - US Cloud: `https://us.posthog.com/.well-known/oauth-authorization-server`
    - EU Cloud: `https://eu.posthog.com/.well-known/oauth-authorization-server`
 
-2. **Use the metadata**: The response contains all the endpoints and capabilities you need, including:
+   The response contains all the endpoints and capabilities you need, including:
    - `authorization_endpoint` - Where to send users to authorize
    - `token_endpoint` - Where to exchange codes for tokens
    - `scopes_supported` - Available [OAuth scopes](/docs/api#scopes) (same as our REST API)
    - `response_types_supported` - Supported response types
 
-3. **Implement the OAuth flow**: Use the discovered endpoints to implement the standard [OAuth 2.0 authorization code flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1).
+3. **Implement the OAuth flow**: Use your domain as the `client_id` and implement the standard [OAuth 2.0 authorization code flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1).
 
 ### Example metadata discovery
 
@@ -52,6 +66,7 @@ Both token types are automatically revoked if detected by [GitHub secret scannin
 
 ## Further reading
 
+- [CIMD specification](https://www.ietf.org/archive/id/draft-parecki-oauth-client-id-metadata-document-07.html) - Client-Initiated Metadata Discovery
 - [OAuth 2.0 specification (RFC 6749)](https://datatracker.ietf.org/doc/html/rfc6749) - The OAuth 2.0 authorization framework
 - [API overview](/docs/api) - Learn about PostHog's API authentication options
 - [Personal API keys](/docs/api#private-endpoint-authentication) - Alternative authentication for scripts and integrations
