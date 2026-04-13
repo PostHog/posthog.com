@@ -64,3 +64,25 @@ Here are the common tools the Sales, CS, and Onboarding teams use daily.
 - <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#customer-churn</PrivateLink> - discussion of potential and actual customer churn.
 - <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#changelog</PrivateLink> - product launches.
 - <PrivateLink url='https://posthog.slack.com/archives/C0975UEGHT5'>#today-i-learned</PrivateLink> - where we share our learnings.
+
+### Internal tools
+Why should engineers have all the fun? We routinely build our own internal tooling.
+
+- <PrivateLink url='https://demohog.vercel.app/'>DemoHog</PrivateLink> - sample data for demo calls.
+- <PrivateLink url='https://hogflix.dev/'>HogFlix</PrivateLink> - demo app.
+- <PrivateLink url='https://github.com/PostHog/hedgeground'>Hedgeground</PrivateLink> - LLM-focused demo app.
+- <PrivateLink url='https://reinvented-won.vercel.app/'>Wheel of Names</PrivateLink> - randomly pick a person.
+- <PrivateLink url='https://posthog-academy.vercel.app/'>Academy</PrivateLink> - training platform.
+- <PrivateLink url='https://quotehog.vercel.app'>QuoteHog</PrivateLink> - create quotes for customers.
+- <PrivateLink url='https://github.com/PostHog/hogspy'>HogSpy</PrivateLink> - Chrome extension for extra debugging info about PostHog usage.
+- <PrivateLink url='https://github.com/PostHog/learn'>Learn</PrivateLink> - prompts for PostHog Code on how to use PostHog effectively.
+- <PrivateLink url='https://github.com/PostHog/yahe'>Yet Another Hog Spy</PrivateLink> - Chrome extension to identify SDKs used on a website.
+- <PrivateLink url='https://gotwatchtower.com/'>WatchTower</PrivateLink> - alerts for your accounts.
+- <PrivateLink url='https://github.com/PostHog/blake-bot'>Blake Bot</PrivateLink> - Slack bot to retrieve customer data.
+- <PrivateLink url='https://github.com/PostHog/vitally-mcp-server'>Vitally MCP Server</PrivateLink> - expose Vitally data over MCP (public version also available).
+- <PrivateLink url='https://github.com/PostHog/skills'>Claude Skills</PrivateLink> - miscellaneous skills for retrieving data.
+- <PrivateLink url='https://stakeholdermap.vercel.app'>Stakeholder Mapping</PrivateLink> - visualise accounts from Vitally data.
+- <PrivateLink url='https://github.com/PostHog/forage'>Forage</PrivateLink> - outbound sales tooling.
+- <PrivateLink url='https://sdkscanner.posthog.dev/'>SDK Scanner</PrivateLink> - spy on tools used by customers.
+- <PrivateLink url='https://github.com/PostHog/md-crm'>MD CRM</PrivateLink> - markdown CRM.
+
