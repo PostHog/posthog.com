@@ -1,0 +1,175 @@
+---
+title: Cloudflare Workers logs installation
+platformLogo: cloudflare
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+Cloudflare Workers has built-in OpenTelemetry support that can export logs directly to PostHog. This is the easiest way to get logs from your Workers into PostHog without adding any SDK code.
+
+<Steps>
+
+<Step title="Get your project token" badge="required">
+
+You'll need your PostHog project token to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
+
+> **Important:** Use your **project token** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project token in [Project Settings](https://app.posthog.com/settings/project).
+
+</Step>
+
+<Step title="Configure observability in Wrangler" badge="required">
+
+Add the observability configuration to your `wrangler.jsonc` (or `wrangler.toml`) file to export logs to PostHog:
+
+**Using wrangler.jsonc:**
+
+```json
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "my-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-06-20",
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "head_sampling_rate": 1
+    },
+    "export": {
+      "otel": {
+        "endpoint": "<ph_client_api_host>/i/v1",
+        "headers": {
+          "Authorization": "Bearer <ph_project_token>"
+        }
+      }
+    }
+  }
+}
+```
+
+**Using wrangler.toml:**
+
+```toml
+name = "my-worker"
+main = "src/index.ts"
+compatibility_date = "2025-06-20"
+
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+invocation_logs = true
+head_sampling_rate = 1
+
+[observability.export.otel]
+endpoint = "<ph_client_api_host>/i/v1"
+
+[observability.export.otel.headers]
+Authorization = "Bearer <ph_project_token>"
+```
+
+</Step>
+
+<Step title="Configuration options" badge="optional">
+
+You can customize the logging behavior with these options:
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `logs.enabled` | Enable log export | `true` |
+| `logs.invocation_logs` | Include logs from each Worker invocation | `true` |
+| `logs.head_sampling_rate` | Percentage of requests to sample (0-1) | `1` (100%) |
+
+For high-traffic Workers, consider reducing the sampling rate to control costs:
+
+```json
+{
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 0.1
+    },
+    "export": {
+      "otel": {
+        "endpoint": "<ph_client_api_host>/i/v1",
+        "headers": {
+          "Authorization": "Bearer <ph_project_token>"
+        }
+      }
+    }
+  }
+}
+```
+
+</Step>
+
+<Step title="Use console logging" badge="required">
+
+Once configured, any `console.log()` calls in your Worker will be exported to PostHog:
+
+```javascript
+export default {
+  async fetch(request, env, ctx) {
+    console.log('Request received', { url: request.url });
+    
+    try {
+      // Your worker logic
+      console.log('Processing request');
+      return new Response('Hello World!');
+    } catch (error) {
+      console.error('Error processing request', { error: error.message });
+      throw error;
+    }
+  },
+};
+```
+
+You can log at different levels:
+- `console.log()` - INFO level
+- `console.info()` - INFO level
+- `console.warn()` - WARN level
+- `console.error()` - ERROR level
+- `console.debug()` - DEBUG level
+
+</Step>
+
+<Step title="Deploy and test" badge="recommended">
+
+Deploy your Worker and verify logs are flowing to PostHog:
+
+```bash
+npx wrangler deploy
+```
+
+After deployment:
+
+1. Make a few requests to your Worker
+2. Check the PostHog logs interface for your log entries
+3. Verify the logs appear with the correct service name and attributes
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>
+
+## Using with PostHog SDK
+
+You can combine OTEL log export with the PostHog SDK for analytics. See our [Cloudflare Workers SDK guide](/docs/libraries/cloudflare-workers) for capturing events and using feature flags.
+
+## Further reading
+
+- [Cloudflare Workers SDK](/docs/libraries/cloudflare-workers)
+- [Cloudflare OTEL documentation](https://developers.cloudflare.com/workers/observability/exporting-opentelemetry-data/posthog/)
+- [Using Cloudflare as a reverse proxy](/docs/advanced/proxy/cloudflare)
