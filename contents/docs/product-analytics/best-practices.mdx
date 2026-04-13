@@ -13,11 +13,11 @@ Many teams – even at large companies – rely on autocapture and miss instrume
 Track your signup event explicitly from both frontend and backend:
 
 ```js
-posthog.capture('user_signed_up', {
-    signup_method: 'email',
-    referral_source: 'google',
-    plan: 'free'
-})
+posthog.capture("user_signed_up", {
+  signup_method: "email",
+  referral_source: "google",
+  plan: "free",
+});
 ```
 
 Once you have signup tracking in place, you can build reliable funnels and cohorts for everything else.
@@ -40,12 +40,19 @@ For example, let's say you're capturing signup metrics. Your team might capture 
 
 All these differences make it more likely that you'll misinterpret your data. Implementing a naming convention prevents these problems.
 
+<CalloutBox icon="IconInfo" title="About mobile autocapture events" type="fyi">
+
+Mobile SDKs automatically capture events like `Application Opened` and `Application Backgrounded` using Title Case with spaces. This is intentional – it makes autocaptured events easy to distinguish from your custom events. When you implement your own tracking, use `snake_case` to maintain consistency across your codebase and clearly separate your custom instrumentation from autocaptured events.
+
+</CalloutBox>
+
 ### Suggested naming guide
 
 - Only use lowercase letters.
 - Use present-tense verbs, e.g., "submit" and "create" instead of "submitted" and "created".
 - Use snake case, i.e., `signup_button_click`.
 - Create a dedicated list of allowed verbs, and don't deviate from it. Here's a list of the most common ones you're likely to use:
+
 ```
 - click
 - submit
@@ -65,7 +72,6 @@ All these differences make it more likely that you'll misinterpret your data. Im
 ```
 
 - For event names, use the **category:object_action** framework to make it easier to find a specific event within a long list:
-
   - **category** describes the context the event took place in – e.g., `account_settings` or `signup_flow`.
 
   - **object** is a noun that refers to the component or location the event took place in – e.g., `forgot_password_button` or `pricing_page`.
@@ -75,12 +81,11 @@ All these differences make it more likely that you'll misinterpret your data. Im
   - Putting all of these together, you get `account_settings:forgot_password_button_click` or `signup_flow:pricing_page_view`.
 
 - For property names:
-
   - Use the **object_adjective** pattern – e.g., `user_id`, `item_price`, or `member_count`.
 
   - Use **is/has** prefixes for boolean properties – e.g., `is_subscribed`, `has_seen_upsell`.
 
-  - If the property's value is a date or timestamp, include **_date** or **_timestamp** at the end – e.g., `user_creation_date`, `last_login_timestamp`.
+  - If the property's value is a date or timestamp, include **\_date** or **\_timestamp** at the end – e.g., `user_creation_date`, `last_login_timestamp`.
 
 ## 4. Design your distinct IDs carefully
 
@@ -108,10 +113,10 @@ Instead, use a fixed event name and pass the variable as a property value:
 
 ```javascript
 // Bad – creates a new event definition for every page
-posthog.capture(`page_viewed_${pageName}`)
+posthog.capture(`page_viewed_${pageName}`);
 
 // Good – one event, filterable by page name
-posthog.capture('page_viewed', { page_name: pageName })
+posthog.capture("page_viewed", { page_name: pageName });
 ```
 
 The same applies to property names. A property like `feature_${featureName}_used` creates unbounded property definitions. Use a static name like `feature_name` and set the value to the feature. Projects with too many unique property names can also have new property definitions rate limited, meaning new properties stop appearing in filters and breakdowns.
@@ -150,15 +155,16 @@ PostHog's SDKs flush events as quickly as possible, but delivery timing is ultim
 
 - Events from the same user can arrive out of chronological order.
 - An event that happened first might be ingested after one that happened later.
-- Person properties set with `$set` reflect the last *ingested* value, not the last value by timestamp. Similarly, `$set_once` is claimed by the first *ingested* event, not the earliest by timestamp.
+- Person properties set with `$set` reflect the last _ingested_ value, not the last value by timestamp. Similarly, `$set_once` is claimed by the first _ingested_ event, not the earliest by timestamp.
 
 Design your analytics with this in mind. Use event timestamps for time-based analysis rather than relying on ingestion order. Avoid building logic that assumes one event will always be processed before another – if ordering matters, build that logic into your application rather than depending on ingestion sequence.
 
 ## 9. Filter out internal users
 
-Apps with few users can inadvertently inflate their own metrics by not filtering out their own usage. This leads to a bias in their data. For this reason, it's important to filter out events sent by your own team. 
+Apps with few users can inadvertently inflate their own metrics by not filtering out their own usage. This leads to a bias in their data. For this reason, it's important to filter out events sent by your own team.
 
 There are a few ways to do this:
+
 - Filter out events from users with internal emails.
 - Add a property on your events `is_employee` or `is_test_user` and filter events where these are `true`.
 - Exclude internal IPs from your analytics tracking.
