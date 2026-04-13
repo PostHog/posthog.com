@@ -29,9 +29,9 @@ import AuthAwareOSButton from 'components/OSButton/AuthAwareOSButton'
 
   <SessionReplayInstallationPlatforms />
 
-  <AuthAwareOSButton variant="primary" to="https://app.posthog.com/signup" authenticatedTo="/docs/session-replay/installation">
+  <OSButton variant="primary" asLink to="/docs/session-replay/installation">
     Install PostHog SDK
-  </AuthAwareOSButton>
+  </OSButton>
 
 </QuestLogItem>
 
@@ -137,7 +137,7 @@ Open the **Activity** panel to inspect each moment.
 
 <QuestLogItem 
   title="Integrate your tech stack"
-  subtitle="Connect with product data"
+  subtitle="Connect product data"
   icon="IconLogomark"
 >
 
@@ -176,10 +176,6 @@ Open the **Activity** panel to inspect each moment.
     loop={true}
   />
 
-  <AuthAwareOSButton variant="primary" to="https://app.posthog.com/signup" authenticatedTo="/docs/session-replay/installation">
-    Install Session Replay
-  </AuthAwareOSButton>
-
 </QuestLogItem>
 
 <QuestLogItem
@@ -204,7 +200,7 @@ PostHog's Session Replay is built to be cost-effective by default, with a genero
 That's it! You're ready to start integrating.
 
 <div className="flex flex-wrap gap-2">
-  <AuthAwareOSButton variant="primary" to="https://app.posthog.com/signup" authenticatedTo="/docs/session-replay/installation">
+  <AuthAwareOSButton variant="primary" authenticatedTo="/docs/session-replay/installation" to="https://app.posthog.com/signup">
     Get started free
   </AuthAwareOSButton>
 
