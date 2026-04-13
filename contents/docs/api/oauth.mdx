@@ -13,16 +13,17 @@ If you're building an application that needs to integrate with PostHog's OAuth, 
 ### How CIMD works
 
 1. **Discover metadata**: Your application fetches PostHog's OAuth server metadata from the well-known endpoint:
+   - Generic: `https://oauth.posthog.com/.well-known/oauth-authorization-server` (recommended - handles US/EU routing transparently)
    - US Cloud: `https://us.posthog.com/.well-known/oauth-authorization-server`
    - EU Cloud: `https://eu.posthog.com/.well-known/oauth-authorization-server`
 
 2. **Use the metadata**: The response contains all the endpoints and capabilities you need, including:
    - `authorization_endpoint` - Where to send users to authorize
    - `token_endpoint` - Where to exchange codes for tokens
-   - `scopes_supported` - Available OAuth scopes
+   - `scopes_supported` - Available [OAuth scopes](/docs/api#scopes) (same as our REST API)
    - `response_types_supported` - Supported response types
 
-3. **Implement the OAuth flow**: Use the discovered endpoints to implement the standard OAuth 2.0 authorization code flow.
+3. **Implement the OAuth flow**: Use the discovered endpoints to implement the standard [OAuth 2.0 authorization code flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1).
 
 ### Example metadata discovery
 
@@ -36,7 +37,7 @@ This returns the OAuth server configuration that your application can use to dyn
 
 The <SmallTeam slug="growth" /> is working on creating a better, more streamlined process for partners to register and claim OAuth integrations with PostHog. In the meantime, CIMD provides a reliable way to integrate with PostHog's OAuth system.
 
-If you need to register an official OAuth integration or have questions about the integration process, please [reach out to us](https://posthog.com/talk-to-a-human).
+If you need to register an official OAuth integration or have questions about the integration process, please reach out to the Growth team at [team-growth@posthog.com](mailto:team-growth@posthog.com).
 
 ## Token types
 
@@ -51,5 +52,6 @@ Both token types are automatically revoked if detected by [GitHub secret scannin
 
 ## Further reading
 
+- [OAuth 2.0 specification (RFC 6749)](https://datatracker.ietf.org/doc/html/rfc6749) - The OAuth 2.0 authorization framework
 - [API overview](/docs/api) - Learn about PostHog's API authentication options
 - [Personal API keys](/docs/api#private-endpoint-authentication) - Alternative authentication for scripts and integrations
