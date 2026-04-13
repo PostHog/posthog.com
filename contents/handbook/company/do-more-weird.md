@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-For some (all?) at PostHog, do more weird isn't just a [benign corporate value](/values#do-more-weird) - it's a way of life. A craft, to be honed. This page will help you navigate do more weird at PostHog so that you too may do... weird things. 
+For some (all?) at PostHog, do more weird isn't just a [benign corporate value](/handbook/values#do-more-weird) - it's a way of life. A craft, to be honed. This page will help you navigate do more weird at PostHog so that you too may do... weird things. 
 
 ## What do more weird is
 
@@ -38,7 +38,7 @@ On the other hand, the bar for weirdness in a marketing campaign is extremely hi
 ## Got a weird idea?
 
 Depending on the idea, you have a couple of options:
-- Just do it. Usually best for things you can ship yourself - [you're the driver](/values#youre-the-driver) after all.
+- Just do it. Usually best for things you can ship yourself - [you're the driver](/handbook/values#youre-the-driver) after all.
 - Post it in `#do-more-weird` and see if others want to get involved.
 
 ### Making bigger weird happen
