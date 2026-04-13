@@ -29,7 +29,7 @@ import AuthAwareOSButton from 'components/OSButton/AuthAwareOSButton'
 
   <SessionReplayInstallationPlatforms />
 
-  <AuthAwareOSButton variant="primary" to="https://app.posthog.com/signup" authenticatedTo="/docs/session-replay/installation" external={true}>
+  <AuthAwareOSButton variant="primary" to="https://app.posthog.com/signup" authenticatedTo="/docs/session-replay/installation">
     Install PostHog SDK
   </AuthAwareOSButton>
 
@@ -176,7 +176,7 @@ Open the **Activity** panel to inspect each moment.
     loop={true}
   />
 
-  <AuthAwareOSButton variant="primary" to="https://app.posthog.com/signup" authenticatedTo="/docs/session-replay/installation" external={true}>
+  <AuthAwareOSButton variant="primary" to="https://app.posthog.com/signup" authenticatedTo="/docs/session-replay/installation">
     Install Session Replay
   </AuthAwareOSButton>
 
@@ -186,6 +186,7 @@ Open the **Activity** panel to inspect each moment.
   title="Use for free"
   subtitle="Free 5k web + 2.5k mobile recordings/month"
   icon="IconPiggyBank"
+  idleGlow={true}
 >
 
 PostHog's Session Replay is built to be cost-effective by default, with a generous free tier and transparent usage-based pricing. Since we don't charge per seat, more than 90% of companies use PostHog for free.
@@ -203,11 +204,11 @@ PostHog's Session Replay is built to be cost-effective by default, with a genero
 That's it! You're ready to start integrating.
 
 <div className="flex flex-wrap gap-2">
-  <AuthAwareOSButton variant="primary" to="https://app.posthog.com/signup" authenticatedTo="/docs/session-replay/installation" external={true}>
+  <AuthAwareOSButton variant="primary" to="https://app.posthog.com/signup" authenticatedTo="/docs/session-replay/installation">
     Get started free
   </AuthAwareOSButton>
 
-  <OSButton variant="secondary" asLink to="/talk-to-a-human" external={true}>
+  <OSButton variant="secondary" asLink to="/talk-to-a-human" state={{ newWindow: true }}>
     Talk to a human
   </OSButton>
 </div>
