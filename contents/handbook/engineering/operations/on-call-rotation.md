@@ -26,9 +26,10 @@ Every team has 2 schedules in [incident.io](https://app.incident.io/posthog/on-c
 
 ### Manual escalation schedules
 
-In addition to the regular on-call schedules, every team has a manual escalation schedule in incident.io:
+In addition to the regular on-call schedules, teams that own production-critical services have a manual escalation schedule in incident.io:
 * `Escalation: {team}`
     - This is the "everything is broken" escalation path for critical out-of-hours emergencies
+    - Only teams that own production-critical services are required to have this schedule - other teams don't need one
     - **Everyone relevant on the team should be on this schedule** - it's not a rotation like regular on-call
     - There should be no gaps in coverage since this is the last resort when normal escalation paths fail
     - This schedule is triggered manually by whoever is handling an incident when they need additional help
