@@ -5542,6 +5542,11 @@ export const docsMenu = {
                             icon: 'IconCode',
                         },
                         {
+                            name: 'Claude Code',
+                            url: '/docs/llm-analytics/installation/claude-code',
+                            icon: 'IconAnthropic',
+                        },
+                        {
                             name: 'Manual capture',
                             url: '/docs/llm-analytics/installation/manual-capture',
                             icon: 'IconCode',
