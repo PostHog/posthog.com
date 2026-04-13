@@ -441,6 +441,7 @@ export const handbookSidebar = [
             { name: 'Meetings', url: '/handbook/getting-started/meetings' },
             { name: 'Kudos', url: '/handbook/company/kudos' },
             { name: 'Offsites', url: '/handbook/company/offsites' },
+            { name: 'Do more weird', url: '/handbook/company/do-more-weird' },
         ],
     },
     {
