@@ -1,0 +1,55 @@
+---
+title: OAuth integration
+sidebar: Docs
+showTitle: true
+---
+
+PostHog supports OAuth 2.0 for third-party applications to access PostHog on behalf of users. This page explains how to integrate with PostHog's OAuth system.
+
+## Client-Initiated Metadata Discovery (CIMD)
+
+If you're building an application that needs to integrate with PostHog's OAuth, we recommend using **Client-Initiated Metadata Discovery (CIMD)**. This approach allows your application to discover PostHog's OAuth configuration through our well-known metadata endpoint and register dynamically.
+
+### How CIMD works
+
+1. **Discover metadata**: Your application fetches PostHog's OAuth server metadata from the well-known endpoint:
+   - US Cloud: `https://us.posthog.com/.well-known/oauth-authorization-server`
+   - EU Cloud: `https://eu.posthog.com/.well-known/oauth-authorization-server`
+
+2. **Use the metadata**: The response contains all the endpoints and capabilities you need, including:
+   - `authorization_endpoint` - Where to send users to authorize
+   - `token_endpoint` - Where to exchange codes for tokens
+   - `scopes_supported` - Available OAuth scopes
+   - `response_types_supported` - Supported response types
+
+3. **Implement the OAuth flow**: Use the discovered endpoints to implement the standard OAuth 2.0 authorization code flow.
+
+### Example metadata discovery
+
+```bash
+curl https://us.posthog.com/.well-known/oauth-authorization-server
+```
+
+This returns the OAuth server configuration that your application can use to dynamically configure itself.
+
+## Claiming your OAuth integration
+
+The <SmallTeam slug="growth" /> is working on creating a better, more streamlined process for partners to register and claim OAuth integrations with PostHog. In the meantime, CIMD provides a reliable way to integrate with PostHog's OAuth system.
+
+If you need to register an official OAuth integration or have questions about the integration process, please [reach out to us](https://posthog.com/talk-to-a-human).
+
+## Token types
+
+PostHog OAuth uses the following token prefixes:
+
+| Token type | Prefix | Description |
+|------------|--------|-------------|
+| Access token | `pha_` | Short-lived token for API access |
+| Refresh token | `phr_` | Long-lived token to obtain new access tokens |
+
+Both token types are automatically revoked if detected by [GitHub secret scanning](/docs/api#github-secret-scanning).
+
+## Further reading
+
+- [API overview](/docs/api) - Learn about PostHog's API authentication options
+- [Personal API keys](/docs/api#private-endpoint-authentication) - Alternative authentication for scripts and integrations
