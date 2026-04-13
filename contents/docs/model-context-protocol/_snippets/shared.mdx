@@ -182,6 +182,19 @@ The agent will use the `create-feature-flag` tool with a `multivariate` configur
 
 The agent will use the `query-run` tool to execute a trends query and return daily signup counts.
 
+### Cohort management
+
+**Prompt:** "List all cohorts in my project"
+
+The agent will use the `cohorts-list` tool to return all cohorts, including both static cohorts (manually defined user lists) and dynamic cohorts (automatically updated based on property filters).
+
+**Prompt:** "Create a dynamic cohort called 'power-users' for users who completed the purchase event more than 5 times in the last 30 days"
+
+The agent will use the `cohorts-create` tool to create a dynamic cohort with the specified behavioral filter criteria.
+
+**Prompt:** "Create a static cohort called 'beta-testers' and add specific users to it"
+
+The agent will use the `cohorts-create` tool with `is_static: true` to create an empty static cohort, then use the `cohorts-add-persons-to-static-cohort-partial-update` tool to add person UUIDs to it.
 
 ### Path analysis
 

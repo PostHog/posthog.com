@@ -10,6 +10,7 @@ features:
   userIdentification: true
   featureFlags: true
   groupAnalytics: true
+  errorTracking: true
   surveys: false
   llmAnalytics: false
 ---
@@ -142,6 +143,28 @@ PostHog::groupIdentify([
 
 The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
+## Error tracking
+
+The PHP SDK supports both manual exception capture and opt-in automatic error tracking.
+
+To automatically capture uncaught exceptions, PHP errors, and fatal shutdown errors, enable `error_tracking` when initializing the client:
+
+```php
+PostHog::init(
+    '<ph_project_token>',
+    [
+        'host' => '<ph_client_api_host>',
+        'error_tracking' => [
+            'enabled' => true,
+        ],
+    ],
+);
+```
+
+You can also call `PostHog::captureException()` directly for manual capture. When source files are readable at runtime, PostHog includes surrounding source lines for in-app stack frames automatically.
+
+For the full setup guide, including `context_provider`, excluded exceptions, and verification steps, see the [PHP error tracking installation docs](/docs/error-tracking/installation/php).
+
 ## Config options
 
 When calling `PostHog::init`, there are various configuration options you can set apart from the host. Pass them into your client initialisation like so:
@@ -170,6 +193,7 @@ All possible options below:
 | `maximum_backoff_duration`<br/><br/>**Type:** Integer<br/>**Default:** `10000` | Request retry backoff. Retries will stop after this duration is hit |
 | `consumer`<br/><br/>**Type:** String<br/>**Default:** `lib_curl` | One of `socket`, `file`, `lib_curl`, and `fork_curl`. Determines what transport option to use for analytics capture. [More details here](https://github.com/PostHog/posthog-php/blob/master/lib/Consumer/File.php) |
 | `debug`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Output debug logs or not |
+| `error_tracking`<br/><br/>**Type:** Array<br/>**Default:** `[]` | Enables automatic error tracking and related options such as `context_provider`, `excluded_exceptions`, and `max_frames`. [See the setup guide](/docs/error-tracking/installation/php). |
 
 ## Debug mode
 

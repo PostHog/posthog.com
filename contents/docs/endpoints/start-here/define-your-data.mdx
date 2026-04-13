@@ -3,13 +3,11 @@ title: Define the data for your endpoint
 showStepsToc: true
 ---
 
-import EndpointsBetaSnippet from '../_snippets/beta.mdx'
-import { CalloutBox } from 'components/Docs/CalloutBox'
-import { CallToAction } from 'components/CallToAction'
-import { Steps, Step } from 'components/Docs/Steps'
-import Tab from 'components/Tab'
-
-
+import EndpointsBetaSnippet from "../_snippets/beta.mdx";
+import { CalloutBox } from "components/Docs/CalloutBox";
+import { CallToAction } from "components/CallToAction";
+import { Steps, Step } from "components/Docs/Steps";
+import Tab from "components/Tab";
 
 <Steps>
 
@@ -30,10 +28,10 @@ Endpoints can be created from existing insights or SQL queries in PostHog. Choos
 **Best for:** Exposing data from existing insights you've already built.
 
 [Create an insight](/docs/product-analytics/insights) in PostHog that shows the data you want to expose. This could be:
+
 - A trend showing daily active users
-- A funnel tracking user conversion
 - A retention analysis
-- Any other insight type
+- A lifecycle analysis
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abe_insight_funnel_example_r_eb45dee714.png"
@@ -88,7 +86,7 @@ This ensures your endpoint will return meaningful data when executed.
 Once you have your data defined, create an endpoint from it.
 
 <CallToAction type="primary" to="/docs/endpoints/start-here/create-endpoint">
-Create an endpoint
+  Create an endpoint
 </CallToAction>
 
 </Step>

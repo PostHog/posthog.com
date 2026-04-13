@@ -90,8 +90,12 @@ const titleMap: Record<string, string> = {
     cohorts: 'Cohorts',
     dashboards: 'Dashboards',
     dashboard_templates: 'Dashboard templates',
+    dataset_items: 'Dataset items',
+    datasets: 'Datasets',
     early_access_feature: 'Early access features',
     environments: 'Environments',
+    evaluation_runs: 'Evaluation runs',
+    evaluations: 'Evaluations',
     event_definitions: 'Event definitions',
     events: 'Events',
     experiments: 'Experiments',
@@ -101,6 +105,8 @@ const titleMap: Record<string, string> = {
     hog_functions: 'Hog functions',
     insights: 'Insights',
     invites: 'Invites',
+    llm_analytics: 'LLM analytics',
+    llm_prompts: 'LLM prompts',
     members: 'Members',
     notebooks: 'Notebooks',
     organizations: 'Organizations',
@@ -449,7 +455,7 @@ response = requests.${item.httpVerb}(
         <CodeBlock
             selector="dropdown"
             currentLanguage={currentLanguage}
-            onChange={({ language }) => setExampleLanguage(language)}
+            onChange={(option) => setExampleLanguage(option.language)}
             label={
                 <div className="code-example flex text-xs space-x-1.5 my-1">
                     <code className={`shrink-0 text-${mapVerbsColor[item.httpVerb]}`}>

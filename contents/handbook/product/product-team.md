@@ -29,16 +29,19 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend><TeamMember name="Anna Szell" photo /></legend>
 
--   <SmallTeam slug="data-stack" />
+-   <SmallTeam slug="data-modeling" />
+-   <SmallTeam slug="data-tools" />
+-   <SmallTeam slug="managed-warehouse" />
+-   <SmallTeam slug="warehouse-sources" />
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Annika Schmid" photo /></legend>
 
--   <SmallTeam slug="feature-flags" />
--   <SmallTeam slug="experiments" />
 -   <SmallTeam slug="posthog-ai" />
+-   <SmallTeam slug="posthog-code" />
+-   <SmallTeam slug="signals" />
 
 </fieldset>
 
@@ -46,37 +49,43 @@ Here is a overview that shows which of our PMs currently works with which team:
 <legend><TeamMember name="Cory Slater" photo /></legend>
 
 -   <SmallTeam slug="error-tracking" />
--   <SmallTeam slug="surveys" />
 -   <SmallTeam slug="replay" />
+-   <SmallTeam slug="surveys" />
+-   <SmallTeam slug="website" />
+- Cross-product growth reviews
+
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Abe Basu" photo /></legend>
 
--   <SmallTeam slug="workflows" />
--   <SmallTeam slug="batch-exports" />*
--   Endpoints
--   <SmallTeam slug="logs" />
+-   <SmallTeam slug="batch-exports" />
 -   <SmallTeam slug="llm-analytics" />
+-   <SmallTeam slug="logs" />
+-   <SmallTeam slug="workflows" />
 
-*light support
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Mike Warren" photo /></legend>
 
+-   <SmallTeam slug="analytics-platform" />
 -   <SmallTeam slug="product-analytics" />
 -   <SmallTeam slug="web-analytics" />
--   <SmallTeam slug="analytics-platform" />
+
 
 </fieldset>
 
 <fieldset>
-<legend>Teams with no PM currently</legend>
+<legend>Product teams with no PM currently</legend>
 
+-   <SmallTeam slug="conversations" />
 -   <SmallTeam slug="customer-analytics" />
+-   <SmallTeam slug="experiments" />
+-   <SmallTeam slug="feature-flags" />
+-   <SmallTeam slug="flags-platform" />
 
 </fieldset>
 

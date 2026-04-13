@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { IconPlay, IconRewindPlay, IconX } from '@posthog/icons'
+import React, { useState, useEffect, useRef } from 'react'
+import { IconPlay, IconX } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import { IconDemoThumb, AppIcon, IconChangelogThumb } from 'components/OSIcons'
@@ -16,6 +16,7 @@ import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
+import { RenderInClient } from 'components/RenderInClient'
 import MediaPlayer from 'components/MediaPlayer'
 import { CallToAction } from 'components/CallToAction'
 
@@ -46,7 +47,16 @@ export const useProductLinks = () => {
         },
         {
             label: 'Product OS',
-            Icon: <AppIcon name="folder" />,
+            Icon: (
+                <RenderInClient
+                    placeholder={<AppIcon name="folder" />}
+                    render={() => (
+                        <AppIcon
+                            name={posthog?.getFeatureFlag?.('data-positioning') === 'test' ? 'notebook' : 'folder'}
+                        />
+                    )}
+                />
+            ),
             url: '/products',
             source: 'desktop',
         },
