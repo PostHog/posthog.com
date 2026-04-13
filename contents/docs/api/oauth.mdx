@@ -25,7 +25,7 @@ If you're building an application that needs to integrate with PostHog's OAuth, 
 With CIMD, you don't pre-register your OAuth client with PostHog. Instead:
 
 1. **Your `client_id` is a URL** on a domain you control (for example, `https://myapp.example.com/oauth-client`).
-2. **You host a metadata document at that URL** - a JSON file describing your client. PostHog fetches this document during the OAuth flow to learn about your application.
+2. **You host a metadata document at that URL** – a JSON file describing your client. PostHog fetches this document during the OAuth flow to learn about your application.
 3. **The domain serves as your client's identity**. Users will see the metadata you publish (including the name and, optionally, a logo) on the authorization screen.
 
 ### Metadata document contents
@@ -43,11 +43,11 @@ The JSON document you host at your `client_id` URL should include at least:
 }
 ```
 
-- `client_name` (required) - The human-readable name of your application, shown to users on the authorization screen.
-- `logo_uri` (optional) - A URL to a logo image that will be shown alongside the name on the authorization screen.
-- `redirect_uris` (required) - The URLs PostHog is allowed to redirect users to after authorization.
+- `client_name` (required) – The human-readable name of your application, shown to users on the authorization screen.
+- `logo_uri` (optional) – A URL to a logo image that will be shown alongside the name on the authorization screen.
+- `redirect_uris` (required) – The URLs PostHog is allowed to redirect users to after authorization.
 
-Because the `client_id` is a URL you control, your organization implicitly "owns" it - anyone fetching the URL sees the same metadata, which is how PostHog validates the client identity.
+Because the `client_id` is a URL you control, your organization implicitly "owns" it – anyone fetching the URL sees the same metadata, which is how PostHog validates the client identity.
 
 See the [OAuth Client ID Metadata Document draft](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) for the full specification.
 
@@ -67,14 +67,14 @@ curl https://oauth.posthog.com/.well-known/oauth-authorization-server
 
 The response contains the endpoints and capabilities you need, including:
 
-- `authorization_endpoint` - Where to send users to authorize
-- `token_endpoint` - Where to exchange codes for tokens
-- `scopes_supported` - Available OAuth scopes (see below)
-- `response_types_supported` - Supported response types
+- `authorization_endpoint` – Where to send users to authorize
+- `token_endpoint` – Where to exchange codes for tokens
+- `scopes_supported` – Available OAuth scopes (see below)
+- `response_types_supported` – Supported response types
 
 ## Supported scopes
 
-The scopes available through OAuth are listed in the `scopes_supported` field of the metadata document and mirror the scopes available for [personal API keys in our REST API](/docs/api). Request only the scopes your application actually needs - this is a security best practice and reduces friction for users on the authorization screen.
+The scopes available through OAuth are listed in the `scopes_supported` field of the metadata document and mirror the scopes available for [personal API keys in our REST API](/docs/api). Request only the scopes your application actually needs – this is a security best practice and reduces friction for users on the authorization screen.
 
 ## Claiming your OAuth integration
 
@@ -95,8 +95,8 @@ Both token types are automatically revoked if detected by [GitHub secret scannin
 
 ## Further reading
 
-- [OAuth 2.0 (RFC 6749)](https://datatracker.ietf.org/doc/html/rfc6749) - The core OAuth 2.0 authorization framework
-- [OAuth 2.0 Authorization Server Metadata (RFC 8414)](https://datatracker.ietf.org/doc/html/rfc8414) - Server metadata discovery via `.well-known`
-- [OAuth Client ID Metadata Document](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) - The CIMD specification
-- [API overview](/docs/api) - Learn about PostHog's API authentication options and scopes
-- [Personal API keys](/docs/api#private-endpoint-authentication) - Alternative authentication for scripts and integrations
+- [OAuth 2.0 (RFC 6749)](https://datatracker.ietf.org/doc/html/rfc6749) – The core OAuth 2.0 authorization framework
+- [OAuth 2.0 Authorization Server Metadata (RFC 8414)](https://datatracker.ietf.org/doc/html/rfc8414) – Server metadata discovery via `.well-known`
+- [OAuth Client ID Metadata Document](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) – The CIMD specification
+- [API overview](/docs/api) – Learn about PostHog's API authentication options and scopes
+- [Personal API keys](/docs/api#private-endpoint-authentication) – Alternative authentication for scripts and integrations
