@@ -441,6 +441,7 @@ export const handbookSidebar = [
             { name: 'Meetings', url: '/handbook/getting-started/meetings' },
             { name: 'Kudos', url: '/handbook/company/kudos' },
             { name: 'Offsites', url: '/handbook/company/offsites' },
+            { name: 'Do more weird', url: '/handbook/company/do-more-weird' },
         ],
     },
     {
@@ -2400,6 +2401,10 @@ export const docsMenu = {
                             url: '/docs/api',
                         },
                         {
+                            name: 'OAuth integration',
+                            url: '/docs/api/oauth',
+                        },
+                        {
                             name: 'Popular',
                         },
                         {
@@ -2850,6 +2855,36 @@ export const docsMenu = {
                         {
                             name: 'Activity',
                             url: '/docs/activity',
+                        },
+                        {
+                            name: 'VS Code extension',
+                            url: '/docs/vscode-extension',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/vscode-extension',
+                                },
+                                {
+                                    name: 'Inline code intelligence',
+                                    url: '/docs/vscode-extension/inline-code-intelligence',
+                                },
+                                {
+                                    name: 'Sidebar dashboard',
+                                    url: '/docs/vscode-extension/sidebar-dashboard',
+                                },
+                                {
+                                    name: 'Flag management',
+                                    url: '/docs/vscode-extension/flag-management',
+                                },
+                                {
+                                    name: 'Stale flag cleanup',
+                                    url: '/docs/vscode-extension/stale-flag-cleanup',
+                                },
+                                {
+                                    name: 'Session replay',
+                                    url: '/docs/vscode-extension/session-replay',
+                                },
+                            ],
                         },
                         {
                             name: 'SDK doctor',
@@ -3732,6 +3767,13 @@ export const docsMenu = {
                     name: 'Getting started',
                 },
                 {
+                    name: 'Start here',
+                    url: '/docs/session-replay/start-here',
+                    icon: 'IconListCheck',
+                    featured: true,
+                    color: 'orange',
+                },
+                {
                     name: 'Installation',
                     url: '/docs/session-replay/installation',
                     icon: 'IconBook',
@@ -3740,27 +3782,25 @@ export const docsMenu = {
                     sortChildrenAlpha: true,
                     children: [
                         { name: 'Overview', url: '/docs/session-replay/installation' },
-                        { name: 'Android', url: '/docs/session-replay/installation/android' },
+                        { name: 'React Native', url: '/docs/session-replay/installation/react-native' },
                         { name: 'iOS', url: '/docs/session-replay/installation/ios' },
+                        { name: 'Android', url: '/docs/session-replay/installation/android' },
+                        { name: 'Web', url: '/docs/session-replay/installation/web' },
+                        { name: 'React', url: '/docs/session-replay/installation/react' },
+                        { name: 'React Router', url: '/docs/session-replay/installation/react-router' },
+                        { name: 'Next.js', url: '/docs/session-replay/installation/nextjs' },
                         { name: 'Flutter', url: '/docs/session-replay/installation/flutter' },
-                        { name: 'Unity', url: '/docs/session-replay/installation/unity' },
+                        { name: 'Vue', url: '/docs/session-replay/installation/vue' },
+                        { name: 'HTML snippet', url: '/docs/session-replay/installation/html-snippet' },
                         { name: 'Angular', url: '/docs/session-replay/installation/angular' },
                         { name: 'Astro', url: '/docs/session-replay/installation/astro' },
-                        { name: 'Bubble', url: '/docs/session-replay/installation/bubble' },
-                        { name: 'Flutter', url: '/docs/session-replay/installation/flutter' },
-                        { name: 'Framer', url: '/docs/session-replay/installation/framer' },
-                        { name: 'HTML snippet', url: '/docs/session-replay/installation/html-snippet' },
-                        { name: 'iOS', url: '/docs/session-replay/installation/ios' },
-                        { name: 'Next.js', url: '/docs/session-replay/installation/nextjs' },
                         { name: 'Nuxt', url: '/docs/session-replay/installation/nuxt' },
-                        { name: 'React', url: '/docs/session-replay/installation/react' },
-                        { name: 'React Native', url: '/docs/session-replay/installation/react-native' },
-                        { name: 'React Router', url: '/docs/session-replay/installation/react-router' },
                         { name: 'Remix', url: '/docs/session-replay/installation/remix' },
                         { name: 'Svelte', url: '/docs/session-replay/installation/svelte' },
-                        { name: 'Vue', url: '/docs/session-replay/installation/vue' },
-                        { name: 'Web', url: '/docs/session-replay/installation/web' },
+                        { name: 'Unity', url: '/docs/session-replay/installation/unity' },
                         { name: 'Webflow', url: '/docs/session-replay/installation/webflow' },
+                        { name: 'Framer', url: '/docs/session-replay/installation/framer' },
+                        { name: 'Bubble', url: '/docs/session-replay/installation/bubble' },
                     ],
                 },
                 {
@@ -5540,6 +5580,11 @@ export const docsMenu = {
                             name: 'Pi Coding Agent',
                             url: '/docs/llm-analytics/installation/pi',
                             icon: 'IconCode',
+                        },
+                        {
+                            name: 'Claude Code',
+                            url: '/docs/llm-analytics/installation/claude-code',
+                            icon: 'IconClaudeCode',
                         },
                         {
                             name: 'Manual capture',
