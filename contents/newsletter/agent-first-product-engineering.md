@@ -157,7 +157,7 @@ In traditional software, even if user behavior isn't predictable, the code is. W
 
 This means classic testing methods will leave a gap, so you need new ways to catch the things automated tests no longer will.
 
-You need to treat the agent like you would treat a user. Talk to them, build empathy for them, and develop an intuition of what they want.
+You need to treat the agent like you would treat a user. [Talk to them](/newsletter/talk-to-users), build empathy for them, and develop an intuition of what they want.
 
 This helps you see your product like they would and get familiar with all the interaction patterns and quirks they have.
 
