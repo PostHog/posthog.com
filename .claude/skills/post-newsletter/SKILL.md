@@ -53,7 +53,6 @@ seo:
 ### Body
 
 - Copy all writing **verbatim** — do not paraphrase, restructure, or summarize.
-- Convert the subtitle (if present) to an italicized line at the top: `*Subtitle text here*`
 - Format section headers as `##` and subsections as `###`.
 - Place `<NewsletterForm />` once mid-article (after the first major section) and once at the very end.
 - For images: write a placeholder in the format `![PLACEHOLDER: description of image](PLACEHOLDER)` so the user knows where to upload. **Detection tip:** a sentence that ends with a colon (`:`) followed by a blank line almost always precedes an inline image in the Substack source — treat those as image locations even if the scraper didn't return an `<img>` tag.
