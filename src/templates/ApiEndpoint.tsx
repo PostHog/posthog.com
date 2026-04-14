@@ -557,6 +557,7 @@ interface ApiEndpointData {
     data: {
         name: string
         nextURL?: string
+        previousURL?: string
         items: string
         components: string
     }
@@ -573,6 +574,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
     const name = data.data.name
     const title = titleMap[name] || humanReadableName(name)
     const nextURL = data.data.nextURL
+    const previousURL = data.data.previousURL
     const paths = {}
     const components = {
         inlineCode: InlineCode,
@@ -727,11 +729,18 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                         )
                     })}
 
-                    {nextURL && (
-                        <CallToAction className="mt-8" to={nextURL}>
-                            Next page →
-                        </CallToAction>
-                    )}
+                    <div className="mt-8 flex gap-4">
+                        {previousURL && (
+                            <CallToAction to={previousURL} type="outline">
+                                ← Previous page
+                            </CallToAction>
+                        )}
+                        {nextURL && (
+                            <CallToAction to={nextURL}>
+                                Next page →
+                            </CallToAction>
+                        )}
+                    </div>
                 </div>
             </ReaderView>
         </ScrollSpyProvider>
@@ -758,6 +767,7 @@ export const query = graphql`
             name
             url
             nextURL
+            previousURL
             components
         }
     }
