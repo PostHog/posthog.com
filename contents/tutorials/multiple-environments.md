@@ -102,7 +102,7 @@ Setting this up correctly prevents capturing non-production event data. It enabl
 
 The previous options capture data to separate projects or don’t capture data at all, but there is another option. This is to capture data normally and filter internal users from your analysis.
 
-PostHog provides a toggle to filter internal users (as defined by you) from your analysis and visualization. To set this up, go to [Project Settings](https://us.posthog.com/settings/project#internal-user-filtering) and scroll down to **Filter out internal and test users**. Here you can add filters to identify your internal users and events so that they can be removed from insights. This could include filters like: 
+PostHog provides a toggle to filter internal users (as defined by you) from your analysis and visualization. To set this up, go to your project's [product analytics settings](https://us.posthog.com/settings/project-product-analytics#internal-user-filtering) and scroll down to **Filter out internal and test users**. Here you can add filters to identify your internal users and events so that they can be removed from insights. This could include filters like: 
 
 - `distinct ID does not contain your domain`
 - `host is not localhost`
