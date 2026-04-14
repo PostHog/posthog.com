@@ -19,7 +19,7 @@ Nuxt server routes run on the server and can intercept requests before they reac
 Here's the request flow:
 
 1. User triggers an event in your app
-2. Request goes to your domain (e.g., `yourdomain.com/ph/e`)
+2. Request goes to your domain (e.g., `yourdomain.com/yourpath/e`)
 3. Nuxt's server middleware intercepts requests matching your proxy path
 4. The server route fetches the response from PostHog's servers
 5. PostHog's response is returned to the user under your domain
@@ -36,7 +36,7 @@ This guide requires a Nuxt 3 project with server-side rendering enabled (the def
 
 <Step title="Create the server route">
 
-Create a file at `server/routes/ph/[...path].ts`:
+Create a file at `server/routes/yourpath/[...path].ts`:
 
 <MultiLanguage>
 
@@ -158,7 +158,7 @@ export default defineEventHandler(async (event) => {
 
 </MultiLanguage>
 
-The `[...path]` in the filename is a Nuxt [catch-all route](https://nuxt.com/docs/guide/directory-structure/server#catch-all-route) that matches any path after `/ph/`. This handles all PostHog endpoints like `/ph/e`, `/ph/decide`, and `/ph/static/array.js`.
+The `[...path]` in the filename is a Nuxt [catch-all route](https://nuxt.com/docs/guide/directory-structure/server#catch-all-route) that matches any path after `/yourpath/`. This handles all PostHog endpoints like `/yourpath/e`, `/yourpath/decide`, and `/yourpath/static/array.js`.
 
 Here's what the code does:
 
@@ -188,7 +188,7 @@ export default defineNuxtConfig({
   posthogConfig: {
     publicKey: '<ph_project_token>',
     clientConfig: {
-      api_host: '/ph',
+      api_host: '/yourpath',
       ui_host: 'https://us.posthog.com'
     }
   }
@@ -202,7 +202,7 @@ export default defineNuxtConfig({
   posthogConfig: {
     publicKey: '<ph_project_token>',
     clientConfig: {
-      api_host: '/ph',
+      api_host: '/yourpath',
       ui_host: 'https://eu.posthog.com'
     }
   }
@@ -226,7 +226,7 @@ export default defineNuxtPlugin(() => {
   const runtimeConfig = useRuntimeConfig()
 
   posthog.init(runtimeConfig.public.posthogKey, {
-    api_host: '/ph',
+    api_host: '/yourpath',
     ui_host: 'https://us.posthog.com'
   })
 
@@ -247,7 +247,7 @@ export default defineNuxtPlugin(() => {
   const runtimeConfig = useRuntimeConfig()
 
   posthog.init(runtimeConfig.public.posthogKey, {
-    api_host: '/ph',
+    api_host: '/yourpath',
     ui_host: 'https://eu.posthog.com'
   })
 
@@ -279,7 +279,7 @@ Confirm events are flowing through your proxy:
 
 1. Open your browser's developer tools and go to the **Network** tab
 2. Navigate to your site or trigger an event
-3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/ph`)
+3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/yourpath`)
 4. Verify the response status is `200 OK`
 5. Check the [PostHog app](https://app.posthog.com) to confirm events appear in your activity feed
 
@@ -295,7 +295,7 @@ If you see errors, check [troubleshooting](#troubleshooting) below.
 
 If requests to your proxy path return 404:
 
-1. Verify the file is at `server/routes/ph/[...path].ts` (not `server/api/`)
+1. Verify the file is at `server/routes/yourpath/[...path].ts` (not `server/api/`)
 2. Check the file extension is `.ts` not `.js` if you're using TypeScript
 3. Restart your dev server after creating the file
 
