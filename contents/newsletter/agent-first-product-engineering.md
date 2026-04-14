@@ -17,7 +17,6 @@ seo:
     Five principles for building products that work well for AI agents and MCP servers.
 ---
 
-*Five principles to develop your product intuition for agents*
 
 Companies building for agents often treat them as a bolt-on feature. This is a mistake.
 
