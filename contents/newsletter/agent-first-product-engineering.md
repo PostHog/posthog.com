@@ -129,7 +129,7 @@ Instead, think of it like onboarding a new employee who's already highly qualifi
 
 A bad manager micromanages every process – do A, then B, never C, and always D. A good manager trusts the hire and only steps in with the specific things they couldn't have known on their own.
 
-That's what good skills look like.
+That's [what good skills look like](/handbook/engineering/ai/writing-skills).
 
 They should only contain context that a human can provide since an agent can't discover by itself, such as:
 
