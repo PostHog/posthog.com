@@ -99,7 +99,7 @@ That works for general-purpose agents since they're designed to be flexible. Ant
 
 But if you're building an agent experience for your specific product, the problem space is much smaller. You already know the key scenarios, tools, and use cases.
 
-So for product engineers, you can strike that balance by front-loading what you know every session will need, and defer the rest.
+So for [product engineers](/product-engineer/what-is-a-product-engineer), you can strike that balance by front-loading what you know every session will need, and defer the rest.
 
 ### What this looks like in practice
 
