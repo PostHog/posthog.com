@@ -2,6 +2,7 @@ import React from 'react'
 import { IconToggle } from '@posthog/icons'
 import CodeBlock from 'components/Home/CodeBlock'
 import Link from 'components/Link'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const featureFlags = {
     Icon: IconToggle,
@@ -345,6 +346,33 @@ export const featureFlags = {
                 },
             ],
         },
+        {
+            title: 'MCP',
+            headline: 'Manage flags from your editor',
+            description:
+                'Create flags, configure targeting rules, and check rollout status from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            features: [
+                {
+                    title: 'Create flags while building features',
+                    description:
+                        'Create a new feature flag with rollout percentage, targeting rules, and optional multivariate variants.',
+                },
+                {
+                    title: 'Check flags before deploying',
+                    description: 'Get the full definition of flags, including filters, groups, and payloads.',
+                },
+                {
+                    title: 'Clean up stale flags',
+                    description:
+                        'List all active/inactive feature flags in the current project and find dead code to remove.',
+                },
+                {
+                    title: 'Update rollout rules',
+                    description: "Update a flag's rollout percentage, targeting rules, or variants.",
+                },
+            ],
+            children: <MCPInstall />,
+        },
     ],
     postHogOnPostHog: {
         title: 'How PostHog uses Feature Flags',
@@ -510,7 +538,7 @@ export const featureFlags = {
         ai: 'The PostHog MCP server lets your AI coding agent create and manage Feature Flags directly from your code editor. Create flags, configure targeting rules, and check rollout status – without switching to the PostHog app.',
     },
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/FEATURE_FLAGS_2a5dd8fbf2.svg',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/FEATURE_FLAGS_hog_95e008723c.png',
         imageAlt: 'PostHog AI and feature flags',
         description: 'set up, monitor, and manage feature flags using natural language',
         skills: [

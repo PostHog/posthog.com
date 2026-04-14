@@ -89,7 +89,7 @@ Groups require additional code in your app to set up, while cohorts are created 
 
 ## How to create a cohort
 
-Once you've captured identified events, there are two ways to create a new cohort:
+Once you've captured identified events, there are three ways to create a new cohort:
 
 ### Method 1: Create a new cohort directly from an insight
 
@@ -122,6 +122,20 @@ The video below shows how to create a new cohort from a trend, although you can 
   alt="left hand navigation for cohorts"
   classes="rounded"
 />
+
+### Method 3: Create a cohort using AI and MCP
+
+You can create and manage cohorts using AI agents through the PostHog [MCP server](/docs/model-context-protocol). Ask your AI agent to create, list, retrieve, update, or delete cohorts and it uses the appropriate MCP tools.
+
+For static cohorts, you can also ask the agent to add or remove persons by their UUIDs.
+
+Example prompts:
+
+- "Create a dynamic cohort called 'power-users' for users who completed the purchase event more than 5 times"
+- "Create a static cohort called 'beta-testers' that I can manually add users to"
+- "List all cohorts in my project"
+
+See the [MCP documentation](/docs/model-context-protocol) for setup instructions and the full list of available tools.
 
 ## Static and dynamic cohorts
 

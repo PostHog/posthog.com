@@ -441,6 +441,7 @@ export const handbookSidebar = [
             { name: 'Meetings', url: '/handbook/getting-started/meetings' },
             { name: 'Kudos', url: '/handbook/company/kudos' },
             { name: 'Offsites', url: '/handbook/company/offsites' },
+            { name: 'Do more weird', url: '/handbook/company/do-more-weird' },
         ],
     },
     {
@@ -605,6 +606,10 @@ export const handbookSidebar = [
             {
                 name: 'Writing metadata',
                 url: '/handbook/content/metadata',
+            },
+            {
+                name: 'LinkedIn',
+                url: '/handbook/content/linkedin',
             },
         ],
     },
@@ -2400,6 +2405,10 @@ export const docsMenu = {
                             url: '/docs/api',
                         },
                         {
+                            name: 'OAuth integration',
+                            url: '/docs/api/oauth',
+                        },
+                        {
                             name: 'Popular',
                         },
                         {
@@ -2450,6 +2459,14 @@ export const docsMenu = {
                             url: '/docs/api/dashboard-templates',
                         },
                         {
+                            name: 'Dataset items',
+                            url: '/docs/api/dataset-items',
+                        },
+                        {
+                            name: 'Datasets',
+                            url: '/docs/api/datasets',
+                        },
+                        {
                             name: 'Early access features',
                             url: '/docs/api/early-access-feature',
                         },
@@ -2460,6 +2477,14 @@ export const docsMenu = {
                         {
                             name: 'Environments',
                             url: '/docs/api/environments',
+                        },
+                        {
+                            name: 'Evaluation runs',
+                            url: '/docs/api/evaluation-runs',
+                        },
+                        {
+                            name: 'Evaluations',
+                            url: '/docs/api/evaluations',
                         },
                         {
                             name: 'Event definitions',
@@ -2496,6 +2521,14 @@ export const docsMenu = {
                         {
                             name: 'Invites',
                             url: '/docs/api/invites',
+                        },
+                        {
+                            name: 'LLM analytics',
+                            url: '/docs/api/llm-analytics',
+                        },
+                        {
+                            name: 'LLM prompts',
+                            url: '/docs/api/llm-prompts',
                         },
                         {
                             name: 'Members',
@@ -2826,6 +2859,36 @@ export const docsMenu = {
                         {
                             name: 'Activity',
                             url: '/docs/activity',
+                        },
+                        {
+                            name: 'VS Code extension',
+                            url: '/docs/vscode-extension',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/vscode-extension',
+                                },
+                                {
+                                    name: 'Inline code intelligence',
+                                    url: '/docs/vscode-extension/inline-code-intelligence',
+                                },
+                                {
+                                    name: 'Sidebar dashboard',
+                                    url: '/docs/vscode-extension/sidebar-dashboard',
+                                },
+                                {
+                                    name: 'Flag management',
+                                    url: '/docs/vscode-extension/flag-management',
+                                },
+                                {
+                                    name: 'Stale flag cleanup',
+                                    url: '/docs/vscode-extension/stale-flag-cleanup',
+                                },
+                                {
+                                    name: 'Session replay',
+                                    url: '/docs/vscode-extension/session-replay',
+                                },
+                            ],
                         },
                         {
                             name: 'SDK doctor',
@@ -3708,6 +3771,13 @@ export const docsMenu = {
                     name: 'Getting started',
                 },
                 {
+                    name: 'Start here',
+                    url: '/docs/session-replay/start-here',
+                    icon: 'IconListCheck',
+                    featured: true,
+                    color: 'orange',
+                },
+                {
                     name: 'Installation',
                     url: '/docs/session-replay/installation',
                     icon: 'IconBook',
@@ -3716,27 +3786,25 @@ export const docsMenu = {
                     sortChildrenAlpha: true,
                     children: [
                         { name: 'Overview', url: '/docs/session-replay/installation' },
-                        { name: 'Android', url: '/docs/session-replay/installation/android' },
+                        { name: 'React Native', url: '/docs/session-replay/installation/react-native' },
                         { name: 'iOS', url: '/docs/session-replay/installation/ios' },
+                        { name: 'Android', url: '/docs/session-replay/installation/android' },
+                        { name: 'Web', url: '/docs/session-replay/installation/web' },
+                        { name: 'React', url: '/docs/session-replay/installation/react' },
+                        { name: 'React Router', url: '/docs/session-replay/installation/react-router' },
+                        { name: 'Next.js', url: '/docs/session-replay/installation/nextjs' },
                         { name: 'Flutter', url: '/docs/session-replay/installation/flutter' },
-                        { name: 'Unity', url: '/docs/session-replay/installation/unity' },
+                        { name: 'Vue', url: '/docs/session-replay/installation/vue' },
+                        { name: 'HTML snippet', url: '/docs/session-replay/installation/html-snippet' },
                         { name: 'Angular', url: '/docs/session-replay/installation/angular' },
                         { name: 'Astro', url: '/docs/session-replay/installation/astro' },
-                        { name: 'Bubble', url: '/docs/session-replay/installation/bubble' },
-                        { name: 'Flutter', url: '/docs/session-replay/installation/flutter' },
-                        { name: 'Framer', url: '/docs/session-replay/installation/framer' },
-                        { name: 'HTML snippet', url: '/docs/session-replay/installation/html-snippet' },
-                        { name: 'iOS', url: '/docs/session-replay/installation/ios' },
-                        { name: 'Next.js', url: '/docs/session-replay/installation/nextjs' },
                         { name: 'Nuxt', url: '/docs/session-replay/installation/nuxt' },
-                        { name: 'React', url: '/docs/session-replay/installation/react' },
-                        { name: 'React Native', url: '/docs/session-replay/installation/react-native' },
-                        { name: 'React Router', url: '/docs/session-replay/installation/react-router' },
                         { name: 'Remix', url: '/docs/session-replay/installation/remix' },
                         { name: 'Svelte', url: '/docs/session-replay/installation/svelte' },
-                        { name: 'Vue', url: '/docs/session-replay/installation/vue' },
-                        { name: 'Web', url: '/docs/session-replay/installation/web' },
+                        { name: 'Unity', url: '/docs/session-replay/installation/unity' },
                         { name: 'Webflow', url: '/docs/session-replay/installation/webflow' },
+                        { name: 'Framer', url: '/docs/session-replay/installation/framer' },
+                        { name: 'Bubble', url: '/docs/session-replay/installation/bubble' },
                     ],
                 },
                 {
@@ -3881,12 +3949,11 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
-                    sortChildrenAlpha: true,
                     children: [
                         { name: 'Overview', url: '/docs/feature-flags/installation' },
+                        { name: 'Web', url: '/docs/feature-flags/installation/web' },
                         { name: '.NET', url: '/docs/feature-flags/installation/dotnet' },
                         { name: 'Android', url: '/docs/feature-flags/installation/android' },
-                        { name: 'API', url: '/docs/feature-flags/installation/api' },
                         { name: 'Elixir', url: '/docs/feature-flags/installation/elixir' },
                         { name: 'Flutter', url: '/docs/feature-flags/installation/flutter' },
                         { name: 'Go', url: '/docs/feature-flags/installation/go' },
@@ -3898,9 +3965,10 @@ export const docsMenu = {
                         { name: 'React', url: '/docs/feature-flags/installation/react' },
                         { name: 'React Native', url: '/docs/feature-flags/installation/react-native' },
                         { name: 'React Router', url: '/docs/feature-flags/installation/react-router' },
+                        { name: 'Remix', url: '/docs/feature-flags/installation/remix' },
                         { name: 'Ruby', url: '/docs/feature-flags/installation/ruby' },
                         { name: 'Rust', url: '/docs/feature-flags/installation/rust' },
-                        { name: 'Web', url: '/docs/feature-flags/installation/web' },
+                        { name: 'API', url: '/docs/feature-flags/installation/api' },
                     ],
                 },
                 {
@@ -3925,13 +3993,6 @@ export const docsMenu = {
                 },
                 {
                     name: 'Concepts',
-                },
-                {
-                    name: 'Best practices',
-                    url: '/docs/feature-flags/best-practices',
-                    icon: 'IconStar',
-                    color: 'red',
-                    featured: true,
                 },
                 {
                     name: 'Server-side local evaluation',
@@ -3975,8 +4036,8 @@ export const docsMenu = {
                     name: 'Guides',
                 },
                 {
-                    name: 'Production-ready feature flags',
-                    url: '/docs/feature-flags/production-ready',
+                    name: 'Best practices',
+                    url: '/docs/feature-flags/best-practices',
                     icon: 'IconBolt',
                     color: 'purple',
                     featured: true,
@@ -4000,6 +4061,13 @@ export const docsMenu = {
                     url: '/docs/feature-flags/targeting-groups',
                     icon: 'IconPeople',
                     color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'User and group targeting',
+                    url: '/docs/feature-flags/user-and-group-targeting',
+                    icon: 'IconPeople',
+                    color: 'blue',
                     featured: true,
                 },
                 {
@@ -4856,10 +4924,22 @@ export const docsMenu = {
                     featured: true,
                     children: [
                         { name: 'Overview', url: '/docs/surveys/installation' },
-                        { name: 'Web', url: '/docs/surveys/installation/web' },
-                        { name: 'React Native', url: '/docs/surveys/installation/react-native' },
-                        { name: 'iOS', url: '/docs/surveys/installation/ios' },
+                        { name: 'Angular', url: '/docs/surveys/installation/angular' },
+                        { name: 'Astro', url: '/docs/surveys/installation/astro' },
+                        { name: 'Bubble', url: '/docs/surveys/installation/bubble' },
                         { name: 'Flutter', url: '/docs/surveys/installation/flutter' },
+                        { name: 'Framer', url: '/docs/surveys/installation/framer' },
+                        { name: 'iOS', url: '/docs/surveys/installation/ios' },
+                        { name: 'Next.js', url: '/docs/surveys/installation/nextjs' },
+                        { name: 'Nuxt', url: '/docs/surveys/installation/nuxt' },
+                        { name: 'React', url: '/docs/surveys/installation/react' },
+                        { name: 'React Native', url: '/docs/surveys/installation/react-native' },
+                        { name: 'React Router', url: '/docs/surveys/installation/react-router' },
+                        { name: 'Remix', url: '/docs/surveys/installation/remix' },
+                        { name: 'Svelte', url: '/docs/surveys/installation/svelte' },
+                        { name: 'Vue', url: '/docs/surveys/installation/vue' },
+                        { name: 'Web', url: '/docs/surveys/installation/web' },
+                        { name: 'Webflow', url: '/docs/surveys/installation/webflow' },
                     ],
                 },
                 {
@@ -5504,6 +5584,11 @@ export const docsMenu = {
                             name: 'Pi Coding Agent',
                             url: '/docs/llm-analytics/installation/pi',
                             icon: 'IconCode',
+                        },
+                        {
+                            name: 'Claude Code',
+                            url: '/docs/llm-analytics/installation/claude-code',
+                            icon: 'IconClaudeCode',
                         },
                         {
                             name: 'Manual capture',

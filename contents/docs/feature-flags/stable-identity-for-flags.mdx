@@ -6,7 +6,7 @@ sidebar: Docs
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Feature flags are [pure functions](/docs/feature-flags/production-ready) – same inputs, same outputs. The most common way to break that contract is to change the `distinct_id` between evaluations, which happens naturally when a user transitions from anonymous to identified.
+Feature Flags are [pure functions](/docs/feature-flags/best-practices) – same inputs, same outputs. The most common way to break that contract is to change the `distinct_id` between evaluations, which happens naturally when a user transitions from anonymous to identified.
 
 This page covers how to keep the hash input stable so flags don't flip during authentication transitions. If you haven't already, read [identity resolution](/docs/product-analytics/identity-resolution) first – a stable identity strategy eliminates most flag stability problems before they start.
 
@@ -21,7 +21,7 @@ hash("my-experiment", "user-456")       → 0.72 → variant "control"
 
 Same person, different variant. The hash function worked correctly both times – it received different inputs and produced different outputs.
 
-For experiments, this is data corruption: the user experienced "test" but may now be counted in "control." For feature rollouts, the user sees a feature appear and then disappear on login.
+For Experiments, this is data corruption: you experienced "test" but may now be counted in "control." For feature rollouts, you see a feature appear and then disappear on login.
 
 ## Start with your identity strategy
 
@@ -29,7 +29,7 @@ The best way to keep flag evaluations stable is to prevent the `distinct_id` fro
 
 - **[Golden path: stable ID from first touch](/docs/product-analytics/identity-resolution#golden-path-stable-id-from-first-touch)** – assign a durable ID before any flag evaluation happens. The `distinct_id` never changes, so the hash never changes. This is the recommended approach.
 - **[Common path: anonymous then identify on login](/docs/product-analytics/identity-resolution#common-path-anonymous-then-identify-on-login)** – the SDK generates an anonymous ID, then `identify()` links it to a known user. This changes the `distinct_id`, which changes the hash. The mitigations below exist for this path.
-- **[Server-side bootstrap with a known ID](/docs/product-analytics/identity-resolution#server-side-linking-with-alias)** – if you have server rendering, you know the user before the page loads. Bootstrap with their stable ID and the anonymous-to-identified transition never happens.
+- **[Server-side bootstrap with a known ID](/docs/product-analytics/identity-resolution#server-side-linking-with-alias)** – if you have server rendering, you already know who's visiting before the page loads. Bootstrap with their stable ID and the anonymous-to-identified transition never happens.
 
 If you can use the golden path or server-side bootstrap, the rest of this page is unnecessary. The sections below are for when the `distinct_id` will change and you need to manage that.
 
@@ -50,15 +50,32 @@ See [Device bucketing](/docs/feature-flags/device-bucketing) for setup.
 | Bootstrapping | Compatible | Not compatible |
 | `person_profiles: 'identified_only'` | Works | Doesn't work |
 | Cross-device consistency | No (per-device) | No (per-person, but only after identify) |
-| Known issues | `$device_id` can be lost on cookie clears | posthog-js [#2623](https://github.com/PostHog/posthog-js/issues/2623): values can change after identify |
+| Known issues | `$device_id` can be lost on cookie clears | PostHog-js [#2623](https://github.com/PostHog/posthog-js/issues/2623): values can change after identify |
 
 ### Experience continuity
 
 Pins a stable hash key to a person record in Postgres. Enabled per-flag via `ensure_experience_continuity`. The server remembers which hash key was used for the first evaluation and reuses it on all subsequent evaluations, even after the `distinct_id` changes.
 
-See [Creating feature flags – persisting across authentication](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional) for setup.
+See [Creating Feature Flags – persisting across authentication](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional) for setup.
 
 Use experience continuity only when device bucketing and the stable ID approaches aren't feasible. It comes at a cost: a database read and write on every evaluation, no support for [local evaluation](/docs/feature-flags/local-evaluation), and a [known issue](https://github.com/PostHog/posthog-js/issues/2623) where values can still change after `identify()`.
+
+<details>
+<summary>How "persist flags across authentication" works internally</summary>
+
+When a flag has this setting enabled (the `ensure_experience_continuity` API field), the flags service uses the original anonymous hash key for evaluations even after the `distinct_id` changes:
+
+1. **Override write.** When the SDK calls `/flags` with both `distinct_id` (the new identified ID) and `$anon_distinct_id` (the previous anonymous ID), the flags service writes a hash key override to the database. The override maps the person to the original anonymous ID for that flag key.
+
+2. **Override read.** On subsequent `/flags` requests for the identified `distinct_id`, the service looks up stored overrides and uses the original anonymous ID as the hash input instead of the current `distinct_id`.
+
+3. **Write timing matters.** Overrides are written during `/flags` requests, not during `identify()` events. The web SDK handles this automatically – after `identify()`, it reloads flags and sends `$anon_distinct_id` along with the request, which triggers the override write. Server-side SDKs must include `$anon_distinct_id` in their flag evaluation calls – either as a top-level field in direct `/flags` HTTP requests, or via `person_properties` (the Rust flags service checks both locations, with top-level taking precedence).
+
+4. **Requires `person_profiles: 'always'`.** The override is stored against a `person_id`. With `identified_only`, no person record exists during anonymous activity, so the write fails silently. The SDK clears `$anon_distinct_id` after the request regardless, so no retry happens.
+
+5. **Optimization for 100% rollout.** Flags at 100% rollout with no multivariate variants return the same value regardless of hash input, so the database lookup is skipped automatically.
+
+</details>
 
 ## Cross-device consistency
 
@@ -73,6 +90,16 @@ Flag condition: where cohort = "beta-users" → show feature
 
 Person properties resolve server-side against the person record. The same person matches the same conditions regardless of device. This reframes the question: instead of "how do I make the hash stable across devices," ask "how do I target users based on who they are?"
 
+### Multi-platform consistency
+
+If the same user has flags evaluated on multiple platforms simultaneously (web SDK, mobile SDK, and backend local evaluation), consistency depends on the flag type:
+
+**Property-targeted flags** resolve against the person record, so they're consistent as long as properties are synced across platforms. Ensure every SDK has access to the properties you're targeting on – see [cross-environment consistency](/docs/product-analytics/identity-resolution#cross-environment-consistency) for how to coordinate this.
+
+**Percentage-rollout flags** (including Experiments) use the hash of `flag_key + distinct_id`. The hash is deterministic, so if every platform uses the same `distinct_id`, they produce the same result. Ensure your [backend uses the same `distinct_id` string](/docs/product-analytics/identity-resolution#cross-environment-consistency) as your client SDKs.
+
+To guarantee consistency across platforms for Experiments, evaluate flags on your server and distribute results to clients via [bootstrap](/docs/feature-flags/bootstrapping) or your own API response – one evaluation, one authoritative result.
+
 ## Choosing the right pattern
 
 | Requirement | Best approach |
@@ -86,7 +113,7 @@ Person properties resolve server-side against the person record. The same person
 
 ## Further reading
 
-- [Production-ready feature flags](/docs/feature-flags/production-ready) – the pure function model that explains why identity matters for flags
+- [Production-ready Feature Flags](/docs/feature-flags/best-practices) – the pure function model that explains why identity matters for flags
 - [Identity resolution](/docs/product-analytics/identity-resolution) – designing your identity strategy (start here if you haven't)
 - [Device bucketing](/docs/feature-flags/device-bucketing) – setup guide
 - [Bootstrapping](/docs/feature-flags/bootstrapping) – eliminating the async gap
