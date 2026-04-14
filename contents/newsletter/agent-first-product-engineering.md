@@ -155,7 +155,7 @@ By adding this line in the skill, we're embedding a PostHog Certified™ opinion
 
 In traditional software, even if user behavior isn't predictable, the code is. With AI, you lose that stability; the same inputs [won't produce the same outputs anymore](/blog/correct-llm-code-generation).
 
-This means classic testing methods will leave a gap, so you need new ways to catch the things automated tests no longer will.
+This means [classic testing methods will leave a gap](/blog/testing-ai-agents), so you need new ways to catch the things automated tests no longer will.
 
 You need to treat the agent like you would treat a user. [Talk to them](/newsletter/talk-to-users), build empathy for them, and develop an intuition of what they want.
 
