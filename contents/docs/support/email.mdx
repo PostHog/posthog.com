@@ -53,6 +53,7 @@ When a customer sends an email to your connected address, it's forwarded to Post
 - A new ticket is created with the email subject, sender name, and sender email
 - The email body appears as the first message on the ticket
 - Attachments (images and files, up to 10 MB each, max 20 per email) are included in the message
+- Any CC recipients on the email are stored on the ticket and included in future replies
 - If the customer replies to an existing thread, the message is added to the same ticket
 
 Tickets from email show `email` as the channel source in the [inbox](/docs/support/inbox) and can be filtered by it.
@@ -62,6 +63,7 @@ Tickets from email show `email` as the channel source in the [inbox](/docs/suppo
 When you reply to an email ticket in PostHog:
 
 - Your reply is sent as an email back to the customer
+- Any CC recipients from the original email are included in the reply
 - The email uses your configured display name and sending address
 - Standard email threading headers are set, so the reply appears in the same thread in the customer's inbox
 - Rich text formatting (bold, links, images, etc.) is preserved in the email
@@ -78,6 +80,7 @@ Email-sourced tickets appear in your [inbox](/docs/support/inbox) alongside widg
 
 - An email icon indicating the channel source
 - The sender's name and email address on messages
+- CC recipients, if any were on the original email
 
 You can filter the ticket list by channel source to see only email tickets.
 
