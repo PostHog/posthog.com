@@ -268,7 +268,7 @@ We're managing deployments with [ArgoCD](http://go/argo) where you can also see 
 
 After your PR is deployed to an environment, a bot automatically comments on the merged PR with the deployment status. The **dev** deployment triggers the initial comment. As **prod-us** and **prod-eu** finish deploying, the bot updates the same comment in-place rather than posting new ones.
 
-If you don't see a comment on your PR after a deploy, give it a few minutes -- the notification runs after ArgoCD finishes syncing. If it still hasn't appeared, check the deploy workflows in PostHog/charts ([dev](https://github.com/PostHog/charts/actions/workflows/argocd-deploy-dev.yml), [prod](https://github.com/PostHog/charts/actions/workflows/argocd-deploy-prod.yml)) for failures.
+If you don't see a comment on your PR after a deploy, give it a few minutes -- the notification runs after ArgoCD finishes syncing. If it still hasn't appeared, check the [deploy workflow](https://github.com/PostHog/charts/actions/workflows/state-deploy.yml) in PostHog/charts for failures.
 
 ### Verifying your deployment
 
