@@ -145,7 +145,7 @@ For us, it's in the connective tissue between our products, the domain knowledge
 
 As an example, here's a line we added to query-retention.md:
 
-*"For activation and retention events, use the `$pageview` event by default. Avoid infrequent or inconsistent events like `signed in` unless asked explicitly, as they skew the data."*
+> For [activation](/newsletter/wtf-is-activation) and [retention](/docs/product-analytics/retention) events, use the `$pageview` event by default. Avoid infrequent or inconsistent events like `signed in` unless asked explicitly, as they skew the data.
 
 Without this guidance, an agent would just use whatever event the user mentions, which is usually misleading. Retention would look worse than it actually is, and there's no way a user would know unless they'd done this analysis themselves before.
 
