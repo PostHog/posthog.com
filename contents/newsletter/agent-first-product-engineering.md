@@ -8,9 +8,13 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Product engineers
+  - Engineering
 crosspost:
-  - Founders
   - Blog
+seo:
+  metaTitle: The golden rules of agent-first product engineering
+  metaDescription: >-
+    Five principles for building products that work well for AI agents and MCP servers.
 ---
 
 *Five principles to develop your product intuition for agents*
@@ -124,7 +128,7 @@ The biggest mistake people make is writing them like step-by-step manuals. If yo
 
 Instead, think of it like onboarding a new employee who's already highly qualified.
 
-A bad manager micromanages every process — do A, then B, never C, and always D. A good manager trusts the hire and only steps in with the specific things they couldn't have known on their own.
+A bad manager micromanages every process – do A, then B, never C, and always D. A good manager trusts the hire and only steps in with the specific things they couldn't have known on their own.
 
 That's what good skills look like.
 
