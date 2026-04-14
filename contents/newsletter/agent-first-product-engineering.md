@@ -112,7 +112,7 @@ In v2, we made use of the fact that anyone connecting to the PostHog MCP is ther
 Now, we load these at the start of every PostHog MCP session:
 
 - **PostHog-specific taxonomy.** What's a feature flag, experiment, [session replay](/session-replay), etc.
-- **Our [HogQL](/docs/sql) syntax.** How to use our custom translation layer over ClickHouse SQL.
+- **Our [SQL](/docs/sql) syntax.** How to use our custom translation layer over ClickHouse SQL.
 - **Critical querying rules.** Hard constraints that apply to every query (e.g., always filter by time range).
 
 Everything else gets pulled later. We let the agent figure out when.
