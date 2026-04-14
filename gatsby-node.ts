@@ -16,11 +16,6 @@ export { onPreBootstrap } from './gatsby/onPreBootstrap'
 export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }) => {
     const { createPage, deletePage } = actions
 
-    if (process.env.GATSBY_DOCS_ONLY === 'true' && !page.path.startsWith('/docs/')) {
-        deletePage(page)
-        return
-    }
-
     // Add build time to credits page using environment variable
     if (page.path === '/credits/') {
         // Use Vercel's VERCEL_ENV variable or current time as fallback

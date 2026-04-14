@@ -51,21 +51,6 @@ jobs:
 
             - name: Checkout
               uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-              with:
-                  fetch-depth: 0
-
-            - name: Detect docs-only changes
-              id: changed
-              env:
-                  BASE_REF: ${{ github.base_ref }}
-              run: |
-                  CHANGED=$(git diff --name-only "origin/$BASE_REF"...HEAD)
-                  echo "Changed files: $CHANGED"
-                  if echo "$CHANGED" | grep -qvE '^(contents/docs/|src/navs/index\.js|vercel\.json)'; then
-                    echo "docs_only=false" >> $GITHUB_OUTPUT
-                  else
-                    echo "docs_only=true" >> $GITHUB_OUTPUT
-                  fi
 
             - name: Set up pnpm
               uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
@@ -93,7 +78,6 @@ jobs:
               run: pnpm build
               env:
                   GATSBY_MINIMAL: 'true'
-                  GATSBY_DOCS_ONLY: ${{ steps.changed.outputs.docs_only }}
                   CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
                   CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
 
@@ -125,6 +109,34 @@ jobs:
                       | Status | Details | Updated (UTC) |
                       |--------|---------|---------|
                       | 🟢 **Ready** | [View preview](${{ steps.deploy.outputs.deployment-url }}) | ${{ steps.timestamp-final.outputs.time }} |
+
+            - name: Notify reviewer on successful builds (Inkeep PRs only)
+              if: success() && contains(github.event.pull_request.user.login, 'inkeep')
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const pr = context.payload.pull_request;
+                      const reviewers = pr.requested_reviewers.map(r => `@${r.login}`).join(', ');
+                      await github.rest.issues.createComment({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: pr.number,
+                        body: `Hey ${reviewers}! This docs PR was generated for you by an agent. You're responsible for reviewing and merging it into production.\n\n1. Review and approve the PR\n2. Merge the PR\n   a. Check the preview env and CI build and merge it yourself\n   b. Enable auto-merge if you're confident in the changes`
+                      });
+
+            - name: Notify reviewer on build failure (Inkeep PRs only)
+              if: failure() && contains(github.event.pull_request.user.login, 'inkeep')
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const pr = context.payload.pull_request;
+                      const reviewers = pr.requested_reviewers.map(r => `@${r.login}`).join(', ');
+                      await github.rest.issues.createComment({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: pr.number,
+                        body: `Hey ${reviewers}! This docs PR was generated for you by an agent. You're responsible for reviewing and merging it into production.\n\nThe deploy preview failed to build. [View logs](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) to see what went wrong. If it looks like a flaky failure, re-run the workflow.`
+                      });
 
             - name: Comment on failure
               if: failure()
