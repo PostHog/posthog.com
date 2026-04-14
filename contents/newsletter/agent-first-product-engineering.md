@@ -22,7 +22,7 @@ Companies building for agents often treat them as a bolt-on feature. This is a m
 
 Agents today are more like a new form factor – an interaction layer that sits between your product and your users:
 
-![Agents as a new interaction layer between your product and users](https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,g_center,h_0.6,fl_relative/q_auto,f_auto/agent0_191d5281bd.png)
+![Agents as a new interaction layer between your product and users](https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,g_center,w_1.0,h_0.6,fl_relative/q_auto,f_auto/agent0_191d5281bd.png)
 
 That means you need to build for agents as a *primary* surface, not an afterthought.
 
@@ -32,7 +32,7 @@ We learned this the hard way and overhauled our AI architecture two times in the
 
 Here are the golden rules of agent-first product engineering we learned along the way.
 
-## Rule 1: Let agents do everything users can
+## 1. Let agents do everything users can
 
 If a human can do something in your product, an agent should be able to do it as well.
 
@@ -59,7 +59,7 @@ The result is a set of tool handlers – one file per product area – ready to 
 
 <NewsletterForm />
 
-## Rule 2: Meet agents at their level of abstraction
+## 2. Meet agents at their level of abstraction
 
 To build an agent-first experience, you have to find the semantic layer where agents already reason best and meet them there.
 
@@ -89,7 +89,7 @@ GROUP BY week
 ORDER BY week
 ```
 
-## Rule 3: Front-load universal context
+## 3. Front-load universal context
 
 In the early days of AI, developers had to front-load *everything* into agents to compensate for smaller context windows and less capable models.
 
@@ -117,11 +117,11 @@ Now, we load these at the start of every PostHog MCP session:
 
 Everything else gets pulled later. We let the agent figure out when.
 
-## Rule 4: Writing skills is a human skill
+## 4. Writing skills is a human skill
 
 Skills help you fill the gap between what your product can do and what an agent can do out of the box with your tools:
 
-![Writing skills for agents](https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,g_center,h_0.6,fl_relative/q_auto,f_auto/agent1_b1e92e5899.png)
+![Writing skills for agents](https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,g_center,w_1.0,h_0.6,fl_relative/q_auto,f_auto/agent1_b1e92e5899.png)
 
 The biggest mistake people make is writing them like step-by-step manuals. If you're too prescriptive, agents will follow your instructions too rigidly and lose the ability to improvise.
 
@@ -151,7 +151,7 @@ Without this guidance, an agent would just use whatever event the user mentions,
 
 By adding this line in the skill, we're embedding a PostHog Certified™ opinion about what good metrics and analysis actually look like. This ensures agents use our product correctly, and users aren't inadvertently misled.
 
-## Rule 5: Treat agents like real users
+## 5. Treat agents like real users
 
 In traditional software, even if user behavior isn't predictable, the code is. With AI, you lose that stability; the same inputs [won't produce the same outputs anymore](/blog/correct-llm-code-generation).
 
