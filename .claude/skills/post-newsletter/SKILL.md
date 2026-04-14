@@ -39,9 +39,14 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Product engineers
+  - Engineering  # adjust based on content
 crosspost:
-  - Founders
-  - Blog
+  - Blog  # omit Founders if not relevant
+seo:
+  metaTitle: {title — can match the post title exactly}
+  metaDescription: >-
+    {1–2 sentence summary, ~155 chars, keyword-rich. Expand on the subtitle if
+    there is one.}
 ---
 ```
 

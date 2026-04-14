@@ -23,7 +23,7 @@ Companies building for agents often treat them as a bolt-on feature. This is a m
 
 Agents today are more like a new form factor – an interaction layer that sits between your product and your users:
 
-![Agents as a new interaction layer between your product and users](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agent0_191d5281bd.png)
+![Agents as a new interaction layer between your product and users](https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,g_center,h_0.6,fl_relative/q_auto,f_auto/agent0_191d5281bd.png)
 
 That means you need to build for agents as a *primary* surface, not an afterthought.
 
@@ -122,7 +122,7 @@ Everything else gets pulled later. We let the agent figure out when.
 
 Skills help you fill the gap between what your product can do and what an agent can do out of the box with your tools:
 
-![Writing skills for agents](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agent1_b1e92e5899.png)
+![Writing skills for agents](https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,g_center,h_0.6,fl_relative/q_auto,f_auto/agent1_b1e92e5899.png)
 
 The biggest mistake people make is writing them like step-by-step manuals. If you're too prescriptive, agents will follow your instructions too rigidly and lose the ability to improvise.
 
@@ -168,7 +168,7 @@ Here are a few habits and behaviors we adopt at PostHog to achieve this:
 
 - **Dogfooding headlessly.** When testing our agent features, we reach for the CLI before the UI. This puts us in the same environment the agent operates in and exposes us to the same types of errors, syntax, and friction they'd experience. It's how we caught an issue internally and found that our MCP tool descriptions were eating up way more tokens than it should.
 
-![Dogfooding headlessly via the CLI](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Frame_10150_e3bde237da.png)
+![Dogfooding headlessly via the CLI](https://res.cloudinary.com/dmukukwp6/image/upload/c_scale,w_0.75,fl_relative/q_auto,f_auto/Frame_10150_e3bde237da.png)
 
 - **Doing manual trace reviews.** We hold a weekly "traces hour" where we go through real user sessions that have user feedback ratings. For example, we found a case where PostHog AI confidently told a user that feature flags don't support scheduled releases and then backtracked. Automated tests wouldn't have caught that since the agent did respond; the response was just incorrect.
 
