@@ -95,7 +95,7 @@ In the early days of AI, developers had to front-load *everything* into agents t
 
 But as the technology keeps improving, there's a new trend that removes as much context as possible and trusts the model to figure out the rest.
 
-That works for general-purpose agents since they're designed to be flexible. Anthropic can't predict everything that everyone is using Claude for.
+That works for general-purpose agents since they're designed to be flexible. Anthropic can't predict everything that everyone is [using Claude for](/newsletter/ai-coding-mistakes).
 
 But if you're building an agent experience for your specific product, the problem space is much smaller. You already know the key scenarios, tools, and use cases.
 
