@@ -11,11 +11,10 @@ const Support: React.FC = () => {
             <SEO title="Support - Docs - PostHog" />
             <CalloutBox icon="IconFlask" title="Support is in private alpha" type="info">
                 <p>
-                    Support is currently in private alpha.{' '}
-                    <a href="https://us.posthog.com/settings/user-feature-previews#in-app-messenger">
-                        Request early access
-                    </a>{' '}
-                    and we'll invite you when ready.
+                    <strong>Note:</strong> Support is currently in{' '}
+                    <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
+                        Beta
+                    </span>
                 </p>
             </CalloutBox>
             <Intro

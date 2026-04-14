@@ -455,7 +455,7 @@ response = requests.${item.httpVerb}(
         <CodeBlock
             selector="dropdown"
             currentLanguage={currentLanguage}
-            onChange={({ language }) => setExampleLanguage(language)}
+            onChange={(option) => setExampleLanguage(option.language)}
             label={
                 <div className="code-example flex text-xs space-x-1.5 my-1">
                     <code className={`shrink-0 text-${mapVerbsColor[item.httpVerb]}`}>

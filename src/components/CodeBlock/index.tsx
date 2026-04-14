@@ -356,7 +356,14 @@ export const CodeBlock = ({
                     <div className="shrink-0 ml-auto flex items-center divide-x divide-border dark:divide-border-dark">
                         {selector === 'dropdown' && languages.length > 1 ? (
                             <div className="relative mr-2">
-                                <Listbox value={currentLanguage} onChange={(language) => onChange(language)}>
+                                <Listbox
+                                    value={currentLanguage}
+                                    onChange={(language) => {
+                                        const index = languages.findIndex((l) => l.language === language.language)
+                                        if (index !== -1) setSelectedIndex(index)
+                                        onChange?.(language)
+                                    }}
+                                >
                                     <Listbox.Button className="flex items-center space-x-1.5 text-gray">
                                         <span>
                                             {currentLanguage.label ||

@@ -78,7 +78,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'blue',
             category: 'communication',
             slug: 'docs/support',
-            status: 'alpha',
+            status: 'beta',
         },
         {
             name: 'PostHog Code',

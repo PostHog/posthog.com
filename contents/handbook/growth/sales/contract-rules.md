@@ -153,7 +153,7 @@ We do not offer price guarantees for the following reasons:
 
 This request most often comes from procurement teams unfamiliar with our pricing philosophy. Address it proactively in commercial discussions, but if there is push back, reference the above points. As an example:
 
-> "We've dropped Events pricing [X]% over [timeframe]. A price guarantee would have cost you more. We're committed to being the cheapest at every scale—if we're not, tell us. Our prepaid credits for usage based pricing gives budget control without betting against our commitment to low prices."
+> "We've dropped Events pricing [X]% over [timeframe]. A price guarantee would have cost you more. We're committed to matching the cheapest at every scale—if we're not, tell us. Our prepaid credits for usage based pricing gives budget control without betting against our commitment to low prices."
 
 ## Multi-year credit allocation
 
