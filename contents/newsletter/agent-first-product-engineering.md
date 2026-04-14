@@ -135,7 +135,7 @@ They should only contain context that a human can provide since an agent can't d
 
 - **Idiosyncratic knowledge.** Internal acronyms, naming conventions, and style guides.
 - **Edge cases.** The uncommon places where things break, and how to handle them.
-- **Taste and craft.** Not just how to use your product correctly, but how to use it well.
+- **[Taste](/newsletter/good-taste-great-products) and craft.** Not just how to use your product correctly, but how to use it well.
 
 ### What this looks like in practice
 
