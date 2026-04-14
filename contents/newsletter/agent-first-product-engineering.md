@@ -75,7 +75,7 @@ In the old version of our MCP, to answer "why did signups drop last week?", an a
 
 So in our MCP v2, we let agents query PostHog data in a language they already speak fluently: [SQL](/sql).
 
-By exposing our product at this layer of abstraction, we were able to turn off all our read/get endpoints since they get subsumed by `executeSql.ts`.
+By exposing our product at this layer of abstraction, we were able to turn off all our read/get endpoints since they get subsumed by [`executeSql.ts`](https://github.com/PostHog/posthog/blob/master/services/mcp/src/tools/posthogAiTools/executeSql.ts).
 
 Now, answering "why did signups drop last week?" can be answered with just a single, elegant query:
 
