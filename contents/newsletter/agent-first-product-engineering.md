@@ -143,7 +143,7 @@ To figure out what goes into a skill, ask yourself: what would an agent get wron
 
 For us, it's in the connective tissue between our products, the domain knowledge buried in our data, and our niche developer takes. For Linear, it's the opinionated issue hierarchy. For Figma, it's their design system coherence.
 
-As an example, here's a line we added to query-retention.md:
+As an example, here's a line we added to [`query-retention.md`](https://github.com/PostHog/posthog/blob/master/services/mcp/definitions/prompts/query-retention.md):
 
 > For [activation](/newsletter/wtf-is-activation) and [retention](/docs/product-analytics/retention) events, use the `$pageview` event by default. Avoid infrequent or inconsistent events like `signed in` unless asked explicitly, as they skew the data.
 
