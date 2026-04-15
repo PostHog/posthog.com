@@ -607,6 +607,10 @@ export const handbookSidebar = [
                 name: 'Writing metadata',
                 url: '/handbook/content/metadata',
             },
+            {
+                name: 'LinkedIn',
+                url: '/handbook/content/linkedin',
+            },
         ],
     },
     {
@@ -785,6 +789,10 @@ export const handbookSidebar = [
                     {
                         name: 'Writing HogQL queries in Python',
                         url: '/handbook/engineering/databases/hogql-python',
+                    },
+                    {
+                        name: 'Writing ClickHouse queries for new products',
+                        url: '/handbook/engineering/databases/clickhouse-queries-new-products',
                     },
                 ],
             },
