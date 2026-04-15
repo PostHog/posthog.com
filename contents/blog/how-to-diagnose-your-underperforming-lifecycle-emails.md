@@ -1,5 +1,5 @@
 ---
-title: How to diagnose your underperforming lifecycle emails
+title: You're doing lifecycle emails wrong
 date: 2026-04-14
 rootPage: /blog
 sidebar: Blog
