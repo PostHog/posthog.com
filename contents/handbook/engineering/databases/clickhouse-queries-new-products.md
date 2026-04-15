@@ -51,7 +51,7 @@ The `QueryRunner` base class gives you:
 
 ### How to implement one
 
-1. Define your query and response schema types (these live in `schema.py` and are generated from the frontend schema)
+1. Define your query and response schema types in `frontend/src/queries/schema/schema-general.ts` (or `frontend/src/types.ts`). The Python `schema.py` is auto-generated from these – don't edit it directly.
 2. Create a runner class extending `QueryRunner` (or `AnalyticsQueryRunner` for analytics-style queries)
 3. Implement `_calculate()` to build and execute your HogQL query
 4. Register your runner in [`get_query_runner()`](https://github.com/PostHog/posthog/blob/master/posthog/hogql_queries/query_runner.py)
