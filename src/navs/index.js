@@ -5445,6 +5445,16 @@ export const docsMenu = {
                             icon: 'IconOpenRouter',
                         },
                         {
+                            name: 'Cloudflare AI Gateway',
+                            url: '/docs/llm-analytics/installation/cloudflare-ai-gateway',
+                            platformLogo: 'cloudflare',
+                        },
+                        {
+                            name: 'Dedalus Labs',
+                            url: '/docs/llm-analytics/installation/dedalus',
+                            platformLogo: 'dedalus',
+                        },
+                        {
                             name: 'DeepSeek',
                             url: '/docs/llm-analytics/installation/deepseek',
                             platformLogo: 'deepseek',
