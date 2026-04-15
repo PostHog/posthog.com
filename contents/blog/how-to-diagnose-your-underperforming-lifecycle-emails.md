@@ -35,7 +35,13 @@ There's a lot of content on the first three, so in this article, we'll explore t
 
 Messaging tools like Customer.io and [ActiveCampaign](/blog/best-activecampaign-alternatives) were built for a specific job: broadcast email with some segmentation on top. You upload a list, you define some basic audience filters, and set up a drip sequence. That model worked well for a long time – and it's still fine for newsletters, product announcements, and campaigns where you're addressing a stable audience with a consistent message.
 
-PLG lifecycle messaging is a different job entirely. It needs to reason about sequences of behavior. Has this user completed onboarding *and then* gone quiet? Have they invited a teammate *before* hitting the feature wall? Did they upgrade, or did they hit the paywall three times and leave? That logic requires asking arbitrarily complex questions about what a user has and hasn't done, in sequence, in real time. Messaging tools weren't designed to answer those questions – they were designed to send emails to lists.
+PLG lifecycle messaging is a different job entirely. It needs to reason about sequences of behavior. 
+
+- Has this user completed onboarding *and then* gone quiet? 
+- Have they invited a teammate *before* hitting the feature wall? 
+- Did they upgrade, or did they hit the paywall three times and leave? 
+
+This logic requires asking arbitrarily complex questions about what a user has and hasn't done, in sequence, in real time. Messaging tools weren't designed to answer these questions – they were designed to send emails to lists.
 
 So teams end up with trigger logic that's dumber than their product data. Not because they're doing lifecycle marketing wrong, but because they're using a broadcast tool to do behavioral work.
 
