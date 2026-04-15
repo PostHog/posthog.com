@@ -47,7 +47,7 @@ So teams end up with trigger logic that's dumber than their product data. Not be
 
 ## How this plays out in practice
 
-Most teams built their messaging stack early, when event tracking was still basic. Signup event, maybe a key action or two. So the sequences were time-based, because that was all you could reliably trigger on. Day 1 welcome. Day 3 nudge. Day 7 check-in. It shipped, it ran, and it was good enough.
+Most teams build their messaging stack early, when event tracking is still basic. Signup event, maybe a key action or two. So the sequences were time-based, because that was all you could reliably trigger on. Day 1 welcome. Day 3 nudge. Day 7 check-in. It shipped, it ran, and it was good enough.
 
 Then the product got more instrumented. Feature usage, [activation](/newsletter/wtf-is-activation) milestones, plan changes – all of it flowing into the analytics tool. But the sequences kept running on the old architecture, because the open rates looked acceptable and there was always something more urgent.
 
