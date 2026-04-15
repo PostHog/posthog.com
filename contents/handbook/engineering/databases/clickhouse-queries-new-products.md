@@ -18,7 +18,7 @@ Always use [HogQL](/handbook/engineering/databases/hogql-python) rather than wri
 
 ### Automatic team ID guards
 
-Every HogQL query gets an automatic `team_id = <your_team_id>` filter injected on every table access. This is enforced by [`team_id_guard_for_table()`](https://github.com/PostHog/posthog/blob/master/posthog/hogql/printer/clickhouse.py#L53-L63) and [`_ensure_team_id_where_clause()`](https://github.com/PostHog/posthog/blob/master/posthog/hogql/printer/clickhouse.py#L973-L986) in the ClickHouse printer. Without this, a missing `WHERE team_id = ...` clause would leak data across teams — one of the worst possible bugs.
+Every HogQL query gets an automatic `team_id = <your_team_id>` filter injected on every table access. This is enforced by [`team_id_guard_for_table()`](https://github.com/PostHog/posthog/blob/master/posthog/hogql/printer/clickhouse.py#L53-L63) and [`_ensure_team_id_where_clause()`](https://github.com/PostHog/posthog/blob/master/posthog/hogql/printer/clickhouse.py#L973-L986) in the ClickHouse printer. Without this, a missing `WHERE team_id = ...` clause would leak data across teams - one of the worst possible bugs.
 
 ### Materialized property optimizations
 
@@ -44,7 +44,7 @@ The `QueryRunner` base class gives you:
 
 - **Observability**: Query execution is automatically instrumented with Prometheus metrics (`QUERY_EXECUTION_TOTAL`, `QUERY_EXECUTION_DURATION`) and PostHog analytics events, giving you latency histograms and error breakdowns for free.
 
-- **Testability**: Query runners are straightforward to unit test — instantiate the runner with a team and a query schema, call `calculate()`, and assert on the response. No HTTP layer needed.
+- **Testability**: Query runners are straightforward to unit test - instantiate the runner with a team and a query schema, call `calculate()`, and assert on the response. No HTTP layer needed.
 
 - **Async execution**: The base class handles async query execution, rate limiting, and query status tracking automatically.
 
@@ -65,8 +65,8 @@ If your product stores data in ClickHouse, prefer UUIDv7 for your row IDs. We ha
 
 ClickHouse tables have a primary index (roughly: the order rows are stored on disk) but no secondary index in the traditional RDBMS sense. You almost certainly need to support two access patterns:
 
-1. **Lookup by ID** — fetching a specific row
-2. **Aggregation over a time range** — analytics queries filtering by timestamp
+1. **Lookup by ID** - fetching a specific row
+2. **Aggregation over a time range** - analytics queries filtering by timestamp
 
 Since ClickHouse can only efficiently filter on the primary key order, your ID must also encode the timestamp. [UUIDv7](https://www.rfc-editor.org/rfc/rfc9562#name-uuid-version-7) solves this: the first 48 bits are the Unix timestamp in milliseconds, so rows are naturally time-ordered.
 
@@ -81,7 +81,7 @@ The sessions v3 table is the canonical example of this pattern:
 session_id_v7 UInt128,
 ```
 
-### ClickHouse UUID sorting is broken — use UInt128
+### ClickHouse UUID sorting is broken - use UInt128
 
 ClickHouse does not sort UUIDs correctly as of today. The internal representation swaps the high and low 64-bit words, so `ORDER BY uuid_column` does not produce chronological order for UUIDv7s. This is a [known issue](https://michcioperz.com/wiki/clickhouse-uuid-ordering/) (see also [ClickHouse issue #77226](https://github.com/ClickHouse/ClickHouse/issues/77226)).
 
@@ -89,7 +89,7 @@ The workaround is to store your UUIDv7 as `UInt128` instead of `UUID`. You can c
 
 ### When not to use UUIDv7
 
-You need a good reason to use a different format. The main exception is person IDs, which use UUIDv5 via `uuidFromDistinctId()`. Person IDs are deterministic based on `(team_id, distinct_id)` — this is critical because the same person must get the same UUID both before and after an identify call. This determinism requirement outweighs the benefits of time-sortability.
+You need a good reason to use a different format. The main exception is person IDs, which use UUIDv5 via `uuidFromDistinctId()`. Person IDs are deterministic based on `(team_id, distinct_id)` - this is critical because the same person must get the same UUID both before and after an identify call. This determinism requirement outweighs the benefits of time-sortability.
 
 ## Query performance
 
@@ -97,7 +97,7 @@ You need a good reason to use a different format. The main exception is person I
 
 If your product frequently filters or groups by a specific property, you should ensure that property has a materialized column. Materialized columns store JSON property values as separate columns on disk, making reads up to 25x faster.
 
-Properties are automatically materialized by a cron job that analyzes slow queries (see `analyze.py`). But for new products, you may want to proactively create materialized columns for properties you know will be heavily queried. You can do this via a ClickHouse migration — see migration 0147 for an example that adds both a materialized column and a bloom filter index.
+Properties are automatically materialized by a cron job that analyzes slow queries (see `analyze.py`). But for new products, you may want to proactively create materialized columns for properties you know will be heavily queried. You can do this via a ClickHouse migration - see migration 0147 for an example that adds both a materialized column and a bloom filter index.
 
 For more details, see the [materialized columns handbook page](/handbook/engineering/databases/materialized-columns).
 
@@ -105,9 +105,9 @@ For more details, see the [materialized columns handbook page](/handbook/enginee
 
 ClickHouse data skipping indexes allow the engine to skip granules (blocks of rows) that definitely don't match your query filter. Common types:
 
-- **minmax** — tracks the min and max value per granule. Good for timestamp or numeric columns. Example: migration 0222 adds a minmax index on `$session_id_uuid`.
-- **bloom_filter** — probabilistic index for equality and IN lookups on high-cardinality columns. Example: migration 0184 adds a bloom filter on `distinct_id`. Bloom filters also support Map columns — you can index `mapKeys(my_map)` and `mapValues(my_map)` separately to speed up lookups into map-typed columns. See the logs table and spans table for examples, and `property_groups.py` for the reusable pattern.
-- **ngrambf_v1** — n-gram bloom filter for substring and `ILIKE` searches on text columns. Good for things like log bodies, email addresses, URLs, or any column where users will do partial-match searches. Examples: the logs table indexes `lower(body)` with `ngrambf_v1(3, 25000, 2, 0)`, and the spans table indexes span name. For materialized property columns, we have a reusable `NgramLowerIndex` helper that handles the ClickHouse limitations around case-insensitivity (must wrap in `lower()`) and nullable columns (must wrap in `coalesce()`).
+- **`minmax`** - tracks the min and max value per granule. Good for timestamp or numeric columns. Example: migration 0222 adds a `minmax` index on `$session_id_uuid`.
+- **bloom_filter** - probabilistic index for equality and IN lookups on high-cardinality columns. Example: migration 0184 adds a bloom filter on `distinct_id`. Bloom filters also support Map columns - you can index `mapKeys(my_map)` and `mapValues(my_map)` separately to speed up lookups into map-typed columns. See the Logs table and spans table for examples, and `property_groups.py` for the reusable pattern.
+- **ngrambf_v1** - n-gram bloom filter for `substring` and `ILIKE` searches on text columns. Good for things like log bodies, email addresses, URLs, or any column where users will do partial-match searches. Examples: the Logs table indexes `lower(body)` with `ngrambf_v1(3, 25000, 2, 0)`, and the spans table indexes span name. For materialized property columns, we have a reusable `NgramLowerIndex` helper that handles the ClickHouse limitations around case-insensitivity (must wrap in `lower()`) and `Nullable` columns (must wrap in `coalesce()`).
 
 ### Test that your skip indexes are actually used
 
@@ -131,7 +131,7 @@ def test_skip_index_is_used(self):
         )
 ```
 
-You can also use the `forceClickhouseDataSkippingIndexes` modifier to make ClickHouse error if a specified skip index can't be used — this acts as a safety net in production:
+You can also use the `forceClickhouseDataSkippingIndexes` modifier to make ClickHouse error if a specified skip index can't be used - this acts as a safety net in production:
 
 ```python
 from posthog.schema import HogQLQueryModifiers, MaterializationMode
@@ -157,7 +157,7 @@ Before shipping, you should verify that your queries perform well with realistic
 
 #### Step 1: Add your product to demo data generation
 
-The `generate_demo_data` management command uses a Matrix simulation framework to generate realistic-looking data. Rather than creating a new Matrix subclass (which is significant overhead), add your product's events and properties to the existing `HedgeboxMatrix`. This is the default simulation and already generates a rich set of users, sessions, and behavioral patterns — you just need to add your product's events alongside the existing ones.
+The `generate_demo_data` management command uses a Matrix simulation framework to generate realistic-looking data. Rather than creating a new Matrix subclass (which is significant overhead), add your product's events and properties to the existing `HedgeboxMatrix`. This is the default simulation and already generates a rich set of users, sessions, and behavioral patterns - you just need to add your product's events alongside the existing ones.
 
 Run it with:
 
@@ -165,7 +165,7 @@ Run it with:
 python manage.py generate_demo_data --n-clusters 10
 ```
 
-Tweak the `--n-clusters` number as appropriate — higher values generate more data but take longer to run. This gives you a local dev environment with enough data to spot performance issues that wouldn't appear with a handful of rows.
+Tweak the `--n-clusters` number as appropriate - higher values generate more data but take longer to run. This gives you a local dev environment with enough data to spot performance issues that wouldn't appear with a handful of rows.
 
 #### Step 2: Get the compiled ClickHouse SQL
 
@@ -186,15 +186,15 @@ SELECT ...your compiled query...
 
 The key options:
 
-- `indexes=1` — shows which indexes (primary key, partition key, skip indexes) are used and how many granules they filter
-- `json=1` — outputs structured JSON so you can parse it programmatically
+- `indexes=1` - shows which indexes (primary key, partition key, skip indexes) are used and how many granules they filter
+- `json=1` - outputs structured JSON so you can parse it programmatically
 
 In the output, look for the `Indexes` array on each `ReadFromMergeTree` node. Each index entry shows:
 
-- **Type** — `MinMax`, `Partition`, `PrimaryKey`, or a skip index name
-- **Condition** — the filter condition applied (if `"true"`, the index wasn't useful)
-- **Initial Granules** — granules before this index was applied
-- **Selected Granules** — granules after (this should be significantly smaller than Initial Granules)
+- **Type** - `MinMax`, `Partition`, `PrimaryKey`, or a skip index name
+- **Condition** - the filter condition applied (if `"true"`, the index wasn't useful)
+- **Initial Granules** - granules before this index was applied
+- **Selected Granules** - granules after (this should be significantly smaller than Initial Granules)
 
 You can also run a pipeline analysis to see the execution plan including parallelism:
 
@@ -207,7 +207,7 @@ This can reveal bottlenecks like single-threaded aggregation stages.
 
 #### Step 4: Run the query with trace logging
 
-To see what ClickHouse is actually doing during execution — including how much data it reads, which parts are slow, and where time is spent — run the query with trace-level logging via `clickhouse-client`:
+To see what ClickHouse is actually doing during execution - including how much data it reads, which parts are slow, and where time is spent - run the query with trace-level logging via `clickhouse-client`:
 
 ```bash
 clickhouse-client --send_logs_level=trace --query "SELECT ...your compiled query..."
