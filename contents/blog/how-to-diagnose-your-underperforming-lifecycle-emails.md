@@ -53,19 +53,19 @@ Then the product got more instrumented. Feature usage, [activation](/newsletter/
 
 The result is a hybrid nobody designed: time-based triggers standing in for behavioral logic, audience definitions evaluated at sync time rather than the moment of truth, and a messaging tool working from a portrait of each user rather than a live feed.
 
-Here's what that actually looks like. You have a "hasn't invited a teammate" email that fires on day 5. It was built when you couldn't trigger on teammate invitations reliably. Now you can – but the sequence hasn't been updated. So users who invited a teammate on day 2 still get the email on day 5.
+Here's what that actually looks like: A "hasn't invited a teammate" email that fires on day 5 built when you couldn't trigger on teammate invitations reliably. Now you can – but the sequence hasn't been updated. So users who invited a teammate on day 2 still get the email on day 5.
 
 ![A behavior-gated workflow](https://res.cloudinary.com/dmukukwp6/image/upload/workflow_teammate_invite_bf6ebd82c6.png)
 
-*A behavior-gated workflow: after signup, it checks on day 2 whether a teammate has been invited. Users who haven't get a 5-day wait before a reminder fires – rather than sending the nudge blindly to everyone.*
+<Caption>A behavior-gated workflow: after signup, it checks on day 2 whether a teammate has been invited. Users who haven't get a 5-day wait before a reminder fires – rather than sending the nudge blindly to everyone.</Caption>
 
-Low conversion on a sequence that's emailing the wrong people at the wrong time looks identical to low conversion from a weak subject line. Both show up as "low conversion." The difference only becomes visible when you cross-reference what your messaging tool thinks is true about users against what your analytics tool actually shows.
+Low conversion on a sequence that's emailing the wrong people at the wrong time looks identical to low conversion from a weak subject line. The difference only becomes visible when you cross-reference what your messaging tool thinks is true about users against what your analytics tool actually shows.
 
 ## The sync problem is a symptom, not the cause
 
 The instinctive fix is to tighten the data pipeline: shorter sync intervals, better property mappings, a regular audit of what's actually making it across. That's worth doing. But it treats the symptom.
 
-The deeper problem is that you're running behavioral logic in a tool that doesn't have the data to evaluate it properly. [Evan Rallis from Grantable](/customers/grantable) – who'd rebuilt complex production automation on Zapier and Make before moving to PostHog Workflows – put it clearly: 
+The deeper problem is that you're running behavioral logic in a tool that doesn't have the data to evaluate it properly. [Evan Rallis from Grantable](/customers/grantable) – who'd rebuilt complex production automation on Zapier and Make before moving to [PostHog Workflows](/workflows) – put it clearly: 
 
 >"There's no core dataset they live on top of unless you keep pushing data in manually. That is not a pretty process. And as your product changes, you have to keep re-wiring all of it."
 
@@ -85,17 +85,21 @@ The right fix depends on whether you have a mapping problem, a sync problem, or 
 
 Go through your five most important sequences. For each trigger, ask whether it's time-based because time actually makes sense there, or because behavioral triggers were harder to set up when you built it. Cross-reference the audience against your analytics tool – are users getting emails about actions they've already taken?
 
-Most teams find at least one sequence sending to users it shouldn't, and at least one behavioral signal they're tracking in analytics that never made it into their messaging logic. Fix the obvious mismatches first. This alone moves the needle, and the exercise tells you exactly where the structural limits are.
+Most teams find at least one sequence sending to users it shouldn't, and at least one behavioral signal they're tracking in analytics that never made it into their messaging logic. 
+
+Fix the obvious mismatches first. This alone moves the needle, and the exercise tells you exactly where the structural limits are.
 
 ### Tighten the data pipeline
 
-If your sequences are logically sound but still misfiring, the problem is probably the sync. Shorter sync intervals, explicit property mappings you've actually verified, and a regular check of what's in your messaging tool vs. what's in your analytics tool. Silent failures here are common – a property mapping breaks, nobody notices, sequences keep firing on stale data for months.
+If your sequences are logically sound but still misfiring, the problem is probably the sync. 
+
+Set shorter sync intervals, create explicit property mappings you've actually verified, and regularly check what's in your messaging tool vs. what's in your analytics tool. Silent failures here are common – a property mapping breaks, nobody notices, sequences keep firing on stale data for months.
 
 This is the least exciting fix, but also the most underrated one. A lot of performance problems disappear when the underlying data is accurate and fresh.
 
 ### Pre-qualify audiences in your analytics tool before sending
 
-Instead of defining audiences inside your messaging tool, build them where the data is freshest and sync the cohort across before triggering. More manual, but you're working from a source you trust rather than hoping the sync caught up in time. Good option if your trigger logic is the problem but your sequences themselves are solid.
+Instead of defining audiences inside your messaging tool, build them where the data is freshest and sync the cohort across before triggering. This is more manual, but you're working from a source you trust rather than hoping the sync caught up in time. It is a good option if your trigger logic is the problem but sequences themselves are solid.
 
 ### Move the trigger logic to where the data lives
 
