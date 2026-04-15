@@ -162,10 +162,10 @@ The `generate_demo_data` management command uses a Matrix simulation framework t
 Run it with:
 
 ```bash
-python manage.py generate_demo_data --n-clusters 500
+python manage.py generate_demo_data --n-clusters 10
 ```
 
-This gives you a local dev environment with enough data to spot performance issues that wouldn't appear with 10 rows.
+Tweak the `--n-clusters` number as appropriate — higher values generate more data but take longer to run. This gives you a local dev environment with enough data to spot performance issues that wouldn't appear with a handful of rows.
 
 #### Step 2: Get the compiled ClickHouse SQL
 
