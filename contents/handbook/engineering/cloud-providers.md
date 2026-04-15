@@ -19,7 +19,7 @@ To give someone access
 
 ### Elevating permissions via `#aws-access`
 
-To access the dev AWS environment, use the `/awsaccess` slash command in the `#aws-access` Slack channel and fill out the form that appears. Make sure to set up your AWS config file as described in our <PrivateLink url="https://github.com/PostHog/posthog-cloud-infra/blob/main/ACCESS.md">docs</PrivateLink>.
+To access the dev AWS environment, use the `/awsaccess` slash command in the `#aws-access` Slack channel and fill out the form that appears. Make sure to set up your AWS config file as described in our <PrivateLink url="https://github.com/PostHog/posthog-cloud-infra/blob/main/docs/ACCESS.md">docs</PrivateLink>.
 
 A dedicated `secrets-editor` role is available for managing secrets. Use this role across all AWS environments.
 
