@@ -11,6 +11,7 @@ Related reading:
 - [Writing HogQL queries in Python](/handbook/engineering/databases/hogql-python)
 - [Query performance optimization](/handbook/engineering/databases/query-performance-optimization)
 - [Materialized columns](/handbook/engineering/databases/materialized-columns)
+- [Query attribution](/handbook/engineering/clickhouse/query-attribution)
 
 ## Use HogQL, not raw ClickHouse SQL
 
