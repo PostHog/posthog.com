@@ -16,13 +16,13 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/llm
 
 ## Choosing an evaluation type
 
-| | LLM-as-a-judge | Code-based (Hog) |
-|---|---|---|
-| **Best for** | Subjective quality checks (tone, helpfulness, hallucination) | Deterministic rule-based checks (format, keywords, length) |
-| **Cost** | LLM API call per evaluation | Free |
-| **Speed** | Seconds | Milliseconds |
-| **Consistency** | May vary between runs | Deterministic — same input always produces same result |
-| **Setup** | Write a prompt | Write Hog code |
+|                 | LLM-as-a-judge                                               | Code-based (Hog)                                           |
+| --------------- | ------------------------------------------------------------ | ---------------------------------------------------------- |
+| **Best for**    | Subjective quality checks (tone, helpfulness, hallucination) | Deterministic rule-based checks (format, keywords, length) |
+| **Cost**        | LLM API call per evaluation                                  | Free                                                       |
+| **Speed**       | Seconds                                                      | Milliseconds                                               |
+| **Consistency** | May vary between runs                                        | Deterministic — same input always produces same result     |
+| **Setup**       | Write a prompt                                               | Write Hog code                                             |
 
 ## LLM-as-a-judge evaluations
 
@@ -36,13 +36,13 @@ You can optionally filter which generations get evaluated using event properties
 
 PostHog provides five pre-built evaluation templates to get you started:
 
-| Template | What it checks | Best for |
-|----------|---------------|----------|
-| **Relevance** | Whether the output addresses the user's input | Customer support bots, Q&A systems |
-| **Helpfulness** | Whether the response is useful and actionable | Chat assistants, productivity tools |
-| **Jailbreak** | Attempts to bypass safety guardrails | Security-sensitive applications |
-| **Hallucination** | Made-up facts or unsupported claims | RAG systems, knowledge bases |
-| **Toxicity** | Harmful, offensive, or inappropriate content | User-facing applications |
+| Template          | What it checks                                | Best for                            |
+| ----------------- | --------------------------------------------- | ----------------------------------- |
+| **Relevance**     | Whether the output addresses the user's input | Customer support bots, Q&A systems  |
+| **Helpfulness**   | Whether the response is useful and actionable | Chat assistants, productivity tools |
+| **Jailbreak**     | Attempts to bypass safety guardrails          | Security-sensitive applications     |
+| **Hallucination** | Made-up facts or unsupported claims           | RAG systems, knowledge bases        |
+| **Toxicity**      | Harmful, offensive, or inappropriate content  | User-facing applications            |
 
 ### Creating an LLM judge evaluation
 
@@ -99,14 +99,14 @@ Code-based evaluations share the same sampling rate and property filter options 
 
 Your Hog code has access to these variables:
 
-| Variable | Type | Description |
-|----------|------|-------------|
-| `input` | string or object | The LLM input (prompt or messages array) |
-| `output` | string or object | The LLM output (response or choices) |
-| `properties` | object | All event properties from the generation |
-| `event.uuid` | string | The event UUID |
-| `event.event` | string | The event name |
-| `event.distinct_id` | string | The distinct ID of the user |
+| Variable            | Type             | Description                              |
+| ------------------- | ---------------- | ---------------------------------------- |
+| `input`             | string or object | The LLM input (prompt or messages array) |
+| `output`            | string or object | The LLM output (response or choices)     |
+| `properties`        | object           | All event properties from the generation |
+| `event.uuid`        | string           | The event UUID                           |
+| `event.event`       | string           | The event name                           |
+| `event.distinct_id` | string           | The distinct ID of the user              |
 
 ### Creating a code-based evaluation
 
@@ -222,14 +222,14 @@ You can also manage evaluations through the [PostHog MCP server](/docs/model-con
 
 The MCP server provides six evaluation management tools:
 
-| Tool | Description |
-|------|-------------|
-| `evaluations-get` | List evaluations with optional search and enabled filter |
-| `evaluation-get` | Get a specific evaluation by UUID |
-| `evaluation-create` | Create LLM judge or Hog code evaluations |
-| `evaluation-update` | Update evaluation config, name, or enabled status |
-| `evaluation-delete` | Delete an evaluation (soft delete) |
-| `evaluation-run` | Trigger an async evaluation run on a specific generation event |
+| Tool                | Description                                                    |
+| ------------------- | -------------------------------------------------------------- |
+| `evaluations-get`   | List evaluations with optional search and enabled filter       |
+| `evaluation-get`    | Get a specific evaluation by UUID                              |
+| `evaluation-create` | Create LLM judge or Hog code evaluations                       |
+| `evaluation-update` | Update evaluation config, name, or enabled status              |
+| `evaluation-delete` | Delete an evaluation (soft delete)                             |
+| `evaluation-run`    | Trigger an async evaluation run on a specific generation event |
 
 This enables teams to manage evaluations programmatically from agent workflows without using the web UI.
 
@@ -239,13 +239,47 @@ The **Evaluations** page shows all your evaluations with their pass rates and re
 
 You can also filter generations by evaluation results or create [insights](/docs/product-analytics/insights) based on evaluation data to build quality monitoring dashboards.
 
+## Evaluation status and errors
+
+Each evaluation has a status that indicates whether it's running:
+
+- **Active** – The evaluation is enabled and running on sampled generations.
+- **Paused** – You disabled the evaluation. It won't run until you re-enable it.
+- **Error** – PostHog automatically disabled the evaluation due to an issue that needs attention.
+
+### Automatic error states
+
+PostHog automatically disables evaluations and sets them to error status when:
+
+| Error reason             | Cause                                                     | How to resolve                                                                                                                                   |
+| ------------------------ | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Trial limit reached**  | The 100 free trial evaluation runs have been exhausted.   | Add your own API key in [**Settings** > **LLM analytics**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok).       |
+| **Model not allowed**    | The selected model isn't available on the trial plan.     | Switch to a trial-allowed model, or add your own provider API key.                                                                               |
+| **Provider key deleted** | The provider API key used by this evaluation was removed. | Add a new provider API key in [**Settings** > **LLM analytics**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok). |
+
+### Identifying errored evaluations
+
+On the **Evaluations** list page, errored evaluations display a red **Error** pill instead of the enable/disable toggle. Hover over the pill to see the specific error reason. Errored evaluations sort to the top of the list.
+
+On the evaluation detail page, the header shows a red **Error** tag and a banner explains the cause with recovery steps.
+
+### Re-enabling errored evaluations
+
+You must resolve the underlying issue before re-enabling an errored evaluation:
+
+- **Trial limit reached** – Add your own provider API key.
+- **Model not allowed** – Switch to a trial-allowed model, or add your own provider API key.
+- **Provider key deleted** – Add a new provider API key.
+
+Once the issue is resolved, open the evaluation and toggle it back on.
+
 ## Pricing
 
 Each evaluation run counts as one LLM analytics event toward your quota.
 
 **LLM judge evaluations** use an LLM to score your generations. Your first 100 evaluation runs are on us so you can try the feature right away. After that, add your own API key from OpenAI, Google Gemini, Anthropic, OpenRouter, or Fireworks in [**Settings** > **LLM analytics**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok) to keep running evaluations.
 
-If a provider API key becomes invalid or encounters an error, PostHog displays a warning banner on the evaluations page so you can take action quickly. Update or replace the key in [**Settings** > **LLM analytics**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok).
+If a provider API key is deleted or an evaluation hits trial limits, PostHog automatically disables the affected evaluations and shows an error status. See [Evaluation status and errors](#evaluation-status-and-errors) for details on error states and how to resolve them.
 
 **Code-based evaluations** have no LLM cost — they run your Hog code directly with no external API calls.
 
