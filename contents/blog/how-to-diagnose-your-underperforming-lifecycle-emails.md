@@ -101,7 +101,7 @@ Instead of defining audiences inside your messaging tool, build them where the d
 
 The most structural fix is rethinking where the logic runs. As long as your automation lives in a separate tool, you're constrained by whatever you remembered to sync – you can only ask questions about properties that made it across the pipeline. When your automation runs directly on your full event stream, you can express the behavioral logic you actually want.
 
-[PostHog Workflows](https://app.posthog.com/workflows) is built on this premise: the trigger logic, the condition checks, and the user data all live in the same place. A workflow can branch on real behavioral state, wait until a condition is met or a time window closes, and evaluate against everything your product knows about a user right now, not whatever made it across the last sync.
+[PostHog Workflows](https://app.posthog.com/workflows) is built on this premise: the trigger logic, condition checks, and user data all live in the same place. A workflow can branch on real behavioral state, wait until a condition is met or a time window closes, and evaluate against everything your product knows about a user right now, not whatever made it across the last sync.
 
 The sequences you actually want to write: "wait until this user has done X, or send this after 7 days if they haven't," are only expressible if the tool running them can see everything.
 
