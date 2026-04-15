@@ -22,7 +22,14 @@ seo:
 
 Your onboarding sequence has a 40% open rate and a 3% click-through. That looks fine, but users are still unsubscribing in week two. You rewrite the subject lines. You move the send time. Nothing changes.
 
-There are a few reasons lifecycle emails underperform: weak copy, the wrong audience, bad timing, or a structural mismatch between your messaging tool and your product data. I feel like there's a lot of content on the first three, so in this article, we'll explore the fourth.
+There are a few reasons lifecycle emails underperform: 
+
+1. Weak copy
+2. The wrong audience
+3. Bad timing
+4. A structural mismatch between your messaging tool and your product data
+
+There's a lot of content on the first three, so in this article, we'll explore the fourth.
 
 ## The tool you're using wasn't built for what you're trying to do
 
