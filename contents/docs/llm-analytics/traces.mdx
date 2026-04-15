@@ -2,7 +2,7 @@
 title: Traces
 ---
 
-import TraceEventSnippet from "./_snippets/trace-event.mdx"
+import TraceEventSnippet from "./_snippets/trace-event.mdx";
 
 Traces are a collection of [generations](/docs/llm-analytics/generations) and [spans](/docs/llm-analytics/spans) that capture a full interaction between a user and an LLM. The [traces tab](https://app.posthog.com/llm-analytics/traces) lists them along with the properties autocaptured by PostHog like the person, total cost, total latency, and more.
 
@@ -26,7 +26,6 @@ Clicking on a trace opens a timeline of the interaction with all the generation 
 
 <Caption>A trace presents LLM event data in a timeline, tree-structured view </Caption>
 
-
 ## Conversation display options
 
 When viewing a trace, you can control how conversation messages are displayed using the display options dropdown. The available options are:
@@ -42,6 +41,18 @@ Traces display any [tools](/docs/llm-analytics/tools) called by the generations 
 ## Sentiment classification
 
 PostHog can classify the sentiment of user messages in a trace as negative, neutral, or positive. Sentiment is computed on-demand using a local model when you view a trace — no data is sent to third-party services. Each trace gets an overall sentiment label and score, with a per-generation and per-message breakdown. See [Sentiment classification](/docs/llm-analytics/sentiment) for more details.
+
+## Evaluation results
+
+When [evaluations](/docs/llm-analytics/evaluations) have run on a trace's generations, color-coded badges appear in the trace detail panel header so you can see pass/fail status at a glance. Each badge reflects the latest result for a given evaluation:
+
+- **True** (green) – the evaluation passed
+- **False** (red) – the evaluation failed
+- **Error** (red) – the evaluation encountered an error
+- **Running** (blue) – the evaluation is still in progress
+- **N/A** (gray) – the evaluation was not applicable
+
+Hover over a badge to see the evaluation name, when it ran, how many times it has run, and the reasoning behind the result. Click a badge to navigate to the **Evaluations** tab for full details.
 
 ## Search traces with PostHog AI
 
