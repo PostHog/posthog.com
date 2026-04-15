@@ -206,6 +206,41 @@ import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-te
 
 <PostHogBillableUsageTemplate />
 
+## Server-side SDK gotchas
+
+### Async compatibility (Python / FastAPI)
+
+The `posthog-python` SDK is synchronous — it uses the `requests` library internally. In async Python web frameworks (FastAPI, Starlette), calling SDK methods directly blocks the event loop. Under concurrent load, a single slow PostHog call (e.g., 3-second timeout during an outage) blocks all other requests.
+
+**Fix:** Wrap SDK calls in `asyncio.to_thread()`:
+
+```python
+import asyncio
+from posthog import Posthog
+
+posthog_client = Posthog('phc_xxx', host='https://us.i.posthog.com')
+
+async def get_flags(distinct_id, properties=None):
+    return await asyncio.to_thread(
+        posthog_client.get_all_flags_and_payloads,
+        distinct_id,
+        person_properties=properties,
+    )
+```
+
+### Payload format differs between SDKs
+
+The Python SDK returns flag payloads as JSON strings — you need to parse them yourself:
+
+```python
+result = posthog_client.get_all_flags_and_payloads('user-123')
+# result['featureFlagPayloads']['my-flag'] is '{"color": "blue"}' — a string
+import json
+payload = json.loads(result['featureFlagPayloads']['my-flag'])
+```
+
+The Node SDK automatically parses payloads into objects — no manual parsing needed.
+
 ## Solved community questions
 
 <SolvedQuestions

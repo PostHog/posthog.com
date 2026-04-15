@@ -241,3 +241,23 @@ When testing multiple variants (A/B/C/D tests):
 - The p-value and confidence interval are calculated for each variant vs. control
 - No correction for multiple comparisons is applied by default
 - Each comparison uses the same α = 0.05 significance level
+
+## Multiple metrics and false positives
+
+At the default significance level (α = 0.05), there's a 5% chance that any single metric shows a significant result when nothing actually changed — the statistical engine itself can produce a false signal from random noise. Think of it like rolling a die: each metric is an independent roll, and each one has a small chance of landing on "significant" by chance.
+
+With 5 metrics, the chance that *at least one* produces a false positive is about 23%. With 10 metrics, it's 40%. PostHog tests each metric independently and doesn't adjust for this — each result stands on its own.
+
+### More metrics can help — if they're planned
+
+This doesn't mean fewer metrics is better. Multiple well-chosen metrics actually help you cross-check results. If your change improves conversion but one out of five other metrics lights up as significant while the rest show nothing, that pattern tells you the one outlier is likely noise. The other metrics gave you the context to see that.
+
+But this only works if your metrics form a coherent set tied to your hypothesis. If you add 10 unrelated metrics with no plan, you lose that cross-checking power — you're just giving yourself more chances to find something to cherry-pick.
+
+### How to use this in practice
+
+**Before launching,** make sure each metric is tied to your hypothesis and has clear success criteria. Decide which metric is your primary decision-driver, and which are secondary (providing context, not driving the ship/kill decision).
+
+**When reading results,** look at the full pattern across metrics, not individual ones in isolation. A coherent story across multiple metrics is strong evidence. A single significant metric with no supporting signal from the others is worth skepticism.
+
+**If something unexpected is significant,** don't ship based on the surprise. Design a follow-up experiment with that metric as the primary. If the effect replicates, it's real.

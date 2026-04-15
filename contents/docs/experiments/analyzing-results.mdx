@@ -150,7 +150,7 @@ When all your primary metrics show green (positive) significance for a variant:
 It's common to see some metrics improve while others decline. When this happens:
 
 1. **Prioritize your primary metric**: Focus on the metric you defined as most important when setting up the experiment
-2. **Understand the trade-offs**: 
+2. **Understand the trade-offs**:
    - Is a 5% increase in conversion worth a 2% decrease in average order value?
    - Does improved engagement justify slightly lower retention?
 3. **Dig deeper with analytics**:
@@ -158,6 +158,29 @@ It's common to see some metrics improve while others decline. When this happens:
    - Use [Session replays](/docs/session-replay) to see how users interact differently with each variant
    - Create [Cohorts](/docs/data/cohorts) of users from each variant for further analysis
 4. **Consider the user journey**: Sometimes negative changes in one metric lead to positive downstream effects
+
+### Reading the pattern across metrics
+
+At the default 95% confidence level, any single metric has a 5% chance of showing a significant result even when nothing real changed. Your other metrics help you judge whether a result is real or noise — but only if they're related to each other and to your hypothesis.
+
+**Metrics that support each other (good).** You're testing a new onboarding flow. Your metrics:
+- Onboarding completion rate (primary)
+- Time to first key action
+- 7-day retention
+- Support tickets in first week
+
+Completion rate is significantly up. Time to first action is down. Retention is slightly up but not significant. Support tickets are flat. This is a coherent story — users are completing onboarding faster and sticking around. You can trust the primary result because the surrounding metrics all point the same direction.
+
+**Metrics that can't help you (bad).** Same experiment, but your metrics are:
+- Onboarding completion rate
+- Total pageviews
+- Pricing page visits
+- Blog bounce rate
+- API calls made
+
+Completion rate is significantly up — but the other four metrics have nothing to do with onboarding. They can't confirm or contradict the primary result. If completion rate lit up by chance, you'd have no way to tell. And if blog bounce rate also happens to show significance, that's almost certainly noise, but it might look tempting to claim your onboarding change also "improved content engagement."
+
+**The takeaway:** Choose metrics that form a system around your hypothesis. When they agree, you have strong evidence. When one stands alone, be skeptical — especially if it's a metric you weren't focused on. If a surprising result looks compelling, run a follow-up experiment with that metric as the primary.
 
 ### No significant results
 
