@@ -6,6 +6,7 @@ templateId:
 
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
+import AdDestinationPersonDataFaq from "../_snippets/ad-destination-person-data-faq.mdx"
 
 
 You should be aware that this destination relies on creating third-party cookies. You'll also need access to the relevant TikTok Ads account.
@@ -41,6 +42,8 @@ You should be aware that this destination relies on creating third-party cookies
 <TemplateParameters />
 
 ## FAQ
+
+<AdDestinationPersonDataFaq />
 
 ### Is the source code for this destination available?
 
