@@ -78,7 +78,7 @@ Incremental sync uses primary key columns to deduplicate rows. During source set
 
 For sources like BigQuery views that don't support primary key constraints, or tables with non-standard primary key names (like `_id`), you can select custom primary key columns during setup. This is available for all managed SQL sources: Postgres, MySQL, MSSQL, Redshift, Snowflake, and BigQuery.
 
-Once the first incremental sync completes, the primary key columns are locked and can't be changed. To modify them, delete the synced data first or switch to a different sync method like append or full table.
+Once the first incremental sync completes, the primary key columns are locked and can't be changed. To modify them, delete the synced data first.
 
 PostHog displays a warning if your selected primary key columns are nullable, since null values can cause deduplication issues.
 
