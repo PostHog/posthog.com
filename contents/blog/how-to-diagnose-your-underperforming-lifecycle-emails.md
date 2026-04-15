@@ -77,7 +77,7 @@ You're not limited by how fast your sync runs. You're limited by what you rememb
 
 The speed gain is basically the difference between trigger logic constrained by a sync schema someone set up two years ago and trigger logic that can reason against everything your product knows about a user right now.
 
-## What actually fixes it
+## Real fixes to underperforming lifecycle emails
 
 The right fix depends on whether you have a mapping problem, a sync problem, or an architecture problem. They look similar on the surface – low conversion, wrong people getting emails – but the solutions are different.
 
