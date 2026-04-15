@@ -373,6 +373,136 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 <JSIdentifyCrossPlatform/>
 
+### How to link server-side events to frontend users
+
+When your frontend makes API calls to your backend, and your backend captures PostHog events during those requests, those server events won't automatically be associated with the frontend user's session. There are two ways to solve this:
+
+#### Option 1: Automatic tracing headers
+
+Enable tracing headers in posthog-js to automatically inject identity headers on every request to your backend:
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    __add_tracing_headers: ['your-api-domain.com'],
+})
+```
+
+This injects `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID` headers on every request to the specified domain. Server-side SDK middleware (like the [posthog-python Django middleware](/docs/libraries/django#django-contexts-middleware)) picks these up and attaches them to any server-side events captured during that request.
+
+#### Option 2: Manually pass identity values
+
+If you need more control, extract the identity values from posthog-js and pass them to your backend yourself.
+
+**Frontend: Extract and send identity values**
+
+```js-web
+// Get the current user's distinct ID and session ID
+const distinctId = posthog.get_distinct_id()
+const sessionId = posthog.get_session_id()
+
+// Include them in your API requests
+fetch('https://your-api.example.com/api/action', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-POSTHOG-DISTINCT-ID': distinctId,
+        'X-POSTHOG-SESSION-ID': sessionId,
+    },
+    body: JSON.stringify({ /* your data */ }),
+})
+```
+
+**Backend: Use identity values when capturing events**
+
+<MultiLanguage selector="tabs">
+
+```node
+// Express example
+app.post('/api/action', (req, res) => {
+    const distinctId = req.headers['x-posthog-distinct-id']
+    const sessionId = req.headers['x-posthog-session-id']
+
+    // Capture event with frontend user's identity
+    posthog.capture({
+        distinctId: distinctId,
+        event: 'server_action_completed',
+        properties: {
+            $session_id: sessionId,
+        },
+    })
+
+    res.json({ success: true })
+})
+```
+
+```python
+# Django example
+def api_action(request):
+    distinct_id = request.headers.get('X-POSTHOG-DISTINCT-ID')
+    session_id = request.headers.get('X-POSTHOG-SESSION-ID')
+
+    # Capture event with frontend user's identity
+    posthog.capture(
+        distinct_id=distinct_id,
+        event='server_action_completed',
+        properties={
+            '$session_id': session_id,
+        }
+    )
+
+    return JsonResponse({'success': True})
+```
+
+```ruby
+# Rails example
+def api_action
+    distinct_id = request.headers['X-POSTHOG-DISTINCT-ID']
+    session_id = request.headers['X-POSTHOG-SESSION-ID']
+
+    # Capture event with frontend user's identity
+    posthog.capture({
+        distinct_id: distinct_id,
+        event: 'server_action_completed',
+        properties: {
+            '$session_id': session_id,
+        }
+    })
+
+    render json: { success: true }
+end
+```
+
+```go
+func apiAction(w http.ResponseWriter, r *http.Request) {
+    distinctId := r.Header.Get("X-POSTHOG-DISTINCT-ID")
+    sessionId := r.Header.Get("X-POSTHOG-SESSION-ID")
+
+    // Capture event with frontend user's identity
+    client.Enqueue(posthog.Capture{
+        DistinctId: distinctId,
+        Event:      "server_action_completed",
+        Properties: posthog.NewProperties().
+            Set("$session_id", sessionId),
+    })
+
+    json.NewEncoder(w).Encode(map[string]bool{"success": true})
+}
+```
+
+</MultiLanguage>
+
+#### When each approach works
+
+| Scenario                        | Tracing headers        | Manual approach        |
+| ------------------------------- | ---------------------- | ---------------------- |
+| User-triggered API calls        | ✅ Works               | ✅ Works               |
+| Webhooks from external services | ❌ No frontend context | ❌ No frontend context |
+| Background jobs                 | ❌ No frontend context | ❌ No frontend context |
+| Custom header requirements      | ❌ Fixed header names  | ✅ Full control        |
+
+For events triggered by external webhooks or background jobs with no frontend context, use [alias](#alias-assigning-multiple-distinct-ids-to-the-same-user) to connect backend-only IDs to frontend users after the fact.
+
 ### How to split a merged user back into separate users
 
 If you've accidentally linked distinct IDs together that represent different users, or you've made a mistake when merging users, it's possible to split their combined user back into separate users. You can do this in the PostHog app by navigating to the user you'd like split, and then clicking "Split IDs" in the top right corner.
