@@ -16,28 +16,15 @@ tags:
     - Growth
     - Lifecycle messaging
 seo:
-    metaTitle: 'How to diagnose your underperforming lifecycle emails'
+    metaTitle: "You're doing lifecycle emails wrong"
     metaDescription: 'High open rates can hide a deeper problem: your messaging tool may be working from outdated user data. Here is how data gets in, where it breaks, and how to audit it.'
 ---
-
-Your onboarding sequence has a 40% open rate and a 3% click-through. That looks fine, but users are still unsubscribing in week two. You rewrite the subject lines. You move the send time. Nothing changes.
-
-There are a few reasons lifecycle emails underperform: 
-
-1. Weak copy
-2. The wrong audience
-3. Bad timing
-4. A structural mismatch between your messaging tool and your product data
-
-There's a lot of content on the first three, so in this article, we'll explore the fourth.
-
-## The tool you're using wasn't built for what you're trying to do
 
 Messaging tools like Customer.io and [ActiveCampaign](/blog/best-activecampaign-alternatives) were built for a specific job: broadcast email with some segmentation on top. You upload a list, you define some basic audience filters, and set up a drip sequence. That model worked well for a long time – and it's still fine for newsletters, product announcements, and campaigns where you're addressing a stable audience with a consistent message.
 
 PLG lifecycle messaging is a different job entirely. It needs to reason about sequences of behavior. 
 
-- Has this user completed onboarding *and then* gone quiet? 
+- Has this user completed [onboarding](/blog/how-to-find-and-fix-app-onboarding-drop-off) *and then* gone quiet? 
 - Have they invited a teammate *before* hitting the feature wall? 
 - Did they upgrade, or did they hit the paywall three times and leave? 
 
@@ -47,7 +34,7 @@ So teams end up with trigger logic that's dumber than their product data. Not be
 
 ## How this plays out in practice
 
-Most teams build their messaging stack early, when event tracking is still basic. Signup event, maybe a key action or two. So the sequences were time-based, because that was all you could reliably trigger on. Day 1 welcome. Day 3 nudge. Day 7 check-in. It shipped, it ran, and it was good enough.
+Most teams build their messaging stack early, when [event tracking](/blog/events-you-should-track-with-posthog) is still basic. Signup event, maybe a key action or two. So the sequences were time-based, because that was all you could reliably trigger on. Day 1 welcome. Day 3 nudge. Day 7 check-in. It shipped, it ran, and it was good enough.
 
 Then the product got more instrumented. Feature usage, [activation](/newsletter/wtf-is-activation) milestones, plan changes – all of it flowing into the analytics tool. But the sequences kept running on the old architecture, because the open rates looked acceptable and there was always something more urgent.
 
@@ -109,8 +96,12 @@ The most structural fix is rethinking where the logic runs. As long as your auto
 
 The sequences you actually want to write: "wait until this user has done X, or send this after 7 days if they haven't," are only expressible if the tool running them can see everything.
 
-## Start with the audit
+## What changes when the data is right
 
-Go through your most important sequences. For each trigger, ask whether it's time-based because time actually makes sense there, or because behavioral triggers were harder to set up when you built it. Cross-reference the audience against your analytics tool. Are users getting emails about actions they've already taken?
+When the trigger logic and the data are in the same place, a few things change that are hard to appreciate until you've experienced the alternative.
 
-What you find will tell you whether you have a copy problem, a data problem, or an architecture problem. You can tweak the copy easily, after eliminating the possible technical challenges.
+You stop writing time-based sequences as a proxy for behavioral ones. Instead of "day 5 nudge," you write "send this when the user hasn't invited a teammate within 5 days of signup" – and mean it literally. The sequence reflects what you actually know about the user at the moment it fires.
+
+Sequences get shorter. A lot of the emails in a typical onboarding flow exist to cover uncertainty – you don't know if the user activated, so you send another nudge just in case. When you can branch on real behavioral state, you stop sending emails to people who don't need them.
+
+And you can finally measure whether your sequences are working – not just open rates and clicks, but whether users who entered a flow actually did the thing. (If you need a framework for what to measure, start with [product engagement](/blog/how-to-measure-product-engagement).) Because the data for measuring it lives in the same place as the data that triggered it.
