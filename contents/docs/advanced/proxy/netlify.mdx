@@ -19,7 +19,7 @@ Netlify's redirect rules can function as a reverse proxy by returning a `200` st
 Here's the request flow:
 
 1. User triggers an event in your app
-2. Request goes to your domain (e.g., `yourdomain.com/ph`)
+2. Request goes to your domain (e.g., `yourdomain.com/yourpath`)
 3. Netlify intercepts the request and matches it against your redirect rules
 4. Netlify fetches the response from PostHog's servers
 5. Netlify returns PostHog's response to the user under your domain
@@ -62,21 +62,21 @@ In your project root, add these redirects to your `netlify.toml` file:
 
 ```toml
 [[redirects]]
-  from = "/ph/static/*"
+  from = "/yourpath/static/*"
   to = "https://us-assets.i.posthog.com/static/:splat"
   host = "us-assets.i.posthog.com"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/ph/array/*"
+  from = "/yourpath/array/*"
   to = "https://us-assets.i.posthog.com/array/:splat"
   host = "us-assets.i.posthog.com"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/ph/*"
+  from = "/yourpath/*"
   to = "https://us.i.posthog.com/:splat"
   host = "us.i.posthog.com"
   status = 200
@@ -93,7 +93,7 @@ Here's what each directive does:
 - `status = 200`: Makes this a proxy (returns content) rather than a redirect (returns a redirect response). This is what makes the browser see your domain instead of PostHog's.
 - `force = true`: Applies this rule even if a file exists at that path. Without this, Netlify might serve a local file instead of proxying to PostHog.
 
-The static assets and remote config rules must come before the catch-all because Netlify evaluates rules in order. If the catch-all rule came first, it would match `/ph/static/*` and `/ph/array/*` requests before the specific rules could route them to the assets origin.
+The static assets and remote config rules must come before the catch-all because Netlify evaluates rules in order. If the catch-all rule came first, it would match `/yourpath/static/*` and `/yourpath/array/*` requests before the specific rules could route them to the assets origin.
 
 See [Netlify's redirects documentation](https://docs.netlify.com/routing/redirects/) for more details.
 
@@ -115,14 +115,14 @@ In your application code, update your PostHog initialization to use your proxy p
 
 ```js file=US
 posthog.init('<ph_project_token>', {
-  api_host: 'https://yourdomain.com/ph',
+  api_host: 'https://yourdomain.com/yourpath',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
 posthog.init('<ph_project_token>', {
-  api_host: 'https://yourdomain.com/ph',
+  api_host: 'https://yourdomain.com/yourpath',
   ui_host: 'https://eu.posthog.com'
 })
 ```
@@ -139,14 +139,14 @@ You can also use a relative path if you prefer:
 
 ```js file=US
 posthog.init('<ph_project_token>', {
-  api_host: '/ph',
+  api_host: '/yourpath',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
 posthog.init('<ph_project_token>', {
-  api_host: '/ph',
+  api_host: '/yourpath',
   ui_host: 'https://eu.posthog.com'
 })
 ```
@@ -163,7 +163,7 @@ Confirm events are flowing through your proxy:
 
 1. Open your browser's developer tools and go to the **Network** tab
 2. Navigate to your site or trigger an event in your app
-3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/ph`)
+3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/yourpath`)
 4. Verify the response status is `200 OK`
 5. Check the [PostHog app](https://app.posthog.com) to confirm events appear in your activity feed
 
@@ -186,9 +186,9 @@ Create a file named `_redirects` in the directory that gets deployed to Netlify.
 Add this content:
 
 ```
-/ph/static/*  https://us-assets.i.posthog.com/static/:splat  200!
-/ph/array/*   https://us-assets.i.posthog.com/array/:splat   200!
-/ph/*         https://us.i.posthog.com/:splat                200!
+/yourpath/static/*  https://us-assets.i.posthog.com/static/:splat  200!
+/yourpath/array/*   https://us-assets.i.posthog.com/array/:splat   200!
+/yourpath/*         https://us.i.posthog.com/:splat                200!
 ```
 
 Replace `us` with `eu` for EU region.
@@ -228,14 +228,14 @@ In your application code, update your PostHog initialization to use your proxy p
 
 ```js file=US
 posthog.init('<ph_project_token>', {
-  api_host: 'https://yourdomain.com/ph',
+  api_host: 'https://yourdomain.com/yourpath',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
 posthog.init('<ph_project_token>', {
-  api_host: 'https://yourdomain.com/ph',
+  api_host: 'https://yourdomain.com/yourpath',
   ui_host: 'https://eu.posthog.com'
 })
 ```
@@ -252,14 +252,14 @@ You can also use a relative path:
 
 ```js file=US
 posthog.init('<ph_project_token>', {
-  api_host: '/ph',
+  api_host: '/yourpath',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
 posthog.init('<ph_project_token>', {
-  api_host: '/ph',
+  api_host: '/yourpath',
   ui_host: 'https://eu.posthog.com'
 })
 ```
@@ -276,7 +276,7 @@ Confirm events are flowing through your proxy:
 
 1. Open your browser's developer tools and go to the **Network** tab
 2. Navigate to your site or trigger an event in your app
-3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/ph`)
+3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/yourpath`)
 4. Verify the response status is `200 OK`
 5. Check the [PostHog app](https://app.posthog.com) to confirm events appear in your activity feed
 
@@ -306,21 +306,21 @@ If you see CORS errors about a missing `Access-Control-Allow-Origin` header, try
 
 ```js file=US
 posthog.init('<ph_project_token>', {
-  api_host: '/ph',
+  api_host: '/yourpath',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
 posthog.init('<ph_project_token>', {
-  api_host: '/ph',
+  api_host: '/yourpath',
   ui_host: 'https://eu.posthog.com'
 })
 ```
 
 </MultiLanguage>
 
-This often happens when your primary Netlify domain differs from the one in `api_host`. For example, if your primary domain is `mydomain.com` but you set `api_host` to `https://www.mydomain.com/ph`, browsers will treat this as a cross-origin request.
+This often happens when your primary Netlify domain differs from the one in `api_host`. For example, if your primary domain is `mydomain.com` but you set `api_host` to `https://www.mydomain.com/yourpath`, browsers will treat this as a cross-origin request.
 
 ### Redirects not working in SvelteKit
 

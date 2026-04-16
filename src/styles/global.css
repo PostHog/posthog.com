@@ -2631,7 +2631,8 @@ article.reader-view-content-container:has(.quest-sidebar) {
     }
 }
 
-.quest-idle .quest-desktop-nav .space-y-4 > a:last-of-type > div:not(.border-orange) {
+.quest-idle .quest-desktop-nav .space-y-4 > a:last-of-type > div:not(.border-orange),
+.quest-item-glow {
     animation: questGlow 2s ease-in-out infinite;
 }
 

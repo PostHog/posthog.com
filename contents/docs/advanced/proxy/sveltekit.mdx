@@ -19,7 +19,7 @@ SvelteKit's `handle` hook runs on every request before it reaches your routes. W
 Here's the request flow:
 
 1. User triggers an event in your app
-2. Request goes to your domain (e.g., `yourdomain.com/ph/e`)
+2. Request goes to your domain (e.g., `yourdomain.com/yourpath/e`)
 3. SvelteKit's server hook intercepts the request
 4. The hook fetches the response from PostHog's servers
 5. PostHog's response is returned to the user under your domain
@@ -52,8 +52,8 @@ import type { Handle } from '@sveltejs/kit'
 export const handle: Handle = async ({ event, resolve }) => {
   const { pathname } = event.url
 
-  if (pathname.startsWith('/ph')) {
-    const useAssetHost = pathname.startsWith('/ph/static/') || pathname.startsWith('/ph/array/')
+  if (pathname.startsWith('/yourpath')) {
+    const useAssetHost = pathname.startsWith('/yourpath/static/') || pathname.startsWith('/yourpath/array/')
     const hostname = useAssetHost
       ? 'us-assets.i.posthog.com'
       : 'us.i.posthog.com'
@@ -62,7 +62,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     url.protocol = 'https:'
     url.hostname = hostname
     url.port = '443'
-    url.pathname = pathname.replace(/^\/ph/, '')
+    url.pathname = pathname.replace(/^\/yourpath/, '')
 
     const headers = new Headers(event.request.headers)
     headers.set('host', hostname)
@@ -95,8 +95,8 @@ import type { Handle } from '@sveltejs/kit'
 export const handle: Handle = async ({ event, resolve }) => {
   const { pathname } = event.url
 
-  if (pathname.startsWith('/ph')) {
-    const useAssetHost = pathname.startsWith('/ph/static/') || pathname.startsWith('/ph/array/')
+  if (pathname.startsWith('/yourpath')) {
+    const useAssetHost = pathname.startsWith('/yourpath/static/') || pathname.startsWith('/yourpath/array/')
     const hostname = useAssetHost
       ? 'eu-assets.i.posthog.com'
       : 'eu.i.posthog.com'
@@ -105,7 +105,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     url.protocol = 'https:'
     url.hostname = hostname
     url.port = '443'
-    url.pathname = pathname.replace(/^\/ph/, '')
+    url.pathname = pathname.replace(/^\/yourpath/, '')
 
     const headers = new Headers(event.request.headers)
     headers.set('host', hostname)
@@ -136,7 +136,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 Here's what the code does:
 
-- Intercepts requests starting with `/ph`
+- Intercepts requests starting with `/yourpath`
 - Routes `/static/*` and `/array/*` requests to PostHog's asset server and everything else to the main API
 - Sets the `host` header so PostHog can route the request correctly
 - Forwards the client's IP address for accurate geolocation
@@ -161,7 +161,7 @@ export function initPostHog() {
   if (!browser) return
 
   posthog.init(import.meta.env.VITE_POSTHOG_TOKEN, {
-    api_host: '/ph',
+    api_host: '/yourpath',
     ui_host: 'https://us.posthog.com',
     persistence: 'localStorage'
   })
@@ -177,7 +177,7 @@ export function initPostHog() {
   if (!browser) return
 
   posthog.init(import.meta.env.VITE_POSTHOG_TOKEN, {
-    api_host: '/ph',
+    api_host: '/yourpath',
     ui_host: 'https://eu.posthog.com',
     persistence: 'localStorage'
   })
@@ -220,7 +220,7 @@ Confirm events are flowing through your proxy:
 
 1. Open your browser's developer tools and go to the **Network** tab
 2. Navigate to your site or trigger an event
-3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/ph`)
+3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/yourpath`)
 4. Verify the response status is `200 OK`
 5. Check the [PostHog app](https://app.posthog.com) to confirm events appear in your activity feed
 

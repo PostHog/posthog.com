@@ -27,7 +27,7 @@ Next.js proxy runs on the edge before a request reaches your pages. When a reque
 Here's the request flow:
 
 1. User triggers an event in your app
-2. Request goes to your domain (e.g., `yourdomain.com/ph`)
+2. Request goes to your domain (e.g., `yourdomain.com/yourpath`)
 3. Next.js proxy intercepts the request before it reaches your pages
 4. Proxy rewrites the request URL to PostHog's servers
 5. PostHog processes the request and returns a response
@@ -63,7 +63,7 @@ import { NextResponse } from 'next/server'
 
 export function proxy(request) {
   const url = request.nextUrl.clone()
-  const hostname = url.pathname.startsWith('/ph/static/') || url.pathname.startsWith('/ph/array/')
+  const hostname = url.pathname.startsWith('/yourpath/static/') || url.pathname.startsWith('/yourpath/array/')
     ? 'us-assets.i.posthog.com'
     : 'us.i.posthog.com'
 
@@ -73,7 +73,7 @@ export function proxy(request) {
   url.protocol = 'https'
   url.hostname = hostname
   url.port = '443'
-  url.pathname = url.pathname.replace(/^\/ph/, '')
+  url.pathname = url.pathname.replace(/^\/yourpath/, '')
 
   return NextResponse.rewrite(url, {
     headers: requestHeaders,
@@ -81,7 +81,7 @@ export function proxy(request) {
 }
 
 export const config = {
-  matcher: '/ph/:path*',
+  matcher: '/yourpath/:path*',
 }
 ```
 
@@ -90,7 +90,7 @@ import { NextResponse } from 'next/server'
 
 export function proxy(request) {
   const url = request.nextUrl.clone()
-  const hostname = url.pathname.startsWith('/ph/static/') || url.pathname.startsWith('/ph/array/')
+  const hostname = url.pathname.startsWith('/yourpath/static/') || url.pathname.startsWith('/yourpath/array/')
     ? 'eu-assets.i.posthog.com'
     : 'eu.i.posthog.com'
 
@@ -100,7 +100,7 @@ export function proxy(request) {
   url.protocol = 'https'
   url.hostname = hostname
   url.port = '443'
-  url.pathname = url.pathname.replace(/^\/ph/, '')
+  url.pathname = url.pathname.replace(/^\/yourpath/, '')
 
   return NextResponse.rewrite(url, {
     headers: requestHeaders,
@@ -108,7 +108,7 @@ export function proxy(request) {
 }
 
 export const config = {
-  matcher: '/ph/:path*',
+  matcher: '/yourpath/:path*',
 }
 ```
 
@@ -124,7 +124,7 @@ import { NextResponse } from 'next/server'
 
 export function middleware(request) {
   const url = request.nextUrl.clone()
-  const hostname = url.pathname.startsWith('/ph/static/') || url.pathname.startsWith('/ph/array/')
+  const hostname = url.pathname.startsWith('/yourpath/static/') || url.pathname.startsWith('/yourpath/array/')
     ? 'us-assets.i.posthog.com'
     : 'us.i.posthog.com'
 
@@ -134,7 +134,7 @@ export function middleware(request) {
   url.protocol = 'https'
   url.hostname = hostname
   url.port = '443'
-  url.pathname = url.pathname.replace(/^\/ph/, '')
+  url.pathname = url.pathname.replace(/^\/yourpath/, '')
 
   return NextResponse.rewrite(url, {
     headers: requestHeaders,
@@ -142,7 +142,7 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: '/ph/:path*',
+  matcher: '/yourpath/:path*',
 }
 ```
 
@@ -151,7 +151,7 @@ import { NextResponse } from 'next/server'
 
 export function middleware(request) {
   const url = request.nextUrl.clone()
-  const hostname = url.pathname.startsWith('/ph/static/') || url.pathname.startsWith('/ph/array/')
+  const hostname = url.pathname.startsWith('/yourpath/static/') || url.pathname.startsWith('/yourpath/array/')
     ? 'eu-assets.i.posthog.com'
     : 'eu.i.posthog.com'
 
@@ -161,7 +161,7 @@ export function middleware(request) {
   url.protocol = 'https'
   url.hostname = hostname
   url.port = '443'
-  url.pathname = url.pathname.replace(/^\/ph/, '')
+  url.pathname = url.pathname.replace(/^\/yourpath/, '')
 
   return NextResponse.rewrite(url, {
     headers: requestHeaders,
@@ -169,7 +169,7 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: '/ph/:path*',
+  matcher: '/yourpath/:path*',
 }
 ```
 
@@ -181,10 +181,10 @@ The only differences are the filename (`middleware.js`) and the exported functio
 
 The proxy does the following:
 
-- The `matcher` config tells Next.js to only run this proxy for requests starting with `/ph`
+- The `matcher` config tells Next.js to only run this proxy for requests starting with `/yourpath`
 - It determines which PostHog host to use: the assets host for `/static/*` and `/array/*` requests (so that cache headers are preserved), the main host for everything else
 - It sets the `host` header so PostHog knows how to route the request. Without this, you'll get 401 errors.
-- It rewrites the URL to PostHog's domain and strips the `/ph` prefix
+- It rewrites the URL to PostHog's domain and strips the `/yourpath` prefix
 
 See [Next.js proxy documentation](https://nextjs.org/docs/app/api-reference/file-conventions/proxy) for more details.
 
@@ -215,14 +215,14 @@ In your application code, update your PostHog initialization to use your proxy p
 
 ```js file=US
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
-  api_host: '/ph',
+  api_host: '/yourpath',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
-  api_host: '/ph',
+  api_host: '/yourpath',
   ui_host: 'https://eu.posthog.com'
 })
 ```
@@ -247,7 +247,7 @@ Confirm events are flowing through your proxy:
 
 1. Open your browser's developer tools and go to the **Network** tab
 2. Navigate to your site or trigger an event
-3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/ph`)
+3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/yourpath`)
 4. Verify the response status is `200 OK`
 5. Check the [PostHog app](https://app.posthog.com) to confirm events appear in your activity feed
 
@@ -276,9 +276,9 @@ If you're using Clerk or similar auth solutions, handle PostHog routes before au
 ```js file=US
 export default authMiddleware({
   beforeAuth(req) {
-    if (req.nextUrl.pathname.startsWith('/ph')) {
+    if (req.nextUrl.pathname.startsWith('/yourpath')) {
       const url = req.nextUrl.clone()
-      const hostname = url.pathname.startsWith('/ph/static/') || url.pathname.startsWith('/ph/array/')
+      const hostname = url.pathname.startsWith('/yourpath/static/') || url.pathname.startsWith('/yourpath/array/')
         ? 'us-assets.i.posthog.com'
         : 'us.i.posthog.com'
 
@@ -288,23 +288,23 @@ export default authMiddleware({
       url.protocol = 'https'
       url.hostname = hostname
       url.port = '443'
-      url.pathname = url.pathname.replace(/^\/ph/, '')
+      url.pathname = url.pathname.replace(/^\/yourpath/, '')
 
       return NextResponse.rewrite(url, {
         headers: requestHeaders,
       })
     }
   },
-  ignoredRoutes: ['/ph(.*)'],
+  ignoredRoutes: ['/yourpath(.*)'],
 })
 ```
 
 ```js file=EU
 export default authMiddleware({
   beforeAuth(req) {
-    if (req.nextUrl.pathname.startsWith('/ph')) {
+    if (req.nextUrl.pathname.startsWith('/yourpath')) {
       const url = req.nextUrl.clone()
-      const hostname = url.pathname.startsWith('/ph/static/') || url.pathname.startsWith('/ph/array/')
+      const hostname = url.pathname.startsWith('/yourpath/static/') || url.pathname.startsWith('/yourpath/array/')
         ? 'eu-assets.i.posthog.com'
         : 'eu.i.posthog.com'
 
@@ -314,14 +314,14 @@ export default authMiddleware({
       url.protocol = 'https'
       url.hostname = hostname
       url.port = '443'
-      url.pathname = url.pathname.replace(/^\/ph/, '')
+      url.pathname = url.pathname.replace(/^\/yourpath/, '')
 
       return NextResponse.rewrite(url, {
         headers: requestHeaders,
       })
     }
   },
-  ignoredRoutes: ['/ph(.*)'],
+  ignoredRoutes: ['/yourpath(.*)'],
 })
 ```
 
@@ -341,7 +341,7 @@ Alternatively, configure PostHog to use `localStorage` instead of cookies:
 
 ```js
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
-  api_host: '/ph',
+  api_host: '/yourpath',
   persistence: 'localStorage'
 })
 ```
