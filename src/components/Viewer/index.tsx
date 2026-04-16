@@ -15,7 +15,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Popover } from 'components/RadixUI/Popover'
 import Slider from 'components/RadixUI/Slider'
-import DebugContainerQuery from 'components/DebugContainerQuery'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface ViewerProps {
     slug?: string
@@ -321,48 +321,49 @@ export function Viewer({
                             onSearch={onSearchChange}
                         />
 
-                        {hasTabs ? (
-                            <div data-scheme="primary" className="bg-accent h-full">
-                                <article
-                                    data-scheme="primary"
-                                    className={`${getProseClasses(proseSize)} h-full mx-auto transition-all ${
-                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-4xl'
-                                    }`}
-                                >
-                                    {title && (
-                                        <h1 className="text-2xl font-bold">
-                                            {title}
-                                            {type && <span className="opacity-40">.{type}</span>}
-                                        </h1>
-                                    )}
-                                    <div className="relative h-full" ref={searchContentRef}>
-                                        {children}
-                                    </div>
-                                </article>
-                            </div>
-                        ) : (
-                            <ScrollWrapper scrollable={scrollable}>
-                                <article
-                                    ref={articleRef ?? undefined}
-                                    className={`${getProseClasses(
-                                        proseSize
-                                    )} py-4 px-4 @xl:p-8 mx-auto transition-all ${
-                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-4xl'
-                                    }`}
-                                >
-                                    <DebugContainerQuery />
-                                    {title && (
-                                        <h1 className="text-2xl font-bold">
-                                            {title}
-                                            {type && <span className="opacity-40">.{type}</span>}
-                                        </h1>
-                                    )}
-                                    <div className="relative">
-                                        <div ref={searchContentRef}>{children}</div>
-                                    </div>
-                                </article>
-                            </ScrollWrapper>
-                        )}
+                        <div className="flex-1 min-h-0 [mask-image:linear-gradient(to_bottom,transparent_0,black_3rem)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_3rem)]">
+                            {hasTabs ? (
+                                <div data-scheme="primary" className="bg-accent h-full">
+                                    <article
+                                        data-scheme="primary"
+                                        className={`${getProseClasses(proseSize)} h-full mx-auto transition-all ${
+                                            fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-5xl'
+                                        }`}
+                                    >
+                                        {title && (
+                                            <h1 className="text-2xl font-bold">
+                                                {title}
+                                                {type && <span className="opacity-40">.{type}</span>}
+                                            </h1>
+                                        )}
+                                        <div className="relative h-full" ref={searchContentRef}>
+                                            {children}
+                                        </div>
+                                    </article>
+                                </div>
+                            ) : (
+                                <ScrollWrapper scrollable={scrollable}>
+                                    <article
+                                        ref={articleRef ?? undefined}
+                                        className={`${getProseClasses(
+                                            proseSize
+                                        )} py-4 px-4 @xl:p-8 @2xl:px-12 @3xl:px-16 mx-auto transition-all ${
+                                            fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-5xl'
+                                        }`}
+                                    >
+                                        {title && (
+                                            <h1 className="text-2xl font-bold">
+                                                {title}
+                                                {type && <span className="opacity-40">.{type}</span>}
+                                            </h1>
+                                        )}
+                                        <div className="relative">
+                                            <div ref={searchContentRef}>{children}</div>
+                                        </div>
+                                    </article>
+                                </ScrollWrapper>
+                            )}
+                        </div>
                     </main>
                 </div>
             </div>
