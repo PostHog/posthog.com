@@ -1849,6 +1849,7 @@
         },
         { "source": "/professional-services", "destination": "/services" },
         { "source": "/posthug", "destination": "/" },
-        { "source": "/mcp", "destination": "/docs/model-context-protocol" }
+        { "source": "/mcp", "destination": "/docs/model-context-protocol" },
+        { "source": "/login", "destination": "https://app.posthog.com/login" }
     ]
 }
