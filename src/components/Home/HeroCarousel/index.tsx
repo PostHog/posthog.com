@@ -3,6 +3,7 @@ import { Tabs } from 'radix-ui'
 import { IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import { OnePlaceSlide, UnderstandUsageSlide, DebugFixSlide, TestRolloutSlide } from './slides'
 import Tooltip from 'components/RadixUI/Tooltip'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const SLIDE_DURATION = 5000
 
@@ -70,21 +71,27 @@ export default function HeroCarousel() {
     return (
         <div className="@container" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
             <Tabs.Root value={activeTab} onValueChange={handleTabChange} className="flex flex-col">
-                <Tabs.List className="flex items-center gap-0">
-                    <div className="flex flex-wrap @sm:flex-nowrap flex-1 min-w-0">
+                <Tabs.List className="flex items-center gap-0 relative z-10">
+                    <div className="flex flex-wrap @sm:flex-nowrap flex-1 min-w-0 gap-1">
                         {tabs.map((tab) => {
                             const isActive = activeTab === tab.value
                             return (
                                 <Tabs.Trigger
                                     key={tab.value}
                                     value={tab.value}
-                                    className={`relative flex-1 min-w-[200px] @sm:min-w-0 px-3 py-2.5 text-sm font-semibold cursor-pointer select-none @sm:transition-colors text-balance rounded-t-md ${
+                                    className={`relative flex-1 min-w-[200px] @sm:min-w-0 px-3 py-1.5 @3xl:py-2.5 text-sm font-semibold cursor-pointer select-none  text-balance rounded-t-md border border-b-0 ${
                                         isActive
-                                            ? `${tab.color} ${tab.activeText} order-last @sm:order-none`
-                                            : 'text-secondary'
+                                            ? `${tab.color} ${tab.activeText} order-last @sm:order-none border-black/10 dark:border-white/60 @sm:transition-colors`
+                                            : 'text-secondary @lg:hover:text-primary @lg:hover:bg-white/30 @lg:hover:backdrop-blur border-transparent @lg:hover:border-black/10 dark:@lg:hover:border-white/60 z-20 @lg:hover:-top-px'
                                     }`}
                                 >
-                                    {tab.label}
+                                    {isActive && (
+                                        <div
+                                            aria-hidden
+                                            className={`hidden @sm:block pointer-events-none absolute -inset-x-4 -top-2 bottom-0 ${tab.color} blur-3xl opacity-40 -z-10 rounded-t-md`}
+                                        />
+                                    )}
+                                    <span className="relative">{tab.label}</span>
                                     <div className="absolute bottom-0 left-2 right-2 h-[3px] overflow-hidden">
                                         {isActive && (
                                             <div
@@ -105,12 +112,16 @@ export default function HeroCarousel() {
                 </Tabs.List>
 
                 <div
-                    className={`min-h-[300px] @[820px]:min-h-[400px] p-2 @sm:rounded-b-md @sm:rounded-t-md ${
+                    className={`min-h-[300px] @[820px]:min-h-[400px] p-2 @sm:rounded-b-md @sm:rounded-t-md border border-black/10 dark:border-white/60 -mt-px ${
                         isFirst ? '@sm:rounded-tl-none' : ''
                     } ${isLast ? '@sm:rounded-tr-none' : ''} relative ${activeColor} flex @sm:transition-colors`}
                 >
-                    <div className="flex flex-col bg-light dark:bg-dark flex-1 w-full shadow-2xl rounded">
-                        <span className="absolute top-4 right-4 z-10">
+                    <div
+                        aria-hidden
+                        className={`hidden @sm:block pointer-events-none absolute inset-0 ${activeColor} blur-3xl opacity-20 -z-10 rounded-md @sm:transition-colors duration-500`}
+                    />
+                    <div className="flex flex-col bg-light dark:bg-dark flex-1 w-full shadow-2xl rounded relative">
+                        <span className="absolute top-2 right-2 z-10">
                             <Tooltip
                                 trigger={
                                     <button

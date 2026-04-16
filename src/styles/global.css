@@ -173,7 +173,7 @@
     h4,
     h5,
     h6 {
-        @apply font-bold font-matter;
+        @apply font-bold;
     }
 
     .prose-sm {
@@ -479,7 +479,7 @@
 }
 
 body {
-    @apply font-sans overflow-x-hidden m-0;
+    @apply font-rounded overflow-x-hidden m-0;
     word-wrap: break-word;
 }
 body.light {
