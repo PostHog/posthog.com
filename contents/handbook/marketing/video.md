@@ -39,7 +39,7 @@ Videos exist on a spectrum from 100% entertaining to 100% informative. Some are 
 Going from most informative to most entertaining:
 
 - **Core brand assets:** Demo videos and short feature trailers that showcase cool things you can do in PostHog.
-- **Launch videos:** We've made [some already](https://www.youtube.com/watch?v=e_SICQg2Wak), but we're still developing how we do these. The goal is to have a creative format that's repeatable and can be shot at (reasonably) short notice.
+- **Launch videos:** The goal is to have a creative format that's repeatable and can be shot at (reasonably) short notice.
   - These can also easily be repurposed as ads
 - **The Changelog:** Our goal is to produce a great changelog update every four weeks like [this one](https://www.youtube.com/shorts/XdHozF7JLT0).
   - Also great as ads
