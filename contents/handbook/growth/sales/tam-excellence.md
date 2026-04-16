@@ -52,3 +52,6 @@ An excellent TAM:
 
 - Is a relentless advocate for the customer's interests
     - We are closest to our customers and need to be their voice. Engineers want to hear from us about how our customers are feeling
+
+- Continues to grow their expertise in PostHog and is always getting a deeper understanding of the products and platform
+    - PostHog is constantly changing and growing, so continued growth to keep up with it is essential to being a good TAM. We should never shy away from selling a new product due to lack of knowledge
