@@ -195,6 +195,7 @@ module.exports = {
                 'button-secondary-shadow-dark': '#925D05',
 
                 border: 'rgb(var(--border) / <alpha-value>)',
+                primary: 'rgb(var(--bg) / <alpha-value>)',
 
                 light: '#fff',
                 'accent-light': '#e5e7e0',
