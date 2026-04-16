@@ -92,6 +92,7 @@ export const fullstory = {
                 free_tier: true, // https://www.fullstory.com/FullstoryFree
             },
             features: {
+                ai_summaries: 'Add-on',
                 canvas_recording: true,
                 chat_with_recordings: false,
                 // https://help.fullstory.com/hc/en-us/articles/360020623854-Is-it-possible-to-rate-limit-or-sample-with-Fullstory
@@ -142,12 +143,6 @@ export const fullstory = {
                     rage_taps: true,
                 },
             },
-            // https://www.fullstory.com/plans/
-            ai: {
-                features: {
-                    ai_summaries: 'Add-on',
-                },
-            },
         },
         feature_flags: {
             available: false,
@@ -169,6 +164,16 @@ export const fullstory = {
             targeting: {
                 features: {
                     custom_targeting: false,
+                },
+            },
+            implementation: {
+                features: {
+                    multivariate_testing: false,
+                },
+            },
+            supported_tests: {
+                features: {
+                    multi_armed_bandit: false,
                 },
             },
         },

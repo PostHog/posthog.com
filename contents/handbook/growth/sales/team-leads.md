@@ -38,6 +38,17 @@ Customer Success Managers (CSMs) own a book of business of around 30 customers w
 - Take the lead in driving churn risk team calls, ensuring that we stick to planning and next steps rather than storytelling.
 - Ensure that CSMs are on top of any credit renewals well before they expire.
 
+### Onboarding
+
+The Onboarding team operates at scale, supporting hundreds of customers whose MRR falls below the TAM/CSM threshold. As a result, the number of customers in the program, as well as the ARR represented, can fluctuate from month to month. The team is currently focused on customers whose first bill is forecasted at $500+ MRR. Its north star metric is maintaining 90% logo retention through customers’ first three months.
+
+- Make sure the Onboarding Specialists prioritize work effectively, engage with customers ahead of renewal, and prevent accounts from falling through the cracks.
+- Ensure the Onboarding Specialists adapt to customer needs, continue providing value, and maintain a high-quality bar.
+- Lead the team’s continuous improvement efforts across internal processes and the overall onboarding program.
+- Ensure high-spend accounts are properly qualified for Sales handoff and that the handoff process runs smoothly.
+- Monitor team coverage and customer volume to identify and flag hiring needs proactively.
+
+
 ## Other things we collectively need to stay on top of
 
 ### Tracking new products

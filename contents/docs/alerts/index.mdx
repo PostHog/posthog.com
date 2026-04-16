@@ -8,16 +8,17 @@ availability:
   enterprise: full
 ---
 
-Alerts enable you to monitor your [insights](/product-analytics) and get notified when the value of the insight breaches a threshold that you've set (for example, the number of unique visitors to your site increased by 5% week over week).
+Alerts enable you to monitor your [insights](/product-analytics) and get notified when something important changes. You can set fixed thresholds (e.g., notify me when unique visitors exceed 5,000) or use [anomaly detection](#anomaly-detection) to automatically flag unusual patterns in your data.
+
 Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
 
 ## How to create an alert
 
 <ProductVideo
-    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/alerts_light_3687dafb8a.mp4"
-    videoDark="https://res.cloudinary.com/dmukukwp6/video/upload/alerts_video_3685c5b1e1.mp4"
-    alt="How to create an alert video"
-    classes="rounded"
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/alerts_light_3687dafb8a.mp4"
+  videoDark="https://res.cloudinary.com/dmukukwp6/video/upload/alerts_video_3685c5b1e1.mp4"
+  alt="How to create an alert video"
+  classes="rounded"
 />
 
 1. Alerts are based off of [insights](/docs/product-analytics/insights). You can pick any existing trend insight or create a new one.
@@ -31,75 +32,77 @@ Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
 />
 
 3. Click the **New alert** button.
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_button_30d3dde83c.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_dark_19591ee179.png"
-    alt="new alert button"
-    classes="rounded"
-/>
+
+   <ProductScreenshot
+     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_button_30d3dde83c.png"
+     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_dark_19591ee179.png"
+     alt="new alert button"
+     classes="rounded"
+   />
 
 4. Set a name for the alert.
 
 5. Select a 'series' you want to alert on. These are the different events/values you're plotting in the insight.
-    For example, an insight might have multiple series like `A - $pageview` (total count of page views for a URL) and `B - signed_up` (count of users who signed up on the page).
-    You can select either `A` or `B`, which will determine if the alert gets checked against the value for `A` (total page views) or `B` (signups).
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/series_picker_aa01668862.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_options_dark_7adf700d24.png"
-    alt="series picker" 
-    classes="rounded"
-/>
+   For example, an insight might have multiple series like `A - $pageview` (total count of page views for a URL) and `B - signed_up` (count of users who signed up on the page).
+   You can select either `A` or `B`, which will determine if the alert gets checked against the value for `A` (total page views) or `B` (signups).
 
+   <ProductScreenshot
+     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/series_picker_aa01668862.png"
+     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_options_dark_7adf700d24.png"
+     alt="series picker"
+     classes="rounded"
+   />
 
 6. Select the alert type:
-    - **has value** - checks the series against a specific value.
-    - **increases by**/**decreases by** - checks if the series has changed by a certain amount.
+   - **has value** - checks the series against a specific value.
+   - **increases by**/**decreases by** - checks if the series has changed by a certain amount.
 
-    <ProductScreenshot
-        imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alert_type_picker_18909b0b33.png"
-        imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_type_dark_b3620b34da.png"
-        alt="alert type picker"
-        classes="rounded"
-    />
+   <ProductScreenshot
+     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alert_type_picker_18909b0b33.png"
+     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_type_dark_b3620b34da.png"
+     alt="alert type picker"
+     classes="rounded"
+   />
 
 7. Set the threshold. This is the value you want to compare the series value against. For example, you can set a value of 5000 in the "more than" field to check when pageviews have exceeded 5k.
 
 8. (Optional) For relative alerts (**increases by**/**decreases by**), you can set a percentage threshold. It compares the percentage change in the series value to the thresholds you've set.
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/percentage_threshold_1940ead9e6.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_relative_threshold_dark_02aa4741c3.png"
-    alt="percentage threshold" 
-    classes="rounded"
-/>
+
+   <ProductScreenshot
+     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/percentage_threshold_1940ead9e6.png"
+     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_relative_threshold_dark_02aa4741c3.png"
+     alt="percentage threshold"
+     classes="rounded"
+   />
 
 9. Select how often you want the alert to be checked (e.g. every hour, every day, every week, every month)
 
 10. Pick who should be notified when the alert is triggered. You can add email recipients, Slack channels, or webhook URLs directly in the alert form.
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_people_dark_0ccd7611bd.png"
-    alt="filled alert" 
-    classes="rounded"
-/>
 
-11. Click **Create alert**, and you're done! 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/insight_alerts_5k_daef47ade1.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/created_alert_dark_1710da74dc.png"
-    alt="insight alerts" 
-    classes="rounded"
-/>
+    <ProductScreenshot
+      imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png"
+      imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_people_dark_0ccd7611bd.png"
+      alt="filled alert"
+      classes="rounded"
+    />
+
+11. Click **Create alert**, and you're done!
+    <ProductScreenshot
+      imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/insight_alerts_5k_daef47ade1.png"
+      imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/created_alert_dark_1710da74dc.png"
+      alt="insight alerts"
+      classes="rounded"
+    />
 
 You can now view all the alerts set on the insight.
 To view all the alerts set, click [Product analytics](https://app.posthog.com/insights) in the sidebar and then click the **Alerts** tab.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/all_alerts_d92386e45a.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/all_alerts_dark_80be487707.png"
-    alt="all alerts" 
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/all_alerts_d92386e45a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/all_alerts_dark_80be487707.png"
+  alt="all alerts"
+  classes="rounded"
 />
-
 
 ## Create alerts with PostHog AI
 
@@ -133,23 +136,136 @@ The [PostHog MCP server](/docs/model-context-protocol) provides tools to list, c
 - "Delete the old conversion alert"
 
 ## Relative alerts
+
 Relative alerts check for change in the value of an insight.
 For example, if a value increases by 5% in a week.
 To create a relative alert, you just need to change the **has value** option to **increases by** or **decreases by**.
 This will then also enable you to set a percentage threshold.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/relative_alert_picker_fa04215397.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_relative_increase_dark_0855f0afee.png"
-    alt="relative alert picker" 
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/relative_alert_picker_fa04215397.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_relative_increase_dark_0855f0afee.png"
+  alt="relative alert picker"
+  classes="rounded"
 />
 
-
 ### Thresholds
+
 We support both **absolute value** thresholds (insight value more than or less than a certain number) or **percentage** thresholds (insight value changed by a certain percentage).
 Percentage thresholds are only available for relative alerts (as you need to compare two values to figure out percentage change).
 
+## Anomaly detection
+
+<CalloutBox icon="IconFlask" title="Feature preview" type="info">
+
+Anomaly detection alerts are in **beta**. To enable them, go to [Settings > Feature previews](https://us.posthog.com/settings/user-feature-previews) and toggle on **Anomaly Detection Alerts**.
+
+</CalloutBox>
+
+Instead of setting a fixed threshold, anomaly detection uses statistical algorithms to automatically learn what "normal" looks like for your data and alert you when something unusual happens. This is useful when:
+
+- You don't know what threshold to set (e.g., your traffic varies by time of day)
+- You want to detect subtle changes that a fixed threshold would miss
+- Your metrics have seasonal patterns that make static thresholds unreliable
+
+### Creating an anomaly detection alert
+
+1. Open an existing [trend insight](/docs/product-analytics/trends) or create a new one.
+2. Click **Actions** in the sidebar and select **Alerts**, then click **New alert**.
+3. Under alert type, select **Anomaly detection** instead of a threshold condition.
+4. Choose a **detector** (see [available detectors](#available-detectors) below).
+5. Configure the **sensitivity** and **window size** for your detector.
+6. Use the **Simulate** section to preview how the detector performs on historical data before saving.
+7. Set your notification preferences and click **Create alert**.
+
+### Available detectors
+
+PostHog includes 13 anomaly detection algorithms. For most use cases, **Z-score** or **MAD** are good starting points.
+
+#### Statistical detectors
+
+| Detector | Best for | How it works |
+|----------|----------|--------------|
+| **Z-score** | General purpose | Flags points that are many standard deviations from the rolling mean. Uses first-order differencing by default to handle cyclical data. |
+| **MAD** (Median Absolute Deviation) | Data with outliers | Similar to Z-score but uses median instead of mean, making it more robust to existing outliers. Uses first-order differencing by default. |
+| **IQR** (Interquartile Range) | Skewed distributions | Flags values outside the interquartile range. Less sensitive to distribution shape than Z-score. |
+
+#### Machine learning detectors
+
+These use the [PyOD](https://pyod.readthedocs.io/) library and work well for more complex patterns:
+
+| Detector | Best for | How it works |
+|----------|----------|--------------|
+| **Isolation Forest** | General purpose, high-dimensional | Isolates anomalies by randomly partitioning data. Anomalies require fewer partitions to isolate. |
+| **KNN** (K-Nearest Neighbors) | Cluster-based patterns | Flags points that are far from their nearest neighbors. |
+| **LOF** (Local Outlier Factor) | Variable-density data | Compares a point's local density to its neighbors. Good when "normal" varies across different ranges. |
+| **ECOD** | Fast, no tuning needed | Uses empirical cumulative distribution functions. One of the fastest detectors with no hyperparameters beyond threshold and window. |
+| **COPOD** | Multivariate data | Uses copula-based outlier detection. Fast and parameter-light. |
+| **HBOS** (Histogram-Based Outlier Score) | Fast, large datasets | Builds histograms to estimate density. Very fast but assumes feature independence. |
+| **PCA** (Principal Component Analysis) | Correlated metrics | Projects data into lower dimensions and flags points with high reconstruction error. |
+| **OCSVM** (One-Class SVM) | Complex boundaries | Learns a boundary around normal data. Good when normal data forms an irregular shape. |
+
+#### Ensemble detector
+
+The **Ensemble** detector combines two or more of the above detectors with AND/OR logic:
+
+- **AND**: Only fires when *all* sub-detectors agree a point is anomalous. Reduces false positives.
+- **OR**: Fires when *any* sub-detector flags an anomaly. Catches more anomalies but may be noisier.
+
+### Configuration
+
+All detectors share these core parameters:
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| **Sensitivity** (threshold) | Anomaly probability cutoff between 0 and 1. Higher values mean fewer alerts. | 0.9 |
+| **Window** | Number of historical data points used for training. | Depends on interval (see below) |
+
+Default window sizes based on your alert's check interval:
+
+| Interval | Default window | What it covers |
+|----------|---------------|----------------|
+| Hourly | 168 | 7 days |
+| Daily | 90 | ~3 months |
+| Weekly | 26 | ~6 months |
+| Monthly | 12 | 1 year |
+
+#### Preprocessing
+
+Some detectors support preprocessing options:
+
+- **Differencing** (`diffs_n`): Transforms absolute values into changes between consecutive points. Enabled by default for Z-score and MAD detectors. This prevents normal daily/weekly cycles from being flagged as anomalies.
+- **Lagging** (`lags_n`): Adds lagged values as additional features, giving the detector more temporal context. Useful for ML-based detectors like Isolation Forest or KNN.
+
+### Simulating a detector
+
+Before creating an alert, you can simulate how a detector would perform on your insight's historical data. The simulation section appears below the detector configuration in the alert form.
+
+The simulation shows:
+
+- A chart with your data values and anomaly scores
+- Red dots on points the detector would flag
+- Statistics: total points analyzed, anomalies found, and anomaly rate
+
+For ensemble detectors, the chart shows individual score lines for each sub-detector so you can see how they interact.
+
+Use the date range dropdown to test the detector over different time periods (e.g., last 24 hours, last 7 days, last 30 days).
+
+### Create anomaly detection alerts with PostHog AI
+
+You can create anomaly detection alerts using [PostHog AI](/docs/posthog-ai/overview) or the [MCP server](/docs/model-context-protocol). Example prompts:
+
+- "Create an anomaly detection alert on my pageviews insight using Z-score"
+- "Set up an ensemble alert using Z-score AND Isolation Forest on daily signups"
+- "Simulate a MAD detector on my revenue insight for the last 30 days"
+
+### Tips
+
+- **Start with Z-score or MAD** — they work well for most time series data and are easy to understand.
+- **Use the simulator** — always simulate before saving to see how the detector performs on your data.
+- **Set sensitivity to 0.95 for noisy metrics** — the default of 0.9 may produce too many alerts for high-variance data.
+- **Use ensemble AND to reduce false positives** — combining two detectors with AND logic means both must agree, which cuts down on noise.
+- **Differencing matters** — if your data has regular cycles (e.g., more traffic on weekdays), make sure differencing is enabled. Z-score and MAD enable it by default.
 
 ## Notifications
 
@@ -175,26 +291,26 @@ When creating or editing an alert, you can add notification destinations inline:
 You can add multiple notification destinations to a single alert. Each destination appears in the list with its status.
 
 ## Advanced options
-You can configure alerts to skip checking on weekends. 
+
+You can configure alerts to skip checking on weekends.
 This is useful for daily alerts which would normally trigger on weekends.
 
 ### Check ongoing period
-Alerts also enable you to check the current/ongoing period. 
-When enabled, this checks the insight value for the ongoing period (current week/month) that hasn't yet completed. 
+
+Alerts also enable you to check the current/ongoing period.
+When enabled, this checks the insight value for the ongoing period (current week/month) that hasn't yet completed.
 Use this if you want to be alerted right away when the insight value rises/increases above threshold
 
-
 ## Alerts on breakdowns
+
 When you set an alert on a trend with a breakdown, the alert will be triggered when any of the breakdown values breaches the thresholds set.
 
-
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/breakdown_alert_7bd87114cb.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_with_breakdown_dark_475c3803c3.png"
-    alt="alert on breakdown" 
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/breakdown_alert_7bd87114cb.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_with_breakdown_dark_475c3803c3.png"
+  alt="alert on breakdown"
+  classes="rounded"
 />
-
 
 ## Automatically disabled alerts
 
@@ -206,6 +322,7 @@ Common reasons an alert may be auto-disabled:
 - The series referenced by the alert was removed from the insight
 - A relative alert condition (**increases by**/**decreases by**) was set on a non-time-series trend (e.g., a pie chart or number)
 - An absolute value alert was configured with a percentage threshold
+- The alert has a missing or invalid check frequency (calculation interval)
 
 <CalloutBox icon="IconWarning" title="Re-enable manually" type="caution">
 
@@ -214,4 +331,5 @@ Disabled alerts don't re-enable themselves. After fixing the configuration issue
 </CalloutBox>
 
 ## Further reading
+
 For more ideas on how to get started with Alerts, check out our [alerts examples](/blog/alerts-examples).

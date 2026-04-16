@@ -74,18 +74,20 @@ Detailed training plan available in the [new hire onboarding checklist](https://
 **By the end of month 1:**
  - You continue learning from the received feedback.
  - You have a good grasp of our internal processes and workflows.
+ - You're the driver, you take initiative, prioritize your time well, and work independently.
  - You lead customer calls on your own.
- - You convert customers to 'Onboarded'.
+ - You should consistently craft a minimum of 10 outreach messages per day, without compromising on quality, style, or accuracy.
+ - You don't let accounts fall through the cracks before their renewal.
  - You pass well-qualified opportunities to Sales via the `Onboarding referral` segment.
 
 **By the end of month 2:**
  - You're a PostHog power user - most questions you raise can only be answered by product engineers rather than the support team.
+ - You should show steady growth in both call volume and outreach activity, with a minimum of 15 outreach emails sent per day.
  - You fully participate in team discussions and contribute to team projects.
 
 **By the end of month 3:**
  - You've implemented process and system-level changes to make your job better/more effective.
- - You're the driver, you take initiative, prioritize your time well, and work independently.
- - The quality of your outreach is up to the company's standard. 
+ - You raise the bar and surface ideas contributing to the growth of the team.
  - Customers are happy after interacting with you, and you meaningfully contribute to their success.
 
 ### General expectations

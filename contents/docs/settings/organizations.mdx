@@ -3,16 +3,16 @@ title: Organizations
 sidebar: Docs
 showTitle: true
 availability:
-    free: partial
-    selfServe: partial
-    enterprise: full
+  free: partial
+  selfServe: partial
+  enterprise: full
 
-    features:
-        multipleOrgs:
-            openSource: false
-            free: true
-            selfServe: true
-            enterprise: true
+  features:
+    multipleOrgs:
+      openSource: false
+      free: true
+      selfServe: true
+      enterprise: true
 ---
 
 > Multiple organizations and projects aren't available on open source hobby deployments.
@@ -41,7 +41,9 @@ Newly-joined users get the basic Member access level.
 
 ### Deleting an organization
 
-Organization can be deleted by any organization Owner. This action is irreversible. See the Danger Zone in your settings for more information.
+An organization can be deleted by any organization Owner. This action is irreversible. See the Danger Zone in your [organization settings](https://app.posthog.com/settings/organization) for more information.
+
+Deletion is processed asynchronously in the background. While it completes, all organization members are redirected to a blocking screen – this typically takes a couple of minutes. From this screen, you can switch to another organization (if you belong to one) or contact support.
 
 ### IP data capture default
 
@@ -61,4 +63,3 @@ Individual projects can override this organization default by configuring their 
 By default every time a member joins an organization in an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud), all existing members of the organization get notified about this with an email. This increases security by making it explicit who gains access to your product data.
 
 If you'd rather not get such notifications, you can disable them in the "Notification Preferences" section of organization settings.
-

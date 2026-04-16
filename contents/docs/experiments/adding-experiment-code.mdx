@@ -150,6 +150,15 @@ if feature_flag.enabled == "variant-name" do
 end
 ```
 
+```java
+Object flagValue = posthog.getFeatureFlag("user_distinct_id", "experiment-feature-flag-key", "control");
+String variant = flagValue instanceof String ? (String) flagValue : "control";
+
+if ("variant-name".equals(variant)) {
+    // Do something
+}
+```
+
 ```dotnet
 var featureFlag = await posthog.GetFeatureFlagAsync("experiment-feature-flag-key", "user_distinct_id");
 
@@ -160,4 +169,4 @@ if (featureFlag is { VariantKey: "variant-name" })
 ```
 </MultiLanguage>
 
-> Since feature flags are not supported yet in our Java SDK, to run an experiment using this SDK see our docs on [how to run experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags). This also applies to running experiments using our API.
+> To run an experiment using our API (without any SDK), see our docs on [how to run experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags).
