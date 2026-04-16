@@ -95,7 +95,7 @@ Common use cases:
 
 ## Outlier handling
 
-You can limit the impact of extreme values by capping metric data at specified percentile thresholds using configurable lower and upper bounds. Metric data beyond those thresholds aren't included in experiment calculations.
+You can limit the impact of extreme values by clamping metric data at specified percentile thresholds using configurable lower and upper bounds. Values below the lower bound are replaced with the lower bound value, and values above the upper bound are replaced with the upper bound value. No data is excluded — all users remain in the calculation.
 
 This technique is commonly known as **Winsorization** and is especially useful for metrics with highly skewed distributions, such as revenue or total event counts, where a small subset of users can produce unusually high values that distort overall results.
 
