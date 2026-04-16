@@ -31,7 +31,7 @@ To create an App API key in Customer.io, go to **[Settings > Account Settings > 
 
 Click **Create New App API Key** and give it a descriptive name (e.g. "PostHog Import").
 
-**Important**: Save this API key securely, Customer.io will only show it once.
+**Important**: Save this API key securely – Customer.io only shows it once.
 
 Go back to PostHog, paste the key into the first step, and click **Start import**. This will import:
 - All available categories from Customer.io
@@ -100,7 +100,7 @@ To keep opt-outs in sync, set up a [Reporting Webhook](https://docs.customer.io/
 
 Go to Customer.io and navigate to **Integrations > Add integration > Reporting webhook**. Paste the webhook URL from PostHog.
 
-Next, copy the webhook signing secret. It is used to verify that incoming webhooks are from your Customer.io account, unsigned webhooks are rejected.
+Next, copy the webhook signing secret. It is used to verify that incoming webhooks are from your Customer.io account – unsigned webhooks are rejected.
 
 Back in PostHog, paste the signing secret and click **Enable sync**.
 
@@ -133,7 +133,7 @@ Only categories originally imported from Customer.io are synced back.
 To get your Customer.io Track API credentials, go to **Settings > API and webhook credentials > Track API Keys** and copy the **Site ID** and **Track API key**.
 
 Back in PostHog:
-1. Select your Customer.io **region** (US or EU) - this determines which Track API endpoint PostHog uses
+1. Select your Customer.io **region** (US or EU) – this determines which Track API endpoint PostHog uses
 2. Enter your **Site ID**
 3. Enter your **Track API key**
 4. Click **Enable sync**
