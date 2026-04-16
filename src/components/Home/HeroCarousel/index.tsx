@@ -69,7 +69,7 @@ export default function HeroCarousel() {
     const isLast = activeIndex === tabs.length - 1
 
     return (
-        <div className="@container" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+        <div onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
             <Tabs.Root value={activeTab} onValueChange={handleTabChange} className="flex flex-col">
                 <Tabs.List className="flex items-center gap-0 relative z-10">
                     <div className="flex flex-wrap @sm:flex-nowrap flex-1 min-w-0 gap-1">

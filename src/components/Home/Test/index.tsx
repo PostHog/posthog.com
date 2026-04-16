@@ -339,9 +339,11 @@ export default function HomeTest() {
                     label: 'Get started - free',
                 }}
             >
-                <MDXProvider components={mdxComponents}>
-                    <MDXRenderer>{mdxBody}</MDXRenderer>
-                </MDXProvider>
+                <div className="space-y-12">
+                    <MDXProvider components={mdxComponents}>
+                        <MDXRenderer>{mdxBody}</MDXRenderer>
+                    </MDXProvider>
+                </div>
             </Viewer>
         </>
     )
