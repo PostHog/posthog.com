@@ -15,11 +15,12 @@ import {
     IconMCP,
 } from 'components/OSIcons'
 import useProduct from 'hooks/useProduct'
-import { JsxComponentDescriptor } from '@mdxeditor/editor'
 import Logo from 'components/Logo'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
-import MDXEditor from 'components/MDXEditor'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { MDXProvider } from '@mdx-js/react'
+import Viewer from 'components/Viewer'
 import { graphql, useStaticQuery } from 'gatsby'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
@@ -31,7 +32,6 @@ import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { Customers, getSharedDescriptors } from '../shared'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const AppCount = () => <span className="text-xs font-normal">{APP_COUNT} apps</span>
 
@@ -273,55 +273,44 @@ function HeroImage(): JSX.Element {
     )
 }
 
-const jsxComponentDescriptors: JsxComponentDescriptor[] = [
-    { name: 'Tagline', kind: 'flow', props: [], Editor: () => <Tagline /> },
-    { name: 'AppCount', kind: 'flow', props: [], Editor: () => <AppCount /> },
-    { name: 'CompanyStageTabs', kind: 'flow', props: [], Editor: () => <CompanyStageTabs /> },
-    { name: 'CTAs', kind: 'flow', props: [], Editor: () => <CTAs /> },
-    { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <HeroCarousel /> },
-    { name: 'HomeHitCounter', kind: 'flow', props: [], Editor: () => <HomeHitCounter /> },
-    { name: 'Customers', kind: 'flow', props: [], Editor: () => <Customers tableClassName="bg-white" /> },
-    {
-        name: 'Logo',
-        kind: 'flow',
-        props: [],
-        Editor: () => {
-            const { siteSettings } = useApp()
-            return (
-                <>
-                    <Logo className="inline-block h-9" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
-                </>
-            )
-        },
-    },
-    {
-        name: 'HeroImage',
-        kind: 'flow',
-        props: [],
-        Editor: () => <HeroImage />,
-    },
-    {
-        name: 'ButtonDataStack',
-        kind: 'flow',
-        props: [],
-        Editor: () => <Button url="/data-stack">README: PostHog data stack.md</Button>,
-    },
-    { name: 'ButtonPricing', kind: 'flow', props: [], Editor: () => <Button url="/pricing">Explore pricing</Button> },
-    { name: 'ButtonAI', kind: 'flow', props: [], Editor: () => <Button url="/ai">Learn about PostHog AI</Button> },
-    { name: 'ButtonAbout', kind: 'flow', props: [], Editor: () => <Button url="/about">Read more about us</Button> },
-    ...getSharedDescriptors(),
-]
+const LogoComponent = () => {
+    const { siteSettings } = useApp()
+    return (
+        <>
+            <Logo className="inline-block h-9" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
+        </>
+    )
+}
+
+const mdxComponents: Record<string, React.ComponentType<any>> = {
+    a: Link,
+    Tagline,
+    AppCount,
+    CompanyStageTabs,
+    CTAs,
+    HeroCarousel,
+    HomeHitCounter,
+    Customers: () => <Customers tableClassName="bg-white" />,
+    Logo: LogoComponent,
+    HeroImage,
+    ButtonDataStack: () => <Button url="/data-stack">README: PostHog data stack.md</Button>,
+    ButtonPricing: () => <Button url="/pricing">Explore pricing</Button>,
+    ButtonAI: () => <Button url="/ai">Learn about PostHog AI</Button>,
+    ButtonAbout: () => <Button url="/about">Read more about us</Button>,
+    ...getSharedDescriptors().reduce((acc, d) => {
+        acc[d.name] = d.Editor
+        return acc
+    }, {} as Record<string, React.ComponentType<any>>),
+}
 
 export default function HomeTest() {
     const data = useStaticQuery(graphql`
         query HomeTestMdx {
             homepageMdx: mdx(fileAbsolutePath: { regex: "/contents/index\\.mdx/" }) {
-                rawBody
                 mdxBody: body
             }
         }
     `)
-    const rawBody = data?.homepageMdx?.rawBody
     const mdxBody = data?.homepageMdx?.mdxBody
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
@@ -341,10 +330,7 @@ export default function HomeTest() {
                 description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
                 image="/images/og/default.png"
             />
-            <MDXEditor
-                jsxComponentDescriptors={jsxComponentDescriptors}
-                body={rawBody}
-                mdxBody={mdxBody}
+            <Viewer
                 maxWidth={900}
                 cta={{
                     url: `https://${
@@ -352,7 +338,11 @@ export default function HomeTest() {
                     }.posthog.com/signup`,
                     label: 'Get started - free',
                 }}
-            />
+            >
+                <MDXProvider components={mdxComponents}>
+                    <MDXRenderer>{mdxBody}</MDXRenderer>
+                </MDXProvider>
+            </Viewer>
         </>
     )
 }
