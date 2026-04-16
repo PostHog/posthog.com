@@ -138,15 +138,13 @@ See the [list of all small teams](/small-teams).
 
 We have a defined [process for proposing changes to teams](/handbook/company/team-changes), or creating a new team.
 
-Once a decision is made, the following happens:
+Once a decision is made, the team lead is responsible for driving the setup process. 
 
--   [ ] Ops team updates the [Org Chart](https://app.deel.com/organization-chart/organization/834ac289-7c04-4d93-91f0-8922c5664b77?groupBy=group-by-report) in Deel.
--   [ ] Ops creates an issue with [the new org change template](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/org-change.yml) and assigns the team lead
--   [ ] Exec informs everyone else in the company in the next all hands session.
+To get started, create a new issue using [the new org change template](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/org-change.yml) keeping only the **Team Change** and **New Small Team** sections of the checklist and deleting the rest. Assign the issue to Ops and the exec you report into so they have visibility and can action their respective tasks.
 
-The small teams template contains a list of tasks for the Ops team and the team lead. 
+The checklist is split between tasks for the team lead and tasks for Ops. As team lead, you're responsible for completing your portion.
 
-These include standard tasks, such as creating Slack groups and a team page to ensure the team can communicate efficiently.
+Once the issue is complete, your Blitzscale team member will announce the new team in the relevant Slack channel, and the exec will inform the rest of the company at the next all hands.
 
 ## FAQ
 
