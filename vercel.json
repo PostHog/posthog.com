@@ -57,6 +57,7 @@
     ],
     "redirects": [
         { "source": "/coupons/:path*", "destination": "https://app.posthog.com/coupons/:path*", "statusCode": 301 },
+        { "source": "/product-toolkit", "destination": "/products" },
         { "source": "/handbook/growth/marketing", "destination": "/handbook/marketing", "statusCode": 301 },
         {
             "source": "/handbook/growth/marketing/:path*",
