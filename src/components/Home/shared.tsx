@@ -416,6 +416,7 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
                     rows={rows}
                     size="sm"
                     rowAlignment="top"
+                    width="full"
                     className={tableClassName || undefined}
                 />
                 <OSButton
