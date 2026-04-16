@@ -317,6 +317,7 @@ function RequestBody({ item, objects }) {
         item.requestBody?.content?.['application/json']?.schema.items?.['$ref'].split('/').at(-1)
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
+    if (!object?.properties) return null
 
     return (
         <div>
@@ -342,6 +343,7 @@ function ResponseBody({ item, objects }) {
         .at(-1)
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
+    if (!object?.properties) return null
     const [showResponse, setShowResponse] = useState(false)
 
     return (
