@@ -114,7 +114,7 @@ Mostly for screenshots in outreach, or helping with a specific dashboard/flag/ex
 
 Start with the [getting people to talk to you playbook](/handbook/growth/sales/getting-people-to-talk-to-you).
 
-Then: create a shared Slack channel and invite team members who are active in their PostHog org. It's cheap, it's not annoying if you keep the channel useful, and it's the fastest path to valueable comms for them + multi-threading for us.
+Then: create a shared Slack channel and invite team members who are active in their PostHog org. It's cheap, it's not annoying if you keep the channel useful, and it's the fastest path to valuable comms for them + multi-threading for us.
 
 ## 5. Offer a training session
 
