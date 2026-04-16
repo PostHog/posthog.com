@@ -321,7 +321,7 @@ export function Viewer({
                             onSearch={onSearchChange}
                         />
 
-                        <div className="flex-1 min-h-0 [mask-image:linear-gradient(to_bottom,transparent_0,black_3rem)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_3rem)]">
+                        <div className="flex-1 min-h-0 [mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]">
                             {hasTabs ? (
                                 <div data-scheme="primary" className="bg-accent h-full">
                                     <article
