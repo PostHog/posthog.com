@@ -1314,6 +1314,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/how-we-work',
                     },
                     {
+                        name: 'Mastering technical account management',
+                        url: '/handbook/growth/sales/master-technical-account-management',
+                    },
+                    {
                         name: 'Why buy PostHog',
                         url: '/handbook/growth/sales/why-buy-posthog',
                     },
