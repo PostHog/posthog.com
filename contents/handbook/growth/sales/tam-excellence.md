@@ -8,50 +8,21 @@ A question we often get asked is: "What makes an excellent TAM?" This touches al
 
 An excellent TAM:
 
-- Distinguishes themselves from other vendors with personalized outreach
-    - Things like recording personalized videos, putting in PRs for the customer's software, sending personalized food or merch to the office, signing up for their product, invitations to events, and making donations in their name are all great examples
-
-- Knows how to dig into a customer, find what will be valuable to them, and then surface that to them in a way that engages them and deepens the relationship
-    - This is a mix of getting the content right (saving money, recommendations based on expertise, ideas for success outside the realm of PostHog) and conveying the information in a way that the customer will take notice
-
-- Takes a customer problem, owns that problem as their own, and sees it through to solution
-    - Even if you can't ultimately solve the issue, owning it as if it is yours and driving it to a successful conclusion is key and is a great way to earn trust. People recognize when you are willing to see a problem through and help them with it
-
-- Builds the relationship for the long term such that the work you did a year ago pays dividends when it comes to adopting new products or expanding usage
-    - It can be tempting to feel like a customer is not worth the time when they aren't responding or their engagement seems unenthusiastic. It's important to remember that we aren't building the relationship for this quarter, we are doing so for the same quarter next year
-
-- Find the right balance of cross sell and non-sales value so that customers don't feel like we are selling them, but that we are sincerely trying to help them
-    - Customers notice when we only come to them to ask them to spend more money. Avoid turning every interaction into a chance to increase revenue; give them value that doesn't require them to open the wallet
-
-- Is sincerely interested in their customer's business and success and understands the customer well enough to provide concrete suggestions on how they can get better with PostHog
-    - Said plainly, congratulate them on product launches, give them feedback on their product, leave them reviews, and back up that sincere interest with really getting to know their product
-
-- Has the technical chops to get their hands dirty and help a customer with their technical questions / issues
-    - As a general rule, we aren't implementing for our customers, but we should be capable of doing so – that demonstrates we understand enough to be genuinely useful
-
-- Doesn't take "we're good" as an answer from a customer and continues to engage and find those areas where they aren't good and could use our help
-    - A customer may say "talk to us again in 6 months" but that is almost always born out of not wanting a sales person to try to upsell them. Don't upsell them, give them concrete suggestions that will reduce cost or help them with issues they face
-
-- Regularly shares learnings, both successes and failures, publicly so that the whole team gets better when they learn something
-    - We value learning from mistakes, sharing those will help others avoid similar issues
-
-- Has a sense for when an account is at risk and is proactive in de-risking that account
-    - You should be close enough to your accounts that you can tell when something is _off_ and proactively act to address it
-
-- Has the right mix of directness / transparency when needed, but can balance that with giving the customer space when needed
-    - Like any relationship, sales is a balance and knowing what that balance looks like for a given customer is the art of the role
-
-- Sees things about our sales process that need to get better, and proactively works to make those things better
-    - Said conversely, an excellent TAM doesn't complain about sales processes, they fix them to make them better
-
-- Identifies a customer's key business goals / outcomes and aligns PostHog with those outcomes
-    - If a customer is looking to increase conversions or sell more premium plans, position specific things PostHog can do to help them reach that goal so that PostHog is a key to their success and not just a nice to have or a source of vanity metrics
-
-- Enables / upskills / supports their customer champion so they look good within the org
-    - Work hard for your champion, and then let them take all the credit
-
-- Is a relentless advocate for the customer's interests
-    - We are closest to our customers and need to be their voice. Engineers want to hear from us about how our customers are feeling
-
-- Continues to grow their expertise in PostHog and is always getting a deeper understanding of the products and platform
-    - PostHog is constantly changing and growing, so continued growth to keep up with it is essential to being a good TAM. We should never shy away from selling a new product due to lack of knowledge
+| General Principle | Specific Examples |
+|---|---|
+| Distinguish yourself from other vendors with personalized outreach | Record personalized videos, submit PRs for a customer's software, send personalized food or merch, sign up for their product, invite them to events, or make donations in their name |
+| Dig into a customer, find what will be valuable to them, and surface it in a way that deepens the relationship | Get the content right — saving money, expert recommendations, ideas for success beyond PostHog — and deliver it in a way that earns attention |
+| Take ownership of a customer problem and see it through to resolution | Even when a full fix isn't possible, owning the issue and driving it to conclusion builds trust — people notice when you see things through |
+| Build relationships for the long term so that today's work pays off a year from now | Don't write off a quiet or unresponsive customer — the relationship being built now is for next year's expansion, not this quarter's |
+| Balance cross-sell with non-sales value so customers feel helped, not sold to | Avoid making every interaction a revenue conversation — give them value that doesn't require opening the wallet |
+| Show sincere interest in the customer's business and back it up with real knowledge | Congratulate them on product launches, give feedback on their product, leave them reviews — and actually know their product well enough to do so |
+| Have the technical depth to get hands dirty and help with technical questions | You shouldn't be implementing for customers as a rule, but being capable of it demonstrates you understand enough to be genuinely useful |
+| Don't accept "we're good" as a final answer — keep engaging to find where you can help | "Talk to us in 6 months" usually means "don't upsell me" — respond with concrete suggestions on cost reduction or real pain points instead |
+| Regularly share learnings — both wins and failures — publicly with the team | When you learn something (especially from a mistake), sharing it helps others avoid the same issues and raises the whole team's effectiveness |
+| Develop a sense for when an account is at risk and act proactively | Be close enough to your accounts that you can detect when something feels off, and address it before it becomes a problem |
+| Balance directness and transparency with knowing when to give a customer space | Understanding what the right balance looks like for each individual customer is the art of the role |
+| Spot gaps in the sales process and proactively fix them rather than complain | An excellent TAM doesn't sit on process frustrations — they take ownership and make improvements |
+| Identify the customer's key business goals and align PostHog directly to those outcomes | If a customer wants to increase conversions or grow premium plans, show specifically how PostHog helps reach that goal — make it essential, not just a nice-to-have |
+| Enable and upskill your customer champion so they look good within their org | Do the hard work for your champion, then let them take all the credit |
+| Be a relentless advocate for customer interests internally | TAMs are closest to customers — engineers need to hear from you about how customers are actually feeling |
+| Continuously grow your PostHog expertise to keep pace with the product | PostHog is constantly changing — never shy away from selling a new product because of unfamiliarity; learn it |
