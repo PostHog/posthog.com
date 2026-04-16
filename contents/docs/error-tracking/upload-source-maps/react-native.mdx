@@ -13,12 +13,6 @@ A minimum CLI version of [0.7.8](https://github.com/PostHog/posthog/releases/tag
 
 </CalloutBox>
 
-<CalloutBox icon="IconInfo" title="Git metadata on uploads" type="fyi">
-
-When you upload source maps from a local build or from CI, PostHog will attach git metadata (branch, commit, repo, remote URL) to the release so symbol sets link back to the exact commit in the Error Tracking UI. This works automatically for Android and iOS; no configuration is required.
-
-</CalloutBox>
-
 <CalloutBox icon="IconInfo" title="React Native Web" type="action">
 
 If you are using React Native Web, ensure source maps are generated
@@ -110,44 +104,7 @@ Add the `posthog-react-native/expo` plugin under the `expo.plugins`.
 }
 ```
 
-2. Android: Update the `/android/app/build.gradle` file from your app's root directory so that it looks like this:
-
-```diff
-
-...
-
-// This must be placed directly above the following `android` block.
-+apply from: new File(["node", "--print", "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog.gradle')"].execute().text.trim())
-
-
-android {
-  ...
-}
-```
-
-3. iOS: Update the `/ios/$yourProjectName.xcodeproj/project.pbxproj` file (replace `$yourProjectName` with your project's actual name). You need to locate the `Bundle React Native code and images` build step.
-
-To do this through Xcode, open your project in Xcode, go to the project settings, navigate to Build Phases, select Bundle React Native code and images, and apply the changes shown below.
-
-```diff
-
-...
-
--`"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
-+/bin/sh `"$NODE_BINARY" --print "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog-xcode.sh')"` `"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
-```
-
-You must also disable User Script Sandboxing for the upload script to work. In Xcode, go to Build Settings, search for **User Script Sandboxing** (`ENABLE_USER_SCRIPT_SANDBOXING`) and set it to **No**. This is required because the script needs to read `.git/` for release metadata and execute `posthog-cli`, which are not allowed under Xcode's script sandbox. If you are using the Expo plugin (step 1), this is handled automatically.
-
-</Step>
-
-<StepVerifySymbolSetsUpload />
-
-</Steps>
-
-## Plugin options
-
-The `posthog-react-native/expo` plugin accepts the following options:
+The plugin accepts the following options:
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -177,18 +134,42 @@ This setting only affects build-time scripts on the build machine. Your shipped 
 
 </CalloutBox>
 
+2. Android: Update the `/android/app/build.gradle` file from your app's root directory so that it looks like this:
+
+```diff
+
+...
+
+// This must be placed directly above the following `android` block.
++apply from: new File(["node", "--print", "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog.gradle')"].execute().text.trim())
+
+
+android {
+  ...
+}
+```
+
+3. iOS: Update the `/ios/$yourProjectName.xcodeproj/project.pbxproj` file (replace `$yourProjectName` with your project's actual name). You need to locate the `Bundle React Native code and images` build step.
+
+To do this through Xcode, open your project in Xcode, go to the project settings, navigate to Build Phases, select Bundle React Native code and images, and apply the changes shown below.
+
+```diff
+
+...
+
+-`"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
++/bin/sh `"$NODE_BINARY" --print "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog-xcode.sh')"` `"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
+```
+
+If you are not using the Expo plugin (step 1), you will need to also disable User Script Sandboxing for the upload script to work. In Xcode, go to Build Settings, search for **User Script Sandboxing** (`ENABLE_USER_SCRIPT_SANDBOXING`) and set it to **No**. This is required because the script needs to read `.git/` for release metadata and execute `posthog-cli`, which are not allowed under Xcode's script sandbox.
+
+</Step>
+
+<StepVerifySymbolSetsUpload />
+
+</Steps>
+
 ## Troubleshooting
-
-**Upload succeeds but the symbol set has no git chip in the UI**
-
-Releases in PostHog are keyed by `{release-name}@{release-version}`. If a release already exists for that key (created by an earlier upload before you enabled git metadata, or from a CI job with sandboxing issues), PostHog doesn't backfill metadata onto it — it just links your new upload to the existing record. To get git metadata on a new release, bump your build number (`CURRENT_PROJECT_VERSION` on iOS, `versionCode` on Android) or delete the stale release from the Error Tracking UI, then rebuild.
-
-**`Server returned 0 upload keys (1 skipped as already present)`**
-
-This means the CLI already uploaded a source map with the same chunk ID. Hermes bytecode is deterministic, so if your JS hasn't changed meaningfully, the chunk ID stays the same and the server deduplicates. To force a fresh upload:
-
-1. Make a real change to your app's JavaScript (not just a whitespace change), or
-2. Delete the existing symbol set in the Error Tracking UI and rerun the build
 
 **Build fails with `Sandbox: bash deny(1) file-read-data`**
 
