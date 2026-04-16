@@ -40,9 +40,12 @@ Going from most informative to most entertaining:
 
 - **Core brand assets:** We're starting with demo videos, and we'll expand from there.
 - **Launch videos:** We've made [some already](https://www.youtube.com/watch?v=e_SICQg2Wak), but we're still developing how we do these. The goal is to have a creative format that's repeatable and can be shot at (reasonably) short notice.
-- **The Changelog:** Our goal is to produce a great changelog update every four weeks like [this one](https://www.youtube.com/shorts/XdHozF7JLT0). 
+  - These can also easily be repurposed as ads
+- **The Changelog:** Our goal is to produce a great changelog update every four weeks like [this one](https://www.youtube.com/shorts/XdHozF7JLT0).
+  - Also great as ads
 - **Startup stories:** Regular YouTube output focused on telling the stories of cool companies that our audience is interested in. 
-- **Brand-centric hero videos:** We have a unique culture and brand, and we want to share that through [weird](https://posthog.com/handbook/company/do-more-weird) content that no one else would invest in because it's too hard - who else would do an [action figures](https://www.youtube.com/watch?v=xxBqKIBBxQw) video for April Fools'?
+- **Brand-centric hero videos:** We have a unique culture and brand, and we want to share that through weird content that no one else would invest in because it's too hard - who else would do an [action figures](https://www.youtube.com/watch?v=xxBqKIBBxQw) video for April Fools'?
+  - This is where we have the greatest freedom to [#do-more-weird](https://posthog.com/handbook/company/do-more-weird) - we just need to be wary of the pitfalls of corporate try hard
 
 ## How to work with the video team
 
