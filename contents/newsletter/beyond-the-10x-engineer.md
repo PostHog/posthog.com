@@ -25,6 +25,7 @@ At PostHog, we rely on engineers to make product decisions. They set their roadm
 > This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Always prototyping and experimenting
+
 You can plan and polish a feature to death. We prefer to ship early and iterate. This means engineers must be comfortable:
 
 - Building functional MVPs and proofs of concept.
@@ -65,6 +66,8 @@ To do this async with multiple teams involved, [Ted](/ted) wrote two 1,500+ word
 
 > **What to look for:** People who communicate well throughout the hiring process, have a blog, or come from a writing-heavy culture.
 
+<NewsletterForm />
+
 ## 3. A genuine love for building
 
 There are two types of engineers:
@@ -86,7 +89,7 @@ Because engineers shape the direction of every product, having this trait ensure
 
 ## 4. Customer obsessed
 
-To uncover the real problems users have (and value), [product engineers](/blog/what-is-a-product-engineer) at PostHog interact with them much more often than regular engineers do. This includes:
+To uncover the real problems users have (and value), [product engineers](/product-engineer/what-is-a-product-engineer) at PostHog interact with them much more often than regular engineers do. This includes:
 
 - [Talking to users](/product-engineers/10x-engineers-do-user-interviews), doing user interviews.
 - Recruiting testers for new features and collecting feedback.

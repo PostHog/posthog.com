@@ -12,6 +12,8 @@ export interface QuestLogItemProps {
     children: React.ReactNode
     index?: number
     isSelected?: boolean
+    idleGlow?: boolean
+    isIdle?: boolean
     questRef?: React.Ref<HTMLDivElement>
     onSelect?: () => void
 }
@@ -76,6 +78,9 @@ export const QuestLog: React.FC<{
         </svg>
     )
 
+    // Idle glow constants
+    const IDLE_GLOW_DELAY = 4000
+
     const [selectedQuest, setSelectedQuest] = useState(0)
     const [bracketPosition, setBracketPosition] = useState({ top: 0, height: 0 })
     const [hasInitialLoadSettled, setHasInitialLoadSettled] = useState(false)
@@ -85,6 +90,7 @@ export const QuestLog: React.FC<{
     const [isSmoothScrolling, setIsSmoothScrolling] = useState(false)
     const [isJumping, setIsJumping] = useState(false)
     const [animationKey, setAnimationKey] = useState(0)
+    const [isIdle, setIsIdle] = useState(false)
 
     const questRefs = useRef<(HTMLDivElement | null)[]>([])
     const dropdownRef = useRef<HTMLDivElement>(null)
@@ -375,6 +381,26 @@ export const QuestLog: React.FC<{
         }
     }, [])
 
+    // Idle detection for last-item glow
+    useEffect(() => {
+        let timer: ReturnType<typeof setTimeout>
+
+        const resetIdle = () => {
+            setIsIdle(false)
+            clearTimeout(timer)
+            timer = setTimeout(() => setIsIdle(true), IDLE_GLOW_DELAY)
+        }
+
+        const events: (keyof WindowEventMap)[] = ['mousemove', 'keydown', 'scroll', 'touchstart']
+        events.forEach((evt) => window.addEventListener(evt, resetIdle, { passive: true }))
+        timer = setTimeout(() => setIsIdle(true), IDLE_GLOW_DELAY)
+
+        return () => {
+            clearTimeout(timer)
+            events.forEach((evt) => window.removeEventListener(evt, resetIdle))
+        }
+    }, [])
+
     const progressPercentage = hasInitialLoadSettled ? ((selectedQuest + 1) / questItems.length) * 100 : 0
     const spritePosition = hasInitialLoadSettled
         ? `calc(${((selectedQuest + 1) / questItems.length) * 100}% - 32px)`
@@ -383,7 +409,7 @@ export const QuestLog: React.FC<{
     return (
         <ScrollSpyProvider>
             <QuestScrollTracker />
-            <div className="max-w-7xl mx-auto pb-6 quest-log-container">
+            <div className={`max-w-7xl mx-auto pb-6 quest-log-container${isIdle ? ' quest-idle' : ''}`}>
                 <div className="quest-main-content">
                     {/* Quest Details */}
                     <div className="quest-details" ref={questContentRef}>
@@ -474,15 +500,15 @@ export const QuestLog: React.FC<{
                                         }}
                                     >
                                         {/* Speech Bubble Container */}
-                                        <div className="relative rounded-lg shadow-sm bg-white border border-solid border-primary px-1 py-1 min-w-[120px] max-w-[175px]">
+                                        <div className="relative rounded-lg shadow-sm bg-white dark:bg-accent-dark border border-solid border-primary px-1 py-1 min-w-[120px] max-w-[175px]">
                                             {/* Speech Text */}
-                                            <div className="text-xs font-medium text-primary dark:text-primary-dark text-center">
+                                            <div className="text-xs font-medium text-primary text-center">
                                                 <span className="inline-block">{speechText}</span>
                                             </div>
 
                                             {/* Speech Bubble Tail */}
                                             <div
-                                                className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 border-solid border-primary bg-white rotate-45 ${
+                                                className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 border-solid border-primary bg-primary rotate-45 ${
                                                     selectedQuest === questItems.length - 1
                                                         ? 'border-r border-t left-full -translate-x-1/2'
                                                         : 'border-l border-b right-full translate-x-1/2'
@@ -535,6 +561,7 @@ export const QuestLog: React.FC<{
                                         {React.cloneElement(child, {
                                             index,
                                             isSelected: selectedQuest === index,
+                                            isIdle,
                                             questRef: (el: HTMLDivElement | null) => (questRefs.current[index] = el),
                                         })}
                                     </a>
@@ -561,8 +588,17 @@ export const QuestLog: React.FC<{
     )
 }
 
-export const QuestLogItem: React.FC<QuestLogItemProps> = ({ title, subtitle, icon, isSelected = false, questRef }) => {
+export const QuestLogItem: React.FC<QuestLogItemProps> = ({
+    title,
+    subtitle,
+    icon,
+    isSelected = false,
+    idleGlow = false,
+    isIdle = false,
+    questRef,
+}) => {
     const Icon = Icons[icon as keyof typeof Icons] || Icons.IconInfo
+    const showGlow = idleGlow && isIdle && !isSelected
 
     return (
         <div
@@ -571,7 +607,7 @@ export const QuestLogItem: React.FC<QuestLogItemProps> = ({ title, subtitle, ico
                 isSelected
                     ? 'border border-orange shadow-md opacity-100 bg-orange/10 dark:bg-orange/10'
                     : 'border border-primary dark:border-primary opacity-80 bg-white dark:bg-accent-dark shadow-sm hover:translate-y-[-2px] active:translate-y-[-1px]'
-            }`}
+            }${showGlow ? ' quest-item-glow' : ''}`}
         >
             <div className={`flex items-center space-x-2.5 py-2 ${isSelected ? 'text-red dark:text-yellow' : ''}`}>
                 <div

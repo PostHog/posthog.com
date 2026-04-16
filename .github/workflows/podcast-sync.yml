@@ -1,0 +1,73 @@
+name: Sync Podcast to Podbean
+
+on:
+    # # Run on schedule (daily at 6 AM UTC)
+    # schedule:
+    #   - cron: '0 6 * * *'
+
+    # Allow manual trigger
+    workflow_dispatch:
+        inputs:
+            dry_run:
+                description: 'Dry run (show what would be synced without uploading)'
+                required: false
+                default: 'false'
+                type: choice
+                options:
+                    - 'true'
+                    - 'false'
+            status:
+                description: 'Status for new episodes'
+                required: false
+                default: 'draft'
+                type: choice
+                options:
+                    - draft
+                    - publish
+
+jobs:
+    sync:
+        name: Sync S3 to Podbean
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@3259c6206f993105e3a61b142c2d97bf4b9ef83d # v7.1.0
+
+            - name: Set up Python
+              run: uv python install 3.12
+
+            - name: Install dependencies
+              run: |
+                  cd scripts/hogfm
+                  uv sync
+
+            - name: Sync podcasts to Podbean
+              env:
+                  AWS_ACCESS_KEY_ID: ${{ secrets.PODCAST_AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.PODCAST_AWS_SECRET_ACCESS_KEY }}
+                  AWS_REGION: ${{ secrets.PODCAST_AWS_REGION || 'us-east-1' }}
+                  PODBEAN_CLIENT_ID: ${{ secrets.PODBEAN_CLIENT_ID }}
+                  PODBEAN_CLIENT_SECRET: ${{ secrets.PODBEAN_CLIENT_SECRET }}
+                  INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
+                  INPUT_STATUS: ${{ github.event.inputs.status }}
+              run: |
+                  cd scripts/hogfm
+
+                  # Determine arguments based on inputs
+                  ARGS=""
+
+                  if [ "$INPUT_DRY_RUN" = "true" ]; then
+                    ARGS="$ARGS --dry-run"
+                  fi
+
+                  if [ -n "$INPUT_STATUS" ]; then
+                    ARGS="$ARGS --status $INPUT_STATUS"
+                  else
+                    ARGS="$ARGS --status draft"
+                  fi
+
+                  uv run python sync_s3_to_podbean.py $ARGS

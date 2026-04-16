@@ -1,0 +1,36 @@
+## Q2 2026 objectives
+
+### Objective 1 - Build a BI experience that feels competitive and joyful (Marius)
+
+Motivation: A competitive BI product and a joyful SQL editor are useful products on their own, in addition to being the main building blocks of notebooks.
+
+What we’ll ship:
+
+- New chart types, prioritizing the most-requested visualizations
+- SQL editor reliability and UX improvements
+- Better variables, including multiselect, query-backed and time-based variables (e.g. for dashboards)
+- Easier schema exploration and an alternate “no-sql” query building interface (manual controls + AI integration).
+- Ability to click in and out of rows to explore deeper.
+
+
+### Objective 2 - Make notebooks the default way to analyze data (Anna)
+
+Motivation: Notebooks, especially with Python, provide a more complete BI experience than a standalone SQL editor. We are 80% done here, just need to finish the last 20%.
+
+What we’ll ship:
+- Python notebooks for customers
+- Core notebook UX and stability improvements
+- Better integration between notebooks, HogQL, DuckDB, and external databases
+- Initial collaboration improvements for notebooks (lock nodes if someone is editing, etc)
+- A clearer default analysis flow centered on notebooks
+
+### Objective 3 - Build a first-class querying and DuckDB experience (George)
+
+Motivation: We want a great experience for our first-party DuckDB warehouse. Today, querying and connections are inconsistent and confusing.
+
+What we’ll ship:
+- First-class DuckDB support (not treated as “just Postgres”)
+- Better query errors so failures are understandable and actionable
+- Improvements to the HogQL type system to support earlier errors
+- Calculated properties and lambdas on top of HogQL tables
+- Improved UX for connecting to databases

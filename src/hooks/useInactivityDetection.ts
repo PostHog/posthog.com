@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { INACTIVITY_TIMEOUTS } from '../constants'
+import { useApp } from '../context/App'
 
 interface UseInactivityDetectionOptions {
     focusedTimeout?: number
@@ -12,9 +13,32 @@ export const useInactivityDetection = ({
     unfocusedTimeout = INACTIVITY_TIMEOUTS.UNFOCUSED,
     enabled = true,
 }: UseInactivityDetectionOptions = {}) => {
+    const { windowsInView } = useApp()
     const [isInactive, setIsInactive] = useState(false)
     const timeoutRef = useRef<NodeJS.Timeout>()
     const isWindowFocusedRef = useRef(true)
+
+    const checkVideosInView = useCallback(() => {
+        try {
+            return windowsInView.some((window) => {
+                if (!window.ref?.current) return false
+
+                const hasActiveVideo = Array.from(window.ref.current.querySelectorAll('video')).some(
+                    (video) => !video.paused && !video.ended
+                )
+
+                const hasYouTubeIframe =
+                    window.ref.current.querySelectorAll(
+                        'iframe[src*="youtube.com"], iframe[src*="youtube-nocookie.com"]'
+                    ).length > 0
+
+                return hasActiveVideo || hasYouTubeIframe
+            })
+        } catch (error) {
+            console.error(error)
+            return false
+        }
+    }, [windowsInView])
 
     const resetTimer = useCallback(() => {
         if (!enabled) return
@@ -28,9 +52,12 @@ export const useInactivityDetection = ({
         const timeout = isWindowFocusedRef.current ? focusedTimeout : unfocusedTimeout
 
         timeoutRef.current = setTimeout(() => {
-            setIsInactive(true)
+            const hasVideosInView = checkVideosInView()
+            if (!hasVideosInView) {
+                setIsInactive(true)
+            }
         }, timeout)
-    }, [enabled, focusedTimeout, unfocusedTimeout])
+    }, [enabled, focusedTimeout, unfocusedTimeout, checkVideosInView])
 
     const handleActivity = useCallback(() => {
         resetTimer()

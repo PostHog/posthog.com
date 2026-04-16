@@ -16,6 +16,8 @@ export const ClientPostMarkdown = ({
     allowedElements?: string[]
 }) => {
     return (
+        // transformImageUri is safe, rehypeSanitize sanitizes all HTML output
+        // nosemgrep: typescript.react.security.react-markdown-insecure-html.react-markdown-insecure-html
         <ReactMarkdown
             allowedElements={allowedElements}
             remarkPlugins={[remarkGfm]}

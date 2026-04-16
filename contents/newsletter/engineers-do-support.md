@@ -51,7 +51,7 @@ This helps us create good word of mouth, and it’s motivating for engineers whe
 
 Sometimes an issue only affects the requester, but often it impacts hundreds or thousands of users who silently tolerate an issue, or stop using your product.
 
-For example, our customer effort score survey used to give options from 1-5. A user reported that the industry standard is actually 1-7. The next day, [Dylan](https://posthog.com/community/profiles/30455) added 1-7 as [an option](https://posthog.com/changelog/2024#surveys-now-support-7-point-likert-scale-responses), making our survey product more accurate for that user and future ones.
+For example, our customer effort score survey used to give options from 1-5. A user reported that the industry standard is actually 1-7. The next day, [Dylan](/community/profiles/30455) added 1-7 as [an option](/changelog?id=2057), making our survey product more accurate for that user and future ones.
 
 Every small improvement inches your product towards greatness.
 
@@ -59,13 +59,15 @@ Every small improvement inches your product towards greatness.
 
 ### Encouraging full cycle ownership
 
-[Engineers at PostHog](/blog/what-is-a-product-engineer) own the entire product development cycle – ideation, implementation, and ongoing maintenance. Doing support acts as both input and feedback on this and helps them do it better. For example:
+[Engineers at PostHog](/product-engineer/what-is-a-product-engineer) own the entire product development cycle – ideation, implementation, and ongoing maintenance. Doing support acts as both input and feedback on this and helps them do it better. For example:
 
 - When ideating and validating, engineers can draw on real customer behavior and pain points. Product decisions are backed by support issues they dealt with and requests from large customers.
 
 - When building, it encourages engineers to write reliable and maintainable code, because they will be the ones who need to fix it if it breaks.
 
 - When doing support, they are familiar with the potential fixes because they were involved with (or wrote) the code related to the issue.
+
+<NewsletterForm />
 
 ## 2. Creating a support process built for engineers
 

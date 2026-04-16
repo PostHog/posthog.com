@@ -79,7 +79,9 @@ You will also see the below message – as with next week’s release you will n
 
 ![workers added to PostHog message](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/04/Posthog-5.png)
 
-###[ Precalculate Events that match Actions](https://github.com/PostHog/posthog/pull/420)
+### Precalculate events that match actions
+
+[Related PR](https://github.com/PostHog/posthog/pull/420)
 
 This is one of the most impactful updates to PostHog so far –  whenever we did a query involving actions in the frontend, the database had to do a lot of heavy lifting to calculate which events match the action. 
 

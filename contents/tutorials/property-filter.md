@@ -22,7 +22,7 @@ That's where the [property filter app](/apps/property-filter), which was created
 
 The property filter app works by setting the selected properties to `null` when events are ingested. Here's how to set it up:
 
-1. Navigate to the [data pipelines](https://us.posthog.com/pipeline) tab in PostHog.
+1. Navigate to the [data pipelines](https://app.posthog.com/data-management/transformations) tab in PostHog.
 2. Click the **+ New** button in the top right.
 3. Select **Transformation** from the dropdown.
 4. Next to the **Property Filter** app, click **+ Create**.
@@ -89,7 +89,7 @@ Note that PostHog's default properties begin with `$`, so you'll need to include
 
 ### Filtering GeoIP properties
 
-PostHog enriches events based on IP addresses, with the [GeoIP transformation](https://app.posthog.com/pipeline/transformations?search=GeoIP). You either disable this app completely or filter out specific properties using the property filter app.
+PostHog enriches events based on IP addresses, with the [GeoIP transformation](https://app.posthog.com/data-management/transformations?search=GeoIP). You either disable this app completely or filter out specific properties using the property filter app.
 
 The current list of GeoIP properties is shown below. For the most up-to-date list, see the [source code](https://github.com/PostHog/posthog-plugin-geoip).
 
@@ -114,7 +114,7 @@ Transformations in PostHog run in sequential order, so you should carefully cons
 
 Here's how to reorder transformations:
 
-1. Go to the [transformations tab](https://us.posthog.com/pipeline/transformations).
+1. Go to the [transformations tab](https://app.posthog.com/data-management/transformations).
 2. Click **Change order** just above the table.
 3. Drag and drop apps to change their order.
 

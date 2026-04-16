@@ -280,6 +280,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                 quality: 1,
                 canvasWidth: 1200,
                 canvasHeight: 1200,
+                skipFonts: true,
             })
             const link = document.createElement('a')
             link.download = `${socialValues.title}.jpeg`
@@ -441,6 +442,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                                         margin: `${socialValues.titleSpacing}px 0`,
                                                     }}
                                                     className="text-center leading-none"
+                                                    // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - form title from state, not external user input
                                                     dangerouslySetInnerHTML={{ __html: socialValues.title }}
                                                 />
                                                 {imageURL && (
@@ -529,7 +531,7 @@ export default function RoadmapForm({
     const [status, setStatus] = useState(other.status)
     const [loading, setLoading] = useState(false)
     const { getJwt, user } = useUser()
-    const { handleSubmit, handleChange, values, setFieldValue, initialValues } = useFormik({
+    const { handleSubmit, handleChange, values, setFieldValue, initialValues, errors, submitCount } = useFormik({
         enableReinitialize: true,
         validateOnMount: false,
         validationSchema: ValidationSchema(status),
@@ -716,16 +718,16 @@ export default function RoadmapForm({
                         searchable={false}
                     />
                 )}
-                {(status === 'in-progress' || status === 'under-consideration') && (
-                    <GitHubURLs
-                        urls={values.githubUrls}
-                        onChange={(githubUrls) => setFieldValue('githubUrls', githubUrls)}
-                        multiple={status === 'in-progress'}
-                        placeholder={`https://github.com/PostHog/posthog/${
-                            status === 'under-consideration' ? 'issues' : 'pull'
-                        }/1`}
-                    />
-                )}
+
+                <GitHubURLs
+                    urls={values.githubUrls}
+                    onChange={(githubUrls) => setFieldValue('githubUrls', githubUrls)}
+                    multiple={status === 'in-progress'}
+                    placeholder={`https://github.com/PostHog/posthog/${
+                        status === 'under-consideration' ? 'issues' : 'pull'
+                    }/1`}
+                />
+
                 {status !== 'under-consideration' && (
                     <div className="p-4 border border-primary">
                         <label className="text-sm text-secondary pt-4 block mb-2">Options</label>
@@ -751,6 +753,16 @@ export default function RoadmapForm({
                 )}
                 <SocialSharing values={values} setFieldValue={setFieldValue} />
             </div>
+            {submitCount > 0 && Object.keys(errors).length > 0 && (
+                <div className="text-red dark:text-yellow text-sm font-semibold mt-2 p-3 border border-red dark:border-yellow rounded-md bg-accent space-y-1">
+                    <p className="font-semibold mb-1">Fix the following:</p>
+                    <ul className="list-disc pl-4">
+                        {Object.values(errors).map((error, i) => (
+                            <li key={i}>{typeof error === 'string' ? error : 'Invalid value'}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
             <CallToAction disabled={loading} onClick={handleSubmit} className="mt-2 w-full">
                 {loading ? <Spinner className="text-white mx-auto !w-6 !h-6" /> : buttonText}
             </CallToAction>

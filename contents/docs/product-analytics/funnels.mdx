@@ -44,6 +44,9 @@ export const funnelStepBreakdownLight = "https://res.cloudinary.com/dmukukwp6/im
 export const funnelStepBreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-dark-mode.png"
 export const converstionOverTimeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/conversion-over-time-using-trends-light-mode.png"
 export const converstionOverTimeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/conversion-over-time-using-trends-dark-mode.png"
+export const funnelsInlineEventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/h_500,c_limit,q_auto,f_auto/funnels_inline_events_light_fd59b44032.png"
+export const funnelsInlineEventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/h_500,c_limit,q_auto,f_auto/funnels_inline_events_dark_f9c82e5cd9.png"
+
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=573"
@@ -85,6 +88,20 @@ Next, add events users must complete to proceed through the funnel, ending with 
     imageDark = {funnelStepsDark}
     classes="rounded"
     alt="Funnel steps"
+/>
+
+
+#### Combine events inline
+
+You can combine multiple events into a single funnel step using inline combination. This lets you treat several events as one step without creating a custom [action](/docs/data/actions).
+
+Select the events to include in a step, and they're combined using a logical `OR` – any occurrence of the selected events counts toward that step. This works the same way as [combining events inline in trends](/docs/product-analytics/trends/overview#combine-events-inline).
+
+<ProductScreenshot
+    imageLight = {funnelsInlineEventsLight} 
+    imageDark = {funnelsInlineEventsDark}
+    classes="rounded"
+    alt="Inline events"
 />
 
 By default, funnel steps must be completed **sequentially**, however you are able to change this behavior by selecting one of three different step orders:
@@ -137,7 +154,9 @@ There are two options for showing conversion rates in a funnel:
 
 ### Breakdowns
 
-To understand how different types of user interact with your funnel, it's helpful to breakdown results. You can breakdown steps by event and person properties. To do this, click on the **+ Add breakdown** button and select the property you want to break down by.
+To understand how different types of user interact with your funnel, it's helpful to breakdown results. You can breakdown steps by event properties, person properties, and [cohorts](/docs/data/cohorts). To do this, click on the **+ Add breakdown** button and select the property or cohort you want to break down by.
+
+> **Note:** Only one cohort can be used at a time for funnel breakdowns. This is because users can belong to multiple cohorts, which would produce confusing results.
 
 The example below shows a breakdown by operating system:
 
@@ -275,7 +294,7 @@ Each type serves a unique purpose:
 
 - **Time to convert** – shows you steps with the highest friction. Steps with a long time to convert are likely much harder than steps with a short time.
 
-- **Historical trends** – shows you how your conversion rate has changed over time for users who entered the funnel on a given date. Useful for understanding how changes, fixes, and new features have affected your funnel success rate.
+- **Historical trends** – shows you how your conversion rate has changed over time for users who entered the funnel on a given date. Useful for understanding how changes, fixes, and new features have affected your funnel success rate. You can enable trend lines from the **Options** menu to help identify patterns in noisy data.
 
 ## Tips for analyzing funnels
 

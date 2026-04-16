@@ -13,7 +13,7 @@ tags:
 
 It's useful receive Slack notifications as soon as users respond to your surveys. You can do this in PostHog using our [realtime destinations](/docs/cdp/destinations).
 
-After you've created your survey, go to the [data pipeline destinations tab](https://us.posthog.com/pipeline/destinations), search for the **Slack** destination and click **+ Create**. Then on the creation screen:
+After you've created your survey, go to the [data pipeline destinations tab](https://app.posthog.com/data-management/destinations), search for the **Slack** destination and click **+ Create**. Then on the creation screen:
 
 1. Follow the steps to integrate with your Slack workspace if you haven't already and then select it.
 
@@ -56,7 +56,7 @@ You can extract the following properties from surveys:
 |----------|-------------|
 | `event.properties.$survey_name` | The name of the survey |
 | `event.properties.$survey_questions` | An array of objects containing the following survey question properties: `id`, `question`, and `response` |
-| `event.properties.$survey_response_{response_key}` | The response to a specific question. To find `response_key`, go to your survey page and click on the button **Copy survey response key**. There's one for each question in your survey. `response_key` is identical to the corresponding survey question ID |
+| `event.properties.$survey_response_{response_key}` | The response to a specific question. To find `response_key`, go to your survey's **Results** tab and click **Copy response key** on the question card. There's one for each question in your survey. `response_key` is identical to the corresponding survey question ID |
 | `event.properties.$survey_completed` | Whether the survey was completed. Relevant if you're using partial responses. |
 | `person.name` or other person properties | The name of the person who responded or other properties |
 

@@ -68,7 +68,7 @@ import { browser } from '$app/environment';
 
 export const load = async () => {
   if (browser) {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     })
@@ -188,7 +188,7 @@ In SvelteKit, server-side logic can be implemented using the [load](https://kit.
 import { PostHog } from 'posthog-node';
 
 export async function load() {
-  const posthog = new PostHog('<ph_project_api_key>', 
+  const posthog = new PostHog('<ph_project_token>', 
   { host: '<ph_client_api_host>' });
   
   let ctaText = 'No variant'
@@ -237,7 +237,7 @@ import { PostHog } from 'posthog-node';
 import { parse } from 'cookie';
 
 export async function load({ request }) {
-  const projectAPIKey = '<ph_project_api_key>'
+  const projectAPIKey = '<ph_project_token>'
   const posthog = new PostHog(projectAPIKey, 
   { host: '<ph_client_api_host>' });
   

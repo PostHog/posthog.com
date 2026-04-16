@@ -1,0 +1,62 @@
+---
+title: Upload mappings for Android
+showStepsToc: true
+---
+
+import CLIDownload from "../_snippets/cli/download.mdx"
+import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
+import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
+
+
+<Steps>
+
+<Step title="Download CLI" badge="required">
+
+> [CLI v0.7.4](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.7.4) or later
+
+<CLIDownload/>
+
+</Step>
+
+<Step title="Authenticate" badge="required">
+
+<CLIAuthenticate />
+
+</Step>
+
+<Step title="Inject and upload" badge="required">
+
+> [AGP v8](https://developer.android.com/build/releases/gradle-plugin) or later
+
+Automatic mappings uploading is handled through the Gradle build process on Android.
+
+Install the [PostHog Android Gradle Plugin](https://github.com/PostHog/posthog-android/blob/main/posthog-android-gradle-plugin/CHANGELOG.md) on your app's `build.gradle.kts` file.
+
+```kotlin
+// Available through mavenCentral()
+plugins {
+    id("com.android.application")
+    id("com.posthog.android") version "$version"
+    ...
+}
+```
+
+If you are running this in CI/CD, you can configure the CLI directly on the Gradle task instead of relying on `POSTHOG_CLI_HOST`, `POSTHOG_CLI_PROJECT_ID`, and `POSTHOG_CLI_API_KEY` environment variables:
+
+```kotlin
+import com.posthog.android.PostHogCliExecTask
+
+tasks.withType<PostHogCliExecTask> {
+    postHogHost = "https://eu.posthog.com"
+    postHogProjectId = "my-project-id"
+    postHogApiKey = "my-personal-api-key"
+}
+```
+
+You can also set `postHogExecutable` if you want to use a custom `posthog-cli` path.
+
+</Step>
+
+<StepVerifySymbolSetsUpload symbolType="mappings" />
+
+</Steps>

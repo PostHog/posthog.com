@@ -29,14 +29,15 @@ export const getCookie = (name: string): string | null => {
     return cookieValue
 }
 
-export const setCookie = (name: string, value: string, days: number): void => {
+export const setCookie = (name: string, value: string, days: number, domain?: string): void => {
     let expires = ''
     if (days) {
         const date = new Date()
         date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
         expires = '; expires=' + date.toUTCString()
     }
-    document.cookie = name + '=' + (value || '') + expires + '; path=/'
+    const domainStr = domain ? `; domain=${domain}` : ''
+    document.cookie = name + '=' + (value || '') + expires + domainStr + '; path=/'
 }
 
 export const generateRandomHtmlId = (): string =>
@@ -88,7 +89,7 @@ export const isURL = (s: string): boolean => {
     try {
         new URL(s)
         return true
-    } catch (_) {
+    } catch {
         return false
     }
 }

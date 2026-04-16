@@ -1,5 +1,5 @@
-import React from 'react'
-import { useStaticQuery, graphql, Link } from 'gatsby'
+import React, { useEffect } from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 import { IconLightBulb } from '@posthog/icons'
@@ -7,83 +7,13 @@ import Cards from 'components/Cards'
 import { PostHogAIExampleCards } from 'components/Cards/data'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import CustomRoadmapSlide from 'components/AI/CustomRoadmapSlide'
-
+import CustomPersonasSlide from 'components/AI/CustomPersonasSlide'
+import CustomCapabilitiesSlide from 'components/AI/CustomCapabilitiesSlide'
+import { useWindow } from '../../context/Window'
+import TerminalView from 'components/AI/TerminalView'
+import usePostHog from 'hooks/usePostHog'
+import Demos from 'components/Home/Test/Demos'
 const PRODUCT_HANDLE = 'posthog_ai'
-
-const CustomManifestoSlide = () => {
-    return (
-        <div
-            data-scheme="primary"
-            className="flex flex-col p-12 justify-start @2xl:justify-center items-center h-full bg-primary text-primary"
-        >
-            <h2 className="text-4xl font-bold mb-8">Manifesto</h2>
-            <p>
-                <Link to="/ai" state={{ newWindow: true }}>
-                    PostHog AI
-                </Link>{' '}
-                is our product assistant that helps you build context, assemble insights, find areas for product
-                improvement, and even create pull requests after writing code (alpha).
-            </p>
-
-            <p>PostHog AI is free to use during beta. (After that, we may charge a nominal flat monthly fee.)</p>
-
-            <h2>Why don’t I just ask ChatGPT instead?</h2>
-
-            <p>
-                PostHog AI has a nuanced understanding of your customers - it has access to errors, replays, event data,
-                and everything in your data warehouse. You can ask ChatGPT questions based on data from one product at a
-                time, but that’s like trying to understand a painting when you can only see the color blue - you may get
-                a rough idea, but it’s hardly the Mona Lisa.
-            </p>
-
-            <h2>More than chatting with your data...</h2>
-
-            <p>
-                PostHog AI can read and write. He can find, watch sessions, explain and summarize replays for you. He
-                can create insights, write and edit SQL, conduct multi-step deep research, and more. The goal is to
-                generate a rich understanding of your customers’ broad range of data.
-            </p>
-
-            <h2>Product autonomy</h2>
-
-            <p>
-                The goal long term is to help every developer to ship a product autonomously. There are many steps to
-                get there, many of which we are still to take, but we believe the technology today exists to make very
-                meaningful progress.
-            </p>
-
-            <p>
-                Right now, you can meaningfully detect issues and understand user behavior to inform what you ship. As
-                we give PostHog AI access to more tools, he’ll get smarter, more accurate, and more intelligent.
-            </p>
-
-            <p>
-                Very shortly you’ll be able to detect and generate PRs for fixing UX issues and errors, before you even
-                wake up for the day. We’re working on the ability to generate ideas for what to work on, and to convert
-                these into pull requests agentically. Stay tuned.
-            </p>
-        </div>
-    )
-}
-
-const CustomPricingSlide = () => {
-    return (
-        <div
-            data-scheme="primary"
-            className="flex flex-col p-12 justify-start @2xl:justify-center items-center h-full bg-primary text-primary"
-        >
-            <h2 className="text-4xl font-bold mb-8">Pricing</h2>
-
-            <div className="bg-accent border border-primary max-w-xl mx-auto rounded p-8 text-center">
-                <div className="text-2xl font-bold mb-4">PostHog AI is free during beta.</div>
-                <p className="text-xl">
-                    Eventually we'll charge usage-based pricing and will offer a generous monthly free tier, as we do
-                    with all of our paid products.
-                </p>
-            </div>
-        </div>
-    )
-}
 
 const CustomDemoSlide = () => {
     return (
@@ -97,7 +27,7 @@ const CustomDemoSlide = () => {
             </p>
 
             <ScrollArea className="min-h-0 w-full h-full @2xl:-mt-4">
-                <Cards data={PostHogAIExampleCards} buttons={false} />
+                <Cards data={PostHogAIExampleCards} />
             </ScrollArea>
 
             <div className="flex gap-2 justify-center absolute bottom-4 left-0 right-0 scale-125 @2xl:scale-100">
@@ -112,6 +42,8 @@ const CustomDemoSlide = () => {
 }
 
 export default function PostHogAI(): JSX.Element {
+    const posthog = usePostHog()
+    const { view, setHasDeveloperMode, setView } = useWindow()
     const contentData = useContentData()
     const data = useStaticQuery(graphql`
         query {
@@ -183,17 +115,33 @@ export default function PostHogAI(): JSX.Element {
             'docs',
             'pairs-with',
             'answers',
+            'posthog-on-posthog',
         ],
         custom: [
+            {
+                slug: 'demos',
+                name: 'Demos',
+                component: Demos,
+            },
             {
                 slug: 'roadmap',
                 name: 'Roadmap',
                 component: CustomRoadmapSlide,
             },
             {
-                slug: 'demo',
-                name: 'Demo',
+                slug: 'you',
+                name: 'PostHog AI for you',
+                component: CustomPersonasSlide,
+            },
+            {
+                slug: 'try-it',
+                name: 'Try it',
                 component: CustomDemoSlide,
+            },
+            {
+                slug: 'capabilities',
+                name: 'Advanced modes',
+                component: CustomCapabilitiesSlide,
             },
             // {
             //     slug: 'manifesto',
@@ -201,7 +149,18 @@ export default function PostHogAI(): JSX.Element {
             //     component: CustomManifestoSlide,
             // },
         ],
-        order: ['overview', 'features', 'demo', `posthog-on-posthog`, 'roadmap', 'pricing', 'getting-started'],
+        order: [
+            'overview',
+            'features',
+            'demos',
+            'try-it',
+            'capabilities',
+            'videos',
+            'you',
+            'roadmap',
+            'pricing',
+            'getting-started',
+        ],
         templates: {
             overview: 'max',
             features: 'ai',
@@ -212,19 +171,20 @@ export default function PostHogAI(): JSX.Element {
         },
     })
 
-    // Override the pricing slide with our custom component
-    const pricingSlideIndex = slides.slides.findIndex((slide) => slide.slug === 'pricing')
-    if (pricingSlideIndex !== -1) {
-        slides.slides[pricingSlideIndex] = {
-            ...slides.slides[pricingSlideIndex],
-            component: CustomPricingSlide,
-        }
-    }
-
     const mergedData = {
         ...data,
         ...contentData,
     }
 
-    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
+    useEffect(() => {
+        setHasDeveloperMode(true)
+        const mode = posthog?.getFeatureFlag?.('mode-selection-test')
+        setView(mode === 'developer' ? 'developer' : 'marketing')
+    }, [])
+
+    return view === 'developer' ? (
+        <TerminalView />
+    ) : (
+        <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
+    )
 }

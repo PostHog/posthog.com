@@ -1,28 +1,53 @@
-## Q4 objectives
+## Q2 2026 objectives
 
-### Implement the LLM Analytics Pipeline
+### Isolate ingestion Kafka topics
 
-- Build a new endpoint to handle LLM analytics events with large contexts
-- Include support for multi-modal models
+Kafka infrastructure is shared across ingestion and other teams, making it much harder to maintain ingestion reliability and scale independently.
 
-### Define the event ingestion boundaries and enforce them
+- Separate Kafka infrastructure for ingestion from other teams
+- Evaluate WarpStream as a full MSK replacement
+- Fall back to multi-MSK cluster setup if WarpStream doesn't pan out
 
-- Make it clear which use cases and traffic patterns are supported
-- Enforce boundaries to improve the resilience of the ingestion pipeline
+### PersonHog
 
-### Prototype Persons API
+Person processing should be stable and fully handled by PersonHog.
 
-- Encapsulate database access to improve maintainability, scalability and performance
-- Enable more frequent and granular updates of person profiles
+- Route all reads and writes through PersonHog — no direct DB calls from other services
+- Define and guarantee SLAs for read/write latency and availability
+- Ship the read/write split architecture to production
+- Roll out safely with strong validation of data
 
-### Prototype multi-threaded ingestion
+### Redesign the capture contract
 
-- Increase the maximum per-partition event throughput of the ingestion pipeline in Node.js
-- Prepare for a possible future rewrite
+Capture lacks the structure needed for strong rate limiting and efficient downstream processing.
 
-### Do at least one thing that improves data quality for customers
+- Define a new capture contract with a strict schema for all endpoints
+- Include critical metadata in headers so downstream consumers don't need to parse payloads
+- Standardize response and error codes for SDKs
+- Establish the SDK harness as the canonical way to stay on contract
+- Migrate all SDKs to the new contract
+- Enable rate limiting
 
-Potential options:
-- Schema management
-- Authorized events
-- Better timestamp handling
+### Define and commit to ingestion SLAs
+
+The primary ingestion lane needs consistently low latency, not just high availability.
+
+- Publish metrics and SLAs for all pipelines, especially the general lane
+- Automate monitoring to protect 99.99% of traffic from the 0.01% causing lag
+
+### Improve per-partition throughput
+
+Current per-partition processing speed won't support 10x growth.
+
+- Benchmark and identify per-partition bottlenecks
+- Evaluate alternative languages or architectures
+- Reduce the number of running ingestion pods
+
+### Make ingestion pipelines easy to manage
+
+The ingestion team will own more pipelines over time and needs better tooling to manage them efficiently.
+
+- Make Helm charts easy to configure for deploying new pipelines
+- Provision metrics and alerting automatically with each pipeline
+- Build MCP tooling for interactive pipeline support
+

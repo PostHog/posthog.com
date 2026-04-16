@@ -1,0 +1,90 @@
+name: Art board status change
+
+# Handles two actions when an issue is moved on the art request board:
+# 1. Moved to "Done"         → close the issue
+# 2. Moved to "Assigned: X"  → remove the other default assignees
+#    (exception: internal requests from team members keep everyone assigned)
+
+permissions:
+    contents: read
+
+on:
+    projects_v2_item:
+        types: [edited]
+
+jobs:
+    handle:
+        runs-on: ubuntu-latest
+        if: github.event.projects_v2_item.field_name == 'Status'
+        steps:
+            - name: Get app token
+              id: app-token
+              uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+              with:
+                  app-id: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_APP_ID }}
+                  private-key: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_PRIVATE_KEY }}
+            - name: Close issue or sync assignees
+              uses: actions/github-script@v7
+              with:
+                  github-token: ${{ steps.app-token.outputs.token }}
+                  script: |
+                      const ASSIGNEE_MAP = {
+                        'Assigned: Daniel': { keep: 'dphawkins1617', remove: ['lottiecoxon', 'heidiberton'] },
+                        'Assigned: Lottie': { keep: 'lottiecoxon',   remove: ['dphawkins1617', 'heidiberton'] },
+                        'Assigned: Heidi':  { keep: 'heidiberton',   remove: ['lottiecoxon', 'dphawkins1617'] },
+                      };
+                      const TEAM = ['lottiecoxon', 'dphawkins1617', 'heidiberton'];
+
+                      const { node: item } = await github.graphql(`
+                        query($id: ID!) {
+                          node(id: $id) {
+                            ... on ProjectV2Item {
+                              fieldValues(first: 20) {
+                                nodes {
+                                  ... on ProjectV2ItemFieldSingleSelectValue {
+                                    name
+                                    field { ... on ProjectV2FieldCommon { name } }
+                                  }
+                                }
+                              }
+                              content {
+                                ... on Issue {
+                                  number state author { login }
+                                  repository { nameWithOwner }
+                                }
+                              }
+                            }
+                          }
+                        }`, { id: context.payload.projects_v2_item.node_id });
+
+                      const status = item.fieldValues.nodes.find(f => f.field?.name === 'Status');
+                      if (!status) return;
+
+                      const issue = item.content;
+                      if (!issue?.number || issue.state === 'CLOSED') return;
+
+                      const [owner, repo] = issue.repository.nameWithOwner.split('/');
+
+                      // ── Done → close ──────────────────────────────────────────────
+                      if (status.name === 'Done') {
+                        await github.rest.issues.update({
+                          owner, repo, issue_number: issue.number,
+                          state: 'closed', state_reason: 'completed',
+                        });
+                        console.log(`Closed #${issue.number}`);
+                        return;
+                      }
+
+                      // ── Assigned column → sync assignees ──────────────────────────
+                      const mapping = ASSIGNEE_MAP[status.name];
+                      if (!mapping) return;
+
+                      if (TEAM.includes(issue.author?.login?.toLowerCase())) {
+                        console.log(`#${issue.number} is an internal request — keeping all assignees.`);
+                        return;
+                      }
+
+                      await github.rest.issues.removeAssignees({
+                        owner, repo, issue_number: issue.number, assignees: mapping.remove,
+                      });
+                      console.log(`Synced assignees on #${issue.number}: kept @${mapping.keep}`);

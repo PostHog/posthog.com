@@ -7,9 +7,17 @@ import { TreeMenu } from 'components/TreeMenu'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Question, QuestionForm } from 'components/Squeak'
-import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
-import { IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification, IconSearch } from '@posthog/icons'
+import {
+    IconSidePanel,
+    IconBottomPanel,
+    IconChevronDown,
+    IconNotification,
+    IconSearch,
+    IconPin,
+    IconCheck,
+    IconChevronLeft,
+} from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useToast } from '../../context/Toast'
@@ -95,6 +103,96 @@ const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => 
 
 const SIDE_WIDTH_DEFAULT = 600
 
+interface QuestionRowProps {
+    question: any
+    lastQuestionRef: (node?: Element | null) => void
+    appWindowPath?: string
+    bottomHeight: number
+    setBottomHeight: (height: number) => void
+    containerRef: React.RefObject<HTMLDivElement>
+    pinned?: boolean
+}
+
+const QuestionRow = ({
+    question,
+    lastQuestionRef,
+    appWindowPath,
+    bottomHeight,
+    setBottomHeight,
+    containerRef,
+    pinned = false,
+}: QuestionRowProps) => {
+    const { subject, numReplies, activeAt, replies, profile, permalink, resolved } = question
+    const latestAuthor = replies?.data?.[replies.data.length - 1]?.profile || profile
+    const active = `/questions/${permalink}` === appWindowPath
+
+    return (
+        <div key={question.id} ref={lastQuestionRef}>
+            <OSButton
+                asLink
+                to={`/questions/${permalink}`}
+                align="left"
+                width="full"
+                hover="background"
+                size="md"
+                key={question.id}
+                className={` 
+                    flex-wrap @3xl:flex-nowrap !gap-0 @3xl:!gap-1 !items-start
+                    ${active ? 'font-bold bg-accent' : ''}
+                    ${pinned ? 'bg-accent border-b border-primary' : ''}
+                `}
+                onClick={() => {
+                    if (!containerRef.current) return
+                    if (bottomHeight <= 45) {
+                        setBottomHeight(containerRef.current.getBoundingClientRect().height * 0.8)
+                    }
+                }}
+            >
+                <div
+                    className={`shrink-0 w-7 @3xl:basis-auto basis-[5%] @3xl:block ${
+                        pinned || resolved ? '' : 'hidden'
+                    }`}
+                >
+                    {pinned ? (
+                        <Tooltip trigger={<IconPin className="size-full max-w-5" />}>Pinned</Tooltip>
+                    ) : resolved ? (
+                        <Tooltip trigger={<IconCheck className="size-full max-w-5 text-green" />}>Resolved</Tooltip>
+                    ) : null}
+                </div>
+
+                <div
+                    className={`order-1 @3xl:order-none @3xl:w-48 @3xl:block @3xl:basis-auto ${
+                        pinned || resolved ? 'basis-[65%]' : 'basis-[75%]'
+                    }`}
+                >
+                    {profile?.firstName} {profile?.lastName}
+                    <span className="text-muted text-sm ml-1 @3xl:hidden">{numReplies}</span>
+                </div>
+                <div
+                    className={`order-3 @3xl:order-none flex-[1_0_100%] @3xl:flex-1 ${
+                        active ? 'font-medium @3xl:font-bold' : 'font-medium'
+                    }`}
+                >
+                    {subject}
+                </div>
+                <div className="hidden @3xl:block w-24 text-center">{numReplies}</div>
+                <div
+                    className={`order-2 text-right @3xl:text-left @3xl:basis-auto @3xl:w-60 font-normal ${
+                        pinned || resolved ? 'basis-[30%]' : 'basis-[25%]'
+                    }`}
+                >
+                    <Tooltip trigger={dayjs(activeAt).fromNow()}>
+                        {dayjs(activeAt).format('dddd, MMMM D, YYYY')} at {dayjs(activeAt).format('h:mm A')}
+                    </Tooltip>{' '}
+                    <span className="hidden @3xl:inline-block">
+                        by {latestAuthor?.firstName} {latestAuthor?.lastName}
+                    </span>
+                </div>
+            </OSButton>
+        </div>
+    )
+}
+
 const layoutOptions = [
     {
         label: 'Stacked view',
@@ -166,12 +264,12 @@ export default function Inbox(props) {
     const [filters, setFilters] = useState(defaultFilters)
     const { addToast } = useToast()
     const { user, setSubscription, isSubscribed, isValidating } = useUser()
-    const { questions, isLoading, fetchMore, hasMore, refresh } = useQuestions({
+    const { questions, isLoading, fetchMore, hasMore, refresh, pinnedQuestions } = useQuestions({
         limit: 20,
         sortBy: 'activity',
         filters,
     })
-    const { addWindow, openSearch } = useApp()
+    const { addWindow, openSearch, websiteMode } = useApp()
     const { appWindow } = useWindow()
     const bottomHeightDefault = useMemo(() => ((appWindow?.size.height || 0) * 3) / 5, [appWindow?.size.height])
     const [bottomHeight, setBottomHeight] = useState(bottomHeightDefault)
@@ -232,6 +330,12 @@ export default function Inbox(props) {
         setSideWidth(newSideWidth)
     }
 
+    const handleBack = () => {
+        if (websiteMode) {
+            navigate(-1)
+        }
+    }
+
     useEffect(() => {
         if (inView && hasMore) {
             fetchMore()
@@ -266,9 +370,13 @@ export default function Inbox(props) {
     }, [isValidating, props.path])
 
     useEffect(() => {
-        const sideBySide = localStorage.getItem('sideBySide')
-        if (sideBySide) {
-            setSideBySide(sideBySide === 'true')
+        if (websiteMode) {
+            setSideBySide(true)
+        } else {
+            const sideBySide = localStorage.getItem('sideBySide')
+            if (sideBySide) {
+                setSideBySide(sideBySide === 'true')
+            }
         }
     }, [])
 
@@ -284,10 +392,10 @@ export default function Inbox(props) {
     }, [sideBySide])
 
     useEffect(() => {
-        if (isMobile && sideBySide && containerRef.current) {
+        if (websiteMode || (isMobile && sideBySide && containerRef.current)) {
             setSideWidth(containerRef.current.getBoundingClientRect().width)
         }
-    }, [isMobile, sideBySide, containerRef.current, appWindow?.size.width])
+    }, [isMobile, sideBySide, containerRef.current, appWindow?.size.width, websiteMode])
 
     return (
         <>
@@ -295,15 +403,18 @@ export default function Inbox(props) {
             {ready ? (
                 <div className="@container w-full h-full flex flex-col">
                     <HeaderBar
-                        homeURL="/questions"
-                        showBack
-                        showForward
+                        homeURL={websiteMode ? undefined : '/questions'}
+                        showBack={!websiteMode}
+                        showForward={!websiteMode}
                         showSearch
+                        showCustomLeft={websiteMode ? <h2 className="text-primary">Forums</h2> : undefined}
+                        className={websiteMode ? 'border-b border-primary sticky top-[49px] z-20 bg-primary' : ''}
                         rightActionButtons={
                             <div className="flex items-center gap-2 flex-wrap">
-                                <OSButton icon={<IconSearch />} onClick={() => openSearch('questions')} />
+                                <OSButton icon={<IconSearch />} onClick={() => openSearch('question')} />
                                 <CallToAction
                                     size="sm"
+                                    type={websiteMode ? 'secondary' : 'primary'}
                                     onClick={() =>
                                         addWindow(
                                             <AskAQuestion
@@ -317,7 +428,7 @@ export default function Inbox(props) {
                                 >
                                     Ask a question
                                 </CallToAction>
-                                {permalink ? (
+                                {permalink && !websiteMode ? (
                                     <ToggleGroup
                                         title="Layout"
                                         hideTitle={true}
@@ -333,11 +444,17 @@ export default function Inbox(props) {
 
                     <div
                         data-scheme="secondary"
-                        className="flex @2xl:flex-row flex-col flex-grow border-t border-primary min-h-0"
+                        className={`flex @2xl:flex-row flex-col flex-grow min-h-0 ${
+                            websiteMode ? '' : 'border-t border-primary'
+                        }`}
                     >
                         <aside
                             data-scheme="secondary"
-                            className="w-full @2xl:w-64 bg-primary @2xl:border-r border-primary @2xl:h-full flex-shrink-0"
+                            className={`w-full @2xl:w-64 bg-primary flex-shrink-0 ${
+                                websiteMode
+                                    ? 'h-[calc(100vh-91px)] sticky top-[101px]'
+                                    : '@2xl:border-r border-primary @2xl:h-full'
+                            }`}
                         >
                             <ScrollArea className="h-full">
                                 <Menu onValueChange={setMenuValue} />
@@ -345,140 +462,112 @@ export default function Inbox(props) {
                         </aside>
                         <main
                             data-scheme="primary"
-                            className="flex-1 bg-primary overflow-hidden @2xl:border-none border-t border-primary"
+                            className={`flex-1 bg-primary overflow-hidden border-primary ${
+                                websiteMode ? 'border-l' : '@2xl:border-none border-t'
+                            }`}
                         >
                             <div
                                 ref={containerRef}
                                 className={`flex flex-row h-full ${sideBySide ? 'flex-row' : 'flex-col'}`}
                             >
-                                <div className={`@container flex-1 min-h-0 text-sm ${sideBySide ? 'w-0' : 'w-full'}`}>
-                                    <ScrollArea className="h-full">
-                                        <div className="flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary z-10 whitespace-nowrap">
-                                            <div className="hidden @3xl:block w-48">Author</div>
-                                            <div className="flex-1">
-                                                <span className="@3xl:hidden">Author / Replies</span>
-                                                <span className="hidden @3xl:block">Subject</span>
+                                {permalink && websiteMode ? null : (
+                                    <div
+                                        className={`@container flex-1 min-h-0 text-sm ${sideBySide ? 'w-0' : 'w-full'}`}
+                                    >
+                                        <ScrollArea className="h-full">
+                                            <div className="flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary z-10 whitespace-nowrap">
+                                                <div className="w-8 shrink-0 @3xl:block hidden" />
+                                                <div className="hidden @3xl:block w-48">Author</div>
+                                                <div className="flex-1">
+                                                    <span className="@3xl:hidden">Author / Replies</span>
+                                                    <span className="hidden @3xl:block">Subject</span>
+                                                </div>
+                                                <div className="hidden @3xl:block w-24 text-center">Replies</div>
+                                                <div className="w-60 text-right @3xl:text-left">Last activity</div>
                                             </div>
-                                            <div className="hidden @3xl:block w-24 text-center">Replies</div>
-                                            <div className="w-60 text-right @3xl:text-left">Last activity</div>
-                                        </div>
-                                        <div className="px-1 py-1 space-y-px">
-                                            {(showSubscribedQuestions
-                                                ? subscribedQuestions
-                                                : flattenStrapiResponse(questions.data)
-                                            )?.map((question) => {
-                                                const { subject, numReplies, activeAt, replies, profile, permalink } =
-                                                    question
-                                                const latestAuthor =
-                                                    replies?.data?.[replies.data.length - 1]?.profile || profile
-                                                const active = `/questions/${permalink}` === appWindow?.path
-                                                return (
-                                                    <div key={question.id} ref={lastQuestionRef}>
-                                                        <OSButton
-                                                            asLink
-                                                            to={`/questions/${permalink}`}
-                                                            align="left"
-                                                            width="full"
-                                                            hover="background"
-                                                            size="md"
-                                                            key={question.id}
-                                                            className={` 
-                                                        flex-wrap @3xl:flex-nowrap !gap-0 @3xl:!gap-1 !items-start
-                                                        ${active ? 'font-bold bg-accent' : ''}
-                                                    `}
-                                                            onClick={() => {
-                                                                if (!containerRef.current) return
-                                                                if (bottomHeight <= 45) {
-                                                                    setBottomHeight(
-                                                                        containerRef.current.getBoundingClientRect()
-                                                                            .height * 0.8
-                                                                    )
-                                                                }
-                                                            }}
-                                                        >
-                                                            <div className="basis-9/12 @3xl:basis-auto order-1 @3xl:order-none @3xl:w-48 @3xl:block">
-                                                                {profile?.firstName} {profile?.lastName}
-                                                                <span className="text-muted text-sm ml-1 @3xl:hidden">
-                                                                    {numReplies}
-                                                                </span>
-                                                            </div>
-                                                            <div
-                                                                className={`order-3 @3xl:order-none flex-[1_0_100%] @3xl:flex-1 ${
-                                                                    active
-                                                                        ? 'font-medium @3xl:font-bold'
-                                                                        : 'font-medium'
-                                                                }`}
-                                                            >
-                                                                {subject}
-                                                            </div>
-                                                            <div className="hidden @3xl:block w-24 text-center">
-                                                                {numReplies}
-                                                            </div>
-                                                            <div className="order-2 basis-3/12 text-right @3xl:text-left @3xl:basis-auto @3xl:w-60 font-normal">
-                                                                <Tooltip trigger={dayjs(activeAt).fromNow()}>
-                                                                    {dayjs(activeAt).format('dddd, MMMM D, YYYY')} at{' '}
-                                                                    {dayjs(activeAt).format('h:mm A')}
-                                                                </Tooltip>{' '}
-                                                                <span className="hidden @3xl:inline-block">
-                                                                    by {latestAuthor?.firstName}{' '}
-                                                                    {latestAuthor?.lastName}
-                                                                </span>
-                                                            </div>
-                                                        </OSButton>
-                                                    </div>
-                                                )
-                                            })}
-                                            {!isLoading && (!questions.data || questions.data.length === 0) && (
-                                                <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-                                                    <div className="text-lg mb-2 font-semibold">No questions found</div>
-                                                    <div className="text-secondary text-sm">
-                                                        {props.path === '/questions/subscriptions'
-                                                            ? "You haven't subscribed to any questions yet."
-                                                            : 'There are no questions in this topic yet.'}
-                                                    </div>
-                                                </div>
-                                            )}
-                                            {isLoading && (
-                                                <div className="flex items-center justify-center py-8 h-full">
-                                                    <Lottie
-                                                        animationData={hourglassAnimation}
-                                                        className="size-6 opacity-75 text-secondary"
-                                                        className="size-6 opacity-75 dark:hidden"
-                                                        title="Loading questions..."
+                                            <div className="px-1 py-1 space-y-px">
+                                                {pinnedQuestions?.map((question) => (
+                                                    <QuestionRow
+                                                        key={question.id}
+                                                        question={question}
+                                                        lastQuestionRef={lastQuestionRef}
+                                                        appWindowPath={appWindow?.path}
+                                                        bottomHeight={bottomHeight}
+                                                        setBottomHeight={setBottomHeight}
+                                                        containerRef={containerRef}
+                                                        pinned
                                                     />
-                                                    <Lottie
-                                                        animationData={hourglassAnimationWhite}
-                                                        className="size-6 opacity-75 hidden dark:block"
-                                                        title="Loading questions..."
+                                                ))}
+                                                {(showSubscribedQuestions
+                                                    ? subscribedQuestions
+                                                    : flattenStrapiResponse(questions.data)?.filter(
+                                                          (question) => !question?.pinnedTopics?.[0]
+                                                      )
+                                                )?.map((question) => (
+                                                    <QuestionRow
+                                                        key={question.id}
+                                                        question={question}
+                                                        lastQuestionRef={lastQuestionRef}
+                                                        appWindowPath={appWindow?.path}
+                                                        bottomHeight={bottomHeight}
+                                                        setBottomHeight={setBottomHeight}
+                                                        containerRef={containerRef}
                                                     />
-                                                </div>
-                                            )}
-                                        </div>
-                                    </ScrollArea>
-                                </div>
+                                                ))}
+                                                {!isLoading && (!questions.data || questions.data.length === 0) && (
+                                                    <div className="flex flex-col items-center justify-center py-12 px-4 text-center text-primary">
+                                                        <div className="text-lg mb-2 font-semibold">
+                                                            No questions found
+                                                        </div>
+                                                        <div className="text-secondary text-sm">
+                                                            {props.path === '/questions/subscriptions'
+                                                                ? "You haven't subscribed to any questions yet."
+                                                                : 'There are no questions in this topic yet.'}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                {isLoading && (
+                                                    <div className="flex items-center justify-center py-8 h-full">
+                                                        <Lottie
+                                                            animationData={hourglassAnimation}
+                                                            className="size-6 opacity-75 dark:hidden"
+                                                            title="Loading questions..."
+                                                        />
+                                                        <Lottie
+                                                            animationData={hourglassAnimationWhite}
+                                                            className="size-6 opacity-75 hidden dark:block"
+                                                            title="Loading questions..."
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </ScrollArea>
+                                    </div>
+                                )}
                                 <AnimatePresence>
                                     {permalink && (
                                         <motion.div
                                             ref={bottomContainerRef}
                                             className={`flex-none relative min-h-0 min-w-0 ${
                                                 !isDragging ? 'transition-all duration-200 ease-out' : ''
-                                            } ${sideBySide ? '@4xl:border-l border-primary' : ''}`}
+                                            } ${sideBySide && !websiteMode ? '@4xl:border-l border-primary' : ''}`}
                                             initial={{
-                                                width: 0,
+                                                width: websiteMode ? '100%' : 0,
                                             }}
                                             animate={{
                                                 height: sideBySide ? '100%' : bottomHeight,
-                                                width: sideBySide ? sideWidth : '100%',
+                                                width: sideBySide && !websiteMode ? sideWidth : '100%',
                                             }}
                                             exit={{
-                                                width: 0,
+                                                width: websiteMode ? '100%' : 0,
                                             }}
                                             transition={{
                                                 type: 'tween',
+                                                ...(websiteMode ? { duration: 0 } : {}),
                                                 ...(isDragging ? { duration: 0 } : {}),
                                             }}
                                         >
-                                            {sideBySide ? (
+                                            {websiteMode ? null : sideBySide ? (
                                                 <motion.div
                                                     data-scheme="tertiary"
                                                     className="w-1.5 cursor-ew-resize top-0 left-0 !transform-none absolute z-20 h-full hover:bg-accent active:bg-accent @4xl:block hidden"
@@ -515,6 +604,13 @@ export default function Inbox(props) {
                                                     sideBySide ? 'border-t-0' : ''
                                                 }`}
                                             >
+                                                {websiteMode && (
+                                                    <OSButton
+                                                        size="md"
+                                                        onClick={handleBack}
+                                                        icon={<IconChevronLeft />}
+                                                    />
+                                                )}
                                                 <OSButton
                                                     variant="secondary"
                                                     size="xs"
@@ -569,41 +665,43 @@ export default function Inbox(props) {
                                                         />
                                                     )}
 
-                                                    <div className="ml-1 pl-1 border-l border-primary">
-                                                        <Tooltip
-                                                            trigger={
-                                                                <span>
-                                                                    <OSButton
-                                                                        size="sm"
-                                                                        className="relative"
-                                                                        style={{ width: 26, height: 26 }}
-                                                                        icon={
-                                                                            <IconChevronDown
-                                                                                className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
-                                                                                    sideBySide
-                                                                                        ? expandable
-                                                                                            ? 'rotate-90'
-                                                                                            : '-rotate-90'
-                                                                                        : expandable
-                                                                                        ? 'rotate-180'
-                                                                                        : ''
-                                                                                }`}
-                                                                            />
-                                                                        }
-                                                                        onClick={() => {
-                                                                            if (isMobile && sideBySide) {
-                                                                                navigate(menuValue)
-                                                                            } else {
-                                                                                expandOrCollapse(expandable)
+                                                    {!websiteMode && (
+                                                        <div className="ml-1 pl-1 border-l border-primary">
+                                                            <Tooltip
+                                                                trigger={
+                                                                    <span>
+                                                                        <OSButton
+                                                                            size="sm"
+                                                                            className="relative"
+                                                                            style={{ width: 26, height: 26 }}
+                                                                            icon={
+                                                                                <IconChevronDown
+                                                                                    className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
+                                                                                        sideBySide
+                                                                                            ? expandable
+                                                                                                ? 'rotate-90'
+                                                                                                : '-rotate-90'
+                                                                                            : expandable
+                                                                                            ? 'rotate-180'
+                                                                                            : ''
+                                                                                    }`}
+                                                                                />
                                                                             }
-                                                                        }}
-                                                                    />
-                                                                </span>
-                                                            }
-                                                        >
-                                                            {expandable ? 'Expand' : 'Collapse'}
-                                                        </Tooltip>
-                                                    </div>
+                                                                            onClick={() => {
+                                                                                if (isMobile && sideBySide) {
+                                                                                    navigate(menuValue)
+                                                                                } else {
+                                                                                    expandOrCollapse(expandable)
+                                                                                }
+                                                                            }}
+                                                                        />
+                                                                    </span>
+                                                                }
+                                                            >
+                                                                {expandable ? 'Expand' : 'Collapse'}
+                                                            </Tooltip>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
                                             <ScrollArea>
@@ -615,6 +713,7 @@ export default function Inbox(props) {
                                                         subscribeButton={false}
                                                         showSlug
                                                         isInForum={true}
+                                                        onPinTopics={refresh}
                                                     />
                                                 </div>
                                             </ScrollArea>

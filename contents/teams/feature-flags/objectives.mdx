@@ -1,63 +1,30 @@
-### Q4 2025 Objectives
-This quarter we're making feature flags faster, more reliable, and way more automated. That means better (and more!) SDKs, more powerful local evaluation, supporting real-time use cases, and using AI to handle the tedious stuff. We're also talking to a bunch of users to figure out what to build next, fixing the foundations so nothing breaks, and shipping features that make flags easier to wrangle when you have thousands of them.
+### Q2 2026 Objectives
 
-#### Awesome documentation <TeamMember name="Dylan Martin" photo />
+#### AI-first flag management ONLY for PostHog employees (Driver: <TeamMember name="Dylan Martin" />)
 
-Our docs should be as good as the <SmallTeam slug="experiment" />'s. We're partnering with the <SmallTeam slug="content" /> to refresh everything, writing real-world walkthroughs, and making it easier to jump from the app to the right docs.
+We have loads of people who work with feature flags internally, so let's dogfood the shit out of this. The bet is that teams will manage their entire feature flag lifecycle (this includes both flag and cohort-based targeting) through AI coding agents without ever opening the PostHog UI (or exclusively through PostHog AI). If agents can create, modify, and reason about flags autonomously, we become the default flags tool in agentic workflows rather than losing to DIY implementations.
 
-#### Make local evaluation the default server-side evaluation strategy <TeamMember name="Dylan Martin" photo /> <TeamMember name="Phil Haack" photo />
+**What we'll ship:**
 
-Local eval means faster, cheaper, and more reliable flags. We want to make it the default for server-side SDKs by:
-- Finishing HyperCache integration to decouple `/local_evaluation` from Postgres
-- Solving the properties problem that's been blocking adoption (it's not very ergonomic to bring your own properties to everything, we'd love to improve this experience)
-- Rewriting the endpoint in Rust for better performance
-- Adding ETag support for efficient caching
-- Writing better docs and guides
+- MCP server with full CRUD for flags, rollout conditions, and overrides
+- Flag usage metrics & evaluation stats exposed via MCP
+- Proactive signals pushed to agents: rollout changes, stale flag detection, evaluation anomalies
+- Add MCP support for early access features
 
-#### Ship a Java SDK <TeamMember name="Dustin Byrne" photo />
+#### Real-time cohorts (Driver: <TeamMember name="Gustavo Henrique Strassburger" />)
 
-Java developers need an official SDK. We're shipping one and iterating based on feedback.
+This is our most-requested feature. Dynamic cohorts today are computed on a delay, which makes them useless for real-time targeting decisions like "user did X in the last 5 minutes." If we can make cohort membership evaluate in real-time at the point of flag evaluation, we collapse a whole category of custom targeting logic people currently build themselves.
 
-#### Improve SDK standardization <TeamMember name="Dustin Byrne" photo />
+**What we'll ship:**
 
-Inconsistent SDKs lead to bugs. We're burning down the [SDK standardization meta-issue](https://github.com/PostHog/posthog/issues/31425) to create a consistent experience across the stack.
+- Real-time cohort evaluation at flag check time
+- Cohort membership change signals for MCP / webhooks
+- Migration path from existing dynamic cohorts
 
-#### Mature the Cohorts UI/UX <TeamMember name="Gustavo Henrique Strassburger" photo />
+#### Close the targeting functionality gap (Driver: <TeamMember name="Dylan Martin" />)
 
-Cohorts has been neglected. We're clearing the backlog and fixing UI bugs so cohorts is actually pleasant to use by end of Q4.
+User and group targeting in the same flag is the most requested targeting capability we don't fully support. Every time someone hits this wall, they either hack around it or leave. This is table-stakes work that unblocks expansion in accounts already using flags.
 
-#### Real-time feature flags <TeamMember name="Gustavo Henrique Strassburger" photo />
+**What we'll ship:**
 
-Some use cases need instant flag updates without refreshes or restarts. We're adding WebSocket/SSE-based real-time updates to key SDKs.
-
-#### Finish behavioral cohort targeting <TeamMember name="Dylan Martin" photo />
-
-We started building a system to track behavioral cohort membership in a fast data store. We're finishing it so you can target flags based on behavioral cohorts.
-
-#### Flag staleness cleanup system <TeamMember name="Phil Haack" photo />
-
-Stale flags are tech debt. We're building tools to:
-- Detect and surface stale flags in the UI
-- Make cleanup easy with in-app tools
-- Generate prompts for Cursor/Claude Code to remove flags from your codebase
-- (Stretch) Automated actions like creating cleanup PRs
-
-#### Natural language flag creation <TeamMember name="Phil Haack" photo />
-
-Building flags with AI. You describe what you want in plain English, Max builds the flag.
-
-#### Enhanced flag evaluation debugging capabilities <TeamMember name="Dylan Martin" photo />
-
-Better visibility into why flags evaluate the way they do. We're adding evaluation properties to `$feature_flag_called` events and [showing flag evaluation history for each person](https://github.com/PostHog/posthog/issues/38669).
-
-#### Platform improvements <TeamMember name="Dylan Martin" photo />
-
-Fixing the foundations:
-- Finishing the persons database split (shared with ingestion team)
-- Decoupling `/flags` from the writer database so flags stay up even when the database is down
-- Rewriting `/evaluation_reasons` in Rust
-- Deprecating the legacy `/decide` endpoint
-
-#### Customer interviews around UI/UX improvements (Shared goal across the team)
-
-We're doing 10+ user interviews about flags UI and cohorts to figure out what to build next. This feeds directly into our roadmap for both products.
+- API and UI support for BOTH user AND group target management

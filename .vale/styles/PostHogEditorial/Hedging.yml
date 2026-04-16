@@ -1,0 +1,11 @@
+extends: existence
+message: "Avoid hedging. Be opinionated instead of saying '%s'."
+link: https://posthog.com/handbook/content/posthog-style-guide
+level: suggestion
+ignorecase: true
+tokens:
+    - it's complicated
+    - it depends
+    - it really depends
+    - there's no right answer
+    - there is no right answer

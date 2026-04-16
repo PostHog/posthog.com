@@ -7,7 +7,7 @@ hideAnchor: false
 
 ## No product design within small teams
 
-We encourage engineers to act like feature owners, carrying a project from ideation to completion. We maintain a design system in [Storybook](https://storybook.posthog.net/), so engineers can build high-quality features independently, as much as possible.
+We encourage engineers to act like feature owners, carrying a project from ideation to completion. We maintain a design system in [Storybook](https://storybook.dev.posthog.dev/), so engineers can build high-quality features independently, as much as possible.
 
 Because engineers choose their sprint tasks near the beginning of a sprint (and product doesn't plan tasks _for_ engineers in advance), our process doesn't allow for us to have a product manager and a designer to work closely together before a task gets selected by an engineer.
 

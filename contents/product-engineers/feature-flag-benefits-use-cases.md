@@ -16,7 +16,7 @@ crosspost:
 
 ## What is a feature flag?
 
-Feature flags (aka feature toggles) are a powerful tool to help improve your product. They enable engineering teams to conditionally run code, display components, and control access based on release conditions. These conditions check user data, group data, and percentages to decide whether to activate or not.
+[Feature flags (aka feature toggles)](/blog/what-is-a-feature-flag) are a powerful tool to help improve your product. They enable engineering teams to conditionally run code, display components, and control access based on release conditions. These conditions check user data, group data, and percentages to decide whether to activate or not.
 
 There are three broad types of feature flags:
 

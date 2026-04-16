@@ -1,0 +1,29 @@
+### Q2 2026 Objectives
+
+This quarter we're focused on reliability metrics, exploring a write-heavy architecture, and improving deployment confidence.
+
+#### Short term reliability and performance — <TeamMember name="Matheus Batista" photo />
+
+**Goal: Reliable remote evaluation with stable, predictable performance.**
+
+- **Define and stick to clear metrics** — p50/90/99 response time, error rate percentage, and availability SLA (e.g. 99.99% per month), equally defined for both remote and local evaluation
+- **Update flags HyperCache** — Pre-compute more operations to reduce memory and CPU during evaluation
+- **Load shedding and request hedging** — Graceful degradation under load
+- **Port local evaluation to Rust** — Move local evaluation to the new flag definitions service
+- **Customer-facing latency and uptime dashboard** — Make key performance metrics publicly visible
+
+#### Move from read-heavy architecture to write-heavy — <TeamMember name="Phil Haack" photo />
+
+**Goal: Decouple flag evaluation from the Persons DB to contain blast radius.**
+
+- **Dedicated Persons Feature Flag Store** — A denormalized store purpose-built for flag evaluation, so we're not dependent on the shared Persons DB
+- **POC for pre-calculated flag evaluation store** — Explore pre-computing flag results so evaluation doesn't require live DB reads
+
+#### Improve deployment confidence and reduce foot guns — <TeamMember name="Patricio Tarantino" photo />
+
+**Goal: Deploy changes safely with confidence, especially concurrency-sensitive changes.**
+
+- **Load tester** — Build a load testing framework for the flags service
+- **Improvements to "side" canary deploys** — Enhance the existing canary deployment approach
+- **Full canary deployment** — Graduate to a full canary deployment model
+- **Argo deployment pipeline** — Work with the ops team on a proper deployment pipeline

@@ -46,6 +46,8 @@ Inertia is the default mode of most companies – most people, really. The day y
 
 > **What we’ve learned:** Transparency is key. All our small team off-sites include a [360-degree feedback session](/handbook/people/feedback). Good feedback is based on observations, not emotions. Our [SuperDays](https://newsletter.posthog.com/i/136720638/actual-work-is-x-more-valuable-than-interviews) are designed to see how candidates receive feedback.
 
+<NewsletterForm />
+
 ## 3. Taking shortcuts when hiring
 
 Hiring people is hard. 
@@ -125,7 +127,7 @@ Exceptions include:
 - You’re building some kind of mission critical infrastructure.
 - Your product is a design-led take on a product that already exists (e.g [Linear](https://linear.app/)), where design and polish are the reason to use it over alternatives. 
 
-> **What we’ve learned:** [Product engineers](/blog/what-is-a-product-engineer) who can work autonomously are essential, as is a “[no design by default](/handbook/brand/process#no-design-by-default)” approach, so engineers can ship basic UX on their own. We use feature flags to [test in production](/product-engineers/testing-in-production), and we avoid innovating on MVPs, so we don’t get bogged down in minutiae.
+> **What we’ve learned:** [Product engineers](/product-engineer/what-is-a-product-engineer) who can work autonomously are essential, as is a “[no design by default](/handbook/brand/process#no-design-by-default)” approach, so engineers can ship basic UX on their own. We use feature flags to [test in production](/product-engineers/testing-in-production), and we avoid innovating on MVPs, so we don’t get bogged down in minutiae.
 
 ## 7. Not following-up with customers
 
@@ -167,6 +169,8 @@ You shouldn’t ignore competitors, but the decisions you make about your produc
 - **[How we built an (actually useful) AI community support bot](/blog/ai-community-answers) – <TeamMember name="Cory Watilo" />**
 
 _Words by Andy Vandervell, mechanical pencil enthusiast._
+
+<NewsletterForm />
 
 [^1]: Want to work for PostHog? Read [How to get a job at a startup](https://newsletter.posthog.com/p/how-to-get-a-job-at-a-startup), then head to [our careers page](https://posthog.com/careers) – we’re always hiring.
 

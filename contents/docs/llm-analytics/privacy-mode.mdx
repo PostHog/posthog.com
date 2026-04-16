@@ -14,7 +14,7 @@ This can be done by setting the `privacy_mode` config option in the SDK like thi
 from posthog import Posthog
 
 posthog = Posthog(
-    "<ph_project_api_key>",
+    "<ph_project_token>",
     host="<ph_client_api_host>",
     privacy_mode=True
 )
@@ -22,7 +22,7 @@ posthog = Posthog(
 
 ```ts
 const phClient = new PostHog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   { 
     host: '<ph_client_api_host>',
     privacyMode: true

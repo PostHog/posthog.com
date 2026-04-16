@@ -1,33 +1,25 @@
-### Q4 2025 Objectives
-This quarter we’re doubling down on making experiments more powerful and easier to use – pushing towards AI automation, strengthening the feature flag foundations, and expanding the metrics and tools that help teams learn faster and act with confidence.
+### Q2 2026 Objectives
+This quarter we're making experiments work great with AI agents, removing feature flag friction, and improving the results experience.
 
+#### AI
 
-#### AI features
-Motivation: We’re pushing towards more automation, using AI to make experimentation easier to set up, interpret, and act on.
+##### API layer <TeamMember name="Marcel Poelker" photo />
+Get the API layer ready for AI agents. All experiment operations should be covered, well tested and work the same way whether the caller is our frontend or an agent.
 
-* **Integrate Experiments into Tasks (AI)** – Deploy any code change behind an experiment, track its progress, and make a decision based on results. <TeamMember name="Juraj Majerik" photo /> <TeamMember name="Rodrigo Iloro" photo />
+##### Skills <TeamMember name="Marcel Poelker" photo />
+Create experiment skills so PostHog AI knows how to use our MCP tools effectively.
 
-* **“Analyze results”** AI agent – An AI agent that reviews experiment results, highlights important findings, and explains them in plain language. It can suggest whether to continue the test, stop it early, or roll out a variant. The agent should also call out risks, like low sample size or unusual data patterns, to help teams make better decisions. <TeamMember name="Anders Asheim Hennum" photo />
+##### MCP <TeamMember name="Rodrigo Iloro" photo />
+External callers like PostHog Code or any other agent can connect via MCP and run experiment operations reliably.
 
+##### Signals <TeamMember name="Juraj Majerik" photo />
+Ship our first signal - notifying users when an experiment reaches significance.
 
-#### Feature flags foundation
-Motivation: Experiments rely on flags, so we need to make sure the basics are solid and ready to support advanced use cases.
+#### Feature flags <TeamMember name="Anders Asheim Hennum" photo />
+Make it possible to run multiple Experiments per Feature Flag. Rollout configurations will be more flexible and it will be easier to understand how Feature Flags and Experiments are related.
 
-* **Anonymous -> Logged in users experiments** – Create a seamless experience for experiments that start with anonymous users but continue when the same user logs in. <TeamMember name="Anders Asheim Hennum" photo />
+#### Query performance <TeamMember name="Juraj Majerik" photo />
+Extend precomputation to the main subquery for all metric types. Make precomputation observable - see where it kicked in, how it ran and compare results against direct-scan queries.
 
-* **Feature flags integration** <TeamMember name="Anders Asheim Hennum" photo />
-    - Make it possible to run multiple experiments on the same feature flag
-    - Support boolean flags in experiments
-
-
-#### Metrics & results
-Motivation: Users need the right metrics and analysis options to get meaningful answers from experiments.
-
-* **Retention metric** – Add support for retention as a metric type, covering use cases like “users who return after 7 days”. This is the last major metric type missing from experiments. <TeamMember name="Rodrigo Iloro" photo />
-
-* **Metric breakdowns** – Enable users to break down experiment metrics by properties such as country, device, plan type, or any custom property. This allows deeper analysis of how variants perform across different user segments. <TeamMember name="Rodrigo Iloro" photo />
-
-* **Running time calculator** <TeamMember name="Juraj Majerik" photo />
-Build a new calculator with two functions:
-    - Before launch: let users enter their expected traffic and baseline conversion to estimate how long the experiment will take to reach significance.  
-    - During the experiment: show how much longer the experiment likely needs based on current progress and live data.
+#### Loading experience <TeamMember name="Rodrigo Iloro" photo />
+Loading is painful for our high-volume users. Consolidate query fetching, only re-query when the user asks and set better expectations around loading states.

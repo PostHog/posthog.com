@@ -1,50 +1,81 @@
-### Implement two way sync for community questions with Zendesk
-- **Owner:** <TeamMember name="Christian Rafferty" photo />
-- **Rationale:** A centralised tool for managing both community and non-community tickets will give the support team full visibility into all customer questions without splitting focus across multiple platforms. This also creates the groundwork for being able to offer some level of support to free customers.
-- **What we'll ship:** When a community question is posted, ensure that it is raised in Zendesk and assigned to the correct agent group. When follow up replies are posted on the community question thread, ensure that these are posted onto the Zendesk ticket and the ticket status changes appropriately. Allow agents to post their reply in Zendesk as a public comment which will be posted to the community thread (internal comments will remain only in Zendesk). Ensure that the desired behaivour is achieved relative to existing triggers and automations that exist in Zendesk.
-- **We'll know we're successful when:** All community tickets and their replies are tracked in Zendesk, community tickets follow the same status rules as non-community tickets, and we are able to start considering target response times for community questions.
-- **Stretch Goal:** Set the `Org plan level` on the ticket.
+### Q2 2026
 
-### Create a reliable way to surface if we are experiencing a customer facing incident
-- **Owner:** <TeamMember name="Joshua Ordehi" photo />
-- **Rationale:** Being able to surface incidents faster means that we as a company can jump on those incidents and fix them sooner.
-- **What we'll ship:** Improvements to the existing reporting and alerting that Joshua has created which looks at support tickets created from customer facing errors. The goal is to make the detection more accurate (considering both specific product areas and being able to identify cross-functional issues) and less noisy. The next stage of implementation will also look at the related error tracking issue to discover if more customers are experiencing this error/incident (within a specific timeframe) but aren't reporting it in support tickets.
-- **We'll know we're successful when:** We feel confident enough in the accuracy of the incident identification to put the alert into #tell-posthog-anything.
+This quarter we're driving SLA attainment and response times in one direction: up. We want consistent week-on-week improvement, with our Q2 average beating Q1. Every goal below is pointed at making that happen — through deeper product knowledge, faster investigations, and fewer tickets raised in the first place.
 
-### Make it more obvious how to submit tickets during the login workflow
-- **Owner:** <TeamMember name="Eleftheria Trivyzaki" photo />
-- **Rationale:** Prevent customer frustration and improve support experience by making it more obvious how to submit tickets during the login workflow.
-- **What we'll ship:** Implement a more obvious prompt to the user for how to submit a support ticket.
-- **We'll know we're successful when:** Fewer tickets with the `email-closed` tag that have been created due to issues encountered during the login workflow.
+#### 1. Deepen SME expertise and reduce ticket friction
 
-### Develop a framework that will give us confidence in how PostHog AI is being used as a support tool
-- **Owner:** <TeamMember name="Luke Belton" photo />
-- **Rationale:** PostHog AI is being used as a support tool and we don't really know what the quality of that support is. We want to ensure that users are receiving the best support experience and that PostHog AI is monitored with that in mind. If PostHog AI gives bad support advice then we will confuse our customers and worst case leave them looking for solutions from PostHog alternatives.
-- **What we'll ship:** This is a research piece that will outline a future framework for evaluating PostHog AI as a 'member' of the support team.
-- **We'll know we're successful when:** We have a clear route forwards on how we want to be testing PostHog AI support output. We'll have a good understanding of how to feedback PostHog AI performance on support and iterate to improve it.
+A core focus this quarter is turning our SMEs into genuine product experts — people who can spot patterns, advocate for fixes, and proactively prevent tickets before they're raised.
 
-### Get SDK Doctor into active beta and collecting feedback from users
-- **Owner:** <TeamMember name="Steven Shults" photo />
-- **Rationale:** Getting SDK doctor into active beta will help our customers understand if they are staying up to date with the latest version of our SDKs or if they are trying to call feature flags too soon. Having this in active beta will allow us to see how users respond (and address some feedback) before extending the functionality of SDK doctor.
-- **What we'll ship:** We'll complete all beta prep including creating public documentation, getting the code reviewed by engineering, tightening up and extending our test cases, and generally shipping SDK doctor into an active beta state. We can also implement any feedback we receive from customers that we think is reasonable.
-- **We'll know we're successful when:** SDK doctor is in active beta and feedback tickets about SDK Doctor are coming into Zendesk from customers.
+##### Objectives
+ - Identify most common investigation steps that could be surfaced onto tickets automatically
+ - Identify proactive interventions (e.g. docs, in-app prompts, automatic checks) that could prevent recurring tickets
+ - Identify top user pain points or bugs and feed these back to the relevant engineering teams
+ - Begin establishing an SME for analytics products
 
-### Investigate and design a tool that will become our omnisearch and source of knowledge that we use while solving tickets
-- **Owner:** <TeamMember name="Ben Lea" photo />, <TeamMember name="Ben Haynes" photo />
-- **Rationale:** Having better AI tooling and search ability for support engineers makes us more efficient in diagnosing issues and answering support tickets.
-- **What we'll ship:** Do investigation into approaches we can take to create this tool (whether we use a third party or something homegrown). Design and implement a minimum prototype of this tool that can be used by the support team.
-- **We'll know we're successful when:** We have a design for this tool and have a prototype we can build on.
+##### Owners
+ - Replay SME depth: <TeamMember name="Ben Haynes" photo />
+ - Data SME depth: <TeamMember name="Luke Belton" photo />
+ - AI & Observability SME depth: <TeamMember name="Christiaan Hendriksen" photo />
+ - Flags SME depth: <TeamMember name="Phillip Ramirez" photo />
+ - Analytics SME launch: <TeamMember name="Xander Jones" photo />
 
-### Design a tool that helps us to troubleshoot customer implementations of PostHog
-- **Owner:** <TeamMember name="Kyle Swank" photo />
-- **Rationale:** Having better tooling for support engineers makes us more efficient in diagnosing issues and answering support tickets.
-- **What we'll ship:** Design a tool (we'll consider browser extensions, using the toolbar, implementations in PostHog, etc) which helps support engineers to more easily troubleshoot customer's implementations of PostHog. Consider two of the most common things we as support engineers need to surface from a customer's implementation when troubleshooting, and design a tool which can more easily surface these things.
-- **We'll know we're successful when:** We have a design for this tool and have begun implementing a minimum functioning version of it.
+#### 2. Ship improvements that make support faster and smarter
 
-### Things <TeamMember name="Abigail Richardson" photo /> is focusing on this quarter:
-- Implementing Support Zero weeks to enable the team to reach more of our quarterly goals
-- Outlining a strategy for SMEs and how we get there to enable the team to deal with the rising complexity in tickets
-- Outlining a strategy for products coming out of beta and into support
-- Outlining a strategy for community support
-- Hiring and onboarding to improve support coverage
-- Improving reporting, especially on coverage and where tickets come from
+##### 2.1 SDK Doctor improvements
+
+**Owner:** <TeamMember name="Steven Shults" photo />
+
+**Objective:** Add a couple of additional features to SDK doctor - including alerts, and understanding how PostHog is being initialised. Implement a couple of fixes for existing known issues. If we have time we will look into doing tasks to get SDK doctor into GA.
+
+
+##### 2.2 Surface useful context for support investigations
+
+**Owner:** <TeamMember name="Kyle Swank" photo />
+
+**Objective:** Start by enhancing information captured at the bottom of Zendesk tickets with additional context and information that could help the support engineer during the investigation of the ticket. We will also investigate what the future of this should look like, considering things like enhancing the health overview. The intention with the investigation is to understand what this should look like for us internally as we start to use different tools, and then later consider how we might be able to make this diagnostic information available to users to proactively help them.
+
+
+##### 2.3 Surface information about the state of replay capture from events
+
+**Owner:** <TeamMember name="Christian Rafferty" photo />
+
+**Objective:** Currently we store properties on events which provide information about the state of replay capture at the time of the event. These properties are frequently used when trying to diagnose recordings and whether a recording should have taken place. We plan to investigate ways that this information can be:
+ 1. proactively surfaced to users to prevent the need for them to raise a ticket
+ 2. available to support members while working on tickets to reduce investigation time
+
+
+##### 2.4 Quality of life improvements to account impersonation
+
+**Owner:** <TeamMember name="Xander Jones" photo />
+
+**Objective:** Make initial improvements to account impersonation, making switching between impersonated users within the same organization easier. We will also investigate what improvements and enhancements can be made to make impersonation easier when answering customer queries via conversations.
+
+
+#### 3. Billing support readiness
+
+**Owner:** <TeamMember name="Eleftheria Trivyzaki" photo />
+
+##### 3.1 Complete the Billing Support Superday task
+
+**Objective:** Build on the Q1 work to deliver a ready-to-use Superday task for the Billing Support role. We'll know we're ready when the task has been through at least one round of feedback and the team feels confident it'll help us hire the right person
+
+##### 3.2 Stay ahead of billing launches this quarter
+
+**Objective:** Get up to speed on upcoming billing changes by testing new features, attending relevant conversations, and building context before launch. We'll know this is working when launch day doesn't cause a spike in unresolved tickets or SLA breaches, and feedback is being routed back to the right people in real time.
+
+
+#### 4. Raise the bar for high-paying customers and team clarity
+
+**Owner:** <TeamMember name="Abigail Richardson" photo />
+
+##### 4.1 Improve response times and coverage for high-paying customers
+
+**Objective:** Define and document when it makes sense to share a ticket across timezones vs. take care of it yourself, with the goal of reducing response and resolution times for managed accounts. We'll know this is working when we can point to a clear, agreed process and response times for these customers are improving.
+
+##### 4.2 Clarify the boundary between Sales/CS-owned tickets and support-owned tickets
+
+**Objective:** Create clarity around which tickets should be picked up by support vs. managed by Sales/CS. We'll know this is done when these tickets are handled more efficiently and fewer of these tickets remain breaching (but answered) in the queue.
+
+##### 4.3 Get the team working from their SME queues
+
+**Objective:** Ensure every support engineer is primarily working from their dedicated SME Zendesk view, with the shared queue as overflow. We'll know this is working when engineers can spend more time on their SME tickets and point to deepening knowledge in their product area.

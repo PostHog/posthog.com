@@ -71,7 +71,7 @@ Ultimately, self-service analytics is important because it enables organizations
 
 It’s complicated. 
 
-Google Analytics is a self-service analytics platform but that doesn’t mean it is a good platform for understanding your user behaviour. This is because Google Analytics is a self-service _web_ analytics platform and so focuses on metrics such as pageviews, bounce rate and click-through rates. It lacks the ability to go deep into topics such as retention and user trends, or the ability to watch session recordings and create multivariate experiments. 
+Google Analytics is a self-service analytics platform but that doesn’t mean it is a good platform for understanding your user behavior. This is because Google Analytics is a self-service _web_ analytics platform and so focuses on metrics such as pageviews, bounce rate and click-through rates. It lacks the ability to go deep into topics such as retention and user trends, or the ability to watch session recordings and create multivariate experiments. 
 
 <BorderWrapper>
 <Quote

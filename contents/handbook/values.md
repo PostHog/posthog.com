@@ -26,13 +26,17 @@ Internally, a culture of transparency looks like managers telling you to raise f
 
 Being transparent externally helps us achieve our mission - we write about what we're working on so the world can take advantage of the lessons we're learning, and so they know how to work with us better. Knowing that thousands of people will read our handbook pages forces clearer thinking. And, for free, we can build trust in a way other vendors just choose not to.
 
+> There are a few things that we are internally transparent about, but that should not be shared publicly. Anything related to our company financials is strictly confidential and should not be shared externally, including our current revenue numbers, ACV, burn rate, etc. Anything in a public press release is fine to share!
+
 ## Do more weird
 
 So much about how we work is different.
 
 Weirdness can just be the absurd lengths we are willing to go to. It can mean redesigning an already world-class website, for the 5th time. It can mean shipping _literally_ every product that relates to customer data, with teams of just one to five people competing with $200bn+ companies, successfully.
 
-We aren't weird for the sake of it. We want the company perfectly optimized for our strategy. We have small teams when very few others do, because we are going to build 50+ products. We post billboards of our founders' faces because no one else is brave enough thus it stands out. Even the little things - like having _pricing_ on our pricing page!
+We aren't weird for the sake of it. We want the company perfectly optimized for our strategy. We have small teams when very few others do, because we are going to build 50+ products. We post billboards of our founders' faces because no one else is brave enough thus it stands out. Even the little things - like having _pricing_ on our pricing page! 
+
+[We've even written a guide](/handbook/company/do-more-weird) on how you can do more weird. 
 
 ## Why not now?
 

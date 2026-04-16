@@ -4,11 +4,55 @@ import path from 'path'
 import fs from 'fs'
 
 import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTools'
+import { enrichVideos } from './enrichVideos'
 
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
 export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
 
+const GATSBY_SOURCE_GIT_CACHE_DIR = path.resolve(__dirname, '../.cache/gatsby-source-git')
+const BRANCH_MANIFEST_FILE = path.join(GATSBY_SOURCE_GIT_CACHE_DIR, '.branch-manifest.json')
+
+/**
+ * Invalidates the gatsby-source-git cache if the configured branch has changed.
+ * This prevents stale docs from being served when switching GATSBY_POSTHOG_BRANCH.
+ */
+function invalidateGitCacheIfBranchChanged(): void {
+    const currentBranch = process.env.GATSBY_POSTHOG_BRANCH || 'master'
+
+    // Read the stored branch from the manifest file
+    let storedBranch: string | null = null
+    if (fs.existsSync(BRANCH_MANIFEST_FILE)) {
+        try {
+            const manifest = JSON.parse(fs.readFileSync(BRANCH_MANIFEST_FILE, 'utf-8'))
+            storedBranch = manifest.branch
+        } catch {
+            // Manifest is corrupted, treat as no stored branch
+        }
+    }
+
+    // If the branch has changed, clear the gatsby-source-git cache
+    if (storedBranch !== null && storedBranch !== currentBranch) {
+        console.log(`GATSBY_POSTHOG_BRANCH changed from '${storedBranch}' to '${currentBranch}'`)
+        console.log('Clearing gatsby-source-git cache…')
+
+        // Remove the entire gatsby-source-git cache directory
+        if (fs.existsSync(GATSBY_SOURCE_GIT_CACHE_DIR)) {
+            fs.rmSync(GATSBY_SOURCE_GIT_CACHE_DIR, { recursive: true, force: true })
+        }
+    }
+
+    // Ensure the cache directory exists and write the current branch to the manifest
+    if (!fs.existsSync(GATSBY_SOURCE_GIT_CACHE_DIR)) {
+        fs.mkdirSync(GATSBY_SOURCE_GIT_CACHE_DIR, { recursive: true })
+    }
+    fs.writeFileSync(BRANCH_MANIFEST_FILE, JSON.stringify({ branch: currentBranch }))
+}
+
 export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) => {
+    // Invalidate gatsby-source-git cache if branch has changed
+    invalidateGitCacheIfBranchChanged()
+    // Enrich video data with thumbnails and titles from APIs
+    await enrichVideos()
     if (process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST) {
         const posthogScript = `!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
@@ -17,12 +61,16 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     capture_pageview: false,
     capture_pageleave: true,
     persistence: 'localStorage+cookie',
+    cookie_persisted_properties: ['prod_interest'],
     uuid_version:'v7',
     session_recording: {
         maskAllInputs: false,
         maskInputOptions: {
             password: true,
         },
+    },
+    error_tracking: {
+        __capturePostHogExceptions: true,
     },
     person_profiles: 'identified_only',
     __preview_heatmaps: true,
@@ -31,7 +79,6 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     __preview_flags_v2: true,
     __preview_lazy_load_replay: true,
     __preview_capture_bot_pageviews: true,
-    cookieless_mode: navigator.userAgent.includes("Firefox/") ? "on_reject" : undefined,
     __preview_disable_xhr_credentials: true,
 })`
         const scriptsDir = path.resolve(__dirname, '../static/scripts')

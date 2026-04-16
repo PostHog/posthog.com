@@ -1,0 +1,17 @@
+extends: substitution
+message: "Prefer '%s' over '%s'."
+link: https://posthog.com/handbook/docs-and-wizard/docs-style-guide
+level: suggestion
+ignorecase: true
+swap:
+    '(?:he|she)': proper nouns or they
+    his: proper nouns or their/theirs
+    her: proper nouns or their/them
+    hers: proper nouns or theirs
+    him: proper nouns or them
+    blacklist: denylist
+    blacklisted: denylisted
+    blacklisting: denylisting
+    whitelist: allowlist
+    whitelisted: allowlisted
+    whitelisting: allowlisting

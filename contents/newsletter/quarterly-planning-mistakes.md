@@ -46,6 +46,8 @@ When a team realizes they need a different goal, they have [the autonomy to chan
 
 Again, it's not about perfectly matching the original goals set, but building a great product. It's better to change a goal to something useful than be stuck working on something useless because you said you would two months ago.
 
+<NewsletterForm />
+
 ## 2. You have to prepare asynchronously
 
 Goals planning can really go off the rails in meetings, especially if:
@@ -145,7 +147,7 @@ Regularly checking on progress means:
 
 Early in PostHog's life, an engineer wanted to build session replay. Our co-founder James thought it was a terrible idea. The engineer built it anyway and it ended up being wildly successful and changed the direction of the company.
 
-Since then, [engineers are in charge](/newsletter/product-management-is-broken) of [figuring out what to build](/newsletter/how-we-decide-what-to-build). Neither execs nor product managers tell engineers what to build. It's up to engineers to decide, but this means they need to form a strong opinion of what they want to build.
+Since then, [engineers are in charge](/newsletter/product-management-is-broken) of [figuring out what to build](/newsletter/how-we-decide-what-to-build). Neither execs nor [product managers](/newsletter/what-does-a-product-manager-do) tell engineers what to build. It's up to engineers to decide, but this means they need to form a strong opinion of what they want to build.
 
 When it comes to quarterly planning, our process looks like the “[W framework](https://review.firstround.com/the-secret-to-a-great-planning-process-lessons-from-airbnb-and-eventbrite?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=quarterly-planning)” created by Lenny Rachitsky and Nels Gilbreth. This process encourages teams and execs to work together in planning like this:
 
@@ -173,4 +175,4 @@ This process creates enough direction to make both the company and the small tea
 
 5. **Being dependent on other teams.** I've found that almost every time a goal is dependent on another team, it gets delayed or doesn't get done. The beauty of small teams is that they are autonomous. Dependency breaks this. Flag these in your plans before they become a problem.
 
-<NewsletterCTA />
+<NewsletterForm />

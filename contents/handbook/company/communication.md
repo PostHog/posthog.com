@@ -154,6 +154,8 @@ Also keep in mind that, as an open source platform, PostHog has contributors who
 
 > [Slack recap](https://slack.com/help/articles/25076892548883-Guide-to-AI-features-in-Slack#01JM0PAPCT4K0TWNWGJRQDXTBA) is a great way to learn from others by adding channels like `#ask-max` and `#today-i-learned` to the recap. You can also use it to keep tabs on teams you may not directly work on, but still want to know what's being discussed.
 
+> [Slackbot](https://slack.com/features/slackbot) is a handy AI agent that can search across the PostHog workspace in Slack to help answer your questions. If you're looking for information or trying to find a past conversation, Slackbot is a great place to start.
+
 **Slack etiquette**
 
 Slack is used differently in different organizations. Here are some guidelines for how we use Slack at PostHog:
@@ -163,6 +165,7 @@ Slack is used differently in different organizations. Here are some guidelines f
 3. Make use of threads when responding to a post. This allows informal discussion to take place without notifications being sent to everyone in the channel on every reply.
 4. When possible, summarize multiple thoughts into a single message instead of sending multiple messages sequentially.
 5. You don't need to tell people if you're away from your computer, especially on no-meeting days. There's no general expectation people are available to reply to messages in real time, including in Slack.
+6. Keep your Slack profile up to date with the right information, including the appropriate name eg with surname or surname initial if you share a name with a colleauge.
 
 Channel naming conventions so people don't get confused:
 
@@ -215,7 +218,7 @@ We use RFCs to communicate and gather feedback on a decision. RFCs are useful be
 Here are the steps for an RFC:
 
 1. Identify a problem and a decision to be made
-2. Create an RFC as a pull request using one of the [RFC templates](https://github.com/PostHog/product-internal/tree/main/requests-for-comments/templates).
+2. Create an RFC as a pull request using one of the [RFC templates](https://github.com/PostHog/requests-for-comments-internal/tree/main/_TEMPLATES).
     - Using a template isn't a requirement, though it is a helpful and recommended starting place if you haven't written many RFCs here before. You can also get inspiration from other RFCs, as many have different sections and styles depending on the type of thing being discussed.
 3. Share the RFC:
     - Assign people whom this RFC will impact, or who may have good opinions on the topic, as reviews to the pull request.
@@ -289,7 +292,7 @@ We recommend you set your Google Calendar access permissions to 'Make available 
 
 ### Calendly
 
-We use Calendly for scheduling external meetings, such as demos or product feedback calls. If you need an account, ask Charles to invite you to the PostHog team account.
+We use Calendly for scheduling external meetings, such as demos or product feedback calls. If you need an account, ask Simon in `#sales` to invite you to the PostHog team account.
 
 ## Communication Methods
 

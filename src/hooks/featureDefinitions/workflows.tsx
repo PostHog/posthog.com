@@ -11,6 +11,66 @@ export const workflowsFeatures = {
         },
     },
     features: {
+        visual_builder: {
+            name: 'Visual workflow builder',
+            description: 'Drag-and-drop interface for building workflows',
+        },
+        ai_assistant: {
+            name: 'AI workflow assistant',
+            description: 'Build and edit workflows using natural language',
+        },
+        campaign_tracking: {
+            name: 'Campaign tracking',
+            description: 'Track open rates, click rates, link clicks, and conversions',
+        },
+        real_time_triggers: {
+            name: 'Real-time triggers',
+            description: 'Trigger workflows in real-time based on user events',
+        },
+        email_editor: {
+            name: 'Email editor/sender built-in',
+            description: 'Built-in email editor and sending capabilities',
+        },
+        cohort_targeting: {
+            name: 'Cohort/segment-based targeting',
+            description: 'Target users based on cohorts and segments',
+        },
+        native_event_triggers: {
+            name: 'Native product event triggers',
+            description: 'Trigger workflows from native product events',
+        },
+        user_identity: {
+            name: 'User identity & profiles',
+            description: 'Access to user identity and profile data',
+        },
+        user_properties: {
+            name: 'User properties updating',
+            description: 'Update user properties within workflows',
+        },
+        branching_logic: {
+            name: 'Branching/conditional logic',
+            description: 'Create conditional branches in workflows',
+        },
+        no_data_syncing: {
+            name: 'Automations without data syncing',
+            description: 'Run automations without needing to sync data externally',
+        },
+        unified_analytics: {
+            name: 'Unified analytics + automation',
+            description: 'Analytics and automation in one platform',
+        },
+        experiment_triggers: {
+            name: 'Experiments/feature flag triggers',
+            description: 'Trigger workflows from experiments and feature flags',
+        },
+        webhook_actions: {
+            name: 'Webhook actions',
+            description: 'Send webhook requests as workflow actions',
+        },
+        run_based_pricing: {
+            name: 'Predictable run-based pricing',
+            description: 'Pay based on workflow runs',
+        },
         api: {
             name: 'API',
             description: 'Programmatically start a workflow with a webhook',
@@ -41,7 +101,11 @@ export const workflowsFeatures = {
             },
             push: {
                 name: 'Push notifications',
-                description: 'Send push notifications to users',
+                description: 'Send mobile push notifications to users',
+            },
+            whatsapp: {
+                name: 'WhatsApp',
+                description: 'Send messages to users via WhatsApp',
             },
             cdp: {
                 name: 'CDP destinations',

@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react'
+import React, { ChangeEventHandler, useEffect, useMemo, useRef, useState } from 'react'
 import { PageProps } from 'gatsby'
 import SEO from 'components/seo'
 import { GitHub, LinkedIn, Twitter } from 'components/Icons'
@@ -14,10 +14,10 @@ import usePostHog from 'hooks/usePostHog'
 import useTopicsNav from '../../../navs/useTopicsNav'
 import { usePosts } from 'components/Edition/hooks/usePosts'
 import PostsTable from 'components/Edition/PostsTable'
-import { SortDropdown } from 'components/Edition/Views/Default'
 import { sortOptions } from 'components/Edition/Posts'
 import NotFoundPage from 'components/NotFoundPage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { Popover } from 'components/RadixUI/Popover'
 import Stickers from 'components/Stickers/Index'
 import Tooltip from 'components/RadixUI/Tooltip'
 import dayjs from 'dayjs'
@@ -29,13 +29,13 @@ import {
     IconThumbsDownFilled,
     IconArrowUpRight,
     IconPencil,
-    IconSpinner,
     IconUpload,
     IconX,
     IconCheck,
     IconExternal,
+    IconPresent,
+    IconSparkles,
 } from '@posthog/icons'
-import { CallToAction } from 'components/CallToAction'
 import { Fieldset } from 'components/OSFieldset'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -49,6 +49,8 @@ import { useToast } from '../../../context/Toast'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import OSButton from 'components/OSButton'
 import { IconNoEntry, IconStrapi } from 'components/OSIcons'
+import Points from 'components/Points'
+import { useWindow } from '../../../context/Window'
 
 dayjs.extend(relativeTime)
 
@@ -539,9 +541,110 @@ function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
 }
 
+// Also defined in src/pages/team-directory.tsx — update both if changed
+const unisexSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL']
+const femaleSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
+
+const unisexSizeDataIn = {
+    sizes: unisexSizes,
+    rows: [
+        { label: 'Length', values: ['26.25', '27.50', '28.50', '29.50', '30.50', '31.50'] },
+        { label: 'Width', values: ['18.00', '19.50', '21.00', '22.50', '24.00', '25.50'] },
+        { label: 'Sleeve', values: ['16.00', '16.875', '17.75', '18.625', '19.50', '20.375'] },
+    ],
+}
+
+const unisexSizeDataCm = {
+    sizes: unisexSizes,
+    rows: [
+        { label: 'Length', values: ['66', '69', '72', '74', '77', '80'] },
+        { label: 'Width', values: ['45', '49', '53', '57', '60', '64'] },
+        { label: 'Sleeve', values: ['40', '42', '45', '47', '49', '51'] },
+    ],
+}
+
+const womensSizeDataUS = {
+    sizes: femaleSizes,
+    rows: [{ label: 'Fits Sizes', values: ['2-6', '6-10', '10-14', '14-18', '18-22', '23-27'] }],
+}
+
+const womensSizeDataUK = {
+    sizes: femaleSizes,
+    rows: [{ label: 'Fits Sizes', values: ['6-10', '10-14', '14-18', '18-22', '22-26', '27-31'] }],
+}
+
+const UnisexSizeChart = () => {
+    const [unit, setUnit] = useState('in')
+    return (
+        <div className="w-[380px]">
+            <ToggleGroup
+                title="Unit"
+                hideTitle
+                options={[
+                    { label: 'in', value: 'in' },
+                    { label: 'cm', value: 'cm' },
+                ]}
+                value={unit}
+                onValueChange={(value) => value && setUnit(value)}
+                className="mb-2"
+            />
+            <SizeTable data={unit === 'cm' ? unisexSizeDataCm : unisexSizeDataIn} />
+        </div>
+    )
+}
+
+const WomensSizeChart = () => {
+    const [region, setRegion] = useState('US')
+    return (
+        <div>
+            <ToggleGroup
+                title="Region"
+                hideTitle
+                options={[
+                    { label: 'US', value: 'US' },
+                    { label: 'UK', value: 'UK' },
+                ]}
+                value={region}
+                onValueChange={(value) => value && setRegion(value)}
+                className="mb-2"
+            />
+            <SizeTable data={region === 'UK' ? womensSizeDataUK : womensSizeDataUS} />
+        </div>
+    )
+}
+
+const SizeTable = ({ data }: { data: typeof unisexSizeDataIn }) => (
+    <table className="text-xs text-left border-collapse w-full">
+        <thead>
+            <tr>
+                <th className="pr-3 py-1 font-semibold" />
+                {data.sizes.map((s) => (
+                    <th key={s} className="px-2 py-1 font-semibold text-center">
+                        {s}
+                    </th>
+                ))}
+            </tr>
+        </thead>
+        <tbody>
+            {data.rows.map((row) => (
+                <tr key={row.label} className="border-t border-primary">
+                    <td className="pr-3 py-1 font-semibold whitespace-nowrap">{row.label}</td>
+                    {row.values.map((v, i) => (
+                        <td key={i} className="px-2 py-1 text-center">
+                            {v}
+                        </td>
+                    ))}
+                </tr>
+            ))}
+        </tbody>
+    </table>
+)
+
 const ModeratorFields = ({ setFieldValue, values, errors }) => {
     const [heightUnit, setHeightUnit] = useState('in')
     const [height, setHeight] = useState(values.height)
+    const tShirt = values.tShirt || { fit: null, size: null, additionalInfo: null }
+    const availableSizes = tShirt.fit === 'female' ? femaleSizes : tShirt.fit === 'unisex' ? unisexSizes : []
 
     useEffect(() => {
         setFieldValue('height', heightUnit === 'cm' ? convertCentimetersToInches(height) : height)
@@ -614,6 +717,79 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                     ]}
                     value={values.amaEnabled === null ? undefined : values.amaEnabled ? 'yes' : 'no'}
                     onValueChange={(value) => setFieldValue('amaEnabled', value === 'yes' ? true : false)}
+                />
+            </div>
+            <div>
+                <ToggleGroup
+                    title="T-shirt fit"
+                    options={[
+                        { label: 'Unisex', value: 'unisex' },
+                        { label: 'Female', value: 'female' },
+                    ]}
+                    value={tShirt.fit || undefined}
+                    onValueChange={(value) => {
+                        if (!value) return
+                        const newSizes = value === 'female' ? femaleSizes : unisexSizes
+                        setFieldValue('tShirt', {
+                            ...tShirt,
+                            fit: value,
+                            size: newSizes.includes(tShirt.size) ? tShirt.size : null,
+                        })
+                    }}
+                />
+            </div>
+            {tShirt.fit && (
+                <div>
+                    <label className="text-[15px] flex items-center gap-2 mb-1">
+                        T-shirt size
+                        {tShirt.fit === 'unisex' ? (
+                            <Tooltip
+                                delay={0}
+                                side="right"
+                                trigger={
+                                    <span className="text-xs text-secondary hover:text-primary underline cursor-help">
+                                        Unisex size guide
+                                    </span>
+                                }
+                            >
+                                <UnisexSizeChart />
+                            </Tooltip>
+                        ) : (
+                            <Tooltip
+                                delay={0}
+                                side="right"
+                                trigger={
+                                    <span className="text-xs text-secondary hover:text-primary underline cursor-help">
+                                        Women's size guide
+                                    </span>
+                                }
+                            >
+                                <WomensSizeChart />
+                            </Tooltip>
+                        )}
+                    </label>
+                    <ToggleGroup
+                        title="T-shirt size"
+                        hideTitle
+                        options={availableSizes.map((size) => ({ label: size, value: size }))}
+                        value={tShirt.size || undefined}
+                        onValueChange={(value) => {
+                            if (!value) return
+                            setFieldValue('tShirt', { ...tShirt, size: value })
+                        }}
+                    />
+                </div>
+            )}
+            <div>
+                <label className="text-[15px] block mb-1">T-shirt additional info</label>
+                <textarea
+                    className="bg-primary text-primary border border-input rounded px-3 py-1.5 text-[15px] placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-orange/50 w-full resize-y"
+                    name="tShirtAdditionalInfo"
+                    value={tShirt.additionalInfo || ''}
+                    data-scheme="primary"
+                    onChange={(e) => setFieldValue('tShirt', { ...tShirt, additionalInfo: e.target.value })}
+                    placeholder="Any additional notes about t-shirt preferences"
+                    rows={3}
                 />
             </div>
         </div>
@@ -770,6 +946,7 @@ const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue, maxLength })
 }
 
 const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFieldValue }) => {
+    const { appWindow } = useWindow()
     const { user, isModerator } = useUser()
     const [sort, setSort] = useState(sortOptions[0].label)
     const [hasPosts, setHasPosts] = useState(false)
@@ -885,13 +1062,23 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                           </>
                       ),
                   },
+                  {
+                      value: 'points',
+                      label: 'Points',
+                      content: <Points />,
+                  },
               ]
             : []),
     ]
 
+    const initialTab = useMemo(() => {
+        const params = new URLSearchParams(appWindow?.location?.search)
+        return tabs.find((tab) => tab.value === params.get('tab'))?.value || tabs[0].value
+    }, [])
+
     return (
         <div data-scheme="secondary">
-            <OSTabs tabs={tabs} defaultValue={tabs[0].value} className="h-auto" triggerDataScheme="primary" />
+            <OSTabs tabs={tabs} defaultValue={initialTab} className="h-auto" triggerDataScheme="primary" />
         </div>
     )
 }
@@ -911,10 +1098,14 @@ const ValidationSchema = Yup.object().shape({
 export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const posthog = usePostHog()
-    const nav = useTopicsNav()
     const { addToast } = useToast()
     const { user, getJwt } = useUser()
     const [isEditing, setIsEditing] = useState(false)
+    const [giftPopoverOpen, setGiftPopoverOpen] = useState(false)
+    const [giftAmount, setGiftAmount] = useState<number>()
+    const [giftNote, setGiftNote] = useState('')
+    const [giftSubmitting, setGiftSubmitting] = useState(false)
+    const [giftConfirming, setGiftConfirming] = useState(false)
 
     const isCurrentUser = user?.profile?.id === id
     const isModerator = user?.role?.type === 'moderator'
@@ -954,6 +1145,7 @@ export default function ProfilePage({ params }: PageProps) {
                         crest: true,
                     },
                 },
+                tShirt: true,
                 ...(isModerator
                     ? {
                           user: true,
@@ -1111,6 +1303,7 @@ export default function ProfilePage({ params }: PageProps) {
             backgroundImage: profile?.backgroundImage,
             companyRole: profile?.companyRole,
             amaEnabled: profile?.amaEnabled,
+            tShirt: profile?.tShirt || { fit: null, size: null, additionalInfo: null },
         },
         onSubmit: async ({ avatar, images, ...values }) => {
             try {
@@ -1206,6 +1399,68 @@ export default function ProfilePage({ params }: PageProps) {
         },
     })
 
+    const handleGift = async () => {
+        if (!giftAmount || !giftNote?.trim()) {
+            addToast({
+                description: 'Amount and description are required',
+                error: true,
+                duration: 3000,
+            })
+            return
+        }
+
+        setGiftSubmitting(true)
+        try {
+            const jwt = await getJwt()
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/points/gift`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${jwt}`,
+                },
+                body: JSON.stringify({
+                    profileId: id,
+                    amount: giftAmount,
+                    note: giftNote.trim(),
+                }),
+            })
+
+            if (response.ok) {
+                addToast({
+                    description: (
+                        <>
+                            <IconCheck className="text-green size-4 inline-block mr-1" />
+                            Gift sent successfully
+                        </>
+                    ),
+                    duration: 3000,
+                })
+                setGiftPopoverOpen(false)
+                setGiftAmount(undefined)
+                setGiftNote('')
+                setGiftConfirming(false)
+                mutate()
+            } else {
+                const data = await response.json()
+                addToast({
+                    description: data?.error?.message || 'Failed to send gift',
+                    error: true,
+                    duration: 3000,
+                })
+            }
+        } catch (err) {
+            console.error(err)
+            addToast({
+                description: 'Failed to send gift',
+                error: true,
+                duration: 3000,
+            })
+        } finally {
+            setGiftSubmitting(false)
+            setGiftConfirming(false)
+        }
+    }
+
     if (!profile && isLoading) {
         return <ProfileSkeleton />
     } else if (!profile && !isLoading) {
@@ -1239,6 +1494,122 @@ export default function ProfilePage({ params }: PageProps) {
                             <>
                                 {isModerator && (
                                     <div className="flex gap-px border-r border-secondary pr-2 mr-2">
+                                        <Popover
+                                            dataScheme="primary"
+                                            open={giftPopoverOpen}
+                                            onOpenChange={setGiftPopoverOpen}
+                                            trigger={
+                                                <span>
+                                                    <OSButton
+                                                        asLink
+                                                        size="md"
+                                                        tooltip={<>Gift this user points</>}
+                                                        icon={<IconPresent />}
+                                                        iconClassName="size-5"
+                                                    />
+                                                </span>
+                                            }
+                                            contentClassName="w-80 !p-0 overflow-hidden border border-primary rounded-md"
+                                        >
+                                            <div className="bg-gradient-to-br from-yellow/20 via-orange/10 to-red/10 p-4 border-b border-primary">
+                                                <div className="flex items-center gap-2">
+                                                    <div className="bg-yellow/30 rounded-full p-2">
+                                                        <IconPresent className="size-5 text-orange" />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="text-sm font-bold m-0 flex items-center gap-1">
+                                                            Gift points to {firstName}
+                                                            <IconSparkles className="size-3.5 text-yellow" />
+                                                        </h4>
+                                                        <p className="text-xs text-secondary m-0">
+                                                            Reward great contributions
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="p-4 pt-2 space-y-2">
+                                                <div>
+                                                    <label
+                                                        htmlFor="gift-amount"
+                                                        className="text-xs font-semibold text-secondary block mb-1"
+                                                    >
+                                                        Points
+                                                    </label>
+                                                    <OSInput
+                                                        id="gift-amount"
+                                                        direction="column"
+                                                        showLabel={false}
+                                                        label="Points"
+                                                        type="number"
+                                                        min={1}
+                                                        value={giftAmount}
+                                                        onChange={(e) =>
+                                                            setGiftAmount(e.target.value ? Number(e.target.value) : '')
+                                                        }
+                                                        placeholder="How many points?"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        htmlFor="gift-reason"
+                                                        className="text-xs font-semibold  text-secondary block mb-1"
+                                                    >
+                                                        Reason
+                                                    </label>
+                                                    <OSInput
+                                                        id="gift-reason"
+                                                        direction="column"
+                                                        showLabel={false}
+                                                        label="Reason"
+                                                        type="text"
+                                                        value={giftNote}
+                                                        onChange={(e) => setGiftNote(e.target.value)}
+                                                        placeholder="What's this gift for?"
+                                                    />
+                                                </div>
+                                                {giftConfirming ? (
+                                                    <div className="space-y-2">
+                                                        <p className="text-sm text-secondary text-center">
+                                                            Send{' '}
+                                                            <span className="font-bold">
+                                                                {giftAmount} point{giftAmount === 1 ? '' : 's'}
+                                                            </span>{' '}
+                                                            to {profile?.firstName}?
+                                                        </p>
+                                                        <div className="flex gap-2">
+                                                            <OSButton
+                                                                size="md"
+                                                                variant="secondary"
+                                                                onClick={() => setGiftConfirming(false)}
+                                                                disabled={giftSubmitting}
+                                                                width="full"
+                                                            >
+                                                                Cancel
+                                                            </OSButton>
+                                                            <OSButton
+                                                                size="md"
+                                                                variant="primary"
+                                                                onClick={handleGift}
+                                                                disabled={giftSubmitting}
+                                                                width="full"
+                                                            >
+                                                                {giftSubmitting ? 'Sending...' : 'Confirm'}
+                                                            </OSButton>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <OSButton
+                                                        size="md"
+                                                        variant="primary"
+                                                        onClick={() => setGiftConfirming(true)}
+                                                        disabled={!giftAmount || !giftNote?.trim()}
+                                                        width="full"
+                                                    >
+                                                        Send gift
+                                                    </OSButton>
+                                                )}
+                                            </div>
+                                        </Popover>
                                         <OSButton
                                             asLink
                                             size="md"
@@ -1347,7 +1718,7 @@ export default function ProfilePage({ params }: PageProps) {
                             )}
 
                             {profile.achievements?.length > 0 && (
-                                <Block title="Achievements">
+                                <Block title="Achievements" url={`/community/achievements`}>
                                     <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
                                         {profile.achievements.map(({ achievement, hidden, id }) => (
                                             <li key={id} className="flex justify-center">
@@ -1448,7 +1819,9 @@ export default function ProfilePage({ params }: PageProps) {
 const TeamMembersList = ({ self, team }) => {
     const selfTeammate = team.attributes.profiles.data.find((teammate) => teammate.id === self.id)
     const otherTeammates = team.attributes.profiles.data.filter((teammate) => teammate.id !== self.id)
-    const teammates = [selfTeammate, ...otherTeammates].filter(Boolean)
+    const teammates = [selfTeammate, ...otherTeammates].filter(
+        (teammate) => teammate?.attributes?.startDate && new Date(teammate.attributes.startDate) <= new Date()
+    )
 
     return (
         <>

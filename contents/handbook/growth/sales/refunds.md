@@ -73,9 +73,10 @@ Large account requests
 
 Before doing a refund, review customer's usage. Some useful sources:
 
--   You can make a copy of [this posthog insight](https://us.posthog.com/project/2/insights/8nLWTLHu) and use organization id to review account usage.
--   [This dashboard](https://metabase.prod-us.posthog.dev/dashboard/3-customer-detail?stripe_customer_id=&customer_or_org_id=) for an overview with usage reports and invoice history.
+-   If you have access to Vitally, find the customer's Metabase dashboard link under the 'Usage Dashboard Link' trait. The 'Event counts by type last X days' insight is particularly useful here - you can change the lookback period to see a longer time range. 
+-   [This dashboard](https://us.posthog.com/project/2/dashboard/259114) for an overview with usage reports and invoice history.
 -   [This dashboard](https://metabase.prod-us.posthog.dev/dashboard/139-customer-usage-breakdown?organization_id=&project_id=) to help identify issues for customers with many projects
+-   You can also make a copy of [this PostHog insight](https://us.posthog.com/project/2/insights/8nLWTLHu) and use organization id to review account usage. Note that the org usage report can run 2-3 times per day, so numbers may be duplicated/inflated.
 
 What's "normal" vs "weird" usage:
 
@@ -92,9 +93,18 @@ What's "normal" vs "weird" usage:
 
 -   Subtract the baseline usage from the spike amount to find the total overage. Example: If average monthly usage was 1 million events per month and a spike resulted in 3 million events, the overage amount would be 2 million events.
 
+**For event-specific overages (optional):**
+
+If you want more precision when a single event type is inflated, use the 'Event counts by type last X days' insight in the Metabase dashboard:
+
+1. Change the lookback days to find the baseline period before the spike
+2. Identify the inflated event type and compare its spike volume to the baseline
+3. The difference is your overage amount for that event type
+
 ### Calculate the amount to refund/credit
 
--   Use [pricing calculator](https://posthog.com/pricing) to calculate the total price for baseline and overage volumes. The difference between the two will be the refund amount.
+-   Use the [pricing calculator](https://posthog.com/pricing) to calculate the total price for baseline and overage volumes. The difference between the two will be the refund amount.
+-   Alternatively, you can use [QuoteHog](https://quote.posthog.com) - go to the usage history tab, build a price option from a specific month's usage, and subtract the inflated volume to see what the bill would have been without the spike.
 -   Don't just put in the overage amount in the calculator - doing this would give you the wrong amount because of our tiered pricing structure. Calculating the difference between regular usage and usage with overage is the accurate way to calculate actual amount.
 -   Add a note in the Zendesk ticket with a breakdown of calculations, the baseline average, and the overage. This transparency can be helpful if the customer has questions.
 
@@ -122,16 +132,31 @@ You need Support specialist level access to Stripe, ask Simon for access.
 8. Click 'Save and view'
 9. Confirm that the credits were successfully added to the customer's balance in Stripe under 'Customer invoice balance'
 
-### Issuing a credit note refund
+### Issuing a refund
+Refunds are now initiated through Billing Admin and finalized in Stripe via a credit note. 
 
-1. Find customer profile in Stripe (you can search by organization id)
-2. Under Invoices, find the invoice corresponding to the usage period or product you want to refund.
-3. Click “Issue a credit note” in the top right corner of the invoice page.
-4. In the Reason field, select relevant reason from dropdown or select "Other" and add any relevant context (e.g. Zendesk ticket link, Slack message link, or short explanation)
-5. Under "Items to credit" select the corresponding products or charges you want to issue a refund for. If this is a full refund, you can select all products by checking the box at the very top of the list next to Description.
-6. Review the credit amount and confirm everything looks correct.
-7. Under "Amount to credit" field towards the bottom of the page you will see a dropdown that says "Select how to credit" Select "Refund to ... (customer's default payment method)" 
-8. Once you review everything and all looks good click "Issue credit note" this will finalize the process and send a notification email to the customer.
+There are two ways to reach the Add Refund screen.
+
+*Option A:*
+
+1. Navigate to Billing Admin → Customers.
+2. Find the right Customer (search by organization ID or customer ID).
+3. Once in the Customer view, scroll down to _Related invoices_ section. Find the right one (you can identify it by its id, dates or amount).
+4. Click on "Start refund"
+
+*Option B:*
+
+1. Navigate to Billing Admin → Invoices.
+2. Find the right invoice (search by invoice ID, organization ID, etc).
+3. Click and open the invoice view. 
+4. Once in the view, click on the top right button "Start refund"
+
+Once you do that (through any of the two options), you'll land on the "Add refund" screen. From there, you can continue with the refund:
+
+1. Allocate refund amounts per product. Refunds must be issued per product. Enter the refund amount for each affected product. You may need to do more math here: for an event spike refund may span Product Analytics, Person Profiles, and Group Analytics. Billing Admin does not automatically split refunds across products, you must do the math and allocate amounts manually. As you enter per product amounts, the total refund amount updates automatically.
+2. Select refund reasons: Choose a Stripe refund reason (required) and select an internal reason (used for internal reporting and analysis)
+3. Add any relevant notes or context (e.g. Zendesk ticket, Slack link, short explanation)
+4. Once you review everything and all looks good save the refund in Billing Admin. This will issue a Stripe credit note, which is processed as a refund to the customer’s default payment method. Stripe automatically sends a notification email to the customer.
 
 ### Fixed fee product refunds
 For fixed-fee subscriptions (e.g. Boost plan), Stripe’s default proration behavior can cause double crediting.

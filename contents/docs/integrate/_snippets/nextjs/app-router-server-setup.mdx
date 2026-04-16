@@ -7,7 +7,7 @@ This enables us to send events and fetch data from PostHog on the server – wit
 import { PostHog } from 'posthog-node'
 
 export default function PostHogClient() {
-  const posthogClient = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+  const posthogClient = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
     host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
     flushAt: 1,
     flushInterval: 0

@@ -10,7 +10,7 @@ Sent and managed via [Substack](https://newsletter.posthog.com/), we put togethe
 
 The newsletter is long-form, original copy, often based on blog posts we already wrote. It focuses on product and business lessons and information for engineers. 
 
-We [run ads](/handbook/growth/marketing/open-source-sponsorship) to drive subscriptions for this newsletter.
+We [run ads](/handbook/marketing/open-source-sponsorship) to drive subscriptions for this newsletter.
 
 Art from previous newsletters is in <PrivateLink url="https://www.figma.com/design/tNuNQ0STmx0ve4f1sAv4Ka/Blog-images?node-id=0-1&p=f&t=qHbYLFRHbl0v8wqW-0">Figma</PrivateLink> and diagrams are in <PrivateLink url="https://www.figma.com/board/b0ttECQMiQ6LlGKpIICUcM/Marketing-Jam?node-id=0-1&p=f&t=Uy3T3a4MXGY266zM-0">FigJam</PrivateLink>.
 
@@ -66,7 +66,7 @@ These aren’t rules, just things that have worked well in the past. They provid
 
 - **Think about rhythm:** Two long paragraphs back-to-back is tiring. Use bullet points to break things up where needed, and mix short, clear sentences with longer ones, so the pace doesn't become monotonous. 
 
-- **Break up very hard to read sentences:** Use a tool like [Hemmingway](https://hemingwayapp.com/) to identify sections that are very hard to read. Some long sentences aren't bad, but lots of them consecutively will drain the reader's attention. Aim for readability grade of 8 or less.
+- **Break up very hard to read sentences:** Use a tool like [Hemingway](https://hemingwayapp.com/) to identify sections that are very hard to read. Some long sentences aren't bad, but lots of them consecutively will drain the reader's attention. Aim for readability grade of 8 or less.
 
 - **Use footnotes tactically:** They're useful for adding context that's useful, but not important enough to bog down your core narrative. If something is hard to explain and slowing things down, consider using a footnote. They're also a fun way to add jokes, rants, easter eggs, and references.
 

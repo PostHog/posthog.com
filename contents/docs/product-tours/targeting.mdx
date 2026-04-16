@@ -1,0 +1,90 @@
+---
+title: Target users and set display conditions
+sidebar: Docs
+showTitle: true
+---
+
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+Targeting controls who sees your tours and when they appear. A user must match **all** conditions to see a tour.
+
+## URL conditions
+
+Show tours on specific pages using URL matching.
+
+| Type | Description | Example |
+|------|-------------|---------|
+| **Exact** | URL must match exactly | `https://app.example.com/dashboard` |
+| **Contains** | URL must contain the string | `/dashboard` matches any URL with `/dashboard` |
+| **Regex** | URL must match the pattern | `/users/[0-9]+` |
+
+
+> **Note:** When using **Exact** matching, trailing slashes are stripped from both the target URL and the current page URL before comparison. This means `https://app.example.com/dashboard` and `https://app.example.com/dashboard/` are treated as the same URL.
+
+The URL is matched against the full `window.location.href`.
+
+## Device type targeting
+
+Show tours only on specific device types. Select one or more options:
+
+- **Desktop** - Laptops and desktop computers
+- **Tablet** - Tablets like iPad
+- **Mobile** - Smartphones
+
+If no device types are selected, the tour shows on all devices.
+
+## User targeting
+
+Target specific users using [feature flag](/docs/feature-flags) filters. Every tour has an auto-created internal feature flag, and you can add targeting filters to control who sees the tour.
+
+This lets you show tours to:
+
+- Users with specific properties (e.g., `plan = pro`)
+- Users in specific [cohorts](/docs/data/cohorts)
+- A percentage of users (rollout)
+
+## Auto-launch delay
+
+Set a delay (in seconds) before the tour appears after the page loads. This is useful when:
+
+- You want users to orient themselves before the tour starts
+- Target elements load asynchronously
+
+## Display frequency
+
+Controls how often a tour shows to users.
+
+**Tours** show until the user interacts with them (completes or dismisses). Once a user interacts, they won't see the tour again.
+
+**Announcements** have configurable display frequencies:
+
+| Type | Options |
+|------|---------|
+| **Modal announcements** | Show once (default), or until interacted |
+| **Banners** | Until interacted (default), or always |
+
+This is handled via person properties:
+- `$product_tour_completed/{tour_id}`
+- `$product_tour_dismissed/{tour_id}`
+
+These properties are set automatically and used to filter out users who have already interacted with a tour.
+
+## Wait period
+
+Prevent tour fatigue by hiding tours from users who recently saw other tours, announcements, or banners.
+
+Enable the "Don't show to users who recently saw another..." option and configure:
+
+- **Tour types** - Select which types count toward the wait period: tours, announcements, and/or banners
+- **Days** - How many days must pass before showing this tour (1-365 days, default 7)
+
+For example, if you configure a 7-day wait period for all types, users who saw any tour, announcement, or banner in the last 7 days won't see this tour.
+
+This uses person properties to track when each type was last shown:
+- `$product_tour_last_seen_date/tour`
+- `$product_tour_last_seen_date/announcement`
+- `$product_tour_last_seen_date/banner`
+
+These properties are set automatically when a tour is shown and checked via the tour's internal feature flag.

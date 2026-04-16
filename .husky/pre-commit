@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+# Try to find pnpm in PATH or common locations (needed for GitHub Desktop)
+if ! command -v pnpm >/dev/null 2>&1; then
+  # Try to source shell profile to get pnpm in PATH
+  if [ -f ~/.zshrc ]; then
+    . ~/.zshrc 2>/dev/null || true
+  elif [ -f ~/.bash_profile ]; then
+    . ~/.bash_profile 2>/dev/null || true
+  elif [ -f ~/.bashrc ]; then
+    . ~/.bashrc 2>/dev/null || true
+  fi
+  
+  # If still not found, try npx
+  if ! command -v pnpm >/dev/null 2>&1; then
+    if command -v npx >/dev/null 2>&1; then
+      npx pnpm lint-staged
+      exit $?
+    else
+      echo "Error: pnpm not found and npx is not available"
+      exit 1
+    fi
+  fi
+fi
+
+pnpm lint-staged

@@ -49,6 +49,8 @@ Here are a few ways to empower them to do that:
 
 > 🏆 **You'll know you're successful if:** You can disappear for two weeks without affecting the quality and frequency of releases.
 
+<NewsletterForm />
+
 ## 2. You stopped writing code
 
 ### Symptom
@@ -146,3 +148,5 @@ When your team isn't yet confident or experienced enough, handling things yourse
 * **Hire for constraints.** When you realise the work no longer matches anyone's strengths, treat it as a signal that you need to bring on a new person to the team.
 
 > 🏆 **You'll know you're successful if:** you're no longer the first name that pops up when something breaks, and the fix is merged before you even open Slack.
+
+<NewsletterForm />

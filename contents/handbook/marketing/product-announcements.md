@@ -1,5 +1,5 @@
 ---
-title: Product Marketing
+title: Product announcements
 sidebar: Handbook
 showTitle: true
 ---
@@ -18,9 +18,9 @@ Minor announcements involve changes which have no noticeable impact on the exper
 We may typically support minor announcements by:
 
 - Including them in the weekly changelog update.
-- Writing a short Twitter and/or LinkedIn post.
+- Writing a short Twitter and/or [LinkedIn post](/handbook/content/linkedin).
 
-An example of a minor announcement is the [UUID format change](/changelog/2023#new-uuid-format-for-posthog-js).
+An example of a minor announcement is the [UUID format change](/changelog?id=1923).
 
 ### Medium announcements
 Medium announcements involve changes which have a noticeable impact on the experience of some users, but not the majority. They are likely to involve visual or functional changes, such as adding a chart type, but do not introduce wholly new features. They do not require action from users and pose no known risk.
@@ -31,27 +31,33 @@ We may typically support medium announcements by:
 - Creating an in-app changelog notification.
 - Writing a Twitter and LinkedIn post.
 
-An example of a medium announcement includes the [launch of the NPS app](/changelog/2023#nps-survey-app).
+An example of a medium announcement includes the [launch of the NPS app](/changelog?id=1787).
 
 ### Major announcements
 Major announcements involve changes which have a noticeable impact on the experience of most users, or require specific action from affected users. They may introduce new features, require product downtime, or include opt-in betas for upcoming work.
 
 We might do anything and everything for a major announcement.
 
-Examples of major announcements include [the surveys beta](/changelog/2023#user-surveys-beta) or [the analytics pricing change](/changelog/2023#reduced-pricing-for-product-analytics).
+Examples of major announcements include [the surveys beta](/changelog?id=1945) or [the analytics pricing change](/changelog?id=1907).
 
 ### New product announcements
 New product launches are major announcements. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/meta/issues/new/choose). Product marketers should always create a launch plan for new product announcements. 
 
 For new product announcements we generally apply the following best practices:
 
-- Ensure the product has at least one customer story created for it within 3 weeks of launch.
-- Ensure we publish best practice content for the product and link to it from docs.
-- Ensure the product has at least one tutorial created for it at launch.
+- Ensure the product has a product page added to the website.
+- Ensure the product team has implemented [intent](/handbook/growth/growth-engineering/product-intents) and [activation](/handbook/growth/growth-engineering/per-product-activation) signals for the product.
+- Ensure the product has at least one customer story created for it within 3 weeks of launch. [example](/customers/lovable)
+- Ensure we publish best practice content for the product and link to it from docs. [example](/docs/product-analytics/best-practices)
+- Ensure the product has at least one tutorial created for it at launch. [example](/docs/feature-flags/tutorials)
 - Ensure launch activities (such as changelog) link clearly to the docs.
 - Ensure the product is added to email and in-app onboarding flows.
+- Ensure the product is added to the [pricing page](/pricing) (this is typically owned by the product team's PM and the <SmallTeam slug="billing" />)
+- Submit an [art request](/handbook/brand/art-requests) for any creative assets needed for the email campaign, blog post, social media posts etc...
 
 Comms should also be aware of [the engineering best practices for product launches](/handbook/engineering/development-process#best-practices-for-full-releases), so we can be sure that features launch well.
+
+If the product is moving from free beta to paid general availability (GA) you might also want to choose a reward for beta users. Examples of this include giving PostHog AI beta users 30 extra days of unlimited free usage, or giving Workflows beta users a discount code for merch.
 
 ### PR announcements
 We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/brand/press). 

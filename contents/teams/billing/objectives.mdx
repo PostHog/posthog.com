@@ -1,41 +1,57 @@
-## Q4 2025 Objectives
+## Q2 2026 Objectives
 
+1. **Complete the transition to the new revenue model (eng lead: <TeamMember name="Marce Coll" />, revops lead: <TeamMember name="Mine Kansu" />)**
+    - Initial implementation
+    - Discrepancy hunting and fixing - all understood and fixed or explicitly accepted
+    - All internal dashboards re-implemented on the new model
+    - Investor reporting migrated
+    - Model understood and trusted across the team
+        - Finance signs off on model documentation
+        - Zero revops escalations for routine ARR/MRR questions for 4 weeks after launch
+        - Bonus: self-serve (finance can pull monthly data they need to close the books without billing/revops in the loop)
+    - Stretch goal: revenue model data flowing into Campfire
 
-### Pawel
+2. **Migrate all credits to an in-house ledger (lead: <TeamMember name="Pawel Cebula" />)**
+    - Implement a double-entry credit ledger
+    - Deploy and run the shadow ledger
+    - Fix unexpected discrepancies
+    - Migrate from customer balance to the ledger
 
-- Implement pricing changes and launches (e.g. Data warehouse, Max, Tasks, Logs, Messaging/Workflows)
-- Launch a new, more compact billing page
-- Investigate and improve subscribe flow (e.g. status check timeouts, 3DS)
-- Experiment with the unsubscribe flow to reduce churn
-- Research usage-based billing providers to learn how they deal with challenges we face
+3. **Ship all expected pricing launches and changes (lead: <TeamMember name="Pawel Cebula" />)**
+    - **PostHog Code**
+        - Seat-based subscriptions (free and paid)
+        - Seat-based subscriptions (free and multiple paid)
+        - Overages and background agents
+    - **Storage and compute**
+        - Data warehouse
+        - Endpoints
+    - **Workflows**
+        - Channels: Push, SMS
+        - Per-workflow limit exclusion
+    - **Batch exports**
+        - Higher frequency exports
+    - **Logs**
+        - 30 and 90 day retention
 
-### Pato
+4. **Reduce tech debt and improve developer experience (lead: <TeamMember name="Marce Coll" />)**
+    - Improve async task observability and reliability
+    - Upgrade to PostgreSQL 17/18
+    - Switch from Nginx to Granian
 
-- Improve billing system, introducing pattern designs and abstractions (strategies for billing limits, forecasting and usage report)
-- Update legacy Stripe API version
-- Move Stripe flows to billing admin (e.g. credit notes, refunds, payments)
-- Collaborate with Mine & BigTimeData to deliver new revenue models
-- Implement pricing changes and launches (with Pawel)
-- Learn to ride a bike properly
+5. **Complete the Salesforce org object rollout (lead: <TeamMember name="Abhischek Thottakara" />)**
+    - Deploy deduplication workflow and scripts to production
+    - Complete historical migration to custom org object
+    - Migrate all integrations and lead triggers to new object
+    - Confirm Vitally and Salesforce sync works under the new setup
+    - Document all scripts and workflows in PostHog-owned GitHub repo
 
-### Marce
+6. **Build customer health score v1 in Vitally (lead: <TeamMember name="Mine Kansu" />)**
+    - Define "active user" per product
+    - Define org-level "active customer" rollup logic
+    - Validate definitions against known accounts (healthy, churned, at-risk)
+    - Implement health scores in Vitally
 
-- Produce and maintain a single source of truth for billing logic
-- Comprehensive set of assertions on the billing system (incl. historical tables)
-- Real-time usage reporting RFC
-
-### Mine
-
-- Deliver v1 reconciled revenue reporting with monthly reconciled revenue numbers and migrate all key metrics to the new model as the single source of truth
-- Update lifecycle metrics under new revenue model to include resurrected/paused accounts so expansion/churn views are more realistic
-- Create an end to end dashboard tying marketing -> sales pipeline -> revenue attribution 
-- Ship custom posthog org object in salesforce
-- Work with sales team on automation and tracking of outbound leads
-
-### Bonus
-
-- Upgrade billing postgres
-- Enable local payment options in key markets (e.g. India, China; verify the need/ROI first)
-- Improve self-serve credit purchase flow (credit expiry logic, granting credits upfront)
-- Enable billing through partners (e.g. AWS self-serve, Vercel)
-- Support coupons (e.g. newsletters, hackathons)
+7. **Implement fully automated outbound pipelines (lead: <TeamMember name="Abhischek Thottakara" />)**
+    - Source and score additional leads (LinkedIn followers, Appfigures.com targets, Stripe Propensity Leads)
+    - Generate outbound sequence content using LLM in Clay
+    - Sequence highest scoring targets automatically using Lemlist

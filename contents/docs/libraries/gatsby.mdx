@@ -1,7 +1,6 @@
 ---
 title: Gatsby
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/gatsby.svg
+platformLogo: gatsby
 ---
 
 import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
@@ -34,7 +33,7 @@ module.exports = {
       resolve: `gatsby-plugin-posthog`,
       options: {
         // Specify the API key for your PostHog Project (required)
-        apiKey: "<ph_project_api_key>",
+        apiKey: "<ph_project_token>",
         // Specify the app host if self-hosting (optional, default: https://us.i.posthog.com)
         apiHost: "<ph_client_api_host>",
         // Puts tracking script in the head instead of the body (optional, default: true)
@@ -53,9 +52,15 @@ In your code you can access posthog via `window.posthog`.
 
 For more instructions, see [browser JS library](/docs/integrate/client/js).
 
+## Identifying users
+
+import IdentifyFrontendCallout from '../_snippets/identify-frontend-callout.mdx'
+
+<IdentifyFrontendCallout />
 
 <DetailSetUpReverseProxy />
 
 <DetailGroupProductsInOneProject />
 
 <DetailPostHogIPs />
+

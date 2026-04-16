@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
-import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
+import { createSlideConfig, SlidesTemplate, IntegratedWarehouseSlide } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 import { Accordion } from 'components/RadixUI/Accordion'
 
@@ -403,12 +403,17 @@ export default function Experiments(): JSX.Element {
     // Optional: Customize slides
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
-        exclude: ['answers'],
+        exclude: ['answers', 'videos'],
         custom: [
             {
                 slug: 'statistical-methods',
                 name: 'Statistical methods',
                 component: StatisticalMethodsSlide,
+            },
+            {
+                slug: 'warehouse-integration',
+                name: 'Warehouse integration',
+                component: IntegratedWarehouseSlide,
             },
         ],
         order: [
@@ -422,6 +427,7 @@ export default function Experiments(): JSX.Element {
             'feature-comparison',
             'docs',
             'pairs-with',
+            'warehouse-integration',
             'getting-started',
         ],
         templates: {

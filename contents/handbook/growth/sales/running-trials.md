@@ -107,7 +107,11 @@ It's important to have visibility into a customer's usage and engagement in orde
 
 These signals are not guaranteed to always indicate success. Some teams are chattier than others, some teams like to keep comms over email, others enjoy regular Zoom meetings - see above for notes on Hands-on vs. Self-serve approaches.
 
-> Pro tip: You can always use session replay to also check their activity and learn how they are using PostHog!
+> Pro tip: You can always use session replay to also check their activity and learn how they are using PostHog! Leverage PostHog AI to help you analyze multiple user sessions. Look for things like:
+- How well users are onboarding
+- Points of friction, confusion, or frustration
+- Product usage & discovery - are they doing the things they said they wanted to?
+
 
 **High engagement signals:**
 

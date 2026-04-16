@@ -1,42 +1,69 @@
-## Q4 2025 objectives
+## Q2 2026 objectives
 
-This team is now back online after a short time of having no assigned engineers to it - the old team did such a great job they now have their own product!
+**North star:** 20% of sign ups should happen outside posthog.com/signup
 
-This is also only a half quarter for this team, plus we're onboarding <TeamMember name="Matthew Brooker" photo />.
+These are the primary goals the team is prioritizing this quarter.
 
+<details>
+<summary>Make agentic sign ups first-citizen of PostHog (<TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo />)</summary>
 
-### Cross-Sell
+- **Rationale:** Agents are increasingly the ones picking and setting up tools. If our sign-up assumes a human clicking through a dashboard, we miss the fastest-growing top of funnel.
+- **Things we could do:** Agentic onboarding by default — headless onboarding, Wizard, Stripe projects, AI-first flows. Wizard should be able to create orgs + projects on its own with no UI clicks. Expand the pattern beyond Stripe (done) to Vercel, Lovable, Supabase, and Replit.
+- **We'll know we're successful when:** An agent can bring a PostHog org and project online through any of our partner surfaces without a human in the loop.
 
-<TeamMember name="Rafael Audibert" photo /> will be working on cross-sell motions to continue easing our customers into adopting more of our products - that's our moat.
+</details>
 
-- Make use of the huge amount of data we capture for product intent signals inside PostHog.
-- Work with <SmallTeam slug="platform-ux" /> to improve the sidebar experience for long-term onboarding (activation for our other products).
-- Expose PostHog signals to Array
-  - It's not yet clear what's Growth team's responsibility here. Each team will send individual signals from their product to Array. The intention here at the moment is that Growth team should send signals to foster feature adoption (introduce error tracking, introduce session replay, add a new NPS survey, etc.)
-  - If the feature is actually implemented we should offer some sort of credit to the customer to justify the feature adoption.
-- Stretch goal: Explore the PostHog Ads concept (using the sidebar? using notifications? using email marketing?). Task success implies an MVP that let's us answer whether we should focus on this or not. If so, decide on a plan for it.
+<details>
+<summary>Allow anyone to integrate/provision an org + project in PostHog (<TeamMember name="Rafael Audibert" photo /> <TeamMember name="Matt Brooker" photo />)</summary>
 
-### Integrations
+- **Rationale:** Every partner, every embedded platform, and every agentic flow needs a programmatic way to spin up a PostHog org or project. One-off integrations don't scale — a generic path does.
+- **Things we could do:** Lean on the soon-to-come Partnerships Wrangler. Market it as either PostHog Marketplace or PostHog as a platform. Review what Agentic Provisioning needs to become generic (just an API). Write docs and settle on how to do it. Stand up the right application process — probably Support Hero-driven.
+- **We'll know we're successful when:** A partner or agent can provision an org + project through a single public path, with no custom work from us.
 
-<TeamMember name="Matt Brooker" photo /> will be working on integrations with external partners to drive growth. We already have an MCP and Array but we don't closely integrate with partners.
+</details>
 
-- Launch our Vercel integration
-- Integrate with other AI tools (and get them to integrate with us) - this can be either via an MCP or custom integration.
-  - PostHog MCP OAuth flow enables Interaction (and any other MCP-consuming tools) to use us, and for us to be available in Claude, ChatGPT pages
-    - Add new self-serve OAuth screen to let apps generate custom OAuth apps
-    - Stretch goal: Metrics on OAuth usage
-  - Expose PostHog natively inside vibecoding platforms (needs buy-in from platforms)
-    - Might require a forward deployed engineer approach
-- Focus on increasing top of funnel adoption - the more sign ups/orgs created the better!
+<details>
+<summary>Activation rate across all onboarding experiences should be 60%+ (<TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo /> <TeamMember name="Rafael Audibert" photo />)</summary>
 
+- **Rationale:** A single numerical bar pulls every onboarding experience towards the same outcome. Different channels — warm, lukewarm, cold, frozen — need different treatment, and a unified target forces us to treat them as one system.
+- **Things we could do:** Settle the activation metric alongside PMs — we're currently on "soft activation" per-product; global activation is still TBD. Implement channel-specific onboarding: website (warm), Wizard (lukewarm), agentic provisioning (cold), Lovable/Replit auto-adding Analytics (frozen). Explicitly de-scope PostHog Code activation for now — Signals + PostHog Code team will handle that.
+- **We'll know we're successful when:** Measured activation rate across every onboarding surface is 60% or higher.
+
+</details>
+
+<details>
+<summary>Shape the external interface for Signals (<TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo /> <TeamMember name="Rafael Audibert" photo />)</summary>
+
+- **Rationale:** Signals is still early and its external surface isn't settled. Getting the shape right now — before partners depend on it — avoids painful contract breaks later. Partner vibecoding app builders are the most credible early validators.
+- **Things we could do:** Write a spec for the external interface and validate with partner vibecoding app builders. We believe these partners want Signals, but Signals may not be ready to expose yet — first check feasibility. Once that's done, stop and reflect: how do we make this the next big thing after MCP?
+- **We'll know we're successful when:** We have a validated spec and a clear read on whether Signals can be the next big thing after MCP.
+
+</details>
+
+### Stretch goals
+
+- Launching VSCode extension - <TeamMember name="Fernando Gomes" photo />
+- Launching MCP Analytics alongside Lucas/Surveys team - <TeamMember name="Rafael Audibert" photo />
+- With the wizard getting context from posthog, foster cross-selling - TBD
+- Something fun? - <TeamMember name="Matt Brooker" photo />
+
+## Q1 2026 recap
+
+- Onboarded <TeamMember name="Fernando Gomes" photo /> to the team
+- Shipped MCP Apps
+- Shipped Stripe projects
+- Shipped Vercel integration
+- A bunch of MCP improvements alongside the PostHog AI team
+- Shipped VSCode extension
+- Shipped HogSpy
+- Reverse proxy revival (mostly Daniel, but we made it more relevant in-app)
+- MCP got featured as connector in a bunch of different marketplaces
+- ...and much more, look at the [changelog](/changelog)
 
 ## Next quarters
 
 Non-exhaustive list of things we want to work on eventually:
-- 10x the toolbar
 - One-click migration away from competitors
-- Spin up an SDK team
-- Agent Analytics? SDK Analytics? MCP Analytics?
 - Demo environment for customers to try out PostHog with existing data (and relatable to their own business domain)
 - PostHog-billed AI SDK
   - Don't need to setup an AI account in each provider, just use PostHog's AI SDK.

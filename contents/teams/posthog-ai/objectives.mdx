@@ -1,94 +1,65 @@
-### Q4 2025 objectives
+## Q2 2026
 
-💰 Pricing structure (just do itTM) <TeamMember name="Annika Schmid" />  
-📚 Deep research release <TeamMember name="Emanuele Capparelli" />, <TeamMember name="Alessandro Pogliaghi" />
+### Objective 1: PostHog AI 2.0 migration - <TeamMember name="Georgiy Tarasov" photo />, <TeamMember name="Chris Volzer" photo />
 
--   Pricing
--   Single loop executor
--   Draft report denoising
--   Support session summaries
--   (bonus) integrate with AI platform
+We will migrate PostHog AI to the new sandboxed agent architecture that will be shared by PostHog AI and PostHog Code. This will give PostHog AI code access, and much better support for all of PostHog's products via MCP + skills.
 
-📺 Session summaries release <TeamMember name="Alex Lebedev" />
+- Move PostHog AI to use the sandbox architecture
+- Migrate existing MaxTools to MCP tools and skills
+- Evals to compare old vs new PostHog AI
 
--   Pricing
--   Notebooks UX \-\> <TeamMember name="Michael Matloka" />
--   Figure out evals
--   Video/image grounding
+### Objective 2: AI infrastructure - <TeamMember name="Alessandro Pogliaghi" photo />, <TeamMember name="Ryan Sutton" photo />, <TeamMember name="Vojta Bartos" photo />, <TeamMember name="Joshua Snyder" photo />
 
-🔎 Use traces for iteration <TeamMember name="Georgiy Tarasov" />
+Provide good infrastructure that teams can build reliable AI features on top of.
 
--   Traces Day to identify what users think PostHog AI should do, failures modes, errors
--   Start adding traces to datasets
+- Sandboxes
+  - Stable infra to launch sandboxes, snapshot/resume them
+  - Better development experience
+  - Observability for debugging running tasks
+  - Scalability for GA release of PostHog Code
+  - Consider support for EC2 sandboxes
+  - Run tasks with structured output
+- LLM gateway (high priority for internal usage, low priority for productised stuff — we need more bandwidth here)
+  - Reliability & fallback providers
+  - Support team based usage rather than requiring a personal API key
+  - Open source models for internal usage (if we have time)
+- MCP server
+  - Move from cloudflare to our own infrastructure
+  - Improve observability and alerting
 
-🔌 AI architecture / platform
+### Objective 3: Background agents & automations - <TeamMember name="Alessandro Pogliaghi" photo />, <TeamMember name="Ryan Sutton" photo />, <TeamMember name="Vojta Bartos" photo />, <TeamMember name="Joshua Snyder" photo />
 
--   Search resources in PostHog, incl. UI presentation <TeamMember name="Denada Korita" />
--   PostHog AI being as single-loop agent <TeamMember name="Georgiy Tarasov" />
--   Unify MCP server and PostHog AI tools to the extent sensible <TeamMember name="Emanuele Capparelli" />
--   Codify the revamped AI platform for teams <TeamMember name="Alessandro Pogliaghi" />
+Users are shipping code from the cloud via signals, PostHog Code, and PostHog AI. We want to make this a great experience for them.
 
-📈 SQL quality <TeamMember name="Georgiy Tarasov" /><TeamMember name="Denada Korita" />
+- UX of using cloud runs in PostHog Code
+- Slack app for kicking off cloud tasks
+- Webhooks for auto-fixing CI failures and PR comments
+- Agent makes data driven decisions using the MCP server
+- Automations for running agents on a schedule
+- Snapshot setup and custom environments
+- Pricing & billing for cloud runs - <TeamMember name="Annika Schmid" photo />
+- Preview environments for PR changes
+- Ability to ship PRs from the PostHog AI UI in cloud (if we have time)
 
--   Pull 'Fix SQL' into PostHog AI as a tool
--   Specify only listed functions in the prompt adapted from HogQL docs are allowed
--   SQL mode (“morphing” the root node)
--   Latency improvements
+### Objective 4: Every product has a first-class AI experience - <TeamMember name="Georgiy Tarasov" photo />, <TeamMember name="Chris Volzer" photo />
 
-🤖 Gaps from ChatGPT <TeamMember name="Michael Matloka" />
+The experience of using any product in PostHog via an agent should be amazing. As part of this we want product teams to build three things:
 
--   Reasoning as an option
--   Web search
+1. **MCP tools**
+2. **Skills**
+   - Ship a skill for writing skills
+   - Help teams understand when their skill is working well or not
+   - Track skill usage in our agents, give feedback on traces where we see issues
+3. **MCP UI** (second half of Q2)
+   - Make a start on using Quill for the AI first experience of each product
+   - Give teams a good way to test this in PostHog Code / PostHog AI
 
-**Should**
+## Side quests
 
-🎨 UI sparks joy <TeamMember name="Michael Matloka" /> <TeamMember name="Georgiy Tarasov" />
-
--   Show full thinking
--   Show every tool use clearly
--   UI freshness like shimmering text <TeamMember name="Emanuele Capparelli" />
--   Meta: Hire UI designer
-
-🔎 Use traces for iteration <TeamMember name="Georgiy Tarasov" />
-
--   Finish rollout of running evals on prod datasets
-
-**Could (nice to have)**
-
-💪 Experiments
-
--   Explore post-training a small model <TeamMember name="Georgiy Tarasov" /> <TeamMember name="Alex Lebedev" /><TeamMember name="Denada Korita" /><TeamMember name="Alessandro Pogliaghi" />
-
-🔎 Use traces for iteration <TeamMember name="Georgiy Tarasov" />
-
--   Build a simple online evals thing (not product)
-
-💭 Context platform <TeamMember name="Georgiy Tarasov" />
-
--   Connect third-party tools (an MCP store?) <TeamMember name="Emanuele Capparelli" />
--   Uploaded files <TeamMember name="Alessandro Pogliaghi" />
--   Code search <TeamMember name="Michael Matloka" />
--   Attach resources with a @ <TeamMember name="Michael Matloka" />
--   Improve formation of memories and surface in chat UI
-
-🔌 Internal API optimizations
-
--   Unify LangChain and Temporal mix into Temporal <TeamMember name="Alessandro Pogliaghi" />
--   Use LLM proxy <TeamMember name="Denada Korita" />
--   Profile Temporal Django handoff, perf tracing <TeamMember name="Georgiy Tarasov" /> <TeamMember name="Alessandro Pogliaghi" />
-
-💡 Product Pulse (proactive data signals / suggestions)
-
-### Open product questions
-
-Pricing structure, then work with deep research & session summaries on concrete pricing
-Provide suggestions on some UI/UX bits, that will also help with pricing / tool differentiation
-Then: Figure out line between PostHog AI and Array if not clear yet
-Then: Figure out MCP vs PostHog AI, if not clear yet
-Then: Jobs to be done, if not clear yet
-
-Where is the line between PostHog AI and Array, what is the handover, is PostHog AI read, and Array write?
-Is everything ‘write’ Array? Such as creating a feature flag
-What jobs to be done are we solving? How do we define business / product autonomy exactly?
-Sit down with users to clarify product autonomy
-MCP vs PostHog AI, where do they overlap, where not? Venn diagram style
+- Enterprise compliance
+  - HIPAA — <TeamMember name="Joshua Snyder" photo />
+    - Azure account with BAA
+    - OpenAI commitment
+  - Regional processing (GDPR/EU) — <TeamMember name="Chris Volzer" photo />
+    - Use AWS Bedrock in the EU for Anthropic models across all deployments
+    - Use regional processing for OpenAI models across all deployments

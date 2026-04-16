@@ -1,0 +1,24 @@
+import OverrideServerPropertiesIntro from './override-server-properties-intro.mdx'
+
+<OverrideServerPropertiesIntro />
+
+```java
+import com.posthog.server.PostHogFeatureFlagOptions;
+
+posthog.getFeatureFlag(
+    "distinct_id_of_the_user",
+    "flag-key",
+    PostHogFeatureFlagOptions
+        .builder()
+        .defaultValue(false)
+        .group("your_group_type", "your_group_id")
+        .group("another_group_type", "your_group_id")
+        .groupProperty("your_group_type", "group_property_name", "value")
+        .groupProperty("another_group_type", "group_property_name", "value")
+        .personProperty("property_name", "value")
+        .build());
+```
+
+import OverrideGeoIPPropertiesSDK from './override-geoip-properties-SDKs.mdx'
+
+<OverrideGeoIPPropertiesSDK />

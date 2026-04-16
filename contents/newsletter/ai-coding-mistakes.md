@@ -45,6 +45,8 @@ As one of our product engineers, Paul D'Ambra, noted in a [blog on how he uses L
 
 > They're not actually very good software engineers… particularly since most of the data they've ingested about software engineering is "blogs on how to start something from scratch". So, if that's not the task. Then I find it often harder to prompt an LLM to do than to do it myself
 
+<NewsletterForm />
+
 ## 2. Not providing the right context, rules, and guardrails
 
 > DO NOT GIVE ME HIGH LEVEL SHIT, IF I ASK FOR FIX OR EXPLANATION, I WANT ACTUAL CODE OR EXPLANATION! I DON'T WANT "Here's how you can blablabla" - `posthog/.cursorrules`
@@ -73,7 +75,7 @@ Of course, engineers have built a whole set of non-AI (😱) tools for preventin
 - IDE tooling like PyCharm, JetBrains' testing suite, and IntelliJ.
 - Style guides and [coding standards](/handbook/engineering/conventions/backend-coding).
 
-Developers, especially [product engineers](/blog/what-is-a-product-engineer), were already relying on tools like these prior to AI. AI has just made these deterministic checks and guardrails even more important.
+Developers, especially [product engineers](/product-engineer/what-is-a-product-engineer), were already relying on tools like these prior to AI. AI has just made these deterministic checks and guardrails even more important.
 
 Like AI, the rise in importance of these tools isn't expected to slow down either. As [Gergely from Pragmatic Engineer](https://newsletter.pragmaticengineer.com/p/software-engineering-with-llms-in-2025) says:
 
@@ -114,7 +116,7 @@ Identifying what AI is and isn't good at also helps you at a meta level. It stop
 
 ## 4. Being content with your existing workflow
 
-A personality trait of a [great product engineer](/blog/what-is-a-product-engineer) is that they are always experimenting. When it comes to AI tools, this is no different. 
+A personality trait of a [great product engineer](/product-engineer/what-is-a-product-engineer) is that they are always experimenting. When it comes to AI tools, this is no different. 
 
 Our team is always testing (and talking about) new tools and approaches. There have been 1,104 messages with the word "Cursor" in our Slack, 187 with "Claude Code." This started early and is led by [our cofounders](/newsletter/how-to-not-breakup-with-your-cofounder). 
 
@@ -159,3 +161,5 @@ Ultimately, you are responsible for the end product of what you create. This is 
 AI is reshaping software. As model capacities and adoption increase, more and more of software (and software development) will be reshaped. What's important as an individual isn't using AI for the sake of it, but, like everything else, understanding it and fitting it into how you work.
 
 Getting big architecture decisions right, [figuring out what to build](/newsletter/how-we-decide-what-to-build), positioning correctly, and [choosing the right tools](/newsletter/choosing-technologies) will all remain important, but it also remains up to you to figure these out, with or without AI. If you do choose to use AI, avoiding the mistakes here will help improve your odds that you're successful.
+
+<NewsletterForm />

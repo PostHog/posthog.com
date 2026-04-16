@@ -68,7 +68,7 @@ Now that we have a basic app up and running, we can set up PostHog. Start by ins
 dotnet add package PostHog.AspNetCore --prerelease
 ```
 
-Next, update your `appsettings.json` to include your project API key and host, both of which you can get from [your project settings](https://us.posthog.com/settings/project):
+Next, update your `appsettings.json` to include your project token and host, both of which you can get from [your project settings](https://us.posthog.com/settings/project):
 
 ```json
 {
@@ -80,7 +80,7 @@ Next, update your `appsettings.json` to include your project API key and host, b
   },
   "AllowedHosts": "*",
   "PostHog": {
-    "ProjectApiKey": "<ph_project_api_key>",
+    "ProjectApiKey": "<ph_project_token>",
     "Host": "<ph_client_api_host>"
   }
 }

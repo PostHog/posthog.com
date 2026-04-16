@@ -167,6 +167,7 @@ export default function ErrorTracking(): JSX.Element {
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },
+        exclude: ['videos'],
         content: {
             answersDescription: 'Track and resolve errors and exceptions in your application',
         },

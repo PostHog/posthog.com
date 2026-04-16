@@ -57,6 +57,9 @@ export interface AppWindow {
     minimal: boolean
     appSettings?: AppSetting
     location?: Location
+    modal?: {
+        type: 'standard' | 'side' | 'floating'
+    }
 }
 
 interface WindowProviderProps {
@@ -69,11 +72,16 @@ interface WindowProviderProps {
     canGoBack: boolean
     canGoForward: boolean
     dragControls?: any
+    pageOptions?: MenuItemType[]
     setPageOptions: (pageOptions: MenuItemType[]) => void
     setActiveInternalMenu: (activeInternalMenu: MenuItem) => void
     internalMenu: MenuItem[]
     activeInternalMenu?: MenuItem
     parent: MenuItem
+    view: 'marketing' | 'developer'
+    setView: (view: 'marketing' | 'developer') => void
+    hasDeveloperMode: boolean
+    setHasDeveloperMode: (hasDeveloperMode: boolean) => void
 }
 
 interface WindowContextType {
@@ -85,11 +93,16 @@ interface WindowContextType {
     canGoBack: boolean
     canGoForward: boolean
     dragControls?: any
+    pageOptions?: MenuItemType[]
     setPageOptions: (pageOptions: MenuItemType[]) => void
     setActiveInternalMenu: (activeInternalMenu: MenuItem) => void
     internalMenu: MenuItem[]
     activeInternalMenu?: MenuItem
     parent: MenuItem
+    view: 'marketing' | 'developer'
+    setView: (view: 'marketing' | 'developer') => void
+    hasDeveloperMode: boolean
+    setHasDeveloperMode: (hasDeveloperMode: boolean) => void
 }
 
 export const Context = createContext<WindowContextType>({
@@ -101,6 +114,7 @@ export const Context = createContext<WindowContextType>({
     },
     canGoBack: false,
     canGoForward: false,
+    pageOptions: undefined,
     setPageOptions: () => {
         // No-op default implementation
     },
@@ -117,6 +131,14 @@ export const Context = createContext<WindowContextType>({
         url: '',
         children: [],
     },
+    view: 'marketing',
+    setView: () => {
+        // No-op default implementation
+    },
+    hasDeveloperMode: false,
+    setHasDeveloperMode: () => {
+        // No-op default implementation
+    },
 })
 
 export const Provider = ({
@@ -129,11 +151,16 @@ export const Provider = ({
     canGoBack,
     canGoForward,
     dragControls,
+    pageOptions,
     setPageOptions,
     setActiveInternalMenu,
     internalMenu,
     activeInternalMenu,
     parent,
+    view,
+    setView,
+    hasDeveloperMode,
+    setHasDeveloperMode,
 }: WindowProviderProps) => {
     return (
         <Context.Provider
@@ -146,11 +173,16 @@ export const Provider = ({
                 canGoBack,
                 canGoForward,
                 dragControls,
+                pageOptions,
                 setPageOptions,
                 setActiveInternalMenu,
                 internalMenu,
                 activeInternalMenu,
                 parent,
+                view,
+                setView,
+                hasDeveloperMode,
+                setHasDeveloperMode,
             }}
         >
             {children}

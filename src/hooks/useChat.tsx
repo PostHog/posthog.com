@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
+import { navigate } from 'gatsby'
 import useInkeepSettings, { defaultQuickQuestions } from './useInkeepSettings'
 import Chat from 'components/Chat'
 import { useApp } from '../context/App'
@@ -20,6 +21,7 @@ interface ChatContextType {
     addContext: (newContext: { type: 'page'; value: { path: string; label: string } }) => void
     firstResponse: string | null
     initialQuestion?: string
+    codeSnippet?: { code: string; language: string; sourceUrl: string }
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
@@ -30,12 +32,14 @@ export function ChatProvider({
     chatId,
     date,
     initialQuestion,
+    codeSnippet,
 }: {
     context?: { type: 'page'; value: { path: string; label: string } }[]
     quickQuestions?: string[]
     chatId?: string
     date?: string
     initialQuestion?: string
+    codeSnippet?: { code: string; language: string; sourceUrl: string }
 }): JSX.Element {
     const { windows, setWindowTitle } = useApp()
     const { appWindow } = useWindow()
@@ -85,6 +89,30 @@ export function ChatProvider({
                     setHasFirstResponse(true)
                 }
             }
+            if (event?.eventName === 'assistant_answer_displayed') {
+                const shadowRoot = document.querySelector('#embedded-chat-target>div')?.shadowRoot
+                if (shadowRoot) {
+                    const links = Array.from(shadowRoot.querySelectorAll('a'))
+                    for (const link of links) {
+                        link.addEventListener('click', (e: Event) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            const href = link.getAttribute('href')
+                            if (!href) return
+                            try {
+                                const url = new URL(href, window.location.origin)
+                                if (url.origin === 'https://posthog.com' || href.startsWith('/')) {
+                                    navigate(url.pathname, { state: { newWindow: true } })
+                                } else {
+                                    window.open(href, '_blank', 'noopener,noreferrer')
+                                }
+                            } catch {
+                                window.open(href, '_blank', 'noopener,noreferrer')
+                            }
+                        })
+                    }
+                }
+            }
             logConversation(event)
         },
         [hasFirstResponse]
@@ -125,8 +153,16 @@ export function ChatProvider({
                 if (chatBubbleActions) {
                     const el = document.createElement('p')
                     el.classList.add('community-suggestion')
-                    el.innerHTML = `<strong style="display: block; font-size: .933rem;">Not the answer you were looking for?</strong> Try <a target="_blank" style="text-decoration: underline;" href="/questions"><strong>posting a community question</strong></a> and humans may respond!`
+                    el.innerHTML = `<strong style="display: block; font-size: .933rem;">Not the answer you were looking for?</strong> Try <a id="inkeep-community-question-link" target="_blank" style="text-decoration: underline;" href="/questions"><strong>posting a community question</strong></a> and humans may respond!`
                     chatBubbleActions.insertAdjacentElement('afterend', el)
+                    const communityQuestionLink = shadowRoot.querySelector('#inkeep-community-question-link')
+                    if (communityQuestionLink) {
+                        communityQuestionLink.addEventListener('click', (e: Event) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            navigate('/questions', { state: { newWindow: true } })
+                        })
+                    }
                 }
             }
         }
@@ -140,12 +176,13 @@ export function ChatProvider({
     }, [])
 
     useEffect(() => {
-        const prompts = context.map((c) =>
+        const contextPrompts = context.map((c) =>
             c.type === 'page' ? `The user is currently viewing the page ${c.value.label} at ${c.value.path}` : ``
         )
+        // codePrompt is now handled in Chat/index.tsx and passed through Inkeep.tsx
         setAiChatSettings({
             ...aiChatSettings,
-            prompts,
+            prompts: contextPrompts,
         })
     }, [context])
 
@@ -196,6 +233,7 @@ export function ChatProvider({
                 addContext,
                 firstResponse,
                 initialQuestion,
+                codeSnippet,
             }}
         >
             <Chat />

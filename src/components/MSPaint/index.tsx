@@ -806,7 +806,7 @@ export default function MSPaint({
         if (!canvas) return
 
         try {
-            const dataUrl = await (format === 'png' ? toPng : toJpeg)(canvas)
+            const dataUrl = await (format === 'png' ? toPng : toJpeg)(canvas, { skipFonts: true })
             const link = document.createElement('a')
             link.download = `mspaint-${Date.now()}.${format}`
             link.href = dataUrl

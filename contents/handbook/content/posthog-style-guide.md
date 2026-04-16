@@ -163,7 +163,7 @@ Please don't use a hyphen instead of en dash. On Macs, holding down `Option` and
 
 ### Images, gifs, and short videos
 
-Most media for your article should be uploaded to Cloudinary.
+Most media for your article should be uploaded to Cloudinary (under 20 MB).
 
 You can do this from posthog.com by signing in, clicking on your avatar in the top right, then clicking **Upload media** in the dropdown menu (available to moderators only).
 
@@ -190,7 +190,15 @@ Short videos (like screen recordings) should be uploaded to Cloudinary.
 There are two other places we host videos:
 
 -   YouTube - videos that are intended for wide distribution
--   Wistia - hosted videos used for embedding on PostHog.com (like our product demos) – like in product presentations
+-   Wistia - hosted videos used for embedding on PostHog.com (like our product demos) – like in product presentations, or for large videos (for blog posts or tutorials) that aren't beneficial to have on social media
+
+#### YouTube embeds
+
+When [embedding YouTube videos](/handbook/engineering/posthog-com/markdown#embedding-youtube-videos), use YouTube's iframe embed code with the "Enabled privacy-enhanced mode" box ticked. This ensures Google doesn't drop a cookie on our website. You'll know it's enabled if the code includes "https://www.youtube-nocookie.com" in the URL. Also add the `allowfullscreen` attribute to the iframe so users have the option to watch the video in fullscreen (useful for reading code snippets).
+
+#### Wistia
+
+<TeamMember name="Cory Watilo" photo /> or <TeamMember name="Jordo Dibb" photo /> can upload videos to Wistia. It's best to also have a thumbnail image which can be uploaded to Wistia as well. Videos can be embedded on the site using our <a href="/handbook/engineering/posthog-com/markdown#embedding-wistia-videos">Wistia component</a>.
 
 ### Best practices for images and videos
 
@@ -198,10 +206,8 @@ There are two other places we host videos:
 
 -   _Do not_ upload animated GIFs. They're large and lossy. Instead, record short clips as MP4s using [Screen Studio](https://www.screen.studio/) and add them to your markdown file as you would any normal image.
 
--   When embedding YouTube videos, use YouTube's iframe embed code with the "Enabled privacy-enhanced mode" box ticked. This ensures Google doesn't drop a cookie on our website. You'll know it's enabled if the code includes "https://www.youtube-nocookie.com" in the URL. Also add the `allowfullscreen` attribute to the iframe so users have the option to watch the video in fullscreen (useful for reading code snippets).
-
 -   If your article needs custom artwork, please file a request. See [Art and branding requests](/handbook/brand/art-requests) for instructions.
 
 ## Technical and docs writing
 
-See our [docs style guide](/handbook/content/docs-style-guide).
+See our [docs style guide](/handbook/docs-and-wizard/docs-style-guide).

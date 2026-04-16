@@ -1,5 +1,7 @@
 import React from 'react'
 import { initKea, wrapElement } from './kea'
+import '@fontsource-variable/ibm-plex-sans'
+import '@fontsource-variable/ibm-plex-sans/wght-italic.css'
 import './src/styles/global.css'
 import { Provider as ToastProvider } from './src/context/Toast'
 import { RouteUpdateArgs } from 'gatsby'
@@ -42,4 +44,11 @@ export const wrapPageElement = ({ element, props: { location } }) => {
             <Wrapper />
         </Provider>
     )
+}
+
+export const shouldUpdateScroll = ({ routerProps: { location } }) => {
+    if (location.state?.preventScroll) {
+        return false
+    }
+    return true
 }

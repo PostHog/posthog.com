@@ -49,6 +49,7 @@ const discountsData = {
         'AI-powered savings',
         'Sign up 5 friends discount',
         'Hedgehog hug discount',
+        'Sign up for 18 enterprise plans and get the 19th for free',
     ],
     discountValues: [6084, 12243, 3060, 9182, 6121, 5000, 1274],
 }
@@ -192,8 +193,8 @@ export default function Discounts(): JSX.Element {
                 <p>
                     We price our products fairly and offer discounts based on usage and deal terms – you can read all
                     about them{' '}
-                    <Link to="/pricing#discounts" state={{ newWindow: true }}>
-                        on our pricing page.
+                    <Link to="/handbook/growth/sales/contract-rules#discounts" state={{ newWindow: true }}>
+                        in our handbook.
                     </Link>
                 </p>
                 <p>But sometimes this leaves our customers feeling left out. They want huge discounts too!</p>

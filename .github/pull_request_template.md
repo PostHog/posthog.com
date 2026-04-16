@@ -6,17 +6,8 @@
 
 ## Checklist
 
+- [ ] I've read the [docs](https://posthog.com/handbook/docs-and-wizard/docs-style-guide) and/or [content](https://posthog.com/handbook/content/posthog-style-guide) style guides.
 - [ ] Words are spelled using American English
-- [ ] Titles are in [sentence case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case)
-- [ ] Feature names are in **[sentence case too](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case)**. It's "product analytics" not "Product Analytics" and so on.
 - [ ] Use relative URLs for internal links
+- [ ] I've checked the pages added or changed in the Vercel preview build 
 - [ ] If I moved a page, I added a redirect in `vercel.json`
-- [ ] Remove this template if you're not going to fill it out!
-
-## Article checklist
-
-- [ ] I've added (at least) 3-5 internal links to this new article
-- [ ] I've added keywords for this page to the rank tracker in Ahrefs
-- [ ] I've checked the preview build of the article
-- [ ] The date on the article is today's date
-- [ ] I've added this to the relevant "Tutorials and guides" docs page (if applicable)

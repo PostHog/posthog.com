@@ -97,10 +97,6 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
             setIsCart(true)
             setIsAdding(false)
             setJustAdded(true)
-            // Hide the message after 5 seconds
-            setTimeout(() => {
-                setJustAdded(false)
-            }, 5000)
         }, 500)
     }
 
@@ -223,8 +219,8 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                     </>
                 )}
 
-                <div className="text-secondary">Quality</div>
-                <div className="col-span-3">Excellent</div>
+                {/* <div className="text-secondary">Quality</div>
+                <div className="col-span-3">Excellent</div> */}
 
                 {productModelInfo && typeof productModelInfo === 'string' && (
                     <>
@@ -246,7 +242,11 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 {product.description && (
                     <>
                         <div className="text-secondary">Description</div>
-                        <div className="col-span-3" dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+                        <div
+                            className="col-span-3 product-description"
+                            // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - product description from Shopify, not user input
+                            dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+                        />
                     </>
                 )}
             </div>

@@ -30,7 +30,7 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
 
 **Variables**
 
-- Your OTE comprises a 90/10 split between base and contractual bonus.
+- Your OTE comprises an 80/20 split between base and contractual bonus.
 - Bonus is paid based on revenue retention above 100%, and is _uncapped_.
   - For example, if you have 100% revenue retention and your target is 120% revenue retention, you get 0% of bonus. For 120% retention, it's 100% bonus, and for 140% retention, it's 200% bonus. This is on a sliding scale so if you hit 110% retention you get 50% bonus.
   - The Q4 2025 target is 120% half-yearly NRR. This may change in future depending on how things go.
@@ -43,14 +43,13 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
 - Your bonus is guaranteed at 100% for your first 3 months at PostHog - this gives you time to get up to speed, but also if you over-perform then you will get your additional bonus.
 - If an account is added to your book:
   - If you inherit a new account that hasn't been managed by a PostHog human before, you have a 3 month grace period - if they drop or churn in that initial period, they won't be counted against you. We want to encourage you to right-size customers, rather than your deliberately letting them wastefully spend money due to some poor implementation.
-  - If you inherit an account from another CSM, AE, or AM, it will count toward your NRR in that quarter.
+  - If you inherit an account from another CSM, AE, or AM, it will count toward your NRR in that quarter, even in the first 3 months.
 - How bonus is calculated:
   - In general, we compare annualized ARR over the past 2 quarters with annualized ARR 2 quarters before.
     - For Q4 2025 bonus: (Q4 + Q3 ARR) vs (Q2 + Q1 ARR)
     - For Q1 2026 bonus: (Q1 + Q4 ARR) vs (Q3 + Q2 ARR)
   - For customers on annual plans, we will look at their usage-based spending (instead of total contract amount / 12)
-  - If an account is removed from your book mid-quarter, they will not be included in bonus calculation.
-  - If we have to give a customer a big refund, we’ll deal with your bonus on a case by case basis depending on what happened.
+  - If an account is removed from your book mid-quarter, they will not be included in bonus calculation. We do this extremely rarely, even if a customer shuts down. If we have to give a customer a big refund, we’ll deal with your bonus on a case by case basis depending on what happened, but usually this will still be counted. 
  
 **Account allocation**
 - CSMs manage approximately $1.5M in ARR.

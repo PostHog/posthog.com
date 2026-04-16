@@ -12,7 +12,7 @@ availability:
 
 Actions are a way of combining several related events into one, which you can then analyze in [insights](/docs/product-analytics/insights) and [dashboards](/docs/product-analytics/dashboards) as if it were a single event.
 
-Actions can include autocapture events, custom events, or pageviews, and support filters for:
+Actions can include autocapture events, custom events, pageviews, or screen views, and support filters for:
 
 - Event properties (e.g. UTM tags)
 - Person properties (e.g. location, operating system)
@@ -42,7 +42,7 @@ You can create new actions by either:
 
 Actions are retroactive, meaning they also apply to past events, not only events that happen after the action was created.
 
-You can create actions using events from three sources:
+You can create actions using events from four sources:
 
 ### 1. Autocapture
 
@@ -117,7 +117,19 @@ Actions can be created using pageview events that match URLs containing a specif
 
 Regex matching is commonly used for URLs containing IDs like `/some/path/123/view`, which could be matched by a regex like `/some/path/\d+/view` into a single action.
 
-### 3. Custom events
+### 3. Screen views
+
+Screen view actions are for mobile apps that track `$screen` events with a `$screen_name` property. This enables you to create actions based on which screens users visit in your mobile app.
+
+You can match screen names using three methods:
+
+- **contains** - the screen name contains the specified string (default)
+- **matches exactly** - the screen name matches the specified value exactly
+- **matches regex** - the screen name matches a regex pattern, useful for screens with dynamic names like `Profile_123`
+
+This works similarly to pageview URL matching, but for mobile app navigation.
+
+### 4. Custom events
 
 Custom events can be sent to your PostHog instance via our [API](/docs/api), or one of our [SDKs](/docs/getting-started/install).
 

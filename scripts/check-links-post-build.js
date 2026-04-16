@@ -45,6 +45,7 @@ const CONFIG = {
         '/community/', // powered by Strapi
         '/teams/', // powered by Strapi
         '/careers/', // powered by Ashby
+        '/absolute-path/', // example path
     ],
     SITEMAP_PATH: path.join(process.cwd(), 'public', 'sitemap', 'sitemap-0.xml'),
     CONTENTS_DIR: 'contents',
@@ -108,12 +109,24 @@ function isRedirectSource(url, redirects) {
         // If source contains :path*, check if URL contains the part before :path*
         if (redirect.source.includes(':path*')) {
             const pathPrefix = redirect.source.split('/:path*')[0]
-            return url.includes(pathPrefix)
+            return url.startsWith(pathPrefix)
         }
         // Otherwise, check if URL contains the full source
-        return url.includes(redirect.source)
+        return url.startsWith(redirect.source)
     })
 }
+
+// List of folders under /contents
+function getContentsSubfolders() {
+    return new Set(
+        fs
+            .readdirSync(CONFIG.CONTENTS_DIR, { withFileTypes: true })
+            .filter((dirent) => dirent.isDirectory())
+            .map((dirent) => dirent.name)
+    )
+}
+
+const ROOT_LINKS = Array.from(getContentsSubfolders())
 
 // ============================================================================
 // SITEMAP FUNCTIONS
@@ -322,6 +335,11 @@ function validateAnchor(url, pages) {
 // MARKDOWN PROCESSING FUNCTIONS
 // ============================================================================
 
+// Detects relative link to content with missing leading forward slash
+function isLikelyRelativeInternalLink(url) {
+    return ROOT_LINKS.some((root) => url.startsWith(root))
+}
+
 // Extract all internal links from a markdown file
 function extractInternalLinks(filePath) {
     const content = fs.readFileSync(filePath, 'utf8')
@@ -345,7 +363,7 @@ function extractInternalLinks(filePath) {
         }
 
         // Only check internal links
-        if (linkUrl.startsWith('/') && !linkUrl.startsWith('//')) {
+        if ((linkUrl.startsWith('/') || isLikelyRelativeInternalLink(linkUrl)) && !linkUrl.startsWith('//')) {
             const beforeMatch = content.substring(Math.max(0, match.index - 75), match.index)
             const afterMatch = content.substring(
                 match.index + match[0].length,
@@ -685,8 +703,8 @@ function checkLinks(outputPath) {
     brokenAnchors.sort((a, b) => a.file.localeCompare(b.file))
 
     // Display broken links
-    displayBrokenLinks(brokenLinks)
     displayBrokenAnchors(brokenAnchors)
+    displayBrokenLinks(brokenLinks)
 
     if (brokenLinks.length === 0 && brokenAnchors.length === 0) {
         console.log('\nNo broken links found! 🎉')
@@ -699,7 +717,10 @@ function checkLinks(outputPath) {
     const results = createResultsObject(brokenLinks, brokenAnchors, stats, markdownFiles, redirects, pages)
     writeResultsToFile(results, outputPath)
 
-    return brokenLinks.length
+    return {
+        brokenLinks: brokenLinks.length,
+        brokenAnchors: brokenAnchors.length,
+    }
 }
 
 // ============================================================================
@@ -717,12 +738,11 @@ if (outputPath) {
 }
 
 // Run the script
-const brokenCount = checkLinks(outputPath)
-
-// Only exit with error code if there are broken PAGE links (not just anchor links)
-// This allows the workflow to continue while still reporting issues
-if (brokenCount > 0) {
+const checkResults = checkLinks(outputPath)
+if (checkResults.brokenLinks > 0) {
     console.log('\nCheck the output above ☝️')
+    process.exit(1)
 }
 
-process.exit(0) // Always exit successfully
+// Always exit successfully until we fix existing broken links
+process.exit(0)

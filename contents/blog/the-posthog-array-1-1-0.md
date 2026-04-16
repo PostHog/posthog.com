@@ -94,7 +94,9 @@ Note: this is *only* on new deployments.
 
 This is a small change but will be important for future versions as we want to make [paths](https://github.com/PostHog/posthog/issues/448) [powerful](https://github.com/PostHog/posthog/issues/568). For now we have updated the way urls are rendered so they don’t cover the whole screen depending on screen size.
 
-### [UX Improvements to saving Actions](https://github.com/PostHog/posthog/pull/497)
+### UX Improvements to saving Actions
+
+[Related PR](https://github.com/PostHog/posthog/pull/497)
 
 ![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/04/save-actions-ux.gif)
 

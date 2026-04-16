@@ -33,7 +33,7 @@ As PostHog grows, I’ve seen more and more collaboration that doesn’t add val
 
 “You’re the driver” is a [key value](/handbook/values) for us at PostHog. We aim to hire people who are great at their jobs and get out of their way. No deadlines, minimal coordination, and no managers telling you what to do.
 
-In return, we ask for extraordinarily high ownership and the ability to get a lot done by *yourself.* Marketers ship code, salespeople answer technical questions without backup, and [product engineers](/blog/what-is-a-product-engineer) work across the stack.
+In return, we ask for extraordinarily high ownership and the ability to get a lot done by *yourself.* Marketers ship code, [salespeople answer technical questions without backup](/newsletter/engineeringification-of-everything), and [product engineers](/product-engineer/what-is-a-product-engineer) work across the stack.
 
 This means there is almost always someone better at what you are doing than you are. It is tempting to get them, or anybody really, involved and ✨ collaborate ✨, but collaboration forces the driver to slow down and explain stuff (background, context, their thinking).
 
@@ -64,6 +64,8 @@ Everyone is to blame.
 * It’s not clear who the owner is (or no one wants to own what’s being discussed).
 
 * It is annoying, but sometimes a single person can’t ship certain things front to back to a high-enough quality, and we can’t just ship and iterate. We can fix broken code, but we can’t resend a newsletter.
+
+<NewsletterForm />
 
 ## How to crush collaboration (and go farther, faster)
 

@@ -30,7 +30,7 @@ export const newrelic = {
             },
             integrations: {
                 product_analytics: false,
-                session_replay: false,
+                session_replay: true,
             },
         },
         product_analytics: {
@@ -38,6 +38,27 @@ export const newrelic = {
         },
         session_replay: {
             available: true,
+        },
+        logs: {
+            available: true,
+            core_logging_and_ingestion: {
+                features: {
+                    native_open_telemetry_ingest: 'Limited, proprietary',
+                },
+            },
+            observability: {
+                features: {
+                    metrics: true,
+                    traces: true,
+                    alerting: true,
+                    infra_monitoring: true,
+                },
+            },
+        },
+        llm_analytics: {
+            // They have some open source tools, but it's not native:
+            // https://newrelic.com/instant-observability/openllm
+            available: false,
         },
         surveys: {
             available: false,
@@ -58,7 +79,7 @@ export const newrelic = {
         },
         developer: {
             api: true,
-            collaboration: false,
+            collaboration: true,
             mobile_sdks: true,
             native_data_sources: true,
             proxies: false,
@@ -68,8 +89,9 @@ export const newrelic = {
         },
         tools: {
             cms: '',
-            notebooks: false,
+            notebooks: true,
             project_management_tools: '',
+            ai_assistant: true,
         },
         integrations: {
             azure_blob: true,
@@ -115,12 +137,13 @@ export const newrelic = {
             reverse_proxy: false,
             role_based_access_control: true,
             saml_sso: true,
+            siem: false,
             soc2_certified: true,
             two_factor_auth: true,
             user_privacy_options: true,
         },
         analytics_integration: {
-            built_in_analytics: false,
+            built_in_analytics: true,
         },
     },
     pricing: {

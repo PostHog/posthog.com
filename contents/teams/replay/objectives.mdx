@@ -1,67 +1,71 @@
-See more detail in our MegaIssue https://github.com/PostHog/posthog/issues/39011
+## 🧠 Goal 1: Nail single-session on-demand summaries
 
-## 🚀 Goal 1: Get Kim and Hayne rocketing
+Ship a reliable, on-demand AI summary for individual sessions. Users should be able to hit a button and get a useful natural-language summary of what happened in a session — key user actions, errors, frustration signals, and outcomes.
 
-It's great to have new folk on the team, let's make the time and priority to make it a success
+- Wire up the rasterizer → AI pipeline end-to-end
+- Iterate on summary quality (prompt tuning, frame selection, context enrichment)
+- Configurable customer-specific context (let customers provide their own domain context to make summaries more relevant)
+- Measure latency and cost per summary, set targets for both
 
-## 👀 Goal 2: See the value of each recording - deep integrations into other tools @TueHaulund with @veryayskiy
+## 🎬 Goal 2: Scale video export pipeline
 
-* Build on the manual crisp and intercom integrations to make it easy to add replay into every support tool
-* Easy link to share clips to github/linear/jira etc
-* Easy links from salesforce
-* Easy links to AI/vibe-coding platforms
-* A zendesk app to have two way links
-* more ...?
+The rasterizer can render sessions to video — now make it production-ready at scale.
 
-### Why?
+- Harden the Temporal worker for reliability and throughput
+- Optimize resource usage (browser concurrency, memory, CPU)
+- Explore GPU acceleration for further speedup
 
-Replay is a great debugging and support tool, let's help folk discover that
+## 🏷️ Goal 3: Build session categorizer
 
-## ⌚ Goal 3: See the value of each recording - nail watching in context @veryayskiy
+Train a binary classifier that can label sessions as "interesting" or not. Use this model to power a categorizer that groups sessions by properties (rage clicks, errors, conversion flows, etc.) but only surfaces the ones the model flags as interesting.
 
-For example....
+- Extend the session summarizer (Goal 1) to also classify sessions as interesting/not — this becomes our training dataset
+- Train and evaluate the binary classifier
+- Build the categorizer layer on top: group by session properties, filter by interestingness
+- Run classifier on a schedule
 
-It’s hard to get from a funnel to the recordings for the funnel. It should be easy to watch them, summarise them, track them
+## 📡 Goal 4: Replay as a Signal source
 
-imagine being able to ask Max: "hey max, 12% of people drop off this funnel at step 2 - summarize those sessions and tell me why"
+Make Replay a first-class signal source for the Signals product. Today, session summarization is tightly coupled to the clustering workflow and doesn't scale. We need to own the summarization pipeline end-to-end so it works independently, scales to thousands of teams, and gives customers control over which sessions get analyzed.
 
-And not just funnels but everywhere
+- Own the session summarization pipeline on the Replay team — decouple from clustering
+- Per-team configuration: let customers choose which sessions to summarize (filters, sampling rate)
+- Intelligent session selection via the categorizer model (Goal 3)
 
-* If a recording doesn’t exist, upsell adding it - make it easy to know why i can’t watch, and make it easy to watch the ones i do have
-* get from where you are (flag, funnel, insight, etc) to the point in time in the recording
-* split the list of recordings out of the actors modal
-* view recording button should be session aware
+## 🖥️ Goal 5: Build new AI-native frontend for Replay
 
-### Why?
+Reimagine the Replay UI around AI-first workflows. Move away from recency as the primary way to rank recordings — instead, leverage the session categorizer (Goal 3) to surface interesting recordings across categories.
 
-Folk should be able to watch the recordings they need to where they are, without needing to figure out how to find them in replay
+- Augment the chronological recording list with category-driven views
+- Surface AI-generated summaries and labels directly in the list UI
+- Design the UX for exploring sessions by category rather than scrolling by time
 
-## 💰 Goal 4: Refresh price comparisons @fivestarspicy supported by us all
+## 🔌 Goal 6: Basic MCP for Session Replay
 
-Are we still competitive? Do recent infrastructure improvements change things?
+Expose Session Replay as MCP tools so AI agents (Claude Desktop, etc.) can search, retrieve, and summarize sessions programmatically.
 
-## 🏎️ Goal 5: Replay the rocket @pauldambra with @TueHaulund
+## 💰 Goal 7: Business model for AI features
 
-We hear (some) people tell us replay is slow... let's fix that
+Figure out how to price and sustain AI-powered Replay features.
 
-* Snappy in the browser so we don’t need to decompress in the API
-* Don’t load the whole 2hour recording to play it
-* Performance in the browser generally for playback
-* Performance impact when recording
-* Listing speed should be blazing fast
-* Precache the recording homepage data when you login or start a session?
+- Map out costs per session for summaries, categorization, and video export
+- Identify break-even points at different usage tiers
+- Propose a pricing model that works for customers and for us
 
-### Why?
+## 🔒 Goal 8: Map out PII, data retention, and IP concerns
 
-Replay is awesome, waiting for things is not
+Before we begin using machine learning we need to figure out the compliance, legal, and brand concerns around training future models on recording data.
 
-## 👨‍🔬 Goal 6. Refresh our understanding of how replay gets used and where we can derive more value faster @fivestarspicy 
+- What PII risks exist when sending session data to LLMs?
+- How do data retention policies interact with AI-generated artifacts?
+- What are the IP implications of training on customer recordings?
+- What do customers expect and what do we need to communicate?
+- What does s-tier consent look like?
 
-Talk to customers who love replay and customers who churned. Learn what makes them pay vs leave. Hone in on questions like:
-- How do they find replays to watch?
-- What makes an individual replay interesting/valuable?
-- Where do they want replays to show up? (in posthog? external tools?)
-- What workflows have they built around replay?
-- Why do they churn or turn down volume?
+## 🗂️ Goal 9: Set up data labelling system for replays
 
+Build the infrastructure for labelling replay data at scale — needed to train and evaluate future models on session data.
 
+- Evaluate labelling tools / build internal tooling
+- Design the labelling workflow and quality controls
+- Start building a labelled dataset

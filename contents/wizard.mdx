@@ -1,0 +1,120 @@
+---
+title: PostHog Wizard
+template: custom
+---
+
+<WizardHeader />
+
+## TL;DR:
+
+PostHog Wizard is an agentic CLI tool that installs and configures PostHog for you – the way an expert would.
+
+The wizard starts by analyzing your codebase, then it automagically sets up the right tools, custom events, and dashboards for your product.
+
+<DemoVideo />
+
+It's free, open source, and doesn't enable any paid features. It works with a growing list of PostHog products.
+
+## How it works
+
+<SupportedProducts />
+
+The wizard uses agent skills built from carefully curated context. These skills include up-to-date developer docs, example code, and best practices on how to instrument PostHog.
+
+<SkillStructure />
+
+## Supported frameworks
+
+<SupportedFrameworks />
+
+## Why PostHog Wizard?
+
+The better your PostHog instrumentation, the more helpful PostHog can be. You can use your AI coding agent to ask questions about product usage, which uses the [PostHog MCP server](/docs/model-context-protocol) to answer them.
+
+**Example questions:**
+
+- _"How many unique users signed up in the last 7 days, broken down by day?"_
+- _"Create an A/B test for our pricing page that measures conversion to checkout."_
+- _"What are the top 5 errors in my project this week?"_
+
+<ExplainerVideo />
+
+## Open source
+
+Like almost everything we make, PostHog Wizard is open source. Want to fork it and adapt it for your projects, or add support for your preferred frameworks or AI workflows? [Go ahead](https://github.com/PostHog/wizard).
+
+## Get started
+
+<GetStarted />
+
+<Hr />
+
+## FAQ
+
+#### How many events does PostHog Wizard instrument? Are you going to track 1 billion events and cost me tons of money?!
+
+PostHog Wizard is instructed to focus on finding valuable funnel events in your codebase – between 10-15 events and files, so it's unlikely to rack up a bill.
+
+That said, we plan on introducing a cost cutting skill, intended for existing PostHog customers who want to reduce the volume of existing events logged to PostHog to help reduce cost.
+
+#### Why does PostHog Wizard only configure 10-15 events?
+
+The goal of PostHog Wizard is to provide tangible examples of how to instrument PostHog in your codebase. It includes a targeted agent skill that's intended to set a good example for your AI agents so they can extend your PostHog implementation with new features you introduce in the future.
+
+#### Does PostHog Wizard run on its own after the initial run?
+
+No, the agent skill should assist your existing AI agents in instrumenting future features. However, you can choose to run it yourself at any time!
+
+#### Do I need to also install the PostHog MCP?
+
+Nope! Our MCP gets added when you run the wizard. If you don't want to run PostHog Wizard and _only_ want the MCP server, run this:
+
+<pre>
+npx @posthog/wizard mcp add
+</pre>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="text-sm text-secondary text-center py-12">This page intentionally left blank</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="text-xs text-secondary text-center py-12 opacity-50">What are you still doing here?!</div>

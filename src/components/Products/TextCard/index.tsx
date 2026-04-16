@@ -16,6 +16,7 @@ export const TextCard = ({ title, description, url }: TextCardProps): JSX.Elemen
     return (
         <li className="bg-accent p-6 rounded flex flex-col items-start">
             <p className="text-lg font-bold m-0 leading-tight mb-1">{title}</p>
+            {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - CMS content, not user input */}
             <p className="text-sm flex-1 mb-0" dangerouslySetInnerHTML={{ __html: description }} />
             {url && (
                 <CallToAction to={url} type="secondary" size="sm" className="mt-2">

@@ -22,9 +22,11 @@ const FunThing: React.FC<{
             image
         )}
         <div className={`p-4 ${imagePosition === 'top' ? '' : ''}`}>
+            {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - static content from codebase, not user input */}
             <h3 className="text-xl mb-1 leading-tight" dangerouslySetInnerHTML={{ __html: title }} />
             <div
                 className="text-[15px] [&_p]:text-[15px] [&_p]:mb-2 last:[&_p]:mb-0"
+                // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - static content from codebase, not user input
                 dangerouslySetInnerHTML={{ __html: content }}
             />
         </div>

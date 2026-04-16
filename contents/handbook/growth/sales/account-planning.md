@@ -1,9 +1,9 @@
 ---
-title: Account planning for expansion and cross-sell
+title: Account planning
 sidebar: Handbook
 showTitle: true
 ---
-This account planning framework is designed to help you quickly get up to speed on accounts and consistently think through a set of questions that deepen the partnership with your accounts. It encourages a proactive approach to identifying expansion and cross-sell opportunities, driving growth and customer success. This template was initially developed for managing a book of business primarily consisting of smaller startups. It will likely need modification to be useful for larger, more enterprise, accounts.
+This account planning framework is designed to help you quickly get up to speed on accounts and consistently think through a set of questions that deepen the partnership with your accounts. It encourages a proactive approach to identifying expansion and [cross-sell](/handbook/growth/cross-selling/how-we-upsell-and-cross-sell) opportunities, driving growth and customer success. This template was initially developed for managing a book of business primarily consisting of smaller startups. It will likely need modification to be useful for larger, more enterprise, accounts.
 
 Here are some times where it may help:
 - When onboarding a new account.

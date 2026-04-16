@@ -21,6 +21,7 @@ export const Feature = ({ title, description, image, background, border, fade }:
                 {image}
             </div>
             <h4 className="mb-1 leading-tight text-lg">{title}</h4>
+            {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - feature description from CMS, not user input */}
             <p className="text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
         </li>
     )

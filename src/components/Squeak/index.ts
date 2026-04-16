@@ -9,6 +9,7 @@ import { Questions } from './components/Questions'
 import { EditProfile } from './components/EditProfile'
 import { TopicSelector } from './components/TopicSelector'
 import { useQuestion } from './hooks/useQuestion'
+import { fetchTopicGroups, topicGroupsSorted } from './util/topicGroups'
 
 export {
     Authentication,
@@ -22,4 +23,6 @@ export {
     SignUp,
     EditProfile,
     TopicSelector,
+    fetchTopicGroups,
+    topicGroupsSorted,
 }

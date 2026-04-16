@@ -92,6 +92,8 @@ But, beyond the absolute essentials, only start a back-office team when you can 
 
 Until then, a little bit of chaos is valuable: desirable, even. It teaches everyone which problems actually matter.
 
+<NewsletterForm />
+
 ## Address must-have gaps
 
 Meanwhile, it’s easy to set aside shared areas of the product and forget about them. Don’t mistake them for back-office functions. This is precisely where you need glue teams.
@@ -111,7 +113,7 @@ Those glue areas don’t bring product-market fit by themselves, but neglecting 
 And remember: an org that over indexes on back-office teams early will:
 
 1. Optimize for fluffy internal goals more than real value.
-2. Create an approval culture that erodes autonomy and slows you down.
+2. Create an [approval culture that erodes autonomy](/newsletter/how-startups-lose-their-edge) and slows you down.
 
 That’s a death sentence, so choose wisely.
 
@@ -119,14 +121,15 @@ _If you liked this, consider [sharing it on Hacker News](https://news.ycombinato
 
 ---
 
-## **🧠 Good reads for people who build cool stuff**
+## 🧠 Good reads for people who build cool stuff
 
 -   [**How we use PostHog's built-in data warehouse**](/blog/data-warehouse-at-posthog) **– Ian Vanagas**
 -   [**Why LLMs Can't Really Build Software**](https://zed.dev/blog/why-llms-cant-build-software?utm_source=newsletter.posthog.com&utm_medium=post&utm_campaign=glue-teams) **– Conrad Irwin**
 -   [**Everything I know about good system design**](https://www.seangoedecke.com/good-system-design?utm_source=newsletter.posthog.com&utm_medium=post&utm_campaign=glue-teams) **– Sean Goedecke**
 -   [**If you're remote, ramble**](https://stephango.com/ramblings?utm_source=newsletter.posthog.com&utm_medium=post&utm_campaign=glue-teams) **– Steph Ango**
 
+<NewsletterForm />
+
 [^1]: This article is specifically about engineering teams. There are many non-engineering teams, such as support or customer success, that you could call glue teams, too.
 [^2]: Still, with so much of hosting outsourced to cloud providers, infra is leaner than ever. More so if you run on Vercel + Supabase.
 
-<NewsletterForm />

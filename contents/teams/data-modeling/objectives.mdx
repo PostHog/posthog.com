@@ -1,0 +1,34 @@
+## Q2 2026 objectives
+
+### Objective 1
+- Source control on models
+  - Transitioning from rapid iteration in app to guarded, PR'd changes against a GitHub repo must be smooth
+  - We will also provide a CLI to improve the local dev experience for data engineers
+
+### Objective 2
+- Modeling tests
+  - Data tests: the values of certain data are what they should be or custom assertions on data pass
+  - Schema tests: the schema conforms to a contract like `not null` or `unique`
+  - Freshness tests: the data from a particular node is no more than `<some duration>` old
+  - Relational tests: expectations on referential integrity hold (i.e. one-to-one, many-to-one, etc.)
+
+### Objective 3
+- Endpoints GA
+  - Beta label is removed as soon as the experience meets our expectations of quality; this includes fixes to current papercuts
+  - Marketing launch and "true" GA happens once pricing is ready
+
+### Objective 4
+- Modeling on managed warehouse
+  - We will substantially limit what modeling workflows are allowed to hit our ClickHouse infra
+  - We will help customers as much as reasonably possible as they migrate to our managed warehouse; this includes UX changes to gently nudge customers toward the (ultimately superior) managed warehouse experience
+
+### Objective 5
+- Competitor research concerning anomaly detection and alerting
+  - We don't feel any of our competitors nail this and many of our customers agree; that doesn't mean these features aren't incredibly useful, it just means we have to do better
+  - Anna will ship an RFC with some opinionated recommendations here
+
+### Objective 6 (Side Quest)
+- Integrating modeling into the PostHog MCP
+  - We already have some internal folks itching to help ship this
+  - It's not the top priority because we believe that source control and testing will act as solid guard rails for reigning in agents that will model on behalf of customers in the near future; so, we will ship those first and then MCP and agentic stuff as a fast follow
+

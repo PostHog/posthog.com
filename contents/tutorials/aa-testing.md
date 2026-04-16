@@ -58,7 +58,7 @@ export default function Home() {
 from posthog import Posthog
 
 posthog = Posthog(
-  '<ph_project_api_key>', 
+  '<ph_project_token>', 
   host='<ph_client_api_host>'
 )
 user_id = 'ian@posthog.com'

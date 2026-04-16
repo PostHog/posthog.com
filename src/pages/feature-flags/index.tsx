@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
+import { createSlideConfig, SlidesTemplate, IntegratedWarehouseSlide } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 
 // Product configuration - change this to adapt for different products
@@ -62,11 +62,32 @@ export default function FeatureFlags(): JSX.Element {
     // Optional: Customize slides
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
-        // exclude: ['comparison-summary'],
-        // order: ['overview', 'pricing', 'features'],
+        exclude: ['videos'],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },
+        custom: [
+            {
+                slug: 'integrated-warehouse',
+                name: 'Integrated data warehouse',
+                component: IntegratedWarehouseSlide,
+                props: { variant: 'feature-flags' },
+            },
+        ],
+        order: [
+            'overview',
+            'customers',
+            'features',
+            'posthog-on-posthog',
+            'answers',
+            'pricing',
+            'comparison-summary',
+            'feature-comparison',
+            'docs',
+            'pairs-with',
+            'integrated-warehouse',
+            'getting-started',
+        ],
         content: {
             // answersDescription: 'Control the release of new features to your users', moved to json
         },

@@ -66,7 +66,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
     - **Client Address Information** - Needs to be their legal correspondence address (check with your customer contact)
     - **Client.Company** - The legal company name
     - **Contract.Discount** - The discount % (appears in the Additional credit purchase section)
-    - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) when rolling off the startup plan, add up their total and discount as normal, and then add a note about the free credits in this format: "An additional credit in the amount of `<amount>` to be applied to Customer's account at start of Contract with an expiration 14 months from the start date." For example, if a customer is signing a standard $20k annual contract to get the 20% discount, the total will be $25k, 20% discount of $5k, total cost to the customer would be $20k. In the notes, you would write: "An additional credit in the amount of USD $4,166.67 to be applied to Customer's account at start of Contract with an expiration 14 months from the start date."
+    - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) when rolling off the startup plan, add up their total and discount as normal, and then add a note about the free credits in this format: "An additional credit in the amount of XXXXX (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date." For example, if a customer is signing a standard $20k annual contract to get the 20% discount, the total will be $25k, 20% discount of $5k, total cost to the customer would be $20k. In the notes, you would write: "An additional credit in the amount of USD $4,166.67 (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date."
     - **Contract.EffectiveDate**
 
         - Set the start date of the contract in the format DD MMM YYYY (e.g., 01 Feb 2023). For a new customer, this would be the date they choose to start their subscription. For an existing customer, we have two options:
@@ -77,6 +77,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
                 - If a customer wants to start using credits starting the next billing cycle, your contract start date should be November 1.
                 - If you set the start date correctly, our Zapier automation flow will create the invoices with correct dates so our revenue calculations are not affected from the transition.
         - **Note:** Pay-as-you-go products are charged after the end of the period, while flat-rate subscriptions are charged at the beginning of the period. As a result the first two payments on a monthly schedule may occur within the same billing period as part of the transition. Make sure to send a note to the customer to ensure they're fully informed!
+        - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) set the start date of the contract for 2 months in the future, to account for the two free months ahead of the contract.
 
     - **Contract.Term** - The term in months of the contract (12 months by default)
 
@@ -85,11 +86,15 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
     - Payment Method to `Credit Card`.
 9. If an MSA is being used rather than the standard terms you will need to replace the following text:
 
-    > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: /privacy (collectively the “Agreement”)
+    > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”)
 
-    with
+    with either
 
-    > PostHog Cloud License Terms executed by and between PostHog, Inc. and CUSTOMER LEGAL NAME (the “Agreement”)
+    > PostHog Cloud License Terms entered into by and between the Parties on or about the date hereof and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
+
+    or, if the Customer insists on including the exact date of the MSA to remove ambiguity,
+
+   > PostHog Cloud License Terms entered into by and between the Parties on or about [INSERT DATE OF EXECUTION OF MSA] and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
 
 10. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
 
@@ -133,7 +138,7 @@ Occasionally, customers will want to sign an MSA instead of referencing our term
 7. Check the signing order (Client, then PostHog normally).
 8. Send for signature - so long as any proposed changes have been reviewed and approved by Hector or Fraser, you are free to sign on behalf of PostHog
 
-Sometimes large customers will ask for changes to our MSA. We have a list of the kinds of changes we will/won't consider in a private repo [here](https://github.com/PostHog/company-internal/blob/master/finance/sales%20contract%20changes) that you can generally agree to without the Ops team reviewing. However, if you are ever in doubt, ask in `#legal` in Slack
+Sometimes large customers will ask for changes to our MSA. We have a list of the kinds of changes we will/won't consider in a private repo in the [company-internal sales contract changes directory](https://github.com/PostHog/company-internal/blob/master/finance/sales%20contract%20changes) that you can generally agree to without the Ops team reviewing. However, if you are ever in doubt, ask in `#legal` in Slack
 
 ## Business Associate Agreement (BAA)
 
@@ -146,3 +151,14 @@ We offer HIPAA Compliance on PostHog Cloud and as such health companies will req
 5. You'll get a notification when everybody has signed it - we have automation in place to ensure that the `HIPAA BAA Signed Date` property on the customer's Salesforce Account record is updated.
 
 > We only provide our default BAA for platform add-on subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to a platform add-on - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. A customer who is on a platform add-on trial (with a credit card in PostHog) is eligible to sign a default BAA, but you should make it clear to them that the default BAA will be voided if/when the platform add-on subscription lapses. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
+
+## Non-disclosure Agreement (NDA)
+In some cases, prospective or current customers require a mutual Non-disclosure Agreement (MNDA) in place before conversastion or product activity can proceed. Terms already specify Confidentiality and if there is still a situation where a documented agreement is requested this can be easily accommodated. 
+
+- Access PandaDoc and Create a New Document
+- Use the current PostHog - NDA template
+- Add your desired contact as a recipient and follow the usual PandaDoc process
+- When document is complete, it will be stored in the Document library and can also be attached to the Salesforce account for future reference
+
+### Trust center approvals
+Requests that originate from the [Trust Center](https://trust.posthog.com/) automatically get sent an NDA in the request from SafeBase to PandaDoc. Once the document is fully signed, access will automatically be granted. 

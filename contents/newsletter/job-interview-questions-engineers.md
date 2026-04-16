@@ -7,6 +7,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/job_interview_questions_35bb07c898.jpg
 featuredImageType: full
+featuredVideo: 'https://www.youtube-nocookie.com/embed/KVMZgY2KNto'
 tags:
   - Product engineers
   - Culture
@@ -30,7 +31,7 @@ What follows are some questions we wish people would ask us more often. They com
 
 This is the single most important thing a company can do to survive and grow, so you need to figure out if a startup already has it, or how likely they are to get there.
 
-There's an entire internet of writing on [how to find product-market fit](/founders/product-market-fit-game), and [how to measure it](founders/measure-product-market-fit), but broadly speaking you need three things:
+There's an entire internet of writing on [how to find product-market fit](/founders/product-market-fit-game), and [how to measure it](/founders/measure-product-market-fit), but broadly speaking you need three things:
 
 1. Non-trivial growth in a specific market.
 2. Meaningful usage after people sign-up.
@@ -78,6 +79,8 @@ Some founders will think or say, either intentionally or through self-delusion, 
 * Are hiring like mad despite a lack of product-market fit / growth.
 
 >  **Remember:** Not having product-market fit is normal for early-stage startups, so don't be put off by this alone. Your goal is to understand if the company you're applying to is likely to make it or not.
+
+<NewsletterForm />
 
 ## Can the company survive?
 
@@ -174,7 +177,7 @@ You're looking for specific, thoughtful answers that show a level of intentional
 * There's an [excess of meetings and processes](/newsletter/this-is-why-youre-not-shipping).
 * It's obvious no one is thinking about the type of company they want to build.
 
->  **Remember:** Culture eats strategy for breakfast. A winning culture can overcome all sorts of disadvantages. It's also the biggest advantage a startup has over larger, more established competitors. A startup that can't tap into this is likely to fail.
+>  **Remember:** Culture eats strategy for breakfast. A winning culture can overcome all sorts of disadvantages. It's also the biggest advantage a startup has over larger, more established competitors. A startup that can't tap into this is [likely to fail](/newsletter/how-startups-lose-their-edge).
 
 ## What does the future look like?
 
@@ -224,6 +227,8 @@ Finally, early-stage companies often fall apart because the founders break up, s
 - **[Senior Engineer](https://jobs.gem.com/zep/am9icG9zdDruahx6m_TnEkWP11kC3JBv?utm_source=posthog) at Zep**
 - **[Founding Software Engineer](https://jobs.gem.com/voker-ai/am9icG9zdDoNMp8onm6ESFRFCYjTu_bY?utm_source=posthog) at Voker**
 - **[Full-Stack Growth Engineer](https://jobs.ashbyhq.com/elevenlabs/5881bc5d-765a-430e-9d28-7d598a0e1a03?utm_source=posthog) at ElevenLabs**
+
+<NewsletterForm />
 
 ## Footnotes
 

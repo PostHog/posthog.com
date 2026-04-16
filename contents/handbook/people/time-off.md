@@ -102,6 +102,8 @@ Please communicate parental leave to Fraser as soon as you feel comfortable doin
 
 The above is in reference to Paid Time Off (PTO). Maternity leave can be extended using unpaid time off, please work with your team to find a reasonable solution for both your family and your team, and let Fraser know the total amount of time you expect to take off as soon as possible.
 
+> For quota-carrying Sales roles taking 12 weeks or longer, your OTE will be calculated by averaging your sales quota attainment for the prior two full quarters (capped at 100% OTE).
+
 ### Paternity leave
 
 We do not offer unpaid leave for Paternity leave.
@@ -169,4 +171,4 @@ On your 4th anniversary at PostHog as a big thank you for sticking with us, we g
 2. Apple 27-inch 5K Retina Studio Display with standard glass and tilt-adjustable stand
 3. Rimowa luggage set (large trunk, cabin bag, packing cube, toiletries bag)
 
-On the run up to your anniversary Coua will send you a link to the gift options questionnaire, from there Kendal will order it for you! Thank you for making PostHog great!
+On the run up to your anniversary, our Ops team will send you a link to the gift options questionnaire and order your 4 year anniversary gift once we receive your completed form. Thank you for making PostHog great!

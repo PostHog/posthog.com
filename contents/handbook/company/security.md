@@ -16,16 +16,26 @@ For information about security advisories and CVEs, see our [advisories & CVEs p
 
 ## Multi-factor authentication 
 
-We enforce the use of hardware security keys wherever we can. Every team members gets two of these, most commonly:
+All team members are required to enable multi-factor authentication (MFA) on their accounts. **Passkeys are the preferred method** for securing all accounts — they are phishing-resistant, easy to use, and supported by most major services including Google Workspace, GitHub, 1Password, and macOS.
+
+Please set up passkeys for Google Workspace and GitHub at the very least. If you are new, please do this within your first week so you don't get locked out.
+
+It is recommended to have most passkeys saved in 1Password itself, which will allow you to use them from your phone.
+
+### YubiKeys for infrastructure accounts
+
+YubiKeys are required for certain infrastructure-specific accounts as determined by the security team. If your role requires access to these accounts you will be told by the team - if in doubt ask in #team-security.
+
+We recommend purchasing:
 
 - One [YubiKey 5C Nano](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nano/) for use with the work computer (can be left plugged in most of the time)
-- One [YubiKey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) (or [YubiKey 5Ci](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5ci/) to be on the safe side, if you have an older iPhone model) for use with mobile devices, and as backup
+- One [YubiKey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) (or [YubiKey 5Ci](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5ci/) if you have an older iPhone model) for use with mobile devices, and as backup
 
-Please enable security keys for Google Workspace, MacOS, AWS, 1Password (or whatever password manager you use) and GitHub at the very least. You can also use the Yubikeys to protect personal accounts. If you are new, please do this within your first month so you don't get locked out.
+#### Setting up your YubiKeys
 
-Google recently changed its settings for 2FA and Yubikeys and you may struggle to link your Yubikeys to your Google account. Go [here to find out about the change](https://joshua.hu/enrolling-hardware-keys-2fa-google-workspace) or use this direct link to head [straight to this page where](https://myaccount.google.com/signinoptions/two-step-verification?flow=sk&opendialog=addsk) you can register your Yubikeys. 
-
-> **YubiKey tip:** Avoid spamming OTPs if you accidentally touch your YubiKey by installing the [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) or by running `brew install ykman && ykman config usb --disable OTP`
+1. **Register your YubiKeys** with each required service. The security team will let you know which accounts need YubiKey authentication.
+2. **Always register both keys** with every service so the second acts as a backup if you lose one.
+3. **Disable OTP mode** — avoid spamming OTPs if you accidentally touch your YubiKey by installing the [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) or by running `brew install ykman && ykman config usb --disable OTP`
 
 ## SOC 2
 import SOC2 from './_snippets/soc2.mdx'
@@ -55,7 +65,7 @@ PostHog does not require personally identifiable information or personal data to
 
 - We maintain an extensive security policies to ensure we are managing data responsibly - [see above](/handbook/company/security#policies).  
 - We enter into Data Processing Agreements ('DPAs') with PostHog Cloud customers when requested - [you can generate a DPA here](/dpa). We maintain a register of all DPAs we have entered into. 
-- Customers can choose whether to host data on our AWS server in the EU (Germany) or US. If data transfer is required from the United Kingdom, EU or EEA to our US-West based AWS environment, we rely on [EU Standard Contractual Clauses](https://docs.google.com/document/d/1reTUk6VTsTLo1ErNYn-Tdmj_ETo8QYNH6tNCaebDwpE/edit?usp=sharing) (SCCs). 
+- Customers can choose whether to host data on our AWS servers in the EU (eu-central-1 in Germany) or the US (us-east-1 in Virginia). If data transfer is required from the United Kingdom, EU, or EEA to our US based AWS environment, we rely on [EU Standard Contractual Clauses](https://docs.google.com/document/d/1reTUk6VTsTLo1ErNYn-Tdmj_ETo8QYNH6tNCaebDwpE/edit?usp=sharing) (SCCs). 
 - We are registered with the Information Commissioner's Office in the United Kingdom as Hiberly Ltd., which is the legal name for our UK entity. 
 - A list of sub-Processors is maintained as part of our [DPA](/dpa) - we keep this to a strict minimum.
 - Our [Data Processing Register](https://docs.google.com/spreadsheets/d/1HRBhfYINn8jAgwzggVfVH0ttaCfUC18SFAWHU1cjejg/edit#gid=1554885211) is available for viewing by any interested party upon request. 

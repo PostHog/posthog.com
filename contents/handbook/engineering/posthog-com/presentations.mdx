@@ -306,6 +306,14 @@ The `thumbnails`, `notes`, and `form` values can be overridden in the query stri
 
 These configuration options are remembered when using the _Share your windows_ link generator in the _Active windows_ pane. This is useful for sending a link to someone that will open multiple windows _and also_ remember the display options of a presentation.
 
+### Product presentations
+
+The above properties also work for product presentations, like:
+
+```
+/llm-analytics?thumbnails=false&notes=false&form=true
+```
+
 ### Lead form
 
 The lead form is hidden by default but can be enabled in a persona's JSON file, or displayed manually using the query param `&form=true`.
@@ -331,7 +339,7 @@ This is because different URL patterns are intended for different purposes.
 | `/for/{company}/{persona}` | Outbound | New Business Sales Team |
 | `/for/{persona}`           | Inbound  | Product-Led Sales Team  |
 
-### Small team customization
+#### Small team
 
 The small team in the `config` object can be overridden for any persona, company, persona within a specific company, or completely custom landing page.
 
@@ -342,6 +350,13 @@ The small team in the `config` object can be overridden for any persona, company
 }
 ```
 
-On landing pages personalized to a specific company, we check if the account is assigned in Salesforce. This takes priority over any small team assignment in JSON.
+This can also be overridden to show a specific small team using `&t={id}` using mappings in the `TEAM_QUERY_MAP` in `src/components/Presentation/index.tsx` and works for product presentations, use case landing pages, personalized landing pages, and custom presentations.
+
+| ID  | Small Team          |
+| --- | ------------------- |
+| 1   | `sales-cs`          |
+| 2   | `sales-product-led` |
+
+On landing pages personalized to a specific company, we check if the account is assigned in Salesforce. This takes priority over any small team assignment in JSON and the `t` query param.
 
 ![Account assigned in Salesforce](https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2025_11_06_T22_27_14_309_Z_58d38f7173.png)

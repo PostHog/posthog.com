@@ -8,7 +8,7 @@ featuredVideo: https://www.youtube-nocookie.com/embed/BtHeP8lORJY
 
 [A/B tests](/experiments) help you make your iOS app better by comparing the impact of changes on key metrics. 
 
-PostHog makes [A/B testing on iOS](/docs/experiments/installation?tab=iOS) simple. To show you how, this tutorial will guide you on how to add PostHog to your iOS app and run an A/B test. We'll create a basic A/B test to see how the background color of a screen affects the click-through rate of a button. 
+PostHog makes [A/B testing on iOS](/docs/experiments/installation/ios) simple. To show you how, this tutorial will guide you on how to add PostHog to your iOS app and run an A/B test. We'll create a basic A/B test to see how the background color of a screen affects the click-through rate of a button. 
 
 ## Creating a new iOS app
 
@@ -97,7 +97,7 @@ import PostHog
 @main
 struct App: App {
     init() {
-        let POSTHOG_API_KEY = "<ph_project_api_key>"
+        let POSTHOG_API_KEY = "<ph_project_token>"
         let POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
         let configuration = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST) 
         PostHogSDK.shared.setup(configuration)
@@ -111,7 +111,7 @@ struct App: App {
 }
 ```
 
-To get your PostHog API key and host, [sign up to PostHog](https://app.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://app.posthog.com/settings/project). Replace the strings `<ph_project_api_key>` and `<ph_client_api_host>` with your API key and host.
+To get your PostHog API key and host, [sign up to PostHog](https://app.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://app.posthog.com/settings/project). Replace the strings `<ph_project_token>` and `<ph_client_api_host>` with your API key and host.
 
 Finally, [capture a custom event](/docs/libraries/ios#capturing-events) when the button on `FeatureScreenView` is clicked. We'll use this event as our goal metric in our A/B test.
 

@@ -132,9 +132,9 @@ export default function ProductManagerNewsletterContent(): JSX.Element {
 
                 <p>
                     This is why developers at PostHog are called{' '}
-                    <Link to="/blog/what-is-a-product-engineer">product engineers</Link>. We want them to be opinionated
-                    and customer obsessed, and that's only possible if they have genuine autonomy and responsibility for
-                    product decisions.
+                    <Link to="/product-engineer/what-is-a-product-engineer">product engineers</Link>. We want them to be
+                    opinionated and customer obsessed, and that's only possible if they have genuine autonomy and
+                    responsibility for product decisions.
                 </p>
 
                 <p>However, if engineers are to make all the decisions, they still need support…</p>
@@ -350,7 +350,7 @@ export default function ProductManagerNewsletterContent(): JSX.Element {
 
                 <p>
                     We also have a{' '}
-                    <Link to="https://storybook.posthog.net/?path=/story/exporter-exporter--trends-bar-breakdown-insight">
+                    <Link to="https://storybook.dev.posthog.dev/?path=/story/exporter-exporter--trends-bar-breakdown-insight">
                         design system
                     </Link>{' '}
                     to help engineers self-serve their design needs and move faster.

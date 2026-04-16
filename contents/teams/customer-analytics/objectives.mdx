@@ -1,27 +1,55 @@
-# 1: Default dashboard with customer base insights
+<details>
+<summary>1: Customer lists are fast enough to be the default tool for customer lookup</summary>
+
+Who: <TeamMember name="Arthur Moreira de Deus" photo />, [Team analytics platform](/teams/analytics-platform)
+<br />
+
+PostHog employees currently prefer other tools for customer lookup because our own customer lists are too slow. This is a non-negotiable enabler for everything else.
+<br />
+
+What we'll ship:
+
+- Diagnose query performance issues in customer lists (with Analytics Platform team support)
+- Customer list queries under 2 seconds
+
+</details>
+
+<details>
+<summary>2: Engineers can see which customers matter and where they are in the journey</summary>
+
 Who: <TeamMember name="Arthur Moreira de Deus" photo />
+<br />
 
-Have an entry UI for the product showing data about the customer base:
+Interviewed users consistently asked: "Where is this user stuck?" and "Who are my most valuable customers?" Combining revenue visibility with journey position answers both questions.
+<br />
 
-* Active users (DAU/WAU/MAU) and their trends over time
-* Signups
-* Paying customers
-* Free to paid conversion rate
-* Customer engagement/usage
+What we'll ship:
 
-# 2: Better individual customer visualization
-Who: <TeamMember name="Arthur Moreira de Deus" photo />
+- Revenue data in profiles: current MRR, trend, plan tier, usage vs billing (Stripe users + PostHog one-off implementation)
+- Attribution data in profiles (first touch of earliest user for groups)
+- Global customer journey funnel: user defines funnel(s) as "the journey," shown in dashboard (aggregate) and profiles (individual position)
+- Basic AI-assisted setup with initial prompt to define customer journeys
+- Power users table enriched with revenue and attribution columns, sortable
+- Customer profile data persistence
 
-Pick up the work on person feed canvas, expanding it to groups and also showing:
+</details>
 
-* LLM traces (if enabled)
-* Exceptions (if enabled)
-* Support tickets (if Zendesk source connected)
+<details>
+<summary>3: Custom properties from data warehouse in persons and groups</summary>
 
-# 3: Answer questions with Max
-Who: <TeamMember name="Arthur Moreira de Deus" photo />
+Who: <TeamMember name="Arthur Moreira de Deus" photo />, [Team data stack](/teams/data-stack)
+<br />
 
-Focusing on improving the user interview process for engineers, have Max answer questions such as:
+This is something that comes up quite frequently: have a way to populate properties out of data warehouse and/or materialized views.
+<br />
 
-* I want to interview product engineers that are using product X, give me a list ranked by usage.
-* I am about to jump on a call with customer X about Y. What do I need to know about them?
+What we'll ship:
+
+- User-defined property schemas that can be populated from data warehouse tables or materialized views
+- UI for configuring the schema and properties sync to persons/groups
+- Display of custom properties in profiles
+- Properties available for cohorts and feature flag targeting
+
+Ownership: Data stack team owns backend/ingestion. Customer analytics owns configuration UI and display.
+
+</details>

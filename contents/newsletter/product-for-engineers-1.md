@@ -22,7 +22,7 @@ Welcome to our new newsletter, Product for Engineers. We launched it because (1)
 
 ## 💬 10x engineers talk to users
 
-In traditional tech companies, product managers (PMs) talk to users, and write tickets for engineers to ship. It looks something like this:
+In traditional tech companies, [product managers](/newsletter/what-does-a-product-manager-do) (PMs) talk to users, and write tickets for engineers to ship. It looks something like this:
 
 ![PM to engineer](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/10x-engineers-do-user-interviews/pm-to-engineer.png)
 
@@ -41,6 +41,8 @@ Luke’s tips for engineers who want to talk to users:
 2. Think about your goals. There are two basic interview types: problem exploration and solution validation.
 
 3. Build async feedback loops. Zoom calls are just one way to talk to users; Slack can be just as (if not more) effective.
+
+<NewsletterForm />
 
 ## 📸 User interviews + snapshots = action
 

@@ -8,7 +8,8 @@ showTitle: true
 
 We use [Salesforce](https://posthog.lightning.force.com/lightning/page/home) as our customer relationship management ('CRM') platform. If you need access, you can ask <TeamMember name="Mine Kansu" photo /> for an invite.
 
-As a first step, make sure you connect your Gmail account under your Salesforce settings. Go to Settings → Connected Accounts → Gmail and connect it. This ensures all your customer emails sync automatically with Salesforce. This is essential so that we capture the full customer context and avoid duplicate or conflicting outreach.
+As a first step, make sure you connect your Gmail account under your Salesforce settings. Go to Settings → Connected Accounts → Gmail and connect it. This ensures all your customer emails sync automatically with Salesforce. 
+Next, make sure your Gmail account is connected in <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally</PrivateLink>. This is essential so that we capture the full customer context and avoid duplicate or conflicting outreach.
 
 As a general principle, we try to make sure as much customer communication as possible is captured in Salesforce rather than in individual email inboxes so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!). You should use the channel that suits the user, not us. Just make sure you keep Salesforce up to date with your interactions. We’ve found Slack messages usually get better response rates than email.
 
@@ -52,9 +53,9 @@ We have a [contact us form](/talk-to-a-human) on posthog.com where we ask users 
 These submissions are processed through the Default app and routed into Salesforce as tasks. Tasks are then automatically assigned to the right team member based on account ownership and territory (see below).
 
 If the submission is clearly a support or billing request, you don’t need to reach out manually:
-- Select the Disqualification reason “Billing Support Request” or “Support Request.”
+- On the task, select the disqualification reason **Billing Support Request** or **Support Request**.
 - This automatically creates a Zendesk ticket for the correct team.
-- No manual outreach is needed, automation handles it.
+- No manual outreach is needed; automation handles it.
 
 ### Zendesk Integration
 
@@ -83,8 +84,14 @@ Territories
 - Europe & Africa
 - Asia & Middle East
 - Australia & New Zealand (ANZ)
+- Territory 1 (U.S. state unknown)
+- Territory 3 (Unknown, but otherwise qualified)
 
 Each territory runs its own round robin assignment for new, unowned accounts.
+
+### Stale task reassignment
+
+If a task is assigned to a someone but remains untouched for 10 days, it will be automatically reassigned once via round robin. If it remains untouched after reassignment, it will be automatically disqualified with the **Stale – Autoclosed** reason.
 
 ### Converting tasks to opportunities
 
@@ -116,21 +123,43 @@ All of the above criteria should be met before creating an opportunity.  By doin
 
 If you aren't able to confidently say that you have covered the above, you should keep them as a Lead in the Nurturing stage.
 
+### Task disqualification reasons (reference)
+
+When you disqualify a task, choose the picklist reason that best matches the situation. Salesforce groups reasons into categories; full definitions are on the field in Salesforce. This table is a quick map so the team uses the same buckets.
+
+| Category | What it means | Reasons (picklist) |
+| --- | --- | --- |
+| Auto-Dispositioned | System closed the task or sent auto emails without hands-on sales triage. | Below Threshold – Auto; Stale – Autoclosed |
+| Re-route | Send the conversation to another PostHog team. | Support Request; Billing Support Request; Existing Customer Inquiry; Event Request; Partnership Request |
+| Not a Lead | Not a commercial sales opportunity for this path. | Spam; Duplicate Lead; Non-Commercial; Startup Plan / YC; Self-Hosted Requirement; Business Closed; Feedback; BAA / DPA Request |
+| Unreachable | You cannot reach them or they stopped responding; split by whether they are worth revisiting. | No Response – Pass; No Response – Prospect; Invalid Contact Info |
+| Fit | You could assess fit; outcome is ICP, product, technical sponsor, or competitive situation. | Below Sales Assist Threshold – Pass; Below Sales Assist Threshold – Prospect; Not a Good Fit; No Technical Resource; No Product Fit; Using Competitor / Unsolicited RFP |
+| Timing / Economics | Fit may be fine later; budget, timing, or capacity block a deal now. | No Budget; No Current Need; Resource Constraints |
+| Other | None of the above; use sparingly. | Other |
+
+**Splits and follow-ups** (pick **Pass** vs **Prospect** carefully so reporting and nurture stay accurate):
+
+- **No Response – Pass** — No response and no meaningful signal (e.g. low lead score, no usage); terminal for active pipeline.
+- **No Response – Prospect** — They showed qualifying signals but went dark; create a **follow-up task** with a date (revisit in roughly 3–6 months).
+- **Below Sales Assist Threshold – Pass** — TAE judged under ~$20K potential with no signals worth revisiting.
+- **Below Sales Assist Threshold – Prospect** — Same economic band but signals worth another pass (ICP, growth, usage); create a **follow-up task** (e.g. BDR or named list). If nothing happens within ~90 days, revisit whether this split is useful.
+- **Using Competitor / Unsolicited RFP** — Locked in or chose a competitor; set a reminder to check in in about **9 months** (see [new sales playbook](/handbook/growth/sales/new-sales)).
+- **Other** — Requires a free-text comment when selected; if a large share of disqualifications land here, propose a new reason.
+
 ### Manual entry
 
 If you meet a potential customer elsewhere (e.g., events, introductions, referrals):
 - Create the Account and Contact manually.
 - Assign the correct Lead Source from drop down.
 - Create a Lead Task for any action item or sales follow up.
- 
-### Support requests
 
-If you receive a lead for a self serve customer who has used the Sales Contact Form to submit a support request, you should:
+### Support and billing routing
 
--   Set the 'Disqualification reason' to 'Support Request'
--   Update the lead status to 'Unqualified'
+For support or billing questions submitted via the sales channel, disqualify with **Support Request** or **Billing Support Request** as in [Completed contact form](#completed-contact-form) (Zendesk ticket automation). If you still see legacy lead records from older flows, the same reasons apply; ticket creation may use [this Zapier path](https://zapier.com/editor/274433115/published) for some automations.
 
-This will [automatically create a ticket](https://zapier.com/editor/274433115/published) in Zendesk for the Brand team to review and address. You will be CC'd on the ticket and the ticket link will be added to the Lead's 'Next Steps' field in Salesforce.
+### Below Threshold – Auto (Customer.io)
+
+When you should route someone to self-serve onboarding instead of hands-on sales, mark the task **Below Threshold – Auto**. That triggers the automated onboarding flow in <PrivateLink url="https://fly.customer.io/workspaces/127208/journeys/campaigns/109/overview">customer.io</PrivateLink>, which guides them without manual outreach. Manual TAE judgment under the sales-assist threshold uses **Below Sales Assist Threshold – Pass** or **Below Sales Assist Threshold – Prospect** (see splits above), not this auto reason.
 
 ### Spam
 
@@ -214,12 +243,40 @@ You can also create an opportunity directly from scratch, but make sure to conne
 Stages will differ depending on the chosen Opportunity Record Type. The following stages are for the New and Existing Business Record Types:
 
 1. Problem Agreement - Buyer explicitly acknowledges they have a meaningful problem that can be qualified (e.g. "What happens if you don't solve this problem?")
+Exit criteria:
+-   **Identified & implicated pain with specific, quantifiable metrics (time/money/risk)**
+-   Answer to "What happens if you do nothing?" documented with real consequence
+-   Buyer explicitly said "This is a problem we need to solve" (not just "interesting")
+
 2. Solution Agreement - Buyer confirms our solution is best suited to solve their problem. Can be as simple as "We think PostHog will work for us"
+Exit criteria:
+-   **Active product usage OR completed POC/trial**
+-   **Clear, documentable decision made for PostHog (with or without comparing alternatives)**
+-   Economic Buyer identified (name + title)
+-   Champion identified (name)
+
 3. Priority Agreement - A senior decision-maker acknowledges the problem as a priority and validates our solution.
+Exit criteria:
+-   **Budget confirmed (amount range OR "yes, funded")**
+-   **Decision process mapped (who approves, what steps, timeline)**
+-   Economic Buyer said this is a priority (exact quote documented)
+-   Champion tested (evidence they're advocating internally)
+-   Compelling event known (deadline: budget cycle, launch, renewal, etc.)
+
 4. Commercial Agreement - Mutual agreement is reached on price and all contractual terms.
+Exit criteria:
+-   **Price agreed in writing (email/quote with amount + terms)**
+-   **All commercial terms agreed (payment terms, contract length, prepaid amount)**
+-   **Paper process mapped (legal, security, procurement steps + owners + timeline)**
+
 5. Vendor Approval - Buyer completes internal processes (legal, security, procurement) and contract is executed.
+Exit criteria:
+-   **Contract signed**
+
 6. Closed Won (100%) - They have signed the contract and are officially a PostHog customer.
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
+
+Bolded exit criteria indicate the minimum standard for the opportunity to advance stages (for typically smaller, more transational deals). More detail is available on the stages and the exit criteria for each state <PrivateLink url='https://docs.google.com/spreadsheets/d/1BpLMHZ52iE1Ni0-Hf0Y68RSq0ohNNnJv7Jd90lgSI6s/edit?usp=sharing'>in this spreadsheet</PrivateLink>
 
 ### Forecast categories
 

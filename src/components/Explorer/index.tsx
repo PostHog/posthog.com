@@ -6,11 +6,11 @@ import { navigate } from 'gatsby'
 import { useLocation } from '@reach/router'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { productMenu } from '../../navs'
 import { Accordion } from '../RadixUI/Accordion'
 import { useWindow } from '../../context/Window'
 import { getProseClasses } from '../../constants'
 import AddressBar from 'components/OSChrome/AddressBar'
+import { useApp } from '../../context/App'
 
 interface AccordionItem {
     title: string
@@ -39,6 +39,7 @@ interface ExplorerProps {
     rightActionButtons?: React.ReactNode
     onSearch?: (query: string) => void
     viewportClasses?: string
+    showAddressBar?: boolean
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -92,7 +93,9 @@ export default function Explorer({
     rightActionButtons,
     onSearch,
     viewportClasses = '',
+    showAddressBar = true,
 }: ExplorerProps) {
+    const { websiteMode } = useApp()
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const searchContainerRef = useRef<HTMLDivElement>(null)
@@ -124,39 +127,45 @@ export default function Explorer({
         return props
     }
 
+    const windowWidth = appWindow?.size?.width
     const ContentWrapper = useMemo(() => {
         const WrapperComponent = ({ children: wrapperChildren }: { children: React.ReactNode }) => {
-            if (appWindow?.size?.width && appWindow.size.width <= 768) {
+            if (windowWidth && windowWidth <= 768) {
                 return <ScrollArea viewportClasses={`[&>div]:h-full ${viewportClasses}`}>{wrapperChildren}</ScrollArea>
             }
             return <>{wrapperChildren}</>
         }
         WrapperComponent.displayName = 'ContentWrapper'
         return WrapperComponent
-    }, [appWindow, viewportClasses])
+    }, [windowWidth, viewportClasses])
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
-            {!fullScreen && (
+            {(!fullScreen || !websiteMode) && (
                 <>
                     <HeaderBar
                         {...getHeaderBarProps()}
                         searchContentRef={searchContainerRef}
                         rightActionButtons={rightActionButtons}
                         onSearch={onSearch}
+                        className={!showAddressBar ? 'border-b border-primary' : ''}
                     />
-                    <AddressBar
-                        selectOptions={selectOptions}
-                        currentPath={currentPath}
-                        handleValueChange={handleValueChange}
-                        selectedCategory={selectedCategory}
-                    />
+                    {showAddressBar && (
+                        <AddressBar
+                            selectOptions={selectOptions}
+                            currentPath={currentPath}
+                            handleValueChange={handleValueChange}
+                            selectedCategory={selectedCategory}
+                        />
+                    )}
                 </>
             )}
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
-                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? ' ' : 'h-full'}`}
+                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? ' ' : 'h-full'} ${
+                        websiteMode && 'max-w-7xl'
+                    }`}
                 >
                     {/* Static right sidebar content (original) */}
                     {rightSidebarContent && (
@@ -230,7 +239,9 @@ export default function Explorer({
                     {leftSidebarContent && (
                         <aside
                             data-scheme="secondary"
-                            className="@3xl:w-64 bg-primary border-t @md:border-t-0 @md:border-r border-primary h-full prose prose-sm dark:prose-invert"
+                            className={`@3xl:w-64 bg-primary border-t @3xl:border-t-0 @3xl:border-r border-primary prose prose-sm dark:prose-invert ${
+                                websiteMode ? '@3xl:h-[calc(100vh-48px)]' : 'h-full'
+                            }`}
                         >
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">

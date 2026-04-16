@@ -1,5 +1,8 @@
 // Strapi helper types
-export type StrapiResult<T> = StrapiData<T> & StrapiMeta
+export type StrapiResult<T> = StrapiData<T> &
+    StrapiMeta & {
+        pinnedQuestions?: StrapiRecord<QuestionData>[]
+    }
 
 export type StrapiMeta = {
     meta: {
@@ -80,6 +83,12 @@ export type ProfileData = {
         description: string
         notes: string
     }[]
+    tShirt?: {
+        id?: number
+        fit: 'unisex' | 'female' | null
+        size: 'XS' | 'S' | 'M' | 'L' | 'XL' | '2XL' | '3XL' | null
+        additionalInfo: string | null
+    } | null
 }
 
 export type UserData = {

@@ -46,13 +46,13 @@ Many companies and roles assume that challenging problems to solve (#1) is the o
 
 ## So what makes product engineering so fun?
 
-We've written before about [what product engineering is](/blog/what-is-a-product-engineer), so I won't bore you with the details here. TL;DR: A product engineer is someone who works with customers and data to decide what should be built, and then goes and builds it themselves. 
+We've written before about [what product engineering is](/product-engineer/what-is-a-product-engineer), so I won't bore you with the details here. TL;DR: A product engineer is someone who works with customers and data to decide what should be built, and then goes and builds it themselves. 
 
 Critically, you can't do the work of a product engineer without the four essential ingredients mentioned above. But interestingly, you can _also_ find those ingredients for fun in other roles. 
 
 So what makes product engineering more fun than those other roles? In my opinion, it comes down to the _intensity_ of each ingredient.
 
-Let's look at two other roles, specifically two that have been combined to create the product engineer: product management and software engineering.
+Let's look at two other roles, specifically two that have been combined to create the product engineer: [product management and software engineering](/blog/product-engineer-vs-software-engineer).
 
 ### How fun is product management?
 

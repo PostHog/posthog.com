@@ -1,8 +1,8 @@
 import React from 'react'
 
 interface FieldsetProps extends React.FieldsetHTMLAttributes<HTMLFieldSetElement> {
-    legend: string
-    children: any
+    legend: React.ReactNode
+    children: React.ReactNode
     className?: string
 }
 
