@@ -100,7 +100,7 @@ To keep opt-outs in sync, set up a [Reporting Webhook](https://docs.customer.io/
 
 Go to Customer.io and navigate to **Integrations > Add integration > Reporting webhook**. Paste the webhook URL from PostHog.
 
-Next, copy the webhook signing secret. It is used to verify that incoming webhooks are from your Customer.io account – unsigned webhooks are rejected.
+Next, copy the webhook signing secret. It's used to verify that incoming webhooks are from your Customer.io account – unsigned webhooks are rejected.
 
 Back in PostHog, paste the signing secret and click **Enable sync**.
 
@@ -121,14 +121,7 @@ Once enabled, PostHog automatically records opt-outs whenever:
 
 When users update their preferences through a PostHog-managed preferences page, you can automatically sync those changes back to Customer.io. This is useful if you haven't fully migrated your email campaigns to PostHog workflows.
 
-Only categories originally imported from Customer.io are synced back. 
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step4_light_ec05fee09f.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step4_dark_e4a42010f8.png"
-    classes="rounded"
-    alt="Outbound sync configuration in PostHog"
-/>
+Only categories originally imported from Customer.io are synced back.
 
 To get your Customer.io Track API credentials, go to **Settings > API and webhook credentials > Track API Keys** and copy the **Site ID** and **Track API key**.
 
@@ -137,6 +130,13 @@ Back in PostHog:
 2. Enter your **Site ID**
 3. Enter your **Track API key**
 4. Click **Enable sync**
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step4_light_ec05fee09f.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step4_dark_e4a42010f8.png"
+    classes="rounded"
+    alt="Outbound sync configuration in PostHog"
+/>
 
 </Step>
 
