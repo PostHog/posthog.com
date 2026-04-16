@@ -166,85 +166,6 @@ export function Viewer({
         setShowSearch(false)
     }
 
-    const toolbarElements: ToolbarElement[] = [
-        {
-            type: 'container' as const,
-            className: 'ml-auto flex items-center gap-px',
-            children: (
-                <>
-                    <OSButton size="md" active={showSearch} icon={<IconSearch />} onClick={toggleSearch} />
-                    {extraMenuOptions}
-                    {bookmark && <BookmarkButton bookmark={bookmark} />}
-                    <Options
-                        fullWidthContent={fullWidthContent}
-                        maxWidth={maxWidth}
-                        setMaxWidth={setMaxWidth}
-                        initialMaxWidth={initialMaxWidth}
-                    />
-                    <div
-                        onMouseEnter={() => setIsHovering(true)}
-                        onMouseLeave={() => setIsHovering(false)}
-                        className="relative z-10"
-                    >
-                        <OSButton
-                            variant="primary"
-                            size="md"
-                            {...(hasShareButton
-                                ? showCher
-                                    ? {
-                                          onClick: () => {
-                                              addWindow(
-                                                  <MediaPlayer
-                                                      newWindow
-                                                      location={{ pathname: `cher` }}
-                                                      key={`cher`}
-                                                      videoId="nZXRV4MezEw"
-                                                  />
-                                              )
-                                          },
-                                      }
-                                    : {
-                                          onClick: () => {
-                                              addWindow(
-                                                  <Share
-                                                      title={appWindow?.meta?.title}
-                                                      location={{ pathname: `share` }}
-                                                      key={`share`}
-                                                      newWindow
-                                                      url={`${window.location.origin}${appWindow?.path}`}
-                                                  />
-                                              )
-                                          },
-                                      }
-                                : {
-                                      to: cta?.url,
-                                  })}
-                            state={{ newWindow: true }}
-                            asLink
-                            className="ml-1 -my-0.5"
-                        >
-                            {hasShareButton ? (
-                                showCher ? (
-                                    <span className="relative">
-                                        <CloudinaryImage
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/cher_hog_5cdafbe899.png"
-                                            className="w-[38px] absolute left-0 translate-x-[-25%] translate-y-[-25%]"
-                                        />
-                                        <span className="inline-block ml-6">Cher</span>
-                                    </span>
-                                ) : (
-                                    'Share'
-                                )
-                            ) : (
-                                cta?.label
-                            )}
-                        </OSButton>
-                    </div>
-                </>
-            ),
-        },
-    ]
-
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.ctrlKey || event.metaKey) {
@@ -357,8 +278,8 @@ export function Viewer({
                                                 {type && <span className="opacity-40">.{type}</span>}
                                             </h1>
                                         )}
-                                        <div className="relative">
-                                            <div ref={searchContentRef}>{children}</div>
+                                        <div className="relative" ref={searchContentRef}>
+                                            {children}
                                         </div>
                                     </article>
                                 </ScrollWrapper>
