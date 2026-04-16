@@ -9,7 +9,7 @@ The YouTube team's mission is to:
 - Increase awareness of PostHog, especially among people in our ideal customer profile, through content that is genuinely entertaining
 - Help developers and PostHog users be more successful through, through content that is genuinely informative
 
-Our model is that of a [newsroom](https://en.wikipedia.org/wiki/Newsroom), not a marketing department, as it is for the rest of content. This meeans that we start from a place of producing great video first that stands alone, irrespective of its connection to PostHog and our products. We have found over the years that if we get this right, the marketing benefits naturally follow, but if we start from a marketing-first perspective, people are never as interested. 
+Our model is that of content creators, not a marketing department, as it is for the rest of content. This means that we start from a place of producing great video first that stands alone, irrespective of its connection to PostHog and our products. We have found over the years that if we get this right, the marketing benefits naturally follow, but if we start from a marketing-first perspective, people are never as interested. 
 
 As a result, our focus is on awareness, not converting people to sign up or revenue. Other parts of our marketing and product are a much better fit for that. 
 
