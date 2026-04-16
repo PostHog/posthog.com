@@ -122,11 +122,11 @@ A rage click is when a user taps an area multiple times in quick succession (e.g
 
 This is captured as a `$rageclick` event. You can use this event to identify opportunities to improve your UI, since it's a good indication that users may be frustrated with your product.
 
-It is enabled by default (`captureRageClicks = true`).
+It is enabled by default (`rageClickConfig.enabled = true`).
 
 ```swift
 let config = PostHogConfig(apiKey: <ph_project_token>, host: <ph_client_api_host>)
-config.captureRageClicks = true // Enabled by default
+config.rageClickConfig.enabled = true // Enabled by default
 config.rageClickConfig.minimumTapCount = 3 // Optional, default is 3
 config.rageClickConfig.thresholdPoints = 30 // Optional, default is 30
 config.rageClickConfig.timeoutInterval = 1.0 // Optional, default is 1.0s
