@@ -15,6 +15,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Popover } from 'components/RadixUI/Popover'
 import Slider from 'components/RadixUI/Slider'
+import DebugContainerQuery from 'components/DebugContainerQuery'
 
 interface ViewerProps {
     slug?: string
@@ -325,7 +326,7 @@ export function Viewer({
                                 <article
                                     data-scheme="primary"
                                     className={`${getProseClasses(proseSize)} h-full mx-auto transition-all ${
-                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-3xl'
+                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-4xl'
                                     }`}
                                 >
                                     {title && (
@@ -346,9 +347,10 @@ export function Viewer({
                                     className={`${getProseClasses(
                                         proseSize
                                     )} py-4 px-4 @xl:p-8 mx-auto transition-all ${
-                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-3xl'
+                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-4xl'
                                     }`}
                                 >
+                                    <DebugContainerQuery />
                                     {title && (
                                         <h1 className="text-2xl font-bold">
                                             {title}
@@ -368,5 +370,4 @@ export function Viewer({
     )
 }
 
-// Add default export for backward compatibility
 export default Viewer
