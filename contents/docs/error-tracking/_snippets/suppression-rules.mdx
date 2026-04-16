@@ -1,8 +1,15 @@
-Autocaptured exceptions can be ignored client-side by [configuring suppression rules](https://app.posthog.com/error_tracking?activeTab=configuration#selectedSetting=error-tracking-suppression-rules) in PostHog settings. You can only filter based on the exception type and message attributes because the stack of an exception may still be minified client-side.
+Autocaptured exceptions can be ignored by [configuring suppression rules](https://app.posthog.com/error_tracking?activeTab=configuration#selectedSetting=error-tracking-suppression-rules) in PostHog settings. Configure filters to match exceptions you want to suppress using **All** (match all filters) or **Any** (match any filter) logic.
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/suppression_rule_light_8db44eb6b1.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/suppression_rule_dark_5972d57398.png"
-    alt="Issue suppression rules"
-    classes="rounded"
-/>
+By default, 100% of matching exceptions are suppressed. You can adjust the **sampling rate** slider to suppress only a percentage of matching exceptions. For example, setting it to 50% suppresses half of the matching exceptions while capturing the rest normally.
+
+Click **Test rule** to see how many exceptions your rule would match. The test shows the number of matching exceptions and issues in the last seven days, with the option to expand to 30 or 90 days.
+
+#### Client-side vs server-side evaluation
+
+Suppression rules show an evaluation indicator that tells you where the rule runs:
+
+- **Client** – Exceptions are dropped by the SDK before being sent to PostHog. This is the most efficient option for cost and performance.
+- **Server** – Exceptions are sent to PostHog and evaluated during ingestion. Required when using `$exception_sources` or `$exception_functions` filters since stack traces may be minified client-side.
+- **Client + Server** – Some filters evaluate client-side while others require server-side evaluation. If using **Any** (OR) logic, matching client-side filters drop the exception immediately.
+
+For best performance and cost savings, prefer filters that can evaluate client-side, such as `$exception_types` and `$exception_values`.

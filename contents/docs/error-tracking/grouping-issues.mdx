@@ -50,6 +50,16 @@ You can also set custom properties on the error tracking event to filter on. You
 
 Grouping rules are evaluated in the order they are configured and can be reordered. The first rule that matches will be used to group exceptions into an issue. This means you should configure the most specific rules first, and then the more general rules. If you configure a catch-all rule first, it will always match and block other rules from being evaluated.
 
+### Testing grouping rules
+
+Click the **Test rule** button to see how many exceptions your grouping rule would match. The test shows:
+
+- Number of matching exceptions in the last 7 days (expandable to 30 or 90 days)
+- Number of issues those exceptions would be grouped into
+- Links to view the matching exceptions and issues
+
+Use this to verify your rule matches the expected exceptions before saving.
+
 ### Disabled grouping rules
 
 Grouping rules can become disabled if they encounter processing errors during ingestion. When a rule is disabled, a banner displays the original error message explaining the issue. To re-enable a disabled rule, edit the rule to fix the problem and save your changes. Saving the rule automatically re-enables it. If you need help resolving the issue, reach out to support.
