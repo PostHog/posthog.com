@@ -17,21 +17,14 @@ Related reading:
 
 Always use [HogQL](/handbook/engineering/databases/hogql-python) rather than writing raw ClickHouse SQL. HogQL is our AST-powered layer on top of ClickHouse SQL that provides critical safety and performance guarantees automatically.
 
-### Automatic team ID guards
+### Why HogQL
 
-Every HogQL query gets an automatic `team_id = <your_team_id>` filter injected on every table access. This is enforced by [`team_id_guard_for_table()`](https://github.com/PostHog/posthog/blob/master/posthog/hogql/printer/clickhouse.py#L53-L63) and [`_ensure_team_id_where_clause()`](https://github.com/PostHog/posthog/blob/master/posthog/hogql/printer/clickhouse.py#L973-L986) in the ClickHouse printer. Without this, a missing `WHERE team_id = ...` clause would leak data across teams – one of the worst possible bugs.
+HogQL gives you:
 
-### Materialized property optimizations
-
-When a HogQL query accesses event or person properties (e.g. `properties.$browser`), the printer automatically checks whether that property has a materialized column and rewrites the access to use the pre-extracted column instead of parsing JSON at query time. This happens in [`_get_materialized_property_source_for_property_type()`](https://github.com/PostHog/posthog/blob/master/posthog/hogql/printer/base.py#L1258-L1303) and can make property reads up to 25x faster. Raw SQL would bypass this entirely.
-
-### Person join optimizations
-
-HogQL automatically handles person-on-events (PoE) mode via [`PersonsOnEventsMode`](https://github.com/PostHog/posthog/blob/master/posthog/hogql/database/database.py#L871-L895). Depending on the team's configuration, person properties and IDs are resolved either from a join or directly from columns on the events table. The right strategy is selected automatically by [`create_default_modifiers_for_team()`](https://github.com/PostHog/posthog/blob/master/posthog/hogql/modifiers.py). Writing raw SQL would require you to handle all of these modes manually.
-
-### Customer-specific query settings
-
-HogQL supports per-query settings via [`HogQLQuerySettings`](https://github.com/PostHog/posthog/blob/master/posthog/hogql/constants.py#L114-L139), which allows tuning things like `join_algorithm`, `optimize_aggregation_in_order`, and `max_bytes_to_read` on a per-team or per-query basis. There are also per-query modifiers via [`HogQLQueryModifiers`](https://github.com/PostHog/posthog/blob/master/posthog/schema.py) that control behavior like materialization mode, projection optimization, and session table version.
+- **Automatic team ID guards**: Every query gets an automatic `team_id = <your_team_id>` filter injected on every table access (via [`team_id_guard_for_table()`](https://github.com/PostHog/posthog/blob/master/posthog/hogql/printer/clickhouse.py#L53-L63)), preventing cross-team data leaks.
+- **Materialized property optimizations**: Property accesses like `properties.$browser` are automatically rewritten to use pre-extracted materialized columns where available – up to 25x faster than parsing JSON at query time.
+- **Person join optimizations**: [Person-on-events (PoE) mode](https://github.com/PostHog/posthog/blob/master/posthog/hogql/database/database.py#L871-L895) is handled automatically – the right join or column strategy is selected based on team configuration, with no manual handling required.
+- **Customer-specific query settings**: Per-query [settings](https://github.com/PostHog/posthog/blob/master/posthog/hogql/constants.py#L114-L139) and [modifiers](https://github.com/PostHog/posthog/blob/master/posthog/schema.py) (join algorithm, materialization mode, projection optimization, etc.) can be tuned per-team or per-query.
 
 ## Use backend query runners, not frontend-defined queries
 

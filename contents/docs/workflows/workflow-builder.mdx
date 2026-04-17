@@ -2,6 +2,8 @@
 title: Workflow builder
 ---
 
+import CalloutBox from 'components/Docs/CalloutBox'
+
 Workflows are a collection of steps that automate a process or deliver messages to your users based on your configured logic. In PostHog, you can create a workflow using our no-code workflow builder.
 
 <ProductScreenshot
@@ -15,7 +17,7 @@ Workflows are composed of the following components:
 
 | Component                             | Description                                                                                                                                                          |
 | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Triggers](#triggers)                 | What starts the workflow. We let you start a workflow when an event is performed (e.g. a user signs up), on a recurring schedule, or programmatically via a webhook. |
+| [Triggers](#triggers)                 | What starts the workflow. You can trigger a workflow from an event, a recurring schedule, a batch audience, a webhook, or a tracking pixel.                          |
 | [Dispatches](#dispatches)             | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations.                                                                             |
 | [Delays](#delays)                     | Wait steps such as "wait 2 days" or "wait until condition is true."                                                                                                  |
 | [Audience splits](#audience-splits)   | Target and split your users so you can automate some action for them or send a message with more specificity.                                                        |
@@ -39,13 +41,15 @@ Draft workflows can also be archived, even if they contain invalid configuration
 
 ## Triggers
 
-Every workflow starts with a trigger. Triggers define what kicks off the workflow. There are three types of triggers:
+Every workflow starts with a trigger. Triggers define what kicks off the workflow.
 
-| Trigger type     | Description                                                          |
-| ---------------- | -------------------------------------------------------------------- |
-| Event trigger    | A captured [PostHog event](/docs/data/events) (e.g. `signed up`)     |
-| Webhook trigger  | Programmatically start a workflow with a webhook                     |
-| Schedule trigger | Run a workflow on a recurring schedule (e.g. daily, weekly, monthly) |
+| Trigger type             | Description                                                                        |
+| ------------------------ | ---------------------------------------------------------------------------------- |
+| Event trigger            | A captured [PostHog event](/docs/data/events) (e.g. `signed up`)                   |
+| Webhook trigger          | Programmatically start a workflow with an HTTP request                             |
+| Schedule trigger         | Run a workflow on a recurring schedule (e.g. daily, weekly, monthly)               |
+| Batch trigger            | Run the workflow for each person matching an audience, on a recurring schedule     |
+| Tracking pixel trigger   | Start the workflow when a 1x1 tracking pixel is loaded (e.g. in an email)          |
 
 ### Event triggers
 
@@ -88,6 +92,34 @@ Schedule triggers display a status badge next to the trigger type:
 | Completed | The schedule has finished all its occurrences                |
 
 If you update a completed schedule's configuration, its status resets to **Active**.
+
+If your workflow needs to target specific users on a schedule, use a [batch trigger](#batch-triggers) instead.
+
+### Batch triggers
+
+<CalloutBox icon="IconInfo" title="Batch triggers are in beta" type="fyi">
+
+Batch triggers are currently in beta. We're always looking for feedback, please [reach out to us directly](https://app.posthog.com/workflows#panel=support%3Afeedback%3A%3Alow%3Atrue) in app.
+
+</CalloutBox>
+
+Batch triggers let you run a workflow for each person in an audience you define, on a recurring schedule.
+At each scheduled time, PostHog evaluates your audience filters and executes the workflow once per matching person.
+
+You define the audience using person properties, cohorts, or feature flag filters.
+The trigger shows an estimate of how many persons will be affected before you enable the workflow.
+
+A batch trigger combines two things:
+- **Audience filters** — who should enter the workflow (e.g. person properties, cohorts, feature flags)
+- **A recurring schedule** — when the batch should run (same schedule picker as schedule triggers)
+
+### Tracking pixel triggers
+
+Tracking pixel triggers start a workflow when a 1x1 tracking pixel image is loaded.
+PostHog generates a unique URL you can embed as an `<img>` tag in emails or web pages.
+When the pixel is loaded (e.g. when a recipient opens an email), the workflow fires.
+
+You can pass data via query parameters on the pixel URL and map them to event properties in the trigger configuration.
 
 ## Dispatches
 

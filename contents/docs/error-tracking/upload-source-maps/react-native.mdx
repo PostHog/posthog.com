@@ -9,7 +9,7 @@ import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
 
 <CalloutBox icon="IconInfo" title="CLI version requirement" type="action">
 
-A minimum CLI version of [0.7.4](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.7.4) is required, but we recommend [keeping up with the latest CLI version](/docs/error-tracking/upload-source-maps/cli) to ensure you have all of error tracking's features.
+A minimum CLI version of [0.7.8](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.7.8) is required, but we recommend [keeping up with the latest CLI version](/docs/error-tracking/upload-source-maps/cli) to ensure you have all of error tracking's features.
 
 </CalloutBox>
 
@@ -104,6 +104,36 @@ Add the `posthog-react-native/expo` plugin under the `expo.plugins`.
 }
 ```
 
+The plugin accepts the following options:
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `disableSandboxing` | `boolean` | `true` | iOS only. When `true`, sets `ENABLE_USER_SCRIPT_SANDBOXING=NO` on your main app target's Xcode build configurations during `expo prebuild`. This lets the source map upload script read `.git/` (for release metadata) and lets stock Expo projects build without manually declaring input/output files on every script phase. |
+
+Example opting out of the sandbox change:
+
+```json
+{
+  "expo": {
+    "plugins": [
+      ["posthog-react-native/expo", { "disableSandboxing": false }]
+    ]
+  }
+}
+```
+
+<CalloutBox icon="IconInfo" title="When to opt out" type="fyi">
+
+`disableSandboxing: false` is intended for organizations with compliance requirements that forbid disabling Xcode's user script sandbox. With the opt-out:
+
+- iOS source map uploads continue to work — errors still symbolicate
+- Git metadata will not be attached to iOS releases (the UI chip shown for Android rows will be missing on iOS rows)
+- Your project must already have every build-phase script (yours, Expo's, CocoaPods-generated) declaring its inputs and outputs, otherwise the build will fail
+
+This setting only affects build-time scripts on the build machine. Your shipped app's runtime security is unchanged.
+
+</CalloutBox>
+
 2. Android: Update the `/android/app/build.gradle` file from your app's root directory so that it looks like this:
 
 ```diff
@@ -131,8 +161,16 @@ To do this through Xcode, open your project in Xcode, go to the project settings
 +/bin/sh `"$NODE_BINARY" --print "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog-xcode.sh')"` `"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
 ```
 
+If you are not using the Expo plugin (step 1), you will need to also disable User Script Sandboxing for the upload script to work. In Xcode, go to Build Settings, search for **User Script Sandboxing** (`ENABLE_USER_SCRIPT_SANDBOXING`) and set it to **No**. This is required because the script needs to read `.git/` for release metadata and execute `posthog-cli`, which are not allowed under Xcode's script sandbox.
+
 </Step>
 
 <StepVerifySymbolSetsUpload />
 
 </Steps>
+
+## Troubleshooting
+
+**Build fails with `Sandbox: bash deny(1) file-read-data`**
+
+You probably have `{ disableSandboxing: false }` set in your plugin options, or your Xcode project has `ENABLE_USER_SCRIPT_SANDBOXING = YES` set explicitly somewhere that overrides the plugin. Stock Expo projects need the sandbox disabled because several build-phase scripts (Expo's `expo-configure-project.sh`, various CocoaPods-generated scripts) don't declare all their inputs. Either remove the opt-out, or declare inputs on every script phase and keep sandboxing on.

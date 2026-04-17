@@ -110,6 +110,15 @@ To debug:
 4. Use a development build which includes full error messages. Only use this for debugging, not production
 
 
+## Symbol set upload skipped as already present
+
+If the CLI reports `Server returned 0 upload keys (1 skipped as already present)`, it means a symbol set with the same chunk ID already exists on the server. This happens when your bundle content hasn't changed between builds — the chunk ID is derived from the bundle's content hash, so identical code produces identical IDs.
+
+To force a fresh upload:
+
+1. Make a real change to your application code (not just a whitespace change), or
+2. Delete the existing symbol set in the [Error Tracking Symbol Sets](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets) UI and rerun the build
+
 ## Grouping or assignment rules disabled
 
 Rules can become disabled if PostHog encounters a processing error while evaluating the rule during exception ingestion. When a rule is disabled, a banner appears in the [Error Tracking **Configuration** tab](https://us.posthog.com/error_tracking) showing the error message.
