@@ -9,6 +9,7 @@ import { motion } from 'framer-motion'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import Logo from 'components/Logo'
 import { useApp } from '../../../context/App'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 export const Hero = () => {
     const { siteSettings } = useApp()
@@ -26,12 +27,12 @@ export const Hero = () => {
                 </h1>
 
                 <h1 className="!text-2xl pt-4">The new way to build products</h1>
-                <p className="text-balance @xl:text-wrap">
+                <p className="text-balance @xl:text-wrap @5xl:text-balance">
                     Product development used to mean manually writing code, running analysis, diagnosing bugs, and
                     rolling out changes using dozens of tools.
                 </p>
 
-                <p className="text-balance @xl:text-wrap">
+                <p className="text-balance @xl:text-wrap @5xl:text-balance">
                     PostHog is the only platform that acts like a co-pilot for you (and your AI agents) to do it all –{' '}
                     <em>autonomously</em>.
                 </p>
