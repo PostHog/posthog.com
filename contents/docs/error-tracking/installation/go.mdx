@@ -1,0 +1,180 @@
+---
+title: Go error tracking installation
+platformLogo: go
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<Steps>
+
+<Step title="Install the Go SDK" badge="required">
+
+Install the [PostHog Go SDK](/docs/libraries/go):
+
+```bash
+go get github.com/posthog/posthog-go
+```
+
+<CalloutBox icon="IconInfo" title="Source context not yet supported" type="fyi">
+
+The Go SDK captures stack traces with file names, line numbers, and function names, but does not yet support source context (displaying the surrounding lines of code in the error tracking UI). Symbol set uploads for Go are not currently available.
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Initialize the client" badge="required">
+
+```go
+package main
+
+import (
+    "github.com/posthog/posthog-go"
+)
+
+func main() {
+    client, _ := posthog.NewWithConfig(
+        "<ph_project_token>",
+        posthog.Config{
+            Endpoint: "<ph_client_api_host>",
+        },
+    )
+    defer client.Close()
+}
+```
+
+</Step>
+
+<Step title="Capture exceptions" badge="required">
+
+There are two ways to capture exceptions with the Go SDK:
+
+### Option A: Direct capture
+
+Use `NewDefaultException` to capture errors directly. This automatically generates a UUID and stack trace for you.
+
+```go
+import (
+    "time"
+    "github.com/posthog/posthog-go"
+)
+
+exception := posthog.NewDefaultException(
+    time.Now(),
+    "user_distinct_id",
+    "DatabaseError",         // type - rendered as title in the UI
+    "connection refused",    // value - rendered as description in the UI
+)
+client.Enqueue(exception)
+```
+
+For more control, build the `Exception` struct manually:
+
+```go
+import (
+    "time"
+    "github.com/posthog/posthog-go"
+)
+
+handled := true
+fingerprint := "my-custom-fingerprint"
+
+exception := posthog.Exception{
+    DistinctId: "user_distinct_id",
+    Timestamp:  time.Now(),
+    ExceptionList: []posthog.ExceptionItem{
+        {
+            Type:  "DatabaseError",
+            Value: "connection refused",
+            Mechanism: &posthog.ExceptionMechanism{
+                Handled: &handled,
+            },
+        },
+    },
+    ExceptionFingerprint: &fingerprint,
+}
+client.Enqueue(exception)
+```
+
+### Option B: Automatic capture with slog
+
+The SDK provides a `SlogCaptureHandler` that wraps Go's standard `log/slog` logger and automatically captures log records as exceptions.
+
+By default, it captures logs at `Warning` level and above.
+
+```go
+import (
+    "context"
+    "fmt"
+    "log/slog"
+    "os"
+
+    "github.com/posthog/posthog-go"
+)
+
+client, _ := posthog.NewWithConfig(
+    "<ph_project_token>",
+    posthog.Config{
+        Endpoint: "<ph_client_api_host>",
+    },
+)
+defer client.Close()
+
+baseHandler := slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+    Level: slog.LevelInfo,
+})
+
+logger := slog.New(posthog.NewSlogCaptureHandler(baseHandler, client,
+    posthog.WithDistinctIDFn(func(ctx context.Context, r slog.Record) string {
+        // Return the user ID from context or another source
+        return "user_distinct_id"
+    }),
+))
+
+// This warning is automatically captured as an exception in PostHog
+logger.Warn("Something broke",
+    "error", fmt.Errorf("connection refused"),
+)
+```
+
+The handler supports several configuration options:
+
+| Option | Description | Default |
+|---|---|---|
+| `WithMinCaptureLevel(level)` | Minimum log level to capture | `slog.LevelWarn` |
+| `WithDistinctIDFn(fn)` | Function to extract distinct ID from context/record | Returns `""` (skips capture) |
+| `WithFingerprintFn(fn)` | Custom fingerprint for error grouping | `nil` (PostHog assigns) |
+| `WithSkip(n)` | Stack frames to skip | `5` |
+| `WithStackTraceExtractor(e)` | Custom stack trace extractor | `DefaultStackTraceExtractor` |
+| `WithDescriptionExtractor(e)` | Custom description extractor | `ErrorExtractor` |
+
+<CalloutBox icon="IconInfo" title="Error extraction" type="fyi">
+
+The slog handler automatically extracts error descriptions from log attributes with keys `err` or `error` (case-insensitive). It also supports wrapped errors via the `Unwrap()` interface.
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Verify error tracking" badge="recommended">
+
+Trigger a test exception to confirm events are being sent to PostHog. You should see them appear in the [activity feed](https://app.posthog.com/activity/explore).
+
+```go
+exception := posthog.NewDefaultException(
+    time.Now(),
+    "test_user",
+    "TestError",
+    "This is a test exception from Go",
+)
+client.Enqueue(exception)
+
+// Flush the queue before exiting
+client.Close()
+```
+
+</Step>
+
+</Steps>

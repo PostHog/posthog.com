@@ -7,6 +7,14 @@ tags:
  - LLM analytics
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox type="fyi" title="New: Simpler options available" icon="IconInfo">
+
+Since publishing this post, we've integrated further with OpenRouter. You can enable the PostHog integration directly through **OpenRouter Broadcast** – no SDK instrumentation required. All your LLM calls will then be tracked automatically in PostHog's LLM Analytics. See the [OpenRouter installation docs](/docs/llm-analytics/installation/openrouter) for details.
+
+</CalloutBox>
+
 OpenRouter makes it easy to use a range of different LLMs. No matter which you use, understanding API usage, costs, and latency is crucial for understanding how users interact with your AI features. In this tutorial, we'll show you how to monitor important metrics such as:
 
 - Total cost across different models
@@ -124,7 +132,7 @@ import { OpenAI } from '@posthog/ai'
 import { PostHog } from 'posthog-node'
 
 const phClient = new PostHog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   { host: '<ph_api_client_host>' }
 )
 

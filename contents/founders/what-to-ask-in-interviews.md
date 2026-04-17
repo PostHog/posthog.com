@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+featuredVideo: 'https://www.youtube-nocookie.com/embed/KVMZgY2KNto'
 tags:
   - Founders
   - People
@@ -124,5 +125,11 @@ This will reveal perhaps what the hardest challenge will be, and where you could
 ## Be reasonable, but buyer beware
 
 Startups do not have everything figured out. The challenge is figuring out if they can get from where they are today to where they need to be to succeed – just don't shy away from asking to see if they're headed in the right direction.
+
+## Further reading
+
+- Curious how we do it? See [our hiring process](/handbook/people/hiring-process) in detail
+- [Literally everything](/newsletter/hiring-at-posthog-lessons) we've learned about hiring at PostHog
+- A bunch of [myths and truths](/founders/early-stage-startup-hiring-strategy) I've learned about startup hiring in the last 10 years
 
 <NewsletterForm />

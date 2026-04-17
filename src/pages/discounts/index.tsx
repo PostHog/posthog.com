@@ -49,6 +49,7 @@ const discountsData = {
         'AI-powered savings',
         'Sign up 5 friends discount',
         'Hedgehog hug discount',
+        'Sign up for 18 enterprise plans and get the 19th for free',
     ],
     discountValues: [6084, 12243, 3060, 9182, 6121, 5000, 1274],
 }

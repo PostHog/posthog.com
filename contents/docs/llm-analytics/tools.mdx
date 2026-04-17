@@ -1,0 +1,72 @@
+---
+title: Tools
+---
+
+The Tools tab shows which tools and functions your LLMs are calling, aggregated across all your `$ai_generation` events. This helps you understand how your AI agents use tools, which tools are most popular, and how tool usage patterns change over time.
+
+## How it works
+
+When your LLM application makes a generation that includes tool calls (also known as function calls), PostHog automatically extracts the tool names from the response at ingestion time. This works across all major LLM providers and formats — OpenAI, Anthropic, Vercel AI SDK, and more.
+
+Two properties are set on each generation event:
+
+| Property | Description |
+|----------|-------------|
+| `$ai_tools_called` | The names of tools called in this generation (e.g., `get_weather,search_docs`) |
+| `$ai_tool_call_count` | The number of tool calls in this generation |
+
+No additional setup is needed — if your LLM responses include tool calls, PostHog captures them automatically through the SDK wrappers.
+
+## Tool metrics
+
+The Tools tab displays the following metrics for each tool:
+
+| Metric | Description |
+|--------|-------------|
+| **tool** | The tool/function name |
+| **total_calls** | Total number of times this tool was called |
+| **traces** | Number of unique traces where this tool was used |
+| **users** | Number of unique users whose generations called this tool |
+| **sessions** | Number of unique sessions containing this tool |
+| **days_seen** | Number of distinct days the tool was called |
+| **solo_pct** | Percentage of calls where this was the only tool called in the generation |
+| **first_seen** | When the tool was first called |
+| **last_seen** | Most recent call |
+
+## Visualizing tool usage
+
+Each tool row includes three icon buttons for quick visual analysis. Each opens a new insight in a new tab:
+
+- **Trend** - Opens a time series chart showing that tool's usage over time
+- **Combinations** - Opens a bar chart showing the most common tool call combinations containing that tool
+- **Paths** - Opens a Paths insight showing tool call flow sequences starting from that tool
+
+The table toolbar also includes two buttons for aggregated analysis across all tools:
+
+- **Tool trends** - Opens a trends insight with a line per tool (top 10 by usage)
+- **Tool co-occurrence** - Opens a 2D heatmap showing pairwise tool co-occurrence counts across AI generations
+
+## Investigating tool usage
+
+Click on any tool name to drill down into the [Generations](/docs/llm-analytics/generations) tab, filtered to show only generations that called that specific tool. This helps you:
+
+- See the full context of how the tool is being used
+- Examine the inputs and outputs around tool calls
+- Identify patterns in tool usage across users and traces
+
+## Tools in traces and generations
+
+Tool calls also appear as tags directly in the [Traces](/docs/llm-analytics/traces) and [Generations](/docs/llm-analytics/generations) views, making it easy to spot which conversations involved tool use at a glance.
+
+When a generation calls more than 5 tools, the additional tools are collapsed behind a "+N more" tag — hover over it to see the full list.
+
+## Supported formats
+
+PostHog automatically extracts tool calls from all major LLM response formats:
+
+- **OpenAI** (Chat Completions and Responses API)
+- **Anthropic** (tool_use content blocks)
+- **OpenAI Agents SDK** (function tool calls)
+- **Vercel AI SDK** and other normalized formats
+
+If your SDK already sets `$ai_tools_called` on the generation event, PostHog respects that value and skips automatic extraction.

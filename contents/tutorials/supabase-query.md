@@ -15,7 +15,7 @@ Thanks to modern advances in <RainbowText>enterprise synergy</RainbowText>™, w
 > **Note:** We currently don't support connections using IPv6, therefore, you will need to enable IPv4 connections to your database. If you have enabled IPv4 connections, you can [connect directly](https://supabase.com/docs/guides/database/connecting-to-postgres#direct-connection) to your database with a simple connection string. Alternatively, you can use Supabase's [session pooler connection](https://supabase.com/docs/guides/database/connecting-to-postgres#shared-pooler). The shared pooler is IPv4 compatible by default, and it is included in new Supabase projects for free.
 > <ProductScreenshot imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/supabase_connection_methods_c6fe1c0f48.png" imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/supabase_connection_methods_c6fe1c0f48.png" alt="Supabase data warehouse link setup in PostHog" classes="rounded" />
 
-To start, you need both a Supabase and PostHog account. Once you have those, head to PostHog's [data pipeline sources tab](https://us.posthog.com/pipeline/sources) and:
+To start, you need both a Supabase and PostHog account. Once you have those, head to PostHog's [data pipeline sources tab](https://app.posthog.com/data-management/sources) and:
 
 1. Click **New source**
 2. Choose the **Supabase** option by clicking **Link.**

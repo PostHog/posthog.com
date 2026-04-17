@@ -113,9 +113,9 @@ import Root, { RootErrorBoundary } from "./app/root";
 import posthog from 'posthog-js'; // +
 import { PostHogProvider } from '@posthog/react' // +
 
-posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, { // +
+posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_TOKEN, { // +
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
-  defaults: '2025-11-30', // +
+  defaults: '2026-01-30', // +
 }); // +
 
 const router = createBrowserRouter([...]);
@@ -196,9 +196,9 @@ Now that you've set up PostHog for React Router V7 in data mode, you can continu
 To help PostHog track your user sessions across the client and server, you'll need to add the `__add_tracing_headers: ['your-backend-domain1.com', 'your-backend-domain2.com', ...]` option to your PostHog initialization:
 
 ```tsx
-posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
+posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_TOKEN, {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
-  defaults: '2025-11-30',
+  defaults: '2026-01-30',
   __add_tracing_headers: [ window.location.host, 'localhost' ], // +
 });
 ```

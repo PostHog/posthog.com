@@ -7,42 +7,55 @@ import { useApp } from '../../context/App'
 
 // Competitor data imports
 import { ab_tasty } from '../../hooks/competitorData/ab_tasty'
+import { activecampaign } from 'hooks/competitorData/activecampaign'
 import { adobe_analytics } from '../../hooks/competitorData/adobe_analytics'
 import { airbrake } from '../../hooks/competitorData/airbrake'
 import { amplitude } from '../../hooks/competitorData/amplitude'
 import { appcues } from '../../hooks/competitorData/appcues'
 import { appsignal } from '../../hooks/competitorData/appsignal'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
+import { better_stack } from '../../hooks/competitorData/better_stack'
 import { braintrust } from '../../hooks/competitorData/braintrust'
 import { bugsnag } from '../../hooks/competitorData/bugsnag'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
 import { chameleon } from '../../hooks/competitorData/chameleon'
 import { clarity } from '../../hooks/competitorData/clarity'
+import { clickhouse_cloud } from '../../hooks/competitorData/clickhouse_cloud'
 import { cloudflare } from '../../hooks/competitorData/cloudflare'
 import { contentsquare } from '../../hooks/competitorData/contentsquare'
+import { counter } from 'hooks/competitorData/counter'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
 import { datadog } from '../../hooks/competitorData/datadog'
 import { devcycle } from '../../hooks/competitorData/devcycle'
+import { drip } from '../../hooks/competitorData/drip'
 import { dynamic_yield } from '../../hooks/competitorData/dynamic_yield'
+import { dynatrace } from '../../hooks/competitorData/dynatrace'
+import { elastic } from '../../hooks/competitorData/elastic'
 import { eppo } from '../../hooks/competitorData/eppo'
 import { fathom } from '../../hooks/competitorData/fathom'
 import { fivetran } from '../../hooks/competitorData/fivetran'
 import { flagsmith } from '../../hooks/competitorData/flagsmith'
 import { fullstory } from '../../hooks/competitorData/fullstory'
 import { ga4 } from '../../hooks/competitorData/ga4'
+import { getresponse } from '../../hooks/competitorData/getresponse'
 import { glassbox } from '../../hooks/competitorData/glassbox'
 import { glitchtip } from '../../hooks/competitorData/glitchtip'
+import { grafana_loki } from 'hooks/competitorData/grafana_loki'
 import { growthbook } from '../../hooks/competitorData/growthbook'
 import { harness } from '../../hooks/competitorData/harness'
 import { heap } from '../../hooks/competitorData/heap'
 import { helicone } from '../../hooks/competitorData/helicone'
+import { hightouch } from '../../hooks/competitorData/hightouch'
 import { hotjar } from '../../hooks/competitorData/hotjar'
 import { kameleoon } from '../../hooks/competitorData/kameleoon'
+import { kissmetrics } from '../../hooks/competitorData/kissmetrics'
+import { klaviyo } from 'hooks/competitorData/klaviyo'
 import { langfuse } from '../../hooks/competitorData/langfuse'
 import { langsmith } from '../../hooks/competitorData/langsmith'
 import { launchdarkly } from '../../hooks/competitorData/launchdarkly'
 import { logrocket } from '../../hooks/competitorData/logrocket'
 import { lucky_orange } from '../../hooks/competitorData/lucky_orange'
+import { mailerlite } from 'hooks/competitorData/mailerlite'
 import { matomo } from '../../hooks/competitorData/matomo'
 import { mixpanel } from '../../hooks/competitorData/mixpanel'
 import { microsoft_clarity } from '../../hooks/competitorData/microsoft_clarity'
@@ -50,6 +63,7 @@ import { mouseflow } from '../../hooks/competitorData/mouseflow'
 import { mparticle } from '../../hooks/competitorData/mparticle'
 import { mutiny } from '../../hooks/competitorData/mutiny'
 import { newrelic } from '../../hooks/competitorData/newrelic'
+import { omnisend } from 'hooks/competitorData/omnisend'
 import { openreplay } from '../../hooks/competitorData/openreplay'
 import { optimizely } from '../../hooks/competitorData/optimizely'
 import { pendo } from '../../hooks/competitorData/pendo'
@@ -71,11 +85,15 @@ import { statsig } from '../../hooks/competitorData/statsig'
 import { stripe } from '../../hooks/competitorData/stripe'
 import { survicate } from '../../hooks/competitorData/survicate'
 import { survey_monkey } from '../../hooks/competitorData/survey_monkey'
+import { telemetrydeck } from 'hooks/competitorData/telemetrydeck'
+import { tealium } from '../../hooks/competitorData/tealium'
+import { tinybird } from '../../hooks/competitorData/tinybird'
 import { umami } from '../../hooks/competitorData/umami'
 import { unleash } from '../../hooks/competitorData/unleash'
 import { userpilot } from '../../hooks/competitorData/userpilot'
 import { userflow } from '../../hooks/competitorData/userflow'
 import { uxcam } from '../../hooks/competitorData/uxcam'
+import { vercel_analytics } from 'hooks/competitorData/vercel_analytics'
 import { vwo } from '../../hooks/competitorData/vwo'
 import { walkme } from '../../hooks/competitorData/walkme'
 import { whatfix } from '../../hooks/competitorData/whatfix'
@@ -88,6 +106,7 @@ import { brevo } from '../../hooks/competitorData/brevo'
 import { cdpFeatures } from '../../hooks/featureDefinitions/cdp'
 import { dashboardsFeatures } from '../../hooks/featureDefinitions/dashboards'
 import { dataWarehouseFeatures } from '../../hooks/featureDefinitions/data_warehouse'
+import { endpointsFeatures } from '../../hooks/featureDefinitions/endpoints'
 import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_tracking'
 import { experimentsFeatures } from '../../hooks/featureDefinitions/experiments'
 import { featureFlagsFeatures } from '../../hooks/featureDefinitions/feature_flags'
@@ -102,7 +121,8 @@ import { sessionReplayFeatures } from '../../hooks/featureDefinitions/session_re
 import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
 import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analytics'
 import { workflowsFeatures } from '../../hooks/featureDefinitions/workflows'
-
+import { logsFeatures } from 'hooks/featureDefinitions/logs'
+import { logs } from 'hooks/productData/logs'
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
     path?: string
@@ -143,6 +163,7 @@ export default function ProductComparisonTable({
         dashboards: dashboardsFeatures,
         data_warehouse: dataWarehouseFeatures,
         error_tracking: errorTrackingFeatures,
+        endpoints: endpointsFeatures,
         experiments: experimentsFeatures,
         feature_flags: featureFlagsFeatures,
         heatmaps: heatmapsFeatures,
@@ -155,6 +176,7 @@ export default function ProductComparisonTable({
         surveys: surveysFeatures,
         web_analytics: webAnalyticsFeatures,
         workflows: workflowsFeatures,
+        logs: logsFeatures,
     }
 
     // Resolve nested nodes by dot-path
@@ -586,42 +608,55 @@ export default function ProductComparisonTable({
     // Competitor data
     const competitorData: Record<string, any> = {
         ab_tasty,
+        activecampaign,
         adobe_analytics,
         airbrake,
         amplitude,
         appcues,
         appsignal,
         baremetrics,
+        better_stack,
         braintrust,
         bugsnag,
         chartmogul,
         chameleon,
         clarity,
+        clickhouse_cloud,
         cloudflare,
         contentsquare,
+        counter,
         crazy_egg,
         datadog,
         devcycle,
         dynamic_yield,
+        dynatrace,
+        drip,
+        elastic,
         eppo,
         fathom,
         fivetran,
         flagsmith,
         fullstory,
         ga4,
+        getresponse,
         glassbox,
         glitchtip,
+        grafana_loki,
         growthbook,
         harness,
         heap,
         helicone,
         hotjar,
+        hightouch,
         kameleoon,
+        kissmetrics,
+        klaviyo,
         langfuse,
         langsmith,
         launchdarkly,
         logrocket,
         lucky_orange,
+        mailerlite,
         matomo,
         mixpanel,
         microsoft_clarity,
@@ -629,6 +664,7 @@ export default function ProductComparisonTable({
         mparticle,
         mutiny,
         newrelic,
+        omnisend,
         openreplay,
         optimizely,
         pendo,
@@ -650,11 +686,15 @@ export default function ProductComparisonTable({
         stripe,
         survicate,
         survey_monkey,
+        telemetrydeck,
+        tealium,
+        tinybird,
         umami,
         unleash,
         userpilot,
         userflow,
         uxcam,
+        vercel_analytics,
         vwo,
         walkme,
         whatfix,

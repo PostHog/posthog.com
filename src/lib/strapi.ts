@@ -83,6 +83,12 @@ export type ProfileData = {
         description: string
         notes: string
     }[]
+    tShirt?: {
+        id?: number
+        fit: 'unisex' | 'female' | null
+        size: 'XS' | 'S' | 'M' | 'L' | 'XL' | '2XL' | '3XL' | null
+        additionalInfo: string | null
+    } | null
 }
 
 export type UserData = {

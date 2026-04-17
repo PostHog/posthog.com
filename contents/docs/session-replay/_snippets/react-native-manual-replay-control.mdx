@@ -1,0 +1,24 @@
+> Requires `posthog-react-native` >= [4.36.0](https://github.com/PostHog/posthog-js/releases) and `posthog-react-native-session-replay` >= [1.3.0](https://github.com/PostHog/posthog-react-native-session-replay/releases).
+
+Setting `sessionReplay` to `false` in your PostHog configuration will prevent PostHog from automatically starting session recordings on SDK setup.
+
+You can manually control when to start and stop session recordings using the following methods:
+
+- `startSessionRecording(resumeCurrent?: boolean)`
+  - Set **resumeCurrent** to `true` to resume a previous session recording (Default). 
+  - Set **resumeCurrent** to `false` to start a new session recording. 
+- `stopSessionRecording()` 
+  - Stops/pauses the current session recording.
+
+```typescript
+// Start recording (resume current session)
+await posthog.startSessionRecording()
+
+// Start recording with a new session
+await posthog.startSessionRecording(false)
+
+// Stop recording
+await posthog.stopSessionRecording()
+```
+
+> **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).

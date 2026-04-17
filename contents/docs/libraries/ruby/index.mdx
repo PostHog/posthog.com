@@ -25,6 +25,12 @@ import RubyInstall from '../../integrate/_snippets/install-ruby.mdx'
 
 <RubyInstall />
 
+## Identifying users
+
+import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx'
+
+<IdentifyBackendCallout />
+
 ## Capturing events
 
 import RubySendEvents from '../../integrate/send-events/_snippets/send-events-ruby.mdx'
@@ -100,7 +106,7 @@ If you have `preload_app true` in your unicorn config, you can use the [`after_f
 ```ruby
 after_fork do |server, worker|
   $posthog = PostHog::Client.new(
-    api_key: '<ph_project_api_key>',
+    api_key: '<ph_project_token>',
     personal_api_key: '<ph_personal_api_key>'
     host: '<ph_client_api_host>',
     on_error: Proc.new { |status, msg| print msg }
@@ -115,7 +121,7 @@ If you use Puma with multiple workers, you can use the `on_worker_boot` hook (wh
 ```ruby
 on_worker_boot do
   $posthog = PostHog::Client.new(
-    api_key: '<ph_project_api_key>',
+    api_key: '<ph_project_token>',
     personal_api_key: '<ph_personal_api_key>'
     host: '<ph_client_api_host>',
     on_error: Proc.new { |status, msg| print msg }
@@ -181,7 +187,13 @@ If the optional `distinct_id` is not provided in the group identify call, it def
 
 You can capture exceptions using the `posthog-ruby` library. This enables you to see stack traces and debug errors in your application. Learn more in our [error tracking docs](/docs/error-tracking/installation/ruby).
 
-> **Note:** The Ruby SDK currently only supports manual exception capture. Automatic exception capture is not yet available.
+<CalloutBox icon="IconRocket" title="Using Rails?" type="fyi">
+
+The [posthog-rails](/docs/libraries/ruby-on-rails) gem provides automatic exception capture, ActiveJob instrumentation, and user context out of the box. See our [Rails error tracking guide](/docs/error-tracking/installation/ruby-on-rails) for details.
+
+</CalloutBox>
+
+For non-Rails Ruby applications, you can manually capture exceptions:
 
 To capture exceptions, use the `capture_exception` method:
 

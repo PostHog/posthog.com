@@ -1,0 +1,401 @@
+---
+title: Logging best practices
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import Tab from 'components/Tab'
+
+Most logging is bad. Not because people don't log enough. They log too much of the wrong things and too little of the right things. The result is millions of lines that are expensive to store and useless to query.
+
+This guide covers what actually makes logs useful in production systems. PostHog ingests logs via [OpenTelemetry (OTLP)](/docs/logs/installation), so the patterns here are built around OTel's structured logging model: resource attributes, log attributes, and trace context.
+
+This guide covers:
+
+- [Centralize your logs](#centralize-your-logs)
+- [Logging requests, not code](#log-what-happened-to-requests-not-what-your-code-is-doing)
+- [Structured logging](#use-structured-logging)
+- [Cardinality and dimensionality](#think-in-cardinality-and-dimensionality)
+- [Business context and OTel attributes](#include-business-context)
+- [Building wide events](#build-events-throughout-the-request-lifecycle)
+- [Log levels](#use-log-levels-correctly)
+- [Sampling](#sample-strategically)
+- [Trace and session context](#add-trace-and-session-context)
+- [Schema evolution](#treat-your-log-schema-like-an-api-contract)
+- [What not to log](#what-not-to-log)
+- [Checklist](#logging-checklist)
+
+## Centralize your logs
+
+Centralizing your logs makes it possible to search across all your services in one place.
+
+With PostHog, your logs live alongside your [Product Analytics](/docs/product-analytics), [Session Replays](/docs/session-replay), and [Feature Flags](/docs/feature-flags), so you can go from a log line to a user's session to the flag variant they were on without switching tools.
+
+If you're already using `posthog.capture()`, you might wonder how logs differ from events. The key distinction is:
+
+- Events track what the user did (e.g. clicks, signups, purchases, feature usage)
+- Logs track what the system did (e.g. API requests, errors, retries, timeouts, configuration failures)
+
+If you've been capturing things like `database_connection_failed` or `stripe_api_timeout` as PostHog events, those belong in logs instead.
+
+## Log what happened to requests, not what your code is doing
+
+This is the single most important shift you can make.
+
+```
+logger.info("Entering payment processing")
+logger.info("Validating card details")
+logger.info("Calling Stripe API")
+logger.info("Stripe API returned")
+logger.info("Updating database")
+logger.info("Payment complete")
+```
+
+Six log lines, none of them useful in production at `INFO` level. They tell you what the code *does* (you already know that, you wrote it), not what happened to a specific request.
+
+Step-level logs aren't universally wrong. They're valuable at `DEBUG` level for diagnosing race conditions, understanding ordering in concurrent systems, or tracing through complex state machines. The point is: don't make them your default.
+
+Your `INFO`-level logs should be wide events. Your `DEBUG`-level logs can be as granular as you need, turned on selectively when you're actively investigating.
+
+Instead, emit one rich log per request per service:
+
+```json
+{
+  "event": "payment.completed",
+  "duration_ms": 342,
+  "posthog_distinct_id": "user_abc123",
+  "order_id": "ord_789",
+  "amount_cents": 4999,
+  "currency": "USD",
+  "payment_method": "card",
+  "provider": "stripe",
+  "provider_latency_ms": 287,
+  "retry_count": 0,
+  "feature_flags": ["new_checkout_flow"],
+  "subscription_tier": "pro"
+}
+```
+
+One line. Everything you need to debug, alert on, or analyze, all in one place. This is a **wide event** (sometimes called a canonical log line), and it's the foundation of useful logging.
+
+This pattern works cleanly for request-response services. For long-running processes, event-driven architectures, or workflows that span multiple services over minutes or hours, a pure single-event approach is less practical.
+
+In those cases, use a hybrid: emit a wide event at each meaningful stage boundary (job started, stage completed, job finished), with each event carrying the full accumulated context up to that point. You still get the benefits of wide events without relying on a single emit that might never fire.
+
+## Use structured logging
+
+Plain text logs are optimized for writing, not querying. Structured logs (JSON key-value pairs) are the opposite. They're queryable, filterable, and machine-readable.
+
+**Bad:**
+```
+Payment failed for user abc123 - Stripe error: card_declined (amount: $49.99)
+```
+
+**Good:**
+```json
+{
+  "event": "payment.failed",
+  "posthog_distinct_id": "user_abc123",
+  "error_type": "card_declined",
+  "provider": "stripe",
+  "amount_cents": 4999
+}
+```
+
+The structured version lets you query "all card_declined errors for pro-tier users in the last hour" without regex. The plain text version requires you to hope your string parsing doesn't break on edge cases.
+
+<CalloutBox icon="IconInfo" title="Structured logs in PostHog" type="fyi">
+
+PostHog's log search works across all fields in structured logs, so the more context you include, the more useful your [search and filtering](/docs/logs/search) becomes. Every key-value pair is a field you can filter on.
+
+</CalloutBox>
+
+## Think in cardinality and dimensionality
+
+Two concepts that separate useful logs from noise. You want both high cardinality *and* high dimensionality. One wide event with 50 fields tells you more than 50 separate log lines with three fields each.
+
+<details>
+<summary>What is cardinality?</summary>
+
+Cardinality is the number of unique values a field has. `posthog_distinct_id` has high cardinality (millions of unique values). `log_level` has low cardinality (5 values). High-cardinality fields are what enable you to debug specific requests and users.
+
+Some teams avoid high-cardinality fields because older logging tools can't handle them efficiently. Modern columnar databases (like ClickHouse, which PostHog uses under the hood) handle high cardinality just fine. Don't let outdated tooling concerns stop you from logging the fields that matter.
+
+</details>
+
+<details>
+<summary>What is dimensionality?</summary>
+
+Dimensionality is the number of fields per log event. A log with three fields (`timestamp`, `level`, `message`) has low dimensionality. A wide event with 30+ fields has high dimensionality.
+
+High dimensionality is what makes wide events powerful. Instead of scattering context across dozens of log lines, you pack it all into one event. This means every query can filter, group, and correlate across all those fields simultaneously.
+
+</details>
+
+## Include business context
+
+Technical context (status codes, latency, error types) is necessary but insufficient. Add the business context that turns debugging into understanding:
+
+- **Who:** user ID, account type, subscription tier, organization
+- **What:** order ID, cart contents, item count, Feature Flags
+- **Where:** service name, deployment version, region
+- **How:** payment method, auth provider, API version
+- **How much:** amount, quantity, retry count
+
+This lets you move from "500 errors spiked" to "500 errors spiked for enterprise users using the new checkout flow with coupon codes."
+
+In OpenTelemetry, this context splits into two layers.
+
+1. **Resource attributes** are set once when your service starts. They describe the service itself: `service.name`, `deployment.environment`, `service.version`, `cloud.region`. Every log from that process automatically includes them.
+2. **Log attributes** are set per event. They describe what happened in that specific request: `posthog_distinct_id`, `order_id`, `payment_method`, `duration_ms`.
+
+<CalloutBox icon="IconInfo" title="Correlate with Product Analytics" type="fyi">
+
+If you're using PostHog for [Product Analytics](/docs/product-analytics), the business context in your logs can match the properties on your events. This means you can go from a log search result straight to seeing how that user behaves in your product, and vice versa.
+
+</CalloutBox>
+
+## Build events throughout the request lifecycle
+
+Don't emit 15 separate logs as a request moves through your code. Instead, accumulate context onto a single event and emit it once when the request completes.
+
+The implementation details vary by language, but the pattern is always the same. These examples use the OpenTelemetry APIs from the [installation guide](/docs/logs/installation):
+
+<Tab.Group tabs={['Python', 'Node.js', 'Go']}>
+<Tab.List>
+  <Tab>Python</Tab>
+  <Tab>Node.js</Tab>
+  <Tab>Go</Tab>
+</Tab.List>
+<Tab.Panels>
+  <Tab.Panel>
+
+  Python's standard `logging` module with the `extra` parameter. The OpenTelemetry SDK (configured in the [installation guide](/docs/logs/installation/python)) picks up these attributes automatically.
+
+  ```python
+  import logging
+
+  logger = logging.getLogger(__name__)
+
+  def handle_checkout(request):
+      attrs = {
+          "event": "checkout",
+          "posthog_distinct_id": request.user.id,
+          "subscription_tier": request.user.tier,
+      }
+
+      cart = get_cart(request.user)
+      attrs.update({
+          "item_count": len(cart.items),
+          "cart_total_cents": cart.total_cents,
+      })
+
+      try:
+          payment = process_payment(cart)
+          attrs.update({
+              "payment_method": payment.method,
+              "provider": payment.provider,
+              "provider_latency_ms": payment.latency_ms,
+              "status": "success",
+          })
+          logger.info("checkout completed", extra=attrs)
+      except PaymentError as e:
+          attrs.update({"status": "failed", "error_type": e.code})
+          logger.error("checkout completed", extra=attrs)
+          raise
+  ```
+
+  </Tab.Panel>
+  <Tab.Panel>
+
+  The OpenTelemetry Logs API with `logger.emit()`. Attributes are passed as a dictionary on each log record. See the [installation guide](/docs/logs/installation/nodejs) for SDK setup.
+
+  ```js
+  import { logs } from "@opentelemetry/api-logs";
+
+  const logger = logs.getLogger("my-app");
+
+  function handleCheckout(req, res) {
+    const attrs = {
+      event: "checkout",
+      posthog_distinct_id: req.user.id,
+      subscription_tier: req.user.tier,
+    };
+
+    const cart = getCart(req.user);
+    Object.assign(attrs, { item_count: cart.items.length, cart_total_cents: cart.totalCents });
+
+    try {
+      const payment = processPayment(cart);
+      Object.assign(attrs, {
+        payment_method: payment.method,
+        provider: payment.provider,
+        provider_latency_ms: payment.latencyMs,
+        status: "success",
+      });
+      logger.emit({ severityText: "INFO", body: "checkout completed", attributes: attrs });
+    } catch (e) {
+      Object.assign(attrs, { status: "failed", error_type: e.code });
+      logger.emit({ severityText: "ERROR", body: "checkout completed", attributes: attrs });
+      throw e;
+    }
+  }
+  ```
+
+  </Tab.Panel>
+  <Tab.Panel>
+
+  Go's standard `slog` package, bridged to OpenTelemetry via `otelslog` (configured in the [installation guide](/docs/logs/installation/go)). Each `slog.With()` call returns a new logger with additional attributes.
+
+  ```go
+  func HandleCheckout(w http.ResponseWriter, r *http.Request) {
+      log := slog.With(
+          "event", "checkout",
+          "posthog_distinct_id", r.Context().Value("posthog_distinct_id"),
+      )
+
+      cart, _ := getCart(r.Context())
+      log = log.With(
+          "item_count", len(cart.Items),
+          "cart_total_cents", cart.TotalCents,
+      )
+
+      payment, err := processPayment(r.Context(), cart)
+      if err != nil {
+          log.With(
+              "status", "failed",
+              "error_type", err.Code,
+          ).ErrorContext(r.Context(), "checkout completed")
+          return
+      }
+
+      log.With(
+          "payment_method", payment.Method,
+          "provider", payment.Provider,
+          "provider_latency_ms", payment.LatencyMs,
+          "status", "success",
+      ).InfoContext(r.Context(), "checkout completed")
+  }
+  ```
+
+  </Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+One log line at the end, containing everything. Each step accumulates attributes, and the final emit carries them all.
+
+<CalloutBox icon="IconInfo" title="Watch out for context bloat" type="fyi">
+
+Only bind scalar values (strings, numbers, booleans) to your log context. If you accidentally attach a full API response, a large query result, or a serialized object, you'll hit payload size limits or memory issues. Log the fields you need for debugging, not entire data structures.
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="What if the process crashes?" type="fyi">
+
+If your application crashes before reaching the end of a request (segfault, OOM, power failure), the accumulated context never gets emitted. Make sure you have a global exception handler or `finally` block that flushes whatever context has been collected. For long-running background jobs, consider emitting a "started" log at the beginning and "checkpoint" logs at key milestones, so a crash doesn't mean total data loss.
+
+</CalloutBox>
+
+## Use log levels correctly
+
+Log levels exist to control signal-to-noise ratio. Use them consistently:
+
+| Level | Use for | Example |
+|-------|---------|---------|
+| `ERROR` | Something failed and needs attention | Payment processing failed, database connection lost |
+| `WARN` | Something unexpected that didn't cause failure | Retry succeeded on third attempt, deprecated API version used |
+| `INFO` | Normal operations worth recording | Request completed, user signed up, deployment finished |
+| `DEBUG` | Detailed info for active debugging | Cache hit/miss ratios, query plans, intermediate state |
+
+Two rules of thumb:
+
+<CalloutBox icon="IconInfo" title="The noisy ERROR trap" type="fyi">
+
+1. If you're logging at `ERROR`, someone should eventually act on it. If no one ever looks at an error log, it's not an error. It's noise.
+2. `DEBUG` logs should be off in production by default. Turn them on for specific services or requests when actively investigating.
+
+</CalloutBox>
+
+## Sample strategically
+
+At scale, logging everything is expensive and unnecessary. Use **tail sampling**. Make sampling decisions after a request completes, based on the outcome:
+
+- **Keep 100%** of errors and exceptions
+- **Keep 100%** of requests that exceeded your p99 latency threshold
+- **Keep 100%** of requests from important accounts or flagged sessions
+
+This gives you full visibility into problems while keeping costs manageable. You lose nothing useful. The sampled successful requests are statistically representative.
+
+Tail sampling is the ideal, but it's genuinely hard to implement well. Your logging pipeline needs to buffer data in memory until a request completes, and in distributed systems you need consistent sampling decisions across services for the same trace. This is typically handled by an OpenTelemetry Collector with a [tail sampling processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/tailsamplingprocessor), but configuring it correctly takes real effort.
+
+If your infrastructure doesn't support tail sampling yet, **head sampling** (randomly keeping a fixed percentage of requests up front) is a pragmatic starting point. It's less precise (you'll drop some errors and keep some boring requests), but it's better than logging everything or nothing. You can always move to tail sampling later.
+
+<details>
+<summary>How much does log storage cost in PostHog?</summary>
+
+PostHog Logs is billed by GB ingested per month with volume-based pricing. Use the calculator on the [pricing page](/docs/logs/pricing) for a full breakdown.
+
+</details>
+
+## Add trace and session context
+
+Isolated logs are hard to correlate. Adding trace IDs and session IDs connects individual log events to the broader request journey.
+
+Pick a library that supports structured output, async/buffered writes, and low per-call overhead. If you're using the OpenTelemetry SDK, the OTel log bridge adds minimal overhead on top of your chosen library, so the library itself is the bottleneck, not the export pipeline.
+
+When in doubt, benchmark your logging path under realistic load before shipping to production.
+
+Since PostHog uses OpenTelemetry, trace context propagation is automatic. Your logs are already correlated by trace ID if you have the OTel SDK configured. If you're also using PostHog for Product Analytics or Session Replay, you can go further and [link your logs to Session Replays](/docs/logs/link-session-replay), giving you the user's full experience alongside your backend logs.
+
+<CalloutBox icon="IconRewindPlay" title="Link logs to Session Replays" type="fyi">
+
+By adding a PostHog session ID and distinct ID to your log attributes, you can jump directly from a log line to the user's Session Replay. See the [Session Replay linking guide](/docs/logs/link-session-replay) to set this up.
+
+</CalloutBox>
+
+## Treat your log schema like an API contract
+
+Once you adopt wide events, your field names and value formats become dependencies. Dashboards, alerts, and saved searches all break silently when someone renames `error_type` to `err_code` or changes `duration_ms` from an integer to a string. Treat changes to your log schema the same way you'd treat changes to a public API: communicate them, deprecate before removing, and avoid breaking existing consumers.
+
+## What not to log
+
+Some things should never appear in your logs:
+
+- **Secrets:** API keys, passwords, tokens, credit card numbers. If you log these by accident, you now have a security incident *and* a logging problem.
+- **Request and response bodies:** Logging full payloads is one of the fastest ways to blow up storage costs and accidentally capture PII, auth tokens, or sensitive user data. Log the metadata (status code, content length, duration), not the body.
+- **Personal data you don't need:** Full email addresses, IP addresses, or other PII beyond what's required for debugging. If you need to correlate logs to a user but can't store raw identifiers, hash or tokenize them. Check your GDPR, HIPAA, or other compliance requirements, as even fields like `posthog_distinct_id` or `email` may need masking depending on your jurisdiction.
+- **High-frequency health checks:** Load balancer pings and liveness probes generate massive volume with zero debugging value. Exclude them.
+- **Unnecessary duplication:** If a downstream service logs the same event, you don't always need to log it again upstream. That said, when you're debugging a production incident at 2am, having key context from downstream calls in your own service's logs can save you from correlating across multiple systems under pressure. The rule of thumb: don't log a play-by-play of every call you make, but do include the outcome and any data you'd need to debug without switching to another service's logs.
+
+## Logging checklist
+
+Use this to audit your existing logging or as a starting point for a new service.
+
+### Structural requirements
+
+- Logs are structured JSON key-value pairs, not plain text strings
+- Each request emits one wide event at the end, not a trail of step-by-step messages
+- Only scalar values (strings, numbers, booleans) are logged. No raw objects, large arrays, or full API response bodies
+- Context is accumulated throughout the request lifecycle (e.g., `cart_total` added once calculated, `payment_id` added later)
+
+### Business and trace context
+
+- **The "Who":** `posthog_distinct_id`, `org_id`, `account_tier`, or equivalent
+- **The "What":** `order_id`, `transaction_id`, `feature_flag_variants`, or equivalent
+- **The "Where":** `service.name`, `service.version`, `deployment.environment` set as OTel resource attributes
+- **Trace IDs:** OpenTelemetry `trace_id` is attached so you can jump from logs to traces
+- **Session IDs:** PostHog `session_id` is included to enable [Session Replay linking](/docs/logs/link-session-replay)
+
+### Levels and sampling
+
+- Log levels are correct: INFO for request completion, WARN for retries or non-breaking issues, ERROR only if someone needs to act
+- Health checks (`/healthz`) and load balancer pings are excluded or sampled down
+- A sampling strategy is in place (or planned) for high-traffic services
+- A `try`/`finally` or global error handler flushes log context if the process dies mid-request
+
+### Security and compliance
+
+- No secrets: API keys, Bearer tokens, and passwords are scrubbed
+- PII is masked: emails, physical addresses, and credit card numbers are hashed or removed per GDPR/HIPAA requirements
+- Request/response bodies are not logged (to avoid capturing sensitive user data)
+- Field names and value types are treated as a stable schema (changes are communicated)
+- [Link logs to Session Replays](/docs/logs/link-session-replay) for full user context

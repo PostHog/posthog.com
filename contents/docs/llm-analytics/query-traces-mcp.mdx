@@ -1,0 +1,50 @@
+---
+title: Query traces with MCP
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent query [LLM traces](/docs/llm-analytics) directly from your code editor. Check costs, monitor errors, and analyze model performance – without switching to the PostHog app.
+
+This works in any MCP client – Cursor, Windsurf, Claude Code, VS Code, and others.
+
+## How it works
+
+With MCP, your coding agent can:
+
+- **Check costs before and after deploys** – "What's my LLM spend today vs yesterday?" to catch cost regressions
+- **Monitor error rates** – "Are there any LLM errors in the last hour?" to detect issues early
+- **Compare models** – "Compare latency between GPT-4 and Claude for the chat feature" to evaluate model choices
+- **Investigate specific traces** – "Show me the most expensive LLM call from today" to find optimization opportunities
+
+## LLM Analytics tools
+
+The MCP server provides these tools for working with LLM traces:
+
+| Tool | Description |
+|------|-------------|
+| `get-llm-total-costs-for-project` | Get total LLM costs for the project, broken down by model. Useful for monitoring spend and detecting cost anomalies. |
+| `query-run` | Run a custom HogQL query against your LLM trace data. Supports filtering by model, feature, cost, latency, error status, and time range. |
+
+A typical workflow starts with `get-llm-total-costs-for-project` to check overall spend and identify which models are most expensive, then uses `query-run` with a HogQL query to drill into specific traces by feature, time range, or cost threshold.
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `What are my total LLM costs this week, broken down by model?`
+- `Find the most expensive LLM calls from the last 24 hours.`
+- `Are there any LLM errors today?`
+- `Compare token usage between GPT-4 and Claude for the search feature.`
+- `How has LLM latency changed over the past 7 days?`
+- `Show me traces where a single call cost more than $0.50.`
+
+## Install the MCP server
+
+The recommended way to install is with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+The wizard supports Claude, Cursor, Windsurf, VS Code, and more. You can also [configure it manually](/docs/model-context-protocol#manual-install).
+
+See the [MCP server docs](/docs/model-context-protocol) for full setup instructions.

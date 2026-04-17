@@ -1,0 +1,49 @@
+---
+title: Query web traffic with MCP
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent query [web analytics](/docs/web-analytics) data directly from your code editor. Check traffic trends, investigate anomalies, and build dashboards – without switching to the PostHog app.
+
+This works in any MCP client – Cursor, Windsurf, Claude Code, VS Code, and others.
+
+## How it works
+
+With MCP, your coding agent can:
+
+- **Check traffic after deploys** – "Did traffic to `/pricing` change after yesterday's deploy?" to validate changes
+- **Investigate anomalies** – "Why did pageviews drop this morning?" to quickly diagnose issues
+- **Analyze referral sources** – "Which sources are driving the most traffic to the blog?" to inform content decisions
+- **Monitor page performance** – "What's the bounce rate on our landing pages this week?" to catch regressions
+
+## Web Analytics tools
+
+The MCP server uses these tools for querying web analytics data:
+
+| Tool | Description |
+|------|-------------|
+| `query-run` | Run a HogQL query against your web analytics data. Supports pageview counts, bounce rates, session durations, traffic breakdowns, and path analysis. |
+| `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question about traffic. Returns the query for review before running. |
+| `insight-create-from-query` | Create a saved insight from a traffic query and add it to a dashboard. |
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `How many pageviews did we get today vs yesterday?`
+- `What are the top landing pages by traffic this week?`
+- `Show me traffic broken down by referral source for the past 30 days.`
+- `What's the bounce rate on /pricing compared to /docs?`
+- `Which countries are driving the most traffic?`
+- `Create a dashboard showing daily pageviews, top pages, and traffic by source.`
+
+## Install the MCP server
+
+The recommended way to install is with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+The wizard supports Claude, Cursor, Windsurf, VS Code, and more. You can also [configure it manually](/docs/model-context-protocol#manual-install).
+
+See the [MCP server docs](/docs/model-context-protocol) for full setup instructions.

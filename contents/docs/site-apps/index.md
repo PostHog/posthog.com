@@ -10,7 +10,7 @@ Site apps enable you to easily add functionality to your site without extra code
 
 ## Enabling apps
 
-Head to **Data pipelines** and click the [Site apps](https://us.posthog.com/pipeline/site-apps) tab. Here you can install official PostHog apps by clicking **+ New site-app**.
+Head to **Data pipelines** and click the [Site apps](https://app.posthog.com/apps) tab. Here you can install official PostHog apps by clicking **+ New site-app**.
 
 ## Available site apps
 

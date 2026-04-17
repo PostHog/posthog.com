@@ -118,8 +118,9 @@ Nailing these two things is the 80/20 of managing cracked engineers.
 
 ## Moar reading
 
-- Got the interview? [Here are the questions](/founders/what-to-ask-in-interviews) you should be asking. 
+- Got the interview? [Here are the questions](/founders/what-to-ask-in-interviews) you should be asking.
 - [Literally everything](/newsletter/hiring-at-posthog-lessons) we've learned about hiring at PostHog
 - A bunch of [myths and truths](/founders/early-stage-startup-hiring-strategy) I've learned about startup hiring in the last 10 years
+- See [how we actually run our hiring process](/handbook/people/hiring-process) at PostHog
 
 <NewsletterForm />

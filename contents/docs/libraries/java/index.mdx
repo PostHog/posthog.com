@@ -22,6 +22,11 @@ import JavaInstall from '../../integrate/_snippets/install-java.mdx'
 
 <JavaInstall />
 
+## Identifying users
+
+import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx'
+
+<IdentifyBackendCallout />
 
 ## Capturing events
 
@@ -188,15 +193,15 @@ Local evaluation improves performance by fetching flag definitions once and eval
 
 To enable local evaluation, you need:
 
-1. A **personal API key** (not your project API key)
-   - Generate one at: PostHog → Settings → Account → Personal API Keys
+1. A **personal API key** (not your project token)
+   - Generate one at: PostHog → Settings → Account → [Personal API Keys](https://app.posthog.com/settings/user-api-keys)
 2. Enable `localEvaluation` in your config
 
 ```java
 PostHogConfig config = PostHogConfig
-    .builder(POSTHOG_API_KEY)
+    .builder(POSTHOG_API_KEY) // This is your project token
     .host(POSTHOG_HOST)
-    .personalApiKey("phx_your_personal_api_key_here")
+    .personalApiKey("phx_your_personal_api_key_here") // This is your personal API key, required for local evaluation
     .localEvaluation(true)
     .pollIntervalSeconds(30)  // Optional: customize the rate which flag definitions are polled (default: 30s)
     .build();

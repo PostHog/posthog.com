@@ -67,11 +67,12 @@ Create two routes in the Pomerium Zero console, both using the public access pol
 | Route | From | To | Path prefix |
 |-------|------|-----|-------------|
 | PostHog | `https://e.yourdomain.com` | `https://us.i.posthog.com` | none |
-| PostHog Assets | `https://e.yourdomain.com` | `https://us-assets.i.posthog.com` | `/static` |
+| PostHog Assets (static) | `https://e.yourdomain.com` | `https://us-assets.i.posthog.com` | `/static` |
+| PostHog Assets (array) | `https://e.yourdomain.com` | `https://us-assets.i.posthog.com` | `/array` |
 
 Replace `e.yourdomain.com` with your subdomain. Replace `us` with `eu` for EU region.
 
-The assets route needs the `/static` prefix so it only matches requests for PostHog's JavaScript SDK and other static files. All other requests go to the main route.
+The assets routes need the `/static` and `/array` prefixes so they only match requests for PostHog's JavaScript SDK, remote config, and other static files. All other requests go to the main route.
 
 See [Pomerium's routing documentation](https://www.pomerium.com/docs/capabilities/routing) for detailed instructions.
 
@@ -84,14 +85,14 @@ In your application code, update your PostHog initialization:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -146,7 +147,16 @@ routes:
       - allow:
           or:
             - public: true
-    name: "PostHog Assets"
+    name: "PostHog Assets (static)"
+
+  - from: https://e.yourdomain.com
+    to: https://us-assets.i.posthog.com
+    prefix: "/array"
+    policy:
+      - allow:
+          or:
+            - public: true
+    name: "PostHog Assets (array)"
 ```
 
 ```yaml file=EU
@@ -166,14 +176,23 @@ routes:
       - allow:
           or:
             - public: true
-    name: "PostHog Assets"
+    name: "PostHog Assets (static)"
+
+  - from: https://e.yourdomain.com
+    to: https://eu-assets.i.posthog.com
+    prefix: "/array"
+    policy:
+      - allow:
+          or:
+            - public: true
+    name: "PostHog Assets (array)"
 ```
 
 </MultiLanguage>
 
 Replace `e.yourdomain.com` with your subdomain.
 
-The `public: true` policy allows unauthenticated access. The `prefix: "/static"` ensures the assets route only matches static file requests.
+The `public: true` policy allows unauthenticated access. The `prefix` values ensure the assets routes only match static file and remote config requests.
 
 See [Pomerium's routes documentation](https://www.pomerium.com/docs/reference/routes) for more configuration options.
 
@@ -197,14 +216,14 @@ In your application code, update your PostHog initialization:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -223,7 +242,7 @@ Confirm events are flowing through your proxy:
 1. Test the proxy directly:
 
     ```bash
-    curl -I https://e.yourdomain.com/decide?v=3
+    curl -I https://e.yourdomain.com/flags?v=2
     ```
 
     You should see a `200 OK` response without authentication prompts.
@@ -247,7 +266,7 @@ If users are prompted to log in when accessing your proxy, verify your policy ha
 
 ### 404 errors on static assets
 
-If the PostHog SDK fails to load, verify the assets route has the `/static` prefix configured and points to the correct domain (`us-assets.i.posthog.com` or `eu-assets.i.posthog.com`).
+If the PostHog SDK fails to load, verify the assets routes have the `/static` and `/array` prefixes configured and point to the correct domain (`us-assets.i.posthog.com` or `eu-assets.i.posthog.com`).
 
 ### DNS not resolving
 

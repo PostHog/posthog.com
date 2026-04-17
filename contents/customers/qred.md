@@ -62,4 +62,4 @@ Unsurprisingly (and convenient for us to highlight in this article), Lezgin does
 
 “Hell yes, I’d recommend PostHog. It’s just important to think about your setup — you can just use autocapture to grab everything and move fast, or you can tag exactly what you want to keep the bill lower. Either way works and you can still go from a usage funnel that’s automatically posted to Slack to a specific event to a session recording of a user and see what feature flags they’ve used. It’s incredible.”
 
-"Especially [the MCP.](https://github.com/PostHog/posthog/tree/master/products/mcp)"
+"Especially [the MCP.](https://github.com/PostHog/posthog/tree/master/services/mcp)"

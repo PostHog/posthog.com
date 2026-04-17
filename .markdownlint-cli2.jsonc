@@ -39,6 +39,7 @@
     "MD060": false
   },
   "ignores": [
-    "**/fixtures/**"
+    "**/fixtures/**",
+    ".vale/test/**"
   ]
 }

@@ -83,7 +83,7 @@ Reach out to all active users on the account, and let them know that access will
 
 #### Step 3 - Suspending user access
 
-To prevent users from being able to log in you need to go to the Django admin panel for their organization, then for each user account listed there open the user, uncheck the `Is Active` box and then save the user.
+To prevent users from being able to log in you need to go to the Django admin panel for their organization, then set the "Active" field to "No", with the reason selected from the dropdown: "Access revoked due to an unpaid balance." Then, hit save.
 
 After completing this, email or Slack all users in the organization letting them know that access has been suspended and what they can do to rectify the situation.  Also make it clear that if this isn't resolved within the next 7 days we will revert them back to the Free tier and they be subjected to the usage limits of that tier (e.g. they are likely to lose tracking data).
 
@@ -179,6 +179,14 @@ You can find a list of available plans in the billing repo. These are found insi
 Each plan can have a list of features, and a price.
 Features are used to infer which features are available in the product, for a customer on that plan.
 You can manually change the plan for a customer by updating the `plans_map` in the billing admin panel.
+
+### Paid features for employee side projects
+
+Employees can get access to paid features (like Boost) on personal or side projects. Ask in #team-billing with your organization ID and someone can set this up. There are two approaches for platform add-ons:
+
+1. **Special billing-only plan**: Add a plan like `boost-addon-20250602` to the customer's `plans_map` in the billing admin. These plans exist only in the billing system and grant features without a Stripe subscription.
+
+2. **Long trial**: Create a trial that does not auto-convert with a long `expires_at` date. This works well for temporary access or when you want a clear end date.
 
 ### Updating subscriptions
 

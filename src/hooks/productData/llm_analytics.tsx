@@ -23,6 +23,7 @@ import {
     IconLlmPromptManagement,
     IconLlmPromptEvaluation,
     IconDatabase,
+    IconPlug,
 } from '@posthog/icons'
 import {
     IconAnthropic,
@@ -38,6 +39,7 @@ import {
     IconTraceloop,
     IconVercel,
 } from 'components/OSIcons'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const llmAnalytics = {
     name: 'LLM Analytics',
@@ -49,6 +51,7 @@ export const llmAnalytics = {
     color: 'purple',
     colorSecondary: 'green-2',
     category: 'analytics',
+    wizardSupport: 'Coming soon',
     slider: {
         marks: [100000, 1000000, 10000000, 100000000],
         min: 100000,
@@ -87,7 +90,7 @@ export const llmAnalytics = {
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
             alt: 'LLM Analytics screenshot',
             classes: 'justify-end items-end pl-4 @lg:pl-6',
-            imgClasses: 'rounded-tl-lg shadow-2xl',
+            imgClasses: 'rounded-tl-md shadow-2xl',
         },
     },
     // hog: {
@@ -495,6 +498,34 @@ export const llmAnalytics = {
         //         </div>
         //     ),
         // },
+        {
+            title: 'MCP',
+            headline: 'Query LLM traces from your editor',
+            description:
+                'Check LLM costs, monitor errors, and analyze model performance from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            icon: <IconPlug />,
+            color: 'blue',
+            features: [
+                {
+                    title: 'Check costs before and after deploys',
+                    description: 'Compare LLM spend across periods to spot unexpected jumps before they compound.',
+                },
+                {
+                    title: 'Monitor errors',
+                    description: 'Surface failing LLM calls so your agent can flag or fix them immediately.',
+                },
+                {
+                    title: 'Compare models',
+                    description:
+                        'Evaluate cost, latency, and token usage across models to pick the right one per feature.',
+                },
+                {
+                    title: 'Find expensive traces',
+                    description: 'Drill into individual calls to identify optimization opportunities.',
+                },
+            ],
+            children: <MCPInstall />,
+        },
     ],
     postHogOnPostHog: {
         title: 'How PostHog uses LLM Analytics',

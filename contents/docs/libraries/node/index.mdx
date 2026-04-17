@@ -23,6 +23,12 @@ import NodeInstall from '../../integrate/_snippets/install-node.mdx'
 
 <NodeInstall />
 
+## Identifying users
+
+import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx'
+
+<IdentifyBackendCallout />
+
 ### Options
 
 | Variable                      | Description                                                                                                           | Default value              |
@@ -89,6 +95,50 @@ client.alias({
 ```
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+
+## Super properties
+
+> Requires `posthog-node` version >= 5.25.0.
+
+Super properties are properties that are automatically included with every event captured by the client. Use `register` to set them:
+
+```node
+client.register({
+  app_version: '1.2.0',
+  environment: 'production',
+})
+
+// Both events include app_version and environment
+client.capture({
+  distinctId: 'distinct_id',
+  event: 'page_viewed',
+})
+client.capture({
+  distinctId: 'distinct_id',
+  event: 'button_clicked',
+})
+```
+
+If an event sets a property with the same key as a super property, the event's property takes precedence:
+
+```node
+client.register({ environment: 'production' })
+
+// This event is captured with environment='staging'
+client.capture({
+  distinctId: 'distinct_id',
+  event: 'page_viewed',
+  properties: { environment: 'staging' },
+})
+```
+
+To remove a super property, use `unregister`:
+
+```node
+client.unregister('environment')
+```
+
+Super properties are **global** — they apply to every event for the lifetime of the client instance. For properties that should only apply to a specific scope (e.g. a single request or transaction), use [contexts](#contexts) instead.
 
 ## Contexts
 
@@ -224,6 +274,8 @@ import NodeFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/f
 
 <NodeFeatureFlagsCode />
 
+> **Note:** For remote config flags, see the [remote config documentation](/docs/feature-flags/remote-config). Remote config requires the [Feature Flags secure API key](/docs/feature-flags/remote-config#step-1-find-your-feature-flags-secure-api-key) passed as the `personalApiKey` option.
+
 import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
 
 ### Local evaluation
@@ -306,7 +358,7 @@ As of `posthog-node` v3.0, the default now is to disregard the server IP, not ad
 You can go back to previous behavior by setting `disableGeoip` to false in your initialization:
 
 ```node
-const posthog = new PostHog('<ph_project_api_key>', {
+const posthog = new PostHog('<ph_project_token>', {
   host: '<ph_client_api_host>',
   disableGeoip: false
 })

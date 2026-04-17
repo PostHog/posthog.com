@@ -1,0 +1,8 @@
+extends: existence
+message: 'Add a blank line between long bullet points for better readability in Markdown.'
+link: https://posthog.com/handbook/content/posthog-style-guide
+level: warning
+scope: text
+# Match long bullet points (>100 chars or 2+ sentences) immediately followed by another bullet point
+tokens:
+    - '(?:^[-*]\s+.{100,}|^[-*]\s+[^\n]*\.[^\n]*\.[^\n]*)\n[-*]\s+'

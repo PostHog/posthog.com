@@ -117,7 +117,7 @@ PostHog currently comprises 91 people, the vast majority of whom have "engineer"
 
 * Hire customer success and sales people with a technical background.
 
-* Hire support engineers who have software development experience.
+* Hire [support engineers who have software development experience](/newsletter/engineeringification-of-everything).
 
 * [Use GitHub as our content management system](/blog/github-cms).
 

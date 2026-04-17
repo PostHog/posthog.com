@@ -52,10 +52,23 @@ exports.onPreInit = async function (_, options) {
 
 const cloudinaryCache = {}
 
+let templateListPromise: Promise<any[]> | null = null
+async function getTemplateList() {
+    if (!templateListPromise) {
+        templateListPromise = fetch('https://us.posthog.com/api/public_hog_function_templates?limit=350/')
+            .then((res) => {
+                if (res.status !== 200) throw `Got status code ${res.status}`
+                return res.json()
+            })
+            .then((body) => body.results)
+    }
+    return templateListPromise
+}
+
 const REPO_CONFIGS = {
     'posthog-main-repo': {
         stripPrefix: '/docs/published/',
-        pathPrefix: '/handbook/engineering',
+        pathPrefix: '',
     },
 }
 
@@ -240,16 +253,10 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             const templateIds = node.frontmatter.templateId
 
             try {
+                const results = await getTemplateList()
                 const templateConfigs: { templateId: string; inputs_schema: any; name: string; type: string }[] = []
                 for (const templateId of templateIds) {
-                    const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates?limit=350/`)
-
-                    if (res.status !== 200) {
-                        throw `Got status code ${res.status}`
-                    }
-
-                    const body = await res.json()
-                    const config = body.results.find((template: { id: string }) => template?.id === templateId)
+                    const config = results.find((template: { id: string }) => template?.id === templateId)
                     const inputs_schema = config?.inputs_schema
                     const name = config?.name
                     const type = config?.type

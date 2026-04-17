@@ -146,7 +146,9 @@ export const SingleCodeBlock = ({ label, language, children, ...props }: SingleC
 const tooltipKey = '// TIP:'
 const highlightKey = '// HIGHLIGHT'
 const diffAddKey = '// +'
+const diffAddKeyHash = '# +'
 const diffRemoveKey = '// -'
+const diffRemoveKeyHash = '# -'
 
 const removeQuotes = (str?: string | null): string | null | undefined => {
     return str?.replace(/['"]/g, '')
@@ -157,7 +159,9 @@ const stripAnnotationComments = (code: string): string => {
         .replace(tooltipKey, '//')
         .replace(highlightKey, '')
         .replace(diffAddKey, '')
+        .replace(diffAddKeyHash, '')
         .replace(diffRemoveKey, '')
+        .replace(diffRemoveKeyHash, '')
         .trim()
 }
 
@@ -228,12 +232,12 @@ export const CodeBlock = ({
 
     const replaceProjectInfo = (code: string): string => {
         return code
-            .replace(/<ph_project_api_key>/g, removeQuotes(projectToken) || '<ph_project_api_key>')
+            .replace(/<ph_project_token>/g, removeQuotes(projectToken) || '<ph_project_token>')
             .replace(/<ph_project_name>/g, removeQuotes(projectName) || '<ph_project_name>')
             .replace(/<ph_app_host>/g, removeQuotes(appHost) || '<ph_app_host>')
             .replace(/<ph_client_api_host>/g, removeQuotes(clientApiHost) || 'https://us.i.posthog.com')
             .replace(/<ph_region>/g, removeQuotes(region) || '<ph_region>')
-            .replace(/<ph_posthog_js_defaults>/g, '2025-11-30')
+            .replace(/<ph_posthog_js_defaults>/g, '2026-01-30')
             .replace(
                 /<ph_proxy_path>/g,
                 projectToken ? `relay-${removeQuotes(projectToken)?.slice(-4)}` : '<ph_proxy_path>'
@@ -271,10 +275,10 @@ export const CodeBlock = ({
             if (line.includes(highlightKey)) {
                 highlightLineNumbers.push(index)
             }
-            if (line.includes(diffAddKey)) {
+            if (line.includes(diffAddKey) || line.includes(diffAddKeyHash)) {
                 diffAddLineNumbers.push(index)
             }
-            if (line.includes(diffRemoveKey)) {
+            if (line.includes(diffRemoveKey) || line.includes(diffRemoveKeyHash)) {
                 diffRemoveLineNumbers.push(index)
             }
         })
@@ -352,7 +356,14 @@ export const CodeBlock = ({
                     <div className="shrink-0 ml-auto flex items-center divide-x divide-border dark:divide-border-dark">
                         {selector === 'dropdown' && languages.length > 1 ? (
                             <div className="relative mr-2">
-                                <Listbox value={currentLanguage} onChange={(language) => onChange(language)}>
+                                <Listbox
+                                    value={currentLanguage}
+                                    onChange={(language) => {
+                                        const index = languages.findIndex((l) => l.language === language.language)
+                                        if (index !== -1) setSelectedIndex(index)
+                                        onChange?.(language)
+                                    }}
+                                >
                                     <Listbox.Button className="flex items-center space-x-1.5 text-gray">
                                         <span>
                                             {currentLanguage.label ||
@@ -581,8 +592,14 @@ export const CodeBlock = ({
                                                         if (token.content.includes(diffAddKey)) {
                                                             token.content = token.content.replace(diffAddKey, '')
                                                         }
+                                                        if (token.content.includes(diffAddKeyHash)) {
+                                                            token.content = token.content.replace(diffAddKeyHash, '')
+                                                        }
                                                         if (token.content.includes(diffRemoveKey)) {
                                                             token.content = token.content.replace(diffRemoveKey, '')
+                                                        }
+                                                        if (token.content.includes(diffRemoveKeyHash)) {
+                                                            token.content = token.content.replace(diffRemoveKeyHash, '')
                                                         }
                                                     })
 

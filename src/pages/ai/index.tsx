@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { useStaticQuery, graphql, Link } from 'gatsby'
+import React, { useEffect } from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
-import { IconLightBulb, IconMegaphone, IconTerminal } from '@posthog/icons'
+import { IconLightBulb } from '@posthog/icons'
 import Cards from 'components/Cards'
 import { PostHogAIExampleCards } from 'components/Cards/data'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import CustomRoadmapSlide from 'components/AI/CustomRoadmapSlide'
 import CustomPersonasSlide from 'components/AI/CustomPersonasSlide'
-import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
-import ASCIISlide from 'components/AI/ASCIISlide'
-import Tooltip from 'components/RadixUI/Tooltip'
+import CustomCapabilitiesSlide from 'components/AI/CustomCapabilitiesSlide'
 import { useWindow } from '../../context/Window'
 import TerminalView from 'components/AI/TerminalView'
 import usePostHog from 'hooks/usePostHog'
-import Demos from 'components/Home/Test'
+import Demos from 'components/Home/Test/Demos'
 const PRODUCT_HANDLE = 'posthog_ai'
 
 const CustomDemoSlide = () => {
@@ -29,7 +27,7 @@ const CustomDemoSlide = () => {
             </p>
 
             <ScrollArea className="min-h-0 w-full h-full @2xl:-mt-4">
-                <Cards data={PostHogAIExampleCards} buttons={false} />
+                <Cards data={PostHogAIExampleCards} />
             </ScrollArea>
 
             <div className="flex gap-2 justify-center absolute bottom-4 left-0 right-0 scale-125 @2xl:scale-100">
@@ -140,13 +138,29 @@ export default function PostHogAI(): JSX.Element {
                 name: 'Try it',
                 component: CustomDemoSlide,
             },
+            {
+                slug: 'capabilities',
+                name: 'Advanced modes',
+                component: CustomCapabilitiesSlide,
+            },
             // {
             //     slug: 'manifesto',
             //     name: 'AI manifesto',
             //     component: CustomManifestoSlide,
             // },
         ],
-        order: ['overview', 'features', 'demos', 'try-it', 'videos', 'you', 'roadmap', 'pricing', 'getting-started'],
+        order: [
+            'overview',
+            'features',
+            'demos',
+            'try-it',
+            'capabilities',
+            'videos',
+            'you',
+            'roadmap',
+            'pricing',
+            'getting-started',
+        ],
         templates: {
             overview: 'max',
             features: 'ai',

@@ -541,9 +541,110 @@ function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
 }
 
+// Also defined in src/pages/team-directory.tsx — update both if changed
+const unisexSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL']
+const femaleSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
+
+const unisexSizeDataIn = {
+    sizes: unisexSizes,
+    rows: [
+        { label: 'Length', values: ['26.25', '27.50', '28.50', '29.50', '30.50', '31.50'] },
+        { label: 'Width', values: ['18.00', '19.50', '21.00', '22.50', '24.00', '25.50'] },
+        { label: 'Sleeve', values: ['16.00', '16.875', '17.75', '18.625', '19.50', '20.375'] },
+    ],
+}
+
+const unisexSizeDataCm = {
+    sizes: unisexSizes,
+    rows: [
+        { label: 'Length', values: ['66', '69', '72', '74', '77', '80'] },
+        { label: 'Width', values: ['45', '49', '53', '57', '60', '64'] },
+        { label: 'Sleeve', values: ['40', '42', '45', '47', '49', '51'] },
+    ],
+}
+
+const womensSizeDataUS = {
+    sizes: femaleSizes,
+    rows: [{ label: 'Fits Sizes', values: ['2-6', '6-10', '10-14', '14-18', '18-22', '23-27'] }],
+}
+
+const womensSizeDataUK = {
+    sizes: femaleSizes,
+    rows: [{ label: 'Fits Sizes', values: ['6-10', '10-14', '14-18', '18-22', '22-26', '27-31'] }],
+}
+
+const UnisexSizeChart = () => {
+    const [unit, setUnit] = useState('in')
+    return (
+        <div className="w-[380px]">
+            <ToggleGroup
+                title="Unit"
+                hideTitle
+                options={[
+                    { label: 'in', value: 'in' },
+                    { label: 'cm', value: 'cm' },
+                ]}
+                value={unit}
+                onValueChange={(value) => value && setUnit(value)}
+                className="mb-2"
+            />
+            <SizeTable data={unit === 'cm' ? unisexSizeDataCm : unisexSizeDataIn} />
+        </div>
+    )
+}
+
+const WomensSizeChart = () => {
+    const [region, setRegion] = useState('US')
+    return (
+        <div>
+            <ToggleGroup
+                title="Region"
+                hideTitle
+                options={[
+                    { label: 'US', value: 'US' },
+                    { label: 'UK', value: 'UK' },
+                ]}
+                value={region}
+                onValueChange={(value) => value && setRegion(value)}
+                className="mb-2"
+            />
+            <SizeTable data={region === 'UK' ? womensSizeDataUK : womensSizeDataUS} />
+        </div>
+    )
+}
+
+const SizeTable = ({ data }: { data: typeof unisexSizeDataIn }) => (
+    <table className="text-xs text-left border-collapse w-full">
+        <thead>
+            <tr>
+                <th className="pr-3 py-1 font-semibold" />
+                {data.sizes.map((s) => (
+                    <th key={s} className="px-2 py-1 font-semibold text-center">
+                        {s}
+                    </th>
+                ))}
+            </tr>
+        </thead>
+        <tbody>
+            {data.rows.map((row) => (
+                <tr key={row.label} className="border-t border-primary">
+                    <td className="pr-3 py-1 font-semibold whitespace-nowrap">{row.label}</td>
+                    {row.values.map((v, i) => (
+                        <td key={i} className="px-2 py-1 text-center">
+                            {v}
+                        </td>
+                    ))}
+                </tr>
+            ))}
+        </tbody>
+    </table>
+)
+
 const ModeratorFields = ({ setFieldValue, values, errors }) => {
     const [heightUnit, setHeightUnit] = useState('in')
     const [height, setHeight] = useState(values.height)
+    const tShirt = values.tShirt || { fit: null, size: null, additionalInfo: null }
+    const availableSizes = tShirt.fit === 'female' ? femaleSizes : tShirt.fit === 'unisex' ? unisexSizes : []
 
     useEffect(() => {
         setFieldValue('height', heightUnit === 'cm' ? convertCentimetersToInches(height) : height)
@@ -616,6 +717,79 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                     ]}
                     value={values.amaEnabled === null ? undefined : values.amaEnabled ? 'yes' : 'no'}
                     onValueChange={(value) => setFieldValue('amaEnabled', value === 'yes' ? true : false)}
+                />
+            </div>
+            <div>
+                <ToggleGroup
+                    title="T-shirt fit"
+                    options={[
+                        { label: 'Unisex', value: 'unisex' },
+                        { label: 'Female', value: 'female' },
+                    ]}
+                    value={tShirt.fit || undefined}
+                    onValueChange={(value) => {
+                        if (!value) return
+                        const newSizes = value === 'female' ? femaleSizes : unisexSizes
+                        setFieldValue('tShirt', {
+                            ...tShirt,
+                            fit: value,
+                            size: newSizes.includes(tShirt.size) ? tShirt.size : null,
+                        })
+                    }}
+                />
+            </div>
+            {tShirt.fit && (
+                <div>
+                    <label className="text-[15px] flex items-center gap-2 mb-1">
+                        T-shirt size
+                        {tShirt.fit === 'unisex' ? (
+                            <Tooltip
+                                delay={0}
+                                side="right"
+                                trigger={
+                                    <span className="text-xs text-secondary hover:text-primary underline cursor-help">
+                                        Unisex size guide
+                                    </span>
+                                }
+                            >
+                                <UnisexSizeChart />
+                            </Tooltip>
+                        ) : (
+                            <Tooltip
+                                delay={0}
+                                side="right"
+                                trigger={
+                                    <span className="text-xs text-secondary hover:text-primary underline cursor-help">
+                                        Women's size guide
+                                    </span>
+                                }
+                            >
+                                <WomensSizeChart />
+                            </Tooltip>
+                        )}
+                    </label>
+                    <ToggleGroup
+                        title="T-shirt size"
+                        hideTitle
+                        options={availableSizes.map((size) => ({ label: size, value: size }))}
+                        value={tShirt.size || undefined}
+                        onValueChange={(value) => {
+                            if (!value) return
+                            setFieldValue('tShirt', { ...tShirt, size: value })
+                        }}
+                    />
+                </div>
+            )}
+            <div>
+                <label className="text-[15px] block mb-1">T-shirt additional info</label>
+                <textarea
+                    className="bg-primary text-primary border border-input rounded px-3 py-1.5 text-[15px] placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-orange/50 w-full resize-y"
+                    name="tShirtAdditionalInfo"
+                    value={tShirt.additionalInfo || ''}
+                    data-scheme="primary"
+                    onChange={(e) => setFieldValue('tShirt', { ...tShirt, additionalInfo: e.target.value })}
+                    placeholder="Any additional notes about t-shirt preferences"
+                    rows={3}
                 />
             </div>
         </div>
@@ -971,6 +1145,7 @@ export default function ProfilePage({ params }: PageProps) {
                         crest: true,
                     },
                 },
+                tShirt: true,
                 ...(isModerator
                     ? {
                           user: true,
@@ -1128,6 +1303,7 @@ export default function ProfilePage({ params }: PageProps) {
             backgroundImage: profile?.backgroundImage,
             companyRole: profile?.companyRole,
             amaEnabled: profile?.amaEnabled,
+            tShirt: profile?.tShirt || { fit: null, size: null, additionalInfo: null },
         },
         onSubmit: async ({ avatar, images, ...values }) => {
             try {
@@ -1643,7 +1819,9 @@ export default function ProfilePage({ params }: PageProps) {
 const TeamMembersList = ({ self, team }) => {
     const selfTeammate = team.attributes.profiles.data.find((teammate) => teammate.id === self.id)
     const otherTeammates = team.attributes.profiles.data.filter((teammate) => teammate.id !== self.id)
-    const teammates = [selfTeammate, ...otherTeammates].filter(Boolean)
+    const teammates = [selfTeammate, ...otherTeammates].filter(
+        (teammate) => teammate?.attributes?.startDate && new Date(teammate.attributes.startDate) <= new Date()
+    )
 
     return (
         <>

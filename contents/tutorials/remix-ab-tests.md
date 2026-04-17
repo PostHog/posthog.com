@@ -64,7 +64,7 @@ import posthog from "posthog-js";
 
 function PosthogInit() {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     });
@@ -192,7 +192,7 @@ To set this up, we must install and use [PostHog’s Node library](/docs/librari
 npm install posthog-node
 ```
 
-Next, we create a `posthog.js` file in the `app` folder. In it, we initialize the `posthog-node` client. We also set up logic to return the existing client if it is already initialized. Once again, you need your project API key and instance address from [your project settings](https://us.posthog.com/settings/project).
+Next, we create a `posthog.js` file in the `app` folder. In it, we initialize the `posthog-node` client. We also set up logic to return the existing client if it is already initialized. Once again, you need your project token and instance address from [your project settings](https://us.posthog.com/settings/project).
 
 ```js file=app/posthog.js
 import { PostHog } from 'posthog-node';
@@ -201,7 +201,7 @@ let posthogNodeClient = null;
 
 export default function PostHogNodeClient() {
   if (!posthogNodeClient) {
-    posthogNodeClient = new PostHog('<ph_project_api_key>', {
+    posthogNodeClient = new PostHog('<ph_project_token>', {
       host: '<ph_client_api_host>',
     });
   }
@@ -272,7 +272,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const posthogNode = PostHogNodeClient()
   let buttonText = 'No variant'
 
-  const projectAPIKey = '<ph_project_api_key>' // your PostHog API key from your App Settings
+  const projectAPIKey = '<ph_project_token>' // your PostHog API key from your App Settings
   const cookies = parse(request.headers.get('cookie') || '');
   const cookieKey = `ph_${projectAPIKey}_posthog`;
   if (cookies[cookieKey]) {

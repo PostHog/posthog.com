@@ -394,7 +394,7 @@ Since version 1.187.0, you can provide a `before_send` function when initializin
 <summary>Redact URLs in event properties</summary>
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     before_send: (event: CaptureResult | null): CaptureResult | null => {
         if (!event) {
             return null
@@ -458,7 +458,7 @@ posthog.init('<ph_project_api_key>', {
 <summary>Redact person properties in $set or $set_once</summary>
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     before_send: (event: CaptureResult | null): CaptureResult | null => {
         if (!event) {
             return null
@@ -495,7 +495,7 @@ We offer a pre-built `sampleByEvent` function to sample by event name. You can i
 ```ts file=Import
 import { sampleByEvent } from 'posthog-js/lib/src/customizations'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   // capture only half of dead click and web vitals events
   before_send: sampleByEvent(['$dead_click', '$web_vitals'], 0.5)
 })
@@ -505,7 +505,7 @@ posthog.init('<ph_project_api_key>', {
 // Add this script to your site, may need to change the script src to match your API host:
 // <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   // capture only half of dead click and web vitals events
   before_send: posthogCustomizations.sampleByEvent(['$dead_click', '$web_vitals'], 0.5)
 })
@@ -521,7 +521,7 @@ This can be used to sample events by name, distinct ID, session ID, or custom fu
 When working locally it can be useful to see what PostHog would do, without actually sending the data to PostHog
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: (event: CaptureResult | null): CaptureResult | null => {
     if (event) {
       console.log('posthog event: ' + event.event, event)
@@ -545,7 +545,7 @@ We offer a pre-built `sampleByDistinctId` function to sample a percentage of eve
 ```ts file=Import
 import { sampleByDistinctId } from 'posthog-js/lib/src/customizations'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: sampleByDistinctId(0.4)
 })
 ```
@@ -554,7 +554,7 @@ posthog.init('<ph_project_api_key>', {
 // Add this script to your site, may need to change the script src to match your API host:
 // <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: posthogCustomizations.sampleByDistinctId(0.4)
 })
 ```
@@ -575,7 +575,7 @@ We offer a pre-built `sampleBySessionId` function to sample a percentage of even
 ```ts file=Import
 import { sampleBySessionId } from 'posthog-js/lib/src/customizations'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: sampleBySessionId(0.25)
 })
 ```
@@ -584,7 +584,7 @@ posthog.init('<ph_project_api_key>', {
 // Add this script to your site, may need to change the script src to match your API host:
 // <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: posthogCustomizations.sampleBySessionId(0.25)
 })
 ```
@@ -599,7 +599,7 @@ posthog.init('<ph_project_api_key>', {
 If none of the provided sampling functions meet your needs, you can provide a custom function to sample events.
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: (event: CaptureResult | null): CaptureResult | null => {
     if (!event) {
       return null
@@ -624,7 +624,7 @@ posthog.init('<ph_project_api_key>', {
 You can provide an array of functions to be called one after the other:
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: [
     sampleByDistinctId(0.5), // only half of people
     sampleByEvent(['$web_vitals'], 0.1), // and they capture all events except 10% of web vitals
@@ -642,7 +642,7 @@ If you see an unusual number of visitors in your project, you can try and unders
 If a specific user agent is causing problems (many more events than other user agents), you can block it by adding it to `custom_blocked_useragents` in your PostHog initialization:
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   custom_blocked_useragents: ['<user_agent_string>']
 })
 ```
@@ -659,7 +659,7 @@ const LIGHTHOUSE_USER_AGENTS = [
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
 ]
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   custom_blocked_useragents: LIGHTHOUSE_USER_AGENTS
 })
 ```
@@ -677,7 +677,7 @@ If you're not seeing the expected events being captured, the feature flags being
 You can enable debug mode by setting the `debug` option to `true` in the `init` call. A common pattern is to set this to `true` in development environments only using environment variables.
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   debug: true // Set this to true in development environments only using environment variables
 })
 ```
