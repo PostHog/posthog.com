@@ -14,6 +14,8 @@ import BedtimeReadingSection from 'components/Home/Sections/BedtimeReadingSectio
 import ShamelessCTASection from 'components/Home/Sections/ShamelessCTASection'
 import HitCounter from 'components/Home/HitCounter'
 
+export { CTAs } from './Demos'
+
 export default function HomeTest() {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
