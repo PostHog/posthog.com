@@ -116,7 +116,8 @@ PostHog Inc is a US incorporated company and a US tax resident and we do not cla
 - Our no PE (Permanent Establishment) Certificate
 These documents are available in the [shared Finance drive](https://drive.google.com/drive/folders/17GjgGr-vJO_azV2yx4PWHaKO0PgdztLN?usp=sharing). You can share them with the customer on request.
  
-The full invoice amount is due. Any tax withheld will be treated as a short payment and pursued as outstanding.
+The full invoice amount is due. Any tax withheld is exclusive of the invoice, which will be treated as outstanding.
+
 
 ### Stripe Products & Prices
 
