@@ -107,7 +107,7 @@ After three consecutive missed payment periods, the customer must provide advanc
 
 ### India-based customers
 - GST: If you're a business, you're required to provide your GSTIN when signing up with PostHog. You would be liable to manage all GST under the Reverse Charge Mechanism.
-- 3DS payment failures: Indian banks require 3DS (one time password) for international card payments. It is your responisbility to complete the 3DS step (our billing system sends you a couple of reminders) without which the payments will fail.
+- 3DS payment failures: Indian banks require 3DS (one time password) for international card payments. The customer is responsible for completing the 3DS step (our billing system sends a couple of reminders) without which the payment will fail.
 
 
 ### Withholding taxes
