@@ -46,6 +46,8 @@ interface OSTableProps {
         hasNextPage: boolean
         hasPrevPage: boolean
     }
+    children?: React.ReactNode
+    shadow?: boolean
 }
 
 const RowSkeleton = () => {
@@ -169,6 +171,7 @@ const Row = ({
     moreCount,
     onShowMore,
     type,
+    isLastRow = false,
 }: {
     row: Row
     lastRowRef: any
@@ -178,18 +181,26 @@ const Row = ({
     moreCount?: number
     onShowMore?: () => void
     type?: string
+    isLastRow?: boolean
 }) => {
+    const hasMoreRow = !!(moreCount && moreCount > 0)
     return (
         <>
             <React.Fragment>
                 {row.cells.map((cell, cellIndex) => {
+                    const isFirstCell = cellIndex === 0
+                    const isLastCell = cellIndex === row.cells.length - 1
+                    const roundBottomLeft = isLastRow && !hasMoreRow && isFirstCell
+                    const roundBottomRight = isLastRow && !hasMoreRow && isLastCell
                     return (
                         <div
                             ref={lastRowRef}
                             key={cellIndex}
                             className={`
                                 relative
-               ${cellIndex === row.cells.length - 1 ? '!border-r' : ''}
+               ${isLastCell ? '!border-r' : ''}
+               ${roundBottomLeft ? 'rounded-bl-md' : ''}
+               ${roundBottomRight ? 'rounded-br-md' : ''}
             flex flex-col 
             ${rowAlignment === 'top' ? 'justify-start' : 'justify-center'} 
             ${
@@ -205,8 +216,12 @@ const Row = ({
                         </div>
                     )
                 })}
-                {moreCount && moreCount > 0 ? (
-                    <div className="col-span-full text-center !py-0 !border-r border-primary bg-accent/50 hover:bg-accent">
+                {hasMoreRow ? (
+                    <div
+                        className={`col-span-full text-center !py-0 !border-r border-primary bg-accent/50 hover:bg-accent ${
+                            isLastRow ? 'rounded-b-md' : ''
+                        }`}
+                    >
                         <button
                             onClick={onShowMore}
                             className="text-primary hover:text-accent font-semibold text-[13px] w-full py-1"
@@ -227,6 +242,7 @@ const GroupedRows = ({
     columns,
     editable,
     type,
+    isLastGroup = false,
 }: {
     rows: Row[]
     lastRowRef: any
@@ -234,11 +250,13 @@ const GroupedRows = ({
     columns?: Column[]
     editable: boolean
     type?: string
+    isLastGroup?: boolean
 }) => {
     const [showMore, setShowMore] = useState(false)
+    const visibleRows = showMore ? rows : rows.slice(0, 1)
     return (
         <>
-            {(showMore ? rows : rows.slice(0, 1)).map((row, rowIndex) => (
+            {visibleRows.map((row, rowIndex) => (
                 <Row
                     key={rowIndex}
                     row={row}
@@ -249,6 +267,7 @@ const GroupedRows = ({
                     moreCount={showMore ? undefined : rows.length - 1}
                     onShowMore={() => setShowMore(true)}
                     type={type}
+                    isLastRow={isLastGroup && rowIndex === visibleRows.length - 1}
                 />
             ))}
         </>
@@ -269,6 +288,8 @@ const OSTable: React.FC<OSTableProps> = ({
     fetchMore,
     pagination,
     type,
+    children,
+    shadow = false,
 }) => {
     const gridClass = columns?.map((col) => col.width || 'auto').join(' ') || ''
     const [lastRowRef, lastRowInView] = useInView({ threshold: 0.1 })
@@ -281,7 +302,7 @@ const OSTable: React.FC<OSTableProps> = ({
     }, [lastRowInView])
     return (
         <div
-            className={`OSTable md:@2xs/not-full-width:mx-0 mb-2 ${
+            className={`OSTable md:@2xs/not-full-width:mx-0 mb-2 relative ${shadow ? 'shadow-xl' : ''} ${
                 width === 'full' ? '' : '-mx-4 @md/reader-content-container:-mx-6 @lg/reader-content-container:-mx-8'
             }`}
         >
@@ -294,7 +315,7 @@ const OSTable: React.FC<OSTableProps> = ({
                     }`}
                 >
                     <div
-                        className={`text-primary inline-grid min-w-[42rem] max-w-full divide-x divide-y divide-border border-b border-primary text-[15px] [&>div]:px-2 ${
+                        className={`text-primary inline-grid min-w-[42rem] max-w-full divide-x divide-y divide-border border-b border-primary text-[15px] [&>div]:px-2 rounded-md ${
                             width === 'full' ? 'w-full' : 'w-min'
                         } ${
                             size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'
@@ -308,8 +329,10 @@ const OSTable: React.FC<OSTableProps> = ({
                                     <div
                                         key={index}
                                         className={`text-sm border-l border-t border-primary bg-input font-bold ${
-                                            index === columns.length - 1 ? '!border-r' : ''
-                                        } ${column.align === 'center' ? 'text-center' : ''} ${column.className || ''}`}
+                                            index === 0 ? 'rounded-tl-md' : ''
+                                        } ${index === columns.length - 1 ? '!border-r rounded-tr-md' : ''} ${
+                                            column.align === 'center' ? 'text-center' : ''
+                                        } ${column.className || ''}`}
                                     >
                                         {column.name}
                                     </div>
@@ -319,24 +342,28 @@ const OSTable: React.FC<OSTableProps> = ({
 
                         {/* Data Rows */}
                         {groupBy
-                            ? Object.entries(
-                                  _groupBy(
-                                      rows,
-                                      `cells[${columns?.findIndex(
-                                          (col) => typeof col.name === 'string' && col.name === groupBy
-                                      )}].content.props.children`
+                            ? (() => {
+                                  const groupedEntries = Object.entries(
+                                      _groupBy(
+                                          rows,
+                                          `cells[${columns?.findIndex(
+                                              (col) => typeof col.name === 'string' && col.name === groupBy
+                                          )}].content.props.children`
+                                      )
                                   )
-                              ).map(([_group, value], index) => (
-                                  <GroupedRows
-                                      key={index}
-                                      rows={value}
-                                      lastRowRef={lastRowRef}
-                                      rowAlignment={rowAlignment}
-                                      columns={columns}
-                                      editable={editable}
-                                      type={_group ? `${_group.toLowerCase()} ${type}` : type}
-                                  />
-                              ))
+                                  return groupedEntries.map(([_group, value], index) => (
+                                      <GroupedRows
+                                          key={index}
+                                          rows={value as Row[]}
+                                          lastRowRef={lastRowRef}
+                                          rowAlignment={rowAlignment}
+                                          columns={columns}
+                                          editable={editable}
+                                          type={_group ? `${_group.toLowerCase()} ${type}` : type}
+                                          isLastGroup={index === groupedEntries.length - 1}
+                                      />
+                                  ))
+                              })()
                             : rows?.map((row, rowIndex) => (
                                   <Row
                                       key={row.key || rowIndex}
@@ -346,6 +373,7 @@ const OSTable: React.FC<OSTableProps> = ({
                                       columns={columns}
                                       editable={editable}
                                       type={type}
+                                      isLastRow={rowIndex === rows.length - 1}
                                   />
                               ))}
                     </div>
@@ -361,6 +389,7 @@ const OSTable: React.FC<OSTableProps> = ({
                         </div>
                     )}
                 </div>
+                {children}
                 {pagination && (
                     <Pagination
                         currentPage={pagination.currentPage}

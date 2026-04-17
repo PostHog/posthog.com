@@ -1,69 +1,9 @@
 import React, { useState } from 'react'
 import OSTable from 'components/OSTable'
-import { useCustomers } from 'hooks/useCustomers'
-import CTA from 'components/Home/CTA'
-import { IconInfo, IconRefresh } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import useProduct from 'hooks/useProduct'
-import { AccordionItem, AccordionTrigger, AccordionContent } from 'components/RadixUI/Accordion'
-import { Accordion as RadixAccordionPrimitives } from 'radix-ui'
 import Tooltip from 'components/RadixUI/Tooltip'
-import CloudinaryImage from 'components/CloudinaryImage'
-import SmallTeam from 'components/SmallTeam'
-import Pricing from 'components/Home/New/Pricing'
-import { JsxComponentDescriptor } from '@mdxeditor/editor'
-
-interface ProductButtonsProps {
-    productTypes: string[]
-    className?: string
-    beta?: boolean
-}
-
-export const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className = '', beta = false }) => {
-    const allProducts = useProduct()
-
-    const getProduct = (handle: string) =>
-        Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === handle) : undefined
-
-    return (
-        <span className={`flex flex-wrap gap-1 pt-1 ${className}`}>
-            {productTypes.map((type, index) => {
-                const product = getProduct(type)
-                return product ? (
-                    <OSButton
-                        key={type}
-                        icon={product.Icon ? <product.Icon /> : undefined}
-                        iconClassName={`text-${product.color}`}
-                        color={product.color}
-                        className="font-medium text-primary hover:text-primary"
-                        to={`/${product.slug}`}
-                        state={{ newWindow: true }}
-                        asLink
-                    >
-                        {product.name}
-                        {beta && <span className="text-xs opacity-50">beta</span>}
-                    </OSButton>
-                ) : null
-            })}
-        </span>
-    )
-}
-
-export const HomeHappyHog = () => {
-    return (
-        <img
-            src="https://res.cloudinary.com/dmukukwp6/image/upload/happy_hog_ebc59e4658.png"
-            alt="happy hog"
-            className="@xl:float-right @xl:ml-2 max-w-[400px] max-h-48 -mt-2 -mr-2"
-        />
-    )
-}
-
-export const Image = ({ src, className = '', alt = '' }: { src: string; className?: string; alt?: string }) => (
-    <CloudinaryImage src={src} alt={alt} className={className} />
-)
-
-// --- Company data ---
+import { IconRefresh } from '@posthog/icons'
+import { useCustomers } from 'hooks/useCustomers'
 
 export const COL1 = [
     'ycombinator',
@@ -244,12 +184,10 @@ export const companyAttributes: Record<string, string[]> = {
     ],
 }
 
-// --- Customers component ---
-
 export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) => {
     const { getCustomers, hasCaseStudy } = useCustomers()
-    const [currentBreakdown, setCurrentBreakdown] = React.useState('VCsLoveThem')
-    const [isAnimating, setIsAnimating] = React.useState(false)
+    const [currentBreakdown, setCurrentBreakdown] = useState('VCsLoveThem')
+    const [isAnimating, setIsAnimating] = useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
 
     const allCompanies = [...COL1, ...COL2]
@@ -390,202 +328,44 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
     ]
 
     return (
-        <>
-            <div className="inline-block">
-                <div className="relative @xl:pt-1 pb-2 @xl:pb-0 @4xl:mt-8">
-                    <div className="@xl:absolute right-0 -top-8">
-                        <OSButton
-                            onClick={toggleBreakdown}
-                            variant="secondary"
-                            size="sm"
-                            className="font-semibold [&_span]:min-w-[146px]"
-                            disabled={isAnimating}
-                        >
-                            {isAnimating ? (
-                                '🔀 Shuffling...'
-                            ) : (
-                                <>
-                                    <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
-                                </>
-                            )}
-                        </OSButton>
-                    </div>
-                </div>
-                <OSTable
-                    columns={columns}
-                    rows={rows}
-                    size="sm"
-                    rowAlignment="top"
-                    width="full"
-                    className={tableClassName || undefined}
-                />
-                <OSButton
-                    asLink
-                    to="/customers"
-                    variant="secondary"
-                    size="md"
-                    className="mt-4"
-                    state={{ newWindow: true }}
-                >
-                    Open customers.mdx
-                </OSButton>
-            </div>
-        </>
-    )
-}
-
-// --- FAQ components ---
-
-export const FAQ = ({ children }: { children: React.ReactNode }) => {
-    const [value, setValue] = useState<string[]>([])
-
-    const allValues = React.useMemo(() => {
-        const values: string[] = []
-        React.Children.forEach(children, (child) => {
-            if (React.isValidElement(child) && child.props.trigger) {
-                values.push(child.props.trigger)
-            }
-        })
-        return values
-    }, [children])
-
-    return (
-        <div>
-            <div className="flex justify-end mb-2">
-                <OSButton variant="secondary" size="sm" onClick={() => setValue(allValues)}>
-                    Expand all
-                </OSButton>
-            </div>
-            <RadixAccordionPrimitives.Root
-                className="rounded border border-primary"
-                type="multiple"
-                value={value}
-                onValueChange={setValue}
-                data-scheme="primary"
+        <div id="customers">
+            <h2>Who's using PostHog?</h2>
+            <p>
+                Here are some of our paying customers. (Yes they actually use us, no it's not just some random engineer
+                who tried us out 2+ years ago.)
+            </p>
+            <OSTable
+                columns={columns}
+                rows={rows}
+                size="sm"
+                rowAlignment="top"
+                width="full"
+                className="bg-white dark:bg-dark"
+                shadow
             >
-                {children}
-            </RadixAccordionPrimitives.Root>
+                <div className="absolute top-2 left-[calc(50%-17px)]">
+                    <OSButton
+                        onClick={toggleBreakdown}
+                        variant="secondary"
+                        size="sm"
+                        className="font-semibold rounded-full [&_span]:rounded-full aspect-square [&_span]:aspect-square disabled:opacity-100"
+                        disabled={isAnimating}
+                        tooltip="Shuffle companies"
+                        icon={
+                            <IconRefresh
+                                className={`size-4 inline-block relative -top-px ${
+                                    isAnimating ? 'animate-spin [animation-direction:reverse]' : ''
+                                }`}
+                            />
+                        }
+                    />
+                </div>
+            </OSTable>
+            <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
+                Open customers.mdx
+            </OSButton>
         </div>
     )
 }
 
-export const FAQItem = ({ trigger, children }: { trigger: string; children: React.ReactNode }) => (
-    <AccordionItem value={trigger} skin>
-        <AccordionTrigger skin className="!text-base font-bold">
-            {trigger}
-        </AccordionTrigger>
-        <AccordionContent skin>{children}</AccordionContent>
-    </AccordionItem>
-)
-
-// --- Shared jsxComponentDescriptors ---
-
-export function getSharedDescriptors(): JsxComponentDescriptor[] {
-    return [
-        {
-            name: 'CTA',
-            kind: 'flow',
-            props: [],
-            Editor: () => (
-                <>
-                    <p className="-mt-2">
-                        If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
-                    </p>
-                    <CTA headline={false} />
-                </>
-            ),
-        },
-        {
-            name: 'Pricing',
-            kind: 'flow',
-            props: [],
-            Editor: () => <Pricing />,
-        },
-        {
-            name: 'ImageDW',
-            kind: 'flow',
-            props: [],
-            Editor: () => (
-                <Image
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png"
-                    className="max-w-[213px] absolute bottom-[-4px] right-0 rounded-br-sm"
-                />
-            ),
-        },
-        {
-            name: 'ImageMoney',
-            kind: 'flow',
-            props: [],
-            Editor: () => (
-                <Image
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/dont_burn_money_28d5861fad.png"
-                    className="float-right max-w-[120px] @sm:max-w-[200px] ml-2 @sm:ml-4 mb-2 @sm:-mt-4"
-                />
-            ),
-        },
-        {
-            name: 'ImageReading1',
-            kind: 'flow',
-            props: [],
-            Editor: () => (
-                <Image
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
-                    className="@md:hidden @xl:block @lg:float-right max-w-full @xl:max-w-xs rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary -mb-2 @lg:mb-2 @lg:ml-4 @lg:-mt-2"
-                />
-            ),
-        },
-        {
-            name: 'ImageReading2',
-            kind: 'flow',
-            props: [],
-            Editor: () => (
-                <Image
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
-                    className="hidden @md:block @md:float-right @xl:hidden @md:max-w-60 @xl:max-w-xs @sm:ml-4 @sm:mb-2 rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary"
-                />
-            ),
-        },
-        {
-            name: 'TooltipDW',
-            kind: 'flow',
-            props: [],
-            Editor: () => (
-                <Tooltip
-                    trigger={
-                        <span>
-                            <IconInfo className="size-4 inline-block relative -top-px" />
-                        </span>
-                    }
-                    delay={0}
-                >
-                    <p className="text-sm mb-0">You can also connect your own!</p>
-                </Tooltip>
-            ),
-        },
-        {
-            name: 'SupportSmallTeamLink',
-            kind: 'flow',
-            props: [],
-            Editor: () => (
-                <SmallTeam slug="support" noMiniCrest>
-                    support folks
-                </SmallTeam>
-            ),
-        },
-        {
-            name: 'FAQ',
-            kind: 'flow',
-            props: [{ name: 'children', type: 'expression' }],
-            Editor: ({ children }) => <FAQ>{children}</FAQ>,
-        },
-        {
-            name: 'FAQItem',
-            kind: 'flow',
-            props: [
-                { name: 'trigger', type: 'string' },
-                { name: 'children', type: 'expression' },
-            ],
-            Editor: ({ trigger, children }) => <FAQItem trigger={trigger}>{children}</FAQItem>,
-        },
-    ]
-}
+export default Customers

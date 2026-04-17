@@ -4,11 +4,11 @@ Auto-advancing tabbed carousel for the homepage hero section.
 
 ## Usage
 
-```mdx
+```tsx
 <HeroCarousel />
 ```
 
-Registered as an MDX component in `Home/Control/index.tsx` and used in `contents/index.mdx`.
+Rendered inside `Home/Sections/Hero.tsx` as part of the homepage hero.
 
 ## Behavior
 

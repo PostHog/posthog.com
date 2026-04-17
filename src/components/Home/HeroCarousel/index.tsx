@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Tabs } from 'radix-ui'
 import { IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import { OnePlaceSlide, UnderstandUsageSlide, DebugFixSlide, TestRolloutSlide } from './slides'
@@ -42,13 +42,30 @@ const tabs = [
     },
 ]
 
-export default function HeroCarousel() {
+export const HeroCarousel = () => {
     const [activeTab, setActiveTab] = useState(tabs[0].value)
     const [isPaused, setIsPaused] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
+    const [isOffscreen, setIsOffscreen] = useState(false)
     const [progressKey, setProgressKey] = useState(0)
+    const containerRef = useRef<HTMLDivElement>(null)
 
-    const effectivelyPaused = isPaused || isHovering
+    useEffect(() => {
+        const el = containerRef.current
+        if (!el || typeof IntersectionObserver === 'undefined') return
+
+        const scrollRoot = (el.closest('[data-radix-scroll-area-viewport]') as Element | null) ?? null
+
+        const observer = new IntersectionObserver(([entry]) => setIsOffscreen(!entry.isIntersecting), {
+            root: scrollRoot,
+            threshold: 0,
+            rootMargin: '-200px 0px 0px 0px',
+        })
+        observer.observe(el)
+        return () => observer.disconnect()
+    }, [])
+
+    const effectivelyPaused = isPaused || isHovering || isOffscreen
 
     const advance = useCallback(() => {
         setActiveTab((prev) => {
@@ -69,7 +86,7 @@ export default function HeroCarousel() {
     const isLast = activeIndex === tabs.length - 1
 
     return (
-        <div onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+        <div ref={containerRef} onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
             <Tabs.Root value={activeTab} onValueChange={handleTabChange} className="flex flex-col">
                 <Tabs.List className="flex items-center gap-0 relative z-10">
                     <div className="flex flex-wrap @sm:flex-nowrap flex-1 min-w-0 gap-1">
@@ -156,3 +173,4 @@ export default function HeroCarousel() {
         </div>
     )
 }
+export default HeroCarousel
