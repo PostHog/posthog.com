@@ -59,7 +59,7 @@ export const HeroCarousel = () => {
         const observer = new IntersectionObserver(([entry]) => setIsOffscreen(!entry.isIntersecting), {
             root: scrollRoot,
             threshold: 0,
-            rootMargin: '-200px 0px 0px 0px',
+            rootMargin: '-300px 0px 0px 0px',
         })
         observer.observe(el)
         return () => observer.disconnect()

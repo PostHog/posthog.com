@@ -50,6 +50,7 @@ export const companyBreakdowns = {
     pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' },
     arr: { col1: 'Measured in ARR', col2: 'Measured in GDP' },
     devTool: { col1: 'Trendy devtool', col2: 'Trendy, but not a devtool' },
+    usesPostHog: { col1: 'Uses PostHog', col2: 'Also uses PostHog' },
 }
 
 export const companyAttributes: Record<string, string[]> = {
@@ -182,6 +183,7 @@ export const companyAttributes: Record<string, string[]> = {
         'greptile',
         'posthog',
     ],
+    usesPostHog: ['ycombinator', 'airbus', 'trust', 'supabase', 'hasura', 'researchgate', 'heygen', 'posthog'],
 }
 
 export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) => {
