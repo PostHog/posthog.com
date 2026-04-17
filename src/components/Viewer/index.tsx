@@ -239,7 +239,7 @@ export function Viewer({
                 <div className="flex flex-col flex-grow min-h-0">
                     <main data-app="Viewer" data-scheme="primary" className="@container flex-1 relative h-full flex">
                         <div
-                            className={`hidden bg-dark/10 dark:bg-light/10 border-r border-secondary transition-all duration-300 overflow-hidden ${
+                            className={`bg-dark/10 dark:bg-light/10 border-r border-secondary transition-all duration-300 overflow-hidden ${
                                 sidebarOpen ? 'basis-80' : 'basis-12'
                             }`}
                         >
