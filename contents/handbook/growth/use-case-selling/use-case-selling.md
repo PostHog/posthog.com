@@ -12,17 +12,17 @@ When we pitch "add Surveys," it sounds like we're trying to increase their bill.
  
 Each use case has a full playbook with discovery questions, competitive positioning, expansion paths, objection handling, and onboarding checklists.
  
-## The six use cases
+## The seven use cases
  
-| Use case | Job to be done | Core buyer | Status |
-|---|---|---|---|
-| [Product Intelligence](/handbook/growth/use-case-selling/product-intelligence) | "Help me understand what users do, why they do it, and what to build next." | PMs, designers, product engineers, founders |  |
-| [Release Engineering](/handbook/growth/use-case-selling/release-engineering) | "Help me ship faster without breaking things." | Engineering managers, platform teams, developers |   |
-| [Observability](/handbook/growth/use-case-selling/observability) | "Help me know when things break, understand why, and fix them fast." | SREs, platform engineers, DevOps |   |
-| [Growth & Marketing](/handbook/growth/use-case-selling/growth-and-marketing) | "Help me understand what drives acquisition, conversion, and revenue." | Growth engineers, marketing leads, CRO, GTM engineers |  |
-| [AI/LLM Observability](/handbook/growth/use-case-selling/ai-llm-observability) | "Help me understand how my AI features perform, what they cost, and how users interact with them." | AI/ML engineers, AI PMs, AI founders |   |
-| [Data Infrastructure](/handbook/growth/use-case-selling/data-infrastructure) | "Help me unify product data with business data and get it where it needs to go." | Data engineers, analytics engineers, product ops |   |
-| [Customer Experience](/handbook/growth/use-case-selling/customer-experience) | "Help me quickly understand what happened, identify the problem, and verify a fix." | Support leaders, engineering leads, CS leaders |  |
+| Use case | Job to be done | Core buyer | 
+|---|---|---|
+| [Product Intelligence](/handbook/growth/use-case-selling/product-intelligence) | "Help me understand what users do, why they do it, and what to build next." | PMs, designers, product engineers, founders | 
+| [Release Engineering](/handbook/growth/use-case-selling/release-engineering) | "Help me ship faster without breaking things." | Engineering managers, platform teams, developers | 
+| [Observability](/handbook/growth/use-case-selling/observability) | "Help me know when things break, understand why, and fix them fast." | SREs, platform engineers, DevOps | 
+| [Growth & Marketing](/handbook/growth/use-case-selling/growth-and-marketing) | "Help me understand what drives acquisition, conversion, and revenue." | Growth engineers, marketing leads, CRO, GTM engineers |
+| [AI/LLM Observability](/handbook/growth/use-case-selling/ai-llm-observability) | "Help me understand how my AI features perform, what they cost, and how users interact with them." | AI/ML engineers, AI PMs, AI founders | 
+| [Data Infrastructure](/handbook/growth/use-case-selling/data-infrastructure) | "Help me unify product data with business data and get it where it needs to go." | Data engineers, analytics engineers, product ops | 
+| [Customer Experience](/handbook/growth/use-case-selling/customer-experience) | "Help me quickly understand what happened, identify the problem, and verify a fix." | Support leaders, engineering leads, CS leaders |
  
 ## Product coverage matrix
  

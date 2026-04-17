@@ -538,6 +538,10 @@ export const handbookSidebar = [
                 url: '/handbook/company/brand-assets',
             },
             {
+                name: 'Style guide',
+                url: '/handbook/brand/style-guide',
+            },
+            {
                 name: 'Our design philosophy',
                 url: '/handbook/brand/philosophy',
             },
@@ -5443,6 +5447,16 @@ export const docsMenu = {
                             name: 'OpenRouter',
                             url: '/docs/llm-analytics/installation/openrouter',
                             icon: 'IconOpenRouter',
+                        },
+                        {
+                            name: 'Cloudflare AI Gateway',
+                            url: '/docs/llm-analytics/installation/cloudflare-ai-gateway',
+                            platformLogo: 'cloudflare',
+                        },
+                        {
+                            name: 'Dedalus Labs',
+                            url: '/docs/llm-analytics/installation/dedalus',
+                            platformLogo: 'dedalus',
                         },
                         {
                             name: 'DeepSeek',
