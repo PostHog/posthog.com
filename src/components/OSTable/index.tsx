@@ -302,10 +302,16 @@ const OSTable: React.FC<OSTableProps> = ({
     }, [lastRowInView])
     return (
         <div
-            className={`OSTable md:@2xs/not-full-width:mx-0 mb-2 relative ${shadow ? 'shadow-xl' : ''} ${
+            className={`OSTable md:@2xs/not-full-width:mx-0 mb-2 relative ${
                 width === 'full' ? '' : '-mx-4 @md/reader-content-container:-mx-6 @lg/reader-content-container:-mx-8'
             }`}
         >
+            {shadow && (
+                <div
+                    aria-hidden
+                    className="hidden @sm:block pointer-events-none absolute inset-0 bg-black blur-xl opacity-10 -z-10 rounded-md"
+                />
+            )}
             <ScrollArea fullWidth>
                 <div
                     className={`md:@2xs/not-full-width:px-0 flex ${

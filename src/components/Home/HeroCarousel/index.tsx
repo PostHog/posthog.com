@@ -98,7 +98,7 @@ export const HeroCarousel = () => {
                                     value={tab.value}
                                     className={`relative flex-1 min-w-[200px] @sm:min-w-0 px-3 py-1.5 @3xl:py-2.5 text-sm font-semibold cursor-pointer select-none  text-balance rounded-t-md border border-b-0 ${
                                         isActive
-                                            ? `${tab.color} ${tab.activeText} order-last @sm:order-none border-black/10 dark:border-white/60 @sm:transition-colors`
+                                            ? `${tab.color} ${tab.activeText} order-last @sm:order-none border-black/10 dark:border-white/60 @sm:transition-background-color`
                                             : 'text-secondary @lg:hover:text-primary @lg:hover:bg-white/30 @lg:hover:backdrop-blur border-transparent @lg:hover:border-black/10 dark:@lg:hover:border-white/60 z-20 @lg:hover:-top-px'
                                     }`}
                                 >
