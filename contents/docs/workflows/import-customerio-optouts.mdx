@@ -5,13 +5,13 @@ showStepsToc: true
 
 In this guide we'll walk through importing your **opt-out lists from Customer.io** into PostHog and keeping them in sync.
 
-Go to your PostHog app and navigate to **Workflows > Opt-out list**. Click **Import from Customer.io**. 
+Go to your PostHog app and navigate to **Workflows > Opt-out list**. Click **Import from Customer.io**.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/3_9e79e42360.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/3_9e79e42360.png"
-    classes="rounded"
-    alt="PostHog opt-out list page"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/3_9e79e42360.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/3_9e79e42360.png"
+  classes="rounded"
+  alt="PostHog opt-out list page"
 />
 
 <Steps>
@@ -21,19 +21,24 @@ Go to your PostHog app and navigate to **Workflows > Opt-out list**. Click **Imp
 This step imports all subscription topics and globally unsubscribed customers from Customer.io using an App API key.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step1_light_bf6fe10f61.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step1_dark_17eab665b2.png"
-    classes="rounded"
-    alt="Enter API key"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step1_light_bf6fe10f61.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step1_dark_17eab665b2.png"
+  classes="rounded"
+  alt="Enter API key"
 />
 
-To create an App API key in Customer.io, go to **[Settings > Account Settings > App API Keys](https://fly.customer.io/settings/api_credentials?keyType=app)** in your Customer.io dashboard. 
+To create an App API key in Customer.io, go to **[Settings > Account Settings > App API Keys](https://fly.customer.io/settings/api_credentials?keyType=app)** in your Customer.io dashboard.
 
 Click **Create New App API Key** and give it a descriptive name (e.g. "PostHog Import").
 
-**Important**: Save this API key securely – Customer.io only shows it once.
+<CalloutBox icon="IconInfo" title="Save your API key" type="action">
+
+Save this API key securely – Customer.io only shows it once.
+
+</CalloutBox>
 
 Go back to PostHog, paste the key into the first step, and click **Start import**. This will import:
+
 - All available categories from Customer.io
 - All customers who are generally unsubscribed (not subscribed to any category)
 
@@ -44,21 +49,23 @@ Customer.io only supports importing globally unsubscribed users via API, so per-
 <Step title="Upload opt-out preferences CSV" badge="required">
 
 To get the CSV of people who have opted out of specific categories, go to the **People** page in Customer.io. Filter for people with subscription preferences:
+
 1. Click **conditions** at the top of the page
 2. Select `cio_subscription_preferences` from the dropdown
 3. Choose the **exists** operator
 4. Confirm your choice
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/1_a04d048af2.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/1_a04d048af2.png"
-    classes="rounded"
-    alt="Adding attribute filter for cio_subscription_preferences"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/1_a04d048af2.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/1_a04d048af2.png"
+  classes="rounded"
+  alt="Adding attribute filter for cio_subscription_preferences"
 />
 
 This will update the people list in the table below to show only those with subscription preferences.
 
 Now export this data:
+
 1. Click **Export to CSV** in the top right corner
 2. Click **Choose attributes**
 3. Select only these two attributes:
@@ -66,10 +73,10 @@ Now export this data:
    - `email` (make sure it's `email` and **not** `$email`)
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2_0cf22e73b9.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2_0cf22e73b9.png"
-    classes="rounded"
-    alt="Choosing export attributes"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2_0cf22e73b9.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2_0cf22e73b9.png"
+  classes="rounded"
+  alt="Choosing export attributes"
 />
 
 Customer.io will send you an email with a download link for the CSV file.
@@ -77,19 +84,19 @@ Customer.io will send you an email with a download link for the CSV file.
 Back in PostHog, select the CSV and click **Upload & process CSV**.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step2_light_0f5a6142c2.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step2_dark_c964735a03.png" 
-    classes="rounded"
-    alt="Upload CSV"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step2_light_0f5a6142c2.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step2_dark_c964735a03.png"
+  classes="rounded"
+  alt="Upload CSV"
 />
 
 Once complete, you'll see a success message with a summary of imported opt-outs.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step2_completed_light_2774421ebd.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step2_completed_dark_e54e84395f.png"
-    classes="rounded"
-    alt="CSV import complete"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step2_completed_light_2774421ebd.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step2_completed_dark_e54e84395f.png"
+  classes="rounded"
+  alt="CSV import complete"
 />
 
 </Step>
@@ -105,13 +112,14 @@ Next, copy the webhook signing secret. It's used to verify that incoming webhook
 Back in PostHog, paste the signing secret and click **Enable sync**.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step3_light_2c23a92419.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step3_dark_c36c86c266.png"
-    classes="rounded"
-    alt="Inbound webhook sync enabled"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step3_light_2c23a92419.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step3_dark_c36c86c266.png"
+  classes="rounded"
+  alt="Inbound webhook sync enabled"
 />
 
 Once enabled, PostHog automatically records opt-outs whenever:
+
 - A user globally unsubscribes or resubscribes in Customer.io
 - A user changes their per-topic subscription preferences in Customer.io
 
@@ -126,16 +134,17 @@ Only categories originally imported from Customer.io are synced back.
 To get your Customer.io Track API credentials, go to **Settings > API and webhook credentials > Track API Keys** and copy the **Site ID** and **Track API key**.
 
 Back in PostHog:
+
 1. Select your Customer.io **region** (US or EU) – this determines which Track API endpoint PostHog uses
 2. Enter your **Site ID**
 3. Enter your **Track API key**
 4. Click **Enable sync**
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step4_light_ec05fee09f.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step4_dark_e4a42010f8.png"
-    classes="rounded"
-    alt="Outbound sync configuration in PostHog"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step4_light_ec05fee09f.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step4_dark_e4a42010f8.png"
+  classes="rounded"
+  alt="Outbound sync configuration in PostHog"
 />
 
 </Step>
