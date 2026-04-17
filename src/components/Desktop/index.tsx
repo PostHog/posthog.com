@@ -707,15 +707,6 @@ export default function Desktop() {
                             }}
                         />
                         <div
-                            className="absolute inset-0 opacity-0 dark:opacity-100"
-                            style={{
-                                backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_dark_9ab088797a.png')",
-                                backgroundSize: '200px 200px',
-                                backgroundRepeat: 'repeat',
-                            }}
-                        />
-                        <div
                             className={`absolute ${
                                 websiteMode
                                     ? 'bottom-4 -right-4 @[2600px]:right-4'

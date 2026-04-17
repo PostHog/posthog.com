@@ -1,10 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { IconSearch, IconGear, IconTextWidthFixed, IconTextWidth, IconRefresh, IconSidebarClose } from '@posthog/icons'
+import {
+    IconSearch,
+    IconGear,
+    IconTextWidthFixed,
+    IconTextWidth,
+    IconRefresh,
+    IconSidebarClose,
+    IconSidebarOpen,
+} from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Toolbar, ToolbarElement } from '../RadixUI/Toolbar'
 import { SearchProvider } from './SearchProvider'
-import { SearchBar } from './SearchBar'
+import { ViewerSearchBar } from './SearchBar'
 import { getProseClasses } from '../../constants/index'
 import { useApp } from '../../context/App'
 import Share from 'components/Share'
@@ -149,6 +157,7 @@ export function Viewer({
 }: ViewerProps) {
     const [showCher, setShowCher] = useState(false)
     const [showSearch, setShowSearch] = useState(false)
+    const [sidebarOpen, setSidebarOpen] = useState(false)
     const [isModifierKeyPressed, setIsModifierKeyPressed] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
     const searchContentRef = useRef(null)
@@ -228,26 +237,43 @@ export function Viewer({
                         </aside>
                     )} */}
                 <div className="flex flex-col flex-grow min-h-0">
-                    <main
-                        data-app="Viewer"
-                        data-scheme="primary"
-                        className="@container flex-1 relative h-full flex gap-8"
-                    >
-                        <SearchBar
-                            visible={showSearch}
-                            onClose={closeSearch}
-                            contentRef={onSearchChange ? undefined : searchContentRef}
-                            dataScheme="secondary"
-                            className="bg-primary -top-px right-8"
-                            onSearch={onSearchChange}
-                        />
+                    <main data-app="Viewer" data-scheme="primary" className="@container flex-1 relative h-full flex">
+                        <div
+                            className={`hidden bg-dark/10 dark:bg-light/10 border-r border-secondary transition-all duration-300 overflow-hidden ${
+                                sidebarOpen ? 'basis-80' : 'basis-12'
+                            }`}
+                        >
+                            <OSButton
+                                onClick={() => setSidebarOpen(!sidebarOpen)}
+                                icon={
+                                    sidebarOpen ? (
+                                        <IconSidebarOpen className="size-5 text-primary" />
+                                    ) : (
+                                        <IconSidebarClose className="size-5 text-primary" />
+                                    )
+                                }
+                                size="md"
+                            />
+                            <OSButton
+                                onClick={toggleSearch}
+                                icon={<IconSearch className="size-5 text-primary" />}
+                                size="md"
+                            />
 
-                        <div className="hidden absolute bg-white inset-8 rounded-lg shadow-xl z-10 w-full max-w-sm p-4">
-                            Search
-                        </div>
+                            {sidebarOpen && (
+                                <div className="w-80 p-4">
+                                    <h3 className="text-sm font-semibold">Search</h3>
 
-                        <div className="basis-0 basis-80 mt-12 bg-white transition-all duration-300">
-                            <OSButton icon={<IconSidebarClose className="size-5 text-primary" />} size="md" />
+                                    <ViewerSearchBar
+                                        visible={showSearch}
+                                        onClose={closeSearch}
+                                        contentRef={onSearchChange ? undefined : searchContentRef}
+                                        dataScheme="secondary"
+                                        className=""
+                                        onSearch={onSearchChange}
+                                    />
+                                </div>
+                            )}
                         </div>
 
                         <div className="@container flex-1 min-h-0 [mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]">

@@ -728,10 +728,10 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 {!item.minimal && !compact && siteSettings.experience !== 'boring' && (
                                     <>
                                         <div
-                                            className="group absolute left-2 top-2 w-full cursor-move touch-none z-10"
+                                            className="group absolute top-2 left-1/2 -translate-x-1/2 cursor-move touch-none z-10"
                                             onPointerDown={(e) => controls.start(e)}
                                         >
-                                            <IconDrag className="size-5 opacity-25 group-hover:opacity-50" />
+                                            <IconDrag className="size-5 rotate-90 opacity-25 group-hover:opacity-50" />
                                         </div>
                                         <div
                                             data-scheme="tertiary"
@@ -741,12 +741,12 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                             <div className="flex justify-end">
                                                 {siteSettings.experience !== 'boring' && (
                                                     <>
-                                                        <OSButton
+                                                        {/* <OSButton
                                                             windowButton
                                                             size="xs"
                                                             icon={<IconSearch />}
                                                             iconClassName="size-5"
-                                                        />
+                                                        /> */}
                                                         <OSButton
                                                             windowButton
                                                             size="xs"

@@ -5,7 +5,7 @@ import { useSearch } from './SearchProvider'
 import Mark from 'mark.js'
 import debounce from 'lodash/debounce'
 
-interface SearchBarProps {
+interface ViewerSearchBarProps {
     visible: boolean
     onClose: () => void
     contentRef?: React.RefObject<HTMLElement>
@@ -14,7 +14,7 @@ interface SearchBarProps {
     onSearch?: (search: string) => void
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({
+export const ViewerSearchBar: React.FC<ViewerSearchBarProps> = ({
     visible,
     onClose,
     contentRef,
@@ -106,9 +106,14 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     }, [inputValue, debouncedSetSearchQuery])
 
     useEffect(() => {
+        const contentEl = contentRef?.current
         return () => {
             if (duplicateContainerRef.current) {
                 duplicateContainerRef.current.remove()
+                duplicateContainerRef.current = null
+            }
+            if (contentEl) {
+                contentEl.style.display = 'block'
             }
         }
     }, [])
@@ -129,14 +134,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     if (!visible) return null
 
     return (
-        <div
-            ref={containerRef}
-            data-scheme={dataScheme}
-            className={`absolute w-64 p-1.5 border border-t-0 border-primary rounded-b z-50 flex items-center gap-1 ${className}`}
-        >
+        <div ref={containerRef} data-scheme={dataScheme} className={` ${className}`}>
             <input
                 placeholder="Search this page..."
-                className="w-full p-1 rounded border border-input text-primary text-sm bg-light dark:bg-dark"
+                className="w-full px-3 py-1.5 text-sm border border-secondary rounded bg-white dark:bg-dark focus:outline-none focus:border-primary"
                 value={inputValue}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
@@ -156,4 +157,4 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     )
 }
 
-export default SearchBar
+export default ViewerSearchBar
