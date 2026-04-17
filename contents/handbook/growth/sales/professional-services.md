@@ -4,9 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Some potential customers either expect to pay for professional services to help them get set up. There are others who don't ask for this, but where we can tell it would be helpful for them. 
+Some potential customers expect to pay for professional services to help them get set up. While not every potential customer will ask, we have capability to help customers that have this need. 
 
-> For now this is only a service we offer to potential customers by default, so this will mainly be of interest to the <SmallTeam slug="sales-cs" />.
+> For now, this is only a service we offer to potential customers by default, so this will mainly be of interest to the <SmallTeam slug="sales-cs" />.
 
 ## Who we can offer professional services to
 
@@ -20,7 +20,7 @@ A good candidate for this probably has some combination of the following:
 - They are able and willing to give our team access to their codebase
 - We are helping them get set up with session replay, feature flags, LLM analytics, and/or error tracking
 
-If you are working with someone where this might be applicable, ping Charles and Simon first, as we can offer to send a forward deployed engineer to work with them to help get set up. **Please don't just offer this to anyone without checking in**, as we don't have unlimited capacity. 
+If you are working with a lead where this might be applicable, ping Charles and Simon first, as we can offer to send a forward deployed engineer to work with them to help get set up. **Please don't just offer this to anyone without checking in**, as we don't have unlimited capacity. 
 
 For ongoing training, this is something that we are solving for separately, but is not within the scope of professional services at the moment. 
 
@@ -37,14 +37,16 @@ The specific checklist of what will be implemented depends on the customer, but 
 This should be conducted ahead of time to ensure that we deliver services according to the customer's needs.  We will document a plan for:
 
  - PostHog SDK implementation.
- - User identification.
+ - User/role identification.
+ - Migration needs.
  - Privacy controls.
  - Sampling.
  - Autocapture tuning.
  - Custom event instrumentation.
  - Identifying key insights/dashboards to be created.
+ - Training plan.
 
-At the end of this session we should have a good plan and understanding of any onsite work which needs to take place, as well as who in the customer our engineer will be working with, and what level of access to customer systems they require.
+At the end of this session we should have a good plan and understanding of any onsite work which needs to take place, as well as who in the customer our engineer will be working with, and what level of access to customer systems they require. Implementation scoping may also serve as a chance at deeper discovery with an expanded team. We can consider implementation scoping as an opportunity to both expand value to different personas at the same usage level (and hence, cost) as well as to identify additional PostHog products that have a strong use case / solve pain points for the customer.
 
 ### Technical implementation
 
@@ -58,7 +60,7 @@ Here we make sure that PostHog is correctly integrated into the codebase using o
 
 ### Getting started training
 
-Once data is integrated, we should provide an intro to PostHog session to the customer to teach them the basics of how to use PostHog.  This will be tailored to their needs but should provide a baseline understanding of how to navigate the UI, where to find events, create insights, filter replays, etc.
+Once data is integrated, we should provide an intro to PostHog session to the customer to teach them the basics of how to use PostHog.  This will be tailored to their needs but should provide a baseline understanding of how to navigate the UI, where to find events, create insights, filter replays, etc. While some customers will only have engineers interacting with the PostHog product, we should identify whether there are adjacent teams that would benefit from visibility into the data and assess whether a baseline level of training would add value (and stickiness).
 
 > Whilst Sales and CS folks also provide ongoing training to customers in their book of business, it's important to ensure they have a basic understanding of PostHog, especially if they are brand new.
 
