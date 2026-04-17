@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { IconSearch, IconGear, IconTextWidthFixed, IconTextWidth, IconRefresh } from '@posthog/icons'
+import { IconSearch, IconGear, IconTextWidthFixed, IconTextWidth, IconRefresh, IconSidebarClose } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Toolbar, ToolbarElement } from '../RadixUI/Toolbar'
@@ -231,7 +231,7 @@ export function Viewer({
                     <main
                         data-app="Viewer"
                         data-scheme="primary"
-                        className="@container flex-1 relative h-full flex flex-col"
+                        className="@container flex-1 relative h-full flex gap-8"
                     >
                         <SearchBar
                             visible={showSearch}
@@ -242,7 +242,15 @@ export function Viewer({
                             onSearch={onSearchChange}
                         />
 
-                        <div className="flex-1 min-h-0 [mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]">
+                        <div className="hidden absolute bg-white inset-8 rounded-lg shadow-xl z-10 w-full max-w-sm p-4">
+                            Search
+                        </div>
+
+                        <div className="basis-0 basis-80 mt-12 bg-white transition-all duration-300">
+                            <OSButton icon={<IconSidebarClose className="size-5 text-primary" />} size="md" />
+                        </div>
+
+                        <div className="@container flex-1 min-h-0 [mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]">
                             {hasTabs ? (
                                 <div data-scheme="primary" className="bg-accent h-full">
                                     <article
