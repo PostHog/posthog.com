@@ -106,7 +106,7 @@ At this point they will be notified about this automatically via the billing ser
 After three consecutive missed payment periods, the customer must provide advance payment covering three months of service based on their typical usage before account access is restored. If the customer disagrees or fails to make the advance payment, the account may be reverted to the Free Tier. 
 
 ### India-based customers
-- GST: If you're a business, you're required to provide your GSTIN when signing up with PostHog. You would be liable to manage all GST under the Reverse Charge Mechanism.
+- GST: India-based customers are required to provide their GSTIN when signing up. The customer is liable to manage all GST under the Reverse Charge Mechanism.
 - 3DS payment failures: Indian banks require 3DS (one time password) for international card payments. The customer is responsible for completing the 3DS step (our billing system sends a couple of reminders) without which the payment will fail.
 
 
