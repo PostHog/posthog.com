@@ -111,9 +111,9 @@ Users are analyzed based on the first variant they were exposed to, regardless o
 
 ## Exposure deduplication
 
-PostHog counts one exposure per user per variant in experiment results — even if multiple `$feature_flag_called` events fire for the same user, they won't inflate your exposure counts or affect your results as long as the variant value is the same.
+PostHog counts one exposure per user per variant in experiment results. Even if multiple `$feature_flag_called` events fire for the same user, they won't inflate your exposure counts or affect your results as long as the variant value is the same.
 
-The SDKs also deduplicate on the sending side. In the browser, dedup persists across sessions via localStorage. In server-side SDKs (Node, Python), dedup is in-memory and resets on server restart, so a user may fire a new event after a deploy — but as noted above, this doesn't affect experiment analysis.
+The SDKs also deduplicate on the sending side. In the browser, dedup persists across sessions via localStorage. In server-side SDKs (Node, Python), dedup is in-memory and resets on server restart, so a user may fire a new event after a deploy. As noted above, this doesn't affect experiment analysis.
 
 ## Sample ratio mismatch detection
 

@@ -18,7 +18,7 @@ In your experiment, each user is randomly assigned to a variant (usually either 
 
 <CalloutBox icon="IconWarning" title="Only getFeatureFlag() counts as an exposure" type="caution">
 
-You must use `getFeatureFlag()` (or its framework equivalent like `useFeatureFlagVariantKey()`) to check variants. Other methods like `getAllFlags()`, `getFeatureFlags()`, or `getFeatureFlagPayload()` alone do **not** record an [exposure event](/docs/experiments/exposures) — users evaluated with those methods won't be included in your experiment results.
+You must use `getFeatureFlag()` (or its framework equivalent like `useFeatureFlagVariantKey()`) to check variants. Other methods like `getAllFlags()`, `getFeatureFlags()`, or `getFeatureFlagPayload()` alone do **not** record an [exposure event](/docs/experiments/exposures). Users evaluated with those methods won't be included in your experiment results.
 
 </CalloutBox>
 
