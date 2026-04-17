@@ -132,7 +132,7 @@ const AppCount = () => {
     return <>{APP_COUNT}</>
 }
 
-const CTAs = () => {
+export const CTAs = () => {
     const [showInstall, setShowInstall] = useState(false)
     return (
         <div className="mb-4">
