@@ -28,6 +28,7 @@ import EditWrapper from './EditWrapper'
 import { useApp } from '../../../context/App'
 import ReportSpamButton from './ReportSpamButton'
 import OSButton from 'components/OSButton'
+import LevelBadge from './LevelBadge'
 import { useToast } from '../../../context/Toast'
 
 type ReplyProps = {
@@ -423,6 +424,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
                     </Link>
                 )}
+                {!isMax && <LevelBadge points={profile?.data?.attributes?.reputation} />}
                 {badgeText && (
                     <span className="border border-primary dark: text-xs py-0.5 px-1 rounded-sm">{badgeText}</span>
                 )}
