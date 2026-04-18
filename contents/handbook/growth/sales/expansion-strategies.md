@@ -17,7 +17,7 @@ These four strategies are not mutually exclusive. Most accounts will involve a c
 | Go deeper | Layer more products onto the team already using PostHog | Accounts with 1-2 products adopted, strong engagement, same team |
 | Build champions | Grow usage and advocacy from individual power users up | Accounts where you lack executive access, or where adoption is engineer-driven |
 | Expand into new teams | Replicate PostHog usage in a different team or business unit | Larger orgs with multiple engineering teams, product lines, or workloads |
-| Move upward | Engage leadership to drive org-wide adoption or commitment | Accounts with strong bottom-up usage ready for an annual contract or org-wide rollout |
+| Move upward | Engage leadership to drive org-wide adoption or commitment | Accounts with strong bottom-up usage ready for credit purchase or org-wide rollout |
 
 ## Strategy 1: Go deeper on the existing team
 
