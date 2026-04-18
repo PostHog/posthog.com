@@ -90,6 +90,7 @@ export const LOGOS = {
     nodejs: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg',
     nuxt: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nuxt.svg',
     ollama: 'https://res.cloudinary.com/dmukukwp6/image/upload/ollama_a058ab8f46.svg',
+    opentelemetry: 'https://res.cloudinary.com/dmukukwp6/image/upload/opentelemetry_afb29df5ab.svg',
     phoenix: 'https://res.cloudinary.com/dmukukwp6/image/upload/Phoenix_Framework_81f5da0296.svg',
     perplexity: 'https://res.cloudinary.com/dmukukwp6/image/upload/perplexity_1_cb4f143ce1.svg',
     php: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/php.svg',
