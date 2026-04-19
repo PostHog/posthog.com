@@ -17,6 +17,7 @@ import {
     IconShieldLock,
     IconThumbsDown,
     IconThumbsDownFilled,
+    IconSpinner,
     IconThumbsUp,
     IconThumbsUpFilled,
     IconTrash,
@@ -279,6 +280,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
 
     const [pendingDelete, setPendingDelete] = useState(false)
     const [isEditingReply, setIsEditingReply] = useState(false)
+    const [resolving, setResolving] = useState(false)
     const deleteTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const toastCreatedAtRef = useRef<number | null>(null)
     const { addToast, removeToast } = useToast()
@@ -541,10 +543,18 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         <div className="space-y-1 mt-2">
                             {(isModerator || resolvable) && !(resolved && resolvedBy?.data?.id === id) && (
                                 <OSButton
-                                    onClick={() => handleResolve(true, id)}
+                                    onClick={async () => {
+                                        setResolving(true)
+                                        try {
+                                            await handleResolve(true, id)
+                                        } finally {
+                                            setResolving(false)
+                                        }
+                                    }}
                                     variant="secondary"
                                     size="md"
-                                    icon={<IconCheck />}
+                                    icon={resolving ? <IconSpinner className="animate-spin" /> : <IconCheck />}
+                                    disabled={resolving}
                                 >
                                     Mark as solution
                                 </OSButton>
