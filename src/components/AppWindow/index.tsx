@@ -618,7 +618,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         ? 'border-b border-primary'
                                         : `${
                                               focusedWindow === item
-                                                  ? 'shadow-2xl border-secondary'
+                                                  ? 'shadow-2xl border-primary'
                                                   : 'shadow-lg border-input'
                                           } ${dragging ? '[&_*]:select-none' : ''} ${
                                               item.minimal
@@ -893,7 +893,11 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 )}
                                 <div
                                     ref={contentRef}
-                                    className={`size-full flex-grow ${chrome ? 'overflow-hidden' : ''}`}
+                                    className={`size-full flex-grow ${
+                                        chrome
+                                            ? 'overflow-hidden border border-white/50 dark:border-white/10 rounded-lg'
+                                            : ''
+                                    }`}
                                 >
                                     {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
                                         <Router

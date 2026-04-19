@@ -331,11 +331,8 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
 
     return (
         <div id="customers">
-            <h2>Who's using PostHog?</h2>
-            <p>
-                Here are some of our paying customers. (Yes they actually use us, no it's not just some random engineer
-                who tried us out 2+ years ago.)
-            </p>
+            <h2>Social proof</h2>
+            <p>Yes they actually use us, no it's not just some random engineer who tried us out 2+ years ago.</p>
             <OSTable
                 columns={columns}
                 rows={rows}

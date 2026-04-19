@@ -5,7 +5,7 @@ import { ImageDW, TooltipDW } from 'components/Home/Decorations'
 
 export const DataStackSection = () => (
     <div id="customer-infrastructure">
-        <h2>PostHog data stack, built for data teams and loved by product teams</h2>
+        <h2>The PostHog data stack: built for data teams, loved by product people</h2>
 
         <div className="@lg:float-right text-sm @lg:max-w-xs bg-accent p-4 rounded-sm @lg:ml-6 @lg:mb-2 relative pb-[120px] @md:pb-4 @md:pr-[220px] @lg:pr-6 @lg:pb-[120px]">
             <p className="my-0 [&_p]:my-0">
@@ -25,7 +25,7 @@ export const DataStackSection = () => (
             <ImageDW />
         </div>
 
-        <Markdown>{`When you're analyzing how customers use your product, you should be operating from *the full set of data*.
+        <Markdown className="[&_li]:marker:text-primary/50">{`When you're analyzing how customers use your product, you should be operating from *the full set of data*.
 
 This includes customer information that happens *outside your product*:
 

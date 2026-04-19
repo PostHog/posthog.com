@@ -20,7 +20,7 @@ export const Hero = () => {
             <div className="text-center @xl:text-left mb-12">
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/lazy_a2afd552f7.png"
-                    className="w-64 @xl:w-48 @xl:float-right @xl:ml-4 @2xl:w-56 @3xl:w-64 @2xl:float-right -scale-x-100 @xl:mt-16 @3xl:mt-8"
+                    className="w-64 @xl:w-48 @xl:float-right @xl:ml-8 @2xl:w-56 @3xl:w-64 @2xl:float-right -scale-x-100 @xl:mt-16 @3xl:mt-8"
                 />
                 <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
                     <Logo className="inline-block h-9" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
