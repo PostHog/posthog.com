@@ -2,11 +2,23 @@
 title: Send error tracking alerts
 ---
 
-To stay on top of issues, you can set up alerts. These enable you to post to Slack, Discord, Teams, or an HTTP Webhook when an issue is created or reopened.
+Set up alerts to stay informed when issues need attention. PostHog supports three alert triggers:
 
-## Issue created or reopened
+- **Issue created** - Get notified when a new error issue is detected
+- **Issue reopened** - Get notified when a previously resolved issue reoccurs
+- **Issue spiking** - Get notified when an issue's error rate spikes above its baseline
 
-To alert when an issue is created or reopened, go to [error tracking's configuration page](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-alerting) and click **Alerting**. This shows you a list of existing alerts. Clicking **New notification** brings you to a page to create a new one.
+Send alerts to Slack, Discord, Microsoft Teams, GitHub (creates an issue), GitLab (creates an issue), or Linear (creates an issue).
+
+## Create alerts from the Recommendations tab
+
+The fastest way to set up alerts is from the **Recommendations** tab in [Error Tracking](https://app.posthog.com/error_tracking). The **Alert coverage** card shows which alert types you've configured and lets you create new alerts directly.
+
+Click **Create alert** next to any unconfigured trigger to open the setup wizard. Choose your destination and configure settings. Since you selected the trigger from the card, the wizard skips the trigger selection step.
+
+## Create alerts from the Configuration page
+
+Alternatively, you can create alerts from [error tracking's configuration page](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-alerting). Click **Alerting** to see a list of existing alerts, then click **New notification** to create a new one.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/error_alerts_create_light_1a05deef21.png"
@@ -15,9 +27,9 @@ To alert when an issue is created or reopened, go to [error tracking's configura
     classes="rounded"
 />
 
-Choosing an option brings you to a page to configure the alert. This may require setting up the Slack integration or pasting in a webhook URL. Once done, you can test the alert by clicking **Test function** and then finalize by clicking **Create & enable**.
+Choosing a destination brings you to a page to configure the alert. Some destinations require additional setup, such as OAuth for Slack or repository access for GitHub. Once configured, you can test the alert by clicking **Test function** and then finalize by clicking **Create & enable**.
 
-This will then send alerts to your chosen destination when an issue is created or reopened like this:
+Here's an example of a Slack notification:
 
 ![Slack notification](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_14_02_41_2x_2410295066.png)
 
@@ -32,11 +44,11 @@ You can filter an alert based on the properties of an issue. This is useful for 
     classes="rounded"
 />
 
-## Spike alerts
+## Spike detection
 
-PostHog can also alert you when an existing issue suddenly spikes in volume - for example, after a bad deploy. This works differently from issue-created alerts. Instead of triggering when a new issue is first seen, spike alerts fire when an issue's error rate significantly exceeds its historical baseline.
+The **Issue spiking** trigger works differently from the other two triggers. Instead of firing when an issue is first seen or reopened, spike alerts trigger when an existing issue's error rate significantly exceeds its historical baseline. This is useful for catching regressions after deploys.
 
-See the [spike detection guide](/docs/error-tracking/spikes) to learn how it works and how to configure it.
+See the [spike detection guide](/docs/error-tracking/spikes) to learn how spike detection works and how to configure sensitivity thresholds.
 
 ## Other alerting options
 
