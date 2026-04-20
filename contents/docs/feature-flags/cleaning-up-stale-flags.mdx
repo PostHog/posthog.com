@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
 Feature flags accumulate, and you're billed for every active flag even if no code explicitly checks it. The web SDK evaluates all active flags by default on load, and server-side calls to `getAllFlags()` include them too. Flags that are fully rolled out, linked to completed experiments, or simply forgotten keep generating costs while adding clutter to your codebase. Cleaning them up reduces your bill, removes tech debt, and makes your remaining flags easier to reason about.
 
 This guide covers all the ways to find and remove stale flags, from fully manual to fully automated. Pick what fits your workflow. You can also paste this page's URL or contents into any AI coding agent as a prompt to guide the cleanup process.
@@ -23,11 +21,7 @@ You can see stale flags in the PostHog UI by filtering the feature flags list to
 
 ## The correct cleanup order
 
-<CalloutBox icon="IconWarning" title="Always clean up code first, then disable the flag in PostHog" type="caution">
-
-A 100% rollout doesn't mean the flag is safe to disable. If your code still checks it, disabling it in PostHog turns the feature off for everyone. Remove the flag from your code first.
-
-</CalloutBox>
+Order of operations matters when cleaning up stale flags. A 100% rollout doesn't mean the flag is safe to disable. If your code still checks it, disabling it in PostHog turns the feature off for everyone. Remove the flag from your code first.
 
 The safe sequence is:
 
@@ -65,19 +59,6 @@ List all stale feature flags in my project.
 ```
 
 The MCP server calls `feature-flag-get-all` with `active: "STALE"` and returns the results. This works in any MCP client like Claude Code, Cursor, Windsurf, VS Code, and others. See [Manage flags with MCP](/docs/feature-flags/create-flags-mcp).
-
-### With the API
-
-Hit the feature flags endpoint with the `active=STALE` filter:
-
-```bash
-curl -s "https://us.posthog.com/api/projects/<PROJECT_ID>/feature_flags/?active=STALE&limit=100" \
-  -H "Authorization: Bearer <PERSONAL_API_KEY>" | python3 -m json.tool
-```
-
-Replace `us.posthog.com` with `eu.posthog.com` or your self-hosted URL. Get your personal API key from [project settings](https://us.posthog.com/settings/project#personal-api-keys).
-
-The response includes each flag's key, rollout configuration, last evaluation date, and experiment associations.
 
 ## 2. Removing flags from code
 
@@ -197,40 +178,6 @@ Disable the feature flag "new-checkout".
 
 ```text
 Disable the feature flag "new-checkout" by setting active to false.
-```
-
-### With the API
-
-```bash
-curl -X PATCH "https://us.posthog.com/api/projects/<PROJECT_ID>/feature_flags/<FLAG_ID>/" \
-  -H "Authorization: Bearer <PERSONAL_API_KEY>" \
-  -H "Content-Type: application/json" \
-  -d '{"active": false}'
-```
-
-To disable multiple flags at once, use a script:
-
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-POSTHOG_HOST="https://us.posthog.com"
-PROJECT_ID="<YOUR_PROJECT_ID>"
-API_KEY="<YOUR_PERSONAL_API_KEY>"
-
-disable_flag() {
-  local flag_id="$1" flag_key="$2"
-  echo "Disabling: $flag_key (id: $flag_id)"
-  curl -s -X PATCH "${POSTHOG_HOST}/api/projects/${PROJECT_ID}/feature_flags/${flag_id}/" \
-    -H "Authorization: Bearer ${API_KEY}" \
-    -H "Content-Type: application/json" \
-    -d '{"active": false}' > /dev/null
-}
-
-disable_flag "12345" "new-checkout"
-disable_flag "12346" "beta-dashboard-v2"
-
-echo "Done."
 ```
 
 ## 4. Automating cleanup with CI
