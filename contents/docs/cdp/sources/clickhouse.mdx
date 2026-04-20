@@ -1,0 +1,60 @@
+---
+title: Linking ClickHouse as a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+sourceId: ClickHouse
+---
+
+<CalloutBox icon="IconInfo" title="Beta" type="fyi">
+
+The ClickHouse source is currently in beta.
+
+</CalloutBox>
+
+The ClickHouse connector can link your database tables to PostHog. It uses Arrow streaming to keep memory bounded, so it works with very large databases.
+
+To link ClickHouse:
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
+2. Click **New source** and select ClickHouse
+3. Enter your database connection details:
+   - **Host** – The hostname or IP of your ClickHouse server, like `play.clickhouse.com` or `123.132.1.100`.
+   - **Port** – The HTTP(S) port your ClickHouse server is listening on. The default for HTTPS is `8443` and for HTTP is `8123`.
+   - **Database** – The name of the database you want to sync, like `default`.
+   - **User** – The username with the necessary permissions to access the database.
+   - **Password** – The password for the user (optional if your server allows passwordless access).
+   - **Use HTTPS?** – Whether to connect over HTTPS. Default is **Yes**.
+   - **Verify SSL certificate?** – Whether to verify the server's SSL certificate. Default is **Yes**. Disable this if your server uses a self-signed certificate.
+4. If you need to connect through an SSH tunnel, enable and configure it (optional):
+   - **Tunnel host** – The hostname of your SSH server.
+   - **Tunnel port** – The port your SSH server is listening on.
+   - **Authentication type:**
+     - For password authentication, enter your SSH username and password.
+     - For key-based authentication, enter your SSH username, private key, and optional passphrase.
+5. Click **Next**
+
+The data warehouse then starts syncing your ClickHouse data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
+
+## Row counts
+
+Row counts are fetched automatically for most table engines. However, some table types don't track row counts natively:
+
+- **Plain views** and engines like Memory, Buffer, Log, Kafka, and URL show as **Skipped** in the schema list because counting rows would require a full table scan.
+- **MergeTree** tables use the fast `system.tables.total_rows` metadata.
+- **Distributed** tables fall back to a lightweight `SELECT count()` query.
+
+## Incremental sync
+
+ClickHouse sources support incremental sync using integer (`Int8`–`Int64`, `UInt8`–`UInt64`) and temporal (`Date`, `Date32`, `DateTime`, `DateTime64`) cursor fields. Choose a cursor field that increases monotonically so new rows are picked up on each sync.
+
+## Permissions
+
+The ClickHouse source only requires read permissions on the database and tables you intend to sync, plus access to `system.columns` and `system.tables` for schema discovery.
+
+import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
+
+<InboundIpAddresses />
