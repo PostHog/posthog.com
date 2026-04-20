@@ -37,8 +37,8 @@
                 fill: #ffffff;
             }
             #initial-loader-logomark {
-                width: 48px;
-                height: 28px;
+                width: 144px;
+                height: 84px;
                 overflow: visible;
                 flex-shrink: 0;
             }
@@ -83,7 +83,7 @@
         loadingWrapper.id = 'initial-loader'
         loadingWrapper.innerHTML = `
             <div id="initial-loader-content" class="animate-logomark-jump" style="--logomark-jump-magnitude: 1.75;">
-                <svg id="initial-loader-logomark" width="48" height="28" viewBox="0 0 48 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg id="initial-loader-logomark" width="144" height="84" viewBox="0 0 48 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path id="blue" class="segment"
                         d="M0 22.4082C0 21.5173 1.07707 21.0712 1.70703 21.7012L6.29004 26.2842C6.92 26.9141 6.47391 27.9912 5.58301 27.9912H1C0.447715 27.9912 0 27.5435 0 26.9912V22.4082ZM0 12.4112C0 11.5203 1.07707 11.0742 1.70703 11.7041L9.99707 19.9942V27.9912L0.292969 18.2871C0.105496 18.0996 0 17.8453 0 17.5801V12.4112ZM0 2.41412C4.22779e-05 1.52327 1.07708 1.07718 1.70703 1.70709L9.99707 9.99711V17.9942L0.292969 8.29008C0.10552 8.10256 0 7.8482 0 7.58306V2.41412Z"
                         fill="#3F80FF"></path>
