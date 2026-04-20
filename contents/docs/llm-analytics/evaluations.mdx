@@ -216,6 +216,20 @@ Click **Generate with AI** in the code editor to open Max, PostHog's AI assistan
 - Debug errors in your existing code
 - Iterate on the logic by testing and refining
 
+## Generating descriptions with AI
+
+Click **Generate with AI** next to the description field to have PostHog summarize what your evaluation checks for. This works for both LLM judge and code-based evaluations.
+
+The generated description is based on:
+- The evaluation name
+- The judge prompt (for LLM judge evaluations)
+- The Hog source code (for code-based evaluations)
+- Whether the evaluation allows N/A results
+
+You need at least a name or prompt/source code before generating a description. If you already have a description, the button changes to **Regenerate with AI** so you can update it after making changes.
+
+> **Note:** Your organization must have AI data processing approved to use this feature. Contact your organization admin if you see a permission error.
+
 ## Managing evaluations via MCP
 
 You can also manage evaluations through the [PostHog MCP server](/docs/model-context-protocol) using AI agents like Claude Code, Cursor, or any MCP-connected tool.
