@@ -2,15 +2,27 @@
 title: Legacy statistics methodology
 ---
 
-import { FormulaScreenshot } from 'components/FormulaScreenshot'
-export const TrendExperimentCalculationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/trend-experiment-calculation-light.png"
-export const TrendExperimentCalculationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/trend-experiment-calculation-dark.png"
-export const FunnelExperimentCalculationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-experiment-calculation-light.png"
-export const FunnelExperimentCalculationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-experiment-calculation-dark.png"
-export const FunnelSignificanceLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-significance-light.png"
-export const FunnelSignificanceDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-significance-dark.png"
+import { FormulaScreenshot } from "components/FormulaScreenshot";
+export const TrendExperimentCalculationLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/trend-experiment-calculation-light.png";
+export const TrendExperimentCalculationDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/trend-experiment-calculation-dark.png";
+export const FunnelExperimentCalculationLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-experiment-calculation-light.png";
+export const FunnelExperimentCalculationDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-experiment-calculation-dark.png";
+export const FunnelSignificanceLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-significance-light.png";
+export const FunnelSignificanceDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-significance-dark.png";
 
 > **Note:** This document describes methodology used to evaluate experiments created prior to January 2025. Check out our [statistics overview](/docs/experiments/statistics) for an introduction to our updated methodology.
+
+<CalloutBox icon="IconWarning" title="Legacy experiments are read-only" type="caution">
+
+Experiments created before January 2025 are legacy experiments. Metrics on legacy experiments can no longer be edited. If you need to modify metrics, recreate the experiment using the current experiment format.
+
+</CalloutBox>
 
 ## Bayesian experimentation
 
@@ -29,7 +41,7 @@ Funnel experiments compare conversion rates. For example, if you want to measure
 
 ### 1. Probability of being the best
 
-We use Monte Carlo simulations to determine the probability of each variant being the best. 
+We use Monte Carlo simulations to determine the probability of each variant being the best.
 
 Each variant can be modeled as a beta distribution, with the alpha parameter equal to the number of conversions and the beta parameter equal to the number of failures for that variant. For each variant, we sample from their respective distributions to get a conversion rate. We perform 100,000 simulation runs in our calculations.
 
@@ -38,7 +50,7 @@ The probability of a variant being the best is given by:
 <FormulaScreenshot
   imageLight={FunnelExperimentCalculationLight}
   imageDark={FunnelExperimentCalculationDark}
-  alt="Funnel experiment calculation" 
+  alt="Funnel experiment calculation"
   classes="rounded"
 />
 
@@ -51,7 +63,7 @@ To do this, we run a Monte Carlo simulation and calculate the loss as:
 <FormulaScreenshot
   imageLight={FunnelSignificanceLight}
   imageDark={FunnelSignificanceDark}
-  alt="Funnel significance" 
+  alt="Funnel significance"
   classes="rounded"
 />
 
@@ -63,7 +75,7 @@ Trend experiments capture count data. For example, if you want to measure the ch
 
 ### 1. Probability of being the best
 
-We use Monte Carlo simulations to determine the probability of each variant being the best. 
+We use Monte Carlo simulations to determine the probability of each variant being the best.
 
 Each variant can be modeled as a gamma distribution, with the shape parameter equal to the trend count and the exposure parameter equal to the relative exposure for that variant. For each variant, we sample from their respective distributions to get a count value. We perform 100,000 simulation runs in our calculations.
 
@@ -72,7 +84,7 @@ The probability of a variant being the best is given by:
 <FormulaScreenshot
   imageLight={TrendExperimentCalculationLight}
   imageDark={TrendExperimentCalculationDark}
-  alt="Trend experiment calculation" 
+  alt="Trend experiment calculation"
   classes="rounded"
 />
 
@@ -97,5 +109,3 @@ Therefore, we have additional criteria to determine what we call **final signifi
 - Each variant has more than 100 unique users.
 - The statistical significance calculations confirm significance.
 - The combined probability of all test variants being the best is greater than 90%.
-
-
