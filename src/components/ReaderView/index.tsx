@@ -62,6 +62,20 @@ const ConditionalMarkdownDropdown = ({ pageUrl }: { pageUrl: string | undefined 
     return <CopyMarkdownActionsDropdown pageUrl={pageUrl} />
 }
 
+/**
+ * A swappable menu tab for the LeftSidebar. When `menuTabs` is provided to
+ * ReaderView, a ToggleGroup is rendered above the menu and clicking a tab
+ * swaps which `menu` is shown. Tab state is local to the sidebar — switching
+ * tabs never navigates; only clicking a link inside a `menu` does.
+ */
+export interface MenuTab {
+    label: React.ReactNode
+    value: string
+    menu: React.ReactNode
+    /** When true, this tab is active on first render. */
+    default?: boolean
+}
+
 interface ReaderViewProps {
     body?: {
         type: 'mdx' | 'plain'
@@ -101,6 +115,12 @@ interface ReaderViewProps {
      * Defaults to false (transparent, no border) to match the Viewer aesthetic.
      */
     chrome?: boolean
+    /**
+     * When provided, the LeftSidebar renders a ToggleGroup tab strip and shows
+     * the active tab's `menu` instead of `leftSidebar`/`children`. The first
+     * tab marked `default: true` is selected on mount; otherwise the first tab.
+     */
+    menuTabs?: MenuTab[]
 }
 
 interface BackgroundImageOption {
@@ -429,6 +449,7 @@ export default function ReaderView({
     showAbout = false,
     sourceInstanceName,
     chrome = false,
+    menuTabs,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -457,6 +478,7 @@ export default function ReaderView({
                 showAbout={showAbout}
                 sourceInstanceName={sourceInstanceName}
                 chrome={chrome}
+                menuTabs={menuTabs}
             >
                 {children}
             </ReaderViewContent>
@@ -659,6 +681,7 @@ interface LeftSidebarProps {
     rightActionButtons?: React.ReactNode
     productSelect?: React.ReactNode
     inlineSearch?: React.ReactNode
+    menuTabs?: MenuTab[]
     children: React.ReactNode
 }
 
@@ -675,8 +698,14 @@ const LeftSidebar = ({
     rightActionButtons,
     productSelect,
     inlineSearch,
+    menuTabs,
     children,
 }: LeftSidebarProps) => {
+    const hasTabs = !!menuTabs && menuTabs.length > 0
+    const initialTab = hasTabs ? menuTabs!.find((t) => t.default)?.value || menuTabs![0].value : ''
+    const [activeTab, setActiveTab] = useState(initialTab)
+    const activeMenu = hasTabs ? menuTabs!.find((t) => t.value === activeTab)?.menu : null
+
     return (
         <aside
             data-scheme="secondary"
@@ -694,7 +723,24 @@ const LeftSidebar = ({
                 <div className="flex-1 min-h-0 flex flex-col w-[250px]">
                     {productSelect && <div className="px-2 pb-2 flex-shrink-0">{productSelect}</div>}
                     {!isEditing && inlineSearch && <div className="px-2 pb-2 flex-shrink-0">{inlineSearch}</div>}
-                    <ScrollArea className="px-2 pb-2">{children}</ScrollArea>
+                    {hasTabs && (
+                        <div className="px-2 pb-2 flex-shrink-0">
+                            <ToggleGroup
+                                title="Sidebar mode"
+                                hideTitle
+                                options={menuTabs!.map((t) => ({
+                                    label: t.label,
+                                    value: t.value,
+                                    default: t.default,
+                                }))}
+                                value={activeTab}
+                                onValueChange={(v) => {
+                                    if (v) setActiveTab(v)
+                                }}
+                            />
+                        </div>
+                    )}
+                    <ScrollArea className="px-2 pb-2">{hasTabs ? activeMenu : children}</ScrollArea>
                 </div>
             )}
             <div
@@ -795,6 +841,7 @@ function ReaderViewContent({
     showAbout = false,
     sourceInstanceName,
     chrome = false,
+    menuTabs,
 }: ReaderViewProps) {
     const { compact, websiteMode } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
@@ -919,6 +966,7 @@ function ReaderViewContent({
                         inlineSearch={
                             <InlineSearch contentRef={onSearch ? undefined : contentRef} onSearch={onSearch} />
                         }
+                        menuTabs={menuTabs}
                     >
                         {leftSidebar || <Menu parent={parent as MenuItem} />}
                     </LeftSidebar>

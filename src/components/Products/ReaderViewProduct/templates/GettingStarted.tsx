@@ -1,0 +1,59 @@
+import React, { useState } from 'react'
+import { IconCheck, IconCopy } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import { SignupCTA } from 'components/SignupCTA'
+import { useToast } from '../../../../context/Toast'
+import { SectionComponentProps } from '../types'
+
+const INSTALL_COMMAND = 'npx -y @posthog/wizard@latest'
+
+const GettingStarted = ({ id, productData }: SectionComponentProps) => {
+    const [justCopied, setJustCopied] = useState(false)
+    const { addToast } = useToast()
+
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText(INSTALL_COMMAND)
+            setJustCopied(true)
+            addToast({ description: 'Code copied to clipboard!', duration: 3000 })
+            setTimeout(() => setJustCopied(false), 3000)
+        } catch (err) {
+            console.error('Failed to copy text: ', err)
+        }
+    }
+
+    return (
+        <section id={id} className="scroll-mt-20 not-prose">
+            <h2 className="text-3xl font-bold text-primary mt-0 mb-3">Get started</h2>
+            <p className="text-base text-secondary leading-relaxed m-0 mb-4">
+                Try {productData?.name} for free — no credit card required.
+            </p>
+            <div className="grid grid-cols-1 @md:grid-cols-2 gap-4">
+                <div className="border border-primary rounded p-5 bg-primary">
+                    <h3 className="text-lg font-bold text-primary mt-0 mb-2">Install with AI</h3>
+                    <p className="text-sm text-secondary leading-relaxed m-0 mb-3">
+                        In your terminal or AI editor (Cursor, Claude Code, etc.), run:
+                    </p>
+                    <div className="flex items-center gap-1 bg-accent rounded p-2">
+                        <code className="text-sm flex-1 truncate">{INSTALL_COMMAND}</code>
+                        <OSButton size="xs" onClick={handleCopy} aria-label="Copy to clipboard">
+                            {justCopied ? <IconCheck className="size-4 text-green" /> : <IconCopy className="size-4" />}
+                        </OSButton>
+                    </div>
+                    <p className="text-xs text-secondary m-0 mt-2">
+                        Supports Next.js, React, React Native, Svelte, and Astro.
+                    </p>
+                </div>
+                <div className="border border-primary rounded p-5 bg-primary">
+                    <h3 className="text-lg font-bold text-primary mt-0 mb-2">Install without AI</h3>
+                    <p className="text-sm text-secondary leading-relaxed m-0 mb-4">
+                        Sign up for a free account and follow the install instructions for your stack.
+                    </p>
+                    <SignupCTA size="md" type="primary" state={{ initialTab: 'signup' }} />
+                </div>
+            </div>
+        </section>
+    )
+}
+
+export default GettingStarted

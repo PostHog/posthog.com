@@ -26,6 +26,26 @@ export const sessionReplay = {
         description:
             'See how users interact with your product with Session Replay. Inspect sessions, diagnose issues, debug errors, and understand user behavior.',
     },
+    /**
+     * Explicit list of sections rendered on the About surface (`/session-replay`).
+     * Each entry picks a `template` from the template registry — defaults to
+     * the `slug` when omitted. Only nodes listed here get their own section;
+     * other product-data fields (like `screenshots`, `hog`, `slider`, etc.) are
+     * referenced by templates but don't need their own menu item.
+     */
+    marketingMenu: [
+        { slug: 'overview', name: 'Overview' },
+        { slug: 'customers', name: 'Customers' },
+        { slug: 'features', name: 'Features' },
+        { slug: 'ai', name: 'AI' },
+        { slug: 'answers', name: 'Questions' },
+        { slug: 'pricing', name: 'Pricing' },
+        { slug: 'comparison-summary', name: 'PostHog vs...' },
+        { slug: 'feature-comparison', name: 'Feature comparison' },
+        { slug: 'docs', name: 'Docs' },
+        { slug: 'pairs-with', name: 'Pairs with...' },
+        { slug: 'getting-started', name: 'Get started' },
+    ],
     overview: {
         title: 'Watch people use your product',
         description:

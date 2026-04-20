@@ -1,16 +1,10 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
-import { useContentData } from 'hooks/useContentData'
+import ProductReaderView from 'components/Products/ReaderViewProduct'
 
-// Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'session_replay'
 
 export default function SessionReplay(): JSX.Element {
-    // Get content data from multiple directories
-    const contentData = useContentData()
-
-    // Combined GraphQL query for product data
     const data = useStaticQuery(graphql`
         query {
             allProductData {
@@ -59,24 +53,5 @@ export default function SessionReplay(): JSX.Element {
         }
     `)
 
-    // Optional: Customize slides
-    // See /components/Products/Slides/README.md for more details
-    const slides = createSlideConfig({
-        templates: {
-            overview: 'columns', // Use the horizontal split layout
-        },
-        exclude: ['videos'],
-        content: {
-            answersDescription:
-                'Understand user behavior, identify friction points, and improve your product experience',
-        },
-    })
-
-    // Merge content data with product data
-    const mergedData = {
-        ...data,
-        ...contentData,
-    }
-
-    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
+    return <ProductReaderView productHandle={PRODUCT_HANDLE} data={data} />
 }
