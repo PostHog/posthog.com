@@ -1011,7 +1011,7 @@ function ReaderViewContent({
                                 )}
                                 <div
                                     ref={contentRef}
-                                    className={`@container/reader-content relative ${
+                                    className={`@container/reader-content relative ${chrome ? '' : 'font-medium'} ${
                                         padding
                                             ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
                                             : ''

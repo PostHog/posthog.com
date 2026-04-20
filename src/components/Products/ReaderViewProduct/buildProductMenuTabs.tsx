@@ -6,68 +6,99 @@ import MarketingNav from './MarketingNav'
 import ProductNav from './ProductNav'
 import type { MarketingNavItem } from './types'
 
+export type ProductSurface = 'about' | 'pricing' | 'docs'
+
 interface BuildProductMenuTabsArgs {
     /**
-     * Resolved product data from `useProduct(...)`. Must include `slug`,
-     * `name`, and `marketingMenu` (the list of About-surface sections).
+     * Resolved product data from `useProduct(...)`. Must include `slug` and
+     * `name`. Reads `marketingMenu` (About) and `pricingMenu` (Pricing) when
+     * present.
      */
     productData:
         | {
               slug: string
               name: string
               marketingMenu?: MarketingNavItem[]
+              pricingMenu?: MarketingNavItem[]
           }
         | null
         | undefined
     /**
-     * Ref to the wrapping element containing the `<section id="..." />` nodes.
-     * When provided, the About tab uses `MarketingNav` (in-page anchor scrolling
-     * within the article column's ScrollArea). Omit when rendering on a page
-     * that doesn't host the About sections — the About tab falls back to
-     * `ProductNav` (cross-page Gatsby links).
+     * Ref to the wrapping element containing the `<section id="..." />` nodes
+     * on the active surface. Used by `MarketingNav` for in-page anchor scrolling
+     * within the article column's ScrollArea. Only the tab whose `value`
+     * matches `activeSurface` uses this ref; the other tabs fall back to
+     * cross-page Gatsby links via `ProductNav`.
      */
-    aboutContentRef?: React.RefObject<HTMLElement>
+    contentRef?: React.RefObject<HTMLElement>
     /** Seeds which tab is active on first render. */
-    activeSurface: 'about' | 'docs'
+    activeSurface: ProductSurface
+}
+
+const surfaceBasePath = (productSlug: string, surface: ProductSurface): string => {
+    if (surface === 'pricing') return `/${productSlug}/pricing`
+    return `/${productSlug}`
 }
 
 /**
- * Single source of truth for the LeftSidebar's tab strip on a product's
- * About page (`/<slug>`) and Docs page (`/docs/<slug>`). Reads the
- * `marketingMenu` from `productData` and looks up the Docs menu from
- * `docsMenu` so both surfaces render an identical sidebar.
+ * Single source of truth for the LeftSidebar's tab strip across a product's
+ * About (`/<slug>`), Pricing (`/<slug>/pricing`), and Docs (`/docs/<slug>`)
+ * surfaces. Reads `marketingMenu` / `pricingMenu` from `productData` and
+ * looks up the Docs menu from `docsMenu` so every surface renders an
+ * identical sidebar.
+ *
+ * The active tab uses in-page anchor scrolling via `MarketingNav` (when
+ * `contentRef` is provided); inactive tabs use `ProductNav` cross-page links.
  */
-export function buildProductMenuTabs({
-    productData,
-    aboutContentRef,
-    activeSurface,
-}: BuildProductMenuTabsArgs): MenuTab[] {
+export function buildProductMenuTabs({ productData, contentRef, activeSurface }: BuildProductMenuTabsArgs): MenuTab[] {
     if (!productData) return []
 
-    const { slug: productSlug, name: productName, marketingMenu = [] } = productData
+    const { slug: productSlug, name: productName, marketingMenu = [], pricingMenu = [] } = productData
 
     const docsChildren =
         docsMenu.children.find(({ name }: { name: string }) => name.toLowerCase() === productName.toLowerCase())
             ?.children || []
 
-    return [
-        {
+    const tabs: MenuTab[] = []
+
+    if (marketingMenu.length > 0) {
+        tabs.push({
             label: 'About',
             value: 'about',
             default: activeSurface === 'about',
-            menu: aboutContentRef ? (
-                <MarketingNav items={marketingMenu} contentRef={aboutContentRef} />
-            ) : (
-                <ProductNav items={marketingMenu} basePath={`/${productSlug}`} />
-            ),
-        },
-        {
+            menu:
+                activeSurface === 'about' && contentRef ? (
+                    <MarketingNav items={marketingMenu} contentRef={contentRef} />
+                ) : (
+                    <ProductNav items={marketingMenu} basePath={surfaceBasePath(productSlug, 'about')} />
+                ),
+        })
+    }
+
+    if (pricingMenu.length > 0) {
+        tabs.push({
+            label: 'Pricing',
+            value: 'pricing',
+            default: activeSurface === 'pricing',
+            menu:
+                activeSurface === 'pricing' && contentRef ? (
+                    <MarketingNav items={pricingMenu} contentRef={contentRef} />
+                ) : (
+                    <ProductNav items={pricingMenu} basePath={surfaceBasePath(productSlug, 'pricing')} />
+                ),
+        })
+    }
+
+    if (docsChildren.length > 0) {
+        tabs.push({
             label: 'Docs',
             value: 'docs',
             default: activeSurface === 'docs',
             menu: <TreeMenu items={docsChildren} />,
-        },
-    ]
+        })
+    }
+
+    return tabs
 }
 
 export default buildProductMenuTabs

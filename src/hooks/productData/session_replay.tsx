@@ -39,17 +39,26 @@ export const sessionReplay = {
         { slug: 'features', name: 'Features' },
         { slug: 'ai', name: 'AI' },
         { slug: 'answers', name: 'Questions' },
-        { slug: 'pricing', name: 'Pricing' },
         { slug: 'comparison-summary', name: 'PostHog vs...' },
         { slug: 'feature-comparison', name: 'Feature comparison' },
         { slug: 'docs', name: 'Docs' },
         { slug: 'pairs-with', name: 'Pairs with...' },
         { slug: 'getting-started', name: 'Get started' },
     ],
+    /**
+     * Sections rendered on the Pricing surface (`/session-replay/pricing`).
+     * Same shape as `marketingMenu` — `template` defaults to `slug`.
+     */
+    pricingMenu: [
+        { slug: 'rates', name: 'Session Replay rates', template: 'pricing' },
+        { slug: 'calculator', name: 'Pricing calculator' },
+        { slug: 'plans', name: 'Plans' },
+    ],
     overview: {
         title: 'Watch people use your product',
         description:
             'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
+        eli5: 'Replay records what happens in a user\'s session — clicks, scrolls, form inputs, page views, network requests, console logs — and plays it back like video. You reach for it when metrics tell you something is wrong but not why: a funnel drops off, a bug report comes in, rage clicks spike. Replay fills in the "why."',
         textColor: 'text-black', // tw
     },
     videos: {
@@ -171,7 +180,6 @@ export const sessionReplay = {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
                     alt: 'Network monitor',
                     stylize: true,
-                    shadow: true,
                 },
             ],
         },
@@ -293,15 +301,15 @@ window.posthog.onFeatureFlags(function () {
             description:
                 "Works with PostHog.js on the web. If you're already using product analytics, there's no separate installation.",
             children: (
-                <div className="max-w-xl mx-auto">
+                <div>
                     <fieldset className="bg-primary">
-                        <legend className="text-lg font-semibold">Web</legend>
+                        <legend className="text-sm font-semibold">Web</legend>
                         <OSButton
                             asLink
                             icon={<IconJavaScript />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
+                            iconClassName="size-6 relative -top-px"
+                            size="lg"
+                            className="mr-1"
                             to="/docs/libraries/js"
                             state={{
                                 newWindow: true,
@@ -311,13 +319,13 @@ window.posthog.onFeatureFlags(function () {
                         </OSButton>
                     </fieldset>
                     <fieldset className="bg-primary">
-                        <legend className="text-lg font-semibold">Mobile*</legend>
+                        <legend className="text-sm font-semibold">Mobile*</legend>
                         <OSButton
                             asLink
                             icon={<IconApple />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
+                            iconClassName="size-6 relative -top-px"
+                            size="lg"
+                            className="mr-1"
                             to="/docs/libraries/ios"
                             state={{
                                 newWindow: true,
@@ -328,9 +336,9 @@ window.posthog.onFeatureFlags(function () {
                         <OSButton
                             asLink
                             icon={<IconAndroid />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
+                            iconClassName="size-6 relative -top-px"
+                            size="lg"
+                            className="mr-1"
                             to="/docs/libraries/android"
                             state={{
                                 newWindow: true,
@@ -340,13 +348,13 @@ window.posthog.onFeatureFlags(function () {
                         </OSButton>
                     </fieldset>
                     <fieldset className="bg-primary">
-                        <legend className="text-lg font-semibold">Cross-platform*</legend>
+                        <legend className="text-sm font-semibold">Cross-platform*</legend>
                         <OSButton
                             asLink
                             icon={<IconReactNative />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
+                            iconClassName="size-6 relative -top-px"
+                            size="lg"
+                            className="mr-1"
                             to="/docs/libraries/react-native"
                             state={{
                                 newWindow: true,
@@ -357,9 +365,9 @@ window.posthog.onFeatureFlags(function () {
                         <OSButton
                             asLink
                             icon={<IconFlutter />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
+                            iconClassName="size-6 relative -top-px"
+                            size="lg"
+                            className="mr-1"
                             to="/docs/libraries/flutter"
                             state={{
                                 newWindow: true,

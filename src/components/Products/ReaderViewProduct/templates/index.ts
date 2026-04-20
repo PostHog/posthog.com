@@ -12,6 +12,8 @@ import FeatureComparison from './FeatureComparison'
 import Docs from './Docs'
 import PairsWith from './PairsWith'
 import GettingStarted from './GettingStarted'
+import PricingCalculator from './PricingCalculator'
+import Plans from './Plans'
 
 /**
  * Registry of available section templates, keyed by the `template` string on
@@ -32,6 +34,8 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
     docs: Docs,
     'pairs-with': PairsWith,
     'getting-started': GettingStarted,
+    calculator: PricingCalculator,
+    plans: Plans,
 }
 
 export {
@@ -47,4 +51,6 @@ export {
     Docs,
     PairsWith,
     GettingStarted,
+    PricingCalculator,
+    Plans,
 }

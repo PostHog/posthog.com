@@ -8,10 +8,11 @@ import ProgressBar from 'components/ProgressBar'
 
 import type { MarketingNavItem, SectionComponentProps } from './types'
 import { resolveTemplate } from './types'
-import buildProductMenuTabs from './buildProductMenuTabs'
+import buildProductMenuTabs, { type ProductSurface } from './buildProductMenuTabs'
 import { templateRegistry } from './templates'
 
 export { default as buildProductMenuTabs } from './buildProductMenuTabs'
+export type { ProductSurface } from './buildProductMenuTabs'
 export { default as MarketingNav } from './MarketingNav'
 export { default as ProductNav } from './ProductNav'
 export { templateRegistry } from './templates'
@@ -22,6 +23,12 @@ export type { MenuTab } from 'components/ReaderView'
 interface ProductReaderViewProps {
     productHandle: string
     data: any
+    /**
+     * Which surface this page renders. Picks the matching menu off the product
+     * data (`marketingMenu` for `'about'`, `pricingMenu` for `'pricing'`) and
+     * seeds the active tab in the sidebar. Defaults to `'about'`.
+     */
+    surface?: Exclude<ProductSurface, 'docs'>
     seoOverrides?: {
         title?: string
         description?: string
@@ -29,7 +36,17 @@ interface ProductReaderViewProps {
     }
 }
 
-export default function ProductReaderView({ productHandle, data, seoOverrides }: ProductReaderViewProps) {
+const SURFACE_MENU_FIELD: Record<Exclude<ProductSurface, 'docs'>, 'marketingMenu' | 'pricingMenu'> = {
+    about: 'marketingMenu',
+    pricing: 'pricingMenu',
+}
+
+export default function ProductReaderView({
+    productHandle,
+    data,
+    surface = 'about',
+    seoOverrides,
+}: ProductReaderViewProps) {
     const productData = useProduct({ handle: productHandle }) as any
     const allProducts = useProduct() as any[]
     const { getCustomers, hasCaseStudy } = useCustomers()
@@ -49,12 +66,13 @@ export default function ProductReaderView({ productHandle, data, seoOverrides }:
         )
     }
 
-    const marketingMenu: MarketingNavItem[] = productData.marketingMenu || []
+    const menuField = SURFACE_MENU_FIELD[surface]
+    const surfaceMenu: MarketingNavItem[] = productData[menuField] || []
 
     const menuTabs = buildProductMenuTabs({
         productData,
-        aboutContentRef: sectionsRef,
-        activeSurface: 'about',
+        contentRef: sectionsRef,
+        activeSurface: surface,
     })
 
     return (
@@ -64,16 +82,9 @@ export default function ProductReaderView({ productHandle, data, seoOverrides }:
                 description={seoOverrides?.description || productData?.seo?.description}
                 image={seoOverrides?.image || `/images/og/${productData?.slug}.jpg`}
             />
-            <ReaderView
-                title={productData?.name}
-                hideTitle
-                chrome
-                proseSize="base"
-                showQuestions={false}
-                menuTabs={menuTabs}
-            >
+            <ReaderView title={productData?.name} hideTitle proseSize="lg" showQuestions={false} menuTabs={menuTabs}>
                 <div ref={sectionsRef} className="flex flex-col gap-12">
-                    {marketingMenu.map((item) => {
+                    {surfaceMenu.map((item) => {
                         const templateKey = resolveTemplate(item)
                         const Template = templateRegistry[templateKey] as
                             | React.ComponentType<SectionComponentProps>
