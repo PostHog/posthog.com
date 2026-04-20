@@ -24,6 +24,8 @@ Beyond this, we recommend:
 
 4. Archiving the experiment.
 
+5. Disabling the feature flag once the winning variant is hardcoded in your application and the flag check has been removed from your code. Every active flag counts toward your [feature flag billing](/docs/feature-flags/cutting-costs), even if it's rolled out to 100% and no longer doing anything useful.
+
 Remember, experimentation is an iterative process. Each experiment teaches you something about your users, even when results aren't what you expected.
 
 ### Ending an already rolled out experiment

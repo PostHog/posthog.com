@@ -109,6 +109,17 @@ const custom = cntl`
     hover:text-primary-dark
 `
 
+const plain = cntl`
+    bg-transparent
+    text-primary
+    hover:text-primary
+    hover:!underline
+    dark:text-primary-dark
+    dark:hover:text-primary-dark
+    !p-0
+    !border-0
+`
+
 const containerTypes = {
     primary: cntl`
         bg-button-shadow
@@ -132,6 +143,13 @@ const containerTypes = {
         bg-white/20
         border-white/30
     `,
+    plain: cntl`
+        bg-transparent
+        border-transparent
+        !no-underline
+        !border-0
+        !top-[2px]
+    `,
 }
 
 const containerSizes = {
@@ -143,8 +161,8 @@ const containerSizes = {
 }
 
 export const container = (type = 'primary', size = 'lg', width = 'auto') => cntl`
-    ${containerTypes[type]}
-    ${containerSizes[size]}
+    ${containerTypes[type as keyof typeof containerTypes]}
+    ${containerSizes[size as keyof typeof containerSizes]}
     w-${width}
     text-primary
     inline-block
@@ -168,6 +186,7 @@ const buttonTypes = {
     secondary,
     outline,
     custom,
+    plain,
 }
 
 export const button = (

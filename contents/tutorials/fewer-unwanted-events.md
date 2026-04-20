@@ -19,7 +19,7 @@ For some users, cost is a big concern. Too many events can cause unexpected cost
 
 For others, PostHog can overwhelm them with events. We try our best to help you avoid this by providing filtering tools for [insights](/manual/insights), [internal users](/tutorials/filter-internal-users), and [privacy](/tutorials/property-filter). We recommend having as much data as possible, because you never know what you need, but if you are feeling overwhelmed, there are solutions.
 
-PostHog provides options to capture fewer events and limit the number of unwanted ones. This can help lower costs and stress for new or overwhelmed users. In this tutorial, we'll explore how to limit the number of unwanted events you capture in PostHog. 
+PostHog provides options to capture fewer events and limit the number of unwanted ones. This can help lower costs and stress for new or overwhelmed users. In this tutorial, we'll explore how to limit the number of unwanted events you capture in PostHog.
 
 ## Configuring autocapture
 
@@ -27,20 +27,20 @@ PostHog provides options to capture fewer events and limit the number of unwante
 
 The potential challenge for high-traffic apps and sites is too many events being captured.
 
-To counteract this, autocapture is configurable. For example, you can use the frontend JavaScript library without enabling autocapture. Just set `autocapture` to `false` when initializing the library (this still captures `pageview` and `pageleave`).
+To counteract this, autocapture is configurable. For example, you can use the frontend JavaScript library without enabling autocapture. Just set `autocapture` to `false` when initializing the library. This disables [**interaction** autocapture](/docs/product-analytics/autocapture#interaction-autocapture) but not [**navigation** autocapture](/docs/product-analytics/autocapture#navigation-and-lifecycle-event-autocapture), so `$pageview` and `$pageleave` events are still captured.
 
 ```js
-posthog.init('<ph_project_token>', {
-  api_host: '<ph_client_api_host>',
-  defaults: '<ph_posthog_js_defaults>',
+posthog.init("<ph_project_token>", {
+  api_host: "<ph_client_api_host>",
+  defaults: "<ph_posthog_js_defaults>",
   autocapture: false,
   // ... more options
-})
+});
 ```
 
 You can also disable `pageview` and `pageleave` with the `capture_pageview` option and session recordings with `disable_session_recording`. You can find all the [configuration options for our JavaScript library](/docs/libraries/js/config) in our docs.
 
-Disabling these options still allows you to use other PostHog features such as `posthog.capture()` calls or feature flags. If limiting unwanted events is what is important for you, disabling autocapture and using capture calls gives you more control over the events you are capturing. 
+Disabling these options still allows you to use other PostHog features such as `posthog.capture()` calls or feature flags. If limiting unwanted events is what is important for you, disabling autocapture and using capture calls gives you more control over the events you are capturing.
 
 ## Using feature flags
 
@@ -49,24 +49,24 @@ If you’re worried that a specific area of your product may be generating too m
 First, you can turn off autocapture with a feature flag when the PostHog library loads. Toggling off this feature flag can lower event flow within PostHog without changing the code.
 
 ```js
-posthog.init('<ph_project_token>', { 
-  api_host: '<ph_client_api_host>',
-  defaults: '<ph_posthog_js_defaults>',
+posthog.init("<ph_project_token>", {
+  api_host: "<ph_client_api_host>",
+  defaults: "<ph_posthog_js_defaults>",
   loaded: function (posthog) {
     posthog.onFeatureFlags((_flags) => {
-      if (posthog.isFeatureEnabled('disable-autocapture')) {
+      if (posthog.isFeatureEnabled("disable-autocapture")) {
         posthog.config.autocapture = false;
       }
-    })
-  }
-})
+    });
+  },
+});
 ```
 
 Second, you can put events in key areas behind feature flags and turn them off if you reach your limit.
 
 ```js
-if (!posthog.isFeatureEnabled('disable-event-capture')) {
-  posthog.capture('event');
+if (!posthog.isFeatureEnabled("disable-event-capture")) {
+  posthog.capture("event");
 }
 ```
 
@@ -82,7 +82,7 @@ Another way to get fewer events from specific parts of your site is using the `p
 </div>
 ```
 
-This allows you to prevent autocapture on high-volume or sensitive parts of your website. For example, you could add `ph-no-capture` to your navbar to cut down on navigation click events, while keeping pageviews. 
+This allows you to prevent autocapture on high-volume or sensitive parts of your website. For example, you could add `ph-no-capture` to your navbar to cut down on navigation click events, while keeping pageviews.
 
 ## Filter out app
 
@@ -95,25 +95,26 @@ To set it up, navigate to Data Pipeline, select the Transformations tab, select 
 ```js
 [
   {
-    "property": "email",
-    "type": "string",
-    "operator": "not_contains",
-    "value": "yourcompany.com"
+    property: "email",
+    type: "string",
+    operator: "not_contains",
+    value: "yourcompany.com",
   },
   {
-    "property": "$host",
-    "type": "string",
-    "operator": "is_not",
-    "value": "localhost:8000"
+    property: "$host",
+    type: "string",
+    operator: "is_not",
+    value: "localhost:8000",
   },
   {
-    "property": "$browser_version",
-    "type": "number",
-    "operator": "gt",
-    "value": 100
-  }
-]
+    property: "$browser_version",
+    type: "number",
+    operator: "gt",
+    value: 100,
+  },
+];
 ```
+
 Finally, click save and toggle the app to activate it. You'll be able to track how it is working by clicking on the "App metrics" button (graph).
 
 > Be sure to test your filters drop the events you expect, because miswritten schema can filter large amounts of events. For example, our sample `email` filter filters all events without an email key and autocaptured properties must start with `$`.

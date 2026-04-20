@@ -247,7 +247,7 @@ posthog.capture(
   new HashMap<String, Object>() {
     {
       put("$feature_flag_response", "variant-name");
-      put("feature_flag", "feature-flag-key");
+      put("$feature_flag", "feature-flag-key");
     }
   }
 );
@@ -259,7 +259,7 @@ posthog.Capture(
     "$feature_flag_called",
     properties: new() {
         ["$feature_flag_response"] = "variant-name",
-        ["feature_flag"] = "feature-flag-key"
+        ["$feature_flag"] = "feature-flag-key"
     }
 );
 ```
