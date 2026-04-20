@@ -8,9 +8,11 @@ availability:
   enterprise: full
 ---
 
-In your [Account settings](https://us.posthog.com/settings/user-api-keys#personal-api-keys) you will find options for:
+In your [Account settings](https://app.posthog.com/settings/user-api-keys#personal-api-keys) you will find options for:
+
 - [Authentication](#authentication)
-- [Personal API keys](#personal-api-keys)  
+- [Connected applications](#connected-applications)
+- [Personal API keys](#personal-api-keys)
 - [Notifications](#notifications)
 - [Theming options](#theming-and-customization)
 
@@ -25,6 +27,7 @@ You can update your password in [your account settings](https://us.posthog.com/s
 ## Password requirements
 
 PostHog enforces the following password requirements for users:
+
 - 8 character minimum length
 - 72 character maximum length
 - We enforce complexity through [zxcvbn](https://github.com/dropbox/zxcvbn) with a minimum score of 3 ("safely unguessable")
@@ -37,6 +40,25 @@ You can require two-factor authentication (2FA) to boost your account security.
 
 To enable 2FA, go to [your account settings](https://us.posthog.com/settings/user#2fa). Under the **Two-factor authentication** section, click **Set up 2FA**. Click **View backup codes** and save them in a secure place in case you can't reach your 2FA device..
 
+## Connected applications
+
+Connected applications are third-party OAuth applications that have been granted access to your PostHog account. These include AI coding assistants like Claude Code, Cursor, and other developer tools that integrate with PostHog.
+
+You can view and manage connected applications in [your account settings](https://app.posthog.com/settings/user-connected-apps) under **Connected applications**.
+
+For each connected application, you can see:
+
+- Application name and logo
+- Scopes and permissions granted
+- When the application was authorized
+- Whether the application is verified or a first-party PostHog app
+
+### Revoking access
+
+To revoke an application's access, click the **Revoke** button next to the application. This immediately revokes all tokens and permissions granted to that application.
+
+If you need to use the application again, you can re-authorize it through the application's own interface.
+
 ## Notifications
 
 You can choose which email notifications you receive in [your account settings](https://us.posthog.com/settings/user#notifications) under **Notifications**. You can enable or disable specific notifications with toggles. Product-specific notification, such as [Alerts](/docs/alerts), have separate configurations in each product.
@@ -48,6 +70,12 @@ You can switch between dark and light mode in [your account settings](https://us
 You can also customize the new tab behavior when working in the [SQL editor](/docs/data-warehouse/sql). By default, clicking **New tab** while in the SQL editor opens another SQL editor tab. To open the search command instead, go to [**Account > Customization**](https://us.posthog.com/settings/user-customization#sql-editor-tab-preference) and select your preferred option.
 
 If you're feeling lonely and would like Max to keep you company, you can find him under [Hedgehog mode](https://us.posthog.com/settings/user#hedgehog-mode).
+
+### Sidebar apps
+
+You can customize which apps appear in the **Apps** section of the sidebar. Click the pencil icon next to **Apps** to enter edit mode, then use the checkboxes to show or hide individual apps. Click the checkmark to save your changes.
+
+To control whether new products are automatically added to your sidebar, go to [**Account > Customization**](https://app.posthog.com/settings/user-customization#sidebar-auto-suggest) and toggle **Automatically suggest new apps**.
 
 ## Deleting your account
 

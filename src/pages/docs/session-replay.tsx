@@ -133,7 +133,7 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                 title="Session replay"
                 description="Play back sessions to diagnose UI issues, improve support, and get context for nuanced user behavior."
                 buttonText="Record your first session"
-                buttonLink="/docs/session-replay/installation"
+                buttonLink="/docs/session-replay/start-here"
                 imageColumnClasses="max-w-96 mt-8 md:mt-0"
                 imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
                 imageClasses=""

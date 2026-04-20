@@ -221,22 +221,14 @@ const AskAQuestion = ({ onSubmit }: { onSubmit: () => void }) => {
                 showTopicSelector
                 onSubmit={(_values, _type, data) => {
                     onSubmit()
-                    addToast({
-                        title: 'Question posted',
-                        description: (
-                            <>
-                                Your question has been posted.
-                                <br />
-                                <Link
-                                    className="text-red dark:text-yellow font-semibold"
-                                    to={`/questions/${data.attributes.permalink}`}
-                                >
-                                    View it here
-                                </Link>
-                            </>
-                        ),
-                    })
                     closeWindow(appWindow)
+                    if (data?.attributes?.permalink) {
+                        setTimeout(() => {
+                            navigate(`/questions/${data.attributes.permalink}`, {
+                                state: { askMax: true },
+                            })
+                        }, 0)
+                    }
                 }}
                 initialView="question-form"
                 slug="/questions"

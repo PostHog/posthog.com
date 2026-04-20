@@ -45,6 +45,8 @@ If you don't get the context you're looking for, try <PrivateLink url="https://p
 
 PostHog is a startup. As solid as our stack / product / CI / dev experience is for a company of our size (super solid, tbh), it might not be the extremely-well-oiled machine you had at BigCo. If something doesn't Just Work, follow the framework above to get help.
 
+We're all human - you shouldn't expect perfection for adhering to our [culture](/handbook/company/culture), either. But you should help others learn how to stick to our culture, especially new joiners. We're all prone to occasional lapses, and it takes everyone on the team nudging each other in the right direction to keep us all on track. If you notice something happening all the time, take it upon yourself to make it better - see the next section!. 
+
 ## Make it better
 
 If you run into something you found that is confusing or needs fixing, we expect you to update the docs or handbook at minimum, and if you're keen then definitely improve the experience yourself. For example, CI is _everyone's_ job. If it sucks, fix it.

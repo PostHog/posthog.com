@@ -2,6 +2,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { pricingMenu } from '../navs'
 import Layout from 'components/Layout'
+import SEO from 'components/seo'
 import { IconAdvanced } from '@posthog/icons'
 import useProducts from 'components/Pricing/Products'
 import { PricingTiers } from 'components/Pricing/Plans'
@@ -104,6 +105,10 @@ const Addons = (): JSX.Element => {
 
     return (
         <Layout parent={pricingMenu}>
+            <SEO
+                title="Add-ons - PostHog"
+                description="Specialized functionality like data pipelines and person profiles, so you never pay for things you don't need."
+            />
             <section className="xl:w-11/12 mx-auto px-4 md:px-8 2xl:px-12 py-8 relative">
                 <div className="flex flex-col-reverse md:flex-row gap-4">
                     <div className="flex-1">

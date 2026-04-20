@@ -7,52 +7,49 @@ In simple terms, the ingestion pipeline is a collection of services which listen
 ```mermaid
 graph TD
     CLIENT[Client Library]
-    FLAGS["/flags API"]
-    CAPTURE[Capture API]
-    PLUGINS[Plugin server]
-    PERSONS["PostgreSQL (persons table)"]
+    CAPTURE["Capture service (Rust)"]
+    CDP["CDP / Ingestion worker (Node.js)"]
+    PERSONS["PostgreSQL (persons)"]
     Kafka2[Kafka]
-
-    CLIENT -..-> FLAGS
 
     CLIENT -..-> CAPTURE
     CAPTURE --> Kafka
 
-    Kafka <-..- PLUGINS
+    Kafka <-..- CDP
 
-    PLUGINS <--> PERSONS
-    PLUGINS --> Kafka2
+    CDP <--> PERSONS
+    CDP --> Kafka2
 
     Kafka2 <-..- ClickHouse
 ```
 
-## Capture API
+## Capture service
 
-The Capture API represents the user-facing side of the ingestion pipeline and is exposed as API routes where events can be sent.
+The capture service is a Rust HTTP server that represents the user-facing side of the ingestion pipeline. It is exposed as API routes where events can be sent.
 
-Before an event reaches the ingestion pipeline, there are a couple of preliminary checks and actions that we perform so that we can return a response immediately to the client:
+Before an event reaches the ingestion pipeline, there are a couple of preliminary checks and actions that the capture service performs so that it can return a response immediately to the client:
 
 - Decompressing and normalizing the shape of event data for the rest of the system
 - Sending raw data to `events_plugin_ingestion`, `events_plugin_ingestion_overflow`, or `events_plugin_ingestion_historical` Kafka topic for further processing
 
-The goal of this step is to be as simple as possible so that we can reliably get events into the ingestion pipeline, where Kafka can persist them until they can be processed.
+The goal of this step is to be as simple and fast as possible so that we can reliably get events into the ingestion pipeline, where Kafka can persist them until they can be processed.
 
-Events are written to the Kafka topics, which are then consumed by the plugin server.
+Events are written to the Kafka topics, which are then consumed by the CDP ingestion worker.
 
-## Plugin server
+## CDP ingestion worker
 
-Here is an overview of the steps events go through in the plugin server:
+The CDP (Customer Data Platform) ingestion worker is a Node.js service that processes events from Kafka. Here is an overview of the steps events go through:
 
 ```mermaid
 flowchart TD
-    STEP2["Apps - processEvent"]
-    STEP3["plugin-server - Person processing"]
-    STEP4["plugin-server - Event processing"]
-    STEP5["plugin-server - Writing to ClickHouse"]
-    STEP6["Apps - onEvent"]
+    STEP2["CDP transformations"]
+    STEP3["Person processing"]
+    STEP4["Event processing"]
+    STEP5["Writing to ClickHouse"]
+    STEP6["CDP destinations"]
     APPS1[/"GeoIP"/]
-    APPS3[/"Property flattener"/]
-    APPS2[/"Customer.io destination"/]
+    APPS3[/"Property filter"/]
+    APPS2[/"Webhook destination"/]
     APPS4[/"Hubspot destination"/]
     PERSONS[("PostgreSQL")]
     KafkaIn{{"Kafka - events_plugin_ingestion"}}
@@ -78,23 +75,23 @@ flowchart TD
 
 In the sections below we will dive deeper into each step:
 
-1. [Apps - `processEvent`](#1-apps---processevent)
+1. [CDP transformations](#1-cdp-transformations)
 2. [Person processing](#2-person-processing)
 3. [Event processing](#3-event-processing)
 4. [Writing to ClickHouse](#4-writing-to-clickhouse)
-5. [Apps - `onEvent`](#5-apps---onevent)
+5. [CDP destinations](#5-cdp-destinations)
 
 If you would like to dive even deeper the related source code can be found in the [event pipeline implementation](https://github.com/PostHog/posthog/tree/master/nodejs/src/worker/ingestion/event-pipeline).
 
-### 1. Apps - `processEvent`
+### 1. CDP transformations
 
-Once data reaches the plugin server, we start the first of steps that augment or transform our raw event data before it gets written into ClickHouse.
+Once data reaches the CDP ingestion worker, we start the first of steps that augment or transform our raw event data before it gets written into ClickHouse.
 
-This first step runs any workloads that come from [transformations](/docs/cdp) you installed and which export a `processEvent` function. This is the only chance for apps to transform or exclude an event before it is written into ClickHouse.
+This first step runs any [transformations](/docs/cdp) you have enabled. This is the only chance for transformations to modify or exclude an event before it is written into ClickHouse.
 
 ### 2. Person processing
 
-The next step in the ingestion pipeline is processing the [person](/docs/how-posthog-works/data-model#person) who sent the event, which is determined by the `distinct_id` field.
+The next step in the ingestion pipeline is processing the [person](/docs/how-posthog-works/data-model#person) who sent the event, which is determined by the `distinct_id` field. This step can be skipped for events sent with `$process_person_profile` set to `false` (personless mode), which avoids the PostgreSQL lookup and uses a deterministic UUID instead.
 
 Many actions can happen here depending on if we've seen this `distinct_id` before, as well as which type of event is being sent.
 
@@ -184,8 +181,8 @@ We combine the fully-processed event and the person, send it to a separate Kafka
 > - [How data is stored in ClickHouse](/docs/how-posthog-works/clickhouse)
 > - [How ClickHouse ingestion works](/handbook/engineering/clickhouse/data-ingestion)
 
-### 5. Apps - `composeWebhook`
+### 5. CDP destinations
 
-The final step in the ingestion pipeline is calling the `composeWebhook` handler from any destinations that we have enabled.
+The final step in the ingestion pipeline is triggering any [CDP destinations](/docs/cdp) that are enabled (e.g. webhooks, Hubspot, Slack).
 
-Since this event has already been written to ClickHouse, it is effectively immutable as we do not allow apps to directly update events. Any apps that need to transform events should use the `processEvent` handler.
+Since this event has already been written to ClickHouse, it is effectively immutable — destinations cannot modify events. Any transformations that need to modify or exclude events must run in [step 1](#1-cdp-transformations).
