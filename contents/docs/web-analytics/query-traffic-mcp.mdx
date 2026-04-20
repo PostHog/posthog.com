@@ -10,6 +10,7 @@ This works in any MCP client – Cursor, Windsurf, Claude Code, VS Code, and oth
 
 With MCP, your coding agent can:
 
+- **Get a quick traffic summary** – "How are my web analytics?" to see visitors, pageviews, top pages, and traffic sources at a glance
 - **Check traffic after deploys** – "Did traffic to `/pricing` change after yesterday's deploy?" to validate changes
 - **Investigate anomalies** – "Why did pageviews drop this morning?" to quickly diagnose issues
 - **Analyze referral sources** – "Which sources are driving the most traffic to the blog?" to inform content decisions
@@ -21,6 +22,7 @@ The MCP server uses these tools for querying web analytics data:
 
 | Tool | Description |
 |------|-------------|
+| `web-analytics-weekly-digest` | Get a quick summary of your web analytics: visitors, pageviews, sessions, bounce rate, and session duration with period-over-period comparisons, plus top 5 pages, top 5 traffic sources, and goal conversions. |
 | `query-run` | Run a HogQL query against your web analytics data. Supports pageview counts, bounce rates, session durations, traffic breakdowns, and path analysis. |
 | `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question about traffic. Returns the query for review before running. |
 | `insight-create-from-query` | Create a saved insight from a traffic query and add it to a dashboard. |
@@ -28,6 +30,15 @@ The MCP server uses these tools for querying web analytics data:
 ## Example prompts
 
 Try these with your MCP-enabled agent:
+
+### Traffic summaries
+
+- `How are my web analytics?`
+- `How did the site do last week?`
+- `What's my traffic looking like this month?` (uses `days=30`)
+- `Give me a quick traffic summary for the past 14 days.`
+
+### Detailed queries
 
 - `How many pageviews did we get today vs yesterday?`
 - `What are the top landing pages by traffic this week?`
