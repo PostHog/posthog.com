@@ -228,7 +228,7 @@ This mode is **more accurate** for filtering out short sessions, especially on s
 
 On iOS, minimum duration is enforced using **buffer length**, similar to web strict mode:
 
-- Replay events are buffered, and PostHog checks the duration of buffered replay data (from the oldest to newest buffered snapshot)
+- Snapshots are buffered, and PostHog checks the duration of buffered replay data (from the oldest to newest buffered snapshot)
 - Recording starts sending only after that buffered duration reaches the configured minimum duration
 - After this threshold is reached once in a session, new snapshots are sent normally for the rest of that session
 
