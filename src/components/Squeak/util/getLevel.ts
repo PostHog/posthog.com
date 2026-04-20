@@ -1,7 +1,7 @@
 export const LEVELS = [
     {
         threshold: 10,
-        label: 'Contributor',
+        label: 'Hoglet',
         color: '#6B7280',
         borderOpacity: '40',
         bgOpacity: '12',
@@ -9,7 +9,7 @@ export const LEVELS = [
     },
     {
         threshold: 50,
-        label: 'Enthusiast',
+        label: 'Hogthusiast',
         color: '#30ABC6',
         borderOpacity: '60',
         bgOpacity: '18',
@@ -17,7 +17,7 @@ export const LEVELS = [
     },
     {
         threshold: 100,
-        label: 'Power user',
+        label: 'PowerHog',
         color: '#2F80FA',
         borderOpacity: '80',
         bgOpacity: '20',
@@ -25,7 +25,7 @@ export const LEVELS = [
     },
     {
         threshold: 200,
-        label: 'Top contributor',
+        label: 'TopHog',
         color: '#B62AD9',
         borderOpacity: '90',
         bgOpacity: '22',
@@ -33,7 +33,7 @@ export const LEVELS = [
     },
     {
         threshold: 400,
-        label: 'Community hero',
+        label: 'ElderHog',
         color: '#F54E00',
         borderOpacity: 'A0',
         bgOpacity: '28',
