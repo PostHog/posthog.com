@@ -1,0 +1,15 @@
+---
+title: AI-generated content
+sidebar: Docs
+showTitle: true
+---
+
+PostHog Code generates a handful of fields you'd normally write by hand:
+
+- **Branch names** – derived from your task title, so what's on disk reads like the work it contains.
+- **Commit messages** – a tight imperative subject line that respects your repo's commit conventions.
+- **PR titles and descriptions** – a TL;DR and a "what changed" rundown of the actual diff, slotted into your `PULL_REQUEST_TEMPLATE.md` if you have one.
+
+When the change came out of an agent task, the conversation is folded in too – so the "why" carries through to the commit and PR, not just the "what".
+
+You can always edit, regenerate, or write your own.
