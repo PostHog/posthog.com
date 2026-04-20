@@ -6443,6 +6443,7 @@ export const docsMenu = {
                     featured: true,
                     children: [
                         { name: 'Overview', url: '/docs/logs/installation' },
+                        { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },
                         { name: 'Node.js', url: '/docs/logs/installation/nodejs' },
                         { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
                         { name: 'Python', url: '/docs/logs/installation/python' },
