@@ -15,8 +15,6 @@ export const Handbook: React.FC = () => {
                 title="Company Handbook"
                 hideTitle={true}
                 leftSidebar={<TreeMenu items={handbookSidebar} />}
-                homeURL="/handbook"
-                description="Learn how PostHog works"
                 proseSize="base"
             >
                 <section className="max-w-4xl">

@@ -379,8 +379,6 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
                 mdxComponents={components}
                 commits={commits}
                 filePath={post.parent?.relativePath}
-                homeURL={breadcrumbBase.url}
-                description={seo?.metaDescription || excerpt}
                 showSurvey
                 hideRightSidebar={hideRightSidebar}
                 contentMaxWidthClass={contentMaxWidthClass}

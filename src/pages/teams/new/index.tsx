@@ -50,7 +50,7 @@ export default function NewTeam(props: TeamPageProps) {
                 .map((t: any) => ({
                     name: t.name,
                     url: `/teams/${t.slug}`,
-                }))
+                })),
         ]
     }, [data?.allSqueakTeam?.nodes])
 
@@ -76,8 +76,6 @@ export default function NewTeam(props: TeamPageProps) {
                 title="New Team"
                 hideTitle={true}
                 leftSidebar={<TreeMenu items={teamsNavigation} />}
-                homeURL="/teams"
-                description="Create a new team at PostHog"
                 proseSize="base"
                 rightActionButtons={editActions}
             >

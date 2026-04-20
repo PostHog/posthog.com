@@ -438,7 +438,6 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 title={title}
                 tableOfContents={tableOfContents}
                 mdxComponents={components}
-                homeURL={`/${root}`}
             />
         </>
     )

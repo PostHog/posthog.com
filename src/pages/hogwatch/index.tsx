@@ -73,7 +73,6 @@ export default function HogWatchPage() {
                 <ReaderView
                     title="HogWatch 3000"
                     leftSidebar={<TreeMenu items={internalToolsNav} />}
-                    description="Internal tool for YouTube channel CPM evaluation"
                     showQuestions={false}
                 >
                     <div className="@container text-primary">
@@ -96,12 +95,7 @@ export default function HogWatchPage() {
                 title="HogWatch 3000 - PostHog"
                 description="Internal tool to check if creators are worth going into negotiations with"
             />
-            <ReaderView
-                title="HogWatch 3000"
-                leftSidebar={<TreeMenu items={internalToolsNav} />}
-                description="A tool to check if creators are worth going into negotiations with or not. Internal use."
-                showQuestions={false}
-            >
+            <ReaderView title="HogWatch 3000" leftSidebar={<TreeMenu items={internalToolsNav} />} showQuestions={false}>
                 <div className="@container text-primary">
                     <div className="space-y-8">
                         <section>

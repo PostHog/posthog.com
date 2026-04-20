@@ -212,7 +212,6 @@ export default function Components(): JSX.Element {
                 title="Components"
                 leftSidebar={<TreeMenu items={internalToolsNav} />}
                 tableOfContents={tableOfContents}
-                description="Component showcase and internal tooling for PostHog development"
                 showQuestions={false}
             >
                 <div className="@container text-primary">
