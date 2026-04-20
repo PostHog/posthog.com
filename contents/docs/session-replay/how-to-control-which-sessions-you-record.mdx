@@ -230,7 +230,7 @@ On iOS, minimum duration is enforced using **buffer length**, similar to web str
 
 - Replay events are buffered, and PostHog checks the duration of buffered replay data (from the oldest to newest buffered snapshot)
 - Recording starts sending only after that buffered duration reaches the configured minimum duration
-- After this threshold is reached once in a session, new replay events are sent normally for the rest of that session
+- After this threshold is reached once in a session, new snapshots are sent normally for the rest of that session
 
 If the session changes before the threshold is reached, the buffer is cleared, and the next session starts buffering from zero.
 
