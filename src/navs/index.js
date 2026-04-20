@@ -1367,6 +1367,10 @@ export const handbookSidebar = [
                                 url: '/handbook/growth/sales/expansion-and-retention',
                             },
                             {
+                                name: 'Expansion strategies',
+                                url: '/handbook/growth/sales/expansion-strategies',
+                            },
+                            {
                                 name: 'TAM Excellence',
                                 url: '/handbook/growth/sales/tam-excellence',
                             },
@@ -5611,6 +5615,11 @@ export const docsMenu = {
                             name: 'Claude Code',
                             url: '/docs/llm-analytics/installation/claude-code',
                             icon: 'IconClaudeCode',
+                        },
+                        {
+                            name: 'OpenTelemetry',
+                            url: '/docs/llm-analytics/installation/opentelemetry',
+                            platformLogo: 'opentelemetry',
                         },
                         {
                             name: 'Manual capture',
