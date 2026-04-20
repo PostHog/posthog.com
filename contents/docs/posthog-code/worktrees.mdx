@@ -1,0 +1,72 @@
+---
+title: Worktrees
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconWarning" title="Worktrees are in beta" type="caution">
+
+You may experience unexpected behavior with worktrees in complex development environments. For running parallel agents, we recommend using [cloud tasks](#TODO-ADD-LINK) instead.
+
+</CalloutBox>
+
+Worktrees provide a local, isolated environment for your agents within PostHog Code.
+
+## Getting started
+
+To create a worktree, choose **Worktree** from the mode selector, enter your prompt, and submit.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_24_at_10_04_03_AM_96628e61b1.png"
+    classes="rounded"
+    alt="Task mode selector"
+/>
+
+For simple development environments, this is typically all you'll need.
+
+## Environment setup
+
+For more complex projects, you may need to apply some configuration to your worktree environments. PostHog Code supports both `.worktreeinclude` and `.worktreelink` files to help.
+
+### `.worktreeinclude`
+
+Worktrees create fresh checkouts of your git repo, so they do not include untracked files like `.env`.
+
+To automatically copy over required files, add them to a `.worktreeinclude` file at the root of your project.
+
+Example:
+
+```bash
+# .worktreeinclude
+
+.env
+.env.local
+```
+
+This file uses `.gitignore` syntax. Only files that match the pattern and are `.gitignore`'d are copied.
+
+### `.worktreelink`
+
+Some files may be required for your environment but are too heavy to copy, such as a `.flox` directory.
+
+Instead you can add these to a `.worktreelink` file, and PostHog Code will automatically create a symlink when a new worktree is created.
+
+Example:
+
+```bash
+# .worktreelink
+
+.flox
+```
+
+This file also uses `.gitignore` syntax, and only creates links to files that are `.gitignore`'d.
+
+## How it works
+
+When you create a worktree, PostHog Code:
+
+1. Creates the git worktree with pre/post-checkout hooks disabled
+2. Symlinks the Claude config (`.claude/` directory and `CLAUDE.local.md`)
+3. Creates symlinks from `.worktreelink`
+4. Copies files from `.worktreeinclude`, using CoW copy when possible
+5. Runs and awaits post-checkout hooks

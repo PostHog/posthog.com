@@ -1,0 +1,69 @@
+---
+title: PostHog integration
+sidebar: Docs
+showTitle: true
+---
+
+PostHog Code brings all of your PostHog context – product data, flags, experiments, and errors into the agent's context in real time. If you don't use PostHog, PostHog Code still works as a general-purpose coding agent; the integration adds context, it isn't a hard dependency.
+
+## Built-in PostHog skills
+
+PostHog Code ships a curated set of [skills](/docs/posthog-code/skills) that the agent loads automatically:
+
+- `instrument-product-analytics`, `instrument-feature-flags`, `instrument-error-tracking`, `instrument-llm-analytics`, `instrument-logs` – wire up PostHog SDKs in any supported language
+- `creating-experiments`, `configuring-experiment-analytics`, `managing-experiment-lifecycle` – run A/B tests end to end
+- `query-examples`, `exploring-llm-traces`, `exploring-llm-clusters` – work with HogQL and LLM analytics data
+- `setting-up-a-data-warehouse-source`, `diagnosing-failed-warehouse-syncs`, `auditing-warehouse-data-health` – manage data pipelines
+
+These update independently of the desktop app, so you get new skills without waiting for a release.
+
+## Built-in PostHog MCP
+
+PostHog's [MCP server](/docs/model-context-protocol) is wired up out of the box. Once you sign in, the agent can query your project for insights, dashboards, flags, experiments, and errors – useful for prompts like "did my last deploy regress conversion?" or "build me a dashboard for the new checkout flow".
+
+You don't need to install or configure the MCP server separately. It's authenticated with the same session you use to sign in.
+
+## Enricher
+
+The enricher detects PostHog SDK calls in your source and pulls live context from your PostHog project so the agent (and you) can reason about real impact, not just code.
+
+When you open a file or stage a diff, PostHog Code parses it and finds:
+
+- `capture()` calls and the events they emit
+- Feature flag checks (`isFeatureEnabled`, `getFeatureFlag`, etc.)
+- `init()` calls and SDK configuration
+- Variant branches based on flag values
+
+For each detection, it fetches the matching record from PostHog – flag rollout and staleness, experiment status, event volume and unique users, last-seen timestamps – and surfaces it inline:
+
+```ts
+// [PostHog] Event: "purchase" (verified) – 12,500 events – 3,200 users
+posthog.capture("purchase", { amount: 99 });
+
+// [PostHog] Flag: "new-checkout" – boolean – 100% rolled out – STALE (fully_rolled_out)
+const flag = posthog.getFeatureFlag("new-checkout");
+```
+
+That context goes into the agent's working memory, so when you ask it to clean up a stale flag or change an event payload, it knows the actual usage and consequences.
+
+### Supported languages
+
+| Language | Capture | Flags | Init | Variants |
+|---|---|---|---|---|
+| JavaScript / TypeScript | yes | yes | yes | yes |
+| JSX / TSX | yes | yes | yes | yes |
+| Python | yes | yes | yes | yes |
+| Go | yes | yes | yes | yes |
+| Ruby | yes | yes | yes | yes |
+
+Detection runs locally via tree-sitter – no source code is sent anywhere. Enrichment fetches metadata from your PostHog project using your existing API credentials.
+
+## Switching projects
+
+PostHog Code is signed in to your PostHog organization out of the box. To change which project the integration points at, use the project switcher in the bottom-left corner of the app and pick a different project from the list.
+
+The selected project is the one used by:
+
+- The PostHog [MCP server](/docs/model-context-protocol) when the agent queries insights, dashboards, flags, experiments, and errors
+- The enricher when it fetches flag and event metadata
+- [Cloud tasks](/docs/posthog-code/cloud-runs) launched from your machine
