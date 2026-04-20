@@ -1,7 +1,6 @@
 import React from 'react'
 import { SectionComponentProps } from '../types'
 import Overview from './Overview'
-import Customers from './Customers'
 import Features from './Features'
 import AI from './AI'
 import PostHogOnPostHog from './PostHogOnPostHog'
@@ -23,7 +22,6 @@ import Plans from './Plans'
  */
 export const templateRegistry: Record<string, React.ComponentType<SectionComponentProps>> = {
     overview: Overview,
-    customers: Customers,
     features: Features,
     ai: AI,
     'posthog-on-posthog': PostHogOnPostHog,
@@ -40,7 +38,6 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
 
 export {
     Overview,
-    Customers,
     Features,
     AI,
     PostHogOnPostHog,

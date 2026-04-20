@@ -14,7 +14,6 @@ import {
     IconX,
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { Select } from '../RadixUI/Select'
 import { Popover } from '../RadixUI/Popover'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -41,7 +40,6 @@ import { getProseClasses, isMarkdownContentPath } from '../../constants'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
-import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import CopyMarkdownActionsDropdown, { useMarkdownUrlExists } from 'components/MarkdownActionsDropdown'
 import CustomerMetadata from './CustomerMetadata'
@@ -121,6 +119,12 @@ interface ReaderViewProps {
      * tab marked `default: true` is selected on mount; otherwise the first tab.
      */
     menuTabs?: MenuTab[]
+    /**
+     * Optional element rendered at the top of the LeftSidebar (above the
+     * inline search and menu). Typical use is a product switcher; see
+     * `ProductSwitcher` from `components/Products/ReaderViewProduct`.
+     */
+    productSelect?: React.ReactNode
 }
 
 interface BackgroundImageOption {
@@ -450,6 +454,7 @@ export default function ReaderView({
     sourceInstanceName,
     chrome = false,
     menuTabs,
+    productSelect,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -479,6 +484,7 @@ export default function ReaderView({
                 sourceInstanceName={sourceInstanceName}
                 chrome={chrome}
                 menuTabs={menuTabs}
+                productSelect={productSelect}
             >
                 {children}
             </ReaderViewContent>
@@ -620,51 +626,6 @@ const InlineSearch = ({
                 <OSButton size="xs" icon={<IconX />} onClick={handleClear} className="rounded-full !p-1.5" />
             )}
         </div>
-    )
-}
-
-/**
- * Dropdown for switching between the parent menu's children (e.g.
- * "Error Tracking" → "Session Replay"). Rendered inside the LeftSidebar above
- * the TreeMenu when the sidebar is expanded. Returns null when there's no
- * parent or no children to choose from.
- */
-const ProductSelect = ({ parent: parentProp }: { parent?: MenuItem }) => {
-    const { setActiveInternalMenu, activeInternalMenu: windowActiveInternalMenu, parent: windowParent } = useWindow()
-
-    const parent = parentProp || windowParent
-    const activeInternalMenu = windowActiveInternalMenu || parent?.children?.[0]
-
-    if (!parent || !parent.children || parent.children.length === 0) return null
-
-    return (
-        <Select
-            groups={[
-                {
-                    label: null,
-                    items: parent.children.map((menuItem) => ({
-                        value: menuItem.url || menuItem.name,
-                        label: menuItem.name,
-                        icon: menuItem.icon,
-                        color: menuItem.color,
-                    })),
-                },
-            ]}
-            placeholder="Select..."
-            ariaLabel="Products"
-            className="w-full"
-            value={activeInternalMenu?.url || activeInternalMenu?.name}
-            onValueChange={(value) => {
-                const selectedMenu = parent.children?.find(
-                    (menuItem) => menuItem.url === value || menuItem.name === value
-                )
-                setActiveInternalMenu(selectedMenu)
-                if (selectedMenu?.url) {
-                    return navigate(selectedMenu.url)
-                }
-            }}
-            dataScheme="primary"
-        />
     )
 }
 
@@ -842,6 +803,7 @@ function ReaderViewContent({
     sourceInstanceName,
     chrome = false,
     menuTabs,
+    productSelect,
 }: ReaderViewProps) {
     const { compact, websiteMode } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
@@ -962,7 +924,7 @@ function ReaderViewContent({
                         commits={commits}
                         pageUrl={appWindow?.path}
                         rightActionButtons={rightActionButtons}
-                        productSelect={!leftSidebar ? <ProductSelect parent={parent as MenuItem} /> : null}
+                        productSelect={productSelect}
                         inlineSearch={
                             <InlineSearch contentRef={onSearch ? undefined : contentRef} onSearch={onSearch} />
                         }
@@ -987,7 +949,10 @@ function ReaderViewContent({
                             : undefined
                     }
                 >
-                    <ScrollArea dataScheme="primary" className="flex-1 min-h-0 relative">
+                    <ScrollArea
+                        dataScheme="primary"
+                        className="flex-1 min-h-0 relative [mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]"
+                    >
                         <div className="flex items-start min-h-full">
                             <article
                                 className={`reader-view-content-container @container/reader-content-container ${getProseClasses(
@@ -1011,9 +976,11 @@ function ReaderViewContent({
                                 )}
                                 <div
                                     ref={contentRef}
-                                    className={`@container/reader-content relative ${chrome ? '' : 'font-medium'} ${
+                                    className={`@container/reader-content relative ${
+                                        chrome ? '' : 'font-medium pt-12'
+                                    } ${
                                         padding
-                                            ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
+                                            ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8 @xl/reader-content-container:px-12 @2xl/reader-content-container:px-16 @3xl/reader-content-container:px-20'
                                             : ''
                                     }`}
                                 >

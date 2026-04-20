@@ -35,7 +35,6 @@ export const sessionReplay = {
      */
     marketingMenu: [
         { slug: 'overview', name: 'Overview' },
-        { slug: 'customers', name: 'Customers' },
         { slug: 'features', name: 'Features' },
         { slug: 'ai', name: 'AI' },
         { slug: 'answers', name: 'Questions' },

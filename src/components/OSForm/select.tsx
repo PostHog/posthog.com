@@ -35,6 +35,8 @@ interface SelectProps {
     dataScheme?: 'primary' | 'secondary' | 'tertiary'
     className?: string
     containerClassName?: string
+    /** Extra classes appended to each option's button (lets callers tune option-row sizing/typography). */
+    optionClassName?: string
     touched?: boolean
     error?: string
 }
@@ -61,6 +63,7 @@ const OSSelect = ({
     dataScheme,
     className = '',
     containerClassName = '',
+    optionClassName = '',
     touched = false,
     error,
 }: SelectProps) => {
@@ -407,7 +410,7 @@ const OSSelect = ({
                                                     option.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
                                                 } ${option.value === value ? 'font-bold' : ''} ${
                                                     index === highlightedIndex ? 'bg-accent' : ''
-                                                }`}
+                                                } ${optionClassName}`}
                                                 role="option"
                                                 aria-selected={option.value === value}
                                                 onMouseEnter={() => setHighlightedIndex(index)}

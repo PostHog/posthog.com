@@ -198,6 +198,51 @@ If a template finds nothing to render (e.g. `customers` for a product with no `c
 
 ---
 
+## Product switcher
+
+[`ProductSwitcher`](./ProductSwitcher.tsx) is the searchable dropdown rendered at the very top of the LeftSidebar. It sources the product list from `useProduct()` (which chains in `useProducts()` plus the alpha/beta extensions in [`hooks/useProduct.ts`](../../../hooks/useProduct.ts)) and renders each entry through [`OSForm/select.tsx`](../../OSForm/select.tsx) with the product's `Icon` (tinted with `text-${color}`) and name.
+
+```tsx
+<ReaderView
+    productSelect={<ProductSwitcher activeHandle="session_replay" />}
+    menuTabs={menuTabs}
+>
+    …
+</ReaderView>
+```
+
+Both `ProductReaderView` and the docs page set this up automatically; pass it manually when wiring a new product surface.
+
+Props:
+- `activeHandle: string` — the currently selected product's `handle`.
+- `excludeHandles?: string[]` — handles to hide from the dropdown.
+
+### Sizing and styling
+
+The visible look (icon size, dropdown height, option text) is tuned inside [`ProductSwitcher.tsx`](./ProductSwitcher.tsx) via props on the underlying [`OSSelect`](../../OSForm/select.tsx):
+
+- **Trigger size** — `size="sm"` on `OSSelect` (controls the trigger button's padding/typography). Other allowed values: `'md'`, `'lg'`.
+- **Icon size** — set on the icon element built per option (currently `size-4`, tinted `text-${color}`). Edit the `<p.Icon className=… />` line in `ProductSwitcher.tsx` to change.
+- **Dropdown max height** — `maxHeight="max-h-[70vh]"` (any Tailwind max-height utility works). Default in `OSSelect` is `max-h-60` if omitted.
+- **Option row padding & text** — `optionClassName="!px-2 !py-1 !text-[13px]"`. This is an additive prop on `OSSelect` that's appended to each option's button class list. The `!` (Tailwind `!important`) wins against the OSSelect defaults of `px-3 py-2 text-sm`. Other `OSSelect` consumers are unaffected since `optionClassName` defaults to `''`.
+
+What's still hard-coded inside `OSSelect` (not exposed as props): the search input row, the header rows, and the check-icon next to the active option. Add additive override props on `OSSelect` if you need those tunable.
+
+### Navigation
+
+Switching products navigates via [`getProductSurfaceUrl`](./getProductSurfaceUrl.ts):
+
+| Current URL                           | Target                          | Reason |
+| ------------------------------------- | ------------------------------- | ------ |
+| `/<currentSlug>`                      | `/<newSlug>`                    | About root → About root. |
+| `/<currentSlug>/<section>` where `section` is in `KNOWN_SHARED_SECTIONS` (currently just `'pricing'`) | `/<newSlug>/<section>` | Preserve known shared surfaces (e.g. Pricing). |
+| `/<currentSlug>/<anything-else>`      | `/<newSlug>`                    | Unknown subpath → fall back to product root. |
+| `/docs/<currentSlug>/...`             | `/docs/<newSlug>`               | Docs subpaths are product-specific; always strip to docs root. |
+
+To add a new shared surface (e.g. `tutorials`), append its segment to `KNOWN_SHARED_SECTIONS` in [`getProductSurfaceUrl.ts`](./getProductSurfaceUrl.ts).
+
+---
+
 ## Components in this folder
 
 | File                       | Purpose                                                            |
@@ -207,6 +252,8 @@ If a template finds nothing to render (e.g. `customers` for a product with no `c
 | `buildProductMenuTabs.tsx` | Returns the `[About, Pricing, Docs]` tabs for `<ReaderView menuTabs={…}>`. Tabs whose menus are empty are omitted. |
 | `MarketingNav.tsx`         | About-tab menu on the About page. Uses `ElementScrollLink` for in-page anchor scrolling inside the radix `ScrollArea` viewport. |
 | `ProductNav.tsx`           | About-tab menu on every other product surface (Docs, tutorials, community questions, etc.). Uses Gatsby `Link` → `/<slug>#<anchor>` for cross-page jumps. |
+| `ProductSwitcher.tsx`      | Searchable product dropdown rendered above the menu. Driven by `useProduct()`; navigates via `getProductSurfaceUrl`. |
+| `getProductSurfaceUrl.ts`  | Pure function that maps the current path onto the equivalent surface for another product when the user switches. |
 | `templates/`               | One file per section template + the `templateRegistry`.            |
 
 ---

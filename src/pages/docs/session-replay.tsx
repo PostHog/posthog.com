@@ -12,7 +12,7 @@ import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
 import AskMax from 'components/AskMax'
 import ReaderView from 'components/ReaderView'
-import { buildProductMenuTabs } from 'components/Products/ReaderViewProduct'
+import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
 import useProduct from 'hooks/useProduct'
 
 const PRODUCT_HANDLE = 'session_replay'
@@ -132,7 +132,7 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
     const menuTabs = buildProductMenuTabs({ productData, activeSurface: 'docs' })
 
     return (
-        <ReaderView menuTabs={menuTabs}>
+        <ReaderView menuTabs={menuTabs} productSelect={<ProductSwitcher activeHandle={PRODUCT_HANDLE} />}>
             <SEO title="Session replay - Docs - PostHog" />
 
             <Intro

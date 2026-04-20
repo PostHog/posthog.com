@@ -9,12 +9,15 @@ import ProgressBar from 'components/ProgressBar'
 import type { MarketingNavItem, SectionComponentProps } from './types'
 import { resolveTemplate } from './types'
 import buildProductMenuTabs, { type ProductSurface } from './buildProductMenuTabs'
+import ProductSwitcher from './ProductSwitcher'
 import { templateRegistry } from './templates'
 
 export { default as buildProductMenuTabs } from './buildProductMenuTabs'
 export type { ProductSurface } from './buildProductMenuTabs'
 export { default as MarketingNav } from './MarketingNav'
 export { default as ProductNav } from './ProductNav'
+export { default as ProductSwitcher } from './ProductSwitcher'
+export { getProductSurfaceUrl } from './getProductSurfaceUrl'
 export { templateRegistry } from './templates'
 export { resolveTemplate } from './types'
 export type { MarketingNavItem, SectionComponentProps } from './types'
@@ -82,7 +85,14 @@ export default function ProductReaderView({
                 description={seoOverrides?.description || productData?.seo?.description}
                 image={seoOverrides?.image || `/images/og/${productData?.slug}.jpg`}
             />
-            <ReaderView title={productData?.name} hideTitle proseSize="lg" showQuestions={false} menuTabs={menuTabs}>
+            <ReaderView
+                title={productData?.name}
+                hideTitle
+                proseSize="lg"
+                showQuestions={false}
+                menuTabs={menuTabs}
+                productSelect={<ProductSwitcher activeHandle={productData.handle} />}
+            >
                 <div ref={sectionsRef} className="flex flex-col gap-12">
                     {surfaceMenu.map((item) => {
                         const templateKey = resolveTemplate(item)
