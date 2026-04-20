@@ -40,6 +40,7 @@ import ZendeskTicket from 'components/ZendeskTicket'
 import { TopicSelector } from './TopicSelector'
 import { XIcon } from 'lucide-react'
 import { useToast } from '../../../context/Toast'
+import { useWindow } from '../../../context/Window'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -444,7 +445,10 @@ export function Question(props: QuestionProps) {
     const [expanded, setExpanded] = useState(props.expanded || false)
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
     const { user, notifications, setNotifications, isModerator } = useUser()
-    const [maxQuestions, setMaxQuestions] = useState(other.askMax ? [{ manual: false, withContext: false }] : [])
+    const { appWindow } = useWindow()
+    const [maxQuestions, setMaxQuestions] = useState(
+        appWindow?.location?.state?.askMax ? [{ manual: false, withContext: false }] : []
+    )
 
     useEffect(() => {
         if (

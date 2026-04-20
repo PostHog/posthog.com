@@ -409,6 +409,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['signals'],
         label: 'feature/signals',
     },
+    'slack-app': {
+        feature: 'Slack app',
+        owner: ['posthog-ai'],
+        label: 'feature/slack-app',
+    },
     settings: {
         feature: 'Settings structure (personal & project)',
         owner: ['platform-ux'],

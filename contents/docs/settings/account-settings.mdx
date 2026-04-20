@@ -8,9 +8,10 @@ availability:
   enterprise: full
 ---
 
-In your [Account settings](https://us.posthog.com/settings/user-api-keys#personal-api-keys) you will find options for:
+In your [Account settings](https://app.posthog.com/settings/user-api-keys#personal-api-keys) you will find options for:
 
 - [Authentication](#authentication)
+- [Connected applications](#connected-applications)
 - [Personal API keys](#personal-api-keys)
 - [Notifications](#notifications)
 - [Theming options](#theming-and-customization)
@@ -38,6 +39,25 @@ PostHog enforces the following password requirements for users:
 You can require two-factor authentication (2FA) to boost your account security.
 
 To enable 2FA, go to [your account settings](https://us.posthog.com/settings/user#2fa). Under the **Two-factor authentication** section, click **Set up 2FA**. Click **View backup codes** and save them in a secure place in case you can't reach your 2FA device..
+
+## Connected applications
+
+Connected applications are third-party OAuth applications that have been granted access to your PostHog account. These include AI coding assistants like Claude Code, Cursor, and other developer tools that integrate with PostHog.
+
+You can view and manage connected applications in [your account settings](https://app.posthog.com/settings/user-connected-apps) under **Connected applications**.
+
+For each connected application, you can see:
+
+- Application name and logo
+- Scopes and permissions granted
+- When the application was authorized
+- Whether the application is verified or a first-party PostHog app
+
+### Revoking access
+
+To revoke an application's access, click the **Revoke** button next to the application. This immediately revokes all tokens and permissions granted to that application.
+
+If you need to use the application again, you can re-authorize it through the application's own interface.
 
 ## Notifications
 

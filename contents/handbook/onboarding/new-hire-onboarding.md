@@ -121,7 +121,7 @@ Our customers are always central to our work. There’s time and space to work o
 
 Everything at PostHog changes really fast. That's how to keep up as a start:
 
-- Follow #tell-posthog-anything daily for general announcements.
+- Follow #tell-posthog-anything and #demo-posthog-anything daily for general announcements.
 - Follow #cs-sales-support channel daily - it's crucial for all folks in customer-facing roles.
 - Stay on top of the #incidents channel to know what’s going on and be able to inform customers.
 - From time to time, it’s worth taking a look at #sales, #customer-success, #team-new-business-sales, #team-product-led-sales to get inspired by new ideas that other customer-facing folks implement, and what’s going on in general 

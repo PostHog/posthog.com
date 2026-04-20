@@ -326,6 +326,22 @@ export const workflows = {
         rows: ['workflows'],
         excluded_sections: ['platform'],
     },
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
+        imageAlt: 'A hedgehog automating workflows',
+        imageClasses: 'max-w-[360px]',
+        description: 'build automations based on events and user behavior',
+        skills: [
+            'Generates email templates for your content library',
+            'Sets up multi-step workflows from the triggers, conditions, and actions you describe',
+            'Recommends which workflows to build and when to run them based on your product metrics',
+        ],
+        prompts: [
+            'Build an onboarding email sequence to help new users get started',
+            'Create a workflow that notifies our Slack channel when someone upgrades to a paid plan',
+            'Generate a SMS sequence to encourage users to complete a survey',
+        ],
+    },
     pairsWith: [
         {
             slug: 'experiments',
@@ -353,9 +369,9 @@ export const workflows = {
         overview: '',
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
-        alt: 'A hedgehog automating workflows',
-        classes: 'absolute bottom-0 right-4 max-w-[250px]',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_066caea85f.png',
+        alt: 'the automator hedgehog',
+        classes: 'absolute bottom-0 right-0 w-auto h-auto max-w-[min(90vw,480px)] @2xl:max-w-xl',
     },
     videos: {
         automating_onboarding_with_posthog_workflows: {

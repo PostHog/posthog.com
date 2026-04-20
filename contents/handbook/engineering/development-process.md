@@ -264,6 +264,12 @@ Once you merge a pull request, it will automatically deploy to all environments.
 
 We're managing deployments with [ArgoCD](http://go/argo) where you can also see individual resources and their status.
 
+### Deploy notification bot
+
+After your PR is deployed to an environment, a bot automatically comments on the merged PR with the deployment status. The **dev** deployment triggers the initial comment. As **prod-us** and **prod-eu** finish deploying, the bot updates the same comment in-place rather than posting new ones.
+
+If you don't see a comment on your PR after a deploy, give it a few minutes -- the notification runs after ArgoCD finishes syncing. If it still hasn't appeared, check the [deploy workflow](https://github.com/PostHog/charts/actions/workflows/state-deploy.yml) in PostHog/charts for failures.
+
 ### Verifying your deployment
 
 After merging, your code should deploy automatically. If you need to verify your changes are live (or troubleshoot why they're not), here's how:

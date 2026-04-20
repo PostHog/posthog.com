@@ -135,6 +135,8 @@ In exceptional circumstances, we may explore providing additional discounts whic
 2. We are taking their business from a competitor.
 3. We are preventing them from churning to a competitor.
 
+For the avoidance of doubt, these types of deals are **very rare** (~1 per year), and not offered to customers with standard usage volumes. 
+
 If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with your manager, who will then clear it with Simon (TAMs/CSMs) or Charles (TAEs).
 
 ## Additional credit purchase
@@ -151,7 +153,7 @@ We do not offer price guarantees for the following reasons:
 
 This request most often comes from procurement teams unfamiliar with our pricing philosophy. Address it proactively in commercial discussions, but if there is push back, reference the above points. As an example:
 
-> "We've dropped Events pricing [X]% over [timeframe]. A price guarantee would have cost you more. We're committed to being the cheapest at every scale—if we're not, tell us. Our prepaid credits for usage based pricing gives budget control without betting against our commitment to low prices."
+> "We've dropped Events pricing [X]% over [timeframe]. A price guarantee would have cost you more. We're committed to matching the cheapest at every scale—if we're not, tell us. Our prepaid credits for usage based pricing gives budget control without betting against our commitment to low prices."
 
 ## Multi-year credit allocation
 
