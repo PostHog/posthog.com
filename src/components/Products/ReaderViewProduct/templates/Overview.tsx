@@ -98,9 +98,14 @@ const Overview = ({ id, productData, customers, hasCaseStudy }: SectionComponent
                         <h2 className="text-4xl font-bold leading-tight">{overview?.title || name}</h2>
                         <p className="leading-relaxed">{overview?.description}</p>
                     </div>
-                    <CTAs />
+                    <div>
+                        <CTAs />
+                    </div>
                 </div>
+            </header>
 
+            <div>
+                <h2>Who uses it?</h2>
                 {customerLogos.length > 0 && (
                     <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 items-center">
                         {customerLogos.map((customer: any) => {
@@ -159,10 +164,7 @@ const Overview = ({ id, productData, customers, hasCaseStudy }: SectionComponent
                         })}
                     </div>
                 )}
-            </header>
 
-            <div>
-                <h2>Who uses it?</h2>
                 <OSTable
                     columns={columns}
                     rows={rows}

@@ -39,6 +39,7 @@ interface SelectProps {
     optionClassName?: string
     touched?: boolean
     error?: string
+    chrome?: boolean
 }
 
 const OSSelect = ({
@@ -66,6 +67,7 @@ const OSSelect = ({
     optionClassName = '',
     touched = false,
     error,
+    chrome = true,
 }: SelectProps) => {
     const [isOpen, setIsOpen] = useState(false)
     const [searchTerm, setSearchTerm] = useState('')
@@ -338,9 +340,11 @@ const OSSelect = ({
                     onClick={() => !disabled && setIsOpen(!isOpen)}
                     onKeyDown={handleKeyDown}
                     disabled={disabled}
-                    className={`group bg-primary border rounded ring-0 focus:ring-1 flex items-center justify-between ${
-                        touched && error ? 'border-red dark:border-yellow' : 'border-primary'
-                    } ${sizeClasses[size]} ${widthClasses[width]} ${
+                    className={`group ring-0 focus:ring-1 flex items-center justify-between ${
+                        chrome ? 'bg-primary border rounded' : ''
+                    } ${touched && error ? 'border-red dark:border-yellow' : 'border-primary'} ${
+                        chrome ? sizeClasses[size] : 'text-[15px]'
+                    } ${widthClasses[width]} ${
                         disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
                     } ${className}`}
                     aria-haspopup="listbox"

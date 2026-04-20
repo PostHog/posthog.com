@@ -53,11 +53,13 @@ const ProductSwitcher = ({ activeHandle, excludeHandles = [] }: ProductSwitcherP
             placeholder="Switch product..."
             searchable
             searchPlaceholder="Search products..."
-            width="full"
+            width="auto"
             size="sm"
             maxHeight="max-h-[70vh]"
+            className="font-bold text-black dark:text-primary"
             optionClassName="!px-2 !py-1 !text-[13px]"
             dataScheme="primary"
+            chrome={false}
         />
     )
 }
