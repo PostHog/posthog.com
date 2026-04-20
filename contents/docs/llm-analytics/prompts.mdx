@@ -2,7 +2,7 @@
 title: Prompt management
 ---
 
-import PromptsAlpha from "./_snippets/prompts-alpha.mdx"
+import PromptsAlpha from "./_snippets/prompts-alpha.mdx";
 
 <PromptsAlpha />
 
@@ -42,12 +42,12 @@ You can also manage prompts through the [PostHog MCP server](/docs/model-context
 
 The MCP server provides four prompt management tools:
 
-| Tool | Description |
-|------|-------------|
-| `prompt-list` | List all team prompts with optional name filtering |
-| `prompt-get` | Get a prompt by name, including full content |
+| Tool            | Description                                        |
+| --------------- | -------------------------------------------------- |
+| `prompt-list`   | List all team prompts with optional name filtering |
+| `prompt-get`    | Get a prompt by name, including full content       |
 | `prompt-create` | Create a new prompt with a unique name and content |
-| `prompt-update` | Update an existing prompt's content by name |
+| `prompt-update` | Update an existing prompt's content by name        |
 
 This enables teams to manage prompts programmatically from agent workflows without using the web UI.
 
@@ -112,12 +112,19 @@ Click **Archive** to remove a prompt from active use. This archives all versions
 
 ### Prerequisites
 
-- **Personal API key (`phx_...`)** – Used as Bearer auth for prompt fetches
-- **Project Token (`phc_...`)** – Used as `token` query param so prompt reads are resolved deterministically to the right project
+- **[Personal API key](/docs/api#personal-api-keys) (`phx_...`)** – Used as Bearer auth for prompt fetches. Prompts may contain sensitive business logic, system instructions, or proprietary context, so PostHog requires authenticated access to read prompt content. The personal API key provides this authentication and creates an audit trail of who accessed prompts.
+- **Project token (`phc_...`)** – Used as `token` query param to resolve prompt reads to the correct project. The project token identifies your project but doesn't authenticate requests on its own.
 - **PostHog SDK** – Install the Python or JavaScript SDK with the AI package
 
 When you initialize `Prompts` with a PostHog client, the SDK uses the client's project token automatically. If you initialize `Prompts` directly, you must pass both keys.
 Use your app host (for example, `https://us.posthog.com` or `https://eu.posthog.com`) for prompt reads, not an ingestion host like `https://us.i.posthog.com`.
+
+### Secure key handling for teams
+
+- Store personal API keys in environment variables or a secrets manager – never commit them to source control.
+- Create separate personal API keys per environment (development, staging, production) for better audit trails.
+- Each team member who needs to test prompts locally should create their own [personal API key](https://app.posthog.com/settings/user-api-keys) rather than sharing one.
+- Rotate keys periodically and revoke any that are no longer in use.
 
 ### Python
 
@@ -168,42 +175,42 @@ system_prompt = prompts.compile(template, {
 ### JavaScript/TypeScript
 
 ```typescript
-import { Prompts } from '@posthog/ai'
-import { PostHog } from 'posthog-node'
+import { Prompts } from "@posthog/ai";
+import { PostHog } from "posthog-node";
 
 // Initialize with PostHog client
-const posthog = new PostHog('<your_project_api_key>', {
-  host: 'https://us.posthog.com',
-  personalApiKey: '<your_personal_api_key>'
-})
+const posthog = new PostHog("<your_project_api_key>", {
+  host: "https://us.posthog.com",
+  personalApiKey: "<your_personal_api_key>",
+});
 
-const prompts = new Prompts({ posthog })
+const prompts = new Prompts({ posthog });
 
 // Or initialize directly (without PostHog client)
 const prompts = new Prompts({
-  personalApiKey: '<your_personal_api_key>',
-  projectApiKey: '<your_project_api_key>',
-  host: 'https://us.posthog.com'
-})
+  personalApiKey: "<your_personal_api_key>",
+  projectApiKey: "<your_project_api_key>",
+  host: "https://us.posthog.com",
+});
 
 // Fetch the latest version of a prompt
-const template = await prompts.get('support-system-prompt', {
+const template = await prompts.get("support-system-prompt", {
   cacheTtlSeconds: 600,
-  fallback: 'You are a helpful assistant.'
-})
+  fallback: "You are a helpful assistant.",
+});
 
 // Or fetch a specific version
-const template = await prompts.get('support-system-prompt', {
+const template = await prompts.get("support-system-prompt", {
   version: 2,
-  fallback: 'You are a helpful assistant.'
-})
+  fallback: "You are a helpful assistant.",
+});
 
 // Compile with variables
 const systemPrompt = prompts.compile(template, {
-  company: 'Acme Corp',
-  tier: 'premium',
-  userName: 'Alice'
-})
+  company: "Acme Corp",
+  tier: "premium",
+  userName: "Alice",
+});
 
 // Use in your LLM call
 // ... your OpenAI/Anthropic call here
@@ -237,18 +244,19 @@ response = client.chat.completions.create(
 
 ```typescript
 const response = await openai.chat.completions.create({
-    model: "gpt-5",
-    messages: [{ role: "system", content: systemPrompt }],
-    posthogProperties: {
-        $ai_prompt_name: "support-system-prompt",
-        $ai_prompt_version: 2
-    }
-})
+  model: "gpt-5",
+  messages: [{ role: "system", content: systemPrompt }],
+  posthogProperties: {
+    $ai_prompt_name: "support-system-prompt",
+    $ai_prompt_version: 2,
+  },
+});
 ```
 
 </MultiLanguage>
 
 Once linked, you can:
+
 - Filter generations by prompt name and version
 - View related traces from the prompt detail page
 - See which specific version was used in each trace
