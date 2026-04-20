@@ -205,6 +205,10 @@ Start at 5-10% of users, monitor metrics, then gradually increase. This is a [ph
 
 [Feature flag dependencies](/docs/feature-flags/dependencies) let one flag's activation depend on another flag's state – useful for enabling complex features only after foundational components are active, or running Experiments only on users with specific features enabled. Keep dependency chains simple and avoid circular dependencies.
 
+### Be careful with "Latest" person properties
+
+PostHog automatically creates person properties like "Latest Current URL" and "Latest Referring Domain" — these are derived from the corresponding event properties (like `$current_url`) and update every time a new event comes in. If you target a flag on one of these, the flag value can change with every new event. If you need to target based on a value like this, capture it once as a stable person property (e.g., `first_landing_page` via `$set_once`) and target that instead.
+
 ### Reducing your bill
 
 Stale flags are the most common source of unnecessary cost. Beyond cleaning up flags, see our [dedicated guide to cutting costs](/docs/feature-flags/cutting-costs) for estimating and reducing your feature flag bill.
