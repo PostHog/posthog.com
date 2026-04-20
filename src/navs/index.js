@@ -538,6 +538,10 @@ export const handbookSidebar = [
                 url: '/handbook/company/brand-assets',
             },
             {
+                name: 'Style guide',
+                url: '/handbook/brand/style-guide',
+            },
+            {
                 name: 'Our design philosophy',
                 url: '/handbook/brand/philosophy',
             },
@@ -1361,6 +1365,14 @@ export const handbookSidebar = [
                             {
                                 name: 'Expansion, cross-sell & retention',
                                 url: '/handbook/growth/sales/expansion-and-retention',
+                            },
+                            {
+                                name: 'Expansion strategies',
+                                url: '/handbook/growth/sales/expansion-strategies',
+                            },
+                            {
+                                name: 'TAM Excellence',
+                                url: '/handbook/growth/sales/tam-excellence',
                             },
                         ],
                     },
@@ -5445,6 +5457,16 @@ export const docsMenu = {
                             icon: 'IconOpenRouter',
                         },
                         {
+                            name: 'Cloudflare AI Gateway',
+                            url: '/docs/llm-analytics/installation/cloudflare-ai-gateway',
+                            platformLogo: 'cloudflare',
+                        },
+                        {
+                            name: 'Dedalus Labs',
+                            url: '/docs/llm-analytics/installation/dedalus',
+                            platformLogo: 'dedalus',
+                        },
+                        {
                             name: 'DeepSeek',
                             url: '/docs/llm-analytics/installation/deepseek',
                             platformLogo: 'deepseek',
@@ -5593,6 +5615,11 @@ export const docsMenu = {
                             name: 'Claude Code',
                             url: '/docs/llm-analytics/installation/claude-code',
                             icon: 'IconClaudeCode',
+                        },
+                        {
+                            name: 'OpenTelemetry',
+                            url: '/docs/llm-analytics/installation/opentelemetry',
+                            platformLogo: 'opentelemetry',
                         },
                         {
                             name: 'Manual capture',

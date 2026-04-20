@@ -60,7 +60,7 @@ You can also:
 
 - Filter your retention insights using filter groups, such as event properties (country, device, etc.), person properties (job title, company name, etc.), feature flags (users who have a flag enabled), and existing [cohorts](/docs/data/cohorts) (pre-defined groups of users).
 
-- Choose between **first time** and **recurring** retention. **Recurring retention** counts a user or group as part of a cohort if they performed the start event during that time period, irrespective of if it was their first time or not. **First time retention** only counts a user or group as part of the cohort if it was their first time performing the start event.
+- Choose between **first time**, **first ever occurrence**, and **recurring** retention. **Recurring retention** counts a user or group as part of a cohort if they performed the start event during that time period, irrespective of if it was their first time or not. **First time retention** only counts a user or group as part of the cohort if it was their first time performing the start event during the insight's date range. **First ever occurrence** is similar, but only includes users whose very first instance of the start event (across all time, not just the date range) falls within the cohort period.
 
 - Add [breakdowns](#breakdowns) to see how retention varies across different properties.
 
