@@ -8,7 +8,7 @@ Be mindful of prompt injection – LLMs can be tricked into following untrusted 
 
 If your MCP client doesn't support OAuth, you can authenticate manually:
 
-1. Create a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) using the **MCP Server** preset (this scopes access to a specific project)
+1. Create a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) using the **MCP Server** preset. The preset selects exactly the API scopes the PostHog MCP needs — do not hand-pick scopes, as `user:read`, `group:read`, and `organization:read` are required and easy to miss. A key without these will cause every MCP call to fail with HTTP 500.
 2. Add the `Authorization: Bearer YOUR_API_KEY` header to your MCP configuration
 
 Example for Cursor (add to `.cursor/mcp.json`):

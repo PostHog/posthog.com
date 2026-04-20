@@ -24,6 +24,11 @@ const MCPClients = () => {
             icon: 'IconCode',
         },
         {
+            label: 'Cursor Team',
+            url: '/docs/model-context-protocol/cursor-team',
+            icon: 'IconCode',
+        },
+        {
             label: 'VS Code',
             url: '/docs/model-context-protocol/vscode',
             icon: 'IconCode',

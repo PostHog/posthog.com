@@ -1,0 +1,74 @@
+---
+title: PostHog MCP for Cursor Team
+sidebarTitle: Cursor Team
+---
+
+import SharedContent from "./_snippets/shared.mdx"
+
+Cursor's [Team MCP servers](https://cursor.com/dashboard/integrations) feature lets admins configure an MCP server once and push it to every teammate's IDE. Use this instead of the [personal Cursor setup](/docs/model-context-protocol/cursor) when you want PostHog MCP available for your whole engineering org without asking each person to edit their own `mcp.json`.
+
+This flow requires a Cursor **Teams** or **Business** plan and admin access to your Cursor organization.
+
+## Server URL
+
+| Region | URL |
+|--------|-----|
+| **US** (default) | `https://mcp.posthog.com/mcp` |
+| **EU** | `https://mcp-eu.posthog.com/mcp` |
+
+## Manual setup
+
+1. Sign in to [cursor.com](https://cursor.com) as a team admin and go to **Dashboard → Integrations → Team MCP servers**
+2. Click **Add MCP server** and pick the HTTP/URL type
+3. **Name:** `PostHog`
+4. **URL:** `https://mcp.posthog.com/mcp`
+5. Choose an authentication method (see below)
+6. **Save**. Each teammate will see **posthog** appear under **MCP Tools** in their Cursor the next time they reload
+
+## Authentication: OAuth vs API key
+
+You have two options. OAuth is strongly preferred for team deployments.
+
+### OAuth (recommended)
+
+**Leave the headers field empty.** Cursor will discover OAuth from the URL alone and prompt each teammate to authenticate individually the first time they use a PostHog tool.
+
+Why this is the better default for teams:
+
+- **Short-lived access tokens** (~1 hour) with automatic refresh via PKCE. A leaked token goes stale quickly.
+- **Per-user attribution.** PostHog activity logs and LLM traces show which specific teammate ran each query, instead of everything being attributed to a shared service identity.
+- **Granular revocation.** Offboarding someone means disabling their PostHog account, not rotating a key for the entire team.
+- **No shared secret in Cursor's cloud config**, your password manager, or anywhere else.
+
+### Personal API key (shared)
+
+If every teammate needs to share a single identity in PostHog (for example, because an unattended cloud agent needs to run without a browser prompt), you can add an API key header:
+
+1. [Create a personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) using the **MCP Server** preset. This preset selects exactly the API scopes the PostHog MCP needs. Do not hand-pick scopes — `user:read`, `group:read`, and `organization:read` are required and easy to miss.
+2. Back in the Cursor Team MCP dashboard, add this header:
+   - **Key:** `Authorization`
+   - **Value:** `Bearer phx_your_api_key_here`
+3. Save
+
+The trade-offs compared to OAuth: the key is long-lived, shared across the whole team, and stored in Cursor's cloud. Every teammate's actions are attributed to the key owner in PostHog's logs.
+
+## Optional: pin to a project
+
+By default the PostHog MCP lets agents switch between any organization and project the authenticated user has access to. To lock every teammate's session to a specific project, add this header in the Cursor dashboard:
+
+- **Key:** `x-posthog-project-id`
+- **Value:** your numeric project ID (find it in PostHog under **Settings → Project**)
+
+This hides the `switch-organization` and `switch-project` tools so agents can't wander into other projects. Only use this if you specifically want to enforce a project boundary — most teams don't need it.
+
+See the [headers reference](#pinning-to-a-specific-organization-or-project) below for more context-pinning options and for organization-level pinning.
+
+## Troubleshooting
+
+**Every request returns HTTP 500 "Internal server error":** almost always a PAT scope issue. Regenerate the key using the **MCP Server** preset at `/settings/user-api-keys?preset=mcp_server` and paste the new value into the Cursor dashboard. Common missing scopes are `user:read`, `group:read`, and `organization:read`.
+
+**Teammates don't see the server:** ask them to fully reload Cursor. The Team MCP config is pushed by Cursor's control plane on startup; if they were already running Cursor when you added it, they may need to restart. Only admins see the dashboard itself, but every teammate on the plan receives the pushed config.
+
+**OAuth prompt keeps reappearing on every tool call:** known Cursor-side bug with refresh token handling in certain versions. Update Cursor to the latest release.
+
+<SharedContent />
