@@ -538,6 +538,10 @@ export const handbookSidebar = [
                 url: '/handbook/company/brand-assets',
             },
             {
+                name: 'Style guide',
+                url: '/handbook/brand/style-guide',
+            },
+            {
                 name: 'Our design philosophy',
                 url: '/handbook/brand/philosophy',
             },
@@ -606,6 +610,10 @@ export const handbookSidebar = [
             {
                 name: 'Writing metadata',
                 url: '/handbook/content/metadata',
+            },
+            {
+                name: 'LinkedIn',
+                url: '/handbook/content/linkedin',
             },
         ],
     },
@@ -785,6 +793,10 @@ export const handbookSidebar = [
                     {
                         name: 'Writing HogQL queries in Python',
                         url: '/handbook/engineering/databases/hogql-python',
+                    },
+                    {
+                        name: 'Writing ClickHouse queries for new products',
+                        url: '/handbook/engineering/databases/clickhouse-queries-new-products',
                     },
                 ],
             },
@@ -1353,6 +1365,14 @@ export const handbookSidebar = [
                             {
                                 name: 'Expansion, cross-sell & retention',
                                 url: '/handbook/growth/sales/expansion-and-retention',
+                            },
+                            {
+                                name: 'Expansion strategies',
+                                url: '/handbook/growth/sales/expansion-strategies',
+                            },
+                            {
+                                name: 'TAM Excellence',
+                                url: '/handbook/growth/sales/tam-excellence',
                             },
                         ],
                     },
@@ -5437,6 +5457,16 @@ export const docsMenu = {
                             icon: 'IconOpenRouter',
                         },
                         {
+                            name: 'Cloudflare AI Gateway',
+                            url: '/docs/llm-analytics/installation/cloudflare-ai-gateway',
+                            platformLogo: 'cloudflare',
+                        },
+                        {
+                            name: 'Dedalus Labs',
+                            url: '/docs/llm-analytics/installation/dedalus',
+                            platformLogo: 'dedalus',
+                        },
+                        {
                             name: 'DeepSeek',
                             url: '/docs/llm-analytics/installation/deepseek',
                             platformLogo: 'deepseek',
@@ -5585,6 +5615,11 @@ export const docsMenu = {
                             name: 'Claude Code',
                             url: '/docs/llm-analytics/installation/claude-code',
                             icon: 'IconClaudeCode',
+                        },
+                        {
+                            name: 'OpenTelemetry',
+                            url: '/docs/llm-analytics/installation/opentelemetry',
+                            platformLogo: 'opentelemetry',
                         },
                         {
                             name: 'Manual capture',
