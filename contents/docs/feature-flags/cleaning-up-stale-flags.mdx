@@ -145,6 +145,8 @@ After removing flag references, clean up any dead imports, unused variables, and
 
 The [PostHog VS Code extension](/docs/vscode-extension/stale-flag-cleanup) automates this for JavaScript and TypeScript codebases. It uses AST-based scanning to find stale flag references and can remove them while preserving the correct code paths. It handles batch cleanup across multiple files.
 
+The AST-based clean up is not perfect, check the diffs carefully before committing.
+
 ### Using an AI coding agent
 
 Paste this prompt into any AI coding agent (Claude Code, Cursor, Copilot, etc.) and adapt the flag list:
