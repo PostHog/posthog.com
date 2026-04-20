@@ -140,6 +140,7 @@ Changes one or more fields on a ticket. Only the fields you provide are changed.
 | `priority` | choice | No | `low`, `medium`, `high` |
 | `sla_amount` | string | No | Duration until SLA expires. Use `clear` to remove. |
 | `sla_unit` | choice | No | `minute`, `hour`, or `day` (default: `hour`) |
+| `sla_business_hours` | object | No | Restrict SLA calculation to business hours. See [Business hours SLAs](#business-hours-slas). |
 | `assignee` | assignee | No | Assign to a user or role. Set to null to remove assignment. |
 | `tags` | tags | No | Replace all tags on the ticket. |
 
@@ -380,6 +381,20 @@ SLAs are set as a duration from "now" (the time the workflow runs). The `sla_due
 | `24` | `hour` | 24 hours from now |
 | `1` | `day` | 1 day from now |
 | `clear` | (ignored) | Removes the SLA |
+
+### Business hours SLAs
+
+By default, SLAs count calendar time (24/7). To calculate SLAs based on business hours, configure `sla_business_hours` with your working schedule.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `days` | array | Working days (e.g., `["monday", "tuesday", "wednesday", "thursday", "friday"]`). Lowercase weekday names. |
+| `time` | string or array | `"any"` for 24-hour days, or a two-element array like `["09:00", "17:00"]` for specific hours. |
+| `timezone` | string | IANA timezone name (e.g., `"America/New_York"`). Defaults to your team's timezone. |
+
+When business hours are configured, the SLA clock only runs during those windows. A 4-hour SLA set on Thursday at 4pm with Monday-Friday 9am-5pm business hours won't expire until Monday at noon.
+
+**Important:** With a custom time window, the `day` unit equals one window-length – not 24 hours. A 9am-5pm window is 8 hours, so `sla_amount: 2` with `sla_unit: day` equals 16 business hours, not 48 calendar hours.
 
 In the ticket list, SLAs show as one of three states:
 
