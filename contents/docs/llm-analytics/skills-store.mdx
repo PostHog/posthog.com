@@ -270,9 +270,21 @@ a "Known limitations" section in the release notes structure.
 
 The agent calls `skill-get` to read the current version, then `skill-update` with the new body and `base_version`. Fields you don't pass are carried forward — if you don't send `files`, the existing bundle is preserved. If you do send `files`, they replace the previous version's bundle.
 
-### Review changes
+### Compare versions
 
-Use the compare view in the PostHog UI to see a diff between any two versions. This is especially useful when an agent has updated a skill — you can review exactly what it changed before the rest of your team picks it up.
+Compare two skill versions side-by-side to see what changed. Available for skills with two or more versions.
+
+To compare versions:
+
+1. Open a skill and click **Compare versions** next to **Skill body**
+2. The diff view shows the current version against the previous version by default
+3. Use the version dropdown to change the comparison target
+
+You can also click the compare icon on any version in the **Version history** sidebar to compare it with the currently selected version. The comparison target is highlighted with a **Comparing** tag.
+
+Unchanged regions collapse automatically. Click **Compare versions** again to exit the diff view.
+
+This is useful when an agent has updated a skill — you can review exactly what changed before the rest of your team picks it up.
 
 ### Automatic propagation
 
