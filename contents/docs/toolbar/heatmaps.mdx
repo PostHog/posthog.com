@@ -8,18 +8,18 @@ availability:
   enterprise: full
 ---
 
-import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx"
+import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx";
 
 <iframe
-    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=250"
-    className="rounded shadow-xl"
+  src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=250"
+  className="rounded shadow-xl"
 />
 
 Heatmaps shows you how users are interacting with elements on your website or app.
 
-To start, ensure you enable the capturing of heatmap data in [your project settings](https://us.posthog.com/settings/project-heatmaps#heatmaps) or with the `enable_heatmaps` key in the [JavaScript Web SDK initialization config](/docs/libraries/js/config). 
+To start, ensure you enable the capturing of heatmap data in [your project settings](https://us.posthog.com/settings/project-heatmaps#heatmaps) or with the `enable_heatmaps` key in the [JavaScript Web SDK initialization config](/docs/libraries/js/config).
 
-Heatmap data is captured along with other events, so it doesn't contribute to your bill, but the clickmap requires [autocapture](/docs/product-analytics/autocapture) and the scrollmap requires pageleave events. 
+Heatmap data is captured along with other events, so it doesn't contribute to your bill, but the clickmap requires [autocapture](/docs/product-analytics/autocapture) and the scrollmap requires pageleave events.
 
 You can view heatmaps via the PostHog toolbar, or using the in-app Heatmap tool that's currently an opt-in beta.
 
@@ -47,8 +47,8 @@ To view heatmaps in the app:
 
 1. Enable the [**In-App Heatmaps** feature preview](https://app.posthog.com/settings/user-feature-previews#heatmaps-ui)
 1. Go to the [Heatmaps section in PostHog](https://us.posthog.com/heatmaps)
-2. Type the URL of your website in the **Display URL** field
-3. Optional: Use wildcard URL matching for the **Heatmap data URL** to combine data from similar pages
+1. Type the URL of your website in the **Display URL** field
+1. Optional: Use wildcard URL matching for the **Heatmap data URL** to combine data from similar pages
 
 ![Heatmaps in PostHog app interface](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/heatmaps_in_app_9b447c455e.png)
 
@@ -58,7 +58,16 @@ The in-app heatmap viewer provides the same three types of heatmaps as the toolb
 2. **Scrollmap:** Shows how far users scroll down your page
 3. **Clickmap:** Displays click counts on specific elements with rageclick indicators
 
-All configuration options available in the toolbar (aggregation, viewport accuracy, color palette, fixed positioning) are also available in the in-app version.
+All configuration options available in the toolbar (aggregation, viewport accuracy, color palette, fixed positioning) are also available in the in-app version, along with a capture method toggle.
+
+### Capture method
+
+When using the in-app heatmap viewer, you can switch between two capture methods in **Heatmap settings**:
+
+- **Screenshot** – Generates a full-page screenshot of your site. This works even if your site blocks iframes.
+- **Iframe** – Loads your site directly in an iframe for a live view.
+
+You can change the capture method at any time. If you switch to screenshot mode and no screenshot exists, PostHog automatically generates one.
 
 You can also generate a screenshot for heatmaps directly from [Session Replay](/docs/session-replay/how-to-watch-recordings) by clicking the **View heatmap** button above a recording.
 
@@ -80,45 +89,45 @@ The clickmap can be used when you want exact counts.
 
 ### Viewport accuracy
 
-You can set a tolerance for the viewport accuracy. 
+You can set a tolerance for the viewport accuracy.
 
-This enables you to view the heatmap on a different sized screen from your users. You can reduce viewport accuracy to include events from different sized screens. 
+This enables you to view the heatmap on a different sized screen from your users. You can reduce viewport accuracy to include events from different sized screens.
 
-This means that you get more data but the position might not be as accurate. 
+This means that you get more data but the position might not be as accurate.
 
 ![Viewport accuracy](https://res.cloudinary.com/dmukukwp6/image/upload/v1716592899/posthog.com/contents/docs/toolbar/accuracy.png)
 
 ### Color palette
 
-The default palette for the heatmap is a gradient from red to green. This won't be visible for all users or against all site color themes. 
+The default palette for the heatmap is a gradient from red to green. This won't be visible for all users or against all site color themes.
 
 You can change the color palette to a different gradient or to a single color.
 
 ### Fixed positioning
 
-Some clicks are on elements that don't move when the page scrolls. 
+Some clicks are on elements that don't move when the page scrolls.
 
-Our JavaScript SDK attempts to detect fixed elements, such as headers or modals, and show those heatmap areas, ignoring the scroll value. 
+Our JavaScript SDK attempts to detect fixed elements, such as headers or modals, and show those heatmap areas, ignoring the scroll value.
 
 You can change fixed positioning so these clicks move when scrolled or hide them entirely.
 
 ## Scrollmaps
 
-The scrollmap uses data from pageview and pageleave events to show how far down the page users are scrolling. 
+The scrollmap uses data from pageview and pageleave events to show how far down the page users are scrolling.
 
 ![Scrollmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1716593249/posthog.com/contents/docs/toolbar/scrollmap.png)
 
 ## Clickmaps
 
-With the clickmap, clickable elements on your website will have a red overlay with numbers on them. 
+With the clickmap, clickable elements on your website will have a red overlay with numbers on them.
 
 Here's an example of our website with the heatmap enabled:
 
 ![An example from the PostHog website showing the click map highlighting a number of page elements. Some showing a count of clicks and one also showing a rageclick](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/toolbar/posthog-heatmap-example.png)
 
-Each number in the top right box of each element represents the total number of clicks in the last 7 days. 
+Each number in the top right box of each element represents the total number of clicks in the last 7 days.
 
-The number in the top left of the element is the number of rageclicks. 
+The number in the top left of the element is the number of rageclicks.
 
 A rageclick is collected when a user clicks on a static element more than three times in a one-second window.
 
@@ -132,7 +141,7 @@ With the clickmap enabled, click on any element. This opens a menu where you can
 
 ### Loading more data
 
-If you have many events, you may need to load more data to see everything on the clickmap. 
+If you have many events, you may need to load more data to see everything on the clickmap.
 
 To do this, click on the load more button in the clickmap menu.
 
@@ -140,9 +149,9 @@ To do this, click on the load more button in the clickmap menu.
 
 ### Matching links by their target URL
 
-By default, the toolbar matches clicks using the elements on the page, and not by their target URLs (i.e., `href` attribute). 
+By default, the toolbar matches clicks using the elements on the page, and not by their target URLs (i.e., `href` attribute).
 
-This is fine for most scenarios where you have static elements with the same target URL. 
+This is fine for most scenarios where you have static elements with the same target URL.
 
 However, this may not be ideal for dynamic lists that have different target URLs depending on the underlying data.
 
@@ -150,19 +159,19 @@ For example, consider the following screenshot of a list of elements for "Newly 
 
 ![the list of recent insights showing several clicks](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-target-url-off.png)
 
-The "Newly seen persons" shows the most recent list of persons using the app and is constantly being updated as new users use the app. 
+The "Newly seen persons" shows the most recent list of persons using the app and is constantly being updated as new users use the app.
 
-In the clickmap, we see 106 clicks for the **first element**. 
+In the clickmap, we see 106 clicks for the **first element**.
 
 This doesn't mean that the this specific person in the list received 106 clicks, but rather that the first element in the list received 106 clicks, regardless of which person was shown.
 
-If we were interested in the number of clicks each specific person in the list received (regardless of which position they appeared in), then we can turn on "Match links by their target URL" in the clickmap menu. 
+If we were interested in the number of clicks each specific person in the list received (regardless of which position they appeared in), then we can turn on "Match links by their target URL" in the clickmap menu.
 
 This matches clicks to elements based on their target URLs.
 
 ![How to enable link matching in the clickmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-match-link.png)
 
-For example, if we enable this for our previous example, we see much fewer clicks. 
+For example, if we enable this for our previous example, we see much fewer clicks.
 
 This is because we are now seeing clicks on each specific user:
 
@@ -184,7 +193,7 @@ If you're viewing heatmaps [in-app](https://us.posthog.com/heatmaps) and the hea
 
 In app, PostHog overlays the heatmap over your site in an iframe. You can allow PostHog to place your site in an `<iframe>` by updating your `Content-Security-Policy` header.
 
-| Region | Content Security Policy |
-| --- | --- |
-| US | `Content-Security-Policy: frame-ancestors 'self' https://us.posthog.com;` |
-| EU | `Content-Security-Policy: frame-ancestors 'self' https://eu.posthog.com;` |
+| Region | Content Security Policy                                                   |
+| ------ | ------------------------------------------------------------------------- |
+| US     | `Content-Security-Policy: frame-ancestors 'self' https://us.posthog.com;` |
+| EU     | `Content-Security-Policy: frame-ancestors 'self' https://eu.posthog.com;` |
