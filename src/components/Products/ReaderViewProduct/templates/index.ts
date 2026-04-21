@@ -4,7 +4,6 @@ import Overview from './Overview'
 import Features from './Features'
 import AI from './AI'
 import PostHogOnPostHog from './PostHogOnPostHog'
-import Answers from './Answers'
 import Pricing from './Pricing'
 import ComparisonSummary from './ComparisonSummary'
 import FeatureComparison from './FeatureComparison'
@@ -24,7 +23,6 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
     features: Features,
     ai: AI,
     'posthog-on-posthog': PostHogOnPostHog,
-    answers: Answers,
     pricing: Pricing,
     'comparison-summary': ComparisonSummary,
     'feature-comparison': FeatureComparison,
@@ -39,7 +37,6 @@ export {
     Features,
     AI,
     PostHogOnPostHog,
-    Answers,
     Pricing,
     ComparisonSummary,
     FeatureComparison,
