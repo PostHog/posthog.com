@@ -5752,7 +5752,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Prompts as a skills store',
+                    name: 'Skills store',
                     url: '/docs/llm-analytics/skills-store',
                     icon: 'IconStack',
                     color: 'blue',
