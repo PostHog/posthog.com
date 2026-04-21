@@ -37,7 +37,6 @@ export const sessionReplay = {
         { slug: 'overview', name: 'Overview' },
         { slug: 'features', name: 'Features' },
         { slug: 'ai', name: 'AI' },
-        { slug: 'answers', name: 'Questions' },
         { slug: 'comparison-summary', name: 'PostHog vs...' },
         { slug: 'feature-comparison', name: 'Feature comparison' },
         { slug: 'pairs-with', name: 'Pairs with...' },
