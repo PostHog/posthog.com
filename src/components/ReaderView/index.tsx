@@ -675,7 +675,6 @@ const LeftSidebar = ({
             }`}
         >
             <div className="flex flex-col items-center gap-px p-1 flex-shrink-0">
-                <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
                 <ConditionalMarkdownDropdown pageUrl={pageUrl} />
                 <EditHistoryPopover commits={commits || []} />
                 {rightActionButtons}
@@ -722,10 +721,13 @@ const LeftSidebar = ({
                 >
                     {isNavVisible ? 'Hide' : 'Show'} sidebar
                 </Tooltip>
-                <AppOptionsButton
-                    lineHeightMultiplier={lineHeightMultiplier}
-                    handleLineHeightChange={handleLineHeightChange}
-                />
+                <div className={isNavVisible ? 'flex items-center gap-px' : 'contents'}>
+                    <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
+                    <AppOptionsButton
+                        lineHeightMultiplier={lineHeightMultiplier}
+                        handleLineHeightChange={handleLineHeightChange}
+                    />
+                </div>
             </div>
         </aside>
     )
