@@ -306,6 +306,28 @@ The agent will use the `conversations-tickets-retrieve` tool to fetch the full t
 
 The agent will use the `conversations-tickets-update` tool to change the status and priority of the specified tickets.
 
+### Data warehouse source management
+
+**Prompt:** "List all data sources connected to my data warehouse"
+
+The agent will use the `external-data-sources-list` tool to return all configured sources, including their types, sync status, and table counts.
+
+**Prompt:** "Connect a new Postgres database as a data source"
+
+The agent will use the `external-data-sources-wizard` tool to get the required credentials configuration, then use `external-data-sources-db-schema` to preview available tables and `external-data-sources-create` to set up the connection with selected tables.
+
+**Prompt:** "Show me the sync history for my Stripe source"
+
+The agent will use the `external-data-sources-jobs` tool to return recent sync jobs with their status, duration, and any errors.
+
+**Prompt:** "Trigger a sync for all tables in my HubSpot source"
+
+The agent will use the `external-data-sources-reload` tool to start a sync for all enabled schemas in the source.
+
+**Prompt:** "Change my Postgres source to sync daily instead of hourly"
+
+The agent will use the `external-data-schemas-partial-update` tool to update the sync frequency for the relevant schemas.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
