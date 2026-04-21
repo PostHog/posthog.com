@@ -7,6 +7,7 @@ import ArenaLogo from '../components/CustomerLogos/ArenaLogo'
 import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
 import BrainboardLogo from '../components/CustomerLogos/BrainboardLogo'
 import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
+import ClerkLogo from '../components/CustomerLogos/ClerkLogo'
 import CloudPeekLogo from '../images/customers/CloudPeek_Final_Logo_Transparent.png'
 import CloudPeekLogoDark from '../images/customers/CloudPeek_Full_Logo_-_White_Transparent.png'
 import ContraLogo from '../components/CustomerLogos/ContraLogo'
@@ -249,6 +250,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: CarVerticalLogo,
         featured: false,
         height: 10,
+    },
+    clerk: {
+        name: 'Clerk',
+        // toolsUsed: ['feature_flags', 'session_replay', 'product_analytics'],
+        industries: ['SaaS'],
+        // users: ['Product', 'Engineering'],
+        notes: 'Identity and access management',
+        logo: ClerkLogo,
+        featured: true,
+        height: 9,
     },
     cloudpeek: {
         name: 'CloudPeek',
