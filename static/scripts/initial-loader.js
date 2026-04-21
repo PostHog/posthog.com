@@ -1,8 +1,13 @@
 ; (function () {
     try {
-        const websiteMode = JSON.parse(localStorage.getItem('siteSettings') || '{}').experience === 'boring'
-        if (websiteMode) return
         const body = document.body
+        const websiteMode = JSON.parse(localStorage.getItem('siteSettings') || '{}').experience === 'boring'
+        if (websiteMode) {
+            body.setAttribute('data-wallpaper-ready', 'true')
+            const hideStyle = document.getElementById('initial-loader-wallpaper-hide')
+            if (hideStyle) hideStyle.remove()
+            return
+        }
         const loadingWrapper = document.createElement('div')
         const loadingStyles = document.createElement('style')
         loadingStyles.textContent = `
@@ -82,9 +87,6 @@
             [data-app="Desktop"] > div:not(#initial-loader) {
                 transition: opacity 400ms ease-out;
             }
-            body[data-wallpaper-ready="false"] [data-app="Desktop"] > div:not(#initial-loader) {
-                opacity: 0;
-            }
         `
         loadingWrapper.id = 'initial-loader'
         loadingWrapper.innerHTML = `
@@ -107,12 +109,13 @@
                 </svg>
             </div>
         `
-        body.setAttribute('data-wallpaper-ready', 'false')
         body.appendChild(loadingStyles)
         body.appendChild(loadingWrapper)
 
         const cleanup = () => {
             body.setAttribute('data-wallpaper-ready', 'true')
+            const hideStyle = document.getElementById('initial-loader-wallpaper-hide')
+            if (hideStyle) hideStyle.remove()
             loadingWrapper.remove()
             setTimeout(() => loadingStyles.remove(), 500)
         }

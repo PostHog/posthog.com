@@ -35,9 +35,26 @@ export default function HTML(props: HTMLProps): JSX.Element {
                     <script src="/scripts/posthog-init.js" />
                 )}
 
+                <style
+                    id="initial-loader-wallpaper-hide"
+                    dangerouslySetInnerHTML={{
+                        __html: `body[data-wallpaper-ready="false"] [data-app="Desktop"] > div:not(#initial-loader){opacity:0}`,
+                    }}
+                />
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `setTimeout(function(){if(document.body&&document.body.getAttribute('data-wallpaper-ready')==='false'){document.body.setAttribute('data-wallpaper-ready','true');var s=document.getElementById('initial-loader-wallpaper-hide');if(s)s.remove();}},5000);`,
+                    }}
+                />
+
                 {props.headComponents}
             </head>
-            <body {...props.bodyAttributes} className="light" data-wallpaper="keyboard-garden">
+            <body
+                {...props.bodyAttributes}
+                className="light"
+                data-wallpaper="keyboard-garden"
+                data-wallpaper-ready="false"
+            >
                 {props.preBodyComponents}
                 {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - Gatsby body content from build, not user input */}
                 <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
