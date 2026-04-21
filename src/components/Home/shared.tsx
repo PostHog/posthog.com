@@ -429,44 +429,36 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
 
     return (
         <>
-            <div className="inline-block">
-                <div className="relative @xl:pt-1 pb-2 @xl:pb-0 @4xl:mt-8">
-                    <div className="@xl:absolute right-0 -top-8">
-                        <OSButton
-                            onClick={toggleBreakdown}
-                            variant="secondary"
-                            size="sm"
-                            className="font-semibold [&_span]:min-w-[146px]"
-                            disabled={isAnimating}
-                        >
-                            {isAnimating ? (
-                                '🔀 Shuffling...'
-                            ) : (
-                                <>
-                                    <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
-                                </>
-                            )}
-                        </OSButton>
-                    </div>
+            <div className="relative @xl:pt-1 pb-2 @xl:pb-0 @4xl:mt-8">
+                <div className="@xl:absolute right-0 -top-8">
+                    <OSButton
+                        onClick={toggleBreakdown}
+                        variant="secondary"
+                        size="sm"
+                        className="font-semibold [&_span]:min-w-[146px]"
+                        disabled={isAnimating}
+                    >
+                        {isAnimating ? (
+                            '🔀 Shuffling...'
+                        ) : (
+                            <>
+                                <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
+                            </>
+                        )}
+                    </OSButton>
                 </div>
-                <OSTable
-                    columns={columns}
-                    rows={rows}
-                    size="sm"
-                    rowAlignment="top"
-                    className={tableClassName || undefined}
-                />
-                <OSButton
-                    asLink
-                    to="/customers"
-                    variant="secondary"
-                    size="md"
-                    className="mt-4"
-                    state={{ newWindow: true }}
-                >
-                    Open customers.mdx
-                </OSButton>
             </div>
+            <OSTable
+                columns={columns}
+                rows={rows}
+                size="sm"
+                rowAlignment="top"
+                width="full"
+                className={tableClassName || undefined}
+            />
+            <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
+                Open customers.mdx
+            </OSButton>
         </>
     )
 }
