@@ -20,6 +20,8 @@ seo:
   metaDescription: "Six levels of product autonomy, the five things every agent actually needs, and why we're shipping PostHog Code into beta."
 ---
 
+import PostHogCodeWaitlist from 'components/PostHogCodeWaitlist'
+
 Product work splits two ways: reactive and proactive.
 
 Reactive work is mechanical. Fix the typo. Add the index. Flip the flag. The data tells you what's wrong and the scope tells you what to fix. A computer can do this better than you. Full stop.
@@ -156,4 +158,17 @@ A workbench isn't the destination. It's the shop we're building the vehicle in. 
 
 The human stays in the seat for taste, strategy, and the freedom to build what data can't yet dictate. The agent handles everything downstream of that.
 
-Have I convinced you to take it for a test drive? [Sign up for the beta here.](/code)
+Have I convinced you to take it for a test drive?
+
+<div className="dark:bg-dark bg-accent border border-input p-4 rounded">
+    <p className="!mt-0">
+        PostHog Code is in{' '}
+        <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
+            Beta
+        </span>
+        . Join the waitlist to get early access.
+    </p>
+    <div className="max-w-md">
+        <PostHogCodeWaitlist />
+    </div>
+</div>
