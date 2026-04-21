@@ -4,6 +4,7 @@ import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import List from 'components/List'
+import Link from 'components/Link'
 import ResourceItem from 'components/Docs/ResourceItem'
 import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
@@ -14,6 +15,8 @@ import AskMax from 'components/AskMax'
 import ReaderView from 'components/ReaderView'
 import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
 import useProduct from 'hooks/useProduct'
+import { groupMenuItems } from 'lib/utils'
+import { IconChevronRight } from '@posthog/icons'
 
 const PRODUCT_HANDLE = 'session_replay'
 
@@ -50,6 +53,63 @@ export const quickLinks = [
         description: 'Common issues and how to resolve them.',
     },
 ]
+
+const PRODUCT_NAV_NAME = 'Session Replay'
+
+type NavItem = {
+    name: string
+    url?: string
+    children?: NavItem[]
+}
+
+const ProductDocsNav = () => {
+    const productMenu = docsMenu.children.find(
+        ({ name }: { name: string }) => name.toLowerCase() === PRODUCT_NAV_NAME.toLowerCase()
+    )
+    const items: NavItem[] = productMenu?.children ?? []
+    const grouped = groupMenuItems(items as any) as Record<string, NavItem[]>
+
+    const sections = Object.entries(grouped).filter(([heading, links]) => {
+        if (!heading || heading.toLowerCase() === PRODUCT_NAV_NAME.toLowerCase()) return false
+        return links.some((link) => link.url)
+    })
+
+    if (sections.length === 0) return null
+
+    return (
+        <nav aria-label={`${PRODUCT_NAV_NAME} documentation`} className="mb-12">
+            <div className="md:columns-2 md:gap-x-8">
+                {sections.map(([heading, links]) => (
+                    <section key={heading} className="mb-6 break-inside-avoid">
+                        <h3 className="m-0 mb-2 text-sm font-semibold uppercase tracking-wide text-secondary">
+                            {heading}
+                        </h3>
+                        <ul className="m-0 p-0 list-none flex flex-col">
+                            {links
+                                .filter((link) => link.url && link.name.toLowerCase() !== 'overview')
+                                .map((link) => {
+                                    const hasChildren = Array.isArray(link.children) && link.children.length > 0
+                                    return (
+                                        <li key={link.url} className="m-0">
+                                            <Link
+                                                to={link.url as string}
+                                                className="group flex items-center gap-1 py-1 -mx-1 px-1 rounded text-[15px] !text-primary dark:!text-primary-dark hover:!text-red dark:hover:!text-yellow"
+                                            >
+                                                {hasChildren && (
+                                                    <IconChevronRight className="size-3 shrink-0 text-secondary group-hover:text-current" />
+                                                )}
+                                                <span className={hasChildren ? '' : 'pl-4'}>{link.name}</span>
+                                            </Link>
+                                        </li>
+                                    )
+                                })}
+                        </ul>
+                    </section>
+                ))}
+            </div>
+        </nav>
+    )
+}
 
 type SessionRecordingProps = {
     data: {
@@ -153,6 +213,8 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                     'How can I control costs?',
                 ]}
             />
+
+            <ProductDocsNav />
 
             <Content />
 
