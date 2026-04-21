@@ -54,8 +54,6 @@ These events track changes to organization-wide settings and membership.
 | Organization settings changed | Organization name, logo, or other settings were updated                   |
 | 2FA enforcement changed       | Two-factor authentication requirements were modified                      |
 | _+ many more_                 |                                                                           |
-| 2FA enforcement changed       | Two-factor authentication requirements were modified                      |
-| _+ many more_                 |                                                                           |
 
 ### Project-level events
 
@@ -107,14 +105,14 @@ These events track changes to individual resources within projects.
 
 Each activity log entry contains the following information:
 
-| Field     | Description                                                    |
-| --------- | -------------------------------------------------------------- |
-| Timestamp | When the action occurred (UTC)                                 |
-| Actor     | The user who performed the action (name, email)                |
-| Action    | The type of action performed (created, updated, deleted, etc.) |
-| Scope     | The type of resource affected (feature flag, dashboard, etc.)  |
-| Target    | The specific resource that was affected (name and ID)          |
-| Changes   | Before and after values for each modified field                |
+| Field     | Description                                                                                                                                           |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Timestamp | When the action occurred (UTC)                                                                                                                        |
+| Actor     | The user who performed the action (name, email). Actions performed via [MCP](/docs/model-context-protocol) display an **MCP** badge next to the user. |
+| Action    | The type of action performed (created, updated, deleted, etc.)                                                                                        |
+| Scope     | The type of resource affected (feature flag, dashboard, etc.)                                                                                         |
+| Target    | The specific resource that was affected (name and ID)                                                                                                 |
+| Changes   | Before and after values for each modified field                                                                                                       |
 
 ### Example log entry
 
@@ -150,7 +148,8 @@ Here's an example of what a log entry looks like when retrieved via the API:
     "last_name": "Doe"
   },
   "created_at": "2024-01-15T10:30:00.000000Z",
-  "is_system": false
+  "is_system": false,
+  "client": "mcp"
 }
 ```
 
@@ -290,6 +289,9 @@ Filter by specific resource IDs. Enter one or more IDs to see activity for only 
 
 **Detail filters**
 Filter on specific fields within the activity log details. You can filter using three operations: **equals** (exact match), **contains** (partial match), or **is one of** (matches any value in a list). This lets you search for changes to particular fields (like "active" or "filters") or filter by specific before/after values. Useful for finding when a specific setting was changed across multiple resources.
+
+**Client**
+Filter by the client that originated the action. This lets you see which actions were performed via specific integrations like [MCP](/docs/model-context-protocol) (Model Context Protocol). Available client values are auto-discovered from your activity log data.
 
 ## Exporting and retention
 
