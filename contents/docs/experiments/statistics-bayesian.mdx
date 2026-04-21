@@ -58,7 +58,7 @@ These sufficient statistics contain all the information needed to calculate mean
 
 #### Outlier handling (winsorization)
 
-For mean metrics, extreme outliers can skew results. PostHog optionally applies winsorization by clamping values to percentile-based bounds — values below the lower percentile (e.g., 1st percentile) are replaced with the lower bound, and values above the upper percentile (e.g., 99th percentile) are replaced with the upper bound. No data is excluded; all users remain in the calculation. This makes results more robust to data entry errors or extreme edge cases. The percentile bounds are [configured per metric](https://posthog.com/docs/experiments/metrics#outlier-handling) when setting up the experiment.
+For mean metrics, extreme outliers can skew results. PostHog optionally applies winsorization by clamping values to percentile-based bounds. Values below the lower percentile (e.g., 1st percentile) are replaced with the lower bound, and values above the upper percentile (e.g., 99th percentile) are replaced with the upper bound. No data is excluded; all users remain in the calculation. This makes results more robust to data entry errors or extreme edge cases. The percentile bounds are [configured per metric](https://posthog.com/docs/experiments/metrics#outlier-handling) when setting up the experiment.
 
 ### Step 2: Data quality validation
 
@@ -234,3 +234,23 @@ When testing multiple variants (A/B/C/D tests):
 - The chance to win is calculated for each variant vs. control
 - No correction for multiple comparisons
 - This is philosophically consistent: each comparison stands on its own
+
+## Multiple metrics and false positives
+
+At the default 95% confidence level, there's a 5% chance that any single metric shows a significant result when nothing actually changed. The statistical engine itself can produce a false signal from random noise. Think of it like rolling a die: each metric is an independent roll, and each one has a small chance of landing on "significant" by chance.
+
+With 5 metrics, the chance that *at least one* produces a false positive is about 23%. With 10 metrics, it's 40%. PostHog tests each metric independently and doesn't adjust for this, so each result stands on its own.
+
+### More metrics can help, if they're planned
+
+This doesn't mean fewer metrics is better. Multiple well-chosen metrics actually help you cross-check results. If your change improves conversion but _only_ one of five supporting metrics improve with it, that pattern tells you the one outlier is likely noise. The other metrics gave you the context to see that.
+
+But this only works if you intentionally choose related metrics tied to your hypothesis. If you add 10 unrelated metrics with no plan, you lose that cross-checking power. You're just giving yourself more chances to find something to cherry-pick.
+
+### How to use this in practice
+
+**Before launching,** make sure each metric is tied to your hypothesis and has clear success criteria. Decide which metric is your primary decision-driver, and which are secondary (providing context, not driving the ship/kill decision).
+
+**When reading results,** look at the full pattern across metrics, not individual ones in isolation. A coherent story across multiple metrics is strong evidence. A single significant metric with no supporting signal from the others is worth skepticism.
+
+**If an unexpected metric shows significant change,** don't ship based on that metric alone. Design a follow-up experiment with that metric as the primary. If the effect replicates, it's real.
