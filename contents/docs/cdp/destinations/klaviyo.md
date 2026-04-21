@@ -52,7 +52,7 @@ Once you’ve configured your Klaviyo destination, click **Create & enable** the
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/webhook/template_airtable.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/klaviyo/template_klaviyo.py) is available on GitHub.
 
 <PostHogMaintained />
 

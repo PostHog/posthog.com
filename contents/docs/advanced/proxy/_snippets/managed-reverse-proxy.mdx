@@ -96,3 +96,17 @@ If you see errors or events aren't appearing, see [troubleshooting](/docs/advanc
 </Step>
 
 </Steps>
+
+## FAQ
+
+### Why does my managed proxy stay in "erroring" state with Cloudflare?
+
+If you're using a **Cloudflare Enterprise** zone with **zone hold** enabled, the managed reverse proxy won't work. Zone holds prevent external services from provisioning SSL certificates or verifying DNS for domains in your zone.
+
+You have two options:
+
+1. **Set up a self-hosted proxy instead:** Use [Cloudflare Workers](/docs/advanced/proxy/cloudflare) to create your own reverse proxy. This works with zone holds enabled since you're configuring everything within your own Cloudflare account.
+
+2. **Disable zone hold** (not recommended): Zone holds are typically enabled for security reasons. Disabling them may expose your domain to certain risks. Only consider this if you understand the security implications for your organization.
+
+For most users with Cloudflare Enterprise, option 1 (setting up your own Cloudflare Worker proxy) is the recommended approach.

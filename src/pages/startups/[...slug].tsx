@@ -14,6 +14,8 @@ import Logo1984 from '../../images/1984.svg'
 import ODFLogo from '../../images/odf.svg'
 import Logo from 'components/Logo'
 import OSButton from 'components/OSButton'
+import AxisLogo from '../../images/axis-logo.svg'
+import CategoryLogo from '../../images/category.svg'
 import { useMenuSelectOptions } from 'components/TaskBarMenu/menuData'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
@@ -36,6 +38,26 @@ const partnerConfigs = [
                 <IconX className="size-8 text-white inline-block relative top-1" />
                 <img src={StripeLogo} alt="Stripe" className="inline-block h-9 relative top-[.2rem]" />
                 <span>Atlas</span>
+            </>
+        ),
+        value: '$50,000',
+    },
+    {
+        slug: 'axi',
+        title: (
+            <>
+                <IconX className="size-8 text-white inline-block relative top-1 pb-2" />
+                <img src={AxisLogo} alt="Axis" className="inline-block h-9 relative top-[.2rem] pb-2" />
+            </>
+        ),
+        value: '$50,000',
+    },
+    {
+        slug: 'category',
+        title: (
+            <>
+                <IconX className="size-8 text-white inline-block relative top-1 pb-2" />
+                <img src={CategoryLogo} alt="Category" className="inline-block h-9 relative top-[.2rem] pb-2" />
             </>
         ),
         value: '$50,000',

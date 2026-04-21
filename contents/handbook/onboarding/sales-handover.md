@@ -11,7 +11,9 @@ If you see that a customer is spending **more than $1,000 monthly**, evaluate wh
 
 If that's the case, you can pass the account to Sales even **without speaking with the customer first**, as long as you’ve confirmed that the high spend is intentional. The goal is to react quickly to healthy, high-spend accounts—but avoid passing through problematic ones.
 
-Be courteous and **leave a note in Vitally**, providing context on the account (e.g., what you've noticed in Metabase, etc.) to the Sales person assigned to your lead.
+Before you hand off, also consider month-over-month growth. A flat $1.2k account is a very different lead from a $1k account that doubled organically last month. Growth rate matters to the Sales person deciding whether to prioritise the lead, so call it out.
+
+Be courteous and **leave a note in Vitally** with context on the account before handing off. Include what you spotted in Metabase, any relevant billing patterns, and your read on why the spend is legitimate. The Sales person receiving the lead should be able to pick it up without having to dig.
 
 #### Handover during onboarding - engaged customers
 
@@ -42,6 +44,7 @@ The automation flips the Vitally's Onboarding pipeline trait to `Sales Handoff` 
 
 Some pointers on what to pay attention to in Vitally while checking for prior Sales engagement:
 
+- Pin `temporary owner` trait in your Vitally sidebar - the trait is set when a Salesforce lead task exists (otherwise it's "null")
 - Segments (e.g. TAM/CSM Candidate, $20k MRR, Active Trial, Active Self-serve Trial, Annual Plan, etc.)
 - Slack channel (following the naming convention `#posthog-[company name]`)
 - Key Roles (is someone assigned to the account?)
@@ -49,6 +52,12 @@ Some pointers on what to pay attention to in Vitally while checking for prior Sa
 - Active Conversations and Meetings (any trace of a booked call or an ongoing conversation)
 - Notes
 
+If Sales are already engaged, there's no need to create an `Onboarding Referral`. 
+
 If the account has engaged with the Sales team at some point and it's unclear where the conversation stands, ping your fellow AE to make sure you’re not overlapping efforts. 
 
 If it’s clear there’s a duplication issue and we shouldn’t be involved, ping Mine to double-check the logic.
+
+### What to do when Sales is involved?
+
+If an account is in the `Onboarding Lead` segment, but there are recent Active Conversations in Vitally from a TAE/TAM (or scheduled meetings), and TAE/TAM confirms they are already actively engaged with the account, add a Vitally note saying: “Removing from Onboarding Lead segment — Sales already engaged.” Then remove the account from the segment and delete both the pipeline trait and the timestamp.

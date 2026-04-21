@@ -50,6 +50,10 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
         page.matchPath = '/community/profiles/*'
         createPage(page)
     }
+    if (page.path.match(/^\/events\//)) {
+        page.matchPath = '/events/*'
+        createPage(page)
+    }
     if (page.path.match(/^\/next\-steps/)) {
         page.matchPath = '/next-steps/*'
         createPage(page)

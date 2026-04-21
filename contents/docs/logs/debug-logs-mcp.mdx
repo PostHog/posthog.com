@@ -1,0 +1,44 @@
+---
+title: Debug Logs with MCP
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) gives AI agents direct access to your Logs. Ask your agent to search, filter, and analyze log data without leaving your code editor.
+
+With MCP, your agents can:
+
+- **Search and filter logs** – Query by severity level, service name, date range, and free text.
+- **Discover log attributes** – List available attributes and their values to build targeted queries.
+- **Debug in context** – Investigate production issues without switching tools.
+- **Correlate with traces** – Use trace IDs and span IDs from log entries to follow request flows across services.
+
+This works in any MCP client – Cursor, Windsurf, Claude Code, and others.
+
+## Example prompts
+
+Try these prompts with your MCP-enabled agent:
+
+- `Show me all error logs from the last hour.`
+- `What services are logging errors? Search for error logs from the payments service.`
+- `Find logs related to trace ID abc123.`
+- `What log attributes are available? Show me the values for the service.name attribute.`
+- `Show me warning and error logs from the last 24 hours, excluding debug noise.`
+
+## Logs tools
+
+The MCP server provides three tools for working with logs:
+
+| Tool | Description |
+|------|-------------|
+| `logs-query` | Search and query logs with filters for severity levels (trace, debug, info, warn, error, fatal), service names, date ranges, and free text. Supports pagination for large result sets. |
+| `logs-list-attributes` | List available log attributes in your project to discover what you can filter on. Supports filtering by attribute type (log or resource). |
+| `logs-list-attribute-values` | Get possible values for a specific log attribute. Find service names, log levels, or other attribute values before querying. |
+
+A typical workflow:
+
+1. Call `logs-list-attributes` to discover available filter attributes.
+2. Call `logs-list-attribute-values` to find specific values (e.g., which service names exist).
+3. Call `logs-query` to search logs with the right filters.
+
+## Get started
+
+See the [MCP server documentation](/docs/model-context-protocol) for setup instructions.

@@ -427,7 +427,7 @@ export class AppComponent {
     localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: this.surveyID, // required
-      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: `${value}` // required. Convert numbers to string
+      $survey_response: `${value}` // required. Convert numbers to string
       $survey_questions: [
         {
           id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
@@ -505,7 +505,7 @@ export class AppComponent {
     localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: this.surveyID, // required
-      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: `${value}` // required. Convert numbers to string
+      $survey_response: `${value}` // required. Convert numbers to string
       $survey_questions: [
         {
           id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
