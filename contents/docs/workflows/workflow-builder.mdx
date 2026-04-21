@@ -2,7 +2,7 @@
 title: Workflow builder
 ---
 
-import CalloutBox from 'components/Docs/CalloutBox'
+import CalloutBox from "components/Docs/CalloutBox";
 
 Workflows are a collection of steps that automate a process or deliver messages to your users based on your configured logic. In PostHog, you can create a workflow using our no-code workflow builder.
 
@@ -15,14 +15,14 @@ Workflows are a collection of steps that automate a process or deliver messages 
 
 Workflows are composed of the following components:
 
-| Component                             | Description                                                                                                                                                          |
-| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Triggers](#triggers)                 | What starts the workflow. You can trigger a workflow from an event, a recurring schedule, a batch audience, a webhook, or a tracking pixel.                          |
-| [Dispatches](#dispatches)             | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations.                                                                             |
-| [Delays](#delays)                     | Wait steps such as "wait 2 days" or "wait until condition is true."                                                                                                  |
-| [Audience splits](#audience-splits)   | Target and split your users so you can automate some action for them or send a message with more specificity.                                                        |
-| [PostHog actions](#posthog-actions)   | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow.                                                      |
-| [Output variables](#output-variables) | Store data from step results in workflow variables for use in later steps.                                                                                           |
+| Component                             | Description                                                                                                                                 |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Triggers](#triggers)                 | What starts the workflow. You can trigger a workflow from an event, a recurring schedule, a batch audience, a webhook, or a tracking pixel. |
+| [Dispatches](#dispatches)             | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations.                                                    |
+| [Delays](#delays)                     | Wait steps such as "wait 2 days" or "wait until condition is true."                                                                         |
+| [Audience splits](#audience-splits)   | Target and split your users so you can automate some action for them or send a message with more specificity.                               |
+| [PostHog actions](#posthog-actions)   | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow.                             |
+| [Output variables](#output-variables) | Store data from step results in workflow variables for use in later steps.                                                                  |
 
 ## Draft and enabled workflows
 
@@ -43,13 +43,13 @@ Draft workflows can also be archived, even if they contain invalid configuration
 
 Every workflow starts with a trigger. Triggers define what kicks off the workflow.
 
-| Trigger type             | Description                                                                        |
-| ------------------------ | ---------------------------------------------------------------------------------- |
-| Event trigger            | A captured [PostHog event](/docs/data/events) (e.g. `signed up`)                   |
-| Webhook trigger          | Programmatically start a workflow with an HTTP request                             |
-| Schedule trigger         | Run a workflow on a recurring schedule (e.g. daily, weekly, monthly)               |
-| Batch trigger            | Run the workflow for each person matching an audience, on a recurring schedule     |
-| Tracking pixel trigger   | Start the workflow when a 1x1 tracking pixel is loaded (e.g. in an email)          |
+| Trigger type           | Description                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------ |
+| Event trigger          | A captured [PostHog event](/docs/data/events) (e.g. `signed up`)               |
+| Webhook trigger        | Programmatically start a workflow with an HTTP request                         |
+| Schedule trigger       | Run a workflow on a recurring schedule (e.g. daily, weekly, monthly)           |
+| Batch trigger          | Run the workflow for each person matching an audience, on a recurring schedule |
+| Tracking pixel trigger | Start the workflow when a 1x1 tracking pixel is loaded (e.g. in an email)      |
 
 ### Event triggers
 
@@ -110,6 +110,7 @@ You define the audience using person properties, cohorts, or feature flag filter
 The trigger shows an estimate of how many persons will be affected before you enable the workflow.
 
 A batch trigger combines two things:
+
 - **Audience filters** — who should enter the workflow (e.g. person properties, cohorts, feature flags)
 - **A recurring schedule** — when the batch should run (same schedule picker as schedule triggers)
 
@@ -120,6 +121,20 @@ PostHog generates a unique URL you can embed as an `<img>` tag in emails or web 
 When the pixel is loaded (e.g. when a recipient opens an email), the workflow fires.
 
 You can pass data via query parameters on the pixel URL and map them to event properties in the trigger configuration.
+
+### Trigger frequency
+
+For event-based triggers, you can control how often a workflow fires per person using the frequency setting.
+
+| Option                    | Description                                                                                              |
+| ------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Every time**            | The workflow fires for every matching event.                                                             |
+| **One time**              | The workflow fires at most once per person. Once a person has entered the workflow, they can't re-enter. |
+| **Once per calendar day** | The workflow fires at most once per person per calendar day. The day boundary resets at midnight UTC.    |
+
+For the **One time** option, you can also configure a time interval to control how long the deduplication window lasts.
+
+> **Note:** The calendar-day option uses the UTC timezone, which may differ from your local timezone.
 
 ## Dispatches
 
