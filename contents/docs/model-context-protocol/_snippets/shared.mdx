@@ -306,6 +306,30 @@ The agent will use the `conversations-tickets-retrieve` tool to fetch the full t
 
 The agent will use the `conversations-tickets-update` tool to change the status and priority of the specified tickets.
 
+### Project settings
+
+**Prompt:** "Change my project timezone to America/New_York"
+
+The agent will use the `project-settings-update` tool with `@current` as the project ID to update the timezone setting. The tool uses PATCH semantics, so only the timezone field is modified.
+
+**Prompt:** "Enable session recording for my project and set the sample rate to 50%"
+
+The agent will use `project-settings-update` to enable `session_recording_opt_in` and set `session_recording_sample_rate` to 0.5. These settings control whether sessions are recorded and what percentage of sessions to capture.
+
+**Prompt:** "What are my current project settings?"
+
+The agent will use the `project-get` tool with `@current` to retrieve all current project settings, including timezone, recording configuration, autocapture settings, and test account filters.
+
+### User settings
+
+**Prompt:** "Switch my PostHog theme to dark mode"
+
+The agent will use the `user-settings-update` tool with `@me` as the user UUID to update the `theme` setting. Available options are `light`, `dark`, or `system` (follows OS preference).
+
+**Prompt:** "Update my notification settings to only receive security alerts"
+
+The agent will use `user-settings-update` to modify `notification_settings`. The tool merges notification preferences key-by-key, so you can selectively enable or disable specific notification types.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
