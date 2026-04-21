@@ -86,6 +86,20 @@ Then, by default, PostHog attempts to evaluate the flag locally using definition
 
 You can disable this behavior by setting `onlyEvaluateLocally` to `true`. In this case, PostHog will **only** attempt to evaluate the flag locally, and return `undefined` / `None` / `nil` if it was unable to.
 
+### Cold start and fallback defaults
+
+When the SDK first starts, it needs up to one polling interval (30 seconds by default) to fetch flag definitions. During this window, local evaluation returns `undefined` / `None` because no definitions are loaded yet. Use per-flag defaults to control what users see during this period:
+
+```javascript
+// Without a default, undefined is falsy — users see nothing
+const variant = posthog.getFeatureFlag('checkout-redesign') || false
+
+// With a per-flag default, you control the experience
+const variant = posthog.getFeatureFlag('checkout-redesign') ?? 'control'
+```
+
+If you deploy frequently or have many short-lived workers, consider using a [shared flag definition cache](/docs/feature-flags/local-evaluation/distributed-environments) so definitions survive restarts and the cold start window is eliminated.
+
 <MultiLanguage>
 
 ```node

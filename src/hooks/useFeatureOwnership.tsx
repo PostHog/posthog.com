@@ -47,6 +47,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Annotations',
         owner: ['product-analytics'],
     },
+    'background-agents': {
+        feature: 'Background agents',
+        owner: ['posthog-ai'],
+        label: 'feature/background-agents',
+    },
     'api-structure': {
         feature: 'API structure',
         owner: [],
@@ -104,12 +109,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'currency-rate-dataset': {
         feature: 'Currency rate dataset',
-        owner: ['growth', 'customer-analytics'],
+        owner: ['growth', 'web-analytics'],
         label: 'feature/currency-rate',
     },
     'customer-analytics': {
         feature: 'Customer Analytics',
-        owner: ['customer-analytics'],
+        owner: ['web-analytics'],
     },
     dashboards: {
         feature: 'Dashboards',
@@ -146,6 +151,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Managed warehouse',
         owner: ['managed-warehouse'],
     },
+    'embedding-worker': {
+        feature: 'Embedding worker',
+        owner: ['signals'],
+        label: false,
+    },
     'early-access-features': {
         feature: 'Early access features',
         owner: ['feature-flags'],
@@ -174,7 +184,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'group-analytics': {
         feature: 'Group analytics',
-        owner: ['customer-analytics'],
+        owner: ['web-analytics'],
     },
     heatmaps: {
         feature: 'Heatmaps',
@@ -198,6 +208,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Internal messaging (email, notifications)',
         owner: ['platform-features'],
         label: 'feature/notifications',
+    },
+    'llm-gateway': {
+        feature: 'LLM gateway',
+        owner: ['posthog-ai'],
+        label: false,
     },
     'live-events': {
         feature: 'Live events',
@@ -284,6 +299,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['posthog-ai'],
         label: 'feature/posthog-ai',
     },
+    'posthog-code': {
+        feature: 'PostHog Code',
+        owner: ['posthog-code'],
+        label: 'feature/posthog-code',
+    },
     'project-homepage': {
         feature: 'Project homepage',
         owner: ['platform-ux'],
@@ -320,11 +340,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'revenue-analytics': {
         feature: 'Revenue analytics',
-        owner: ['customer-analytics'],
+        owner: ['web-analytics'],
     },
     'revenue-data-management': {
         feature: 'Revenue data management',
-        owner: ['customer-analytics'],
+        owner: ['web-analytics'],
     },
     sdks: {
         feature: 'SDKs & client libraries',
@@ -381,8 +401,18 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'session-summaries': {
         feature: 'Session summaries',
-        owner: ['signals'],
+        owner: ['replay'],
         label: 'feature/session-summaries',
+    },
+    signals: {
+        feature: 'Signals',
+        owner: ['signals'],
+        label: 'feature/signals',
+    },
+    'slack-app': {
+        feature: 'Slack app',
+        owner: ['posthog-ai'],
+        label: 'feature/slack-app',
     },
     settings: {
         feature: 'Settings structure (personal & project)',

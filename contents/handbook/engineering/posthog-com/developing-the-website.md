@@ -192,6 +192,16 @@ Minimal mode only builds:
 
 Everything else (apps, CDP, templates, jobs, API docs, SDK references, pagination/category/tag pages) won't exist - they'll 404. Next/previous navigation links and GitHub data for roadmaps/jobs will also be absent. Sourcemap generation is disabled.
 
+### PR preview deployments (Cloudflare Pages)
+
+Pull request previews on Cloudflare Pages use the same minimal build as above: the workflow sets `GATSBY_MINIMAL=true` (see `.github/workflows/deploy-preview.yml`). That keeps preview builds fast.
+
+**Implications for content authors:**
+
+- **Post category indexes are not built** — Routes like `/tutorials`, `/blog`, and `/posts` are not generated in previews. Opening them can fail or show a broken page (for example a blank or error screen in the site shell). This is expected.
+- **Individual posts and docs still build** — Preview the change by opening the **direct URL** to the MDX page (e.g. `/tutorials/your-post-slug`, `/blog/your-post-slug`).
+- **Search and listing data** — Post listings and site search rely on full production builds and indexing (e.g. Algolia). Content from a branch typically will not appear in search on the preview until it is merged to `master` and the production site is built.
+
 ### Environment variables
 
 Our website uses various APIs to pull in data from sites like GitHub (for contributors) and Ashby (our applicant tracking system). Without setting these environment variables, you may see various errors when building the site. Most of these errors are dismissible, and you can continue to edit the website.
