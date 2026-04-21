@@ -63,7 +63,7 @@ posthog.logger.error('payment failed', { error_code: 'E001', order_id: 'ord_789'
 
 Available severity levels: `trace`, `debug`, `info`, `warn`, `error`, and `fatal`.
 
-Logger calls don't write to the browser console. They go directly to PostHog as structured records, so you can query by attribute (e.g. `total_cents > 1000`) rather than string-searching log output, and nothing extra appears in the user's browser console.
+Logger calls don't write to the browser console, they go directly to PostHog as structured records. You can query logs by attribute, such as `total_cents > 1000`, instead of string-searching log output. Nothing extra appears in the user's browser console.
 
 For full control over a log record, including trace correlation, use `posthog.captureLog`:
 
