@@ -6,11 +6,11 @@ export const clickhouse_cloud = {
             available: true,
             features: {
                 data_source: 'Raw data in ClickHouse',
-                predefined_queries: false,
+                predefined_queries: true,
                 apis_from_product_insights: false,
                 sql_based_query_support: true,
                 materialized_queries: true,
-                stable_named_api_endpoints: false,
+                stable_named_api_endpoints: true,
                 built_in_caching: false,
                 higher_limits_predefined_queries: false,
                 embedded_analytics: false,
