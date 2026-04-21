@@ -151,3 +151,5 @@ To confirm PostHog is configured correctly, visit your website and then check if
 - If your theme auto-updates, manually editing the `header.php` file may lose your settings. Making a [Child Theme](https://developer.wordpress.org/themes/advanced-topics/child-themes/) is the recommended approach.
 
 </CalloutBox>
+
+</CalloutBox>
