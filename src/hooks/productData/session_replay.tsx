@@ -135,6 +135,18 @@ export const sessionReplay = {
             ],
         },
         {
+            title: 'Network monitor',
+            headline: 'Network monitor',
+            description: 'Analyze performance and network calls',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
+                    alt: 'Network monitor',
+                    stylize: true,
+                },
+            ],
+        },
+        {
             title: 'Console logs',
             headline: 'Console logs',
             description: (
@@ -168,18 +180,6 @@ export const sessionReplay = {
                     </div>
                 </>
             ),
-        },
-        {
-            title: 'Network monitor',
-            headline: 'Network monitor',
-            description: 'Analyze performance and network calls',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
-                    alt: 'Network monitor',
-                    stylize: true,
-                },
-            ],
         },
         {
             title: 'Autocapture',
