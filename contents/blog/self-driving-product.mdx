@@ -72,7 +72,11 @@ Apply the same variables to software and the framework looks similar:
 
 Lovable, Replit, Bolt, v0, and the rest of the vibe-coding cohort have proven you can get surprisingly far by equipping agents with tools and skills. Plug in the right MCP servers, point the agent at a goal, ship a working app before lunch. That's a legitimate Level 3 experience for *building* software, and it's why [AI has quietly eaten the no-code category](/blog/ai-is-killing-no-code-experiments).
 
-Lovable itself is already one of the top clients hitting PostHog's MCP server, and [PostHog is a first-class integration in Vercel's v0](/blog/posthog-v0-integration). The vibe-coding cohort isn't the competition here – they're customers reaching for product data to do the Level 3 job better. The ceiling they can't cross is the one that sits above that: the proactive work that starts *after* the app ships. In a typical week, PostHog customers generate 100,000+ failed queries, 1.2 to 2.6 million new error-tracking issues, and 12 to 47 million raw exceptions. Each one is a candidate signal for an agent to act on – and none of it is visible to a tool whose worldview ends at the last git push.
+![On Wednesdays we do trace reviews](https://res.cloudinary.com/dmukukwp6/image/upload/aps0un_8b5268c19e.jpg)
+
+Lovable itself is already one of the top clients hitting PostHog's MCP server, and [PostHog is a first-class integration in Vercel's v0](/blog/posthog-v0-integration). The vibe-coding cohort isn't the competition here – they're customers reaching for product data to do the Level 3 job better. The ceiling they can't cross is the one that sits above that: the proactive work that starts *after* the app ships.
+
+In a typical week, PostHog customers generate 100,000+ failed queries, 1.2 to 2.6 million new error-tracking issues, and 12 to 47 million raw exceptions. Each one is a candidate signal for an agent to act on – and none of it is visible to a tool whose worldview ends at the last git push.
 
 To shift out of cruise control and into self-driving, an agentic engineering tool needs five things: **tools, skills, signals, memory,** and **evaluation**. Our [AI engineering handbook](/handbook/engineering/ai/ai-platform) goes deep on each one. Here's the quick version.
 
@@ -119,6 +123,8 @@ Stitch the five together and a pattern falls out:
 That's the product autonomy loop. Tools, skills, and signals get you to Level 4. Memory and evaluation are what Level 5 is built out of. You can't reliably do this inside a general-purpose coding agent, because the signals, memory, and evaluation data all live somewhere else. For a lot of companies, that somewhere else is PostHog.
 
 Which brings us back to Level 5 – and the question I ducked earlier.
+
+![we added, skills, memory and a flux capacitor](https://res.cloudinary.com/dmukukwp6/image/upload/no_roadmaps_d355fa4d19.jpg)
 
 ## Why we built PostHog Code (and what that means for you)
 
