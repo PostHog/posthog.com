@@ -311,6 +311,61 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 12,
         featured: false,
     },
+    croissant: {
+        name: 'Croissant',
+        toolsUsed: ['workflows_emails', 'product_analytics', 'surveys', 'web_analytics'],
+        industries: ['SaaS'],
+        users: ['Growth', 'Product', 'Marketing'],
+        notes: 'Workspace finder',
+        featured: false,
+        logo: {
+            light: CroissantLogo,
+            dark: CroissantLogoDark,
+        },
+        height: 6,
+        quotes: {
+            jorge_lopez: {
+                name: 'Jorge López',
+                role: 'Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jorge_lopez_sarry_a9197f790d.jpeg',
+                },
+                products: {
+                    workflows:
+                        'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
+                },
+            },
+        },
+    },
+    counterpress: {
+        name: 'CounterPress',
+        toolsUsed: ['endpoints', 'product_analytics'],
+        industries: ['SaaS', 'Publishing'],
+        users: ['Engineering', 'Product'],
+        notes: 'Publishing platform for sports journalism',
+        featured: false,
+        logo: {
+            light: CounterPressLogoDark,
+            dark: CounterPressLogo,
+        },
+        height: 6,
+        quotes: {
+            jay_collett: {
+                name: 'Jay Collett',
+                role: 'Founder & CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jay_collett_b9f458e7f0.jpeg',
+                },
+                products: {
+                    endpoints:
+                        'The endpoints API has given us a simple and efficient solution to the complicated and daunting prospect of building a platform to consume data and create endpoints.',
+                },
+                quotes: [
+                    'Endpoints has effectively given us the power to keep up with them without spending a penny on analytics.',
+                ],
+            },
+        },
+    },
     elevenlabs: {
         name: 'ElevenLabs',
         toolsUsed: ['feature_flags', 'product_analytics', 'surveys'],
@@ -382,87 +437,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     workflows:
                         'PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.',
                 },
-            },
-        },
-    },
-    croissant: {
-        name: 'Croissant',
-        toolsUsed: ['workflows_emails', 'product_analytics', 'surveys', 'web_analytics'],
-        industries: ['SaaS'],
-        users: ['Growth', 'Product', 'Marketing'],
-        notes: 'Workspace finder',
-        featured: false,
-        logo: {
-            light: CroissantLogo,
-            dark: CroissantLogoDark,
-        },
-        height: 6,
-        quotes: {
-            jorge_lopez: {
-                name: 'Jorge López',
-                role: 'Growth',
-                image: {
-                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jorge_lopez_sarry_a9197f790d.jpeg',
-                },
-                products: {
-                    workflows:
-                        'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
-                },
-            },
-        },
-    },
-    counterpress: {
-        name: 'CounterPress',
-        toolsUsed: ['endpoints', 'product_analytics'],
-        industries: ['SaaS', 'Publishing'],
-        users: ['Engineering', 'Product'],
-        notes: 'Publishing platform for sports journalism',
-        featured: false,
-        logo: {
-            light: CounterPressLogoDark,
-            dark: CounterPressLogo,
-        },
-        height: 6,
-        quotes: {
-            jay_collett: {
-                name: 'Jay Collett',
-                role: 'Founder & CTO',
-                image: {
-                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jay_collett_b9f458e7f0.jpeg',
-                },
-                products: {
-                    endpoints:
-                        'The endpoints API has given us a simple and efficient solution to the complicated and daunting prospect of building a platform to consume data and create endpoints.',
-                },
-                quotes: [
-                    'Endpoints has effectively given us the power to keep up with them without spending a penny on analytics.',
-                ],
-            },
-        },
-    },
-    suped: {
-        name: 'Suped',
-        toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
-        industries: ['SaaS'],
-        users: ['Leadership', 'Product', 'Engineering'],
-        notes: 'Email authentication and deliverability platform',
-        featured: false,
-        logo: {
-            light: SupedLogo,
-            dark: SupedLogoDark,
-        },
-        height: 6,
-        quotes: {
-            michael_ko: {
-                name: 'Michael Ko',
-                role: 'Co-founder & CEO',
-                image: {
-                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/michael_suped_7544dceb29.jpeg',
-                },
-                quotes: [
-                    "Product data was in PostHog, and messaging logic was somewhere else. Every time we wanted to use a new event or property in a campaign, we had to make sure it was synced properly. It's manageable, but it's extra coordination that doesn't really add value.",
-                    "The biggest win is that the data's already there. All our events, all our user properties – we don't have to push them anywhere. We're building automation directly on top of the same events we use for analytics. There's no translation layer.",
-                ],
             },
         },
     },
@@ -880,6 +854,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: SupabaseLogo,
         featured: true,
         height: 10,
+    },
+    suped: {
+        name: 'Suped',
+        toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
+        industries: ['SaaS'],
+        users: ['Leadership', 'Product', 'Engineering'],
+        notes: 'Email authentication and deliverability platform',
+        featured: false,
+        logo: {
+            light: SupedLogo,
+            dark: SupedLogoDark,
+        },
+        height: 6,
+        quotes: {
+            michael_ko: {
+                name: 'Michael Ko',
+                role: 'Co-founder & CEO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/michael_suped_7544dceb29.jpeg',
+                },
+                quotes: [
+                    "Product data was in PostHog, and messaging logic was somewhere else. Every time we wanted to use a new event or property in a campaign, we had to make sure it was synced properly. It's manageable, but it's extra coordination that doesn't really add value.",
+                    "The biggest win is that the data's already there. All our events, all our user properties – we don't have to push them anywhere. We're building automation directly on top of the same events we use for analytics. There's no translation layer.",
+                ],
+            },
+        },
     },
     startengine: {
         name: 'StartEngine',
