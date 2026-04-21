@@ -6,7 +6,7 @@ import { useCustomers } from 'hooks/useCustomers'
 import { useProductInterest } from 'hooks/useProductInterest'
 import ProgressBar from 'components/ProgressBar'
 
-import type { MarketingNavItem, SectionComponentProps } from './types'
+import type { ProductNavItem, SectionComponentProps } from './types'
 import { resolveTemplate } from './types'
 import buildProductMenuTabs, { type ProductSurface } from './buildProductMenuTabs'
 import ProductSwitcher from './ProductSwitcher'
@@ -14,13 +14,12 @@ import { templateRegistry } from './templates'
 
 export { default as buildProductMenuTabs } from './buildProductMenuTabs'
 export type { ProductSurface } from './buildProductMenuTabs'
-export { default as MarketingNav } from './MarketingNav'
 export { default as ProductNav } from './ProductNav'
 export { default as ProductSwitcher } from './ProductSwitcher'
 export { getProductSurfaceUrl } from './getProductSurfaceUrl'
 export { templateRegistry } from './templates'
 export { resolveTemplate } from './types'
-export type { MarketingNavItem, SectionComponentProps } from './types'
+export type { ProductNavItem, SectionComponentProps } from './types'
 export type { MenuTab } from 'components/ReaderView'
 
 interface ProductReaderViewProps {
@@ -28,8 +27,8 @@ interface ProductReaderViewProps {
     data: any
     /**
      * Which surface this page renders. Picks the matching menu off the product
-     * data (`marketingMenu` for `'about'`, `pricingMenu` for `'pricing'`) and
-     * seeds the active tab in the sidebar. Defaults to `'about'`.
+     * data (`productMenu` for `'product'`, `pricingMenu` for `'pricing'`) and
+     * seeds the active tab in the sidebar. Defaults to `'product'`.
      */
     surface?: Exclude<ProductSurface, 'docs'>
     seoOverrides?: {
@@ -39,15 +38,15 @@ interface ProductReaderViewProps {
     }
 }
 
-const SURFACE_MENU_FIELD: Record<Exclude<ProductSurface, 'docs'>, 'marketingMenu' | 'pricingMenu'> = {
-    about: 'marketingMenu',
+const SURFACE_MENU_FIELD: Record<Exclude<ProductSurface, 'docs'>, 'productMenu' | 'pricingMenu'> = {
+    product: 'productMenu',
     pricing: 'pricingMenu',
 }
 
 export default function ProductReaderView({
     productHandle,
     data,
-    surface = 'about',
+    surface = 'product',
     seoOverrides,
 }: ProductReaderViewProps) {
     const productData = useProduct({ handle: productHandle }) as any
@@ -70,7 +69,7 @@ export default function ProductReaderView({
     }
 
     const menuField = SURFACE_MENU_FIELD[surface]
-    const surfaceMenu: MarketingNavItem[] = productData[menuField] || []
+    const surfaceMenu: ProductNavItem[] = productData[menuField] || []
 
     const menuTabs = buildProductMenuTabs({
         productData,

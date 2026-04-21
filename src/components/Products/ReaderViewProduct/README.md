@@ -2,7 +2,7 @@
 
 Stacked, prose-first product pages rendered inside `ReaderView`. This is the replacement for the older `Slides/SlidesTemplate` flow — each product section is a normal bit of markup instead of a 1280x720 slide.
 
-- **About surface:** `/<product-slug>` → `<ProductReaderView productHandle="…" />` stacks one `<section>` per `marketingMenu` item.
+- **Product surface:** `/<product-slug>` → `<ProductReaderView productHandle="…" />` stacks one `<section>` per `productMenu` item.
 - **Pricing surface:** `/<product-slug>/pricing` → `<ProductReaderView productHandle="…" surface="pricing" />` stacks one `<section>` per `pricingMenu` item.
 - **Docs surface:** `/docs/<product-slug>` → a normal `<ReaderView>` that shares the same tabbed sidebar via `buildProductMenuTabs({ productData, activeSurface: 'docs' })`.
 
@@ -17,10 +17,10 @@ productData.<surface>Menu   →   sections rendered in the article column
 [{ slug, name, template? }]     (via templateRegistry[template ?? slug])
 
                             →   items in that surface's tab in the sidebar
-                                (via MarketingNav or ProductNav)
+                                (via ProductNav, in-page or cross-page mode)
 ```
 
-`<surface>Menu` is one of `marketingMenu` (About surface) or `pricingMenu` (Pricing surface). Add `pricingMenu` to a product to make the Pricing tab appear; omit it and only About + Docs show up.
+`<surface>Menu` is one of `productMenu` (Product surface) or `pricingMenu` (Pricing surface). Add `pricingMenu` to a product to make the Pricing tab appear; omit it and only Product + Docs show up.
 
 `slug`, `name`, and `template` are the only inputs you need to think about.
 
@@ -41,7 +41,7 @@ productData.<surface>Menu   →   sections rendered in the article column
 - Lets multiple items reuse the same template under different anchors:
 
   ```ts
-  marketingMenu: [
+  productMenu: [
       { slug: 'core-features', name: 'Core features', template: 'features' },
       { slug: 'mobile-features', name: 'Mobile features', template: 'features' },
   ]
@@ -61,7 +61,7 @@ productData.<surface>Menu   →   sections rendered in the article column
 
 ## Defining a product's menus
 
-Add `marketingMenu` (and optionally `pricingMenu`) arrays to the product data hook (for example [`src/hooks/productData/session_replay.tsx`](../../../hooks/productData/session_replay.tsx)):
+Add `productMenu` (and optionally `pricingMenu`) arrays to the product data hook (for example [`src/hooks/productData/session_replay.tsx`](../../../hooks/productData/session_replay.tsx)):
 
 ```tsx
 export const sessionReplay = {
@@ -69,7 +69,7 @@ export const sessionReplay = {
     handle: 'session_replay',
     slug: 'session-replay',
     // …other product data
-    marketingMenu: [
+    productMenu: [
         { slug: 'overview', name: 'Overview' },
         { slug: 'customers', name: 'Customers' },
         { slug: 'features', name: 'Features' },
@@ -93,7 +93,7 @@ Only the items listed here render — other product-data fields (like `screensho
 
 ## Page wiring
 
-**About page** — stacks the sections and auto-wires the sidebar:
+**Product page** — stacks the sections and auto-wires the sidebar:
 
 ```tsx
 // src/pages/session-replay/index.tsx
@@ -191,7 +191,7 @@ If a template finds nothing to render (e.g. `customers` for a product with no `c
        'my-template': MyTemplate,
    }
    ```
-3. Reference it from any product's `marketingMenu`:
+3. Reference it from any product's `productMenu` (or `pricingMenu`):
    ```ts
    { slug: 'some-slug', name: 'Some name', template: 'my-template' }
    ```
@@ -234,7 +234,7 @@ Switching products navigates via [`getProductSurfaceUrl`](./getProductSurfaceUrl
 
 | Current URL                           | Target                          | Reason |
 | ------------------------------------- | ------------------------------- | ------ |
-| `/<currentSlug>`                      | `/<newSlug>`                    | About root → About root. |
+| `/<currentSlug>`                      | `/<newSlug>`                    | Product root → Product root. |
 | `/<currentSlug>/<section>` where `section` is in `KNOWN_SHARED_SECTIONS` (currently just `'pricing'`) | `/<newSlug>/<section>` | Preserve known shared surfaces (e.g. Pricing). |
 | `/<currentSlug>/<anything-else>`      | `/<newSlug>`                    | Unknown subpath → fall back to product root. |
 | `/docs/<currentSlug>/...`             | `/docs/<newSlug>`               | Docs subpaths are product-specific; always strip to docs root. |
@@ -247,11 +247,10 @@ To add a new shared surface (e.g. `tutorials`), append its segment to `KNOWN_SHA
 
 | File                       | Purpose                                                            |
 | -------------------------- | ------------------------------------------------------------------ |
-| `index.tsx`                | `ProductReaderView` (entry point for the About + Pricing surfaces) + barrel exports. Takes `surface?: 'about' \| 'pricing'`. |
-| `types.ts`                 | `MarketingNavItem`, `SectionComponentProps`, `resolveTemplate(item)`. |
-| `buildProductMenuTabs.tsx` | Returns the `[About, Pricing, Docs]` tabs for `<ReaderView menuTabs={…}>`. Tabs whose menus are empty are omitted. |
-| `MarketingNav.tsx`         | About-tab menu on the About page. Uses `ElementScrollLink` for in-page anchor scrolling inside the radix `ScrollArea` viewport. |
-| `ProductNav.tsx`           | About-tab menu on every other product surface (Docs, tutorials, community questions, etc.). Uses Gatsby `Link` → `/<slug>#<anchor>` for cross-page jumps. |
+| `index.tsx`                | `ProductReaderView` (entry point for the Product + Pricing surfaces) + barrel exports. Takes `surface?: 'product' \| 'pricing'`. |
+| `types.ts`                 | `ProductNavItem`, `SectionComponentProps`, `resolveTemplate(item)`. |
+| `buildProductMenuTabs.tsx` | Returns the `[Product, Pricing, Docs]` tabs for `<ReaderView menuTabs={…}>`. Tabs whose menus are empty are omitted. |
+| `ProductNav.tsx`           | The single product nav. When given a `contentRef` it scrolls in-page (radix viewport + ScrollSpy active highlighting via `ElementScrollLink`); without one it emits Gatsby `<Link>`s to `${basePath}#${slug}` for cross-page jumps. The `'overview'` slug is special-cased to land at the top of the surface in both modes. |
 | `ProductSwitcher.tsx`      | Searchable product dropdown rendered above the menu. Driven by `useProduct()`; navigates via `getProductSurfaceUrl`. |
 | `getProductSurfaceUrl.ts`  | Pure function that maps the current path onto the equivalent surface for another product when the user switches. |
 | `templates/`               | One file per section template + the `templateRegistry`.            |
@@ -260,7 +259,7 @@ To add a new shared surface (e.g. `tutorials`), append its segment to `KNOWN_SHA
 
 ## Future surfaces
 
-`ProductNav` is named broadly on purpose — today it's driven by `marketingMenu` and `pricingMenu`, but the intent is that any product-related surface (tutorials landing page, community questions page, customer stories filtered by product, etc.) drops in the same sidebar with this nav, so switching between surfaces feels like one app. To add a new surface:
+`ProductNav` is named broadly on purpose — today it's driven by `productMenu` and `pricingMenu`, but the intent is that any product-related surface (tutorials landing page, community questions page, customer stories filtered by product, etc.) drops in the same sidebar with this nav, so switching between surfaces feels like one app. To add a new surface:
 
 1. Add a new menu field on the product hook (e.g. `tutorialsMenu`).
 2. Extend `ProductSurface` and the `SURFACE_MENU_FIELD` map in `index.tsx`, and add a tab branch in `buildProductMenuTabs.tsx`.

@@ -127,7 +127,7 @@ const Overview = ({ id, productData, customers, hasCaseStudy }: SectionComponent
     }))
 
     return (
-        <section id={id} className="scroll-mt-20 not-prose flex flex-col gap-12">
+        <section id={id} className="scroll-mt-20 not-prose flex flex-col gap-12 max-w-7xl mx-auto">
             <header className="">
                 {screenshots?.home?.src && (
                     <Glow
