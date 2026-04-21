@@ -5196,6 +5196,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Microsoft Teams integration',
+                    url: '/docs/support/teams',
+                    icon: 'IconMessage',
+                    color: 'orange',
+                },
+                {
                     name: 'Email channel',
                     url: '/docs/support/email',
                     icon: 'IconMail',

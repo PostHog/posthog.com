@@ -1,0 +1,92 @@
+---
+title: Microsoft Teams integration
+sidebar: Docs
+showTitle: true
+---
+
+The **SupportHog** Teams bot connects your Microsoft Teams workspace to PostHog Support, enabling two-way sync between Teams conversations and support tickets.
+
+- **Teams to PostHog** – messages in Teams automatically create support tickets and add comments
+- **PostHog to Teams** – team replies in PostHog are posted back to the Teams thread
+
+This is separate from the [Microsoft Teams CDP destination](/docs/cdp/destinations/microsoft-teams), which sends events to Teams. SupportHog has its own bot, credentials, and event handling.
+
+## Connecting Microsoft Teams
+
+1. Go to **Support > Settings** in PostHog
+2. Click **Connect Microsoft Teams**
+3. Sign in with a Microsoft account that has admin permissions for your Teams tenant
+4. Authorize the SupportHog app in Azure AD
+5. You're redirected back to PostHog settings
+
+<CalloutBox icon="IconInfo" title="One tenant per project" type="fyi">
+
+Each PostHog project can connect to one Microsoft Teams tenant. If the tenant is already connected to another project, you'll see an error.
+
+</CalloutBox>
+
+## Configuration
+
+After connecting, configure the integration in **Support > Settings**:
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| **Teams group** | Select which Microsoft Teams group contains your support channel. | – |
+| **Support channel** | Every top-level message in this channel becomes a ticket. Thread replies sync as ticket messages. | – |
+| **Bot mentions** | Always active – `@SupportHog` in any channel creates a ticket from that message. | – |
+
+### Picking a support channel
+
+When you click the channel selector, PostHog lists all channels in the selected Teams group. Select the channel you want to use as your dedicated support inbox.
+
+## How tickets are created
+
+There are two ways a Teams message becomes a support ticket:
+
+### 1. Support channel messages
+
+Any top-level message in your configured support channel automatically creates a new ticket. Thread replies on that message sync as ticket messages.
+
+### 2. Bot mentions
+
+Type `@SupportHog` in any channel to create a ticket from that message. If mentioned inside an existing ticket thread, the message is added as a comment instead.
+
+Both methods:
+
+- Set `channel_source` to `teams` on the ticket
+- Resolve the Teams user's name and avatar
+- Convert Teams message formatting to PostHog's rich text format
+- Post a confirmation card in the Teams thread with the ticket number and a link to view it in PostHog
+
+## Two-way sync
+
+### Teams to PostHog
+
+- New messages in the support channel create tickets
+- Thread replies sync as ticket messages
+
+### PostHog to Teams
+
+- When a team member replies to a Teams-sourced ticket in PostHog, the reply is posted back to the original Teams thread
+- The reply shows the team member's name
+
+**Private notes** (internal notes) are never sent to Teams.
+
+## Viewing Teams tickets
+
+Teams-sourced tickets appear in your [inbox](/docs/support/inbox) alongside widget, email, and Slack tickets. Each Teams ticket shows:
+
+- A Microsoft Teams icon indicating the channel source
+- The Teams user's name and avatar on messages
+
+You can filter the ticket list by channel source to see only Teams tickets.
+
+## Disconnecting
+
+To remove the Microsoft Teams integration:
+
+1. Go to **Support > Settings**
+2. Click **Disconnect** in the Microsoft Teams section
+3. Confirm the disconnection
+
+Existing tickets created from Teams are not affected – they remain in your inbox but will no longer sync new messages.
