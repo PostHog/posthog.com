@@ -321,7 +321,7 @@ const OSTable: React.FC<OSTableProps> = ({
                     }`}
                 >
                     <div
-                        className={`text-primary inline-grid min-w-[42rem] max-w-full divide-x divide-y divide-border border-b border-primary text-[15px] [&>div]:px-2 rounded-md ${
+                        className={`text-primary inline-grid max-w-full divide-x divide-y divide-border border-b border-primary text-[15px] [&>div]:px-2 rounded-md ${
                             width === 'full' ? 'w-full' : 'w-min'
                         } ${
                             size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'

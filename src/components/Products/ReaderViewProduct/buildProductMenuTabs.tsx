@@ -63,7 +63,7 @@ export function buildProductMenuTabs({ productData, contentRef, activeSurface }:
 
     if (marketingMenu.length > 0) {
         tabs.push({
-            label: 'About',
+            label: 'Product',
             value: 'about',
             default: activeSurface === 'about',
             menu:

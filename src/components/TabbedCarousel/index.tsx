@@ -6,23 +6,31 @@ const DEFAULT_SLIDE_DURATION = 5000
 
 export interface TabbedCarouselTab {
     value: string
-    label: string
+    label: React.ReactNode
     content: React.ReactNode
     color: string
     activeText: string
     progressBar: string
+    /** Appended to the trigger's class — useful for per-tab sizing/active-state overrides. */
+    triggerClassName?: string
 }
 
 export interface TabbedCarouselProps {
     tabs: TabbedCarouselTab[]
     slideDuration?: number
     className?: string
+    /** Appended to the slide outer container — overrides default chrome (min-h, padding, rounded). */
+    slideClassName?: string
+    /** When false, the slide outer container does not paint the active tab's color as a background. Default: true. */
+    showActiveBg?: boolean
 }
 
 export default function TabbedCarousel({
     tabs,
     slideDuration = DEFAULT_SLIDE_DURATION,
     className,
+    slideClassName,
+    showActiveBg = true,
 }: TabbedCarouselProps) {
     const [activeTab, setActiveTab] = useState(tabs[0].value)
     const [isPaused, setIsPaused] = useState(false)
@@ -66,7 +74,7 @@ export default function TabbedCarousel({
                                     value={tab.value}
                                     className={`relative flex-1 min-w-[200px] @sm:min-w-0 px-3 py-2.5 text-sm font-semibold cursor-pointer select-none transition-colors text-balance rounded-t-md ${
                                         isActive ? `${tab.color} ${tab.activeText}` : 'text-secondary'
-                                    }`}
+                                    } ${tab.triggerClassName ?? ''}`}
                                 >
                                     {tab.label}
                                     <div className="absolute bottom-0 left-2 right-2 h-[3px] overflow-hidden">
@@ -91,7 +99,9 @@ export default function TabbedCarousel({
                 <div
                     className={`min-h-[300px] @[820px]:min-h-[400px] p-2 rounded-b-md rounded-t-md ${
                         isFirst ? '@sm:rounded-tl-none' : ''
-                    } ${isLast ? '@sm:rounded-tr-none' : ''} relative ${activeColor} flex transition-colors`}
+                    } ${isLast ? '@sm:rounded-tr-none' : ''} relative ${
+                        showActiveBg ? activeColor : ''
+                    } flex transition-colors ${slideClassName ?? ''}`}
                 >
                     <div className="flex flex-col bg-light dark:bg-dark flex-1 w-full shadow-2xl rounded">
                         <button

@@ -137,7 +137,7 @@ const SessionRecording = () => {
 }
 ```
 
-All three surfaces render identical sidebar tabs ("About", "Pricing" — when `pricingMenu` exists, "Docs"). The active surface's tab uses in-page anchor scrolling; the other tabs navigate to `/<slug>#<section>` or `/<slug>/pricing#<section>` and the browser handles the anchor jump after navigation.
+All three surfaces render identical sidebar tabs ("Product", "Pricing" — when `pricingMenu` exists, "Docs"). The active surface's tab uses in-page anchor scrolling; the other tabs navigate to `/<slug>#<section>` or `/<slug>/pricing#<section>` and the browser handles the anchor jump after navigation.
 
 ---
 
