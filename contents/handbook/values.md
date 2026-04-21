@@ -34,7 +34,9 @@ So much about how we work is different.
 
 Weirdness can just be the absurd lengths we are willing to go to. It can mean redesigning an already world-class website, for the 5th time. It can mean shipping _literally_ every product that relates to customer data, with teams of just one to five people competing with $200bn+ companies, successfully.
 
-We aren't weird for the sake of it. We want the company perfectly optimized for our strategy. We have small teams when very few others do, because we are going to build 50+ products. We post billboards of our founders' faces because no one else is brave enough thus it stands out. Even the little things - like having _pricing_ on our pricing page!
+We aren't weird for the sake of it. We want the company perfectly optimized for our strategy. We have small teams when very few others do, because we are going to build 50+ products. We post billboards of our founders' faces because no one else is brave enough thus it stands out. Even the little things - like having _pricing_ on our pricing page! 
+
+[We've even written a guide](/handbook/company/do-more-weird) on how you can do more weird. 
 
 ## Why not now?
 

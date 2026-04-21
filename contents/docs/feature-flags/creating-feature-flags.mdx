@@ -293,6 +293,42 @@ Tags are a way to categorize and organize your Feature Flags. They are purely or
 
 Tags are separate from [evaluation contexts](#evaluation-contexts-optional), which control where flags evaluate at runtime.
 
+## Editing feature flags
+
+After creating a feature flag, you can edit it directly from the flag's overview page without navigating to a separate edit form.
+
+### Inline editing
+
+Hover over any editable section on the feature flag overview page to reveal an **Edit** button. Click it to enter edit mode for that section. The following sections support inline editing:
+
+| Section | What you can edit |
+|---------|-------------------|
+| **Advanced options** | Tags, evaluation runtime, persistence settings |
+| **Payload** | JSON payload values for boolean flags |
+| **Release conditions** | Targeting rules and rollout percentages |
+| **Variants** | Variant keys, rollout percentages, descriptions, and payloads |
+
+After making changes, click **Save** to apply them or **Cancel** to discard. If you cancel with unsaved changes, a confirmation dialog appears to prevent accidental data loss.
+
+<CalloutBox icon="IconInfo" title="One section at a time" type="fyi">
+
+You can only edit one section at a time. Save or cancel your current edits before editing another section.
+
+</CalloutBox>
+
+### Editing the flag description
+
+The flag description is editable directly from the overview page. Click on the description text to edit it inline. Changes save automatically when you click away.
+
+### Editing the flag key
+
+The flag key is not editable from the overview page because changing it can break SDK calls like `posthog.isFeatureEnabled('your-flag-key')` or `posthog.getFeatureFlag('your-flag-key')`.
+
+To change a flag key, use the full edit form. When you change the key, PostHog shows an inline warning under the key field and requires confirmation before saving.
+
+### Experiment-linked flags
+
+For feature flags linked to an [experiment](/docs/experiments), inline editing is restricted for **variants** and **release conditions** since these are managed by the experiment.
 
 ## Managing and deleting Feature Flags
 
