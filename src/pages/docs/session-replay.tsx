@@ -78,19 +78,17 @@ const ProductDocsNav = () => {
 
     return (
         <nav aria-label={`${PRODUCT_NAV_NAME} documentation`} className="mb-12">
-            <div className="md:columns-2 md:gap-x-8">
+            <div className="grid gap-8 @xl/reader-content:grid-cols-2">
                 {sections.map(([heading, links]) => (
                     <section key={heading} className="mb-6 break-inside-avoid">
-                        <h3 className="m-0 mb-2 text-sm font-semibold uppercase tracking-wide text-secondary">
-                            {heading}
-                        </h3>
+                        <h3 className="m-0 mb-2 text-sm font-semibold text-secondary">{heading}</h3>
                         <ul className="m-0 p-0 list-none flex flex-col">
                             {links
                                 .filter((link) => link.url && link.name.toLowerCase() !== 'overview')
                                 .map((link) => {
                                     const hasChildren = Array.isArray(link.children) && link.children.length > 0
                                     return (
-                                        <li key={link.url} className="m-0">
+                                        <li key={link.url} className="m-0 p-0">
                                             <Link
                                                 to={link.url as string}
                                                 className="group flex items-center gap-1 py-1 -mx-1 px-1 rounded text-[15px] !text-primary dark:!text-primary-dark hover:!text-red dark:hover:!text-yellow"
@@ -98,7 +96,7 @@ const ProductDocsNav = () => {
                                                 {hasChildren && (
                                                     <IconChevronRight className="size-3 shrink-0 text-secondary group-hover:text-current" />
                                                 )}
-                                                <span className={hasChildren ? '' : 'pl-4'}>{link.name}</span>
+                                                <span className={hasChildren ? '' : ''}>{link.name}</span>
                                             </Link>
                                         </li>
                                     )
