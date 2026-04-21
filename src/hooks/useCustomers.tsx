@@ -254,7 +254,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     clerk: {
         name: 'Clerk',
-        // toolsUsed: ['feature_flags', 'session_replay', 'product_analytics'],
+        toolsUsed: ['feature_flags', 'session_replay', 'product_analytics', 'cdp', 'data_warehouse', 'posthog_ai'],
         industries: ['SaaS'],
         // users: ['Product', 'Engineering'],
         notes: 'Identity and access management',
