@@ -9,10 +9,12 @@ The Errors tab groups and aggregates error messages from your LLM application, h
 When your LLM application captures an error event (with `$ai_is_error` set to `true`), PostHog automatically normalizes the error message by replacing dynamic values like IDs, timestamps, and numbers with placeholders. This groups similar errors together, even when they contain different specific values.
 
 For example, these two errors:
+
 - `"Request req_abc123 failed at 2025-01-11T14:25:51Z with status 429"`
 - `"Request req_xyz789 failed at 2025-01-10T09:15:30Z with status 429"`
 
 Are normalized to:
+
 - `"Request <ID> failed at <TIMESTAMP> with status <N>"`
 
 This allows you to see that both errors are the same underlying issue, rather than treating them as separate problems.
@@ -21,18 +23,18 @@ This allows you to see that both errors are the same underlying issue, rather th
 
 The Errors tab displays the following metrics for each normalized error:
 
-| Metric | Description |
-|--------|-------------|
-| **error** | The normalized error message |
-| **traces** | Number of unique traces containing this error |
-| **generations** | Number of generation events with this error |
-| **spans** | Number of span events with this error |
-| **embeddings** | Number of embedding events with this error |
-| **sessions** | Number of unique sessions affected |
-| **users** | Number of unique users who encountered this error |
-| **days_seen** | Number of distinct days the error occurred |
-| **first_seen** | When the error first appeared |
-| **last_seen** | Most recent occurrence |
+| Metric          | Description                                       |
+| --------------- | ------------------------------------------------- |
+| **error**       | The normalized error message                      |
+| **traces**      | Number of unique traces containing this error     |
+| **generations** | Number of generation events with this error       |
+| **spans**       | Number of span events with this error             |
+| **embeddings**  | Number of embedding events with this error        |
+| **sessions**    | Number of unique sessions affected                |
+| **users**       | Number of unique users who encountered this error |
+| **days_seen**   | Number of distinct days the error occurred        |
+| **first_seen**  | When the error first appeared                     |
+| **last_seen**   | Most recent occurrence                            |
 
 ## Investigating errors
 
@@ -41,6 +43,16 @@ Click on any error row to drill down into the [Traces](/docs/llm-analytics/trace
 - See the full context of what led to the error
 - Examine the inputs and outputs around the failure
 - Identify patterns across affected traces
+
+## Visualizing error trends
+
+To understand how errors change over time, use the error trend visualization features:
+
+- **All errors trend** - Click the **Error trends** button in the table header to open a trends insight showing all errors over time, broken down by error type (top 10). This opens in a new tab.
+
+- **Individual error trend** - Click the trend icon next to any error row to open a trends insight for that specific error. This shows occurrences over time across all LLM event types (generations, spans, traces, and embeddings).
+
+These trend visualizations help you identify error spikes, track the impact of fixes, and spot recurring patterns in your LLM application.
 
 ## Capturing errors
 
@@ -82,15 +94,15 @@ posthog.capture(
 
 PostHog normalizes errors by replacing:
 
-| Pattern | Replacement | Example |
-|---------|-------------|---------|
-| UUIDs and request IDs | `<ID>` | `req_abc123` → `<ID>` |
-| ISO timestamps | `<TIMESTAMP>` | `2025-01-11T14:25:51Z` → `<TIMESTAMP>` |
-| Tool call IDs | `<TOOL_CALL_ID>` | `toolu_01ABC...` → `<TOOL_CALL_ID>` |
-| Function call IDs | `<CALL_ID>` | `call_abc123` → `call_<CALL_ID>` |
-| User IDs | `<USER_ID>` | `user_abc123` → `user_<USER_ID>` |
-| Token counts | `<TOKEN_COUNT>` | `"tokenCount":5000` → `"tokenCount":<TOKEN_COUNT>` |
-| Large numbers (9+ digits) | `<ID>` | `1234567890` → `<ID>` |
-| Other numbers | `<N>` | `429`, `5000` → `<N>` |
+| Pattern                   | Replacement      | Example                                            |
+| ------------------------- | ---------------- | -------------------------------------------------- |
+| UUIDs and request IDs     | `<ID>`           | `req_abc123` → `<ID>`                              |
+| ISO timestamps            | `<TIMESTAMP>`    | `2025-01-11T14:25:51Z` → `<TIMESTAMP>`             |
+| Tool call IDs             | `<TOOL_CALL_ID>` | `toolu_01ABC...` → `<TOOL_CALL_ID>`                |
+| Function call IDs         | `<CALL_ID>`      | `call_abc123` → `call_<CALL_ID>`                   |
+| User IDs                  | `<USER_ID>`      | `user_abc123` → `user_<USER_ID>`                   |
+| Token counts              | `<TOKEN_COUNT>`  | `"tokenCount":5000` → `"tokenCount":<TOKEN_COUNT>` |
+| Large numbers (9+ digits) | `<ID>`           | `1234567890` → `<ID>`                              |
+| Other numbers             | `<N>`            | `429`, `5000` → `<N>`                              |
 
 Errors are truncated to 1000 characters before normalization.
