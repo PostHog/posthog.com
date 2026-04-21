@@ -79,6 +79,12 @@
                     transform: translateY(calc(var(--logomark-jump-magnitude, 1) * -0.2px));
                 }
             }
+            [data-app="Desktop"] > div:not(#initial-loader) {
+                transition: opacity 400ms ease-out;
+            }
+            body[data-wallpaper-ready="false"] [data-app="Desktop"] > div:not(#initial-loader) {
+                opacity: 0;
+            }
         `
         loadingWrapper.id = 'initial-loader'
         loadingWrapper.innerHTML = `
@@ -101,12 +107,14 @@
                 </svg>
             </div>
         `
+        body.setAttribute('data-wallpaper-ready', 'false')
         body.appendChild(loadingStyles)
         body.appendChild(loadingWrapper)
 
         const cleanup = () => {
+            body.setAttribute('data-wallpaper-ready', 'true')
             loadingWrapper.remove()
-            loadingStyles.remove()
+            setTimeout(() => loadingStyles.remove(), 500)
         }
 
         if (window.__desktopLoaded) {
