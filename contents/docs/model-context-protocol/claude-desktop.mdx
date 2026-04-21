@@ -8,13 +8,7 @@ import SharedContent from "./_snippets/shared.mdx"
 
 The PostHog [MCP server](https://modelcontextprotocol.io/introduction) enables Claude Desktop to directly interact with your PostHog data – managing feature flags, querying analytics, investigating errors, and more.
 
-## Server URL
-
-`https://mcp.posthog.com/mcp`
-
-The PostHog authentication server automatically routes you to the correct data region (US or EU) based on the account you log in with.
-
-## The PostHog connector (recommended)
+## The PostHog connector
 
 You can install the PostHog MCP directly into Claude Desktop using the [PostHog connector](https://claude.ai/directory/connectors/posthog).
 
@@ -23,12 +17,5 @@ You can install the PostHog MCP directly into Claude Desktop using the [PostHog 
 3. When prompted, sign in to PostHog to finish authentication.
 
 After that, PostHog MCP tools are available in Claude Desktop wherever that connector is supported.
-
-<MCPConfigSnippet variant="claude-desktop" />
-
-4. **Save** the configuration file and **restart Claude Desktop**.
-5. The MCP server should show as **PostHog** under **Settings → Connectors** in the app.
-
-When you first use the MCP server, you'll be prompted to log in to PostHog to authenticate.
 
 <SharedContent />
