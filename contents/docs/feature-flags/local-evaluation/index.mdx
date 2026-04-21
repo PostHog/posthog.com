@@ -36,7 +36,7 @@ sequenceDiagram
 
 Every flag check is a network round trip. PostHog already has all the data it needs, so you just pass the flag key and a user ID.
 
-With local evaluation, the SDK periodically fetches **flag definitions** from PostHog's `/api/feature_flag/local_evaluation` endpoint in the background. When you check a flag, **you provide the properties** and the SDK evaluates locally — no round trip:
+With local evaluation, the SDK periodically fetches **flag definitions** from PostHog's `/flags/definitions` endpoint in the background. When you check a flag, **you provide the properties** and the SDK evaluates locally — no round trip:
 
 ```mermaid
 sequenceDiagram
@@ -44,7 +44,7 @@ sequenceDiagram
     participant SDK as PostHog SDK
     participant PH as PostHog
     Note over SDK,PH: Background (every 30s)
-    SDK->>PH: GET /local_evaluation
+    SDK->>PH: GET /flags/definitions
     PH-->>SDK: Flag definitions
     Note over App,SDK: At evaluation time
     App->>SDK: flag key + person properties + group properties
