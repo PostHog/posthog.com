@@ -78,7 +78,7 @@ Click the red record icon to finish recording.
 
 Once you’re done recording, it’ll either open the recording up into a new editable project or you’ll see the “Edit” option in the preview box, which you should click.
 
-Now simply go up to the “File” menu and select “Save as…”.
+Now simply go up to the “File” menu and select “Save as...”.
 
 Use your name or the project’s name for the file name, and ensure the file ends in the `.screenstudio` file extension. 
 
