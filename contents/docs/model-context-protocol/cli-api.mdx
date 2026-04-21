@@ -1,0 +1,141 @@
+---
+title: CLI API for coding agents
+sidebarTitle: CLI API
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+The PostHog CLI API gives coding agents a bash-accessible interface to PostHog. It exposes 197 API tools through a command-line interface with progressive schema discovery.
+
+## When to use the CLI API vs MCP
+
+Both the CLI API and [MCP server](/docs/model-context-protocol) let coding agents interact with PostHog. Choose based on your agent's capabilities:
+
+| Approach | Best for | Token overhead |
+|----------|----------|----------------|
+| **CLI API** | Agents that execute bash commands (Claude Code, Cursor) | Low – discover tools incrementally via `list` and `schema` |
+| **MCP** | Agents with native MCP support | Higher – full tool definitions loaded upfront |
+
+Use the CLI API when you want to minimize context window usage while still accessing all PostHog API capabilities.
+
+## Installation
+
+```bash
+npm install -g @posthog/cli
+```
+
+## Authentication
+
+The CLI API supports three authentication methods, checked in this order:
+
+1. **Stored credentials** from `posthog-cli login`:
+
+```bash
+posthog-cli login
+```
+
+2. **Environment variables**:
+
+```bash
+export POSTHOG_API_KEY=phx_your_api_key
+export POSTHOG_PROJECT_ID=your_project_id
+export POSTHOG_HOST=https://us.posthog.com  # Optional, defaults to US region
+```
+
+3. **Local development** auto-detection – when running inside a PostHog repository clone, defaults to `localhost:8010` with the dev API key.
+
+<CalloutBox icon="IconInfo" title="API key scope" type="fyi">
+
+Create a [personal API key](https://us.posthog.com/settings/user-api-keys) with the appropriate scopes for the tools you need. The **MCP Server** preset provides access to most tools.
+
+</CalloutBox>
+
+## Commands
+
+### List available tools
+
+Discover available API tools:
+
+```bash
+# List all 197 tools, grouped by category
+posthog-cli api list
+
+# Filter by category
+posthog-cli api list --category "Feature Flags"
+
+# Machine-readable output
+posthog-cli api list --json
+```
+
+### View tool schemas
+
+Explore the parameters and types for any tool:
+
+```bash
+# Brief schema with params and types
+posthog-cli api schema feature-flag-get-all
+
+# Full schema including descriptions
+posthog-cli api schema query-trends --full
+```
+
+### Execute API calls
+
+Run any tool by name:
+
+```bash
+# List feature flags
+posthog-cli api feature-flags-list --json '{}'
+
+# Query trends data
+posthog-cli api query-trends --json '{"series": [{"event": "$pageview"}]}'
+
+# Get a specific feature flag
+posthog-cli api feature-flag-get-all --json '{"limit": 5}'
+```
+
+## Useful flags
+
+### Dry run
+
+Preview the HTTP request without executing it:
+
+```bash
+posthog-cli api feature-flag-get-all --json '{}' --dry-run
+```
+
+### Field selection
+
+Extract specific fields from the response:
+
+```bash
+posthog-cli api feature-flags-list --json '{}' --fields 'name,key,active'
+```
+
+## Example prompts for coding agents
+
+Here are examples of what you can ask your AI agent to do using the CLI API:
+
+### Feature flag management
+
+**Prompt:** "Use the PostHog CLI to list all feature flags in my project"
+
+The agent will run `posthog-cli api list` to discover available tools, then execute `posthog-cli api feature-flags-list --json '{}'` to retrieve the flags.
+
+### Analytics queries
+
+**Prompt:** "Query PostHog for daily signups over the last 7 days using the CLI"
+
+The agent will use `posthog-cli api schema query-trends --full` to understand the parameters, then execute the query with the appropriate date range and event filter.
+
+### Safe exploration
+
+**Prompt:** "Show me what the PostHog CLI would send to create a new feature flag, but don't create it yet"
+
+The agent will use the `--dry-run` flag to preview the request:
+
+```bash
+posthog-cli api feature-flag-create --json '{"key": "new-feature", "name": "New Feature", "rollout_percentage": 0}' --dry-run
+```

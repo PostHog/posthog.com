@@ -2670,6 +2670,10 @@ export const docsMenu = {
                                     url: '/docs/model-context-protocol',
                                 },
                                 {
+                                    name: 'CLI API',
+                                    url: '/docs/model-context-protocol/cli-api',
+                                },
+                                {
                                     name: 'Code editors',
                                 },
                                 {
