@@ -24,6 +24,26 @@ Instead of the firehose of all your PostHog data, you can construct a query that
 
 ![Filtering destinations](https://res.cloudinary.com/dmukukwp6/image/upload/filter_ui_8c7b1fb3be.png)
 
+## Trigger options
+
+Trigger options control how often a destination fires for each person. By default, destinations fire every time a matching event occurs. You can use trigger options to deduplicate and limit firing frequency.
+
+Available trigger options:
+
+- **Run every time** - Fires for every matching event (default)
+- **Run once per person** - Fires once per person within a configurable time window
+- **Run once per person per event name** - Fires once per person for each event type within a time window
+- **Run once per person per calendar day** - Fires once per person per calendar date (resets at midnight UTC)
+- **Run once per person per event name per calendar day** - Fires once per person for each event type per calendar date (resets at midnight UTC)
+
+### Rolling interval vs calendar day
+
+Interval-based options (like "Run once per person") use a rolling time window. With a 24-hour interval, an event at 3pm Monday prevents the destination from firing again until 3pm Tuesday.
+
+Calendar-day options use the actual calendar date instead. An event at 3pm Monday doesn't prevent the destination from firing at 10am Tuesday because they're on different dates. The day boundary resets at midnight UTC.
+
+Use calendar-day options when you want a clean daily reset regardless of when events occur – useful for daily notification limits, daily sync operations, or any workflow where "once per day" means one calendar day, not a rolling 24-hour window.
+
 ## Testing
 
 The hardest part of integrating two services is making sure everything works as you expect. Every destination includes a built-in testing interface, enabling you to send real data from PostHog on-demand to your target service and debug any errors.
