@@ -409,20 +409,22 @@ PostHog captures the following events:
 
 #### Configuring screen navigation autocapture
 
-Screen navigation autocapture is not enabled by default. You can enable it by setting `captureScreenViews` to `true` in the config.
+Screen navigation autocapture is **enabled by default**. You can disable it by setting `captureScreenViews` to `false` in the config.
 
-| Option                              | Description                                                                                     |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `captureScreenViews`                | **Type:** `boolean`. When set to `true`, autocapture will capture screen views.                 |
-| `captureApplicationLifecycleEvents` | **Type:** `boolean`. When set to `true`, autocapture will capture application lifecycle events. |
+| Option                              | Description                                                                                                                                  |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `captureScreenViews`                | **Type:** `boolean`. **Default:** `true`. When `true`, autocapture will capture screen views (`$screen` events).                             |
+| `captureApplicationLifecycleEvents` | **Type:** `boolean`. **Default:** `true`. When `true`, autocapture will capture application lifecycle events (`Application Installed` etc.). |
+| `captureElementInteractions`        | **Type:** `boolean`. **Default:** `false`. When `true`, autocapture will capture element interactions (iOS / Mac Catalyst only).             |
 
-For example, your initialization code might look like this:
+For example, if you want to turn off the defaults and only enable element interactions, your initialization code might look like this:
 
 ```swift
 let config = PostHogConfig(apiKey: <ph_project_token>, host: <ph_client_api_host>)
 
-config.captureElementInteractions = true // Disabled by default
-config.captureApplicationLifecycleEvents = true // Disabled by default
+config.captureScreenViews = false                // Enabled by default
+config.captureApplicationLifecycleEvents = false // Enabled by default
+config.captureElementInteractions = true         // Disabled by default
 
 PostHogSDK.shared.setup(config)
 ```
