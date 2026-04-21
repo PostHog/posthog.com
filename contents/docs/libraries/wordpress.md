@@ -145,7 +145,9 @@ Find the closing `</head>` in the code editor and paste the PostHog snippet befo
 
 To confirm PostHog is configured correctly, visit your website and then check if the events from your session appear in PostHog.
 
-> **Notes:**
->
-> - Using the Theme Editor is very convenient, but you have to consider the potential drawbacks of having template files writable, which many prefer to disable for security purposes. Also, wrongfully editing a file may cause problems so be sure to perform appropriate backups before attempting this.
-> - If your theme auto-updates, manually editing the `header.php` file may lose your settings. Making a [Child Theme](https://developer.wordpress.org/themes/advanced-topics/child-themes/) is the recommended approach.
+<CalloutBox icon="IconInfo" title="Notes" type="fyi">
+
+- Using the Theme Editor is very convenient, but you have to consider the potential drawbacks of having template files writable, which many prefer to disable for security purposes. Also, wrongfully editing a file may cause problems so be sure to perform appropriate backups before attempting this.
+- If your theme auto-updates, manually editing the `header.php` file may lose your settings. Making a [Child Theme](https://developer.wordpress.org/themes/advanced-topics/child-themes/) is the recommended approach.
+
+</CalloutBox>
