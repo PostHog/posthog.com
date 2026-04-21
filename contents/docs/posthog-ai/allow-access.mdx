@@ -2,6 +2,8 @@
 title: Allow PostHog AI access
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 You can pop PostHog AI open wherever you are in PostHog. Click on the [PostHog AI](https://app.posthog.com/#panel=max) icon in the right-hand sidebar of the app to open the chat.
 
 <ProductScreenshot
@@ -15,11 +17,17 @@ You can pop PostHog AI open wherever you are in PostHog. Click on the [PostHog A
 PostHog AI chat is always available in the sidebar
 </Caption>
 
-## Allow access 
+## Allow access
 
 In order to use PostHog AI, you need to grant access to your project. This action requires [admin permissions](/docs/settings/access-control) for your organization.
 
 Because PostHog AI features use third-party LLM providers, we require organizations to opt in with admin approval. In most cases, this is just a formality, but we've made it explicit as we take data governance seriously.
+
+<CalloutBox type="caution" title="HIPAA compliance">
+
+PostHog AI is not HIPAA-compliant and is not intended for processing Protected Health Information (PHI). Any [Business Associate Agreement (BAA)](/docs/privacy/hipaa-compliance) you may have with PostHog does not apply to PostHog AI features. You are responsible for ensuring your use complies with applicable laws and regulations.
+
+</CalloutBox>
 
 There are two ways to grant PostHog AI access to your project as an organization admin.
 
