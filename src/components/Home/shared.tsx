@@ -81,14 +81,15 @@ export const COL2 = [
     'supabase',
     'mistralai',
     'elevenlabs',
+    'exa',
     'convex',
     'hasura',
-    'exa',
     'raycast',
     'clerk',
     'resend',
     'greptile',
     'wisprflow',
+    'paper',
     'posthog',
 ]
 
@@ -152,6 +153,7 @@ export const companyAttributes: Record<string, string[]> = {
         'heygen',
         'posthog',
         'wisprflow',
+        'paper',
         'ukgovt',
     ],
     goodBandName: [
@@ -166,6 +168,7 @@ export const companyAttributes: Record<string, string[]> = {
         'researchgate',
         'nationaldesignstudio',
         'wisprflow',
+        'paper',
         'posthog',
     ],
     explainable: [
@@ -192,6 +195,7 @@ export const companyAttributes: Record<string, string[]> = {
         'heygen',
         'wisprflow',
         'ukgovt',
+        'paper',
         'posthog',
     ],
     realWords: [
@@ -206,7 +210,7 @@ export const companyAttributes: Record<string, string[]> = {
         'researchgate',
         'nationaldesignstudio',
         'wisprflow',
-        'posthog',
+        'paper',
     ],
     american: [
         'ycombinator',
@@ -223,9 +227,22 @@ export const companyAttributes: Record<string, string[]> = {
         'nationaldesignstudio',
         'wisprflow',
         'greptile',
+        'paper',
         'posthog',
     ],
-    pokemon: ['lovable', 'convex', 'supabase', 'hasura', 'mistralai', 'raycast', 'resend', 'exa', 'heygen', 'greptile'],
+    pokemon: [
+        'lovable',
+        'convex',
+        'supabase',
+        'hasura',
+        'mistralai',
+        'raycast',
+        'resend',
+        'exa',
+        'heygen',
+        'paper',
+        'greptile',
+    ],
     arr: [
         'ycombinator',
         'airbus',
@@ -245,6 +262,7 @@ export const companyAttributes: Record<string, string[]> = {
         'heygen',
         'wisprflow',
         'greptile',
+        'paper',
         'posthog',
     ],
     devTool: [
@@ -259,6 +277,7 @@ export const companyAttributes: Record<string, string[]> = {
         'resend',
         'exa',
         'greptile',
+        'paper',
         'posthog',
     ],
 }

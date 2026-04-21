@@ -35,6 +35,7 @@ import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
 import NationalDesignStudioLogo from '../components/CustomerLogos/NationalDesignStudioLogo'
 import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
 import OpenSaucedLogo from '../components/CustomerLogos/OpenSaucedLogo'
+import PaperLogo from '../components/CustomerLogos/PaperLogo'
 import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
 import PostHogLogo from '../components/CustomerLogos/PostHogLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
@@ -653,6 +654,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: OpenSaucedLogo,
         featured: false,
         height: 10,
+    },
+    paper: {
+        name: 'Paper',
+        toolsUsed: ['session_replay'],
+        industries: ['SaaS'],
+        users: ['Leadership', 'Product', 'Engineering'],
+        notes: 'Design tool',
+        logo: PaperLogo,
+        featured: true,
+        height: 11,
     },
     phantom: {
         name: 'Phantom',
