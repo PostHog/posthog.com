@@ -92,7 +92,7 @@ At this point, the data model was in place, the migration had been run, and the 
 
 However, even if the evaluator had been updated to _support_ per-condition aggregation types, it still didn't know how to actually handle them. In other words, if someone were to have created a mixed flag at that point, the evaluator wouldn't know what to do.
 
-So to prevent anything from messing with the stent, I added validation to ensure all conditions agree on their aggregation type. It contianed effectively the same constraints as the assumptions baked in before – no mixed targeting allowed – just expressed through the new per-condition field. 
+So to prevent anything from messing with the stent, I added validation to ensure all conditions agree on their aggregation type. It contained effectively the same constraints as the assumptions baked in before – no mixed targeting allowed – just expressed through the new per-condition field. 
 
 The core idea behind this was to constrain first, then relax. That way, I could continue with all the complex parts of the actual surgery – rewiring the evaluation logic, separating property caches by entity type, teaching the system to skip a group condition instead of failing the whole flag, etc. – all behind the safety of this constraint that guarantees that prod is only seeing inputs it can already handle. 
 
