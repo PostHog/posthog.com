@@ -42,11 +42,11 @@ Ultimately, we want someone who we'd want to buy from.
 
 #### Culture interview
 
-This is our usual first-round interview with a member of the People & Ops team. 
+This is our usual first-round interview with a member of the Talent team. 
 
 #### Technical interview and demo
 
-The small team interview with the relevant team lead usually lasts 45 minutes.  The majority of this session will be a demo role-play so that we can assess how you talk about your current product to a prospective customer who knows nothing about it.  You can assume that the customer is a prospective buyer but otherwise knows nothing about your product, and you should approach the demo as if they were a real prospective customer. After a short introduction, we will jump into the role play where you should aim to present and demo your product for 20 minutes with 10 minutes of questions and answers at the end.  After this, we will go over some technical interview questions and allow you to ask anything that's on your mind. 
+The technical interview with the relevant team lead usually lasts ~45 minutes. Part of this session will be a demo role-play so that we can assess how you talk about your current product to a prospective customer who knows nothing about it. You can assume that the customer is a prospective buyer but otherwise knows nothing about your product, and you should approach the demo as if they were a real prospective customer. What we care about here is not the content of the demo, but seeing how you'd interact with a prospective customer. After a short introduction, we will jump into questions for 25-30 minutes, and then move on to the role play where you should aim to present and demo your product for 15-20 minutes with 10 minutes. After this, we will allow you to ask anything that's on your mind. 
 
 #### Culture and motivation interview
 
