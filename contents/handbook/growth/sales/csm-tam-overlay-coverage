@@ -4,260 +4,55 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The point of dual coverage on an account by both a CSM and a TAM is sharing the load so both roles can go deeper in their respective areas. It allows for more specialization and focus and therefore a better customer outcome.
+Some accounts have both a CSM and a TAM. The point is depth: two people sharing the load so each can focus on what they're best at, and the customer gets a better experience than one person stretched across everything.
 
-A single person covering an account end to end (support, billing, onboarding, expansion, contracts, multi-threading) can only go so deep, especially when the customer organization is larger or more complex. For a mid six-figure account, that's generally not sustainable and we find that healthy customer steady-state work takes up most of the bandwidth for a given account, leaving little room to proactively and strategically cross-sell and expand. Two people sharing the load means each can do their part better, and the customer gets a higher quality experience across the board.
+Both roles have a real relationship with the customer. Both are in the Slack channel. Both know what's happening on the account. The difference is _focus_, not ownership.
 
-This doesn't mean we're mass-migrating accounts tomorrow. The immediate starting point is layering CSMs onto the largest accounts where a single individual can't effectively retain and expand at the same time. We'll expand from there as the model proves itself.
+The customer should never have to figure out who to contact. They reach out to either person, and PostHog sorts it out internally.
 
-Both the CSM and TAM have a real, ongoing relationship with the customer. The customer should know both of them, trust both of them, and experience them as a team. This is not a model where the CSM "owns" the relationship and the TAM drops in when there's money on the table. That creates a parachute dynamic where the customer only hears from the TAM when PostHog wants something, and it erodes trust fast. What we want is: "this account has a lot of opportunity, makes sense to have a TAM here to focus on cross-sell and expansion for 2-4 quarters."
+## What each role focuses on
 
-The difference between the roles is _focus_, not _relationship depth_.
+### CSM
 
-- **CSM focus:** operational health, retention, support coordination, billing, onboarding/training, day-to-day responsiveness, and general health of the technical implementation.
-- **TAM focus:** expansion strategy, cross-sell execution, credit discounts, use case discovery, multi-threading into new teams, stakeholder management
+- Operational health and [health score](/handbook/cs-and-onboarding/health-tracking) monitoring
+- Support escalation and follow-through
+- Billing, invoicing, credit balances
+- Onboarding, training, getting new users set up
+- Renewal logistics and contract paperwork
+- Day-to-day responsiveness
+- Health of the technical implementation
 
-Both are present and in the Slack channel. Both know what's happening on the account at all times. Not every call or touchpoint needs both people, but neither should be surprised by what the other communicated.
+### TAM
 
-> The customer should never have to figure out who to contact. They reach out to either person, or post in Slack, and PostHog sorts it out internally. Routing is our problem, not theirs. If a customer has to learn the difference between a CSM and a TAM to get help, we've failed.
+- Cross-sell strategy and execution
+- Credit discount negotiation and deal structuring
+- Use case discovery, mapping products to problems
+- Multi-threading into new teams and stakeholders
+- Account planning (quarterly in Vitally)
+- Stakeholder management
 
-## Both roles need authority to act
+### Both
 
-A common failure in dual coverage models is that one role lacks the authority to actually help. The customer asks a question, gets told "let me check with my colleague," and wonders why they have two people if neither can make things happen. Both the CSM and TAM need enough authority and product knowledge to answer questions, make decisions, and resolve issues without bouncing the customer between them.
+- General customer questions (whoever sees it first)
+- Implementation reviews
+- Retention. TAMs are not off the hook here. Understanding health and usage is a prerequisite for cross-selling, not work that gets delegated.
 
-This means both roles should:
-
-- Know PostHog pricing well enough to discuss it
-- Be able to create and modify Slack channels, Vitally tasks, and support tickets
-- Have the context to answer most product questions
-- Feel empowered to act first and coordinate internally afterward, not the reverse
-
-The only things that require explicit coordination before acting are active deal negotiations (where the TAM has a specific discount or contract structure in play) and escalations that involve engineering or leadership commitments. Everything else: just handle it.
-
-## Who owns what
-
-Ownership is divided by _type of work_, not by who "owns" the customer. Both roles maintain the relationship. The split is about where each person spends their focused effort.
-
-| Domain | Primary | Examples |
-| --- | --- | --- |
-| **Health monitoring** | CSM | Vitally health score tracking, risk indicators, usage trend monitoring |
-| **Support escalation** | CSM | Flagging tickets, following up on open issues, looping in engineering |
-| **Billing and invoicing** | CSM | Credit balance questions, billing limit changes, payment failures |
-| **Onboarding new users** | CSM | Team training, getting new stakeholders set up, sharing docs |
-| **Renewal logistics** | CSM | Contract paperwork, PandaDoc routing, renewal timeline coordination |
-| **Cross-sell strategy** | TAM | Identifying new product opportunities, building the case, running the play |
-| **Discount credit negotiation** | TAM | Pricing discussions, QuoteHog quotes, discount structuring, credit sizing |
-| **Use case discovery** | TAM | Deep technical discovery, mapping use cases to products, expansion planning |
-| **Multi-threading** | TAM | Getting in front of new stakeholders, new teams, new budget holders |
-| **Account planning** | TAM | Quarterly account plan in Vitally, reviewed with manager |
-| **General questions from the customer** | Whoever sees it first | Product questions, "how do I do X", feature questions |
-| **Implementation review** | Shared | CSM flags issues, TAM digs deeper if tied to an expansion motion |
-
-If a customer asks something either person could answer, whoever sees it first takes it. Speed matters more than perfect role separation. The only thing that requires coordination is active deal negotiation: if the TAM is working a specific annual contract or custom discount structure, the CSM should know about it so they don't inadvertently contradict the terms. This is a communication problem, not a permissions problem.
-
-### TAMs are not off the hook for retention
-
-Sharing the load doesn't mean TAMs stop caring about health and engagement. Understanding the account deeply, knowing the usage patterns, monitoring the health signals: these are prerequisites for effective cross-selling, not separate work that gets delegated to the CSM. A TAM who doesn't understand the account's health can't credibly expand it.
-
-What changes is that TAMs no longer have to be the _sole person_ fielding billing questions, chasing support tickets, and running onboarding sessions. That operational work gets shared, freeing up bandwidth for the strategic and commercial work that drives quota. But the TAM still needs to know what's going on, and still needs to build trust through being genuinely helpful, not just showing up when there's a deal to run.
-
-## Communication with the customer
-
-### How to introduce dual coverage
-
-When a TAM is added to an account, both people should be introduced together. If the CSM has an existing relationship, the CSM makes the intro. If the CSM and TAM are being added around the same time, introduce them as a team.
-
-What the customer should experience:
-
-- Two people from PostHog who both know their account and work together
-- Fast responses regardless of who they reach out to
-- Never having to think about which person handles what. They ask, PostHog answers.
-
-What the customer should never experience:
-
-- Getting the same question from both people
-- Conflicting information about pricing, features, or roadmap
-- Radio silence because each person assumed the other was handling it
-- Being asked to repeat context they already shared with the other person
-- Only hearing from the TAM when PostHog wants to sell them something
-- Having to learn PostHog's internal org chart to get help
-
-### Proactive comms
-
-The CSM typically sends health check-ins, product tips, billing updates, support follow-ups, and renewal reminders. The TAM typically sends cross-sell outreach, annual plan proposals, use case deep dives, and strategic meeting requests.
-
-Either person can send general outreach. "Hey, saw you launched a new feature, congrats!" doesn't need to be assigned to a role. Both should feel comfortable reaching out when they have something genuine to share.
-
-## Slack channel behavior
-
-Shared Slack channels are the highest-risk area for coordination failures. Two people from PostHog responding to the same message, or worse, giving different answers, looks unprofessional.
-
-**Whoever sees it first, takes it.** Don't wait for the "right" person to respond. If it's a question you can answer, answer it. If you genuinely don't know, tag the other person. The customer should never wait because you were deciding whose job it was.
-
-**Never respond to the same message.** If you see the other person has already responded, leave it alone. If you have something to add, DM your counterpart and let them relay it, or respond in-thread with clear additive context (not a restatement).
-
-**Check before posting on ambiguous topics.** A quick DM ("I'm going to respond to their question about LLM analytics, good with you?") takes 5 seconds and prevents confusion. This matters most when there's an active deal or negotiation in play where the other person has context you might not.
-
-**Both monitor the channel.** Neither person gets to assume the other is watching. If something goes unanswered for 2+ hours during business hours, whoever sees it picks it up. No exceptions.
-
-**Both should be visible.** The TAM shouldn't only show up in Slack when there's a deal to run. Reacting to messages, sharing relevant changelog updates, congratulating launches. Being present is part of the relationship, not a distraction from it.
-
-## How the TAM gets added (and removed)
-
-### Adding a TAM
-
-TAMs get added to CSM-covered accounts when there's a reason for the additional investment. This can be expansion potential _or_ retention complexity.
-
-**Expansion triggers:**
-
-- $100k+ ARR (automatic, always has both)
-- $50k-$100k ARR with clear expansion potential: adopted 2 or fewer use cases with additional applicable ones identified, monthly billing with strong annual candidacy, recent funding or headcount growth, multiple workloads identified but only one instrumented
-- $20k-$50k ARR with exceptional signal: rapid MRR growth (>15% MoM sustained), engineering team actively experimenting with new products, inbound interest in annual or enterprise features
-
-**Retention triggers:**
-
-Not all accounts that need TAM-level attention are expansion plays. Some need the technical depth and relationship intensity of a TAM for retention reasons: the account is using PostHog primarily as a capture layer with all analysis happening externally, trust in the data is eroding, there's a single engaged user, or the account is structurally fragile despite healthy MRR. These accounts won't show up on expansion-signal dashboards, but losing them hurts quota just as much. CSMs should flag these to TAM leads the same way they flag expansion signals.
-
-**The process:**
-
-1. CSM spots signal or account hits threshold. CSM posts in the team channel or flags to the TAM team lead with: account name, ARR, what triggered the flag, and any relevant context.
-2. TAM team lead reviews and assigns. Not every signal warrants a TAM. The team lead makes the call.
-3. CSM introduces TAM to the customer (or both are introduced together if timing allows). This happens in Slack or on the next scheduled call. Frame it as "you're getting a team" not "here's a specialist."
-4. TAM creates or updates the account plan in Vitally. Within 2 weeks of being added.
-5. Both roles are visible in Vitally. CSM in the CSM field, TAM in the Account Owner/AE field. No ambiguity about who's on the account.
-
-### TAM duration
-
-TAMs aren't one-and-done. When a TAM is added to an account, expect them to stay for 2-4 quarters minimum. That's enough time to build a real relationship, run expansion plays, and demonstrate value. Short rotations destroy trust with the customer and waste ramp-up time.
-
-### Removing a TAM
-
-If the expansion opportunity has been fully realized (annual signed, cross-sell landed, no remaining whitespace) and the account is stable, the TAM can roll off. This should feel natural to the customer, not like they lost someone.
-
-1. TAM proposes removal to their team lead during quarterly account planning.
-2. TAM tells the CSM before anything changes.
-3. TAM sends a brief message to the customer. No drama, no long goodbye. "Hey, [CSM] and I have been working together on your account. Going forward, [CSM] is your main point of contact. I'm always around if anything comes up."
-4. TAM updates Vitally to remove themselves from the account.
-
-## Signaling: both directions
-
-Dual coverage only works if both roles are actively sharing context. "I mentioned it in passing" doesn't count. There needs to be clear, documented communication.
-
-### The qualitative layer matters most
-
-Automated triggers (Vitally indicators, MRR thresholds, product usage spikes) will catch the quantitative signals. The reason dual coverage works better than automation alone is the qualitative context that comes from being in the relationship: what customers say in Slack, what they mention on calls, the tone of their messages, the questions they ask that reveal what they're actually thinking about. A CSM hearing "we're evaluating our analytics stack" in a casual Slack exchange is worth more than ten Vitally indicators. That qualitative judgment is harder work than watching dashboards, and it's the core of what makes the signaling layer valuable.
-
-### What CSMs should flag to TAMs
-
-| Signal | How to flag |
-| --- | --- |
-| Customer mentions interest in a new product | Post in team channel with account name, what they said, and context |
-| Customer asks about annual plans or discounts | Answer the question if you can. If there's an active negotiation the TAM is running, brief them afterward so they have the context. |
-| Usage of a new product crosses $50/mo | Vitally indicator will catch this, but call it out if you see it first |
-| New team or department starts using PostHog | Flag to TAM. New workload = new expansion surface area |
-| Customer mentions budget availability or new funding | Flag immediately. Timing matters |
-| Customer complains about a competitor product they also use | Flag. This is a consolidation opportunity |
-| Customer's trust in data quality is eroding | Flag. This is a retention risk that may need TAM-level technical intervention |
-| Qualitative shift in tone or engagement | Flag. "They used to respond in hours, now it takes days" is a signal automation won't catch |
-
-CSMs should also be cross-selling and expanding on their own where appropriate. The signal to bring in a TAM isn't "the customer asked about a new product." It's the qualitative evaluation that "this is a good opportunity for a TAM to focus on for a few quarters" versus a straightforward product question that the CSM can handle.
-
-### What TAMs should share back to CSMs
-
-| Signal | How to share |
-| --- | --- |
-| Expansion play outcome (won/lost/stalled) | Update the account plan in Vitally and tell the CSM directly |
-| New stakeholder relationships established | Add contacts to Vitally, brief the CSM so they can build the relationship too |
-| Pricing or contract changes | CSM must know about any pricing discussion _before_ the customer brings it up in a support context |
-| Product feedback or feature requests | Log in Vitally, share with CSM so they can follow up if relevant |
-| Risk identified during strategic conversations | Flag in Vitally with Churn Risk segment if warranted, tell the CSM |
-
-## Account plans and Vitally hygiene
-
-The TAM creates and maintains the account plan when both roles are present. CSM contributes operational context (health trends, support history, billing notes). If it's CSM-only, the CSM owns the plan.
-
-Both roles create notes. Use clear subjects that indicate context (e.g., "cross-sell discovery call" vs. "billing limit adjustment"). Don't duplicate information the other person already documented.
-
-Whoever creates a task owns the task. Don't create tasks for the other person without telling them.
-
-CSM monitors and acts on [health score](/handbook/cs-and-onboarding/health-tracking) changes. If the TAM notices a health issue during their work, they tell the CSM so they can coordinate the response together.
-
-## Meetings
-
-### Joint calls
-
-Not every call needs both people. Default to single-person calls unless there's a clear reason for both.
-
-**Both should attend:** quarterly business reviews or account planning sessions, calls where the customer has both operational and strategic topics, the initial introduction when dual coverage starts, and annual contract negotiation (TAM to drive, CSM for relationship context).
-
-**CSM only:** support follow-ups, onboarding and training sessions, billing reviews.
-
-**TAM only:** cross-sell discovery, technical deep dives on new products, multi-threading calls with new stakeholders (unless the CSM already knows that person, in which case they should make the intro).
-
-## Escalation and support
-
-### When a customer has a problem
-
-Whoever hears about it first owns getting it resolved, or getting it to the person who can. The customer should never hear "that's not really my area." They should hear "on it."
-
-Between the two roles, the CSM typically drives support coordination and issue resolution because that's where their focused effort sits. But "typically drives" doesn't mean the TAM disappears. Both stay informed, both follow up.
-
-> Layering CSMs doesn't replace the need for adequate support staffing and tighter SLAs for high-value accounts. That's a separate problem. Dual coverage helps (two capable people watching an account is better than one), but it's not a substitute for support investment.
-
-### When there's internal disagreement
-
-If the CSM and TAM disagree about how to handle something on the account (pricing approach, risk assessment, whether to push for annual), they resolve it between themselves first. The customer should never see internal disagreement.
-
-## What "good" looks like
+## What good looks like
 
 - Customer reaches out to either person and gets a fast, informed response. They never think about who to contact.
-- Both roles go deeper on their focus area than either could alone. CSM catches a health issue early because they weren't distracted by a cross-sell play. TAM closes an annual deal because they weren't fielding billing tickets.
-- Customer knows both people, trusts both, and feels like they have a team
-- Neither person is surprised by something the other communicated to the customer
-- Account plan is current, notes are in Vitally, no duplicated work
+- Both go deeper on their focus area than either could alone
+- Customer knows both people, trusts both, feels like they have a team
+- Neither person is surprised by what the other communicated
+- Both are visible in Slack, not just when they need something
+- Context flows both directions without being asked for it
 
-## What "bad" looks like
+## What bad looks like
 
-- Customer asks a question and gets told "that's not my area, let me get [other person]" instead of just getting an answer
-- Customer only hears from the TAM when PostHog wants to sell them something
+- Customer gets told "that's not my area, let me get [other person]"
+- Customer only hears from the TAM when PostHog wants to sell something
 - Customer gets asked "how are things going?" by both people in the same week
-- CSM discusses pricing without knowing the TAM had a specific deal structure in play, and the numbers don't match
+- CSM discusses pricing without knowing the TAM had a deal in play
 - TAM sends a cross-sell email without knowing the customer filed 3 support tickets yesterday
-- Neither person responds to a Slack message for a day because each assumed the other would handle it
-- Account plan hasn't been updated in 2 months because "the other person was supposed to do it"
-- Customer has to explain the same problem twice because the CSM and TAM don't share notes
-- TAM checks out on health and engagement because "the CSM handles that now"
-
-## FAQ
-
-**What if a customer asks the CSM about pricing or annual plans?**
-
-Answer it. Both roles should know PostHog pricing well enough to have this conversation. If the TAM is actively negotiating a custom deal or discount structure on this account, the CSM should already know about it (see signaling above) and can factor that in. The only time to redirect is if you genuinely don't know the answer, in which case you say "let me check and get back to you," not "let me get someone else."
-
-**What if the TAM isn't available and the customer needs an answer now?**
-
-Handle it. Speed beats perfect role separation. Brief the TAM afterward so they know what was communicated.
-
-**Who responds to the customer when they post in Slack at 3am?**
-
-Whoever sees it first. Don't overthink this. If it's a straightforward question, answer it. If it's strategic, acknowledge receipt and tell them you'll follow up during business hours.
-
-**Does the CSM get commission on expansion?**
-
-This is defined in the [compensation section](/handbook/growth/sales/how-we-work). The TAM's quota is based on ARR growth for AM Managed accounts. CSM comp is separate. The CSM's incentive is that well-managed accounts retain and grow, which makes everyone's job easier.
-
-**What happens to the TAM's quota when a dual-covered account churns?**
-
-If the account is in the TAM's AM Managed book, it counts against quota per the [standard rules](/handbook/growth/sales/how-we-work#how-commission-works---technical-account-managers). The CSM doesn't carry quota on that account, but churn on a dual-covered account is a shared failure. Both roles should have seen it coming.
-
-**What about accounts that need TAM attention for retention, not expansion?**
-
-Not every account that gets a TAM is an expansion play. Some accounts have healthy MRR but are structurally fragile: single user dependency, using PostHog as a pipe to an external warehouse, eroding trust in data quality. These need the technical depth and relationship intensity that a TAM brings, even if there's no cross-sell on the table. CSMs should flag these the same way they flag expansion signals, and TAM leads should evaluate them the same way.
-
-**Does this mean TAMs get more accounts?**
-
-Not necessarily. The minimum book size stays the same. But because the CSM absorbs a meaningful chunk of the operational work, TAMs may have bandwidth to be strategic and proactive across a few more accounts. The point isn't volume, it's that the time freed up goes to higher-value work, not more accounts at the same depth.
-
-**Can a CSM become a TAM (or vice versa)?**
-
-Yes. The roles share a lot of skills. A CSM who demonstrates strong commercial instincts and technical depth is a natural TAM candidate. A TAM who prefers relationship depth over deal velocity might thrive as a CSM. Talk to your team lead.
+- Neither person responds because each assumed the other would
+- TAM checks out on health because "the CSM handles that now"
+- Customer has to explain the same thing twice
