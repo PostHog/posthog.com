@@ -27,6 +27,7 @@ You can create usage metrics in two ways:
 | **Name**            | The column title shown in customer lists                                                   |
 | **Interval**        | Time period for the metric: 7, 30 or 90 days                                               |
 | **Format**          | How the value should be formated: Numeric or currency                                      |
+| **Display**         | How the metric is visualized: Number (default) or Sparkline                                |
 | **Calculation**     | How events are aggregated: Count of events (default) or Sum of property                    |
 | **Property to sum** | The numeric property to sum. Only shown when **Calculation** is set to **Sum of property** |
 | **Match events**    | Which events to count toward this metric                                                   |
@@ -48,3 +49,10 @@ Choose how events are aggregated for the metric:
 
 - **Count of events** – Counts the total number of matched events. This is the default.
 - **Sum of property** – Sums the values of a numeric event property across matched events. When selected, a **Property to sum** field appears where you select the property to aggregate. This is useful for tracking cumulative values like API tokens consumed, storage used, or revenue generated.
+
+### Display
+
+Choose how the metric is visualized on customer profiles:
+
+- **Number** – Shows a single numeric value with a percentage change indicator. This is the default.
+- **Sparkline** – Shows a bar chart of daily values over the selected interval, along with the total value and percentage change. Useful for spotting trends at a glance.
