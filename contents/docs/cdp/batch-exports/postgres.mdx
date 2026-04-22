@@ -16,8 +16,7 @@ Batch exports can be used to export data to a Postgres table.
 
 1. Make sure PostHog can access your Postgres database.
 
-> **Notes:** 
-> -  We only support connections using SSL/TLS. This [provides protection against various types of attacks](https://www.postgresql.org/docs/current/libpq-ssl.html#LIBPQ-SSL-PROTECTION).
+> **Note:** We recommend using SSL/TLS connections for security. See [SSL configuration](#ssl-configuration) below for available options. For more information on why SSL/TLS is important, see [PostgreSQL's documentation on SSL protection](https://www.postgresql.org/docs/current/libpq-ssl.html#LIBPQ-SSL-PROTECTION).
 
 2. Create a Postgres user with table creation privileges.
 
@@ -93,4 +92,19 @@ Configuring a batch export targeting Postgres requires the following Postgres-sp
 * **Table name:** The name of a Postgres table where to export the data.
 * **Database:** The name of the Postgres database where the table provided to insert data is located.
 * **Schema:** The name of the Postgres database schema where the table provided to insert data is located.
-* **Does your Postgres instance have a self-signed SSL certificate?**: In most cases, Heroku and RDS users should check this box.
+
+### SSL configuration
+
+PostHog supports SSL/TLS connections to your Postgres database. Configure the level of SSL verification with these options:
+
+* **SSL mode** - Controls how SSL/TLS is used for the connection:
+  * `prefer` - Try SSL first, fall back to unencrypted if unavailable.
+  * `require` - Require SSL but don't verify the server certificate.
+  * `verify-ca` - Require SSL and verify the server certificate against a trusted CA.
+  * `verify-full` - Require SSL, verify the certificate, and validate the server hostname.
+
+* **SSL root certificate (optional)** - The CA certificate used to verify the server's certificate when using `verify-ca` or `verify-full` modes:
+  * `system` - Use your system's certificate store (requires PostgreSQL 16+).
+  * Custom certificate - Paste your CA certificate in PEM format.
+
+For most managed Postgres services like Amazon RDS or Heroku, `require` mode is sufficient. Use `verify-ca` or `verify-full` when you need to verify you're connecting to the correct server and not a man-in-the-middle.
