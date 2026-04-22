@@ -22,6 +22,7 @@ export const umami = {
         product_analytics: {
             available: false,
             features: {
+                autocapture: 'Pageviews',
                 conversion_funnels: true,
                 user_profiles: false,
                 cohorts: true,
@@ -34,6 +35,12 @@ export const umami = {
             available: false,
         },
         feature_flags: {
+            available: false,
+        },
+        error_tracking: {
+            available: false,
+        },
+        heatmaps: {
             available: false,
         },
     },

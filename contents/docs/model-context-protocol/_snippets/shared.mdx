@@ -1,4 +1,4 @@
-import MCPTools from '../../../../src/components/Docs/MCPTools'
+import MCPTools from "../../../../src/components/Docs/MCPTools";
 
 Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review tool calls before executing them.
 
@@ -40,10 +40,12 @@ When you pin the context, the `switch-organization` and `switch-project` tools a
 - When only `organizationId` is provided: only `switch-organization` is excluded
 
 **Headers:**
+
 - `x-posthog-organization-id` - Pin to a specific organization
 - `x-posthog-project-id` - Pin to a specific project
 
 **Query parameters:**
+
 - `organization_id` - Pin to a specific organization
 - `project_id` - Pin to a specific project
 
@@ -82,37 +84,38 @@ https://mcp.posthog.com/mcp?features=flags,dashboards,insights
 
 Available features:
 
-| Feature | Description |
-|---------|-------------|
-| `workspace` | Organization and project management |
-| `actions` | [Action definitions](/docs/data/actions) |
-| `activity_logs` | Activity log viewing |
-| `alerts` | [Alert management](/docs/product-analytics/alerts) |
-| `annotations` | [Annotation management](/docs/product-analytics/annotations) |
-| `cohorts` | [Cohort management](/docs/data/cohorts) |
-| `dashboards` | [Dashboard creation and management](/docs/product-analytics/dashboards) |
-| `data_schema` | Data schema exploration |
-| `data_warehouse` | [Data warehouse management](/docs/data-warehouse) |
-| `debug` | Debug and diagnostic tools |
-| `docs` | PostHog documentation search |
-| `early_access_features` | [Early access feature management](/docs/feature-flags/early-access-feature-management) |
-| `error_tracking` | [Error monitoring and debugging](/docs/error-tracking) |
-| `events` | Event and property definitions |
-| `experiments` | [A/B testing experiments](/docs/experiments) |
-| `flags` | [Feature flag management](/docs/feature-flags) |
-| `hog_functions` | [CDP function management](/docs/cdp) |
-| `hog_function_templates` | CDP function template browsing |
-| `insights` | [Analytics insights](/docs/product-analytics/insights) |
-| `llm_analytics` | [LLM analytics evaluations](/docs/ai-engineering) |
-| `prompts` | [LLM prompt management](/docs/ai-engineering) |
-| `logs` | [Log querying](/docs/ai-engineering/observability) |
-| `notebooks` | [Notebook management](/docs/notebooks) |
-| `persons` | [Person and group management](/docs/data/persons) |
-| `reverse_proxy` | Reverse proxy record management |
-| `search` | Entity search across the project |
-| `sql` | SQL query execution |
-| `surveys` | [Survey management](/docs/surveys) |
-| `workflows` | [Workflow management](/docs/cdp) |
+| Feature                  | Description                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------- |
+| `workspace`              | Organization and project management                                                    |
+| `actions`                | [Action definitions](/docs/data/actions)                                               |
+| `activity_logs`          | Activity log viewing                                                                   |
+| `alerts`                 | [Alert management](/docs/product-analytics/alerts)                                     |
+| `annotations`            | [Annotation management](/docs/product-analytics/annotations)                           |
+| `cohorts`                | [Cohort management](/docs/data/cohorts)                                                |
+| `conversations`          | [Support ticket management](/docs/support)                                             |
+| `dashboards`             | [Dashboard creation and management](/docs/product-analytics/dashboards)                |
+| `data_schema`            | Data schema exploration                                                                |
+| `data_warehouse`         | [Data warehouse management](/docs/data-warehouse)                                      |
+| `debug`                  | Debug and diagnostic tools                                                             |
+| `docs`                   | PostHog documentation search                                                           |
+| `early_access_features`  | [Early access feature management](/docs/feature-flags/early-access-feature-management) |
+| `error_tracking`         | [Error monitoring and debugging](/docs/error-tracking)                                 |
+| `events`                 | Event and property definitions                                                         |
+| `experiments`            | [A/B testing experiments](/docs/experiments)                                           |
+| `flags`                  | [Feature flag management](/docs/feature-flags)                                         |
+| `hog_functions`          | [CDP function management](/docs/cdp)                                                   |
+| `hog_function_templates` | CDP function template browsing                                                         |
+| `insights`               | [Analytics insights](/docs/product-analytics/insights)                                 |
+| `llm_analytics`          | [LLM analytics evaluations](/docs/ai-engineering)                                      |
+| `prompts`                | [LLM prompt management](/docs/ai-engineering)                                          |
+| `logs`                   | [Log querying](/docs/ai-engineering/observability)                                     |
+| `notebooks`              | [Notebook management](/docs/notebooks)                                                 |
+| `persons`                | [Person and group management](/docs/data/persons)                                      |
+| `reverse_proxy`          | Reverse proxy record management                                                        |
+| `search`                 | Entity search across the project                                                       |
+| `sql`                    | SQL query execution                                                                    |
+| `surveys`                | [Survey management](/docs/surveys)                                                     |
+| `workflows`              | [Workflow management](/docs/cdp)                                                       |
 
 > **Note:** Hyphens and underscores are treated as equivalent in feature names (e.g., `error-tracking` and `error_tracking` both work).
 
@@ -150,7 +153,6 @@ Example for Cursor (add to `.cursor/mcp.json`):
 ```
 
 </details>
-
 
 ## Available tools
 
@@ -289,6 +291,20 @@ The agent will use the `early-access-feature-partial-update` tool to change the 
 **Prompt:** "Query early access features in active stages via HogQL"
 
 The agent will use `query-run` to execute a HogQL query against `system.early_access_features`, filtering by stage to find features in alpha, beta, or general-availability.
+
+### Support ticket management
+
+**Prompt:** "List all open support tickets"
+
+The agent will use the `conversations-tickets-list` tool with a status filter to return all open tickets, including ticket numbers, priorities, message counts, and timestamps.
+
+**Prompt:** "Get details for support ticket #5"
+
+The agent will use the `conversations-tickets-retrieve` tool to fetch the full ticket details by ticket number, including status, priority, channel info, message history, and session context.
+
+**Prompt:** "Mark ticket #3 as resolved and set ticket #7 to high priority"
+
+The agent will use the `conversations-tickets-update` tool to change the status and priority of the specified tickets.
 
 ## Prompts and resources
 

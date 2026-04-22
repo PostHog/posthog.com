@@ -127,6 +127,12 @@ with new_context():
 - `posthog.reset()` keeps `$device_id`. Device-bucketed flags stay stable even after logout.
 - `posthog.reset(true)` creates a new `$device_id`. Use this on shared devices or kiosks when each session should be treated as a new device.
 
+## Device bucketing for experiments
+
+For experiments that span the anonymous-to-identified transition (signup flows, pre-login landing pages), device bucketing is the recommended approach over [flag persistence across authentication](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional).
+
+**Why:** Flag persistence across authentication requires a database lookup on every flag evaluation, doesn't support local evaluation, and has a known issue where flag values can change after `identify()` despite persistence being enabled (posthog-js [#2623](https://github.com/PostHog/posthog-js/issues/2623)). Device bucketing has none of these costs — the `$device_id` stays constant across the anonymous → identified transition, so the hash input doesn't change and the variant stays consistent.
+
 ## Further reading
 
 - [Creating feature flags](/docs/feature-flags/creating-feature-flags)
