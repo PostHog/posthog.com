@@ -1376,6 +1376,10 @@ export const handbookSidebar = [
                                 name: 'Expansion strategies',
                                 url: '/handbook/growth/sales/expansion-strategies',
                             },
+                             {
+                                name: 'PLG lead qualification',
+                                url: '/handbook/growth/sales/product-led-lead-qualification',
+                            },
                             {
                                 name: 'TAM Excellence',
                                 url: '/handbook/growth/sales/tam-excellence',
