@@ -12,9 +12,7 @@ import WhyPostHogSection from 'components/Home/Sections/WhyPostHogSection'
 import BedtimeReadingSection from 'components/Home/Sections/BedtimeReadingSection'
 import ShamelessCTASection from 'components/Home/Sections/ShamelessCTASection'
 import HitCounter from 'components/Home/HitCounter'
-import Customers from './Demos'
-
-export { CTAs } from './Demos'
+import Customers from '../Customers'
 
 export default function HomeTest() {
     const { appWindow } = useWindow()
