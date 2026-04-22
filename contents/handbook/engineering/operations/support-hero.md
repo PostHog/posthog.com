@@ -76,7 +76,7 @@ Check the `#papercuts` Slack channel during your rotation and pick up any report
 - **React with ❌** to reject the papercut (for example, if the behavior is intentional). A brief reply explaining why is appreciated.
 - **React with ✅** once you've shipped a fix or improvement.
 
-Papercuts are also routed to the Signals inbox, so before you start work, check whether an auto-generated PR is already waiting — it may save you most of the effort.
+Papercuts are also routed to the Signals inbox, so before you start work, check whether an auto-generated PR is already waiting – it may save you most of the effort.
 
 ### Responding to external PRs
 
