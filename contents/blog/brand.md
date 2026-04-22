@@ -79,7 +79,7 @@ We sometimes make business decisions based on who we are, and what we want to do
 
 We chose this path because there was less competition for a self-hosted product. We could build a refined point solution that anyone could self-host, and not worry about competing with cloud-based competitors with over $100m in annual revenue.
 
-But we soon realized we just love shipping new features. After our first hackathon, we wound up with session replay – i.e. a new feature big enough to be its own product. It took off and this resulted in our current multi-product approach.
+But we soon realized we just love shipping new features. After our first [hackathon](/newsletter/hackathons), we wound up with session replay – i.e. a new feature big enough to be its own product. It took off and this resulted in our current multi-product approach.
 
 Eventually, we removed our paid, self-hosted offering entirely, and went all in on multi-product in cloud, and "getting in first" with early-stage companies, not enterprises.
 
