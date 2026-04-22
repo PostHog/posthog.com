@@ -1,6 +1,6 @@
 ---
 title: Great companies are built in hackathons
-date: 2025-09-30
+date: 2026-04-21
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/hackathon_fefb490d64.jpg
 author:
