@@ -10,6 +10,9 @@ export const platformFeatures = {
                 name: 'Open source',
                 description: 'Audit code, contribute to roadmap, and build integrations',
             },
+            open_core: {
+                name: 'Open core',
+            },
             reverse_proxy: {
                 name: 'Reverse proxy',
                 description: 'Avoid tracking blockers and capture more data',
@@ -180,6 +183,10 @@ export const platformFeatures = {
                 name: 'Zendesk',
                 description: 'Send and receive data from Zendesk',
             },
+            imports: {
+                name: 'Warehouse import',
+                description: 'Import data from external warehouses and sources like Stripe, HubSpot, and S3 for unified analysis',
+            },
         },
     },
     libraries: {
@@ -205,6 +212,12 @@ export const platformFeatures = {
             },
             ruby: {
                 name: 'Ruby',
+            },
+            python: {
+                name: 'Python',
+            },
+            node: {
+                name: 'Node.js',
             },
         },
     },
@@ -308,6 +321,10 @@ export const platformFeatures = {
                 name: 'Security certification',
                 description: 'Third-party security compliance frameworks',
             },
+            siem: {
+                name: 'SIEM',
+                description: 'Collect, analyze, and correlate security logs to detect threats',
+            },
             soc2_certified: {
                 name: 'SOC 2 Type II',
                 description: 'SOC 2 security certification',
@@ -334,6 +351,10 @@ export const platformFeatures = {
         project_management_tools: {
             name: 'Project management tools',
             description: 'Plan better with backlogs, boards, calendars, and more',
+        },
+        ai_assistant: {
+            name: 'AI assistant',
+            description: 'Use AI to assist with tasks and queries',
         },
     },
 }

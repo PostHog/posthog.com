@@ -98,6 +98,7 @@ function getSidebarSection(sidebarPath: string): SidebarSection | null {
 
 interface UsePlatformListOptions {
     platformSourceType?: 'managed' | 'self-hosted'
+    sortAlpha?: boolean
 }
 
 export default function usePlatformList(
@@ -177,12 +178,14 @@ export default function usePlatformList(
             )
         }
 
-        // Filter to only include items that are in the sidebar, then sort alphabetically if configured
+        // Default: follow the sidebar source order from navs/index.js. When `sortAlpha` is passed, sort by label instead.
         const filtered = result.filter((platform: Platform) => section.urls.includes(platform.url))
-        return section.sortChildrenAlpha
-            ? filtered.sort((a: Platform, b: Platform) => a.label.localeCompare(b.label))
-            : filtered
+        if (options?.sortAlpha) {
+            return filtered.sort((a: Platform, b: Platform) => a.label.localeCompare(b.label))
+        }
+        const urlOrder = new Map(section.urls.map((url, index) => [url, index]))
+        return filtered.sort((a: Platform, b: Platform) => (urlOrder.get(a.url) ?? 0) - (urlOrder.get(b.url) ?? 0))
     }
 
-    return result
+    return options?.sortAlpha ? result.sort((a: Platform, b: Platform) => a.label.localeCompare(b.label)) : result
 }

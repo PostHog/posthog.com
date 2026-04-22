@@ -1,0 +1,44 @@
+---
+title: Create Surveys with PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) creates [Surveys](/docs/surveys) from natural language descriptions. Describe the survey you want – including the audience, question types, and goals – and PostHog AI generates it with the right questions, targeting rules, and display conditions.
+
+## How it works
+
+PostHog AI selects the appropriate question types (NPS, rating scales, multiple choice, open text, and more), generates questions based on your research goals, configures targeting rules based on user properties or cohorts, and sets display conditions for when and where the survey appears.
+
+You can refine the survey by asking follow-up questions like "add a follow-up question for detractors" or "only show this on the dashboard page."
+
+## Survey types PostHog AI supports
+
+| Type | Best for | Example prompt |
+|------|----------|----------------|
+| **NPS** | Measuring overall satisfaction and loyalty | "Create an NPS survey for users who signed up in the last 30 days" |
+| **Product-market fit** | Gauging how essential your product is | "Set up a PMF survey targeting power users" |
+| **Feedback** | Collecting open-ended user input | "Build a feedback survey for the checkout experience" |
+| **Rating** | Measuring satisfaction on a scale | "Create a 1-5 star rating survey for our support experience" |
+| **Multiple choice** | Understanding preferences or segmenting users | "Create a survey asking which features users want next" |
+| **Churn** | Understanding why users leave | "Create a survey asking users why they canceled" |
+
+## Try it
+
+Select a prompt to try it out in the PostHog app:
+
+- [`Create an NPS survey for users who signed up in the last 30 days`](https://app.posthog.com/#panel=max:Create%20an%20NPS%20survey%20for%20users%20who%20signed%20up%20in%20the%20last%2030%20days)
+- [`Build a feedback survey for the checkout experience`](https://app.posthog.com/#panel=max:Build%20a%20feedback%20survey%20for%20the%20checkout%20experience)
+- [`Create a survey asking users why they cancelled their subscription`](https://app.posthog.com/#panel=max:Create%20a%20survey%20asking%20users%20why%20they%20cancelled%20their%20subscription)
+- [`Set up a product-market fit survey targeting power users`](https://app.posthog.com/#panel=max:Set%20up%20a%20product-market%20fit%20survey%20targeting%20power%20users)
+- [`Create a multiple choice survey about feature preferences`](https://app.posthog.com/#panel=max:Create%20a%20multiple%20choice%20survey%20about%20feature%20preferences)
+
+## Tips for better results
+
+- **Describe your goal** – "understand why users churn" gives PostHog AI more context than "create a survey"
+- **Name the audience** – "for enterprise users" or "targeting users who completed onboarding" helps PostHog AI set the right targeting rules
+- **Specify question types** – "with an NPS question followed by an open-text question" tells PostHog AI exactly what format to use
+- **Include display conditions** – "only show on the dashboard page after 30 seconds" configures when the survey appears
+- **Ask for branching logic** – "If the user scores 0-6, ask why. If they score 9-10, ask what they love." sets up conditional follow-up questions
+
+## Get started
+
+To start creating Surveys with PostHog AI, [set up PostHog AI](/docs/posthog-ai/start-here).

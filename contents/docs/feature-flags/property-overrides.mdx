@@ -420,13 +420,15 @@ First, enable browser properties using the customization (see [Including browser
 2. Add filter conditions: `$browser` equals `Chrome` AND `$device_type` equals `Desktop`
 3. The flag automatically matches Chrome desktop users
 
-**Mobile example:** Target a specific app version
+**Mobile example:** Target app versions
 
 With `setDefaultPersonProperties` enabled (the default), you can target app versions without any additional code:
 
 1. [Create a feature flag in PostHog](/docs/feature-flags/creating-feature-flags)
-2. Add a filter condition: `$app_version` equals `2.0.0`
-3. The flag automatically matches users on version 2.0.0
+2. Add a filter condition using `$app_version` with a [semver operator](/docs/data/property-filters#semver-operators) – for example, `$app_version >= (semver) 2.0.0`
+3. The flag automatically matches users on version 2.0.0 and above
+
+You can also use `equals` for exact version matching (e.g., `$app_version` equals `2.0.0`), but semver operators give you more flexibility for version range targeting.
 
 ## GeoIP property overrides
 

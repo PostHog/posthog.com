@@ -3,7 +3,7 @@ You can use the `before_send` callback in the [web](/docs/libraries/js), [Node.j
 <MultiLanguage>
 
 ```js file=Web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     before_send: (event) => {
         if (event.event === "$exception") {
             const exceptionList = event.properties["$exception_list"] || []
@@ -19,7 +19,7 @@ posthog.init('<ph_project_api_key>', {
 ```
 
 ```react-native file=React Native
-const posthog = new PostHog('<ph_project_api_key>', {
+const posthog = new PostHog('<ph_project_token>', {
     host: '<ph_client_api_host>',
     before_send: (event) => {
         if (event.event === '$exception') {

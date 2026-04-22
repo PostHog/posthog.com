@@ -112,6 +112,13 @@ You can select a [feature flag](/docs/feature-flags) to control whether to recor
 
 Sampling enables you to record a percentage of all sessions. To set a sampling rate, go to the [replay ingestion settings page](https://us.posthog.com/replay/settings#selectedSetting=replay-triggers).
 
+Sampling is supported on the following SDKs:
+
+- **Web** - posthog-js 1.85.0+
+- **Android** - 3.34.0+
+- **iOS** - 3.42.0+
+- **React Native** - 4.37.0+
+
 <ProductScreenshot
     imageLight={ImgSampleConfigLight} 
     imageDark={ImgSampleConfigDark}
@@ -152,6 +159,10 @@ You'll capture 20% of any session on the checkout page that has an exception eve
 
 In your [replay ingestion settings](https://us.posthog.com/settings/project-replay#replay-ingestion), you can set a minimum duration for sessions to be recorded. 
 
+Supported on the following SDKs:
+- **web** posthog-js 1.291.0+
+- **iOS:** 3.53.0+
+
 <ProductScreenshot
     imageLight={ImgMinDurationLight} 
     imageDark={ImgMinDurationDark}
@@ -166,7 +177,7 @@ There are two modes for how minimum duration is enforced, controlled by the `str
 In legacy mode (`strictMinimumDuration: false` or not set), the minimum duration is checked against the **total session age**. When a session starts, the browser records the start time. If the minimum duration has passed since the session start time, the recording data is sent to the backend.
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   session_recording: {
     strictMinimumDuration: false // +
@@ -188,7 +199,7 @@ In strict mode (`strictMinimumDuration: true`), the minimum duration is checked 
 **Note**: This will become the default behavior in a future release. To opt in now, add to your config:
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   session_recording: {
     strictMinimumDuration: true // +
@@ -212,6 +223,16 @@ This mode is **more accurate** for filtering out short sessions, especially on s
 
 - **Use legacy mode** if you want to capture as much session data as possible and are okay with potentially missing early parts of sessions after page refreshes
 - **Use strict mode** if you want to ensure you only record sessions where users actually spend the minimum duration on a single page, accepting that you may miss more bouncing users
+
+### iOS behavior
+
+On iOS, minimum duration is enforced using **buffer length**, similar to web strict mode:
+
+- Snapshots are buffered, and PostHog checks the duration of buffered replay data (from the oldest to newest buffered snapshot)
+- Recording starts sending only after that buffered duration reaches the configured minimum duration
+- After this threshold is reached once in a session, new snapshots are sent normally for the rest of that session
+
+If the session changes before the threshold is reached, the buffer is cleared, and the next session starts buffering from zero.
 
 ## Billing Limits
 

@@ -61,7 +61,7 @@ This returns a [BigQuery `RowIterator` object](https://cloud.google.com/python/d
 
 ## 3. Converting GA event data to the PostHog schema and capturing
 
-The schema of Google Analytics' exported event data is similar to PostHog's schema, but it requires conversion to work with the rest of PostHog's data. You can see details on the Google Analytics schema in [their docs](https://support.google.com/analytics/answer/7029846?hl=en) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture #autocaptured-events).
+The schema of Google Analytics' exported event data is similar to PostHog's schema, but it requires conversion to work with the rest of PostHog's data. You can see details on the Google Analytics schema in [their docs](https://support.google.com/analytics/answer/7029846?hl=en) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
 
 For example, many PostHog events and properties are prepended with the `$` character.
 
@@ -77,7 +77,7 @@ To convert to PostHog's schema, we need to:
 
 5. Do the same conversion with person properties. These are then added to the `$set` property.
 
-Once this is done, you can capture events into PostHog using the [Python SDK](/docs/libraries/python #historical-migrations) with `historical_migration` set to `true`.
+Once this is done, you can capture events into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) with `historical_migration` set to `true`.
 
 Here's an example version of a full Python script that gets data from BigQuery, converts it to PostHog's schema, and captures it in PostHog.
 
@@ -87,7 +87,7 @@ from datetime import datetime
 from google.cloud import bigquery
 
 posthog = Posthog(
-'<ph_project_api_key>',
+'<ph_project_token>',
 host='<ph_client_api_host>',
 debug=True,
 historical_migration=True

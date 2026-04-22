@@ -6,6 +6,7 @@ showTitle: true
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import ReturningUsersExposures from "./snippets/returning-users-exposures.mdx"
 
 Exposures are the foundation of experiment analysis in PostHog. A user must be **exposed** to your experiment before they can be included in any metric calculations. Understanding how exposures work is crucial for running successful experiments.
 
@@ -52,6 +53,10 @@ The exposures chart shows:
 | **Distribution percentage** | How users are split across variants |
 | **Exposure criteria** | The event being used to determine exposure |
 
+## Ensuring exposures for returning users
+
+<ReturningUsersExposures />
+
 ## Custom exposure events
 
 While the default `$feature_flag_called` event works for most experiments, you might need a custom exposure event when:
@@ -64,9 +69,9 @@ While the default `$feature_flag_called` event works for most experiments, you m
 
 To configure a custom exposure event:
 
-1. Click **Edit exposure criteria** in your experiment
-2. Select **Custom** exposure type
-3. Choose your exposure event (e.g., "viewed_checkout_page", "api_endpoint_called")
+1. In the experiment creation form or experiment settings, find the **Include people when** dropdown. For saved experiments, click **Edit exposure criteria** in your experiment
+2. Select **Custom event**
+3. Choose your exposure event (e.g., `viewed_checkout_page`, `api_endpoint_called`)
 4. Add any property filters to refine the exposure criteria
 
 <ProductScreenshot
@@ -95,6 +100,7 @@ Users might be exposed to different variants if:
 - They clear cookies/storage
 - There's an implementation error
 - They're part of a gradual rollout
+- They evaluate the flag both before and after calling `identify` and you don't have [flag persistence](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps) enabled
 
 PostHog provides two strategies for handling these cases:
 
@@ -103,6 +109,12 @@ Users exposed to multiple variants are completely removed from the experiment an
 
 ### Use first seen variant
 Users are analyzed based on the first variant they were exposed to, regardless of subsequent exposures. This maximizes sample size but may introduce some noise into your results.
+
+## Exposure deduplication
+
+PostHog counts one exposure per user per variant in experiment results. Even if multiple `$feature_flag_called` events fire for the same user, they won't inflate your exposure counts or affect your results as long as the variant value is the same.
+
+The SDKs also deduplicate on the sending side. In the browser, dedup persists across sessions via localStorage. In server-side SDKs (Node, Python), dedup is in-memory and resets on server restart, so a user may fire a new event after a deploy. As noted above, this doesn't affect experiment analysis.
 
 ## Sample ratio mismatch detection
 

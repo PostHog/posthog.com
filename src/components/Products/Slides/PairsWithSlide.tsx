@@ -21,7 +21,15 @@ export default function PairsWithSlide({ productName, pairsWith, allProducts }: 
             <p className="text-xl text-secondary max-w-4xl mx-auto mb-12">
                 {productName} pairs with other products to give you a complete picture of your product.
             </p>
-            <div className="grid grid-cols-1 @2xl:grid-cols-3 gap-4">
+            <div
+                className={`grid grid-cols-1 gap-4 ${
+                    pairsWith.length <= 1
+                        ? '@2xl:grid-cols-1'
+                        : pairsWith.length === 2
+                        ? '@2xl:grid-cols-2'
+                        : '@2xl:grid-cols-3'
+                }`}
+            >
                 {pairsWith.map((pair: PairItem) => {
                     // Find the product details by slug
                     const productDetails = allProducts.find((product: any) => product.slug === pair.slug)

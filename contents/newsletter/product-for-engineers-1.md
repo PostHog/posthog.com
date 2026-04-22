@@ -22,7 +22,7 @@ Welcome to our new newsletter, Product for Engineers. We launched it because (1)
 
 ## 💬 10x engineers talk to users
 
-In traditional tech companies, product managers (PMs) talk to users, and write tickets for engineers to ship. It looks something like this:
+In traditional tech companies, [product managers](/newsletter/what-does-a-product-manager-do) (PMs) talk to users, and write tickets for engineers to ship. It looks something like this:
 
 ![PM to engineer](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/10x-engineers-do-user-interviews/pm-to-engineer.png)
 

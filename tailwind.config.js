@@ -55,7 +55,7 @@ module.exports = {
                 'ai-blue': '#3E6B9E',
             },
             backgroundImage: {
-                ai: 'radial-gradient(at 84% 83%, hsla(354,99%,77%,1) 0px, transparent 50%), radial-gradient(at 66% 38%, hsla(295,67%,67%,1) 0px, transparent 50%), radial-gradient(at 44% 51%, hsla(149,78%,70%,1) 0px, transparent 50%), radial-gradient(at 41% 14%, hsla(257,76%,72%,1) 0px, transparent 50%), radial-gradient(at 75% 97%, hsla(107,92%,67%,1) 0px, transparent 50%), radial-gradient(at 68% 35%, hsla(237,71%,71%,1) 0px, transparent 50%), radial-gradient(at 42% 23%, hsla(64,65%,79%,1) 0px, transparent 50%)',
+                ai: 'radial-gradient(at 84% 83%, hsla(195,45%,75%,1) 0px, transparent 50%), radial-gradient(at 66% 38%, rgb(173, 212, 155) 0px, transparent 50%), radial-gradient(at 44% 51%, rgb(226, 219, 167) 0px, transparent 50%), radial-gradient(at 41% 14%, hsla(180,38%,78%,1) 0px, transparent 50%), radial-gradient(at 75% 97%, hsla(155,42%,68%,1) 0px, transparent 50%), radial-gradient(at 68% 35%, hsla(178,45%,65%,1) 0px, transparent 50%), radial-gradient(at 42% 23%, hsla(200,40%,72%,1) 0px, transparent 50%)',
                 'llm-analytics':
                     'radial-gradient(ellipse 80% 60% at 15% 20%, #DE7AFF 0px, transparent 40%), radial-gradient(ellipse 100% 80% at 85% 15%, #EF7D9B 0px, transparent 35%), radial-gradient(ellipse 70% 100% at 90% 85%, #3795FF 0px, transparent 45%), radial-gradient(ellipse 90% 70% at 10% 90%, #40C8D8 0px, transparent 40%)',
                 'trace-monitoring':
@@ -84,6 +84,8 @@ module.exports = {
                 'arrow-up-right':
                     'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24"><path fill="%232F80FA" fill-rule="evenodd" d="M7.995 5.75a.75.75 0 0 1 .75-.75h8.505c.966 0 1.75.784 1.75 1.75v9.496a.75.75 0 0 1-1.5 0V7.56L7.03 18.03a.75.75 0 0 1-1.06-1.061L16.44 6.5H8.744a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd"/></svg>\')',
                 'red-carpet': "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_8817dd42aa.png')",
+                'text-gradient-light': 'linear-gradient(90deg,#30ABC6,#F35454,#2F80FA)',
+                'text-gradient-dark': 'linear-gradient(90deg,#F54E00,#F7A501,#29DBBB,#EB9D2A,#F54E00)',
             },
             backgroundPosition: {
                 0: '0',
@@ -246,6 +248,7 @@ module.exports = {
                 button: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
                 nav: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
+                rounded: ['Open Runde', 'sans-serif'],
                 squeak: ['Squeak', 'sans-serif'],
                 comic: [
                     'Comic Sans MS',
@@ -396,6 +399,32 @@ module.exports = {
                         transform: 'translateY(-10px)',
                     },
                 },
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-6px)' },
+                },
+                breathe: {
+                    '0%, 100%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(1.03)' },
+                },
+                shimmer: {
+                    '0%': { 'background-position': '200% 0' },
+                    '100%': { 'background-position': '-200% 0' },
+                },
+                'hogfather-roll': {
+                    '0%': { left: '0', transform: 'scaleX(-1) translateY(-75%)' },
+                    '44%': { left: 'calc(100% - 32px)', transform: 'scaleX(-1) translateY(-75%)' },
+                    '46%': { left: 'calc(100% - 32px)', transform: 'scaleX(1) translateY(-75%)' },
+                    '98%': { left: '0', transform: 'scaleX(1) translateY(-75%)' },
+                    '100%': { left: '0', transform: 'scaleX(-1) translateY(-75%)' },
+                },
+                'hogfather-jump': {
+                    '0%': { 'margin-top': '0' },
+                    '30%': { 'margin-top': '-24px' },
+                    '60%': { 'margin-top': '0' },
+                    '80%': { 'margin-top': '-8px' },
+                    '100%': { 'margin-top': '0' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
@@ -417,6 +446,11 @@ module.exports = {
                 'gradient-rotate': 'gradient-rotate 3s ease-in-out infinite',
                 'slide-up-fade-in': 'slideUpFadeIn 300ms ease-out forwards',
                 'slide-up-fade-out': 'slideUpFadeOut 300ms ease-in forwards',
+                float: 'float 2s ease-in-out infinite',
+                breathe: 'breathe 3s ease-in-out infinite',
+                shimmer: 'shimmer 8s linear infinite',
+                'hogfather-roll': 'hogfather-roll 20s ease-in-out infinite',
+                'hogfather-jump': 'hogfather-jump 400ms ease-out',
             },
             containers: {
                 '2xs': '16rem',

@@ -10,11 +10,13 @@ import Alpha from './_snippets/alpha.mdx'
 
 Product tours are multi-step walkthroughs that highlight elements in your UI. You build them visually using the PostHog toolbar directly on your site.
 
-## Launch the toolbar
+## Create a new tour
 
 1. Go to [Product tours](https://app.posthog.com/product_tours) in PostHog
-2. Click **New tour** and select **Product tour**
-3. Enter the URL where you want to build the tour and click **Launch**
+2. Click **New** and select **Product tour**
+3. Enter a name for your tour and click **Create**
+
+After creation, you're taken to the tour editor where you can start building your tour.
 
 ## Define your tour steps
 
@@ -33,6 +35,15 @@ When attaching elements to steps, you'll be able to choose between **Auto** and 
 - **Manual**: Provide a CSS selector for us to target the element.
 
 To learn more about auto vs. manual element targeting, see [Element selection](/docs/product-tours/element-selection).
+
+**Tip:** If the sidebar overlaps with elements on your site, click the toggle button in the sidebar header to move it to the left or right side of the screen.
+
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/tour_sidebar_button_dcefeb85b8.mp4" 
+  alt="Move the sidebar if it blocks elements on your page"
+  autoPlay={true}
+  loop={true}
+/>
 
 ### Record your session (optional)
 
@@ -83,4 +94,6 @@ Embed a survey question mid-tour (open text or rating scale). Responses are capt
 
 ## Save and launch
 
-Click **Save** in the toolbar to save your tour as a draft. When ready, [launch the tour](/docs/product-tours/managing-tours).
+Changes auto-save as you edit. A status indicator in the header shows whether your changes are **unsaved**, **saving**, or **saved**.
+
+When you're done, click **Save** to publish your changes or **Cancel** to discard the draft. When ready, [launch the tour](/docs/product-tours/managing-tours).

@@ -119,7 +119,7 @@ This enables any geolocation-based flags to work without manually setting these 
 You can configure the `feature_flag_request_timeout_ms` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
 
 ```js
-posthog.init('<ph_project_api_key>', { 
+posthog.init('<ph_project_token>', { 
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>'
   feature_flag_request_timeout_ms: 3000 // Time in milliseconds. Default is 3000 (3 seconds).

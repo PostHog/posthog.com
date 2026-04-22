@@ -103,7 +103,7 @@ You can configure the `FeatureFlagRequestTimeout` parameter when initializing yo
 
 ```go
  client, _ := posthog.NewWithConfig(
-   os.Getenv("<ph_project_api_key>"),
+   os.Getenv("<ph_project_token>"),
    posthog.Config{
       PersonalApiKey:            "your personal API key", // Optional, but much more performant.  If this token is not supplied, then fetching feature flag values will be slower.
       Endpoint:                  "<ph_client_api_host>",

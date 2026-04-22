@@ -5,13 +5,22 @@ export const elastic = {
         icon: '/images/competitors/elastic.png',
     },
     products: {
+        product_analytics: {
+            available: false,
+        },
+        session_replay: {
+            available: false,
+        },
+        error_tracking: {
+            available: true,
+        },
         logs: {
             available: true,
             core_logging_and_ingestion: {
                 features: {
                     centralized_log_ingestion_search: true,
                     live_tail_real_time_logs: false,
-                    native_open_telemetry_ingest: 'Limited',
+                    native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
                 },
             },
@@ -33,6 +42,7 @@ export const elastic = {
                 features: {
                     metrics: true,
                     traces: true,
+                    alerting: true,
                     infra_monitoring: true,
                 },
             },
@@ -43,6 +53,23 @@ export const elastic = {
                     predictable_at_scale: false,
                 },
             },
+        },
+        llm_analytics: {
+            available: true,
+        },
+    },
+    platform: {
+        deployment: {
+            self_host: true,
+        },
+        pricing: {
+            transparent_pricing: false,
+        },
+        tools: {
+            ai_assistant: true,
+        },
+        security: {
+            siem: true,
         },
     },
 }

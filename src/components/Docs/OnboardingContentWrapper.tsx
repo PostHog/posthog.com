@@ -137,7 +137,9 @@ export const OnboardingContentWrapper: React.FC<OnboardingContentWrapperProps> =
                 snippets,
             }}
         >
-            {children}
+            <div className="[&_.LemonMarkdown]:overflow-x-auto [&_.LemonMarkdown_table]:w-full [&_.LemonMarkdown_table]:table-fixed">
+                {children}
+            </div>
         </MDXComponentsContext.Provider>
     )
 }

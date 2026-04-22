@@ -12,9 +12,9 @@ Sales, engineering, or support will sometimes tag marketing into customer Slack 
 If it does seem promising, a product marketer will take the lead and loop in events or other teams as needed.
 
 What this article doesn’t cover:
-- [Influencers](/handbook/growth/marketing/influencers) and newsletters
+- [Influencers](/handbook/marketing/influencers) and newsletters
 - Rev-share [partners](/handbook/brand/partners) and individual consultants
-- [Sponsorships](/handbook/growth/marketing/open-source-sponsorship)
+- [Sponsorships](/handbook/marketing/open-source-sponsorship)
 
 ## Integrations and CDP destinations
 
@@ -72,7 +72,7 @@ Examples:
 
 If we're signing anything with legal commitments, that needs to go via <PrivateLink url="https://posthog.slack.com/archives/C08MYQX74KH">#legal</PrivateLink>. If it's an informal exchange of perks, you can usually just coordinate directly with the partner company.
 
-If you’re giving PostHog credits, check with the <SmallTeam slug="billing"/> to explore the options. See the [campaigns and coupons](/handbook/growth/marketing/campaigns-and-coupons) handbook entry for more detail.
+If you’re giving PostHog credits, check with the <SmallTeam slug="billing"/> to explore the options. See the [campaigns and coupons](/handbook/marketing/campaigns-and-coupons) handbook entry for more detail.
 
 When a new startup perk goes live:
 - Add the offer to the [PostHog for startups](/startups) page

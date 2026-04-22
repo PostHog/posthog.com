@@ -1,6 +1,8 @@
 import SensitiveThirdPartyScreens from "./sensitive-third-party-screens.mdx"
 
-To replace any type of `View` with a redacted version in the recording, set the [tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`.
+### Masking views
+
+To mask any type of `View` in the recording, set the [tag](https://developer.android.com/reference/android/view/View#tags) or [contentDescription](https://developer.android.com/reference/android/view/View#attr_android:contentDescription) to `ph-no-capture`.
 
 ```xml
 <ImageView
@@ -11,23 +13,58 @@ To replace any type of `View` with a redacted version in the recording, set the 
 />
 ```
 
+### Unmasking views
+
+To explicitly prevent a `View` from being masked, even when global masking options are enabled, set the [tag](https://developer.android.com/reference/android/view/View#tags) or [contentDescription](https://developer.android.com/reference/android/view/View#attr_android:contentDescription) to `ph-no-mask`.
+
+```xml
+<TextView
+    android:id="@+id/tvPublicLabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:tag="ph-no-mask"
+/>
+```
+
 ### Masking in Jetpack Compose
 
-- You can manually mark a Compose View for masking using the `postHogMask()` view modifier:
+You can manually mark a composable for masking using the `postHogMask()` modifier:
 
 ```android_kotlin
-...
-    Text(
-        text = AnnotatedString(text),
-        modifier =
-            modifier
-                .wrapContentSize()
-                .postHogMask()
-                .clickable {
-                    text = "Sensitive!"
-                },
-    )
-...
+Text(
+    text = AnnotatedString(text),
+    modifier = modifier
+        .wrapContentSize()
+        .postHogMask()
+        .clickable { text = "Sensitive!" },
+)
+```
+
+### Unmasking in Jetpack Compose
+
+To explicitly prevent a composable from being masked, even when global masking options are enabled, use the `postHogUnmask()` modifier:
+
+```android_kotlin
+Text(
+    text = "Always visible",
+    modifier = modifier
+        .wrapContentSize()
+        .postHogUnmask(),
+)
+```
+
+### Precedence and propagation
+
+Both mask and unmask controls apply to all children of the view or composable they are set on. The unmask option (`ph-no-mask` / `postHogUnmask()`) always takes precedence over the mask option (`ph-no-capture` / `postHogMask()`).
+
+Both `postHogMask()` and `postHogUnmask()` accept an `isEnabled` parameter. When set to `false`, the modifier has no effect (as if it was never applied), allowing dynamic control via global settings or remote config:
+
+```android_kotlin
+Text(
+    text = "Conditionally masked",
+    modifier = modifier
+        .postHogMask(isEnabled = shouldApplyMask),
+)
 ```
 
 <SensitiveThirdPartyScreens />

@@ -24,7 +24,7 @@ All events captured during the request (including exceptions) will include these
 If you are using PostHog on your frontend, the JavaScript Web SDK will add the session and distinct ID headers automatically if you enable tracing headers.
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     __add_tracing_headers: ['your-backend-domain.com'] // +
 })
 ```

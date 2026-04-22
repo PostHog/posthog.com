@@ -108,13 +108,13 @@ Start by installing the `posthog-js` package:
 npm i posthog-js
 ```
 
-Next, create a new `renderer.js` file to import and initialize PostHog with our project API key and host (which you can get in [your project settings](https://us.posthog.com/settings/project)). Importantly, because Electron has security restrictions about loading external code, we need to import PostHog's full bundle. This means our Electron initialization look like this:
+Next, create a new `renderer.js` file to import and initialize PostHog with our project token and host (which you can get in [your project settings](https://us.posthog.com/settings/project)). Importantly, because Electron has security restrictions about loading external code, we need to import PostHog's full bundle. This means our Electron initialization look like this:
 
 ```js
 // renderer.js
 import posthog from './node_modules/posthog-js/dist/module.full.no-external.js'
 
-posthog.init("<ph_project_api_key>", {
+posthog.init("<ph_project_token>", {
   api_host: "<ph_client_api_host>"
 })
 ```
@@ -158,7 +158,7 @@ For example, if we wanted to capture a `home_button_clicked` event, we can simpl
 // renderer.js
 import posthog from './node_modules/posthog-js/dist/module.full.no-external.js'
 
-posthog.init("<ph_project_api_key>", {
+posthog.init("<ph_project_token>", {
   api_host: "<ph_client_api_host>"
 })
 

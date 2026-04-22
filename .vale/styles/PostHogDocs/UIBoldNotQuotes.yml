@@ -1,0 +1,13 @@
+extends: existence
+message: 'Use bold (**text**) for UI elements, not quotes.'
+link: https://posthog.com/handbook/docs-and-wizard/docs-style-guide
+level: warning
+scope: text
+nonword: true
+tokens:
+    - 'click the ".*?" button'
+    - 'click ".*?"'
+    - 'select the ".*?" option'
+    - 'the ".*?" tab'
+    - 'the ".*?" menu'
+    - 'the ".*?" setting'

@@ -1,31 +1,29 @@
 Once initialized in `instrumentation-client.js|ts`, import `posthog` from `posthog-js` anywhere and call the methods you need on the `posthog` object.
 
 ```js
-'use client'
-import posthog from 'posthog-js'
+"use client";
+import posthog from "posthog-js";
 
 export default function Home() {
   return (
     <div>
-      <button onClick={() => posthog.capture('test_event')}>
-        Click me for an event
-      </button>
+      <button onClick={() => posthog.capture("test_event")}>Click me for an event</button>
     </div>
   );
 }
 ```
 
-### Using React hooks without PostHogProvider
+### Using React hooks
 
-When PostHog is initialized via `instrumentation-client.ts`, the [React feature flag hooks](/docs/libraries/react#feature-flags) work without wrapping your app in `PostHogProvider`. The hooks default to using the initialized posthog-js singleton:
+The [React feature flag hooks](/docs/libraries/react#feature-flags) work automatically when PostHog is initialized via `instrumentation-client.ts`. The hooks use the initialized posthog-js singleton:
 
 ```js
-'use client'
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+"use client";
+import { useFeatureFlagEnabled } from "@posthog/react";
 
 export default function FeatureComponent() {
-  const showNewFeature = useFeatureFlagEnabled('new-feature')
+  const showNewFeature = useFeatureFlagEnabled("new-feature");
 
-  return showNewFeature ? <NewFeature /> : <OldFeature />
+  return showNewFeature ? <NewFeature /> : <OldFeature />;
 }
 ```

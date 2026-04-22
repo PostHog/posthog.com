@@ -6,7 +6,7 @@ export const kameleoon = {
     },
     products: {
         feature_flags: {
-            available: true,
+            available: 'Enterprise',
             implementation: {
                 features: {
                     local_evaluation: true,
@@ -27,8 +27,11 @@ export const kameleoon = {
                 secondary_metrics: true,
             },
             supported_tests: {
-                multi_armed_bandit: true,
+                multi_armed_bandit: 'Enterprise',
                 mutually_exclusive_experiments: false,
+            },
+            implementation: {
+                multivariate_testing: 'Enterprise',
             },
         },
         product_analytics: {
@@ -49,6 +52,9 @@ export const kameleoon = {
         surveys: {
             available: true,
         },
+        web_analytics: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
@@ -58,6 +64,7 @@ export const kameleoon = {
         pricing: {
             self_serve: false,
             transparent_pricing: false,
+            free_tier: false,
         },
         developer: {
             api: true,
@@ -70,6 +77,7 @@ export const kameleoon = {
         security: {
             history_audit_logs: true,
             role_based_access_control: true,
+            hipaa_ready: 'Enterprise',
         },
     },
     pricing: {
