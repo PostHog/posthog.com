@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-If you plan on recording a demo, a screenshare, or the PostHog UI for use on the PostHog website and/or YouTube channel, the PostHog YouTube team kindly asks you to watch the video below and follow the corresponding instructions for your recordings.
+If you plan on recording a demo, a screen share, or the PostHog UI for use on the PostHog website and/or YouTube channel, the PostHog YouTube team kindly asks you to watch the video below and follow the corresponding instructions for your recordings.
 
 > **Important!** While Loom is great for personal use videos, it does not meet our quality standards for videos that will be going on the PostHog website and/or YouTube channel. Please use [Screen Studio](https://screen.studio/download) for such recordings, steps listed below.
 
@@ -26,15 +26,15 @@ By default, **Screen Studio is free** and there’s **no need to upgrade to a pa
 
 Before recording, make sure you correctly set up the three Screen Studio settings listed below:
 
-- **Camera** - If you’d like to record yourself during your recording, make sure you select which camera you want to record from. Most likely your laptop’s camera.  
+- **Camera** If you’d like to record yourself during your recording, make sure you select which camera you want to record from. Most likely your laptop’s camera.  
               
 > **Important!** Set the “Max Camera Resolution” setting to 4K or the highest available option. If you’d like to record your camera but don’t want to see yourself as you record, enable the “Hide camera preview” option. If you don’t wish to record yourself, then select “Don’t record camera”.   
 
-- **Microphone** - Select which microphone you’d like to record your audio from. Be sure to enable the “Reduce noise and normalize volume” setting. 
+- **Microphone** Select which microphone you’d like to record your audio from. Be sure to enable the “Reduce noise and normalize volume” setting. 
 
-- **System Audio** - If your screen recording requires that you capture audio from an app, then select the appropriate option. Otherwise, select the “Don’t record system audio” to ensure no system audio is recorded.
+- **System Audio** If your screen recording requires that you capture audio from an app, then select the appropriate option. Otherwise, select the “Don’t record system audio” to ensure no system audio is recorded.
 
-## 3. Set Up 16:9 Recording Area
+## 3. Set Up 16:9 recording area
 
 You’ll need to ensure your recording area is a 16:9 aspect ratio. Most displays are not 16:9 by default. If yours is not or you are unsure, follow the instructions below:
 
@@ -48,7 +48,7 @@ You’ll need to ensure your recording area is a 16:9 aspect ratio. Most display
 - Your computer’s menu bar  
 - Your computer’s docks/apps 
 
-## 4 Prepare to record
+## 4. Prepare to record
 
 Run through this checklist before recording to make sure things go as smoothly as possible:
 
