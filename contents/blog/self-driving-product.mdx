@@ -38,17 +38,17 @@ The Society of Automotive Engineers has a framework for self-driving. Six levels
 
 It maps surprisingly cleanly onto building products with AI.
 
-**Level 0 – No automation.** Analytics without AI. Dashboards, filters, SQL. Everything you do, you do yourself through an interface. Really good docs are your best bet for troubleshooting. This is most of what shipped before 2024.
+**Level 0 – No automation.** Analytics without AI, code without autocomplete. Dashboards, filters, SQL. Really good docs are your best bet for troubleshooting. Engineers write all the code, frame every question, and interpret all the data themselves. This was most of what shipped before 2024.
 
-**Level 1 – Basic data analysis.** The agent answers specific, well-formed questions like *"How many users are on the pro plan?"* or *"What's our conversion rate?"* It falls apart when the question is ambiguous, or the query engine can't express it. This was the first version of [PostHog AI](/ai).
+**Level 1 – Basic assistance.** The agent answers specific, well-formed questions like *"How many users are on the pro plan?"* and drafts short, scoped snippets when you point at the file. It falls apart when the question is ambiguous or the change spans more than a function. Engineers still decide what to ask, where to put the code, and how to read the answer. This was the first version of [PostHog AI](/ai).
 
-**Level 2 – Versatile data analysis.** The agent handles ambiguity and stitches queries together. It answers vague, loaded questions like *"Which features do users engage with most?"* PostHog AI [reached this state in 2025](/blog/8-learnings-from-1-year-of-agents-posthog-ai), once reasoning models matured and we learned how to harness them.
+**Level 2 – Versatile assistance.** The agent handles ambiguity, stitches queries together, and writes working functions and files on demand. It answers vague, loaded questions like *"Which features do users engage with most?"* without constant handholding. Engineers still have to know what questions to ask, and how to interpret the output. PostHog AI [reached this state in 2025](/blog/8-learnings-from-1-year-of-agents-posthog-ai), once reasoning models matured.
 
-**Level 3 – Actionable product guidance.** The agent compresses massive amounts of context and responds not just to the query, but suggests meaningful follow-up actions. Late 2025 is when PostHog AI started to feel like the future instead of a fancy search bar – it could summarize thousands of session recordings *and* give suggestions for what to do next.
+**Level 3 – Actionable product guidance.** The agent compresses massive amounts of context and responds not just to the query, but suggests meaningful follow-up actions – often as a draft PR. It summarizes thousands of session recordings *and* proposes the change that addresses them. Engineers review rather than originate; interpretation starts migrating from human to agent. PostHog AI crossed into this territory in late 2025.
 
-**Level 4 – Proactive product maintenance.** The agent understands your codebase, your product data, and the surrounding context – support tickets, internal comms, industry news. It proposes work without being asked and has permissions to ship autonomously. The [PostHog MCP](/docs/model-context-protocol) enables a working prototype of this. You can hand product data to your agent and automate scoped work like bug fixes.
+**Level 4 – Proactive product maintenance.** The agent understands your codebase, your product data, and the surrounding context – support tickets, internal comms, industry news. It proposes and ships work without being asked *(and is trusted to read, write, and delete)*. The [PostHog MCP](/docs/model-context-protocol) enables a working prototype of this today. Engineers set guardrails and approve outcomes; the agent does most of the framing and interpretation.
 
-**Level 5 – Self-driving development.** An agentic system that decides, orchestrates, and evaluates itself. You might prompt work and weigh in on decisions, but it's largely self-sufficient. *"Just build me an app that generates $1M MRR, bro"* is a plausible starting prompt. That's not why you became a product engineer, though – so what does self-driving actually mean for the human in the loop?
+**Level 5 – Self-driving development.** The full product autonomy loop runs on its own. Signals come in, the agent decides what to do, ships the change, evaluates whether it worked, and updates its memory for next time. You still weigh in on strategy and direction, but the loop between *what users are doing* and *what ships to fix or extend it* closes without a human turning the crank. *"Just build me an app that generates $1M MRR, bro"* is a plausible starting prompt. That's not why you became a product engineer, though – so what does self-driving actually mean for the human in the loop?
 
 ## Code generation ≠ building software
 
@@ -58,23 +58,13 @@ An autonomous vehicle must know where it is, what's around it, what those things
 
 Critically, it does all of that continuously, without being asked. The *self* in self-driving isn't autonomy from the passenger. It's autonomy from instruction.
 
-Apply the same variables to software and the framework looks similar:
-
-- **Localization** – it knows what state it's in. Which users are doing what, which features are healthy, which experiments are running, what shipped yesterday.
-- **Perception** – it curates its own context, from in and outside the system. Support tickets connect to session replays; Slack threads connect to code changes.
-- **Prediction** – it has a working model of what's about to happen. *This cohort is about to churn. This new feature would go viral. Competitors are zigging, so we should zag.*
-- **Planning** – it decides what to do based on data, and forms a plan before merging. Build a fix, run an experiment, add a button, write a doc. It also decides what *not* to do, which is equally important.
-- **Control** – it has what it needs to act without asking. Skills to implement feature flags, permission to merge into master.
-- **Feedback** – it checks whether the execution worked. Did engagement go up? Did latency drop? Did adding a tooltip have a meaningful impact?
-- **Learning** – most importantly, it updates the next decision based on that feedback. If the fix doesn't work, it tries something else. If the experiment was conclusive, it rolls out the best variant. If you told it not to use em dashes, it actually listens to you.
-
 ## Why vibe-coding tools plateau at Level 3
 
-Lovable, Replit, Bolt, v0, and the rest of the vibe-coding cohort have proven you can get surprisingly far by equipping agents with tools and skills. Plug in the right MCP servers, point the agent at a goal, ship a working app before lunch. That's a legitimate Level 3 experience for *building* software, and it's why [AI has quietly eaten the no-code category](/blog/ai-is-killing-no-code-experiments).
+Most coding agents aren't aiming for autonomy from instruction. They're aiming for speed *per* instruction – and they've gotten *very* good at it. Vibe-coding tools have proven you can get surprisingly far by equipping agents with tools and skills: plug in the right MCP servers, point the agent at a goal, ship a working app before lunch. That's a legitimate Level 3 experience for *building* software, and it's why [AI has quietly eaten the no-code category](/blog/ai-is-killing-no-code-experiments).
 
 ![On Wednesdays we do trace reviews](https://res.cloudinary.com/dmukukwp6/image/upload/aps0un_8b5268c19e.jpg)
 
-Lovable itself is already one of the top clients hitting PostHog's MCP server, and [PostHog is a first-class integration in Vercel's v0](/blog/posthog-v0-integration). The vibe-coding cohort isn't the competition here – they're customers reaching for product data to do the Level 3 job better. The ceiling they can't cross is the one that sits above that: the proactive work that starts *after* the app ships.
+Past Level 3, the thing you shipped stops being a prompt-response artifact and becomes a product with users. The signals the agent needs next don't live in the codebase. That's why MCP tool calls against our server have grown ~21× in five months across 70+ clients including Claude Code, Cursor, VS Code, Codex, Lovable, Windsurf, Copilot, and Gemini CLI. Real user data is the line between a vibe-app and a software product.
 
 In a typical week, PostHog customers generate 100,000+ failed queries, 1.2 to 2.6 million new error-tracking issues, and 12 to 47 million raw exceptions. Each one is a candidate signal for an agent to act on – and none of it is visible to a tool whose worldview ends at the last git push.
 
@@ -82,37 +72,33 @@ To shift out of cruise control and into self-driving, an agentic engineering too
 
 ### 1. Tools – atomic capabilities
 
-Tools are agent-friendly descriptions of what your product can do. At PostHog, we treat them as [atomic capabilities](/handbook/engineering/ai/implementation#mcp-tools-vs-skills) – CRUD operations and simple actions that answer *"what can I do?"* Create an insight. Execute a query. Read the taxonomy. Flip a flag. Agents are good at composing simple tools; they're bad at guessing which composite tool you secretly wish you'd built.
+Tools are agent-friendly descriptions of what your product can do. At PostHog we treat them as [atomic capabilities](/handbook/engineering/ai/implementation#mcp-tools-vs-skills) – CRUD operations and simple actions that answer *"what can I do?"* Create an insight. Execute a query. Read the taxonomy. Flip a flag. Open a PR. Agents are good at composing simple tools; they're bad at guessing which composite tool you secretly wish you'd built.
 
-One atomic tool in particular is doing disproportionate work at PostHog: `read_taxonomy`. It lets the agent check what events and properties actually exist before it writes a query. No `read_taxonomy`, no [hallucination protection](/handbook/engineering/ai/architecture).
-
-MCP tool calls against our server have grown ~21× in five months – 60K in October 2025 to 1.26M in March 2026, across 70+ clients including Claude Code, Cursor, VS Code, Codex, Lovable, Windsurf, Copilot, and Gemini CLI. If you haven't shipped an MCP server or a machine-readable API surface, you're invisible in this stack. Tools are table stakes.
+PostHog Code ships with PostHog's MCP server built in, and plugs into any others you bring – Linear, GitHub, Zendesk, Attio, Canva, Atlassian, Notion, Monday. One tool in particular does disproportionate work for coding agents: `read_taxonomy`. It lets the agent check what events and properties actually exist before it writes a query or an instrumentation PR. No `read_taxonomy`, no [hallucination protection](/handbook/engineering/ai/architecture) – and no agent you'd trust with your codebase.
 
 ### 2. Skills – how to get the job done
 
-If tools are the fork and knife, skills are the recipe. A [skill](/handbook/engineering/ai/implementation#mcp-tools-vs-skills) combines tools, query patterns, domain knowledge, and constraints into a playbook. Not a rigid script – more like a doc you'd hand a sharp new hire: *"When investigating a drop in conversion, run a funnel first, then check for correlated flag changes with `feature-flag-get-all`, then pull session replays for the drop-off step."*
+If tools are the fork and knife, skills are the recipe. A [skill](/handbook/engineering/ai/implementation#mcp-tools-vs-skills) combines tools, query patterns, domain knowledge, and constraints into a playbook – not a rigid script, more like a doc you'd hand a sharp new hire: *"When adding error tracking, install the SDK, wire the exception handler, add a test that throws, then verify the event shows up in PostHog."*
 
-The clearest evidence of a skills gap is in our own data. The single most-called tool on PostHog's MCP server is `docs-search`, at ~28K calls a month. That's every agent, more or less, asking our docs for directions. Writing a skill feels like writing a doc – and [most engineers would rather ship the feature](/newsletter/agent-first-product-engineering) than document it. But for a non-human user, a skill *is* the feature.
+The clearest evidence of a skills gap is in our own data: the single most-called tool on PostHog's MCP server is `docs-search`, at ~28K calls a month. That's every coding agent, more or less, asking our docs for directions. PostHog Code has skills for the engineering workflows we see most often – instrumenting events, auditing feature flags, adding error tracking – and you can write your own the same way you'd write an internal runbook. Writing a skill feels like writing a doc – and [most engineers would rather ship the feature](/newsletter/agent-first-product-engineering) than document it. But for a non-human user, a skill *is* the feature.
 
 ### 3. Signals – when work should happen
 
-Tools and skills guide the *what*. Signals determine the *when*.
+Tools and skills guide the *what*. Signals determine the *when*. An exception spike, a checkout funnel drop, a cluster of support tickets that sound suspiciously alike – these are signals. Most products have tools. A few have skills. Almost nobody has signals.
 
-An exception spike, a checkout funnel drop, a replay of someone rage-clicking the same button three times, a cluster of support tickets that sound suspiciously alike – these are signals. Most products have tools. A few have skills. Almost nobody has signals. The [PostHog AI architecture](/handbook/engineering/ai/ai-platform#vision-product-autonomy) treats signals as the entry point to the autonomy loop: raw observations get deduplicated, contextualized, and turned into concrete plans an agent can execute.
+PostHog Code sits directly on the signal source: your product data. Instead of you noticing the funnel drop and prompting the agent, the drop itself is the prompt. The [PostHog AI architecture](/handbook/engineering/ai/ai-platform#vision-product-autonomy) treats signals as the entry point to the autonomy loop – raw observations get deduplicated, contextualized, and turned into concrete plans the agent can execute or queue for your review. You stop triaging a noisy inbox and start opening a pre-framed to-do list.
 
 ### 4. Memory – what the agent already knows
 
-Signals tell the agent something is happening *now*. Memory tells it what happened last time, and the time before that, and whether what it's about to try has already failed.
+Signals tell the agent something is happening *now*. Memory tells it what happened last time, whether what it's about to try has already failed, and whether you yelled at it yesterday for em-dashing every sentence. Without memory, the agent is a goldfish with git access – re-opening the same PR every Tuesday because the same signal fires every Tuesday. It also keeps costs sane; we [caught our own AI agent embezzling tokens](/blog/optimizing-agent-cost) because it kept re-running work it had already done.
 
-Without memory, the agent is a goldfish with git access. It re-opens the same PR every Tuesday because the same signal fires every Tuesday. Memory also keeps costs sane – we [caught our own AI agent embezzling tokens](/blog/optimizing-agent-cost) because it kept re-running work it had already done. Durable state prevents that.
-
-Memory isn't a context window. It's a persistent model of the product's own history: every PR the agent has opened, linked to the signal that triggered it, linked to the metric that confirmed or denied the fix, queryable by the next agent run. PostHog's [single-loop architecture](/handbook/engineering/ai/architecture) is our version of this – the agent maintains full context across decisions instead of handing off to amnesiac sub-agents. Nearly every other coding agent on the market still skips durable memory in favor of a context window that resets the moment you start a new session.
+Memory isn't a context window. It's a persistent model of the product's own history: every PR the agent has opened, linked to the signal that triggered it, linked to the metric that confirmed or denied the fix, queryable by the next run. PostHog Code shares that memory across sessions, across agents, and across humans on the team – so switching between Claude Code and Codex (or between engineers) doesn't wipe what's already been tried. Nearly every other coding agent on the market still skips durable memory in favor of a context window that resets the moment you start a new session.
 
 ### 5. Evaluation – did the thing actually work?
 
-The loop doesn't close without this. An agent can ship a PR. A self-driving product ships a PR and then checks whether the thing it was trying to fix actually got fixed – against the same signal that triggered the work in the first place.
+The loop doesn't close without this. An agent can ship a PR. A self-driving product ships a PR and then checks whether the thing it was trying to fix actually got fixed – against the same signal that triggered the work in the first place. Evals are the hard part nobody was trained for. [Testing AI agents](/blog/testing-ai-agents) looks nothing like testing traditional software, and "it runs without erroring" is not a pass condition.
 
-Evals are the hard part nobody was trained for. [Testing AI agents](/blog/testing-ai-agents) looks nothing like testing traditional software, and "it runs without erroring" is not a pass condition. We've written about running [LLM-as-a-judge evals](/blog/stop-ai-slop) against your own agent output for exactly this reason. At PostHog, evaluation is the last leg of the loop: a long-running job that re-queries the same dashboard, funnel, or experiment that fired the signal, and decides whether the PR moved the needle or needs a revert.
+PostHog Code schedules evaluation as a long-running Temporal job, so the check runs hours or days after a PR merges – long after any chat session would have expired. The same dashboard, funnel, experiment, or [LLM-as-a-judge eval](/blog/stop-ai-slop) that fired the signal gets re-queried, and if the metric didn't move (or moved the wrong way), the agent reverts or reopens the work. Skip this step and you don't have a self-driving product – you have a PR generator with opinions.
 
 ## The product autonomy loop
 
@@ -131,7 +117,7 @@ Which brings us back to Level 5 – and the question I ducked earlier.
 We've been sitting on a weirdly complete set of ingredients for this loop:
 
 - **Data** – years of it. [Errors](/docs/error-tracking/start-here), [session replays](/docs/session-replay/start-here), [LLM traces](/docs/llm-analytics/start-here), [experiments](/docs/experiments/start-here), [feature flags](/docs/feature-flags/start-here), revenue. The event stream of what real users are actually doing.
-- **Warehouse** – ClickHouse for storing and querying events and agent decision history in the same place.
+- **Warehouse** – your full data stack in one place: product events, application data, and anything you sync from Stripe, Salesforce, Snowflake, BigQuery, or flat files. Runs on ClickHouse today, DuckDB in the near future.
 - **Orchestration** – Temporal for long-running jobs that outlive any single agent session, so evaluation runs hours after execution without anyone holding the process open.
 - **Sandboxes** – cloud agents for running code safely, without blowing up production.
 - **Devtools** – a growing catalog of the things product engineers actually reach for.
