@@ -2,7 +2,7 @@
 title: Great companies are built in hackathons
 date: 2025-09-30
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/495141653_3354558f_3262_48a5_aeb8_81c9a2fd3d9f_8c1a84f082.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/hackathon_fefb490d64.jpg
 author:
  - ian-vanagas
 featuredImageType: full
