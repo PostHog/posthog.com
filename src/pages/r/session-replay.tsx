@@ -9,10 +9,9 @@ import List from 'components/List'
 import { IconGraph, IconToggle, IconWarning } from '@posthog/icons'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import Link from 'components/Link'
-import HasuraLogo from 'components/CustomerLogos/HasuraLogo'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
-import NetdataLogo from 'components/CustomerLogos/NetdataLogo'
-import PryLogo from 'components/CustomerLogos/PryLogo'
+import JuiceboxLogo from 'components/CustomerLogos/JuiceboxLogo'
+import ExaLogo from 'components/CustomerLogos/ExaLogo'
 
 const TOP_COUNT = 8
 const PLATFORM_ORDER = [
@@ -116,7 +115,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             </Link>
                             , your AI agent can query session replays, summarize user behavior, and turn bug reports
                             into PRs, all from Claude Code, Cursor, Zed, or Windsurf. Free for 5,000 web + 2,500 mobile
-                            recordings/month, no per-seat pricing.
+                            recordings/month, no per-seat pricing, and we won't even ask for your credit card.
                         </p>
                     </div>
                     <div>
@@ -130,10 +129,14 @@ export default function SessionReplayLanding(): JSX.Element {
 
                 <div className="mb-20 max-w-7xl mx-auto">
                     <div className="flex flex-wrap items-center gap-x-12 gap-y-6 text-primary dark:text-primary-dark">
-                        <HasuraLogo className="fill-current object-contain max-w-full h-10" />
                         <ElevenLabsLogo className="fill-current object-contain max-w-full h-8" />
-                        <NetdataLogo className="fill-current object-contain max-w-full h-8" />
-                        <PryLogo className="fill-current object-contain max-w-full h-8" />
+                        <img
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/kilocode_logo_c58c88f029.webp"
+                            alt="Kilo Code"
+                            className="object-contain max-w-full h-8 w-auto"
+                        />
+                        <JuiceboxLogo className="fill-current object-contain max-w-full h-10" />
+                        <ExaLogo className="fill-current object-contain max-w-full h-9" />
                     </div>
                     <p className="text-xs opacity-60 mt-3 !mb-0">
                         These are some of our paying customers.
