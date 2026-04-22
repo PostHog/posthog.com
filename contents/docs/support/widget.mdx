@@ -41,6 +41,35 @@ You can optionally require users to identify themselves before starting a conver
 
 When enabled, the form appears before they can send their first message. The collected information is used to link the ticket to a person in PostHog.
 
+## Email replies to widget tickets
+
+When a customer provides their email in the widget, your team's replies are also sent to them via email. They don't have to return to your site to see your response.
+
+### Requirements
+
+For email replies to work:
+
+1. **Customer provides email** – The customer must enter an email address in the widget (either via the identification form or the JavaScript API)
+2. **Email channel configured** – You must have a [verified email configuration](/docs/support/email) set up for your team
+3. **Email enabled** – Email must be enabled in your Support settings
+
+When these conditions are met, replies are sent automatically using your team's first verified email configuration.
+
+### How it works
+
+1. Customer starts a conversation and provides their email
+2. Your team replies to the ticket in PostHog
+3. The reply is sent to the customer's email address
+4. If the customer replies by email, the message appears in the same ticket
+
+Customers can follow the conversation from their inbox, while your team manages everything in PostHog.
+
+<CalloutBox icon="IconInfo" title="Email-origin vs widget-origin tickets" type="fyi">
+
+Tickets created via the [email channel](/docs/support/email) always send email replies. Widget tickets only send email replies when the customer has shared their email address.
+
+</CalloutBox>
+
 ## Domain restrictions
 
 You can restrict which domains the widget appears on for security:
