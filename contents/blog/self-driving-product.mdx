@@ -30,13 +30,13 @@ Proactive work is what happens when you prompt yourself – when you shift out o
 
 There's a third category in between, and it's the one getting interesting: proactive work a computer could do if it had the tools, context, and permissions. That's where self-driving products live, and the lane we're launching a new product into.
 
-Today, [PostHog Code](/code) enters beta. It's a desktop app for agentic engineering that automates the reactive parts of product building and frames the proactive work for you to steer. It's also the first public piece of a much bigger bet (more on that later).
+Today, [PostHog Code](/code) enters beta. It's a desktop app for agentic engineering that automates the reactive parts of product building and frames the proactive work for you to steer.
 
 If you've been following [our AI work](/blog/8-learnings-from-1-year-of-agents-posthog-ai), you probably saw this coming. If not, you might reasonably wonder why we think we can win in a space that has Cursor, Claude Code, Codex, and a new entrant every other Tuesday. This post is the map, how we're thinking about it, and why I think you should give our version of agentic engineering a shot.
 
 ## Borrowing a taxonomy from the car people
 
-The Society of Automotive Engineers has had a framework for self-driving since 2014. Six levels of autonomy, from Level 0 (you do everything) to Level 5 (the car does everything, everywhere, in any condition). It's a good mental model because it forces specificity about where the machine takes over and where a human is still on the hook.
+The Society of Automotive Engineers has a framework for self-driving. Six levels of autonomy, from Level 0 (you do everything) to Level 5 (the car does everything, everywhere, in any condition). It's a good mental model because it forces specificity about where the machine takes over and where a human is still on the hook.
 
 It maps surprisingly cleanly onto building products with AI.
 
@@ -46,7 +46,7 @@ It maps surprisingly cleanly onto building products with AI.
 
 **Level 2 – Versatile data analysis.** The agent handles ambiguity and stitches queries together. It answers vague, loaded questions like *"Which features do users engage with most?"* PostHog AI [reached this state in 2025](/blog/8-learnings-from-1-year-of-agents-posthog-ai), once reasoning models matured and we learned how to harness them.
 
-**Level 3 – Actionable product guidance.** The agent compresses massive amounts of context and responds not just to the query, but suggests meaningful follow-up actions. Late 2025 is when PostHog AI started to feel like the future instead of a fancy search bar – it could summarize thousands of session recordings *and* give excellent suggestions for what to do next.
+**Level 3 – Actionable product guidance.** The agent compresses massive amounts of context and responds not just to the query, but suggests meaningful follow-up actions. Late 2025 is when PostHog AI started to feel like the future instead of a fancy search bar – it could summarize thousands of session recordings *and* give suggestions for what to do next.
 
 **Level 4 – Proactive product maintenance.** The agent understands your codebase, your product data, and the surrounding context – support tickets, internal comms, industry news. It proposes work without being asked and has permissions to ship autonomously. The [PostHog MCP](/docs/model-context-protocol) enables a working prototype of this. You can hand product data to your agent and automate scoped work like bug fixes.
 
@@ -116,7 +116,7 @@ The loop doesn't close without this. An agent can ship a PR. A self-driving prod
 
 Evals are the hard part nobody was trained for. [Testing AI agents](/blog/testing-ai-agents) looks nothing like testing traditional software, and "it runs without erroring" is not a pass condition. We've written about running [LLM-as-a-judge evals](/blog/stop-ai-slop) against your own agent output for exactly this reason. At PostHog, evaluation is the last leg of the loop: a long-running job that re-queries the same dashboard, funnel, or experiment that fired the signal, and decides whether the PR moved the needle or needs a revert.
 
-## The loop
+## The product autonomy loop
 
 Stitch the five together and a pattern falls out:
 
@@ -148,7 +148,7 @@ The same pattern plays out for the internal agents we've already built ourselves
 
 Practically, that means a prioritized to-do list instead of a noisy one, and automatic code changes for stuff that doesn't need your energy. You can switch between Claude Code and Codex from a single interface, plug in your MCP servers (Attio, Canva, Atlassian, Notion, Monday), and pull context from Linear, Zendesk, and GitHub into the same pipeline as your product data.
 
-## The TL;DR (and CTA)
+## Test drive a self-driving product
 
 Our long-term vision is Level 5 self-driving. We're not *quite* there yet. The current version of PostHog Code is more of a workbench. It's useful on its own, and – more importantly – it's ahead of general-purpose agents on the one axis we care about: **product context comes pre-loaded.**
 
