@@ -391,15 +391,17 @@ export const QuestionForm = ({
         setLoading(true)
         const transformedValues = await transformValues(values, user)
 
-        setLoading(false)
-        setView(null)
-        setFormValues(null)
-
         if (formType === 'question') {
             createQuestion(transformedValues).then((data) => {
+                setLoading(false)
+                setView(null)
+                setFormValues(null)
                 onSubmit?.(transformedValues, formType, data)
             })
         } else if (formType === 'reply' && questionId && reply) {
+            setLoading(false)
+            setView(null)
+            setFormValues(null)
             reply(transformedValues.body).then((data) => {
                 onSubmit?.(transformedValues, formType, data)
             })
