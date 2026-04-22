@@ -119,7 +119,7 @@ When you have a piece of code ready to be reviewed, create a PR. Link the PR to 
 
 All PRs should be attributable to a human author as far as possible, even if they were assisted by an agent.
 
-Fully automatically generated PRs might come from systems like Dependabot or from an agent like PostHog Code. These PRs are fine, but they should be clearly labelled as such and include a clear description of the changes being made and any relevant context about the generation process. These PRs should in turn not be attributed to a human author, as the changes were not directly or indirectly made by a human.
+Fully automatically generated PRs might come from an agent like PostHog Code or from systems like Dependabot. These PRs are fine, but they should be clearly labelled as such and include a clear description of the changes being made and any relevant context about the generation process. These PRs should in turn never be attributed to a human author, as the changes were not directly or indirectly made by a human.
 
 To make sure our issues are linked correctly to the PRs, you can tag the issue in your commit.
 
