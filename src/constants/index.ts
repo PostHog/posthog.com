@@ -1,5 +1,7 @@
 // Paths that have raw markdown available for copying/downloading
 export const MARKDOWN_CONTENT_PATHS = ['/docs', '/handbook'] as const
+export const isMarkdownContentPath = (path: string) =>
+    MARKDOWN_CONTENT_PATHS.some((p) => path === p || path.startsWith(`${p}/`))
 
 // Default avatar fallback (Max the hedgehog)
 export const AVATAR_FALLBACK_URL =

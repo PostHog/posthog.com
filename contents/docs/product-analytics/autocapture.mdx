@@ -8,12 +8,14 @@ availability:
   enterprise: full
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
-import { CalloutBox } from 'components/Docs/CalloutBox'
-import { Tab } from 'components/Tab'
+import { ProductScreenshot } from "components/ProductScreenshot";
+import { CalloutBox } from "components/Docs/CalloutBox";
+import { Tab } from "components/Tab";
 
-export const ImgClipboardAuocaptureLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/autocapture/clipboard-activity-light.png"
-export const ImgClipboardAuocaptureDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/autocapture/clipboard-activity-dark.png"
+export const ImgClipboardAuocaptureLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/autocapture/clipboard-activity-light.png";
+export const ImgClipboardAuocaptureDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/autocapture/clipboard-activity-dark.png";
 
 PostHog can automatically capture a variety of events in your app without specific tracking code. This page covers the different types of events that PostHog can capture and how to configure them.
 
@@ -21,22 +23,21 @@ PostHog can automatically capture a variety of events in your app without specif
 
 PostHog can automatically capture these types of data without specific tracking code:
 
-| Type | Description |
-|------|-------------|
-| [Interaction](/docs/product-analytics/autocapture#interaction-autocapture) | Captures clicks, taps, and other user interactions |
-| [Navigation](/docs/product-analytics/autocapture#navigation-autocapture) | Captures pageviews, pageleaves, and screen views |
-| [Clipboard](/docs/product-analytics/autocapture#clipboard-autocapture) | Captures copy and paste actions |
-| [Heatmap](/docs/product-analytics/autocapture#heatmap-autocapture) | Shows where users interact with your product the most |
-| [Dead clicks](/docs/product-analytics/autocapture#dead-clicks-autocapture) | Captures clicks that don't trigger a change to the page |
-| [Exception](/docs/error-tracking/start-here) | Captures errors and crashes. See the [error tracking](/docs/error-tracking/start-here) docs for more information. |
-| [Session](/docs/session-replay/installation) | Records real user behavior for playback. See the [session replay](/docs/session-replay/installation) docs for more information. |
-| [Web vitals](/docs/web-analytics/web-vitals) | Captures largest contentful paint, first input delay, cumulative layout shift, and first contentful paint |
-| [Lifecycle](/docs/product-analytics/autocapture#navigation-and-lifecycle-event-autocapture) | Captures app launches, backgrounds, and updates. |
-
+| Type                                                                                         | Description                                                                                                                     |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| [Interaction](/docs/product-analytics/autocapture#interaction-autocapture)                   | Captures clicks, taps, and other user interactions                                                                              |
+| [Navigation](/docs/product-analytics/autocapture#navigation-and-lifecycle-event-autocapture) | Captures pageviews, pageleaves, and screen views                                                                                |
+| [Clipboard](/docs/product-analytics/autocapture#clipboard-autocapture)                       | Captures copy and paste actions                                                                                                 |
+| [Heatmap](/docs/product-analytics/autocapture#heatmap-autocapture)                           | Shows where users interact with your product the most                                                                           |
+| [Dead clicks](/docs/product-analytics/autocapture#dead-clicks-autocapture)                   | Captures clicks that don't trigger a change to the page                                                                         |
+| [Exception](/docs/error-tracking/start-here)                                                 | Captures errors and crashes. See the [error tracking](/docs/error-tracking/start-here) docs for more information.               |
+| [Session](/docs/session-replay/installation)                                                 | Records real user behavior for playback. See the [session replay](/docs/session-replay/installation) docs for more information. |
+| [Web vitals](/docs/web-analytics/web-vitals)                                                 | Captures largest contentful paint, first input delay, cumulative layout shift, and first contentful paint                       |
+| [Lifecycle](/docs/product-analytics/autocapture#navigation-and-lifecycle-event-autocapture)  | Captures app launches, backgrounds, and updates.                                                                                |
 
 ## Supported SDKs
 
-Autocapture is available in the following SDKs, each with a different set of captured events:  
+Autocapture is available in the following SDKs, each with a different set of captured events:
 
 - [JavaScript Web](/docs/libraries/js) - enabled by default
 - [React](/docs/libraries/react) - enabled by default
@@ -47,7 +48,7 @@ Autocapture is available in the following SDKs, each with a different set of cap
 
 <CalloutBox icon="IconInfo" title="Looking for session and exception autocapture?" type="fyi">
 
-  You can also autocapture session and exception events. See [session replay](/docs/session-replay/installation) and [error tracking](/docs/error-tracking/start-here) for more information.
+You can also autocapture session and exception events. See [session replay](/docs/session-replay/installation) and [error tracking](/docs/error-tracking/start-here) for more information.
 
 </CalloutBox>
 
@@ -68,26 +69,26 @@ The [JavaScript web SDK](/docs/libraries/js) captures the following events by de
 
 - Interactions like clicks with a tag like `a`, `button`, `form`, `input`, `select`, `textarea`, `label`
 - Form submissions and form changes
-- Changes on content with `contenteditable="true"`. 
+- Changes on content with `contenteditable="true"`.
 - Copies from clipboard
 
 Autocaptures are [displayed](https://app.posthog.com/activity/explore) with names like `clicked span with text "Delete"`. You can filter for **Autocapture** events to see all interactions.
 
 #### Configuring interaction autocapture
 
-You can configure `posthog-js` to autocapture information that users copy or cut on your page with the `capture_copied_text` config option. 
+You can configure `posthog-js` to autocapture information that users copy or cut on your page with the `capture_copied_text` config option.
 
 You can configure the following options:
 
-| Option | Description |
-|--------|-------------|
-| `url_allowlist`<br/>**Type:** `(string \| RegExp)[]` | List of URLs to enable autocapture on. Can be strings to match or regexes (e.g., `['https://example.com', 'test.com/.*']`). Useful when you want to autocapture on specific pages only. If both `url_allowlist` and `url_ignorelist` are set, the allowlist is checked first, then the ignorelist (which can override the allowlist). |
-| `url_ignorelist`<br/>**Type:** `(string \| RegExp)[]` | List of URLs to not enable autocapture on. Can be strings to match or regexes (e.g., `['https://example.com', 'test.com/.*']`). Useful when you want to autocapture on most pages but not some specific ones. |
-| `dom_event_allowlist`<br/>**Type:** `DomAutocaptureEvents[]` | List of DOM events to enable autocapture on (e.g., `['click', 'change', 'submit']`). |
-| `element_allowlist`<br/>**Type:** `AutocaptureCompatibleElement[]` | List of DOM elements to enable autocapture on (e.g., `['a', 'button', 'form', 'input', 'select', 'textarea', 'label']`). We consider the element tree from root to target, so if `button` is in the allowlist, clicks on `button` or its children (like `svg`) are captured, but not clicks on parent `div` elements. |
-| `css_selector_allowlist`<br/>**Type:** `string[]` | List of CSS selectors to enable autocapture on (e.g., `['[ph-capture]']`). We consider the element tree from root to target, so if `['[id]']` is in the allowlist, clicks on elements with IDs or their parents with IDs are captured. Everything is enabled when there's no allowlist. |
-| `element_attribute_ignorelist`<br/>**Type:** `string[]` | Exclude certain element attributes from autocapture (e.g., `['aria-label']` or `['data-attr-pii']`). |
-| `capture_copied_text`<br/>**Type:** `boolean` | When set to `true`, autocapture will capture the text of any element that is cut or copied. |
+| Option                                                             | Description                                                                                                                                                                                                                                                                                                                           |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `url_allowlist`<br/>**Type:** `(string \| RegExp)[]`               | List of URLs to enable autocapture on. Can be strings to match or regexes (e.g., `['https://example.com', 'test.com/.*']`). Useful when you want to autocapture on specific pages only. If both `url_allowlist` and `url_ignorelist` are set, the allowlist is checked first, then the ignorelist (which can override the allowlist). |
+| `url_ignorelist`<br/>**Type:** `(string \| RegExp)[]`              | List of URLs to not enable autocapture on. Can be strings to match or regexes (e.g., `['https://example.com', 'test.com/.*']`). Useful when you want to autocapture on most pages but not some specific ones.                                                                                                                         |
+| `dom_event_allowlist`<br/>**Type:** `DomAutocaptureEvents[]`       | List of DOM events to enable autocapture on (e.g., `['click', 'change', 'submit']`).                                                                                                                                                                                                                                                  |
+| `element_allowlist`<br/>**Type:** `AutocaptureCompatibleElement[]` | List of DOM elements to enable autocapture on (e.g., `['a', 'button', 'form', 'input', 'select', 'textarea', 'label']`). We consider the element tree from root to target, so if `button` is in the allowlist, clicks on `button` or its children (like `svg`) are captured, but not clicks on parent `div` elements.                 |
+| `css_selector_allowlist`<br/>**Type:** `string[]`                  | List of CSS selectors to enable autocapture on (e.g., `['[ph-capture]']`). We consider the element tree from root to target, so if `['[id]']` is in the allowlist, clicks on elements with IDs or their parents with IDs are captured. Everything is enabled when there's no allowlist.                                               |
+| `element_attribute_ignorelist`<br/>**Type:** `string[]`            | Exclude certain element attributes from autocapture (e.g., `['aria-label']` or `['data-attr-pii']`).                                                                                                                                                                                                                                  |
+| `capture_copied_text`<br/>**Type:** `boolean`                      | When set to `true`, autocapture will capture the text of any element that is cut or copied.                                                                                                                                                                                                                                           |
 
 Here's a full example of how to configure autocapture:
 
@@ -99,17 +100,17 @@ posthog.init('<ph_project_token>', {
         // URL filtering
         url_allowlist: ['https://example.com', 'test.com/.*'],
         url_ignorelist: ['https://example.com/admin', 'test.com/private/.*'],
-        
+
         // Event filtering
         dom_event_allowlist: ['click', 'change', 'submit', 'input'],
-        
+
         // Element filtering
         element_allowlist: ['a', 'button', 'form', 'input', 'select', 'textarea', 'label'],
         css_selector_allowlist: ['[ph-capture]', '[data-track]'],
-        
+
         // Attribute filtering
         element_attribute_ignorelist: ['aria-label', 'data-attr-pii', 'data-sensitive'],
-        
+
         // Copy/cut capture
         capture_copied_text: true,
     },
@@ -118,7 +119,8 @@ posthog.init('<ph_project_token>', {
 
 #### Disabling interaction autocapture
 
-You can disable autocapture in two ways:
+You can disable interaction autocapture in two ways:
+
 - In your [project settings](https://us.posthog.com/project/settings)
 - By setting `autocapture: false` in the [config](/docs/libraries/js/config)
 
@@ -134,13 +136,11 @@ posthog.init('<ph_project_token>', {
 posthog.set_config({ autocapture: false })
 ```
 
-> **Note:** Disabling autocapture in your project settings isn't instant. PostHog will continue to capture events where it is initialized. Instead, autocaptured events will taper off as users trigger reinitialization of PostHog (like when they reload your site). 
->
-> Disabling autocapture does not disable capture of page views or page leaves. See [navigation autocapture](#navigation-autocapture) for more information.
+> **Note:** Disabling **interaction** autocapture does not disable **navigation** autocapture (pageviews and pageleaves). See [navigation autocapture](#navigation-and-lifecycle-event-autocapture) for how to disable those separately.
 
 #### Capturing additional properties in autocapture events
 
-If you add a data attribute onto an element in the format `data-ph-capture-attribute-some-key={someValue}`, then any autocapture event from that element or one of its children will have the property `some-key: 'someValue'` added to it. This can be useful when you want to add additional information to autocapture events. 
+If you add a data attribute onto an element in the format `data-ph-capture-attribute-some-key={someValue}`, then any autocapture event from that element or one of its children will have the property `some-key: 'someValue'` added to it. This can be useful when you want to add additional information to autocapture events.
 
 As an example, say you have a notification bell with a value like this:
 
@@ -173,6 +173,7 @@ The below ecommerce example helps you understand _what_ users are interested in,
     Add to cart
 </button>
 ```
+
 Replace the `{productXx}` values with the relevant information available on the webpage. Now when the _Add to cart_ button is clicked, the autocapture event will include the product information in the event's properties, like:
 
 ```json
@@ -202,19 +203,21 @@ In this example, the `product-id` property will be sent with the form submission
 The following example shows how you can use the `data-ph-capture-attribute` attribute dynamically in a React component. The `product-name` property will be sent with the form submission event.
 
 ```tsx
-import { useState } from 'react'
+import { useState } from "react";
 
 const MyForm = () => {
-  const [productName, setProductName] = useState('')
+  const [productName, setProductName] = useState("");
   return (
-    <form
-        data-ph-capture-attribute-name={productName}
-    >
-        <input name="product-name" onChange={(e) => setProductName(e.target.value)} value={productName}/>
-        <button type="submit">Submit</button>
+    <form data-ph-capture-attribute-name={productName}>
+      <input
+        name="product-name"
+        onChange={(e) => setProductName(e.target.value)}
+        value={productName}
+      />
+      <button type="submit">Submit</button>
     </form>
-  )
-}
+  );
+};
 ```
 
 #### Rage clicks autocapture
@@ -265,7 +268,6 @@ view.accessibilityLabel = "ph-no-capture"
 
 For more details on how to setup masking for session replay, please refer to our [privacy controls documentation](/docs/session-replay/privacy?tab=iOS).
 
-
 </Tab.Panel>
 <Tab.Panel>
 
@@ -274,10 +276,13 @@ For more details on how to setup masking for session replay, please refer to our
 The PostHog [React Native SDK](/docs/libraries/react-native) can automatically capture touch events when the user interacts with the screen. To enable this, set the `captureTouches` config option to true in your autocapture config like this:
 
 ```jsx
-<PostHogProvider apiKey="<ph_project_token>" autocapture={{
+<PostHogProvider
+  apiKey="<ph_project_token>"
+  autocapture={{
     captureTouches: true,
-}}>
-    ...
+  }}
+>
+  ...
 </PostHogProvider>
 ```
 
@@ -287,28 +292,30 @@ Autocaptured events display as the autocaptured interaction type in the [activit
 
 You can configure the following options:
 
-| Option | Description |
-|--------|-------------|
-| `captureTouches` | **Type:** `boolean`. When set to `true`, autocapture will capture touch events. |
-| `ignoreLabels` | **Type:** `string[]`. List of labels to ignore from the stack in touch events. |
-| `customLabelProp` | **Type:** `string`. Default: `ph-label`. If you set a custom label prop such as `<View ph-label="product-card">`, the UI element will display as `product-card` instead of a generic `View`. |
-| `maxElementsCaptured` | **Type:** `number`. The maximum number of elements to capture in the component hierarchy. |
-| `noCaptureProp` | **Type:** `string`. Default: `ph-no-capture`. The prop to use for no capture. For example, if set to `data-no-tracking` the component `<Button data-no-tracking>This won't be tracked</Button>` will be ignored. |
-| `propsToCapture` | **Type:** `string[]`. List of props to capture from the component hierarchy. By default, identifiers and text content are captured. |
+| Option                | Description                                                                                                                                                                                                      |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `captureTouches`      | **Type:** `boolean`. When set to `true`, autocapture will capture touch events.                                                                                                                                  |
+| `ignoreLabels`        | **Type:** `string[]`. List of labels to ignore from the stack in touch events.                                                                                                                                   |
+| `customLabelProp`     | **Type:** `string`. Default: `ph-label`. If you set a custom label prop such as `<View ph-label="product-card">`, the UI element will display as `product-card` instead of a generic `View`.                     |
+| `maxElementsCaptured` | **Type:** `number`. The maximum number of elements to capture in the component hierarchy.                                                                                                                        |
+| `noCaptureProp`       | **Type:** `string`. Default: `ph-no-capture`. The prop to use for no capture. For example, if set to `data-no-tracking` the component `<Button data-no-tracking>This won't be tracked</Button>` will be ignored. |
+| `propsToCapture`      | **Type:** `string[]`. List of props to capture from the component hierarchy. By default, identifiers and text content are captured.                                                                              |
 
 ```jsx
-<PostHogProvider apiKey="<ph_project_token>" autocapture={{
+<PostHogProvider
+  apiKey="<ph_project_token>"
+  autocapture={{
     captureTouches: true,
     ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
     customLabelProp: "ph-label",
     maxElementsCaptured: 20,
     noCaptureProp: "ph-no-capture",
     propsToCapture: ["testID"], // Limit which props are captured. By default, identifiers and text content are captured.
-}}>
-    ...
+  }}
+>
+  ...
 </PostHogProvider>
 ```
-
 
 #### Preventing sensitive data capture
 
@@ -348,15 +355,15 @@ To exclude specific UI elements from autocapture or session replay, add `ph-no-c
 
 ### Web navigation autocapture
 
-PostHog automatically captures navigation events as `$pageview` and `$pageleave` events. 
+PostHog automatically captures navigation events as `$pageview` and `$pageleave` events.
 
 #### Configuring page navigation autocapture
 
 You can configure the following options:
 
-| Option | Description |
-|--------|-------------|
-| `capture_pageview` | **Type:** `boolean`, `'history_change'` (default). When set to `history_change`, autocapture will capture pageviews. This also works on single-page apps. |
+| Option              | Description                                                                                                                                                                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `capture_pageview`  | **Type:** `boolean`, `'history_change'` (default). When set to `history_change`, autocapture will capture pageviews. This also works on single-page apps.                                                                                          |
 | `capturePageleaves` | **Type:** `boolean`, `'if_capture_pageview'` (default). When set to `true`, autocapture will capture pageleaves. If set to `'if_capture_pageview'`, it only captures pageleaves if `capturePageviews` is also set to `true` or `'history_change'`. |
 
 For example, your initialization code might look like this:
@@ -372,11 +379,7 @@ posthog.init('<ph_project_token>', {
 
 #### Disabling page navigation autocapture
 
-You can disable `$pageview` and `$pageleave` autocapture in two ways:
-- In your [project settings](https://us.posthog.com/project/settings)
-- By setting `capturePageviews: false` and `capture_pageleave: false` in the [config](/docs/libraries/js/config)
-
-For example:
+You can disable `$pageview` and `$pageleave` autocapture by setting `capture_pageview: false` and `capture_pageleave: false` in the [SDK config](/docs/libraries/js/config):
 
 ```js-web
 posthog.init('<ph_project_token>', {
@@ -396,22 +399,21 @@ PostHog can automatically captures navigation and lifecycle events as the user n
 
 PostHog captures the following events:
 
-| Event Name | Description |
-|------------|-------------|
-| `$screen` | Screen view changes, with screen name as property |
-| `Application Installed` | First app launch |
-| `Application Updated` | App version updates |
-| `Application Opened` | App becomes active/foreground |
-| `Application Backgrounded` | App moves to background |
-
+| Event Name                 | Description                                       |
+| -------------------------- | ------------------------------------------------- |
+| `$screen`                  | Screen view changes, with screen name as property |
+| `Application Installed`    | First app launch                                  |
+| `Application Updated`      | App version updates                               |
+| `Application Opened`       | App becomes active/foreground                     |
+| `Application Backgrounded` | App moves to background                           |
 
 #### Configuring screen navigation autocapture
 
 Screen navigation autocapture is not enabled by default. You can enable it by setting `captureScreenViews` to `true` in the config.
 
-| Option | Description |
-|--------|-------------|
-| `captureScreenViews` | **Type:** `boolean`. When set to `true`, autocapture will capture screen views. |
+| Option                              | Description                                                                                     |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `captureScreenViews`                | **Type:** `boolean`. When set to `true`, autocapture will capture screen views.                 |
 | `captureApplicationLifecycleEvents` | **Type:** `boolean`. When set to `true`, autocapture will capture application lifecycle events. |
 
 For example, your initialization code might look like this:
@@ -424,7 +426,6 @@ config.captureApplicationLifecycleEvents = true // Disabled by default
 
 PostHogSDK.shared.setup(config)
 ```
-
 
 </Tab.Panel>
 <Tab.Panel>
@@ -444,7 +445,6 @@ Screen navigation autocapture is **not enabled by default**. You can enable it b
 | `Application Became Active` | When app becomes active from background |
 | `Application Backgrounded` | When app goes to background |
 
-
 </Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
@@ -458,16 +458,15 @@ Screen navigation autocapture is **not enabled by default**. You can enable it b
 When enabled with `capture_copied_text` set to true, we capture the copied or cut text as a **Clipboard autocapture** event. You can then use the `$selected_content` property in analysis or use the [activity page](/docs/activity) to view the copied content in context.
 
 <ProductScreenshot
-  imageLight={ImgClipboardAuocaptureLight} 
-  imageDark={ImgClipboardAuocaptureDark} 
-  alt="The activity view showing the copied content highlighted in context" 
+  imageLight={ImgClipboardAuocaptureLight}
+  imageDark={ImgClipboardAuocaptureDark}
+  alt="The activity view showing the copied content highlighted in context"
   classes="rounded"
 />
 
 Clipboard autocapture respects other privacy settings. For example, won't capture content from a password field.
 
 > **Note:** Browsers don't directly allow access to copied data for privacy reasons so when `posthog-js` sees a clipboard event, we capture any text currently selected in the browser.import { useSelector } from 'react-redux'
-
 
 ## Heatmap autocapture
 
@@ -477,14 +476,13 @@ If you use our JavaScript libraries and enable heatmap autocapture in your [proj
 
 Whereas autocapture creates events whenever it can uniquely identify an interacted element, heatmaps are generated based on overall mouse or touch positions and are useful for understanding more general user behavior across your site.
 
-
 ## Dead clicks autocapture
 
-A dead click (or slow click) is a click which isn't followed by a change to the page. 
+A dead click (or slow click) is a click which isn't followed by a change to the page.
 
 Dead clicks are a great way to identify opportunities to improve your UI, showing you where your users expect to be able to interact with the page but cannot.
 
-You can collect dead clicks with the Web SDK by enabling them in [your project settings](https://app.posthog.com/settings/project-autocapture#dead-clicks-autocapture). 
+You can collect dead clicks with the Web SDK by enabling them in [your project settings](https://app.posthog.com/settings/project-autocapture#dead-clicks-autocapture).
 
 Or by setting your config:
 
@@ -499,7 +497,6 @@ posthog.init('<ph_project_token>', {
 
 > **Note:** The PostHog heatmap captures dead clicks for free, collecting only the coordinates of dead clicks to display in heatmaps. Enabling the autocapture of dead clicks here allows for deeper analysis and is priced as a standard product analytics event.
 
-
 ## Analyzing autocaptured events and properties
 
 Autocapture events and properties can be used like any other [event type](/docs/data/events). You can use them in trends, funnels, cohorts, surveys, and more. Beyond this, they come with some special features:
@@ -509,7 +506,7 @@ Autocapture events and properties can be used like any other [event type](/docs/
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/auto_light_b669bff067.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/auto_dark_c52206511f.png"
-  alt="Trends using autocapture properties" 
+  alt="Trends using autocapture properties"
   classes="rounded"
 />
 
@@ -526,7 +523,7 @@ For UI interactions, you may see autocaptured events such as `clicked span with 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/element_text_light_6cadb0a9a9.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/element_text_dark_99c0ae37a5.png"
-  alt="Element text property" 
+  alt="Element text property"
   classes="rounded"
 />
 
@@ -551,48 +548,49 @@ Autocaptured events can also be filtered by its CSS selector. For example, you c
 
 Autocaptured events (and client-side custom events) have many default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo. You can find them in [PostHog](https://app.posthog.com/data-management/properties) or in [the references](/docs/references/posthog-js).
 
-| Name                        | Key                      | Example value                  |
-|-----------------------------|--------------------------|--------------------------------|
-| Timestamp                   | `$timestamp`             | `2024-05-29T17:32:07.202Z`     |
-| OS                          | `$os`                    | `Mac OS X`                     |
-| OS Version                  | `$os_version`            | `10.15.7`                      |
-| Browser                     | `$browser`               | `Chrome`                       |
-| Browser Version             | `$browser_version`       | `125`                          |
-| Device Type                 | `$device_type`           | `Desktop`                      |
-| Current URL                 | `$current_url`           | `https://example.com/page`     |
-| Host                        | `$host`                  | `example.com`                  |
-| Path Name                   | `$pathname`              | `/page`                        |
-| Screen Height               | `$screen_height`         | `1080`                         |
-| Screen Width                | `$screen_width`          | `1920`                         |
-| Viewport Height             | `$viewport_height`       | `950`                          |
-| Viewport Width              | `$viewport_width`        | `1903`                         |
-| Library                     | `$lib`                   | `web`                          |
-| Library Version             | `$lib_version`           | `1.31.0`                       |
-| Referrer URL                | `$referrer`              | `https://google.com`           |
-| Referring Domain            | `$referring_domain`      | `www.google.com`               |
-| Active Feature Flags        | `$active_feature_flags`  | `['beta_feature']`             |
-| Event Type                  | `$event_type`            | `click`                        |
-| UTM Source                  | `$utm_source`            | `newsletter`                   |
-| UTM Medium                  | `$utm_medium`            | `email`                        |
-| UTM Campaign                | `$utm_campaign`          | `product_launch`               |
-| UTM Term                    | `$utm_term`              | `new+product`                  |
-| UTM Content                 | `$utm_content`           | `logolink`                     |
-| Google Click ID             | `$gclid`                 | `TeSter-123`                   |
-| Google Ads Source           | `$gad_source`            | `google_ads`                   |
-| Google Search Ads 360 Click | `$gclsrc`                | `dsa`                          |
-| Google DoubleClick Click ID | `$dclid`                 | `testDclid123`                 |
-| Google Web-to-app Measure   | `$wbraid`                | `testWbraid123`                |
-| Google App-to-web Measure   | `$gbraid`                | `testGbraid123`                |
-| Facebook Click ID           | `$fbclid`                | `testFbclid123`                |
-| Microsoft Click ID          | `$msclkid`               | `testMsclkid123`               |
-| Twitter Click ID            | `$twclid`                | `testTwclid123`                |
-| LinkedIn Ad Tracking ID     | `$la_fat_id`             | `testLaFatId123`               |
-| Mailchimp Campaign ID       | `$mc_cid`                | `testMcCid123`                 |
-| Instagram Share Id          | `$igshid`                | `testIgshid123`                |
-| TikTok Click ID             | `$ttclid`                | `testTtclid123`                |
-| IP Address                  | `$ip`                    | `192.168.1.1`                  |
+| Name                        | Key                     | Example value              |
+| --------------------------- | ----------------------- | -------------------------- |
+| Timestamp                   | `$timestamp`            | `2024-05-29T17:32:07.202Z` |
+| OS                          | `$os`                   | `Mac OS X`                 |
+| OS Version                  | `$os_version`           | `10.15.7`                  |
+| Browser                     | `$browser`              | `Chrome`                   |
+| Browser Version             | `$browser_version`      | `125`                      |
+| Device Type                 | `$device_type`          | `Desktop`                  |
+| Current URL                 | `$current_url`          | `https://example.com/page` |
+| Host                        | `$host`                 | `example.com`              |
+| Path Name                   | `$pathname`             | `/page`                    |
+| Screen Height               | `$screen_height`        | `1080`                     |
+| Screen Width                | `$screen_width`         | `1920`                     |
+| Viewport Height             | `$viewport_height`      | `950`                      |
+| Viewport Width              | `$viewport_width`       | `1903`                     |
+| Library                     | `$lib`                  | `web`                      |
+| Library Version             | `$lib_version`          | `1.31.0`                   |
+| Referrer URL                | `$referrer`             | `https://google.com`       |
+| Referring Domain            | `$referring_domain`     | `www.google.com`           |
+| Active Feature Flags        | `$active_feature_flags` | `['beta_feature']`         |
+| Event Type                  | `$event_type`           | `click`                    |
+| UTM Source                  | `$utm_source`           | `newsletter`               |
+| UTM Medium                  | `$utm_medium`           | `email`                    |
+| UTM Campaign                | `$utm_campaign`         | `product_launch`           |
+| UTM Term                    | `$utm_term`             | `new+product`              |
+| UTM Content                 | `$utm_content`          | `logolink`                 |
+| Google Click ID             | `$gclid`                | `TeSter-123`               |
+| Google Ads Source           | `$gad_source`           | `google_ads`               |
+| Google Search Ads 360 Click | `$gclsrc`               | `dsa`                      |
+| Google DoubleClick Click ID | `$dclid`                | `testDclid123`             |
+| Google Web-to-app Measure   | `$wbraid`               | `testWbraid123`            |
+| Google App-to-web Measure   | `$gbraid`               | `testGbraid123`            |
+| Facebook Click ID           | `$fbclid`               | `testFbclid123`            |
+| Microsoft Click ID          | `$msclkid`              | `testMsclkid123`           |
+| Twitter Click ID            | `$twclid`               | `testTwclid123`            |
+| LinkedIn Ad Tracking ID     | `$la_fat_id`            | `testLaFatId123`           |
+| Mailchimp Campaign ID       | `$mc_cid`               | `testMcCid123`             |
+| Instagram Share Id          | `$igshid`               | `testIgshid123`            |
+| TikTok Click ID             | `$ttclid`               | `testTtclid123`            |
+| IP Address                  | `$ip`                   | `192.168.1.1`              |
 
 #### Notes:
+
 - If enabled, [GeoIP data](/docs/cdp/geoip-enrichment) is added also as properties at ingestion.
 - Many of these are also captured as [session properties](/docs/data/sessions).
 - These properties can be hidden in activity by checking the **Hide PostHog properties** box.
@@ -602,70 +600,70 @@ Autocaptured events (and client-side custom events) have many default properties
 
 On autocaptured iOS events, you can find the following properties (on top of the default event properties):
 
-| Property | Description |
-|----------|-------------|
-| `description` | Type of user interaction |
-| `text` | Element text/value (sanitized) |
-| `screen_name` | Current view controller name |
+| Property         | Description                        |
+| ---------------- | ---------------------------------- |
+| `description`    | Type of user interaction           |
+| `text`           | Element text/value (sanitized)     |
+| `screen_name`    | Current view controller name       |
 | `elements_chain` | View hierarchy from target to root |
 
 Where `description` is one of the following types of user interaction:
 
-| Description | When Captured |
-|-------------|---------------|
-| `"touch"` | Tap gestures on views |
-| `"swipe"` | Swipe gestures |
-| `"pan"` | Pan/drag gestures |
-| `"pinch"` | Pinch to zoom |
-| `"rotation"` | Rotation gestures |
-| `"long_press"` | Long press gestures |
-| `"scroll"` | Scroll view changes |
-| `"value_changed"` | Control value changes |
-| `"submit"` | Form submission |
-| `"toggle"` | Switch/checkbox changes |
-| `"primary_action"` | Main control actions |
-| `"menu_action"` | Menu actions |
-| `"change"` | General editing changes |
+| Description        | When Captured           |
+| ------------------ | ----------------------- |
+| `"touch"`          | Tap gestures on views   |
+| `"swipe"`          | Swipe gestures          |
+| `"pan"`            | Pan/drag gestures       |
+| `"pinch"`          | Pinch to zoom           |
+| `"rotation"`       | Rotation gestures       |
+| `"long_press"`     | Long press gestures     |
+| `"scroll"`         | Scroll view changes     |
+| `"value_changed"`  | Control value changes   |
+| `"submit"`         | Form submission         |
+| `"toggle"`         | Switch/checkbox changes |
+| `"primary_action"` | Main control actions    |
+| `"menu_action"`    | Menu actions            |
+| `"change"`         | General editing changes |
 
 Where `elements_chain` is a list of elements from the target to the root of the view hierarchy.
 
-| Element Type | Format |
-|--------------|--------|
-| **With Text** | `"ClassName:text=\"value\""` |
+| Element Type        | Format                                  |
+| ------------------- | --------------------------------------- |
+| **With Text**       | `"ClassName:text=\"value\""`            |
 | **With Base Class** | `"ClassName:attr__class=\"baseClass\""` |
-| **With Label** | `"ClassName:attr_id=\"label\""` |
-| **Plain** | `"ClassName"` |
+| **With Label**      | `"ClassName:attr_id=\"label\""`         |
+| **Plain**           | `"ClassName"`                           |
 
 Where rules are:
 
-| Rule | Description |
-|------|-------------|
-| **Length Limit** | Maximum 255 characters |
-| **Whitespace** | Multiple spaces/line breaks → single space |
-| **Unicode** | Zero-width characters removed |
-| **Sensitive** | Password fields automatically excluded |
+| Rule             | Description                                |
+| ---------------- | ------------------------------------------ |
+| **Length Limit** | Maximum 255 characters                     |
+| **Whitespace**   | Multiple spaces/line breaks → single space |
+| **Unicode**      | Zero-width characters removed              |
+| **Sensitive**    | Password fields automatically excluded     |
 
 Where `text` is the text of the element.
 
-| Control Type | Debounce Interval |
-|--------------|------------------|
-| **UISlider** | 0.3 seconds |
-| **UISwitch** | 0.4 seconds |
-| **UIPickerView** | 0.0 seconds |
-| **UIScrollView** | 0.0 seconds |
-| **Text Fields** | 0.0 seconds |
+| Control Type     | Debounce Interval |
+| ---------------- | ----------------- |
+| **UISlider**     | 0.3 seconds       |
+| **UISwitch**     | 0.4 seconds       |
+| **UIPickerView** | 0.0 seconds       |
+| **UIScrollView** | 0.0 seconds       |
+| **Text Fields**  | 0.0 seconds       |
 
 </Tab.Panel>
 <Tab.Panel>
 
 On autocaptured React Native events, you can find the following properties (on top of the default event properties):
 
-| Property | Description |
-|----------|-------------|
-| `description` | Type of user interaction (e.g., "touch") |
-| `text` | Element text/value (sanitized) |
-| `screen_name` | Current screen name |
-| `elements_chain` | Component hierarchy from target to root |
+| Property         | Description                              |
+| ---------------- | ---------------------------------------- |
+| `description`    | Type of user interaction (e.g., "touch") |
+| `text`           | Element text/value (sanitized)           |
+| `screen_name`    | Current screen name                      |
+| `elements_chain` | Component hierarchy from target to root  |
 
 The `elements_chain` follows a similar format to iOS, showing the component tree structure with props and text content where available.
 

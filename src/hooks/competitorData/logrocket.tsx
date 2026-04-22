@@ -78,7 +78,7 @@ export const logrocket = {
                 canvas_recording: true,
                 chat_with_recordings: false,
                 clickmaps: true,
-                conditional_recording: true,
+                conditional_recording: 'Add-on',
                 crash_reports: true,
                 event_timeline: true,
                 // https://docs.logrocket.com/docs/streaming-data-export
