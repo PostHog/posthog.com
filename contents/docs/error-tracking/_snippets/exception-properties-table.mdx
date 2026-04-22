@@ -7,3 +7,7 @@
 | └─ `mechanism` | Object | If the stacktrace is handled and if it's synthetic |
 | `$exception_fingerprint` | String | A fingerprint of the exception |
 | `$exception_level` | String | The level of the severity of the error |
+| `$exception_steps` | List | A list of [exception steps](#exception-steps) recorded before the exception occurred. Contains the following properties: |
+| └─ `$message` | String | The step description |
+| └─ `$timestamp` | String | When the step was recorded (ISO 8601 format) |
+| └─ `...` | Any | Custom properties added to the step |

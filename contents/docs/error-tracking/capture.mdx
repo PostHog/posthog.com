@@ -338,6 +338,62 @@ It's important to think about your grouping rules when you configure exception c
 
 Note that grouping issues means that all exceptions will be grouped together under a **single issue**. You **cannot** group exceptions into multiple issues, but you can still [filter on custom properties](/docs/error-tracking/monitoring#finding-specific-issues) across multiple issues without grouping them.
 
+## Exception steps
+
+Exception steps record breadcrumb-style context that gets attached to the next captured exception. They're useful for tracking user actions, navigation, or application state leading up to an error.
+
+### Adding exception steps
+
+Call `addExceptionStep()` to record a step. Each step requires a message and can include optional properties:
+
+```javascript
+// Record user actions as they happen
+posthog.addExceptionStep('User clicked checkout button', {
+    cart_id: 'cart_123',
+    item_count: 3
+})
+
+posthog.addExceptionStep('Payment form submitted', {
+    payment_method: 'credit_card'
+})
+
+// When an exception is captured, these steps are automatically attached
+posthog.captureException(new Error('Payment failed'))
+```
+
+Steps are automatically attached to the `$exception_steps` property on the next captured exception (whether captured manually or automatically). After the exception is captured, the step buffer is cleared.
+
+### How exception steps work
+
+Exception steps are buffered in memory until an exception is captured:
+
+- Steps attach to the exception as the `$exception_steps` property
+- After a successful capture, the buffer clears
+- If an exception is dropped by a [suppression rule](#suppressing-exceptions), the buffer is preserved and a note is added
+- If you manually provide `$exception_steps` when capturing an exception, it overrides the buffered steps
+
+### Configuring exception steps
+
+Configure exception steps using the `error_tracking.exception_steps` option:
+
+```javascript
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    error_tracking: {
+        exception_steps: {
+            enabled: true,       // default: true
+            max_bytes: 32768     // default: 32768 (~32KB)
+        }
+    }
+})
+```
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `enabled` | `true` | Whether to collect and attach exception steps |
+| `max_bytes` | `32768` | Maximum byte budget for buffered steps. Oldest steps are evicted when exceeded. |
+
 ## Suppressing exceptions
 
 We recommend that you suppress exceptions on the client side for performance and cost reasons.
