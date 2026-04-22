@@ -9,6 +9,8 @@ import List from 'components/List'
 import { IconGraph, IconToggle, IconWarning } from '@posthog/icons'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import Link from 'components/Link'
+import CloudinaryImage from 'components/CloudinaryImage'
+import { SingleCodeBlock } from 'components/CodeBlock'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
 import JuiceboxLogo from 'components/CustomerLogos/JuiceboxLogo'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
@@ -86,12 +88,12 @@ export default function SessionReplayLanding(): JSX.Element {
                 contentMaxWidthClass="max-w-5xl"
                 showQuestions={false}
             >
-                <div className="grid grid-cols-1 @lg:grid-cols-[1.2fr_1fr] gap-8 items-center mb-10 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 @lg:grid-cols-[1.2fr_1fr] gap-10 items-center mb-6 max-w-7xl mx-auto">
                     <div>
                         <h1 className="text-3xl md:text-5xl !mb-4">
                             Session replay that shows you exactly what happened
                         </h1>
-                        <p className="text-lg md:text-xl mb-6 opacity-75">
+                        <p className="text-lg md:text-xl mb-6 text-secondary">
                             Automatic session capture, DevTools in every replay, and MCP for Claude Code, Cursor, or
                             your editor.
                         </p>
@@ -108,7 +110,7 @@ export default function SessionReplayLanding(): JSX.Element {
                                 Install MCP
                             </CallToAction>
                         </div>
-                        <p className="text-sm opacity-75 !mb-0">
+                        <p className="text-sm !mb-0 text-secondary">
                             With{' '}
                             <Link to="/docs/model-context-protocol" state={{ newWindow: true }}>
                                 PostHog MCP
@@ -119,7 +121,7 @@ export default function SessionReplayLanding(): JSX.Element {
                         </p>
                     </div>
                     <div>
-                        <img
+                        <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/presentation_55bc6acecd.png"
                             alt="Hedgehog presenting a heatmap"
                             className="w-full"
@@ -127,21 +129,24 @@ export default function SessionReplayLanding(): JSX.Element {
                     </div>
                 </div>
 
-                <div className="mb-20 max-w-7xl mx-auto">
+                <div className="mb-12 max-w-7xl mx-auto">
                     <div className="flex flex-wrap items-center gap-x-12 gap-y-6 text-primary dark:text-primary-dark">
                         <ElevenLabsLogo className="fill-current object-contain max-w-full h-8" />
-                        <img
+                        <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/kilocode_logo_c58c88f029.webp"
                             alt="Kilo Code"
-                            className="object-contain max-w-full h-8 w-auto"
+                            imgClassName="object-contain max-w-full h-8 w-auto"
                         />
-                        <JuiceboxLogo className="fill-current object-contain max-w-full h-10" />
-                        <ExaLogo className="fill-current object-contain max-w-full h-9" />
+                        <JuiceboxLogo className="fill-current object-contain max-w-full h-8" />
+                        <ExaLogo className="fill-current object-contain max-w-full h-8" />
                     </div>
-                    <p className="text-xs opacity-60 mt-3 !mb-0">
-                        These are some of our paying customers.
+                    <p className="text-xs mt-3 !mb-0">
+                        <span className="font-semibold">These are some of our paying customers.</span>
                         <br />
-                        (Yes they actually use us, no it's not just some random engineer who tried us out 2+ years ago.)
+                        <span className="text-muted">
+                            (Yes they actually use us, no it's not just some random engineer who tried us out 2+ years
+                            ago.)
+                        </span>
                     </p>
                 </div>
 
@@ -200,9 +205,9 @@ export default function SessionReplayLanding(): JSX.Element {
 
                             <h3>Install in 30 seconds</h3>
 
-                            <pre>
-                                <code>npx @posthog/wizard mcp add</code>
-                            </pre>
+                            <SingleCodeBlock language="bash" showAskAI={false}>
+                                npx @posthog/wizard mcp add
+                            </SingleCodeBlock>
 
                             <ProductVideo
                                 videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/mcp_session_replay_1080_de1089e7aa.mp4"
@@ -463,7 +468,7 @@ export default function SessionReplayLanding(): JSX.Element {
                                 <li>Set billing limits to avoid surprise charges</li>
                                 <li>
                                     See our{' '}
-                                    <Link to="/docs/session-replay/pricing" state={{ newWindow: true }}>
+                                    <Link to="/pricing" state={{ newWindow: true }}>
                                         pricing page
                                     </Link>{' '}
                                     for more up-to-date details
