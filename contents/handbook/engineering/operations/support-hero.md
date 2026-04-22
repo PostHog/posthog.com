@@ -70,9 +70,7 @@ It might be an intense week, but you're also going to solve so many real problem
 
 Check the `#papercuts` Slack channel during your rotation and pick up any reports that relate to your team's area. For each one, pick one of the following:
 
-- **Reply** to the reporter acknowledging the papercut, then either:
-  - Prompt PostHog Code to ship a fix or small improvement, or
-  - Open a GitHub issue to track it if it needs more scoping or isn't a quick fix.
+- **Reply** to the reporter acknowledging the papercut, then either get a fix shipped or open a GitHub issue to track it if it needs more scoping. How you get the fix out is up to you – prompting PostHog Code is often the fastest path, but feel free to fix it however you like.
 - **React with ❌** to reject the papercut (for example, if the behavior is intentional). A brief reply explaining why is appreciated.
 - **React with ✅** once you've shipped a fix or improvement.
 
