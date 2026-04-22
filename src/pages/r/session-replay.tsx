@@ -76,7 +76,7 @@ export default function SessionReplayLanding(): JSX.Element {
         <>
             <SEO
                 title="Session replay that shows you exactly what happened"
-                description="Automatic session capture, AI-powered debugging, and full DevTools context in one place. Free for 5,000 web + 2,500 mobile recordings/month."
+                description="With PostHog MCP, your AI agent can query session replays, summarize user behavior, and turn bug reports into PRs, all from Claude Code, Cursor, Zed, or Windsurf. Free for 5,000 web + 2,500 mobile recordings/month."
                 noindex
             />
             <ReaderView
@@ -100,15 +100,23 @@ export default function SessionReplayLanding(): JSX.Element {
                             <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
                                 Get started free
                             </CallToAction>
-                            <CallToAction type="secondary" size="md" to="/talk-to-a-human" state={{ newWindow: true }}>
-                                Talk to a human
+                            <CallToAction
+                                type="secondary"
+                                size="md"
+                                to="/docs/model-context-protocol"
+                                state={{ newWindow: true }}
+                            >
+                                Install MCP
                             </CallToAction>
                         </div>
                         <p className="text-sm opacity-75 !mb-0">
-                            PostHog's Session Replay is built to be cost-effective by default, with a generous free tier
-                            and transparent usage-based pricing. Since we don't charge per seat, more than 90% of
-                            companies use PostHog for free — and with PostHog MCP, your AI coding agent can pull session
-                            data straight into Claude Code or Cursor.
+                            With{' '}
+                            <Link to="/docs/model-context-protocol" state={{ newWindow: true }}>
+                                PostHog MCP
+                            </Link>
+                            , your AI agent can query session replays, summarize user behavior, and turn bug reports
+                            into PRs, all from Claude Code, Cursor, Zed, or Windsurf. Free for 5,000 web + 2,500 mobile
+                            recordings/month, no per-seat pricing.
                         </p>
                     </div>
                     <div>
@@ -172,6 +180,96 @@ export default function SessionReplayLanding(): JSX.Element {
                         </QuestLogItem>
 
                         <QuestLogItem
+                            title="MCP: Debug without leaving your editor"
+                            subtitle="Query replays from Claude Code, Cursor, Zed, or Windsurf"
+                            icon="IconSparkles"
+                        >
+                            <p>
+                                <strong>MCP (Model Context Protocol)</strong> lets your AI coding agent query PostHog
+                                like it's part of your codebase. Point Claude Code, Cursor, Zed, Windsurf, or VS Code at
+                                the{' '}
+                                <Link to="/docs/model-context-protocol" state={{ newWindow: true }}>
+                                    PostHog MCP server
+                                </Link>{' '}
+                                and ask it to find sessions, trace errors, and generate fixes without leaving your
+                                editor. Bug report to PR, no context switching.
+                            </p>
+
+                            <h3>Install in 30 seconds</h3>
+
+                            <pre>
+                                <code>npx @posthog/wizard mcp add</code>
+                            </pre>
+
+                            <ProductVideo
+                                videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/mcp_session_replay_1080_de1089e7aa.mp4"
+                                videoDark={undefined}
+                                classes="rounded border border-primary"
+                                autoPlay={true}
+                            />
+
+                            <h3>Try prompts like</h3>
+                            <ul>
+                                <li>
+                                    <em>
+                                        "A user reported checkout is broken at 2pm. Find the session and tell me what
+                                        component errored."
+                                    </em>
+                                </li>
+                                <li>
+                                    <em>"Generate a regression test from the failing session in replay 12345."</em>
+                                </li>
+                                <li>
+                                    <em>
+                                        "Find every session where the CheckoutButton component threw an error in the
+                                        last 24h and summarize the pattern."
+                                    </em>
+                                </li>
+                                <li>
+                                    <em>"Show me replays from enterprise users who rage clicked in the last day."</em>
+                                </li>
+                                <li>
+                                    <em>
+                                        "Find the most recent session for user with email user@example.com and summarize
+                                        what they tried to do."
+                                    </em>
+                                </li>
+                            </ul>
+
+                            <h3>Or use AI inside PostHog</h3>
+                            <p>
+                                Can't watch every recording? PostHog AI can. Use natural language to search sessions, or
+                                ask AI to summarize a batch of recordings and surface the patterns you'd otherwise miss.
+                            </p>
+
+                            <ProductVideo
+                                videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/session_summaries_664cfbb85d.mp4"
+                                videoDark={undefined}
+                                classes="rounded border border-primary"
+                                autoPlay={true}
+                            />
+
+                            <div className="flex flex-wrap gap-2 mt-4">
+                                <CallToAction
+                                    type="primary"
+                                    size="md"
+                                    to="/docs/model-context-protocol"
+                                    state={{ newWindow: true }}
+                                >
+                                    Install the MCP
+                                </CallToAction>
+                                <CallToAction
+                                    type="secondary"
+                                    size="md"
+                                    to="/docs/session-replay/session-summaries-ai"
+                                    state={{ newWindow: true }}
+                                >
+                                    Explore AI features
+                                </CallToAction>
+                            </div>
+                        </QuestLogItem>
+
+                        <QuestLogItem
                             title="Get DevTools context, inside the replay"
                             subtitle="Watch your first recording"
                             icon="IconBrowser"
@@ -225,6 +323,14 @@ export default function SessionReplayLanding(): JSX.Element {
                                 as collections so your whole team can pull up the right recordings without rebuilding
                                 the query from scratch.
                             </p>
+                            <p>
+                                Or describe what you want (like{' '}
+                                <em>"users who rage clicked after seeing variant B yesterday"</em>) and{' '}
+                                <Link to="/docs/session-replay/search-replays-mcp" state={{ newWindow: true }}>
+                                    PostHog MCP
+                                </Link>{' '}
+                                returns the matching collection in your editor.
+                            </p>
 
                             <ProductScreenshot
                                 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/light_playlist_annotated_d7f45dda32.png"
@@ -260,75 +366,6 @@ export default function SessionReplayLanding(): JSX.Element {
                         </QuestLogItem>
 
                         <QuestLogItem
-                            title="MCP: Debug without leaving your editor"
-                            subtitle="MCP, AI summaries, and natural language search"
-                            icon="IconSparkles"
-                        >
-                            <p>Two ways to bring AI to your session data, pick the one that fits how you work.</p>
-
-                            <h3>Use Claude Code, Cursor, or any MCP-compatible agent</h3>
-                            <p>
-                                Connect the PostHog{' '}
-                                <Link to="/docs/model-context-protocol" state={{ newWindow: true }}>
-                                    MCP server
-                                </Link>{' '}
-                                and your AI coding agent can query session replay data without you opening a browser
-                                tab. Ask it to find sessions where a specific error occurred, have it pull the event
-                                timeline, cross-reference with your codebase, and generate a fix, all from your terminal
-                                or editor. Bug report to PR, no context switching.
-                            </p>
-
-                            <ProductVideo
-                                videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/mcp_session_replay_1080_de1089e7aa.mp4"
-                                videoDark={undefined}
-                                classes="rounded border border-primary"
-                                autoPlay={true}
-                            />
-
-                            <h3>Or use AI inside PostHog</h3>
-                            <p>
-                                Can't watch every recording? PostHog AI can. Use natural language to search sessions, or
-                                ask AI to summarize a batch of recordings and surface the patterns you'd otherwise miss.
-                            </p>
-
-                            <ProductVideo
-                                videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/session_summaries_664cfbb85d.mp4"
-                                videoDark={undefined}
-                                classes="rounded border border-primary"
-                                autoPlay={true}
-                            />
-
-                            <p>Try prompts like:</p>
-                            <ul>
-                                <li>
-                                    <em>"Find sessions where users rage clicked on the pricing page"</em>
-                                </li>
-                                <li>
-                                    <em>"What are users struggling with on the settings page?"</em>
-                                </li>
-                                <li>
-                                    <em>"Summarize sessions from users who signed up today but didn't activate"</em>
-                                </li>
-                                <li>
-                                    <em>
-                                        "What behavioral differences do you see between variant A and variant B users?"
-                                    </em>
-                                </li>
-                            </ul>
-
-                            <div className="mt-4">
-                                <CallToAction
-                                    type="primary"
-                                    size="md"
-                                    to="/docs/session-replay/session-summaries-ai"
-                                    state={{ newWindow: true }}
-                                >
-                                    Explore AI features
-                                </CallToAction>
-                            </div>
-                        </QuestLogItem>
-
-                        <QuestLogItem
                             title="Go from insight to fix without switching tabs"
                             subtitle="Integrate with your stack"
                             icon="IconLogomark"
@@ -337,9 +374,12 @@ export default function SessionReplayLanding(): JSX.Element {
                                 <IconGraph className="text-blue w-7 -mt-1 inline-block" /> Product analytics
                             </h3>
                             <p>
-                                Click any data point in your funnels, retention charts, or user paths and land directly
-                                in a playlist of session replays for the users behind that number. No ID matching
-                                between tools, no export, same data layer powering both.
+                                Using Product Analytics and PostHog MCP, you can{' '}
+                                <Link to="/docs/product-analytics/build-insights-mcp" state={{ newWindow: true }}>
+                                    build funnels, retention charts, and user paths
+                                </Link>{' '}
+                                from your editor. Then drop straight into a playlist of session replays for the users
+                                behind any data point.
                             </p>
 
                             <ProductVideo
@@ -354,9 +394,11 @@ export default function SessionReplayLanding(): JSX.Element {
                                 <IconToggle className="text-seagreen w-7 -mt-1 inline-block" /> Feature flags
                             </h3>
                             <p>
-                                Filter recordings by which feature flag variant a user had. See exactly how users
-                                interacted with version A vs. version B. Roll out a fix to affected users without a full
-                                deploy.
+                                With Feature Flags, use the MCP to{' '}
+                                <Link to="/docs/feature-flags/create-flags-mcp" state={{ newWindow: true }}>
+                                    flip flags, target rollouts, and filter replays by variant
+                                </Link>{' '}
+                                from Claude Code or Cursor. Roll out fixes to affected users without a full deploy.
                             </p>
 
                             <ProductScreenshot
@@ -372,8 +414,11 @@ export default function SessionReplayLanding(): JSX.Element {
                                 <IconWarning className="text-orange w-7 -mt-1 inline-block" /> Error tracking
                             </h3>
                             <p>
-                                When an exception fires, jump to the session replay to see exactly what the user was
-                                doing before and after the error. No reproduction needed.
+                                Error Tracking + PostHog MCP means your agent can{' '}
+                                <Link to="/docs/error-tracking/debug-errors-mcp" state={{ newWindow: true }}>
+                                    pull the stack trace and session replay together
+                                </Link>
+                                , then write the fix. No reproduction needed, no tab switching.
                             </p>
 
                             <ProductVideo
@@ -408,6 +453,9 @@ export default function SessionReplayLanding(): JSX.Element {
                                 <li>First 5,000 web recordings and 2,500 mobile recordings per month are free</li>
                                 <li>
                                     Above that we have usage-based pricing starting at $0.005/recording with discounts
+                                </li>
+                                <li>
+                                    <strong>PostHog MCP is included</strong> (no enterprise plan required)
                                 </li>
                                 <li>Set billing limits to avoid surprise charges</li>
                                 <li>
