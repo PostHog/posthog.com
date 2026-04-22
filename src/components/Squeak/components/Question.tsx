@@ -475,6 +475,7 @@ export function Question(props: QuestionProps) {
         handlePublishReply,
         handleResolve,
         handleReplyDelete,
+        voteReply,
         archive,
         pinTopics,
         escalate,
@@ -519,6 +520,7 @@ export function Question(props: QuestionProps) {
                 handlePublishReply,
                 handleResolve,
                 handleReplyDelete,
+                voteReply,
                 pinTopics,
                 mutate,
             }}
