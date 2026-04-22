@@ -275,11 +275,6 @@ a "Known limitations" section in the release notes structure.
 
 The agent calls `skill-get` to read the current version, then `skill-update` with the new body and `base_version`. Fields you don't pass are carried forward — if you don't send `files`, the existing bundle is preserved. If you do send `files`, they replace the previous version's bundle.
 
-<<<<<<< HEAD
-### Compare versions
-||||||| fcf732a3a
-### Review changes
-=======
 ### Use incremental edits
 
 Instead of rewriting the entire skill body, you can use incremental find/replace edits via the `edits` parameter. This is useful for making small changes without risking accidental drift:
@@ -303,8 +298,7 @@ Edits are applied sequentially. If `old` matches zero times or more than once, t
 
 You can use either `body` (full replacement) or `edits` (incremental), but not both in the same request.
 
-### Review changes
->>>>>>> master
+### Compare versions
 
 Compare two skill versions side-by-side to see what changed. Available for skills with two or more versions.
 
