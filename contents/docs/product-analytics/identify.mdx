@@ -375,9 +375,15 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 ### How to split a merged user back into separate users
 
-If you've accidentally linked distinct IDs together that represent different users, or you've made a mistake when merging users, it's possible to split their combined user back into separate users. You can do this in the PostHog app by navigating to the user you'd like split, and then clicking "Split IDs" in the top right corner.
+If you've accidentally linked distinct IDs that belong to different users, or made a mistake when merging, you can split them apart. Go to the user you want to split in PostHog and click **Split IDs** in the top right corner.
 
-> **Warning:** This will treat the distinct IDs as separate users for future events. However, there is no guarantee as to how past events will be treated – they may be be considered separate users, or be considered a single user for some or all events.
+PostHog offers two splitting modes:
+
+**Split all distinct IDs** – Every distinct ID except one becomes a new, separate person. You can choose which distinct ID keeps the original person's properties; all other new persons start with no properties. Use this when you need to completely undo a merge and separate all identities.
+
+**Extract specific distinct IDs** – Only the distinct IDs you select move to new persons. The original person keeps all other distinct IDs and its properties. Use this when many profiles were accidentally merged into one mega-person and you only need to extract some of them – leaving the rest merged and the original person's data intact.
+
+> **Warning:** Splitting treats the affected distinct IDs as separate users for future events. There's no guarantee how past events are treated – they may be considered separate users, or remain associated with the original user for some or all events.
 
 <ProductVideo
     videoLight = {splitUsersLight}
