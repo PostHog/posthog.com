@@ -53,37 +53,74 @@ import NodeSetSendFeatureFlagsTrue from "./feature-flags-code-node-set-send-feat
 
 <NodeSetSendFeatureFlagsTrue />
 
-### Fetching all flags for a user
+### Evaluating multiple specific flags
 
-You can fetch all flag values for a single user by calling `getAllFlags()` or `getAllFlagsAndPayloads()`.
-
-This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
+When you know which flags you need and want to emit `$feature_flag_called` events for analytics, use `getFeatureFlags()`. This evaluates a specific subset of flags in a single request while still capturing per-flag usage.
 
 ```node
-await client.getAllFlags('distinct_id_of_your_user') 
+const results = await client.getFeatureFlags(
+    ['new-dashboard', 'beta-search', 'premium-features'],
+    'distinct_id_of_your_user'
+)
+
+if (results['new-dashboard']?.enabled) {
+    // Show new dashboard
+}
+
+if (results['beta-search']?.variant === 'enhanced') {
+    // Use enhanced search variant
+}
+```
+
+Each result contains:
+- `enabled`: Whether the flag is on for this user
+- `variant`: The variant key (for multivariate flags)
+- `payload`: Any JSON payload attached to the flag
+
+This method is ideal when you need analytics on specific flags but want to avoid multiple network requests from calling `getFeatureFlag()` individually.
+
+### Fetching all flags for a user
+
+Use `getAllFlags()` or `getAllFlagsAndPayloads()` to fetch all flag values for a user in a single request.
+
+```node
+await client.getAllFlags('distinct_id_of_your_user')
 await client.getAllFlagsAndPayloads('distinct_id_of_your_user')
+```
+
+By default, these methods don't emit `$feature_flag_called` events. To enable per-flag analytics, set `sendFeatureFlagEvents` to `true`:
+
+```node
+await client.getAllFlags('distinct_id_of_your_user', { sendFeatureFlagEvents: true })
+await client.getAllFlagsAndPayloads('distinct_id_of_your_user', { sendFeatureFlagEvents: true })
 ```
 
 ### Sending `$feature_flag_called` events
 
-Capturing `$feature_flag_called` events enable PostHog to know when a flag was accessed by a user and thus provide [analytics and insights](/docs/product-analytics/insights) on the flag. By default, we send a these event when:
+Capturing `$feature_flag_called` events enables PostHog to know when a flag was accessed by a user and thus provide [analytics and insights](/docs/product-analytics/insights) on the flag. By default, we send these events when:
 
-1. You call `posthog.getFeatureFlag()` or `posthog.isFeatureEnabled()`, AND 
+1. You call `getFeatureFlag()`, `isFeatureEnabled()`, or `getFeatureFlags()`, AND
 2. It's a new user, or the value of the flag has changed. 
 
-> *Note:* Tracking whether it's a new user or if a flag value has changed happens in a local cache. This means that if you reinitialize the PostHog client, the cache resets as well – causing `$feature_flag_called` events to be sent again when calling `getFeatureFlag` or `isFeatureEnabled`. PostHog is built to handle this, and so duplicate `$feature_flag_called` events won't affect your analytics.
+> *Note:* Tracking whether it's a new user or if a flag value has changed happens in a local cache. This means that if you reinitialize the PostHog client, the cache resets as well – causing `$feature_flag_called` events to be sent again when calling `getFeatureFlag`, `isFeatureEnabled`, or `getFeatureFlags`. PostHog is built to handle this, and so duplicate `$feature_flag_called` events won't affect your analytics.
 
 You can disable automatically capturing `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
 
-To disable it, set the `sendFeatureFlagEvents` argument in your function call, like so:
+To disable it, set the `sendFeatureFlagEvents` argument in your function call:
 
 ```node
 const isFeatureFlagEnabled = await client.isFeatureEnabled(
-    'flag-key', 
+    'flag-key',
     'distinct_id_of_your_user',
-    {
-        'sendFeatureFlagEvents': false
-    })
+    { sendFeatureFlagEvents: false }
+)
+
+// Or for bulk evaluation
+const results = await client.getFeatureFlags(
+    ['flag-one', 'flag-two'],
+    'distinct_id_of_your_user',
+    { sendFeatureFlagEvents: false }
+)
 ```
 
 import NodeOverrideServerProperties from './override-server-properties/node.mdx'
