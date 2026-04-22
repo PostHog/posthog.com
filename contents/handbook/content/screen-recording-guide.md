@@ -14,7 +14,7 @@ Feel free to ask any questions in the [#team-youtube](https://posthog.slack.com/
 
 You like cookies? Then watch this video. Plus, you’ll learn about how to properly set up Screen Studio and your recording area aspect ratio for PostHog videos:
 
-[![recording guide](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_04_22_at_11_45_03_73a9e47dbd.png)](https://drive.google.com/file/d/1xZQc2shX-nzhvhX3uSBPuB94ToRPpteN/view?usp=sharing)
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/UCsfwjlcBbc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 1. Download Screen Studio
 
