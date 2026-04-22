@@ -153,7 +153,17 @@ When a batch export run is triggered, all workflows first read the data to expor
 
 To trigger these workflows on intervals chosen by our users, we leverage another feature of Temporal: [schedules](https://docs.temporal.io/workflows#schedule). Whenever a PostHog user creates a batch export, under the hood PostHog creates a Temporal schedule configured to execute the workflow associated with the export destination at the chosen interval.
 
-After creation, the schedule will wait until the end of the current batch period as defined by the batch export frequency, such as until the end of the current hour for hourly exports. At this point, the schedule will trigger a workflow to export the data for the batch period that has just concluded. However, before doing so, the schedule will wait for an additional small and randomly assigned amount of time. This additional waiting time allows us to avoid issues with having all workflows starting just as the next hour or day starts (commonly known as the thundering herd problem).
+After creation, the schedule will wait until the end of the current batch period as defined by the batch export frequency, such as until the end of the current hour for hourly exports. At this point, the schedule will trigger a workflow to export the data for the batch period that has just concluded. However, before doing so, the schedule will wait for an additional randomly assigned amount of time called **jitter**. This jitter helps avoid issues with all workflows starting at exactly the same time (commonly known as the thundering herd problem).
+
+The maximum jitter depends on the batch export frequency:
+
+| Frequency | Maximum jitter |
+|-----------|----------------|
+| Hourly    | 15 minutes     |
+| Daily     | 20 minutes     |
+| Weekly    | 30 minutes     |
+
+For example, a daily batch export configured to start at midnight may begin anywhere between 00:00 and 00:20.
 
 Each workflow is divided into activities, and we operate workers running in [PostHog infrastructure](/docs/how-posthog-works) that pick up and run these activities as they are queued-up by each workflow.
 
