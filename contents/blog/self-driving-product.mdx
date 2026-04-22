@@ -28,13 +28,13 @@ The **mechanical** stuff (fix the typo, add the index, flip the flag) is work a 
 
 The interesting lane is **interpretive**: incidents, customer issues, funnel drops. Work a computer *could* do, but only with the right tools and permissions. That's where self-driving products live.
 
-Today, [PostHog Code](/code) enters beta. It's a desktop app that orchestrates coding agents (Claude Code, Codex, and others) on top of your product data – automating the mechanical work, and surfacing the interpretive work as a prioritized to-do list for you to steer.
+Today, [PostHog Code](/code) enters beta. It's a desktop app that orchestrates coding agents on top of your product data – automating the mechanical work, and surfacing the interpretive work as a prioritized to-do list for you to steer.
 
 ## Borrowing a taxonomy from the car people
 
-The Society of Automotive Engineers has a framework for self-driving. Six levels of autonomy, from Level 0 (you do everything) to Level 5 (the car does everything, everywhere, in any condition). It's a good mental model because it forces specificity about where the machine takes over and where a human is still on the hook.
+The Society of Automotive Engineers has a framework for self-driving. Six levels of autonomy, from Level 0 (you do everything) to Level 5 (you can take a nap). It's a good mental model because it forces specificity about where the machine takes over and where a human is still on the hook.
 
-It maps surprisingly cleanly onto building products with AI.
+This maps surprisingly cleanly onto building products with AI.
 
 **Level 0 – No automation.** Analytics without AI, code without autocomplete. Dashboards, filters, SQL. Really good docs are your best bet for troubleshooting. Engineers write all the code, frame every question, and interpret all the data themselves. This was most of what shipped before 2024.
 
@@ -46,25 +46,19 @@ It maps surprisingly cleanly onto building products with AI.
 
 **Level 4 – High automation.** The agent understands your codebase, your product data, and the surrounding context – support tickets, internal comms, industry news. It proposes and ships work without being asked *(and is trusted to read, write, and delete)*. The [PostHog MCP](/docs/model-context-protocol) enables a working prototype of this today. Engineers set guardrails and approve outcomes; the agent does most of the framing and interpretation.
 
-**Level 5 – Full automation.** The full product autonomy loop runs on its own. Signals come in, the agent decides what to do, ships the change, evaluates whether it worked, and updates its memory for next time. You still weigh in on strategy and direction, but the loop between *what users are doing* and *what ships to fix or extend it* closes without a human turning the crank. *"Just build me an app that generates $1M MRR, bro"* is a plausible starting prompt. That's not why you became a product engineer, though – so what does self-driving actually mean for the human in the loop?
+**Level 5 – Full automation.** The full product autonomy loop runs on its own. Signals come in, the agent decides what to do, ships the change, evaluates whether it worked, and updates its memory for next time. You still weigh in on strategy and direction, but the loop between *what users are doing* and *what ships to fix or extend it* closes without a human turning the crank.
 
-## Code generation ≠ building software
-
-Allow me to dodge that question for a second and make a clear distinction. A self-driving car isn't just a vehicle that gets itself where you point it (that's cruise control and lane assist).
-
-An autonomous vehicle must know where it is, what's around it, what those things might do next, and what it will do in response. Once it executes a decision, it must evaluate whether the execution matched the plan, and adjust the next decision based on what it learned.
-
-Critically, it does all of that continuously, without being asked. The *self* in self-driving isn't autonomy from the passenger. It's autonomy from instruction.
 
 ## Why vibe-coding tools plateau at Level 3
+A self-driving car isn't just a vehicle that gets itself where you point it (that's cruise control and lane assist). Similarily, a self-driving product isn't just a really good coding agent. To reach level 5, a product must have a concept of where it is, what's around it, what those things might do next, and what it will do in response. Once it executes a decision, it must evaluate whether the execution matched the plan, and adjust the next decision based on what it learned.
 
-Most coding agents aren't aiming for autonomy from instruction. They're aiming for speed *per* instruction – and they've gotten *very* good at it. Vibe-coding tools have proven you can get surprisingly far by equipping agents with tools and skills: plug in the right MCP servers, point the agent at a goal, ship a working app before lunch. That's a legitimate Level 3 experience for *building* software, and it's why [AI has quietly eaten the no-code category](/blog/ai-is-killing-no-code-experiments).
+Critically, it does all of that continuously, without being asked. The *self* in self-driving isn't autonomy from the engineer. It's autonomy from instruction.
+
+Vibecoding tools aren't aiming for autonomy from instruction. They're aiming for speed per instruction – and they've gotten *very* good at it. Apps like Lovable, Replit and [v0](/blog/posthog-v0-integration) have proven you can get surprisingly far by equipping agents with tools and skills: plug in the right MCP servers, point the agent at a goal, ship a working app before lunch. That's a legitimate Level 3 experience for *building* software, and it's why [AI has quietly eaten the no-code category](/blog/ai-is-killing-no-code-experiments).
 
 ![On Wednesdays we do trace reviews](https://res.cloudinary.com/dmukukwp6/image/upload/aps0un_8b5268c19e.jpg)
 
-Past Level 3, the thing you shipped stops being a prompt-response artifact and becomes a product with users. The signals the agent needs next don't live in the codebase. That's why MCP tool calls against our server have grown ~21× in five months across 70+ clients including Claude Code, Cursor, VS Code, Codex, Lovable, Windsurf, Copilot, and Gemini CLI. Real user data is the line between a vibe-app and a software product.
-
-In a typical week, PostHog customers generate 100,000+ failed queries, 1.2 to 2.6 million new error-tracking issues, and 12 to 47 million raw exceptions. Each one is a candidate signal for an agent to act on – and none of it is visible to a tool whose worldview ends at the last git push.
+The problem is what happens after lunch. In a typical week, PostHog customers generate 100,000+ failed queries, 1.2 to 2.6 million new error-tracking issues, and 12 to 47 million raw exceptions. Each one is a candidate signal for an agent to act on – and none of it is visible to a tool whose worldview ends at the last git push.The signals the agent needs next don't live in the codebase. In a typical week, PostHog customers generate 100,000+ failed queries, 1.2 to 2.6 million new error-tracking issues, and 12 to 47 million raw exceptions. Each one is a candidate signal for an agent to act on – and none of it is visible to a tool whose worldview ends at the last git push.
 
 To shift out of cruise control and into self-driving, an agentic engineering tool needs five things: **tools, skills, signals, memory,** and **evaluation**. Our [AI engineering handbook](/handbook/engineering/ai/ai-platform) goes deep on each one. Here's the quick version.
 
