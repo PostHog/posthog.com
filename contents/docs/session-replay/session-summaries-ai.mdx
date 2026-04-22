@@ -37,6 +37,30 @@ Ask PostHog AI to summarize replays for each variant to spot behavioral differen
 - [`Summarize session replays for the control group in my checkout experiment`](https://app.posthog.com/#panel=max:Summarize%20session%20replays%20for%20the%20control%20group%20in%20my%20checkout%20experiment)
 - [`What behavioral differences do you see between variant A and variant B?`](https://app.posthog.com/#panel=max:What%20behavioral%20differences%20do%20you%20see%20between%20variant%20A%20and%20variant%20B%3F)
 
+## Add product context
+
+You can add product context to help PostHog AI generate more accurate summaries for your specific product. This context is injected into every single-session replay summary, helping the AI understand your custom events, product terminology, and intentional behaviors.
+
+To configure product context, click **Add product context** next to the "Use AI to summarize this session" button in the session replay player. This opens a drawer where you can describe your product in up to 10,000 characters.
+
+Good product context includes:
+
+- **Custom event and feature names** – What key events mean in your product (e.g., "creating a workspace", "completing a sprint")
+- **Product terminology** – Terms specific to your product that the AI should recognize
+- **Intentional behaviors** – Things that look like errors but aren't (e.g., "Free users see an upgrade modal when they try to export – this is intentional")
+- **Normal user patterns** – Behaviors that might look like confusion but are expected (e.g., "Users often switch between board view and list view rapidly when comparing tasks")
+- **What success looks like** – How to recognize when a user has completed their goal
+
+Example product context:
+
+> We're a B2B project management tool for software teams. Key events include creating projects, inviting team members, and completing sprints. A "Workspace" is a team's shared environment.
+>
+> Free users see an upgrade modal when they try to export — this is intentional, not an error.
+>
+> Users often switch between board view and list view rapidly when comparing tasks — normal behavior, not confusion.
+
+Product context only applies to single-session replay summaries generated from the replay page. It doesn't affect group summaries or summaries generated via Max.
+
 ## Tips for better results
 
 - **Ask about specific behaviors** – "What do users do after seeing the upgrade prompt?" gives you more targeted summaries than "Summarize recent sessions"
