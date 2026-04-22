@@ -4073,6 +4073,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Clean up stale flags',
+                    url: '/docs/feature-flags/cleaning-up-stale-flags',
+                    icon: 'IconFilter',
+                    color: 'salmon',
+                    featured: true,
+                },
+                {
                     name: 'Do a phased rollout',
                     url: '/docs/feature-flags/phased-rollout',
                     icon: 'IconTrends',
