@@ -45,7 +45,7 @@ info:
         \ use `app.posthog.com` as the host address.\n\n#### Specifying a project when\
         \ using the API\n\nBy default, if you're accessing the API, PostHog will return\
         \ results from the last project you visited in the UI. To override this behavior,\
-        \ you can pass in your Project API Key (public token) as a query parameter in\
+        \ you can pass in your Project Token as a query parameter in\
         \ the request. This ensures you will get data from the project associated with\
         \ that token.\n\n**Example**\n\n```\napi/event/?token=my_project_api_key\n```\n\
         \n### cURL example for self-hosted PostHog\n\n```bash\nPOSTHOG_PERSONAL_API_KEY=qTjsppKJqYLr2YskbsLXmu46eW1oH0r3jZkmKaERlf0\n\

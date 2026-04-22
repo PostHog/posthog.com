@@ -1,0 +1,71 @@
+---
+title: Product Tours troubleshooting
+---
+
+This page covers troubleshooting for Product Tours. For setup, see [Getting started](/docs/product-tours/start-here).
+
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+
+## Tours not displaying
+
+There are a few common reasons your Product Tour(s) may not be displaying as expected.
+
+### Tours not enabled in PostHog config
+
+For now, we require product tours to be explicitly enabled in your PostHog init via `disable_product_tours: false`.
+
+Example:
+
+```typescript
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN!, {
+  api_host: process.env.NEXT_PUBLIC_POSTHOG_API_HOST,
+  defaults: '2025-05-24',
+  disable_product_tours: false,
+});
+```
+
+### Old PostHog SDK version
+
+Product tours require `posthog-js` version 1.324.0 or higher. We always recommend updating to the latest to ensure you have the most recent improvements and bug fixes.
+
+## Toolbar issues (with reverse proxy)
+
+If you are using a [reverse proxy](/docs/advanced/proxy) you may encounter some issues with the Toolbar, such as:
+
+- Unable to authenticate the toolbar
+- Links back to PostHog cause 404 errors
+
+To resolve these issues, be sure to pass the proper [`ui_host` config parameter](/docs/libraries/js/config) when initializing PostHog. Example:
+
+```typescript
+posthog.init('<ph_project_token>', {
+  api_host: '/ingest',
+  ui_host: 'https://us.posthog.com', // or 'https://eu.posthog.com`
+  defaults: '2025-05-24',
+  disable_product_tours: false,
+});
+```
+
+See [Troubleshooting and FAQ](/docs/toolbar#troubleshooting-and-faq) for more help with the Toolbar.
+
+## Debugging tool
+
+If the above is not helpful, you can also try our [PostHog Tours Debugger Chrome extension](https://chromewebstore.google.com/detail/posthog-tours-debugger/dpdodohbbgfpiflpolelmgijjefkegem).
+
+This extension will provide some helpful information such as:
+
+- Tours currently active in your project
+- Eligibility status per tour, based on its conditions
+- `posthog-js` version checks
+
+For the latest, download and install the extension manually [from the GitHub source](https://github.com/PostHog/product-tours-debugger).
+
+**Note:** we recommend closing the PostHog Toolbar when using the Chrome extension, to ensure the debugger is running in an environment most similar to your production site.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_11_at_8_01_14_AM_098dbff0a3.png"
+    alt="Close toolbar button"
+    classes="rounded"
+/>

@@ -70,6 +70,15 @@ SDK doctor is available in the [right side panel](https://app.posthog.com/#panel
 3. View detected SDKs, their versions, and notes about issues found
 4. Click the provided links to view available versions and documentation
 
+You can also search for "SDK doctor" in the [command palette](/docs/cmd-k) (`Cmd` + `K` on Mac, `Ctrl` + `K` on Windows/Linux) to quickly navigate to it.
+
+## Investigating SDK events
+
+Click on any version number in the SDK doctor table to open a dropdown menu with two options for viewing events from that SDK version:
+
+- **Events on Activity page** – Opens the [Activity page](/docs/data/events) with filters pre-configured for the SDK type, version, and events from the last 7 days. This is useful if you prefer a visual interface over writing queries.
+- **SQL query** – Opens the [SQL editor](/docs/hogql) with a HogQL query showing events for that SDK version. This is useful if you want to customize the query or export data.
+
 ## Understanding SDK doctor badges
 
 SDK doctor uses badges to quickly communicate SDK status:

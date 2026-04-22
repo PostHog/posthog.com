@@ -14,6 +14,18 @@ Our library lets you create reusable message templates for your workflows. You c
 
 Currently, we support email templates, with push notifications and SMS templates coming soon.
 
+## Workflow templates
+
+You can save workflows as reusable templates to share across your team. When saving a workflow as a template, select a scope to control visibility:
+
+| Scope | Description |
+|-------|-------------|
+| **Project** | Template is only visible within the current project (default) |
+| **Organization** | Template is visible to all projects within your organization |
+| **Global** | Official PostHog templates (staff-only) |
+
+Organization-scoped templates are accessible to all teams within the same organization. Any team member can use and update these shared templates. Templates remain isolated to their organization and aren't visible to other organizations.
+
 ## Liquid and merge tags
 
 All template types support [Liquid templating](https://shopify.github.io/liquid/) to personalize your messages with user properties and data. You can type liquid directly, or use the merge tag dropdown in your message templates, which will show you the entire list of available person properties (see email example below).
@@ -29,6 +41,17 @@ When using Liquid with existing user properties, you should include a default va
 This ensures your message displays correctly even when a property is missing.
 
 </CalloutBox>
+
+### Email merge tags
+
+In addition to person properties, PostHog provides these system merge tags for email templates:
+
+| Merge tag | Description |
+|-----------|-------------|
+| `{{unsubscribe_url}}` | Links to a page where recipients can manage their email preferences |
+| `{{unsubscribe_url_one_click}}` | Enables RFC 8058-compliant one-click unsubscribe. When email clients send a POST request to this URL, recipients are automatically unsubscribed from all marketing emails. When clicked directly, it displays an unsubscribe confirmation page. |
+
+Use the one-click unsubscribe URL to improve email deliverability and comply with email regulations like CAN-SPAM. Most modern email clients display a prominent unsubscribe button when they detect proper one-click unsubscribe headers.
 
 ## Email templates
 

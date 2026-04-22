@@ -30,7 +30,7 @@ cd beta-program
 npm i posthog-js
 ```
 
-After this, we initialize PostHog. Create a `providers.js` file in the `app` folder, then set up PostHog with your project API key and instance address (which you get from your [project settings](https://app.posthog.com/project/settings)). Make sure to include the `use client` directive, a check for the window, and opt-in to site apps (which we will use later).
+After this, we initialize PostHog. Create a `providers.js` file in the `app` folder, then set up PostHog with your project token and instance address (which you get from your [project settings](https://app.posthog.com/project/settings)). Make sure to include the `use client` directive, a check for the window, and opt-in to site apps (which we will use later).
 
 ```js
 // app/providers.js
@@ -41,7 +41,7 @@ import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
       opt_in_site_apps: true

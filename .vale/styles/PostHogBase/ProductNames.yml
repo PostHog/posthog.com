@@ -1,0 +1,27 @@
+extends: substitution
+message: "Capitalize '%s' for PostHog's product. Use '%s' for the general industry concept."
+link: https://posthog.com/handbook/content/posthog-style-guide
+level: warning
+ignorecase: true
+swap:
+    customer analytics: Customer Analytics
+    data pipelines: Data Pipelines
+    data warehouse: Data Warehouse
+    endpoints: Endpoints
+    error tracking: Error Tracking
+    experimentation: Experimentation
+    experiments: Experiments
+    feature flags: Feature Flags
+    llm analytics: LLM Analytics
+    logs: Logs
+    marketing analytics: Marketing Analytics
+    posthog ai: PostHog AI
+    posthog cloud: PostHog Cloud
+    posthog code: PostHog Code
+    product analytics: Product Analytics
+    product tours: Product Tours
+    revenue analytics: Revenue Analytics
+    session replay: Session Replay
+    surveys: Surveys
+    web analytics: Web Analytics
+    workflows: Workflows

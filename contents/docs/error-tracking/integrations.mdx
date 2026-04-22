@@ -2,13 +2,14 @@
 title: Set up integrations
 ---
 
-PostHog integrates with GitHub, GitLab, and Linear to enhance error tracking with source code context, commit information, and external issue tracking.
+PostHog integrates with GitHub, GitLab, Linear, and Jira to enhance error tracking with source code context, commit information, and external issue tracking.
 
 | Integration | Capabilities |
 |-------------|-----------------|
 | [GitHub](#github-integration) | Pinpoint Git commits that cause issues, open files in GitHub directly from stack traces, and create GitHub issues from errors |
 | [GitLab](#gitlab-integration) | Pinpoint Git commits that cause issues, open files in GitLab directly from stack traces, and create GitLab issues from errors |
 | [Linear](#linear-integration) | Create Linear issues directly from errors and track fixes in your existing Linear workflows |
+| [Jira](#jira-integration) | Create Jira issues directly from errors and track fixes in your existing Jira workflows |
 
 ## GitHub integration
 
@@ -55,6 +56,22 @@ PostHog connects to Linear using a [third-party app](https://linear.app/docs/thi
 
 - Create issues for your workspace
 - Read access to your workspace
+
+
+## Jira integration
+
+Connect your Jira workspace to create and track Jira issues directly from error tracking.
+
+To set up the Jira integration:
+
+1. Go to [Error tracking settings](https://app.posthog.com/settings/project-error-tracking) in the PostHog app and find **Integrations**
+2. Under **Jira**, click **Connect workspace**
+3. Authorize PostHog to access your Jira site
+
+PostHog connects to Jira using OAuth 2.0. PostHog needs the following permissions:
+
+- Create issues in your Jira projects
+- Read access to your Jira projects
 
 ## What's next?
 

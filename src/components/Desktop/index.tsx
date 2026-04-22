@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
-import { IconDemoThumb, AppIcon, IconChangelogThumb } from 'components/OSIcons'
+import { IconDemoThumb, AppIcon } from 'components/OSIcons'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -14,6 +14,7 @@ import { motion } from 'framer-motion'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
+import usePostHog from '../../hooks/usePostHog'
 
 declare global {
     interface Window {
@@ -29,7 +30,9 @@ interface Product {
 }
 
 export const useProductLinks = () => {
-    const { posthogInstance, openNewChat } = useApp()
+    const { posthogInstance, openNewChat, siteSettings, updateSiteSettings } = useApp()
+    const { addToast } = useToast()
+    const posthog = usePostHog()
 
     return [
         {
@@ -40,7 +43,7 @@ export const useProductLinks = () => {
         },
         {
             label: 'Product OS',
-            Icon: <AppIcon name="folder" />,
+            Icon: <AppIcon name="notebook" />,
             url: '/products',
             source: 'desktop',
         },
@@ -83,23 +86,43 @@ export const useProductLinks = () => {
         },
         ...(posthogInstance
             ? [
-                {
-                    label: 'Open app ↗',
-                    Icon: <AppIcon name="computerCoffee" />,
-                    url: 'https://app.posthog.com',
-                    external: true,
-                    source: 'desktop',
-                },
-            ]
+                  {
+                      label: 'Open app ↗',
+                      Icon: <AppIcon name="computerCoffee" />,
+                      url: 'https://app.posthog.com',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]
             : [
-                {
-                    label: 'Sign up ↗',
-                    Icon: <AppIcon name="compass" />,
-                    url: 'https://app.posthog.com/signup',
-                    external: true,
+                  {
+                      label: 'Sign up ↗',
+                      Icon: <AppIcon name="compass" />,
+                      url: 'https://app.posthog.com/signup',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]),
+        {
+            label: 'Switch to website mode',
+            Icon: <AppIcon name="switch" />,
+            onClick: () => {
+                updateSiteSettings({ ...siteSettings, experience: 'boring' })
+                posthog?.capture('switched site mode', {
+                    value: 'website',
                     source: 'desktop',
-                },
-            ]),
+                })
+                addToast({
+                    title: 'Switched to website mode',
+                    description: 'Hover the logo to return to OS mode.',
+                    duration: 5000,
+                    onUndo: () => {
+                        updateSiteSettings({ ...siteSettings, experience: 'posthog' })
+                    },
+                })
+            },
+            source: 'desktop',
+        },
     ]
 }
 
@@ -204,6 +227,8 @@ export default function Desktop() {
         setConfetti,
         confetti,
         compact,
+        windows,
+        websiteMode,
         posthogInstance,
         updateSiteSettings,
     } = useApp()
@@ -212,6 +237,8 @@ export default function Desktop() {
         enabled: !siteSettings.screensaverDisabled,
     })
     const [rendered, setRendered] = useState(false)
+    const [navVisible, setNavVisible] = useState(false)
+    const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const { getWallpaperClasses } = useTheme()
     const { addToast } = useToast()
     function generateInitialPositions(columns = 2): IconPositions {
@@ -320,6 +347,9 @@ export default function Desktop() {
 
         return () => {
             window.removeEventListener('resize', handleResize)
+            if (hoverTimeoutRef.current) {
+                clearTimeout(hoverTimeoutRef.current)
+            }
         }
     }, [posthogInstance])
 
@@ -334,6 +364,20 @@ export default function Desktop() {
         const newPositions = { ...iconPositions, [appLabel]: position }
         setIconPositions(newPositions)
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newPositions))
+    }
+
+    const handleMouseEnter = () => {
+        if (hoverTimeoutRef.current) {
+            clearTimeout(hoverTimeoutRef.current)
+            hoverTimeoutRef.current = null
+        }
+        setNavVisible(true)
+    }
+
+    const handleMouseLeave = () => {
+        hoverTimeoutRef.current = setTimeout(() => {
+            setNavVisible(false)
+        }, 2000)
     }
 
     const allApps = [...productLinks, ...apps]
@@ -417,13 +461,18 @@ export default function Desktop() {
                     },
                 ]}
             >
-                <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
+                <div
+                    data-scheme="primary"
+                    data-app="Desktop"
+                    className={`fixed size-full ${websiteMode ? '-z-10 inset-0' : ''}`}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
                     <div className={`fixed inset-0 -z-10 ${getWallpaperClasses()}`} />
                     {/* Hogzilla */}
                     <div className="hidden select-none wallpaper-hogzilla:flex items-end justify-end absolute inset-0">
                         <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB] dark:opacity-0"></div>
                         <CloudinaryImage
-                            loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
                             alt=""
                             width={2574}
@@ -495,21 +544,44 @@ export default function Desktop() {
                                 backgroundRepeat: 'repeat',
                             }}
                         />
-                        <div className="absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0">
+                        <div
+                            className={`absolute ${
+                                websiteMode
+                                    ? 'bottom-4 -right-4 @[2600px]:right-4'
+                                    : 'bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0'
+                            }`}
+                        >
                             <CloudinaryImage
+                                loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
-                                alt=""
                                 width={1401}
                                 height={1400}
-                                className="size-[300px] md:size-[700px] dark:hidden"
+                                className={`${websiteMode ? '' : 'size-[300px] md:size-[700px]'} dark:hidden`}
+                                style={
+                                    websiteMode
+                                        ? {
+                                              width: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                              height: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                          }
+                                        : undefined
+                                }
+                                draggable={false}
                             />
                             <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_dark_opt_15e213413c.png"
-                                alt=""
                                 width={1401}
                                 height={1400}
-                                className="size-[300px] md:size-[700px] hidden dark:block"
+                                className={`${websiteMode ? '' : 'size-[300px] md:size-[700px]'} hidden dark:block`}
+                                style={
+                                    websiteMode
+                                        ? {
+                                              width: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                              height: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                          }
+                                        : undefined
+                                }
+                                draggable={false}
                             />
                         </div>
                     </div>
@@ -566,34 +638,38 @@ export default function Desktop() {
                         />
                     </div>
 
-                    <nav>
-                        <motion.ul
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: rendered ? 1 : 0 }}
-                            className="list-none m-0 -mt-2 md:mt-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2"
-                        >
-                            {allApps.map((app) => {
-                                const position = iconPositions[app.label] || { x: 0, y: 0 }
+                    {!websiteMode && (
+                        <nav>
+                            <motion.ul
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: rendered ? 1 : 0 }}
+                                className="list-none m-0 -mt-2 md:mt-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2"
+                            >
+                                {allApps.map((app) => {
+                                    const position = iconPositions[app.label] || { x: 0, y: 0 }
 
-                                return (
-                                    <DraggableDesktopIcon
-                                        key={app.label}
-                                        app={app}
-                                        initialPosition={position}
-                                        onPositionChange={(newPosition) => handlePositionChange(app.label, newPosition)}
-                                    />
-                                )
-                            })}
-                        </motion.ul>
-                    </nav>
+                                    return (
+                                        <DraggableDesktopIcon
+                                            key={app.label}
+                                            app={app}
+                                            initialPosition={position}
+                                            onPositionChange={(newPosition) =>
+                                                handlePositionChange(app.label, newPosition)
+                                            }
+                                        />
+                                    )
+                                })}
+                            </motion.ul>
+                        </nav>
+                    )}
                 </div>
-                {!compact && (
+                {!compact && !websiteMode && (
                     <Screensaver
                         isActive={isInactive || screensaverPreviewActive}
                         onDismiss={handleScreensaverDismiss}
                     />
                 )}
-                <HedgeHogModeEmbed />
+                {!websiteMode && <HedgeHogModeEmbed />}
             </ContextMenu>
             <NotificationsPanel />
             {confetti && (

@@ -34,6 +34,8 @@ import { mergeRegister } from '@lexical/utils'
 import { navigate } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
+import { useApp } from '../../context/App'
+import Link from 'components/Link'
 
 export default function MDXEditor({
     body,
@@ -41,6 +43,7 @@ export default function MDXEditor({
     jsxComponentDescriptors = [],
     cta,
     noEditorWrapper = false,
+    maxWidth,
 }: {
     mdxBody?: string
     body: string
@@ -50,6 +53,7 @@ export default function MDXEditor({
         label: string
     }
     noEditorWrapper?: boolean
+    maxWidth?: number
 }) {
     const [isSSR, setIsSSR] = useState(true)
     const [currentFormat, setCurrentFormat] = useState<FORMAT>(0)
@@ -59,6 +63,7 @@ export default function MDXEditor({
     const [canUndo, setCanUndo] = React.useState(false)
     const [canRedo, setCanRedo] = React.useState(false)
     const mdxEditorContainerRef = React.useRef<HTMLDivElement>(null)
+    const { websiteMode } = useApp()
 
     const mdxComponents = useMemo(() => {
         return jsxComponentDescriptors.reduce((acc, descriptor) => {
@@ -128,13 +133,18 @@ export default function MDXEditor({
     }
 
     const content = (
-        <div onClick={handleClick} ref={mdxEditorContainerRef}>
-            {isSSR && mdxBody ? (
-                <MDXProvider components={mdxComponents}>
+        <div
+            onClick={handleClick}
+            ref={mdxEditorContainerRef}
+            style={maxWidth ? { maxWidth, margin: '0 auto' } : undefined}
+        >
+            {(isSSR && mdxBody) || websiteMode ? (
+                <MDXProvider components={{ a: Link, ...mdxComponents }}>
                     <MDXRenderer>{mdxBody}</MDXRenderer>
                 </MDXProvider>
             ) : (
                 <MDXEditorComponent
+                    readOnly={websiteMode}
                     contentEditableClassName="outline-none"
                     markdown={body}
                     lexicalTheme={{

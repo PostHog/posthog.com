@@ -47,6 +47,7 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     width?: 'auto' | 'full'
     asLink?: boolean
     external?: boolean
+    hideExternalIcon?: boolean
     to?: string
     iconPosition?: 'left' | 'right'
     onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
@@ -73,6 +74,7 @@ export default function OSButton({
     width = 'auto',
     asLink = false,
     external = false,
+    hideExternalIcon = false,
     to,
     iconPosition = 'left',
     onClick,
@@ -172,7 +174,7 @@ export default function OSButton({
                     )}
                     {children}
                     {label && <span className={`${labelSizeClasses[size]} text-secondary`}>{label}</span>}
-                    {external ? (
+                    {external && !hideExternalIcon ? (
                         <IconArrowUpRight className="size-4 text-accent group-hover:text-secondary -ml-1" />
                     ) : null}
                     {chip && (
@@ -195,7 +197,7 @@ export default function OSButton({
                     )}
                     {children}
                     {label && <span className={`${labelSizeClasses[size]} text-secondary`}>{label}</span>}
-                    {external ? (
+                    {external && !hideExternalIcon ? (
                         <IconArrowUpRight className="size-4 text-accent group-hover:text-secondary -ml-1" />
                     ) : null}
                     {chip && (

@@ -1,0 +1,122 @@
+---
+title: Collecting user feedback
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+import EmbeddedSurvey from 'components/Docs/EmbeddedSurvey'
+
+<CalloutBox icon="IconInfo" title="User feedback is in beta" type="fyi">
+
+User feedback is currently in beta. We'd love to hear your feedback as we develop this feature:
+
+<EmbeddedSurvey surveyId="019c4416-db5e-0000-4b3c-3a565a512fed" />
+
+</CalloutBox>
+
+To collect user feedback for LLM traces, PostHog provides a native integration with [Surveys](/docs/surveys). The Surveys integration enables you to collect user feedback and thumbs up/down responses attached directly to a given trace.
+
+## How it works
+
+1. Start by creating a survey for a group of LLM traces.
+2. In your app, collect survey responses with an `$ai_trace_id` property attached to the events.
+3. View user feedback per-trace within LLM Analytics, or view all feedback within [Surveys](https://app.posthog.com/surveys).
+
+For the common thumbs up/down use-case, we provide a React hook `useThumbSurvey` to quickly attach a thumb survey and optional followup questions to your existing UI. In other cases, you can manually send survey-related events to attach them to your trace.
+
+## Creating a survey
+
+On any top-level [trace](/docs/llm-analytics/traces) (or pseudo-trace) event, navigate to the **Feedback** tab to create a survey.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_09_at_9_47_08_AM_322820b6e6.png" 
+    classes="rounded"
+    alt="LLM trace Feedback tab"
+/>
+
+The survey will begin with a thumbs up/down question. Toggle on **Ask follow-up on thumbs down** to ask a follow-up question when the user responds with "thumbs down".
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_09_at_10_04_53_AM_545b67c6bb.png" 
+    classes="rounded"
+    alt="LLM trace survey creation"
+/>
+
+For more customization you can edit this survey post-creation, or create a [new survey](https://app.posthog.com/surveys). However, complex surveys may not work with our `useThumbSurveys` hook and require manual event capture.
+
+Click **Create & continue** to create your survey and view implementation instructions.
+
+## Integrating with your app
+
+For the quickest setup in React apps, [use the `useThumbSurvey` hook to wire up your survey](/docs/llm-analytics/user-feedback/use-thumb-survey).
+
+If you need more flexibility, or are not building a React app, see [manual feedback event capture](/docs/llm-analytics/user-feedback/manual-event-capture).
+
+## Viewing survey responses
+
+You can view survey responses per-trace within LLM Analytics, or per-survey within Surveys.
+
+### View all feedback in Surveys
+
+Navigate to [Surveys](https://app.posthog.com/surveys) and open your LLM feedback survey. You'll see aggregated survey metrics at the top, such as overall thumbs up/down ratings:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_09_at_10_51_53_AM_249986e17f.png" 
+    classes="rounded"
+    alt="Survey thumbs up down ratings"
+/>
+
+You can also view all responses in a table, and quickly link to the related trace by clicking the LLM Analytics icon:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_09_at_10_52_04_AM_b4c56f0097.png" 
+    classes="rounded"
+    alt="Survey thumbs up down ratings"
+/>
+
+### View all traces with feedback
+
+Use this SQL expression to filter your LLM traces down to only those with attached survey responses:
+
+```sql
+properties.$ai_trace_id IN (
+  SELECT properties.$ai_trace_id
+  FROM events
+  WHERE event = 'survey sent'
+)
+```
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_11_at_7_36_02_PM_132b44dbea.png" 
+    classes="rounded"
+    alt="SQL expression for filtering LLM traces with feedback"
+/>
+
+### View individual trace feedback
+
+For an individual trace, navigate to the **Feedback** tab to see survey responses.
+
+If there are no `survey sent` or `survey shown` events associated with the given trace, you'll see the option to create a new survey, or select an existing one to see implementation instructions.
+
+Otherwise you'll see the survey response, or a message indicating a survey was shown but no response was sent.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_09_at_11_36_28_AM_efff2d2a69.png" 
+    classes="rounded"
+    alt="Negative feedback on trace event with followup"
+/>
+
+## Best practices
+
+### Organizing feedback
+
+We recommend creating one survey per logical "group" of traces.
+
+For example, consider a product that offers users two AI generations:
+1. Chatbot to help query the docs
+2. Agent to help build custom dashboards
+
+In this case, we'd recommend creating two separate surveys: one for the docs chatbot, and another for the dashboard agent.
+
+This would enable you to quickly view aggregate feedback for all docs chat traces or custom dashboard generation traces via the [Surveys](https://app.posthog.com/surveys) UI.
+
+If you use a single survey for all traces, it will be difficult to parse them per "group" or "user action" without adding custom event properties and building your own dashboards.

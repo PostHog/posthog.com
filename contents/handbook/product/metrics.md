@@ -39,7 +39,7 @@ Note that currently, refunds are not removed from per-product revenue, which is 
 
 ### Usage
 
-Product usage metrics are defined by the PM or small team lead. When setting up metrics for a new product, it’s recommended to start with a longer list and trim it once user behaviour is better understood. We recommend adding all relevant product metrics to one dashboard that is accessible, kept up to date and reviewed by the whole small team. For better discoverability, some of us use the appendix ™ to mark the primary usage dashboard.
+Product usage metrics are defined by the PM or small team lead. When setting up metrics for a new product, it’s recommended to start with a longer list and trim it once user behavior is better understood. We recommend adding all relevant product metrics to one dashboard that is accessible, kept up to date and reviewed by the whole small team. For better discoverability, some of us use the appendix ™ to mark the primary usage dashboard.
 
 This dashboard can also include NPS & support metrics (see below).
 

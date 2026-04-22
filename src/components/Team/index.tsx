@@ -1,10 +1,11 @@
+import { AVATAR_FALLBACK_URL } from 'constants/index'
 import { PineappleText } from 'components/Job/Sidebar'
 import { InProgress } from 'components/Roadmap/InProgress'
 import { Question } from 'components/Squeak'
 import useTeamUpdates from 'hooks/useTeamUpdates'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import { kebabCase } from 'lib/utils'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
@@ -25,7 +26,6 @@ import TaskOwnershipTable from 'components/TaskOwnershipTable'
 import SmallTeam from 'components/SmallTeam'
 import Stickers from 'components/ProfileStickers'
 import uploadImage from 'components/Squeak/util/uploadImage'
-import slugify from 'slugify'
 import * as yup from 'yup'
 import Section from './Section'
 import Header from './Header'
@@ -45,6 +45,7 @@ import {
 } from 'components/Stickers/Index'
 import ZoomHover from 'components/ZoomHover'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { normalizeSlug } from './utils'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -183,14 +184,7 @@ export const TeamMemberCard = ({
                 </div>
             </div>
             <div className="ml-auto -mb-4 -mr-4 mt-2">
-                <img
-                    src={
-                        avatar?.data?.attributes?.url ||
-                        avatar?.url ||
-                        'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-                    }
-                    className="w-[165px]"
-                />
+                <img src={avatar?.data?.attributes?.url || avatar?.url || AVATAR_FALLBACK_URL} className="w-[165px]" />
             </div>
         </div>
     )
@@ -259,13 +253,24 @@ export default function Team({
         slug,
     })
 
-    const { name, crest, crestOptions, description, tagline, profiles, leadProfiles, teamImage, miniCrest } =
-        team?.attributes || {}
+    const {
+        name,
+        slug: teamSlug,
+        crest,
+        crestOptions,
+        description,
+        tagline,
+        profiles,
+        leadProfiles,
+        teamImage,
+        miniCrest,
+    } = team?.attributes || {}
     const { user, getJwt } = useUser()
     const isModerator = user?.role?.type === 'moderator'
     const {
         allSlackEmoji: { totalCount: totalSlackEmojis },
         allTeams,
+        allTeamSlugs,
         allAshbyJobPosting,
     } = useStaticQuery(graphql`
         {
@@ -283,6 +288,11 @@ export default function Team({
                             }
                         }
                     }
+                }
+            }
+            allTeamSlugs: allSqueakTeam(filter: { name: { ne: "Hedgehogs" } }) {
+                nodes {
+                    slug
                 }
             }
             allAshbyJobPosting(filter: { isListed: { eq: true } }) {
@@ -303,15 +313,33 @@ export default function Team({
             }
         }
     `)
+    const existingTeamSlugs = useMemo(
+        () => new Set((allTeamSlugs?.nodes || []).map((node: any) => node?.slug?.toLowerCase()).filter(Boolean)),
+        [allTeamSlugs?.nodes]
+    )
 
-    const { handleChange, values, submitForm, setFieldValue } = useFormik({
+    const { handleChange, handleBlur, values, submitForm, setFieldValue, touched, errors } = useFormik({
         enableReinitialize: true,
         validateOnMount: true,
         validationSchema: yup.object({
             name: yup.string().required('Name is required'),
+            slug: yup
+                .string()
+                .required('Slug is required')
+                .test('valid-slug', 'Slug can only include lowercase letters, numbers, and hyphens', (value) => {
+                    if (!value) return false
+                    return normalizeSlug(value) === value
+                })
+                .test('unique-slug', 'Slug is already in use', (value) => {
+                    if (!value) return false
+                    const normalized = normalizeSlug(value)
+                    const currentSlug = (teamSlug || slug || '').toLowerCase()
+                    return normalized === currentSlug || !existingTeamSlugs.has(normalized)
+                }),
         }),
         initialValues: {
             name,
+            slug: teamSlug || slug || '',
             description,
             tagline,
             teamImage: teamImage?.image?.data
@@ -337,6 +365,7 @@ export default function Team({
         },
         onSubmit: async ({
             name,
+            slug: submittedSlug,
             description,
             tagline,
             teamImageCaption,
@@ -372,8 +401,10 @@ export default function Team({
                     id: profileID,
                     type: 'api::profile.profile',
                 }))
+            const normalizedSlug = normalizeSlug(submittedSlug || name)
             const updatedTeam = {
                 name,
+                slug: normalizedSlug,
                 description,
                 tagline,
                 teamImage: {
@@ -394,6 +425,9 @@ export default function Team({
                 await createTeam(updatedTeam)
             } else {
                 await updateTeam(updatedTeam)
+                if (normalizedSlug !== slug) {
+                    navigate(`/teams/${normalizedSlug}`)
+                }
             }
             setSaving(false)
             setEditing(false)
@@ -444,7 +478,7 @@ export default function Team({
 
     const createTeam = async (team: any) => {
         const jwt = await getJwt()
-        const body = JSON.stringify({ data: { ...team, slug: slugify(team.name, { lower: true, remove: /and/ }) } })
+        const body = JSON.stringify({ data: { ...team, slug: team.slug || normalizeSlug(team.name) } })
         const {
             data: {
                 attributes: { slug },
@@ -538,8 +572,11 @@ export default function Team({
                 teamImage={teamImage}
                 hasInProgress={hasInProgress}
                 handleChange={handleChange}
+                onBlur={handleBlur}
                 values={values}
                 editing={editing}
+                touched={touched}
+                errors={errors}
                 setFieldValue={setFieldValue}
             />
 

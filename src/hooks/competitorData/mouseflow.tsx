@@ -6,7 +6,7 @@ export const mouseflow = {
     },
     products: {
         product_analytics: {
-            available: false,
+            available: 'Funnels only',
         },
         web_analytics: {
             available: false,
@@ -17,6 +17,7 @@ export const mouseflow = {
                 free_tier: '500/mo',
             },
             features: {
+                ai_summaries: true,
                 canvas_recording: false,
                 event_timeline: true,
             },
@@ -71,7 +72,7 @@ export const mouseflow = {
             role_based_access_control: '',
         },
         pricing: {
-            transparent_pricing: '',
+            transparent_pricing: true,
             self_serve: true,
         },
         tools: {

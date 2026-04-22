@@ -7,6 +7,7 @@
         "duration": "Duration of the agreement",
         "reason": "Cloud storage of PostHog Cloud data",
         "location": "USA (PostHog US Cloud) or Germany (PostHog EU Cloud)",
+        "regions": ["USA", "Germany"],
         "dataTypes": {
             "Identifying": ["Name", "Username"],
             "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
@@ -15,7 +16,7 @@
             "Behavioral": ["Product Usage (Page Views, Clicks, Browsing Behavior)"]
         },
         "categories": "Customer's end users",
-        "details": ["https://aws.amazon.com/compliance/sub-processors/"]
+        "details": ["https://aws.amazon.com/trust-center/", "https://aws.amazon.com/compliance/sub-processors/"]
     },
     {
         "name": "OpenAI, L.L.C.",
@@ -24,7 +25,8 @@
         "subject": "Personal data of users of the Controller's web product(s)",
         "duration": "Duration of the agreement for so long as AI Features are enabled",
         "reason": "Service Provider for AI Features",
-        "location": "<div>USA</div><div>Location of the sub-sub processors can be found at <a href='https://openai.com/policies/sub-processor-list/' target='_blank'>openai.com/policies/sub-processor-list</a></div>",
+        "location": "<div>USA</div>",
+        "regions": ["USA"],
         "dataTypes": {
             "Identifying": ["Name", "Username"],
             "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
@@ -33,7 +35,7 @@
             "Behavioral": ["Product Usage (Page Views, Clicks, Browsing Behavior)"]
         },
         "categories": "Customer's end users",
-        "details": ["https://openai.com/policies/sub-processor-list"]
+        "details": ["https://trust.openai.com/", "https://openai.com/policies/sub-processor-list"]
     },
     {
         "name": "Google LLC",
@@ -42,7 +44,8 @@
         "subject": "Personal data of users of the Controller's web product(s)",
         "duration": "Duration of the agreement for so long as AI Features are enabled",
         "reason": "Service Provider for AI Features",
-        "location": "<div>USA</div><div>Location of the sub-sub processors can be found at <a href='https://business.safety.google/subprocessors/' target='_blank'>business.safety.google/subprocessors</a></div>",
+        "location": "<div>USA</div>",
+        "regions": ["USA"],
         "dataTypes": {
             "Identifying": ["Name", "Username"],
             "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
@@ -51,7 +54,7 @@
             "Behavioral": ["Product Usage (Page Views, Clicks, Browsing Behavior)"]
         },
         "categories": "Customer's end users",
-        "details": ["https://business.safety.google/subprocessors"]
+        "details": ["https://cloud.google.com/trust-center", "https://business.safety.google/subprocessors"]
     },
     {
         "name": "Anthropic PBC",
@@ -60,7 +63,8 @@
         "subject": "Personal data of users of the Controller's web product(s)",
         "duration": "Duration of the agreement for so long as AI Features are enabled",
         "reason": "Service Provider for AI Features",
-        "location": "<div>USA</div><div>Location of the sub-sub processors can be found at <a href='https://trust.anthropic.com/subprocessors' target='_blank'>trust.anthropic.com/subprocessors</a></div>",
+        "location": "<div>USA</div>",
+        "regions": ["USA"],
         "dataTypes": {
             "Identifying": ["Name", "Username"],
             "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
@@ -69,7 +73,7 @@
             "Behavioral": ["Product Usage (Page Views, Clicks, Browsing Behavior)"]
         },
         "categories": "Customer's end users",
-        "details": ["https://trust.anthropic.com/subprocessors"]
+        "details": ["https://trust.anthropic.com/", "https://trust.anthropic.com/subprocessors"]
     },
     {
         "name": "Microsoft Corporation",
@@ -78,7 +82,8 @@
         "subject": "Personal data of users of the Controller's web product(s)",
         "duration": "Duration of the agreement for so long as AI Features are enabled",
         "reason": "Service Provider for AI Features",
-        "location": "<div>USA, Germany</div><div>Location of the sub-sub processors can be found at <a href='https://servicetrust.microsoft.com/DocumentPage/f2cc90fe-471f-4f07-a9ae-af71ebce8486' target='_blank'>servicetrust.microsoft.com/DocumentPage/f2cc90fe-471f-4f07-a9ae-af71ebce8486</a></div>",
+        "location": "<div>USA, Germany</div>",
+        "regions": ["USA", "Germany"],
         "dataTypes": {
             "Identifying": ["Name", "Username"],
             "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
@@ -87,7 +92,10 @@
             "Behavioral": ["Product Usage (Page Views, Clicks, Browsing Behavior)"]
         },
         "categories": "Customer's end users",
-        "details": ["https://servicetrust.microsoft.com/DocumentPage/f2cc90fe-471f-4f07-a9ae-af71ebce8486"]
+        "details": [
+            "https://www.microsoft.com/en-us/trust-center",
+            "https://servicetrust.microsoft.com/DocumentPage/f2cc90fe-471f-4f07-a9ae-af71ebce8486"
+        ]
     },
     {
         "name": "Wiz, Inc.",
@@ -96,7 +104,8 @@
         "subject": "Personal data of users of the Controller's web product(s)",
         "duration": "Duration of the agreement",
         "reason": "Security vulnerability management and detection",
-        "location": "<div>Germany, France</div><div>Location of the sub-sub processors can be found at <a href='https://www.wiz.io/legal/sub-processor-list' target='_blank'>wiz.io/legal/sub-processor-list</a></div>",
+        "location": "<div>Germany, France</div>",
+        "regions": ["Germany", "France"],
         "dataTypes": {
             "Identifying": ["Name", "Username"],
             "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
@@ -114,7 +123,8 @@
         "subject": "Personal data of users of the Controller's web product(s)",
         "duration": "Duration of the agreement",
         "reason": "Operations and performance monitoring of Databases hosted on Amazon Web Services",
-        "location": "<div>USA (PostHog US Cloud) or Germany (PostHog EU Cloud)</div><div>Location of the sub-sub processors can be found at <a href='https://trust.planetscale.com/subprocessors' target='_blank'>trust.planetscale.com/subprocessors</a></div>",
+        "location": "<div>USA (PostHog US Cloud) or Germany (PostHog EU Cloud)</div>",
+        "regions": ["USA", "Germany"],
         "dataTypes": {
             "Identifying": ["Name", "Username"],
             "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
@@ -125,14 +135,15 @@
         "categories": "Customer's end users",
         "details": ["https://trust.planetscale.com/", "https://trust.planetscale.com/subprocessors"]
     },
-        {
+    {
         "name": "Modal Labs, Inc.",
         "type": "cloud",
         "contact": "Modal Labs, Inc. 584 Broadway Rm 1001<br />New York, NY 10012<br />USA,<br />security@modal.com",
         "subject": "Personal data of users of the Controller's web product(s)",
         "duration": "Duration of the agreement",
         "reason": "Serverless compute infrastructure for isolated code execution",
-        "location": "<div>USA (PostHog US Cloud) or Germany (PostHog EU Cloud)</div><div>Location of the sub-sub processors can be found at <a href='https://trust.modal.com/subprocessors' target='_blank'>trust.modal.com/subprocessors</a></div>",
+        "location": "<div>USA (PostHog US Cloud) or Germany (PostHog EU Cloud)</div>",
+        "regions": ["USA", "Germany"],
         "dataTypes": {
             "Identifying": ["Name", "Username"],
             "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],

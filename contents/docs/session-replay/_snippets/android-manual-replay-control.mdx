@@ -1,0 +1,13 @@
+> Requires PostHog Android SDK version >= [3.16.0](https://github.com/PostHog/posthog-android/releases/tag/3.16.0).
+
+Setting `config.sessionReplay = false` in your PostHog configuration will prevent PostHog from automatically starting session recordings on SDK setup.
+
+You can manually control when to start and stop session recordings using the following methods:
+
+- `startSessionReplay(resumeCurrent: Boolean)`
+  - Set **resumeCurrent** to `true` to resume a previous session recording (Default). 
+  - Set **resumeCurrent** to `false` to start a new session recording. 
+- `stopSessionReplay()` 
+  - Stops/pauses the current session recording.
+
+> **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).

@@ -68,17 +68,15 @@ client.capture(event).unwrap();
 ```
 
 ```elixir
-Posthog.capture("your_event_name", %{
-  distinct_id: distinct_id_of_the_user,
-  properties: %{
-    "$process_person_profile": false
-  }
+PostHog.capture("your_event_name", %{
+  distinct_id: "distinct_id_of_the_user",
+  "$process_person_profile": false
 })
 ```
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "properties": {
         "$process_person_profile": false
     },

@@ -90,8 +90,12 @@ const titleMap: Record<string, string> = {
     cohorts: 'Cohorts',
     dashboards: 'Dashboards',
     dashboard_templates: 'Dashboard templates',
+    dataset_items: 'Dataset items',
+    datasets: 'Datasets',
     early_access_feature: 'Early access features',
     environments: 'Environments',
+    evaluation_runs: 'Evaluation runs',
+    evaluations: 'Evaluations',
     event_definitions: 'Event definitions',
     events: 'Events',
     experiments: 'Experiments',
@@ -101,6 +105,8 @@ const titleMap: Record<string, string> = {
     hog_functions: 'Hog functions',
     insights: 'Insights',
     invites: 'Invites',
+    llm_analytics: 'LLM analytics',
+    llm_prompts: 'LLM prompts',
     members: 'Members',
     notebooks: 'Notebooks',
     organizations: 'Organizations',
@@ -142,7 +148,7 @@ function pathID(verb, path) {
 
 function Params({ params, objects, object, depth = 0 }) {
     if (depth > 4) return null
-    if (object) {
+    if (object?.properties) {
         params = Object.entries(object.properties).map(([key, value]) => {
             return {
                 name: key,
@@ -311,6 +317,7 @@ function RequestBody({ item, objects }) {
         item.requestBody?.content?.['application/json']?.schema.items?.['$ref'].split('/').at(-1)
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
+    if (!object?.properties) return null
 
     return (
         <div>
@@ -336,6 +343,7 @@ function ResponseBody({ item, objects }) {
         .at(-1)
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
+    if (!object?.properties) return null
     const [showResponse, setShowResponse] = useState(false)
 
     return (
@@ -374,6 +382,7 @@ function RequestExample({ name, item, objects, exampleLanguage, setExampleLangua
         const objectKey = item.requestBody.content?.['application/json']?.schema['$ref']?.split('/').at(-1)
         if (!objectKey) return null
         const object = objects.schemas[objectKey]
+        if (!object?.properties) return null
         params = Object.entries(object.properties).filter(
             ([name, schema]) => object.required?.indexOf(name) > -1 && !schema.readOnly
         )
@@ -449,7 +458,7 @@ response = requests.${item.httpVerb}(
         <CodeBlock
             selector="dropdown"
             currentLanguage={currentLanguage}
-            onChange={({ language }) => setExampleLanguage(language)}
+            onChange={(option) => setExampleLanguage(option.language)}
             label={
                 <div className="code-example flex text-xs space-x-1.5 my-1">
                     <code className={`shrink-0 text-${mapVerbsColor[item.httpVerb]}`}>
@@ -558,8 +567,6 @@ interface ApiEndpointData {
         name: string
         nextURL?: string
         items: string
-    }
-    apiComponents: {
         components: string
     }
     allMdx: {
@@ -571,10 +578,7 @@ interface ApiEndpointData {
 }
 
 export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.Element {
-    const {
-        apiComponents: { components: apiComponents },
-        allMdx,
-    } = data
+    const { allMdx } = data
     const name = data.data.name
     const title = titleMap[name] || humanReadableName(name)
     const nextURL = data.data.nextURL
@@ -587,13 +591,13 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
     }
     // Filter PUT as it's basically the same as PATCH
     const items = JSON.parse(data.data.items).filter((item) => item.httpVerb !== 'put')
-    items.map((item) => {
-        if (!paths[item.path]) {
-            paths[item.path] = {}
+    items.forEach((item) => {
+        if (!paths[item.pathName]) {
+            paths[item.pathName] = {}
         }
-        paths[item.path][item.httpVerb] = item.operationSpec
+        paths[item.pathName][item.httpVerb] = item
     })
-    const objects = JSON.parse(apiComponents)
+    const objects = JSON.parse(data.data.components)
 
     const [exampleLanguage, setExampleLanguageState] = useState()
     const contentContainerRef = useRef<HTMLDivElement>(null)
@@ -641,7 +645,6 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                     <Endpoints paths={paths} containerRef={contentContainerRef} />
 
                     {items.map((item, index) => {
-                        item = item.operationSpec
                         const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
 
                         return (
@@ -764,8 +767,6 @@ export const query = graphql`
             name
             url
             nextURL
-        }
-        apiComponents: apiComponents {
             components
         }
     }

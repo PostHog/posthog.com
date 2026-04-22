@@ -22,6 +22,12 @@ import DotNetInstall from '../../integrate/_snippets/install-dotnet.mdx'
 
 <DotNetInstall />
 
+## Identifying users
+
+import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx'
+
+<IdentifyBackendCallout />
+
 ## Capturing events
 
 import DotNetSendEvents from '../../integrate/send-events/_snippets/send-events-dotnet.mdx'
@@ -118,7 +124,7 @@ For details on how to implement local evaluation, see our [local evaluation guid
 
 ## Experiments (A/B tests)
 
-Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```csharp
 if (await posthog.GetFeatureFlagAsync(

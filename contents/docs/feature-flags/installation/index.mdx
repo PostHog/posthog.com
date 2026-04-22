@@ -1,30 +1,18 @@
 ---
-title: Feature flag installation
-sidebar: Docs
-showTitle: true
-availability:
-    free: partial
-    selfServe: full
-    enterprise: full
+title: Install Feature Flags with PostHog
 ---
 
 import FeatureFlagsInstallationPlatforms from './_snippets/installation-platforms'
+import WizardCommand from 'components/WizardCommand'
 
-Feature flags enable safer deployment and roll back of new features and code. This helps roll out new features to your users in a managed way. If something goes wrong, flags enable roll backs without having to re-deploy your application.
+## AI wizard
 
-Feature flags also help you control access to certain parts of your product, such as only showing paid features to users with an active subscription or [early access features](/docs/feature-flags/early-access-feature-management) to users enrolled in a beta.
+Install PostHog in seconds with our wizard by running this command in your project directory with your terminal (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
+
+<WizardCommand />
+
+Wait for it to finish and test the setup once the wizard is complete.
 
 ## Platforms
 
 <FeatureFlagsInstallationPlatforms />
-
-> **Note:** Feature flags are not yet supported in our community-maintained Rust SDK. Use the [API](/docs/feature-flags/installation/api) instead.
-
-## Next steps
-
-| Resource | Description |
-|----------|-------------|
-| [Adding feature flag code](/docs/feature-flags/adding-feature-flag-code) | How to check flags in your code for all platforms |
-| [Framework-specific guides](/docs/feature-flags/tutorials#framework-guides) | Setup guides for React Native, Next.js, Flutter, and other frameworks |
-| [How to do a phased rollout](/tutorials/phased-rollout) | Gradually roll out features to minimize risk |
-| [More tutorials](/docs/feature-flags/tutorials) | Other real-world examples and use cases |

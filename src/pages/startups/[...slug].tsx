@@ -5,7 +5,6 @@ import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-
 import { Accordion } from 'components/RadixUI/Accordion'
 import { IconCheck, IconX } from '@posthog/icons'
 import OSTable from 'components/OSTable'
@@ -15,6 +14,8 @@ import Logo1984 from '../../images/1984.svg'
 import ODFLogo from '../../images/odf.svg'
 import Logo from 'components/Logo'
 import OSButton from 'components/OSButton'
+import AxisLogo from '../../images/axis-logo.svg'
+import CategoryLogo from '../../images/category.svg'
 import { useMenuSelectOptions } from 'components/TaskBarMenu/menuData'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
@@ -37,6 +38,26 @@ const partnerConfigs = [
                 <IconX className="size-8 text-white inline-block relative top-1" />
                 <img src={StripeLogo} alt="Stripe" className="inline-block h-9 relative top-[.2rem]" />
                 <span>Atlas</span>
+            </>
+        ),
+        value: '$50,000',
+    },
+    {
+        slug: 'axi',
+        title: (
+            <>
+                <IconX className="size-8 text-white inline-block relative top-1 pb-2" />
+                <img src={AxisLogo} alt="Axis" className="inline-block h-9 relative top-[.2rem] pb-2" />
+            </>
+        ),
+        value: '$50,000',
+    },
+    {
+        slug: 'category',
+        title: (
+            <>
+                <IconX className="size-8 text-white inline-block relative top-1 pb-2" />
+                <img src={CategoryLogo} alt="Category" className="inline-block h-9 relative top-[.2rem] pb-2" />
             </>
         ),
         value: '$50,000',
@@ -89,6 +110,7 @@ export default function Startups(): JSX.Element {
     // Use partner config if available, otherwise use defaults
     const titleContent = partnerConfig ? partnerConfig.title : <span>for startups</span>
     const creditValue = partnerConfig ? partnerConfig.value : '$50,000'
+    const applyUrl = `https://app.posthog.com/startups${partnerSlug ? `/${partnerSlug}` : ''}`
 
     return (
         <>
@@ -127,11 +149,7 @@ export default function Startups(): JSX.Element {
                                                 <li>Create a PostHog account and add a credit card</li>
                                                 <li>
                                                     After onboarding,{' '}
-                                                    <Link
-                                                        to="https://app.posthog.com/startups"
-                                                        external
-                                                        className="underline font-semibold"
-                                                    >
+                                                    <Link to={applyUrl} external className="underline font-semibold">
                                                         complete this form
                                                     </Link>
                                                 </li>
@@ -216,7 +234,7 @@ export default function Startups(): JSX.Element {
                                 <li>Partner benefits</li>
                             </ul>
 
-                            <OSButton asLink to="https://app.posthog.com/startups" variant="primary" size="md" external>
+                            <OSButton asLink to={applyUrl} variant="primary" size="md" external>
                                 Apply now
                             </OSButton>
 
@@ -234,13 +252,13 @@ export default function Startups(): JSX.Element {
                         </div>
                         <div className="bg-[#9BBEC2] p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_merch_b2106b276a.png" />
-                            <h3 className="text-base my-1 leading-tight">Founder swag</h3>
+                            <h3 className="text-base my-1 leading-tight">Exclusive founder swag</h3>
                             <p className="text-sm mb-0">
                                 You can never have too many laptop stickers, hats, or free t-shirts, right?
                             </p>
                         </div>
                         <div className="bg-[#E6B2F8] rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_docs_ae8043058c.png" />
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/startup_perk_2_f6a6b9d058.png" />
                             <h3 className="text-base my-1 leading-tight">Easier incidents with Incident.io</h3>
                             <p className="text-sm mb-0">
                                 Avoid additional stress by getting $1,500 off a teams plan for Incident.io.
@@ -281,7 +299,7 @@ export default function Startups(): JSX.Element {
                             </div>
                         </div>
 
-                        <div className="border-t border-primary pt-4 @2xl:border-none @2xl:pt-0">
+                        <div className="border-t border-primary pt-4 mt-4 @2xl:border-none @2xl:pt-0">
                             <img
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/concept_ventures_fa46262122.svg"
                                 className="h-8 my-2"
@@ -433,11 +451,7 @@ export default function Startups(): JSX.Element {
                                         <p>
                                             Just sign up to a paid plan in PostHog (you're only charged for usage) and
                                             then fill in this{' '}
-                                            <Link
-                                                to="https://app.posthog.com/startups"
-                                                external
-                                                className="underline font-semibold"
-                                            >
+                                            <Link to={applyUrl} external className="underline font-semibold">
                                                 form
                                             </Link>
                                             . We will apply the credit automatically if you're eligible. If you're
@@ -475,6 +489,33 @@ export default function Startups(): JSX.Element {
                                                 contact us to discuss options
                                             </Link>
                                             . Credits can be used towards all other aspects of the Boost add-on.
+                                        </p>
+                                    ),
+                                },
+                                {
+                                    trigger:
+                                        'I use another tool, like Amplitude or Pendo. Can I migrate that data to PostHog?',
+                                    content: (
+                                        <p>
+                                            Yes, you can migrate your data from another tool to PostHog using our
+                                            [migration guides](/docs/migrate/), which cover how to migrate from tools
+                                            such as Amplitude, Pendo, Plausible, Mixpanel, Heap, LaunchDarkly, Google
+                                            Analytics, and more.
+                                        </p>
+                                    ),
+                                },
+                                {
+                                    trigger:
+                                        'Do you offer onboarding help, to make sure I get everything set up correctly.',
+                                    content: (
+                                        <p>
+                                            Yes. By joining the startup program, you'll already get access to our
+                                            startup newsletter full of tips and tricks for getting the most out of
+                                            PostHog, as well as invites to our exclusive events. If you need more help,
+                                            you can [purchase a 30-minute onboarding call with our
+                                            team](/merch?product=30-min-onboarding-consultation), or explore [custom
+                                            service packages](/services). Please note that PostHog credit can not be
+                                            used towards these services.
                                         </p>
                                     ),
                                 },

@@ -18,15 +18,15 @@ We also offer [parental leave](/handbook/people/time-off#parental-leave) for new
 
 As we are fully remote, we provide [all equipment](/handbook/people/spending-money#equipment) you need to have an ergonomic setup at home to be as productive as possible. We provide all team members with a company card for this purpose.
 
-If you ever need change of scenery, we offer a monthly budget towards [coworking or café working](/handbook/people/spending-money#work-space), or [WeWork All Access](https://www.wework.com/solutions/wework-all-access).
+If you ever need change of scenery, co-working or working from a cafe or [WeWork All Access](https://www.wework.com/solutions/wework-all-access) are available, just follow our [expense policy](https://posthog.com/handbook/people/spending-money) e.g. we trust you to do the right thing.
 
 > Please message Kendal to get added to our company WeWork account. 
 
 ## Meeting up 
 
-We do regular [team offsites](/handbook/company/offsites) - recent trips have included Aruba, Iceland, and Portugal! Small Teams also have their own offsites at least once a year. 
+We do regular [team offsites](/handbook/company/offsites) - recent trips have included Mexico, Aruba, Iceland, and Portugal! Small Teams also have their own offsites at least once a year. 
 
-We also give all team members a [$1,500/quarter budget](/handbook/people/spending-money#budget-for-socializing) to meet up in person _in addition_ to the offsite budget
+We also encourage people and teams to meet up in person _in addition_ to the offsites. If you are working on a problem that is better worked on in person, then you should do this. Our [expense policy](https://posthog.com/handbook/people/spending-money) is about trusting you to make the best decisions. Travelling can be distracting so we expect you to exercise judgement when doing this.
 
 For any work-related travel, we also use [Project Wren](https://www.wren.co/) for carbon offsetting. 
 
@@ -56,13 +56,13 @@ We currently offer a [Training budget](/handbook/people/training#training-budget
 
 #### 401k contribution
 
-In the US, our 401k plan is managed by [Guideline](https://www.guideline.com/) and we match up to 4%. 
+In the US, our 401k plan is managed by [Vestwell](https://connect-b.vestwell.com/) and we match up to 4%. 
 
 #### Health care
 
-In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Deel](https://app.deel.com/). We also offer dental and vision insurance via Guardian. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents. Manage your benefits through [Employee Navigator](https://www.employeenavigator.com/).
+In the US, you'll enroll in benefits through [BambooHR](https://posthog.bamboohr.com/login.php) and manage your coverage through [UnitedHealthcare](https://member.uhc.com/) for medical and [Guardian](https://www.guardiananytime.com/) for dental and vision. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents.
 
-We offer the option to opt in to a [Flexible Savings Account (FSA)](https://www.healthcare.gov/have-job-based-coverage/flexible-spending-accounts/), which is a tax-advantaged account that allows you to contribute pre-tax dollars up to $3,050 per year to be used on out-of-pocket medical expenses. The FSA is a "use it or lose it" benefit, so any dollars that are not spent by the end of the year return to the company.  
+We offer the option to opt in to a [Flexible Savings Account (FSA)](https://www.healthcare.gov/have-job-based-coverage/flexible-spending-accounts/), which is a tax-advantaged account that allows you to contribute pre-tax dollars up to $3,400 per year to be used on out-of-pocket medical expenses. The FSA is a "use it or lose it" benefit, so any dollars that are not spent by the end of the year return to the company.  
 
 There is also the option to choose a lower tier, high deductible health plan (HDHP), which will qualify you for a [Health Savings Account (HSA)](https://www.healthcare.gov/glossary/health-savings-account-hsa/) that has further tax benefits beyond what the FSA provides. At the end of the year, any unused money rolls over and the contribution limit resets.
 

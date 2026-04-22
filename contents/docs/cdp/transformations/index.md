@@ -12,7 +12,7 @@ As PostHog data arrives, you can transform it *immediately* before ingestion. Yo
 - Filtering out bot traffic
 - Much more.. 
 
-PostHog enables you to transform your events in realtime using a variety of pre-built transformations. Check out the [data pipelines](https://us.posthog.com/pipeline/overview) tab and choose **transformations** to get started.
+PostHog enables you to transform your events in realtime using a variety of pre-built transformations. Check out the [data pipelines transformations](https://app.posthog.com/data-management/transformations) tab to get started.
 
 ![Transformations list in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/transformation_list_a15ad4e309.png)
 
