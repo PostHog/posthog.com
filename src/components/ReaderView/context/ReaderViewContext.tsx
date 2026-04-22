@@ -39,12 +39,29 @@ const ReaderViewContext = createContext<ReaderViewContextType | undefined>(undef
 
 const isLabel = (item: any) => !item?.url && item?.name
 
+const SIDEBAR_PINNED_KEY = 'reader-sidebar-pinned'
+
+const readPersistedPinned = (): boolean | null => {
+    if (typeof window === 'undefined') return null
+    const raw = localStorage.getItem(SIDEBAR_PINNED_KEY)
+    if (raw === 'true') return true
+    if (raw === 'false') return false
+    return null
+}
+
 export function ReaderViewProvider({ children }: { children: React.ReactNode }) {
     const { appWindow } = useWindow()
     // @2xl breakpoint for sidebar visibility (equivalent to @2xl/app-reader used in CSS)
     const isWideEnoughForSidebar = appWindow?.size?.width && appWindow?.size?.width >= 672 // 42rem = 672px
-    const [isNavVisible, setIsNavVisible] = useState(isWideEnoughForSidebar)
-    const [navUserToggled, setNavUserToggled] = useState(false)
+    // `isNavVisible` is the user-facing "pinned" state for the LeftSidebar.
+    // Persisted to localStorage so the choice survives reloads. On first visit
+    // (or with no stored value) it falls back to the width-based default.
+    const [isNavVisible, setIsNavVisible] = useState<boolean>(() => {
+        const persisted = readPersistedPinned()
+        if (persisted !== null) return persisted
+        return !!isWideEnoughForSidebar
+    })
+    const [navUserToggled, setNavUserToggled] = useState(() => readPersistedPinned() !== null)
     // @6xl breakpoint is 72rem = 1152px
     const isLarge = appWindow?.size?.width && appWindow?.size?.width >= 1152
     const [isTocVisible, setIsTocVisible] = useState(isLarge)
@@ -63,7 +80,13 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
 
     const toggleNav = useCallback(() => {
         setNavUserToggled(true)
-        setIsNavVisible((prev) => !prev)
+        setIsNavVisible((prev) => {
+            const next = !prev
+            if (typeof window !== 'undefined') {
+                localStorage.setItem(SIDEBAR_PINNED_KEY, String(next))
+            }
+            return next
+        })
     }, [])
 
     const toggleToc = useCallback(() => {
@@ -108,10 +131,9 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         }
     }, [])
 
-    // Reset ToC and Nav toggle state when path changes
+    // Reset ToC toggle state when path changes (Nav stays sticky — persisted to localStorage)
     useEffect(() => {
         setTocUserToggled(false)
-        setNavUserToggled(false)
     }, [appWindow?.path])
 
     const handleBackgroundImageChange = useCallback((image: string | null) => {

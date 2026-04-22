@@ -1,5 +1,17 @@
 import React from 'react'
-import { IconRewindPlay } from '@posthog/icons'
+import {
+    IconRewindPlay,
+    IconEye,
+    IconFeatures,
+    IconSparkles,
+    IconList,
+    IconGraph,
+    IconConfetti,
+    IconRocket,
+    IconReceipt,
+    IconPieChart,
+    IconCheckCircle,
+} from '@posthog/icons'
 import { IconJavaScript, IconApple, IconAndroid, IconFlutter, IconReactNative } from 'components/OSIcons/Icons'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
@@ -34,22 +46,22 @@ export const sessionReplay = {
      * referenced by templates but don't need their own menu item.
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview' },
-        { slug: 'features', name: 'Features' },
-        { slug: 'ai', name: 'AI' },
-        { slug: 'comparison-summary', name: 'PostHog vs...' },
-        { slug: 'feature-comparison', name: 'Feature comparison' },
-        { slug: 'pairs-with', name: 'Pairs with...' },
-        { slug: 'getting-started', name: 'Get started' },
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        { slug: 'features', name: 'Features', icon: <IconFeatures className="size-4" /> },
+        { slug: 'ai', name: 'AI', icon: <IconSparkles className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        { slug: 'feature-comparison', name: 'Feature comparison', icon: <IconGraph className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', icon: <IconConfetti className="size-4" /> },
+        { slug: 'getting-started', name: 'Get started', icon: <IconRocket className="size-4" /> },
     ],
     /**
      * Sections rendered on the Pricing surface (`/session-replay/pricing`).
      * Same shape as `productMenu` — `template` defaults to `slug`.
      */
     pricingMenu: [
-        { slug: 'rates', name: 'Session Replay rates', template: 'pricing' },
-        { slug: 'calculator', name: 'Pricing calculator' },
-        { slug: 'plans', name: 'Plans' },
+        { slug: 'rates', name: 'Session Replay rates', template: 'pricing', icon: <IconReceipt className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
     ],
     overview: {
         title: 'Watch people use your product',

@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import OSButton from 'components/OSButton'
 import {
     IconPencil,
@@ -8,6 +9,7 @@ import {
     IconRefresh,
     IconClockRewind,
     IconTextWidthFixed,
+    IconSearch,
     IconSidebarClose,
     IconSidebarOpen,
     IconTableOfContents,
@@ -72,6 +74,13 @@ export interface MenuTab {
     menu: React.ReactNode
     /** When true, this tab is active on first render. */
     default?: boolean
+    /**
+     * Optional icon for this tab. Used by the LeftSidebar's collapsed-state
+     * vertical icon stack so the user can recognize / switch tabs without
+     * expanding the sidebar. The pinned `ToggleGroup` already renders whatever
+     * `label` you pass (so embed the icon in the label JSX if you want both).
+     */
+    icon?: React.ReactNode
 }
 
 interface ReaderViewProps {
@@ -646,6 +655,107 @@ interface LeftSidebarProps {
     children: React.ReactNode
 }
 
+const SIDEBAR_TRANSITION = { type: 'spring' as const, stiffness: 380, damping: 36 }
+
+interface SidebarTabButtonProps {
+    tab: MenuTab
+    active: boolean
+    showLabel: boolean
+    /** Pinned mode renders the tab with icon stacked above label (horizontal row). */
+    stacked: boolean
+    onClick: () => void
+}
+
+const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarTabButtonProps) => {
+    // Manual FLIP for the icon: capture position on every commit, then on the
+    // next commit — IF the structural layout changed (`layoutKey`) — animate
+    // the icon from its old position to its new one. Click-only re-renders
+    // don't change `layoutKey`, so they never trigger an animation (which is
+    // the bug we keep hitting with framer's `motion.span layout="position"`,
+    // since v4 measures on every render and any sub-pixel delta animates).
+    const iconRef = useRef<HTMLSpanElement>(null)
+    const prevPosRef = useRef<DOMRect | null>(null)
+    const layoutKey = `${stacked ? 1 : 0}-${showLabel ? 1 : 0}`
+    const prevKeyRef = useRef(layoutKey)
+
+    useLayoutEffect(() => {
+        const el = iconRef.current
+        if (!el) return
+        const curr = el.getBoundingClientRect()
+        if (prevPosRef.current && prevKeyRef.current !== layoutKey) {
+            const dx = prevPosRef.current.left - curr.left
+            const dy = prevPosRef.current.top - curr.top
+            if ((dx || dy) && typeof el.animate === 'function') {
+                el.getAnimations?.().forEach((a) => a.cancel())
+                el.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'translate(0, 0)' }], {
+                    duration: 320,
+                    easing: 'cubic-bezier(0.32, 0.72, 0, 1)',
+                })
+            }
+        }
+        prevPosRef.current = curr
+        prevKeyRef.current = layoutKey
+    })
+
+    // The active highlight just fades in/out on the active button. Position
+    // follows the button via CSS (`inset-0`), so when the layout reflows
+    // (hover/pin), the highlight stays glued to its button instead of trying
+    // to animate from a stale position.
+    const button = (
+        <button
+            type="button"
+            onClick={onClick}
+            role="tab"
+            aria-selected={active}
+            className={`relative rounded text-sm leading-none flex ${
+                stacked
+                    ? 'flex-1 flex-col items-center text-center gap-1 px-2 py-1.5'
+                    : showLabel
+                    ? 'items-center justify-start gap-2 px-2 py-1'
+                    : 'items-center justify-center px-2 py-1'
+            } ${active ? 'text-primary' : 'text-secondary hover:text-primary'}`}
+        >
+            <AnimatePresence initial={false}>
+                {active && (
+                    <motion.span
+                        key="indicator"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.18 }}
+                        className="absolute inset-0 -z-10 rounded bg-accent"
+                    />
+                )}
+            </AnimatePresence>
+            <span ref={iconRef} className="inline-flex items-center justify-center shrink-0">
+                {tab.icon}
+            </span>
+            <AnimatePresence initial={false}>
+                {showLabel && (
+                    <motion.span
+                        key="label"
+                        initial={stacked ? { opacity: 0 } : { opacity: 0, width: 0 }}
+                        animate={stacked ? { opacity: 1 } : { opacity: 1, width: 'auto' }}
+                        exit={stacked ? { opacity: 0 } : { opacity: 0, width: 0 }}
+                        transition={{ duration: 0.18 }}
+                        className={stacked ? '' : 'overflow-hidden whitespace-nowrap'}
+                    >
+                        {tab.label}
+                    </motion.span>
+                )}
+            </AnimatePresence>
+        </button>
+    )
+
+    return showLabel ? (
+        button
+    ) : (
+        <Tooltip side="right" trigger={button}>
+            {tab.label}
+        </Tooltip>
+    )
+}
+
 const LeftSidebar = ({
     isNavVisible,
     toggleNav,
@@ -667,68 +777,150 @@ const LeftSidebar = ({
     const [activeTab, setActiveTab] = useState(initialTab)
     const activeMenu = hasTabs ? menuTabs!.find((t) => t.value === activeTab)?.menu : null
 
+    // `isPinned` is the persisted user preference (toggled via the bottom-row
+    // toggle button, written to localStorage in ReaderViewContext). When NOT
+    // pinned the inner panel collapses to 48px and only expands as an overlay
+    // when the user hovers it OR clicks the search icon (`searchFocused`).
+    // We track hover in JS (rather than CSS group-hover) so framer-motion can
+    // drive the width / icon-row → icon-column animations off the same boolean.
+    const isPinned = isNavVisible
+    const [searchFocused, setSearchFocused] = useState(false)
+    const [hovered, setHovered] = useState(false)
+    const searchSlotRef = useRef<HTMLDivElement>(null)
+    const expanded = isPinned || searchFocused || hovered
+
+    const handleSearchTrigger = () => {
+        setSearchFocused(true)
+        // Wait for the panel to expand and render the input, then focus it.
+        requestAnimationFrame(() => {
+            const input = searchSlotRef.current?.querySelector('input') as HTMLInputElement | null
+            input?.focus()
+        })
+    }
+
+    const handleSearchBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+            setSearchFocused(false)
+        }
+    }
+
+    const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === 'Escape') setSearchFocused(false)
+    }
+
+    const handleMouseEnter = () => {
+        if (!isPinned) setHovered(true)
+    }
+    const handleMouseLeave = () => {
+        setHovered(false)
+    }
+
     return (
         <aside
             data-scheme="secondary"
-            className={`flex-shrink-0 bg-dark/10 dark:bg-light/10 border-r border-primary transition-[basis,flex-basis] duration-300 overflow-hidden flex flex-col min-h-0 ${
-                isNavVisible ? 'basis-[250px]' : 'basis-12'
+            className={`relative flex-shrink-0 transition-[flex-basis] duration-300 ${
+                isPinned ? 'basis-[250px]' : 'basis-12'
             }`}
         >
-            <div className="flex flex-col items-center gap-px p-1 flex-shrink-0">
-                <ConditionalMarkdownDropdown pageUrl={pageUrl} />
-                <EditHistoryPopover commits={commits || []} />
-                {rightActionButtons}
-            </div>
-            {isNavVisible && (
-                <div className="flex-1 min-h-0 flex flex-col w-[250px]">
-                    {productSelect && <div className="px-2 pb-2 flex-shrink-0">{productSelect}</div>}
-                    {!isEditing && inlineSearch && <div className="px-2 pb-2 flex-shrink-0">{inlineSearch}</div>}
-                    {hasTabs && (
-                        <div className="px-2 pb-2 flex-shrink-0">
-                            <ToggleGroup
-                                title="Sidebar mode"
-                                hideTitle
-                                options={menuTabs!.map((t) => ({
-                                    label: t.label,
-                                    value: t.value,
-                                    default: t.default,
-                                }))}
-                                value={activeTab}
-                                onValueChange={(v) => {
-                                    if (v) setActiveTab(v)
-                                }}
-                            />
-                        </div>
-                    )}
-                    <ScrollArea className="px-2 pb-2">{hasTabs ? activeMenu : children}</ScrollArea>
-                </div>
-            )}
-            <div
-                className={`flex-shrink-0 p-1 border-t border-primary ${
-                    isNavVisible ? 'flex justify-between items-center' : 'flex flex-col items-center gap-px'
+            <motion.div
+                initial={false}
+                animate={{ width: expanded ? 250 : 48 }}
+                transition={SIDEBAR_TRANSITION}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                data-scheme="secondary"
+                className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden bg-primary border-r border-primary ${
+                    !isPinned && expanded ? 'z-50 shadow-2xl' : 'z-30'
                 }`}
             >
-                <Tooltip
-                    trigger={
-                        <OSButton
-                            size="md"
-                            onClick={toggleNav}
-                            active={isNavVisible}
-                            icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
-                        />
-                    }
-                    side="right"
-                >
-                    {isNavVisible ? 'Hide' : 'Show'} sidebar
-                </Tooltip>
-                <div className={isNavVisible ? 'flex items-center gap-px' : 'contents'}>
-                    <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
-                    <AppOptionsButton
-                        lineHeightMultiplier={lineHeightMultiplier}
-                        handleLineHeightChange={handleLineHeightChange}
-                    />
+                {/* Top icon stack: edit-related actions */}
+                <div className="flex flex-col items-center gap-px p-1 flex-shrink-0">
+                    <ConditionalMarkdownDropdown pageUrl={pageUrl} />
+                    <EditHistoryPopover commits={commits || []} />
+                    {rightActionButtons}
                 </div>
-            </div>
+
+                {/* Middle content — always rendered so the bottom row stays anchored */}
+                <div className="flex-1 min-h-0 flex flex-col w-[250px]">
+                    {productSelect && <div className="px-2 pb-2 flex-shrink-0">{productSelect}</div>}
+
+                    {/* Inline search: full input when expanded; transparent icon button when collapsed */}
+                    {!isEditing && inlineSearch && (
+                        <div
+                            ref={searchSlotRef}
+                            className="px-2 pb-2 flex-shrink-0"
+                            onBlur={handleSearchBlur}
+                            onKeyDown={handleSearchKeyDown}
+                        >
+                            {expanded ? (
+                                inlineSearch
+                            ) : (
+                                <Tooltip
+                                    side="right"
+                                    trigger={<OSButton size="md" icon={<IconSearch />} onClick={handleSearchTrigger} />}
+                                >
+                                    Search this page
+                                </Tooltip>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Tab strip:
+                        - Expanded (pinned, hovered, or search-focused): horizontal
+                          row, each tab icon-stacked-above-label.
+                        - Collapsed: vertical icon-only column. */}
+                    {hasTabs && (
+                        <div
+                            className={`px-2 pb-2 flex-shrink-0 flex gap-px ${
+                                expanded ? 'flex-row' : 'flex-col items-stretch'
+                            }`}
+                            role="tablist"
+                            aria-label="Sidebar mode"
+                        >
+                            {menuTabs!.map((t) => (
+                                <SidebarTabButton
+                                    key={t.value}
+                                    tab={t}
+                                    active={t.value === activeTab}
+                                    showLabel={expanded}
+                                    stacked={expanded}
+                                    onClick={() => setActiveTab(t.value)}
+                                />
+                            ))}
+                        </div>
+                    )}
+
+                    <ScrollArea className="px-2 pb-2">{hasTabs ? activeMenu : children}</ScrollArea>
+                </div>
+
+                {/* Bottom action row: pin/toggle on left, edit + gear on right (or stacked when narrow) */}
+                <div
+                    className={`flex-shrink-0 p-1 border-t border-primary ${
+                        expanded ? 'flex justify-between items-center' : 'flex flex-col items-center gap-px'
+                    }`}
+                >
+                    <Tooltip
+                        trigger={
+                            <OSButton
+                                size="md"
+                                onClick={toggleNav}
+                                active={isPinned}
+                                icon={isPinned ? <IconSidebarOpen /> : <IconSidebarClose />}
+                            />
+                        }
+                        side="right"
+                    >
+                        {isPinned ? 'Unpin sidebar' : 'Pin sidebar'}
+                    </Tooltip>
+                    <div className={expanded ? 'flex items-center gap-px' : 'contents'}>
+                        <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
+                        <AppOptionsButton
+                            lineHeightMultiplier={lineHeightMultiplier}
+                            handleLineHeightChange={handleLineHeightChange}
+                        />
+                    </div>
+                </div>
+            </motion.div>
         </aside>
     )
 }

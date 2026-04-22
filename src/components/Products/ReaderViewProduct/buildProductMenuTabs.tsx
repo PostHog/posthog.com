@@ -1,9 +1,16 @@
 import React from 'react'
+import { IconBook, IconPiggyBank, IconPresent } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import type { MenuTab } from 'components/ReaderView'
 import { docsMenu } from '../../../navs'
 import ProductNav from './ProductNav'
 import type { ProductNavItem } from './types'
+
+const TAB_ICON: Record<'product' | 'pricing' | 'docs', React.ReactNode> = {
+    product: <IconPresent className="size-4" />,
+    pricing: <IconPiggyBank className="size-4" />,
+    docs: <IconBook className="size-4" />,
+}
 
 export type ProductSurface = 'product' | 'pricing' | 'docs'
 
@@ -64,6 +71,7 @@ export function buildProductMenuTabs({ productData, contentRef, activeSurface }:
         tabs.push({
             label: 'Product',
             value: 'product',
+            icon: TAB_ICON.product,
             default: activeSurface === 'product',
             menu: (
                 <ProductNav
@@ -79,6 +87,7 @@ export function buildProductMenuTabs({ productData, contentRef, activeSurface }:
         tabs.push({
             label: 'Pricing',
             value: 'pricing',
+            icon: TAB_ICON.pricing,
             default: activeSurface === 'pricing',
             menu: (
                 <ProductNav
@@ -94,6 +103,7 @@ export function buildProductMenuTabs({ productData, contentRef, activeSurface }:
         tabs.push({
             label: 'Docs',
             value: 'docs',
+            icon: TAB_ICON.docs,
             default: activeSurface === 'docs',
             menu: <TreeMenu items={docsChildren} />,
         })
