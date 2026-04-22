@@ -3,7 +3,6 @@ import { motion } from 'framer-motion'
 import * as Yup from 'yup'
 import { IconCheckCircle } from '@posthog/icons'
 import usePostHog from '../../hooks/usePostHog'
-import useProduct from '../../hooks/useProduct'
 import OSButton from 'components/OSButton'
 
 const ValidationSchema = Yup.object().shape({
@@ -16,7 +15,6 @@ export default function PostHogCodeWaitlist(): JSX.Element {
     const [showForm, setShowForm] = useState(false)
     const [error, setError] = useState('')
     const posthog = usePostHog()
-    const selectedProduct = useProduct({ handle: 'posthog_code' })
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
@@ -32,7 +30,10 @@ export default function PostHogCodeWaitlist(): JSX.Element {
         }
 
         if (posthog) {
-            posthog.capture('subscribe_to_product_updates', { email, selectedProduct })
+            posthog.capture('subscribe_to_product_updates', {
+                email,
+                selectedProduct: { handle: 'posthog_code', name: 'PostHog Code' },
+            })
             posthog.setPersonProperties({
                 email,
                 posthog_code_waitlist: true,

@@ -22,15 +22,13 @@ seo:
 
 import PostHogCodeWaitlist from 'components/PostHogCodeWaitlist'
 
-Product work splits two ways: reactive and proactive.
+Product work splits three ways: mechanical, interpretive, and proactive.
 
-Reactive work is mechanical. Fix the typo. Add the index. Flip the flag. The data tells you what's wrong and the scope tells you what to fix. A computer can do this better than you. Full stop.
+The **mechanical** stuff (fix the typo, add the index, flip the flag) is work a computer can do better than you. The **proactive** stuff – deciding what to build next – requires context, judgement, and that other word everyone won't stop saying: [taste](/newsletter/good-taste-great-products).
 
-Proactive work is what happens when you prompt yourself – when you shift out of maintenance mode and decide what to build next. It needs context, judgement, and that other word everyone won't stop saying: [taste](/newsletter/good-taste-great-products).
+The interesting lane is **interpretive**: incidents, customer issues, funnel drops. Work a computer *could* do, but only with the right tools and permissions. That's where self-driving products live.
 
-There's a third category in between, and it's the one getting interesting: proactive work a computer could do if it had the tools, context, and permissions. That's where self-driving products live, and the lane we're launching a new product into.
-
-Today, [PostHog Code](/code) enters beta. It's a desktop app for agentic engineering that automates the reactive parts of product building and frames the proactive work for you to steer.
+Today, [PostHog Code](/code) enters beta. It's a desktop app that orchestrates coding agents (Claude Code, Codex, and others) on top of your product data – automating the mechanical work, and surfacing the interpretive work as a prioritized to-do list for you to steer.
 
 ## Borrowing a taxonomy from the car people
 
@@ -40,15 +38,15 @@ It maps surprisingly cleanly onto building products with AI.
 
 **Level 0 – No automation.** Analytics without AI, code without autocomplete. Dashboards, filters, SQL. Really good docs are your best bet for troubleshooting. Engineers write all the code, frame every question, and interpret all the data themselves. This was most of what shipped before 2024.
 
-**Level 1 – Basic assistance.** The agent answers specific, well-formed questions like *"How many users are on the pro plan?"* and drafts short, scoped snippets when you point at the file. It falls apart when the question is ambiguous or the change spans more than a function. Engineers still decide what to ask, where to put the code, and how to read the answer. This was the first version of [PostHog AI](/ai).
+**Level 1 – Engineer assistance.** The agent answers specific, well-formed questions like *"How many users are on the pro plan?"* and drafts short, scoped snippets when you point at the file. It falls apart when the question is ambiguous or the change spans more than a function. Engineers still decide what to ask, where to put the code, and how to read the answer. This was the first version of [PostHog AI](/ai).
 
-**Level 2 – Versatile assistance.** The agent handles ambiguity, stitches queries together, and writes working functions and files on demand. It answers vague, loaded questions like *"Which features do users engage with most?"* without constant handholding. Engineers still have to know what questions to ask, and how to interpret the output. PostHog AI [reached this state in 2025](/blog/8-learnings-from-1-year-of-agents-posthog-ai), once reasoning models matured.
+**Level 2 – Partial automation.** The agent handles ambiguity, stitches queries together, and writes working functions and files on demand. It answers vague, loaded questions like *"Which features do users engage with most?"* without constant handholding. Engineers still have to know what questions to ask, and how to interpret the output. PostHog AI [reached this state in 2025](/blog/8-learnings-from-1-year-of-agents-posthog-ai), once reasoning models matured.
 
-**Level 3 – Actionable product guidance.** The agent compresses massive amounts of context and responds not just to the query, but suggests meaningful follow-up actions – often as a draft PR. It summarizes thousands of session recordings *and* proposes the change that addresses them. Engineers review rather than originate; interpretation starts migrating from human to agent. PostHog AI crossed into this territory in late 2025.
+**Level 3 – Conditional automation.** The agent compresses massive amounts of context and responds not just to the query, but suggests meaningful follow-up actions – often as a draft PR. It summarizes thousands of session recordings *and* proposes the change that addresses them. Engineers review rather than originate; interpretation starts migrating from human to agent. PostHog AI crossed into this territory in late 2025.
 
-**Level 4 – Proactive product maintenance.** The agent understands your codebase, your product data, and the surrounding context – support tickets, internal comms, industry news. It proposes and ships work without being asked *(and is trusted to read, write, and delete)*. The [PostHog MCP](/docs/model-context-protocol) enables a working prototype of this today. Engineers set guardrails and approve outcomes; the agent does most of the framing and interpretation.
+**Level 4 – High automation.** The agent understands your codebase, your product data, and the surrounding context – support tickets, internal comms, industry news. It proposes and ships work without being asked *(and is trusted to read, write, and delete)*. The [PostHog MCP](/docs/model-context-protocol) enables a working prototype of this today. Engineers set guardrails and approve outcomes; the agent does most of the framing and interpretation.
 
-**Level 5 – Self-driving development.** The full product autonomy loop runs on its own. Signals come in, the agent decides what to do, ships the change, evaluates whether it worked, and updates its memory for next time. You still weigh in on strategy and direction, but the loop between *what users are doing* and *what ships to fix or extend it* closes without a human turning the crank. *"Just build me an app that generates $1M MRR, bro"* is a plausible starting prompt. That's not why you became a product engineer, though – so what does self-driving actually mean for the human in the loop?
+**Level 5 – Full automation.** The full product autonomy loop runs on its own. Signals come in, the agent decides what to do, ships the change, evaluates whether it worked, and updates its memory for next time. You still weigh in on strategy and direction, but the loop between *what users are doing* and *what ships to fix or extend it* closes without a human turning the crank. *"Just build me an app that generates $1M MRR, bro"* is a plausible starting prompt. That's not why you became a product engineer, though – so what does self-driving actually mean for the human in the loop?
 
 ## Code generation ≠ building software
 
@@ -119,7 +117,7 @@ We've been sitting on a weirdly complete set of ingredients for this loop:
 - **Data** – years of it. [Errors](/docs/error-tracking/start-here), [session replays](/docs/session-replay/start-here), [LLM traces](/docs/llm-analytics/start-here), [experiments](/docs/experiments/start-here), [feature flags](/docs/feature-flags/start-here), revenue. The event stream of what real users are actually doing.
 - **Warehouse** – your full data stack in one place: product events, application data, and anything you sync from Stripe, Salesforce, Snowflake, BigQuery, or flat files. Runs on ClickHouse today, DuckDB in the near future.
 - **Orchestration** – Temporal for long-running jobs that outlive any single agent session, so evaluation runs hours after execution without anyone holding the process open.
-- **Sandboxes** – cloud agents for running code safely, without blowing up production.
+- **Sandboxes** – cloud agents we recently added to run code safely, without blowing up production.
 - **Devtools** – a growing catalog of the things product engineers actually reach for.
 
 PostHog Code is the first public piece. It sits on top of your product data and does two things.
