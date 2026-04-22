@@ -36,6 +36,18 @@ If stack traces show minified code instead of original source:
 
 See the [source maps guide](/docs/error-tracking/upload-source-maps/) for upload instructions.
 
+## Empty sourcemap warning
+
+If the CLI reports `sourcemap is empty (no mappings/sources/names) — likely a bundler misconfiguration`, your bundler generated sourcemap files with no useful mapping data. The CLI skips these files since they can't resolve stack traces.
+
+To fix this:
+
+1. Check your bundler's sourcemap settings are enabled (e.g., `devtool: 'source-map'` in webpack, `sourcemap: true` in Vite/Rollup)
+2. Ensure you're building in a mode that generates sourcemaps (some bundlers disable them in production by default)
+3. Verify your build output includes `.map` files with actual content — open one and check that the `mappings` field isn't empty
+
+After fixing your bundler config, rebuild and re-run the sourcemap upload.
+
 ## 'Script error' with no stack trace
 
 For security purposes, browsers hide error details from scripts loaded from different domains. This shows as `Script error` with no stack trace.
