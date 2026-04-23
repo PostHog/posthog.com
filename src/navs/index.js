@@ -1332,6 +1332,10 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
                     },
+                     {
+                        name: "CSM and TAM dual coverage",
+                        url: '/handbook/growth/sales/csm-tam-overlay-coverage',
+                    },
                     {
                         name: 'Why buy PostHog',
                         url: '/handbook/growth/sales/why-buy-posthog',
