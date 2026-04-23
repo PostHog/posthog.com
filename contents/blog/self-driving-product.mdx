@@ -20,7 +20,7 @@ seo:
   metaDescription: "Six levels of product autonomy, the five things every agent actually needs, and why we're shipping PostHog Code into beta."
 ---
 
-import PostHogCodeWaitlist from 'components/PostHogCodeWaitlist'
+import { WaitlistForm } from 'components/WaitlistForm'
 
 Today, [PostHog Code](/code) enters beta. It's a desktop app that runs coding agents on top of your product data. The obvious stuff ships itself. The tricky stuff shows up as a prioritized to-do list for you to steer.
 
@@ -122,6 +122,6 @@ Want to take it for a test drive?
         . Join the waitlist to get early access.
     </p>
     <div className="max-w-md">
-        <PostHogCodeWaitlist />
+        <WaitlistForm confetti={false} />
     </div>
 </div>
