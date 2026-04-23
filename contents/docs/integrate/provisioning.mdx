@@ -17,6 +17,21 @@ Your application is identified by a metadata document hosted on your domain.
 3. POST /resources          →  project API key + host
 ```
 
+```mermaid
+sequenceDiagram
+    participant P as Partner
+    participant PH as PostHog
+
+    P->>PH: POST /account_requests (email, code_challenge)
+    PH-->>P: authorization code
+
+    P->>PH: POST /oauth/token (code, code_verifier)
+    PH-->>P: access_token + refresh_token
+
+    P->>PH: POST /resources (Bearer token)
+    PH-->>P: project API key + host
+```
+
 ## Set up as a partner
 
 ### Host a CIMD metadata document
@@ -92,6 +107,21 @@ The timestamp must be within 5 minutes of the server's clock.
 ### The 3-step flow with HMAC
 
 The same three endpoints work with HMAC auth. The difference: you authenticate with the `Stripe-Signature` header instead of PKCE, and you skip `code_challenge`/`code_verifier` fields.
+
+```mermaid
+sequenceDiagram
+    participant P as Partner
+    participant PH as PostHog
+
+    P->>PH: POST /account_requests (Stripe-Signature header)
+    PH-->>P: authorization code
+
+    P->>PH: POST /oauth/token (Stripe-Signature header)
+    PH-->>P: access_token + refresh_token
+
+    P->>PH: POST /resources (Bearer token)
+    PH-->>P: project API key + host
+```
 
 **Step 1: Create an account**
 
@@ -234,6 +264,26 @@ The user receives a welcome email with a link to set their password and access t
 ```
 
 When `type` is `requires_auth`, redirect the user to the provided URL. After they approve, PostHog redirects them to your `redirect_uris` with a `code` query parameter that you use in step 2.
+
+```mermaid
+sequenceDiagram
+    participant P as Partner
+    participant PH as PostHog
+    participant U as User
+
+    P->>PH: POST /account_requests (existing email)
+    PH-->>P: requires_auth (consent URL)
+
+    P->>U: redirect to consent URL
+    U->>PH: approve
+    PH->>P: redirect with authorization code
+
+    P->>PH: POST /oauth/token (code, code_verifier)
+    PH-->>P: access_token + refresh_token
+
+    P->>PH: POST /resources (Bearer token)
+    PH-->>P: project API key + host
+```
 
 ### Step 2: Exchange the code for tokens
 
