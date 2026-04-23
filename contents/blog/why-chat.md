@@ -1,6 +1,6 @@
 ---
 title: Why we made chat our default UI
-date: 2026-04-17
+date: 2026-04-22
 author:
   - ian-vanagas
 featuredImageType: full
