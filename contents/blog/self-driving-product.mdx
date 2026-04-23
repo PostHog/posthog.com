@@ -41,23 +41,27 @@ The Society of Automotive Engineers has a framework for self-driving cars: six l
 
 ## Why vibe-coding tools plateau at Level 3
 
-A self-driving car isn't a vehicle that goes where you point it (that's cruise control). A self-driving product isn't just a really good coding agent. To reach Level 5, it has to sense what's happening, decide what to do, do it, check if it worked, and adjust next time — all without being asked. The *self* in self-driving isn't autonomy from the engineer. It's autonomy from instruction.
+A self-driving car isn't a vehicle that goes where you point it (that's cruise control). A self-driving product isn't just a really good coding agent. To reach Level 5, it has to sense what's happening, decide what to do, do it, check if it worked, and adjust next time — all without being asked. 
 
-Vibecoding tools aren't aiming for that. They're aiming for speed per instruction – and they've gotten *very* good at it. Point Lovable, Replit or [v0](/blog/posthog-v0-integration) at a goal and they'll ship a working app before lunch. That's a legitimate Level 3 experience for *building* software, and it's why [AI has quietly eaten the no-code category](/blog/ai-is-killing-no-code-experiments).
+The *self* in self-driving isn't autonomy from the engineer. It's autonomy from instruction.
+
+Vibe-coding tools aren't aiming for that. They're aiming for speed per instruction – and they've gotten *very* good at it. Point Lovable, Replit or [v0](/blog/posthog-v0-integration) at a goal and they'll ship a working app before lunch. That's a legitimate Level 3 experience for *building* software, and it's why [AI has quietly eaten the no-code category](/blog/ai-is-killing-no-code-experiments).
 
 ![On Wednesdays we do trace reviews](https://res.cloudinary.com/dmukukwp6/image/upload/aps0un_8b5268c19e.jpg)
 
-The problem is what happens after lunch. In a typical week, PostHog customers generate 100,000+ failed queries, 1.2 to 2.6 million new error-tracking issues, and 12 to 47 million raw exceptions. Each one is a signal an agent could act on. None of it is visible to a tool whose worldview ends at the last git push.
+The problem is what happens after lunch. In a typical week, PostHog customers generate 100,000+ failed queries, 2.6 million new error tracking issues, and 47 million raw exceptions. Each one is a signal an agent could act on. None of it is visible to a tool whose worldview ends at the last git push.
 
 To move from cruise control to self-driving, an agent needs five things: **tools, skills, signals, memory,** and **evaluation**. Our [AI engineering handbook](/handbook/engineering/ai/ai-platform) goes deep on each. Here's the short version.
 
 ### 1. Tools – what the agent can do
 
-Tools are small, specific actions the agent can take. At PostHog we treat them as [atomic capabilities](/handbook/engineering/ai/implementation#mcp-tools-vs-skills) — things like `Create_insight` or `read_taxonomy`. That last one does a lot of heavy lifting. It lets the agent check what events and properties actually exist before it writes a query or an instrumentation PR.
+Tools are small, specific actions the agent can take. At PostHog we treat them as [atomic capabilities](/handbook/engineering/ai/implementation#mcp-tools-vs-skills) — things like `create_insight` or `read_taxonomy`. The latter does a lot of heavy lifting. It lets the agent check what events and properties actually exist before it writes a query or an instrumentation PR.
 
 ### 2. Skills – how to get the job done
 
-If tools are the fork and knife, skills are the recipe. A [skill](/handbook/engineering/ai/writing-skills) ties tools, docs, and rules into a playbook. You can see the gap in our own data: `docs-search` is the most-called tool on PostHog's MCP server, at ~28K calls a month. That's every coding agent asking our docs for directions. PostHog Code has skills for the workflows we see most — instrumenting events, auditing flags, adding error tracking. Writing a skill feels like writing a doc, and [most engineers would rather ship the feature](/newsletter/agent-first-product-engineering) than document it. But for an agent, the skill *is* the feature.
+If tools are the fork and knife, skills are the recipe. A [skill](/handbook/engineering/ai/writing-skills) ties tools, docs, and rules into a playbook. You can see the gap in our own data: `docs-search` is the most-called tool on PostHog's MCP server, at ~28K calls a month.
+
+PostHog Code has skills for the workflows we see most – instrumenting events, auditing flags, adding error tracking. Writing a skill feels like writing a doc, and [most engineers would rather ship the feature](/newsletter/agent-first-product-engineering) than document it. But for an agent, the skill *is* the feature.
 
 ### 3. Signals – when the work should happen
 
@@ -69,7 +73,7 @@ Signals say something's happening now. Memory says what happened last time. With
 
 ### 5. Evaluation – did it actually work?
 
-The loop doesn't close without this. [Testing AI agents](/blog/testing-ai-agents) looks nothing like testing normal software, and "it runs without erroring" is not a pass. PostHog Code schedules evals as long-running Temporal jobs, so the check runs hours or days after the PR merges. The same dashboard, funnel, experiment, or [LLM-as-a-judge eval](/blog/stop-ai-slop) that fired the signal gets re-queried. If the metric didn't move — or moved the wrong way — the agent reverts or reopens the work.
+The loop doesn't close without this. [Testing AI agents](/blog/testing-ai-agents) looks nothing like testing normal software, and "it runs without erroring" is not a pass. PostHog Code schedules evals as long-running Temporal jobs, so the check runs hours or days after the PR merges. The same dashboard, funnel, experiment, or [LLM-as-a-judge eval](/blog/stop-ai-slop) that fired the signal gets re-queried. If the metric didn't move — or moved the wrong way – the agent reverts or reopens the work.
 
 ## The product autonomy loop
 
@@ -81,7 +85,7 @@ That's what a self-driving product runs on. You can't do this reliably inside a 
 
 ![we added skills, memory and a flux capacitor](https://res.cloudinary.com/dmukukwp6/image/upload/no_roadmaps_d355fa4d19.jpg)
 
-## Why we built PostHog Code (and what it does for you)
+## What PostHog Code does for you
 
 We've spent years building the stack this loop needs:
 
@@ -105,7 +109,7 @@ The PostHog side has built-in skills for instrumenting events, flags, and experi
 
 You get a prioritized to-do list instead of a noisy one, and automatic fixes for the stuff that doesn't need your attention.
 
-Product engineers [keep telling us this is the missing piece](/newsletter/agent-first-product-engineering) — an agent that understands your codebase *and* your product. We're not at Level 5 yet. But the gap closes every week, and you get to watch it happen from the driver's seat.
+Product engineers [keep telling us this is the missing piece](/newsletter/agent-first-product-engineering) – an agent that understands your codebase *and* your product. We're not at Level 5 yet. But the gap closes every week, and you get to watch it happen from the driver's seat.
 
 Want to take it for a test drive?
 
