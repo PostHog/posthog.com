@@ -16,13 +16,13 @@ If PostHog isn't capturing errors:
 2. Verify **exception capture** is enabled on the [**Configuration** page](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-exception-autocapture) in Error Tracking
 3. Only unhandled exceptions auto-capture. For caught errors, use `posthog.captureException()`:
 
-    ```js
-    try {
-        // code that errors
-    } catch (error) {
-        posthog.captureException(error)
-    }
-    ```
+   ```js
+   try {
+     // code that errors
+   } catch (error) {
+     posthog.captureException(error);
+   }
+   ```
 
 4. Wait a few minutes and check [Error Tracking in the PostHog app](https://app.posthog.com/error_tracking). Issues may take a few minutes to update after ingesting new error events
 
@@ -32,7 +32,12 @@ If stack traces show minified code instead of original source:
 
 1. Verify source maps are uploaded to the correct project by navigating to [Error Tracking](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets). You'll see warnings for missing symbol sets
 2. Source map paths must match your production bundle URLs exactly
-3. Upload source maps *before* deploying code that references them
+3. Upload source maps _before_ deploying code that references them
+4. Download and inspect uploaded symbol sets to verify their contents match your build artifacts. Click the download button on any uploaded symbol set in the [Symbol Sets configuration](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets), or use the CLI:
+
+   ```bash
+   posthog-cli symbol-sets download --id <symbol-set-id> -o ./output-dir
+   ```
 
 See the [source maps guide](/docs/error-tracking/upload-source-maps/) for upload instructions.
 
@@ -68,18 +73,18 @@ This happens when you reject a promise with a string instead of an `Error` objec
 
 ```js file=Without stack trace
 new Promise((resolve, reject) => {
-  reject('Something went wrong'); // String has no stack trace
+  reject("Something went wrong"); // String has no stack trace
 });
 
-Promise.reject('Something went wrong');
+Promise.reject("Something went wrong");
 ```
 
 ```js file=With stack trace
 new Promise((resolve, reject) => {
-  reject(new Error('Something went wrong')); // Error includes stack trace
+  reject(new Error("Something went wrong")); // Error includes stack trace
 });
 
-Promise.reject(new Error('Something went wrong'));
+Promise.reject(new Error("Something went wrong"));
 ```
 
 </MultiLanguage>
@@ -87,11 +92,10 @@ Promise.reject(new Error('Something went wrong'));
 For third-party libraries that reject with strings, wrap the rejection:
 
 ```js
-somePromise()
-  .catch(err => {
-    posthog.captureException(new Error(err))
-    throw err
-  })
+somePromise().catch((err) => {
+  posthog.captureException(new Error(err));
+  throw err;
+});
 ```
 
 ## 'Minified React error' with no stack trace
@@ -109,7 +113,6 @@ To debug:
 3. Watch [session recordings](/docs/session-replay) to see what user actions triggered the error, then reproduce in development
 4. Use a development build which includes full error messages. Only use this for debugging, not production
 
-
 ## Symbol set upload skipped as already present
 
 If the CLI reports `Server returned 0 upload keys (1 skipped as already present)`, it means a symbol set with the same chunk ID already exists on the server. This happens when your bundle content hasn't changed between builds — the chunk ID is derived from the bundle's content hash, so identical code produces identical IDs.
@@ -121,7 +124,7 @@ To force a fresh upload:
 
 ## Grouping or assignment rules disabled
 
-Rules can become disabled if PostHog encounters a processing error while evaluating the rule during exception ingestion. When a rule is disabled, a banner appears in the [Error Tracking **Configuration** tab](https://us.posthog.com/error_tracking) showing the error message.
+Rules can become disabled if PostHog encounters a processing error while evaluating the rule during exception ingestion. When a rule is disabled, a banner appears in the [Error Tracking **Configuration** tab](https://app.posthog.com/error_tracking) showing the error message.
 
 To fix and re-enable a disabled rule:
 
@@ -135,10 +138,10 @@ If the error persists after editing, reach out to support.
 ## Solved community questions
 
 <SolvedQuestions
-    topicLabel="Error Tracking"
-    pinnedQuestions={[
-        'code-variables-for-external-libraries-for-python',
-        'trouble-setting-up-source-map-in-vite-react',
-        'webpack-turbopack-plugin-getting-sourcemaps-uploaded-to-vercel'
-    ]}
+  topicLabel="Error Tracking"
+  pinnedQuestions={[
+    "code-variables-for-external-libraries-for-python",
+    "trouble-setting-up-source-map-in-vite-react",
+    "webpack-turbopack-plugin-getting-sourcemaps-uploaded-to-vercel",
+  ]}
 />
