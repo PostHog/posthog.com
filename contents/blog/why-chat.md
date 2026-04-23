@@ -18,66 +18,52 @@ Companies like Linear, Attio, and us (PostHog) have all made an [AI chat](/ai) t
 
 ![Complaints](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_04_17_at_11_14_10_2x_b8266e901c.png)
 
-Although we can't speak for the other companies, we can talk about our thinking. 
+We're seeing good results from doing this so far. Only 6% of homepage visitors clicked a dashboard link while 12% chat with AI. On top of this, only 2% of people over 30 days have put the default dashboard back within one hour of visiting.
 
-## We're shipping fast
+To go further, we're explaining why we made this change and what we're doing to support it.
 
-PostHog is getting more powerful. We're adding more products and more features. We had 48 [changelog-worthy](/changelog) updates in March. LLMs are increasing the velocity at which we can do this. 
+## Our existing default doesn't make sense anymore
 
-This is great because it's helping us provide every tool engineers need to build successful products. We can offer more of the products and features they need, have more of their data in one place (great for AI-powered analysis), and offer each of those products cheaper than competitors.
+PostHog started as an "open source product analytics tool" but has grown to be much more. 48.5% of active PostHog users in the last 30 days didn't even use product analytics. They rely on [session replay](/session-replay), [web analytics](/web-analytics), [feature flags](/feature-flags), [error tracking](/error-tracking), or any of our other tools. 
 
-But this growth causes two problems:
+This is great as it shows we're making progress towards our mission of providing every tool engineers need to build successful products. We're sure aiming for it. We had 48 [changelog-worthy](/changelog) updates in March and LLMs are increasing the velocity at which we can ship new features.
 
-1. There's a limited amount of room on the screen to put all of these products and features. 
-2. Users have a limited amount of time and attention to learn the usage and best practices of these products too. 
+But this shift and growth causes three problems:
 
-The combination of these creates the complaint that PostHog is "too complicated" and our UI is "too cluttered."
+1. Defaulting to a product analytics dashboard doesn't make sense for ~50% of our users.
+2. There's a limited amount of room on the screen to put all of these products and features. 
+3. Users have a limited amount of time and attention to learn the usage and best practices of these products too. 
 
-On top of this, the more we ship and the better products get, the further away PostHog gets from "just" being a product analytics tool as it once was. 48.5% of active PostHog users in the last 30 days didn't use product analytics. They rely on [session replay](/session-replay), [web analytics](/web-analytics), [feature flags](/feature-flags), [error tracking](/error-tracking), or any of our other tools. 
+The combination of these creates the complaint that PostHog is "too complicated" and our UI is "too cluttered." Our [Platform UX team](/teams/platform-ux) is working on this, and we also have an exec leading a project on fixing "papercuts," 51 of which have been fixed in the last 2 weeks.
 
-Simply, we're outgrowing the default of having a product analytics dashboard as the homepage.
+But we're also being helped by the biggest shift in how we build software: agents.
 
 ## Welcome to the agent-first present
 
-People come to PostHog to get what they want done so they can go back to building. One way they do that most efficiently is [through agents](/newsletter/building-ai-agents). 
+People come to PostHog to get what they want done so they can go back to building. One way they do that most efficiently is [through agents](/newsletter/building-ai-agents).
 
 More and more people are using PostHog in an agent-first way. 55% of dashboards, 28% of insights, 26% of experiments, and 13% of feature flags created in the last 7 days were done through agents.
 
 ![Dashboards created](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_04_17_at_11_12_09_2x_0748d14ed3.png)
 
-For many people, chat has become the default way they are developing software. This has two consequences:
+Agents are helping people with the complexity of using all software, PostHog included. When they work well, they are a solution to all three of our problems:
 
-1. Going back to click around a UI feels like the past. They want to use natural language to get the insights as well as create and modify flags, experiments, surveys, and more.
-2. We need to focus more of our efforts on improving the [agent-first](/newsletter/agent-first-product-engineering) experience. 
+1. A chat-based agent provide a much simpler UI. Users can use natural language to get the insights as well as create and modify flags, experiments, surveys, and more.
+2. Agents can be set up with the [right tools and skills](/newsletter/agent-first-product-engineering) to figure out what products to use and know the best practices of using them.
+3. Because they can use all of our products and features, a chat-based agent is more relevant to more of our users than a product analytics dashboard is.
 
-Having the chat as the homepage supports both of these. It's a new way of interacting with software, but one people seemingly want. Focusing more on it, and having more users use it, makes it better, and that improves our other agentic surfaces (like [MCP](/docs/model-context-protocol)).
+The key bit is *when they work well*. Many people have had bad experiences with these chat-based agents, which is where resentment comes from. We've done a lot of work and testing and had enough positive feedback to be confident in ours though.
 
-It also helps us solve the two problems caused by our growth. An agent can figure out what products to use and know the best practices of using them. Users get their simpler UI as a chat is a lot simpler than the existing PostHog UI.
+Making chat the default also helps us make improvements faster. More usage means more feedback, and the better tools and skills we build thanks to this feedback then spill over to our other agentic surfaces (like [MCP](/docs/model-context-protocol)).
 
-## What making chat default is not
+## Chat has it's own challenges but is a step towards the future
 
-There is a lot of theories of why a company would do this that need debunking. Making the chat the default is not:
+Chat has it's own challenges.
 
-- **A loss of vision.** For us, we see this as a core part of our AI-first vision. Chat is the best format for interacting with agents right now and more people want to interact with PostHog through agents. 
+First, it's not faster for everything. Each product's UI still exists, is still the primary way of interacting with it, and is still being improved. Experts will still use the UI and we'll continue to build for them.
 
-- **A complete replacement.** The underlying UI is there and is still the primary way of interacting with every product. A lot of PostHog is visual in a way that text cannot represent. You can always change it back. 
+Second, it's not clear what a chat can do for you. A UI provides immediate value because it shows you what you can do. Although a chat can give hints, it requires users to know what they want. It's like a restaurant without a menu.
 
-- **Faster for everything.** We fully realize that in lots of circumstances, having a UI is better. We fully expect product experts to still use the UI. Chat is faster when you're not fully familiar with the UI.
+This problem is trickier but we're working on it too. The solution is not to just give more hints, but to autonomously make improvements to your product. You guide this via chat, but there will be less of you "needing to know what you want" and more of PostHog knowing what to do. 
 
-- **Going to have 100% approval.** PostHog as a whole isn't perfect. We'll continue to iterate and improve. 
-
-- **Completely unique.** Other companies have done this before us. We're not claiming this is a genius new UI paradigm we've invented, just one that works for a lot of people.
-
-- **Just "chat with your data."** Although the primary way people use chat is querying their data and doing analysis, you can use many of our products and features through PostHog AI. We're aiming for all of them.
-
-## Chat is a step towards the future
-
-We're seeing good results from doing this so far. Only 6% of homepage visitors clicked a dashboard link while 12% chat with AI. On top of this, only 2% of people over 30 days have put the default dashboard back within one hour of visiting. 
-
-More importantly, we're not done.
-
-Not just in the "feature completeness" sense, but in a broader mission sense. We're working towards product autonomy, enabling PostHog to improve your product automatically. 
-
-This will work towards solving one of the final complaints: that a chat requires users to know what they want. Product autonomy aims to turn product data into improvements. Being able to guide this through chat is a critical part in helping it succeed.
-
-The chat you see now is just a start.
+We're excited to show you more of this soon. The chat you see now is just a start.
