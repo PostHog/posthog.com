@@ -1,0 +1,384 @@
+---
+title: Provisioning API
+sidebarTitle: Provisioning API
+---
+
+The provisioning API lets partners create PostHog accounts and projects for their users programmatically.
+Instead of sending users to a signup page, you call three endpoints and get back a project API key, a personal API key, and a host URL -- everything needed to start sending events.
+
+## How it works
+
+The flow uses OAuth 2.0 with PKCE (Proof Key for Code Exchange), so there are no shared secrets to manage.
+Your application is identified by a metadata document hosted on your domain.
+
+```
+1. POST /account_requests  →  authorization code
+2. POST /oauth/token        →  access + refresh tokens
+3. POST /resources          →  project API key + host
+```
+
+## Set up as a partner
+
+### Host a CIMD metadata document
+
+PostHog uses [Client ID Metadata Documents](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/) (CIMD) for partner registration.
+Instead of a manual signup, you host a JSON document at an HTTPS URL on your domain.
+That URL becomes your `client_id`.
+
+Create a JSON file at a stable HTTPS URL, for example `https://yourapp.com/.well-known/posthog-client.json`:
+
+```json
+{
+  "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+  "client_name": "Your App Name",
+  "redirect_uris": ["https://yourapp.com/callbacks/posthog"],
+  "logo_uri": "https://yourapp.com/logo.png",
+  "token_endpoint_auth_method": "none",
+  "grant_types": ["authorization_code"],
+  "response_types": ["code"]
+}
+```
+
+Requirements:
+- **`client_id`** must exactly match the URL where this document is hosted.
+- **`redirect_uris`** is required and must contain at least one HTTPS URI. This is where PostHog redirects existing users during the consent flow.
+- **`logo_uri`** (optional) must be HTTPS if provided.
+- **`token_endpoint_auth_method`** must be `"none"` (CIMD clients are public clients -- no client secret).
+- The document must be served with `Content-Type: application/json` and be under 5 KB.
+- The URL must use HTTPS, include a path component, and must not contain query parameters or fragments.
+
+PostHog fetches and caches this document automatically.
+Subsequent requests reuse the cached version and refresh it in the background based on your `Cache-Control: max-age` header (clamped between 5 minutes and 24 hours, default 1 hour).
+
+### Contact PostHog
+
+After hosting your metadata document, contact PostHog to activate provisioning for your application.
+We'll enable the `provisioning_can_create_accounts` and `provisioning_can_provision_resources` flags on your application.
+
+## API reference
+
+All endpoints are on `https://us.posthog.com` (US region) or `https://eu.posthog.com` (EU region).
+
+Every request must include the `API-Version: 0.1d` header.
+
+### Step 1: Create an account
+
+Create a PostHog account for a user by email. If the user is new, PostHog creates the account and returns an authorization code immediately. If the user already exists, the response tells you to redirect them for consent.
+
+Generate a PKCE code verifier and challenge before making this request:
+
+```bash
+# Generate PKCE values
+CODE_VERIFIER=$(openssl rand -base64 32 | tr -d '=' | tr '+/' '-_')
+CODE_CHALLENGE=$(echo -n "$CODE_VERIFIER" | openssl dgst -sha256 -binary | openssl base64 | tr -d '=' | tr '+/' '-_')
+```
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
+  -H "Content-Type: application/json" \
+  -H "API-Version: 0.1d" \
+  -d '{
+    "id": "req_unique_request_id",
+    "email": "user@example.com",
+    "name": "Jane Doe",
+    "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+    "code_challenge": "'$CODE_CHALLENGE'",
+    "code_challenge_method": "S256",
+    "configuration": {
+      "region": "US",
+      "organization_name": "Acme Corp"
+    }
+  }'
+```
+
+**Request fields:**
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `id` | string | Yes | Your unique request ID (for idempotency) |
+| `email` | string | Yes | User's email address |
+| `name` | string | No | User's full name |
+| `client_id` | string | Yes | Your CIMD metadata URL |
+| `code_challenge` | string | Yes | Base64url-encoded SHA-256 hash of your code verifier (43-128 chars) |
+| `code_challenge_method` | string | Yes | Must be `"S256"` |
+| `configuration.region` | string | No | `"US"` (default) or `"EU"` |
+| `configuration.organization_name` | string | No | Organization name (defaults to `"Partner (email)"`) |
+
+**New user response** (HTTP 200):
+
+```json
+{
+  "id": "req_unique_request_id",
+  "type": "oauth",
+  "oauth": {
+    "code": "abc123...authorization_code"
+  }
+}
+```
+
+The user receives a welcome email with a link to set their password and access their dashboard.
+
+**Existing user response** (HTTP 200):
+
+```json
+{
+  "id": "req_unique_request_id",
+  "type": "requires_auth",
+  "requires_auth": {
+    "url": "https://us.posthog.com/api/agentic/authorize?state=xyz..."
+  }
+}
+```
+
+When `type` is `requires_auth`, redirect the user to the provided URL. After they approve, PostHog redirects them to your `redirect_uris` with a `code` query parameter that you use in step 2.
+
+### Step 2: Exchange the code for tokens
+
+Exchange the authorization code for an access token and refresh token. The token endpoint uses standard `application/x-www-form-urlencoded` encoding.
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/oauth/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -H "API-Version: 0.1d" \
+  -d "grant_type=authorization_code&code=abc123...authorization_code&code_verifier=$CODE_VERIFIER"
+```
+
+**Request fields:**
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `grant_type` | string | Yes | Must be `"authorization_code"` |
+| `code` | string | Yes | The authorization code from step 1 |
+| `code_verifier` | string | Yes | The original PKCE code verifier (must match the challenge from step 1) |
+
+**Response** (HTTP 200):
+
+```json
+{
+  "token_type": "bearer",
+  "access_token": "phx_abc123...",
+  "refresh_token": "phr_def456...",
+  "expires_in": 3600,
+  "account": {
+    "id": "01234567-89ab-cdef-0123-456789abcdef",
+    "payment_credentials": "orchestrator",
+    "available_teams": [
+      {
+        "id": 12345,
+        "name": "Default project",
+        "organization_id": "01234567-89ab-cdef-0123-456789abcdef",
+        "organization_name": "Acme Corp"
+      }
+    ]
+  }
+}
+```
+
+Authorization codes expire after 5 minutes and can only be used once.
+Access tokens expire after 1 hour. Use the refresh token to get new tokens.
+
+### Step 3: Provision a project
+
+Use the access token to provision a PostHog project and get credentials.
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer phx_abc123..." \
+  -H "API-Version: 0.1d" \
+  -d '{
+    "service_id": "analytics",
+    "configuration": {
+      "project_name": "My App - Production"
+    }
+  }'
+```
+
+**Request fields:**
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `service_id` | string | No | `"analytics"` (default), `"free"`, or `"pay_as_you_go"` |
+| `configuration.project_name` | string | No | Project name (defaults to `"Default project"`) |
+
+**Response** (HTTP 200):
+
+```json
+{
+  "status": "complete",
+  "id": "12345",
+  "service_id": "analytics",
+  "complete": {
+    "access_configuration": {
+      "api_key": "phc_abc123...",
+      "host": "https://us.posthog.com",
+      "personal_api_key": "phx_def456..."
+    }
+  }
+}
+```
+
+**Response fields:**
+
+| Field | Description |
+|---|---|
+| `api_key` | The project API token -- use this to initialize PostHog SDKs |
+| `host` | The API host (`https://us.posthog.com` or `https://eu.posthog.com`) |
+| `personal_api_key` | A personal API key scoped to this project -- use this for the PostHog API |
+
+### Refresh tokens
+
+Access tokens expire after 1 hour. Use the refresh token to get new credentials:
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/oauth/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -H "API-Version: 0.1d" \
+  -d "grant_type=refresh_token&refresh_token=phr_def456..."
+```
+
+**Response** (HTTP 200):
+
+```json
+{
+  "token_type": "bearer",
+  "access_token": "phx_new_token...",
+  "refresh_token": "phr_new_refresh...",
+  "expires_in": 3600
+}
+```
+
+Each refresh token is single-use. The response includes a new refresh token for subsequent refreshes.
+
+## What the user gets
+
+When you provision a new account, the user receives:
+
+- **Welcome email** with a link to set their password
+- **Full dashboard access** at [us.posthog.com](https://us.posthog.com) (or [eu.posthog.com](https://eu.posthog.com) for EU)
+- **Free tier** with generous limits across all PostHog products -- no credit card required
+
+Your integration gets back the project API key and host needed to start sending events immediately.
+
+## Error handling
+
+All error responses follow this format:
+
+```json
+{
+  "type": "error",
+  "error": {
+    "code": "error_code",
+    "message": "Human-readable description"
+  }
+}
+```
+
+Common error codes:
+
+| Code | HTTP Status | Description |
+|---|---|---|
+| `invalid_request` | 400 | Missing or invalid field |
+| `unauthorized` | 401 | Authentication failed |
+| `forbidden` | 403 | Partner not authorized for this action |
+| `expired` | 400 | Account request has expired |
+| `invalid_grant` | 400 | Authorization code is invalid or expired |
+| `invalid_scope` | 400 | Unrecognized scope requested |
+| `account_creation_failed` | 500 | Server error during account creation |
+
+## Rate limits
+
+All provisioning endpoints are rate limited. Default limits are applied per partner.
+If you need higher limits for your integration, contact PostHog -- we can configure partner-specific overrides.
+
+## Full example
+
+Here's a complete example in Node.js:
+
+```javascript
+import crypto from 'node:crypto';
+
+const CLIENT_ID = 'https://yourapp.com/.well-known/posthog-client.json';
+const BASE_URL = 'https://us.posthog.com';
+
+async function provisionPostHogAccount(email, name) {
+  // Generate PKCE values
+  const codeVerifier = crypto.randomBytes(32).toString('base64url');
+  const codeChallenge = crypto
+    .createHash('sha256')
+    .update(codeVerifier)
+    .digest('base64url');
+
+  // Step 1: Create account
+  const accountRes = await fetch(
+    `${BASE_URL}/api/agentic/provisioning/account_requests`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'API-Version': '0.1d',
+      },
+      body: JSON.stringify({
+        id: crypto.randomUUID(),
+        email,
+        name,
+        client_id: CLIENT_ID,
+        code_challenge: codeChallenge,
+        code_challenge_method: 'S256',
+        configuration: { region: 'US' },
+      }),
+    }
+  );
+  const account = await accountRes.json();
+
+  if (account.type === 'requires_auth') {
+    // Existing user -- redirect them to account.requires_auth.url
+    return { type: 'requires_auth', url: account.requires_auth.url };
+  }
+
+  if (account.type !== 'oauth') {
+    throw new Error(account.error?.message || 'Account creation failed');
+  }
+
+  // Step 2: Exchange code for tokens
+  const tokenRes = await fetch(`${BASE_URL}/api/agentic/oauth/token`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'API-Version': '0.1d',
+    },
+    body: new URLSearchParams({
+      grant_type: 'authorization_code',
+      code: account.oauth.code,
+      code_verifier: codeVerifier,
+    }),
+  });
+  const tokens = await tokenRes.json();
+
+  // Step 3: Provision a project
+  const resourceRes = await fetch(
+    `${BASE_URL}/api/agentic/provisioning/resources`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${tokens.access_token}`,
+        'API-Version': '0.1d',
+      },
+      body: JSON.stringify({
+        service_id: 'analytics',
+        configuration: { project_name: 'Production' },
+      }),
+    }
+  );
+  const resource = await resourceRes.json();
+
+  return {
+    type: 'provisioned',
+    apiKey: resource.complete.access_configuration.api_key,
+    host: resource.complete.access_configuration.host,
+    personalApiKey: resource.complete.access_configuration.personal_api_key,
+    projectId: resource.id,
+  };
+}
+```
