@@ -47,7 +47,7 @@ export const sessionReplay = {
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        { slug: 'features', name: 'Features', icon: <IconFeatures className="size-4" /> },
+        { slug: 'features', name: 'Features', icon: <IconSparkles className="size-4" /> },
         { slug: 'ai', name: 'AI', icon: <IconSparkles className="size-4" /> },
         { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
         { slug: 'feature-comparison', name: 'Feature comparison', icon: <IconGraph className="size-4" /> },

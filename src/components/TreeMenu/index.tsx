@@ -46,10 +46,12 @@ const TreeLink = ({
             onClick={() => onClick(menuItem)}
             icon={typeof menuItem.icon !== 'string' && menuItem.icon}
         >
-            {menuItem.name}
+            <span data-sidebar-label>{menuItem.name}</span>
         </OSButton>
     ) : (
-        <div className={`text-muted text-sm py-0.5 !mt-2 ml-${2 + index} pl-${index * 4}`}>{menuItem.name}</div>
+        <div className={`text-muted text-sm py-0.5 !mt-2 ml-${2 + index} pl-${index * 4}`}>
+            <span data-sidebar-label>{menuItem.name}</span>
+        </div>
     )
 }
 
@@ -163,7 +165,9 @@ function TreeMenuItem({
                             <IconChevronRight className="size-4" />
                         </motion.div>
                     )}
-                    <span className={`${open ? 'font-semibold' : ''}`}>{item.name}</span>
+                    <span className={`${open ? 'font-semibold' : ''}`} data-sidebar-label>
+                        {item.name}
+                    </span>
                 </OSButton>
             </Collapsible.Trigger>
 

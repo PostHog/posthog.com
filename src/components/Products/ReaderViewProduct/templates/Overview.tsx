@@ -9,6 +9,8 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import UseCaseSubmission from '../UseCaseSubmission'
 import { CTAs } from 'components/CTAs'
 import { IconArrowUpRight } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import Tooltip from 'components/RadixUI/Tooltip'
 
 // Per-customer brand glow color. Tweak as desired; falls back to the product's color when unset.
 const customerGlowColors: Record<string, GlowColor> = {
@@ -167,6 +169,106 @@ const Overview = ({ id, productData, customers, hasCaseStudy }: SectionComponent
 
             <div>
                 <h2>Who uses it?</h2>
+
+                {customerLogos.length > 0 && (
+                    <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 items-center">
+                        {customerLogos.map((customer: any) => {
+                            const data = customerData[customer.slug]
+                            const isCaseStudy = hasCaseStudy(customer.slug)
+
+                            const logoNode = renderLogo(customer)
+                            const glowColor = customerGlowColors[customer.slug] ?? productData?.color
+
+                            const tooltipContent = (
+                                <div className="max-w-xs flex flex-col gap-1.5 leading-snug">
+                                    <p className="m-0 font-semibold text-primary">
+                                        {customer.name} {data.headline}
+                                    </p>
+                                    <p className="m-0 text-sm italic text-secondary">"{data.description}"</p>
+                                    {isCaseStudy && (
+                                        <p className="m-0 inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
+                                            <span className="inline-flex w-2.5 h-2.5 rounded-full bg-red shrink-0"></span>
+                                            Read case study
+                                        </p>
+                                    )}
+                                </div>
+                            )
+
+                            if (isCaseStudy) {
+                                const logoLink = (
+                                    <OSButton
+                                        asLink
+                                        to={`/customers/${customer.slug}`}
+                                        state={{ newWindow: true }}
+                                        className="border border-transparent hover:border-primary rounded-sm"
+                                    >
+                                        {logoNode}
+                                    </OSButton>
+                                )
+
+                                const wrappedLogo = glowColor ? (
+                                    <Glow
+                                        as="span"
+                                        color={glowColor}
+                                        hover
+                                        size="sm"
+                                        intensity="medium"
+                                        rounded="md"
+                                        className="inline-block"
+                                    >
+                                        {logoLink}
+                                    </Glow>
+                                ) : (
+                                    <span className="inline-block">{logoLink}</span>
+                                )
+
+                                return (
+                                    <span key={customer.slug} className="relative inline-flex items-center">
+                                        {wrappedLogo}
+                                        <Tooltip
+                                            trigger={
+                                                <button
+                                                    type="button"
+                                                    aria-label={`About ${customer.name}`}
+                                                    className="absolute -top-1 -right-1 inline-flex w-3 h-3 rounded-full bg-red border-2 border-white dark:border-dark cursor-pointer z-10 p-0"
+                                                />
+                                            }
+                                            delay={150}
+                                            sideOffset={20}
+                                        >
+                                            {tooltipContent}
+                                        </Tooltip>
+                                    </span>
+                                )
+                            }
+
+                            const inner = <span className="inline-flex py-1.5 px-2">{logoNode}</span>
+
+                            const trigger = glowColor ? (
+                                <Glow
+                                    as="span"
+                                    color={glowColor}
+                                    hover
+                                    size="sm"
+                                    intensity="medium"
+                                    rounded="md"
+                                    className="inline-block"
+                                >
+                                    {inner}
+                                </Glow>
+                            ) : (
+                                <span className="inline-block">{inner}</span>
+                            )
+
+                            return (
+                                <Tooltip key={customer.slug} trigger={trigger} delay={150} sideOffset={8}>
+                                    {tooltipContent}
+                                </Tooltip>
+                            )
+                        })}
+                    </div>
+                )}
+
                 {customerTabs.length > 0 && (
                     <TabbedCarousel
                         tabs={customerTabs}

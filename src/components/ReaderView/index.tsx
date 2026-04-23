@@ -624,13 +624,18 @@ const InlineSearch = ({
 
     return (
         <div className="flex items-center gap-1">
-            <input
-                type="text"
-                placeholder={placeholder}
-                className="w-full p-1 rounded border border-input text-primary text-sm bg-light dark:bg-dark"
-                value={inputValue}
-                onChange={handleInputChange}
-            />
+            <div className="relative flex-1 min-w-0">
+                <span className="absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none text-secondary inline-flex">
+                    <IconSearch className="size-4" />
+                </span>
+                <input
+                    type="text"
+                    placeholder={placeholder}
+                    className="w-full pl-7 pr-2 py-1 rounded border border-input text-primary text-sm bg-light dark:bg-dark"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                />
+            </div>
             {inputValue && (
                 <OSButton size="xs" icon={<IconX />} onClick={handleClear} className="rounded-full !p-1.5" />
             )}
@@ -656,6 +661,18 @@ interface LeftSidebarProps {
 }
 
 const SIDEBAR_TRANSITION = { type: 'spring' as const, stiffness: 380, damping: 36 }
+
+/**
+ * Tracks whether the LeftSidebar is currently expanded (pinned, hovered, or
+ * search-focused). Slotted components like `ProductSwitcher` consume this so
+ * they can render a compact, icon-only variant when collapsed and the full
+ * widget when expanded — without the call sites having to pass two props.
+ *
+ * Outside the sidebar there's no Provider, so the default `true` keeps
+ * everything rendering normally.
+ */
+export const SidebarExpandedContext = React.createContext<boolean>(true)
+export const useSidebarExpanded = (): boolean => React.useContext(SidebarExpandedContext)
 
 interface SidebarTabButtonProps {
     tab: MenuTab
@@ -707,13 +724,16 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
             onClick={onClick}
             role="tab"
             aria-selected={active}
-            className={`relative rounded text-sm leading-none flex ${
+            className={`relative rounded text-sm leading-tight flex ${
                 stacked
                     ? 'flex-1 flex-col items-center text-center gap-1 px-2 py-1.5'
-                    : showLabel
-                    ? 'items-center justify-start gap-2 px-2 py-1'
-                    : 'items-center justify-center px-2 py-1'
-            } ${active ? 'text-primary' : 'text-secondary hover:text-primary'}`}
+                    : // Icon-only AND with-label both use justify-start so
+                      // the icon stays at button x=8 regardless of button
+                      // width. `justify-center` tied icon x to width and
+                      // made the icon jut as the wrapper shrank during a
+                      // hover→collapse transition.
+                      `min-h-7 items-center justify-start ${showLabel ? 'gap-2' : ''} px-2 py-1`
+            } ${active ? 'text-primary' : 'text-secondary hover:text-primary hover:bg-accent/50'}`}
         >
             <AnimatePresence initial={false}>
                 {active && (
@@ -786,17 +806,57 @@ const LeftSidebar = ({
     const isPinned = isNavVisible
     const [searchFocused, setSearchFocused] = useState(false)
     const [hovered, setHovered] = useState(false)
-    const searchSlotRef = useRef<HTMLDivElement>(null)
     const expanded = isPinned || searchFocused || hovered
 
-    const handleSearchTrigger = () => {
-        setSearchFocused(true)
-        // Wait for the panel to expand and render the input, then focus it.
-        requestAnimationFrame(() => {
-            const input = searchSlotRef.current?.querySelector('input') as HTMLInputElement | null
-            input?.focus()
-        })
-    }
+    // `displayExpanded` mirrors `expanded` instantly when growing, but only
+    // flips to false AFTER the panel's shrink animation finishes (driven by
+    // the panel motion.div's `onAnimationComplete` below). Things that should
+    // animate IN on expand but only disappear once the wrapper is fully
+    // collapsed — the product switcher swap, the menu's label-hide rule —
+    // read this instead of `expanded`. Wrapper widths still use `expanded`
+    // so they animate with the hover/blur immediately.
+    const [displayExpanded, setDisplayExpanded] = useState(expanded)
+    useEffect(() => {
+        if (expanded) setDisplayExpanded(true)
+    }, [expanded])
+
+    // The tab strip wrapper animates its width 32 ↔ 234 in lockstep with
+    // the panel. If the user pins WHILE that animation is mid-flight (e.g.
+    // they hover then immediately click pin), the tab strip's flex layout
+    // would flip from column to row before the wrapper has reached 234 — the
+    // FLIP measurement in SidebarTabButton would capture mid-animation
+    // positions, so the icons appear to snap rather than glide to their
+    // final spots.
+    //
+    // `appliedPinned` defers the visual stacked switch until the wrapper
+    // settles. `tabsAnimating` is set true whenever the width target
+    // changes (a new animation will run) and back to false on the wrapper's
+    // `onAnimationComplete`. While animating, pin/unpin updates are queued
+    // and applied only when the wrapper is settled.
+    const tabsWidthTarget = isPinned || expanded ? 234 : 32
+    const tabsWidthTargetRef = useRef(tabsWidthTarget)
+    const [tabsAnimating, setTabsAnimating] = useState(false)
+    useEffect(() => {
+        if (tabsWidthTarget !== tabsWidthTargetRef.current) {
+            tabsWidthTargetRef.current = tabsWidthTarget
+            setTabsAnimating(true)
+        }
+    }, [tabsWidthTarget])
+
+    // Going TO pinned (false → true) is deferred so the FLIP captures
+    // stable positions; going FROM pinned (true → false) is applied
+    // immediately so the tab strip reflows out of `flex-row` BEFORE the
+    // wrapper shrinks (otherwise the icons get squished while waiting).
+    const [appliedPinned, setAppliedPinned] = useState(isPinned)
+    useEffect(() => {
+        if (!isPinned) {
+            setAppliedPinned(false)
+            return
+        }
+        if (!tabsAnimating) setAppliedPinned(true)
+    }, [isPinned, tabsAnimating])
+
+    const handleSearchFocus = () => setSearchFocused(true)
 
     const handleSearchBlur = (e: React.FocusEvent<HTMLDivElement>) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
@@ -815,6 +875,17 @@ const LeftSidebar = ({
         setHovered(false)
     }
 
+    // Wrap toggleNav so unpin clears `appliedPinned` in the SAME render batch
+    // as the toggle. Without this, React commits one intermediate render with
+    // `isPinned=false` but `appliedPinned=true` (the `useEffect` that flips
+    // `appliedPinned` runs in a later cycle) — that frame shows the tab strip
+    // stuck in `flex-row` while the wrapper has already started shrinking,
+    // squishing the buttons before the layout finally flips.
+    const handleToggleNav = () => {
+        if (isPinned) setAppliedPinned(false)
+        toggleNav()
+    }
+
     return (
         <aside
             data-scheme="secondary"
@@ -826,10 +897,16 @@ const LeftSidebar = ({
                 initial={false}
                 animate={{ width: expanded ? 250 : 48 }}
                 transition={SIDEBAR_TRANSITION}
+                onAnimationComplete={() => {
+                    // Defer ProductSwitcher/menu-label hide until the panel
+                    // has actually finished shrinking — otherwise the swap
+                    // happens mid-animation and the icon visibly jumps.
+                    if (!expanded) setDisplayExpanded(false)
+                }}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 data-scheme="secondary"
-                className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden bg-primary border-r border-primary ${
+                className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden bg-primary/75 dark:bg-primary border-r border-primary backdrop-blur ${
                     !isPinned && expanded ? 'z-50 shadow-2xl' : 'z-30'
                 }`}
             >
@@ -840,70 +917,146 @@ const LeftSidebar = ({
                     {rightActionButtons}
                 </div>
 
-                {/* Middle content — always rendered so the bottom row stays anchored */}
-                <div className="flex-1 min-h-0 flex flex-col w-[250px]">
-                    {productSelect && <div className="px-2 pb-2 flex-shrink-0">{productSelect}</div>}
+                {/* Middle content — always rendered so the bottom row stays
+                    anchored. The single fade rule on this container reaches
+                    every `[data-sidebar-label]` descendant — product name,
+                    menu items, anything else — so they all fade in lockstep
+                    when the user mouses out, keeping the disappearance
+                    smooth instead of an abrupt cut. */}
+                <SidebarExpandedContext.Provider value={displayExpanded}>
+                    <div
+                        className={`flex-1 min-h-0 flex flex-col w-[250px] [&_[data-sidebar-label]]:transition-opacity [&_[data-sidebar-label]]:duration-200 ${
+                            expanded ? '' : '[&_[data-sidebar-label]]:opacity-0'
+                        }`}
+                    >
+                        {/* Product slot: width-animates 32 ↔ 234 like the search
+                        and tab strip. When collapsed, ProductSwitcher renders
+                        a centered icon that lands at panel center; on
+                        hover/pin it swaps in the full searchable dropdown.
+                        Two scoped fade rules cover the OSSelect chrome that
+                        isn't a `data-sidebar-label`:
+                        - the chevron (`button > svg:last-child`)
+                        - the product name span (the second span inside the
+                          trigger's content wrapper — see OSSelect markup)
+                        Both fade in lockstep with the menu labels so the
+                        whole expanded view dissolves smoothly. */}
+                        {productSelect && (
+                            <motion.div
+                                initial={false}
+                                animate={{ width: expanded ? 234 : 32 }}
+                                transition={SIDEBAR_TRANSITION}
+                                className={`mx-2 pb-2 flex-shrink-0 [&_button>svg:last-child]:transition-opacity [&_button>svg:last-child]:duration-200 [&_button>span>span>span:nth-child(2)]:transition-opacity [&_button>span>span>span:nth-child(2)]:duration-200 ${
+                                    expanded
+                                        ? ''
+                                        : '[&_button>svg:last-child]:opacity-0 [&_button>span>span>span:nth-child(2)]:opacity-0'
+                                }`}
+                            >
+                                {productSelect}
+                            </motion.div>
+                        )}
 
-                    {/* Inline search: full input when expanded; transparent icon button when collapsed */}
-                    {!isEditing && inlineSearch && (
-                        <div
-                            ref={searchSlotRef}
-                            className="px-2 pb-2 flex-shrink-0"
-                            onBlur={handleSearchBlur}
-                            onKeyDown={handleSearchKeyDown}
-                        >
-                            {expanded ? (
-                                inlineSearch
-                            ) : (
-                                <Tooltip
-                                    side="right"
-                                    trigger={<OSButton size="md" icon={<IconSearch />} onClick={handleSearchTrigger} />}
+                        {/* Inline search: always rendered with the magnifying-glass
+                        icon inside the input itself. The wrapper width animates
+                        in lockstep with the panel (32 ↔ 234) so when collapsed
+                        only the icon is visible — no row appears/disappears,
+                        keeping the vertical layout perfectly stable. Focusing
+                        the input triggers `searchFocused` to expand the panel. */}
+                        {!isEditing && inlineSearch && (
+                            <div
+                                className="mx-2 mb-2 flex-shrink-0"
+                                onFocus={handleSearchFocus}
+                                onBlur={handleSearchBlur}
+                                onKeyDown={handleSearchKeyDown}
+                            >
+                                <motion.div
+                                    initial={false}
+                                    animate={{ width: expanded ? 234 : 32 }}
+                                    transition={SIDEBAR_TRANSITION}
+                                    // Transition the colors on the descendant
+                                    // input itself — `transition-colors` on this
+                                    // wrapper would only animate the wrapper's
+                                    // own colors (which never change), so the
+                                    // input bg/border were flipping instantly
+                                    // and reading as out-of-sync with the rest.
+                                    className={`overflow-hidden [&_input]:transition-colors [&_input]:duration-200 ${
+                                        expanded ? '' : '[&_input]:!bg-transparent [&_input]:!border-transparent'
+                                    }`}
                                 >
-                                    Search this page
-                                </Tooltip>
-                            )}
+                                    {inlineSearch}
+                                </motion.div>
+                            </div>
+                        )}
+
+                        {/* Tab strip:
+                        - Pinned: horizontal row, each tab icon-stacked-above-label.
+                        - Otherwise (collapsed OR hover-expanded): vertical
+                          icon-only column. We deliberately don't reflow on
+                          hover — tabs only rotate axes when the user pins. */}
+                        {hasTabs && (
+                            // Single container across all states (pinned, hover,
+                            // collapsed) so SidebarTabButton instances stay
+                            // mounted — required for the icon FLIP animation to
+                            // know each icon's previous position when the layout
+                            // flips between row/column.
+                            // Width animates in lockstep with the panel so the
+                            // border-y always stays inside the visible area
+                            // rather than overflowing the 250px content box.
+                            <motion.div
+                                initial={false}
+                                animate={{ width: tabsWidthTarget }}
+                                transition={SIDEBAR_TRANSITION}
+                                onAnimationComplete={() => {
+                                    // Width has settled — safe to flip the
+                                    // tab strip's flex direction. Doing this
+                                    // mid-animation makes SidebarTabButton's
+                                    // FLIP measure mid-flight positions, so
+                                    // the icons appear to snap on first pin.
+                                    setTabsAnimating(false)
+                                    setAppliedPinned(isPinned)
+                                }}
+                                className={`mx-2 mb-2 flex gap-px flex-shrink-0 ${
+                                    appliedPinned ? 'flex-row' : 'flex-col items-stretch py-2 border-y border-secondary'
+                                }`}
+                                role="tablist"
+                                aria-label="Sidebar mode"
+                            >
+                                {menuTabs!.map((t) => (
+                                    <SidebarTabButton
+                                        key={t.value}
+                                        tab={t}
+                                        active={t.value === activeTab}
+                                        showLabel={expanded}
+                                        stacked={appliedPinned}
+                                        onClick={() => setActiveTab(t.value)}
+                                    />
+                                ))}
+                            </motion.div>
+                        )}
+
+                        {/* Menu: stays mounted in both states. The label fade is
+                        applied by the parent (covers product name + menu
+                        items uniformly), so this just contributes the
+                        scrolling viewport. */}
+                        <div className="flex-1 min-h-0 flex flex-col">
+                            <ScrollArea className="px-2 pb-2">{hasTabs ? activeMenu : children}</ScrollArea>
                         </div>
-                    )}
+                    </div>
+                </SidebarExpandedContext.Provider>
 
-                    {/* Tab strip:
-                        - Expanded (pinned, hovered, or search-focused): horizontal
-                          row, each tab icon-stacked-above-label.
-                        - Collapsed: vertical icon-only column. */}
-                    {hasTabs && (
-                        <div
-                            className={`px-2 pb-2 flex-shrink-0 flex gap-px ${
-                                expanded ? 'flex-row' : 'flex-col items-stretch'
-                            }`}
-                            role="tablist"
-                            aria-label="Sidebar mode"
-                        >
-                            {menuTabs!.map((t) => (
-                                <SidebarTabButton
-                                    key={t.value}
-                                    tab={t}
-                                    active={t.value === activeTab}
-                                    showLabel={expanded}
-                                    stacked={expanded}
-                                    onClick={() => setActiveTab(t.value)}
-                                />
-                            ))}
-                        </div>
-                    )}
-
-                    <ScrollArea className="px-2 pb-2">{hasTabs ? activeMenu : children}</ScrollArea>
-                </div>
-
-                {/* Bottom action row: pin/toggle on left, edit + gear on right (or stacked when narrow) */}
-                <div
-                    className={`flex-shrink-0 p-1 border-t border-primary ${
-                        expanded ? 'flex justify-between items-center' : 'flex flex-col items-center gap-px'
-                    }`}
-                >
+                {/* Bottom action row: single flex-row layout in every
+                    state. The pin button is pushed to panel x=24 via
+                    `pl-2.5` so its icon center aligns with every other
+                    icon-only element when collapsed AND stays put when the
+                    sidebar expands. Edit/gear ride along on the right via
+                    `ml-auto` and only mount once `displayExpanded` is true,
+                    so they appear/disappear cleanly without nudging the
+                    pin. */}
+                <div className="flex-shrink-0 border-t border-primary py-1 pl-2.5 pr-1 flex items-center">
                     <Tooltip
                         trigger={
                             <OSButton
                                 size="md"
-                                onClick={toggleNav}
+                                onClick={handleToggleNav}
                                 active={isPinned}
                                 icon={isPinned ? <IconSidebarOpen /> : <IconSidebarClose />}
                             />
@@ -912,13 +1065,15 @@ const LeftSidebar = ({
                     >
                         {isPinned ? 'Unpin sidebar' : 'Pin sidebar'}
                     </Tooltip>
-                    <div className={expanded ? 'flex items-center gap-px' : 'contents'}>
-                        <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
-                        <AppOptionsButton
-                            lineHeightMultiplier={lineHeightMultiplier}
-                            handleLineHeightChange={handleLineHeightChange}
-                        />
-                    </div>
+                    {displayExpanded && (
+                        <div className="ml-auto flex items-center gap-px">
+                            <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
+                            <AppOptionsButton
+                                lineHeightMultiplier={lineHeightMultiplier}
+                                handleLineHeightChange={handleLineHeightChange}
+                            />
+                        </div>
+                    )}
                 </div>
             </motion.div>
         </aside>

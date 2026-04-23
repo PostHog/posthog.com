@@ -62,7 +62,7 @@ const ProductNav = ({ items, basePath, contentRef }: ProductNavProps) => {
                     const label = (
                         <span className="inline-flex items-center gap-2">
                             {icon && <span className="size-4 inline-flex">{icon}</span>}
-                            {name}
+                            <span data-sidebar-label>{name}</span>
                         </span>
                     )
 
