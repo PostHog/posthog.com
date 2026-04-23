@@ -26,6 +26,40 @@ import VueSetup from "../../integrate/_snippets/vuejs/vue-setup.mdx"
 
 <VueSetup />
 
+## Environment-specific tracking
+
+You usually don't want to send development or test traffic to your PostHog project. There are two common ways to scope PostHog to production in Vue:
+
+**Guard `posthog.init` on an environment flag.** Vite exposes `import.meta.env.PROD` (true only in `vite build` output), and Vue CLI / Nuxt expose `process.env.NODE_ENV`:
+
+```ts
+// src/main.ts (Vite + Vue 3)
+if (import.meta.env.PROD) {
+  posthog.init(import.meta.env.VITE_POSTHOG_TOKEN, {
+    api_host: import.meta.env.VITE_POSTHOG_HOST,
+    defaults: '2026-01-30',
+  })
+}
+```
+
+**Or initialize once and opt out per-environment** so the instance still exists for consumer code but does not send events:
+
+```ts
+posthog.init(import.meta.env.VITE_POSTHOG_TOKEN, {
+  api_host: import.meta.env.VITE_POSTHOG_HOST,
+  defaults: '2026-01-30',
+  opt_out_capturing_by_default: !import.meta.env.PROD,
+  loaded: (ph) => {
+    if (import.meta.env.DEV) ph.debug()
+  },
+})
+```
+
+With the second approach, `posthog.capture()` calls made from components are no-ops in development while still type-checking and running through your plugin layer, so you don't need `if (PROD)` checks sprinkled across components. Swap `import.meta.env` for `process.env` if you're on Vue CLI or Nuxt.
+
+Using different PostHog projects per environment -- staging vs production -- is just a matter of binding `VITE_POSTHOG_TOKEN` (or `NUXT_PUBLIC_POSTHOG_KEY`) to different project tokens in your `.env.production` / `.env.staging` files.
+
+
 ## Identifying users
 
 import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
