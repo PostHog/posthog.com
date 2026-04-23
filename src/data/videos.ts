@@ -10,7 +10,7 @@ export interface Video {
 export const videos: Video[] = [
     {
         source: 'youtube',
-        videoId: 'ILp4lT2gwvQ',
+        videoId: '9pw9qvfskpk',
         folder: 'products',
         title: 'Demo video',
         tags: ['demo', 'overview'],
