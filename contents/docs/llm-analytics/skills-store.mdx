@@ -22,14 +22,17 @@ A PostHog skill follows the [Agent Skills specification](https://agentskills.io/
 
 The MCP server exposes the skills store through a dedicated family of tools:
 
-| Tool              | Purpose                                                                  |
-| ----------------- | ------------------------------------------------------------------------ |
-| `skill-list`      | List all available skills (name + description only)                      |
-| `skill-get`       | Fetch a skill by name — returns the body and a manifest of bundled files |
-| `skill-file-get`  | Fetch a single bundled file by path (on demand)                          |
-| `skill-create`    | Store a new skill, optionally with bundled files                         |
-| `skill-update`    | Publish a new version — provide full `body` or incremental `edits`       |
-| `skill-duplicate` | Duplicate an existing skill under a new name                             |
+| Tool                | Purpose                                                                           |
+| ------------------- | --------------------------------------------------------------------------------- |
+| `skill-list`        | List all available skills (name + description only)                               |
+| `skill-get`         | Fetch a skill by name — returns the body and a manifest of bundled files          |
+| `skill-file-get`    | Fetch a single bundled file by path (on demand)                                   |
+| `skill-create`      | Store a new skill, optionally with bundled files                                  |
+| `skill-update`      | Publish a new version — provide full `body`, incremental `edits`, or `file_edits` |
+| `skill-file-create` | Add one bundled file to a skill (publishes a new version)                         |
+| `skill-file-delete` | Remove one bundled file from a skill                                              |
+| `skill-file-rename` | Rename one bundled file (move without rewriting content)                          |
+| `skill-duplicate`   | Duplicate an existing skill under a new name                                      |
 
 Agents use these with progressive disclosure: discover by description, fetch the body only when relevant, and pull individual files on demand — rather than loading everything up front.
 
@@ -187,7 +190,9 @@ description: Access and run shared team skills stored in PostHog.
   skills, or references "skills store" or "skill store".
 allowed-tools: mcp__posthog__skill-list, mcp__posthog__skill-get,
   mcp__posthog__skill-file-get, mcp__posthog__skill-create,
-  mcp__posthog__skill-update, mcp__posthog__skill-duplicate
+  mcp__posthog__skill-update, mcp__posthog__skill-file-create,
+  mcp__posthog__skill-file-delete, mcp__posthog__skill-file-rename,
+  mcp__posthog__skill-duplicate
 ---
 
 # PostHog Skills Store
@@ -273,7 +278,7 @@ Update the PostHog skill "hog-release-notes" to also include
 a "Known limitations" section in the release notes structure.
 ```
 
-The agent calls `skill-get` to read the current version, then `skill-update` with the new body and `base_version`. Fields you don't pass are carried forward — if you don't send `files`, the existing bundle is preserved. If you do send `files`, they replace the previous version's bundle.
+The agent calls `skill-get` to read the current version, then `skill-update` with the new body and `base_version`. Fields you don't pass are carried forward. Pick the most surgical primitive for what you're changing — the API offers several so you don't have to round-trip the whole skill to tweak one part.
 
 ### Use incremental edits
 
@@ -297,6 +302,68 @@ Each edit must have:
 Edits are applied sequentially. If `old` matches zero times or more than once, the update fails with an error indicating which edit failed.
 
 You can use either `body` (full replacement) or `edits` (incremental), but not both in the same request.
+
+### Edit a single bundled file
+
+Use `file_edits` to patch one bundled file without resending every file:
+
+```json
+{
+  "skill_name": "hog-release-notes",
+  "file_edits": [
+    {
+      "path": "scripts/changelog.py",
+      "edits": [{ "old": "DAYS = 7", "new": "DAYS = 14" }]
+    }
+  ],
+  "base_version": 2
+}
+```
+
+Non-targeted files carry forward unchanged. `file_edits` cannot add, remove, or rename files — use the per-file tools below for that.
+
+### Add, remove, or rename a file
+
+Use atomic per-file tools when you need to add, delete, or rename a single bundled file. Each publishes a new version:
+
+**Add a file:**
+
+```json
+// skill-file-create
+{
+  "skill_name": "hog-release-notes",
+  "path": "scripts/format.py",
+  "content": "# Formatting helpers...",
+  "base_version": 2
+}
+```
+
+**Delete a file:**
+
+```json
+// skill-file-delete
+{
+  "skill_name": "hog-release-notes",
+  "file_path": "scripts/old-script.py",
+  "base_version": 3
+}
+```
+
+**Rename a file:**
+
+```json
+// skill-file-rename
+{
+  "skill_name": "hog-release-notes",
+  "old_path": "scripts/format.py",
+  "new_path": "scripts/format_v2.py",
+  "base_version": 4
+}
+```
+
+### Replace the whole bundle (rare)
+
+Passing `files` to `skill-update` replaces ALL bundled files — anything not in the array is dropped. Only use this when you intentionally want to wipe and reseed the bundle. For everything else, prefer `file_edits` or the per-file CRUD tools above.
 
 ### Review changes
 
