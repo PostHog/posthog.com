@@ -4,7 +4,9 @@ sidebarTitle: Provisioning API
 ---
 
 The provisioning API lets partners create PostHog accounts and projects for their users programmatically.
-Instead of sending users to a signup page, you call three endpoints and get back a project API key, a personal API key, and a host URL -- everything needed to start sending events.
+Instead of sending users to a signup page, you call three endpoints and get back a project API key, a personal API key, and a host URL - everything needed to start sending events.
+
+Jump to the [full Node.js example](#full-example) to see the complete flow in code.
 
 ## How it works
 
@@ -58,135 +60,14 @@ Requirements:
 - **`client_id`** must exactly match the URL where this document is hosted.
 - **`redirect_uris`** is required and must contain at least one HTTPS URI. This is where PostHog redirects existing users during the consent flow.
 - **`logo_uri`** (optional) must be HTTPS if provided.
-- **`token_endpoint_auth_method`** must be `"none"` (CIMD clients are public clients -- no client secret).
+- **`token_endpoint_auth_method`** must be `"none"` (CIMD clients are public clients, no client secret).
 - The document must be served with `Content-Type: application/json` and be under 5 KB.
 - The URL must use HTTPS, include a path component, and must not contain query parameters or fragments.
 
 PostHog fetches and caches this document automatically.
 Subsequent requests reuse the cached version and refresh it in the background based on your `Cache-Control: max-age` header (clamped between 5 minutes and 24 hours, default 1 hour).
 
-### Contact PostHog
-
-After hosting your metadata document, contact PostHog to activate provisioning for your application.
-We'll enable the `provisioning_can_create_accounts` and `provisioning_can_provision_resources` flags on your application.
-
-## Server-to-server integration (HMAC)
-
-If your integration runs entirely on your backend (no browser redirects, no public client), you can use HMAC signing instead of PKCE.
-The tradeoff: you manage a shared secret, but you skip the `code_challenge`/`code_verifier` dance entirely.
-
-| | PKCE (public client) | HMAC (server-to-server) |
-|---|---|---|
-| **Secret management** | None -- CIMD metadata document only | Shared `signing_secret` stored on your server |
-| **Auth signal** | `client_id` in request body | `Stripe-Signature` header on every request |
-| **Best for** | Browser-based flows, CLIs, apps that redirect users | Backend services that provision accounts without user interaction |
-
-### Get credentials
-
-Contact PostHog to set up an HMAC partner application. You'll receive a `signing_secret` -- store it securely on your server (environment variable, secrets manager, etc.).
-
-### Sign requests
-
-Every request must include a `Stripe-Signature` header with a timestamp and HMAC-SHA256 signature:
-
-```
-Stripe-Signature: t={unix_timestamp},v1={hex_signature}
-```
-
-The signature is computed over `{timestamp}.{request_body}` using your signing secret:
-
-```bash
-# Compute the signature
-TIMESTAMP=$(date +%s)
-BODY='{"id":"req_123","email":"user@example.com","name":"Jane Doe","configuration":{"region":"US"}}'
-SIGNATURE=$(printf '%s.%s' "$TIMESTAMP" "$BODY" | openssl dgst -sha256 -hmac "$SIGNING_SECRET" | sed 's/^.* //')
-```
-
-The timestamp must be within 5 minutes of the server's clock.
-
-### The 3-step flow with HMAC
-
-The same three endpoints work with HMAC auth. The difference: you authenticate with the `Stripe-Signature` header instead of PKCE, and you skip `code_challenge`/`code_verifier` fields.
-
-```mermaid
-sequenceDiagram
-    participant P as Partner
-    participant PH as PostHog
-
-    P->>PH: POST /account_requests (Stripe-Signature header)
-    PH-->>P: authorization code
-
-    P->>PH: POST /oauth/token (Stripe-Signature header)
-    PH-->>P: access_token + refresh_token
-
-    P->>PH: POST /resources (Bearer token)
-    PH-->>P: project API key + host
-```
-
-**Step 1: Create an account**
-
-```bash
-TIMESTAMP=$(date +%s)
-BODY='{"id":"req_unique_request_id","email":"user@example.com","name":"Jane Doe","configuration":{"region":"US","organization_name":"Acme Corp"}}'
-SIGNATURE=$(printf '%s.%s' "$TIMESTAMP" "$BODY" | openssl dgst -sha256 -hmac "$SIGNING_SECRET" | sed 's/^.* //')
-
-curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
-  -H "Content-Type: application/json" \
-  -H "API-Version: 0.1d" \
-  -H "Stripe-Signature: t=$TIMESTAMP,v1=$SIGNATURE" \
-  -d "$BODY"
-```
-
-No `code_challenge` or `code_challenge_method` needed. The response format is the same as the PKCE flow.
-
-**Step 2: Exchange the code for tokens**
-
-```bash
-BODY="grant_type=authorization_code&code=abc123...authorization_code"
-TIMESTAMP=$(date +%s)
-SIGNATURE=$(printf '%s.%s' "$TIMESTAMP" "$BODY" | openssl dgst -sha256 -hmac "$SIGNING_SECRET" | sed 's/^.* //')
-
-curl -X POST https://us.posthog.com/api/agentic/oauth/token \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -H "API-Version: 0.1d" \
-  -H "Stripe-Signature: t=$TIMESTAMP,v1=$SIGNATURE" \
-  -d "$BODY"
-```
-
-No `code_verifier` needed. The response includes the same `access_token`, `refresh_token`, and `account` fields.
-
-**Step 3: Provision a project**
-
-Once you have an access token, use it with a `Bearer` header -- the same as the PKCE flow:
-
-```bash
-curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer phx_abc123..." \
-  -H "API-Version: 0.1d" \
-  -d '{"service_id":"analytics","configuration":{"project_name":"My App - Production"}}'
-```
-
-### Signing in code (Node.js)
-
-```javascript
-import crypto from 'node:crypto';
-
-function signRequest(signingSecret, body) {
-  const timestamp = Math.floor(Date.now() / 1000);
-  const payload = `${timestamp}.${body}`;
-  const signature = crypto
-    .createHmac('sha256', signingSecret)
-    .update(payload)
-    .digest('hex');
-  return `t=${timestamp},v1=${signature}`;
-}
-
-// Usage
-const body = JSON.stringify({ id: 'req_123', email: 'user@example.com' });
-const header = signRequest(process.env.SIGNING_SECRET, body);
-// Set header: { 'Stripe-Signature': header }
-```
+Once your metadata document is live, you can start calling the API immediately. CIMD auto-registration handles partner setup automatically (sets `provisioning_active`, `provisioning_can_create_accounts`, and `provisioning_can_provision_resources` to `true`). Your first request triggers background registration and returns HTTP 202; retry after a few seconds and you're ready.
 
 ## API reference
 
@@ -207,21 +88,26 @@ CODE_CHALLENGE=$(echo -n "$CODE_VERIFIER" | openssl dgst -sha256 -binary | opens
 ```
 
 ```bash
+BODY=$(cat <<JSON
+{
+  "id": "req_unique_request_id",
+  "email": "user@example.com",
+  "name": "Jane Doe",
+  "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+  "code_challenge": "$CODE_CHALLENGE",
+  "code_challenge_method": "S256",
+  "configuration": {
+    "region": "US",
+    "organization_name": "Acme Corp"
+  }
+}
+JSON
+)
+
 curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
   -H "Content-Type: application/json" \
   -H "API-Version: 0.1d" \
-  -d '{
-    "id": "req_unique_request_id",
-    "email": "user@example.com",
-    "name": "Jane Doe",
-    "client_id": "https://yourapp.com/.well-known/posthog-client.json",
-    "code_challenge": "'$CODE_CHALLENGE'",
-    "code_challenge_method": "S256",
-    "configuration": {
-      "region": "US",
-      "organization_name": "Acme Corp"
-    }
-  }'
+  -d "$BODY"
 ```
 
 **Request fields:**
@@ -231,9 +117,10 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
 | `id` | string | Yes | Your unique request ID (for idempotency) |
 | `email` | string | Yes | User's email address |
 | `name` | string | No | User's full name |
-| `client_id` | string | Yes | Your CIMD metadata URL |
-| `code_challenge` | string | Yes | Base64url-encoded SHA-256 hash of your code verifier (43-128 chars) |
-| `code_challenge_method` | string | Yes | Must be `"S256"` |
+| `client_id` | string | Required (PKCE) | Your CIMD metadata URL. HMAC partners are identified by the `Stripe-Signature` header instead. |
+| `code_challenge` | string | Required (PKCE) | Base64url-encoded SHA-256 hash of your code verifier (43-128 chars) |
+| `code_challenge_method` | string | Required (PKCE) | Must be `"S256"` |
+| `scopes` | list | No | OAuth scopes to request for the access token. See [available scopes](#available-scopes). |
 | `configuration.region` | string | No | `"US"` (default) or `"EU"` |
 | `configuration.organization_name` | string | No | Organization name (defaults to `"Partner (email)"`) |
 
@@ -302,7 +189,7 @@ curl -X POST https://us.posthog.com/api/agentic/oauth/token \
 |---|---|---|---|
 | `grant_type` | string | Yes | Must be `"authorization_code"` |
 | `code` | string | Yes | The authorization code from step 1 |
-| `code_verifier` | string | Yes | The original PKCE code verifier (must match the challenge from step 1) |
+| `code_verifier` | string | Required (PKCE) | The original PKCE code verifier (must match the challenge from step 1). Not needed for HMAC partners. |
 
 **Response** (HTTP 200):
 
@@ -330,6 +217,15 @@ curl -X POST https://us.posthog.com/api/agentic/oauth/token \
 Authorization codes expire after 5 minutes and can only be used once.
 Access tokens expire after 1 hour. Use the refresh token to get new tokens.
 
+**Token endpoint errors** use the standard OAuth 2.0 format:
+
+```json
+{
+  "error": "invalid_grant",
+  "error_description": "Invalid or expired authorization code"
+}
+```
+
 ### Step 3: Provision a project
 
 Use the access token to provision a PostHog project and get credentials.
@@ -351,7 +247,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `service_id` | string | No | `"analytics"` (default), `"free"`, or `"pay_as_you_go"` |
+| `service_id` | string | No | The plan to provision. `"analytics"` (default) provisions a standard project. `"free"` and `"pay_as_you_go"` set the billing plan explicitly. |
 | `configuration.project_name` | string | No | Project name (defaults to `"Default project"`) |
 
 **Response** (HTTP 200):
@@ -375,9 +271,9 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 
 | Field | Description |
 |---|---|
-| `api_key` | The project API token -- use this to initialize PostHog SDKs |
+| `api_key` | The project API token - use this to initialize PostHog SDKs |
 | `host` | The API host (`https://us.posthog.com` or `https://eu.posthog.com`) |
-| `personal_api_key` | A personal API key scoped to this project -- use this for the PostHog API |
+| `personal_api_key` | A personal API key scoped to this project - use this for the PostHog API |
 
 ### Refresh tokens
 
@@ -403,19 +299,41 @@ curl -X POST https://us.posthog.com/api/agentic/oauth/token \
 
 Each refresh token is single-use. The response includes a new refresh token for subsequent refreshes.
 
+### Available scopes
+
+The `scopes` field in the account request controls what permissions the access token receives. If omitted, a default set of scopes is granted. Available scopes:
+
+| Scope | Description |
+|---|---|
+| `customer_journey:read` | Read customer journey data |
+| `query:read` | Execute read-only queries |
+| `conversation:read` | Read PostHog AI conversations |
+| `conversation:write` | Create and update PostHog AI conversations |
+| `experiment:read` | Read experiments |
+| `feature_flag:read` | Read feature flags |
+| `insight:read` | Read insights |
+| `organization:read` | Read organization details |
+| `person:read` | Read person data |
+| `project:read` | Read project settings |
+| `ticket:read` | Read tickets |
+| `ticket:write` | Create and update tickets |
+| `user:read` | Read user information |
+| `hog_flow:read` | Read Hog flows |
+| `hog_flow:write` | Create and update Hog flows |
+
 ## What the user gets
 
 When you provision a new account, the user receives:
 
 - **Welcome email** with a link to set their password
 - **Full dashboard access** at [us.posthog.com](https://us.posthog.com) (or [eu.posthog.com](https://eu.posthog.com) for EU)
-- **Free tier** with generous limits across all PostHog products -- no credit card required
+- **Free tier** with generous limits across all PostHog products - no credit card required
 
 Your integration gets back the project API key and host needed to start sending events immediately.
 
 ## Error handling
 
-All error responses follow this format:
+Provisioning endpoints (account_requests, resources) return errors in this format:
 
 ```json
 {
@@ -427,6 +345,15 @@ All error responses follow this format:
 }
 ```
 
+The token endpoint uses the standard OAuth 2.0 error format instead:
+
+```json
+{
+  "error": "error_code",
+  "error_description": "Human-readable description"
+}
+```
+
 Common error codes:
 
 | Code | HTTP Status | Description |
@@ -435,14 +362,125 @@ Common error codes:
 | `unauthorized` | 401 | Authentication failed |
 | `forbidden` | 403 | Partner not authorized for this action |
 | `expired` | 400 | Account request has expired |
-| `invalid_grant` | 400 | Authorization code is invalid or expired |
+| `invalid_grant` | 400 | Authorization code is invalid or expired (token endpoint) |
 | `invalid_scope` | 400 | Unrecognized scope requested |
+| `rate_limited` | 429 | Rate limit exceeded |
 | `account_creation_failed` | 500 | Server error during account creation |
 
 ## Rate limits
 
-All provisioning endpoints are rate limited. Default limits are applied per partner.
-If you need higher limits for your integration, contact PostHog -- we can configure partner-specific overrides.
+All provisioning endpoints are rate limited.
+
+**CIMD registration** (first request from a new `client_id`):
+- 5 requests per minute per IP (burst)
+- 10 requests per hour per IP (sustained)
+- 100 new client registrations per hour globally
+- 5 new client registrations per domain per hour
+
+**Account requests** (per partner, per hour): defaults to 10/hour for new CIMD partners. Contact PostHog to increase this for higher-volume integrations.
+
+## Alternative: server-to-server (HMAC)
+
+If your integration runs entirely on your backend (no browser redirects, no public client), you can use HMAC signing instead of PKCE.
+The tradeoff: you manage a shared secret, but you skip the `code_challenge`/`code_verifier` dance entirely.
+
+| | PKCE (public client) | HMAC (server-to-server) |
+|---|---|---|
+| **Secret management** | None - CIMD metadata document only | Shared `signing_secret` stored on your server |
+| **Auth signal** | `client_id` in request body | `Stripe-Signature` header on every request |
+| **Best for** | Browser-based flows, CLIs, apps that redirect users | Backend services that provision accounts without user interaction |
+
+### Get credentials
+
+Contact PostHog to set up an HMAC partner application. You'll receive a `signing_secret` - store it securely on your server (environment variable, secrets manager, etc.).
+
+### Sign requests
+
+Every request must include a `Stripe-Signature` header with a timestamp and HMAC-SHA256 signature. (This header format follows the convention established by the original Stripe integration. It will be renamed in a future API version.)
+
+```
+Stripe-Signature: t={unix_timestamp},v1={hex_signature}
+```
+
+The signature is computed over `{timestamp}.{request_body}` using your signing secret:
+
+```bash
+# Compute the signature
+TIMESTAMP=$(date +%s)
+BODY='{"id":"req_123","email":"user@example.com","name":"Jane Doe","configuration":{"region":"US"}}'
+SIGNATURE=$(printf '%s.%s' "$TIMESTAMP" "$BODY" | openssl dgst -sha256 -hmac "$SIGNING_SECRET" | sed 's/^.* //')
+```
+
+The timestamp must be within 5 minutes of the server's clock.
+
+### The 3-step flow with HMAC
+
+The same three endpoints work with HMAC auth. The difference: you authenticate with the `Stripe-Signature` header instead of PKCE, and you skip `code_challenge`/`code_verifier` fields.
+
+**Step 1: Create an account**
+
+```bash
+TIMESTAMP=$(date +%s)
+BODY='{"id":"req_unique_request_id","email":"user@example.com","name":"Jane Doe","configuration":{"region":"US","organization_name":"Acme Corp"}}'
+SIGNATURE=$(printf '%s.%s' "$TIMESTAMP" "$BODY" | openssl dgst -sha256 -hmac "$SIGNING_SECRET" | sed 's/^.* //')
+
+curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
+  -H "Content-Type: application/json" \
+  -H "API-Version: 0.1d" \
+  -H "Stripe-Signature: t=$TIMESTAMP,v1=$SIGNATURE" \
+  -d "$BODY"
+```
+
+No `code_challenge` or `code_challenge_method` needed. The response format is the same as the PKCE flow.
+
+**Step 2: Exchange the code for tokens**
+
+```bash
+BODY="grant_type=authorization_code&code=abc123...authorization_code"
+TIMESTAMP=$(date +%s)
+SIGNATURE=$(printf '%s.%s' "$TIMESTAMP" "$BODY" | openssl dgst -sha256 -hmac "$SIGNING_SECRET" | sed 's/^.* //')
+
+curl -X POST https://us.posthog.com/api/agentic/oauth/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -H "API-Version: 0.1d" \
+  -H "Stripe-Signature: t=$TIMESTAMP,v1=$SIGNATURE" \
+  -d "$BODY"
+```
+
+No `code_verifier` needed. The response includes the same `access_token`, `refresh_token`, and `account` fields.
+
+**Step 3: Provision a project**
+
+Once you have an access token, use it with a `Bearer` header - the same as the PKCE flow:
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer phx_abc123..." \
+  -H "API-Version: 0.1d" \
+  -d '{"service_id":"analytics","configuration":{"project_name":"My App - Production"}}'
+```
+
+### Signing in code (Node.js)
+
+```javascript
+import crypto from 'node:crypto';
+
+function signRequest(signingSecret, body) {
+  const timestamp = Math.floor(Date.now() / 1000);
+  const payload = `${timestamp}.${body}`;
+  const signature = crypto
+    .createHmac('sha256', signingSecret)
+    .update(payload)
+    .digest('hex');
+  return `t=${timestamp},v1=${signature}`;
+}
+
+// Usage
+const body = JSON.stringify({ id: 'req_123', email: 'user@example.com' });
+const header = signRequest(process.env.SIGNING_SECRET, body);
+// Set header: { 'Stripe-Signature': header }
+```
 
 ## Full example
 
@@ -482,15 +520,23 @@ async function provisionPostHogAccount(email, name) {
       }),
     }
   );
+
+  if (!accountRes.ok) {
+    const err = await accountRes.json();
+    throw new Error(
+      `Account request failed (${accountRes.status}): ${err.error?.message || JSON.stringify(err)}`
+    );
+  }
+
   const account = await accountRes.json();
 
   if (account.type === 'requires_auth') {
-    // Existing user -- redirect them to account.requires_auth.url
+    // Existing user - redirect them to account.requires_auth.url
     return { type: 'requires_auth', url: account.requires_auth.url };
   }
 
   if (account.type !== 'oauth') {
-    throw new Error(account.error?.message || 'Account creation failed');
+    throw new Error(account.error?.message || 'Unexpected response type');
   }
 
   // Step 2: Exchange code for tokens
@@ -506,6 +552,14 @@ async function provisionPostHogAccount(email, name) {
       code_verifier: codeVerifier,
     }),
   });
+
+  if (!tokenRes.ok) {
+    const err = await tokenRes.json();
+    throw new Error(
+      `Token exchange failed (${tokenRes.status}): ${err.error_description || JSON.stringify(err)}`
+    );
+  }
+
   const tokens = await tokenRes.json();
 
   // Step 3: Provision a project
@@ -524,6 +578,14 @@ async function provisionPostHogAccount(email, name) {
       }),
     }
   );
+
+  if (!resourceRes.ok) {
+    const err = await resourceRes.json();
+    throw new Error(
+      `Resource provisioning failed (${resourceRes.status}): ${err.error?.message || JSON.stringify(err)}`
+    );
+  }
+
   const resource = await resourceRes.json();
 
   return {
