@@ -1342,6 +1342,21 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         />
     ) : (
         <form onSubmit={handleSubmit} className="space-y-4 m-0">
+            {isModerator && !companyId && (
+                <div className="-mt-2 -mx-4 pb-2 border-b border-border px-2">
+                    <OSButton
+                        icon={<IconArrowLeft />}
+                        onClick={() => {
+                            setUsingPending(null)
+                            setCompany(null)
+                        }}
+                        size="sm"
+                        hover="background"
+                    >
+                        Back
+                    </OSButton>
+                </div>
+            )}
             <Input
                 label="Company name"
                 placeholder="Bluth Company"
@@ -1592,7 +1607,9 @@ const AddAJobWindow = ({
         <ScrollArea className="min-h-0 h-full [&>div>div]:h-full">
             <div
                 data-scheme="secondary"
-                className={`bg-primary text-primary ${siteSettings.experience === 'boring' ? 'size-full' : 'h-full'}`}
+                className={`bg-primary text-primary ${
+                    siteSettings.experience === 'boring' ? 'size-full' : 'min-h-full'
+                }`}
             >
                 <div className="p-4">
                     <CompanyForm companyId={companyId} onSuccess={onSuccess} />
