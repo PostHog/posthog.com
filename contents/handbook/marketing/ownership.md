@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-If you have a general marketing question, go to `#team-marketing` in Slack.
+If you have a general marketing question, go to `#group-marketing-and-content` in Slack.
 
 If you need help with the website, go to `#posthogdotcom`.
 
@@ -14,7 +14,7 @@ Here's a quick guide to who to ask if you want help with a specific marketing ac
 <details>
 <summary>I need a product marketer, but I don't know which</summary>
 
-Product marketing is part of <SmallTeam slug="marketing" />. You can see which PMM is focused on which team on the <SmallTeam slug="marketing" /> team page. If it's a team which doesn't currently have an assigned marketer, just ask in #team-marketing in Slack and tag the team lead. 
+Product marketing is part of <SmallTeam slug="marketing" />. You can see which PMM is focused on which team on the <SmallTeam slug="marketing" /> team page. If it's a team which doesn't currently have an assigned marketer, just ask in #group-marketing-and-content in Slack and tag the team lead. 
 </details>
 
 
