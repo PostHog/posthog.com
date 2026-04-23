@@ -54,7 +54,7 @@ Besides knowledge, being on call requires availability – including weekends. I
 ### Mindset
 
 Read: [Jos Visser: Ten things not to worry about regarding oncall](https://josvisser.substack.com/p/ten-things-not-to-worry-about-regarding?r=b67wp&utm_source=posthog&utm_medium=web&triedRedirect=true)
-(it's worth watching even if you are seasoned in on-call)
+(Worth the read, even if you're an on-call veteran.)
 
 ### Be prepared
 
