@@ -25,6 +25,38 @@ PostHog captures spans to track atomic operations that make up your LLM workflow
 
 For technical implementation details, see [manual capture](/docs/llm-analytics/installation/manual-capture).
 
+## Filtering spans
+
+Use the filter controls to find specific operations in the spans list. You can filter by:
+
+### Span name
+
+Filter spans by name using string matching:
+
+- **Equals / Not equals** – Match an exact name
+- **Contains / Not contains** – Match names that include a substring
+- **Matches regex / Not matches regex** – Match using regular expression patterns
+
+### Span kind
+
+Filter by OpenTelemetry span kind, which indicates the span's role in a distributed trace:
+
+| Kind | Description |
+|------|-------------|
+| Unspecified | Default when no kind is set |
+| Internal | Internal operation within an application |
+| Server | Handles an incoming request (e.g., HTTP server) |
+| Client | Makes an outgoing request (e.g., HTTP client, database call) |
+| Producer | Creates a message for async processing |
+| Consumer | Processes a message from a queue |
+
+### Status code
+
+Filter spans by completion status:
+
+- **OK** – The operation completed successfully
+- **Error** – The operation failed
+
 ## Event properties
 
 <SpanEventSnippet />
