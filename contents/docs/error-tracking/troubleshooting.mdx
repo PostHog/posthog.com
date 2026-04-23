@@ -110,6 +110,45 @@ To debug:
 4. Use a development build which includes full error messages. Only use this for debugging, not production
 
 
+## Debugging uploaded symbol sets
+
+If source maps aren't resolving correctly, download and inspect your uploaded symbol sets to verify their contents match what you expect.
+
+### Download from the UI
+
+In the [Symbol Sets configuration](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets) page, uploaded symbol sets have a download button. Click it to download the raw symbol set file.
+
+### Download with the CLI
+
+Use `symbol-sets download` to download and extract a symbol set:
+
+```bash
+# Download by symbol set ID
+posthog-cli symbol-sets download --id <symbol-set-id> -o ./output-dir
+
+# Download by ref (e.g., chunk ID)
+posthog-cli symbol-sets download --ref <ref-string> -o ./output-dir
+```
+
+The CLI automatically extracts contents based on the symbol set type:
+- **JavaScript source maps** - Extracts `.js` and `.js.map` files
+- **React Native (Hermes)** - Extracts `.hbc.map` files
+- **Android (ProGuard)** - Extracts `.txt` mapping files
+- **iOS (dSYM)** - Extracts the dSYM directory structure
+
+### Extract a local symbol set file
+
+If you have a symbol set file locally (from the UI download or your build), use `symbol-sets extract` to inspect its contents without API authentication:
+
+```bash
+posthog-cli symbol-sets extract ./symbol-set-file -o ./output-dir
+```
+
+This helps you:
+- Verify source map content matches your build artifacts
+- Debug why a source map isn't resolving correctly
+- Compare what was uploaded against your local build output
+
 ## Symbol set upload skipped as already present
 
 If the CLI reports `Server returned 0 upload keys (1 skipped as already present)`, it means a symbol set with the same chunk ID already exists on the server. This happens when your bundle content hasn't changed between builds — the chunk ID is derived from the bundle's content hash, so identical code produces identical IDs.
