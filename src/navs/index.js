@@ -5643,6 +5643,11 @@ export const docsMenu = {
                             url: '/docs/llm-analytics/installation/manual-capture',
                             icon: 'IconCode',
                         },
+                        {
+                            name: 'Generic provider',
+                            url: '/docs/llm-analytics/installation/generic',
+                            icon: 'IconCode',
+                        },
                     ],
                 },
                 {

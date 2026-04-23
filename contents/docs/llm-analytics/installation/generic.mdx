@@ -1,0 +1,219 @@
+---
+title: Generic AI provider LLM analytics installation
+platformIconName: IconCode
+showStepsToc: true
+tableOfContents: [
+    {
+        url: 'when-to-use-captureAiGeneration',
+        value: 'When to use captureAiGeneration',
+        depth: 1,
+    },
+    {
+        url: 'install-dependencies',
+        value: 'Install dependencies',
+        depth: 1,
+    },
+    {
+        url: 'capture-ai-generation-events',
+        value: 'Capture AI generation events',
+        depth: 1,
+    },
+    {
+        url: 'api-reference',
+        value: 'API reference',
+        depth: 1,
+    },
+    {
+        url: 'verify-traces-and-generations',
+        value: 'Verify traces and generations',
+        depth: 1,
+    },
+]
+---
+
+import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
+import LLMANextSteps from './_snippets/llma-next-steps.mdx'
+
+The `captureAiGeneration` function captures `$ai_generation` events from any AI provider without requiring a provider-specific SDK wrapper. Use it when your AI provider or method doesn't have dedicated PostHog instrumentation.
+
+## When to use captureAiGeneration
+
+Use `captureAiGeneration` when:
+
+- You're calling AI providers directly (like Cloudflare Workers AI bindings with `env.AI.run()`)
+- You're using TanStack AI adapters or other generic AI client libraries
+- You need to trace AI calls from a provider without a [dedicated PostHog SDK wrapper](/docs/llm-analytics/installation)
+- You want full control over what gets captured and when
+
+If your provider has a dedicated SDK wrapper (like [OpenAI](/docs/llm-analytics/installation/openai), [Anthropic](/docs/llm-analytics/installation/anthropic), or [Vercel AI](/docs/llm-analytics/installation/vercel-ai)), use that instead for automatic instrumentation.
+
+## Install dependencies
+
+Install the `@posthog/ai` package and the PostHog Node.js SDK:
+
+<MultiLanguage>
+
+```bash file=npm
+npm install @posthog/ai posthog-node
+```
+
+```bash file=yarn
+yarn add @posthog/ai posthog-node
+```
+
+```bash file=pnpm
+pnpm add @posthog/ai posthog-node
+```
+
+</MultiLanguage>
+
+## Capture AI generation events
+
+Import `captureAiGeneration` and call it after your AI provider returns a response:
+
+```typescript
+import { captureAiGeneration } from '@posthog/ai'
+import { PostHog } from 'posthog-node'
+
+const posthogClient = new PostHog(
+    '<ph_project_api_key>',
+    { host: '<ph_client_api_host>' }
+)
+
+// Make your AI call
+const startTime = Date.now()
+const response = await env.AI.run('@cf/meta/llama-3-8b-instruct', {
+    messages: [{ role: 'user', content: 'Tell me about hedgehogs' }]
+})
+const latency = (Date.now() - startTime) / 1000
+
+// Capture the generation event
+await captureAiGeneration(posthogClient, {
+    distinctId: 'user-123',
+    provider: 'cloudflare-workers-ai',
+    model: '@cf/meta/llama-3-8b-instruct',
+    input: [{ role: 'user', content: 'Tell me about hedgehogs' }],
+    output: response.response,
+    usage: {
+        inputTokens: response.usage?.prompt_tokens,
+        outputTokens: response.usage?.completion_tokens
+    },
+    latency: latency, // seconds
+    properties: {
+        feature: 'chat',
+        environment: 'production'
+    }
+})
+```
+
+For serverless environments where the function may exit before the event queue flushes, set `captureImmediate: true` to send the event immediately:
+
+```typescript
+await captureAiGeneration(posthogClient, {
+    distinctId: 'user-123',
+    provider: 'cloudflare-workers-ai',
+    model: '@cf/meta/llama-3-8b-instruct',
+    input: messages,
+    output: responseText,
+    captureImmediate: true // Wait for the event to send
+})
+```
+
+### Handling errors
+
+When an error occurs during the AI call, pass it to capture error metadata:
+
+```typescript
+try {
+    const response = await aiProvider.generate(prompt)
+    await captureAiGeneration(posthogClient, {
+        distinctId: 'user-123',
+        provider: 'my-provider',
+        model: 'model-name',
+        input: prompt,
+        output: response.text
+    })
+} catch (error) {
+    await captureAiGeneration(posthogClient, {
+        distinctId: 'user-123',
+        provider: 'my-provider',
+        model: 'model-name',
+        input: prompt,
+        error: error // Captures error details and sets $ai_is_error: true
+    })
+}
+```
+
+### Privacy mode
+
+To redact input and output content from captured events (for sensitive data), enable privacy mode:
+
+```typescript
+await captureAiGeneration(posthogClient, {
+    distinctId: 'user-123',
+    provider: 'my-provider',
+    model: 'model-name',
+    input: sensitivePrompt,
+    output: sensitiveResponse,
+    privacyMode: true // Input and output will be set to null
+})
+```
+
+## API reference
+
+The `captureAiGeneration` function accepts a PostHog client and an options object:
+
+```typescript
+captureAiGeneration(client: PostHog, options: CaptureAiGenerationOptions): Promise<void>
+```
+
+### CaptureAiGenerationOptions
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `distinctId` | `string` | User identifier. Falls back to `traceId` if not provided. |
+| `traceId` | `string` | Trace identifier. Auto-generated if not provided. |
+| `provider` | `string` | AI provider name (e.g., `'cloudflare-workers-ai'`, `'openai'`). |
+| `model` | `string` | Model identifier (e.g., `'@cf/meta/llama-3-8b-instruct'`). |
+| `input` | `any` | The input/prompt passed to the model. |
+| `output` | `any` | The response from the model. |
+| `usage` | `TokenUsage` | Token usage statistics (see below). |
+| `latency` | `number` | Request latency in seconds. |
+| `timeToFirstToken` | `number` | Time to first token in seconds (for streaming). |
+| `baseURL` | `string` | The base URL of the API. |
+| `httpStatus` | `number` | HTTP status code of the response. |
+| `error` | `unknown` | Error that occurred during generation. |
+| `stopReason` | `string` | Reason why generation stopped. |
+| `tools` | `any[]` | Tools available to the model. |
+| `properties` | `Record<string, unknown>` | Additional custom properties. |
+| `groups` | `Record<string, string>` | PostHog groups for the event. |
+| `captureImmediate` | `boolean` | Send event immediately without queueing. |
+| `privacyMode` | `boolean` | Redact input/output content. |
+
+### TokenUsage
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `inputTokens` | `number` | Number of input tokens. |
+| `outputTokens` | `number` | Number of output tokens. |
+| `reasoningTokens` | `number` | Number of reasoning tokens (for models that support this). |
+| `cacheReadInputTokens` | `number` | Tokens read from cache. |
+| `cacheCreationInputTokens` | `number` | Tokens used to create cache. |
+
+## Verify traces and generations
+
+Once you've captured AI generation events, verify they appear in PostHog:
+
+1. Go to the [Activity tab](https://us.posthog.com/activity/explore) in PostHog
+2. Filter for `$ai_generation` events
+3. Click on an event to see the captured properties
+
+You can also view generations in the **LLM analytics** > [**Generations** tab](https://us.posthog.com/llm-analytics/generations).
+
+## Notable generation properties
+
+<NotableGenerationProperties />
+
+## Next steps
+
+<LLMANextSteps />
