@@ -62,6 +62,19 @@ import { navigate } from 'gatsby'
 
 dayjs.extend(relativeTime)
 
+const unpublishPendingCompany = async (companyId: number, jwt: string) => {
+    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/pending-companies/${companyId}`, {
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            data: { publishedAt: null },
+        }),
+    })
+}
+
 type JobBoardType = 'ashby' | 'greenhouse' | 'gem' | 'kadoa' | 'other'
 
 interface ToggleFilter {
@@ -806,16 +819,7 @@ const ModeratorInitialView = ({
         setDismissingId(companyId)
         try {
             const jwt = await getJwt()
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/pending-companies/${companyId}`, {
-                method: 'PUT',
-                headers: {
-                    Authorization: `Bearer ${jwt}`,
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    data: { publishedAt: null },
-                }),
-            })
+            await unpublishPendingCompany(companyId, jwt)
             const remaining = pendingCompanies.filter((c) => c.id !== companyId)
             setPendingCompanies(remaining)
             if (selectedCompany?.id === companyId) {
@@ -1243,6 +1247,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                             "Thanks for applying to be a part of Cool tech jobs! We'll review your application and get back to you as soon as possible.",
                     })
                 }
+                if (usingPending && company?.id) {
+                    await unpublishPendingCompany(company.id, jwt)
+                }
                 onSuccess?.()
             } catch (error) {
                 setConfirmationMessage({
@@ -1304,34 +1311,51 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
     ) : !isModerator && !disclaimerConfirmed ? (
         <JobBoardIntro onConfirm={() => setDisclaimerConfirmed(true)} />
     ) : confirmationMessage ? (
-        <div
-            className={`p-4 rounded-md border ${
-                confirmationMessage.type === 'success'
-                    ? 'border-green bg-green/20'
-                    : confirmationMessage.type === 'warning'
-                    ? 'border-yellow bg-yellow/20'
-                    : 'border-red bg-red/20'
-            }`}
-        >
-            <h4 className="text-base m-0">{confirmationMessage.title}</h4>
-            <p
-                className="text-sm opacity-70 m-0"
-                dangerouslySetInnerHTML={{ __html: confirmationMessage.description }}
-            />
-            {(confirmationMessage.type === 'error' || confirmationMessage.type === 'warning') &&
-                (canUpdate || !isModerator) && (
-                    <CallToAction
-                        size="sm"
-                        type="secondary"
-                        className="mt-2"
-                        onClick={() => setConfirmationMessage(null)}
-                    >
-                        <span className="flex items-center gap-1">
-                            <IconArrowLeft className="size-4" />
-                            Go back
-                        </span>
-                    </CallToAction>
-                )}
+        <div>
+            {isModerator && !companyId && (
+                <OSButton
+                    icon={<IconArrowLeft />}
+                    onClick={() => {
+                        setConfirmationMessage(null)
+                        setUsingPending(null)
+                        setCompany(null)
+                    }}
+                    size="sm"
+                    hover="background"
+                    className="mb-2"
+                >
+                    Back to pending companies
+                </OSButton>
+            )}
+            <div
+                className={`p-4 rounded-md border ${
+                    confirmationMessage.type === 'success'
+                        ? 'border-green bg-green/20'
+                        : confirmationMessage.type === 'warning'
+                        ? 'border-yellow bg-yellow/20'
+                        : 'border-red bg-red/20'
+                }`}
+            >
+                <h4 className="text-base m-0">{confirmationMessage.title}</h4>
+                <p
+                    className="text-sm opacity-70 m-0"
+                    dangerouslySetInnerHTML={{ __html: confirmationMessage.description }}
+                />
+                {(confirmationMessage.type === 'error' || confirmationMessage.type === 'warning') &&
+                    (canUpdate || !isModerator) && (
+                        <CallToAction
+                            size="sm"
+                            type="secondary"
+                            className="mt-2"
+                            onClick={() => setConfirmationMessage(null)}
+                        >
+                            <span className="flex items-center gap-1">
+                                <IconArrowLeft className="size-4" />
+                                Go back
+                            </span>
+                        </CallToAction>
+                    )}
+            </div>
         </div>
     ) : companyId && !company ? (
         <CompanyFormSkeleton />
