@@ -1,0 +1,41 @@
+---
+title: Linking Plain as a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+sourceId: Plain
+---
+
+The Plain connector syncs customer support data from [Plain](https://plain.com) to PostHog, including customer profiles, support threads, and timeline entries.
+
+## What gets synced
+
+- **customers** - Customer profiles and metadata
+- **threads** - Support threads with status, priority, and assignment information
+- **timeline_entries** - Messages and events within threads, including customer messages, agent replies, and system events
+
+## Linking Plain to PostHog
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
+2. Click **New source** and select Plain
+3. Get an API key from Plain:
+   - Go to your [Plain workspace settings](https://app.plain.com/settings/api-keys)
+   - Create a new API key with these read permissions:
+     - `customer:read`
+     - `thread:read`
+     - `timeline:read`
+   - Copy the generated API key (it starts with `plainApiKey_`)
+4. Paste the API key and click **Next**
+5. Select the tables you want to sync and configure the sync frequency, then click **Import**
+
+The data warehouse then starts syncing your Plain data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
+
+## How syncing works
+
+- **customers and threads** - Sync incrementally using the `updatedAt` field. Only records modified since the last sync are fetched.
+- **timeline_entries** - Sync incrementally using the `createdAt` field. New entries are fetched based on the thread's last update time.
+
+Incremental syncing reduces sync time and API usage by only fetching changed data.
