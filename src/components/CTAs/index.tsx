@@ -11,21 +11,23 @@ export const CTAs = () => {
     const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
         <>
-            <div className="flex flex-col @xs:flex-row @xs:justify-center @xl:justify-start gap-3 @sm:gap-2">
-                <CallToAction
-                    to="https://app.posthog.com/signup"
-                    size="md"
-                    state={{ newWindow: true, initialTab: 'signup' }}
-                >
-                    Get started - free
-                </CallToAction>
-                <CallToAction
-                    type="secondary"
-                    size="md"
-                    onClick={() => setShowIntegrationPrompt((current) => !current)}
-                >
-                    Install with AI
-                </CallToAction>
+            <div className="@container">
+                <div className="flex flex-col @xs:flex-row gap-3 @sm:gap-2">
+                    <CallToAction
+                        to="https://app.posthog.com/signup"
+                        size="md"
+                        state={{ newWindow: true, initialTab: 'signup' }}
+                    >
+                        Get started - free
+                    </CallToAction>
+                    <CallToAction
+                        type="secondary"
+                        size="md"
+                        onClick={() => setShowIntegrationPrompt((current) => !current)}
+                    >
+                        Install with AI
+                    </CallToAction>
+                </div>
             </div>
             <motion.div
                 className="overflow-hidden"
@@ -39,7 +41,8 @@ export const CTAs = () => {
                     <IntegrationPrompt />
                 </div>
             </motion.div>
-            <p className="!text-sm flex items-center gap-2 mt-4 justify-center @xl:justify-start">
+
+            <p className="!text-sm flex flex-wrap items-center gap-2 mt-4 justify-center @xl:justify-start">
                 <Link
                     to="/docs/model-context-protocol"
                     state={{ newWindow: true }}
