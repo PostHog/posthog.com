@@ -3,40 +3,39 @@ title: Upload source maps with CLI
 showStepsToc: true
 ---
 
-import CLIDownload from "../_snippets/cli/download.mdx"
-import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
-import CLIInject from "../_snippets/cli/inject.mdx"
-import CLIUpload from "../_snippets/cli/upload.mdx"
-import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
-
+import CLIDownload from "../_snippets/cli/download.mdx";
+import CLIAuthenticate from "../_snippets/cli/authenticate.mdx";
+import CLIInject from "../_snippets/cli/inject.mdx";
+import CLIUpload from "../_snippets/cli/upload.mdx";
+import StepVerifySymbolSetsUpload from "../_snippets/StepVerifySymbolSetsUpload";
 
 <Steps>
 
 <Step title="Download CLI" badge="required">
 
-  <CLIDownload/>
+<CLIDownload />
 
 </Step>
 
 <Step title="Authenticate" badge="required">
 
-  <CLIAuthenticate />
+<CLIAuthenticate />
 
 </Step>
 
 <Step title="Inject" badge="required">
 
-  Once you've built your application and have bundled assets, inject the context required by PostHog to associate the maps with the served code.
+Once you've built your application and have bundled assets, inject the context required by PostHog to associate the maps with the served code.
 
-  <CLIInject />
+<CLIInject />
 
-  You can verify that the metadata has been injected by checking for the `//# chunkId=...` comment in the minified code.
+You can verify that the metadata has been injected by checking for the `//# chunkId=...` comment in the minified code.
 
 </Step>
 
 <Step title="Upload" badge="required">
 
-  You will then need to upload the modified assets to PostHog.
+You will then need to upload the modified assets to PostHog.
 
 <CLIUpload path="./path/to/assets" />
 
@@ -44,12 +43,49 @@ import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
 
 <Step title="Serve injected assets" badge="required">
 
-  You *must* serve the injected assets in deployed production app. The injected metadata is used during error capture to identify the correct source map to use.
+You _must_ serve the injected assets in deployed production app. The injected metadata is used during error capture to identify the correct source map to use.
 
-  If you serve a copy of the bundled assets as they were prior to running `posthog-cli sourcemap inject`, we won't be able to use the uploaded sourcemap to unminify or demangle your stack traces.
+If you serve a copy of the bundled assets as they were prior to running `posthog-cli sourcemap inject`, we won't be able to use the uploaded sourcemap to unminify or demangle your stack traces.
 
 </Step>
 
 <StepVerifySymbolSetsUpload />
 
 </Steps>
+
+## Download and extract symbol sets
+
+You can download and extract uploaded symbol sets from PostHog to verify what was uploaded, debug source map issues, or compare against your build artifacts.
+
+You can also download symbol sets directly from the [Symbol Sets configuration](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets) page in the PostHog app by clicking the download button on any uploaded symbol set.
+
+### Download from PostHog
+
+Use `symbol-sets download` to download a symbol set and extract its contents. You can look up the symbol set by ID or by ref:
+
+```bash
+# Download by symbol set ID
+posthog-cli symbol-sets download --id <symbol-set-id> -o ./output-dir
+
+# Download by symbol set ref
+posthog-cli symbol-sets download --ref <symbol-set-ref> -o ./output-dir
+```
+
+Find the symbol set ID or ref on the [Symbol Sets configuration](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets) page.
+
+The command auto-detects the data type and extracts files with the correct extensions:
+
+- **SourceAndMap** – `.js` and `.js.map` files
+- **HermesMap** – `.hbc.map` files
+- **ProguardMapping** – `.txt` files
+- **AppleDsym** – `.dSYM` files
+
+### Extract a local file
+
+Use `symbol-sets extract` to decompress and extract a local symbol set binary file. This doesn't require API authentication:
+
+```bash
+posthog-cli symbol-sets extract ./path/to/symbol-set-file -o ./output-dir
+```
+
+This is useful for inspecting symbol sets before uploading or comparing local files against what was uploaded to PostHog.
