@@ -33,7 +33,7 @@ import * as OSIcons from '../OSIcons/Icons'
 import { getLogo } from '../../constants/logos'
 import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
-import { getProseClasses, MARKDOWN_CONTENT_PATHS } from '../../constants'
+import { getProseClasses, isMarkdownContentPath } from '../../constants'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
@@ -50,7 +50,7 @@ dayjs.extend(relativeTime)
 // Wrapper component that conditionally renders CopyMarkdownActionsDropdown based on whether the markdown URL exists
 const ConditionalMarkdownDropdown = ({ pageUrl }: { pageUrl: string | undefined }) => {
     // Check if path is in allowed content paths
-    const isAllowedPath = pageUrl && MARKDOWN_CONTENT_PATHS.some((path) => pageUrl.includes(path))
+    const isAllowedPath = pageUrl && isMarkdownContentPath(pageUrl)
     const markdownExists = useMarkdownUrlExists(isAllowedPath ? pageUrl : '')
 
     // Don't render if path is not allowed, during loading, or if markdown doesn't exist
@@ -928,7 +928,8 @@ function ReaderViewContent({
                                             <a href="/error-tracking">error tracking</a>,{' '}
                                             <a href="/feature-flags">feature flags</a>,{' '}
                                             <a href="/experiments">experiments</a>, <a href="/surveys">surveys</a>,{' '}
-                                            <a href="/llm-analytics">LLM analytics</a>,{' '}
+                                            <a href="/llm-analytics">LLM analytics</a>, <a href="/logs">logs</a>,{' '}
+                                            <a href="/workflows">workflows</a>, <a href="/endpoints">endpoints</a>,{' '}
                                             <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an{' '}
                                             <a href="/ai">AI product assistant</a> to help debug your code, ship
                                             features faster, and keep all your usage and customer data in one stack.

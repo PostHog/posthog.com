@@ -33,6 +33,19 @@ The Tools tab displays the following metrics for each tool:
 | **first_seen** | When the tool was first called |
 | **last_seen** | Most recent call |
 
+## Visualizing tool usage
+
+Each tool row includes three icon buttons for quick visual analysis. Each opens a new insight in a new tab:
+
+- **Trend** - Opens a time series chart showing that tool's usage over time
+- **Combinations** - Opens a bar chart showing the most common tool call combinations containing that tool
+- **Paths** - Opens a Paths insight showing tool call flow sequences starting from that tool
+
+The table toolbar also includes two buttons for aggregated analysis across all tools:
+
+- **Tool trends** - Opens a trends insight with a line per tool (top 10 by usage)
+- **Tool co-occurrence** - Opens a 2D heatmap showing pairwise tool co-occurrence counts across AI generations
+
 ## Investigating tool usage
 
 Click on any tool name to drill down into the [Generations](/docs/llm-analytics/generations) tab, filtered to show only generations that called that specific tool. This helps you:

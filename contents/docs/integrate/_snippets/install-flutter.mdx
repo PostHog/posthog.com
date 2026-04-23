@@ -2,7 +2,7 @@ PostHog is available for install via [Pub](https://pub.dev/packages/posthog_flut
 
 ### Configuration
 
-Set your PostHog API key and change the automatic event tracking on if you wish the library to take care of it for you.
+Set your PostHog project token and change the automatic event tracking on if you wish the library to take care of it for you.
 
 Remember that the application lifecycle events won't have any special context set for you by the time it is initialized. If you are using a self-hosted instance of PostHog you will need to have the public hostname or IP for your instance as well.
 
@@ -14,7 +14,7 @@ To start, add `posthog_flutter` to your `pubspec.yaml`:
 dependencies:
   flutter:
     sdk: flutter
-  posthog_flutter: ^5.0.0
+  posthog_flutter: ^5.24.0
 
 # rest of your code
 ```
@@ -35,9 +35,9 @@ Add your PostHog configuration to your `AndroidManifest.xml` file located in the
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="your.package.name">
     <application>
         <!-- ... other configuration ... -->
-        <meta-data android:name="com.posthog.posthog.API_KEY" android:value="<ph_project_token>" />
+        <meta-data android:name="com.posthog.posthog.PROJECT_TOKEN" android:value="<ph_project_token>" />
         <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_client_api_host>" />  <!-- usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com' -->
-        <meta-data android:name="com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="true" />
+        <!-- com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS is enabled by default since version 5.23.0 (previously named TRACK_APPLICATION_LIFECYCLE_EVENTS, which still works as an alias) -->
         <meta-data android:name="com.posthog.posthog.DEBUG" android:value="true" />
     </application>
 </manifest>
@@ -56,13 +56,13 @@ Add your PostHog configuration to your `AndroidManifest.xml` file located in the
 </manifest>
 ```
 
-In both cases, you'll also need to update the minimum Android SDK version to `21` in `android/app/build.gradle`:
+In both cases, you'll also need to update the minimum Android SDK version to `23` in `android/app/build.gradle`:
 
 ```gradle_kotlin file=android/app/build.gradle
 // rest of your config
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 23
         // rest of your config
     }
 
@@ -85,12 +85,11 @@ Add your PostHog configuration to the `Info.plist` file located in the `ios/Runn
 <plist version="1.0">
 <dict>
 	<!-- rest of your configuration -->
-	<key>com.posthog.posthog.API_KEY</key>
+	<key>com.posthog.posthog.PROJECT_TOKEN</key>
 	<string><ph_project_token></string>
 	<key>com.posthog.posthog.POSTHOG_HOST</key>
 	<string><ph_client_api_host></string>
-	<key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
-	<true/>
+	<!-- com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS is enabled by default since version 5.23.0 -->
 	<key>com.posthog.posthog.DEBUG</key>
 	<true/>
 </dict>
@@ -136,7 +135,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final config = PostHogConfig('<ph_project_token>');
   config.debug = true;
-  config.captureApplicationLifecycleEvents = true;
+  // captureApplicationLifecycleEvents is enabled by default since version 5.23.0
   config.host = '<ph_client_api_host>';
   await Posthog().setup(config);
   runApp(MyApp());

@@ -77,7 +77,7 @@ In the case of BugSplat, here's what I found when I researched similar apps:
 
 You should now have a strong opinion of how you want your app to look and feel. The next step is to wireframe it and see how the UX holds together.
 
-[Lovable](https://lovable.dev/?utm_source=newsletter.posthog.com), [v0.dev](https://v0.dev/?utm_source=newsletter.posthog.com), or [Bolt](https://bolt.new/?utm_source=newsletter.posthog.com) can get you to a working wireframe fast. The key is to give them enough context on what the app should do, who it’s for, and how it should feel. Don’t forget to include your notes and screenshots from your competitor research.
+[Lovable](https://lovable.dev/?utm_source=newsletter.posthog.com), [v0.dev](https://v0.dev/?utm_source=newsletter.posthog.com), or [Bolt](https://bolt.new/?utm_source=newsletter.posthog.com) can get you to a working wireframe fast. The key is to give them enough context on what the app should do, who it’s for, and how it should feel. Don’t forget to include your notes and screenshots from your [competitor research](/newsletter/what-does-a-product-manager-do).
 
 Here's the template I use:
 

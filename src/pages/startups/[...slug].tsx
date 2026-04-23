@@ -14,6 +14,8 @@ import Logo1984 from '../../images/1984.svg'
 import ODFLogo from '../../images/odf.svg'
 import Logo from 'components/Logo'
 import OSButton from 'components/OSButton'
+import AxisLogo from '../../images/axis-logo.svg'
+import CategoryLogo from '../../images/category.svg'
 import { useMenuSelectOptions } from 'components/TaskBarMenu/menuData'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
@@ -36,6 +38,26 @@ const partnerConfigs = [
                 <IconX className="size-8 text-white inline-block relative top-1" />
                 <img src={StripeLogo} alt="Stripe" className="inline-block h-9 relative top-[.2rem]" />
                 <span>Atlas</span>
+            </>
+        ),
+        value: '$50,000',
+    },
+    {
+        slug: 'axi',
+        title: (
+            <>
+                <IconX className="size-8 text-white inline-block relative top-1 pb-2" />
+                <img src={AxisLogo} alt="Axis" className="inline-block h-9 relative top-[.2rem] pb-2" />
+            </>
+        ),
+        value: '$50,000',
+    },
+    {
+        slug: 'category',
+        title: (
+            <>
+                <IconX className="size-8 text-white inline-block relative top-1 pb-2" />
+                <img src={CategoryLogo} alt="Category" className="inline-block h-9 relative top-[.2rem] pb-2" />
             </>
         ),
         value: '$50,000',
@@ -88,6 +110,7 @@ export default function Startups(): JSX.Element {
     // Use partner config if available, otherwise use defaults
     const titleContent = partnerConfig ? partnerConfig.title : <span>for startups</span>
     const creditValue = partnerConfig ? partnerConfig.value : '$50,000'
+    const applyUrl = `https://app.posthog.com/startups${partnerSlug ? `/${partnerSlug}` : ''}`
 
     return (
         <>
@@ -126,11 +149,7 @@ export default function Startups(): JSX.Element {
                                                 <li>Create a PostHog account and add a credit card</li>
                                                 <li>
                                                     After onboarding,{' '}
-                                                    <Link
-                                                        to="https://app.posthog.com/startups"
-                                                        external
-                                                        className="underline font-semibold"
-                                                    >
+                                                    <Link to={applyUrl} external className="underline font-semibold">
                                                         complete this form
                                                     </Link>
                                                 </li>
@@ -215,7 +234,7 @@ export default function Startups(): JSX.Element {
                                 <li>Partner benefits</li>
                             </ul>
 
-                            <OSButton asLink to="https://app.posthog.com/startups" variant="primary" size="md" external>
+                            <OSButton asLink to={applyUrl} variant="primary" size="md" external>
                                 Apply now
                             </OSButton>
 
@@ -432,11 +451,7 @@ export default function Startups(): JSX.Element {
                                         <p>
                                             Just sign up to a paid plan in PostHog (you're only charged for usage) and
                                             then fill in this{' '}
-                                            <Link
-                                                to="https://app.posthog.com/startups"
-                                                external
-                                                className="underline font-semibold"
-                                            >
+                                            <Link to={applyUrl} external className="underline font-semibold">
                                                 form
                                             </Link>
                                             . We will apply the credit automatically if you're eligible. If you're
