@@ -110,6 +110,7 @@ export default function Startups(): JSX.Element {
     // Use partner config if available, otherwise use defaults
     const titleContent = partnerConfig ? partnerConfig.title : <span>for startups</span>
     const creditValue = partnerConfig ? partnerConfig.value : '$50,000'
+    const applyUrl = `https://app.posthog.com/startups${partnerSlug ? `/${partnerSlug}` : ''}`
 
     return (
         <>
@@ -148,11 +149,7 @@ export default function Startups(): JSX.Element {
                                                 <li>Create a PostHog account and add a credit card</li>
                                                 <li>
                                                     After onboarding,{' '}
-                                                    <Link
-                                                        to="https://app.posthog.com/startups"
-                                                        external
-                                                        className="underline font-semibold"
-                                                    >
+                                                    <Link to={applyUrl} external className="underline font-semibold">
                                                         complete this form
                                                     </Link>
                                                 </li>
@@ -237,7 +234,7 @@ export default function Startups(): JSX.Element {
                                 <li>Partner benefits</li>
                             </ul>
 
-                            <OSButton asLink to="https://app.posthog.com/startups" variant="primary" size="md" external>
+                            <OSButton asLink to={applyUrl} variant="primary" size="md" external>
                                 Apply now
                             </OSButton>
 
@@ -454,11 +451,7 @@ export default function Startups(): JSX.Element {
                                         <p>
                                             Just sign up to a paid plan in PostHog (you're only charged for usage) and
                                             then fill in this{' '}
-                                            <Link
-                                                to="https://app.posthog.com/startups"
-                                                external
-                                                className="underline font-semibold"
-                                            >
+                                            <Link to={applyUrl} external className="underline font-semibold">
                                                 form
                                             </Link>
                                             . We will apply the credit automatically if you're eligible. If you're

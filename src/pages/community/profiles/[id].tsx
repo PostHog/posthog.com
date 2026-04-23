@@ -47,6 +47,7 @@ import { Select } from 'components/RadixUI/Select'
 import OSInput from 'components/OSForm/input'
 import { useToast } from '../../../context/Toast'
 import HeaderBar from 'components/OSChrome/HeaderBar'
+import LevelBadge from 'components/Squeak/components/LevelBadge'
 import OSButton from 'components/OSButton'
 import { IconNoEntry, IconStrapi } from 'components/OSIcons'
 import Points from 'components/Points'
@@ -433,6 +434,12 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
     }, [values.pronouns])
     return (
         <div className="text-sm space-y-3">
+            {!isEditing && profile.reputation != null && (
+                <p className="flex justify-between items-center m-0">
+                    <span className="font-semibold">Reputation</span>
+                    <LevelBadge points={profile.reputation} />
+                </p>
+            )}
             {!isEditing && (
                 <p className="flex justify-between m-0">
                     {isTeamMember ? (
@@ -1686,6 +1693,7 @@ export default function ProfilePage({ params }: PageProps) {
                             />
 
                             {(isEditing ||
+                                profile.reputation != null ||
                                 profile.pineappleOnPizza !== null ||
                                 profile.pronouns ||
                                 profile.location) && (

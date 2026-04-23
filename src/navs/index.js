@@ -541,6 +541,12 @@ export const handbookSidebar = [
                         name: 'YouTube',
                         url: '/handbook/content/youtube',
                     },
+                    {
+                        name: 'Screen recording guide',
+                        url: '/handbook/content/screen-recording-guide',
+                    },
+                    
+
                 ],
             },
             {
@@ -1283,6 +1289,10 @@ export const handbookSidebar = [
                             {
                                 name: 'Expansion strategies',
                                 url: '/handbook/growth/sales/expansion-strategies',
+                            },
+                             {
+                                name: 'PLG lead qualification',
+                                url: '/handbook/growth/sales/product-led-lead-qualification',
                             },
                             {
                                 name: 'TAM Excellence',
@@ -4065,6 +4075,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Clean up stale flags',
+                    url: '/docs/feature-flags/cleaning-up-stale-flags',
+                    icon: 'IconFilter',
+                    color: 'salmon',
+                    featured: true,
+                },
+                {
                     name: 'Do a phased rollout',
                     url: '/docs/feature-flags/phased-rollout',
                     icon: 'IconTrends',
@@ -5752,7 +5769,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Prompts as a skills store',
+                    name: 'Skills store',
                     url: '/docs/llm-analytics/skills-store',
                     icon: 'IconStack',
                     color: 'blue',
@@ -6449,6 +6466,7 @@ export const docsMenu = {
                     featured: true,
                     children: [
                         { name: 'Overview', url: '/docs/logs/installation' },
+                        { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },
                         { name: 'Node.js', url: '/docs/logs/installation/nodejs' },
                         { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
                         { name: 'Python', url: '/docs/logs/installation/python' },
