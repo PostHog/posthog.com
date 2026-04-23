@@ -53,7 +53,7 @@ The detail Vercel has [talked about publicly](https://vercel.com/changelog/new-u
 
 [Booking.com](http://Booking.com) has made a science of turning live activity into social proof: "23 people are looking at this hotel right now." "Booked 4 times in the last 6 hours." "Only 2 rooms left at this price." These numbers are pulled from live booking and browsing data and dropped directly onto the property listing.
 
-![Booking.com using Enpoints to create scarcity](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/booking_com_931a76829b.png)
+![Booking.com using Endpoints to create scarcity](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/booking_com_931a76829b.png)
 
 
 ### Why it works
@@ -94,7 +94,7 @@ The green-square contribution graph on every [GitHub](https://github.com/) profi
 
 ### Why it works
 
-Not only does it gamify engagement (the duolingo of coding?) It's spawned an entire third-party ecosystem of "[GitHub Wrapped](https://git-wrapped.com/)" tools built by people filling in the year-in-review who wanted to share their streaks creating a viral community moment thats great for GitHub’s brand. Once you expose customer-facing analytics, users will ask for more, and some of them will just go build it themselves.
+Not only does it gamify engagement (the duolingo of coding?) It's spawned an entire third-party ecosystem of "[GitHub Wrapped](https://git-wrapped.com/)" tools built by people filling in the year-in-review who wanted to share their streaks creating a viral community moment that's great for GitHub’s brand. Once you expose customer-facing analytics, users will ask for more, and some of them will just go build it themselves.
 
 ## Make your customer-facing analytics a success
 
