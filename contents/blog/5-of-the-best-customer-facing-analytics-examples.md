@@ -22,9 +22,9 @@ seo:
 
 Customer-facing analytics is the stuff you show your users, not your internal team. Their usage dashboard, "23 people are viewing this right now" counter on a product page, a leaderboard on a public homepage, and support manager's live queue inside the product they pay you for.
 
-What you probably didn't know is that a lot of this is quietly powered by the same kind of tech under the hood: a fast, authenticated API layer that takes product data and ships it straight into the place users will see it. At PostHog, we call this [Endpoints](https://posthog.com/endpoints).
+What you probably didn't know is that a lot of this is quietly powered by the same kind of tech under the hood: a fast, authenticated API layer that takes product data and ships it straight into the place users will see it. At PostHog, we call this [Endpoints](/endpoints).
 
-Endpoints are a way to expose your PostHog data as fast, versioned, authenticated APIs you can [drop straight into your product](https://posthog.com/docs/endpoints) without maintaining a custom API backend. 
+Endpoints are a way to expose your PostHog data as fast, versioned, authenticated APIs you can [drop straight into your product](/docs/endpoints) without maintaining a custom API backend. 
 
 But, rather than telling you what customer-facing analytics is, we’re going to show you five companies who do it really well, and for each one, we've pulled out what's worth copying.
 
@@ -115,4 +115,4 @@ The best part? You don’t need to be super technical. If you're a PM who wants 
 3. **Drop it wherever you need the number to show up.** Your product, a customer-facing dashboard, a Retool or Notion page, an internal Slack bot, an AI workflow — anywhere that accepts a URL or an API call.
 4. **Let it update itself.** The number stays live. If you tweak the underlying insight in PostHog, the Endpoint updates too. No rebuilds, no stale screenshots, no Monday-morning "can someone refresh this for me" messages.
 
-Take the data you already trust in PostHog, ship it to the place your users actually look, and let the tool do the heavy lifting for you. [Give it a try](https://posthog.com/docs/endpoints/start-here), or you can check out [our docs](https://posthog.com/docs/endpoints) to learn more.
+Take the data you already trust in PostHog, ship it to the place your users actually look, and let the tool do the heavy lifting for you. [Give it a try](/docs/endpoints/start-here), or you can check out [our docs](/docs/endpoints) to learn more.
