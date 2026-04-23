@@ -303,11 +303,6 @@ Edits are applied sequentially. If `old` matches zero times or more than once, t
 
 You can use either `body` (full replacement) or `edits` (incremental), but not both in the same request.
 
-<<<<<<< HEAD
-### Compare versions
-||||||| c6f4ed48c
-### Review changes
-=======
 ### Edit a single bundled file
 
 Use `file_edits` to patch one bundled file without resending every file:
@@ -370,8 +365,7 @@ Use atomic per-file tools when you need to add, delete, or rename a single bundl
 
 Passing `files` to `skill-update` replaces ALL bundled files — anything not in the array is dropped. Only use this when you intentionally want to wipe and reseed the bundle. For everything else, prefer `file_edits` or the per-file CRUD tools above.
 
-### Review changes
->>>>>>> master
+### Compare versions
 
 Compare two skill versions side-by-side to see what changed. Available for skills with two or more versions.
 
