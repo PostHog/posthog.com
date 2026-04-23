@@ -22,6 +22,8 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Toggle from 'components/Toggle'
 import { Select } from 'components/RadixUI/Select'
+import Tooltip from 'components/Tooltip'
+import { useToast } from '../context/Toast'
 import { StickerEngineerRatio, StickerHourglass } from 'components/Stickers/Index'
 import { StickerDnd, StickerLaptop, StickerPalmTree, StickerPullRequest } from 'components/Stickers/Index'
 import { motion } from 'framer-motion'
@@ -772,16 +774,22 @@ const ModeratorInitialView = ({
     onAddNewCompany: () => void
 }) => {
     const { getJwt } = useUser()
+    const { addToast } = useToast()
     const [pendingCompanies, setPendingCompanies] = useState<Company[]>([])
     const [selectedCompany, setSelectedCompany] = useState<Company | null>(null)
+    const [dismissingId, setDismissingId] = useState<number | null>(null)
+    const [loaded, setLoaded] = useState(false)
 
     const getPendingCompanies = async () => {
         const jwt = await getJwt()
-        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/pending-companies?populate=*`, {
-            headers: {
-                Authorization: `Bearer ${jwt}`,
-            },
-        })
+        const response = await fetch(
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/pending-companies?populate=*&sort=createdAt:desc`,
+            {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            }
+        )
         const data = await response.json()
         if (data.data?.length > 0) {
             setPendingCompanies(data.data)
@@ -789,32 +797,104 @@ const ModeratorInitialView = ({
         } else {
             onAddNewCompany()
         }
+        setLoaded(true)
+    }
+
+    const dismissCompany = async (companyId: number) => {
+        const company = pendingCompanies.find((c) => c.id === companyId)
+        if (!confirm(`Are you sure you want to dismiss ${company?.attributes.name || 'this company'}?`)) return
+        setDismissingId(companyId)
+        try {
+            const jwt = await getJwt()
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/pending-companies/${companyId}`, {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                    'content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    data: { publishedAt: null },
+                }),
+            })
+            const remaining = pendingCompanies.filter((c) => c.id !== companyId)
+            setPendingCompanies(remaining)
+            if (selectedCompany?.id === companyId) {
+                setSelectedCompany(remaining[0] || null)
+            }
+            addToast({
+                description: `${company?.attributes.name || 'Company'} dismissed`,
+            })
+            if (remaining.length <= 0) {
+                onAddNewCompany()
+            }
+        } catch (error) {
+            console.error('Error dismissing pending company:', error)
+        } finally {
+            setDismissingId(null)
+        }
     }
 
     useEffect(() => {
         getPendingCompanies()
     }, [])
 
+    if (!loaded) return null
+
     return pendingCompanies.length > 0 ? (
         <div data-scheme="primary">
             <h2 className="mb-2">Companies awaiting approval</h2>
-            <Select
-                value={selectedCompany?.id?.toString()}
-                onValueChange={(value) => {
-                    setSelectedCompany(pendingCompanies.find((company) => company.id.toString() === value) || null)
-                }}
-                placeholder="Continue with a pending company"
-                groups={[
-                    {
-                        label: 'Pending Companies',
-                        items: pendingCompanies.map((company) => ({
-                            label: company.attributes.name,
-                            value: company.id.toString(),
-                        })),
-                    },
-                ]}
-                className="w-full"
-            />
+            <ScrollArea>
+                <ul className="list-none p-0 m-0 space-y-2 pr-2 max-h-80">
+                    {pendingCompanies.map((company) => {
+                        const isSelected = selectedCompany?.id === company.id
+                        const perks = toggleFilters.filter((toggle) => (company.attributes as any)[toggle.key])
+                        return (
+                            <li
+                                key={company.id}
+                                className={`px-2 py-1.5 rounded-md border cursor-pointer ${
+                                    isSelected ? 'border-yellow bg-yellow/10' : 'border-primary bg-accent/50'
+                                }`}
+                                onClick={() => setSelectedCompany(company)}
+                            >
+                                <div className="flex items-center justify-between gap-2">
+                                    <div className="flex-1 min-w-0 flex items-center gap-2">
+                                        <span className="font-semibold text-sm leading-none">
+                                            {company.attributes.name}
+                                        </span>
+                                        <span className="text-xs opacity-40 whitespace-nowrap">
+                                            {dayjs(company.attributes.createdAt).fromNow()}
+                                        </span>
+                                        {perks.length > 0 ? (
+                                            <span className="text-xs font-semibold opacity-60 whitespace-nowrap">
+                                                {perks.length} perk{perks.length === 1 ? '' : 's'}
+                                            </span>
+                                        ) : (
+                                            <span className="text-xs font-semibold opacity-40">No perks</span>
+                                        )}
+                                    </div>
+                                    <OSButton
+                                        icon={
+                                            dismissingId === company.id ? (
+                                                <IconSpinner className="animate-spin" />
+                                            ) : (
+                                                <IconTrash />
+                                            )
+                                        }
+                                        onClick={(e: React.MouseEvent) => {
+                                            e.stopPropagation()
+                                            dismissCompany(company.id)
+                                        }}
+                                        size="sm"
+                                        hover="background"
+                                        disabled={dismissingId === company.id}
+                                        tooltip="Dismiss"
+                                    />
+                                </div>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </ScrollArea>
             {selectedCompany && (
                 <div className="mt-4">
                     <OSButton
