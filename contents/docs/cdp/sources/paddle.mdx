@@ -1,0 +1,43 @@
+---
+title: Linking Paddle as a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+sourceId: Paddle
+---
+
+The Paddle connector syncs billing and subscription data from [Paddle](https://www.paddle.com) to PostHog, including customers, products, subscriptions, and transactions.
+
+## What gets synced
+
+- **customers** - Customer profiles with email, marketing consent, and status
+- **products** - Product catalog with name, description, and tax category
+- **prices** - Pricing information including billing cycles and trial periods
+- **subscriptions** - Active and historical subscriptions with billing details
+- **transactions** - Payment transactions with invoice and checkout information
+- **discounts** - Discount codes and their usage limits
+- **adjustments** - Refunds and other transaction adjustments
+
+## Linking Paddle to PostHog
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
+2. Click **New source** and select Paddle
+3. Get an API key from Paddle:
+   - Go to your [Paddle Dashboard](https://vendors.paddle.com/authentication)
+   - Navigate to **Developer Tools** > **Authentication**
+   - Generate a new API key (it starts with `pdl_live_` for production or `pdl_sbox_` for sandbox)
+   - The key needs read access to customers, products, prices, subscriptions, transactions, discounts, and adjustments
+4. Paste the API key and click **Next**
+5. Select the tables you want to sync and configure the sync frequency, then click **Import**
+
+The data warehouse starts syncing your Paddle data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
+
+## How syncing works
+
+- **transactions** - Syncs incrementally using the `billed_at` field. Only transactions billed after the last sync are fetched.
+- **All other tables** - Sync using full refresh. The entire table is re-synced on each run.
+
+Incremental syncing for transactions reduces sync time and API usage by fetching only new billing data.
