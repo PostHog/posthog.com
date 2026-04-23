@@ -5,6 +5,7 @@ showStepsToc: true
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
+import InstallWebPackageManagers from '../../integrate/_snippets/install-web-package-managers.mdx'
 import LogsNextSteps from './_snippets/logs-next-steps.mdx'
 
 The PostHog JavaScript web SDK ships with first-class support for Logs. Send structured log records with the `posthog.logger` API or opt in to autocapture of `console.*` calls.
@@ -15,7 +16,11 @@ The PostHog JavaScript web SDK ships with first-class support for Logs. Send str
 
 <Step title="Install posthog-js" badge="required">
 
-Install and initialize `posthog-js` if you haven't already. See the [web SDK install guide](/docs/libraries/js) for setup details.
+If you haven't already, install `posthog-js` with your package manager:
+
+<InstallWebPackageManagers />
+
+Prefer the HTML snippet, CDN, or advanced install options (tree-shaking, CSP)? See the [web SDK install guide](/docs/libraries/js).
 
 </Step>
 
