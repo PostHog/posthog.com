@@ -22,14 +22,14 @@ A PostHog skill follows the [Agent Skills specification](https://agentskills.io/
 
 The MCP server exposes the skills store through a dedicated family of tools:
 
-| Tool              | Purpose                                                                  |
-| ----------------- | ------------------------------------------------------------------------ |
-| `skill-list`      | List all available skills (name + description only)                      |
-| `skill-get`       | Fetch a skill by name — returns the body and a manifest of bundled files |
-| `skill-file-get`  | Fetch a single bundled file by path (on demand)                          |
-| `skill-create`    | Store a new skill, optionally with bundled files                         |
-| `skill-update`    | Publish a new version — provide full `body` or incremental `edits`       |
-| `skill-duplicate` | Duplicate an existing skill under a new name                             |
+| Tool              | Purpose                                                                                     |
+| ----------------- | ------------------------------------------------------------------------------------------- |
+| `skill-list`      | List all available skills (name + description only)                                         |
+| `skill-get`       | Fetch a skill by name — returns the body and a manifest of bundled files                    |
+| `skill-file-get`  | Fetch a single bundled file by path (on demand)                                             |
+| `skill-create`    | Store a new skill, optionally with bundled files                                            |
+| `skill-update`    | Publish a new version — full `body`, incremental `edits`, or `file_edits` for bundled files |
+| `skill-duplicate` | Duplicate an existing skill under a new name                                                |
 
 Agents use these with progressive disclosure: discover by description, fetch the body only when relevant, and pull individual files on demand — rather than loading everything up front.
 
@@ -297,6 +297,28 @@ Each edit must have:
 Edits are applied sequentially. If `old` matches zero times or more than once, the update fails with an error indicating which edit failed.
 
 You can use either `body` (full replacement) or `edits` (incremental), but not both in the same request.
+
+### Use incremental file edits
+
+For bundled files, use the `file_edits` parameter to patch specific files without replacing the entire `files` array:
+
+```json
+{
+  "file_edits": [
+    {
+      "path": "references/ranking.md",
+      "edits": [{ "old": "rank high", "new": "rank higher" }]
+    }
+  ],
+  "base_version": 2
+}
+```
+
+Each entry targets one existing file by path and applies sequential find/replace edits. Files not listed in `file_edits` carry forward unchanged.
+
+Like body edits, each edit must match exactly once in the target file. If the `old` text matches zero times or more than once, the update fails with an error indicating which file and edit index failed.
+
+You can combine `file_edits` with body `edits` in the same request. You can use either `files` (full replacement) or `file_edits` (incremental), but not both. `file_edits` only patches existing files — to add, remove, or rename files, use the `files` parameter.
 
 ### Review changes
 
