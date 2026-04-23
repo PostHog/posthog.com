@@ -55,6 +55,109 @@ Subsequent requests reuse the cached version and refresh it in the background ba
 After hosting your metadata document, contact PostHog to activate provisioning for your application.
 We'll enable the `provisioning_can_create_accounts` and `provisioning_can_provision_resources` flags on your application.
 
+## Server-to-server integration (HMAC)
+
+If your integration runs entirely on your backend (no browser redirects, no public client), you can use HMAC signing instead of PKCE.
+The tradeoff: you manage a shared secret, but you skip the `code_challenge`/`code_verifier` dance entirely.
+
+| | PKCE (public client) | HMAC (server-to-server) |
+|---|---|---|
+| **Secret management** | None -- CIMD metadata document only | Shared `signing_secret` stored on your server |
+| **Auth signal** | `client_id` in request body | `Stripe-Signature` header on every request |
+| **Best for** | Browser-based flows, CLIs, apps that redirect users | Backend services that provision accounts without user interaction |
+
+### Get credentials
+
+Contact PostHog to set up an HMAC partner application. You'll receive a `signing_secret` -- store it securely on your server (environment variable, secrets manager, etc.).
+
+### Sign requests
+
+Every request must include a `Stripe-Signature` header with a timestamp and HMAC-SHA256 signature:
+
+```
+Stripe-Signature: t={unix_timestamp},v1={hex_signature}
+```
+
+The signature is computed over `{timestamp}.{request_body}` using your signing secret:
+
+```bash
+# Compute the signature
+TIMESTAMP=$(date +%s)
+BODY='{"id":"req_123","email":"user@example.com","name":"Jane Doe","configuration":{"region":"US"}}'
+SIGNATURE=$(printf '%s.%s' "$TIMESTAMP" "$BODY" | openssl dgst -sha256 -hmac "$SIGNING_SECRET" | sed 's/^.* //')
+```
+
+The timestamp must be within 5 minutes of the server's clock.
+
+### The 3-step flow with HMAC
+
+The same three endpoints work with HMAC auth. The difference: you authenticate with the `Stripe-Signature` header instead of PKCE, and you skip `code_challenge`/`code_verifier` fields.
+
+**Step 1: Create an account**
+
+```bash
+TIMESTAMP=$(date +%s)
+BODY='{"id":"req_unique_request_id","email":"user@example.com","name":"Jane Doe","configuration":{"region":"US","organization_name":"Acme Corp"}}'
+SIGNATURE=$(printf '%s.%s' "$TIMESTAMP" "$BODY" | openssl dgst -sha256 -hmac "$SIGNING_SECRET" | sed 's/^.* //')
+
+curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
+  -H "Content-Type: application/json" \
+  -H "API-Version: 0.1d" \
+  -H "Stripe-Signature: t=$TIMESTAMP,v1=$SIGNATURE" \
+  -d "$BODY"
+```
+
+No `code_challenge` or `code_challenge_method` needed. The response format is the same as the PKCE flow.
+
+**Step 2: Exchange the code for tokens**
+
+```bash
+BODY="grant_type=authorization_code&code=abc123...authorization_code"
+TIMESTAMP=$(date +%s)
+SIGNATURE=$(printf '%s.%s' "$TIMESTAMP" "$BODY" | openssl dgst -sha256 -hmac "$SIGNING_SECRET" | sed 's/^.* //')
+
+curl -X POST https://us.posthog.com/api/agentic/oauth/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -H "API-Version: 0.1d" \
+  -H "Stripe-Signature: t=$TIMESTAMP,v1=$SIGNATURE" \
+  -d "$BODY"
+```
+
+No `code_verifier` needed. The response includes the same `access_token`, `refresh_token`, and `account` fields.
+
+**Step 3: Provision a project**
+
+Once you have an access token, use it with a `Bearer` header -- the same as the PKCE flow:
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer phx_abc123..." \
+  -H "API-Version: 0.1d" \
+  -d '{"service_id":"analytics","configuration":{"project_name":"My App - Production"}}'
+```
+
+### Signing in code (Node.js)
+
+```javascript
+import crypto from 'node:crypto';
+
+function signRequest(signingSecret, body) {
+  const timestamp = Math.floor(Date.now() / 1000);
+  const payload = `${timestamp}.${body}`;
+  const signature = crypto
+    .createHmac('sha256', signingSecret)
+    .update(payload)
+    .digest('hex');
+  return `t=${timestamp},v1=${signature}`;
+}
+
+// Usage
+const body = JSON.stringify({ id: 'req_123', email: 'user@example.com' });
+const header = signRequest(process.env.SIGNING_SECRET, body);
+// Set header: { 'Stripe-Signature': header }
+```
+
 ## API reference
 
 All endpoints are on `https://us.posthog.com` (US region) or `https://eu.posthog.com` (EU region).
