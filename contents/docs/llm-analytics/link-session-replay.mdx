@@ -34,14 +34,14 @@ Configure the PostHog SDK to automatically inject session headers into requests 
 ```javascript file=Web
 posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
-  __add_tracing_headers: ['api.your-app.com']  // Your backend hostname(s)
+  addTracingHeaders: ['api.your-app.com']  // Your backend hostname(s)
 })
 ```
 
 ```typescript file=React Native
 new PostHog('<ph_project_token>', {
   host: '<ph_client_api_host>',
-  __add_tracing_headers: ['api.your-app.com']  // Your backend hostname(s)
+  addTracingHeaders: ['api.your-app.com']  // Your backend hostname(s)
 })
 ```
 
