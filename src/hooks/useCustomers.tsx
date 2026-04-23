@@ -380,7 +380,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     elevenlabs: {
         name: 'ElevenLabs',
-        toolsUsed: ['feature_flags', 'product_analytics', 'surveys'],
+        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'surveys'],
         industries: ['AI'],
         users: ['Marketing', 'Growth', 'Engineering'],
         notes: 'AI voice generator',
