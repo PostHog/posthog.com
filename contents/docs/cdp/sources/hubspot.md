@@ -17,7 +17,7 @@ To link Hubspot:
 2. Click **New source** and select Hubspot
 3. Select the Hubspot account you want to link and click **Connect app**
 4. *Optional:* Add a prefix to your table names
-5. Select the tables you want to import (incremental/append syncs are not supported for HubSpot tables.)
+5. Select the tables you want to import
 6. Click **Import**
 
 ### Customize synced properties
