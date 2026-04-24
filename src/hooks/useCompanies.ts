@@ -24,13 +24,15 @@ export type Filters = Array<
       }
 >
 
-const query = (offset: number, companyFilters: Filters, jobFilters: Filters) => {
+const query = (offset: number, companyFilters: Filters, jobFilters: Filters, isModerator = false) => {
     return qs.stringify(
         {
-            pagination: {
-                start: offset * 20,
-                limit: 20,
-            },
+            pagination: isModerator
+                ? { limit: -1 }
+                : {
+                      start: offset * 20,
+                      limit: 25,
+                  },
             sort: 'name:asc',
             populate: {
                 jobs: {
