@@ -8,9 +8,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/515178785_18a6e619_601a_4758_aaaa_06deb2695902_4a267826d4.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/robocop_8939115965.png
 featuredImageType: full
-featuredImageCaption: Just knitting actionable insights out of data noodles.
 category: Blog
 tags:
 - General
