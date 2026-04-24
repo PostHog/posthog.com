@@ -2,11 +2,11 @@
 title: PII scrubbing
 ---
 
-PostHog can scrub common sensitive patterns out of your logs at ingestion, before they're written to storage. This is an opt-in, best-effort safety net — the most reliable way to keep PII out of your logs is to not send it from the client in the first place.
+PostHog can scrub common sensitive patterns out of your Logs at ingestion, before they're written to storage. This is an opt-in, best-effort safety net – the most reliable way to keep PII out of your Logs is to not send it from the client in the first place.
 
 ## Enabling PII scrubbing
 
-Go to **Project settings → Logs** and turn on **Scrub PII in logs at ingestion**. Once enabled, scrubbing runs on every log that comes in. It does not apply retroactively to logs that have already been stored.
+Go to **Project settings → Logs** and turn on **Scrub PII in Logs at ingestion**. Once enabled, scrubbing runs on every log that comes in. It does not apply retroactively to Logs that have already been stored.
 
 ## What gets scrubbed
 
@@ -66,15 +66,15 @@ Scrubbing is a safety net, not a guarantee. It will miss things:
 
 - **It only matches known patterns.** Emails, Bearer-style tokens, and Stripe secret keys are covered. Credit card numbers, phone numbers, national IDs, addresses, names, and custom token formats are **not** detected.
 - **It doesn't walk JSON structure in the log body.** If you log a serialized JSON blob, patterns inside the string are still matched, but sensitive values hidden behind numeric or boolean fields (e.g. `{"password": 12345}`) are not redacted.
-- **Redaction is permanent.** Once a log is written with `{{REDACTED}}`, the original value is gone — this is not encryption, and there's no way to recover the original text.
-- **Existing logs are not retroactively scrubbed.** Only logs ingested after you enable the setting are processed.
+- **Redaction is permanent.** Once a log is written with `{{REDACTED}}`, the original value is gone – this is not encryption, and there's no way to recover the original text.
+- **Existing Logs are not retroactively scrubbed.** Only Logs ingested after you enable the setting are processed.
 
 ### The best defense is not sending PII
 
-Do not rely on ingestion-time scrubbing as your primary control. The most reliable way to keep sensitive data out of your logs is to not log it in the first place:
+Do not rely on ingestion-time scrubbing as your primary control. The most reliable way to keep sensitive data out of your Logs is to not log it in the first place:
 
 - **Log identifiers, not contents.** Log a `user_id` instead of an email; a `card_token` instead of a PAN.
 - **Redact on the client.** Filter or mask sensitive fields in your application before handing them to your logger.
-- **Review what your logger captures automatically.** Some frameworks log full request/response bodies or headers by default — strip `Authorization`, `Cookie`, and similar headers at the source.
+- **Review what your logger captures automatically.** Some frameworks log full request/response bodies or headers by default – strip `Authorization`, `Cookie`, and similar headers at the source.
 
-See our [logging best practices guide](/docs/logs/best-practices) for more on structured logging patterns that make it easy to keep PII out of your logs.
+See our [logging best practices guide](/docs/logs/best-practices) for more on structured logging patterns that make it easy to keep PII out of your Logs.
