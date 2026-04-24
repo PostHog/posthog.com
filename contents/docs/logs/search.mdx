@@ -2,55 +2,46 @@
 title: Search logs
 ---
 
-The logs search accepts multiple tokens and quoted phrases to help you find the exact log lines you need.
+Filter logs from the filter bar at the top of the [logs page](https://us.posthog.com/logs). Pick a field, choose an operator, and enter a value. Add as many filters as you need — they're combined with AND.
 
-- **Space-separated words** are combined with implicit AND: the log must contain all positive tokens
-- **Prefix a token with `!`** to exclude logs that contain that token. You can use multiple negative tokens to exclude several different terms
-- **Wrap text in double quotes** to search for an exact phrase (an exact substring match)
+There are three kinds of fields you can filter on:
 
-## How to use search
+- **Message** – full-text search over the log body
+- **Resource attributes** – describe where the log came from, like `service.name`, `host.name`, or `k8s.container.name`
+- **Attributes** – custom key-value context attached to individual log events, like `user_id`, `endpoint`, or `status_code`
 
-### Require multiple words
+## Filter on resource attributes and attributes
 
-**Type:** `bug frontend`
+Resource attributes identify the source of a log (the service, host, or container that emitted it). Attributes describe a specific log event. Both come from your OpenTelemetry instrumentation — the richer your [structured logging](/docs/logs/best-practices), the more you can filter on.
 
-**Result:** Shows logs that contain both the words `bug` and `frontend` anywhere in the line.
+To filter:
 
-### Exclude words
+1. Click the filter bar and pick a field. Resource attributes and attributes are grouped separately in the picker.
+2. Choose an operator (equals, contains, is set, greater than, etc.).
+3. Enter a value.
 
-**Type:** `error !timeout`
+For example, filter `service.name` equals `checkout-api` to scope to one service, then add `status_code` equals `500` to narrow to failed requests.
 
-**Result:** Shows logs that contain `error` but excludes any log that also contains `timeout`.
+## Full-text search on Message
 
-### Combine require + exclude
+To search log bodies, pick the **Message** field from the filter bar. Message supports three operators, each with a negated variant for exclusion:
 
-**Type:** `api "server error" !403 !timeout`
+| Operator | Behavior |
+|----------|----------|
+| `equals` / `doesn't equal` | Exact match. Case-sensitive. |
+| `contains` / `doesn't contain` | Substring match. **Case-insensitive.** The default. |
+| `matches regex` / `doesn't match regex` | RE2 regex. **Case-insensitive.** |
 
-**Result:** Must contain `api` and the exact phrase `server error`, and must not contain `403` or `timeout`.
+### Examples
 
-### Search exact phrases
-
-**Type:** `"failed to connect"`
-
-**Result:** Matches logs that include the substring `failed to connect` exactly as written.
-
-## More examples
-
-| Query | What it finds |
-|-------|---------------|
-| `login timeout` | Logs that contain both `login` and `timeout` |
-| `login !debug` | Logs that contain `login` and excludes logs that contain `debug` |
-| `"database error"` | Logs with the exact phrase `database error` |
-| `"payment failed" !trace !debug` | Logs that contain the exact phrase `payment failed` and excludes any that contain `trace` or `debug` |
+- **Contains** `failed to connect` – matches any log containing that substring, regardless of case.
+- **Equals** `Health check OK` – matches only logs whose body is exactly that string.
+- **Matches regex** `timeout|refused|reset` – matches logs mentioning any of those words (useful when you'd otherwise add multiple contains filters).
+- **Doesn't contain** `healthcheck` – exclude noisy healthcheck lines while keeping everything else.
 
 ## Tips
 
-- **Special characters:** If a token contains spaces or special characters, wrap it in double quotes to treat it as a single search item
-- **Standalone exclamation mark:** A standalone `!` by itself is ignored — use `!` followed by text to exclude that text
-- **Multiple negative tokens:** List multiple `!tokens` (e.g., `!debug !trace`) to exclude logs that contain any of those tokens
-- **Punctuation:** Quotes and escapes are handled using shell-like parsing rules, so complex tokens should be quoted if they contain spaces or special characters
-
-## Get more from search with structured logs
-
-Search works best when your logs are consistent and structured. Adding key-value context like `user_id`, `endpoint`, and `status_code` to every log line makes filtering faster and more precise. See our [logging best practices guide](/docs/logs/best-practices) for patterns that make logs easier to search and query.
-
+- **Stack filters to narrow down.** Every filter you add is ANDed together — combine a `service.name` filter with a Message contains to scope full-text search to one service.
+- **Start with contains, then tighten.** Contains is case-insensitive and forgiving. Switch to equals only when you need an exact match, or regex when you want OR-style matching in a single filter.
+- **Use regex for alternatives.** Instead of adding three contains filters, use one regex like `(timeout|refused|reset)`.
+- **Structured logs make filtering more powerful.** Key-value context like `user_id`, `endpoint`, and `status_code` becomes an attribute you can filter on directly. See our [logging best practices](/docs/logs/best-practices) for patterns that make logs easier to query.
