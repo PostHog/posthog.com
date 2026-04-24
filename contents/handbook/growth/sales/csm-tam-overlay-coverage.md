@@ -1,5 +1,5 @@
 ---
-title: 'CSM + TAM rules of engagement'
+title: CSM + TAM rules of engagement
 sidebar: Handbook
 showTitle: true
 ---
