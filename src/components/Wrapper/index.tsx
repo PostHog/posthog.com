@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useApp } from '../../context/App'
 import Desktop from 'components/Desktop'
 import TaskBarMenu from 'components/TaskBarMenu'
+import KoreanDesktop from '../../pages/ko/components/KoreanDesktop'
+import KoreanTaskBarMenu from '../../pages/ko/components/KoreanTaskBarMenu'
 import AppWindow from 'components/AppWindow'
 import { AnimatePresence, motion } from 'framer-motion'
 import CookieBannerToast from 'components/CookieBanner/ToastVersion'
@@ -18,9 +20,13 @@ export default function Wrapper() {
         closeAllWindows,
         websiteMode,
         searchOpen,
+        location,
     } = useApp()
     const [shakeReady, setShakeReady] = useState(false)
     const dotLottieRef = useRef<any>(null)
+    const isKoreanPage = location?.pathname === '/ko' || location?.pathname?.startsWith('/ko/')
+    const DesktopComponent = isKoreanPage ? KoreanDesktop : Desktop
+    const TaskBarMenuComponent = isKoreanPage ? KoreanTaskBarMenu : TaskBarMenu
 
     useEffect(() => {
         if (closingAllWindowsAnimation) {
@@ -38,9 +44,9 @@ export default function Wrapper() {
             } flex flex-col`}
             id="app-container"
         >
-            {!compact && <TaskBarMenu />}
+            {!compact && <TaskBarMenuComponent />}
             <div ref={constraintsRef} className={`flex-grow relative`}>
-                <Desktop />
+                <DesktopComponent />
                 <AnimatePresence>
                     {windows.map((item, index) => {
                         return (
