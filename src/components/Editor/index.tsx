@@ -40,6 +40,7 @@ import { Popover } from 'components/RadixUI/Popover'
 import Slider from 'components/RadixUI/Slider'
 import { WEBSITE_MODE_CLASSES } from '../../constants'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { cn } from '../../utils'
 
 interface EditorProps {
     slug?: string
@@ -593,7 +594,11 @@ export function Editor({
                         />
 
                         {showFilters && availableFilters && availableFilters.length > 0 && (
-                            <div className="bg-accent p-2 text-sm border-b border-primary text-primary gap-1 sticky top-0 z-20 ">
+                            <div
+                                className={cn('bg-accent p-2 text-sm border-b border-primary text-primary gap-1 z-20', {
+                                    'sticky top-0': !websiteMode,
+                                })}
+                            >
                                 <div className={`flex flex-wrap ${websiteMode && WEBSITE_MODE_CLASSES}`}>
                                     {availableFilters?.map((filter, index) => {
                                         return (
