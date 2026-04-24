@@ -1,0 +1,431 @@
+---
+title: The best real-time analytics platforms for developers, compared
+date: 2026-04-24
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - natalia-amorim
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+seo:
+    {
+        metaTitle: 'The best real-time analytics platforms for developers, compared',
+        metaDescription: 'Compare the top real-time analytics dashboards for seeing who is on your site right now. See how PostHog, GA4, Mixpanel, Plausible, and more stack up on live data.',
+    }
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+"How many people are on my site right now?"
+
+A real-time analytics platform, in the way most people actually mean the phrase, is one that lets you *watch your product as it's being used*. Users currently online, pages they're on right now, the event that just fired three seconds ago, the referrer that's suddenly spiking...
+
+Nothing beats a live dashboard when you're launching a product on Hacker News or running a flash sale.
+
+This guide compares the best real-time analytics tools for developers, what each one does well, where they fall short, and how to pick the right one.
+
+## What features do you need in a real-time analytics tool?
+
+At a minimum, a real-time analytics tool should include:
+
+- A live dashboard showing active users right now
+- A real-time event stream or activity feed
+- Live pageviews, top pages, and top referrers
+- Geographic breakdown of current visitors
+- Data that updates without manual refresh (every few seconds, ideally)
+
+The best real-time analytics tools go further with:
+
+- **Live event data that's also queryable later** – so "what happened during the launch spike" is still answerable next week
+- **Session replay integration** – click a live user and watch what they're actually doing
+- **Named users, not just anonymous pageviews** – see which specific customer is on your pricing page right now
+- **Alerts on live metrics** – get pinged when traffic spikes, signups stall, or errors jump
+- **A live feed you can embed or share** – TV-mode dashboards for war rooms or office displays
+- **Mobile apps or widgets** – check live stats without opening a laptop
+
+Here's how the most popular real-time analytics tools compare:
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'google_analytics', 'mixpanel', 'plausible', 'fathom', 'matomo']}
+    rows={[
+        {
+            label: 'Live active users dashboard',
+            description: 'See how many users are on your site right now',
+            values: [true, true, true, true, true, true],
+        },
+        {
+            label: 'Real-time event stream',
+            description: 'Watch events as they happen, one by one',
+            values: [true, 'Limited', true, false, false, 'Limited'],
+        },
+        {
+            label: 'Live top pages and referrers',
+            description: 'See the most popular pages and traffic sources right now',
+            values: [true, true, true, true, true, true],
+        },
+        {
+            label: 'Live user location map',
+            description: 'See where current visitors are located',
+            values: [true, true, false, true, true, true],
+        },
+        {
+            label: 'See specific users by name/email',
+            description: 'Identify logged-in users who are currently active',
+            values: [true, false, true, false, false, 'Limited'],
+        },
+        {
+            label: 'Live session replay',
+            description: 'Click into a live session and watch what the user is doing',
+            values: [true, false, 'Add-on', false, false, 'Add-on'],
+        },
+        {
+            label: 'Free tier',
+            description: 'Meaningful free plan available',
+            values: [true, true, true, '30-day trial', '30-day trial', 'Self-host only'],
+        },
+        {
+            label: 'Cookie-free by default',
+            description: 'Works without cookies, no consent banner required',
+            values: ['Optional', false, false, true, true, 'Optional'],
+        },
+        {
+            label: 'Open source',
+            description: 'Core product is open source',
+            values: [true, false, false, true, false, true],
+        },
+    ]}
+/>
+</p>
+
+You might notice some absences: [**Amplitude**](/blog/posthog-vs-amplitude) and [**Heap**](/blog/posthog-vs-heap) are both popular product analytics tools, but neither leads with a live "who's here now" view the way this guide cares about – Amplitude's dashboards update quickly but aren't built around a live feed, and Heap's autocapture architecture introduces some processing delay before events appear. 
+
+**Adobe Analytics**, **Umami**, and **Simple Analytics** are all worth a look for specific use cases, but we've focused on the six tools most teams actually shortlist when they want a live dashboard.
+
+## What's the best real-time analytics tool for developers?
+
+### 1. PostHog
+
+[PostHog](/) gives you a live dashboard showing who's on your site right now, what pages they're visiting, where they're coming from, and – because users are identified – which specific customers are currently active. 
+
+The real-time dashboard is currently in alpha.
+
+What makes PostHog different from a standalone live-stats tool is that the same data powering your live view is available for everything else. That anonymous visitor you're watching on the pricing page right now? Tomorrow they sign up, and you can see their full journey – every page, every click, every session recording. 
+
+When traffic spikes from a launch, you can watch it happen live, then slice it by UTM source, country, or feature flag the next morning.
+
+PostHog also connects the live view to [session replay](/session-replay): click a currently-active user and watch exactly what they're doing in real time. Pair that with [feature flags](/feature-flags) and you can spot an issue on a live user, ship a fix behind a flag, and watch the flag roll out, all in one tool.
+
+PostHog is free up to 1 million events, 5,000 session recordings, 1 million feature flag requests, and [a lot more per month](/pricing). After that, it's usage-based with configurable billing caps.
+
+**Strengths:**
+
+- Live dashboard plus a real-time event stream with full user context
+- Identified users visible in live view
+- Connects data to session replay, feature flags, and experiments
+- Same data is queryable with SQL after the fact
+- Transparent usage-based pricing
+
+<CalloutBox icon="IconStarFilled" title="PostHog is best for..." type="fyi">
+
+Developers and product teams who want a live dashboard as part of a complete data workflow (analytics, flags, experiments, replays, and more), and who care about seeing *which* users are on their site right now, not just how many.
+
+</CalloutBox>
+
+<WizardCTA />
+
+### 2. Google Analytics 4
+
+GA4 is, for many teams, still the default, and its Realtime report is probably the most widely-used live dashboard on the web. 
+
+It shows users in the last 30 minutes (and, since 2024, users in the last 5 minutes), top pages, traffic sources, events, and a map of where visitors are coming from. You can also click into a single random active user and see a timeline of what they've done in the session.
+
+The good news: it's free, it's there, and most teams already have it installed. 
+
+The bad news: GA4's "event-driven" data model makes everything more complicated than it used to be in Universal Analytics, the Realtime report is a single pre-built view you can't customize much, and you can't see specific users by email or any meaningful identifier. 
+
+Privacy is also a legitimate concern. GA4 requires a cookie consent banner in most jurisdictions, and in several European countries its legality has been challenged. A meaningful chunk of traffic is simply not counted because users decline consent.
+
+**Strengths:**
+
+- Large free tier and nearly universally supported
+- Live user count (30-minute and 5-minute windows)
+- Integration with Google Ads and the broader Google ecosystem
+- Huge ecosystem of tutorials, plugins, and agencies
+
+<CalloutBox icon="IconStarFilled" title="GA4 is best for..." type="fyi">
+
+Teams that need a free live dashboard and are already invested in the Google ecosystem, especially for marketing-driven use cases where the tight integration with Google Ads matters.
+
+</CalloutBox>
+
+### 3. Mixpanel
+
+Mixpanel is a product analytics platform best known for funnels, retention, and cohort analysis, but it also has strong real-time capabilities. 
+
+The platform processes events in near-real-time, and dashboards update as users interact with your product, which makes it a popular choice for teams running live experiments or monitoring active campaigns.
+
+Mixpanel's real-time strength is identified users: you can build a live view showing which specific accounts are active right now, what events they just fired, and which segment they belong to. 
+
+Pair that with session replay (included in newer plans with 10K–20K replays/month depending on tier) and you get live-ish debugging alongside the analytics.
+
+The trade-off is complexity and pricing. Mixpanel's data model is flexible but requires upfront planning – event taxonomy, property conventions, and tracking plans all matter. 
+
+Pricing is based on Monthly Tracked Users (MTUs), and while the free tier is generous, costs can scale quickly.
+
+**Strengths:**
+
+- Fast, near-real-time event processing
+- Strong identified-user analytics
+- Deep funnel, retention, and cohort analysis
+- Session replay and heatmaps included in newer plans
+
+<CalloutBox icon="IconStarFilled" title="Mixpanel is best for..." type="fyi">
+
+Product teams that want near-real-time product analytics with strong identified-user tracking and are willing to invest in a proper event taxonomy to get the most out of it.
+
+</CalloutBox>
+
+### 4. Plausible
+
+Plausible is a privacy-first, lightweight web analytics tool that puts everything – including live stats – on a single clean dashboard. The headline number at the top of the page is always "X current visitors," updated every few seconds. Below that, you see the same page you'd see a month from now, just with live-updating numbers: top pages, top sources, countries, devices.
+
+Plausible's appeal is simplicity. The tracking script is under 1 KB, there are no cookies by default (so no consent banner required in most cases), and the dashboard is designed to be readable in under a minute. It's open source and can be self-hosted.
+
+The trade-off is depth. Plausible is a web analytics tool, not a product analytics one. You can track custom events and set conversion goals, but you won't find deep funnels, cohort analysis, or identified-user tracking. If your use case is "what's happening on my marketing site right now," Plausible is excellent. If it's "which logged-in customers are currently active," look elsewhere.
+
+Plausible starts at $9/month for 10K pageviews; there's a 30-day free trial.
+
+**Strengths:**
+
+- Clean, readable single-page dashboard with live stats
+- Ultra-lightweight script (< 1 KB)
+- Cookie-free and GDPR-compliant by default
+- Open source and self-hostable
+
+<CalloutBox icon="IconStarFilled" title="Plausible is best for..." type="fyi">
+
+Content sites, marketing sites, and small SaaS teams that want a clean live dashboard without cookies, consent banners, or complexity.
+
+</CalloutBox>
+
+### 5. Fathom Analytics
+
+Fathom is Plausible's closest competitor – another privacy-first, simple web analytics tool with a single-page dashboard that prominently features current visitors. It's built around the same philosophy: minimal tracking, no cookies, GDPR/CCPA/PECR compliance by default, and a dashboard your CEO can read without training.
+
+Fathom differentiates itself on a few specific details: it's pioneered an ethical approach to bypassing ad blockers, has slightly different pricing tiers (starts at $15/month for 100K pageviews – cheaper than Plausible at higher volumes), and is fully SaaS-only (no self-host option).
+
+Like Plausible, Fathom is a web analytics tool, not a product analytics one. You can track events and conversions, but there's no funnel analysis, no cohort tracking, no identified-user view.
+
+**Strengths:**
+
+- Beautiful, simple dashboard with live visitor count
+- Strong privacy credentials (GDPR, CCPA, PECR by default)
+- Ethical ad-blocker bypass
+- Better pricing at higher traffic volumes than Plausible
+
+<CalloutBox icon="IconStarFilled" title="Fathom is best for..." type="fyi">
+
+Privacy-conscious teams that want a simple, beautiful live dashboard and don't need self-hosting. Especially good for content creators, solo founders, and agencies managing multiple sites.
+
+</CalloutBox>
+
+### 6. Matomo
+
+Matomo (formerly Piwik) is the veteran open-source alternative to Google Analytics, and it has one of the most feature-complete real-time views in this list. The Visitors → Real-time view shows a live-updating log of visitors with their location, pages viewed, referrer, browser, and time on site. You can click into any individual visitor and see their full session as it happens.
+
+Matomo is the opposite of Plausible and Fathom in philosophy – instead of trimming to essentials, it gives you everything. Heatmaps, session recordings, A/B testing, form analytics, funnels, custom dimensions, goal tracking. It's often described as "self-hosted Google Analytics," and the interface reflects that – lots of menus, lots of options.
+
+You can self-host Matomo for free, or use their cloud service. Self-hosting is genuinely free but requires server setup and maintenance. The tracking script is ~22 KB (nearly 10x Plausible), and the default configuration uses cookies (though you can configure a cookieless mode).
+
+**Strengths:**
+
+- Most feature-complete real-time view of any tool in this list
+- Self-host option gives you full data ownership
+- Huge feature set: heatmaps, session recordings, A/B testing, form analytics
+- Deep customization and plugin ecosystem
+
+<CalloutBox icon="IconStarFilled" title="Matomo is best for..." type="fyi">
+
+Teams that need a feature-rich real-time view with full data ownership and compliance control – especially ecommerce, enterprise, or privacy-sensitive organizations willing to invest in setup.
+
+</CalloutBox>
+
+## Which real-time analytics tool should you choose?
+
+- Want a live dashboard connected to product analytics, session replay, feature flags, and more? **PostHog**.
+- Want something free that most teams already have, and only need basic live stats? **Google Analytics 4**.
+- Want near-real-time product analytics with strong identified-user tracking? **Mixpanel**.
+- Want a clean, simple live dashboard for your content or marketing site? **Plausible**.
+- Want the Plausible experience without self-host, with slightly better pricing at scale? **Fathom**.
+- Want the most feature-complete real-time view with full data ownership? **Matomo**.
+
+### Recommendations by team type
+
+#### For startups and indie hackers
+
+- **PostHog** if you want a live view plus everything else you'll need as you grow (analytics, replay, flags)
+- **Plausible** or **Fathom** if you just want a clean live dashboard for a marketing site and nothing more
+- **GA4** if you want free and don't care about the UX
+
+#### For product teams
+
+- **PostHog** for a live view of identified users tied to session replay and feature flags
+- **Mixpanel** if your team is deep in funnels and cohorts and wants real-time dashboards layered on top
+- **Matomo** if you need feature depth and data ownership
+
+#### For marketing and content teams
+
+- **Plausible** or **Fathom** for simple, shareable live dashboards
+- **GA4** if you need tight Google Ads integration
+- **Matomo** if you need heatmaps, A/B testing, and form analytics alongside live stats
+
+#### For privacy-focused or compliance-driven teams
+
+- **Plausible** or **Fathom** for cookie-free, consent-banner-free simplicity
+- **Matomo** (self-hosted) for full data ownership and compliance control
+- **PostHog** (self-hosted or EU cloud) for all the features with EU data residency
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but PostHog is the best choice for a real-time analytics platform if:
+
+- You want a live view of who's on your site right now – including identified users by email – connected to analytics, session replay, feature flags, and error tracking
+- You value open source and transparent pricing
+- You want to try before you buy with 1 million events free every month
+
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out our [docs](/docs) to do it yourself.
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+  <summary>What is a real-time analytics tool?</summary>
+
+A **real-time analytics tool** lets you see what's happening on your site or product right now – how many users are active, what pages they're on, where they came from, and what they're doing. 
+
+Unlike batch-processed analytics (which might show data from hours or a day ago), real-time tools update their dashboards every few seconds.
+
+"Real-time" in this context usually means data that's a few seconds to a few minutes old. True zero-latency analytics is rare and usually unnecessary – most teams just want to see their launch traffic live, monitor a campaign, or debug a spike as it happens.
+
+</details>
+
+<details>
+  <summary>How does real-time analytics differ from regular analytics?</summary>
+
+Regular (or "batch") analytics processes events on a schedule – hourly, nightly, or daily – and shows you yesterday's or last week's data. It's good for trend analysis, reports, and retrospectives.
+
+Real-time analytics shows you what's happening *right now*. Live active users, current top pages, the event that just fired. It's good for monitoring launches, running live experiments, catching issues as they happen, and generally seeing your product in use.
+
+Most modern analytics tools – including all six in this guide – do both: a live view for "right now" and historical analysis for "what happened last month." The difference is how prominent the live view is and how deep the tooling around it goes.
+
+</details>
+
+<details>
+  <summary>Do I need a real-time analytics tool, or is batch analytics enough?</summary>
+
+If you're running a marketing site where traffic is fairly predictable and you look at analytics weekly, batch is probably fine. GA4's once-a-day refresh rhythm won't hurt you.
+
+If you fall into any of these situations, a real-time view becomes actually useful:
+
+- You're about to launch something (new product, pricing change, marketing campaign) and want to watch it land
+- You're running paid campaigns and need to spot wasted spend fast
+- You ship code multiple times a day and want to catch regressions before your users do
+- You have a product-led growth motion where knowing which users are active matters
+
+For most product teams, a tool with a good real-time view pays for itself the first time you watch a launch go sideways and catch it in minutes instead of hours.
+
+</details>
+
+<details>
+  <summary>Can I see who specifically is on my site right now?</summary>
+
+Only if your analytics tool supports identified users. **PostHog**, **Mixpanel**, and **Matomo** (with some configuration) can show you specific logged-in users by email or user ID.
+
+**GA4**, **Plausible**, and **Fathom** are built around aggregate, privacy-friendly analytics and don't identify users by default – you'll see "23 active users" and a breakdown by page, but not who specifically.
+
+For logged-in product experiences where knowing which customer is on the pricing page matters, you want a tool with identified-user support. For public marketing sites, aggregate live stats are usually enough (and better from a privacy standpoint).
+
+</details>
+
+<details>
+  <summary>What's the best free real-time analytics tool?</summary>
+
+**PostHog** has the most generous free tier of any tool with serious real-time features: 1 million events/month, 5,000 session recordings, 1 million feature flag requests. Most small teams can stay on the free plan indefinitely.
+
+**Google Analytics 4** is free forever but with the trade-offs discussed above – limited customization, no identified users, and consent-banner requirements in many jurisdictions.
+
+**Matomo** self-hosted is free (but you pay in server and engineering costs). **Plausible** and **Fathom** both have 30-day free trials but no permanent free tier.
+
+</details>
+
+<details>
+  <summary>Which real-time analytics tool is most privacy-friendly?</summary>
+
+**Plausible** and **Fathom** are both built around privacy-first analytics: no cookies by default, no personal data collected, no consent banner required in most jurisdictions. They're the default recommendation for teams that want analytics without the compliance overhead.
+
+**PostHog** and **Matomo** can both be configured for privacy-friendly operation (cookieless tracking, self-hosting, EU data residency) but require some setup. They're better choices when you need deeper features and are willing to configure them carefully.
+
+**GA4** and **Mixpanel** are both cookie-based by default and typically require a consent banner.
+
+</details>
+
+<details>
+  <summary>Can I self-host a real-time analytics tool?</summary>
+
+Yes. **PostHog**, **Matomo**, and **Plausible** all support self-hosting. Self-hosting gives you full data ownership and can help with compliance, but you pay in server and maintenance costs.
+
+**Mixpanel**, **Fathom**, and **GA4** are all SaaS-only.
+
+For most teams, a managed cloud plan ends up simpler and cheaper once you factor in engineering time. Self-hosting makes sense if you have strict data residency requirements, a dedicated infra team, or very high data volumes.
+
+</details>
+
+<details>
+  <summary>How does PostHog compare to Google Analytics?</summary>
+
+**GA4** is a web and marketing analytics tool, optimized for traffic analysis, ad campaign tracking, and broad audience reporting. It's free and widely adopted, but limited in depth – especially around identified users, custom event analysis, and real-time visibility of specific customers.
+
+**PostHog** is a developer-first product platform with web analytics included. The live dashboard shows you not just aggregate counts but specific users by email. The same data powers [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), and [error tracking](/error-tracking) – so you can go from "this user is on the pricing page right now" to "watch their session" to "ship a fix" in one tool.
+
+For marketing sites, GA4 is fine. For product-led SaaS, PostHog's depth usually wins.
+
+</details>
+
+<details>
+  <summary>How does PostHog compare to Mixpanel?</summary>
+
+Both PostHog and Mixpanel are product analytics platforms with real-time capabilities. The main differences:
+
+- **Pricing model**: PostHog uses transparent, usage-based pricing with a generous free tier (1M events/month). Mixpanel uses Monthly Tracked User (MTU) pricing, which can scale less predictably.
+- **Product scope**: PostHog is a broader developer platform (analytics, replay, feature flags, experiments, error tracking, surveys, LLM observability). Mixpanel is deeper on product analytics specifically but narrower overall.
+- **Open source**: PostHog is open source under the MIT license and can be self-hosted. Mixpanel is closed-source, SaaS-only.
+- **Live data**: Both process events in near-real-time, but PostHog's live activity feed and real-time dashboard are more prominent in the UI.
+
+Choose Mixpanel if product analytics depth is your primary need. Choose PostHog if you want a broader platform and value open source and transparent pricing.
+
+</details>
+
+<details>
+  <summary>Which real-time analytics tool is best for mobile apps?</summary>
+
+**PostHog** has native mobile SDKs for iOS, Android, React Native, and Flutter, with live data flowing to the same dashboard as your web events.
+
+**Mixpanel** has strong mobile analytics with iOS and Android SDKs and mobile-specific features like push notifications and in-app messaging.
+
+**GA4** supports mobile via Firebase, though the real-time view is web-focused.
+
+**Plausible**, **Fathom**, and **Matomo** are primarily web analytics tools; mobile support is either limited or requires custom integration.
+
+</details>
+
+<NewsletterForm />
