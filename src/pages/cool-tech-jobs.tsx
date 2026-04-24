@@ -492,10 +492,8 @@ const CompanyRows = ({
 
             {/* Companies without jobs (moderators only) */}
             {showCompaniesWithoutJobs && companiesWithoutJobs.length > 0 && (
-                <>
-                    <h2 className="text-xl font-semibold text-muted dark:text-secondary mt-12 mb-6">
-                        Companies with no active RootClasses
-                    </h2>
+                <div>
+                    <h2 className="text-xl font-semibold m-0">Companies with no active jobs</h2>
                     <p className="text-secondary">(Only visible to moderators)</p>
                     {companiesWithoutJobs.map((company, index) => {
                         const { name } = company.attributes
@@ -589,7 +587,7 @@ const CompanyRows = ({
                             </div>
                         )
                     })}
-                </>
+                </div>
             )}
 
             {displayCompanies.length === 0 && !isLoading && (
