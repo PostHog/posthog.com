@@ -182,7 +182,7 @@ if (isTestEnv) {
 // Detect test/CI environment
 let isTestEnv = ProcessInfo.processInfo.environment["CI"] != nil
 
-let config = PostHogConfig(apiKey: "<ph_project_token>")
+let config = PostHogConfig(projectToken: "<ph_project_token>")
 
 if isTestEnv {
     config.preloadFeatureFlags = false
