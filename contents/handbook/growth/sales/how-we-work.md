@@ -180,6 +180,7 @@ Here is an illustrative example of how quota calculation works. Let's look at a 
 | (A × B) | Quota Invoice Amt | 1610 | 1540 | 1750 | 2430 | 1960 | 3300 |
 
 For your Q2 quota calculation:
+
 | Metric | Calculation | Result |
 |---|---|---|
 | Q2 Starting ARR | 4 × (1610 + 1540 + 1750) | 19600 |
