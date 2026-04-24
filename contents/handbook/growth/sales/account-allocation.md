@@ -189,6 +189,8 @@ The incoming TAM should prepare by reviewing the following in Vitally and SFDC b
 - [ ] **Usage metrics** – active users, project count, Feature Flag requests, Session Replay volume, insight/dashboard engagement
 - [ ] **Support history** – recent Zendesk tickets, tags, severity, resolution status
 - [ ] **Conversations & notes** – read all Vitally notes, meeting summaries, and conversation history
+- [ ] **Customer Slack channel** – scan the shared channel for who's actually active on the customer side, what issues have come up, and any open threads worth asking the previous owner about. This is often where the most useful context lives.
+- [ ] **Internal Slack discussions** – search our own Slack (outside the shared channel) for mentions of the customer. Engineering debates, pricing conversations, support escalations, and context from the previous owner often surface things that were never written down in Vitally.
 - [ ] **SFDC opportunity** – deal value, stage, next steps, close date
 - [ ] **Admin emails & user list** – identify who's active, who has admin access, what domains are in play
 - [ ] **The customer's product** – sign up or browse their website. Understand what they do and how they make money
