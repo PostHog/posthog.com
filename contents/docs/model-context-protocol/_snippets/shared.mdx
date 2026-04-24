@@ -306,6 +306,46 @@ The agent will use the `conversations-tickets-retrieve` tool to fetch the full t
 
 The agent will use the `conversations-tickets-update` tool to change the status and priority of the specified tickets.
 
+### SDK health diagnostics
+
+**Prompt:** "Are any of my PostHog SDKs outdated?"
+
+The agent will use the `sdk-doctor-get` tool to check SDK health across your project and return a report showing which SDKs need updating, including version details and severity levels.
+
+**Prompt:** "Which SDK versions are most of my events coming from?"
+
+The agent will use `sdk-doctor-get` to retrieve per-version breakdowns with event counts and timestamps, showing which SDK versions are actively sending data.
+
+The `sdk-doctor-get` tool returns an `SdkHealthReport` with this structure:
+
+```json
+{
+  "overall_health": "healthy" | "needs_attention",
+  "health": "success" | "warning" | "danger",
+  "needs_updating_count": 2,
+  "team_sdk_count": 5,
+  "sdks": [
+    {
+      "lib": "posthog-python",
+      "readable_name": "Python",
+      "latest_version": "3.12.0",
+      "needs_updating": true,
+      "severity": "warning",
+      "banners": ["Time for an update!"],
+      "releases": [
+        {
+          "version": "3.10.0",
+          "count": 15420,
+          "released_ago": "3 months ago",
+          "status_reason": "3 minor versions behind",
+          "activity_page_url": "/project/1/activity/explore?..."
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
