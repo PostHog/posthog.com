@@ -334,6 +334,8 @@ Local evaluation is not possible for flags that:
 4. Use the `is_not_set` property operator, since local evaluation can only check properties you provide — it can't determine whether a property is absent on a person.
 5. Use [mixed targeting](/docs/feature-flags/user-and-group-targeting#mixed-targeting) (the "User & Group" match mode), which combines user-level and group-level conditions in a single flag.
 
+> **Note:** This restriction **does not apply** to v7.13.1 and above of our [Python](/docs/libraries/python) SDK, which can evaluate mixed-targeting flags locally when you provide both `person_properties` and `groups` / `group_properties`.
+
 ### Dynamic cohort restrictions
 
 > **Note:** This restriction **does not apply** to our [Go](/docs/libraries/go) SDK, [Rust](/docs/libraries/rust) SDK, v2.6.0 and above of our [Node](/docs/libraries/node) SDK, and to v2.4.0 and above of our [Python](/docs/libraries/python) SDK.
