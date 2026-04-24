@@ -10,6 +10,14 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 <ProxyCallout />
 
+<CalloutBox icon="IconInfo" title="Data transfer costs" type="fyi">
+
+Rewrites route all PostHog traffic – events, session recordings, feature flag polls, and SDK assets – through your Next.js server. On Vercel, this counts toward [Fast Data Transfer and Edge Requests](https://vercel.com/docs/pricing); on other hosts it counts against their bandwidth and compute quotas. Session recordings are the biggest driver (often 1–5 MB per session) and can consume a plan quickly on high-traffic sites.
+
+To avoid these costs, use the [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) (free for PostHog Cloud users) or a provider without egress fees like [Cloudflare Workers](/docs/advanced/proxy/cloudflare).
+
+</CalloutBox>
+
 This guide shows you how to use [Next.js rewrites](https://nextjs.org/docs/app/api-reference/next-config-js/rewrites) as a reverse proxy for PostHog.
 
 <iframe
