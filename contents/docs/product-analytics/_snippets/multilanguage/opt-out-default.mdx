@@ -7,7 +7,7 @@ posthog.init('<ph_project_token>', {
 ```
 
 ```ios_swift        
-let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_client_api_host>")
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
 config.optOut = true
 PostHogSDK.shared.setup(config)
 ```
