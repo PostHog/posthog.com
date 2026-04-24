@@ -47,7 +47,7 @@ He’s since figured out the right visuals, added scroll depth to autocapture, a
 
 The work it took to reach the current beta phase has required skills across the stack.  
 
-> **What to look for:** People who have built products or projects from scratch, done hackathons, have an eye for UX and design, and understand system design.
+> **What to look for:** People who have built products or projects from scratch, done [hackathons](/newsletter/hackathons), have an eye for UX and design, and understand system design.
 
 ## 2. Comfortable writing
 
