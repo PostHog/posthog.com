@@ -82,6 +82,13 @@ Your first week can definitely be a bit overwhelming at any new company, so here
 - You should try and speak to some actual users of your product. Your manager or PM will help you set these up, and this can be a great source of things to work on in your first week.
 - You should dive straight in, fix a typo in the handbook, ship a tiny bug fix, anything to get you going! 
 
+> **If your laptop is delayed:** In rare cases your PostHog-issued laptop may not arrive until several days after your start date. If that happens, you can begin non-sensitive onboarding tasks (reading the handbook, intro calls, etc.) on your personal laptop in the meantime. Treat a personal laptop as less trusted:
+>
+> - Do **not** access production cloud environments (AWS, GCP, etc.) from it.
+> - Do **not** store or handle any secrets on it, including secrets used for local development.
+>
+> Move anything sensitive to your company laptop as soon as it arrives.
+
 ### Engineering
 
 We hire engineers on a regular basis, running in-person onboarding practically every time. Over the years, we've learned a lot about doing this efficiently and there's much to gain from sharing the knowledge between teams.

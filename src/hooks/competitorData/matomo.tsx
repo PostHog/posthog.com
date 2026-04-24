@@ -62,6 +62,14 @@ export const matomo = {
                 },
             },
         },
+        dashboards: {
+            available: true,
+            features: {
+                pre_configured_dashboards: true,
+                custom_dashboard: true,
+                dashboard_sharing: 'Limited',
+            },
+        },
         web_analytics: {
             available: true,
             features: {
