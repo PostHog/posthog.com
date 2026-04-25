@@ -20,7 +20,7 @@ tags:
 
 Every article I read about "AI agents for work" tells me the same things. Clean up my inbox. Summarize my meetings. Draft my emails. Turn rough notes into polished decks. Keep my calendar tidy.
 
-These are all lovely ideas. They are also, almost entirely, a list of low-leverage work that I already don't need help with or don’t want to do even better. 
+These are all lovely ideas. They are also, almost entirely, a list of low-leverage work that I already don't need help with or don’t want to do better. 
 
 I've been using Claude Cowork for a while now. Here's what I've actually found useful, what I haven't, and the single most useful thing it did. Which was telling me what to use it for (wait that bit was supposed to go at the end, oh well.)
 
