@@ -24,7 +24,7 @@ These are all lovely ideas. They are also, almost entirely, a list of low-levera
 
 I've been using Claude Cowork for a while now. Here's what I've actually found useful, what I haven't, and the single most useful thing it did: telling me what to use it for (wait that bit was supposed to go at the end, oh well.)
 
-### tl;dr
+### TL;DR
 
 1. Generic "top AI use cases" listicles are written for someone whose job is not your job. Don't copy them.  
 2. The highest-leverage thing you can do is ask the agent to come up with use cases for *your* work.  
@@ -55,7 +55,7 @@ Two of my favorite scheduled tasks came directly out of that conversation.
 
 ### 1. Coherence check
 
-Every Monday at 08:08 London time, Cowork pulls the quarterly objectives for every [small team](/newsletter/small-teams) (about fifty of them) from the website repo on GitHub. Then it reads them all in one pass, looking for the stuff you only spot when you actually have every plan in your head at the same time: two teams using the word "activation" to mean different things, Team A's plan assuming Team B will ship something that Team B has not committed to, two teams pulling in opposite directions on the same metric, objectives still labelled Q1 in late April. 
+Every Monday at 08:08 London time, Cowork pulls the quarterly objectives for every [small team](/newsletter/small-teams) (about fifty of them) from the website repo on GitHub. Then it reads them all in one pass, looking for the stuff you only spot when you actually have every plan in your head at the same time: two teams using the word "activation" to mean different things, Team A's plan assuming Team B will ship something that Team B has not committed to, two teams pulling in opposite directions on the same metric, objectives still labeled Q1 in late April. 
 
 It posts a list to a private Slack channel, grouped by the person who owns each team. If nothing's worth flagging, it doesn't post at all. This work is the kind of cross-org program management that you basically pay executives fabulous amounts of money to do.
 
@@ -306,4 +306,4 @@ Not bad at reading my calendar, occasionally used by scheduling-related tasks. I
 
 ### Google Drive
 
-Included for completeness. Reading files is *fine* - the push-harder ritual reads the sales and marketing growth review sheets every Monday. Anything involving Docs formatting or Drive organisation is currently a mess. I tried getting Docs to actually update my 1-1 docs and it was comically inept.
+Included for completeness. Reading files is *fine* - the push-harder ritual reads the sales and marketing growth review sheets every Monday. Anything involving Docs formatting or Drive organization is currently a mess. I tried getting Docs to actually update my 1-1 docs and it was comically inept.
