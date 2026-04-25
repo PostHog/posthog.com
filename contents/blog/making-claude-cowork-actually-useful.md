@@ -124,7 +124,7 @@ I’m sure all of this stuff will get better. I’ve gone from ‘what’s an MC
 
 I'm excited about where this goes. The whole ‘ask the robot how to use it’ and then scheduling tasks taken together has taken me from messing about and [creating slop](/blog/stop-ai-slop) to genuinely deriving value from AI tools. As PostHog grows, I’m already finding Cowork helps me keep on top of what’s going on without feeling like we need to impose more structure or project management to get things done. 
 
-I also think a lot of the early disappointment people have with agents is the "help me with my inbox" type stuff, where you’re getting the agent to do some low leverage task that is also hard to get right because the bar is "exactly how I would have done it, but faster." The bar is much easier to clear when the task is "do something I wasn't doing at all."
+I also think a lot of the early disappointment people have [with agents](/newsletter/building-ai-agents) is the "help me with my inbox" type stuff, where you’re getting the agent to do some low leverage task that is also hard to get right because the bar is "exactly how I would have done it, but faster." The bar is much easier to clear when the task is "do something I wasn't doing at all."
 
 My advice, if you're trying Cowork:
 
