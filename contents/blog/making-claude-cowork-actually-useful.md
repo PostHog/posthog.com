@@ -110,7 +110,7 @@ Later in the week:
 
 ## Where it still falls over
 
-Lots of things! But I’m 80% sure the models will just keep getting better and better. 
+Lots of things! But I’m 80% sure the models will just keep getting better.
 
 * **Writing.** For anything where voice *really* matters - brand-type blog posts, giving feedback, real emails/DMs - it's still faster and better for me to brain-type or dictate. I had Cowork help on a draft of this piece and the overall structure, and then spent a bunch of time rewriting 80% of it. I have a writing style skill that I’m working on here.   
   * I also believe that the implied social contract of ‘it should take the writer much more time to create something than the reader to read it’ will continue to hold.   
@@ -274,7 +274,7 @@ If the scheduled tasks are the output layer and the memory files are the context
 
 ### PostHog MCP
 
-The one that changes what's possible. When I ask "how's ARR looking this week?" Cowork runs actual SQL against our PostHog data warehouse, pulls live numbers, and hands them back.
+The one that changes what's possible. When I ask "how's ARR looking this week?" Cowork runs actual SQL against [our data warehouse](/data-stack), pulls live numbers, and hands them back.
 
 I also use it for customer lookups. I route "who's the TAM for [customer]?" through the PostHog MCP because we keep [Vitally synced into our warehouse](/docs/cdp/sources/vitally). Every customer question Cowork answers starts with an `execute-sql` call against that data.
 
