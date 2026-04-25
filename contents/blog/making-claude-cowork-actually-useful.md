@@ -37,7 +37,7 @@ I’ve also shared some of my scheduled tasks, in full, at the end of this post 
 
 ## Most AI agent advice is written for someone else's job
 
-When I started with Cowork I did the dutiful thing and read the "top use cases" posts. The advice was always a variation on the same list: inbox triage, meeting notes, polished drafts, calendar wrangling, create a PRD etc.
+When I started with Cowork, I did the dutiful thing and read the "top use cases" posts. The advice was always a variation on the same list: inbox triage, meeting notes, polished drafts, calendar wrangling, create a PRD, etc.
 
 The problem: I am already a fast reader and typer. I’ve been inbox zero since 2013. I’m now able to dictate with Wispr Flow at roughly the speed of thought (which is wrecking my WPM). The ambient chore of just reading stuff is kinda where I figure out what I think about things. Hand-typing or dictating is *still* faster and better for me than handing a draft off to an agent and shepherding the output back into something I'd put my name to.
 
