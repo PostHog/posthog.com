@@ -1,5 +1,5 @@
 ---
-date: "2025-04-24"
+date: "2026-04-24"
 title: Making Claude Cowork actually useful
 author:
   - charles-cook
@@ -24,7 +24,7 @@ These are all lovely ideas. They are also, almost entirely, a list of low-levera
 
 I've been using Claude Cowork for a while now. Here's what I've actually found useful, what I haven't, and the single most useful thing it did: telling me what to use it for (wait that bit was supposed to go at the end, oh well.)
 
-**tl;dr**
+### tl;dr
 
 1. Generic "top AI use cases" listicles are written for someone whose job is not your job. Don't copy them.  
 2. The highest-leverage thing you can do is ask the agent to come up with use cases for *your* work.  
@@ -51,7 +51,7 @@ The single most useful hour I spent with Cowork was asking it to help me figure 
 
 I started by complaining about the things I don’t want to use it for. I then gave it a bunch of context about me (more later) and what I’m *already* doing in a typical week, rather than what aspirationally I think I should be doing. The suggestions were much better than anything I'd have come up with on my own. 
 
-Two of my favourite scheduled tasks came directly out of that conversation.
+Two of my favorite scheduled tasks came directly out of that conversation.
 
 ### 1. Coherence check
 
@@ -59,9 +59,9 @@ Every Monday at 08:08 London time, Cowork pulls the quarterly objectives for eve
 
 It posts a list to a private Slack channel, grouped by the person who owns each team. If nothing's worth flagging, it doesn't post at all. This work is the kind of cross-org program management that you basically pay executives fabulous amounts of money to do.
 
-### 2. Push-harder Monday ritual
+### 2. "Push harder" Monday ritual
 
-Also Monday, also before I open my laptop. Cowork pulls current PostHog metrics via [our own MCP](/docs/model-context-protocol), reads the growth review sheets from the sales and marketing teams, and scans the last 7 days of the main GTM channels in Slack. Then it generates 3–5 aggressive growth bets that I might not have considered. 
+Also Monday, before I open my laptop, Cowork pulls current PostHog metrics via [our own MCP](/docs/model-context-protocol), reads the growth review sheets from the sales and marketing teams, and scans the last 7 days of the main GTM channels in Slack. Then it generates 3–5 aggressive growth bets that I might not have considered. 
 
 Each bet has to name the “sacred cow” being sacrificed (CAC payback, margin, attribution clarity, brand consistency- pick one), rough size, a concrete first move with the person who'd own it, how we'd know to kill it, and a one-line rebuttal to the predictable frugal objection. The prompt literally says *"hype man, not McKinsey"* and *"most spicy first."* 
 
@@ -136,7 +136,7 @@ My advice, if you're trying Cowork:
 
 ---
 
-## Reference - tasks you can steal (Cowork wrote this bit for me!)
+## Reference: tasks you can steal
 
 Below are simplified versions of three of the scheduled tasks I mentioned above. The originals have a lot of PostHog-specific detail in them (team names, Slack channel IDs, direct report GitHub handles, our growth sheets); these versions have been trimmed to the pattern so you can adapt them to your own setup.
 
@@ -176,7 +176,7 @@ no --- dividers, keep under ~2000 chars. Lead with the 1–3 items to act on fir
 If there is nothing material to flag, do NOT post. Silence is correct.
 ```
 
-### 2. Push-harder Monday ritual — weekly
+### 2. "Push harder" Monday ritual — weekly
 
 **Frequency:** Monday morning. **Gets you:** 3–5 aggressive growth bets designed to push against your own defaults.
 
