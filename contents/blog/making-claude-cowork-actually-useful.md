@@ -53,8 +53,11 @@ I started by complaining about the things I don’t want to use it for. I then g
 
 Two of my favourite scheduled tasks came directly out of that conversation.
 
-### Coherence check
-Every Monday at 08:08 London time, Cowork pulls the quarterly objectives for every Small Team at PostHog (about fifty of them) from the website repo on GitHub. Then it reads them all in one pass, looking for the stuff you only spot when you actually have every plan in your head at the same time: two teams using the word "activation" to mean different things, Team A's plan assuming Team B will ship something that Team B has not committed to, two teams pulling in opposite directions on the same metric, objectives still labelled Q1 in late April. It posts a list to a private Slack channel, grouped by the person who owns each team. If nothing's worth flagging, it doesn't post at all. This is the kind of cross-org program management that you basically pay executives fabulous amounts of money to do.
+### 1. Coherence check
+
+Every Monday at 08:08 London time, Cowork pulls the quarterly objectives for every [small team](/newsletter/small-teams) (about fifty of them) from the website repo on GitHub. Then it reads them all in one pass, looking for the stuff you only spot when you actually have every plan in your head at the same time: two teams using the word "activation" to mean different things, Team A's plan assuming Team B will ship something that Team B has not committed to, two teams pulling in opposite directions on the same metric, objectives still labelled Q1 in late April. 
+
+It posts a list to a private Slack channel, grouped by the person who owns each team. If nothing's worth flagging, it doesn't post at all. This work is the kind of cross-org program management that you basically pay executives fabulous amounts of money to do.
 
 ### Push-harder Monday ritual.
 Also Monday, also before I open my laptop. Cowork pulls current PostHog metrics via our own MCP, reads the growth review sheets from the sales and marketing teams, and scans the last 7 days of the main GTM channels in Slack. Then it generates 3–5 aggressive growth bets that I might not have considered. Each bet has to name the “sacred cow” being sacrificed (CAC payback, margin, attribution clarity, brand consistency- pick one), rough size, a concrete first move with the person who'd own it, how we'd know to kill it, and a one-line rebuttal to the predictable frugal objection. The prompt literally says *"hype man, not McKinsey"* and *"most spicy first."* I don't take all of the bets seriously. I take about one in five, which is roughly the hit rate I want, adapting as needed. I then copy and paste my favorite to the relevant team and pretend I came up with it myself. 
