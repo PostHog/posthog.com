@@ -77,10 +77,10 @@ Out of the box, an agent knows nothing about you. It doesn't know Joe runs the M
 
 My setup lives under `~/Documents/Claude/Memory/`:
 
-* **CLAUDE.md** is the index. Who I am, my direct reports (with GitHub handles and Slack IDs), current focus areas, standing preferences ("Meeting Free Tuesday — protect for deep work"), and a map pointing to everything else.  
-* **glossary.md** explains stuff to Cowork. Every PostHog-specific acronym (NRR, TAM, MCP), every Slack channel that matters. When someone pings me "TAM coverage proposal status?", the agent knows TAM = Technical Account Manager at PostHog, not total addressable market. It also knows that when I refer to James, I’m probably talking about James Hawkins not James Greenhill (sorry Jams).   
-* **people/[name].md** — one file per person I work closely with. What they own, how they want to be managed, what I've learned about working with them. This is the bit that helps Cowork help me prep for things like 1-1s.   
-* **context/company.md, context/handbook/, context/exec-responsibilities.md** — how the org actually works. Which exec owns which Small Teams. The current quarterly goals. How the handbook's structured and where to find what. (Side note - having a public handbook that consists entirely of .md files is awesome for this!)
+* `CLAUDE.md` is the index. Who I am, my direct reports (with GitHub handles and Slack IDs), current focus areas, standing preferences ("Meeting Free Tuesday — protect for deep work"), and a map pointing to everything else.  
+* `glossary.md` explains stuff to Cowork. Every PostHog-specific acronym (NRR, TAM, MCP), every Slack channel that matters. When someone pings me "TAM coverage proposal status?", the agent knows TAM = Technical Account Manager at PostHog, not total addressable market. It also knows that when I refer to James, I’m probably talking about James Hawkins not James Greenhill (sorry Jams).   
+* `people/[name].md` – one file per person I work closely with. What they own, how they want to be managed, what I've learned about working with them. This is the bit that helps Cowork help me prep for things like 1-1s.   
+* `context/company.md`, `context/handbook/`, `context/exec-responsibilities.md` – how the org actually works. Which exec owns which small teams. The current quarterly goals. How the handbook's structured and where to find what. (Side note – having a [public handbook](/handbook) that consists entirely of `.md` files is awesome for this!)
 
 To keep the context fresh, I have a bunch of scheduled tasks running, which all started with a prompt like ‘ok so how are you keeping this up to date’:
 
