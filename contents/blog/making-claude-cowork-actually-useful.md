@@ -17,7 +17,6 @@ tags:
 - People
 ---
 
-## Making Claude Cowork actually useful
 
 Every article I read about "AI agents for work" tells me the same things. Clean up my inbox. Summarize my meetings. Draft my emails. Turn rough notes into polished decks. Keep my calendar tidy.
 
