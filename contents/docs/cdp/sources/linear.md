@@ -22,3 +22,7 @@ To link Linear:
 4. Select the tables you want to sync and modify the method and frequency as needed. Once done, click **Import**.
 
 Once the syncs are complete, you can start using Linear data in PostHog.
+
+## Configuration
+
+<SourceParameters />

@@ -43,3 +43,7 @@ Find the newly created file via the storage browser menu item. Once found, open 
 ![linking your data in posthog](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_15_at_18_10_06_f93fadf82b.png)
 
 That's it! You should be able to query the data from the PostHog SQL editor.
+
+## Configuration
+
+<SourceParameters />

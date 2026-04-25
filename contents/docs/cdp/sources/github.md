@@ -35,3 +35,7 @@ To link GitHub:
 
 Once the syncs are complete, you can start using GitHub data in PostHog.
 
+## Configuration
+
+<SourceParameters />
+

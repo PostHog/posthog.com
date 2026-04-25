@@ -35,6 +35,10 @@ The data warehouse then starts syncing your ClickHouse data. You can see details
 
 > **Permissions:** The ClickHouse source only requires read permissions on the database and tables you intend to sync, plus read access to `system.tables` and `system.columns` for schema discovery.
 
+## Configuration
+
+<SourceParameters />
+
 ## Supported table engines
 
 PostHog can sync data from any ClickHouse table engine, but row counts are only available for engines that track them:

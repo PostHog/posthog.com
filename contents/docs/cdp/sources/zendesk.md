@@ -21,3 +21,7 @@ To link Zendesk:
 6. Click **Next**
 
 The data warehouse then starts syncing your Zendesk data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
+
+## Configuration
+
+<SourceParameters />

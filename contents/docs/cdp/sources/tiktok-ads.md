@@ -42,3 +42,7 @@ Connect PostHog to your TikTok Ads account. The TikTok account must have permiss
 4. Enter the **Account ID** of the Tiktok Ads account you want to sync.
 5. Select an existing TikTok Ads account, or create a new integration.
 6. (Optional) Add a prefix for the table name.
+
+## Configuration
+
+<SourceParameters />

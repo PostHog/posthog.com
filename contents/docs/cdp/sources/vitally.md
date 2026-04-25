@@ -24,3 +24,7 @@ To link Vitally:
 5. On the next page, set up the schemas you want to sync and modify the method and frequency as needed. Once done, click **Import**.
 
 Once the syncs are complete, you can start using Vitally data in PostHog.
+
+## Configuration
+
+<SourceParameters />

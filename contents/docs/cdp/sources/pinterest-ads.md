@@ -36,3 +36,7 @@ Connect PostHog to your Pinterest Ads account. The Pinterest account must have p
 4. Enter the **Ad Account ID** of the Pinterest Ads account you want to sync.
 5. Select an existing Pinterest Ads account, or create a new integration.
 6. (Optional) Add a prefix for the table name.
+
+## Configuration
+
+<SourceParameters />
