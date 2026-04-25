@@ -1,13 +1,90 @@
 ---
-title: Inbox
+title: Getting started with Inbox
 sidebar: Docs
 showTitle: true
 ---
 
-<!--
-Scratch notes
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
 
-  Content and priority in the list likely depend on Signals readiness.
--->
+PostHog **Inbox** is your command center for self-driving development. It uses signals from your production data – like error spikes, user complaints, and session anomalies – to automatically research issues, write code fixes, and open pull requests.
 
-pepe
+Instead of reactive firefighting, Inbox moves your workflow to a "proactive merging" model where AI agents do the heavy lifting of investigation and implementation.
+
+<QuestLog firstSpeechBubble="Let's set up your self-driving command center!" lastSpeechBubble="Your Inbox is ready. Time to start merging!">
+
+<QuestLogItem
+    title="Connect your Signal Sources"
+    subtitle="Required"
+    icon="IconPlug"
+>
+
+  Inbox identifies work by monitoring "Signals." To get started, you need to connect the sources where your product data and user feedback live.
+
+  - **Internal:** Enable [Error Tracking](/docs/error-tracking), [Support Conversations](/docs/support), and [Session Replay](/docs/session-replay).
+  - **External:** Connect your [GitHub Issues, Linear, or Zendesk](/docs/posthog-code/inbox-sources) accounts.
+
+  <OSButton variant="primary" asLink to="/docs/posthog-code/inbox-sources">
+    Configure sources
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Triage actionable reports"
+    subtitle="Required"
+    icon="IconTerminal"
+>
+
+  Once sources are connected, Inbox clusters signals into **Reports**. Each report is automatically ranked by:
+  
+  - **Priority (P0-P3):** Determined by the impact on user flow and code importance.
+  - **Actionability:** Marked as "Actionable" if an agent has found a clear path to a fix.
+
+  Review your first report to see the root cause analysis and the proposed resolution logic.
+
+  <OSButton variant="primary" asLink to="/docs/posthog-code/inbox-triage">
+    Learn about prioritization
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Audit Agent Research"
+    subtitle="Recommended"
+    icon="IconMagnifyingGlass"
+>
+
+  For actionable reports, an AI agent automatically performs a **Research Task**. It uses the [Model Context Protocol (MCP)](/docs/ai-engineering/mcp) to search your codebase and identify the exact lines of code causing the issue.
+
+  You can audit the agent's logs to see exactly how it navigated your repo and reached its conclusions.
+
+  <OSButton variant="primary" asLink to="/docs/posthog-code/inbox-research">
+    See how agents research
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Merge your first PR"
+    subtitle="The Goal"
+    icon="IconRocket"
+>
+
+  When research is complete, the agent executes an **Implementation Task**: cloning your repo, creating a branch, and opening a GitHub PR.
+
+  Each PR includes an AI-generated description of the problem and the change. Your job is simply to review the code in GitHub and click **Merge**.
+
+  <OSButton variant="primary" asLink to="/docs/posthog-code/inbox-research#implementation-tasks">
+    Review the PR workflow
+  </OSButton>
+
+</QuestLogItem>
+
+</QuestLog>
+
+## Next steps
+
+- Explore [how prioritization works](/docs/posthog-code/inbox-triage) to focus on what matters.
+- Deep dive into [Agent Research](/docs/posthog-code/inbox-research) to understand the "self-driving" engine.
+- If you run into issues, check the [troubleshooting guide](/docs/posthog-code/inbox-troubleshooting).
