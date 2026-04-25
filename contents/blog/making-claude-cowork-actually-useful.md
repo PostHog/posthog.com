@@ -88,7 +88,7 @@ To keep the context fresh, I have a bunch of scheduled tasks running, which all 
 * **Weekly company-details sync.** Pulls the latest legal/finance/entity data from a Google Sheet into the memory file, so when I ask about the German entity I get current numbers, not something from February.  
 * **Weekly handbook sync.** Grabs fresh versions of the handbook's root pages from the website repo.  
 * **Weekly Blitzscale ownership refresh.** Re-reads [the handbook](/handbook/exec/responsibilities) to work out which exec is currently responsible for which teams. This is what powers the "group by owner" bit of the coherence check - this matters because we change stuff around a bunch at PostHog.   
-* **Monthly memory refresh**. Every month I write a GitHub issue called "Things Charles cares about" that lists my current priorities. On the 8th, a task reads that issue and updates CLAUDE.md. The issue is the only place I write my monthly priorities down for the whole company to see.
+* **Monthly memory refresh**. Every month I write a GitHub issue called "Things Charles cares about" that lists my current priorities. On the 8th, a task reads that issue and updates `CLAUDE.md`. The issue is the only place I write my monthly priorities down for the whole company to see.
 
 The effect is that when I open Cowork on a random Tuesday morning and ask "who's the TAM for blah?", the agent already knows that it's a customer lookup, that Vitally is the source of truth, what our data model looks like etc. Without the context layer, it has to ask me clarifying questions every single time, or make random wrong assumptions. 
 
