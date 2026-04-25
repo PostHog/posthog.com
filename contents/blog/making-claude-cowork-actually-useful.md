@@ -1,5 +1,5 @@
 ---
-date: "2025-04-27"
+date: "2025-04-24"
 title: Making Claude Cowork actually useful
 author:
   - charles-cook
