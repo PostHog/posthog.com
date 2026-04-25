@@ -1,5 +1,5 @@
+import Markdown from 'components/Squeak/components/Markdown'
 import React from 'react'
-import PipelineConfiguration from '../Pipelines/Configuration'
 
 interface SourceField {
     name?: string | null
@@ -17,13 +17,69 @@ export default function SourceConfiguration({
 }): JSX.Element | null {
     if (!sourceFields?.length) return null
 
-    const inputs_schema = sourceFields.map((field) => ({
-        key: field.name,
-        label: field.label,
-        type: field.type,
-        required: field.required,
-        description: field.caption,
-    }))
+    const hasCaption = sourceFields.some((field) => field.caption)
 
-    return <PipelineConfiguration inputs_schema={inputs_schema} />
+    if (hasCaption) {
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {sourceFields.map((field) => (
+                        <tr key={field.name}>
+                            <td>
+                                <div className="mb-6 w-40">
+                                    <code className=" dark:text-white bg-accent-light text-inherit p-1 rounded !whitespace-normal">
+                                        {field.label || field.name}
+                                    </code>
+                                </div>
+
+                                {field.type && (
+                                    <div>
+                                        <strong>Type: </strong>
+                                        <span>{field.type}</span>
+                                    </div>
+                                )}
+
+                                <div>
+                                    <strong>Required: </strong>
+                                    <span>{field.required ? 'True' : 'False'}</span>
+                                </div>
+                            </td>
+                            <td>{field.caption ? <Markdown>{field.caption}</Markdown> : null}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        )
+    }
+
+    return (
+        <table>
+            <thead>
+                <tr>
+                    <th>Option</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                </tr>
+            </thead>
+            <tbody>
+                {sourceFields.map((field) => (
+                    <tr key={field.name}>
+                        <td>
+                            <code className=" dark:text-white bg-accent-light text-inherit p-1 rounded !whitespace-normal">
+                                {field.label || field.name}
+                            </code>
+                        </td>
+                        <td>{field.type || '—'}</td>
+                        <td>{field.required ? 'Yes' : 'No'}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    )
 }
