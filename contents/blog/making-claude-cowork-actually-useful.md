@@ -271,7 +271,7 @@ If the scheduled tasks are the output layer and the memory files are the context
 
 The one that changes what's possible. When I ask "how's ARR looking this week?" Cowork runs actual SQL against our PostHog data warehouse, pulls live numbers, and hands them back.
 
-I also use it for customer lookups. I route "who's the TAM for [customer]?" through the PostHog MCP because we keep Vitally synced into our warehouse. Every customer question Cowork answers starts with an `execute-sql` call against that data.
+I also use it for customer lookups. I route "who's the TAM for [customer]?" through the PostHog MCP because we keep [Vitally synced into our warehouse](/docs/cdp/sources/vitally). Every customer question Cowork answers starts with an `execute-sql` call against that data.
 
 ### GitHub MCP
 
