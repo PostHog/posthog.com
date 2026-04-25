@@ -59,8 +59,13 @@ Every Monday at 08:08 London time, Cowork pulls the quarterly objectives for eve
 
 It posts a list to a private Slack channel, grouped by the person who owns each team. If nothing's worth flagging, it doesn't post at all. This work is the kind of cross-org program management that you basically pay executives fabulous amounts of money to do.
 
-### Push-harder Monday ritual.
-Also Monday, also before I open my laptop. Cowork pulls current PostHog metrics via our own MCP, reads the growth review sheets from the sales and marketing teams, and scans the last 7 days of the main GTM channels in Slack. Then it generates 3–5 aggressive growth bets that I might not have considered. Each bet has to name the “sacred cow” being sacrificed (CAC payback, margin, attribution clarity, brand consistency- pick one), rough size, a concrete first move with the person who'd own it, how we'd know to kill it, and a one-line rebuttal to the predictable frugal objection. The prompt literally says *"hype man, not McKinsey"* and *"most spicy first."* I don't take all of the bets seriously. I take about one in five, which is roughly the hit rate I want, adapting as needed. I then copy and paste my favorite to the relevant team and pretend I came up with it myself. 
+### 2. Push-harder Monday ritual
+
+Also Monday, also before I open my laptop. Cowork pulls current PostHog metrics via [our own MCP](/docs/model-context-protocol), reads the growth review sheets from the sales and marketing teams, and scans the last 7 days of the main GTM channels in Slack. Then it generates 3–5 aggressive growth bets that I might not have considered. 
+
+Each bet has to name the “sacred cow” being sacrificed (CAC payback, margin, attribution clarity, brand consistency- pick one), rough size, a concrete first move with the person who'd own it, how we'd know to kill it, and a one-line rebuttal to the predictable frugal objection. The prompt literally says *"hype man, not McKinsey"* and *"most spicy first."* 
+
+I don't take all of the bets seriously. I take about one in five, which is roughly the hit rate I want, adapting as needed. I then copy and paste my favorite to the relevant team and pretend I came up with it myself. 
 
 I also periodically ask Cowork to check its own setup! “Where are you getting that from?” or “What context do you have on blah?”. This works surprisingly well - often Cowork will tell me about things like duplicate or stale files, and then suggest a solution. 
 
