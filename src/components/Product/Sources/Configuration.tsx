@@ -33,7 +33,7 @@ export default function SourceConfiguration({
                         <tr key={field.name}>
                             <td>
                                 <div className="mb-6 w-40">
-                                    <code className=" dark:text-white bg-accent-light text-inherit p-1 rounded !whitespace-normal">
+                                    <code className=" dark:text-white bg-accent text-inherit p-1 rounded !whitespace-normal">
                                         {field.label || field.name}
                                     </code>
                                 </div>
@@ -71,7 +71,7 @@ export default function SourceConfiguration({
                 {sourceFields.map((field) => (
                     <tr key={field.name}>
                         <td>
-                            <code className=" dark:text-white bg-accent-light text-inherit p-1 rounded !whitespace-normal">
+                            <code className=" dark:text-white bg-accent text-inherit p-1 rounded !whitespace-normal">
                                 {field.label || field.name}
                             </code>
                         </td>
