@@ -1,0 +1,168 @@
+---
+title: Bot detection
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+PostHog can detect and classify bot traffic hitting your website or API.
+This works by matching the user agent string of each event against a curated list of over 100 known bot patterns, including AI crawlers, search engines, SEO tools, and monitoring services.
+
+> **Note:** Bot detection is currently in beta and available behind the **Web analytics bot analysis** feature flag.
+
+## How it works
+
+Bot classification runs at query time using [HogQL expressions](/docs/sql/expressions).
+When you query events with bot virtual properties, PostHog matches the event's user agent against all known bot patterns in a single pass using efficient regex matching.
+
+The system checks `$raw_user_agent` first (set by server-side SDKs), falling back to `$user_agent` (set by the JavaScript SDK).
+Events with no user agent are classified as **Automation**.
+
+## Traffic types
+
+Every event is classified into one of four traffic types:
+
+| Traffic type | Description | Examples |
+|---|---|---|
+| **Regular** | Normal human visitors | Chrome, Safari, Firefox |
+| **AI Agent** | AI-related crawlers, search bots, and assistants | GPTBot, ClaudeBot, PerplexityBot |
+| **Bot** | Traditional crawlers and monitoring | Googlebot, Bingbot, AhrefsBot |
+| **Automation** | HTTP clients, headless browsers, and events with no user agent | curl, Puppeteer, HeadlessChrome |
+
+## Bot categories
+
+Within each traffic type, bots are further classified into categories:
+
+| Category | Traffic type | Description | Examples |
+|---|---|---|---|
+| `ai_crawler` | AI Agent | Training data collection | GPTBot, ClaudeBot, Google-Extended |
+| `ai_search` | AI Agent | AI-powered search results | OAI-SearchBot, Claude-SearchBot, Applebot |
+| `ai_assistant` | AI Agent | Real-time user-facing AI | ChatGPT-User, Claude-User, Perplexity-User |
+| `search_crawler` | Bot | Traditional search engines | Googlebot, Bingbot, Baidu |
+| `seo_crawler` | Bot | SEO analysis tools | AhrefsBot, SemrushBot, Majestic |
+| `social_crawler` | Bot | Social media preview crawlers | Facebook, Twitter, LinkedIn, Slack |
+| `monitoring` | Bot | Uptime and health monitoring | Pingdom, UptimeRobot, Datadog |
+| `http_client` | Automation | HTTP client libraries | curl, wget, Python requests, axios |
+| `headless_browser` | Automation | Automated browsers | HeadlessChrome, Puppeteer, Playwright |
+| `no_user_agent` | Automation | Empty or missing user agent | — |
+
+## Virtual properties
+
+Bot detection exposes five virtual properties on the `events` table.
+These are computed at query time and can be used in filters, breakdowns, and HogQL queries.
+
+| Property | Type | Description |
+|---|---|---|
+| `$virt_is_bot` | Boolean | `true` if the event is from a bot, AI agent, or automation |
+| `$virt_traffic_type` | String | One of `Regular`, `AI Agent`, `Bot`, `Automation` |
+| `$virt_traffic_category` | String | Subcategory like `ai_crawler`, `search_crawler`, etc. |
+| `$virt_bot_name` | String | Display name of the bot (e.g., `Googlebot`, `GPTBot`) or empty string |
+| `$virt_bot_operator` | String | Company operating the bot (e.g., `Google`, `OpenAI`) or empty string |
+
+### Using virtual properties in filters
+
+You can use these properties to filter any web analytics query.
+For example, to exclude all bot traffic from a trends query, add a filter where `$virt_is_bot` equals `false`.
+
+To filter for a specific category of bots, use `$virt_traffic_category` with the category value (e.g., `ai_crawler`).
+
+## HogQL functions
+
+For advanced use cases, PostHog provides HogQL functions for bot classification.
+These are experimental and prefixed with `__preview_`.
+
+| Function | Returns | Description |
+|---|---|---|
+| `__preview_isBot(user_agent)` | Boolean | Whether the user agent matches a known bot |
+| `__preview_getTrafficType(user_agent)` | String | `Regular`, `AI Agent`, `Bot`, or `Automation` |
+| `__preview_getTrafficCategory(user_agent)` | String | Subcategory (e.g., `ai_crawler`, `search_crawler`) |
+| `__preview_getBotName(user_agent)` | String | Bot display name or empty string |
+| `__preview_getBotOperator(user_agent)` | String | Bot operator company or empty string |
+
+### Example: count bot vs regular traffic
+
+```sql
+SELECT
+    __preview_getTrafficType(properties.$user_agent) AS traffic_type,
+    count() AS events
+FROM events
+WHERE timestamp >= now() - INTERVAL 7 DAY
+GROUP BY traffic_type
+ORDER BY events DESC
+```
+
+### Example: top AI crawlers by request count
+
+```sql
+SELECT
+    __preview_getBotName(properties.$user_agent) AS bot_name,
+    __preview_getBotOperator(properties.$user_agent) AS operator,
+    count() AS requests
+FROM events
+WHERE timestamp >= now() - INTERVAL 7 DAY
+    AND __preview_getTrafficCategory(properties.$user_agent) = 'ai_crawler'
+GROUP BY bot_name, operator
+ORDER BY requests DESC
+LIMIT 20
+```
+
+## Bot analytics tab
+
+When the bot analysis feature flag is enabled, a **Bot analytics** tab appears in [web analytics](/docs/web-analytics/dashboard).
+It shows:
+
+- **Requests over time** — trends chart with breakdowns by crawler, category, or host
+- **Crawlers table** — all detected bots with request counts and last-seen timestamps
+- **Most crawled paths** — which pages bots visit most
+- **Bot detail page** — click any crawler name to see its individual trends and top paths
+
+## Server-side bot detection with `$http_log`
+
+Most bots don't execute JavaScript, which means the PostHog JavaScript SDK never fires a `$pageview` event for them.
+To capture this traffic, you need server-side log ingestion using `$http_log` events.
+
+`$http_log` events are HTTP access log entries sent to PostHog from your web server, CDN, or edge network.
+They include the raw user agent string, which PostHog's bot detection can classify.
+
+### How to send `$http_log` events
+
+There are two main approaches:
+
+1. **Vercel log drain** — use the [Vercel logs CDP integration](https://us.posthog.com/pipeline/new/destination) to forward access logs from Vercel to PostHog automatically.
+
+2. **Custom CDN logger** — send HTTP access logs from your CDN or reverse proxy using the PostHog capture API. Each log entry should be sent as a `$http_log` event with the `$user_agent` or `$raw_user_agent` property set.
+
+Example payload for the [capture API](/docs/api/capture):
+
+```json
+{
+    "api_key": "your-project-api-key",
+    "event": "$http_log",
+    "distinct_id": "server-log",
+    "properties": {
+        "$raw_user_agent": "Mozilla/5.0 (compatible; GPTBot/1.2; +https://openai.com/gptbot)",
+        "$current_url": "https://yoursite.com/blog/hello-world",
+        "$pathname": "/blog/hello-world",
+        "status_code": 200,
+        "method": "GET"
+    }
+}
+```
+
+Once `$http_log` events are flowing, bot analytics automatically includes them alongside `$pageview` and `$screen` events.
+
+## Client-side bot blocking
+
+Separately from server-side bot detection, the PostHog JavaScript SDK blocks known bot user agents from sending events at all.
+This prevents bots that _do_ execute JavaScript from polluting your analytics data.
+
+You can see the blocked list on [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/blocked-uas.ts).
+To block additional user agents, set the `custom_blocked_useragents` [config option](/docs/libraries/js/config).
+
+## Bot definitions
+
+The full list of bot patterns is maintained in the [PostHog source code](https://github.com/PostHog/posthog/blob/master/posthog/hogql_queries/web_analytics/bot_definitions.py).
+Contributions are welcome — if you know of a bot that should be detected, open a pull request.

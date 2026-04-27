@@ -3738,6 +3738,16 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Bot detection',
+                    url: '/docs/web-analytics/bot-detection',
+                    icon: 'IconRobot',
+                    color: 'yellow',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                    },
+                },
+                {
                     name: 'Marketing analytics',
                     url: '/docs/web-analytics/marketing-analytics',
                     icon: 'IconGraph',
