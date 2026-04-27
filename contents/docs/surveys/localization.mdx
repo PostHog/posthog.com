@@ -18,7 +18,7 @@ When a survey renders, PostHog determines the user's language through a priority
 
 1. **`override_display_language` config** – Explicit language set in SDK configuration
 2. **Person property `language`** – Language set via `posthog.identify()` or person profile
-3. **Browser locale** – The user's `navigator.language` setting
+3. **User locale** – On web, this is the browser's `navigator.language` setting. On React Native, this is the device locale.
 
 If no translation matches the detected language, the survey displays in its default language.
 
@@ -62,14 +62,15 @@ When determining which translation to use, PostHog checks in this order:
 
 ## Language overrides
 
-By default, PostHog uses the user's browser language to determine which translation to show. You can override this in two ways.
+By default, PostHog uses the user's locale (browser language on web, device locale on React Native) to determine which translation to show. You can override this in two ways.
 
 ### SDK configuration
 
-Set the `override_display_language` option when initializing PostHog or at runtime:
+Set the `override_display_language` option when initializing PostHog:
+
+**Web:**
 
 ```js
-// Set at initialization
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
     override_display_language: 'es',
@@ -81,7 +82,16 @@ posthog.set_config({
 })
 ```
 
-This option is shared with [Product Tours](/docs/product-tours/localization) – setting it affects both features.
+**React Native:**
+
+```typescript
+const posthog = new PostHog('<ph_project_api_key>', {
+    host: '<ph_client_api_host>',
+    override_display_language: 'es',
+})
+```
+
+On web, this option is shared with [Product Tours](/docs/product-tours/localization) – setting it affects both features.
 
 ### Person property
 
@@ -93,7 +103,7 @@ posthog.identify('user-123', {
 })
 ```
 
-This is useful when users have language preferences stored in your app that should apply across sessions.
+This works the same way on both web and React Native. It's useful when users have language preferences stored in your app that should apply across sessions.
 
 ## Tracking which language was displayed
 
