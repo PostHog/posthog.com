@@ -5,6 +5,15 @@
 
 # Brands and companies
 PostHog
+Alation
+Atlan
+Contentsquare
+Firebolt
+[Hh]elicone
+[Ll]angfuse
+Luma
+Runware
+Tecton
 ABsmartly
 Accoil
 [Aa]coustic
@@ -285,6 +294,15 @@ Zendesk
 Zuora
 
 # Acronyms, languages, frameworks, protocols, etc.
+CSMs
+[Hh]yperscalers
+[Oo]mnichannel
+[Rr]emarketing
+[Rr]etargeting
+ecomm
+eval
+orgs
+wishlist
 A/A
 A/B
 ACLs

@@ -96,7 +96,7 @@ _Note: This list is incomplete, ongoing, and has overlap. It is meant to serve a
 - Feature Stores: Tecton, Databricks, SageMaker, Redis
 - Data Warehouse: Snowflake, Databricks, Firebolt, BigQuery
 - Unit Economics: FinOps tooling, Helicone, LiteLLM, OpenRouter
-- Data Pipeline: Atlan, Alation, dbt, Fivetran, Apache Airflow, Stitch
+- Data Pipeline: Atlan, Alation, dbt, FiveTran, Apache Airflow, Stitch
 
 Software can be indicative of maturity of the organization. For example, teams using Helicone and Langfuse are likely early-stage, developer-heavy orgs that are in PostHog's ICP. Teams using dbt/Airflow will be very interested in the value of PostHog's warehouse integrations and batch exports. 
 
