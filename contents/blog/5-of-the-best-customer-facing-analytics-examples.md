@@ -7,9 +7,6 @@ showTitle: true
 hideAnchor: true
 author:
     - lizzie-epton
-featuredImage: >-
-    
-featuredImageType: full
 category: General
 tags:
     - Workflows
