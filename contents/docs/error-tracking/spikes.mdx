@@ -42,6 +42,15 @@ The following options are available:
 | **Multiplier** | How many times the current bucket must exceed the baseline for the spike to fire. A higher multiplier means only more dramatic surges trigger an alert. |
 | **Snooze duration** | After a spike fires for an issue, you won't be notified again for this many minutes — even if the issue continues spiking. This prevents alert fatigue during sustained incidents. |
 
+## Viewing spike details
+
+On an issue's detail page, spikes appear as highlighted bars in the volume chart. Click any spike bar to see more details in a popover:
+
+- **Zoomed chart** - A 120-minute window centered on the spike, showing exactly when the spike started and ended
+- **Occurrences** - The number of exceptions during the spike
+- **Baseline** - The expected exception rate based on historical data
+- **Exceeded by** - How many times the spike exceeded the baseline (e.g., 3.2x)
+
 ## Getting notified about spikes
 
 You can set up alerts to be notified when a spike occurs. Head to the [alerts tab](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-spike-detection) to configure notifications to Slack, Discord, Teams, HTTP Webhook and more
