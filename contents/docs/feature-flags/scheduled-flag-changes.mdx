@@ -102,6 +102,8 @@ Here are some common examples:
 
 > **Note:** Only standard 5-field cron expressions are supported. Six-field expressions (with seconds) are not allowed.
 
+> **Note:** The first run of a recurring cron schedule fires in your project's timezone, but subsequent runs are currently computed in UTC. This means schedules can drift relative to your project timezone across daylight-saving transitions. If precise wall-clock timing matters for every run, prefer one-time schedules or paired daily presets until full project-timezone cron support ships.
+
 ## Schedule changes with MCP
 
 You can also schedule flag changes programmatically using the [PostHog MCP server](/docs/feature-flags/create-flags-mcp#scheduled-change-tools). This enables AI coding agents to create, list, update, and delete scheduled changes directly from your code editor.
