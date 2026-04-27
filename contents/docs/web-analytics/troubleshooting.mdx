@@ -31,7 +31,17 @@ All good web analytics dashboards need to include a world map. Ours includes it 
 
 ## Do stats include bots and crawlers?
 
-No, we automatically block bots and crawlers. You can see exactly which ones [we block here](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/blocked-uas.ts).
+No, we automatically block bots and crawlers from your main analytics data based on user agent pattern matching. You can see exactly which ones [we block here](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/blocked-uas.ts).
+
+### Viewing bot traffic
+
+To view bot traffic separately, switch to the **Bot analytics** tab in your web analytics dashboard. This shows trends and details about bot visits to your site, including which crawlers visit most often.
+
+Events without a user agent are excluded from bot analytics because they represent missing data rather than confirmed bot traffic.
+
+### Improving bot detection coverage
+
+Most bots don't execute JavaScript, so client-side tracking alone misses most crawler traffic. For better coverage, send server-side HTTP logs as `$http_log` events. Bot analytics queries include `$pageview`, `$screen`, and `$http_log` events.
 
 ## Why is my pageview/user count different on PostHog than my other analytics tool?
 
