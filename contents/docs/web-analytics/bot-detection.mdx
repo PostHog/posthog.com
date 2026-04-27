@@ -154,6 +154,39 @@ Example payload for the [capture API](/docs/api/capture):
 
 Once `$http_log` events are flowing, bot analytics automatically includes them alongside `$pageview` and `$screen` events.
 
+## Limitations and data gaps
+
+### Events without a user agent
+
+Events that have no user agent (e.g., server-to-server calls, misconfigured SDKs) are **excluded** from bot analytics results.
+These events can't be reliably classified as bot or human traffic based on user agent alone.
+
+You can find these events using the `$virt_traffic_category` virtual property with the value `no_user_agent`:
+
+```sql
+SELECT count()
+FROM events
+WHERE `$virt_traffic_category` = 'no_user_agent'
+    AND timestamp >= now() - INTERVAL 7 DAY
+```
+
+### User agent spoofing
+
+Some bots disguise themselves with regular browser user agent strings, and some legitimate tools use bot-like user agents.
+User agent-based detection is a best-effort heuristic, not a guarantee.
+
+### Future: HTTP header-based identification
+
+User agent matching is just one signal for bot classification.
+Future versions may incorporate additional detection methods, including:
+
+- **HTTP request headers** — bots often omit or send unusual values for headers like `Accept-Language`, `Accept-Encoding`, or `Sec-Fetch-*` that browsers always include
+- **TLS fingerprinting** — JA3/JA4 fingerprints can distinguish between real browsers, bot frameworks, and HTTP libraries
+- **IP and ASN reputation** — known datacenter IP ranges and cloud provider ASNs associated with crawler infrastructure
+- **Behavioral signals** — request rate patterns, absence of JavaScript execution, and missing referrer chains
+
+These signals would supplement (not replace) user agent matching, improving accuracy for bots that spoof their user agent or for legitimate traffic from unusual clients.
+
 ## Client-side bot blocking
 
 Separately from server-side bot detection, the PostHog JavaScript SDK blocks known bot user agents from sending events at all.
