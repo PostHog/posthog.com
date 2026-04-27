@@ -257,7 +257,9 @@ Bad names are generic and vague:
 
 ### 5. Use timestamp-based pagination instead of OFFSET
 
-When querying large datasets like `events` or `query_log` over multiple batches, avoid using `OFFSET` for pagination. Instead, use timestamp-based pagination, which is much more efficient and scales better.
+`OFFSET` pagination is **not supported** on `/query` when authenticating with a personal API key — requests using it return HTTP 400. Use keyset pagination on `timestamp` instead.
+
+This isn't only a restriction: keyset pagination is also dramatically more efficient on large tables like `events` and `query_log`, and scales better as your data grows.
 
 **❌ Inefficient approach using OFFSET:**
 ```sql
