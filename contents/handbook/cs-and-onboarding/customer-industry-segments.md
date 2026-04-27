@@ -69,23 +69,23 @@ Commonly, they share developer-centric focus on adoption and retention. The high
 
 ### Industry terminology
 
-**Observability** - Monitoring model performance, token use, latency, unit economics, and hallucination rates in environments. Primarily related to teams who ship features that directly interact with human users.
+**Observability** – Monitoring model performance, token use, latency, unit economics, and hallucination rates in environments. Primarily related to teams who ship features that directly interact with human users.
 
-**Feature Store** - Centralized system for serving, storing, and managing machine learning features that are used in training and inference. These are more commonly found with mature data organizations.
+**Feature Store** – Centralized system for serving, storing, and managing machine learning features that are used in training and inference. These are more commonly found with mature data organizations.
 
-**Tokens** - Units of processing/billing for LLMs. Can vary based on segment. Other variations would involve count, prediction, job, credit.
+**Tokens** – Units of processing/billing for LLMs. Can vary based on segment. Other variations would involve count, prediction, job, credit.
 
-*RAG (Retrieval-Augmented Generation)** - An architecture pattern where an LLM pulls from external knowledge sources before generating a response. For segmentation, RAG-based products have unique infrastructure needs like accuracy of retrieval and context window usage.
+**RAG (Retrieval-Augmented Generation)** – An architecture pattern where an LLM pulls from external knowledge sources before generating a response. For segmentation, RAG-based products have unique infrastructure needs like accuracy of retrieval and context window usage.
 
-**Benchmark** - A standardized test set for comparing model capabilities.
+**Benchmark** – A standardized test set for comparing model capabilities.
 
-**Latency** - Time between sending a request and receiving a response.
+**Latency** – Time between sending a request and receiving a response.
 
-**Throughput** - Number of requests/tokens processed per unit of time.
+**Throughput** – Number of requests/tokens processed per unit of time.
 
-**NLP (Natural Language Processing)** - Branch of AI that enables computers to understand and generate human language.
+**NLP (Natural Language Processing)** – Branch of AI that enables computers to understand and generate human language.
 
-**Embedding** - Representation of data (text, image, user actions) as vectors used for recommendation, search, and classification. 
+**Embedding** – Representation of data (text, image, user actions) as vectors used for recommendation, search, and classification. 
 
 ### Common software used
 
@@ -121,9 +121,9 @@ Without LLM Analytics SDK:
 - Whatever properties a customer should choose to attach
 
 With LLM Analytics SDK:
-- `$ai_generation` — one row per LLM call with model, input/output tokens, cost, latency, and provider    
-- `$ai_trace` and `$ai_span` — parent/child structure for multi-step agents and tool use
-- `$ai_embedding`, `$ai_metric`, `$ai_feedback` — vector ops, eval scores, thumbs up/down
+- `$ai_generation` – one row per LLM call with model, input/output tokens, cost, latency, and provider    
+- `$ai_trace` and `$ai_span` – parent/child structure for multi-step agents and tool use
+- `$ai_embedding`, `$ai_metric`, `$ai_feedback` – vector ops, eval scores, thumbs up/down
 
 ##### Person profiles
 
@@ -139,18 +139,18 @@ When companies look at their event data in this segment, they're usually trying 
 
 ##### Common challenges
 
-- High event volume &rarr; cost aversion; lean on sampling (where relevant), ingestion filters, discpline on `$set`.
+- High event volume &rarr; cost aversion; lean on sampling (where relevant), ingestion filters, discipline on `$set`.
 - Most meaningful events occur server-side, which can raise complexity. Make sure to identify on each authenticated request.
 - Environment density (staging, test, development, simulation alongside production) leads to messy data. Use separate projects or strict environment properties.
 
-##### Cross-Product Use Cases
+##### Cross-product use cases
 
-- **LLM Analytics** — join `$ai_generation` cost back to person properties for cost-per-segment, or to identify which plan or role is burning the most tokens.
-- **Feature flags and experiments** — gate new models behind flags, run A/B tests on prompt changes, hold out high-value users from risky rollouts.
-- **Surveys** — trigger feedback prompts after a generation, collect CSAT on AI features, run PMF surveys against power users.
-- **Session replay** — filter to recordings of users hitting prompt failures or specific $ai_generation errors.
-- **Error tracking** — group exceptions by plan, model, or role to see which segment hits a bug.
-- **Data warehouse** — sync events for joins against billing or model cost tables, then pipe insights back. 
+- **LLM Analytics** – join `$ai_generation` cost back to person properties for cost-per-segment, or to identify which plan or role is burning the most tokens.
+- **Feature Flags and Experiments** – gate new models behind flags, run A/B tests on prompt changes, hold out high-value users from risky rollouts.
+- **Surveys** – trigger feedback prompts after a generation, collect CSAT on AI features, run PMF surveys against power users.
+- **Session Replay** – filter to recordings of users hitting prompt failures or specific $ai_generation errors.
+- **Error Tracking** – group exceptions by plan, model, or role to see which segment hits a bug.
+- **Data Warehouse** – sync events for joins against billing or model cost tables, then pipe insights back. 
 
 </details>
 
@@ -216,7 +216,7 @@ Online retail businesses including direct-to-consumer brands, marketplace platfo
 
 ### PostHog products they should be using
 
-#### Product analytics
+#### Product Analytics
 
 ##### Best practices
 
@@ -232,8 +232,8 @@ Online retail businesses including direct-to-consumer brands, marketplace platfo
 
 ##### Cross-product use cases
 
-- Use session replay to identify issues > Create experiment to test fix > Monitor with analytics
+- Use Session Replay to identify issues > Create experiment to test fix > Monitor with analytics
 - Feature flag for seasonal promotions > Track performance in analytics > Watch customer interactions via replay
-- Identify drop-off points in funnels > Watch those specific sessions > Run experiments on improvements
+- Identify drop-off points in funnels > Watch those specific sessions > Run Experiments on improvements
 
 </details> 
