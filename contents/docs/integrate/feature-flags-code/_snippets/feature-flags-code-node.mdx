@@ -2,7 +2,94 @@ There are 2 steps to implement feature flags in Node:
 
 ### Step 1: Evaluate the feature flag value
 
-#### Boolean feature flags
+For server-side applications, use `evaluateFlags()` to evaluate all feature flags for a user in a single call. This is the recommended approach because it:
+
+- Makes a single `/flags` request instead of one per flag check
+- Ensures events capture the exact flag values your code branched on
+- Lets you filter which flags get attached to events
+
+```node
+const flags = await client.evaluateFlags('distinct_id_of_your_user', {
+    personProperties: { plan: 'enterprise' }
+})
+
+if (flags.isEnabled('new-dashboard')) {
+    renderNewDashboard()
+}
+
+// Attach the flag values to the captured event
+client.capture({
+    distinctId: 'distinct_id_of_your_user',
+    event: 'page_viewed',
+    flags
+})
+```
+
+#### Getting flag values and payloads
+
+Use `isEnabled()` to check if a flag is enabled, `getFlag()` to get the variant value, and `getFlagPayload()` to get the payload:
+
+```node
+const flags = await client.evaluateFlags('distinct_id_of_your_user')
+
+// Boolean check
+if (flags.isEnabled('new-feature')) {
+    // Feature is enabled
+}
+
+// Get the variant value (returns true, false, or variant string)
+const variant = flags.getFlag('experiment-flag')
+if (variant === 'control') {
+    // Show control experience
+} else if (variant === 'test') {
+    // Show test experience
+}
+
+// Get the payload associated with a flag
+const payload = flags.getFlagPayload('feature-with-payload')
+```
+
+#### Filtering flags attached to events
+
+You can filter which flags get attached to captured events using `onlyAccessed()` or `only()`:
+
+```node
+const flags = await client.evaluateFlags('distinct_id_of_your_user')
+
+if (flags.isEnabled('checkout-v2')) {
+    processCheckoutV2()
+}
+
+// Only attach flags that were actually checked via isEnabled() or getFlag()
+client.capture({
+    distinctId: 'distinct_id_of_your_user',
+    event: 'checkout_completed',
+    flags: flags.onlyAccessed()
+})
+
+// Or specify exactly which flags to attach
+client.capture({
+    distinctId: 'distinct_id_of_your_user',
+    event: 'checkout_completed',
+    flags: flags.only(['checkout-v2', 'payment-method'])
+})
+```
+
+#### Scoping the flags request
+
+To reduce the response payload, you can scope the `/flags` request to specific flag keys:
+
+```node
+const flags = await client.evaluateFlags('distinct_id_of_your_user', {
+    flagKeys: ['checkout-v2', 'payment-method']
+})
+```
+
+#### Alternative: Single-flag evaluation
+
+For simpler use cases where you only need to check one flag, you can use `isFeatureEnabled()` or `getFeatureFlag()` directly:
+
+##### Boolean feature flags
 
 ```node
 const isFeatureFlagEnabled = await client.isFeatureEnabled('flag-key', 'distinct_id_of_your_user')
@@ -14,7 +101,7 @@ if (isFeatureFlagEnabled) {
 }
 ```
 
-#### Multivariate feature flags
+##### Multivariate feature flags
 
 ```node
 const enabledVariant = await client.getFeatureFlag('flag-key', 'distinct_id_of_your_user')
@@ -27,13 +114,34 @@ if (enabledVariant === 'variant-key') {  // replace 'variant-key' with the key o
 }
 ```
 
-import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx" 
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
 
 <IncludePropertyInEvents />
 
-There are two methods you can use to include feature flag information in your events:
+To include feature flag information in your events, use `evaluateFlags()` and pass the snapshot to `capture()`:
 
-#### Method 1: Include the `$feature/feature_flag_name` property
+```node
+const flags = await client.evaluateFlags('distinct_id_of_your_user')
+
+if (flags.isEnabled('new-checkout')) {
+    processNewCheckout()
+}
+
+// The flags object automatically attaches flag values to the event
+client.capture({
+    distinctId: 'distinct_id_of_your_user',
+    event: 'checkout_completed',
+    flags
+})
+```
+
+This attaches the exact flag values your code branched on without extra network requests.
+
+#### Alternative methods
+
+If you're not using `evaluateFlags()`, there are two other ways to include flag information:
+
+##### Method 1: Include the `$feature/feature_flag_name` property
 
  In the event properties, include `$feature/feature_flag_name: variant_key`:
 
@@ -47,9 +155,11 @@ client.capture({
 })
 ```
 
-#### Method 2: Set `sendFeatureFlags` to `true`
+##### Method 2: Set `sendFeatureFlags` to `true`
 
-import NodeSetSendFeatureFlagsTrue from "./feature-flags-code-node-set-send-feature-flags-to-true.mdx" 
+> **Note:** This method is deprecated. Prefer using `evaluateFlags()` with the `flags` option, which avoids making a separate `/flags` request on every capture.
+
+import NodeSetSendFeatureFlagsTrue from "./feature-flags-code-node-set-send-feature-flags-to-true.mdx"
 
 <NodeSetSendFeatureFlagsTrue />
 
