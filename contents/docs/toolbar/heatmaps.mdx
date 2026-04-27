@@ -42,8 +42,10 @@ To view heatmaps in the app:
 
 1. Enable the [**In-App Heatmaps** feature preview](https://app.posthog.com/settings/user-feature-previews#heatmaps-ui)
 1. Go to the [Heatmaps section in PostHog](https://us.posthog.com/heatmaps)
-2. Type the URL of your website in the **Display URL** field
+2. Type the URL of your website in the **Page URL** field
 3. Optional: Use wildcard URL matching for the **Heatmap data URL** to combine data from similar pages
+
+You can edit the **Page URL** at any time after creating a heatmap. Enter a new URL and click **Regenerate** to refresh the screenshot. The Page URL must be a concrete URL without wildcards. If you want to aggregate data from multiple pages, add wildcards to the **Heatmap data URL** instead.
 
 ![Heatmaps in PostHog app interface](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/heatmaps_in_app_9b447c455e.png)
 
@@ -165,9 +167,11 @@ This is because we are now seeing clicks on each specific user:
 
 ## Combining maps from similar pages using wildcards
 
-If you have similar pages that have dynamic content based on an identifier in the URL (e.g., product pages on an ecommerce site), you can combine their heatmap data using wildcards `*` in the heatmap menu.
+If you have similar pages that have dynamic content based on an identifier in the URL (e.g., product pages on an ecommerce site), you can combine their heatmap data using wildcards `*` in the **Heatmap data URL** field.
 
-For example, if the product pages on an ecommerce site use a URL format of `https://yourwebsite.com/products/product-id`, you can use the wildcard URL `https://yourwebsite.com/products/*` to display a combined heatmap from all the product pages.
+For example, if the product pages on an ecommerce site use a URL format of `https://yourwebsite.com/products/product-id`, you can use the wildcard URL `https://yourwebsite.com/products/*` in the **Heatmap data URL** to display a combined heatmap from all the product pages.
+
+> **Note:** Wildcards can only be used in the **Heatmap data URL** field, not in the **Page URL** field. The Page URL must be a concrete URL since it's the actual page that gets loaded for the heatmap visualization.
 
 ![Toolbar heatmaps popover menu being used to add a wildcard into the URL](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/toolbar-heatmap-wildcard.png)
 
