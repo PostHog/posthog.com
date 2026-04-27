@@ -230,7 +230,7 @@ Most tools on this list are free to start, so there's no reason to wait.
 <details>
 <summary>Do I need a separate LLM observability tool if I already use PostHog?</summary>
 
-No. PostHog's [LLM analytics](/docs/llm-analytics) product is built into the platform, so if you're already using PostHog for product analytics or session replay, you can add LLM observability without any additional setup or contract. You get 100k LLM events free per month.
+No. PostHog's [LLM observability](/docs/llm-analytics) product is built into the platform, so if you're already using PostHog for product analytics or session replay, you can add LLM observability without any additional setup or contract. You get 100k LLM events free per month.
 
 [Getting started](docs/llm-analytics/start-here) is easy; once you install the SDK, it will handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically.
 
@@ -256,7 +256,7 @@ For specific provider support, check each tool's documentation.
 
 ## Related reading
 
-- [PostHog LLM analytics documentation](/docs/llm-analytics)
+- [PostHog LLM observability documentation](/docs/llm-analytics)
 - [How to A/B test LLM prompts with PostHog](/tutorials/llm-ab-tests)
 - [The best error tracking tools](/blog/best-error-tracking-tools) – if you're also instrumenting the rest of your app alongside the LLM parts
 

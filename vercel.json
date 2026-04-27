@@ -744,7 +744,7 @@
             "source": "/docs/integrate/third-party/google-tag-manager",
             "destination": "/docs/libraries/google-tag-manager"
         },
-        { "source": "/docs/experiments/manual", "destination": "/docs/experiments/installation" },
+        { "source": "/docs/experiments/manual", "destination": "/docs/experiments/start-here" },
         { "source": "/docs/experiments/under-the-hood", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/significance", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/statistics", "destination": "/docs/experiments/statistics-bayesian" },
@@ -1476,6 +1476,7 @@
         { "source": "/teams/comms", "destination": "/teams/support" },
         { "source": "/docs/session-replay/flutter", "destination": "/docs/session-replay/installation/flutter" },
         { "source": "/teams/customer-comms", "destination": "/teams/support" },
+        { "source": "/teams/customer-analytics", "destination": "/teams/web-analytics" },
         { "source": "/apps", "destination": "/cdp", "statusCode": 302 },
         { "source": "/docs/data-warehouse/setup/azure-blob", "destination": "/docs/cdp/sources/azure-blob" },
         { "source": "/docs/data-warehouse/setup/azure-db", "destination": "/docs/cdp/sources/azure-db" },
@@ -1786,6 +1787,7 @@
         { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
+        { "source": "/handbook/brand/process", "destination": "/handbook/engineering/product-design-process" },
         { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" },
         { "source": "/teams/twig", "destination": "/teams/posthog-code" },
         { "source": "/teams/twig/:path*", "destination": "/teams/posthog-code/:path*" },
@@ -1849,6 +1851,7 @@
         },
         { "source": "/professional-services", "destination": "/services" },
         { "source": "/posthug", "destination": "/" },
-        { "source": "/mcp", "destination": "/docs/model-context-protocol" }
+        { "source": "/mcp", "destination": "/docs/model-context-protocol" },
+        { "source": "/login", "destination": "https://app.posthog.com/login" }
     ]
 }
