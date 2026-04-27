@@ -381,6 +381,25 @@ The `system.notebooks` table contains notebook metadata from your project.
 | `created_at`       | When the notebook was created                     |
 | `last_modified_at` | When the notebook was last modified               |
 
+### `system.sandbox_environments`
+
+The `system.sandbox_environments` table contains sandbox environment configurations for PostHog AI tasks. Sandbox environments define the execution context for running AI-powered tasks, including network access controls and repository connections.
+
+| Column                    | Description                                                      |
+| ------------------------- | ---------------------------------------------------------------- |
+| `id`                      | Unique identifier for the sandbox environment                    |
+| `team_id`                 | Team ID the environment belongs to                               |
+| `created_by_id`           | User ID who created the environment                              |
+| `name`                    | Name of the sandbox environment                                  |
+| `network_access_level`    | Network access configuration for the sandbox                     |
+| `allowed_domains`         | Array of domains the sandbox is allowed to access                |
+| `include_default_domains` | Whether default PostHog domains are included (1 = yes, 0 = no)   |
+| `repositories`            | Array of repository identifiers connected to this environment    |
+| `private`                 | Whether only the creator can see this environment (1 = yes, 0 = no) |
+| `internal`                | Whether this is an internal system environment (1 = yes, 0 = no) |
+| `created_at`              | When the environment was created                                 |
+| `updated_at`              | When the environment was last updated                            |
+
 ### `system.support_tickets`
 
 The `system.support_tickets` table contains support ticket data from the Conversations product, created via widget, email, or Slack channels.
@@ -412,3 +431,48 @@ The `system.support_tickets` table contains support ticket data from the Convers
 | `updated_at`            | When the ticket was last updated                                                                        |
 
 Status values: `new` (just created), `open` (being worked on), `pending` (waiting for customer), `on_hold` (paused), `resolved` (completed).
+
+### `system.task_runs`
+
+The `system.task_runs` table contains execution records for PostHog AI tasks. Each row represents a single run of a task, including its status, output, and any errors encountered.
+
+| Column         | Description                                        |
+| -------------- | -------------------------------------------------- |
+| `id`           | Unique identifier for the task run                 |
+| `team_id`      | Team ID the task run belongs to                    |
+| `task_id`      | ID of the parent task                              |
+| `branch`       | Git branch associated with this run                |
+| `environment`  | Execution environment identifier                   |
+| `stage`        | Current execution stage                            |
+| `status`       | Current status of the run (see values below)       |
+| `error_message`| Error message if the run failed                    |
+| `output`       | JSON containing the task output                    |
+| `artifacts`    | JSON containing generated artifacts                |
+| `created_at`   | When the run was created                           |
+| `updated_at`   | When the run was last updated                      |
+| `completed_at` | When the run completed                             |
+
+Status values include `queued`, `running`, `completed`, and `failed`.
+
+### `system.tasks`
+
+The `system.tasks` table contains task definitions for PostHog AI. Tasks are reusable AI-powered workflows that can be triggered manually or via automations.
+
+| Column                | Description                                                    |
+| --------------------- | -------------------------------------------------------------- |
+| `id`                  | Unique identifier for the task                                 |
+| `team_id`             | Team ID the task belongs to                                    |
+| `created_by_id`       | User ID who created the task                                   |
+| `github_integration_id`| ID of the connected GitHub integration                        |
+| `task_number`         | Auto-incrementing task number within the team                  |
+| `title`               | Title of the task                                              |
+| `title_manually_set`  | Whether the title was manually set (1 = yes, 0 = auto-generated) |
+| `description`         | Description of what the task does                              |
+| `origin_product`      | Product that originated this task (e.g., `user_created`)       |
+| `repository`          | Connected repository identifier                                |
+| `json_schema`         | JSON schema defining task inputs and outputs                   |
+| `internal`            | Whether this is an internal system task (1 = yes, 0 = no)      |
+| `deleted`             | Whether the task is deleted (1 = yes, 0 = no)                  |
+| `deleted_at`          | When the task was deleted                                      |
+| `created_at`          | When the task was created                                      |
+| `updated_at`          | When the task was last updated                                 |
