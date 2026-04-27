@@ -8,7 +8,7 @@ hideAnchor: true
 author:
     - lizzie-epton
 featuredImage: >-
-    
+    https://res.cloudinary.com/dmukukwp6/image/upload/workflows_beta_cover_a04e206b7a.jpg
 featuredImageType: full
 category: General
 tags:
@@ -71,7 +71,7 @@ When a customer opens a support ticket, HogHero shows our support rep the recent
 
 ### Why it works 
 
-Endpoints data doesn't always need to you to your product, they are an easy way to share customer data with different teams within your organisation and can be a valuable part of your internal workflow. Our support reps don't have to waste time jumping between Zendesk and our analytics tool. The Endpoint exposes a specific piece of data to the user so they don't have to waste time getting lost in data chaos.
+Our support reps don't have to waste time jumping between Zendesk and our analytics tool. The Endpoint exposes a specific piece of data to the user so they don't have to waste time getting lost in data chaos.
 
 ## 5. GitHub's contribution graph: Building a community through user analytics
 
@@ -95,11 +95,13 @@ Across all five, the same few principles keep showing up:
 
 ## Endpoints makes customer-facing analytics simple
 
-Inspired to build customer-facing analytics yourself? We’re biased but we think you should check out [Endpoints](/endpoints). Here's how it works:
+Inspired to build customer-facing analytics yourself? We’re biased but we think you should check out [Endpoints](/endpoints).
+
+The best part? You don’t need to be super technical. If you're a PM who wants to put a live usage metric in your product, a marketer who wants campaign numbers flowing into a report, or an ops lead who wants a customer-facing dashboard that just works, Endpoints is built to be simple for you. Here's how it fits together:
 
 1. **Start from something you already have in PostHog.** Open any saved insight, trend, or SQL query you've already built. If you've got a number you trust inside PostHog, you're 90% of the way there.
-2. **Turn it into an Endpoint.** Go to the three dots at the top of your insight screen and select 'Create Endpoint'. Endpoints wraps your query in a fast, versioned, authenticated API — no backend setup, no pipeline, no new tool to learn.
-3. **Drop it wherever you need the number to show up.** Your product, a customer-facing dashboard, your landing page, or an internal Slack bot — anywhere that accepts a URL or an API call.
+2. **Turn it into an Endpoint with a click. Endpoints wraps your query in a fast, versioned, authenticated API — no backend setup, no pipeline, no new tool to learn.
+3. **Drop it wherever you need the number to show up.** Your product, a customer-facing dashboard, a Retool or Notion page, an internal Slack bot, an AI workflow — anywhere that accepts a URL or an API call.
 4. **Let it update itself.** The number stays live. If you tweak the underlying insight in PostHog, the Endpoint updates too. No rebuilds, no stale screenshots, no Monday-morning "can someone refresh this for me" messages.
 
 Take the data you already trust in PostHog, ship it to the place your users actually look, and let the tool do the heavy lifting for you. [Give it a try](/docs/endpoints/start-here), or you can check out [our docs](/docs/endpoints) to learn more.
