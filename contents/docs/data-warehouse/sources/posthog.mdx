@@ -236,6 +236,31 @@ The `system.cohort_calculation_history` table tracks cohort calculation runs, us
 | `finished_at` | When the calculation finished                   |
 | `error_code`  | Error code if the calculation failed            |
 
+### `system.dashboard_items`
+
+The `system.dashboard_items` table contains dashboard tile data from your project. Dashboard tiles are the individual visualizations, text blocks, or buttons placed on dashboards.
+
+| Column                   | Description                                                      |
+| ------------------------ | ---------------------------------------------------------------- |
+| `id`                     | Unique identifier for the dashboard tile                         |
+| `team_id`                | Team ID the tile belongs to                                      |
+| `dashboard_id`           | ID of the parent dashboard                                       |
+| `insight_id`             | ID of the linked insight (null for non-insight tiles)            |
+| `text_id`                | ID of the linked text block (null for non-text tiles)            |
+| `button_tile_id`         | ID of the button tile (null for non-button tiles)                |
+| `layouts`                | JSON containing tile layout and positioning data                 |
+| `color`                  | Custom color for the tile border                                 |
+| `filters_hash`           | Hash of the tile's current filters                               |
+| `last_refresh`           | When the tile was last refreshed                                 |
+| `refreshing`             | Whether the tile is currently refreshing (1 = yes, 0 = no)       |
+| `refresh_attempt`        | Current refresh attempt number                                   |
+| `filters_overrides`      | JSON containing dashboard-level filter overrides                 |
+| `show_description`       | Whether to show the insight description (1 = yes, 0 = no)        |
+| `transparent_background` | Whether the tile has a transparent background (1 = yes, 0 = no)  |
+| `deleted`                | Whether the tile is deleted (1 = yes, 0 = no)                    |
+
+> **Note:** Filter with `deleted = 0` to exclude soft-deleted tiles.
+
 ### `system.data_warehouse_tables`
 
 The `system.data_warehouse_tables` table contains metadata about data warehouse tables in your project.
