@@ -1,4 +1,4 @@
-When writing custom queries, the burden of performance falls onto you. PostHog handles performance for queries we own (for example, in product analytics insights and experiments, etc.), but because performance depends on how queries are structured and written, we can't optimize them for you. Large data sets particularly require extra careful attention to performance. 
+When writing custom queries, the burden of performance falls onto you. PostHog handles performance for queries we own (for example, in product analytics insights and experiments, etc.), but because performance depends on how queries are structured and written, we can't optimize them for you. Large data sets particularly require extra careful attention to performance.
 
 Here is some advice for making sure your queries are quick and don't read over too much data (which can increase costs):
 
@@ -57,21 +57,21 @@ async function createQuery() {
   const url = "<ph_app_host>/api/projects/:project_id/query/";
   const headers = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+    Authorization: "Bearer {POSTHOG_PERSONAL_API_KEY}",
   };
 
   const payload = {
-    "query": {
-      "kind": "HogQLQuery",
-      "query": `
+    query: {
+      kind: "HogQLQuery",
+      query: `
         SELECT count()
         FROM events
         WHERE timestamp >= now() - INTERVAL 7 DAY
         LIMIT 100
-      `
+      `,
     },
-    "name": "event count in last 7 days"
-  }
+    name: "event count in last 7 days",
+  };
 
   const response = await fetch(url, {
     method: "POST",
@@ -83,7 +83,7 @@ async function createQuery() {
   console.log(data);
 }
 
-createQuery()
+createQuery();
 ```
 
 </MultiLanguage>
@@ -153,19 +153,19 @@ async function createQuery() {
   const url = "<ph_app_host>/api/projects/:project_id/query/";
   const headers = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+    Authorization: "Bearer {POSTHOG_PERSONAL_API_KEY}",
   };
 
   const payload = {
-    "query": {
-      "kind": "HogQLQuery",
-      "query": `
+    query: {
+      kind: "HogQLQuery",
+      query: `
         SELECT *
         FROM mat_event_count
-      `
+      `,
     },
-    "name": "get materialized counts"
-  }
+    name: "get materialized counts",
+  };
 
   const response = await fetch(url, {
     method: "POST",
@@ -177,7 +177,7 @@ async function createQuery() {
   console.log(data);
 }
 
-createQuery()
+createQuery();
 ```
 
 </MultiLanguage>
@@ -257,9 +257,16 @@ Bad names are generic and vague:
 
 ### 5. Use timestamp-based pagination instead of OFFSET
 
-When querying large datasets like `events` or `query_log` over multiple batches, avoid using `OFFSET` for pagination. Instead, use timestamp-based pagination, which is much more efficient and scales better.
+<CalloutBox icon="IconWarning" title="OFFSET is not allowed for API queries" type="caution">
+
+When querying via the API with a [personal API key](/docs/api), `OFFSET` clauses are blocked and return an HTTP 400 error. Use timestamp-based pagination as shown below, or use [batch exports](/docs/cdp/batch-exports) for bulk data extraction.
+
+</CalloutBox>
+
+When querying large datasets like `events` or `query_log` over multiple batches, use timestamp-based pagination instead of `OFFSET`. This is both more efficient and required when using the [API](/docs/api-queries) with a personal API key.
 
 **❌ Inefficient approach using OFFSET:**
+
 ```sql
 -- First batch
 SELECT timestamp, event, distinct_id
@@ -277,6 +284,7 @@ LIMIT 1000 OFFSET 1000;  -- This gets slower with each page
 ```
 
 **✅ Efficient approach using timestamp pagination:**
+
 ```sql
 -- First batch
 SELECT timestamp, event, distinct_id
@@ -294,6 +302,7 @@ LIMIT 1000;
 ```
 
 This approach is more efficient because:
+
 - **Constant performance**: Each query executes in similar time regardless of how many rows you've already retrieved
 - **Index-friendly**: Uses the timestamp index effectively for filtering
 - **Scalable**: Performance doesn't degrade as you paginate through millions of rows
