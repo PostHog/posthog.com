@@ -257,7 +257,7 @@ Bad names are generic and vague:
 
 ### 5. Use timestamp-based pagination instead of OFFSET
 
-`OFFSET` pagination is **not supported** on `/query` when authenticating with a personal API key — requests using it return HTTP 400. Use keyset pagination on `timestamp` instead.
+`OFFSET` pagination is **not supported** for programmatic requests on `/query` — it currently returns HTTP 400 when authenticating with a personal API key, and we may reject it for other authentication methods (OAuth tokens, etc.) at any time. Use keyset pagination on `timestamp` instead.
 
 This isn't only a restriction: keyset pagination is also dramatically more efficient on large tables like `events` and `query_log`, and scales better as your data grows.
 
