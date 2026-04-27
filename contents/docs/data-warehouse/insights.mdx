@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-After [linking your source](/docs/cdp/sources), you can use its data in a [trend](/docs/product-analytics/trends), [funnel](/docs/product-analytics/funnels), [lifecycle](/docs/product-analytics/lifecycle), or [stickiness](/docs/product-analytics/stickiness) insight like you would event or person data.
+After [linking your source](/docs/cdp/sources), you can use its data in a [trend](/docs/product-analytics/trends), [funnel](/docs/product-analytics/funnels), [lifecycle](/docs/product-analytics/lifecycle), [stickiness](/docs/product-analytics/stickiness), or [retention](/docs/product-analytics/retention) insight like you would event or person data.
 
 > You can also create graphs and visualizations directly [with the SQL editor](/docs/data-warehouse/query#sql-visualizations).
 
@@ -64,6 +64,21 @@ If the lifecycle should be calculated for something other than people or groups,
 | Timestamp   | A timestamp or date field representing when the element was created.                                        |
 
 Clicking through to view individual actors is not supported for data warehouse tables in stickiness insights.
+
+### Retention insights
+
+| Field              | Description                                                                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Aggregation target | The actor whose retention you want to measure, such as a person ID or group key. Used to match actors between the start and return events.      |
+| Timestamp          | A timestamp or date field representing when the event happened. PostHog uses this to place actors into cohorts and determine return timing.     |
+
+Data warehouse tables can serve as the start event, return event, or both. When you combine a data warehouse table with PostHog events, the aggregation target from the data warehouse table matches against `person_id` or the selected group.
+
+**Limitations:**
+
+- Only fixed interval retention is supported (not recurring interval)
+- Breakdowns aren't supported with data warehouse tables
+- Property aggregation isn't supported
 
 ## Using the same table multiple times
 
