@@ -545,7 +545,7 @@ export const handbookSidebar = [
                         name: 'Screen recording guide',
                         url: '/handbook/content/screen-recording-guide',
                     },
-                    
+
 
                 ],
             },
@@ -6490,6 +6490,12 @@ export const docsMenu = {
                     icon: 'IconSearch',
                     color: 'purple',
                     featured: true,
+                },
+                {
+                    name: 'PII scrubbing',
+                    url: '/docs/logs/pii-scrubbing',
+                    icon: 'IconSearch',
+                    color: 'blue',
                 },
                 {
                     name: 'Link Session Replay',
