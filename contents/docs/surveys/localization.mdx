@@ -107,6 +107,16 @@ You can use this property to:
 - Filter survey results by language
 - Identify which languages your users need
 
+## Validation requirements
+
+PostHog validates translations before saving to prevent broken surveys from reaching users. Your survey won't save if any of these issues exist:
+
+- **Empty fields** – Translation fields can't be empty. If you don't want to translate a field, leave it blank and it falls back to the default language automatically.
+- **Placeholder text** – When you add a new choice to a multiple choice question, PostHog adds a `[Translation needed]` placeholder to all translations. Replace these with actual translations before saving.
+- **Link URLs** – Link fields must start with `https://` or `mailto:` for security reasons.
+
+When validation fails, PostHog shows a warning banner listing which languages and fields need attention. Click the language name in the error message to jump directly to that translation.
+
 ## Which languages should you support?
 
 You can check common browser languages from your users by running a query like this in the [SQL editor](https://app.posthog.com/sql):
