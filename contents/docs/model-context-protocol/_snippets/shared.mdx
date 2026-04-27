@@ -93,6 +93,7 @@ Available features:
 | `annotations`            | [Annotation management](/docs/product-analytics/annotations)                           |
 | `cohorts`                | [Cohort management](/docs/data/cohorts)                                                |
 | `conversations`          | [Support ticket management](/docs/support)                                             |
+| `customer_analytics`     | [Customer analytics usage metrics](/docs/customer-analytics)                           |
 | `dashboards`             | [Dashboard creation and management](/docs/product-analytics/dashboards)                |
 | `data_schema`            | Data schema exploration                                                                |
 | `data_warehouse`         | [Data warehouse management](/docs/data-warehouse)                                      |
@@ -306,6 +307,24 @@ The agent will use the `conversations-tickets-retrieve` tool to fetch the full t
 **Prompt:** "Mark ticket #3 as resolved and set ticket #7 to high priority"
 
 The agent will use the `conversations-tickets-update` tool to change the status and priority of the specified tickets.
+
+### Usage metrics management
+
+**Prompt:** "List all usage metrics in my project"
+
+The agent will use the `usage-metrics-list` tool to return all usage metrics, including their name, aggregation type (count or sum), rolling time window, and display format.
+
+**Prompt:** "Create a usage metric called 'Weekly API Calls' that counts `api_request` events over a 7-day rolling window"
+
+The agent will use the `usage-metrics-create` tool to create a new count-based usage metric that tracks API usage for each customer in their profile.
+
+**Prompt:** "Create a usage metric for total revenue that sums the `amount` property on `purchase` events over 30 days"
+
+The agent will use the `usage-metrics-create` tool with `math: sum` and `math_property: amount` to create a sum-based usage metric displayed as currency.
+
+**Prompt:** "Update my 'Feature Usage' metric to use a 14-day rolling window instead of 7 days"
+
+The agent will use the `usage-metrics-partial-update` tool to modify the interval field on an existing metric.
 
 ## Prompts and resources
 
