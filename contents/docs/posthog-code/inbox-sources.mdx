@@ -6,6 +6,15 @@ showTitle: true
 
 Inbox identifies potential work by monitoring **signal sources**. These sources provide the raw data that AI agents use to research and triage issues.
 
+## Configuration
+
+To manage your sources:
+1. Open **Inbox** in PostHog Code
+2. Click the **Settings** icon (or the **Signal Sources** tab)
+3. Toggle the sources you want to enable and follow the authentication prompts for external services
+
+> **Note:** You don't need to manually configure MCP for Inbox sources. Once your repository is connected in PostHog Code, research tasks can run automatically.
+
 ## Internal PostHog sources
 
 These sources are available by default if you're already using PostHog.
@@ -39,12 +48,3 @@ By connecting Linear (for project management) or Zendesk (for customer support),
 1. Read the ticket or issue context
 2. Search your codebase for relevant logic
 3. Propose a fix that references the original ticket ID
-
-## Configuration
-
-To manage your sources:
-1. Open **Inbox** in PostHog Code
-2. Click the **Settings** icon (or the **Signal Sources** tab)
-3. Toggle the sources you want to enable and follow the authentication prompts for external services
-
-> **Note:** For agents to research issues from these sources, you need a connected repository with a configured [MCP server](/docs/ai-engineering/mcp).
