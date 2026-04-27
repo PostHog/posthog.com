@@ -1,6 +1,6 @@
 The Python SDK uses nested contexts for managing state that's shared across events. Contexts are the recommended way to manage things like "which user is taking this action" (through `identify_context`), rather than manually passing user state through your apps stack.
 
-When events (including exceptions) are captured in a context, the event uses the user [distinct ID](/docs/getting-started/identify-users), [session ID](/docs/data/sessions), and tags that are (optionally) set in the context. This is useful for adding properties to multiple events during a single user's interaction with your product.
+When events (including exceptions) are captured in a context, the event uses the user [distinct ID](/docs/getting-started/identify-users), [session ID](/docs/data/sessions), [window ID](/docs/data/sessions#windows), and tags that are (optionally) set in the context. This is useful for adding properties to multiple events during a single user's interaction with your product.
 
 You can enter a context using the `with` statement:
 
@@ -39,7 +39,7 @@ def outer_function():
 
 ```
 
-Contexts are nested, so tags added to a parent context are inherited by child contexts. If you set the same tag in both a parent and child context, the child context's value overrides the parent's at event capture (but the parent context won't be affected). This nesting also applies to session IDs and distinct IDs.
+Contexts are nested, so tags added to a parent context are inherited by child contexts. If you set the same tag in both a parent and child context, the child context's value overrides the parent's at event capture (but the parent context won't be affected). This nesting also applies to session IDs, distinct IDs, and window IDs.
 
 ```python
 from posthog import new_context, tag
@@ -69,7 +69,7 @@ with new_context(fresh=True):
 
 ```
 
-> **Note:** Distinct IDs, session IDs, and properties passed directly to calls to `capture` and related functions override context state in the final event captured.
+> **Note:** Distinct IDs, session IDs, window IDs, and properties passed directly to calls to `capture` and related functions override context state in the final event captured.
 
 ### Contexts and user identification
 
@@ -128,6 +128,20 @@ If you associate a context with a session, you'll be able to do things like:
 - View session replays for users that triggered a backend exception in error tracking
 
 You can read more about sessions in the [session tracking](/docs/data/sessions) documentation.
+
+### Contexts and window IDs
+
+Window IDs identify individual browser tabs or windows within a session. You can associate a context with a window ID by calling `posthog.set_context_window_id`:
+
+```python
+from posthog import new_context, set_context_window_id
+with new_context():
+    set_context_window_id(request.get_header("X-POSTHOG-WINDOW-ID"))
+```
+
+When set, the window ID is automatically added to all events captured in the context as the `$window_id` property. This enables you to correlate backend events with the specific browser tab or window where the user action originated.
+
+If you're using the PostHog JavaScript Web SDK on your frontend, it generates a window ID for you and passes it to your backend automatically when you enable tracing headers (the same configuration used for session IDs).
 
 ### Exception capture
 
