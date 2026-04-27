@@ -5025,6 +5025,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Localization',
+                    url: '/docs/surveys/localization',
+                    icon: 'IconGlobe',
+                    color: 'purple',
+                },
+                {
                     name: 'PostHog AI',
                 },
                 {

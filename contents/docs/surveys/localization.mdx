@@ -1,0 +1,126 @@
+---
+title: Localization
+sidebar: Docs
+showTitle: true
+availability:
+    free: none
+    selfServe: full
+    enterprise: full
+---
+
+Display your surveys in multiple languages based on user locale.
+
+## How it works
+
+When you add translations to a survey, PostHog automatically displays the appropriate version based on the user's language. Translations can include question text, descriptions, button labels, choices, and thank-you messages.
+
+When a survey renders, PostHog determines the user's language through a priority hierarchy:
+
+1. **`override_display_language` config** – Explicit language set in SDK configuration
+2. **Person property `language`** – Language set via `posthog.identify()` or person profile
+3. **Browser locale** – The user's `navigator.language` setting
+
+If no translation matches the detected language, the survey displays in its default language.
+
+## Creating translations
+
+### Set the default language
+
+First, set the default language for your survey in the editor.
+
+When you set a default language, all existing survey content is mapped to that language. This is used as a fallback when the user's language can't be determined, or when your survey doesn't have a translation for the user's language.
+
+Open the **Translations** panel in the survey editor and enter a language code that represents your survey's default language.
+
+### Add a new language
+
+Once the default is set, you can add more languages in the same **Translations** panel.
+
+Enter a new language code, click the plus button to add it, then click the language card to select it.
+
+Once selected, you can edit the translated content for that language. This includes:
+
+- Question text and descriptions
+- Button labels
+- Choice options (for single/multiple choice questions)
+- Thank-you message header and description
+- Close button text
+
+Fields you don't translate fall back to the default language.
+
+## Language code matching
+
+PostHog uses [BCP 47 language tags](https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag) (like `en`, `es`, `fr-CA`) and performs case-insensitive matching with base-language fallback.
+
+When determining which translation to use, PostHog checks in this order:
+
+1. **Exact match** – A user with language `en-US` matches a translation with key `en-US`.
+2. **Base match** – If no exact match exists, PostHog checks for the user's "base" language. For example, a user with language `es-MX` matches a translation with key `es`, if no `es-MX` translation exists.
+3. **Fallback** – If neither match succeeds, the survey displays in its default language.
+
+> **Note:** Base matching is one-directional. A user with language `en` won't match a translation keyed `en-US`. We recommend keeping your translation keys as base-only (like `en`) unless you have translations for specific regional dialects.
+
+## Language overrides
+
+By default, PostHog uses the user's browser language to determine which translation to show. You can override this in two ways.
+
+### SDK configuration
+
+Set the `override_display_language` option when initializing PostHog or at runtime:
+
+```js
+// Set at initialization
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    override_display_language: 'es',
+})
+
+// Or change at runtime
+posthog.set_config({
+    override_display_language: 'fr',
+})
+```
+
+This option is shared with [Product Tours](/docs/product-tours/localization) – setting it affects both features.
+
+### Person property
+
+You can also set a `language` property on the person profile, which PostHog uses when no SDK override is configured:
+
+```js
+posthog.identify('user-123', {
+    language: 'de',
+})
+```
+
+This is useful when users have language preferences stored in your app that should apply across sessions.
+
+## Tracking which language was displayed
+
+When a survey is shown, sent, or dismissed, PostHog includes a `$survey_language` property on the event if a translation was used. The value is the matched language key (for example, `es` or `fr-CA`).
+
+This property is omitted when the survey displays in its default language (no translation match).
+
+You can use this property to:
+
+- Analyze survey completion rates by language
+- Filter survey results by language
+- Identify which languages your users need
+
+## Which languages should you support?
+
+You can check common browser languages from your users by running a query like this in the [SQL editor](https://app.posthog.com/sql):
+
+```sql
+SELECT
+    properties.$browser_language AS language,
+    uniq(distinct_id) AS unique_users
+FROM events
+WHERE event = '$pageview'
+    AND timestamp >= now() - interval 30 day
+GROUP BY language
+ORDER BY unique_users DESC
+LIMIT 100
+```
+
+This shows the top 100 languages based on `$pageview` events in the past 30 days.
