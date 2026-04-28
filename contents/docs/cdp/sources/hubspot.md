@@ -20,6 +20,10 @@ To link Hubspot:
 5. Select the tables you want to import (incremental/append syncs are not supported for HubSpot tables.)
 6. Click **Import**
 
+## Configuration
+
+<SourceParameters />
+
 ### Customize synced properties
 
 By default, PostHog syncs a standard set of properties for each HubSpot schema. To control which properties are synced, enable the **Customize synced properties** toggle during setup.
