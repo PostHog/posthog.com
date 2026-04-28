@@ -30,6 +30,8 @@ Every dependency adds size, security surface area, licensing questions, maintena
 
 A good rule of thumb: basic event capture should work with as little extra machinery as the platform reasonably enables. Optional integrations can have optional dependencies, but the base SDK should stay lean.
 
+If a specific feature needs a specific dependency, consider making that feature a separate module or package. For example, Session Replay may need image or video encoding dependencies, and iOS Error Tracking may need crash reporting dependencies. Users should have a clear way to opt out of that feature and dependency when they don't need it, can't ship it, or need a smaller binary.
+
 That said, dependencies are sometimes the right choice. Some platforms don't provide safe basic primitives, such as an HTTP layer, storage, or concurrency tools. In those cases, use a boring, well-maintained dependency. If dependency risk is high but the code is small and stable, vendoring can also be a reasonable option. Document the tradeoff either way.
 
 ### Respect the platform
