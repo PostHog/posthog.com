@@ -127,6 +127,18 @@ export const sessionReplay = {
             classes: 'justify-start items-end pr-4 @lg:pr-6',
             imgClasses: 'rounded-tr-md shadow-2xl',
         },
+        filters: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/filters_light_020d186555.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/filters_dark_6f3e65501b.png',
+        },
+        chat: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/chat_light_9efd89f586.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/chat_dark_ecac24fa87.png',
+        },
+        recordings: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/recordings_light_90e389a4fa.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/recordings_dark_6a8ebd989f.png',
+        },
     },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',

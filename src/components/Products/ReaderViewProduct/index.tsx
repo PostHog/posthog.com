@@ -44,7 +44,7 @@ const SURFACE_MENU_FIELD: Record<Exclude<ProductSurface, 'docs'>, 'productMenu' 
 }
 
 const DIVIDED_GROUP_CLASSES =
-    'flex flex-col divide-y divide-primary [&>*]:py-8 [&>*:first-child]:pt-0 [&>*:last-child]:pb-0'
+    'not-prose flex flex-col divide-y divide-primary [&>*]:py-8 [&>*:first-child]:pt-0 [&>*:last-child]:pb-0'
 
 interface SurfaceGroup {
     items: ProductNavItem[]

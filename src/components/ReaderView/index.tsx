@@ -6,7 +6,6 @@ import {
     IconPullRequest,
     IconTextWidth,
     IconGear,
-    IconRefresh,
     IconClockRewind,
     IconTextWidthFixed,
     IconSearch,
@@ -27,7 +26,6 @@ import { TreeMenu } from 'components/TreeMenu'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Fieldset } from 'components/OSFieldset'
-import Slider from 'components/RadixUI/Slider'
 import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -240,25 +238,6 @@ const ContributorsSmall = ({ contributors }) => {
     ) : null
 }
 
-const LineHeightSlider = ({ lineHeightMultiplier, onValueChange }) => {
-    return (
-        <div className="flex items-center space-x-1">
-            <div className="flex-grow">
-                <Slider
-                    defaultValue={lineHeightMultiplier}
-                    max={3}
-                    step={0.25}
-                    min={1}
-                    value={[lineHeightMultiplier]}
-                    label="Line height"
-                    onValueChange={onValueChange}
-                />
-            </div>
-            <OSButton onClick={() => onValueChange([1])} icon={<IconRefresh className="size-5" />} />
-        </div>
-    )
-}
-
 const EditOnGitHubButton = ({ filePath, sourceInstanceName }: { filePath?: string; sourceInstanceName?: string }) => {
     if (!filePath) {
         return null
@@ -331,7 +310,7 @@ const EditHistoryPopover = ({ commits }: { commits: any[] }) => {
     )
 }
 
-const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
+const AppOptionsButton = () => {
     const { fullWidthContent, setFullWidthContent, setBackgroundImage, backgroundImage } = useReaderView()
 
     const selectedOption =
@@ -357,12 +336,6 @@ const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
             <div className="w-full h-full bg-primary text-primary space-y-2">
                 <Fieldset legend="Paragraphs">
                     <div className="grid grid-cols-2 gap-2">
-                        <label className="text-[15px]">Line height</label>
-                        <LineHeightSlider
-                            lineHeightMultiplier={lineHeightMultiplier}
-                            onValueChange={handleLineHeightChange}
-                        />
-
                         <ToggleGroup
                             title="Content width"
                             options={contentWidthOptions}
@@ -647,8 +620,6 @@ interface LeftSidebarProps {
     isNavVisible: boolean
     toggleNav: () => void
     isEditing?: boolean
-    lineHeightMultiplier: number
-    handleLineHeightChange: (value: number) => void
     filePath?: string
     sourceInstanceName?: string
     commits?: any[]
@@ -780,8 +751,6 @@ const LeftSidebar = ({
     isNavVisible,
     toggleNav,
     isEditing,
-    lineHeightMultiplier,
-    handleLineHeightChange,
     filePath,
     sourceInstanceName,
     commits,
@@ -1068,10 +1037,7 @@ const LeftSidebar = ({
                     {displayExpanded && (
                         <div className="ml-auto flex items-center gap-px">
                             <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
-                            <AppOptionsButton
-                                lineHeightMultiplier={lineHeightMultiplier}
-                                handleLineHeightChange={handleLineHeightChange}
-                            />
+                            <AppOptionsButton />
                         </div>
                     )}
                 </div>
@@ -1167,16 +1133,7 @@ function ReaderViewContent({
     // Handle slug-to-key mapping (e.g., great-expectations → greatexpectations)
     const customerKey = customerSlug ? customerSlug.replace(/-/g, '') : null
 
-    const {
-        isNavVisible,
-        isTocVisible,
-        lineHeightMultiplier,
-        fullWidthContent,
-        backgroundImage,
-        toggleNav,
-        toggleToc,
-        handleLineHeightChange,
-    } = useReaderView()
+    const { isNavVisible, isTocVisible, fullWidthContent, backgroundImage, toggleNav, toggleToc } = useReaderView()
 
     const showSidebar = tableOfContents && tableOfContents?.length > 0 && !hideRightSidebar
     const renderLeftSidebar = !compact && !hideLeftSidebar
@@ -1266,8 +1223,6 @@ function ReaderViewContent({
                         isNavVisible={isNavVisible}
                         toggleNav={toggleNav}
                         isEditing={isEditing}
-                        lineHeightMultiplier={lineHeightMultiplier}
-                        handleLineHeightChange={handleLineHeightChange}
                         filePath={filePath}
                         sourceInstanceName={sourceInstanceName}
                         commits={commits}

@@ -75,14 +75,14 @@ const Customers = ({ id, productData, customers, hasCaseStudy }: SectionComponen
                         return (
                             <li key={customer.slug} className="text-sm leading-snug">
                                 <span className="inline-flex gap-2 align-middle w-24 justify-end">
-                                    {renderLogo(customer, true)}
+                                    {renderLogo(customer)}
                                 </span>
-                                <span className="ml-4 text-primary relative top-px">{data.headline}</span>
+                                <span className="ml-4 text-[15px] text-primary relative top-px">{data.headline}</span>
                                 {isCaseStudy && (
                                     <Link
                                         to={`/customers/${customer.slug}`}
                                         state={{ newWindow: true }}
-                                        className="group border border-transparent hover:border-primary transition-all duration-100 rounded-full px-2 py-1 inline-flex items-center font-semibold whitespace-nowrap leading-none text-sm relative top-px"
+                                        className="group border border-transparent hover:border-primary transition-all duration-100 rounded-full px-2 py-1 inline-flex items-center font-semibold whitespace-nowrap leading-none text-sm relative top-px ml-1"
                                     >
                                         <span className="w-[0px] group-hover:w-10 max-w-auto transition-all duration-100 whitespace-nowrap overflow-hidden inline-block">
                                             Read

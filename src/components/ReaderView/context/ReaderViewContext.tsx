@@ -8,31 +8,10 @@ interface ReaderViewContextType {
     isTocVisible: boolean
     fullWidthContent: boolean
     setFullWidthContent: (value: boolean) => void
-    lineHeightMultiplier: number
     backgroundImage: string | null
     toggleNav: () => void
     toggleToc: () => void
-    handleLineHeightChange: (value: number) => void
     setBackgroundImage: (image: string | null) => void
-}
-
-const getComputedLineHeight = (selector: string) => {
-    const articleContent = document.querySelector('.reader-content-container')
-    const elements = articleContent?.querySelectorAll(selector)
-
-    if (!elements?.length) return 1.5
-
-    const computedStyle = window.getComputedStyle(elements[0])
-    const lineHeight = computedStyle.lineHeight
-
-    if (lineHeight === 'normal') return 1.5
-    if (lineHeight.endsWith('px')) {
-        return parseFloat(lineHeight) / parseFloat(computedStyle.fontSize)
-    }
-    if (lineHeight.endsWith('%')) {
-        return parseFloat(lineHeight) / 100
-    }
-    return parseFloat(lineHeight)
 }
 
 const ReaderViewContext = createContext<ReaderViewContextType | undefined>(undefined)
@@ -67,9 +46,6 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
     const [isTocVisible, setIsTocVisible] = useState(isLarge)
     const [tocUserToggled, setTocUserToggled] = useState(false)
     const [fullWidthContent, setFullWidthContent] = useState(false)
-    const [lineHeightMultiplier, setLineHeightMultiplier] = useState<number>(1)
-    const [lineHeightP, setLineHeightP] = useState<number | null>(null)
-    const [lineHeightLi, setLineHeightLi] = useState<number | null>(null)
     const [backgroundImage, setBackgroundImage] = useState<string | null>(() => {
         if (typeof window !== 'undefined') {
             const savedBackground = localStorage.getItem('background-image')
@@ -92,43 +68,6 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
     const toggleToc = useCallback(() => {
         setTocUserToggled(true)
         setIsTocVisible((prev) => !prev)
-    }, [])
-
-    const handleLineHeightChange = (value: number) => {
-        setLineHeightMultiplier(value)
-    }
-
-    useEffect(() => {
-        if (!lineHeightP || !lineHeightLi) return
-        const styleId = 'reader-line-height-style'
-        let style = document.getElementById(styleId) as HTMLStyleElement
-
-        if (!style) {
-            style = document.createElement('style')
-            style.id = styleId
-            document.head.appendChild(style)
-        }
-
-        style.textContent = `
-            .reader-content-container p { line-height: ${lineHeightP * lineHeightMultiplier} !important; }
-            .reader-content-container li { line-height: ${lineHeightLi * lineHeightMultiplier} !important; }
-        `
-        localStorage.setItem('lineHeightMultiplier', lineHeightMultiplier.toString())
-
-        return () => {
-            style.remove()
-        }
-    }, [lineHeightMultiplier, lineHeightLi, lineHeightP])
-
-    useEffect(() => {
-        const baseLineHeightP = getComputedLineHeight('p')
-        const baseLineHeightLi = getComputedLineHeight('li')
-        setLineHeightP(baseLineHeightP)
-        setLineHeightLi(baseLineHeightLi)
-        const storedLineHeightMultiplier = localStorage.getItem('lineHeightMultiplier')
-        if (storedLineHeightMultiplier) {
-            handleLineHeightChange(parseFloat(storedLineHeightMultiplier))
-        }
     }, [])
 
     // Reset ToC toggle state when path changes (Nav stays sticky — persisted to localStorage)
@@ -183,11 +122,9 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         isTocVisible,
         fullWidthContent,
         setFullWidthContent,
-        lineHeightMultiplier,
         backgroundImage,
         toggleNav,
         toggleToc,
-        handleLineHeightChange,
         setBackgroundImage: handleBackgroundImageChange,
     }
 
