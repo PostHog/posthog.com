@@ -2,9 +2,7 @@
 title: Pricing
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
-
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 <CalloutBox icon="IconInfo" type="fyi" title="Pricing not yet finalized">
 
@@ -36,6 +34,7 @@ The most effective way to reduce costs is to write efficient queries:
 ### When materialization saves money
 
 Materialization is cost-effective when:
+
 - The endpoint is called frequently (many reads per sync)
 - The underlying query is expensive (scans lots of data)
 - Data freshness requirements allow for periodic syncs
@@ -43,31 +42,34 @@ Materialization is cost-effective when:
 ### When materialization adds cost
 
 Materialization may increase costs when:
+
 - The endpoint is rarely called
 - The query is already fast and cheap
 - You need real-time data
 
-### Sync frequency trade-offs
+### Data freshness trade-offs
 
-Choose a sync frequency that balances freshness with cost:
+Choose a data freshness setting that balances how current your data needs to be with cost:
 
-| Frequency | Best for |
-|-----------|----------|
-| Hourly | High-traffic endpoints where near-real-time matters |
-| Daily | Most customer-facing dashboards |
-| Weekly | Historical reports, slowly-changing data |
+| Data freshness | Best for                                            |
+| -------------- | --------------------------------------------------- |
+| 15-30 minutes  | High-traffic endpoints where near-real-time matters |
+| 1-6 hours      | Most customer-facing dashboards                     |
+| 12-24 hours    | Standard daily reporting                            |
+| 7 days         | Historical reports, slowly-changing data            |
 
 ## Caching strategies
 
 Endpoints support [caching](/docs/endpoints/caching) to reduce redundant query execution.
 
-### Setting appropriate cache duration
+### Choosing the right data freshness
 
-- **5-15 minutes**: Data that changes frequently but doesn't need to be real-time
+- **15-30 minutes**: Data that changes frequently but doesn't need to be real-time
 - **1-6 hours**: Dashboards and reports viewed periodically
-- **24 hours**: Historical data or slowly-changing metrics
+- **12-24 hours**: Standard daily metrics
+- **7 days**: Historical data or slowly-changing metrics
 
-Longer cache durations reduce costs but show less fresh data.
+Longer data freshness intervals reduce costs but data may be less current.
 
 ## Monitoring usage
 
