@@ -3,12 +3,14 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { SectionComponentProps } from '../types'
 import Glow from 'components/Glow'
 import { CTAs } from 'components/CTAs'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const Overview = ({ id, productData }: SectionComponentProps) => {
     const { name, Icon, overview, screenshots, status } = productData ?? {}
 
     return (
         <section id={id} className="scroll-mt-20 not-prose flex flex-col gap-12 max-w-7xl mx-auto">
+            <DebugContainerQuery name="reader-content" />
             <header className="">
                 {screenshots?.home?.src && (
                     <Glow

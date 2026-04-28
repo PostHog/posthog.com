@@ -22,7 +22,6 @@ interface WistiaCustomPlayerProps {
     onMaximize?: () => void
     onPopOut?: (currentTime: number) => void
     subtitle?: string
-    isPreview?: boolean // For thumbnail mode
     startTime?: number // Start playback at specific time
     onTimeUpdate?: (time: number) => void // Callback for time updates
 }
@@ -46,7 +45,6 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
             onMaximize,
             onPopOut,
             subtitle,
-            isPreview = false,
             startTime = 0,
             onTimeUpdate,
         },
@@ -79,9 +77,6 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
 
         // Load Wistia scripts and initialize player
         useEffect(() => {
-            // Don't initialize actual player in preview mode
-            if (isPreview) return
-
             if (typeof window === 'undefined' || !containerRef.current) return
 
             // Check if we're inside a very small container (likely a thumbnail in a grid)
@@ -715,68 +710,10 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                   ]
                 : []
 
-        // If in preview mode, show a static thumbnail
-        if (isPreview) {
-            return (
-                <div className={`flex flex-col overflow-hidden ${className}`}>
-                    <div
-                        className={`relative ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}
-                        style={{ paddingTop: `${(1 / aspectRatio) * 100}%` }}
-                    >
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            {/* Wistia thumbnail */}
-                            <img
-                                src={`https://fast.wistia.com/oembed?url=https://home.wistia.com/medias/${mediaId}&format=json&width=640&height=360`}
-                                alt="Video thumbnail"
-                                className="w-full h-full object-cover"
-                                onError={(e) => {
-                                    // Fallback to a placeholder if thumbnail fails to load
-                                    e.currentTarget.src = `https://embedwistia-a.akamaihd.net/deliveries/${mediaId}/thumbnail.jpg?width=640`
-                                }}
-                            />
-                            <div
-                                className={`absolute inset-0 ${
-                                    theme === 'dark' ? 'bg-black/30' : 'bg-white/30'
-                                } flex items-center justify-center`}
-                            >
-                                <div className="bg-black/50 rounded-full p-4">
-                                    <IconPlayFilled
-                                        className={`w-8 h-8 ${
-                                            theme === 'dark'
-                                                ? 'text-white'
-                                                : theme === 'light'
-                                                ? 'text-black'
-                                                : 'text-secondary'
-                                        }`}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bg-gray-dark p-3">
-                        <div
-                            className={`text-center ${
-                                theme === 'dark'
-                                    ? 'text-white/60'
-                                    : theme === 'light'
-                                    ? 'text-black/60'
-                                    : 'text-secondary/60'
-                            } text-xs`}
-                        >
-                            Video Player Preview
-                        </div>
-                    </div>
-                </div>
-            )
-        }
-
         return (
             <div className={`flex flex-col ${className}`}>
                 {/* Video container */}
-                <div
-                    className={`relative ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}
-                    style={{ paddingTop: `${(1 / aspectRatio) * 100}%` }}
-                >
+                <div className={`relative`} style={{ paddingTop: `${(1 / aspectRatio) * 100}%` }}>
                     <div className="absolute inset-0">
                         {/* Wistia player container */}
                         <div ref={containerRef} className="w-full h-full" />

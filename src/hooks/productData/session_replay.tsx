@@ -88,7 +88,7 @@ export const sessionReplay = {
         title: 'See how people use your product',
         description:
             'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
-        eli5: "Replay records what happens in a user's session — clicks, scrolls, form inputs, page views, network requests, console logs — and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",
+        eli5: "Session Replay records what happens in a user's session — clicks, scrolls, form inputs, page views, network requests, console logs — and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",
         textColor: 'text-black', // tw
     },
     videos: {
@@ -144,6 +144,11 @@ export const sessionReplay = {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
         alt: 'A hedgehog watching some session recordings',
         classes: 'absolute bottom-0 right-0 max-w-[698px]',
+    },
+    hogs: {
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/replay_mobile_hog_03d948364a.png',
+        },
     },
     slider: {
         marks: [5000, 25000, 120000, 500000],
