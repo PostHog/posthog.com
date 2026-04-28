@@ -6175,6 +6175,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                {
+                    name: 'Manage usage metrics with MCP',
+                    url: '/docs/customer-analytics/manage-usage-metrics-mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                },
                     name: 'Resources',
                 },
                 {
