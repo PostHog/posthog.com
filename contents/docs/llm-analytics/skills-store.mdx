@@ -22,14 +22,17 @@ A PostHog skill follows the [Agent Skills specification](https://agentskills.io/
 
 The MCP server exposes the skills store through a dedicated family of tools:
 
-| Tool | Purpose |
-|------|---------|
-| `skill-list` | List all available skills (name + description only) |
-| `skill-get` | Fetch a skill by name — returns the body and a manifest of bundled files |
-| `skill-file-get` | Fetch a single bundled file by path (on demand) |
-| `skill-create` | Store a new skill, optionally with bundled files |
-| `skill-update` | Publish a new immutable version (with `base_version` for concurrency) |
-| `skill-duplicate` | Duplicate an existing skill under a new name |
+| Tool                | Purpose                                                                           |
+| ------------------- | --------------------------------------------------------------------------------- |
+| `skill-list`        | List all available skills (name + description only)                               |
+| `skill-get`         | Fetch a skill by name — returns the body and a manifest of bundled files          |
+| `skill-file-get`    | Fetch a single bundled file by path (on demand)                                   |
+| `skill-create`      | Store a new skill, optionally with bundled files                                  |
+| `skill-update`      | Publish a new version — provide full `body`, incremental `edits`, or `file_edits` |
+| `skill-file-create` | Add one bundled file to a skill (publishes a new version)                         |
+| `skill-file-delete` | Remove one bundled file from a skill                                              |
+| `skill-file-rename` | Rename one bundled file (move without rewriting content)                          |
+| `skill-duplicate`   | Duplicate an existing skill under a new name                                      |
 
 Agents use these with progressive disclosure: discover by description, fetch the body only when relevant, and pull individual files on demand — rather than loading everything up front.
 
@@ -47,7 +50,7 @@ Let's create a skill called `hog-release-notes` that writes release notes in Pos
 1. Navigate to **LLM analytics** > **Skills**
 2. Click **New skill**
 3. Name it `hog-release-notes`
-4. Add a description that explains *when* to use the skill — this is what agents use to discover it
+4. Add a description that explains _when_ to use the skill — this is what agents use to discover it
 5. Paste your skill body (see example below)
 6. Optionally add bundled files, `allowed_tools`, `license`, `compatibility`, or metadata
 7. Click **Create skill**
@@ -83,6 +86,7 @@ A good skill body gives the agent all the context it needs — where to find inf
 You write release notes for PostHog. Follow these rules.
 
 ## Where to find what's new
+
 - Check the changelog at contents/docs/llm-analytics/changelog.mdx
   for what's already been published
 - Look at merged PRs since the last changelog entry using
@@ -91,18 +95,21 @@ You write release notes for PostHog. Follow these rules.
 - Cross-reference with the GitHub milestone if one exists
 
 ## Voice and tone
+
 - Direct and concise — no marketing fluff
 - Technical but approachable
 - Use second person ("you") not third person ("users")
 - Be specific about what changed and why it matters
 
 ## Structure for each entry
+
 1. **One-line summary** — What shipped, in plain language
 2. **What it does** — 2-3 sentences on the feature or fix
 3. **How to use it** — Concrete steps or code snippets
 4. **Why we built it** — The problem this solves (one sentence)
 
 ## Rules
+
 - Start with a verb (Add, Fix, Improve, Remove)
 - Include links to relevant docs pages
 - If it's a breaking change, lead with that
@@ -110,6 +117,7 @@ You write release notes for PostHog. Follow these rules.
 - Skip dependency bumps and minor refactors
 
 ## Output
+
 Write the release notes as markdown, ready to append to the changelog.
 ```
 
@@ -182,7 +190,9 @@ description: Access and run shared team skills stored in PostHog.
   skills, or references "skills store" or "skill store".
 allowed-tools: mcp__posthog__skill-list, mcp__posthog__skill-get,
   mcp__posthog__skill-file-get, mcp__posthog__skill-create,
-  mcp__posthog__skill-update, mcp__posthog__skill-duplicate
+  mcp__posthog__skill-update, mcp__posthog__skill-file-create,
+  mcp__posthog__skill-file-delete, mcp__posthog__skill-file-rename,
+  mcp__posthog__skill-duplicate
 ---
 
 # PostHog Skills Store
@@ -268,7 +278,92 @@ Update the PostHog skill "hog-release-notes" to also include
 a "Known limitations" section in the release notes structure.
 ```
 
-The agent calls `skill-get` to read the current version, then `skill-update` with the new body and `base_version`. Fields you don't pass are carried forward — if you don't send `files`, the existing bundle is preserved. If you do send `files`, they replace the previous version's bundle.
+The agent calls `skill-get` to read the current version, then `skill-update` with the new body and `base_version`. Fields you don't pass are carried forward. Pick the most surgical primitive for what you're changing — the API offers several so you don't have to round-trip the whole skill to tweak one part.
+
+### Use incremental edits
+
+Instead of rewriting the entire skill body, you can use incremental find/replace edits via the `edits` parameter. This is useful for making small changes without risking accidental drift:
+
+```json
+{
+  "edits": [
+    { "old": "## Old heading", "new": "## New heading" },
+    { "old": "outdated instruction", "new": "updated instruction" }
+  ],
+  "base_version": 2
+}
+```
+
+Each edit must have:
+
+- `old` — the exact text to find (must match exactly once in the body)
+- `new` — the replacement text
+
+Edits are applied sequentially. If `old` matches zero times or more than once, the update fails with an error indicating which edit failed.
+
+You can use either `body` (full replacement) or `edits` (incremental), but not both in the same request.
+
+### Edit a single bundled file
+
+Use `file_edits` to patch one bundled file without resending every file:
+
+```json
+{
+  "skill_name": "hog-release-notes",
+  "file_edits": [
+    {
+      "path": "scripts/changelog.py",
+      "edits": [{ "old": "DAYS = 7", "new": "DAYS = 14" }]
+    }
+  ],
+  "base_version": 2
+}
+```
+
+Non-targeted files carry forward unchanged. `file_edits` cannot add, remove, or rename files — use the per-file tools below for that.
+
+### Add, remove, or rename a file
+
+Use atomic per-file tools when you need to add, delete, or rename a single bundled file. Each publishes a new version:
+
+**Add a file:**
+
+```json
+// skill-file-create
+{
+  "skill_name": "hog-release-notes",
+  "path": "scripts/format.py",
+  "content": "# Formatting helpers...",
+  "base_version": 2
+}
+```
+
+**Delete a file:**
+
+```json
+// skill-file-delete
+{
+  "skill_name": "hog-release-notes",
+  "file_path": "scripts/old-script.py",
+  "base_version": 3
+}
+```
+
+**Rename a file:**
+
+```json
+// skill-file-rename
+{
+  "skill_name": "hog-release-notes",
+  "old_path": "scripts/format.py",
+  "new_path": "scripts/format_v2.py",
+  "base_version": 4
+}
+```
+
+### Replace the whole bundle (rare)
+
+Passing `files` to `skill-update` replaces ALL bundled files — anything not in the array is dropped. Only use this when you intentionally want to wipe and reseed the bundle. For everything else, prefer `file_edits` or the per-file CRUD tools above.
 
 ### Review changes
 

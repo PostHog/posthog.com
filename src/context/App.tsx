@@ -1198,6 +1198,25 @@ const appSettings: AppSettings = {
             type: 'standard',
         },
     },
+    '/community/reputation': {
+        size: {
+            min: {
+                width: 500,
+                height: 1000,
+            },
+            max: {
+                width: 500,
+                height: 1000,
+            },
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
     '/fm': {
         size: {
             min: {

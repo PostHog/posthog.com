@@ -3,6 +3,7 @@ import React, { useState, createContext, useEffect, useContext, useRef } from 'r
 import { Replies } from './Replies'
 import { Profile } from './Profile'
 import { QuestionData, StrapiData, StrapiRecord, TopicData } from 'lib/strapi'
+import LevelBadge from './LevelBadge'
 import Days from './Days'
 import Markdown from './Markdown'
 import { QuestionForm } from './QuestionForm'
@@ -474,6 +475,7 @@ export function Question(props: QuestionProps) {
         handlePublishReply,
         handleResolve,
         handleReplyDelete,
+        voteReply,
         archive,
         pinTopics,
         escalate,
@@ -518,6 +520,7 @@ export function Question(props: QuestionProps) {
                 handlePublishReply,
                 handleResolve,
                 handleReplyDelete,
+                voteReply,
                 pinTopics,
                 mutate,
             }}
@@ -550,6 +553,7 @@ export function Question(props: QuestionProps) {
                             profile={questionData.attributes.profile?.data}
                             className={archived ? 'opacity-50' : ''}
                         />
+                        <LevelBadge points={questionData.attributes.profile?.data?.attributes?.reputation} />
                         <Days
                             created={questionData.attributes.createdAt}
                             profile={questionData.attributes.profile?.data}

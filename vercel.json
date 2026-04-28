@@ -1788,6 +1788,7 @@
         { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
+        { "source": "/handbook/brand/process", "destination": "/handbook/engineering/product-design-process" },
         { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" },
         { "source": "/teams/twig", "destination": "/teams/posthog-code" },
         { "source": "/teams/twig/:path*", "destination": "/teams/posthog-code/:path*" },
