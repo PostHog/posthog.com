@@ -155,6 +155,55 @@ Example for Cursor (add to `.cursor/mcp.json`):
 
 </details>
 
+<details>
+
+<summary>Choosing server mode (tool-based vs exec-based)?</summary>
+
+The MCP server can operate in two modes:
+
+- **Tool-based mode** (default): Each PostHog tool is registered as a separate MCP tool. This gives your agent fine-grained access to individual capabilities.
+- **Exec-based mode**: All tools are wrapped behind a single `posthog` CLI-like tool. This reduces the number of tools visible to token-constrained coding agents.
+
+The server auto-detects which mode to use based on your client. To explicitly override this, use the `mode` query parameter or `x-posthog-mcp-mode` header:
+
+**Query parameter:**
+
+```text
+https://mcp.posthog.com/mcp?mode=tools
+https://mcp.posthog.com/mcp?mode=exec
+```
+
+**Header:**
+
+```http
+x-posthog-mcp-mode: tools
+x-posthog-mcp-mode: exec
+```
+
+| Value                  | Behavior                                        |
+| ---------------------- | ----------------------------------------------- |
+| `tools` or `tool`      | Force tool-based mode (one tool per capability) |
+| `exec` or `single-exec`| Force exec-based mode (single `posthog` tool)   |
+
+The header takes precedence when both are set. Any other value is ignored and auto-detection is used.
+
+Example for Cursor (add to `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp?mode=exec",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Available tools
 
 Tools trigger actions on behalf of the user based on the goals and information already in the context of the LLM.
