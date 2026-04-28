@@ -54,6 +54,10 @@ Direct query sources appear in the SQL editor's connection dropdown. Select your
 
 </CalloutBox>
 
+## Configuration
+
+<SourceParameters />
+
 <CalloutBox icon="IconWarning" title="SSL/TLS required for new sources" type="caution">
 
 PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption for database connections. Ensure your PostgreSQL database supports SSL/TLS connections before linking. Existing sources created before this date are not affected. If you're connecting through an SSH tunnel, you can optionally disable TLS using the **Require TLS through tunnel?** toggle since the tunnel already encrypts the connection.
