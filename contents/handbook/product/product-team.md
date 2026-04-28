@@ -29,16 +29,19 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend><TeamMember name="Anna Szell" photo /></legend>
 
--   <SmallTeam slug="data-stack" />
+-   <SmallTeam slug="data-modeling" />
+-   <SmallTeam slug="data-tools" />
+-   <SmallTeam slug="managed-warehouse" />
+-   <SmallTeam slug="warehouse-sources" />
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Annika Schmid" photo /></legend>
 
--   <SmallTeam slug="feature-flags" />
--   <SmallTeam slug="experiments" />
 -   <SmallTeam slug="posthog-ai" />
+-   <SmallTeam slug="posthog-code" />
+-   <SmallTeam slug="signals" />
 
 </fieldset>
 
@@ -46,37 +49,42 @@ Here is a overview that shows which of our PMs currently works with which team:
 <legend><TeamMember name="Cory Slater" photo /></legend>
 
 -   <SmallTeam slug="error-tracking" />
--   <SmallTeam slug="surveys" />
 -   <SmallTeam slug="replay" />
+-   <SmallTeam slug="surveys" />
+-   <SmallTeam slug="website" />
+- Cross-product growth reviews
+
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Abe Basu" photo /></legend>
 
+-   <SmallTeam slug="batch-exports" />
+-   <SmallTeam slug="llm-analytics" />
+-   <SmallTeam slug="logs" />
 -   <SmallTeam slug="workflows" />
--   <SmallTeam slug="batch-exports" />*
--   Endpoints
--   Logs
 
-*light support
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Mike Warren" photo /></legend>
 
+-   <SmallTeam slug="analytics-platform" />
 -   <SmallTeam slug="product-analytics" />
 -   <SmallTeam slug="web-analytics" />
--   <SmallTeam slug="analytics-platform" />
+
 
 </fieldset>
 
 <fieldset>
-<legend>Teams with no PM currently</legend>
+<legend>Product teams with no PM currently</legend>
 
--   <SmallTeam slug="customer-analytics" />
--   <SmallTeam slug="llm-analytics" />
+-   <SmallTeam slug="conversations" />
+-   <SmallTeam slug="experiments" />
+-   <SmallTeam slug="feature-flags" />
+-   <SmallTeam slug="flags-platform" />
 
 </fieldset>
 
@@ -84,7 +92,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 ## Product goals
 
-Product managers primarily support their teams in reaching their goals. The top two priorities of each PM are to run a growth review at the beginning of every month for each of their products, and to organise regular user interviews. (Our rule of thumb is 1 interview per week per PM).
+Product managers primarily support their teams in reaching their goals. The top two priorities of each PM are to run a growth review at the beginning of every month for each of their products, and to organize regular user interviews. (Our rule of thumb is 1 interview per week per PM).
 
 The [quarterly per-product planning](/handbook/company/goal-setting) typically highlight the biggest blind spots a team or product has (e.g. what metrics or parts of the product do we think have potential, but we don't have enough context yet). Teams are encouraged to include their "biggest unknown" as a research goal for the PM to own as part of their quarterly goals. Findings should be shared asynchronously via a GitHub PR in the <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal">product-internal repo</PrivateLink>, and in the growth reviews or team standups where applicable.
 
@@ -92,4 +100,19 @@ To keep track of their projects across teams, PMs should track their personal qu
 
 As the PM team, we are usually also pursuing a couple of side projects each quarter with the goal of leveling up how we do Product at PostHog.
 
-In Q4 2025, we are focussing primarily on the teams we work with, and have no big side projects.
+In Q2 2026, we are working on the following themes:
+
+- Ensure our metrics definitions are mature enough for our scale (e.g. inconsistencies in activation & product intent) -> Annika
+    - Investigate ways to make updates to activation definitions sustainable & consistent -> Mike
+- Figure out information flows between product, growth and marketing, so that we get the right exposure for new and mature products -> Abe
+- Make sure our products & tracking are set up for a agent-first world
+    - Tracking human vs agent actions, and defining success for each -> every PM
+    - Make sure each product has use cases and a “reason for being” in an agent-first world -> every product team
+- Think about ideas how to fix the “accountability gap” in growth reviews -> Cory
+    - From product teams, expect more accountability
+    - From PMs, get growth reviews done early in the month
+
+“Business-as-usual” themes:
+
+- Make sure we standardise best practices & share knowledge as a group of 5 (soon to be 7) without central leadership, and without adding bureaucracy & friction
+- Use our PM brownbags to share how we use AI to be more effective

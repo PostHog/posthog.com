@@ -16,7 +16,7 @@ crosspost:
 ---
 
 
-Software companies were once dominated by two types of roles: product managers and software engineers, but this is changing. A new role is emerging: the [product engineer](/blog/what-is-a-product-engineer).
+Software companies were once dominated by two types of roles: product managers and software engineers, but this is changing. A new role is emerging: the [product engineer](/product-engineer/what-is-a-product-engineer).
 
 Want proof? [Look at this graph](https://www.youtube.com/watch?v=oMRgdpXLElE):
 
@@ -92,7 +92,7 @@ Picking what's right is up to the company and its goals. If you're a small team 
 
 ## Further reading
 
-- [What is a product engineer (and why they matter)](/blog/what-is-a-product-engineer/)
+- [What is a product engineer (and why they matter)](/product-engineer/what-is-a-product-engineer/)
 - [Startups, stop treating engineers like a different species](/blog/stop-treating-engineers-differently)
 - [The really important job interview questions engineers should ask (but don't)](/blog/what-to-ask-in-interviews)
 - [WTF is a forward-deployed engineer? (and why everyone is hiring them)](/blog/forward-deployed-engineer)

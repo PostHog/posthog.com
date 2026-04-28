@@ -42,7 +42,7 @@ The small teams structure is core to how we've [designed our company for speed](
 
 Two to six people is ideal. More than this and you have a department, which is what we're trying to avoid. Less than two people and, well, you don’t have a team.
 
-Small teams are effectively one-pizza teams, as opposed to the [two-pizza teams](https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/two-pizza-teams.html) idea popularized by Amazon. They’re mostly comprised of [product engineers](/blog/what-is-a-product-engineer) – i.e. engineers who also talk to users, and own product decisions.
+Small teams are effectively one-pizza teams, as opposed to the [two-pizza teams](https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/two-pizza-teams.html) idea popularized by Amazon. They’re mostly comprised of [product engineers](/product-engineer/what-is-a-product-engineer) – i.e. engineers who also talk to users, and own product decisions.
 
 The overall goal of small teams is to own an area of the product or company, and behave like an early-stage startup. They don't have all the functions of a startup, but their spirit and approach to work should be exactly the same.
 

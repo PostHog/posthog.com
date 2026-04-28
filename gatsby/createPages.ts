@@ -40,6 +40,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
 
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
+    const DataWarehouseSource = path.resolve(`src/templates/DataWarehouseSource.tsx`)
     const SdkReferenceTemplate = path.resolve(`src/templates/sdk/SdkReference.tsx`)
     const SdkTypeTemplate = path.resolve(`src/templates/sdk/SdkType.tsx`)
 
@@ -68,6 +69,26 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             }
             handbook: allMdx(
                 filter: { fields: { slug: { regex: "/^/handbook/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    parent {
+                        ... on File {
+                            sourceInstanceName
+                        }
+                    }
+                    rawBody
+                }
+            }
+            productEngineerHandbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/product-engineer/" } }, frontmatter: { title: { ne: "" } } }
             ) {
                 nodes {
                     id
@@ -359,6 +380,38 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     name
                     slug
                     type
+                }
+            }
+            postHogSources: allPostHogSource(filter: { mdx: { id: { eq: null } }, unreleased: { ne: true } }) {
+                nodes {
+                    id
+                    name
+                    slug
+                }
+            }
+            postHogSourcesWithDocs: allPostHogSource(filter: { mdx: { id: { ne: null } }, unreleased: { ne: true } }) {
+                nodes {
+                    id
+                    slug
+                    mdx {
+                        id
+                        fields {
+                            slug
+                        }
+                    }
+                }
+            }
+            selfHostedSources: allMdx(
+                filter: {
+                    fields: { slug: { regex: "/^/docs/cdp/sources/(s3|azure-blob|r2|gcs)$/" } }
+                    frontmatter: { title: { ne: "" } }
+                }
+            ) {
+                nodes {
+                    id
+                    fields {
+                        slug
+                    }
                 }
             }
             allSdkReferences {
@@ -692,6 +745,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     )
     createPosts(engineeringHandbook, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(localHandbook, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
+    createPosts(result.data.productEngineerHandbook.nodes, 'product-engineer', HandbookTemplate, {
+        name: 'Product Engineer Handbook',
+        url: '/product-engineer',
+    })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' }, (node) => ({
         regex: `$${node.url}/`,
@@ -900,6 +957,55 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
+    // Sources WITHOUT hand-written docs: create API-generated pages at both paths
+    result.data.postHogSources.nodes.forEach((node) => {
+        createPage({
+            path: `/docs/data-warehouse/sources/${node.slug}`,
+            component: DataWarehouseSource,
+            context: { id: node.id, ignoreWrapper: true },
+        })
+        createPage({
+            path: `/docs/cdp/sources/${node.slug}`,
+            component: DataWarehouseSource,
+            context: { id: node.id, ignoreWrapper: true },
+        })
+    })
+
+    // Sources WITH hand-written docs: create data-warehouse page from the MDX content
+    // (cdp page is already created by Gatsby's MDX processing from contents/docs/cdp/sources/)
+    result.data.postHogSourcesWithDocs.nodes.forEach((node) => {
+        if (node.mdx?.id) {
+            createPage({
+                path: `/docs/data-warehouse/sources/${node.slug}`,
+                component: HandbookTemplate,
+                context: {
+                    id: node.mdx.id,
+                    links: [],
+                    nextURL: '',
+                    searchFilter: 'Docs',
+                    breadcrumbBase: { name: 'Docs', url: '/docs' },
+                },
+            })
+        }
+    })
+
+    // Self-hosted sources: not in the API, but have MDX files at cdp/sources/
+    // Create data-warehouse alias pages for them
+    result.data.selfHostedSources.nodes.forEach((node) => {
+        const slug = node.fields.slug.replace('/docs/cdp/sources/', '')
+        createPage({
+            path: `/docs/data-warehouse/sources/${slug}`,
+            component: HandbookTemplate,
+            context: {
+                id: node.id,
+                links: [],
+                nextURL: '',
+                searchFilter: 'Docs',
+                breadcrumbBase: { name: 'Docs', url: '/docs' },
+            },
+        })
+    })
+
     // Grab types available for each SDK and version
     const sdkTypesByReference = result.data.allSdkTypes.nodes.reduce((acc, node) => {
         const { referenceId, version, ...types } = node
@@ -1002,6 +1108,20 @@ async function createMinimalPages({
             }
             handbook: allMdx(
                 filter: { fields: { slug: { regex: "/^/handbook/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            productEngineerHandbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/product-engineer/" } }, frontmatter: { title: { ne: "" } } }
             ) {
                 nodes {
                     id
@@ -1117,10 +1237,16 @@ async function createMinimalPages({
     const data = result.data as {
         docs: { nodes: any[] }
         handbook: { nodes: any[] }
+        productEngineerHandbook: { nodes: any[] }
         posts: { nodes: any[] }
     }
 
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
+
     createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
+    createHandbookPreviewPosts(data.productEngineerHandbook.nodes, 'product-engineer', {
+        name: 'Product Engineer Handbook',
+        url: '/product-engineer',
+    })
     createBlogPreviewPosts(data.posts.nodes)
 }

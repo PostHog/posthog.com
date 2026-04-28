@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-If you have a general marketing question, go to `#team-marketing` in Slack.
+If you have a general marketing question, go to `#group-marketing-and-content` in Slack.
 
 If you need help with the website, go to `#posthogdotcom`.
 
@@ -14,7 +14,7 @@ Here's a quick guide to who to ask if you want help with a specific marketing ac
 <details>
 <summary>I need a product marketer, but I don't know which</summary>
 
-Product marketing is part of <SmallTeam slug="marketing" />. You can see which PMM is focused on which team on the <SmallTeam slug="marketing" /> team page. If it's a team which doesn't currently have an assigned marketer, just ask in #team-marketing in Slack and tag the team lead. 
+Product marketing is part of <SmallTeam slug="marketing" />. You can see which PMM is focused on which team on the <SmallTeam slug="marketing" /> team page. If it's a team which doesn't currently have an assigned marketer, just ask in #group-marketing-and-content in Slack and tag the team lead. 
 </details>
 
 
@@ -84,6 +84,8 @@ Please share in the #merch channel. <TeamMember name="Kendal Hall" /> owns fulfi
 <summary>I have a question / problem / suggestion for the website</summary>
 
 The website is owned by <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" />. Generally, the best place to ask is the `#posthogdotcom` Slack channel.
+
+For larger pieces of work — a new product page, a significant copy overhaul — read [Working with the website team](/handbook/marketing/working-with-website) for the process to follow.
 </details>
 
 <details>

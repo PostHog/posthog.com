@@ -1,6 +1,6 @@
 ---
 title: OpenClaw LLM analytics installation
-platformIconName: IconCode
+platformIconName: IconOpenClaw
 showStepsToc: true
 tableOfContents: [
     {
@@ -9,8 +9,13 @@ tableOfContents: [
         depth: 1,
     },
     {
-        url: 'enable-the-posthog-plugin',
-        value: 'Enable the PostHog plugin',
+        url: 'install-the-posthog-plugin',
+        value: 'Install the PostHog plugin',
+        depth: 1,
+    },
+    {
+        url: 'configure-the-plugin',
+        value: 'Configure the plugin',
         depth: 1,
     },
     {
@@ -31,7 +36,7 @@ tableOfContents: [
 ]
 ---
 
-[OpenClaw](https://github.com/openclaw/openclaw) is a self-hosted AI assistant gateway that connects messaging platforms (Telegram, Slack, Discord, WebChat) to AI models. The PostHog plugin is bundled with OpenClaw and captures LLM generations, tool executions, and conversation traces as `$ai_generation`, `$ai_span`, and `$ai_trace` events.
+[OpenClaw](https://github.com/openclaw/openclaw) is a self-hosted AI assistant gateway that connects messaging platforms (Telegram, Slack, Discord, WebChat, and more) to AI models. The [`@posthog/openclaw`](https://github.com/PostHog/posthog-openclaw) plugin captures LLM generations, tool executions, and conversation traces as `$ai_generation`, `$ai_span`, and `$ai_trace` events.
 
 ## Prerequisites
 
@@ -40,7 +45,15 @@ You need:
 - A running [OpenClaw](https://github.com/openclaw/openclaw) gateway (Node.js >= 22)
 - A [PostHog account](https://us.posthog.com/signup) with a project API key
 
-## Enable the PostHog plugin
+## Install the PostHog plugin
+
+Install the [`@posthog/openclaw`](https://github.com/PostHog/posthog-openclaw) plugin using the OpenClaw CLI:
+
+```bash
+openclaw plugins install @posthog/openclaw
+```
+
+## Configure the plugin
 
 Add the PostHog plugin to your OpenClaw config file (`~/.openclaw/openclaw.json` or `openclaw.yaml`):
 

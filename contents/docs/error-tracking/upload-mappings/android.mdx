@@ -41,6 +41,20 @@ plugins {
 }
 ```
 
+If you are running this in CI/CD, you can configure the CLI directly on the Gradle task instead of relying on `POSTHOG_CLI_HOST`, `POSTHOG_CLI_PROJECT_ID`, and `POSTHOG_CLI_API_KEY` environment variables:
+
+```kotlin
+import com.posthog.android.PostHogCliExecTask
+
+tasks.withType<PostHogCliExecTask> {
+    postHogHost = "https://eu.posthog.com"
+    postHogProjectId = "my-project-id"
+    postHogApiKey = "my-personal-api-key"
+}
+```
+
+You can also set `postHogExecutable` if you want to use a custom `posthog-cli` path.
+
 </Step>
 
 <StepVerifySymbolSetsUpload symbolType="mappings" />

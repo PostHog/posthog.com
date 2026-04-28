@@ -29,7 +29,7 @@ To start, it is useful to understand who growth engineers are as people. When co
 
 1. **Entrepreneurial**. Growth engineers, especially at PostHog, have an interest in the business as a whole as well as the hustle to find ways to improve it. They find areas they can make a large impact on the growth metrics, and develop solutions themselves to improve those metrics. Like an entrepreneur, they are independent and scrappy.
 
-2. **Experimental.** Growth ideas need [testing in the real world](/product-engineers/testing-in-production), and this means growth engineers are like scientists: they experiment a lot. This means developing multiple solutions for a problem, having a testing framework, building their implementations, and evaluating its success. Growth engineers care more about real results from experiments than designing the perfect experiment. 
+2. **Experimental.** Growth ideas need [testing in the real world](/product-engineers/testing-in-production), and this means growth engineers are like scientists: they experiment a lot. This means developing multiple solutions for a problem, having a testing framework, building their implementations ([often with the help of AI](/blog/ai-is-killing-no-code-experiments)), and evaluating its success. Growth engineers care more about real results from experiments than designing the perfect experiment. 
 
 3. **Data-driven.** More than other engineering roles, they care about usage data and it guides their work. They use data to inform and evaluate all the experiments they do. They need data, and the ability to analyze that data, to know which ideas to work on and how their solutions are working.
 
@@ -77,7 +77,7 @@ If all this sounds like a unicorn, you aren’t wrong. This is again why we find
 
 ![Growth engineers' power](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/what-is-a-growth-engineer/thanos.png)
 
-> **Growth engineers vs product engineers:** Both build new features, are opinionated, experiment, and take ownership. The difference is their focus. [Product engineers](/blog/what-is-a-product-engineer) focus on building products for specific users. Growth engineers focus on projects that drive growth. This could be a feature enabling product teams, a service supporting marketing, or an optimization to a cross-product flow. They are less constrained to a specific product.
+> **Growth engineers vs product engineers:** Both build new features, are opinionated, experiment, and take ownership. The difference is their focus. [Product engineers](/product-engineer/what-is-a-product-engineer) focus on building products for specific users. Growth engineers focus on projects that drive growth. This could be a feature enabling product teams, a service supporting marketing, or an optimization to a cross-product flow. They are less constrained to a specific product.
 
 <NewsletterForm />
 
@@ -132,7 +132,7 @@ From our experience, we'd recommend the technical and entrepreneurial growth eng
 
 ## Further reading
 
-- [What is a product engineer (and why they're awesome)](/blog/what-is-a-product-engineer)
+- [What is a product engineer (and why they're awesome)](/product-engineer/what-is-a-product-engineer)
 - [What we've learned about multi-product pricing (so far)](/blog/multi-product-pricing)
 - [Why 'Product Engineer' is the most fun role I've had in tech](/blog/why-product-engineering-is-so-fun)
 - [WTF is a forward-deployed engineer? (and why everyone is hiring them)](/blog/forward-deployed-engineer)

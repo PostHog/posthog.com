@@ -111,7 +111,7 @@ Joining an offsite? _Only use the offsite budget_, not your User Limit - it help
 - What if I'm driving for work-related purposes?
   - You can claim a mileage reimbursement through Brex. **Do not** separately expense fuel.
 - What if I accidentally used the company card for a personal expense?
-  - Login to Brex > find the charge > click on 'Repay'
+  - Login to Brex > find the charge > click on 'Repay' > Repay to the bank account details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md)
   - For Revolut charges, ping [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ)
 - How do I get access to WeWork?
   - We have a company All Access account - ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
@@ -143,9 +143,9 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
   - Apple Studio Displays are only for Product Engineers (high density screen) and Sales/CS/Onboarding teams (built-in high quality webcam and microphone). For all other teams that feel they could benefit from an enhanced monitor, there are some really great competitors to the Studio Display at a fraction of the price - like the [Clarity Pro 27"](https://alogic.co.uk/products/clarity-pro-27-uhd-4k-monitor-with-65w-pd-and-webcam) or another solid option is this [LG screen](https://www.amazon.co.uk/LG-UltraFine-Monitor-27U730A-B-Built/dp/B0F7M27H6F/ref=asc_df_B0F7M27H6F?mcid=d91fd0cc5e06349887121f1ba2c4d6b6&tag=googshopuk-21&linkCode=df0&hvadid=696386561242&hvpos=&hvnetw=g&hvrand=11057029523976072922&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9045888&hvtargid=pla-2442615442699&psc=1&hvocijid=11057029523976072922-B0F7M27H6F-&hvexpln=0&gad_source=1)  You can purchase these using your personal limit.
     - If you order a Studio Display during your probation period but end up leaving PostHog, we can recover the cost of the display and you won't need to return it.
   - Laptop guidelines
-    - For engineering roles (product, platform, & support), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. We recommend the 1TB SSD drive in order to make sure you have enough space to run the full stack locally.
+    - For engineering roles (product, platform, & support), we recommend a Macbook Pro 14-inch M5 Pro, with the 18-core CPU, 20-core GPU upgrade and 64GB of RAM.
     - For sales & CS roles, we buy the Macbook Pro 14-inch M5, with 10-core GPU, 16-core and the 32GB RAM upgrade.
-    - All other roles, we currently recommend a Macbook Air with the latest Apple Silicon processor and 16GB of RAM.
+    - All other roles, we issue Macbook Pros. Wherever possible we will redistribute engineering models (Macbook Pros) no longer in use to allow you to have a more powerful machine for running PostHog Code.
     - Apple offers multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large monitor.
     - We only purchase laptops with an English keyboard configuration (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave.
     - In the unlikely case that you need to purchase your own laptop:
@@ -156,8 +156,11 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
     - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old or significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
     - Part of `#team-client-libraries` and need to purchase a phone for testing? Talk to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
 
-#### Yubikey
-We enforce the use of hardware security keys wherever we can. Every team member needs two Yubikeys. You can find them on Amazon, and can read more about how to get set up [on the MFA page](https://posthog.com/handbook/company/security#multi-factor-authentication).
+#### Yubikey (for specific roles only)
+
+Passkeys are the preferred way of securing accounts. In some cases Passkeys aren't supported by the service provider.
+
+If you find yourself in a team requiring access to these kinds of tools where a Yubikey is required then you should purchase them as recommended on the [on the MFA page](https://posthog.com/handbook/company/security#multi-factor-authentication) using your Brex card. If you aren't sure if you need one then you probably don't and should instead be using Passkeys
 
 #### Other equipment
 - Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items usually work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.

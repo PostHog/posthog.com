@@ -13,7 +13,7 @@ import { CallToAction } from 'components/CallToAction'
 export const addNextStepsStep = (
     steps: StepDefinition[],
     platformSlug?: string,
-    options?: { mappingsUrl?: string; mappingsLabel?: string }
+    options?: { mappingsUrl?: string; mappingsLabel?: string; mappingsDescription?: string }
 ): StepDefinition[] => {
     // Filter out any existing verify steps from onboarding content
     const filteredSteps = steps.filter(
@@ -60,8 +60,8 @@ export const addNextStepsStep = (
             content: (
                 <>
                     <p>
-                        Great, you're capturing exceptions! If you serve minified bundles, the next step is to upload
-                        source maps to generate accurate stack traces.
+                        {options?.mappingsDescription ||
+                            `Great, you're capturing exceptions! If you serve minified bundles, the next step is to upload source maps to generate accurate stack traces.`}
                     </p>
                     <p>Let's continue to the next section.</p>
                     <CallToAction

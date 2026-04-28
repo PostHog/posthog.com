@@ -8,6 +8,7 @@ import type {
     MetaobjectsReferencesEdge,
     MetaobjectsResponseData,
 } from '../src/templates/merch/types'
+import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
 import dayjs from 'dayjs'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
@@ -997,35 +998,53 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
-    const fetchReferences = async (page = 1) => {
-        const referenceQuery = qs.stringify(
-            {
-                pagination: {
-                    page,
-                    pageSize: 100,
+    const fetchReferences = async () => {
+        /** Keep the pinned `latest` row + newest N versioned rows per SDK so builds stay fast. */
+        const MAX_VERSIONS_PER_SDK = 10
+
+        const fetchRows = async (filters: Record<string, unknown>, pageSize: number) => {
+            const referenceQuery = qs.stringify(
+                {
+                    filters,
+                    pagination: { page: 1, pageSize },
+                    sort: ['createdAt:desc'],
                 },
-            },
-            {
-                encodeValuesOnly: true,
-            }
-        )
-        const referencesURL = `${process.env.GATSBY_SQUEAK_API_HOST}/api/sdk-references?${referenceQuery}`
-        const { data, meta } = await fetch(referencesURL).then((res) => res.json())
-        for (const reference of data) {
-            const data = reference?.attributes?.data
-            if (!data) continue
-            const versionNode = {
+                { encodeValuesOnly: true }
+            )
+            const url = `${process.env.GATSBY_SQUEAK_API_HOST}/api/sdk-references?${referenceQuery}`
+            const { data } = await fetch(url).then((res) => res.json())
+            return (data ?? []) as Array<{ attributes?: { data?: Record<string, unknown> } }>
+        }
+
+        const createReferenceNode = (refData: Record<string, unknown>) => {
+            createNode({
                 parent: null,
                 children: [],
                 internal: {
                     type: `SdkReferences`,
-                    contentDigest: createContentDigest(data),
+                    contentDigest: createContentDigest(refData),
                 },
-                ...data,
-            }
-            createNode(versionNode)
+                ...refData,
+                // Strapi payload is validated at runtime; `id` lives on `data`.
+            } as unknown as Parameters<typeof createNode>[0])
         }
-        if (meta?.pagination?.pageCount > meta?.pagination?.page) await fetchReferences(page + 1)
+
+        await Promise.all(
+            SUPPORTED_SDK_IDS.flatMap((referenceId) => [
+                fetchRows({ referenceId: { $eq: referenceId }, version: { $containsi: 'latest' } }, 1),
+                fetchRows(
+                    { referenceId: { $eq: referenceId }, version: { $notContainsi: 'latest' } },
+                    MAX_VERSIONS_PER_SDK
+                ),
+            ])
+        ).then((batches) => {
+            for (const batch of batches) {
+                for (const reference of batch) {
+                    const refData = reference?.attributes?.data
+                    if (refData) createReferenceNode(refData)
+                }
+            }
+        })
     }
 
     const fetchEvents = async (page = 1) => {
@@ -1123,6 +1142,50 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
+    const fetchDataWarehouseSources = async () => {
+        try {
+            const response = await fetch('https://us.posthog.com/api/public_source_configs')
+            const data = await response.json()
+            if (data?.type === 'invalid_request' || data?.code === 'not_found') {
+                console.warn('Failed to fetch data warehouse sources:', data?.detail || 'unknown error')
+                return
+            }
+            const configs = Array.isArray(data) ? data : Object.values(data)
+
+            for (const config of configs) {
+                const displayName = config.label || config.name
+                if (!displayName) continue
+                const slug = displayName
+                    .toLowerCase()
+                    .replace(/\./g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/[^a-z0-9-]/g, '')
+
+                createNode({
+                    id: createNodeId(`posthog-source-${config.name}`),
+                    internal: {
+                        type: 'PostHogSource',
+                        contentDigest: createContentDigest(config),
+                    },
+                    sourceId: config.name,
+                    slug,
+                    name: displayName,
+                    icon_url: config.iconPath ? `https://us.posthog.com${config.iconPath}` : null,
+                    docsUrl: config.docsUrl || null,
+                    unreleased: config.unreleasedSource || false,
+                    beta: config.betaSource || false,
+                    featured: config.featured || false,
+                    caption: config.caption || null,
+                    sourceFields: config.fields || [],
+                    permissionsCaption: config.permissionsCaption || null,
+                    featureFlag: config.featureFlag || null,
+                })
+            }
+        } catch (error) {
+            console.warn('Failed to fetch data warehouse sources:', error)
+        }
+    }
+
     await Promise.all([
         createProductDataNode(),
         createRoadmapItems(),
@@ -1139,5 +1202,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         fetchAchievements(),
         fetchAchievementGroups(),
         fetchRewards(),
+        fetchDataWarehouseSources(),
     ])
 }

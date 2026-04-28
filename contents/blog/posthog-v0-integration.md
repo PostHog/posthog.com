@@ -27,7 +27,7 @@ That integration focuses on how flags and experiments run in production. Now, we
 
 ## What you can do with PostHog in v0
 
-v0 can build directly on real codebases, enabling teams to ship production-ready apps and agents rather than prototypes or toy projects.
+v0 can build directly on real codebases, enabling teams to ship production-ready apps and [agents](/newsletter/building-ai-agents) rather than prototypes or toy projects.
 
 With PostHog as a partner, v0 doesn’t just generate code against your repository – it can do so with an understanding of how your product actually behaves in production. It has access to experiment results, user behavior patterns, feature flag state, and error impact, which means the software you generate reflects real product data rather than assumptions about how the product should work.
 

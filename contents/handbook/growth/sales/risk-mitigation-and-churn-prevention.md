@@ -133,7 +133,7 @@ Proactively check for common implementation issues, especially for newer account
 
 **Feature flag resilience:**
 
-- **No fallback code.** If flags fail to load, the app should still work. Check that they're [falling back to working code](/docs/feature-flags/best-practices#9-fallback-to-working-code) when flags return unexpected values.
+- **No fallback code.** If flags fail to load, the app should still work. Check that they're [falling back to working code](/docs/feature-flags/best-practices#undefined-is-not-flag-is-off-nor-false) when flags return unexpected values.
 - **No local evaluation (server-side).** [Server-side local evaluation](/docs/feature-flags/local-evaluation) ensures flags work regardless of network status. Important for reliability.
 
 When you find implementation issues, don't just tell them what's wrong. Help them fix it. A customer who had a billing problem you solved is more loyal than one who never had a problem at all.

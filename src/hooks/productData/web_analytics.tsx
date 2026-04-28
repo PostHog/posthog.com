@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconPieChart } from '@posthog/icons'
 import Link from 'components/Link'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const webAnalytics = {
     Icon: IconPieChart,
@@ -282,6 +283,33 @@ export const webAnalytics = {
                 },
             ],
         },
+        {
+            title: 'MCP',
+            headline: 'Query traffic from your editor',
+            description:
+                'Check traffic, investigate anomalies, and build traffic dashboards from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            features: [
+                {
+                    title: 'Validate deploys',
+                    description: 'Check whether traffic to specific pages changed after an update.',
+                },
+                {
+                    title: 'Diagnose anomalies',
+                    description: 'Investigate sudden drops in pageviews or sessions as context for your coding agent.',
+                },
+                {
+                    title: 'Analyze traffic sources',
+                    description:
+                        'Break down which referrers, UTMs, or channels are driving visits to prioritize what to build next.',
+                },
+                {
+                    title: 'Monitor page performance',
+                    description:
+                        'Track bounce rates, session durations, and page-level trends to catch regressions early.',
+                },
+            ],
+            children: <MCPInstall />,
+        },
     ],
     postHogOnPostHog: {
         title: 'How PostHog uses Web Analytics',
@@ -447,5 +475,22 @@ export const webAnalytics = {
             "See traffic spike? Click through to session replays of those visitors. Run surveys on specific traffic sources. Build custom analytics beyond the dashboard. It all connects because it's one platform.",
         'getting-started':
             "Add our snippet. Data flows immediately. The pre-built dashboard has everything most people need. Later, customize with product analytics if you want deeper insights. But if you're just looking for a web analytics, the defaults are probably enough.",
+        ai: 'The PostHog MCP server lets your AI coding agent query web analytics data directly from your code editor. Check traffic trends, investigate anomalies, and build dashboards – without switching to the PostHog app.',
+    },
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_92791a9d9b.png',
+        imageAlt: 'PostHog AI and web analytics',
+        imageClasses: 'w-96',
+        description: 'surface why traffic changed, what is converting, and how acquisition ties to product usage',
+        skills: [
+            'Filters web traffic by path, geography, device, or referrer',
+            'Investigates traffic spikes, dips, and other anomalies',
+            'Analyzes Core Web Vitals to identify performance bottlenecks',
+        ],
+        prompts: [
+            'Create a dashboard showing web traffic by source and campaign',
+            'Which landing pages have the highest bounce rate this month?',
+            'There was an odd traffic spike yesterday – find the root cause',
+        ],
     },
 }
