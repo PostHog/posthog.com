@@ -22,7 +22,7 @@ Beyond this, we recommend:
 
 3. Removing the experiment and losing variant's code.
 
-4. Archiving the experiment.
+4. [Archiving the experiment](#archiving-experiments).
 
 5. Disabling the feature flag once the winning variant is hardcoded in your application and the flag check has been removed from your code. Every active flag counts toward your [feature flag billing](/docs/feature-flags/cutting-costs), even if it's rolled out to 100% and no longer doing anything useful.
 
@@ -63,3 +63,20 @@ Here's how the actions differ:
 | **Pausing** | Disabled | Control variant | Stops | Fixed | Yes |
 | **Ending** | Modified to roll out chosen variant to all users | Chosen variant | Continues (chosen variant only) | Fixed | No |
 | **Resetting** | Unchanged | Multiple variants | Continues | Cleared | Yes (relaunch) |
+| **Archiving** | Unchanged | Unchanged | Unchanged | Preserved | Yes (unarchive) |
+
+## Archiving experiments
+
+Archiving moves completed experiments out of your default list view while keeping all data and results intact. Archived experiments don't appear in the main experiments list, so you can focus on active work.
+
+To archive an experiment, open the **More** menu on the experiment page and select **Archive experiment**.
+
+### Unarchiving experiments
+
+You can unarchive an experiment if you need to reference or restore it. This returns the experiment to the default list view without changing its status, dates, or results.
+
+To unarchive:
+
+1. Filter the experiments list to show **Archived** experiments.
+2. Find the experiment you want to restore.
+3. Open the **More** menu on the experiment row or detail page and select **Unarchive experiment**.
