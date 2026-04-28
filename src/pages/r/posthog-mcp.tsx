@@ -54,7 +54,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                 contentMaxWidthClass="max-w-5xl"
                 showQuestions={false}
             >
-                <div className="grid grid-cols-1 @lg:grid-cols-[1.2fr_1fr] gap-10 items-start mb-6 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 @lg:grid-cols-[1.2fr_1fr] gap-10 items-center mb-6 max-w-7xl mx-auto">
                     <div>
                         <h1 className="text-3xl md:text-5xl !mb-4">PostHog MCP</h1>
                         <p className="text-lg md:text-xl mb-6 text-secondary">
@@ -88,7 +88,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Group_143773_7436a145da.png"
                             alt="PostHog MCP in your editor"
-                            className="w-full"
+                            className="w-full max-w-[260px] mx-auto"
                         />
                     </div>
                 </div>
