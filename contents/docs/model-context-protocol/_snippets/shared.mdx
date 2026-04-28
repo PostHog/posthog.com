@@ -185,6 +185,12 @@ The agent will use the `create-feature-flag` tool with a `multivariate` configur
 
 The agent will use the `query-run` tool to execute a trends query and return daily signup counts.
 
+### Metric investigation
+
+**Prompt:** "Why did our signup conversion rate drop last week?"
+
+The agent will diagnose the metric change by checking for known causes (feature flag changes, experiments, deployments), running breakdowns across segments, and analyzing lifecycle shifts to identify the root cause.
+
 ### Cohort management
 
 **Prompt:** "List all cohorts in my project"
