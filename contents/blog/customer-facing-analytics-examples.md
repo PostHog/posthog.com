@@ -40,6 +40,8 @@ The detail Vercel has [talked about publicly](https://vercel.com/changelog/new-u
 
 If you've ever hit refresh on a dashboard wondering whether the numbers are actually live or 20 minutes stale, you know why this matters. Customer-facing analytics lose most of their value the moment users stop trusting the numbers are current.
 
+Good news if you're a PostHog user: We just launched a real-time dashboard for [Web Analytics.](https://posthog.com/web-analytics) 
+
 ## 2. Booking.com: Live metrics on the landing page
 
 Booking.com has made a science of turning live activity into social proof: "23 people are looking at this hotel right now." "Booked 4 times in the last 6 hours." "Only 2 rooms left at this price." These numbers are pulled from live booking and browsing data and dropped directly onto the property listing.
