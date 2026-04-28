@@ -265,7 +265,7 @@ The auto-created report uses these defaults:
 | --------------------- | ------------- | ------------------------------------------------------------ |
 | **Frequency**         | Count-based   | Generates a report after a set number of evaluation runs     |
 | **Trigger threshold** | 100           | A report is generated every 100 new evaluation results       |
-| **Cooldown**          | 60 minutes    | Minimum time between count-triggered reports                 |
+| **Cooldown**          | 1 hour        | Minimum hours between count-triggered reports (1–24 hours)   |
 | **Daily run cap**     | 10            | Maximum report runs per day                                  |
 | **Enabled**           | Yes           | Reports start generating immediately                         |
 | **Delivery targets**  | None          | Reports are viewable in the UI but no notifications are sent |
@@ -277,6 +277,7 @@ Reports are viewable directly in the evaluation's **Reports** tab without config
 You can adjust the report configuration after creating an evaluation:
 
 - Change the trigger threshold to generate reports more or less frequently
+- Adjust the minimum hours between reports (1–24) to control how often count-triggered reports can fire
 - Add email or Slack delivery targets to receive notifications when reports are generated
 - Disable the report if you don't need automated summaries
 
