@@ -7,6 +7,7 @@ const DEFAULT_SLIDE_DURATION = 5000
 export interface TabbedCarouselTab {
     value: string
     label: React.ReactNode
+    icon?: React.ReactNode
     content: React.ReactNode
     color: string
     activeText: string
@@ -72,10 +73,11 @@ export default function TabbedCarousel({
                                 <Tabs.Trigger
                                     key={tab.value}
                                     value={tab.value}
-                                    className={`relative flex-1 min-w-[200px] @sm:min-w-0 px-3 py-2.5 text-sm font-semibold cursor-pointer select-none transition-colors text-balance rounded-t-md ${
+                                    className={`relative flex-1 min-w-[200px] @sm:min-w-0 px-3 py-2.5 text-sm font-semibold cursor-pointer select-none transition-colors text-balance rounded-t-md flex flex-col gap-1 items-center ${
                                         isActive ? `${tab.color} ${tab.activeText}` : 'text-secondary'
                                     } ${tab.triggerClassName ?? ''}`}
                                 >
+                                    {tab.icon && tab.icon}
                                     {tab.label}
                                     <div className="absolute bottom-0 left-2 right-2 h-[3px] overflow-hidden">
                                         {isActive && (

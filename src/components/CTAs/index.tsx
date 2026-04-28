@@ -42,7 +42,7 @@ export const CTAs = () => {
                 </div>
             </motion.div>
 
-            <p className="!text-sm flex flex-wrap items-center gap-2 mt-4 justify-center @xl:justify-start">
+            <p className="!text-sm flex flex-wrap items-center gap-2 mt-4 justify-start">
                 <Link
                     to="/docs/model-context-protocol"
                     state={{ newWindow: true }}

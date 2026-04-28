@@ -576,12 +576,7 @@ export default function Job({
                                 <div>
                                     {parsedContent.map((item) => (
                                         <div key={item.value} id={item.value}>
-                                            <Accordion
-                                                skin={false}
-                                                items={[item]}
-                                                type="single"
-                                                defaultValue={item.value}
-                                            />
+                                            <Accordion items={[item]} type="single" defaultValue={item.value} />
                                         </div>
                                     ))}
                                 </div>
@@ -625,7 +620,6 @@ export default function Job({
                             {sfBenchmark[salaryRole] && (
                                 <div id="salary">
                                     <Accordion
-                                        skin={false}
                                         items={[
                                             {
                                                 value: 'salary',
@@ -658,7 +652,6 @@ export default function Job({
                             )}
                             <div id="benefits">
                                 <Accordion
-                                    skin={false}
                                     items={[
                                         {
                                             value: 'benefits',
@@ -699,7 +692,6 @@ export default function Job({
                             {gitHubIssues.length > 0 && (
                                 <div id="typical-tasks">
                                     <Accordion
-                                        skin={false}
                                         items={[
                                             {
                                                 value: 'typical-tasks',
@@ -762,7 +754,6 @@ export default function Job({
                             {!multipleTeams && showObjectives && objectives && (
                                 <div id="mission-objectives">
                                     <Accordion
-                                        skin={false}
                                         items={[
                                             {
                                                 value: 'mission-objectives',
@@ -794,7 +785,6 @@ export default function Job({
                             )}
                             <div id="interview-process">
                                 <Accordion
-                                    skin={false}
                                     items={[
                                         {
                                             value: 'interview-process',
@@ -815,7 +805,6 @@ export default function Job({
                             </div>
                             <div id="apply">
                                 <Accordion
-                                    skin={false}
                                     items={[
                                         {
                                             value: 'apply',

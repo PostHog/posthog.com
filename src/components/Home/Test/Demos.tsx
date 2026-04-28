@@ -997,7 +997,6 @@ export default function Home2() {
                         <div className="@2xl:max-w-lg mb-6">
                             <Accordion
                                 key={activeAccordion}
-                                // skin={false}
                                 items={accordionItems}
                                 defaultValue={activeAccordion}
                                 onValueChange={handleAccordionChange}

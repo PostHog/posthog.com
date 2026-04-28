@@ -67,12 +67,29 @@ export const sessionReplay = {
         title: 'Watch people use your product',
         description:
             'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
-        eli5: 'Replay records what happens in a user\'s session — clicks, scrolls, form inputs, page views, network requests, console logs — and plays it back like video. You reach for it when metrics tell you something is wrong but not why: a funnel drops off, a bug report comes in, rage clicks spike. Replay fills in the "why."',
+        eli5: "Replay records what happens in a user's session — clicks, scrolls, form inputs, page views, network requests, console logs — and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",
         textColor: 'text-black', // tw
     },
     videos: {
         overview: {
             wistia: 'a1480fky0u',
+            highlights: [
+                { title: 'Gather context', description: 'by seeing what led to each rageclick' },
+                { title: 'Debug issues', description: 'by watching the prelude to each bug' },
+                {
+                    title: 'Assess performance',
+                    description: 'by measuring first contentful paint and load time',
+                },
+                {
+                    title: 'Resolve experiments',
+                    description: 'by seeing how users interact with new features',
+                },
+                { title: 'Build user empathy', description: 'by watching their entire product journey' },
+                {
+                    title: 'Improve conversion',
+                    description: 'by using context to solve stubborn problems',
+                },
+            ],
         },
     },
     screenshots: {

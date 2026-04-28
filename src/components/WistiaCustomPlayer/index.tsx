@@ -150,7 +150,9 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     }
                                 },
                                 play: () => {
-                                    const playPromise = playerRef.current?.play ? playerRef.current.play() : video?.play()
+                                    const playPromise = playerRef.current?.play
+                                        ? playerRef.current.play()
+                                        : video?.play()
                                     if (playPromise && typeof playPromise.catch === 'function') {
                                         playPromise.catch((error: any) => {
                                             console.warn('Play was prevented:', error)
@@ -982,7 +984,7 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                             } text-sm pt-4 px-4 min-h-[32px] flex items-center justify-center`}
                         >
                             {captionText ? (
-                                <p className="text-2xl font-medium">{captionText}</p>
+                                <p className="text-base font-medium">{captionText}</p>
                             ) : (
                                 <p
                                     className={`${

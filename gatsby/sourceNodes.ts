@@ -210,6 +210,55 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     })
 
     // --- Begin parallel sourcing of independent data ---
+    const sourceProductUsageStats = async () => {
+        if (!process.env.POSTHOG_APP_API_KEY) return
+
+        try {
+            const res = await fetch(
+                'https://us.posthog.com/api/environments/2/endpoints/product_active_usage_30d/run',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
+                    },
+                    body: JSON.stringify({}),
+                }
+            )
+            if (res.status !== 200) {
+                console.error('Failed to fetch product_active_usage_30d endpoint:', res.status)
+                return
+            }
+            const body: any = await res.json()
+            const columns: string[] = body.columns || []
+            const productIdx = columns.indexOf('product')
+            const usersIdx = columns.indexOf('unique_users')
+            const orgsIdx = columns.indexOf('unique_orgs')
+            const rows: any[][] = body.results || []
+            rows.forEach((row) => {
+                const product = row[productIdx]
+                if (!product) return
+                const data = {
+                    product,
+                    unique_users: row[usersIdx] ?? null,
+                    unique_orgs: row[orgsIdx] ?? null,
+                }
+                createNode({
+                    id: createNodeId(`product-usage-stats-30d-${product}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: 'ProductUsageStats',
+                        contentDigest: createContentDigest(data),
+                    },
+                    ...data,
+                })
+            })
+        } catch (err) {
+            console.error('Error fetching product_active_usage_30d endpoint:', err)
+        }
+    }
+
     const createProductDataNode = async () => {
         const url = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
         const headers = {
@@ -1187,6 +1236,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     await Promise.all([
+        sourceProductUsageStats(),
         createProductDataNode(),
         createRoadmapItems(),
         sourceChangelogVideos(),

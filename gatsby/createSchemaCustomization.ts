@@ -541,6 +541,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         created_by: PostHogWorkflowTemplateCreatedBy
         fields: PostHogWorkflowTemplateFields
     }
+    type ProductUsageStats implements Node {
+        product: String
+        unique_users: Int
+        unique_orgs: Int
+    }
   `)
     createTypes([
         schema.buildObjectType({

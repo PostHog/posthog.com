@@ -1,5 +1,6 @@
 import React from 'react'
 import { SectionComponentProps } from '../types'
+import TabbedCarousel from 'components/TabbedCarousel'
 
 interface FeatureImage {
     src: string
@@ -56,15 +57,30 @@ const FeatureBlock = ({ feature }: { feature: Feature }) => {
     )
 }
 
-const Features = ({ id, productData }: SectionComponentProps) => {
+const Features = ({ id, productData, customers, hasCaseStudy }: SectionComponentProps) => {
     const features: Feature[] = productData?.features || []
+
+    const productUsageStatsData = useStaticQuery(graphql`
+        query ProductUsageStatsQuery {
+            allProductUsageStats {
+                nodes {
+                    product
+                    unique_users
+                    unique_orgs
+                }
+            }
+        }
+    `)
+    const productUsageStats = productUsageStatsData?.allProductUsageStats?.nodes?.find(
+        (n: { product: string }) => n.product === productData?.slug
+    ) ?? { unique_users: null, unique_orgs: null }
 
     if (!features.length) return null
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
             <h2>Features</h2>
-            <div className="space-y-4">
+            <div className="grid @2xl/reader-content-container:grid-cols-2 gap-8">
                 {features.map((feature, index) => {
                     if (feature.label) {
                         return (
