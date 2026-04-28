@@ -49,7 +49,7 @@ Each job has the following settings:
 
 - **Name** – A label to identify the job (e.g. "Production GPT-4o")
 - **Analysis level** – Whether to cluster traces (entire conversations) or generations (individual LLM calls)
-- **Event filters** – Property filters to scope which traces or generations are included. Leave empty to include all.
+- **Filters** – Narrow which traces or generations to include by event properties, person properties, or cohort membership. Leave empty to include all.
 - **Enabled** – Toggle a job on or off without deleting it
 
 You can create up to five clustering jobs per team. Jobs run automatically during the next scheduled clustering and summarization cycle. The run selector on the Clusters page includes the job name so you can identify which job produced each run.
