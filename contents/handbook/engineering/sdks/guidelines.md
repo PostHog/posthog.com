@@ -134,4 +134,4 @@ The right cadence also depends on the platform and ecosystem. Web and server SDK
 
 If an SDK supports only certain platform versions, has unusual threading behavior, drops events under pressure, stores data locally, or handles privacy-sensitive data, write it down.
 
-This isn't bureaucracy. It's how we avoid the next contributor rediscovering the same tradeoff six months later.
+Most of the time, a code comment near the decision is enough. For bigger decisions, write an RFC or add the guidance here if it applies across SDKs. This isn't bureaucracy. It's how we avoid the next contributor rediscovering the same tradeoff six months later.
