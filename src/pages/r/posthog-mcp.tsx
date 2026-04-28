@@ -54,7 +54,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                 contentMaxWidthClass="max-w-5xl"
                 showQuestions={false}
             >
-                <div className="grid grid-cols-1 @lg:grid-cols-[1.2fr_1fr] gap-10 items-center mb-6 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 @lg:grid-cols-[1.2fr_1fr] gap-10 items-start mb-6 max-w-7xl mx-auto">
                     <div>
                         <h1 className="text-3xl md:text-5xl !mb-4">PostHog MCP</h1>
                         <p className="text-lg md:text-xl mb-6 text-secondary">
@@ -115,10 +115,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                 </div>
 
                 <div className={isIdle ? 'quest-idle' : ''}>
-                    <QuestLog
-                        firstSpeechBubble="Let's wire up your editor!"
-                        lastSpeechBubble="Time to start shipping!"
-                    >
+                    <QuestLog firstSpeechBubble="Let's wire up your editor!" lastSpeechBubble="Time to start shipping!">
                         <QuestLogItem
                             title="Start with the Wizard"
                             subtitle="Set up PostHog in 8 minutes with the Wizard"
@@ -144,8 +141,10 @@ export default function PostHogMCPLanding(): JSX.Element {
                             <p>No schemas to design upfront. No data warehouse to set up.</p>
 
                             <p className="text-secondary">
-                                <em>Prefer to manually set up PostHog in your codebase? Already using PostHog and want
-                                to wire it into your IDE?</em>
+                                <em>
+                                    Prefer to manually set up PostHog in your codebase? Already using PostHog and want
+                                    to wire it into your IDE?
+                                </em>
                             </p>
                             <p>
                                 You can still benefit from installing the MCP. Instead of using the Wizard, use the
@@ -163,14 +162,10 @@ export default function PostHogMCPLanding(): JSX.Element {
                             </div>
                         </QuestLogItem>
 
-                        <QuestLogItem
-                            title="Talk to me, baby"
-                            subtitle="Natural language navigation"
-                            icon="IconChat"
-                        >
+                        <QuestLogItem title="Talk to me, baby" subtitle="Natural language navigation" icon="IconChat">
                             <p>
-                                Once you connect the PostHog MCP server to Claude, Cursor, or whatever agent you
-                                already use, just ask a question. For example:
+                                Once you connect the PostHog MCP server to Claude, Cursor, or whatever agent you already
+                                use, just ask a question. For example:
                             </p>
 
                             <ul>
@@ -327,8 +322,8 @@ export default function PostHogMCPLanding(): JSX.Element {
                             icon="IconRocket"
                         >
                             <p>
-                                You've found the problem. Now ship the fix behind a flag, measured, and A/B tested.
-                                Just ask your agent to do it.
+                                You've found the problem. Now ship the fix behind a flag, measured, and A/B tested. Just
+                                ask your agent to do it.
                             </p>
 
                             <ProductScreenshot
@@ -348,8 +343,8 @@ export default function PostHogMCPLanding(): JSX.Element {
                                     new-search rolled out to 10% of users" as part of your development workflow.
                                 </li>
                                 <li>
-                                    <strong>Set up A/B tests in plain English</strong> – "Create an A/B test for the
-                                    new checkout flow with a 70/30 split. Use purchase_completed as the goal metric."
+                                    <strong>Set up A/B tests in plain English</strong> – "Create an A/B test for the new
+                                    checkout flow with a 70/30 split. Use purchase_completed as the goal metric."
                                 </li>
                                 <li>
                                     <strong>Get updates on experiments</strong> – "Is the dark-mode-test Experiment
