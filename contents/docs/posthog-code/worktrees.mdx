@@ -28,6 +28,8 @@ For simple development environments, this is typically all you'll need.
 
 For more complex projects, you may need to apply some configuration to your worktree environments. PostHog Code supports both `.worktreeinclude` and `.worktreelink` files to help.
 
+For setup scripts that run when a worktree is created (installing dependencies, running migrations, and so on), see [Local environments](/docs/posthog-code/environments#local-environments).
+
 ### `.worktreeinclude`
 
 Worktrees create fresh checkouts of your git repo, so they do not include untracked files like `.env`.

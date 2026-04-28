@@ -4,13 +4,34 @@ sidebar: Docs
 showTitle: true
 ---
 
-<!--
-Scratch notes
+A **cloud run** is a [task](/docs/posthog-code/tasks) which runs in a sandbox environment instead of on your computer. You can close the app, switch networks, or shut your computer, and the agent keeps going. Reconnect when you're ready to check on progress or hand the task back to your computer.
 
-  Defer depth to cloud-runs owners; minimum outline:
-    What is a cloud run?
-    Configuring cloud env for your workflow.
-    Cloud ↔ local handoff, conflicts, how we handle them.
--->
+## How a cloud run works
 
-pepe
+When you start a cloud run, PostHog Code:
+
+1. Provisions a fresh, isolated workspace for the task.
+2. Applies the [cloud environment](/docs/posthog-code/environments#cloud-environments) you've picked, which sets the network access rules and injects the secrets and environment variables the workspace needs.
+3. Checks out your repo at the branch you started from.
+4. Starts the agent on your prompt.
+
+Once the agent is done, you can pick the work back up locally for review (see [Handing off between cloud and local](#handing-off-between-cloud-and-local) below) or open a PR straight from the run.
+
+## Configuring cloud for your workflow
+
+Cloud runs use a [cloud environment](/docs/posthog-code/environments#cloud-environments) to control:
+
+- **Secrets and environment variables** injected into the cloud workspace
+- **Network access**, either an allowlist of trusted services, full internet access, or a custom set of domains
+
+## Handing off between cloud and local
+
+A task can move between local and cloud in either direction. When you hand off, PostHog Code transfers:
+
+- All your code changes. Committed, uncommitted, unpushed, untracked, everything in the working folder gets carried over.
+- The branch you're on.
+- The full agent conversation, so it remembers what you've already discussed.
+
+The other side picks up exactly where you left off, and you can hand off again at any point.
+
+Handoff to local requires a clean working tree on the destination side. If you have uncommitted changes there, commit or stash them first.
