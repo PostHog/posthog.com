@@ -257,7 +257,7 @@ Bad names are generic and vague:
 
 ### 5. Use keyset pagination instead of OFFSET
 
-`OFFSET` pagination is **not supported** for programmatic requests on `/query` and is currently rejected with HTTP 400 for personal API keys. If you're paginating to export data, **stop and use [batch exports](/docs/cdp/batch-exports) instead** — `/query` is not a supported export path.
+`OFFSET` pagination is **not supported** for programmatic requests on `/query` and is currently rejected with HTTP 400 for personal API keys. If you're paginating to export data, **stop and use [batch exports](/docs/cdp/batch-exports) instead** – `/query` is not a supported export path.
 
 For ad-hoc paging, use keyset pagination on the table's sort column: `timestamp` for `events`, `id` for `persons`. Other columns (e.g. `created_at`) are not indexed for this and will be slow.
 

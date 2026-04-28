@@ -40,7 +40,7 @@ To create a query, you make a `POST` request to the `/api/projects/:project_id/q
 
 By default, API queries return up to 100 rows. If you specify your own `LIMIT`, you can return up to 50k rows per query.
 
-For paginating beyond a single query, you **must** use [keyset pagination on `timestamp`](#5-use-timestamp-based-pagination-instead-of-offset). `OFFSET` is not supported for programmatic requests and is currently rejected with HTTP 400 for personal API keys. For exporting larger volumes, use [batch exports](/docs/cdp/batch-exports) — `/query` is not a supported export path.
+For paginating beyond a single query, you **must** use [keyset pagination on `timestamp`](#5-use-timestamp-based-pagination-instead-of-offset). `OFFSET` is not supported for programmatic requests and is currently rejected with HTTP 400 for personal API keys. For exporting larger volumes, use [batch exports](/docs/cdp/batch-exports) – `/query` is not a supported export path.
 
 </CalloutBox>
 
