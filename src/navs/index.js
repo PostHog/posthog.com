@@ -545,8 +545,6 @@ export const handbookSidebar = [
                         name: 'Screen recording guide',
                         url: '/handbook/content/screen-recording-guide',
                     },
-                    
-
                 ],
             },
             {
@@ -779,6 +777,10 @@ export const handbookSidebar = [
                     {
                         name: 'Overview',
                         url: '/handbook/engineering/sdks',
+                    },
+                    {
+                        name: 'Guidelines',
+                        url: '/handbook/engineering/sdks/guidelines',
                     },
                     {
                         name: 'Support rotation',
@@ -1250,8 +1252,8 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
                     },
-                     {
-                        name: "CSM and TAM dual coverage",
+                    {
+                        name: 'CSM and TAM dual coverage',
                         url: '/handbook/growth/sales/csm-tam-overlay-coverage',
                     },
                     {
@@ -1298,7 +1300,7 @@ export const handbookSidebar = [
                                 name: 'Expansion strategies',
                                 url: '/handbook/growth/sales/expansion-strategies',
                             },
-                             {
+                            {
                                 name: 'PLG lead qualification',
                                 url: '/handbook/growth/sales/product-led-lead-qualification',
                             },
