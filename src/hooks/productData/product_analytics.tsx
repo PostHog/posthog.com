@@ -67,8 +67,8 @@ export const productAnalytics = {
         classes: 'absolute bottom-0 right-4 max-w-lg',
     },
     slider: {
-        marks: [MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
-        min: MILLION,
+        marks: [0, MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
+        min: 0,
         max: MAX_PRODUCT_ANALYTICS,
     },
     volume: 1000000,
