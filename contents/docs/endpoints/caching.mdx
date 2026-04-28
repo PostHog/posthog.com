@@ -2,9 +2,6 @@
 title: Caching
 ---
 
-
-
-
 Caching stores query results temporarily so repeated calls don't re-run the query. This is different from [materialization](/docs/endpoints/materialization), which pre-computes and stores results on a schedule.
 
 ## How caching works
@@ -15,23 +12,32 @@ When you execute an endpoint:
 2. If yes, it returns the cached result immediately
 3. If no, it runs the query and caches the result
 
-## Cache age
+## Data freshness
 
-You can set a custom cache duration per endpoint in the **Configuration** tab. The allowed range is:
+Data freshness controls how fresh your data should be. You can configure it per endpoint in the **Configuration** tab.
 
-- **Minimum:** 5 minutes (300 seconds)
-- **Maximum:** 24 hours (86,400 seconds)
+For non-materialized endpoints, data freshness determines how long cached results are considered fresh. Once results exceed this age, the next request re-runs the query.
 
-If not set, the default is 6 hours.
+The available options are:
+
+- **15 minutes** (900 seconds)
+- **30 minutes** (1,800 seconds)
+- **1 hour** (3,600 seconds)
+- **6 hours** (21,600 seconds)
+- **12 hours** (43,200 seconds)
+- **24 hours** (86,400 seconds) – default
+- **7 days** (604,800 seconds)
+
+For [materialized endpoints](/docs/endpoints/materialization), this same setting controls how often the materialized table refreshes.
 
 See [endpoint execution](/docs/endpoints/execution) for more detail on how this can affect your results.
 
 ## Caching vs materialization
 
-| Feature | Caching | Materialization |
-|---------|---------|-----------------|
-| Storage | Temporary | Persistent (S3) |
-| Refresh | On demand | Scheduled |
+| Feature  | Caching                           | Materialization                 |
+| -------- | --------------------------------- | ------------------------------- |
+| Storage  | Temporary                         | Persistent (S3)                 |
+| Refresh  | On demand                         | Scheduled                       |
 | Best for | Moderate traffic, real-time needs | High traffic, expensive queries |
 
 Use caching when you need relatively fresh data. Use materialization when query speed matters more than freshness.
