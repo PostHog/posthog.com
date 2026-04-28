@@ -1042,10 +1042,10 @@ function DpaGenerator() {
                                 <p>
                                     2.1.3. instruct the Processor to process Company Personal Data to provide the
                                     Services. The Company acknowledges that if AI Features are enabled as part of the
-                                    Services, such AI Features may use or rely on AI functionality (based on OpenAI's model
-                                    or similar LLMs). Note that the Processor does not use any Company Personal Data to fine tune, train or develop its AI
-                                    functionality or models for its own purposes and does not permit any third
-                                    parties (including its Subprocessors) to do so.
+                                    Services, such AI Features may use or rely on AI functionality (based on OpenAI's
+                                    model or similar LLMs). Note that the Processor does not permit any third parties
+                                    (including its Subprocessors) to use any Company Personal Data to fine tune, train
+                                    or develop their AI functionality or models.
                                 </p>
                             </div>
                             <p>2.2. Processor shall:</p>
