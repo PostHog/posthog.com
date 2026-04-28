@@ -1,0 +1,52 @@
+---
+title: Manage usage metrics with MCP
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent create, manage, and delete [usage metrics](/docs/customer-analytics/usage-metrics) directly from your code editor.
+
+This works in any MCP client – Cursor, Windsurf, Claude Code, VS Code, and others.
+
+## How it works
+
+With MCP, your coding agent can:
+
+- **Create usage metrics while building features** – "Create a usage metric called 'API Calls' that counts `api_request` events in the last 30 days"
+- **List existing metrics** – "Show me all usage metrics in this project"
+- **Update metric configurations** – "Change the API Calls metric to sum the `tokens_used` property instead of counting events"
+- **Delete unused metrics** – "Remove the old revenue usage metric"
+
+## Usage metrics tools
+
+The MCP server provides these tools for working with usage metrics:
+
+| Tool                           | Description                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------- |
+| `usage-metrics-create`         | Create a new usage metric with name, interval, format, display mode, math aggregation, and event filters. |
+| `usage-metrics-list`           | List all usage metrics in the current project.                                                            |
+| `usage-metrics-retrieve`       | Get the full definition of a usage metric by ID.                                                          |
+| `usage-metrics-partial-update` | Update a metric's configuration. Unspecified fields remain unchanged.                                     |
+| `usage-metrics-destroy`        | Delete a usage metric.                                                                                    |
+
+Usage metrics surface on both group and person [Customer Analytics profile pages](/docs/customer-analytics/customer-profiles). They are not scoped to a specific group type.
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `Create a usage metric called "API Requests" that counts api_request events over the last 30 days.`
+- `List all usage metrics in my project.`
+- `Create a usage metric called "Revenue" that sums the amount property from purchase events over 7 days.`
+- `Update the "API Requests" metric to show as a sparkline instead of a number.`
+- `Delete the "Old Metric" usage metric.`
+
+## Install the MCP server
+
+The recommended way to install is with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+The wizard supports Claude, Cursor, Windsurf, VS Code, and more. You can also [configure it manually](/docs/model-context-protocol#manual-install).
+
+See the [MCP server docs](/docs/model-context-protocol) for full setup instructions.
