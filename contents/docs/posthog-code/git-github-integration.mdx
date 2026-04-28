@@ -1,10 +1,10 @@
 ---
-title: Git + GitHub integration
+title: PostHog Git + GitHub integration
 sidebar: Docs
 showTitle: true
 ---
 
-PostHog Code has Git and GitHub support built directly into the UI, so common operations like committing, pushing, and opening a PR don't have to go through the agent.
+PostHog Code has Git and GitHub support built directly into the UI, so you can perform common operations like committing, pushing, and opening a PR without using the agent.
 
 ## Getting started
 
@@ -72,10 +72,10 @@ If `gh` isn't installed or authenticated, native git operations like commit, pus
 
 ## Troubleshooting
 
-If **Create PR** fails at the push step, check that your branch has a remote configured and that `gh auth status` reports you as authenticated. Force-push is never used – if the remote has diverged, resolve it manually before retrying.
+- If **Create PR** fails at the push step, check that your branch has a remote configured and that `gh auth status` reports you as authenticated. Force-push is never used – if the remote has diverged, resolve it manually before retrying.
 
-If auto-generated commit messages or PR bodies come back empty, generation requires network access. When you're offline, fill the fields in by hand – the create-PR flow works the same way.
+- If auto-generated commit messages or PR bodies come back empty, generation requires network access. When you're offline, fill the fields in by hand – the create-PR flow works the same way.
 
-If your PR template isn't being honored, PostHog Code looks for templates at the standard GitHub locations like `.github/PULL_REQUEST_TEMPLATE.md`. Templates in non-standard paths won't be picked up.
+- If your PR template isn't being honored, PostHog Code looks for templates at the standard GitHub locations like `.github/PULL_REQUEST_TEMPLATE.md`. Templates in non-standard paths won't be picked up.
 
-If a cloud task didn't link its PR, the link is extracted from the PR URL in the agent's tool output. If the agent opened the PR via an unusual path that hides the URL, the link may not be auto-attached, but the PR still exists on GitHub.
+- If a cloud task didn't link its PR, the link is extracted from the PR URL in the agent's tool output. If the agent opened the PR via an unusual path that hides the URL, the link may not be auto-attached, but the PR still exists on GitHub.
