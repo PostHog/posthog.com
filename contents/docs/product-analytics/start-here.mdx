@@ -1,0 +1,220 @@
+---
+title: Getting started with Product Analytics
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import ProductAnalyticsInstallationCombined from './installation/_snippets/installation-combined'
+
+import WizardCommand from 'components/WizardCommand'
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconGraph, IconRewindPlay, IconToggle, IconDatabase  } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+
+
+<QuestLog firstSpeechBubble="Let's capture custom product events!" lastSpeechBubble="Time to integrate Product Analytics!">
+
+<QuestLogItem 
+    title="Capture your first event"
+    subtitle="Required"
+    icon="IconCode2"
+>
+
+To get started with [Product Analytics](/docs/product-analytics), the first step is to install the PostHog SDK to start capturing events within your application.
+
+Autocapture is on by default. Pageviews, clicks, form submissions, and session data are tracked automatically.
+
+Call `posthog.capture()` to capture custom events and properties.
+
+```javascript
+posthog.capture('signup_completed', { plan: 'pro' })
+```
+
+<ProductAnalyticsInstallationCombined />
+
+For a customized setup, run the [AI wizard](/docs/ai-engineering/ai-wizard) with one command to automatically set up autocapture, custom events, and more.
+
+<WizardCommand />
+
+<OSButton variant="primary" asLink to="/docs/product-analytics/installation/ai-wizard">
+Install PostHog
+</OSButton>
+
+</QuestLogItem>
+
+
+<QuestLogItem 
+  title="Create insights and dashboards"
+  subtitle="Required"
+  icon="IconGraph"
+>
+
+With PostHog connected, your app automatically sends events.
+
+Query the full event stream to analyze product data and user behavior. You can combine related events into actions to create any kind of metric you need.
+
+Create insights and dashboards to visualize trends, funnels, and retention.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_light_61b3bab3b6.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_dark_5f2002f750.png"
+  classes="rounded"
+  padding={false}
+  alt="Example of a dashboard"
+/>
+
+You can also query your event data with [SQL](/docs/data-warehouse/query) if you need more flexibility.
+
+<OSButton variant="primary" asLink to="/docs/product-analytics/insights">
+Create insights
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Identify users and groups"
+  subtitle="Recommended"
+  icon="IconPeople"
+>
+
+Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms.
+
+```javascript
+posthog.identify(
+  'max@hedgehogmail.com',  // user's unique identifier
+  { name: 'Max Hedgehog' } // additional person properties
+);
+```
+
+You can also aggregate events into groups to track organization behavior at the company, team, or project level.
+
+```javascript
+posthog.group(
+  'company', 
+  'company_id_in_your_db',
+  { name: 'PostHog' } // additional group properties
+);
+```
+
+  <OSButton variant="primary" asLink to="/docs/product-analytics/identify">
+    Identify users
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Anaylze data with MCP and AI"
+  subtitle="Recommended"
+  icon="IconSparkles"
+>
+
+Use AI to investigate and conduct data analysis for you. 
+
+Connect the PostHog MCP server to let agents query your data and run analysis.
+
+<ProductVideo
+    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/product_analytics_data_1080_0f850bdf5b.mp4" 
+    alt="Use PostHog MCP to fetch event data" 
+    classes="rounded"
+    loop={true}
+    autoPlay={true}
+/>
+
+You can also ask [PostHog AI](/docs/posthog-ai) to answer questions, create insights, and build dashboards for you.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260428_byls_6beef62442.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260428_byoo_2fe6e6ec6f.png"
+  classes="rounded"
+  padding={false}
+  alt="PostHog AI example prompts"
+/>
+
+Try these prompts:
+
+- [`Create an insight showing daily active users for the past week`](https://app.posthog.com/#panel=max:!Create%20an%20insight%20showing%20daily%20active%20users%20for%20the%20past%20week)
+- [`Build a dashboard for onboarding retention`](https://app.posthog.com/#panel=max:!Build%20a%20dashboard%20for%20onboarding%20retention)
+- [`What changed across my product this week?`](https://app.posthog.com/#panel=max:!What%20changed%20across%20my%20product%20this%20week?)
+
+<OSButton variant="primary" asLink to="/docs/product-analytics/build-insights-mcp">
+  Explore AI features
+</OSButton>
+
+</QuestLogItem>
+
+
+<QuestLogItem 
+  title="Integrate your tech stack"
+  subtitle="Recommended"
+  icon="IconLogomark"
+>  
+
+  ###  <IconRewindPlay className="text-yellow w-7 -mt-1 inline-block"/>  Session Replay
+
+  Click any data point in your funnels, retention charts, or user paths and land directly in a playlist of session recordings for the users behind that number. 
+  
+  [Session Replay](/docs/session-replay) runs on the same events you've already captured. 
+
+  <ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/session_replay_funnel_1080_ff50e3d9c8.mp4"
+    alt="Session replay funnel"
+    classes="rounded border border-primary"
+    autoPlay={true}
+    background={false}
+  />
+
+  ###  <IconToggle className="text-seagreen w-7 -mt-1 inline-block"/>  Feature Flags
+
+  Roll out or revert code updates with [Feature Flags](/docs/feature-flags) using product events as release conditions.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sirw_4622f2f7d0.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sivj_9e5d71bb69.png"
+    alt="Feature flags taregting error cohorts"
+    classes="rounded"
+    padding={false}
+  />
+
+  ###  <IconDatabase className="text-purple w-7 -mt-1 inline-block"/>  Data Warehouse
+
+  Use the [Data Warehouse](/docs/data-warehouse) as a single source of truth for your customer data. Sync your product data with external sources like Stripe, Hubspot, Zendesk, and more.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/trend_light_9b29b1c254.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/trend_dark_77178b53cb.png"
+    alt="Selecting a data warehouse table in a trend" 
+    classes="rounded"
+    padding={false}
+  />
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Use for free"
+  subtitle="Free 1 million events/mo"
+  icon="IconPiggyBank"
+>
+
+PostHog's Product Analytics is built to be cost-effective by default, with a generous free tier and transparent usage-based pricing. Since we don't charge per seat, more than 90% of companies use PostHog for free.
+
+## TL;DR 💸
+
+- No credit card required to start
+- First 1 million events per month are free
+- Above 1 million we have usage-based pricing at $0.000015/event with discounts 
+- Set billing limits to avoid surprise charges
+- See our [pricing page](/docs/product-analytics/pricing) for more up-to-date details
+
+And if that's *still* not enough, we wrote a whole page on how to [cut costs](/docs/product-analytics/cutting-costs).
+
+--- 
+
+That's it! You're ready to start integrating.
+
+<OSButton variant="primary" asLink to="/docs/product-analytics/installation">
+  Install Product Analytics
+</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>

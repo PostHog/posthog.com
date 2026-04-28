@@ -3621,6 +3621,12 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Pricing',
+                    url: '/docs/product-analytics/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'purple',
+                },
+                {
                     name: 'Cutting costs',
                     url: '/docs/product-analytics/cutting-costs',
                     icon: 'IconPiggyBank',
@@ -3939,6 +3945,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/session-replay/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'purple',
                 },
                 {
                     name: 'Tutorials and guides',
