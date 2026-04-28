@@ -7,11 +7,13 @@ showTitle: true
 hideAnchor: true
 author:
     - lizzie-epton
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/workflows_beta_cover_a04e206b7a.jpg
 category: General
 tags:
-    - Workflows
-    - Growth
-    - Lifecycle messaging
+    - Endpoints
+    - Data
+    - Customer Analytics
 seo:
     metaTitle: "The 5 best customer-facing analytics examples (and what to steal from each)"
     metaDescription: '5 customer-facing analytics examples worth stealing, plus how to ship your own in PostHog without a data team or custom APIs.'
@@ -19,7 +21,7 @@ seo:
 
 Customer-facing analytics is the stats you show your users, not your internal team. Users' usage dashboard, a "23 people are viewing this right now" counter on a product page, a public leaderboard, or how big your support queue is.
 
-What you probably didn't know is that a lot of this is quietly powered by the same kind of tech under the hood: a fast, authenticated API layer that takes product data and ships it straight into the place users will see it. At PostHog, we call this [Endpoints](/endpoints).
+What you probably didn't know is that a lot of this is powered by the same kind of tech under the hood: a fast, authenticated API layer that takes product data and ships it straight into the place users will see it. At PostHog, we call this [Endpoints](/endpoints).
 
 Endpoints are a way to expose your PostHog data as fast, versioned, authenticated APIs you can [drop straight into your product](/docs/endpoints) without maintaining a custom API backend. 
 
@@ -28,7 +30,7 @@ But, rather than telling you what customer-facing analytics is, we’re going to
 
 ## 1. Vercel Analytics: Embedded customer usage dashboard
 
-[Vercel](https://vercel.com/changelog/new-usage-dashboard-for-pro-customers) is the textbook case of a dashboard that customers log in to check. Every project deployed on Vercel ships with a Web Analytics panel that surfaces live visitor counts, top pages, referrers, UTM campaigns, and geographic breakdowns. All one click from the deploy button, with no separate tool to install.
+**Vercel** is the textbook case of a dashboard that customers log in to check. Every project deployed on Vercel ships with a Web Analytics panel that surfaces live visitor counts, top pages, referrers, UTM campaigns, and geographic breakdowns. All one click from the deploy button, with no separate tool to install.
 
 ![Vercel's embedded analytics dasboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/vercel_dashboard_5e867b436f.png)
 
@@ -38,6 +40,8 @@ The detail Vercel has [talked about publicly](https://vercel.com/changelog/new-u
 
 If you've ever hit refresh on a dashboard wondering whether the numbers are actually live or 20 minutes stale, you know why this matters. Customer-facing analytics lose most of their value the moment users stop trusting the numbers are current.
 
+Good news if you're a PostHog user: We just launched a real-time dashboard for [Web Analytics.](https://posthog.com/web-analytics) 
+
 ## 2. Booking.com: Live metrics on the landing page
 
 Booking.com has made a science of turning live activity into social proof: "23 people are looking at this hotel right now." "Booked 4 times in the last 6 hours." "Only 2 rooms left at this price." These numbers are pulled from live booking and browsing data and dropped directly onto the property listing.
@@ -46,11 +50,11 @@ Booking.com has made a science of turning live activity into social proof: "23 p
 
 ### Why it works
 
-The analytics aren't a side feature, [industry analysts have credited similar "shopping activation" widgets with lifting direct bookings by close to 50%](https://blog.guestcentric.com/how-hotels-can-leverage-social-proof-to-increase-direct-bookings/). Booking.com figured out that the most valuable customer-facing analytics often aren't in a dashboard. They're in the product where someone is deciding whether to buy.
+The analytics aren't a side feature, industry analysts have credited similar "shopping activation" widgets with [lifting direct bookings by close to 50%](https://blog.guestcentric.com/how-hotels-can-leverage-social-proof-to-increase-direct-bookings/). Booking.com figured out that the most valuable customer-facing analytics often aren't in a dashboard. They're in the product where someone is deciding whether to buy.
 
 ## 3. Product Hunt: Making leaderboards front and centre
 
-[Product Hunt's](https://www.producthunt.com/) entire homepage is a customer-facing leaderboard. Every 24 hours it ranks a few hundred new launches by upvotes, comments, and reviews, and rolls the top five into permanent "Yesterday / Last Week / Last Month" slots. The ranking logic is transparent enough that makers plan launches around it; [roughly 700–800 upvotes](https://flexprice.io/blog/how-we-ranked-product-of-the-day-on-product-hunt) is the bar for a weekday #1.
+[**Product Hunt's**](https://www.producthunt.com/) entire homepage is a customer-facing leaderboard. Every 24 hours it ranks a few hundred new launches by upvotes, comments, and reviews, and rolls the top five into permanent "Yesterday / Last Week / Last Month" slots. The ranking logic is transparent enough that makers plan launches around it; [roughly 700–800 upvotes](https://flexprice.io/blog/how-we-ranked-product-of-the-day-on-product-hunt) is the bar for a weekday #1.
 
 ![ProductHunt's homepage leaderboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/producthunt_6ca9a9dc9e.png)
 
@@ -68,7 +72,7 @@ When a customer opens a support ticket, HogHero shows our support rep the recent
 
 ### Why it works 
 
-Endpoints data doesn't always need to you to your product, they are an easy way to share customer data with different teams within your organisation and can be a valuable part of your internal workflow. Our support reps don't have to waste time jumping between Zendesk and our analytics tool. The Endpoint exposes a specific piece of data to the user so they don't have to waste time getting lost in data chaos.
+Our support reps don't have to waste time jumping between Zendesk and our analytics tool. The Endpoint exposes a specific piece of data to the user so they don't have to waste time getting lost in data chaos.
 
 ## 5. GitHub's contribution graph: Building a community through user analytics
 

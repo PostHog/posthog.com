@@ -9,12 +9,11 @@ author:
     - lizzie-epton
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/workflows_beta_cover_a04e206b7a.jpg
-featuredImageType: full
 category: General
 tags:
-    - Workflows
-    - Growth
-    - Lifecycle messaging
+    - Endpoints
+    - Data
+    - Customer Analytics
 seo:
     metaTitle: "The 5 best customer-facing analytics examples (and what to steal from each)"
     metaDescription: '5 customer-facing analytics examples worth stealing, plus how to ship your own in PostHog without a data team or custom APIs.'
@@ -22,7 +21,7 @@ seo:
 
 Customer-facing analytics is the stats you show your users, not your internal team. Users' usage dashboard, a "23 people are viewing this right now" counter on a product page, a public leaderboard, or how big your support queue is.
 
-What you probably didn't know is that a lot of this is quietly powered by the same kind of tech under the hood: a fast, authenticated API layer that takes product data and ships it straight into the place users will see it. At PostHog, we call this [Endpoints](/endpoints).
+What you probably didn't know is that a lot of this is powered by the same kind of tech under the hood: a fast, authenticated API layer that takes product data and ships it straight into the place users will see it. At PostHog, we call this [Endpoints](/endpoints).
 
 Endpoints are a way to expose your PostHog data as fast, versioned, authenticated APIs you can [drop straight into your product](/docs/endpoints) without maintaining a custom API backend. 
 
@@ -31,7 +30,7 @@ But, rather than telling you what customer-facing analytics is, we’re going to
 
 ## 1. Vercel Analytics: Embedded customer usage dashboard
 
-[Vercel](https://vercel.com/changelog/new-usage-dashboard-for-pro-customers) is the textbook case of a dashboard that customers log in to check. Every project deployed on Vercel ships with a Web Analytics panel that surfaces live visitor counts, top pages, referrers, UTM campaigns, and geographic breakdowns. All one click from the deploy button, with no separate tool to install.
+**Vercel** is the textbook case of a dashboard that customers log in to check. Every project deployed on Vercel ships with a Web Analytics panel that surfaces live visitor counts, top pages, referrers, UTM campaigns, and geographic breakdowns. All one click from the deploy button, with no separate tool to install.
 
 ![Vercel's embedded analytics dasboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/vercel_dashboard_5e867b436f.png)
 
@@ -49,11 +48,11 @@ Booking.com has made a science of turning live activity into social proof: "23 p
 
 ### Why it works
 
-The analytics aren't a side feature, [industry analysts have credited similar "shopping activation" widgets with lifting direct bookings by close to 50%](https://blog.guestcentric.com/how-hotels-can-leverage-social-proof-to-increase-direct-bookings/). Booking.com figured out that the most valuable customer-facing analytics often aren't in a dashboard. They're in the product where someone is deciding whether to buy.
+The analytics aren't a side feature, industry analysts have credited similar "shopping activation" widgets with [lifting direct bookings by close to 50%](https://blog.guestcentric.com/how-hotels-can-leverage-social-proof-to-increase-direct-bookings/). Booking.com figured out that the most valuable customer-facing analytics often aren't in a dashboard. They're in the product where someone is deciding whether to buy.
 
 ## 3. Product Hunt: Making leaderboards front and centre
 
-[Product Hunt's](https://www.producthunt.com/) entire homepage is a customer-facing leaderboard. Every 24 hours it ranks a few hundred new launches by upvotes, comments, and reviews, and rolls the top five into permanent "Yesterday / Last Week / Last Month" slots. The ranking logic is transparent enough that makers plan launches around it; [roughly 700–800 upvotes](https://flexprice.io/blog/how-we-ranked-product-of-the-day-on-product-hunt) is the bar for a weekday #1.
+[**Product Hunt's**](https://www.producthunt.com/) entire homepage is a customer-facing leaderboard. Every 24 hours it ranks a few hundred new launches by upvotes, comments, and reviews, and rolls the top five into permanent "Yesterday / Last Week / Last Month" slots. The ranking logic is transparent enough that makers plan launches around it; [roughly 700–800 upvotes](https://flexprice.io/blog/how-we-ranked-product-of-the-day-on-product-hunt) is the bar for a weekday #1.
 
 ![ProductHunt's homepage leaderboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/producthunt_6ca9a9dc9e.png)
 
@@ -95,13 +94,11 @@ Across all five, the same few principles keep showing up:
 
 ## Endpoints makes customer-facing analytics simple
 
-Inspired to build customer-facing analytics yourself? We’re biased but we think you should check out [Endpoints](/endpoints).
-
-The best part? You don’t need to be super technical. If you're a PM who wants to put a live usage metric in your product, a marketer who wants campaign numbers flowing into a report, or an ops lead who wants a customer-facing dashboard that just works, Endpoints is built to be simple for you. Here's how it fits together:
+Inspired to build customer-facing analytics yourself? We’re biased but we think you should check out [Endpoints](/endpoints). Here's how it works:
 
 1. **Start from something you already have in PostHog.** Open any saved insight, trend, or SQL query you've already built. If you've got a number you trust inside PostHog, you're 90% of the way there.
-2. **Turn it into an Endpoint with a click. Endpoints wraps your query in a fast, versioned, authenticated API — no backend setup, no pipeline, no new tool to learn.
-3. **Drop it wherever you need the number to show up.** Your product, a customer-facing dashboard, a Retool or Notion page, an internal Slack bot, an AI workflow — anywhere that accepts a URL or an API call.
+2. **Turn it into an Endpoint.** Go to the three dots at the top of your insight screen and select 'Create Endpoint'. Endpoints wraps your query in a fast, versioned, authenticated API — no backend setup, no pipeline, no new tool to learn.
+3. **Drop it wherever you need the number to show up.** Your product, a customer-facing dashboard, your landing page, or an internal Slack bot — anywhere that accepts a URL or an API call.
 4. **Let it update itself.** The number stays live. If you tweak the underlying insight in PostHog, the Endpoint updates too. No rebuilds, no stale screenshots, no Monday-morning "can someone refresh this for me" messages.
 
 Take the data you already trust in PostHog, ship it to the place your users actually look, and let the tool do the heavy lifting for you. [Give it a try](/docs/endpoints/start-here), or you can check out [our docs](/docs/endpoints) to learn more.
