@@ -82,7 +82,11 @@ Releases are part of the security model too. SDK publishing should be automated 
 
 SDK APIs live for a long time. Once a pattern is copied into thousands of apps, changing it gets expensive.
 
-Keep the public API small, boring, and hard to misuse. Use options objects for things likely to grow. Avoid exposing internal concepts unless customers need them. Public APIs and configuration options should be unique: don't offer two or more ways to do the same thing unless there's a strong compatibility reason. Duplicate paths confuse humans, documentation, support, and LLMs. When you need a breaking change, respect the SDK's versioning scheme, make the migration obvious, document it clearly, and release it intentionally.
+Keep the public API small, boring, and hard to misuse. Use options objects for things likely to grow. Avoid exposing internal concepts unless customers need them. Public APIs and configuration options should be unique: don't offer two or more ways to do the same thing unless there's a strong compatibility reason. Duplicate paths confuse humans, documentation, support, and LLMs.
+
+Be careful not to expand the public API by accident. Exported helpers, leaked internal types, undocumented options, and test-only hooks can become APIs customers depend on. Keep internals private where the platform enables it. If something is experimental, say so clearly and consider keeping it behind an internal API until we're confident it should be public.
+
+Prefer additive API changes over breaking ones. It's much easier to add a new method, option, or type than to remove one later. When you need a breaking change, respect the SDK's versioning scheme, make the migration obvious, document it clearly, and release it intentionally.
 
 For larger migrations, write a migration doc and, where useful, an agent skill that can help apply the change across customer codebases. Try to batch breaking changes into a single major version instead of shipping a new breaking change every week.
 
