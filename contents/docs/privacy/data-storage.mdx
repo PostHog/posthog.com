@@ -193,6 +193,71 @@ print(response.json())
 
 This request will delete all events of the person(s) that have been captured before the deletion request.
 
+#### Bulk delete response
+
+When using the [bulk_delete endpoint](/docs/api/persons-4#post-api-projects-project_id-persons-bulk_delete), the API returns a response with details about the deletion operation:
+
+| Field                            | Type    | Description                                                                  |
+| -------------------------------- | ------- | ---------------------------------------------------------------------------- |
+| `persons_found`                  | integer | Number of persons matched by the provided IDs or distinct IDs                |
+| `persons_deleted`                | integer | Number of person records deleted. Returns 0 if `keep_person` was set to true |
+| `events_queued_for_deletion`     | boolean | Whether event deletion was queued for the matched persons                    |
+| `recordings_queued_for_deletion` | boolean | Whether recording deletion was queued for the matched persons                |
+| `deletion_errors`                | array   | List of any persons that could not be deleted, each containing `person_uuid` |
+
+#### Checking deletion status
+
+Event deletions run asynchronously during non-peak hours. To check the status of queued event deletions, use the deletion status endpoint:
+
+<MultiLanguage>
+
+```bash
+export POSTHOG_PERSONAL_API_KEY=[your personal api key]
+curl \
+    -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+    "https://us.posthog.com/api/projects/:project_id/persons/deletion_status?status=pending"
+```
+
+```javascript
+const response = await fetch(
+  "https://us.posthog.com/api/projects/:project_id/persons/deletion_status?status=pending",
+  {
+    headers: {
+      Authorization: "Bearer [your personal api key]",
+    },
+  },
+);
+```
+
+```python
+import requests
+
+api_key = "[your personal api key]"
+project_id = "[your project id]"
+response = requests.get(
+    "https://us.posthog.com/api/projects/{project_id}/persons/deletion_status?status=pending".format(
+        project_id=project_id
+    ),
+    headers={"Authorization": "Bearer {}".format(api_key)},
+).json()
+```
+
+</MultiLanguage>
+
+**Query parameters:**
+
+- `status` - Filter by `pending`, `completed`, or `all` (default: `all`)
+- `person_uuid` - Filter by a specific person UUID
+
+**Response fields:**
+
+| Field                | Type   | Description                                                       |
+| -------------------- | ------ | ----------------------------------------------------------------- |
+| `person_uuid`        | string | The UUID of the person whose events are queued for deletion       |
+| `created_at`         | string | When the deletion was requested (ISO 8601)                        |
+| `status`             | string | Current status: `pending` or `completed`                          |
+| `delete_verified_at` | string | When the deletion was verified complete, or null if still pending |
+
 ### Manual data deletion
 
 You can manually delete persons and their events in the PostHog UI:

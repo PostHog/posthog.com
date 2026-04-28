@@ -925,26 +925,6 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    'action-figure': {
-        size: {
-            min: {
-                width: 960,
-                height: 682,
-            },
-            max: {
-                width: 960,
-                height: 682,
-            },
-            fixed: false,
-            autoHeight: true,
-        },
-        position: {
-            center: true,
-        },
-        modal: {
-            type: 'standard',
-        },
-    },
     'ask-max': {
         size: {
             min: {
@@ -1234,6 +1214,25 @@ const appSettings: AppSettings = {
             type: 'standard',
         },
     },
+    '/community/reputation': {
+        size: {
+            min: {
+                width: 500,
+                height: 1000,
+            },
+            max: {
+                width: 500,
+                height: 1000,
+            },
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
     '/fm': {
         size: {
             min: {
@@ -1315,18 +1314,12 @@ export interface SiteSettings {
         | '2001-bliss'
         | 'parade'
         | 'coding-at-night'
-        | 'action-figure'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
-
-export const isAprilFirst = () => {
-    const now = new Date()
-    return now.getMonth() === 3 && now.getDate() === 1
-}
 
 const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
     const lastReset = typeof window !== 'undefined' ? localStorage.getItem('lastReset') : null
@@ -1344,12 +1337,12 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         ...(!lastReset ? { experience: 'posthog' } : {}),
     }
 
-    if (isAprilFirst()) {
-        siteSettings.wallpaper = 'action-figure'
-    }
-
     if (isMobile || compact) {
         siteSettings.experience = 'boring'
+    }
+
+    if (siteSettings.wallpaper === 'action-figure') {
+        siteSettings.wallpaper = 'keyboard-garden'
     }
 
     return siteSettings

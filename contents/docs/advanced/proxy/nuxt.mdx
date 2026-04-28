@@ -10,6 +10,14 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 <ProxyCallout />
 
+<CalloutBox icon="IconInfo" title="Data transfer costs" type="fyi">
+
+Server routes run on the server, so all PostHog traffic – events, session recordings, feature flag polls, and SDK assets – passes through your Nuxt deployment. Costs depend on where it's hosted: serverless platforms like Vercel or Netlify bill this as bandwidth and function invocations, which can add up on high-traffic sites, especially because session recordings are often 1–5 MB each.
+
+To avoid these costs, use the [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) (free for PostHog Cloud users) or a provider without egress fees like [Cloudflare Workers](/docs/advanced/proxy/cloudflare).
+
+</CalloutBox>
+
 This guide shows you how to use [Nuxt server routes](https://nuxt.com/docs/guide/directory-structure/server) as a reverse proxy for PostHog.
 
 ## How it works

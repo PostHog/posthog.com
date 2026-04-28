@@ -1,16 +1,16 @@
 ---
 title: SQL editor
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
 The [SQL editor](https://us.posthog.com/sql) enables you to directly access all your data in PostHog, from PostHog-specific `events` and `persons` tables to your external sources, using [SQL queries](/blog/sql-for-analytics).
 
 ## SQL commands
 
-You create SQL queries out of a list of commands that shape what data, filters, aggregations, and ordering we want to see. 
+You create SQL queries out of a list of commands that shape what data, filters, aggregations, and ordering we want to see.
 
 > SQL queries in PostHog don't require the trailing semicolon (`;`) of traditional SQL queries.
 
@@ -19,15 +19,15 @@ You create SQL queries out of a list of commands that shape what data, filters, 
 Use `SELECT` to select data (usually columns, transformations, or aggregations) from one or more tables in the database. You can use arithmetic or functions to modify the selected data.
 
 ```sql
-SELECT 
-   event, 
-   timestamp, 
+SELECT
+   event,
+   timestamp,
    properties.$current_url,
    concat(properties.$lib, ' - ', properties.$lib_version)
 FROM events
 ```
 
-Common values to select are `*` (representing all), `event`, `timestamp`, `properties`, and functions like `count()`. You can access properties using dot notation like `person.properties.$initial_browser`. These values can be found in the data management [properties tab](https://app.posthog.com/data-management/properties) or inside tables in the [SQL tab](https://us.posthog.com/sql). 
+Common values to select are `*` (representing all), `event`, `timestamp`, `properties`, and functions like `count()`. You can access properties using dot notation like `person.properties.$initial_browser`. These values can be found in the data management [properties tab](https://app.posthog.com/data-management/properties) or inside tables in the [SQL tab](https://us.posthog.com/sql).
 
 Add the `DISTINCT` clause to `SELECT` commands to keep only unique rows in query results.
 
@@ -41,14 +41,14 @@ FROM events
 Use `FROM` to select the database table to run the queries on. In PostHog, examples include `events`, `groups`, `raw_session_replay_events`, and more listed in the [data management database tab](https://app.posthog.com/data-management/database).
 
 ```sql
-SELECT session_id, min_first_timestamp, click_count 
+SELECT session_id, min_first_timestamp, click_count
 FROM raw_session_replay_events
 ```
 
 `FROM` also enables you to break down your query into subqueries. This is useful for analyzing multiple groups of data. For example, to get the difference in event count between the last 7 days and the 7 days before that, you can use two subqueries like this:
 
 ```sql
-SELECT 
+SELECT
   last_7_days.last_7_days_count - previous_7_days.previous_7_days_count
 FROM
   (
@@ -100,7 +100,7 @@ ORDER BY event_count DESC
 Use `WHERE` to filter rows based on specified conditions. These conditions can be:
 
 1. Comparison operators like `=`, `!=`, `<`, or `>=`
-2. Logical operators like `AND`, `OR`, or `NOT`. These are often used to combine multiple conditions. 
+2. Logical operators like `AND`, `OR`, or `NOT`. These are often used to combine multiple conditions.
 3. Functions like `toDate`, `today()`
 4. Clauses like `LIKE`, `IN`, `IS NULL`
 
@@ -137,11 +137,11 @@ ORDER BY event_count DESC
 Use `GROUP BY` to group rows that have the same values in specified columns into summary rows. It is often used in combination with [aggregate functions](#aggregate-functions).
 
 ```sql
-select 
+select
    properties.$os,
    count()
 from events
-group by 
+group by
    properties.$os
 ```
 
@@ -150,12 +150,57 @@ group by
 Use `ORDER BY` to sort the query results by one or more columns. You can specify order by ascending with `ASC` or descending with `DESC`.
 
 ```sql
-SELECT 
-   properties.$browser, 
+SELECT
+   properties.$browser,
    count()
 FROM events
 GROUP BY properties.$browser
 ORDER BY count() DESC
+```
+
+#### WITH FILL
+
+Use `WITH FILL` after an `ORDER BY` column to fill gaps in time series data. This is useful when you have missing data points (like days with no events) and want to include them in your results.
+
+The `WITH FILL` clause supports three optional parameters:
+
+- `FROM` - The starting value for filling (defaults to the minimum value in the column)
+- `TO` - The ending value for filling (defaults to the maximum value in the column)
+- `STEP` - The increment between filled values (defaults to 1)
+
+```sql
+SELECT
+   toStartOfDay(timestamp) AS day,
+   count() AS event_count
+FROM events
+WHERE timestamp > now() - INTERVAL 7 DAY
+GROUP BY day
+ORDER BY day WITH FILL
+   FROM toStartOfDay(now() - INTERVAL 7 DAY)
+   TO toStartOfDay(now())
+   STEP INTERVAL 1 DAY
+```
+
+This query returns a row for each day in the last seven days, even if no events occurred on that day.
+
+#### INTERPOLATE
+
+Use `INTERPOLATE` alongside `WITH FILL` to control how non-ordered columns are filled for newly inserted rows. By default, filled rows use default values (0 for numbers, empty string for strings). With `INTERPOLATE`, you can define custom fill expressions or specify that a column should keep its default.
+
+`INTERPOLATE` can be used bare (to interpolate all columns with defaults) or with explicit column expressions:
+
+```sql
+SELECT
+   toStartOfDay(timestamp) AS day,
+   count() AS event_count
+FROM events
+WHERE timestamp > now() - INTERVAL 7 DAY
+GROUP BY day
+ORDER BY day WITH FILL
+   FROM toStartOfDay(now() - INTERVAL 7 DAY)
+   TO toStartOfDay(now())
+   STEP INTERVAL 1 DAY
+INTERPOLATE (event_count AS 0)
 ```
 
 ### LIKE
@@ -177,7 +222,7 @@ WHERE properties.$current_url LIKE '%docs%'
 Use `AS` to alias columns or tables with different names. This makes the query and results more readable.
 
 ```sql
-SELECT 
+SELECT
    properties.$current_url as current_url,
    count() as current_url_count
 FROM events
@@ -190,7 +235,7 @@ ORDER BY current_url_count DESC
 Use `LIMIT` to restrict the number of rows returned by the query. It specifies the maximum number of rows the query should retrieve. By default, PostHog sets it at `100`.
 
 ```sql
-SELECT 
+SELECT
    properties.$lib as library,
    count() as library_count
 FROM events
@@ -217,11 +262,11 @@ LIMIT 50 OFFSET 100
 Use `HAVING` with the `GROUP BY` command to filter the results based on aggregate function values. While `WHERE` filters rows before grouping, `HAVING` filters grouped results after aggregation.
 
 ```sql
-SELECT 
+SELECT
    properties.$os,
    count()
 FROM events
-GROUP BY 
+GROUP BY
    properties.$os
 HAVING count() > 100
 ```
@@ -256,8 +301,8 @@ A window function contains multiple parts:
 It is useful for analysis like running totals, moving averages, ranking, and percentiles. For example, to get a running total of pageviews, you can:
 
 ```sql
-SELECT 
-    event, 
+SELECT
+    event,
     timestamp,
     COUNT(*) OVER w AS running_total_pageviews
 FROM events
@@ -273,8 +318,8 @@ Use `CASE` within the `SELECT` command to implement conditional logic within you
 For example, to group `properties.$os` values in `mobile`, `desktop`, and `other`, you can use:
 
 ```sql
-SELECT 
-  CASE 
+SELECT
+  CASE
     WHEN properties.$os IN ('iOS', 'Android') THEN 'mobile'
     WHEN properties.$os IN ('Windows', 'Mac OS X', 'Linux', 'Chrome OS') THEN 'desktop'
     ELSE 'other'
@@ -288,7 +333,7 @@ ORDER BY os_count DESC
 
 ### Comments
 
-Use two dashes (`--`) to write comments. 
+Use two dashes (`--`) to write comments.
 
 ```sql
 SELECT *

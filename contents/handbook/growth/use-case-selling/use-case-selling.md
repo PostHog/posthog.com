@@ -12,10 +12,10 @@ When we pitch "add Surveys," it sounds like we're trying to increase their bill.
  
 Each use case has a full playbook with discovery questions, competitive positioning, expansion paths, objection handling, and onboarding checklists.
  
-## The six use cases
+## The seven use cases
  
-| Use case | Job to be done | Core buyer | Status |
-|---|---|---|---|
+| Use case | Job to be done | Core buyer | 
+|---|---|---|
 | [Product Intelligence](/handbook/growth/use-case-selling/product-intelligence) | "Help me understand what users do, why they do it, and what to build next." | PMs, designers, product engineers, founders | 
 | [Release Engineering](/handbook/growth/use-case-selling/release-engineering) | "Help me ship faster without breaking things." | Engineering managers, platform teams, developers | 
 | [Observability](/handbook/growth/use-case-selling/observability) | "Help me know when things break, understand why, and fix them fast." | SREs, platform engineers, DevOps | 

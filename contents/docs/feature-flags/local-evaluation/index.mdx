@@ -36,7 +36,7 @@ sequenceDiagram
 
 Every flag check is a network round trip. PostHog already has all the data it needs, so you just pass the flag key and a user ID.
 
-With local evaluation, the SDK periodically fetches **flag definitions** from PostHog's `/api/feature_flag/local_evaluation` endpoint in the background. When you check a flag, **you provide the properties** and the SDK evaluates locally — no round trip:
+With local evaluation, the SDK periodically fetches **flag definitions** from PostHog's `/flags/definitions` endpoint in the background. When you check a flag, **you provide the properties** and the SDK evaluates locally — no round trip:
 
 ```mermaid
 sequenceDiagram
@@ -44,7 +44,7 @@ sequenceDiagram
     participant SDK as PostHog SDK
     participant PH as PostHog
     Note over SDK,PH: Background (every 30s)
-    SDK->>PH: GET /local_evaluation
+    SDK->>PH: GET /flags/definitions
     PH-->>SDK: Flag definitions
     Note over App,SDK: At evaluation time
     App->>SDK: flag key + person properties + group properties
@@ -85,6 +85,20 @@ To evaluate the feature flag, call any of the flag related methods, like `getFea
 Then, by default, PostHog attempts to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request to fetch the flag value.
 
 You can disable this behavior by setting `onlyEvaluateLocally` to `true`. In this case, PostHog will **only** attempt to evaluate the flag locally, and return `undefined` / `None` / `nil` if it was unable to.
+
+### Cold start and fallback defaults
+
+When the SDK first starts, it needs up to one polling interval (30 seconds by default) to fetch flag definitions. During this window, local evaluation returns `undefined` / `None` because no definitions are loaded yet. Use per-flag defaults to control what users see during this period:
+
+```javascript
+// Without a default, undefined is falsy — users see nothing
+const variant = posthog.getFeatureFlag('checkout-redesign') || false
+
+// With a per-flag default, you control the experience
+const variant = posthog.getFeatureFlag('checkout-redesign') ?? 'control'
+```
+
+If you deploy frequently or have many short-lived workers, consider using a [shared flag definition cache](/docs/feature-flags/local-evaluation/distributed-environments) so definitions survive restarts and the cold start window is eliminated.
 
 <MultiLanguage>
 
@@ -318,6 +332,7 @@ Local evaluation is not possible for flags that:
 2. Are linked to an [early access feature](/docs/feature-flags/early-access-feature-management)
 3. Depend on [static cohorts](/docs/data/cohorts#static-cohorts)
 4. Use the `is_not_set` property operator, since local evaluation can only check properties you provide — it can't determine whether a property is absent on a person.
+5. Use [mixed targeting](/docs/feature-flags/user-and-group-targeting#mixed-targeting) (the "User & Group" match mode), which combines user-level and group-level conditions in a single flag.
 
 ### Dynamic cohort restrictions
 
