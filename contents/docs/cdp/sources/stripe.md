@@ -62,6 +62,10 @@ If your Stripe account is in a language other than English, we suggest you updat
 
 The data warehouse then starts syncing your Stripe data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
 
+## Configuration
+
+<SourceParameters />
+
 ## Setting up webhooks for real-time syncing
 
 Webhook syncing is the mode we recommend for almost every Stripe source. Without it, you're choosing between append-only syncs (which silently miss updates to existing rows because Stripe's API doesn't expose an "updated since" filter) and full refresh syncs (which work but get expensive as your account grows). Webhooks avoid both problems: Stripe pushes every create, update, and delete to PostHog in real time, and PostHog only ingests what actually changed.
