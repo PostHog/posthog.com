@@ -3,8 +3,8 @@ title: Slack
 platformLogo: slack
 ---
 
-import AddSlackToWorkspace from '../workflows/_snippets/add-posthog-to-slack-workspace.mdx'
-import AddSlackToChannel from '../workflows/_snippets/add-posthog-to-slack-channel.mdx'
+import AddSlackToWorkspace from "../workflows/_snippets/add-posthog-to-slack-workspace.mdx";
+import AddSlackToChannel from "../workflows/_snippets/add-posthog-to-slack-channel.mdx";
 
 The PostHog app for Slack helps you stay connected to your product data and receive timely updates directly in your workspace.
 
@@ -26,11 +26,11 @@ The PostHog app for Slack provides three key capabilities:
 
 ### 1. Adding the PostHog Slack app to your workspace
 
-<AddSlackToWorkspace/>
+<AddSlackToWorkspace />
 
 ### 2. Adding the PostHog Slack app to specific channels
 
-<AddSlackToChannel/>
+<AddSlackToChannel />
 
 <!--
 ## Using PostHog AI in Slack
@@ -52,11 +52,10 @@ You can receive regular updates of your [insights](/docs/product-analytics/insig
 To set up a subscription:
 
 1. Open the insight or dashboard you want to subscribe to in PostHog
-2. Click the dropdown menu in the top right corner (three dots)
-3. Click **Subscribe**
-4. Click "Add subscription" and select **Slack** as the destination
-5. Choose the Slack channel where you want to receive updates
-6. Set your desired frequency (daily, weekly, monthly, etc.)
+2. Click **Subscribe** in the sidebar
+3. Click "Add subscription" and select **Slack** as the destination
+4. Choose the Slack channel where you want to receive updates
+5. Set your desired frequency (daily, weekly, monthly, etc.)
 
 For more details, see our [subscriptions documentation](/docs/product-analytics/subscriptions).
 
@@ -65,6 +64,7 @@ For more details, see our [subscriptions documentation](/docs/product-analytics/
 You can send custom messages to Slack based on PostHog events or actions using [Data Pipelines destinations](/docs/cdp/destinations/slack).
 
 Common use cases include:
+
 - Notifying your team when a user completes a key action
 - Alerting on errors or issues detected in your product
 - Sharing important user milestones with your team
@@ -90,7 +90,6 @@ When you paste a PostHog insight or dashboard URL in any Slack channel where the
 - The description, if available
 
 Link unfurling respects PostHog access permissions. Only team members with at least viewer access to the insight or dashboard will see the unfurled preview.
-
 
 ## What can you do with this integration?
 
