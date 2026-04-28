@@ -545,8 +545,6 @@ export const handbookSidebar = [
                         name: 'Screen recording guide',
                         url: '/handbook/content/screen-recording-guide',
                     },
-                    
-
                 ],
             },
             {
@@ -1250,8 +1248,8 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
                     },
-                     {
-                        name: "CSM and TAM dual coverage",
+                    {
+                        name: 'CSM and TAM dual coverage',
                         url: '/handbook/growth/sales/csm-tam-overlay-coverage',
                     },
                     {
@@ -1298,7 +1296,7 @@ export const handbookSidebar = [
                                 name: 'Expansion strategies',
                                 url: '/handbook/growth/sales/expansion-strategies',
                             },
-                             {
+                            {
                                 name: 'PLG lead qualification',
                                 url: '/handbook/growth/sales/product-led-lead-qualification',
                             },
@@ -6393,12 +6391,7 @@ export const docsMenu = {
                     url: '/docs/posthog-code/inbox',
                     icon: 'IconInbox',
                     color: 'yellow',
-                    children: [
-                        { name: 'Overview', url: '/docs/posthog-code/inbox' },
-                        { name: 'Connect sources', url: '/docs/posthog-code/inbox-sources' },
-                        { name: 'Triage and priority', url: '/docs/posthog-code/inbox-triage' },
-                        { name: 'Research & implementation', url: '/docs/posthog-code/inbox-research' },
-                    ],
+                    children: [{ name: 'Overview', url: '/docs/posthog-code/inbox' }],
                 },
                 {
                     name: 'Skills',
@@ -6474,12 +6467,6 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
-                },
-                {
-                    name: 'Inbox Troubleshooting',
-                    url: '/docs/posthog-code/inbox-troubleshooting',
-                    icon: 'IconQuestion',
-                    color: 'red',
                 },
                 {
                     name: 'Open source',
