@@ -18,11 +18,14 @@ If you need real-time data or frequently update your query, stick with direct ex
 
 1. Go to your endpoint's **Configuration** tab
 2. Enable the **Materialization** toggle
-3. Choose a sync frequency:
-   - **Every hour** - Updates every hour
-   - **Every 6 hours** - Updates four times a day
-   - **Daily** - Updates once per day
-   - **Weekly** - Updates once per week
+3. Set the **Data freshness** – this controls how often materialized results refresh:
+   - **15 minutes** – updates every 15 minutes
+   - **30 minutes** – updates every 30 minutes
+   - **1 hour** – updates every hour
+   - **6 hours** – updates four times a day
+   - **12 hours** – updates twice a day
+   - **24 hours** (default) – updates once per day
+   - **7 days** – updates once per week
 
 PostHog will run the first materialization immediately. After that, it syncs on your chosen schedule.
 
