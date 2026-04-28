@@ -61,13 +61,16 @@ export function buildProductMenuTabs({ productData, contentRef, activeSurface }:
 
     const { slug: productSlug, name: productName, productMenu = [], pricingMenu = [] } = productData
 
+    const navProductMenu = productMenu.filter((item) => !item.hideFromNav)
+    const navPricingMenu = pricingMenu.filter((item) => !item.hideFromNav)
+
     const docsChildren =
         docsMenu.children.find(({ name }: { name: string }) => name.toLowerCase() === productName.toLowerCase())
             ?.children || []
 
     const tabs: MenuTab[] = []
 
-    if (productMenu.length > 0) {
+    if (navProductMenu.length > 0) {
         tabs.push({
             label: 'Product',
             value: 'product',
@@ -75,7 +78,7 @@ export function buildProductMenuTabs({ productData, contentRef, activeSurface }:
             default: activeSurface === 'product',
             menu: (
                 <ProductNav
-                    items={productMenu}
+                    items={navProductMenu}
                     basePath={surfaceBasePath(productSlug, 'product')}
                     contentRef={activeSurface === 'product' ? contentRef : undefined}
                 />
@@ -83,7 +86,7 @@ export function buildProductMenuTabs({ productData, contentRef, activeSurface }:
         })
     }
 
-    if (pricingMenu.length > 0) {
+    if (navPricingMenu.length > 0) {
         tabs.push({
             label: 'Pricing',
             value: 'pricing',
@@ -91,7 +94,7 @@ export function buildProductMenuTabs({ productData, contentRef, activeSurface }:
             default: activeSurface === 'pricing',
             menu: (
                 <ProductNav
-                    items={pricingMenu}
+                    items={navPricingMenu}
                     basePath={surfaceBasePath(productSlug, 'pricing')}
                     contentRef={activeSurface === 'pricing' ? contentRef : undefined}
                 />

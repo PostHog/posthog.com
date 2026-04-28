@@ -43,6 +43,33 @@ const SURFACE_MENU_FIELD: Record<Exclude<ProductSurface, 'docs'>, 'productMenu' 
     pricing: 'pricingMenu',
 }
 
+const DIVIDED_GROUP_CLASSES =
+    'flex flex-col divide-y divide-primary [&>*]:py-8 [&>*:first-child]:pt-0 [&>*:last-child]:pb-0'
+
+interface SurfaceGroup {
+    items: ProductNavItem[]
+    group?: string
+}
+
+/**
+ * Walk the surface menu and collapse consecutive items that share the same
+ * `group` value into a single `SurfaceGroup`. Items without a `group` become
+ * their own one-element groups so they render as standalone siblings of the
+ * outer flex container.
+ */
+const groupSurfaceMenu = (items: ProductNavItem[]): SurfaceGroup[] => {
+    const groups: SurfaceGroup[] = []
+    for (const item of items) {
+        const last = groups[groups.length - 1]
+        if (item.group && last?.group === item.group) {
+            last.items.push(item)
+        } else {
+            groups.push({ items: [item], group: item.group })
+        }
+    }
+    return groups
+}
+
 export default function ProductReaderView({
     productHandle,
     data,
@@ -93,24 +120,34 @@ export default function ProductReaderView({
                 productSelect={<ProductSwitcher activeHandle={productData.handle} />}
             >
                 <div ref={sectionsRef} className="flex flex-col gap-12">
-                    {surfaceMenu.map((item) => {
-                        const templateKey = resolveTemplate(item)
-                        const Template = templateRegistry[templateKey] as
-                            | React.ComponentType<SectionComponentProps>
-                            | undefined
-                        if (!Template) return null
-                        return (
-                            <Template
-                                key={item.slug}
-                                id={item.slug}
-                                productData={productData}
-                                data={data}
-                                customers={customers}
-                                customerSlugs={customerSlugs}
-                                hasCaseStudy={hasCaseStudy}
-                                allProducts={allProducts}
-                            />
-                        )
+                    {groupSurfaceMenu(surfaceMenu).map((group, groupIndex) => {
+                        const renderedItems = group.items.map((item) => {
+                            const templateKey = resolveTemplate(item)
+                            const Template = templateRegistry[templateKey] as
+                                | React.ComponentType<SectionComponentProps>
+                                | undefined
+                            if (!Template) return null
+                            return (
+                                <Template
+                                    key={item.slug}
+                                    id={item.slug}
+                                    productData={productData}
+                                    data={data}
+                                    customers={customers}
+                                    customerSlugs={customerSlugs}
+                                    hasCaseStudy={hasCaseStudy}
+                                    allProducts={allProducts}
+                                />
+                            )
+                        })
+                        if (group.group === 'divided') {
+                            return (
+                                <div key={`g-${groupIndex}`} className={DIVIDED_GROUP_CLASSES}>
+                                    {renderedItems}
+                                </div>
+                            )
+                        }
+                        return <React.Fragment key={`f-${groupIndex}`}>{renderedItems}</React.Fragment>
                     })}
                 </div>
             </ReaderView>

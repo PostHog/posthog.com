@@ -11,6 +11,13 @@ import {
     IconReceipt,
     IconPieChart,
     IconCheckCircle,
+    IconPeople,
+    IconInfo,
+    IconUserPaths,
+    IconPlay,
+    IconCode,
+    IconCursorClick,
+    IconMagic,
 } from '@posthog/icons'
 import { IconJavaScript, IconApple, IconAndroid, IconFlutter, IconReactNative } from 'components/OSIcons/Icons'
 import OSButton from 'components/OSButton'
@@ -47,12 +54,24 @@ export const sessionReplay = {
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        { slug: 'features', name: 'Features', icon: <IconSparkles className="size-4" /> },
-        { slug: 'ai', name: 'AI', icon: <IconSparkles className="size-4" /> },
-        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
-        { slug: 'feature-comparison', name: 'Feature comparison', icon: <IconGraph className="size-4" /> },
-        { slug: 'pairs-with', name: 'Pairs with...', icon: <IconConfetti className="size-4" /> },
-        { slug: 'getting-started', name: 'Get started', icon: <IconRocket className="size-4" /> },
+        { slug: 'customers', name: 'Who uses it?', group: 'divided', icon: <IconPeople className="size-4" /> },
+        { slug: 'eli5', name: 'What does it do?', group: 'divided', icon: <IconInfo className="size-4" /> },
+        { slug: 'use-cases', name: 'Who is it for?', group: 'divided', icon: <IconMagic className="size-4" /> },
+        { slug: 'demo', name: 'Demo', group: 'divided', icon: <IconPlay className="size-4" /> },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+        },
+        { slug: 'top-features', name: 'Top features', group: 'divided', icon: <IconSparkles className="size-4" /> },
+        // Old Features grid lives inside the divided container alongside the new Top features carousel
+        // while content migrates from the grid to the carousel. Hidden from the sidebar nav.
+        { slug: 'features', name: 'Features (legacy)', group: 'divided', hideFromNav: true },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+        // Rendered at the bottom of the page but excluded from the nav — slated for removal.
+        { slug: 'ai', name: 'AI', hideFromNav: true, icon: <IconSparkles className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
     ],
     /**
      * Sections rendered on the Pricing surface (`/session-replay/pricing`).
@@ -62,9 +81,11 @@ export const sessionReplay = {
         { slug: 'rates', name: 'Session Replay rates', template: 'pricing', icon: <IconReceipt className="size-4" /> },
         { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
         { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        { slug: 'feature-comparison', name: 'Feature comparison', icon: <IconGraph className="size-4" /> },
     ],
     overview: {
-        title: 'Watch people use your product',
+        title: 'See how people use your product',
         description:
             'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
         eli5: "Replay records what happens in a user's session — clicks, scrolls, form inputs, page views, network requests, console logs — and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",

@@ -18,6 +18,19 @@ export interface ProductNavItem {
     name: string
     template?: string
     icon?: React.ReactNode
+    /**
+     * Consecutive items sharing the same `group` value are wrapped together in
+     * a styled container by `ProductReaderView` (e.g. `'divided'` renders them
+     * inside a `divide-y` panel with even vertical padding). Items without a
+     * `group` render as standalone siblings.
+     */
+    group?: string
+    /**
+     * When true, the section is still rendered on the page but excluded from
+     * the sidebar nav. Useful for legacy/in-progress sections that should be
+     * visible during migration but not surfaced as anchors.
+     */
+    hideFromNav?: boolean
 }
 
 /**

@@ -1,6 +1,12 @@
 import React from 'react'
 import { SectionComponentProps } from '../types'
 import Overview from './Overview'
+import Customers from './Customers'
+import Eli5 from './Eli5'
+import UseCases from './UseCases'
+import Demo from './Demo'
+import Applications from './Applications'
+import TopFeatures from './TopFeatures'
 import Features from './Features'
 import AI from './AI'
 import PostHogOnPostHog from './PostHogOnPostHog'
@@ -20,6 +26,12 @@ import Plans from './Plans'
  */
 export const templateRegistry: Record<string, React.ComponentType<SectionComponentProps>> = {
     overview: Overview,
+    customers: Customers,
+    eli5: Eli5,
+    'use-cases': UseCases,
+    demo: Demo,
+    applications: Applications,
+    'top-features': TopFeatures,
     features: Features,
     ai: AI,
     'posthog-on-posthog': PostHogOnPostHog,
@@ -34,6 +46,12 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
 
 export {
     Overview,
+    Customers,
+    Eli5,
+    UseCases,
+    Demo,
+    Applications,
+    TopFeatures,
     Features,
     AI,
     PostHogOnPostHog,
