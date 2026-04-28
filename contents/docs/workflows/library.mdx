@@ -103,6 +103,61 @@ You can type Liquid syntax directly into your email template. We also provide a 
 
 If you type Liquid syntax directly and the Liquid doesn't compile correctly, the email won't be sent. Always verify your Liquid syntax is valid before starting a workflow.
 
+### WYSIWYG editor
+
+The WYSIWYG editor lets you write email templates using raw HTML or react-email components. Unlike the drag-and-drop visual builder, this mode gives you full control over the markup while showing a live preview of the rendered output.
+
+To use the WYSIWYG editor, click the **WYSIWYG** tab when creating or editing an email template.
+
+The editor has two panes:
+- **Code editor** (left) – Write your HTML or react-email source code
+- **Live preview** (right) – See the rendered email update as you type. Drag the divider to resize the preview pane.
+
+#### Writing raw HTML
+
+Write standard HTML directly in the editor. Liquid templating works inside your markup:
+
+```html
+<div style="font-family: sans-serif; padding: 24px;">
+  <h1>Hi {{ person.properties.first_name | default: "there" }}</h1>
+  <p>Thanks for triggering <strong>{{ event.event }}</strong>.</p>
+</div>
+```
+
+#### Writing react-email components
+
+For more complex templates, use [react-email](https://react.email) components. The editor automatically detects react-email syntax (capitalized JSX tags like `<Html>`, `<Container>`, `<Text>`) and renders the component accordingly.
+
+```jsx
+import { Html, Container, Text, Button } from '@react-email/components'
+
+export default function WelcomeEmail() {
+  return (
+    <Html>
+      <Container>
+        <Text>Welcome to our platform!</Text>
+        <Button href="https://example.com/dashboard">
+          Get started
+        </Button>
+      </Container>
+    </Html>
+  )
+}
+```
+
+Liquid templating also works in react-email templates – the output is processed through Liquid after rendering.
+
+#### Testing with real event data
+
+Use the event picker above the code editor to preview your template with real data from your project:
+
+1. Click the event dropdown to select an event type.
+2. PostHog loads recent matching events from the past seven days.
+3. Select a specific event from the **Recent matches** dropdown.
+4. The preview updates with actual event properties and person data.
+
+This helps you verify that Liquid variables resolve correctly with real values before launching your workflow.
+
 ### Testing templates
 
 It's best practice to test a message in a workflow before starting the workflow. This helps ensure your template displays correctly with real user data and that all Liquid variables resolve properly.
