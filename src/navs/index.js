@@ -1255,6 +1255,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/csm-tam-overlay-coverage',
                     },
                     {
+                        name: 'Getting started as a TAM',
+                        url: '/handbook/growth/sales/getting-started-as-a-tam',
+                    },
+                    {
                         name: 'Why buy PostHog',
                         url: '/handbook/growth/sales/why-buy-posthog',
                     },
