@@ -22,6 +22,10 @@ Once the syncs are complete, you can start using MongoDB data in PostHog.
 
 > **Note:** MongoDB data is unstructured so the returned columns are an `_id` field and a `data` column that contain the entire document contents. Data fields can be selected with dot notation (e.g. `data.field1`)
 
+## Configuration
+
+<SourceParameters />
+
 ### Incremental and append-only syncing
 
 MongoDB supports incremental and append-only sync methods. For a field to be available for these sync methods, it must:
