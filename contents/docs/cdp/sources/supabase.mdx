@@ -15,8 +15,20 @@ To link Supabase:
 
 1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
 2. Click **New source** and select Supabase
-3. Enter your Supabase connection details. You can find these in your Supabase project under **Project Settings** → **Database** → **Connection info**.
-4. If you need to connect through an SSH tunnel, enable and configure it (optional).
+3. Enter your Supabase connection details. You can find these in your Supabase project under **Project Settings** → **Database** → **Connection info**:
+   - **Host:** The hostname of your Supabase database like `db.abcdefghijklmno.supabase.co`.
+   - **Port:** The port your database is listening on. The default is `5432`.
+   - **Database:** The name of the database. Supabase defaults this to `postgres`.
+   - **User:** The database user with read access to the schemas and tables you want to sync.
+   - **Password:** The password for the user.
+   - **Schema:** The schema where your tables are located. Supabase defaults this to `public`.
+4. If you need to connect through an SSH tunnel, enable and configure it (optional):
+   - **Tunnel host:** The hostname of your SSH server.
+   - **Tunnel port:** The port your SSH server is listening on.
+   - **Authentication type:**
+     - For password authentication, enter your SSH username and password.
+     - For key-based authentication, enter your SSH username, private key, and optional passphrase.
+   - **Require TLS through tunnel?** - Whether to require TLS encryption through the SSH tunnel. Enabled by default. Disable if your database does not support TLS.
 5. Click **Link**
 
 The data warehouse then starts syncing your Supabase data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
