@@ -126,7 +126,7 @@ Because they do. Use semver or the ecosystem's closest equivalent, keep changelo
 
 Release cadence is a balance. Giant releases are hard to review, hard to debug, and hard to roll back, but releasing every tiny change can also create noise and upgrade fatigue. Prefer coherent releases: small enough to understand, grouped enough to be useful, and clearly documented so customers know whether they should care.
 
-The right cadence also depends on the platform and ecosystem. Web and server SDK users can often upgrade quickly through a package manager, but mobile, desktop, game engine, and enterprise customers may deal with app store review, slow adoption, long release trains, or internal approval processes. For those SDKs, batch changes more deliberately, keep compatibility longer, and avoid forcing upgrades unless the fix is important enough to justify the friction.
+The right cadence also depends on the platform and ecosystem. Web and server SDK users can often upgrade quickly through a package manager, but mobile, desktop, game engine, and enterprise customers may deal with app store review, slow adoption, long release trains, or internal approval processes.
 
 ### Document decisions and sharp edges
 
