@@ -35,6 +35,10 @@ The Paddle connector syncs customers, discounts, prices, products, subscriptions
 
 Once the syncs are complete, you can start using Paddle data in PostHog.
 
+## Configuration
+
+<SourceParameters />
+
 ## Sync methods
 
 Only the `transactions` table supports incremental and append-only syncing, using `billed_at` as the replication key. All other tables (customers, discounts, prices, products, subscriptions, and adjustments) are synced via full table refresh.
