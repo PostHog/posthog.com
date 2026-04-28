@@ -545,8 +545,6 @@ export const handbookSidebar = [
                         name: 'Screen recording guide',
                         url: '/handbook/content/screen-recording-guide',
                     },
-                    
-
                 ],
             },
             {
@@ -1250,8 +1248,8 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
                     },
-                     {
-                        name: "CSM and TAM dual coverage",
+                    {
+                        name: 'CSM and TAM dual coverage',
                         url: '/handbook/growth/sales/csm-tam-overlay-coverage',
                     },
                     {
@@ -1298,7 +1296,7 @@ export const handbookSidebar = [
                                 name: 'Expansion strategies',
                                 url: '/handbook/growth/sales/expansion-strategies',
                             },
-                             {
+                            {
                                 name: 'PLG lead qualification',
                                 url: '/handbook/growth/sales/product-led-lead-qualification',
                             },
@@ -3370,6 +3368,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/product-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'purple',
                 },
                 {
                     name: 'Installation',
@@ -6454,12 +6458,6 @@ export const docsMenu = {
                     name: 'Getting started',
                 },
                 {
-                    name: 'Why you need logs',
-                    url: '/docs/logs/basics',
-                    icon: 'IconBook',
-                    color: 'seagreen',
-                },
-                {
                     name: 'Start here',
                     url: '/docs/logs/start-here',
                     icon: 'IconListCheck',
@@ -6474,15 +6472,30 @@ export const docsMenu = {
                     featured: true,
                     children: [
                         { name: 'Overview', url: '/docs/logs/installation' },
-                        { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },
                         { name: 'Node.js', url: '/docs/logs/installation/nodejs' },
-                        { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
                         { name: 'Python', url: '/docs/logs/installation/python' },
-                        { name: 'Java', url: '/docs/logs/installation/java' },
                         { name: 'Go', url: '/docs/logs/installation/go' },
+                        { name: 'Java', url: '/docs/logs/installation/java' },
+                        { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
+                        { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },
                         { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],
+                },
+                {
+                    name: 'Why you need logs',
+                    url: '/docs/logs/basics',
+                    icon: 'IconBook',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Logging best practices',
+                    url: '/docs/logs/best-practices',
+                    icon: 'IconBook',
+                    color: 'green',
                 },
                 {
                     name: 'Search logs',
@@ -6496,15 +6509,6 @@ export const docsMenu = {
                     url: '/docs/logs/link-session-replay',
                     icon: 'IconRewindPlay',
                     color: 'blue',
-                },
-                {
-                    name: 'Guides',
-                },
-                {
-                    name: 'Logging best practices',
-                    url: '/docs/logs/best-practices',
-                    icon: 'IconBook',
-                    color: 'green',
                 },
                 {
                     name: 'PostHog AI',
