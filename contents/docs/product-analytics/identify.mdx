@@ -310,9 +310,9 @@ For example:
 // User A identifies — their person is now marked as identified
 posthog.identify('user-A')
 
-// Later, someone tries to merge User A into User C
+// Later, the same session tries to identify as User C
 // This is BLOCKED because User A's person is already identified
-posthog.identify('user-C', {}, {}, { $anon_distinct_id: 'user-A' })
+posthog.identify('user-C')
 ```
 
 **For `$merge_dangerously`:**
