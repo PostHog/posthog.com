@@ -1,5 +1,5 @@
 ---
-title: Working with Legal
+title: Making changes with legal impact
 sidebar: Handbook
 showTitle: true
 ---
@@ -38,6 +38,6 @@ This means a seemingly small engineering decision — like defaulting a new AI f
 
 ## What happens next 
 
-Once an issue is raised, Hector will advise in the Slack thread on any legal impact. This will include clarifying if the work can go ahead and indicating whether any customer comms are needed and kicking off that process. If new legal language is needed, Hector will work with the engineer to create this information. 
+Once an issue is raised, Hector will advise in the Slack thread on any legal impact. If new legal language is needed, this will be drafted.
 
-If
+If customer comms are needed, Hector will kick off that process by [opening an internal messaging request](https://github.com/PostHog/requests-for-comments-internal/issues/new/choose) for the Marketing team.

@@ -925,7 +925,7 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/security',
             },
             {
-                name: 'Working with Legal',
+                name: 'Changes with legal impact',
                 url: '/handbook/engineering/working-with-legal',
             },
             {
