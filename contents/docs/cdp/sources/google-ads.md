@@ -42,3 +42,7 @@ Connect PostHog to your Google Ads account using a Google account. The Google ac
 4. Enter the **Google Ads customer ID** of the Google Ads account you want to sync.
 5. Select an existing Google Ads account, or create a new integration
 6. (Optional) Add a prefix for the table name.
+
+## Configuration
+
+<SourceParameters />
