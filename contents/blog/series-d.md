@@ -70,7 +70,7 @@ Soon, PostHog AI will be able to:
 
 Below is a sneak peek at the direction of travel, a conceptual demo of a "deep research mode" the <SmallTeam slug="posthog-ai" /> built in 48 hours during our recent offsite in Mexico.
 
-Please bear in mind this was a hackathon project. It's a **proof of concept** that shows the kind of experience we want to build, **not a representative demo** using production data.
+Please bear in mind this was a [hackathon project](/newsletter/hackathons). It's a **proof of concept** that shows the kind of experience we want to build, **not a representative demo** using production data.
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/UFUlCp-HAzo?si=2GJe5ms63VOvnkhY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 

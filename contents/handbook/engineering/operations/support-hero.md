@@ -45,11 +45,12 @@ Each engineering team has its own list of tickets in Zendesk:
 
 Your job is simple: ship features and fixes, resolve ticket after ticket from your team's list, and respond to open-source PRs assigned to your team.
 
-There are three sources of tickets:
+There are four sources of tickets:
 
 1. In-app bug reports/feedback/support tickets sent from the [Support panel](https://us.posthog.com/home#panel=support) (The `Help` tab in the righthand sidebar.) They include a bunch of useful links, e.g. to the admin panel and to the relevant session recording.
 1. Community questions asked on PostHog.com.
 1. Slack threads that have been marked with the 🎫 reaction in customer support channels.
+1. Reports in the `#papercuts` Slack channel that relate to your team's area.
 
 ### Shipping features
 
@@ -64,6 +65,16 @@ Others tickets report bugs or suspected bugs. Get to the bottom of each one - yo
 If not much is happening, feel free to do feature work – but in the case of a backlog in Zendesk, drop other things and roll up your sleeves. When you're Support Hero, supporting users comes first.
 
 It might be an intense week, but you're also going to solve so many real problems, and that feels great.
+
+### Papercuts
+
+Check the `#papercuts` Slack channel during your rotation and pick up any reports that relate to your team's area. For each one, pick one of the following:
+
+- **Reply** to the reporter acknowledging the papercut, then either get a fix shipped or open a GitHub issue to track it if it needs more scoping. How you get the fix out is up to you – prompting PostHog Code is often the fastest path, but feel free to fix it however you like.
+- **React with ❌** to reject the papercut (for example, if the behavior is intentional). A brief reply explaining why is appreciated.
+- **React with ✅** once you've shipped a fix or improvement.
+
+Papercuts are also routed to the Signals inbox, so before you start work, check whether an auto-generated PR is already waiting – it may save you most of the effort.
 
 ### Responding to external PRs
 
