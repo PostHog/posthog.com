@@ -45,6 +45,16 @@ PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption fo
 
 > **Permissions** The Postgres source only requires read permissions on the schemas and tables you intend to sync.
 
+<CalloutBox icon="IconWarning" title="Decimal precision limits" type="caution">
+
+Numeric or decimal columns with values exceeding precision 76 or scale 32 can't be synced. If a sync fails with this error, you have three options:
+
+- Constrain the column with a lower precision/scale
+- Cast the column to text in a view
+- Round the values at the source
+
+</CalloutBox>
+
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).
 
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
