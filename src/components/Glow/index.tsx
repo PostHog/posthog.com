@@ -103,7 +103,7 @@ const Glow = ({
                     blurMap[intensity]
                 } ${opacityClass} ${roundedMap[rounded]} ${glowClassName ?? ''}`}
             />
-            <div className="relative z-2">{children}</div>
+            <div className="relative z-2 w-full h-full">{children}</div>
         </Wrapper>
     )
 }
