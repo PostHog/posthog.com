@@ -125,6 +125,8 @@ Rollout percentages support decimal values with up to two decimal places of prec
 
 - If you enabled group analytics, you can target based on [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties).
 
+When you target a person property of `distinct_id equals`, the value field searches persons by name, email, or distinct_id, so you don't need to paste a raw ID. A person with multiple distinct_ids – for example an anonymous device ID plus an identified email – appears as a separate option per ID, so you can pick the specific one the SDK captures under. The stored filter value is still the literal distinct_id, so flag evaluation is unchanged.
+
 <ProductScreenshot
     imageLight={ReleaseConditionLight}
     imageDark={ReleaseConditionDark}
