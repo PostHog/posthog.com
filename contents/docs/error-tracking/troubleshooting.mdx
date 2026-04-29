@@ -109,6 +109,36 @@ To debug:
 3. Watch [session recordings](/docs/session-replay) to see what user actions triggered the error, then reproduce in development
 4. Use a development build which includes full error messages. Only use this for debugging, not production
 
+## 'Load failed' with no stack trace
+
+`TypeError: Load failed` is the error Safari throws when a `fetch()` call can't complete. Because it's thrown from native browser code, no JavaScript stack trace is captured.
+
+Common causes include:
+
+- **Network errors** – The device lost connectivity or the server is unreachable
+- **CORS misconfiguration** – The server doesn't return the correct `Access-Control-Allow-Origin` headers
+- **Request aborted** – The page navigated away or `AbortController.abort()` was called before the response arrived
+- **Browser extension blocking** – An ad blocker or privacy extension blocked the request
+
+To add context to these errors, wrap your fetch calls:
+
+```js
+async function fetchWithContext(url, options) {
+  try {
+    return await fetch(url, options)
+  } catch (error) {
+    posthog.captureException(error, {
+      properties: {
+        url,
+        method: options?.method ?? 'GET',
+      },
+    })
+    throw error
+  }
+}
+```
+
+You can also use [session recordings](/docs/session-replay) and the network inspector to see which request failed and what the user was doing when it happened.
 
 ## Symbol set upload skipped as already present
 
