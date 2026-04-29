@@ -3,6 +3,8 @@ import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import { IconArrowUpRight } from '@posthog/icons'
 import { SectionComponentProps } from '../types'
+import ZoomHover from 'components/ZoomHover'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const renderLogo = (customer: any, compact = false) => {
     const baseHeight = customer.height ? Math.max(customer.height - 3, 4) : 5
@@ -67,33 +69,37 @@ const Customers = ({ id, productData, customers, hasCaseStudy }: SectionComponen
             )}
 
             {customerLogos.length > 0 && (
-                <ul className="m-0 space-y-2">
+                <div className="grid grid-cols-[fit-content(110px)_1fr] gap-2 leading-none @md/reader-content:items-center">
                     {customerLogos.map((customer: any) => {
                         const data = customerData[customer.slug]
                         const isCaseStudy = hasCaseStudy(customer.slug)
 
                         return (
-                            <li key={customer.slug} className="text-sm leading-snug">
-                                <span className="inline-flex gap-2 align-middle w-24 justify-end">
+                            <>
+                                <div key={customer.slug} className="text-sm leading-none flex justify-end">
                                     {renderLogo(customer)}
-                                </span>
-                                <span className="ml-4 text-[15px] text-primary relative top-px">{data.headline}</span>
-                                {isCaseStudy && (
-                                    <Link
-                                        to={`/customers/${customer.slug}`}
-                                        state={{ newWindow: true }}
-                                        className="group border border-transparent hover:border-primary transition-all duration-100 rounded-full px-2 py-1 inline-flex items-center font-semibold whitespace-nowrap leading-none text-sm relative top-px ml-1"
-                                    >
-                                        <span className="w-[0px] group-hover:w-10 max-w-auto transition-all duration-100 whitespace-nowrap overflow-hidden inline-block">
-                                            Read
-                                        </span>
-                                        <IconArrowUpRight className="size-3 relative top-px" aria-hidden />
-                                    </Link>
-                                )}
-                            </li>
+                                </div>
+                                <div>
+                                    <span className="text-[15px] text-primary relative top-px">{data.headline}</span>
+                                    {isCaseStudy && (
+                                        <ZoomHover>
+                                            <Link
+                                                to={`/customers/${customer.slug}`}
+                                                state={{ newWindow: true }}
+                                                className="group border border-transparent hover:border-black/50 dark:hover:border-white/50 transition-all duration-100 rounded-full px-2 py-1 inline-flex items-center font-semibold whitespace-nowrap leading-none text-sm relative top-px -ml-1 hover:ml-1"
+                                            >
+                                                <span className="w-[0px] group-hover:w-10 max-w-auto transition-all duration-100 whitespace-nowrap overflow-hidden inline-block">
+                                                    Read
+                                                </span>
+                                                <IconArrowUpRight className="size-3 relative top-px" aria-hidden />
+                                            </Link>
+                                        </ZoomHover>
+                                    )}
+                                </div>
+                            </>
                         )
                     })}
-                </ul>
+                </div>
             )}
         </section>
     )
