@@ -15,6 +15,7 @@ With MCP, your coding agent can:
 - **Validate queries before running** – Check HogQL syntax and catch column typos without ClickHouse cost
 - **Generate queries from questions** – "Write a HogQL query to find the top users by event count" to get a query you can refine
 - **Query across sources** – Join PostHog events with Stripe, HubSpot, or any linked warehouse table
+- **Query Postgres/DuckDB directly** – Run queries against direct-query data warehouse connections without going through ClickHouse
 - **Manage views** – Create, update, materialize, and delete saved views in your Data Warehouse programmatically
 - **Manage import sources** – Create, configure, and sync data warehouse sources like Postgres, Stripe, and HubSpot
 
@@ -24,12 +25,23 @@ The MCP server provides these tools for running SQL:
 
 | Tool                                 | Description                                                                                                                                                                                             |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `query-run`                          | Run a HogQL query and return results. Supports any valid HogQL syntax including joins, CTEs, subqueries, and window functions.                                                                          |
-| `query-validate`                     | Validate a HogQL query without executing it. Returns structured errors with character positions, warnings, and the list of tables referenced. No ClickHouse cost.                                       |
-| `hogql-schema`                       | List all tables and columns available to HogQL queries. Returns every queryable table (PostHog, system, warehouse, views) with field names and types. Call this before writing queries from scratch.    |
+| `query-run`                          | Run a HogQL query and return results. Supports any valid HogQL syntax including joins, CTEs, subqueries, and window functions. Pass `connectionId` to query a Postgres or DuckDB source directly.       |
+| `query-validate`                     | Validate a HogQL query without executing it. Returns structured errors with character positions, warnings, and the list of tables referenced. Pass `connectionId` to validate against a direct-query source. |
+| `hogql-schema`                       | List all tables and columns available to HogQL queries. Returns every queryable table (PostHog, system, warehouse, views) with field names and types. Pass `connectionId` to get the schema of a direct-query source. |
 | `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Returns the query string so you can review or modify it before running. Requires [AI data processing approval](/docs/posthog-ai/allow-access). |
 | `property-definitions`               | List all event and person properties in your project. Useful for understanding what data is available before writing a query.                                                                           |
 | `event-definitions-list`             | List all event definitions in your project with volume and usage data.                                                                                                                                  |
+
+### Direct database queries
+
+Postgres and DuckDB data warehouse connections support direct querying, which lets you run queries against the source database without going through ClickHouse. This is useful when you need real-time data from your external database or want to use native SQL syntax.
+
+To query a direct-query source:
+
+1. Use `external-data-sources-list` to find the `connectionId` of your Postgres or DuckDB source
+2. Pass that `connectionId` to `query-run`, `query-validate`, or `hogql-schema`
+
+When you pass a `connectionId`, `hogql-schema` returns the source's native schema and `query-validate` checks your query against that schema before execution.
 
 ## View management tools
 
@@ -93,6 +105,13 @@ For schema discovery and query validation:
 - `What fields are on the events table?`
 - `Validate this HogQL query before running it: SELECT user_id FROM events`
 - `Check if my query has any errors: SELECT * FROM event WHERE timestamp > now() - INTERVAL 1 DAY`
+
+For direct Postgres/DuckDB querying:
+
+- `List my data warehouse sources and show which ones support direct queries.`
+- `Show me the schema for my Postgres data warehouse connection.`
+- `Run this query directly against my Postgres source: SELECT * FROM customers LIMIT 10`
+- `Validate this query against my DuckDB connection before running it.`
 
 For querying alerts:
 
