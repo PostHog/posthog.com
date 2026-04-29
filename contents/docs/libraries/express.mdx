@@ -1,0 +1,141 @@
+---
+title: Express
+platformLogo: express
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+PostHog integrates with your [Express](https://expressjs.com/) app to enable analytics, custom event capture, Feature Flags, Error Tracking, and more.
+
+This guide walks you through integrating PostHog with your Express app using the built-in request context middleware, which automatically propagates context to link server-side events with frontend sessions.
+
+## Prerequisites
+
+To follow this guide along, you need:
+
+1. A PostHog instance (either [Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host))
+2. An Express application (v4+)
+
+## Installation
+
+Install the `posthog-node` package:
+
+```bash
+npm install posthog-node
+# or
+yarn add posthog-node
+# or
+pnpm add posthog-node
+```
+
+## Setting up request context
+
+The request context middleware automatically propagates context (session ID, distinct ID, request metadata) to all `posthog.capture()` calls within a request. It uses `AsyncLocalStorage` under the hood for per-request isolation.
+
+In your main app file, create a PostHog client and register the middleware:
+
+```js file=app.js
+const express = require('express')
+const { PostHog, setupExpressRequestContext } = require('posthog-node')
+
+const app = express()
+
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+})
+
+setupExpressRequestContext(posthog, app)
+
+// Your routes go here
+
+app.listen(3000)
+```
+
+### Context propagation
+
+The middleware reads the following headers from incoming requests and attaches them as context to all PostHog calls within that request:
+
+| Header | Context property | Description |
+|---|---|---|
+| `x-posthog-session-id` | `sessionId` | Links server events to a client session |
+| `x-posthog-distinct-id` | `distinctId` | Identifies the user |
+
+It also automatically captures request metadata as properties:
+
+- `$current_url` – the request URL
+- `$request_method` – the HTTP method (GET, POST, etc.)
+- `$request_path` – the request path
+- `$user_agent` – the user agent string
+- `$ip` – the client IP (parsed from `x-forwarded-for` if behind a proxy)
+
+### Sending headers from the client
+
+If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure `__add_tracing_headers` to automatically inject session and identity headers on every request to your Express backend:
+
+```js
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    __add_tracing_headers: ['your-express-backend.com']
+})
+```
+
+This automatically adds `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID` headers to all `fetch` and `XMLHttpRequest` calls to the specified hostnames. The request context middleware reads these headers automatically.
+
+### Capturing events in route handlers
+
+With the middleware active, any `posthog.capture()` call within a request automatically includes the propagated context:
+
+```js file=routes.js
+app.post('/checkout', (req, res) => {
+  posthog.capture({
+    event: 'checkout_started',
+    // distinctId, sessionId, and request properties
+    // are automatically included from the request context
+  })
+  res.json({ status: 'ok' })
+})
+```
+
+## Error tracking
+
+You can also set up error tracking to capture unhandled exceptions and send them to PostHog [Error Tracking](/docs/error-tracking). Use `setupExpressErrorHandler` after your routes:
+
+```js file=app.js
+const { PostHog, setupExpressRequestContext, setupExpressErrorHandler } = require('posthog-node')
+
+const app = express()
+
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+})
+
+setupExpressRequestContext(posthog, app)
+
+// Your routes go here
+
+setupExpressErrorHandler(posthog, app)
+
+app.listen(3000)
+```
+
+When an error is thrown, the error handler captures the exception with the same context propagation as regular events, including session ID, distinct ID, and request metadata.
+
+<CalloutBox icon="IconInfo" title="How error capture works">
+
+The error handler middleware:
+
+- Captures the exception with stack trace and request context
+- Forwards the error to Express's default error handling (so your error pages still work)
+- Automatically links errors to frontend sessions when tracing headers are present
+
+</CalloutBox>
+
+For more details on Error Tracking setup, see the [Node.js Error Tracking installation guide](/docs/error-tracking/installation/node).
+
+## Next steps
+
+To read more about how to integrate specific PostHog features into Express, have a look at our [Node SDK docs](/docs/libraries/node) for concepts such as:
+
+- [Capturing custom events, setting properties, and more.](/docs/libraries/node#capturing-events)
+- [Setting up feature flags including variants and payloads.](/docs/libraries/node#feature-flags)
+- [Using contexts for per-request state management.](/docs/libraries/node#contexts)

@@ -2277,6 +2277,10 @@ export const docsMenu = {
                             url: '/docs/libraries/docusaurus',
                         },
                         {
+                            name: 'Express',
+                            url: '/docs/libraries/express',
+                        },
+                        {
                             name: 'Flask',
                             url: '/docs/libraries/flask',
                         },
