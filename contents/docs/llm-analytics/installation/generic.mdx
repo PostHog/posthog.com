@@ -19,6 +19,21 @@ tableOfContents: [
         depth: 1,
     },
     {
+        url: 'handling-errors',
+        value: 'Handling errors',
+        depth: 2,
+    },
+    {
+        url: 'privacy-mode',
+        value: 'Privacy mode',
+        depth: 2,
+    },
+    {
+        url: 'capturing-embedding-events',
+        value: 'Capturing embedding events',
+        depth: 2,
+    },
+    {
         url: 'api-reference',
         value: 'API reference',
         depth: 1,
@@ -94,6 +109,10 @@ await captureAiGeneration(posthogClient, {
     model: '@cf/meta/llama-3-8b-instruct',
     input: [{ role: 'user', content: 'Tell me about hedgehogs' }],
     output: response.response,
+    modelParameters: {
+        temperature: 0.7,
+        max_tokens: 1024
+    },
     usage: {
         inputTokens: response.usage?.prompt_tokens,
         outputTokens: response.usage?.completion_tokens
@@ -159,6 +178,24 @@ await captureAiGeneration(posthogClient, {
 })
 ```
 
+### Capturing embedding events
+
+To capture embedding calls instead of text generation, import and use `AIEvent.Embedding`:
+
+```typescript
+import { captureAiGeneration, AIEvent } from '@posthog/ai'
+
+await captureAiGeneration(posthogClient, {
+    distinctId: 'user-123',
+    eventType: AIEvent.Embedding,
+    provider: 'openai',
+    model: 'text-embedding-3-small',
+    input: 'Text to embed',
+    output: embeddingVector,
+    usage: { inputTokens: 5 }
+})
+```
+
 ## API reference
 
 The `captureAiGeneration` function accepts a PostHog client and an options object:
@@ -173,10 +210,12 @@ captureAiGeneration(client: PostHog, options: CaptureAiGenerationOptions): Promi
 |--------|------|-------------|
 | `distinctId` | `string` | User identifier. Falls back to `traceId` if not provided. |
 | `traceId` | `string` | Trace identifier. Auto-generated if not provided. |
+| `eventType` | `AIEvent` | Event type. Defaults to `'$ai_generation'`. Use `AIEvent.Embedding` for embedding calls. |
 | `provider` | `string` | AI provider name (e.g., `'cloudflare-workers-ai'`, `'openai'`). |
 | `model` | `string` | Model identifier (e.g., `'@cf/meta/llama-3-8b-instruct'`). |
 | `input` | `any` | The input/prompt passed to the model. |
 | `output` | `any` | The response from the model. |
+| `modelParameters` | `Record<string, unknown>` | Model configuration parameters (e.g., `temperature`, `max_tokens`, `top_p`). |
 | `usage` | `TokenUsage` | Token usage statistics (see below). |
 | `latency` | `number` | Request latency in seconds. |
 | `timeToFirstToken` | `number` | Time to first token in seconds (for streaming). |
@@ -189,6 +228,7 @@ captureAiGeneration(client: PostHog, options: CaptureAiGenerationOptions): Promi
 | `groups` | `Record<string, string>` | PostHog groups for the event. |
 | `captureImmediate` | `boolean` | Send event immediately without queueing. |
 | `privacyMode` | `boolean` | Redact input/output content. |
+| `costOverride` | `CostOverride` | Override auto-calculated costs with custom per-token costs (see below). |
 
 ### TokenUsage
 
@@ -199,6 +239,32 @@ captureAiGeneration(client: PostHog, options: CaptureAiGenerationOptions): Promi
 | `reasoningTokens` | `number` | Number of reasoning tokens (for models that support this). |
 | `cacheReadInputTokens` | `number` | Tokens read from cache. |
 | `cacheCreationInputTokens` | `number` | Tokens used to create cache. |
+| `webSearchCount` | `number` | Count of web search queries used. |
+| `rawUsage` | `unknown` | Raw provider usage metadata for backend processing. |
+
+### CostOverride
+
+Use `costOverride` to provide custom per-token costs in USD when PostHog's automatic cost calculation doesn't cover your model:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `inputCost` | `number` | Cost per input token in USD. |
+| `outputCost` | `number` | Cost per output token in USD. |
+
+```typescript
+await captureAiGeneration(posthogClient, {
+    distinctId: 'user-123',
+    provider: 'custom-provider',
+    model: 'custom-model',
+    input: prompt,
+    output: response,
+    usage: { inputTokens: 500, outputTokens: 200 },
+    costOverride: {
+        inputCost: 0.000001,  // $0.000001 per input token
+        outputCost: 0.000002  // $0.000002 per output token
+    }
+})
+```
 
 ## Verify traces and generations
 
