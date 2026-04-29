@@ -12,6 +12,7 @@ With MCP, your coding agent can:
 
 - **Run ad-hoc queries** – "How many `purchase_completed` events happened this week?" to quickly check data
 - **Explore your schema** – "What tables do I have?" or "Show me the columns in `stripe_charges`" to discover available data
+- **Validate queries before running** – Check HogQL syntax and catch column typos without ClickHouse cost
 - **Generate queries from questions** – "Write a HogQL query to find the top users by event count" to get a query you can refine
 - **Query across sources** – Join PostHog events with Stripe, HubSpot, or any linked warehouse table
 - **Manage views** – Create, update, materialize, and delete saved views in your Data Warehouse programmatically
@@ -24,6 +25,8 @@ The MCP server provides these tools for running SQL:
 | Tool                                 | Description                                                                                                                                                                                             |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `query-run`                          | Run a HogQL query and return results. Supports any valid HogQL syntax including joins, CTEs, subqueries, and window functions.                                                                          |
+| `query-validate`                     | Validate a HogQL query without executing it. Returns structured errors with character positions, warnings, and the list of tables referenced. No ClickHouse cost.                                       |
+| `hogql-schema`                       | List all tables and columns available to HogQL queries. Returns every queryable table (PostHog, system, warehouse, views) with field names and types. Call this before writing queries from scratch.    |
 | `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Returns the query string so you can review or modify it before running. Requires [AI data processing approval](/docs/posthog-ai/allow-access). |
 | `property-definitions`               | List all event and person properties in your project. Useful for understanding what data is available before writing a query.                                                                           |
 | `event-definitions-list`             | List all event definitions in your project with volume and usage data.                                                                                                                                  |
@@ -83,6 +86,13 @@ Try these with your MCP-enabled agent:
 - `Generate a HogQL query to calculate weekly active users by cohort.`
 - `Show me 5 sample rows from the hubspot_contacts table.`
 - `What properties are available on the purchase_completed event?`
+
+For schema discovery and query validation:
+
+- `Show me all tables and columns available for HogQL queries.`
+- `What fields are on the events table?`
+- `Validate this HogQL query before running it: SELECT user_id FROM events`
+- `Check if my query has any errors: SELECT * FROM event WHERE timestamp > now() - INTERVAL 1 DAY`
 
 For querying alerts:
 
