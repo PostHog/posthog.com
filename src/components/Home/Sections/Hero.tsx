@@ -1,10 +1,51 @@
 import React, { useState } from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
-import HeroCarousel from 'components/Home/HeroCarousel'
+import TabbedCarousel, { type TabbedCarouselTab } from 'components/TabbedCarousel'
+import {
+    OnePlaceSlide,
+    UnderstandUsageSlide,
+    DebugFixSlide,
+    TestRolloutSlide,
+} from 'components/Home/HeroCarousel/slides'
 import Logo from 'components/Logo'
 import { useApp } from '../../../context/App'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { CTAs } from 'components/CTAs'
+
+const heroTabs: TabbedCarouselTab[] = [
+    {
+        value: 'understand-usage',
+        label: 'Understand product usage',
+        content: <UnderstandUsageSlide />,
+        color: 'bg-blue',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+    },
+    {
+        value: 'one-place',
+        label: 'One place for product data',
+        content: <OnePlaceSlide />,
+        color: 'bg-teal',
+        activeText: 'text-black',
+        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+    },
+    {
+        value: 'debug-fix',
+        label: 'Debug & fix issues',
+        content: <DebugFixSlide />,
+        color: 'bg-salmon',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+    },
+    {
+        value: 'test-rollout',
+        label: 'Test & roll out changes',
+        content: <TestRolloutSlide />,
+        color: 'bg-purple',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+    },
+]
 
 export const Hero = () => {
     const { siteSettings } = useApp()
@@ -37,7 +78,7 @@ export const Hero = () => {
                 </div>
             </div>
             <div className="@container">
-                <HeroCarousel />
+                <TabbedCarousel variant="hero" tabs={heroTabs} />
             </div>
         </>
     )

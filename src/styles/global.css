@@ -2712,7 +2712,7 @@ div[data-radix-popper-content-wrapper] {
     border-left-color: rgb(30 31 35) !important;
 }
 
-@keyframes hero-carousel-progress {
+@keyframes carousel-progress {
     from {
         width: 0%;
     }
@@ -2721,7 +2721,7 @@ div[data-radix-popper-content-wrapper] {
     }
 }
 
-@keyframes hero-carousel-fade-in {
+@keyframes carousel-fade-in {
     from {
         opacity: 0;
     }
