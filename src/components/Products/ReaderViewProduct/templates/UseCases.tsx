@@ -3,32 +3,34 @@ import OSTable from 'components/OSTable'
 import UseCaseSubmission from '../UseCaseSubmission'
 import { SectionComponentProps } from '../types'
 
-// TODO: source from productData.useCases when generalizing this template across products.
 const columns = [
     { name: 'Role', width: 'minmax(150px,auto)', align: 'left' as const },
     { name: 'Use cases', width: 'minmax(auto,1fr)', align: 'left' as const },
 ]
 
-const rows = [
-    ['Product Engineers', "Debug production issues that can't be reproduced locally"],
-    ['Support', 'Pinpoint the source of issues with visual verification and console logs'],
-    ['PMs & Designers', 'Spot friction, dead ends, and rage clicks'],
-    ['Growth', 'Investigate funnel drop-off and onboarding bleed'],
-    ['QA', 'Validating releases by watching real users instead of staged flows'],
-].map(([role, useCase]) => ({
-    cells: [{ content: role }, { content: useCase }],
-}))
+interface UseCasesData {
+    intro?: string
+    rows?: [string, string][]
+}
 
 const UseCases = ({ id, productData }: SectionComponentProps) => {
     const { name } = productData ?? {}
+    const useCases: UseCasesData | undefined = productData?.useCases
+    const rows = useCases?.rows ?? []
+
+    if (!rows.length) return null
+
+    const tableRows = rows.map(([role, useCase]) => ({
+        cells: [{ content: role }, { content: useCase }],
+    }))
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
             <h2 className="mb-8">Who is it for?</h2>
-            <p>{name} is used across teams depending on your role.</p>
+            {useCases?.intro && <p>{useCases.intro}</p>}
             <OSTable
                 columns={columns}
-                rows={rows}
+                rows={tableRows}
                 size="sm"
                 rowAlignment="top"
                 width="full"

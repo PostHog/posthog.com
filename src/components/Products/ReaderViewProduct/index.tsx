@@ -36,6 +36,15 @@ interface ProductReaderViewProps {
         description?: string
         image?: string
     }
+    /**
+     * Optional page-owned menu arrays. When set, these replace the corresponding
+     * menus from the product hook for both sidebar navigation and section
+     * rendering. Each item can carry a `component` reference (page-owned
+     * rendering) and optional `props` for slot-specific data; otherwise the
+     * shared template registry is used (`item.template ?? item.slug`).
+     */
+    productMenu?: ProductNavItem[]
+    pricingMenu?: ProductNavItem[]
 }
 
 const SURFACE_MENU_FIELD: Record<Exclude<ProductSurface, 'docs'>, 'productMenu' | 'pricingMenu'> = {
@@ -75,6 +84,8 @@ export default function ProductReaderView({
     data,
     surface = 'product',
     seoOverrides,
+    productMenu,
+    pricingMenu,
 }: ProductReaderViewProps) {
     const productData = useProduct({ handle: productHandle }) as any
     const allProducts = useProduct() as any[]
@@ -95,14 +106,32 @@ export default function ProductReaderView({
         )
     }
 
+    const resolvedProductMenu: ProductNavItem[] = productMenu ?? productData.productMenu ?? []
+    const resolvedPricingMenu: ProductNavItem[] = pricingMenu ?? productData.pricingMenu ?? []
+
     const menuField = SURFACE_MENU_FIELD[surface]
-    const surfaceMenu: ProductNavItem[] = productData[menuField] || []
+    const surfaceMenu: ProductNavItem[] = menuField === 'productMenu' ? resolvedProductMenu : resolvedPricingMenu
+
+    const productDataForMenus = {
+        ...productData,
+        productMenu: resolvedProductMenu,
+        pricingMenu: resolvedPricingMenu,
+    }
 
     const menuTabs = buildProductMenuTabs({
-        productData,
+        productData: productDataForMenus,
         contentRef: sectionsRef,
         activeSurface: surface,
     })
+
+    const sharedSectionProps = {
+        productData,
+        data,
+        customers,
+        customerSlugs,
+        hasCaseStudy,
+        allProducts,
+    }
 
     return (
         <>
@@ -122,21 +151,16 @@ export default function ProductReaderView({
                 <div ref={sectionsRef} className="flex flex-col gap-12">
                     {groupSurfaceMenu(surfaceMenu).map((group, groupIndex) => {
                         const renderedItems = group.items.map((item) => {
-                            const templateKey = resolveTemplate(item)
-                            const Template = templateRegistry[templateKey] as
-                                | React.ComponentType<SectionComponentProps>
+                            const Component = (item.component ?? templateRegistry[resolveTemplate(item)]) as
+                                | React.ComponentType<SectionComponentProps & Record<string, any>>
                                 | undefined
-                            if (!Template) return null
+                            if (!Component) return null
                             return (
-                                <Template
+                                <Component
                                     key={item.slug}
                                     id={item.slug}
-                                    productData={productData}
-                                    data={data}
-                                    customers={customers}
-                                    customerSlugs={customerSlugs}
-                                    hasCaseStudy={hasCaseStudy}
-                                    allProducts={allProducts}
+                                    {...sharedSectionProps}
+                                    {...(item.props ?? {})}
                                 />
                             )
                         })

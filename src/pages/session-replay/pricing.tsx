@@ -1,8 +1,7 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import ProductReaderView from 'components/Products/ReaderViewProduct'
-
-const PRODUCT_HANDLE = 'session_replay'
+import { PRODUCT_HANDLE, pricingMenu, productMenu } from './index'
 
 export default function SessionReplayPricing(): JSX.Element {
     const data = useStaticQuery(graphql`
@@ -59,6 +58,8 @@ export default function SessionReplayPricing(): JSX.Element {
             data={data}
             surface="pricing"
             seoOverrides={{ title: 'Session Replay pricing – PostHog' }}
+            productMenu={productMenu}
+            pricingMenu={pricingMenu}
         />
     )
 }

@@ -15,7 +15,6 @@ import {
     IconInfo,
     IconUserPaths,
     IconPlay,
-    IconCode,
     IconCursorClick,
     IconMagic,
 } from '@posthog/icons'
@@ -186,6 +185,16 @@ export const sessionReplay = {
             headline: 'improved registrations by 20-30%',
             description: "We've improved our whole onboarding flow by about 5% too, which is great.",
         },
+    },
+    useCases: {
+        intro: 'Session Replay is used across teams depending on your role.',
+        rows: [
+            ['Product Engineers', "Debug production issues that can't be reproduced locally"],
+            ['Support', 'Pinpoint the source of issues with visual verification and console logs'],
+            ['PMs & Designers', 'Spot friction, dead ends, and rage clicks'],
+            ['Growth', 'Investigate funnel drop-off and onboarding bleed'],
+            ['QA', 'Validating releases by watching real users instead of staged flows'],
+        ],
     },
     features: {
         event_timeline: {
