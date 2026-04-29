@@ -16,12 +16,15 @@ To link Postgres:
 1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
 2. Click **New source** and select Postgres
 3. Enter your database connection details:
+
+   > **Tip:** Paste a connection string in the format `postgres://user:password@host:port/database` to auto-populate the fields below.
    - **Host:** The hostname or IP your database server like `db.example.com` or `123.132.1.100`.
    - **Port:** The port your database server is listening to. The default is `5432`.
    - **Database:** The name of the database you want like `analytics_db`.
    - **User:** The username with the necessary permissions to access the database.
    - **Password:** The password for the user.
    - **Schema:** The schema for your database where your tables are located. The default is `public`.
+
 4. If you need to connect through an SSH tunnel, enable and configure it (optional):
    - **Tunnel host:** The hostname of your SSH server.
    - **Tunnel port:** The port your SSH server is listening on.
