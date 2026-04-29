@@ -118,6 +118,31 @@ To do so, you should add the CSS class name `ph-no-capture` to elements which sh
 
 Note that adding `ph-no-capture` will also prevent any [autocapture](/docs/data/autocapture) events from being captured from that element.
 
+## URL query parameters
+
+URLs can contain sensitive data in query parameters, such as authentication tokens, API keys, or personal identifiers. PostHog can automatically mask these values in session replay URLs.
+
+To enable URL query parameter masking, set `mask_personal_data_properties` to `true`:
+
+```ts
+posthog.init('<ph_project_token>', {
+    mask_personal_data_properties: true
+})
+```
+
+This automatically masks common sensitive parameters like `gclid`, `fbclid`, `msclkid`, `twclid`, `li_fat_id`, `igshid`, `ttclid`, `rdt_cid`, `gbraid`, `wbraid`, `ko_click_id`, `dclid`, and `_ga`.
+
+To mask additional custom parameters, use `custom_personal_data_properties`:
+
+```ts
+posthog.init('<ph_project_token>', {
+    mask_personal_data_properties: true,
+    custom_personal_data_properties: ['token', 'api_key', 'session_id']
+})
+```
+
+When enabled, URLs like `https://example.com/?token=secret123&page=home` appear as `https://example.com/?token=<masked>&page=home` in your recordings.
+
 ## Common example configs
 
 ### Maximum privacy - mask everything
