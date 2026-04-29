@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Tabs } from 'radix-ui'
 import { IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 
@@ -36,9 +36,32 @@ export default function TabbedCarousel({
     const [activeTab, setActiveTab] = useState(tabs[0].value)
     const [isPaused, setIsPaused] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
+    const [isOffscreen, setIsOffscreen] = useState(false)
     const [progressKey, setProgressKey] = useState(0)
+    const containerRef = useRef<HTMLDivElement>(null)
 
-    const effectivelyPaused = isPaused || isHovering
+    // Pause auto-advance when the carousel scrolls mostly out of view, so
+    // height changes between slides don't shift the content the reader is
+    // currently looking at further down the page. Mirrors HeroCarousel.
+    useEffect(() => {
+        const el = containerRef.current
+        if (!el || typeof IntersectionObserver === 'undefined') return
+
+        // ReaderView wraps content in a Radix ScrollArea — use that viewport
+        // as the IntersectionObserver root when present so visibility is
+        // measured against the actual scrolling container, not the window.
+        const scrollRoot = (el.closest('[data-radix-scroll-area-viewport]') as Element | null) ?? null
+
+        const observer = new IntersectionObserver(([entry]) => setIsOffscreen(!entry.isIntersecting), {
+            root: scrollRoot,
+            threshold: 0,
+            rootMargin: '-300px 0px 0px 0px',
+        })
+        observer.observe(el)
+        return () => observer.disconnect()
+    }, [])
+
+    const effectivelyPaused = isPaused || isHovering || isOffscreen
 
     const advance = useCallback(() => {
         setActiveTab((prev) => {
@@ -60,6 +83,7 @@ export default function TabbedCarousel({
 
     return (
         <div
+            ref={containerRef}
             className={`@container ${className || ''}`}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
