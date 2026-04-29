@@ -577,7 +577,14 @@ export const CodeBlock = ({
                                                     ) {
                                                         return
                                                     }
-                                                    const { className, ...props } = getLineProps({ line, key: i })
+                                                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                                    const {
+                                                        key: _lineKey,
+                                                        className,
+                                                        ...props
+                                                    } = getLineProps({
+                                                        line,
+                                                    }) as any
                                                     const tooltipContent =
                                                         tooltips?.find(
                                                             (tooltip) => tooltip.lineNumber === i + lineNumberStart
@@ -621,11 +628,13 @@ export const CodeBlock = ({
                                                                     (token) => !token.content.startsWith(tooltipKey)
                                                                 )
                                                                 .map((token, key) => {
-                                                                    const { className, children, ...props } =
-                                                                        getTokenProps({
-                                                                            token,
-                                                                            key,
-                                                                        })
+                                                                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                                                    const {
+                                                                        key: _tokenKey,
+                                                                        className,
+                                                                        children,
+                                                                        ...props
+                                                                    } = getTokenProps({ token }) as any
                                                                     return (
                                                                         <span className="relative" key={key}>
                                                                             {firstContentIndex === key &&
