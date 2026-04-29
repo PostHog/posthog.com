@@ -187,8 +187,8 @@ export const sessionReplay = {
             description: "We've improved our whole onboarding flow by about 5% too, which is great.",
         },
     },
-    features: [
-        {
+    features: {
+        event_timeline: {
             title: 'Event timeline',
             headline: 'Event timeline',
             description:
@@ -200,7 +200,7 @@ export const sessionReplay = {
                 },
             ],
         },
-        {
+        network_monitor: {
             title: 'Network monitor',
             headline: 'Network monitor',
             description: 'Analyze performance and network calls',
@@ -212,7 +212,7 @@ export const sessionReplay = {
                 },
             ],
         },
-        {
+        console_logs: {
             title: 'Console logs',
             headline: 'Console logs',
             description: (
@@ -247,14 +247,14 @@ export const sessionReplay = {
                 </>
             ),
         },
-        {
+        autocapture: {
             title: 'Autocapture',
             headline: 'Autocapture',
             description:
                 "Capture sessions without extra code. If you're already using PostHog.js for analytics, there's nothing else to install.",
             children: <SnippetRenderer />,
         },
-        {
+        capture_form_data: {
             title: 'Capture form data',
             headline: 'Capture form data',
             description: (
@@ -322,7 +322,7 @@ export const sessionReplay = {
         //         },
         //     ],
         // },
-        {
+        dom_explorer: {
             title: 'DOM explorer',
             headline: 'DOM explorer',
             description:
@@ -334,7 +334,7 @@ export const sessionReplay = {
                 },
             ],
         },
-        {
+        recording_rules: {
             title: 'Recording rules',
             headline: 'Recording rules',
             description:
@@ -359,7 +359,7 @@ window.posthog.onFeatureFlags(function () {
                 </div>
             ),
         },
-        {
+        supported_platforms: {
             title: 'Supported platforms',
             headline: 'Supported platforms',
             description:
@@ -450,7 +450,7 @@ window.posthog.onFeatureFlags(function () {
                 </div>
             ),
         },
-        {
+        more_features: {
             title: 'More features',
             headline: 'More features',
             features: [
@@ -497,7 +497,7 @@ window.posthog.onFeatureFlags(function () {
                 },
             ],
         },
-        {
+        mcp: {
             title: 'MCP',
             headline: 'Search replays from your editor',
             description:
@@ -523,7 +523,7 @@ window.posthog.onFeatureFlags(function () {
             ],
             children: <MCPInstall />,
         },
-    ],
+    },
     postHogOnPostHog: {
         title: 'How PostHog uses Session Replay',
         benefits: [

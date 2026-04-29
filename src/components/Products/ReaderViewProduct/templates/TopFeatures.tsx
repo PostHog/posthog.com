@@ -7,7 +7,7 @@ import { IconList, IconCode, IconRecord, IconSearch, IconExpand } from '@posthog
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const TopFeatures = ({ id, productData }: SectionComponentProps) => {
-    const { name, color, screenshots } = productData ?? {}
+    const { name, color, screenshots, features } = productData ?? {}
 
     // TODO: source from productData.topFeatures when generalizing this template across products.
     const featureTabs: TabbedCarouselTab[] = [
@@ -54,9 +54,9 @@ const TopFeatures = ({ id, productData }: SectionComponentProps) => {
                             </li>
                         </ul>
                         <p>
-                            Click on any row to jump to that point in the session, or click the{' '}
+                            You can click on any row to jump to that point in the session, or click the{' '}
                             <span className="inline-block">
-                                <IconExpand className="size-5 inline-block" aria-label="Expand" /> icon
+                                <IconExpand className="size-5 inline-block relative -top-px" aria-label="Expand" /> icon
                             </span>{' '}
                             view the associated metadata.
                         </p>
@@ -71,7 +71,15 @@ const TopFeatures = ({ id, productData }: SectionComponentProps) => {
             value: 'technical-context',
             label: 'Technical context',
             icon: <IconCode className="size-5" />,
-            content: <p className="p-4">add a placeholder</p>,
+            content: (
+                <div className="@container p-4 @2xl/reader-content:p-8 @4xl/reader-content:p-10">
+                    <div className="text-base text-primary/90">
+                        <h3 className="mb-4">{features.console_logs.headline}</h3>
+                        <p>{features.console_logs.description}</p>
+                        <div className="mt-4">{features.console_logs.children}</div>
+                    </div>
+                </div>
+            ),
             color: 'bg-white',
             activeText: 'text-primary',
             progressBar: 'bg-green',

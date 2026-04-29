@@ -57,7 +57,8 @@ const FeatureBlock = ({ feature }: { feature: Feature }) => {
 }
 
 const Features = ({ id, productData }: SectionComponentProps) => {
-    const features: Feature[] = productData?.features || []
+    const rawFeatures = productData?.features
+    const features: Feature[] = Array.isArray(rawFeatures) ? rawFeatures : Object.values(rawFeatures || {})
 
     if (!features.length) return null
 
