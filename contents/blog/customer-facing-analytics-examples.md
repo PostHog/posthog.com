@@ -54,7 +54,7 @@ The analytics aren't a side feature, industry analysts have credited similar "sh
 
 ## 3. Product Hunt: Making leaderboards front and centre
 
-[**Product Hunt's**](https://www.producthunt.com/) entire homepage is a customer-facing leaderboard. Every 24 hours it ranks a few hundred new launches by upvotes, comments, and reviews, and rolls the top five into permanent "Yesterday / Last Week / Last Month" slots. The ranking logic is transparent enough that makers plan launches around it; [roughly 700–800 upvotes](https://flexprice.io/blog/how-we-ranked-product-of-the-day-on-product-hunt) is the bar for a weekday #1.
+**Product Hunt's** entire homepage is a customer-facing leaderboard. Every 24 hours it ranks a few hundred new launches by upvotes, comments, and reviews, and rolls the top five into permanent "Yesterday / Last Week / Last Month" slots. The ranking logic is transparent enough that makers plan launches around it; [roughly 700–800 upvotes](https://flexprice.io/blog/how-we-ranked-product-of-the-day-on-product-hunt) is the bar for a weekday #1.
 
 ![ProductHunt's homepage leaderboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/producthunt_6ca9a9dc9e.png)
 
