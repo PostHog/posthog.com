@@ -3,7 +3,8 @@ import TabbedCarousel, { type TabbedCarouselTab } from 'components/TabbedCarouse
 import { SectionComponentProps } from '../types'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Glow from 'components/Glow'
-import { IconList, IconCode, IconRecord, IconSearch } from '@posthog/icons'
+import { IconList, IconCode, IconRecord, IconSearch, IconExpand } from '@posthog/icons'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const TopFeatures = ({ id, productData }: SectionComponentProps) => {
     const { name, color, screenshots } = productData ?? {}
@@ -15,11 +16,12 @@ const TopFeatures = ({ id, productData }: SectionComponentProps) => {
             label: 'Event timeline',
             icon: <IconList className="size-5" />,
             content: (
-                <div className="">
+                <div className="@container p-4 @2xl/reader-content:p-8 @4xl/reader-content:p-10">
                     {screenshots?.home?.src && (
                         <Glow
                             color={color}
-                            className="@2xl/reader-content:max-w-sm @4xl/reader-content:max-w-md @5xl/reader-content:max-w-lg @2xl/reader-content:float-right @3xl/reader-content:ml-8 transition-all"
+                            intensity="soft"
+                            className="rounded border border-secondary max-w-md @2xl:float-right @2xl:max-w-sm @3xl:max-w-md transition-all leading-[0] mb-4 @2xl:mb-0 @2xl:ml-4 @3xl:ml-8 @4xl/reader-content:ml-10"
                         >
                             <CloudinaryImage
                                 src={screenshots.overview.src as `https://res.cloudinary.com/${string}`}
@@ -29,14 +31,14 @@ const TopFeatures = ({ id, productData }: SectionComponentProps) => {
                             />
                         </Glow>
                     )}
-                    <div className="p-4 @2xl/reader-content:p-8 @5xl/reader-content:p-10 text-base text-primary/90">
+                    <div className="text-base text-primary/90">
                         <h3 className="mb-4">Event timeline</h3>
                         <p>
                             Scrub through an activity log of a user's session to jump directly to parts you want to
-                            watch. The timeline shows you a full list of page views, custom events, and errors the user
-                            may have encountered during their session.
+                            watch. The timeline shows you a full list of autocapture events (like page views), custom
+                            events, form interactions, and errors the user may have encountered during their session.
                         </p>
-                        <ul className="space-y-4">
+                        <ul className="space-y-4 mb-4">
                             <li>
                                 <strong>Event properties</strong> show you the properties of the event, like the page
                                 URL, the user's IP address, and the timestamp of the event.
@@ -51,6 +53,13 @@ const TopFeatures = ({ id, productData }: SectionComponentProps) => {
                                 and any other acronyms they might think up next.
                             </li>
                         </ul>
+                        <p>
+                            Click on any row to jump to that point in the session, or click the{' '}
+                            <span className="inline-block">
+                                <IconExpand className="size-5 inline-block" aria-label="Expand" /> icon
+                            </span>{' '}
+                            view the associated metadata.
+                        </p>
                     </div>
                 </div>
             ),

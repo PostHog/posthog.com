@@ -99,11 +99,11 @@ const Glow = ({
         <Wrapper className={wrapperClass}>
             <div
                 aria-hidden
-                className={`pointer-events-none absolute -z-10 ${sizeMap[size]} ${colorMap[color]} ${
+                className={`pointer-events-none absolute z-1 ${sizeMap[size]} ${colorMap[color]} ${
                     blurMap[intensity]
                 } ${opacityClass} ${roundedMap[rounded]} ${glowClassName ?? ''}`}
             />
-            {children}
+            <div className="relative z-2">{children}</div>
         </Wrapper>
     )
 }

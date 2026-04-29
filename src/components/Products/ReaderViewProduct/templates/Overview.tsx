@@ -10,7 +10,7 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose flex flex-col gap-12 max-w-7xl mx-auto">
-            <DebugContainerQuery name="reader-content" />
+            {/* <DebugContainerQuery name="reader-content" /> */}
             <header className="">
                 {screenshots?.home?.src && (
                     <Glow

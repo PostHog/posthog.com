@@ -19,8 +19,8 @@ export default function DemoVideo({ wistia, highlights, className = '' }: DemoVi
     return (
         <div className={`@container ${className}`}>
             <div className="flex flex-col @5xl:gap-8 @5xl:flex-row">
-                <div className="rounded overflow-hidden flex-1 w-full">
-                    <WistiaCustomPlayer mediaId={wistia} />
+                <div className="rounded flex-1 w-full">
+                    <WistiaCustomPlayer mediaId={wistia} glow="red" />
                 </div>
 
                 {highlights && highlights.length > 0 && (

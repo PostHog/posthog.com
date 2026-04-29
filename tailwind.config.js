@@ -99,6 +99,7 @@ module.exports = {
                 button: '#B17816',
                 'button-dark': '#835C19',
                 'button-secondary-dark': '#C78617',
+                accent: 'rgb(var(--accent) / <alpha-value>)',
 
                 primary: 'rgb(var(--border) / <alpha-value>)',
                 secondary: 'rgb(var(--input-border) / <alpha-value>)',

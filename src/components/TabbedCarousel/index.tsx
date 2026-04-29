@@ -105,7 +105,7 @@ export default function TabbedCarousel({
                         showActiveBg ? activeColor : ''
                     } flex transition-colors ${slideClassName ?? ''}`}
                 >
-                    <div className="flex flex-col bg-light dark:bg-dark flex-1 w-full shadow-2xl rounded">
+                    <div className="flex flex-col bg-light dark:bg-dark flex-1 w-full shadow-2xl rounded overflow-hidden">
                         <button
                             onClick={() => setIsPaused((p) => !p)}
                             className="absolute top-4 right-4 shrink-0 p-2 text-secondary hover:text-primary cursor-pointer z-10 border border-secondary hover:bg-accent rounded bg-light/25 dark:bg-dark/25 backdrop-blur"
