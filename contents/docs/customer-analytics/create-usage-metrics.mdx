@@ -26,29 +26,29 @@ You can create usage metrics in two ways:
 | ------------------- | ---------------------------------------------------------------------------------------- |
 | **Name**            | The column title shown in customer lists                                                 |
 | **Interval**        | Time period for the metric: 7, 30 or 90 days                                             |
-| **Format**          | How the value should be formated: Numeric or currency                                    |
+| **Format**          | How the value should be formatted: Numeric or currency                                   |
 | **Display**         | How the metric is visualized: Number (default) or Sparkline                              |
 | **Calculation**     | How data is aggregated: Count of events/rows (default) or Sum of property/column         |
 | **Property to sum** | The numeric property or column to sum. Only shown when **Calculation** is set to **Sum** |
-| **Match events**    | Which events or data warehouse table to use as the metric source                         |
+| **Match events**    | Which events or Data Warehouse table to use as the metric source                         |
 | **Filters**         | Additional conditions to narrow down matched events (events source only)                 |
 
-### Match events or data warehouse table
+### Match events or Data Warehouse table
 
-Click **Match event or data warehouse table** to specify the source for this metric.
+Click **Match event or Data Warehouse table** to specify the source for this metric.
 
 For **events-based metrics**, you can add multiple event matchers. The metric counts events matching any of them. For example, to track API usage, you might match events named `api_request` or `api_call`.
 
-For **data warehouse metrics**, select a data warehouse table and configure:
+For **Data Warehouse metrics**, select a Data Warehouse table and configure:
 
-- **Timestamp column** - The column used to filter rows by the metric's date range
-- **Group key column** - The column used to match rows to the correct customer
+- **Timestamp column** – The column used to filter rows by the metric's date range
+- **Group key column** – The column used to match rows to the correct customer
 
-Each metric uses a single source. You can't mix events and data warehouse tables in the same metric.
+Each metric uses a single source. You can't mix events and Data Warehouse tables in the same metric.
 
 <CalloutBox icon="IconInfo" title="Limitation" type="fyi">
 
-Data warehouse usage metrics currently only render on group profiles, not person profiles.
+Data Warehouse usage metrics currently only render on group profiles, not person profiles.
 
 </CalloutBox>
 
@@ -60,8 +60,8 @@ Filters apply to all matched events and are only available for events-based metr
 
 Choose how data is aggregated for the metric:
 
-- **Count of events** (or **Count of rows** for data warehouse) – Counts the total number of matched events or rows. This is the default.
-- **Sum of property** (or **Sum of column** for data warehouse) – Sums the values of a numeric event property or table column across matched data. When selected, a **Property to sum** (or **Column to sum**) field appears where you select the value to aggregate. This is useful for tracking cumulative values like API tokens consumed, storage used, or revenue generated.
+- **Count of events** (or **Count of rows** for Data Warehouse) – Counts the total number of matched events or rows. This is the default.
+- **Sum of property** (or **Sum of column** for Data Warehouse) – Sums the values of a numeric event property or table column across matched data. When selected, a **Property to sum** (or **Column to sum**) field appears where you select the value to aggregate. This is useful for tracking cumulative values like API tokens consumed, storage used, or revenue generated.
 
 ### Display
 

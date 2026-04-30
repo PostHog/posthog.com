@@ -8,7 +8,7 @@ import CustomerAnalyticsBetaWarning from "./_snippets/customer-analytics-beta-wa
 
 <CustomerAnalyticsBetaWarning />
 
-Usage metrics let you define global activity measurements and track them for each customer. Any event performed by your users – or data from your [data warehouse](/docs/data-warehouse) tables – can be turned into usage metrics, so that you can understand their activity at a glance and identify expansion opportunities or churn risk.
+Usage metrics let you define global activity measurements and track them for each customer. Any event performed by your users – or data from your [Data Warehouse](/docs/data-warehouse) tables – can be turned into usage metrics, so that you can understand their activity at a glance and identify expansion opportunities or churn risk.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_47_09_424_Z_893c3cd740.png"
@@ -28,20 +28,20 @@ Here are some examples of usage metrics for SaaS products:
 | Error rate       | `$exception`     | Spot customers hitting issues          |
 | Export usage     | `export_created` | Find power users                       |
 
-## Data warehouse metrics
+## Data Warehouse metrics
 
-You can also create usage metrics from [data warehouse](/docs/data-warehouse) tables. This is useful when your usage or billing data lives outside of PostHog events – for example, in Stripe or your own database.
+You can also create usage metrics from [Data Warehouse](/docs/data-warehouse) tables. This is useful when your usage or billing data lives outside of PostHog events – for example, in Stripe or your own database.
 
-When creating a data warehouse metric, you specify:
+When creating a Data Warehouse metric, you specify:
 
-- **Table** - The data warehouse table to query
-- **Timestamp column** - The column used to filter rows by date range
-- **Group key column** - The column used to match rows to customers
+- **Table** – The Data Warehouse table to query
+- **Timestamp column** – The column used to filter rows by date range
+- **Group key column** – The column used to match rows to customers
 
-Each data warehouse metric is limited to a single table.
+Each Data Warehouse metric is limited to a single table.
 
 <CalloutBox icon="IconInfo" title="Limitation" type="fyi">
 
-Data warehouse usage metrics currently only render on group profiles, not person profiles.
+Data Warehouse usage metrics currently only render on group profiles, not person profiles.
 
 </CalloutBox>
