@@ -8,36 +8,34 @@ availability:
   enterprise: full
 ---
 
-The **Live** tab in [web analytics](/docs/web-analytics/dashboard) is a real-time view of what's happening on your site right now — how many users are active, what pages they're on, where they came from, and what they're doing. Each request streams into the feed as PostHog ingests it, so you can watch traffic as it arrives instead of re-running a query.
+The **Live** tab in [web analytics](/docs/web-analytics/dashboard) is a real-time view of what's happening on your site right now: how many users are active, what pages they're on, where they came from, and what they're doing. Live shows events as they arrive, while PostHog is still processing, enriching, and storing them.
 
 > **Note:** Live is currently in alpha. Behavior and column layout may change before general availability.
-
-"Real-time" here means data that's a few seconds to a few minutes old. True zero-latency analytics is rare and usually unnecessary — what matters is that the feed is fresh enough to act on.
 
 ## What it shows
 
 Live is a continuously updating feed of recent events. Each row includes:
 
-- **Timestamp** — when the event was ingested
-- **Path** — the URL or pathname requested
-- **Referrer** and **UTM parameters** — where the visitor came from
-- **Country** and **device** — derived from the request
+- **Timestamp** – when the event was ingested
+- **Path** – the URL or pathname requested
+- **Referrer** and **UTM parameters** – where the visitor came from
+- **Country** and **device** – derived from the request
 
 Use the filter controls at the top of the tab to narrow the feed by host, path, referrer, or any other property. Filters apply to the live stream so you can isolate exactly what you want to watch.
 
 ## When to use Live
 
-Live is for the moments when "right now" matters more than "this week". Reach for it when you're:
+Use Live when you're:
 
-- **Shipping a launch** — watch traffic land on a new page or product as you announce it on Hacker News, Product Hunt, or a launch email.
-- **Running a paid campaign** — see whether ad spend is converting into real visits within minutes, not the next morning.
-- **Deploying frequently** — if you ship multiple times a day, Live lets you catch regressions before your users do.
-- **Monitoring product-led signups** — see which pages activated users are on right now, useful for PLG flows where active-user signal matters.
-- **Verifying an install** — drop the PostHog snippet onto a site, hit a few pages yourself, and confirm events arrive within seconds.
+- **Shipping a launch** – watch traffic land on a new page or product as you announce it on Hacker News, Product Hunt, or a launch email.
+- **Running a paid campaign** – see whether ad spend converts to real visits within minutes, not the next morning.
+- **Deploying frequently** – if you ship multiple times a day, Live helps you catch regressions before your users do.
+- **Watching active users** – see which pages signed-in users are on right now.
+- **Verifying an install** – drop the PostHog snippet onto a site, hit a few pages yourself, and confirm events arrive within seconds.
 
 ## Live vs. the rest of web analytics
 
-Most analytics work splits into "right now" and "what happened" — Live and the rest of [web analytics](/docs/web-analytics/dashboard) cover the two ends of that split.
+Most analytics work splits into "right now" and "what happened". Live covers the first; the rest of [web analytics](/docs/web-analytics/dashboard) covers the second.
 
 | | Live | Web analytics dashboard |
 |---|---|---|
@@ -46,15 +44,15 @@ Most analytics work splits into "right now" and "what happened" — Live and the
 | **Best for** | Launches, campaigns, monitoring, debugging | Trend analysis, reports, retrospectives |
 | **Aggregations** | Stream of individual events | Visitors, sessions, paths, sources |
 
-For deeper analysis (funnels, retention, breakdowns), use [Product Analytics](/docs/product-analytics) or the [SQL editor](/docs/sql).
+For deeper analysis like funnels, retention, or breakdowns, use [Product Analytics](/docs/product-analytics) or the [SQL editor](/docs/sql).
 
 ## Limitations
 
-- **Recent traffic only** — Live shows events from roughly the last few minutes. For longer windows use the main web analytics dashboard.
-- **Sampling** — high-volume sites may see the feed sampled to keep the stream readable. Aggregate dashboards are unaffected.
-- **No historical scroll** — Live is a stream, not a paginated table. Use the events explorer or SQL editor to look further back.
+- **Recent traffic only** – Live shows events from roughly the last few minutes. For longer windows, use the main web analytics dashboard.
+- **Sampling** – high-volume sites may see the feed sampled to keep the stream readable. Aggregate dashboards are unaffected.
+- **No historical scroll** – Live is a stream, not a paginated table. Use the events explorer or SQL editor to look further back.
 
 ## Related
 
-- [Web analytics dashboard](/docs/web-analytics/dashboard) — aggregated views over longer time ranges
-- [Troubleshooting](/docs/web-analytics/troubleshooting) — when events aren't showing up
+- [Web analytics dashboard](/docs/web-analytics/dashboard) – aggregated views over longer time ranges
+- [Troubleshooting](/docs/web-analytics/troubleshooting) – when events aren't showing up
