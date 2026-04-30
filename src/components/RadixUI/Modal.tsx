@@ -61,7 +61,7 @@ const Modal = ({
                                 : {}
                         }
                     >
-                        <div className="rounded border border-primary overflow-hidden size-full">
+                        <div className="rounded border border-primary overflow-hidden size-full flex flex-col">
                             <div className="bg-accent flex items-center justify-between p-1 border-b border-primary">
                                 <p className="text-primary text-left text-sm font-semibold ml-2 my-0">{title}</p>
                                 {showCloseButton && (

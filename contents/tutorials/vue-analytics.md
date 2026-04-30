@@ -152,14 +152,14 @@ cd plugins
 touch posthog.js
 ```
 
-In `posthog.js`, initialize PostHog with your project API key and host. You can find these in your [project settings](https://us.posthog.com/project/settings).
+In `posthog.js`, initialize PostHog with your project token and host. You can find these in your [project settings](https://us.posthog.com/project/settings).
 
 ```js file=plugins/posthog.js
 import posthog from "posthog-js";
 
 export default {
   install(app) {
-    app.config.globalProperties.$posthog = posthog.init("<ph_project_api_key>", {
+    app.config.globalProperties.$posthog = posthog.init("<ph_project_token>", {
       api_host: "<ph_client_api_host>",
       defaults: "<ph_posthog_js_defaults>",
     });

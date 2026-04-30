@@ -2,9 +2,6 @@
 title: Materialization
 ---
 
-
-
-
 Materialization pre-computes your query results and stores them in S3. When someone calls your endpoint, PostHog returns the materialized results instead of running the query again - making responses much faster.
 
 ## When to use materialization
@@ -43,8 +40,49 @@ If materialization fails, the endpoint falls back to direct execution until the 
 
 Materialization is not available when:
 
-- **The endpoint has incompatible variables** - Complex [variables](docs/endpoints/variables) prevent us from materializing the endpoint.
+- **The endpoint has incompatible variables** - Only certain [variable](/docs/endpoints/variables) types are supported. See the compatibility table below.
 - **The endpoint is inactive** - Only active endpoints and their versions are materialized.
+- **The query uses cohort breakdowns** - Queries with cohort breakdowns cannot be materialized because they produce complex union queries that prevent accurate result reconstruction.
+- **The query uses compare mode** - Queries with compare mode enabled cannot be materialized because compare mode alters the series count in ways that prevent accurate result reconstruction.
+
+### Variable compatibility
+
+Not all variables work with materialization. Compatibility depends on the operator and where the variable is used in the query.
+
+| Variable type                                     | Supported | Notes                                                                  |
+| ------------------------------------------------- | --------- | ---------------------------------------------------------------------- |
+| Equality (`=`) on columns                         | ✅ Yes    | Standard column filters work out of the box                            |
+| Range (`>=`, `>`, `<`, `<=`) on timestamp columns | ✅ Yes    | Uses [timestamp bucketing](#timestamp-bucketing) to pre-aggregate data |
+| Variables in `HAVING` clauses                     | ❌ No     | Cannot be materialized                                                 |
+| Variables in `OR` conditions                      | ❌ No     | Cannot be materialized                                                 |
+
+## Timestamp bucketing
+
+When your query uses timestamp range variables (e.g., `timestamp >= {variables.start_date} AND timestamp < {variables.end_date}`), PostHog uses **bucketed materialization**.
+
+Instead of materializing a single result set, PostHog pre-aggregates your data into time buckets. At read time, it re-aggregates only the buckets that fall within your actual variable values.
+
+Supported bucket granularities:
+
+- `hour`
+- `day` (default)
+- `week`
+- `month`
+
+By default, PostHog uses `toStartOfDay` to bucket your data. This means each row in the materialized result represents one day of pre-aggregated data.
+
+### Configuring bucket size
+
+You can customize the bucket granularity for each timestamp column directly in the **Configuration** tab. When materialization is enabled and your query has timestamp range variables, a dropdown appears for each timestamp column, letting you select a bucket size:
+
+- **Hour**
+- **Day**
+- **Week**
+- **Month**
+
+Smaller buckets give more precise results, while larger buckets produce less granular results.
+
+Bucketed materialization only works with aggregate functions that can be re-aggregated across buckets: `count`, `sum`, `min`, `max`, and their combinator variants like `countIf` and `sumIf`. Functions like `avg`, `uniq`, and `countDistinct` cannot be re-aggregated and are not supported.
 
 ## How materialization works with execution
 
@@ -54,3 +92,9 @@ When you execute an endpoint:
 2. If materialization is **running or failed**, PostHog executes the query directly
 
 See [Execution](/docs/endpoints/execution) for more details on how PostHog chooses between materialized and direct execution.
+
+## Insight-based endpoint results
+
+When an endpoint uses an insight-based query (TrendsQuery, LifecycleQuery, or RetentionQuery), PostHog automatically transforms materialized results to match the same response format as non-materialized execution. This means you get the same rich, structured response regardless of whether materialization is enabled.
+
+If the endpoint query is edited after materialization, the stored data may no longer match the current query definition. When this happens, PostHog returns an error for the current request and automatically triggers a re-materialization. The next request after re-materialization completes will succeed with correctly formatted results.

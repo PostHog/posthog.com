@@ -83,7 +83,7 @@ Reach out to all active users on the account, and let them know that access will
 
 #### Step 3 - Suspending user access
 
-To prevent users from being able to log in you need to go to the Django admin panel for their organization, then for each user account listed there open the user, uncheck the `Is Active` box and then save the user.
+To prevent users from being able to log in you need to go to the Django admin panel for their organization, then set the "Active" field to "No", with the reason selected from the dropdown: "Access revoked due to an unpaid balance." Then, hit save.
 
 After completing this, email or Slack all users in the organization letting them know that access has been suspended and what they can do to rectify the situation.  Also make it clear that if this isn't resolved within the next 7 days we will revert them back to the Free tier and they be subjected to the usage limits of that tier (e.g. they are likely to lose tracking data).
 
@@ -104,6 +104,20 @@ At this point they will be notified about this automatically via the billing ser
 #### Repeated failed payments
 
 After three consecutive missed payment periods, the customer must provide advance payment covering three months of service based on their typical usage before account access is restored. If the customer disagrees or fails to make the advance payment, the account may be reverted to the Free Tier. 
+
+### India-based customers
+- GST: India-based customers are required to provide their GSTIN when signing up. The customer is liable to manage all GST under the Reverse Charge Mechanism.
+- 3DS payment failures: Indian banks require 3DS (one time password) for international card payments. The customer is responsible for completing the 3DS step (our billing system sends a couple of reminders) without which the payment will fail.
+
+
+### Withholding taxes
+PostHog Inc is a US incorporated company and a US tax resident and we do not claim benefits under any Double Taxation Avoidance Agreements (DTAA). To support this, we provide:
+- Our Tax Residency Certificate
+- Our no PE (Permanent Establishment) Certificate
+These documents are available in the [shared Finance drive](https://drive.google.com/drive/folders/17GjgGr-vJO_azV2yx4PWHaKO0PgdztLN?usp=sharing). You can share them with the customer on request.
+ 
+The full invoice amount is due. Any tax withheld is exclusive of the invoice, which will be treated as outstanding.
+
 
 ### Stripe Products & Prices
 

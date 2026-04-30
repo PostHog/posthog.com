@@ -29,6 +29,7 @@ export const contentsquare = {
                 canvas_recording: false,
                 crash_reports: true,
                 console_logs: true,
+                conditional_recording: true,
                 network_monitor: true,
             },
             platform_support: {
@@ -78,16 +79,17 @@ export const contentsquare = {
         },
         error_tracking: {
             available: true,
-             },
-            monitoring: {
+        },
+        monitoring: {
             features: {
                 performance_monitoring: true,
             },
-        }
+        },
     },
     platform: {
         deployment: {
             open_source: false,
+            eu_hosting: true,
         },
         pricing: {
             self_serve: false,

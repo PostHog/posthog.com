@@ -1,0 +1,24 @@
+---
+title: PostHog's integrated data warehouse
+sidebar: Docs
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+This page explains how PostHog&apos;s integrated data warehouse works and how it differs from warehouse-native tools.
+
+> For the full "does PostHog do warehouse native?" answer, check out our [warehouse-native explainer](/data-stack/warehouse-native).
+
+## How it works
+
+Data flows into PostHog and all query execution happens in PostHog:
+
+1. **Getting data** – Events and persons are ingested into PostHog directly or via a PostHog SDK or an external CDP (e.g. Segment or RudderStack).
+2. **Storing data** – Data is stored in PostHog infrastructure (unless you're using [custom sources](/docs/data-warehouse/under-the-hood). 
+3. **Using data** – Analytics, experiments, feature flags, and other tools can draw on the data that’s available in your PostHog warehouse.
+
+If you&apos;re using PostHog as your data warehouse, your data stays in PostHog and is accessible across PostHog tools. You get SQL, unified data, and can use data in the warehouse across many other PostHog tools, such as analytics, feature flags, and surveys. This eliminates the need to stitch multiple vendors together—your data never needs to travel between systems.
+
+If you&apos;re using an external data warehouse, such as Snowflake, you can connect it as a source and sync the tables and fields you need into PostHog via our warehouse sources. Queries then run on PostHog compute, enabling you to use warehouse data across PostHog tools. 
+
+For more detail on how data gets into PostHog and where queries run, find out [how the PostHog warehouse works under the hood](/docs/data-warehouse/under-the-hood).

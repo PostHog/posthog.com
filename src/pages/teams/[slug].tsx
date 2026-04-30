@@ -11,13 +11,13 @@ import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import slugify from 'slugify'
 import useTeam from 'hooks/useTeam'
 import useTeamUpdates from 'hooks/useTeamUpdates'
 import usePostHog from 'hooks/usePostHog'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { Question } from 'components/Squeak'
 import { InProgress } from 'components/Roadmap/InProgress'
+import { useToast } from '../../context/Toast'
 import SideModal from 'components/Modal/SideModal'
 import TeamUpdate from 'components/TeamUpdate'
 import { PrivateLink } from 'components/PrivateLink'
@@ -41,6 +41,8 @@ import {
 import TeamFeatures from 'components/TeamFeatures'
 import SpiritAnimal from 'components/Team/SpiritAnimal'
 import SmallTeam from 'components/SmallTeam'
+import { normalizeSlug } from 'components/Team/utils'
+import NotFoundPage from 'components/NotFoundPage'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -147,12 +149,23 @@ export default function TeamPage(props: TeamPageProps) {
     const [activeProfile, setActiveProfile] = useState<boolean | ProfileData>(false)
     const { user, getJwt } = useUser()
     const isModerator = user?.role?.type === 'moderator'
+    const { addToast } = useToast()
     const onSaveRef = useRef<(() => void) | null>(null)
     const posthog = usePostHog()
 
     const { team, updateTeam, loading } = useTeam({ slug })
-    const { name, crest, crestOptions, description, tagline, profiles, leadProfiles, teamImage, miniCrest } =
-        (team as any)?.attributes || {}
+    const {
+        name,
+        slug: teamSlug,
+        crest,
+        crestOptions,
+        description,
+        tagline,
+        profiles,
+        leadProfiles,
+        teamImage,
+        miniCrest,
+    } = (team as any)?.attributes || {}
 
     const data = useStaticQuery(graphql`
         {
@@ -262,16 +275,35 @@ export default function TeamPage(props: TeamPageProps) {
     const { totalCount: totalSlackEmojis } = data?.allSlackEmoji || {}
     const allTeams = data?.allTeamsData || { nodes: [] }
     const allAshbyJobPosting = data?.allAshbyJobPosting || { nodes: [] }
+    const hasTeam = Boolean((team as any)?.id || teamData || body || objectives)
+    const existingTeamSlugs = useMemo(
+        () => new Set((data?.allSqueakTeam?.nodes || []).map((node: any) => node?.slug?.toLowerCase()).filter(Boolean)),
+        [data?.allSqueakTeam?.nodes]
+    )
 
     // Form handling
-    const { handleChange, values, submitForm, setFieldValue } = useFormik({
+    const { handleChange, handleBlur, values, submitForm, setFieldValue, errors, touched, isValid } = useFormik({
         enableReinitialize: true,
         validateOnMount: true,
         validationSchema: yup.object({
             name: yup.string().required('Name is required'),
+            slug: yup
+                .string()
+                .required('Slug is required')
+                .test('valid-slug', 'Slug can only include lowercase letters, numbers, and hyphens', (value) => {
+                    if (!value) return false
+                    return normalizeSlug(value) === value
+                })
+                .test('unique-slug', 'Slug is already in use', (value) => {
+                    if (!value) return false
+                    const normalized = normalizeSlug(value)
+                    const currentSlug = (teamSlug || slug || '').toLowerCase()
+                    return normalized === currentSlug || !existingTeamSlugs.has(normalized)
+                }),
         }),
         initialValues: {
             name,
+            slug: teamSlug || slug || '',
             description,
             tagline,
             teamImage: teamImage?.image?.data
@@ -298,6 +330,7 @@ export default function TeamPage(props: TeamPageProps) {
         },
         onSubmit: async ({
             name,
+            slug: submittedSlug,
             description,
             tagline,
             teamImageCaption,
@@ -334,8 +367,10 @@ export default function TeamPage(props: TeamPageProps) {
                     id: profileID,
                     type: 'api::profile.profile',
                 }))
+            const normalizedSlug = normalizeSlug(submittedSlug || name)
             const updatedTeam = {
                 name,
+                slug: normalizedSlug,
                 description,
                 tagline,
                 spiritAnimal,
@@ -357,6 +392,9 @@ export default function TeamPage(props: TeamPageProps) {
                 await createTeam(updatedTeam)
             } else {
                 await updateTeam(updatedTeam)
+                if (normalizedSlug !== slug) {
+                    navigate(`/teams/${normalizedSlug}`)
+                }
             }
             setSaving(false)
             setEditing(false)
@@ -372,7 +410,7 @@ export default function TeamPage(props: TeamPageProps) {
 
     const createTeam = async (team: any) => {
         const jwt = await getJwt()
-        const body = JSON.stringify({ data: { ...team, slug: slugify(team.name, { lower: true, remove: /and/ }) } })
+        const body = JSON.stringify({ data: { ...team, slug: team.slug || normalizeSlug(team.name) } })
         const {
             data: {
                 attributes: { slug },
@@ -397,6 +435,13 @@ export default function TeamPage(props: TeamPageProps) {
 
     const addTeamMember = (profile: any) => {
         setFieldValue('teamMembers', [...values.teamMembers, { id: profile.id, attributes: profile }])
+        if (profile.startDate && dayjs(profile.startDate).isAfter(dayjs())) {
+            addToast({
+                description: `${profile.firstName} ${profile.lastName}'s start date is ${dayjs(
+                    profile.startDate
+                ).format('MMMM D, YYYY')}. They will appear on the site on that date.`,
+            })
+        }
     }
 
     const removeTeamMember = (profileID: string) => {
@@ -537,11 +582,15 @@ export default function TeamPage(props: TeamPageProps) {
                 <OSButton size="md" variant="secondary" onClick={handleCancel}>
                     Cancel
                 </OSButton>
-                <OSButton size="md" variant="primary" onClick={handleSave} disabled={saving}>
+                <OSButton size="md" variant="primary" onClick={handleSave} disabled={saving || !isValid}>
                     Save
                 </OSButton>
             </>
         ) : null
+
+    if (!loading && !hasTeam) {
+        return <NotFoundPage />
+    }
 
     return (
         <>
@@ -576,8 +625,11 @@ export default function TeamPage(props: TeamPageProps) {
                             teamImage={teamImage}
                             hasInProgress={hasInProgress}
                             handleChange={handleChange}
+                            onBlur={handleBlur}
                             values={values}
                             editing={editing}
+                            touched={touched}
+                            errors={errors}
                             setFieldValue={setFieldValue}
                         />
                     ),
@@ -612,7 +664,7 @@ export default function TeamPage(props: TeamPageProps) {
                                             <Hedgehog />
                                         </li>
                                     ))}
-                                    {hedgehogPercentage && (
+                                    {hedgehogPercentage > 0 && (
                                         <li
                                             style={{
                                                 width: hedgehogPercentage,

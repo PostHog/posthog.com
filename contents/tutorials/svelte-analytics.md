@@ -202,7 +202,7 @@ Now, you can click sign in, authorized with GitHub, and your basic details show 
 
 ## Adding PostHog
 
-To add PostHog to our Svelte app, we need a PostHog instance ([sign up for free](https://app.posthog.com/signup)). Get your project API key from either the getting started flow or your project settings, along with your instance address from the URL.
+To add PostHog to our Svelte app, we need a PostHog instance ([sign up for free](https://app.posthog.com/signup)). Get your project token from either the getting started flow or your project settings, along with your instance address from the URL.
 
 Next, install `posthog-js`.
 
@@ -210,7 +210,7 @@ Next, install `posthog-js`.
 npm i posthog-js
 ```
 
-In the `src/routes` folder, create a `+layout.js` (different from the `+layout.server.js` file you created earlier). In this file, check the environment is the browser, and initialize PostHog with your project API key and host. You can find these in [your project settings](https://us.posthog.com/settings/project).
+In the `src/routes` folder, create a `+layout.js` (different from the `+layout.server.js` file you created earlier). In this file, check the environment is the browser, and initialize PostHog with your project token and host. You can find these in [your project settings](https://app.posthog.com/settings/project).
 
 ```js
 // src/routes/+layout.js
@@ -219,7 +219,7 @@ import { browser } from '$app/environment';
 
 export const load = async () => {
   if (browser) {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     })

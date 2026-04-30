@@ -1,0 +1,78 @@
+Path cleaning rules let you normalize dynamic URLs into consistent patterns, reducing the cardinality of your path data. This makes your web analytics paths, entry paths, exit paths, and path breakdowns more readable and actionable.
+
+For example, URLs like `/user/123`, `/user/456`, and `/user/789` can all be cleaned into `/user/:id` so they appear as a single row in your path tables.
+
+<CalloutBox icon="IconInfo" title="Path cleaning is a paid feature" type="fyi">
+
+Path cleaning is available on paid plans. If you're on the free plan, you need to add a credit card to access this feature. See our [pricing page](/pricing) for details.
+
+</CalloutBox>
+
+## Why use path cleaning?
+
+Many websites include dynamic segments in URLs — user IDs, product slugs, session tokens, or other unique values. Without path cleaning, each unique URL shows up as a separate row, making it hard to see meaningful patterns.
+
+Common examples of noisy URLs:
+
+| Original URL                 | Problem                                       |
+| ---------------------------- | --------------------------------------------- |
+| `/user/123/profile`          | User ID creates a unique row per user         |
+| `/product/blue-widget-v2`    | Product slug creates a unique row per product |
+| `/merchant/8421/dashboard`   | Merchant ID fragments your dashboard data     |
+| `/post/2024/01/my-blog-post` | Date and slug make each post a separate entry |
+
+Path cleaning solves this by using regex to match these patterns and replace them with a readable alias.
+
+## Configuring path cleaning rules
+
+Path cleaning rules are configured globally in your [project settings](https://us.posthog.com/settings/project-product-analytics#path-cleaning). Once configured, they apply across both web analytics and product analytics.
+
+Each rule has two parts:
+
+- **Regex** – a regular expression that matches the URL patterns you want to combine.
+- **Alias** – the replacement string for the matched portion of the URL.
+
+When a URL matches the regex, the matched portion is replaced with the alias. The rest of the URL remains unchanged.
+
+## Examples
+
+Here are common path cleaning patterns:
+
+### User IDs in URLs
+
+To combine all user profile pages into a single path:
+
+- **Regex:** `\/user\/\d+`
+- **Alias:** `/user/:id`
+
+This turns `/user/123/profile` and `/user/456/profile` into `/user/:id/profile`.
+
+### Product pages with slugs
+
+To combine all product pages:
+
+- **Regex:** `\/product\/[a-z0-9-]+`
+- **Alias:** `/product/:slug`
+
+This turns `/product/blue-widget` and `/product/red-gadget` into `/product/:slug`.
+
+### Merchant dashboards
+
+To combine merchant-specific dashboards:
+
+- **Regex:** `\/merchant\/\d+\/dashboard$`
+- **Alias:** `/merchant/dashboard`
+
+This turns `https://example.com/merchant/12345/dashboard` and `https://example.com/merchant/6789/dashboard` into `https://example.com/merchant/dashboard`.
+
+## Where path cleaning applies
+
+Path cleaning rules apply to the following tiles on the [web analytics dashboard](/docs/web-analytics/dashboard):
+
+- **Top paths** – pageview counts grouped by cleaned path
+- **Entry paths** – first pageview of each session, grouped by cleaned path
+- **Exit paths** – last pageview of each session, grouped by cleaned path
+
+Path cleaning also applies when using [trends insights](/docs/product-analytics/trends) with a path breakdown.
+
+Rules are also applied by default to new [Paths](/docs/product-analytics/paths) insights. When you create a new Paths insight, your global path cleaning rules are automatically applied. You can disable this by toggling off **Apply global path URL cleaning** in the insight settings if you prefer to see raw, uncleaned paths.

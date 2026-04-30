@@ -106,7 +106,7 @@ const Router = (props) => {
     if ((props.pageContext?.post || /^posts/.test(path)) && props.data) {
         return <BlogPost {...props} />
     }
-    if (['/terms', '/privacy', '/dpa', '/baa'].includes(path)) {
+    if (['/terms', '/privacy', '/dpa', '/baa', '/subprocessors'].includes(path)) {
         return <Legal defaultTab={path}>{children}</Legal>
     }
     return (
@@ -755,7 +755,26 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         />
 
                                         <div className="flex-1 truncate flex items-center justify-start @md:justify-center">
-                                            {menu && menu.length > 0 ? (
+                                            {hasDeveloperMode ? (
+                                                <ToggleGroup
+                                                    title="View mode"
+                                                    hideTitle
+                                                    options={[
+                                                        {
+                                                            label: 'Slides',
+                                                            value: 'marketing',
+                                                        },
+                                                        {
+                                                            label: 'Dev mode',
+                                                            value: 'developer',
+                                                        },
+                                                    ]}
+                                                    value={view}
+                                                    onValueChange={(value) =>
+                                                        setView(value as 'marketing' | 'developer')
+                                                    }
+                                                />
+                                            ) : menu && menu.length > 0 ? (
                                                 <Popover
                                                     trigger={
                                                         <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">

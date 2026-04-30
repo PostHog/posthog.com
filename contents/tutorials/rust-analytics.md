@@ -194,13 +194,13 @@ use posthog_rs::Event;
 use tokio::task;
 ```
 
-Then update our `api_dashboard()` function to initialize a PostHog client and capture an event. You'll need your project API key for this, which you can find in [your project settings](https://us.posthog.com/project/settings):
+Then update our `api_dashboard()` function to initialize a PostHog client and capture an event. You'll need your project token for this, which you can find in [your project settings](https://us.posthog.com/project/settings):
 
 ```rust file=main.rs
 async fn api_dashboard(session: Session) -> impl Responder {
     if let Some(user_email) = session.get::<String>("email").unwrap() {
         let _result = task::spawn_blocking(move || {
-            let client: posthog_rs::Client = posthog_rs::client("<ph_project_api_key>");
+            let client: posthog_rs::Client = posthog_rs::client("<ph_project_token>");
             let event = Event::new("dashboard_api_called", &user_email);
             client.capture(event).unwrap();
         }).await;
@@ -237,7 +237,7 @@ async fn api_dashboard(session: Session) -> impl Responder {
         session.get::<String>("name").unwrap()
     ) {
         let _result = task::spawn_blocking(move || {
-            let client: posthog_rs::Client = posthog_rs::client("<ph_project_api_key>");
+            let client: posthog_rs::Client = posthog_rs::client("<ph_project_token>");
             let mut event = Event::new("dashboard_api_called", &user_email);
             event.insert_prop("user_name", user_name).unwrap();
             client.capture(event).unwrap();

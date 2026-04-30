@@ -38,7 +38,7 @@ However, management tasks do come _first_, as giving context to your team tends 
 
 Management is intentionally spread thin at PostHog. This is a forcing function for making sure that teams and ICs continue to have high levels of autonomy. Bored managers are micromanagers. By working across several teams, people like #team-blitzscale and product managers are forced to only give their attention where it's truly needed, and give space & autonomy everywhere else.
 
-> You'll sometimes hear us use the term "team lead". A team lead is the leader of a small team. By default they also manage the individuals that are part of their team, though very occasionally they don't, such as when a new small team has just been created.
+> You'll sometimes hear us use the term "team lead". [A team lead is the leader of a small team](/handbook/company/small-teams#what-is-the-role-of-the-team-lead). By default they also manage the individuals that are part of their team, though very occasionally they don't, such as when a new small team has just been created.
 
 ## How do I set context?
 

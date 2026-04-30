@@ -1,17 +1,17 @@
 You can enable this feature from your client-side by setting `captureLog: true` in our [React Native SDK config](/docs/session-replay/installation/react-native#step-two-configure-replay-settings).
 
-> **Note:** Console log recording is only available for Android.
-
 ```ts
 export const posthog = new PostHog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   {
     // Enable session recording. Requires enabling in your project settings as well.
     // Default is false.
     enableSessionReplay: true,
     sessionReplayConfig: {
       // Capture logs automatically. Default is true.
-      // Android only (Native Logcat only)
+      // Android (Native Logcat only)
+      // iOS (stdout, stderr, OSLog, NSLog)
+      // Remote configuration via project settings requires SDK version 4.35.0 or higher.
       captureLog: true,
       ...
     },

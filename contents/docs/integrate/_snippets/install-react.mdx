@@ -6,10 +6,10 @@ import InstallReactPackageManagers from "./install-react-package-managers.mdx"
 
 <InstallReactPackageManagers />
 
-2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key and host in [your project settings](https://us.posthog.com/settings/project). If you're using Vite, include `VITE_PUBLIC_` in their names ensures they are accessible in the frontend.
+2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project token and host in [your project settings](https://us.posthog.com/settings/project). If you're using Vite, include `VITE_PUBLIC_` in their names ensures they are accessible in the frontend.
 
 ```shell file=.env.local
-VITE_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+VITE_PUBLIC_POSTHOG_TOKEN=<ph_project_token>
 VITE_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 ```
 
@@ -24,7 +24,7 @@ import App from './App.jsx'
 import posthog from 'posthog-js'; // +
 import { PostHogProvider } from '@posthog/react' // +
 
-posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, { // +
+posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_TOKEN, { // +
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST, // +
   defaults: '<ph_posthog_js_defaults>', // +
 }); // +

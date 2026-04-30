@@ -1,0 +1,194 @@
+---
+title: SDK releases
+sidebar: Handbook
+showTitle: true
+---
+
+This guide documents our semi-automated release process for PostHog SDKs. Each SDK repository uses a GitHub App with restricted permissions to handle releases securely, requiring team approval before any release is published. SDK repositories also require all commits [to be signed](/handbook/engineering/security#commit-signing) by their author.
+
+<CalloutBox type="fyi">
+
+Almost all SDKs have been migrated to this process already, but there are still some SDKs who haven't caught up.
+
+If you're creating a new SDK/repo that must be published you MUST implement this approach.
+
+</CalloutBox>
+
+## How it works
+
+Our SDK release process uses a dedicated GitHub App per repository that can push directly to the main branch (bypassing branch protections) while still requiring human approval through GitHub Environments. This gives us:
+
+- **Security:** The app only has access to the specific repository it needs
+- **Auditability:** All releases require approval from the Client Libraries team
+- **Automation:** Changelog generation, version bumping, and publishing are handled automatically
+
+## Setting up releases for a new SDK
+
+When creating a new SDK, or migrating an existing one to the new workflow, follow these steps to set up the release infrastructure.
+
+<CalloutBox title="GitHub administrator privileges required" type="fyi">
+
+Most of these steps require super administrator privileges on GitHub. Make sure you have the appropriate permissions to work on this.
+
+</CalloutBox>
+
+### 1. Create a GitHub App
+
+Create a [new GitHub App](https://github.com/organizations/PostHog/settings/apps/new):
+
+1. **Name:** `Releaser (<sdk_name>)` (e.g., `Releaser (posthog-go)`)
+2. **Description:** Should be "Used to release new versions of `posthog-<sdk_name>` (e.g. "Used to release new versions of `posthog-go`.")
+3. **Homepage URL:** Point to the SDK's docs page on posthog.com (e.g., `https://posthog.com/docs/libraries/go`)
+4. **Webhook:** Disable (uncheck "Active")
+5. **Permissions:** Under "Repository permissions", set only:
+   - `Contents`: Read and write
+
+   > **Note:** If your app needs to open PRs in other repositories and assign teams or members as reviewers (e.g., the posthog-js upgrader opens PRs from `posthog-js` to `posthog` and assigns the `client-libraries` and `client-libraries-approvers` teams), you also need to add under "Organization permissions":
+   > - `Members`: Read-only
+6. **Where can this GitHub App be installed?** Keep it restricted to "Only on this account"
+7. Click **Create GitHub App**
+
+After creating the app:
+
+1. Download [this image](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2514924_640cf3f534.png) and upload it as the app icon
+
+![SDK Releaser bot icon](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2514924_640cf3f534.png)
+
+2. Set the background color to `#D97148`
+2. Click the big "Generate a private key" button to generate a private key and save it locally — you'll need it later
+3. Also save the "App ID" number - you'll need it later
+3. Go to **Install App** in the sidebar
+4. Install the app in the PostHog organization, restricting it to only the SDK repository
+
+### 2. Expose proper access to client libraries teams
+
+In your SDK repository settings:
+
+1. Verify that both `@PostHog/client-libraries-approvers` and `@PostHog/team-client-libraries` teams have at least read access to the repository. This is required for them to be able to approve release workflows.
+2. Access "Collaborators and teams"
+3. Make sure both teams are added as collaborators with at least write access
+
+### 3. Create a release environment
+
+In your SDK repository settings:
+
+1. Go to **Environments** and create a new environment named `Release`
+2. Configure protection rules:
+   - **Required reviewers:** Add `PostHog/client-libraries-approvers` and `PostHog/team-client-libraries` as the only teams allowed to approve this release
+   - **Prevent self-review:** **Check** this box
+   - **Allow administrators to bypass:** **Uncheck** this box
+
+![Protection rules]([https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_26_43_879_Z_cee626f86a.png](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_18_T18_21_01_089_Z_2dd8982a33.png))
+
+3. Remember to click "Save protection rules" to enforce them
+4. Add environment secrets:
+   - `GH_APP_POSTHOG_<SDK_NAME>_RELEASER_APP_ID` — Copy the App ID from your GitHub App settings
+   - `GH_APP_POSTHOG_<SDK_NAME>_RELEASER_PRIVATE_KEY` — Paste the private key you downloaded, include the trailing newline
+      - Easiest way to get the private key value with the correct formatting is via `cat ~/Downloads/release-posthog-<sdk_name>-private-key.pem | pbcopy` on Mac or `type release-posthog-<sdk_name>-private-key.pem | pbcopy`
+
+   > Replace `<SDK_NAME>` with your SDK name in uppercase with underscores (e.g., `GH_APP_POSTHOG_GO_RELEASER_APP_ID`, `GH_APP_POSTHOG_GO_RELEASER_PRIVATE_KEY`)
+
+![Environment secrets](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_28_12_362_Z_83a6c89501.png)
+
+### 4. Add app to bypass lists
+
+The GitHub App needs to bypass certain protections to push release commits directly.
+
+#### CodeQL bypass
+
+1. Access the [CodeQL ruleset](https://github.com/organizations/PostHog/settings/rules/6720674)
+2. Under **Bypass list**, click **Add bypass**
+3. Select your newly created GitHub App (`Releaser (<sdk_name>)`)
+4. Click the three-dot menu and choose **Exempt**
+5. Save the ruleset
+
+![CodeQL bypass exemption](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_29_04_157_Z_a403522dbe.png)
+
+#### Repository PR bypass
+
+1. Go back to your SDK repository settings
+2. Navigate to **Rules** → **Rulesets**
+3. Open the ruleset that requires PRs (may have various names)
+   1. If this ruleset doesn't exist, create one requiring PRs and reviews from codeowners which should be `@PostHog/client-libraries-approvers` for all files
+4. Under **Bypass list**, click **Add bypass**
+5. Select your GitHub App (`Releaser (<sdk_name>)`)
+6. Click the three-dot menu and choose **Exempt**
+7. Save the ruleset
+
+![Repository PR bypass](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_30_39_537_Z_a60a06feae.png)
+
+### 5. Grant access to organization secrets
+
+The release workflow needs access to shared organization secrets. Grant your SDK repository access to the below organization secrets in the [organization settings](https://github.com/organizations/PostHog/settings/secrets/actions):
+
+**Secrets:**
+- `SLACK_CLIENT_LIBRARIES_BOT_TOKEN`
+- `POSTHOG_PROJECT_API_KEY`
+
+**Variables:**
+- `GROUP_CLIENT_LIBRARIES_SLACK_GROUP_ID`
+- `SLACK_APPROVALS_CLIENT_LIBRARIES_CHANNEL_ID`
+
+### 6. Add the release workflow
+
+> **Important:** Our release workflows use [GitHub Actions OIDC tokens](https://docs.github.com/en/actions/concepts/security/openid-connect) for secure authentication with package registries. Make sure your workflow uses a version that supports OIDC for your registry:
+> - **npm:** Node.js v22+
+
+Copy the release workflow from an existing SDK (e.g., [posthog-rs](https://github.com/posthog/posthog-rs/blob/main/.github/workflows/release.yml)) and adapt it:
+
+1. Update the environment variable prefix to match your SDK name
+2. Modify the changelog generation logic if needed for your language's conventions
+3. Update the version bumping logic for your package manager (npm, pip, etc.)
+4. Update the publishing steps for your package registry
+
+#### npm packages: set up trusted publishing before enabling the workflow
+
+This applies only to npm publishing (not other package registries).
+
+If your SDK publishes to npm using OIDC trusted publishing and the package has never been published before, run this initial setup once before allowing your GitHub Actions workflow to publish:
+
+```bash
+npx setup-npm-trusted-publish @posthog/<package-name>
+```
+
+If the package has already been published, you can configure trusted publishing directly in npm package settings instead.
+
+This bootstraps npm trusted publishing for the package so future automated releases can publish successfully.
+
+### 7. Update the README
+
+Add a section to your SDK's README explaining that releases are semi-automatic and link to the `#approvals-client-libraries` Slack channel where approval requests are posted.
+
+### 8. Create required labels
+
+Make sure the repository includes the `release` label, it's used to trigger new releases.
+
+If you're not using something like `changesets` or [`sampo`](https://github.com/bruits/sampo) that automatically generates version bump labels, create the following labels as well to indicate the type of release:
+
+- `bump-patch`
+- `bump-minor`
+- `bump-major`
+
+### 9. Open a PR
+
+Create a PR with the new `release.yml` workflow and request a review from `@PostHog/client-libraries-approvers`. There is now a small, dedicated SDK team at PostHog ([@PostHog/team-client-libraries](https://github.com/orgs/PostHog/teams/team-client-libraries)) that helps drive direction and coordination. However, SDK development and maintenance remains a collaborative effort across the engineering organization.
+
+## Triggering a release
+
+Once set up, releases are triggered by having a `release` label added to the PR alongside a `changesets`(or matching `bump-*` tag). Once a PR is merged, the environment workflow will kick up and someone from the `@PostHog/client-libraries-approvers` team will have to approve it on `#approval-support-libraries`.
+
+<CalloutBox type="fyi">
+
+We're slowly migrating all SDKs to use [`sampo`](https://github.com/bruits/sampo). This is a language-agnostic version of the famous `changesets` library.
+
+If you're feeling inspired, I highly recommend you build an adapter for Sampo for the language you're working on. We'll all thank you for that.
+
+</CalloutBox>
+
+## Troubleshooting
+
+### `Access token expired or revoked` when running `npm publish`
+
+If you see the error **"Access token expired or revoked. Please try logging in again"** when publishing with `npm publish` — even though your credentials and tokens are correctly configured — the issue may be with npm's token handling itself.
+
+**Solution:** Migrate your project to use a pnpm workspace and publish with `pnpm publish` instead. pnpm handles authentication differently and isn't affected by this issue.
