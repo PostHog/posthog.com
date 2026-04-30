@@ -1,0 +1,128 @@
+---
+title: React Native logs installation
+sidebarTitle: React Native
+platformLogo: react
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+PostHog's React Native SDK has built-in support for capturing structured logs. Unlike other languages where you wire OpenTelemetry directly, the SDK handles the OTLP encoding, batching, persistence, and lifecycle for you. You just call `posthog.captureLog(...)` or `posthog.logger.{trace,debug,info,warn,error,fatal}(...)`.
+
+<Steps>
+
+<Step title="Install or upgrade the React Native SDK" badge="required">
+
+Install or upgrade `posthog-react-native` to the version that ships logs support:
+
+```bash
+# Expo
+npx expo install posthog-react-native
+
+# React Native CLI
+yarn add posthog-react-native
+# or: npm install posthog-react-native
+```
+
+If you're new to PostHog on React Native, follow the [SDK installation guide](/docs/libraries/react-native#installation) first to set up the basic SDK.
+
+</Step>
+
+<Step title="Get your project token" badge="required">
+
+You'll need your PostHog project token to authenticate log requests. This is the same key you use for capturing events.
+
+> **Important:** Use your **project token** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project token in [Project Settings](https://app.posthog.com/settings).
+
+</Step>
+
+<Step title="Configure logs in your PostHog options" badge="required">
+
+Add a `logs` block to your PostHog initialization. All fields are optional; defaults are tuned for mobile (cellular bandwidth, battery, OS lifecycle).
+
+```react-native
+import PostHog from 'posthog-react-native'
+
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  logs: {
+    serviceName: 'my-app',          // OTLP service.name — shown in the Logs UI
+    environment: 'production',      // OTLP deployment.environment
+    serviceVersion: '1.2.3',        // OTLP service.version
+  },
+})
+```
+
+</Step>
+
+<Step title="Capture logs" badge="required">
+
+Use `posthog.logger` for the per-level convenience API, or `posthog.captureLog` for full control over level, attributes, and trace context.
+
+```react-native
+// Per-level convenience methods
+posthog.logger.info('checkout completed', { order_id: 'ord_789', amount_cents: 4999 })
+posthog.logger.warn('payment retry', { attempt: 2 })
+posthog.logger.error('payment failed', { code: 'E001' })
+
+// Lower-level API for custom severity / trace context
+posthog.captureLog({
+  body: 'checkout failed',
+  level: 'error',
+  attributes: { order_id: 'ord_789', step: 'auth' },
+  trace_id: '4bf92f3577b34da6a3ce929d0e0e4736',  // optional W3C trace context
+  span_id: '00f067aa0ba902b7',
+})
+```
+
+Records are buffered, batched, persisted to disk, and flushed automatically — every 10 seconds, on AppState change (foreground ↔ background), on buffer fill, or on `posthog.shutdown()`. For an immediate drain, call `await posthog.flushLogs()`.
+
+Each record is automatically tagged with the user's distinct ID, session ID, current screen, app foreground/background state, and active feature flags at the moment of capture.
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+1. Capture a test log from your app:
+   ```react-native
+   posthog.logger.info('hello from RN')
+   await posthog.flushLogs()
+   ```
+2. Open the [PostHog Logs UI](https://app.posthog.com/logs).
+3. Filter by `service.name = 'my-app'` (or whatever value you set above).
+
+You should see your record arrive within a few seconds.
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<Step title="Tune buffering, rate cap, and filtering" badge="optional">
+
+The `logs` config has knobs for high-volume apps:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+  logs: {
+    serviceName: 'my-app',
+    flushIntervalMs: 5000,                       // default 10000ms
+    maxBufferSize: 200,                          // default 100
+    rateCap: { maxLogs: 5000, windowMs: 60000 }, // default 500/10s
+    beforeSend: (record) =>
+      record.body.includes('secret') ? null : record, // redact or drop
+  },
+})
+```
+
+See the [React Native logs reference](/docs/libraries/react-native#logs) for all configuration options.
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>

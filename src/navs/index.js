@@ -6494,6 +6494,7 @@ export const docsMenu = {
                         { name: 'Java', url: '/docs/logs/installation/java' },
                         { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
                         { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },
+                        { name: 'React Native', url: '/docs/logs/installation/react-native' },
                         { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],
