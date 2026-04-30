@@ -43,3 +43,5 @@ A beginner's guide to some of our custom Slack emojis and various anecdotes you'
 * <TeamMember name="James Hawkins" photo /> once decided to go off piste in a new starters intro of all hands and asked the question “Do you moisturize?”
 
 * <TeamMember name="James Hawkins" photo /> has also gone viral <a href="https://x.com/james406/status/1824083929860583858?s=20">multiple</a> <a href="https://x.com/james406/status/2005715590372020669">times</a> for his tweets about "hopping on a quick call" and that is entirely what he is known for now. 
+
+* Everyone says "thanks dylan" to <TeamMember name="Dylan Martin" photo /> because he once had a really good all-hands demo.

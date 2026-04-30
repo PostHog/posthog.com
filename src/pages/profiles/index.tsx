@@ -1,7 +1,6 @@
 import React from 'react'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
-import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { IconCheck } from '@posthog/icons'
 import Link from 'components/Link'
@@ -13,8 +12,6 @@ const LeftSidebarContent = () => {
 }
 
 export default function Profiles() {
-    const profilesProduct = useProduct({ handle: 'profiles' }) as any
-
     return (
         <>
             <SEO
@@ -40,7 +37,7 @@ export default function Profiles() {
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/PricingCalculator/Tabs/event-anonymous.png"
                                 alt="Anonymous event example"
-                                className="mb-4 rounded-md border border-primary"
+                                className="mb-4"
                             />
                             <p className="mb-2">
                                 By default, events are anonymous. They come with info about the browser, device,
@@ -74,7 +71,7 @@ export default function Profiles() {
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/PricingCalculator/Tabs/event-identified.png"
                                 alt="Identified event example"
-                                className="mb-4 rounded-md border border-primary"
+                                className="mb-4"
                             />
                             <p className="mb-2">
                                 Identify users by email or ID, attach custom properties, and track their complete

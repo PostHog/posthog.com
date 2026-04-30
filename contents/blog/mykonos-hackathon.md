@@ -21,7 +21,7 @@ This year, we headed to Mykonos – not to rave, but to code. And to enjoy a coc
 
 ![PostHog's 2024 offsite in Mykonos](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon2_3d7257a965.jpg)
 
-Our all-company offsites are a mix of socializing, group activities, strategic sessions, Post-its, workshops, more Post-its, and, the star of the show, the annual PostHog hackathon. 
+Our all-company offsites are a mix of socializing, group activities, strategic sessions, Post-its, workshops, more Post-its, and, the star of the show, the annual PostHog [hackathon](/newsletter/hackathons). 
 
 Everyone in the company has to pitch a couple of ideas, then we all vote on our favorites, assemble teams, and have a little over a day to go from pitch to demo. 
 
@@ -184,7 +184,7 @@ PostHog crunches a lot of data, especially on very complext queries. To help use
 
 ![Data crunching](https://res.cloudinary.com/dmukukwp6/image/upload/datacrunch1_7ab73f5ab4.jpg)
 
-If you feel the need for a quick distraction while you wait, you could also check out [Hedgehog mode 2.0](https://posthog.com/changelog/2024#hedgehog-mode-2.0-launched), which also shipped recently.
+If you feel the need for a quick distraction while you wait, you could also check out [Hedgehog mode 2.0](/changelog?id=2014), which also shipped recently.
 
 ## CLI
 

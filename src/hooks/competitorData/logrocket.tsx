@@ -74,10 +74,11 @@ export const logrocket = {
                 free_tier: true,
             },
             features: {
+                ai_summaries: true,
                 canvas_recording: true,
                 chat_with_recordings: false,
                 clickmaps: true,
-                conditional_recording: true,
+                conditional_recording: 'Add-on',
                 crash_reports: true,
                 event_timeline: true,
                 // https://docs.logrocket.com/docs/streaming-data-export
@@ -119,11 +120,6 @@ export const logrocket = {
                     performance_monitoring: true,
                     network_monitor: true,
                     dom_explorer: true,
-                },
-            },
-            ai: {
-                features: {
-                    ai_summaries: true,
                 },
             },
         },
@@ -182,10 +178,16 @@ export const logrocket = {
         dashboards: {
             available: true,
         },
+        logs: {
+            available: true,
+        },
+        workflows: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
-            eu_hosting: true,
+            eu_hosting: false,
             open_source: false,
             self_host: 'Enterprise',
             reverse_proxy: true,
@@ -228,11 +230,11 @@ export const logrocket = {
             microsoft_teams: false,
             redshift: true,
             rudderstack: false,
-            s3: false,
+            s3: true,
             salesforce: true,
             segment: true,
             slack: true,
-            snowflake: false,
+            snowflake: true,
             sentry: true,
             stripe: true,
             zapier: true,
@@ -247,6 +249,7 @@ export const logrocket = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
         security: {
             cookieless_tracking: false,

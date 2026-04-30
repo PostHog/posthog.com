@@ -51,7 +51,7 @@ To use PostHog to manage and track our A/B test, we must install and set it up. 
 npm install posthog-js @posthog/react
 ```
 
-Once installed, import PostHog into `src/main.jsx` and set up a client using our project API key and host from [your project settings](https://us.posthog.com/settings/project).
+Once installed, import PostHog into `src/main.jsx` and set up a client using our project token and host from [your project settings](https://app.posthog.com/settings/project).
 
 We can then initialize PostHog and wrap our app in the React `PostHogProvider` to access PostHog in any component.
 
@@ -65,7 +65,7 @@ import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
 posthog.init(
-  <ph_project_api_key>, 
+  <ph_project_token>, 
   {
     api_host: <ph_client_api_host>,
   }

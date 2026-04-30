@@ -13,7 +13,7 @@ We plan objectives every quarter. The <SmallTeam slug="blitzscale" /> set the di
 3. After the planning meeting, the team lead creates a PR on their small team page with the new goals. Make sure you tag the relevant member of the Blitzscale team for review at a minimum.
 4. Goal PRs need to be merged before the next quarter starts. We usually then run through the objectives in the first all hands of the next quarter.
 
-In terms of accountability, Scott will notify all the small teams and make sure that the quarterly meetings happen (and that each small team has a PR), but he will not schedule the meetings for you. 
+In terms of accountability, <TeamMember name="Scott Lewis" photo /> will notify all the small teams and make sure that the quarterly meetings happen (and that each small team has a PR), but he will not schedule the meetings for you. 
 
 > If you prep properly (see below), planning meetings should take 1 hour max. The meeting is not the end of the process - you may still have some back and forth on the PR, but the meeting should give the team lead enough info to write a good PR. 
 
@@ -41,14 +41,18 @@ Add entries under each question with your initials/name like: "- (your name): My
 - Hope
   - What are you most excited about this quarter?
   - What exploration do you want to do?
+  - For Error Tracking/Session Replay/Experiments/Conversations/Experiments/Conversations/Product Analytics/LLM Analytics:
+    We want to make PostHog proactive. How do we programmatically emit signals - i.e. research prompts for an agent with code access & PostHog MCP – that will result in quality concrete code changes?
 - Obstruction
   - Is there anything embarrassing about your product?
   - What’s stopping you from shipping 2x what you’re shipping now?
+  - Can your product be used by agents (Claude Code/Cursor/etc.) via our MPC server? What MCP tools or skills are missing right now?
 - Growth
   - What single thing would move the needle the most this quarter?
     - _If it’s more people, please expand on how many and exactly what type of hire you’d be looking for._
   - What are users asking for? Which of these are we ignoring?
     - _Check Vitally for feature requests (if applicable for your team/product)_
+  - How will users interact with your product in 1 year's time and what can we do now to get this ready?
 - Sneak attack
   - Say a competitor beats your team’s product, what would that product do differently?
   - What are we not talking about enough?
@@ -56,7 +60,6 @@ Add entries under each question with your initials/name like: "- (your name): My
 ## Themes (20 minutes - do as a team)
 
 What themes can we distill from the above HOGS list? What are categories of things we should consider working on? What are other things we might want to consider?
-
 
 ## New goals (15 minutes - do as a team)
 
@@ -72,10 +75,24 @@ What we'll ship:
 
 If you aren't on a product team, replace 'product' with the equivalent 'thing' on your team - e.g. if you do recruitment, your 'product' is how we do recruitment at PostHog and your users are job applicants. 
 
-## Why we do this
+## Publishing and viewing goals 
 
-- Sense of winning / losing - this bonds teams, increases urgency and creates satisfaction when we achieve things
-- Clarifies our direction
+When a team has set their quarterly goals it is the responsibility of the [team lead](/handbook/company/small-teams#what-is-the-role-of-the-team-lead) to document the goals on their team page, [publicly](/handbook/values). This enables teams to see what each other are working on, helps us hold teams accountable to their goals, and creates a shared sense of urgency and direction. 
+
+You can easily see what goals teams have set on the [WIP](/wip) page, which pulls all goals from the respective team pages. 
+
+Teams can choose to document their goals publicly in a number of formats, but below is a useful template for getting started. Individuals may also choose to create planning issues to track their work in greater detail.
+
+```
+<details>
+<summary>Write the goal here (owner)</summary>
+
+- **Rationale:** Why is this important?
+- **What we'll ship:** Keep this brief
+- **We'll know we're successful when:** Metric or outcome
+
+</details>
+```
 
 ## Good goal setting
 

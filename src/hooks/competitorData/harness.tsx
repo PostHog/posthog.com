@@ -41,7 +41,7 @@ export const harness = {
     },
     platform: {
         deployment: {
-            open_source: 'SDKs',
+            open_source: false,
         },
         pricing: {
             self_serve: true,

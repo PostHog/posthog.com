@@ -9,13 +9,12 @@ const Support: React.FC = () => {
     return (
         <ReaderView>
             <SEO title="Support - Docs - PostHog" />
-            <CalloutBox icon="IconFlask" title="Support is in private alpha" type="info">
+            <CalloutBox icon="IconFlask" title="Support is in beta" type="info">
                 <p>
-                    Support is currently in private alpha.{' '}
-                    <a href="https://us.posthog.com/settings/user-feature-previews#in-app-messenger">
-                        Request early access
-                    </a>{' '}
-                    and we'll invite you when ready.
+                    <strong>Note:</strong> Support is currently in{' '}
+                    <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
+                        Beta
+                    </span>
                 </p>
             </CalloutBox>
             <Intro
@@ -52,6 +51,22 @@ const Support: React.FC = () => {
                         title="Unified inbox"
                         description="View and respond to tickets with full context: session replays, events, exceptions, and user history."
                         url="/docs/support/inbox"
+                        Image={undefined}
+                        gatsbyImage={undefined}
+                        type={undefined}
+                    />
+                    <ResourceItem
+                        title="Slack integration"
+                        description="Connect Slack for two-way sync — messages become tickets, replies sync back to threads."
+                        url="/docs/support/slack"
+                        Image={undefined}
+                        gatsbyImage={undefined}
+                        type={undefined}
+                    />
+                    <ResourceItem
+                        title="Workflow automation"
+                        description="Automate ticket management with workflows — set SLAs, auto-assign, tag, and route tickets."
+                        url="/docs/support/workflows"
                         Image={undefined}
                         gatsbyImage={undefined}
                         type={undefined}

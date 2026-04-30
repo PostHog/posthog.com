@@ -10,7 +10,7 @@ Getting traffic, usage, and user behavior data about your WooCommerce site is si
 
 After setting up your WooCommerce site, the easiest way to set up PostHog is to install the free [Insert Headers and Footers](https://wordpress.com/plugins/insert-headers-and-footers) plugin by WPCode. 
 
-After doing this, go into the **Code Snippets** section and add a new snippet. Once you're here, get your PostHog snippet with your project API key and instance address from [your project settings](https://us.posthog.com/settings/environment-details#snippet). Paste it into the code editor, press **Save**, and activate it. 
+After doing this, go into the **Code Snippets** section and add a new snippet. Once you're here, get your PostHog snippet with your project token and instance address from [your project settings](https://us.posthog.com/project/settings#snippet). Paste it into the code editor, press **Save**, and activate it. 
 
 ![Code snippet](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_04_at_15_45_52_2x_1771bfeae4.png)
 

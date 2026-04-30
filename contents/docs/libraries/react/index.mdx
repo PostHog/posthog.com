@@ -59,6 +59,11 @@ import ReactInstall from '../../integrate/_snippets/install-react.mdx'
 
 <ReactInstall />
 
+## Identifying users
+
+import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
+
+<IdentifyFrontendCallout />
 
 ## Usage
 
@@ -73,7 +78,7 @@ The provider takes an initialized and configured client instance like this:
 import posthog from 'posthog-js';
 import { PostHogProvider} from '@posthog/react'
 
-posthog.init(process.env.REACT_APP_PUBLIC_POSTHOG_KEY, {
+posthog.init(process.env.REACT_APP_PUBLIC_POSTHOG_TOKEN, {
   api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
   defaults: '<ph_posthog_js_defaults>',
 });
@@ -255,7 +260,7 @@ For details on how to implement bootstrapping, see our [bootstrapping guide](/do
 
 ## Experiments (A/B tests)
 
-Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```react
 // You can either use the `useFeatureFlagVariantKey` hook,
@@ -287,4 +292,5 @@ function App() {
 ```
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
 

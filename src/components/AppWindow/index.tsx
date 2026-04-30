@@ -106,7 +106,7 @@ const Router = (props) => {
     if ((props.pageContext?.post || /^posts/.test(path)) && props.data) {
         return <BlogPost {...props} />
     }
-    if (['/terms', '/privacy', '/dpa', '/baa'].includes(path)) {
+    if (['/terms', '/privacy', '/dpa', '/baa', '/subprocessors'].includes(path)) {
         return <Legal defaultTab={path}>{children}</Legal>
     }
     return (

@@ -57,7 +57,7 @@ To set it up with your Nuxt app, first install `posthog-js`:
 npm install posthog-js
 ```
 
-Then, add your PostHog API key and host to your `nuxt.config.ts` file. You can find your project API key in your [PostHog project settings](https://app.posthog.com/settings/project)
+Then, add your PostHog token and host to your `nuxt.config.ts` file. You can find your project token in your [PostHog project settings](https://app.posthog.com/settings/project)
 
 ```ts file=nuxt.config.ts
 export default defineNuxtConfig({
@@ -65,7 +65,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      posthogPublicKey: '<ph_project_api_key>',
+      posthogToken: '<ph_project_token>',
       posthogHost: '<ph_client_api_host>',
       posthogDefaults: '<ph_posthog_js_defaults>',
     }
@@ -89,7 +89,7 @@ import posthog from 'posthog-js'
 
 export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
-  const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
+  const posthogClient = posthog.init(runtimeConfig.public.posthogToken, {
     api_host: runtimeConfig.public.posthogHost,
     defaults: runtimeConfig.public.defaults,
   })
@@ -439,7 +439,7 @@ const handleSubmit = (value) => {
   const { $posthog } = useNuxtApp();
   $posthog().capture("survey sent", {
     $survey_id: surveyID, // required
-    $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+    $survey_response: value, // required
     $survey_questions: [
       {
         id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
@@ -522,7 +522,7 @@ const handleSubmit = (value) => {
   const { $posthog } = useNuxtApp();
   $posthog().capture("survey sent", {
     $survey_id: surveyID, // required
-    $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+    $survey_response: value, // required
     $survey_questions: [
       {
         id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",

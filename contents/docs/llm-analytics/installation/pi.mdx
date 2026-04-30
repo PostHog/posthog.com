@@ -1,0 +1,129 @@
+---
+title: Pi Coding Agent LLM analytics installation
+platformIconName: IconCode
+showStepsToc: true
+tableOfContents: [
+    {
+        url: 'prerequisites',
+        value: 'Prerequisites',
+        depth: 1,
+    },
+    {
+        url: 'install-the-extension',
+        value: 'Install the extension',
+        depth: 1,
+    },
+    {
+        url: 'configure-posthog',
+        value: 'Configure PostHog',
+        depth: 1,
+    },
+    {
+        url: 'verify-traces-and-generations',
+        value: 'Verify traces and generations',
+        depth: 1,
+    },
+    {
+        url: 'configuration-options',
+        value: 'Configuration options',
+        depth: 1,
+    },
+]
+---
+
+[Pi](https://github.com/badlogic/pi-mono) is an open-source coding agent that runs in your terminal. The `@posthog/pi` extension captures LLM generations, tool executions, and conversation traces as `$ai_generation`, `$ai_span`, and `$ai_trace` events and sends them to PostHog.
+
+## Prerequisites
+
+You need:
+
+- [Pi](https://github.com/badlogic/pi-mono) coding agent installed (Node.js >= 22)
+- A [PostHog account](https://us.posthog.com/signup) with a project API key
+
+## Install the extension
+
+Install the PostHog extension globally:
+
+```bash
+pi install npm:@posthog/pi
+```
+
+Or for a project-local install:
+
+```bash
+pi install -l npm:@posthog/pi
+```
+
+## Configure PostHog
+
+Set environment variables with your PostHog project API key and host. You can find these in your [PostHog project settings](https://us.posthog.com/settings/project).
+
+```bash
+export POSTHOG_API_KEY="<ph_project_api_key>"
+export POSTHOG_HOST="<ph_client_api_host>"
+```
+
+Then start pi as normal:
+
+```bash
+pi
+```
+
+The extension initializes automatically and captures events for every LLM call, tool execution, and completed agent run.
+
+> **Tip:** You can add these environment variables to your shell profile (e.g. `~/.zshrc` or `~/.bashrc`) so they persist across sessions.
+
+## Verify traces and generations
+
+After running a few prompts through pi:
+
+1. Go to the [LLM analytics](https://us.posthog.com/llm-analytics) tab in PostHog.
+2. You should see traces and generations appearing within a few minutes.
+
+## Configuration options
+
+All configuration is done via environment variables:
+
+| Variable | Default | Description |
+|---|---|---|
+| `POSTHOG_API_KEY` | _(required)_ | Your PostHog project API key |
+| `POSTHOG_HOST` | `https://us.i.posthog.com` | PostHog ingestion host |
+| `POSTHOG_PRIVACY_MODE` | `false` | When `true`, LLM input/output content is not sent to PostHog. Token counts, costs, latency, and model metadata are still captured. |
+| `POSTHOG_ENABLED` | `true` | Set to `false` to disable the extension |
+| `POSTHOG_TRACE_GROUPING` | `message` | `message`: one trace per user prompt. `session`: group all generations in a session into one trace. |
+| `POSTHOG_SESSION_WINDOW_MINUTES` | `60` | Minutes of inactivity before starting a new session window |
+| `POSTHOG_PROJECT_NAME` | cwd basename | Project name included in all events |
+| `POSTHOG_AGENT_NAME` | agent name | Agent name (auto-detects subagent names) |
+| `POSTHOG_TAGS` | _(none)_ | Custom tags added to all events (format: `key1:val1,key2:val2`) |
+| `POSTHOG_MAX_ATTRIBUTE_LENGTH` | `12000` | Max length for serialized tool input/output attributes |
+
+### Trace grouping modes
+
+- **`message` (default):** Each user prompt creates a new trace. Multiple LLM turns within one prompt (e.g., tool-use loops) are grouped under the same trace. Best for most use cases.
+- **`session`:** All generations within a session window are grouped into a single trace. A new trace starts after `POSTHOG_SESSION_WINDOW_MINUTES` of inactivity.
+
+### Privacy mode
+
+When `POSTHOG_PRIVACY_MODE=true`, all LLM input/output content, user prompts, tool inputs, and tool outputs are redacted. Token counts, costs, latency, and model metadata are still captured.
+
+Even with privacy mode off, sensitive keys in tool inputs/outputs (e.g. `api_key`, `token`, `secret`, `password`, `authorization`) are automatically redacted.
+
+### What gets captured
+
+The extension captures three types of events:
+
+- **`$ai_generation`** — Every LLM call, including model, provider, token usage, cost, latency, and input/output messages (in [OpenAI chat format](/docs/llm-analytics/generations)).
+- **`$ai_span`** — Each tool execution (read, write, edit, bash, etc.), including tool name, input parameters, output result, and duration ([learn more](/docs/llm-analytics/spans)).
+- **`$ai_trace`** — Completed agent runs with aggregated token totals and latency ([learn more](/docs/llm-analytics/traces)).
+
+## Next steps
+
+Now that you're capturing AI conversations, continue with the resources below to learn what else LLM analytics enables within the PostHog platform.
+
+| Resource | Description |
+|----------|-------------|
+| [Basics](/docs/llm-analytics/basics) | Learn the basics of how LLM calls become events in PostHog. |
+| [Generations](/docs/llm-analytics/generations) | Read about the `$ai_generation` event and its properties. |
+| [Traces](/docs/llm-analytics/traces) | Explore the trace hierarchy and how to use it to debug LLM calls. |
+| [Spans](/docs/llm-analytics/spans) | Review spans and their role in representing individual operations. |
+| [Analyze LLM performance](/docs/llm-analytics/dashboard) | Learn how to create dashboards to analyze LLM performance. |

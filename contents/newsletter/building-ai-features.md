@@ -35,7 +35,7 @@ There are three key lessons here:
 
 You don’t need to reinvent the wheel.
 
-A bunch of smart people have already figured out effective AI patterns you can copy. These have the advantage of being [UX patterns](/newsletter/vibe-designing) that users are familiar with, while also being functionality AI is actually good at.
+A bunch of smart people have already figured out [effective AI patterns](/newsletter/agent-first-product-engineering) you can copy. These have the advantage of being [UX patterns](/newsletter/vibe-designing) that users are familiar with, while also being functionality AI is actually good at.
 
 First is the classic “chat with your docs/data/PDF.” AI is great at search and summarization, and can use this to build reports and recommendations.
 
@@ -161,7 +161,7 @@ def _format_ui_context(self, ui_context: MaxUIContext) -> str:
   return f"User context: {dashboard_context}\n{insight_context}"
 ```
 
-You also need to handle “context” within the workflow (aka state). As the conversation progresses, you don’t want that context to be lost, and this is especially likely to happen when you have multiple sub-agents. To get this right, we store and include context through every part of the workflow like this:
+You also need to handle “context” within the workflow (aka state). As the conversation progresses, you don’t want that context to be lost, and this is especially likely to happen when you have [multiple sub-agents](/newsletter/building-ai-agents). To get this right, we store and include context through every part of the workflow like this:
 
 ```python
 class AssistantState(TypedDict):
@@ -286,7 +286,7 @@ Not only can the wrong idea make your product worse, changes in models can negat
 
 There are multiple methods we found work best for evaluating effectiveness:
 
--   **Add evals early.** We found even small golden or synthetic datasets were giving insane performance boosts compared to the typical development cycle. Even at our scale, implementing this was an easier task than expected. This makes building future features faster too.
+-   **Add evals early.** We found even [small golden or synthetic datasets](/blog/testing-ai-agents) were giving insane performance boosts compared to the typical development cycle. Even at our scale, implementing this was an easier task than expected. This makes building future features faster too.
 
 -   **A/B test AI-powered features vs the normal experience** as well as different prompts, contexts, workflows, and more.
 

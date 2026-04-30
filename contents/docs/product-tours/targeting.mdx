@@ -20,7 +20,20 @@ Show tours on specific pages using URL matching.
 | **Contains** | URL must contain the string | `/dashboard` matches any URL with `/dashboard` |
 | **Regex** | URL must match the pattern | `/users/[0-9]+` |
 
+
+> **Note:** When using **Exact** matching, trailing slashes are stripped from both the target URL and the current page URL before comparison. This means `https://app.example.com/dashboard` and `https://app.example.com/dashboard/` are treated as the same URL.
+
 The URL is matched against the full `window.location.href`.
+
+## Device type targeting
+
+Show tours only on specific device types. Select one or more options:
+
+- **Desktop** - Laptops and desktop computers
+- **Tablet** - Tablets like iPad
+- **Mobile** - Smartphones
+
+If no device types are selected, the tour shows on all devices.
 
 ## User targeting
 
@@ -57,3 +70,21 @@ This is handled via person properties:
 - `$product_tour_dismissed/{tour_id}`
 
 These properties are set automatically and used to filter out users who have already interacted with a tour.
+
+## Wait period
+
+Prevent tour fatigue by hiding tours from users who recently saw other tours, announcements, or banners.
+
+Enable the "Don't show to users who recently saw another..." option and configure:
+
+- **Tour types** - Select which types count toward the wait period: tours, announcements, and/or banners
+- **Days** - How many days must pass before showing this tour (1-365 days, default 7)
+
+For example, if you configure a 7-day wait period for all types, users who saw any tour, announcement, or banner in the last 7 days won't see this tour.
+
+This uses person properties to track when each type was last shown:
+- `$product_tour_last_seen_date/tour`
+- `$product_tour_last_seen_date/announcement`
+- `$product_tour_last_seen_date/banner`
+
+These properties are set automatically when a tour is shown and checked via the tour's internal feature flag.

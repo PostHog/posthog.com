@@ -302,6 +302,16 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
                 }
             }
 
+            // Prepend MCP link as the first item in 'Utilities, add-ons, & packages'
+            if (category === 'product_os') {
+                categoryItems.unshift({
+                    type: 'item' as const,
+                    label: 'MCP',
+                    link: '/docs/model-context-protocol',
+                    icon: React.createElement(Icons.IconPlug, { className: 'size-4 text-gray' }),
+                })
+            }
+
             items.push({
                 type: 'submenu',
                 label: categoryDisplayNames[category] || category,
@@ -489,6 +499,11 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Product Engineer Handbook',
+                    link: '/product-engineer',
+                },
+                {
+                    type: 'item',
                     label: 'Product engineers hub',
                     link: '/product-engineers',
                 },
@@ -531,6 +546,11 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'WIP',
+                    link: '/wip',
+                },
+                {
+                    type: 'item',
                     label: 'Changelog',
                     link: '/changelog',
                 },
@@ -556,6 +576,11 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Careers',
                     link: '/careers',
+                },
+                {
+                    type: 'item',
+                    label: 'Partnerships',
+                    link: '/partnerships',
                 },
                 {
                     type: 'separator',
@@ -701,6 +726,11 @@ export function useMenuData(): MenuType[] {
                             type: 'item',
                             label: 'HIPAA',
                             link: '/docs/privacy/hipaa-compliance',
+                        },
+                        {
+                            type: 'item',
+                            label: 'Subprocessors',
+                            link: '/subprocessors',
                         },
                     ],
                 },
@@ -986,6 +1016,12 @@ export const SparksJoyItems = {
             link: '/sparks-joy/dictator-or-tech-bro',
             iconName: null,
             customIcon: <IconDictator />,
+        },
+        {
+            label: 'BrickHog',
+            link: '/sparks-joy/brickhog',
+            iconName: 'games' as AppIconName,
+            customIcon: null,
         },
     ],
     notGames: [

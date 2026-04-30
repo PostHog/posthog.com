@@ -46,6 +46,7 @@ export const sentry = {
                 free_tier: '50 recordings',
             },
             features: {
+                crash_reports: true,
                 canvas_recording: true,
                 chat_with_recordings: false,
                 conditional_recording: true,
@@ -95,7 +96,7 @@ export const sentry = {
             },
         },
         heatmaps: {
-            available: true,
+            available: false,
             features: {
                 clickmaps: false,
                 heatmaps: false,
@@ -252,6 +253,7 @@ export const sentry = {
             cms: false,
             notebooks: false,
             project_management_tools: false,
+            ai_assistant: true,
         },
         integrations: {
             azure_blob: false,

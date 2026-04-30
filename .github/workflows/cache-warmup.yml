@@ -1,0 +1,52 @@
+name: Warm Gatsby cache
+
+on:
+    push:
+        branches: [master]
+    workflow_dispatch:
+
+concurrency:
+    group: cache-warmup
+    cancel-in-progress: true
+
+env:
+    NODE_OPTIONS: '--max_old_space_size=8192'
+
+jobs:
+    warm-cache:
+        name: Build & cache
+        runs-on: ubuntu-latest
+        timeout-minutes: 45
+        permissions:
+            contents: read
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+            - name: Set up pnpm
+              uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+              with:
+                  node-version: '22'
+                  cache: 'pnpm'
+
+            - name: Cache Gatsby
+              uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+              with:
+                  path: |
+                      .cache
+                      public
+                  key: gatsby-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'gatsby-config.js') }}
+                  restore-keys: |
+                      gatsby-${{ runner.os }}-
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Build site
+              run: pnpm build
+              env:
+                  GATSBY_MINIMAL: 'true'

@@ -80,7 +80,7 @@ npm i posthog-js posthog-node
 
 ### Frontend setup
 
-We'll set up PostHog in the frontend first. This starts by creating a `providers.js` file in the `app` directory. In it, we initialize PostHog with your project API key and host from [your project settings](https://us.posthog.com/settings/project) and pass it to a `PostHogProvider`.
+We'll set up PostHog in the frontend first. This starts by creating a `providers.js` file in the `app` directory. In it, we initialize PostHog with your project token and host from [your project settings](https://us.posthog.com/settings/project) and pass it to a `PostHogProvider`.
 
 ```js
 // app/providers.js
@@ -92,7 +92,7 @@ import { useEffect } from 'react'
 
 export function PostHogProvider({ children }) {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     })
@@ -137,7 +137,7 @@ PostHog then begins to autocapture events and frontend errors. If you go back to
 
 ### Backend setup
 
-For the backend, we can create a `posthog-server.js` file in the `app` directory. In it, initialize PostHog from `posthog-node` as a singleton with your project API key and host from [your project settings](https://us.posthog.com/settings/project). This looks like this:
+For the backend, we can create a `posthog-server.js` file in the `app` directory. In it, initialize PostHog from `posthog-node` as a singleton with your project token and host from [your project settings](https://us.posthog.com/settings/project). This looks like this:
 
 ```js
 // app/posthog-server.js
@@ -148,7 +148,7 @@ let posthogInstance = null
 export function getPostHogServer() {
   if (!posthogInstance) {
     posthogInstance = new PostHog(
-      '<ph_project_api_key>',
+      '<ph_project_token>',
       {
         host: '<ph_client_api_host>',
         flushAt: 1,
@@ -164,7 +164,7 @@ We can then import this singleton wherever we need it in the backend. Unfortunat
 
 ## 3. Capturing errors
 
-With both front and backend initializations set up, capturing errors with PostHog is as simple as calling `captureException` or capturing an `$exception` event.
+With both front and backend initializations set up, capturing errors with PostHog is as simple as calling `captureException`.
 
 <MultiLanguage>
 
@@ -243,7 +243,7 @@ Because backend requests in Next.js vary between server-side rendering, short-li
 The context of a user and their session lives on the frontend. As such it is necessary to pass this data to your backend when making requests. We recommend configuring PostHog to send this data on every request by specifying the domains you wish to patch with the session and user distinct ID.
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     __add_tracing_headers: ['your-backend-domain.com'] // +
 })
 ```

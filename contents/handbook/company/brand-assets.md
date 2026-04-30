@@ -5,6 +5,8 @@ showTitle: true
 hideAnchor: false
 ---
 
+> **Looking for brand voice, design philosophy, and visual identity guidelines?** Check out our [Style guide](/handbook/brand/style-guide).
+
 > **Want to use our hedgehogs for your community event or article?** We have [a huge library of them you can use](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1). Can't see what you need? [Let us know](mailto:joe@posthog.com)! Please don't use AI art though. We're quite particular about our illustrations and AI just doesn't get it right.
 
 ## Logo and brand usage for third-parties
@@ -145,7 +147,7 @@ Loud Noises is used in the sign the hedgehog is holding:
 
 ---
 
-If you have questions about which font to use, please ask in <PrivateLink url="https://posthog.slack.com/archives/C01V9AT7DK4">#team-brand-and-vibes</PrivateLink> - don't just do what feels right to you!
+If you have questions about which font to use, please ask in <PrivateLink url="https://posthog.slack.com/archives/C01V9AT7DK4">#team-website</PrivateLink> - don't just do what feels right to you!
 
 
 ## Colors

@@ -1,5 +1,54 @@
 {
+    "git": {
+        "deploymentEnabled": {
+            "master": true,
+            "*": false
+        }
+    },
+    "headers": [
+        {
+            "source": "/docs/:path*",
+            "headers": [{ "key": "Vary", "value": "Accept" }]
+        },
+        {
+            "source": "/handbook/:path*",
+            "headers": [{ "key": "Vary", "value": "Accept" }]
+        },
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "Content-Security-Policy-Report-Only",
+                    "value": "default-src 'self'; script-src 'self' https://*.posthog.com https://www.youtube.com https://fast.wistia.com https://import-cdn.default.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com https://raw.githubusercontent.com https://obuldanrptloktxcffvn.supabase.co https://cdn.shopify.com https://i.ytimg.com https://embed-ssl.wistia.com https://fast.wistia.com https://cdn.jsdelivr.net https://user-images.githubusercontent.com https://brandbadge.clearbit.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net https://res.cloudinary.com https://fonts.gstatic.com https://r2cdn.perplexity.ai https://fast.wistia.com https://use.typekit.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com https://forms.default.com https://nucleus.default.com https://import-cdn.default.com https://posthog.myshopify.com https://*.algolia.net https://*.algolianet.com https://api.io.inkeep.com https://fast.wistia.net https://fast.wistia.com https://embed-cloudfront.wistia.com https://api.inkeep.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net https://res.cloudinary.com blob:; frame-src 'self' https://www.youtube-nocookie.com https://hogwars.vercel.app https://hedgehog-mode-playground.vercel.app; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; report-uri https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
+                },
+                {
+                    "key": "Reporting-Endpoints",
+                    "value": "posthog=\"https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1\""
+                }
+            ]
+        }
+    ],
     "rewrites": [
+        {
+            "source": "/docs/:path*/",
+            "has": [{ "type": "header", "key": "accept", "value": "(?:.*text/markdown.*)" }],
+            "destination": "/docs/:path*.md"
+        },
+        {
+            "source": "/docs/:path*",
+            "has": [{ "type": "header", "key": "accept", "value": "(?:.*text/markdown.*)" }],
+            "destination": "/docs/:path*.md"
+        },
+        {
+            "source": "/handbook/:path*/",
+            "has": [{ "type": "header", "key": "accept", "value": "(?:.*text/markdown.*)" }],
+            "destination": "/handbook/:path*.md"
+        },
+        {
+            "source": "/handbook/:path*",
+            "has": [{ "type": "header", "key": "accept", "value": "(?:.*text/markdown.*)" }],
+            "destination": "/handbook/:path*.md"
+        },
         { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
         { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
         { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
@@ -7,14 +56,27 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/coupons/:path*", "destination": "https://app.posthog.com/coupons/:path*", "statusCode": 301 },
+        { "source": "/handbook/growth/marketing", "destination": "/handbook/marketing", "statusCode": 301 },
+        {
+            "source": "/handbook/growth/marketing/:path*",
+            "destination": "/handbook/marketing/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/marketing/customer-personas",
+            "destination": "/handbook/strategy/ideal-customer-persona"
+        },
+        { "source": "/blog/carbon-offset-wren", "destination": "/handbook/people/spending-money" },
         { "source": "/hogwars", "destination": "/sparks-joy/hogwars" },
         { "source": "/youreastar", "destination": "https://www.youtube.com/watch?v=SD7B2teuLXk" },
         {
             "source": "/handbook/growth/marketing/product-announcements",
-            "destination": "/handbook/words-and-pictures/product-announcements"
+            "destination": "/handbook/marketing/product-announcements"
         },
-        { "source": "/teams/words-and-pictures", "destination": "/teams/brand-vibes" },
-        { "source": "/teams/words-pictures", "destination": "/teams/brand-vibes" },
+        { "source": "/teams/words-and-pictures", "destination": "/teams/website" },
+        { "source": "/teams/words-pictures", "destination": "/teams/website" },
+        { "source": "/teams/brand-vibes", "destination": "/teams/website" },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
@@ -179,7 +241,7 @@
         },
         {
             "source": "/handbook/growth/marketing/Customer-personas",
-            "destination": "/handbook/growth/marketing/customer-personas"
+            "destination": "/handbook/strategy/ideal-customer-persona"
         },
         { "source": "/handbook/engineering/product-team", "destination": "/handbook/product/product-team" },
         {
@@ -202,7 +264,7 @@
         { "source": "/handbook/engineering/feature-parity", "destination": "/handbook/strategy/overview" },
         { "source": "/handbook/strategy/strategy", "destination": "/handbook/strategy/overview" },
         { "source": "/docs/contribute/updating-documentation", "destination": "/docs/contribute" },
-        { "source": "/handbook/growth/marketing/messaging_framework", "destination": "/handbook/growth/marketing" },
+        { "source": "/handbook/growth/marketing/messaging_framework", "destination": "/handbook/marketing" },
         {
             "source": "/handbook/growth/handbook/engineering/support-hero",
             "destination": "/handbook/growth/handbook/support-hero"
@@ -288,34 +350,73 @@
         { "source": "/docs/user-guides/plugins", "destination": "/docs/apps" },
         { "source": "/support", "destination": "/questions" },
         { "source": "/handbook/company/1-1s", "destination": "/handbook/company/management" },
-        { "source": "/lenny", "destination": "/?utm_source=lenny&?utm_campaign=lenny" },
-        { "source": "/zizyo", "destination": "/?utm_campaign=zizyo" },
-        { "source": "/devopsjourney", "destination": "/?utm_campaign=devopsjourney" },
-        { "source": "/ebenezer", "destination": "/?utm_campaign=ebenezer" },
-        { "source": "/codu", "destination": "/?utm_campaign=codu" },
-        { "source": "/peterelbaum", "destination": "/?utm_campaign=peterelbaum" },
-        { "source": "/theo", "destination": "/?utm_source=theo&utm_campaign=theo" },
-        { "source": "/morningmaker", "destination": "/?utm_source=morningmaker&utm_campaign=morningmaker" },
-        { "source": "/enggirlfriend", "destination": "/?utm_source=enggirlfriend&utm_campaign=enggirlfriend" },
+        { "source": "/lenny", "destination": "/?utm_source=influencer&utm_medium=newsletter&utm_campaign=lenny" },
+        { "source": "/zizyo", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=zizyo" },
+        {
+            "source": "/devopsjourney",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=devopsjourney"
+        },
+        { "source": "/ebenezer", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=ebenezer" },
+        { "source": "/codu", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=codu" },
+        {
+            "source": "/peterelbaum",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=peterelbaum"
+        },
+        { "source": "/theo", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=theo" },
+        {
+            "source": "/morningmaker",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=morningmaker"
+        },
+        {
+            "source": "/enggirlfriend",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=enggirlfriend"
+        },
         {
             "source": "/youraveragetechbro",
-            "destination": "/?utm_source=youraveragetechbro&utm_campaign=youraveragetechbro"
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=youraveragetechbro"
         },
-        { "source": "/simongrimm", "destination": "/?utm_source=simongrimm&utm_campaign=simongrimm" },
-        { "source": "/howtheygrow", "destination": "/?utm_source=howtheygrow&utm_campaign=howtheygrow" },
-        { "source": "/mikebifulco", "destination": "/?utm_source=mikebifulco&utm_campaign=mikebifulco" },
-        { "source": "/kikisbytes", "destination": "/?utm_source=kikisbytes&utm_campaign=kikisbytes" },
-        { "source": "/raroque", "destination": "/?utm_source=raroque&utm_campaign=raroque" },
-        { "source": "/ashishps", "destination": "/?utm_source=ashishps&utm_campaign=ashishps" },
-        { "source": "/codesource", "destination": "/?utm_source=codesource&utm_campaign=codesource" },
-        { "source": "/bytegrad", "destination": "/?utm_source=bytegrad&utm_campaign=bytegrad" },
-        { "source": "/fireship", "destination": "/?utm_source=fireship&utm_campaign=fireship" },
-        { "source": "/jesseshowalter", "destination": "/?utm_source=jesseshowalter&utm_campaign=jesseshowalter" },
-        { "source": "/benjamincode", "destination": "/?utm_source=benjamincode&utm_campaign=benjamincode" },
-        { "source": "/travismedia", "destination": "/?utm_source=travismedia&utm_campaign=travismedia" },
-        { "source": "/viktor", "destination": "/?utm_source=viktor&utm_campaign=viktor" },
-        { "source": "/starterstory", "destination": "/?utm_source=starterstory&utm_campaign=starterstory" },
-        { "source": "/jsmastery", "destination": "/?utm_source=jsmastery&utm_campaign=jsmastery" },
+        {
+            "source": "/simongrimm",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=simongrimm"
+        },
+        {
+            "source": "/howtheygrow",
+            "destination": "/?utm_source=influencer&utm_medium=newsletter&utm_campaign=howtheygrow"
+        },
+        {
+            "source": "/mikebifulco",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=mikebifulco"
+        },
+        {
+            "source": "/kikisbytes",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=kikisbytes"
+        },
+        { "source": "/raroque", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=raroque" },
+        { "source": "/ashishps", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=ashishps" },
+        {
+            "source": "/codesource",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=codesource"
+        },
+        { "source": "/bytegrad", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=bytegrad" },
+        { "source": "/fireship", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=fireship" },
+        {
+            "source": "/jesseshowalter",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=jesseshowalter"
+        },
+        {
+            "source": "/benjamincode",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=benjamincode"
+        },
+        {
+            "source": "/travismedia",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=travismedia"
+        },
+        { "source": "/viktor", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=viktor" },
+        {
+            "source": "/starterstory",
+            "destination": "/?utm_source=influencer&utm_medium=podcast&utm_campaign=starterstory"
+        },
+        { "source": "/jsmastery", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=jsmastery" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
         { "source": "/tutorials/categories/plugins", "destination": "/tutorials/categories/apps" },
         { "source": "/trial", "destination": "/pricing" },
@@ -576,7 +677,8 @@
         { "source": "/blog/tags/startups", "destination": "/blog/categories/startups" },
         { "source": "/docs/integrate/badge", "destination": "/docs/contribute/badge" },
         { "source": "/blog/introduction-to-customer-retention", "destination": "/blog/customer-churn-analysis-guide" },
-        { "source": "/docs/getting-started/cloud", "destination": "/docs/getting-started/start-here" },
+        { "source": "/docs/getting-started/cloud", "destination": "/docs/getting-started/install" },
+        { "source": "/docs/getting-started/start-here", "destination": "/docs/getting-started/install" },
         { "source": "/docs/integrate/ingest-live-data", "destination": "/docs/getting-started/send-events" },
         { "source": "/docs/self-host/open-source/deployment", "destination": "/docs/self-host" },
         { "source": "/docs/integrate/android", "destination": "/docs/libraries/android" },
@@ -642,7 +744,7 @@
             "source": "/docs/integrate/third-party/google-tag-manager",
             "destination": "/docs/libraries/google-tag-manager"
         },
-        { "source": "/docs/experiments/manual", "destination": "/docs/experiments/installation" },
+        { "source": "/docs/experiments/manual", "destination": "/docs/experiments/start-here" },
         { "source": "/docs/experiments/under-the-hood", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/significance", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/statistics", "destination": "/docs/experiments/statistics-bayesian" },
@@ -708,6 +810,8 @@
             "source": "/docs/session-replay/cutting-costs",
             "destination": "/docs/session-replay/how-to-control-which-sessions-you-record"
         },
+        { "source": "/docs/error-tracking/debugging-with-mcp", "destination": "/docs/error-tracking/debug-errors-mcp" },
+        { "source": "/docs/logs/debugging-with-mcp", "destination": "/docs/logs/debug-logs-mcp" },
         { "source": "/handbook/small-teams/experimentation", "destination": "/handbook/small-teams/feature-success" },
         { "source": "/handbook/small-teams/session-recording", "destination": "/handbook/small-teams/replay" },
         { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" },
@@ -873,7 +977,7 @@
         { "source": "/docs/cdp/github-star-sync", "destination": "/tutorials/github-star-tracker" },
         { "source": "/docs/cdp/twitter-followers", "destination": "/docs/cdp" },
         { "source": "/docs/cdp/gitlab-release-tracker", "destination": "/docs/cdp" },
-        { "source": "/handbook/growth/marketing/Customer-personas", "destination": "/handbook/growth/marketing" },
+        { "source": "/handbook/growth/marketing/Customer-personas", "destination": "/handbook/marketing" },
         { "source": "/docs/cdp/bitbucket-release-tracker", "destination": "/docs/cdp" },
         { "source": "/handbook/company/strategy", "destination": "/handbook/strategy/overview" },
         { "source": "/handbook/company/story", "destination": "/handbook/story" },
@@ -1297,7 +1401,12 @@
             "destination": "/surveys#pricing",
             "has": [{ "type": "query", "key": "product", "value": "surveys" }]
         },
-        { "source": "/handbook/growth/sales/icp", "destination": "/handbook/growth/marketing/icp" },
+        { "source": "/handbook/growth/sales/icp", "destination": "/handbook/growth/sales/lead-scoring" },
+        {
+            "source": "/handbook/marketing/icp",
+            "destination": "/handbook/growth/sales/lead-scoring",
+            "statusCode": 301
+        },
         { "source": "/teams/pipeline", "destination": "/teams/cdp" },
         { "source": "/teams/feature-success", "destination": "/teams/feature-flags" },
         { "source": "/docs/cdp/airbyte-export", "destination": "/docs/cdp/batch-exports" },
@@ -1325,7 +1434,7 @@
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/teams/website-docs", "destination": "/teams/brand-vibes" },
+        { "source": "/teams/website-docs", "destination": "/teams/website" },
         {
             "source": "/questions/manually-merging-persons",
             "destination": "/docs/product-analytics/identify#how-to-merge-userss"
@@ -1353,6 +1462,10 @@
             "destination": "/docs/feature-flags/best-practices"
         },
         {
+            "source": "/docs/feature-flags/production-ready",
+            "destination": "/docs/feature-flags/best-practices"
+        },
+        {
             "source": "/product-engineers/5-ways-to-improve-analytics-data",
             "destination": "/docs/product-analytics/best-practices"
         },
@@ -1363,9 +1476,17 @@
         { "source": "/teams/comms", "destination": "/teams/support" },
         { "source": "/docs/session-replay/flutter", "destination": "/docs/session-replay/installation/flutter" },
         { "source": "/teams/customer-comms", "destination": "/teams/support" },
+        { "source": "/teams/customer-analytics", "destination": "/teams/web-analytics" },
         { "source": "/apps", "destination": "/cdp", "statusCode": 302 },
         { "source": "/docs/data-warehouse/setup/azure-blob", "destination": "/docs/cdp/sources/azure-blob" },
         { "source": "/docs/data-warehouse/setup/azure-db", "destination": "/docs/cdp/sources/azure-db" },
+        {
+            "source": "/docs/data-warehouse/sources/azure-db",
+            "destination": "/docs/data-warehouse/sources/microsoft-sql-server"
+        },
+        { "source": "/docs/cdp/sources/azure-db", "destination": "/docs/cdp/sources/microsoft-sql-server" },
+        { "source": "/docs/data-warehouse/sources/temporal", "destination": "/docs/data-warehouse/sources/temporalio" },
+        { "source": "/docs/cdp/sources/temporal", "destination": "/docs/cdp/sources/temporalio" },
         { "source": "/docs/data-warehouse/setup/chargebee", "destination": "/docs/cdp/sources/chargebee" },
         { "source": "/docs/data-warehouse/setup/gcs", "destination": "/docs/cdp/sources/gcs" },
         { "source": "/docs/data-warehouse/setup/hubspot", "destination": "/docs/cdp/sources/hubspot" },
@@ -1648,10 +1769,6 @@
             "destination": "/about"
         },
         {
-            "source": "/services",
-            "destination": "/"
-        },
-        {
             "source": "/platform-addons",
             "destination": "/platform-packages"
         },
@@ -1670,7 +1787,10 @@
         { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
+        { "source": "/handbook/brand/process", "destination": "/handbook/engineering/product-design-process" },
         { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" },
+        { "source": "/teams/twig", "destination": "/teams/posthog-code" },
+        { "source": "/teams/twig/:path*", "destination": "/teams/posthog-code/:path*" },
         {
             "source": "/docs/max-ai",
             "destination": "/docs/posthog-ai"
@@ -1707,6 +1827,8 @@
         { "source": "/startups/[...slug]", "destination": "/startups" },
         { "source": "/customer-data-infrastructure/:path*", "destination": "/data-stack" },
         { "source": "/data-warehouse", "destination": "/data-stack" },
+        { "source": "/sql", "destination": "/data-stack/sql-editor" },
+        { "source": "/bi", "destination": "/data-stack/business-intelligence" },
         { "source": "/docs/error-tracking/common-questions", "destination": "/docs/error-tracking/troubleshooting" },
         { "source": "/docs/web-analytics/faq", "destination": "/docs/web-analytics/troubleshooting" },
         { "source": "/docs/feature-flags/common-questions", "destination": "/docs/feature-flags/troubleshooting" },
@@ -1719,21 +1841,17 @@
         },
         { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" },
         { "source": "/docs/error-tracking/cutting-costs", "destination": "/docs/error-tracking/pricing" },
-        { "source": "/professional-services", "destination": "/services" }
-    ],
-    "headers": [
         {
-            "source": "/(.*)",
-            "headers": [
-                {
-                    "key": "Content-Security-Policy-Report-Only",
-                    "value": "default-src 'self'; script-src 'self' https://*.posthog.com https://www.youtube.com https://fast.wistia.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com https://raw.githubusercontent.com https://obuldanrptloktxcffvn.supabase.co https://cdn.shopify.com https://i.ytimg.com https://embed-ssl.wistia.com https://fast.wistia.com https://cdn.jsdelivr.net https://user-images.githubusercontent.com https://brandbadge.clearbit.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net https://res.cloudinary.com https://fonts.gstatic.com https://r2cdn.perplexity.ai https://fast.wistia.com https://use.typekit.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com https://forms.default.com https://posthog.myshopify.com https://*.algolia.net https://*.algolianet.com https://api.io.inkeep.com https://fast.wistia.net https://fast.wistia.com https://embed-cloudfront.wistia.com https://api.inkeep.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net https://res.cloudinary.com blob:; frame-src 'self' https://www.youtube-nocookie.com https://hogwars.vercel.app https://hedgehog-mode-playground.vercel.app; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; report-uri https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
-                },
-                {
-                    "key": "Reporting-Endpoints",
-                    "value": "posthog=\"https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1\""
-                }
-            ]
-        }
+            "source": "/blog/what-is-a-product-engineer",
+            "destination": "/product-engineer/what-is-a-product-engineer"
+        },
+        {
+            "source": "/product-engineer",
+            "destination": "/product-engineer/what-is-a-product-engineer"
+        },
+        { "source": "/professional-services", "destination": "/services" },
+        { "source": "/posthug", "destination": "/" },
+        { "source": "/mcp", "destination": "/docs/model-context-protocol" },
+        { "source": "/login", "destination": "https://app.posthog.com/login" }
     ]
 }

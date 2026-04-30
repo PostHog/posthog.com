@@ -83,7 +83,7 @@ Next, we install PostHog [Python SDK](/docs/libraries/python) and the `uuid` pac
 pip install posthog uuid
 ```
 
-We import both into our `hello.py` file then use your project API key and instance address from [your project settings](https://app.posthog.com/project/settings) to initialize a PostHog client.
+We import both into our `hello.py` file then use your project token and instance address from [your project settings](https://app.posthog.com/project/settings) to initialize a PostHog client.
 
 ```python
 # ab-test-demo/hello.py
@@ -92,7 +92,7 @@ from posthog import Posthog
 import uuid
 
 posthog = Posthog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   host='<ph_client_api_host>'
 )
 

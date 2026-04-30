@@ -25,6 +25,8 @@ This guide walks you through integrating PostHog into your Next.js app using the
 
 Next.js has both client and server-side rendering, as well as pages and app routers. We'll cover all of these options in this guide.
 
+> **Try `@posthog/next` (pre-release):** A simplified Next.js integration with synchronized client/server identity, server-side flag bootstrapping, and a built-in API proxy. [Read the setup guide →](/docs/libraries/next-js/posthog-next)
+
 ## Prerequisites
 
 To follow this guide along, you need:
@@ -42,6 +44,12 @@ import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
 
 <NextJSInstall />
 
+## Identifying users
+
+import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
+
+<IdentifyFrontendCallout />
+
 <DetailSetUpReverseProxy />
 
 <DetailGroupProductsInOneProject />
@@ -50,27 +58,9 @@ import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
 
 ## Accessing PostHog
 
-import Tab from "components/Tab"
 import InstrumentationClientSetup from "./_snippets/instrumentation-client-access.mdx"
-import ProviderAccess from "./_snippets/provider-access.mdx"
 
-<Tab.Group tabs={[
-    'Instrumentation client', 
-    'PostHog provider'
-]}>
-    <Tab.List>
-        <Tab>Instrumentation client</Tab>
-        <Tab>PostHog provider</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel>
-            <InstrumentationClientSetup />
-        </Tab.Panel>
-        <Tab.Panel>
-            <ProviderAccess />
-        </Tab.Panel>
-    </Tab.Panels>
-</Tab.Group>
+<InstrumentationClientSetup />
 
 ### Usage
 
@@ -94,7 +84,7 @@ Next.js overrides the default `fetch` behavior on the server to introduce their 
 You can override that configuration when initializing PostHog, but make sure you understand the pros/cons of using Next.js's cache and that you might get cached results rather than the actual result our server would return. This is important for feature flags, for example.
 
 ```tsx
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
   // ... your configuration
   fetch_options: {
     cache: 'force-cache', // Use Next.js cache
@@ -109,109 +99,6 @@ posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
 ## Configuring a reverse proxy to PostHog
 
 To improve the reliability of client-side tracking and make requests less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. Read more about deploying a reverse proxy using [Next.js rewrites](/docs/advanced/proxy/nextjs), [Next.js middleware](/docs/advanced/proxy/nextjs-middleware), and [Vercel rewrites](/docs/advanced/proxy/vercel).
-
-## Frequently asked questions
-
-### Does wrapping my app in the PostHog provider de-opt it to client-side rendering?
-
-No. Even though the PostHog provider is a client component, since we pass the `children` prop to it, any component inside the children tree can still be a server component. Next.js creates a boundary between server-run and client-run code. 
-
-The [`use client` reference](https://react.dev/reference/rsc/use-client) says that it "defines the boundary between server and client code on the module dependency tree, not the render tree." It also says that "During render, the framework will server-render the root component and continue through the render tree, opting-out of evaluating any code imported from client-marked code."
-
-Pages router components are client components by default.
-
-### What does wrapping my app in the PostHog provider do?
-
-On top of the standard features like autocapture, custom events, session recording, and more, wrapping your app in the PostHog provider gives you:
-
-1. The `usePostHog`, `useFeatureFlagEnabled`, and other hooks in any component.
-2. A PostHog context you can access in any component.
-3. The `<PostHogFeature>` component which simplifies feature flag logic.
-
-See the [React SDK docs](/docs/libraries/react) for more details.
-
-### Why use a `useEffect` hook to initialize PostHog in the provider?
-
-We want to initialize PostHog when the app is loaded. The [React docs](https://react.dev/learn/synchronizing-with-effects) recommend using a `useEffect` hook to do this:
-
-> Effects let you specify side effects that are caused by rendering itself, rather than by a particular event. 
-
-Technically, you can also use a `window` object check to initialize PostHog. This happens outside the React lifecycle, meaning it happens earlier and it looks like this:
-
-<MultiLanguage>
-
-```js
-// app/providers.js
-'use client'
-import posthog from 'posthog-js'
-import { PostHogProvider } from '@posthog/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    capture_pageview: false // Disable automatic pageview capture, as we capture manually
-  })
-}
-
-export function PHProvider({ children }) {
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
-}
-```
-
-```tsx
-// app/providers.tsx
-'use client'
-import posthog from 'posthog-js'
-import { PostHogProvider } from '@posthog/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    capture_pageview: false // Disable automatic pageview capture, as we capture manually
-  })
-}
-
-export function PHProvider({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
-}
-```
-
-</MultiLanguage>
-
-The problem with this is that it can cause a [hydration and/or mismatch error](https://nextjs.org/docs/messages/react-hydration-error) like `Warning: Prop dangerouslySetInnerHTML did not match.`.
-
-> **Tip:** If you experience hydration errors related to PostHog injecting scripts (for session recording, surveys, etc.), you can set `external_scripts_inject_target: 'head'` in your PostHog config. This tells PostHog to inject scripts into the document head instead of the body, avoiding DOM mutations that can interfere with React's hydration process. Alternatively, use `defaults: '2026-01-30'` or later which includes this setting by default. See the [JavaScript configuration docs](/docs/libraries/js/config#configuration-options) for more details.
-
-### Why did the pageview component need a `useEffect`?
-
-Before updating the JavaScript Web SDK's default behavior when capturing pageviews (`'2026-01-30'`), we suggested using a `useEffect` hook to capture pageviews. This is because it's the simplest way to accurately capture pageviews. Other approaches include:
-
-1. Not using a `useEffect` hook, but this might lead to duplicate page views being tracked if the component re-renders for reasons other than navigation. It might work depending on your implementation.
-2. Using `window.navigation` to track pageviews, but this approach is more complex and is [not supported](https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation) in all browsers.
-
-> **Note:** This approach of manually capturing pageviews is no longer recommended. We recommend using `defaults: '2026-01-30'` or `capture_pageview: 'history_change'` instead, which automatically handles both `$pageview` and `$pageleave` events.
->
-> If you're still capturing pageviews manually, you should also capture `$pageleave` events to track important engagement metrics like time on page (`$prev_pageview_duration`) and scroll depth (`$prev_pageview_max_scroll_percentage`). To do this, set up a listener on window unload (similar to [how PostHog does it](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/posthog-core.ts#L644-L646)):
->
-> ```js
-> useEffect(() => {
->   const handlePageLeave = () => {
->     posthog.capture('$pageleave', null, { transport: 'sendBeacon' })
->   }
->
->   // Use pagehide if available for better reliability, otherwise fallback to unload
->   const event = 'onpagehide' in window ? 'pagehide' : 'unload'
->   window.addEventListener(event, handlePageLeave)
->
->   return () => window.removeEventListener(event, handlePageLeave)
-> }, [])
-> ```
->
-> Using `sendBeacon` ensures the event is sent even when users quickly close tabs. See our [time on page tutorial](/tutorials/time-on-page) for more details on using these metrics. 
 
 ## Further reading
 

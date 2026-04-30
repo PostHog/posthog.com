@@ -9,21 +9,30 @@ availability:
 ---
 
 import SurveysInstallationPlatforms from './_snippets/installation-platforms'
+import WizardCommand from 'components/WizardCommand'
 
-Surveys let you collect qualitative feedback from your users through targeted, customizable popups. You can trigger them based on events, user properties, feature flags, and more.
+Surveys let you collect qualitative feedback from your users through targeted, customizable popups. You can trigger them based on events, user properties, Feature Flags, and more.
+
+## AI wizard
+
+Install PostHog in seconds with our wizard by running this command in your project directory with your terminal (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
+
+<WizardCommand />
+
+Wait for it to finish and test the setup once the wizard is complete.
 
 ## Platforms
 
 <SurveysInstallationPlatforms />
 
-> **Note:** Web has the most complete feature support, while mobile platforms have some limitations. See each platform's page for details.
+> **Note:** Web has the most complete feature support, while mobile platforms have some limitations. See [SDK feature support](/docs/surveys/sdk-feature-support) for details.
 
 ## Next steps
 
 | Resource | Description |
 |----------|-------------|
-| [Creating surveys](/docs/surveys/creating-surveys) | Learn how to build and customize your surveys |
-| [Targeting surveys](/docs/surveys/targeting) | Show surveys to specific users based on properties, events, or feature flags |
+| [Creating Surveys](/docs/surveys/creating-surveys) | Learn how to build and customize your surveys |
+| [Targeting Surveys](/docs/surveys/targeting) | Show Surveys to specific users based on properties, events, or Feature Flags |
 | [How to create custom surveys](/tutorials/survey) | Build advanced survey experiences with custom code |
 | [Framework guides](/docs/surveys/tutorials#framework-guides) | Setup guides for React, Next.js, Vue, and other frameworks |
 | [More tutorials](/docs/surveys/tutorials) | Other real-world examples and use cases |

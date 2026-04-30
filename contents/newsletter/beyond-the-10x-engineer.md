@@ -47,7 +47,7 @@ He’s since figured out the right visuals, added scroll depth to autocapture, a
 
 The work it took to reach the current beta phase has required skills across the stack.  
 
-> **What to look for:** People who have built products or projects from scratch, done hackathons, have an eye for UX and design, and understand system design.
+> **What to look for:** People who have built products or projects from scratch, done [hackathons](/newsletter/hackathons), have an eye for UX and design, and understand system design.
 
 ## 2. Comfortable writing
 
@@ -89,7 +89,7 @@ Because engineers shape the direction of every product, having this trait ensure
 
 ## 4. Customer obsessed
 
-To uncover the real problems users have (and value), [product engineers](/blog/what-is-a-product-engineer) at PostHog interact with them much more often than regular engineers do. This includes:
+To uncover the real problems users have (and value), [product engineers](/product-engineer/what-is-a-product-engineer) at PostHog interact with them much more often than regular engineers do. This includes:
 
 - [Talking to users](/product-engineers/10x-engineers-do-user-interviews), doing user interviews.
 - Recruiting testers for new features and collecting feedback.

@@ -123,7 +123,7 @@ In the `app` folder, create an `api` folder, a `generate` folder inside it, and 
 
 Next, set up:
 
-1. The PostHog Node client using our project API key and instance address which you can get from [your project settings](https://us.posthog.com/settings/project).
+1. The PostHog Node client using our project token and instance address which you can get from [your project settings](https://us.posthog.com/settings/project).
 2. The Cohere client which requires an API key from your [Cohere dashboard](https://dashboard.cohere.com/api-keys).
 
 ```js
@@ -135,7 +135,7 @@ import { PostHog } from 'posthog-node';
 import { withTracing } from '@posthog/ai';
 
 const phClient = new PostHog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   { host: '<ph_api_client_host>' }
 );
 

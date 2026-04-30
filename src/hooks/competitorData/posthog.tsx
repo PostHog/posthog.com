@@ -40,7 +40,7 @@ export const posthog = {
                 mobile_sdk_coverage: true,
                 profiling: false,
                 source_map_support: true,
-                stack_tracing: false,
+                stack_tracing: true,
                 user_device_context: true,
             },
             monitoring: {
@@ -65,6 +65,7 @@ export const posthog = {
                 free_tier: '5,000 web recordings, 2,500 mobile recordings',
             },
             features: {
+                ai_summaries: 'Beta',
                 canvas_recording: true,
                 chat_with_recordings: true,
                 conditional_recording: true,
@@ -115,11 +116,7 @@ export const posthog = {
                     performance_monitoring: true,
                     network_monitor: true,
                     dom_explorer: true,
-                },
-            },
-            ai: {
-                features: {
-                    ai_summaries: 'Beta',
+                    heatmaps: true,
                 },
             },
         },
@@ -152,6 +149,7 @@ export const posthog = {
                     metrics: false,
                     traces: false,
                     infra_monitoring: false,
+                    alerting: false,
                 },
             },
             pricing: {
@@ -170,7 +168,7 @@ export const posthog = {
             features: {
                 actions: true,
                 advertising_analytics: 'Beta',
-                ai_analysis: false,
+                ai_analysis: true,
                 alerts: true,
                 anomaly_detection: true,
                 any_step_order: true,
@@ -459,7 +457,7 @@ export const posthog = {
                 popover: true,
                 rating: true,
                 sdk_support: true,
-                sentiment_analysis: false,
+                sentiment_analysis: true,
                 slack_integration: true,
                 survey_templates: true,
                 target_by_feature_flag: true,
@@ -545,6 +543,9 @@ export const posthog = {
         workflows: {
             available: true,
             features: {
+                visual_builder: true,
+                ai_assistant: false,
+                campaign_tracking: true,
                 real_time_triggers: true,
                 email_editor: true,
                 cohort_targeting: true,
@@ -557,6 +558,15 @@ export const posthog = {
                 experiment_triggers: true,
                 webhook_actions: true,
                 run_based_pricing: true,
+            },
+            channels: {
+                features: {
+                    email: true,
+                    sms: true,
+                    push: false,
+                    webhooks: true,
+                    whatsapp: false,
+                },
             },
         },
         data_warehouse: {
@@ -615,11 +625,30 @@ export const posthog = {
                 web_vitals_reporting: false,
             },
         },
+        endpoints: {
+            available: true,
+            features: {
+                data_source: 'PostHog product analytics data',
+                predefined_queries: true,
+                apis_from_product_insights: true,
+                sql_based_query_support: true,
+                materialized_queries: true,
+                stable_named_api_endpoints: true,
+                built_in_caching: true,
+                higher_limits_predefined_queries: true,
+                embedded_analytics: true,
+                product_analytics_context: true,
+                real_time_analytics: false,
+                general_purpose_analytics_db: false,
+                no_separate_ingestion: true,
+            },
+        },
     },
     platform: {
         deployment: {
             eu_hosting: true,
             open_source: true,
+            open_core: true,
             reverse_proxy: true,
             managed_reverse_proxy: 'Scale',
             self_host: true,
@@ -704,6 +733,7 @@ export const posthog = {
             cms: false,
             notebooks: true,
             project_management_tools: false,
+            ai_assistant: true,
         },
         security: {
             bot_blocking: true,
@@ -717,6 +747,7 @@ export const posthog = {
             history_audit_logs: 'Scale',
             role_based_access_control: 'Enterprise',
             saml_sso: 'Scale',
+            siem: false,
             soc2_certified: true,
             security_certification: 'SOC 2 Type II',
             two_factor_auth: true,

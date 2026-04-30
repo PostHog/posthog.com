@@ -69,6 +69,28 @@ Discovery is about understanding the real problem through natural conversation. 
 - Focus on understanding their current state and challenges
 - Ask about consequences and impact naturally as the conversation flows
 
+### Understanding customer goals
+
+Instead of asking about room for more PostHog products, ask about what the customer is trying to accomplish. Questions like "what's coming up in your roadmap over the next few months?" get better intel without feeling like an upsell and it's just generally a much more natural conversation.
+
+When you understand their goals, you can frame PostHog around outcomes instead of features. For example, if you learn they're launching a jobs board and their GTM leans on niche SEO, you can shape the demo around using web analytics to nail that launch. You're telling a story where PostHog helps them succeed, not just showing what buttons do.
+
+**Goal-discovery questions:**
+
+- "What's coming up in your product roadmap over the next few months?"
+- "What's the biggest thing your team is trying to accomplish this quarter?"
+- "What does success look like for your team right now?"
+- "What's keeping you up at night with work?" (only if you have genuine rapport)
+
+**When to use these:**
+
+- **In prep** — research their roadmap, recent launches, and blog posts beforehand, then confirm on the call
+- **During discovery** — weave into the opening conversation naturally
+- **At the end of a call** — as a lightweight follow-up: "before we wrap, anything big coming up I should know about?"
+- **In follow-up comms** — as part of a warm intro or handoff (e.g. TAM introducing to the engineering team)
+
+**Important:** This only works if you're genuinely curious. It's not a checklist item for every call — forced interest is gross and salesy. But when the connection is there, it's a much better place to frame what we offer from.
+
 ## What makes PostHog different
 
 ### The demo

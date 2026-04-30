@@ -6,6 +6,7 @@ featuredImage: >-
 ---
 
 import SendEventBackend from "./_snippets/send-event-backend.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 Once your PostHog instance is up and running, the next step is to start sending events.
 
@@ -31,6 +32,12 @@ When you call `posthog.init`, the PostHog browser JS library begins automaticall
 
   Including the `ph-no-capture` class will also exclude elements from being shown in session recordings.
 </details>
+
+<CalloutBox icon="IconRocket" title="Instrument your growth events first" type="action">
+
+Before diving into custom events, make sure you're tracking your key growth events – especially user signups. Autocapture won't give you a reliable `user_signed_up` event. Tracking signups explicitly is essential for measuring [activation](/docs/new-to-posthog/activation), [retention](/docs/new-to-posthog/retention), and [revenue](/docs/new-to-posthog/revenue).
+
+</CalloutBox>
 
 ## 2. Capture custom events
 

@@ -1,0 +1,48 @@
+[
+    {
+        "name": "Chapters",
+        "links": [
+            {
+                "order": "1",
+                "name": "What is a product engineer?",
+                "to": "/product-engineer/what-is-a-product-engineer"
+            },
+            { "order": "2", "name": "Traits", "to": "/product-engineer/traits" },
+            {
+                "order": "3",
+                "name": "Skills",
+                "to": "/product-engineer/skills"
+            },
+            {
+                "order": "4",
+                "name": "How they work",
+                "to": "/product-engineer/product-teams"
+            },
+            {
+                "order": "5",
+                "name": "Benefits",
+                "to": "/product-engineer/benefits"
+            },
+            {
+                "order": "6",
+                "name": "Culture",
+                "to": "/product-engineer/culture"
+            },
+            {
+                "order": "7",
+                "name": "Antipatterns",
+                "to": "/product-engineer/antipatterns"
+            },
+            {
+                "order": "8",
+                "name": "Getting started",
+                "to": "/product-engineer/getting-started"
+            },
+            {
+                "order": "9",
+                "name": "Further reading",
+                "to": "/product-engineer/further-reading"
+            }
+        ]
+    }
+]

@@ -115,7 +115,7 @@ export const Content = () => {
                         type="Resources"
                         title="Use cases and tips"
                         description="Common use cases and performance tips"
-                        url="/docs/endpoints/use-cases-and-tips"
+                        url="/docs/endpoints/best-practices"
                     />
                     <ResourceItem
                         type="Resources"
