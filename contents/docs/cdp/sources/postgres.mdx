@@ -19,7 +19,7 @@ When linking a Postgres source, you choose how PostHog accesses your data:
 
 - **Sync to warehouse** – Copies selected tables into PostHog-managed storage on a schedule you configure. Synced data can be joined with PostHog events, persons, and other sources.
 
-- **Query directly (beta)** – Queries your Postgres database in real-time. Data stays in your database and is queried live from the [SQL editor](/docs/data-warehouse/sql). Direct query sources can't be joined with PostHog data.
+- **Query directly** – Queries your Postgres database in real-time. Data stays in your database and is queried live from the [SQL editor](/docs/data-warehouse/sql). Direct query sources can't be joined with PostHog data.
 
 Use **Sync to warehouse** when you need to combine your Postgres data with PostHog analytics, or want automatic scheduled syncs. Use **Query directly** when you want real-time access without copying data into PostHog.
 
