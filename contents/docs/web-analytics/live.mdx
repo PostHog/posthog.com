@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-The **Live** tab in [web analytics](/docs/web-analytics/dashboard) is a real-time view of what's happening on your site right now: how many users are active, what pages they're on, where they came from, and what they're doing. Live shows events as they arrive, while PostHog is still processing, enriching, and storing them.
+The **Live** tab in [Web Analytics](/docs/web-analytics/dashboard) is a real-time view of what's happening on your site right now: how many users are active, what pages they're on, where they came from, and what they're doing. Live shows events as they arrive, while PostHog is still processing, enriching, and storing them.
 
 > **Note:** Live is currently in alpha. Behavior and column layout may change before general availability.
 
@@ -33,11 +33,11 @@ Use Live when you're:
 - **Watching active users** – see which pages signed-in users are on right now.
 - **Verifying an install** – drop the PostHog snippet onto a site, hit a few pages yourself, and confirm events arrive within seconds.
 
-## Live vs. the rest of web analytics
+## Live vs. the rest of Web Analytics
 
-Most analytics work splits into "right now" and "what happened". Live covers the first; the rest of [web analytics](/docs/web-analytics/dashboard) covers the second.
+Most analytics work splits into "right now" and "what happened". Live covers the first; the rest of [Web Analytics](/docs/web-analytics/dashboard) covers the second.
 
-| | Live | Web analytics dashboard |
+| | Live | Web Analytics dashboard |
 |---|---|---|
 | **Latency** | Seconds | Query-time, cached |
 | **Time range** | Last few minutes | Hours, days, months |
@@ -48,11 +48,11 @@ For deeper analysis like funnels, retention, or breakdowns, use [Product Analyti
 
 ## Limitations
 
-- **Recent traffic only** – Live shows events from roughly the last few minutes. For longer windows, use the main web analytics dashboard.
+- **Recent traffic only** – Live shows events from roughly the last few minutes. For longer windows, use the main Web Analytics dashboard.
 - **Sampling** – high-volume sites may see the feed sampled to keep the stream readable. Aggregate dashboards are unaffected.
 - **No historical scroll** – Live is a stream, not a paginated table. Use the events explorer or SQL editor to look further back.
 
 ## Related
 
-- [Web analytics dashboard](/docs/web-analytics/dashboard) – aggregated views over longer time ranges
+- [Web Analytics dashboard](/docs/web-analytics/dashboard) – aggregated views over longer time ranges
 - [Troubleshooting](/docs/web-analytics/troubleshooting) – when events aren't showing up
