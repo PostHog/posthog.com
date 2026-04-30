@@ -32,7 +32,6 @@ Remember, experimentation is an iterative process. Each experiment teaches you s
 
 If you've already shipped a variant to 100% of users, you can still end the experiment using the **End experiment** button. In this case, the experiment is marked as complete without changing the feature flag.
 
-
 ## Pausing an experiment
 
 You can temporarily pause an experiment to stop collecting data without ending it completely. This is useful when:
@@ -57,9 +56,9 @@ This is useful when you need to restart data collection, for example after fixin
 
 Here's how the actions differ:
 
-| Status | Feature flag | Users see | Exposure tracking | Results | Can resume |
-|--------|----------------------|----------|-----------|---------|---------|
-| **Running** | Enabled | Multiple variants | Continues | Updating | N/A |
-| **Pausing** | Disabled | Control variant | Stops | Fixed | Yes |
-| **Ending** | Modified to roll out chosen variant to all users | Chosen variant | Continues (chosen variant only) | Fixed | No |
-| **Resetting** | Unchanged | Multiple variants | Continues | Cleared | Yes (relaunch) |
+| Status        | Feature flag                                     | Users see         | Exposure tracking               | Results  | Can resume     |
+| ------------- | ------------------------------------------------ | ----------------- | ------------------------------- | -------- | -------------- |
+| **Running**   | Enabled                                          | Multiple variants | Continues                       | Updating | N/A            |
+| **Paused**    | Disabled                                         | Control variant   | Stops                           | Fixed    | Yes            |
+| **Ending**    | Modified to roll out chosen variant to all users | Chosen variant    | Continues (chosen variant only) | Fixed    | No             |
+| **Resetting** | Unchanged                                        | Multiple variants | Continues                       | Cleared  | Yes (relaunch) |
