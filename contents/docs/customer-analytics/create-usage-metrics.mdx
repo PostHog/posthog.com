@@ -76,3 +76,26 @@ Choose how the metric is visualized on customer profiles:
   alt="Usage metric display options"
   classes="rounded centered"
 />
+
+## Manage usage metrics via MCP
+
+The [PostHog MCP server](/docs/model-context-protocol) enables AI agents to programmatically manage usage metrics. You can create, update, list, and delete usage metrics directly from any MCP client like Cursor, Claude Code, or VS Code.
+
+The following MCP tools are available for usage metrics:
+
+| Tool                           | Description                           |
+| ------------------------------ | ------------------------------------- |
+| `usage-metrics-create`         | Create a new usage metric             |
+| `usage-metrics-list`           | List all usage metrics in the project |
+| `usage-metrics-retrieve`       | Get a single usage metric by ID       |
+| `usage-metrics-partial-update` | Update an existing usage metric       |
+| `usage-metrics-destroy`        | Delete a usage metric                 |
+
+Try these example prompts with your MCP-enabled agent:
+
+- `List all usage metrics in my project.`
+- `Create a usage metric that counts api_request events over the last 30 days.`
+- `Update my API calls metric to use a 90-day interval.`
+- `Delete the usage metric with ID 123.`
+
+See the [MCP server documentation](/docs/model-context-protocol) for setup instructions.
