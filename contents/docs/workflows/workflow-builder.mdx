@@ -134,6 +134,45 @@ Dispatches are the messages you send: email, Slack, SMS, push notifications, web
 | Webhook            | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section.                                                                                       |
 | CDP destinations   | Use any [realtime destination](/docs/cdp/destinations) as a dispatch step to deliver messages to users or other services.                                                              |
 
+### Push notifications
+
+A push notification dispatch step has a shared title and body that apply to every recipient, plus optional platform-specific overrides for APNS and FCM payloads.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/screenshot_push_action_config_2bc9ae5766.png"
+  alt="The general configuration of a push notification dispatch step in the workflow builder"
+  classes="rounded"
+/>
+
+Use the **iOS / APNS** and/or **Android / FCM** sections to override or extend the payload for each platform – for example, custom sound, badge count, or action buttons on iOS, or notification channel and priority on Android.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/screenshot_push_action_ios_config_715279ffa9.png"
+  alt="The APNS-specific configuration of a push notification dispatch step in the workflow builder"
+  classes="rounded"
+/>
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/screenshot_push_action_android_config_ddc9968f07.png"
+  alt="The FCM-specific configuration of a push notification dispatch step in the workflow builder"
+  classes="rounded"
+/>
+
+#### Across multiple apps and platforms
+
+A single push notification dispatch step delivers to the recipient on every app they've registered a device token with – across iOS, Android, and any number of separate apps. You don't need to add one dispatch per platform or branch your workflow.
+
+Each PostHog push notification channel is scoped to one app: an APNS channel covers a single iOS bundle ID, and an FCM channel covers a single Firebase project. The mobile SDKs send the device's `app_id` along with each subscription, which is how PostHog routes the message to the right channel and credentials. Configure one channel per app you ship, and the dispatch step will fan out to whichever ones the recipient is subscribed to.
+
+#### When PostHog hasn't seen a device token
+
+A push notification dispatch can only deliver if the PostHog SDK has already registered a device token for the recipient's `distinct_id`. If it hasn't, the dispatch fails and one of these errors appears in the workflow's invocation logs:
+
+- `No active APNS device token found for distinct_id: ...`
+- `No active FCM device token found for distinct_id: ...`
+
+This usually means the user hasn't opened the mobile app since you installed the SDK, denied the OS-level notification permission, or the app never called `handlePushNotificationDeviceToken` (iOS) or `registerPushNotificationToken` (Android). See the [iOS](/docs/libraries/ios#push-notifications) and [Android](/docs/libraries/android#push-notifications) push notification setup guides for the registration flow.
+
 ## Delays
 
 Delays help you control the timing of your messages. There are 3 types of delays:

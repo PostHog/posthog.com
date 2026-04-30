@@ -16,6 +16,12 @@ Before you can design a workflow, you need to configure a workflows channel. Cha
 
 To create a new channel, go to workflows > [**Channels** tab](https://app.posthog.com/workflows/channels) > click **+ New channel**, and select the channel you want to configure:
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/screenshot_new_workflows_channel_3c08ab3558.png"
+    alt="The new channel dropdown picker in the PostHog workflows app"
+    classes="rounded"
+/>
+
 <CalloutBox icon="IconInfo" title="CDP channels" type="fyi">
 
 Other than the channels shown below, you can also dispatch to any [realtime destination](/docs/cdp/destinations) in CDP. If you plan to use a CDP destination, you can configure them directly when you [design a workflow](/docs/workflows/workflow-builder).
@@ -89,6 +95,12 @@ Once configured, you'll be able to use the channel in a workflow to send SMS mes
 
 Apple Push Notification Service (APNS) enables you to send push notifications to iOS and macOS devices.
 
+<CalloutBox icon="IconInfo" title="One channel per app" type="fyi">
+
+An APNS channel is scoped to a single iOS bundle ID. If you ship more than one iOS app, configure a separate APNS channel for each. A single workflow's push notification dispatch step automatically fans out across every app a recipient is subscribed to – including FCM channels for the same recipient on Android – so you don't need to branch your workflow per platform.
+
+</CalloutBox>
+
 To configure the channel, you need the following from your [Apple Developer account](https://developer.apple.com/account/resources/authkeys/list):
 
 | Field             | Example                 | Description                                      |
@@ -97,6 +109,12 @@ To configure the channel, you need the following from your [Apple Developer acco
 | **Key ID**        | `ABC123DEFG`            | The 10-character identifier for your signing key, shown on the key details page. |
 | **Apple team ID** | `ABCDE12345`            | Your Apple Developer team ID, found in the top-right of the Apple Developer portal. |
 | **Bundle ID**     | `com.example.app`       | Your app's bundle identifier, as configured in Xcode. |
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/screenshot_apns_channel_setup_51faccf480.png"
+    alt="The APNS channel setup modal in PostHog workflows"
+    classes="rounded"
+/>
 
 Once configured, you can use APNS as a dispatch step in the workflow builder to send push notifications to your iOS users.
 
@@ -111,12 +129,24 @@ To deliver push notifications, you need the [PostHog iOS SDK](/docs/libraries/io
 
 Firebase Cloud Messaging (FCM) enables you to send push notifications to Android devices.
 
+<CalloutBox icon="IconInfo" title="One channel per Firebase project" type="fyi">
+
+An FCM channel is scoped to a single Firebase project. If you ship multiple Android apps under different Firebase projects, configure one FCM channel per project. A single workflow's push notification dispatch step fans out across every app a recipient is subscribed to – including APNS channels for the same recipient on iOS – so one workflow covers your full mobile footprint.
+
+</CalloutBox>
+
 To configure the channel, you need a **service account key** from your Firebase project:
 
 1. Go to the [Firebase Console](https://console.firebase.google.com/).
 2. Select your project, then navigate to **Project settings** > **Service accounts**.
 3. Click **Generate new private key** to download a JSON file.
 4. Paste the contents of this JSON file into the **Service account key** field in PostHog.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/screenshot_fcm_channel_setup_20cb3d3aa8.png"
+    alt="The FCM channel setup modal in PostHog workflows"
+    classes="rounded"
+/>
 
 Once configured, you can use FCM as a dispatch step in the workflow builder to send push notifications to your Android users.
 
