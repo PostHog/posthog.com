@@ -279,9 +279,26 @@ To set up [session replay](/docs/session-replay/mobile) in your project, all you
 
 The PostHog Android SDK can register a Firebase Cloud Messaging (FCM) device token with PostHog so that [Workflows](/docs/workflows) push notification dispatches can deliver to the device.
 
+### App setup
+
+PostHog delivers push notifications via Firebase Cloud Messaging (FCM), so your app needs to be set up as an FCM client first. Follow Google's [Set up a Firebase Cloud Messaging client app on Android](https://firebase.google.com/docs/cloud-messaging/android/client) guide to:
+
+1. Add the `google-services.json` file to your app module.
+2. Add the Firebase BoM and `com.google.firebase:firebase-messaging` to your `build.gradle`.
+3. Subclass `FirebaseMessagingService` and register it in your `AndroidManifest.xml`. This is what receives notifications and the `onNewToken` callback.
+
+Add the following to your `AndroidManifest.xml`:
+
+```xml
+<!-- Required to show notifications on Android 13+ -->
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+```
+
+`INTERNET` is already declared by the PostHog SDK, so no extra permission is needed for the API call.
+
 ### Requesting permission
 
-The SDK does not request push notification permission for you. Your app must request the `POST_NOTIFICATIONS` runtime permission (Android 13+) and obtain an FCM registration token using the Firebase SDK before forwarding it to PostHog.
+On Android 13 (API 33) and higher, `POST_NOTIFICATIONS` is a runtime permission. The PostHog SDK does not request it for you – use `ActivityCompat.requestPermissions` (or your AndroidX activity result API of choice) before registering the device.
 
 ### Sending the device token to PostHog
 

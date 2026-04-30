@@ -216,6 +216,30 @@ Hence **starting with posthog-ios version 1.2.0** we have removed all references
 
 The PostHog iOS SDK can register device tokens for [Workflows](/docs/workflows) push notifications and capture an event when a user opens one.
 
+### App setup
+
+Before any of the code below will work, your app needs to be set up to receive remote notifications:
+
+- In Xcode, enable the **Push Notifications** capability for your app target. This adds the `aps-environment` entitlement that APNs requires.
+- If you want to handle notifications while the app is in the background, also enable **Background Modes > Remote notifications**.
+- Run on a real device. The iOS Simulator only supports push notifications on macOS 13+/Xcode 14+ and is unreliable for end-to-end testing.
+
+### Sandbox vs. production device tokens
+
+APNs has two environments – **sandbox** and **production** – and a device token is only valid against the environment it was issued for. Sending a sandbox token to production APNs (or vice versa) returns `BadDeviceToken` and the notification is never delivered.
+
+The environment is determined by the `aps-environment` entitlement set at sign time:
+
+| Build type                                          | `aps-environment` | APNs environment |
+| --------------------------------------------------- | ----------------- | ---------------- |
+| Debug builds run from Xcode (Development profile)   | `development`     | Sandbox          |
+| TestFlight and App Store builds (Distribution)      | `production`      | Production       |
+
+Two practical consequences:
+
+- A device token captured from a debug build will not work for TestFlight or App Store builds, and vice versa. Test the build type that matches the APNs environment your PostHog channel is configured for.
+- When a user upgrades from a TestFlight/App Store build to a debug build (or vice versa), the device token changes. The SDK call to `handlePushNotificationDeviceToken` overwrites the previously registered token, so re-register on every app launch and your latest token always wins.
+
 ### Requesting permission
 
 The SDK does not request push notification permission for you. Your app must prompt the user and register for remote notifications using Apple's standard APIs:
