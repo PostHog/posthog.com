@@ -6,7 +6,13 @@ We've got a great library to get you started with the most common transformation
 
 ## Available globals
 
-Because transformations execute _before_ events are fully ingested and processed, they only receive the `event` and `project` globals. Unlike [realtime destinations](/docs/cdp/destinations/customizing-destinations), transformations do **not** have access to `person` or `groups` — person profiles and group associations haven't been resolved at this point in the pipeline.
+Transformations run _before_ events are fully ingested and processed, so they only have access to:
+
+- `event` – The event being transformed
+- `project` – Project information
+- `inputs` – User-defined input values from your transformation configuration
+
+Unlike [realtime destinations](/docs/cdp/destinations/customizing-destinations), transformations do **not** have access to `person`, `groups`, or `source`. Person profiles and group associations haven't been resolved at this point in the pipeline, and `source` is only available for destinations and sources.
 
 Here's the structure of the globals available in transformations:
 
@@ -24,6 +30,7 @@ Here's the structure of the globals available in transformations:
         name: string // The name of the PostHog project
         url: string // A URL to view it in PostHog
     }
+    inputs: Record<string, any> // User-defined input values
 }
 ```
 

@@ -22,9 +22,15 @@ Need more flexibility? Our [custom transformations](/docs/cdp/transformations/cu
 
 ## Available globals
 
-Transformations run during ingestion, _before_ events are fully ingested and processed. As a result, they only receive the `event` and `project` globals. They do **not** have access to the `person` or `groups` globals that [realtime destinations](/docs/cdp/destinations) can use, since person profiles and group associations haven't been resolved yet at the point a transformation executes.
+Transformations run during ingestion, _before_ events are fully processed. They have access to:
 
-If your logic depends on person properties or group data, use a [realtime destination](/docs/cdp/destinations) instead.
+- `event` – The event being transformed
+- `project` – Project information
+- `inputs` – User-defined input values from your transformation configuration
+
+Transformations do **not** have access to `person`, `groups`, or `source` globals that [realtime destinations](/docs/cdp/destinations) can use. Person profiles and group associations haven't been resolved yet when a transformation executes, and the `source` global is only available for destinations and sources.
+
+If your logic depends on person properties, group data, or source information, use a [realtime destination](/docs/cdp/destinations) instead.
 
 ## Filtering
 
