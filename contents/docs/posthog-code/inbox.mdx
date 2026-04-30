@@ -1,13 +1,13 @@
 ---
-title: Getting started with Inbox
+title: Inbox
 sidebar: Docs
 showTitle: true
 ---
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import OSButton from 'components/OSButton'
+import Link from 'components/Link'
 
-PostHog **Inbox** is your command center for self-driving development. It uses signals from your production data - like errors appearing, users stuck in session recording, or support tickets – to automatically research issues, write code fixes, and open pull requests.
+PostHog **Inbox** is your command center for self-driving development. It uses signals from your production data - like errors popping up, users stuck in session recordings, or support tickets coming in – to automatically open pull requests improving your product, based on hard evidence, ready to merge right away (or with whatever tweaks you instruct).
 
 Instead of reactive firefighting, Inbox moves your workflow to a proactive merging model where AI agents do the heavy lifting of investigation and implementation.
 
@@ -19,58 +19,59 @@ Instead of reactive firefighting, Inbox moves your workflow to a proactive mergi
     icon="IconPlug"
 >
 
-  Inbox identifies work by monitoring "Signals." To get started, you need to connect the sources where your product data and user feedback live.
+  Inbox identifies work by monitoring _product signals_ from various sources – both internal to PostHog and external ones. To get started, you need to connect the sources. Currently available:
 
-  - **Internal:** Enable [Error Tracking](/docs/error-tracking), [Support](/docs/support), and [Session Replay](/docs/session-replay).
-  - **External:** Connect your GitHub Issues, Linear, or Zendesk accounts.
+  <ul>
+    <li>
+      <strong>Internal:</strong> PostHog <Link to="/docs/error-tracking">Error Tracking</Link> issues,{" "}
+      <Link to="/docs/support">Support</Link> tickets, and <Link to="/docs/session-replay">Session Replay</Link>{" "}
+      recordings.
+    </li>
+    <li>
+      <strong>External:</strong> GitHub issues, Linear issues, or Zendesk tickets.
+    </li>
+  </ul>
 
-  <OSButton variant="primary" asLink to="#signal-sources">
-    Configure sources
-  </OSButton>
+  In PostHog Code, open **Inbox** and use the **Configure sources** button above the search box.
 
+  <Link to="/docs/posthog-code/inbox#signal-sources">Learn about sources here.</Link>
 </QuestLogItem>
 
 <QuestLogItem
-    title="Triage actionable reports"
+    title="Wait for signals to be researched"
     subtitle="Required"
-    icon="IconTerminal"
+    icon="IconMagnifyingGlass"
 >
 
-  Once sources are connected, Inbox clusters signals into **Reports**. Each report is automatically ranked by:
-  
-  - **Priority (P0-P4):** Determined by the impact on user flow, number of users, and code importance.
-  - **Actionability:** Marked as "Actionable" if the problem can be solved with code.
+  Once sources are connected, Inbox researches new information as it comes in. It orchestrates agents with MCP servers connected in your workspace - starting with the PostHog MCP – to identify what's happening and what's the impact.
 
-  Review your first report to see the root cause analysis and the proposed resolution logic.
+  The agents have access to your product's code for grounding. The result of research is a ready report, rated with:
+
+  <ul>
+    <li>
+      <strong>Actionability:</strong> Marked as "Actionable" if the problem can be solved with code.
+    </li>
+    <li>
+      <strong>Priority (P0-P4):</strong> Determined by the impact on user flow, number of users, and code importance.
+    </li>
+  </ul>
+
+  You can audit the research agent's logs to see exactly how it navigated your repo and reached its conclusions.
 
   ### Waiting for reports to appear?
 
   Background research can take up to fifteen minutes due to its depth. If you've just connected a source, there are two scenarios:
 
-    1. The source already has data to ingest, for example if you connect Error Tracking and you already have error issues in PostHog. It might take a minute or two for these records to appear queued for research in Inbox.
-    2. The source is empty, for example you connect Error Tracking in a blank project. Just stayed tuned for bugs to be tracked then! We'll let you know in the Inbox when there are user issues to resolve.
+  <ol>
+    <li>
+      The source already has data to ingest, for example if you connect Error Tracking and you already have error issues in PostHog. It might take a minute or two for these records to appear queued for research in Inbox.
+    </li>
+    <li>
+      The source is empty, for example you connect Error Tracking in a blank project. Just stay tuned for bugs to be tracked then! We'll let you know in the Inbox when there are user issues to resolve.
+    </li>
+  </ol>
 
-
-  <OSButton variant="primary" asLink to="#triage-and-prioritization">
-    Learn about prioritization
-  </OSButton>
-
-</QuestLogItem>
-
-<QuestLogItem
-    title="Audit agent research"
-    subtitle="Recommended"
-    icon="IconMagnifyingGlass"
->
-
-  For actionable reports, an AI agent automatically performs a **research agent**. It uses MCP servers connected in your workspace - starting with the PostHog MCP – to identify what's happening and what' the impact. It uses access to your product's code to propose a concrete way to fix or simply improve the product.
-
-  You can audit the agent's logs to see exactly how it navigated your repo and reached its conclusions.
-
-  <OSButton variant="primary" asLink to="#research-tasks">
-    See how agents research
-  </OSButton>
-
+  <Link to="/docs/posthog-code/inbox#research-tasks">Learn more about research tasks here.</Link>
 </QuestLogItem>
 
 <QuestLogItem
@@ -79,15 +80,11 @@ Instead of reactive firefighting, Inbox moves your workflow to a proactive mergi
     icon="IconRocket"
 >
 
-  When research is complete, the agent executes an **implementation agent**: cloning your repo, creating a branch, and opening a GitHub PR.
+  When research is complete and the issue can be simply actioned with code, the agent executes an **implementation agent**: cloning your repo, implementing the fix, creating a branch, and opening a GitHub PR.
 
-  Each PR includes an AI-generated description of the problem and the change. Your job is simply to review the code in GitHub and click **Merge**.
+  Each PR includes an AI-generated description of the problem and the change. Your job is simply to review the code in GitHub and click **Merge**. Any comments on the result? You can chat with the implementation agent directly in PostHog Code, and it'll make tweaks you ask for.
 
-  Any comments? Just let the implementation agent know, and it'll make tweaks you ask for.
-
-  <OSButton variant="primary" asLink to="#implementation-tasks">
-    Review the PR workflow
-  </OSButton>
+  <Link to="/docs/posthog-code/inbox#implementation-tasks">Learn more about implementation tasks here.</Link>
 
 </QuestLogItem>
 
@@ -140,16 +137,10 @@ By connecting Linear (for project management) or Zendesk (for customer support),
 2. Search your codebase for relevant logic
 3. Propose a fix that references the original ticket ID
 
-## Triage and prioritization
+## Research tasks
 
-Inbox uses AI to cluster raw signals into actionable **reports** and rank them so you know what to work on first.
+When a signal (like an [Error Tracking](/docs/error-tracking) exception or a GitHub issue) arrives, an agent investigates automatically.
 
-### Understand reports
-
-A **report** is a high-level summary of an issue. Each report contains:
-- **Problem description** - A clear description of the bug or issue
-- **Priority** - Ranked from P0 (critical) to P3 (low)
-- **Actionability** - Whether the AI agent has found a clear path to a code-based fix
 
 ### How Inbox determines priority
 
@@ -164,28 +155,17 @@ Instead of looking at error frequency alone, Inbox uses a product-aware prioriti
 2. **Actionable reports** - Focus on these even if the priority is lower. The agent has already done the research and implementation work for you.
 3. **Needs research** - If a report isn't yet actionable, trigger a **research task** to have an agent investigate the codebase.
 
-### Assign owners
-
-Inbox automatically suggests reviewers and owners for each report based on:
-- **Git blame** - Who recently touched the affected lines of code
-- **Historical ownership** - Who has resolved similar issues in this part of the codebase before
-
-## Research tasks
-
-When a signal (like an [Error Tracking](/docs/error-tracking) exception or a GitHub issue) arrives, an agent investigates automatically.
-
-### Codebase context (MCP)
-
-The agent uses a [Model Context Protocol (MCP) server](/docs/ai-engineering/mcp) to interact with your codebase. This enables it to:
-- Search for specific symbols, classes, or functions
-- Read file contents
-- List directory structures
-
 ### Root cause analysis
 
 The agent combines the production signal (e.g., a stack trace from Error Tracking) with codebase access to identify the root cause.
 
 - **Example** - An agent sees a `DoesNotExist` error in production data and finds the exact line in `billing_manager.py` where a database query is missing a null check.
+
+### Assign owners
+
+Inbox automatically suggests reviewers and owners for each report based on:
+- **Git blame** - Who recently touched the affected lines of code
+- **Historical ownership** - Who has resolved similar issues in this part of the codebase before
 
 ## Implementation tasks
 
