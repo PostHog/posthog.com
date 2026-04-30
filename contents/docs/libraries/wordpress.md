@@ -152,4 +152,3 @@ To confirm PostHog is configured correctly, visit your website and then check if
 
 </CalloutBox>
 
-</CalloutBox>
