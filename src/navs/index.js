@@ -6423,6 +6423,7 @@ export const docsMenu = {
                     url: '/docs/posthog-code/inbox',
                     icon: 'IconInbox',
                     color: 'yellow',
+                    children: [{ name: 'Overview', url: '/docs/posthog-code/inbox' }],
                 },
                 {
                     name: 'Skills',
