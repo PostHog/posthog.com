@@ -214,51 +214,70 @@ Hence **starting with posthog-ios version 1.2.0** we have removed all references
 
 ## Push notifications
 
-The PostHog iOS SDK supports push notifications for [Workflows](/docs/workflows). Once configured, the SDK automatically handles device token registration for push notification subscriptions and tracks when users open push notifications.
+The PostHog iOS SDK can register device tokens for [Workflows](/docs/workflows) push notifications and capture an event when a user opens one.
 
-### Requesting permission and registering for push notifications
+### Requesting permission
 
-Call `requestPushNotificationPermission` to prompt the user for notification permission and automatically register for remote notifications:
-
-```swift
-PostHogSDK.shared.requestPushNotificationPermission()
-```
-
-This method requests notification authorization via `UNUserNotificationCenter` and, if granted, calls `UIApplication.shared.registerForRemoteNotifications()` automatically.
-
-### Automatic device token handling
-
-When swizzling is enabled (the default), the SDK automatically intercepts your app delegate's `application(_:didRegisterForRemoteNotificationsWithDeviceToken:)` method and sends the device token to PostHog. No manual wiring is needed.
-
-If you have swizzling disabled, you need to manually forward the device token:
+The SDK does not request push notification permission for you. Your app must prompt the user and register for remote notifications using Apple's standard APIs:
 
 ```swift
-func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-    PostHogSDK.shared.handlePushNotificationDeviceToken(deviceToken)
+import UserNotifications
+
+UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+    guard granted else { return }
+    DispatchQueue.main.async {
+        UIApplication.shared.registerForRemoteNotifications()
+    }
 }
 ```
 
-### Automatic open tracking
+### Sending the device token to PostHog
 
-When `capturePushNotificationSubscriptions` is enabled (the default) and swizzling is on, the SDK automatically captures a `$push_notification_opened` event when a user taps a push notification. This event includes the following properties:
+Once the system delivers a device token to your `AppDelegate`, forward it to PostHog so it can be used to deliver push notifications from a workflow:
 
-| Property | Description |
-|----------|-------------|
-| `$notification_title` | The title of the notification |
-| `$notification_subtitle` | The subtitle of the notification |
-| `$notification_body` | The body text of the notification |
-| `$notification_action` | The action identifier, if the user tapped a custom action |
+```swift
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    let tokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
+    PostHogSDK.shared.handlePushNotificationDeviceToken(tokenString)
+}
+```
 
-Any key-value pairs in a `posthog` dictionary within the notification's `userInfo` payload are also captured, prefixed with `$notification_`.
+`handlePushNotificationDeviceToken` accepts the device token as a hexadecimal string.
 
-### Disabling push notification subscription
+### Automatic device token registration and open tracking
 
-To disable automatic push notification subscription and open tracking, set `capturePushNotificationSubscriptions` to `false` in your config:
+If you'd rather not wire up the AppDelegate methods yourself, set `capturePushNotificationSubscriptions` to `true` in your config. When enabled (and swizzling is on), the SDK swizzles your `AppDelegate` to forward device tokens automatically and captures a `$push_notification_opened` event when a user taps a push notification.
 
 ```swift
 let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_client_api_host>")
-config.capturePushNotificationSubscriptions = false
+config.capturePushNotificationSubscriptions = true
 PostHogSDK.shared.setup(config)
+```
+
+The `$push_notification_opened` event includes the following properties:
+
+| Property                 | Description                                                  |
+| ------------------------ | ------------------------------------------------------------ |
+| `$notification_title`    | The title of the notification                                |
+| `$notification_subtitle` | The subtitle of the notification                             |
+| `$notification_body`     | The body text of the notification                            |
+| `$notification_action`   | The action identifier, if the user tapped a custom action    |
+
+Any key-value pairs in a `posthog` dictionary within the notification's `userInfo` payload are also captured, prefixed with `$notification_`.
+
+### Manually capturing open events
+
+If you manage your own `UNUserNotificationCenterDelegate` (or have swizzling disabled), call `capturePushNotificationOpened(response:)` from your delegate to capture the same `$push_notification_opened` event:
+
+```swift
+func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    didReceive response: UNNotificationResponse,
+    withCompletionHandler completionHandler: @escaping () -> Void
+) {
+    PostHogSDK.shared.capturePushNotificationOpened(response: response)
+    completionHandler()
+}
 ```
 
 ## Session replay
