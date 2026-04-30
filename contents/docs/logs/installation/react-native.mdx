@@ -1,0 +1,170 @@
+---
+title: React Native logs installation
+platformLogo: react
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallReactNative from '../../integrate/_snippets/install-react-native.mdx'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+The PostHog React Native SDK ships with first-class support for Logs. Send structured log records with the `posthog.logger` API and have them delivered alongside your analytics and session replays.
+
+> **Minimum version:** `posthog-react-native@4.44.0` or later.
+
+<Steps>
+
+<Step title="Install posthog-react-native" badge="required">
+
+If you haven't already, install the React Native SDK:
+
+<InstallReactNative />
+
+</Step>
+
+<Step title="Configure logs at init" badge="required">
+
+Set your service identity when initializing PostHog. These fields map to standard [OpenTelemetry resource attributes](https://opentelemetry.io/docs/specs/semconv/resource/) and apply to every log record this client sends.
+
+```react-native
+import PostHog from 'posthog-react-native'
+
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  logs: {
+    serviceName: 'my-rn-app',
+    environment: 'production',
+    serviceVersion: '1.2.3',
+  },
+})
+```
+
+| Option | Description |
+|--------|-------------|
+| `serviceName` | Identifies the app in the Logs UI. Maps to the OpenTelemetry `service.name` resource attribute. Defaults to `'unknown_service'`. |
+| `environment` | Deployment environment, e.g. `'production'` or `'staging'`. Maps to `deployment.environment`. |
+| `serviceVersion` | Release version, e.g. `'1.2.3'`. Maps to `service.version`. |
+| `resourceAttributes` | Additional OpenTelemetry resource attributes, e.g. `{ 'host.name': 'mobile-01' }`. |
+
+See [Logs configuration options](#logs-configuration-options) below for the complete list.
+
+</Step>
+
+<Step title="Send structured logs with posthog.logger" badge="recommended">
+
+`posthog.logger` provides a straightforward logging interface. Each call produces an OTLP log record with a severity level and typed attributes you can filter and query on in the Logs product.
+
+```react-native
+posthog.logger.info('checkout completed', { order_id: 'ord_789', total_cents: 4200 })
+posthog.logger.warn('payment retry', { attempt: 2, gateway: 'stripe' })
+posthog.logger.error('payment failed', { error_code: 'E001', order_id: 'ord_789' })
+```
+
+Available severity levels: `trace`, `debug`, `info`, `warn`, `error`, and `fatal`.
+
+For full control over a log record, including trace correlation, use `posthog.captureLog`:
+
+```react-native
+posthog.captureLog({
+  body: 'checkout completed',
+  level: 'info',
+  attributes: { order_id: 'ord_789', tags: ['checkout', 'v2'] },
+  trace_id: '0af7651916cd43dd8448eb211c80319c', // optional, 32 hex chars
+  span_id: 'b7ad6b7169203331',                   // optional, 16 hex chars
+})
+```
+
+Attribute values can be strings, numbers, booleans, arrays, or plain objects. `null` and `undefined` values are dropped.
+
+</Step>
+
+<Step title="Understand flush behavior" badge="recommended">
+
+The React Native SDK flushes logs to PostHog in several situations:
+
+- **Timer-based:** Logs flush automatically every 10 seconds by default (configurable via `flushIntervalMs`).
+- **Buffer capacity:** Logs flush when the buffer reaches `maxBufferSize` (default 100 records).
+- **AppState changes:** Logs flush when the app goes to the background or returns to the foreground.
+- **Manual flush:** Call `posthog.flushLogs()` to send all pending logs immediately.
+- **Shutdown:** Call `posthog.shutdown()` to drain both the events queue and the logs queue.
+
+```react-native
+// Flush logs manually (events use posthog.flush())
+await posthog.flushLogs()
+
+// Flush everything and clean up
+await posthog.shutdown()
+```
+
+Logs are persisted to device storage, so they survive app restarts and will be sent on the next launch if the app is terminated before flushing.
+
+</Step>
+
+<Step title="Link logs to sessions and users" badge="recommended">
+
+The React Native SDK automatically attaches the current `distinct_id`, `session_id`, screen name, app state, and active feature flags to every log record. Log entries appear linked to the matching [Session Replay](/docs/session-replay) and person without any extra setup.
+
+See [Link Session Replay](/docs/logs/link-session-replay) for how this surfaces in the UI.
+
+</Step>
+
+<Step title="Filter logs with beforeSend" badge="optional">
+
+Use the `beforeSend` hook to inspect, modify, or drop log records before they enter the queue. Return `null` to drop a record.
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  logs: {
+    serviceName: 'my-rn-app',
+    beforeSend: (record) => {
+      // Drop logs containing sensitive data
+      if (record.body.includes('password')) {
+        return null
+      }
+      // Add a custom attribute to all logs
+      return {
+        ...record,
+        attributes: { ...record.attributes, app_build: '123' },
+      }
+    },
+  },
+})
+```
+
+You can also pass an array of functions. They run left-to-right, and the chain short-circuits if any function returns `null`.
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, verify log records are flowing:
+
+1. Call `posthog.logger.info('hello from react native')` somewhere your app executes.
+2. Open the [Logs](https://app.posthog.com/logs) interface and filter by the `serviceName` you set above.
+3. Confirm the record shows up with the attributes you sent.
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>
+
+## Logs configuration options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `serviceName` | String | `'unknown_service'` | Service name attached as `service.name`. |
+| `serviceVersion` | String | — | Service version attached as `service.version`. |
+| `environment` | String | — | Environment attached as `deployment.environment`. |
+| `resourceAttributes` | Object | — | Additional OTLP resource attributes. |
+| `flushIntervalMs` | Number | `10000` | How often batched log records are flushed (ms). |
+| `maxBufferSize` | Number | `100` | Max records buffered before forcing a flush. |
+| `maxBatchRecordsPerPost` | Number | `50` | Max records per HTTP POST. |
+| `rateCap.maxLogs` | Number | `500` | Max records accepted per rate-cap window. Excess records are dropped with a warning. Set to `undefined` for unbounded. |
+| `rateCap.windowMs` | Number | `10000` | Rate-cap window length (ms). |
+| `beforeSend` | Function or Array | — | Filter or transform records before queuing. Return `null` to drop. |
