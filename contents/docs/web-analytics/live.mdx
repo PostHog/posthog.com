@@ -1,0 +1,48 @@
+---
+title: Live
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+The **Live** tab in [web analytics](/docs/web-analytics/dashboard) is a real-time view of incoming traffic. Each request streams into the feed as PostHog ingests it, so you can watch what's happening on your site right now without re-running a query.
+
+> **Note:** Live is currently in alpha and available behind the **Web analytics bot analysis** feature flag. Behavior and column layout may change before general availability.
+
+## What it shows
+
+The Live tab is a continuously updating feed of recent events. Each row includes:
+
+- **Timestamp** — when the event was ingested
+- **Path** — the URL or pathname requested
+- **Traffic type** — `Regular`, `AI Agent`, `Bot`, or `Automation` (see [bot detection](/docs/web-analytics/bot-detection#traffic-types))
+- **Bot name** and **operator** — populated for non-human traffic (e.g. `GPTBot` / `OpenAI`)
+- **Country** and **device** — derived from the request
+
+Use the filter controls at the top of the tab to narrow the feed by traffic type, category, host, or path. Filters apply to the live stream so you can isolate exactly what you want to watch.
+
+## Filtering by traffic type
+
+The most common filter is **Traffic type**, which lets you isolate one slice of incoming requests:
+
+- **Regular** — only human visitors
+- **AI Agent** — AI crawlers, search bots, and assistants (GPTBot, ClaudeBot, etc.)
+- **Bot** — traditional crawlers and monitoring (Googlebot, Bingbot, Pingdom)
+- **Automation** — HTTP clients and headless browsers (curl, Puppeteer)
+
+For aggregated bot dashboards (top crawlers, most-crawled paths, per-bot trends), use the [Bot analytics tab](/docs/web-analytics/bot-detection#bot-analytics-tab) instead — Live is for watching the stream as it happens.
+
+## Limitations
+
+- **Recent traffic only** — Live shows events from roughly the last few minutes. For longer windows use the main web analytics dashboard or [Product Analytics](/docs/product-analytics).
+- **Sampling** — high-volume sites may see the feed sampled to keep the stream readable. Aggregate dashboards are unaffected.
+- **No historical scroll** — Live is a stream, not a paginated table. Use the events explorer or SQL editor to look further back.
+
+## Related
+
+- [Bot detection](/docs/web-analytics/bot-detection) — how PostHog classifies bot, AI agent, and automation traffic
+- [Web analytics dashboard](/docs/web-analytics/dashboard) — aggregated views over longer time ranges
+- [Troubleshooting](/docs/web-analytics/troubleshooting) — when events aren't showing up
