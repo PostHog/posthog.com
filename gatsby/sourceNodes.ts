@@ -173,15 +173,18 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         if (endpoint.items.length > maxEndpointItems) {
             const chunks = []
             for (let i = 0; i < endpoint.items.length; i += maxEndpointItems) {
+                const pos = Math.floor(i / maxEndpointItems)
                 const next =
                     i + maxEndpointItems < endpoint.items.length &&
-                    `${endpoint.name}-${Math.floor(i / maxEndpointItems) + 2}`
-                const name = i === 0 ? endpoint.name : `${endpoint.name}-${Math.floor(i / maxEndpointItems) + 1}`
+                    `${endpoint.name}-${pos + 2}`
+                const name = pos === 0 ? endpoint.name : `${endpoint.name}-${pos + 1}`
+                const previous = pos === 0 ? null : pos === 1 ? endpoint.name : `${endpoint.name}-${pos}`
                 const chunk = {
                     ...endpoint,
                     name,
                     items: endpoint.items.slice(i, i + maxEndpointItems),
                     next,
+                    previous,
                 }
                 chunks.push(chunk)
             }
@@ -205,6 +208,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
             name: endpoint.name,
             nextURL: endpoint.next ? '/docs/api/' + endpoint.next.replace(/_/g, '-') : null,
+            previousURL: (endpoint as any).previous ? '/docs/api/' + (endpoint as any).previous.replace(/_/g, '-') : null,
         }
         createNode(node)
     })
