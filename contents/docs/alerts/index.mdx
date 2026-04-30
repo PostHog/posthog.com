@@ -134,6 +134,10 @@ The [PostHog MCP server](/docs/model-context-protocol) provides tools to list, c
 - "List all my alerts and their current state"
 - "Update my pageview alert threshold to 5000"
 - "Delete the old conversion alert"
+- "Set up Slack notifications for my revenue alert to the #analytics channel"
+- "Send my pageview alert to a webhook at https://example.com/alerts"
+
+The MCP server can configure Slack channel or webhook delivery for your alerts by creating the appropriate [CDP function](/docs/cdp). For Slack delivery, it automatically looks up your Slack integration and available channels.
 
 ## Relative alerts
 

@@ -275,6 +275,16 @@ The agent will use the `cdp-functions-list` tool with a type filter to return al
 
 The agent will use the `cdp-functions-invocations-create` tool to send a mock event payload to the function and return the execution logs.
 
+### Alert delivery to Slack or webhooks
+
+**Prompt:** "Set up Slack notifications for my revenue alert to the #team-analytics channel"
+
+The agent will use `integrations-list` to find your Slack integration, then `integrations-channels-retrieve` to look up the channel ID. It creates a CDP function that listens for the `$insight_alert_firing` event filtered to your specific alert, delivering formatted messages to your chosen Slack channel.
+
+**Prompt:** "Send my signup alert to a webhook at https://example.com/hooks/alerts"
+
+The agent will create a webhook destination that forwards alert firing events to your specified URL, including alert details like the insight name and breach information.
+
 ### Early access feature management
 
 **Prompt:** "List all early access features in my project"
