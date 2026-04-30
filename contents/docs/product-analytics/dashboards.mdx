@@ -24,7 +24,7 @@ export const dashboardfiltersDark =
 
 Dashboards are the easiest way to track all your most important product and performance metrics.
 
-Unlike [notebooks](/docs/notebooks), which are ideal for adhoc analysis of specific issues, dashboards are designed for tracking common metrics over time.
+Unlike [notebooks](/docs/notebooks), which are ideal for ad hoc analysis of specific issues, dashboards are designed for tracking common metrics over time.
 
 You can create a new dashboard from scratch, but we also offer numerous [dashboard templates](/templates) for tracking things like [website metrics](/templates/website-dashboard), [product health metrics](/templates/health-dashboard), and [metrics for large language models](/docs/llm-analytics).
 
@@ -57,8 +57,8 @@ Click any prompt to open [PostHog AI](/docs/posthog-ai) in the side panel with a
 
 You can organize dashboards into folders for easier navigation. There are two ways to move a dashboard into a folder:
 
-- **From the dashboards list page** - Click the **...** menu next to a dashboard and select **Move to another folder**.
-- **From an individual dashboard** - Use the sidebar to move it to a folder.
+- **From the dashboards list page** – Click the **...** menu next to a dashboard and select **Move to another folder**.
+- **From an individual dashboard** – Use the sidebar to move it to a folder.
 
 > **Note:** Moving a dashboard to a folder requires editor access.
 
@@ -137,7 +137,7 @@ You can do this in five ways:
 
 Once in edit mode, press 'E' again to save your changes and exit edit mode, or press 'Escape' to discard changes and exit.
 
-Tapping 'F' enables fullscreen mode.
+Tapping 'F' enables full-screen mode.
 
 > **Note:** On smaller screens, dashboard tiles are automatically stacked in a single column based on the desktop layout order. Layout editing (drag and resize) is only available on wider viewports.
 
@@ -154,8 +154,8 @@ These options require editor access to the insight.
 
 You can move or copy insight cards and text cards to other dashboards from the **⋯** menu on each card:
 
-- **Move to** - Moves the widget from the current dashboard to another dashboard. It's removed from the current dashboard.
-- **Copy to** - Copies the widget to another dashboard while keeping it on the current dashboard.
+- **Move to** – Moves the widget from the current dashboard to another dashboard. It's removed from the current dashboard.
+- **Copy to** – Copies the widget to another dashboard while keeping it on the current dashboard.
 
 Both options require editor access to the target dashboard.
 
@@ -177,11 +177,11 @@ Button tiles let you link to other pages within PostHog or external URLs. This i
 
 When creating a button tile, you can configure:
 
-- **URL** - The destination link. Use a path like `/dashboards` for internal PostHog pages, or a full URL like `https://example.com` for external sites.
-- **Button text** - The label displayed on the button.
-- **Placement** - Align the button to the left or right side of the tile.
-- **Style** - Choose between primary (filled) or secondary (outlined) button styles.
-- **Transparent background** - Toggle to remove the tile's background for a cleaner look.
+- **URL** – The destination link. Use a path like `/dashboards` for internal PostHog pages, or a full URL like `https://example.com` for external sites.
+- **Button text** – The label displayed on the button.
+- **Placement** – Align the button to the left or right side of the tile.
+- **Style** – Choose between primary (filled) or secondary (outlined) button styles.
+- **Transparent background** – Toggle to remove the tile's background for a cleaner look.
 
 ### Toggling labels and values on insights
 
@@ -221,9 +221,9 @@ For teams practicing infrastructure-as-code, you can manage PostHog dashboards a
 
 This enables:
 
-- **Version-controlled analytics** - Dashboard and insight definitions stored in git
-- **Consistent environments** - Deploy the same dashboards across projects
-- **CI/CD integration** - Automate analytics infrastructure alongside your application
+- **Version-controlled analytics** – Dashboard and insight definitions stored in git
+- **Consistent environments** – Deploy the same dashboards across projects
+- **CI/CD integration** – Automate analytics infrastructure alongside your application
 
 ### Exporting existing dashboards
 
@@ -231,10 +231,10 @@ To get started quickly, you can export your existing dashboards as Terraform cod
 
 You'll see a **Manage with Terraform** button on:
 
-- **Dashboard pages** - Exports the entire dashboard including all insights, dashboard layouts, alerts, and hog functions
-- **Insight detail pages** - Exports the individual insight with its associated alerts and hog functions
+- **Dashboard pages** – Exports the entire dashboard including all insights, dashboard layouts, alerts, and hog functions
+- **Insight detail pages** – Exports the individual insight with its associated alerts and hog functions
 
-Click the button to generate HCL code that you can copy directly into your Terraform configuration. This makes it easy to bring existing dashboards under version control without manually recreating them.
+Click the button to generate HCL code that you can copy directly into your Terraform configuration. This lets you bring existing dashboards under version control without manually recreating them.
 
 ### Installation
 
