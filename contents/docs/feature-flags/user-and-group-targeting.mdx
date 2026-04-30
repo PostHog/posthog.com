@@ -1,0 +1,254 @@
+---
+title: User and group targeting
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconWarning" title="Beta feature" type="action">
+
+Mixed user and group targeting is currently in beta. Contact support if you don't see the **User & Group** option in the **Match by** dropdown.
+
+</CalloutBox>
+
+Feature Flags evaluate against an entity to decide what value to return. By default, that entity is a user (identified by their distinct ID), but you can also target groups like organizations, companies, or teams. With mixed targeting, you can combine both in a single flag.
+
+## Targeting modes
+
+Each release condition on a feature flag has a **Match by** setting that controls which entity gets bucketed. You choose this per condition, not per flag, so different conditions on the same flag can target different entity types.
+
+| Mode | What gets bucketed | When to use it |
+|------|-------------------|----------------|
+| **User** (default) | Your `distinct_id` | In-app features for logged-in users |
+| **Device** (beta) | The device's `$device_id` | Anonymous or pre-login experiences where you need consistency through signup. See [device bucketing](/docs/feature-flags/device-bucketing) |
+| **Group** | A group key (e.g., `company_id`) | Features that should be on or off for an entire organization, team, or other group type |
+| **User & Group** | Depends on the condition | Flags that need both user-level and group-level conditions. See [mixed targeting](#mixed-targeting) |
+
+## Group targeting
+
+Group targeting evaluates a flag based on a group key instead of a user's distinct ID. Everyone in the same group sees the same flag value because PostHog hashes the group key, not the individual user.
+
+For example, if you roll out a flag to 50% of organizations, PostHog hashes each organization's group key to decide whether it's in the rollout. All users in an included organization see the flag enabled, regardless of their own distinct ID.
+
+### Prerequisites
+
+Group targeting requires [group analytics](/docs/product-analytics/group-analytics). You need to:
+
+1. **Define your group types** in PostHog (e.g., "company", "team", "project").
+2. **Send `.group()` calls** from your SDKs so PostHog knows which group each user belongs to.
+
+<MultiLanguage>
+
+```js-web
+// Associate the current user with a company
+posthog.group('company', 'company_abc', {
+    name: 'Acme Inc',
+    industry: 'tech',
+    plan: 'enterprise'
+})
+```
+
+```python
+posthog.group_identify('company', 'company_abc', {
+    'name': 'Acme Inc',
+    'industry': 'tech',
+    'plan': 'enterprise'
+})
+```
+
+```node
+posthog.groupIdentify({
+    groupType: 'company',
+    groupKey: 'company_abc',
+    properties: {
+        name: 'Acme Inc',
+        industry: 'tech',
+        plan: 'enterprise'
+    }
+})
+```
+
+</MultiLanguage>
+
+### Setting up a group-targeted flag
+
+1. Create or edit a feature flag.
+2. Under **Release conditions**, change the **Match by** dropdown from **User** to your group type (e.g., "company").
+3. Optionally add property filters on group properties (e.g., `plan` equals `enterprise`).
+4. Set your rollout percentage.
+
+All users associated with a matching group see the same flag value. If a user belongs to multiple groups of the same type, the group key sent in the current SDK call determines the match.
+
+## Mixed targeting
+
+Mixed targeting lets you combine user-level and group-level conditions in a single feature flag. Each condition set independently picks its own targeting type, so you can have some conditions that hash on a user's distinct ID and others that hash on a group key.
+
+This is useful when you need a flag that accounts for both individual users and organizational membership. For example, you might want to enable a feature for all users in enterprise organizations, with a separate percentage rollout for everyone else.
+
+### How evaluation works
+
+Condition sets are evaluated **top to bottom** and the **first match wins**:
+
+1. PostHog checks each condition set in order.
+2. For a user-targeted condition, it hashes your `distinct_id` to determine rollout inclusion.
+3. For a group-targeted condition, it hashes the group key for the relevant group type.
+4. The first condition set where all property filters pass and the entity falls within the rollout percentage is used.
+
+User-targeted and group-targeted conditions hash different values, so their rollout distributions are independent. A 50% user rollout and a 50% group rollout don't overlap in any predictable way.
+
+<CalloutBox icon="IconWarning" title="Missing group data causes conditions to be skipped" type="caution">
+
+If a group-targeted condition requires a group type that the SDK call didn't include, that condition is **silently skipped** and evaluation continues to the next condition set. This means a misconfigured SDK call can cause users to unexpectedly match a later, less specific condition instead. Always verify that your SDK calls include the correct `groups` data. See [sending user and group data from your SDKs](#sending-user-and-group-data-from-your-sdks) for details.
+
+</CalloutBox>
+
+### Setting up a mixed-targeting flag
+
+1. Create or edit a feature flag.
+2. Under **Release conditions**, change the **Match by** dropdown to **User & Group**.
+3. For each condition set, choose whether it targets a user or a specific group type.
+4. Add property filters and rollout percentages as needed.
+5. Order your conditions so the most specific matches come first, since the first match wins.
+
+## Property filters
+
+The properties available to filter on depend on the targeting type of each condition set:
+
+| Condition targets | Available property filters |
+|-------------------|--------------------------|
+| **User** | Person properties, cohorts, other flags |
+| **Group** | Group properties matching that condition's group type |
+
+You can't filter on person properties in a group-targeted condition, and you can't filter on group properties in a user-targeted condition. This isn't just a UI constraint – group-targeted conditions hash on the group key and only have access to group properties at evaluation time, so person properties aren't available to filter against (and vice versa). The PostHog UI enforces this to prevent incorrect configurations.
+
+## Sending user and group data from your SDKs
+
+For mixed targeting to work, your SDKs need to provide both user and group data in each flag evaluation call.
+
+### Client-side SDKs
+
+Client-side SDKs automatically include the right data when you call `identify()` and `group()`:
+
+```js-web
+// 1. Identify the user
+posthog.identify('user_123', {
+    email: 'jane@acme.com',
+    role: 'admin'
+})
+
+// 2. Associate them with a group
+posthog.group('company', 'company_abc', {
+    name: 'Acme Inc',
+    plan: 'enterprise',
+    industry: 'tech'
+})
+
+// 3. Evaluate the flag — PostHog uses both user and group data
+const showFeature = posthog.getFeatureFlag('mixed-rollout-flag')
+```
+
+### Server-side SDKs
+
+Server-side SDKs are stateless. Pass `groups` and `groupProperties` alongside `personProperties` when evaluating flags:
+
+<MultiLanguage selector="tabs">
+
+```node
+const flagValue = await posthog.getFeatureFlag(
+    'mixed-rollout-flag',
+    'user_123',
+    {
+        personProperties: {
+            email: 'jane@acme.com',
+            role: 'admin'
+        },
+        groups: {
+            company: 'company_abc'
+        },
+        groupProperties: {
+            company: {
+                name: 'Acme Inc',
+                plan: 'enterprise',
+                industry: 'tech'
+            }
+        }
+    }
+)
+```
+
+```python
+flag_value = posthog.get_feature_flag(
+    'mixed-rollout-flag',
+    'user_123',
+    person_properties={
+        'email': 'jane@acme.com',
+        'role': 'admin'
+    },
+    groups={
+        'company': 'company_abc'
+    },
+    group_properties={
+        'company': {
+            'name': 'Acme Inc',
+            'plan': 'enterprise',
+            'industry': 'tech'
+        }
+    }
+)
+```
+
+</MultiLanguage>
+
+If you omit `groups` or `groupProperties`, any group-targeted condition is skipped during evaluation.
+
+## Practical examples
+
+Each example below uses a boolean flag. Mixed targeting also works with [multivariate flags](/docs/feature-flags/creating-feature-flags#step-3-choose-a-feature-flag-type-required) – the same evaluation rules apply, but the matched condition returns the assigned variant key instead of `true`.
+
+Remember that user-targeted and group-targeted conditions have independent rollout distributions, so a 50% group rollout and a 25% user rollout don't interact with each other.
+
+### Roll out to tech companies, plus 25% of all other users
+
+You want all organizations in the tech industry to get a feature, with a gradual rollout for everyone else.
+
+| Condition | Match by | Filter | Rollout |
+|-----------|----------|--------|---------|
+| 1 | Group: company | `industry` equals `tech` | 100% |
+| 2 | User | (none) | 25% |
+
+The group condition is checked first. If your company has `industry` set to `tech`, the flag is enabled. If the company doesn't match the filter, PostHog falls through to the user condition and includes 25% of all users. The same behavior applies if the SDK call didn't include a company group at all – the group condition is skipped and the user condition is evaluated instead.
+
+### Enable for a specific organization, plus 10% of all users
+
+You want to guarantee access for one specific organization while running a broader rollout.
+
+| Condition | Match by | Filter | Rollout |
+|-----------|----------|--------|---------|
+| 1 | Group: company | `name` equals `Acme Inc` | 100% |
+| 2 | User | (none) | 10% |
+
+Everyone in Acme Inc gets the feature. For all other users, 10% are included based on their distinct ID.
+
+### Target enterprise organizations and individual beta testers
+
+You want to enable a feature for organizations on the enterprise plan, and also for specific users who opted into a beta program.
+
+| Condition | Match by | Filter | Rollout |
+|-----------|----------|--------|---------|
+| 1 | Group: company | `plan` equals `enterprise` | 100% |
+| 2 | User | Cohort: `Beta testers` | 100% |
+
+Organizations on the enterprise plan get the feature for all their users. Individual beta testers also get it, regardless of their organization's plan. Users who aren't in either group don't see it.
+
+## Further reading
+
+- [Creating Feature Flags](/docs/feature-flags/creating-feature-flags)
+- [Target flags with groups, pages, machines, and more](/docs/feature-flags/targeting-groups)
+- [Group analytics](/docs/product-analytics/group-analytics)
+- [Property overrides for flag evaluation](/docs/feature-flags/property-overrides)
+- [Device bucketing](/docs/feature-flags/device-bucketing)

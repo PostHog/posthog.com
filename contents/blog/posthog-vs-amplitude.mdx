@@ -38,7 +38,7 @@ PostHog is the ultimate developer platform because it puts all your customer dat
 -   [Experiments](/experiments) to validate product and website improvements
 -   [Error tracking](/error-tracking) for monitoring exceptions and problems in your code
 -   [Surveys](/surveys) to capture user feedback, track NPS, and book interviews
--   [LLM analytics](/docs/llm-analytics) for gathering data on AI and LLM product usage and performance
+-   [LLM observability](/docs/llm-analytics) for gathering data on AI and LLM product usage and performance
 
 In other words, it's everything you need in one app with a single login and contract. A _genuine_ single source of truth for your product and customer data.
 
@@ -50,7 +50,7 @@ This means you get support from the engineers who _actually build the product_, 
 
 And as your needs grow, PostHog grows with you – advanced capabilities such as [a CDP](/cdp) or [data warehouse](/data-warehouse), are ready to switch on whenever you need them.
 
-> Development teams at [Supabase](/customers/supabase), [Lovable](/customers/lovable), and [ElevenLabs](/customers/elevenlabs), and many more trust PostHog as they scale.
+Development teams at [Supabase](/customers/supabase), [Lovable](/customers/lovable), and [ElevenLabs](/customers/elevenlabs), and many more trust PostHog as they scale.
 
 ### 3. Transparent pricing, generous free tiers
 
@@ -58,13 +58,13 @@ Our [pricing](/pricing) is 100% transparent. There are no hidden fees or surpris
 
 We also default to charging as little as possible while still making a sensible margin, and every product comes with a generous free tier. In fact, more than 90% of companies use PostHog for free!
 
-> In 2024, we [cut prices for session replay](/blog/session-replay-pricing) and [analytics events](/blog/analytics-pricing). In 2025, we've [cut prices for data pipelines](/blog/data-pipeline-pricing) and surveys. If we can cut pass a saving onto our customers, we always will.
+In 2024, we [cut prices for session replay](/blog/session-replay-pricing) and [analytics events](/blog/analytics-pricing). In 2025, we've [cut prices for data pipelines](/blog/data-pipeline-pricing) and surveys. If we can pass a saving onto our customers, we always will.
 
 <WizardCTA />
 
 ## Comparing PostHog and Amplitude
 
-PostHog and Amplitude offer a similar suite of products, but Amplitude lacks things like error tracking and LLM analytics.
+PostHog and Amplitude offer a similar suite of products, but Amplitude lacks things like error tracking and LLM observability.
 
 <p>
 <ProductComparisonTable
@@ -224,7 +224,7 @@ Both platforms capture console logs, but PostHog goes deeper for developer debug
         'session_replay.analysis.performance_monitoring',
         'session_replay.analysis.dom_explorer',
         { label: 'Recording controls' },
-        'session_replay.targeting.conditional_recording',
+        'session_replay.features.conditional_recording',
         'session_replay.privacy.privacy_masking',
         'session_replay.targeting.target_by_sample',
         'session_replay.targeting.target_by_feature_flag',
@@ -354,14 +354,14 @@ We offer a Business Associate Agreement (BAA) for any customer on our platform p
 
 Choosing the right analytics platform depends on your team's priorities and technical needs. Here's a quick guide:
 
-- Want an [all-in-one platform](/products) built for engineers, with [product analytics](/product-analytics), [web analytics](/web-analytics), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [surveys](/surveys), and more, with transparent usage-based [pricing](/pricing)? Go with **PostHog**.
+- Want an [all-in-one platform](/products) built for engineers, with [product analytics](/product-analytics), [web analytics](/web-analytics), [error tracking](/error-tracking), [LLM observability](/llm-analytics), [surveys](/surveys), and more, with transparent usage-based [pricing](/pricing)? Go with **PostHog**.
 
 - Need a platform optimized for marketing analytics, campaign attribution, and growth experimentation with a UI built for non-technical teams? **Amplitude** is probably the right choice.
 
 ## Recommendations by team type
 
 **For engineering-led product teams**
-- **PostHog** – Error tracking, LLM analytics, SQL access, and extensive APIs make it the natural fit for teams where engineers drive product decisions. Open source with a public roadmap means you can see exactly what's coming.
+- **PostHog** – Error tracking, LLM observability, SQL access, and extensive APIs make it the natural fit for teams where engineers drive product decisions. Open source with a public roadmap means you can see exactly what's coming.
 
 **For marketing and growth teams**
 - **Amplitude** – Purpose-built for growth analytics with a UI designed for non-technical users. Tighter integrations with ad platforms and marketing tools, plus dedicated web experimentation features.
@@ -387,7 +387,7 @@ Choosing the right analytics platform depends on your team's priorities and tech
 
 - **Pricing model:** PostHog uses usage-based pricing (pay per event/replay); Amplitude uses MTU-based pricing (pay per tracked user)
 - **Free tier:** PostHog offers 1M events, 5,000 replays, 1,500 survey responses free; Amplitude offers 10K MTUs, 1,000 replays
-- **Developer tools:** PostHog includes error tracking, LLM analytics, SQL access in free tier; Amplitude lacks error tracking and LLM analytics entirely
+- **Developer tools:** PostHog includes error tracking, LLM observability, SQL access in free tier; Amplitude lacks error tracking and LLM observability entirely
 - **Target audience:** PostHog is built for engineering-led teams; Amplitude is designed for product and marketing teams
 - **Open source:** PostHog is open source (MIT license); Amplitude is closed source
 
@@ -408,7 +408,7 @@ Choosing the right analytics platform depends on your team's priorities and tech
 <details>
 <summary>Can PostHog replace Amplitude?</summary>
 
-Yes, for most use cases. **PostHog** offers all the core analytics features Amplitude provides – funnels, retention, cohorts, user paths, feature flags, A/B testing, session replay, and surveys – plus additional capabilities like error tracking and LLM analytics. 
+Yes, for most use cases. **PostHog** offers all the core analytics features Amplitude provides – funnels, retention, cohorts, user paths, feature flags, A/B testing, session replay, and surveys – plus additional capabilities like error tracking and LLM observability. 
 
 The main exception is warehouse-native analytics: Amplitude can run queries directly on your data warehouse (Snowflake, BigQuery), while PostHog offers an integrated data warehouse approach. If you use PostHog as your warehouse, data stays in PostHog and is accessible across many PostHog tools. If you use an external warehouse, you can sync tables and fields from Snowflake/BigQuery into PostHog via our warehouse sources; queries then run on PostHog compute.
 
@@ -425,7 +425,7 @@ The main exception is warehouse-native analytics: Amplitude can run queries dire
 <details>
 <summary>Is PostHog cheaper than Amplitude?</summary>
 
-It depends on your usage pattern. PostHog uses usage-based pricing where you pay per event, replay, or survey response, with generous free tiers (1M events, 5,000 replays, 1,500 survey responses monthly). Amplitude charges per Monthly Tracked User (MTU) with 50K MTUs free. PostHog's pricing is fully transparent and published publicly; Amplitude's Growth and Enterprise pricing requires contacting sales.
+It depends on your usage pattern. PostHog uses usage-based pricing where you pay per event, replay, or survey response, with generous free tiers (1M events, 5,000 replays, 1,500 survey responses monthly). Amplitude charges per Monthly Tracked User (MTU) with 10K MTUs free. PostHog's pricing is fully transparent and published publicly; Amplitude's Growth and Enterprise pricing requires contacting sales.
 
 **When usage-based pricing (PostHog) works best:**
 - You have power users who generate lots of events
@@ -447,9 +447,9 @@ No. Amplitude does not offer error tracking. If you need error tracking alongsid
 </details>
 
 <details>
-<summary>Does Amplitude have LLM analytics?</summary>
+<summary>Does Amplitude have LLM observability?</summary>
 
-No. Amplitude does not offer LLM observability or analytics. PostHog includes [LLM analytics](/docs/llm-analytics) for tracking AI product usage, monitoring model performance, and analyzing costs—all connected to your existing user data.
+No. Amplitude does not offer LLM observability or analytics. PostHog includes [LLM observability](/docs/llm-analytics) for tracking AI product usage, monitoring model performance, and analyzing costs—all connected to your existing user data.
 
 </details>
 
@@ -463,7 +463,7 @@ No. Amplitude does not offer LLM observability or analytics. PostHog includes [L
 <details>
 <summary>Which is the best tool for product engineers and developers?</summary>
 
-**PostHog**. Error tracking, LLM analytics, SQL access, open source codebase, transparent roadmap, and direct support from engineers make PostHog the best platform for engineering-led teams and technical founders.
+**PostHog**. Error tracking, LLM observability, SQL access, open source codebase, transparent roadmap, and direct support from engineers make PostHog the best platform for engineering-led teams and technical founders.
 
 </details>
 

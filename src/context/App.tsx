@@ -344,7 +344,7 @@ const appSettings: AppSettings = {
                 height: 500,
             },
             max: {
-                width: 900,
+                width: 960,
                 height: 1000,
             },
             fixed: false,
@@ -360,15 +360,46 @@ const appSettings: AppSettings = {
                 }
 
                 const { x, y } = getDesktopCenterPosition(size)
-                const keyboardGardenImageWidth = 700
-                const keyboardGardenImageLeft = window.innerWidth - keyboardGardenImageWidth
-                const windowRight = x + size.width
-                if (windowRight > keyboardGardenImageLeft) {
-                    const newX = x - (windowRight - keyboardGardenImageLeft)
+                const iconColumnRight = 145
+                const keyboardGardenImageLeft = window.innerWidth - 700
+                if (x + size.width > keyboardGardenImageLeft) {
+                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
+                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
+                    return { x: newX, y }
+                }
+                return { x, y }
+            },
+        },
+    },
+    '/products': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 960,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
+                if (typeof window === 'undefined') {
                     return {
-                        x: newX < 115 ? x : newX,
-                        y,
+                        x: 0,
+                        y: 0,
                     }
+                }
+
+                const { x, y } = getDesktopCenterPosition(size)
+                const iconColumnRight = 145
+                const keyboardGardenImageLeft = window.innerWidth - 700
+                if (x + size.width > keyboardGardenImageLeft) {
+                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
+                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
+                    return { x: newX, y }
                 }
                 return { x, y }
             },
@@ -382,6 +413,22 @@ const appSettings: AppSettings = {
             },
             max: {
                 width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/tooling': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1000,
                 height: 1000,
             },
             fixed: false,
@@ -433,15 +480,12 @@ const appSettings: AppSettings = {
                 }
 
                 const { x, y } = getDesktopCenterPosition(size)
-                const keyboardGardenImageWidth = 700
-                const keyboardGardenImageLeft = window.innerWidth - keyboardGardenImageWidth
-                const windowRight = x + size.width
-                if (windowRight > keyboardGardenImageLeft) {
-                    const newX = x - (windowRight - keyboardGardenImageLeft)
-                    return {
-                        x: newX < 115 ? x : newX,
-                        y,
-                    }
+                const iconColumnRight = 145
+                const keyboardGardenImageLeft = window.innerWidth - 700
+                if (x + size.width > keyboardGardenImageLeft) {
+                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
+                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
+                    return { x: newX, y }
                 }
                 return { x, y }
             },
@@ -470,15 +514,12 @@ const appSettings: AppSettings = {
                 }
 
                 const { x, y } = getDesktopCenterPosition(size)
-                const keyboardGardenImageWidth = 700
-                const keyboardGardenImageLeft = window.innerWidth - keyboardGardenImageWidth
-                const windowRight = x + size.width
-                if (windowRight > keyboardGardenImageLeft) {
-                    const newX = x - (windowRight - keyboardGardenImageLeft)
-                    return {
-                        x: newX < 0 ? x : newX,
-                        y,
-                    }
+                const iconColumnRight = 145
+                const keyboardGardenImageLeft = window.innerWidth - 700
+                if (x + size.width > keyboardGardenImageLeft) {
+                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
+                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
+                    return { x: newX, y }
                 }
                 return { x, y }
             },
@@ -884,26 +925,6 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    'action-figure': {
-        size: {
-            min: {
-                width: 960,
-                height: 682,
-            },
-            max: {
-                width: 960,
-                height: 682,
-            },
-            fixed: false,
-            autoHeight: true,
-        },
-        position: {
-            center: true,
-        },
-        modal: {
-            type: 'standard',
-        },
-    },
     'ask-max': {
         size: {
             min: {
@@ -1193,6 +1214,25 @@ const appSettings: AppSettings = {
             type: 'standard',
         },
     },
+    '/community/reputation': {
+        size: {
+            min: {
+                width: 500,
+                height: 1000,
+            },
+            max: {
+                width: 500,
+                height: 1000,
+            },
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
     '/fm': {
         size: {
             min: {
@@ -1274,18 +1314,12 @@ export interface SiteSettings {
         | '2001-bliss'
         | 'parade'
         | 'coding-at-night'
-        | 'action-figure'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
-
-export const isAprilFirst = () => {
-    const now = new Date()
-    return now.getMonth() === 3 && now.getDate() === 1
-}
 
 const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
     const lastReset = typeof window !== 'undefined' ? localStorage.getItem('lastReset') : null
@@ -1303,12 +1337,12 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         ...(!lastReset ? { experience: 'posthog' } : {}),
     }
 
-    if (isAprilFirst()) {
-        siteSettings.wallpaper = 'action-figure'
-    }
-
     if (isMobile || compact) {
         siteSettings.experience = 'boring'
+    }
+
+    if (siteSettings.wallpaper === 'action-figure') {
+        siteSettings.wallpaper = 'keyboard-garden'
     }
 
     return siteSettings

@@ -181,7 +181,7 @@ For SAML to work your IdP and PostHog (SP) need to exchange information. To do t
 
 2. If you are on self-hosted, you will need to be running your PostHog instance over TLS.
 
-3. Register a new SAML 2.0 application with your IdP. If you need to pass PostHog's information to your provider first, set the following values below (alternatively if your IdP supports it, you can obtain our XML metadata from `<yourdomain>/api/saml/metadata/`)
+3. Register a new SAML 2.0 application with your IdP. If you need to pass PostHog's information to your provider first, set the following values below (alternatively if your IdP supports it, you can obtain our XML metadata from `<yourdomain>/api/saml/metadata/` or `https://us.posthog.com/api/saml/metadata/` for PostHog Cloud US or `https://eu.posthog.com/api/saml/metadata/` for PostHog Cloud EU)
    - **Single Sign On URL** (also called ACS Consumer URL): `<yourdomain>/complete/saml/` or `https://us.posthog.com/complete/saml/` for PostHog Cloud US or `https://eu.posthog.com/complete/saml/` for PostHog Cloud EU.
    - **Audience or Entity ID**: _Your Site URL_ value (verbatim), on PostHog Cloud this is `https://us.posthog.com` or `https://eu.posthog.com`
    - **RelayState**: On PostHog cloud, get your RelayState value from the SAML configuration modal in your PostHog Organization settings. For self hosted, _empty or default_ (will be set on every request).
@@ -315,6 +315,10 @@ Use this option if you want to add additional configurations to your app that ar
    - **X.509 Certificate** needs to be set as SAML X.509 certificate.
 8. You're good to go! Click **Login with SSO** in the login page.
 
+## Multiple domains
+
+If your organization has multiple verified authentication domains, create a separate Identity Provider app for each domain with both SAML and SCIM configured. PostHog looks up SAML configuration based on the user's email domain, so assign users to the IdP app that matches their email domain.
+
 ## SCIM
 
 <FeatureAvailability availability={_frontmatter.availability.features.scim} />
@@ -327,6 +331,7 @@ SCIM enables you to automatically sync users and their roles from your identity 
 - Removing a user from the app deactivates their PostHog account.
 - Users with matching emails in PostHog are updated to match the IdP details and roles.
 - Roles are matched by name (case-sensitive).
+- SCIM configuration changes (enabling, disabling, token rotation) are recorded in the [activity log](/docs/settings/activity-logs).
 
 ### Prerequisites
 

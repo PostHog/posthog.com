@@ -1,43 +1,54 @@
 ---
-title: How we do video at PostHog
+title: Overview
 sidebar: Handbook
 showTitle: true
 ---
 
-## What we're doing right now
+The YouTube team's mission is to:
 
-- **The Changelog:** Our goal is to produce a great changelog update every two weeks with a theme that rotates every three months. This is produced by <TeamMember name="Jordo Dibb" photo /> based on recent changelog entries. We also have plans to turn this into a quarterly wrap-up.
+- Increase awareness of PostHog, especially among people in our ideal customer profile, through content that is genuinely entertaining
+- Help developers and PostHog users be more successful through, through content that is genuinely informative
 
-- **Launch videos:** We've made some already, but we're still developing how we do these. The goal is to have a creative format that's repeatable and can be shot at (reasonably) short notice. We're avoiding doing custom creatives for each launch for now, though this is something we'd like to explore at a later date. Our first was [Introducing Max AI](https://www.youtube.com/watch?v=p7Iculwh7q8).
+Our model is that of content creators, not a marketing department, as it is for the rest of content. This means that we start from a place of producing great video first that stands alone, irrespective of its connection to PostHog and our products. We have found over the years that if we get this right, the marketing benefits naturally follow, but if we start from a marketing-first perspective, people are never as interested. 
 
-- **Brand-centric hero videos:** We have a unique culture and brand, and we want to share that. A hackathon documentary shot at our Tulum offsite is currently in post-production, and we're developing some repeatable formats that showcase our culture. Our very first takes on this are the [pop quiz video](https://www.youtube.com/watch?v=QeU5MmpqBg0), and [Why we made an open-source developer toy](https://www.youtube.com/watch?v=lqeD2vvAA4w&t).
+As a result, our focus is on awareness, not converting people to sign up or revenue. Other parts of our marketing and product are a much better fit for that. 
 
-- **Core brand assets:** There are some core things we need right now, like punchy and up-to-date demo videos for the platform and individual products. We're starting with demo videos, and we'll expand from there.
+### Who is our audience?
 
-## Things we want to do
+It should be the same as [who we are building for](/handbook/who-we-are-building-for), but specifically:
 
-- **Pre-roll video ads:** We haven't done anything like this yet, and we have a big old paid ads budget to spend, so...
+- **Product engineers:** Software engineers who want to improve their product skills, understand users, and build successful new products.
+- **Founders:** Technical and non-technical founders seeking advice on how to run a successful startup.
 
-- **Way more educational content:** We've dipped into this a bit, but this will become a priority once we've scaled video further and have the resources to do these consistently to a high standard.
+### Who is our competition?
 
-- **Build a great YouTube channel:** This is a long term aspiration.
+Our competition is _not_ our competitors' video content (the bar is too low), it is the other stuff that our audience is generally watching and enjoying. Think popular YouTube creators, podcasts, even viral content on TikTok and Instagram. 
+
+### Entertaining vs. informative
+
+Videos exist on a spectrum from 100% entertaining to 100% informative. Some are in the middle and do a bit of both. Generally, when we are making a video, we should try to aggressively pursue one path only, as doing both is _extremely difficult_ - the most likely outcome is that we fail at both and end up with something that is ok. 
+
+## What does success look like in 2026?
+
+- We have a successful YouTube channel. Success means momentum. Momentum means a predictable publishing schedule of videos that fit our audience and brand, thousands of views per video, and a strong understanding of what works.
+- Video that extends the reach of the brand. We have a consistent and well-oiled system for producing video that extends the reach of PostHog products, features, and the brand.
+- We are a benchmark. People love what we do. They want to copy what we do. We are proud of our work. People on the internet cite our video as an example how to do video right.
+
+## What we're working on
+
+Going from most informative to most entertaining:
+
+- **Core brand assets:** Demo videos and short feature trailers that showcase cool things you can do in PostHog.
+- **Launch videos:** The goal is to have a creative format that's repeatable and can be shot at (reasonably) short notice.
+  - These can also easily be repurposed as ads
+- **Startup stories:** Regular YouTube output focused on telling the stories of cool companies that our audience is interested in. 
+- **Brand-centric hero videos:** We have a unique culture and brand, and we want to share that through weird content that no one else would invest in because it's too hard - who else would do an [action figures](https://www.youtube.com/watch?v=xxBqKIBBxQw) video for April Fools'?
+  - This is where we have the greatest freedom to [#do-more-weird](https://posthog.com/handbook/company/do-more-weird) - we just need to be wary of the pitfalls of corporate try hard
 
 ## How to work with the video team
 
 - Know what type of video you want to make. Try to fit it into one of the above categories (and remember, we're up for doing a "one-off" film that is totally different to what we've done before). 
   - Got a random idea? Share in the <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C01FHN8DNN6">content and video ideas channel</PrivateLink>. 
   - Got a specific request? Use the <PrivateLink url="https://github.com/PostHog/company-internal/issues/new?template=video-request-form.yaml">video request form</PrivateLink> and be thorough.
-
-- Suggest when it would make sense to shoot it. London is our main base, but we're flexible to travel and can potentially guide you to capture footage as part of a remote shoot. The further out you can suggest the better because there is a lot more logistical planning involved in shooting a video than writing code. We can feedback on how realistic your timelines are.
-
 - Know your product, even if it's early. What does it do? What are the important features? What are some real world use cases? What's coming next? Why should someone pick it over a competitor? What's interesting about it? Many videos will rely on these details.
-
-- Be ready to be on camera or have a plan for a replacement. None of us are professional actors (well, maybe some...) but it is better for us to create something real than something generic, even if it isn't perfect. We'll coach and support you through it.
-
-## What does success look like?
-
-1. We make a variety of high quality videos. We trust our taste for this. Brand and content are cornerstones of PostHog's marketing and video should contribute to this.
-
-2. Videos support our marketing goals, like new product launches and helping founders and developers succeed.
-
-3. Videos get a lot of views, engagement, and drive signup growth (either directly or through word of mouth).
+- Accept that the team may say no to your cool idea. Like all small teams, Team YouTube have the final say in what is worked on. 

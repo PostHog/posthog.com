@@ -1,6 +1,24 @@
 ---
 title: Manual capture LLM analytics installation
 platformIconName: IconCode
+showStepsToc: true
+tableOfContents: [
+    {
+        url: 'capture-llm-events-manually',
+        value: 'Capture LLM events manually',
+        depth: 1,
+    },
+    {
+        url: 'event-properties',
+        value: 'Event properties',
+        depth: 1,
+    },
+    {
+        url: 'verify-traces-and-generations',
+        value: 'Verify traces and generations',
+        depth: 1,
+    },
+]
 ---
 
 <!--
@@ -11,11 +29,12 @@ See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard
 
 import { ManualInstallation } from 'onboarding/llm-analytics/manual.tsx'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
+import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
 import GenerationEvent from '../_snippets/generation-event.mdx'
 import TraceEvent from '../_snippets/trace-event.mdx'
 import SpanEvent from '../_snippets/span-event.mdx'
 import EmbeddingEvent from '../_snippets/embedding-event.mdx'
 
 <OnboardingContentWrapper snippets={{ GenerationEvent, TraceEvent, SpanEvent, EmbeddingEvent }}>
-    <ManualInstallation />
+    <ManualInstallation modifySteps={addNextStepsStep} />
 </OnboardingContentWrapper>

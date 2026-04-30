@@ -172,7 +172,7 @@ With PostHog set up, let's create two remote config flags to control our app's c
 1. Go to the [feature flags tab](https://us.posthog.com/feature_flags) in PostHog and click **New feature flag**
 2. Enter `company-logo-url` as the key
 3. Under **Served value**, select **Remote config (single payload)**
-4. Set the payload to a string of an image. We'll use PostHog's logo at `"/brand/posthog-logo@2x.png"`
+4. Set the payload to a JSON object with an image URL: `{"url": "/brand/posthog-logo@2x.png"}`
 5. Click **Save**
 
 <ProductScreenshot
@@ -182,7 +182,7 @@ With PostHog set up, let's create two remote config flags to control our app's c
     classes="rounded"
 />
 
-After this, repeat steps 1-5 to create another flag with key `welcome-message` and payload of `"Welcome to our awesome app!"`
+After this, repeat steps 1-5 to create another flag with key `welcome-message` and payload of `{"message": "Welcome to our awesome app!"}`
 
 ## 4. Implement remote config in Flutter
 
@@ -201,15 +201,21 @@ class ConfigProvider extends ChangeNotifier {
 
   Future<void> loadConfig() async {
     try {
-      final logoPayload = await Posthog().getFeatureFlagPayload('company-logo-url');
-      final messagePayload = await Posthog().getFeatureFlagPayload('welcome-message');
+      final logoResult = await Posthog().getFeatureFlagResult('company-logo-url');
+      final messageResult = await Posthog().getFeatureFlagResult('welcome-message');
 
-      if (logoPayload != null) {
-        _logoUrl = logoPayload.toString();
+      if (logoResult?.payload != null) {
+        final logoPayload = logoResult!.payload as Map<String, dynamic>?;
+        if (logoPayload != null && logoPayload['url'] != null) {
+          _logoUrl = logoPayload['url'].toString();
+        }
       }
 
-      if (messagePayload != null) {
-        _welcomeMessage = messagePayload.toString();
+      if (messageResult?.payload != null) {
+        final messagePayload = messageResult!.payload as Map<String, dynamic>?;
+        if (messagePayload != null && messagePayload['message'] != null) {
+          _welcomeMessage = messagePayload['message'].toString();
+        }
       }
 
       notifyListeners();

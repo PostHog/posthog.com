@@ -34,6 +34,12 @@ export const ab_tasty = {
                     custom_targeting: true,
                 },
             },
+            implementation: {
+                multivariate_testing: true,
+            },
+            supported_tests: {
+                multi_armed_bandit: true,
+            },
         },
         product_analytics: {
             available: false,
@@ -53,6 +59,9 @@ export const ab_tasty = {
             available: false,
         },
         surveys: {
+            available: false,
+        },
+        error_tracking: {
             available: false,
         },
     },

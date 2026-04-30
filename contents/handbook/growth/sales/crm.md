@@ -53,9 +53,9 @@ We have a [contact us form](/talk-to-a-human) on posthog.com where we ask users 
 These submissions are processed through the Default app and routed into Salesforce as tasks. Tasks are then automatically assigned to the right team member based on account ownership and territory (see below).
 
 If the submission is clearly a support or billing request, you don’t need to reach out manually:
-- Select the Disqualification reason “Billing Support Request” or “Support Request.”
+- On the task, select the disqualification reason **Billing Support Request** or **Support Request**.
 - This automatically creates a Zendesk ticket for the correct team.
-- No manual outreach is needed, automation handles it.
+- No manual outreach is needed; automation handles it.
 
 ### Zendesk Integration
 
@@ -91,7 +91,7 @@ Each territory runs its own round robin assignment for new, unowned accounts.
 
 ### Stale task reassignment
 
-If a task is assigned to a someone but remains untouched for 10 days, it will be automatically reassigned once via round robin. If it remains untouched after reassignment, it will be automatically disqualified with a "Stale - autoclosed" reason.
+If a task is assigned to a someone but remains untouched for 10 days, it will be automatically reassigned once via round robin. If it remains untouched after reassignment, it will be automatically disqualified with the **Stale – Autoclosed** reason.
 
 ### Converting tasks to opportunities
 
@@ -123,27 +123,43 @@ All of the above criteria should be met before creating an opportunity.  By doin
 
 If you aren't able to confidently say that you have covered the above, you should keep them as a Lead in the Nurturing stage.
 
+### Task disqualification reasons (reference)
+
+When you disqualify a task, choose the picklist reason that best matches the situation. Salesforce groups reasons into categories; full definitions are on the field in Salesforce. This table is a quick map so the team uses the same buckets.
+
+| Category | What it means | Reasons (picklist) |
+| --- | --- | --- |
+| Auto-Dispositioned | System closed the task or sent auto emails without hands-on sales triage. | Below Threshold – Auto; Stale – Autoclosed |
+| Re-route | Send the conversation to another PostHog team. | Support Request; Billing Support Request; Existing Customer Inquiry; Event Request; Partnership Request |
+| Not a Lead | Not a commercial sales opportunity for this path. | Spam; Duplicate Lead; Non-Commercial; Startup Plan / YC; Self-Hosted Requirement; Business Closed; Feedback; BAA / DPA Request |
+| Unreachable | You cannot reach them or they stopped responding; split by whether they are worth revisiting. | No Response – Pass; No Response – Prospect; Invalid Contact Info |
+| Fit | You could assess fit; outcome is ICP, product, technical sponsor, or competitive situation. | Below Sales Assist Threshold – Pass; Below Sales Assist Threshold – Prospect; Not a Good Fit; No Technical Resource; No Product Fit; Using Competitor / Unsolicited RFP |
+| Timing / Economics | Fit may be fine later; budget, timing, or capacity block a deal now. | No Budget; No Current Need; Resource Constraints |
+| Other | None of the above; use sparingly. | Other |
+
+**Splits and follow-ups** (pick **Pass** vs **Prospect** carefully so reporting and nurture stay accurate):
+
+- **No Response – Pass** — No response and no meaningful signal (e.g. low lead score, no usage); terminal for active pipeline.
+- **No Response – Prospect** — They showed qualifying signals but went dark; create a **follow-up task** with a date (revisit in roughly 3–6 months).
+- **Below Sales Assist Threshold – Pass** — TAE judged under ~$20K potential with no signals worth revisiting.
+- **Below Sales Assist Threshold – Prospect** — Same economic band but signals worth another pass (ICP, growth, usage); create a **follow-up task** (e.g. BDR or named list). If nothing happens within ~90 days, revisit whether this split is useful.
+- **Using Competitor / Unsolicited RFP** — Locked in or chose a competitor; set a reminder to check in in about **9 months** (see [new sales playbook](/handbook/growth/sales/new-sales)).
+- **Other** — Requires a free-text comment when selected; if a large share of disqualifications land here, propose a new reason.
+
 ### Manual entry
 
 If you meet a potential customer elsewhere (e.g., events, introductions, referrals):
 - Create the Account and Contact manually.
 - Assign the correct Lead Source from drop down.
 - Create a Lead Task for any action item or sales follow up.
- 
-### Support requests
 
-If you receive a lead for a self serve customer who has used the Sales Contact Form to submit a support request, you should:
+### Support and billing routing
 
--   Set the 'Disqualification reason' to 'Support Request'
--   Update the lead status to 'Unqualified'
+For support or billing questions submitted via the sales channel, disqualify with **Support Request** or **Billing Support Request** as in [Completed contact form](#completed-contact-form) (Zendesk ticket automation). If you still see legacy lead records from older flows, the same reasons apply; ticket creation may use [this Zapier path](https://zapier.com/editor/274433115/published) for some automations.
 
-This will [automatically create a ticket](https://zapier.com/editor/274433115/published) in Zendesk for the Brand team to review and address. You will be CC'd on the ticket and the ticket link will be added to the Lead's 'Next Steps' field in Salesforce.
+### Below Threshold – Auto (Customer.io)
 
-### Below Sales Assist Threshold
-
-If you determine a lead is not a fit for hands on sales engagement, you can mark the task as **Below Sales Assist Threshold - Auto Emails**.
-
-When you do this, it triggers an automated onboarding flow in <PrivateLink url="https://fly.customer.io/workspaces/127208/journeys/campaigns/109/overview">customer.io</PrivateLink>. These emails help guide them through a self-serve onboarding path without requiring manual outreach.
+When you should route someone to self-serve onboarding instead of hands-on sales, mark the task **Below Threshold – Auto**. That triggers the automated onboarding flow in <PrivateLink url="https://fly.customer.io/workspaces/127208/journeys/campaigns/109/overview">customer.io</PrivateLink>, which guides them without manual outreach. Manual TAE judgment under the sales-assist threshold uses **Below Sales Assist Threshold – Pass** or **Below Sales Assist Threshold – Prospect** (see splits above), not this auto reason.
 
 ### Spam
 

@@ -49,7 +49,17 @@ gatsby/
 api/                            # Vercel serverless functions
 ```
 
-Docs also pulled from main PostHog repo into `.cache/gatsby-source-git/`.
+Docs are also pulled from the [PostHog monorepo](https://github.com/PostHog/posthog) (`docs/published/` and `docs/onboarding/`) into `.cache/gatsby-source-git/` at build time via `gatsby-source-git`.
+
+### Where docs content lives
+
+Most product documentation lives in this repo under `contents/docs/`. Some content that is tightly coupled to the monorepo codebase lives in the monorepo's `docs/published/` folder instead and gets pulled in automatically. Today that's mostly handbook/engineering pages (coding conventions, database guides, local dev setup) plus a few product docs like surveys SDK feature support.
+
+**This repo (posthog.com):** blog posts, tutorials, handbook (non-engineering), marketing pages, product landing pages, and the majority of product docs.
+
+**Monorepo (`docs/published/`):** engineering handbook pages and product docs that are tightly coupled to the monorepo codebase. URL mapping: `docs/published/docs/foo/bar.md` becomes `/docs/foo/bar` on the site.
+
+When writing new docs, ask: does this content describe something internal to the monorepo codebase? If yes, it likely belongs in the monorepo's `docs/published/` folder, not here.
 
 ## Apps and pages
 

@@ -16,6 +16,7 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 1. Customers with MRR between $500-1,667, employee count > 50, user count > 7, based in ICP country, and has been paying for at least 3 months
 2. Customers who have high ICP score and subscribe to the Scale plan
 3. Customers with MRR >$1K and >50% forecasted spend increase this month
+4. Unmanaged customers with >$20K ARR who raise a support ticket
 
 **New business sales team**
 1. Completed the book a demo form (organic inbound, paid ads campaign, or outbound)
@@ -28,16 +29,17 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 
 _Ben experiments to find more winners:_
 1. Emailed sales@ 
-2. Requests for Trust Center access that require an NDA
 
 **BDR team**
 
 Campaigns are all [tracked in Lemlist](https://app.lemlist.com/teams/tea_kvdy3nLu9KEA4QPiD/campaigns-next) - these change week-to-week. 
 
 Manual (Lorena):
+
 1. Filled contact sales but then went silent, never talked to an AE
-2. Tried PostHog but did not convert - signed up but went inactive (`'Ignored'` in Vitally), never talked to an AE
+2. Tried PostHog but did not convert - signed up but went inactive, never paid, never talked to an AE (in PostHog Data Warehouse)
 3. Engineers + Engineering Managers who follow us on LinkedIn but are not customers
+4. Event attendees
 
 Not started yet:
 1. Closed lost opportunities (new biz _and_ renewals) 5+ months old where reason was 'unresponsive'
@@ -47,9 +49,8 @@ Not started yet:
 Automated (Abhischek):
 1. [Warmbound](https://app.clay.com/workspaces/268768/workbooks/wb_0t9mfmifwKAqEGkwFC8/tables/t_0ta1652W6yS8tnSyUQF/views/gv_0ta1652BJM69kS4G3P2) - $100-499 MRR at some point in the account's history
 2. [Job switchers](https://app.clay.com/workspaces/268768/workbooks/wb_0t97hmjqzXJdsutTGzw/tables/t_0t9bam77eQE4YsqmPSS/views/gv_0t9bam8gorPiig8kgZT)
-
-Not started yet:
-1. High spenders in Stripe network with low usage that doesn't trigger an TAE/TAM
+3. High spenders in Stripe network with <$500 PostHog MRR that doesn't trigger an TAE/TAM lead
+4. (Coming soon) Requests for Trust Center access that require an NDA
 
 Anyone at PostHog can also manually flag an account as a high potential lead. This includes new or low spend accounts with strong net new potential or existing paying customers with credible expansion potential. To create a lead, go to the customer's Vitally record and add a Segment for `AM referral` (product-led sales) or `AE referral` (new business). 
 

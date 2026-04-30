@@ -1,4 +1,4 @@
-import MCPTools from '../../../../src/components/Docs/MCPTools'
+import MCPTools from "../../../../src/components/Docs/MCPTools";
 
 Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review tool calls before executing them.
 
@@ -40,10 +40,12 @@ When you pin the context, the `switch-organization` and `switch-project` tools a
 - When only `organizationId` is provided: only `switch-organization` is excluded
 
 **Headers:**
+
 - `x-posthog-organization-id` - Pin to a specific organization
 - `x-posthog-project-id` - Pin to a specific project
 
 **Query parameters:**
+
 - `organization_id` - Pin to a specific organization
 - `project_id` - Pin to a specific project
 
@@ -68,9 +70,13 @@ Example for Cursor (add to `.cursor/mcp.json`):
 
 <details>
 
-<summary>Filtering available tools by feature?</summary>
+<summary>Filtering available tools?</summary>
 
-You can limit which tools are available by adding a `features` query parameter to the MCP URL. If no features are specified, all tools are available. When features are specified, only tools matching those features are exposed.
+You can limit which tools are available using two query parameters, individually or together:
+
+### Filter by feature category
+
+The `features` parameter exposes all tools belonging to one or more feature categories:
 
 ```text
 https://mcp.posthog.com/mcp?features=flags,dashboards,insights
@@ -78,39 +84,59 @@ https://mcp.posthog.com/mcp?features=flags,dashboards,insights
 
 Available features:
 
-| Feature | Description |
-|---------|-------------|
-| `workspace` | Organization and project management |
-| `actions` | [Action definitions](/docs/data/actions) |
-| `activity_logs` | Activity log viewing |
-| `alerts` | [Alert management](/docs/product-analytics/alerts) |
-| `annotations` | [Annotation management](/docs/product-analytics/annotations) |
-| `cohorts` | [Cohort management](/docs/data/cohorts) |
-| `dashboards` | [Dashboard creation and management](/docs/product-analytics/dashboards) |
-| `data_schema` | Data schema exploration |
-| `data_warehouse` | [Data warehouse management](/docs/data-warehouse) |
-| `debug` | Debug and diagnostic tools |
-| `docs` | PostHog documentation search |
-| `early_access_features` | [Early access feature management](/docs/feature-flags/early-access-feature-management) |
-| `error_tracking` | [Error monitoring and debugging](/docs/error-tracking) |
-| `events` | Event and property definitions |
-| `experiments` | [A/B testing experiments](/docs/experiments) |
-| `flags` | [Feature flag management](/docs/feature-flags) |
-| `hog_functions` | [CDP function management](/docs/cdp) |
-| `hog_function_templates` | CDP function template browsing |
-| `insights` | [Analytics insights](/docs/product-analytics/insights) |
-| `llm_analytics` | [LLM analytics evaluations](/docs/ai-engineering) |
-| `prompts` | [LLM prompt management](/docs/ai-engineering) |
-| `logs` | [Log querying](/docs/ai-engineering/observability) |
-| `notebooks` | [Notebook management](/docs/notebooks) |
-| `persons` | [Person and group management](/docs/data/persons) |
-| `reverse_proxy` | Reverse proxy record management |
-| `search` | Entity search across the project |
-| `sql` | SQL query execution |
-| `surveys` | [Survey management](/docs/surveys) |
-| `workflows` | [Workflow management](/docs/cdp) |
+| Feature                  | Description                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------- |
+| `workspace`              | Organization and project management                                                    |
+| `actions`                | [Action definitions](/docs/data/actions)                                               |
+| `activity_logs`          | Activity log viewing                                                                   |
+| `alerts`                 | [Alert management](/docs/product-analytics/alerts)                                     |
+| `annotations`            | [Annotation management](/docs/product-analytics/annotations)                           |
+| `cohorts`                | [Cohort management](/docs/data/cohorts)                                                |
+| `conversations`          | [Support ticket management](/docs/support)                                             |
+| `dashboards`             | [Dashboard creation and management](/docs/product-analytics/dashboards)                |
+| `data_schema`            | Data schema exploration                                                                |
+| `data_warehouse`         | [Data warehouse management](/docs/data-warehouse)                                      |
+| `debug`                  | Debug and diagnostic tools                                                             |
+| `docs`                   | PostHog documentation search                                                           |
+| `early_access_features`  | [Early access feature management](/docs/feature-flags/early-access-feature-management) |
+| `error_tracking`         | [Error monitoring and debugging](/docs/error-tracking)                                 |
+| `events`                 | Event and property definitions                                                         |
+| `experiments`            | [A/B testing experiments](/docs/experiments)                                           |
+| `flags`                  | [Feature flag management](/docs/feature-flags)                                         |
+| `hog_functions`          | [CDP function management](/docs/cdp)                                                   |
+| `hog_function_templates` | CDP function template browsing                                                         |
+| `insights`               | [Analytics insights](/docs/product-analytics/insights)                                 |
+| `llm_analytics`          | [LLM analytics evaluations](/docs/ai-engineering)                                      |
+| `prompts`                | [LLM prompt management](/docs/ai-engineering)                                          |
+| `logs`                   | [Log querying](/docs/ai-engineering/observability)                                     |
+| `notebooks`              | [Notebook management](/docs/notebooks)                                                 |
+| `persons`                | [Person and group management](/docs/data/persons)                                      |
+| `reverse_proxy`          | Reverse proxy record management                                                        |
+| `search`                 | Entity search across the project                                                       |
+| `sdk_doctor`             | [SDK health diagnostics](/docs/sdk-doctor)                                             |
+| `sql`                    | SQL query execution                                                                    |
+| `surveys`                | [Survey management](/docs/surveys)                                                     |
+| `workflows`              | [Workflow management](/docs/cdp)                                                       |
 
 > **Note:** Hyphens and underscores are treated as equivalent in feature names (e.g., `error-tracking` and `error_tracking` both work).
+
+### Filter by tool name
+
+The `tools` parameter exposes specific tools by their exact name. Use the [tool list below](#available-tools) to find the names you need:
+
+```text
+https://mcp.posthog.com/mcp?tools=dashboard-get,feature-flag-get-all,execute-sql
+```
+
+### Combining both parameters
+
+When both `features` and `tools` are provided, they act as a union — a tool is exposed if it matches a feature category **or** is listed by name. This lets you select a whole feature group and surgically add individual tools from other categories:
+
+```text
+https://mcp.posthog.com/mcp?features=flags&tools=dashboard-get
+```
+
+If neither parameter is specified, all tools are available.
 
 Example for Cursor (add to `.cursor/mcp.json`):
 
@@ -118,7 +144,7 @@ Example for Cursor (add to `.cursor/mcp.json`):
 {
   "mcpServers": {
     "posthog": {
-      "url": "https://mcp.posthog.com/mcp?features=flags,experiments,insights",
+      "url": "https://mcp.posthog.com/mcp?features=flags&tools=dashboard-get",
       "headers": {
         "Authorization": "Bearer phx_your_api_key_here"
       }
@@ -128,7 +154,6 @@ Example for Cursor (add to `.cursor/mcp.json`):
 ```
 
 </details>
-
 
 ## Available tools
 
@@ -160,6 +185,19 @@ The agent will use the `create-feature-flag` tool with a `multivariate` configur
 
 The agent will use the `query-run` tool to execute a trends query and return daily signup counts.
 
+### Cohort management
+
+**Prompt:** "List all cohorts in my project"
+
+The agent will use the `cohorts-list` tool to return all cohorts, including both static cohorts (manually defined user lists) and dynamic cohorts (automatically updated based on property filters).
+
+**Prompt:** "Create a dynamic cohort called 'power-users' for users who completed the purchase event more than 5 times in the last 30 days"
+
+The agent will use the `cohorts-create` tool to create a dynamic cohort with the specified behavioral filter criteria.
+
+**Prompt:** "Create a static cohort called 'beta-testers' and add specific users to it"
+
+The agent will use the `cohorts-create` tool with `is_static: true` to create an empty static cohort, then use the `cohorts-add-persons-to-static-cohort-partial-update` tool to add person UUIDs to it.
 
 ### Path analysis
 
@@ -222,6 +260,52 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 **Prompt:** "Update the 'onboarding-guide' prompt to include a section about feature flags"
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
+
+### CDP function management
+
+**Prompt:** "Create a Slack destination that sends a message when users sign up"
+
+The agent will use the `cdp-function-templates-list` tool to find the Slack template, then use `cdp-functions-create` to create a destination function with the appropriate inputs and filters for the signup event.
+
+**Prompt:** "List all my destination functions and show which ones are enabled"
+
+The agent will use the `cdp-functions-list` tool with a type filter to return all destinations with their enabled status.
+
+**Prompt:** "Test my webhook destination with a mock purchase event"
+
+The agent will use the `cdp-functions-invocations-create` tool to send a mock event payload to the function and return the execution logs.
+
+### Early access feature management
+
+**Prompt:** "List all early access features in my project"
+
+The agent will use the `early-access-feature-list` tool to retrieve all early access features, returning their names, stages, descriptions, linked feature flags, and creation dates.
+
+**Prompt:** "Create an early access feature called 'Dark Mode' in draft stage"
+
+The agent will use the `early-access-feature-create` tool to create the feature. This auto-creates a linked feature flag with key `dark-mode` and returns the full object with ID, feature flag details, and creation timestamp.
+
+**Prompt:** "Update early access feature `<id>` to beta stage"
+
+The agent will use the `early-access-feature-partial-update` tool to change the stage. Moving to an active stage (alpha, beta, general-availability) adds enrollment conditions to the linked feature flag.
+
+**Prompt:** "Query early access features in active stages via HogQL"
+
+The agent will use `query-run` to execute a HogQL query against `system.early_access_features`, filtering by stage to find features in alpha, beta, or general-availability.
+
+### Support ticket management
+
+**Prompt:** "List all open support tickets"
+
+The agent will use the `conversations-tickets-list` tool with a status filter to return all open tickets, including ticket numbers, priorities, message counts, and timestamps.
+
+**Prompt:** "Get details for support ticket #5"
+
+The agent will use the `conversations-tickets-retrieve` tool to fetch the full ticket details by ticket number, including status, priority, channel info, message history, and session context.
+
+**Prompt:** "Mark ticket #3 as resolved and set ticket #7 to high priority"
+
+The agent will use the `conversations-tickets-update` tool to change the status and priority of the specified tickets.
 
 ## Prompts and resources
 

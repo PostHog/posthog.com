@@ -189,6 +189,8 @@ The incoming TAM should prepare by reviewing the following in Vitally and SFDC b
 - [ ] **Usage metrics** – active users, project count, Feature Flag requests, Session Replay volume, insight/dashboard engagement
 - [ ] **Support history** – recent Zendesk tickets, tags, severity, resolution status
 - [ ] **Conversations & notes** – read all Vitally notes, meeting summaries, and conversation history
+- [ ] **Customer Slack channel** – scan the shared channel for who's actually active on the customer side, what issues have come up, and any open threads worth asking the previous owner about. This is often where the most useful context lives.
+- [ ] **Internal Slack discussions** – search our own Slack (outside the shared channel) for mentions of the customer. Engineering debates, pricing conversations, support escalations, and context from the previous owner often surface things that were never written down in Vitally.
 - [ ] **SFDC opportunity** – deal value, stage, next steps, close date
 - [ ] **Admin emails & user list** – identify who's active, who has admin access, what domains are in play
 - [ ] **The customer's product** – sign up or browse their website. Understand what they do and how they make money
@@ -254,6 +256,45 @@ This is the most valuable part of the handover – relationship context doesn't 
 ### Unassign yourself in Vitally
 
 Once the handover is complete, the outgoing owner should unassign themselves from the account in Vitally. This ensures the new owner is the sole point of contact and avoids confusion about who is responsible for the account.
+
+---
+
+## Receiving an account as a CSM
+
+CSM accounts should generally be in a steady state — they're using the products they need, they're engaged, and there aren't major unresolved issues. When you're taking an account from a TAE or TAM, it's worth looking beyond the surface to make sure that's actually the case. These aren't a rigid checklist. They're things to dig into that can surface problems which are otherwise easy to miss.
+
+### Billing and commercial
+
+- **Open invoices** — verify these have been resolved per the [handover requirements above](#handing-over-customers). You don't want your first interaction with a customer to be chasing payment.
+- **MRR trajectory** — is spend steady, declining, increasing, or swinging around? Declining or volatile MRR is worth digging into before you take over.
+- **Credit purchases** — if they've pre-purchased credits, does the amount actually line up with what they're spending month to month?
+- **Non-standard discounts** — review the contract for anything unusual or undocumented. If discounts exist without clear documentation, get context from the previous owner.
+
+### Product adoption
+
+- **Core product coverage** — see [TAM vs CSM](#tam-vs-csm) for the general criteria. We currently have capacity on the CSM side, so we're okay receiving accounts using only 1 core product if the previous owner has determined there isn't a realistic path to expand.
+- **Deployment health** — if the customer doesn't have basic recommendations in place (e.g. session replay minimum duration, high identify call volume), that's a flag. Check the [customer deployment health check guide](/handbook/cs-and-onboarding/health-checks) and the Metabase dashboard to assess this. The [product onboarding checklist](#product-onboarding) is also a good reference for what "properly set up" looks like.
+- **Unexplained usage changes** — big spikes or drops that aren't documented, or where there's no record of a conversation with the customer about them. These can indicate problems nobody's looked into yet.
+
+### Engagement
+
+- **One-sided relationship** — is there a pattern of outreach from our side with no customer engagement? If it's been a one-sided conversation, understand why before you take over.
+- **User concentration** — is usage concentrated among fewer than 3 users? That's inherently risky. Have there been attempts to engage beyond those users? If so, why haven't they been successful?
+
+### Account documentation
+
+- **Account plan** — one should already exist per the [handover requirements above](#account-plan). Check that it's actually there and current — don't assume.
+
+### Lower priority
+
+Worth being aware of, but less likely to be blockers:
+
+- **Open support tickets** — any unresolved tickets or known frustrations with specific products?
+- **Upcoming features** — anything in the pipeline that's relevant to this customer and worth proactively sharing?
+
+### Pushing back
+
+If you're seeing multiple flags — declining usage, no engagement, concentrated users, missing account plan — push back. An account with several of these signals isn't in steady state and probably needs more work from the previous owner before it's ready for CSM. Talk to [Dana](/community/profiles/52723) if you're unsure whether to accept an account.
 
 ---
 

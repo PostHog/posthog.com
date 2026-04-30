@@ -8,6 +8,7 @@ import type {
     MetaobjectsReferencesEdge,
     MetaobjectsResponseData,
 } from '../src/templates/merch/types'
+import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
 import dayjs from 'dayjs'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
@@ -1001,35 +1002,53 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
-    const fetchReferences = async (page = 1) => {
-        const referenceQuery = qs.stringify(
-            {
-                pagination: {
-                    page,
-                    pageSize: 100,
+    const fetchReferences = async () => {
+        /** Keep the pinned `latest` row + newest N versioned rows per SDK so builds stay fast. */
+        const MAX_VERSIONS_PER_SDK = 10
+
+        const fetchRows = async (filters: Record<string, unknown>, pageSize: number) => {
+            const referenceQuery = qs.stringify(
+                {
+                    filters,
+                    pagination: { page: 1, pageSize },
+                    sort: ['createdAt:desc'],
                 },
-            },
-            {
-                encodeValuesOnly: true,
-            }
-        )
-        const referencesURL = `${process.env.GATSBY_SQUEAK_API_HOST}/api/sdk-references?${referenceQuery}`
-        const { data, meta } = await fetch(referencesURL).then((res) => res.json())
-        for (const reference of data) {
-            const data = reference?.attributes?.data
-            if (!data) continue
-            const versionNode = {
+                { encodeValuesOnly: true }
+            )
+            const url = `${process.env.GATSBY_SQUEAK_API_HOST}/api/sdk-references?${referenceQuery}`
+            const { data } = await fetch(url).then((res) => res.json())
+            return (data ?? []) as Array<{ attributes?: { data?: Record<string, unknown> } }>
+        }
+
+        const createReferenceNode = (refData: Record<string, unknown>) => {
+            createNode({
                 parent: null,
                 children: [],
                 internal: {
                     type: `SdkReferences`,
-                    contentDigest: createContentDigest(data),
+                    contentDigest: createContentDigest(refData),
                 },
-                ...data,
-            }
-            createNode(versionNode)
+                ...refData,
+                // Strapi payload is validated at runtime; `id` lives on `data`.
+            } as unknown as Parameters<typeof createNode>[0])
         }
-        if (meta?.pagination?.pageCount > meta?.pagination?.page) await fetchReferences(page + 1)
+
+        await Promise.all(
+            SUPPORTED_SDK_IDS.flatMap((referenceId) => [
+                fetchRows({ referenceId: { $eq: referenceId }, version: { $containsi: 'latest' } }, 1),
+                fetchRows(
+                    { referenceId: { $eq: referenceId }, version: { $notContainsi: 'latest' } },
+                    MAX_VERSIONS_PER_SDK
+                ),
+            ])
+        ).then((batches) => {
+            for (const batch of batches) {
+                for (const reference of batch) {
+                    const refData = reference?.attributes?.data
+                    if (refData) createReferenceNode(refData)
+                }
+            }
+        })
     }
 
     const fetchEvents = async (page = 1) => {
