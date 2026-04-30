@@ -49,7 +49,7 @@ import PostHog from 'posthog-react-native'
 const posthog = new PostHog('<ph_project_token>', {
   host: '<ph_client_api_host>',
   logs: {
-    serviceName: 'my-app',          // OTLP service.name — shown in the Logs UI
+    serviceName: 'my-app',          // OTLP service.name – shown in the Logs UI
     environment: 'production',      // OTLP deployment.environment
     serviceVersion: '1.2.3',        // OTLP service.version
   },
@@ -78,7 +78,7 @@ posthog.captureLog({
 })
 ```
 
-Records are buffered, batched, persisted to disk, and flushed automatically — every 10 seconds, on AppState change (foreground ↔ background), on buffer fill, or on `posthog.shutdown()`. For an immediate drain, call `await posthog.flushLogs()`.
+Records are buffered, batched, persisted to disk, and flushed automatically – every 10 seconds, on AppState change (foreground ↔ background), on buffer fill, or on `posthog.shutdown()`. For an immediate drain, call `await posthog.flushLogs()`.
 
 Each record is automatically tagged with the user's distinct ID, session ID, current screen, app foreground/background state, and active feature flags at the moment of capture.
 

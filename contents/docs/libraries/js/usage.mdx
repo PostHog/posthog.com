@@ -386,14 +386,14 @@ The browser SDK ships first-class support for [PostHog Logs](/docs/logs): struct
 
 ### Manually flushing logs before unload
 
-Records flush automatically every `flushIntervalMs`, but for an immediate drain — e.g. in a `pagehide` handler before the tab is closed — call `posthog.flushLogs()`:
+Records flush automatically every `flushIntervalMs`, but for an immediate drain – e.g. in a `pagehide` handler before the tab is closed – call `posthog.flushLogs()`:
 
 ```js
 posthog.flushLogs() // uses the configured transport
 posthog.flushLogs('sendBeacon') // forces sendBeacon, useful for unload handlers
 ```
 
-`sendBeacon` is the right choice in `pagehide` / `beforeunload` because the browser guarantees delivery even after the page is gone, where a regular `fetch` may be cancelled.
+`sendBeacon` is the right choice in `pagehide` / `beforeunload` because the browser guarantees delivery even after the page is gone, where a regular `fetch` may be canceled.
 
 ## Amending or sampling events
 

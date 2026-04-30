@@ -470,7 +470,7 @@ Defaults are tuned for cellular-aware mobile apps (~50 logs/sec ceiling, ~16KB m
 
 ### Manual flush
 
-Records flush automatically on a timer, AppState change, buffer fill, or `posthog.shutdown()`. For an immediate drain — e.g. before navigating away from a critical screen, or in a custom crash handler:
+Records flush automatically on a timer, AppState change, buffer fill, or `posthog.shutdown()`. For an immediate drain – e.g. before navigating away from a critical screen, or in a custom crash handler:
 
 ```react-native
 await posthog.flushLogs()
@@ -501,7 +501,7 @@ const posthog = new PostHog('<ph_project_token>', {
 })
 ```
 
-You can also pass an array of functions to form a chain (evaluated left-to-right). A `null` return from any link short-circuits and drops the record. A throwing filter is caught and skipped — the chain continues with the previous return value, so a buggy filter degrades to a no-op rather than crashing your app.
+You can also pass an array of functions to form a chain (evaluated left-to-right). A `null` return from any link short-circuits and drops the record. A throwing filter is caught and skipped – the chain continues with the previous return value, so a buggy filter degrades to a no-op rather than crashing your app.
 
 ## Session replay
 
