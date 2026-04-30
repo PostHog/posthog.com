@@ -6,36 +6,18 @@ showStepsToc: true
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
+import InstallReactNative from '../../integrate/_snippets/install-react-native.mdx'
 import LogsNextSteps from './_snippets/logs-next-steps.mdx'
 
 PostHog's React Native SDK has built-in support for capturing structured logs. Unlike other languages where you wire OpenTelemetry directly, the SDK handles the OTLP encoding, batching, persistence, and lifecycle for you. You just call `posthog.captureLog(...)` or `posthog.logger.{trace,debug,info,warn,error,fatal}(...)`.
 
 <Steps>
 
-<Step title="Install or upgrade the React Native SDK" badge="required">
+<Step title="Install posthog-react-native" badge="required">
 
-Install or upgrade `posthog-react-native` to the version that ships logs support:
+If you haven't already, install and initialize `posthog-react-native` using the steps below. For full details, see the [React Native SDK guide](/docs/libraries/react-native).
 
-```bash
-# Expo
-npx expo install posthog-react-native
-
-# React Native CLI
-yarn add posthog-react-native
-# or: npm install posthog-react-native
-```
-
-If you're new to PostHog on React Native, follow the [SDK installation guide](/docs/libraries/react-native#installation) first to set up the basic SDK.
-
-</Step>
-
-<Step title="Get your project token" badge="required">
-
-You'll need your PostHog project token to authenticate log requests. This is the same key you use for capturing events.
-
-> **Important:** Use your **project token** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
-
-You can find your project token in [Project Settings](https://app.posthog.com/settings).
+<InstallReactNative />
 
 </Step>
 
@@ -119,7 +101,49 @@ const posthog = new PostHog('<ph_project_token>', {
 })
 ```
 
-See the [React Native logs reference](/docs/libraries/react-native#logs) for all configuration options.
+Full configuration reference:
+
+| Field | Default | What it does |
+| --- | --- | --- |
+| `serviceName` | `'unknown_service'` | OTLP `service.name` resource attribute |
+| `serviceVersion` | undefined | OTLP `service.version` resource attribute |
+| `environment` | undefined | OTLP `deployment.environment` resource attribute |
+| `resourceAttributes` | `{}` | Extra OTLP resource attributes |
+| `flushIntervalMs` | `10000` | Periodic flush interval in ms |
+| `maxBufferSize` | `100` | Max records held in memory before eviction |
+| `maxBatchRecordsPerPost` | `50` | Max records per outbound POST (halved on 413) |
+| `rateCap.maxLogs` | `500` | Max records per `windowMs` window |
+| `rateCap.windowMs` | `10000` | Rate-cap window length in ms |
+| `beforeSend` | undefined | Pre-send filter (return `null` to drop) |
+
+Defaults are tuned for cellular-aware mobile apps (~50 logs/sec ceiling, ~16KB max queue file). Raise `rateCap.maxLogs` and `maxBufferSize` for high-volume scenarios.
+
+</Step>
+
+<Step title="Filtering with beforeSend" badge="optional">
+
+The `beforeSend` hook runs synchronously before the rate cap, so dropped records don't consume the per-interval budget. Use it for redaction, sampling, or filtering by level:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  logs: {
+    serviceName: 'my-app',
+    beforeSend: (record) => {
+      // Drop debug logs in production
+      if (record.level === 'debug') return null
+
+      // Redact secrets in the body
+      return {
+        ...record,
+        body: record.body.replace(/api_key=\S+/g, 'api_key=[REDACTED]'),
+      }
+    },
+  },
+})
+```
+
+You can also pass an array of functions to form a chain (evaluated left-to-right). A `null` return from any link short-circuits and drops the record. A throwing filter is caught and skipped – the chain continues with the previous return value, so a buggy filter degrades to a no-op rather than crashing your app.
 
 </Step>
 
