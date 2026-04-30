@@ -382,51 +382,18 @@ posthog.captureException(error, additionalProperties)
 
 ## Logs
 
-The browser SDK can send structured log records to [PostHog Logs](/docs/logs). Two paths:
+The browser SDK ships first-class support for [PostHog Logs](/docs/logs): structured records via `posthog.logger.*` / `posthog.captureLog`, plus optional `console.*` autocapture. For setup and usage, see the [JavaScript web Logs installation guide](/docs/logs/installation/javascript). Config reference: [Configuring logs](/docs/libraries/js/config#configuring-logs).
 
-- **Browser console autocapture** — toggle on `console.log` / `console.warn` / `console.error` interception via the `logs.captureConsoleLogs` config option. See [Configuring logs](/docs/libraries/js/config#configuring-logs).
-- **Manual capture API** — call `posthog.captureLog(...)` or `posthog.logger.{trace,debug,info,warn,error,fatal}(...)` directly. Always available regardless of the autocapture toggle.
+### Manually flushing logs before unload
 
-### Capturing logs manually
-
-Use `posthog.logger` for the per-level convenience API:
-
-```js
-posthog.logger.trace(body, attributes?)
-posthog.logger.debug(body, attributes?)
-posthog.logger.info(body, attributes?)
-posthog.logger.warn(body, attributes?)
-posthog.logger.error(body, attributes?)
-posthog.logger.fatal(body, attributes?)
-```
-
-Or `posthog.captureLog` for full control over level, attributes, and W3C trace context:
-
-```js
-posthog.captureLog({
-  body: 'checkout completed',
-  level: 'info',
-  attributes: { order_id: 'ord_789', amount_cents: 4999 },
-  trace_id: '4bf92f3577b34da6a3ce929d0e0e4736',
-  span_id: '00f067aa0ba902b7',
-  trace_flags: 1,
-})
-```
-
-Each record is automatically tagged at capture time with the user's distinct ID, session ID, current URL, and active feature flags. Records are buffered, batched into OTLP payloads, and flushed every `flushIntervalMs` (default 3 seconds) — or sooner when the buffer fills.
-
-### Manual flush
-
-For an immediate drain — e.g. in a `pagehide` handler before the tab is closed:
+Records flush automatically every `flushIntervalMs`, but for an immediate drain — e.g. in a `pagehide` handler before the tab is closed — call `posthog.flushLogs()`:
 
 ```js
 posthog.flushLogs() // uses the configured transport
 posthog.flushLogs('sendBeacon') // forces sendBeacon, useful for unload handlers
 ```
 
-### Filtering and rate-limiting
-
-Configuration knobs (`flushIntervalMs`, `maxBufferSize`, `maxLogsPerInterval`, `serviceName`, etc.) are documented in [Configuring logs](/docs/libraries/js/config#configuring-logs).
+`sendBeacon` is the right choice in `pagehide` / `beforeunload` because the browser guarantees delivery even after the page is gone, where a regular `fetch` may be cancelled.
 
 ## Amending or sampling events
 
