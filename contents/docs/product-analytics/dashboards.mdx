@@ -62,9 +62,18 @@ You can organize dashboards into folders for easier navigation. There are two wa
 
 > **Note:** Moving a dashboard to a folder requires editor access.
 
-## Copying templates between projects
+## Copying dashboards and templates between projects
 
-You can copy project-scoped dashboard templates from one project to another within the same organization. This is useful when you want to reuse a template you've built without recreating it from scratch.
+You can copy dashboards and project-scoped dashboard templates from one project to another within the same organization. This is useful when you want to reuse work you've built without recreating it from scratch.
+
+To copy a dashboard:
+
+1. Go to [**Dashboards**](https://app.posthog.com/dashboard) and open the dashboard you want to copy.
+1. Open the actions sidebar.
+1. Click **Copy to another project**.
+1. Select the destination project.
+1. Configure the dependencies for the copy.
+1. Click **Copy**.
 
 To copy a template:
 
@@ -77,7 +86,7 @@ A few things to keep in mind:
 - Only project-scoped templates can be copied – global templates can't be copied this way.
 - The source and destination must be different projects in the same organization.
 - The copy is independent – changes to the original don't sync to the copy, and vice versa.
-- If a template with the same name already exists in the destination project, the copy is automatically renamed with a suffix like "(copy)", "(copy 2)", etc.
+- If a dashboard or template with the same name already exists in the destination project, the copy is automatically renamed with a suffix like "(copy)", "(copy 2)", etc.
 
 ## Dates and filters
 
