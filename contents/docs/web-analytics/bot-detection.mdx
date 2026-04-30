@@ -11,7 +11,16 @@ availability:
 PostHog can detect and classify bot traffic hitting your website or API.
 This works by matching the user agent string of each event against a curated list of over 100 known bot patterns, including AI crawlers, search engines, SEO tools, and monitoring services.
 
-> **Note:** Bot detection is currently in beta and available behind the **Web analytics bot analysis** feature flag.
+> **Note:** Bot detection is currently in alpha and available behind the **Web analytics bot analysis** feature flag. The API, virtual properties, and HogQL function names may change before general availability.
+
+## Where you can use bot detection
+
+Bot detection is exposed in four places across PostHog:
+
+- **[Product Analytics](/docs/product-analytics)** — use the `$virt_*` virtual properties as filters and breakdowns in trends, funnels, retention, paths, and any other insight type.
+- **[SQL editor](/docs/sql)** — call the `__preview_*` HogQL functions on any string expression (events, logs, or warehouse tables).
+- **[Web analytics → Bot analytics tab](#bot-analytics-tab)** — a purpose-built dashboard with crawler tables, per-bot trends, and most-crawled paths.
+- **[Web analytics → Real-time view](#real-time-view)** — a live feed of incoming bot requests as they hit your site.
 
 ## How it works
 
@@ -64,7 +73,7 @@ These are computed at query time and can be used in filters, breakdowns, and Hog
 
 ### Using virtual properties in filters
 
-You can use these properties to filter any web analytics query.
+You can use these properties to filter any Product Analytics or web analytics query.
 For example, to exclude all bot traffic from a trends query, add a filter where `$virt_is_bot` equals `false`.
 
 To filter for a specific category of bots, use `$virt_traffic_category` with the category value (e.g., `ai_crawler`).
@@ -119,23 +128,75 @@ It shows:
 - **Most crawled paths** — which pages bots visit most
 - **Bot detail page** — click any crawler name to see its individual trends and top paths
 
-## Server-side bot detection with `$http_log`
+### Real-time view
 
-Most bots don't execute JavaScript, which means the PostHog JavaScript SDK never fires a `$pageview` event for them.
-To capture this traffic, you need server-side log ingestion using `$http_log` events.
+The **Real-time** tab inside Bot analytics streams incoming bot requests as they arrive, which is useful for:
 
-`$http_log` events are HTTP access log entries sent to PostHog from your web server, CDN, or edge network.
-They include the raw user agent string, which PostHog's bot detection can classify.
+- Spotting sudden spikes in crawler activity
+- Verifying a new `$http_log` ingestion pipeline is flowing
+- Sanity-checking user agent classification on live traffic
 
-### How to send `$http_log` events
+Each row shows the timestamp, bot name, operator, traffic type, category, and requested path. Use the filter controls to narrow by traffic type or category.
 
-There are two main approaches:
+## Capturing server-side traffic with `$http_log`
 
-1. **Vercel log drain** — use the [Vercel logs CDP integration](https://us.posthog.com/pipeline/new/destination) to forward access logs from Vercel to PostHog automatically.
+Most bots don't execute JavaScript, so the PostHog JavaScript SDK never fires a `$pageview` for them.
+To classify this traffic you need to forward HTTP access logs to PostHog as `$http_log` events.
 
-2. **Custom CDN logger** — send HTTP access logs from your CDN or reverse proxy using the PostHog capture API. Each log entry should be sent as a `$http_log` event with the `$user_agent` or `$raw_user_agent` property set.
+`$http_log` events are HTTP access log entries sent from your web server, CDN, or edge network.
+They include the raw user agent string, which bot detection classifies the same way it does for `$pageview` and `$screen` events.
 
-Example payload for the [capture API](/docs/api/capture):
+The two recommended forwarding paths are **Vercel** and **Cloudflare**. Both put PostHog in the request path early enough to see bots that never load your client.
+
+### Forwarding Vercel logs
+
+Use Vercel's [log drain](https://vercel.com/docs/observability/log-drains-overview) feature to stream access logs to PostHog.
+
+1. In PostHog, go to [Data pipeline → Sources](https://us.posthog.com/pipeline/new/source) and add the **Vercel logs** integration.
+2. Follow the prompts to connect your Vercel project — PostHog generates a log drain endpoint and registers it with Vercel automatically.
+3. Each log entry is captured as a `$http_log` event with the user agent populated, so bot analytics picks them up immediately.
+
+### Forwarding Cloudflare logs
+
+For sites behind Cloudflare you have two options depending on your plan and tooling:
+
+- **Cloudflare Workers** — intercept requests in a Worker and call the PostHog [capture API](/docs/api/capture) with a `$http_log` event. This works on every Cloudflare plan and gives you full control over what's logged. See the [Cloudflare Workers library docs](/docs/libraries/cloudflare-workers) for setting up a PostHog client.
+- **Cloudflare Logpush** (Enterprise) — push HTTP request logs to an HTTP endpoint that translates them into `$http_log` events and forwards them to the PostHog capture API.
+
+Example Worker that forwards every request as a `$http_log`:
+
+```js
+import { PostHog } from 'posthog-node'
+
+export default {
+  async fetch(request, env, ctx) {
+    const posthog = new PostHog(env.POSTHOG_TOKEN, {
+      host: env.POSTHOG_HOST,
+      flushAt: 1,
+      flushInterval: 0,
+    })
+
+    ctx.waitUntil(
+      posthog.captureImmediate({
+        distinctId: 'cf-worker',
+        event: '$http_log',
+        properties: {
+          $raw_user_agent: request.headers.get('user-agent') ?? '',
+          $current_url: request.url,
+          $pathname: new URL(request.url).pathname,
+          method: request.method,
+        },
+      }).then(() => posthog.shutdown())
+    )
+
+    return fetch(request)
+  },
+}
+```
+
+### Sending `$http_log` events directly
+
+If you don't use Vercel or Cloudflare, send `$http_log` events to the [capture API](/docs/api/capture) from any web server or reverse proxy. Each log entry should set `$raw_user_agent` (preferred for server-side) or `$user_agent`:
 
 ```json
 {
@@ -152,7 +213,7 @@ Example payload for the [capture API](/docs/api/capture):
 }
 ```
 
-Once `$http_log` events are flowing, bot analytics automatically includes them alongside `$pageview` and `$screen` events.
+Once `$http_log` events are flowing, bot analytics includes them alongside `$pageview` and `$screen` events automatically.
 
 ## Limitations and data gaps
 
