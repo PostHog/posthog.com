@@ -67,7 +67,7 @@ Requirements:
 PostHog fetches and caches this document automatically.
 Subsequent requests reuse the cached version and refresh it in the background based on your `Cache-Control: max-age` header (clamped between 5 minutes and 24 hours, default 1 hour).
 
-Once your metadata document is live, you can start calling the API immediately. CIMD auto-registration handles partner setup automatically (sets `provisioning_active`, `provisioning_can_create_accounts`, and `provisioning_can_provision_resources` to `true`). Your first request triggers background registration and returns HTTP 202; retry after a few seconds and you're ready.
+Once your metadata document is live, you can start calling the API. The first request auto-registers your app and returns HTTP 202; retry after a few seconds.
 
 ## API reference
 
@@ -117,9 +117,9 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
 | `id` | string | Yes | Your unique request ID (for idempotency) |
 | `email` | string | Yes | User's email address |
 | `name` | string | No | User's full name |
-| `client_id` | string | Required (PKCE) | Your CIMD metadata URL. HMAC partners are identified by the `Stripe-Signature` header instead. |
-| `code_challenge` | string | Required (PKCE) | Base64url-encoded SHA-256 hash of your code verifier (43-128 chars) |
-| `code_challenge_method` | string | Required (PKCE) | Must be `"S256"` |
+| `client_id` | string | Yes | Your CIMD metadata URL |
+| `code_challenge` | string | Yes | Base64url-encoded SHA-256 hash of your code verifier (43-128 chars) |
+| `code_challenge_method` | string | Yes | Must be `"S256"` |
 | `scopes` | list | No | OAuth scopes to request for the access token. See [available scopes](#available-scopes). |
 | `configuration.region` | string | No | `"US"` (default) or `"EU"` |
 | `configuration.organization_name` | string | No | Organization name (defaults to `"Partner (email)"`) |
@@ -189,7 +189,7 @@ curl -X POST https://us.posthog.com/api/agentic/oauth/token \
 |---|---|---|---|
 | `grant_type` | string | Yes | Must be `"authorization_code"` |
 | `code` | string | Yes | The authorization code from step 1 |
-| `code_verifier` | string | Required (PKCE) | The original PKCE code verifier (must match the challenge from step 1). Not needed for HMAC partners. |
+| `code_verifier` | string | Yes | The original PKCE code verifier (must match the challenge from step 1) |
 
 **Response** (HTTP 200):
 
@@ -378,109 +378,6 @@ All provisioning endpoints are rate limited.
 - 5 new client registrations per domain per hour
 
 **Account requests** (per partner, per hour): defaults to 10/hour for new CIMD partners. Contact PostHog to increase this for higher-volume integrations.
-
-## Alternative: server-to-server (HMAC)
-
-If your integration runs entirely on your backend (no browser redirects, no public client), you can use HMAC signing instead of PKCE.
-The tradeoff: you manage a shared secret, but you skip the `code_challenge`/`code_verifier` dance entirely.
-
-| | PKCE (public client) | HMAC (server-to-server) |
-|---|---|---|
-| **Secret management** | None - CIMD metadata document only | Shared `signing_secret` stored on your server |
-| **Auth signal** | `client_id` in request body | `Stripe-Signature` header on every request |
-| **Best for** | Browser-based flows, CLIs, apps that redirect users | Backend services that provision accounts without user interaction |
-
-### Get credentials
-
-Contact PostHog to set up an HMAC partner application. You'll receive a `signing_secret` - store it securely on your server (environment variable, secrets manager, etc.).
-
-### Sign requests
-
-Every request must include a `Stripe-Signature` header with a timestamp and HMAC-SHA256 signature. (This header format follows the convention established by the original Stripe integration. It will be renamed in a future API version.)
-
-```
-Stripe-Signature: t={unix_timestamp},v1={hex_signature}
-```
-
-The signature is computed over `{timestamp}.{request_body}` using your signing secret:
-
-```bash
-# Compute the signature
-TIMESTAMP=$(date +%s)
-BODY='{"id":"req_123","email":"user@example.com","name":"Jane Doe","configuration":{"region":"US"}}'
-SIGNATURE=$(printf '%s.%s' "$TIMESTAMP" "$BODY" | openssl dgst -sha256 -hmac "$SIGNING_SECRET" | sed 's/^.* //')
-```
-
-The timestamp must be within 5 minutes of the server's clock.
-
-### The 3-step flow with HMAC
-
-The same three endpoints work with HMAC auth. The difference: you authenticate with the `Stripe-Signature` header instead of PKCE, and you skip `code_challenge`/`code_verifier` fields.
-
-**Step 1: Create an account**
-
-```bash
-TIMESTAMP=$(date +%s)
-BODY='{"id":"req_unique_request_id","email":"user@example.com","name":"Jane Doe","configuration":{"region":"US","organization_name":"Acme Corp"}}'
-SIGNATURE=$(printf '%s.%s' "$TIMESTAMP" "$BODY" | openssl dgst -sha256 -hmac "$SIGNING_SECRET" | sed 's/^.* //')
-
-curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
-  -H "Content-Type: application/json" \
-  -H "API-Version: 0.1d" \
-  -H "Stripe-Signature: t=$TIMESTAMP,v1=$SIGNATURE" \
-  -d "$BODY"
-```
-
-No `code_challenge` or `code_challenge_method` needed. The response format is the same as the PKCE flow.
-
-**Step 2: Exchange the code for tokens**
-
-```bash
-BODY="grant_type=authorization_code&code=abc123...authorization_code"
-TIMESTAMP=$(date +%s)
-SIGNATURE=$(printf '%s.%s' "$TIMESTAMP" "$BODY" | openssl dgst -sha256 -hmac "$SIGNING_SECRET" | sed 's/^.* //')
-
-curl -X POST https://us.posthog.com/api/agentic/oauth/token \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -H "API-Version: 0.1d" \
-  -H "Stripe-Signature: t=$TIMESTAMP,v1=$SIGNATURE" \
-  -d "$BODY"
-```
-
-No `code_verifier` needed. The response includes the same `access_token`, `refresh_token`, and `account` fields.
-
-**Step 3: Provision a project**
-
-Once you have an access token, use it with a `Bearer` header - the same as the PKCE flow:
-
-```bash
-curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer phx_abc123..." \
-  -H "API-Version: 0.1d" \
-  -d '{"service_id":"analytics","configuration":{"project_name":"My App - Production"}}'
-```
-
-### Signing in code (Node.js)
-
-```javascript
-import crypto from 'node:crypto';
-
-function signRequest(signingSecret, body) {
-  const timestamp = Math.floor(Date.now() / 1000);
-  const payload = `${timestamp}.${body}`;
-  const signature = crypto
-    .createHmac('sha256', signingSecret)
-    .update(payload)
-    .digest('hex');
-  return `t=${timestamp},v1=${signature}`;
-}
-
-// Usage
-const body = JSON.stringify({ id: 'req_123', email: 'user@example.com' });
-const header = signRequest(process.env.SIGNING_SECRET, body);
-// Set header: { 'Stripe-Signature': header }
-```
 
 ## Full example
 
