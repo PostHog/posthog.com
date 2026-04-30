@@ -7,9 +7,9 @@ showTitle: true
 ### Renewal principals
 Being on a prepaid credit plan - usually annual - is a win-win solution for both PostHog and the customer. Customers get discounts on the credits they purchase and PostHog gets confirmed revenue.
 
-When estimating renewal amount, we want to make sure we accurately determine the amount of credits the customer will need in the next 12 months (or equivalent period, e.g. if they prepaid for 6 months). This is not an opportunity to upsell - do that later by encouraging product usage. 
+When estimating renewal amount, we want to make sure we accurately determine the amount of credits the customer will need in the next 12 months (or equivalent period, e.g. if they prepaid for 6 months). This is not an opportunity to upsell - do that later by encouraging product usage.
 
-This page walks through recommendations for approaching and handling renewals. [Contract rules](/handbook/growth/sales/contract-rules) and [how to create contracts](/handbook/growth/sales/contracts) are covered in relevant pages under our shared processes. 
+This page walks through recommendations for approaching and handling renewals. [Contract rules](/handbook/growth/sales/contract-rules) and [how to create contracts](/handbook/growth/sales/contracts) are covered in relevant pages under our shared processes.
 
 ## When to start
 Start renewal conversations at least 2 months before the contract renewal date for customers you are already in frequent contact with. For customers who are quiet, start renewal discussions 3 months out to allow more time for re-engagement.
@@ -20,8 +20,16 @@ Start by sending a message in the shared Slack channel. Things will change in a 
 
 As you make progress in the renewal discussions, [update the renewal opportunity](/handbook/growth/sales/crm#renewal-pipeline) in Salesforce. 
 
+## Unique Renewal Cases
+
 #### Customers who are projected to run out of credit before renewal
 You will get notified by credit bot in Slack if a customer is set to run out of credits before their renewal date. This is considered an early renewal and follow the same process. If the customer will likely run out of credits before renewal is done, make sure they have a credit card on their account so any overage bills will be paid.
+
+#### Customers who are projected to have expiring credits at the end of their contract
+It is sometimes the case a customer will have a balance on their account when their contract term ends. This credit balance will expire, and they will still be moved to monthly payments. We have [rules in place](/handbook/growth/sales/contract-rules#when-they-will-end-the-contract-term-with-credit-remaining) for this situation, allowing customers to carry over credits on a flat renewal (or higher). If you notice a customer trending towards this, try and engage with the customer to explain this credit expiry and the options available. Use this call to explore projected growth and other use cases and features. In these cases, renewal discussions should start at 3 months, to give time to explore new features and determine if carrying over the credits is valuable to the customer.
+
+#### Customers with irregular contracts
+Many customers are on legacy contracts that do not adhere to our [contract rules](/handbook/growth/sales/contract-rules). This could include non-Net 30 payment terms, unique discounts, legacy pricing, or monthly/quarterly payments. It should be a priority to migrate customers to standard pricing and discounts. Although conversations may be difficult, we should, whenever reasonable, stick to the pricing in our handbook, and freely share that handbook with the customer to defend our point. Trust your judgement on when these irregular terms may be deal-breakers, and worth keeping.
 
 ## Renewal discussions
 Renewal conversations are best done on a call. There can be a lot of moving parts so talking through it is usually a good idea. 
