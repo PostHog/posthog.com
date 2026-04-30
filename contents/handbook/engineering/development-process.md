@@ -337,7 +337,7 @@ If `state.yaml` shows a newer commit than what's running on pods, check ArgoCD:
 | Pods running old commit | Rollout stuck or image not built | Check deployment rollout status; verify CI built the image |
 | Can't find your service in ArgoCD | Looking at wrong app grouping | Search for your specific service + environment (e.g., `ingestion-events-prod-us`) |
 
-If a deployment appears stuck, reach out in `#team-infrastructure`.
+If a deployment appears stuck, reach out in `#team-cloud-platform`.
 
 ## Documenting
 

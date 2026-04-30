@@ -286,7 +286,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     platform: {
         feature: 'Platform (US + EU)',
-        owner: ['infrastructure'],
+        owner: ['cloud-platform', 'cloud-foundations'],
         label: 'feature/platform',
     },
     'PostHog.com': {
@@ -376,12 +376,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     security: {
         feature: 'Security',
-        owner: ['infrastructure'],
+        owner: ['security'],
         notes: <>It's every team's job to consider and react to security issues.</>,
     },
     'self-hosting': {
         feature: 'Self-hosting',
-        owner: ['infrastructure'],
+        owner: ['cloud-foundations'],
         label: false,
     },
     'sentry-integration': {
