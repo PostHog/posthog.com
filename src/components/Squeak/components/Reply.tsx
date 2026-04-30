@@ -203,32 +203,16 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
     )
 }
 
-const VoteButton = ({
-    id,
-    type,
-    voted,
-    votes,
-    onVote,
-}: {
-    id: number
-    type: 'up' | 'down'
-    voted: boolean
-    votes: number
-    onVote: () => void
-}) => {
-    const { voteReply, user } = useUser()
+const VoteButton = ({ id, type, voted, votes }: { id: number; type: 'up' | 'down'; voted: boolean; votes: number }) => {
+    const { user } = useUser()
+    const { voteReply } = useContext(CurrentQuestionContext)
     const { openSignIn } = useApp()
-
-    const vote = async () => {
-        await voteReply(id, type, user)
-        onVote?.()
-    }
 
     const handleClick = () => {
         if (!user) {
             openSignIn()
         } else {
-            vote()
+            voteReply(id, type)
         }
     }
 
@@ -560,14 +544,8 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                 </OSButton>
                             )}
                             <div className="flex items-center gap-1">
-                                <VoteButton id={id} type="up" voted={upvoted} votes={upvotes} onVote={() => mutate()} />
-                                <VoteButton
-                                    id={id}
-                                    type="down"
-                                    voted={downvoted}
-                                    votes={downvotes}
-                                    onVote={() => mutate()}
-                                />
+                                <VoteButton id={id} type="up" voted={upvoted} votes={upvotes} />
+                                <VoteButton id={id} type="down" voted={downvoted} votes={downvotes} />
                             </div>
                         </div>
                     </>

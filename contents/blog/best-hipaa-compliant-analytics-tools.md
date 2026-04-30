@@ -98,14 +98,14 @@ A BAA is available on Mixpanel's Enterprise plan.
 #### Countly and HIPAA compliance
 
 -   **Self-hostable:** <span className="text-green text-lg">✔</span>
--   **BAA available:** <span className="text-red text-lg">✖</span>
+-   **BAA available:** <span className="text-red text-lg">✔</span>
 
-Countly doesn't offer a BAA for HIPAA compliance on its hosted cloud, but it does offer the option to either:
+Countly is a privacy-first platform that supports both BAA-based and full data-control approaches. It offers a BAA for HIPAA compliance on both of its deployment options:
 
-1. Self-host the product on your own.
-2. Deploy it to a private cloud managed by Countly.
+1. Hosted cloud (managed by Countly).
+2. On-premise (self-hosted on your own infrastructure).
 
-This makes Countly a good option if you'd prefer to [self-host your analytics](/blog/best-open-source-analytics-tools).
+This makes Countly a flexible option whether you want a managed BAA-backed deployment or prefer to [self-host your analytics](/blog/best-open-source-analytics-tools) for full data control.
 
 ### 4. Freshpaint
 

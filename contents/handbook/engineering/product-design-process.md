@@ -22,4 +22,3 @@ Need some custom artwork? Read the [art and branding request guidelines](/handbo
 
 ## Portfolio
 
-You can find [PostHog's design portfolio](https://dribbble.com/posthog) on Dribbble... or just have a look around!

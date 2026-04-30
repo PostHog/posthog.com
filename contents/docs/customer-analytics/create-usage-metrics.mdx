@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import CustomerAnalyticsBetaWarning from './_snippets/customer-analytics-beta-warning.mdx'
+import CustomerAnalyticsBetaWarning from "./_snippets/customer-analytics-beta-warning.mdx";
 
 <CustomerAnalyticsBetaWarning />
 
@@ -14,21 +14,24 @@ You can create usage metrics in two ways:
 2. Open any [customer profile](/docs/customer-analytics/customer-profiles) and click **Add usage metric**
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_24_16_161_Z_0fde31684b.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_23_19_968_Z_a4de4c95f4.png"
-    alt="Usage metrics creation form"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_04_23_T21_19_12_623_Z_04edef90cd.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_04_23_T21_20_07_198_Z_6ba15a3927.png"
+  alt="Usage metrics creation form"
+  classes="rounded"
 />
 
 ### Configuration options
 
-| Field | Description |
-| --- | --- |
-| **Name** | The column title shown in customer lists |
-| **Interval** | Time period for the metric: 7, 30 or 90 days |
-| **Format** | How the value should be formated: Numeric or currency  |
-| **Match events** | Which events to count toward this metric |
-| **Filters** | Additional conditions to narrow down matched events |
+| Field               | Description                                                                                |
+| ------------------- | ------------------------------------------------------------------------------------------ |
+| **Name**            | The column title shown in customer lists                                                   |
+| **Interval**        | Time period for the metric: 7, 30 or 90 days                                               |
+| **Format**          | How the value should be formated: Numeric or currency                                      |
+| **Display**         | How the metric is visualized: Number (default) or Sparkline                                |
+| **Calculation**     | How events are aggregated: Count of events (default) or Sum of property                    |
+| **Property to sum** | The numeric property to sum. Only shown when **Calculation** is set to **Sum of property** |
+| **Match events**    | Which events to count toward this metric                                                   |
+| **Filters**         | Additional conditions to narrow down matched events                                        |
 
 ### Match events
 
@@ -39,3 +42,24 @@ For example, to track API usage, you might match events named `api_request` or `
 ### Filters
 
 Filters apply to all matched events. Use them to narrow down what counts—for example, only counting successful API calls by filtering for `status = 200`.
+
+### Calculation
+
+Choose how events are aggregated for the metric:
+
+- **Count of events** – Counts the total number of matched events. This is the default.
+- **Sum of property** – Sums the values of a numeric event property across matched events. When selected, a **Property to sum** field appears where you select the property to aggregate. This is useful for tracking cumulative values like API tokens consumed, storage used, or revenue generated.
+
+### Display
+
+Choose how the metric is visualized on customer profiles:
+
+- **Number** – Shows a single numeric value with a percentage change indicator. This is the default.
+- **Sparkline** – Shows a bar chart of daily values over the selected interval, along with the total value and percentage change. Useful for spotting trends at a glance.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_04_24_T15_45_41_435_Z_568eb81cd7.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_04_24_T15_47_21_502_Z_96349dde36.png"
+  alt="Usage metric display options"
+  classes="rounded centered"
+/>
