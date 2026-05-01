@@ -106,7 +106,7 @@ export const HomepageCards = [
         // ImageSize: 'w-[230px] mt-4',
     },
     {
-        top: 'You enjoy talking to non-technical sales people',
+        top: 'You enjoy talking to non-technical people',
         bottom: (
             <>
                 Actually, we don't force you to talk to anyone to use PostHog. But you can <Link to="/demo">watch a recorded demo</Link>{' '}
