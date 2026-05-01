@@ -48,7 +48,7 @@ When new data is ingested, ClickHouse materialized views transform and route inc
 
 Even when used as a database, DuckDB is not a server. It functions like SQLite: an embedded, in-process engine that runs as an application. This makes DuckDB easy to spin up, query on local data (including Parquet, CSV, and JSON files) or data anywhere, and spin down. It's ephemeral, single-user, and saves metadata to a portable `.duckdb` database file.
 
-![DuckDB query interface](https://res.cloudinary.com/dmukukwp6/image/upload/Duck_DB_q_788d1a16d7.png)
+![DuckDB query interface](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_143762_980111f164.png)
 
 ClickHouse is typically faster than DuckDB at heavy, optimized queries given its massive toolset to optimize retrieval and pre-calculate aggregates; however, DuckDB is fantastic at spontaneous, smaller analytical queries as it skips client-server communication and operates on local data in a stock setup. For many users, data is just ingested once, queried, and then the DuckDB instance is destroyed.
 
@@ -74,11 +74,11 @@ For our first major match-up, let's zoom into the infrastructure differences bet
 
 ClickHouse scales both vertically *and* horizontally. That means that a single ClickHouse instance can scale up, using more RAM, CPUs, and storage (vertical scaling), but could also spread across multiple machines, splitting data and routing queries. When horizontally scaling, ClickHouse users typically implement a shared-nothing approach in self-managed deployments, where data is sharded across multiple instances with no overlap.
 
-![ClickHouse horizontal scaling diagram](https://res.cloudinary.com/dmukukwp6/image/upload/Click_House_903586b66d.png)
+![ClickHouse horizontal scaling diagram](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_143759_652e9d6448.png)
 
 DuckDB is just a single process that scales vertically, all embedded in a single file. When you run out of resources, you'll need to bump up the instance or migrate DuckDB to a beefier server.
 
-![DuckDB single-node scaling diagram](https://res.cloudinary.com/dmukukwp6/image/upload/image_7ba45d685f.png)
+![DuckDB single-node scaling diagram](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_143760_cec9142333.png)
 
 This also means that DuckDB evades the complexities of horizontally scaling. ClickHouse (via Apache ZooKeeper or ClickHouse Keeper) has to track every data part, every merge, and every insert across every replica. That's a challenge when dealing with thousands of tables and millions of ingested events. To address this, some developers prefer ClickHouse's paid offering, ClickHouse Cloud, which stores data in object storage (e.g. S3), treating compute nodes as stateless workers with a cache.
 
@@ -122,7 +122,7 @@ We wanted to make that data natively queryable, so we built a DuckDB layer to ma
 
 To solve this, we built [Duckgres](https://github.com/PostHog/duckgres), an open-source wrapper that wraps DuckDB in a Postgres server, making it compatible with anything that supports the PostgreSQL wire protocol. It effectively makes DuckDB look like a Postgres database to an external service. Tada! Now you can connect a DuckDB warehouse to any Postgres-compatible BI tool, dbt, or Postgres-service. Plus, it has a 10 out of 10 name.
 
-![Duckgres connection diagram](https://res.cloudinary.com/dmukukwp6/image/upload/Duckgres_connect_b7694cb18a.png)
+![Duckgres connection diagram](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_143761_021ff0c0f4.png)
 
 Duckgres also integrates with DuckLake, so that a DuckLake catalog is automatically added to any Duckgres connection. This sets up a nice trinity: DuckDB for easy querying, DuckLake for durable storage, and Duckgres for tight integrations with Postgres-ready systems.
 
