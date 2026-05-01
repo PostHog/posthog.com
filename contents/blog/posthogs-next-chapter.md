@@ -7,10 +7,10 @@ showTitle: true
 hideAnchor: true
 author:
   - james-hawkins
-featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/classic_blog_1_299db11bad.png
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/classic_blog_1_299db11bad.png
 featuredImageType: full
-tags: CEO diaries
+tags: 
+ - CEO diaries
 ---
 
 Building PostHog has been living the dream. We got into YC. We pivoted a bunch. We found product-market fit, onboarded hundreds of thousands of customers, and revenue grew fast.
