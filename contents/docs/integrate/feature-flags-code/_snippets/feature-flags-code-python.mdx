@@ -23,7 +23,21 @@ if variant == 'variant-key':
 payload = flags.get_flag_payload('flag-key')
 ```
 
-The `FeatureFlagEvaluations` snapshot provides these methods:
+#### Additional parameters
+
+| Parameter | Description |
+|-----------|-------------|
+| `groups` | Group associations for group-scoped flags (e.g., `{'company': 'acme-inc'}`) |
+| `person_properties` | Person properties to use for evaluation |
+| `group_properties` | Group properties keyed by group type |
+| `only_evaluate_locally` | If `True`, only evaluate flags locally without server fallback. Flags that can't be evaluated locally are omitted from the result. |
+| `disable_geoip` | Whether to disable GeoIP lookup |
+| `flag_keys` | List of flag keys to fetch. When set, only these flags are requested from the server. |
+| `device_id` | Device ID for experience-continuity flags to match users across distinct ID changes |
+
+#### The `FeatureFlagEvaluations` snapshot
+
+The snapshot returned by `evaluate_flags()` provides these methods:
 
 | Method | Description |
 |--------|-------------|
@@ -42,9 +56,15 @@ flags = posthog.evaluate_flags(
 )
 ```
 
-#### Legacy single-flag methods
+#### Deprecated single-flag methods
 
-The following methods still work but evaluate flags one at a time. Prefer `evaluate_flags()` for better performance when checking multiple flags.
+<CalloutBox icon="IconWarning" title="Deprecated" type="caution">
+
+The following methods are deprecated and will be removed in the next major version. They emit deprecation warnings when called. Use `evaluate_flags()` instead for better performance and consistency.
+
+</CalloutBox>
+
+The following methods still work but evaluate flags one at a time:
 
 **Boolean feature flags:**
 
@@ -102,6 +122,8 @@ posthog.capture('page_viewed', distinct_id='user_123', flags=flags.only_accessed
 posthog.capture('checkout_started', distinct_id='user_123', flags=flags.only(['checkout-flow']))
 ```
 
+> **Note:** `only_accessed()` returns an empty snapshot if no flags were checked via `is_enabled()` or `get_flag()`. Make sure to access the flags you need before calling `only_accessed()`.
+
 #### Alternative methods
 
 **Method 1: Include the `$feature/feature_flag_name` property**
@@ -118,7 +140,13 @@ posthog.capture(
 )
 ```
 
-**Method 2: Set `send_feature_flags` to `true`**
+**Method 2: Set `send_feature_flags` to `true` (deprecated)**
+
+<CalloutBox icon="IconWarning" title="Deprecated" type="caution">
+
+The `send_feature_flags` parameter is deprecated and will be removed in the next major version. Pass a `flags` snapshot from `evaluate_flags()` instead.
+
+</CalloutBox>
 
 import PythonSetSendFeatureFlagsTrue from "./feature-flags-code-python-set-send-feature-flags-to-true.mdx"
 
@@ -176,19 +204,18 @@ posthog = Posthog('<ph_project_token>',
 When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
 
 ```python
-def handle_feature_flag(client, flag_key, distinct_id):
+def handle_feature_flags(distinct_id):
     try:
-        is_enabled = client.is_feature_enabled(flag_key, distinct_id)
-        print(f"Feature flag '{flag_key}' for user '{distinct_id}' is {'enabled' if is_enabled else 'disabled'}")
-        return is_enabled
+        flags = posthog.evaluate_flags(distinct_id)
+        return flags
     except Exception as e:
-        print(f"Error fetching feature flag '{flag_key}': {str(e)}")
+        print(f"Error fetching feature flags: {str(e)}")
         raise e
 
 # Usage example
 try:
-    flag_enabled = handle_feature_flag(client, 'new-feature', 'user-123')
-    if flag_enabled:
+    flags = handle_feature_flags('user-123')
+    if flags.is_enabled('new-feature'):
         # Implement new feature logic
     else:
         # Implement old feature logic
