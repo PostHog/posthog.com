@@ -134,6 +134,31 @@ This is the default model for BigQuery batch exports. The schema of the model as
 
 Some fields can be either `STRING` or `JSON` type depending on whether the corresponding checkbox is marked or not when creating the batch export.
 
+If the table doesn't already exist in the provided dataset, the first batch export run will create it. This is generally the safest option, but you may also create it yourself by running the following query:
+
+```sql runInPostHog=false
+CREATE TABLE IF NOT EXISTS `{project_id}.{dataset_id}.{table_id}` (
+    uuid STRING,
+    event STRING,
+    properties JSON,
+    elements STRING,
+    `set` JSON,
+    set_once JSON,
+    distinct_id STRING,
+    team_id INT64,
+    ip STRING,
+    site_url STRING,
+    timestamp TIMESTAMP,
+    bq_ingested_timestamp TIMESTAMP
+)
+PARTITION BY DATE(timestamp)
+OPTIONS(description = 'PostHog events table')
+```
+
+> **Note:** If you unchecked the JSON columns option when creating the batch export, replace `JSON` with `STRING` for the `properties`, `set`, and `set_once` columns.
+>
+> The `PARTITION BY DATE(timestamp)` clause matches what PostHog creates automatically; if you need a different partition column or want to configure clustering, adjust the query accordingly.
+
 ### Persons model
 
 The schema of the model as created in BigQuery is:
@@ -151,6 +176,23 @@ The schema of the model as created in BigQuery is:
 The BigQuery table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`. The `properties` field can be either `STRING` or `JSON`, depending on whether the corresponding checkbox is marked or not when creating the batch export.
 
 <PersonsModelNote />
+
+If the table doesn't already exist in the provided dataset, the first batch export run will create it. This is generally the safest option, but you may also create it yourself by running the query:
+
+```sql runInPostHog=false
+CREATE TABLE IF NOT EXISTS `{project_id}.{dataset_id}.{table_id}` (
+    team_id INT64,
+    distinct_id STRING,
+    person_id STRING,
+    properties JSON,
+    person_version INT64,
+    person_distinct_id_version INT64,
+    created_at TIMESTAMP
+)
+OPTIONS(description = 'PostHog persons table')
+```
+
+> **Note:** If you unchecked the JSON columns option when creating the batch export, replace `JSON` with `STRING` for the `properties` column.
 
 ### Sessions model
 
@@ -238,4 +280,4 @@ If you are noticing an issue with your BigQuery batch export, it may be useful t
 
 ### How is the BigQuery table partitioned?
 
-When PostHog creates the BigQuery table, it is automatically partitioned by day using the `timestamp` column. If you need a different partition column or want to configure clustering, you should create the table manually in BigQuery before setting up the batch export. PostHog will use the existing table as long as it has a compatible schema.
+When PostHog creates the BigQuery table, it is automatically partitioned by day using the `timestamp` column. If you need a different partition column or want to configure clustering, you should create the table manually in BigQuery before setting up the batch export (see the [Events model](#events-model) and [Persons model](#persons-model) sections above for the schemas). PostHog will use the existing table as long as it has a compatible schema.
