@@ -112,11 +112,11 @@ DuckDB is the opposite. It's super flexible, supporting nested and semi-structur
 
 ## How we use ClickHouse and DuckDB (and Postgres)
 
-PostHog uses three databases. For PostHog's application state, we use Postgres in all of the ways you'd expect. In fact, at our start, we exclusively used Postgres until [our analytical queries were frying it alive](/blog/clickhouse-vs-postgres). We then added ClickHouse, a real-time analytical engine that powers our funnels, trends, retention, and paths over billions of events.
+PostHog uses three databases. For PostHog's application state, we use Postgres in all of the ways you'd expect. In fact, at our start, we exclusively used Postgres until [our analytical queries were frying it alive](/blog/how-we-turned-clickhouse-into-our-eventmansion). We then added ClickHouse, a real-time analytical engine that powers our funnels, trends, retention, and paths over billions of events.
 
 For a while, we were strictly a Postgres and ClickHouse stack and didn't envision needing another OLAP solution. However, as the needs of our customers grew, ClickHouse had constraints that meant it simply would not work for data warehousing for all of our customers.
 
-So, we architected a managed data warehouse product that could scale in parallel and isn't tied to our ClickHouse resources. The managed warehouse is fundamentally different from the analytical products we offered before: instead of only providing analytics on customer data, it also provides a service to store, transform, model, and visualize *all* your data. Essentially, our customers can now use us as a full data stack, not just an opinionated analytics service.
+So, we architected a [managed data warehouse product](/data-stack/managed-warehouse) that could scale in parallel and isn't tied to our ClickHouse resources. The managed warehouse is fundamentally different from the analytical products we offered before: instead of only providing analytics on customer data, it also provides a service to store, transform, model, and visualize *all* your data — not just what's ingested by other PostHog products. Essentially, our customers can now use us as a full data stack, not just an opinionated analytics service.
 
 We wanted to make that data natively queryable, so we built a DuckDB layer to make it easy for our customers. But that posed a problem: if DuckDB is not a server, how should our customers actually access it?
 
