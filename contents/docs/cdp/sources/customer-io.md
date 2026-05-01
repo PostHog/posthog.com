@@ -63,8 +63,8 @@ PostHog automatically registers a reporting webhook in your Customer.io workspac
 
 Customer.io doesn't return the signing key when creating webhooks via API, so you need to copy it manually:
 
-1. In Customer.io, go to **Data & Integrations** > **Integrations** > **Reporting Webhooks**.
-2. Find the webhook named **PostHog data warehouse** and click to view details.
+1. In Customer.io, go to **Integrations** > **Reporting Webhooks** > **PostHog data warehouse**.
+2. Click to view the webhook details.
 3. Copy the **Signing key**.
 4. In PostHog, go to the **Webhook** tab on your Customer.io source.
 5. Paste the signing key and click **Save**.
@@ -76,11 +76,11 @@ PostHog uses HMAC-SHA256 signature verification to authenticate incoming webhook
 If auto-registration fails (for example, if your App API key lacks reporting webhook permissions), you can create the webhook manually:
 
 1. In PostHog, go to your Customer.io source and click the **Webhook** tab. Copy the **webhook URL**.
-2. In Customer.io, go to **Data & Integrations** > **Integrations** > [**Reporting Webhooks**](https://fly.customer.io/settings/webhooks/new/reporting_webhook).
-3. Click **Add Reporting Webhook**.
-4. Paste the PostHog webhook URL into the **Endpoint URL** field.
+2. In Customer.io, go to **Integrations** > **Add Integration**.
+3. Search for **Reporting Webhook**.
+4. Paste the PostHog webhook URL into the **Webhook endpoint** field.
 5. Select the events you want to track (customer, email, push, sms, in-app, slack, webhook).
-6. Click **Save**.
+6. Click **Save and Enable Webhook**.
 7. Copy the **Signing key** and add it to PostHog as described above.
 
 ## Syncing
