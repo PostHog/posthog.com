@@ -1,0 +1,71 @@
+---
+title: Send logs alerts
+---
+
+Logs alerts notify you when log patterns exceed (or drop below) a threshold you define. PostHog checks your filters every 5 minutes and sends notifications to Slack or a webhook when conditions are met.
+
+## Creating an alert
+
+1. Go to [Logs](https://app.posthog.com/logs) and open the **Alerts** tab.
+2. Click **New alert**. This creates a draft alert and opens the detail page immediately.
+
+Draft alerts start with sensible defaults — the name is set to "Untitled alert" and the threshold count to 100. You can save a draft at any time, even with incomplete configuration, and come back to finish it later.
+
+> **What is a draft?** Alerts that haven't been enabled yet show a **Draft** badge. They won't run any checks until you enable them.
+
+## Configuring filters
+
+Under **Filters**, narrow down which logs the alert watches:
+
+- **Severity** – select one or more severity levels (e.g. `ERROR`, `WARN`).
+- **Service** – choose specific service names.
+- **Attributes** – add log or resource attribute filters for more precise matching.
+
+You must add at least one filter before you can enable an alert.
+
+## Setting threshold rules
+
+Under **Rules**, define when the alert should fire:
+
+- Choose whether the log count goes **above** or **below** a value.
+- Set the **threshold count**.
+- Pick a **time window** (5, 10, 15, 30, or 60 minutes).
+
+For example: "Alert if count goes above 50 in the last 10 minutes."
+
+### Advanced settings
+
+- **Reduce noise** – Require the condition to be met multiple times before firing. For example, "3 of 5 checks must match" prevents notifications on brief, one-off spikes. The alert auto-resolves once the condition is no longer met.
+- **Notification cooldown** – After firing, wait a set number of minutes before sending another notification. Set to 0 to notify on every check.
+
+## Adding notification destinations
+
+Switch to the **Notifications** tab to choose where alerts are sent. Each destination delivers notifications for all alert events — firing, resolved, and broken.
+
+### Slack
+
+Select **Slack** from the dropdown and pick a channel. If you haven't connected Slack yet, you'll be prompted to set up the integration first.
+
+### Webhook
+
+Select **Webhook** and paste your endpoint URL. PostHog will POST alert payloads to this URL.
+
+You can add multiple destinations to a single alert.
+
+## Enabling the alert
+
+When your alert is still a draft, the primary button shows **Enable alert** instead of **Save**. Clicking it runs pre-enable checks:
+
+- **No filters configured** – You'll see an error message. Add at least one filter before enabling.
+- **No notification destinations** – You'll see a confirmation dialog warning that the alert will fire silently. Choose **Enable anyway** to proceed without notifications, or **Configure notifications** to add a destination first.
+
+Once enabled, the alert begins checking every 5 minutes and sends notifications when your conditions are met.
+
+## Managing alerts
+
+From the alert detail page you can:
+
+- **Disable** an alert to pause checks without deleting it.
+- **Snooze** an alert temporarily.
+- **Reset** a broken alert to re-enable checks.
+- **Delete** an alert permanently.
