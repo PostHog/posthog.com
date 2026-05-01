@@ -1242,6 +1242,7 @@ async function createMinimalPages({
     }
 
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
+
     createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
     createHandbookPreviewPosts(data.productEngineerHandbook.nodes, 'product-engineer', {
         name: 'Product Engineer Handbook',

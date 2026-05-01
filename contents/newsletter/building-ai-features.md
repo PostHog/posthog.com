@@ -35,7 +35,7 @@ There are three key lessons here:
 
 You don’t need to reinvent the wheel.
 
-A bunch of smart people have already figured out effective AI patterns you can copy. These have the advantage of being [UX patterns](/newsletter/vibe-designing) that users are familiar with, while also being functionality AI is actually good at.
+A bunch of smart people have already figured out [effective AI patterns](/newsletter/agent-first-product-engineering) you can copy. These have the advantage of being [UX patterns](/newsletter/vibe-designing) that users are familiar with, while also being functionality AI is actually good at.
 
 First is the classic “chat with your docs/data/PDF.” AI is great at search and summarization, and can use this to build reports and recommendations.
 

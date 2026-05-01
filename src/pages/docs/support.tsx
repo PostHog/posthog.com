@@ -9,7 +9,7 @@ const Support: React.FC = () => {
     return (
         <ReaderView>
             <SEO title="Support - Docs - PostHog" />
-            <CalloutBox icon="IconFlask" title="Support is in private alpha" type="info">
+            <CalloutBox icon="IconFlask" title="Support is in beta" type="info">
                 <p>
                     <strong>Note:</strong> Support is currently in{' '}
                     <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">

@@ -122,7 +122,7 @@ export const IconDemoThumb = (props: IconProps) => (
             width="48"
             height="32"
             y="8"
-            href="https://res.cloudinary.com/dmukukwp6/image/upload/demo_thumb_0a5b84dd36.png"
+            href="https://res.cloudinary.com/dmukukwp6/image/upload/demo_icon_c491faf6f2.png"
         />
         <path
             d="M20.3808 15.899C19.409 15.31 18.1667 16.0097 18.1667 17.1462V30.8539C18.1667 31.9903 19.409 32.69 20.3808 32.101L31.6897 25.2472C32.6263 24.6795 32.6263 23.3205 31.6897 22.7528L20.3808 15.899Z"

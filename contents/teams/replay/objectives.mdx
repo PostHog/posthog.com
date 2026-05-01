@@ -24,7 +24,15 @@ Train a binary classifier that can label sessions as "interesting" or not. Use t
 - Build the categorizer layer on top: group by session properties, filter by interestingness
 - Run classifier on a schedule
 
-## 🖥️ Goal 4: Build new AI-native frontend for Replay
+## 📡 Goal 4: Replay as a Signal source
+
+Make Replay a first-class signal source for the Signals product. Today, session summarization is tightly coupled to the clustering workflow and doesn't scale. We need to own the summarization pipeline end-to-end so it works independently, scales to thousands of teams, and gives customers control over which sessions get analyzed.
+
+- Own the session summarization pipeline on the Replay team — decouple from clustering
+- Per-team configuration: let customers choose which sessions to summarize (filters, sampling rate)
+- Intelligent session selection via the categorizer model (Goal 3)
+
+## 🖥️ Goal 5: Build new AI-native frontend for Replay
 
 Reimagine the Replay UI around AI-first workflows. Move away from recency as the primary way to rank recordings — instead, leverage the session categorizer (Goal 3) to surface interesting recordings across categories.
 
@@ -32,11 +40,11 @@ Reimagine the Replay UI around AI-first workflows. Move away from recency as the
 - Surface AI-generated summaries and labels directly in the list UI
 - Design the UX for exploring sessions by category rather than scrolling by time
 
-## 🔌 Goal 5: Basic MCP for Session Replay
+## 🔌 Goal 6: Basic MCP for Session Replay
 
 Expose Session Replay as MCP tools so AI agents (Claude Desktop, etc.) can search, retrieve, and summarize sessions programmatically.
 
-## 💰 Goal 6: Business model for AI features
+## 💰 Goal 7: Business model for AI features
 
 Figure out how to price and sustain AI-powered Replay features.
 
@@ -44,7 +52,7 @@ Figure out how to price and sustain AI-powered Replay features.
 - Identify break-even points at different usage tiers
 - Propose a pricing model that works for customers and for us
 
-## 🔒 Goal 7: Map out PII, data retention, and IP concerns
+## 🔒 Goal 8: Map out PII, data retention, and IP concerns
 
 Before we begin using machine learning we need to figure out the compliance, legal, and brand concerns around training future models on recording data.
 
@@ -54,7 +62,7 @@ Before we begin using machine learning we need to figure out the compliance, leg
 - What do customers expect and what do we need to communicate?
 - What does s-tier consent look like?
 
-## 🗂️ Goal 8: Set up data labelling system for replays
+## 🗂️ Goal 9: Set up data labelling system for replays
 
 Build the infrastructure for labelling replay data at scale — needed to train and evaluate future models on session data.
 

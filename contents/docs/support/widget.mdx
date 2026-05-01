@@ -105,6 +105,17 @@ If the page URL contains a `ph_conv_restore` query parameter (from clicking the 
 
 If your app has logged-in users, identity verification works better than email-based recovery. You sign the user's distinct ID on your server, and tickets persist across browsers and devices automatically – no user action required.
 
+<CalloutBox icon="IconInfo" title="setIdentity vs identify" type="info">
+
+`posthog.setIdentity()` and `posthog.identify()` are different methods:
+
+- **`identify()`** links events to a user for analytics. It creates person profiles and merges anonymous events with identified ones. See [identifying users](/docs/product-analytics/identify).
+- **`setIdentity()`** verifies ticket ownership for Support. It uses HMAC signing to prove the user is who they claim to be, enabling cross-browser ticket access.
+
+You typically call both: `identify()` for analytics tracking, and `setIdentity()` for secure ticket access.
+
+</CalloutBox>
+
 ### How it works
 
 1. Your server computes an HMAC-SHA256 hash of the user's `distinct_id` using your team's `secret_api_token`

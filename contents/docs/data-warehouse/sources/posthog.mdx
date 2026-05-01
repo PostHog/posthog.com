@@ -380,3 +380,35 @@ The `system.notebooks` table contains notebook metadata from your project.
 | `version`          | Version number of the notebook                    |
 | `created_at`       | When the notebook was created                     |
 | `last_modified_at` | When the notebook was last modified               |
+
+### `system.support_tickets`
+
+The `system.support_tickets` table contains support ticket data from the Conversations product, created via widget, email, or Slack channels.
+
+| Column                  | Description                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------------------------- |
+| `id`                    | Unique identifier for the ticket (UUID)                                                                 |
+| `team_id`               | Team ID the ticket belongs to                                                                           |
+| `ticket_number`         | Auto-incrementing number, unique per team                                                               |
+| `channel_source`        | Origin channel: `widget`, `email`, or `slack`                                                           |
+| `channel_detail`        | Sub-type: `slack_channel_message`, `slack_bot_mention`, `slack_emoji_reaction`, `widget_embedded`, etc. |
+| `distinct_id`           | PostHog distinct_id linking the ticket to a person                                                      |
+| `status`                | Ticket status: `new`, `open`, `pending`, `on_hold`, or `resolved`                                       |
+| `priority`              | Ticket priority: `low`, `medium`, or `high` (null if unset)                                             |
+| `anonymous_traits`      | JSON containing customer-provided traits (name, email, etc.)                                            |
+| `ai_resolved`           | Whether the ticket was resolved by AI (exposed as integer 0/1)                                          |
+| `escalation_reason`     | Reason the ticket was escalated (if applicable)                                                         |
+| `message_count`         | Total number of messages in the ticket                                                                  |
+| `unread_customer_count` | Number of unread messages for the customer                                                              |
+| `unread_team_count`     | Number of unread messages for the team                                                                  |
+| `last_message_at`       | Timestamp of the most recent message                                                                    |
+| `last_message_text`     | Preview text of the most recent message                                                                 |
+| `email_subject`         | Email subject line (email-originated tickets only)                                                      |
+| `email_from`            | Sender email address (email-originated tickets only)                                                    |
+| `session_id`            | PostHog session ID captured at ticket creation                                                          |
+| `session_context`       | JSON containing session context data (replay URL, current URL, etc.)                                    |
+| `sla_due_at`            | SLA deadline timestamp (null if no SLA set)                                                             |
+| `created_at`            | When the ticket was created                                                                             |
+| `updated_at`            | When the ticket was last updated                                                                        |
+
+Status values: `new` (just created), `open` (being worked on), `pending` (waiting for customer), `on_hold` (paused), `resolved` (completed).
