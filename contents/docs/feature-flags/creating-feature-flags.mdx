@@ -118,6 +118,16 @@ Percentage rollouts are available for all flags. More options depend on your Pos
 
 Rollout percentages support decimal values with up to two decimal places of precision (e.g., 0.15% or 33.33%), down to a minimum of 0.01%. Enter decimal values in the percentage text input – the slider uses whole-number steps.
 
+#### Stop evaluation if excluded by rollout
+
+By default, when a user matches a condition's targeting filters but falls outside the rollout percentage, PostHog continues evaluating the remaining condition sets. This means they might still match a later condition.
+
+Enable **Stop evaluation if excluded by rollout** to change this. When enabled, if a user matches the targeting filters but falls outside the rollout percentage, evaluation stops immediately and returns `false`. PostHog won't check any remaining conditions.
+
+Use this option when:
+- You need deterministic "opt-out" behavior – matching a condition but missing the rollout shouldn't let a later condition enable the flag
+- You want users who match specific targeting criteria to receive a consistent `false` rather than potentially matching a less specific condition below
+- You're building layered rollouts where earlier conditions should definitively exclude certain users from any variant
 
 - If GeoIP is enabled, you can target based on geographic location.
 
