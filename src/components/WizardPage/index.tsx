@@ -56,7 +56,7 @@ function WizardHeader(): JSX.Element {
 function DemoVideo(): JSX.Element {
     return (
         <ProductVideo
-            videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/ai_wizard_install_cursor_331d174d75.mp4"
+            videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/wizard_clip_0a996d3379.mp4"
             videoDark=""
             autoPlay={true}
             classes="rounded"
