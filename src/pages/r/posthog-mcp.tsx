@@ -84,11 +84,11 @@ export default function PostHogMCPLanding(): JSX.Element {
                             PostHog MCP. No per-seat pricing, no credit card.
                         </p>
                     </div>
-                    <div>
+                    <div className="flex justify-center">
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Group_143773_7436a145da.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_143773_7436a145da_622d666c76.png"
                             alt="PostHog MCP in your editor"
-                            className="w-full max-w-[260px] mx-auto"
+                            className="w-full max-w-[350px] mx-auto"
                         />
                     </div>
                 </div>
