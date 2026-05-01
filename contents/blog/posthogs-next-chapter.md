@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - james-hawkins
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/classic_blog_1_299db11bad.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/classic_blog_1_299db11bad.png
 featuredImageType: full
 category: CEO diaries
 ---
