@@ -57,7 +57,7 @@ These tables receive real-time event data via webhooks:
 
 ## Setting up the webhook
 
-PostHog automatically registers a reporting webhook in your Customer.io workspace using your App API key. This webhook streams message delivery events to PostHog in real time.
+PostHog automatically registers a reporting webhook in your Customer.io workspace using your App API key. The webhook starts disabled and activates automatically once you provide the signing key. This prevents events from being lost before PostHog can verify them.
 
 ### Adding the signing key
 
