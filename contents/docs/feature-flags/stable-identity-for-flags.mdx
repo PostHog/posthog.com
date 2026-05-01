@@ -43,6 +43,12 @@ Hashes on `$device_id` instead of `distinct_id`. Since the device ID doesn't cha
 
 See [Device bucketing](/docs/feature-flags/device-bucketing) for setup.
 
+<CalloutBox type="warning">
+**Warning: Changing bucketing method re-evaluates users**
+
+If you change a flag's bucketing method (from `device_id` to `person` or vice versa), all users will be re-evaluated against the new bucketing option. This can cause the flag to evaluate to a different value for existing users, potentially disrupting their experience or corrupting experiment data. Plan changes carefully and consider the impact on active experiments.
+</CalloutBox>
+
 | | Device bucketing | Experience continuity |
 |---|---|---|
 | Database cost | None | Read on every evaluation, write on first identify |
