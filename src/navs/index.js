@@ -3728,6 +3728,16 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Live',
+                    url: '/docs/web-analytics/live',
+                    icon: 'IconLive',
+                    color: 'red',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-red/10 !text-red !dark:text-white !dark:bg-red/50',
+                    },
+                },
+                {
                     name: 'Conversion goals',
                     url: '/docs/web-analytics/conversion-goals',
                     icon: 'IconFunnels',
