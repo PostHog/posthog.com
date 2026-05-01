@@ -115,19 +115,6 @@ posthog.init('<ph_project_token>', {
 
 </Step>
 
-<Step title="Manually flush logs before unload" badge="optional">
-
-Records flush automatically every `flushIntervalMs`, but for an immediate drain – e.g. in a `pagehide` handler before the tab is closed – call `posthog.flushLogs()`:
-
-```js
-posthog.flushLogs() // uses the configured transport
-posthog.flushLogs('sendBeacon') // forces sendBeacon, useful for unload handlers
-```
-
-`sendBeacon` is the right choice in `pagehide` / `beforeunload` because the browser guarantees delivery even after the page is gone, where a regular `fetch` may be canceled.
-
-</Step>
-
 <Step title="Link logs to sessions and users" badge="recommended">
 
 When `posthog-js` is initialized, the web SDK automatically attaches the current `distinct_id` and `session_id` to every log record. Log entries appear linked to the matching [Session Replay](/docs/session-replay) and person without any extra setup.
