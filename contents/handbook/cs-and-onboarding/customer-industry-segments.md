@@ -71,7 +71,7 @@ Commonly, they share developer-centric focus on adoption and retention. The high
 
 **Observability** – Monitoring model performance, token use, latency, unit economics, and hallucination rates in environments. Primarily related to teams who ship features that directly interact with human users.
 
-**Feature Store** – Centralized system for serving, storing, and managing machine learning features that are used in training and inference. These are more commonly found with mature data organizations.
+**Feature store** – Centralized system for serving, storing, and managing machine learning features that are used in training and inference. These are more commonly found with mature data organizations.
 
 **Tokens** – Units of processing/billing for LLMs. Can vary based on segment. Other variations would involve count, prediction, job, credit.
 
