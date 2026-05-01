@@ -185,6 +185,10 @@ The agent will use the `create-feature-flag` tool with a `multivariate` configur
 
 The agent will use the `query-run` tool to execute a trends query and return daily signup counts.
 
+**Prompt:** "Show me pageviews and button clicks combined as one trend line over the last 30 days"
+
+The agent combines the events into a single series using OR logic, counting both event types together rather than as separate lines.
+
 ### Cohort management
 
 **Prompt:** "List all cohorts in my project"
