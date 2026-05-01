@@ -63,7 +63,9 @@ What themes can we distill from the above HOGS list? What are categories of thin
 
 ## New goals (15 minutes - do as a team)
 
-This is an example - feel free to adapt as you need. Generally it is a good idea to have at least one person's name against each thing for accountability even if multiple people work on it - shared goals usually results in less getting shipped. 
+This is an example - feel free to adapt as you need. Generally it is a good idea to have at least one person's name against each thing for accountability even if multiple people work on it - shared goals usually results in less getting shipped.
+
+_For engineering teams - did you do anything cool last quarter that other engineers could learn from? Consider adding a goal to write about those things!_
 
 Objective 1: PostHog in the EU
 Motivation: Unblock 1,000s of customers [link to data] who need to keep data in the EU but are not capable of self hosting.
