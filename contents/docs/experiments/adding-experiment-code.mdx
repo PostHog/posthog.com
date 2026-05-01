@@ -16,9 +16,9 @@ Once you've created your experiment in PostHog, the next step is to add your cod
 
 In your experiment, each user is randomly assigned to a variant (usually either 'control' or 'test'). To check which variant a user has been assigned to, fetch the experiment feature flag. You can then customize their experience based on the value in the feature flag:
 
-<CalloutBox icon="IconWarning" title="Only getFeatureFlag() counts as an exposure" type="caution">
+<CalloutBox icon="IconWarning" title="Only flag value access counts as an exposure" type="caution">
 
-You must use `getFeatureFlag()` (or its framework equivalent like `useFeatureFlagVariantKey()`) to check variants. Other methods like `getAllFlags()`, `getFeatureFlags()`, or `getFeatureFlagPayload()` alone do **not** record an [exposure event](/docs/experiments/exposures). Users evaluated with those methods won't be included in your experiment results.
+You must use `getFeatureFlag()` (or its framework equivalent like `useFeatureFlagVariantKey()`) to check variants. In server SDKs with snapshot APIs, use the snapshot value accessor like `flags.getFlag()` / `flags.get_flag()` / `flags.GetFlag()`. Other methods like `getAllFlags()`, `getFeatureFlags()`, or payload-only accessors do **not** record an [exposure event](/docs/experiments/exposures). Users evaluated with those methods won't be included in your experiment results.
 
 </CalloutBox>
 
@@ -107,10 +107,11 @@ if (PostHogSDK.shared.getFeatureFlag("experiment-feature-flag-key") as? String =
 ```
 
 ```node
-const variant = await client.getFeatureFlag('experiment-feature-flag-key', 'user_distinct_id')
+const flags = await client.evaluateFlags('user_distinct_id')
+const variant = flags.getFlag('experiment-feature-flag-key')
 
 if (variant === 'variant-name') {
-    // do something
+    // Do something
 }
 ```
 
@@ -123,7 +124,8 @@ if variant == "variant-name":
 ```
 
 ```php
-$variant = PostHog::getFeatureFlag('experiment-feature-flag-key', 'user_distinct_id')
+$flags = PostHog::evaluateFlags('user_distinct_id');
+$variant = $flags->getFlag('experiment-feature-flag-key');
 
 if ($variant === 'variant-name') {
     // Do something differently for this user
@@ -131,37 +133,40 @@ if ($variant === 'variant-name') {
 ```
 
 ```ruby
-variant = posthog.get_feature_flag('experiment-feature-flag-key', 'user_distinct_id')
+flags = posthog.evaluate_flags('user_distinct_id')
+variant = flags.get_flag('experiment-feature-flag-key')
 
 if variant == 'variant-name'
-    # Do something 
+    # Do something
 end
 ```
 
 ```go
-variant, err := client.GetFeatureFlag(posthog.FeatureFlagPayload{
-    Key:        "experiment-feature-flag-key",
+flags, err := client.EvaluateFlags(posthog.EvaluateFlagsPayload{
     DistinctId: "user_distinct_id",
 })
 if err != nil {
     // Handle error (e.g. capture error and fallback to default behavior)
 }
+variant := flags.GetFlag("experiment-feature-flag-key")
+
 if variant == "variant-name" {
     // Do something
 }
 ```
 
 ```elixir
-{:ok, feature_flag} = PostHog.feature_flag("experiment-feature-flag-key", "user_distinct_id")
+{:ok, snapshot} = PostHog.FeatureFlags.evaluate_flags("user_distinct_id")
+variant = PostHog.FeatureFlags.Evaluations.get_flag(snapshot, "experiment-feature-flag-key")
 
-if feature_flag.enabled == "variant-name" do
+if variant == "variant-name" do
     # Do something
 end
 ```
 
 ```java
-Object flagValue = posthog.getFeatureFlag("user_distinct_id", "experiment-feature-flag-key", "control");
-String variant = flagValue instanceof String ? (String) flagValue : "control";
+PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags("user_distinct_id");
+Object variant = flags.getFlag("experiment-feature-flag-key");
 
 if ("variant-name".equals(variant)) {
     // Do something
@@ -169,9 +174,10 @@ if ("variant-name".equals(variant)) {
 ```
 
 ```dotnet
-var featureFlag = await posthog.GetFeatureFlagAsync("experiment-feature-flag-key", "user_distinct_id");
+var flags = await posthog.EvaluateFlagsAsync("user_distinct_id");
+var variant = flags.GetFlag("experiment-feature-flag-key")?.VariantKey;
 
-if (featureFlag is { VariantKey: "variant-name" })
+if (variant == "variant-name")
 {
     // Do something
 }

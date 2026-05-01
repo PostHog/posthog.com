@@ -80,7 +80,7 @@ import ConfigureFlagsSecureKey from "../../integrate/_snippets/configure-flags-s
 
 ## Step 3: Evaluate your feature flag
 
-To evaluate the feature flag, call the flag evaluation method for your SDK. In Python, use `evaluate_flags()` once and read values from the returned snapshot with `is_enabled()` or `get_flag()`. The only difference is that you must provide any `person properties`, `groups`, or `group properties` used to evaluate the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) of the flag.
+To evaluate the feature flag, call the flag evaluation method for your SDK. In server SDKs with snapshot APIs, evaluate flags once and read values from the returned snapshot. The only difference is that you must provide any `person properties`, `groups`, or `group properties` used to evaluate the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) of the flag.
 
 Then, by default, PostHog attempts to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request to fetch the flag value.
 
@@ -103,77 +103,64 @@ If you deploy frequently or have many short-lived workers, consider using a [sha
 <MultiLanguage>
 
 ```node
-await client.getFeatureFlag(
-    'flag-key',
-    'distinct_id_of_the_user',
-    {
-        // include any person properties, groups, or group properties required to evaluate the flag
-        personProperties: {
-            'property_name': 'value'
-        },
-        groups: {
-            "your_group_type": "your_group_id",
-            "another_group_type": "another_group_id",
-        },
-        groupProperties: {
-            'your_group_type': {
-                'group_property_name': 'value'
-            },
-            'another_group_type': {
-                'group_property_name': 'another value'
-            }
-        },
-        onlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
-    }
-)
+const flags = await client.evaluateFlags('distinct_id_of_the_user', {
+    // Include any person properties, groups, or group properties required to evaluate the flag
+    personProperties: { property_name: 'value' },
+    groups: {
+        your_group_type: 'your_group_id',
+        another_group_type: 'another_group_id',
+    },
+    groupProperties: {
+        your_group_type: { group_property_name: 'value' },
+        another_group_type: { group_property_name: 'another value' },
+    },
+    onlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
+})
+
+const flagValue = flags.getFlag('flag-key')
 ```
 
 ```ruby
-posthog.get_feature_flag(
-    'flag-key',
+flags = posthog.evaluate_flags(
     'distinct_id_of_the_user',
     # Include any person properties, groups, or group properties required to evaluate the flag
-    person_properties: {
-        'property_name': 'value'
-    },
+    person_properties: { 'property_name' => 'value' },
     groups: {
-        'your_group_type': 'your_group_id',
-        'another_group_type': 'another_group_id',
+        'your_group_type' => 'your_group_id',
+        'another_group_type' => 'another_group_id',
     },
     group_properties: {
-        'your_group_type': {
-            'group_property_name': 'value'
-        }
-        'another_group_type': {
-            'group_property_name': 'another value'
-        }
+        'your_group_type' => { 'group_property_name' => 'value' },
+        'another_group_type' => { 'group_property_name' => 'another value' },
     },
-    only_evaluate_locally: False # Optional. Defaults to False. Set to True if you don't want PostHog to make a server request if it can't evaluate locally
+    only_evaluate_locally: false, # Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
 )
+
+flag_value = flags.get_flag('flag-key')
 ```
 
 ```go
-enabledVariant, err := client.GetFeatureFlag(
-    FeatureFlagPayload{
-        Key:        "flag-key",
-        DistinctId: "distinct_id_of_the_user",
-        // Include any person properties, groups, or group properties required to evaluate the flag
-        Groups: posthog.NewGroups().
-            Set("your_group_type", "your_group_id").
-            Set("another_group_type", "another_group_id"),
-        PersonProperties: posthog.NewProperties().
-            Set("property_name", "value"),
-        GroupProperties: map[string]map[string]interface{}{
-            "your_group_type": {
-                "group_property_name": "value",
-            },
-            "another_group_type": {
-                "group_property_name": "another value",
-            },
-        },
-        OnlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
+flags, err := client.EvaluateFlags(posthog.EvaluateFlagsPayload{
+    DistinctId: "distinct_id_of_the_user",
+    // Include any person properties, groups, or group properties required to evaluate the flag
+    Groups: posthog.NewGroups().
+        Set("your_group_type", "your_group_id").
+        Set("another_group_type", "another_group_id"),
+    PersonProperties: posthog.NewProperties().
+        Set("property_name", "value"),
+    GroupProperties: map[string]posthog.Properties{
+        "your_group_type": posthog.NewProperties().
+            Set("group_property_name", "value"),
+        "another_group_type": posthog.NewProperties().
+            Set("group_property_name", "another value"),
     },
-)
+    OnlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
+})
+if err != nil {
+    // Handle error
+}
+
+flagValue := flags.GetFlag("flag-key")
 ```
 
 ```python
@@ -196,65 +183,70 @@ flag_value = flags.get_flag("flag-key")
 ```
 
 ```php
-PostHog::getFeatureFlag(
-    'flag-key',
-    'distinct_id_of_the_user',
+$flags = PostHog::evaluateFlags(
+    distinctId: 'distinct_id_of_the_user',
     // Include any person properties, groups, or group properties required to evaluate the flag
-    [
+    groups: [
         'your_group_type' => 'your_group_id',
-        'another_group_type' => 'another_group_id'
-    ], // groups
-    ['property_name' => 'value'], // person properties
-    [
+        'another_group_type' => 'another_group_id',
+    ],
+    personProperties: ['property_name' => 'value'],
+    groupProperties: [
         'your_group_type' => ['group_property_name' => 'value'],
-        'another_group_type' => ['group_property_name' => 'another value']
-    ], // group properties
-    false, // only_evaluate_locally, Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
-    true // sendFeatureFlagEvents
+        'another_group_type' => ['group_property_name' => 'another value'],
+    ],
+    onlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
 );
+
+$flagValue = $flags->getFlag('flag-key');
 ```
 
 ```csharp
-await posthog.GetFeatureFlagAsync(
-    "flag-key",
+var flags = await posthog.EvaluateFlagsAsync(
     "distinct_id_of_the_user",
-    options: new FeatureFlagOptions
+    new AllFeatureFlagsOptions
     {
         PersonProperties = new()
         {
-            ["property_name"] = "value"
+            ["property_name"] = "value",
         },
         Groups = new()
         {
             new Group("your_group_type", "your_group_id")
             {
-                ["group_property_name"] = "value"
+                ["group_property_name"] = "value",
             },
             new Group("another_group_type", "another_group_id")
             {
-                ["group_property_name"] = "another value"
-            }
-        }
+                ["group_property_name"] = "another value",
+            },
+        },
+        OnlyEvaluateLocally = false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
     }
 );
+
+var flagValue = flags.GetFlag("flag-key");
 ```
 
 ```java
-posthog.getFeatureFlag(
+PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags(
     "distinct_id_of_the_user",
-    "flag-key",
-    PostHogFeatureFlagOptions
-        .builder()
+    PostHogEvaluateFlagsOptions.builder()
         .personProperty("property_name", "value")
         .group("your_group_type", "your_group_id")
         .group("another_group_type", "another_group_id")
         .groupProperty("your_group_type", "group_property_name", "value")
         .groupProperty("another_group_type", "group_property_name", "another value")
-        .build());
+        .onlyEvaluateLocally(false) // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
+        .build()
+);
+
+Object flagValue = flags.getFlag("flag-key");
 ```
 
 ```rust
 use std::collections::HashMap;
+use posthog_rs::EvaluateFlagsOptions;
 use serde_json::json;
 
 // Include any person properties, groups, or group properties required to evaluate the flag
@@ -274,13 +266,18 @@ let mut another_group_props = HashMap::new();
 another_group_props.insert("group_property_name".to_string(), json!("another value"));
 group_props.insert("another_group_type".to_string(), another_group_props);
 
-let flag = client.get_feature_flag(
-    "flag-key".to_string(),
-    "distinct_id_of_the_user".to_string(),
-    Some(groups),
-    Some(person_props),
-    Some(group_props),
+let flags = client.evaluate_flags(
+    "distinct_id_of_the_user",
+    EvaluateFlagsOptions {
+        groups: Some(groups),
+        person_properties: Some(person_props),
+        group_properties: Some(group_props),
+        only_evaluate_locally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
+        ..Default::default()
+    },
 ).await.unwrap();
+
+let flag = flags.get_flag("flag-key");
 ```
 
 </MultiLanguage>

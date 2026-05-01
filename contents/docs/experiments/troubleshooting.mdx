@@ -141,7 +141,7 @@ Something changed in the evaluation inputs. Common causes: `identify()` called a
 
 The flag is being evaluated in a context you didn't expect. Server-side evaluation without bot filtering means bots are participants. `getAllFlags()` in your code means exposures aren't being recorded. Multiple SDKs evaluating the same flag with different distinct IDs means duplicate exposures.
 
-**Check:** Search your codebase for every place the flag key appears. Is every evaluation using `getFeatureFlag()`? Is the distinct ID consistent? Is bot traffic filtered? See [which SDK methods trigger exposure](/docs/experiments/exposures#which-sdk-methods-trigger-exposure).
+**Check:** Search your codebase for every place the flag key appears. Is every evaluation using `getFeatureFlag()` or a server-side snapshot value accessor like `getFlag()`? Is the distinct ID consistent? Is bot traffic filtered? See [which SDK methods trigger exposure](/docs/experiments/exposures#which-sdk-methods-trigger-exposure).
 
 ### Metric shows all "none" values with a property breakdown
 
