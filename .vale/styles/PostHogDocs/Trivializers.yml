@@ -1,0 +1,13 @@
+extends: existence
+message: "Avoid trivializing words. '%s' can sound dismissive to the reader."
+link: https://posthog.com/handbook/docs-and-wizard/docs-style-guide
+level: warning
+ignorecase: true
+tokens:
+    - simply
+    - easily
+    - easy to
+    - obviously
+    - merely
+    - all you need to do
+    - all you have to do

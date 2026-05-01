@@ -54,6 +54,6 @@ export const unleash = {
         },
     },
     pricing: {
-        model: 'Free + cloud subscription',
+        model: 'Seat-based',
     },
 }

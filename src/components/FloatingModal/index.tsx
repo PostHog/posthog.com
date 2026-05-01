@@ -104,7 +104,7 @@ const FloatingModal = ({ children }: { children: React.ReactNode }): JSX.Element
                             className="bg-primary text-primary shadow-2xl overflow-hidden size-full flex flex-col"
                         >
                             <div
-                                className={`rounded border border-primary overflow-hidden size-full ${
+                                className={`rounded border border-primary overflow-hidden size-full flex flex-col ${
                                     hasDragged ? '' : 'rounded-br-none rounded-bl-none'
                                 }`}
                             >

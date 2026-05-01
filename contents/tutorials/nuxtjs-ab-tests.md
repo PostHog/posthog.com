@@ -48,7 +48,7 @@ Next we add PostHog (if you don't have a PostHog instance, you can [sign up for 
 npm install posthog-js
 ```
 
-Then, add your PostHog API key and host to your `nuxt.config.ts` file. You can find your project API key in your [PostHog project settings](https://app.posthog.com/settings/project)
+Then, add your PostHog token and host to your `nuxt.config.ts` file. You can find your project token in your [PostHog project settings](https://app.posthog.com/settings/project)
 
 ```ts file=nuxt.config.ts
 export default defineNuxtConfig({
@@ -56,7 +56,7 @@ export default defineNuxtConfig({
   
   runtimeConfig: {
     public: {
-      posthogPublicKey: '<ph_project_api_key>',
+      posthogToken: '<ph_project_token>',
       posthogHost: '<ph_client_api_host>',
       posthogDefaults: '<ph_posthog_js_defaults>',
     }
@@ -72,7 +72,7 @@ import posthog from 'posthog-js'
 
 export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
-  const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
+  const posthogClient = posthog.init(runtimeConfig.public.posthogToken, {
     api_host: runtimeConfig.public.posthogHost,
     defaults: runtimeConfig.public.defaults,
   })
@@ -232,11 +232,11 @@ const { data: ctaData, error } = await useAsyncData('ctaText', async () => {
   let ctaText = 'No Variant';
   const runtimeConfig = useRuntimeConfig();
   const posthog = new PostHog(
-    runtimeConfig.public.posthogPublicKey,
+    runtimeConfig.public.posthogToken,
     { host: runtimeConfig.public.posthogHost }
   );
 
-  const cookies = useCookie(`ph_${runtimeConfig.public.posthogPublicKey}_posthog`);
+  const cookies = useCookie(`ph_${runtimeConfig.public.posthogToken}_posthog`);
   if (cookies && cookies.value) {
     try {
       const userId = cookies.value.distinct_id;

@@ -39,6 +39,27 @@ export const newrelic = {
         session_replay: {
             available: true,
         },
+        logs: {
+            available: true,
+            core_logging_and_ingestion: {
+                features: {
+                    native_open_telemetry_ingest: 'Limited, proprietary',
+                },
+            },
+            observability: {
+                features: {
+                    metrics: true,
+                    traces: true,
+                    alerting: true,
+                    infra_monitoring: true,
+                },
+            },
+        },
+        llm_analytics: {
+            // They have some open source tools, but it's not native:
+            // https://newrelic.com/instant-observability/openllm
+            available: false,
+        },
         surveys: {
             available: false,
         },
@@ -70,6 +91,7 @@ export const newrelic = {
             cms: '',
             notebooks: true,
             project_management_tools: '',
+            ai_assistant: true,
         },
         integrations: {
             azure_blob: true,
@@ -115,6 +137,7 @@ export const newrelic = {
             reverse_proxy: false,
             role_based_access_control: true,
             saml_sso: true,
+            siem: false,
             soc2_certified: true,
             two_factor_auth: true,
             user_privacy_options: true,

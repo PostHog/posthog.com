@@ -1,0 +1,22 @@
+Add `PostHogProvider` and `PostHogPageView` to your root layout:
+
+```tsx file=app/layout.tsx
+import { PostHogProvider, PostHogPageView } from '@posthog/next'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+    return (
+        <html lang="en">
+            <body>
+                <PostHogProvider clientOptions={{ api_host: '/ingest' }} bootstrapFlags>
+                    <PostHogPageView />
+                    {children}
+                </PostHogProvider>
+            </body>
+        </html>
+    )
+}
+```
+
+`PostHogProvider` is a React Server Component. When `bootstrapFlags` is enabled, it evaluates feature flags server-side and passes the results to the client so hooks return real values immediately.
+
+> **Note:** Enabling `bootstrapFlags` opts the route into dynamic rendering (incompatible with static generation / ISR). Without it, the provider does not call any dynamic Next.js APIs and is safe for static pages.

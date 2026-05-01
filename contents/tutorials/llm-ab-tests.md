@@ -71,7 +71,7 @@ import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     })
@@ -119,7 +119,7 @@ const openai = new OpenAI({
 });
 
 export async function POST(request) {
-  const posthog = new PostHog("<ph_project_api_key>", {
+  const posthog = new PostHog("<ph_project_token>", {
     api_host:  "<ph_client_api_host>",
   })
   
@@ -255,7 +255,7 @@ To implement the A/B test, we:
 // your existing imports and code
 
 export async function POST(request) {
-  const posthog = new PostHog("<ph_project_api_key>", {
+  const posthog = new PostHog("<ph_project_token>", {
     api_host:  "<ph_client_api_host>",
   })
   

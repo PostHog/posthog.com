@@ -1,0 +1,7 @@
+extends: existence
+message: "Use 'project token' instead of 'project API key'. The project token (phc_) is not an API key."
+link: https://posthog.com/handbook/docs-and-wizard/docs-style-guide#keys-and-tokens
+level: warning
+vocab: false
+raw:
+    - '(?i)project\s+api\s+key'

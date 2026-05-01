@@ -143,7 +143,7 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                             )}
                                         </div>
                                         {item.images && item.images.length > 0 && (
-                                            <aside>
+                                            <aside className="@2xl:pr-10 shrink-0">
                                                 <div className="max-w-md mx-auto @2xl:ml-4">
                                                     <ProductImage images={item.images} />
                                                 </div>

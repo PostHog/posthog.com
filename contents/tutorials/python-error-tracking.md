@@ -30,7 +30,7 @@ source venv/bin/activate
 pip install posthog
 ```
 
-Once done, we can create our script in an `error.py` file. It initializes PostHog with a project API key and host from [your project settings](https://us.posthog.com/settings/project), and then intentionally raises an exception. We can use PostHog’s `enable_exception_autocapture` config option to automatically capture that unhandled exception.
+Once done, we can create our script in an `error.py` file. It initializes PostHog with a project token and host from [your project settings](https://us.posthog.com/settings/project), and then intentionally raises an exception. We can use PostHog’s `enable_exception_autocapture` config option to automatically capture that unhandled exception.
 
 This looks like this:
 
@@ -40,7 +40,7 @@ import os
 from posthog import Posthog
 
 posthog = Posthog(
-    api_key="<ph_project_api_key>",
+    api_key="<ph_project_token>",
     host="<ph_client_api_host>",
     enable_exception_autocapture=True
 )
@@ -100,7 +100,7 @@ You can then run `python app.py` and go to `http://localhost:5000/error` to see 
 
 ### Setting up PostHog
 
-Because we already installed PostHog, all we need to do now is initialize it with your project API key and host from [your project settings](https://us.posthog.com/settings/project), calling `capture_exception()` like this:  
+Because we already installed PostHog, all we need to do now is initialize it with your project token and host from [your project settings](https://app.posthog.com/settings/project), calling `capture_exception()` like this:  
 
 ```python
 from flask import Flask, jsonify
@@ -108,7 +108,7 @@ from posthog import Posthog
 
 app = Flask(__name__)
 
-posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
+posthog = Posthog('<ph_project_token>', host='<ph_client_api_host>')
 
 @app.route('/')
 def home():

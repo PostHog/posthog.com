@@ -47,13 +47,13 @@ npm i posthog-js
 
 Next, we’ll set up PostHog using the Composition API.
 
-In `src`, create a `composables` folder as well as a `usePosthog.js` file to that folder. In `usePosthog.js`, initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project) like this:
+In `src`, create a `composables` folder as well as a `usePosthog.js` file to that folder. In `usePosthog.js`, initialize PostHog with your project token and host from [your project settings](https://app.posthog.com/settings/project) like this:
 
 ```js file=src/composables/usePostHog.js
 import posthog from 'posthog-js'
 
 export function usePostHog() {
-  posthog.init('<ph_project_api_key>', {
+  posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     api_defaults: '<ph_posthog_js_defaults>',
   })
@@ -91,7 +91,7 @@ To do this, you can set `cookieless_mode` to `on_reject` in your initialization 
 import posthog from 'posthog-js'
 
 export function usePostHog() {
-  posthog.init('<ph_project_api_key>', {
+  posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     api_defaults: '<ph_posthog_js_defaults>',
     cookieless_mode: 'on_reject' // +

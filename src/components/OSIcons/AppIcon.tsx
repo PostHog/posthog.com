@@ -115,8 +115,8 @@ const PRODUCT_ICON_MAP = {
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/ga3_1651ec493f.png',
     },
     ai: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_classic_e50b339fec.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/as_modern_090d1c5c71.png',
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/sparkles_classic_7a709c1532.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/sparkles_modern_025a083949.png',
     },
     aiMax: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Icon_AI_Max_Style_Classic_a0cd524bfa.png',
@@ -157,6 +157,10 @@ const PRODUCT_ICON_MAP = {
     dataIn: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Data_In_Classic_b58bd17dbf.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Data_In_Modern_cf968580e4.png',
+    },
+    dataWarehouse: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_classic_224c4dcd25.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_modern_493f5463e7.png',
     },
     dataOut: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Data_Out_Classic_9ed0e7c3dc.png',
@@ -377,6 +381,8 @@ export const AppLink = ({
 
     const renderChildIcon = () => {
         if (!parentIcon || !Icon) return null
+        // if parentIcon is a PRODUCT_ICON_MAP key, it's a complete icon, no child overlay needed
+        if (typeof parentIcon === 'string' && isAppIconName(parentIcon)) return null
 
         if (typeof Icon === 'string') {
             return <IconImage url={Icon} className={getChildIconClasses()} />

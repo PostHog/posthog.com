@@ -22,6 +22,7 @@ const CUSTOMER_ORDER = [
     'researchgate',
     'startengine',
     'exa',
+    'convex',
     'hasura',
     'trust',
     'heygen',

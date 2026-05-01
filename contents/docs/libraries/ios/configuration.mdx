@@ -59,7 +59,7 @@ Since version 3.28.0, you can provide a `BeforeSendBlock` function when initiali
 <summary>Redact URLs in event properties</summary>
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_api_client_host>")
 
 config.setBeforeSend { event in
     // Redact URLs
@@ -75,7 +75,7 @@ config.setBeforeSend { event in
 <summary>Redact sensitive information from event properties</summary>
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_api_client_host>")
 
 config.setBeforeSend { event in
     // Redact sensitive information
@@ -93,7 +93,7 @@ config.setBeforeSend { event in
 <summary>Drop events by event name</summary>
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_api_client_host>")
 
 config.setBeforeSend { event in
     // Drop all events named "Stale Event"
@@ -114,7 +114,7 @@ Sampling lets you choose to send only a percentage of events to PostHog. It is a
 <summary>Sample events by event name</summary>
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_api_client_host>")
 
 config.setBeforeSend { event in
     // Sample 10% of Sampled Event events
@@ -138,7 +138,7 @@ config.setBeforeSend { event in
 You can provide an array of `BeforeSendBlock` functions to be called one after the other:
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_api_client_host>")
 
 config.setBeforeSend(
     // First block: Drop all events named "Stale Event"
@@ -166,7 +166,7 @@ config.setBeforeSend(
 2. **Configure PostHog**: Use the same App Group identifier in all targets:
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_api_client_host>")
 config.appGroupIdentifier = "group.com.yourcompany.yourapp"
 PostHogSDK.shared.setup(config)
 ```
@@ -181,6 +181,7 @@ Method swizzling is enabled by default, but can be disabled by setting the relev
 | ------------------------------ | ------------------------------------------------------------------------------------- | -------------------------------- |
 | Screen view tracking           | Automatically captures when view controllers are presented                            | `config.captureScreenViews`      |
 | Element interactions           | Automatically tracks user interactions with UI elements                               | `config.captureElementInteractions` |
+| Rage clicks                    | Automatically captures `$rageclick` events for rapid repeated taps in the same area (iOS/macCatalyst, UIKit) | `config.rageClickConfig.enabled` |
 | Session replay                 | Records user sessions                                                                 | `config.sessionReplay`           |
 | Surveys                        | Displays surveys at appropriate times                                                 | `config.surveys`                 |
 | Advanced metrics tracking      | Provides more precise session ID calculation and rotation by detecting user activity and idleness | —                          |
@@ -191,7 +192,7 @@ Method swizzling is enabled by default, but can be disabled by setting the relev
 Since version 3.34.0, you can opt out of all swizzling using the `enableSwizzling` configuration option. When you disable swizzling, the SDK disables the features listed above. 
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_api_client_host>")
 config.enableSwizzling = false
 PostHogSDK.shared.setup(config)
 ```
@@ -224,6 +225,7 @@ The [`PostHogConfig` object](https://github.com/PostHog/posthog.com/pull/13379/f
 | `captureScreenViews`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Whether the posthog client should automatically make a screen call when a view controller is added to a view hierarchy. Because the underlying implementation uses method swizzling, we recommend initializing the posthog client as early as possible (before any screens are displayed), ideally during the Application delegate's applicationDidFinishLaunching method. |
 | `enableSwizzling`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Enable method swizzling for SDK functionality that depends on it. When disabled, functionality that requires swizzling (like autocapture, screen views, session replay, surveys) will not be installed. |
 | `captureElementInteractions`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | (UIKit only) Whether the posthog client should automatically make a capture call when the user interacts with an element in a screen. |
+| `rageClickConfig`<br/><br/>**Type:** Object<br/>**Default:** `.init()` | (iOS/macCatalyst, UIKit) Rage click detection configuration. Includes `enabled` (default `true`), `minimumTapCount` (default `3`), `thresholdPoints` (default `30`), and `timeoutInterval` (default `1.0`). Works independently of `captureElementInteractions`. Available in version 3.51.0+. |
 | `sendFeatureFlagEvent`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Send a `$feature_flag_called` event when a feature flag is used automatically. |
 | `preloadFeatureFlags`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Preload feature flags automatically. |
 | `evaluationContexts`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined` | Evaluation context tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned. See [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) for more details. Available in version 3.34.0+. The legacy parameter `evaluationEnvironments` (version 3.33.0+) is also supported for backward compatibility. |

@@ -5,6 +5,7 @@ export const AssignAnOverrideLight = "https://res.cloudinary.com/dmukukwp6/video
 export const AssignAnOverrideDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-dark-mode.mp4"
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import ReturningUsersExposures from "./snippets/returning-users-exposures.mdx"
 export const ReuseFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-light-mode.png"
 export const ReuseFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-dark-mode.png"
 
@@ -18,7 +19,7 @@ This page covers troubleshooting for Experiments. For setup, see the [installati
 
 We generally don't recommend this, since experiment feature flags need to be in a specific format (see below) or otherwise they won't work.
 
-However, if you insist on doing this (for example, you don't want to make code change), you can do this for **multiple variant feature flags only** by doing the following:
+However, if you insist on doing this (for example, you don't want to make code change), you can do this for **feature flags with at least 2 variants** by doing the following:
 
 1. Delete the existing [feature flag](https://app.posthog.com/feature_flags) you'd like to use in the experiment
 2. Create a new experiment and give your feature flag the same key as the feature flag you deleted in step 1.
@@ -35,7 +36,15 @@ However, if you insist on doing this (for example, you don't want to make code c
 
 ## How do I run a second experiment using the same feature flag as the first experiment?
 
-This is similar to running an experiment using an [existing feature flag](#how-do-i-use-an-existing-feature-flag-in-an-experiment). If you want to re-run an experiment (using the same feature flag key) while preserving the previous experiment results, delete the existing feature flag (not the experiment) and use the same key in the new experiment.
+End the first experiment, then create a new experiment and select the existing flag. You can also duplicate the experiment, which preserves your metric setup and lets you choose between reusing the same flag, selecting a different existing flag, or creating a new one.
+
+## Why am I getting a feature flag validation error when creating an experiment?
+
+Experiments require feature flags to meet specific requirements. You may see validation errors if your feature flag doesn't meet them:
+
+- **"Feature flag must have at least 2 variants (control and at least one test variant)"**: Experiments need at least two variants: a `control` and at least one test variant. Single-variant flags cannot be used for experiments.
+
+- **"Feature flag must have a variant with key 'control'"**: One of your variants must have the key `control`. This is used as the baseline for comparison.
 
 ## How can I run experiments with my custom feature flag setup?
 
@@ -55,6 +64,10 @@ Once you create the experiment, go to the feature flag, scroll down to "Release 
 import FAQFalseOrNoneEvents from "../feature-flags/snippets/faq-false-or-none-events.mdx"
 
 <FAQFalseOrNoneEvents />
+
+## Why are returning users not showing as exposed to my experiment?
+
+<ReturningUsersExposures />
 
 ## Why are my A/B test event numbers lower than when I create an insight directly?
 
@@ -95,6 +108,46 @@ You can check your current exposure count on the experiment results page. If you
 - Verify your feature flag implementation.
 - Consider increasing your feature flag's rollout percentage.
 - Ensure your exposure events are firing correctly.
+
+## Diagnosing sample ratio mismatch (SRM)
+
+When PostHog flags SRM on your experiment, check these causes in order. They're ranked by frequency:
+
+1. **Bot traffic.** Bots that trigger server-side flag evaluations are full experiment participants. They hash deterministically into one variant, skewing the split. Fix: enable the CDP Bot Filter Transformation in Settings → Data pipeline → Transformations.
+
+2. **Flag condition changes.** Did someone modify the flag's release conditions or rollout percentage after launch? Check the flag's activity log. Even API-level changes count. The UI locks experiment-linked flags, but the API doesn't enforce the same restrictions.
+
+3. **Identity fragmentation.** The same real user with two unlinked distinct IDs appears as two participants, potentially in different variants. Check your `identify()` flow. See [identity resolution](/docs/product-analytics/identity-resolution).
+
+4. **SDK dedup cache overflow.** Server-side SDKs (Node, Python) dedup exposure events in-memory with a 50,000 entry cache. If your server handles more than 50k distinct flag+value combinations between restarts, earlier entries are evicted and those users may fire duplicate exposures.
+
+5. **Normal early variance.** With fewer than ~1,000 exposures, a 55/45 split on a 50/50 experiment is statistically normal. Hash-based randomization converges with larger samples. If SRM fires early and your sample is small, wait.
+
+## Common issues and self-diagnosis
+
+### Users appearing in both control and test
+
+This is an identity problem. The user has two distinct IDs that haven't been linked. PostHog sees two separate persons, each correctly assigned a variant.
+
+**Check:** Are you calling `identify()` before or after the flag evaluation? Is the same stable ID used in every SDK that evaluates this flag? Did you call `reset()` somewhere that fragmented the session?
+
+### Variant flipped mid-session
+
+Something changed in the evaluation inputs. Common causes: `identify()` called after the flag was already evaluated with an anonymous ID. SDK cache cleared (by `reset()`, page reload without [bootstrapping](/docs/feature-flags/bootstrapping), or server restart). Release conditions modified on the flag while the experiment was running.
+
+**Check:** Pull both `$feature_flag_called` events for the user and compare the `distinct_id`, timestamp, and person properties.
+
+### Unexpected exposure numbers
+
+The flag is being evaluated in a context you didn't expect. Server-side evaluation without bot filtering means bots are participants. `getAllFlags()` in your code means exposures aren't being recorded. Multiple SDKs evaluating the same flag with different distinct IDs means duplicate exposures.
+
+**Check:** Search your codebase for every place the flag key appears. Is every evaluation using `getFeatureFlag()`? Is the distinct ID consistent? Is bot traffic filtered? See [which SDK methods trigger exposure](/docs/experiments/exposures#which-sdk-methods-trigger-exposure).
+
+### Metric shows all "none" values with a property breakdown
+
+The property doesn't exist on the event you're measuring.
+
+**Check:** Go to Data Management → Events → click the event → Properties tab. If your property isn't listed, your instrumentation needs to include it.
 
 ## Solved community questions
 

@@ -20,6 +20,44 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Open Runde';
+    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/v1774793747/fonts/OpenRunde-Regular.woff2')
+            format('woff2'),
+        url('https://res.cloudinary.com/dmukukwp6/raw/upload/v1774793749/fonts/OpenRunde-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Runde';
+    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/v1774793748/fonts/OpenRunde-Medium.woff2') format('woff2'),
+        url('https://res.cloudinary.com/dmukukwp6/raw/upload/v1774793749/fonts/OpenRunde-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Runde';
+    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/v1774793748/fonts/OpenRunde-Semibold.woff2')
+            format('woff2'),
+        url('https://res.cloudinary.com/dmukukwp6/raw/upload/v1774793748/fonts/OpenRunde-Semibold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Runde';
+    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/v1774793747/fonts/OpenRunde-Bold.woff2') format('woff2'),
+        url('https://res.cloudinary.com/dmukukwp6/raw/upload/v1774793750/fonts/OpenRunde-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* This is a copy of the Charter fonts which Bitstream contributed to the X consortium. This is the original notice included with the fonts: */
 
 /* (c) Copyright 1989-1992, Bitstream Inc., Cambridge, MA. You are hereby granted permission under all Bitstream propriety rights to use, copy, modify, sublicense, sell, and redistribute the 4 Bitstream Charter (r) Type 1 outline fonts and the 4 Courier Type 1 outline fonts for any purpose and without restriction; provided, that this notice is left intact on all copies of such fonts and that Bitstream's trademark is acknowledged as shown below on all unmodified copies of the 4 Charter Type 1 fonts. BITSTREAM CHARTER is a registered trademark of Bitstream Inc. */

@@ -86,6 +86,7 @@ For an example, see the [PostHog AI `README`](https://github.com/PostHog/posthog
 
 ## Further reading
 
+- [How to use the content writer agent](/handbook/docs-and-wizard/content-writer-agent)
 - [What nobody tells developers about documentation](/newsletter/what-nobody-tells-devs-about-docs)
 - [Docs style guide](/handbook/docs-and-wizard/docs-style-guide)
 - [PostHog style guide](/handbook/content/posthog-style-guide)

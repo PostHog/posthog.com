@@ -119,7 +119,7 @@ In the `app` folder, create an `api` folder, a `generate` folder inside it, and 
 
 Next, set up:
 
-1. The PostHog Node client using our project API key and API host which you can get from [your project settings](https://us.posthog.com/settings/project).
+1. The PostHog Node client using our project token and API host which you can get from [your project settings](https://us.posthog.com/settings/project).
 2. The Anthropic client which requires an API key from your [Anthropic console](https://console.anthropic.com/settings/keys).
 
 With both of these set up, we simply call the `anthropic.messages.create` method with the input and model then return the response. You can include a `posthogDistinctId` if you want to track specific users. 
@@ -131,7 +131,7 @@ import { Anthropic } from '@posthog/ai';
 import { PostHog } from 'posthog-node';
 
 const phClient = new PostHog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   { host: '<ph_api_client_host>' }
 );
 

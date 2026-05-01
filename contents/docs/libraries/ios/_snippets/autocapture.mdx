@@ -7,9 +7,10 @@ PostHog autocapture automatically tracks the following events for you:
 -   **Application Installed** - when the app is installed
 -   **Application Updated** - when the app is updated
 -   **$screen** - when the user navigates (if using `UIViewController`)
--   **$autocapture** - when the user interacts with elements in a screen (if using `UIKit`)
+-   **$autocapture** - when the user interacts with elements in a screen (`UIKit based`)
+-   **$rageclick** - when the user rapidly taps in the same area (iOS/macCatalyst, `UIKit based`)
 
-> 🚧 **Note:** `$autocapture` captures interactions with UIKit elements. Some SwiftUI views use UIKit under the hood (e.g., `TextField` → `UITextField`, `Toggle` → `UISwitch`) and will also be autocaptured.
+> 🚧 **Note:** `$autocapture` and `$rageclick` are captured from UIKit interactions. Some SwiftUI views use UIKit under the hood (for example, `TextField` → `UITextField` and `Toggle` → `UISwitch`), so those interactions may also be autocaptured. In other SwiftUI cases, interactions might still be captured, but element metadata (such as `$elements_chain`) may be incomplete.
 
 ### Capturing screen views
 
@@ -108,8 +109,27 @@ Interaction autocapture records when users interact with UI elements in your app
 Interaction autocapture is **not enabled by default**. You can enable it by setting `captureElementInteractions` to `true` in the config.
 
 ```swift
-let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
+let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
 config.captureElementInteractions = true // Disabled by default
+PostHogSDK.shared.setup(config)
+```
+
+### Rage click autocapture
+
+> **Note:** Rage click autocapture for iOS/macCatalyst is available in version 3.51.0+.
+
+A rage click is when a user taps an area multiple times in quick succession (e.g more than 3 taps in 1 second). 
+
+This is captured as a `$rageclick` event. You can use this event to identify opportunities to improve your UI, since it's a good indication that users may be frustrated with your product.
+
+It is enabled by default (`rageClickConfig.enabled = true`).
+
+```swift
+let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
+config.rageClickConfig.enabled = true // Enabled by default
+config.rageClickConfig.minimumTapCount = 3 // Optional, default is 3
+config.rageClickConfig.thresholdPoints = 30 // Optional, default is 30
+config.rageClickConfig.timeoutInterval = 1.0 // Optional, default is 1.0s
 PostHogSDK.shared.setup(config)
 ```
 

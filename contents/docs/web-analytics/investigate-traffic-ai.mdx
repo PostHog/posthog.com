@@ -1,0 +1,49 @@
+---
+title: Investigate traffic with PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) analyzes your [web traffic](/docs/web-analytics), investigates anomalies, and builds dashboards using natural language. Ask about traffic sources, bounce rates, user paths, or conversion rates – and PostHog AI queries your web analytics data to find answers.
+
+## How it works
+
+PostHog AI can break down your traffic by any dimension, including:
+
+- **Source and campaign** – organic, paid, referral, direct, and UTM-tagged traffic
+- **Geography** – country, region, and city
+- **Device** – desktop, mobile, tablet, browser, and OS
+- **Pages** – landing pages, exit pages, and navigation paths
+- **Time** – hourly, daily, weekly trends and comparisons
+
+## Investigate anomalies
+
+When you notice something unexpected – like a traffic spike or a sudden drop in conversions – PostHog AI can investigate. Ask "why did traffic drop on Tuesday?" and it compares across dimensions to identify what changed.
+
+For example, PostHog AI might find that:
+
+- A specific referral source stopped sending traffic
+- Mobile traffic dropped while desktop stayed flat
+- A particular landing page's bounce rate spiked
+
+This saves you from manually checking each dimension to isolate the cause.
+
+## Try it
+
+Select a prompt to try it out in the PostHog app:
+
+- [`Create a dashboard showing web traffic by source and campaign`](https://app.posthog.com/#panel=max:Create%20a%20dashboard%20showing%20web%20traffic%20by%20source%20and%20campaign)
+- [`Which landing pages have the highest bounce rate this week?`](https://app.posthog.com/#panel=max:Which%20landing%20pages%20have%20the%20highest%20bounce%20rate%20this%20week%3F)
+- [`Find the most common paths users take after visiting the blog`](https://app.posthog.com/#panel=max:Find%20the%20most%20common%20paths%20users%20take%20after%20visiting%20the%20blog)
+- [`Show me traffic trends for the past 30 days broken down by country`](https://app.posthog.com/#panel=max:Show%20me%20traffic%20trends%20for%20the%20past%2030%20days%20broken%20down%20by%20country)
+- [`What's driving the traffic spike we saw yesterday?`](https://app.posthog.com/#panel=max:What%27s%20driving%20the%20traffic%20spike%20we%20saw%20yesterday%3F)
+- [`Compare organic vs paid traffic conversion rates`](https://app.posthog.com/#panel=max:Compare%20organic%20vs%20paid%20traffic%20conversion%20rates)
+
+## Tips for better results
+
+- **Name the dimension** – "by source" or "broken down by country" tells PostHog AI which breakdown to apply
+- **Ask about specific pages** – "bounce rate on `/pricing`" is more useful than "bounce rates"
+- **Compare time periods** – "this week vs last week" or "month over month" gives you trend context
+- **Describe the anomaly** – "Why did traffic drop on Tuesday?" prompts PostHog AI to investigate across dimensions
+
+## Get started
+
+To start investigating traffic with PostHog AI, [set up PostHog AI](/docs/posthog-ai/start-here).

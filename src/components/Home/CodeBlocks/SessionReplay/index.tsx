@@ -59,7 +59,7 @@ function ConsoleLogs() {
                 <div className="shrink">
                     <h4 className="text-lg">Your code</h4>
                     <CodeBlock
-                        code={`posthog.init('<ph_project_api_key>', {
+                        code={`posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   enable_recording_console_log: true,
@@ -91,7 +91,7 @@ function EnableCohortRecordings() {
             <div>
                 <h4 className="text-lg">Your code</h4>
                 <CodeBlock
-                    code={`posthog.init('<ph_project_api_key>', {
+                    code={`posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   disable_session_recording: true,

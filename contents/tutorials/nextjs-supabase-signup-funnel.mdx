@@ -107,6 +107,7 @@ Now, head to the [Supabase dashboard](https://app.supabase.io/) to create a proj
 
 You may need to select an Organization. You will need to enter details for a project name, database password, and choose a deployment region. Once done, click the **Create new project** button.
 
+<!-- vale PostHogBase.ProjectToken = NO -->
 You'll then be presented with a page showing **Project API keys** and **Project Configuration**.
 
 ![Supabase Project API keys and Project Configuration](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/supabase-api-keys-configuration.png)
@@ -115,6 +116,7 @@ Update the contents of `.env.local` as follows:
 
 -   Update the `NEXT_PUBLIC_SUPABASE_URL` value to be the URL from **Project Configuration**
 -   Update the `NEXT_PUBLIC_SUPABASE_ANON_KEY` value to be the API key tagged with `anon` and `public` from **Project API keys**
+<!-- vale PostHogBase.ProjectToken = YES -->
 
 Next, within the Supabase dashboard project settings select **Auth settings** and add `http://localhost:3000/auth` to the **Additional Redirect URLs** field.
 
@@ -251,11 +253,11 @@ A user can now sign up with our app but there are a number of potential drop-off
 Add two new environment variables to `.env.local` that will be used with the PostHog JavaScript SDK:
 
 ```
-NEXT_PUBLIC_POSTHOG_API_KEY=your_posthog_api_key
+NEXT_PUBLIC_POSTHOG_TOKEN=<ph_project_token>
 NEXT_PUBLIC_POSTHOG_HOST=your_posthog_host
 ```
 
-The value for `NEXT_PUBLIC_POSTHOG_API_KEY` can be found via **Project** in the left-hand menu of your PostHog app, underneath the **Project API Key** heading.
+The value for `NEXT_PUBLIC_POSTHOG_TOKEN` can be found via **Project** in the left-hand menu of your PostHog app, underneath the **Project token** heading.
 
 The value for `NEXT_PUBLIC_POSTHOG_HOST` is the public URL for ingesting events into your PostHog instance. If you're using US cloud, this is `https://us.i.posthog.com`.
 
@@ -277,7 +279,7 @@ import { PostHogProvider } from '@posthog/react'
 
 // Check that PostHog is client-side
 if (typeof window !== 'undefined') {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
         // Enable debug mode in development
         loaded: (posthog) => {
