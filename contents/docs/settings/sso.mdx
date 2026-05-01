@@ -47,7 +47,7 @@ SSO configuration mostly occurs in your Organization settings and is based on au
 
 Authentication domains need to be verified if you are on PostHog Cloud.
 
-To add an Authentication domain, go to your [Organization settings](https://us.posthog.com/settings/organization-authentication).
+To add an Authentication domain, go to your [Organization settings](https://app.posthog.com/settings/organization-authentication).
 
 Authentication domains must be verified in PostHog Cloud. We do this through DNS verification. You will have to add a `TXT` record to your DNS zone with a specific value to prove you have authority over the domain. Verification only needs to be done once, but **the record must be kept at all times,** as we do periodic DNS verification.
 
@@ -86,6 +86,14 @@ This applies to administrators and organization owners, too. Please be sure your
 If you enable SSO enforcement for a particular domain, any user who signs up or logs in with an email address on that domain will be required to use the SSO provider you enforced. This applies to existing users too and users not in your organization.
 
 You can enable SSO enforcement through Authentication domains in your Organization settings.
+
+### Email change restrictions
+
+When SSO enforcement is enabled on a domain, users with email addresses on that domain can't change their email address. This prevents bypassing SSO requirements by switching to an unmanaged domain.
+
+Similarly, users can't change their email to an address on an SSO-enforced domain. This prevents lockout scenarios where a user moves to a domain that requires SSO but has no way to satisfy the enforced login method.
+
+Additionally, when any user successfully verifies a new email address, all connected social authentication providers (Google, GitHub, GitLab) are automatically disconnected. This ensures the old email's social login can no longer access the account. Users need to reconnect these providers with their new email address if they wish to use social login.
 
 ## Third-party providers
 
