@@ -1090,6 +1090,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     const fetchAchievements = async () => {
         const query = qs.stringify({
             populate: ['icon', 'achievement_group.achievements.icon'],
+            publicationState: 'preview',
         })
         const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements?${query}`).then((res) =>
             res.json()
@@ -1110,7 +1111,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     const fetchAchievementGroups = async () => {
         const query = qs.stringify({
-            populate: ['achievements.icon'],
+            populate: ['achievements.icon', 'icon'],
+            publicationState: 'preview',
         })
         const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievement-groups?${query}`).then(
             (res) => res.json()
