@@ -1,6 +1,6 @@
 ---
-title: "In-depth: DuckDB vs ClickHouse"
-date: 2026-04-14
+date: 2026-05-01
+title: 'DuckDB vs ClickHouse: Why we use both at PostHog'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -14,101 +14,118 @@ category: Engineering
 tags:
   - Explainers
   - ClickHouse
-  - Data warehouse
+description: >-
+  ClickHouse and DuckDB are both OLAP databases, but they solve different
+  problems. Here's how we use both at PostHog and why we built Duckgres to
+  make DuckDB work like Postgres.
 ---
 
-import DuckDBWaitlistSurvey from 'components/DuckDBWaitlistSurvey'
+ClickHouse and DuckDB are two heavyweights in the OLAP category. This makes them appear as direct competitors. In a few respects they are, but they are essentially tangential products that have garnered popularity in the OLAP world for separate reasons.
 
-DuckDB and ClickHouse are two heavyweights in the OLAP category. This makes them appear as direct competitors. In a few respects they are, but they are essentially tangential products that have garnered popularity in the OLAP world for separate reasons.
+In fact, at PostHog, we use both ClickHouse and DuckDB. Today, we want to dissect their precise differences and discuss why an organization like us has appetite for double (OLAP) trouble.
 
-In fact, at PostHog, we use both ClickHouse and DuckDB. Today, we want to dissect their precise differences and why an organization like us has appetite for double (OLAP) trouble.
+Previously, I'd likened the debate between ClickHouse and Postgres to that [of grapefruits and grapes](/blog/clickhouse-vs-postgres). While the difference between ClickHouse and DuckDB isn't as drastic, it's similar to comparing onions and spring onions: they share a lot in common, but are used for fundamentally different things.
 
-Previously, I'd likened the debate between ClickHouse and Postgres to that [of grapefruits and grapes](/blog/clickhouse-vs-postgres). While the difference between ClickHouse and DuckDB isn't as drastic, it's similar to comparing onions and shallots: they share a lot in common, but are used for fundamentally different problems.
+To provide a high-level "say less" tl;dr (or whatever kids say these days): ClickHouse is a feature-packed, highly-configurable database for fast analytical queries on massive data scaled across multiple instances. DuckDB, meanwhile, is an embeddable, single-node engine that shines in two modes: as a query engine for fast exploratory analytics directly over files (CSVs, Parquet, etc.) or as the "SQLite of OLAP", a lightweight analytical database for datasets that can fit on a single machine.
 
-To provide a high-level "say less" tl;dr (or whatever kids say these days): ClickHouse is a feature-packed, highly configurable database for fast analytical queries on massive data scaled across multiple instances. DuckDB, meanwhile, is the SQLite of OLAP, an embeddable and portable analytical engine that can query local or remote files (e.g. CSVs, Parquets) without any setup.
+## DuckDB has two modes
 
-## How we use both ClickHouse and DuckDB
+Comparing products against DuckDB can be a bit disorienting since DuckDB is used in two distinct ways. At its core, it's a lightweight OLAP system. However, how it's used alters how it can scale.
 
-PostHog uses three databases. For PostHog's application state, we use Postgres in all of the ways you'd expect. In fact, at our start, we exclusively used Postgres until [our analytical queries were frying it alive](/blog/how-we-turned-clickhouse-into-our-eventmansion). We then added ClickHouse, a real-time analytical engine that powers our funnels, trends, retention, and paths over billions of events.
+The more lightweight way of using DuckDB is just as a query engine. It is imported, pointed to a local or remote data file, and queried with SQL. That's it. DuckDB will just use memory to organize and store information ephemerally. With this implementation, DuckDB feels more like an API than a complete database.
 
-For a while, we were strictly a Postgres and ClickHouse stack and didn't envision needing another OLAP solution. However, as the needs of our customers grew, ClickHouse had constraints that meant it simply would not work for data warehousing for all of our customers. 
+The more involved way of using DuckDB is as a database, where a persistent `.duckdb` database file is provisioned. In this scenario, DuckDB creates tables, views, and schemas in the database file that could be reused in future sessions. This is sometimes referred to as [an "in process" database](https://www.reddit.com/r/dataengineering/comments/1mjudxc/comment/n7dywxi/). It's similar to how a `.sqlite` file would work. DuckDB is still mostly a query engine, but this way, it's also managing a consolidated database file.
 
-So, we architected a [managed data warehouse product](/data-stack/managed-warehouse) that could scale in parallel, but not tied to, our ClickHouse resources. The managed warehouse is fundamentally  different from the analytical products we offered before: instead of only providing analytics on customer data, it also provides a service to store, transform, model, and visualize _all_ your data - not just what's ingested by other PostHog products. Essentially, our customers can now use us as a full data stack, not just an opinionated analytics service.
-
-To fit into the existing modern data stack ecosystem, we built [Duckgres](https://github.com/PostHog/duckgres), a wrapper that encapsulates DuckDB in PostgreSQL wire protocol. Any service that connects to Postgres could connect to our Duckgres wrapper (and by extension, PostHog's managed DuckDB instance). It's kinda neat: our customers could connect any Postgres-compatible [BI tool](/data-stack/business-intelligence), [dbt](/data-stack/data-modeling), or Postgres service to the DuckDB warehouse without worrying about DuckDB-specific compatibility. Nearly every tool out there connects to Postgres – and by extension – now can connect to our managed warehouses.
+Because ClickHouse is a complete database, we'll mostly compare the latter database version of DuckDB to it.
 
 ## ClickHouse is massive (literally)
 
-Because ClickHouse is modeled closer to the median OLAP/columnar database, it's best to start with it. ClickHouse is a dedicated server for handling and returning analytical data. It is a long-lived process that scales horizontally across nodes with self-managed storage. It is *incredibly* fast, made possible by its materialized views, mature compression, and sparse primary indexes. It's fantastic at parallelization and is designed for scaling analytical data across multiple servers.
+ClickHouse is a dedicated server for handling and returning analytical data. It is a long-lived process that scales horizontally across nodes with self-managed storage. It is *incredibly* fast when fine-tuned, made possible by its materialized views, mature compression, and sparse primary indexes. It's fantastic at parallelization and is designed for scaling analytical data across multiple servers.
 
-When new data is ingested, ClickHouse materialized views transform and route incoming rows into destination tables at insert time, following an append-only write model. In the background, the MergeTree engine merges data parts across sharded servers to optimize storage and query performance. This system makes it ideal for our use case, application analytics: as browser data is streamed in, it gets absorbed into MergeTrees that translate into near-real-time metrics on the PostHog dashboard.
+When new data is ingested, ClickHouse materialized views transform and route incoming rows into destination tables at insert time, following an append-only write model. In the background, the MergeTree engine merges data parts across sharded servers to optimize storage and query performance. This system makes it ideal for our use case, application analytics: as data streams in, it gets absorbed into MergeTrees that translate into near-real-time metrics in PostHog.
 
 ## DuckDB is lightweight
 
-DuckDB is not a server. Instead, it functions like SQLite: an embedded, in-process engine that runs as an application. This makes DuckDB easy to spin up, query on local data (including Parquet, CSV, and JSON files) or data in a storage bucket, and spin down. It can also be pointed to a remote bucket and operate the same. It's ephemeral, single-user, and saves metadata to a local and portable `.duckdb` database file (or an external file it's pointed to).
+Even when used as a database, DuckDB is not a server. It functions like SQLite: an embedded, in-process engine that runs as an application. This makes DuckDB easy to spin up, query on local data (including Parquet, CSV, and JSON files) or data anywhere, and spin down. It's ephemeral, single-user, and saves metadata to a portable `.duckdb` database file.
 
-![DuckDB query](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Duck_DB_q_79607d6f3c.png)
+![DuckDB query interface](https://res.cloudinary.com/dmukukwp6/image/upload/Duck_DB_q_788d1a16d7.png)
 
-ClickHouse is typically faster than DuckDB at heavy queries given its massive toolset to optimize retrieval and pre-calculate aggregates; however, DuckDB is fantastic at spontaneous, smaller analytical queries as it skips client-server communication and operates on local data in a stock setup. Data is ingested into DuckDB in batches. For many users, data is just ingested once, queried, and then the DuckDB instance is destroyed.
+ClickHouse is typically faster than DuckDB at heavy, optimized queries given its massive toolset to optimize retrieval and pre-calculate aggregates; however, DuckDB is fantastic at spontaneous, smaller analytical queries as it skips client-server communication and operates on local data in a stock setup. For many users, data is just ingested once, queried, and then the DuckDB instance is destroyed.
+
+## Notable ClickHouse and DuckDB libraries
+
+There are two other ClickHouse and DuckDB libraries that lend to their flexibility: clickhouse-local and DuckLake. To provide a holistic picture of both ecosystems, we'd like to acknowledge these.
 
 ### What is clickhouse-local?
 
-It would be unfair to compare ClickHouse and DuckDB without mentioning [`clickhouse-local`](https://clickhouse.com/docs/operations/utilities/clickhouse-local). `clickhouse-local` is portable distribution of ClickHouse that's embedded without a full database server. In many ways, it's the DuckDB version of ClickHouse, as it can also index Parquet files, and has been [benchmarked against DuckDB](https://www.vantage.sh/blog/clickhouse-local-vs-duckdb).
+Just like how DuckDB has a lightweight (query engine) and heavyweight (database) implementation, ClickHouse also has variations.
 
-However, by ClickHouse's own position, `clickhouse-local` was not designed for serving end users or applications. It's more of a portable tool for testing queries and one-off data processing than something designed to serve production applications or scale horizontally. For the rest of this piece, we'll compare DuckDB to a more production-grade ClickHouse build.
+[clickhouse-local](https://clickhouse.com/docs/operations/utilities/clickhouse-local) is a portable distribution of ClickHouse that's embedded without a full database server. In many ways, it's the DuckDB version of ClickHouse, as it can index Parquet files and has been [benchmarked against DuckDB](https://www.vantage.sh/blog/clickhouse-local-vs-duckdb).
+
+However, by ClickHouse's own position, clickhouse-local was not designed for serving end users or applications. It's more of a portable tool for testing queries and one-off data processing than something designed to serve production applications or scale horizontally. So, for the rest of this piece, we'll stick to the production-grade ClickHouse build.
+
+### What is DuckLake?
+
+DuckLake is a data lake by the DuckDB team. For those unfamiliar, data lakes store raw, unstructured data side-by-side with structured data for future querying. DuckLake provides this flexibility with a native integration with DuckDB. Unlike DuckDB, DuckLake isn't subject to the same single machine sizing constraints as DuckDB and can be used for durable, massive storage for datasets intended for DuckDB queries.
 
 ## Infrastructure match-up: scaling ClickHouse versus DuckDB
 
-For our first major match-up, let's zoom into the infrastructure differences between ClickHouse and DuckDB as it highlights their very different designs. Obviously, there's some configuration variability, but for the sake of comparison, we'll assume a *quintessential* version of both: ClickHouse being implemented for its massive scalability and batteries-included tooling, and DuckDB being used for its lightweight portability.
+For our first major match-up, let's zoom into the infrastructure differences between ClickHouse and DuckDB as it highlights their very different designs. Obviously, there's some configuration variability, but for the sake of comparison, we'll assume a *quintessential* version of both: ClickHouse being implemented for its massive scalability and batteries-included tooling, and DuckDB being used for its portability.
 
 ClickHouse scales both vertically *and* horizontally. That means that a single ClickHouse instance can scale up, using more RAM, CPUs, and storage (vertical scaling), but could also spread across multiple machines, splitting data and routing queries. When horizontally scaling, ClickHouse users typically implement a shared-nothing approach in self-managed deployments, where data is sharded across multiple instances with no overlap.
 
-![ClickHouse scaling](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Click_House_3b27ea474d.png)
+![ClickHouse horizontal scaling diagram](https://res.cloudinary.com/dmukukwp6/image/upload/Click_House_903586b66d.png)
 
-DuckDB couldn't be more different. DuckDB is just a single process that scales vertically, all embedded in a single file. When you run out of resources, you'll need to bump up the instance or migrate DuckDB to a beefier server.
+DuckDB is just a single process that scales vertically, all embedded in a single file. When you run out of resources, you'll need to bump up the instance or migrate DuckDB to a beefier server.
 
-![DuckDB scaling](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Duck_DB_3a01cf6c0a.png)
+![DuckDB single-node scaling diagram](https://res.cloudinary.com/dmukukwp6/image/upload/image_7ba45d685f.png)
 
-This also means that DuckDB evades the complexities of horizontally scaling. ClickHouse (via Apache ZooKeeper or ClickHouse Keeper) has to track every data part, every merge, and every insert across every replica. That's a challenge when dealing with thousands of tables and millions of ingested events. To address this, some developers prefer ClickHouse's paid offering, ClickHouse Cloud which stores data in object storage (e.g. S3), treating compute nodes as stateless workers with a cache.
+This also means that DuckDB evades the complexities of horizontally scaling. ClickHouse (via Apache ZooKeeper or ClickHouse Keeper) has to track every data part, every merge, and every insert across every replica. That's a challenge when dealing with thousands of tables and millions of ingested events. To address this, some developers prefer ClickHouse's paid offering, ClickHouse Cloud, which stores data in object storage (e.g. S3), treating compute nodes as stateless workers with a cache.
 
-The main challenge with scaling DuckDB is the compute-storage coupling issue, where pre-spec'd servers might only ship with compute and storage coupled, leading to one of the two resources being over-provisioned.
+A challenge with scaling DuckDB as an embedded database is the compute-storage coupling issue, where pre-spec'd servers might only ship with compute and storage coupled, leading to one of the two resources being over-provisioned. However, this isn't the case when using DuckDB as a query engine. For PostHog, we provision independent servers for each DuckDB process, but point it to an independent storage unit (specifically, DuckLake with a Postgres catalog).
 
 ## Interface match-up: connecting to ClickHouse versus DuckDB
 
 A second point of difference is how you interface with ClickHouse and DuckDB.
 
-Because DuckDB is embedded, it is queried on-device. Of course, it might be accessed via an SSL tunnel or a proxied service (e.g. Duckgres), but its base implementation involves no server-client relationship. Just an `import` statement, a SQL query, and that's it. It reads and writes local files natively, scans remote Parquet on S3, and integrates tightly with Pandas/Polars DataFrames. It only supports a single writer at a time (but can support concurrent reads and is multithreaded).
+Because DuckDB is embedded, it is queried on-device. Of course, it might be accessed via an SSL tunnel or a proxied service (e.g. [Duckgres](https://github.com/PostHog/duckgres)), but its base implementation involves no server-client relationship. Just an `import` statement, a SQL query, and that's it. It reads and writes local files natively and integrates tightly with Pandas/Polars DataFrames. A single DuckDB file can be opened by one read-write process or many read-only processes (but not both simultaneously).
 
-ClickHouse, meanwhile, is a server. That means interfacing with it over HTTP or a native TCP protocol. Additionally, because ClickHouse has a native client-server interface, it sports first-party features like authentication and connection management. It also supports multiple concurrent writers and readers, made possible by being a multithreaded server process.
+> When using DuckDB as an embedded engine, you also have the independence of a simple import statement and SQL query. The files might be accessible via network (e.g. stored in a data warehouse or S3 bucket).
 
-For ingestion, the databases also differ. For DuckDB, files are loaded in batches, tracked by the `.duckdb` database file. From a usage standpoint, ingestion is typically occasional. For ClickHouse, conversely, events are typically streamed in continuously, progressively added via the MergeTree engine.
+ClickHouse, meanwhile, is a server. That means interfacing with it over HTTP or a native TCP protocol. Additionally, because ClickHouse has a native client-server interface, it sports first-party features like authentication and connection management. It also supports multiple concurrent writers and readers, made possible by being a multi-threaded server process.
+
+For ingestion, the databases also differ. For DuckDB, files are typically loaded in batches, tracked by the `.duckdb` database file. For ClickHouse, conversely, events tend to be streamed in continuously, progressively added via the MergeTree engine.
 
 Despite their interface differences, both databases speak a SQL variant. The ClickHouse variant has some non-standard syntax like array functions, the `FINAL` keyword for deduplication, etc. DuckDB's variant is closer to stock Postgres, but with some nice additions like `EXCLUDE`, `COLUMNS(*)` regex matching, and direct file-path-as-table-name queries.
 
 ## Performance match-up: measuring ClickHouse and DuckDB
 
-Comparing ClickHouse and DuckDB on performance is a bit tricky. On small-to-moderate datasets, DuckDB can match or beat ClickHouse on cold queries since it avoids network overhead and has an efficient vectorized engine. But on large datasets with tuned materialized views and indexes, ClickHouse will always pull ahead.
+Comparing ClickHouse and DuckDB on performance is tricky. On small-to-moderate datasets, DuckDB can match or beat ClickHouse on cold queries since it avoids network overhead and has an efficient vectorized engine. But on large datasets with tuned materialized views and indexes, ClickHouse will always pull ahead.
 
-This is a bit of a flawed comparison, however. The purpose of ClickHouse is to serve long-standing queries. It's a heavily tunable database. For example, we'll have a ClickHouse query that aggregates all of the views of the database to establish the average time spent per session – it's the same query that could be pre-empted by materialized views. DuckDB, meanwhile, is designed to serve ad hoc queries at blazing-fast speed with no set-up.
-
-If I was to provide an analogy, ClickHouse is MatLab, a powerful, yet complex piece of software for doing math. DuckDB is the iPhone calculator app. (On second thought, that's a terrible disservice to DuckDB, but you get the gist!)
+This is a bit of a flawed comparison, however. The purpose of ClickHouse is to serve long-standing queries. It's a heavily tunable database. For example, PostHog might run a ClickHouse query that aggregates all of the views of the database to establish the average time spent per session — it's the same query that could be pre-empted by materialized views. DuckDB, meanwhile, is designed to serve ad hoc queries at blazing-fast speed with minimal set-up.
 
 ## Type match-up: how ClickHouse and DuckDB structure data
 
-ClickHouse's entire data system is built around its MergeTree family. It has some specific MergeTrees like ReplacingMergeTree, AggregatingMergeTree, or SummingMergeTree that are optimized for specific insertion or mutation patterns. Developers choose a variant, a sorting key, and a partition scheme that tunes to the use case. It's complex, but incredibly efficient at scale.
+ClickHouse's entire data system is built around its MergeTree family. It has specific MergeTree variants like ReplacingMergeTree, AggregatingMergeTree, or SummingMergeTree that are optimized for specific insertion or mutation patterns. Developers choose a variant, a sorting key, and a partition scheme that tunes to the use case. It's complex, but incredibly efficient at scale.
 
-DuckDB is the opposite. It's super flexible, supporting nested and semi-structured data natively, such as structs, lists, maps, and unions. It's optimized for developer experience, not sub-millisecond-minimizing readiness. With DuckDB, you can query a nested JSON or Parquet file in S3 without flattening it. It's the Swiss army knife OLAP database (finally, a good analogy for DuckDB).
+DuckDB is the opposite. It's super flexible, supporting nested and semi-structured data natively, such as structs, lists, maps, and unions. It's optimized for developer experience, not sub-millisecond-minimizing-readiness. With DuckDB, you can query a nested JSON or Parquet file in S3 without flattening it. It's the Swiss army knife OLAP database.
 
-## We built a managed DuckDB warehouse!
+## How we use ClickHouse and DuckDB (and Postgres)
 
-PostHog's [data warehouse](/data-stack/managed-warehouse) was built to house the massive amounts of data that users aggregate. We wanted to make that data queryable, so we built a DuckDB layer to make it easy for our customers. But that posed a problem: if DuckDB is embedded, how should customers actually access it?
+PostHog uses three databases. For PostHog's application state, we use Postgres in all of the ways you'd expect. In fact, at our start, we exclusively used Postgres until [our analytical queries were frying it alive](/blog/clickhouse-vs-postgres). We then added ClickHouse, a real-time analytical engine that powers our funnels, trends, retention, and paths over billions of events.
 
-To solve this, we built [Duckgres](https://github.com/PostHog/duckgres), an open-source wrapper that wraps DuckDB in a Postgres server, making it compatible with anything that supports the PostgreSQL wire protocol. It effectively makes DuckDB look like a Postgres database to an external service. Tada! Now you can connect a DuckDB warehouse to any BI tooling.
+For a while, we were strictly a Postgres and ClickHouse stack and didn't envision needing another OLAP solution. However, as the needs of our customers grew, ClickHouse had constraints that meant it simply would not work for data warehousing for all of our customers.
 
-![Duckgres connect.png](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Duckgres_connect_6121da508a.png)
+So, we architected a managed data warehouse product that could scale in parallel and isn't tied to our ClickHouse resources. The managed warehouse is fundamentally different from the analytical products we offered before: instead of only providing analytics on customer data, it also provides a service to store, transform, model, and visualize *all* your data. Essentially, our customers can now use us as a full data stack, not just an opinionated analytics service.
 
-If you want to try PostHog's managed warehouse, please join the waitlist.
+We wanted to make that data natively queryable, so we built a DuckDB layer to make it easy for our customers. But that posed a problem: if DuckDB is not a server, how should our customers actually access it?
 
-<div className="max-w-md">
-  <DuckDBWaitlistSurvey />
-</div>
+To solve this, we built [Duckgres](https://github.com/PostHog/duckgres), an open-source wrapper that wraps DuckDB in a Postgres server, making it compatible with anything that supports the PostgreSQL wire protocol. It effectively makes DuckDB look like a Postgres database to an external service. Tada! Now you can connect a DuckDB warehouse to any Postgres-compatible BI tool, dbt, or Postgres-service. Plus, it has a 10 out of 10 name.
+
+![Duckgres connection diagram](https://res.cloudinary.com/dmukukwp6/image/upload/Duckgres_connect_b7694cb18a.png)
+
+Duckgres also integrates with DuckLake, so that a DuckLake catalog is automatically added to any Duckgres connection. This sets up a nice trinity: DuckDB for easy querying, DuckLake for durable storage, and Duckgres for tight integrations with Postgres-ready systems.
+
+If you're curious about trying PostHog's warehouse product, or even Duckgres, please give it a go!
+
+<NewsletterForm />
