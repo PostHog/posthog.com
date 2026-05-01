@@ -15,6 +15,7 @@ features:
   surveys: true
   llmAnalytics: false
   errorTracking: true
+  logs: true
 ---
 
 import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
@@ -418,6 +419,8 @@ You can also use `before_send` to sample or filter other event types. See the [J
 ## Logs
 
 To set up [logs](/docs/logs) in your React Native app, follow the [React Native logs installation guide](/docs/logs/installation/react-native). The SDK exposes `posthog.captureLog`, `posthog.logger.{trace,debug,info,warn,error,fatal}`, and `posthog.flushLogs` for sending structured records to PostHog Logs.
+
+> **Minimum version:** `posthog-react-native@4.44.0` or later.
 
 ## Session replay
 
