@@ -3228,6 +3228,13 @@ export const docsMenu = {
                     ],
                 },
                 {
+                {
+                    name: 'Send alerts',
+                    url: '/docs/logs/alerts',
+                    icon: 'IconBell',
+                    color: 'red',
+                    featured: true,
+                },
                     name: 'Billing',
                     url: '',
                     children: [
