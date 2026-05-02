@@ -58,3 +58,50 @@ The customer should never have to figure out who to contact. They reach out to e
 - Neither person responds because each assumed the other would
 - TAM checks out on health because "the CSM handles that now"
 - Customer has to explain the same thing twice
+
+# **How to kick off the CSM <> TAM collaboration**
+
+Both of you share the responsibility of making sure the other has enough context to be effective on the account.
+
+## **Create an internal Slack channel**
+
+Create a channel using the naming convention `#customer-[customer_name]-internal`. Invite your counterpart, Dana, and Simon to the channel. If there's an FDE on the account, invite them too.
+
+This channel effectively replaces DMs between TAMs and CSMs related to the account. Your public collaboration here will be a huge service to future teammates who might inherit the account.
+
+## **Get current on the account**
+
+### **If you're joining on and your counterpart has the pre-existing relationship**
+
+Take it upon yourself to gather as much context as you can before jumping in with questions. Share what you find and use any gaps to guide your questions.
+
+As a CSM, treat this like your standard deep dive when [inheriting an account](/handbook/cs-and-onboarding/getting-started-with-customers), but oriented toward where you can create value immediately:
+
+- Are there cost optimizations to surface?
+- Opportunities to deepen value on products they're already using heavily?
+- Implementation issues?
+
+Cross-reference your findings against recent Slack threads and Vitally notes. You want a reasonably current assessment of the account and its needs that your counterpart can sense-check.
+
+Go as far as recommending an initial action item for yourself based on your research - that's a highly effective way to take mental load off your counterpart. Once you have an initial grasp on the account, send a message in your internal Slack channel with your questions, ideas, and recommended action items if applicable ([example](https://posthog.slack.com/archives/C0B0UD92EG1/p1777424141416129)).
+
+**Your goal**: create value for the account as soon as possible, with the right context, while protecting your counterpart's bandwidth. This is an art, not a science. You're co-piloting a ship on a shared mission, but each of you are still responsible for your own controls.
+
+> *If you're a TAM in this position, the principles are the same: gather context first, share what you find, propose an action item.*
+> 
+
+### **If you're the one with the pre-existing relationship**
+
+Proactively share any top-of-mind context in your internal Slack channel as a starting point for your counterpart. If a quick call is needed to convey context that isn't apparent in the paper trail (Slack, Vitally, etc.), do that. 
+
+Your counterpart is already gathering context from what's written, so you don't need to be exhaustive. Focus on:
+
+- Key issues or active threads they must know about
+- Important relationships or stakeholders
+- Implementations in progress or recently completed
+
+Add your counterpart to the customer's Slack Connect channel. Use your judgement for when to introduce them to the wider customer team, and relay that guidance so you stay aligned on timing.
+
+When you do introduce them, frame it positively - the customer's PostHog team is growing, not that they're being handed off (here’s a solid [example](https://posthog.slack.com/archives/C090RCG671C/p1777565614828089)).
+
+> **The underlying principle:** The goal is to outdo one another in service. Getting current on the account and elevating relevant context makes you both better experts, which directly improves the quality of your customer-facing work.
