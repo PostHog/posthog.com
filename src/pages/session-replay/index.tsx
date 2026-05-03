@@ -125,8 +125,9 @@ const topFeatures: CarouselSlide[] = [
                     </li>
                 </ul>
                 <p>
-                    Click on any row to jump to that point in the session, or click the{' '}
+                    Click on any row to jump to that point in the session, or click{' '}
                     <span className="inline-block">
+                        the
                         <IconExpand className="size-5 inline-block" aria-label="Expand" /> icon
                     </span>{' '}
                     view the associated metadata.
@@ -142,8 +143,37 @@ const topFeatures: CarouselSlide[] = [
         color: 'bg-white',
         activeText: 'text-primary',
         progressBar: 'bg-green',
-        layout: 'stack',
-        description: 'add a placeholder',
+        layout: 'float',
+        heading: 'A DevTools panel, synced to the recording',
+        description: (
+            <>
+                <p>
+                    Every session comes with a panel of technical data that stays in sync with the video. Scrub to any
+                    point and see exactly what your app was doing at that moment.
+                </p>
+                <ul className="space-y-4 mb-4">
+                    <li>
+                        <strong>Network monitor</strong> captures every request and response with timing, method, and
+                        status code — so you can spot slow API calls or failed requests as they affect the user
+                        experience.
+                    </li>
+                    <li>
+                        <strong>Console logs</strong> record all warnings and errors in real time, correlated to the
+                        exact point in the session they happened. Connect with Error Tracking for full stack traces
+                        linked directly to the replay.
+                    </li>
+                    <li>
+                        <strong>DOM explorer</strong> lets you inspect a live DOM snapshot at any point in the recording
+                        — useful for catching layout shifts, broken styles, or elements that weren't rendering when they
+                        should.
+                    </li>
+                </ul>
+            </>
+        ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
+            alt: 'Network monitor in session replay',
+        },
     },
     {
         slug: 'recording-rules',
@@ -153,7 +183,34 @@ const topFeatures: CarouselSlide[] = [
         activeText: 'text-primary',
         progressBar: 'bg-blue',
         layout: 'stack',
-        description: 'add a placeholder',
+        heading: 'Record the sessions you care about',
+        description: (
+            <>
+                <p>
+                    Recording every session gets noisy fast. Recording rules let you focus on the traffic that's
+                    actually useful.
+                </p>
+                <ul className="space-y-4 mb-4">
+                    <li>
+                        <strong>Sampling</strong> records a percentage of all sessions. Start at 100% and dial it down
+                        as your volume grows.
+                    </li>
+                    <li>
+                        <strong>URL and event triggers</strong> start recording when a user visits a specific page or
+                        fires a specific event — like reaching checkout, hitting an error, or completing onboarding.
+                    </li>
+                    <li>
+                        <strong>Feature flag targeting</strong> limits recordings to users in a specific rollout —
+                        useful for monitoring experiments or beta users without recording everyone.
+                    </li>
+                    <li>
+                        <strong>Privacy masking</strong> redacts sensitive fields by default. Passwords are always
+                        masked; exclude any element from capture with a <code>ph-no-capture</code> class.
+                    </li>
+                </ul>
+                <p>Combine multiple rules to capture the highest-signal sessions — and nothing else.</p>
+            </>
+        ),
     },
     {
         slug: 'find-behavior',
@@ -163,7 +220,34 @@ const topFeatures: CarouselSlide[] = [
         activeText: 'text-primary',
         progressBar: 'bg-purple',
         layout: 'stack',
-        description: 'add a placeholder',
+        heading: 'Find the sessions you need',
+        description: (
+            <>
+                <p>You can filter recordings by almost anything.</p>
+                <ul className="space-y-4 mb-4">
+                    <li>
+                        <strong>Event filters</strong> narrow down to recordings where a specific action was triggered —
+                        like a button click, page view, or custom event.
+                    </li>
+                    <li>
+                        <strong>Person properties</strong> let you filter by country, plan, email, or any user attribute
+                        to find sessions from the right segment.
+                    </li>
+                    <li>
+                        <strong>Frustration signals</strong> surface recordings with rage clicks, dead clicks, or
+                        exceptions — the sessions most likely to show you something worth fixing.
+                    </li>
+                    <li>
+                        <strong>PostHog AI</strong> lets you describe the behavior you're looking for in plain English —
+                        "users who dropped off during checkout" — and returns a matching playlist. Once you've found a
+                        session, AI summaries give you a plain-English breakdown of what happened without watching the
+                        whole thing.
+                    </li>
+                </ul>
+                <p>Save filters as dynamic playlists that automatically update as new sessions come in.</p>
+            </>
+        ),
+        image: 'filters',
     },
 ]
 
