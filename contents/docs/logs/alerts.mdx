@@ -16,15 +16,17 @@ Alerts are checked every 5 minutes and can be configured with noise-reduction se
 
 ## Create an alert
 
-1. Go to [**Settings** > **Environment** > **Logs** > **Alerting**](https://app.posthog.com/settings/environment-logs#logs-alerting).
-2. Click **New alert**.
-3. Give your alert a descriptive name (e.g. "API 5xx errors").
-4. Configure your [filters](#configure-filters), [threshold rules](#set threshold-rules), and optionally [advanced options](#advanced-options).
+You can manage alerts from the **Alerts** tab in the [Logs](/docs/logs) section, or from [**Settings** > **Environment** > **Logs** > **Alerting**](https://app.posthog.com/settings/environment-logs#logs-alerting).
+
+1. Click **New alert**.
+2. Give your alert a descriptive name (e.g. "API 5xx errors").
+3. Configure your [filters](#configure-filters), [threshold rules](#set-threshold-rules), and [notification destinations](#configure-notifications). Optionally adjust [advanced options](#advanced-options) to reduce noise.
+4. (Optional) Use the **Simulate** panel to preview which logs would have matched your filters and threshold against recent historical data before saving.
 5. Click **Create alert**.
 
 ## Configure filters
 
-Every alert requires at least one filter. Filters determine which logs are counted against your threshold. You can combine multiple filter types.
+Every alert requires at least one filter — saving without one returns the error "At least one filter is required". Filters determine which logs are counted against your threshold. You can combine multiple filter types.
 
 ### Severity
 
@@ -42,11 +44,20 @@ Filter by log attributes, resource attributes, or other log properties. Use the 
 
 Threshold rules define the condition that triggers the alert. Configure:
 
-- **Operator** – whether the log count must go **above** or **below** the threshold
+- **Operator** – whether the log count must go **above** or **below** the threshold (default: above)
 - **Count** – the number of matching logs that triggers the alert (default: 100)
 - **Window** – the time window to check, one of 5, 10, 15, 30, or 60 minutes (default: 10 minutes)
 
 For example, "alert if count goes above 100 in the last 10 minutes" fires when more than 100 matching logs are observed in a rolling 10-minute window.
+
+## Configure notifications
+
+An alert without a destination has nowhere to send notifications. Add at least one of:
+
+- **[Slack](/docs/cdp/destinations/slack)** – pick a connected Slack workspace and channel.
+- **[Webhook](/docs/cdp/destinations/webhook)** – provide a URL to receive an HTTP POST when the alert fires.
+
+Destinations are delivered through hog functions under the hood, so they reuse the same infrastructure as other PostHog destinations. The **Notifications** column in the alert list shows a struck-through bell when no destinations are configured.
 
 ## Advanced options
 
@@ -69,14 +80,19 @@ After an alert fires, you can set a cooldown period (in minutes) before another 
 
 ## Manage alerts
 
-The [alerting settings page](https://app.posthog.com/settings/environment-logs#logs-alerting) shows a table of all your alerts with the following columns:
+The alert list shows a table of all your alerts:
 
 | Column | Description |
 |--------|-------------|
-| **Name** | The alert name. Click to edit. |
+| **Name** | The alert name. Click to open the alert detail view. |
 | **Status** | Current alert state (see below). |
 | **Threshold** | Summary of the threshold rule (e.g. `> 100 in 10m`). |
+| **Last checked** | When the alert was last evaluated. |
+| **Last 24h** | Sparkline of the alert's state over the last 24 hours. Green = OK, red = firing, orange = resolving/errored, grey = snoozed or disabled. |
+| **Notifications** | Tags for each configured destination. A struck-through bell indicates no destinations. |
+| **Created by** | The user who created the alert. |
 | **Enabled** | Toggle to enable or disable the alert without deleting it. |
+| **⋯** | Edit, view history, snooze, reset (when broken), and delete actions. |
 
 ### Alert states
 
@@ -87,11 +103,24 @@ The [alerting settings page](https://app.posthog.com/settings/environment-logs#l
 | **Resolving** | The condition was previously met but is no longer breaching the threshold. |
 | **Errored** | Something went wrong evaluating the alert. |
 | **Snoozed** | The alert is temporarily silenced. |
+| **Broken** | The alert has failed 5 consecutive checks and won't be evaluated again until you [reset it](#reset-a-broken-alert). |
 
 ### Edit an alert
 
-Click the alert name in the table, or click the **⋯** menu and select **Edit**. Update any fields and click **Save**.
+Open the **⋯** menu and select **Edit**. Update any fields and click **Save**. Clicking the alert name opens the detail view rather than the edit modal.
+
+### Snooze an alert
+
+Open the **⋯** menu and select **Snooze**, then pick a duration: 30 minutes, 1 hour, 4 hours, or 24 hours. The alert won't fire until the snooze expires. To clear it early, open the menu again and choose **Unsnooze**.
+
+### Reset a broken alert
+
+If an alert errors on 5 consecutive checks, it enters the **Broken** state and stops evaluating. Open the **⋯** menu and select **Reset alert** to clear the failure count and resume checks.
+
+### View history
+
+Open the **⋯** menu and select **View history** to see every check, state transition, snooze, and reset for the alert.
 
 ### Delete an alert
 
-Click the **⋯** menu next to the alert and select **Delete**. Confirm the deletion in the dialog. This action can't be undone.
+Open the **⋯** menu and select **Delete**. Confirm in the dialog. This action can't be undone.
