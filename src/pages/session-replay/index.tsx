@@ -148,24 +148,22 @@ const topFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Every session comes with a panel of technical data that stays in sync with the video. Scrub to any
-                    point and see exactly what your app was doing at that moment.
+                    Every session comes with a panel of technical data synced to the video. Scrub to any point and see
+                    exactly what your app was doing at that moment.
                 </p>
                 <ul className="space-y-4 mb-4">
                     <li>
                         <strong>Network monitor</strong> captures every request and response with timing, method, and
-                        status code — so you can spot slow API calls or failed requests as they affect the user
-                        experience.
+                        status code – spot slow API calls or failed requests the moment they happen.
                     </li>
                     <li>
                         <strong>Console logs</strong> record all warnings and errors in real time, correlated to the
-                        exact point in the session they happened. Connect with Error Tracking for full stack traces
-                        linked directly to the replay.
+                        exact point in the session they happened. Pair with Error Tracking for full stack traces linked
+                        directly to the replay.
                     </li>
                     <li>
-                        <strong>DOM explorer</strong> lets you inspect a live DOM snapshot at any point in the recording
-                        — useful for catching layout shifts, broken styles, or elements that weren't rendering when they
-                        should.
+                        <strong>DOM explorer</strong> shows a live DOM snapshot at any point in the recording – catch
+                        layout shifts, broken styles, or elements that weren't rendering when they should.
                     </li>
                 </ul>
             </>
@@ -187,8 +185,8 @@ const topFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Recording every session gets noisy fast. Recording rules let you focus on the traffic that's
-                    actually useful.
+                    Recording every session gets noisy fast. Recording rules narrow your capture to what's actually
+                    useful.
                 </p>
                 <ul className="space-y-4 mb-4">
                     <li>
@@ -197,10 +195,10 @@ const topFeatures: CarouselSlide[] = [
                     </li>
                     <li>
                         <strong>URL and event triggers</strong> start recording when a user visits a specific page or
-                        fires a specific event — like reaching checkout, hitting an error, or completing onboarding.
+                        fires a specific event – like reaching checkout, hitting an error, or completing onboarding.
                     </li>
                     <li>
-                        <strong>Feature flag targeting</strong> limits recordings to users in a specific rollout —
+                        <strong>Feature flag targeting</strong> limits recordings to users in a specific rollout –
                         useful for monitoring experiments or beta users without recording everyone.
                     </li>
                     <li>
@@ -208,7 +206,7 @@ const topFeatures: CarouselSlide[] = [
                         masked; exclude any element from capture with a <code>ph-no-capture</code> class.
                     </li>
                 </ul>
-                <p>Combine multiple rules to capture the highest-signal sessions — and nothing else.</p>
+                <p>Combine multiple rules to capture the highest-signal sessions – and nothing else.</p>
             </>
         ),
     },
@@ -223,25 +221,24 @@ const topFeatures: CarouselSlide[] = [
         heading: 'Find the sessions you need',
         description: (
             <>
-                <p>You can filter recordings by almost anything.</p>
+                <p>Filter recordings by almost anything.</p>
                 <ul className="space-y-4 mb-4">
                     <li>
-                        <strong>Event filters</strong> narrow down to recordings where a specific action was triggered —
-                        like a button click, page view, or custom event.
+                        <strong>Event filters</strong> narrow recordings to sessions where a specific action was
+                        triggered – a button click, page view, or custom event.
                     </li>
                     <li>
-                        <strong>Person properties</strong> let you filter by country, plan, email, or any user attribute
-                        to find sessions from the right segment.
+                        <strong>Person properties</strong> filter by country, plan, email, or any user attribute to find
+                        sessions from the right segment.
                     </li>
                     <li>
                         <strong>Frustration signals</strong> surface recordings with rage clicks, dead clicks, or
-                        exceptions — the sessions most likely to show you something worth fixing.
+                        exceptions – the sessions most likely to show you something worth fixing.
                     </li>
                     <li>
-                        <strong>PostHog AI</strong> lets you describe the behavior you're looking for in plain English —
-                        "users who dropped off during checkout" — and returns a matching playlist. Once you've found a
-                        session, AI summaries give you a plain-English breakdown of what happened without watching the
-                        whole thing.
+                        <strong>PostHog AI</strong> takes a plain-English description of the behavior you're looking for
+                        – "users who dropped off during checkout" – and returns a matching playlist. Once found, AI
+                        summaries give you a breakdown of what happened without watching the whole thing.
                     </li>
                 </ul>
                 <p>Save filters as dynamic playlists that automatically update as new sessions come in.</p>
