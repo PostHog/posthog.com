@@ -185,7 +185,7 @@ function AIModelBadge({ innerRef }: { innerRef: React.RefObject<HTMLSpanElement>
             className="inline-flex items-center gap-1.5 border border-primary rounded px-2 py-1 text-xs bg-accent align-middle ml-6 mt-0 mb-2"
         >
             <span className="font-semibold">Supports</span>
-            <span className="text-secondary">Haiku, Opus, Sonnet, Codex, GPT 5.4</span>
+            <span className="text-secondary">Haiku, Opus, Sonnet, GPT 5.4, GPT 5.5</span>
         </span>
     )
 }
@@ -1225,10 +1225,7 @@ const TableStakes = () => {
                             <p className="m-0 text-xs font-semibold uppercase text-secondary tracking-wide">OpenAI</p>
                             <ul className="m-0 mt-1 list-none p-0 space-y-2">
                                 <li className="text-sm font-bold text-primary">
-                                    <code>GPT-5.2</code>
-                                </li>
-                                <li className="text-sm font-bold text-primary">
-                                    <code>GPT-5.3-codex</code>
+                                    <code>GPT-5.5</code>
                                 </li>
                                 <li className="text-sm font-bold text-primary">
                                     <code>GPT-5.4</code>
@@ -1244,7 +1241,7 @@ const TableStakes = () => {
                                     <code>Claude Sonnet 4.6</code>
                                 </li>
                                 <li className="text-sm font-bold text-primary">
-                                    <code>Claude Opus 4.6</code>
+                                    <code>Claude Opus 4.7</code>
                                 </li>
                                 <li className="text-sm font-bold text-primary">
                                     <code>Claude Haiku 4.5</code>

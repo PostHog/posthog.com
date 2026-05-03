@@ -20,6 +20,7 @@ import TeamMember from 'components/TeamMember'
 import { OverflowXSection } from 'components/OverflowXSection'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
+import SourceConfiguration from 'components/Product/Sources/Configuration'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import { IconWarning, IconCheck, IconX } from '@posthog/icons'
@@ -287,9 +288,27 @@ export const TemplateParametersFactory: (params: TemplateParametersProps) => Rea
     return TemplateParameters
 }
 
+type SourceParametersProps = {
+    sourceFields:
+        | {
+              name?: string | null
+              label?: string | null
+              type?: string | null
+              required?: boolean | null
+              caption?: string | null
+              placeholder?: string | null
+          }[]
+        | null
+}
+
+export const SourceParametersFactory: (params: SourceParametersProps) => React.FC = ({ sourceFields }) => {
+    const SourceParameters = () => <SourceConfiguration sourceFields={sourceFields} />
+    return SourceParameters
+}
+
 const A = (props) => <Link {...props} />
 
-export default function Handbook({ data: { post }, pageContext: { breadcrumbBase, tableOfContents } }) {
+export default function Handbook({ data: { post, postHogSource }, pageContext: { breadcrumbBase, tableOfContents } }) {
     const {
         body,
         frontmatter: {
@@ -306,6 +325,8 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
         fields: { slug, appConfig, templateConfigs, commits },
         excerpt,
     } = post
+
+    const sourceFields = postHogSource?.sourceFields ?? null
 
     // Track product interest for cross-subdomain cookie
     useProductInterestFromPathname(slug)
@@ -346,6 +367,7 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
         TestimonialsTable,
         AppParameters: AppParametersFactory({ config: appConfig }),
         TemplateParameters: TemplateParametersFactory(templateConfigs),
+        SourceParameters: SourceParametersFactory({ sourceFields }),
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
@@ -413,6 +435,16 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
 
 export const query = graphql`
     query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!) {
+        postHogSource(mdx: { id: { eq: $id } }) {
+            sourceFields {
+                name
+                label
+                type
+                required
+                placeholder
+                caption
+            }
+        }
         glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
             nodes {
                 fields {
