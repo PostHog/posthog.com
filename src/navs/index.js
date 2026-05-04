@@ -6538,6 +6538,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Drop rules',
+                    url: '/docs/logs/drop-rules',
+                    icon: 'IconFilter',
+                    color: 'orange',
+                },
+                {
                     name: 'PostHog AI',
                 },
                 {

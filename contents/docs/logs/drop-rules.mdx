@@ -1,0 +1,113 @@
+---
+title: Drop rules
+sidebar: Docs
+showTitle: true
+---
+
+Drop rules filter out logs at ingestion before they're stored. This helps you control costs and reduce noise without changing your application code.
+
+Go to [**Logs** > **Settings**](https://app.posthog.com/logs/settings) to create and manage drop rules.
+
+PostHog supports three rule types:
+
+- **Drop when matched** - Drop logs that match a regex pattern on a path or attribute
+- **Drop by severity** - Sample or drop entire severity levels (debug, info, warn, error)
+- **Rate limit by service** - Cap logs per second for a specific service
+
+Rules are evaluated in priority order. The first matching rule wins.
+
+## Drop when matched
+
+Filter out specific log patterns, like health checks or noisy endpoints.
+
+1. Go to [**Logs** > **Settings**](https://app.posthog.com/logs/settings) and click **New rule**
+2. Select **Drop when matched** as the rule type
+3. Enter one or more regex patterns to match against
+
+By default, patterns match against the log's path (the first non-empty value among `url.path`, `http.path`, `http.route`, or `path`). To match a different attribute, select **Custom attribute** and enter the attribute key.
+
+**Example patterns:**
+
+| Pattern | Matches |
+|---------|---------|
+| `/healthz` | Health check endpoints |
+| `^/api/internal/` | Internal API routes |
+| `GET /static/` | Static asset requests |
+
+## Drop by severity
+
+Sample or drop logs based on severity level. You can set each level independently to keep all, drop all, or sample a percentage.
+
+1. Go to [**Logs** > **Settings**](https://app.posthog.com/logs/settings) and click **New rule**
+2. Select **Drop by severity** as the rule type
+3. Configure an action for each severity level:
+   - **Keep** - Store all logs at this level
+   - **Drop** - Discard all logs at this level
+   - **Sample** - Keep a percentage (e.g., 10% keeps 1 in 10 logs)
+
+**Example configuration:**
+
+| Level | Action | Effect |
+|-------|--------|--------|
+| Debug | Drop | Drop all debug logs |
+| Info | Sample 10% | Keep 10% of info logs |
+| Warn | Keep | Keep all warnings |
+| Error | Keep | Keep all errors |
+
+You can also configure **Always keep** conditions to preserve important logs regardless of severity:
+
+- **Status code ≥** - Keep logs with HTTP status codes at or above a threshold
+- **Latency >** - Keep logs where request latency exceeds a threshold in milliseconds
+
+## Rate limit by service
+
+Cap how many logs per second PostHog stores for a specific service. Logs above the limit are dropped at ingestion.
+
+1. Go to [**Logs** > **Settings**](https://app.posthog.com/logs/settings) and click **New rule**
+2. Select **Rate limit by service** as the rule type
+3. Choose or enter a service name (must match `service.name` exactly, case-sensitive)
+4. Set the **sustained limit** - how many logs per second to store on average
+5. Optionally set the **burst capacity** - how many logs can spike above the sustained rate before dropping begins
+
+The service picker shows services from the last 24 hours. You can also type a service name directly.
+
+**How rate limiting works:**
+
+PostHog uses a token bucket algorithm:
+
+- The bucket fills at your sustained rate (e.g., 100 logs/second)
+- The bucket holds up to your burst capacity (defaults to 3× sustained)
+- Each log consumes one token
+- When the bucket is empty, excess logs are dropped
+
+This allows short traffic spikes while keeping your average volume at or below the sustained rate.
+
+**Example:**
+
+| Setting | Value | Effect |
+|---------|-------|--------|
+| Service | `payment-api` | Only affects logs from this service |
+| Sustained limit | 100 logs/sec | Average 100 logs/second stored |
+| Burst capacity | 300 | Up to 300 logs can be stored during short spikes |
+
+With these settings, if `payment-api` emits 500 logs in one second, the first 300 are stored (drawing from burst capacity) and 200 are dropped. The bucket refills at 100/second, so sustained volume trends toward 100 logs/second.
+
+**Configuration limits:**
+
+- Sustained limit: 1 to 1,000,000 logs/second
+- Burst capacity: must be ≥ sustained limit, up to 60,000,000
+
+## Scoping rules
+
+All rule types support optional scoping:
+
+- **Service name** - Restrict the rule to logs from a specific `service.name`. Required for rate limit rules, optional for others.
+- **Path pattern** - Restrict the rule to logs matching a path regex (not available for rate limit rules)
+
+When both are set, both conditions must match for the rule to apply.
+
+## Rule priority
+
+Rules are evaluated in the order shown in the settings UI. Drag rules to reorder them. The first matching rule determines whether a log is kept or dropped.
+
+If no rules match, logs are kept.
