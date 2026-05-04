@@ -6395,12 +6395,6 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Running background tasks',
-                    url: '/docs/posthog-code/running-background-tasks',
-                    icon: 'IconGraduationCap',
-                    color: 'green',
-                },
-                {
                     name: 'Reviewing code',
                     url: '/docs/posthog-code/reviewing-code',
                     icon: 'IconGraduationCap',

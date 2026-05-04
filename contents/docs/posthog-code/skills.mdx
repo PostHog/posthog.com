@@ -51,7 +51,7 @@ Your user, repo, and marketplace skills aren't polled – they're discovered whe
 
 If a skill isn't showing up, check that it lives in a directory with a `SKILL.md` file at its root, and that the file begins with valid YAML frontmatter containing at least `name` and `description` fields. Skills with missing or malformed frontmatter are skipped silently.
 
-If changes to a user or repo skill aren't being picked up, start a new task — these are scanned at session start, not in real time.
+If changes to a user or repo skill aren't being picked up, start a new task. These are scanned at session start, not in real time.
 
 If your PostHog marketplace plugin isn't appearing, that's expected. PostHog Code ships its own bundled copy of the PostHog plugin and skips any marketplace-installed version to avoid duplicates.
 
