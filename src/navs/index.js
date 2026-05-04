@@ -6383,24 +6383,6 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Orchestrating multiple agents',
-                    url: '/docs/posthog-code/orchestrating-multiple-agents',
-                    icon: 'IconGraduationCap',
-                    color: 'green',
-                },
-                {
-                    name: 'Acting on signal reports',
-                    url: '/docs/posthog-code/acting-on-signal-reports',
-                    icon: 'IconGraduationCap',
-                    color: 'green',
-                },
-                {
-                    name: 'Reviewing code',
-                    url: '/docs/posthog-code/reviewing-code',
-                    icon: 'IconGraduationCap',
-                    color: 'green',
-                },
-                {
                     name: 'Features',
                 },
                 {
