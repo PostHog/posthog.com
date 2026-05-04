@@ -249,7 +249,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `service_id` | string | No | The plan to provision. `"analytics"` (default) provisions a standard project. `"free"` and `"pay_as_you_go"` set the billing plan explicitly. |
-| `label_prefix` | string | No | Label prefix for the personal API key shown in PostHog, up to 25 characters. The key is labeled `{label_prefix} - {team_name}`. If omitted, empty, or whitespace-only, the label uses the default `Stripe Projects` prefix. |
+| `label_prefix` | string | No | Label prefix for the personal API key shown in PostHog, up to 25 characters. The key is labeled `{label_prefix} - {team_name}`. If omitted, empty, or whitespace-only, the key is labeled with just the team name. |
 | `configuration.project_name` | string | No | Project name (defaults to `"Default project"`) |
 
 **Response** (HTTP 200):
@@ -295,7 +295,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources/12345/rot
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `label_prefix` | string | No | Label prefix for the new personal API key shown in PostHog, up to 25 characters. The key is labeled `{label_prefix} - {team_name}`. If omitted, empty, or whitespace-only, the label uses the default `Stripe Projects` prefix. |
+| `label_prefix` | string | No | Label prefix for the new personal API key shown in PostHog, up to 25 characters. The key is labeled `{label_prefix} - {team_name}`. If omitted, empty, or whitespace-only, the key is labeled with just the team name. |
 
 The response has the same shape as the project provisioning response and includes the rotated `api_key`, `host`, and new `personal_api_key`.
 
