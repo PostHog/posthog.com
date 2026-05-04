@@ -140,27 +140,27 @@ flag_value = flags.get_flag('flag-key')
 ```
 
 ```go
-enabledVariant, err := client.GetFeatureFlag(
-    FeatureFlagPayload{
-        Key:        "flag-key",
-        DistinctId: "distinct_id_of_the_user",
-        // Include any person properties, groups, or group properties required to evaluate the flag
-        Groups: posthog.NewGroups().
-            Set("your_group_type", "your_group_id").
-            Set("another_group_type", "another_group_id"),
-        PersonProperties: posthog.NewProperties().
-            Set("property_name", "value"),
-        GroupProperties: map[string]map[string]interface{}{
-            "your_group_type": {
-                "group_property_name": "value",
-            },
-            "another_group_type": {
-                "group_property_name": "another value",
-            },
-        },
-        OnlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
+flags, err := client.EvaluateFlags(posthog.EvaluateFlagsPayload{
+    DistinctId: "distinct_id_of_the_user",
+    // Include any person properties, groups, or group properties required to evaluate the flag
+    Groups: posthog.NewGroups().
+        Set("your_group_type", "your_group_id").
+        Set("another_group_type", "another_group_id"),
+    PersonProperties: posthog.NewProperties().
+        Set("property_name", "value"),
+    GroupProperties: map[string]posthog.Properties{
+        "your_group_type": posthog.NewProperties().
+            Set("group_property_name", "value"),
+        "another_group_type": posthog.NewProperties().
+            Set("group_property_name", "another value"),
     },
-)
+    OnlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
+})
+if err != nil {
+    // Handle error
+}
+
+flagValue := flags.GetFlag("flag-key")
 ```
 
 ```python

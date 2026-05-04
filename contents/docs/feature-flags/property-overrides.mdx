@@ -546,23 +546,24 @@ flag_value = flags.get_flag('feature-flag-key')
 ```
 
 ```go
-flagValue, err := client.GetFeatureFlag(
-    posthog.FeatureFlagPayload{
-        Key:        "feature-flag-key",
-        DistinctId: "user-distinct-id",
-        PersonProperties: posthog.NewProperties().
+flags, err := client.EvaluateFlags(posthog.EvaluateFlagsPayload{
+    DistinctId: "user-distinct-id",
+    PersonProperties: posthog.NewProperties().
+        Set("plan", "enterprise").
+        Set("company_size", "large"),
+    Groups: posthog.NewGroups().
+        Set("company", "company-123"),
+    GroupProperties: map[string]posthog.Properties{
+        "company": posthog.NewProperties().
             Set("plan", "enterprise").
-            Set("company_size", "large"),
-        Groups: posthog.NewGroups().
-            Set("company", "company-123"),
-        GroupProperties: map[string]map[string]interface{}{
-            "company": {
-                "plan":           "enterprise",
-                "employee_count": 500,
-            },
-        },
+            Set("employee_count", 500),
     },
-)
+})
+if err != nil {
+    // Handle error
+}
+
+flagValue := flags.GetFlag("feature-flag-key")
 ```
 
 ```java
