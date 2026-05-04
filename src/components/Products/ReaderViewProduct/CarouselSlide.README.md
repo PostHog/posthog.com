@@ -129,13 +129,17 @@ Used when `slide.image` is an object instead of a string shorthand.
 |---|---|---|---|
 | `src` | `string` | required *(unless `ref` is set)* | Light-mode source URL (typically Cloudinary). Mutually exclusive with `ref`. |
 | `srcDark` | `string` | none | Dark-mode source URL. When present and the site theme is dark, this is used instead of `src`. Falls through to `src` when omitted. |
+| `srcMobile` | `string` | none | `stack` layout only. When set, this image shows below `srcMobileBreakpoint` (default `@2xl/reader-content`); `src` shows above it. Use when the same content warrants a portrait mobile crop and a landscape desktop crop. |
+| `srcMobileDark` | `string` | none | Dark-mode variant of `srcMobile`. Falls through to `srcMobile` when omitted. |
+| `srcMobileBreakpoint` | `'2xl' \| '3xl' \| '4xl'` | `'2xl'` | Breakpoint at which `srcMobile` is swapped for `src`. All values reference the named `reader-content` container. Use `'3xl'` or `'4xl'` when the desktop image is very wide and should stay hidden longer. |
 | `ref` | `string` | none | Lookup key into `productData.screenshots`. The matching entry's `src`/`srcDark`/`alt` are merged in as defaults; any other fields on this object override them. **Use this when you want the screenshots catalog to remain the single source of truth for image URLs but you need to override styling on this slide.** |
 | `alt` | `string` | catalog `alt` → `productData.name` | Alt text for the `<img>`. |
 | `maxWidth` | `string` | layout-dependent | Tailwind max-width class. `stack` defaults to `@2xl/reader-content:max-w-3xl`; `float` defaults to `max-w-md @2xl:max-w-sm @3xl:max-w-md`. Override examples: `'max-w-none'` (full width), `'max-w-2xl'`. |
 | `align` | `'left' \| 'center' \| 'right'` | `'left'` | Alignment of the image within its container (only meaningful when `maxWidth` is narrower than container). |
-| `frameless` | `boolean` | `false` | `stack` layout only. When `true`, skips the default `bg-tan dark:bg-dark p-4 border-t border-primary` framed wrapper. Useful for full-bleed images that should butt against the slide bottom. |
-| `containerClassName` | `string` | none | Extra classes on the wrapper div around the image. Appended after the renderer's defaults so later utilities can override earlier ones. Example: `'pb-0 leading-[0]'`. |
-| `imgClassName` | `string` | none | Extra classes on the `<img>` element itself. Appended after the defaults. The `stack` default applies `h-auto border border-secondary rounded-md`; pass `'border-0 rounded-none'` to drop the border. |
+| `frameless` | `boolean` | `false` | `stack` layout only. Removes the frame's **background** (`bg-tan dark:bg-dark`) and **border** (`border-t border-primary`). Padding is controlled independently by `framePadding` — when `frameless: true`, padding defaults to `''` instead of `p-4`. |
+| `framePadding` | `string` | `'p-4'` (framed) / `''` (frameless) | Replaces the default `p-4` frame padding. Accepts any Tailwind spacing class, including responsive container-query variants. Use this to add desktop-only padding (e.g. `'@3xl/reader-content:pt-4 @3xl/reader-content:px-4'`) without needing `!important` overrides. |
+| `containerClassName` | `string` | none | Extra classes on the wrapper div. Appended after frame classes. Use for `pb-0 leading-[0]` (flush-bottom), responsive border (`'@3xl/reader-content:border-t @3xl/reader-content:border-primary'`), or any other one-off styling. |
+| `imgClassName` | `string` | none | Extra classes on the `<img>` element. Appended after the defaults. The `stack` default applies `h-auto border border-secondary rounded-md` (or just `h-auto` when `frameless: true`). Use `'w-full !border-0 !rounded-none'` for a full-width borderless image. |
 | `glow` | `boolean \| GlowColor` | `undefined` | `float` layout only. `true` wraps the image in `<Glow>` using `productData.color`; pass a specific `GlowColor` (`'red'`, `'blue'`, etc.) to override. Ignored in `stack` layout. |
 
 ### Image source: three modes
@@ -159,7 +163,7 @@ image: {
 
 The `ref` form keeps the screenshots catalog as the single source of truth for URLs — you don't have to duplicate the URLs in the slide config when you only need to add styling overrides.
 
-**Class merging:** `containerClassName`, `imgClassName`, and `slide.className` are appended after the renderer's defaults using plain template-string composition. Later utilities sit later in the className string, so they win on Tailwind's "last wins" rule for utilities of the same property. For overrides where source order isn't enough (e.g. nuking the default padding), use Tailwind's `!` prefix (`'!p-0'`).
+**Class merging:** `containerClassName`, `imgClassName`, and `slide.className` are appended after the renderer's defaults. For padding, use `framePadding` instead of trying to override `p-4` via `containerClassName` — it replaces the padding directly with no specificity fights. For background and border, use `frameless: true`. Reserve `!important` (`'!border-0'`) only when overriding `imgClassName` defaults that can't be controlled via a dedicated prop.
 
 ## Bullets (`SlideBullet`)
 
@@ -172,7 +176,8 @@ Rendered as `<li><strong>{title}</strong> {description}</li>`. The bullet list i
 ## What comes free (defaults you don't have to specify)
 
 - **Slide padding**: `@container p-4 @2xl/reader-content:p-8 @4xl/reader-content:p-10` on the prose container (`stack`) or root (`float`). Override via `slide.className`.
-- **Stack image framing**: `bg-tan dark:bg-dark p-4 border-t border-primary` wrapper + `h-auto border border-secondary rounded-md` on the img. Bypass with `image.frameless: true` or override with `image.containerClassName` / `image.imgClassName`.
+- **Stack image frame**: `bg-tan dark:bg-dark` background + `p-4` padding + `border-t border-primary` top border. Each part is independently controllable: `frameless: true` removes bg and border; `framePadding` replaces padding; `containerClassName` adds anything else.
+- **Stack image defaults (img)**: `h-auto border border-secondary rounded-md`. Skipped when `frameless: true` (becomes just `h-auto`). Override via `imgClassName`.
 - **Stack image max-width**: `@2xl/reader-content:max-w-3xl` (left-aligned within its container). Good for landscape screenshots.
 - **Float image position**: floats right at `@2xl/reader-content` with margin offsets that escalate at `@2xl` / `@3xl` / `@4xl/reader-content`. Stacks above prose at narrower sizes.
 - **Float image max-width**: `max-w-md @2xl:max-w-sm @3xl:max-w-md` (responsive — narrower when wedged into the float position).
@@ -259,6 +264,39 @@ image: { ref: 'overview', glow: 'purple' }                     // any GlowColor:
 
 ```tsx
 image: { ref: 'screenshot', maxWidth: 'max-w-md', align: 'center' }
+```
+
+### Responsive mobile/desktop images
+
+Use `srcMobile` when you have separate portrait (mobile) and landscape (desktop) crops. Control the switch point with `srcMobileBreakpoint` — default is `'2xl'`, use `'3xl'` or `'4xl'` if the desktop image is very wide.
+
+```tsx
+image: {
+    src: 'https://res.cloudinary.com/.../desktop_light.png',
+    srcDark: 'https://res.cloudinary.com/.../desktop_dark.png',
+    srcMobile: 'https://res.cloudinary.com/.../mobile_light.png',
+    srcMobileDark: 'https://res.cloudinary.com/.../mobile_dark.png',
+    maxWidth: 'max-w-none',
+    srcMobileBreakpoint: '3xl',           // keep mobile crop until @3xl/reader-content
+    imgClassName: 'w-full !border-0 !rounded-none',
+}
+```
+
+**Important:** Add `w-full` to `imgClassName` when using `max-w-none`. Without it, a wide image overflows its wrapper and the container's padding becomes invisible.
+
+### Frame on desktop only (no frame on mobile)
+
+Use `frameless: true` to strip bg and border at all sizes, then add them back responsively via `framePadding` (padding) and `containerClassName` (border). The image sits flush at the bottom by default; add `pb-0 leading-[0]` to maintain the flush edge when adding top/side padding at desktop.
+
+```tsx
+image: {
+    src: '...',
+    maxWidth: 'max-w-none',
+    frameless: true,
+    framePadding: '@3xl/reader-content:pt-4 @3xl/reader-content:px-4',
+    containerClassName: '@3xl/reader-content:border-t @3xl/reader-content:border-primary pb-0 leading-[0]',
+    imgClassName: 'w-full !border-0 !rounded-none',
+}
 ```
 
 ## Trailing prose pattern

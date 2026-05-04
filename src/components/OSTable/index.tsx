@@ -201,14 +201,13 @@ const Row = ({
                ${isLastCell ? '!border-r' : ''}
                ${roundBottomLeft ? 'rounded-bl-md' : ''}
                ${roundBottomRight ? 'rounded-br-md' : ''}
-            flex flex-col 
-            ${rowAlignment === 'top' ? 'justify-start' : 'justify-center'} 
+            ${rowAlignment === 'center' ? 'flex items-center' : ''}
             ${
-                columns?.[cellIndex]?.align === 'left'
-                    ? 'items-start'
-                    : columns?.[cellIndex]?.align === 'right'
-                    ? 'justify-end'
-                    : 'items-center text-center'
+                columns?.[cellIndex]?.align === 'right'
+                    ? 'text-right'
+                    : columns?.[cellIndex]?.align === 'center'
+                    ? 'text-center'
+                    : ''
             } ${cell.className || ''}`}
                             style={cell.style}
                         >

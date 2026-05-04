@@ -98,6 +98,23 @@ export interface ImageConfig {
     /** Optional dark-mode source. When set and the theme is dark, this is used instead of `src`. */
     srcDark?: string
     /**
+     * Mobile-specific source URL. When set alongside `src`, the mobile image is shown below
+     * the breakpoint defined by `srcMobileBreakpoint` (default `'2xl'`) and `src` is shown above it.
+     * Only applies to the `stack` layout. Ignored when `srcMobile` is absent (single image, all sizes).
+     */
+    srcMobile?: string
+    /** Dark-mode variant of `srcMobile`. Falls through to `srcMobile` when omitted. */
+    srcMobileDark?: string
+    /**
+     * Container-query breakpoint at which the mobile image is swapped for the desktop image (`src`).
+     * All values reference the named `reader-content` container. Defaults to `'2xl'`.
+     *
+     * - `'2xl'` — switch at ≥42rem container width (default)
+     * - `'3xl'` — switch at ≥48rem
+     * - `'4xl'` — switch at ≥56rem (use when the desktop image is very wide)
+     */
+    srcMobileBreakpoint?: '2xl' | '3xl' | '4xl'
+    /**
      * Lookup key into `productData.screenshots`. The matching entry's `src`/`srcDark`/`alt` are
      * merged in as defaults; any other fields on this config override them. Mutually exclusive
      * with `src`.
@@ -108,8 +125,14 @@ export interface ImageConfig {
     maxWidth?: string
     /** Image alignment within its container. Default: 'left'. */
     align?: 'left' | 'center' | 'right'
-    /** Skip the default framed wrapper (bg-tan + border-t + padding) used in the `stack` layout. */
+    /** Skip the default background and border of the framed wrapper in the `stack` layout. Padding is still controlled by `framePadding`. */
     frameless?: boolean
+    /**
+     * Replaces the default `p-4` padding on the stack image frame. Use this to set
+     * responsive or directional padding independently of the background and border.
+     * Pass `''` to remove all frame padding.
+     */
+    framePadding?: string
     /**
      * Extra classes on the wrapper div around the image. Appended after the renderer's
      * defaults so later utilities win on Tailwind's last-wins rule for utilities of the

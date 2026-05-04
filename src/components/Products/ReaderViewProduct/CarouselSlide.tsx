@@ -11,8 +11,9 @@ import type { CarouselSlide as CarouselSlideType, ImageConfig } from './types'
  */
 const SLIDE_PADDING = '@container p-4 @2xl/reader-content:p-8 @4xl/reader-content:p-10'
 
-/** Default framed wrapper around stack-layout images. Bypassed when `image.frameless` is true. */
-const STACK_IMAGE_FRAME = 'bg-tan dark:bg-dark p-4 border-t border-primary'
+const FRAME_BG = 'bg-tan dark:bg-dark'
+const FRAME_PADDING = 'p-4'
+const FRAME_BORDER = 'border-t border-primary'
 const STACK_IMAGE_DEFAULTS = 'h-auto border border-secondary rounded-md'
 
 const ALIGN_MAP: Record<NonNullable<ImageConfig['align']>, string> = {
@@ -45,6 +46,16 @@ const resolveImage = (image: string | ImageConfig | undefined, productData: any)
 
 /** Pick the appropriate src based on the active theme. Falls back to `src` when no `srcDark` exists. */
 const pickSrc = (img: ImageConfig, isDark: boolean) => (isDark && img.srcDark ? img.srcDark : (img.src as string))
+
+/** Tailwind classes for hiding the mobile image and showing the desktop image at each breakpoint. */
+const MOBILE_BREAKPOINT: Record<
+    NonNullable<ImageConfig['srcMobileBreakpoint']>,
+    { mobileHide: string; desktopShow: string }
+> = {
+    '2xl': { mobileHide: '@2xl/reader-content:hidden', desktopShow: 'hidden @2xl/reader-content:block' },
+    '3xl': { mobileHide: '@3xl/reader-content:hidden', desktopShow: 'hidden @3xl/reader-content:block' },
+    '4xl': { mobileHide: '@4xl/reader-content:hidden', desktopShow: 'hidden @4xl/reader-content:block' },
+}
 
 const SlideBullets = ({ bullets }: { bullets?: { title: string; description?: React.ReactNode | string }[] }) => {
     if (!bullets || bullets.length === 0) return null
@@ -93,6 +104,14 @@ export default function CarouselSlide({ slide, productData }: CarouselSlideProps
     const image = resolveImage(slide.image, productData)
 
     if (slide.layout === 'stack') {
+        const bp = image?.srcMobile ? MOBILE_BREAKPOINT[image.srcMobileBreakpoint ?? '2xl'] : null
+        const imgDefaults = `${image?.frameless ? 'h-auto' : STACK_IMAGE_DEFAULTS}${
+            image?.imgClassName ? ` ${image.imgClassName}` : ''
+        }`
+        const desktopClass = `w-full ${image?.maxWidth ?? '@2xl/reader-content:max-w-3xl'} ${
+            ALIGN_MAP[image?.align ?? 'left']
+        }`
+
         return (
             <div className={`text-base text-primary/90${slide.className ? ` ${slide.className}` : ''}`}>
                 <div className={SLIDE_PADDING}>
@@ -102,19 +121,32 @@ export default function CarouselSlide({ slide, productData }: CarouselSlideProps
                 </div>
                 {image && (
                     <div
-                        className={`${image.frameless ? '' : STACK_IMAGE_FRAME}${
-                            image.containerClassName ? ` ${image.containerClassName}` : ''
-                        }`.trim()}
+                        className={[
+                            image.frameless ? '' : FRAME_BG,
+                            image.frameless ? image.framePadding ?? '' : image.framePadding ?? FRAME_PADDING,
+                            image.frameless ? '' : FRAME_BORDER,
+                            image.containerClassName ?? '',
+                        ]
+                            .filter(Boolean)
+                            .join(' ')}
                     >
+                        {bp && (
+                            <CloudinaryImage
+                                src={
+                                    (isDark && image.srcMobileDark
+                                        ? image.srcMobileDark
+                                        : image.srcMobile) as `https://res.cloudinary.com/${string}`
+                                }
+                                alt={image.alt || productData?.name}
+                                className={`w-full ${bp.mobileHide}`}
+                                imgClassName={imgDefaults}
+                            />
+                        )}
                         <CloudinaryImage
                             src={pickSrc(image, isDark) as `https://res.cloudinary.com/${string}`}
                             alt={image.alt || productData?.name}
-                            className={`w-full ${image.maxWidth ?? '@2xl/reader-content:max-w-3xl'} ${
-                                ALIGN_MAP[image.align ?? 'left']
-                            }`}
-                            imgClassName={`${image.frameless ? 'h-auto' : STACK_IMAGE_DEFAULTS}${
-                                image.imgClassName ? ` ${image.imgClassName}` : ''
-                            }`}
+                            className={bp ? `${desktopClass} ${bp.desktopShow}` : desktopClass}
+                            imgClassName={imgDefaults}
                         />
                     </div>
                 )}

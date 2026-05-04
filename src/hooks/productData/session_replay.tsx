@@ -130,6 +130,15 @@ export const sessionReplay = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/filters_light_020d186555.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/filters_dark_6f3e65501b.png',
         },
+        'technical-context': {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/technical_content_desktop_light_a9c7516f43.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/technical_content_desktop_dark_67abc27556.png',
+            srcMobile:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/technical_content_mobile_light_bcf6de0102.png',
+            srcMobileDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/technical_content_mobile_dark_12b7c6f51b.png',
+            alt: 'Technical context in session replay',
+        },
         chat: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/chat_light_9efd89f586.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/chat_dark_ecac24fa87.png',
@@ -209,10 +218,26 @@ export const sessionReplay = {
                 },
             ],
         },
+        event_properties: {
+            title: 'Event properties',
+            description:
+                "Show you the properties of the event, like the page URL, the user's IP address, and the timestamp of the event.",
+        },
+        error_details: {
+            title: 'Error details',
+            description:
+                'Show you the details of the error, like the error message, the stack trace, and the timestamp of the error. You can also see the full request and response headers.',
+        },
+        web_vitals: {
+            title: 'Web vitals',
+            description:
+                'Track performance metrics like FCP, LCP, INP, CLS, and any other acronyms they might think up next.',
+        },
         network_monitor: {
             title: 'Network monitor',
             headline: 'Network monitor',
-            description: 'Analyze performance and network calls',
+            description:
+                'Captures every request and response with timing, method, and status code – spot slow API calls or failed requests the moment they happen.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
@@ -224,12 +249,8 @@ export const sessionReplay = {
         console_logs: {
             title: 'Console logs',
             headline: 'Console logs',
-            description: (
-                <>
-                    Console logs are useful for debugging and can be enabled by passing{' '}
-                    <code>enable_recording_console_logs: true</code> or in your project's settings.
-                </>
-            ),
+            description:
+                'Records all warnings and errors in real time, correlated to the exact point in the session they happened. Pair with Error Tracking for full stack traces linked directly to the replay.',
             children: (
                 <>
                     <div className="flex @lg:flex-row @lg:gap-x-6 flex-col">
@@ -335,7 +356,7 @@ export const sessionReplay = {
             title: 'DOM explorer',
             headline: 'DOM explorer',
             description:
-                "Inspect the DOM of the user's browser at any moment in the recording. This lets you see the exact HTML and CSS that was rendered at that point in time – useful for debugging.",
+                "Shows a live DOM snapshot at any point in the recording – catch layout shifts, broken styles, or elements that weren't rendering when they should.",
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/inspect_dom_e9376c469a.png',
@@ -343,11 +364,74 @@ export const sessionReplay = {
                 },
             ],
         },
+        technical_context: {
+            title: 'Technical context',
+            headline: 'A DevTools panel, synced to the recording',
+            description:
+                'Every session comes with a panel of technical data synced to the video. Scrub to any point and see exactly what your app was doing at that moment.',
+        },
+        sampling: {
+            title: 'Sampling',
+            description: 'Records a percentage of all sessions. Start at 100% and dial it down as your volume grows.',
+        },
+        url_event_triggers: {
+            title: 'URL and event triggers',
+            description:
+                'Start recording when a user visits a specific page or fires a specific event – like reaching checkout, hitting an error, or completing onboarding.',
+        },
+        feature_flag_targeting: {
+            title: 'Feature flag targeting',
+            description:
+                'Limits recordings to a specific rollout – record your experiment group without capturing everyone.',
+        },
+        privacy_masking: {
+            title: 'Privacy masking',
+            description: (
+                <>
+                    Redacts sensitive fields by default. Passwords are always masked; opt in to capturing other inputs
+                    with <code>maskAllInputs: false</code>. Exclude any element with a <code>ph-no-capture</code> class.
+                    Masked data never leaves the browser.
+                </>
+            ),
+        },
+        event_filters: {
+            title: 'Event filters',
+            description:
+                'Narrow recordings to sessions where a specific action was triggered – a button click, page view, or custom event.',
+        },
+        person_properties: {
+            title: 'Person properties',
+            description:
+                'Filter by country, plan, email, or any user attribute to find sessions from the right segment.',
+        },
+        frustration_signals: {
+            title: 'Frustration signals',
+            description:
+                'Surface recordings with rage clicks, dead clicks, or exceptions – the sessions most likely to show you something worth fixing.',
+        },
+        ai_search: {
+            title: 'PostHog AI',
+            description: (
+                <>
+                    Takes a plain-English description of the behavior you're looking for – "users who dropped off during
+                    checkout" – and returns a matching playlist. Once found, AI summaries give you a breakdown of what
+                    happened without watching the whole thing.
+                </>
+            ),
+        },
         recording_rules: {
             title: 'Recording rules',
             headline: 'Recording rules',
             description:
                 'You can limit the sessions that are recorded to a percentage of randomized traffic, or based on triggered events, user properties, or browsing behavior. You can also manually enable recording in your code when a user is opted in to a feature flag.',
+            codeExample: `posthog.init('<ph_project_token>', {
+  disable_session_recording: true,
+})
+window.posthog.onFeatureFlags(() => {
+  if (window.posthog.isFeatureEnabled('your-feature-flag')) {
+    window.posthog.startSessionRecording()
+  }
+})`,
             children: (
                 <div>
                     <h4 className="text-lg">Manually enable recording when a visitor is enrolled in a feature flag</h4>
