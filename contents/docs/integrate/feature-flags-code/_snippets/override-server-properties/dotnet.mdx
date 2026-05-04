@@ -3,53 +3,32 @@ import OverrideServerPropertiesIntro from './override-server-properties-intro.md
 <OverrideServerPropertiesIntro />
 
 ```csharp
-
-// Overriding Person Properties
-var personFlag = await posthog.GetFeatureFlagAsync(
-    "flag-key",
+var flags = await posthog.EvaluateFlagsAsync(
     "distinct_id_of_the_user",
-    personProperties: new() {["property_name"] = "value"});
-
-// Overriding Group Properties
-var groupFlag = await posthog.GetFeatureFlagAsync(
-    "flag-key",
-    "distinct_id_of_the_user",
-    options: new FeatureFlagOptions
+    new AllFeatureFlagsOptions
     {
-        Groups = [
+        PersonProperties = new()
+        {
+            ["property_name"] = "value",
+        },
+        Groups = new()
+        {
             new Group("your_group_type", "your_group_id")
             {
-                ["group_property_name"] = "your group value"
+                ["group_property_name"] = "value",
             },
-            new Group(
-                "another_group_type",
-                "another_group_id")
-                {
-                    ["group_property_name"] = "another group value"
-                }
-        ]
-    });
-
-// Overriding both Person and Group Properties
-var bothFlag = await posthog.GetFeatureFlagAsync(
-    "flag-key",
-    "distinct_id_of_the_user",
-    options: new FeatureFlagOptions
-    {
-        PersonProperties = new() { ["property_name"] = "value" },
-        Groups = [
-            new Group("your_group_type", "your_group_id")
+            new Group("another_group_type", "another_group_id")
             {
-                ["group_property_name"] = "your group value"
+                ["group_property_name"] = "another value",
             },
-            new Group(
-                "another_group_type",
-                "another_group_id")
-                {
-                    ["group_property_name"] = "another group value"
-                }
-        ]
-    });
+        },
+    }
+);
+
+if (flags.IsEnabled("flag-key"))
+{
+    // Do something differently for this user
+}
 ```
 
 import OverrideGeoIPPropertiesSDK from './override-geoip-properties-SDKs.mdx'
