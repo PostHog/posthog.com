@@ -103,7 +103,7 @@ export default function DemoVideo({ wistia, highlights, chapters, className = ''
                                                 before:-ml-px
                                                 before:top-0 
                                                 before:bottom-0 
-                                                before:w-0.5 before:bg-black/25 dark:before:bg-white
+                                                before:w-0.5 before:bg-black/25 dark:before:bg-white/25
                                                 transition-all duration-100
                                                 hover:text-primary"
                                             >
@@ -111,11 +111,12 @@ export default function DemoVideo({ wistia, highlights, chapters, className = ''
                                                     className="absolute size-3 top-2 left-1.5 group-hover:size-7 group-hover:top-0 group-hover:-left-0.5
                                                 group-active:top-0.5
                                                 group-active:left-0 
-                                                group-active:size-6 rounded-full bg-black group-hover:bg-black border border-primary group-hover:border-[1.5px] group-hover:border-black/50 flex justify-center items-center transition-all duration-100"
+                                                group-active:size-6 rounded-full bg-black dark:bg-[#aaa] group-hover:bg-black 
+                                                dark:group-hover:bg-white border border-primary group-hover:border-[1.5px] group-hover:border-black/50 dark:group-hover:border-white flex justify-center items-center transition-all duration-100"
                                                 >
                                                     <IconPlayFilled
                                                         className="size-0 group-hover:size-4
-                                                    group-active:size-3 transition-all duration-100 group-hover:text-white"
+                                                    group-active:size-3 transition-all duration-100 group-hover:text-white dark:group-hover:text-black"
                                                     />
                                                 </div>
                                                 <span className="font-mono text-xs text-secondary shrink-0 pt-0.5">
