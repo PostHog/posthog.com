@@ -14,26 +14,39 @@ Go to **Support** in the main PostHog navigation to access your inbox.
 
 Each ticket has the following properties:
 
-| Property | Description |
-|----------|-------------|
-| **Ticket number** | Auto-incremented unique number (e.g., #1, #2, #3) |
-| **Status** | `new`, `open`, `pending`, `on_hold`, `resolved` |
-| **Priority** | `low`, `medium`, `high` (optional) |
-| **Channel** | Where the ticket came from: `widget`, `slack`, or `email` |
-| **Assignee** | User or role responsible for the ticket |
-| **Session ID** | The PostHog session for events and exceptions |
-| **Session Replay ID** | The session recording (if replay is enabled) |
-| **Distinct ID** | PostHog distinct_id for person linking |
+| Property              | Description                                                 |
+| --------------------- | ----------------------------------------------------------- |
+| **Ticket number**     | Auto-incremented unique number (e.g., #1, #2, #3)           |
+| **Status**            | `new`, `open`, `pending`, `on_hold`, `resolved`             |
+| **Priority**          | `low`, `medium`, `high` (optional)                          |
+| **Channel**           | Where the ticket came from: `widget`, `slack`, or `email`   |
+| **Assignee**          | User or role responsible for the ticket                     |
+| **Session ID**        | The PostHog session for events and exceptions               |
+| **Session Replay ID** | The session recording (if replay is enabled)                |
+| **Distinct ID**       | PostHog distinct_id for person linking                      |
+| **Snoozed until**     | Datetime when the ticket automatically reopens (if snoozed) |
 
 ## Status workflow
 
-| Status | Meaning |
-|--------|---------|
-| `new` | Just created, not yet viewed by team |
-| `open` | Being actively worked on |
-| `pending` | Waiting for customer response |
-| `on_hold` | Paused for external reason |
-| `resolved` | Issue resolved, conversation closed |
+| Status     | Meaning                                                     |
+| ---------- | ----------------------------------------------------------- |
+| `new`      | Just created, not yet viewed by team                        |
+| `open`     | Being actively worked on                                    |
+| `pending`  | Waiting for customer response                               |
+| `on_hold`  | Paused for external reason or snoozed until a specific time |
+| `resolved` | Issue resolved, conversation closed                         |
+
+## Snoozing tickets
+
+Snoozing puts a ticket on hold until a specific date and time. When you snooze a ticket, the status automatically changes to `on_hold`. When the snooze period expires, the ticket automatically reopens with the `open` status.
+
+To snooze a ticket:
+
+1. Open a ticket
+2. Click the **Snooze** date picker in the sidebar
+3. Select a future date and time
+
+To clear a snooze and immediately reopen the ticket, click the **Snooze** date picker and clear the value.
 
 ## Filtering and search
 
@@ -47,6 +60,7 @@ The ticket inbox supports filtering by:
 - **Assignee** – Unassigned, specific user, or specific role
 - **Date range** – Filter by creation date
 - **Search** – Search by ticket number, customer name, or email
+- **Snoozed** – Filter by whether tickets are currently snoozed
 
 ## Ticket assignment
 
@@ -71,6 +85,7 @@ Assignment is manual with no automatic routing. Each ticket supports one assigne
 ### Filtering by assignee
 
 In the ticket list, use the assignee filter:
+
 - **Unassigned** – Show tickets with no assignment
 - **User: [name]** – Show tickets assigned to a specific user
 - **Role: [name]** – Show tickets assigned to a specific role
@@ -81,11 +96,11 @@ SLA deadlines are set via [workflow automation](/docs/support/workflows) – the
 
 SLA states are derived from the deadline:
 
-| State | Condition |
-|-------|-----------|
+| State        | Condition                       |
+| ------------ | ------------------------------- |
 | **On track** | More than 1 hour until deadline |
-| **At risk** | 1 hour or less until deadline |
-| **Breached** | Past the deadline |
+| **At risk**  | 1 hour or less until deadline   |
+| **Breached** | Past the deadline               |
 
 The ticket list supports filtering and sorting by SLA state. The SLA deadline is also displayed in the ticket detail sidebar.
 
@@ -105,26 +120,27 @@ Tags can also be set automatically via [workflow automation](/docs/support/workf
 
 ### Author types
 
-| Author type | Description |
-|-------------|-------------|
+| Author type  | Description                                  |
+| ------------ | -------------------------------------------- |
 | **Customer** | Messages sent by the end user via the widget |
-| **Support** | Messages sent by your team from PostHog |
-| **AI** | Messages from AI (reserved for future use) |
+| **Support**  | Messages sent by your team from PostHog      |
+| **AI**       | Messages from AI (reserved for future use)   |
 
 ### Message status
 
 Messages you send to customers display delivery status indicators:
 
-| Status | Meaning |
-|--------|----------|
+| Status   | Meaning                                    |
+| -------- | ------------------------------------------ |
 | **Sent** | Message has been delivered to the customer |
-| **Read** | Customer has viewed the message |
+| **Read** | Customer has viewed the message            |
 
 Status indicators appear on messages sent by your team. They help you understand whether customers have seen your responses.
 
 ### Private notes
 
 Messages can be marked as private notes, which are:
+
 - Only visible to your team in PostHog
 - Hidden from customers in the widget
 - Useful for internal notes or handoff context
@@ -134,10 +150,12 @@ To send a private note, toggle the **Private** option before sending.
 ### Unread tracking
 
 The system tracks unread messages separately for:
+
 - **Customer** – Messages the customer hasn't seen (from your team)
 - **Team** – Messages your team hasn't seen (from the customer)
 
 Unread counts reset when:
+
 - Team views a ticket in PostHog
 - Customer calls the "mark as read" endpoint from the widget
 
@@ -156,6 +174,7 @@ If Session Replay is enabled, you can watch their session directly in the ticket
 ### Recent events panel
 
 Events from ±5 minutes around when the ticket was created. This helps you understand:
+
 - What actions led to the support request
 - What they were trying to accomplish
 - Any errors or unusual patterns
@@ -167,6 +186,7 @@ Any errors or exceptions from their session. If they encountered a bug, you'll s
 ### Previous tickets panel
 
 Other tickets from the same person. Useful for:
+
 - Understanding their history with support
 - Identifying recurring issues
 - Seeing how previous issues were resolved
@@ -182,3 +202,4 @@ A history of all changes made to the ticket – status changes, assignment updat
 3. **Look at exceptions** to quickly identify bugs
 4. **Review previous tickets** to avoid asking repeat questions
 5. **Set status to pending** after you respond to track who's waiting for a reply
+6. **Snooze tickets** that need follow-up later instead of leaving them open
