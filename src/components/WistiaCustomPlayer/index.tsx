@@ -885,7 +885,7 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
 
                     {/* Caption display area */}
                     {showCaptions && !showCaptionSearch && (
-                        <div className="text-center text-secondary text-sm pt-4 px-4 min-h-[32px] flex items-center justify-center">
+                        <div className="text-center text-secondary text-sm mt-4 px-4 min-h-16 flex items-center justify-center">
                             {captionText ? (
                                 <p className="text-base font-medium">{captionText}</p>
                             ) : (

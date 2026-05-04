@@ -29,6 +29,7 @@ export default function DemoVideo({ wistia, highlights, chapters, className = ''
     const playerRef = useRef<any>(null)
     const containerRef = useRef<HTMLDivElement>(null)
     const [wistiaChapters, setWistiaChapters] = useState<DemoVideoChapter[]>([])
+    const [currentTime, setCurrentTime] = useState(0)
 
     useEffect(() => {
         if (chapters && chapters.length > 0) return
@@ -52,12 +53,15 @@ export default function DemoVideo({ wistia, highlights, chapters, className = ''
 
     const resolvedChapters = chapters?.length ? chapters : wistiaChapters
     const hasSidebar = (highlights && highlights.length > 0) || resolvedChapters.length > 0
+    const activeChapterIndex = resolvedChapters.reduce((active, chapter, index) => {
+        return chapter.time <= currentTime ? index : active
+    }, -1)
 
     return (
         <div ref={containerRef} className={`@container scroll-mt-20 ${className}`}>
             <div className="flex flex-col @5xl:gap-8 @5xl:flex-row">
                 <div className="rounded flex-1 w-full">
-                    <WistiaCustomPlayer mediaId={wistia} glow="red" ref={playerRef} />
+                    <WistiaCustomPlayer mediaId={wistia} glow="red" ref={playerRef} onTimeUpdate={setCurrentTime} />
                 </div>
 
                 {hasSidebar && (
@@ -117,7 +121,11 @@ export default function DemoVideo({ wistia, highlights, chapters, className = ''
                                                 <span className="font-mono text-xs text-secondary shrink-0 pt-0.5">
                                                     {formatTime(chapter.time)}
                                                 </span>
-                                                <span className=" group-hover:underline group-active:scale-[.999] group-active:top-px transition-all duration-50">
+                                                <span
+                                                    className={`group-hover:underline group-active:scale-[.999] group-active:top-px transition-all duration-50${
+                                                        index === activeChapterIndex ? ' font-bold' : ''
+                                                    }`}
+                                                >
                                                     {chapter.title}
                                                 </span>
                                             </button>
