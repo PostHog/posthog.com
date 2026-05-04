@@ -13,7 +13,12 @@ const Demo = ({ id, productData }: SectionComponentProps) => {
                 Here's a video of how PostHog uses {productData?.name} to support people who use {productData?.name}.
                 Yes, it's very meta.
             </p>
-            <DemoVideo wistia={wistia} highlights={productData?.videos?.overview?.highlights} className="mt-6" />
+            <DemoVideo
+                wistia={wistia}
+                highlights={productData?.videos?.overview?.highlights}
+                chapters={productData?.videos?.overview?.chapters}
+                className="mt-6"
+            />
         </section>
     )
 }

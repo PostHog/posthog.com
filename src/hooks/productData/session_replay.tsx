@@ -93,23 +93,6 @@ export const sessionReplay = {
     videos: {
         overview: {
             wistia: 'a1480fky0u',
-            highlights: [
-                { title: 'Gather context', description: 'by seeing what led to each rageclick' },
-                { title: 'Debug issues', description: 'by watching the prelude to each bug' },
-                {
-                    title: 'Assess performance',
-                    description: 'by measuring first contentful paint and load time',
-                },
-                {
-                    title: 'Resolve experiments',
-                    description: 'by seeing how users interact with new features',
-                },
-                { title: 'Build user empathy', description: 'by watching their entire product journey' },
-                {
-                    title: 'Improve conversion',
-                    description: 'by using context to solve stubborn problems',
-                },
-            ],
         },
     },
     screenshots: {
