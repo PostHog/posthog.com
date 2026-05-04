@@ -4,4 +4,108 @@ hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-pepe
+import OSButton from 'components/OSButton'
+
+PostHog Code is a desktop coding agent wired into your PostHog project. It writes code with live product context – flags, experiments, events, errors – and runs tasks in parallel, locally or in the cloud. Here's the quick tour.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_43_01_PM_eea6fe87a8.png"
+    classes="rounded"
+    alt="The PostHog Code desktop app"
+/>
+
+## Start a task
+
+A **task** is the unit of work in PostHog Code. Type a prompt, pick a [mode](/docs/posthog-code/tasks#task-modes), and the agent gets to work. Tasks persist across restarts, hand off cleanly between your computer and the cloud, and can hand off between teammates.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_43_01_PM_eea6fe87a8.png"
+    classes="rounded"
+    alt="Starting a task in PostHog Code"
+/>
+
+Three modes, three tradeoffs:
+
+| Mode | Where it runs | Best for |
+|---|---|---|
+| **Cloud** | PostHog-managed sandbox | Long-running tasks you want to walk away from |
+| **Local** | Your computer, current branch | Quick, focused changes |
+| **Worktree** | Your computer, dedicated branch + folder | Parallel work on the same repo |
+
+[Learn more about tasks →](/docs/posthog-code/tasks)
+
+## Give the agent your PostHog context
+
+This is the part that makes PostHog Code different from any other coding agent. As you write code or stage a diff, PostHog Code's [enricher](/docs/posthog-code/posthog-integration#enricher) detects PostHog SDK calls and pulls live data from your project – flag rollouts, experiment status, event volume, error frequency – right next to the code that emits them.
+
+Ask the agent things you couldn't ask a code-only tool:
+
+> Add a feature flag to the new checkout page and roll it out to everyone with an `@example.com` email.
+
+> Did my last deploy regress signup conversion? If so, revert it.
+
+> This error keeps showing up in production – fix it and add a regression test.
+
+[Learn more about the PostHog integration →](/docs/posthog-code/posthog-integration)
+
+## Review the diff before you ship
+
+Every task has a built-in diff panel. Read through edits side-by-side, leave inline feedback, manage what's staged, and follow up on PR comments without leaving the app.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_30_at_2_14_45_PM_aec0c02d2b.png"
+    classes="rounded"
+    alt="Diff panel in PostHog Code"
+/>
+
+When you're happy, hit **Create PR** – PostHog Code commits, pushes, generates a title and body that respect your repo's `PULL_REQUEST_TEMPLATE.md`, and opens the PR via the GitHub CLI.
+
+[Learn more about code review →](/docs/posthog-code/code-review)
+
+## Run agents in parallel with Command Center
+
+Open Command Center to run multiple agent sessions side-by-side – up to a 3×3 grid. Each cell is an independent task with its own conversation, branch, and workspace. Plan three features in parallel, fan out a batch of small fixes, or watch a long cloud run while you work locally on something else.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_46_22_PM_8aa62e0c9b.png"
+    classes="rounded"
+    alt="Command Center with multiple agents running in parallel"
+/>
+
+[Learn more about Command Center →](/docs/posthog-code/command-center)
+
+## Hand off to the cloud (and back)
+
+Cloud runs put a task in a sandboxed PostHog-managed workspace. Close the app, switch networks, shut your laptop – the agent keeps going. When you're ready, hand the task back to local for review, with all your changes, branch, and conversation history intact.
+
+[Learn more about cloud runs →](/docs/posthog-code/cloud-runs)
+
+## Kick off tasks from Slack
+
+Mention `@PostHog` in any channel, describe what you want done, and the agent picks up the work and replies in-thread. Ideal for fixes that come up while you're away from your computer.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_47_08_PM_b8ba794fdc.png"
+    classes="rounded"
+    alt="A PostHog Code task running in a Slack thread"
+/>
+
+[Learn more about the Slack integration →](/docs/posthog-code/slack)
+
+## Let your Inbox open PRs for you
+
+[Inbox](/docs/posthog-code/inbox) is the autopilot version of all of the above. Connect signal sources – Error Tracking, Support tickets, Session Replay, GitHub or Linear issues – and PostHog Code researches each new signal, prioritizes it by user impact, and opens a PR when a code-only fix is possible. Your job is to review and merge.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_48_19_PM_9652a9fb7c.png"
+    classes="rounded"
+    alt="The PostHog Code Inbox with researched and actionable reports"
+/>
+
+[Get started with Inbox →](/docs/posthog-code/inbox)
+
+## Ready to try it?
+
+<OSButton variant="primary" asLink to="/docs/posthog-code/download-posthog-code">
+  Download PostHog Code
+</OSButton>
