@@ -6351,29 +6351,13 @@ export const docsMenu = {
         },
         {
             name: 'PostHog Code',
-            icon: 'IconBook',
+            icon: 'IconCoffee',
             color: 'brown',
-            url: '/docs/posthog-code',
+            url: '/docs/posthog-code/quick-tour',
             description: 'AI coding environment with deep PostHog integration.',
             children: [
                 {
-                    name: 'PostHog Code',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/posthog-code',
-                    icon: 'IconHome',
-                    color: 'seagreen',
-                },
-                {
                     name: 'Getting started',
-                },
-                {
-                    name: 'Download PostHog Code',
-                    url: '/docs/posthog-code/download-posthog-code',
-                    icon: 'IconDownload',
-                    color: 'blue',
-                    featured: true,
                 },
                 {
                     name: 'Quick Tour',
@@ -6383,10 +6367,17 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Download',
+                    url: '/docs/posthog-code/download-posthog-code',
+                    icon: 'IconDownload',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
                     name: 'Guides',
                 },
                 {
-                    name: 'Use any model and any harness',
+                    name: 'Any model and any harness',
                     url: '/docs/posthog-code/use-any-model-and-harness',
                     icon: 'IconGraduationCap',
                     color: 'green',
@@ -6423,6 +6414,13 @@ export const docsMenu = {
                     url: '/docs/posthog-code/inbox',
                     icon: 'IconInbox',
                     color: 'yellow',
+                    children: [
+                        { name: 'Overview', url: '/docs/posthog-code/inbox' },
+                        { name: 'Sources', url: '/docs/posthog-code/inbox/sources' },
+                        { name: 'Research', url: '/docs/posthog-code/inbox/research' },
+                        { name: 'Triage', url: '/docs/posthog-code/inbox/triage' },
+                        { name: 'Troubleshooting', url: '/docs/posthog-code/inbox/troubleshooting' },
+                    ],
                 },
                 {
                     name: 'Skills',

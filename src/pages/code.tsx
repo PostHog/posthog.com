@@ -53,7 +53,7 @@ import { IconDiscord } from 'components/OSIcons/Icons'
 // Download CTA Button
 // ─────────────────────────────────────────────
 
-function DownloadButton({ autoFocus = false }: { autoFocus?: boolean }) {
+export function DownloadButton({ autoFocus = false }: { autoFocus?: boolean }) {
     const posthog = usePostHog()
     const selectedProduct = useProduct({ handle: 'posthog_code' })
     const { setConfetti } = useApp()
