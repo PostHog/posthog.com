@@ -152,9 +152,10 @@ if variant == "variant-name" {
 ```
 
 ```elixir
-{:ok, feature_flag} = PostHog.feature_flag("experiment-feature-flag-key", "user_distinct_id")
+{:ok, snapshot} = PostHog.FeatureFlags.evaluate_flags("user_distinct_id")
+variant = PostHog.FeatureFlags.Evaluations.get_flag(snapshot, "experiment-feature-flag-key")
 
-if feature_flag.enabled == "variant-name" do
+if variant == "variant-name" do
     # Do something
 end
 ```

@@ -1,37 +1,103 @@
-`PostHog.FeatureFlags.check/2` is the main function for checking a feature flag in Elixir. More documentation on it can be found in the [HexPM Docs](https://hexdocs.pm/posthog/PostHog.FeatureFlags.html).
+There are two steps to implement feature flags in Elixir:
 
+### Step 1: Evaluate flags once
+
+Call `PostHog.FeatureFlags.evaluate_flags/2` once for the user, then read values from the returned snapshot.
 
 #### Boolean feature flags
 
 ```elixir
-iex> PostHog.FeatureFlags.check("example-feature-flag-1", "user123")
-{:ok, true}
+{:ok, snapshot} = PostHog.FeatureFlags.evaluate_flags("distinct_id_of_your_user")
+
+if PostHog.FeatureFlags.Evaluations.enabled?(snapshot, "flag-key") do
+  # Do something differently for this user
+  # Optional: fetch the payload
+  matched_flag_payload = PostHog.FeatureFlags.Evaluations.get_flag_payload(snapshot, "flag-key")
+end
 ```
-
-It will attempt to take `distinct_id` from the context if it's not provided.
-
-```elixir
-iex> PostHog.set_context(%{distinct_id: "user123"})
-:ok
-iex> PostHog.FeatureFlags.check("example-feature-flag-1")
-{:ok, true}
-```
-
 
 #### Multivariate feature flags
 
 ```elixir
-iex> PostHog.FeatureFlags.check("example-feature-flag-1", "user123")
-{:ok, "variant2"}
+{:ok, snapshot} = PostHog.FeatureFlags.evaluate_flags("distinct_id_of_your_user")
+
+enabled_variant = PostHog.FeatureFlags.Evaluations.get_flag(snapshot, "flag-key")
+
+if enabled_variant == "variant-key" do
+  # Do something differently for this user
+  # Optional: fetch the payload
+  matched_flag_payload = PostHog.FeatureFlags.Evaluations.get_flag_payload(snapshot, "flag-key")
+end
 ```
 
-### Errors
+`PostHog.FeatureFlags.Evaluations.get_flag/2` returns the variant string for multivariate flags, `true` for enabled boolean flags, `false` for disabled flags, and `nil` when the flag wasn't returned by the evaluation.
 
-We'll return an error if the feature flag doesn't exist.
+> **Note:** `PostHog.FeatureFlags.check/2`, `PostHog.FeatureFlags.check!/2`, and the older `feature_flag` helpers still work during the migration period, but they're deprecated. Prefer `evaluate_flags/2` for new code.
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
+
+<IncludePropertyInEvents />
+
+There are two methods you can use to include feature flag information in your events:
+
+#### Method 1: Put the evaluated flags snapshot in context
+
+Put the same `snapshot` object that you used for branching into context. Subsequent captures from the same process attach the exact flag values from that evaluation and don't make another `/flags` request.
 
 ```elixir
-iex> PostHog.FeatureFlags.check("example-feature-flag-3", "user123")
-{:error, %PostHog.UnexpectedResponseError{message: "Feature flag example-feature-flag-3 was not found in the response", response: ...}}
+{:ok, snapshot} = PostHog.FeatureFlags.evaluate_flags("distinct_id_of_your_user")
+
+if PostHog.FeatureFlags.Evaluations.enabled?(snapshot, "flag-key") do
+  # Do something differently for this user
+end
+
+PostHog.FeatureFlags.set_in_context(snapshot)
+PostHog.capture("event_name", %{distinct_id: "distinct_id_of_your_user"})
 ```
 
-You can also use `PostHog.FeatureFlags.check!/2` if you're feeling adventurous or running a script and prefer errors to be raised instead.
+By default, this attaches every flag in the snapshot using `$feature/<flag-key>` properties and `$active_feature_flags`.
+
+To reduce event property bloat, put a filtered snapshot in context:
+
+```elixir
+# Attach only flags accessed with enabled?/2, get_flag/2, or get_flag_payload/2 before this call
+PostHog.FeatureFlags.set_in_context(
+  PostHog.FeatureFlags.Evaluations.only_accessed(snapshot)
+)
+
+# Attach only specific flags
+PostHog.FeatureFlags.set_in_context(
+  PostHog.FeatureFlags.Evaluations.only(snapshot, ["checkout-flow", "new-dashboard"])
+)
+```
+
+`only_accessed/1` is order-dependent. If you call it before accessing any flags with `enabled?/2`, `get_flag/2`, or `get_flag_payload/2`, no feature flag properties are attached.
+
+#### Method 2: Include the `$feature/feature_flag_name` property manually
+
+In the event properties, include `$feature/feature_flag_name: variant_key`:
+
+```elixir
+PostHog.capture("event_name", %{
+  distinct_id: "distinct_id_of_your_user",
+  "$feature/feature-flag-key": "variant-key"
+})
+```
+
+### Evaluating only specific flags
+
+By default, `evaluate_flags/2` evaluates every flag for the user. If you only need a few flags, pass `flag_keys` to request only those flags:
+
+```elixir
+{:ok, snapshot} =
+  PostHog.FeatureFlags.evaluate_flags(%{
+    distinct_id: "distinct_id_of_your_user",
+    flag_keys: ["checkout-flow", "new-dashboard"]
+  })
+```
+
+### Sending `$feature_flag_called` events
+
+Capturing `$feature_flag_called` events enables PostHog to know when a flag was accessed by a user and provide [analytics and insights](/docs/product-analytics/insights) on the flag. With `evaluate_flags/2`, the SDK sends this event when you call `PostHog.FeatureFlags.Evaluations.enabled?/2` or `PostHog.FeatureFlags.Evaluations.get_flag/2` for a flag.
+
+`PostHog.FeatureFlags.Evaluations.get_flag_payload/2` doesn't send `$feature_flag_called` events, but it does count as an access for `only_accessed/1`.
