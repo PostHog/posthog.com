@@ -59,9 +59,9 @@ The MCP servers worth your time tend to share a few things:
 
 </details>
 
-## A starter stack for startups
+## A starter MCP server stack for startups
  
-Most teams don't need more than a few MCP servers running at once. Here's a category-by-category starter stack:
+A handful of well-chosen MCP servers will get you further than a directory full of them. Here's a starter stack to begin with, organized by category:
 
 ### Code and infrastructure
  
@@ -77,7 +77,7 @@ Read-only mode is supported via the `--read-only` flag, which is the safest way 
 
 **Best for:** Every engineering team. This is table stakes.
 
-**Alts (stack dependent):** [GitLab MCP](https://gitlab.com/gitlab-org/gitlab) for GitLab teams, [Bitbucket MCP](https://www.pulsemcp.com/servers?q=bitbucket) (community) for Atlassian shops.
+*Alts (stack dependent):* [GitLab MCP](https://gitlab.com/gitlab-org/gitlab) for GitLab teams, [Atlassian's Rovo MCP](https://www.atlassian.com/platform/remote-mcp-server) for Bitbucket Cloud (with Jira and Confluence in the same connector).
 
 #### 2. A deployment platform MCP (Vercel, Render, or Cloudflare)
 
@@ -91,7 +91,7 @@ Most of these run in read-only or limited-write mode by default, which is the ri
 
 **Best for:** Any team deploying to a major cloud or PaaS. Pairs naturally with GitHub MCP for the "review the code → check the deploy → debug the issue" loop.
 
-**Alts (stack dependent):** [Fly.io](https://fly.io/docs/mcp/), [Railway](https://docs.railway.com/reference/mcp-server), AWS (via [AWS Labs MCP](https://awslabs.github.io/mcp/)) for teams already deep in those platforms.
+*Alts (stack dependent):* [Fly.io](https://fly.io/docs/mcp/), [Railway](https://docs.railway.com/reference/mcp-server), AWS (via [AWS Labs MCP](https://awslabs.github.io/mcp/)) for teams already deep in those platforms.
 
 ### Project management and docs
 
@@ -103,7 +103,7 @@ The server is centrally managed by Linear, which means it auto-updates and handl
 
 **Best for:** Teams that already use Linear. The setup is genuinely two minutes.
 
-**Alts (stack dependent):** [Jira MCP](https://www.atlassian.com/platform/remote-mcp-server) for Atlassian teams, [Asana MCP](https://developers.asana.com/docs/mcp-server) (V2, OAuth-based, 30+ tools), [ClickUp MCP](https://www.pulsemcp.com/servers?q=clickup) (community), or [Trello MCP](https://www.pulsemcp.com/servers?q=trello) (community) depending on your stack.
+*Alts (stack dependent):* [Atlassian's Rovo MCP](https://www.atlassian.com/platform/remote-mcp-server) for Jira and Confluence teams, [Asana MCP](https://developers.asana.com/docs/mcp-server) (V2, OAuth-based, 30+ tools), [ClickUp MCP](https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server) (official, OAuth), or [Trello MCP](https://www.pulsemcp.com/servers?q=trello) (community-built; Atlassian hasn't shipped one yet) depending on your stack.
 
 #### 4. Notion MCP
 
@@ -115,7 +115,7 @@ One caveat: the local open-source server has 131+ open issues as of today, with 
 
 **Best for:** Teams using Notion as their wiki, PRD tool, or knowledge base.
 
-**Alts (stack dependent):** [Confluence](https://www.atlassian.com/platform/remote-mcp-server) if you're on Atlassian, [Google Drive MCP](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/gdrive) for Google Workspace teams, Obsidian or Coda MCPs (community-maintained) for those stacks.
+*Alts (stack dependent):* [Confluence](https://www.atlassian.com/platform/remote-mcp-server) if you're on Atlassian, [Google Drive MCP](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/gdrive) for Google Workspace teams, Obsidian or Coda MCPs (community-maintained) for those stacks.
 
 ### Communication
 
@@ -127,13 +127,13 @@ Slack's MCP is currently rolled out through partner apps (Claude, Perplexity, No
 
 **Best for:** Teams where Slack is the source of truth for decisions, debates, and async context.
 
-**Alts (stack dependent):** [Discord MCP](https://www.pulsemcp.com/servers?q=discord) (community, multiple options) if your team or community lives there, Microsoft Teams MCP if you use Teams for whatever reason (our condolences).
+*Alts (stack dependent):* [Discord MCP](https://www.pulsemcp.com/servers?q=discord) (community, multiple options) if your team or community lives there, Microsoft Teams MCP if you use Teams for whatever reason (our condolences).
 
 ### Data and analytics
 
 #### 6. PostHog MCP
 
-The [PostHog MCP server](/docs/model-context-protocol) at `https://mcp.posthog.com/mcp` exposes the entire PostHog platform to AI agents – product analytics, feature flags, experiments, session replay, surveys, error tracking, data warehouse, CDP, LLM observability, plus dashboards, cohorts, alerts, annotations, and notebooks. 
+The [PostHog MCP server](/docs/model-context-protocol) at `https://mcp.posthog.com/mcp` exposes the entire PostHog platform to AI agents – [product analytics](/product-analytics), [feature flags](/feature-flags), [experiments](/experiments), [session replay](/session-replay), [surveys](/surveys), [error tracking](/error-tracking), [data warehouse](/data-stack), [CDP](/cdp), [LLM observability](/llm-analytics), plus dashboards, cohorts, alerts, annotations, and notebooks.
 
 It's hosted, OAuth-based, free to use (no charges on your PostHog bill for MCP calls), and works in Claude Code, Claude Desktop, Cursor, Codex, VS Code, Zed, and Windsurf, plus OAuth-based clients like Lovable and Replit.
 
@@ -145,7 +145,7 @@ Install it with `npx @posthog/wizard mcp add` – works for most popular clients
 
 **Best for:** Teams that already use PostHog – and the simplest pick if you don't have an all-in-one developer platform yet, since the same server covers analytics, flags, errors, LLM observability, and more to come.
 
-**Alts (stack dependent):** [Mixpanel](/blog/posthog-vs-mixpanel), [Amplitude](/blog/posthog-vs-amplitude), and [Heap](/blog/posthog-vs-heap) ship MCP servers for product analytics, and [Sentry](/blog/posthog-vs-sentry) has one for error tracking – but if you're stacking two or more of those tools, you'll need a server for each. PostHog is the simplest single-server option for teams that want analytics, flags, errors, LLM observability, and more under one connector.
+**Alts (stack dependent):** [Mixpanel](/blog/posthog-vs-mixpanel), [Amplitude](/blog/posthog-vs-amplitude), and [Heap](/blog/posthog-vs-heap) ship MCP servers for product analytics, [Sentry](/blog/posthog-vs-sentry) has one for error tracking, and [LaunchDarkly](/blog/posthog-vs-launchdarkly) has three for feature flags, AI Configs, and observability – but if you're stacking two or more of those tools, you'll need a server for each. PostHog is the simplest single-server option for teams that want analytics, flags, errors, LLM observability, and more under one connector.
 
 #### 7. A database MCP (Postgres or Supabase)
 
@@ -155,7 +155,7 @@ Postgres MCP exposes your schema and lets the agent run SQL. Supabase's goes fur
 
 **Best for:** Anyone doing data exploration or SQL work directly in their editor.
 
-**Alts (stack dependent):** [MongoDB MCP](https://www.mongodb.com/docs/mongodb-mcp-server/) for document stores, [Snowflake](https://www.pulsemcp.com/servers?q=snowflake) or [BigQuery](https://www.pulsemcp.com/servers?q=bigquery) MCPs for warehouse work, [Redis MCP](https://www.pulsemcp.com/servers?q=redis) for caching and session data.
+*Alts (stack dependent):* [MongoDB MCP](https://www.mongodb.com/docs/mongodb-mcp-server/) for document stores, [Snowflake](https://www.pulsemcp.com/servers?q=snowflake) or [BigQuery](https://www.pulsemcp.com/servers?q=bigquery) MCPs for warehouse work, [Redis MCP](https://www.pulsemcp.com/servers?q=redis) for caching and session data.
 
 ### Search and web
 
@@ -171,7 +171,7 @@ For most startups, Brave is fine. Switch to Exa or Tavily if you're building age
 
 **Best for:** Any agent that needs current information from the web.
 
-**Alts (stack dependent):** [Perplexity MCP](https://www.pulsemcp.com/servers?q=perplexity) for AI-summarized search, [Firecrawl MCP](https://www.firecrawl.dev/) for scraping-heavy workflows.
+*Alts (stack dependent):* [Perplexity MCP](https://www.pulsemcp.com/servers?q=perplexity) for AI-summarized search, [Firecrawl MCP](https://www.firecrawl.dev/) for scraping-heavy workflows.
 
 ### Core building blocks
 
@@ -183,7 +183,7 @@ It's the building block for any local development workflow where you want the ag
 
 **Best for:** Any local agent workflow. Pair with the GitHub MCP for the full loop.
 
-**Alts (stack dependent):** No direct alternative — this one's a building block. For more powerful local control, [Desktop Commander](https://github.com/wonderwhy-er/DesktopCommanderMCP) adds terminal access (with the higher blast radius that implies).
+*Alts (stack dependent):* No direct alternative – this one's a building block. For more powerful local control, [Desktop Commander](https://github.com/wonderwhy-er/DesktopCommanderMCP) adds terminal access (with the higher blast radius that implies).
 
 ## How to actually set this up
  
@@ -201,46 +201,46 @@ Rough recommendations by team:
  
 #### For a typical seed-stage SaaS startup
 
-- GitHub for code and PRs
-- A deployment MCP (Vercel, Render, or Cloudflare) for shipping
-- Linear or Notion for project context
-- PostHog for analytics, errors, feature flags, and more
-- Brave Search for current info
-- Filesystem for local code work
+- **GitHub** for code and PRs
+- A deployment MCP (**Vercel**, **Render**, or **Cloudflare**) for shipping
+- **Linear** or **Notion** for project context
+- **PostHog** for analytics, errors, feature flags, and more
+- **Brave Search **for current info
+- **Filesystem** for local code work
 
 That's six servers, covers 80% of daily workflows, and takes under an hour to install.
 
 #### For a developer tools company
 
-- GitHub + Filesystem
-- A deployment MCP (Cloudflare if you're on Workers, Vercel for Next.js, Render otherwise)
-- PostHog
-- Postgres or Supabase
-- Linear
-- Web search (Exa for research-heavy, Brave otherwise)
+- **GitHub** + **Filesystem**
+- A deployment MCP (**Cloudflare** if you're on Workers, **Vercel** for Next.js, **Render** otherwise)
+- **PostHog**
+- **Postgres** or **Supabase**
+- **Linear**
+- Web search (**Exa** for research-heavy, **Brave** otherwise)
 
 #### For an AI-native startup
 
-- GitHub + Filesystem
-- A deployment MCP (Vercel or Cloudflare for inference at the edge)
-- PostHog (with [LLM observability](/llm-analytics)) for traces and costs
+- **GitHub** + **Filesystem**
+- A deployment MCP (**Vercel** or **Cloudflare** for inference at the edge)
+- **PostHog** (with [LLM observability](/llm-analytics)) for traces and costs
 - A database MCP for your app data
 - Web search
-- Linear or Notion for project tracking
+- **Linear** or **Notion** for project tracking
 
 #### For an operations- or content-heavy team
 
-- Notion + Linear or Asana
-- Slack
-- A search MCP (Brave or Exa)
-- PostHog if you have a product or Mixpanel/Amplitude
+- **Notion** + **Linear** or **Asana**
+- **Slack**
+- A search MCP (**Brave** or **Exa**)
+- **PostHog** if you have a product or Mixpanel/Amplitude
 - Skip the dev tooling unless engineers will use it
 
 ## Is PostHog right for you?
 
 Here's the (short) sales pitch.
 
-We're biased, obviously, but PostHog's MCP is worth installing if:
+We're biased, obviously, but **PostHog's MCP**(/docs/model-context-protocol) is worth installing if:
 
 - You want to query analytics, feature flags, errors, and LLM traces directly from your editor without context-switching to a dashboard
 - You're already using PostHog (or want to start; the [free tier](/pricing) covers 1M events, 5K session recordings, 1M feature flag requests, and a lot more per month)
@@ -262,9 +262,9 @@ For startups, MCP matters because it turns "we need to integrate AI with our too
 <details>
   <summary>How many MCP servers should I install?</summary>
 
-Most effective setups run 3–9 MCP servers at once. Each server adds tool definitions to your agent's context window, which costs tokens and can confuse the model when there are too many overlapping tools.
-
 Start with two or three covering your primary workflow (e.g. GitHub + PostHog + Linear), then add more as you find concrete use cases. Resist the urge to install everything just because you can.
+
+Each server adds tool definitions to your agent's context window, which costs tokens and can confuse the model when there are too many overlapping tools.
 
 </details>
 
@@ -305,7 +305,7 @@ Two specific risks worth knowing about:
 
 Yes – and it's not hard. Anthropic publishes [TypeScript and Python SDKs](https://modelcontextprotocol.io/), and a basic server exposing a few tools can be built in under an hour with FastMCP (Python) or `@modelcontextprotocol/sdk` (Node.js).
 
-If you're building one, PostHog's newsletter has a great breakdown of [the golden rules of agent-first product](https://newsletter.posthog.com/p/the-golden-rules-of-agent-first-product) — useful for thinking through what your server should actually expose to agents (and what to leave out).
+If you're building one, PostHog's newsletter has a great breakdown of [the golden rules of agent-first product](https://newsletter.posthog.com/p/the-golden-rules-of-agent-first-product) – useful for thinking through what your server should actually expose to agents (and what to leave out).
 
 </details>
 
@@ -335,17 +335,6 @@ If you don't have an analytics tool yet, **PostHog's MCP** is the strongest fit 
 The combination of **GitHub MCP + Filesystem MCP + PostHog MCP** covers most real coding workflows: search and edit your code, check for recent errors and analytics anomalies, and ship a fix through a PR. Add a database MCP if you're doing data work.
 
 For browser-based testing and automation, **Playwright MCP** is the standard.
-
-</details>
-
-<details>
-  <summary>Where can I browse all available MCP servers?</summary>
-
-Three directories worth knowing:
-
-- The [official MCP Registry](https://github.com/modelcontextprotocol/servers) – reference servers maintained by Anthropic and the steering group
-- [PulseMCP](https://www.pulsemcp.com/servers) – over 14,000 servers, updated daily
-- [Awesome MCP Servers](https://github.com/wong2/awesome-mcp-servers) – curated GitHub list
 
 </details>
 
