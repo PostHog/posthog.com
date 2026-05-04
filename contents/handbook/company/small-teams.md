@@ -57,7 +57,7 @@ Overall, the team lead is responsible for ensuring the above happens. They shoul
 
 Team leads do not necessarily = managers. Read more about [how we think about management](/handbook/company/management).
 
-Once a new team lead is appointed, or a small team is created, team leaders take on additional responsibilities that are defined in [the new small team template within the new org change issue](https://github.com/PostHog/company-internal/issues), along with a checklist of actions. The dropdown of actions appears when you create a new issue and select the "org change" template and you simply delete the non-relevant sections of the checklist.
+Once a new team lead is appointed, or a small team is created, team leaders take on additional responsibilities, along with a checklist of actions. To kick off the process, run `/org-change` in Slack and select the relevant change type – it'll create a tracked issue in company-internal with the right checklist.
 
 Team leads also take on a range of broader responsibilities that revolve around releasing new features and communicating with other teams. Some helpful guidelines on what team leads should be taking responsibility for are listed below.
 
@@ -67,7 +67,7 @@ Setting up support processes is a team lead responsibility, but if you need any 
 
 Team leads are responsible for creating Slack channels for their support function and ensuring integration with Zendesk, so that the team can be alerted to support issues. Once the support process is set up, team leads are responsible for ensuring a sustainable and fair support rotation and setting up SLA and support hero notifications.
 
-Further details on how to do this are available in [the new org change template](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/org-change.yml).
+To kick off any org change, run `/org-change` in Slack.
 
 ### Launching new products and features
 
@@ -141,7 +141,7 @@ We have a defined [process for proposing changes to teams](/handbook/company/tea
 Once a decision is made, the following happens:
 
 -   [ ] Ops team updates the [Org Chart](https://app.deel.com/organization-chart/organization/834ac289-7c04-4d93-91f0-8922c5664b77?groupBy=group-by-report) in Deel.
--   [ ] Ops creates an issue with [the new org change template](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/org-change.yml) and assigns the team lead
+-   [ ] The team lead runs `/org-change` in Slack to kick off the tracking issue. Ops will be notified and picks up execution from there.
 -   [ ] Exec informs everyone else in the company in the next all hands session.
 
 The small teams template contains a list of tasks for the Ops team and the team lead. 

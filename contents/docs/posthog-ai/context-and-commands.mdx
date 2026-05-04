@@ -14,24 +14,22 @@ Click the **@ Add context** button in the chat to include:
 - Notebooks with their full content
 
 <ProductVideo
-  videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/add_context_81218e0b5d.mp4" 
-  alt="Add context" 
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/add_context_81218e0b5d.mp4"
+  alt="Add context"
   classes="rounded"
   autoPlay={true}
 />
 
-<Caption>
-  Select data points to include as context
-</Caption>
+<Caption>Select data points to include as context</Caption>
 
 When you add context, PostHog AI can reference the specific queries, filters, or data from those items when answering your questions.
 
 ## Chat commands
 
-PostHog AI supports the following slash `/` commands in the chat. 
+PostHog AI supports the following slash `/` commands in the chat.
 
-| Command | Description |
-| ---     | ----        |
-| `/init`   | PostHog AI collects information about your product and company to save to memory. |
-| `/remember` | Saves your text input to memory. |
-| `/usage` | Displays a breakdown of your [AI credit](/docs/posthog-ai/pricing) usage. |
+| Command     | Description                                                                                                                                          |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/init`     | PostHog AI collects information about your product and company to save to memory.                                                                    |
+| `/remember` | Saves your text input to [memory](/docs/posthog-ai/edit-memory). Returns an error if adding the text would exceed the 10,000 character memory limit. |
+| `/usage`    | Displays a breakdown of your [AI credit](/docs/posthog-ai/pricing) usage.                                                                            |

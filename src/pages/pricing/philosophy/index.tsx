@@ -28,8 +28,7 @@ const PricingPhilosophy = (): JSX.Element => {
                         products that will go up in pricing later or get retired.
                     </li>
                     <li>
-                        <strong>We aim to be the cheapest for each product at every scale</strong> compared to every
-                        major competitor.{' '}
+                        <strong>We aim to match the cheapest competitor for each product at every scale.</strong>{' '}
                         <Link
                             iconClasses="!text-dark dark:!text-light"
                             href="https://twitter.com/intent/tweet?text=@posthog%20Your%20pricing%20is..."

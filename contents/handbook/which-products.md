@@ -41,7 +41,7 @@ From our [roadmap](/roadmap), here's what we're currently working on:
 - Endpoints - `#team-data-modeling`
 - Logs - `#project-logs`
 - Product autonomy - `#team-array`
-- Customer Analytics `#team-customer-analytics`
+- Customer Analytics `#team-web-analytics`
   - Revenue analytics now included in customer analytics
 - Workflows `#team-workflows`
 

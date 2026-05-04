@@ -72,7 +72,7 @@ Next, we'll set up PostHog to capture these errors. First, we need to install `p
 npm install posthog-js @posthog/react
 ```
 
-Next, create a `PostHogProvider.jsx` file in your `src` directory, and in it, initialize PostHog using your project token and host from [your project settings](https://app.posthog.com/settings/project). While you are there, make sure that [exception autocapture](https://app.posthog.com/settings/environment-error-tracking#error-tracking-exception-autocapture) is enabled. 
+Next, create a `PostHogProvider.jsx` file in your `src` directory, and in it, initialize PostHog using your project token and host from [your project settings](https://app.posthog.com/settings/project). While you are there, make sure that [exception autocapture](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-exception-autocapture) is enabled. 
 
 ```js
 // src/PostHogProvider.jsx

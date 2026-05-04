@@ -148,7 +148,7 @@ function pathID(verb, path) {
 
 function Params({ params, objects, object, depth = 0 }) {
     if (depth > 4) return null
-    if (object) {
+    if (object?.properties) {
         params = Object.entries(object.properties).map(([key, value]) => {
             return {
                 name: key,
@@ -317,6 +317,7 @@ function RequestBody({ item, objects }) {
         item.requestBody?.content?.['application/json']?.schema.items?.['$ref'].split('/').at(-1)
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
+    if (!object?.properties) return null
 
     return (
         <div>
@@ -342,6 +343,7 @@ function ResponseBody({ item, objects }) {
         .at(-1)
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
+    if (!object?.properties) return null
     const [showResponse, setShowResponse] = useState(false)
 
     return (
@@ -380,6 +382,7 @@ function RequestExample({ name, item, objects, exampleLanguage, setExampleLangua
         const objectKey = item.requestBody.content?.['application/json']?.schema['$ref']?.split('/').at(-1)
         if (!objectKey) return null
         const object = objects.schemas[objectKey]
+        if (!object?.properties) return null
         params = Object.entries(object.properties).filter(
             ([name, schema]) => object.required?.indexOf(name) > -1 && !schema.readOnly
         )
@@ -563,6 +566,7 @@ interface ApiEndpointData {
     data: {
         name: string
         nextURL?: string
+        previousURL?: string
         items: string
         components: string
     }
@@ -579,6 +583,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
     const name = data.data.name
     const title = titleMap[name] || humanReadableName(name)
     const nextURL = data.data.nextURL
+    const previousURL = data.data.previousURL
     const paths = {}
     const components = {
         inlineCode: InlineCode,
@@ -733,11 +738,18 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                         )
                     })}
 
-                    {nextURL && (
-                        <CallToAction className="mt-8" to={nextURL}>
-                            Next page →
-                        </CallToAction>
-                    )}
+                    <div className="mt-8 flex gap-4">
+                        {previousURL && (
+                            <CallToAction to={previousURL} type="outline">
+                                ← Previous page
+                            </CallToAction>
+                        )}
+                        {nextURL && (
+                            <CallToAction to={nextURL}>
+                                Next page →
+                            </CallToAction>
+                        )}
+                    </div>
                 </div>
             </ReaderView>
         </ScrollSpyProvider>
@@ -764,6 +776,7 @@ export const query = graphql`
             name
             url
             nextURL
+            previousURL
             components
         }
     }

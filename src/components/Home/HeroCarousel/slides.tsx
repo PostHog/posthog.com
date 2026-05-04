@@ -448,7 +448,7 @@ export const DebugFixSlide = () => {
         <div className="rounded pt-4 px-4 bg-primary">
             <h2 className="mt-0 mb-2">Triage issues, fix them automatically</h2>
             <p className="text-secondary text-sm">
-                Use PostHog's debugging tools to quickly find issues and the get context to fix them.
+                Use PostHog's debugging tools to quickly find issues and get the context to fix them.
             </p>
             <div className="bg-yellow/10 rounded px-3 border border-yellow mb-4">
                 <p className="text-secondary text-sm my-3">
