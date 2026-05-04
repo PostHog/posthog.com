@@ -251,7 +251,7 @@ The auto-created report uses these defaults:
 | --------------------- | ------------- | ------------------------------------------------------------ |
 | **Frequency**         | Count-based   | Generates a report after a set number of evaluation runs     |
 | **Trigger threshold** | 100           | A report is generated every 100 new evaluation results       |
-| **Cooldown**          | 60 minutes    | Minimum time between count-triggered reports                 |
+| **Cooldown**          | 1 hour        | Minimum hours between count-triggered reports (1–24 hours)   |
 | **Daily run cap**     | 10            | Maximum report runs per day                                  |
 | **Enabled**           | Yes           | Reports start generating immediately                         |
 | **Delivery targets**  | None          | Reports are viewable in the UI but no notifications are sent |
@@ -263,6 +263,7 @@ Reports are viewable directly in the evaluation's **Reports** tab without config
 You can adjust the report configuration after creating an evaluation:
 
 - Change the trigger threshold to generate reports more or less frequently
+- Adjust the minimum hours between reports (1–24) to control how often count-triggered reports can fire
 - Add email or Slack delivery targets to receive notifications when reports are generated
 - Disable the report if you don't need automated summaries
 
@@ -304,7 +305,7 @@ Once the issue is resolved, open the evaluation and toggle it back on.
 
 Each evaluation run counts as one LLM analytics event toward your quota.
 
-**LLM judge evaluations** use an LLM to score your generations. Your first 100 evaluation runs are on us so you can try the feature right away. After that, add your own API key from OpenAI, Google Gemini, Anthropic, OpenRouter, or Fireworks in [**Settings** > **LLM analytics**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok) to keep running evaluations.
+**LLM judge evaluations** use an LLM to score your generations. Your first 100 evaluation runs are on us so you can try the feature right away. After that, add your own API key from OpenAI, Azure OpenAI, Google Gemini, Anthropic, OpenRouter, Fireworks, or Together AI in [**Settings** > **LLM analytics**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok) to keep running evaluations.
 
 If a provider API key is deleted or an evaluation hits trial limits, PostHog automatically disables the affected evaluations and shows an error status. See [Evaluation status and errors](#evaluation-status-and-errors) for details on error states and how to resolve them.
 

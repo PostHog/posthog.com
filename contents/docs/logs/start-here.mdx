@@ -1,34 +1,60 @@
 ---
-title: Getting started with logs
+title: Getting started with Logs
 hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import { IconCode, IconSearch, IconSettings } from '@posthog/icons'
+import { IconCode, IconSearch, IconSettings, IconRewindPlay, IconWarning, IconGraph } from '@posthog/icons'
+import LogsInstallationPlatforms from './installation/_snippets/installation-platforms'
 
-> **New to logging?** Read [Why you need logs](/docs/logs/basics) first for a primer on what logs show you that nothing else does.
-
-<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to search through your logs!">
+<QuestLog firstSpeechBubble="Let's get started with logs!" lastSpeechBubble="Time to search through your logs!">
 
 <QuestLogItem 
-    title="Install and configure logging"
+    title="Use your logging client"
     subtitle="Required"
     icon="IconCode"
 >
 
-PostHog Logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP). 
-You don't need any vendor-specific SDKs – just use standard OpenTelemetry libraries.
+PostHog Logs works with any OpenTelemetry client. No PostHog-specific packages required. Use the OTel SDKs you already have, point them at PostHog's HTTP endpoint, and drop in your project token.
 
-Install and configure your logging client to send logs to PostHog:
+On the frontend, our [JavaScript web SDK](/docs/logs/installation/javascript) and [React Native SDK](/docs/logs/installation/react-native) include first-class logging support. 
 
-- Use the HTTP endpoint: `https://us.i.posthog.com/i/v1/logs`
-- Authenticate with your project token (the same token used for events/exceptions)
-- Include the token in the Authorization header or as a `?token=` query parameter
-- Use the standard [OTLP log format](https://opentelemetry.io/docs/specs/otel/logs/data-model/)
+Follow the guides below to set up your logging client:
+
+<LogsInstallationPlatforms />
 
 <CallToAction type="primary" to="/docs/logs/installation">
-  Configure your logging client
+  Configure logging client
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+    title="Send context-rich logs"
+    subtitle="Required"
+    icon="IconCode2"
+>
+
+PostHog ingests logs in the same pattern as OTel's structured logging model: resource attributes, log attributes, and trace context.
+
+Enrich your logs with granular detail and business context for `INFO`, `DEBUG`, `WARN`, and `ERROR` log levels.
+
+```python
+import logging
+
+# Configure logging to use OpenTelemetry
+logging.basicConfig(level=logging.INFO)
+logging.getLogger().addHandler(LoggingHandler())
+
+# Use standard Python logging
+logger = logging.getLogger("my-app")
+logger.info("User action", extra={"userId": "123", "action": "login"})
+logger.warning("Deprecated API used", extra={"endpoint": "/old-api"})
+logger.error("Database connection failed", extra={"error": "Connection timeout"})
+```
+<CallToAction type="primary" to="/docs/logs/best-practices">
+  Learn best practices
 </CallToAction>
 
 </QuestLogItem>
@@ -41,11 +67,18 @@ Install and configure your logging client to send logs to PostHog:
 
 Once your logs are flowing into PostHog, you can:
 
-- **Search through logs** using multiple search tokens, negative filters, and exact phrase matching
+- **Search through logs** using full-text searches, multiple search tokens, and negative filters
 - **Filter by time ranges** to find specific events
+- **Filter on attributes** for specific resources or events
 - **Correlate logs with events** from your PostHog analytics
 
-Navigate to the Logs section in your PostHog dashboard to start exploring your log data.
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/logs_light_dd81ff5093.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/logs_dark_d7135f1b22.png"
+  alt="PostHog Logs search interface"
+  padding={false}
+  classes="rounded"
+/>
 
 <CallToAction type="primary" to="/docs/logs/search">
   Learn how to search logs
@@ -54,35 +87,116 @@ Navigate to the Logs section in your PostHog dashboard to start exploring your l
 </QuestLogItem>
 
 <QuestLogItem 
-  title="Troubleshooting"
+  title="Use MCP and AI to debug"
   subtitle="Recommended"
-  icon="IconSettings"
+  icon="IconSparkles"
 >
 
-Common issues you might encounter when setting up logging:
+Connect the PostHog MCP server and your AI agent can query logs directly. Use Cursor, Claude Code, or any MCP-compatible tool. 
 
-- **Authentication errors** - Make sure you're using your correct project token
-- **Connection issues** - Verify the HTTP endpoint is accessible
-- **Log format problems** - Ensure you're using the standard [OTLP log format](https://opentelemetry.io/docs/specs/otel/logs/data-model/)
+Your coding agent pulls the relevant logs it needs to debug and build faster without switching workflows.
 
-<CallToAction type="primary" to="/docs/logs/troubleshooting">
-  Troubleshoot common issues
+<ProductVideo
+    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/logs_mcp_1080_5a4c635638.mp4" 
+    alt="Use PostHog MCP to fetch logs" 
+    classes="rounded"
+    autoPlay={false}
+/>
+
+You can also ask [PostHog AI](/docs/posthog-ai) to search and analyze your logs.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260427_shqt_e667a5a091.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260427_shuk_901780b9f1.png"
+  alt="PostHog AI logs"
+  padding={false}
+  classes="rounded"
+/>
+
+Try out these prompts:
+
+- [`Show me error logs from the API service in the last hour`](https://app.posthog.com/#panel=max:Show%20me%20error%20logs%20from%20the%20API%20service%20in%20the%20last%20hour)
+- [`Find all logs related to authentication failures today`](https://app.posthog.com/#panel=max:Find%20all%20logs%20related%20to%20authentication%20failures%20today)
+- [`Show logs from the payment service around 2pm yesterday`](https://app.posthog.com/#panel=max:Show%20logs%20from%20the%20payment%20service%20around%202pm%20yesterday)
+
+<CallToAction type="primary" to="/docs/logs/debug-logs-mcp">
+  Explore logs with AI 
 </CallToAction>
 
 </QuestLogItem>
 
-<QuestLogItem
-  title="Logging best practices"
+<QuestLogItem 
+  title="Integrate your product data"
   subtitle="Recommended"
-  icon="IconBook"
+  icon="IconLogomark"
 >
 
-Learn what to log, how to structure your logs, and the patterns that make logs actually useful in production – including wide events, strategic sampling, and adding business context.
+With PostHog, your logs live alongside your [Product Analytics](/docs/product-analytics), [Session Replays](/docs/session-replay), and [Error Tracking](/docs/error-tracking), so you can go from a log line to a user's session to the flag variant they were on without switching tools.
 
-<CallToAction type="primary" to="/docs/logs/best-practices">
-  Read the best practices guide
+### <IconRewindPlay className="text-yellow w-7 -mt-1 inline-block"/> Session Replay
+
+Log events in PostHog can be connected to the session and user who triggered them. Jump from a log line to a session replay in one click. 
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260427_tlab_c79adf4315.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260427_tpbx_e2154c4155.png"
+  alt="logs and errors"
+  padding={false}
+  classes="rounded"
+/>
+
+### <IconGraph className="text-blue w-7 -mt-1 inline-block"/> Product Analytics
+
+Turn log patterns into trends, funnels, and retention insights. Know which logged errors actually hurt user retention vs. which are just noise.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260427_twkv_8d5e77b42d.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260427_twoz_4e12550875.png"
+  alt="logs and product analytics"
+  padding={false}
+  classes="rounded"
+/>
+
+### <IconWarning className="text-orange w-7 -mt-1 inline-block"/> Error Tracking
+
+Logs with `$exception` events become issues you can assign, resolve, and alert on. No separate error tracking tool needed.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260427_tpic_6c27c8b1e0.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260427_tlie_6ffdbd4369.png"
+  alt="logs and session replay"
+  padding={false}
+  classes="rounded"
+/>
+
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Use for free"
+  subtitle="Free 50 GB/mo"
+  icon="IconPiggyBank"
+>
+
+PostHog's Logs is built to be cost-effective by default, with a generous free tier and transparent usage-based pricing. Since we don't charge per seat, more than 90% of companies use PostHog for free.
+
+## TL;DR 💸
+
+- No credit card required to start
+- First 50 GB of ingested logs per month are free
+- Above 50 GB we have usage-based pricing at $0.25/GB with discounts 
+- Set billing limits to avoid surprise charges
+- See our [pricing page](/docs/logs/pricing) for more up-to-date details
+
+--- 
+
+That's it! You're ready to start integrating.
+
+<CallToAction type="primary" to="/docs/logs/installation">
+  Install logs
 </CallToAction>
 
 </QuestLogItem>
+
 
 </QuestLog>
