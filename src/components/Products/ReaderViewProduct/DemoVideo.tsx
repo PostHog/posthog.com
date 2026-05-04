@@ -82,7 +82,7 @@ export default function DemoVideo({ wistia, highlights, chapters, className = ''
                                     {resolvedChapters.map((chapter, index) => (
                                         <li
                                             key={index}
-                                            className="[&>button]:first:before:top-1 [&>button]:last:before:bottom-1"
+                                            className="[&>button]:first:before:top-1.5 [&>button]:last:before:bottom-2.5"
                                         >
                                             <button
                                                 type="button"
@@ -90,19 +90,31 @@ export default function DemoVideo({ wistia, highlights, chapters, className = ''
                                                     playerRef.current?.time(chapter.time)
                                                     playerRef.current?.play()
                                                 }}
-                                                className="group relative py-1 flex items-start gap-2 text-sm text-left w-full hover:text-red group before:content-[''] before:absolute before:left-3
+                                                className="group relative py-1 pl-7 hover:pl-8 flex items-start gap-2 text-sm text-left w-full hover:text-red group before:content-[''] before:absolute before:left-3
                                                 before:-ml-px
-                                                before:-top-1 
+                                                before:top-0 
                                                 before:bottom-0 
-                                                before:w-0.5 before:bg-black/50 dark:before:bg-white"
+                                                before:w-0.5 before:bg-black/25 dark:before:bg-white
+                                                transition-all duration-100
+                                                hover:text-primary"
                                             >
-                                                <div className="relative size-6 group-hover:size-7 group-hover:-m-0.5 rounded-full bg-white border border-primary flex justify-center items-center transition-all duration-300">
-                                                    <IconPlayFilled className="size-0 group-hover:size-4 transition-all duration-300" />
+                                                <div
+                                                    className="absolute size-3 top-2 left-1.5 group-hover:size-7 group-hover:top-0 group-hover:-left-0.5
+                                                group-active:top-0.5
+                                                group-active:left-0 
+                                                group-active:size-6 rounded-full bg-black group-hover:bg-black border border-primary group-hover:border-[1.5px] group-hover:border-black/50 flex justify-center items-center transition-all duration-100"
+                                                >
+                                                    <IconPlayFilled
+                                                        className="size-0 group-hover:size-4
+                                                    group-active:size-3 transition-all duration-100 group-hover:text-white"
+                                                    />
                                                 </div>
-                                                <span className="font-mono text-xs text-secondary shrink-0 pt-0.5 group-hover:text-red">
+                                                <span className="font-mono text-xs text-secondary shrink-0 pt-0.5">
                                                     {formatTime(chapter.time)}
                                                 </span>
-                                                <span>{chapter.title}</span>
+                                                <span className=" group-hover:underline group-active:scale-[.999] group-active:top-px transition-all duration-50">
+                                                    {chapter.title}
+                                                </span>
                                             </button>
                                         </li>
                                     ))}
