@@ -177,21 +177,22 @@ enabledVariant, err := client.GetFeatureFlag(
 ```
 
 ```python
-posthog.get_feature_flag(
-    'flag-key',
-    'distinct_id_of_the_user',
+flags = posthog.evaluate_flags(
+    "distinct_id_of_the_user",
     # Include any person properties, groups, or group properties required to evaluate the flag
-    person_properties={'property_name': 'value'},
+    person_properties={"property_name": "value"},
     groups={
-        'your_group_type': 'your_group_id',
-        'another_group_type': 'another_group_id'
+        "your_group_type": "your_group_id",
+        "another_group_type": "another_group_id",
     },
     group_properties={
-        'your_group_type': {'group_property_name': 'value'},
-        'another_group_type': {'group_property_name': 'another value'}
+        "your_group_type": {"group_property_name": "value"},
+        "another_group_type": {"group_property_name": "another value"},
     },
-    only_evaluate_locally=False # Optional. Defaults to False. Set to True if you don't want PostHog to make a server request if it can't evaluate locally
+    only_evaluate_locally=False,  # Optional. Defaults to False. Set to True if you don't want PostHog to make a server request if it can't evaluate locally.
 )
+
+flag_value = flags.get_flag("flag-key")
 ```
 
 ```php

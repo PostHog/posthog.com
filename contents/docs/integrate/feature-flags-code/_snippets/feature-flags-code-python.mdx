@@ -1,28 +1,36 @@
-There are 2 steps to implement feature flags in Python:
+There are two steps to implement feature flags in Python:
 
-### Step 1: Evaluate the feature flag value
+### Step 1: Evaluate flags once
+
+Call `posthog.evaluate_flags()` once for the user, then read values from the returned snapshot.
 
 #### Boolean feature flags
 
 ```python
-is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user')
+flags = posthog.evaluate_flags("distinct_id_of_your_user")
 
-if is_my_flag_enabled:
+if flags.is_enabled("flag-key"):
     # Do something differently for this user
     # Optional: fetch the payload
-    matched_flag_payload = posthog.get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')
+    matched_flag_payload = flags.get_flag_payload("flag-key")
 ```
 
 #### Multivariate feature flags
 
 ```python
-enabled_variant = posthog.get_feature_flag('flag-key', 'distinct_id_of_your_user')
+flags = posthog.evaluate_flags("distinct_id_of_your_user")
 
-if enabled_variant == 'variant-key': # replace 'variant-key' with the key of your variant
+enabled_variant = flags.get_flag("flag-key")
+
+if enabled_variant == "variant-key":  # replace "variant-key" with the key of your variant
     # Do something differently for this user
     # Optional: fetch the payload
-    matched_flag_payload = posthog.get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')
+    matched_flag_payload = flags.get_flag_payload("flag-key")
 ```
+
+`flags.get_flag()` returns the variant string for multivariate flags, `True` for enabled boolean flags, `False` for disabled flags, and `None` when the flag wasn't returned by the evaluation.
+
+> **Note:** `posthog.feature_enabled()`, `posthog.get_feature_flag()`, `posthog.get_feature_flag_payload()`, and `capture(send_feature_flags=True)` still work during the migration period, but they're deprecated. Prefer `evaluate_flags()` for new code.
 
 import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
 
@@ -30,54 +38,79 @@ import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-
 
 There are two methods you can use to include feature flag information in your events:
 
-#### Method 1: Include the `$feature/feature_flag_name` property
+#### Method 1: Pass the evaluated flags snapshot to `capture()`
 
- In the event properties, include `$feature/feature_flag_name: variant_key`:
+Pass the same `flags` object that you used for branching. This attaches the exact flag values from that evaluation and doesn't make another `/flags` request.
+
+```python
+flags = posthog.evaluate_flags("distinct_id_of_your_user")
+
+if flags.is_enabled("flag-key"):
+    # Do something differently for this user
+    pass
+
+posthog.capture(
+    "event_name",
+    distinct_id="distinct_id_of_your_user",
+    flags=flags,
+)
+```
+
+By default, this attaches every flag in the snapshot using `$feature/<flag-key>` properties and `$active_feature_flags`.
+
+To reduce event property bloat, pass a filtered snapshot:
+
+```python
+# Attach only flags accessed with is_enabled() or get_flag() before this call
+posthog.capture(
+    "event_name",
+    distinct_id="distinct_id_of_your_user",
+    flags=flags.only_accessed(),
+)
+
+# Attach only specific flags
+posthog.capture(
+    "event_name",
+    distinct_id="distinct_id_of_your_user",
+    flags=flags.only(["checkout-flow", "new-dashboard"]),
+)
+```
+
+`only_accessed()` is order-dependent. If you call it before accessing any flags with `is_enabled()` or `get_flag()`, no feature flag properties are attached.
+
+#### Method 2: Include the `$feature/feature_flag_name` property manually
+
+In the event properties, include `$feature/feature_flag_name: variant_key`:
 
 ```python
 posthog.capture(
     "event_name",
     distinct_id="distinct_id_of_the_user",
     properties={
-        "$feature/feature-flag-key": "variant-key"  # replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
+        # Replace feature-flag-key with your flag key and "variant-key" with the key of your variant
+        "$feature/feature-flag-key": "variant-key",
     },
 )
 ```
 
-#### Method 2: Set `send_feature_flags` to `true`
+### Evaluating only specific flags
 
-import PythonSetSendFeatureFlagsTrue from "./feature-flags-code-python-set-send-feature-flags-to-true.mdx"
-
-<PythonSetSendFeatureFlagsTrue />
-
-### Fetching all flags for a user
-
-You can fetch all flag values for a single user by calling `get_all_flags()` or `get_all_flags_and_payloads()`.
-
-This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
+By default, `evaluate_flags()` evaluates every flag for the user. If you only need a few flags, pass `flag_keys` to request only those flags:
 
 ```python
-posthog.get_all_flags('distinct_id_of_your_user')
-posthog.get_all_flags_and_payloads('distinct_id_of_your_user')
+flags = posthog.evaluate_flags(
+    "distinct_id_of_your_user",
+    flag_keys=["checkout-flow", "new-dashboard"],
+)
 ```
 
 ### Sending `$feature_flag_called` events
 
-Capturing `$feature_flag_called` events enable PostHog to know when a flag was accessed by a user and thus provide [analytics and insights](/docs/product-analytics/insights) on the flag. By default, we send a these event when:
+Capturing `$feature_flag_called` events enables PostHog to know when a flag was accessed by a user and provide [analytics and insights](/docs/product-analytics/insights) on the flag. With `evaluate_flags()`, the SDK sends this event when you call `flags.is_enabled()` or `flags.get_flag()` for a flag.
 
-1. You call `posthog.get_feature_flag()` or `posthog.feature_enabled()`, AND
-2. It's a new user, or the value of the flag has changed.
+The SDK deduplicates these events per `(distinct_id, flag, value)` in a local cache. If you reinitialize the PostHog client, the cache resets and `$feature_flag_called` events may be sent again. PostHog handles duplicates, so duplicate `$feature_flag_called` events don't affect your analytics.
 
-> *Note:* Tracking whether it's a new user or if a flag value has changed happens in a local cache. This means that if you reinitialize the PostHog client, the cache resets as well – causing `$feature_flag_called` events to be sent again when calling `get_feature_flag` or `feature_enabled`. PostHog is built to handle this, and so duplicate `$feature_flag_called` events won't affect your analytics.
-
-You can disable automatically capturing `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
-
-To disable it, set the `send_feature_flag_events` argument in your function call, like so:
-
-```python
-is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user', send_feature_flag_events=False)
-# will not send `$feature_flag_called` events
-```
+`flags.get_flag_payload()` doesn't send `$feature_flag_called` events and doesn't count as an access for `only_accessed()`.
 
 import PythonOverrideServerProperties from './override-server-properties/python.mdx'
 
@@ -85,36 +118,12 @@ import PythonOverrideServerProperties from './override-server-properties/python.
 
 ### Request timeout
 
-You can configure the `feature_flags_request_timeout_seconds` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
+You can configure the `feature_flags_request_timeout_seconds` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked if PostHog's servers are too slow to respond. By default, this is set to 3 seconds.
 
 ```python
-posthog = Posthog('<ph_project_token>',
-    host='<ph_client_api_host>'
-    feature_flags_request_timeout_seconds=3 // Time in second. Default is 3
+posthog = Posthog(
+    "<ph_project_token>",
+    host="<ph_client_api_host>",
+    feature_flags_request_timeout_seconds=3,  # Time in seconds. Defaults to 3.
 )
-```
-
-### Error handling
-
-When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
-
-```python
-def handle_feature_flag(client, flag_key, distinct_id):
-    try:
-        is_enabled = client.is_feature_enabled(flag_key, distinct_id)
-        print(f"Feature flag '{flag_key}' for user '{distinct_id}' is {'enabled' if is_enabled else 'disabled'}")
-        return is_enabled
-    except Exception as e:
-        print(f"Error fetching feature flag '{flag_key}': {str(e)}")
-        raise e
-
-# Usage example
-try:
-    flag_enabled = handle_feature_flag(client, 'new-feature', 'user-123')
-    if flag_enabled:
-        # Implement new feature logic
-    else:
-        # Implement old feature logic
-except Exception as e:
-    # Handle the error at a higher level
 ```

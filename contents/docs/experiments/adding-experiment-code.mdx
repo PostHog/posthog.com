@@ -115,9 +115,10 @@ if (variant === 'variant-name') {
 ```
 
 ```python
-variant = posthog.get_feature_flag('experiment-feature-flag-key', 'user_distinct_id')
+flags = posthog.evaluate_flags("user_distinct_id")
+variant = flags.get_flag("experiment-feature-flag-key")
 
-if variant == 'variant-name':
+if variant == "variant-name":
     # Do something
 ```
 
