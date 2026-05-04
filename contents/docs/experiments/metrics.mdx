@@ -124,6 +124,22 @@ This ensures that only relevant, post-exposure behavior is included in the analy
   alt="Screenshot of conversion window configuration"
 />
 
+### Require completed conversion window
+
+When you set a conversion window, you can choose to include all participants or only those whose window has fully elapsed. This is controlled by the **Require completed conversion window** setting.
+
+When enabled, PostHog only counts participants whose full conversion window has passed. For example, with a 7-day window, a user exposed today won't appear in the analysis until 7 days have passed – even if they've already converted.
+
+This is useful when you want everyone to have the same amount of time to convert before being counted. Without it, recently exposed users who haven't had time to convert could skew your results.
+
+To enable this setting:
+
+1. Go to your experiment's **Settings** tab
+2. Find the **Conversion windows** section
+3. Check **Require completed conversion window**
+
+You can also set a default for all new experiments in your environment settings under **Experiments > Default conversion window filter**. This default can be overridden per experiment.
+
 ## Primary and secondary metrics
 
 Each metric can be set as either a **primary** or **secondary** metric. This is just a way of organizing metrics - primary and secondary metrics work the same way.
