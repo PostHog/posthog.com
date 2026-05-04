@@ -20,7 +20,7 @@ import { WaitlistForm } from 'components/WaitlistForm'
 
 Today, [PostHog Code](/code) enters beta. It's a desktop app that runs coding agents on top of your product data. The obvious stuff ships itself. The tricky stuff shows up as a prioritized to-do list for you to steer.
 
-We built it to chase one idea: the self-driving product. A product that spots its own problems, fixes them, checks the fix worked, and remembers what it learned. We're not there yet. But we're closer than you might expect.
+We built it to chase one idea: self-driving product development. A self-reinforcing system that identifies problems, fixes them, checks the fix worked, and remembers what it learned.
 
 ## Six levels of autonomy, but for products
 
@@ -71,7 +71,9 @@ Signals say something's happening now. Memory says what happened last time. With
 
 ### 5. Evaluation – did it actually work?
 
-The loop doesn't close without this. [Testing AI agents](/blog/testing-ai-agents) looks nothing like testing normal software, and "it runs without erroring" is not a pass. PostHog Code schedules evals as long-running Temporal jobs, so the check runs hours or days after the PR merges. The same dashboard, funnel, experiment, or [LLM-as-a-judge eval](/blog/stop-ai-slop) that fired the signal gets re-queried. If the metric didn't move – or moved the wrong way – the agent reverts or reopens the work.
+The loop doesn't close without this. [Testing AI agents](/blog/testing-ai-agents) looks nothing like testing normal software, and "it runs without erroring" is not a pass. 
+
+PostHog Code schedules evals as long-running Temporal jobs, so the check runs hours or days after the PR merges. The same dashboard, funnel, experiment, or [LLM-as-a-judge eval](/blog/stop-ai-slop) that fired the signal gets re-queried. If the metric didn't move – or moved the wrong way – the agent reverts or reopens the work.
 
 ## The product autonomy loop
 
@@ -85,21 +87,33 @@ You can't run this reliably inside a general-purpose coding agent, because the c
 
 **How this works in PostHog Code:**
 
-Errors, replays, and external signals flow into the signals pipeline and are clustered into signal reports. Each task that lands in your inbox is ranked by urgency, and links to relevant context and research done by background agents.
+Errors, replays, and external signals flow into the signals pipeline and are clustered into signal reports. 
+
+Each task that lands in your inbox is ranked by urgency, and links to relevant context and research done by background agents.
 
 ![Signals](https://res.cloudinary.com/dmukukwp6/image/upload/signals_full_light_1ceb88aa2c.png)
 
-You pick the tasks worth working on and the model and harness that fit each one. The split-screen Command Center handles up to nine agents in parallel – our engineers call it *dopamine mode* (you'll understand why). Long jobs run in the cloud so your laptop stays free.
+You pick the tasks worth working on, and the model and harness that fit each one. 
+
+The split-screen Command Center handles up to nine agents in parallel – our engineers call it *dopamine mode* (you'll understand why). 
+
+Long jobs run in the cloud, so your laptop stays free.
 
 ![Command Center](https://res.cloudinary.com/dmukukwp6/image/upload/command_center_light_096957d499.png)
 
-The PostHog side is wired in by default. One-click instrumentation drops events, flags, and experiments into your code without you typing the boilerplate. The [PostHog MCP](/docs/model-context-protocol) handles impact measurement, [error debugging](/docs/error-tracking/debug-errors-mcp), and dashboard building. Plug in other MCP servers to take more actions or pull in extra context as you build.
+The PostHog side is wired in by default. One-click instrumentation drops events, flags, and experiments into your code without you typing the boilerplate. 
+
+The [PostHog MCP](/docs/model-context-protocol) handles impact measurement, [error debugging](/docs/error-tracking/debug-errors-mcp), and dashboard building. 
+
+Plug in other MCP servers to take more actions or pull in extra context as you build.
 
 With the routine work automated, you get more room for the big stuff. Prompt your own tasks, build with full product-data context, and keep shipping new features alongside the self-driving work.
 
 ## Try PostHog Code
 
-Product engineers [keep telling us this is the missing piece](/newsletter/agent-first-product-engineering) – an agent that understands your codebase *and* your product. We're not fully self-driving yet. But we're getting closer every week, and you get to watch it happen from the driver's seat.
+Product engineers [keep telling us this is the missing piece](/newsletter/agent-first-product-engineering) – an agent that understands your codebase *and* your product. 
+
+We're not fully self-driving yet, but we're getting closer every week, and you get to watch it happen from the driver's seat.
 
 Want to take it for a test drive?
 
