@@ -196,22 +196,22 @@ flag_value = flags.get_flag("flag-key")
 ```
 
 ```php
-PostHog::getFeatureFlag(
-    'flag-key',
-    'distinct_id_of_the_user',
+$flags = PostHog::evaluateFlags(
+    distinctId: 'distinct_id_of_the_user',
     // Include any person properties, groups, or group properties required to evaluate the flag
-    [
+    groups: [
         'your_group_type' => 'your_group_id',
-        'another_group_type' => 'another_group_id'
-    ], // groups
-    ['property_name' => 'value'], // person properties
-    [
+        'another_group_type' => 'another_group_id',
+    ],
+    personProperties: ['property_name' => 'value'],
+    groupProperties: [
         'your_group_type' => ['group_property_name' => 'value'],
-        'another_group_type' => ['group_property_name' => 'another value']
-    ], // group properties
-    false, // only_evaluate_locally, Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
-    true // sendFeatureFlagEvents
+        'another_group_type' => ['group_property_name' => 'another value'],
+    ],
+    onlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
 );
+
+$flagValue = $flags->getFlag('flag-key');
 ```
 
 ```csharp

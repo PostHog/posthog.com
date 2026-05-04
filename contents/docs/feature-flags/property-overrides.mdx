@@ -506,21 +506,24 @@ flag_value = flags.get_flag("feature-flag-key")
 ```
 
 ```php
-$flagValue = PostHog::getFeatureFlag(
-    'feature-flag-key',
-    'user-distinct-id',
-    [],  // groups
-    [    // personProperties
+$flags = PostHog::evaluateFlags(
+    distinctId: 'user-distinct-id',
+    personProperties: [
         'plan' => 'enterprise',
-        'company_size' => 'large'
+        'company_size' => 'large',
     ],
-    [    // groupProperties
+    groups: [
+        'company' => 'company-123',
+    ],
+    groupProperties: [
         'company' => [
             'plan' => 'enterprise',
-            'employee_count' => 500
-        ]
-    ]
+            'employee_count' => 500,
+        ],
+    ],
 );
+
+$flagValue = $flags->getFlag('feature-flag-key');
 ```
 
 ```ruby

@@ -116,6 +116,7 @@ Search your codebase for the flag key as a string. Common SDK patterns:
 | Python | `posthog.evaluate_flags(...)` followed by `flags.is_enabled('key')` or `flags.get_flag('key')`, plus older `posthog.feature_enabled('key')` and `posthog.get_feature_flag('key')` calls |
 | Ruby | `is_feature_enabled('key')`, `get_feature_flag('key')` |
 | Go | `IsFeatureEnabled("key")`, `GetFeatureFlag("key")` |
+| PHP | `evaluateFlags(...)` followed by `$flags->isEnabled('key')` or `$flags->getFlag('key')`, plus older `isFeatureEnabled('key')` and `getFeatureFlag('key')` calls |
 | Other SDKs | Search for the flag key as a string literal |
 
 Also search for the flag key in constants, config files, test fixtures, and comments.
