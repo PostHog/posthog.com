@@ -139,7 +139,7 @@ It's hosted, OAuth-based, free to use (no charges on your PostHog bill for MCP c
 
 **Two features worth knowing**: you can **pin the session to a specific org or project** (via headers or query params) so an agent can't accidentally touch the wrong workspace, and you can **filter the available tools by feature category** (`flags`, `error_tracking`, `llm_analytics`, etc.) to keep your context window tight and the model focused.
 
-Install it with `npx @posthog/wizard mcp add` –works for most popular clients in one shot.
+Install it with `npx @posthog/wizard mcp add` – works for most popular clients in one shot.
 
 **Best for:** Teams that already use PostHog – and the simplest pick if you don't have an all-in-one developer platform yet, since the same server covers analytics, flags, errors, LLM observability, and more to come.
 
@@ -196,7 +196,7 @@ Once you've picked your stack, the install pattern is similar across servers:
  
 Rough recommendations by team:
  
-#### For a typical –-stage SaaS startup
+#### For a typical seed-stage SaaS startup
 
 - GitHub for code and PRs
 - A deployment MCP (Vercel, Render, or Cloudflare) for shipping
@@ -301,6 +301,8 @@ If you're building one, PostHog's newsletter has a great breakdown of [the golde
 PostHog maintains [one official MCP server](/docs/model-context-protocol) that exposes the entire PostHog platform – product analytics, web analytics, feature flags, experiments, error tracking, LLM observability, surveys, and SQL – to AI agents. It works in Claude Code, Claude Desktop, Cursor, Codex, VS Code, Zed, and Windsurf.
 
 You can install it via the [PostHog Wizard](/wizard), as a Claude Code plugin, or manually via the [connector directory](/docs/model-context-protocol).
+
+<WizardCTA slim />
 </details>
 
 <details>
@@ -322,10 +324,8 @@ For browser-based testing and automation, **Playwright MCP** is the standard.
 Three directories worth knowing:
 
 - The [official MCP Registry](https://github.com/modelcontextprotocol/servers) – reference servers maintained by Anthropic and the steering group
-- [PulseMCP](https://www.pulsemcp.com/servers) – over 13,000 servers, updated daily
+- [PulseMCP](https://www.pulsemcp.com/servers) – over 14,000 servers, updated daily
 - [Awesome MCP Servers](https://github.com/wong2/awesome-mcp-servers) – curated GitHub list
-
-For most teams, you don't need to browse – you'll know which ones to install based on the tools you already use.
 </details>
 
 <NewsletterForm />
