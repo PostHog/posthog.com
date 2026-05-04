@@ -107,10 +107,11 @@ if (PostHogSDK.shared.getFeatureFlag("experiment-feature-flag-key") as? String =
 ```
 
 ```node
-const variant = await client.getFeatureFlag('experiment-feature-flag-key', 'user_distinct_id')
+const flags = await client.evaluateFlags('user_distinct_id')
+const variant = flags.getFlag('experiment-feature-flag-key')
 
 if (variant === 'variant-name') {
-    // do something
+    // Do something
 }
 ```
 
