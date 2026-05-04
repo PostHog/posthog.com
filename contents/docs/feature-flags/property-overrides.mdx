@@ -567,10 +567,9 @@ flagValue := flags.GetFlag("feature-flag-key")
 ```
 
 ```java
-Object flagValue = posthog.getFeatureFlag(
+PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags(
     "user-distinct-id",
-    "feature-flag-key",
-    PostHogFeatureFlagOptions.builder()
+    PostHogEvaluateFlagsOptions.builder()
         .groups(Map.of("company", "company-123"))
         .personProperties(Map.of(
             "plan", "enterprise",
@@ -584,6 +583,8 @@ Object flagValue = posthog.getFeatureFlag(
         ))
         .build()
 );
+
+Object flagValue = flags.getFlag("feature-flag-key");
 ```
 
 </MultiLanguage>
