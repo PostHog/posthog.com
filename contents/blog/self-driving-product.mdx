@@ -18,28 +18,17 @@ tags:
 
 Today, [PostHog Code](/code) enters beta. It's a desktop app that runs coding agents on top of your product data. The obvious stuff ships itself. The tricky stuff shows up as a prioritized to-do list for you to steer.
 
-We built it to chase one idea: self-driving product development. A self-reinforcing system that identifies problems, fixes them, checks the fix worked, and remembers what it learned.
-
-## Six levels of autonomy, but for products
-
-The Society of Automotive Engineers has a framework for self-driving cars: six levels, from "you do everything" to "you can take a nap." It maps well onto building products with AI.
-
-- **Level 0 – No automation.** Dashboards, SQL, docs. Engineers do everything. This was most of what shipped before 2024.
-- **Level 1 – Engineer assistance.** The agent answers narrow questions and writes short snippets when you point at the file. Ambiguity breaks it.
-- **Level 2 – Partial automation.** The agent handles vague questions, stitches queries together, and writes whole functions. You still decide what to ask.
-- **Level 3 – Conditional automation.** The agent does end-to-end work in its domain – drafts whole PRs, runs multi-step analyses, builds dashboards from a vague brief. It asks follow-up questions and proposes next steps.
-- **Level 4 – High automation.** The agent understands your code, your data, and the world around it. It proposes and ships work on its own, inside guardrails you set.
-- **Level 5 – Full automation.** The loop runs itself. Signals come in, work ships, evals check it, memory updates. Engineers still drive their own work – the loop just handles what doesn't need their attention.
-
-Here's where things sit today: [PostHog AI](/ai) is at Level 3. You prompt it in chat, it pulls its own context, and suggests its own follow-ups – but it stops at the codebase. PostHog Code picks up where it leaves off.
+We built it to chase one idea: self-driving product development.
 
 ## How we're defining self-driving
 
-The *self* in self-driving isn't autonomy from the engineer. It's autonomy from instruction.
+A self-driving product can prompt itself. It understands your codebase, your data, and your users. It proposes and ships work on its own, inside of guardrails you set.
+
+The *self* in self-driving isn't autonomy from the engineer. It's autonomy from user instruction as the starting point. 
 
 ![Complexity pyramid](https://res.cloudinary.com/dmukukwp6/image/upload/complexity_pyramid_ef1350e915.png)
 
-There's a lot of work that distracts engineers from building things that could actually be put on cruise control: bugs, UX issues, small features, conversion-rate tweaks. The work that drains engineering hours but rarely needs strategic input.
+There's a lot of work that distracts engineers from building things that could actually be put on cruise control: bugs, UX issues, small features, conversion-rate tweaks – things that drain engineering hours but rarely needs strategic input.
 
 This is where product data does the heavy lifting. In a typical week, PostHog customers generate 100,000+ failed queries and ~1.5 million new error tracking issues. Each one is a signal an agent could act on.
 
