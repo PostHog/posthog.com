@@ -21,7 +21,7 @@ export const whereToClickDark = "https://res.cloudinary.com/dmukukwp6/image/uplo
 export const addCommentLight = "https://res.cloudinary.com/dmukukwp6/image/upload/adding_a_comment_light_f481a19ca9.png"
 export const addCommentDark = "https://res.cloudinary.com/dmukukwp6/image/upload/adding_a_comment_dark_55457f2e3c.png"
 
-Comments enable you to add written notes to a particular time on a session recording so you can highlight what you see.
+Comments enable you to add written notes to a particular time on a session recording so you can highlight what you see. You can create regular comments or task comments that track work items.
 
 ## Creating a comment
 
@@ -61,7 +61,30 @@ Once created, comments and reactions are available at the bottom of your recordi
     classes="rounded"
 />
 
-And you can also view all of your existing comments in `/data-management/comments`.
+## Task comments
+
+Task comments enable you to track issues that need attention. When you spot something that needs fixing in a session recording, add it as a task to track whether it's been addressed.
+
+To create a task comment:
+
+1. Press **C** or click the comment button while viewing a recording.
+2. Enter your comment text.
+3. Click **Add as task** instead of **Save**.
+
+Task comments display with a checkbox. Click the checkbox to mark a task as complete. Completed tasks show strikethrough text and a "Completed" label. Click the checkbox again to reopen a completed task.
+
+> **Note:** Replies and emoji reactions can't be tasks. The task type is set when you create the comment and can't be changed afterward.
+
+## Managing comments
+
+View all your comments in [Data Management > Comments](https://app.posthog.com/data-management/comments).
+
+The comments list includes a **Kind** column showing whether each item is a "Comment" or "Task". Use the filters to narrow down what you see:
+
+- **Kind** - Filter by "Comments", "Tasks", or "Any"
+- **Status** - When filtering by tasks, filter by "Open", "Completed", or "Any"
+
+Click any comment to jump to that moment in the recording.
 
 
 
