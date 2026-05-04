@@ -8,7 +8,7 @@ Materialization pre-computes your query results and stores them in S3. When some
 
 Materialization is ideal when:
 
-- **Your data doesn't need to be real-time** - Results are only as fresh as the last sync
+- **Your data doesn't need to be real-time** - Results are only as fresh as the last materialization run
 - **Your query is expensive** - Complex queries with large datasets benefit the most
 - **You have high traffic** - Avoid repeatedly running the same query
 
@@ -19,25 +19,21 @@ If you need real-time data or frequently update your query, stick with direct ex
 1. Go to your endpoint's **Configuration** tab
 2. Enable the **Materialization** toggle
 
-PostHog runs the first materialization immediately. After that, it refreshes on a schedule determined by your [data freshness](/docs/endpoints/caching#data-freshness) setting.
+PostHog uses the endpoint's [data freshness](/docs/endpoints/caching#data-freshness) setting to determine how often materialization runs. For example, if data freshness is set to 1 hour, PostHog re-runs the query and updates the stored results every hour.
 
-## Sync schedule
+The default data freshness is 24 hours. You can change it in the **Data freshness** section of the **Configuration** tab. Available options are:
 
-The materialization sync schedule is controlled by the **Data freshness** setting in the **Configuration** tab. PostHog automatically determines when to refresh materialized data based on the value you choose:
+| Data freshness  | Materialization schedule |
+| --------------- | ------------------------ |
+| 15 minutes      | Every 15 minutes         |
+| 30 minutes      | Every 30 minutes         |
+| 1 hour          | Every hour               |
+| 6 hours         | Every 6 hours            |
+| 12 hours        | Every 12 hours           |
+| 1 day (default) | Once a day               |
+| 7 days          | Once a week              |
 
-| Data freshness  | Sync interval    |
-| --------------- | ---------------- |
-| 15 minutes      | Every 15 minutes |
-| 30 minutes      | Every 30 minutes |
-| 1 hour          | Every hour       |
-| 6 hours         | Every 6 hours    |
-| 12 hours        | Every 12 hours   |
-| 1 day (default) | Every 24 hours   |
-| 7 days          | Every 7 days     |
-
-Shorter data freshness values mean more frequent syncs, which keeps your data fresher but consumes more compute. Choose a value that balances freshness with cost for your use case.
-
-For non-materialized endpoints, data freshness controls how long query results are cached. See [Caching](/docs/endpoints/caching) for more details.
+PostHog runs the first materialization immediately after you enable it.
 
 ## Materialization status
 
@@ -48,6 +44,14 @@ On the endpoint page, you'll see one of these statuses:
 - **Failed** - Materialization encountered an error
 
 If materialization fails, the endpoint falls back to direct execution until the next successful sync.
+
+## Caching for materialized endpoints
+
+For materialized endpoints, PostHog dynamically calculates the cache TTL based on the time remaining until the next scheduled materialization run, rather than using a static cache duration.
+
+For example, if data freshness is set to 1 hour and the last materialization ran 20 minutes ago, the cache TTL is set to 40 minutes. This ensures cached results expire around the time fresh materialized data becomes available.
+
+This is different from non-materialized endpoints, where [data freshness](/docs/endpoints/caching#data-freshness) directly sets the cache duration. See [Caching](/docs/endpoints/caching) for more details.
 
 ## Limitations
 
