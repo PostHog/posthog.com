@@ -37,9 +37,9 @@ Here's where things sit today: [PostHog AI](/ai) is at Level 3. You prompt it in
 
 The *self* in self-driving isn't autonomy from the engineer. It's autonomy from instruction.
 
-There's a lot of work that distracts engineers from building things that could actually be put on cruise control: bugs, UX issues, small features, conversion-rate tweaks. The work that drains engineering hours but rarely needs strategic input.
+![Complexity pyramid](https://res.cloudinary.com/dmukukwp6/image/upload/complexity_pyramid_ef1350e915.png)
 
-![Complexity pyramid](https://res.cloudinary.com/dmukukwp6/image/upload/complexity_pyramid2_324f0c5d8c.png)
+There's a lot of work that distracts engineers from building things that could actually be put on cruise control: bugs, UX issues, small features, conversion-rate tweaks. The work that drains engineering hours but rarely needs strategic input.
 
 This is where product data does the heavy lifting. In a typical week, PostHog customers generate 100,000+ failed queries and ~1.5 million new error tracking issues. Each one is a signal an agent could act on.
 
@@ -79,7 +79,7 @@ Stitch those five things together, and you get a loop we like to call product au
 
 *Collect data → cluster signals → check memory → notify workers → do work → evaluate → write back to memory.*
 
-![Loop diagram](TODO_loop_diagram_image_url)
+![Loop diagram](https://res.cloudinary.com/dmukukwp6/image/upload/product_autonomy_loop_2a39299464.png)
 
 You can't run this reliably inside a general-purpose coding agent, because the critical signals live somewhere else. For a lot of companies, that somewhere else is PostHog.
 
