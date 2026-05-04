@@ -1,0 +1,21 @@
+`capture(send_feature_flags=True)` is a legacy way to attach feature flag properties to captured events. For new Python code, prefer evaluating flags once with `evaluate_flags()` and passing the returned snapshot to `capture()` with `flags=flags`.
+
+```python
+flags = posthog.evaluate_flags("distinct_id_of_your_user")
+
+posthog.capture(
+    "event_name",
+    distinct_id="distinct_id_of_your_user",
+    flags=flags,
+)
+```
+
+If you're maintaining existing code, `send_feature_flags=True` continues to work during the migration period:
+
+```python
+posthog.capture(
+    "event_name",
+    distinct_id="distinct_id_of_the_user",
+    send_feature_flags=True,
+)
+```
