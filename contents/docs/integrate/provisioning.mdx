@@ -237,6 +237,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
   -H "API-Version: 0.1d" \
   -d '{
     "service_id": "analytics",
+    "label_prefix": "Acme Co",
     "configuration": {
       "project_name": "My App - Production"
     }
@@ -248,6 +249,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `service_id` | string | No | The plan to provision. `"analytics"` (default) provisions a standard project. `"free"` and `"pay_as_you_go"` set the billing plan explicitly. |
+| `label_prefix` | string | No | Label prefix for the personal API key shown in PostHog, up to 25 characters. The key is labeled `{label_prefix} - {team_name}`. If omitted, empty, or whitespace-only, the label uses the default `Stripe Projects` prefix. |
 | `configuration.project_name` | string | No | Project name (defaults to `"Default project"`) |
 
 **Response** (HTTP 200):
@@ -274,6 +276,28 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 | `api_key` | The project API token - use this to initialize PostHog SDKs |
 | `host` | The API host (`https://us.posthog.com` or `https://eu.posthog.com`) |
 | `personal_api_key` | A personal API key scoped to this project - use this for the PostHog API |
+
+### Rotate project credentials
+
+Rotate the project API token and create a new personal API key for an existing provisioned project:
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/resources/12345/rotate_credentials \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer phx_abc123..." \
+  -H "API-Version: 0.1d" \
+  -d '{
+    "label_prefix": "Acme Co"
+  }'
+```
+
+**Request fields:**
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `label_prefix` | string | No | Label prefix for the new personal API key shown in PostHog, up to 25 characters. The key is labeled `{label_prefix} - {team_name}`. If omitted, empty, or whitespace-only, the label uses the default `Stripe Projects` prefix. |
+
+The response has the same shape as the project provisioning response and includes the rotated `api_key`, `host`, and new `personal_api_key`.
 
 ### Refresh tokens
 
@@ -363,6 +387,7 @@ Common error codes:
 | `forbidden` | 403 | Partner not authorized for this action |
 | `expired` | 400 | Account request has expired |
 | `invalid_grant` | 400 | Authorization code is invalid or expired (token endpoint) |
+| `invalid_label_prefix` | 400 | `label_prefix` is not a string, is longer than 25 characters after trimming, or contains control or Unicode format characters |
 | `invalid_scope` | 400 | Unrecognized scope requested |
 | `rate_limited` | 429 | Rate limit exceeded |
 | `account_creation_failed` | 500 | Server error during account creation |
@@ -471,6 +496,7 @@ async function provisionPostHogAccount(email, name) {
       },
       body: JSON.stringify({
         service_id: 'analytics',
+        label_prefix: 'Acme Co',
         configuration: { project_name: 'Production' },
       }),
     }
