@@ -58,11 +58,11 @@ const Customers = ({ id, productData, customers, hasCaseStudy }: SectionComponen
     if (customerLogos.length === 0 && productUsageStats.unique_users == null) return null
 
     return (
-        <section id={id} className="scroll-mt-32 not-prose">
-            <h2 className="mb-8">Who uses it?</h2>
+        <section id={id} className="scroll-mt-32 not-prose space-y-6">
+            <h2 className="mb-2">Who uses it?</h2>
 
             {productUsageStats.unique_users != null && productUsageStats.unique_orgs != null && (
-                <p className="text-base mb-6">
+                <p className="text-base">
                     In the last month, <strong>{productUsageStats.unique_users.toLocaleString('en-US')} people</strong>{' '}
                     across <strong>{productUsageStats.unique_orgs.toLocaleString('en-US')} teams</strong> used {name}.
                 </p>

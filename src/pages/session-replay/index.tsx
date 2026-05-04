@@ -71,9 +71,9 @@ const LabeledList = ({
         >
             {items.map(({ label, description }) => (
                 <React.Fragment key={label}>
-                    <div className={`pt-2 @lg:pt-1 @lg:pb-1 font-bold ${colSpanClass[labelCols]}`}>{label}</div>
+                    <div className={`pt-2 @lg:pt-4 @lg:pb-4 font-bold ${colSpanClass[labelCols]}`}>{label}</div>
                     <div
-                        className={`pb-2 @lg:pb-1 @lg:pt-1 @lg:pl-4 text-secondary text-[15px] border-b border-primary last:border-b-0 @lg:border-b-0 text-balance ${colSpanClass[descCols]}`}
+                        className={`pb-2 @lg:pt-4 @lg:pb-4 @lg:pl-4 text-secondary text-[15px] border-b border-primary last:border-b-0 @lg:border-b-0 text-balance ${colSpanClass[descCols]}`}
                     >
                         {description}
                     </div>
