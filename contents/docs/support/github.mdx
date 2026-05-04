@@ -1,0 +1,108 @@
+---
+title: GitHub Issues integration
+sidebar: Docs
+showTitle: true
+---
+
+The GitHub Issues channel connects your GitHub repositories to PostHog Support, turning GitHub issues into support tickets with two-way sync.
+
+- **GitHub to PostHog** – new issues automatically create support tickets, and issue comments sync as ticket messages
+- **PostHog to GitHub** – team replies in PostHog are posted as comments on the GitHub issue
+
+This uses your existing GitHub integration (same one used for other PostHog features like linking to code). You select which repositories to monitor for issues.
+
+## Connecting GitHub
+
+The GitHub Issues channel requires a GitHub App integration already connected to your PostHog project.
+
+1. Go to **Support > Settings** in PostHog
+2. Navigate to the **GitHub** tab
+3. Select your existing GitHub integration from the dropdown
+4. Click **Connect**
+
+If you don't have a GitHub integration yet, set one up first in **Settings > Integrations > GitHub**.
+
+<CalloutBox icon="IconInfo" title="One integration per project" type="fyi">
+
+Each PostHog project can use one GitHub integration for the Support channel. The same integration can be used for other PostHog features.
+
+</CalloutBox>
+
+## Selecting repositories
+
+After connecting, choose which repositories to monitor for issues:
+
+1. In **Support > Settings > GitHub**, click the repository selector under **Monitored repositories**
+2. Select the repositories you want to watch for new issues
+3. Only issues from these repositories create tickets
+
+You can monitor up to 100 repositories per project.
+
+## How tickets are created
+
+When a new issue is opened in a monitored repository:
+
+1. PostHog creates a support ticket with the issue title and body
+2. The ticket shows `github` as the channel source
+3. A link to the original GitHub issue appears in the ticket sidebar
+4. The GitHub user's login is used as the customer identifier
+
+Issue status syncs automatically:
+
+- **Issue opened** → ticket created with `New` status
+- **Issue closed** → ticket status changes to `Resolved`
+- **Issue reopened** → ticket status changes to `Open`
+
+## Two-way sync
+
+### GitHub to PostHog
+
+- New issues in monitored repositories create tickets
+- Issue comments sync as ticket messages
+- Closing or reopening an issue updates the ticket status
+
+### PostHog to GitHub
+
+- When a team member replies to a GitHub-sourced ticket in PostHog, the reply is posted as a comment on the GitHub issue
+- The comment shows the team member's name
+
+**Private notes** (internal notes) are never posted to GitHub.
+
+## Creating issues from PostHog
+
+You can create new GitHub issues directly from PostHog:
+
+1. In the Support inbox, click **Create issue**
+2. Select the target repository from your monitored repositories
+3. Enter the issue title and body
+4. Optionally add labels
+5. Click **Create**
+
+The issue is created in GitHub and a corresponding ticket appears in your inbox.
+
+## Viewing GitHub tickets
+
+GitHub-sourced tickets appear in your [inbox](/docs/support/inbox) alongside widget, email, Slack, and Teams tickets. Each GitHub ticket shows:
+
+- A GitHub icon indicating the channel source
+- A link to the original GitHub issue
+- The GitHub user's login on messages
+
+You can filter the ticket list by channel source to see only GitHub tickets.
+
+## Workflows
+
+GitHub tickets work with [workflow automation](/docs/support/workflows) like all other channels. The `channel_source` property is `github` for GitHub-sourced tickets, so you can build channel-specific workflows. For example:
+
+- Set different SLAs for GitHub issues vs. widget tickets
+- Auto-assign GitHub issues to a specific team
+- Tag tickets based on the repository name
+
+## Disconnecting
+
+To remove the GitHub Issues integration:
+
+1. Go to **Support > Settings > GitHub**
+2. Click **Disconnect**
+
+Existing tickets created from GitHub issues are not affected – they remain in your inbox but no longer sync new comments or status changes.

@@ -5263,6 +5263,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'GitHub Issues',
+                    url: '/docs/support/github',
+                    icon: 'IconGitHub',
+                    color: 'orange',
+                },
+                {
                     name: 'Workflow automation',
                     url: '/docs/support/workflows',
                     icon: 'IconDecisionTree',
