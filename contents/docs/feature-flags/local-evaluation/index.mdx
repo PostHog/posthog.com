@@ -246,6 +246,7 @@ Object flagValue = flags.getFlag("flag-key");
 
 ```rust
 use std::collections::HashMap;
+use posthog_rs::EvaluateFlagsOptions;
 use serde_json::json;
 
 // Include any person properties, groups, or group properties required to evaluate the flag
@@ -265,13 +266,18 @@ let mut another_group_props = HashMap::new();
 another_group_props.insert("group_property_name".to_string(), json!("another value"));
 group_props.insert("another_group_type".to_string(), another_group_props);
 
-let flag = client.get_feature_flag(
-    "flag-key".to_string(),
-    "distinct_id_of_the_user".to_string(),
-    Some(groups),
-    Some(person_props),
-    Some(group_props),
+let flags = client.evaluate_flags(
+    "distinct_id_of_the_user",
+    EvaluateFlagsOptions {
+        groups: Some(groups),
+        person_properties: Some(person_props),
+        group_properties: Some(group_props),
+        only_evaluate_locally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
+        ..Default::default()
+    },
 ).await.unwrap();
+
+let flag = flags.get_flag("flag-key");
 ```
 
 </MultiLanguage>
