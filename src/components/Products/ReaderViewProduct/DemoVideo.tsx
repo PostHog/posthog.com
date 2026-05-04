@@ -87,7 +87,7 @@ export default function DemoVideo({ wistia, highlights, chapters, className = ''
                                     {resolvedChapters.map((chapter, index) => (
                                         <li
                                             key={index}
-                                            className="[&>button]:first:before:top-1.5 [&>button]:last:before:bottom-2.5"
+                                            className="[&>button]:first:before:top-2 [&>button]:last:before:bottom-[calc(100%_-_1rem)]"
                                         >
                                             <button
                                                 type="button"
@@ -122,7 +122,7 @@ export default function DemoVideo({ wistia, highlights, chapters, className = ''
                                                     {formatTime(chapter.time)}
                                                 </span>
                                                 <span
-                                                    className={`group-hover:underline group-active:scale-[.999] group-active:top-px transition-all duration-50${
+                                                    className={`relative group-hover:underline group-active:scale-[.995] group-active:top-[.5px] transition-all duration-50${
                                                         index === activeChapterIndex ? ' font-bold' : ''
                                                     }`}
                                                 >
