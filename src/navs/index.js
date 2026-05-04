@@ -3728,6 +3728,16 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Live',
+                    url: '/docs/web-analytics/live',
+                    icon: 'IconLive',
+                    color: 'red',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-red/10 !text-red !dark:text-white !dark:bg-red/50',
+                    },
+                },
+                {
                     name: 'Conversion goals',
                     url: '/docs/web-analytics/conversion-goals',
                     icon: 'IconFunnels',
@@ -6494,6 +6504,7 @@ export const docsMenu = {
                         { name: 'Java', url: '/docs/logs/installation/java' },
                         { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
                         { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },
+                        { name: 'React Native', url: '/docs/logs/installation/react-native' },
                         { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],
