@@ -43,6 +43,7 @@ What this looks like in practice:
 - [Install PostHog's](/docs/model-context-protocol), and the same agent can query your analytics, answer questions about user behavior, manage feature flags, investigate errors, analyze LLM costs and traces... the list goes on.
 
 MCPs basically turned what used to be a custom-integration problem into a plug-in problem.
+
 </details>
 
 <details>
@@ -55,6 +56,7 @@ The MCP servers worth your time tend to share a few things:
 - **OAuth or scoped tokens.** Servers that require pasting a personal access token with full account permissions are riskier than ones using OAuth with scoped permissions.
 - **Read-only mode available.** For anything that can write to production systems, the ability to run in read-only mode while you're testing is important.
 - **Active development.** Check the GitHub repo: when was the last commit, how many open issues, is anyone responding? A dead repo is likely a dead server.
+
 </details>
 
 ## A starter stack for startups
@@ -164,6 +166,7 @@ LLMs are more powerful when armed with current information, and search MCPs are 
 - **Brave Search MCP** – Brave's privacy-focused web search, with a generous free tier. 
 - **Exa MCP** – Designed specifically for AI agents, semantic search, better for research-heavy queries.
 - **Tavily MCP** – Optimized for RAG and agent workflows, with built-in result filtering.
+
 For most startups, Brave is fine. Switch to Exa or Tavily if you're building agents that do heavier research as a primary workflow.
 
 **Best for:** Any agent that needs current information from the web.
@@ -242,6 +245,7 @@ We're biased, obviously, but PostHog's MCP is worth installing if:
 - You want to query analytics, feature flags, errors, and LLM traces directly from your editor without context-switching to a dashboard
 - You're already using PostHog (or want to start; the [free tier](/pricing) covers 1M events, 5K session recordings, 1M feature flag requests, and a lot more per month)
 - You value open source and transparent pricing
+
 Setup takes about a minute via the [PostHog Wizard](/wizard) or the [connector directory](/docs/model-context-protocol).
 
 <WizardCTA />
@@ -252,13 +256,16 @@ Setup takes about a minute via the [PostHog Wizard](/wizard) or the [connector d
   <summary>Why does an MCP matter for startups?</summary>
 
 For startups, MCP matters because it turns "we need to integrate AI with our tools" from a custom-engineering project into a plug-in problem. Instead of building bespoke integrations, you install a server, and your AI client gets new capabilities. That dramatically lowers the cost of having AI actually do work in your stack.
+
 </details>
 
 <details>
   <summary>How many MCP servers should I install?</summary>
+
 Most effective setups run 3–9 MCP servers at once. Each server adds tool definitions to your agent's context window, which costs tokens and can confuse the model when there are too many overlapping tools.
 
 Start with two or three covering your primary workflow (e.g. GitHub + PostHog + Linear), then add more as you find concrete use cases. Resist the urge to install everything just because you can.
+
 </details>
 
 <details>
@@ -267,6 +274,7 @@ Start with two or three covering your primary workflow (e.g. GitHub + PostHog + 
 Generally, yes. Official servers from GitHub, Linear, Notion, PostHog, Slack, and others are maintained as part of the company's product, get updated when APIs change, follow security best practices, and handle auth properly.
 
 Community servers are useful when an official option doesn't exist (or is missing a feature you need), but check the GitHub repo for activity to make sure it's being given the attention it needs.
+
 </details>
 
 <details>
@@ -277,55 +285,68 @@ Community servers are useful when an official option doesn't exist (or is missin
 **Remote (hosted) servers** are HTTP-based and run on the vendor's infrastructure. You connect via OAuth and the client talks to the server over the network. They're simpler to install, auto-update, and require no local dependencies – but you need internet and you're trusting the vendor with the connection.
 
 For most servers, prefer remote when available. The main exceptions are filesystem, terminal, or anything that genuinely needs local access.
+
 </details>
 
 <details>
   <summary>Are MCP servers secure?</summary>
+
 It depends on the server. Official servers from major vendors generally follow best practices – scoped tokens, OAuth, principle of least privilege. Community servers vary widely.
 
 Two specific risks worth knowing about:
 
 1. **Prompt injection** – researchers have flagged that LLMs can be tricked into following untrusted commands embedded in MCP responses. Always review tool calls before approving destructive actions.
 2. **Over-broad permissions** – if a server asks for full account access, treat that the same way you'd treat a new app on your phone asking for "full access to everything." Use scoped tokens, read-only mode, and limited filesystem paths whenever possible.
+
 </details>
 
 <details>
   <summary>Can I build my own MCP server?</summary>
+
 Yes – and it's not hard. Anthropic publishes [TypeScript and Python SDKs](https://modelcontextprotocol.io/), and a basic server exposing a few tools can be built in under an hour with FastMCP (Python) or `@modelcontextprotocol/sdk` (Node.js).
 
 If you're building one, PostHog's newsletter has a great breakdown of [the golden rules of agent-first product](https://newsletter.posthog.com/p/the-golden-rules-of-agent-first-product) — useful for thinking through what your server should actually expose to agents (and what to leave out).
+
 </details>
 
 <details>
   <summary>Which MCP servers does PostHog have?</summary>
+
 PostHog maintains [one official MCP server](/docs/model-context-protocol) that exposes the entire PostHog platform – product analytics, web analytics, feature flags, experiments, error tracking, LLM observability, surveys, and SQL – to AI agents. It works in Claude Code, Claude Desktop, Cursor, Codex, VS Code, Zed, and Windsurf.
 
 You can install it via the [PostHog Wizard](/wizard), as a Claude Code plugin, or manually via the [connector directory](/docs/model-context-protocol).
 
 <WizardCTA slim />
+
 </details>
 
 <details>
   <summary>What's the best MCP server for analytics?</summary>
+
 If you're already on PostHog, Mixpanel, Amplitude, or Segment, use that vendor's official MCP server – they all have one as of 2026. The integration with your existing dashboards and identity model matters more than picking the "best" tool in a vacuum.
 
 If you don't have an analytics tool yet, **PostHog's MCP** is the strongest fit for startups: free to call (no charges on your PostHog bill), 1M events/month free on the platform itself, and one server covers analytics, feature flags, error tracking, LLM observability, and the data warehouse.
+
 </details>
 
 <details>
   <summary>What's the best MCP server for code work?</summary>
+
 The combination of **GitHub MCP + Filesystem MCP + PostHog MCP** covers most real coding workflows: search and edit your code, check for recent errors and analytics anomalies, and ship a fix through a PR. Add a database MCP if you're doing data work.
 
 For browser-based testing and automation, **Playwright MCP** is the standard.
+
 </details>
 
 <details>
   <summary>Where can I browse all available MCP servers?</summary>
+
 Three directories worth knowing:
 
 - The [official MCP Registry](https://github.com/modelcontextprotocol/servers) – reference servers maintained by Anthropic and the steering group
 - [PulseMCP](https://www.pulsemcp.com/servers) – over 14,000 servers, updated daily
 - [Awesome MCP Servers](https://github.com/wong2/awesome-mcp-servers) – curated GitHub list
+
 </details>
 
 <NewsletterForm />
