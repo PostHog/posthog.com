@@ -115,7 +115,7 @@ export default function CarouselSlide({ slide, productData }: CarouselSlideProps
         return (
             <div className={`text-base text-primary/90${slide.className ? ` ${slide.className}` : ''}`}>
                 <div className={SLIDE_PADDING}>
-                    {slide.heading && <h3 className="mb-2">{slide.heading}</h3>}
+                    {slide.heading && <h3 className="mb-2 pr-8">{slide.heading}</h3>}
                     <Description description={slide.description} />
                     <SlideBullets bullets={slide.bullets} />
                 </div>

@@ -496,7 +496,7 @@ export const CodeBlock = ({
                                     }`}
                                 >
                                     <ScrollArea>
-                                        <div className="flex whitespace-pre min-w-fit relative pb-2" id={languageId}>
+                                        <div className="flex whitespace-pre min-w-fit relative" id={languageId}>
                                             {showLineNumbers && (
                                                 <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent">
                                                     <span

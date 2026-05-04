@@ -36,7 +36,6 @@ import {
     Demo,
     Eli5,
     FeatureComparison,
-    Features,
     GettingStarted,
     Overview,
     PairsWith,
@@ -193,8 +192,8 @@ const topFeatures: CarouselSlide[] = [
             <>
                 <p>
                     Scrub through an activity log of a user's session to jump directly to parts you want to watch. The
-                    timeline shows you a full list of autocapture events (like page views), custom events, form
-                    interactions, and errors the user may have encountered during their session.
+                    timeline shows you a full list of autocapture events (like page views, clicks, scrolling activity),
+                    custom events, form interactions, and errors the user may have encountered during their session.
                 </p>
                 <ul className="space-y-4 mb-4">
                     <li>
@@ -223,83 +222,6 @@ const topFeatures: CarouselSlide[] = [
         image: { ref: 'overview', glow: true },
     },
     {
-        slug: 'technical-context',
-        label: 'Technical context',
-        icon: <IconCode className="size-5" />,
-        color: 'bg-white',
-        activeText: 'text-primary',
-        progressBar: 'bg-green',
-        layout: 'stack',
-        heading: f.technical_context.headline,
-        description: (
-            <>
-                <p>{f.technical_context.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        columns={[1, 3]}
-                        items={[
-                            { label: f.network_monitor.title, description: f.network_monitor.description },
-                            { label: f.console_logs.title, description: f.console_logs.description },
-                            { label: f.dom_explorer.title, description: f.dom_explorer.description },
-                        ]}
-                    />
-                </div>
-            </>
-        ),
-        image: {
-            ref: 'technical-context',
-            maxWidth: 'max-w-none',
-            srcMobileBreakpoint: '3xl',
-            frameless: true,
-            framePadding: '@3xl/reader-content:pt-4 @3xl/reader-content:px-4',
-            containerClassName:
-                '@3xl/reader-content:bg-tan dark:@3xl/reader-content:bg-dark @3xl/reader-content:border-t @3xl/reader-content:border-primary pb-0 leading-[0]',
-            imgClassName: 'w-full !border-0 !rounded-none',
-        },
-    },
-    {
-        slug: 'recording-rules',
-        label: 'Recording rules',
-        icon: <IconRecord className="size-5" />,
-        color: 'bg-white',
-        activeText: 'text-primary',
-        progressBar: 'bg-blue',
-        layout: 'stack',
-        heading: 'Record the sessions you care about',
-        description: (
-            <>
-                <p>
-                    Recording every session gets noisy fast. Set recording rules to capture errors, target pages, and
-                    specific users – and skip everything else.
-                </p>
-                <div className="@container mb-8">
-                    <LabeledList
-                        columns={[1, 3]}
-                        items={[
-                            { label: f.sampling.title, description: f.sampling.description },
-                            { label: f.url_event_triggers.title, description: f.url_event_triggers.description },
-                            {
-                                label: f.feature_flag_targeting.title,
-                                description: f.feature_flag_targeting.description,
-                            },
-                            { label: f.privacy_masking.title, description: f.privacy_masking.description },
-                        ]}
-                    />
-                </div>
-                <p>
-                    Or take manual control – disable recording by default and enable it in code when conditions are met:
-                </p>
-                <CodeBlock
-                    code={f.recording_rules.codeExample}
-                    language="js"
-                    hideNumbers={undefined}
-                    lineNumberStart={undefined}
-                    tooltips={undefined}
-                />
-            </>
-        ),
-    },
-    {
         slug: 'analyze-behavior',
         label: 'Analyze behavior',
         icon: <IconSearch className="size-5" />,
@@ -307,11 +229,20 @@ const topFeatures: CarouselSlide[] = [
         activeText: 'text-primary',
         progressBar: 'bg-purple',
         layout: 'stack',
-        heading: 'Find the sessions you need',
+        heading: "See when users did (or didn't do) almost anything",
         description: (
             <>
-                <p>Filter recordings by almost anything.</p>
-                <ul className="space-y-4 mb-4">
+                <p>
+                    Powerful filters let you find behavior you can use to improve your product. Aside from searching by
+                    event data or properties, you can also get "frustration signals" from built-in PostHog events like
+                    rage clicks, dead clicks, and errors.
+                </p>
+                <p>
+                    And you don't need to remember the syntax for your filters – you can use natural language with
+                    PostHog AI (or with our MCP) to describe the behavior you're looking for.
+                </p>
+                <p>Here are some examples of what you can find:</p>
+                {/* <ul className="space-y-4 my-4">
                     <li>
                         <strong>{f.event_filters.title}</strong>
                         <br /> {f.event_filters.description}
@@ -328,12 +259,11 @@ const topFeatures: CarouselSlide[] = [
                         <strong>{f.ai_search.title}</strong>
                         <br /> {f.ai_search.description}
                     </li>
-                </ul>
-                <p>Save filters as dynamic playlists that automatically update as new sessions come in.</p>
+                </ul> */}
 
                 <OSTable
                     columns={[
-                        { name: 'What you want to find', width: 'minmax(200px,1fr)', align: 'left' },
+                        { name: 'User behavior', width: 'minmax(200px,1fr)', align: 'left' },
                         { name: 'Filter criteria', width: 'minmax(220px,1fr)', align: 'left' },
                     ]}
                     rows={[
@@ -497,6 +427,94 @@ const topFeatures: CarouselSlide[] = [
                     rowAlignment="top"
                     width="full"
                 />
+
+                <p>
+                    Once you've found interesting behavior, you can save a set of filters as a dynamic playlist that
+                    automatically updates as new sessions are recorded.
+                </p>
+            </>
+        ),
+    },
+    {
+        slug: 'technical-context',
+        label: 'Technical context',
+        icon: <IconCode className="size-5" />,
+        color: 'bg-white',
+        activeText: 'text-primary',
+        progressBar: 'bg-green',
+        layout: 'stack',
+        heading: f.technical_context.headline,
+        description: (
+            <>
+                <p>{f.technical_context.description}</p>
+                <div className="@container">
+                    <LabeledList
+                        columns={[1, 3]}
+                        items={[
+                            { label: f.network_monitor.title, description: f.network_monitor.description },
+                            { label: f.console_logs.title, description: f.console_logs.description },
+                            { label: f.dom_explorer.title, description: f.dom_explorer.description },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            ref: 'technical-context',
+            maxWidth: 'max-w-none',
+            srcMobileBreakpoint: '3xl',
+            frameless: true,
+            framePadding: '@3xl/reader-content:pt-4 @3xl/reader-content:px-4',
+            containerClassName:
+                '@3xl/reader-content:bg-tan dark:@3xl/reader-content:bg-dark @3xl/reader-content:border-t @3xl/reader-content:border-primary pb-0 leading-[0]',
+            imgClassName: 'w-full !border-0 !rounded-none',
+        },
+    },
+    {
+        slug: 'recording-rules',
+        label: 'Recording rules',
+        icon: <IconRecord className="size-5" />,
+        color: 'bg-white',
+        activeText: 'text-primary',
+        progressBar: 'bg-blue',
+        layout: 'stack',
+        heading: 'Limit recordings based on your needs',
+        description: (
+            <>
+                <p>
+                    You can opt to record every session, or only capture sessions that meet certain criteria, like when
+                    an error is triggered, or based on a user's enrollment in an experiment or feature flag.
+                </p>
+                <p>
+                    Recording rules are useful for apps with sensitive data or legal requirements, as well as for cost
+                    management.
+                </p>
+                <div className="@container my-8">
+                    <h3 className="mb-4">Recording rules</h3>
+                    <LabeledList
+                        columns={[1, 3]}
+                        items={[
+                            { label: f.sampling.title, description: f.sampling.description },
+                            { label: f.url_event_triggers.title, description: f.url_event_triggers.description },
+                            {
+                                label: f.feature_flag_targeting.title,
+                                description: f.feature_flag_targeting.description,
+                            },
+                            { label: f.privacy_masking.title, description: f.privacy_masking.description },
+                        ]}
+                    />
+                </div>
+                <p>
+                    You can also disable recording by default and conditionally enable it in code when conditions are
+                    met:
+                </p>
+                <CodeBlock
+                    code={f.recording_rules.codeExample}
+                    language="js"
+                    hideNumbers={undefined}
+                    lineNumberStart={undefined}
+                    tooltips={undefined}
+                />
             </>
         ),
     },
@@ -544,7 +562,6 @@ export const productMenu: ProductNavItem[] = [
         component: TopFeatures,
         props: { slides: topFeatures },
     },
-    { slug: 'features', name: 'Features (legacy)', group: 'divided', hideFromNav: true, component: Features },
     {
         slug: 'getting-started',
         name: 'Get started',

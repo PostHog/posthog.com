@@ -6,7 +6,7 @@ import { CTAs } from 'components/CTAs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const Overview = ({ id, productData }: SectionComponentProps) => {
-    const { name, Icon, overview, screenshots, status } = productData ?? {}
+    const { name, Icon, overview, screenshots, status, hogs } = productData ?? {}
 
     return (
         <section id={id} className="scroll-mt-20 not-prose flex flex-col gap-12 max-w-7xl mx-auto">
@@ -15,7 +15,7 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
                 {screenshots?.home?.src && (
                     <Glow
                         color={productData?.color}
-                        className="mb-8 @3xl/reader-content:max-w-lg @3xl/reader-content:float-right @3xl/reader-content:ml-8"
+                        className="mb-8 @3xl/reader-content:max-w-lg @3xl/reader-content:float-right @3xl/reader-content:ml-8 relative"
                     >
                         <CloudinaryImage
                             src={screenshots.home.src as `https://res.cloudinary.com/${string}`}
@@ -23,6 +23,13 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
                             className="w-full"
                             imgClassName="h-auto rounded-lg"
                         />
+                        <div className="absolute bottom-0 -right-4">
+                            <CloudinaryImage
+                                src={hogs.default.src as `https://res.cloudinary.com/${string}`}
+                                alt={hogs.default.alt || name}
+                                imgClassName="h-36 @2xl/reader-content:h-48"
+                            />
+                        </div>
                     </Glow>
                 )}
 

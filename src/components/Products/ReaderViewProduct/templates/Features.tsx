@@ -63,7 +63,8 @@ const Features = ({ id, productData }: SectionComponentProps) => {
     if (!features.length) return null
 
     return (
-        <section id={id} className="scroll-mt-20 not-prose">
+        <section id={id} className="scroll-mt-20 not-prose opacity-50">
+            <h2>OLD</h2>
             <div className="grid @2xl/reader-content-container:grid-cols-2 gap-8">
                 {features.map((feature, index) => {
                     if (feature.label) {

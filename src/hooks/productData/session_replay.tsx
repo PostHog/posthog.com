@@ -154,6 +154,9 @@ export const sessionReplay = {
         classes: 'absolute bottom-0 right-0 max-w-[698px]',
     },
     hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
+        },
         mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/replay_mobile_hog_03d948364a.png',
         },
@@ -220,24 +223,22 @@ export const sessionReplay = {
         },
         event_properties: {
             title: 'Event properties',
-            description:
-                "Show you the properties of the event, like the page URL, the user's IP address, and the timestamp of the event.",
+            description: "Page URL, user's IP address, the timestamp of the event, etc.",
         },
         error_details: {
-            title: 'Error details',
+            title: 'Exception details',
             description:
-                'Show you the details of the error, like the error message, the stack trace, and the timestamp of the error. You can also see the full request and response headers.',
+                'Error message, stack trace, and the timestamp of the error. You can also see the full request and response headers.',
         },
         web_vitals: {
             title: 'Web vitals',
-            description:
-                'Track performance metrics like FCP, LCP, INP, CLS, and any other acronyms they might think up next.',
+            description: 'Performance metrics like FCP, LCP, INP, CLS, and any other acronyms they might think up next',
         },
         network_monitor: {
             title: 'Network monitor',
             headline: 'Network monitor',
             description:
-                'Captures every request and response with timing, method, and status code – spot slow API calls or failed requests the moment they happen.',
+                'Capture every request and response with timing, method, and status code – spot slow API calls or failed requests the moment they happen.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
@@ -250,7 +251,7 @@ export const sessionReplay = {
             title: 'Console logs',
             headline: 'Console logs',
             description:
-                'Records all warnings and errors in real time, correlated to the exact point in the session they happened. Pair with Error Tracking for full stack traces linked directly to the replay.',
+                'Record all warnings and errors in real time, correlated to the exact point in the session they happened. Pair with Error Tracking for full stack traces linked directly to the replay.',
             children: (
                 <>
                     <div className="flex @lg:flex-row @lg:gap-x-6 flex-col">
@@ -432,190 +433,123 @@ window.posthog.onFeatureFlags(() => {
     window.posthog.startSessionRecording()
   }
 })`,
-            children: (
-                <div>
-                    <h4 className="text-lg">Manually enable recording when a visitor is enrolled in a feature flag</h4>
-                    <CodeBlock
-                        code={`posthog.init('<ph_project_token>', {
-  api_host: '<ph_client_api_host>',
-  defaults: '<ph_posthog_js_defaults>',
-  disable_session_recording: true,
-});
-window.posthog.onFeatureFlags(function () {
-  if (window.posthog.isFeatureEnabled('your-feature-flag')) {
-    window.posthog.startSessionRecording();
-  }
-});
-`}
-                        language="js"
-                    />
-                </div>
-            ),
         },
-        supported_platforms: {
-            title: 'Supported platforms',
-            headline: 'Supported platforms',
-            description:
-                "Works with PostHog.js on the web. If you're already using product analytics, there's no separate installation.",
-            children: (
-                <div>
-                    <fieldset className="bg-primary">
-                        <legend className="text-sm font-semibold">Web</legend>
-                        <OSButton
-                            asLink
-                            icon={<IconJavaScript />}
-                            iconClassName="size-6 relative -top-px"
-                            size="lg"
-                            className="mr-1"
-                            to="/docs/libraries/js"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>JavaScript</span>
-                        </OSButton>
-                    </fieldset>
-                    <fieldset className="bg-primary">
-                        <legend className="text-sm font-semibold">Mobile*</legend>
-                        <OSButton
-                            asLink
-                            icon={<IconApple />}
-                            iconClassName="size-6 relative -top-px"
-                            size="lg"
-                            className="mr-1"
-                            to="/docs/libraries/ios"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>iOS</span>
-                        </OSButton>
-                        <OSButton
-                            asLink
-                            icon={<IconAndroid />}
-                            iconClassName="size-6 relative -top-px"
-                            size="lg"
-                            className="mr-1"
-                            to="/docs/libraries/android"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>Android</span>
-                        </OSButton>
-                    </fieldset>
-                    <fieldset className="bg-primary">
-                        <legend className="text-sm font-semibold">Cross-platform*</legend>
-                        <OSButton
-                            asLink
-                            icon={<IconReactNative />}
-                            iconClassName="size-6 relative -top-px"
-                            size="lg"
-                            className="mr-1"
-                            to="/docs/libraries/react-native"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>React Native</span>
-                        </OSButton>
-                        <OSButton
-                            asLink
-                            icon={<IconFlutter />}
-                            iconClassName="size-6 relative -top-px"
-                            size="lg"
-                            className="mr-1"
-                            to="/docs/libraries/flutter"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>Flutter</span>
-                        </OSButton>
-                    </fieldset>
-                    <p className="">
-                        *Mobile and cross-platform libraries available as an{' '}
-                        <Link to="/addons" state={{ newWindow: true }}>
-                            add-on
-                        </Link>
-                        .
-                    </p>
-                </div>
-            ),
-        },
-        more_features: {
-            title: 'More features',
-            headline: 'More features',
-            features: [
-                {
-                    title: 'Canvas recording',
-                    description:
-                        'Capture canvas elements from your application. It works in both 2D and WebGL environments.',
-                },
-                {
-                    title: 'Filter by event',
-                    description: 'Limit to recordings where users performed a specific event or action',
-                },
-                {
-                    title: 'Filter by people',
-                    description:
-                        'Use person properties (like country, custom property, or even email address) to quickly find relevant recordings',
-                },
-                {
-                    title: 'Saved filters',
-                    description: 'Find important recordings faster with saved filters',
-                },
-                {
-                    title: 'Collections',
-                    description:
-                        'Create a dynamic playlist of sessions to watch based on visitor activity, user properties, or cohort',
-                },
-                {
-                    title: 'Block sensitive data',
-                    description:
-                        'Limit the data you capture from the DOM with HTML attributes or a customizable config within the PostHog app',
-                },
-                {
-                    title: 'Share & embed',
-                    description: 'Share recordings directly by URL or embed via iframe',
-                },
-                {
-                    title: 'Minimum duration filter',
-                    description: 'Only record sessions longer than a specified duration',
-                },
-                {
-                    title: 'Sample recorded sessions',
-                    description:
-                        'Restrict the percentage of sessions that will be recorded to reduce data collection or cost',
-                },
-            ],
-        },
-        mcp: {
-            title: 'MCP',
-            headline: 'Search replays from your editor',
-            description:
-                'Find session recordings from Cursor, Claude Code, VS Code, or any MCP-compatible agent. Filter by events, user properties, and frustration signals.',
-            features: [
-                {
-                    title: 'Investigate bug reports',
-                    description: 'Find session replays where users encountered errors to feed your agent with context.',
-                },
-                {
-                    title: 'Research before coding',
-                    description: 'Summarize current user behavior before making code changes.',
-                },
-                {
-                    title: 'Validate after deploying',
-                    description: 'Monitor how users interact with newly deployed updates.',
-                },
-                {
-                    title: 'Search session replays',
-                    description:
-                        'Filter recordings by events, user properties, time ranges, and specific user behaviors.',
-                },
-            ],
-            children: <MCPInstall />,
-        },
+    },
+    mcp: {
+        title: 'MCP',
+        headline: 'Search replays from your editor',
+        description:
+            'Find session recordings from Cursor, Claude Code, VS Code, or any MCP-compatible agent. Filter by events, user properties, and frustration signals.',
+        features: [
+            {
+                title: 'Investigate bug reports',
+                description: 'Find session replays where users encountered errors to feed your agent with context.',
+            },
+            {
+                title: 'Research before coding',
+                description: 'Summarize current user behavior before making code changes.',
+            },
+            {
+                title: 'Validate after deploying',
+                description: 'Monitor how users interact with newly deployed updates.',
+            },
+            {
+                title: 'Search session replays',
+                description: 'Filter recordings by events, user properties, time ranges, and specific user behaviors.',
+            },
+        ],
+        children: <MCPInstall />,
+    },
+    compatibility: {
+        title: 'Supported platforms',
+        headline: 'Supported platforms',
+        description:
+            "Works with PostHog.js on the web. If you're already using product analytics, there's no separate installation.",
+        children: (
+            <div>
+                <fieldset className="bg-primary">
+                    <legend className="text-sm font-semibold">Web</legend>
+                    <OSButton
+                        asLink
+                        icon={<IconJavaScript />}
+                        iconClassName="size-6 relative -top-px"
+                        size="lg"
+                        className="mr-1"
+                        to="/docs/libraries/js"
+                        state={{
+                            newWindow: true,
+                        }}
+                    >
+                        <span>JavaScript</span>
+                    </OSButton>
+                </fieldset>
+                <fieldset className="bg-primary">
+                    <legend className="text-sm font-semibold">Mobile*</legend>
+                    <OSButton
+                        asLink
+                        icon={<IconApple />}
+                        iconClassName="size-6 relative -top-px"
+                        size="lg"
+                        className="mr-1"
+                        to="/docs/libraries/ios"
+                        state={{
+                            newWindow: true,
+                        }}
+                    >
+                        <span>iOS</span>
+                    </OSButton>
+                    <OSButton
+                        asLink
+                        icon={<IconAndroid />}
+                        iconClassName="size-6 relative -top-px"
+                        size="lg"
+                        className="mr-1"
+                        to="/docs/libraries/android"
+                        state={{
+                            newWindow: true,
+                        }}
+                    >
+                        <span>Android</span>
+                    </OSButton>
+                </fieldset>
+                <fieldset className="bg-primary">
+                    <legend className="text-sm font-semibold">Cross-platform*</legend>
+                    <OSButton
+                        asLink
+                        icon={<IconReactNative />}
+                        iconClassName="size-6 relative -top-px"
+                        size="lg"
+                        className="mr-1"
+                        to="/docs/libraries/react-native"
+                        state={{
+                            newWindow: true,
+                        }}
+                    >
+                        <span>React Native</span>
+                    </OSButton>
+                    <OSButton
+                        asLink
+                        icon={<IconFlutter />}
+                        iconClassName="size-6 relative -top-px"
+                        size="lg"
+                        className="mr-1"
+                        to="/docs/libraries/flutter"
+                        state={{
+                            newWindow: true,
+                        }}
+                    >
+                        <span>Flutter</span>
+                    </OSButton>
+                </fieldset>
+                <p className="">
+                    *Mobile and cross-platform libraries available as an{' '}
+                    <Link to="/addons" state={{ newWindow: true }}>
+                        add-on
+                    </Link>
+                    .
+                </p>
+            </div>
+        ),
     },
     postHogOnPostHog: {
         title: 'How PostHog uses Session Replay',

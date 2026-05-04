@@ -7,6 +7,56 @@ import { SectionComponentProps } from '../types'
 
 const INSTALL_COMMAND = 'npx -y @posthog/wizard@latest'
 
+/** Renders `productData.compatibility` (e.g. supported platforms on Session Replay). */
+const Compatibility = ({ productData }: { productData: any }) => {
+    const compatibility = productData?.compatibility
+    if (!compatibility) return null
+
+    const heading = compatibility.headline || compatibility.title
+
+    return (
+        <div className="mb-8">
+            {heading ? <h3 className="text-lg font-bold text-primary mt-0 mb-2">{heading}</h3> : null}
+            {compatibility.description ? (
+                <p className="text-base text-secondary leading-relaxed m-0 mb-4">{compatibility.description}</p>
+            ) : null}
+            {compatibility.children}
+        </div>
+    )
+}
+
+/** Renders `productData.mcp` (Session Replay MCP install + bullets). */
+const ProductMcp = ({ productData }: { productData: any }) => {
+    const mcp = productData?.mcp
+    if (!mcp) return null
+
+    const heading = mcp.headline || mcp.title
+
+    return (
+        <div className="mb-8">
+            {heading ? <h3 className="text-lg font-bold text-primary mt-0 mb-2">{heading}</h3> : null}
+            {mcp.description ? (
+                typeof mcp.description === 'string' ? (
+                    <p className="text-base text-secondary leading-relaxed m-0 mb-4">{mcp.description}</p>
+                ) : (
+                    <div className="text-base text-secondary leading-relaxed mb-4">{mcp.description}</div>
+                )
+            ) : null}
+            {mcp.features && mcp.features.length > 0 ? (
+                <ul className="m-0 mb-4 pl-4 space-y-2 list-disc text-base text-secondary">
+                    {mcp.features.map((item: { title: string; description?: React.ReactNode }) => (
+                        <li key={item.title}>
+                            <strong className="text-primary">{item.title}</strong>
+                            {item.description != null && item.description !== '' ? <> — {item.description}</> : null}
+                        </li>
+                    ))}
+                </ul>
+            ) : null}
+            {mcp.children}
+        </div>
+    )
+}
+
 const GettingStarted = ({ id, productData }: SectionComponentProps) => {
     const [justCopied, setJustCopied] = useState(false)
     const { addToast } = useToast()
@@ -28,6 +78,7 @@ const GettingStarted = ({ id, productData }: SectionComponentProps) => {
             <p className="text-base text-secondary leading-relaxed m-0 mb-4">
                 Try {productData?.name} for free — no credit card required.
             </p>
+            <Compatibility productData={productData} />
             <div className="grid grid-cols-1 @md:grid-cols-2 gap-4">
                 <div className="border border-primary rounded p-5 bg-primary">
                     <h3 className="text-lg font-bold text-primary mt-0 mb-2">Install with AI</h3>
@@ -52,6 +103,7 @@ const GettingStarted = ({ id, productData }: SectionComponentProps) => {
                     <SignupCTA size="md" type="primary" state={{ initialTab: 'signup' }} />
                 </div>
             </div>
+            <ProductMcp productData={productData} />
         </section>
     )
 }
