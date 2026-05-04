@@ -27,6 +27,7 @@ const formatTime = (seconds: number): string => {
 
 export default function DemoVideo({ wistia, highlights, chapters, className = '' }: DemoVideoProps) {
     const playerRef = useRef<any>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
     const [wistiaChapters, setWistiaChapters] = useState<DemoVideoChapter[]>([])
 
     useEffect(() => {
@@ -53,7 +54,7 @@ export default function DemoVideo({ wistia, highlights, chapters, className = ''
     const hasSidebar = (highlights && highlights.length > 0) || resolvedChapters.length > 0
 
     return (
-        <div className={`@container ${className}`}>
+        <div ref={containerRef} className={`@container scroll-mt-20 ${className}`}>
             <div className="flex flex-col @5xl:gap-8 @5xl:flex-row">
                 <div className="rounded flex-1 w-full">
                     <WistiaCustomPlayer mediaId={wistia} glow="red" ref={playerRef} />
@@ -87,6 +88,10 @@ export default function DemoVideo({ wistia, highlights, chapters, className = ''
                                             <button
                                                 type="button"
                                                 onClick={() => {
+                                                    containerRef.current?.scrollIntoView({
+                                                        behavior: 'smooth',
+                                                        block: 'nearest',
+                                                    })
                                                     playerRef.current?.time(chapter.time)
                                                     playerRef.current?.play()
                                                 }}
