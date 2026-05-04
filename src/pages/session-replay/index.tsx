@@ -50,18 +50,39 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const f = sessionReplay.features
 
-const FilterCriteria = ({ items }: { items: { label: string; description: string }[] }) => (
-    <div className="inline-grid @lg:grid-cols-3 @lg:[&>*:nth-child(n+3)]:border-t @lg:[&>*:nth-child(n+3)]:border-primary">
-        {items.map(({ label, description }) => (
-            <React.Fragment key={label}>
-                <div className="pt-2 @lg:pt-1 @lg:pb-1 font-bold">{label}</div>
-                <div className="@lg:col-span-2 pb-2 @lg:pb-1 @lg:pt-1 @lg:pl-4 text-secondary text-[15px] border-b border-primary last:border-b-0 @lg:border-b-0 text-balance">
-                    {description}
-                </div>
-            </React.Fragment>
-        ))}
-    </div>
-)
+const LabeledList = ({
+    items,
+    columns = [1, 2],
+}: {
+    items: { label: string; description: React.ReactNode }[]
+    columns?: [number, number]
+}) => {
+    const [labelCols, descCols] = columns
+    const totalCols = labelCols + descCols
+    const gridClass: Record<number, string> = { 3: '@lg:grid-cols-3', 4: '@lg:grid-cols-4', 5: '@lg:grid-cols-5' }
+    const colSpanClass: Record<number, string> = {
+        1: '@lg:col-span-1',
+        2: '@lg:col-span-2',
+        3: '@lg:col-span-3',
+        4: '@lg:col-span-4',
+    }
+    return (
+        <div
+            className={`inline-grid @lg:[&>*:nth-child(n+3)]:border-t @lg:[&>*:nth-child(n+3)]:border-primary ${gridClass[totalCols]}`}
+        >
+            {items.map(({ label, description }) => (
+                <React.Fragment key={label}>
+                    <div className={`pt-2 @lg:pt-1 @lg:pb-1 font-bold ${colSpanClass[labelCols]}`}>{label}</div>
+                    <div
+                        className={`pb-2 @lg:pb-1 @lg:pt-1 @lg:pl-4 text-secondary text-[15px] border-b border-primary last:border-b-0 @lg:border-b-0 text-balance ${colSpanClass[descCols]}`}
+                    >
+                        {description}
+                    </div>
+                </React.Fragment>
+            ))}
+        </div>
+    )
+}
 
 const FilterTag = ({ children }: { children: React.ReactNode }) => (
     <span className="inline-flex items-center text-xs font-medium px-1.5 py-1 rounded-sm leading-none bg-yellow/20 text-[#B56C00] dark:text-yellow dark:bg-yellow/20">
@@ -95,7 +116,7 @@ const applications: CarouselSlide[] = [
                     />
                 </aside>
                 <div className="@container max-w-6xl">
-                    <FilterCriteria
+                    <LabeledList
                         items={[
                             { label: 'Activity data', description: 'Page views, clicks, scrolls, form submissions' },
                             { label: 'Session data', description: 'Device type, browser, OS' },
@@ -213,20 +234,16 @@ const topFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>{f.technical_context.description}</p>
-                <ul className="space-y-4 mb-4">
-                    <li>
-                        <strong>{f.network_monitor.title}</strong>
-                        <br /> {f.network_monitor.description}
-                    </li>
-                    <li>
-                        <strong>{f.console_logs.title}</strong>
-                        <br /> {f.console_logs.description}
-                    </li>
-                    <li>
-                        <strong>{f.dom_explorer.title}</strong>
-                        <br /> {f.dom_explorer.description}
-                    </li>
-                </ul>
+                <div className="@container">
+                    <LabeledList
+                        columns={[1, 3]}
+                        items={[
+                            { label: f.network_monitor.title, description: f.network_monitor.description },
+                            { label: f.console_logs.title, description: f.console_logs.description },
+                            { label: f.dom_explorer.title, description: f.dom_explorer.description },
+                        ]}
+                    />
+                </div>
             </>
         ),
         image: {
@@ -255,24 +272,20 @@ const topFeatures: CarouselSlide[] = [
                     Recording every session gets noisy fast. Set recording rules to capture errors, target pages, and
                     specific users – and skip everything else.
                 </p>
-                <ul className="space-y-4 mb-4">
-                    <li>
-                        <strong>{f.sampling.title}</strong>
-                        <br /> {f.sampling.description}
-                    </li>
-                    <li>
-                        <strong>{f.url_event_triggers.title}</strong>
-                        <br /> {f.url_event_triggers.description}
-                    </li>
-                    <li>
-                        <strong>{f.feature_flag_targeting.title}</strong>
-                        <br /> {f.feature_flag_targeting.description}
-                    </li>
-                    <li>
-                        <strong>{f.privacy_masking.title}</strong>
-                        <br /> {f.privacy_masking.description}
-                    </li>
-                </ul>
+                <div className="@container mb-8">
+                    <LabeledList
+                        columns={[1, 3]}
+                        items={[
+                            { label: f.sampling.title, description: f.sampling.description },
+                            { label: f.url_event_triggers.title, description: f.url_event_triggers.description },
+                            {
+                                label: f.feature_flag_targeting.title,
+                                description: f.feature_flag_targeting.description,
+                            },
+                            { label: f.privacy_masking.title, description: f.privacy_masking.description },
+                        ]}
+                    />
+                </div>
                 <p>
                     Or take manual control – disable recording by default and enable it in code when conditions are met:
                 </p>
