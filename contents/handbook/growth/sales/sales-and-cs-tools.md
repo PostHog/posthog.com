@@ -73,7 +73,7 @@ Why should engineers have all the fun? We routinely build our own internal tooli
 - <PrivateLink url='https://github.com/PostHog/hedgeground'>Hedgeground</PrivateLink> - LLM-focused demo app.
 - <PrivateLink url='https://reinvented-won.vercel.app/'>Wheel of Names</PrivateLink> - randomly pick a person.
 - <PrivateLink url='https://posthog-academy.vercel.app/'>Academy</PrivateLink> - training platform.
-- <PrivateLink url='https://quotehog.vercel.app'>QuoteHog</PrivateLink> - create quotes for customers.
+- <PrivateLink url='https://quote.posthog.com'>QuoteHog</PrivateLink> - create quotes for customers.
 - <PrivateLink url='https://github.com/PostHog/hogspy'>HogSpy</PrivateLink> - Chrome extension for extra debugging info about PostHog usage.
 - <PrivateLink url='https://github.com/PostHog/learn'>Learn</PrivateLink> - prompts for PostHog Code on how to use PostHog effectively.
 - <PrivateLink url='https://github.com/PostHog/yahe'>Yet Another Hog Spy</PrivateLink> - Chrome extension to identify SDKs used on a website.
