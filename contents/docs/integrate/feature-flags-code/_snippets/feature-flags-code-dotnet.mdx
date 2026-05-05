@@ -99,9 +99,7 @@ posthog.Capture(
     {
         // Replace feature-flag-key with your flag key and "variant-key" with the key of your variant
         ["$feature/feature-flag-key"] = "variant-key",
-    },
-    groups: null,
-    flags: null
+    }
 );
 ```
 
@@ -112,7 +110,7 @@ By default, `EvaluateFlagsAsync()` evaluates every flag for the user. If you onl
 ```csharp
 var flags = await posthog.EvaluateFlagsAsync(
     "distinct_id_of_your_user",
-    new AllFeatureFlagsOptions
+    options: new AllFeatureFlagsOptions
     {
         FlagKeysToEvaluate = new[] { "checkout-flow", "new-dashboard" },
     }

@@ -5,7 +5,7 @@ import OverrideServerPropertiesIntro from './override-server-properties-intro.md
 ```csharp
 var flags = await posthog.EvaluateFlagsAsync(
     "distinct_id_of_the_user",
-    new AllFeatureFlagsOptions
+    options: new AllFeatureFlagsOptions
     {
         PersonProperties = new()
         {

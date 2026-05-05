@@ -204,7 +204,7 @@ $flagValue = $flags->getFlag('flag-key');
 ```csharp
 var flags = await posthog.EvaluateFlagsAsync(
     "distinct_id_of_the_user",
-    new AllFeatureFlagsOptions
+    options: new AllFeatureFlagsOptions
     {
         PersonProperties = new()
         {
