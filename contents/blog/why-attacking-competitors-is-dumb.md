@@ -56,13 +56,17 @@ The urgency of wanting to respond scales with how much it bothered you, not with
 
 ## What to do instead
 
+I'll admit - we've got this wrong before. When we threw together [isgoogleanalyticsillegal.com](https://www.isgoogleanalyticsillegal.com/), it was meant to be tongue in cheek but we still got criticized for going directly after a competitor, which was fair. 
+
+This is what we try to do instead:
+
 **Make fun of trends, not companies.** If something in your market is genuinely dumb, be funny and critical about that without naming anyone. The joke lands, people share it, and you haven't handed anyone ammunition.
 
-**Publish honest comparisons.** The instinct is to make yourself look great and them look bad. The better move is genuine honesty about tradeoffs – where you're stronger, where you're not, who each product is actually for. PostHog does this. It builds trust that no amount of positioning copy can buy, because it's harder to argue with.
+**Publish detailed, honest comparisons.** The instinct is to make yourself look great and them look bad - lots of ticks for you, lots of crosses for them. The better move is genuine honesty about tradeoffs – where you're stronger, where you're not, who each product is actually for. PostHog does this, and I think it builds trust that no amount of positioning copy can buy. I'll admit we haven't always got this right, so where we have made factual errors, we do our best to fix them as quickly as possible when someone notices.
 
-**Bid on their keywords.** Fully legitimate. If someone is searching for your competitor, you should be showing up. I know a lot of people think this doesn't work, but a) data disagrees with you, and b) sometimes we're reaching PostHog users who weren't aware we also did [thing].
+**Bid on competitor keywords.** If someone is searching for your competitor, you should be showing up. I know a lot of people think this doesn't work, but a) data disagrees with you, and b) sometimes we're reaching PostHog users who weren't aware we also did [thing]. You know when someone asks in a forum 'what do you think about X?' and the response is 'I actually like Y'? This is the ads equivalent of that. 
 
-**Correct factual errors privately if they _actually_ matter.** "Hey, this isn't accurate, it should be this" takes five minutes and either fixes it or motivates you when they are annoying about it. We have seen this succeed in both directions – we have happily accepted PRs to our website to set the record straight.
+**Correct factual errors privately if they _actually_ matter.** Contacting a competitors to say "Hey, this isn't accurate, it should be this" takes five minutes and either fixes it or motivates you when they are annoying about it. We have seen this succeed in both directions – we have happily accepted PRs to our website to set the record straight!
 
 But mostly: use your anger to outship them and build a better product.
 
