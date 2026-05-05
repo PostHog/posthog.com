@@ -113,7 +113,7 @@ Search your codebase for the flag key as a string. Common SDK patterns:
 | Language | Patterns to search for |
 | --- | --- |
 | JavaScript/TypeScript | `isFeatureEnabled('key')`, `getFeatureFlag('key')`, `useFeatureFlag('key')` |
-| Python | `feature_enabled('key')`, `get_feature_flag('key')` |
+| Python | `posthog.evaluate_flags(...)` followed by `flags.is_enabled('key')` or `flags.get_flag('key')`, plus older `posthog.feature_enabled('key')` and `posthog.get_feature_flag('key')` calls |
 | Ruby | `is_feature_enabled('key')`, `get_feature_flag('key')` |
 | Go | `IsFeatureEnabled("key")`, `GetFeatureFlag("key")` |
 | Other SDKs | Search for the flag key as a string literal |
@@ -135,8 +135,9 @@ Update the list of flags to update and paste this prompt into any AI coding agen
 ```text
 Find and remove all references to these feature flags in the codebase.
 For each flag, search for all usages including isFeatureEnabled,
-getFeatureFlag, useFeatureFlag, feature_enabled, and the flag key
-as a string literal in constants and configs.
+getFeatureFlag, useFeatureFlag, evaluate_flags, is_enabled,
+get_flag, feature_enabled, and the flag key as a string literal
+in constants and configs.
 
 ## Fully rolled out – remove the flag check, KEEP the enabled code path
 - new-checkout

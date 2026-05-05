@@ -361,21 +361,22 @@ function BAAGenerator() {
                             visibility service more fully described at posthog.com (the "Service"). This BAA will amend
                             the terms of the Agreement to reflect the parties' rights and responsibilities with respect
                             to the processing and security of your Protected Health Information (defined below) under
-                            the Agreement; provided, however, that this BAA, and any obligations relating to compliance 
-                            with HIPAA hereunder, do not apply with respect to any Services (or features or functionality thereof) 
-                            that PostHog designates as not subject to this BAA, as indicated in the applicable service 
-                            interface, guidance, documentation, ordering materials, or otherwise, even if such Services 
-                            involve the processing of PHI . If you are accepting this BAA in your capacity as an employee, consultant or
-                            agent of Customer, you represent that you are an employee, consultant or agent of Customer,
-                            and that you have the authority to bind Customer to this BAA.
+                            the Agreement; provided, however, that this BAA, and any obligations relating to compliance
+                            with HIPAA hereunder, do not apply with respect to any Services (or features or
+                            functionality thereof) that PostHog designates as not subject to this BAA, as indicated in
+                            the applicable service interface, guidance, documentation, ordering materials, or otherwise,
+                            even if such Services involve the processing of PHI . If you are accepting this BAA in your
+                            capacity as an employee, consultant or agent of Customer, you represent that you are an
+                            employee, consultant or agent of Customer, and that you have the authority to bind Customer
+                            to this BAA.
                         </p>
                         <p>
-                            This BAA is only available to customers with the applicable Platform Package, as defined below, and is
-                            effective only if the Customer has the required add-on in place at the time of signing. By
-                            signing this BAA, the Customer represents and warrants that they meet the requirements of and have entered 
-                            into the applicable Platform Package. This BAA shall be null, void, and of no effect if the Customer does not meet
-                            those requirements at the time of signing, regardless of whether this BAA has been
-                            electronically executed.
+                            This BAA is only available to customers with the applicable Platform Package, as defined
+                            below, and is effective only if the Customer has the required add-on in place at the time of
+                            signing. By signing this BAA, the Customer represents and warrants that they meet the
+                            requirements of and have entered into the applicable Platform Package. This BAA shall be
+                            null, void, and of no effect if the Customer does not meet those requirements at the time of
+                            signing, regardless of whether this BAA has been electronically executed.
                         </p>
                         <p>
                             This BAA applies only to PostHog's processing of PHI for Customer in Customer's capacity as
@@ -417,9 +418,9 @@ function BAAGenerator() {
                             PHI.
                         </p>
                         <p>
-                            "Platform Package" shall mean the add-on that the Customer must be paying for to receive coverage 
-                            with a BAA (either the Boost, Scale or Enterprise{' '}
-                        <Link to="/platform-packages">add-on</Link>).
+                            "Platform Package" shall mean the add-on that the Customer must be paying for to receive
+                            coverage with a BAA (either the Boost, Scale or Enterprise{' '}
+                            <Link to="/platform-packages">add-on</Link>).
                         </p>
                         <p>
                             <strong>Customer Assurances.</strong>

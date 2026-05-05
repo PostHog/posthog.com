@@ -684,7 +684,12 @@ if (posthog.isFeatureEnabled('new-groups-feature')) {
 ```
 
 ```python
-if posthog.feature_enabled("new-groups-feature", "user_distinct_id", groups={"company": "company_id_in_your_db"}):
+flags = posthog.evaluate_flags(
+    "user_distinct_id",
+    groups={"company": "company_id_in_your_db"},
+)
+
+if flags.is_enabled("new-groups-feature"):
     # Do something
 ```
 
