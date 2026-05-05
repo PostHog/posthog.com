@@ -20,7 +20,6 @@ if (flags.isEnabled('flag-key')) {
 
 ```node
 const flags = await client.evaluateFlags('distinct_id_of_your_user')
-
 const enabledVariant = flags.getFlag('flag-key')
 
 if (enabledVariant === 'variant-key') { // replace 'variant-key' with the key of your variant
