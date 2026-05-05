@@ -46,7 +46,7 @@ Add entries under each question with your initials/name like: "- (your name): My
 - Obstruction
   - Is there anything embarrassing about your product?
   - What’s stopping you from shipping 2x what you’re shipping now?
-  - Can your product be used by agents (Claude Code/Cursor/etc.) via our MPC server? What MCP tools or skills are missing right now?
+  - Can your product be used by agents (Claude Code/Cursor/etc.) via our MCP server? What MCP tools or skills are missing right now?
 - Growth
   - What single thing would move the needle the most this quarter?
     - _If it’s more people, please expand on how many and exactly what type of hire you’d be looking for._

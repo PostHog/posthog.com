@@ -98,7 +98,7 @@ Talent partners are responsible for scheduling these, you can read more in the [
 
 At PostHog, we have two major forces playing against each other when it comes to hiring. We want to move quickly, when we want to hire somebody, usually they should have started last week. The reason for that is we always want to hire for quality, and this takes time. This makes life as a talent partner a constant balance between these two things.
 The way we try and balance these things is try and move as quickly as possible with the things in our control. We aim to review applications ASAP, usually within 48 hours of application. Then we want to make sure that candidates can book their first round call with us within 2 business days. This keeps the momentum going from a candidate deciding to apply, to speaking to somebody.
-Our aim is to get back to every candidate by the end of the day after their interview, this is difficult, so whilst it's an aim we don't always hit it. We should be pushing interviewers to get feedback to us ASAP. The longer we leave canddiates without a decision the slower we will move. 
+Our aim is to get back to every candidate by the end of the day after their interview, this is difficult, so whilst it's an aim we don't always hit it. We should be pushing interviewers to get feedback to us ASAP. The longer we leave candidates without a decision the slower we will move. 
 
 Speed is a team effort, we should always keep things moving for each other. This means that if we see something that needs arranged and you can do it now, do it. No need to wait for the person who was last in contact to come online, just give them a heads up that it's done. This shared ownership mentality of speed is what will help us succeed. 
 

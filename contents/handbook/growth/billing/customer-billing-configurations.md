@@ -38,7 +38,7 @@ Below are the main 5 configurations we support right now. Each outlines how the 
    - Enterprise customers pay an invoice for credits (before the subscription is created).
    - Once the invoice is paid, the subscription is created by CS.
    - Much of this is done via Zapier. See the [docs](https://posthog.com/handbook/growth/sales/billing) for more info.
-   - Credits apply to their usage (including the Teams addon - up to the discretion of the CS team is that's charged for).
+   - Credits apply to their usage (including the Teams addon - up to the discretion of the CS team if that's charged for).
    - Credits reduce product charges on invoices.
    - Can be with or without tax.
    - Should be using default products/prices.

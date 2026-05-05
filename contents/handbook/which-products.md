@@ -9,7 +9,7 @@ Shipping them in the right order is key to a fast return on investment from ever
 
 ## How we pick new products
 
-Until products are built and launched, it's hard to predict which ones will do well. Because of this, we want to be working on a mix of new products at any given time. Some we're very sure will do well, others might be more of a bet with a potentially big outcome. This guidance is therefore less prescriptive that it could otherwise be.
+Until products are built and launched, it's hard to predict which ones will do well. Because of this, we want to be working on a mix of new products at any given time. Some we're very sure will do well, others might be more of a bet with a potentially big outcome. This guidance is therefore less prescriptive than it could otherwise be.
 
 Products we know will work well if we ship them:
 - Products engineers use at all company stages

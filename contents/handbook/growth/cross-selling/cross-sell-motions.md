@@ -42,7 +42,7 @@ Successful expansion strengthens customer relationships and increases account st
 - Churn rate by specific products i.e. are there products that once adopted lead to a noticeably lower (or higher) churn rate.
 - Customer feedback on expanded products
 - Percentage of revenue from a customer spread across products
-  - Is all the revenue for a customer coming from person profiles or is is spread between recordings, events, feature flags, and exceptions
+  - Is all the revenue for a customer coming from person profiles or is it spread between recordings, events, feature flags, and exceptions
 
 > Since we have different folks at different stages of ramp and onboarding, instead of making these metrics flat or percentage based, we are looking for an increase quarter over quarter.
 
@@ -124,7 +124,7 @@ For example, customer B2C SaaS has a business model selling subscription plans. 
 
 ## The new cross-sell motions playbook
 
-You've been here awhile and just want the script. Wet get it. The following sections describe the actual approaches that fit well within PostHog for a cross-sell motion, and can be pitched in grouping by feature or by user needs.
+You've been here awhile and just want the script. We get it. The following sections describe the actual approaches that fit well within PostHog for a cross-sell motion, and can be pitched in grouping by feature or by user needs.
 
 Remember that where possible, we're providing solutions and outcomes rather than features. Today we have clear examples with the Error tracking product where customers have found success, with more direct playbooks in the works. 
 
@@ -259,7 +259,7 @@ These questions will naturally surface use cases for session replay, feature fla
 
 | Question | Pain Revealed | PostHog Advantage |
 | --- | --- | --- |
-| When an error occurs, how easy is it for you to see exactly which user actions led up to it and how it affected the experience? | Debugging relies often relies on reproducing error | Error Tracking tied directly to replays makes root cause and impact obvious. |
+| When an error occurs, how easy is it for you to see exactly which user actions led up to it and how it affected the experience? | Debugging often relies on reproducing error | Error Tracking tied directly to replays makes root cause and impact obvious. |
 | If you’ve built your own error tracking, how much effort goes into maintaining and correlating it with analytics? | Time wasted maintaining infra, blind spots in analysis. | Lightweight SDK that's tightly integrated with other products. |
 | How do you decide which errors to fix first? | Prioritizing by gut feeling or frequency, not business impact. | Error Tracking + Product & Revenue Analytics can show which errors have the greatest impact. |
 
@@ -280,7 +280,7 @@ These questions will naturally surface use cases for session replay, feature fla
 | When launching a new feature, how do you manage risk of rollouts failing? | “Big bang” releases increase risk + stress. | Feature Flags enable safe, gradual rollouts & rollbacks. |
 | How do you measure whether users actually engage with a feature once it’s enabled? | No feedback loop between rollout and usage metrics. | PostHog connects flags directly to analytics & experiments. |
 | What’s your process for debugging an experiment if users drop off unexpectedly? | Experiments may fail without clarity on root cause. | Session Replay + Error Tracking pinpoint where the experience broke down. |
-| How do you currently measure the business impact (e.g., revenue, retention) of an experiment? | Results limited to engagement metrics, missing real business outcomes. | Revenue Analytics + Product Analytics + Data Warehous show both engagement and business impact. |
+| How do you currently measure the business impact (e.g., revenue, retention) of an experiment? | Results limited to engagement metrics, missing real business outcomes. | Revenue Analytics + Product Analytics + Data Warehouse show both engagement and business impact. |
 
 ### Customer/Revenue analytics
 
@@ -302,7 +302,7 @@ These questions will naturally surface use cases for session replay, feature fla
 | Question | Pain Revealed | PostHog Advantage |
 | --- | --- | --- |
 | When analyzing survey responses, how easy is it to connect them to specific user behaviors or outcomes? | Responses are siloed, making it hard to correlate feedback with analytics or events. | Surveys integrate natively with Product Analytics and Session Replay, linking responses to user journeys and metrics. |
-| How do you target surveys to the right users without manual segmentation or guesswork? | Less targeted surveys lead to low relevance and response rates. Custom targeting requires dev time. | Display conditions use cohorts, feature flags, and events to show surveys only to specifics users, with built-in response limits. |
+| How do you target surveys to the right users without manual segmentation or guesswork? | Less targeted surveys lead to low relevance and response rates. Custom targeting requires dev time. | Display conditions use cohorts, feature flags, and events to show surveys only to specific users, with built-in response limits. |
 
 ## Expansion within existing product usage - and up-selling
 It's worth calling out a question again: are we selling more of the thing, a more expensive thing, or a new thing? Cross-sell and expansion opportunities can have significant overlap in product plays. 

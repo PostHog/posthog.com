@@ -253,7 +253,7 @@ All non-sharded tables are replicated so that they are local to the coordinator.
 
 We should probably consider moving this to a `m7g.metal` if we hit any memory constraints with this, but so far we have not because of the dedicated nature of this node.
 
-We will also want to create new coodinators for multi-tenant workloads in the future. This will allow us to scale up and down easily over time, and even potentially throughout the day as the workload rises and falls.
+We will also want to create new coordinators for multi-tenant workloads in the future. This will allow us to scale up and down easily over time, and even potentially throughout the day as the workload rises and falls.
 
 
 ### Monitoring
@@ -285,7 +285,7 @@ The biggest pain points on our ClickHouse clusters is Disk Throughput. We still 
 Every mutation rewrites large portions of our data on disk. This requires reading, and writing huge amounts of data which robs normal queries and inserts of resources.
 The best solution that we've found to support the current high utilization of mutations is to move to nodes that have local NVMe storage.
 This, along with RAID 10 far 2 configs provides us with roughly 1000 MB/s writes and 4000 MB/s reads at the same time on a node.
-This is  than anything we can get with any combination of EBS volumes alone (within reason $$$). A nice bonus on top of this is this does not impinge on the EBS throughput limits of the node.
+This is more than anything we can get with any combination of EBS volumes alone (within reason $$$). A nice bonus on top of this is this does not impinge on the EBS throughput limits of the node.
 Meaning that on top of the baseline speed to NVMe disk we can tier out to EBS and have full instance EBS throughput available for that JBOD disk pack.
 
 Currently US is entirely on NVMe backed nodes. EU will need to be migrated to this setup as well.

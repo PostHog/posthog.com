@@ -174,7 +174,7 @@ pnpm --filter=@posthog/storybook test:visual:ci:update <path_to_story>
 
 #### Merge conflicts with visual regression snapshots
 
-It happens often that your PR will show conflics with our snapshots, as our CI pipeline will run `test-runner.ts` on every push, generating and pushing to your PR any significant visual changes.
+It happens often that your PR will show conflicts with our snapshots, as our CI pipeline will run `test-runner.ts` on every push, generating and pushing to your PR any significant visual changes.
 
 Github does not allow for conflict resolution inside their website, so you must do it manually.
 
@@ -352,7 +352,7 @@ See our [docs style guide](/handbook/content/posthog-style-guide) for tips on ho
 There are a few different ways to release code here:
 
 * just release the code change directly
-    * when you have hign confidence the change is safe 
+    * when you have high confidence the change is safe 
 * release it behind a flag and slowly roll it out
     * when you don't need to run an AB test but want to be sure you can check the impact of the change 
 * release it behind a flag and roll it out on demand (we call this a closed beta)
@@ -394,7 +394,7 @@ A/B tests make sense when:
     - If the feature is designed to improve some other metric like retention or stickiness, then test away!
 - The change impacts user behavior (eg most backend changes should have code tests - not behavioral A/B tests)
 
-If you're not sure something should be A/B tested, run one anyway. Feature flags (which experiments run on top of) are a great kill-switch for rolling back features in case something goes sidwways. And it's always nice to know how your changes might move the numbers! 
+If you're not sure something should be A/B tested, run one anyway. Feature flags (which experiments run on top of) are a great kill-switch for rolling back features in case something goes sideways. And it's always nice to know how your changes might move the numbers! 
 
 It's easy to just think "this makes more sense, let's just roll it out." Sometimes that's okay, sometimes it has unintended consequences. We obviously can't and shouldn't test everything, but running A/B tests frequently gets you comfortable with being wrong, which is a _very_ handy skill to have.
 

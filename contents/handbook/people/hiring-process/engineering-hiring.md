@@ -85,7 +85,7 @@ You should try to have as extensive notes as possible, this is good hygiene for 
 
 Once you have conducted your first 5-10 interviews you will want to reflect on how you are getting on. The best way to do this is to review how your candidates have got on. If you've rejected more than 6 or 7, then perhaps you might be being too harsh. You can ask other interviewers or a talent partner to assess your notes and see if they would have been more lenient. The technical screen has about a 50% pass rate, so keep that in mind. 
 
-For the candidates that you put through, it's worth keeping a close eye on how they perform at stage 3 & stage 4 and seeing how they have done. Did those flags that you have ultimately lead to them failing, should you have just said no? Where flags that you had actually not a problem, if so, how can you dig in to them better next time to understand them better. 
+For the candidates that you put through, it's worth keeping a close eye on how they perform at stage 3 & stage 4 and seeing how they have done. Did those flags that you have ultimately lead to them failing, should you have just said no? Were flags that you had actually not a problem, if so, how can you dig in to them better next time to understand them better. 
 
 You should try and keep your approach relatively consistent for the first 5-10 interviews so you can then introduce changes afterwards and see if they yield better or worse results. If anything is very obviously not working, change it immediately.
 

@@ -62,7 +62,7 @@ We will share the task with you at the start of the day. The task is representat
 
 This gives you the chance to learn how we work, and for us to see your quality and speed of work, as well as the way you communicate. It is a very demanding day of work, but we all want you to succeed! 
 
-An DevRel SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences)_:
+A DevRel SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences)_:
 
 *   Kick-off and ideation session where we'll define the specific deliverables for the Super Day. These will most likely include:
     * GitHub repo with code and README (we'll create and setup a private repo)

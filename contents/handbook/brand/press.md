@@ -39,7 +39,7 @@ We currently prefer working with a single media partner on an exclusive basis, a
 
 - [ ] *Wait for the media partner's story to go live first!* Check it carefully and ask for any errors to be amended before proceeding with the below...
 - [ ] Push out the press release via BusinessWire
-- [ ] Submit via YC's social media request from
+- [ ] Submit via YC's social media request form
 - [ ] James to post on his personal LinkedIn (and tag all relevant people)
 - [ ] Post in our PostHog Users Slack
 - [ ] Post in YC Slack
