@@ -22,7 +22,8 @@ if (flags.isEnabled("flag-key")) {
 ```java
 PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags("distinct_id_of_your_user");
 
-Object enabledVariant = flags.getFlag("flag-key");
+Object flagValue = flags.getFlag("flag-key");
+String enabledVariant = flagValue instanceof String ? (String) flagValue : null;
 
 if ("variant-key".equals(enabledVariant)) { // replace "variant-key" with the key of your variant
     // Do something differently for this user
@@ -34,7 +35,7 @@ if ("variant-key".equals(enabledVariant)) { // replace "variant-key" with the ke
 
 `flags.getFlag()` returns the variant string for multivariate flags, `true` for enabled boolean flags, `false` for disabled flags, and `null` when the flag wasn't returned by the evaluation.
 
-> **Note:** `posthog.isFeatureEnabled()`, `posthog.getFeatureFlag()`, `posthog.getFeatureFlagPayload()`, and `capture(appendFeatureFlags = true)` still work during the migration period, but they're deprecated. Prefer `evaluateFlags()` for new code.
+> **Note:** `posthog.isFeatureEnabled()`, `posthog.getFeatureFlag()`, `posthog.getFeatureFlagPayload()`, and `PostHogCaptureOptions.builder().appendFeatureFlags(true)` still work during the migration period, but they're deprecated. Prefer `evaluateFlags()` for new code.
 
 import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
 
@@ -107,12 +108,12 @@ posthog.capture(
 By default, `evaluateFlags()` evaluates every flag for the user. If you only need a few flags, pass `flagKeys` to request only those flags:
 
 ```java
-import java.util.List;
+import java.util.Arrays;
 
 PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags(
     "distinct_id_of_your_user",
     PostHogEvaluateFlagsOptions.builder()
-        .flagKeys(List.of("checkout-flow", "new-dashboard"))
+        .flagKeys(Arrays.asList("checkout-flow", "new-dashboard"))
         .build()
 );
 ```

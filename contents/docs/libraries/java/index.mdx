@@ -217,8 +217,10 @@ PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags(
         .build()
 );
 
-Object algorithm = flags.getFlag("algorithm");
-switch (String.valueOf(algorithm)) {
+Object flagValue = flags.getFlag("algorithm");
+String algorithm = flagValue instanceof String ? (String) flagValue : "control";
+
+switch (algorithm) {
     case "neural_network":
         useNeuralNetwork();
         break;
@@ -267,7 +269,8 @@ Since [experiments](/docs/experiments/start-here) use feature flags, the code fo
 
 ```java
 PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags("user_distinct_id");
-Object variant = flags.getFlag("recommendation_algorithm");
+Object flagValue = flags.getFlag("recommendation_algorithm");
+String variant = flagValue instanceof String ? (String) flagValue : "control";
 
 if ("neural_network".equals(variant)) {
     // Do something differently for this user
