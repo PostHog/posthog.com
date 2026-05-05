@@ -1,5 +1,5 @@
 ---
-date: "2026-04-20"
+date: "2026-05-05"
 title: "The self-driving product (and why we're launching PostHog Code)"
 author:
   - cleo-lant
@@ -16,13 +16,17 @@ tags:
   - PostHog news
 ---
 
-Today, [PostHog Code](/code) enters beta. It's a desktop app that runs coding agents on top of your product data. The obvious stuff ships itself. The tricky stuff shows up as a prioritized to-do list for you to steer.
+Today, [PostHog Code](/code) enters beta. 
+
+It's a desktop app that runs coding agents on top of your product data. The obvious stuff ships itself. The tricky stuff shows up as a prioritized to-do list for you to steer.
 
 We built it to chase one idea: self-driving product development.
 
 ## How we're defining self-driving
 
-A self-driving product can prompt itself. It understands your codebase, your data, and your users. It proposes and ships work on its own, inside of guardrails you set.
+A self-driving product can prompt itself. 
+
+It understands your codebase, your data, and your users. It proposes and ships work on its own, inside of guardrails you set.
 
 The *self* in self-driving isn't autonomy from the engineer. It's autonomy from user instruction as the starting point. 
 
@@ -60,17 +64,17 @@ Signals say something's happening now. Memory says what happened last time. With
 
 The loop doesn't close without this. [Testing AI agents](/blog/testing-ai-agents) looks nothing like testing normal software, and "it runs without erroring" is not a pass. 
 
-PostHog Code schedules evals as long-running Temporal jobs, so the check runs hours or days after the PR merges. The same dashboard, funnel, experiment, or [LLM-as-a-judge eval](/blog/stop-ai-slop) that fired the signal gets re-queried. If the metric didn't move – or moved the wrong way – the agent reverts or reopens the work.
+PostHog Code schedules evals as long-running Temporal jobs, so the check runs hours or days after the PR merges. The same dashboard, funnel, experiment, or [LLM-as-a-judge eval](/blog/stop-ai-slop) that fired the signal gets re-queried. 
+
+If the metric didn't move – or moved the wrong way – the agent reverts or reopens the work.
 
 ## The product autonomy loop
 
-Stitch those five things together, and you get a loop we like to call product autonomy:
-
-*Collect data → cluster signals → check memory → notify workers → do work → evaluate → write back to memory.*
+Stitch those five things together, and you get a loop we like to call product autonomy: *Collect data → cluster signals → check memory → notify workers → do work → evaluate → write back to memory.*
 
 ![Loop diagram](https://res.cloudinary.com/dmukukwp6/image/upload/product_autonomy_loop_2a39299464.png)
 
-You can't run this reliably inside a general-purpose coding agent, because the critical signals live somewhere else. For a lot of companies, that somewhere else is PostHog.
+You can't run this reliably inside a general-purpose coding agent because the critical signals live somewhere else. For a lot of companies, that somewhere else is PostHog.
 
 **How this works in PostHog Code:**
 
@@ -92,7 +96,7 @@ The PostHog side is wired in by default. One-click instrumentation drops events,
 
 The [PostHog MCP](/docs/model-context-protocol) handles impact measurement, [error debugging](/docs/error-tracking/debug-errors-mcp), and dashboard building. 
 
-Plug in other MCP servers to take more actions or pull in extra context as you build.
+Plug in other MCP servers to take more actions, or pull in extra context as you build.
 
 With the routine work automated, you get more room for the big stuff. Prompt your own tasks, build with full product-data context, and keep shipping new features alongside the self-driving work.
 
