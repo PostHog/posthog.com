@@ -1,5 +1,3 @@
-import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
 import { IconActivity } from '@posthog/icons'
 
 export const logs = {
@@ -151,24 +149,21 @@ export const logs = {
                 },
             ],
         },
-
-        {
-            title: 'AI',
-            handle: 'ai',
-            template: 'grid',
-            className: 'bg-blue',
-            headline: 'Get a sanity check from AI ✨',
-            description:
-                'PostHog AI can give on-demand summaries and highlight patterns. Think of it as your automatic backup; a second set of eyes on the problem.',
-            children: (
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/logs_4_light_6b4cc017f6.png"
-                    alt="AI"
-                    className="w-full h-full object-contain"
-                />
-            ),
-        },
     ],
+    ai: {
+        imageAlt: 'PostHog AI and logs',
+        description: 'search, summarize, and debug your logs using natural language',
+        skills: [
+            'Finds the exact log lines you need with natural language – no query syntax required',
+            'Summarizes patterns, surfaces anomalies, and explains likely causes from a sea of log entries',
+            'Connects log entries to related session replays, errors, and analytics for full debugging context',
+        ],
+        prompts: [
+            'Show me all error-level logs from the payments service in the last hour',
+            "Summarize the most common errors users hit yesterday and what's causing them",
+            'Find logs related to the spike in 500 errors after the latest deploy',
+        ],
+    },
     postHogOnPostHog: {
         title: 'How PostHog uses Logs',
         benefits: [
