@@ -101,11 +101,6 @@
             "destination": "/docs/posthog-code",
             "statusCode": 301
         },
-        {
-            "source": "/docs/posthog-code/quick-tour/",
-            "destination": "/docs/posthog-code",
-            "statusCode": 301
-        },
         { "source": "/docs/integrations/android-integration", "destination": "/docs/libraries/android" },
         { "source": "/docs/integrations/community", "destination": "/docs/libraries/community" },
         { "source": "/docs/integrations/docusaurus-integration", "destination": "/docs/libraries/docusaurus" },
