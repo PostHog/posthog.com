@@ -1,0 +1,78 @@
+---
+title: Query logs with SQL
+---
+
+The SQL tab on the [Logs page](https://app.posthog.com/logs) lets you run custom HogQL queries against your log data. Use it when you need more flexibility than the filter bar.
+
+To query logs with SQL:
+
+1. Go to the [**Logs** page](https://app.posthog.com/logs).
+2. Click the **SQL** tab.
+3. Write your query in the editor. The default is `SELECT * FROM logs LIMIT 10`.
+4. Click **Run** or press `Cmd/Ctrl + Enter`.
+
+## The logs table
+
+The `logs` table contains all your log data. Key columns include:
+
+| Column | Description |
+|--------|-------------|
+| `timestamp` | When the log was recorded |
+| `message` | The log message body |
+| `level` | Log level (e.g., `INFO`, `WARN`, `ERROR`) |
+| `service.name` | Service that emitted the log |
+| `resource` | Resource attributes from OpenTelemetry |
+| `attributes` | Custom key-value context attached to the log |
+
+## Example queries
+
+### Filter by log level
+
+```sql
+SELECT timestamp, message, level
+FROM logs
+WHERE level = 'ERROR'
+ORDER BY timestamp DESC
+LIMIT 100
+```
+
+### Search by service
+
+```sql
+SELECT timestamp, message, attributes
+FROM logs
+WHERE resource['service.name'] = 'checkout-api'
+ORDER BY timestamp DESC
+LIMIT 50
+```
+
+### Count logs by level
+
+```sql
+SELECT level, count() as log_count
+FROM logs
+WHERE timestamp > now() - INTERVAL 1 DAY
+GROUP BY level
+ORDER BY log_count DESC
+```
+
+### Find logs containing a keyword
+
+```sql
+SELECT timestamp, message, level
+FROM logs
+WHERE message LIKE '%timeout%'
+ORDER BY timestamp DESC
+LIMIT 100
+```
+
+## When to use SQL vs. the filter bar
+
+The **filter bar** is best for quick searches on known attributes. Use the **SQL tab** when you need:
+
+- Aggregations like `COUNT`, `SUM`, or `GROUP BY`
+- Complex conditions with `OR` logic or nested filters
+- Joins with other tables like `events` or `persons`
+- Custom transformations on your log data
+
+For more on HogQL query syntax, see the [SQL editor docs](/docs/data-warehouse/sql).

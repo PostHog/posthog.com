@@ -6673,6 +6673,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Query logs with SQL',
+                    url: '/docs/logs/query-with-sql',
+                    icon: 'IconTerminal',
+                    color: 'blue',
+                },
+                {
                     name: 'Link Session Replay',
                     url: '/docs/logs/link-session-replay',
                     icon: 'IconRewindPlay',
