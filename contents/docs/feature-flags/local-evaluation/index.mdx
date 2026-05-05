@@ -227,17 +227,19 @@ await posthog.GetFeatureFlagAsync(
 ```
 
 ```java
-posthog.getFeatureFlag(
+PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags(
     "distinct_id_of_the_user",
-    "flag-key",
-    PostHogFeatureFlagOptions
-        .builder()
+    PostHogEvaluateFlagsOptions.builder()
         .personProperty("property_name", "value")
         .group("your_group_type", "your_group_id")
         .group("another_group_type", "another_group_id")
         .groupProperty("your_group_type", "group_property_name", "value")
         .groupProperty("another_group_type", "group_property_name", "another value")
-        .build());
+        .onlyEvaluateLocally(false) // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
+        .build()
+);
+
+Object flagValue = flags.getFlag("flag-key");
 ```
 
 ```rust

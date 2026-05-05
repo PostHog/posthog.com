@@ -165,7 +165,8 @@ end
 ```
 
 ```java
-Object flagValue = posthog.getFeatureFlag("user_distinct_id", "experiment-feature-flag-key", "control");
+PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags("user_distinct_id");
+Object flagValue = flags.getFlag("experiment-feature-flag-key");
 String variant = flagValue instanceof String ? (String) flagValue : "control";
 
 if ("variant-name".equals(variant)) {
