@@ -124,7 +124,8 @@ if variant == "variant-name":
 ```
 
 ```php
-$variant = PostHog::getFeatureFlag('experiment-feature-flag-key', 'user_distinct_id')
+$flags = PostHog::evaluateFlags('user_distinct_id');
+$variant = $flags->getFlag('experiment-feature-flag-key');
 
 if ($variant === 'variant-name') {
     // Do something differently for this user

@@ -117,6 +117,7 @@ Search your codebase for the flag key as a string. Common SDK patterns:
 | Node | `evaluateFlags(...)` followed by `flags.isEnabled('key')` or `flags.getFlag('key')`, plus older `isFeatureEnabled('key')` and `getFeatureFlag('key')` calls |
 | Ruby | `is_feature_enabled('key')`, `get_feature_flag('key')` |
 | Go | `IsFeatureEnabled("key")`, `GetFeatureFlag("key")` |
+| PHP | `evaluateFlags(...)` followed by `$flags->isEnabled('key')` or `$flags->getFlag('key')`, plus older `isFeatureEnabled('key')` and `getFeatureFlag('key')` calls |
 | Other SDKs | Search for the flag key as a string literal |
 
 Also search for the flag key in constants, config files, test fixtures, and comments.
