@@ -113,7 +113,7 @@ Search your codebase for the flag key as a string. Common SDK patterns:
 | Language | Patterns to search for |
 | --- | --- |
 | JavaScript/TypeScript | `isFeatureEnabled('key')`, `getFeatureFlag('key')`, `useFeatureFlag('key')` |
-| Python | `evaluate_flags(...)` followed by `flags.is_enabled('key')` or `flags.get_flag('key')`, plus older `feature_enabled('key')` and `get_feature_flag('key')` calls |
+| Python | `posthog.evaluate_flags(...)` followed by `flags.is_enabled('key')` or `flags.get_flag('key')`, plus older `posthog.feature_enabled('key')` and `posthog.get_feature_flag('key')` calls |
 | Ruby | `is_feature_enabled('key')`, `get_feature_flag('key')` |
 | Go | `IsFeatureEnabled("key")`, `GetFeatureFlag("key")` |
 | Other SDKs | Search for the flag key as a string literal |

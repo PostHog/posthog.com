@@ -156,7 +156,7 @@ If your flag is returning false and you expect it to return another value, check
 
 - The flag is enabled, rolled out, and has the correct release conditions.
 
-- You are evaluating the flag with all the information and arguments it needs. For example, in Python, call `evaluate_flags()` with the distinct ID, then pass the flag key to `flags.is_enabled()` or `flags.get_flag()`.
+- You are evaluating the flag with all the information and arguments it needs. For example, in Python, call `posthog.evaluate_flags()` with the distinct ID, then pass the flag key to `flags.is_enabled()` or `flags.get_flag()`.
 
 - Your flags are loaded before you evaluate them. Test this by evaluating the flag in the `onFeatureFlags()` callback.
 
