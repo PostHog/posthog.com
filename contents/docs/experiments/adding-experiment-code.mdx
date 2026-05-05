@@ -142,13 +142,14 @@ end
 ```
 
 ```go
-variant, err := client.GetFeatureFlag(posthog.FeatureFlagPayload{
-    Key:        "experiment-feature-flag-key",
+flags, err := client.EvaluateFlags(posthog.EvaluateFlagsPayload{
     DistinctId: "user_distinct_id",
 })
 if err != nil {
     // Handle error (e.g. capture error and fallback to default behavior)
 }
+variant := flags.GetFlag("experiment-feature-flag-key")
+
 if variant == "variant-name" {
     // Do something
 }
