@@ -1,9 +1,9 @@
 name: Inkeep Sync
 
 on:
-    # Run hourly at :17 past the hour to avoid scheduler delays
+    # Run every 8 hours at :17 past the hour
     schedule:
-        - cron: '17 * * * *'
+        - cron: '17 */8 * * *'
 
     # Allow manual trigger from the Actions tab.
     workflow_dispatch:
