@@ -103,29 +103,21 @@ If you deploy frequently or have many short-lived workers, consider using a [sha
 <MultiLanguage>
 
 ```node
-await client.getFeatureFlag(
-    'flag-key',
-    'distinct_id_of_the_user',
-    {
-        // include any person properties, groups, or group properties required to evaluate the flag
-        personProperties: {
-            'property_name': 'value'
-        },
-        groups: {
-            "your_group_type": "your_group_id",
-            "another_group_type": "another_group_id",
-        },
-        groupProperties: {
-            'your_group_type': {
-                'group_property_name': 'value'
-            },
-            'another_group_type': {
-                'group_property_name': 'another value'
-            }
-        },
-        onlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
-    }
-)
+const flags = await client.evaluateFlags('distinct_id_of_the_user', {
+    // Include any person properties, groups, or group properties required to evaluate the flag
+    personProperties: { property_name: 'value' },
+    groups: {
+        your_group_type: 'your_group_id',
+        another_group_type: 'another_group_id',
+    },
+    groupProperties: {
+        your_group_type: { group_property_name: 'value' },
+        another_group_type: { group_property_name: 'another value' },
+    },
+    onlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
+})
+
+const flagValue = flags.getFlag('flag-key')
 ```
 
 ```ruby

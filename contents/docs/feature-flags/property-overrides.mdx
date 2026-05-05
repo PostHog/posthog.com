@@ -463,25 +463,23 @@ Server-side SDKs handle property overrides differently. Instead of persistent se
 <MultiLanguage selector="tabs">
 
 ```node
-const flagValue = await client.getFeatureFlag(
-    'feature-flag-key',
-    'user-distinct-id',
-    {
-        personProperties: {
+const flags = await client.evaluateFlags('user-distinct-id', {
+    personProperties: {
+        plan: 'enterprise',
+        company_size: 'large',
+    },
+    groups: {
+        company: 'company-123',
+    },
+    groupProperties: {
+        company: {
             plan: 'enterprise',
-            company_size: 'large'
+            employee_count: 500,
         },
-        groups: {
-            company: 'company-123'
-        },
-        groupProperties: {
-            company: {
-                plan: 'enterprise',
-                employee_count: 500
-            }
-        }
-    }
-)
+    },
+})
+
+const flagValue = flags.getFlag('feature-flag-key')
 ```
 
 ```python
