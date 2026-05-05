@@ -182,24 +182,25 @@ const flagValue = await posthog.getFeatureFlag(
 ```
 
 ```python
-flag_value = posthog.get_feature_flag(
-    'mixed-rollout-flag',
-    'user_123',
+flags = posthog.evaluate_flags(
+    "user_123",
     person_properties={
-        'email': 'jane@acme.com',
-        'role': 'admin'
+        "email": "jane@acme.com",
+        "role": "admin",
     },
     groups={
-        'company': 'company_abc'
+        "company": "company_abc",
     },
     group_properties={
-        'company': {
-            'name': 'Acme Inc',
-            'plan': 'enterprise',
-            'industry': 'tech'
-        }
-    }
+        "company": {
+            "name": "Acme Inc",
+            "plan": "enterprise",
+            "industry": "tech",
+        },
+    },
 )
+
+flag_value = flags.get_flag("mixed-rollout-flag")
 ```
 
 </MultiLanguage>
