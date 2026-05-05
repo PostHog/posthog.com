@@ -24,7 +24,6 @@ export type { MenuTab } from 'components/ReaderView'
 
 interface ProductReaderViewProps {
     productHandle: string
-    data: any
     /**
      * Which surface this page renders. Picks the matching menu off the product
      * data (`productMenu` for `'product'`, `pricingMenu` for `'pricing'`) and
@@ -81,7 +80,6 @@ const groupSurfaceMenu = (items: ProductNavItem[]): SurfaceGroup[] => {
 
 export default function ProductReaderView({
     productHandle,
-    data,
     surface = 'product',
     seoOverrides,
     productMenu,
@@ -126,7 +124,6 @@ export default function ProductReaderView({
 
     const sharedSectionProps = {
         productData,
-        data,
         customers,
         customerSlugs,
         hasCaseStudy,
