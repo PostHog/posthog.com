@@ -18,7 +18,7 @@ In your experiment, each user is randomly assigned to a variant (usually either 
 
 <CalloutBox icon="IconWarning" title="Only flag value access counts as an exposure" type="caution">
 
-You must use `getFeatureFlag()` (or its framework equivalent like `useFeatureFlagVariantKey()`) to check variants. In server SDKs with snapshot APIs, use the snapshot value accessor like `flags.getFlag()` / `flags.get_flag()` / `flags.GetFlag()`. Other methods like `getAllFlags()`, `getFeatureFlags()`, or payload-only accessors do **not** record an [exposure event](/docs/experiments/exposures). Users evaluated with those methods won't be included in your experiment results.
+You must use `getFeatureFlag()` (or its framework equivalent like `useFeatureFlagVariantKey()`) to check variants. In server-side SDKs, use the `evaluateFlags` API to access flag values via `getFlag()` / `get_flag()`. Other methods like `getAllFlags()`, `getFeatureFlags()`, or payload-only accessors do **not** record an [exposure event](/docs/experiments/exposures). Users evaluated with those methods won't be included in your experiment results.
 
 </CalloutBox>
 

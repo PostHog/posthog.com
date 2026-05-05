@@ -14,7 +14,7 @@ Exposures are the foundation of experiment analysis in PostHog. A user must be *
 
 An exposure occurs when a user encounters the part of your product where the experiment is running. This is the moment they become a participant in your experiment and start contributing to your metrics.
 
-**For most users**: If you're using PostHog feature flags with our SDKs, exposures are tracked automatically. When you call `getFeatureFlag()` or read a flag from a server-side snapshot with an accessor like `getFlag()`, `get_flag()`, or `GetFlag()`, PostHog sends a `$feature_flag_called` event with all the necessary properties. You don't need to do anything extra.
+**For most users**: If you're using PostHog feature flags with our SDKs, exposures are tracked automatically. When you call `getFeatureFlag()` or read a flag from a server-side `evaluateFlags` result, PostHog sends a `$feature_flag_called` event with all the necessary properties. You don't need to do anything extra.
 
 **Technical details**: PostHog considers a user exposed when it receives a `$feature_flag_called` event containing:
 - The property `$feature_flag` matching your experiment's flag key
