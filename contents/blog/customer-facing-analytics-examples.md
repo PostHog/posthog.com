@@ -19,11 +19,7 @@ seo:
     metaDescription: '5 customer-facing analytics examples worth stealing, plus how to ship your own in PostHog without a data team or custom APIs.'
 ---
 
-<<<<<<< HEAD
-Customer-facing analytics are the stats you show your users, not your internal team. Users' usage dashboard, a "23 people are viewing this right now" counter on a product page, a public leaderboard, or how big your support queue is.
-=======
 Customer-facing analytics are the stats you show your users, not your internal team. A users' usage dashboard, a "23 people are viewing this right now" counter on a product page, a public leaderboard, or how big your support queue is.
->>>>>>> 89ba3ac02919f11fe4ca64f5e9715d1bd595209b
 
 Under the hood, a lot of these are powered by the same kind of infrastructure: a fast, authenticated API layer that takes product data and ships it straight into the place users will see it. At PostHog, we call this [Endpoints](/endpoints).
 
