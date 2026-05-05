@@ -19,7 +19,11 @@ seo:
     metaDescription: '5 customer-facing analytics examples worth stealing, plus how to ship your own in PostHog without a data team or custom APIs.'
 ---
 
+<<<<<<< HEAD
+Customer-facing analytics are the stats you show your users, not your internal team. Users' usage dashboard, a "23 people are viewing this right now" counter on a product page, a public leaderboard, or how big your support queue is.
+=======
 Customer-facing analytics are the stats you show your users, not your internal team. A users' usage dashboard, a "23 people are viewing this right now" counter on a product page, a public leaderboard, or how big your support queue is.
+>>>>>>> 89ba3ac02919f11fe4ca64f5e9715d1bd595209b
 
 Under the hood, a lot of these are powered by the same kind of infrastructure: a fast, authenticated API layer that takes product data and ships it straight into the place users will see it. At PostHog, we call this [Endpoints](/endpoints).
 
@@ -34,11 +38,11 @@ But, rather than telling you what customer-facing analytics is, we’re going to
 
 ![Vercel's embedded analytics dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/vercel_dashboard_5e867b436f.png)
 
-### Why it works 
+### What to steal  
 
-The detail Vercel has [talked about publicly](https://vercel.com/changelog/new-usage-dashboard-for-pro-customers) is latency: data shows up "seconds after enabling Analytics, not 30 minutes." They treat customer analytics with the same latency expectations as the rest of the product. 
+Treat customer-facing analytics with the same latency expectations as the rest of the product. Vercel made the design choice for their Web Analytics so that data shows up "[seconds after enabling Analytics, not 30 minutes](https://vercel.com/changelog/new-usage-dashboard-for-pro-customers)". 
 
-If you've ever hit refresh on a dashboard wondering whether the numbers are actually live or 20 minutes stale, you know why this matters. Customer-facing analytics lose most of their value the moment users stop trusting the numbers are current.
+Customer-facing analytics live or die on whether users trust the numbers are fresh — the moment they stop trusting, the dashboard quietly becomes wallpaper.
 
 Good news if you're a PostHog user: We just launched a real-time dashboard for [Web Analytics](/web-analytics). 
 
@@ -48,9 +52,9 @@ Booking.com has made a science of turning live activity into social proof: "23 p
 
 ![Booking.com using Endpoints to create scarcity](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/booking_com_931a76829b.png)
 
-### Why it works
+### What to steal
 
-The analytics aren't a side feature, industry analysts have credited similar "shopping activation" widgets with [lifting direct bookings by close to 50%](https://blog.guestcentric.com/how-hotels-can-leverage-social-proof-to-increase-direct-bookings/). Booking.com figured out that the most valuable customer-facing analytics often aren't in a dashboard. They're in the product where someone is deciding whether to buy.
+Put the analytics where the decision happens, not in a dashboard. Booking's live counters aren't a side feature, they're load-bearing conversion copy, and industry analysts have credited similar "shopping activation" widgets with [lifting direct bookings by close to 50%](https://blog.guestcentric.com/how-hotels-can-leverage-social-proof-to-increase-direct-bookings/). Audit your purchase flow for places a live number would move inventory, demand, recent activity, and put it inline. Real-time data that would matter to a buyer right now is wasted signal the moment you bury it two clicks deep in a reports tab.
 
 ## 3. Product Hunt: Making leaderboards front and centre
 
@@ -58,9 +62,9 @@ The analytics aren't a side feature, industry analysts have credited similar "sh
 
 ![ProductHunt's homepage leaderboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/producthunt_6ca9a9dc9e.png)
 
-### Why it works
+### What to steal
 
-The leaderboard is both the recommendation feed for readers and the scoreboard for makers. The more people check it, the more valuable ranking on it becomes. Leaderboards get dismissed as a gimmick, but what Product Hunt did was turn a database of upvotes into the product.
+Make your analytics two-sided. If you're sitting on ranking data , you have a potential product. Leaderboards get dismissed as a gimmick, but Product Hunt turned a database of upvotes into the homepage and let it do two jobs at once: recommendation feed for readers, scoreboard for makers. The more people check it, the more valuable ranking on it becomes.
 
 ## 4. HogHero: Augmenting support data with user information
 
@@ -70,9 +74,9 @@ When a customer opens a support ticket, HogHero shows our support rep the recent
 
 ![PostHog HogHero dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/posthog_hoghero_877cc43b1c.png)
 
-### Why it works 
+### What to steal
 
-Our support reps don't have to waste time jumping between Zendesk and our analytics tool. The Endpoint exposes a specific piece of data to the user so they don't have to waste time getting lost in data chaos.
+Customer-facing analytics doesn't have to mean end-customer-facing. The fastest way to make an internal tool feel magical is to put the right data inside the app people are already in, not build yet another place they have to log into. Our reps don't have to switch tabs to PostHog and rebuild the customer's context, the conversation history is just there, scoped to that customer, the moment the ticket opens.
 
 ## 5. GitHub's contribution graph: Building a community through user analytics
 
@@ -80,11 +84,9 @@ The green-square contribution graph on every GitHub profile is one of the most-c
 
 ![One PostHogger's GitHub wrapped](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/git_wrapped_Gilbert09_81a0301f06.png)
 
-### Why it works
+### What to steal
 
-Not only does it gamify engagement, it's spawned an entire third-party ecosystem of "[GitHub Wrapped](https://git-wrapped.com/)" tools. These are built by people who want to share their streaks which creates a viral community moment that's great for GitHub’s brand. 
-
-Once you expose customer-facing analytics, users will ask for more and some of them will just go build it themselves.
+Once you expose customer-facing analytics, users will ask for more – and some will just build it themselves. The contribution graph started life as a visualization and ended up as identity, habit-loop, and an entire third-party ecosystem of [GitHub Wrapped](https://git-wrapped.com/) tools. These are built by people who want to share their streaks which creates a viral community moment that's great for GitHub’s brand. 
 
 ## The principles to make your customer-facing analytics a success
 
