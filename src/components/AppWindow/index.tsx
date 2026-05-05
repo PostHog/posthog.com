@@ -60,9 +60,17 @@ const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean 
 
 const snapThreshold = -50
 
-// Pairs of light/dark mesh-gradient classes (defined in tailwind.config.js).
-// Each variant must be a full literal string so Tailwind's JIT picks it up.
-export const MESH_VARIANTS = ['bg-mesh-green-light dark:bg-mesh-green-dark']
+// Light/dark mesh-gradient class pairs (defined in tailwind.config.js).
+// Each value must be a full literal string so Tailwind's JIT picks it up.
+export const MESH_VARIANTS = {
+    green: 'bg-mesh-green-light dark:bg-mesh-green-dark',
+    red: 'bg-mesh-red-light dark:bg-mesh-red-dark',
+    yellow: 'bg-mesh-yellow-light dark:bg-mesh-yellow-dark',
+    blue: 'bg-mesh-blue-light dark:bg-mesh-blue-dark',
+    purple: 'bg-mesh-purple-light dark:bg-mesh-purple-dark',
+} as const
+
+export type MeshColor = keyof typeof MESH_VARIANTS
 
 const PageModal = ({ children }: { children: React.ReactNode }) => {
     const [open, setOpen] = useState(true)
@@ -145,7 +153,7 @@ const WindowContainer = ({ children, closing }: { children: React.ReactNode; clo
 }
 
 export default function AppWindow({ item, chrome = true }: { item: AppWindowType; chrome?: boolean }) {
-    const meshVariant = useMemo(() => MESH_VARIANTS[Math.floor(Math.random() * MESH_VARIANTS.length)], [])
+    const meshVariant = MESH_VARIANTS[item.appSettings?.mesh ?? 'green']
     const { addToast, toasts } = useToast()
     const {
         minimizeWindow,
