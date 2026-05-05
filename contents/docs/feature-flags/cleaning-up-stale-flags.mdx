@@ -119,6 +119,7 @@ Search your codebase for the flag key as a string. Common SDK patterns:
 | Go | `EvaluateFlags(...)` followed by `flags.IsEnabled("key")` or `flags.GetFlag("key")`, plus older `IsFeatureEnabled("key")` and `GetFeatureFlag("key")` calls |
 | Java | `evaluateFlags(...)` followed by `flags.isEnabled("key")` or `flags.getFlag("key")`, plus older `isFeatureEnabled("key")` and `getFeatureFlag("key")` calls |
 | .NET | `EvaluateFlagsAsync(...)` followed by `flags.IsEnabled("key")` or `flags.GetFlag("key")`, plus older `IsFeatureEnabledAsync("key")` and `GetFeatureFlagAsync("key")` calls |
+| Rust | `evaluate_flags(...)` followed by `flags.is_enabled("key")` or `flags.get_flag("key")`, plus older `is_feature_enabled("key")` and `get_feature_flag("key")` calls |
 | PHP | `evaluateFlags(...)` followed by `$flags->isEnabled('key')` or `$flags->getFlag('key')`, plus older `isFeatureEnabled('key')` and `getFeatureFlag('key')` calls |
 | Other SDKs | Search for the flag key as a string literal |
 
