@@ -16,9 +16,9 @@ Once you've created your experiment in PostHog, the next step is to add your cod
 
 In your experiment, each user is randomly assigned to a variant (usually either 'control' or 'test'). To check which variant a user has been assigned to, fetch the experiment feature flag. You can then customize their experience based on the value in the feature flag:
 
-<CalloutBox icon="IconWarning" title="Only getFeatureFlag() counts as an exposure" type="caution">
+<CalloutBox icon="IconWarning" title="Only flag value access counts as an exposure" type="caution">
 
-You must use `getFeatureFlag()` (or its framework equivalent like `useFeatureFlagVariantKey()`) to check variants. Other methods like `getAllFlags()`, `getFeatureFlags()`, or `getFeatureFlagPayload()` alone do **not** record an [exposure event](/docs/experiments/exposures). Users evaluated with those methods won't be included in your experiment results.
+You must use `getFeatureFlag()` (or its framework equivalent like `useFeatureFlagVariantKey()`) to check variants. In server-side SDKs, use the `evaluateFlags` API to access flag values via `getFlag()` / `get_flag()`. Other methods like `getAllFlags()`, `getFeatureFlags()`, or payload-only accessors do **not** record an [exposure event](/docs/experiments/exposures). Users evaluated with those methods won't be included in your experiment results.
 
 </CalloutBox>
 
