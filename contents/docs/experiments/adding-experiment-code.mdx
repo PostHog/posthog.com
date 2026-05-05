@@ -175,9 +175,10 @@ if ("variant-name".equals(variant)) {
 ```
 
 ```dotnet
-var featureFlag = await posthog.GetFeatureFlagAsync("experiment-feature-flag-key", "user_distinct_id");
+var flags = await posthog.EvaluateFlagsAsync("user_distinct_id");
+var variant = flags.GetFlag("experiment-feature-flag-key")?.VariantKey;
 
-if (featureFlag is { VariantKey: "variant-name" })
+if (variant == "variant-name")
 {
     // Do something
 }

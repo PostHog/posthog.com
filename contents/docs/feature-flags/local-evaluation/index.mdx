@@ -202,28 +202,30 @@ $flagValue = $flags->getFlag('flag-key');
 ```
 
 ```csharp
-await posthog.GetFeatureFlagAsync(
-    "flag-key",
+var flags = await posthog.EvaluateFlagsAsync(
     "distinct_id_of_the_user",
-    options: new FeatureFlagOptions
+    options: new AllFeatureFlagsOptions
     {
         PersonProperties = new()
         {
-            ["property_name"] = "value"
+            ["property_name"] = "value",
         },
         Groups = new()
         {
             new Group("your_group_type", "your_group_id")
             {
-                ["group_property_name"] = "value"
+                ["group_property_name"] = "value",
             },
             new Group("another_group_type", "another_group_id")
             {
-                ["group_property_name"] = "another value"
-            }
-        }
+                ["group_property_name"] = "another value",
+            },
+        },
+        OnlyEvaluateLocally = false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
     }
 );
+
+var flagValue = flags.GetFlag("flag-key");
 ```
 
 ```java
