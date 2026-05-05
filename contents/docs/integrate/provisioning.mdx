@@ -69,6 +69,33 @@ Subsequent requests reuse the cached version and refresh it in the background ba
 
 Once your metadata document is live, you can start calling the API. The first request auto-registers your app and returns HTTP 202; retry after a few seconds.
 
+### Link your partner app to a PostHog organization (optional)
+
+By default, a CIMD partner app is unverified and capped at 10 account requests per hour.
+You can link the app to a PostHog organization with a verification token to raise that to 100/hour and surface the partner integration to that org's admins.
+
+1. In PostHog, go to **Organization settings → CIMD verification tokens** and click **Create token**. Copy the `phvt_…` value — it's only shown once.
+2. Add a `posthog_verification_token` field to your CIMD metadata document:
+
+   ```json
+   {
+     "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+     "client_name": "Your App Name",
+     "redirect_uris": ["https://yourapp.com/callbacks/posthog"],
+     "logo_uri": "https://yourapp.com/logo.png",
+     "token_endpoint_auth_method": "none",
+     "grant_types": ["authorization_code"],
+     "response_types": ["code"],
+     "posthog_verification_token": "phvt_..."
+   }
+   ```
+
+3. The next time PostHog refreshes the metadata document, the app is linked to the matching organization and the rate limit is bumped.
+
+The token is only used to prove ownership of the partner app — it isn't sent on API requests.
+You can rotate or revoke a token at any time from the same settings page.
+Revocation clears the link on the next metadata refresh, so a leaked or stale token can't keep an app linked to your org.
+
 ## API reference
 
 All endpoints are on `https://us.posthog.com` (US region) or `https://eu.posthog.com` (EU region).
@@ -402,7 +429,11 @@ All provisioning endpoints are rate limited.
 - 100 new client registrations per hour globally
 - 5 new client registrations per domain per hour
 
-**Account requests** (per partner, per hour): defaults to 10/hour for new CIMD partners. Contact PostHog to increase this for higher-volume integrations.
+**Account requests** (per partner, per hour):
+- 10/hour for unverified CIMD partners
+- 100/hour for partners linked to a PostHog organization via a [verification token](#link-your-partner-app-to-a-posthog-organization-optional)
+
+Contact PostHog to increase this further for higher-volume integrations.
 
 ## Full example
 
