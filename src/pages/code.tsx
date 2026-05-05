@@ -1369,6 +1369,14 @@ function FAQ() {
 // Page
 // ─────────────────────────────────────────────
 
+export function DownloadButton() {
+    return (
+        <div className="py-6">
+            <WaitlistForm />
+        </div>
+    )
+}
+
 export default function CodePage() {
     const [postHogWayDone, setPostHogWayDone] = useState(false)
 
