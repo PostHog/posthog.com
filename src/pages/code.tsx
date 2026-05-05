@@ -666,17 +666,13 @@ function HeroSection() {
                             <WaitlistForm autoFocus />
                         ) : (
                             <>
-                                <div className="flex items-center gap-3">
+                                <div className="flex flex-wrap items-center gap-2">
                                     <OSButton variant="primary" size="lg" onClick={() => setShowForm(true)}>
                                         Join the waitlist
                                     </OSButton>
-                                    <Link
-                                        to="/docs/posthog-code"
-                                        className="group inline-flex items-center gap-0.5 text-sm font-semibold text-red dark:text-yellow hover:underline"
-                                    >
+                                    <OSButton variant="secondary" size="lg" asLink to="/docs/posthog-code">
                                         Read the docs
-                                        <IconArrowUpRight className="size-4 inline-block" />
-                                    </Link>
+                                    </OSButton>
                                 </div>
                                 <p className="text-sm text-secondary mt-4">Test drives begin Spring 2026</p>
                             </>
