@@ -18,7 +18,7 @@ import LogsInstallationPlatforms from './installation/_snippets/installation-pla
 
 PostHog Logs works with any OpenTelemetry client. No PostHog-specific packages required. Use the OTel SDKs you already have, point them at PostHog's HTTP endpoint, and drop in your project token.
 
-On the frontend, our [JavaScript web SDK](/docs/logs/installation/javascript) includes first-class logging support. 
+On the frontend, our [JavaScript web SDK](/docs/logs/installation/javascript) and [React Native SDK](/docs/logs/installation/react-native) include first-class logging support. 
 
 Follow the guides below to set up your logging client:
 
@@ -82,6 +82,26 @@ Once your logs are flowing into PostHog, you can:
 
 <CallToAction type="primary" to="/docs/logs/search">
   Learn how to search logs
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Set up alerts"
+  subtitle="Recommended"
+  icon="IconBell"
+>
+
+Get notified when your logs match specific conditions. Create alerts to:
+
+- **Monitor error spikes** — Alert when error log counts exceed a threshold
+- **Track specific services** — Watch for issues in critical services
+- **Filter by attributes** — Set up granular alerts based on log attributes
+
+Configure alerting rules in your project settings to stay on top of issues as they happen.
+
+<CallToAction type="primary" to="/docs/logs/alerts">
+  Configure log alerts
 </CallToAction>
 
 </QuestLogItem>

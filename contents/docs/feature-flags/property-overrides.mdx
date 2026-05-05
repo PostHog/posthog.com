@@ -485,23 +485,24 @@ const flagValue = await client.getFeatureFlag(
 ```
 
 ```python
-flag_value = posthog.get_feature_flag(
-    'feature-flag-key',
-    'user-distinct-id',
+flags = posthog.evaluate_flags(
+    "user-distinct-id",
     person_properties={
-        'plan': 'enterprise',
-        'company_size': 'large'
+        "plan": "enterprise",
+        "company_size": "large",
     },
     groups={
-        'company': 'company-123'
+        "company": "company-123",
     },
     group_properties={
-        'company': {
-            'plan': 'enterprise',
-            'employee_count': 500
-        }
-    }
+        "company": {
+            "plan": "enterprise",
+            "employee_count": 500,
+        },
+    },
 )
+
+flag_value = flags.get_flag("feature-flag-key")
 ```
 
 ```php

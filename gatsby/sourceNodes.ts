@@ -173,15 +173,16 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         if (endpoint.items.length > maxEndpointItems) {
             const chunks = []
             for (let i = 0; i < endpoint.items.length; i += maxEndpointItems) {
-                const next =
-                    i + maxEndpointItems < endpoint.items.length &&
-                    `${endpoint.name}-${Math.floor(i / maxEndpointItems) + 2}`
-                const name = i === 0 ? endpoint.name : `${endpoint.name}-${Math.floor(i / maxEndpointItems) + 1}`
+                const pos = Math.floor(i / maxEndpointItems)
+                const next = i + maxEndpointItems < endpoint.items.length && `${endpoint.name}-${pos + 2}`
+                const name = pos === 0 ? endpoint.name : `${endpoint.name}-${pos + 1}`
+                const previous = pos === 0 ? null : pos === 1 ? endpoint.name : `${endpoint.name}-${pos}`
                 const chunk = {
                     ...endpoint,
                     name,
                     items: endpoint.items.slice(i, i + maxEndpointItems),
                     next,
+                    previous,
                 }
                 chunks.push(chunk)
             }
@@ -205,6 +206,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
             name: endpoint.name,
             nextURL: endpoint.next ? '/docs/api/' + endpoint.next.replace(/_/g, '-') : null,
+            previousURL: (endpoint as any).previous
+                ? '/docs/api/' + (endpoint as any).previous.replace(/_/g, '-')
+                : null,
         }
         createNode(node)
     })
@@ -1086,6 +1090,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     const fetchAchievements = async () => {
         const query = qs.stringify({
             populate: ['icon', 'achievement_group.achievements.icon'],
+            publicationState: 'preview',
         })
         const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements?${query}`).then((res) =>
             res.json()
@@ -1106,7 +1111,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     const fetchAchievementGroups = async () => {
         const query = qs.stringify({
-            populate: ['achievements.icon'],
+            populate: ['achievements.icon', 'icon'],
+            publicationState: 'preview',
         })
         const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievement-groups?${query}`).then(
             (res) => res.json()
