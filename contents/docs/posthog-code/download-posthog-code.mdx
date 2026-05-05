@@ -1,0 +1,44 @@
+---
+title: Download PostHog Code
+---
+
+import { DownloadButton } from '../../../src/pages/code'
+import List from 'components/List'
+
+PostHog Code will be available for download in Spring 2026.
+
+<div className="max-w-lg @container bg-blue/10 border border-blue rounded-md pb-8 pt-0 px-8 shadow-xl">
+  <DownloadButton />
+</div>
+
+## Downloads
+
+<List
+    className="grid gap-4 grid-cols-1 @md:grid-cols-2 not-prose"
+    items={[
+        {
+            label: "macOS",
+            url: "#",
+            icon: "IconApple",
+            badge: "Coming soon",
+            description: "Official app",
+        },
+        {
+            label: "Windows",
+            url: "#",
+            icon: "IconLaptop",
+            badge: "Coming soon",
+            description: "Community maintained",
+        },
+    ]}
+/>
+
+## Open source
+
+PostHog Code is open source under the MIT license. The full source code lives in the [PostHog/code GitHub repo](https://github.com/PostHog/code). More about the license and contribution guidelines in the [PostHog Code open source](/docs/posthog-code/open-source) page.
+
+## Platform availability
+
+The macOS app is maintained by the PostHog Code team. The Windows app is community maintained and reviewed by the PostHog Code team.
+
+For bugs, search [open GitHub issues](https://github.com/PostHog/code/issues) first. If nothing matches, [open a new issue](https://github.com/PostHog/code/issues/new) with your OS, app version, and steps to reproduce.

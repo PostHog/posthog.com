@@ -103,6 +103,9 @@ To force specific users or audiences to receive specific variants (and their ass
 
 This specifies the conditions a user must meet to access the feature flag and receive a value. Release conditions do not apply to remote config flags.
 
+
+> **Tip:** You can configure [default release conditions](/docs/feature-flags/project-wide-settings#default-release-conditions) in your project settings to pre-populate release conditions when creating new flags. These defaults aren't enforced – you can modify or remove them during flag creation. Default release conditions don't apply to remote config flags.
+
 Condition sets are evaluated from **top to bottom**, and the **first** condition set that matches will be used. A condition matches when all property filters pass and the target falls within the rollout percentage.
 
 By default, release conditions **match by user**, meaning the flag is evaluated based on your distinct ID. You can change this using the **Match by** dropdown:
@@ -121,6 +124,8 @@ Rollout percentages support decimal values with up to two decimal places of prec
 - If you capture identified events, you can target based on [person properties](/docs/product-analytics/person-properties) and [cohorts](/docs/data/cohorts).
 
 - If you enabled group analytics, you can target based on [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties).
+
+When you target a person property of `distinct_id equals`, the value field searches persons by name, email, or distinct_id, so you don't need to paste a raw ID. A person with multiple distinct_ids – for example an anonymous device ID plus an identified email – appears as a separate option per ID, so you can pick the specific one the SDK captures under. The stored filter value is still the literal distinct_id, so flag evaluation is unchanged.
 
 <ProductScreenshot
     imageLight={ReleaseConditionLight}
@@ -253,12 +258,6 @@ If you're not sure which runtime to use, you can use the following guidelines:
    - When you're unsure or need maximum flexibility
 
 ### Evaluation contexts (optional)
-
-<CalloutBox icon="IconWarning" title="Evaluation contexts are in alpha release" type="caution">
-
-Evaluation contexts are currently in alpha release. This feature may not be available in your PostHog instance yet. Contact support if you'd like early access.
-
-</CalloutBox>
 
 Evaluation contexts control where and when a feature flag evaluates at runtime. They have their own dedicated section on the feature flag page, separate from tags.
 

@@ -1199,6 +1199,24 @@ const appSettings: AppSettings = {
         size: {
             min: {
                 width: 500,
+                height: 650,
+            },
+            max: {
+                width: 500,
+                height: 650,
+            },
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
+    '/community/reputation': {
+        size: {
+            min: {
+                width: 500,
                 height: 1000,
             },
             max: {

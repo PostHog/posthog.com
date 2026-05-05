@@ -518,44 +518,6 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Brand & design',
-        url: '',
-        children: [
-            {
-                name: 'Overview',
-                url: '/handbook/brand/overview',
-            },
-            {
-                name: 'Brand strategy',
-                url: '/handbook/strategy/brand',
-            },
-            {
-                name: 'Art requests',
-                url: '/handbook/brand/art-requests',
-            },
-            {
-                name: 'Logos, brand, and hedgehogs',
-                url: '/handbook/company/brand-assets',
-            },
-            {
-                name: 'Style guide',
-                url: '/handbook/brand/style-guide',
-            },
-            {
-                name: 'Our design philosophy',
-                url: '/handbook/brand/philosophy',
-            },
-            {
-                name: 'Product design for engineers',
-                url: '/handbook/engineering/product-design',
-            },
-            {
-                name: 'Product design process',
-                url: '/handbook/brand/process',
-            },
-        ],
-    },
-    {
         name: 'Content',
         url: '',
         children: [
@@ -578,6 +540,10 @@ export const handbookSidebar = [
                     {
                         name: 'YouTube',
                         url: '/handbook/content/youtube',
+                    },
+                    {
+                        name: 'Screen recording guide',
+                        url: '/handbook/content/screen-recording-guide',
                     },
                 ],
             },
@@ -717,6 +683,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/visiting-customers',
                     },
                     {
+                        name: 'Customer comms as an engineer',
+                        url: '/handbook/engineering/customer-comms',
+                    },
+                    {
                         name: 'Writing docs (as an engineer)',
                         url: '/handbook/engineering/writing-docs',
                     },
@@ -807,6 +777,10 @@ export const handbookSidebar = [
                     {
                         name: 'Overview',
                         url: '/handbook/engineering/sdks',
+                    },
+                    {
+                        name: 'Guidelines',
+                        url: '/handbook/engineering/sdks/guidelines',
                     },
                     {
                         name: 'Support rotation',
@@ -961,6 +935,50 @@ export const handbookSidebar = [
             {
                 name: 'Tech talks',
                 url: '/handbook/engineering/tech-talks',
+            },
+            {
+                name: 'Product design',
+                url: '',
+                children: [
+                    {
+                        name: 'Product design for engineers',
+                        url: '/handbook/engineering/product-design',
+                    },
+                    {
+                        name: 'Product design process',
+                        url: '/handbook/engineering/product-design-process',
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        name: 'Graphics',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/brand/overview',
+            },
+            {
+                name: 'Brand strategy',
+                url: '/handbook/strategy/brand',
+            },
+            {
+                name: 'Art requests',
+                url: '/handbook/brand/art-requests',
+            },
+            {
+                name: 'Logos, brand, and hedgehogs',
+                url: '/handbook/company/brand-assets',
+            },
+            {
+                name: 'Style guide',
+                url: '/handbook/brand/style-guide',
+            },
+            {
+                name: 'Our design philosophy',
+                url: '/handbook/brand/philosophy',
             },
         ],
     },
@@ -1125,102 +1143,6 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'PostHog.com',
-        url: '',
-        children: [
-            {
-                name: 'Overview',
-                url: '/handbook/engineering/posthog-com/overview',
-            },
-            {
-                name: 'Developing the website',
-                url: '/handbook/engineering/posthog-com/developing-the-website',
-            },
-            {
-                name: 'How PostHog.com works',
-                url: '/handbook/engineering/posthog-com/how-posthog-website-works',
-            },
-            {
-                name: 'Designing PostHog.com',
-                url: '/handbook/brand/designing-posthog-website',
-            },
-            {
-                name: 'Technical architecture',
-                url: '/handbook/engineering/posthog-com/technical-architecture',
-            },
-            {
-                name: 'MDX setup',
-                url: '/handbook/engineering/posthog-com/mdx-setup',
-            },
-            {
-                name: 'MDX components',
-                url: '/handbook/engineering/posthog-com/markdown',
-            },
-            {
-                name: 'Uploading assets',
-                url: '/handbook/engineering/posthog-com/assets',
-            },
-            {
-                name: 'Merch store',
-                url: '/handbook/engineering/posthog-com/merch-store',
-            },
-            {
-                name: 'Posting a new job',
-                url: '/handbook/engineering/posthog-com/jobs',
-            },
-            {
-                name: 'Managing cool tech jobs',
-                url: '/handbook/engineering/posthog-com/cool-tech-jobs',
-            },
-            {
-                name: 'Managing small teams',
-                url: '/handbook/engineering/posthog-com/small-teams',
-            },
-            {
-                name: 'Adding a team member',
-                url: '/handbook/engineering/posthog-com/add-team-member',
-            },
-            {
-                name: 'Managing the company roadmap',
-                url: '/handbook/engineering/posthog-com/roadmap',
-            },
-            {
-                name: 'Changelog entries',
-                url: '/handbook/engineering/posthog-com/changelog',
-            },
-            {
-                name: 'Custom presentations',
-                url: '/handbook/engineering/posthog-com/presentations',
-            },
-            {
-                name: 'Product & feature comparisons',
-                url: '/handbook/engineering/posthog-com/product-comparisons',
-            },
-            {
-                name: 'Editing API docs',
-                url: '/handbook/engineering/posthog-com/api-docs',
-            },
-            {
-                name: 'Community',
-                url: '',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/community',
-                    },
-                    {
-                        name: 'Answering community questions',
-                        url: '/handbook/community/questions',
-                    },
-                    {
-                        name: 'Profiles',
-                        url: '/handbook/community/profiles',
-                    },
-                ],
-            },
-        ],
-    },
-    {
         name: 'Product',
         url: '',
         children: [
@@ -1267,38 +1189,42 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Support',
+        name: 'RevOps',
         url: '',
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/support/support-team',
+                url: '/handbook/growth/revops/overview',
             },
             {
-                name: 'Customer support',
-                url: '/handbook/support/customer-support',
+                name: 'Revenue adjustments',
+                url: '/handbook/growth/revops/revenue-adjustments',
             },
             {
-                name: 'Support team incident response',
-                url: '/handbook/support/support-incident-response',
+                name: 'Retention metrics',
+                url: '/handbook/growth/revops/retention-metrics',
             },
             {
-                name: 'How we work',
+                name: 'Lifecycle analysis',
+                url: '/handbook/growth/revops/lifecycle-analysis',
+            },
+            {
+                name: 'SalesOps',
                 url: '',
                 children: [
                     {
-                        name: 'Technical support SMEs',
-                        url: '/handbook/support/support-smes',
+                        name: 'Refunds',
+                        url: '/handbook/growth/sales/refunds',
                     },
                     {
-                        name: 'Support zero weeks',
-                        url: '/handbook/support/support-zero',
+                        name: 'Lead assignment during time off',
+                        url: '/handbook/growth/revops/lead-assignment-ooo',
+                    },
+                    {
+                        name: 'Giving credits to customers',
+                        url: '/handbook/growth/revops/credits',
                     },
                 ],
-            },
-            {
-                name: 'Troubleshooting tips',
-                url: '/handbook/support/troubleshooting-tips',
             },
         ],
     },
@@ -1325,6 +1251,10 @@ export const handbookSidebar = [
                     {
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
+                    },
+                    {
+                        name: 'CSM and TAM dual coverage',
+                        url: '/handbook/growth/sales/csm-tam-overlay-coverage',
                     },
                     {
                         name: 'Why buy PostHog',
@@ -1369,6 +1299,10 @@ export const handbookSidebar = [
                             {
                                 name: 'Expansion strategies',
                                 url: '/handbook/growth/sales/expansion-strategies',
+                            },
+                            {
+                                name: 'PLG lead qualification',
+                                url: '/handbook/growth/sales/product-led-lead-qualification',
                             },
                             {
                                 name: 'TAM Excellence',
@@ -1670,40 +1604,132 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'RevOps',
+        name: 'Support',
         url: '',
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/growth/revops/overview',
+                url: '/handbook/support/support-team',
             },
             {
-                name: 'Revenue adjustments',
-                url: '/handbook/growth/revops/revenue-adjustments',
+                name: 'Customer support',
+                url: '/handbook/support/customer-support',
             },
             {
-                name: 'Retention metrics',
-                url: '/handbook/growth/revops/retention-metrics',
+                name: 'Support team incident response',
+                url: '/handbook/support/support-incident-response',
             },
             {
-                name: 'Lifecycle analysis',
-                url: '/handbook/growth/revops/lifecycle-analysis',
-            },
-            {
-                name: 'SalesOps',
+                name: 'How we work',
                 url: '',
                 children: [
                     {
-                        name: 'Refunds',
-                        url: '/handbook/growth/sales/refunds',
+                        name: 'Technical support SMEs',
+                        url: '/handbook/support/support-smes',
                     },
                     {
-                        name: 'Lead assignment during time off',
-                        url: '/handbook/growth/revops/lead-assignment-ooo',
+                        name: 'Support zero weeks',
+                        url: '/handbook/support/support-zero',
+                    },
+                ],
+            },
+            {
+                name: 'Troubleshooting tips',
+                url: '/handbook/support/troubleshooting-tips',
+            },
+        ],
+    },
+    {
+        name: 'Website',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/engineering/posthog-com/overview',
+            },
+            {
+                name: 'Developing the website',
+                url: '/handbook/engineering/posthog-com/developing-the-website',
+            },
+            {
+                name: 'How PostHog.com works',
+                url: '/handbook/engineering/posthog-com/how-posthog-website-works',
+            },
+            {
+                name: 'Designing PostHog.com',
+                url: '/handbook/brand/designing-posthog-website',
+            },
+            {
+                name: 'Technical architecture',
+                url: '/handbook/engineering/posthog-com/technical-architecture',
+            },
+            {
+                name: 'MDX setup',
+                url: '/handbook/engineering/posthog-com/mdx-setup',
+            },
+            {
+                name: 'MDX components',
+                url: '/handbook/engineering/posthog-com/markdown',
+            },
+            {
+                name: 'Uploading assets',
+                url: '/handbook/engineering/posthog-com/assets',
+            },
+            {
+                name: 'Merch store',
+                url: '/handbook/engineering/posthog-com/merch-store',
+            },
+            {
+                name: 'Posting a new job',
+                url: '/handbook/engineering/posthog-com/jobs',
+            },
+            {
+                name: 'Managing cool tech jobs',
+                url: '/handbook/engineering/posthog-com/cool-tech-jobs',
+            },
+            {
+                name: 'Managing small teams',
+                url: '/handbook/engineering/posthog-com/small-teams',
+            },
+            {
+                name: 'Adding a team member',
+                url: '/handbook/engineering/posthog-com/add-team-member',
+            },
+            {
+                name: 'Managing the company roadmap',
+                url: '/handbook/engineering/posthog-com/roadmap',
+            },
+            {
+                name: 'Changelog entries',
+                url: '/handbook/engineering/posthog-com/changelog',
+            },
+            {
+                name: 'Custom presentations',
+                url: '/handbook/engineering/posthog-com/presentations',
+            },
+            {
+                name: 'Product & feature comparisons',
+                url: '/handbook/engineering/posthog-com/product-comparisons',
+            },
+            {
+                name: 'Editing API docs',
+                url: '/handbook/engineering/posthog-com/api-docs',
+            },
+            {
+                name: 'Community',
+                url: '',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/community',
                     },
                     {
-                        name: 'Giving credits to customers',
-                        url: '/handbook/growth/revops/credits',
+                        name: 'Answering community questions',
+                        url: '/handbook/community/questions',
+                    },
+                    {
+                        name: 'Profiles',
+                        url: '/handbook/community/profiles',
                     },
                 ],
             },
@@ -3348,6 +3374,12 @@ export const docsMenu = {
                     name: 'Getting started',
                 },
                 {
+                    name: 'Start here',
+                    url: '/docs/product-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'purple',
+                },
+                {
                     name: 'Installation',
                     url: '/docs/product-analytics/installation',
                     icon: 'IconBook',
@@ -3593,6 +3625,12 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Pricing',
+                    url: '/docs/product-analytics/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'purple',
+                },
+                {
                     name: 'Cutting costs',
                     url: '/docs/product-analytics/cutting-costs',
                     icon: 'IconPiggyBank',
@@ -3688,6 +3726,16 @@ export const docsMenu = {
                     url: '/docs/web-analytics/dashboard',
                     icon: 'IconDashboard',
                     color: 'orange',
+                },
+                {
+                    name: 'Live',
+                    url: '/docs/web-analytics/live',
+                    icon: 'IconLive',
+                    color: 'red',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-red/10 !text-red !dark:text-white !dark:bg-red/50',
+                    },
                 },
                 {
                     name: 'Conversion goals',
@@ -3913,6 +3961,12 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Pricing',
+                    url: '/docs/session-replay/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'purple',
+                },
+                {
                     name: 'Tutorials and guides',
                     url: '/docs/session-replay/tutorials',
                     icon: 'IconGraduationCap',
@@ -4056,6 +4110,13 @@ export const docsMenu = {
                     url: '/docs/feature-flags/best-practices',
                     icon: 'IconBolt',
                     color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Clean up stale flags',
+                    url: '/docs/feature-flags/cleaning-up-stale-flags',
+                    icon: 'IconFilter',
+                    color: 'salmon',
                     featured: true,
                 },
                 {
@@ -5202,6 +5263,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'GitHub integration',
+                    url: '/docs/support/github',
+                    icon: 'IconGitHub',
+                    color: 'orange',
+                },
+                {
                     name: 'Workflow automation',
                     url: '/docs/support/workflows',
                     icon: 'IconDecisionTree',
@@ -5746,7 +5813,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Prompts as a skills store',
+                    name: 'Skills store',
                     url: '/docs/llm-analytics/skills-store',
                     icon: 'IconStack',
                     color: 'blue',
@@ -6289,6 +6356,141 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'PostHog Code',
+            icon: 'IconCoffee',
+            color: 'brown',
+            url: '/docs/posthog-code/quick-tour',
+            description: 'AI coding environment with deep PostHog integration.',
+            children: [
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Quick Tour',
+                    url: '/docs/posthog-code/quick-tour',
+                    icon: 'IconRewindPlay',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Download',
+                    url: '/docs/posthog-code/download-posthog-code',
+                    icon: 'IconDownload',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Features',
+                },
+                {
+                    name: 'Any model and any harness',
+                    url: '/docs/posthog-code/use-any-model-and-harness',
+                    icon: 'IconGraduationCap',
+                    color: 'green',
+                },
+                {
+                    name: 'Inbox',
+                    url: '/docs/posthog-code/inbox',
+                    icon: 'IconInbox',
+                    color: 'yellow',
+                    children: [
+                        { name: 'Overview', url: '/docs/posthog-code/inbox' },
+                        { name: 'Sources', url: '/docs/posthog-code/inbox/sources' },
+                        { name: 'Research', url: '/docs/posthog-code/inbox/research' },
+                        { name: 'Implementation', url: '/docs/posthog-code/inbox/implementation' },
+                        { name: 'Troubleshooting', url: '/docs/posthog-code/inbox/troubleshooting' },
+                    ],
+                },
+                {
+                    name: 'Skills',
+                    url: '/docs/posthog-code/skills',
+                    icon: 'IconMagic',
+                    color: 'purple',
+                },
+                {
+                    name: 'Command Center',
+                    url: '/docs/posthog-code/command-center',
+                    icon: 'IconLayoutDashboard',
+                    color: 'orange',
+                },
+                {
+                    name: 'Tasks',
+                    url: '/docs/posthog-code/tasks',
+                    icon: 'IconListCheck',
+                    color: 'blue',
+                },
+                {
+                    name: 'PostHog integration',
+                    url: '/docs/posthog-code/posthog-integration',
+                    icon: 'IconSparkles',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Git + GitHub integration',
+                    url: '/docs/posthog-code/git-github-integration',
+                    icon: 'IconGitBranch',
+                    color: 'green',
+                },
+                {
+                    name: 'Slack',
+                    url: '/docs/posthog-code/slack',
+                    icon: 'IconChat',
+                    color: 'purple',
+                },
+                {
+                    name: 'Code review',
+                    url: '/docs/posthog-code/code-review',
+                    icon: 'IconCode',
+                    color: 'blue',
+                },
+                {
+                    name: 'Environments',
+                    url: '/docs/posthog-code/environments',
+                    icon: 'IconServer',
+                    color: 'purple',
+                },
+                {
+                    name: 'Cloud runs',
+                    url: '/docs/posthog-code/cloud-runs',
+                    icon: 'IconCloud',
+                    color: 'blue',
+                },
+                {
+                    name: 'Worktrees',
+                    url: '/docs/posthog-code/worktrees',
+                    icon: 'IconGitFork',
+                    color: 'orange',
+                },
+                {
+                    name: 'AI-generated content',
+                    url: '/docs/posthog-code/ai-generated-content',
+                    icon: 'IconAI',
+                    color: 'purple',
+                },
+                {
+                    name: 'Settings',
+                    url: '/docs/posthog-code/settings',
+                    icon: 'IconGear',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Open source',
+                    url: '/docs/posthog-code/open-source',
+                    icon: 'IconGithub',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Community',
+                    url: '/docs/posthog-code/community',
+                    icon: 'IconPeople',
+                    color: 'purple',
+                },
+            ],
+        },
+        {
             name: 'Workflows',
             icon: 'IconMegaphone',
             color: 'red',
@@ -6423,12 +6625,6 @@ export const docsMenu = {
                     name: 'Getting started',
                 },
                 {
-                    name: 'Why you need logs',
-                    url: '/docs/logs/basics',
-                    icon: 'IconBook',
-                    color: 'seagreen',
-                },
-                {
                     name: 'Start here',
                     url: '/docs/logs/start-here',
                     icon: 'IconListCheck',
@@ -6444,13 +6640,30 @@ export const docsMenu = {
                     children: [
                         { name: 'Overview', url: '/docs/logs/installation' },
                         { name: 'Node.js', url: '/docs/logs/installation/nodejs' },
-                        { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
                         { name: 'Python', url: '/docs/logs/installation/python' },
-                        { name: 'Java', url: '/docs/logs/installation/java' },
                         { name: 'Go', url: '/docs/logs/installation/go' },
+                        { name: 'Java', url: '/docs/logs/installation/java' },
+                        { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
+                        { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },
+                        { name: 'React Native', url: '/docs/logs/installation/react-native' },
                         { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],
+                },
+                {
+                    name: 'Why you need logs',
+                    url: '/docs/logs/basics',
+                    icon: 'IconBook',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Logging best practices',
+                    url: '/docs/logs/best-practices',
+                    icon: 'IconBook',
+                    color: 'green',
                 },
                 {
                     name: 'Search logs',
@@ -6464,15 +6677,6 @@ export const docsMenu = {
                     url: '/docs/logs/link-session-replay',
                     icon: 'IconRewindPlay',
                     color: 'blue',
-                },
-                {
-                    name: 'Guides',
-                },
-                {
-                    name: 'Logging best practices',
-                    url: '/docs/logs/best-practices',
-                    icon: 'IconBook',
-                    color: 'green',
                 },
                 {
                     name: 'PostHog AI',

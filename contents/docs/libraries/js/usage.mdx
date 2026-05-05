@@ -198,7 +198,7 @@ See [the React component](https://github.com/PostHog/posthog-js/blob/master/reac
 
 ## Experiments (A/B tests)
 
-Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```js-web
 // Ensure flags are loaded before usage.
@@ -379,6 +379,10 @@ It is also possible to manually capture exceptions using the `captureException` 
 ```js
 posthog.captureException(error, additionalProperties)
 ```
+
+## Logs
+
+The browser SDK ships first-class support for [PostHog Logs](/docs/logs): structured records via `posthog.logger.*` / `posthog.captureLog`, plus optional `console.*` autocapture. For setup, manual flushing, and the full config reference, see the [JavaScript web logs installation guide](/docs/logs/installation/javascript).
 
 ## Amending or sampling events
 

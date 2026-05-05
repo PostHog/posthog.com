@@ -35,7 +35,7 @@ Click the reset button to clear the playground back to its default state at any 
 Use the model picker at the top of each prompt to select a model. The available models depend on your setup:
 
 - **Trial models** — A curated set of models provided by PostHog at no cost. These have rate limits to prevent abuse and require a valid payment method on file.
-- **Bring your own key (BYOK)** — When you add your own API keys (OpenAI, Anthropic, Google, OpenRouter, Fireworks, etc.), the playground lists all models available through those providers with no PostHog rate limits.
+- **Bring your own key (BYOK)** — When you add your own API keys (OpenAI, Azure OpenAI, Anthropic, Google, OpenRouter, Fireworks, Together AI, etc.), the playground lists all models available through those providers with no PostHog rate limits.
 
 ## Writing prompts
 
@@ -64,13 +64,13 @@ When you run a prompt with tools defined, any tool calls the model makes are dis
 
 Click **Settings** (gear icon) next to the model picker to adjust generation parameters:
 
-| Parameter | Description | Range |
-|-----------|-------------|-------|
-| **Max tokens** | Maximum number of tokens in the response | 1–16,384 |
-| **Temperature** | Controls randomness — lower values are more deterministic | 0–2 |
-| **Top p** | Nucleus sampling threshold | 0–1 |
-| **Reasoning effort** | How much the model reasons before responding (for supported models) | None, Minimal, Low, Medium, High |
-| **Thinking** | Enable the thinking/reasoning stream (model must support extended thinking) | On/Off |
+| Parameter            | Description                                                                 | Range                            |
+| -------------------- | --------------------------------------------------------------------------- | -------------------------------- |
+| **Max tokens**       | Maximum number of tokens in the response                                    | 1–16,384                         |
+| **Temperature**      | Controls randomness — lower values are more deterministic                   | 0–2                              |
+| **Top p**            | Nucleus sampling threshold                                                  | 0–1                              |
+| **Reasoning effort** | How much the model reasons before responding (for supported models)         | None, Minimal, Low, Medium, High |
+| **Thinking**         | Enable the thinking/reasoning stream (model must support extended thinking) | On/Off                           |
 
 ## Running prompts
 
