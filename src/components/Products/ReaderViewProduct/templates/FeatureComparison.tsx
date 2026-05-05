@@ -12,13 +12,18 @@ const FeatureComparison = ({ id, productData }: SectionComponentProps) => {
         competitors = ['posthog', ...competitors.filter((c: string) => c !== 'posthog')]
     }
 
+    // Always exclude platform sections here — product feature pages don't need them.
+    // Products can add more via comparison.excluded_sections.
+    const excludedSections = ['platform', ...(comparison.excluded_sections || [])]
+
     return (
         <section id={id} className="scroll-mt-20 not-prose">
             <h2 className="text-3xl font-bold text-primary mt-0 mb-4">Feature comparison</h2>
             <ProductComparisonTable
                 competitors={competitors}
                 rows={comparison.rows}
-                excludedSections={comparison.excluded_sections}
+                autoExpand
+                excludedSections={excludedSections}
                 requireCompleteData={comparison.require_complete_data}
             />
         </section>

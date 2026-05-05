@@ -17,7 +17,6 @@ import {
     IconSparkles,
     IconRocket,
     IconConfetti,
-    IconReceipt,
     IconPieChart,
     IconCheckCircle,
     IconGraph,
@@ -40,8 +39,8 @@ import {
     Overview,
     PairsWith,
     Plans,
-    Pricing,
     PricingCalculator,
+    PricingFooterCTA,
     TopFeatures,
     UseCases,
 } from 'components/Products/ReaderViewProduct/templates'
@@ -580,7 +579,6 @@ export const productMenu: ProductNavItem[] = [
 ]
 
 export const pricingMenu: ProductNavItem[] = [
-    { slug: 'rates', name: 'Session Replay rates', icon: <IconReceipt className="size-4" />, component: Pricing },
     {
         slug: 'calculator',
         name: 'Pricing calculator',
@@ -600,6 +598,7 @@ export const pricingMenu: ProductNavItem[] = [
         icon: <IconGraph className="size-4" />,
         component: FeatureComparison,
     },
+    { slug: 'pricing-cta', name: 'Get started', hideFromNav: true, component: PricingFooterCTA },
 ]
 
 export default function SessionReplay(): JSX.Element {
