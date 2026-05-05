@@ -10,9 +10,11 @@ Tasks run in one of three places. The mode determines _where_ the agent works an
 
 | Mode | Where it runs | Isolation | Best for |
 |------|---------------|-----------|----------|
-| Local | Your computer, current branch | None | Quick, small changes |
-| Worktree | Your computer, dedicated branch + working directory | Per-folder isolation | Longer work, parallel tasks on the same repo |
-| Cloud | PostHog-managed workspace | Fully isolated from your computer | Long-running tasks |
+| [Local](/docs/posthog-code/git-github-integration) | Your computer, current branch | None | Quick, small changes |
+| [Worktree](/docs/posthog-code/worktrees) | Your computer, dedicated branch + working directory | Per-folder isolation | Longer work, parallel tasks on the same repo |
+| [Cloud](/docs/posthog-code/cloud-runs) | PostHog-managed workspace | Fully isolated from your computer | Long-running tasks |
+
+To run several tasks in a grid (mixing these modes), use [Command Center](/docs/posthog-code/command-center).
 
 ### Local
 

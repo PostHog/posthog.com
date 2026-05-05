@@ -8,11 +8,16 @@ You may experience unexpected behavior with worktrees in complex development env
 
 </CalloutBox>
 
-Worktrees provide a local, isolated environment for your agents within PostHog Code.
+Worktrees give agents a local, isolated checkout inside PostHog Code. Use them when you want an agent to work on a separate branch without touching your current working directory.
 
 ## Getting started
 
-To create a worktree, choose **Worktree** from the mode selector, enter your prompt, and submit.
+To create a worktree:
+
+1. Open the mode selector.
+2. Choose **Worktree**.
+3. Enter your prompt.
+4. Submit the task.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_24_at_10_04_03_AM_96628e61b1.png"
@@ -24,7 +29,12 @@ For simple development environments, this is typically all you'll need.
 
 ## Environment setup
 
-For more complex projects, you may need to apply some configuration to your worktree environments. PostHog Code supports both `.worktreeinclude` and `.worktreelink` files to help.
+For more complex projects, you may need extra configuration. PostHog Code supports two files for this:
+
+| File | Use it to |
+|---|---|
+| `.worktreeinclude` | Copy required ignored files into each worktree |
+| `.worktreelink` | Symlink required ignored files or directories into each worktree |
 
 For setup scripts that run when a worktree is created (installing dependencies, running migrations, and so on), see [Local environments](/docs/posthog-code/environments#local-environments).
 
@@ -32,7 +42,7 @@ For setup scripts that run when a worktree is created (installing dependencies, 
 
 Worktrees create fresh checkouts of your git repo, so they do not include untracked files like `.env`.
 
-To automatically copy over required files, add them to a `.worktreeinclude` file at the root of your project.
+To automatically copy required files, add them to a `.worktreeinclude` file at the root of your project.
 
 Example:
 
@@ -43,13 +53,13 @@ Example:
 .env.local
 ```
 
-This file uses `.gitignore` syntax. Only files that match the pattern and are `.gitignore`'d are copied.
+This file uses `.gitignore` syntax. Only matching files that are also ignored by git are copied.
 
 ### `.worktreelink`
 
 Some files may be required for your environment but are too heavy to copy, such as a `.flox` directory.
 
-Instead you can add these to a `.worktreelink` file, and PostHog Code will automatically create a symlink when a new worktree is created.
+Add these files or directories to `.worktreelink`. PostHog Code creates symlinks for them when a new worktree is created.
 
 Example:
 
@@ -59,7 +69,7 @@ Example:
 .flox
 ```
 
-This file also uses `.gitignore` syntax, and only creates links to files that are `.gitignore`'d.
+This file also uses `.gitignore` syntax. It only creates links to files that are ignored by git.
 
 ## How it works
 

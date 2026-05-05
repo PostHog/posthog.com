@@ -6374,16 +6374,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Guides',
+                    name: 'Features',
                 },
                 {
                     name: 'Any model and any harness',
                     url: '/docs/posthog-code/use-any-model-and-harness',
                     icon: 'IconGraduationCap',
                     color: 'green',
-                },
-                {
-                    name: 'Features',
                 },
                 {
                     name: 'Inbox',
@@ -6394,7 +6391,7 @@ export const docsMenu = {
                         { name: 'Overview', url: '/docs/posthog-code/inbox' },
                         { name: 'Sources', url: '/docs/posthog-code/inbox/sources' },
                         { name: 'Research', url: '/docs/posthog-code/inbox/research' },
-                        { name: 'Triage', url: '/docs/posthog-code/inbox/triage' },
+                        { name: 'Implementation', url: '/docs/posthog-code/inbox/implementation' },
                         { name: 'Troubleshooting', url: '/docs/posthog-code/inbox/troubleshooting' },
                     ],
                 },

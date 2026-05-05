@@ -5,11 +5,10 @@ contentMaxWidthClass: max-w-5xl
 ---
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconMessage, IconRewindPlay, IconWarning } from '@posthog/icons'
 import Link from 'components/Link'
+import OSButton from 'components/OSButton'
 
-PostHog **Inbox** is your command center for self-driving development. It uses signals from your production data - like errors popping up, users stuck in session recordings, or support tickets coming in – to automatically open pull requests improving your product, based on hard evidence, ready to merge right away (or with whatever tweaks you instruct).
-
-Instead of reactive firefighting, Inbox moves your workflow to a proactive merging model where AI agents do the heavy lifting of investigation and implementation.
 
 <QuestLog firstSpeechBubble="Let's set up your self-driving command center!" lastSpeechBubble="Your Inbox is ready. Time to start merging!">
 
@@ -19,13 +18,23 @@ Instead of reactive firefighting, Inbox moves your workflow to a proactive mergi
     icon="IconPlug"
 >
 
-  Inbox identifies work by monitoring _product signals_ from various sources – both internal to PostHog and external ones. To get started, you need to connect the sources. Currently available:
+  Inbox identifies work by monitoring _product signals_ from various sources, both internal to PostHog and external ones. To get started, you need to connect the sources:
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_112,y_75,w_iw_sub_224,h_ih_sub_222/Screenshot_2026_05_04_at_4_48_19_PM_9652a9fb7c.png"
+    classes="rounded"
+    alt="The PostHog Code Inbox with researched and actionable reports"
+  />
 
   <ul>
     <li>
-      <strong>Internal:</strong> PostHog <Link to="/docs/error-tracking">Error Tracking</Link> issues,{" "}
-      <Link to="/docs/support">Support</Link> tickets, and <Link to="/docs/session-replay">Session Replay</Link>{" "}
-      recordings.
+      <strong>Internal:</strong> PostHog{" "}
+      <IconWarning className="inline-block size-4 align-middle -mt-px mr-0.5 text-yellow" aria-hidden />{" "}
+      <Link to="/docs/error-tracking">Error Tracking</Link> issues,{" "}
+      <IconMessage className="inline-block size-4 align-middle -mt-px mr-0.5 text-red" aria-hidden />{" "}
+      <Link to="/docs/support">Support</Link> tickets, and{" "}
+      <IconRewindPlay className="inline-block size-4 align-middle -mt-px mr-0.5 text-yellow" aria-hidden />{" "}
+      <Link to="/docs/session-replay">Session Replay</Link> recordings.
     </li>
     <li>
       <strong>External:</strong> GitHub issues, Linear issues, or Zendesk tickets.
@@ -34,7 +43,9 @@ Instead of reactive firefighting, Inbox moves your workflow to a proactive mergi
 
   In PostHog Code, open **Inbox** and use the **Configure sources** button above the search box.
 
-  <Link to="/docs/posthog-code/inbox/sources">Learn about sources here.</Link>
+  <OSButton variant="primary" asLink to="/docs/posthog-code/inbox/sources">
+    Learn about signal sources
+  </OSButton>
 </QuestLogItem>
 
 <QuestLogItem
@@ -43,7 +54,7 @@ Instead of reactive firefighting, Inbox moves your workflow to a proactive mergi
     icon="IconMagnifyingGlass"
 >
 
-  Once sources are connected, Inbox researches new information as it comes in. It orchestrates agents with MCP servers connected in your workspace - starting with the PostHog MCP – to identify what's happening and what's the impact.
+  Once sources are connected, Inbox researches new information as it arrives. The agent uses the MCP servers in your workspace, starting with the PostHog MCP, to figure out what's happening and how big the impact is.
 
   The agents have access to your product's code for grounding. The result of research is a ready report, rated with:
 
@@ -71,7 +82,9 @@ Instead of reactive firefighting, Inbox moves your workflow to a proactive mergi
     </li>
   </ol>
 
-  <Link to="/docs/posthog-code/inbox/research">Learn more about research tasks here.</Link>
+  <OSButton variant="primary" asLink to="/docs/posthog-code/inbox/research">
+    Learn about research tasks
+  </OSButton>
 </QuestLogItem>
 
 <QuestLogItem
@@ -84,7 +97,9 @@ Instead of reactive firefighting, Inbox moves your workflow to a proactive mergi
 
   Each PR includes an AI-generated description of the problem and the change. Your job is simply to review the code in GitHub and click **Merge**. Any comments on the result? You can chat with the implementation agent directly in PostHog Code, and it'll make tweaks you ask for.
 
-  <Link to="/docs/posthog-code/inbox/triage#implementation-tasks">Learn more about implementation tasks here.</Link>
+  <OSButton variant="primary" asLink to="/docs/posthog-code/inbox/implementation#implementation-tasks">
+    Learn about implementation tasks
+  </OSButton>
 
 </QuestLogItem>
 

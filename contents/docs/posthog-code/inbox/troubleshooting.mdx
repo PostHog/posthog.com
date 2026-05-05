@@ -2,24 +2,26 @@
 title: PostHog Code Inbox troubleshooting
 ---
 
-## Waiting for reports to appear?
+This page covers common issues with Inbox reports and agent research.
 
-Background research can take up to fifteen minutes due to its depth. If you've just connected a source, there are two scenarios:
+## Reports are not appearing
 
-<ol>
-  <li>
-    The source already has data to ingest, for example if you connect Error Tracking and you already have error issues in PostHog. It might take a minute or two for these records to appear queued for research in Inbox.
-  </li>
-  <li>
-    The source is empty, for example you connect Error Tracking in a blank project. Just stay tuned for bugs to be tracked then! We'll let you know in the Inbox when there are user issues to resolve.
-  </li>
-</ol>
+Background research can take up to fifteen minutes. If you've just connected a source, check which case applies.
+
+### The source already has data
+
+If the source already has data to ingest, records should appear in Inbox after a minute or two. For example, this applies when you connect Error Tracking and already have error issues in PostHog.
+
+### The source is empty
+
+If the source is empty, Inbox has nothing to report yet. For example, this applies when you connect Error Tracking in a blank project. Inbox will surface reports when there are user issues to resolve.
 
 ## Audit the agent
 
 Every action the agent takes is logged. View the **Agent Log** in Inbox to see:
+
 - Which files the agent read
 - Which search queries it ran
 - How it arrived at the final implementation logic
 
-This transparency ensures you can trust the process even as it automates the tedious parts of your workflow.
+Use the log to check what the agent saw, which decisions it made, and where to step in if the result looks wrong.

@@ -26,7 +26,7 @@ PostHog Code picks up skills from three places:
 
 Any directory in these locations that contains a `SKILL.md` with valid YAML frontmatter will appear in the Skills sidebar and be available to the agent.
 
-Codex sessions pick up the bundled PostHog skills automatically – PostHog Code syncs them to `~/.agents/skills/` so the Codex CLI can find them.
+Codex sessions pick up the bundled PostHog skills automatically. PostHog Code syncs them to `~/.agents/skills/` so the Codex CLI can find them.
 
 ## Bundled skills
 
@@ -45,14 +45,28 @@ Bundled skills are published independently from the app and update on their own 
 
 Bundled PostHog skills are packaged with the app at build time and re-fetched in the background every 30 minutes while the app is running. If a download fails (no network, restrictive proxy, etc.) the previously-cached skills stay in place and the app retries on the next interval.
 
-Your user, repo, and marketplace skills aren't polled – they're discovered when a new agent session starts. If you add or edit a skill on disk, PostHog Code picks it up the next time you kick off a task.
+Your user, repo, and marketplace skills aren't polled. They're discovered when a new agent session starts. If you add or edit a skill on disk, PostHog Code picks it up the next time you kick off a task.
 
 ## Troubleshooting
 
-If a skill isn't showing up, check that it lives in a directory with a `SKILL.md` file at its root, and that the file begins with valid YAML frontmatter containing at least `name` and `description` fields. Skills with missing or malformed frontmatter are skipped silently.
+### A skill is missing
 
-If changes to a user or repo skill aren't being picked up, start a new task. These are scanned at session start, not in real time.
+Check that the skill:
 
-If your PostHog marketplace plugin isn't appearing, that's expected. PostHog Code ships its own bundled copy of the PostHog plugin and skips any marketplace-installed version to avoid duplicates.
+- Lives in a directory with a `SKILL.md` file at its root
+- Starts with valid YAML frontmatter
+- Includes at least `name` and `description` fields
 
-If bundled skills seem out of date, background updates require network access. When you're offline or behind a restrictive proxy, the app keeps using the last-downloaded set until it can reach the release endpoint again.
+Skills with missing or malformed frontmatter are skipped silently.
+
+### Skill changes are not appearing
+
+Start a new task. User and repo skills are scanned when a session starts, not in real time.
+
+### The PostHog marketplace plugin is missing
+
+This is expected. PostHog Code ships its own bundled copy of the PostHog plugin and skips any marketplace-installed version to avoid duplicates.
+
+### Bundled skills seem out of date
+
+Background updates require network access. When you're offline or behind a restrictive proxy, the app keeps using the last-downloaded set until it can reach the release endpoint again.

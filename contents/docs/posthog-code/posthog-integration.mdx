@@ -2,22 +2,49 @@
 title: PostHog integration for PostHog Code
 ---
 
-PostHog Code brings all of your PostHog context – product data, flags, experiments, and errors into the agent's context in real time. If you don't use PostHog, PostHog Code still works as a general-purpose coding agent; the integration adds context, it isn't a hard dependency.
+PostHog Code brings your PostHog context into the agent in real time, including product data, flags, experiments, and errors. If you don't use PostHog, PostHog Code still works as a general-purpose coding agent. The integration adds context, it isn't a hard dependency.
 
 ## Built-in PostHog skills
 
-PostHog Code ships a curated set of [skills](/docs/posthog-code/skills) that the agent loads automatically:
+PostHog Code ships a curated set of [skills](/docs/posthog-code/skills) that the agent loads automatically. They update independently of the desktop app, so you get new skills without waiting for a release.
 
-- `instrument-product-analytics`, `instrument-feature-flags`, `instrument-error-tracking`, `instrument-llm-analytics`, `instrument-logs` – wire up PostHog SDKs in any supported language
-- `creating-experiments`, `configuring-experiment-analytics`, `managing-experiment-lifecycle` – run A/B tests end to end
-- `query-examples`, `exploring-llm-traces`, `exploring-llm-clusters` – work with HogQL and LLM analytics data
-- `setting-up-a-data-warehouse-source`, `diagnosing-failed-warehouse-syncs`, `auditing-warehouse-data-health` – manage data pipelines
+Wire up PostHog SDKs in any supported language with these skills:
 
-These update independently of the desktop app, so you get new skills without waiting for a release.
+| Skill | What it does |
+|---|---|
+| `instrument-product-analytics` | Set up event capture |
+| `instrument-feature-flags` | Add flag checks and rollouts |
+| `instrument-error-tracking` | Hook up error capture |
+| `instrument-llm-analytics` | Instrument LLM calls |
+| `instrument-logs` | Send logs to PostHog |
+
+Run A/B tests end to end with these skills:
+
+| Skill | What it does |
+|---|---|
+| `creating-experiments` | Scaffold new experiments |
+| `configuring-experiment-analytics` | Define metrics and goals |
+| `managing-experiment-lifecycle` | Launch, monitor, and ship results |
+
+Work with HogQL and LLM analytics data with these skills:
+
+| Skill | What it does |
+|---|---|
+| `query-examples` | Write HogQL queries from worked examples |
+| `exploring-llm-traces` | Inspect individual LLM traces |
+| `exploring-llm-clusters` | Find patterns across LLM traffic |
+
+Manage data pipelines with these skills:
+
+| Skill | What it does |
+|---|---|
+| `setting-up-a-data-warehouse-source` | Connect a new warehouse source |
+| `diagnosing-failed-warehouse-syncs` | Debug sync failures |
+| `auditing-warehouse-data-health` | Check freshness and integrity |
 
 ## Built-in PostHog MCP
 
-PostHog's [MCP server](/docs/model-context-protocol) is wired up out of the box. Once you sign in, the agent can query your project for insights, dashboards, flags, experiments, and errors – useful for prompts like "did my last deploy regress conversion?" or "build me a dashboard for the new checkout flow".
+PostHog's [MCP server](/docs/model-context-protocol) is wired up out of the box. Once you sign in, the agent can query your project for insights, dashboards, flags, experiments, and errors. This is useful for prompts like "did my last deploy regress conversion?" or "build me a dashboard for the new checkout flow".
 
 You don't need to install or configure the MCP server separately. It's authenticated with the same session you use to sign in.
 
@@ -32,13 +59,13 @@ When you open a file or stage a diff, PostHog Code parses it and finds:
 - `init()` calls and SDK configuration
 - Variant branches based on flag values
 
-For each detection, it fetches the matching record from PostHog – flag rollout and staleness, experiment status, event volume and unique users, last-seen timestamps – and surfaces it inline:
+For each detection, it fetches the matching record from PostHog, then surfaces it inline. This can include flag rollout and staleness, experiment status, event volume, unique users, and last-seen timestamps.
 
 ```ts
-// [PostHog] Event: "purchase" (verified) – 12,500 events – 3,200 users
+// [PostHog] Event: "purchase" (verified), 12,500 events, 3,200 users
 posthog.capture("purchase", { amount: 99 });
 
-// [PostHog] Flag: "new-checkout" – boolean – 100% rolled out – STALE (fully_rolled_out)
+// [PostHog] Flag: "new-checkout", boolean, 100% rolled out, STALE (fully_rolled_out)
 const flag = posthog.getFeatureFlag("new-checkout");
 ```
 
@@ -48,13 +75,13 @@ That context goes into the agent's working memory, so when you ask it to clean u
 
 | Language | Capture | Flags | Init | Variants |
 |---|---|---|---|---|
-| JavaScript / TypeScript | yes | yes | yes | yes |
-| JSX / TSX | yes | yes | yes | yes |
-| Python | yes | yes | yes | yes |
-| Go | yes | yes | yes | yes |
-| Ruby | yes | yes | yes | yes |
+| JavaScript / TypeScript | ✅ | ✅ | ✅ | ✅ |
+| JSX / TSX | ✅ | ✅ | ✅ | ✅ |
+| Python | ✅ | ✅ | ✅ | ✅ |
+| Go | ✅ | ✅ | ✅ | ✅ |
+| Ruby | ✅ | ✅ | ✅ | ✅ |
 
-Detection runs locally via tree-sitter – no source code is sent anywhere. Enrichment fetches metadata from your PostHog project using your existing API credentials.
+Detection runs locally via tree-sitter. Source code is not sent anywhere. Enrichment fetches metadata from your PostHog project using your existing API credentials.
 
 ## Switching projects
 
