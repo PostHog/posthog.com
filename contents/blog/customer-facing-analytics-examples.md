@@ -19,9 +19,9 @@ seo:
     metaDescription: '5 customer-facing analytics examples worth stealing, plus how to ship your own in PostHog without a data team or custom APIs.'
 ---
 
-Customer-facing analytics is the stats you show your users, not your internal team. Users' usage dashboard, a "23 people are viewing this right now" counter on a product page, a public leaderboard, or how big your support queue is.
+Customer-facing analytics are the stats you show your users, not your internal team. A users' usage dashboard, a "23 people are viewing this right now" counter on a product page, a public leaderboard, or how big your support queue is.
 
-What you probably didn't know is that a lot of this is powered by the same kind of tech under the hood: a fast, authenticated API layer that takes product data and ships it straight into the place users will see it. At PostHog, we call this [Endpoints](/endpoints).
+Under the hood, a lot of these are powered by the same kind of infrastructure: a fast, authenticated API layer that takes product data and ships it straight into the place users will see it. At PostHog, we call this [Endpoints](/endpoints).
 
 Endpoints are a way to expose your PostHog data as fast, versioned, authenticated APIs you can [drop straight into your product](/docs/endpoints) without maintaining a custom API backend. 
 
@@ -32,7 +32,7 @@ But, rather than telling you what customer-facing analytics is, we’re going to
 
 **Vercel** is the textbook case of a dashboard that customers log in to check. Every project deployed on Vercel ships with a Web Analytics panel that surfaces live visitor counts, top pages, referrers, UTM campaigns, and geographic breakdowns. All one click from the deploy button, with no separate tool to install.
 
-![Vercel's embedded analytics dasboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/vercel_dashboard_5e867b436f.png)
+![Vercel's embedded analytics dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/vercel_dashboard_5e867b436f.png)
 
 ### Why it works 
 
@@ -40,7 +40,7 @@ The detail Vercel has [talked about publicly](https://vercel.com/changelog/new-u
 
 If you've ever hit refresh on a dashboard wondering whether the numbers are actually live or 20 minutes stale, you know why this matters. Customer-facing analytics lose most of their value the moment users stop trusting the numbers are current.
 
-Good news if you're a PostHog user: We just launched a real-time dashboard for [Web Analytics.](https://posthog.com/web-analytics) 
+Good news if you're a PostHog user: We just launched a real-time dashboard for [Web Analytics](/web-analytics). 
 
 ## 2. Booking.com: Live metrics on the landing page
 
