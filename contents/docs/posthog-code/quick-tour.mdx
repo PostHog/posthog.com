@@ -7,6 +7,7 @@ contentMaxWidthClass: max-w-5xl
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconFlask, IconGraph, IconToggle, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import { DownloadButton } from '../../../src/pages/code'
 
 PostHog Code is a desktop coding agent that understands your product and business, not only your source code. Here's a quick tour of how it works.
 
@@ -54,19 +55,19 @@ You can ask the agent product-aware questions that cut across PostHog—here are
 
 ### <IconGraph className="text-blue w-7 -mt-1 inline-block" /> Event instrumentation
 
-"Are we capturing the right events for this new feature, and can we compare adoption to what we shipped before?"
+_"Are we capturing the right events for this new feature, and can we compare adoption to what we shipped before?"_
 
 ### <IconWarning className="text-yellow w-7 -mt-1 inline-block" /> Error tracking
 
-"This error keeps showing up in production—what is going wrong, and can you fix it and add a regression test?"
+_"This error keeps showing up in production—what is going wrong, and can you fix it and add a regression test?"_
 
 ### <IconToggle className="text-seagreen w-7 -mt-1 inline-block" /> Feature flags and rollout conditions
 
-"Can you add a feature flag to the new checkout page, implement `isFeatureEnabled`, and roll it out to everyone with an `@example.com` email first?"
+_"Can you add a feature flag to the new checkout page, implement `isFeatureEnabled`, and roll it out to everyone with an `@example.com` email first?"_
 
 ### <IconFlask className="text-purple w-7 -mt-1 inline-block" /> Experiments
 
-"Can you scaffold an experiment with variants, a traffic split, and goal metrics so we can measure this change properly?"
+_"Can you scaffold an experiment with variants, a traffic split, and goal metrics so we can measure this change properly?"_
 
 <OSButton variant="primary" asLink to="/docs/posthog-code/posthog-integration">
   Learn about the PostHog integration
@@ -83,7 +84,7 @@ icon="IconCode"
 Every task has a built-in diff panel. Use it to read edits side by side, leave inline feedback, manage staged files, and follow up on PR comments without leaving the app.
 
 <ProductScreenshot
-imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_30_at_2_14_45_PM_aec0c02d2b.png"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_112,y_75,w_iw_sub_224,h_ih_sub_222/Screenshot_2026_04_30_at_2_14_45_PM_aec0c02d2b.png"
 classes="rounded"
 alt="Diff panel in PostHog Code"
 />
@@ -127,7 +128,7 @@ icon="IconCloud"
 Cloud runs put a task in a sandboxed PostHog-managed workspace. Close the app, switch networks, or shut your laptop, and the agent keeps going.
 
 <ProductScreenshot
-imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_05_05_T00_47_11_943_Z_28027af119.png"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_05_05_T00_51_48_152_Z_24fe877fde.png"
 classes="rounded"
 alt="Command Center showing multiple agent tasks in a grid"
 />
@@ -173,7 +174,7 @@ icon="IconInbox"
 PostHog Code researches each new signal, prioritizes it by user impact, and opens a PR when a code fix is possible. Your job is to review and merge.
 
 <ProductScreenshot
-imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_48_19_PM_9652a9fb7c.png"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_112,y_75,w_iw_sub_224,h_ih_sub_222/Screenshot_2026_05_04_at_4_48_19_PM_9652a9fb7c.png"
 classes="rounded"
 alt="The PostHog Code Inbox with researched and actionable reports"
 />
@@ -190,10 +191,11 @@ subtitle="Next step"
 icon="IconDownload"
 >
 
-Ready to take it for a spin? Download PostHog Code and connect your first repo.
+Ready to take it for a spin? Download PostHog Code and connect your first repo. PostHog Code will be available for download in Spring 2026. 
 
-<OSButton variant="primary" asLink to="/docs/posthog-code/download-posthog-code">
-  Download PostHog Code
-</OSButton>
+<div className="max-w-lg @container bg-blue/10 border border-blue rounded-md pb-8 pt-0 px-8 shadow-xl">
+  <DownloadButton />
+</div>
+
 </QuestLogItem>
 </QuestLog>
