@@ -2,7 +2,7 @@ There are two steps to implement feature flags in Elixir:
 
 ### Step 1: Evaluate flags once
 
-Call `PostHog.FeatureFlags.evaluate_flags/2` once for the user, then read values from the returned snapshot.
+Call `PostHog.FeatureFlags.evaluate_flags/1` once for the user, then read values from the returned snapshot.
 
 #### Boolean feature flags
 
@@ -12,7 +12,7 @@ Call `PostHog.FeatureFlags.evaluate_flags/2` once for the user, then read values
 if PostHog.FeatureFlags.Evaluations.enabled?(snapshot, "flag-key") do
   # Do something differently for this user
   # Optional: fetch the payload
-  matched_flag_payload = PostHog.FeatureFlags.Evaluations.get_flag_payload(snapshot, "flag-key")
+  payload = PostHog.FeatureFlags.Evaluations.get_flag_payload(snapshot, "flag-key")
 end
 ```
 
@@ -26,13 +26,13 @@ enabled_variant = PostHog.FeatureFlags.Evaluations.get_flag(snapshot, "flag-key"
 if enabled_variant == "variant-key" do
   # Do something differently for this user
   # Optional: fetch the payload
-  matched_flag_payload = PostHog.FeatureFlags.Evaluations.get_flag_payload(snapshot, "flag-key")
+  payload = PostHog.FeatureFlags.Evaluations.get_flag_payload(snapshot, "flag-key")
 end
 ```
 
 `PostHog.FeatureFlags.Evaluations.get_flag/2` returns the variant string for multivariate flags, `true` for enabled boolean flags, `false` for disabled flags, and `nil` when the flag wasn't returned by the evaluation.
 
-> **Note:** `PostHog.FeatureFlags.check/2`, `PostHog.FeatureFlags.check!/2`, and the older `feature_flag` helpers still work during the migration period, but they're deprecated. Prefer `evaluate_flags/2` for new code.
+> **Note:** `PostHog.FeatureFlags.check/2`, `PostHog.FeatureFlags.check!/2`, `PostHog.FeatureFlags.get_feature_flag_result/2`, and `PostHog.FeatureFlags.get_feature_flag_result!/2` still work during the migration period, but they're deprecated. Prefer `evaluate_flags/1` for new code.
 
 import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
 
@@ -60,12 +60,15 @@ By default, this attaches every flag in the snapshot using `$feature/<flag-key>`
 To reduce event property bloat, put a filtered snapshot in context:
 
 ```elixir
+{:ok, snapshot} = PostHog.FeatureFlags.evaluate_flags("distinct_id_of_your_user")
+
 # Attach only flags accessed with enabled?/2, get_flag/2, or get_flag_payload/2 before this call
+PostHog.FeatureFlags.Evaluations.enabled?(snapshot, "flag-key")
 PostHog.FeatureFlags.set_in_context(
   PostHog.FeatureFlags.Evaluations.only_accessed(snapshot)
 )
 
-# Attach only specific flags
+# Or attach only specific flags
 PostHog.FeatureFlags.set_in_context(
   PostHog.FeatureFlags.Evaluations.only(snapshot, ["checkout-flow", "new-dashboard"])
 )
@@ -79,14 +82,14 @@ In the event properties, include `$feature/feature_flag_name: variant_key`:
 
 ```elixir
 PostHog.capture("event_name", %{
-  distinct_id: "distinct_id_of_your_user",
-  "$feature/feature-flag-key": "variant-key"
+  "$feature/feature-flag-key" => "variant-key",
+  distinct_id: "distinct_id_of_your_user"
 })
 ```
 
 ### Evaluating only specific flags
 
-By default, `evaluate_flags/2` evaluates every flag for the user. If you only need a few flags, pass `flag_keys` to request only those flags:
+By default, `evaluate_flags/1` evaluates every flag for the user. If you only need a few flags, pass `flag_keys` to request only those flags:
 
 ```elixir
 {:ok, snapshot} =
@@ -98,6 +101,6 @@ By default, `evaluate_flags/2` evaluates every flag for the user. If you only ne
 
 ### Sending `$feature_flag_called` events
 
-Capturing `$feature_flag_called` events enables PostHog to know when a flag was accessed by a user and provide [analytics and insights](/docs/product-analytics/insights) on the flag. With `evaluate_flags/2`, the SDK sends this event when you call `PostHog.FeatureFlags.Evaluations.enabled?/2` or `PostHog.FeatureFlags.Evaluations.get_flag/2` for a flag.
+Capturing `$feature_flag_called` events enables PostHog to know when a flag was accessed by a user and provide [analytics and insights](/docs/product-analytics/insights) on the flag. With `evaluate_flags/1`, the SDK sends this event when you call `PostHog.FeatureFlags.Evaluations.enabled?/2` or `PostHog.FeatureFlags.Evaluations.get_flag/2` for a flag.
 
-`PostHog.FeatureFlags.Evaluations.get_flag_payload/2` doesn't send `$feature_flag_called` events, but it does count as an access for `only_accessed/1`.
+`PostHog.FeatureFlags.Evaluations.get_flag_payload/2` doesn't send `$feature_flag_called` events.
