@@ -61,6 +61,21 @@ Example product context:
 
 Product context only applies to single-session replay summaries generated from the replay page. It doesn't affect group summaries or summaries generated via Max.
 
+## Add custom tags
+
+PostHog AI automatically applies tags from a fixed taxonomy to each session summary. You can extend this with custom tags specific to your product or workflows.
+
+Custom tags let you define a vocabulary that matches your domain. For example, an e-commerce checkout team might create tags like `cart_abandoned` or `payment_failed`, while a B2B tool might use `workspace_invite` or `first_dashboard_setup`.
+
+To add custom tags, go to **Settings > Replay > AI**. Each tag needs:
+
+- **Name** – A snake_case identifier (lowercase letters, numbers, and underscores). Maximum 60 characters.
+- **Description** – Tell the AI when to apply this tag. Maximum 200 characters.
+
+You can add up to 15 custom tags. The AI uses your descriptions to decide when each tag applies, so be specific about the behavior or outcome that should trigger the tag.
+
+Custom tags appear separately from the fixed taxonomy in session summaries. Like product context, custom tags only apply to single-session replay summaries generated from the replay page.
+
 ## Tips for better results
 
 - **Ask about specific behaviors** – "What do users do after seeing the upgrade prompt?" gives you more targeted summaries than "Summarize recent sessions"
