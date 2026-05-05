@@ -80,7 +80,7 @@ import ConfigureFlagsSecureKey from "../../integrate/_snippets/configure-flags-s
 
 ## Step 3: Evaluate your feature flag
 
-To evaluate the feature flag, call the flag evaluation method for your SDK. In Python, use `posthog.evaluate_flags()` once and read values from the returned snapshot with `flags.is_enabled()` or `flags.get_flag()`. The only difference is that you must provide any `person properties`, `groups`, or `group properties` used to evaluate the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) of the flag.
+To evaluate the feature flag, call the flag evaluation method for your SDK. In server-side APIs, evaluate flags once and read values from the returned snapshot. The only difference is that you must provide any `person properties`, `groups`, or `group properties` used to evaluate the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) of the flag.
 
 Then, by default, PostHog attempts to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request to fetch the flag value.
 
