@@ -9,7 +9,7 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
     const { name, Icon, overview, screenshots, status, hogs } = productData ?? {}
 
     return (
-        <section id={id} className="scroll-mt-20 not-prose flex flex-col gap-12 max-w-7xl mx-auto">
+        <section id={id} className="scroll-mt-20 not-prose flex flex-col gap-12 max-w-9xl mx-auto">
             {/* <DebugContainerQuery name="reader-content" /> */}
             <header className="">
                 {screenshots?.home?.src && (

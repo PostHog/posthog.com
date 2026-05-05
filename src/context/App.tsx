@@ -271,6 +271,7 @@ export const Context = createContext<AppContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
+        heaterMode: false,
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -1298,6 +1299,7 @@ export interface SiteSettings {
         | 'parade'
         | 'coding-at-night'
     screensaverDisabled?: boolean
+    heaterMode?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
 }
@@ -1316,6 +1318,7 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
+        heaterMode: false,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
         ...(!lastReset ? { experience: 'posthog' } : {}),
     }

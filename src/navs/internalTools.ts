@@ -4,4 +4,5 @@ export const internalToolsNav = [
     { name: 'Feature matrix', url: '/feature-matrix' },
     { name: 'Team', url: '/team-directory' },
     { name: 'HogWatch 3000', url: '/hogwatch' },
+    { name: 'Mesh gradients', url: '/mesh-gradients' },
 ]
