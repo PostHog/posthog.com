@@ -309,6 +309,31 @@ export default function DisplayOptions() {
                             />
                         </div>
                     </div>
+                    <div className="bg-primary grid grid-cols-2 gap-2">
+                        <div className="flex items-center gap-1 mb-1">
+                            <span className="text-sm">Heater mode</span>
+                            <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
+                                <p className="max-w-sm my-0 leading-snug">
+                                    A visual enhancement that uses partially transparent backgrounds in app windows for
+                                    a nice diffused glass effect. Will absolutely destroy your battery and possibly
+                                    cause third degree burns.
+                                </p>
+                            </Tooltip>
+                        </div>
+                        <div>
+                            <ToggleGroup
+                                title=""
+                                options={[
+                                    { label: 'Disabled', value: 'false' },
+                                    { label: 'Enabled', value: 'true' },
+                                ]}
+                                onValueChange={(value) => {
+                                    updateSiteSettings({ ...siteSettings, heaterMode: value === 'true' })
+                                }}
+                                value={siteSettings.heaterMode ? 'true' : 'false'}
+                            />
+                        </div>
+                    </div>
                 </Fieldset>
                 <div className="hidden md:block">
                     <Fieldset legend="Navigation">

@@ -60,6 +60,10 @@ const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean 
 
 const snapThreshold = -50
 
+// Pairs of light/dark mesh-gradient classes (defined in tailwind.config.js).
+// Each variant must be a full literal string so Tailwind's JIT picks it up.
+export const MESH_VARIANTS = ['bg-mesh-green-light dark:bg-mesh-green-dark']
+
 const PageModal = ({ children }: { children: React.ReactNode }) => {
     const [open, setOpen] = useState(true)
     const { appWindow } = useWindow()
@@ -141,6 +145,7 @@ const WindowContainer = ({ children, closing }: { children: React.ReactNode; clo
 }
 
 export default function AppWindow({ item, chrome = true }: { item: AppWindowType; chrome?: boolean }) {
+    const meshVariant = useMemo(() => MESH_VARIANTS[Math.floor(Math.random() * MESH_VARIANTS.length)], [])
     const { addToast, toasts } = useToast()
     const {
         minimizeWindow,
@@ -612,7 +617,11 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 data-scheme="tertiary"
                                 suppressHydrationWarning
                                 className={`@container absolute !select-auto flex flex-col ${
-                                    item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-primary/75 backdrop-blur-3xl'
+                                    item.appSettings?.size?.fixed
+                                        ? 'bg-transparent'
+                                        : siteSettings.heaterMode
+                                        ? 'bg-primary/75 backdrop-blur-3xl'
+                                        : `bg-primary ${meshVariant}`
                                 } ${
                                     siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
                                         ? 'border-b border-primary'

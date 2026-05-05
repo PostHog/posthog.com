@@ -56,6 +56,10 @@ module.exports = {
             },
             backgroundImage: {
                 ai: 'radial-gradient(at 84% 83%, hsla(195,45%,75%,1) 0px, transparent 50%), radial-gradient(at 66% 38%, rgb(173, 212, 155) 0px, transparent 50%), radial-gradient(at 44% 51%, rgb(226, 219, 167) 0px, transparent 50%), radial-gradient(at 41% 14%, hsla(180,38%,78%,1) 0px, transparent 50%), radial-gradient(at 75% 97%, hsla(155,42%,68%,1) 0px, transparent 50%), radial-gradient(at 68% 35%, hsla(178,45%,65%,1) 0px, transparent 50%), radial-gradient(at 42% 23%, hsla(200,40%,72%,1) 0px, transparent 50%)',
+                'mesh-green-light':
+                    'radial-gradient(at 80% 20%, rgba(240,215,160,0.70) 0px, transparent 45%), radial-gradient(at 85% 80%, rgba(220,180,185,0.40) 0px, transparent 50%), radial-gradient(at 20% 90%, rgba(225,210,175,0.45) 0px, transparent 55%), radial-gradient(at 50% 50%, rgba(178,208,150,0.85) 0px, rgba(190,215,160,0.55) 70%, rgba(195,220,165,0.45) 100%)',
+                'mesh-green-dark':
+                    'radial-gradient(at 80% 25%, rgba(190,150,90,0.22) 0px, transparent 50%), radial-gradient(at 20% 80%, rgba(120,150,100,0.14) 0px, transparent 55%), radial-gradient(at 90% 90%, rgba(160,140,150,0.10) 0px, transparent 50%), radial-gradient(at 50% 50%, rgba(70,90,65,0.35) 0px, rgba(60,75,55,0.22) 70%, rgba(50,65,50,0.15) 100%)',
                 'llm-analytics':
                     'radial-gradient(ellipse 80% 60% at 15% 20%, #DE7AFF 0px, transparent 40%), radial-gradient(ellipse 100% 80% at 85% 15%, #EF7D9B 0px, transparent 35%), radial-gradient(ellipse 70% 100% at 90% 85%, #3795FF 0px, transparent 45%), radial-gradient(ellipse 90% 70% at 10% 90%, #40C8D8 0px, transparent 40%)',
                 'trace-monitoring':
@@ -311,6 +315,8 @@ module.exports = {
             },
             maxWidth: {
                 '2xs': '16rem',
+                '8xl': '88rem', // 1408px (8rem more than 7xl: 80rem)
+                '9xl': '96rem', // 1536px (8rem more than 8xl: 88rem)
             },
             keyframes: {
                 wiggle: {
