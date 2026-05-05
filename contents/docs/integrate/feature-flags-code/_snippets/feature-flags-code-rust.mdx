@@ -31,12 +31,13 @@ let flags = client.evaluate_flags(
     EvaluateFlagsOptions::default(),
 ).await.unwrap();
 
-let enabled_variant = flags.get_flag("flag-key");
-
-if enabled_variant == Some(FlagValue::String("variant-key".to_string())) {
-    // Do something differently for this user
-    // Optional: fetch the payload
-    let matched_flag_payload = flags.get_flag_payload("flag-key");
+match flags.get_flag("flag-key") {
+    Some(FlagValue::String(variant)) if variant == "variant-key" => {
+        // Do something differently for this user
+        // Optional: fetch the payload
+        let matched_flag_payload = flags.get_flag_payload("flag-key");
+    }
+    _ => {}
 }
 ```
 
@@ -130,6 +131,8 @@ The SDK deduplicates these events per `(distinct_id, flag, value)` in a local ca
 If you're using the blocking client (with `default-features = false`), the API is the same but without `.await`:
 
 ```rust
+use posthog_rs::EvaluateFlagsOptions;
+
 let flags = client.evaluate_flags(
     "distinct_id_of_your_user",
     EvaluateFlagsOptions::default(),
