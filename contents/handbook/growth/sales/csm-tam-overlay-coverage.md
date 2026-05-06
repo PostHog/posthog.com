@@ -65,7 +65,7 @@ Both of you share the responsibility of making sure the other has enough context
 
 ## **Create an internal Slack channel**
 
-Create a channel using the naming convention `#customer-[customer_name]-internal`. Invite your counterpart, Dana, and Simon to the channel. If there's an FDE on the account, invite them too.
+Create a channel using the naming convention `#customer-[customer_name]-internal`. Invite your counterpart, respective Team Leads and Simon to the channel. If there's an FDE on the account, invite them too.
 
 This channel effectively replaces DMs between TAMs and CSMs related to the account. Your public collaboration here will be a huge service to future teammates who might inherit the account.
 
