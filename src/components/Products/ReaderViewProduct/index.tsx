@@ -35,15 +35,6 @@ interface ProductReaderViewProps {
         description?: string
         image?: string
     }
-    /**
-     * Optional page-owned menu arrays. When set, these replace the corresponding
-     * menus from the product hook for both sidebar navigation and section
-     * rendering. Each item can carry a `component` reference (page-owned
-     * rendering) and optional `props` for slot-specific data; otherwise the
-     * shared template registry is used (`item.template ?? item.slug`).
-     */
-    productMenu?: ProductNavItem[]
-    pricingMenu?: ProductNavItem[]
 }
 
 const SURFACE_MENU_FIELD: Record<Exclude<ProductSurface, 'docs'>, 'productMenu' | 'pricingMenu'> = {
@@ -82,8 +73,6 @@ export default function ProductReaderView({
     productHandle,
     surface = 'product',
     seoOverrides,
-    productMenu,
-    pricingMenu,
 }: ProductReaderViewProps) {
     const productData = useProduct({ handle: productHandle }) as any
     const allProducts = useProduct() as any[]
@@ -104,21 +93,11 @@ export default function ProductReaderView({
         )
     }
 
-    const resolvedProductMenu: ProductNavItem[] = productMenu ?? productData.productMenu ?? []
-    const resolvedPricingMenu: ProductNavItem[] = pricingMenu ?? productData.pricingMenu ?? []
-
     const menuField = SURFACE_MENU_FIELD[surface]
-    const surfaceMenu: ProductNavItem[] = menuField === 'productMenu' ? resolvedProductMenu : resolvedPricingMenu
-
-    const productDataForMenus = {
-        slug: productData.slug,
-        name: productData.name,
-        productMenu: resolvedProductMenu,
-        pricingMenu: resolvedPricingMenu,
-    }
+    const surfaceMenu: ProductNavItem[] = (productData[menuField] ?? []) as ProductNavItem[]
 
     const menuTabs = buildProductMenuTabs({
-        productData: productDataForMenus,
+        productData,
         contentRef: sectionsRef,
         activeSurface: surface,
     })

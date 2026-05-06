@@ -13,16 +13,16 @@ Clicking a tab in the sidebar never navigates — it just swaps which menu is vi
 ## Three things wired together
 
 ```
-productData.<surface>Menu   →   sections rendered in the article column
-[{ slug, name, template? }]     (via templateRegistry[template ?? slug])
+productData.<surface>Menu        →   sections rendered in the article column
+[{ slug, name, template?,             (via templateRegistry[template ?? slug];
+   icon?, group?, hideFromNav?,        item.props is forwarded to the section
+   props? }]                           component)
 
-                            →   items in that surface's tab in the sidebar
-                                (via ProductNav, in-page or cross-page mode)
+                                 →   items in that surface's tab in the sidebar
+                                     (via ProductNav, in-page or cross-page mode)
 ```
 
 `<surface>Menu` is one of `productMenu` (Product surface) or `pricingMenu` (Pricing surface). Add `pricingMenu` to a product to make the Pricing tab appear; omit it and only Product + Docs show up.
-
-`slug`, `name`, and `template` are the only inputs you need to think about.
 
 ### `slug`
 
@@ -57,63 +57,109 @@ productData.<surface>Menu   →   sections rendered in the article column
 
 - Any `React.ReactNode`. Rendered next to the `name` in the sidebar.
 
+### `group` (optional)
+
+- String key. Consecutive items with the same `group` value render inside a single divided container (`divide-y` between sections). Standalone items render as siblings of the outer flex.
+
+### `hideFromNav` (optional)
+
+- When `true`, the section still renders on the page but is hidden from the sidebar nav. Useful for footer CTAs or content slated for removal.
+
+### `props` (optional)
+
+- Object passed straight through to the section component as extra props (alongside the standard `SectionComponentProps`). Used to feed slot-specific data into reusable templates — e.g. handing the `applications` and `top-features` carousel templates their slide arrays.
+
 ---
 
 ## Defining a product's menus
 
-Add `productMenu` (and optionally `pricingMenu`) arrays to the product data hook (for example [`src/hooks/productData/session_replay.tsx`](../../../hooks/productData/session_replay.tsx)):
+Each product that opts into `ProductReaderView` is defined in a hook file under `src/hooks/productData/` (for example [`src/hooks/productData/session_replay.tsx`](../../../hooks/productData/session_replay.tsx)). The hook is the **single source of truth** for menus, content, and section render config — there is no page-level override.
+
+When a product's surface grows beyond the menu config and basic data fields, the supporting JSX (carousel slides, local helpers, large reusable sub-trees) lives in a sibling folder named after the hook. The hook stays as a single `.tsx` file because it's shared with production tooling.
+
+```
+src/hooks/productData/
+  session_replay.tsx          sessionReplay export (data + productMenu + pricingMenu)
+  session_replay/             sibling folder for supporting modules
+    features.tsx              `features` object reused by sections and slide arrays
+    slides.tsx                CarouselSlide[] arrays consumed via menu item `props`
+    helpers.tsx               small JSX helpers used inside slide content
+```
+
+The hook is imported as `'hooks/productData/session_replay'` (resolves to `session_replay.tsx`); the sibling folder is imported via `./session_replay/<module>` from inside the hook.
 
 ```tsx
+// src/hooks/productData/session_replay.tsx
+import { applications, topFeatures } from './session_replay/slides'
+import { features } from './session_replay/features'
+
 export const sessionReplay = {
     name: 'Session Replay',
     handle: 'session_replay',
     slug: 'session-replay',
     // …other product data
     productMenu: [
-        { slug: 'overview', name: 'Overview' },
-        { slug: 'customers', name: 'Customers' },
-        { slug: 'features', name: 'Features' },
-        { slug: 'ai', name: 'AI' },
-        { slug: 'answers', name: 'Questions' },
-        { slug: 'comparison-summary', name: 'PostHog vs...' },
-        { slug: 'feature-comparison', name: 'Feature comparison' },
-        { slug: 'docs', name: 'Docs' },
-        { slug: 'pairs-with', name: 'Pairs with...' },
-        { slug: 'getting-started', name: 'Get started' },
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        { slug: 'customers', name: 'Who uses it?', group: 'divided', icon: <IconPeople className="size-4" /> },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        { slug: 'getting-started', name: 'Get started', group: 'divided' },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true },
     ],
     pricingMenu: [
-        { slug: 'rates', name: 'Session Replay rates', template: 'pricing' },
         { slug: 'calculator', name: 'Pricing calculator' },
         { slug: 'plans', name: 'Plans' },
+        // Hidden footer CTA rendered at the bottom of the Pricing surface.
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
+    features,
+    // …other product data fields the templates read directly
 }
 ```
 
-Only the items listed here render — other product-data fields (like `screenshots`, `hog`, `slider`, `videos`, `presenterNotes`) are consumed by individual templates internally and don't need their own menu entry.
+Only the items listed in `productMenu` / `pricingMenu` render as sections — other product-data fields (like `screenshots`, `hog`, `slider`, `videos`, `presenterNotes`) are consumed by individual templates internally and don't need their own menu entry.
+
+If a section's slug already matches a key in `templateRegistry` (see `templates/index.ts`), no extra wiring is needed; the registry resolves it automatically. Use `template:` only when the slug differs from the desired template key, or when reusing one template under several anchors.
 
 ## Page wiring
 
-**Product page** — stacks the sections and auto-wires the sidebar:
+**Product page** — one-liner that just hands the `productHandle` to `ProductReaderView`. The hook supplies everything else.
 
 ```tsx
 // src/pages/session-replay/index.tsx
 import ProductReaderView from 'components/Products/ReaderViewProduct'
 
-export default function SessionReplay() {
-    const data = useStaticQuery(/* allProductData for <Pricing> */)
-    return <ProductReaderView productHandle="session_replay" data={data} />
+export default function SessionReplay(): JSX.Element {
+    return <ProductReaderView productHandle="session_replay" />
 }
 ```
 
-**Pricing page** — same component, just pass `surface="pricing"`:
+**Pricing page** — same component, plus `surface="pricing"`:
 
 ```tsx
 // src/pages/session-replay/pricing.tsx
 import ProductReaderView from 'components/Products/ReaderViewProduct'
 
-export default function SessionReplayPricing() {
-    const data = useStaticQuery(/* allProductData for <Pricing> */)
-    return <ProductReaderView productHandle="session_replay" data={data} surface="pricing" />
+export default function SessionReplayPricing(): JSX.Element {
+    return (
+        <ProductReaderView
+            productHandle="session_replay"
+            surface="pricing"
+            seoOverrides={{ title: 'Session Replay pricing – PostHog' }}
+        />
+    )
 }
 ```
 

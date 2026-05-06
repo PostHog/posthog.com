@@ -1,6 +1,6 @@
 # CarouselSlide
 
-Renders the body of a `TabbedCarousel` tab from a structured `CarouselSlide` config. Designed so per-product carousel content (Applications, TopFeatures, etc.) can live in product-data hook files like [`session_replay.tsx`](../../../hooks/productData/session_replay.tsx) instead of being inlined as JSX in templates — making the templates themselves product-agnostic and reusable across products.
+Renders the body of a `TabbedCarousel` tab from a structured `CarouselSlide` config. Designed so per-product carousel content (Applications, TopFeatures, etc.) can live alongside product-data hook files like [`session_replay.tsx`](../../../hooks/productData/session_replay.tsx) (typically in a `session_replay/slides.tsx` sibling) instead of being inlined as JSX in templates — making the templates themselves product-agnostic and reusable across products.
 
 ## What this component is for
 
