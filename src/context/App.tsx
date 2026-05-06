@@ -408,7 +408,7 @@ const appSettings: AppSettings = {
         },
     },
     '/session-replay': {
-        mesh: 'green',
+        mesh: 'yellow',
     },
     '/wizard': {
         size: {
