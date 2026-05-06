@@ -58,7 +58,7 @@ export const applications: CarouselSlide[] = [
                                 description: 'Monitor how users interact with newly deployed updates.',
                             },
                             {
-                                label: 'Search session replays',
+                                label: 'Search session recordings',
                                 description:
                                     'Filter recordings by events, user properties, time ranges, and specific user behaviors.',
                             },

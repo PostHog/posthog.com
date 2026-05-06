@@ -14,6 +14,7 @@ import {
     IconPlay,
     IconCursorClick,
     IconMagic,
+    IconChat,
 } from '@posthog/icons'
 import { IconJavaScript, IconApple, IconAndroid, IconFlutter, IconReactNative } from 'components/OSIcons/Icons'
 import OSButton from 'components/OSButton'
@@ -65,8 +66,13 @@ export const sessionReplay = {
             icon: <IconSparkles className="size-4" />,
             props: { slides: topFeatures },
         },
+        {
+            slug: 'ask-anything',
+            name: 'Ask PostHog anything',
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+        },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
-        { slug: 'ai', name: 'AI', hideFromNav: true, icon: <IconSparkles className="size-4" /> },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
     ],
     /**
@@ -440,16 +446,56 @@ export const sessionReplay = {
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/SESSION_REPLAY_a3ca565731.png',
         imageAlt: 'PostHog AI and session replay',
-        description: 'search, summarize, cluster, and debug session recordings',
-        skills: [
-            'Finds recordings through natural language prompts – describe the behavior you want instead of setting filters',
-            'Reads the event stream from a recording and produces a summary',
-            'Clusters similar sessions and surfaces representative examples from thousands',
-        ],
-        prompts: [
-            'Find sessions where users dropped off during checkout',
-            'Find sessions with rage clicks on the pricing page',
-            'Show recordings from enterprise users in the last 24 hours',
+        intro: 'Ask PostHog AI to find a specific session or summarize a group of them. Works in PostHog AI (in-app chat), PostHog Code (our AI code editor), and in your product editor (using the MCP).',
+        groups: [
+            {
+                title: 'Find',
+                tool: 'query-session-recordings-list',
+                prompts: [
+                    'Find sessions where users dropped off during checkout',
+                    'Show me sessions from yesterday with rage clicks on /pricing',
+                    'Find replays where the signup form was abandoned',
+                    'Show enterprise users who hit a 500 error in the last 24 hours',
+                    'Find mobile sessions longer than 5 minutes from this week',
+                    "Pull replays where users clicked the upgrade button but didn't convert",
+                ],
+            },
+            {
+                title: 'Summarize',
+                tool: 'session-recording-summarize',
+                prompts: [
+                    'Summarize what this user did in their last session',
+                    'What happened in the session for ticket #4821?',
+                    'Walk me through what tina@acme.com did before opening this support ticket',
+                    'Tell me where users typically get stuck in onboarding',
+                ],
+            },
+            {
+                title: 'Cluster + investigate',
+                prompts: [
+                    "What's the most common reason users rage click on /settings?",
+                    "Cluster yesterday's checkout drop-offs and tell me what they have in common",
+                    'What are the top 3 patterns in sessions that ended on the pricing page?',
+                    'Find the funniest thing a user did this week',
+                ],
+            },
+            {
+                title: 'Build a playlist',
+                tool: 'session-recording-playlist-create',
+                prompts: [
+                    'Make a playlist of every session where someone hit our new pricing page',
+                    'Save a playlist of replays from users in the experiment B variant',
+                    'Create a playlist of sessions where users abandoned the signup flow',
+                ],
+            },
+            {
+                title: 'Debug a specific user',
+                prompts: [
+                    'Show me what acme.com users did this week',
+                    'Pull every replay from user_id 12345 in the last 7 days',
+                    'Find sessions where this user hit a JS error',
+                ],
+            },
         ],
     },
     presenterNotes: {

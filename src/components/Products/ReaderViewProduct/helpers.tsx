@@ -5,7 +5,7 @@ export const LabeledList = ({
     columns = [1, 2],
     className = '',
 }: {
-    items: { label: string; description: React.ReactNode }[]
+    items: { label: React.ReactNode; description: React.ReactNode }[]
     columns?: [number, number]
     className?: string
 }) => {
@@ -22,8 +22,8 @@ export const LabeledList = ({
         <div
             className={`inline-grid @lg:[&>*:nth-child(n+3)]:border-t @lg:[&>*:nth-child(n+3)]:border-primary ${gridClass[totalCols]} ${className}`}
         >
-            {items.map(({ label, description }) => (
-                <React.Fragment key={label}>
+            {items.map(({ label, description }, i) => (
+                <React.Fragment key={typeof label === 'string' ? label : i}>
                     <div className={`pt-2 @lg:pt-4 @lg:pb-4 font-bold ${colSpanClass[labelCols]}`}>{label}</div>
                     <div
                         className={`pb-2 @lg:pt-4 @lg:pb-4 @lg:pl-4 text-secondary text-[15px] border-b border-primary last:border-b-0 @lg:border-b-0 text-balance ${colSpanClass[descCols]}`}
