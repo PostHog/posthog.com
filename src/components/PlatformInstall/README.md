@@ -87,7 +87,8 @@ A small letter-tile placeholder stands in for Cursor, VS Code, Windsurf, Zed, Lo
 
 ## Files
 
-- `index.tsx` — main component, snippet/tab rendering, copy logic
+- `index.tsx` — main component, snippet/tab rendering
+- `CopyableCommand.tsx` — shared copy-to-clipboard snippet (gradient option); re-exported from the package root
 - `schema.tsx` — types + default `mcpInstallSchema`
 - `IconButton.tsx` — local button style (1px border, 2px bottom border, animated label reveal, ZoomHover, tooltip)
 
