@@ -32,9 +32,6 @@ type Layout = {
     zIndex: number
 }
 
-const DRAG_CLICK_THRESHOLD_PX = 4
-const ADVANCE_THRESHOLD_RATIO = 0.22
-const ADVANCE_THRESHOLD_MIN_PX = 60
 const INNER_TRANSLATE_RATIO = 0.42
 const INNER_SCALE = 0.88
 const INNER_ROTATE_DEG = 5
@@ -98,8 +95,6 @@ function StackCardShell({
     index,
     position,
     cardWidth,
-    dragOffset,
-    isDragging,
     prefersReducedMotion,
     transitionEnabled,
     entrance,
@@ -108,8 +103,6 @@ function StackCardShell({
     index: number
     position: StackPosition
     cardWidth: number
-    dragOffset: number
-    isDragging: boolean
     prefersReducedMotion: boolean
     transitionEnabled: boolean
     entrance: Entrance | null
@@ -148,14 +141,7 @@ function StackCardShell({
     }, [enteringThis, prefersReducedMotion, index, position, entrance])
 
     const pose = useSettledLayout ? settled : entry
-    const w = cardWidth || 320
-    const dragRot = isDragging ? Math.max(-6, Math.min(6, (dragOffset / w) * 7.5)) : 0
-    const sideDragFactor = position === 0 ? 1 : 0.55
-    const liveRotate = pose.rotate - dragRot * sideDragFactor
-    const liveX = pose.baseX + (isDragging ? dragOffset : 0)
-
-    const transitionStyle =
-        !transitionEnabled || isDragging || suppressTransition || prefersReducedMotion ? 'none' : TRANSITION
+    const transitionStyle = !transitionEnabled || suppressTransition || prefersReducedMotion ? 'none' : TRANSITION
 
     const isSideCard = position !== 0
 
@@ -172,7 +158,7 @@ function StackCardShell({
             className={`absolute top-0 left-1/2 w-[min(90%,368px)] pointer-events-none ${sideOpacityClass}`}
             style={{
                 zIndex: pose.zIndex,
-                transform: `translate(calc(-50% + ${liveX}px), ${pose.baseY}px) scale(${pose.scale}) rotate(${liveRotate}deg)`,
+                transform: `translate(calc(-50% + ${pose.baseX}px), ${pose.baseY}px) scale(${pose.scale}) rotate(${pose.rotate}deg)`,
                 transformOrigin: 'top center',
                 // Side card opacity is controlled by CSS container query class above.
                 // Only the center card needs an inline opacity (1).
@@ -180,11 +166,7 @@ function StackCardShell({
                 transition: transitionStyle,
             }}
         >
-            <div
-                className={`w-full select-none ${position === 0 && !isDragging ? 'pointer-events-auto' : ''} ${
-                    isDragging ? 'cursor-grabbing' : position === 0 ? 'cursor-grab' : ''
-                }`}
-            >
+            <div className={`w-full select-none ${position === 0 ? 'pointer-events-auto' : ''}`}>
                 {renderCard(index, { isActive: position === 0 })}
             </div>
         </div>
@@ -198,19 +180,13 @@ export function CardStackCarousel({
     className = '',
     ariaLabel = 'Card carousel',
 }: CardStackCarouselProps) {
-    const containerRef = useRef<HTMLDivElement>(null)
     const stageRef = useRef<HTMLDivElement>(null)
     const cardWidthRef = useRef(0)
-    const dragStartXRef = useRef(0)
-    const hasMovedRef = useRef(false)
-    const activePointerRef = useRef<number | null>(null)
     const pendingNavRef = useRef<0 | 1 | -1>(0)
     const prevCurrentRef = useRef(0)
     const didInitialEntranceRef = useRef(false)
 
     const [current, setCurrent] = useState(0)
-    const [dragOffset, setDragOffset] = useState(0)
-    const [isDragging, setIsDragging] = useState(false)
     const [entrance, setEntrance] = useState<Entrance | null>(null)
     const prefersReducedMotion = usePrefersReducedMotion()
 
@@ -338,50 +314,6 @@ export function CardStackCarousel({
         return () => observer.disconnect()
     }, [count, visibleCards.length])
 
-    const onPointerDown = (e: React.PointerEvent) => {
-        if (e.pointerType === 'mouse' && e.button !== 0) return
-        if (count <= 1) return
-        const stageTarget = e.currentTarget as HTMLElement
-        stageTarget.setPointerCapture(e.pointerId)
-        activePointerRef.current = e.pointerId
-        dragStartXRef.current = e.clientX
-        hasMovedRef.current = false
-        setIsDragging(true)
-        setDragOffset(0)
-    }
-
-    const onPointerMove = (e: React.PointerEvent) => {
-        if (activePointerRef.current !== e.pointerId) return
-        const dx = e.clientX - dragStartXRef.current
-        if (Math.abs(dx) > DRAG_CLICK_THRESHOLD_PX) hasMovedRef.current = true
-        setDragOffset(dx)
-    }
-
-    const finishDrag = (clientX: number | null) => {
-        const startedAt = dragStartXRef.current
-        const movedX = clientX === null ? 0 : clientX - startedAt
-        setIsDragging(false)
-        setDragOffset(0)
-        activePointerRef.current = null
-
-        if (!hasMovedRef.current || clientX === null) return
-
-        const cardWidth = cardWidthRef.current || 320
-        const threshold = Math.max(ADVANCE_THRESHOLD_MIN_PX, cardWidth * ADVANCE_THRESHOLD_RATIO)
-        if (movedX <= -threshold && canNext) goTo(1)
-        else if (movedX >= threshold && canPrev) goTo(-1)
-    }
-
-    const onPointerUp = (e: React.PointerEvent) => {
-        if (activePointerRef.current !== e.pointerId) return
-        finishDrag(e.clientX)
-    }
-
-    const onPointerCancel = (e: React.PointerEvent) => {
-        if (activePointerRef.current !== e.pointerId) return
-        finishDrag(null)
-    }
-
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'ArrowLeft') {
             if (!canPrev) return
@@ -396,7 +328,6 @@ export function CardStackCarousel({
 
     return (
         <div
-            ref={containerRef}
             tabIndex={0}
             role="region"
             aria-roledescription="carousel"
@@ -411,15 +342,7 @@ export function CardStackCarousel({
                 {current + 1} of {count}
             </div>
 
-            <div
-                ref={stageRef}
-                className="relative h-[285px] @md:h-[325px]"
-                onPointerDown={onPointerDown}
-                onPointerMove={onPointerMove}
-                onPointerUp={onPointerUp}
-                onPointerCancel={onPointerCancel}
-                style={{ touchAction: 'pan-y' }}
-            >
+            <div ref={stageRef} className="relative h-[285px] @md:h-[325px]">
                 {visibleCards.map(({ index, position }) => {
                     const cardWidth = cardWidthRef.current || 320
                     return (
@@ -428,8 +351,6 @@ export function CardStackCarousel({
                             index={index}
                             position={position}
                             cardWidth={cardWidth}
-                            dragOffset={dragOffset}
-                            isDragging={isDragging}
                             prefersReducedMotion={prefersReducedMotion}
                             transitionEnabled={true}
                             entrance={entrance}
@@ -440,7 +361,6 @@ export function CardStackCarousel({
 
                 <button
                     type="button"
-                    onPointerDown={(e) => e.stopPropagation()}
                     onClick={() => goTo(-1)}
                     disabled={!canPrev}
                     aria-label="Previous slide"
@@ -450,7 +370,6 @@ export function CardStackCarousel({
                 </button>
                 <button
                     type="button"
-                    onPointerDown={(e) => e.stopPropagation()}
                     onClick={() => goTo(1)}
                     disabled={!canNext}
                     aria-label="Next slide"
