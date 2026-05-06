@@ -4,10 +4,12 @@ import mcpToolsData from '../../data/mcp-tools.json'
 interface Tool {
     name: string
     summary: string
+    description: string
 }
 
 interface ToolCategory {
     name: string
+    feature?: string
     tools: Tool[]
 }
 
