@@ -19,6 +19,7 @@ import { Popover } from '../RadixUI/Popover'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
+import { navigate } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
@@ -79,6 +80,8 @@ export interface MenuTab {
      * `label` you pass (so embed the icon in the label JSX if you want both).
      */
     icon?: React.ReactNode
+    /** If set, clicking this tab navigates to the given path instead of only switching local state. */
+    href?: string
 }
 
 interface ReaderViewProps {
@@ -996,7 +999,13 @@ const LeftSidebar = ({
                                         active={t.value === activeTab}
                                         showLabel={expanded}
                                         stacked={appliedPinned}
-                                        onClick={() => setActiveTab(t.value)}
+                                        onClick={() => {
+                                            if (t.href && t.value !== activeTab) {
+                                                navigate(t.href)
+                                            } else {
+                                                setActiveTab(t.value)
+                                            }
+                                        }}
                                     />
                                 ))}
                             </motion.div>
