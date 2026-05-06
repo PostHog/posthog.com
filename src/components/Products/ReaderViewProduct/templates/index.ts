@@ -10,6 +10,7 @@ import TopFeatures from './TopFeatures'
 import Features from './Features'
 import AI from './AI'
 import AskAnything from './AskAnything'
+import Installation from './Installation'
 import PostHogOnPostHog from './PostHogOnPostHog'
 import Pricing from './Pricing'
 import ComparisonSummary from './ComparisonSummary'
@@ -37,6 +38,7 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
     features: Features,
     ai: AI,
     'ask-anything': AskAnything,
+    installation: Installation,
     'posthog-on-posthog': PostHogOnPostHog,
     pricing: Pricing,
     'comparison-summary': ComparisonSummary,
@@ -59,6 +61,7 @@ export {
     Features,
     AI,
     AskAnything,
+    Installation,
     PostHogOnPostHog,
     Pricing,
     ComparisonSummary,
