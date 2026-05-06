@@ -1,0 +1,204 @@
+---
+title: Celery
+platformLogo: celery
+---
+
+import AgentIntegrationSection from "../components/AgentIntegrationSection.mdx"
+
+PostHog makes it easy to track task performance and errors in your Celery app. Integrating PostHog enables task lifecycle analytics, context propagation from producers to workers, and automatic exception capture.
+
+This guide walks you through integrating PostHog into your Celery app using the [Python SDK](/docs/libraries/python).
+
+<AgentIntegrationSection framework="Celery" />
+
+## Installation
+
+Install the PostHog Python SDK:
+
+```bash
+pip install posthog
+```
+
+## Basic setup
+
+Initialize PostHog and instrument the Celery integration:
+
+```python
+import posthog
+from posthog.integrations.celery import PosthogCeleryIntegration
+
+# Initialize PostHog
+posthog.api_key = '<ph_project_token>'
+posthog.host = '<ph_client_api_host>'
+posthog.setup()
+
+# Create and instrument the integration
+integration = PosthogCeleryIntegration()
+integration.instrument()
+```
+
+You can find your project token and instance address in [your project settings](https://us.posthog.com/project/settings).
+
+## Features
+
+The integration captures the following automatically:
+
+- **Task lifecycle events** - `celery task published`, `celery task started`, `celery task success`, `celery task failure`, `celery task retry`
+- **Context propagation** - distinct ID, session ID, and tags flow from producer to worker
+- **Exception capture** - failed tasks automatically send exceptions to PostHog Error Tracking
+
+### Event properties
+
+All lifecycle events include:
+
+| Property | Description |
+|----------|-------------|
+| `celery_task_id` | Unique task ID |
+| `celery_task_name` | Registered task name |
+| `celery_state` | Lifecycle state (started, success, failure, etc.) |
+| `celery_hostname` | Worker hostname |
+| `celery_exchange` | Broker exchange |
+| `celery_routing_key` | Broker routing key |
+| `celery_queue` | Broker queue name |
+| `celery_retry_count` | Number of retries so far |
+| `celery_version` | Installed Celery library version |
+| `celery_task_duration_ms` | Task duration in milliseconds (on terminal states) |
+
+Failure events also include `error_type` and `error_message`. Retry events include `celery_reason`.
+
+## Context propagation
+
+When you set up PostHog context before dispatching tasks, the integration propagates it to workers:
+
+```python
+import posthog
+from posthog import new_context, identify_context, set_context_session, tag
+
+with new_context(fresh=True):
+    identify_context('user-123')
+    set_context_session('session-abc')
+    tag('source', 'checkout_flow')
+    tag('release', 'v1.2.3')
+
+    # These tasks inherit the context above
+    process_order.delay('order-456')
+    send_notification.delay('user-123', 'Order confirmed')
+```
+
+Events captured inside the worker (including custom events you capture manually) are automatically associated with the propagated distinct ID and session, and include the propagated tags.
+
+## Configuration options
+
+```python
+integration = PosthogCeleryIntegration(
+    client=None,                          # Optional custom PostHog client
+    capture_exceptions=True,              # Capture task exceptions
+    capture_task_lifecycle_events=True,   # Emit lifecycle events
+    propagate_context=True,               # Propagate context to workers
+    task_filter=None,                     # Optional filter callback
+)
+```
+
+### Custom client
+
+Pass a custom `Client` instance if you're using a custom flag definition cache provider or need specific configuration:
+
+```python
+from posthog import Posthog
+
+client = Posthog('<ph_project_token>', host='<ph_client_api_host>')
+integration = PosthogCeleryIntegration(client=client)
+```
+
+### Task filter
+
+Use `task_filter` to exclude specific tasks from tracking:
+
+```python
+def task_filter(task_name, task_properties):
+    # Don't track health checks
+    if task_name and task_name.endswith('.health_check'):
+        return False
+    return True
+
+integration = PosthogCeleryIntegration(task_filter=task_filter)
+```
+
+## Worker setup
+
+### Single-host deployment
+
+On a single host, the forked child inherits the PostHog client and integration, so no additional setup is needed.
+
+### Multi-host deployment
+
+If workers run on different hosts, initialize PostHog and the integration in each worker process using Celery's `worker_process_init` signal:
+
+```python
+from celery.signals import worker_process_init
+
+@worker_process_init.connect
+def on_worker_process_init(**kwargs):
+    posthog.api_key = '<ph_project_token>'
+    posthog.host = '<ph_client_api_host>'
+    posthog.setup()
+
+    global integration
+    integration = PosthogCeleryIntegration()
+    integration.instrument()
+```
+
+## Shutdown
+
+Call `shutdown()` to flush pending events and disconnect signal handlers:
+
+```python
+from celery.signals import worker_process_shutdown
+
+@worker_process_shutdown.connect
+def on_worker_process_shutdown(**kwargs):
+    integration.shutdown()
+    posthog.shutdown()
+```
+
+The integration automatically registers shutdown handlers, but calling `shutdown()` manually ensures all events are flushed before the process exits.
+
+## Complete example
+
+```python
+import posthog
+from posthog.integrations.celery import PosthogCeleryIntegration
+from celery import Celery
+from celery.signals import worker_process_shutdown
+
+# Initialize PostHog
+posthog.api_key = '<ph_project_token>'
+posthog.host = '<ph_client_api_host>'
+posthog.setup()
+
+# Create Celery app
+app = Celery('myapp', broker='redis://localhost:6379/0')
+
+# Set up integration
+integration = PosthogCeleryIntegration(
+    capture_exceptions=True,
+    capture_task_lifecycle_events=True,
+    propagate_context=True,
+)
+integration.instrument()
+
+@worker_process_shutdown.connect
+def on_worker_process_shutdown(**kwargs):
+    integration.shutdown()
+    posthog.shutdown()
+
+@app.task
+def process_order(order_id):
+    # Custom events inside tasks include propagated context
+    posthog.capture('order_processed', properties={'order_id': order_id})
+    return {'status': 'completed'}
+```
+
+## Next steps
+
+For any technical questions for how to integrate specific PostHog features into Celery (such as analytics, feature flags, A/B testing, etc.), have a look at our [Python SDK docs](/docs/libraries/python).
