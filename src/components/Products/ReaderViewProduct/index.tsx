@@ -111,7 +111,8 @@ export default function ProductReaderView({
     const surfaceMenu: ProductNavItem[] = menuField === 'productMenu' ? resolvedProductMenu : resolvedPricingMenu
 
     const productDataForMenus = {
-        ...productData,
+        slug: productData.slug,
+        name: productData.name,
         productMenu: resolvedProductMenu,
         pricingMenu: resolvedPricingMenu,
     }
