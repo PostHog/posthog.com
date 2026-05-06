@@ -9,29 +9,50 @@ availability:
 sourceId: Postgres
 ---
 
-The Postgres connector can link your database tables to PostHog.
+The Postgres connector links your database tables to PostHog. You can sync data into PostHog's managed storage or query your Postgres database directly from the SQL editor.
 
-To link Postgres:
+## Linking Postgres
 
-1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
-2. Click **New source** and select Postgres
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab
+2. Click **New source** and select **Postgres**
 3. Enter your database connection details:
-   - **Host:** The hostname or IP your database server like `db.example.com` or `123.132.1.100`.
-   - **Port:** The port your database server is listening to. The default is `5432`.
-   - **Database:** The name of the database you want like `analytics_db`.
-   - **User:** The username with the necessary permissions to access the database.
-   - **Password:** The password for the user.
-   - **Schema:** The schema for your database where your tables are located. The default is `public`.
+    - **Host:** The hostname or IP your database server like `db.example.com` or `123.132.1.100`.
+    - **Port:** The port your database server is listening to. The default is `5432`.
+    - **Database:** The name of the database you want like `analytics_db`.
+    - **User:** The username with the necessary permissions to access the database.
+    - **Password:** The password for the user.
+    - **Schema:** The schema where your tables are located. Leave blank to sync tables from all schemas in your database.
 4. If you need to connect through an SSH tunnel, enable and configure it (optional):
-   - **Tunnel host:** The hostname of your SSH server.
-   - **Tunnel port:** The port your SSH server is listening on.
-   - **Authentication type:**
-     - For password authentication, enter your SSH username and password.
-     - For key-based authentication, enter your SSH username, private key, and optional passphrase.
-   - **Require TLS through tunnel?** - Whether to require TLS encryption through the SSH tunnel. Enabled by default. Disable if your database does not support TLS.
+    - **Tunnel host:** The hostname of your SSH server.
+    - **Tunnel port:** The port your SSH server is listening on.
+    - **Authentication type:**
+      - For password authentication, enter your SSH username and password.
+      - For key-based authentication, enter your SSH username, private key, and optional passphrase.
+    - **Require TLS through tunnel?** - Whether to require TLS encryption through the SSH tunnel. Enabled by default. Disable if your database doesn't support TLS.
 5. Click **Link**
 
-The data warehouse then starts syncing your Postgres data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
+PostHog starts syncing your data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
+
+## Multi-schema syncing
+
+When you leave the **Schema** field blank during setup, PostHog discovers tables across all non-system schemas in your database. Each table appears with its fully qualified name (for example, `public.users` or `analytics.events`) so you can identify which schema it belongs to.
+
+This lets you sync tables from multiple schemas without creating separate sources for each one.
+
+## Selecting columns
+
+You can choose which columns to sync for each table. This is useful when you want to exclude sensitive data like PII from syncing.
+
+To select columns:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and select your Postgres source
+2. Find the table you want to configure
+3. Click the **More** menu (three dots) and select **Columns**
+4. Select the columns you want to sync and click **Save**
+
+Primary key columns and any incremental sync field are always included, even if you don't select them. This ensures data integrity during syncs.
+
+Column changes take effect on the next sync. Previously synced data for excluded columns remains in storage but isn't visible in HogQL queries.
 
 ## Configuration
 
