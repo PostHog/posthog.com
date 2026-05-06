@@ -11,9 +11,6 @@ export const userflow = {
                 autocapture: false,
             },
         },
-        product_tours: {
-            available: true,
-        },
         surveys: {
             available: true,
         },

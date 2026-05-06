@@ -515,14 +515,6 @@ const products: Product[] = [
         },
     },
     {
-        name: 'Product tours',
-        Icon: IconMegaphone,
-        color: 'seagreen',
-        types: ['Product'],
-        status: 'Roadmap',
-        roadmapID: 2111,
-    },
-    {
         name: 'Heatmaps',
         Icon: IconApp,
         color: 'yellow',

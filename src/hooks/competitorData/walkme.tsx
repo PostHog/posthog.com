@@ -62,9 +62,6 @@ export const walkme = {
                 },
             },
         },
-        product_tours: {
-            available: true,
-        },
         heatmaps: {
             available: false,
             features: {

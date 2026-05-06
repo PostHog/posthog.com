@@ -62,9 +62,6 @@ export const whatfix = {
                 },
             },
         },
-        product_tours: {
-            available: true,
-        },
         heatmaps: {
             available: false,
             features: {

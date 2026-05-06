@@ -280,9 +280,6 @@ export const posthog = {
                 user_level_permissions: true,
             },
         },
-        product_tours: {
-            available: 'Private alpha',
-        },
         feature_flags: {
             available: true,
             pricing: {
