@@ -26,10 +26,10 @@ const Compatibility = ({ productData }: { productData: any }) => {
 
 const GettingStarted = ({ id, productData }: SectionComponentProps) => {
     return (
-        <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="text-3xl font-bold text-primary mt-0 mb-3">Get started</h2>
+        <section id={id} className="scroll-mt-20 not-prose mb-20">
+            <h2 className="text-3xl font-bold text-primary mt-0 mb-3">Get started – free</h2>
             <p className="text-base leading-relaxed m-0 mb-4">
-                Try {productData?.name} for free — no credit card required.
+                No credit card required.{' '}
                 {productData?.freeLimit && productData?.startsAt && productData?.unit ? (
                     <>
                         You get the{' '}
@@ -37,16 +37,17 @@ const GettingStarted = ({ id, productData }: SectionComponentProps) => {
                             first {Number(productData.freeLimit).toLocaleString()} {productData.unit}s free every month,
                         </strong>{' '}
                         <span className="inline-block">
-                            then starting at{' '}
+                            then pricing starts at{' '}
                             <strong>
-                                ${productData.startsAt}/{productData.unit}.
-                            </strong>
+                                ${productData.startsAt}/{productData.unit}
+                            </strong>{' '}
+                            and reduces with volume.
                         </span>
                     </>
                 ) : null}
             </p>
             <Compatibility productData={productData} />
-            <div className="grid grid-cols-1 @md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-4">
                 <ScriptInstallCallout
                     title="Install with AI"
                     description="Run this command in your terminal or AI editor."
