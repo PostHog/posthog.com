@@ -4,10 +4,12 @@ import OSButton from '../OSButton'
 
 const HIGHLIGHT_COLOR = 'rgba(247, 165, 1, 0.35)' // PostHog yellow (#F7A501) at 35% alpha
 const STRONG_REGEX = /<strong>([\s\S]*?)<\/strong>/g
-/** After the stack finishes moving (~380ms), draw highlights so rough-notation measures an un-rotated box */
-const HIGHLIGHT_DELAY_MS = 240
-/** Rough-notation draw speed once `show` becomes true */
-const HIGHLIGHT_ANIMATION_MS = 1600
+/** Wait until the card CSS transition (420ms) fully settles before drawing highlights.
+ *  Starting before that stores mid-rotation rects; rough-notation's internal 400ms
+ *  resize debounce then detects the rect change and calls show() mid-animation → pop. */
+const HIGHLIGHT_DELAY_MS = 460
+/** Rough-notation draw speed once `show` becomes true. */
+const HIGHLIGHT_ANIMATION_MS = 800
 
 type ContentPart = { text: string; highlight: boolean }
 

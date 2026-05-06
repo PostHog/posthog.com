@@ -41,10 +41,6 @@ const INNER_ROTATE_DEG = 5
 const INNER_OPACITY = 0.75
 const INNER_TRANSLATE_Y_PX = 40
 
-/**
- * Entry-only pose: same Y as resting side cards (`top center` pivot) so nothing “jumps” vertically
- * into the stack. Less horizontal travel than before; extra rotation does most of the “from the edge” read.
- */
 const ENTRY_TRANSLATE_RATIO = 0.64
 const ENTRY_EXTRA_Y_PX = 0
 const ENTRY_SCALE = 0.82
@@ -56,14 +52,7 @@ const TRANSITION = `transform ${TRANSITION_MS}ms cubic-bezier(0.22, 1, 0.36, 1),
 function layoutForPosition(position: StackPosition, cardWidth: number): Layout {
     const w = cardWidth || 320
     if (position === 0) {
-        return {
-            baseX: 0,
-            baseY: 0,
-            scale: 1,
-            rotate: 0,
-            opacity: 1,
-            zIndex: 30,
-        }
+        return { baseX: 0, baseY: 0, scale: 1, rotate: 0, opacity: 1, zIndex: 30 }
     }
     const sign = position as 1 | -1
     return {
@@ -89,7 +78,6 @@ function entryPose(from: 'left' | 'right', cardWidth: number): Layout {
     }
 }
 
-/** `initial` = first paint, both neighbors fly in; `nav` = one new neighbor after advance */
 type Entrance = { kind: 'initial' } | { kind: 'nav'; index: number; from: 'left' | 'right' }
 
 function isEnteringSide(entrance: Entrance | null, index: number, position: StackPosition): boolean {
@@ -133,19 +121,28 @@ function StackCardShell({
     const entry = enteringThis && entrance ? entryPose(entryPoseForEntrance(entrance, position), cardWidth) : settled
 
     const [useSettledLayout, setUseSettledLayout] = useState(!enteringThis || prefersReducedMotion)
+    // Suppresses the CSS transition while jumping to the entry pose so the card doesn't animate backwards.
+    const [suppressTransition, setSuppressTransition] = useState(false)
 
     useLayoutEffect(() => {
         if (prefersReducedMotion) {
             setUseSettledLayout(true)
+            setSuppressTransition(false)
             return
         }
         if (!enteringThis) {
             setUseSettledLayout(true)
+            setSuppressTransition(false)
             return
         }
+        // Instantly place card at entry pose (no transition), then animate to settled.
         setUseSettledLayout(false)
+        setSuppressTransition(true)
         const id = requestAnimationFrame(() => {
-            requestAnimationFrame(() => setUseSettledLayout(true))
+            requestAnimationFrame(() => {
+                setSuppressTransition(false)
+                setUseSettledLayout(true)
+            })
         })
         return () => cancelAnimationFrame(id)
     }, [enteringThis, prefersReducedMotion, index, position, entrance])
@@ -155,25 +152,31 @@ function StackCardShell({
     const dragRot = isDragging ? Math.max(-6, Math.min(6, (dragOffset / w) * 7.5)) : 0
     const sideDragFactor = position === 0 ? 1 : 0.55
     const liveRotate = pose.rotate - dragRot * sideDragFactor
-
     const liveX = pose.baseX + (isDragging ? dragOffset : 0)
 
-    const transitionStyle = !transitionEnabled || isDragging || prefersReducedMotion ? 'none' : TRANSITION
+    const transitionStyle =
+        !transitionEnabled || isDragging || suppressTransition || prefersReducedMotion ? 'none' : TRANSITION
 
-    const sideCardHiddenBelowLg = position !== 0
+    const isSideCard = position !== 0
+
+    // Side cards: CSS @container query controls visibility (opacity-0 → @lg:opacity-[0.75]).
+    // @lg in @tailwindcss/container-queries = 32rem = 512px, which is where the stack layout fits.
+    // The inline `transition` already covers opacity, so the enter/exit animations play naturally.
+    // Center card: opacity always 1 (or set via inline style during drag/transition).
+    const sideOpacityClass = isSideCard ? 'opacity-0 @lg:opacity-[0.75]' : ''
 
     return (
         <div
             data-card-stack-position={position}
             aria-hidden={position !== 0}
-            className={`absolute top-0 left-1/2 w-[min(90%,368px)] pointer-events-none ${
-                sideCardHiddenBelowLg ? 'hidden @lg:block' : ''
-            }`}
+            className={`absolute top-0 left-1/2 w-[min(90%,368px)] pointer-events-none ${sideOpacityClass}`}
             style={{
                 zIndex: pose.zIndex,
                 transform: `translate(calc(-50% + ${liveX}px), ${pose.baseY}px) scale(${pose.scale}) rotate(${liveRotate}deg)`,
                 transformOrigin: 'top center',
-                opacity: pose.opacity,
+                // Side card opacity is controlled by CSS container query class above.
+                // Only the center card needs an inline opacity (1).
+                opacity: isSideCard ? undefined : pose.opacity,
                 transition: transitionStyle,
             }}
         >
@@ -242,7 +245,6 @@ export function CardStackCarousel({
     const canPrev = loop ? count > 1 : current > 0
     const canNext = loop ? count > 1 : current < count - 1
 
-    // First paint (wide layout): both side neighbors animate from entry poses into the stack.
     useLayoutEffect(() => {
         if (count <= 1 || prefersReducedMotion) return
         if (didInitialEntranceRef.current) return

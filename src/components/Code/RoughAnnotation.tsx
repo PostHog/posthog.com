@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
 export type AnnotationType = 'underline' | 'box' | 'circle' | 'highlight' | 'strike-through' | 'crossed-off' | 'bracket'
@@ -112,12 +112,10 @@ export function RoughAnnotation({
                     () => {
                         showTimeoutRef.current = null
                         if (!annotationRef.current) return
-                        console.log('[RoughAnnotation] calling show(), starting animation')
                         isAnimatingRef.current = true
                         annotationRef.current.show()
                         const aniDuration = prefersReducedMotion ? 0 : animationDuration
                         animationEndTimerRef.current = setTimeout(() => {
-                            console.log('[RoughAnnotation] animation complete, repositioning re-enabled')
                             isAnimatingRef.current = false
                             animationEndTimerRef.current = null
                         }, aniDuration)
