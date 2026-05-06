@@ -34,6 +34,7 @@ import * as PostHogIcons from '@posthog/icons'
 import * as OSIcons from '../OSIcons/Icons'
 import { getLogo } from '../../constants/logos'
 import SearchProvider, { useSearch } from 'components/Editor/SearchProvider'
+import algoliasearch from 'algoliasearch/lite'
 import Mark from 'mark.js'
 import debounce from 'lodash/debounce'
 import { useLocation } from '@reach/router'
@@ -48,6 +49,11 @@ import { getVideoClasses } from '../../constants'
 import { Blockquote } from 'components/BlockQuote'
 
 dayjs.extend(relativeTime)
+
+const algoliaSearchClient = algoliasearch(
+    process.env.GATSBY_ALGOLIA_APP_ID as string,
+    process.env.GATSBY_ALGOLIA_SEARCH_API_KEY as string
+)
 
 // Wrapper component that conditionally renders CopyMarkdownActionsDropdown based on whether the markdown URL exists
 const ConditionalMarkdownDropdown = ({ pageUrl }: { pageUrl: string | undefined }) => {
@@ -514,11 +520,9 @@ const Menu = (props: { parent: MenuItem }) => {
 }
 
 /**
- * Always-visible inline search input rendered in the LeftSidebar. Mirrors the
- * Editor SearchBar's mark.js highlighting behavior (clones contentRef into a
- * sibling container that gets marked) but without the open/close toggle and
- * absolute positioning. Cleans up the duplicate when the query is empty or
- * the component unmounts.
+ * Always-visible inline search input rendered in the LeftSidebar. Uses mark.js
+ * to highlight matches directly in the article content. When the query is
+ * cleared or the component unmounts, highlights are removed.
  */
 const InlineSearch = ({
     contentRef,
@@ -532,46 +536,26 @@ const InlineSearch = ({
     const { searchQuery, setSearchQuery } = useSearch()
     const [inputValue, setInputValue] = useState(searchQuery)
     const markedRef = useRef<any>(null)
-    const duplicateContainerRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
         setInputValue(searchQuery)
     }, [searchQuery])
 
-    const teardownDuplicate = () => {
-        if (duplicateContainerRef.current) {
-            duplicateContainerRef.current.remove()
-            duplicateContainerRef.current = null
-        }
-        if (contentRef?.current) {
-            contentRef.current.style.display = ''
-        }
-        markedRef.current = null
-    }
-
     useEffect(() => {
         if (!contentRef?.current) return
-        if (!inputValue) {
-            teardownDuplicate()
-            return
+        if (!markedRef.current) {
+            markedRef.current = new Mark(contentRef.current)
         }
-        if (!duplicateContainerRef.current) {
-            const duplicate = document.createElement('div')
-            const clone = contentRef.current.cloneNode(true) as HTMLElement
-            duplicate.appendChild(clone)
-            duplicate.className = 'highlight-container'
-            contentRef.current.parentElement?.appendChild(duplicate)
-            contentRef.current.style.display = 'none'
-            duplicateContainerRef.current = duplicate
-            markedRef.current = new Mark(duplicate)
+        markedRef.current.unmark()
+        if (inputValue) {
+            markedRef.current.mark(inputValue, { separateWordSearch: false })
         }
-        markedRef.current?.unmark()
-        markedRef.current?.mark(inputValue)
     }, [inputValue])
 
     useEffect(() => {
         return () => {
-            teardownDuplicate()
+            markedRef.current?.unmark()
+            markedRef.current = null
         }
     }, [])
 
@@ -619,6 +603,261 @@ const InlineSearch = ({
     )
 }
 
+interface OnPageMatch {
+    id: string
+    snippet: string
+    heading: string | null
+    element: HTMLElement
+}
+
+const extractOnPageMatches = (contentEl: HTMLElement, query: string): OnPageMatch[] => {
+    if (!query || query.length < 2) return []
+
+    const matches: OnPageMatch[] = []
+    const lowerQuery = query.toLowerCase()
+    const headings = Array.from(contentEl.querySelectorAll('h1, h2, h3, h4, h5, h6'))
+    const blocks = contentEl.querySelectorAll('p, li, td, th, dt, dd, pre, h1, h2, h3, h4, h5, h6')
+
+    let matchId = 0
+
+    blocks.forEach((block) => {
+        const text = block.textContent || ''
+        const lowerText = text.toLowerCase()
+        if (!lowerText.includes(lowerQuery)) return
+
+        const idx = lowerText.indexOf(lowerQuery)
+        const contextRadius = 60
+        const start = Math.max(0, idx - contextRadius)
+        const end = Math.min(text.length, idx + query.length + contextRadius)
+        let snippet = text.slice(start, end).trim()
+        if (start > 0) snippet = '...' + snippet
+        if (end < text.length) snippet = snippet + '...'
+
+        const isHeading = /^H[1-6]$/.test(block.tagName)
+        let heading: string | null = null
+        if (!isHeading) {
+            for (let j = headings.length - 1; j >= 0; j--) {
+                const pos = block.compareDocumentPosition(headings[j])
+                if (pos & Node.DOCUMENT_POSITION_PRECEDING) {
+                    heading = headings[j].textContent?.trim() || null
+                    break
+                }
+            }
+        }
+
+        matches.push({
+            id: `m${matchId++}`,
+            snippet,
+            heading: isHeading ? text.trim() : heading,
+            element: block as HTMLElement,
+        })
+    })
+
+    return matches
+}
+
+const HighlightedSnippet = ({ text, query }: { text: string; query: string }) => {
+    const lowerText = text.toLowerCase()
+    const lowerQuery = query.toLowerCase()
+    const parts: React.ReactNode[] = []
+
+    let lastIdx = 0
+    let idx = lowerText.indexOf(lowerQuery)
+    let key = 0
+
+    while (idx !== -1) {
+        if (idx > lastIdx) {
+            parts.push(
+                <span key={key++} className="text-secondary">
+                    {text.slice(lastIdx, idx)}
+                </span>
+            )
+        }
+        parts.push(
+            <mark key={key++} className="bg-yellow/40 dark:bg-yellow/30 text-primary rounded-sm px-0.5 font-medium">
+                {text.slice(idx, idx + query.length)}
+            </mark>
+        )
+        lastIdx = idx + query.length
+        idx = lowerText.indexOf(lowerQuery, lastIdx)
+    }
+
+    if (lastIdx < text.length) {
+        parts.push(
+            <span key={key++} className="text-secondary">
+                {text.slice(lastIdx)}
+            </span>
+        )
+    }
+
+    return <span className="text-xs leading-relaxed">{parts}</span>
+}
+
+const SidebarSearchResults = ({
+    contentRef,
+    currentPath,
+}: {
+    contentRef?: React.RefObject<HTMLElement>
+    currentPath?: string
+}) => {
+    const { searchQuery } = useSearch()
+    const [onPageMatches, setOnPageMatches] = useState<OnPageMatch[]>([])
+    const [algoliaHits, setAlgoliaHits] = useState<any[]>([])
+    const [algoliaLoading, setAlgoliaLoading] = useState(false)
+
+    useEffect(() => {
+        if (!searchQuery || searchQuery.length < 2 || !contentRef?.current) {
+            setOnPageMatches([])
+            return
+        }
+        const matches = extractOnPageMatches(contentRef.current, searchQuery)
+        setOnPageMatches(matches.slice(0, 20))
+    }, [searchQuery])
+
+    useEffect(() => {
+        if (!searchQuery || searchQuery.length < 2) {
+            setAlgoliaHits([])
+            setAlgoliaLoading(false)
+            return
+        }
+
+        let cancelled = false
+        setAlgoliaLoading(true)
+
+        const doSearch = async () => {
+            try {
+                const index = algoliaSearchClient.initIndex(process.env.GATSBY_ALGOLIA_INDEX_NAME as string)
+                const { hits } = await index.search(searchQuery, { hitsPerPage: 8 })
+                if (!cancelled) {
+                    const filtered = currentPath
+                        ? hits.filter((h: any) => {
+                              const slug = h.fields?.slug || `/${h.slug}`
+                              return slug !== currentPath
+                          })
+                        : hits
+                    setAlgoliaHits(filtered)
+                    setAlgoliaLoading(false)
+                }
+            } catch {
+                if (!cancelled) setAlgoliaLoading(false)
+            }
+        }
+
+        doSearch()
+        return () => {
+            cancelled = true
+        }
+    }, [searchQuery, currentPath])
+
+    const scrollToMatch = (element: HTMLElement) => {
+        const scrollEl = contentRef?.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement
+        if (!scrollEl) return
+
+        const scrollRect = scrollEl.getBoundingClientRect()
+        const elementRect = element.getBoundingClientRect()
+        const targetTop = elementRect.top - scrollRect.top + scrollEl.scrollTop - 100
+
+        scrollEl.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' })
+
+        element.classList.add('search-scroll-target')
+        setTimeout(() => element.classList.remove('search-scroll-target'), 2000)
+    }
+
+    if (!searchQuery || searchQuery.length < 2) return null
+
+    const groupedByHeading: Record<string, OnPageMatch[]> = {}
+    onPageMatches.forEach((match) => {
+        const key = match.heading || ''
+        if (!groupedByHeading[key]) groupedByHeading[key] = []
+        groupedByHeading[key].push(match)
+    })
+
+    return (
+        <div className="text-sm space-y-3">
+            {onPageMatches.length > 0 && (
+                <div>
+                    <h4 className="text-[11px] font-semibold text-muted uppercase tracking-wide m-0 mb-1 px-1">
+                        On this page
+                        <span className="ml-1.5 text-muted/60 font-normal normal-case tracking-normal">
+                            {onPageMatches.length} {onPageMatches.length === 1 ? 'match' : 'matches'}
+                        </span>
+                    </h4>
+                    <ul className="list-none m-0 p-0">
+                        {Object.entries(groupedByHeading).map(([heading, matches]) => (
+                            <li key={heading} className="mb-1">
+                                {heading && (
+                                    <span className="block text-[11px] font-medium text-muted px-2 pt-1 truncate">
+                                        {heading}
+                                    </span>
+                                )}
+                                <ul className="list-none m-0 p-0">
+                                    {matches.map((match) => (
+                                        <li key={match.id}>
+                                            <button
+                                                type="button"
+                                                onClick={() => scrollToMatch(match.element)}
+                                                className="w-full text-left px-2 py-1 rounded hover:bg-accent transition-colors cursor-pointer"
+                                            >
+                                                <HighlightedSnippet text={match.snippet} query={searchQuery} />
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
+            {onPageMatches.length === 0 && (
+                <div>
+                    <h4 className="text-[11px] font-semibold text-muted uppercase tracking-wide m-0 mb-1 px-1">
+                        On this page
+                    </h4>
+                    <p className="px-2 py-1 text-xs text-muted m-0">No matches</p>
+                </div>
+            )}
+
+            <div className="border-t border-secondary pt-2">
+                <h4 className="text-[11px] font-semibold text-muted uppercase tracking-wide m-0 mb-1 px-1">
+                    Other pages
+                </h4>
+                {algoliaLoading ? (
+                    <div className="px-2 py-3 space-y-2">
+                        {[...Array(3)].map((_, i) => (
+                            <div key={i} className="space-y-1">
+                                <div className="h-3.5 bg-accent rounded animate-pulse w-3/4" />
+                                <div className="h-3 bg-accent rounded animate-pulse w-1/2" />
+                            </div>
+                        ))}
+                    </div>
+                ) : algoliaHits.length > 0 ? (
+                    <ul className="list-none m-0 p-0">
+                        {algoliaHits.map((hit: any) => (
+                            <li key={hit.objectID}>
+                                <Link
+                                    to={hit.fields?.slug || `/${hit.slug}`}
+                                    state={{ newWindow: true }}
+                                    className="block px-2 py-1.5 rounded hover:bg-accent transition-colors group"
+                                >
+                                    <span className="block text-[13px] font-medium text-primary truncate">
+                                        {hit.title}
+                                    </span>
+                                    <span className="block text-[11px] text-muted truncate">
+                                        posthog.com{hit.fields?.slug || `/${hit.slug}`}
+                                    </span>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className="px-2 py-1 text-xs text-muted m-0">No results</p>
+                )}
+            </div>
+        </div>
+    )
+}
+
 interface LeftSidebarProps {
     isNavVisible: boolean
     toggleNav: () => void
@@ -632,6 +871,8 @@ interface LeftSidebarProps {
     inlineSearch?: React.ReactNode
     menuTabs?: MenuTab[]
     children: React.ReactNode
+    contentRef?: React.RefObject<HTMLElement>
+    currentPath?: string
 }
 
 const SIDEBAR_TRANSITION = { type: 'spring' as const, stiffness: 380, damping: 36 }
@@ -763,7 +1004,11 @@ const LeftSidebar = ({
     inlineSearch,
     menuTabs,
     children,
+    contentRef,
+    currentPath,
 }: LeftSidebarProps) => {
+    const { searchQuery } = useSearch()
+    const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
     const hasTabs = !!menuTabs && menuTabs.length > 0
     const initialTab = hasTabs ? menuTabs!.find((t) => t.default)?.value || menuTabs![0].value : ''
     const [activeTab, setActiveTab] = useState(initialTab)
@@ -964,7 +1209,7 @@ const LeftSidebar = ({
                         - Otherwise (collapsed OR hover-expanded): vertical
                           icon-only column. We deliberately don't reflow on
                           hover — tabs only rotate axes when the user pins. */}
-                        {hasTabs && (
+                        {hasTabs && !hasActiveSearch && (
                             // Single container across all states (pinned, hover,
                             // collapsed) so SidebarTabButton instances stay
                             // mounted — required for the icon FLIP animation to
@@ -1011,12 +1256,16 @@ const LeftSidebar = ({
                             </motion.div>
                         )}
 
-                        {/* Menu: stays mounted in both states. The label fade is
-                        applied by the parent (covers product name + menu
-                        items uniformly), so this just contributes the
-                        scrolling viewport. */}
                         <div className="flex-1 min-h-0 flex flex-col">
-                            <ScrollArea className="px-2 pb-2">{hasTabs ? activeMenu : children}</ScrollArea>
+                            <ScrollArea className="px-2 pb-2">
+                                {hasActiveSearch ? (
+                                    <SidebarSearchResults contentRef={contentRef} currentPath={currentPath} />
+                                ) : hasTabs ? (
+                                    activeMenu
+                                ) : (
+                                    children
+                                )}
+                            </ScrollArea>
                         </div>
                     </div>
                 </SidebarExpandedContext.Provider>
@@ -1227,6 +1476,8 @@ function ReaderViewContent({
                             <InlineSearch contentRef={onSearch ? undefined : contentRef} onSearch={onSearch} />
                         }
                         menuTabs={menuTabs}
+                        contentRef={onSearch ? undefined : contentRef}
+                        currentPath={appWindow?.path}
                     >
                         {leftSidebar || <Menu parent={parent as MenuItem} />}
                     </LeftSidebar>
