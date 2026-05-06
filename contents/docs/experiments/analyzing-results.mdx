@@ -214,3 +214,35 @@ The funnel breakdown shows conversion rates at each step, helping you identify:
 
 > **Important**: Statistical significance for funnels is always calculated between the first step (exposure event) and the final step. Intermediate steps are shown for analysis but don't affect the significance calculation.
 
+## Significance alerts
+
+Get notified when a metric in your experiment reaches statistical significance. This lets you act on results quickly without checking the experiment page manually.
+
+### Setting up alerts
+
+To configure significance alerts:
+
+1. Go to your experiment and click the **Settings** tab
+2. In the **Notifications** section, click **Add destination**
+3. Choose your notification method:
+   - **Slack** – Post to a Slack channel when a metric reaches significance
+   - **Webhook** – Send an HTTP request to a custom endpoint
+4. Configure the destination settings (select a Slack channel or enter your webhook URL)
+5. Save the destination
+
+You can add multiple destinations to notify different channels or systems.
+
+### What the notification includes
+
+When a metric reaches significance, the notification includes:
+
+- The experiment name
+- Which variant is winning
+- The metric name and relative change
+- The chance to win and goal direction
+- A link to the experiment in PostHog
+
+### When alerts fire
+
+Alerts fire when any metric in your experiment first reaches statistical significance. Each metric triggers its own alert, so you may receive multiple notifications if several metrics become significant.
+
