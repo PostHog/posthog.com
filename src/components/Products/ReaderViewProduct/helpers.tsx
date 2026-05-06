@@ -3,9 +3,11 @@ import React from 'react'
 export const LabeledList = ({
     items,
     columns = [1, 2],
+    className = '',
 }: {
     items: { label: string; description: React.ReactNode }[]
     columns?: [number, number]
+    className?: string
 }) => {
     const [labelCols, descCols] = columns
     const totalCols = labelCols + descCols
@@ -18,7 +20,7 @@ export const LabeledList = ({
     }
     return (
         <div
-            className={`inline-grid @lg:[&>*:nth-child(n+3)]:border-t @lg:[&>*:nth-child(n+3)]:border-primary ${gridClass[totalCols]}`}
+            className={`inline-grid @lg:[&>*:nth-child(n+3)]:border-t @lg:[&>*:nth-child(n+3)]:border-primary ${gridClass[totalCols]} ${className}`}
         >
             {items.map(({ label, description }) => (
                 <React.Fragment key={label}>

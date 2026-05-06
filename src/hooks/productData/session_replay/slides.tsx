@@ -11,6 +11,65 @@ import PlatformInstall from 'components/PlatformInstall'
 
 export const applications: CarouselSlide[] = [
     {
+        slug: 'research',
+        label: 'Editor / MCP',
+        icon: <IconBrowser className="size-5" />,
+        color: 'bg-white dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-purple',
+        layout: 'stack',
+        heading: 'Debug or research without leaving your product editor',
+        description: (
+            <>
+                <aside className="my-4 @lg/reader-content:mt-2 @lg/reader-content:float-right max-w-[100%_+_1rem] @lg/reader-content:max-w-[300px] @xl/reader-content:max-w-[360px] @3xl/reader-content:max-w-[440px] @lg/reader-content:ml-8 -mr-4 @2xl/reader-content:-mr-8 @4xl/reader-content:-mr-10">
+                    <Glow color="black" intensity="gentle" rounded="lg">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_light_cf355dbe0d.png"
+                            className="dark:hidden w-full"
+                            imgClassName="w-full"
+                        />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_dark_c535f2d8b4.png"
+                            className="hidden dark:inline-block w-full"
+                            imgClassName="w-full"
+                        />
+                    </Glow>
+                </aside>
+                <p>
+                    PostHog AI can find, watch, and summarize session recordings and you can do it from Cursor, Claude
+                    Code, VS Code, or any MCP-compatible agent.
+                </p>
+
+                <div className="@container">
+                    <LabeledList
+                        className="mb-8"
+                        items={[
+                            {
+                                label: 'Investigate bug reports',
+                                description:
+                                    'Find session replays where users encountered errors to feed your agent with context.',
+                            },
+                            {
+                                label: 'Research before coding',
+                                description: 'Summarize current user behavior before making code changes.',
+                            },
+                            {
+                                label: 'Validate after deploying',
+                                description: 'Monitor how users interact with newly deployed updates.',
+                            },
+                            {
+                                label: 'Search session replays',
+                                description:
+                                    'Filter recordings by events, user properties, time ranges, and specific user behaviors.',
+                            },
+                        ]}
+                    />
+                    <PlatformInstall />
+                </div>
+            </>
+        ),
+    },
+    {
         slug: 'filter',
         label: 'Search',
         icon: <IconSearch className="size-5" />,
@@ -76,64 +135,6 @@ export const applications: CarouselSlide[] = [
             containerClassName: 'pb-0 leading-[0]',
             imgClassName: 'border-b-0 rounded-b-none',
         },
-    },
-    {
-        slug: 'research',
-        label: 'Editor / MCP',
-        icon: <IconBrowser className="size-5" />,
-        color: 'bg-white dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-purple',
-        layout: 'stack',
-        heading: 'Debug or research without leaving your product editor',
-        description: (
-            <>
-                <aside className="my-4 @lg/reader-content:mt-2 @lg/reader-content:float-right max-w-[100%_+_1rem] @lg/reader-content:max-w-[300px] @xl/reader-content:max-w-[360px] @3xl/reader-content:max-w-[440px] @lg/reader-content:ml-8 -mr-4 @2xl/reader-content:-mr-8 @4xl/reader-content:-mr-10">
-                    <Glow color="black" intensity="gentle" rounded="lg">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_light_cf355dbe0d.png"
-                            className="dark:hidden w-full"
-                            imgClassName="w-full"
-                        />
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_dark_c535f2d8b4.png"
-                            className="hidden dark:inline-block w-full"
-                            imgClassName="w-full"
-                        />
-                    </Glow>
-                </aside>
-                <p>
-                    PostHog AI can find, watch, and summarize session recordings and you can do it from Cursor, Claude
-                    Code, VS Code, or any MCP-compatible agent.
-                </p>
-                <PlatformInstall />
-
-                <div className="@container">
-                    <LabeledList
-                        items={[
-                            {
-                                label: 'Investigate bug reports',
-                                description:
-                                    'Find session replays where users encountered errors to feed your agent with context.',
-                            },
-                            {
-                                label: 'Research before coding',
-                                description: 'Summarize current user behavior before making code changes.',
-                            },
-                            {
-                                label: 'Validate after deploying',
-                                description: 'Monitor how users interact with newly deployed updates.',
-                            },
-                            {
-                                label: 'Search session replays',
-                                description:
-                                    'Filter recordings by events, user properties, time ranges, and specific user behaviors.',
-                            },
-                        ]}
-                    />
-                </div>
-            </>
-        ),
     },
 ]
 
