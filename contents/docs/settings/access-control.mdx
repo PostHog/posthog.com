@@ -85,7 +85,7 @@ See the table below for a summary of project-level permissions:
 | Delete project                                                                 | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> |
 | Edit project settings                                                          | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> |
 | View/edit own or permitted resources (based on resource-level access controls) | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
-| View/edit all resources (regardless of resource-level access controls)         | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> |
+| View/edit all resources (regardless of resource-level access controls)         | <span className="text-red text-lg">✖</span>   | <span className="text-red text-lg">✖</span>   |
 
 ### 3. Resource level
 
@@ -125,9 +125,9 @@ These settings allow you to control who can view and edit a specific resource ob
 
 By default, new resources are set to "Editor" access. Users with appropriate permissions can modify this default and set specific permissions for members and roles.
 
-Resource creators, project admins, and users with "Manager" access can always view and edit resources, as well as manage their access controls.
+Resource creators, organization admins, and users with "Manager" access can always view and edit resources, as well as manage their access controls.
 
-You cannot set resource-level access controls for project admins, as they always have full access.
+You cannot set resource-level access controls for organization admins, as they always have full access.
 
 <ProductScreenshot
   imageLight={objectAccessControlLight}
@@ -144,7 +144,7 @@ You can set default access levels for all resources of a given type in a project
 
 Individual resource object access controls for specific users or roles take precedence over resource-level access controls.
 
-You cannot set resource-level access controls for project admins, as they always have full access.
+You cannot set resource-level access controls for organization admins, as they always have full access.
 
 <ProductScreenshot
   imageLight={resourceAccessControlLight}
