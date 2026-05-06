@@ -3,9 +3,9 @@ title: Provisioning API
 sidebarTitle: Provisioning API
 ---
 
-If you're onboarding users from your own product into PostHog, this API lets you skip the signup page. Call three endpoints and you get back a project token, a personal API key, and a host URL – everything you need to start sending events on the user's behalf.
+If you're onboarding users from your own product into PostHog, this API lets you skip the signup form. Call three endpoints and you get back a project token, a personal API key, and a host URL – everything you need to start sending events into the user's project. The user still gets a welcome email with a link to set their password and access their dashboard.
 
-It's intended for partners and platform integrations. If you're integrating your own app with your own PostHog account, you probably want [OAuth](/docs/api/oauth) or a [personal API key](/docs/api) instead.
+It's intended for partners and platform integrations. If you're integrating your own app with your own PostHog account, you probably want [OAuth](/docs/api/oauth) or a [personal API key](/docs/api#private-endpoint-authentication) instead.
 
 Jump to the [full Node.js example](#full-example) to see the complete flow in code.
 
@@ -39,7 +39,7 @@ sequenceDiagram
 
 ### Host a CIMD metadata document
 
-PostHog uses [Client ID Metadata Documents](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/) (CIMD) for partner registration. There's no signup form to fill out – you host a JSON document at an HTTPS URL on your domain, and that URL becomes your `client_id`. The first API call you make picks it up.
+PostHog uses [Client ID Metadata Documents](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/) (CIMD) for partner registration. There's no signup form to fill out – you host a JSON document at an HTTPS URL on your domain, and that URL becomes your `client_id`.
 
 Create a JSON file at a stable HTTPS URL, for example `https://yourapp.com/.well-known/posthog-client.json`:
 
@@ -401,7 +401,7 @@ All provisioning endpoints are rate limited.
 - 100 new client registrations per hour globally
 - 5 new client registrations per domain per hour
 
-**Account requests** (per partner, per hour): defaults to 10/hour for new CIMD partners. Email **team-growth@posthog.com** if you need a higher limit for a real integration.
+**Account requests** (per partner, per hour): defaults to 10/hour for new CIMD partners. Email [team-growth@posthog.com](mailto:team-growth@posthog.com) if you need a higher limit for production use.
 
 ## Full example
 
