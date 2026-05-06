@@ -7,7 +7,7 @@ import OSTable from 'components/OSTable'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { features as f } from './features'
 import { LabeledList, FilterTag, InlineCode } from 'components/Products/ReaderViewProduct/helpers'
-import WizardCommand from 'components/WizardCommand'
+import PlatformInstall from 'components/PlatformInstall'
 
 export const applications: CarouselSlide[] = [
     {
@@ -106,7 +106,7 @@ export const applications: CarouselSlide[] = [
                     PostHog AI can find, watch, and summarize session recordings and you can do it from Cursor, Claude
                     Code, VS Code, or any MCP-compatible agent.
                 </p>
-                <WizardCommand latest={false} />
+                <PlatformInstall />
 
                 <div className="@container">
                     <LabeledList
