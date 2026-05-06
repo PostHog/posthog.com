@@ -15,10 +15,8 @@ import {
     IconCursorClick,
     IconMagic,
     IconChat,
+    IconCode,
 } from '@posthog/icons'
-import { IconJavaScript, IconApple, IconAndroid, IconFlutter, IconReactNative } from 'components/OSIcons/Icons'
-import OSButton from 'components/OSButton'
-import Link from 'components/Link'
 import { features } from './session_replay/features'
 import { applications, topFeatures } from './session_replay/slides'
 
@@ -71,6 +69,12 @@ export const sessionReplay = {
             name: 'Ask PostHog anything',
             group: 'divided',
             icon: <IconChat className="size-4" />,
+        },
+        {
+            slug: 'installation',
+            name: 'Install',
+            group: 'divided',
+            icon: <IconCode className="size-4" />,
         },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
@@ -202,96 +206,12 @@ export const sessionReplay = {
         description:
             'Find session recordings from Cursor, Claude Code, VS Code, or any MCP-compatible agent. Filter by events, user properties, and frustration signals.',
     },
-    compatibility: {
-        title: 'Supported platforms',
-        headline: 'Supported platforms',
-        description:
-            "Works with PostHog.js on the web. If you're already using product analytics, there's no separate installation.",
-        children: (
-            <div>
-                <fieldset className="bg-primary">
-                    <legend className="text-sm font-semibold">Web</legend>
-                    <OSButton
-                        asLink
-                        icon={<IconJavaScript />}
-                        iconClassName="size-6 relative -top-px"
-                        size="lg"
-                        className="mr-1"
-                        to="/docs/libraries/js"
-                        state={{
-                            newWindow: true,
-                        }}
-                    >
-                        <span>JavaScript</span>
-                    </OSButton>
-                </fieldset>
-                <fieldset className="bg-primary">
-                    <legend className="text-sm font-semibold">Mobile*</legend>
-                    <OSButton
-                        asLink
-                        icon={<IconApple />}
-                        iconClassName="size-6 relative -top-px"
-                        size="lg"
-                        className="mr-1"
-                        to="/docs/libraries/ios"
-                        state={{
-                            newWindow: true,
-                        }}
-                    >
-                        <span>iOS</span>
-                    </OSButton>
-                    <OSButton
-                        asLink
-                        icon={<IconAndroid />}
-                        iconClassName="size-6 relative -top-px"
-                        size="lg"
-                        className="mr-1"
-                        to="/docs/libraries/android"
-                        state={{
-                            newWindow: true,
-                        }}
-                    >
-                        <span>Android</span>
-                    </OSButton>
-                </fieldset>
-                <fieldset className="bg-primary">
-                    <legend className="text-sm font-semibold">Cross-platform*</legend>
-                    <OSButton
-                        asLink
-                        icon={<IconReactNative />}
-                        iconClassName="size-6 relative -top-px"
-                        size="lg"
-                        className="mr-1"
-                        to="/docs/libraries/react-native"
-                        state={{
-                            newWindow: true,
-                        }}
-                    >
-                        <span>React Native</span>
-                    </OSButton>
-                    <OSButton
-                        asLink
-                        icon={<IconFlutter />}
-                        iconClassName="size-6 relative -top-px"
-                        size="lg"
-                        className="mr-1"
-                        to="/docs/libraries/flutter"
-                        state={{
-                            newWindow: true,
-                        }}
-                    >
-                        <span>Flutter</span>
-                    </OSButton>
-                </fieldset>
-                <p className="">
-                    *Mobile and cross-platform libraries available as an{' '}
-                    <Link to="/addons" state={{ newWindow: true }}>
-                        add-on
-                    </Link>
-                    .
-                </p>
-            </div>
-        ),
+    installation: {
+        title: 'Install',
+        headline: 'Install',
+        description: "We've got an install method for you.",
+        productSlug: 'session-replay',
+        categories: ['web', 'mobile', 'no-code'],
     },
     postHogOnPostHog: {
         title: 'How PostHog uses Session Replay',
