@@ -70,3 +70,21 @@ CSMs are encouraged (as are all PostHog employees) to experiment and surface new
 * Impact on customer experience  
 * Requirement for human judgment  
 * Scalability across the team
+
+### **Incoorporating Posthog Signals into Automations:**
+
+You can incoorporate PostHog signals into automation tools such as customer.io, zapier, n8n etc. to create outreach that highly resonates with users (vs. a generic 'hope all is well' type of message). To do this you can setup a Data Pipeline in PostHog and choose your desired tool i.e. wherever you manage your automations. You can then populate these autonomous tools, with context that allows them to trigger specific workflows or output, based on signals that you've ingested.
+
+**Note**
+As previously highlighted, this is not a substitution for personalized outreach and human intervention is incredibly important. Bombarding users with insignificant messages is not the intention of this recommendation. This workflow is to ensure that when we can't personally reach out to our users during important moments we have systems in place that do in a highly personalized manner.
+
+**Importance**
+
+This workflow is important because the way you interact and onboard a user who has been in the platform 10 times vs. 1000 is quite different. They shouldn't both be receiving the same emails, slack blasks, reminders, etc. You should have a dynamic experience based on signals that inform you of their behavior in PostHog. 
+
+Even though we might not always be there to recognize customers accomplishments, as a user it still feels great to get emails from a team that know where you're at and what's important to you. Pulling in data from PostHog allows us to track milestones such as a 30 day streak, or completion of a key actions and subsequently interact with our customers, throughtfully.
+
+**Use Case Example**: Customer upgrades from a free tier to a paid tier and has been a power user since 2022
+**Platform**: Customer.io
+
+A Segment is created and campaign distributed based off of subscription upgrade type. PostHog pushes event specific data to Customer.io signifying number of logins, feature breadth, streak milestones etc. Customer.io uses this information to place a user into the right segment and dynamically craft an email related to the upgrade and next steps the user should follow to take full advantage of this change, based on what we already know about them. Email is drafted. Human reviews and sends. You can also set the email to 'Send Automatically' if you'd like, and can configure Customer.io to send/receive as you vs. hello@posthog.com etc.
