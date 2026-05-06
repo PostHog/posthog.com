@@ -1,0 +1,131 @@
+name: Inkeep Sync
+
+on:
+    # Run every 8 hours at :17 past the hour
+    schedule:
+        - cron: '17 */8 * * *'
+
+    # Allow manual trigger from the Actions tab.
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    sync-docs:
+        name: Sync docs
+        runs-on: ubuntu-latest
+        steps:
+            - name: Trigger Inkeep sync
+              env:
+                  INKEEP_API_KEY: ${{ secrets.INKEEP_MANAGEMENT_API_KEY }}
+                  SOURCE_ID: ${{ secrets.INKEEP_DOCS_SOURCE_ID }}
+                  SOURCE_NAME: docs
+              run: |
+                  set -euo pipefail
+
+                  if [ -z "${INKEEP_API_KEY:-}" ]; then
+                    echo "::error::INKEEP_MANAGEMENT_API_KEY secret is not set"
+                    exit 1
+                  fi
+
+                  if [ -z "${SOURCE_ID:-}" ]; then
+                    echo "::error::INKEEP_DOCS_SOURCE_ID secret is not set"
+                    exit 1
+                  fi
+
+                  echo "Triggering sync for source: $SOURCE_NAME"
+
+                  PAYLOAD=$(jq -n --arg sourceId "$SOURCE_ID" '{
+                    query: "mutation CreateSourceSyncJob($sourceId: ID!) { createSourceSyncJob(input: {sourceId: $sourceId, type: FULL, origin: MANUAL}) { job { id } success } }",
+                    variables: { sourceId: $sourceId }
+                  }')
+
+                  RESPONSE=$(curl -sS -w "\n%{http_code}" -X POST https://api.management.inkeep.com/graphql \
+                    -H "Content-Type: application/json" \
+                    -H "Authorization: Bearer $INKEEP_API_KEY" \
+                    -d "$PAYLOAD")
+
+                  HTTP_CODE=$(tail -n1 <<< "$RESPONSE")
+                  BODY=$(sed '$ d' <<< "$RESPONSE")
+
+                  echo "HTTP status: $HTTP_CODE"
+                  echo "Response body: $BODY"
+
+                  if [ "$HTTP_CODE" != "200" ]; then
+                    echo "::error::Inkeep API returned HTTP $HTTP_CODE"
+                    exit 1
+                  fi
+
+                  if echo "$BODY" | jq -e '.errors' > /dev/null; then
+                    echo "::error::GraphQL returned errors"
+                    exit 1
+                  fi
+
+                  SUCCESS=$(echo "$BODY" | jq -r '.data.createSourceSyncJob.success')
+                  if [ "$SUCCESS" != "true" ]; then
+                    echo "::error::Sync job creation reported success=false"
+                    exit 1
+                  fi
+
+                  JOB_ID=$(echo "$BODY" | jq -r '.data.createSourceSyncJob.job.id')
+                  echo "Sync job created for $SOURCE_NAME: $JOB_ID"
+
+    sync-handbook:
+        name: Sync handbook
+        runs-on: ubuntu-latest
+        steps:
+            - name: Trigger Inkeep sync
+              env:
+                  INKEEP_API_KEY: ${{ secrets.INKEEP_MANAGEMENT_API_KEY }}
+                  SOURCE_ID: ${{ secrets.INKEEP_HANDBOOK_SOURCE_ID }}
+                  SOURCE_NAME: handbook
+              run: |
+                  set -euo pipefail
+
+                  if [ -z "${INKEEP_API_KEY:-}" ]; then
+                    echo "::error::INKEEP_MANAGEMENT_API_KEY secret is not set"
+                    exit 1
+                  fi
+
+                  if [ -z "${SOURCE_ID:-}" ]; then
+                    echo "::error::INKEEP_HANDBOOK_SOURCE_ID secret is not set"
+                    exit 1
+                  fi
+
+                  echo "Triggering sync for source: $SOURCE_NAME"
+
+                  PAYLOAD=$(jq -n --arg sourceId "$SOURCE_ID" '{
+                    query: "mutation CreateSourceSyncJob($sourceId: ID!) { createSourceSyncJob(input: {sourceId: $sourceId, type: FULL, origin: MANUAL}) { job { id } success } }",
+                    variables: { sourceId: $sourceId }
+                  }')
+
+                  RESPONSE=$(curl -sS -w "\n%{http_code}" -X POST https://api.management.inkeep.com/graphql \
+                    -H "Content-Type: application/json" \
+                    -H "Authorization: Bearer $INKEEP_API_KEY" \
+                    -d "$PAYLOAD")
+
+                  HTTP_CODE=$(tail -n1 <<< "$RESPONSE")
+                  BODY=$(sed '$ d' <<< "$RESPONSE")
+
+                  echo "HTTP status: $HTTP_CODE"
+                  echo "Response body: $BODY"
+
+                  if [ "$HTTP_CODE" != "200" ]; then
+                    echo "::error::Inkeep API returned HTTP $HTTP_CODE"
+                    exit 1
+                  fi
+
+                  if echo "$BODY" | jq -e '.errors' > /dev/null; then
+                    echo "::error::GraphQL returned errors"
+                    exit 1
+                  fi
+
+                  SUCCESS=$(echo "$BODY" | jq -r '.data.createSourceSyncJob.success')
+                  if [ "$SUCCESS" != "true" ]; then
+                    echo "::error::Sync job creation reported success=false"
+                    exit 1
+                  fi
+
+                  JOB_ID=$(echo "$BODY" | jq -r '.data.createSourceSyncJob.job.id')
+                  echo "Sync job created for $SOURCE_NAME: $JOB_ID"
