@@ -70,6 +70,7 @@ export const sessionReplay = {
             group: 'divided',
             icon: <IconChat className="size-4" />,
         },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         {
             slug: 'installation',
             name: 'Install',
@@ -77,7 +78,6 @@ export const sessionReplay = {
             icon: <IconCode className="size-4" />,
         },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
-        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
     ],
     /**
      * Sections rendered on the Pricing surface (`/session-replay/pricing`).
@@ -209,7 +209,7 @@ export const sessionReplay = {
     installation: {
         title: 'Install',
         headline: 'Install',
-        description: "We've got an install method for you.",
+        description: "No matter how you build, we've probably got a way to install it.",
         productSlug: 'session-replay',
         categories: ['web', 'mobile', 'no-code'],
     },

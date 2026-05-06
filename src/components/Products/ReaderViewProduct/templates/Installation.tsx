@@ -149,7 +149,7 @@ const collectUrls = (node: any, prefix: string): Set<string> => {
 const sortByName = (a: InstallItem, b: InstallItem) => a.name.localeCompare(b.name)
 
 const subheading = 'text-[11px] font-semibold text-secondary m-0 mb-1'
-const tileGrid = 'columns-1 @md:columns-2 @2xl:columns-3 @4xl:columns-4 gap-x-4 p-0 m-0'
+const tileGrid = 'columns-1 @md:columns-2 @2xl:columns-3 @4xl:columns-4 gap-x-4 p-0 m-0 gap-y-1'
 
 const Installation = ({ id, productData }: SectionComponentProps) => {
     const installation = productData?.installation
