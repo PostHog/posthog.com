@@ -66,9 +66,6 @@ export const hotjar = {
         web_analytics: {
             available: false,
         },
-        product_tours: {
-            available: false,
-        },
         session_replay: {
             available: true,
             pricing: {

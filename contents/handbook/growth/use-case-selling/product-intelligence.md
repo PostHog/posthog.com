@@ -15,7 +15,7 @@ hideAnchor: false
 - Validate product hypotheses with experiments before committing engineering resources
 - Collect direct user feedback at key moments in the product experience
 - Track business outcomes (revenue, expansion) tied to product usage
-- Act on insights by guiding users through onboarding and feature adoption directly inside the product
+- Act on insights by automating onboarding and feature adoption messaging based on user behavior
 
 This is our bread and butter. Most accounts start here. The risk is they *stay* here as a single product analytics customer and never expand. The opportunity is that Product Intelligence naturally creates demand for the other use cases once teams start acting on what they learn.
 
@@ -27,7 +27,6 @@ This is our bread and butter. Most accounts start here. The risk is they *stay* 
 - **[Revenue Analytics](/docs/revenue-analytics/start-here)** — Business outcome tracking. Connect product usage to [MRR](/docs/revenue-analytics/dashboard#mrr-and-arr), expansion revenue, LTV, and churn. Lets PMs prove that the feature they shipped actually moved the revenue needle. ([Dashboard](/docs/revenue-analytics/dashboard))
 - **[Experiments](/docs/experiments)** — Validate hypotheses with statistical rigor before committing to a full build. A/B test changes against real metrics, not gut feel. Requires [Feature Flags](/docs/feature-flags) for implementation.
 - **[Workflows](/docs/workflows/start-here)** — Onboarding sequences, activation nudges, lifecycle engagement. The action layer: once you've identified a drop-off in analytics, Workflows lets you do something about it automatically. ([Email drip campaigns](/docs/workflows/email-drip-campaign))
-- **[Product Tours](/docs/product-tours/start-here)** *alpha* — In-app guided onboarding, feature adoption prompts. The in-product complement to Workflows' out-of-product engagement. Guide users through the right path at exactly the right moment. ([Creating tours](/docs/product-tours/creating-product-tours))
 - **AI Evals** — For products with AI features: proactively surface where users are struggling based on AI output quality. This is product intelligence driven by AI observability. A bridge product to the [AI/LLM Observability](/handbook/growth/cross-selling/use-case-selling/ai-llm-observability) use case.
 - **[PostHog AI](/docs/posthog-ai/allow-access)** — Natural language querying and insight discovery. Lowers the bar for non-technical product stakeholders to self-serve. A PM asks "why did retention drop last week?" instead of building a custom query. ([Example prompts](/docs/posthog-ai/example-prompts))
 
@@ -39,7 +38,7 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 
 ### Primary expansion path
 
-**Product Analytics → + Session Replay → + Surveys → + Experiments → + Revenue Analytics → + Workflows / Product Tours**
+**Product Analytics → + Session Replay → + Surveys → + Experiments → + Revenue Analytics → + Workflows**
 
 **The logic of each step:**
 
@@ -47,7 +46,7 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 - Session Replay → Surveys: They're watching replays and forming hypotheses about why users struggle. Surveys let them ask users directly at the moment of friction, then tie responses back to behavior data.
 - Surveys → Experiments: They've identified the problem through analytics, replay, and feedback. Now they want to test a fix. Experiments require Feature Flags, which gets engineering involved (multithreading moment).
 - Experiments → Revenue Analytics: They've validated changes with experiments and want to prove business impact. Revenue Analytics connects product usage to MRR, expansion, and churn.
-- Revenue Analytics → Workflows / Product Tours: They've identified what drives value. Now they want to guide users toward those high-value behaviors automatically, through in-app tours and behavior-triggered engagement sequences.
+- Revenue Analytics → Workflows: They've identified what drives value. Now they want to guide users toward those high-value behaviors automatically, through behavior-triggered engagement sequences.
 
 ### Alternate expansion paths
 
@@ -61,7 +60,7 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 
 **This is the use case with the largest existing install base.** Most PostHog accounts start with Product Analytics. The expansion opportunity isn't convincing them to adopt PostHog. It's convincing them to go beyond a single product and use the full Product Intelligence stack.
 
-**The Workflows and Product Tours close-the-loop story is powerful.** You identify a drop-off point (analytics), you understand why users leave (session replay, surveys), and now you can actually fix it by guiding users through the right path (product tours) or re-engaging them when they disengage (workflows). That's a complete insight-to-action cycle that no competitor offers in one platform.
+**The Workflows close-the-loop story is powerful.** You identify a drop-off point (analytics), you understand why users leave (session replay, surveys), and now you can re-engage users when they disengage (workflows). That's a complete insight-to-action cycle that no competitor offers in one platform.
 
 **Product Intelligence creates demand for other use cases.** Once the product team is deep in PostHog, they pull in the growth team (Growth & Marketing use case) for acquisition and activation. Once they're running experiments, engineering gets involved in rollouts (Release Engineering). This is the gateway use case.
 
@@ -149,14 +148,14 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 - Customer expands from Product Analytics-only to multi-product (Session Replay, Surveys, Experiments)
 - Multiple product team members (PMs, designers) are active, not just engineers
 - Experiment usage grows (indicates the product team is using PostHog for decisions, not just reporting)
-- Workflow or Product Tour usage starts (they're closing the insight-to-action loop)
+- Workflow usage starts (they're closing the insight-to-action loop)
 
 ## Competitive positioning
 
 ### Our positioning
 
 - **Quantitative + qualitative in one platform.** Product Analytics and Session Replay together. No switching between Amplitude and Hotjar. Filter replays by funnel drop-off, cohort, or event.
-- **Insight to action, not just insight.** Most analytics tools stop at the dashboard. PostHog lets you act on what you find with [Workflows](/docs/workflows/start-here), [Product Tours](/docs/product-tours/start-here), and [Experiments](/docs/experiments).
+- **Insight to action, not just insight.** Most analytics tools stop at the dashboard. PostHog lets you act on what you find with [Workflows](/docs/workflows/start-here) and [Experiments](/docs/experiments).
 - **Experiments built into the analytics workflow.** See a drop-off in a funnel, right-click to create an experiment, measure the result in the same tool. No separate experimentation platform.
 - **[PostHog AI](/docs/posthog-ai/allow-access) makes analytics accessible.** PMs who aren't comfortable with SQL can ask questions in plain English.
 
@@ -170,13 +169,13 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 | Heap | Auto-capture product analytics, session replay | Also auto-capture, plus flags, experiments, surveys, workflows | Retroactive analytics (virtual events) is a strong pitch |
 | Pendo | Product analytics + in-app guides | Deeper analytics; experiments; open source; better pricing | More mature in-app guides; stronger enterprise PM workflow features |
 
-**Honest assessment:** Our strongest position is the breadth of the platform. No competitor offers analytics + replay + surveys + experiments + workflows + product tours in one tool. We're weaker against Amplitude in very large enterprises where their ML features and enterprise sales motion are more mature. We're weaker against Hotjar/Pendo for non-technical product teams who want a simpler, more opinionated UX. Our sweet spot is technical product teams at companies with engineers who value depth, flexibility, and not paying for 5 separate tools.
+**Honest assessment:** Our strongest position is the breadth of the platform. No competitor offers analytics + replay + surveys + experiments + workflows in one tool. We're weaker against Amplitude in very large enterprises where their ML features and enterprise sales motion are more mature. We're weaker against Hotjar/Pendo for non-technical product teams who want a simpler, more opinionated UX. Our sweet spot is technical product teams at companies with engineers who value depth, flexibility, and not paying for 5 separate tools.
 
 ## Pain points & known limitations
 
 | Pain Point | Impact | Workaround / Solution |
 |---|---|---|
-| Product Tours is alpha, limited customization | Teams with complex in-app onboarding needs may hit walls | Position as the integrated option. For advanced tooltip/modal UX, keep a dedicated tool (Appcues, Pendo) and use PostHog for analytics + experimentation. |
+| No native in-app guides or tooltips | Teams with complex in-app onboarding needs may hit walls | For tooltip/modal UX, keep a dedicated tool (Appcues, Pendo) and use PostHog for analytics + experimentation. |
 | Workflows is new, less mature than dedicated engagement tools | Teams expecting Braze-level email sequencing will find gaps | Position as behavior-driven automation, not a full lifecycle marketing replacement. Complement with existing tools via [Data Pipelines](/docs/cdp/destinations). |
 | No built-in heatmaps | Some UX teams expect heatmaps as part of the qualitative toolkit | Session Replay provides more context than heatmaps (full session vs. aggregated click positions). [Toolbar](/docs/toolbar) provides some click-map functionality. |
 | Learning curve for non-technical PMs | PMs used to Amplitude's guided UX may find PostHog's flexibility overwhelming initially | Lead with [PostHog AI](/docs/posthog-ai/allow-access) for querying. Build pre-configured dashboards during onboarding. Start with simple funnels and retention, not HogQL. |
@@ -211,7 +210,7 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 | Product Analytics + Session Replay | Surveys | They're forming hypotheses from replays and want direct user input | "You're watching sessions and seeing confusion. Want to ask users directly what's tripping them up?" |
 | Product Analytics + Surveys | Experiments | They've identified problems and want to validate fixes | "You know the problem. Let's test whether your proposed fix actually works before building it fully." |
 | Experiments running | Revenue Analytics | They're testing changes but measuring proxy metrics, not revenue | "Your experiment improved conversion by 15%. But did it actually increase MRR?" |
-| Analytics + Experiments mature | Workflows + Product Tours | They know what works and want to operationalize it | "You proved the new onboarding flow works. Now let's guide every new user through it automatically." |
+| Analytics + Experiments mature | Workflows | They know what works and want to operationalize it | "You proved the new onboarding flow works. Now let's automatically nudge every new user toward it." |
 | Product team in PostHog | Growth & Marketing (for the growth team) | Product team is in PostHog. Growth team should be too. | "Your PMs are using PostHog for product decisions. Has the growth team seen what they can do with funnels and experiments for conversion optimization?" |
 | B2B account, no Group Analytics | Group Analytics add-on | B2B companies need company-level analytics | "You're tracking individual users. But do you know which *companies* are most engaged and which are at risk?" |
 | Product team using flags for experiments | Release Engineering (for the eng team) | Engineering is implementing flags for experiments. They can use them for releases too. | "Your engineers are already deploying feature flags for experiments. Have they considered using the same infrastructure for all their releases?" |
@@ -224,7 +223,6 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 - **Experiments docs:** [Experiments](/docs/experiments) · [Exposures](/docs/experiments/exposures)
 - **Revenue Analytics docs:** [Getting started](/docs/revenue-analytics/start-here) · [Dashboard](/docs/revenue-analytics/dashboard)
 - **Workflows docs:** [Getting started](/docs/workflows/start-here) · [Email drip campaigns](/docs/workflows/email-drip-campaign)
-- **Product Tours docs:** [Getting started](/docs/product-tours/start-here) · [Creating tours](/docs/product-tours/creating-product-tours)
 - **Feature Flags docs:** [Getting started](/docs/feature-flags/start-here)
 - **PostHog AI docs:** [Enable PostHog AI](/docs/posthog-ai/allow-access) · [Example prompts](/docs/posthog-ai/example-prompts)
 - **Group Analytics docs:** [Group Analytics](/docs/product-analytics/group-analytics)
@@ -236,5 +234,5 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 | AI Native — Early | Product Intelligence looks different here. There's no UX researcher. A GTM engineer or founding PM is looking at funnels, activation rates, and conversion. Frame it as "understand what makes users stick" not "deep behavioral research." | Product Analytics (funnels, retention), Session Replay, Experiments, PostHog AI | Founder, founding PM, GTM engineer |
 | AI Native — Scaled | Starting to formalize the product function. May have a dedicated PM. AI Evals becomes relevant as a bridge: evaluating AI output quality is product intelligence for AI products. | Product Analytics, Session Replay, Surveys, Experiments, AI Evals, Revenue Analytics | PM, Head of Product, AI Product Lead |
 | Cloud Native — Early | First real analytics investment. They need to find product-market fit. Speed matters. Don't overwhelm with features. Start with funnels and retention, add replay and surveys as they mature. | Product Analytics, Session Replay, PostHog AI | Founder, first PM, product engineer |
-| Cloud Native — Scaled | Dedicated product team with PMs, designers, maybe UX researchers. They want depth: cohort analysis, retention by feature, experiment velocity. Workflows and Product Tours become relevant for operationalizing insights. | Full Product Intelligence stack. Group Analytics if B2B. | Head of Product, VP Product, UX Research Lead |
+| Cloud Native — Scaled | Dedicated product team with PMs, designers, maybe UX researchers. They want depth: cohort analysis, retention by feature, experiment velocity. Workflows becomes relevant for operationalizing insights. | Full Product Intelligence stack. Group Analytics if B2B. | Head of Product, VP Product, UX Research Lead |
 | Cloud Native — Enterprise | Multiple product teams, multiple workloads. The play is expanding PostHog from one team to many. Standardization and governance matter. RBAC (Enterprise package) becomes relevant. | Full stack + Group Analytics + Enterprise package | VP Product, CPO, product ops |

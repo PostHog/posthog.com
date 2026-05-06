@@ -54,9 +54,6 @@ export const smartlook = {
         web_analytics: {
             available: true,
         },
-        product_tours: {
-            available: false,
-        },
         session_replay: {
             available: true,
             features: {

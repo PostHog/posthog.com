@@ -348,9 +348,6 @@ export const amplitude = {
                 sql_access: 'Add-on',
             },
         },
-        product_tours: {
-            available: true,
-        },
         error_tracking: {
             available: false,
         },

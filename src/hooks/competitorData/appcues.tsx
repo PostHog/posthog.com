@@ -62,9 +62,6 @@ export const appcues = {
                 },
             },
         },
-        product_tours: {
-            available: true,
-        },
         heatmaps: {
             available: false,
             features: {

@@ -173,7 +173,7 @@ For example:
 
 Another name for this is [continuous discovery](https://www.youtube.com/watch?v=9RFaz9ZBXpk): letting user behavior and feedback influence what gets amplified next.
 
-[Emails](/workflows) and [tooltips](/docs/product-tours/start-here) can help here, but only when they're contextual: "you're using X, so Y might be useful." Better is adding features to existing habit loops, encouraging users to build new habit loops with the features, or making the features sharable.
+[Emails](/workflows) and tooltips can help here, but only when they're contextual: "you're using X, so Y might be useful." Better is adding features to existing habit loops, encouraging users to build new habit loops with the features, or making the features sharable.
 
 > **What this looks like:** Atlassian famously struggled with feature sprawl across Jira, Confluence, and their other products. Users couldn't keep up with so much surface area. The solution wasn't more marketing, it was investing heavily in in-product discovery, clearer use-case documentation, and opinionated defaults to guide users to success.
 

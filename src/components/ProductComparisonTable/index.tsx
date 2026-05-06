@@ -115,7 +115,6 @@ import { llmAnalyticsFeatures } from '../../hooks/featureDefinitions/llm_analyti
 import { platformFeatures } from '../../hooks/featureDefinitions/platform'
 import { productAnalyticsFeatures } from '../../hooks/featureDefinitions/product_analytics'
 import { productDescriptions } from '../../hooks/featureDefinitions/products'
-import { productToursFeatures } from '../../hooks/featureDefinitions/product_tours'
 import { revenueAnalyticsFeatures } from '../../hooks/featureDefinitions/revenue_analytics'
 import { sessionReplayFeatures } from '../../hooks/featureDefinitions/session_replay'
 import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
@@ -170,7 +169,6 @@ export default function ProductComparisonTable({
         llm_analytics: llmAnalyticsFeatures,
         platform: platformFeatures,
         product_analytics: productAnalyticsFeatures,
-        product_tours: productToursFeatures,
         revenue_analytics: revenueAnalyticsFeatures,
         session_replay: sessionReplayFeatures,
         surveys: surveysFeatures,

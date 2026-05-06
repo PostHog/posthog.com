@@ -56,6 +56,10 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
+        { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
+        { "source": "/docs/api/product-tours", "destination": "/docs/api", "statusCode": 301 },
+        { "source": "/docs/api/product-tours/:path*", "destination": "/docs/api", "statusCode": 301 },
         { "source": "/coupons/:path*", "destination": "https://app.posthog.com/coupons/:path*", "statusCode": 301 },
         { "source": "/handbook/growth/marketing", "destination": "/handbook/marketing", "statusCode": 301 },
         {
