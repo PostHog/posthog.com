@@ -1,6 +1,6 @@
 ---
 title: "How to grow your AEO function (without losing your mind)"
-date: 2026-05-05
+date: 2026-05-06
 author:
     - natalia-amorim
 featuredImage: >-
@@ -32,7 +32,7 @@ This isn't theoretical for us; we're watching this happen in our numbers, in rea
 
 **PostHog's LLM-referred traffic has grown 41x in 23 months**, 7.4x year-over-year, and every single quarter since Q2 2024 has set a new record, with no signs of slowing down.
 
-![AI chatbot traffic count](https://res.cloudinary.com/dmukukwp6/image/upload/AI_chatbot_traffic_count_v2_f6c79d7750.jpg)
+![AI chatbot traffic count](https://res.cloudinary.com/dmukukwp6/image/upload/AI_chatbot_traffic_count_v2_a71b557dda.jpg)
 
 If you're a skeptic like me, you're probably about to ask: *"WeLL, BuT dOeS iT cOnvErT?"*
 
@@ -156,7 +156,7 @@ To my surprise, people answer. In detail. Sometimes long, long paragraphs of det
 
 **Now I have first-party data on the prompts actually leading people to us.** Real sentences typed by real humans with real credit cards.
 
-As of today, **5,857** of them to be exact (and we've only been doing this for 3 months).
+As of today, **6,618** of them to be exact (and we've only been doing this for 3 months).
 
 ![LLM Conditional question](https://res.cloudinary.com/dmukukwp6/video/upload/LLM_conditional_question_video_04b5f21be7.mp4)
 
@@ -166,7 +166,7 @@ It's an amazing feedback loop. The best part? It cost roughly zero dollars to se
 
 ![Prompt workflow](https://res.cloudinary.com/dmukukwp6/video/upload/LLM_Workflow_2_c45cf79570.mp4)
 
-We've watched hundreds of signups walk in asking for "an alternative to Google Analytics," dozens more for Sentry, Hotjar, Amplitude, Mixpanel. These reports have surfaced entire content niches for us to focus on, specific framings of problems we hadn't thought to write about, adjacent tools and use cases we hadn't stumbled upon through keyword research…
+We've watched hundreds of signups walk in asking for "an alternative to Google Analytics," dozens more for Sentry, Hotjar, Amplitude, Mixpanel. These reports have surfaced new content niches for us to focus on, specific framings of problems we hadn't thought to write about, adjacent tools and use cases to surface in our articles...
 
 It's also a goldmine of unfiltered user thoughts, which I personally love. Some highlights:
 
@@ -186,6 +186,8 @@ Your peers are also building the plane while flying it. Learn from their mistake
 
 No single data source tells the full story. Not yet, anyway.
 
+![Reporting stack](https://res.cloudinary.com/dmukukwp6/image/upload/aeo_reporting_stack_aa03395d44.jpg)
+
 - **Referrer traffic** catches some of it, but not everything is properly tagged.
 - **Self-reported attribution** catches more, but not everyone answers the question.
 - **Bot analytics** (who's crawling you, how often, for what) helps you understand what the models are *seeing*, which is a different question than what the models are *saying*.
@@ -203,7 +205,7 @@ So does that mean you don't report on it? No. Sometimes you tell the story even 
 
 The good news is that this part has gotten dramatically easier in the last couple of months, [thanks to MCPs](/docs/model-content-protocol). If your data sources have them, your agent can fetch from each one and help you see the bigger picture.
 
-Mine pulls from Gauge for prompt visibility (and from GSC for clicks, impressions, and rankings, via Gauge's connector), [PostHog](/) for traffic, conversion, and product-level breakdowns, our self-attribution survey and prompt data for the qualitative side, and a few more besides.
+Mine pulls from Gauge for prompt visibility (and from GSC for clicks, impressions, and rankings, via Gauge's connector), [PostHog](/docs/model-content-protocol) for traffic, conversion, and product-level breakdowns, our self-attribution survey and prompt data for the qualitative side, and a few more besides.
 
 It's not magic, and it's not always clear cut, but it's a hell of a lot better than copy-pasting between four tabs and praying the numbers line up.
 
@@ -236,7 +238,7 @@ In a new one like AEO, it can be fatal.
 
 Kidding, that was mean. Yes, you should. FAQs catch the long tail of questions your users actually ask, and they give models more discrete chunks to cite. Two birds, one section.
 
-The caveat: make them genuinely useful. There's still humans reading this stuff, after all. People can tell when you're padding your content for the sake of it, and so can the models.
+**The caveat: make them genuinely useful.** There's still humans reading this stuff, after all. People can tell when you're padding your content for the sake of it, and so can the models.
 
 </details>
 
@@ -247,7 +249,7 @@ My honest answer is that when I first started I took 100+ AI-generated suggestio
 
 Now I have a framework, or at least a more confident shape of one. It comes down to three circles:
 
-![Prompt framework](https://res.cloudinary.com/dmukukwp6/image/upload/LLM_conversion_rates_v2_1a9b794f4e.jpg)
+![Prompt framework](https://res.cloudinary.com/dmukukwp6/image/upload/LLM_conversion_rates_v2_5d10be1453.jpg)
 
 - **Your ICP** (the people you're trying to reach, and what they actually care about)
 - **You** (your product, your features, the things you do well)
