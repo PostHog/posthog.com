@@ -309,7 +309,7 @@ export interface AppSetting {
         variant: 'control' | 'test'
         flag: string
     }
-    size: {
+    size?: {
         min: { width: number; height: number }
         max: { width: number; height: number }
         fixed?: boolean
@@ -327,6 +327,7 @@ export interface AppSetting {
     modal?: {
         type: 'standard' | 'side' | 'floating'
     }
+    mesh?: 'green' | 'red' | 'yellow' | 'blue' | 'purple'
 }
 
 export interface AppSettings {
@@ -405,6 +406,9 @@ const appSettings: AppSettings = {
                 return { x, y }
             },
         },
+    },
+    '/session-replay': {
+        mesh: 'green',
     },
     '/wizard': {
         size: {
@@ -1728,10 +1732,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             previousSize: size,
             position,
             previousPosition: position,
-            sizeConstraints: settings?.size?.fixed
-                ? { min: settings.size.min, max: settings.size.max }
-                : getWindowBasedSizeConstraints(),
-            fixedSize: settings?.size.fixed || false,
+            sizeConstraints:
+                settings?.size?.fixed && settings.size
+                    ? { min: settings.size.min, max: settings.size.max }
+                    : getWindowBasedSizeConstraints(),
+            fixedSize: settings?.size?.fixed || false,
             fromOrigin: lastClickedElementRect
                 ? {
                       x: lastClickedElementRect.x - size.width / 2,
@@ -1753,7 +1758,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
         }
 
-        if (websiteMode && (newWindow.appSettings?.size.fixed || newWindow.appSettings?.modal)) {
+        if (websiteMode && (newWindow.appSettings?.size?.fixed || newWindow.appSettings?.modal)) {
             newWindow.modal = { type: 'standard' as const, ...newWindow.appSettings?.modal }
         }
 
@@ -1764,7 +1769,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const existingWindow = windows.find((w) => w.path === element.props.location.pathname)
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
         if (siteSettings.experience === 'boring') {
-            if (!newWindow.appSettings?.size.fixed && !newWindow.appSettings?.modal) {
+            if (!newWindow.appSettings?.size?.fixed && !newWindow.appSettings?.modal) {
                 return replaceFocusedWindow(newWindow)
             } else {
                 return setWindows([...windows?.filter((w) => w.key !== newWindow.key), newWindow])
@@ -2369,8 +2374,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     useEffect(() => {
         if (websiteMode) {
             const windowsSortedByZIndex = windows.sort((a, b) => b.zIndex - a.zIndex)
-            const currentWindow = windowsSortedByZIndex.find((w) => !w.appSettings?.size.fixed)
-            const modalWindow = windowsSortedByZIndex.find((w) => w.appSettings?.size.fixed || w.appSettings?.modal)
+            const currentWindow = windowsSortedByZIndex.find((w) => !w.appSettings?.size?.fixed)
+            const modalWindow = windowsSortedByZIndex.find((w) => w.appSettings?.size?.fixed || w.appSettings?.modal)
             const newWindows = [
                 ...(currentWindow ? [currentWindow] : []),
                 ...(modalWindow

@@ -11,11 +11,11 @@ type MeshVariant = {
 }
 
 const variants: MeshVariant[] = [
-    {
-        name: 'green',
-        lightClass: 'bg-mesh-green-light',
-        darkClass: 'bg-mesh-green-dark',
-    },
+    { name: 'green', lightClass: 'bg-mesh-green-light', darkClass: 'bg-mesh-green-dark' },
+    { name: 'red', lightClass: 'bg-mesh-red-light', darkClass: 'bg-mesh-red-dark' },
+    { name: 'yellow', lightClass: 'bg-mesh-yellow-light', darkClass: 'bg-mesh-yellow-dark' },
+    { name: 'blue', lightClass: 'bg-mesh-blue-light', darkClass: 'bg-mesh-blue-dark' },
+    { name: 'purple', lightClass: 'bg-mesh-purple-light', darkClass: 'bg-mesh-purple-dark' },
 ]
 
 const Swatch = ({ className, label }: { className: string; label: string }) => (
