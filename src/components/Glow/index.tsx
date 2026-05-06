@@ -12,7 +12,7 @@ export type GlowColor =
     | 'black'
     | 'white'
 export type GlowSize = 'sm' | 'md' | 'lg' | 'xl'
-export type GlowIntensity = 'soft' | 'medium' | 'strong'
+export type GlowIntensity = 'gentle' | 'soft' | 'medium' | 'strong'
 export type GlowRounded = 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
 
 export interface GlowProps {
@@ -52,18 +52,21 @@ const sizeMap: Record<GlowSize, string> = {
 }
 
 const blurMap: Record<GlowIntensity, string> = {
+    gentle: 'blur-2xl',
     soft: 'blur-2xl',
     medium: 'blur-3xl',
     strong: 'blur-3xl',
 }
 
 const opacityMap: Record<GlowIntensity, string> = {
+    gentle: 'opacity-10',
     soft: 'opacity-25',
     medium: 'opacity-40',
     strong: 'opacity-60',
 }
 
 const hoverOpacityMap: Record<GlowIntensity, string> = {
+    gentle: 'group-hover/glow:opacity-10',
     soft: 'group-hover/glow:opacity-25',
     medium: 'group-hover/glow:opacity-40',
     strong: 'group-hover/glow:opacity-60',

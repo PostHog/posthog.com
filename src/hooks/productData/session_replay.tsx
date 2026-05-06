@@ -18,7 +18,6 @@ import {
 import { IconJavaScript, IconApple, IconAndroid, IconFlutter, IconReactNative } from 'components/OSIcons/Icons'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
-import MCPInstall from 'components/Products/MCPInstall'
 import { features } from './session_replay/features'
 import { applications, topFeatures } from './session_replay/slides'
 
@@ -196,25 +195,6 @@ export const sessionReplay = {
         headline: 'Search replays from your editor',
         description:
             'Find session recordings from Cursor, Claude Code, VS Code, or any MCP-compatible agent. Filter by events, user properties, and frustration signals.',
-        features: [
-            {
-                title: 'Investigate bug reports',
-                description: 'Find session replays where users encountered errors to feed your agent with context.',
-            },
-            {
-                title: 'Research before coding',
-                description: 'Summarize current user behavior before making code changes.',
-            },
-            {
-                title: 'Validate after deploying',
-                description: 'Monitor how users interact with newly deployed updates.',
-            },
-            {
-                title: 'Search session replays',
-                description: 'Filter recordings by events, user properties, time ranges, and specific user behaviors.',
-            },
-        ],
-        children: <MCPInstall />,
     },
     compatibility: {
         title: 'Supported platforms',

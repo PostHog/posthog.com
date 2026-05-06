@@ -1,6 +1,7 @@
 import React from 'react'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import Link from 'components/Link'
+import OSButton from 'components/OSButton'
 
 const MCP_URL = 'https://mcp.posthog.com/mcp'
 
@@ -13,7 +14,16 @@ const IDE_BUTTONS = [
     { label: 'Cursor', href: `cursor://anysphere.cursor-deeplink/mcp/install?name=posthog&config=${cursorConfig}` },
 ]
 
-export default function MCPInstall() {
+interface MCPInstallProps {
+    /**
+     * Render the row of one-click "Install in <editor>" buttons under the
+     * install code block. Defaults to `true`. Set to `false` for surfaces
+     * that only want the install command + docs link.
+     */
+    showIDEButtons?: boolean
+}
+
+export default function MCPInstall({ showIDEButtons = true }: MCPInstallProps) {
     return (
         <div className="mt-4 pt-4 border-t border-border">
             <p className="text-sm font-semibold mb-2 opacity-70">Install the MCP server</p>
@@ -22,19 +32,19 @@ export default function MCPInstall() {
                     npx @posthog/wizard mcp add
                 </SingleCodeBlock>
             </div>
-            <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                <span className="text-xs opacity-50">Or install in:</span>
-                {IDE_BUTTONS.map(({ label, href }) => (
-                    <a
-                        key={label}
-                        href={href}
-                        className="text-xs px-2 py-0.5 rounded border border-border opacity-70 hover:opacity-100 transition-opacity"
-                    >
-                        {label}
-                    </a>
-                ))}
-            </div>
-            <p className="text-sm opacity-60 mt-2">
+            {showIDEButtons ? (
+                <div className="mt-3">
+                    <p className="text-xs font-semibold opacity-60 m-0 mb-1.5">Or install directly in your editor:</p>
+                    <div className="flex flex-wrap items-center gap-1">
+                        {IDE_BUTTONS.map(({ label, href }) => (
+                            <OSButton key={label} asLink external hideExternalIcon to={href} size="sm">
+                                {label}
+                            </OSButton>
+                        ))}
+                    </div>
+                </div>
+            ) : null}
+            <p className="text-sm opacity-60 mt-3">
                 See the{' '}
                 <Link to="/docs/model-context-protocol" className="underline">
                     MCP server docs
