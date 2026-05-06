@@ -148,3 +148,25 @@ When editing a subscription, a preview of the next delivery date appears below t
 You can manually trigger a test delivery for any subscription. Click the **...** menu on a subscription in the list and select **Test delivery**. This immediately sends the subscription content to the configured target (email or Slack channel) without waiting for the next scheduled delivery.
 
 This is useful for verifying that the subscription is configured correctly and the content looks as expected.
+
+## Automatically disabled subscriptions
+
+PostHog automatically disables subscriptions when delivery can't succeed. This happens when:
+
+- **Slack integration disconnected** – The Slack integration was removed or disconnected from your PostHog organization.
+- **Unsupported delivery channel** – The subscription targets a delivery channel that's no longer supported.
+
+When a subscription is auto-disabled, the subscription owner receives an email notification explaining the reason. Disabled subscriptions display a **Disabled** tag in the subscriptions list and on the subscriptions page.
+
+Disabled subscriptions don't deliver on their schedule and can't be test-delivered.
+
+### Re-enabling a subscription
+
+To re-enable a disabled subscription:
+
+1. Fix the underlying issue (e.g., reconnect the Slack integration).
+2. Navigate to the subscription and toggle the **Enabled** checkbox back on.
+
+PostHog validates that the issue is resolved before allowing re-enable. If the prerequisite is still broken (e.g., Slack is still disconnected), re-enabling is rejected with an error message.
+
+When you successfully re-enable a subscription, PostHog immediately sends a confirmation delivery and sets the next scheduled delivery date.
