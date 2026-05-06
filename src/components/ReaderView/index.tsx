@@ -19,6 +19,7 @@ import { Popover } from '../RadixUI/Popover'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
+import { navigate } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
@@ -79,6 +80,8 @@ export interface MenuTab {
      * `label` you pass (so embed the icon in the label JSX if you want both).
      */
     icon?: React.ReactNode
+    /** If set, clicking this tab navigates to the given path instead of only switching local state. */
+    href?: string
 }
 
 interface ReaderViewProps {
@@ -996,7 +999,13 @@ const LeftSidebar = ({
                                         active={t.value === activeTab}
                                         showLabel={expanded}
                                         stacked={appliedPinned}
-                                        onClick={() => setActiveTab(t.value)}
+                                        onClick={() => {
+                                            if (t.href && t.value !== activeTab) {
+                                                navigate(t.href)
+                                            } else {
+                                                setActiveTab(t.value)
+                                            }
+                                        }}
                                     />
                                 ))}
                             </motion.div>
@@ -1051,7 +1060,6 @@ interface FloatingTOCProps {
     toggleToc: () => void
     tableOfContents: any
     contentRef: React.RefObject<HTMLDivElement>
-    maxHeight: number
 }
 
 /**
@@ -1061,16 +1069,22 @@ interface FloatingTOCProps {
  * scroll viewport so the TOC never extends past the visible area; an inner
  * ScrollArea handles overflow within that height.
  */
-const FloatingTOC = ({ isTocVisible, toggleToc, tableOfContents, contentRef, maxHeight }: FloatingTOCProps) => {
+const FloatingTOC = ({ isTocVisible, toggleToc, tableOfContents, contentRef }: FloatingTOCProps) => {
     return (
         <aside
             data-scheme="secondary"
-            className={`sticky top-0 self-start flex-shrink-0 z-10 flex flex-col pt-10 bg-dark/10 dark:bg-light/10 border-l border-primary transition-[width] duration-300 overflow-hidden ${
+            className={`flex-shrink-0 z-10 flex flex-col bg-primary/75 dark:bg-primary border-l border-primary backdrop-blur transition-[width] duration-300 overflow-hidden ${
                 isTocVisible ? 'w-[250px]' : 'w-12'
             }`}
-            style={maxHeight ? { maxHeight } : undefined}
         >
-            <div className="flex justify-center p-1 flex-shrink-0">
+            <div className="flex-1 min-h-0 flex flex-col w-[250px]">
+                {isTocVisible && (
+                    <ScrollArea className="px-2 pb-2 pt-8 flex-1 min-h-0" fadeOverflow>
+                        <TableOfContents tableOfContents={tableOfContents} contentRef={contentRef} />
+                    </ScrollArea>
+                )}
+            </div>
+            <div className="flex-shrink-0 border-t border-primary py-1 px-2.5 flex items-center">
                 <Tooltip
                     trigger={
                         <OSButton size="md" icon={<IconTableOfContents />} active={isTocVisible} onClick={toggleToc} />
@@ -1080,13 +1094,6 @@ const FloatingTOC = ({ isTocVisible, toggleToc, tableOfContents, contentRef, max
                     {isTocVisible ? 'Hide' : 'Show'} table of contents
                 </Tooltip>
             </div>
-            {isTocVisible && (
-                <div className="flex-1 min-h-0 flex flex-col w-[250px]">
-                    <ScrollArea className="px-2 pb-2" fadeOverflow>
-                        <TableOfContents tableOfContents={tableOfContents} contentRef={contentRef} />
-                    </ScrollArea>
-                </div>
-            )}
         </aside>
     )
 }
@@ -1125,7 +1132,6 @@ function ReaderViewContent({
     const { hash } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
     const articleColumnRef = useRef<HTMLDivElement>(null)
-    const [tocMaxHeight, setTocMaxHeight] = useState(0)
 
     // Check if this is a customer page and get customer key
     const isCustomerPage = appWindow?.path?.startsWith('/customers/')
@@ -1141,18 +1147,6 @@ function ReaderViewContent({
     const selectedBackgroundOption = backgroundImage
         ? backgroundImageOptions.find((option) => option.value === backgroundImage)
         : null
-
-    // Track the article column's visible height so the floating TOC can cap its
-    // own max-height and never overflow past the viewport.
-    useEffect(() => {
-        const node = articleColumnRef.current
-        if (!node || typeof ResizeObserver === 'undefined') return
-        const update = () => setTocMaxHeight(node.clientHeight)
-        update()
-        const ro = new ResizeObserver(update)
-        ro.observe(node)
-        return () => ro.disconnect()
-    }, [])
 
     useEffect(() => {
         const scrollElement = contentRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement
@@ -1253,11 +1247,11 @@ function ReaderViewContent({
                             : undefined
                     }
                 >
-                    <ScrollArea
-                        dataScheme="primary"
-                        className="flex-1 min-h-0 relative [mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]"
-                    >
-                        <div className="flex items-start min-h-full">
+                    <div className="flex flex-1 min-h-0">
+                        <ScrollArea
+                            dataScheme="primary"
+                            className="flex-1 min-w-0 min-h-0 relative [mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]"
+                        >
                             <article
                                 className={`reader-view-content-container @container/reader-content-container ${getProseClasses(
                                     proseSize
@@ -1450,17 +1444,16 @@ function ReaderViewContent({
                                     )}
                                 </div>
                             </article>
-                            {showSidebar && (
-                                <FloatingTOC
-                                    isTocVisible={isTocVisible}
-                                    toggleToc={toggleToc}
-                                    tableOfContents={tableOfContents}
-                                    contentRef={contentRef}
-                                    maxHeight={tocMaxHeight}
-                                />
-                            )}
-                        </div>
-                    </ScrollArea>
+                        </ScrollArea>
+                        {showSidebar && (
+                            <FloatingTOC
+                                isTocVisible={isTocVisible}
+                                toggleToc={toggleToc}
+                                tableOfContents={tableOfContents}
+                                contentRef={contentRef}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
         </SearchProvider>

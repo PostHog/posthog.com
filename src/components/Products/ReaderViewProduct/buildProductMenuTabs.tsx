@@ -76,6 +76,7 @@ export function buildProductMenuTabs({ productData, contentRef, activeSurface }:
             value: 'product',
             icon: TAB_ICON.product,
             default: activeSurface === 'product',
+            href: surfaceBasePath(productSlug, 'product'),
             menu: (
                 <ProductNav
                     items={navProductMenu}
@@ -92,6 +93,7 @@ export function buildProductMenuTabs({ productData, contentRef, activeSurface }:
             value: 'pricing',
             icon: TAB_ICON.pricing,
             default: activeSurface === 'pricing',
+            href: surfaceBasePath(productSlug, 'pricing'),
             menu: (
                 <ProductNav
                     items={navPricingMenu}
@@ -108,6 +110,7 @@ export function buildProductMenuTabs({ productData, contentRef, activeSurface }:
             value: 'docs',
             icon: TAB_ICON.docs,
             default: activeSurface === 'docs',
+            href: `/docs/${productSlug}`,
             menu: <TreeMenu items={docsChildren} />,
         })
     }
