@@ -5,7 +5,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import OSTable from 'components/OSTable'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { features as f } from './features'
-import { LabeledList, FilterTag, InlineCode } from './helpers'
+import { LabeledList, FilterTag, InlineCode } from 'components/Products/ReaderViewProduct/helpers'
 
 export const applications: CarouselSlide[] = [
     {

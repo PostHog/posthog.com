@@ -75,7 +75,7 @@ productData.<surface>Menu        →   sections rendered in the article column
 
 Each product that opts into `ProductReaderView` is defined in a hook file under `src/hooks/productData/` (for example [`src/hooks/productData/session_replay.tsx`](../../../hooks/productData/session_replay.tsx)). The hook is the **single source of truth** for menus, content, and section render config — there is no page-level override.
 
-When a product's surface grows beyond the menu config and basic data fields, the supporting JSX (carousel slides, local helpers, large reusable sub-trees) lives in a sibling folder named after the hook. The hook stays as a single `.tsx` file because it's shared with production tooling.
+When a product's surface grows beyond the menu config and basic data fields, the supporting JSX (carousel slides, large reusable sub-trees) lives in a sibling folder named after the hook. The hook stays as a single `.tsx` file because it's shared with production tooling.
 
 ```
 src/hooks/productData/
@@ -83,10 +83,11 @@ src/hooks/productData/
   session_replay/             sibling folder for supporting modules
     features.tsx              `features` object reused by sections and slide arrays
     slides.tsx                CarouselSlide[] arrays consumed via menu item `props`
-    helpers.tsx               small JSX helpers used inside slide content
 ```
 
 The hook is imported as `'hooks/productData/session_replay'` (resolves to `session_replay.tsx`); the sibling folder is imported via `./session_replay/<module>` from inside the hook.
+
+Cross-product JSX primitives shared between slide content and templates (e.g. `LabeledList`, `FilterTag`, `InlineCode`) live in [`helpers.tsx`](./helpers.tsx) at this folder root, importable from `'components/Products/ReaderViewProduct/helpers'` or via the package barrel.
 
 ```tsx
 // src/hooks/productData/session_replay.tsx
