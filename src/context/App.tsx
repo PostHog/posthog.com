@@ -78,6 +78,7 @@ interface AppContextType {
             previousPosition?: { x?: number; y?: number }
             previousSize?: { width?: number; height?: number }
             element?: any
+            expanded?: boolean
         }
     ) => void
     getPositionDefaults: (

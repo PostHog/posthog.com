@@ -323,6 +323,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     }
 
     const handleDrag = (_event: any, info: any) => {
+        updateWindow(item, {
+            expanded: false,
+        })
         if (!dragging) setDragging(true)
         if (item.fixedSize) return
         if (!constraintsRef.current) return
