@@ -59,7 +59,7 @@ Single-issue debugging was always doable in the UI. What MCP-driven triage does 
 
 Here are some fun facts too: 
 
-![error tracking mcp fun facts](https://res.cloudinary.com/dmukukwp6/image/upload/Error_tracking_MCP_2_dcbe07ee76.png)
+![error tracking mcp fun facts](https://res.cloudinary.com/dmukukwp6/image/upload/Error_tracking_MCP_3_bd6f36e242.png)
 
 ## The kinds of errors agents handle best
 
