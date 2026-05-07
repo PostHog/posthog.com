@@ -175,39 +175,40 @@ const Team = ({ id, productData }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <header className="flex flex-col-reverse @2xl/reader-content:flex-row @2xl/reader-content:items-center gap-6 @2xl/reader-content:gap-8 mb-12">
-                <div className="flex-1 min-w-0">
+            <header className="grid grid-cols-1 @2xl/reader-content:grid-cols-[1fr_2fr_2fr] gap-6 @2xl/reader-content:gap-8 items-center mb-20">
+                {team.crestOptions && (
+                    <div className="flex justify-center @2xl/reader-content:justify-start">
+                        <TeamPatch
+                            name={team.name}
+                            imageUrl={crestImageUrl}
+                            className="h-32 @2xl/reader-content:h-auto @2xl/reader-content:w-full"
+                            {...team.crestOptions}
+                        />
+                    </div>
+                )}
+                <div className="min-w-0 text-center @2xl/reader-content:text-left">
                     <h2 className="text-3xl font-bold text-primary m-0 leading-tight">{team.name} Team</h2>
                     {team.tagline && <p className="text-base italic text-secondary m-0 mt-1">{team.tagline}</p>}
                     {team.description && (
                         <p className="text-base text-secondary leading-relaxed m-0 mt-3">{team.description}</p>
                     )}
-                    <div className="mt-4">
+                    <div className="mt-4 flex justify-center @2xl/reader-content:justify-start">
                         <PineappleVerdict profiles={profiles} />
                     </div>
                 </div>
-                {team.crestOptions && (
-                    <div className="@2xl/reader-content:w-64 @2xl/reader-content:shrink-0 flex justify-center">
-                        <TeamPatch
-                            name={team.name}
-                            imageUrl={crestImageUrl}
-                            className="h-48 @2xl/reader-content:h-64"
-                            {...team.crestOptions}
-                        />
-                    </div>
+                {heroUrl && (
+                    <figure className="rotate-2 w-full max-w-md mx-auto @2xl/reader-content:mx-0 m-0 flex flex-col gap-2">
+                        <div className="bg-accent flex justify-center items-center shadow-xl border-8 border-white rounded-md overflow-hidden">
+                            <CloudinaryImage src={heroUrl} alt={`${team.name} team`} />
+                        </div>
+                        {heroCaption && (
+                            <figcaption className="text-right text-[12px] mr-2 text-secondary leading-tight">
+                                {heroCaption}
+                            </figcaption>
+                        )}
+                    </figure>
                 )}
             </header>
-
-            {heroUrl && (
-                <figure className="rotate-2 max-w-md w-full flex flex-col gap-2 mx-auto @2xl/reader-content:mr-0 mb-12">
-                    <div className="bg-accent flex justify-center items-center shadow-xl border-8 border-white rounded-md">
-                        <CloudinaryImage src={heroUrl} alt={`${team.name} team`} />
-                    </div>
-                    {heroCaption && (
-                        <figcaption className="text-right text-[13px] mr-2 text-secondary">{heroCaption}</figcaption>
-                    )}
-                </figure>
-            )}
 
             {profiles.length > 0 && (
                 <ul className="list-none m-0 p-0 grid grid-cols-1 @sm/reader-content:grid-cols-2 @2xl/reader-content:grid-cols-3 @4xl/reader-content:grid-cols-4 gap-4">

@@ -3,22 +3,24 @@ import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import { useUser } from 'hooks/useUser'
+import { useRoadmaps } from 'hooks/useRoadmaps'
+import { useToast } from 'hooks/toast'
 import { useApp } from '../../../../context/App'
 import { IconArrowRight, IconThumbsUp, IconUndo } from '@posthog/icons'
 import { SectionComponentProps } from '../types'
 import { FilterTag } from '../helpers'
 
-interface RoadmapNode {
-    id: number
+interface RoadmapAttrs {
     title: string
     description?: string
     projectedCompletion?: string | null
-    teams?: { data?: Array<{ attributes?: { name?: string } }> }
+    likes?: { data?: Array<{ id: number | string }> }
+    teams?: { data?: Array<{ attributes?: { name?: string; slug?: string } }> }
 }
 
-interface StaticReactionNode {
-    squeakId: number
-    githubPages?: Array<{ reactions?: { total_count?: number } }>
+interface RoadmapItem {
+    id: number
+    attributes: RoadmapAttrs
 }
 
 const formatProjected = (value: string | null | undefined): string | null => {
@@ -30,14 +32,24 @@ const formatProjected = (value: string | null | undefined): string | null => {
     return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 }
 
-const RoadmapRow = ({ item, baseLikeCount }: { item: RoadmapNode; baseLikeCount: number }) => {
+const RoadmapRow = ({
+    item,
+    staticLikeCount,
+    onVoted,
+}: {
+    item: RoadmapItem
+    staticLikeCount: number
+    onVoted: () => void
+}) => {
     const { user, likeRoadmap } = useUser()
     const { openSignIn } = useApp()
-    const initiallyLiked = user?.profile?.roadmapLikes?.some(({ id }: { id: number }) => id === item.id) ?? false
-    const [liked, setLiked] = useState(initiallyLiked)
+    const { addToast } = useToast()
     const [pending, setPending] = useState(false)
-    const likeCount = baseLikeCount + (liked && !initiallyLiked ? 1 : !liked && initiallyLiked ? -1 : 0)
-    const projected = formatProjected(item.projectedCompletion)
+    const roadmapLikes: Array<{ id: number }> = (user?.profile as any)?.roadmapLikes ?? []
+    const liked = roadmapLikes.some(({ id }) => id === item.id)
+    const dynamicLikeCount = item.attributes.likes?.data?.length ?? 0
+    const likeCount = dynamicLikeCount + staticLikeCount
+    const projected = formatProjected(item.attributes.projectedCompletion)
 
     const onVote = async () => {
         if (!user) {
@@ -45,12 +57,16 @@ const RoadmapRow = ({ item, baseLikeCount }: { item: RoadmapNode; baseLikeCount:
             return
         }
         setPending(true)
-        const next = !liked
-        setLiked(next)
+        const wasLiked = liked
         try {
-            await likeRoadmap({ id: item.id, title: item.title, user, unlike: !next })
-        } catch (e) {
-            setLiked(!next)
+            await likeRoadmap({ id: item.id, title: item.attributes.title, user, unlike: wasLiked })
+            onVoted()
+            addToast({
+                title: wasLiked ? 'Vote removed' : 'Voted!',
+                description: wasLiked
+                    ? `Your vote on "${item.attributes.title}" has been removed.`
+                    : `Thanks for voting on "${item.attributes.title}".`,
+            })
         } finally {
             setPending(false)
         }
@@ -64,12 +80,12 @@ const RoadmapRow = ({ item, baseLikeCount }: { item: RoadmapNode; baseLikeCount:
             </div>
             <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <h4 className="text-base font-semibold m-0 leading-snug text-primary">{item.title}</h4>
+                    <h4 className="text-base font-semibold m-0 leading-snug text-primary">{item.attributes.title}</h4>
                     {projected && <FilterTag>{projected}</FilterTag>}
                 </div>
-                {item.description && (
+                {item.attributes.description && (
                     <p className="text-sm text-secondary m-0 mt-1 leading-relaxed line-clamp-3">
-                        {item.description.replace(/<[^>]+>/g, '')}
+                        {item.attributes.description.replace(/<[^>]+>/g, '')}
                     </p>
                 )}
                 <div className="mt-2">
@@ -94,51 +110,12 @@ const RoadmapRow = ({ item, baseLikeCount }: { item: RoadmapNode; baseLikeCount:
     )
 }
 
-const Group = ({
-    title,
-    items,
-    likeCounts,
-}: {
-    title: string
-    items: RoadmapNode[]
-    likeCounts: Map<number, number>
-}) => {
-    if (!items.length) return null
-    return (
-        <div>
-            <h3 className="text-base font-semibold text-primary m-0 mb-1 pb-1 border-b border-primary">
-                {title} <span className="text-sm text-secondary font-normal">({items.length})</span>
-            </h3>
-            <ul className="list-none m-0 p-0">
-                {items.map((item) => (
-                    <RoadmapRow key={item.id} item={item} baseLikeCount={likeCounts.get(item.id) ?? 0} />
-                ))}
-            </ul>
-        </div>
-    )
-}
-
 const Roadmap = ({ id, productData }: SectionComponentProps) => {
     const teamSlug = (productData as any)?.teamSlug
     if (!teamSlug) return null
 
-    const { allRoadmap, allSqueakRoadmap, allSqueakTeam } = useStaticQuery(graphql`
+    const { allSqueakRoadmap, allSqueakTeam } = useStaticQuery(graphql`
         query ProductRoadmapSectionQuery {
-            allRoadmap(filter: { complete: { ne: true } }) {
-                nodes {
-                    id: strapiID
-                    title
-                    description
-                    projectedCompletion
-                    teams {
-                        data {
-                            attributes {
-                                name
-                            }
-                        }
-                    }
-                }
-            }
             allSqueakRoadmap {
                 nodes {
                     squeakId
@@ -160,36 +137,71 @@ const Roadmap = ({ id, productData }: SectionComponentProps) => {
 
     const team = allSqueakTeam.nodes.find((t: { name: string; slug: string }) => t.slug === teamSlug)
 
-    const items: RoadmapNode[] = useMemo(() => {
-        if (!team) return []
-        return allRoadmap.nodes.filter((node: RoadmapNode) =>
-            node.teams?.data?.some((t) => t.attributes?.name === team.name)
-        )
-    }, [allRoadmap.nodes, team])
+    // Match the /roadmap page's "Under consideration" filter exactly: not yet
+    // started (no projectedCompletion) and not completed (no dateCompleted).
+    const { roadmaps, isLoading, mutate } = useRoadmaps({
+        params: {
+            filters: {
+                dateCompleted: { $null: true },
+                projectedCompletion: { $null: true },
+                ...(team ? { teams: { name: { $eq: team.name } } } : {}),
+            },
+        },
+        limit: 100,
+    })
 
-    const likeCounts = useMemo(() => {
+    const staticLikeCounts = useMemo(() => {
         const map = new Map<number, number>()
-        for (const node of allSqueakRoadmap.nodes as StaticReactionNode[]) {
+        for (const node of allSqueakRoadmap.nodes as Array<{
+            squeakId: number
+            githubPages?: Array<{ reactions?: { total_count?: number } }>
+        }>) {
             map.set(node.squeakId, node.githubPages?.[0]?.reactions?.total_count ?? 0)
         }
         return map
     }, [allSqueakRoadmap.nodes])
 
-    if (!team || !items.length) return null
+    const sortedItems: RoadmapItem[] = useMemo(() => {
+        const items = (roadmaps as RoadmapItem[]) ?? []
+        return [...items].sort((a, b) => {
+            const aTotal = (a.attributes.likes?.data?.length ?? 0) + (staticLikeCounts.get(a.id) ?? 0)
+            const bTotal = (b.attributes.likes?.data?.length ?? 0) + (staticLikeCounts.get(b.id) ?? 0)
+            return bTotal - aTotal
+        })
+    }, [roadmaps, staticLikeCounts])
 
-    const inProgress = items.filter((i) => i.projectedCompletion)
-    const underConsideration = items.filter((i) => !i.projectedCompletion)
+    if (!team) return null
+
+    const onVoted = () => {
+        mutate()
+    }
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
             <h2 className="text-3xl font-bold text-primary mt-0 mb-3">Roadmap</h2>
             <p className="text-base text-secondary leading-relaxed m-0 mb-6">
-                What the {team.name} Team is working on next. Vote for the things you'd like to see.
+                What the {team.name} Team is considering next. Vote for the things you'd like to see.
             </p>
-            <div className="flex flex-col gap-6">
-                <Group title="In progress" items={inProgress} likeCounts={likeCounts} />
-                <Group title="Under consideration" items={underConsideration} likeCounts={likeCounts} />
-            </div>
+            {isLoading && !sortedItems.length ? (
+                <div className="flex flex-col gap-3">
+                    {[0, 1, 2].map((i) => (
+                        <div key={i} className="h-20 w-full bg-accent rounded animate-pulse" />
+                    ))}
+                </div>
+            ) : sortedItems.length ? (
+                <ul className="list-none m-0 p-0">
+                    {sortedItems.map((item) => (
+                        <RoadmapRow
+                            key={item.id}
+                            item={item}
+                            staticLikeCount={staticLikeCounts.get(item.id) ?? 0}
+                            onVoted={onVoted}
+                        />
+                    ))}
+                </ul>
+            ) : (
+                <p className="text-sm text-secondary italic m-0">Nothing under consideration right now.</p>
+            )}
             <div className="mt-6">
                 <Link
                     to={`/roadmap?team=${encodeURIComponent(team.name)}`}

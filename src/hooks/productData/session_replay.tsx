@@ -74,10 +74,10 @@ export const sessionReplay = {
             group: 'divided',
             icon: <IconChat className="size-4" />,
         },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'roadmap', name: 'Roadmap', group: 'divided', icon: <IconMap className="size-4" /> },
         { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
         { slug: 'team', name: 'Team', group: 'divided', icon: <IconShieldPeople className="size-4" /> },
-        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         {
             slug: 'installation',
             name: 'Install',
