@@ -23,7 +23,7 @@
 *Description*: Cover the providers PostHog's internal AI features actually use, with automatic failover to a hosted equivalent when a primary has an incident.
 
 *What we will ship*:
-- **OpenAI and Anthropic at launch** - chat, responses, and messages endpoints
+- **OpenAI and Anthropic at launch** - chat, responses, and messages routes
 - **Hosted-equivalent fallback** - Anthropic to Bedrock, OpenAI to Azure
 - **Best-effort model resolution** - so clients we don't control work without custom config
 
@@ -36,7 +36,7 @@
 - **Normalized cached vs billable input split** - one shape across providers
 - **Single cost-calculation path** - converge the two we have today and fix existing bugs
 
-#### Goal 5: Take ownership of the Playground
+#### Goal 5: Take ownership of the LLM Analytics Playground
 
 *Description*: Pick up the [LLM Analytics Playground](/docs/llm-analytics/playground) from <SmallTeam slug="llm-analytics" /> and keep it moving as gateway capabilities grow.
 
