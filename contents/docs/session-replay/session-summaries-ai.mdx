@@ -30,7 +30,7 @@ Select a prompt to try it out in the PostHog app:
 
 ## Summarize sessions across experiment variants
 
-Session summaries are especially useful for understanding [Experiment](/docs/experiments) results. Metrics tell you *which* variant won, but summaries tell you *why*.
+Session summaries are especially useful for understanding [Experiment](/docs/experiments) results. Metrics tell you _which_ variant won, but summaries tell you _why_.
 
 Ask PostHog AI to summarize replays for each variant to spot behavioral differences between control and test groups – like different navigation patterns, different points of confusion, or different feature usage.
 
@@ -44,6 +44,12 @@ Ask PostHog AI to summarize replays for each variant to spot behavioral differen
 - **Combine with user properties** – "Summarize sessions from enterprise users who churned" narrows the focus to the most relevant recordings
 - **Use with experiments** – Comparing summaries across variants reveals behavioral differences that raw metrics might miss
 - **Ask follow-up questions** – After getting a summary, ask "What's the most common point of drop-off?" or "Were there any errors?" to drill deeper
+
+## Customize with custom tags
+
+By default, PostHog AI uses a fixed set of tags to categorize recordings. Custom tags let you define up to 15 product-specific tags (using `snake_case` names) so the AI can surface patterns relevant to your team – like `cart_abandoned` or `workspace_invite`.
+
+For setup instructions, see [Customize summaries with custom tags](/docs/posthog-ai/session-summaries#customize-summaries-with-custom-tags).
 
 ## Get started
 
