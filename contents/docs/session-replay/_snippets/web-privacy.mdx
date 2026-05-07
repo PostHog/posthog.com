@@ -120,7 +120,7 @@ Note that adding `ph-no-capture` will also prevent any [autocapture](/docs/data/
 
 ## URL redaction
 
-Session replay captures the page URL shown in the replay player URL bar and timeline. Query strings can include sensitive data such as auth tokens or user identifiers. To redact them, provide a `maskCapturedNetworkRequestFn` callback — the same callback used for [network capture](/docs/session-replay/network-recording#how-to-register-a-callback-to-inspect-and-redact-each-network-request) also runs against the page URL captured in the snapshot, so a single configuration covers both surfaces.
+Session replay captures the page URL shown in the replay player URL bar and timeline. Query strings can include sensitive data such as auth tokens or user identifiers. To redact them, provide a `maskCapturedNetworkRequestFn` callback, the same callback used for [network capture](/docs/session-replay/network-recording#how-to-register-a-callback-to-inspect-and-redact-each-network-request) also runs against the page URL captured in the snapshot, so a single configuration covers both surfaces.
 
 ```js-web
 posthog.init('<ph_project_token>', {
