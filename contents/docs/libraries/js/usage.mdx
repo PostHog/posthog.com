@@ -10,6 +10,36 @@ import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web
 
 <WebSendEvents />
 
+### Advanced capture options
+
+You can pass an optional third argument to `capture()` for advanced options:
+
+```js-web
+posthog.capture('event_name', { property: 'value' }, {
+  timestamp: new Date('2025-01-15T12:00:00Z'),
+  uuid: 'your-deterministic-uuid',
+})
+```
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `timestamp` | `Date` | Override the event timestamp. Useful when capturing events that occurred at a known time in the past. |
+| `uuid` | `string` | Override the auto-generated event UUID. Useful for cross-source idempotency when the same business event fires from multiple sources. |
+
+#### Cross-source event idempotency
+
+When the same business transaction fires events from multiple sources (like a server-side webhook and a browser success page), you can use a deterministic UUID to deduplicate them. PostHog deduplicates events based on the combination of `timestamp`, `distinct_id`, `event`, and `uuid`.
+
+```js-web
+// Browser: capture the purchase event with a deterministic UUID
+posthog.capture('purchase', { transaction_id: 'txn_123' }, {
+  uuid: deterministicUuid('purchase', 'txn_123'),
+  timestamp: serverTimestamp,
+})
+```
+
+By using the same deterministic UUID from both your server-side SDK (like [Node.js](/docs/libraries/node) or [Python](/docs/libraries/python)) and the browser, PostHog collapses duplicate events into one.
+
 ## Anonymous and identified events
 
 import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
