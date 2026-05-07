@@ -1,0 +1,55 @@
+### Q2 2026 objectives
+
+#### Goal 1: Rebuild the gateway
+
+*Description*: Replace today's single-process gateway with a horizontally scalable service that internal PostHog teams can rely on for production AI traffic.
+
+*What we will ship*:
+- **Horizontally scalable service** - capacity adds by replica count, not by raising a single-process ceiling
+- **True-proxy per provider shape** - native OpenAI and Anthropic shapes, no cross-shape translation
+- **Module seams** - clear contracts for auth, rate limit, router, cost, quota, dispatch, and post-call accounting
+- **Load characterization** - replica sizing driven by observed throughput
+
+#### Goal 2: Spending control on the admission path
+
+*Description*: Move spending safeguards onto the admission path so a runaway client cannot run up provider cost before the call's actual cost is recorded.
+
+*What we will ship*:
+- **Cache-aware rate limiting** - admission debits the envelope, slack is refunded after the call completes
+- **Hourly cost circuit breaker** - trips if hourly provider spend on a caller crosses a threshold
+
+#### Goal 3: Provider coverage and failover
+
+*Description*: Cover the providers PostHog's internal AI features actually use, with automatic failover to a hosted equivalent when a primary has an incident.
+
+*What we will ship*:
+- **OpenAI and Anthropic at launch** - chat, responses, and messages endpoints
+- **Hosted-equivalent fallback** - Anthropic to Bedrock, OpenAI to Azure
+- **Best-effort model resolution** - so clients we don't control work without custom config
+
+#### Goal 4: Land gateway calls in LLM Analytics
+
+*Description*: Make every gateway call land in the existing `$ai_generation` pipeline with no schema change, so traces, evals, and cost analytics work on gateway traffic from day one.
+
+*What we will ship*:
+- **No schema change** - same event surface, same Kafka topic, dashboards keep working
+- **Normalized cached vs billable input split** - one shape across providers
+- **Single cost-calculation path** - converge the two we have today and fix existing bugs
+
+#### Goal 5: Take ownership of the Playground
+
+*Description*: Pick up the [LLM Analytics Playground](/docs/llm-analytics/playground) from <SmallTeam slug="llm-analytics" /> and keep it moving as gateway capabilities grow.
+
+*What we will ship*:
+- **Clean handover** - clear ownership, on-call, and triage path for Playground bugs and requests
+- **Gateway-aligned model coverage** - Playground keeps pace with the providers and models the gateway supports
+
+#### Goal 6: Migration off the current gateway
+
+*Description*: Cut traffic over from the existing gateway gradually, starting with the highest-tolerance internal callers, so we shake out failure modes before more services depend on it.
+
+*What we will ship*:
+- **Per-team feature flag at ingress** - one-flag rollback per team
+- **Phased rollout** - start with PostHog AI and PostHog Code, then bring more PostHog services on as the new gateway proves itself
+- **Production readiness** - dashboards, alerts, admin surfaces, graceful shutdown for in-flight streams
+- **Retire the original gateway** - once the new one carries all traffic
