@@ -15,7 +15,7 @@ tags:
   - Engineering
 ---
 
-Last month, AI agents in PostHog projects did 6,124 things to our users' error backlog. They resolved 4,063 issues. They suppressed 1,751 more. They routed 310 to the right team. And almost none of those agents opened the PostHog UI to do it.
+Last month, our customers deployed AI agents to PostHog projects to try and solve 6,124 errors in their products. They resolved 4,063 issues. They suppressed 1,751 more. They routed 310 to the right team. Almost none of those agents opened the PostHog UI to do it.
 
 We were obviously interested to find out what types of problems users were addressing with the MCP.
 
