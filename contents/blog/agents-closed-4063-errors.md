@@ -71,12 +71,6 @@ Browser quirks, deprecated SDK warnings, third-party tracker exceptions. The "we
 
 > "Suppress any errors matching `Script error.`, `ResizeObserver loop completed`, or `Object Not Found Matching Id` from the last 90 days."
 
-### Network and auth errors that need filtering, not fixing
-
-`Failed to fetch`, `AuthRetryableFetchError`, timeout exceptions – usually transient, often best handled by suppression combined with alerting on real spikes. Try:
-
-> "Create a suppression rule for `Failed to fetch` errors from `api.thirdparty.com`, but keep me alerted if the rate exceeds 100 per hour."
-
 ### Business-area errors that need routing
 
 `TypeError` in your checkout flow, `ChunkLoadError` after a deploy, payment webhook failures. Group by route or service and reassign to the team that owns the surface. Try:
