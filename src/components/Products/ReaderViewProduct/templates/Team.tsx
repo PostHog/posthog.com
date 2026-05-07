@@ -24,14 +24,13 @@ interface ProfileNode {
     biography?: string
     pineappleOnPizza?: boolean | null
     startDate?: string | null
-    avatar?: { data?: { attributes?: { url?: string } } }
+    avatar?: { url?: string; formats?: { thumbnail?: { url?: string } } }
     teams?: {
         data?: Array<{
             id?: string | number
             attributes?: {
                 name?: string
                 slug?: string
-                miniCrest?: { data?: { attributes?: { url?: string } } }
             }
         }>
     }
@@ -123,8 +122,9 @@ const Team = ({ id, productData }: SectionComponentProps) => {
                     pineappleOnPizza
                     startDate
                     avatar {
-                        data {
-                            attributes {
+                        url
+                        formats {
+                            thumbnail {
                                 url
                             }
                         }
@@ -135,13 +135,6 @@ const Team = ({ id, productData }: SectionComponentProps) => {
                             attributes {
                                 name
                                 slug
-                                miniCrest {
-                                    data {
-                                        attributes {
-                                            url
-                                        }
-                                    }
-                                }
                             }
                         }
                     }
@@ -212,7 +205,9 @@ const Team = ({ id, productData }: SectionComponentProps) => {
                     {profiles.map((profile) => (
                         <li key={profile.id} className="m-0">
                             <TeamMember
-                                avatar={{ url: profile.avatar?.data?.attributes?.url }}
+                                avatar={{
+                                    url: profile.avatar?.formats?.thumbnail?.url || profile.avatar?.url,
+                                }}
                                 firstName={profile.firstName}
                                 lastName={profile.lastName}
                                 companyRole={profile.companyRole}

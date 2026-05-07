@@ -7,7 +7,6 @@ import { FilterTag } from '../helpers'
 
 interface RoadmapNode {
     id: string | number
-    squeakId?: number
     title: string
     description?: string
     projectedCompletion?: string | null
@@ -90,7 +89,6 @@ const Roadmap = ({ id, productData }: SectionComponentProps) => {
             allRoadmap(filter: { complete: { ne: true } }) {
                 nodes {
                     id: strapiID
-                    squeakId
                     title
                     description
                     projectedCompletion
