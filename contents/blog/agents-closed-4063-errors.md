@@ -37,15 +37,25 @@ Three different outcomes, three different reasons to invoke the tool. The "agent
 
 A few things stood out from watching agent-driven triage in the wild.
 
-**Smaller, sharper tools win.** When we first shipped MCP support for error tracking, `error-tracking-query-issue` was one combined endpoint covering several jobs at once. Watching agents in practice, we kept seeing them want those jobs separately. In late April we split the tool into three – `issues-list`, `issue`, and `issue-events`. Bulk-triage flows got noticeably smoother right after.
+### Smaller, sharper tools win
 
-**Triage isn't one motion.** We started thinking about MCP triage as a single workflow – "the agent updates the issue." In practice, three distinct things are happening: things get fixed and resolved, things get filtered as known noise, and things get rerouted to the right owner. These are three different jobs with three different prompts and three different definitions of success. The next round of skills we ship will treat them that way.
+When we first shipped MCP support for error tracking, `error-tracking-query-issue` was one combined endpoint covering several jobs at once. Watching agents in practice, we kept seeing them want those jobs separately. In late April we split the tool into three – `issues-list`, `issue`, and `issue-events`. Bulk-triage flows got noticeably smoother right after.
 
-**Errors are starting points, not endings.** When agents engage with an error, they rarely stop at the issue. They drill into the surrounding events, pull the affected users, check which feature flags were on, and follow into session recordings. The MCP is most powerful when it carries an investigation across products without anyone having to context-switch.
+### Triage isn't one motion
 
-**Search behaviour told us something we didn't expect.** About half of the searches we see look like what you'd expect – error strings, exception types, common JS patterns. The other half are organised by business surface: checkout, billing, auth, embed. People aren't just hunting "the latest TypeErrors." They're asking "what's broken in checkout this week." That's a clear signal that business-surface filtering needs to be as easy as exception-type filtering, and it's now on our short list.
+We started thinking about MCP triage as a single workflow – "the agent updates the issue." In practice, three distinct things are happening: things get fixed and resolved, things get filtered as known noise, and things get rerouted to the right owner. These are three different jobs with three different prompts and three different definitions of success. The next round of skills we ship will treat them that way.
 
-**Bulk work is the real win.** Single-issue debugging was always doable in the UI. What MCP-driven triage does best is the kind of bulk operation that used to take an hour of clicking – "suppress every variant of this third-party noise across the last 90 days" or "route every iOS crash to the mobile team." One sentence, and it's done. That's where the time savings actually live.
+### Errors are starting points, not endings
+
+When agents engage with an error, they rarely stop at the issue. They drill into the surrounding events, pull the affected users, check which feature flags were on, and follow into session recordings. The MCP is most powerful when it carries an investigation across products without anyone having to context-switch.
+
+### Search behaviour told us something we didn't expect
+
+About half of the searches we see look like what you'd expect – error strings, exception types, common JS patterns. The other half are organised by business surface: checkout, billing, auth, embed. People aren't just hunting "the latest TypeErrors." They're asking "what's broken in checkout this week." That's a clear signal that business-surface filtering needs to be as easy as exception-type filtering, and it's now on our short list.
+
+### Bulk work is the real win
+
+Single-issue debugging was always doable in the UI. What MCP-driven triage does best is the kind of bulk operation that used to take an hour of clicking – "suppress every variant of this third-party noise across the last 90 days" or "route every iOS crash to the mobile team." One sentence, and it's done. That's where the time savings actually live.
 
 Here are some fun facts too: 
 
