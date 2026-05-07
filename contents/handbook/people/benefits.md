@@ -62,7 +62,13 @@ In the US, our 401k plan is managed by [Vestwell](https://connect-b.vestwell.com
 
 In the US, you'll enroll in benefits through [BambooHR](https://posthog.bamboohr.com/login.php) and manage your coverage through [UnitedHealthcare](https://member.uhc.com/) for medical and [Guardian](https://www.guardiananytime.com/) for dental and vision. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents.
 
-We offer the option to opt in to a [Flexible Savings Account (FSA)](https://www.healthcare.gov/have-job-based-coverage/flexible-spending-accounts/), which is a tax-advantaged account that allows you to contribute pre-tax dollars up to $3,400 per year to be used on out-of-pocket medical expenses. The FSA is a "use it or lose it" benefit, so any dollars that are not spent by the end of the year return to the company.  
+We offer the option to opt in to a [Flexible Spending Account (FSA)](https://www.healthcare.gov/have-job-based-coverage/flexible-spending-accounts/), which is a tax-advantaged account that allows you to contribute pre-tax dollars up to $3,400 per year to be used on out-of-pocket medical expenses. The FSA is largely a "use it or lose it" benefit, but up to $680 of unused funds can carry over into the following plan year - any amount above that returns to the company.
+
+We also offer an [FSA Dependent Care](https://www.healthcare.gov/have-job-based-coverage/flexible-spending-accounts/) account, which is a separate tax-advantaged account that lets you contribute pre-tax dollars to cover eligible dependent care expenses, like daycare, preschool, before- and after-school programs, and summer day camps for children under 13, as well as care for a spouse or dependent who is incapable of self-care. The maximum contribution is $3,750 per person, or $7,500 per household.
+
+PostHog provides a small employer match on contributions to both FSA accounts. {/* TODO: confirm and document the exact employer match percentage / dollar amount for both the medical FSA and FSA Dependent Care */}
+
+Both FSA plans are administered through [OCA](https://oca125.com/oca-account/), where you'll submit claims and manage your account. Heads up: OCA is rigorous about documentation requirements, so be prepared to provide detailed itemized receipts and supporting paperwork for every claim - even small ones - and expect follow-up requests if anything is missing.
 
 There is also the option to choose a lower tier, high deductible health plan (HDHP), which will qualify you for a [Health Savings Account (HSA)](https://www.healthcare.gov/glossary/health-savings-account-hsa/) that has further tax benefits beyond what the FSA provides. At the end of the year, any unused money rolls over and the contribution limit resets.
 
