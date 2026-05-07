@@ -188,6 +188,7 @@ PostHog automatically disables subscriptions when delivery can't succeed. This h
 
 - **Slack integration disconnected** – The Slack integration was removed or disconnected from your PostHog organization.
 - **Unsupported delivery channel** – The subscription targets a delivery channel that's no longer supported.
+- **Slack channel access issues** – PostHog can't post to the Slack channel. This includes archived channels, channels the PostHog bot was removed from, channels that no longer exist, or a revoked Slack token.
 
 When a subscription is auto-disabled, the subscription owner receives an email notification explaining the reason. Disabled subscriptions display a **Disabled** tag in the subscriptions list and on the subscriptions page.
 
@@ -197,9 +198,9 @@ Disabled subscriptions don't deliver on their schedule and can't be test-deliver
 
 To re-enable a disabled subscription:
 
-1. Fix the underlying issue (e.g., reconnect the Slack integration).
+1. Fix the underlying issue (e.g., reconnect the Slack integration or re-add the PostHog bot to the channel).
 2. Navigate to the subscription and toggle the **Enabled** checkbox back on.
 
-PostHog validates that the issue is resolved before allowing re-enable. If the prerequisite is still broken (e.g., Slack is still disconnected), re-enabling is rejected with an error message.
+PostHog validates that the issue is resolved before allowing re-enable. If the prerequisite is still broken (e.g., Slack is still disconnected or the bot isn't in the channel), re-enabling is rejected with an error message.
 
 When you successfully re-enable a subscription, PostHog immediately sends a confirmation delivery and sets the next scheduled delivery date.
