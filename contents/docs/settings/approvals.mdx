@@ -48,7 +48,7 @@ Once enough approvers approve the request and reach the required quorum, PostHog
 ### Approval workflow
 
 1. **User attempts a gated action** – For example, enabling a feature flag or changing a rollout percentage
-2. **Change request created** – PostHog captures the intended change and notifies approvers via email
+2. **Change request created** – PostHog captures the intended change and notifies approvers via email and in-app notification
 3. **Reviewers evaluate** – Approvers can approve or reject the request
 4. **Change applied or rejected** – When quorum is reached, the change is automatically applied. If the request is rejected, the requester is notified and the change is discarded
 
@@ -256,4 +256,4 @@ Approvals integrate with PostHog's notification system to keep everyone informed
 - **Approvers** receive notifications when a new change request needs their review
 - **Requesters** receive notifications when their request is approved, applied, rejected, or expires
 
-Notifications are delivered via email and in-app.
+Notifications are delivered via email and in-app. In-app notifications appear in the notification popover and link directly to the approval detail page.
