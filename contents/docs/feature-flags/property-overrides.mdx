@@ -504,81 +504,81 @@ flag_value = flags.get_flag("feature-flag-key")
 ```
 
 ```php
-$flagValue = PostHog::getFeatureFlag(
-    'feature-flag-key',
-    'user-distinct-id',
-    [],  // groups
-    [    // personProperties
+$flags = PostHog::evaluateFlags(
+    distinctId: 'user-distinct-id',
+    personProperties: [
         'plan' => 'enterprise',
-        'company_size' => 'large'
+        'company_size' => 'large',
     ],
-    [    // groupProperties
+    groups: [
+        'company' => 'company-123',
+    ],
+    groupProperties: [
         'company' => [
             'plan' => 'enterprise',
-            'employee_count' => 500
-        ]
-    ]
+            'employee_count' => 500,
+        ],
+    ],
 );
+
+$flagValue = $flags->getFlag('feature-flag-key');
 ```
 
 ```ruby
-flag_value = posthog.get_feature_flag(
-    'feature-flag-key',
+flags = posthog.evaluate_flags(
     'user-distinct-id',
     person_properties: {
-        'plan' => 'enterprise',
-        'company_size' => 'large'
+        plan: 'enterprise',
+        company_size: 'large',
     },
     groups: {
-        'company' => 'company-123'
+        company: 'company-123',
     },
     group_properties: {
-        'company' => {
-            'plan' => 'enterprise',
-            'employee_count' => 500
-        }
-    }
-)
-```
-
-```go
-flagValue, err := client.GetFeatureFlag(
-    posthog.FeatureFlagPayload{
-        Key:        "feature-flag-key",
-        DistinctId: "user-distinct-id",
-        PersonProperties: posthog.NewProperties().
-            Set("plan", "enterprise").
-            Set("company_size", "large"),
-        Groups: posthog.NewGroups().
-            Set("company", "company-123"),
-        GroupProperties: map[string]map[string]interface{}{
-            "company": {
-                "plan":           "enterprise",
-                "employee_count": 500,
-            },
+        company: {
+            plan: 'enterprise',
+            employee_count: 500,
         },
     },
 )
+
+flag_value = flags.get_flag('feature-flag-key')
+```
+
+```go
+flags, err := client.EvaluateFlags(posthog.EvaluateFlagsPayload{
+    DistinctId: "user-distinct-id",
+    PersonProperties: posthog.NewProperties().
+        Set("plan", "enterprise").
+        Set("company_size", "large"),
+    Groups: posthog.NewGroups().
+        Set("company", "company-123"),
+    GroupProperties: map[string]posthog.Properties{
+        "company": posthog.NewProperties().
+            Set("plan", "enterprise").
+            Set("employee_count", 500),
+    },
+})
+if err != nil {
+    // Handle error
+}
+
+flagValue := flags.GetFlag("feature-flag-key")
 ```
 
 ```java
-Object flagValue = posthog.getFeatureFlag(
+PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags(
     "user-distinct-id",
-    "feature-flag-key",
-    PostHogFeatureFlagOptions.builder()
-        .groups(Map.of("company", "company-123"))
-        .personProperties(Map.of(
-            "plan", "enterprise",
-            "company_size", "large"
-        ))
-        .groupProperties(Map.of(
-            "company", Map.of(
-                "plan", "enterprise",
-                "employee_count", 500
-            )
-        ))
+    PostHogEvaluateFlagsOptions.builder()
+        .personProperty("plan", "enterprise")
+        .personProperty("company_size", "large")
+        .group("company", "company-123")
+        .groupProperty("company", "plan", "enterprise")
+        .groupProperty("company", "employee_count", 500)
         .build()
 );
+
+Object flagValue = flags.getFlag("feature-flag-key");
 ```
 
 </MultiLanguage>
