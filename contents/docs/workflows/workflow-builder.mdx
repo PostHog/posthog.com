@@ -33,7 +33,9 @@ Workflows have two states: **draft** and **enabled**.
 | Draft   | A work-in-progress workflow that isn't active. You can save drafts with incomplete or invalid configurations. |
 | Enabled | An active workflow that runs when triggered. Full validation is required before enabling.                     |
 
-When building a workflow, you can save your progress at any time as a draft, even if the configuration is incomplete or has errors. This lets you iteratively build complex workflows without needing a complete, valid configuration at every save.
+The workflow editor auto-saves your changes as you edit. A **Saving…** indicator appears while changes are being saved, followed by a **Last saved** timestamp showing when the workflow was last saved. This prevents you from losing work if you navigate away without manually saving.
+
+Auto-save applies to existing workflows only. New workflows need to be saved manually the first time. You can still click the **Save** button at any time to save explicitly.
 
 Validation is only enforced when you enable a workflow. Before enabling, PostHog checks that all required fields are filled and configurations are valid. If there are errors, you'll see a message prompting you to fix them before the workflow can be enabled.
 
