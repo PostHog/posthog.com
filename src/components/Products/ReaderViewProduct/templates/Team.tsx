@@ -1,7 +1,8 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
+import CloudinaryImage from 'components/CloudinaryImage'
+import TeamPatch from 'components/TeamPatch'
 import { TeamMember } from 'components/People'
 import {
     StickerPineappleYes,
@@ -28,10 +29,7 @@ interface ProfileNode {
     teams?: {
         data?: Array<{
             id?: string | number
-            attributes?: {
-                name?: string
-                slug?: string
-            }
+            attributes?: { name?: string; slug?: string }
         }>
     }
 }
@@ -40,11 +38,11 @@ const PineappleVerdict = ({ profiles }: { profiles: ProfileNode[] }) => {
     const known = profiles.filter((p) => p.pineappleOnPizza === true || p.pineappleOnPizza === false)
     if (!known.length) {
         return (
-            <div className="bg-yellow/10 border border-yellow/40 rounded p-5 flex items-center gap-4">
-                <StickerPineappleUnknown className="size-12 shrink-0" />
+            <div className="flex items-center gap-3">
+                <StickerPineappleUnknown className="size-10 shrink-0" />
                 <div>
-                    <p className="text-sm text-secondary m-0">Does pineapple belong on pizza?</p>
-                    <p className="text-2xl font-bold m-0 text-primary">The team is undecided</p>
+                    <p className="text-sm text-secondary mb-0">Does pineapple belong on pizza?</p>
+                    <p className="text-[15px] m-0">No data available.</p>
                 </div>
             </div>
         )
@@ -52,23 +50,24 @@ const PineappleVerdict = ({ profiles }: { profiles: ProfileNode[] }) => {
     const yes = known.filter((p) => p.pineappleOnPizza === true).length
     const percent = Math.round((yes / known.length) * 100)
     const Sticker = percent > 50 ? StickerPineappleYes : percent === 50 ? StickerPineapple : StickerPineappleNo
-    const verdict =
-        percent > 66
-            ? 'are firmly pro-pineapple'
-            : percent > 50
-            ? 'lean pro-pineapple'
-            : percent === 50
-            ? 'are evenly split'
-            : percent > 33
-            ? 'lean anti-pineapple'
-            : 'are firmly anti-pineapple'
     return (
-        <div className="bg-yellow/10 border border-yellow/40 rounded p-5 flex items-center gap-4">
-            <Sticker className="size-12 shrink-0" />
+        <div className="flex items-center gap-3">
+            <Sticker className="size-10 shrink-0" />
             <div>
-                <p className="text-sm text-secondary m-0">Does pineapple belong on pizza?</p>
-                <p className="text-2xl font-bold m-0 text-primary">
-                    <span className="text-red dark:text-yellow">{percent}%</span> {verdict}
+                <p className="text-sm text-secondary mb-0">Does pineapple belong on pizza?</p>
+                <p className="text-[15px] m-0">
+                    {percent > 50 ? (
+                        <>
+                            <strong>{percent}%</strong> of this team say <strong className="text-green">yes</strong>!
+                        </>
+                    ) : percent === 50 ? (
+                        <>This team is evenly split.</>
+                    ) : (
+                        <>
+                            Shockingly, <strong>{100 - percent}%</strong> of this team say{' '}
+                            <strong className="text-red">no</strong>!
+                        </>
+                    )}
                 </p>
             </div>
         </div>
@@ -88,8 +87,24 @@ const Team = ({ id, productData }: SectionComponentProps) => {
                     slug
                     tagline
                     description
-                    miniCrest {
-                        gatsbyImageData(width: 80, height: 80)
+                    crest {
+                        data {
+                            attributes {
+                                url
+                            }
+                        }
+                    }
+                    crestOptions {
+                        textColor
+                        textShadow
+                        fontSize
+                        frame
+                        frameColor
+                        plaque
+                        plaqueColor
+                        imageScale
+                        imageXOffset
+                        imageYOffset
                     }
                     teamImage {
                         caption
@@ -154,51 +169,45 @@ const Team = ({ id, productData }: SectionComponentProps) => {
         p.teams?.data?.some((t) => t.attributes?.slug === teamSlug)
     )
 
-    const miniCrestImage = team.miniCrest ? getImage(team.miniCrest) : null
+    const crestImageUrl = team.crest?.data?.attributes?.url
     const heroUrl = team.teamImage?.image?.data?.attributes?.url
     const heroCaption = team.teamImage?.caption
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <div className="flex flex-col @2xl/reader-content:flex-row @2xl/reader-content:items-start gap-6 mb-8">
-                <div className="flex items-center gap-4 @2xl/reader-content:flex-col @2xl/reader-content:items-start @2xl/reader-content:w-56 @2xl/reader-content:shrink-0">
-                    {miniCrestImage && (
-                        <GatsbyImage
-                            image={miniCrestImage}
-                            alt={`${team.name} crest`}
-                            className="size-16 @2xl/reader-content:size-20 shrink-0"
-                        />
+            <header className="flex flex-col-reverse @2xl/reader-content:flex-row @2xl/reader-content:items-center gap-6 @2xl/reader-content:gap-8 mb-12">
+                <div className="flex-1 min-w-0">
+                    <h2 className="text-3xl font-bold text-primary m-0 leading-tight">{team.name} Team</h2>
+                    {team.tagline && <p className="text-base italic text-secondary m-0 mt-1">{team.tagline}</p>}
+                    {team.description && (
+                        <p className="text-base text-secondary leading-relaxed m-0 mt-3">{team.description}</p>
                     )}
-                    <div>
-                        <h2 className="text-3xl font-bold text-primary m-0 leading-tight">{team.name} Team</h2>
-                        {team.tagline && <p className="text-base italic text-secondary m-0 mt-1">{team.tagline}</p>}
+                    <div className="mt-4">
+                        <PineappleVerdict profiles={profiles} />
                     </div>
                 </div>
-                {team.description && (
-                    <div className="flex-1 min-w-0">
-                        <p className="text-base text-secondary leading-relaxed m-0">{team.description}</p>
+                {team.crestOptions && (
+                    <div className="@2xl/reader-content:w-64 @2xl/reader-content:shrink-0 flex justify-center">
+                        <TeamPatch
+                            name={team.name}
+                            imageUrl={crestImageUrl}
+                            className="h-48 @2xl/reader-content:h-64"
+                            {...team.crestOptions}
+                        />
                     </div>
                 )}
-            </div>
+            </header>
 
             {heroUrl && (
-                <figure className="m-0 mb-8">
-                    <img
-                        src={heroUrl}
-                        alt={`${team.name} team`}
-                        className="w-full rounded shadow-2xl border border-primary"
-                    />
+                <figure className="rotate-2 max-w-md w-full flex flex-col gap-2 mx-auto @2xl/reader-content:mr-0 mb-12">
+                    <div className="bg-accent flex justify-center items-center shadow-xl border-8 border-white rounded-md">
+                        <CloudinaryImage src={heroUrl} alt={`${team.name} team`} />
+                    </div>
                     {heroCaption && (
-                        <figcaption className="text-xs italic text-secondary text-center mt-2">
-                            {heroCaption}
-                        </figcaption>
+                        <figcaption className="text-right text-[13px] mr-2 text-secondary">{heroCaption}</figcaption>
                     )}
                 </figure>
             )}
-
-            <div className="mb-8">
-                <PineappleVerdict profiles={profiles} />
-            </div>
 
             {profiles.length > 0 && (
                 <ul className="list-none m-0 p-0 grid grid-cols-1 @sm/reader-content:grid-cols-2 @2xl/reader-content:grid-cols-3 @4xl/reader-content:grid-cols-4 gap-4">

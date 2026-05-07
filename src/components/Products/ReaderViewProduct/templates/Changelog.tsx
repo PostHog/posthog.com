@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import Link from 'components/Link'
@@ -9,13 +8,14 @@ import { SectionComponentProps } from '../types'
 
 dayjs.extend(utc)
 
+const MAX_ENTRIES = 12
+
 interface ChangelogNode {
     id: string | number
     date: string
     title: string
     description?: string
     cta?: { label?: string; url?: string }
-    media?: { gatsbyImageData?: IGatsbyImageData }
     teams?: { data?: Array<{ attributes?: { name?: string } }> }
 }
 
@@ -26,44 +26,32 @@ interface MonthGroup {
 }
 
 const stripHtml = (html: string) => html.replace(/<[^>]+>/g, '').trim()
-const truncate = (text: string, max = 180) =>
+const truncate = (text: string, max = 140) =>
     text.length <= max ? text : text.slice(0, max).replace(/\s+\S*$/, '') + '…'
 
-const ChangelogCard = ({ entry }: { entry: ChangelogNode }) => {
+const ChangelogRow = ({ entry }: { entry: ChangelogNode }) => {
     const date = dayjs.utc(entry.date)
-    const image = entry.media?.gatsbyImageData ? getImage(entry.media.gatsbyImageData) : null
     const description = entry.description ? truncate(stripHtml(entry.description)) : null
     return (
-        <article className="group relative bg-primary rounded shadow-2xl border border-primary p-4 @md/reader-content:p-5 transition-transform hover:-translate-y-0.5">
-            <div className="flex flex-col @md/reader-content:flex-row gap-4">
-                {image && (
-                    <div className="@md/reader-content:w-40 @md/reader-content:shrink-0 overflow-hidden rounded">
-                        <GatsbyImage
-                            image={image}
-                            alt={entry.title}
-                            className="w-full h-32 @md/reader-content:h-24 transition-transform group-hover:scale-[1.02]"
-                        />
-                    </div>
-                )}
-                <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-3 mb-1">
-                        <h4 className="text-base font-semibold m-0 leading-snug text-primary">{entry.title}</h4>
-                        <span className="shrink-0 text-xs font-mono text-secondary mt-0.5">{date.format('MMM D')}</span>
-                    </div>
-                    {description && <p className="text-sm text-secondary m-0 leading-relaxed">{description}</p>}
-                    {entry.cta?.url && entry.cta?.label && (
+        <li className="m-0 py-2 grid grid-cols-[60px_1fr] gap-x-3 gap-y-0.5 border-b border-primary last:border-b-0">
+            <div className="text-xs font-mono text-secondary pt-0.5">{date.format('MMM D')}</div>
+            <div>
+                <h4 className="text-[15px] font-semibold m-0 leading-snug text-primary">
+                    {entry.cta?.url ? (
                         <Link
                             to={entry.cta.url}
                             state={{ newWindow: true }}
-                            className="inline-flex items-center gap-1 mt-2 text-xs font-semibold text-red dark:text-yellow hover:underline"
+                            className="text-inherit hover:text-red dark:hover:text-yellow"
                         >
-                            {entry.cta.label}
-                            <IconArrowRight className="size-3" />
+                            {entry.title}
                         </Link>
+                    ) : (
+                        entry.title
                     )}
-                </div>
+                </h4>
+                {description && <p className="text-sm text-secondary m-0 mt-0.5 leading-snug">{description}</p>}
             </div>
-        </article>
+        </li>
     )
 }
 
@@ -82,9 +70,6 @@ const Changelog = ({ id, productData }: SectionComponentProps) => {
                     cta {
                         label
                         url
-                    }
-                    media {
-                        gatsbyImageData(width: 320)
                     }
                     teams {
                         data {
@@ -108,14 +93,11 @@ const Changelog = ({ id, productData }: SectionComponentProps) => {
 
     const groups: MonthGroup[] = useMemo(() => {
         if (!team) return []
-        const cutoff = dayjs.utc().subtract(12, 'month').startOf('day')
-        const entries: ChangelogNode[] = allRoadmap.nodes.filter((node: ChangelogNode) => {
-            if (!node.date) return false
-            if (dayjs.utc(node.date).isBefore(cutoff)) return false
-            return node.teams?.data?.some((t) => t.attributes?.name === team.name)
-        })
+        const matching: ChangelogNode[] = (allRoadmap.nodes as ChangelogNode[])
+            .filter((node) => node.date && node.teams?.data?.some((t) => t.attributes?.name === team.name))
+            .slice(0, MAX_ENTRIES)
         const byMonth = new Map<string, MonthGroup>()
-        for (const entry of entries) {
+        for (const entry of matching) {
             const d = dayjs.utc(entry.date)
             const key = d.format('YYYY-MM')
             if (!byMonth.has(key)) {
@@ -132,36 +114,24 @@ const Changelog = ({ id, productData }: SectionComponentProps) => {
         <section id={id} className="scroll-mt-20 not-prose">
             <h2 className="text-3xl font-bold text-primary mt-0 mb-3">Changelog</h2>
             <p className="text-base text-secondary leading-relaxed m-0 mb-6">
-                What the {team.name} Team has shipped over the last 12 months.
+                Recent updates from the {team.name} Team.
             </p>
-            <div className="relative pl-6">
-                <div
-                    className="absolute left-2 top-2 bottom-2 w-px bg-yellow/50 dark:bg-yellow/40"
-                    aria-hidden="true"
-                />
-                <div className="flex flex-col gap-8">
-                    {groups.map((group) => (
-                        <div key={group.key} className="relative">
-                            <div className="flex items-center gap-3 mb-3 -ml-6">
-                                <span
-                                    className="size-4 rounded-full bg-yellow border-2 border-primary shrink-0"
-                                    aria-hidden="true"
-                                />
-                                <h3 className="text-sm uppercase tracking-wider font-semibold text-primary m-0">
-                                    {group.label}
-                                    <span className="ml-2 text-secondary/70 font-normal normal-case tracking-normal">
-                                        {group.entries.length} update{group.entries.length === 1 ? '' : 's'}
-                                    </span>
-                                </h3>
-                            </div>
-                            <div className="flex flex-col gap-3">
-                                {group.entries.map((entry) => (
-                                    <ChangelogCard key={entry.id} entry={entry} />
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
+            <div className="flex flex-col gap-5">
+                {groups.map((group) => (
+                    <div key={group.key}>
+                        <h3 className="text-base font-semibold text-primary m-0 mb-1 pb-1 border-b border-primary flex items-baseline gap-2">
+                            <span>{group.label}</span>
+                            <span className="text-xs text-secondary font-normal">
+                                {group.entries.length} update{group.entries.length === 1 ? '' : 's'}
+                            </span>
+                        </h3>
+                        <ul className="list-none m-0 p-0">
+                            {group.entries.map((entry) => (
+                                <ChangelogRow key={entry.id} entry={entry} />
+                            ))}
+                        </ul>
+                    </div>
+                ))}
             </div>
             <div className="mt-6">
                 <Link
