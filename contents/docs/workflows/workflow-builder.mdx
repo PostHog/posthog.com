@@ -39,6 +39,14 @@ Validation is only enforced when you enable a workflow. Before enabling, PostHog
 
 Draft workflows can also be archived, even if they contain invalid configurations.
 
+## Auto-save
+
+The workflow editor saves your changes automatically as you work. After a few seconds of inactivity, your workflow saves in the background. A "Last saved" indicator in the tab bar shows when your workflow was last saved.
+
+Auto-save only works on existing workflows. You must save a new workflow manually at least once before auto-save takes effect. Schedule changes are excluded from auto-save and require a manual save.
+
+If you navigate away with unsaved changes, PostHog saves them automatically so you don't lose your work.
+
 ## Triggers
 
 Every workflow starts with a trigger. Triggers define what kicks off the workflow.
