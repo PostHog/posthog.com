@@ -99,7 +99,7 @@ The loop: **define the question → find the right data source → run the query
 The servers:
 
 - **A database MCP** for application data: the [official Postgres MCP](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres) (a reference implementation; the repo is archived but the server still works) or **[Supabase MCP](https://supabase.com/docs/guides/getting-started/mcp)** if that's your stack. Both can run in read-only mode, which is the right default for production databases.
-- **[PostHog MCP](/docs/model-context-protocol)** for event and product data: query analytics with HogQL, pull from your [data warehouse](/data-warehouse) (which can pipe in Stripe, Postgres, BigQuery, etc.), or analyze [LLM traces and costs](/llm-analytics). Good for "users who did X and then Y" queries that are awkward in raw SQL but trivial in HogQL.
+- **[PostHog MCP](/docs/model-context-protocol)** for event and product data: query analytics with SQL, pull from your [data warehouse](/data-stack), or analyze [LLM traces and costs](/llm-analytics). Good for "users who did X and then Y" queries.
 
 A real prompt: *"Pull MRR by plan tier from Postgres, then break down feature usage by tier from PostHog, and give me a single table comparing them."*
 
@@ -119,9 +119,9 @@ Not on the same stack as the recommendations above? Here's what to swap in.
 
 **Communication:** [Discord MCP](https://www.pulsemcp.com/servers?q=discord) (community-built, multiple options) if your team or community lives there. [Microsoft's MCP Server for Enterprise](https://learn.microsoft.com/en-us/graph/mcp-server/overview) covers Teams along with the rest of Microsoft 365 via Graph.
 
-**Analytics and observability:** [Mixpanel](/blog/posthog-vs-mixpanel), [Amplitude](/blog/posthog-vs-amplitude), and [Heap](/blog/posthog-vs-heap) ship MCP servers for product analytics. [Sentry](/blog/posthog-vs-sentry) has one for error tracking. [LaunchDarkly](/blog/posthog-vs-launchdarkly) has three for feature flags, AI Configs, and observability. Stack two or more of these and you'll need a server for each – PostHog covers the same ground in one connector.
+**Analytics and observability:** [Mixpanel](/blog/posthog-vs-mixpanel), [Amplitude](/blog/posthog-vs-amplitude), and [Heap](/blog/posthog-vs-heap) ship MCP servers for product analytics. [Sentry](/blog/posthog-vs-sentry) has one for error tracking. [LaunchDarkly](/blog/posthog-vs-launchdarkly) has three for feature flags, AI Configs, and observability.
 
-*PostHog appears in five of these six workflows because it covers product analytics, error tracking, session replay, feature flags, surveys, LLM observability, a data warehouse, and more under one connector. It's not that it's is the only option, just that it's the simplest single-connector option for teams that want all of it.*
+*PostHog appears in all of these six workflows because it covers product analytics, error tracking, session replay, feature flags, surveys, LLM observability, a data warehouse, and more under one connector. It's not that it's is the only option, just that it's the simplest single-connector option for teams that want all of it.*
 
 **Databases and warehouses:** [MongoDB's official MCP](https://www.mongodb.com/docs/mongodb-mcp-server/) for document stores, [Snowflake's official MCP](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp) or [BigQuery's official MCP](https://cloud.google.com/bigquery/docs/use-bigquery-mcp) for warehouse work, [Redis's official MCP](https://github.com/redis/mcp-redis) for caching and session data.
 
