@@ -49,7 +49,7 @@ Your proxy status will change from **waiting** → **issuing** → **live**. Thi
 
 PostHog will automatically detect your DNS record and provision an SSL certificate. No further action needed.
 
-> **Note:** If your proxy stays in **issuing** for more than 30 minutes, see [troubleshooting](/docs/advanced/proxy/proxy-reference#troubleshooting).
+> **Note:** If your proxy stays in **issuing** for more than 30 minutes, run a diagnostic to identify the issue. See [troubleshooting](#troubleshooting) below.
 
 </Step>
 
@@ -91,11 +91,34 @@ Confirm events are flowing through your proxy:
 4. Verify the response is `200 OK`
 5. Check the [PostHog app](https://app.posthog.com) to confirm events appear
 
-If you see errors or events aren't appearing, see [troubleshooting](/docs/advanced/proxy/proxy-reference#troubleshooting).
+If you see errors or events aren't appearing, run a [diagnostic](#troubleshooting) to identify the issue.
 
 </Step>
 
 </Steps>
+
+## Troubleshooting
+
+If your managed proxy is stuck in **waiting**, **issuing**, or **erroring** state, use the built-in diagnostic tool to identify the issue:
+
+1. Go to [organization proxy settings](https://app.posthog.com/settings/organization-proxy)
+2. Click the **⋯** menu next to your proxy record
+3. Select **Diagnose**
+
+The diagnostic runs several checks and provides specific remediation steps:
+
+| Check | What it verifies |
+|-------|------------------|
+| **DNS CNAME** | Your CNAME record points to the PostHog proxy target |
+| **Cloudflare custom hostname** | Certificate provider can reach your domain |
+| **CAA records** | No CAA restrictions blocking certificate issuance |
+| **HTTP-01 challenge** | Domain is reachable for SSL certificate validation |
+| **Live event probe** | Events can flow through the proxy |
+| **Certificate expiry** | SSL certificate is valid and not expiring soon |
+
+Each check shows **Pass**, **Fail**, **Warn**, or **Skip** status with specific details. Failed checks include the exact DNS records or configuration changes needed to fix the issue.
+
+You can also ask Max (PostHog's AI assistant) to diagnose your proxy from the proxy settings page.
 
 ## FAQ
 
