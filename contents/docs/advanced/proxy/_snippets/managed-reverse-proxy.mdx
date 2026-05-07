@@ -1,5 +1,5 @@
-import { Steps, Step } from 'components/Docs/Steps'
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { Steps, Step } from "components/Docs/Steps";
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 PostHog's managed reverse proxy routes traffic through our infrastructure. We handle SSL certificates, routing, and maintenance automatically.
 
@@ -49,7 +49,7 @@ Your proxy status will change from **waiting** → **issuing** → **live**. Thi
 
 PostHog will automatically detect your DNS record and provision an SSL certificate. No further action needed.
 
-> **Note:** If your proxy stays in **issuing** for more than 30 minutes, see [troubleshooting](/docs/advanced/proxy/proxy-reference#troubleshooting).
+> **Note:** If your proxy stays in **issuing** for more than 30 minutes, see [troubleshooting](#troubleshooting).
 
 </Step>
 
@@ -60,17 +60,17 @@ Update your PostHog initialization to use your new subdomain:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_token>', {
-  api_host: 'https://yoursubdomain.myapp.com',
-  ui_host: 'https://us.posthog.com'
-})
+posthog.init("<ph_project_token>", {
+  api_host: "https://yoursubdomain.myapp.com",
+  ui_host: "https://us.posthog.com",
+});
 ```
 
 ```js file=EU
-posthog.init('<ph_project_token>', {
-  api_host: 'https://yoursubdomain.myapp.com',
-  ui_host: 'https://eu.posthog.com'
-})
+posthog.init("<ph_project_token>", {
+  api_host: "https://yoursubdomain.myapp.com",
+  ui_host: "https://eu.posthog.com",
+});
 ```
 
 </MultiLanguage>
@@ -91,11 +91,54 @@ Confirm events are flowing through your proxy:
 4. Verify the response is `200 OK`
 5. Check the [PostHog app](https://app.posthog.com) to confirm events appear
 
-If you see errors or events aren't appearing, see [troubleshooting](/docs/advanced/proxy/proxy-reference#troubleshooting).
+If you see errors or events aren't appearing, see [troubleshooting](#troubleshooting).
 
 </Step>
 
 </Steps>
+
+## Troubleshooting
+
+If your proxy is stuck in **issuing** or shows as **erroring**, use the built-in diagnostic tool to identify the issue.
+
+### Run diagnostics
+
+1. Go to [organization proxy settings](https://app.posthog.com/settings/organization-proxy)
+2. Find your proxy in the list
+3. Click the **⋯** menu and select **Diagnose**
+
+The diagnostic runs these checks:
+
+- **DNS CNAME** – Verifies your CNAME record points to the correct PostHog proxy target
+- **Certificate status** – Checks if SSL certificate provisioning is progressing normally
+- **CAA records** – Scans your DNS tree for CAA records that might block certificate issuance
+- **HTTP-01 challenge** – Tests if the domain verification endpoint is reachable
+- **Live event probe** – Confirms events can flow through the proxy
+- **Certificate expiry** – Warns if an active certificate is expiring soon
+
+Each check shows a status (passed, warning, failed, or skipped) with details and remediation steps when needed.
+
+### Common issues
+
+**CNAME not configured or pointing to the wrong target**
+
+Add or update your CNAME record at your DNS provider. The diagnostic report shows the exact record value you need.
+
+**CAA records blocking certificate issuance**
+
+Your domain has CAA records that don't authorize PostHog's certificate authority. Add CAA records allowing `pki.goog`, `letsencrypt.org`, and `ssl.com` as shown in the diagnostic report.
+
+**HTTP-01 challenge unreachable**
+
+The domain verification URL isn't accessible. Make sure:
+
+- Port 80 is open and not blocked by a firewall
+- No redirects from HTTP to HTTPS on the verification path
+- No other CDN or proxy is intercepting traffic before it reaches PostHog
+
+**DNS provider proxy enabled**
+
+If you use Cloudflare or a similar DNS provider with proxy features, make sure the proxy is disabled (gray cloud) for your CNAME record.
 
 ## FAQ
 
