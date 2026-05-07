@@ -60,6 +60,7 @@ export interface AppWindow {
     modal?: {
         type: 'standard' | 'side' | 'floating'
     }
+    expanded: boolean
 }
 
 interface WindowProviderProps {

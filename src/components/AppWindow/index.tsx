@@ -252,6 +252,12 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         }
     }, [windowRef.current])
 
+    const isMaximized = () => {
+        const taskbarRect = taskbarRef.current?.getBoundingClientRect()
+        const expandedWidth = window.innerWidth - (taskbarRect?.left ?? 0) * 2
+        return size.width >= expandedWidth
+    }
+
     const beyondViewport = (windowSize: { width: number; height: number }) => {
         const rightEdge = position.x + windowSize.width
         const bottomEdge = position.y + windowSize.height
@@ -298,6 +304,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         updateWindow(item, {
             size: newSize,
             position: isBeyondViewport ? getDesktopCenterPosition(newSize) : previousPosition,
+            expanded: false,
         })
     }
 
@@ -641,7 +648,11 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                               item.minimal
                                                   ? '!shadow-none'
                                                   : `flex flex-col ${
-                                                        siteSettings.experience === 'boring' ? '' : 'border rounded-lg'
+                                                        siteSettings.experience === 'boring'
+                                                            ? ''
+                                                            : `border rounded-lg ${
+                                                                  item.expanded ? 'rounded-tr-none rounded-tl-none' : ''
+                                                              }`
                                                     }`
                                           }`
                                 } ${chrome ? 'overflow-hidden' : ''}`}
@@ -786,7 +797,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                                                         size="xs"
                                                                         onClick={() => {
                                                                             setWindowOptionsTooltipVisible(false)
-                                                                            if (size.width >= window?.innerWidth) {
+                                                                            if (isMaximized()) {
                                                                                 collapseWindow()
                                                                             } else {
                                                                                 expandWindow()
@@ -804,8 +815,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                                                             trigger={
                                                                                 <span>
                                                                                     <IconSquare className="size-5 group-hover:hidden" />
-                                                                                    {!isSSR &&
-                                                                                    size.width >= window?.innerWidth ? (
+                                                                                    {!isSSR && isMaximized() ? (
                                                                                         <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
                                                                                     ) : (
                                                                                         <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
@@ -912,7 +922,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     ref={contentRef}
                                     className={`size-full flex-grow ${
                                         chrome
-                                            ? 'overflow-hidden border border-white/50 dark:border-white/10 rounded-lg'
+                                            ? `overflow-hidden border border-white/50 dark:border-white/10 rounded-lg ${
+                                                  item.expanded ? 'rounded-tr-none rounded-tl-none' : ''
+                                              }`
                                             : ''
                                     }`}
                                 >

@@ -45,6 +45,8 @@ export default function TaskBarMenu() {
         websiteMode,
         searchOpen,
         setSearchOpen,
+        updateTaskbarHeight,
+        focusedWindow,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const [rendered, setRendered] = useState(false)
@@ -271,11 +273,9 @@ export default function TaskBarMenu() {
 
     return (
         <>
-            <div
-                className={websiteMode ? 'z-40' : 'z-50'}
-                style={{ position: 'fixed', top: '16px', left: '16px', right: '16px' }}
-            >
+            <div className={websiteMode ? 'z-40' : 'z-50 p-[16px] pb-0'}>
                 <motion.div
+                    onAnimationComplete={updateTaskbarHeight}
                     ref={taskbarRef}
                     id="taskbar"
                     data-scheme="primary"
@@ -284,15 +284,15 @@ export default function TaskBarMenu() {
                     animate={rendered ? { rotateX: 0, opacity: 1 } : { rotateX: 90, opacity: 0 }}
                     transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1], delay: 0.6 }}
                     style={{
-                        transformOrigin: '50% 50% -10px',
+                        transformOrigin: '50% 50%',
                         transformPerspective: 1200,
                         transformStyle: 'preserve-3d',
                         width: '100%',
                         boxSizing: 'border-box',
                     }}
-                    className={`bg-primary/50 backdrop-blur-3xl skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-b border-secondary rounded pl-0.5 pr-2 ${
+                    className={`bg-primary/50 backdrop-blur-3xl skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded pl-0.5 pr-2 ${
                         websiteMode ? '' : 'shadow-2xl'
-                    }`}
+                    } ${focusedWindow?.expanded ? 'rounded-br-none rounded-bl-none' : ''}`}
                 >
                     {/* Top and bottom edges of the 3D box — visible during rotation */}
                     <div

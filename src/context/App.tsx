@@ -138,6 +138,7 @@ interface AppContextType {
     windowsInView: AppWindow[]
     searchOpen: boolean
     setSearchOpen: (isOpen: boolean) => void
+    updateTaskbarHeight: () => void
 }
 
 interface AppProviderProps {
@@ -302,6 +303,7 @@ export const Context = createContext<AppContextType>({
     windowsInView: [],
     searchOpen: false,
     setSearchOpen: () => {},
+    updateTaskbarHeight: () => {},
 })
 
 export interface AppSetting {
@@ -1346,7 +1348,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
     const [siteSettings, setSiteSettings] = useState<SiteSettings>(getInitialSiteSettings(isMobile, compact))
     const websiteMode = siteSettings.experience === 'boring'
-    const [taskbarHeight, setTaskbarHeight] = useState(38)
+    const [taskbarHeight, setTaskbarHeight] = useState(59)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
     const [desktopCopied, setDesktopCopied] = useState(false)
     const [windowsInView, setWindowsInView] = useState<AppWindow[]>([])
@@ -1746,6 +1748,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[keyToUse],
             location,
+            expanded: false,
         }
 
         // Adjust width if window extends beyond right edge
@@ -1804,6 +1807,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             previousPosition?: { x?: number; y?: number }
             previousSize?: { width?: number; height?: number }
             element?: any
+            expanded?: boolean
         }
     ) => {
         const newAppWindow = {
@@ -1825,6 +1829,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 ...(updates.previousSize || {}),
             },
             ...(updates.element ? { element: updates.element } : {}),
+            ...(updates.expanded !== undefined ? { expanded: updates.expanded } : {}),
         }
         setWindows((windows) => windows.map((w) => (w === appWindow ? newAppWindow : w)))
         return newAppWindow
@@ -1936,11 +1941,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     const expandWindow = () => {
         if (!focusedWindow) return
+        const taskbarRect = document.querySelector('#taskbar')?.getBoundingClientRect()
         updateWindow(focusedWindow, {
-            position: { x: 0, y: 0 },
-            size: { width: isSSR ? 0 : window.innerWidth, height: isSSR ? 0 : window.innerHeight - taskbarHeight },
+            position: { x: taskbarRect?.left, y: 0 },
+            size: {
+                width: isSSR ? 0 : window.innerWidth - taskbarRect?.left * 2,
+                height: isSSR ? 0 : window.innerHeight - taskbarHeight - taskbarRect?.top,
+            },
             previousSize: focusedWindow.size,
             previousPosition: focusedWindow.position,
+            expanded: true,
         })
     }
 
@@ -1986,6 +1996,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }
 
+    const updateTaskbarHeight = () => {
+        const rect = document.querySelector('#taskbar')?.getBoundingClientRect()
+        if (rect && rect.height > 0) {
+            setTaskbarHeight(rect.top + rect.height)
+        }
+    }
+
     useEffect(() => {
         if (
             (location.key === 'initial' && location.pathname === '/' && isMobile) ||
@@ -1998,13 +2015,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }, [element])
 
     useEffect(() => {
-        const updateTaskbarHeight = () => {
-            const height = document.querySelector('#taskbar')?.getBoundingClientRect().height || 0
-            if (height > 0) {
-                setTaskbarHeight(height)
-            }
-        }
-
         updateTaskbarHeight()
 
         if (!isSSR) {
@@ -2554,6 +2564,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 windowsInView,
                 searchOpen,
                 setSearchOpen,
+                updateTaskbarHeight,
             }}
         >
             {children}
