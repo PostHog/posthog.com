@@ -2,8 +2,8 @@
 title: Clusters
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
-import { ProductVideo } from 'components/ProductVideo'
+import { ProductScreenshot } from "components/ProductScreenshot";
+import { ProductVideo } from "components/ProductVideo";
 
 <details>
 <summary>Requirements</summary>
@@ -37,8 +37,8 @@ Enabled clustering jobs run automatically during the next scheduled cycle — no
 Navigate to **LLM analytics** > **Clusters** to see the overview.
 
 <ProductVideo
-    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/llma_clustering_1_3de328bf21.mp4"
-    classes="rounded"
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/llma_clustering_1_3de328bf21.mp4"
+  classes="rounded"
 />
 
 ### Managing clustering jobs
@@ -49,7 +49,7 @@ Each job has the following settings:
 
 - **Name** – A label to identify the job (e.g. "Production GPT-4o")
 - **Analysis level** – Whether to cluster traces (entire conversations) or generations (individual LLM calls)
-- **Event filters** – Property filters to scope which traces or generations are included. Leave empty to include all.
+- **Event filters** – Property filters to scope which traces or generations are included. You can filter by event properties, event metadata, person properties, and [cohorts](/docs/data/cohorts). Leave empty to include all.
 - **Enabled** – Toggle a job on or off without deleting it
 
 You can create up to five clustering jobs per team. Jobs run automatically during the next scheduled clustering and summarization cycle. The run selector on the Clusters page includes the job name so you can identify which job produced each run.
@@ -64,8 +64,8 @@ Clusters can operate at two levels:
 The analysis level is configured per job in the [jobs panel](#managing-clustering-jobs). You can also use the level toggle at the top of the Clusters page to filter which runs are displayed.
 
 <ProductVideo
-    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/llma_clustering_traces_vs_generations_2_64a866dffd.mp4"
-    classes="rounded"
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/llma_clustering_traces_vs_generations_2_64a866dffd.mp4"
+  classes="rounded"
 />
 
 ### Distribution bar
@@ -77,8 +77,8 @@ The color-coded bar at the top shows the proportional size of each cluster. Hove
 The interactive 2D scatter plot visualizes how items are distributed across clusters.
 
 <ProductVideo
-    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/llma_clustering_scatter_plot_e0648875d0.mp4"
-    classes="rounded"
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/llma_clustering_scatter_plot_e0648875d0.mp4"
+  classes="rounded"
 />
 
 <details>
@@ -89,20 +89,21 @@ Unlike a typical scatter plot, the X and Y axes here don't represent any specifi
 **The only thing that matters is distance: similar items are closer together, different items are farther apart.** Think of it as a map of your LLM usage where related conversations form neighborhoods.
 
 This means:
+
 - A tight group of dots = traces or generations that your LLM handled in a similar way
 - Dots far from any group = outliers or unusual behavior
 - The absolute position on the chart doesn't mean anything — only relative distances between dots matter
 
 </details>
 
-| Feature | Description |
-|---------|-------------|
-| Dots | Each dot represents one trace or generation, color-coded by cluster |
-| Centroids | Larger dots marking the center of each cluster |
-| Click dot | Navigate to the trace or generation detail |
-| Click centroid | Navigate to the cluster detail page |
-| Drag to zoom | Zoom into a region of the plot |
-| Double-click | Reset zoom |
+| Feature        | Description                                                         |
+| -------------- | ------------------------------------------------------------------- |
+| Dots           | Each dot represents one trace or generation, color-coded by cluster |
+| Centroids      | Larger dots marking the center of each cluster                      |
+| Click dot      | Navigate to the trace or generation detail                          |
+| Click centroid | Navigate to the cluster detail page                                 |
+| Drag to zoom   | Zoom into a region of the plot                                      |
+| Double-click   | Reset zoom                                                          |
 
 ### Cluster cards
 
