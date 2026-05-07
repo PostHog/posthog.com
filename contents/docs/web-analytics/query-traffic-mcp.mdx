@@ -17,13 +17,15 @@ With MCP, your coding agent can:
 
 ## Web Analytics tools
 
-The MCP server uses these tools for querying web analytics data:
+The MCP server provides these tools for querying web analytics data:
 
 | Tool | Description |
 |------|-------------|
-| `query-run` | Run a HogQL query against your web analytics data. Supports pageview counts, bounce rates, session durations, traffic breakdowns, and path analysis. |
-| `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question about traffic. Returns the query for review before running. |
+| `query-web-overview` | Get high-level KPIs: visitors, pageviews, sessions, average session duration, and bounce rate. Supports period-over-period comparison. |
+| `query-web-stats` | Get tabular breakdowns by page, UTM parameters, device, browser, country, and more. Includes optional bounce rate and average time on page columns. |
 | `insight-create-from-query` | Create a saved insight from a traffic query and add it to a dashboard. |
+
+For custom queries, use `query-run` with HogQL or `query-generate-hogql-from-question` to generate a query from natural language.
 
 ## Example prompts
 
