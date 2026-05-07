@@ -20,6 +20,9 @@ import GettingStarted from './GettingStarted'
 import PricingCalculator from './PricingCalculator'
 import Plans from './Plans'
 import PricingFooterCTA from './PricingFooterCTA'
+import Roadmap from './Roadmap'
+import Changelog from './Changelog'
+import Team from './Team'
 
 /**
  * Registry of available section templates, keyed by the `template` string on
@@ -48,6 +51,9 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
     calculator: PricingCalculator,
     plans: Plans,
     'pricing-cta': PricingFooterCTA,
+    roadmap: Roadmap,
+    changelog: Changelog,
+    team: Team,
 }
 
 export {
@@ -71,4 +77,7 @@ export {
     PricingCalculator,
     Plans,
     PricingFooterCTA,
+    Roadmap,
+    Changelog,
+    Team,
 }
