@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
 export type AnnotationType = 'underline' | 'box' | 'circle' | 'highlight' | 'strike-through' | 'crossed-off' | 'bracket'
@@ -50,6 +50,10 @@ export function RoughAnnotation({
 }: RoughAnnotationProps) {
     const elementRef = useRef<HTMLSpanElement>(null)
     const annotationRef = useRef<any>(null)
+    const showTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+    // True while the initial draw animation is running — suppresses repositioning show() calls.
+    const isAnimatingRef = useRef(false)
+    const animationEndTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
     const [isVisible, setIsVisible] = useState(false)
     const prefersReducedMotion = usePrefersReducedMotion()
 
@@ -81,6 +85,8 @@ export function RoughAnnotation({
 
         // Dynamic import to avoid SSR issues — rough-notation accesses DOM directly
         let cancelled = false
+        clearTimeout(showTimeoutRef.current ?? undefined)
+        clearTimeout(animationEndTimerRef.current ?? undefined)
         import('rough-notation').then(({ annotate }) => {
             if (cancelled) return
 
@@ -102,21 +108,33 @@ export function RoughAnnotation({
             })
 
             if (shouldShow && !annotationRef.current.isShowing()) {
-                const timeoutId = setTimeout(
+                showTimeoutRef.current = setTimeout(
                     () => {
-                        annotationRef.current?.show()
+                        showTimeoutRef.current = null
+                        if (!annotationRef.current) return
+                        isAnimatingRef.current = true
+                        annotationRef.current.show()
+                        const aniDuration = prefersReducedMotion ? 0 : animationDuration
+                        animationEndTimerRef.current = setTimeout(() => {
+                            isAnimatingRef.current = false
+                            animationEndTimerRef.current = null
+                        }, aniDuration)
                         if (onComplete) {
-                            setTimeout(onComplete, prefersReducedMotion ? 0 : animationDuration)
+                            setTimeout(onComplete, aniDuration)
                         }
                     },
                     prefersReducedMotion ? 0 : delay
                 )
-                return () => clearTimeout(timeoutId)
             }
         })
 
         return () => {
             cancelled = true
+            clearTimeout(showTimeoutRef.current ?? undefined)
+            showTimeoutRef.current = null
+            clearTimeout(animationEndTimerRef.current ?? undefined)
+            animationEndTimerRef.current = null
+            isAnimatingRef.current = false
             if (annotationRef.current) {
                 annotationRef.current.remove()
                 annotationRef.current = null
@@ -149,7 +167,12 @@ export function RoughAnnotation({
         const observer = new ResizeObserver(() => {
             clearTimeout(timeout)
             timeout = setTimeout(() => {
+                if (isAnimatingRef.current) {
+                    console.log('[RoughAnnotation] ResizeObserver skipped — animation in progress')
+                    return
+                }
                 if (annotationRef.current?.isShowing()) {
+                    console.log('[RoughAnnotation] ResizeObserver repositioning')
                     annotationRef.current.show()
                 }
             }, 150)
@@ -172,13 +195,19 @@ export function RoughAnnotation({
         if (!container) return
 
         let timeout: ReturnType<typeof setTimeout>
-        let lastRect = ''
+        const r0 = el.getBoundingClientRect()
+        let lastRect = `${r0.top},${r0.left},${r0.width},${r0.height}`
         const recheck = () => {
+            if (isAnimatingRef.current) {
+                console.log('[RoughAnnotation] MutationObserver skipped — animation in progress')
+                return
+            }
             const rect = el.getBoundingClientRect()
             const key = `${rect.top},${rect.left},${rect.width},${rect.height}`
             if (key !== lastRect) {
                 lastRect = key
                 if (annotationRef.current?.isShowing()) {
+                    console.log('[RoughAnnotation] MutationObserver repositioning')
                     annotationRef.current.show()
                 }
             }
