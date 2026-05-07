@@ -17,6 +17,8 @@ tags:
 
 Last month, our customers deployed AI agents to PostHog projects to try and solve 6,124 errors in their products. They resolved 4,063 issues. They suppressed 1,751 more. They routed 310 to the right team. Almost none of those agents opened the PostHog UI to do it.
 
+The numbers track with our bet on [self-driving products](/blog/self-driving-product) – the more agents understand your codebase and your data, the more of the routine work they take off your plate, and triage is one of the first places that shift becomes visible.
+
 We were obviously interested to find out what types of problems users were addressing with the MCP.
 
 Here's what we found.
@@ -31,7 +33,7 @@ We grouped 30 days of MCP-driven error triage actions, and they sorted cleanly i
 
 **Route a.k.a. "Wrong owner."** Over 300 issues reassigned to a different person or team – sometimes alongside a freshly-created Linear ticket so the new owner has a place to track the work.
 
-Three different outcomes, three different reasons to invoke the tool. The "agent does triage" framing is too coarse; what actually happens is more like "the agent does whatever needs to be done and then marks the issue accordingly."
+Three different outcomes, three different reasons users invoked the tool. Our initial perception of the agent doing only triage was too coarse. What actually happened is more like "the agent does whatever needs to be done and then marks the issue accordingly."
 
 ## What we learned
 
@@ -69,19 +71,41 @@ There are four categories where MCP-driven triage really earns its keep.
 
 Browser quirks, deprecated SDK warnings, third-party tracker exceptions. The "we know about it, it doesn't matter" pile that grows until your dashboard becomes unreadable. Try:
 
-> "Suppress any errors matching `Script error.`, `ResizeObserver loop completed`, or `Object Not Found Matching Id` from the last 90 days."
+```
+Suppress any errors matching `Script error.`, `ResizeObserver loop completed`, or `Object Not Found Matching Id` from the last 90 days.
+```
+
+[Try it with PostHogAI](https://app.posthog.com/#panel=max:Suppress%20any%20errors%20matching%20Script%20error.%2C%20ResizeObserver%20loop%20completed%2C%20or%20Object%20Not%20Found%20Matching%20Id%20from%20the%20last%2090%20days.)
+
+### Network and auth errors that need filtering, not fixing
+
+`Failed to fetch`, `AuthRetryableFetchError`, timeout exceptions – usually transient, often best handled by suppression combined with alerting on real spikes. Try:
+
+```
+Create a suppression rule for `Failed to fetch` errors from `api.thirdparty.com`, but keep me alerted if the rate exceeds 100 per hour.
+```
+
+[Try it with PostHogAI](https://app.posthog.com/#panel=max:Create%20a%20suppression%20rule%20for%20Failed%20to%20fetch%20errors%20from%20api.thirdparty.com%2C%20but%20keep%20me%20alerted%20if%20the%20rate%20exceeds%20100%20per%20hour.)
 
 ### Business-area errors that need routing
 
 `TypeError` in your checkout flow, `ChunkLoadError` after a deploy, payment webhook failures. Group by route or service and reassign to the team that owns the surface. Try:
 
-> "Group every error on `/checkout` from the last week by exception type, and assign each group to the team that owns the relevant service."
+```
+Group every error on `/checkout` from the last week by exception type, and assign each group to the team that owns the relevant service.
+```
+
+[Try it with PostHogAI](https://app.posthog.com/#panel=max:Group%20every%20error%20on%20%2Fcheckout%20from%20the%20last%20week%20by%20exception%20type%2C%20and%20assign%20each%20group%20to%20the%20team%20that%20owns%20the%20relevant%20service.)
 
 ### Platform-specific crashes
 
 iOS, Android, server-side errors that only some teammates can investigate. Try:
 
-> "Reassign every iOS crash from the last release to the mobile team, and create a Linear ticket linking back to the PostHog issue."
+```
+Reassign every iOS crash from the last release to the mobile team, and create a Linear ticket linking back to the PostHog issue.
+```
+
+[Try it with PostHogAI](https://app.posthog.com/#panel=max:Reassign%20every%20iOS%20crash%20from%20the%20last%20release%20to%20the%20mobile%20team%2C%20and%20create%20a%20Linear%20ticket%20linking%20back%20to%20the%20PostHog%20issue.)
 
 ## Prompts worth trying
 
