@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import confetti from 'canvas-confetti'
 import useProducts from 'hooks/useProducts'
 import useProduct from 'hooks/useProduct'
 import { LogSlider, sliderCurve, inverseCurve } from 'components/Pricing/PricingSlider/Slider'
@@ -57,6 +58,14 @@ const ProductRateBlock = ({
     }
     const activeTierIndex = getActiveTierIndex()
 
+    const prevTierIndex = useRef<number | null>(null)
+    useEffect(() => {
+        if (prevTierIndex.current !== null && activeTierIndex > prevTierIndex.current) {
+            confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } })
+        }
+        prevTierIndex.current = activeTierIndex
+    }, [activeTierIndex])
+
     const formatPrice = (str: string) => {
         const n = parseFloat(str)
         return n === 0 ? 'Free' : `$${n.toFixed(dp)}`
@@ -64,12 +73,11 @@ const ProductRateBlock = ({
 
     return (
         <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-6 @2xl:gap-10 items-start">
-            {/* Left: rate table — nutrition label style */}
-            <div className="border-2 border-primary overflow-hidden">
+            <div className="space-y-px">
                 {/* Header */}
-                <div className="flex items-center justify-between px-4 py-2 bg-primary border-b-2 border-primary">
-                    <span className="text-xs font-black text-primary-inverse">{name}</span>
-                    <span className="text-xs text-primary-inverse/50">/{unit}</span>
+                <div className="flex items-center justify-between px-4 py-2 bg-black/50 backdrop-blur-md rounded-md text-white">
+                    <span className="text-sm font-bold text-primary-inverse">{name}</span>
+                    <span className="text-sm font-bold">/{unit}</span>
                 </div>
                 {/* Rows */}
                 {billingTiers.map((tier: any, i: number) => {
@@ -79,26 +87,22 @@ const ProductRateBlock = ({
                     const isLast = !tier.up_to
 
                     let label = ''
-                    if (i === 0) label = `First ${formatCompactNumber(tier.up_to)}`
+                    if (i === 0) label = `First ${formatCompactNumber(tier.up_to)}/mo`
                     else if (isLast) label = `${formatCompactNumber(prev?.up_to)}+`
                     else label = `${formatCompactNumber(prev?.up_to)} – ${formatCompactNumber(tier.up_to)}`
 
                     return (
                         <div
                             key={i}
-                            className={`flex items-center justify-between px-4 py-2.5 border-b border-primary/20 last:border-b-0 transition-colors ${
-                                isActive ? 'bg-yellow/30 dark:bg-yellow/15' : ''
+                            className={`flex items-center justify-between px-4 py-1.5 rounded-md ${
+                                isActive ? 'bg-yellow/30 dark:bg-yellow/30 ' : 'transition-colors'
                             }`}
                         >
-                            <span
-                                className={`text-sm font-mono ${
-                                    isActive ? 'font-bold text-primary' : 'text-primary/70'
-                                }`}
-                            >
+                            <span className={`text-sm ${isActive ? 'font-bold text-primary' : 'text-primary/70'}`}>
                                 {label}
                             </span>
                             <span
-                                className={`text-sm font-mono font-bold tabular-nums ${
+                                className={`text-sm font-bold tabular-nums font-mono ${
                                     isFree ? 'text-green' : isActive ? 'text-primary' : 'text-primary/70'
                                 }`}
                             >
@@ -111,10 +115,10 @@ const ProductRateBlock = ({
 
             {/* Right: slider */}
             <div>
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center justify-between mb-2 pr-4">
                     <div className="flex items-center gap-1.5">
                         <NumericFormat
-                            inputClassName="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code text-sm border border-primary hover:border-button dark:border-dark rounded-sm py-1 px-1 min-w-[30px] max-w-[110px]"
+                            inputClassName="bg-primary text-center text-lg font-bold border border-primary hover:border-button dark:border-dark rounded-sm py-1 px-1 min-w-[30px] max-w-[150px]"
                             value={volume}
                             thousandSeparator=","
                             onValueChange={({ floatValue }) => {
@@ -124,7 +128,7 @@ const ProductRateBlock = ({
                         />
                         <span className="text-sm text-primary/60">{unit}s/mo</span>
                     </div>
-                    <span className="text-base font-bold text-primary tabular-nums font-mono">{formatUSD(cost)}</span>
+                    <span className="text-base font-bold text-primary tabular-nums">{formatUSD(cost)}</span>
                 </div>
                 <LogSlider
                     stepsInRange={100}
@@ -189,7 +193,7 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
             <div className="grid grid-cols-1 @2xl:grid-cols-[3fr_2fr] gap-10 @2xl:gap-16 mb-12 pb-12 border-b border-light">
                 {/* Left: the pricing as a single mixed-weight headline */}
                 <div>
-                    <p className="text-sm text-primary/40 mb-3">Pricing</p>
+                    <p className="text-base text-secondary mb-3">TL;DR:</p>
                     <p className="text-2xl leading-snug font-normal text-primary mb-3">
                         {freePlan?.free_allocation && (
                             <>
@@ -215,14 +219,14 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
                                 .reverse()
                                 .find((t: any) => parseFloat(t.unit_amount_usd) > 0)
                             return lastPaidTier && lastPaidTier !== firstPaidTier ? (
-                                <p className="text-base text-primary/50 mb-8">
+                                <p className="text-base text-primary/50 mb-4">
                                     Pricing decreases with volume — as low as{' '}
                                     <strong className="font-semibold text-primary/70">
                                         ${parseFloat(lastPaidTier.unit_amount_usd).toFixed(dp)}/{unit}
                                     </strong>
                                 </p>
                             ) : (
-                                <div className="mb-8" />
+                                <div className="mb-4" />
                             )
                         })()}
                     <div className="flex flex-wrap items-center gap-3">
@@ -238,25 +242,25 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
                 {/* Right: aside — how the model works */}
                 <div className="self-start">
                     <p className="text-sm font-semibold text-primary mb-3">How our pricing works</p>
-                    <ul className="list-disc pl-5 space-y-2">
-                        <li className="text-sm text-primary/80">
+                    <ul className="pl-5 space-y-2">
+                        <li className="list-disc text-sm text-primary/80">
                             <strong className="text-primary font-semibold">Pay per use</strong>, not per seat. Your bill
                             scales with usage, not headcount.
                         </li>
-                        <li className="text-sm text-primary/80">
+                        <li className="list-disc text-sm text-primary/80">
                             <strong className="text-primary font-semibold">Volume discounts</strong> kick in
                             automatically — no negotiations needed.
                         </li>
-                        <li className="text-sm text-primary/80">
+                        <li className="list-disc text-sm text-primary/80">
                             <strong className="text-primary font-semibold">Set billing limits</strong> per product.
                             Never get an unexpected bill.
                         </li>
-                        <li className="text-sm text-primary/80">
-                            <strong className="text-primary font-semibold">Startups get extra discounts.</strong>{' '}
-                            <a href="/startups" className="text-red dark:text-yellow underline hover:no-underline">
-                                Apply here
-                            </a>{' '}
-                            if under 2 years old and pre-series B.
+                        <li className="list-disc text-sm text-primary/80">
+                            <strong className="text-primary font-semibold">We &lt;3 startups:</strong> Under 2 years old
+                            and pre-series B?{' '}
+                            <a href="/startups" className="underline">
+                                Apply for $50k in credits
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -299,10 +303,10 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
                 ))}
 
             {/* Total */}
-            <div className="mt-6 border-2 border-primary overflow-hidden">
-                <div className="flex items-center justify-between px-4 py-3 bg-primary">
-                    <p className="font-black text-xs text-primary-inverse m-0">Estimated monthly cost</p>
-                    <span className="text-base font-black text-primary-inverse tabular-nums font-mono">
+            <div className="mt-6 border-t-3 border-primary">
+                <div className="flex items-center justify-between px-4 py-3">
+                    <p className="font-black text-lg text-primary-inverse m-0">Estimated monthly cost</p>
+                    <span className="text-base font-black text-primary-inverse tabular-nums">
                         {formatUSD(totalCost)}
                     </span>
                 </div>
