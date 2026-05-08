@@ -118,6 +118,7 @@ To do so, you should add the CSS class name `ph-no-capture` to elements which sh
 
 Note that adding `ph-no-capture` will also prevent any [autocapture](/docs/data/autocapture) events from being captured from that element.
 
+<<<<<<< HEAD
 ## URL query parameters
 
 URLs can contain sensitive data in query parameters, such as authentication tokens, API keys, or personal identifiers. PostHog can automatically mask these values in session replay URLs.
@@ -143,6 +144,31 @@ posthog.init('<ph_project_token>', {
 
 When enabled, URLs like `https://example.com/?token=secret123&page=home` appear as `https://example.com/?token=<masked>&page=home` in your recordings.
 
+||||||| 689bbfb97
+=======
+## URL redaction
+
+Session replay captures the page URL shown in the replay player URL bar and timeline. Query strings can include sensitive data such as auth tokens or user identifiers. To redact them, provide a `maskCapturedNetworkRequestFn` callback, the same callback used for [network capture](/docs/session-replay/network-recording#how-to-register-a-callback-to-inspect-and-redact-each-network-request) also runs against the page URL captured in the snapshot, so a single configuration covers both surfaces.
+
+```js-web
+posthog.init('<ph_project_token>', {
+    session_recording: {
+        maskCapturedNetworkRequestFn: (request) => {
+            if (request.name) {
+                // Redact specific query params
+                request.name = request.name.replace(/([?&](token|auth|email)=)[^&]+/g, '$1[REDACTED]')
+                // Or strip the query string entirely:
+                // request.name = request.name.split('?')[0]
+            }
+            return request
+        },
+    },
+})
+```
+
+The callback runs in the browser, so redacted values never leave the user's device.
+
+>>>>>>> master
 ## Common example configs
 
 ### Maximum privacy - mask everything
