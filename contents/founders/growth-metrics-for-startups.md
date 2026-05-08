@@ -16,7 +16,7 @@ crosspost:
 
 Most advice about growth metrics and revenue ops is for businesses that follow classic B2B SaaS – predictable contracts, a single product, and clean MRR lines.
 
-PostHog, on the other hand, is pretty weird. 90% of our users are indie developers who stay on the free tier for life. We do usage-based pricing and literally tell people to pay us less. We also serve free hot dogs at developer conferences.
+PostHog, on the other hand, is pretty weird. 90% of our users are indie developers who stay on the free tier for life. We do [usage-based pricing](/founders/pricing-lessons) and literally tell people to pay us less. We also serve free hot dogs at developer conferences.
 
 We've more than 6x'ed our ARR over the two years since I joined. That number in and of itself says a lot, but I also want to talk about the work that went into figuring that number out.
 
@@ -59,7 +59,7 @@ I started by building a Clay automation that checks multiple data sources for ev
 
 One challenge I faced was that most enrichment vendors are built around large enterprise customers. If your ICP is startups or early-stage companies, you'll find a lot of gaps. Clearbit is great for big company data, but it wasn't working for the kinds of companies we care about. We eventually found [Harmonic](https://harmonic.ai/), which indexes startup data for VCs, and it had much better coverage for our segment.
 
-We've since extended the same enrichment data to combine with usage signals that sales looks at (e.g., activation events, invite volume, feature breadth) to score accounts for expansion potential. Strong matches get tagged in Salesforce for outreach, which is how we're expanding our PLG to PLS motion today.
+We've since extended the same enrichment data to combine with usage signals that sales looks at (e.g., activation events, invite volume, feature breadth) to score accounts for expansion potential. Strong matches get tagged in Salesforce for outreach, which is how we're expanding our [PLG](/founders/product-led-growth) to PLS motion today.
 
 ---
 
@@ -79,7 +79,7 @@ This part can feel frustrating because I'd always have to add caveats along the 
 
 These were incredibly misleading without context because we were operating with traditional SaaS metric calculations, but each cycle helped us get closer. Eventually, enough of those cycles stacked up and patterns became clear.
 
-For example, we fixed the prepaid contract problem by switching to actual usage-based revenue recognition: the revenue line now reflects what customers use, not a fixed amortization of what they paid upfront. My life genuinely got easier after that. ElevenLabs' launch now shows up as a strong month; implementation spikes are visible as spikes.
+For example, we fixed the prepaid contract problem by switching to actual [usage-based revenue recognition](/revenue-analytics): the revenue line now reflects what customers use, not a fixed amortization of what they paid upfront. My life genuinely got easier after that. ElevenLabs' launch now shows up as a strong month; implementation spikes are visible as spikes.
 
 Once we could smooth out seasonal variation and one-off spikes, we got a much more stable view of trends over time.
 
@@ -103,7 +103,7 @@ We can report it with confidence now. It's filtered for the customers we actuall
 
 What you measure depends a lot on your stage too. If you're pre-revenue, anchor on whatever value you're actually delivering and find the metric closest to it. If you're Duolingo, it's people coming back and learning something every day. If you're a classic SaaS, it's usage frequency per person. For an AI company, frequency might not be the right frame at all – it's more about how you define value for those customers.
 
-Once you have revenue, pair it with retention. That combination forces the right question: are the users I'm retaining actually generating revenue? If your growth is 12% but retention is 75%, you're not really compounding. You're just refilling a leaky bucket.
+Once you have revenue, pair it with [retention](/retention). That combination forces the right question: are the users I'm retaining actually generating revenue? If your growth is 12% but retention is 75%, you're not really compounding. You're just refilling a leaky bucket.
 
 The specific formula matters less than the principle: be opinionated about what accurately represents your business, be ready to explain it, and stick with it. The goal is a number that tells the story with as few footnotes attached as possible.
 
@@ -121,7 +121,7 @@ When the "user" isn't human, retention and activation mean something different. 
 
 My take is that the definitions of retention, activation, and revenue retention don't change. What's changing is how we measure them. Retention tied to "did the user come back this week" doesn't make sense if your users are agents, so the better question to guide your selection is whether the agent continued to get called, succeeded, and produced outputs someone else (human or agent) actually acted on?
 
-This is a shift toward measuring things like agent success rates, code merge rates, and whether an output was used in the next downstream step, and not just whether the model generated a valid response. Evals can become one of the most useful early signals. If you define what a valuable output looks like and track that over time, evals can help you measure product quality, spot retention trends, and even identify which user segments are closest to your ICP.
+This is a shift toward measuring things like agent success rates, code merge rates, and whether an output was used in the next downstream step, and not just whether the model generated a valid response. [Evals](/docs/llm-analytics/evaluations) can become one of the most useful early signals. If you define what a valuable output looks like and track that over time, evals can help you measure product quality, spot retention trends, and even identify which user segments are closest to your ICP.
 
 Some potential metrics I'm thinking on are therefore task success rate, workflow completion rate, output-acted-upon rate.
 

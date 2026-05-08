@@ -262,6 +262,8 @@ In either case, I'd recommend you get someone in who has 1-2 years' experience b
 
 ## Further reading
 
+If you want to go deeper on tracking growth for non-standard SaaS models – usage-based billing, ICP-filtered MRR, and how to smooth out seasonal noise – read [our guide to growth metrics for non-standard startups](/founders/growth-metrics-for-startups).
+
 If you found this useful, we recommend reading our [ops toolkit for early-stage startups](/blog/startup-ops-toolkit) – it'll guide you through setting up similar processes for things like hiring, HR, stock options, and more.
 
 Speaking of hiring, [Creating an employee-friendly startup share option scheme](/blog/equity-share-options-explained) will help you create a share option scheme potential hires will love. 
