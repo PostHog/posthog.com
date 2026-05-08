@@ -95,56 +95,8 @@ posthog.capture(
 
 ### Evaluating only specific flags
 
-<<<<<<< HEAD
-import PythonSetSendFeatureFlagsTrue from "./feature-flags-code-python-set-send-feature-flags-to-true.mdx"
-
-<PythonSetSendFeatureFlagsTrue />
-
-### Evaluating multiple specific flags
-
-Use `get_feature_flags()` when you know which flags you need and want to emit `$feature_flag_called` events for analytics. This evaluates a subset of flags in a single request while capturing per-flag usage.
-
-```python
-results = posthog.get_feature_flags(
-    ['new-dashboard', 'beta-search', 'premium-features'],
-    'distinct_id_of_your_user'
-)
-
-if results['new-dashboard'] and results['new-dashboard'].enabled:
-    # Show new dashboard
-    pass
-
-if results['beta-search'] and results['beta-search'].variant == 'enhanced':
-    # Use enhanced search variant
-    pass
-```
-
-Each result is a `FeatureFlagResult` object containing:
-- `enabled` - Whether the flag is on for this user
-- `variant` - The variant key (for multivariate flags)
-- `payload` - Any JSON payload attached to the flag
-
-This is useful when you need analytics on specific flags but don't want to make multiple requests by calling `get_feature_flag()` individually.
-
-### Fetching all flags for a user
-
-You can fetch all flag values for a single user by calling `get_all_flags()` or `get_all_flags_and_payloads()`.
-
-||||||| 689bbfb97
-import PythonSetSendFeatureFlagsTrue from "./feature-flags-code-python-set-send-feature-flags-to-true.mdx"
-
-<PythonSetSendFeatureFlagsTrue />
-
-### Fetching all flags for a user
-
-You can fetch all flag values for a single user by calling `get_all_flags()` or `get_all_flags_and_payloads()`.
-
-This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
-
-=======
 By default, `posthog.evaluate_flags()` evaluates every flag for the user. If you only need a few flags, pass `flag_keys` to request only those flags:
 
->>>>>>> master
 ```python
 flags = posthog.evaluate_flags(
     "distinct_id_of_your_user",
@@ -152,64 +104,13 @@ flags = posthog.evaluate_flags(
 )
 ```
 
-By default, these methods don't emit `$feature_flag_called` events. To enable per-flag analytics, set `send_feature_flag_events` to `True`:
-
-```python
-posthog.get_all_flags('distinct_id_of_your_user', send_feature_flag_events=True)
-posthog.get_all_flags_and_payloads('distinct_id_of_your_user', send_feature_flag_events=True)
-```
-
 ### Sending `$feature_flag_called` events
 
-<<<<<<< HEAD
-Capturing `$feature_flag_called` events enables PostHog to know when a flag was accessed by a user and thus provide [analytics and insights](/docs/product-analytics/insights) on the flag. By default, we send these events when:
-||||||| 689bbfb97
-Capturing `$feature_flag_called` events enable PostHog to know when a flag was accessed by a user and thus provide [analytics and insights](/docs/product-analytics/insights) on the flag. By default, we send a these event when:
-=======
 Capturing `$feature_flag_called` events enables PostHog to know when a flag was accessed by a user and provide [analytics and insights](/docs/product-analytics/insights) on the flag. With `posthog.evaluate_flags()`, the SDK sends this event when you call `flags.is_enabled()` or `flags.get_flag()` for a flag.
->>>>>>> master
 
-<<<<<<< HEAD
-1. You call `get_feature_flag()`, `feature_enabled()`, or `get_feature_flags()`, AND
-2. It's a new user, or the value of the flag has changed.
-||||||| 689bbfb97
-1. You call `posthog.get_feature_flag()` or `posthog.feature_enabled()`, AND
-2. It's a new user, or the value of the flag has changed.
-=======
 The SDK deduplicates these events per `(distinct_id, flag, value)` in a local cache. If you reinitialize the PostHog client, the cache resets and `$feature_flag_called` events may be sent again. PostHog handles duplicates, so duplicate `$feature_flag_called` events don't affect your analytics.
->>>>>>> master
 
-<<<<<<< HEAD
-> *Note:* Tracking whether it's a new user or if a flag value has changed happens in a local cache. This means that if you reinitialize the PostHog client, the cache resets as well – causing `$feature_flag_called` events to be sent again when calling `get_feature_flag`, `feature_enabled`, or `get_feature_flags`. PostHog is built to handle this, and so duplicate `$feature_flag_called` events won't affect your analytics.
-
-You can disable automatically capturing `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
-
-To disable it, set the `send_feature_flag_events` argument in your function call:
-
-```python
-is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user', send_feature_flag_events=False)
-
-# Or for bulk evaluation
-results = posthog.get_feature_flags(
-    ['flag-one', 'flag-two'],
-    'distinct_id_of_your_user',
-    send_feature_flag_events=False
-)
-```
-||||||| 689bbfb97
-> *Note:* Tracking whether it's a new user or if a flag value has changed happens in a local cache. This means that if you reinitialize the PostHog client, the cache resets as well – causing `$feature_flag_called` events to be sent again when calling `get_feature_flag` or `feature_enabled`. PostHog is built to handle this, and so duplicate `$feature_flag_called` events won't affect your analytics.
-
-You can disable automatically capturing `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
-
-To disable it, set the `send_feature_flag_events` argument in your function call, like so:
-
-```python
-is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user', send_feature_flag_events=False)
-# will not send `$feature_flag_called` events
-```
-=======
 `flags.get_flag_payload()` doesn't send `$feature_flag_called` events and doesn't count as an access for `only_accessed()`.
->>>>>>> master
 
 import PythonOverrideServerProperties from './override-server-properties/python.mdx'
 
