@@ -6567,6 +6567,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Manage opt-out lists',
+                    url: '/docs/workflows/manage-optouts',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                },
+                {
                     name: 'A/B testing in workflows',
                     url: '/tutorials/workflows-ab-testing',
                     icon: 'IconDatabase',
