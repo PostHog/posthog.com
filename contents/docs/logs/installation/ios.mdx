@@ -1,5 +1,5 @@
 ---
-title: iOS logs installation
+title: iOS Logs installation
 sidebarTitle: iOS
 platformLogo: ios
 showStepsToc: true
@@ -9,7 +9,7 @@ import { Steps, Step } from 'components/Docs/Steps'
 import IOSInstall from '../../integrate/_snippets/install-ios.mdx'
 import LogsNextSteps from './_snippets/logs-next-steps.mdx'
 
-The PostHog iOS SDK has built-in support for capturing structured logs from iOS, macOS, tvOS, watchOS, and visionOS apps. The SDK handles OTLP encoding, batching, on-disk persistence across app restarts, and lifecycle integration. You just call `PostHogSDK.shared.captureLog(...)` or `PostHogSDK.shared.logger?.{trace,debug,info,warn,error,fatal}(...)`.
+The PostHog iOS SDK has built-in support for capturing structured Logs from iOS, macOS, tvOS, watchOS, and visionOS apps. The SDK handles OTLP encoding, batching, on-disk persistence across app restarts, and lifecycle integration. You just call `PostHogSDK.shared.captureLog(...)` or `PostHogSDK.shared.logger?.{trace,debug,info,warn,error,fatal}(...)`.
 
 > **Manual capture only.** Logs are emitted by your code. The SDK does not autocapture system log streams (`os_log`, `Logger`, `print`).
 
@@ -40,7 +40,7 @@ config.logs.serviceVersion = "1.2.3"      // OTLP service.version
 PostHogSDK.shared.setup(config)
 ```
 
-These resource attributes are snapshotted at `setup(_:)` and apply to every batch. Mutating `config.logs` after `setup` has no effect.
+These resource attributes are captured at `setup(_:)` and apply to every batch. Mutating `config.logs` after `setup` has no effect.
 
 </Step>
 
@@ -66,9 +66,9 @@ PostHogSDK.shared.captureLog(
 
 Available severity levels: `.trace`, `.debug`, `.info`, `.warn`, `.error`, `.fatal`.
 
-Records are buffered, batched, persisted to disk, and flushed automatically – every 30 seconds, when the buffer hits the threshold, on app backgrounding, or on `PostHogSDK.shared.flush()`. `flush()` drains events, session replay, and logs together.
+Records are buffered, batched, persisted to disk, and flushed automatically – every 30 seconds, when the buffer hits the threshold, when the app moves to the background, or on `PostHogSDK.shared.flush()`. `flush()` drains events, Session Replay, and Logs together.
 
-Each record is automatically tagged with the user's distinct ID, session ID, current screen, app foreground/background state, and active feature flags at the moment of capture.
+Each record is automatically tagged with the current distinct ID, session ID, current screen, app foreground/background state, and active Feature Flags at the moment of capture.
 
 </Step>
 
@@ -85,7 +85,7 @@ Each record is automatically tagged with the user's distinct ID, session ID, cur
 You should see your record arrive within a few seconds.
 
 <CallToAction type="primary" to="https://app.posthog.com/logs">
-View your logs in PostHog
+View your Logs in PostHog
 </CallToAction>
 
 </Step>
@@ -122,7 +122,7 @@ Full configuration reference:
 | `rateCapMaxLogs` | `500` | Max records per `rateCapWindowSeconds` window. Set to `0` to disable. |
 | `rateCapWindowSeconds` | `10` | Rate-cap tumbling window length |
 
-All of the above are snapshotted at `setup(_:)`; mutating them later has no effect. Defaults are tuned for cellular-aware mobile apps. Raise `rateCapMaxLogs` and `maxBufferSize` for high-volume scenarios.
+All of the above are captured at `setup(_:)`; mutating them later has no effect. Defaults are tuned for cellular-aware mobile apps. Raise `rateCapMaxLogs` and `maxBufferSize` for high-volume scenarios.
 
 </Step>
 
@@ -145,7 +145,7 @@ config.logs.setBeforeSend({ record in
 })
 ```
 
-Pass an array (or variadic list) of blocks to compose a chain – evaluated left-to-right. Returning `nil` from any block short-circuits and drops the record. Setting `record.body` to an empty string also drops the record.
+Pass an array (or a comma-separated list) of blocks to compose a chain – evaluated left-to-right. Returning `nil` from any block short-circuits and drops the record. Setting `record.body` to an empty string also drops the record.
 
 From Objective-C, wrap each closure in a `BoxedBeforeSendLogBlock`:
 
