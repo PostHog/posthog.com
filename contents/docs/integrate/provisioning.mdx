@@ -3,8 +3,9 @@ title: Provisioning API
 sidebarTitle: Provisioning API
 ---
 
-The provisioning API lets partners create PostHog accounts and projects for their users programmatically.
-Instead of sending users to a signup page, you call three endpoints and get back a project API key, a personal API key, and a host URL - everything needed to start sending events.
+If you're onboarding users from your own product into PostHog, this API lets you skip the signup form. Call three endpoints and you get back a project token, a personal API key, and a host URL – everything you need to start sending events into the user's project. The user still gets a welcome email with a link to set their password and access their dashboard.
+
+It's intended for partners and platform integrations. If you're integrating your own app with your own PostHog account, you probably want [OAuth](/docs/api/oauth) or a [personal API key](/docs/api#private-endpoint-authentication) instead.
 
 Jump to the [full Node.js example](#full-example) to see the complete flow in code.
 
@@ -16,7 +17,7 @@ Your application is identified by a metadata document hosted on your domain.
 ```
 1. POST /account_requests  →  authorization code
 2. POST /oauth/token        →  access + refresh tokens
-3. POST /resources          →  project API key + host
+3. POST /resources          →  project token + host
 ```
 
 ```mermaid
@@ -31,16 +32,14 @@ sequenceDiagram
     PH-->>P: access_token + refresh_token
 
     P->>PH: POST /resources (Bearer token)
-    PH-->>P: project API key + host
+    PH-->>P: project token + host
 ```
 
 ## Set up as a partner
 
 ### Host a CIMD metadata document
 
-PostHog uses [Client ID Metadata Documents](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/) (CIMD) for partner registration.
-Instead of a manual signup, you host a JSON document at an HTTPS URL on your domain.
-That URL becomes your `client_id`.
+PostHog uses [Client ID Metadata Documents](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/) (CIMD) for partner registration. There's no signup form to fill out – you host a JSON document at an HTTPS URL on your domain, and that URL becomes your `client_id`.
 
 Create a JSON file at a stable HTTPS URL, for example `https://yourapp.com/.well-known/posthog-client.json`:
 
@@ -169,7 +168,7 @@ sequenceDiagram
     PH-->>P: access_token + refresh_token
 
     P->>PH: POST /resources (Bearer token)
-    PH-->>P: project API key + host
+    PH-->>P: project token + host
 ```
 
 ### Step 2: Exchange the code for tokens
@@ -273,13 +272,13 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 
 | Field | Description |
 |---|---|
-| `api_key` | The project API token - use this to initialize PostHog SDKs |
+| `api_key` | The project token (starts with `phc_`) – use this to initialize PostHog SDKs |
 | `host` | The API host (`https://us.posthog.com` or `https://eu.posthog.com`) |
-| `personal_api_key` | A personal API key scoped to this project - use this for the PostHog API |
+| `personal_api_key` | A personal API key scoped to this project – use this for the PostHog API |
 
 ### Rotate project credentials
 
-Rotate the project API token and create a new personal API key for an existing provisioned project:
+Rotate the project token and create a new personal API key for an existing provisioned project:
 
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/provisioning/resources/12345/rotate_credentials \
@@ -349,11 +348,11 @@ The `scopes` field in the account request controls what permissions the access t
 
 When you provision a new account, the user receives:
 
-- **Welcome email** with a link to set their password
-- **Full dashboard access** at [us.posthog.com](https://us.posthog.com) (or [eu.posthog.com](https://eu.posthog.com) for EU)
-- **Free tier** with generous limits across all PostHog products - no credit card required
+- A welcome email with a link to set their password.
+- Full dashboard access at [us.posthog.com](https://us.posthog.com) (or [eu.posthog.com](https://eu.posthog.com) for EU).
+- The PostHog [free tier](/pricing) across all products – no credit card required.
 
-Your integration gets back the project API key and host needed to start sending events immediately.
+Your integration gets back the project token and host, so you can start sending events the moment the API call returns.
 
 ## Error handling
 
@@ -402,7 +401,7 @@ All provisioning endpoints are rate limited.
 - 100 new client registrations per hour globally
 - 5 new client registrations per domain per hour
 
-**Account requests** (per partner, per hour): defaults to 10/hour for new CIMD partners. Contact PostHog to increase this for higher-volume integrations.
+**Account requests** (per partner, per hour): defaults to 10/hour for new CIMD partners. Email [team-growth@posthog.com](mailto:team-growth@posthog.com) if you need a higher limit for production use.
 
 ## Full example
 
