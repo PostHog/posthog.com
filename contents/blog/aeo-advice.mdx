@@ -1,6 +1,6 @@
 ---
 title: "How to grow your AEO function (without losing your mind)"
-date: 2026-05-07
+date: 2026-05-08
 author:
     - natalia-amorim
 featuredImage: >-
@@ -21,11 +21,11 @@ Seven years later, fate (and LinkedIn) led me back to a familiar spot.
 
 "Can you lead our AEO efforts?"
 
-"Of course I can," I replied, with the confidence of someone opening 17 tabs.
+"Of course I can," I replied, with a similar sense of mild panic.
 
-The difference was that this time, everyone else in the industry was still figuring it out too. The concept of AEO (or AIO, AISEO, GEO... *\[insert preferred acronym here\]*) had only existed for a few months. We were all still furiously Googling under the table.
+The difference was that this time, everyone else in the industry was still figuring it out too. The concept of AEO (or AIO, AISEO, GEO... *\[insert your preferred acronym here\]*) had only existed for a few months. We were all still furiously Googling under the table.
 
-A year later, I'm reporting back from the AEO trenches with some good news: it works. We're watching it happen in our numbers, in real time.
+A year later, I'm reporting back from the AI optimization trenches with some good news: it works. We're watching it happen in our numbers, in real time.
 
 **PostHog's LLM-referred traffic has grown 41x in 23 months**, 7.4x year-over-year, and every single quarter since Q2 2024 has set a new record, with no signs of slowing down.
 
@@ -100,7 +100,7 @@ Here's the rule I've settled on: clean your house first. Making sure your owned 
 
 That doesn't mean ignore the extra stuff forever; it means **do them when you have the capacity to do them well**, not when you're panicking that your competitor has a Reddit thread and you don't.
 
-Full-ass one thing instead of half-assing twenty.
+[Full-ass one thing instead of half-assing twenty.](https://newsletter.posthog.com/p/the-stuff-nobody-tells-you-about)
 
 ## 3. Don't overthink the tools
 
@@ -154,13 +154,13 @@ People respect it, and more importantly, **it keeps you from drinking your own K
 
 ## 5. You can just… ask
 
-I'm not great at the whole not knowing thing, so I worked around it. We added a conditional question on our onboarding flow: whenever someone says they heard about us through AI, we ask them which prompt they used.
+I'm not great at the whole not knowing thing, so I worked around it. We added a conditional question to our onboarding flow: whenever someone says they heard about us through AI, we ask them which prompt they used.
 
 To my surprise, people answer. In detail. Sometimes long, long paragraphs of detail.
 
 **Now we have first-party data on the prompts actually leading people to us.** Real sentences typed by real humans with real credit cards.
 
-As of today, **6,750** of them to be exact (and we've only been doing this for 3 months).
+As of today, **6,814** of them to be exact (and we've only been doing this for 3 months).
 
 ![LLM Conditional question](https://res.cloudinary.com/dmukukwp6/video/upload/LLM_conditional_question_video_04b5f21be7.mp4)
 
@@ -224,15 +224,17 @@ Which meant six months of historical data aged like milk.
   <figcaption>Me rebuilding our tracking setup from scratch</figcaption>
 </figure>
 
-When you're working in a discipline this new, any data feels sacred, so admitting to my team and to myself that ours needed to be scrapped was a tough pill to swallow. But we started over, and the new dataset is already more useful than the old one ever was.
+When you're working in a discipline this new, any data feels sacred, so admitting to my team and to myself that ours needed to be scrapped was a tough pill to swallow. It would've been easier if there was a playbook to defer to; there isn't. 
 
-It would've been easier if there was a playbook to defer to; there isn't. But **adaptability isn't a nice-to-have**. In a settled channel, being attached to your v1 is inefficient; in a new one like AEO, it can be fatal.
+But did it anyway – we started over, and the new dataset is already more useful than the old one ever was.
 
-Zoom out, though, and the same principle applies to everything else in AEO. The models are changing constantly; a feature that didn't exist last week can completely rewire the landscape you thought you'd figured out.
+Zoom out, though, and the same principle applies to everything else in AEO. The models are changing constantly; a feature that didn't exist last week can completely rewire the landscape you thought you'd figured out. A win today may not be a win tomorrow.
 
-Anyone who lived through the Panda, Penguin, or Helpful Content updates in SEO (Google algorithm shifts that wiped out entire categories of content overnight) already knows this tune all too well: a win today is not a win tomorrow.
+What I'm trying to say here is that **adaptability isn't a nice-to-have**. In a settled channel, being attached to your v1 is inefficient; in a new one like AEO, it can be fatal.
 
-**The strategies that got you here might get you nothing in six months**; the key is not to fear it, it's to expect it.
+Anyone who lived through the Panda, Penguin, or Helpful Content updates in SEO (Google algorithm shifts that wiped out entire categories of content overnight) already knows this tune all too well; the strategies that got you here might get you nothing in six months. 
+
+The key is to not fear it, but to expect it.
 
 ## Frequently asked AEO questions
 
@@ -250,7 +252,7 @@ Kidding, that was mean. Yes, you should. FAQs catch the long tail of questions y
 <details>
   <summary>How do you decide which prompts to track?</summary>
 
-My honest answer is that when I first started I took 100+ AI-generated suggestions from my AEO tool, tracked all of them, and hoped for the best (see section #5 for how that ended.)
+My honest answer is that when I first started I took 100+ AI-generated suggestions from my AEO tool, tracked all of them, and hoped for the best (*see section #7 for how that ended.)*
 
 Now I have a framework, or at least a more confident shape of one. It comes down to three circles:
 
@@ -266,7 +268,7 @@ Every prompt worth tracking lives in one of the overlaps:
   - *PostHog example: "Open-source web analytics tool that won't sell my data."*
 - **You ∩ Competitors: table stakes prompts.** What you and competitors both do. Everyone shows up here. Worth tracking as a baseline, but rarely worth fighting for as they're usually too broad, and nobody wins by being the fifth mention in a list of ten.
   - *Example: "Best web analytics tools."*
-- **ICP ∩ Competitors: vulnerability prompts.** What your customer wants, competitors offer, you don't (or don't do well yet). You're losing these. Track them to learn where your ICP is being pulled instead.
+- **ICP ∩ Competitors: vulnerability prompts.** What your customer wants, competitors offer, and you don't (or don't do well yet). You're losing these. Track them to learn where your ICP is being pulled instead.
   - *PostHog example: "Best web analytics tool with native Google Ads integration."*
 - **All three: battleground prompts.** Your ICP wants it, you do it, your competitors do it too, which means the LLM has to pick someone from the shortlist when it answers. This is where the actual war happens. Optimize here first, hardest, most obsessively.
   - *PostHog example: "Best alternatives to google analytics for startups" or "best web analytics tool for developers"*
@@ -302,7 +304,7 @@ My current stance, which is roughly the sensible-person consensus:
 
 **It would be silly not to use AI tools to speed up the work.** Research, briefs, outlines, drafting summaries, grammar edits, fact-checking against sources are all fair game to me and something we'll continue to invest and expand on.
 
-**It would be sillier to think you can offload the whole thing.** Strategy, voice, taste, judgment about what to write at all, those should still be yours.
+**It would be sillier to think you can offload the whole thing.** Strategy, voice, taste, judgment about what to write and how to write it, copyediting processes, those should still be yours.
 
 That's our take. Yours might be different.
 
@@ -316,13 +318,11 @@ I didn't write this to claim I've figured out AEO. Far from it.
 
 I wrote it because the version of me from a year ago would have loved to read it, and because the version of me a year from now will probably disagree with at least two points on this list.
 
-**Two things can be true at once: I might just be throwing pasta at the wall and seeing what sticks.**
-**…I might also be a really good pasta thrower.**
+I might just be throwing pasta at the wall and seeing what sticks.
+…I might also be a really good pasta thrower.
 
-Am I a savant? Probably not. Am in the right place, at the right company, at the right moment in the technology cycle? Maybe. Some of both? Most likely.
+Only time will tell how much of this advice holds up. Ask me again in a couple of years when the wave has either broken or kept going, and I'll have a better answer.
 
-Only time will tell. Ask me again in two years when the wave has either broken or kept going, and I'll have a better answer.
-
-If you're a peer figuring this out alongside me: let's trade notes, [my DMs are always open!](https://www.linkedin.com/in/nataliahelenaamorim/)
+In the meantime, if you're a peer figuring this out alongside me: let's trade notes, [my DMs are always open!](https://www.linkedin.com/in/nataliahelenaamorim/)
 
 And if you want to watch me fake it till I make it in real time, [PostHog is hiring](https://posthog.com/careers).
