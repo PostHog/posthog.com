@@ -37,6 +37,10 @@ This test can detect and diagnose configuration issues, like invalid credentials
 
 Support for new destinations will be added based on demand. Message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue) or create an [issue in GitHub](https://github.com/PostHog/posthog/issues/new?template=feature_request.yml) to voice your interest in new destinations.
 
+## On-demand file downloads
+
+If you need to export data programmatically without setting up a recurring schedule, use the [file download API](/docs/cdp/batch-exports/file-download-api). This API lets you trigger batch exports on demand and download the resulting files directly – useful for integrating batch exports into your own data pipelines or downloading data for specific date ranges when you need it.
+
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 import PersonsModelNote from "../_snippets/persons-model-note.mdx";
 

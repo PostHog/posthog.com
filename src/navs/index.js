@@ -255,6 +255,10 @@ export const dataPipelines = {
             featured: true,
             children: [
                 {
+                    name: 'File download API',
+                    url: '/docs/cdp/batch-exports/file-download-api',
+                },
+                {
                     name: 'Amazon S3',
                     url: '/docs/cdp/batch-exports/s3',
                 },

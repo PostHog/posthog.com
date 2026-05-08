@@ -1,0 +1,300 @@
+---
+title: File download API
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+The file download API lets you trigger batch exports on demand and download the resulting files programmatically. Unlike scheduled batch exports that run automatically, this API exports data for specific time ranges whenever you need it.
+
+Use this API to:
+- Export data programmatically without a recurring schedule
+- Download data for specific date ranges on demand
+- Integrate batch exports into your own data pipelines or workflows
+
+## Supported models
+
+The file download API supports the same data models as regular batch exports:
+
+- **events** - Export event data with optional filtering
+- **persons** - Export person data and their properties
+- **sessions** - Export session data
+
+## File formats
+
+Exported files can be in one of the following formats:
+
+| Format | Description |
+|--------|-------------|
+| Parquet | Apache Parquet format, recommended for large datasets |
+| JSONLines | JSON Lines format, one JSON object per line |
+
+Optional compression methods include: `zstd`, `gzip`, `brotli`, `lz4`, and `snappy`.
+
+## API workflow
+
+The file download API follows a three-step workflow:
+
+1. **Create** - Start an export run by specifying the model, file format, and date range
+2. **Poll status** - Check the status of the run until it completes
+3. **Download** - Download the exported file(s)
+
+## API endpoints
+
+All endpoints use the base path:
+
+```
+/api/environments/{project_id}/file_download_batch_exports
+```
+
+### Create an export run
+
+Start a new batch export run.
+
+**Request:**
+
+```bash
+POST /api/environments/{project_id}/file_download_batch_exports
+```
+
+**Request body:**
+
+```json
+{
+    "model": "events",
+    "file": {
+        "format": "Parquet",
+        "compression": "zstd",
+        "max_size_mb": 100
+    },
+    "data_interval_start": "2024-01-01T00:00:00Z",
+    "data_interval_end": "2024-01-07T00:00:00Z",
+    "include": ["$pageview", "purchase_completed"],
+    "exclude": ["$autocapture"]
+}
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `model` | string | Yes | Data model to export: `events`, `persons`, or `sessions` |
+| `file.format` | string | Yes | File format: `Parquet` or `JSONLines` |
+| `file.compression` | string | No | Compression method: `zstd`, `gzip`, `brotli`, `lz4`, or `snappy` |
+| `file.max_size_mb` | integer | No | Split output into multiple files of this maximum size in MB |
+| `data_interval_start` | ISO datetime | Yes | Start of the date range (inclusive) |
+| `data_interval_end` | ISO datetime | Yes | End of the date range (exclusive) |
+| `include` | array | No | Event names to include (events model only) |
+| `exclude` | array | No | Event names to exclude (events model only) |
+
+**Response:**
+
+```json
+{
+    "id": "01912345-6789-abcd-ef01-234567890abc"
+}
+```
+
+Returns HTTP 202 (Accepted) with the run ID.
+
+### Check export status
+
+Check the status of an export run.
+
+**Request:**
+
+```bash
+GET /api/environments/{project_id}/file_download_batch_exports/{run_id}
+```
+
+**Response (in progress):**
+
+```json
+{
+    "status": "Running"
+}
+```
+
+**Response (completed):**
+
+```json
+{
+    "status": "Completed",
+    "files": [
+        "01912345-6789-abcd-ef01-234567890abc",
+        "01912345-6789-abcd-ef01-234567890def"
+    ]
+}
+```
+
+**Response (failed):**
+
+```json
+{
+    "status": "Failed",
+    "error": "Error message describing what went wrong"
+}
+```
+
+**Status values:**
+
+| Status | Description |
+|--------|-------------|
+| `Starting` | Export run is initializing |
+| `Running` | Export is in progress |
+| `Completed` | Export finished successfully |
+| `Failed` | Export failed with an error |
+| `FailedRetryable` | Export failed but can be retried |
+| `Terminated` | Export was terminated |
+| `TimedOut` | Export exceeded the time limit |
+
+### Download files
+
+Download the exported file(s). This endpoint redirects to a pre-signed S3 URL.
+
+**Request:**
+
+```bash
+GET /api/environments/{project_id}/file_download_batch_exports/{run_id}/download
+GET /api/environments/{project_id}/file_download_batch_exports/{run_id}/download/{part}
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `part` | string or integer | No | File index (0-based) or file ID. If omitted, downloads the first file. |
+
+**Response:**
+
+Returns HTTP 302 redirect to a pre-signed download URL.
+
+**Errors:**
+
+| Error | Description |
+|-------|-------------|
+| `Batch export run is still in progress` | Wait for the run to complete before downloading |
+| `Batch export run has failed` | The export failed and no files are available |
+| `No files with index {n}` | The specified file index doesn't exist |
+
+## Complete example
+
+Here's a complete example using cURL:
+
+```bash
+# 1. Create an export run
+RUN_ID=$(curl -s -X POST \
+    "https://us.posthog.com/api/environments/{project_id}/file_download_batch_exports" \
+    -H "Authorization: Bearer {personal_api_key}" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "model": "events",
+        "file": {
+            "format": "Parquet",
+            "compression": "zstd"
+        },
+        "data_interval_start": "2024-01-01T00:00:00Z",
+        "data_interval_end": "2024-01-07T00:00:00Z"
+    }' | jq -r '.id')
+
+echo "Started export run: $RUN_ID"
+
+# 2. Poll for status until completed
+while true; do
+    STATUS=$(curl -s \
+        "https://us.posthog.com/api/environments/{project_id}/file_download_batch_exports/$RUN_ID" \
+        -H "Authorization: Bearer {personal_api_key}" | jq -r '.status')
+    
+    echo "Status: $STATUS"
+    
+    if [ "$STATUS" = "Completed" ]; then
+        break
+    elif [ "$STATUS" = "Failed" ] || [ "$STATUS" = "Terminated" ] || [ "$STATUS" = "TimedOut" ]; then
+        echo "Export failed"
+        exit 1
+    fi
+    
+    sleep 10
+done
+
+# 3. Download the file
+curl -L \
+    "https://us.posthog.com/api/environments/{project_id}/file_download_batch_exports/$RUN_ID/download" \
+    -H "Authorization: Bearer {personal_api_key}" \
+    -o export.parquet.zst
+```
+
+## Python example
+
+```python
+import requests
+import time
+
+PROJECT_ID = "your_project_id"
+API_KEY = "your_personal_api_key"
+BASE_URL = f"https://us.posthog.com/api/environments/{PROJECT_ID}/file_download_batch_exports"
+
+headers = {
+    "Authorization": f"Bearer {API_KEY}",
+    "Content-Type": "application/json"
+}
+
+# 1. Create export run
+response = requests.post(BASE_URL, headers=headers, json={
+    "model": "events",
+    "file": {
+        "format": "Parquet",
+        "compression": "zstd"
+    },
+    "data_interval_start": "2024-01-01T00:00:00Z",
+    "data_interval_end": "2024-01-07T00:00:00Z"
+})
+
+run_id = response.json()["id"]
+print(f"Started export run: {run_id}")
+
+# 2. Poll for completion
+while True:
+    response = requests.get(f"{BASE_URL}/{run_id}", headers=headers)
+    status = response.json()["status"]
+    print(f"Status: {status}")
+    
+    if status == "Completed":
+        break
+    elif status in ["Failed", "Terminated", "TimedOut"]:
+        print(f"Export failed: {response.json().get('error')}")
+        exit(1)
+    
+    time.sleep(10)
+
+# 3. Download file
+response = requests.get(
+    f"{BASE_URL}/{run_id}/download",
+    headers=headers,
+    allow_redirects=True
+)
+
+with open("export.parquet.zst", "wb") as f:
+    f.write(response.content)
+
+print("Download complete!")
+```
+
+## Constraints
+
+- **Maximum date range** - The date range (`data_interval_end` minus `data_interval_start`) cannot exceed 1 week
+- **Date ordering** - `data_interval_end` must be after `data_interval_start`
+- **Event filtering** - The `include` and `exclude` parameters only apply to the `events` model
+
+## Differences from scheduled batch exports
+
+| Feature | Scheduled batch exports | File download API |
+|---------|------------------------|-------------------|
+| Trigger | Automatic on schedule | On demand via API |
+| Destination | External services (S3, BigQuery, etc.) | Direct file download |
+| Configuration | Create export, then runs execute automatically | Each request creates a one-time run |
+| Backfills | Supported | Built-in (specify any date range) |
+| UI | Full configuration and monitoring in PostHog | API only |
