@@ -6358,8 +6358,8 @@ export const docsMenu = {
         {
             name: 'PostHog Code',
             icon: 'IconCoffee',
-            color: 'brown',
-            url: '/docs/posthog-code/quick-tour',
+            color: 'yellow',
+            url: '/docs/posthog-code',
             description: 'AI coding environment with deep PostHog integration.',
             children: [
                 {
@@ -6367,7 +6367,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Quick Tour',
-                    url: '/docs/posthog-code/quick-tour',
+                    url: '/docs/posthog-code',
                     icon: 'IconRewindPlay',
                     color: 'orange',
                     featured: true,
