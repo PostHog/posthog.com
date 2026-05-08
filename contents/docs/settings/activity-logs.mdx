@@ -196,6 +196,24 @@ This adds organization-level events to your activity feed, such as member invita
 
 > **Note**: This setting also affects notifications. If you subscribe to activity log notifications, you will only receive notifications for organization-level events if this setting is enabled.
 
+### Organization-wide activity logs
+
+Organization admins and owners can view activity logs across all projects in their organization from a single view:
+
+1. Go to **Settings** → **Project** → **Activity logs**
+2. Click the **Organization** toggle at the top of the page
+
+In organization mode:
+
+- Activity from all projects in your organization is shown, along with organization-level events
+- A **Project** column indicates which project each activity belongs to
+- A **Project** filter lets you narrow results to specific projects
+- Export is not available in this view – use the project view for exports
+
+You can deep-link directly to the organization view by appending `?view=organization` to the activity logs URL.
+
+> **Note**: Organization-wide activity logs are only available to organization admins and owners. Other members see the project view only.
+
 ### Resource history
 
 You can view the change history for any individual resource. When viewing a feature flag, dashboard, experiment, or other resource, click the **History** tab to see all changes made to that specific item over time.
@@ -271,6 +289,9 @@ Filter by the team member who performed the action. Select one or multiple users
 **Scope**
 Filter by resource type. Scopes include Feature flags, Experiments, Dashboards, Insights, Surveys, Cohorts, and more. Select multiple scopes to see changes across different resource types.
 
+**Project** (organization mode only)
+Filter by specific projects within your organization. This filter only appears when viewing organization-wide activity logs. Select one or multiple projects to narrow down results.
+
 **Activity**
 Filter by the type of action performed. Activities include created, updated, deleted, enabled, disabled, merged, split, and others depending on the resource type.
 
@@ -316,6 +337,8 @@ Activity logs can be exported for offline analysis, compliance reporting, or int
 5. The export will be generated and available for download
 
 Exports include all log entry fields and respect any filters you have applied.
+
+> **Note**: Export is currently only available in the project view. Organization-wide exports are not yet supported.
 
 ## Common use cases
 
@@ -377,14 +400,15 @@ To use the activity log API endpoints, authenticate using one of PostHog's [auth
 
 ### Endpoints
 
-PostHog provides two activity log endpoints:
+PostHog provides three activity log endpoints:
 
-| Endpoint                                             | Description                                               |
-| ---------------------------------------------------- | --------------------------------------------------------- |
-| `GET /api/projects/@current/activity_log/`           | Basic activity log retrieval with simple filtering        |
-| `GET /api/projects/@current/advanced_activity_logs/` | Full-featured endpoint with advanced filtering and export |
+| Endpoint                                              | Description                                                                      |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `GET /api/projects/@current/activity_log/`            | Basic activity log retrieval with simple filtering                               |
+| `GET /api/projects/@current/advanced_activity_logs/`  | Full-featured endpoint with advanced filtering and export                        |
+| `GET /api/organizations/<id>/advanced_activity_logs/` | Organization-wide activity logs (admin/owner only), supports `team_ids[]` filter |
 
-Both endpoints return activity logs for the current project. If **Show organization activity** is enabled in project settings, organization-level events are also included.
+The project endpoints return activity logs for the current project. If **Show organization activity** is enabled in project settings, organization-level events are also included. The organization endpoint returns activity logs across all projects in the organization and is restricted to organization admins and owners.
 
 ### API reference
 
