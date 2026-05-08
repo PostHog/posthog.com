@@ -21,6 +21,8 @@ The options for customization on the activity tab include:
 
 3. Switching between relative and absolute time. Click the column header menu on the **Time** column and select **Show absolute time** to see full timestamps instead of relative times like "2 minutes ago". For custom formatting, add an SQL expression column like `formatDateTime(toTimeZone($timestamp, 'America/Chicago' ), '%b %d, %H:%i:%s')`.
 
+3. Toggling between relative and absolute time for date-time columns. Click the column header menu (three dots) on a date-time column like **Time** and select **Show absolute time** to display the full date and time instead of relative time like "2 minutes ago." This toggle is also available on the **Events** tab of person profiles.
+
 ## Activity views
 
 The activity tab also has multiple views:
@@ -31,7 +33,7 @@ The activity tab also has multiple views:
 
 3. **Event count:** Shows each event along with the number of times it's been captured.
 
-4. **Live:** Shows a live feed of events as they are captured as well as the number of currently active users. This can be filtered for a specific event or paused. 
+4. **Live:** Shows a live feed of events as they are captured as well as the number of currently active users. This can be filtered for a specific event or paused.
 
 5. **Jump to timestamp:** Press `J` then `T` to quickly navigate to events around a specific point in time.
 
@@ -72,12 +74,12 @@ Filter events using CLI flags:
 
 ### Keyboard shortcuts
 
-| Key | Action |
-|-----|--------|
-| `p` | Pause/resume event stream |
-| `f` | Set event type filter |
-| `d` | Set distinct ID filter |
-| `c` | Set property columns |
-| `Enter` | Open event detail view |
-| `?` | Toggle help |
-| `q` | Quit |
+| Key     | Action                    |
+| ------- | ------------------------- |
+| `p`     | Pause/resume event stream |
+| `f`     | Set event type filter     |
+| `d`     | Set distinct ID filter    |
+| `c`     | Set property columns      |
+| `Enter` | Open event detail view    |
+| `?`     | Toggle help               |
+| `q`     | Quit                      |
