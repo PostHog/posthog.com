@@ -160,8 +160,9 @@ You'll capture 20% of any session on the checkout page that has an exception eve
 In your [replay ingestion settings](https://us.posthog.com/settings/project-replay#replay-ingestion), you can set a minimum duration for sessions to be recorded. 
 
 Supported on the following SDKs:
-- **web** posthog-js 1.291.0+
+- **Web:** posthog-js 1.291.0+
 - **iOS:** 3.53.0+
+- **Android:** 3.44.0+
 
 <ProductScreenshot
     imageLight={ImgMinDurationLight} 
@@ -224,9 +225,9 @@ This mode is **more accurate** for filtering out short sessions, especially on s
 - **Use legacy mode** if you want to capture as much session data as possible and are okay with potentially missing early parts of sessions after page refreshes
 - **Use strict mode** if you want to ensure you only record sessions where users actually spend the minimum duration on a single page, accepting that you may miss more bouncing users
 
-### iOS behavior
+### iOS and Android behavior
 
-On iOS, minimum duration is enforced using **buffer length**, similar to web strict mode:
+On iOS and Android, minimum duration is enforced using **buffer length**, similar to web strict mode:
 
 - Snapshots are buffered, and PostHog checks the duration of buffered replay data (from the oldest to newest buffered snapshot)
 - Recording starts sending only after that buffered duration reaches the configured minimum duration
