@@ -7,19 +7,28 @@ availability:
   selfServe: full
   enterprise: full
 ---
-import {ProductScreenshot} from 'components/ProductScreenshot'
 
-export const quickReactionsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/quick_reactions_light_971a45a8cc.png"
-export const quickReactionsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/quick_reactions_dark_412eed0c48.png"
+import { ProductScreenshot } from "components/ProductScreenshot";
 
-export const showingInTimelineLight = "https://res.cloudinary.com/dmukukwp6/image/upload/showing_in_timeline_light_006933aee6.png"
-export const showingInTimelineDark = "https://res.cloudinary.com/dmukukwp6/image/upload/showing_in_timeline_dark_171c064db4.png"
+export const quickReactionsLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/quick_reactions_light_971a45a8cc.png";
+export const quickReactionsDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/quick_reactions_dark_412eed0c48.png";
 
-export const whereToClickLight = "https://res.cloudinary.com/dmukukwp6/image/upload/where_to_click_light_ee28583dce.png"
-export const whereToClickDark = "https://res.cloudinary.com/dmukukwp6/image/upload/where_to_click_dark_1ba3ca4d23.png"
+export const showingInTimelineLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/showing_in_timeline_light_006933aee6.png";
+export const showingInTimelineDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/showing_in_timeline_dark_171c064db4.png";
 
-export const addCommentLight = "https://res.cloudinary.com/dmukukwp6/image/upload/adding_a_comment_light_f481a19ca9.png"
-export const addCommentDark = "https://res.cloudinary.com/dmukukwp6/image/upload/adding_a_comment_dark_55457f2e3c.png"
+export const whereToClickLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/where_to_click_light_ee28583dce.png";
+export const whereToClickDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/where_to_click_dark_1ba3ca4d23.png";
+
+export const addCommentLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/adding_a_comment_light_f481a19ca9.png";
+export const addCommentDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/adding_a_comment_dark_55457f2e3c.png";
 
 Comments enable you to add written notes to a particular time on a session recording so you can highlight what you see. You can create regular comments or task comments that track work items.
 
@@ -28,39 +37,40 @@ Comments enable you to add written notes to a particular time on a session recor
 When viewing a recording, you can press 'c' or click the comment button at the bottom of the recording.
 
 <ProductScreenshot
-    imageLight={whereToClickLight}
-    imageDark={whereToClickDark}
-    alt="Where to click to start commenting"
-    classes="rounded"
+  imageLight={whereToClickLight}
+  imageDark={whereToClickDark}
+  alt="Where to click to start commenting"
+  classes="rounded"
 />
 
 You can add text, images, and emojis to your comments.
 
 <ProductScreenshot
-    imageLight={addCommentLight}
-    imageDark={addCommentDark}
-    alt="The text area that lets you add a comment"
-    classes="rounded"
+  imageLight={addCommentLight}
+  imageDark={addCommentDark}
+  alt="The text area that lets you add a comment"
+  classes="rounded"
 />
 
 If you want to quickly highlight something great or terrible in a recording, you can add emoji reactions.
 
 <ProductScreenshot
-    imageLight={quickReactionsLight}
-    imageDark={quickReactionsDark}
-    alt="How to add a quick emoji reaction"
-    classes="rounded"
+  imageLight={quickReactionsLight}
+  imageDark={quickReactionsDark}
+  alt="How to add a quick emoji reaction"
+  classes="rounded"
 />
 
 Once created, comments and reactions are available at the bottom of your recording in the timeline or in the player's activity inspector.
 
 <ProductScreenshot
-    imageLight={showingInTimelineLight}
-    imageDark={showingInTimelineDark}
-    alt="Comments and emojis showing in the recording timeline"
-    classes="rounded"
+  imageLight={showingInTimelineLight}
+  imageDark={showingInTimelineDark}
+  alt="Comments and emojis showing in the recording timeline"
+  classes="rounded"
 />
 
+<<<<<<< HEAD
 ## Task comments
 
 Task comments enable you to track issues that need attention. When you spot something that needs fixing in a session recording, add it as a task to track whether it's been addressed.
@@ -85,6 +95,30 @@ The comments list includes a **Kind** column showing whether each item is a "Com
 - **Status** - When filtering by tasks, filter by "Open", "Completed", or "Any"
 
 Click any comment to jump to that moment in the recording.
+||||||| 0ad22c606
+And you can also view all of your existing comments in `/data-management/comments`.
+=======
+## Creating a task
+>>>>>>> master
 
+Tasks are a type of comment that can be marked as complete or incomplete, helping your team track which issues from a recording have been addressed.
 
+To create a task:
 
+1. Press **C** or click the comment button while viewing a recording.
+2. Write your comment describing the issue to track.
+3. Click **Add as task** instead of the regular **Save** button.
+
+The **Add as task** button is available in both the side-panel composer and the replay player overlay. Tasks appear with a checkbox in the recording timeline and activity inspector. Click the checkbox to mark a task as complete – completed tasks show with a strikethrough.
+
+Tasks can only be set at creation time. Once a comment is created as a task (or as a regular comment), this can't be changed. Replies and emoji reactions can't be tasks.
+
+## Viewing and filtering comments
+
+You can view all comments and tasks in [**Data Management** > **Comments**](https://app.posthog.com/data-management/comments). The list includes:
+
+- **Kind** column – shows whether each item is a comment or task
+- **Kind** filter – filter to show only comments, only tasks, or all
+- **Status** filter – when filtering by tasks, filter by open or completed status
+
+Click the **Open in app** icon on any comment to jump directly to the recording moment where it was made.
