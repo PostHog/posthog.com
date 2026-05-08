@@ -1,0 +1,72 @@
+---
+title: PostHog Code skills
+---
+
+PostHog Code loads the same skills Claude Code uses: from your machine, from the repo you are in, and from any marketplace plugins you have installed. It also includes PostHog-maintained skills for things like event capture, feature flags, experiments, and error tracking, so the agent already knows how to work with PostHog.
+
+## Getting started
+
+To view all available skills, choose **Skills** from the left sidebar. Select any individual skill to see its details.
+
+<ProductScreenshot
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_24_at_10_20_25_AM_3122a5985b.png"
+classes="rounded"
+alt="PostHog Code skills view"
+/>
+
+## Your skills
+
+PostHog Code picks up skills from three places:
+
+| Source | Location |
+|---|---|
+| **User** | `~/.claude/skills/` |
+| **Repository** | `.claude/skills/` in the current repo |
+| **Marketplace** | Plugins installed via `~/.claude/plugins/installed_plugins.json` |
+
+Any directory in these locations that contains a `SKILL.md` with valid YAML frontmatter will appear in the Skills sidebar and be available to the agent.
+
+Codex sessions pick up the bundled PostHog skills automatically. PostHog Code syncs them to `~/.agents/skills/` so the Codex CLI can find them.
+
+## Bundled skills
+
+PostHog Code comes with a set of first-party skills for common PostHog workflows. A few of our favorites:
+
+- `instrument-product-analytics` - add event capture to a codebase
+- `instrument-error-tracking` - wire up exception tracking with source maps
+- `instrument-feature-flags` - gate functionality behind feature flags
+- `creating-experiments` - set up an A/B test end to end
+- `diagnosing-failed-warehouse-syncs` - troubleshoot broken warehouse pipelines
+- `exploring-llm-traces` - debug LLM agent traces
+
+Bundled skills are published independently from the app and update on their own schedule, so you don't need a new build of PostHog Code to get the latest versions.
+
+## How it works
+
+Bundled PostHog skills are packaged with the app at build time and re-fetched in the background every 30 minutes while the app is running. If a download fails (no network, restrictive proxy, etc.) the previously-cached skills stay in place and the app retries on the next interval.
+
+Your user, repo, and marketplace skills aren't polled. They're discovered when a new agent session starts. If you add or edit a skill on disk, PostHog Code picks it up the next time you kick off a task.
+
+## Troubleshooting
+
+### A skill is missing
+
+Check that the skill:
+
+- Lives in a directory with a `SKILL.md` file at its root
+- Starts with valid YAML frontmatter
+- Includes at least `name` and `description` fields
+
+Skills with missing or malformed frontmatter are skipped silently.
+
+### Skill changes are not appearing
+
+Start a new task. User and repo skills are scanned when a session starts, not in real time.
+
+### The PostHog marketplace plugin is missing
+
+This is expected. PostHog Code ships its own bundled copy of the PostHog plugin and skips any marketplace-installed version to avoid duplicates.
+
+### Bundled skills seem out of date
+
+Background updates require network access. When you're offline or behind a restrictive proxy, the app keeps using the last-downloaded set until it can reach the release endpoint again.
