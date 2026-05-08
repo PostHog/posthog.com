@@ -64,6 +64,8 @@ And we redact bodies if we believe they contain
 
 ## How to register a callback to inspect and redact each network request
 
+> **Note:** This callback also runs against the page URL captured in the session snapshot (the URL shown in the replay player), not only network request URLs. See [URL redaction](/docs/session-replay/privacy#url-redaction) in the privacy docs.
+
 ```js-web
 posthog.init('<ph_project_token>', {
     session_recording: {
