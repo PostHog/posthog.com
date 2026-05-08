@@ -54,7 +54,7 @@ The instinct at this point is to write a list of 5-10 other channels to try in t
 
 It's much better to do more of the thing that's already showing signs of life. If you went mildly viral on LinkedIn, keep posting every day. If a podcast appearance converted, email another hundred. If a blog post got picked up, write the next one. And the next one.
 
-That's what we did early on to [get our first 1,000 users](https://newsletter.posthog.com/p/how-we-got-our-first-1000-users). When we saw early success with our HN launch, James kept serial posting founder blogs about everything behind the scenes:
+That's what we did early on to [get our first 1,000 users](/founders/first-1000-users). When we saw early success with our HN launch, James kept serial posting founder blogs about everything behind the scenes:
 
 - [A reflection after the HN launch](/blog/after-the-hn-launch) on what made it successful, and what we wanted to do with the momentum.
 - An explainer about how we [raised $3M in seed funding as an open source company](/blog/raising-3m-for-os) (including all the tactical details of VC meetings to the boring paperwork).
@@ -74,7 +74,7 @@ If you're PLG, your early wins are going to come from places where your users al
 
 If you're sales-led, from what I've heard from marketers at other companies, your early wins are going to come from more targeted approaches. You'll be the one going up to them. Think direct outreach, industry events, partnerships, and the founder's own network. Get on the podcasts your buyers listen to. Turn up to AWS Re:invent. 😤🔥
 
-In either case, however, [don't start with SEO](/newsletter/seo-for-startups). SEO is also one of those domains that takes a very long time, and requires you to know what you're doing. It is _very_ hard to vibe-SEO. Same goes for AEO.
+In either case, however, [don't start with SEO](/newsletter/seo-for-startups). SEO is also one of those domains that takes a very long time, and requires you to know what you're doing. It is _very_ hard to vibe-SEO. [Same goes for AEO.](/blog/aeo-advice)
 
 <NewsletterForm />
 
