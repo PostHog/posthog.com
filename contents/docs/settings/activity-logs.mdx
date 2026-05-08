@@ -196,6 +196,23 @@ This adds organization-level events to your activity feed, such as member invita
 
 > **Note**: This setting also affects notifications. If you subscribe to activity log notifications, you will only receive notifications for organization-level events if this setting is enabled.
 
+### Organization-wide activity logs
+
+Organization admins and owners can view activity across all projects from a single view. This helps you audit changes across your organization without switching between projects.
+
+To access organization-wide activity logs:
+
+1. Go to **Settings** → **Project** → **Activity logs**
+2. Click the **Project** / **Organization** toggle in the top right and select **Organization**
+
+In organization view:
+
+- A **Project** column shows which project each activity belongs to (or "Organization-wide" for org-level events)
+- A **Project** filter lets you narrow results to specific projects using multi-select
+- Deep-link to the organization view with `?view=organization` in the URL, and filter by project with `&team_ids=123,456`
+
+> **Note:** Export isn't available in organization view yet. Switch to project view to export activity logs.
+
 ### Resource history
 
 You can view the change history for any individual resource. When viewing a feature flag, dashboard, experiment, or other resource, click the **History** tab to see all changes made to that specific item over time.
@@ -377,14 +394,17 @@ To use the activity log API endpoints, authenticate using one of PostHog's [auth
 
 ### Endpoints
 
-PostHog provides two activity log endpoints:
+PostHog provides three activity log endpoints:
 
-| Endpoint                                             | Description                                               |
-| ---------------------------------------------------- | --------------------------------------------------------- |
-| `GET /api/projects/@current/activity_log/`           | Basic activity log retrieval with simple filtering        |
-| `GET /api/projects/@current/advanced_activity_logs/` | Full-featured endpoint with advanced filtering and export |
+| Endpoint                                                    | Description                                                     |
+| ----------------------------------------------------------- | --------------------------------------------------------------- |
+| `GET /api/projects/@current/activity_log/`                  | Basic activity log retrieval with simple filtering              |
+| `GET /api/projects/@current/advanced_activity_logs/`        | Full-featured endpoint with advanced filtering and export       |
+| `GET /api/organizations/<id>/advanced_activity_logs/`       | Organization-wide activity logs (admins and owners only)        |
 
-Both endpoints return activity logs for the current project. If **Show organization activity** is enabled in project settings, organization-level events are also included.
+The project-scoped endpoints return activity logs for the current project. If **Show organization activity** is enabled in project settings, organization-level events are also included.
+
+The organization-scoped endpoint returns activity across all projects in the organization. It supports a `team_ids` filter to narrow results to specific projects. Export is not yet available on this endpoint.
 
 ### API reference
 
