@@ -72,11 +72,12 @@ if (typeof variant === 'string' && variant.startsWith('holdout-')) {
 ```
 
 ```python
-variant = posthog.get_feature_flag('experiment-feature-flag', 'user-id')
+flags = posthog.evaluate_flags("user-id")
+variant = flags.get_flag("experiment-feature-flag")
 
-if isinstance(variant, str) and variant.startswith('holdout-'):
+if isinstance(variant, str) and variant.startswith("holdout-"):
     # User is in a holdout group - show them the default experience
-elif variant == 'test':
+elif variant == "test":
     # User is in the test variant
 else:
     # User is in control or flag is disabled
