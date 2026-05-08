@@ -18,11 +18,19 @@ In your [Account settings](https://app.posthog.com/settings/user-api-keys#person
 
 ## Updating name and email
 
-You can update your email and name in [your account settings](https://us.posthog.com/settings/user#details) under the **Details** section. This email account is used both for authentication and [notifications](#notifications).
+You can update your email and name in [your account settings](https://app.posthog.com/settings/user#details) under the **Details** section. This email account is used both for authentication and [notifications](#notifications).
+
+You can't change your email if either your current or new email address uses an [SSO-enforced domain](/docs/settings/sso#sso-enforcement).
+
+<CalloutBox icon="IconWarning" title="Social auth is removed after verification" type="caution">
+
+When you verify your new email address, all linked social auth methods (Google, GitHub, GitLab) are automatically removed. Make sure you have a password set before changing your email so you don't lose access.
+
+</CalloutBox>
 
 ## Updating password
 
-You can update your password in [your account settings](https://us.posthog.com/settings/user#change-password) under the **Change password** section.
+You can update your password in [your account settings](https://app.posthog.com/settings/user#change-password) under the **Change password** section.
 
 ## Password requirements
 
@@ -38,7 +46,7 @@ PostHog enforces the following password requirements for users:
 
 You can require two-factor authentication (2FA) to boost your account security.
 
-To enable 2FA, go to [your account settings](https://us.posthog.com/settings/user#2fa). Under the **Two-factor authentication** section, click **Set up 2FA**. Click **View backup codes** and save them in a secure place in case you can't reach your 2FA device..
+To enable 2FA, go to [your account settings](https://app.posthog.com/settings/user#2fa). Under the **Two-factor authentication** section, click **Set up 2FA**. Click **View backup codes** and save them in a secure place in case you can't reach your 2FA device.
 
 ## Connected applications
 
@@ -61,6 +69,7 @@ If you need to use the application again, you can re-authorize it through the ap
 
 ## Notifications
 
+<<<<<<< HEAD
 ### Email notifications
 
 You can choose which email notifications you receive in [your account settings](https://us.posthog.com/settings/user#notifications) under **Notifications**. You can enable or disable specific notifications with toggles. Product-specific notifications, such as [Alerts](/docs/alerts), have separate configurations in each product.
@@ -85,14 +94,19 @@ In-app notifications are enabled by default. To disable notifications for specif
 3. Toggle individual notification types on or off
 
 You can also use **Enable all** or **Disable all** to quickly configure notifications across all projects.
+||||||| c807337ad
+You can choose which email notifications you receive in [your account settings](https://us.posthog.com/settings/user#notifications) under **Notifications**. You can enable or disable specific notifications with toggles. Product-specific notification, such as [Alerts](/docs/alerts), have separate configurations in each product.
+=======
+You can choose which email notifications you receive in [your account settings](https://app.posthog.com/settings/user#notifications) under **Notifications**. You can enable or disable specific notifications with toggles. Product-specific notification, such as [Alerts](/docs/alerts), have separate configurations in each product.
+>>>>>>> master
 
 ## Theming and customization
 
-You can switch between dark and light mode in [your account settings](https://us.posthog.com/settings/user-customization#theme) under **Theme**. You can also quickly toggle theme using the [command palette](/docs/cmd-k) by searching for "dark", "light", or "theme".
+You can switch between dark and light mode in [your account settings](https://app.posthog.com/settings/user-customization#theme) under **Theme**. You can also quickly toggle theme using the [command palette](/docs/cmd-k) by searching for "dark", "light", or "theme".
 
-You can also customize the new tab behavior when working in the [SQL editor](/docs/data-warehouse/sql). By default, clicking **New tab** while in the SQL editor opens another SQL editor tab. To open the search command instead, go to [**Account > Customization**](https://us.posthog.com/settings/user-customization#sql-editor-tab-preference) and select your preferred option.
+You can also customize the new tab behavior when working in the [SQL editor](/docs/data-warehouse/sql). By default, clicking **New tab** while in the SQL editor opens another SQL editor tab. To open the search command instead, go to [**Account > Customization**](https://app.posthog.com/settings/user-customization#sql-editor-tab-preference) and select your preferred option.
 
-If you're feeling lonely and would like Max to keep you company, you can find him under [Hedgehog mode](https://us.posthog.com/settings/user#hedgehog-mode).
+If you're feeling lonely and would like Max to keep you company, you can find him under [Hedgehog mode](https://app.posthog.com/settings/user#hedgehog-mode).
 
 ### Sidebar apps
 
@@ -102,8 +116,8 @@ To control whether new products are automatically added to your sidebar, go to [
 
 ## Deleting your account
 
-You can delete your PostHog account in [your account settings](https://us.posthog.com/settings/user#user-delete) under **Delete account**. This action is **irreversible**.
+You can delete your PostHog account in [your account settings](https://app.posthog.com/settings/user#user-delete) under **Delete account**. This action is **irreversible**.
 
-Deleting your account does not delete any projects or organizations you belong to. If you also want to delete a project or organization, do that separately from [project settings](https://us.posthog.com/settings/project#project-delete) or [organization settings](https://us.posthog.com/settings/organization#organization-delete) before deleting your account.
+Deleting your account does not delete any projects or organizations you belong to. If you also want to delete a project or organization, do that separately from [project settings](https://app.posthog.com/settings/project#project-delete) or [organization settings](https://app.posthog.com/settings/organization#organization-delete) before deleting your account.
 
 For information on deleting other data (persons, events, projects, organizations), see [data deletion](/docs/privacy/data-storage#data-deletion).
