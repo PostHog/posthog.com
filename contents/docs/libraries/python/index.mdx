@@ -145,9 +145,10 @@ In multi-worker or edge environments, you can implement custom caching for flag 
 Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```python
-variant = posthog.get_feature_flag('experiment-feature-flag-key', 'user_distinct_id')
+flags = posthog.evaluate_flags("user_distinct_id")
+variant = flags.get_flag("experiment-feature-flag-key")
 
-if variant == 'variant-name':
+if variant == "variant-name":
     # Do something
 ```
 
