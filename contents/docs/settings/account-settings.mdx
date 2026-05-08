@@ -20,11 +20,11 @@ In your [Account settings](https://app.posthog.com/settings/user-api-keys#person
 
 You can update your email and name in [your account settings](https://app.posthog.com/settings/user#details) under the **Details** section. This email account is used both for authentication and [notifications](#notifications).
 
-When you change your email address, PostHog sends a verification email to the new address. Once verified, all linked social auth methods (Google, GitHub, GitLab) are automatically removed to prevent the old identity from accessing your account. Make sure you have a password set before changing your email so you don't lose access.
+You can't change your email if either your current or new email address uses an [SSO-enforced domain](/docs/settings/sso#sso-enforcement).
 
-<CalloutBox icon="IconWarning" title="SSO-enforced domains" type="caution">
+<CalloutBox icon="IconWarning" title="Social auth is removed after verification" type="caution">
 
-You can't change your email if [SSO is enforced](/docs/settings/sso#sso-enforcement) on your current email's domain. You also can't change your email to an address on an SSO-enforced domain.
+When you verify your new email address, all linked social auth methods (Google, GitHub, GitLab) are automatically removed. Make sure you have a password set before changing your email so you don't lose access.
 
 </CalloutBox>
 
