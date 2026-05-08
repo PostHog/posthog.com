@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 title: GitHub Issues integration
 sidebar: Docs
@@ -106,3 +107,95 @@ To remove the GitHub Issues integration:
 2. Click **Disconnect**
 
 Existing tickets created from GitHub issues are not affected – they remain in your inbox but no longer sync new comments or status changes.
+||||||| 689bbfb97
+=======
+---
+title: GitHub integration
+sidebar: Docs
+showTitle: true
+---
+
+The GitHub Issues channel connects your GitHub repositories to PostHog Support, enabling two-way sync between GitHub issues and support tickets.
+
+- **GitHub to PostHog** – new issues in monitored repos automatically create support tickets, and issue comments sync as ticket messages
+- **PostHog to GitHub** – team replies in PostHog are posted back to the GitHub issue as comments
+
+## Connecting GitHub
+
+<CalloutBox icon="IconInfo" title="GitHub App required" type="action">
+
+You need a PostHog GitHub App installation before connecting the GitHub channel. If you don't have one yet, go to [**Settings** > **Integrations**](https://app.posthog.com/settings/project-integrations) and install the GitHub App first.
+
+</CalloutBox>
+
+1. Go to [**Support** > **Settings**](https://app.posthog.com/support/settings) in PostHog
+2. Click the **GitHub** tab under channels
+3. Select a GitHub App installation to connect
+4. Choose which repositories to monitor
+5. Issues from those repos start creating tickets automatically
+
+## Configuration
+
+After connecting, configure the integration in the **GitHub** tab under **Support** > **Settings**:
+
+| Setting                    | Description                                                                    |
+| -------------------------- | ------------------------------------------------------------------------------ |
+| **Monitored repositories** | Issues from these repos create support tickets. Select up to 100 repositories. |
+| **Connection status**      | Toggle the integration on or off without removing the connection.              |
+
+### Selecting repositories
+
+Click the repository selector to see all repos available through your GitHub App installation. Only issues from selected repositories create tickets – issues from other repos are ignored.
+
+## How tickets are created
+
+### New issues
+
+When someone opens a new issue in a monitored repository, PostHog automatically creates a support ticket with:
+
+- The issue title and body as the first message
+- The GitHub username as the customer identity (`github:<username>`)
+- `channel_source` set to `github`
+- A link back to the original GitHub issue
+
+### Issue comments
+
+Comments on monitored issues sync as ticket messages. If a comment arrives for an issue that doesn't have a ticket yet (e.g. the issue was opened before monitoring was enabled), PostHog creates the ticket automatically.
+
+Duplicate comments are detected and skipped to prevent echoing.
+
+## Two-way sync
+
+### GitHub to PostHog
+
+- New issues create tickets with status **new**
+- Issue comments sync as ticket messages
+- Closing a GitHub issue sets the ticket status to **resolved**
+- Reopening a GitHub issue sets the ticket status back to **open**
+
+### PostHog to GitHub
+
+When a team member replies to a GitHub-sourced ticket in PostHog, the reply is posted back to the GitHub issue as a comment. The comment includes the team member's name.
+
+**Private notes** (internal messages) are never posted to GitHub.
+
+## Viewing GitHub tickets
+
+GitHub-sourced tickets appear in your [inbox](/docs/support/inbox) alongside widget, Slack, and email tickets. Each GitHub ticket shows:
+
+- A GitHub icon indicating the channel source
+- A link to the original GitHub issue in the ticket sidebar (e.g. `owner/repo#123`)
+- The GitHub user's login name on messages
+
+Filter the ticket list by channel source to see only GitHub tickets.
+
+## Disconnecting
+
+To remove the GitHub integration:
+
+1. Go to [**Support** > **Settings**](https://app.posthog.com/support/settings)
+2. Click the **GitHub** tab
+3. Click **Disconnect**
+
+Existing tickets created from GitHub issues are not affected – they remain in your inbox but new issues and comments no longer sync.
+>>>>>>> master
