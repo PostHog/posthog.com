@@ -18,9 +18,9 @@ Most advice about growth metrics and revenue ops is for businesses that follow c
 
 PostHog, on the other hand, is pretty weird. 90% of our users are indie developers who stay on the free tier for life. We do usage-based pricing and literally tell people to pay us less. We also serve free hot dogs at developer conferences.
 
-We've grown from [TODO] to [TODO] in ARR over the two years since I joined. The numbers alone are impressive, but it also took me a lot of trial and error to _figure out_ those numbers as head of revenue ops.
+We've more than 6x'ed our ARR over the two years since I joined. That number in and of itself says a lot, but I also want to talk about the work that went into figuring that number out.
 
-Here's all the advice and lessons learned that I'd give to founders at other companies that don't follow the standard playbook.
+Here's all the advice and lessons learned about growth metrics that I'd give to founders at other companies that don't follow the standard playbook.
 
 ---
 
@@ -89,7 +89,13 @@ There are still explicit corrections in the retention calculation for events lik
 
 ## 4. Be opinionated but defensible with your numbers
 
-For our core growth metric, we now use average quarterly MRR, annualized: TODO
+For our core growth metric, we now use average quarterly MRR, annualized:
+
+```
+((MRR_month1 + MRR_month2 + MRR_month3) / 3) × 12
+```
+
+Taking the average of three months before annualizing directly addresses the February problem – a short month no longer creates a mechanical dip in our reported ARR. It also smooths out one-off spikes from a single big launch or an unusual billing cycle, so the number moves with the actual trend of the business rather than with noise.
 
 That's now the single number that captures how the business is actually doing, and what we track against "the hundy" (what we call our $100M ARR goal for 2026 internally).
 
