@@ -79,6 +79,26 @@ Click on any version number in the SDK doctor table to open a dropdown menu with
 - **Events on Activity page** – Opens the [Activity page](/docs/data/events) with filters pre-configured for the SDK type, version, and events from the last 7 days. This is useful if you prefer a visual interface over writing queries.
 - **SQL query** – Opens the [SQL editor](/docs/hogql) with a HogQL query showing events for that SDK version. This is useful if you want to customize the query or export data.
 
+## Subscribing to alerts
+
+SDK doctor can notify you when your SDKs become outdated. Click **Alerts** on the SDK doctor page to set up notifications via Slack, Discord, Microsoft Teams, email, or a custom webhook.
+
+To set up an alert:
+
+1. Click **Alerts** to open the alert wizard
+2. Choose a destination (Slack, Discord, Teams, email, or webhook)
+3. Configure recipients and frequency
+
+When SDK doctor detects outdated SDKs, it sends an alert to your configured destinations. To reduce noise, notifications are sent at most once every seven days per project while SDKs remain outdated.
+
+Each alert includes:
+
+- Number of outdated SDKs
+- Total SDKs in use
+- A link to SDK doctor for details
+
+View and manage alerts from the **Alerts** modal. Click any alert to edit its configuration or disable it.
+
 ## Understanding SDK doctor badges
 
 SDK doctor uses badges to quickly communicate SDK status:
