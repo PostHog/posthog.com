@@ -1,0 +1,20 @@
+---
+title: LLM Gateway
+sidebar: Handbook
+showTitle: true
+hideAnchor: false
+template: team
+---
+
+The LLM gateway is PostHog's internal routing layer for calling LLM providers. It gives PostHog's AI features a single endpoint to call, with shared handling for things like provider routing, caching, fallbacks, and cost attribution. The team owns the gateway service, its provider integrations, the [LLM Analytics Playground](/docs/llm-analytics/playground), and the seams where the gateway connects into the rest of PostHog — particularly <SmallTeam slug="llm-analytics" />.
+
+## Working with other teams
+
+The gateway sits underneath PostHog's AI features, so most internal teams shipping AI functionality will end up calling it instead of providers directly. We work closely with <SmallTeam slug="posthog-ai" />, <SmallTeam slug="posthog-code" />, <SmallTeam slug="llm-analytics" />, and any small team adding AI features to their product.
+
+Come to us if you:
+
+- Are calling an LLM from inside PostHog and want to go through the gateway instead of a provider SDK
+- Need a new provider, model, or capability added to the gateway
+- Are debugging gateway latency, errors, or cost attribution
+- Want gateway-level features like caching, fallbacks, structured outputs, or rate-limit handling
