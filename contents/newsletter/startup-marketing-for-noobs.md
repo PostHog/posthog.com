@@ -74,7 +74,7 @@ If you're PLG, your early wins are going to come from places where your users al
 
 If you're sales-led, from what I've heard from marketers at other companies, your early wins are going to come from more targeted approaches. You'll be the one going up to them. Think direct outreach, industry events, partnerships, and the founder's own network. Get on the podcasts your buyers listen to. Turn up to AWS Re:invent. 😤🔥
 
-In either case, however, [don't start with SEO](/newsletter/seo-for-startups). SEO is also one of those domains that takes a very long time, and requires you to know what you're doing. It is _very_ hard to vibe-SEO. Same goes for AEO.
+In either case, however, [don't start with SEO](/newsletter/seo-for-startups). SEO is also one of those domains that takes a very long time, and requires you to know what you're doing. It is _very_ hard to vibe-SEO. [Same goes for AEO.](/blog/aeo-advice)
 
 <NewsletterForm />
 
