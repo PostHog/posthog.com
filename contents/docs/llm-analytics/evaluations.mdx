@@ -32,6 +32,62 @@ When a [generation](/docs/llm-analytics/generations) is captured, PostHog sample
 
 You can optionally filter which generations get evaluated using event properties or person properties. For example, only evaluate generations from production, from a specific model, or above a certain cost threshold. You can also use person properties to exclude internal users or target specific user segments.
 
+### What the judge receives
+
+The LLM judge receives a structured prompt containing sections extracted from the generation event:
+
+```text
+Input: <the generation's input messages or prompt>
+
+Tools available:
+<list of tools the agent could call — only present when the event includes a tool catalog>
+
+Output: <the generation's output response>
+```
+
+#### Tool call and result correlation
+
+When the generation includes tool calls (common in agentic workflows), PostHog renders them with correlation IDs so the judge can match each tool result to the call that produced it:
+
+- Assistant tool calls render as `[tool_call <id>: name(args)]`
+- Tool results render as `tool[<id>]: <result>`
+
+For example, a conversation with parallel tool calls appears as:
+
+```text
+assistant: [tool_call call_abc: search_docs({"query": "pricing"})] [tool_call call_def: get_user({"id": 42})]
+tool[call_abc]: {"results": ["Free tier includes 1M events"]}
+tool[call_def]: {"name": "Jane", "plan": "pro"}
+```
+
+This lets the judge reliably evaluate prompts like "did the agent handle the tool failure correctly?" even when multiple tool calls run in parallel.
+
+#### Tool catalog format
+
+When the event's `$ai_tools` property contains the list of tools the agent could call, PostHog renders a compact summary:
+
+```text
+- search_docs: Search the documentation (query, limit?)
+- get_user: Fetch user details (user_id)
+```
+
+Each line shows the tool name, description, and parameters. A `?` suffix marks optional parameters. This format supports OpenAI, Anthropic, and Gemini tool definitions.
+
+#### Shaping custom events for evaluations
+
+If you emit custom `$ai_generation` events or span/trace events and want the judge to have full context, include these properties:
+
+| Property                             | Purpose                                      |
+| ------------------------------------ | -------------------------------------------- |
+| `$ai_input`                          | The input messages or prompt                 |
+| `$ai_output_choices` or `$ai_output` | The output response                          |
+| `$ai_tools`                          | The tool catalog (array of tool definitions) |
+
+For tool call correlation within messages, include:
+
+- A `tool_calls` array on assistant messages, where each entry has `id`, `function.name`, and `function.arguments`
+- A `tool_call_id` field on tool result messages matching the `id` from the corresponding tool call
+
 ### Built-in templates
 
 PostHog provides five pre-built evaluation templates to get you started:
@@ -59,7 +115,7 @@ PostHog provides five pre-built evaluation templates to get you started:
 
 ### Writing custom prompts
 
-When creating a custom evaluation, your prompt should instruct the LLM judge to return `true` (pass) or `false` (fail) along with reasoning. The judge receives the generation's input and output for context.
+When creating a custom evaluation, your prompt should instruct the LLM judge to return `true` (pass) or `false` (fail) along with reasoning. The judge receives the generation's input, output, and (when present) the available tool catalog for context. See [What the judge receives](#what-the-judge-receives) for details on the full prompt structure.
 
 Tips for effective evaluation prompts:
 
