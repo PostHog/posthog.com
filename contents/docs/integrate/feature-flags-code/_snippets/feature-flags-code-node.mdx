@@ -96,7 +96,14 @@ client.capture({
 
 ### Evaluating only specific flags
 
-<<<<<<< HEAD
+By default, `evaluateFlags()` evaluates every flag for the user. If you only need a few flags, pass `flagKeys` to request only those flags:
+
+```node
+const flags = await client.evaluateFlags('distinct_id_of_your_user', {
+    flagKeys: ['checkout-flow', 'new-dashboard'],
+})
+```
+
 import NodeSetSendFeatureFlagsTrue from "./feature-flags-code-node-set-send-feature-flags-to-true.mdx" 
 
 <NodeSetSendFeatureFlagsTrue />
@@ -104,22 +111,8 @@ import NodeSetSendFeatureFlagsTrue from "./feature-flags-code-node-set-send-feat
 ### Evaluating multiple specific flags
 
 When you know which flags you need and want to emit `$feature_flag_called` events for analytics, use `getFeatureFlags()`. This evaluates a specific subset of flags in a single request while still capturing per-flag usage.
-||||||| 689bbfb97
-import NodeSetSendFeatureFlagsTrue from "./feature-flags-code-node-set-send-feature-flags-to-true.mdx" 
-
-<NodeSetSendFeatureFlagsTrue />
-
-### Fetching all flags for a user
-
-You can fetch all flag values for a single user by calling `getAllFlags()` or `getAllFlagsAndPayloads()`.
-
-This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
-=======
-By default, `evaluateFlags()` evaluates every flag for the user. If you only need a few flags, pass `flagKeys` to request only those flags:
->>>>>>> master
 
 ```node
-<<<<<<< HEAD
 const results = await client.getFeatureFlags(
     ['new-dashboard', 'beta-search', 'premium-features'],
     'distinct_id_of_your_user'
@@ -148,14 +141,6 @@ Use `getAllFlags()` or `getAllFlagsAndPayloads()` to fetch all flag values for a
 ```node
 await client.getAllFlags('distinct_id_of_your_user')
 await client.getAllFlagsAndPayloads('distinct_id_of_your_user')
-||||||| 689bbfb97
-await client.getAllFlags('distinct_id_of_your_user') 
-await client.getAllFlagsAndPayloads('distinct_id_of_your_user')
-=======
-const flags = await client.evaluateFlags('distinct_id_of_your_user', {
-    flagKeys: ['checkout-flow', 'new-dashboard'],
-})
->>>>>>> master
 ```
 
 By default, these methods don't emit `$feature_flag_called` events. To enable per-flag analytics, set `sendFeatureFlagEvents` to `true`:
@@ -167,26 +152,16 @@ await client.getAllFlagsAndPayloads('distinct_id_of_your_user', { sendFeatureFla
 
 ### Sending `$feature_flag_called` events
 
-<<<<<<< HEAD
-Capturing `$feature_flag_called` events enables PostHog to know when a flag was accessed by a user and thus provide [analytics and insights](/docs/product-analytics/insights) on the flag. By default, we send these events when:
-||||||| 689bbfb97
-Capturing `$feature_flag_called` events enable PostHog to know when a flag was accessed by a user and thus provide [analytics and insights](/docs/product-analytics/insights) on the flag. By default, we send a these event when:
-=======
 Capturing `$feature_flag_called` events enables PostHog to know when a flag was accessed by a user and provide [analytics and insights](/docs/product-analytics/insights) on the flag. With `evaluateFlags()`, the SDK sends this event when you call `flags.isEnabled()` or `flags.getFlag()` for a flag.
->>>>>>> master
 
-<<<<<<< HEAD
+The SDK deduplicates these events per `(distinct_id, flag, value)` in a local cache. If you reinitialize the PostHog client, the cache resets and `$feature_flag_called` events may be sent again. PostHog handles duplicates, so duplicate `$feature_flag_called` events don't affect your analytics.
+
+`flags.getFlagPayload()` doesn't send `$feature_flag_called` events and doesn't count as an access for `onlyAccessed()`.
+
+For the deprecated methods (`getFeatureFlag()`, `isFeatureEnabled()`, `getFeatureFlags()`), events are sent when:
+
 1. You call `getFeatureFlag()`, `isFeatureEnabled()`, or `getFeatureFlags()`, AND
 2. It's a new user, or the value of the flag has changed. 
-||||||| 689bbfb97
-1. You call `posthog.getFeatureFlag()` or `posthog.isFeatureEnabled()`, AND 
-2. It's a new user, or the value of the flag has changed. 
-=======
-The SDK deduplicates these events per `(distinct_id, flag, value)` in a local cache. If you reinitialize the PostHog client, the cache resets and `$feature_flag_called` events may be sent again. PostHog handles duplicates, so duplicate `$feature_flag_called` events don't affect your analytics.
->>>>>>> master
-
-<<<<<<< HEAD
-> *Note:* Tracking whether it's a new user or if a flag value has changed happens in a local cache. This means that if you reinitialize the PostHog client, the cache resets as well – causing `$feature_flag_called` events to be sent again when calling `getFeatureFlag`, `isFeatureEnabled`, or `getFeatureFlags`. PostHog is built to handle this, and so duplicate `$feature_flag_called` events won't affect your analytics.
 
 You can disable automatically capturing `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
 
@@ -206,24 +181,6 @@ const results = await client.getFeatureFlags(
     { sendFeatureFlagEvents: false }
 )
 ```
-||||||| 689bbfb97
-> *Note:* Tracking whether it's a new user or if a flag value has changed happens in a local cache. This means that if you reinitialize the PostHog client, the cache resets as well – causing `$feature_flag_called` events to be sent again when calling `getFeatureFlag` or `isFeatureEnabled`. PostHog is built to handle this, and so duplicate `$feature_flag_called` events won't affect your analytics.
-
-You can disable automatically capturing `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
-
-To disable it, set the `sendFeatureFlagEvents` argument in your function call, like so:
-
-```node
-const isFeatureFlagEnabled = await client.isFeatureEnabled(
-    'flag-key', 
-    'distinct_id_of_your_user',
-    {
-        'sendFeatureFlagEvents': false
-    })
-```
-=======
-`flags.getFlagPayload()` doesn't send `$feature_flag_called` events and doesn't count as an access for `onlyAccessed()`.
->>>>>>> master
 
 import NodeOverrideServerProperties from './override-server-properties/node.mdx'
 
