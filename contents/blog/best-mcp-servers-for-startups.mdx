@@ -28,7 +28,9 @@ Plugins and connectors have let you use different tools inside an editor for yea
 
 A handful of well-chosen MCP servers, composed thoughtfully, will get you further than a stack full of them. Below are the workflows we see startup teams run most often, and the servers that compose well together for each.
 
-## Debugging in production
+## Best MCP servers, by workflow
+
+### Debugging in production
 
 Something's wrong. Maybe you're seeing error spikes or a slow endpoint; maybe your CS team is getting flooded with complaints about a buggy feature. You want to find the cause without leaving your editor.
 
@@ -43,7 +45,7 @@ The servers:
 
 A real prompt example for this loop: *"Using PostHog and the Vercel MCP, pull the top error traces for /checkout from yesterday afternoon, find the deploy that went out around 3pm, and use GitHub to show me the diff."*
 
-## Shipping code
+### Shipping code
 
 You're writing code and want the agent to help you scaffold it, open the PR, watch the deploy, and confirm nothing broke.
 
@@ -59,7 +61,7 @@ The servers:
 
 A real prompt: *"Add a debounce to the search input in apps/web/components/SearchBar.tsx. Edit the file locally, run the tests, open a PR titled 'Debounce search input', and ping me when Vercel finishes the preview deploy. After it's live in production, use PostHog to check that search-related events still fire and that no new errors are spiking."*
 
-## Understanding user behavior
+### Understanding user behavior
 
 You shipped a new onboarding flow last week and signups didn't move, and you [want to figure out why](/blog/how-to-find-and-fix-app-onboarding-drop-off). Your top-three-paying customer just churned and you're trying to reconstruct what went wrong before reaching out. Or the experiment you ran last sprint came back inconclusive, and you're not sure whether to ship, iterate, or kill it.
 
@@ -75,7 +77,7 @@ A real prompt: *"My top-three customer just churned. Use PostHog to pull session
 
 This is the workflow where MCPs save the most time. The traditional version is 6+ tabs and lots of patience, but with the right MCP stack, it's one prompt and a coffee break.
 
-## Planning work and managing sprints
+### Planning work and managing sprints
 
 Monday sprint planning, Friday status updates, quarterly board reviews... not the fun parts of running a startup, but necessary ones. Might as well get some help.
 
@@ -90,7 +92,7 @@ The servers:
 
 A real prompt: *"Pull the issues we shipped this sprint from Linear, cross-reference them with the roadmap doc in Notion, check PostHog for which of those features are actually getting used, and grab the highlights from #product-updates in Slack to draft a Friday update for the team."*
 
-## Answering questions about your data (the SQL/warehouse loop)
+### Answering questions about your data (the SQL/warehouse loop)
 
 You're prepping a board deck and need MRR by plan tier, broken down by feature usage, or an investor asked a sharp question on a call and you want the answer before the follow-up email.
 
@@ -105,7 +107,7 @@ A real prompt: *"Pull MRR by plan tier from Postgres, then break down feature us
 
 The agent queries Postgres for billing data, queries PostHog for product engagement, and joins them in the response.
 
-## Swap-in alternatives by tool category
+### Swap-in alternatives by tool category
 
 Not on the same stack as the recommendations above? Here's what to swap in.
 
