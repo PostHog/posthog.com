@@ -41,7 +41,7 @@ We know that giving feedback can sometimes be difficult, so here are a few tips 
 
 - Be as specific as you can with your feedback. An example can be helpful to give the recipient context. 
 
-- Do not give ambiguous or neutral feedback. Something that may have been intended as positive may be interpreted as negative, and vice-versa. This means you should prepare in advance, to avoid saying "I've got nothing to say, it's all going good".
+- Do not give ambiguous or neutral feedback. Something that may have been intended as positive may be interpreted as negative, and vice-versa.
 
 - Sometimes a question can be more useful if you feel you lack the full context. For example 'I've noticed that you sometimes do X. Can you explain to me what your thought process is when you are doing that?' 
 
