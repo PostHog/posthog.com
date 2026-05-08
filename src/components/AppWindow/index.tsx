@@ -152,6 +152,32 @@ const WindowContainer = ({ children, closing }: { children: React.ReactNode; clo
     )
 }
 
+function SnapIndicator({ side }: { side: 'left' | 'right' }) {
+    const { taskbarRef, taskbarHeight } = useApp()
+    const taskbarRect = taskbarRef.current?.getBoundingClientRect()
+    const left = taskbarRect?.left ?? 0
+    const top = taskbarRect?.top ?? 0
+    const availableWidth = window.innerWidth - left * 2
+    const halfWidth = availableWidth / 2
+
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.3 }}
+            exit={{ opacity: 0 }}
+            className={`fixed border-2 border-blue bg-blue/40 pointer-events-none ${
+                side === 'left' ? 'rounded-bl-lg' : 'rounded-br-lg'
+            }`}
+            style={{
+                left: side === 'left' ? left : left + halfWidth,
+                width: halfWidth,
+                top: taskbarHeight,
+                height: window.innerHeight - taskbarHeight - (taskbarRect?.top ?? 0),
+            }}
+        />
+    )
+}
+
 export default function AppWindow({ item, chrome = true }: { item: AppWindowType; chrome?: boolean }) {
     const meshVariant = MESH_VARIANTS[item.appSettings?.mesh ?? 'green']
     const { addToast, toasts } = useToast()
@@ -305,6 +331,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             size: newSize,
             position: isBeyondViewport ? getDesktopCenterPosition(newSize) : previousPosition,
             expanded: false,
+            snapped: false,
         })
     }
 
@@ -325,6 +352,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const handleDrag = (_event: any, info: any) => {
         updateWindow(item, {
             expanded: false,
+            snapped: false,
         })
         if (!dragging) setDragging(true)
         if (item.fixedSize) return
@@ -615,20 +643,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                 <WindowContainer closing={closing}>
                     {!item.minimized && !closed && (
                         <>
-                            {snapIndicator && (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 0.3 }}
-                                    exit={{ opacity: 0 }}
-                                    className="fixed inset-4 border-2 border-blue bg-blue/40 pointer-events-none rounded-md"
-                                    style={{
-                                        left: snapIndicator === 'left' ? 0 : '50%',
-                                        width: '50%',
-                                        top: taskbarHeight,
-                                        height: `calc(100% - ${taskbarHeight}px)`,
-                                    }}
-                                />
-                            )}
+                            {snapIndicator && <SnapIndicator side={snapIndicator} />}
                             <motion.div
                                 ref={windowRef}
                                 data-app="AppWindow"
@@ -654,7 +669,13 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                                         siteSettings.experience === 'boring'
                                                             ? ''
                                                             : `border rounded-lg ${
-                                                                  item.expanded ? 'rounded-tr-none rounded-tl-none' : ''
+                                                                  item.expanded
+                                                                      ? 'rounded-tr-none rounded-tl-none'
+                                                                      : item.snapped === 'left'
+                                                                      ? 'rounded-tl-none rounded-tr-none rounded-br-none'
+                                                                      : item.snapped === 'right'
+                                                                      ? 'rounded-tl-none rounded-tr-none rounded-bl-none'
+                                                                      : ''
                                                               }`
                                                     }`
                                           }`
@@ -926,7 +947,13 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     className={`size-full flex-grow ${
                                         chrome
                                             ? `overflow-hidden border border-white/50 dark:border-white/10 rounded-lg ${
-                                                  item.expanded ? 'rounded-tr-none rounded-tl-none' : ''
+                                                  item.expanded
+                                                      ? 'rounded-tr-none rounded-tl-none'
+                                                      : item.snapped === 'left'
+                                                      ? 'rounded-tl-none rounded-tr-none rounded-br-none'
+                                                      : item.snapped === 'right'
+                                                      ? 'rounded-tl-none rounded-tr-none rounded-bl-none'
+                                                      : ''
                                               }`
                                             : ''
                                     }`}

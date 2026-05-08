@@ -79,6 +79,7 @@ interface AppContextType {
             previousSize?: { width?: number; height?: number }
             element?: any
             expanded?: boolean
+            snapped?: 'left' | 'right' | false
         }
     ) => void
     getPositionDefaults: (
@@ -1750,6 +1751,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             appSettings: appSettings[keyToUse],
             location,
             expanded: false,
+            snapped: false,
         }
 
         // Adjust width if window extends beyond right edge
@@ -1809,6 +1811,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             previousSize?: { width?: number; height?: number }
             element?: any
             expanded?: boolean
+            snapped?: 'left' | 'right' | false
         }
     ) => {
         const newAppWindow = {
@@ -1831,6 +1834,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             },
             ...(updates.element ? { element: updates.element } : {}),
             ...(updates.expanded !== undefined ? { expanded: updates.expanded } : {}),
+            ...(updates.snapped !== undefined ? { snapped: updates.snapped } : {}),
         }
         setWindows((windows) => windows.map((w) => (w === appWindow ? newAppWindow : w)))
         return newAppWindow
@@ -1928,15 +1932,23 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const handleSnapToSide = (side: 'left' | 'right') => {
         if (!constraintsRef.current || !focusedWindow) return
 
-        const bounds = constraintsRef.current.getBoundingClientRect()
-        const x = side === 'left' ? 0 : bounds.width / 2
-        const finalWidth = bounds.width / 2
-        const size = { width: finalWidth, height: bounds.height }
+        const taskbarRect = document.querySelector('#taskbar')?.getBoundingClientRect()
+        const left = taskbarRect?.left ?? 0
+        const top = taskbarRect?.top ?? 0
+        const availableWidth = window.innerWidth - left * 2
+        const availableHeight = window.innerHeight - taskbarHeight - top
+        const finalWidth = availableWidth / 2
+        const x = side === 'left' ? left : left + finalWidth
+        const size = { width: finalWidth, height: availableHeight }
         const position = { x, y: 0 }
 
         updateWindow(focusedWindow, {
             position,
             size,
+            previousSize: focusedWindow.size,
+            previousPosition: focusedWindow.position,
+            snapped: side,
+            expanded: false,
         })
     }
 
@@ -1952,6 +1964,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             previousSize: focusedWindow.size,
             previousPosition: focusedWindow.position,
             expanded: true,
+            snapped: false,
         })
     }
 

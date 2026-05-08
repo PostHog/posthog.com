@@ -273,7 +273,7 @@ export default function TaskBarMenu() {
 
     return (
         <>
-            <div className={websiteMode ? 'z-40' : 'z-50 p-[16px] pb-0'}>
+            <div className={websiteMode ? 'z-40' : 'z-50 p-2 pb-0'}>
                 <motion.div
                     onAnimationComplete={updateTaskbarHeight}
                     ref={taskbarRef}
@@ -292,7 +292,13 @@ export default function TaskBarMenu() {
                     }}
                     className={`bg-primary/50 backdrop-blur-3xl skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded pl-0.5 pr-2 ${
                         websiteMode ? '' : 'shadow-2xl'
-                    } ${focusedWindow?.expanded ? 'rounded-br-none rounded-bl-none' : ''}`}
+                    } ${
+                        windows.some((w) => w.expanded && !w.minimized)
+                            ? 'rounded-br-none rounded-bl-none'
+                            : `${windows.some((w) => w.snapped === 'left' && !w.minimized) ? 'rounded-bl-none' : ''} ${
+                                  windows.some((w) => w.snapped === 'right' && !w.minimized) ? 'rounded-br-none' : ''
+                              }`
+                    }`}
                 >
                     {/* Top and bottom edges of the 3D box — visible during rotation */}
                     <div

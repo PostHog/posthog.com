@@ -61,6 +61,7 @@ export interface AppWindow {
         type: 'standard' | 'side' | 'floating'
     }
     expanded: boolean
+    snapped: 'left' | 'right' | false
 }
 
 interface WindowProviderProps {
