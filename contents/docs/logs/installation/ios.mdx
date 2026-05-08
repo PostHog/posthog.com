@@ -27,7 +27,7 @@ If you haven't installed `posthog-ios` yet, follow the steps below. For full det
 
 <Step title="Configure logs in your PostHogConfig" badge="required">
 
-Add a `logs` block on the `PostHogConfig` instance you pass to `setup`. All fields are optional; defaults are tuned for mobile (cellular bandwidth, battery, OS lifecycle).
+Configure Logs through `config.logs` before calling `setup(_:)`. All fields are optional; defaults are tuned for mobile (cellular bandwidth, battery, OS lifecycle).
 
 ```swift
 import PostHog
