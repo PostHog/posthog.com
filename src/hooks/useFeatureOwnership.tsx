@@ -211,7 +211,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'llm-gateway': {
         feature: 'LLM gateway',
-        owner: ['posthog-ai'],
+        owner: ['llm-gateway'],
         label: false,
     },
     'live-events': {
