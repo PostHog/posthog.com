@@ -3,34 +3,35 @@ title: Testing your feature flag
 sidebar: Docs
 showTitle: true
 ---
-import {ProductVideo} from 'components/ProductVideo'
-export const OverrideFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/feature-flags/override-feature-flag-light-mode.mp4"
-export const OverrideFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/feature-flags/override-feature-flag-dark-mode.mp4"
 
-Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. There are 3 ways you can do this:
+import { ProductVideo } from "components/ProductVideo";
+export const OverrideFeatureFlagLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/feature-flags/override-feature-flag-light-mode.mp4";
+export const OverrideFeatureFlagDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/feature-flags/override-feature-flag-dark-mode.mp4";
+
+Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. There are 4 ways you can do this:
 
 ## Method 1: Assign a user a specific flag value
 
-For boolean flags, you can roll out the flag to a specific user. For multivariate flags, you can assign a user to a specific variant by **adding an optional override** to your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions). 
+For boolean flags, you can roll out the flag to a specific user. For multivariate flags, you can assign a user to a specific variant by **adding an optional override** to your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions).
 
 To do this:
 
 1. Go to your feature flag.
 2. Ensure the feature flag is enabled by checking the "Enable feature flag" box.
 3. Add a new condition set with the condition to `email = your_email@domain.com`. Set the rollout percentage for this set to 100%.
-   
    - You can also target with `distinct_id equals`. The value field searches persons by name, email, or distinct_id, which is useful when `email` isn't set as a person property but the user is identified.
    - In cases where `email` is not available (such as when your users are logged out), you can use a parameter like `utm_source` and append `?utm_source=your_variant_name` to your URL.
-
 
 4. If it is a multivariant flag, set the optional override to the variant you want to assign these users to.
 5. Click "Save".
 
 <ProductVideo
-    videoLight = {OverrideFeatureFlagLight}
-    videoDark = {OverrideFeatureFlagDark}
-    alt = "How to test your feature flag"
-    classes = "rounded"
+  videoLight={OverrideFeatureFlagLight}
+  videoDark={OverrideFeatureFlagDark}
+  alt="How to test your feature flag"
+  classes="rounded"
 />
 
 ## Method 2: Use `posthog.featureFlags.overrideFeatureFlags()`
@@ -52,6 +53,29 @@ posthog.featureFlags.overrideFeatureFlags( {
 
 > **Note:** The [PostHog toolbar](/docs/toolbar) is only available for the [JavaScript web SDK](/docs/libraries/js).
 
-import OverrideFeatureFlags from "../toolbar/_snippets/override-feature-flags.mdx"
+import OverrideFeatureFlags from "../toolbar/_snippets/override-feature-flags.mdx";
 
 <OverrideFeatureFlags />
+
+## Method 4: Use the MCP test evaluation tool
+
+> **Note:** This requires the [PostHog MCP server](/docs/model-context-protocol) configured in your AI coding agent (Cursor, Claude Code, VS Code, etc.).
+
+If you use an MCP-enabled coding agent, you can test flag evaluation directly from your editor with the `feature-flags-test-evaluation-create` tool. Provide a flag ID and a `distinct_id` or `person_id`, and the tool returns detailed evaluation results.
+
+Ask your agent:
+
+- `Test how the new-checkout-flow flag evaluates for user abc123.`
+- `Why doesn't the dark-mode flag match for user john@example.com?`
+
+The tool returns:
+
+- Whether the flag matched (and which variant for multivariate flags)
+- The reason for the match or no-match
+- Which condition was matched
+- The person properties used in evaluation
+- Analysis of each condition showing why it matched or didn't
+
+You can also pass an optional `timestamp` to evaluate the flag as it existed at a specific point in time.
+
+See [managing Feature Flags with MCP](/docs/feature-flags/create-flags-mcp) for setup instructions and more example prompts.
