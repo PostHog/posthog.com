@@ -453,6 +453,110 @@ export const handler() {
 
 This is also useful for shutting down a standard Node.js app.
 
+## Cookie and identity helpers
+
+> Requires `posthog-node` version >= 5.34.0.
+
+The Node SDK exports helper functions for working with PostHog's browser cookie format. These are useful when you need to manage user identity server-side without a full browser integration – for example, in AWS Lambda functions handling cross-domain redirects where you want to maintain the same distinct ID across domains.
+
+### Reading cookies from requests
+
+Use `cookieStoreFromHeader` to parse a `Cookie` header into a store that the other helpers can read:
+
+```node
+import { cookieStoreFromHeader, readPostHogCookie } from 'posthog-node'
+
+const cookieHeader = request.headers.cookie || ''
+const cookieStore = cookieStoreFromHeader(cookieHeader)
+const state = readPostHogCookie(cookieStore, '<ph_project_token>')
+
+if (state) {
+  console.log('Distinct ID:', state.distinctId)
+  console.log('Is identified:', state.isIdentified)
+  console.log('Session ID:', state.sessionId)
+  console.log('Device ID:', state.deviceId)
+}
+```
+
+If you already have access to a cookie store like Next.js `cookies()` or `request.cookies`, pass it directly to `readPostHogCookie`:
+
+```node
+import { readPostHogCookie } from 'posthog-node'
+import { cookies } from 'next/headers'
+
+const state = readPostHogCookie(cookies(), '<ph_project_token>')
+```
+
+### Creating cookies for new users
+
+When a user doesn't have a PostHog cookie, generate a new anonymous ID with `uuidv7` and serialize it with `serializePostHogCookie`:
+
+```node
+import { uuidv7, serializePostHogCookie, getPostHogCookieName } from 'posthog-node'
+
+const anonymousId = uuidv7()
+const cookieValue = serializePostHogCookie(anonymousId)
+const cookieName = getPostHogCookieName('<ph_project_token>')
+
+// Set the cookie in your response
+response.setHeader('Set-Cookie', `${cookieName}=${encodeURIComponent(cookieValue)}; Path=/; Max-Age=31536000`)
+
+// Use the same ID when capturing events
+client.capture({
+  distinctId: anonymousId,
+  event: 'redirect_tracked',
+})
+```
+
+### Converting cookie state to event properties
+
+Use `cookieStateToProperties` to extract `$session_id` and `$device_id` from cookie state for event properties:
+
+```node
+import { cookieStoreFromHeader, readPostHogCookie, cookieStateToProperties } from 'posthog-node'
+
+const state = readPostHogCookie(cookieStoreFromHeader(cookieHeader), '<ph_project_token>')
+const properties = cookieStateToProperties(state)
+
+client.capture({
+  distinctId: state?.distinctId || 'anonymous',
+  event: 'page_viewed',
+  properties: {
+    ...properties,
+    url: request.url,
+  },
+})
+```
+
+### Available functions
+
+| Function | Description |
+| :------- | :---------- |
+| `uuidv7()` | Generates a UUID v7, the same format PostHog uses for distinct IDs |
+| `getPostHogCookieName(apiKey)` | Returns the cookie name for a given project token |
+| `cookieStoreFromHeader(header)` | Parses a `Cookie` header string into a cookie store |
+| `readPostHogCookie(store, apiKey)` | Reads and parses the PostHog cookie from a cookie store |
+| `parsePostHogCookie(value)` | Parses a raw PostHog cookie value string |
+| `serializePostHogCookie(anonymousId)` | Creates a cookie value for a new anonymous user |
+| `cookieStateToProperties(state)` | Extracts `$session_id` and `$device_id` from cookie state |
+
+### Types
+
+The SDK exports these TypeScript types:
+
+```typescript
+interface PostHogCookieState {
+  distinctId: string
+  isIdentified: boolean
+  sessionId?: string
+  deviceId?: string
+}
+
+interface CookieStore {
+  get(name: string): { value: string } | undefined
+}
+```
+
 ## LLM analytics
 
 You can capture LLM usage and performance data by combining the `posthog-node` and `@posthog/ai` libraries. These work with LLM providers like OpenAI and Vercel's AI SDKs. Learn more in our [LLM analytics docs](/docs/llm-analytics).
