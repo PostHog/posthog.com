@@ -25,6 +25,30 @@ export const posthog = new PostHog(
 }
 ```
 
+# Screenshot background capture (iOS only, experimental)
+
+In screenshot mode, you can schedule screenshot capture on a background queue instead of the main thread.
+
+<CalloutBox type="caution" title="Experimental feature">
+
+This triggers Main Thread Checker warnings in Xcode and may briefly freeze the app on first capture. Consider disabling Main Thread Checker in your scheme's run diagnostics.
+
+</CalloutBox>
+
+```ts
+export const posthog = new PostHog(
+  '<ph_project_token>',
+  {
+    enableSessionReplay: true,
+    sessionReplayConfig: {
+      // Schedule screenshot capture on a background queue.
+      // iOS only. Experimental.
+      // Default is false.
+      screenshotModeBackgroundCapture: false,
+  }
+}
+```
+
 # Manual Masking
 
 There are two ways to manually mask sensitive content in your React Native app:
