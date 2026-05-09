@@ -111,6 +111,36 @@ By excluding these zeros from the percentile calculation, you can more accuratel
   alt="Screenshot of outlier handling"
 />
 
+## CUPED variance reduction
+
+CUPED (Controlled-experiment Using Pre-Experiment Data) reduces variance in experiment results by using historical data about your users. It accounts for each user's baseline behavior before the experiment started, helping you detect significant effects faster without needing more traffic.
+
+### How it works
+
+CUPED analyzes each user's pre-experiment metric values and uses them as a covariate adjustment. If a user historically has high revenue, CUPED factors that in when measuring the experiment's impact on their revenue. This reduces noise from natural user-to-user variation, making it easier to isolate the effect of your change.
+
+### When to use CUPED
+
+CUPED works best when:
+- Your metric has high natural variance between users
+- Users have historical data for the metric you're measuring
+- You want to reach statistical significance faster without increasing sample size
+
+CUPED supports **mean** and **funnel** metrics. It automatically uses 14 days of pre-experiment data as the lookback window.
+
+### Enabling CUPED
+
+You can enable CUPED at two levels:
+
+**Per experiment** – Toggle CUPED on or off in the experiment's statistics settings. This controls whether CUPED applies to supported metrics for that specific experiment.
+
+**Team default** – Set a default for all new experiments in **Experiments > Settings**. When enabled, new experiments use CUPED by default on supported metrics. You can still override this on individual experiments.
+
+If both are configured, the experiment-level setting takes precedence:
+1. Experiment-level CUPED setting (if explicitly set)
+2. Team default setting
+3. Off (disabled)
+
 ## Conversion windows
 
 Conversion windows restrict metric events to those that occur within a defined time window following a user's initial exposure to the experiment. Metric events outside of the conversion window aren't included in experiment calculations.
