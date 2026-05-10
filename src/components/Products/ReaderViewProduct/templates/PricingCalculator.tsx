@@ -6,7 +6,6 @@ import { LogSlider, sliderCurve, inverseCurve } from 'components/Pricing/Pricing
 import { calculatePrice, formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
-import OSButton from 'components/OSButton'
 import { SectionComponentProps } from '../types'
 
 const formatCompactNumber = (n: number) =>
@@ -166,8 +165,6 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
     const paidPlan = billing.plans.find((p: any) => !p.free_allocation)
     const mainTiers = paidPlan?.tiers || []
     const unit = billing.unit || 'unit'
-    const dp = getMaxDecimalPlaces(mainTiers)
-    const firstPaidTier = mainTiers.find((t: any) => parseFloat(t.unit_amount_usd) > 0)
 
     const addonSliders = activeProduct.addonSliders || []
     const addonBillingData = addonSliders.map((addon: any) => {
@@ -187,86 +184,7 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose @container">
-            <h2 className="text-3xl font-bold text-primary mt-0 mb-10">Pricing</h2>
-
-            {/* Primary: pricing numbers (left) + aside (right) */}
-            <div className="grid grid-cols-1 @2xl:grid-cols-[3fr_2fr] gap-10 @2xl:gap-16 mb-12 pb-12 border-b border-light">
-                {/* Left: the pricing as a single mixed-weight headline */}
-                <div>
-                    <p className="text-base text-secondary mb-3">TL;DR:</p>
-                    <p className="text-2xl leading-snug font-normal text-primary mb-3">
-                        {freePlan?.free_allocation && (
-                            <>
-                                <strong className="font-bold">
-                                    {freePlan.free_allocation.toLocaleString()} {unit}s free
-                                </strong>{' '}
-                                every month
-                            </>
-                        )}
-                        {firstPaidTier && (
-                            <>
-                                <br />
-                                {'then starting at '}
-                                <strong className="font-bold tabular-nums">
-                                    ${parseFloat(firstPaidTier.unit_amount_usd).toFixed(dp)}/{unit}
-                                </strong>
-                            </>
-                        )}
-                    </p>
-                    {mainTiers.length > 0 &&
-                        (() => {
-                            const lastPaidTier = [...mainTiers]
-                                .reverse()
-                                .find((t: any) => parseFloat(t.unit_amount_usd) > 0)
-                            return lastPaidTier && lastPaidTier !== firstPaidTier ? (
-                                <p className="text-base text-primary/50 mb-4">
-                                    Pricing decreases with volume — as low as{' '}
-                                    <strong className="font-semibold text-primary/70">
-                                        ${parseFloat(lastPaidTier.unit_amount_usd).toFixed(dp)}/{unit}
-                                    </strong>
-                                </p>
-                            ) : (
-                                <div className="mb-4" />
-                            )
-                        })()}
-                    <div className="flex flex-wrap items-center gap-3">
-                        <OSButton variant="primary" asLink to="https://app.posthog.com/signup" size="lg">
-                            Get started — free
-                        </OSButton>
-                        <OSButton variant="secondary" asLink to="/talk-to-a-human" size="lg">
-                            Talk to a human
-                        </OSButton>
-                    </div>
-                </div>
-
-                {/* Right: aside — how the model works */}
-                <div className="self-start">
-                    <p className="text-sm font-semibold text-primary mb-3">How our pricing works</p>
-                    <ul className="pl-5 space-y-2">
-                        <li className="list-disc text-sm text-primary/80">
-                            <strong className="text-primary font-semibold">Pay per use</strong>, not per seat. Your bill
-                            scales with usage, not headcount.
-                        </li>
-                        <li className="list-disc text-sm text-primary/80">
-                            <strong className="text-primary font-semibold">Volume discounts</strong> kick in
-                            automatically — no negotiations needed.
-                        </li>
-                        <li className="list-disc text-sm text-primary/80">
-                            <strong className="text-primary font-semibold">Set billing limits</strong> per product.
-                            Never get an unexpected bill.
-                        </li>
-                        <li className="list-disc text-sm text-primary/80">
-                            <strong className="text-primary font-semibold">We &lt;3 startups:</strong> Under 2 years old
-                            and pre-series B?{' '}
-                            <a href="/startups" className="underline">
-                                Apply for $50k in credits
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <h3 className="text-xl font-bold text-primary mb-5">Calculate your cost</h3>
+            <h2 className="text-3xl font-bold text-primary mt-0 mb-8">Calculate your cost</h2>
 
             {/* Main product: rates left, slider right */}
             {mainTiers.length > 0 && (

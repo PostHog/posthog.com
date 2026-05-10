@@ -13,6 +13,7 @@ import AskAnything from './AskAnything'
 import Installation from './Installation'
 import PostHogOnPostHog from './PostHogOnPostHog'
 import Pricing from './Pricing'
+import PricingHeadline from './PricingHeadline'
 import ComparisonSummary from './ComparisonSummary'
 import FeatureComparison from './FeatureComparison'
 import PairsWith from './PairsWith'
@@ -45,6 +46,7 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
     installation: Installation,
     'posthog-on-posthog': PostHogOnPostHog,
     pricing: Pricing,
+    'pricing-headline': PricingHeadline,
     'comparison-summary': ComparisonSummary,
     'feature-comparison': FeatureComparison,
     'pairs-with': PairsWith,
@@ -72,6 +74,7 @@ export {
     Installation,
     PostHogOnPostHog,
     Pricing,
+    PricingHeadline,
     ComparisonSummary,
     FeatureComparison,
     PairsWith,

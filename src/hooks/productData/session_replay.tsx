@@ -8,6 +8,7 @@ import {
     IconConfetti,
     IconRocket,
     IconPieChart,
+    IconReceipt,
     IconCheckCircle,
     IconPeople,
     IconInfo,
@@ -94,8 +95,9 @@ export const sessionReplay = {
      * Same shape as `productMenu`.
      */
     pricingMenu: [
-        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'pricing-headline', name: 'Pricing', icon: <IconReceipt className="size-4" /> },
         { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
         { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
         { slug: 'feature-comparison', name: 'Feature comparison', icon: <IconGraph className="size-4" /> },
         // Hidden footer CTA rendered at the bottom of the Pricing surface.
