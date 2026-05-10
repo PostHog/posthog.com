@@ -233,10 +233,84 @@ export default function Components(): JSX.Element {
                             </div>
                         </section>
                         <section id="logo">
-                            <h2>Logo</h2>
+                            <h2>
+                                <code>&lt;Logo /&gt;</code>
+                            </h2>
 
-                            <Logo />
-                            <Logo noText />
+                            <table className="w-full border-collapse border border-primary">
+                                <thead>
+                                    <tr className="bg-accent">
+                                        <th className="border border-primary px-4 py-2 text-left">Variant</th>
+                                        <th className="border border-primary px-4 py-2 text-left">Preview</th>
+                                        <th className="border border-primary px-4 py-2 text-left">Code</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2">Default (full)</td>
+                                        <td className="border border-primary px-4 py-2">
+                                            <Logo className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2">
+                                            <code className="text-xs whitespace-pre">{`<Logo />`}</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2">Default (icon only)</td>
+                                        <td className="border border-primary px-4 py-2">
+                                            <Logo noText className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2">
+                                            <code className="text-xs whitespace-pre">{`<Logo noText />`}</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2">Solid fill — primary (full)</td>
+                                        <td className="border border-primary px-4 py-2">
+                                            <Logo fill="primary" className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2">
+                                            <code className="text-xs whitespace-pre">{`<Logo fill="primary" />`}</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2">Solid fill — primary (icon)</td>
+                                        <td className="border border-primary px-4 py-2">
+                                            <Logo noText fill="primary" className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2">
+                                            <code className="text-xs whitespace-pre">{`<Logo noText fill="primary" />`}</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2">Solid fill — white (full)</td>
+                                        <td className="border border-primary px-4 py-2 bg-black">
+                                            <Logo fill="white" className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2">
+                                            <code className="text-xs whitespace-pre">{`<Logo fill="white" />`}</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2">Solid fill — white (icon)</td>
+                                        <td className="border border-primary px-4 py-2 bg-black">
+                                            <Logo noText fill="white" className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2">
+                                            <code className="text-xs whitespace-pre">{`<Logo noText fill="white" />`}</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2">Hex fill (full)</td>
+                                        <td className="border border-primary px-4 py-2">
+                                            <Logo fill="#111" className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2">
+                                            <code className="text-xs whitespace-pre">{`<Logo fill="#111" />`}</code>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </section>
                         <section id="og-templates">
                             <h2>Open graph image templates</h2>
