@@ -9,9 +9,18 @@ availability:
 sourceId: Postgres
 ---
 
-The Postgres connector can link your database tables to PostHog.
+The Postgres connector can link your database tables to PostHog. When linking a Postgres source, you choose between two access methods:
 
-To link Postgres:
+- **Sync to warehouse** (default) - Syncs selected tables into PostHog-managed storage. This enables you to join Postgres data with PostHog events, persons, and other sources using SQL.
+- **Query directly** (beta) - Runs queries live against your Postgres database without syncing data into PostHog. This is useful when you want real-time results from your database. Data from direct query sources can't be joined with PostHog data.
+
+You select the access method when creating a new Postgres source. The choice can't be changed after creation.
+
+## Sync to warehouse
+
+This is the default access method. PostHog syncs your selected Postgres tables into its managed storage on a schedule, so you can query them with SQL and join them with your PostHog data.
+
+To link Postgres with the sync to warehouse method:
 
 1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
 2. Click **New source** and select Postgres
@@ -52,3 +61,26 @@ import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 <InboundIpAddresses />
 
 > **Note:** We currently don't support connections using IPv6, therefore, you may need to enable IPv4 connections to your database. This is required for Supabase, for example.
+
+## Query directly
+
+The **Query directly** access method runs queries live against your external Postgres connection from the [SQL editor](https://app.posthog.com/sql). PostHog doesn't sync or store the data — it reads directly from your database each time you run a query.
+
+To link Postgres with the query directly method:
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
+2. Click **New source** and select Postgres
+3. Under **How should PostHog query this source?**, select **Query directly**
+4. Enter a **Name** for the connection. This name appears in the SQL editor when selecting a connection.
+5. Enter your database connection details (host, port, database, user, password, schema)
+6. Click **Link**
+
+Once linked, the connection appears in the SQL editor's connection selector. Select it to run queries directly against your Postgres database.
+
+<CalloutBox icon="IconInfo" title="Limitations of direct querying" type="fyi">
+
+- Data from direct query sources can't be joined with PostHog data (events, persons, or other sources).
+- SSH tunnels are not supported for direct query connections.
+- The access method can't be changed after creation.
+
+</CalloutBox>
