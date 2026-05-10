@@ -26,7 +26,7 @@ export const objectAccessControlLight =
 export const objectAccessControlDark =
   "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_object_dark_17f1adda40.png";
 
-PostHog's access control system allows you to manage permissions at three levels: organization, project, and resource. This hierarchical approach provides granular control over who can view and edit different parts of PostHog.
+PostHog's access control system allows you to manage permissions at four levels: organization, project, resource, and property. This hierarchical approach provides granular control over who can view and edit different parts of PostHog.
 
 ## Levels of access control
 
@@ -107,7 +107,7 @@ Currently, resource access controls are available for:
 - Web analytics
 - (more resource types coming soon – looking for others? Let us know!)
 
-Note: We do not yet support limiting access to querying data, viewing replays, or accessing person / group profiles. Support for these features is planned for the near future.
+Note: We do not yet support limiting access to viewing replays or accessing person / group profiles. Support for these features is planned for the near future. See [property-level access controls](#4-property-level) for how to restrict access to specific event and person properties.
 
 Resource access controls have four possible access levels:
 
@@ -151,6 +151,28 @@ You cannot set resource-level access controls for organization admins, as they a
   alt="Resource access control"
   classes="rounded"
 />
+
+### 4. Property level
+
+Property-level access controls let you restrict access to specific event and person properties. This is useful for hiding sensitive data like PII (e.g., credit card numbers or ID numbers) from other users in your project.
+
+Access controls are set on property definitions and enforced in HogQL queries. When a user doesn't have access to a property, they can't reference or read it on any event or person.
+
+There are three access levels for properties:
+
+- **Read & write** – Full access to view and query the property (default)
+- **Read** – Can view and query the property
+- **None** – Cannot reference or read the property in any query
+
+#### Property access hierarchy
+
+When determining a user's access level for a property, PostHog checks rules in this order (highest priority first):
+
+1. **User-specific rules** – Access set directly for a specific organization member
+2. **Role-specific rules** – Access set for a role the user belongs to (most permissive role wins)
+3. **Default rule** – The default access level set on the property definition
+
+If no rules are configured for a property, the default access level is **Read & write**.
 
 ## How object access control precedence works
 
