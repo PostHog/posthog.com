@@ -161,13 +161,13 @@ const Team = ({ id, productData }: SectionComponentProps) => {
     const team = allSqueakTeam.nodes.find((t: any) => t.slug === teamSlug)
     if (!team) return null
 
-    const leadIds = new Set<string | number>(
-        (team.leadProfiles?.data ?? []).map((l: { id: string | number }) => String(l.id))
-    )
+    const leadIds = new Set<string>((team.leadProfiles?.data ?? []).map((l: { id: string | number }) => String(l.id)))
 
-    const profiles: ProfileNode[] = (allSqueakProfile.nodes as ProfileNode[]).filter((p) =>
-        p.teams?.data?.some((t) => t.attributes?.slug === teamSlug)
-    )
+    const isLead = (p: ProfileNode) => leadIds.has(String(p.squeakId))
+
+    const profiles: ProfileNode[] = (allSqueakProfile.nodes as ProfileNode[])
+        .filter((p) => p.teams?.data?.some((t) => t.attributes?.slug === teamSlug))
+        .sort((a, b) => Number(isLead(b)) - Number(isLead(a)))
 
     const crestImageUrl = team.crest?.data?.attributes?.url
     const heroUrl = team.teamImage?.image?.data?.attributes?.url
@@ -228,7 +228,7 @@ const Team = ({ id, productData }: SectionComponentProps) => {
                                 biography={profile.biography || ''}
                                 pineappleOnPizza={profile.pineappleOnPizza}
                                 startDate={profile.startDate}
-                                isTeamLead={leadIds.has(String(profile.id))}
+                                isTeamLead={isLead(profile)}
                                 teams={profile.teams}
                                 viewingOwnTeam={true}
                             />
