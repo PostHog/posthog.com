@@ -19,7 +19,7 @@ Second, they're more motivated by work that directly benefits users, and getting
 
 > "We're ruthless about working on stuff that our users will see and care about. We are not ruthless about shaping and polishing our code into a radiant-cut gem of perfection."
 
-Third, they love jumping on user problems and solving them. Whether it's an papercut they can solve quickly, or a useful feature that other users will benefit from, product engineers live for sparking joy by proactively solving problems.
+Third, they love jumping on user problems and solving them. Whether it's a papercut they can solve quickly, or a useful feature that other users will benefit from, product engineers live for sparking joy by proactively solving problems.
 
 By being customer-obsessed, product engineers become more open-minded. They care more about solving real user problems than dogmatically following best practices just because "that's how it's done."
 
