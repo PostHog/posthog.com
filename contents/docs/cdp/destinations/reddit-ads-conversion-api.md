@@ -6,6 +6,7 @@ templateId:
 
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
+import AdDestinationPersonDataFaq from "../_snippets/ad-destination-person-data-faq.mdx"
 
 
 You'll also need access to the relevant Reddit Ads account.
@@ -39,6 +40,8 @@ You'll also need access to the relevant Reddit Ads account.
 <TemplateParameters />
 
 ## FAQ
+
+<AdDestinationPersonDataFaq />
 
 ### Is the source code for this destination available?
 
