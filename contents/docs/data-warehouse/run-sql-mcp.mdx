@@ -14,6 +14,7 @@ With MCP, your coding agent can:
 - **Explore your schema** – "What tables do I have?" or "Show me the columns in `stripe_charges`" to discover available data
 - **Generate queries from questions** – "Write a HogQL query to find the top users by event count" to get a query you can refine
 - **Query across sources** – Join PostHog events with Stripe, HubSpot, or any linked warehouse table
+- **Query external databases directly** – Run queries against Postgres or DuckDB connections without syncing data into PostHog
 - **Manage views** – Create, update, materialize, and delete saved views in your Data Warehouse programmatically
 - **Manage import sources** – Create, configure, and sync data warehouse sources like Postgres, Stripe, and HubSpot
 
@@ -21,12 +22,20 @@ With MCP, your coding agent can:
 
 The MCP server provides these tools for running SQL:
 
-| Tool                                 | Description                                                                                                                                                                                             |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `query-run`                          | Run a HogQL query and return results. Supports any valid HogQL syntax including joins, CTEs, subqueries, and window functions.                                                                          |
-| `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Returns the query string so you can review or modify it before running. Requires [AI data processing approval](/docs/posthog-ai/allow-access). |
-| `property-definitions`               | List all event and person properties in your project. Useful for understanding what data is available before writing a query.                                                                           |
-| `event-definitions-list`             | List all event definitions in your project with volume and usage data.                                                                                                                                  |
+| Tool                                 | Description                                                                                                                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `query-run`                          | Run a HogQL query and return results. Supports any valid HogQL syntax including joins, CTEs, subqueries, and window functions. Accepts an optional `connectionId` to query Postgres or DuckDB sources directly. |
+| `query-validate`                     | Dry-run a HogQL query to check for errors without executing it. Returns structured errors, warnings, and referenced tables. Accepts an optional `connectionId` to validate against an external source.          |
+| `hogql-schema`                       | List all tables and columns available to HogQL queries. Accepts an optional `connectionId` to return the schema of a Postgres or DuckDB source instead of the ClickHouse catalog.                               |
+| `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Returns the query string so you can review or modify it before running. Requires [AI data processing approval](/docs/posthog-ai/allow-access).         |
+| `property-definitions`               | List all event and person properties in your project. Useful for understanding what data is available before writing a query.                                                                                   |
+| `event-definitions-list`             | List all event definitions in your project with volume and usage data.                                                                                                                                          |
+
+### Query external data sources directly
+
+The `query-run`, `query-validate`, and `hogql-schema` tools accept an optional `connectionId` parameter. When set, queries run against that external data source (such as a Postgres or DuckDB direct-query connection) instead of ClickHouse.
+
+To find available connection IDs, use the `external-data-sources-list` tool.
 
 ## View management tools
 
@@ -105,6 +114,13 @@ For source management:
 - `Trigger a sync for my Postgres source.`
 - `Show me the sync status for all my import schemas.`
 - `Cancel the running sync on the hubspot_contacts table.`
+
+For querying external data sources directly:
+
+- `List my external data sources so I can find connection IDs.`
+- `Show me the schema of my Postgres connection.`
+- `Run a query against my DuckDB source to count all rows in the users table.`
+- `Validate this query against my Postgres connection before running it.`
 
 ## Install the MCP server
 
