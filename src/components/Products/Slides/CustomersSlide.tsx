@@ -127,7 +127,13 @@ export default function CustomersSlide({
         <SlideContainer>
             <ScrollArea className="h-full">
                 <h2 className="text-4xl font-bold text-primary mb-6 text-center">
-                    Customers who love <Logo noText fill="primary" className="h-14 inline-block relative -top-1 mx-1" />{' '}
+                    Customers who love{' '}
+                    <Logo
+                        wordmark={false}
+                        variant="mono"
+                        color="primary"
+                        className="h-14 inline-block relative -top-1 mx-1"
+                    />{' '}
                     {productName}
                 </h2>
 
