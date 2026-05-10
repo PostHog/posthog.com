@@ -9,6 +9,8 @@ import {
     IconRefresh,
     IconClockRewind,
     IconTextWidthFixed,
+    IconDownload,
+    IconCheck,
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Select } from '../RadixUI/Select'
@@ -35,6 +37,7 @@ import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
 import { getProseClasses, isMarkdownContentPath } from '../../constants'
 import { useWindow } from '../../context/Window'
+import { useToast } from '../../context/Toast'
 import { MenuItem, useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
 import { navigate } from 'gatsby'
@@ -233,6 +236,63 @@ const EditOnGitHubButton = ({ filePath, sourceInstanceName }: { filePath?: strin
             }/${filePath}`}
             icon={<IconPencil />}
         />
+    )
+}
+
+const EXCLUDED_DOCS_PREFIXES = ['/docs/libraries/', '/docs/api/', '/docs/endpoints/', '/docs/open-api-spec/']
+
+const InstallSkillButton = ({ pathname }: { pathname: string }) => {
+    const { addToast } = useToast()
+    const [popoverOpen, setPopoverOpen] = React.useState(false)
+
+    if (!pathname.startsWith('/docs/')) return null
+    if (EXCLUDED_DOCS_PREFIXES.some((prefix) => pathname.startsWith(prefix))) return null
+
+    const segments = pathname
+        .replace(/^\/docs\//, '')
+        .replace(/\/$/, '')
+        .split('/')
+    const firstSegment = segments[0]
+    if (!firstSegment) return null
+
+    const cleanSlug = firstSegment.startsWith('posthog-') ? firstSegment.slice(8) : firstSegment
+    const skillId = `posthog-docs-${cleanSlug}`
+    const downloadUrl = `https://github.com/PostHog/context-mill/releases/latest/download/${skillId}.zip`
+
+    const handleInstall = () => {
+        setPopoverOpen(false)
+        addToast({
+            description: (
+                <span className="inline-flex items-center gap-1.5">
+                    <IconCheck className="size-4 text-green" />
+                    Unzip into .claude/skills/ in your project to use as AI context
+                </span>
+            ),
+            duration: 5000,
+        })
+    }
+
+    return (
+        <Popover
+            trigger={
+                <span>
+                    <OSButton icon={<IconDownload />} />
+                </span>
+            }
+            dataScheme="secondary"
+            open={popoverOpen}
+            onOpenChange={setPopoverOpen}
+        >
+            <a
+                href={downloadUrl}
+                download
+                onClick={handleInstall}
+                className="flex items-center gap-2 px-2 py-1 text-sm rounded hover:bg-accent transition-colors w-full"
+            >
+                <IconDownload className="size-4" />
+                <span>Install as a skill</span>
+            </a>
+        </Popover>
     )
 }
 
@@ -1084,6 +1144,7 @@ function ReaderViewContent({
                         } ${websiteMode && showSidebar && isTocVisible ? '@6xl:bg-primary pl-0 box-content' : ''}`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
+                        <InstallSkillButton pathname={pathname} />
                         <ConditionalMarkdownDropdown pageUrl={appWindow?.path} />
                         <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
                         <EditHistoryPopover commits={commits} />

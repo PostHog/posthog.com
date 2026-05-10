@@ -486,7 +486,31 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter }) => {
-    if (process.env.GATSBY_MINIMAL === 'true') return
+    if (process.env.GATSBY_MINIMAL === 'true') {
+        if (process.env.GENERATE_DOCS_MD === 'true') {
+            // Minimal build with GENERATE_DOCS_MD: only convert HTML to markdown and generate llms.txt
+            const markdownPathsRegex = `/^/(${MARKDOWN_CONTENT_PATHS.map((p) => p.replace('/', '')).join('|')})/`
+            const docsQuery = (await graphql(`
+                query {
+                    allMdx(filter: { fields: { slug: { regex: "${markdownPathsRegex}" } } }) {
+                        nodes {
+                            fields {
+                                slug
+                            }
+                            frontmatter {
+                                title
+                            }
+                        }
+                    }
+                }
+            `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
+
+            const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
+            const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
+            generateLlmsTxt(docsPages)
+        }
+        return
+    }
     // Generate API spec markdown files first
     try {
         const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
