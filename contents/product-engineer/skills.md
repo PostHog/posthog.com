@@ -87,7 +87,7 @@ Product engineers also need to be practical about choosing the best tool for the
 
 You can't be a truly effective product engineer without AI asisstance anymore. This is a straightforward fact. It's too powerful a tool to ignore, so learning how to use AI effectively is table stakes for a product engineer.
 
-This doesn't, however, invalidate invalidate traditional engineering skills and knowledge because understanding the proper architecture of a software project protects you against the decision-making of the robot.
+This doesn't, however, invalidate traditional engineering skills and knowledge because understanding the proper architecture of a software project protects you against the decision-making of the robot.
 
 ## 7. Design and UX fundamentals
 
