@@ -168,6 +168,8 @@ Instead of setting a fixed threshold, anomaly detection uses statistical algorit
 - You want to detect subtle changes that a fixed threshold would miss
 - Your metrics have seasonal patterns that make static thresholds unreliable
 
+Anomaly detection alerts also support [breakdowns](#alerts-on-breakdowns). When your insight has a breakdown, the detector monitors each breakdown value independently and fires on the first anomaly detected.
+
 ### Creating an anomaly detection alert
 
 1. Open an existing [trend insight](/docs/product-analytics/trends) or create a new one.
@@ -251,6 +253,8 @@ For ensemble detectors, the chart shows individual score lines for each sub-dete
 
 Use the date range dropdown to test the detector over different time periods (e.g., last 24 hours, last 7 days, last 30 days).
 
+When your insight has breakdowns, the simulation displays results for each breakdown value (up to 25) in a scrollable list of mini-charts, with aggregated statistics at the top.
+
 ### Create anomaly detection alerts with PostHog AI
 
 You can create anomaly detection alerts using [PostHog AI](/docs/posthog-ai/overview) or the [MCP server](/docs/model-context-protocol). Example prompts:
@@ -303,7 +307,9 @@ Use this if you want to be alerted right away when the insight value rises/incre
 
 ## Alerts on breakdowns
 
-When you set an alert on a trend with a breakdown, the alert will be triggered when any of the breakdown values breaches the thresholds set.
+Both threshold and anomaly detection alerts support breakdowns. When you set an alert on a trend with a breakdown, the alert fires when any of the breakdown values triggers the alert condition.
+
+For **threshold alerts**, each breakdown value is checked against the thresholds you've set. For **anomaly detection alerts**, each breakdown value (up to 25) is monitored independently by the detector, and the alert fires on the first anomaly detected. Breakdown values with insufficient data for the detector are skipped.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/breakdown_alert_7bd87114cb.png"
