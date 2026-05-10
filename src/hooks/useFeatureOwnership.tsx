@@ -109,12 +109,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'currency-rate-dataset': {
         feature: 'Currency rate dataset',
-        owner: ['growth', 'customer-analytics'],
+        owner: ['growth', 'web-analytics'],
         label: 'feature/currency-rate',
     },
     'customer-analytics': {
         feature: 'Customer Analytics',
-        owner: ['customer-analytics'],
+        owner: ['web-analytics'],
     },
     dashboards: {
         feature: 'Dashboards',
@@ -184,7 +184,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'group-analytics': {
         feature: 'Group analytics',
-        owner: ['customer-analytics'],
+        owner: ['web-analytics'],
     },
     heatmaps: {
         feature: 'Heatmaps',
@@ -211,7 +211,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'llm-gateway': {
         feature: 'LLM gateway',
-        owner: ['posthog-ai'],
+        owner: ['llm-gateway'],
         label: false,
     },
     'live-events': {
@@ -340,11 +340,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'revenue-analytics': {
         feature: 'Revenue analytics',
-        owner: ['customer-analytics'],
+        owner: ['web-analytics'],
     },
     'revenue-data-management': {
         feature: 'Revenue data management',
-        owner: ['customer-analytics'],
+        owner: ['web-analytics'],
     },
     sdks: {
         feature: 'SDKs & client libraries',
@@ -408,6 +408,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Signals',
         owner: ['signals'],
         label: 'feature/signals',
+    },
+    'slack-app': {
+        feature: 'Slack app',
+        owner: ['posthog-ai'],
+        label: 'feature/slack-app',
     },
     settings: {
         feature: 'Settings structure (personal & project)',

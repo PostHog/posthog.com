@@ -565,5 +565,13 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/raduraicea/",
         "profile_id": 34711
+    },
+    {
+        "handle": "matheus-batista",
+        "name": "Matheus Batista",
+        "role": "Software Engineer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/matheusvbatista/",
+        "profile_id": 41646
     }
 ]

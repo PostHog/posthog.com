@@ -19,7 +19,7 @@ Software testing used to be relatively straightforward.
 
 You wrote business logic, defined expected outputs, and verified them with unit, integration, and UI tests. With the same input, your system behaved the same way every time.
 
-AI agents changed this.
+[AI agents](/newsletter/agent-first-product-engineering) changed this.
 
 Instead of fixed logic, we now build systems powered by models that are probabilistic. The same input can produce different outputs. Behavior depends on prompts, context, tool calls, and external data. The "correct" answer is fuzzy.
 

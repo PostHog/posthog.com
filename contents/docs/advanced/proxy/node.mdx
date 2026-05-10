@@ -19,7 +19,7 @@ This proxy uses Node.js as a lightweight server that intercepts requests to your
 Here's the request flow:
 
 1. User triggers an event in your app
-2. Request goes to your Node.js server (e.g., `yourdomain.com/ph`)
+2. Request goes to your Node.js server (e.g., `yourdomain.com/yourpath`)
 3. The proxy middleware intercepts requests matching your prefix
 4. It rewrites headers and forwards the request to PostHog using `fetch`
 5. PostHog's response is returned to the user under your domain
@@ -215,7 +215,7 @@ import cors from 'cors'
 import proxy from './proxy.js'
 
 const corsMiddleware = cors({ origin: 'https://yourdomain.com' })
-const posthogMiddleware = proxy({ prefix: '/ph' })
+const posthogMiddleware = proxy({ prefix: '/yourpath' })
 
 const server = http.createServer((req, res) => {
   corsMiddleware(req, res, (err) => {
@@ -277,14 +277,14 @@ In your application code, update your PostHog initialization:
 
 ```js file=US
 posthog.init('<ph_project_token>', {
-  api_host: 'http://localhost:3000/ph',
+  api_host: 'http://localhost:3000/yourpath',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
 posthog.init('<ph_project_token>', {
-  api_host: 'http://localhost:3000/ph',
+  api_host: 'http://localhost:3000/yourpath',
   ui_host: 'https://eu.posthog.com'
 })
 ```
@@ -301,7 +301,7 @@ Confirm events are flowing through your proxy:
 
 1. Test the proxy directly:
    ```bash
-   curl -I http://localhost:3000/ph/flags?v=2
+   curl -I http://localhost:3000/yourpath/flags?v=2
    ```
    You should see a `200 OK` response.
 

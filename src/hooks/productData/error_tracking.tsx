@@ -1,4 +1,6 @@
+import React from 'react'
 import { IconWarning } from '@posthog/icons'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const errorTracking = {
     Icon: IconWarning,
@@ -171,6 +173,33 @@ export const errorTracking = {
                     shadow: true,
                 },
             ],
+        },
+        {
+            title: 'MCP',
+            headline: 'Debug errors from your editor',
+            description:
+                'Triage issues, inspect stack traces, and generate fixes from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            features: [
+                {
+                    title: 'Inspect error details',
+                    description: 'Give your agent access to full stack traces, error messages, and relevant metadata.',
+                },
+                {
+                    title: 'Reproduce errors',
+                    description:
+                        'Identify failure points and perform root cause analysis using the captured stack trace context.',
+                },
+                {
+                    title: 'Debug and create fixes',
+                    description: 'Prompt your agent to generate code fixes based on the error details.',
+                },
+                {
+                    title: 'Update issue status',
+                    description:
+                        'Mark issues as resolved, archived, suppressed, or pending release directly from your code editor.',
+                },
+            ],
+            children: <MCPInstall />,
         },
     ],
     questions: [

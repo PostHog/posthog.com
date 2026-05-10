@@ -579,8 +579,8 @@ const products: Product[] = [
         color: 'blue',
         description: 'Built-in customer support with chat widget and unified inbox.',
         types: ['Support'],
-        status: 'WIP',
-        badge: 'ALPHA',
+        status: 'Production',
+        badge: 'BETA',
         pricing: {
             cta: {
                 url: '/docs/support',

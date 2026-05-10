@@ -102,6 +102,28 @@ Here are some common examples:
 
 > **Note:** Only standard 5-field cron expressions are supported. Six-field expressions (with seconds) are not allowed.
 
+## Schedule changes with MCP
+
+You can also schedule flag changes programmatically using the [PostHog MCP server](/docs/feature-flags/create-flags-mcp#scheduled-change-tools). This enables AI coding agents to create, list, update, and delete scheduled changes directly from your code editor.
+
+The MCP server provides five tools for scheduled changes:
+
+| Tool                       | Description                                                                                             |
+| -------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `scheduled-changes-list`   | List scheduled changes in the current project. Filter by flag ID to see schedules for a specific flag.  |
+| `scheduled-changes-get`    | Get a single scheduled change by ID, including payload, timing, and execution status.                   |
+| `scheduled-changes-create` | Schedule a future change to a feature flag (enable/disable, add release condition, or update variants). |
+| `scheduled-changes-update` | Update a pending scheduled change's payload, timing, or recurrence settings.                            |
+| `scheduled-changes-delete` | Delete a scheduled change so it won't be executed.                                                      |
+
+Example prompts:
+
+- `Schedule the new-checkout flag to enable at midnight tomorrow.`
+- `List all pending scheduled changes for my feature flags.`
+- `Cancel the scheduled rollout for the dark-mode flag.`
+
+See the [MCP server docs](/docs/model-context-protocol) for setup instructions.
+
 ## Copy scheduled changes across projects
 
 When [copying feature flags across projects](/docs/feature-flags/multi-project-feature-flags), you can optionally include pending scheduled changes. This is useful when you want to replicate your entire flag configuration, including future automated changes, to another project.

@@ -1,43 +1,32 @@
-### 🎨 Goal 1: Survey Platform UX Simplification
+### 🔍 Goal 1: Surveys research & pricing exploration
 
-> Why: The current survey creation flow is complex. We need to simplify it by organizing surveys by purpose and use case.
+> Why: We're in exploration mode on Surveys. We need to determine the product's future direction by understanding willingness to pay and testing a simpler pricing model.
+
+> Who: <TeamMember name="Lucas Faria" photo />, <TeamMember name="Cory Slater" photo />
+
+Talk to customers and explore a new pricing model:
+- Speak with ~10 customers who have consistently created surveys or received responses recently
+- Conduct 1:1 calls throughout the quarter, framed around rethinking the future of the product
+- Explore a flat monthly fee for a set number of responses, with a reduced free tier
+- Explore including branding removal in the paid tier
+- Use research outcomes to decide whether to invest further, change pricing, or sunset the product
+
+### 🪶 Goal 2: Surveys MCP & skills
+
+> Why: Make Surveys usable from agentic Workflows by exposing it through MCP and skills.
 
 > Who: <TeamMember name="Lucas Faria" photo />
 
-Restructure the surveys experience around specific survey types and use cases:
-- Create dedicated pages for different survey types (hosted surveys, metric-based surveys like NPS/CSAT, small in-app feedback collection)
-- Figure out our current North Star metrics (Usage + NDR)
-- Make it intuitive for users to pick the right survey type for their needs
+Ship Surveys MCP tools and skills so users can create and manage surveys from AI clients. Add it as an Early Access feature so users can opt in and signal interest.
 
-### 🎯 Goal 2: Product Tours on Public Beta
+### 📊 Goal 3: MCP analytics
 
-> Why: Product Tours is a highly requested feature that complements our surveys and feedback collection capabilities.
+> Why: As MCP usage grows, we want to capture the *why* behind MCP calls – not just cost/latency – and whether users accomplished their goal.
 
-> Who: <TeamMember name="Adam Bowker" photo />
+> Who: <TeamMember name="Lucas Faria" photo />
 
-Ship a limited feature set (Tours, Announcements, Banners) for Product Tours to Public Beta:
-- Deliver core Product Tours functionality
-- Enabled for everyone (self-serve)
-- Come up with a pricing plan
-
-### 🌎 Goal 3: Collective Qualitative Feedback on Autopilot (Surveys Everywhere v2)
-
-> Why: Users shouldn't have to think about "creating a survey" — they should just tell us how they want to collect feedback.
-
-> Who: <TeamMember name="Lucas Faria" photo />, <TeamMember name="Adam Bowker" photo />, and <TeamMember name="Cory Slater" photo />
-
-Evolve the surveys paradigm from "create a survey" to "how do you want to collect feedback":
-- Enable feedback collection from feature flags, experiments, and errors
-- Make qualitative feedback collection feel automatic and contextual
-
-### 🤖 Goal 4: PostHog AI User Interviews
-
-> Why: AI-powered user interviews could be a game-changer for qualitative research at scale.
-
-> Who: <TeamMember name="Lucas Faria" photo />, <TeamMember name="Adam Bowker" photo />, and <TeamMember name="Cory Slater" photo />
-
-Explore and validate AI-powered user interviews:
-- Talk to customers to understand if this is a real problem worth solving
-- Write an RFC on what we're trying to solve
-- Understand how to integrate with PostHog's AI Platform
-- Benchmark against competitors
+Build bare-bones infrastructure for MCP analytics:
+- Ship an initial version in the PostHog MCP server
+- Capture user context around MCP calls (intent, outcome), not just telemetry
+- Work closely with the analytics and growth teams
+- Potential naming: "MCP Insights" or "MCP Feedback"

@@ -2,7 +2,7 @@
 title: Create an insight-based endpoint with variables
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 This guide walks through creating an endpoint from an insight that has a breakdown, then querying it using the `variables` field to filter results at execution time. We'll create an endpoint that shows daily active users by OS, filterable by a specific OS.
 
@@ -107,7 +107,6 @@ Only breakdown variables can be passed to a materialized insight-based endpoint.
 Breakdown variables work with:
 
 - **TrendsQuery** - filter trend data by breakdown value
-- **FunnelsQuery** - filter funnel results by breakdown value
 - **RetentionQuery** - filter retention cohorts by breakdown value
 
 Insights with multiple breakdowns are supported. Each breakdown property becomes a separate variable that you can pass when executing the endpoint.

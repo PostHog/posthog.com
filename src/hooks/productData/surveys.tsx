@@ -4,6 +4,7 @@ import OSButton from 'components/OSButton'
 import { IconJavaScript, IconApple, IconAndroid, IconReactNative, IconFlutter } from 'components/OSIcons'
 import Link from 'components/Link'
 import { Shadow } from '@inkeep/cxkit-react'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const surveys = {
     Icon: IconMessage,
@@ -320,6 +321,32 @@ export const surveys = {
                 },
             ],
         },
+        {
+            title: 'MCP',
+            headline: 'Manage surveys from your editor',
+            description:
+                'Create, update, and analyze surveys from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            features: [
+                {
+                    title: 'Create surveys',
+                    description: 'Spin up a new in-app survey without switching to the PostHog UI.',
+                },
+                {
+                    title: 'Check survey performance',
+                    description: 'Pull response rates, completion stats, and results for any survey.',
+                },
+                {
+                    title: 'Iterate on live surveys',
+                    description: 'Update questions, targeting, or appearance of surveys without leaving your editor.',
+                },
+                {
+                    title: 'Global stats',
+                    description:
+                        'Get all surveys in the project, view aggregated response statistics, or apply filters.',
+                },
+            ],
+            children: <MCPInstall />,
+        },
     ],
     questions: [
         {
@@ -395,14 +422,13 @@ export const surveys = {
     },
     ai: {
         // title: '',
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_aeb8302376.png',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_284d9e66f4.png',
         imageAlt: 'PostHog AI and surveys',
-        description: 'build surveys more efficiently',
+        description: 'collect user feedback and contextualize the results with product data',
         skills: [
-            'Generate complete surveys based on your research goals',
-            'Suggest appropriate question types(freeform text, rating scales, multiple choice, etc.)',
-            'Help you set up display conditions and targeting',
-            'Recommend survey templates for common use cases',
+            'Generates complete surveys with display conditions and targeting',
+            'Suggests appropriate question types (freeform text, rating scales, multiple choice, etc.) based on your research goals',
+            'Analyzes the results and provides insights',
         ],
         prompts: [
             'Create an NPS survey for my mobile app users',

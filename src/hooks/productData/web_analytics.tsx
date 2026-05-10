@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconPieChart } from '@posthog/icons'
 import Link from 'components/Link'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const webAnalytics = {
     Icon: IconPieChart,
@@ -281,6 +282,33 @@ export const webAnalytics = {
                     description: 'No additional cost beyond event usage',
                 },
             ],
+        },
+        {
+            title: 'MCP',
+            headline: 'Query traffic from your editor',
+            description:
+                'Check traffic, investigate anomalies, and build traffic dashboards from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            features: [
+                {
+                    title: 'Validate deploys',
+                    description: 'Check whether traffic to specific pages changed after an update.',
+                },
+                {
+                    title: 'Diagnose anomalies',
+                    description: 'Investigate sudden drops in pageviews or sessions as context for your coding agent.',
+                },
+                {
+                    title: 'Analyze traffic sources',
+                    description:
+                        'Break down which referrers, UTMs, or channels are driving visits to prioritize what to build next.',
+                },
+                {
+                    title: 'Monitor page performance',
+                    description:
+                        'Track bounce rates, session durations, and page-level trends to catch regressions early.',
+                },
+            ],
+            children: <MCPInstall />,
         },
     ],
     postHogOnPostHog: {

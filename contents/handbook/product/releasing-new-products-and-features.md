@@ -123,3 +123,4 @@ Team members can be assigned specific tasks within the RFC checklist.
 - [Small teams and launching products](/handbook/company/small-teams#launching-new-products-and-features)
 - [Product announcements](/handbook/marketing/product-announcements)
 - [Per-product activation](/handbook/growth/growth-engineering/per-product-activation)
+- [Writing ClickHouse queries for new products](/handbook/engineering/databases/clickhouse-queries-new-products)
