@@ -2,7 +2,7 @@
 title: Capture exceptions for error tracking
 ---
 
-import Tab from "components/Tab"
+import Tab from "components/Tab";
 
 You can track and monitor errors and exceptions in your code by capturing [exception events](/docs/error-tracking/issues-and-exceptions). This can be done automatically when exceptions are thrown in your code, or manually by calling the exception capture method.
 
@@ -12,17 +12,17 @@ Exceptions are a special type of [event](/docs/data/events) in PostHog. Similar 
 
 To help group exceptions into issues and help you debug them, PostHog automatically captures the following properties:
 
-import ExceptionPropertiesTable from './_snippets/exception-properties-table.mdx'
+import ExceptionPropertiesTable from "./_snippets/exception-properties-table.mdx";
 
 <ExceptionPropertiesTable />
 
 Like normal events, it's important to [identify the user](/docs/product-analytics/identify) when capturing exceptions.
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 <CalloutBox icon="IconInfo" title="Source maps" type="fyi">
 
-  If you serve minified or compiled code, PostHog needs source maps to display the correct stack traces. [Configure source maps](/docs/error-tracking/upload-source-maps) to get the most out of your exception events.
+If you serve minified or compiled code, PostHog needs source maps to display the correct stack traces. [Configure source maps](/docs/error-tracking/upload-source-maps) to get the most out of your exception events.
 
 </CalloutBox>
 
@@ -33,22 +33,22 @@ If you followed one of our guides to [set up error tracking](/docs/error-trackin
 For browser SDKs (JavaScript Web, React, Next.js, etc.), you can configure which types of errors are automatically captured using the `capture_exceptions` option:
 
 ```js
-posthog.init('<ph_project_token>', {
-    api_host: '<ph_api_client_host>',
-    defaults: '<ph_posthog_js_defaults>',
-    capture_exceptions: {
-      capture_unhandled_errors: true, // default
-      capture_unhandled_rejections: true, // default
-      capture_console_errors: false // default
-  }
-})
+posthog.init("<ph_project_token>", {
+  api_host: "<ph_api_client_host>",
+  defaults: "<ph_posthog_js_defaults>",
+  capture_exceptions: {
+    capture_unhandled_errors: true, // default
+    capture_unhandled_rejections: true, // default
+    capture_console_errors: false, // default
+  },
+});
 ```
 
-| Option | Default | Description |
-|---|---|---|
-| `capture_unhandled_errors` | `true` | Captures uncaught errors via `window.onerror`. |
-| `capture_unhandled_rejections` | `true` | Captures unhandled promise rejections via `window.onunhandledrejection`. |
-| `capture_console_errors` | `false` | Captures calls to `console.error` as exception events. |
+| Option                         | Default | Description                                                              |
+| ------------------------------ | ------- | ------------------------------------------------------------------------ |
+| `capture_unhandled_errors`     | `true`  | Captures uncaught errors via `window.onerror`.                           |
+| `capture_unhandled_rejections` | `true`  | Captures unhandled promise rejections via `window.onunhandledrejection`. |
+| `capture_console_errors`       | `false` | Captures calls to `console.error` as exception events.                   |
 
 You can also pass `capture_exceptions: true` to enable all default options, or `capture_exceptions: false` to disable autocapture entirely.
 
@@ -68,14 +68,14 @@ Never manually capture `$exception` events using `posthog.capture('$exception', 
 posthog.captureException(error, {
   custom_property: "custom_value",
   custom_list: ["custom_value_1", "custom_value_2"],
-})
+});
 ```
 
 ```javascript file=Node.js
-posthog.captureException(e, 'user_distinct_id', {
+posthog.captureException(e, "user_distinct_id", {
   custom_property: "custom_value",
   custom_list: ["custom_value_1", "custom_value_2"],
-})
+});
 ```
 
 ```python
@@ -86,7 +86,7 @@ additional_properties = {
 
 posthog.capture_exception(
     e,
-    distinct_id="user_distinct_id", 
+    distinct_id="user_distinct_id",
     properties=additional_properties
 )
 ```
@@ -197,13 +197,13 @@ Error boundaries let you catch rendering errors in your component tree and repor
 
 ## Customizing exception capture
 
-Like all data, the better **quality** of your exception events, the more **context** you'll have for debugging and analysis. Customizing exception capture helps you do this. 
+Like all data, the better **quality** of your exception events, the more **context** you'll have for debugging and analysis. Customizing exception capture helps you do this.
 
-Customizing exception capture lets you override exception properties to influence how they're grouped into issues. 
+Customizing exception capture lets you override exception properties to influence how they're grouped into issues.
 
 Equally important, you can customize properties on the exceptions to help you configure rules for [automatic issue assignment](/docs/error-tracking/assigning-issues#automatic-issue-assignment), [alerts](/docs/error-tracking/alerts), [issue grouping](/docs/error-tracking/grouping-issues). They can also be used in analysis in [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and [data warehouse queries](/docs/data-warehouse/start-here).
 
-### Customizing exception properties 
+### Customizing exception properties
 
 #### During manual capture
 
@@ -219,11 +219,11 @@ Here are some examples of how to override exception properties:
 try {
   // ...
 } catch (error) {
- posthog.captureException(error, { 
-      "custom_property": "custom_value",
-      // Optional: you can also override generated properties like fingerprint
-      "$exception_fingerprint": "CustomExceptionGroup",
-    });
+  posthog.captureException(error, {
+    custom_property: "custom_value",
+    // Optional: you can also override generated properties like fingerprint
+    $exception_fingerprint: "CustomExceptionGroup",
+  });
 }
 ```
 
@@ -231,11 +231,11 @@ try {
 try {
   // ...
 } catch (error) {
- posthog.captureException(error, 'user_123', { 
-      "custom_property": "custom_value",
-      // Optional: you can also override generated properties like fingerprint
-      "$exception_fingerprint": "CustomExceptionGroup",
-    });
+  posthog.captureException(error, "user_123", {
+    custom_property: "custom_value",
+    // Optional: you can also override generated properties like fingerprint
+    $exception_fingerprint: "CustomExceptionGroup",
+  });
 }
 ```
 
@@ -307,7 +307,7 @@ client.Enqueue(exception)
 
 #### During automatic capture
 
-When automatic exception capture is enabled, you can still override the default properties and add custom properties to the exception event. 
+When automatic exception capture is enabled, you can still override the default properties and add custom properties to the exception event.
 
 You can also override the [fingerprint](/docs/error-tracking/fingerprints) to [group](/docs/error-tracking/issues-and-exceptions#how-are-issues-grouped) exceptions together at capture time.
 
@@ -322,85 +322,85 @@ The process is slightly different depending on the SDK you're using.
 <Tab.Panels>
   <Tab.Panel>
 
-  In [JavaScript Web](/docs/libraries/js) and [Node.js](/docs/libraries/node) SDKs, you can override the default properties by passing a `before_send` callback. This callback is called before any exception is captured.
+In [JavaScript Web](/docs/libraries/js) and [Node.js](/docs/libraries/node) SDKs, you can override the default properties by passing a `before_send` callback. This callback is called before any exception is captured.
 
-  ```javascript 
-  posthog.init('<ph_project_token>', {
-  api_host:'<ph_client_api_host>',
-  defaults: '<ph_posthog_js_defaults>',
+```javascript
+posthog.init("<ph_project_token>", {
+  api_host: "<ph_client_api_host>",
+  defaults: "<ph_posthog_js_defaults>",
   before_send: (event) => {
     if (event && event.event === "$exception") {
-      const exceptionList = event.properties?.["$exception_list"] || []
+      const exceptionList = event.properties?.["$exception_list"] || [];
       const exception = exceptionList.length > 0 ? exceptionList[0] : null;
 
       if (exception) {
-        event.properties["custom_property"] = "custom_value"
+        event.properties["custom_property"] = "custom_value";
         // Optional: you can also override generated properties like fingerprint
-        event.properties["$exception_fingerprint"] = "MyCustomGroup"
+        event.properties["$exception_fingerprint"] = "MyCustomGroup";
         // ... and any other properties you want to override
-      }    
+      }
+    }
+    return event;
+  },
+});
+```
+
+  </Tab.Panel>
+  <Tab.Panel>
+
+In [React Native](/docs/libraries/react-native), you can override the default properties by passing a `before_send` callback when initializing PostHog. This callback is called before any exception is captured.
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  before_send: (event) => {
+    if (event.event === '$exception') {
+      const exceptionList = event.properties?.['$exception_list'] || []
+      const exception = exceptionList.length > 0 ? exceptionList[0] : null
+
+      if (exception) {
+        event.properties['custom_property'] = 'custom_value'
+        // Optional: you can also override generated properties like fingerprint
+        event.properties['$exception_fingerprint'] = 'MyCustomGroup'
+        // ... and any other properties you want to override
+      }
     }
     return event
-    }
-  })
-  ```
-  
+  },
+})
+```
+
   </Tab.Panel>
   <Tab.Panel>
 
-  In [React Native](/docs/libraries/react-native), you can override the default properties by passing a `before_send` callback when initializing PostHog. This callback is called before any exception is captured.
+In Python, you can override the default properties through the use of [contexts](/docs/libraries/python#contexts) and tags.
 
-  ```react-native
-  const posthog = new PostHog('<ph_project_token>', {
-    host: '<ph_client_api_host>',
-    before_send: (event) => {
-      if (event.event === '$exception') {
-        const exceptionList = event.properties?.['$exception_list'] || []
-        const exception = exceptionList.length > 0 ? exceptionList[0] : null
+```python
+import posthog
 
-        if (exception) {
-          event.properties['custom_property'] = 'custom_value'
-          // Optional: you can also override generated properties like fingerprint
-          event.properties['$exception_fingerprint'] = 'MyCustomGroup'
-          // ... and any other properties you want to override
-        }
-      }
-      return event
-    },
-  })
-  ```
-  
-  </Tab.Panel>
-  <Tab.Panel>
+posthog.api_key = '<ph_project_token>'
+posthog.host = '<ph_client_api_host>'
 
-  In Python, you can override the default properties through the use of [contexts](/docs/libraries/python#contexts) and tags. 
+# With context
+with posthog.new_context():
+    posthog.identify_context(distinct_id="<user_distinct_id>")
+    posthog.set_context_session(session_id="<session_id>")
 
-  ```python
-  import posthog
+    posthog.tag("custom_property", "custom_value")
+    # Optional: you can also override generated properties like fingerprint
+    posthog.tag("$exception_fingerprint", ["custom_fingerprint"])
 
-  posthog.api_key = '<ph_project_token>'
-  posthog.host = '<ph_client_api_host>'
+    # When this exception is automatically captured, it will be tagged with the custom properties
+    raise Exception("Test custom exception")
+```
 
-  # With context
-  with posthog.new_context():
-      posthog.identify_context(distinct_id="<user_distinct_id>")
-      posthog.set_context_session(session_id="<session_id>")
-
-      posthog.tag("custom_property", "custom_value")
-      # Optional: you can also override generated properties like fingerprint
-      posthog.tag("$exception_fingerprint", ["custom_fingerprint"])
-
-      # When this exception is automatically captured, it will be tagged with the custom properties
-      raise Exception("Test custom exception")
-  ```
-  
   </Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
 
 ### Capturing properties for custom issue grouping rules
 
-Other than grouping with [custom fingerprints](#customizing-exception-properties), you can also set custom properties on the exception to help you group exceptions together using [issue grouping rules](/docs/error-tracking/grouping-issues). 
+Other than grouping with [custom fingerprints](#customizing-exception-properties), you can also set custom properties on the exception to help you group exceptions together using [issue grouping rules](/docs/error-tracking/grouping-issues).
 
 For example:
 
@@ -408,7 +408,7 @@ For example:
 - Setting `feature_name`, `service_name`, or `service_version` to group exceptions together for a specific features and services.
 - Setting `intent` to group exceptions due to common interactions like accessing storage or network.
 
-It's important to think about your grouping rules when you configure exception capture. You cannot group exceptions together if you don't set some common properties between them. 
+It's important to think about your grouping rules when you configure exception capture. You cannot group exceptions together if you don't set some common properties between them.
 
 Note that grouping issues means that all exceptions will be grouped together under a **single issue**. You **cannot** group exceptions into multiple issues, but you can still [filter on custom properties](/docs/error-tracking/monitoring#finding-specific-issues) across multiple issues without grouping them.
 
@@ -416,21 +416,29 @@ Note that grouping issues means that all exceptions will be grouped together und
 
 We recommend that you suppress exceptions on the client side for performance and cost reasons.
 
-import BeforeSendHook from './_snippets/before-send-hook.mdx'
+import BeforeSendHook from "./_snippets/before-send-hook.mdx";
 
 <BeforeSendHook />
 
 You can also suppress exceptions in PostHog, these rules will be applied client-side.
 
-import SuppressionRules from './_snippets/suppression-rules.mdx'
+import SuppressionRules from "./_snippets/suppression-rules.mdx";
 
 <SuppressionRules />
 
 ## Burst protection
 
-import BurstProtection from './_snippets/burst-protection.mdx'
+import BurstProtection from "./_snippets/burst-protection.mdx";
 
 <BurstProtection />
+
+Burst protection and [suppression rules](#suppressing-exceptions) operate **client-side only** – they limit the rate at which exceptions are sent from individual browser or app instances. PostHog does not currently offer server-side rate limiting controls at the project or organization level.
+
+To manage exception volume server-side, consider:
+
+- Using the `before_send` hook to filter exceptions before they're sent
+- Implementing rate limiting in your own application code before calling `captureException()`
+- Configuring [suppression rules](#suppressing-exceptions) to drop specific exception patterns client-side
 
 ## Common problems
 
@@ -450,8 +458,8 @@ Start by verifying identification and session linkage, then confirm your steps a
 
 <CalloutBox icon="IconWarning" title="Don't do this" type="caution">
 
-  **Do not** use `posthog.capture('$exception', { ... })` and try to attach exception metadata yourself (e.g. `$exception_stack_trace_raw`, `$exception_type`, `$exception_message`). This approach fails in the vast majority of cases because the exception event schema is strict and the SDK does not normalize or validate these properties when you use `capture()`.
+**Do not** use `posthog.capture('$exception', { ... })` and try to attach exception metadata yourself (e.g. `$exception_stack_trace_raw`, `$exception_type`, `$exception_message`). This approach fails in the vast majority of cases because the exception event schema is strict and the SDK does not normalize or validate these properties when you use `capture()`.
 
-  **Do this instead:** use `posthog.captureException(error)`. It accepts an `Error` object (or your runtime's equivalent), extracts stack trace, type, and message correctly, and sends a valid `$exception` event with all required metadata. You can still pass optional properties as the second argument.
+**Do this instead:** use `posthog.captureException(error)`. It accepts an `Error` object (or your runtime's equivalent), extracts stack trace, type, and message correctly, and sends a valid `$exception` event with all required metadata. You can still pass optional properties as the second argument.
 
 </CalloutBox>
