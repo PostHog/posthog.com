@@ -8,7 +8,6 @@ import {
     IconConfetti,
     IconRocket,
     IconPieChart,
-    IconReceipt,
     IconCheckCircle,
     IconPeople,
     IconInfo,
@@ -59,7 +58,7 @@ export const sessionReplay = {
         { slug: 'demo', name: 'Demo', group: 'divided', icon: <IconPlay className="size-4" /> },
         {
             slug: 'applications',
-            name: 'How do I use it?',
+            name: 'What can I do with it?',
             group: 'divided',
             icon: <IconCursorClick className="size-4" />,
             props: { slides: applications },
@@ -95,7 +94,6 @@ export const sessionReplay = {
      * Same shape as `productMenu`.
      */
     pricingMenu: [
-        { slug: 'pricing-headline', name: 'Pricing', icon: <IconReceipt className="size-4" /> },
         { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
         { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
         { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
