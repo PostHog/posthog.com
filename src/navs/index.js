@@ -929,6 +929,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/security',
             },
             {
+                name: 'Changes with legal impact',
+                url: '/handbook/engineering/working-with-legal',
+            },
+            {
                 name: 'Setting up SSL locally',
                 url: '/handbook/engineering/setup-ssl-locally',
             },
