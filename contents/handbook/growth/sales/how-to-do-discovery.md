@@ -99,6 +99,19 @@ When you understand their goals, you can frame PostHog around outcomes instead o
 
 A demo can also be a great format where questions bubble naturally.
 
+Great demos tend to follow a few simple best practices:
+
+- Understand the technical expertise, priorities, and goals of those attending the demo. Staying too high level or going too technical can cause the demo to miss the mark.
+- Don’t let the earlier discovery just be a tickbox exercise. Integrate it into your demo to make it more relevant and show the customer they've been heard.
+- Rehearse your demo enough so that you know your flow, but not so much that you sound robotic.
+- The best demos are conversations. Ask questions, pause regularly to check understanding, and handle objections in the moment.
+- A relatable story will always be far more memorable than delivering the same generic demo every time.
+- Set context before jumping into features, speak at a measured pace, and make it easy for the audience to follow along.
+- Keep your screen tidy, avoid unnecessary distractions, and use tools like zooming or highlighting sparingly but with purpose.
+
+> Always remember, the goal of a demo is not to show every feature you can within the allotted time, but to make sure that the customer is walking away from the demo with a better understanding of the platform and with their questions answered.
+
+
 **Principles:**
 
 - Leverage PostHog's technical credibility by showing vs. telling
