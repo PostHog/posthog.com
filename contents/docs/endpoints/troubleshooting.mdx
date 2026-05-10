@@ -56,9 +56,9 @@ If you get `"Version X not found for endpoint"`:
 - Create the variable in [data management variables](https://app.posthog.com/data-management/variables)
 - Verify you're using the correct project
 
-<CalloutBox icon="IconWarning" type="warning" title="Breaking change">
+<CalloutBox icon="IconWarning" type="warning" title="Deprecated parameter">
 
-The `filters_override` parameter has been removed. Requests using `filters_override` return a validation error. Use `variables` instead. See the [variables documentation](/docs/endpoints/variables) for migration guidance.
+The `filters_override` parameter is deprecated for insight-based endpoints and is not supported for HogQL endpoints. Requests using `filters_override` return a deprecation warning in the `X-PostHog-Warn` response header. Use `variables` instead for all new endpoints. See the [variables documentation](/docs/endpoints/variables) for migration guidance.
 
 </CalloutBox>
 
