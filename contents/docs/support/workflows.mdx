@@ -22,7 +22,6 @@ Updates made by Workflows do **not** re-emit ticket events, so you won't get inf
 
 When ticket or message state changes, certain events are emitted and can be used as workflow triggers:
 
-
 All events include these base properties: `ticket_id`, `ticket_number`, `channel_source`, `status`, and `priority`.
 
 ### New ticket created
@@ -30,24 +29,24 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 - **Event ID:** `$conversation_ticket_created`
 - **Event description:** A customer creates a new ticket.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `ticket_id` | string (UUID) | The ticket's unique ID |
-| `ticket_number` | int | Human-readable ticket number |
-| `channel_source` | string | `widget`, `email`, or `slack` |
-| `status` | string | Always `new` for this trigger |
-| `priority` | string or null | `low`, `medium`, `high`, or null |
-| `customer_name` | string | Customer name |
-| `customer_email` | string | Customer email |
+| Property         | Type           | Description                      |
+| ---------------- | -------------- | -------------------------------- |
+| `ticket_id`      | string (UUID)  | The ticket's unique ID           |
+| `ticket_number`  | int            | Human-readable ticket number     |
+| `channel_source` | string         | `widget`, `email`, or `slack`    |
+| `status`         | string         | Always `new` for this trigger    |
+| `priority`       | string or null | `low`, `medium`, `high`, or null |
+| `customer_name`  | string         | Customer name                    |
+| `customer_email` | string         | Customer email                   |
 
 ### Ticket status changed
 
 - **Event ID:** `$conversation_ticket_status_changed`
-- **Event description*:* Ticket status changes (e.g. new → pending → resolved). You can filter on `new_status` to trigger only for specific transitions.
+- \*_Event description_:\* Ticket status changes (e.g. new → pending → resolved). You can filter on `new_status` to trigger only for specific transitions.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `old_status` | string | Previous status |
+| Property     | Type   | Description                                                  |
+| ------------ | ------ | ------------------------------------------------------------ |
+| `old_status` | string | Previous status                                              |
 | `new_status` | string | New status (`new`, `open`, `pending`, `on_hold`, `resolved`) |
 
 ### Ticket priority changed
@@ -55,45 +54,45 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 - **Event ID:** `$conversation_ticket_priority_changed`
 - **Event description:** Ticket priority is set or changed.
 
-| Property | Type | Description |
-|----------|------|-------------|
+| Property       | Type           | Description       |
+| -------------- | -------------- | ----------------- |
 | `old_priority` | string or null | Previous priority |
-| `new_priority` | string or null | New priority |
+| `new_priority` | string or null | New priority      |
 
 ### Ticket assigned
 
 - **Event ID:** `$conversation_ticket_assigned`
 - **Event description:** Ticket is assigned or unassigned.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `assignee_type` | string | `user` or `role` |
-| `assignee_id` | int or null | ID of the assigned user or role |
+| Property        | Type        | Description                     |
+| --------------- | ----------- | ------------------------------- |
+| `assignee_type` | string      | `user` or `role`                |
+| `assignee_id`   | int or null | ID of the assigned user or role |
 
 ### Ticket message sent (team reply)
 
 - **Event ID:** `$conversation_message_sent`
 - **Event description:** A team member sends a reply.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `message_id` | string | The message UUID |
-| `message_content` | string | Message text (truncated to 1,000 chars) |
-| `author_type` | string | Always `team` |
-| `author_id` | int or null | PostHog user ID of the sender |
+| Property          | Type        | Description                             |
+| ----------------- | ----------- | --------------------------------------- |
+| `message_id`      | string      | The message UUID                        |
+| `message_content` | string      | Message text (truncated to 1,000 chars) |
+| `author_type`     | string      | Always `team`                           |
+| `author_id`       | int or null | PostHog user ID of the sender           |
 
 ### Ticket message received (customer message)
 
 - **Event ID:** `$conversation_message_received`
 - **Event description:** A customer sends a message.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `message_id` | string | The message UUID |
+| Property          | Type   | Description                             |
+| ----------------- | ------ | --------------------------------------- |
+| `message_id`      | string | The message UUID                        |
 | `message_content` | string | Message text (truncated to 1,000 chars) |
-| `author_type` | string | Always `customer` |
-| `customer_name` | string | Customer name |
-| `customer_email` | string | Customer email |
+| `author_type`     | string | Always `customer`                       |
+| `customer_name`   | string | Customer name                           |
+| `customer_email`  | string | Customer email                          |
 
 ## Actions
 
@@ -103,28 +102,26 @@ Two workflow actions are available for ticket management:
 
 Fetches the full ticket into workflow variables. Use this when you need fields beyond what's in the trigger event properties (e.g. `message_count`, `sla_due_at`).
 
-
-| Input field | Type | Default |
-|-------|------|---------|
+| Input field | Type   | Default                        |
+| ----------- | ------ | ------------------------------ |
 | `ticket_id` | string | `{event.properties.ticket_id}` |
 
-
-| Output field | Type | Description |
-|-------|------|-------------|
-| `id` | string (UUID) | Ticket ID |
-| `ticket_number` | int | Per-team ticket number |
-| `status` | string | `new`, `open`, `pending`, `on_hold`, `resolved` |
-| `priority` | string or null | `low`, `medium`, `high`, or null |
-| `channel_source` | string | `widget`, `email`, or `slack` |
-| `distinct_id` | string | Customer's PostHog distinct ID |
-| `created_at` | string (ISO 8601) | When the ticket was created |
-| `updated_at` | string (ISO 8601) | Last update timestamp |
-| `message_count` | int | Total messages on the ticket |
-| `last_message_at` | string or null | Timestamp of last message |
-| `last_message_text` | string or null | Preview of last message |
-| `unread_team_count` | int | Unread messages for the team |
-| `unread_customer_count` | int | Unread messages for the customer |
-| `sla_due_at` | string or null | SLA deadline, or null if none |
+| Output field            | Type              | Description                                     |
+| ----------------------- | ----------------- | ----------------------------------------------- |
+| `id`                    | string (UUID)     | Ticket ID                                       |
+| `ticket_number`         | int               | Per-team ticket number                          |
+| `status`                | string            | `new`, `open`, `pending`, `on_hold`, `resolved` |
+| `priority`              | string or null    | `low`, `medium`, `high`, or null                |
+| `channel_source`        | string            | `widget`, `email`, or `slack`                   |
+| `distinct_id`           | string            | Customer's PostHog distinct ID                  |
+| `created_at`            | string (ISO 8601) | When the ticket was created                     |
+| `updated_at`            | string (ISO 8601) | Last update timestamp                           |
+| `message_count`         | int               | Total messages on the ticket                    |
+| `last_message_at`       | string or null    | Timestamp of last message                       |
+| `last_message_text`     | string or null    | Preview of last message                         |
+| `unread_team_count`     | int               | Unread messages for the team                    |
+| `unread_customer_count` | int               | Unread messages for the customer                |
+| `sla_due_at`            | string or null    | SLA deadline, or null if none                   |
 
 The output fields are available as `{variables.ticket.*}`.
 
@@ -132,16 +129,16 @@ The output fields are available as `{variables.ticket.*}`.
 
 Changes one or more fields on a ticket. Only the fields you provide are changed.
 
-
-| Input field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `ticket_id` | string | Yes | UUID of the ticket to update |
-| `status` | choice | No | `new`, `open`, `pending`, `on_hold`, `resolved` |
-| `priority` | choice | No | `low`, `medium`, `high` |
-| `sla_amount` | string | No | Duration until SLA expires. Use `clear` to remove. |
-| `sla_unit` | choice | No | `minute`, `hour`, or `day` (default: `hour`) |
-| `assignee` | assignee | No | Assign to a user or role. Set to null to remove assignment. |
-| `tags` | tags | No | Replace all tags on the ticket. |
+| Input field          | Type     | Required | Description                                                               |
+| -------------------- | -------- | -------- | ------------------------------------------------------------------------- |
+| `ticket_id`          | string   | Yes      | UUID of the ticket to update                                              |
+| `status`             | choice   | No       | `new`, `open`, `pending`, `on_hold`, `resolved`                           |
+| `priority`           | choice   | No       | `low`, `medium`, `high`                                                   |
+| `sla_amount`         | string   | No       | Duration until SLA expires. Use `clear` to remove.                        |
+| `sla_unit`           | choice   | No       | `minute`, `hour`, or `day` (default: `hour`)                              |
+| `sla_business_hours` | object   | No       | Working hours for SLA calculation. See [business hours](#business-hours). |
+| `assignee`           | assignee | No       | Assign to a user or role. Set to null to remove assignment.               |
+| `tags`               | tags     | No       | Replace all tags on the ticket.                                           |
 
 <CalloutBox icon="IconWarning" title="Tags replace, not append" type="caution">
 
@@ -190,11 +187,11 @@ ELSE
 
 Update ticket config for the widget path:
 
-| Input | Value |
-|-------|-------|
-| `ticket_id` | `{event.properties.ticket_id}` |
-| `sla_amount` | `4` |
-| `sla_unit` | `hour` |
+| Input        | Value                          |
+| ------------ | ------------------------------ |
+| `ticket_id`  | `{event.properties.ticket_id}` |
+| `sla_amount` | `4`                            |
+| `sla_unit`   | `hour`                         |
 
 ### 2. Set SLA based on priority
 
@@ -211,7 +208,30 @@ ELSE
    SET SLA = 24 hours
 ```
 
-### 3. Auto-assign new tickets to a role
+### 3. Set SLA with business hours
+
+Count only business hours toward the SLA deadline instead of calendar time.
+
+**Trigger:** New ticket created
+
+**Flow:**
+
+1. **Update ticket:**
+
+```
+ticket_id = {event.properties.ticket_id}
+sla_amount = "4"
+sla_unit = "hour"
+sla_business_hours = {
+  "days": ["monday", "tuesday", "wednesday", "thursday", "friday"],
+  "time": ["09:00", "17:00"],
+  "timezone": "America/New_York"
+}
+```
+
+This sets a 4 business-hour SLA that only counts time during Monday–Friday, 9am–5pm Eastern. If a ticket is created on Thursday at 4pm, the deadline resolves to Friday at 12pm (1 hour Thursday + 3 hours Friday).
+
+### 4. Auto-assign new tickets to a role
 
 Assign every new ticket to the "Support" role automatically.
 
@@ -221,7 +241,7 @@ Trigger event = New ticket created
 SET assignee = Support role
 ```
 
-### 4. Auto-assign based on channel
+### 5. Auto-assign based on channel
 
 Route tickets to different teams based on where they came from.
 
@@ -234,7 +254,7 @@ ELSE
    SET assignee = Support role
 ```
 
-### 5. Move ticket to Open when team replies
+### 6. Move ticket to Open when team replies
 
 Automatically change status from New to Open when a team member first replies.
 
@@ -249,7 +269,7 @@ Automatically change status from New to Open when a team member first replies.
 status = "open"
 ```
 
-### 6. Move ticket to Pending after team reply
+### 7. Move ticket to Pending after team reply
 
 After a teammate replies, set the ticket to Pending (waiting for customer response).
 
@@ -263,7 +283,7 @@ After a teammate replies, set the ticket to Pending (waiting for customer respon
 status = "pending"
 ```
 
-### 7. Reopen ticket when customer replies
+### 8. Reopen ticket when customer replies
 
 When a customer sends a message on a pending or resolved ticket, reopen it.
 
@@ -274,7 +294,7 @@ When a customer sends a message on a pending or resolved ticket, reopen it.
 1. **If** `event.properties.status` equals `pending` **or** `event.properties.status` equals `resolved`
    - **Update ticket:** `status` = `open`
 
-### 8. Auto-tag tickets by customer email domain
+### 9. Auto-tag tickets by customer email domain
 
 Tag tickets from specific customer domains for prioritization.
 
@@ -296,7 +316,7 @@ tags = ["enterprise", "priority"]
 tags = ["startup"]
 ```
 
-### 9. Escalate high-priority tickets
+### 10. Escalate high-priority tickets
 
 Immediately set a tight SLA and assign to senior support when a high-priority ticket is created.
 
@@ -314,7 +334,7 @@ assignee = Senior Support role
 tags = ["escalated"]
 ```
 
-### 10. Tag tickets moving to Pending
+### 11. Tag tickets moving to Pending
 
 Track how many tickets go through the pending state by adding a tag.
 
@@ -328,7 +348,7 @@ Track how many tickets go through the pending state by adding a tag.
 tags = ["awaiting-customer"]
 ```
 
-### 11. Full SLA Workflow with priority and channel
+### 12. Full SLA Workflow with priority and channel
 
 A comprehensive example combining multiple conditions for SLA, priority, and assignment.
 
@@ -372,22 +392,42 @@ assignee = Support role
 
 SLAs are set as a duration from "now" (the time the workflow runs). The `sla_due_at` field on the ticket stores the absolute deadline.
 
-| `sla_amount` | `sla_unit` | Resulting deadline |
-|--------------|------------|-------------------|
-| `30` | `minute` | 30 minutes from now |
-| `1` | `hour` | 1 hour from now |
-| `4` | `hour` | 4 hours from now |
-| `24` | `hour` | 24 hours from now |
-| `1` | `day` | 1 day from now |
-| `clear` | (ignored) | Removes the SLA |
+### Calendar hours (default)
+
+By default, SLA deadlines use calendar hours – every minute counts regardless of day or time.
+
+| `sla_amount` | `sla_unit` | Resulting deadline  |
+| ------------ | ---------- | ------------------- |
+| `30`         | `minute`   | 30 minutes from now |
+| `1`          | `hour`     | 1 hour from now     |
+| `4`          | `hour`     | 4 hours from now    |
+| `24`         | `hour`     | 24 hours from now   |
+| `1`          | `day`      | 1 day from now      |
+| `clear`      | (ignored)  | Removes the SLA     |
+
+### Business hours
+
+Set `sla_business_hours` to count only working hours toward the SLA. The SLA clock pauses outside the configured window and resumes when the next business period starts.
+
+`sla_business_hours` accepts an object with these keys:
+
+| Key        | Type                            | Description                                                                                                              |
+| ---------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `days`     | array of strings                | Lowercase weekday names to include, e.g. `["monday", "tuesday", "wednesday", "thursday", "friday"]`                      |
+| `time`     | `"any"` or `["HH:MM", "HH:MM"]` | `"any"` for the full day, or a start/end pair like `["09:00", "17:00"]`. End must be after start (no overnight windows). |
+| `timezone` | string                          | IANA timezone, e.g. `"America/New_York"`, `"Europe/London"`, `"UTC"`. Defaults to `"UTC"`.                               |
+
+When `sla_unit` is `day` with a custom time window, one day equals one window length. For example, with a 9am–5pm window, `1` day equals 8 business hours.
+
+If `sla_business_hours` is omitted or covers all seven days with `time` set to `"any"`, the SLA falls back to calendar hours.
 
 In the ticket list, SLAs show as one of three states:
 
-| SLA state | Condition |
-|-----------|-----------|
+| SLA state    | Condition                       |
+| ------------ | ------------------------------- |
 | **On track** | More than 1 hour until deadline |
-| **At risk** | 1 hour or less until deadline |
-| **Breached** | Past the deadline |
+| **At risk**  | 1 hour or less until deadline   |
+| **Breached** | Past the deadline               |
 
 ## Important notes
 
