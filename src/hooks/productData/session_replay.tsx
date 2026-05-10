@@ -17,6 +17,7 @@ import {
     IconChat,
     IconCode,
     IconMap,
+    IconMessage,
     IconNewspaper,
     IconShieldPeople,
 } from '@posthog/icons'
@@ -30,6 +31,7 @@ export const sessionReplay = {
     type: 'session_replay',
     slug: 'session-replay',
     teamSlug: 'replay',
+    forumTopicId: 377,
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     category: 'product_engineering',
@@ -77,6 +79,7 @@ export const sessionReplay = {
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'roadmap', name: 'Roadmap', group: 'divided', icon: <IconMap className="size-4" /> },
         { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
+        { slug: 'community', name: 'Discussions', group: 'divided', icon: <IconMessage className="size-4" /> },
         { slug: 'team', name: 'Team', group: 'divided', icon: <IconShieldPeople className="size-4" /> },
         {
             slug: 'installation',
