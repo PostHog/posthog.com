@@ -315,6 +315,72 @@ The `system.error_tracking_issues` table contains error tracking issues from you
 | `name`        | Name of the issue                |
 | `description` | Description of the issue         |
 
+### `system.error_tracking_issue_assignments`
+
+The `system.error_tracking_issue_assignments` table contains issue assignment data, linking error tracking issues to users or roles.
+
+| Column     | Description                          |
+| ---------- | ------------------------------------ |
+| `id`       | Unique identifier for the assignment |
+| `issue_id` | ID of the issue being assigned       |
+| `user_id`  | User ID of the assignee              |
+| `role_id`  | Role ID if assigned to a role        |
+
+### `system.error_tracking_issue_fingerprints`
+
+The `system.error_tracking_issue_fingerprints` table contains fingerprint mappings that link error fingerprints to their parent issues.
+
+| Column        | Description                           |
+| ------------- | ------------------------------------- |
+| `id`          | Unique identifier for the fingerprint |
+| `issue_id`    | ID of the associated issue            |
+| `fingerprint` | The fingerprint string                |
+| `first_seen`  | When the fingerprint was first seen   |
+
+### `system.error_tracking_assignment_rules`
+
+The `system.error_tracking_assignment_rules` table contains rules for automatically assigning error tracking issues to users or roles based on filter criteria.
+
+| Column          | Description                               |
+| --------------- | ----------------------------------------- |
+| `id`            | Unique identifier for the rule            |
+| `user_id`       | User ID to assign issues to (nullable)    |
+| `role_id`       | Role ID to assign issues to (nullable)    |
+| `order_key`     | Priority/order of the rule                |
+| `filters`       | JSON filter criteria for matching issues  |
+| `bytecode`      | Compiled filter bytecode                  |
+| `disabled_data` | JSON data about disabled state (nullable) |
+| `created_at`    | When the rule was created                 |
+| `updated_at`    | When the rule was last updated            |
+
+### `system.error_tracking_suppression_rules`
+
+The `system.error_tracking_suppression_rules` table contains rules for suppressing or sampling error tracking events based on filter criteria.
+
+| Column          | Description                               |
+| --------------- | ----------------------------------------- |
+| `id`            | Unique identifier for the rule            |
+| `order_key`     | Priority/order of the rule                |
+| `sampling_rate` | Sampling rate for suppressed events (0–1) |
+| `filters`       | JSON filter criteria for matching events  |
+| `bytecode`      | Compiled filter bytecode (nullable)       |
+| `disabled_data` | JSON data about disabled state (nullable) |
+| `created_at`    | When the rule was created                 |
+| `updated_at`    | When the rule was last updated            |
+
+### `system.error_tracking_releases`
+
+The `system.error_tracking_releases` table contains release information associated with your error tracking project.
+
+| Column       | Description                            |
+| ------------ | -------------------------------------- |
+| `id`         | Unique identifier for the release      |
+| `hash_id`    | Hash identifier for the release        |
+| `version`    | Version string of the release          |
+| `project`    | Project name the release belongs to    |
+| `metadata`   | Additional release metadata (nullable) |
+| `created_at` | When the release was created           |
+
 ### `system.hog_flows`
 
 The `system.hog_flows` table contains workflow definitions from your project.
