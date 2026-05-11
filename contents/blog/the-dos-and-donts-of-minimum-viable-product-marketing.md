@@ -72,4 +72,4 @@ Will it still work in another five years? I don't know!
 
 What I _do_ know is that product marketing is full of thought-leaders who want to inflate their importance by making their work more complicated and mysterious than it needs to be. The reality is that the job is basically just storytelling, and storytelling can be messy. 
 
-That's a good thing. It means you don't need messaging matrices, fancy frameworks, or page-long personas. All you really need is to know [Orwell's sixth rule of writing](https://sites.duke.edu/scientificwriting/orwells-6-rules/) and apply it vigorously.
+That's a good thing. It means you don't need messaging matrices, fancy frameworks, or page-long personas. All you really need is to know [Orwell's sixth rule of writing](https://sites.duke.edu/scientificwriting/orwells-6-rules/) and apply it vigorously. Even here. 
