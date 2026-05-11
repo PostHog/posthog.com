@@ -26,9 +26,11 @@ The AI platform solves these problems by providing:
 3. **Consistent UX**: Standard patterns for AI interactions, loading states, error handling, and result presentation
 4. **Platform-level improvements**: When we improve the core agent (better reasoning, faster responses, cheaper inference), all products benefit automatically
 
-## Vision: Product autonomy
+## Vision: Self driving product
 
-The overarching goal of PostHog's AI direction is **product autonomy** — a closed loop where PostHog data automatically drives product improvements with minimal human intervention.
+The overarching goal of PostHog's AI direction is **self driving product**. A self-driving product can prompt itself. It understands your codebase, your data, and your users. It proposes and ships work on its own, inside of guardrails you set. 
+
+The self in self-driving isn't autonomy from the engineer. It's autonomy from user instruction as the starting point.
 
 Here's how the loop works:
 
@@ -117,11 +119,11 @@ Analyze hundreds of session recordings in minutes instead of hours. Session summ
 
 [Learn more →](/handbook/engineering/ai/products#session-summaries)
 
-### PostHog Code [Under development]
+### PostHog Code [Beta]
 An agent development environment that solves the messy workflow problem of engineering with coding agents. Each task gets its own isolated workspace where an agent works — you can guide the agent, review changes, and switch between workspaces, with everything related to a task in one place instead of across your terminal, editor, and GitHub.
 
 **Best for**: Product engineers who work on multiple tasks simultaneously and already use agents heavily
-**Status**: Under development | **Pricing**: TBD
+**Status**: Beta | **Pricing**: TBD
 
 [Learn more →](/handbook/engineering/ai/products#posthog-code)
 
