@@ -4,9 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-# How we sell PostHog data pipelines
-
-> **Owner:** [PMM name] / [Product team lead]
+> **Owner:** See [who owns this feature](https://posthog.com/handbook/engineering/feature-ownership)
 
 ## The unique belief (in terms of data pipelines)
 
