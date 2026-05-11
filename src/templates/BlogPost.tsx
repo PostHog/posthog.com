@@ -409,6 +409,11 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                         ) : (
                             <TreeMenu
                                 key={`posts-${posts?.length}`}
+                                activeUrl={
+                                    localizedRoot
+                                        ? languageAlternates?.find((alt) => alt.hrefLang === 'en')?.href
+                                        : undefined
+                                }
                                 items={posts?.map((post) => {
                                     return {
                                         name: post.attributes.title,
