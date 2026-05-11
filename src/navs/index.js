@@ -1108,6 +1108,16 @@ export const handbookSidebar = [
                         name: 'Working with the website team',
                         url: '/handbook/marketing/working-with-website',
                     },
+                    {
+                        name: 'How we position and sell PostHog',
+                        url: '/handbook/marketing/how-we-position-and-sell/data-pipelines',
+                        children: [
+                            {
+                                name: 'Data pipelines',
+                                url: '/handbook/marketing/how-we-position-and-sell/data-pipelines',
+                            },
+                        ],
+                    },
                 ],
             },
         ],
