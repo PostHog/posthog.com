@@ -1,73 +1,27 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import { SEO } from 'components/seo'
-import Layout from 'components/Layout'
-import { heading, section } from 'components/Home/classes'
-import { TrackedCTA } from 'components/CallToAction'
+import { heading } from 'components/Home/classes'
 import Link from 'components/Link'
-import { StaticImage } from 'gatsby-plugin-image'
-import { IconInfo, IconRevert, IconSend } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
-import subprocessors from '../data/subprocessors.json'
-import { sexyLegalMenu } from '../navs'
-import usePostHog from 'hooks/usePostHog'
-import Confetti from 'react-confetti'
 
-const IconPrint = ({ className = '' }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24">
-        <path
-            stroke="#000"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1.5"
-            d="M9.25 10.75h-2.5m0 3v6.5a1 1 0 0 0 1 1h8.5a1 1 0 0 0 1-1v-6.5m-10.5 0h10.5m-10.5 0v3.5h-3a1 1 0 0 1-1-1v-8.5a1 1 0 0 1 1-1h16.5a1 1 0 0 1 1 1v8.5a1 1 0 0 1-1 1h-3v-3.5m-9.5-11h8.5a1 1 0 0 1 1 1v3H6.75v-3a1 1 0 0 1 1-1Z"
-        />
-    </svg>
-)
-
-const IconDocument = ({ className = '' }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24">
-        <rect x="4" y="2" width="16" height="20" rx="2" stroke="#000" strokeWidth="1.5" />
-        <path d="M8 6h8M8 10h8M8 14h5" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-)
+const APP_LEGAL_URL = 'https://app.posthog.com/legal'
 
 function DpaGenerator() {
-    const [companyName, setCompanyName] = useState('')
-    const [companyAddress, setCompanyAddress] = useState('')
-    const [yourName, setYourName] = useState('')
-    const [yourTitle, setYourTitle] = useState('')
-    const [representativeEmail, setRepresentativeEmail] = useState('')
     const [mode, setMode] = useState('pretty')
-    const [isFormComplete, setIsFormComplete] = useState(false)
-    const [isSubmitted, setIsSubmitted] = useState(false)
-    const [showConfetti, setShowConfetti] = useState(false)
-    const divRef = useRef(null)
-    const posthog = usePostHog()
 
     const FloatRight = `float-right -mr-2 @2xl:-mr-20 -my-8 @2xl:-mt-16 w-48 @2xl:w-80`
     const FloatLeft = `float-left -ml-2 @2xl:-ml-20 -my-8 @2xl:-mt-16 w-48 @2xl:w-80`
 
-    const handleDpaSubmit = () => {
-        if (typeof posthog === 'undefined') return
-        if (posthog === null) return
-        if (typeof posthog.capture !== 'function') return
-        try {
-            fetch('/api/dpa-export-event', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    companyName,
-                    companyAddress,
-                    yourName,
-                    yourTitle,
-                    representativeEmail,
-                    distinctId: posthog?.get_distinct_id?.() || undefined,
-                }),
-            })
-        } catch (e) {
-            // fail silently
-        }
+    const handleModeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setMode(e.target.value)
+        const pageElement = document.querySelector('#page')
+        const headerElement = document.querySelector('header')
+        const top =
+            window.scrollY +
+            (pageElement?.getBoundingClientRect().top || 0) -
+            (headerElement?.getBoundingClientRect().height || 0)
+        window.scrollTo({ top, behavior: 'smooth' })
     }
 
     const SignatureFields = () => (
@@ -76,8 +30,16 @@ function DpaGenerator() {
                 <Tooltip
                     content={() => (
                         <>
-                            Fill out the form <span className="@3xl:hidden">at the top</span>
-                            <span className="hidden @3xl:inline-block">to the left</span> populate these fields
+                            Generate this DPA at{' '}
+                            <a
+                                href="https://app.posthog.com/legal"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline"
+                            >
+                                app.posthog.com/legal
+                            </a>{' '}
+                            to fill in your details and have it countersigned
                         </>
                     )}
                     placement="top"
@@ -86,7 +48,7 @@ function DpaGenerator() {
                     <span className="relative">
                         <button type="button">
                             <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                {companyName ? companyName : '[COMPANY NAME]'}
+                                [COMPANY NAME]
                             </label>
                         </button>
                     </span>
@@ -101,8 +63,16 @@ function DpaGenerator() {
                     <Tooltip
                         content={() => (
                             <>
-                                Fill out the form <span className="@3xl:hidden">at the top</span>
-                                <span className="hidden @3xl:inline-block">to the left</span> populate these fields
+                                Generate this DPA at{' '}
+                                <a
+                                    href="https://app.posthog.com/legal"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="underline"
+                                >
+                                    app.posthog.com/legal
+                                </a>{' '}
+                                to fill in your details and have it countersigned
                             </>
                         )}
                         placement="top"
@@ -111,7 +81,7 @@ function DpaGenerator() {
                         <span className="relative">
                             <button type="button">
                                 <label htmlFor="yourName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                    {yourName ? yourName : '[REPRESENTATIVE NAME]'}
+                                    [REPRESENTATIVE NAME]
                                 </label>
                             </button>
                         </span>
@@ -123,8 +93,16 @@ function DpaGenerator() {
                     <Tooltip
                         content={() => (
                             <>
-                                Fill out the form <span className="@3xl:hidden">at the top</span>
-                                <span className="hidden @3xl:inline-block">to the left</span> populate these fields
+                                Generate this DPA at{' '}
+                                <a
+                                    href="https://app.posthog.com/legal"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="underline"
+                                >
+                                    app.posthog.com/legal
+                                </a>{' '}
+                                to fill in your details and have it countersigned
                             </>
                         )}
                         placement="top"
@@ -133,7 +111,7 @@ function DpaGenerator() {
                         <span className="relative">
                             <button type="button">
                                 <label htmlFor="yourTitle" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                    {yourTitle ? yourTitle : '[REPRESENTATIVE TITLE]'}
+                                    [REPRESENTATIVE TITLE]
                                 </label>
                             </button>
                         </span>
@@ -164,65 +142,9 @@ function DpaGenerator() {
         </>
     )
 
-    useEffect(() => {
-        if (companyName && companyAddress && yourName && yourTitle && representativeEmail && mode) {
-            setIsFormComplete(true)
-        } else {
-            setIsFormComplete(false)
-        }
-    }, [companyName, companyAddress, yourName, yourTitle, representativeEmail, mode])
-
-    const handlePrint = () => {
-        window.print()
-    }
-
-    const handleReset = () => {
-        setCompanyName('')
-        setCompanyAddress('')
-        setYourName('')
-        setYourTitle('')
-        setRepresentativeEmail('')
-        setIsSubmitted(false)
-        setShowConfetti(false)
-    }
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setMode(e.target.value)
-        const pageElement = document.querySelector('#page')
-        const headerElement = document.querySelector('header')
-        const top =
-            window.scrollY +
-            (pageElement?.getBoundingClientRect().top || 0) -
-            (headerElement?.getBoundingClientRect().height || 0)
-        window.scrollTo({ top, behavior: 'smooth' })
-    }
-
-    // Determine if the current mode is a request mode
-    const isRequestMode = mode === 'pretty' || mode === 'lawyer'
-
-    // Modified handleButtonClick to show confirmation instead of redirecting
-    const handleButtonClick = () => {
-        if (isRequestMode) {
-            handleDpaSubmit()
-            setIsSubmitted(true)
-            setShowConfetti(true)
-            // Hide confetti after 5 seconds
-            setTimeout(() => setShowConfetti(false), 5000)
-            // Smooth scroll to top of page
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-        } else {
-            handlePrint()
-        }
-    }
-
     return (
         <>
-            {showConfetti && <Confetti recycle={false} numberOfPieces={1000} />}
-            <SEO
-                title="DPA generator"
-                description="PostHog's cutting-edge data processing agreement (DPA) generator"
-                image={`/images/og/dpa.png`}
-            />
+            <SEO title="DPA" description="PostHog's data processing agreement (DPA)" image={`/images/og/dpa.png`} />
             <header data-scheme="primary" className="text-primary print:hidden">
                 <h1 className={`${heading()} overflow-hidden pt-8 pb-1`}>
                     DPA? Try DP
@@ -241,52 +163,22 @@ function DpaGenerator() {
 
             <section
                 data-scheme="primary"
-                className={`relative flex flex-col items-center mt-20 max-w-xl mx-auto bg-accent rounded px-8 pb-8 border border-primary text-primary ${
-                    isSubmitted ? 'block' : 'hidden'
-                }`}
+                className="grid @3xl:grid-cols-5 2xl:grid-cols-4 relative @3xl:border-b border-primary text-primary items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4"
             >
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/bookworm_f7fd07d80b.png"
-                    alt="Legal hog"
-                    className="w-64"
-                />
-
-                <h1 className="text-3xl font-bold text-green">DPA request received</h1>
-                <p className="text-center">
-                    Our legal hogs are working on generating a legal document for you. You should receive an email from
-                    PandaDoc in the next 24 hours.
-                </p>
-                <p className="text-center mb-0">
-                    If you have any questions (or don't hear back), please contact{' '}
-                    <a href="mailto:privacy@posthog.com" className="text-primary underline">
-                        privacy@posthog.com
-                    </a>
-                    .
-                </p>
-            </section>
-
-            <section
-                data-scheme="primary"
-                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative @3xl:border-b border-primary text-primary items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4 ${
-                    isSubmitted ? 'hidden' : 'block'
-                }`}
-            >
-                <div
-                    className={`@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:pt-4 @3xl:pb-8 print:hidden @3xl:sticky @3xl:top-0`}
-                >
-                    <div className="flex justify-between items-center">
-                        <h2 className="mb-1 text-xl">Enter your company details</h2>
-                        <Tooltip content="Reset form" placement="top">
-                            <span className="relative">
-                                <button type="button" className="bg-accent p-1 rounded" onClick={handleReset}>
-                                    <IconRevert className="size-6" />
-                                </button>
-                            </span>
-                        </Tooltip>
-                    </div>
+                <div className="@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:pt-4 @3xl:pb-8 print:hidden @3xl:sticky @3xl:top-0">
+                    <h2 className="mb-1 text-xl">Want a countersigned DPA?</h2>
                     <p className="text-sm">
-                        After completing this form, we'll prep it in PandaDoc where we'll sign and send a copy by email
-                        for counter-signature.
+                        Head to{' '}
+                        <Link to={APP_LEGAL_URL} external className="font-semibold underline">
+                            app.posthog.com/legal
+                        </Link>{' '}
+                        inside your PostHog organization. That's where you generate, sign, and download a real, valid
+                        DPA — countersigned by us.
+                    </p>
+                    <p className="text-sm">
+                        The version below is the exact same agreement, just rendered here for your reading pleasure (and
+                        choice of font). It's not binding on its own — only the one you generate and countersign through
+                        the app counts.
                     </p>
                     <p className="text-sm">
                         Need changes to this DPA?{' '}
@@ -295,201 +187,113 @@ function DpaGenerator() {
                         </Link>{' '}
                         first.
                     </p>
-                    <form>
-                        <div className="grid grid-cols-5 gap-1 @sm:gap-2 items-center">
-                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="companyName">
-                                Company name
-                            </label>
-                            <input
-                                type="text"
-                                value={companyName}
-                                onChange={(e) => setCompanyName(e.target.value)}
-                                placeholder="Company name"
-                                id="companyName"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-primary text-primary"
-                                required
-                            />
 
-                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="companyAddress">
-                                Company address
-                            </label>
-                            <input
-                                type="text"
-                                value={companyAddress}
-                                onChange={(e) => setCompanyAddress(e.target.value)}
-                                placeholder="Company address"
-                                id="companyAddress"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-primary text-primary"
-                                required
-                            />
+                    <Link
+                        to={APP_LEGAL_URL}
+                        external
+                        className="inline-block mt-2 mb-6 px-4 py-2 rounded bg-red text-white font-semibold no-underline hover:bg-red/90"
+                    >
+                        Generate a DPA in PostHog
+                    </Link>
 
-                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="yourName">
-                                Representative name
-                            </label>
-                            <input
-                                type="text"
-                                value={yourName}
-                                onChange={(e) => setYourName(e.target.value)}
-                                placeholder="Representative name"
-                                id="yourName"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-primary text-primary"
-                                required
-                            />
-
-                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="representativeEmail">
-                                Representative email
-                            </label>
-                            <input
-                                type="email"
-                                value={representativeEmail}
-                                onChange={(e) => setRepresentativeEmail(e.target.value)}
-                                placeholder="Representative email"
-                                id="representativeEmail"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-primary text-primary"
-                                required
-                            />
-
-                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="yourTitle">
-                                Representative title
-                            </label>
-                            <input
-                                type="text"
-                                value={yourTitle}
-                                onChange={(e) => setYourTitle(e.target.value)}
-                                placeholder="Representative title"
-                                id="yourTitle"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-primary text-primary"
-                                required
-                            />
-
-                            <div className="col-span-5 @@3xl:col-span-2 text-sm self-baseline pt-2">Format</div>
-
-                            <ul className="flex flex-col col-span-5 @@3xl:col-span-3 gap-3 list-none pt-2 pl-0">
-                                <li className="pl-7 relative">
-                                    <input
-                                        type="radio"
-                                        id="pretty"
-                                        name="mode"
-                                        value="pretty"
-                                        className="absolute left-1 top-1"
-                                        onChange={handleInputChange}
-                                        checked={mode === 'pretty'}
-                                    />
-                                    <label className="font-semibold leading-tight block pb-1" htmlFor="pretty">
-                                        A perfectly legal doc, but with some pizazz
-                                    </label>
-                                    <div className="block text-sm opacity-75">
-                                        Holds up in a court of law, but with a nicer font and a color logo
-                                    </div>
-                                </li>
-                                <li className="pl-7 relative">
-                                    <input
-                                        type="radio"
-                                        id="lawyer"
-                                        name="mode"
-                                        value="lawyer"
-                                        className="absolute left-1 top-1"
-                                        onChange={handleInputChange}
-                                    />
-                                    <label className="font-semibold" htmlFor="lawyer">
-                                        Drab and dull - preferred by lawyers
-                                    </label>
-                                    <br />
-                                    <div className="block text-sm opacity-75">
-                                        Because lawyers hate fun but love Times New Roman
-                                    </div>
-                                </li>
-                                <li className="pl-7 relative">
-                                    <input
-                                        type="radio"
-                                        id="fairytale"
-                                        name="mode"
-                                        className="absolute left-1 top-1"
-                                        value="fairytale"
-                                        onChange={handleInputChange}
-                                    />
-                                    <label className="font-semibold" htmlFor="fairytale">
-                                        A fairy tale story
-                                    </label>
-                                    <br />
-                                    <div className="block text-sm opacity-75">"Explain it to me like I'm five"</div>
-                                </li>
-                                <li className="pl-7 relative">
-                                    <input
-                                        type="radio"
-                                        id="tswift"
-                                        name="mode"
-                                        value="tswift"
-                                        className="absolute left-1 top-1"
-                                        onChange={handleInputChange}
-                                    />
-                                    <label className="font-semibold" htmlFor="tswift">
-                                        Taylor Swift's version
-                                    </label>
-                                    <br />
-                                    <div className="block text-sm opacity-75">Sing along while staying compliant</div>
-                                </li>
-                            </ul>
-                        </div>
-                    </form>
+                    <div>
+                        <div className="text-sm font-semibold pt-2 pb-2">Pick your reading style</div>
+                        <ul className="flex flex-col gap-3 list-none pl-0">
+                            <li className="pl-7 relative">
+                                <input
+                                    type="radio"
+                                    id="pretty"
+                                    name="mode"
+                                    value="pretty"
+                                    className="absolute left-1 top-1"
+                                    onChange={handleModeChange}
+                                    checked={mode === 'pretty'}
+                                />
+                                <label className="font-semibold leading-tight block pb-1" htmlFor="pretty">
+                                    A perfectly legal doc, but with some pizazz
+                                </label>
+                                <div className="block text-sm opacity-75">
+                                    Holds up in a court of law, but with a nicer font and a color logo
+                                </div>
+                            </li>
+                            <li className="pl-7 relative">
+                                <input
+                                    type="radio"
+                                    id="lawyer"
+                                    name="mode"
+                                    value="lawyer"
+                                    className="absolute left-1 top-1"
+                                    onChange={handleModeChange}
+                                />
+                                <label className="font-semibold" htmlFor="lawyer">
+                                    Drab and dull - preferred by lawyers
+                                </label>
+                                <br />
+                                <div className="block text-sm opacity-75">
+                                    Because lawyers hate fun but love Times New Roman
+                                </div>
+                            </li>
+                            <li className="pl-7 relative">
+                                <input
+                                    type="radio"
+                                    id="fairytale"
+                                    name="mode"
+                                    className="absolute left-1 top-1"
+                                    value="fairytale"
+                                    onChange={handleModeChange}
+                                />
+                                <label className="font-semibold" htmlFor="fairytale">
+                                    A fairy tale story
+                                </label>
+                                <br />
+                                <div className="block text-sm opacity-75">"Explain it to me like I'm five"</div>
+                            </li>
+                            <li className="pl-7 relative">
+                                <input
+                                    type="radio"
+                                    id="tswift"
+                                    name="mode"
+                                    value="tswift"
+                                    className="absolute left-1 top-1"
+                                    onChange={handleModeChange}
+                                />
+                                <label className="font-semibold" htmlFor="tswift">
+                                    Taylor Swift's version
+                                </label>
+                                <br />
+                                <div className="block text-sm opacity-75">Sing along while staying compliant</div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div
-                    ref={divRef}
                     id="page"
                     className="@container prose @3xl:col-span-3 bg-white text-primary dark:text-black px-4 @3xl:px-8 pt-4 border-y @3xl:border-b-0 border-primary @3xl:border-l print:shadow-none rounded relative"
                 >
-                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky top-0 z-10">
+                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm border-b border-light -mx-8 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky top-0 z-10 gap-4">
                         <div className="text-lg font-bold dark:text-primary">Preview</div>
-                        <Tooltip
-                            content={() => (
-                                <div className="max-w-xs @3xl:max-w-sm print:hidden">
-                                    {isFormComplete ? (
-                                        <>
-                                            {mode === 'pretty' || mode === 'lawyer' ? (
-                                                <>
-                                                    <h4 className="text-base mb-1">Ready to send?</h4>
-                                                    <p className="mb-0 text-[15px]">
-                                                        Clicking this button will submit your information to PandaDoc
-                                                        where we'll sign it and email it to you for a counter-signature.
-                                                    </p>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <h4 className="text-base mb-1">Try another version</h4>
-                                                    <p className="text-sm mb-0 text-[15px]">
-                                                        Sorry, our lawyers refuse to recognize this version as a binding
-                                                        legal document.
-                                                    </p>
-                                                </>
-                                            )}
-                                        </>
-                                    ) : (
-                                        <>
-                                            Fill out all the fields <br className="@3xl:hidden" />
-                                            to send for signature.
-                                        </>
-                                    )}
-                                </div>
-                            )}
-                            placement="left"
+                        <Link
+                            to={APP_LEGAL_URL}
+                            external
+                            className="px-3 py-1.5 rounded bg-red text-white text-sm font-semibold no-underline hover:bg-red/90 whitespace-nowrap"
                         >
-                            <span className="relative">
-                                <TrackedCTA
-                                    event={{ name: 'clicked Request DPA' }}
-                                    type="primary"
-                                    size="sm"
-                                    disabled={!isFormComplete || !(mode === 'pretty' || mode === 'lawyer')}
-                                    onClick={handleButtonClick}
-                                    className="[&>span]:flex [&>span]:items-center [&>span]:gap-2"
-                                >
-                                    <span className="flex items-center gap-2">
-                                        <IconSend className="size-5" />
-                                        <span>Send for signature</span>
-                                    </span>
-                                </TrackedCTA>
-                            </span>
-                        </Tooltip>
+                            Get countersigned DPA
+                        </Link>
+                    </div>
+
+                    <div className="bg-yellow/25 py-3 px-4 text-sm -mx-4 @3xl:-mx-8 mt-0 border-b border-light dark:text-black">
+                        <strong>Heads up:</strong> This is a preview. To get a countersigned, valid DPA, generate it
+                        inside your PostHog organization at{' '}
+                        <a
+                            href={APP_LEGAL_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline font-semibold"
+                        >
+                            app.posthog.com/legal
+                        </a>
+                        .
                     </div>
 
                     <div className={`${mode === 'fairytale' ? 'block' : 'hidden'}`}>
@@ -512,9 +316,16 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="@3xl:hidden">at the top</span>
-                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
-                                            fields
+                                            Generate this DPA at{' '}
+                                            <a
+                                                href="https://app.posthog.com/legal"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="underline"
+                                            >
+                                                app.posthog.com/legal
+                                            </a>{' '}
+                                            to fill in your details and have it countersigned
                                         </>
                                     )}
                                     placement="top"
@@ -526,7 +337,7 @@ function DpaGenerator() {
                                                 htmlFor="companyName"
                                                 className="bg-yellow/40 font-bold px-0.5 py-0.5"
                                             >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                                [COMPANY NAME]
                                             </label>
                                         </button>
                                     </span>
@@ -547,9 +358,16 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="@3xl:hidden">at the top</span>
-                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
-                                            fields
+                                            Generate this DPA at{' '}
+                                            <a
+                                                href="https://app.posthog.com/legal"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="underline"
+                                            >
+                                                app.posthog.com/legal
+                                            </a>{' '}
+                                            to fill in your details and have it countersigned
                                         </>
                                     )}
                                     placement="top"
@@ -561,7 +379,7 @@ function DpaGenerator() {
                                                 htmlFor="companyName"
                                                 className="bg-yellow/40 font-bold px-0.5 py-0.5"
                                             >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                                [COMPANY NAME]
                                             </label>
                                         </button>
                                     </span>
@@ -583,9 +401,16 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="@3xl:hidden">at the top</span>
-                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
-                                            fields
+                                            Generate this DPA at{' '}
+                                            <a
+                                                href="https://app.posthog.com/legal"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="underline"
+                                            >
+                                                app.posthog.com/legal
+                                            </a>{' '}
+                                            to fill in your details and have it countersigned
                                         </>
                                     )}
                                     placement="top"
@@ -597,7 +422,7 @@ function DpaGenerator() {
                                                 htmlFor="companyName"
                                                 className="bg-yellow/40 font-bold px-0.5 py-0.5"
                                             >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                                [COMPANY NAME]
                                             </label>
                                         </button>
                                     </span>
@@ -609,9 +434,16 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="@3xl:hidden">at the top</span>
-                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
-                                            fields
+                                            Generate this DPA at{' '}
+                                            <a
+                                                href="https://app.posthog.com/legal"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="underline"
+                                            >
+                                                app.posthog.com/legal
+                                            </a>{' '}
+                                            to fill in your details and have it countersigned
                                         </>
                                     )}
                                     placement="top"
@@ -623,7 +455,7 @@ function DpaGenerator() {
                                                 htmlFor="companyName"
                                                 className="bg-yellow/40 font-bold px-0.5 py-0.5"
                                             >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                                [COMPANY NAME]
                                             </label>
                                         </button>
                                     </span>
@@ -645,9 +477,16 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="@3xl:hidden">at the top</span>
-                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
-                                            fields
+                                            Generate this DPA at{' '}
+                                            <a
+                                                href="https://app.posthog.com/legal"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="underline"
+                                            >
+                                                app.posthog.com/legal
+                                            </a>{' '}
+                                            to fill in your details and have it countersigned
                                         </>
                                     )}
                                     placement="top"
@@ -659,7 +498,7 @@ function DpaGenerator() {
                                                 htmlFor="companyName"
                                                 className="bg-yellow/40 font-bold px-0.5 py-0.5"
                                             >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                                [COMPANY NAME]
                                             </label>
                                         </button>
                                     </span>
@@ -683,9 +522,16 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="@3xl:hidden">at the top</span>
-                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
-                                            fields
+                                            Generate this DPA at{' '}
+                                            <a
+                                                href="https://app.posthog.com/legal"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="underline"
+                                            >
+                                                app.posthog.com/legal
+                                            </a>{' '}
+                                            to fill in your details and have it countersigned
                                         </>
                                     )}
                                     placement="top"
@@ -697,7 +543,7 @@ function DpaGenerator() {
                                                 htmlFor="companyName"
                                                 className="bg-yellow/40 font-bold px-0.5 py-0.5"
                                             >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                                [COMPANY NAME]
                                             </label>
                                         </button>
                                     </span>
@@ -713,9 +559,16 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="@3xl:hidden">at the top</span>
-                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
-                                            fields
+                                            Generate this DPA at{' '}
+                                            <a
+                                                href="https://app.posthog.com/legal"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="underline"
+                                            >
+                                                app.posthog.com/legal
+                                            </a>{' '}
+                                            to fill in your details and have it countersigned
                                         </>
                                     )}
                                     placement="top"
@@ -727,7 +580,7 @@ function DpaGenerator() {
                                                 htmlFor="companyName"
                                                 className="bg-yellow/40 font-bold px-0.5 py-0.5"
                                             >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                                [COMPANY NAME]
                                             </label>
                                         </button>
                                     </span>
@@ -840,9 +693,16 @@ function DpaGenerator() {
                             <Tooltip
                                 content={() => (
                                     <>
-                                        Fill out the form <span className="@3xl:hidden">at the top</span>
-                                        <span className="hidden @3xl:inline-block">to the left</span> populate these
-                                        fields
+                                        Generate this DPA at{' '}
+                                        <a
+                                            href="https://app.posthog.com/legal"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="underline"
+                                        >
+                                            app.posthog.com/legal
+                                        </a>{' '}
+                                        to fill in your details and have it countersigned
                                     </>
                                 )}
                                 placement="top"
@@ -851,7 +711,7 @@ function DpaGenerator() {
                                 <span className="relative">
                                     <button type="button">
                                         <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                            {companyName ? companyName : '[COMPANY NAME]'}
+                                            [COMPANY NAME]
                                         </label>
                                     </button>
                                 </span>
@@ -1042,10 +902,10 @@ function DpaGenerator() {
                                 <p>
                                     2.1.3. instruct the Processor to process Company Personal Data to provide the
                                     Services. The Company acknowledges that if AI Features are enabled as part of the
-                                    Services, such AI Features may use or rely on AI functionality (based on OpenAI's model
-                                    or similar LLMs). Note that the Processor does not use any Company Personal Data to fine tune, train or develop its AI
-                                    functionality or models for its own purposes and does not permit any third
-                                    parties (including its Subprocessors) to do so.
+                                    Services, such AI Features may use or rely on AI functionality (based on OpenAI's
+                                    model or similar LLMs). Note that the Processor does not permit any third parties
+                                    (including its Subprocessors) to use any Company Personal Data to fine tune, train
+                                    or develop their AI functionality or models.
                                 </p>
                             </div>
                             <p>2.2. Processor shall:</p>
@@ -1472,9 +1332,16 @@ function DpaGenerator() {
                                     <Tooltip
                                         content={() => (
                                             <>
-                                                Fill out the form <span className="@3xl:hidden">at the top</span>
-                                                <span className="hidden @3xl:inline-block">to the left</span> populate
-                                                these fields
+                                                Generate this DPA at{' '}
+                                                <a
+                                                    href="https://app.posthog.com/legal"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="underline"
+                                                >
+                                                    app.posthog.com/legal
+                                                </a>{' '}
+                                                to fill in your details and have it countersigned
                                             </>
                                         )}
                                         placement="top"
@@ -1486,7 +1353,7 @@ function DpaGenerator() {
                                                     htmlFor="companyAddress"
                                                     className="bg-yellow/40 font-bold px-0.5 py-0.5"
                                                 >
-                                                    {companyAddress ? companyAddress : '[COMPANY ADDRESS]'}
+                                                    [COMPANY ADDRESS]
                                                 </label>
                                             </button>
                                         </span>
@@ -1498,9 +1365,16 @@ function DpaGenerator() {
                                     <Tooltip
                                         content={() => (
                                             <>
-                                                Fill out the form <span className="@3xl:hidden">at the top</span>
-                                                <span className="hidden @3xl:inline-block">to the left</span> populate
-                                                these fields
+                                                Generate this DPA at{' '}
+                                                <a
+                                                    href="https://app.posthog.com/legal"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="underline"
+                                                >
+                                                    app.posthog.com/legal
+                                                </a>{' '}
+                                                to fill in your details and have it countersigned
                                             </>
                                         )}
                                         placement="top"
@@ -1512,7 +1386,7 @@ function DpaGenerator() {
                                                     htmlFor="yourName"
                                                     className="bg-yellow/40 font-bold px-0.5 py-0.5"
                                                 >
-                                                    {yourName ? yourName : '[REPRESENTATIVE NAME]'}
+                                                    [REPRESENTATIVE NAME]
                                                 </label>
                                             </button>
                                         </span>
@@ -1630,15 +1504,13 @@ function DpaGenerator() {
 
             <section className="text-center mt-20 @3xl:mt-40 pb-20 @3xl:pb-24 print:hidden">
                 <h3 className="mb-4">Need a custom MSA?</h3>
-                <TrackedCTA
-                    event={{ name: `clicked Talk to a human` }}
-                    href="/talk-to-a-human"
-                    type="secondary"
-                    size="lg"
+                <Link
+                    to="/talk-to-a-human"
                     state={{ newWindow: true }}
+                    className="inline-block px-6 py-3 rounded border border-primary font-semibold no-underline"
                 >
                     Talk to sales
-                </TrackedCTA>
+                </Link>
             </section>
         </>
     )
