@@ -937,15 +937,15 @@ export function useMenuData(): MenuType[] {
                 <>
                     <div className="flex items-center">
                         <Logo
-                            noText
+                            wordmark={false}
+                            variant="mono"
+                            color="primary"
                             className={`2xs:hidden md:block ${websiteMode ? 'size-10' : 'size-8 md:size-6'}`}
-                            fill="primary"
-                            classic
                         />
                         <Logo
+                            variant="mono"
+                            color="primary"
                             className={`hidden 2xs:flex md:hidden w-auto ${websiteMode ? 'h-7' : ' h-5'} `}
-                            fill="primary"
-                            classic
                         />
                         <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>

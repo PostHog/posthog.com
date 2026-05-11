@@ -53,7 +53,7 @@ export default function NextSteps({ location }) {
                 <SEO title="Next Steps - PostHog" />
                 <div className="px-5 max-w-[600px] mx-auto">
                     <div className="flex justify-center items-center my-16 space-x-4 transition-opacity">
-                        <Logo noText />
+                        <Logo wordmark={false} />
                         {customer.logo && (
                             <>
                                 <span className="text-2xl">❤️</span>

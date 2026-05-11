@@ -12,7 +12,7 @@ const Applications = ({ id, productData, slides = [] }: ApplicationsProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-8">How do I use it?</h2>
+            <h2 className="mb-8">What can I do with it?</h2>
             <p>There are a few ways to explore session recordings.</p>
             <TabbedCarousel
                 tabs={slides.map((s) => ({

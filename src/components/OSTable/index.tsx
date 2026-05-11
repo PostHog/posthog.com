@@ -48,6 +48,7 @@ interface OSTableProps {
     }
     children?: React.ReactNode
     shadow?: boolean
+    background?: 'full' | 'header' | 'none'
 }
 
 const RowSkeleton = () => {
@@ -172,6 +173,7 @@ const Row = ({
     onShowMore,
     type,
     isLastRow = false,
+    background = 'full',
 }: {
     row: Row
     lastRowRef: any
@@ -182,8 +184,11 @@ const Row = ({
     onShowMore?: () => void
     type?: string
     isLastRow?: boolean
+    background?: 'full' | 'header' | 'none'
 }) => {
     const hasMoreRow = !!(moreCount && moreCount > 0)
+    const cellBg = background === 'full' ? 'bg-primary' : ''
+    const moreRowBg = background === 'full' ? 'bg-accent hover:bg-input-hover' : 'bg-accent/50 hover:bg-accent'
     return (
         <>
             <React.Fragment>
@@ -198,6 +203,7 @@ const Row = ({
                             key={cellIndex}
                             className={`
                                 relative
+               ${cellBg}
                ${isLastCell ? '!border-r' : ''}
                ${roundBottomLeft ? 'rounded-bl-md' : ''}
                ${roundBottomRight ? 'rounded-br-md' : ''}
@@ -217,7 +223,7 @@ const Row = ({
                 })}
                 {hasMoreRow ? (
                     <div
-                        className={`col-span-full text-center !py-0 !border-r border-primary bg-accent/50 hover:bg-accent ${
+                        className={`col-span-full text-center !py-0 !border-r border-primary ${moreRowBg} ${
                             isLastRow ? 'rounded-b-md' : ''
                         }`}
                     >
@@ -242,6 +248,7 @@ const GroupedRows = ({
     editable,
     type,
     isLastGroup = false,
+    background = 'full',
 }: {
     rows: Row[]
     lastRowRef: any
@@ -250,6 +257,7 @@ const GroupedRows = ({
     editable: boolean
     type?: string
     isLastGroup?: boolean
+    background?: 'full' | 'header' | 'none'
 }) => {
     const [showMore, setShowMore] = useState(false)
     const visibleRows = showMore ? rows : rows.slice(0, 1)
@@ -267,6 +275,7 @@ const GroupedRows = ({
                     onShowMore={() => setShowMore(true)}
                     type={type}
                     isLastRow={isLastGroup && rowIndex === visibleRows.length - 1}
+                    background={background}
                 />
             ))}
         </>
@@ -289,7 +298,9 @@ const OSTable: React.FC<OSTableProps> = ({
     type,
     children,
     shadow = false,
+    background = 'full',
 }) => {
+    const headerBg = background === 'none' ? '' : 'bg-input'
     const gridClass = columns?.map((col) => col.width || 'auto').join(' ') || ''
     const [lastRowRef, lastRowInView] = useInView({ threshold: 0.1 })
     const groupIndex = columns?.findIndex((col) => col.name === groupBy)
@@ -333,7 +344,7 @@ const OSTable: React.FC<OSTableProps> = ({
                                 {columns.map((column, index) => (
                                     <div
                                         key={index}
-                                        className={`text-sm border-l border-t border-primary bg-input font-bold ${
+                                        className={`text-sm border-l border-t border-primary ${headerBg} font-bold ${
                                             index === 0 ? 'rounded-tl-md' : ''
                                         } ${index === columns.length - 1 ? '!border-r rounded-tr-md' : ''} ${
                                             column.align === 'center' ? 'text-center' : ''
@@ -366,6 +377,7 @@ const OSTable: React.FC<OSTableProps> = ({
                                           editable={editable}
                                           type={_group ? `${_group.toLowerCase()} ${type}` : type}
                                           isLastGroup={index === groupedEntries.length - 1}
+                                          background={background}
                                       />
                                   ))
                               })()
@@ -379,6 +391,7 @@ const OSTable: React.FC<OSTableProps> = ({
                                       editable={editable}
                                       type={type}
                                       isLastRow={rowIndex === rows.length - 1}
+                                      background={background}
                                   />
                               ))}
                     </div>

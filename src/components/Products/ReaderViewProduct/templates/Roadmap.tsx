@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
+import OSButton2 from 'components/OSButton/OSButton2'
 import { useUser } from 'hooks/useUser'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import { useToast } from 'hooks/toast'
@@ -203,14 +204,10 @@ const Roadmap = ({ id, productData }: SectionComponentProps) => {
                 <p className="text-sm text-secondary italic m-0">Nothing under consideration right now.</p>
             )}
             <div className="mt-6">
-                <Link
-                    to={`/roadmap?team=${encodeURIComponent(team.name)}`}
-                    state={{ newWindow: true }}
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-red dark:text-yellow hover:underline"
-                >
+                <OSButton2 to={`/roadmap?team=${encodeURIComponent(team.name)}`} state={{ newWindow: true }}>
                     View full roadmap
                     <IconArrowRight className="size-4" />
-                </Link>
+                </OSButton2>
             </div>
         </section>
     )

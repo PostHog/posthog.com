@@ -43,7 +43,7 @@ const mdxComponents = {
     DifferentHighlights,
     HappyHog,
     Letterhead,
-    Logo: () => <Logo noText className="inline-block" />,
+    Logo: () => <Logo wordmark={false} className="inline-block" />,
     CloudinaryImage,
     ProductCount,
     CustomerCount,

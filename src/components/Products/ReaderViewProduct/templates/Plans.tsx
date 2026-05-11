@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { IconCheck, IconX } from '@posthog/icons'
 import useProduct from 'hooks/useProduct'
 import OSButton from 'components/OSButton'
+import Toggle from 'components/Toggle'
 import { SectionComponentProps } from '../types'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
+
+type PlanFeatureValue = string | number | boolean
 
 const CUSTOM_FEATURE_UNITS: Record<string, string> = {
     group_analytics: 'group',
@@ -16,80 +22,67 @@ const getFeatureUnit = (featureKey: string) => {
     return featureKey.endsWith('s') ? featureKey.slice(0, -1) : featureKey
 }
 
-const getFeatureValue = (feature: any, featureKey: string) => {
+const pluralize = (n: number, unit: string): string => {
+    const isPlural = unit.endsWith('s')
+    if (n === 1) return isPlural ? unit.slice(0, -1) : unit
+    return isPlural ? unit : `${unit}s`
+}
+
+const getFeatureValue = (feature: any, featureKey: string): PlanFeatureValue => {
     if (!feature) return false
     if (feature.note !== undefined && feature.note !== null && feature.note !== '') return feature.note
     if (feature.limit !== undefined && feature.limit !== null) {
-        const unit = getFeatureUnit(featureKey) || feature.unit
-        if (unit) return `${feature.limit} ${unit}${Number(feature.limit) !== 1 ? 's' : ''}`
+        const unit = feature.unit || getFeatureUnit(featureKey)
+        if (unit) return `${feature.limit} ${pluralize(Number(feature.limit), unit)}`
         return feature.limit
     }
     return true
 }
 
-const formatValue = (value: any, featureKey: string): string => {
-    if (typeof value === 'boolean') return value ? 'Yes' : 'No'
-    if (typeof value === 'string') {
-        // Handle "1 month" style strings
-        const match = value.match(/^(\d+)\s+(.+)$/)
-        if (match) {
-            const custom = CUSTOM_FEATURE_UNITS[match[2]]
-            if (custom) {
-                const n = parseInt(match[1])
-                return `${n} ${n !== 1 ? `${custom}s` : custom}`
-            }
-        }
-        return value
+const getMaxDecimalPlaces = (tiers: any[]) =>
+    tiers.reduce((max: number, tier: any) => {
+        const price = parseFloat(tier.unit_amount_usd)
+        if (price === 0) return max
+        const str = tier.unit_amount_usd.toString()
+        const dot = str.indexOf('.')
+        return dot === -1 ? max : Math.max(max, str.length - dot - 1)
+    }, 0)
+
+const valuesEqual = (a: PlanFeatureValue, b: PlanFeatureValue): boolean => {
+    const norm = (v: PlanFeatureValue) => {
+        if (v === false || v === undefined || v === null || v === '') return ''
+        if (v === true) return '__true__'
+        return String(v).trim().toLowerCase()
     }
-    if (typeof value === 'number') {
-        const unit = getFeatureUnit(featureKey)
-        return unit ? `${value.toLocaleString()} ${value !== 1 ? `${unit}s` : unit}` : value.toLocaleString()
-    }
-    return String(value)
+    return norm(a) === norm(b)
 }
 
-const calculatePlanDifferences = (freePlan: any, paidPlan: any, addons: any[]) => {
-    if (!freePlan || !paidPlan) return []
-
-    const differences: Array<{
-        name: string
-        key: string
-        freeValue: any
-        paidValue: any
-    }> = []
-
-    const freeFeatures = freePlan.features || []
-    const paidFeatures = paidPlan.features || []
-    const allKeys = new Set([...freeFeatures.map((f: any) => f.key), ...paidFeatures.map((f: any) => f.key)])
-
-    allKeys.forEach((key: string) => {
-        const ff = freeFeatures.find((f: any) => f.key === key)
-        const pf = paidFeatures.find((f: any) => f.key === key)
-        const fv = getFeatureValue(ff, key)
-        const pv = getFeatureValue(pf, key)
-        if (fv !== pv) {
-            differences.push({ name: ff?.name || pf?.name || key, key, freeValue: fv, paidValue: pv })
-        }
-    })
-
-    addons.forEach((addon: any) => {
-        const freePlanEntry = addon.plans?.find((p: any) => p.included_if === 'no_active_parent_subscription')
-        const paidPlanEntry = addon.plans?.find((p: any) => p.included_if === 'has_parent_subscription')
-        const freeAddonVal = freePlanEntry?.included_if === 'no_active_parent_subscription' ? false : false
-        const paidAddonVal = paidPlanEntry?.included_if === 'has_parent_subscription' ? 'Available' : false
-        if (freeAddonVal !== paidAddonVal) {
-            differences.push({ name: addon.name, key: addon.type, freeValue: freeAddonVal, paidValue: paidAddonVal })
-        }
-    })
-
-    return differences
+const ValueCell = ({ value }: { value: PlanFeatureValue }) => {
+    if (value === false || value === undefined || value === null || value === '') {
+        return <IconX className="size-5 text-red" />
+    }
+    if (value === true) {
+        return <IconCheck className="size-5 text-green" />
+    }
+    return (
+        <span className="text-sm text-primary whitespace-pre-line">
+            {typeof value === 'number' ? value.toLocaleString() : value}
+        </span>
+    )
 }
 
-// Pricing philosophy bullet points — universal PostHog content
-const philosophy = [
+const pricingDetails: Array<{ headline: React.ReactNode; body: React.ReactNode }> = [
     {
         headline: 'More than 90% of companies use PostHog for free.',
         body: 'Only add a card if you need more volume, more projects, or advanced features.',
+    },
+    {
+        headline: 'Pay per use, not per seat.',
+        body: 'Your bill scales with usage, not headcount.',
+    },
+    {
+        headline: 'Volume discounts kick in automatically.',
+        body: 'No negotiations needed.',
     },
     {
         headline: 'Set a billing limit and never get an unexpected bill.',
@@ -103,12 +96,89 @@ const philosophy = [
         headline: 'We aim to match the cheapest competitor at every scale.',
         body: "Tell us if we're not.",
     },
+    {
+        headline: 'We ♥ startups.',
+        body: (
+            <>
+                Under 2 years old and pre-series B?{' '}
+                <a href="/startups" className="underline">
+                    Apply for $50k in credits
+                </a>
+                .
+            </>
+        ),
+    },
 ]
+
+const formatAllocation = (allocation: number | undefined, unit: string | undefined) => {
+    if (!allocation) return null
+    const u = unit || 'unit'
+    return `${allocation.toLocaleString()} ${pluralize(allocation, u)}/mo`
+}
+
+/*
+ * Layout overview — all breakpoints are container queries (window-resizable UI):
+ *
+ * Outer section uses CSS grid-template-areas with two named regions:
+ *   - [tldr] + [plans] on the left, [sidebar] pinned to the right
+ *   - Switches from single-column to this 2-column layout at @4xl.
+ *   - The section element must carry @container for these to fire.
+ *
+ * Comparison table rows (ROW_GRID / LABEL_CELL):
+ *   - Below @xl: 2-column grid. The label uses LABEL_CELL (col-span-2) to sit
+ *     on its own full-width row above the two plan value cells.
+ *   - At @xl and above: 3-column grid (label | free value | paid value).
+ *   - The [plans] div also carries @container so its own width drives these
+ *     breakpoints independently of the page/window width.
+ *   - Header/CTA spacer <span>s use `hidden @xl:block` to stay out of the
+ *     2-column flow on mobile while occupying the label column on desktop.
+ *
+ * Data sources:
+ *   - Product pricing (tiers, free allocation, per-product features):
+ *     useProduct({ handle }) → billing.plans / billing.addons
+ *   - Platform-wide features (projects, team members, SSO, etc.):
+ *     useStaticQuery → allProductData → type === 'platform_and_support'
+ *     Free plan: included_if === 'no_active_subscription'
+ *     Paid plan: included_if === 'has_subscription'
+ *     entitlement_only features are filtered out (display-only entitlements).
+ */
+const ROW_GRID = 'grid grid-cols-2 @xl:grid-cols-[minmax(0,1.5fr)_minmax(0,2fr)_minmax(0,2fr)] gap-x-4 @xl:gap-x-8'
+const LABEL_CELL = 'col-span-2 @xl:col-span-1'
+const ROW_PADDING = 'py-3 border-b border-light'
 
 const Plans = ({ id, productData }: SectionComponentProps) => {
     const billingHandle = productData?.sharesFreeTier || productData?.handle
     const product = useProduct({ handle: billingHandle })
     const billing = product?.billingData
+    const [showDifferencesOnly, setShowDifferencesOnly] = useState(true)
+
+    const { allProductData } = useStaticQuery(graphql`
+        query PlatformAndSupportFeatures {
+            allProductData {
+                nodes {
+                    products {
+                        type
+                        plans {
+                            plan_key
+                            included_if
+                            features {
+                                key
+                                name
+                                limit
+                                note
+                                unit
+                                entitlement_only
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `)
+
+    const platformProduct = allProductData?.nodes?.[0]?.products?.find((p: any) => p.type === 'platform_and_support')
+    const platformFreePlan = platformProduct?.plans?.find((p: any) => p.included_if === 'no_active_subscription')
+    const platformPaidPlan = platformProduct?.plans?.find((p: any) => p.included_if === 'has_subscription')
 
     if (!billing?.plans?.length || !productData) return null
 
@@ -117,115 +187,260 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
     const paidTiers = paidPlan?.tiers || []
     const unit = billing.unit || 'unit'
     const addons = billing.addons || []
-    const differences = calculatePlanDifferences(freePlan, paidPlan, addons)
 
     const firstPaidTier = paidTiers.find((t: any) => parseFloat(t.unit_amount_usd) > 0)
-    const startingPrice = firstPaidTier ? `$${parseFloat(firstPaidTier.unit_amount_usd)}/${unit}` : null
+    const dp = getMaxDecimalPlaces(paidTiers)
+    const startingPrice = firstPaidTier ? `$${parseFloat(firstPaidTier.unit_amount_usd).toFixed(dp)}` : null
+    const hasMultipleTiers = paidTiers.filter((t: any) => parseFloat(t.unit_amount_usd) > 0).length > 1
 
-    // Paid-plan unlocks (things that differ and the paid value is "better")
-    const paidUnlocks = differences.filter((d) => {
-        const pv = d.paidValue
-        const fv = d.freeValue
-        if (pv === false || pv === 'No') return false
-        if (fv === false && pv !== false) return true
-        return true
-    })
+    // Free tier rows: main product + (optionally) addons
+    const freeTierRows: Array<{ name: string; allocation: number; unit: string }> = []
+    if (freePlan?.free_allocation) {
+        freeTierRows.push({
+            name: billing.name,
+            allocation: freePlan.free_allocation,
+            unit,
+        })
+    }
+    if (productData.includeAddonRates) {
+        addons.forEach((addon: any) => {
+            const addonFreePlan = addon.plans?.find((p: any) => p.free_allocation)
+            if (addonFreePlan?.free_allocation) {
+                freeTierRows.push({
+                    name: addon.name,
+                    allocation: addonFreePlan.free_allocation,
+                    unit: addon.unit || unit,
+                })
+            }
+        })
+    }
+
+    // Build comparison rows
+    type Row = { key: string; name: string; free: PlanFeatureValue; paid: PlanFeatureValue }
+
+    const productRows: Row[] = (() => {
+        const ff = freePlan?.features || []
+        const pf = paidPlan?.features || []
+        const keys = Array.from(new Set<string>([...ff.map((f: any) => f.key), ...pf.map((f: any) => f.key)]))
+        return keys.map((key) => {
+            const fFeature = ff.find((f: any) => f.key === key)
+            const pFeature = pf.find((f: any) => f.key === key)
+            return {
+                key,
+                name: fFeature?.name || pFeature?.name || key,
+                free: getFeatureValue(fFeature, key),
+                paid: getFeatureValue(pFeature, key),
+            }
+        })
+    })()
+
+    const planRows: Row[] = (() => {
+        const ff = (platformFreePlan?.features || []).filter((f: any) => f.entitlement_only !== true)
+        const pf = (platformPaidPlan?.features || []).filter((f: any) => f.entitlement_only !== true)
+        const keys = Array.from(new Set<string>([...ff.map((f: any) => f.key), ...pf.map((f: any) => f.key)]))
+        return keys.map((key) => {
+            const fFeature = ff.find((f: any) => f.key === key)
+            const pFeature = pf.find((f: any) => f.key === key)
+            return {
+                key,
+                name: fFeature?.name || pFeature?.name || key,
+                free: getFeatureValue(fFeature, key),
+                paid: getFeatureValue(pFeature, key),
+            }
+        })
+    })()
+
+    const filterRows = (rows: Row[]) => (showDifferencesOnly ? rows.filter((r) => !valuesEqual(r.free, r.paid)) : rows)
+    const visibleProductRows = filterRows(productRows)
+    const visiblePlanRows = filterRows(planRows)
+
+    const lowestPaidTier = [...paidTiers].reverse().find((t: any) => parseFloat(t.unit_amount_usd) > 0)
+    const lowestPrice =
+        lowestPaidTier && lowestPaidTier !== firstPaidTier
+            ? `$${parseFloat(lowestPaidTier.unit_amount_usd).toFixed(dp)}`
+            : null
 
     return (
-        <section id={id} className="scroll-mt-20 not-prose @container">
-            <h2 className="text-3xl font-bold text-primary mt-0 mb-8">Plans</h2>
-
-            <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-12 @2xl:gap-16">
-                {/* Left: plan list */}
-                <div>
-                    {/* Free */}
-                    <div className="mb-8">
-                        <div className="flex items-baseline gap-2 mb-3">
-                            <h3 className="text-xl font-bold text-primary m-0">{freePlan?.name || 'Free'}</h3>
-                            <span className="text-sm text-primary/40">no credit card required</span>
-                        </div>
-                        <ul className="space-y-2 list-none m-0 p-0">
-                            <li className="flex items-baseline gap-2">
-                                <span className="text-green font-bold text-lg leading-none mt-0.5">✓</span>
-                                <span className="text-base text-primary">
-                                    <strong>{freePlan?.free_allocation?.toLocaleString()}</strong> {unit}s/mo
-                                </span>
-                            </li>
-                            {differences.map((diff) => (
-                                <li key={diff.key} className="flex items-baseline gap-2">
-                                    <span
-                                        className={`font-bold text-lg leading-none mt-0.5 ${
-                                            diff.freeValue === false ? 'text-primary/20' : 'text-green'
-                                        }`}
-                                    >
-                                        {diff.freeValue === false ? '—' : '✓'}
-                                    </span>
-                                    <span className="text-base text-primary/70">
-                                        {diff.name}
-                                        {diff.freeValue !== false && diff.freeValue !== true && (
-                                            <span className="text-primary/50">
-                                                {' '}
-                                                ({formatValue(diff.freeValue, diff.key)})
-                                            </span>
-                                        )}
-                                    </span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div className="border-t border-light my-8" />
-
-                    {/* Pay-as-you-go */}
-                    <div className="mb-8">
-                        <div className="flex items-baseline gap-2 mb-3">
-                            <h3 className="text-xl font-bold text-primary m-0">{paidPlan?.name || 'Pay-as-you-go'}</h3>
-                            {startingPrice && (
-                                <span className="text-sm text-primary/40">starts at {startingPrice}</span>
-                            )}
-                        </div>
-                        <ul className="space-y-2 list-none m-0 p-0">
-                            <li className="flex items-baseline gap-2">
-                                <span className="text-green font-bold text-lg leading-none mt-0.5">✓</span>
-                                <span className="text-base text-primary">
-                                    <strong>Unlimited</strong> {unit}s/mo
-                                </span>
-                            </li>
-                            {paidUnlocks.map((diff) => (
-                                <li key={diff.key} className="flex items-baseline gap-2">
-                                    <span className="text-green font-bold text-lg leading-none mt-0.5">✓</span>
-                                    <span className="text-base text-primary/70">
-                                        {diff.name}
-                                        {diff.paidValue !== true && diff.paidValue !== 'Available' && (
-                                            <span className="text-primary/50">
-                                                {' '}
-                                                ({formatValue(diff.paidValue, diff.key)})
-                                            </span>
-                                        )}
-                                    </span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
+        <section
+            id={id}
+            className="scroll-mt-20 not-prose @container grid grid-cols-1 gap-10 @4xl:gap-x-16 @4xl:gap-y-12 @4xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] @4xl:[grid-template-areas:'tldr_sidebar'_'plans_sidebar']"
+        >
+            {/* TL;DR */}
+            <div className="@container @4xl:[grid-area:tldr]">
+                <h2 className="text-3xl font-bold text-primary mt-0 mb-6">TL;DR:</h2>
+                <p className="text-3xl leading-snug font-normal text-primary mb-3">
+                    {freePlan?.free_allocation && (
+                        <>
+                            <strong className="font-bold">
+                                {freePlan.free_allocation.toLocaleString()} {pluralize(freePlan.free_allocation, unit)}{' '}
+                                free
+                            </strong>{' '}
+                            every month,{' '}
+                        </>
+                    )}
+                    {firstPaidTier && (
+                        <>
+                            <br className="hidden @xl:block" />
+                            then starting at{' '}
+                            <strong className="font-bold tabular-nums">
+                                ${parseFloat(firstPaidTier.unit_amount_usd).toFixed(dp)}/{unit}
+                            </strong>
+                        </>
+                    )}
+                </p>
+                {lowestPrice && (
+                    <p className="text-lg text-primary/50 mb-4">
+                        Pricing decreases with volume — as low as{' '}
+                        <strong className="font-semibold text-primary/70">
+                            {lowestPrice}/{unit}
+                        </strong>
+                    </p>
+                )}
+                <div className="flex flex-wrap items-center gap-3 mt-6">
                     <OSButton variant="primary" asLink to="https://app.posthog.com/signup" size="lg">
-                        Get started free
+                        Get started — free
+                    </OSButton>
+                    <OSButton variant="secondary" asLink to="/talk-to-a-human" size="lg">
+                        Talk to a human
                     </OSButton>
                 </div>
+            </div>
 
-                {/* Right: pricing philosophy */}
-                <div className="@2xl:border-l @2xl:border-light @2xl:pl-12">
-                    <p className="text-sm text-primary/40 mb-6">Our pricing philosophy</p>
-                    <ul className="space-y-6 list-none m-0 p-0">
-                        {philosophy.map((point, i) => (
-                            <li key={i}>
-                                <p className="font-semibold text-primary mb-0.5">{point.headline}</p>
-                                <p className="text-sm text-primary/60 mb-0">{point.body}</p>
-                            </li>
+            {/* Plans comparison */}
+            <div className="@container @4xl:[grid-area:plans]">
+                <h3 className="text-2xl font-bold text-primary m-0 mb-4">Plans</h3>
+
+                {/* Plan column headers */}
+                <div className={`${ROW_GRID} ${ROW_PADDING}`}>
+                    <span className="hidden @xl:block" />
+                    <span className="text-base font-bold text-primary">Totally free</span>
+                    <span className="text-base font-bold text-primary">Pay-as-you-go</span>
+                </div>
+
+                {/* Price per unit */}
+                <div className={`${ROW_GRID} ${ROW_PADDING} items-start`}>
+                    <span className={`${LABEL_CELL} text-base text-primary/70`}>Price per {unit}</span>
+                    <span>
+                        <strong className="text-lg text-primary">$0</strong>
+                    </span>
+                    <span>
+                        {startingPrice ? (
+                            <>
+                                <strong className="text-lg text-primary">
+                                    {startingPrice}/{unit}
+                                </strong>
+                                {hasMultipleTiers && <em className="text-base text-primary/60"> or less!</em>}
+                                {hasMultipleTiers && (
+                                    <span className="block text-sm text-primary/50 mt-0.5">
+                                        Pricing reduces with scale
+                                    </span>
+                                )}
+                            </>
+                        ) : (
+                            <strong className="text-lg text-primary">$0</strong>
+                        )}
+                    </span>
+                </div>
+
+                {/* Monthly free tier */}
+                {freeTierRows.length > 0 && (
+                    <div className={`${ROW_GRID} ${ROW_PADDING} items-start`}>
+                        <span className={`${LABEL_CELL} text-base text-primary/70`}>Monthly free tier</span>
+                        <div className="space-y-3">
+                            {freeTierRows.map((row) => (
+                                <div key={row.name}>
+                                    <p className="text-sm text-primary/50 m-0">{row.name}</p>
+                                    <p className="text-base font-semibold text-primary m-0">
+                                        {formatAllocation(row.allocation, row.unit)}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="space-y-3">
+                            {freeTierRows.map((row) => (
+                                <div key={row.name}>
+                                    <p className="text-sm text-primary/50 m-0">{row.name}</p>
+                                    <p className="text-base font-semibold text-primary m-0">
+                                        {formatAllocation(row.allocation, row.unit)}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* Product features */}
+                <div className="mt-12 mb-4 flex items-center justify-between gap-4">
+                    <h3 className="text-2xl font-bold text-primary m-0">Product features</h3>
+                    <Toggle
+                        checked={showDifferencesOnly}
+                        onChange={setShowDifferencesOnly}
+                        label="Show differences only"
+                        position="right"
+                    />
+                </div>
+
+                {visibleProductRows.length === 0 ? (
+                    <p className="text-sm text-primary/50 italic py-4 m-0">
+                        {showDifferencesOnly
+                            ? 'All product features are the same across plans.'
+                            : 'No product features.'}
+                    </p>
+                ) : (
+                    <div>
+                        {visibleProductRows.map((row) => (
+                            <div key={`prod-${row.key}`} className={`${ROW_GRID} ${ROW_PADDING} items-center`}>
+                                <span className={`${LABEL_CELL} text-sm text-primary/70`}>{row.name}</span>
+                                <ValueCell value={row.free} />
+                                <ValueCell value={row.paid} />
+                            </div>
                         ))}
-                    </ul>
+                    </div>
+                )}
+
+                {/* Platform features */}
+                <h3 className="text-2xl font-bold text-primary mt-12 mb-4">Platform features</h3>
+                {visiblePlanRows.length === 0 ? (
+                    <p className="text-sm text-primary/50 italic py-4 m-0">
+                        {showDifferencesOnly
+                            ? 'All platform features are the same across plans.'
+                            : 'No platform features.'}
+                    </p>
+                ) : (
+                    <div>
+                        {visiblePlanRows.map((row) => (
+                            <div key={`plan-${row.key}`} className={`${ROW_GRID} ${ROW_PADDING} items-center`}>
+                                <span className={`${LABEL_CELL} text-sm text-primary/70`}>{row.name}</span>
+                                <ValueCell value={row.free} />
+                                <ValueCell value={row.paid} />
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {/* Dual CTAs */}
+                <div className={`${ROW_GRID} mt-8`}>
+                    <span className="hidden @xl:block" />
+                    <OSButton variant="primary" asLink to="https://app.posthog.com/signup" size="lg">
+                        Get started - free
+                    </OSButton>
+                    <OSButton variant="primary" asLink to="https://app.posthog.com/signup" size="lg">
+                        Get started - free
+                    </OSButton>
                 </div>
             </div>
+
+            {/* Sidebar: combined pricing details */}
+            <aside className="@container @4xl:[grid-area:sidebar] @4xl:border-l @4xl:border-light @4xl:pl-12">
+                <ul className="space-y-6 list-none m-0 p-0">
+                    {pricingDetails.map((point, i) => (
+                        <li key={i}>
+                            <p className="font-semibold text-primary leading-tight mb-1">{point.headline}</p>
+                            <p className="text-sm text-primary/60 mb-0">{point.body}</p>
+                        </li>
+                    ))}
+                </ul>
+            </aside>
         </section>
     )
 }

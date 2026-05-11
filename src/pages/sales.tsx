@@ -613,7 +613,7 @@ export default function Sales() {
                     <h2 className="text-4xl !m-0 p-0">
                         <span className="text-red dark:text-yellow">[Everyone else]</span> vs.{' '}
                         <span className="inline-flex items-center gap-2 whitespace-nowrap relative top-3">
-                            <Logo noText className="h-12 inline-block" /> PostHog
+                            <Logo wordmark={false} className="h-12 inline-block" /> PostHog
                         </span>
                     </h2>
                     <div className="grid @3xl:grid-cols-2 @3xl:gap-8 items-center @3xl:items-start">
@@ -722,7 +722,8 @@ export default function Sales() {
                 <div className="flex-1 px-8 py-8">
                     <div className="max-w-5xl mx-auto">
                         <h2 className="flex justify-center items-center mb-6 text-2xl font-bold">
-                            How <Logo noText className="inline-block mt-[-2px] ml-2 mr-1.5" /> PostHog does sales
+                            How <Logo wordmark={false} className="inline-block mt-[-2px] ml-2 mr-1.5" /> PostHog does
+                            sales
                         </h2>
                         <div className="not-prose">
                             <Accordion key="us-accordion" items={us} keyboardContainerRef={keyboardContainerRef} />

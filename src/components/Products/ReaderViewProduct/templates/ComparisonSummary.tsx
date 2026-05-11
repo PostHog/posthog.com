@@ -1,6 +1,7 @@
 import React from 'react'
 import Logo from 'components/Logo'
 import { SectionComponentProps } from '../types'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 interface ComparisonItem {
     title: string
@@ -35,19 +36,33 @@ const ComparisonSummary = ({ id, productData }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="text-3xl font-bold text-primary mt-0 mb-4">PostHog vs...</h2>
-            <p className="text-base text-secondary m-0 mb-4">An honest comparison.</p>
+            <div className="rounded-lg shadow-2xl flex flex-col justify-between items-center relative overflow-hidden min-h-64 mb-6 before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/compare_bg_0ffcd7a4d0.jpg')] before:bg-cover before:bg-center before:bg-no-repeat after:absolute after:inset-0 after:bg-gradient-to-b after:from-[rgba(0,0,0,.5)] after:via-[rgba(0,0,0,.2)] after:to-[rgba(0,0,0,0)]">
+                <div className="relative z-20 pt-8">
+                    <h2 className="text-4xl font-bold text-white mb-2 text-center">PostHog vs...</h2>
+                    <p className="text-xl text-white max-w-4xl mx-auto mb-8 text-center">An honest comparison tl;dr:</p>
+                </div>
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/mascots_e1d975b193.png"
+                    alt="PostHog's mascot and what competitor's mascots would look like if they had Lottie"
+                    className="relative z-10"
+                    imgClassName="max-h-[218px]"
+                />
+            </div>
             <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-6">
                 <div>
-                    <h3 className="text-lg font-bold text-primary mt-0 mb-2">
-                        A competitor might suit you better <em>(for now)</em> if...
-                    </h3>
+                    <h3 className="text-lg font-bold text-primary mt-0 mb-2">Choose a competitor if...</h3>
                     <ItemList items={summary.them || []} />
                 </div>
                 <div>
                     <h3 className="text-lg font-bold text-primary mt-0 mb-2">
-                        Reasons to choose <Logo noText fill="primary" className="h-6 inline-block -mb-1 mx-0.5" />{' '}
-                        PostHog
+                        Go with{' '}
+                        <Logo
+                            wordmark={false}
+                            variant="mono"
+                            color="primary"
+                            className="h-6 inline-block -mb-1 mx-0.5"
+                        />{' '}
+                        if...
                     </h3>
                     <ItemList items={summary.us || []} />
                 </div>

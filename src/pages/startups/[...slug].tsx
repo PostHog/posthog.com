@@ -226,7 +226,7 @@ export default function Startups(): JSX.Element {
 
                         <div className="relative pb-32 prose-invert prose-sm">
                             <h1 className="flex items-center gap-2.5 mb-0 text-2xl">
-                                <Logo className="h-14 relative -top-px" fill="white" /> {titleContent}
+                                <Logo className="h-14 relative -top-px" variant="mono" color="white" /> {titleContent}
                             </h1>
                             <ul className="prose prose-sm text-white mt-2 mb-4">
                                 <li>{creditValue} in PostHog credits</li>

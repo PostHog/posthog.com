@@ -233,10 +233,198 @@ export default function Components(): JSX.Element {
                             </div>
                         </section>
                         <section id="logo">
-                            <h2>Logo</h2>
+                            <h2>
+                                <code>&lt;Logo /&gt;</code>
+                            </h2>
 
-                            <Logo />
-                            <Logo noText />
+                            <table className="w-full border-collapse border border-primary">
+                                <thead>
+                                    <tr className="bg-accent">
+                                        <th className="border border-primary px-4 py-2 text-left">Variant</th>
+                                        <th className="border border-primary px-4 py-2 text-left">Preview</th>
+                                        <th className="border border-primary px-4 py-2 text-left">Code</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            Landscape — gradient
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <Logo className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <code className="text-xs whitespace-pre">{`<Logo />`}</code>
+                                            <p className="mt-2 mb-0 text-xs text-secondary">
+                                                Default treatment for digital surfaces with a light background.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            Landscape — gradient + code
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <Logo code className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <code className="text-xs whitespace-pre">{`<Logo code />`}</code>
+                                            <p className="mt-2 mb-0 text-xs text-secondary">
+                                                Use on PostHog Code product surfaces — the Code app, its landing pages,
+                                                and Code-specific marketing.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            Icon only — gradient
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <Logo wordmark={false} className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <code className="text-xs whitespace-pre">{`<Logo wordmark={false} />`}</code>
+                                            <p className="mt-2 mb-0 text-xs text-secondary">
+                                                Tight spaces, inline with copy, app icons, favicons.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            Landscape — print (4-color)
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <Logo variant="print" className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <code className="text-xs whitespace-pre">{`<Logo variant="print" />`}</code>
+                                            <p className="mt-2 mb-0 text-xs text-secondary">
+                                                Solid CMYK-friendly fills for print, swag, and any surface where
+                                                gradients won't reproduce reliably.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            Icon only — print (4-color)
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <Logo variant="print" wordmark={false} className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <code className="text-xs whitespace-pre">{`<Logo variant="print" wordmark={false} />`}</code>
+                                            <p className="mt-2 mb-0 text-xs text-secondary">
+                                                Print/swag in compact spaces — stickers, lapel pins, embroidery.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            Landscape — mono (black)
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <Logo variant="mono" className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <code className="text-xs whitespace-pre">{`<Logo variant="mono" />`}</code>
+                                            <p className="mt-2 mb-0 text-xs text-secondary">
+                                                Single-color treatment for press kits, partner pages, embedded
+                                                signatures.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            Landscape — mono (white)
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top bg-black">
+                                            <Logo variant="mono" color="white" className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <code className="text-xs whitespace-pre">{`<Logo variant="mono" color="white" />`}</code>
+                                            <p className="mt-2 mb-0 text-xs text-secondary">
+                                                Use on dark backgrounds, photography, or any surface where the color
+                                                logo lacks contrast.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            Icon only — mono (primary)
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <Logo variant="mono" color="primary" wordmark={false} className="h-7" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <code className="text-xs whitespace-pre">{`<Logo variant="mono" color="primary" wordmark={false} />`}</code>
+                                            <p className="mt-2 mb-0 text-xs text-secondary">
+                                                Brand-tinted accent in UI — section dividers, watermarks, hover states.
+                                                Pass any color string (Tailwind token, hex, or
+                                                <code className="mx-1 text-xs">currentColor</code>).
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            Stacked — gradient
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <Logo stacked className="h-24" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <code className="text-xs whitespace-pre">{`<Logo stacked />`}</code>
+                                            <p className="mt-2 mb-0 text-xs text-secondary">
+                                                Vertical layouts — square cards, social posts, business cards,
+                                                presentation covers.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            Stacked — gradient + code
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <Logo stacked code className="h-28" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <code className="text-xs whitespace-pre">{`<Logo stacked code />`}</code>
+                                            <p className="mt-2 mb-0 text-xs text-secondary">
+                                                Stacked PostHog Code mark for Code-specific covers, swag, and portrait
+                                                surfaces.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            Stacked — print (4-color)
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <Logo stacked variant="print" className="h-24" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <code className="text-xs whitespace-pre">{`<Logo stacked variant="print" />`}</code>
+                                            <p className="mt-2 mb-0 text-xs text-secondary">
+                                                Stacked layout for print — posters, swag tags, portrait flyers.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            Stacked — mono (black)
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <Logo stacked variant="mono" className="h-24" />
+                                        </td>
+                                        <td className="border border-primary px-4 py-2 align-top">
+                                            <code className="text-xs whitespace-pre">{`<Logo stacked variant="mono" />`}</code>
+                                            <p className="mt-2 mb-0 text-xs text-secondary">
+                                                Mono treatment in vertical layout — partner stack-ups, signage,
+                                                single-color print runs.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </section>
                         <section id="og-templates">
                             <h2>Open graph image templates</h2>

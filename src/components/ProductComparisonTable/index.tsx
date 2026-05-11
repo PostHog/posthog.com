@@ -1003,7 +1003,11 @@ export default function ProductComparisonTable({
                 name: (
                     <>
                         {key === 'posthog' ? (
-                            <Logo className="h-5 mx-auto w-auto max-w-full" fill={isDark ? 'white' : ''} />
+                            <Logo
+                                className="h-5 mx-auto w-auto max-w-full"
+                                variant={isDark ? 'mono' : 'gradient'}
+                                color={isDark ? 'white' : undefined}
+                            />
                         ) : competitorData[key]?.name ? (
                             competitorData[key].name
                         ) : (

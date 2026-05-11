@@ -736,7 +736,13 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         props: [],
         Editor: () => {
             const { siteSettings } = useApp()
-            return <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
+            return (
+                <Logo
+                    className="inline-block"
+                    variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
+                    color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                />
+            )
         },
     },
     {
