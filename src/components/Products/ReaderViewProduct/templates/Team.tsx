@@ -1,6 +1,5 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import TeamPatch from 'components/TeamPatch'
 import { TeamMember } from 'components/People'
@@ -12,6 +11,7 @@ import {
 } from 'components/Stickers/Index'
 import { IconArrowRight } from '@posthog/icons'
 import { SectionComponentProps } from '../types'
+import OSButton2 from 'components/OSButton/OSButton2'
 
 interface ProfileNode {
     id: string | number
@@ -238,14 +238,10 @@ const Team = ({ id, productData }: SectionComponentProps) => {
             )}
 
             <div className="mt-6">
-                <Link
-                    to={`/teams/${team.slug}`}
-                    state={{ newWindow: true }}
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-red dark:text-yellow hover:underline"
-                >
+                <OSButton2 to={`/teams/${team.slug}`} state={{ newWindow: true }}>
                     Visit team page
                     <IconArrowRight className="size-4" />
-                </Link>
+                </OSButton2>
             </div>
         </section>
     )

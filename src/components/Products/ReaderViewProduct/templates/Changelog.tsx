@@ -5,6 +5,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import Link from 'components/Link'
 import { ZoomImage } from 'components/ZoomImage'
+import OSButton2 from 'components/OSButton/OSButton2'
 import { IconArrowRight } from '@posthog/icons'
 import { SectionComponentProps } from '../types'
 
@@ -49,7 +50,7 @@ const ChangelogRow = ({ entry }: { entry: ChangelogNode }) => {
     const thumb = entry.media?.gatsbyImageData ? getImage(entry.media.gatsbyImageData) : null
     const href = `/changelog?id=${entry.id}`
     return (
-        <li className="m-0 grid grid-cols-[60px_1fr] @md/reader-content:grid-cols-[60px_1fr_auto] gap-x-3 gap-y-1 py-2 border-b border-primary last:border-b-0 items-center">
+        <li className="m-0 grid grid-cols-[60px_1fr] @md/reader-content:grid-cols-[60px_1fr_auto] gap-x-3 gap-y-1 py-2 border-b border-primary last:border-b-0 items-center @md/reader-content:items-start">
             <div className="text-xs font-mono text-secondary pt-0.5 self-start">{date.format('MMM D')}</div>
             <div className="min-w-0">
                 <Link to={href} state={{ newWindow: true, preventScroll: true }} className="text-inherit">
@@ -60,7 +61,7 @@ const ChangelogRow = ({ entry }: { entry: ChangelogNode }) => {
                 {description && <p className="text-sm text-secondary m-0 mt-0.5 leading-snug">{description}</p>}
             </div>
             {thumb && (
-                <div className="hidden @md/reader-content:block w-32 shrink-0 overflow-hidden rounded border border-primary">
+                <div className="hidden @md/reader-content:block w-32 shrink-0 overflow-hidden rounded border border-primary leading-[0]">
                     <ZoomImage>
                         <GatsbyImage image={thumb} alt={entry.title} className="w-full h-20 object-cover" />
                     </ZoomImage>
@@ -130,7 +131,7 @@ const Changelog = ({ id, productData }: SectionComponentProps) => {
             <p className="text-base text-secondary leading-relaxed m-0 mb-6">
                 Recent updates from the {team.name} Team.
             </p>
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-8">
                 {groups.map((group) => (
                     <div key={group.key}>
                         <h3 className="text-base font-semibold text-primary m-0 mb-1 pb-1 border-b border-primary flex items-baseline gap-2">
@@ -146,14 +147,10 @@ const Changelog = ({ id, productData }: SectionComponentProps) => {
                 ))}
             </div>
             <div className="mt-6">
-                <Link
-                    to={`/changelog?team=${encodeURIComponent(team.name)}`}
-                    state={{ newWindow: true }}
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-red dark:text-yellow hover:underline"
-                >
+                <OSButton2 to={`/changelog?team=${encodeURIComponent(team.name)}`} state={{ newWindow: true }}>
                     View full changelog
                     <IconArrowRight className="size-4" />
-                </Link>
+                </OSButton2>
             </div>
         </section>
     )
