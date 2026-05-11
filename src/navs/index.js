@@ -1116,6 +1116,10 @@ export const handbookSidebar = [
                                 name: 'Data pipelines',
                                 url: '/handbook/marketing/how-we-position-and-sell/data-pipelines',
                             },
+                            {
+                                name: 'Data warehouse',
+                                url: '/handbook/marketing/how-we-position-and-sell/data-warehouse',
+                            },
                         ],
                     },
                 ],
