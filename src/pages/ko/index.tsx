@@ -8,7 +8,7 @@ export default function KoreanHome() {
             translate={translateKo}
             translateBody={translateKoHomeBody}
             seo={{
-                title: 'PostHog - 제품 엔지니어를 위한 올인원 개발 도구',
+                title: 'PostHog - 우리는 프로덕트 엔지니어를 위한 개발 도구를 만듭니다',
                 description:
                     'PostHog는 제품 분석, 세션 리플레이, 피처 플래그, 실험, 데이터 웨어하우스를 한곳에서 제공하는 오픈소스 Product OS입니다.',
                 lang: 'ko',

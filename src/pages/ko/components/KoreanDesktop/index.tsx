@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'components/Link'
 import { useApp } from '../../../../context/App'
 import { IconDemoThumb, AppIcon } from 'components/OSIcons'
@@ -16,6 +16,7 @@ import ReactConfetti from 'react-confetti'
 import { useToast } from '../../../../context/Toast'
 import usePostHog from 'hooks/usePostHog'
 import { translateKo } from '../../_translations'
+import KoreanCookieBannerToast from '../KoreanCookieBannerToast'
 
 declare global {
     interface Window {
@@ -23,14 +24,7 @@ declare global {
     }
 }
 
-interface Product {
-    name: string
-    slug: string
-    Icon: React.ComponentType<any>
-    color?: string
-}
-
-export const useProductLinks = () => {
+export const useProductLinks = (): AppItem[] => {
     const { posthogInstance, openNewChat, siteSettings, updateSiteSettings } = useApp()
     const { addToast } = useToast()
     const posthog = usePostHog()
@@ -218,7 +212,7 @@ const validateIconPositions = (
     return true
 }
 
-export default function Desktop() {
+export default function Desktop(): JSX.Element {
     const productLinks = useProductLinks()
     const {
         constraintsRef,
@@ -228,7 +222,6 @@ export default function Desktop() {
         setConfetti,
         confetti,
         compact,
-        windows,
         websiteMode,
         posthogInstance,
         updateSiteSettings,
@@ -238,8 +231,6 @@ export default function Desktop() {
         enabled: !siteSettings.screensaverDisabled,
     })
     const [rendered, setRendered] = useState(false)
-    const [navVisible, setNavVisible] = useState(false)
-    const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const { getWallpaperClasses } = useTheme()
     const { addToast } = useToast()
     function generateInitialPositions(columns = 2): IconPositions {
@@ -348,9 +339,6 @@ export default function Desktop() {
 
         return () => {
             window.removeEventListener('resize', handleResize)
-            if (hoverTimeoutRef.current) {
-                clearTimeout(hoverTimeoutRef.current)
-            }
         }
     }, [posthogInstance])
 
@@ -365,20 +353,6 @@ export default function Desktop() {
         const newPositions = { ...iconPositions, [appLabel]: position }
         setIconPositions(newPositions)
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newPositions))
-    }
-
-    const handleMouseEnter = () => {
-        if (hoverTimeoutRef.current) {
-            clearTimeout(hoverTimeoutRef.current)
-            hoverTimeoutRef.current = null
-        }
-        setNavVisible(true)
-    }
-
-    const handleMouseLeave = () => {
-        hoverTimeoutRef.current = setTimeout(() => {
-            setNavVisible(false)
-        }, 2000)
     }
 
     const allApps = [...productLinks, ...apps]
@@ -419,6 +393,7 @@ export default function Desktop() {
 
     return (
         <>
+            <KoreanCookieBannerToast />
             <ContextMenu
                 menuItems={[
                     {
@@ -466,8 +441,6 @@ export default function Desktop() {
                     data-scheme="primary"
                     data-app="Desktop"
                     className={`fixed size-full ${websiteMode ? '-z-10 inset-0' : ''}`}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
                 >
                     <div className={`fixed inset-0 -z-10 ${getWallpaperClasses()}`} />
                     {/* Hogzilla */}

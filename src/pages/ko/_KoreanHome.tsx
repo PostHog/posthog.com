@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Link from 'components/Link'
 import { IconHeadset, IconPlayFilled } from '@posthog/icons'
 import {
@@ -23,16 +23,24 @@ import { graphql, useStaticQuery } from 'gatsby'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
 import { APP_COUNT } from '../../constants'
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction, child as ctaChild, container as ctaContainer } from 'components/CallToAction'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
-import HeroCarousel from 'components/Home/HeroCarousel'
-import { Customers, getSharedDescriptors } from 'components/Home/shared'
 import KoreanMDXViewer from './components/KoreanMDXViewer'
+import KoreanHeroCarousel from './components/KoreanHeroCarousel'
+import { KoreanCustomers, getKoreanSharedDescriptors } from './components/KoreanHomeShared'
 
 type TranslateFn = (value: string) => string
+type ProductSummary = {
+    handle: string
+    slug: string
+    name: string
+    color: string
+    Icon?: React.ComponentType<{ className?: string }>
+}
+
 const identity = (value: string) => value
 const AppCount = ({ t = identity }: { t?: TranslateFn }) => (
     <span className="text-xs font-normal">
@@ -56,7 +64,7 @@ const Tagline = ({ t = identity }: { t?: TranslateFn }) => (
     </>
 )
 
-export const CTAs = ({ t = identity }: { t?: TranslateFn }) => {
+export const CTAs = ({ t = identity }: { t?: TranslateFn }): JSX.Element => {
     const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
         <div>
@@ -68,13 +76,13 @@ export const CTAs = ({ t = identity }: { t?: TranslateFn }) => {
                 >
                     {t('Get started - free')}
                 </CallToAction>
-                <CallToAction
-                    type="secondary"
-                    size="md"
+                <button
+                    type="button"
                     onClick={() => setShowIntegrationPrompt((current) => !current)}
+                    className={ctaContainer('secondary', 'md')}
                 >
-                    {t('Install with AI')}
-                </CallToAction>
+                    <span className={ctaChild('secondary', 'auto', '', 'md')}>{t('Install with AI')}</span>
+                </button>
             </div>
             <motion.div
                 className="overflow-hidden"
@@ -139,6 +147,9 @@ export const CTAs = ({ t = identity }: { t?: TranslateFn }) => {
                     <span className="underline font-semibold">{t('Talk to a human')}</span>
                 </Link>
             </p>
+            <p className="!text-sm text-secondary mt-2 mb-0 text-center @xl:text-left">
+                {t("PostHog's products and support are only available in English at this time.")}
+            </p>
         </div>
     )
 }
@@ -158,7 +169,7 @@ const HomeHitCounter = () => {
     }
 
     const getDigitComponent = (digit: string) => {
-        const digitComponents: { [key: string]: React.ComponentType<any> } = {
+        const digitComponents: { [key: string]: React.ComponentType<{ className?: string }> } = {
             '0': Digit0,
             '1': Digit1,
             '2': Digit2,
@@ -199,7 +210,7 @@ const CompanyStageTabs = ({ t = identity }: { t?: TranslateFn }) => {
     const allProducts = useProduct()
 
     const getProduct = (handle: string) =>
-        Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === handle) : undefined
+        Array.isArray(allProducts) ? allProducts.find((p: ProductSummary) => p.handle === handle) : undefined
 
     const stages = [
         {
@@ -284,9 +295,14 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     { name: 'AppCount', kind: 'flow', props: [], Editor: () => <AppCount /> },
     { name: 'CompanyStageTabs', kind: 'flow', props: [], Editor: () => <CompanyStageTabs /> },
     { name: 'CTAs', kind: 'flow', props: [], Editor: () => <CTAs /> },
-    { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <HeroCarousel /> },
+    { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <KoreanHeroCarousel /> },
     { name: 'HomeHitCounter', kind: 'flow', props: [], Editor: () => <HomeHitCounter /> },
-    { name: 'Customers', kind: 'flow', props: [], Editor: () => <Customers tableClassName="bg-white dark:bg-dark" /> },
+    {
+        name: 'Customers',
+        kind: 'flow',
+        props: [],
+        Editor: () => <KoreanCustomers tableClassName="bg-white dark:bg-dark" />,
+    },
     {
         name: 'Logo',
         kind: 'flow',
@@ -310,12 +326,17 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ButtonDataStack',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/data-stack">README: PostHog data stack.md</Button>,
+        Editor: () => <Button url="/data-stack">README: PostHog 데이터 스택.md</Button>,
     },
-    { name: 'ButtonPricing', kind: 'flow', props: [], Editor: () => <Button url="/pricing">Explore pricing</Button> },
-    { name: 'ButtonAI', kind: 'flow', props: [], Editor: () => <Button url="/ai">Learn about PostHog AI</Button> },
-    { name: 'ButtonAbout', kind: 'flow', props: [], Editor: () => <Button url="/about">Read more about us</Button> },
-    ...getSharedDescriptors(),
+    { name: 'ButtonPricing', kind: 'flow', props: [], Editor: () => <Button url="/pricing">가격 정보 보기</Button> },
+    { name: 'ButtonAI', kind: 'flow', props: [], Editor: () => <Button url="/ai">PostHog AI 알아보기</Button> },
+    {
+        name: 'ButtonAbout',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Button url="/about">PostHog에 대해 더 알아보기</Button>,
+    },
+    ...getKoreanSharedDescriptors(),
 ]
 
 const getJsxComponentDescriptors = (t: TranslateFn): JsxComponentDescriptor[] => [
@@ -323,9 +344,14 @@ const getJsxComponentDescriptors = (t: TranslateFn): JsxComponentDescriptor[] =>
     { name: 'AppCount', kind: 'flow', props: [], Editor: () => <AppCount t={t} /> },
     { name: 'CompanyStageTabs', kind: 'flow', props: [], Editor: () => <CompanyStageTabs t={t} /> },
     { name: 'CTAs', kind: 'flow', props: [], Editor: () => <CTAs t={t} /> },
-    { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <HeroCarousel /> },
+    { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <KoreanHeroCarousel translate={t} /> },
     { name: 'HomeHitCounter', kind: 'flow', props: [], Editor: () => <HomeHitCounter /> },
-    { name: 'Customers', kind: 'flow', props: [], Editor: () => <Customers tableClassName="bg-white dark:bg-dark" /> },
+    {
+        name: 'Customers',
+        kind: 'flow',
+        props: [],
+        Editor: () => <KoreanCustomers tableClassName="bg-white dark:bg-dark" translate={t} />,
+    },
     {
         name: 'Logo',
         kind: 'flow',
@@ -369,7 +395,7 @@ const getJsxComponentDescriptors = (t: TranslateFn): JsxComponentDescriptor[] =>
         props: [],
         Editor: () => <Button url="/about">{t('Read more about us')}</Button>,
     },
-    ...getSharedDescriptors(),
+    ...getKoreanSharedDescriptors(t),
 ]
 
 interface HomeTestProps {
@@ -384,7 +410,7 @@ interface HomeTestProps {
     }
 }
 
-export default function KoreanHome({ translate = identity, translateBody, seo }: HomeTestProps = {}) {
+export default function KoreanHome({ translate = identity, translateBody, seo }: HomeTestProps = {}): JSX.Element {
     const data = useStaticQuery(graphql`
         query KoreanHomeMdx {
             homepageMdx: mdx(fileAbsolutePath: { regex: "/contents/index\\.mdx/" }) {
@@ -392,7 +418,15 @@ export default function KoreanHome({ translate = identity, translateBody, seo }:
             }
         }
     `)
-    const mdxBody = translateBody ? translateBody(data?.homepageMdx?.mdxBody || '') : data?.homepageMdx?.mdxBody
+    const sourceMdxBody = data?.homepageMdx?.mdxBody || ''
+    const mdxBody = useMemo(
+        () => (translateBody ? translateBody(sourceMdxBody) : sourceMdxBody),
+        [sourceMdxBody, translateBody]
+    )
+    const jsxDescriptors = useMemo(
+        () => (translate === identity ? jsxComponentDescriptors : getJsxComponentDescriptors(translate)),
+        [translate]
+    )
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
     const posthog = usePostHog()
@@ -418,9 +452,7 @@ export default function KoreanHome({ translate = identity, translateBody, seo }:
                 languageAlternates={seo?.languageAlternates}
             />
             <KoreanMDXViewer
-                jsxComponentDescriptors={
-                    translate === identity ? jsxComponentDescriptors : getJsxComponentDescriptors(translate)
-                }
+                jsxComponentDescriptors={jsxDescriptors}
                 mdxBody={mdxBody}
                 maxWidth={900}
                 cta={{

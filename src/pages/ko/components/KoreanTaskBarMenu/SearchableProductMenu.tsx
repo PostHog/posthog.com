@@ -145,7 +145,7 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products 
                         </div>
                     </>
                 ) : (
-                    <div className="text-center py-4 text-muted text-sm">No apps found for "{searchTerm}"</div>
+                    <div className="text-center py-4 text-muted text-sm">"{searchTerm}"에 맞는 앱이 없습니다</div>
                 )}
             </div>
         </div>

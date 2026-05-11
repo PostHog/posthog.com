@@ -638,11 +638,7 @@ export function useMenuData(): MenuType[] {
             ],
         },
         {
-            trigger: (
-                <>
-                    <span>More</span>
-                </>
-            ),
+            trigger: 'More',
             items: [
                 {
                     type: 'item',

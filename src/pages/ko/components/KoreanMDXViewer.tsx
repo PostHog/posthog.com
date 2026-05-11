@@ -23,6 +23,7 @@ export default function KoreanMDXViewer({ mdxBody, jsxComponentDescriptors, cta,
             return acc
         }, {} as Record<string, React.ComponentType<any>>)
     }, [jsxComponentDescriptors])
+    const providerComponents = useMemo(() => ({ a: Link, ...mdxComponents }), [mdxComponents])
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
         const href = (event.target as HTMLElement).closest('a')?.getAttribute('href')
@@ -35,7 +36,7 @@ export default function KoreanMDXViewer({ mdxBody, jsxComponentDescriptors, cta,
     return (
         <Editor type="mdx" cta={cta}>
             <div onClick={handleClick} style={maxWidth ? { maxWidth, margin: '0 auto' } : undefined}>
-                <MDXProvider components={{ a: Link, ...mdxComponents }}>
+                <MDXProvider components={providerComponents}>
                     <MDXRenderer>{mdxBody}</MDXRenderer>
                 </MDXProvider>
             </div>
