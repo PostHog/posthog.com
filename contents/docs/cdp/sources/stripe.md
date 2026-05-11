@@ -19,7 +19,7 @@ Stripe tables can be synced in one of three modes, and the one you pick has a bi
 - **Append-only (incremental) sync.** PostHog periodically asks Stripe for new rows using Stripe's `created` cursor. This is cheap, but the Stripe API does not expose an "updated since" filter for most resources, so any change to an existing row – a subscription being cancelled, an invoice being marked paid, a customer's email being corrected – is silently missed. Fine for append-only tables you never mutate, dangerous for anything else.
 - **Full refresh sync.** PostHog re-downloads every row every sync. This is the only non-webhook mode that will eventually reflect updates, but it's expensive on both sides (lots of Stripe API calls, lots of warehouse writes) and the larger your Stripe account gets, the slower and more costly it becomes. Treat it as a fallback, not a default.
 
-If you only take one thing from this page: connect with OAuth (or a restricted key with **Write** on **Webhooks**) and turn on webhook syncing as soon as your source is created.
+If you only take one thing from this page: connect with a restricted API key (with **Write** on **Webhook**) or OAuth and turn on webhook syncing as soon as your source is created.
 
 ## Adding a data source
 
@@ -27,17 +27,7 @@ If you only take one thing from this page: connect with OAuth (or a restricted k
 2. Click **+ New source** and select Stripe by clicking the **Link** button.
 3. Choose your authentication method:
 
-### Option 1: OAuth (recommended)
-
-1. Select **OAuth connection** as the authentication type.
-2. Click the **Connect** button and follow the prompts to authorize PostHog with your Stripe account.
-3. _Optional:_ Add your Stripe Account ID. You can find it by going to **Settings** > **Business**, selecting the [Account details](https://dashboard.stripe.com/settings/account) tab, and clicking your **Account ID** or pressing `⌘` + `I` to copy your ID.
-4. _Optional:_ Add a prefix to your table names.
-5. Click **Next**.
-
-### Option 2: Restricted API key
-
-If you prefer not to use OAuth, you can connect using a restricted API key instead.
+### Option 1: Restricted API key (recommended)
 
 1. Select **Restricted API key** as the authentication type.
 2. Head to your Stripe dashboard > **Developers** > **API keys**, under **Restricted keys**, click [+ Create a restricted key](https://dashboard.stripe.com/apikeys/create). You need to give your API key the following permissions:
@@ -60,9 +50,21 @@ If your Stripe account is in a language other than English, we suggest you updat
 5. _Optional:_ Add a prefix to your table names.
 6. Click **Next**.
 
+### Option 2: OAuth connection
+
+1. Select **OAuth connection** as the authentication type.
+2. Click the **Connect** button and follow the prompts to authorize PostHog with your Stripe account.
+3. _Optional:_ Add your Stripe Account ID. You can find it by going to **Settings** > **Business**, selecting the [Account details](https://dashboard.stripe.com/settings/account) tab, and clicking your **Account ID** or pressing `⌘` + `I` to copy your ID.
+4. _Optional:_ Add a prefix to your table names.
+5. Click **Next**.
+
 > For Stripe tables, incremental (append-only) syncs only sync new records and don't update existing ones – this is a limitation of the Stripe API, not PostHog. Full refresh syncs do pick up changes but get expensive fast as your Stripe account grows. We strongly recommend [setting up webhooks](#setting-up-webhooks-for-real-time-syncing) for real-time, change-aware syncing instead.
 
 The data warehouse then starts syncing your Stripe data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
+
+## Configuration
+
+<SourceParameters />
 
 ## Setting up webhooks for real-time syncing
 

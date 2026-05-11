@@ -52,7 +52,7 @@ You also need to opt in to the site apps beta by setting `opt_in_site_apps: true
    });
    ```
 
-2. In PostHog, go to **Data** > **Pipeline** > **Destinations**
+2. In PostHog, go to **Apps** > **Tools** > **Web scripts**
 3. Search for **Notification Bar** and click **+ Create**
 4. Configure the bar with your message, colors, and positioning
 5. Click **Save** and enable the destination
