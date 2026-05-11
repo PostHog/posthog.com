@@ -45,7 +45,7 @@ Lovable가 채용 중인 [플랫폼 엔지니어](https://jobs.ashbyhq.com/lovab
 
 오픈 소스 회사라면 여기에서 좀 더 나아가서 [실제 PR 링크를 첨부](/founders/write-great-job-ads#if-you-are-open-source-link-to-your-repo)할 수도 있다. PostHog는 실제 프로젝트 샘플을 공개한다. DevEx 엔지니어를 모집할 때 이렇게 작성했다:
 
-- [PostHog 개발자 워크플로우를 위한 통합 CLI 도구, Hogli](https://github.com/PostHog/hogli)
+- [PostHog 개발자 워크플로우를 위한 통합 CLI 도구, hogli](https://github.com/PostHog/hogli)
 - [Django 마이그레이션 안전성 검증 및 가이드 제공](https://github.com/PostHog/posthog/pull/29451)
 - [Django 5.2 버전으로 업그레이드](https://github.com/PostHog/posthog/pull/30000)
 
@@ -59,7 +59,7 @@ Lovable가 채용 중인 [플랫폼 엔지니어](https://jobs.ashbyhq.com/lovab
 
 그러나 다 제쳐두고, [뛰어난 엔지니어들](/founders/cracked-manifesto)에게 가장 크게 어필하는 것은 그들이 흥미를 느낄 수 있는 업무이다. 아래처럼 업무 그 자체로 어필하라:
 
-- **출근 첫날부터 직접적인 임팩트 창출:** 실제 고객 데이터를 기반으로 AI 에이전트를 구축 — 데모용 X, "언젠가 사용자가 생기면"을 전제로 하는 것 X ([AI Product Engineer, PostHog](/careers/ai-product-engineer))
+- **출근 첫날부터 직접적인 임팩트 창출:** 실제 고객 데이터를 기반으로 AI 에이전트를 구축 – 데모용 X, "언젠가 사용자가 생기면"을 전제로 하는 것 X ([AI Product Engineer, PostHog](/careers/ai-product-engineer))
 - 오픈소스 커뮤니티와 적극적으로 협업하고 논의에 참여하며, **개발자 커뮤니티에 기여**한다는 우리의 철학을 실천합니다 ([Software Engineer, Vercel](https://vercel.com/careers/software-engineer-ai-sdk-5474915004?utm_source=posthog-newsletter))
 - **압도적인 도달 범위:** 우리의 문서 플랫폼은 매년 1억 명 이상의 개발자에게 제공되며, Anthropic, Cursor, PayPal, Coinbase, X를 포함한 18,000개 이상의 기업의 문서를 지원합니다 ([Product Engineer, Mintlify](https://jobs.ashbyhq.com/mintlify/e132acd4-ec23-41bb-b33a-9e694fc63f99?utm_source=posthog-newsletter))
 - **높은 자율성:** 회의는 최소화되어 있으며, 월요일과 금요일에 Company Board를 공유하는 미팅만 진행합니다. 우리는 당신의 업무 시간뿐만 아니라 업무 외 시간도 존중합니다 ([Senior Full-Stack Engineer, Railway](https://jobs.ashbyhq.com/Railway/6ddcfe47-6cce-469b-ba6d-4f0e83440c9d?utm_source=posthog-newsletter))
