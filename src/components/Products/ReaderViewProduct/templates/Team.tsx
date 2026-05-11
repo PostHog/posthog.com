@@ -211,7 +211,7 @@ const Team = ({ id, productData }: SectionComponentProps) => {
             </header>
 
             {profiles.length > 0 && (
-                <ul className="list-none m-0 p-0 grid grid-cols-1 @sm/reader-content:grid-cols-2 @xl/reader-content:grid-cols-3 @4xl/reader-content:grid-cols-4 gap-4">
+                <ul className="list-none m-0 p-0 grid grid-cols-1 @sm/reader-content:grid-cols-2 @xl/reader-content:grid-cols-3 @4xl/reader-content:grid-cols-4 gap-x-4 gap-y-16">
                     {profiles.map((profile) => (
                         <li key={profile.id} className="m-0">
                             <TeamMember
