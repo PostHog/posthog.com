@@ -6,6 +6,7 @@ import OSButton from 'components/OSButton'
 import Toggle from 'components/Toggle'
 import { SectionComponentProps } from '../types'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import Link from 'components/Link'
 
 type PlanFeatureValue = string | number | boolean
 
@@ -101,9 +102,9 @@ const pricingDetails: Array<{ headline: React.ReactNode; body: React.ReactNode }
         body: (
             <>
                 Under 2 years old and pre-series B?{' '}
-                <a href="/startups" className="underline">
+                <Link to="/startups" className="underline" state={{ newWindow: true }}>
                     Apply for $50k in credits
-                </a>
+                </Link>
                 .
             </>
         ),
@@ -144,7 +145,7 @@ const formatAllocation = (allocation: number | undefined, unit: string | undefin
  */
 const ROW_GRID = 'grid grid-cols-2 @xl:grid-cols-[minmax(0,1.5fr)_minmax(0,2fr)_minmax(0,2fr)] gap-x-4 @xl:gap-x-8'
 const LABEL_CELL = 'col-span-2 @xl:col-span-1'
-const ROW_PADDING = 'py-3 border-b border-light'
+const ROW_PADDING = 'py-3'
 
 const Plans = ({ id, productData }: SectionComponentProps) => {
     const billingHandle = productData?.sharesFreeTier || productData?.handle
@@ -253,6 +254,8 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
     const filterRows = (rows: Row[]) => (showDifferencesOnly ? rows.filter((r) => !valuesEqual(r.free, r.paid)) : rows)
     const visibleProductRows = filterRows(productRows)
     const visiblePlanRows = filterRows(planRows)
+    const hiddenProductCount = productRows.length - visibleProductRows.length
+    const hiddenPlanCount = planRows.length - visiblePlanRows.length
 
     const lowestPaidTier = [...paidTiers].reverse().find((t: any) => parseFloat(t.unit_amount_usd) > 0)
     const lowestPrice =
@@ -310,64 +313,66 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
             <div className="@container @4xl:[grid-area:plans]">
                 <h3 className="text-2xl font-bold text-primary m-0 mb-4">Plans</h3>
 
-                {/* Plan column headers */}
-                <div className={`${ROW_GRID} ${ROW_PADDING}`}>
-                    <span className="hidden @xl:block" />
-                    <span className="text-base font-bold text-primary">Totally free</span>
-                    <span className="text-base font-bold text-primary">Pay-as-you-go</span>
-                </div>
-
-                {/* Price per unit */}
-                <div className={`${ROW_GRID} ${ROW_PADDING} items-start`}>
-                    <span className={`${LABEL_CELL} text-base text-primary/70`}>Price per {unit}</span>
-                    <span>
-                        <strong className="text-lg text-primary">$0</strong>
-                    </span>
-                    <span>
-                        {startingPrice ? (
-                            <>
-                                <strong className="text-lg text-primary">
-                                    {startingPrice}/{unit}
-                                </strong>
-                                {hasMultipleTiers && <em className="text-base text-primary/60"> or less!</em>}
-                                {hasMultipleTiers && (
-                                    <span className="block text-sm text-primary/50 mt-0.5">
-                                        Pricing reduces with scale
-                                    </span>
-                                )}
-                            </>
-                        ) : (
-                            <strong className="text-lg text-primary">$0</strong>
-                        )}
-                    </span>
-                </div>
-
-                {/* Monthly free tier */}
-                {freeTierRows.length > 0 && (
-                    <div className={`${ROW_GRID} ${ROW_PADDING} items-start`}>
-                        <span className={`${LABEL_CELL} text-base text-primary/70`}>Monthly free tier</span>
-                        <div className="space-y-3">
-                            {freeTierRows.map((row) => (
-                                <div key={row.name}>
-                                    <p className="text-sm text-primary/50 m-0">{row.name}</p>
-                                    <p className="text-base font-semibold text-primary m-0">
-                                        {formatAllocation(row.allocation, row.unit)}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="space-y-3">
-                            {freeTierRows.map((row) => (
-                                <div key={row.name}>
-                                    <p className="text-sm text-primary/50 m-0">{row.name}</p>
-                                    <p className="text-base font-semibold text-primary m-0">
-                                        {formatAllocation(row.allocation, row.unit)}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
+                <div className="divide-y divide-primary">
+                    {/* Plan column headers */}
+                    <div className={`${ROW_GRID} ${ROW_PADDING}`}>
+                        <span className="hidden @xl:block" />
+                        <span className="text-base font-bold text-primary">Totally free</span>
+                        <span className="text-base font-bold text-primary">Pay-as-you-go</span>
                     </div>
-                )}
+
+                    {/* Price per unit */}
+                    <div className={`${ROW_GRID} ${ROW_PADDING} items-start`}>
+                        <span className={`${LABEL_CELL} text-base text-primary/70`}>Price per {unit}</span>
+                        <span>
+                            <strong className="text-lg text-primary">$0</strong>
+                        </span>
+                        <span>
+                            {startingPrice ? (
+                                <>
+                                    <strong className="text-lg text-primary">
+                                        {startingPrice}/{unit}
+                                    </strong>
+                                    {hasMultipleTiers && <em className="text-base text-primary/60"> or less!</em>}
+                                    {hasMultipleTiers && (
+                                        <span className="block text-sm text-primary/50 mt-0.5">
+                                            Pricing reduces with scale
+                                        </span>
+                                    )}
+                                </>
+                            ) : (
+                                <strong className="text-lg text-primary">$0</strong>
+                            )}
+                        </span>
+                    </div>
+
+                    {/* Monthly free tier */}
+                    {freeTierRows.length > 0 && (
+                        <div className={`${ROW_GRID} ${ROW_PADDING} items-start`}>
+                            <span className={`${LABEL_CELL} text-base text-primary/70`}>Monthly free tier</span>
+                            <div className="space-y-3">
+                                {freeTierRows.map((row) => (
+                                    <div key={row.name}>
+                                        <p className="text-sm text-primary/50 m-0">{row.name}</p>
+                                        <p className="text-base font-semibold text-primary m-0">
+                                            {formatAllocation(row.allocation, row.unit)}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="space-y-3">
+                                {freeTierRows.map((row) => (
+                                    <div key={row.name}>
+                                        <p className="text-sm text-primary/50 m-0">{row.name}</p>
+                                        <p className="text-base font-semibold text-primary m-0">
+                                            {formatAllocation(row.allocation, row.unit)}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
 
                 {/* Product features */}
                 <div className="mt-12 mb-4 flex items-center justify-between gap-4">
@@ -380,14 +385,10 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                     />
                 </div>
 
-                {visibleProductRows.length === 0 ? (
-                    <p className="text-sm text-primary/50 italic py-4 m-0">
-                        {showDifferencesOnly
-                            ? 'All product features are the same across plans.'
-                            : 'No product features.'}
-                    </p>
+                {visibleProductRows.length === 0 && !showDifferencesOnly ? (
+                    <p className="text-sm text-primary/50 italic py-4 m-0">No product features.</p>
                 ) : (
-                    <div>
+                    <div className="divide-y divide-primary">
                         {visibleProductRows.map((row) => (
                             <div key={`prod-${row.key}`} className={`${ROW_GRID} ${ROW_PADDING} items-center`}>
                                 <span className={`${LABEL_CELL} text-sm text-primary/70`}>{row.name}</span>
@@ -395,19 +396,25 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                                 <ValueCell value={row.paid} />
                             </div>
                         ))}
+                        {showDifferencesOnly && hiddenProductCount > 0 && (
+                            <div className="py-3 text-center">
+                                <button
+                                    onClick={() => setShowDifferencesOnly(false)}
+                                    className="text-sm text-primary/50 hover:text-primary/80 cursor-pointer"
+                                >
+                                    Show all {productRows.length} features
+                                </button>
+                            </div>
+                        )}
                     </div>
                 )}
 
                 {/* Platform features */}
                 <h3 className="text-2xl font-bold text-primary mt-12 mb-4">Platform features</h3>
-                {visiblePlanRows.length === 0 ? (
-                    <p className="text-sm text-primary/50 italic py-4 m-0">
-                        {showDifferencesOnly
-                            ? 'All platform features are the same across plans.'
-                            : 'No platform features.'}
-                    </p>
+                {visiblePlanRows.length === 0 && !showDifferencesOnly ? (
+                    <p className="text-sm text-primary/50 italic py-4 m-0">No platform features.</p>
                 ) : (
-                    <div>
+                    <div className="divide-y divide-primary">
                         {visiblePlanRows.map((row) => (
                             <div key={`plan-${row.key}`} className={`${ROW_GRID} ${ROW_PADDING} items-center`}>
                                 <span className={`${LABEL_CELL} text-sm text-primary/70`}>{row.name}</span>
@@ -415,6 +422,16 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                                 <ValueCell value={row.paid} />
                             </div>
                         ))}
+                        {showDifferencesOnly && hiddenPlanCount > 0 && (
+                            <div className="py-3 text-center">
+                                <button
+                                    onClick={() => setShowDifferencesOnly(false)}
+                                    className="text-sm text-primary/50 hover:text-primary/80 cursor-pointer"
+                                >
+                                    Show all {planRows.length} features
+                                </button>
+                            </div>
+                        )}
                     </div>
                 )}
 
@@ -431,7 +448,8 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
             </div>
 
             {/* Sidebar: combined pricing details */}
-            <aside className="@container @4xl:[grid-area:sidebar] @4xl:border-l @4xl:border-light @4xl:pl-12">
+            <aside className="@container @4xl:[grid-area:sidebar] @4xl:border-l @4xl:border-primary @4xl:pl-12">
+                <h3 className="mb-4 !text-sm font-normal text-secondary">Things you should know about our pricing</h3>
                 <ul className="space-y-6 list-none m-0 p-0">
                     {pricingDetails.map((point, i) => (
                         <li key={i}>

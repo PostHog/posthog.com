@@ -49,20 +49,20 @@ export default function Toggle({
                 <Switch
                     checked={checked}
                     onChange={onChange}
-                    className="group flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-2 w-8 cursor-pointer focus:outline-none"
+                    className="group flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-2.5 w-8 cursor-pointer focus:outline-none"
                 >
                     <span className="sr-only">Use setting</span>
                     <span
                         aria-hidden="true"
-                        className="pointer-events-none absolute bg-[#c4c4c4] dark:bg-[#5A5A5A] w-full h-full rounded-md"
+                        className="pointer-events-none absolute bg-black/20 dark:bg-white/20 w-full h-full rounded-md"
                     />
                     <span
                         aria-hidden="true"
                         className={classNames(
                             checked
-                                ? 'translate-x-5 bg-teal dark:bg-teal'
-                                : 'translate-x-0 bg-[#555] hover:bg-[#222] dark:bg-[#999] dark:group-hover:bg-[#ddd]',
-                            'pointer-events-none absolute left-0 inline-block h-4 w-4 rounded-full transform ring-0 transition-transform ease-in-out duration-200'
+                                ? 'translate-x-5 bg-teal dark:bg-teal border-white dark:border-black'
+                                : 'translate-x-0 border-white dark:border-black bg-[#555] hover:bg-[#222] dark:bg-[#999] dark:group-hover:bg-[#ddd]',
+                            'pointer-events-none absolute left-0 inline-block size-5 rounded-full transform ring-0 transition-transform ease-in-out duration-200 border-2 shadow-lg'
                         )}
                     />
                 </Switch>
