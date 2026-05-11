@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useApp } from '../../context/App'
-import Desktop from 'components/Desktop'
-import TaskBarMenu from 'components/TaskBarMenu'
+import { useApp } from '../../../../context/App'
 import AppWindow from 'components/AppWindow'
 import { AnimatePresence, motion } from 'framer-motion'
 import CookieBannerToast from 'components/CookieBanner/ToastVersion'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
 import WebsiteFooter from 'components/WebsiteFooter'
+import KoreanDesktop from '../KoreanDesktop'
+import KoreanTaskBarMenu from '../KoreanTaskBarMenu'
 
-export default function Wrapper() {
+export default function KoreanWrapper() {
     const {
         windows,
         constraintsRef,
@@ -38,9 +38,9 @@ export default function Wrapper() {
             } flex flex-col`}
             id="app-container"
         >
-            {!compact && <TaskBarMenu />}
+            {!compact && <KoreanTaskBarMenu />}
             <div ref={constraintsRef} className={`flex-grow relative`}>
-                <Desktop />
+                <KoreanDesktop />
                 <AnimatePresence>
                     {windows.map((item, index) => {
                         return (
@@ -74,7 +74,7 @@ export default function Wrapper() {
                 </AnimatePresence>
             </div>
             {websiteMode && <WebsiteFooter />}
-            {/*             
+            {/*
             {!compact && <Dock />}
             */}
             <CookieBannerToast />
