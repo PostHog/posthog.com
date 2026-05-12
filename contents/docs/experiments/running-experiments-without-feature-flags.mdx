@@ -1,20 +1,20 @@
 ---
-title: "How to run experiments without feature flags"
+title: "How to run Experiments without Feature Flags"
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-You can run experiments without using PostHog's feature flags if you're using a different feature flag library and want to track your experiment results in PostHog.
+You can run Experiments without using PostHog's Feature Flags if you're using a different feature flag library and want to track your experiment results in PostHog.
 
-This doc walks you through how to set up an experiment without using PostHog's feature flags.
+This doc walks you through how to set up an experiment without using PostHog's Feature Flags.
 
 ## Step 1: Create your experiment in PostHog
 
-Create a new experiment in the [experiments tab](https://app.posthog.com/experiments) and follow the same steps as you would when [creating a regular experiment](/docs/experiments/creating-an-experiment).
+Create a new experiment in the [Experiments tab](https://app.posthog.com/experiments) and follow the same steps as you would when [creating a regular experiment](/docs/experiments/creating-an-experiment).
 
 <CalloutBox type="note">
 
-Although you won't be using PostHog's feature flags directly, you still need to name your feature flag key. This key is used to identify which events belong to your experiment when PostHog calculates results.
+Although you won't be using PostHog's Feature Flags directly, you still need to name your feature flag key. This key is used to identify which events belong to your experiment when PostHog calculates results.
 
 The 'control' variant name is fixed, but you can name other variants whatever you like.
 
@@ -50,7 +50,7 @@ The property key format is `$feature/` followed by your experiment's feature fla
 
 <CalloutBox type="note">
 
-When using PostHog's feature flags with our SDKs, this property is added automatically to all events. When using your own feature flag system, you must manually add it.
+When using PostHog's Feature Flags with our SDKs, this property is added automatically to all events. When using your own feature flag system, you must manually add it.
 
 </CalloutBox>
 
@@ -203,8 +203,8 @@ When you send your custom exposure event (e.g., `$pageview`), PostHog's exposure
 
 For each metric event (identified by the `$feature/<flag-key>` property):
 
-1. PostHog checks if the user was exposed to the experiment
-2. Verifies the metric event occurred **after** the user's first exposure
+1. PostHog checks if a user was exposed to the experiment
+2. Verifies the metric event occurred **after** their first exposure
 3. Attributes the event to the variant specified in `$feature/<flag-key>`
 4. Includes it in the experiment results
 
