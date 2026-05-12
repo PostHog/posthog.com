@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
+import { AnimatePresence, motion } from 'framer-motion'
+import groupBy from 'lodash.groupby'
 import { IconCheck, IconX } from '@posthog/icons'
 import useProduct from 'hooks/useProduct'
 import OSButton from 'components/OSButton'
@@ -147,6 +149,20 @@ const ROW_GRID = 'grid grid-cols-2 @xl:grid-cols-[minmax(0,1.5fr)_minmax(0,2fr)_
 const LABEL_CELL = 'col-span-2 @xl:col-span-1'
 const ROW_PADDING = 'py-3'
 
+const ROW_ANIMATION = {
+    initial: { height: 0, opacity: 0 },
+    animate: { height: 'auto', opacity: 1 },
+    exit: { height: 0, opacity: 0 },
+    transition: { duration: 0.18, ease: 'easeInOut' },
+    style: { overflow: 'hidden' },
+} as const
+
+const SubheaderRow = ({ label }: { label: string }) => (
+    <div className="pt-4 pb-1">
+        <span className="text-xs font-semibold uppercase tracking-wider text-primary/40">{label}</span>
+    </div>
+)
+
 const Plans = ({ id, productData }: SectionComponentProps) => {
     const billingHandle = productData?.sharesFreeTier || productData?.handle
     const product = useProduct({ handle: billingHandle })
@@ -169,6 +185,7 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                                 note
                                 unit
                                 entitlement_only
+                                category
                             }
                         }
                     }
@@ -217,7 +234,7 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
     }
 
     // Build comparison rows
-    type Row = { key: string; name: string; free: PlanFeatureValue; paid: PlanFeatureValue }
+    type Row = { key: string; name: string; free: PlanFeatureValue; paid: PlanFeatureValue; category: string | null }
 
     const productRows: Row[] = (() => {
         const ff = freePlan?.features || []
@@ -231,6 +248,7 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                 name: fFeature?.name || pFeature?.name || key,
                 free: getFeatureValue(fFeature, key),
                 paid: getFeatureValue(pFeature, key),
+                category: fFeature?.category || pFeature?.category || null,
             }
         })
     })()
@@ -247,6 +265,7 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                 name: fFeature?.name || pFeature?.name || key,
                 free: getFeatureValue(fFeature, key),
                 paid: getFeatureValue(pFeature, key),
+                category: fFeature?.category || pFeature?.category || null,
             }
         })
     })()
@@ -256,6 +275,28 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
     const visiblePlanRows = filterRows(planRows)
     const hiddenProductCount = productRows.length - visibleProductRows.length
     const hiddenPlanCount = planRows.length - visiblePlanRows.length
+
+    const splitByCategory = (rows: Row[]) => {
+        const ungrouped = rows.filter((r) => !r.category)
+        const grouped = groupBy(
+            rows.filter((r) => r.category),
+            (r) => r.category
+        )
+        return { ungrouped, grouped, categories: Object.keys(grouped).sort() }
+    }
+
+    const productSplit = splitByCategory(visibleProductRows)
+    const planSplit = splitByCategory(visiblePlanRows)
+
+    console.log('[Plans debug]', {
+        productRowCount: productRows.length,
+        visibleProductRowCount: visibleProductRows.length,
+        showDifferencesOnly,
+        categorySample: visibleProductRows.slice(0, 5).map((r) => ({ key: r.key, category: r.category })),
+        ungroupedCount: productSplit.ungrouped.length,
+        categories: productSplit.categories,
+        groupedCounts: Object.fromEntries(productSplit.categories.map((c) => [c, productSplit.grouped[c].length])),
+    })
 
     const lowestPaidTier = [...paidTiers].reverse().find((t: any) => parseFloat(t.unit_amount_usd) > 0)
     const lowestPrice =
@@ -317,7 +358,10 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                     {/* Plan column headers */}
                     <div className={`${ROW_GRID} ${ROW_PADDING}`}>
                         <span className="hidden @xl:block" />
-                        <span className="text-base font-bold text-primary">Totally free</span>
+                        <span>
+                            <span className="text-base font-bold text-primary block">Totally free</span>
+                            <span className="text-xs text-primary/50">No credit card required</span>
+                        </span>
                         <span className="text-base font-bold text-primary">Pay-as-you-go</span>
                     </div>
 
@@ -389,23 +433,47 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                     <p className="text-sm text-primary/50 italic py-4 m-0">No product features.</p>
                 ) : (
                     <div className="divide-y divide-primary">
-                        {visibleProductRows.map((row) => (
-                            <div key={`prod-${row.key}`} className={`${ROW_GRID} ${ROW_PADDING} items-center`}>
-                                <span className={`${LABEL_CELL} text-sm text-primary/70`}>{row.name}</span>
-                                <ValueCell value={row.free} />
-                                <ValueCell value={row.paid} />
-                            </div>
-                        ))}
-                        {showDifferencesOnly && hiddenProductCount > 0 && (
-                            <div className="py-3 text-center">
-                                <button
-                                    onClick={() => setShowDifferencesOnly(false)}
-                                    className="text-sm text-primary/50 hover:text-primary/80 cursor-pointer"
-                                >
-                                    Show all {productRows.length} features
-                                </button>
-                            </div>
-                        )}
+                        <AnimatePresence initial={false}>
+                            {productSplit.ungrouped.map((row) => (
+                                <motion.div key={`prod-${row.key}`} {...ROW_ANIMATION}>
+                                    <div className={`${ROW_GRID} ${ROW_PADDING} items-center`}>
+                                        <span className={`${LABEL_CELL} text-sm text-primary/70`}>{row.name}</span>
+                                        <ValueCell value={row.free} />
+                                        <ValueCell value={row.paid} />
+                                    </div>
+                                </motion.div>
+                            ))}
+                            {productSplit.categories.map((cat) => (
+                                <React.Fragment key={`prod-group-${cat}`}>
+                                    <motion.div key={`prod-subheader-${cat}`} {...ROW_ANIMATION}>
+                                        <SubheaderRow label={cat} />
+                                    </motion.div>
+                                    {productSplit.grouped[cat].map((row) => (
+                                        <motion.div key={`prod-${row.key}`} {...ROW_ANIMATION}>
+                                            <div className={`${ROW_GRID} ${ROW_PADDING} items-center`}>
+                                                <span className={`${LABEL_CELL} text-sm text-primary/70`}>
+                                                    {row.name}
+                                                </span>
+                                                <ValueCell value={row.free} />
+                                                <ValueCell value={row.paid} />
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </React.Fragment>
+                            ))}
+                            {showDifferencesOnly && hiddenProductCount > 0 && (
+                                <motion.div key="show-all-product" {...ROW_ANIMATION}>
+                                    <div className="py-3 text-center">
+                                        <button
+                                            onClick={() => setShowDifferencesOnly(false)}
+                                            className="text-sm text-primary/50 hover:text-primary/80 cursor-pointer"
+                                        >
+                                            Show all {productRows.length} features
+                                        </button>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
                 )}
 
@@ -415,23 +483,47 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                     <p className="text-sm text-primary/50 italic py-4 m-0">No platform features.</p>
                 ) : (
                     <div className="divide-y divide-primary">
-                        {visiblePlanRows.map((row) => (
-                            <div key={`plan-${row.key}`} className={`${ROW_GRID} ${ROW_PADDING} items-center`}>
-                                <span className={`${LABEL_CELL} text-sm text-primary/70`}>{row.name}</span>
-                                <ValueCell value={row.free} />
-                                <ValueCell value={row.paid} />
-                            </div>
-                        ))}
-                        {showDifferencesOnly && hiddenPlanCount > 0 && (
-                            <div className="py-3 text-center">
-                                <button
-                                    onClick={() => setShowDifferencesOnly(false)}
-                                    className="text-sm text-primary/50 hover:text-primary/80 cursor-pointer"
-                                >
-                                    Show all {planRows.length} features
-                                </button>
-                            </div>
-                        )}
+                        <AnimatePresence initial={false}>
+                            {planSplit.ungrouped.map((row) => (
+                                <motion.div key={`plan-${row.key}`} {...ROW_ANIMATION}>
+                                    <div className={`${ROW_GRID} ${ROW_PADDING} items-center`}>
+                                        <span className={`${LABEL_CELL} text-sm text-primary/70`}>{row.name}</span>
+                                        <ValueCell value={row.free} />
+                                        <ValueCell value={row.paid} />
+                                    </div>
+                                </motion.div>
+                            ))}
+                            {planSplit.categories.map((cat) => (
+                                <React.Fragment key={`plan-group-${cat}`}>
+                                    <motion.div key={`plan-subheader-${cat}`} {...ROW_ANIMATION}>
+                                        <SubheaderRow label={cat} />
+                                    </motion.div>
+                                    {planSplit.grouped[cat].map((row) => (
+                                        <motion.div key={`plan-${row.key}`} {...ROW_ANIMATION}>
+                                            <div className={`${ROW_GRID} ${ROW_PADDING} items-center`}>
+                                                <span className={`${LABEL_CELL} text-sm text-primary/70`}>
+                                                    {row.name}
+                                                </span>
+                                                <ValueCell value={row.free} />
+                                                <ValueCell value={row.paid} />
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </React.Fragment>
+                            ))}
+                            {showDifferencesOnly && hiddenPlanCount > 0 && (
+                                <motion.div key="show-all-plan" {...ROW_ANIMATION}>
+                                    <div className="py-3 text-center">
+                                        <button
+                                            onClick={() => setShowDifferencesOnly(false)}
+                                            className="text-sm text-primary/50 hover:text-primary/80 cursor-pointer"
+                                        >
+                                            Show all {planRows.length} features
+                                        </button>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
                 )}
 
