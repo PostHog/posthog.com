@@ -42,6 +42,24 @@ With it, you can interact with elements to [create actions](/tutorials/how-to-ca
     classes = {"rounded"}
 />
 
+## Disabling the toolbar
+
+Project admins can disable the toolbar for a specific environment. This is useful for security-sensitive environments where you don't want team members to complete the toolbar OAuth flow.
+
+To disable the toolbar:
+
+1. Go to [**Settings** → **Environment** → **Toolbar**](https://us.posthog.com/settings/environment-toolbar).
+2. Enable **Disable PostHog Toolbar for this environment**.
+
+When disabled:
+
+- All toolbar OAuth authorize, callback, and refresh requests return a 403 error.
+- "Open in toolbar" buttons are hidden throughout PostHog (heatmaps, persons, product tours).
+- The toolbar launch page shows a warning banner explaining the toolbar is off.
+- The legacy redirect-to-site endpoint is blocked.
+
+You can still edit authorized URLs while the toolbar is disabled. This lets you manage the allowlist before re-enabling.
+
 ## Creating actions using the toolbar
 
 The toolbar enables you to easily create [actions](/docs/data/actions) by clicking elements directly on your website.
