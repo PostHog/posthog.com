@@ -58,6 +58,36 @@ Discovery includes preparation. Before speaking with any new customer interested
 - Visit the company's website, learn about their product, who they are marketing/selling to, language they are using. Familiarize yourself with what may be important to them
 - Use ChatGPT, Perplexity, Claude, etc. to help research the company, their industry, macroeconomic factors and potential use cases for PostHog
 
+### Investigate their existing stack (before you reach out)
+
+Understanding what tools a prospect already uses and how they are configured frees up discovery time for other questions surrounding workflows, ownership, pain points, etc. Instead of "what analytics tool do you use?", you can ask "you're on tool X, what session video sampling rate are you at?" instead. The second question shows you've done your homework and moves the conversation forward faster.
+
+Investigating the config object for relevant competitive products can also sometimes expose important details like:
+- How is their stack integrated?
+- What does their session video sampling rate look like?
+- Which features are they actively using or not using for this product?
+
+**Two quick techniques:**
+
+- Browser extensions:
+  - Install browser extensions for [Wappalyzer](https://www.wappalyzer.com/) or [BuiltWith](https://builtwith.com/) and visit their site before you reach out.
+  - These surface analytics, session replay, feature flag, and A/B testing tools in seconds.
+  - Check both their marketing site and their app as they often run different stacks.
+
+- Inspect window.config objects or relevant scripts
+  -   Open their site in a browser, go to DevTools console, and check for tool fingerprints.
+  -   Based on their stack that either Wappalyzer or BuiltWith exposed, ask any LLM what the window object or the script name should be for the product and run that in the DevTools console.
+  -   Copy the output and ask an LLM to decipher it.
+
+Here are some examples:
+```js
+window.analytics       // Segment
+window.mixpanel        // Mixpanel
+window.CS_CONF         // ContentSquare
+```
+
+This will often yield helpful results like whether for an existing platform, they use survey features, A/B testing, session video sampling rates, integrations, error capture, etc.
+
 ### Asking questions
 
 Discovery is about understanding the real problem through natural conversation. The goal is to be genuinely curious about their situation, not to interrogate them.
@@ -68,6 +98,17 @@ Discovery is about understanding the real problem through natural conversation. 
 - Start questions with "tell me...", "explain to me...", or "describe to me..." to avoid yes/no answers
 - Focus on understanding their current state and challenges
 - Ask about consequences and impact naturally as the conversation flows
+
+**Using stack investigation intel to ask questions:**
+
+Based on what you learn from the stack investigation, consider asking some of these questions:
+| Tool type | Examples | What to ask |
+| --- | --- | --- |
+| Session replay | Hotjar, FullStory, Microsoft Clarity | "What's your current sampling rate? Are you capturing all sessions? Is it connected to your analytics tool?" |
+| Feature flags | LaunchDarkly, Split, Unleash | "How are you tying flag variants back to your analytics events? Are those two systems talking to each other?" |
+| Product analytics | Amplitude, Mixpanel | "Are you using their A/B testing, or is that a separate tool? How do you pull experiment results into your analytics?" |
+| CDP / event pipeline | Segment, RudderStack, mParticle | "Are you routing events to multiple destinations? Which ones are actually load-bearing right now?" |
+| Multiple point solutions | Any combination of the above | "How many logins does it take your team to go from a question to an answer?" |
 
 ### Understanding customer goals
 
