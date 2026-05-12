@@ -117,7 +117,7 @@ const ProductRateBlock = ({
                 </div>
 
                 {/* Right: slider */}
-                <div>
+                <div className="-mr-4">
                     <div className="flex items-center justify-between mb-2 pr-4">
                         <div className="flex items-center gap-1.5">
                             <NumericFormat
@@ -188,13 +188,13 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
     }
 
     return (
-        <section id={id} className="scroll-mt-20 not-prose @container">
-            <h2 className="text-3xl font-bold text-primary mt-0 mb-8">Calculate your cost</h2>
+        <section id={id} className="scroll-mt-40 not-prose @container">
+            <h2 className="text-3xl font-bold text-primary mt-0 !mb-4">Calculate your cost</h2>
 
             {/* Main product: rates left, slider right */}
             {mainTiers.length > 0 && (
                 <ProductRateBlock
-                    name={activeProduct.name || productData.name}
+                    name={activeProduct.label || activeProduct.name || productData.label || productData.name}
                     billingTiers={mainTiers}
                     sliderConfig={
                         activeProduct.slider || {
@@ -227,7 +227,7 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
 
             {/* Total */}
             <div className="mt-6 border-t-2 border-dark dark:border-white">
-                <div className="flex items-center justify-between px-4 py-3">
+                <div className="flex items-center justify-between py-3">
                     <p className="font-black text-xl text-primary m-0">Estimated monthly cost</p>
                     <span className="text-2xl font-black text-primary tabular-nums">{formatUSD(totalCost)}</span>
                 </div>

@@ -215,7 +215,7 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
     const freeTierRows: Array<{ name: string; allocation: number; unit: string }> = []
     if (freePlan?.free_allocation) {
         freeTierRows.push({
-            name: billing.name,
+            name: productData.label || billing.name,
             allocation: freePlan.free_allocation,
             unit,
         })
@@ -224,8 +224,9 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
         addons.forEach((addon: any) => {
             const addonFreePlan = addon.plans?.find((p: any) => p.free_allocation)
             if (addonFreePlan?.free_allocation) {
+                const addonLabel = (productData.addonSliders || []).find((s: any) => s.key === addon.type)?.label
                 freeTierRows.push({
-                    name: addon.name,
+                    name: addonLabel || addon.name,
                     allocation: addonFreePlan.free_allocation,
                     unit: addon.unit || unit,
                 })
@@ -375,7 +376,23 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                                     <strong className="text-lg text-primary">
                                         {startingPrice}/{unit}
                                     </strong>
-                                    {hasMultipleTiers && <em className="text-base text-primary/60"> or less!</em>}
+                                    {hasMultipleTiers && (
+                                        <em className="text-sm text-primary/60">
+                                            {' '}
+                                            <a
+                                                href="#calculator"
+                                                className="text-primary/60 hover:text-primary/80 underline decoration-dotted"
+                                                onClick={(e) => {
+                                                    e.preventDefault()
+                                                    document
+                                                        .getElementById('calculator')
+                                                        ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                                }}
+                                            >
+                                                or less!
+                                            </a>
+                                        </em>
+                                    )}
                                     {hasMultipleTiers && (
                                         <span className="block text-sm text-primary/50 mt-0.5">
                                             Pricing reduces with scale
@@ -397,7 +414,7 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                                     <div key={row.name}>
                                         <p className="text-sm text-primary/50 m-0">{row.name}</p>
                                         <p className="text-base font-semibold text-primary m-0">
-                                            {formatAllocation(row.allocation, row.unit)}
+                                            {row.allocation.toLocaleString()}/mo
                                         </p>
                                     </div>
                                 ))}
@@ -407,7 +424,7 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                                     <div key={row.name}>
                                         <p className="text-sm text-primary/50 m-0">{row.name}</p>
                                         <p className="text-base font-semibold text-primary m-0">
-                                            {formatAllocation(row.allocation, row.unit)}
+                                            {row.allocation.toLocaleString()}/mo
                                         </p>
                                     </div>
                                 ))}
