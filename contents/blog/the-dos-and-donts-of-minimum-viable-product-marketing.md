@@ -36,7 +36,7 @@ This is the hard bit, so I've written more about how I personally approach this 
 
 **Write the title first.** If you can't write the title, you don't know what you're announcing. The title is the only part of the post most readers will see, so it needs to be right. I find it helps not to spend time perfecting it: just get a vomit draft out quickly and go from there. Writing is rewriting, after all. 
 
-**Focus on conflict.** Conflict takes many forms, but it's ultimately at the root of every story worth telling. Maybe the conflict is the problem your product solves, or the competitors you're standing against. Maybe you're standing on principle or disrupting an industry. When we cut session replay pricing by more than 50%, we titled the post '[We've decided to make less money](/blog/session-replay-pricing)' That's the conflict (us vs. shareholders) and the change (we're cutting prices) in eight words.
+**Focus on conflict.** Conflict takes many forms, but it's ultimately at the root of every story worth telling. Maybe the conflict is the problem your product solves, or the competitors you're standing against. Maybe you're standing on principle or disrupting an industry. When we cut session replay pricing by more than 50%, we titled the post "[We've decided to make less money.](/blog/session-replay-pricing)" That's the conflict (us vs. shareholders) and the change (we're cutting prices) in eight words.
 
 **Think through the release experience.** Are you going from beta to GA, or cold-launching? Are there early users that need to be thanked? Is there an existing customer who should hear from you first? These questions are not flourishes. They're the difference between an experience that leads to a renewal contract and one which leads to quiet churn.
 
