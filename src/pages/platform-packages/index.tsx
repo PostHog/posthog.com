@@ -110,19 +110,20 @@ export default function PlatformPackages() {
                                     <div key={addon.name} className="">
                                         <h3 className="text-xl font-semibold mb-2 mt-0">{addon.name}</h3>
                                         <p className="text-secondary mb-2">{addon.description}</p>
-                                        {plan?.flat_rate &&
-                                            (addon.name === 'Enterprise' ? (
-                                                <div className="flex items-baseline mt-auto">
+                                        {plan?.flat_rate && (
+                                            <div className="flex items-baseline mt-auto">
+                                                {addon.name === 'Enterprise' ? (
                                                     <strong className="text-lg">Contact us</strong>
-                                                </div>
-                                            ) : (
-                                                <div className="flex items-baseline mt-auto">
-                                                    <strong className="text-lg">
-                                                        ${plan.unit_amount_usd.replace('.00', '')}
-                                                    </strong>
-                                                    <span className="text-sm opacity-60 ml-1">/mo</span>
-                                                </div>
-                                            ))}
+                                                ) : (
+                                                    <>
+                                                        <strong className="text-lg">
+                                                            ${plan.unit_amount_usd.replace('.00', '')}
+                                                        </strong>
+                                                        <span className="text-sm opacity-60 ml-1">/mo</span>
+                                                    </>
+                                                )}
+                                            </div>
+                                        )}
                                     </div>
                                 )
                             })}
