@@ -744,11 +744,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                 ← Previous page
                             </CallToAction>
                         )}
-                        {nextURL && (
-                            <CallToAction to={nextURL}>
-                                Next page →
-                            </CallToAction>
-                        )}
+                        {nextURL && <CallToAction to={nextURL}>Next page →</CallToAction>}
                     </div>
                 </div>
             </ReaderView>

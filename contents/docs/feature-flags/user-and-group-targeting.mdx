@@ -159,26 +159,24 @@ Server-side SDKs are stateless. Pass `groups` and `groupProperties` alongside `p
 <MultiLanguage selector="tabs">
 
 ```node
-const flagValue = await posthog.getFeatureFlag(
-    'mixed-rollout-flag',
-    'user_123',
-    {
-        personProperties: {
-            email: 'jane@acme.com',
-            role: 'admin'
+const flags = await posthog.evaluateFlags('user_123', {
+    personProperties: {
+        email: 'jane@acme.com',
+        role: 'admin',
+    },
+    groups: {
+        company: 'company_abc',
+    },
+    groupProperties: {
+        company: {
+            name: 'Acme Inc',
+            plan: 'enterprise',
+            industry: 'tech',
         },
-        groups: {
-            company: 'company_abc'
-        },
-        groupProperties: {
-            company: {
-                name: 'Acme Inc',
-                plan: 'enterprise',
-                industry: 'tech'
-            }
-        }
-    }
-)
+    },
+})
+
+const flagValue = flags.getFlag('mixed-rollout-flag')
 ```
 
 ```python

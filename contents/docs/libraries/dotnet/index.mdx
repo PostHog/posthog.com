@@ -127,10 +127,10 @@ For details on how to implement local evaluation, see our [local evaluation guid
 Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```csharp
-if (await posthog.GetFeatureFlagAsync(
-        "experiment-feature-flag-key",
-        "user_distinct_id")
-    is { VariantKey: "variant-name" })
+var flags = await posthog.EvaluateFlagsAsync("user_distinct_id");
+var variant = flags.GetFlag("experiment-feature-flag-key")?.VariantKey;
+
+if (variant == "variant-name")
 {
     // Do something
 }
