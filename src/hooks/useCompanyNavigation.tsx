@@ -54,7 +54,7 @@ const tabs = [
 ]
 
 const tabContainerClassName = 'flex justify-center sticky top-0 z-30'
-const className = 'h-full bg-accent p-2'
+const className = 'h-full bg-accent p-2 mt-6'
 
 export function useCompanyNavigation({ value, content }: { value: string; content: React.ReactNode }): {
     tabs: { value: string; label: string; content: React.ReactNode }[]
