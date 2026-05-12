@@ -112,7 +112,7 @@ export default function PlatformPackages() {
                                         <p className="text-secondary mb-2">{addon.description}</p>
                                         {plan?.flat_rate && (
                                             <div className="flex items-baseline mt-auto">
-                                                {addon.name === 'Enterprise' ? (
+                                                {addon.type === 'enterprise' ? (
                                                     <strong className="text-lg">Contact us</strong>
                                                 ) : (
                                                     <>
