@@ -358,10 +358,7 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                     {/* Plan column headers */}
                     <div className={`${ROW_GRID} ${ROW_PADDING}`}>
                         <span className="hidden @xl:block" />
-                        <span>
-                            <span className="text-base font-bold text-primary block">Totally free</span>
-                            <span className="text-xs text-primary/50">No credit card required</span>
-                        </span>
+                        <span className="text-base font-bold text-primary">Totally free</span>
                         <span className="text-base font-bold text-primary">Pay-as-you-go</span>
                     </div>
 
@@ -370,6 +367,7 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                         <span className={`${LABEL_CELL} text-base text-primary/70`}>Price per {unit}</span>
                         <span>
                             <strong className="text-lg text-primary">$0</strong>
+                            <span className="block text-sm text-primary/50 mt-0.5">No credit card required</span>
                         </span>
                         <span>
                             {startingPrice ? (
