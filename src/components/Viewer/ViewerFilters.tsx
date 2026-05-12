@@ -45,7 +45,7 @@ const filterData = (
     return data.filter((obj: any) => {
         return Object.keys(filters).every((key) => {
             const { value, filter } = filters[key]
-            if (value === null) {
+            if (value === undefined) {
                 return true
             }
             return filter(obj, value)

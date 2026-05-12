@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Select } from '../RadixUI/Select'
 import {
     IconSearch,
     IconMessage,
@@ -10,7 +9,6 @@ import {
     IconRefresh,
     IconPlus,
 } from '@posthog/icons'
-import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Toolbar, ToolbarElement } from '../RadixUI/Toolbar'
@@ -38,8 +36,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Popover } from 'components/RadixUI/Popover'
 import Slider from 'components/RadixUI/Slider'
-import { WEBSITE_MODE_CLASSES } from '../../constants'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import ViewerFilters from 'components/Viewer/ViewerFilters'
 
 interface EditorProps {
     slug?: string
@@ -94,6 +92,7 @@ interface EditorProps {
     articleRef?: React.RefObject<HTMLDivElement>
     hideToolbar?: boolean
     scrollable?: boolean
+    className?: string
 }
 
 type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
@@ -108,18 +107,6 @@ type EditorActionButton = {
 
 const ScrollWrapper = ({ scrollable, children }: { scrollable: boolean; children: React.ReactNode }) =>
     scrollable ? <ScrollArea>{children}</ScrollArea> : <>{children}</>
-
-const filterData = (data: any, filters: any) => {
-    return data.filter((obj: any) => {
-        return Object.keys(filters).every((key) => {
-            const { value, filter } = filters[key]
-            if (value === null) {
-                return true
-            }
-            return filter(obj, value)
-        })
-    })
-}
 
 const contentWidthOptions: ToggleOption[] = [
     {
@@ -222,6 +209,7 @@ export function Editor({
     disableFilterChange = false,
     dataToFilter,
     onFilterChange,
+    handleFilterChange,
     actionButtons,
     availableGroups,
     onGroupChange,
@@ -236,12 +224,11 @@ export function Editor({
     articleRef,
     hideToolbar = false,
     scrollable = true,
-    ...other
+    className = '',
 }: EditorProps) {
     const [showCher, setShowCher] = useState(false)
     const [showFilters, setShowFilters] = useState(initialShowFilters)
     const [showSearch, setShowSearch] = useState(false)
-    const [filters, setFilters] = useState({})
     const [isModifierKeyPressed, setIsModifierKeyPressed] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
     const products = useProduct() as { slug: string; name: string; type: string }[]
@@ -249,7 +236,6 @@ export function Editor({
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
     // if we're filtering to a product, show the filter button in an active/open state
     const searchContentRef = useRef(null)
-    const { search } = useLocation()
     const { addWindow, focusedWindow, websiteMode } = useApp()
     const hasShareButton = !cta?.url || !cta?.label
     const { appWindow } = useWindow()
@@ -483,39 +469,6 @@ export function Editor({
         },
     ]
 
-    const handleFilterChange = (key: string, value: any, filter: (obj: any, value: any) => boolean) => {
-        const newFilters = { ...filters, [key]: { value, filter } }
-        setFilters(newFilters)
-        if (other.handleFilterChange) {
-            other.handleFilterChange(newFilters)
-        } else {
-            const filteredData = filterData(dataToFilter, newFilters)
-            onFilterChange?.(filteredData)
-        }
-    }
-
-    useEffect(() => {
-        if (availableFilters && availableFilters.length > 0) {
-            const searchParams = new URLSearchParams(search)
-            if (searchParams.size <= 0) return
-            const newFilters = {}
-
-            searchParams.forEach((value, key) => {
-                const filter = availableFilters.find((f) => (f.value || f.label).toLowerCase() === key.toLowerCase())
-                if (filter) {
-                    newFilters[filter.value || filter.label] = { value, filter: filter.filter, initialValue: value }
-                }
-            })
-            setFilters(newFilters)
-            if (other.handleFilterChange) {
-                other.handleFilterChange(newFilters)
-            } else {
-                const filteredData = filterData(dataToFilter, newFilters)
-                onFilterChange?.(filteredData)
-            }
-        }
-    }, [availableFilters])
-
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.ctrlKey || event.metaKey) {
@@ -569,14 +522,7 @@ export function Editor({
 
     return (
         <SearchProvider onSearchChange={onSearchChange}>
-            <div className="@container w-full h-full flex flex-col min-h-1">
-                {hideToolbar
-                    ? null
-                    : !websiteMode && (
-                          <aside data-scheme="secondary" className="bg-primary p-2 border-b border-primary">
-                              <Toolbar elements={toolbarElements} />
-                          </aside>
-                      )}
+            <div className={`@container w-full h-full flex flex-col min-h-1 ${className}`}>
                 <div className="flex flex-col flex-grow min-h-0">
                     <main
                         data-app="Editor"
@@ -592,91 +538,6 @@ export function Editor({
                             onSearch={onSearchChange}
                         />
 
-                        {showFilters && availableFilters && availableFilters.length > 0 && (
-                            <div className="bg-accent p-2 text-sm border-b border-primary text-primary gap-1 sticky top-0 z-20 ">
-                                <div className={`flex flex-wrap ${websiteMode && WEBSITE_MODE_CLASSES}`}>
-                                    {availableFilters?.map((filter, index) => {
-                                        return (
-                                            <div key={filter.label} className="flex items-center gap-1">
-                                                <span>{index === 0 ? 'where' : 'and'}</span>
-                                                <span className="text-sm font-bold">{filter.label}</span>
-                                                <span className="italic">{filter.operator}</span>
-                                                <Select
-                                                    key={`${Object.keys(filters).length}-${filter.label}`}
-                                                    disabled={disableFilterChange}
-                                                    placeholder={filter.label}
-                                                    defaultValue={
-                                                        filter.initialValue === null
-                                                            ? null
-                                                            : filter.initialValue ??
-                                                              filters[filter.value ?? filter.label]?.value ??
-                                                              filter.options[0].value
-                                                    }
-                                                    groups={[
-                                                        {
-                                                            label: '',
-                                                            items: filter.options.map((option) => ({
-                                                                label: option.label,
-                                                                value: option.value,
-                                                            })),
-                                                        },
-                                                    ]}
-                                                    onValueChange={(value) =>
-                                                        handleFilterChange(
-                                                            filter.value ?? filter.label,
-                                                            value,
-                                                            filter.filter
-                                                        )
-                                                    }
-                                                />
-                                            </div>
-                                        )
-                                    })}
-                                    {availableGroups && availableGroups.length > 0 && (
-                                        <div className="@xl:ml-auto flex items-center space-x-1">
-                                            <span className="text-sm font-bold">Group by</span>
-                                            <Select
-                                                placeholder="Group by"
-                                                defaultValue="none"
-                                                groups={[
-                                                    {
-                                                        label: '',
-                                                        items: [
-                                                            { label: 'None', value: 'none' },
-                                                            ...availableGroups.map((group) => ({
-                                                                label: group.label,
-                                                                value: group.value,
-                                                            })),
-                                                        ],
-                                                    },
-                                                ]}
-                                                onValueChange={(value) => onGroupChange?.(value)}
-                                            />
-                                        </div>
-                                    )}
-                                    {sortOptions && sortOptions.length > 0 && (
-                                        <div className="ml-auto flex items-center space-x-2">
-                                            <span className="text-sm font-bold">Sort by:</span>
-                                            <Select
-                                                placeholder="Sort by"
-                                                defaultValue={defaultSortValue}
-                                                groups={[
-                                                    {
-                                                        label: '',
-                                                        items: sortOptions.map((option) => ({
-                                                            label: option.label,
-                                                            value: option.value,
-                                                        })),
-                                                    },
-                                                ]}
-                                                onValueChange={(value) => onSortChange?.(value)}
-                                            />
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        )}
-
                         {hasTabs ? (
                             <div data-scheme="primary" className="bg-accent h-full">
                                 <article
@@ -690,6 +551,22 @@ export function Editor({
                                             {title}
                                             {type && <span className="opacity-40">.{type}</span>}
                                         </h1>
+                                    )}
+                                    {availableFilters && availableFilters.length > 0 && (
+                                        <div className="mb-2 mt-4">
+                                            <ViewerFilters
+                                                availableFilters={availableFilters}
+                                                dataToFilter={dataToFilter}
+                                                onFilterChange={onFilterChange}
+                                                handleFilterChange={handleFilterChange}
+                                                disableFilterChange={disableFilterChange}
+                                                availableGroups={availableGroups}
+                                                onGroupChange={onGroupChange}
+                                                sortOptions={sortOptions}
+                                                onSortChange={onSortChange}
+                                                defaultSortValue={defaultSortValue}
+                                            />
+                                        </div>
                                     )}
                                     <div className="relative h-full" ref={searchContentRef}>
                                         {children}
@@ -711,6 +588,22 @@ export function Editor({
                                             {title}
                                             {type && <span className="opacity-40">.{type}</span>}
                                         </h1>
+                                    )}
+                                    {availableFilters && availableFilters.length > 0 && (
+                                        <div className="mb-2 mt-4">
+                                            <ViewerFilters
+                                                availableFilters={availableFilters}
+                                                dataToFilter={dataToFilter}
+                                                onFilterChange={onFilterChange}
+                                                handleFilterChange={handleFilterChange}
+                                                disableFilterChange={disableFilterChange}
+                                                availableGroups={availableGroups}
+                                                onGroupChange={onGroupChange}
+                                                sortOptions={sortOptions}
+                                                onSortChange={onSortChange}
+                                                defaultSortValue={defaultSortValue}
+                                            />
+                                        </div>
                                     )}
                                     <div className="relative">
                                         <div ref={searchContentRef}>{children}</div>

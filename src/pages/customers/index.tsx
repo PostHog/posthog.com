@@ -158,7 +158,7 @@ export default function Customers(): JSX.Element {
                         {
                             label: 'Product',
                             options: [
-                                { label: 'Any', value: null },
+                                { label: 'Any', value: undefined },
                                 ...Array.from(
                                     new Set(
                                         customers
@@ -176,7 +176,7 @@ export default function Customers(): JSX.Element {
                         {
                             label: 'Case study?',
                             options: [
-                                { label: 'Any', value: null },
+                                { label: 'Any', value: undefined },
                                 { label: 'Yes', value: true },
                                 { label: 'No', value: false },
                             ],
@@ -186,7 +186,7 @@ export default function Customers(): JSX.Element {
                         {
                             label: 'Featured',
                             options: [
-                                { label: 'Any', value: null },
+                                { label: 'Any', value: undefined },
                                 { label: 'Yes', value: true },
                                 { label: 'No', value: false },
                             ],
@@ -199,7 +199,9 @@ export default function Customers(): JSX.Element {
                     onFilterChange={handleFilterChange}
                 />
                 <OSTable
+                    className="mt-2"
                     columns={columns}
+                    width="full"
                     rows={(filteredCustomers || customers).map((customer: any, index: number) => {
                         return Customer({
                             number: index + 1,
