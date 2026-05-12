@@ -133,3 +133,20 @@ You have two options:
 2. **Disable zone hold** (not recommended): Zone holds are typically enabled for security reasons. Disabling them may expose your domain to certain risks. Only consider this if you understand the security implications for your organization.
 
 For most users with Cloudflare Enterprise, option 1 (setting up your own Cloudflare Worker proxy) is the recommended approach.
+
+### For EU Cloud, is managed reverse proxy traffic guaranteed to terminate only at EU Cloudflare edges?
+
+Not strictly guaranteed, but in practice this is usually the case. Cloudflare uses [anycast routing](https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/geographic-traffic-routing/) to terminate connections at the data center closest to the end user, so requests from users in Europe almost always land on EU edges. There are two caveats:
+
+- If your user is physically outside Europe, their request will terminate at a non-EU edge.
+- If the nearest Cloudflare data center is overloaded or unavailable, traffic may be routed to another region.
+
+We do not enable [Regional Services or the Data Localization Suite](https://developers.cloudflare.com/data-localization/) on the managed reverse proxy, so EU-only edge termination is not contractually enforced.
+
+That said, the managed reverse proxy is designed so that **no request content is stored at the edge**, regardless of which data center terminates the connection:
+
+- The Cloudflare Workers we use to forward traffic to our ingestion pipeline do not log requests.
+- Request caching is not enabled.
+- Cloudflare has confirmed to us that they do not retain request logs for this traffic either.
+
+Once traffic reaches PostHog, it is ingested into the region you selected (EU or US Cloud). If strict EU-only termination at the edge is a hard requirement for your compliance posture, we recommend setting up a [self-hosted proxy](/docs/advanced/proxy) on infrastructure you control instead.
