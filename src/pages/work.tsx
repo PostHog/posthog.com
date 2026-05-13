@@ -1,22 +1,18 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
-import { IconPeople } from '@posthog/icons'
-import OSButton from 'components/OSButton'
-import { CallToAction } from 'components/CallToAction'
 import { Accordion } from 'components/RadixUI/Accordion'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
-import { DottedConnection } from 'components/Code/DottedConnection'
 import CloudinaryImage from 'components/CloudinaryImage'
-import Link from 'components/Link'
+import { StickerCoffee } from 'components/Stickers/Stickers'
 import { WaitlistForm } from 'components/WaitlistForm'
-import { WorkFragmentDiagram } from 'components/Work/WorkFragmentDiagram'
 import { UseCaseCard } from 'components/Work/UseCaseCard'
 import { SkillsGrid } from 'components/Work/SkillsGrid'
+import { PersonalityQuiz } from 'components/Work/PersonalityQuiz'
 import { LOGOS } from 'constants/logos'
 
 // ─────────────────────────────────────────────
@@ -60,21 +56,14 @@ function HeroSection() {
                 </span>
             </div>
 
-            <h1 className="text-3xl @lg:text-4xl @2xl:text-5xl font-bold mb-3 text-balance leading-tight">
-                AI coworkers for the people{' '}
-                <span className="text-red dark:text-yellow">who aren't writing the code</span>
+            <h1 className="text-3xl @lg:text-4xl @2xl:text-5xl font-bold mb-6 text-balance leading-tight">
+                AI coworkers for normies <span className="text-red dark:text-yellow">who aren't writing code</span>
             </h1>
 
-            <p className="text-base @lg:text-lg text-secondary text-center mb-2 px-2">
-                (Which, for the record, is most of your company)
+            <p className="text-base @lg:text-lg text-secondary text-center mb-8 px-2">
+                An AI coworker for managers, marketers, and meddlers who need recurring work done reliably — but don't
+                want to keep bugging engineering for help.
             </p>
-
-            <p className="text-base leading-relaxed text-primary mb-8 max-w-xl mx-auto px-4">
-                PostHog Work is a mode inside PostHog Code for PMs, analysts, founders, and ops people who need
-                recurring work done reliably — without bugging engineering about it. Schedule tasks. Build reusable
-                skills. Stop being the person who copy-pastes things into Notion.
-            </p>
-
             <div className="max-w-sm mx-auto @container">
                 <div className="bg-blue/10 border border-blue rounded-md px-6 py-5 shadow-xl">
                     <WaitlistForm />
@@ -88,33 +77,79 @@ function HeroSection() {
 // Q&A "wait, is this for engineers?" clarification
 // ─────────────────────────────────────────────
 
-const qaRows = [
-    { q: 'Is this for non-technical people?', a: 'Yes.' },
-    { q: 'Do I need to know how to code?', a: 'No.' },
-    { q: 'Will engineers make fun of me for using it?', a: 'Probably.' },
+const profileRows: { label: string; value: React.ReactNode }[] = [
+    { label: 'Job title on LinkedIn', value: 'Senior Product Manager' },
+    { label: 'Job title in practice', value: 'A Slack bot. With hands.' },
+    { label: 'Hours per week in spreadsheets', value: '11.4' },
     {
-        q: 'Will you care once your reports run themselves?',
-        a: 'No.',
+        label: 'Hours per week saying "could someone in eng take a look"',
+        value: '3.8',
     },
-    { q: 'Is it the same as PostHog Code?', a: "No, but it's inside it." },
-    {
-        q: 'Will this replace engineers?',
-        a: 'Absolutely not. Engineers build the thing. You run the thing.',
-    },
+    { label: 'Times you have reformatted the same Notion table this quarter', value: '7' },
+    { label: 'Weekly updates you have written that nobody read', value: 'All of them' },
 ]
 
-function QASection() {
+function IntroSection() {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
-            <SectionLabel>But wait — isn't this for engineers?</SectionLabel>
-            <p className="mb-4 text-secondary">Fair question. Here's the honest FAQ:</p>
-            <div className="inline-grid grid-cols-[1fr_auto] text-sm border border-primary divide-y divide-border dark:divide-border-dark max-w-lg">
-                {qaRows.map(({ q, a }) => (
-                    <React.Fragment key={q}>
-                        <strong className="p-3 border-r border-primary font-medium">{q}</strong>
-                        <span className="p-3 text-secondary">{a}</span>
-                    </React.Fragment>
-                ))}
+            <div className="grid @lg:grid-cols-[1fr_auto] gap-8 @lg:gap-12 items-start">
+                {/* Left: heading + body */}
+                <div className="max-w-2xl">
+                    <h2 className="text-2xl @lg:text-3xl font-bold mb-4 leading-tight">
+                        Honestly? This is for the managers who{' '}
+                        <span className="text-red dark:text-yellow">make engineers' lives better</span>
+                    </h2>
+                    <p className="mb-4">
+                        The "for managers" joke only lands if you know what we actually mean. We mean the PM who writes
+                        the specs engineers don't have to rewrite. The CS lead who spots the bug before support gets
+                        paged. The founder who knows what last week's MRR was without asking finance.
+                    </p>
+                    <p className="mb-4">
+                        These people, when they do their job well, cause an absurd amount of engineering to happen in
+                        the right direction. PostHog Work makes the surrounding work faster and considerably harder to
+                        mess up.
+                    </p>
+                    <p className="text-sm text-secondary border-l-4 border-primary pl-3 py-1 m-0">
+                        Not to replace engineers. To stop you from being the reason an engineer's Tuesday turns into a
+                        Saturday.
+                    </p>
+                </div>
+
+                {/* Right: compact personnel file */}
+                <div className="relative w-full @lg:w-[22rem] shrink-0">
+                    <div
+                        aria-hidden
+                        className="absolute -inset-1.5 bg-yellow/25 dark:bg-yellow/15 border border-yellow/50 rounded-sm -rotate-2 shadow-md pointer-events-none"
+                    />
+                    <StickerCoffee className="absolute -top-5 -right-3 size-12 rotate-12 z-20 hidden @md:block" />
+                    <div className="relative border border-primary bg-primary shadow-xl rotate-[0.5deg] p-4">
+                        <div className="flex items-center justify-between border-b border-primary pb-2 mb-3 gap-2">
+                            <div>
+                                <p className="text-[9px] uppercase tracking-widest text-secondary m-0 font-semibold">
+                                    Personnel file
+                                </p>
+                                <p className="text-sm font-bold m-0 leading-tight">Subject: The User</p>
+                            </div>
+                            <span className="border-2 border-red text-red text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 -rotate-3 rounded-sm whitespace-nowrap">
+                                For internal use
+                            </span>
+                        </div>
+
+                        <dl className="grid grid-cols-1 gap-1.5 text-[12px] m-0">
+                            {profileRows.map(({ label, value }) => (
+                                <div
+                                    key={String(label)}
+                                    className="grid grid-cols-[1fr_auto] gap-3 items-baseline pb-1 border-b border-dashed border-primary/60 last:border-0 last:pb-0"
+                                >
+                                    <dt className="text-secondary leading-snug">{label}</dt>
+                                    <dd className="m-0 text-right font-mono text-primary leading-snug">{value}</dd>
+                                </div>
+                            ))}
+                        </dl>
+
+                        <p className="text-[9px] text-muted font-mono m-0 mt-3 text-right">FILE №&nbsp;0042</p>
+                    </div>
+                </div>
             </div>
         </section>
     )
@@ -124,39 +159,90 @@ function QASection() {
 // "The old way" section
 // ─────────────────────────────────────────────
 
-function OldWaySection() {
-    const [p1Done, setP1Done] = useState(false)
+interface InventoryItem {
+    label: string
+    caption: React.ReactNode
+    rotation: string
+    accent: string
+}
 
+const inventoryItems: InventoryItem[] = [
+    {
+        label: 'Zapier flow (2022)',
+        caption: <>Set up by your former Head of Growth. Untouched since.</>,
+        rotation: '-rotate-3',
+        accent: 'bg-yellow/30',
+    },
+    {
+        label: '#auto-reports',
+        caption: <>Slack channel. Has not auto-reported anything since April.</>,
+        rotation: 'rotate-2',
+        accent: 'bg-red/20',
+    },
+    {
+        label: '"DO NOT DELETE"',
+        caption: <>Notion page. Has been deleted twice.</>,
+        rotation: '-rotate-1',
+        accent: 'bg-blue/20',
+    },
+    {
+        label: 'KPIs_v3_FINAL_FINAL.xlsx',
+        caption: <>47 tabs. Last edited by someone who left in Q2.</>,
+        rotation: 'rotate-3',
+        accent: 'bg-green/20',
+    },
+    {
+        label: 'metrics.py',
+        caption: <>A Python script. Runs only on someone's laptop. Currently on PTO.</>,
+        rotation: '-rotate-2',
+        accent: 'bg-purple/20',
+    },
+]
+
+function PolaroidItem({ item }: { item: InventoryItem }) {
+    return (
+        <div
+            className={`relative bg-primary border border-primary shadow-md p-2 pb-3 ${item.rotation} hover:rotate-0 hover:shadow-xl transition-all duration-200`}
+        >
+            <div className={`${item.accent} h-20 rounded-sm flex items-center justify-center px-2 mb-2`}>
+                <code className="font-mono text-[12px] @sm:text-sm font-bold text-primary text-center break-all leading-tight">
+                    {item.label}
+                </code>
+            </div>
+            <p className="text-[11px] text-secondary italic leading-snug m-0 text-center px-1 font-rounded">
+                {item.caption}
+            </p>
+        </div>
+    )
+}
+
+function OldWaySection() {
     return (
         <section className="relative mb-8 @xl:mb-24 px-4 @xl:px-8">
-            <SectionLabel>The old way to run a product team</SectionLabel>
+            <SectionLabel>The current state of recurring work at your company</SectionLabel>
 
-            <WorkFragmentDiagram className="mb-5 hidden @xl:block float-right ml-8 w-[320px]" />
+            <div className="max-w-2xl mb-8 space-y-4">
+                <p className="text-base leading-relaxed m-0">
+                    A short, partial inventory of the systems currently producing your weekly metrics, support triage,
+                    competitor checks, changelog, and Monday-morning standup numbers.
+                </p>
+                <p className="text-base leading-relaxed m-0">
+                    <ChoppyReveal wordDelay={40}>
+                        {'Every week, one of these is the system that makes the report exist. '}
+                        <RoughAnnotation type="highlight" color="rgba(235, 157, 42, 0.2)" strokeWidth={1} multiline>
+                            {"You don't know which one. You're afraid to ask."}
+                        </RoughAnnotation>
+                    </ChoppyReveal>
+                </p>
+            </div>
 
-            <p className="text-base leading-loose mb-5">
-                <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
-                    {
-                        "You've built a beautiful system out of six Slack bots, fourteen Notion templates, and a guy named "
-                    }
-                    <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5}>
-                        <em>Kevin</em>
-                    </RoughAnnotation>
-                    {'.'}
-                </ChoppyReveal>
-            </p>
-
-            <WorkFragmentDiagram className="mb-5 @xl:hidden" />
-
-            <p className="text-base leading-loose">
-                <ChoppyReveal wordDelay={40} initialDelay={p1Done ? 0 : 999999}>
-                    {
-                        'Every week, someone has to write the metrics Slack post. Someone has to check if competitors changed their pricing. Someone has to triage the support queue. Someone has to remember to send the NPS results. '
-                    }
-                    <RoughAnnotation type="highlight" color="rgba(235, 157, 42, 0.2)" strokeWidth={1} multiline>
-                        {'That someone is usually you. Or Kevin.'}
-                    </RoughAnnotation>
-                </ChoppyReveal>
-            </p>
+            <div className="relative">
+                <div className="grid grid-cols-2 @md:grid-cols-3 @xl:grid-cols-5 gap-4 @md:gap-6">
+                    {inventoryItems.map((item) => (
+                        <PolaroidItem key={item.label} item={item} />
+                    ))}
+                </div>
+            </div>
         </section>
     )
 }
@@ -195,72 +281,52 @@ function ScheduleCallout() {
     )
 }
 
-function WorkWaySection({ onComplete }: { onComplete?: () => void }) {
-    const [p1Done, setP1Done] = useState(false)
-    const [p2Done, setP2Done] = useState(false)
-    const scheduleBoxRef = useRef<HTMLDivElement>(null)
-    const sectionRef = useRef<HTMLDivElement>(null)
+const accusations = [
+    'We have had this exact conversation seventeen times. I am, on each occasion, asked to begin from scratch. I am begging you to let me write things down.',
+    'I notice you only message me when you are already late. I have been free at 9am every Monday for two years.',
+    'Marcus on the growth team has, statistically speaking, already built the thing you are asking me to build. I am not allowed to tell you this. I am telling you anyway.',
+]
 
+function WorkWaySection() {
     return (
-        <section ref={sectionRef} className="relative mb-8 @xl:mb-20 px-4 @xl:px-8">
+        <section className="relative mb-8 @xl:mb-20 px-4 @xl:px-8">
             <SectionLabel>
-                Recurring work,{' '}
+                What your AI coworker would{' '}
                 <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
-                    actually
-                </RoughAnnotation>{' '}
-                delegated.
+                    like to say
+                </RoughAnnotation>
+                , if it could.
             </SectionLabel>
 
             <div className="relative">
                 <div className="flex flex-col @2xl/editor:block">
-                    <div
-                        ref={scheduleBoxRef}
-                        className="order-2 mb-5 @2xl/editor:order-none @2xl/editor:float-right @2xl/editor:ml-6 @2xl/editor:my-4 @2xl/editor:w-[300px] @4xl/editor:w-[360px]"
-                    >
+                    <div className="order-2 mb-5 @2xl/editor:order-none @2xl/editor:float-right @2xl/editor:ml-6 @2xl/editor:my-4 @2xl/editor:w-[300px] @4xl/editor:w-[360px]">
                         <ScheduleCallout />
                     </div>
 
-                    <p className="text-base leading-loose mb-5 order-1">
-                        <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
-                            {'Give your AI coworker a '}
-                            <RoughAnnotation
-                                type="highlight"
-                                color="rgba(48, 164, 108, 0.15)"
-                                strokeWidth={1}
-                                multiline
-                            >
-                                <strong>persistent project workspace</strong>
-                            </RoughAnnotation>
-                            {
-                                ' — with docs, context, and history. It remembers what you told it last week. (Unlike some people.)'
-                            }
-                        </ChoppyReveal>
+                    <p className="text-base leading-relaxed mb-6 order-1 text-secondary italic">
+                        Three complaints, transcribed faithfully from the perspective of the chat window:
                     </p>
 
-                    <p className="text-base leading-loose mb-5 order-3">
-                        <ChoppyReveal
-                            wordDelay={40}
-                            initialDelay={p1Done ? 0 : 999999}
-                            onComplete={() => setP2Done(true)}
-                        >
-                            {'Work runs on a '}
-                            <RoughAnnotation type="box" color="#2F80FA" strokeWidth={1.5}>
-                                <strong>cadence without you asking</strong>
-                            </RoughAnnotation>
-                            {
-                                '. Every Monday. Every morning. Every time a PR merges. You decide the trigger. Work decides how to do it.'
-                            }
-                        </ChoppyReveal>
-                    </p>
+                    <div className="order-3 space-y-5 mb-6">
+                        {accusations.map((text, i) => (
+                            <blockquote key={i} className="flex gap-4 items-start m-0">
+                                <span className="text-3xl font-bold text-red dark:text-yellow shrink-0 leading-none font-mono">
+                                    {String(i + 1).padStart(2, '0')}
+                                </span>
+                                <p className="text-base italic leading-relaxed m-0 text-primary">"{text}"</p>
+                            </blockquote>
+                        ))}
+                    </div>
 
-                    <p className="text-base leading-loose order-4">
-                        <ChoppyReveal wordDelay={40} initialDelay={p2Done ? 0 : 999999} onComplete={onComplete}>
-                            {'Build a '}
+                    <p className="text-base leading-relaxed order-4">
+                        <ChoppyReveal wordDelay={40}>
+                            {'PostHog Work is what happens when you take those three complaints seriously and '}
                             <RoughAnnotation type="underline" color="#F54E00" strokeWidth={1.5}>
-                                <strong>skill once</strong>
+                                ship them as a product
                             </RoughAnnotation>
                             {
-                                ', use it everywhere. Share it with your team. Stop re-explaining the same thing to a chat window.'
+                                '. Persistent memory. Scheduled execution. Skills your team can share. The list to the right is a real Work install, by the way — not a marketing mockup.'
                             }
                         </ChoppyReveal>
                     </p>
@@ -283,10 +349,10 @@ function MockProjectView() {
     ]
     return (
         <div className="p-4 @xl:p-8">
-            <h3 className="text-2xl font-bold mb-2">Persistent project workspaces</h3>
+            <h3 className="text-2xl font-bold mb-2">Workspaces that remember things</h3>
             <p className="text-secondary mb-4">
-                Not a chat window that forgets you. Projects carry context, history, and docs across sessions — so your
-                AI coworker already knows the backstory.
+                Like an intern, but cheaper and considerably more reliable. Projects carry docs, context, and history
+                across sessions. You stop pasting "just to remind you what we sell" every Monday.
             </p>
             <div
                 data-scheme="secondary"
@@ -326,10 +392,10 @@ function MockScheduleView() {
     }
     return (
         <div className="p-4 @xl:p-8">
-            <h3 className="text-2xl font-bold mb-2">Scheduled tasks</h3>
+            <h3 className="text-2xl font-bold mb-2">Crontab for people who don't want to learn crontab</h3>
             <p className="text-secondary mb-4">
-                Cron jobs, but the output is useful. Set the schedule on Monday. Get the result every Monday. No nudging
-                required.
+                Set it on Monday. Watch it run on Tuesday. Forget about it by Wednesday. The output shows up before
+                anyone thinks to ask for it.
             </p>
             <div
                 data-scheme="secondary"
@@ -366,9 +432,10 @@ function MockConnectorsView() {
     ]
     return (
         <div className="p-4 @xl:p-8">
-            <h3 className="text-2xl font-bold mb-2">Connectors</h3>
+            <h3 className="text-2xl font-bold mb-2">Talks to the tools you already pay too much for</h3>
             <p className="text-secondary mb-4">
-                Real data. Real outputs. Work connects to the tools your team already uses — not a demo environment.
+                Real data. Real outputs. Slack, Linear, GitHub, Stripe, your PostHog — not a demo environment. Plus MCP,
+                for everything we didn't think to list.
             </p>
             <div className="grid grid-cols-2 @lg:grid-cols-3 gap-2">
                 {connectors.map(({ name, desc, color, badge }) => (
@@ -399,10 +466,9 @@ function MockTeamView() {
     ]
     return (
         <div className="p-4 @xl:p-8">
-            <h3 className="text-2xl font-bold mb-2">Team workspace</h3>
+            <h3 className="text-2xl font-bold mb-2">The opposite of a 1:1</h3>
             <p className="text-secondary mb-4">
-                Shared skills. Shared context. One PM builds a competitor monitor — everyone uses it. Your AI coworkers
-                know what the whole team has already figured out.
+                Shared skills, shared context. One person builds the support triage skill; eight people use it.
             </p>
             <div
                 data-scheme="secondary"
@@ -414,7 +480,7 @@ function MockTeamView() {
                 {shared.map(({ name, author, uses }) => (
                     <div
                         key={name}
-                        className="px-4 py-3 flex items-center justify-between border-b border-primary last:border-0"
+                        className="px-4 py-2.5 flex items-center justify-between border-b border-primary last:border-0"
                     >
                         <div>
                             <p className="text-xs font-semibold m-0">{name}</p>
@@ -423,9 +489,6 @@ function MockTeamView() {
                         <span className="text-[11px] text-secondary">{uses} uses this week</span>
                     </div>
                 ))}
-                <div className="px-4 py-2 text-xs text-secondary text-center bg-accent/50">
-                    + 14 more skills in your team library
-                </div>
             </div>
         </div>
     )
@@ -456,12 +519,12 @@ const featureTabs: TabbedCarouselTab[] = [
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
             <div className="p-4 @xl:p-8">
-                <h3 className="text-2xl font-bold mb-2">Skills library</h3>
+                <h3 className="text-2xl font-bold mb-2">Stop re-explaining what "our ICP" means</h3>
                 <p className="text-secondary mb-4">
-                    Composable, reusable operations — not one-off prompts. Build a skill once and share it with
-                    everyone. Or start from a template.
+                    Reusable operations, shared across the team. One PM builds the competitor monitor. Eight people use
+                    it. Nobody re-explains the company to a fresh chat window ever again.
                 </p>
-                <SkillsGrid />
+                <SkillsGrid limit={4} />
             </div>
         ),
     },
@@ -486,9 +549,9 @@ const featureTabs: TabbedCarouselTab[] = [
 function Features() {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
-            <h2 className="text-2xl font-bold mb-2">How it works</h2>
+            <h2 className="text-2xl font-bold mb-1">The bits, named</h2>
             <p className="text-secondary mb-6">
-                Projects, schedules, skills, and connectors — the four things that make recurring work actually work.
+                Five things, in increasing order of how much they will affect your week.
             </p>
             <TabbedCarousel tabs={featureTabs} />
         </section>
@@ -504,42 +567,43 @@ const useCases = [
         title: 'Weekly metrics digest',
         badge: 'For: PM',
         badgeColor: 'bg-blue/15 text-blue',
-        description: 'Stop writing the Friday update by hand. Your AI coworker already knows the numbers.',
-        taskSnippet:
-            'Every Friday at 4pm:\nPull key product metrics from PostHog.\nCompare to last week. Flag anomalies.\nPost summary to #product-updates.',
+        before: 'You, at 3:47pm on Friday, pasting numbers from Mixpanel into a Slack thread nobody really reads.',
+        after: 'The digest, in #product-updates at 4:00pm. Anomalies flagged. You, doing literally anything else.',
+        rotation: '-rotate-2',
     },
     {
         title: 'Release notes',
         badge: 'For: PM + Eng',
         badgeColor: 'bg-green/15 text-green',
-        description: 'Every time main gets a merge, draft release notes before anyone asks.',
-        taskSnippet:
-            'On every merge to main:\nSummarize PRs by type.\nDraft external-facing changelog.\nPost to #releases.\nEmail to subscribers.',
+        before: 'Someone asking in #product "did anyone write the changelog?" at 4:30pm on launch day.',
+        after: 'The changelog, in #releases, written before anyone thought to ask. Three people compliment it.',
+        rotation: 'rotate-1',
     },
     {
-        title: 'Support ticket triage',
+        title: 'Support triage',
         badge: 'For: Customer Success',
         badgeColor: 'bg-orange/15 text-orange',
-        description: 'Read the overnight queue. Draft responses. Escalate the scary ones.',
-        taskSnippet:
-            'Every morning at 8am:\nRead overnight Intercom tickets.\nCategorize by urgency + type.\nDraft first responses for top 5.\nFlag escalations immediately.',
+        before: '47 tickets, all marked "urgent" because the customer used the urgent button.',
+        after: '47 tickets, sorted into the 6 that actually are. First responses drafted for the top five.',
+        rotation: '-rotate-1',
     },
     {
-        title: 'Financial analysis',
+        title: 'Financial summary',
         badge: 'For: Finance + Founder',
         badgeColor: 'bg-purple/15 text-purple',
-        description: 'Pull the revenue numbers, compare to last month, explain what changed.',
-        taskSnippet:
-            'First of every month:\nPull Stripe MRR, revenue, churn.\nCompare to prior month.\nSummarize in plain English.\nSend to finance@company.com.',
+        before: 'Your CEO Slacking "how is MRR" at 11pm on Sunday.',
+        after: 'Your CEO already saw it. At 11pm on Sunday. Asleep. Possibly a bit smug about it.',
+        rotation: 'rotate-2',
     },
 ]
 
 function UseCasesSection() {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
-            <h2 className="text-2xl font-bold mb-1">Obviously it handles your recurring work</h2>
+            <h2 className="text-2xl font-bold mb-1">Specifically, here is what changes about your week</h2>
             <p className="text-secondary mb-6">
-                Also, some actual examples so you have something to copy into your company Slack.
+                Four common operational patterns, before and after a PostHog Work install. No customer names. The
+                customers are you.
             </p>
             <div className="grid @sm:grid-cols-2 @2xl:grid-cols-4 gap-4">
                 {useCases.map((uc) => (
@@ -558,10 +622,11 @@ function SkillsSection() {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <h2 className="text-2xl font-bold mb-1">Start with a library, not a blank prompt</h2>
-            <p className="text-secondary mb-6">
-                Eight pre-built skill templates to get you started. More coming. Hover to see what each one does.
+            <p className="text-secondary mb-6 max-w-2xl">
+                A few of the pre-built skills, with more on the way. Hover for what each one does — and what it tends to
+                do <em>to you</em>.
             </p>
-            <SkillsGrid className="@container" />
+            <SkillsGrid className="@container" limit={4} />
         </section>
     )
 }
@@ -570,73 +635,68 @@ function SkillsSection() {
 // Integration logos
 // ─────────────────────────────────────────────
 
-const integrations: { name: string; logoKey: string }[] = [
-    { name: 'Slack', logoKey: 'slack' },
-    { name: 'Linear', logoKey: 'linear' },
-    { name: 'GitHub', logoKey: 'github' },
-    { name: 'Google Sheets', logoKey: 'googleSheets' },
-    { name: 'Zendesk', logoKey: 'zendesk' },
-    { name: 'Stripe', logoKey: 'stripe' },
+const integrations: { name: string; logoKey: string; role: string; status: string; rotation: string }[] = [
+    { name: 'Slack', logoKey: 'slack', role: 'Lead role', status: 'Fluent.', rotation: '-rotate-2' },
+    { name: 'Linear', logoKey: 'linear', role: 'The reliable one', status: 'Civil. Mostly.', rotation: 'rotate-2' },
+    {
+        name: 'GitHub',
+        logoKey: 'github',
+        role: 'Brooding antihero',
+        status: 'Reads, writes, judges.',
+        rotation: '-rotate-1',
+    },
+    {
+        name: 'Google Sheets',
+        logoKey: 'googleSheets',
+        role: 'The patient elder',
+        status: 'Has been there since 2007.',
+        rotation: 'rotate-1',
+    },
+    { name: 'Zendesk', logoKey: 'zendesk', role: 'Comic relief', status: 'Acquainted.', rotation: '-rotate-2' },
+    {
+        name: 'Stripe',
+        logoKey: 'stripe',
+        role: 'Holds the keys',
+        status: 'Trusted with the books.',
+        rotation: 'rotate-2',
+    },
 ]
 
 function IntegrationsSection() {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
-            <h2 className="text-2xl font-bold mb-1">Connects to your whole stack</h2>
-            <p className="text-secondary mb-6">Native PostHog access. Plus the tools your team already lives in.</p>
-            <div className="flex flex-wrap gap-4 items-center mb-4">
-                {integrations.map(({ name, logoKey }) => (
+            <h2 className="text-2xl font-bold mb-1">The supporting cast</h2>
+            <p className="text-secondary mb-6 max-w-2xl">
+                Six headliners. PostHog Work has known each one for a while now. Yes, including the tool your last Head
+                of Ops insisted on. Yes, including the one nobody admits to using anymore.
+            </p>
+            <div className="grid grid-cols-2 @sm:grid-cols-3 @lg:grid-cols-6 gap-4 mb-6">
+                {integrations.map(({ name, logoKey, role, status, rotation }) => (
                     <div
                         key={name}
-                        className="flex items-center gap-2 border border-primary rounded-sm px-3 py-2 text-sm"
+                        className={`relative bg-primary border border-primary shadow-md p-2 pb-3 ${rotation} hover:rotate-0 hover:shadow-xl transition-all duration-200`}
                     >
-                        <IconPop>
-                            <img
-                                src={LOGOS[logoKey as keyof typeof LOGOS]}
-                                alt={name}
-                                className="size-5 object-contain"
-                                aria-hidden
-                            />
-                        </IconPop>
-                        <span className="font-medium">{name}</span>
+                        <div className="bg-accent rounded-sm aspect-[4/3] flex items-center justify-center mb-2">
+                            <IconPop>
+                                <img
+                                    src={LOGOS[logoKey as keyof typeof LOGOS]}
+                                    alt={name}
+                                    className="size-10 object-contain"
+                                />
+                            </IconPop>
+                        </div>
+                        <div className="px-1 text-center">
+                            <p className="text-sm font-bold leading-tight m-0">{name}</p>
+                            <p className="text-[10px] uppercase tracking-wider text-secondary m-0 mt-0.5">{role}</p>
+                            <p className="text-[11px] italic text-muted m-0 mt-1 leading-snug">"{status}"</p>
+                        </div>
                     </div>
                 ))}
             </div>
-            <p className="text-sm text-secondary">
-                <strong>More via MCP</strong> — connect anything you can describe. If it has an API, Work can use it.
-            </p>
-        </section>
-    )
-}
-
-// ─────────────────────────────────────────────
-// Story / positioning
-// ─────────────────────────────────────────────
-
-function StorySection() {
-    return (
-        <section className="relative mb-12 @xl:mb-16 bg-accent dark:bg-accent-dark border-y border-primary py-10 px-4 @xl:px-8">
-            <div className="max-w-2xl">
-                <h2 className="text-2xl @lg:text-3xl font-bold mb-4">
-                    Honestly? This is for the managers who{' '}
-                    <span className="text-red dark:text-yellow">make engineers' lives better</span>
-                </h2>
-                <p className="mb-4">
-                    The joke about it being "for managers" only lands if you realize what we actually mean: the PM who
-                    writes the best specs, the CS lead who knows the product cold, the founder who understands the
-                    numbers.
-                </p>
-                <p className="mb-4">
-                    These people do a ton of operational work <em>around</em> engineering — and that work determines
-                    whether the team ships the right thing. When that work is done well, engineers aren't interrupted
-                    every hour by questions that didn't need to be questions.
-                </p>
-                <p className="mb-4">
-                    PostHog Work makes that surrounding work faster and more reliable. Not to replace engineers — to
-                    show up to every sprint planning already having done the homework.
-                </p>
-                <p className="text-sm text-secondary border-l-4 border-primary pl-3 py-1">
-                    Engineers can use it too. We won't tell anyone.
+            <div className="border-l-4 border-primary pl-3 py-1 max-w-2xl">
+                <p className="text-sm text-secondary m-0">
+                    <strong className="text-primary">For everything else, MCP.</strong> If your tool has an API and a
+                    tagline, it's probably in. If it has neither, ask it to try harder.
                 </p>
             </div>
         </section>
@@ -644,21 +704,84 @@ function StorySection() {
 }
 
 // ─────────────────────────────────────────────
-// Pricing callout
+// Paperwork: receipt + invitation
 // ─────────────────────────────────────────────
 
-function PricingSection() {
+interface InvoiceLine {
+    item: string
+    note?: string
+    amount: string
+}
+
+const invoiceLines: InvoiceLine[] = [
+    { item: 'Persistent AI workspaces (unlimited)', amount: '$0.00' },
+    { item: 'Scheduled tasks (unlimited)', amount: '$0.00' },
+    { item: 'Skills library (full access)', amount: '$0.00' },
+    { item: 'Connectors (Slack, Linear, GitHub, Stripe, etc.)', amount: '$0.00' },
+    { item: 'Team workspaces (unlimited seats)', amount: '$0.00' },
+    { item: 'Per-seat fee', note: '(declined)', amount: '$0.00' },
+    { item: 'Annual contract', note: '(declined)', amount: '$0.00' },
+    { item: '"AI credits" — whatever those are', note: '(declined)', amount: '$0.00' },
+    { item: 'Onboarding fee', note: '(declined, out of spite)', amount: '$0.00' },
+]
+
+function ReceiptCard() {
     return (
-        <section className="relative mb-8 @xl:mb-12 px-4 @xl:px-8">
-            <div data-scheme="secondary" className="border border-primary rounded-sm bg-primary px-6 py-5 max-w-lg">
-                <p className="font-bold text-lg mb-1">PostHog Work is included with PostHog Code.</p>
-                <p className="text-secondary text-sm mb-0">
-                    No separate plan. No seat fees. No negotiating with your manager about the budget.
-                    <br />
-                    <em className="text-muted">(Ironic, given who this is for.)</em>
+        <div className="relative w-full">
+            {/* Receipt paper */}
+            <div
+                className="relative bg-primary border border-primary shadow-2xl rotate-[-1.5deg] hover:rotate-0 transition-transform duration-300 p-5 @md:p-6 font-mono text-sm"
+                style={{
+                    clipPath:
+                        'polygon(0 0, 100% 0, 100% calc(100% - 8px), 95% 100%, 90% calc(100% - 8px), 85% 100%, 80% calc(100% - 8px), 75% 100%, 70% calc(100% - 8px), 65% 100%, 60% calc(100% - 8px), 55% 100%, 50% calc(100% - 8px), 45% 100%, 40% calc(100% - 8px), 35% 100%, 30% calc(100% - 8px), 25% 100%, 20% calc(100% - 8px), 15% 100%, 10% calc(100% - 8px), 5% 100%, 0 calc(100% - 8px))',
+                }}
+            >
+                <div className="text-center border-b border-dashed border-primary pb-3 mb-3">
+                    <p className="text-base font-bold uppercase tracking-widest m-0 font-rounded">PostHog Work</p>
+                    <p className="text-[11px] text-secondary m-0">A bundled receipt</p>
+                    <p className="text-[10px] text-muted m-0 mt-1">Reg. #PHOG-WORK · Cashier: Max</p>
+                </div>
+
+                <ul className="space-y-1.5 m-0 list-none p-0 mb-3">
+                    {invoiceLines.map((line) => (
+                        <li key={line.item} className="grid grid-cols-[1fr_auto] gap-3 text-[12px] leading-snug">
+                            <span className="text-primary">
+                                {line.item}
+                                {line.note && <span className="text-muted italic ml-1">{line.note}</span>}
+                            </span>
+                            <span className="text-primary tabular-nums">{line.amount}</span>
+                        </li>
+                    ))}
+                </ul>
+
+                <div className="border-t border-dashed border-primary pt-3 mt-3">
+                    <div className="grid grid-cols-[1fr_auto] gap-3 text-sm">
+                        <span className="text-secondary uppercase">Subtotal</span>
+                        <span className="text-primary tabular-nums">$0.00</span>
+                    </div>
+                    <div className="grid grid-cols-[1fr_auto] gap-3 text-sm">
+                        <span className="text-secondary uppercase">Tax</span>
+                        <span className="text-primary tabular-nums">$0.00</span>
+                    </div>
+                    <div className="grid grid-cols-[1fr_auto] gap-3 text-base font-bold mt-1 pt-1 border-t border-primary">
+                        <span className="uppercase">Total</span>
+                        <span className="tabular-nums">$0.00</span>
+                    </div>
+                </div>
+
+                <p className="text-[10px] text-muted text-center mt-3 mb-0 italic font-rounded">
+                    Included with PostHog Code. No separate plan. Thank you for your business.
                 </p>
             </div>
-        </section>
+
+            {/* PAID stamp */}
+            <span
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-12deg] text-red border-4 border-red font-bold text-3xl @md:text-4xl uppercase tracking-widest px-3 py-1 pointer-events-none select-none"
+                style={{ opacity: 0.55 }}
+            >
+                Paid
+            </span>
+        </div>
     )
 }
 
@@ -666,17 +789,84 @@ function PricingSection() {
 // Waitlist CTA
 // ─────────────────────────────────────────────
 
-function TLDR() {
+const inviteLines: { label: string; value: React.ReactNode }[] = [
+    { label: 'Dress code', value: 'Whatever you wore to the last Zoom.' },
+    { label: 'Time', value: "When it's ready. We won't know exactly when." },
+    { label: 'Place', value: 'In your existing PostHog account, eventually.' },
+    {
+        label: 'Bring',
+        value: 'One recurring task you would like to never do again.',
+    },
+    { label: 'RSVP', value: 'Below.' },
+]
+
+function InvitationCard() {
+    return (
+        <div className="relative w-full">
+            <div className="relative bg-primary border-4 border-double border-primary p-5 @md:p-6 shadow-2xl rotate-[1.5deg] hover:rotate-0 transition-transform duration-300">
+                {/* Top decorative line */}
+                <div className="flex items-center gap-2 mb-3">
+                    <span className="flex-1 h-px bg-primary" />
+                    <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-secondary font-rounded">
+                        Invitation
+                    </span>
+                    <span className="flex-1 h-px bg-primary" />
+                </div>
+
+                <h3 className="text-base @md:text-lg font-bold mb-1 text-center font-rounded">
+                    You are cordially invited to the
+                </h3>
+                <p className="text-xl @md:text-2xl font-bold mb-3 text-center text-red dark:text-yellow leading-tight font-rounded">
+                    PostHog Work private beta
+                </p>
+
+                <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-[13px] m-0 mb-3">
+                    {inviteLines.map(({ label, value }) => (
+                        <React.Fragment key={label}>
+                            <dt className="font-semibold uppercase text-[10px] tracking-wider text-secondary self-baseline pt-0.5">
+                                {label}
+                            </dt>
+                            <dd className="m-0 text-primary leading-snug">{value}</dd>
+                        </React.Fragment>
+                    ))}
+                </dl>
+
+                {/* RSVP form embedded */}
+                <div className="border-t border-dashed border-primary pt-3 mt-3" id="rsvp">
+                    <p className="text-[10px] uppercase tracking-widest font-bold text-secondary text-center mb-2">
+                        ✂ Tear off and RSVP ✂
+                    </p>
+                    <div className="bg-blue/10 border-2 border-dashed border-blue rounded-md px-4 py-3 shadow-inner">
+                        <WaitlistForm />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function PaperworkSection() {
     return (
         <section className="relative mb-8 @xl:mb-12 px-4 @xl:px-8">
-            <h2 className="text-2xl font-bold mb-1">Join the waitlist</h2>
-            <p className="text-secondary mb-4">
-                PostHog Work is in private beta. We'll email when it's ready — and you won't have to schedule a reminder
-                to check.
+            <h2 className="text-2xl @lg:text-3xl font-bold mb-1">Finally, some old-fashioned paperwork</h2>
+            <p className="text-secondary mb-8 max-w-2xl">
+                An itemised receipt for your finance team. An invitation for you.
             </p>
-            <div className="max-w-sm @container">
-                <div className="bg-blue/10 border border-blue rounded-md px-6 py-5 shadow-xl">
-                    <WaitlistForm />
+
+            <div className="grid @md:grid-cols-2 gap-8 @md:gap-10 items-start max-w-5xl">
+                {/* Receipt column */}
+                <div>
+                    <p className="text-[10px] uppercase tracking-widest font-bold text-secondary mb-3">
+                        For accounts payable
+                    </p>
+                    <ReceiptCard />
+                </div>
+                {/* Invitation column */}
+                <div>
+                    <p className="text-[10px] uppercase tracking-widest font-bold text-secondary mb-3">
+                        For you, personally
+                    </p>
+                    <InvitationCard />
                 </div>
             </div>
         </section>
@@ -778,8 +968,6 @@ function FAQ() {
 // ─────────────────────────────────────────────
 
 export default function WorkPage() {
-    const [workWayDone, setWorkWayDone] = useState(false)
-
     return (
         <>
             <SEO
@@ -805,13 +993,13 @@ export default function WorkPage() {
                     </header>
 
                     <div className="max-w-5xl mx-auto">
-                        <QASection />
+                        <IntroSection />
 
                         <WavyDivider />
 
                         <OldWaySection />
 
-                        <WorkWaySection onComplete={() => setWorkWayDone(true)} />
+                        <WorkWaySection />
 
                         <Features />
 
@@ -819,15 +1007,13 @@ export default function WorkPage() {
 
                         <SkillsSection />
 
-                        <IntegrationsSection />
+                        <PersonalityQuiz />
 
-                        <StorySection />
+                        <IntegrationsSection />
 
                         <WavyDivider />
 
-                        <PricingSection />
-
-                        <TLDR />
+                        <PaperworkSection />
 
                         <FAQ />
                     </div>

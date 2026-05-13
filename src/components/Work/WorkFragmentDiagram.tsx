@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { IconMessage, IconStack, IconPerson, IconGraph, IconSend } from '@posthog/icons'
+import { IconMessage, IconStack, IconBolt, IconGraph, IconCode2 } from '@posthog/icons'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 
 const nodes = [
-    { label: '#product-updates\n(manually written)', icon: IconMessage, color: 'text-red', x: '15%', y: '20%' },
-    { label: 'Notion template\n(already stale)', icon: IconStack, color: 'text-blue', x: '65%', y: '12%' },
-    { label: 'Kevin', icon: IconPerson, color: 'text-yellow', x: '40%', y: '50%' },
-    { label: "Spreadsheet\n(on Kevin's laptop)", icon: IconGraph, color: 'text-green', x: '80%', y: '55%' },
-    { label: 'Email thread\n(112 replies)', icon: IconSend, color: 'text-orange', x: '10%', y: '72%' },
+    { label: '#auto-reports\n(silent since April)', icon: IconMessage, color: 'text-red', x: '15%', y: '20%' },
+    { label: 'Notion template\n("DO NOT DELETE")', icon: IconStack, color: 'text-blue', x: '65%', y: '12%' },
+    { label: 'Zapier flow\n(unmaintained, 2022)', icon: IconBolt, color: 'text-yellow', x: '40%', y: '50%' },
+    { label: 'KPIs_v3_FINAL\n.xlsx', icon: IconGraph, color: 'text-green', x: '80%', y: '55%' },
+    { label: "Python script\n(on someone's laptop)", icon: IconCode2, color: 'text-orange', x: '10%', y: '72%' },
 ]
 
 const chaosLines = [
