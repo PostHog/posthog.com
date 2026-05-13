@@ -6701,22 +6701,18 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-<<<<<<< HEAD
                     name: 'Drop rules',
                     url: '/docs/logs/drop-rules',
                     icon: 'IconFilter',
                     color: 'orange',
                 },
                 {
-||||||| b0608d063
-=======
                     name: 'Set up alerts',
                     url: '/docs/logs/alerts',
                     icon: 'IconBell',
                     color: 'red',
                 },
                 {
->>>>>>> master
                     name: 'PostHog AI',
                 },
                 {
