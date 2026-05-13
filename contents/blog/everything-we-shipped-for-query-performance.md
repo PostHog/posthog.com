@@ -170,7 +170,7 @@ But every query goes through them, so the multiplier on total CPU is large.
 Late in this cycle we ran an experiment at our company offsite in Lisbon:
 take Andrej Karpathy's [autoresearch](https://github.com/karpathy/autoresearch) idea and point it at our slow queries.
 It found a bug we'd had for [three years](/blog/autoresearch-found-a-3-year-old-clickhouse-bug):
-HogQL's per-team timezone support was silently disabling ClickHouse's primary key on every query that filtered by `timestamp`.
+HogQL's per-team timezone support was silently stopping ClickHouse from fully using its primary key on every query that filtered by `timestamp`.
 
 Fixing that ([#54819](https://github.com/PostHog/posthog/pull/54819)) made our test funnel 22–37% faster and cut scanned granules by 62%.
 
