@@ -1,6 +1,6 @@
 ---
 date: 2026-05-13
-title: A year of query performance work at PostHog
+title: Recent query performance work at PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -15,15 +15,15 @@ tags:
   - Engineering
   - Inside PostHog
 seo:
-  metaTitle: "A year of query performance work at PostHog"
-  metaDescription: "A technical accounting of what PostHog's Query Performance and Analytics Platform teams shipped over the past year: hardware upgrades, schema redesigns, pre-aggregation, lazy computation, HogQL parser optimizations, query observability, and AI-driven query rewriting."
+  metaTitle: "Recent query performance work at PostHog"
+  metaDescription: "A technical accounting of what PostHog's Query Performance, Analytics Platform, and ClickHouse teams have shipped recently: a new production ClickHouse cluster, lazy computation, query result caching and coalescing, HogQL parser optimizations, AI-driven query rewriting, and observability tooling."
 ---
 
 Customers ask us about query performance, and it is a fair question.
 At scale (billions of events, hundreds of dashboards, teams across regions) query latency is the difference between analytics that get used and analytics that get ignored.
 
-This post is a substantive accounting of what the [Query Performance](/teams/query-performance), [Analytics Platform](/teams/analytics-platform), [ClickHouse](/teams/clickhouse), and [Web Analytics](/teams/web-analytics) teams shipped over the last year to make PostHog queries faster, why each piece matters, and what we are working on next.
-It covers infrastructure, schema redesigns, query-time optimizations, precomputation, AI-driven query rewriting, and the observability work that makes all of it possible.
+This post is a substantive accounting of what the [Query Performance](/teams/query-performance), [Analytics Platform](/teams/analytics-platform), and [ClickHouse](/teams/clickhouse) teams have shipped recently to make PostHog queries faster, why each piece matters, and what we are working on next.
+It covers infrastructure, query-time optimizations, precomputation and caching, AI-driven query rewriting, and the observability tooling that makes all of it possible.
 
 If you are running PostHog at scale, or evaluating it, this document is for you.
 
@@ -39,8 +39,8 @@ The window is shorter than the year-over-year comparison we would prefer.
 The archive table that retains the data we need only goes back to late January 2026, so a year-on-year view is not yet possible.
 The roughly ten-week window below is the longest reliable comparison we can show today; we will publish the full year-over-year view once the archive depth catches up.
 
-Note that the ClickHouse hardware upgrade described in section 1 happened in early 2026 and is therefore not captured in this comparison: both the February and the May samples are already running on the upgraded hardware.
-The improvements shown below are essentially all software.
+Note that the new ClickHouse cluster described in section 1 was cut over in mid-January 2026, before this comparison window starts: both the February and the May samples are already running on the new cluster. The hardware change itself was substantial, roughly 3× peak read throughput compared to the old cluster, and that improvement is **not** captured in the latency numbers below. The improvements shown are a separate set of software wins that landed on top of the new cluster, not a measurement of it.
+Earlier optimization work that predates the comparison window (most of what shipped before January 2026) is similarly not captured here.
 
 **Cluster-wide, across every customer-facing query, latency dropped at every percentile we measure:**
 
@@ -71,10 +71,10 @@ The improvement is largest in the tail, which is the part customers feel the mos
 
 Not everything improved.
 RetentionQuery and both marketing-analytics query types regressed across all percentiles in the comparison window.
-The regressions are mostly consistent with workstreams that are in progress but not yet shipped (the marketing-analytics preaggregation work in section 2, and active improvements to retention).
+The regressions are mostly consistent with workstreams that are in progress but not yet shipped (marketing-analytics preaggregation and lazy computation, both listed under "What is in flight" below, and active improvements to retention).
 Where we have a clear regression we are working on it; we are not going to claim universal wins.
 
-A practical caveat on the cluster-wide table: the way we tag queries from some products expanded significantly in March 2026 (see section 9 on tooling and observability), which shifts the population mix for any individual product's per-product line between the two periods.
+A practical caveat on the cluster-wide table: the way we tag queries from some products expanded significantly in March 2026 (see section 6 on tooling and observability), which shifts the population mix for any individual product's per-product line between the two periods.
 The cluster-wide totals and the per-query-type breakdown above are unaffected by that tagging change, because they aggregate over the underlying query, not the tag.
 
 ## How we approach query performance
@@ -99,39 +99,23 @@ The rest of this post is what we shipped in each category, with links to the PRs
 
 ## 1. ClickHouse infrastructure
 
-[Team ClickHouse](/teams/clickhouse) owns everything beneath HogQL: cluster topology, version management, schema migrations, and the operational maintenance that keeps queries fast. A few of the larger items shipped over the past year:
+[Team ClickHouse](/teams/clickhouse) owns everything beneath HogQL: cluster topology, version management, schema migrations, and the operational maintenance that keeps queries fast. The biggest items:
 
-- **Hardware uplift.** Both PostHog Cloud regions moved to more CPU, more RAM, and faster NVMe storage in early 2026. The uplift applies to every query regardless of which product issued it.
+- **A new production ClickHouse cluster.** Production traffic in the US region moved to a new cluster in mid-January 2026. The new cluster runs on 20 bare-metal AWS i7ie instances, each with around 120 TB of local NVMe storage and 300 Gbit network bandwidth. The most important change is moving from EBS-backed storage to local NVMe: data is read directly off local disk rather than over the network from an EBS volume. Peak measured read throughput on the new cluster is roughly 3× that of the old one. This change alone is the single largest query-performance win in the period covered by this post.
 
 - **ClickHouse 26.3 upgrade.** The production cluster moved from 25.x to ClickHouse 26.3 in April 2026 ([#54222](https://github.com/PostHog/posthog/pull/54222), [#54696](https://github.com/PostHog/posthog/pull/54696)). The upgrade unlocks performance and correctness fixes that were not backported to 25.12. We are also rolling out ClickHouse's new query analyzer to selected teams ([#51340](https://github.com/PostHog/posthog/pull/51340)).
 
 - **Satellite clusters for specialised workloads.** Rather than running everything on a single shared cluster, we introduced satellite ClickHouse clusters in early 2026 for AI events, sessions, ops, and auxiliary workloads ([#52869](https://github.com/PostHog/posthog/pull/52869), [#58175](https://github.com/PostHog/posthog/pull/58175), [#52045](https://github.com/PostHog/posthog/pull/52045)). The main multi-shard DATA cluster handles customer-facing analytical queries; the satellites isolate workloads that would otherwise compete for the same resources.
 
-- **New skip indexes on the events table.** A MinMax skip index on `timestamp` ([#42941](https://github.com/PostHog/posthog/pull/42941)) and a bloom filter on `distinct_id` ([#42571](https://github.com/PostHog/posthog/pull/42571)) let ClickHouse skip granules that do not satisfy time-range or person filters without scanning them.
-
 - **Continuous part-size management.** Large ClickHouse parts (above ~300 GiB) degrade query performance and increase merge pressure. A scheduled "part-breaker" job splits oversized parts across the fleet ([#52030](https://github.com/PostHog/posthog/pull/52030), plus a series of follow-up hardenings).
 
-The rest of this post is the work that sits on top of this foundation.
+The rest of this post is the software work that sits on top of this foundation.
 
-## 2. Pre-aggregated tables for web analytics
+## 2. Lazy computation for arbitrary queries
 
-Web analytics queries are predictable.
-You are almost always asking for uniques, pageviews, or bounce rate, by some combination of `host`, `device_type`, `pathname`, UTM source, country, and so on, over a date range.
-The query space is small enough that we can precompute it.
-
-[The web analytics team](/teams/web-analytics) has spent most of 2025 building this out: hourly pre-aggregated tables for the current day, daily pre-aggregated tables for historical data, and a query-time union that joins the two together so dashboards get near-real-time numbers without paying the full price ([#33018](https://github.com/PostHog/posthog/pull/33018), [#33122](https://github.com/PostHog/posthog/pull/33122)).
-Filters, path cleaning, marketing attribution, and conversion goals all work against the pre-aggregated tables ([#32677](https://github.com/PostHog/posthog/pull/32677), [#32724](https://github.com/PostHog/posthog/pull/32724), [#32788](https://github.com/PostHog/posthog/pull/32788), [#39677](https://github.com/PostHog/posthog/pull/39677)).
-Daily partitions on the pre-aggregated tables let us efficiently swap and re-run the previous day's data when upstream issues require it ([#33022](https://github.com/PostHog/posthog/pull/33022)).
-The largest customers were enabled first ([#36014](https://github.com/PostHog/posthog/pull/36014)), and asset checks compare aggregated numbers against a raw-events ground truth so drift would be caught quickly ([#33572](https://github.com/PostHog/posthog/pull/33572), [#38827](https://github.com/PostHog/posthog/pull/38827)).
-
-For typical web analytics dashboards, pre-aggregated tables deliver substantially faster query times than scanning raw events on every request, often by an order of magnitude.
-Comparable work is in progress on the marketing analytics side ([#54527](https://github.com/PostHog/posthog/pull/54527), [#54959](https://github.com/PostHog/posthog/pull/54959)) using the same pattern adapted for a different query shape.
-
-## 3. Lazy computation for arbitrary queries
-
-The pre-aggregation pattern works well when the query space is known in advance.
-Web analytics tiles, experiment exposure calculations, and marketing attribution all fit.
-Ad-hoc queries (a Trends insight a customer just built, a one-off HogQL query against arbitrary filters) do not.
+Some PostHog query patterns are predictable enough that the result can be precomputed: web analytics tiles, experiment exposure calculations, marketing attribution.
+For those, we maintain dedicated pre-aggregated tables and compute on a schedule.
+Ad-hoc queries (a Trends insight a customer just built, a one-off HogQL query against arbitrary filters) do not fit that pattern.
 
 To handle the long tail, we built a more general precomputation layer.
 
@@ -155,14 +139,14 @@ Web analytics and marketing analytics are next.
 
 The full design, including the consistency story under concurrent writes and stale-job recovery, is documented in our [engineering handbook](/handbook/engineering/clickhouse/preaggregation).
 
-## 4. Query result caching and coalescing
+## 3. Query result caching and coalescing
 
 Most analytics workloads have a lot of repetition: the same dashboard tile rendered for many viewers on auto-refresh, the same exposure calculation across several metric tiles in an experiment, the same Trends insight pinned to multiple dashboards.
 When the inputs and time range are identical, the second answer should not require any work on the cluster.
 
 Three lines of work shipped this year:
 
-- **A unified query result cache.** All HogQL queries route through a single cache layer keyed on the query hash, time range, and team. Legacy trend and funnel endpoints that previously bypassed this are now on the unified path ([#52369](https://github.com/PostHog/posthog/pull/52369)). Per-team cache size limits keep one customer's results from evicting another's ([#44131](https://github.com/PostHog/posthog/pull/44131), [#52492](https://github.com/PostHog/posthog/pull/52492)).
+- **A unified query result cache.** All HogQL queries route through a single cache layer keyed on the query hash, time range, and team. Legacy trend and funnel endpoints that previously bypassed this are now on the unified path ([#52369](https://github.com/PostHog/posthog/pull/52369)). Per-team cache size limits keep one customer's results from evicting another's ([#52492](https://github.com/PostHog/posthog/pull/52492)).
 
 - **Query coalescing.** Two concurrent requests for the same query no longer run twice; the second waits on the first via a middleware layer in Django ([#49295](https://github.com/PostHog/posthog/pull/49295), [#51049](https://github.com/PostHog/posthog/pull/51049), [#51713](https://github.com/PostHog/posthog/pull/51713), [#52511](https://github.com/PostHog/posthog/pull/52511)). On dashboards with many concurrent viewers, or with many tiles that share an underlying query, cache-miss work is done once instead of N times.
 
@@ -170,39 +154,7 @@ Three lines of work shipped this year:
 
 The combined effect is that dashboard refreshes after the first one are served from cache, concurrent users share the work rather than duplicate it, and the cache itself is isolated from the rest of the cluster.
 
-## 5. Better use of skip indexes and materialized columns
-
-ClickHouse has two features that are underused by the queries most analytics products produce:
-
-- **Skip indexes** (bloom filters, ngram filters, min/max) allow ClickHouse to skip granules without scanning them, at the cost of a small amount of disk space.
-
-- **Materialized columns** pull a JSON property out into its own column so queries against that property read a dense column rather than parsing JSON on every event.
-
-Most queries were not using them.
-
-Not because the indexes were missing, but because the queries were almost in the right shape and ClickHouse's planner is strict about that.
-Wrap a column in `nullIf()` and the materialized column becomes invisible.
-Use `ilike` instead of `=` and the ngram skip index becomes invisible.
-Use `JSONHas()` to check whether a property is set and the property map skip indexes become useless.
-
-We addressed this with a series of HogQL-level rewrites that normalize the AST into shapes the planner can optimize ([#44542](https://github.com/PostHog/posthog/pull/44542), [#44626](https://github.com/PostHog/posthog/pull/44626), [#44513](https://github.com/PostHog/posthog/pull/44513), [#45035](https://github.com/PostHog/posthog/pull/45035), [#44346](https://github.com/PostHog/posthog/pull/44346)).
-The most impactful one, auto-rewriting `ilike(properties.email, '%@gmail.com')`-shaped queries to use a hidden ngram skip index, is in [#44820](https://github.com/PostHog/posthog/pull/44820).
-We also added a MinMax skip index on `$session_id_uuid` so session-scoped queries can skip parts that do not overlap ([#52170](https://github.com/PostHog/posthog/pull/52170)).
-
-The pattern is consistent: a customer query may be semantically correct but not in a shape ClickHouse can optimize. The rewriter normalizes it without changing semantics.
-
-## 6. Persons-on-events
-
-Most analytics queries need to know who did what.
-Historically this meant joining events against a persons table at query time.
-In a distributed ClickHouse cluster a join like this is expensive even when the per-team data is small, because rows have to be fetched and brought together across nodes before the join resolves; the cost is dominated by the data movement, not the final result size.
-
-To avoid the join, we duplicate the relevant person columns directly onto the events row.
-A "who did what" question can then be answered from a single table on a single shard.
-This year we built the pipeline to backfill the denormalized columns onto every team that does not already have them, and to keep them correct as people merge ([#58035](https://github.com/PostHog/posthog/pull/58035)).
-For most customers, this is an invisible change: queries become faster without any modification to the dashboards or queries they wrote.
-
-## 7. HogQL parser caching and AST speedups
+## 4. HogQL parser caching and AST speedups
 
 Every HogQL query is parsed into an AST, walked by a chain of visitors (the resolver, the property-type swapper, the printer, and so on), and turned into ClickHouse SQL.
 For small queries the parse is dwarfed by the ClickHouse scan time.
@@ -217,7 +169,7 @@ Two recent improvements:
 Neither change affects what ClickHouse sees; both are pure Python-side optimizations.
 But every HogQL query goes through this code path, so the aggregate CPU savings across the cluster are significant.
 
-## 8. Autonomous query optimization
+## 5. Autonomous query optimization
 
 At a recent team offsite, we evaluated [autoresearch](https://github.com/karpathy/autoresearch) (Andrej Karpathy's pattern of giving an AI agent a benchmark and letting it iterate) against our slow ClickHouse queries.
 Within the first day, the agent identified a bug that had been in the codebase for three years: HogQL's per-team timezone support was stopping ClickHouse from fully using its primary key on every query that filtered by `timestamp`.
@@ -232,7 +184,7 @@ The full writeup of the initial result is in our [companion post](/blog/autorese
 
 The substantive value here is that the system optimizes the queries customers actually run, not the synthetic ones a benchmark suite might cover.
 
-## 9. Tooling and observability
+## 6. Tooling and observability
 
 Performance optimization at scale requires good attribution (knowing which product, code path, or customer action issued each query) and the right investigation tooling so that any engineer at PostHog can diagnose a slow query without escalating to a specialist.
 A substantial portion of the past year went into both.
@@ -244,7 +196,7 @@ A substantial portion of the past year went into both.
 - **Investigation surface.** A CLI for running ad-hoc queries against `system.query_log` from any engineer's terminal ([#56800](https://github.com/PostHog/posthog/pull/56800)), so per-team and per-product investigations take minutes rather than being a specialist task. The "Measured impact" tables at the top of this post were produced through that CLI.
 
 With per-product labels and a low-friction investigation path, we can rank queries by total CPU cost across the cluster and target optimization work at the highest-spend paths rather than guessing.
-The same data feeds the AI-driven query optimization described in section 8.
+The same data feeds the AI-driven query optimization described in section 5.
 
 ## What is in flight
 
@@ -260,12 +212,12 @@ Several initiatives are landing or in progress:
 
 - **Predictive cache warming.** Lazy computation is currently reactive: it computes when asked. If we can predict which conversion events a customer is about to look at in web analytics, or which experiment metric an owner is about to expand, we can warm the cache ahead of the click. The architecture is intentionally separate from the executor itself; it is a service that calls `ensure_precomputed` on its best guess.
 
-- **Continuous autoresearch.** Beyond the initial hackathon result, the pipeline described in section 8 will run autoresearch on a steady stream of slow queries from production and surface candidate optimizations for human review.
+- **Continuous autoresearch.** Beyond the initial hackathon result, the pipeline described in section 5 will run autoresearch on a steady stream of slow queries from production and surface candidate optimizations for human review.
 
 ## Summary
 
-PostHog queries are meaningfully faster across every product surface than they were a year ago, and we expect to make them meaningfully faster again over the next year.
+PostHog queries are meaningfully faster across every product surface than they were a few months ago, and we expect to make them meaningfully faster again over the coming months.
 Query performance is staffed and prioritized as a long-term commitment, not as a periodic project.
 
 If you have specific performance concerns about your workload, our engineering team is happy to dig into your query patterns directly; reach out to your account contact or open a [support ticket](https://us.posthog.com/home#supportModal).
-The teams contributing to this work include [Query Performance](/teams/query-performance), [Analytics Platform](/teams/analytics-platform), [ClickHouse](/teams/clickhouse), and [Web Analytics](/teams/web-analytics), and all of it ships in the open at [PostHog/posthog](https://github.com/PostHog/posthog).
+The teams contributing to this work include [Query Performance](/teams/query-performance), [Analytics Platform](/teams/analytics-platform), and [ClickHouse](/teams/clickhouse), and all of it ships in the open at [PostHog/posthog](https://github.com/PostHog/posthog).
