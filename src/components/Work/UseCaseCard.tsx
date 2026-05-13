@@ -19,7 +19,7 @@ export function UseCaseCard({
 }: UseCaseCardProps) {
     return (
         <div
-            className={`relative bg-primary border border-primary shadow-md p-3 pb-4 ${rotation} hover:rotate-0 hover:shadow-xl transition-all duration-200 h-full flex flex-col`}
+            className={`relative bg-primary border border-primary shadow-md p-3 pb-4 ${rotation} hover:rotate-0 hover:shadow-xl transition-all duration-200 ease-out h-full flex flex-col`}
         >
             {/* Sticky tape at top */}
             <div

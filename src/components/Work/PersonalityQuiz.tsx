@@ -92,8 +92,16 @@ function CharacterImage({ type }: { type: PersonalityType }) {
 }
 
 function FeaturedCard({ type }: { type: PersonalityType }) {
+    const handleScrollToRsvp = (e: React.MouseEvent) => {
+        e.preventDefault()
+        const target = document.getElementById('rsvp')
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            history.replaceState(null, '', '#rsvp')
+        }
+    }
     return (
-        <div className="relative bg-primary border border-primary rounded-lg shadow-2xl p-5 @md:p-6 max-w-sm mx-auto text-center -rotate-1 hover:rotate-0 transition-transform duration-300">
+        <div className="relative bg-primary border border-primary rounded-lg shadow-2xl p-5 @md:p-6 max-w-sm mx-auto text-center -rotate-1 hover:rotate-0 transition-transform duration-300 ease-out">
             <div className="flex justify-center mb-3">
                 <CharacterImage type={type} />
             </div>
@@ -103,7 +111,7 @@ function FeaturedCard({ type }: { type: PersonalityType }) {
             <h3 className="text-xl @md:text-2xl font-bold m-0 mb-2 leading-tight">{type.title}</h3>
             <p className="italic text-secondary m-0 mb-3 text-sm">{type.tagline}</p>
             <p className="text-sm text-primary leading-snug m-0 mb-4">{type.body}</p>
-            <OSButton asLink to="#rsvp" variant="primary" size="md">
+            <OSButton asLink to="#rsvp" variant="primary" size="md" onClick={handleScrollToRsvp}>
                 Find out yours
             </OSButton>
         </div>
@@ -120,24 +128,26 @@ export function PersonalityQuiz() {
     }, [])
 
     return (
-        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
+        <section className="relative mb-12 @xl:mb-20 px-4 @xl:px-8">
             <div className="grid @lg:grid-cols-[1fr_auto] gap-8 @lg:gap-12 items-start max-w-5xl">
                 <div>
-                    <div className="flex items-baseline gap-2 mb-2 flex-wrap">
-                        <h2 className="text-2xl font-bold m-0">Find out what your skill usage says about you</h2>
+                    <div className="flex items-baseline gap-2 mb-3 flex-wrap">
+                        <h2 className="text-2xl @lg:text-3xl font-bold m-0 leading-tight">
+                            Find out what your skill usage says about you
+                        </h2>
                         <span className="text-[10px] uppercase tracking-widest font-bold bg-yellow text-primary rounded-sm px-1.5 py-0.5">
                             Beta
                         </span>
                     </div>
-                    <p className="text-secondary mb-4 max-w-xl">
-                        Personality test, but built from your actual recurring work. PostHog Work quietly watches which
-                        skills you activate and assigns you to one of five types.
+                    <p className="text-secondary max-w-xl mb-4 m-0 leading-relaxed">
+                        PostHog Work quietly watches how you work and assigns you to one of five types. Not in a creepy
+                        way.
                     </p>
-                    <p className="text-secondary mb-4 max-w-xl">
+                    <p className="text-secondary max-w-xl mb-4 m-0 leading-relaxed">
                         It is a personality quiz. It is also a productivity report. Mostly it is for sharing in your
                         team Slack channel.
                     </p>
-                    <p className="text-xs text-muted italic">
+                    <p className="text-xs text-muted italic m-0">
                         Available in private beta. Don't take it too seriously. We don't.
                     </p>
                 </div>

@@ -52,7 +52,7 @@ const skills: SkillCardProps[] = [
     {
         title: 'PMF Tracker',
         type: 'Product',
-        tagline: 'Are users very disappointed (in a good way)?',
+        tagline: 'Are users very disappointed?',
         description:
             'Sets up the Superhuman PMF survey, builds the retention dashboard, and finds the users worth interviewing.',
         sideEffect: 'You will find out whether you have PMF. The answer may not be the one you wanted.',
