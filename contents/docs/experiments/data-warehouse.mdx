@@ -1,5 +1,5 @@
 ---
-title: Using Data Warehouse tables in experiments
+title: Using Data Warehouse tables in Experiments
 sidebar: Docs
 showTitle: true
 ---
@@ -97,7 +97,7 @@ The Data Warehouse join keys can be different (e.g., one table has `user_id`, an
 
 ### Limitations
 
-Data warehouse funnel steps have the following limitations:
+Data Warehouse funnel steps have the following limitations:
 
 - **Maximum 3 Data Warehouse steps** per funnel – This prevents expensive queries. If you need more steps, create a materialized view combining multiple tables.
 
@@ -178,9 +178,9 @@ This ensures Data Warehouse metrics follow the same [exposure logic](/docs/exper
 
 2. **Create materialized views for complex queries** – If you need data from multiple tables or complex transformations, create a materialized view in your Data Warehouse first. This improves query performance and simplifies setup.
 
-3. **Test join keys before running experiments** – Use [Data Management](https://app.posthog.com/data-management/events) to verify your events have the properties you're joining on, and query your Data Warehouse to confirm matching values exist.
+3. **Test join keys before running Experiments** – Use [Data Management](https://app.posthog.com/data-management/events) to verify your events have the properties you're joining on, and query your Data Warehouse to confirm matching values exist.
 
-4. **Monitor query performance** – Data Warehouse queries can be slower than PostHog event queries. Start with smaller date ranges to test performance before running long experiments.
+4. **Monitor query performance** – Data Warehouse queries can be slower than PostHog event queries. Start with smaller date ranges to test performance before running long Experiments.
 
 5. **Document your join keys** – Keep a record of which join keys you use for different tables. This helps when creating new metrics or troubleshooting issues.
 
