@@ -18,7 +18,7 @@ Books do not have to be tied directly to your area, and they only need be loosel
 
 ## Training budget
 
-We have an annual training budget for every team member, regardless of seniority. The budget can be used for relevant courses, training, formal qualifications, or attending conferences. You do not need approval to spend your budget, but you might want to speak to your manager first, in case they have some useful feedback or pointers to a better idea.
+We have an annual training budget for every team member, regardless of seniority. The budget can be used for relevant courses, training, or formal qualifications. You do not need approval to spend your budget, but you might want to speak to your manager first, in case they have some useful feedback or pointers to a better idea.
 
 We strongly encourage all non-technical team members to take some kind of entry level programming course - it's part of our 'you're the driver' culture that everyone can at least understand very basic concepts around software development. [Codecademy](https://www.codecademy.com/) is a good place to start and they cover many of the technologies we use, such as Python and React.
 
@@ -28,4 +28,4 @@ If possible, please share your learnings with the team afterwards!
 
 ### Conferences
 
-You can use your training budget for time spent talking at conferences and user groups, including coaching others. It is expected that you would spend up to half a day a month on these activities. Like the training budget, this isn't a hard limit. If you think you need more than that talk to your manager in the first instance.
+You can use your training budget for time spent talking at conferences and user groups, including coaching others, as long as it benefits PostHog in some way. It is expected that you would spend up to half a day a month on these activities. Like the training budget, this isn't a hard limit. If you think you need more than that talk to your manager in the first instance.
