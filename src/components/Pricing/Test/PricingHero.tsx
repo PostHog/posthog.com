@@ -196,7 +196,7 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                                     : 'border-yellow bg-white dark:bg-white/5'
                             }`}
                         >
-                            <strong className="whitespace-nowrap">Pay-as-you-go</strong>
+                            <strong className="whitespace-nowrap">Cheaper</strong>
                             <span className="text-sm opacity-75 whitespace-nowrap">Usage-based pricing</span>
                         </button>
                     </li>
