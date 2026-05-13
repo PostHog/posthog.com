@@ -118,6 +118,14 @@ PostHog needs up to 64MB per message for session recordings.
 
 You're missing `ui_host` in your SDK config. See [SDK configuration](#sdk-configuration) above.
 
+### Managed proxy stuck or erroring
+
+If your [managed reverse proxy](/docs/advanced/proxy) is stuck in **issuing**, **erroring**, or **timed_out** state:
+
+1. **Check your DNS settings** - Verify your CNAME record points to the correct PostHog proxy domain and that any DNS proxy features (like Cloudflare's orange cloud) are disabled.
+2. **Retry the setup** - Go to your [organization proxy settings](https://app.posthog.com/settings/organization-proxy), click the menu icon next to the proxy, and select **Retry**. This restarts the provisioning process.
+3. **Wait for propagation** - DNS changes can take up to 30 minutes to propagate. If you recently changed DNS settings, give it time before retrying.
+
 ## Still having issues?
 
 For self-hosted proxies, check your proxy's logs and documentation, or ask in the [PostHog community](/community). If you're using the [managed reverse proxy](/docs/advanced/proxy), [contact support](https://app.posthog.com/home#supportModal).
