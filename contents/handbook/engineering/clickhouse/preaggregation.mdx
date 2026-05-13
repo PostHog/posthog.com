@@ -3,7 +3,7 @@ title: Preaggregation and precomputation
 ---
 
 This page describes the patterns we use at PostHog when we don't want to compute the same thing twice.
-It's aimed at PostHog engineers — if you're building a product that runs analytics queries, this is the menu of options you should be choosing from.
+It's aimed at PostHog engineers. If you're building a product that runs analytics queries, this is the menu of options you should be choosing from.
 
 ## A quick reminder of how ClickHouse works
 
@@ -18,7 +18,7 @@ If you're new to this, [`clickhouse/performance`](/handbook/engineering/clickhou
 
 But "scan one or two months of one team's events" still has a floor.
 For big customers it's a multi-second floor.
-And there are query shapes — wide breakdowns, multi-step funnels, retention cohorts — where even with all the indexes lined up, you're going to scan a lot.
+And there are query shapes (wide breakdowns, multi-step funnels, retention cohorts) where even with all the indexes lined up, you're going to scan a lot.
 
 So we precompute.
 
@@ -33,18 +33,18 @@ You define a target table with an `AggregatingMergeTree` engine and aggregate-st
 plus a `CREATE MATERIALIZED VIEW … TO target_table AS SELECT … FROM events`.
 Every event insert into the source table triggers a partial update on the target.
 
-The flagship example is **`raw_sessions_v3`** — see [`posthog/models/raw_sessions/sessions_v3.py`](https://github.com/PostHog/posthog/blob/master/posthog/models/raw_sessions/sessions_v3.py).
+The flagship example is **`raw_sessions_v3`**: see [`posthog/models/raw_sessions/sessions_v3.py`](https://github.com/PostHog/posthog/blob/master/posthog/models/raw_sessions/sessions_v3.py).
 One row per session, populated on every event insert via a materialized view.
-The columns are `AggregateFunction(argMin, …)`, `AggregateFunction(argMax, …)`, `AggregateFunction(uniqExact, …)` and friends — partial states that ClickHouse merges across parts at query time.
+The columns are `AggregateFunction(argMin, …)`, `AggregateFunction(argMax, …)`, `AggregateFunction(uniqExact, …)` and friends: partial states that ClickHouse merges across parts at query time.
 
 A few patterns worth pointing out:
 
-- **The ORDER BY is `(team_id, session_timestamp, session_id_v7)`** with `PARTITION BY toYYYYMM(session_timestamp)`. The same partition/PK story as `sharded_events`, just keyed on session instead of event. We store `session_timestamp` as its own column (derived from the UUIDv7 session ID) because chaining functions on the timestamp at query time would defeat partition pruning — same lesson as the [autoresearch fix](/blog/autoresearch-found-a-3-year-old-clickhouse-bug).
-- **`AggregateFunction(uniqExact, Nullable(UUID))` for pageview counts** instead of `count()`. This makes inserts idempotent — if the same event is somehow inserted twice (which happens, especially during backfills), the merged state is the same. Worth the extra cost when you care about correctness across retries.
+- **The ORDER BY is `(team_id, session_timestamp, session_id_v7)`** with `PARTITION BY toYYYYMM(session_timestamp)`. The same partition/PK story as `sharded_events`, just keyed on session instead of event. We store `session_timestamp` as its own column (derived from the UUIDv7 session ID) because chaining functions on the timestamp at query time would defeat partition pruning. Same lesson as the [autoresearch fix](/blog/autoresearch-found-a-3-year-old-clickhouse-bug).
+- **`AggregateFunction(uniqExact, Nullable(UUID))` for pageview counts** instead of `count()`. This makes inserts idempotent: if the same event is somehow inserted twice (which happens, especially during backfills), the merged state is the same. Worth the extra cost when you care about correctness across retries.
 - **A property map for lower-tier ad-network click IDs** (gclid, fbclid, msclkid, ttclid, …). v2 had a column per ad network, which made adding a new one a schema migration. v3 stores them in `Map(String, String)` so we can add a new ad network without `ALTER TABLE`.
 - **Presence bits separated from values.** Channel-type calculation only needs to know whether a `gclid` was present, not what the actual string was. v3 stores `has_gclid Boolean` separately so the channel-type query reads one bit per row instead of a 100-character string.
 
-When this works, it's beautiful — your query reads ~one row per session instead of ~50 events per session, and the aggregation work has already happened.
+When this works, it's beautiful: your query reads ~one row per session instead of ~50 events per session, and the aggregation work has already happened.
 
 The downsides:
 
@@ -56,11 +56,11 @@ Reach for this when the query is "ask me about events, but pre-grouped by some n
 
 ## Option 2: a scheduled background job writing to a dedicated ClickHouse table
 
-If the query pattern is fixed but the per-row aggregation doesn't fit an incremental MV — typically because you need joins, subqueries, or window functions — use a scheduled background job.
+If the query pattern is fixed but the per-row aggregation doesn't fit an incremental MV (typically because you need joins, subqueries, or window functions), use a scheduled background job.
 
 The pattern is:
 
-1. Define a target table — typically `MergeTree` or `ReplacingMergeTree`, partitioned by day or hour, ordered by the dimensions you'll filter on.
+1. Define a target table, typically `MergeTree` or `ReplacingMergeTree`, partitioned by day or hour, ordered by the dimensions you'll filter on.
 2. Write a job that runs on a schedule (we use Dagster), executes an `INSERT INTO target SELECT … FROM events …` for the target time window, and swaps the new partition into place atomically.
 3. Rewrite your customer-facing query to read from the target table instead of raw events.
 
@@ -69,7 +69,7 @@ The canonical example is the **web analytics pre-aggregated tables**:
 and [`products/web_analytics/dags/web_preaggregated.py`](https://github.com/PostHog/posthog/blob/master/products/web_analytics/dags/web_preaggregated.py) for the dagster jobs that populate them.
 
 Web analytics is well-suited to this because the query space is small and predictable: a few dozen tiles, each with a fixed set of dimensions (`host`, `device_type`, `pathname`, UTM source, country, …) over a date range.
-We have two layers — daily-grain tables for historical data and hourly-grain tables for the current day — and union them at query time so customers get fresh-ish numbers without paying the full price ([#33018](https://github.com/PostHog/posthog/pull/33018), [#33122](https://github.com/PostHog/posthog/pull/33122)).
+We have two layers (daily-grain tables for historical data and hourly-grain tables for the current day) and union them at query time so customers get fresh-ish numbers without paying the full price ([#33018](https://github.com/PostHog/posthog/pull/33018), [#33122](https://github.com/PostHog/posthog/pull/33122)).
 Partitions are swapped via a staging table so we can atomically replace a day's data if the upstream INSERT failed halfway.
 
 A few things to watch out for:
@@ -84,7 +84,7 @@ Marketing analytics is currently being built on this same pattern.
 
 ## Option 3: customer-defined materialized views (the product)
 
-The above two options are PostHog-defined — we build the schema, we own the job, we update the SQL on deploys.
+The above two options are PostHog-defined: we build the schema, we own the job, we update the SQL on deploys.
 
 We also offer **customer-defined materialized views** as a product feature.
 A customer writes a HogQL query against their event data and warehouse data, hits "materialize," and PostHog runs the query on a schedule and persists the result.
@@ -94,20 +94,20 @@ This is `DataWarehouseSavedQuery` ([`products/data_warehouse/backend/models/data
 The output is written to a per-customer S3 backing store, exposed back to HogQL as a queryable table.
 Refresh is scheduled via Temporal (`sync_frequency_interval` on the model), with health checks that flag failed refreshes ([`products/data_warehouse/backend/temporal/health_checks/materialized_view_failure.py`](https://github.com/PostHog/posthog/blob/master/products/data_warehouse/backend/temporal/health_checks/materialized_view_failure.py)).
 
-Conceptually this is the same pattern as Option 2 — schedule a job, write to a backing table, rewrite reads — but generalized across arbitrary customer queries with the storage de-coupled from our main ClickHouse cluster.
+Conceptually this is the same pattern as Option 2 (schedule a job, write to a backing table, rewrite reads), generalized across arbitrary customer queries with the storage de-coupled from our main ClickHouse cluster.
 
 Reach for this when you're building something the customer needs to define themselves.
-Don't reach for it when you control the query — Options 1 and 2 are cheaper and faster.
+Don't reach for it when you control the query; Options 1 and 2 are cheaper and faster.
 
 ## Option 4: `ensure_precomputed` (lazy computation)
 
-The previous three options assume someone — PostHog or the customer — knows the query shape ahead of time.
+The previous three options assume someone (PostHog or the customer) knows the query shape ahead of time.
 
-For the long tail — a Trends insight someone just built, an experiment metric with a dynamic exposure population, an ad-hoc HogQL query — we don't know the query until the user runs it.
+For the long tail (a Trends insight someone just built, an experiment metric with a dynamic exposure population, an ad-hoc HogQL query) we don't know the query until the user runs it.
 For that we have **lazy computation**, formerly called "preaggregation" ([#48110](https://github.com/PostHog/posthog/pull/48110)).
 
 The interface is `ensure_precomputed(...)` in [`products/analytics_platform/backend/lazy_computation/lazy_computation_executor.py`](https://github.com/PostHog/posthog/blob/master/products/analytics_platform/backend/lazy_computation/lazy_computation_executor.py).
-The README is at [`products/analytics_platform/backend/lazy_computation/README.md`](https://github.com/PostHog/posthog/blob/master/products/analytics_platform/backend/lazy_computation/README.md) and the consistency story is in [`CONSISTENCY.md`](https://github.com/PostHog/posthog/blob/master/products/analytics_platform/backend/lazy_computation/CONSISTENCY.md) — read both before designing on top of this.
+The README is at [`products/analytics_platform/backend/lazy_computation/README.md`](https://github.com/PostHog/posthog/blob/master/products/analytics_platform/backend/lazy_computation/README.md) and the consistency story is in [`CONSISTENCY.md`](https://github.com/PostHog/posthog/blob/master/products/analytics_platform/backend/lazy_computation/CONSISTENCY.md); read both before designing on top of this.
 
 The shape:
 
@@ -145,28 +145,28 @@ The executor:
 3. For any missing ranges (respecting your TTL config), kicks off an `INSERT` to fill them.
 4. Returns a `LazyComputationResult` with the job IDs you then query from.
 
-Your subsequent read query then selects from `preaggregation_results` (or one of the per-product tables — there are dedicated tables for experiment exposures and metric events) filtered by `job_id IN {result.job_ids}`.
-Crucially, this is **not** just aggregation — `preaggregation_results` stores generic aggregate-state and tuple columns, so the same machinery works for any intermediate result you want to memoize, aggregate or not.
+Your subsequent read query then selects from `preaggregation_results` (or one of the per-product tables; there are dedicated tables for experiment exposures and metric events) filtered by `job_id IN {result.job_ids}`.
+Crucially, this is **not** just aggregation. `preaggregation_results` stores generic aggregate-state and tuple columns, so the same machinery works for any intermediate result you want to memoize, aggregate or not.
 
 What makes this interesting beyond the obvious "memoize a query":
 
-- **Variable TTL per data age.** The `ttl_seconds` dict above tells the executor that today's data is fresher than yesterday's, which is fresher than last week's. Internally each job is stamped with the TTL appropriate to its range — ranges with different TTLs are never merged into a single job, because then you couldn't expire them independently.
+- **Variable TTL per data age.** The `ttl_seconds` dict above tells the executor that today's data is fresher than yesterday's, which is fresher than last week's. Internally each job is stamped with the TTL appropriate to its range; ranges with different TTLs are never merged into a single job, because then you couldn't expire them independently.
 - **Reuse across queries.** Two queries that compute the same intermediate result (same hash, overlapping date ranges) share a job. If query A is mid-flight, query B blocks on a Redis pubsub channel for A to finish rather than computing the same thing twice ([#47707](https://github.com/PostHog/posthog/pull/47707)).
 - **Concurrency correctness.** A partial unique index on `(team_id, query_hash, time_range_start, time_range_end) WHERE status = 'pending'` makes it impossible to have two pending jobs for the same range. When a job fails and multiple waiters try to create a replacement, one wins and the others wait on the winner. See `CONSISTENCY.md`.
 - **Crash recovery.** Each executor writes a Redis liveness marker before kicking off the ClickHouse INSERT and refreshes a heartbeat key while it runs. Stale pending jobs (marker missing, or heartbeat expired) are detected by other waiters and replaced. This means if the process that started a job dies, the next query for that range will recover.
-- **Automatic HogQL transformation.** For a handful of specific query shapes (daily uniques on pageviews, etc.), there's an AST-level transformer that rewrites the original query to use precomputed results automatically — no `ensure_precomputed` call needed. See [`lazy_computation_transformer.py`](https://github.com/PostHog/posthog/blob/master/products/analytics_platform/backend/lazy_computation/lazy_computation_transformer.py). The set of supported shapes is small on purpose; adding to it requires careful semantics work.
+- **Automatic HogQL transformation.** For a handful of specific query shapes (daily uniques on pageviews, etc.), there's an AST-level transformer that rewrites the original query to use precomputed results automatically, no `ensure_precomputed` call needed. See [`lazy_computation_transformer.py`](https://github.com/PostHog/posthog/blob/master/products/analytics_platform/backend/lazy_computation/lazy_computation_transformer.py). The set of supported shapes is small on purpose; adding to it requires careful semantics work.
 
-Production users today are experiments — every exposure calculation goes through `ensure_precomputed`.
+Production users today are experiments: every exposure calculation goes through `ensure_precomputed`.
 See [`posthog/hogql_queries/experiments/experiment_exposures_query_runner.py`](https://github.com/PostHog/posthog/blob/master/posthog/hogql_queries/experiments/experiment_exposures_query_runner.py) for a representative call site ([#50498](https://github.com/PostHog/posthog/pull/50498)).
 There's a 12-hour minimum experiment runtime gate so we don't precompute exposures for experiments that may not run long enough to recoup the cost ([#57095](https://github.com/PostHog/posthog/pull/57095)).
 
 Reach for this when:
 
 - The query shape is fixed but the inputs (filters, breakdowns, etc.) vary in a way the user controls.
-- The same query is going to be re-run within the TTL window — typically on a dashboard or in a multi-tile page where several tiles compute against the same intermediate result.
+- The same query is going to be re-run within the TTL window, typically on a dashboard or in a multi-tile page where several tiles compute against the same intermediate result.
 - You want to keep recent data fresher than historical data without writing your own TTL logic.
 
-Don't reach for it for a one-shot query — the executor adds ~30% overhead over reading a precomputed result, so if you're only going to read once, you've made things slower.
+Don't reach for it for a one-shot query. The executor adds ~30% overhead over reading a precomputed result, so if you're only going to read once, you've made things slower.
 
 ## Picking between them
 
@@ -186,14 +186,14 @@ If you're building a new feature and you know the query is going to be on hot pa
 2. If not, can I make it fit Option 2 (scheduled job)? Almost as cheap at query time. Refresh latency is the trade-off.
 3. If neither, use Option 4 (`ensure_precomputed`) for the intermediate results, and accept the +30% executor overhead on first read.
 
-Option 3 isn't really "one of three I'd pick from for my product" — it's the customer-facing surface area of the same idea, and you'd only build on top of it if you're working on the warehouse product itself.
+Option 3 isn't really "one of three I'd pick from for my product"; it's the customer-facing surface area of the same idea, and you'd only build on top of it if you're working on the warehouse product itself.
 
 ## What's next
 
 A few things on the roadmap:
 
 - **Lazy computation in web analytics and marketing analytics.** Pre-aggregated tables (Option 2) handle the predictable queries; lazy computation (Option 4) can handle the long tail of customer-built dashboards on top.
-- **Predictive cache warming.** Right now, lazy computation is reactive — we compute when you ask. But if we can predict what a customer is about to look at (which conversion event in web analytics, which experiment metric they're about to expand), we can call `ensure_precomputed` ahead of time. The architecture for this is intentionally separate from the executor itself — it's just a service that calls `ensure_precomputed` on its best guess.
+- **Predictive cache warming.** Right now, lazy computation is reactive: we compute when you ask. But if we can predict what a customer is about to look at (which conversion event in web analytics, which experiment metric they're about to expand), we can call `ensure_precomputed` ahead of time. The architecture for this is intentionally separate from the executor itself; it's just a service that calls `ensure_precomputed` on its best guess.
 - **More HogQL → precomputed-table AST rewrites.** The automatic transformation in Option 4 covers a small set of query shapes today. Each new shape unlocks a chunk of customer queries that don't have to opt in manually. Adding to the set is mostly a careful semantics exercise.
 
 If you're building a product and the query performance discussion comes up, the team to talk to is [Query Performance](/teams/query-performance) or [Analytics Platform](/teams/analytics-platform).
