@@ -6705,6 +6705,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Set up alerts',
+                    url: '/docs/logs/alerts',
+                    icon: 'IconBell',
+                    color: 'red',
+                },
+                {
                     name: 'PostHog AI',
                 },
                 {
