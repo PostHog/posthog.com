@@ -69,10 +69,10 @@ The improvement is largest in the tail, which is the part customers feel the mos
 
 Not everything improved.
 RetentionQuery regressed across all percentiles in the comparison window, and marketing-analytics queries (not shown) also regressed.
-The regressions are mostly consistent with workstreams that are in progress but not yet shipped (the marketing-analytics preaggregation work in section 3, and active improvements to retention).
+The regressions are mostly consistent with workstreams that are in progress but not yet shipped (the marketing-analytics preaggregation work in section 2, and active improvements to retention).
 Where we have a clear regression we are working on it; we are not going to claim universal wins.
 
-A practical caveat on the cluster-wide table: the way we tag queries from some products expanded significantly in March 2026 (see section 10 on tooling and observability), which shifts the population mix for any individual product's per-product line between the two periods.
+A practical caveat on the cluster-wide table: the way we tag queries from some products expanded significantly in March 2026 (see section 9 on tooling and observability), which shifts the population mix for any individual product's per-product line between the two periods.
 The cluster-wide totals and the per-query-type breakdown above are unaffected by that tagging change, because they aggregate over the underlying query, not the tag.
 
 ## How we approach query performance
@@ -111,29 +111,7 @@ The rest of this post is what we shipped in each category, with links to the PRs
 
 The rest of this post is the work that sits on top of this foundation.
 
-## 2. A new sessions table
-
-Sessions queries (web analytics, session replay search, anything that asks "how many sessions did X this week") used to read raw events and group by session ID at query time.
-That works, but each query repeats the grouping over the same data.
-
-We have been rolling out **sessions v3**, an `AggregatingMergeTree` table populated by a ClickHouse materialized view that fires on every event insert.
-Each event partially updates a row keyed on session ID, so by the time a query runs, most of the aggregation work has already happened.
-
-v3 is a redesign on top of what we learned operating v2 at scale ([#38245](https://github.com/PostHog/posthog/pull/38245), [#39092](https://github.com/PostHog/posthog/pull/39092), [#39959](https://github.com/PostHog/posthog/pull/39959)):
-
-- **Partition and primary key optimized for the access pattern.** v2 used a UUID-derived timestamp in the ORDER BY in a way that defeated partition pruning. v3 stores the session timestamp as its own column and orders by it.
-
-- **A property map for low-volume ad-network click IDs.** v2 had a column per ad-network click ID (`gclid`, `fbclid`, `msclkid`, `ttclid`, and so on), which made adding a new ad network a schema migration. v3 stores the long tail in a single `Map(String, String)` column.
-
-- **Presence bits separately from values.** Channel-type calculation only needs to know whether a `gclid` was present, not the actual string. v3 stores those as `Boolean` columns so the channel-type query reads one bit per row instead of a 100-character string.
-
-- **One JSON parse per event, not one per column.** v2 called `JSONExtract*` once per property per event. v3 does a single tuple-shaped `JSONExtract` into a struct and dereferences fields off that. The savings show up in ingestion CPU.
-
-The cutover is in progress.
-Backfilling a table this size at production scale required substantial pipeline work to handle the `TOO_MANY_PARTS`, `MEMORY_LIMIT_EXCEEDED`, and `TOO_MANY_SIMULTANEOUS_QUERIES` conditions that surface when you push ClickHouse hard ([#56608](https://github.com/PostHog/posthog/pull/56608), [#41374](https://github.com/PostHog/posthog/pull/41374)).
-Retrying a partition is not enough on its own; backfill jobs subdivide on memory failures and lean on insert delays so the cluster self-regulates.
-
-## 3. Pre-aggregated tables for web analytics
+## 2. Pre-aggregated tables for web analytics
 
 Web analytics queries are predictable.
 You are almost always asking for uniques, pageviews, or bounce rate, by some combination of `host`, `device_type`, `pathname`, UTM source, country, and so on, over a date range.
@@ -147,7 +125,7 @@ The largest customers were enabled first ([#36014](https://github.com/PostHog/po
 For typical web analytics dashboards, pre-aggregated tables deliver substantially faster query times than scanning raw events on every request, often by an order of magnitude.
 Comparable work is in progress on the marketing analytics side ([#54527](https://github.com/PostHog/posthog/pull/54527), [#54959](https://github.com/PostHog/posthog/pull/54959)) using the same pattern adapted for a different query shape.
 
-## 4. Lazy computation for arbitrary queries
+## 3. Lazy computation for arbitrary queries
 
 The pre-aggregation pattern works well when the query space is known in advance.
 Web analytics tiles, experiment exposure calculations, and marketing attribution all fit.
@@ -175,7 +153,7 @@ Web analytics and marketing analytics are next.
 
 The full design, including the consistency story under concurrent writes and stale-job recovery, is documented in our [engineering handbook](/handbook/engineering/clickhouse/preaggregation).
 
-## 5. Query result caching and coalescing
+## 4. Query result caching and coalescing
 
 Most analytics workloads have a lot of repetition: the same dashboard tile rendered for many viewers on auto-refresh, the same exposure calculation across several metric tiles in an experiment, the same Trends insight pinned to multiple dashboards.
 When the inputs and time range are identical, the second answer should not require any work on the cluster.
@@ -190,7 +168,7 @@ Three lines of work shipped this year:
 
 The combined effect is that dashboard refreshes after the first one are served from cache, concurrent users share the work rather than duplicate it, and the cache itself is isolated from the rest of the cluster.
 
-## 6. Better use of skip indexes and materialized columns
+## 5. Better use of skip indexes and materialized columns
 
 ClickHouse has two features that are underused by the queries most analytics products produce:
 
@@ -211,7 +189,7 @@ We also added a MinMax skip index on `$session_id_uuid` so session-scoped querie
 
 The pattern is consistent: a customer query may be semantically correct but not in a shape ClickHouse can optimize. The rewriter normalizes it without changing semantics.
 
-## 7. Persons-on-events
+## 6. Persons-on-events
 
 Most analytics queries need to know who did what.
 Historically this meant joining events against a persons table at query time.
@@ -222,7 +200,7 @@ A "who did what" question can then be answered from a single table on a single s
 This year we built the pipeline to backfill the denormalized columns onto every team that does not already have them, and to keep them correct as people merge ([#58035](https://github.com/PostHog/posthog/pull/58035)).
 For most customers, this is an invisible change: queries become faster without any modification to the dashboards or queries they wrote.
 
-## 8. HogQL parser, AST, and visitor speedups
+## 7. HogQL parser, AST, and visitor speedups
 
 Every HogQL query is parsed into an AST, walked by a chain of visitors (the resolver, the property-type swapper, the printer, and so on), and turned into ClickHouse SQL.
 For small queries the parse is dwarfed by the ClickHouse scan time.
@@ -239,7 +217,7 @@ Three recent improvements:
 None of these changes affect what ClickHouse sees; they are pure Python-side optimizations.
 But every HogQL query goes through this code path, so the aggregate CPU savings across the cluster are significant.
 
-## 9. AI-driven query optimization
+## 8. AI-driven query optimization
 
 At a recent team offsite, we evaluated [autoresearch](https://github.com/karpathy/autoresearch) (Andrej Karpathy's pattern of giving an AI agent a benchmark and letting it iterate) against our slow ClickHouse queries.
 Within the first day, the agent identified a bug that had been in the codebase for three years: HogQL's per-team timezone support was stopping ClickHouse from fully using its primary key on every query that filtered by `timestamp`.
@@ -254,7 +232,7 @@ The full writeup of the initial result is in our [companion post](/blog/autorese
 
 The substantive value here is that the system optimizes the queries customers actually run, not the synthetic ones a benchmark suite might cover.
 
-## 10. Tooling and observability
+## 9. Tooling and observability
 
 Performance optimization at scale requires good attribution (knowing which product, code path, or customer action issued each query) and the right investigation tooling so that any engineer at PostHog can diagnose a slow query without escalating to a specialist.
 A substantial portion of the past year went into both.
@@ -266,11 +244,13 @@ A substantial portion of the past year went into both.
 - **Investigation surface.** A CLI for running ad-hoc queries against `system.query_log` from any engineer's terminal ([#56800](https://github.com/PostHog/posthog/pull/56800)), so per-team and per-product investigations take minutes rather than being a specialist task. The "Measured impact" tables at the top of this post were produced through that CLI.
 
 With per-product labels and a low-friction investigation path, we can rank queries by total CPU cost across the cluster and target optimization work at the highest-spend paths rather than guessing.
-The same data feeds the AI-driven query optimization described in section 9.
+The same data feeds the AI-driven query optimization described in section 8.
 
 ## What is in flight
 
 Several initiatives are landing or in progress:
+
+- **A redesigned sessions table.** Sessions queries (web analytics, session replay search, anything that asks "how many sessions did X this week") currently read raw events and group by session ID at query time. We are rolling out **sessions v3**, an `AggregatingMergeTree` table populated by a ClickHouse materialized view that fires on every event insert. Each event partially updates a row keyed on session ID, so by the time a query runs most of the aggregation work has already happened. v3 is a redesign of the existing sessions table with a partition and primary key optimized for the actual access pattern, a property map for low-volume ad-network click IDs (so adding a new one is no longer a schema migration), presence bits stored separately from values (so channel-type queries read one bit per row instead of a 100-character string), and a single JSON parse per event rather than one per column ([#38245](https://github.com/PostHog/posthog/pull/38245), [#39092](https://github.com/PostHog/posthog/pull/39092), [#39959](https://github.com/PostHog/posthog/pull/39959)). The cutover is the largest backfill operation we have run; substantial pipeline work has gone into handling the `TOO_MANY_PARTS`, `MEMORY_LIMIT_EXCEEDED`, and `TOO_MANY_SIMULTANEOUS_QUERIES` conditions ClickHouse surfaces under pressure ([#56608](https://github.com/PostHog/posthog/pull/56608), [#41374](https://github.com/PostHog/posthog/pull/41374)).
 
 - **Dynamic materialized columns.** Today, materialized columns require a per-property migration on the events table. This is operationally heavy and means we materialize only a small handful of properties globally. The dynamic materialized column ("dmat") work introduces a per-team slot pool, currently up to 100 string columns on the events table, mapped per team to whichever JSON properties that team actually queries. A weekly batched workflow runs a single ClickHouse mutation that services every team at once, so the cost is constant in the number of teams ([#58079](https://github.com/PostHog/posthog/pull/58079), [#58251](https://github.com/PostHog/posthog/pull/58251), [#58080](https://github.com/PostHog/posthog/pull/58080), [#58081](https://github.com/PostHog/posthog/pull/58081), [#58082](https://github.com/PostHog/posthog/pull/58082)). Once it lands, each customer's most-queried properties are transparently materialized without per-property engineering work. The HogQL companion that auto-rewrites raw `JSONExtractString` calls onto materialized columns is already merged ([#55408](https://github.com/PostHog/posthog/pull/55408)), so the moment a property gets materialized, existing queries against it become cheaper without anyone editing a dashboard.
 
@@ -280,7 +260,7 @@ Several initiatives are landing or in progress:
 
 - **Predictive cache warming.** Lazy computation is currently reactive: it computes when asked. If we can predict which conversion events a customer is about to look at in web analytics, or which experiment metric an owner is about to expand, we can warm the cache ahead of the click. The architecture is intentionally separate from the executor itself; it is a service that calls `ensure_precomputed` on its best guess.
 
-- **Continuous autoresearch.** Beyond the initial hackathon result, the pipeline described in section 9 will run autoresearch on a steady stream of slow queries from production and surface candidate optimizations for human review.
+- **Continuous autoresearch.** Beyond the initial hackathon result, the pipeline described in section 8 will run autoresearch on a steady stream of slow queries from production and surface candidate optimizations for human review.
 
 ## Summary
 
