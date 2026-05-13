@@ -31,3 +31,32 @@ You can extract the following properties from surveys:
 | `event.properties.$survey_response_{response_key}` | The response to a specific question. To find `response_key`, go to your survey's **Results** tab and click **Copy response key** on the question card. There's one for each question in your survey. `response_key` is identical to the corresponding survey question ID |
 | `event.properties.$survey_completed` | Whether the survey was completed. Relevant for surveys with partial responses. This will be `true` if the user has answered all questions. |
 | `person.name` or other person properties | The name of the person who responded or other properties |
+
+## Filtering notifications by response
+
+By default, notifications fire for every survey response. You can add response filters to only trigger notifications when specific criteria are met.
+
+When setting up or editing a notification, expand **Only notify when…** and click **Add response filter**. The filter options depend on the question type:
+
+**Rating questions** (including NPS):
+- `is at most` – notify when the score is at or below a value
+- `is at least` – notify when the score is at or above a value
+- `equals` – notify when the score matches exactly
+- `is between` – notify when the score falls within a range
+
+**Open text questions**:
+- `has any response` – notify when the user provided any answer
+- `contains` – notify when the response includes specific text (case-insensitive)
+- `does not contain` – notify when the response excludes specific text
+
+**Single choice questions**:
+- `is any of` – notify when the selected answer matches any of the specified choices
+- `is none of` – notify when the selected answer doesn't match any of the specified choices
+
+**Multiple choice questions**:
+- `includes any of` – notify when any of the specified choices were selected
+- `includes none of` – notify when none of the specified choices were selected
+
+You can add filters for multiple questions. All conditions must be met (AND logic) for the notification to fire.
+
+Response filters only apply to the `survey sent` event. If you need to filter partial responses separately, consider filtering on `$survey_completed` instead.
