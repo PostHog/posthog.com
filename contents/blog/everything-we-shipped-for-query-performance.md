@@ -56,21 +56,23 @@ The improvement is largest in the tail, which is the part customers feel the mos
 
 **By HogQL query type:**
 
-| Query type | p50 (Feb / May) | p90 (Feb / May) | p99 (Feb / May) |
-|---|---|---|---|
-| TrendsQuery | 338 / 316 ms (-7%) | 2.14 / 1.46 s (-32%) | 15.1 / 7.8 s (-48%) |
-| FunnelsQuery | 541 / 513 ms (-5%) | 2.63 / 2.13 s (-19%) | 16.2 / 12.5 s (-23%) |
-| HogQLQuery | 159 / 154 ms (-3%) | 1.14 / 0.89 s (-21%) | 11.8 / 6.8 s (-43%) |
-| ExperimentQuery | 900 / 568 ms (-37%) | 6.7 / 3.0 s (-56%) | 32.1 / 26.9 s (-16%) |
-| ExperimentExposureQuery | 290 / 246 ms (-15%) | 2.58 / 1.06 s (-59%) | 16.0 / 7.0 s (-56%) |
-| ErrorTrackingQuery | 312 / 269 ms (-14%) | 1.80 / 0.95 s (-47%) | 14.9 / 4.7 s (-69%) |
-| LifecycleQuery | 565 / 604 ms (+7%) | 2.43 / 2.04 s (-16%) | 22.7 / 11.6 s (-49%) |
-| RetentionQuery | 510 / 915 ms (+80%) | 2.21 / 2.90 s (+31%) | 15.2 / 18.0 s (+19%) |
-| MarketingAnalyticsAggregatedQuery | 2.5 / 3.2 s (+31%) | 7.6 / 9.6 s (+27%) | 39.6 / 47.8 s (+21%) |
-| MarketingAnalyticsTableQuery | 2.3 / 3.3 s (+39%) | 6.1 / 10.1 s (+65%) | 30.0 / 44.5 s (+48%) |
+| Query type | p50 (Feb / May) | p90 (Feb / May) | p99 (Feb / May) | p99.9 (Feb / May) |
+|---|---|---|---|---|
+| TrendsQuery | 338 / 316 ms (-7%) | 2.14 / 1.46 s (-32%) | 15.1 / 7.8 s (-48%) | 35.7 / 31.1 s (-13%) |
+| FunnelsQuery | 541 / 513 ms (-5%) | 2.63 / 2.13 s (-19%) | 16.2 / 12.5 s (-23%) | 80.6 / 60.6 s (-25%) |
+| HogQLQuery | 159 / 154 ms (-3%) | 1.14 / 0.89 s (-21%) | 11.8 / 6.8 s (-43%) | 68.7 / 50.3 s (-27%) |
+| ExperimentQuery | 900 / 568 ms (-37%) | 6.7 / 3.0 s (-56%) | 32.1 / 26.9 s (-16%) | 128.5 / 144.5 s (+12%) |
+| ExperimentExposureQuery | 290 / 246 ms (-15%) | 2.58 / 1.06 s (-59%) | 16.0 / 7.0 s (-56%) | 38.7 / 25.5 s (-34%) |
+| ErrorTrackingQuery | 312 / 269 ms (-14%) | 1.80 / 0.95 s (-47%) | 14.9 / 4.7 s (-69%) | 37.9 / 18.6 s (-51%) |
+| LifecycleQuery | 565 / 604 ms (+7%) | 2.43 / 2.04 s (-16%) | 22.7 / 11.6 s (-49%) | 58.7 / 32.3 s (-45%) |
+| RetentionQuery | 510 / 915 ms (+80%) | 2.21 / 2.90 s (+31%) | 15.2 / 18.0 s (+19%) | 113.3 / 59.0 s (-48%) |
+| MarketingAnalyticsAggregatedQuery | 2.5 / 3.2 s (+31%) | 7.6 / 9.6 s (+27%) | 39.6 / 47.8 s (+21%) | 58.2 / 57.4 s (-1%) |
+| MarketingAnalyticsTableQuery | 2.3 / 3.3 s (+39%) | 6.1 / 10.1 s (+65%) | 30.0 / 44.5 s (+48%) | 54.5 / 56.1 s (+3%) |
 
 Not everything improved.
-RetentionQuery and both marketing-analytics query types regressed across all percentiles in the comparison window.
+The marketing-analytics queries regressed at most percentiles in the comparison window.
+RetentionQuery regressed at p50, p90, and p99 but improved at p99.9.
+ExperimentQuery improved across the board except at p99.9, where it regressed by about 12%.
 The regressions are mostly consistent with workstreams that are in progress but not yet shipped (marketing-analytics preaggregation and lazy computation, both listed under "What is in flight" below, and active improvements to retention).
 Where we have a clear regression we are working on it; we are not going to claim universal wins.
 
