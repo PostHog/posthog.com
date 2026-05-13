@@ -33,11 +33,7 @@ A great deal has changed.
 ## Measured impact
 
 The honest way to answer "are PostHog queries actually faster?" is to look at production latency.
-The numbers below compare two weeks of customer-facing queries on our US Cloud cluster: one in late February 2026, one in early May 2026.
-
-The window is shorter than the year-over-year comparison we would prefer.
-The archive table that retains the data we need only goes back to late January 2026, so a year-on-year view is not yet possible.
-The roughly ten-week window below is the longest reliable comparison we can show today; we will publish the full year-over-year view once the archive depth catches up.
+The numbers below compare two weeks of customer-facing queries on our US Cloud cluster, roughly three months apart: one in late February 2026, one in early May 2026.
 
 Note that the new ClickHouse cluster described in section 1 was cut over in mid-January 2026, before this comparison window starts: both the February and the May samples are already running on the new cluster. The hardware change itself was substantial, roughly 3× peak read throughput compared to the old cluster, and that improvement is **not** captured in the latency numbers below. The improvements shown are a separate set of software wins that landed on top of the new cluster, not a measurement of it.
 Earlier optimization work that predates the comparison window (most of what shipped before January 2026) is similarly not captured here.
