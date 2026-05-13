@@ -71,75 +71,80 @@ const ProductRateBlock = ({
     }
 
     return (
-        <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-6 @2xl:gap-10 items-start">
-            <div className="space-y-px">
-                {/* Header */}
-                <div className="flex items-center justify-between px-4 py-2 bg-black/50 backdrop-blur-md rounded-md text-white">
-                    <span className="text-sm font-bold text-primary-inverse">{name}</span>
-                    <span className="text-sm font-bold">/{unit}</span>
-                </div>
-                {/* Rows */}
-                {billingTiers.map((tier: any, i: number) => {
-                    const isFree = parseFloat(tier.unit_amount_usd) === 0
-                    const isActive = i === activeTierIndex
-                    const prev = i > 0 ? billingTiers[i - 1] : null
-                    const isLast = !tier.up_to
+        <div>
+            <div className="border-b-2 border-dark dark:border-white pb-2 mb-4">
+                <span className="font-bold text-primary">{name}</span>
+            </div>
+            <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-6 @2xl:gap-10 items-start">
+                <div className="space-y-px">
+                    {/* Header */}
+                    <div className="flex items-center justify-between px-4 py-2 bg-black/10 dark:bg-white/10 rounded-md font-bold">
+                        <span className="text-sm text-black dark:text-white">Volume</span>
+                        <span className="text-sm text-black dark:text-white">/{unit}</span>
+                    </div>
+                    {/* Rows */}
+                    {billingTiers.map((tier: any, i: number) => {
+                        const isFree = parseFloat(tier.unit_amount_usd) === 0
+                        const isActive = i === activeTierIndex
+                        const prev = i > 0 ? billingTiers[i - 1] : null
+                        const isLast = !tier.up_to
 
-                    let label = ''
-                    if (i === 0) label = `First ${formatCompactNumber(tier.up_to)}/mo`
-                    else if (isLast) label = `${formatCompactNumber(prev?.up_to)}+`
-                    else label = `${formatCompactNumber(prev?.up_to)} – ${formatCompactNumber(tier.up_to)}`
+                        let label = ''
+                        if (i === 0) label = `First ${formatCompactNumber(tier.up_to)}/mo`
+                        else if (isLast) label = `${formatCompactNumber(prev?.up_to)}+`
+                        else label = `${formatCompactNumber(prev?.up_to)} – ${formatCompactNumber(tier.up_to)}`
 
-                    return (
-                        <div
-                            key={i}
-                            className={`flex items-center justify-between px-4 py-1.5 rounded-md ${
-                                isActive ? 'bg-yellow/30 dark:bg-yellow/30 ' : 'transition-colors'
-                            }`}
-                        >
-                            <span className={`text-sm ${isActive ? 'font-bold text-primary' : 'text-primary/70'}`}>
-                                {label}
-                            </span>
-                            <span
-                                className={`text-sm font-bold tabular-nums font-mono ${
-                                    isFree ? 'text-green' : isActive ? 'text-primary' : 'text-primary/70'
+                        return (
+                            <div
+                                key={i}
+                                className={`flex items-center justify-between px-4 py-1.5 rounded-md ${
+                                    isActive ? 'bg-yellow/30 dark:bg-yellow/30 ' : 'transition-colors'
                                 }`}
                             >
-                                {isFree ? 'Free' : formatPrice(tier.unit_amount_usd)}
-                            </span>
-                        </div>
-                    )
-                })}
-            </div>
-
-            {/* Right: slider */}
-            <div>
-                <div className="flex items-center justify-between mb-2 pr-4">
-                    <div className="flex items-center gap-1.5">
-                        <NumericFormat
-                            inputClassName="bg-primary text-center text-lg font-bold border border-primary hover:border-button dark:border-dark rounded-sm py-1 px-1 min-w-[30px] max-w-[150px]"
-                            value={volume}
-                            thousandSeparator=","
-                            onValueChange={({ floatValue }) => {
-                                if (floatValue !== undefined) setVolume(Math.round(floatValue))
-                            }}
-                            customInput={AutosizeInput}
-                        />
-                        <span className="text-sm text-primary/60">{unit}s/mo</span>
-                    </div>
-                    <span className="text-base font-bold text-primary tabular-nums">{formatUSD(cost)}</span>
+                                <span className={`text-sm ${isActive ? 'font-bold text-primary' : 'text-primary/70'}`}>
+                                    {label}
+                                </span>
+                                <span
+                                    className={`text-sm font-bold tabular-nums font-mono ${
+                                        isFree ? 'text-green' : isActive ? 'text-primary' : 'text-primary/70'
+                                    }`}
+                                >
+                                    {isFree ? 'Free' : formatPrice(tier.unit_amount_usd)}
+                                </span>
+                            </div>
+                        )
+                    })}
                 </div>
-                <LogSlider
-                    stepsInRange={100}
-                    marks={sliderConfig.marks}
-                    min={sliderConfig.min}
-                    max={sliderConfig.max}
-                    onChange={(value) => setVolume(Math.round(sliderCurve(value)))}
-                    value={inverseCurve(volume)}
-                />
-                <p className="text-sm text-green font-semibold mt-8">
-                    First {sliderConfig.min.toLocaleString()} {unit}s free –&nbsp;<em>every month!</em>
-                </p>
+
+                {/* Right: slider */}
+                <div className="-mr-4">
+                    <div className="flex items-center justify-between mb-2 pr-4">
+                        <div className="flex items-center gap-1.5">
+                            <NumericFormat
+                                inputClassName="bg-primary text-center text-lg font-bold border border-primary hover:border-button dark:border-dark rounded-sm py-1 px-1 min-w-[30px] max-w-[150px]"
+                                value={volume}
+                                thousandSeparator=","
+                                onValueChange={({ floatValue }) => {
+                                    if (floatValue !== undefined) setVolume(Math.round(floatValue))
+                                }}
+                                customInput={AutosizeInput}
+                            />
+                            <span className="text-sm text-primary/60">{unit}s/mo</span>
+                        </div>
+                        <span className="text-base font-bold text-primary tabular-nums">{formatUSD(cost)}</span>
+                    </div>
+                    <LogSlider
+                        stepsInRange={100}
+                        marks={sliderConfig.marks}
+                        min={sliderConfig.min}
+                        max={sliderConfig.max}
+                        onChange={(value) => setVolume(Math.round(sliderCurve(value)))}
+                        value={inverseCurve(volume)}
+                    />
+                    <p className="text-sm text-green font-semibold mt-8">
+                        First {sliderConfig.min.toLocaleString()} {unit}s free –&nbsp;<em>every month!</em>
+                    </p>
+                </div>
             </div>
         </div>
     )
@@ -183,13 +188,13 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
     }
 
     return (
-        <section id={id} className="scroll-mt-20 not-prose @container">
-            <h2 className="text-3xl font-bold text-primary mt-0 mb-8">Calculate your cost</h2>
+        <section id={id} className="scroll-mt-40 not-prose @container">
+            <h2 className="text-3xl font-bold text-primary mt-0 !mb-4">Calculate your cost</h2>
 
             {/* Main product: rates left, slider right */}
             {mainTiers.length > 0 && (
                 <ProductRateBlock
-                    name={activeProduct.name || productData.name}
+                    name={activeProduct.label || activeProduct.name || productData.label || productData.name}
                     billingTiers={mainTiers}
                     sliderConfig={
                         activeProduct.slider || {
@@ -208,7 +213,7 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
             {addonBillingData
                 .filter((a: any) => a.tiers?.length)
                 .map((addon: any, i: number) => (
-                    <div key={addon.key} className="mt-8 pt-8 border-t-2 border-primary/20">
+                    <div key={addon.key} className="mt-8">
                         <ProductRateBlock
                             name={addon.label}
                             billingTiers={addon.tiers}
@@ -221,12 +226,10 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
                 ))}
 
             {/* Total */}
-            <div className="mt-6 border-t-3 border-primary">
-                <div className="flex items-center justify-between px-4 py-3">
-                    <p className="font-black text-lg text-primary-inverse m-0">Estimated monthly cost</p>
-                    <span className="text-base font-black text-primary-inverse tabular-nums">
-                        {formatUSD(totalCost)}
-                    </span>
+            <div className="mt-6 border-t-2 border-dark dark:border-white">
+                <div className="flex items-center justify-between py-3">
+                    <p className="font-black text-xl text-primary m-0">Estimated monthly cost</p>
+                    <span className="text-2xl font-black text-primary tabular-nums">{formatUSD(totalCost)}</span>
                 </div>
             </div>
         </section>

@@ -282,9 +282,22 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       html_url: String
       type: String
     }
+    type ProductDataProductsPlansTiers {
+      current_amount_usd: String
+      current_usage: Float
+      flat_amount_usd: String
+      unit_amount_usd: String
+      up_to: Float
+    }
     type ProductDataProductsPlans {
       contact_support: Boolean
       unit_amount_usd: Float
+      tiers: [ProductDataProductsPlansTiers]
+    }
+    type ProductDataProductsAddonsPlans {
+      contact_support: Boolean
+      unit_amount_usd: Float
+      tiers: [ProductDataProductsPlansTiers]
     }
     type SlackEmoji implements Node {
       name: String

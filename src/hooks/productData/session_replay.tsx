@@ -27,6 +27,7 @@ import { applications, topFeatures } from './session_replay/slides'
 export const sessionReplay = {
     Icon: IconRewindPlay,
     name: 'Session Replay',
+    label: 'Web recordings',
     handle: 'session_replay',
     type: 'session_replay',
     slug: 'session-replay',
@@ -171,7 +172,7 @@ export const sessionReplay = {
     addonSliders: [
         {
             key: 'mobile_replay',
-            label: 'Mobile replay',
+            label: 'Mobile recordings',
             sliderConfig: {
                 marks: [2500, 10000, 50000, 150000, 500000],
                 min: 2500,

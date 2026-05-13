@@ -41,7 +41,10 @@ export async function fetchAndProcessMCPTools(): Promise<{
     error: boolean
 }> {
     try {
-        const response = await fetch(MCP_TOOLS_URL)
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), 15000)
+        const response = await fetch(MCP_TOOLS_URL, { signal: controller.signal as any })
+        clearTimeout(timeoutId)
 
         if (response.status !== 200) {
             throw new Error(`Failed to fetch MCP tools: ${response.status}`)
