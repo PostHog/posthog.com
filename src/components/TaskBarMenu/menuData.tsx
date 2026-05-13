@@ -645,6 +645,12 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
+                    label: 'PostHog Work',
+                    link: '/work',
+                    icon: <Icons.IconPeople className="size-4 text-blue" />,
+                },
+                {
+                    type: 'item',
                     label: 'DeskHog',
                     link: '/deskhog',
                     icon: <Icons.IconDeskHog className="size-4 text-seagreen" />,
