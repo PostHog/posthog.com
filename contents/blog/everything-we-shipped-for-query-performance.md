@@ -74,7 +74,7 @@ RetentionQuery and both marketing-analytics query types regressed across all per
 The regressions are mostly consistent with workstreams that are in progress but not yet shipped (marketing-analytics preaggregation and lazy computation, both listed under "What is in flight" below, and active improvements to retention).
 Where we have a clear regression we are working on it; we are not going to claim universal wins.
 
-A practical caveat on the cluster-wide table: the way we tag queries from some products expanded significantly in March 2026 (see section 6 on tooling and observability), which shifts the population mix for any individual product's per-product line between the two periods.
+A practical caveat on the cluster-wide table: the way we tag queries from some products expanded significantly in March 2026 (see section 7 on tooling and observability), which shifts the population mix for any individual product's per-product line between the two periods.
 The cluster-wide totals and the per-query-type breakdown above are unaffected by that tagging change, because they aggregate over the underlying query, not the tag.
 
 ## How we approach query performance
@@ -154,7 +154,28 @@ Three lines of work shipped this year:
 
 The combined effect is that dashboard refreshes after the first one are served from cache, concurrent users share the work rather than duplicate it, and the cache itself is isolated from the rest of the cluster.
 
-## 4. HogQL parser caching and AST speedups
+## 4. Better use of skip indexes and materialized columns
+
+ClickHouse has two features that are underused by the queries most analytics products produce:
+
+- **Skip indexes** (bloom filters, ngram filters, min/max) allow ClickHouse to skip granules without scanning them, at the cost of a small amount of disk space.
+
+- **Materialized columns** pull a JSON property out into its own column so queries against that property read a dense column rather than parsing JSON on every event.
+
+Most queries were not using them.
+
+Not because the indexes were missing, but because the queries were almost in the right shape and ClickHouse's planner is strict about that.
+Wrap a column in `nullIf()` and the materialized column becomes invisible.
+Use `ilike` instead of `=` and the ngram skip index becomes invisible.
+Use `JSONHas()` to check whether a property is set and the property map skip indexes become useless.
+
+We addressed this with a series of HogQL-level rewrites that normalize the AST into shapes the planner can optimize ([#44542](https://github.com/PostHog/posthog/pull/44542), [#44626](https://github.com/PostHog/posthog/pull/44626), [#44513](https://github.com/PostHog/posthog/pull/44513), [#45035](https://github.com/PostHog/posthog/pull/45035), [#44346](https://github.com/PostHog/posthog/pull/44346)).
+The most impactful one, auto-rewriting `ilike(properties.email, '%@gmail.com')`-shaped queries to use a hidden ngram skip index, is in [#44820](https://github.com/PostHog/posthog/pull/44820).
+We also added a MinMax skip index on `$session_id_uuid` so session-scoped queries can skip parts that do not overlap ([#52170](https://github.com/PostHog/posthog/pull/52170)).
+
+The pattern is consistent: a customer query may be semantically correct but not in a shape ClickHouse can optimize. The rewriter normalizes it without changing semantics.
+
+## 5. HogQL parser caching and AST speedups
 
 Every HogQL query is parsed into an AST, walked by a chain of visitors (the resolver, the property-type swapper, the printer, and so on), and turned into ClickHouse SQL.
 For small queries the parse is dwarfed by the ClickHouse scan time.
@@ -169,7 +190,7 @@ Two recent improvements:
 Neither change affects what ClickHouse sees; both are pure Python-side optimizations.
 But every HogQL query goes through this code path, so the aggregate CPU savings across the cluster are significant.
 
-## 5. Autonomous query optimization
+## 6. Autonomous query optimization
 
 At a recent team offsite, we evaluated [autoresearch](https://github.com/karpathy/autoresearch) (Andrej Karpathy's pattern of giving an AI agent a benchmark and letting it iterate) against our slow ClickHouse queries.
 Within the first day, the agent identified a bug that had been in the codebase for three years: HogQL's per-team timezone support was stopping ClickHouse from fully using its primary key on every query that filtered by `timestamp`.
@@ -184,7 +205,7 @@ The full writeup of the initial result is in our [companion post](/blog/autorese
 
 The substantive value here is that the system optimizes the queries customers actually run, not the synthetic ones a benchmark suite might cover.
 
-## 6. Tooling and observability
+## 7. Tooling and observability
 
 Performance optimization at scale requires good attribution (knowing which product, code path, or customer action issued each query) and the right investigation tooling so that any engineer at PostHog can diagnose a slow query without escalating to a specialist.
 A substantial portion of the past year went into both.
@@ -196,7 +217,7 @@ A substantial portion of the past year went into both.
 - **Investigation surface.** A CLI for running ad-hoc queries against `system.query_log` from any engineer's terminal ([#56800](https://github.com/PostHog/posthog/pull/56800)), so per-team and per-product investigations take minutes rather than being a specialist task. The "Measured impact" tables at the top of this post were produced through that CLI.
 
 With per-product labels and a low-friction investigation path, we can rank queries by total CPU cost across the cluster and target optimization work at the highest-spend paths rather than guessing.
-The same data feeds the AI-driven query optimization described in section 5.
+The same data feeds the AI-driven query optimization described in section 6.
 
 ## What is in flight
 
@@ -212,7 +233,7 @@ Several initiatives are landing or in progress:
 
 - **Predictive cache warming.** Lazy computation is currently reactive: it computes when asked. If we can predict which conversion events a customer is about to look at in web analytics, or which experiment metric an owner is about to expand, we can warm the cache ahead of the click. The architecture is intentionally separate from the executor itself; it is a service that calls `ensure_precomputed` on its best guess.
 
-- **Continuous autoresearch.** Beyond the initial hackathon result, the pipeline described in section 5 will run autoresearch on a steady stream of slow queries from production and surface candidate optimizations for human review.
+- **Continuous autoresearch.** Beyond the initial hackathon result, the pipeline described in section 6 will run autoresearch on a steady stream of slow queries from production and surface candidate optimizations for human review.
 
 ## Summary
 
