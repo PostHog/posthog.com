@@ -22,7 +22,7 @@ we pointed an AI agent at our query engine,
 fed it slow queries from production, and let it run overnight.
 
 By the next morning it had found something embarrassing:
-for almost three years, every timestamp filter in PostHog had not been using ClickHouse's primary key correctly.
+for almost three years, every query with a timestamp filter had not been using ClickHouse's primary key correctly.
 [The fix](https://github.com/PostHog/posthog/pull/54819) cut the number of granules ClickHouse had to scan by 62% on the benchmark query, and made the query itself meaningfully faster. More on the numbers below.
 
 This post is about the setup we used,
