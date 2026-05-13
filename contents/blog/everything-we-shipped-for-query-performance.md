@@ -200,24 +200,22 @@ A "who did what" question can then be answered from a single table on a single s
 This year we built the pipeline to backfill the denormalized columns onto every team that does not already have them, and to keep them correct as people merge ([#58035](https://github.com/PostHog/posthog/pull/58035)).
 For most customers, this is an invisible change: queries become faster without any modification to the dashboards or queries they wrote.
 
-## 7. HogQL parser, AST, and visitor speedups
+## 7. HogQL parser caching and AST speedups
 
 Every HogQL query is parsed into an AST, walked by a chain of visitors (the resolver, the property-type swapper, the printer, and so on), and turned into ClickHouse SQL.
 For small queries the parse is dwarfed by the ClickHouse scan time.
-For complex queries, particularly those that go through caching, the parse and AST traversal add up.
+For complex queries, and for any workload that repeats the same query shape (dashboards, insights, alerts, anything on a refresh loop), the parse and AST traversal add up.
 
-Three recent improvements:
+Two recent improvements:
 
-- **A 14–20x speedup on AST deserialization.** We have a C++ HogQL parser and serialize ASTs in and out of it. The Python-side reconstruction was using a generic JSON parser; we moved to `orjson` with precomputed enum field maps ([#58267](https://github.com/PostHog/posthog/pull/58267)). End-to-end `parse_select` is 5 to 13 percent faster as a result.
+- **A bounded LRU cache for parsed ASTs** ([#58269](https://github.com/PostHog/posthog/pull/58269)). Separate buckets for trusted in-code template strings and user input, each with its own size limit, plus hit-rate metrics so we can tune the cache sizes per workload. In production, the cache hit rate on `parse_select` is around 70%. On the workloads where queries repeat (dashboards, insights, and most customer-facing traffic), the p50 of `parse_statement_to_node` dropped from 12.5 ms to 3.7 ms, roughly a 3.4× speedup, and 46% of parses now complete in under one millisecond. The tail of unique, never-cached queries is unchanged, as designed.
 
-- **A 2.7–4.4x speedup on every AST visitor.** AST node classes now use `__slots__` and the `accept()` method-name dispatch is cached. Visitors are pervasive, so this affects every code path that touches HogQL ([#58255](https://github.com/PostHog/posthog/pull/58255)).
+- **A 2.7 to 4.4× speedup on every AST visitor** ([#58255](https://github.com/PostHog/posthog/pull/58255)). AST node classes now use `__slots__` and the `accept()` method-name dispatch is cached. Visitors are pervasive, so this affects every code path that touches HogQL.
 
-- **A 28–120x speedup on cache hits.** A bounded LRU cache for parsed ASTs, with separate buckets for trusted in-code template strings and user input. Each bucket has its own size limit; hit-rate metrics let us tune the cache sizes per workload ([#58269](https://github.com/PostHog/posthog/pull/58269)).
-
-None of these changes affect what ClickHouse sees; they are pure Python-side optimizations.
+Neither change affects what ClickHouse sees; both are pure Python-side optimizations.
 But every HogQL query goes through this code path, so the aggregate CPU savings across the cluster are significant.
 
-## 8. AI-driven query optimization
+## 8. Autonomous query optimization
 
 At a recent team offsite, we evaluated [autoresearch](https://github.com/karpathy/autoresearch) (Andrej Karpathy's pattern of giving an AI agent a benchmark and letting it iterate) against our slow ClickHouse queries.
 Within the first day, the agent identified a bug that had been in the codebase for three years: HogQL's per-team timezone support was stopping ClickHouse from fully using its primary key on every query that filtered by `timestamp`.
