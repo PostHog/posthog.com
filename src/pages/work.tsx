@@ -528,7 +528,7 @@ function Features() {
 const useCases = [
     {
         title: 'Weekly metrics digest',
-        badge: 'For: PM',
+        badge: 'For: PMs',
         badgeColor: 'bg-blue/15 text-blue',
         before: 'You, at 3:47pm on Friday, pasting numbers into a Slack thread nobody really reads.',
         after: 'Anomalies get flagged in #product-updates. You do literally anything else.',
@@ -536,7 +536,7 @@ const useCases = [
     },
     {
         title: 'Release notes',
-        badge: 'For: PM + Eng',
+        badge: 'For: PMs + PMMs',
         badgeColor: 'bg-green/15 text-green',
         before: 'Someone asks "did anyone write the changelog?" at 6:30pm on launch day.',
         after: 'The changelog gets written before anyone thought to ask. Three people compliment it.',
@@ -552,7 +552,7 @@ const useCases = [
     },
     {
         title: 'Financial summary',
-        badge: 'For: Finance + Founder',
+        badge: 'For: Finance + Founders',
         badgeColor: 'bg-purple/15 text-purple',
         before: 'Your CEO Slacks you "how is MRR" at 11pm on Sunday. Again.',
         after: 'Your CEO gets it sent to him at 10:59pm. No matter if it wakes him up.',
