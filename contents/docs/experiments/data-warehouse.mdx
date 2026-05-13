@@ -1,5 +1,5 @@
 ---
-title: Using data warehouse tables in experiments
+title: Using Data Warehouse tables in experiments
 sidebar: Docs
 showTitle: true
 ---
@@ -7,21 +7,21 @@ showTitle: true
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 
-If you have event-like data in a [data warehouse](/docs/data-warehouse) table (e.g., purchases, subscriptions, usage records), you can use it directly as a [metric](/docs/experiments/metrics) in your experiment.
+If you have event-like data in a [Data Warehouse](/docs/data-warehouse) table (e.g., purchases, subscriptions, usage records), you can use it directly as a [metric](/docs/experiments/metrics) in your experiment.
 
-This enables you to measure how PostHog feature flags impact outcomes tracked in your external systems – for example, measuring how a checkout redesign affects completed orders stored in your Stripe or Shopify data.
+This enables you to measure how PostHog Feature Flags impact outcomes tracked in your external systems – for example, measuring how a checkout redesign affects completed orders stored in your Stripe or Shopify data.
 
-## Setting up a data warehouse metric
+## Setting up a Data Warehouse metric
 
-1. When adding a metric to your experiment, select the **Data warehouse tables** category and pick your table.
+1. When adding a metric to your experiment, select the **Data Warehouse tables** category and pick your table.
 
 2. Configure the following fields:
 
     | Field | Description |
     |-------|-------------|
-    | **Timestamp field** | The column in your data warehouse table that contains the timestamp of each row |
-    | **Data warehouse join key** | The column in your data warehouse table that identifies which user each row belongs to (e.g., `user_id`, `email`) |
-    | **Events join key** | The field on PostHog events to match against the data warehouse join key (usually `distinct_id` or `properties.$user_id`) |
+    | **Timestamp field** | The column in your Data Warehouse table that contains the timestamp of each row |
+    | **Data Warehouse join key** | The column in your Data Warehouse table that identifies which user each row belongs to (e.g., `user_id`, `email`) |
+    | **Events join key** | The field on PostHog events to match against the Data Warehouse join key (usually `distinct_id` or `properties.$user_id`) |
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_03_25_at_06_23_00_7269911851.png"
@@ -32,9 +32,9 @@ This enables you to measure how PostHog feature flags impact outcomes tracked in
 
 <CalloutBox type="info">
 
-The **Data warehouse join key** and **Events join key** together determine how PostHog links your data warehouse rows to PostHog events.
+The **Data Warehouse join key** and **Events join key** together determine how PostHog links your Data Warehouse rows to PostHog events.
 
-For example, if your data warehouse table has a `user_id` column and PostHog events include `properties.$user_id`, PostHog matches rows where both values are equal. This links your external data (orders, subscriptions) to the users in your experiment.
+For example, if your Data Warehouse table has a `user_id` column and PostHog events include `properties.$user_id`, PostHog matches rows where both values are equal. This links your external data (orders, subscriptions) to the users in your experiment.
 
 </CalloutBox>
 
@@ -43,12 +43,12 @@ For example, if your data warehouse table has a `user_id` column and PostHog eve
 The join key system bridges PostHog events with your external data:
 
 1. **Events join key** extracts an identifier from PostHog events (e.g., `properties.$user_id` → `"user_123"`)
-2. **Data warehouse join key** queries your table using that identifier (e.g., `WHERE user_id = "user_123"`)
-3. PostHog attributes the data warehouse rows to the experiment variant the user was exposed to
+2. **Data Warehouse join key** queries your table using that identifier (e.g., `WHERE user_id = "user_123"`)
+3. PostHog attributes the Data Warehouse rows to the experiment variant you were exposed to
 
 ### Common join key patterns
 
-| Scenario | Events join key | Data warehouse join key |
+| Scenario | Events join key | Data Warehouse join key |
 |----------|----------------|-------------------------|
 | User ID in properties | `properties.$user_id` | `user_id` |
 | Email as identifier | `properties.$email` | `email` |
@@ -60,17 +60,17 @@ The join key system bridges PostHog events with your external data:
 | Metric type | Supported | Notes |
 |------------|-----------|-------|
 | Mean | Yes | Count, sum, average, min, max aggregations |
-| Ratio | Yes | Both numerator and denominator can be data warehouse tables |
-| Retention | Yes | Both start and completion events can be data warehouse tables |
+| Ratio | Yes | Both numerator and denominator can be Data Warehouse tables |
+| Retention | Yes | Both start and completion events can be Data Warehouse tables |
 | Funnel | Yes | With limitations (see below) |
 
-## Using data warehouse tables in funnels
+## Using Data Warehouse tables in funnels
 
-You can include data warehouse tables as steps in funnel metrics. For example, measuring a funnel from viewing a product page (PostHog event) → adding to cart (PostHog event) → completing purchase (data warehouse table).
+You can include Data Warehouse tables as steps in funnel metrics. For example, measuring a funnel from viewing a product page (PostHog event) → adding to cart (PostHog event) → completing purchase (Data Warehouse table).
 
-### Requirements for data warehouse funnel steps
+### Requirements for Data Warehouse funnel steps
 
-All data warehouse steps in a funnel must use the **same events join key**. This is a technical requirement of how PostHog queries mixed sources.
+All Data Warehouse steps in a funnel must use the **same events join key**. This is a technical requirement of how PostHog queries mixed sources.
 
 <CalloutBox type="caution">
 
@@ -91,7 +91,7 @@ Step 2: orders table (DW, events_join_key: properties.$user_id)  ❌
 Step 3: sessions table (DW, events_join_key: properties.$session_id)  ❌
 ```
 
-The data warehouse join keys can be different (e.g., one table has `user_id`, another has `customer_id`), but the events join key must match.
+The Data Warehouse join keys can be different (e.g., one table has `user_id`, another has `customer_id`), but the events join key must match.
 
 </CalloutBox>
 
@@ -99,15 +99,15 @@ The data warehouse join keys can be different (e.g., one table has `user_id`, an
 
 Data warehouse funnel steps have the following limitations:
 
-- **Maximum 3 data warehouse steps** per funnel – This prevents expensive queries. If you need more steps, create a materialized view combining multiple tables.
+- **Maximum 3 Data Warehouse steps** per funnel – This prevents expensive queries. If you need more steps, create a materialized view combining multiple tables.
 
-- **Maximum 2 distinct data warehouse tables** – This reduces query complexity. Create a view joining multiple tables if needed.
+- **Maximum 2 distinct Data Warehouse tables** – This reduces query complexity. Create a view joining multiple tables if needed.
 
-- **Same events join key required** – All data warehouse steps must extract the user identifier from the same PostHog event property.
+- **Same events join key required** – All Data Warehouse steps must extract your identifier from the same PostHog event property.
 
 These limits ensure queries remain performant while enabling cross-system funnel analysis.
 
-## How PostHog processes data warehouse metrics
+## How PostHog processes Data Warehouse metrics
 
 Understanding the technical implementation helps debug issues and optimize performance.
 
@@ -116,71 +116,71 @@ Understanding the technical implementation helps debug issues and optimize perfo
 PostHog uses different query patterns depending on the metric type:
 
 **Mean, ratio, and retention metrics:**
-- PostHog joins your data warehouse table to the experiment's exposure data
+- PostHog joins your Data Warehouse table to the experiment's exposure data
 - Applies the conversion window to filter rows occurring after exposure
 - Aggregates values per variant
 
-**Funnel metrics with data warehouse steps:**
-- PostHog uses a UNION ALL pattern to combine PostHog events with data warehouse tables
-- Each source (events + each data warehouse table) produces a separate subquery
+**Funnel metrics with Data Warehouse steps:**
+- PostHog uses a UNION ALL pattern to combine PostHog events with Data Warehouse tables
+- Each source (events + each Data Warehouse table) produces a separate sub-query
 - Results are combined and processed by the funnel algorithm
 - This enables mixing PostHog events with external data in a single funnel
 
 ### Temporal filtering
 
-Like PostHog events, data warehouse rows are filtered by:
+Like PostHog events, Data Warehouse rows are filtered by:
 
-1. **Exposure timing** – Only rows occurring after a user's first exposure are counted
+1. **Exposure timing** – Only rows occurring after your first exposure are counted
 2. **Conversion window** – Only rows within the metric's conversion window are included
 3. **Experiment date range** – Only rows within the experiment's start and end dates are counted
 
-This ensures data warehouse metrics follow the same [exposure logic](/docs/experiments/exposures) as PostHog events.
+This ensures Data Warehouse metrics follow the same [exposure logic](/docs/experiments/exposures) as PostHog events.
 
 ## Troubleshooting
 
 ### No data appearing in results
 
-**Problem:** Your data warehouse metric shows zero users or no data.
+**Problem:** Your Data Warehouse metric shows zero users or no data.
 
 **Solution:** Verify that:
 
 - The **events join key** extracts a value that exists on PostHog events (check using [Data Management](https://app.posthog.com/data-management/events) to see event properties)
-- The **data warehouse join key** column exists in your table and contains matching values
-- Your data warehouse table has rows with timestamps within the experiment date range
+- The **Data Warehouse join key** column exists in your table and contains matching values
+- Your Data Warehouse table has rows with timestamps within the experiment date range
 - The timestamp field is a valid datetime/timestamp column (not a string)
 
 ### Join keys not matching
 
-**Problem:** Users are exposed to your experiment but their data warehouse rows aren't being attributed.
+**Problem:** Users are exposed to your experiment but their Data Warehouse rows aren't being attributed.
 
 **Solution:** Check that:
 
 - Values are formatted identically (e.g., both use lowercase emails or both have the same prefix)
 - The events join key extracts the correct property (use [Data Management](https://app.posthog.com/data-management/events) to inspect event structure)
-- Your data warehouse table actually contains the identifier (query your table directly to verify)
+- Your Data Warehouse table actually contains the identifier (query your table directly to verify)
 
 ### Funnel validation errors
 
-**Problem:** You see an error when adding data warehouse steps to a funnel.
+**Problem:** You see an error when adding Data Warehouse steps to a funnel.
 
 **Common errors and solutions:**
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| "events_join_key is required" | Missing configuration | Add the events join key field to your data warehouse step |
-| "Step X uses properties.$user_id but Step Y uses properties.$email" | Inconsistent join keys | Use the same events join key for all data warehouse steps |
-| "Maximum 3 data warehouse steps exceeded" | Too many steps | Create a materialized view combining tables, or remove steps |
+| "events_join_key is required" | Missing configuration | Add the events join key field to your Data Warehouse step |
+| "Step X uses properties.$user_id but Step Y uses properties.$email" | Inconsistent join keys | Use the same events join key for all Data Warehouse steps |
+| "Maximum 3 Data Warehouse steps exceeded" | Too many steps | Create a materialized view combining tables, or remove steps |
 | "Maximum 2 distinct tables exceeded" | Too many tables | Create a view joining the tables |
 
 ## Best practices
 
 1. **Use consistent identifiers** – If possible, use the same identifier across all your systems (e.g., always use email or always use user_id). This makes join keys simpler.
 
-2. **Create materialized views for complex queries** – If you need data from multiple tables or complex transformations, create a materialized view in your data warehouse first. This improves query performance and simplifies setup.
+2. **Create materialized views for complex queries** – If you need data from multiple tables or complex transformations, create a materialized view in your Data Warehouse first. This improves query performance and simplifies setup.
 
-3. **Test join keys before running experiments** – Use [Data Management](https://app.posthog.com/data-management/events) to verify your events have the properties you're joining on, and query your data warehouse to confirm matching values exist.
+3. **Test join keys before running experiments** – Use [Data Management](https://app.posthog.com/data-management/events) to verify your events have the properties you're joining on, and query your Data Warehouse to confirm matching values exist.
 
-4. **Monitor query performance** – Data warehouse queries can be slower than PostHog event queries. Start with smaller date ranges to test performance before running long experiments.
+4. **Monitor query performance** – Data Warehouse queries can be slower than PostHog event queries. Start with smaller date ranges to test performance before running long experiments.
 
 5. **Document your join keys** – Keep a record of which join keys you use for different tables. This helps when creating new metrics or troubleshooting issues.
 
@@ -190,7 +190,7 @@ Here's a complete example of measuring how a pricing page redesign affects subsc
 
 ### Setup
 
-**Data warehouse table:** `stripe_subscriptions`
+**Data Warehouse table:** `stripe_subscriptions`
 - Columns: `subscription_id`, `customer_id`, `created_at`, `plan_amount`
 
 **PostHog events:** Include `properties.$user_id` matching Stripe's `customer_id`
@@ -198,13 +198,13 @@ Here's a complete example of measuring how a pricing page redesign affects subsc
 ### Metric configuration
 
 1. Create a new mean metric
-2. Select **Data warehouse tables** → `stripe_subscriptions`
+2. Select **Data Warehouse tables** → `stripe_subscriptions`
 3. Configure join keys:
    - **Timestamp field:** `created_at`
-   - **Data warehouse join key:** `customer_id`
+   - **Data Warehouse join key:** `customer_id`
    - **Events join key:** `properties.$user_id`
 4. Set math to **Sum** and math property to `plan_amount`
 
 ### Result
 
-PostHog measures total subscription revenue per variant, attributing each Stripe subscription to the variant the user saw when they visited your pricing page.
+PostHog measures total subscription revenue per variant, attributing each Stripe subscription to the variant you saw when you visited your pricing page.
