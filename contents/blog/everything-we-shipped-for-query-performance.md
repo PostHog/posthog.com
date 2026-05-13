@@ -66,9 +66,11 @@ The improvement is largest in the tail, which is the part customers feel the mos
 | ErrorTrackingQuery | 312 / 269 ms (-14%) | 1.80 / 0.95 s (-47%) | 14.9 / 4.7 s (-69%) |
 | LifecycleQuery | 565 / 604 ms (+7%) | 2.43 / 2.04 s (-16%) | 22.7 / 11.6 s (-49%) |
 | RetentionQuery | 510 / 915 ms (+80%) | 2.21 / 2.90 s (+31%) | 15.2 / 18.0 s (+19%) |
+| MarketingAnalyticsAggregatedQuery | 2.5 / 3.2 s (+31%) | 7.6 / 9.6 s (+27%) | 39.6 / 47.8 s (+21%) |
+| MarketingAnalyticsTableQuery | 2.3 / 3.3 s (+39%) | 6.1 / 10.1 s (+65%) | 30.0 / 44.5 s (+48%) |
 
 Not everything improved.
-RetentionQuery regressed across all percentiles in the comparison window, and marketing-analytics queries (not shown) also regressed.
+RetentionQuery and both marketing-analytics query types regressed across all percentiles in the comparison window.
 The regressions are mostly consistent with workstreams that are in progress but not yet shipped (the marketing-analytics preaggregation work in section 2, and active improvements to retention).
 Where we have a clear regression we are working on it; we are not going to claim universal wins.
 
