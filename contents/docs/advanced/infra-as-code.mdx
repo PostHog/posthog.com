@@ -10,14 +10,12 @@ Definitions lets you manage PostHog dashboards, insights, feature flags, actions
 
 ## When this could help
 
-Most PostHog setups are clicked together in the UI, and that's a perfectly fine starting point. Some teams reach a point where a code-first workflow fits better. A few situations where Definitions tends to help:
+The UI is a fine default. A code-first workflow can help when:
 
-- **You'd like a PR review trail.** Dashboard and flag changes can go through the same review as the code that depends on them, instead of changing silently in production.
-- **You manage more than one project.** Defining a dashboard once and applying it to staging, prod, and teammates' dev projects can be easier than rebuilding it per project.
-- **You want an undo button.** With definitions in git, `git revert` + `apply` rolls a change back. The UI on its own doesn't have history.
-- **Your analytics live alongside your code.** If the events your app emits already live in your repo, you may want the dashboards and flags that depend on them there too – so a rename or removal shows up as a single diff.
-
-If none of these resonate, the UI is a fine place to stay. Consider Definitions when ad-hoc changes start to feel risky or repetitive.
+- **You want a PR review trail** for dashboard and flag changes.
+- **You manage more than one project** – e.g. keeping feature flags in sync between a dev project and production so the same keys, variants, and rollout conditions exist in both.
+- **You want an undo button.** `git revert` + `apply` rolls a change back.
+- **Your analytics already live in your repo** and you'd like the dashboards and flags next to them.
 
 <CalloutBox icon="IconWarning" title="Alpha" type="warning">
 
