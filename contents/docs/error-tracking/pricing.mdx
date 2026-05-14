@@ -19,12 +19,14 @@ We aim to be significantly cheaper than our competitors. Below are tips to reduc
 
 ## What contributes to your bill?
 
-Error tracking bills you based on the number of `$exception` events **_ingested_** by PostHog _each month_. This means if you send exception events to PostHog, they will be billed.
+Error tracking bills you based on the number of `$exception` events **_ingested_** by PostHog _each month_. This means if you send exception events to PostHog, they will be billed (events dropped before ingestion are not billed).
 
 This also means:
 - The total number of exceptions stored in PostHog does not contribute to your bill.
 - The number of [issues](/docs/error-tracking/issues-and-exceptions) in PostHog does not affect your bill, only the individual exception events that make up the issues.
-- Merging, resolving, and suppressing issues in PostHog does not reduce your bill.
+- Merging and resolving issues in PostHog do not reduce your bill.
+- Suppressing an issue only affects future matching exceptions. Once an issue is suppressed, future exceptions linked to that issue are not ingested or billed. Exceptions already ingested before suppression still count.
+- Suppression rules also apply to future exceptions. Matching exceptions are dropped before ingestion and are not billed.
 
 ## Prevent surprises with billing limits
 
