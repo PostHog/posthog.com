@@ -142,7 +142,13 @@ const TEAM_DESCRIPTION =
     'The secret society of Bens. United by name, divided by spelling preferences. If you know, you know.'
 
 const teamImage = {
-    image: { data: { attributes: { url: '/images/team-ben.jpg' } } },
+    image: {
+        data: {
+            attributes: {
+                url: 'https://res.cloudinary.com/dmukukwp6/image/upload/team_bens_5642fdbf03.jpg',
+            },
+        },
+    },
     caption: 'The Bens, assembled at the 2026 offsite. Proof of life.',
 }
 
