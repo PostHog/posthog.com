@@ -1,97 +1,188 @@
 import React, { useEffect, useState } from 'react'
 import OSButton from 'components/OSButton'
-import { StickerLaptop, StickerCoffee, StickerCrown, StickerRobot, StickerMindMap } from 'components/Stickers/Stickers'
 
-interface PersonalityType {
-    slug: string
+const AXES = ['Marketing', 'Operations', 'Product', 'Design', 'HR', 'Finance', 'Legal'] as const
+
+interface StarMapSample {
     title: string
-    tagline: string
-    body: string
-    image: string
-    fallbackSticker: React.ComponentType<any>
-    accentText: string
-    accentBg: string
+    values: number[] // length 7, one per AXES entry, 0–100
+    founderScore: number
 }
 
-const personalities: PersonalityType[] = [
+const sampleMaps: StarMapSample[] = [
     {
-        slug: 'the-builder',
-        title: 'The Builder',
-        tagline: 'Ship first, name it later.',
-        body: "You'd rather merge a branch than open a Notion doc. Adoption curves get you out of bed. The roadmap is wherever the last good idea landed.",
-        image: '/images/work/personality/the-builder.png',
-        fallbackSticker: StickerLaptop,
-        accentText: 'text-purple',
-        accentBg: 'bg-purple/10',
+        title: 'Balanced across Product & HR',
+        values: [42, 8, 92, 5, 78, 0, 0],
+        founderScore: 0,
     },
     {
-        slug: 'the-operator',
-        title: 'The Operator',
-        tagline: 'Funnels in your head, conversion on your tongue.',
-        body: "You measure what others romanticize. If a channel can't be attributed, it doesn't exist. Your friends are a little tired of hearing about LTV.",
-        image: '/images/work/personality/the-operator.png',
-        fallbackSticker: StickerCoffee,
-        accentText: 'text-orange',
-        accentBg: 'bg-orange/10',
+        title: 'Mostly Operations',
+        values: [22, 95, 38, 4, 0, 48, 12],
+        founderScore: 14,
     },
     {
-        slug: 'the-closer',
-        title: 'The Closer',
-        tagline: 'Pipeline is a verb.',
-        body: 'You ended last quarter at 103% of plan and the first thing you did Monday morning was forecast this quarter. Sleep is a sales motion. So is brunch.',
-        image: '/images/work/personality/the-closer.png',
-        fallbackSticker: StickerCrown,
-        accentText: 'text-blue',
-        accentBg: 'bg-blue/10',
+        title: 'Marketing-shaped',
+        values: [94, 30, 55, 22, 12, 6, 0],
+        founderScore: 8,
     },
     {
-        slug: 'the-listener',
-        title: 'The Listener',
-        tagline: 'Support is product research in disguise.',
-        body: 'You read every Intercom thread to the end. You remember which customer mentioned the pricing thing in March. You have, frankly, made too many spreadsheets of quotes.',
-        image: '/images/work/personality/the-listener.png',
-        fallbackSticker: StickerRobot,
-        accentText: 'text-red',
-        accentBg: 'bg-red/10',
+        title: 'A finance brain',
+        values: [0, 62, 38, 0, 8, 88, 35],
+        founderScore: 24,
     },
     {
-        slug: 'the-generalist',
-        title: 'The Generalist',
-        tagline: 'Everything is your job and nothing is your specialty.',
-        body: 'You context-switch faster than your laptop does. Beware: you will be asked to do all of it forever.',
-        image: '/images/work/personality/the-generalist.png',
-        fallbackSticker: StickerMindMap,
-        accentText: 'text-green',
-        accentBg: 'bg-green/10',
+        title: "Designer's pull",
+        values: [38, 14, 70, 92, 22, 0, 0],
+        founderScore: 5,
+    },
+    {
+        title: 'Founder mode',
+        values: [55, 60, 70, 50, 55, 65, 40],
+        founderScore: 41,
+    },
+    {
+        title: 'HR-leaning',
+        values: [18, 35, 42, 18, 88, 14, 28],
+        founderScore: 11,
     },
 ]
 
-function CharacterImage({ type }: { type: PersonalityType }) {
-    const Fallback = type.fallbackSticker
+function StarMap({ values, founderScore }: { values: number[]; founderScore: number }) {
+    const size = 320
+    const cx = size / 2
+    const cy = size / 2 + 4
+    const maxR = 96
+    const innerR = 28
+    const labelR = maxR + 22
+    const n = AXES.length
+
+    const point = (index: number, radius: number) => {
+        const angle = -Math.PI / 2 + (index * 2 * Math.PI) / n
+        return [cx + radius * Math.cos(angle), cy + radius * Math.sin(angle)] as const
+    }
+
+    const ringPolygon = (radius: number) =>
+        AXES.map((_, i) => point(i, radius))
+            .map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`)
+            .join(' ')
+
     return (
-        <div className="size-20 relative shrink-0 flex items-center justify-center">
-            <img
-                src={type.image}
-                alt=""
-                className="w-full h-full object-contain"
-                onError={(e) => {
-                    const target = e.currentTarget
-                    target.style.display = 'none'
-                    const fallback = target.nextElementSibling as HTMLElement
-                    if (fallback) fallback.style.display = 'flex'
-                }}
+        <svg viewBox={`0 0 ${size} ${size}`} className="w-full h-auto" role="img" aria-label="Star map">
+            {/* Concentric rings */}
+            {[0.25, 0.5, 0.75].map((r) => (
+                <polygon
+                    key={r}
+                    points={ringPolygon(maxR * r)}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    strokeDasharray="2 3"
+                    className="text-muted/40"
+                />
+            ))}
+            {/* Outer ring */}
+            <polygon
+                points={ringPolygon(maxR)}
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                className="text-muted/60"
             />
-            <div
-                style={{ display: 'none' }}
-                className={`absolute inset-0 ${type.accentBg} rounded-full items-center justify-center`}
+
+            {/* Spokes */}
+            {AXES.map((_, i) => {
+                const [x, y] = point(i, maxR)
+                return (
+                    <line
+                        key={i}
+                        x1={cx}
+                        y1={cy}
+                        x2={x}
+                        y2={y}
+                        stroke="currentColor"
+                        strokeWidth="1"
+                        className="text-muted/30"
+                    />
+                )
+            })}
+
+            {/* Score lines + dots */}
+            {AXES.map((_, i) => {
+                const value = values[i] ?? 0
+                if (value <= 4) return null
+                const [x, y] = point(i, (value / 100) * maxR)
+                return (
+                    <g key={i}>
+                        <line
+                            x1={cx}
+                            y1={cy}
+                            x2={x.toFixed(2)}
+                            y2={y.toFixed(2)}
+                            stroke="#F54E00"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                        />
+                        <circle cx={x.toFixed(2)} cy={y.toFixed(2)} r="3.5" fill="#F54E00" />
+                    </g>
+                )
+            })}
+
+            {/* Center circle */}
+            <circle
+                cx={cx}
+                cy={cy}
+                r={innerR}
+                fill="currentColor"
+                className="text-primary"
+                stroke="currentColor"
+                strokeWidth="1.5"
+            />
+            <circle
+                cx={cx}
+                cy={cy}
+                r={innerR}
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                className="text-muted/50"
+            />
+            <text
+                x={cx}
+                y={cy - 4}
+                textAnchor="middle"
+                fontSize="9"
+                className="fill-secondary"
+                style={{ letterSpacing: '0.05em' }}
             >
-                <Fallback className="size-14" />
-            </div>
-        </div>
+                Founder
+            </text>
+            <text x={cx} y={cy + 11} textAnchor="middle" fontSize="14" fontWeight="700" className="fill-primary">
+                {founderScore}
+            </text>
+
+            {/* Axis labels */}
+            {AXES.map((label, i) => {
+                const [x, y] = point(i, labelR)
+                return (
+                    <text
+                        key={label}
+                        x={x.toFixed(2)}
+                        y={y.toFixed(2)}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        fontSize="11"
+                        fontWeight="600"
+                        className="fill-primary"
+                    >
+                        {label}
+                    </text>
+                )
+            })}
+        </svg>
     )
 }
 
-function FeaturedCard({ type }: { type: PersonalityType }) {
+function StarMapCard({ map }: { map: StarMapSample }) {
     const handleScrollToRsvp = (e: React.MouseEvent) => {
         e.preventDefault()
         const target = document.getElementById('rsvp')
@@ -101,30 +192,35 @@ function FeaturedCard({ type }: { type: PersonalityType }) {
         }
     }
     return (
-        <div className="relative bg-primary border border-primary rounded-lg shadow-2xl p-5 @md:p-6 max-w-sm mx-auto text-center -rotate-1 hover:rotate-0 transition-transform duration-300 ease-out">
-            <div className="flex justify-center mb-3">
-                <CharacterImage type={type} />
-            </div>
-            <p className="text-[10px] uppercase tracking-[0.25em] font-semibold text-secondary m-0 mb-1.5">
-                Your skills personality
+        <div className="relative bg-primary border border-primary rounded-lg shadow-2xl p-5 @md:p-6 max-w-sm mx-auto -rotate-1 hover:rotate-0 transition-transform duration-300 ease-out">
+            <p className="text-[10px] uppercase tracking-[0.25em] font-semibold text-secondary m-0 mb-1 text-center">
+                Your Star Map
             </p>
-            <h3 className="text-xl @md:text-2xl font-bold m-0 mb-2 leading-tight">{type.title}</h3>
-            <p className="italic text-secondary m-0 mb-3 text-sm">{type.tagline}</p>
-            <p className="text-sm text-primary leading-snug m-0 mb-4">{type.body}</p>
-            <OSButton asLink to="#rsvp" variant="primary" size="md" onClick={handleScrollToRsvp}>
-                Find out yours
-            </OSButton>
+            <h3 className="text-lg @md:text-xl font-bold m-0 mb-3 leading-tight text-center text-balance">
+                {map.title}
+            </h3>
+
+            <div className="my-2">
+                <StarMap values={map.values} founderScore={map.founderScore} />
+            </div>
+
+            <p className="text-[10px] text-muted text-center m-0 mb-4 italic">Updated just now</p>
+
+            <div className="flex justify-center">
+                <OSButton asLink to="#rsvp" variant="primary" size="md" onClick={handleScrollToRsvp}>
+                    Find out yours
+                </OSButton>
+            </div>
         </div>
     )
 }
 
 export function PersonalityQuiz() {
-    // SSR-safe random pick: render a deterministic default, then randomize after mount.
-    const [type, setType] = useState<PersonalityType>(personalities[0])
+    const [map, setMap] = useState<StarMapSample>(sampleMaps[0])
 
     useEffect(() => {
-        const random = personalities[Math.floor(Math.random() * personalities.length)]
-        setType(random)
+        const random = sampleMaps[Math.floor(Math.random() * sampleMaps.length)]
+        setMap(random)
     }, [])
 
     return (
@@ -133,18 +229,20 @@ export function PersonalityQuiz() {
                 <div>
                     <div className="flex items-baseline gap-2 mb-3 flex-wrap">
                         <h2 className="text-2xl @lg:text-3xl font-bold m-0 leading-tight">
-                            Find out what your skill usage says about you
+                            See where your skill set actually leans
                         </h2>
                         <span className="text-[10px] uppercase tracking-widest font-bold bg-yellow text-primary rounded-sm px-1.5 py-0.5">
                             Beta
                         </span>
                     </div>
                     <p className="text-secondary max-w-xl mb-4 m-0 leading-relaxed">
-                        PostHog Work quietly watches how you work and assigns you to one of five types. Not in a creepy
-                        way.
+                        PostHog Work plots your activated skills onto a star map across seven everyday roles —
+                        Marketing, Operations, Product, Design, HR, Finance, and Legal — with a Founder score at the
+                        centre for the financial and decision-shaping work.
                     </p>
                     <p className="text-secondary max-w-xl mb-4 m-0 leading-relaxed">
-                        It is a personality quiz. It is also a productivity report. Mostly it is for sharing in your
+                        It refreshes every hour as you add or activate new skills, so your map shifts as your week does.
+                        It is a productivity report. It is also a personality test. Mostly it is for sharing in your
                         team Slack channel.
                     </p>
                     <p className="text-xs text-muted italic m-0">
@@ -153,7 +251,7 @@ export function PersonalityQuiz() {
                 </div>
 
                 <div className="w-full @lg:w-[22rem]">
-                    <FeaturedCard type={type} />
+                    <StarMapCard map={map} />
                 </div>
             </div>
         </section>
