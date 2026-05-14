@@ -232,7 +232,7 @@ export function PersonalityQuiz() {
                             See where your skill set actually leans
                         </h2>
                         <span className="text-[10px] uppercase tracking-widest font-bold bg-yellow text-primary rounded-sm px-1.5 py-0.5">
-                            Beta
+                            Research preview
                         </span>
                     </div>
                     <p className="text-secondary max-w-xl mb-4 m-0 leading-relaxed">
@@ -246,7 +246,7 @@ export function PersonalityQuiz() {
                         team Slack channel.
                     </p>
                     <p className="text-xs text-muted italic m-0">
-                        Available in private beta. Don't take it too seriously. We don't.
+                        Available in research preview. Don't take it too seriously. We don't.
                     </p>
                 </div>
 

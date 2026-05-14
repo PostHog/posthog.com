@@ -37,12 +37,12 @@ function HeroSection() {
                     PostHog Work
                 </span>
                 <span className="text-[10px] font-bold text-primary bg-yellow px-1.5 py-0.5 rounded-sm uppercase tracking-wider">
-                    Private beta
+                    Research preview
                 </span>
             </div>
 
             <h1 className="text-3xl @lg:text-4xl @2xl:text-5xl font-bold mb-6 text-balance leading-tight">
-                The Product OS for normies <span className="text-red dark:text-yellow">who aren't writing code</span>
+                The AI coworker for normies <span className="text-red dark:text-yellow">who aren't writing code</span>
             </h1>
 
             <p className="text-base @lg:text-lg text-secondary text-center mb-8 px-2 max-w-xl mx-auto leading-relaxed">
@@ -260,11 +260,11 @@ function WorkWaySection() {
     return (
         <section className="relative mb-12 @xl:mb-20 px-4 @xl:px-8">
             <SectionLabel>
-                What your current AI tools would{' '}
+                Collaboration even{' '}
                 <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
-                    like to say
-                </RoughAnnotation>
-                , if they could...
+                    we
+                </RoughAnnotation>{' '}
+                can get behind
             </SectionLabel>
 
             <div className="relative">
@@ -786,7 +786,7 @@ function InvitationCard() {
                     You are cordially invited to the
                 </h3>
                 <p className="text-xl @md:text-2xl font-bold mb-3 text-center text-red dark:text-yellow leading-tight font-rounded">
-                    PostHog Work private beta
+                    PostHog Work research preview
                 </p>
 
                 <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-[13px] m-0 mb-3">
@@ -913,7 +913,7 @@ const FAQ_ITEMS = [
         trigger: 'Is this available yet?',
         content: (
             <p>
-                PostHog Work is in private beta. Join the waitlist above and we'll let you know when your access is
+                PostHog Work is in research preview. Join the waitlist above and we'll let you know when your access is
                 ready. We're rolling out gradually — not "sign up and never hear from us again."
             </p>
         ),
