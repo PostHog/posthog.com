@@ -160,6 +160,14 @@ Your organization must approve AI data processing before you can enable AI summa
 
 </CalloutBox>
 
+### PostHog AI memory
+
+If your team has [PostHog AI memory](/docs/posthog-ai/edit-memory) configured, AI summaries automatically use that context – including saved facts about your company, product, users, and goals.
+
+For example, if your memory includes your company name, product name, or key metrics, the AI references them in your summaries instead of using generic descriptions.
+
+To configure memory, run the `/init` command in PostHog AI or edit memory directly in **Settings** > **AI**.
+
 ### Add context for the AI
 
 You can optionally provide context to guide the AI's focus in the **Context for the AI summary** field. For example, you might write "This is a daily revenue health check – focus on revenue drop-off and churn signals."
