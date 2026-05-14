@@ -8,6 +8,7 @@ import usePostHog from 'hooks/usePostHog'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { Fieldset } from 'components/OSFieldset'
 import Header from 'components/Team/Header'
+import TeamImage from 'components/Team/TeamImage'
 import { TeamMember } from 'components/People'
 import {
     StickerPineappleYes,
@@ -69,11 +70,81 @@ const PineapplePieChart = ({ percentage }: { percentage: number | false }) => {
     )
 }
 
+type RoadmapItem = { title: string; description: string; eta?: string }
+
+const inProgress: RoadmapItem[] = [
+    {
+        title: 'Reach Ben singularity',
+        description: 'Rename every PostHog employee to Ben. Drafting the HR change request now.',
+        eta: 'When HR caves',
+    },
+    {
+        title: 'Settle the Ben vs Benn vs Benjamin spelling war',
+        description: 'Currently blocked on consensus. A working group has been formed.',
+        eta: 'Q3 (optimistic)',
+    },
+    {
+        title: 'Standardize beard length across the team',
+        description: 'A ruler has been ordered. Clean-shaven Bens granted a 90-day grace period.',
+        eta: 'Q3',
+    },
+    {
+        title: 'Establish an official spirit beverage',
+        description: 'Leading candidates: tea, lager, espresso. Tasting underway.',
+        eta: 'TBD',
+    },
+]
+
+const underConsideration: RoadmapItem[] = [
+    {
+        title: "Petition Unicode to add a 'Ben' emoji",
+        description: 'Initial draft circulating. Visual reference: see header photo.',
+    },
+    {
+        title: 'Mandatory annual Ben census',
+        description: 'With matching nametags. Sponsor candidates being interviewed.',
+    },
+    {
+        title: 'At least one Ben on every Zoom call',
+        description: 'Pending PostHog policy review.',
+    },
+]
+
+const recentlyShipped: RoadmapItem[] = [
+    {
+        title: 'Matching baseball caps procured',
+        description: 'Five out of five Bens compliant. See evidence above.',
+    },
+    {
+        title: 'Inaugural Ben group photo',
+        description: 'Barbados, 2026. Filed under permanent record.',
+    },
+]
+
+const RoadmapList = ({ items }: { items: RoadmapItem[] }) => (
+    <ul className="list-none m-0 p-0 flex flex-col gap-4">
+        {items.map((item) => (
+            <li key={item.title} className="border-t first:border-t-0 border-primary pt-3 first:pt-0">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <strong className="font-semibold">{item.title}</strong>
+                    {item.eta && <span className="text-xs text-secondary">ETA: {item.eta}</span>}
+                </div>
+                <p className="m-0 text-sm">{item.description}</p>
+            </li>
+        ))}
+    </ul>
+)
+
 const TEAM_NAME = 'Ben'
 const TEAM_SLUG = 'team-ben'
 const TEAM_TAGLINE = 'A more perfect union of Bens.'
 const TEAM_DESCRIPTION =
     'The secret society of Bens. United by name, divided by spelling preferences. If you know, you know.'
+
+const teamImage = {
+    image: { data: { attributes: { url: '/images/team-ben.jpg' } } },
+    caption: 'The Bens, assembled at the 2026 offsite. Proof of life.',
+}
 
 const crestOptions = {
     fontSize: 'base',
@@ -175,8 +246,8 @@ export default function TeamBenPage(): JSX.Element {
         crestOptions,
         crestImage: undefined,
         miniCrest: undefined,
-        teamImage: undefined,
-        teamImageCaption: undefined,
+        teamImage,
+        teamImageCaption: teamImage.caption,
         slug: TEAM_SLUG,
     }
 
@@ -202,8 +273,8 @@ export default function TeamBenPage(): JSX.Element {
                             teamName={TEAM_NAME}
                             description={TEAM_DESCRIPTION}
                             tagline={TEAM_TAGLINE}
-                            teamImage={undefined}
-                            hasInProgress={false}
+                            teamImage={teamImage}
+                            hasInProgress={inProgress.length > 0}
                             handleChange={noop}
                             onBlur={noop}
                             values={headerValues}
@@ -263,8 +334,24 @@ export default function TeamBenPage(): JSX.Element {
                                 </div>
                             </div>
                         </div>
+
+                        <TeamImage values={headerValues} setFieldValue={noop} teamImage={teamImage} editing={false} />
                     </div>
                 </div>
+
+                <h2 id="roadmap">Roadmap</h2>
+
+                <Fieldset legend="What we're building">
+                    <RoadmapList items={inProgress} />
+                </Fieldset>
+
+                <Fieldset legend="Under consideration" className="mt-4">
+                    <RoadmapList items={underConsideration} />
+                </Fieldset>
+
+                <Fieldset legend="Recently shipped" className="mt-4 mb-8">
+                    <RoadmapList items={recentlyShipped} />
+                </Fieldset>
 
                 <Fieldset legend="Members">
                     <div className="@container flex-1">
