@@ -19,6 +19,8 @@ import {
 import QASwarmIcon from 'components/QASwarmIcon'
 import GithubCommentImage from '../../images/qa-swarm/github-comment.png'
 import CheckHogImage from '../../images/qa-swarm/check-hog.png'
+import HeroPrCommentImage from '../../images/qa-swarm/hero-pr-comment.png'
+import DemoThumbnailImage from '../../images/qa-swarm/demo-thumbnail.png'
 
 const PRODUCT_HANDLE = 'qa_swarm'
 
@@ -272,6 +274,33 @@ const waitlistBullets = [
     'Try it on real PRs instead of a canned demo.',
 ]
 
+const demoHighlights: { title: string; description: string }[] = [
+    {
+        title: 'Catch regressions',
+        description: 'before reviewers do, on every PR.',
+    },
+    {
+        title: 'Debug with production data',
+        description: 'logs, errors, events, replay, and LLM traces.',
+    },
+    {
+        title: 'Auto-fix and re-test',
+        description: 'until the branch is actually green.',
+    },
+    {
+        title: 'Loop on the freshest commit',
+        description: 'instead of wasting runs on stale code.',
+    },
+    {
+        title: 'Surface results where review happens',
+        description: 'PR comments, Slack, and a hosted preview.',
+    },
+    {
+        title: 'Plug into PostHog Code',
+        description: 'so testing rides alongside the rest of the platform.',
+    },
+]
+
 const themeClasses: Record<Theme, string> = {
     white: 'bg-light text-primary',
     purple: 'bg-gradient-to-br from-[#7B3EF3] via-[#6F37E8] to-[#5E2FCF] text-white',
@@ -396,8 +425,8 @@ const HeroImageStack = () => {
                 imgClassName="object-right-top"
             />
             <ScreenshotCard
-                src={GithubCommentImage}
-                alt="QA Swarm GitHub hero screenshot"
+                src={HeroPrCommentImage}
+                alt="QA Swarm MCP Report PR comment"
                 className="relative z-20 w-full max-w-5xl border border-white/25 shadow-[0_30px_120px_rgba(21,12,50,0.35)]"
             />
         </div>
@@ -472,30 +501,30 @@ const DebugVisual = () => {
     return (
         <div className="grid flex-1 gap-5 @2xl:grid-cols-[1fr_1fr]">
             <div className="grid gap-4">
-                <Card className="p-5 @2xl:p-6">
-                    <p className="mb-2 text-sm uppercase tracking-[0.18em] text-secondary">Agent reasoning</p>
+                <div className="rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm @2xl:p-6">
+                    <p className="mb-2 text-sm uppercase tracking-[0.18em] text-white/70">Agent reasoning</p>
                     <div className="grid gap-3">
                         {[
                             ['Observed failure', 'Position controls rendered for embedded survey'],
                             ['Hypothesis', 'Presentation state leaked between embedded and popover flows'],
                             ['Validation', 'Replay, logs, and editor state all point to the same branch change'],
                         ].map(([label, value]) => (
-                            <div key={label} className="rounded-xl border border-primary/10 bg-accent p-4">
-                                <p className="mb-1 text-sm font-semibold text-secondary">{label}</p>
-                                <p className="mb-0">{value}</p>
+                            <div key={label} className="rounded-xl border border-white/15 bg-white/10 p-4">
+                                <p className="mb-1 text-sm font-semibold text-white/70">{label}</p>
+                                <p className="mb-0 text-white">{value}</p>
                             </div>
                         ))}
                     </div>
-                </Card>
-                <FeatureGrid items={debugFeatures.slice(0, 2)} />
+                </div>
+                <FeatureGrid items={debugFeatures.slice(0, 2)} inverted />
             </div>
             <div className="grid gap-4">
-                <Card className="p-5 @2xl:p-6">
-                    <p className="mb-3 text-sm uppercase tracking-[0.18em] text-secondary">Debug workspace</p>
+                <div className="rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm @2xl:p-6">
+                    <p className="mb-3 text-sm uppercase tracking-[0.18em] text-white/70">Debug workspace</p>
                     <div className="grid gap-3 @2xl:grid-cols-[0.95fr_1.05fr]">
-                        <div className="rounded-xl border border-primary/10 bg-accent p-4">
-                            <p className="mb-2 font-semibold">Runtime error</p>
-                            <div className="rounded-lg bg-dark p-3 text-sm text-white font-mono">
+                        <div className="rounded-xl border border-white/15 bg-white/10 p-4">
+                            <p className="mb-2 font-semibold text-white">Runtime error</p>
+                            <div className="rounded-lg bg-[#1F2230] p-3 text-sm text-white font-mono">
                                 Error: position controls rendered for embedded survey
                                 <br />
                                 at SurveyEditor.handlePresentationChange
@@ -508,8 +537,8 @@ const DebugVisual = () => {
                             imgClassName="object-top"
                         />
                     </div>
-                </Card>
-                <FeatureGrid items={debugFeatures.slice(2)} />
+                </div>
+                <FeatureGrid items={debugFeatures.slice(2)} inverted />
             </div>
         </div>
     )
@@ -581,24 +610,24 @@ const HowItWorksVisual = () => {
         <div className="grid flex-1 gap-5 @2xl:grid-cols-[0.95fr_1.05fr]">
             <div className="grid gap-3">
                 {howItWorksSteps.map((step, index) => (
-                    <Card key={step} className="p-5">
+                    <div key={step} className="rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
                         <div className="flex gap-4">
-                            <div className="flex size-10 flex-shrink-0 items-center justify-center rounded-full bg-purple text-white font-semibold">
+                            <div className="flex size-10 flex-shrink-0 items-center justify-center rounded-full bg-white text-[#2D67E2] font-semibold">
                                 {index + 1}
                             </div>
-                            <p className="mb-0 pt-1">{step}</p>
+                            <p className="mb-0 pt-1 text-white">{step}</p>
                         </div>
-                    </Card>
+                    </div>
                 ))}
             </div>
-            <Card className="overflow-hidden bg-[#1F2230] text-white">
+            <div className="overflow-hidden rounded-2xl border border-white/15 bg-[#1F2230] text-white">
                 <div className="border-b border-white/10 px-5 py-4">
                     <p className="mb-0 text-sm uppercase tracking-[0.18em] text-white/70">GitHub Actions sketch</p>
                 </div>
                 <pre className="m-0 h-full overflow-auto p-5 text-xs @2xl:text-sm">
                     <code>{yamlSnippet}</code>
                 </pre>
-            </Card>
+            </div>
         </div>
     )
 }
@@ -704,6 +733,53 @@ const EcosystemVisual = () => {
     return <FeatureGrid items={ecosystemFeatures} inverted />
 }
 
+const DemoVisual = () => {
+    return (
+        <div className="grid flex-1 items-center gap-6 @2xl:grid-cols-[1.1fr_0.9fr]">
+            <div className="overflow-hidden rounded-2xl border border-white/15 bg-[#0E1018] shadow-[0_30px_80px_rgba(8,5,30,0.45)]">
+                <div className="flex items-center justify-center border-b border-white/10 px-5 py-3">
+                    <span className="font-serif text-2xl italic text-white">Demo</span>
+                </div>
+                <div className="relative">
+                    <img
+                        src={DemoThumbnailImage}
+                        alt="How Pawel uses PostHog's QA Swarm for testing PRs"
+                        className="block h-auto w-full"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="flex size-16 items-center justify-center rounded-full bg-white/95 shadow-lg @2xl:size-20">
+                            <div
+                                className="ml-1 size-0 border-y-[12px] border-l-[18px] border-y-transparent border-l-[#1F2230] @2xl:ml-1.5 @2xl:border-y-[16px] @2xl:border-l-[24px]"
+                                aria-hidden
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="flex items-center gap-3 px-4 py-3 text-white/80">
+                    <span className="text-xs font-mono">0:00</span>
+                    <div className="relative h-1 flex-1 rounded-full bg-white/15">
+                        <div className="absolute inset-y-0 left-0 w-[6%] rounded-full bg-white" />
+                    </div>
+                    <span className="text-xs font-mono">4:51</span>
+                </div>
+            </div>
+            <div>
+                <h3 className="mb-4 text-3xl text-white @2xl:text-4xl">How PostHog uses QA Swarm</h3>
+                <div className="grid gap-3">
+                    {demoHighlights.map(({ title, description }) => (
+                        <div key={title} className="flex items-start gap-3">
+                            <span className="mt-2 size-1.5 flex-shrink-0 rounded-full bg-white/80" aria-hidden />
+                            <p className="mb-0 text-white/85">
+                                <span className="font-semibold text-white">{title}</span> {description}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    )
+}
+
 const WaitlistVisual = () => {
     return (
         <div className="grid flex-1 items-center gap-6 @2xl:grid-cols-[0.95fr_1.05fr]">
@@ -782,11 +858,12 @@ const ProductionFlowsSlide = () => (
 )
 
 const DebugSlide = () => (
-    <ThemeSlide theme="white">
+    <ThemeSlide theme="purple">
         <SectionIntro
             eyebrow="Grounded debugging"
             title="Agents debug as they test"
             description="Each agent has live access to logs, errors, events, replay, and its own LLM traces. It forms a hypothesis, tests it, and shows the work."
+            inverted
         />
         <DebugVisual />
     </ThemeSlide>
@@ -816,11 +893,12 @@ const ResultsSlide = () => (
 )
 
 const HowItWorksSlide = () => (
-    <ThemeSlide theme="white">
+    <ThemeSlide theme="blue">
         <SectionIntro
             eyebrow="Technical flow"
             title="How it works"
             description="This prototype run used a forced exception after three MCP pagination steps so the agent had something real to detect, report, and auto-fix."
+            inverted
         />
         <HowItWorksVisual />
     </ThemeSlide>
@@ -859,6 +937,19 @@ const EcosystemSlide = () => (
             inverted
         />
         <EcosystemVisual />
+    </ThemeSlide>
+)
+
+const DemoSlide = () => (
+    <ThemeSlide theme="purple">
+        <SectionIntro
+            eyebrow="See it in action"
+            title="Watch a real run end to end"
+            description="A 5-minute walkthrough of QA Swarm catching a regression, debugging from production data, and looping until the PR is green."
+            inverted
+            compact
+        />
+        <DemoVisual />
     </ThemeSlide>
 )
 
@@ -928,6 +1019,7 @@ export default function QASwarm(): JSX.Element {
             { slug: 'comparison-summary', name: 'PostHog vs...', component: ComparisonSummarySlide },
             { slug: 'feature-comparison', name: 'Feature comparison', component: FeatureComparisonSlide },
             { slug: 'ecosystem', name: '10x better', component: EcosystemSlide },
+            { slug: 'demo', name: 'Demo', component: DemoSlide },
             { slug: 'waitlist', name: 'Join the waitlist', component: WaitlistSlide },
         ],
         exclude: [
@@ -952,6 +1044,7 @@ export default function QASwarm(): JSX.Element {
             'comparison-summary',
             'feature-comparison',
             'ecosystem',
+            'demo',
             'waitlist',
         ],
     })
