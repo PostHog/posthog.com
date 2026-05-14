@@ -161,7 +161,7 @@ function TreeMenuItem({
                     hover="background"
                 >
                     {hasChildren && (
-                        <motion.div animate={{ rotate: open ? 90 : 0 }}>
+                        <motion.div animate={{ rotate: open ? 90 : 0 }} data-sidebar-label>
                             <IconChevronRight className="size-4" />
                         </motion.div>
                     )}
