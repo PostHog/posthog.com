@@ -35,21 +35,15 @@ The package ships a `posthog-definitions` CLI that runs via `npx`.
 
 ## Authenticate
 
+Create a [personal API key](https://us.posthog.com/settings/user-api-keys) (EU: [eu.posthog.com](https://eu.posthog.com/settings/user-api-keys)) with read/write scopes for every resource you define. The full set: `dashboard`, `insight`, `feature_flag`, `action`, `endpoint`, `event_definition` (also covers property groups), `experiment` (also covers experiment holdouts), and `experiment_saved_metric`.
+
+Then set the key and your numeric project ID in a `.env` (or `.envrc`) file:
+
 ```bash
-npx posthog-definitions login
+POSTHOG_PERSONAL_API_KEY=phx_...
+POSTHOG_PROJECT_ID=000000
+# POSTHOG_HOST=https://eu.posthog.com   # optional, defaults to us.posthog.com
 ```
-
-This opens a browser, completes an OAuth flow, and prompts you to pick a project. Credentials are saved to `~/.config/posthog-definitions/config.json`.
-
-To switch projects without re-authenticating, run `npx posthog-definitions login --switch-project`. To clear credentials, run `npx posthog-definitions logout`.
-
-For CI, set `POSTHOG_PERSONAL_API_KEY` and `POSTHOG_PROJECT_ID` in the environment instead. They take precedence over the stored OAuth token.
-
-<CalloutBox icon="IconInfo" title="API key scopes" type="fyi">
-
-Personal API keys used by `apply` need read/write scopes for every resource you define. The full set: `dashboard`, `insight`, `feature_flag`, `action`, `endpoint`, `event_definition` (also covers property groups), `experiment` (also covers experiment holdouts), and `experiment_saved_metric`. Create or update keys at [Personal API Keys](https://us.posthog.com/settings/user-api-keys).
-
-</CalloutBox>
 
 ## Define a dashboard
 
