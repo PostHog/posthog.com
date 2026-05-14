@@ -124,6 +124,7 @@ interface ReaderViewProps {
     showQuestions?: boolean
     showAbout?: boolean
     sourceInstanceName?: string
+    defaultNavVisible?: boolean
     /**
      * When true, wraps the article column with a white background, border, and rounded corners.
      * Defaults to false (transparent, no border) to match the Viewer aesthetic.
@@ -444,13 +445,14 @@ export default function ReaderView({
     showQuestions = true,
     showAbout = false,
     sourceInstanceName,
+    defaultNavVisible,
     chrome = false,
     menuTabs,
     productSelect,
     hideMenu = false,
 }: ReaderViewProps) {
     return (
-        <ReaderViewProvider>
+        <ReaderViewProvider defaultNavVisible={defaultNavVisible}>
             <ReaderViewContent
                 body={body}
                 title={title}

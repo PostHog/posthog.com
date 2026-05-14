@@ -31,7 +31,14 @@ export default function HomeTest() {
                 description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
                 image="/images/og/default.png"
             />
-            <ReaderView hideTitle proseSize="lg" showQuestions={false} hideRightSidebar hideMenu>
+            <ReaderView
+                hideTitle
+                proseSize="lg"
+                showQuestions={false}
+                hideRightSidebar
+                hideMenu
+                defaultNavVisible={false}
+            >
                 <div className="space-y-12">
                     <Hero />
                     <Customers />

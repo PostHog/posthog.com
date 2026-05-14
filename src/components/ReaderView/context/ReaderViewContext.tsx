@@ -28,7 +28,13 @@ const readPersistedPinned = (): boolean | null => {
     return null
 }
 
-export function ReaderViewProvider({ children }: { children: React.ReactNode }) {
+export function ReaderViewProvider({
+    children,
+    defaultNavVisible,
+}: {
+    children: React.ReactNode
+    defaultNavVisible?: boolean
+}) {
     const { appWindow } = useWindow()
     // @2xl breakpoint for sidebar visibility (equivalent to @2xl/app-reader used in CSS)
     const isWideEnoughForSidebar = appWindow?.size?.width && appWindow?.size?.width >= 672 // 42rem = 672px
@@ -36,6 +42,7 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
     // Persisted to localStorage so the choice survives reloads. On first visit
     // (or with no stored value) it falls back to the width-based default.
     const [isNavVisible, setIsNavVisible] = useState<boolean>(() => {
+        if (defaultNavVisible !== undefined) return defaultNavVisible
         const persisted = readPersistedPinned()
         if (persisted !== null) return persisted
         return !!isWideEnoughForSidebar
