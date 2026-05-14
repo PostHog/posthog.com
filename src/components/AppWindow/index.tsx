@@ -322,6 +322,15 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         })
     }
 
+    const toggleMaximize = () => {
+        if (item.fixedSize) return
+        if (isMaximized()) {
+            collapseWindow()
+        } else {
+            expandWindow()
+        }
+    }
+
     const collapseWindow = () => {
         const isBeyondViewport = beyondViewport(previousSize)
         const newSize = isBeyondViewport
@@ -782,6 +791,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         <div
                                             className="group absolute top-2 left-1/2 -translate-x-1/2 cursor-move touch-none z-10"
                                             onPointerDown={(e) => controls.start(e)}
+                                            onDoubleClick={toggleMaximize}
                                         >
                                             <IconDrag className="size-5 rotate-90 opacity-25 group-hover:opacity-50" />
                                         </div>
