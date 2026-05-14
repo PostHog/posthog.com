@@ -115,7 +115,7 @@
   .built-for img { height: 16px; opacity: 0.95; display: block; }
 
   .hero-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 24px;
     align-items: center;
   }
   .eyebrow {
@@ -211,12 +211,6 @@
     text-transform: uppercase;
     text-shadow: 0 1px 0 rgba(255,255,255,0.5);
   }
-  .scratch-surface::after {
-    content: "👆";
-    position: absolute; right: 14px; top: 50%;
-    transform: translateY(-50%) rotate(-14deg);
-    font-size: 22px;
-  }
   .invite-card:hover .scratch-surface { filter: brightness(1.04); }
   .invite-meta {
     display: flex; gap: 14px;
@@ -238,6 +232,7 @@
   .hero-mascot {
     width: 100%; height: auto; display: block;
     filter: drop-shadow(4px 6px 0 rgba(21,21,21,0.12));
+    margin: -16px -4px;
   }
   /* Sticker callouts (Caveat, NOT PostHog's licensed Squeak font) */
   .sticker {
@@ -1158,10 +1153,12 @@
         <details>
           <summary>What counts as an "enterprise" referral?</summary>
           <p>
-            A company that signs an annual contract for <em>100+ seats</em>. Verified by
-            Pyramide<sup>*</sup>'s compliance hedgehog before payout clears. There is no upper cap —
-            refer fifty enterprises, earn fifty fortunes. Refer Microsoft and we will personally
-            send you a fruit basket.
+            Officially: a company signing an annual contract for <em>100+ seats</em>. Unofficially:
+            <em>accelerator cohorts</em> (every portfolio co counts separately — yes, that means
+            one YC batch is thirty enterprise referrals in a trench coat), anyone with "VP",
+            "Chief", or "Director of Procurement" in their title, and — somehow —
+            <em>that guy with the podcast</em>. Verified by Pyramide<sup>*</sup>'s compliance hedgehog.
+            No upper cap. Refer Microsoft and we will personally send you a fruit basket.
           </p>
         </details>
         <details>
@@ -1201,8 +1198,8 @@
       <h2>Your downline isn't going to recruit itself.</h2>
       <p>(It will, actually — that's the whole pitch — but you have to start the chain.)</p>
       <div class="ctas">
-        <a href="#" class="btn btn-yellow btn-lg">Generate my code — free</a>
-        <a href="#" class="btn btn-lg">Talk to your upline →</a>
+        <a href="https://app.pyramide.io/claim" class="btn btn-yellow btn-lg">Generate my code — free</a>
+        <a href="mailto:brad@pyramide.io" class="btn btn-lg">Talk to your upline →</a>
       </div>
     </div>
   </section>
