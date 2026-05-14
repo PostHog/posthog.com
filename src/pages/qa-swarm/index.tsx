@@ -125,29 +125,6 @@ const resultFeatures: SlideFeature[] = [
     },
 ]
 
-const moatFeatures: SlideFeature[] = [
-    {
-        title: 'Product analytics chooses the path',
-        description: 'The swarm starts from what users do in production, not an abstract notion of coverage.',
-        icon: IconTrends,
-    },
-    {
-        title: 'Session replay records every run',
-        description: 'Agent behavior is inspectable instead of hidden behind an opaque “AI tested this” label.',
-        icon: IconRewindPlay,
-    },
-    {
-        title: 'Error tracking grounds the diagnosis',
-        description: 'When something breaks, the same runtime evidence engineers already trust is right there.',
-        icon: IconWarning,
-    },
-    {
-        title: 'LLM Analytics traces the swarm itself',
-        description: 'Every tool call, every decision, and every agent run is observable in the same system.',
-        icon: IconSparkles,
-    },
-]
-
 const ecosystemFeatures: SlideFeature[] = [
     {
         title: 'Session replay',
@@ -536,28 +513,29 @@ const DebugVisual = () => {
 
 const LoopVisual = () => {
     return (
-        <div className="grid flex-1 gap-6 @2xl:grid-cols-[1.05fr_0.95fr]">
-            <div className="grid gap-4">
-                <div className="grid grid-cols-2 gap-4">
+        <div className="grid flex-1 gap-6 @2xl:grid-cols-[1fr_0.95fr]">
+            <div className="rounded-3xl bg-white/10 p-6 backdrop-blur-sm @2xl:p-8">
+                <div className="mb-6 flex items-center gap-3 text-white/80">
+                    <QASwarmIcon className="size-8" />
+                    <span className="text-lg font-semibold">One loop, not a pile of dashboards</span>
+                </div>
+                <div className="grid gap-4">
                     {[
-                        ['Detect', 'Run the paths users depend on.'],
-                        ['Hypothesize', 'Classify the failure and test a likely cause.'],
-                        ['Fix', 'Patch the branch when the path is clear.'],
-                        ['Re-test', 'Verify the regression is actually gone.'],
-                    ].map(([label, copy], index) => (
-                        <div key={label} className="rounded-2xl bg-white/12 p-5 backdrop-blur-sm">
-                            <span className="mb-3 inline-flex size-8 items-center justify-center rounded-full bg-white/20 text-sm font-semibold">
-                                {index + 1}
-                            </span>
-                            <h3 className="mb-2 text-2xl">{label}</h3>
-                            <p className="mb-0 text-white/80">{copy}</p>
+                        ['1. Detect', 'Run the product paths users depend on most.'],
+                        ['2. Debug', 'Use runtime evidence to explain what broke and why.'],
+                        ['3. Fix', 'Patch the branch when the fix is clear enough to verify.'],
+                        ['4. Re-test', 'Start over on the newest commit until the PR is actually green.'],
+                    ].map(([label, copy]) => (
+                        <div
+                            key={label}
+                            className="flex items-start justify-between gap-4 border-b border-white/15 pb-4 last:border-b-0 last:pb-0"
+                        >
+                            <h3 className="mb-0 min-w-[110px] text-lg font-semibold text-white @2xl:text-xl">
+                                {label}
+                            </h3>
+                            <p className="mb-0 max-w-[420px] text-white/78">{copy}</p>
                         </div>
                     ))}
-                </div>
-                <div className="rounded-2xl bg-white/12 p-5 backdrop-blur-sm">
-                    <p className="mb-0 text-xl font-semibold">
-                        New push? Cancel the stale run and start again on the latest commit.
-                    </p>
                 </div>
             </div>
             <FeatureGrid items={loopFeatures} inverted />
@@ -590,48 +568,6 @@ const ResultsVisual = () => {
                     </div>
                 </Card>
             </div>
-        </div>
-    )
-}
-
-const DataLayerVisual = () => {
-    const nodes = [
-        ['Product analytics', 'top-0 left-1/2 -translate-x-1/2'],
-        ['Session replay', 'right-0 top-1/2 -translate-y-1/2'],
-        ['LLM Analytics', 'bottom-0 left-1/2 -translate-x-1/2'],
-        ['Error tracking', 'left-0 top-1/2 -translate-y-1/2'],
-    ]
-
-    return (
-        <div className="grid flex-1 gap-6 @2xl:grid-cols-[1fr_0.95fr]">
-            <div className="flex items-center justify-center">
-                <div className="relative aspect-square w-full max-w-[460px]">
-                    <div className="absolute inset-[27%] flex flex-col items-center justify-center rounded-full bg-white text-[#6F37E8] shadow-2xl">
-                        <QASwarmIcon className="mb-3 size-16" />
-                        <h3 className="mb-1 text-3xl text-primary">QA Swarm</h3>
-                        <p className="mb-0 max-w-[220px] text-center text-secondary">
-                            Agents with product context and fully traceable runs.
-                        </p>
-                    </div>
-                    {nodes.map(([label, position]) => (
-                        <div
-                            key={label}
-                            className={`absolute w-40 rounded-2xl bg-white/12 px-4 py-4 text-center backdrop-blur-sm ${position}`}
-                        >
-                            <p className="mb-0 font-semibold">{label}</p>
-                        </div>
-                    ))}
-                    <div className="absolute inset-0 pointer-events-none">
-                        <svg viewBox="0 0 100 100" className="size-full">
-                            <path d="M50 18 L50 34" stroke="currentColor" strokeWidth="1.4" className="text-white/35" />
-                            <path d="M82 50 L66 50" stroke="currentColor" strokeWidth="1.4" className="text-white/35" />
-                            <path d="M50 82 L50 66" stroke="currentColor" strokeWidth="1.4" className="text-white/35" />
-                            <path d="M18 50 L34 50" stroke="currentColor" strokeWidth="1.4" className="text-white/35" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <FeatureGrid items={moatFeatures} inverted />
         </div>
     )
 }
@@ -875,18 +811,6 @@ const ResultsSlide = () => (
     </ThemeSlide>
 )
 
-const DataLayerSlide = () => (
-    <ThemeSlide theme="purple">
-        <SectionIntro
-            eyebrow="The moat"
-            title="Built on the PostHog data layer"
-            description="QA Swarm is not a standalone tool. Every test is informed by analytics, replay, errors, flags, and fully traceable agent runs."
-            inverted
-        />
-        <DataLayerVisual />
-    </ThemeSlide>
-)
-
 const HowItWorksSlide = () => (
     <ThemeSlide theme="white">
         <SectionIntro
@@ -996,20 +920,30 @@ export default function QASwarm(): JSX.Element {
             { slug: 'debug', name: 'Debug', component: DebugSlide },
             { slug: 'loop', name: 'Loops until green', component: LoopSlide },
             { slug: 'results', name: 'Results', component: ResultsSlide },
-            { slug: 'data-layer', name: 'Data layer', component: DataLayerSlide },
             { slug: 'how-it-works', name: 'How it works', component: HowItWorksSlide },
             { slug: 'comparison-summary', name: 'PostHog vs...', component: ComparisonSummarySlide },
             { slug: 'feature-comparison', name: 'Feature comparison', component: FeatureComparisonSlide },
             { slug: 'ecosystem', name: '10x better', component: EcosystemSlide },
             { slug: 'waitlist', name: 'Join the waitlist', component: WaitlistSlide },
         ],
-        include: [
+        exclude: [
+            'overview',
+            'customers',
+            'features',
+            'posthog-on-posthog',
+            'videos',
+            'answers',
+            'pricing',
+            'docs',
+            'pairs-with',
+            'getting-started',
+        ],
+        order: [
             'hero',
             'production-flows',
             'debug',
             'loop',
             'results',
-            'data-layer',
             'how-it-works',
             'comparison-summary',
             'feature-comparison',
