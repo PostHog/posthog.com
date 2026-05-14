@@ -2685,6 +2685,10 @@ export const docsMenu = {
                             url: '/docs/advanced/browser-extension',
                         },
                         {
+                            name: 'Definitions / Infrastructure as code',
+                            url: '/docs/advanced/infra-as-code',
+                        },
+                        {
                             name: 'Enabling beta features',
                             url: '/docs/getting-started/enable-betas',
                         },
@@ -6878,12 +6882,6 @@ export const docsMenu = {
                     url: '/docs/endpoints/internal-tools',
                     icon: 'IconWrench',
                     color: 'orange',
-                },
-                {
-                    name: 'CLI usage',
-                    url: '/docs/endpoints/cli',
-                    icon: 'IconTerminal',
-                    color: 'green',
                 },
                 {
                     name: 'OpenAPI SDK generation',
