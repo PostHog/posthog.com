@@ -38,7 +38,7 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
         <RadixAccordion.Header className="flex">
             <RadixAccordion.Trigger
                 className={`group flex flex-1 items-center justify-between px-2 py-1 text-sm leading-none select-none ${
-                    skin ? 'first:rounded-t last:rounded-b bg-accent hover:bg-accent' : ''
+                    skin ? 'bg-accent hover:bg-accent' : ''
                 } text-primary outline-none ${className}`}
                 {...props}
                 ref={forwardedRef}
@@ -128,7 +128,7 @@ export const Accordion = ({
 
     return (
         <RadixAccordion.Root
-            className={`${skin ? 'rounded border border-primary' : ''} ${className}`}
+            className={`${skin ? 'rounded border border-primary overflow-hidden' : ''} ${className}`}
             type={type as any}
             collapsible
             defaultValue={calculatedDefaultValue as any}
