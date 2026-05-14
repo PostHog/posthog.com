@@ -115,93 +115,65 @@ const skills: SkillCardProps[] = [
         iconBg: 'bg-orange/10',
     },
     {
-        title: 'Weekly Metrics Digest',
-        type: 'Reporting',
-        tagline: 'You are not, in fact, writing this by hand again.',
-        description:
-            'Pulls product metrics from PostHog every week, compares to prior week, flags anomalies, posts to Slack.',
-        sideEffect: 'Reclaims about 38 minutes per week. You will spend 12 of them wondering what to do.',
-        icon: (
-            <svg className="size-5 text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-            </svg>
-        ),
-        iconBg: 'bg-green/10',
-    },
-    {
-        title: 'Release Notes Generator',
-        type: 'Product',
-        tagline: 'PRs in, prose out.',
-        description: 'Reads merged PRs, groups by type, drafts external-facing release notes, posts to your channel.',
-        sideEffect: 'Three people will compliment you on the changelog. You will accept the compliments.',
-        icon: (
-            <svg className="size-5 text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="16" y1="13" x2="8" y2="13" />
-                <line x1="16" y1="17" x2="8" y2="17" />
-            </svg>
-        ),
-        iconBg: 'bg-green/10',
-    },
-    {
-        title: 'Support Triage',
-        type: 'Customer',
-        tagline: 'Reads tickets faster than you’d like to admit.',
-        description:
-            'Reads overnight tickets, categorizes by urgency and type, drafts first responses for the top five.',
-        sideEffect: 'First response times drop ~60%. CSAT improves. CS leads get raises. You do not. Yet.',
-        icon: (
-            <svg className="size-5 text-purple" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-        ),
-        iconBg: 'bg-purple/10',
-    },
-    {
-        title: 'Feature Usage Report',
-        type: 'Product',
-        tagline: 'Tells you which features people actually use.',
-        description:
-            'Queries PostHog for feature adoption by cohort. Flags features your ICP isn’t touching. Compares against your roadmap.',
-        sideEffect: 'You will have to have a conversation about feature number twelve.',
-        icon: (
-            <svg className="size-5 text-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="18" y1="20" x2="18" y2="10" />
-                <line x1="12" y1="20" x2="12" y2="4" />
-                <line x1="6" y1="20" x2="6" y2="14" />
-            </svg>
-        ),
-        iconBg: 'bg-yellow/10',
-    },
-    {
-        title: 'Financial Anomaly Detector',
+        title: 'Board Metrics Pack',
         type: 'Finance',
-        tagline: 'Catches the spike before your CFO does.',
+        tagline: 'MRR, ARR, NRR — and the customers who pay but don’t use it.',
         description:
-            'Pulls Stripe revenue, MRR, and churn. Identifies anomalies vs. rolling average. Suggests possible causes in plain English.',
-        sideEffect: 'Your CFO will be unsettled by your sudden composure on numbers.',
+            'Builds a board-ready monthly pack from Stripe and PostHog, plus the "quiet revenue" overlay that flags paying customers with no product usage.',
+        sideEffect: 'Your CFO stops asking for the spreadsheet on the 28th.',
         icon: (
             <svg className="size-5 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="12" y1="1" x2="12" y2="23" />
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                <rect x="2" y="7" width="20" height="14" rx="2" />
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
             </svg>
         ),
         iconBg: 'bg-teal/10',
     },
     {
-        title: 'Customer Feedback Synthesis',
+        title: 'Churn Risk',
         type: 'Customer',
-        tagline: 'Stops being 400 quotes. Starts being three themes.',
+        tagline: 'Find the accounts going quiet before they go.',
         description:
-            'Aggregates Intercom, Zendesk, and review data. Surfaces recurring themes. Ranks by frequency and sentiment.',
-        sideEffect: 'You will discover that everyone has been saying the same thing for six months.',
+            'Flags paying customers whose product usage has dropped, scores each one out of 100, and estimates revenue at risk.',
+        sideEffect: 'Your renewal calls get a lot less surprising.',
+        icon: (
+            <svg className="size-5 text-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+        ),
+        iconBg: 'bg-red/10',
+    },
+    {
+        title: 'Customer Review',
+        type: 'Customer',
+        tagline: 'A 360 on one account, before the call.',
+        description:
+            'Pulls identity, top events, support and sales touches, MRR, recent session summaries, and ICP fit into a paste-ready brief.',
+        sideEffect: 'You will sound briefed. Because you are.',
+        icon: (
+            <svg className="size-5 text-purple" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M20 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M4 21v-2a4 4 0 0 1 4-4h4" />
+                <circle cx="10" cy="7" r="4" />
+                <polyline points="17 11 19 13 23 9" />
+            </svg>
+        ),
+        iconBg: 'bg-purple/10',
+    },
+    {
+        title: 'Define ICP',
+        type: 'Growth',
+        tagline: 'Stops re-explaining who your customer is, forever.',
+        description:
+            'Captures your ideal customer profile and saves it so every other skill — customer reviews, PMF tracking, power users — uses the same definition.',
+        sideEffect: 'Two skills later, the receipts pay off.',
         icon: (
             <svg className="size-5 text-salmon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="18" cy="18" r="3" />
-                <circle cx="6" cy="6" r="3" />
-                <path d="M13 6h3a2 2 0 0 1 2 2v7" />
-                <line x1="6" y1="9" x2="6" y2="21" />
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="6" />
+                <circle cx="12" cy="12" r="2" />
             </svg>
         ),
         iconBg: 'bg-salmon/10',

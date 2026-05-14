@@ -223,9 +223,9 @@ function PolaroidItem({ item }: { item: InventoryItem }) {
 const scheduledTasks = [
     { time: 'Every Mon 9am', label: 'Competitor changelog check', color: 'text-orange' },
     { time: 'Every Fri 4pm', label: 'Important Slack threads → #weekly-digest', color: 'text-blue' },
-    { time: 'Every Fri 5pm', label: 'Weekly metrics digest → Slack', color: 'text-green' },
+    { time: 'Monthly day 1', label: 'Board metrics pack → #finance', color: 'text-teal' },
     { time: 'Monthly day 1', label: 'PMF survey check + power user cohort', color: 'text-red' },
-    { time: 'On PR merge', label: 'Draft release notes → #releases', color: 'text-purple' },
+    { time: 'Every morning', label: 'Churn-risk watchlist → #cs', color: 'text-purple' },
 ]
 
 function ScheduleCallout() {
@@ -353,8 +353,8 @@ function MockScheduleView() {
     const tasks = [
         { schedule: 'Mon 9:00am', name: 'Competitor Changelog Tracker', status: 'completed', lastRun: '2h ago' },
         { schedule: 'Fri 4:00pm', name: 'Important Slack Threads', status: 'completed', lastRun: '4h ago' },
-        { schedule: 'Fri 5:00pm', name: 'Weekly Metrics Digest', status: 'pending', lastRun: 'Tomorrow' },
-        { schedule: 'On PR merge', name: 'Release Notes Generator', status: 'active', lastRun: 'Watching...' },
+        { schedule: 'Day 1 monthly', name: 'Board Metrics Pack', status: 'pending', lastRun: 'Tomorrow' },
+        { schedule: 'Every morning', name: 'Churn Risk', status: 'active', lastRun: 'Watching...' },
     ]
     const statusColors: Record<string, string> = {
         completed: 'text-green',
@@ -438,7 +438,7 @@ function MockTeamView() {
         <div className="p-4 @xl:p-8">
             <h3 className="text-2xl font-bold mb-2">The opposite of a 1:1</h3>
             <p className="text-secondary mb-4">
-                Shared skills, shared context. One person builds the support triage skill; eight people use it.
+                Shared skills, shared context. One person builds the customer review skill; eight people use it.
             </p>
             <div
                 data-scheme="secondary"
@@ -530,35 +530,35 @@ function Features() {
 
 const useCases = [
     {
-        title: 'Weekly metrics digest',
+        title: 'PMF tracker',
         badge: 'For: PMs',
         badgeColor: 'bg-blue/15 text-blue',
-        before: 'You, at 3:47pm on Friday, pasting numbers into a Slack thread nobody really reads.',
-        after: 'Anomalies get flagged in #product-updates. You do literally anything else.',
+        before: 'You, on Monday morning, wondering if anyone actually loves the thing you shipped.',
+        after: 'The PMF score sits in a dashboard. The "very disappointed" users are already in a cohort.',
         rotation: '-rotate-2',
     },
     {
-        title: 'Release notes',
-        badge: 'For: PMs + PMMs',
+        title: 'Define ICP',
+        badge: 'For: Founders + PMMs',
         badgeColor: 'bg-green/15 text-green',
-        before: 'Someone asks "did anyone write the changelog?" at 6:30pm on launch day.',
-        after: 'The changelog gets written before anyone thought to ask. Three people compliment it.',
+        before: 'Three teammates, three different mental models of "our customer".',
+        after: 'One ICP file every skill reads from. Including the ones you write next month.',
         rotation: 'rotate-1',
     },
     {
-        title: 'Support triage',
+        title: 'Churn risk',
         badge: 'For: Customer Success',
         badgeColor: 'bg-orange/15 text-orange',
-        before: '47 tickets, all marked "urgent" because the customer used the urgent button.',
-        after: '47 tickets, sorted into the ones that actually are. First responses drafted.',
+        before: 'Renewal call Monday. You find out Friday.',
+        after: 'A watchlist in #cs, scored 0–100. Renewal calls stop being ambushes.',
         rotation: '-rotate-1',
     },
     {
-        title: 'Financial summary',
+        title: 'Board metrics pack',
         badge: 'For: Finance + Founders',
         badgeColor: 'bg-purple/15 text-purple',
         before: 'Your CEO Slacks you "how is MRR" at 11pm on Sunday. Again.',
-        after: 'Your CEO gets it sent to him at 10:59pm. No matter if it wakes him up.',
+        after: 'The pack lands in #finance on day 1, every month. Quiet-revenue customers flagged.',
         rotation: 'rotate-2',
     },
 ]
