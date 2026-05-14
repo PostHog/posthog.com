@@ -141,6 +141,7 @@ interface ReaderViewProps {
      * `ProductSwitcher` from `components/Products/ReaderViewProduct`.
      */
     productSelect?: React.ReactNode
+    hideMenu?: boolean
 }
 
 interface BackgroundImageOption {
@@ -446,6 +447,7 @@ export default function ReaderView({
     chrome = false,
     menuTabs,
     productSelect,
+    hideMenu = false,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -476,6 +478,7 @@ export default function ReaderView({
                 chrome={chrome}
                 menuTabs={menuTabs}
                 productSelect={productSelect}
+                hideMenu={hideMenu}
             >
                 {children}
             </ReaderViewContent>
@@ -1375,6 +1378,7 @@ function ReaderViewContent({
     chrome = false,
     menuTabs,
     productSelect,
+    hideMenu = false,
 }: ReaderViewProps) {
     const { compact, websiteMode } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
@@ -1479,7 +1483,7 @@ function ReaderViewContent({
                         contentRef={onSearch ? undefined : contentRef}
                         currentPath={appWindow?.path}
                     >
-                        {leftSidebar || <Menu parent={parent as MenuItem} />}
+                        {leftSidebar || (!hideMenu && <Menu parent={parent as MenuItem} />)}
                     </LeftSidebar>
                 )}
 

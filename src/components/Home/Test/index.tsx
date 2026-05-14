@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
-import Viewer from 'components/Viewer'
+import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
-import usePostHog from 'hooks/usePostHog'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
 import Hero from 'components/Home/Sections/Hero'
@@ -17,7 +16,6 @@ import Customers from '../Customers'
 export default function HomeTest() {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
-    const posthog = usePostHog()
 
     useEffect(() => {
         if (appWindow) {
@@ -33,15 +31,7 @@ export default function HomeTest() {
                 description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
                 image="/images/og/default.png"
             />
-            <Viewer
-                maxWidth={900}
-                cta={{
-                    url: `https://${
-                        posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
-                    }.posthog.com/signup`,
-                    label: 'Get started - free',
-                }}
-            >
+            <ReaderView hideTitle proseSize="lg" showQuestions={false} hideRightSidebar hideMenu>
                 <div className="space-y-12">
                     <Hero />
                     <Customers />
@@ -53,7 +43,7 @@ export default function HomeTest() {
                     <ShamelessCTASection />
                     <HitCounter />
                 </div>
-            </Viewer>
+            </ReaderView>
         </>
     )
 }
