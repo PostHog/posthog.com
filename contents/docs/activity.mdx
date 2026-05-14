@@ -37,49 +37,58 @@ The activity tab also has multiple views:
 
 5. **Jump to timestamp:** Press `J` then `T` to quickly navigate to events around a specific point in time.
 
-## Terminal live events (posthog-live)
+## Terminal live events
 
-You can also view live PostHog events directly in your terminal using the `posthog-live` CLI tool.
-
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_17_T19_57_16_416_Z_dd40e49aea.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_17_T19_57_16_416_Z_dd40e49aea.png"
-  alt="`posthog-live` CLI tool showing live events in the terminal"
-  classes="rounded"
-/>
+You can view live PostHog events directly in your terminal using the PostHog CLI.
 
 ### Installation
 
-Download and install for macOS (Apple Silicon):
+Install the CLI via npm:
 
 ```bash
-curl -L https://github.com/PostHog/posthog/releases/download/posthog-live-latest/posthog-live-darwin-arm64 -o posthog-live && chmod +x posthog-live
+npm install -g @posthog/cli
 ```
-
-For other platforms (Linux, Intel Mac), see the [GitHub releases page](https://github.com/PostHog/posthog/releases?q=posthog-live&expanded=true).
 
 ### Usage
 
-Run the tool and authenticate via your browser:
+Authenticate and start the livestream:
 
 ```bash
-./posthog-live
+posthog-cli login
+posthog-cli livestream
 ```
+
+By default, the command opens an interactive TUI (terminal user interface). The TUI shows a scrollable list of events with real-time stats like events per minute and total count.
 
 Filter events using CLI flags:
 
 ```bash
-./posthog-live --event-type "$pageview,$autocapture" --distinct-id "user_123"
+posthog-cli livestream --event-type "$pageview" --distinct-id "user_123"
 ```
+
+For JSON output (useful for piping to other tools), use the `--json` flag:
+
+```bash
+posthog-cli livestream --json
+```
+
+JSON mode is also used automatically when piping output or using the `--geo` flag.
 
 ### Keyboard shortcuts
 
-| Key     | Action                    |
-| ------- | ------------------------- |
-| `p`     | Pause/resume event stream |
-| `f`     | Set event type filter     |
-| `d`     | Set distinct ID filter    |
-| `c`     | Set property columns      |
-| `Enter` | Open event detail view    |
-| `?`     | Toggle help               |
-| `q`     | Quit                      |
+| Key         | Action                    |
+| ----------- | ------------------------- |
+| `j` / `↓`   | Move cursor down          |
+| `k` / `↑`   | Move cursor up            |
+| `Enter`     | View event details        |
+| `p`         | Pause/resume event stream |
+| `f`         | Filter by event type      |
+| `d`         | Filter by distinct ID     |
+| `x`         | Clear all events          |
+| `?`         | Toggle help               |
+| `Esc`       | Close detail/filter view  |
+| `q`         | Quit                      |
+
+### Legacy tool (posthog-live)
+
+A standalone `posthog-live` binary is also available for download from the [GitHub releases page](https://github.com/PostHog/posthog/releases?q=posthog-live&expanded=true). The CLI version above is recommended for most users.
