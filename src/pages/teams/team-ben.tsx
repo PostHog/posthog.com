@@ -7,6 +7,7 @@ import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { Fieldset } from 'components/OSFieldset'
+import Link from 'components/Link'
 import Header from 'components/Team/Header'
 import TeamImage from 'components/Team/TeamImage'
 import { TeamMember } from 'components/People'
@@ -358,6 +359,14 @@ export default function TeamBenPage(): JSX.Element {
                 <Fieldset legend="Recently shipped" className="mt-4 mb-8">
                     <RoadmapList items={recentlyShipped} />
                 </Fieldset>
+
+                <h2>Handbook</h2>
+                <h3>Slack channel</h3>
+                <p>
+                    All Ben-related business occurs in{' '}
+                    <Link to="https://posthog.slack.com/messages/club-benquin">#club-benquin</Link>. Membership is
+                    self-evident.
+                </p>
 
                 <Fieldset legend="Members">
                     <div className="@container flex-1">
