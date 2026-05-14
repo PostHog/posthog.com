@@ -2,15 +2,28 @@ Personal API keys can enable full access to your account, like logging in with y
 
 #### How to obtain a personal API key
 
-1. Go to the [Personal API keys](https://us.posthog.com/settings/user-api-keys) section in your account settings
+1. Go to the [Personal API keys](https://app.posthog.com/settings/user-api-keys) section in your account settings
 
 2. Click **+ Create a personal API Key**.
 
 3. Give your key a label - this is just for you, usually to describe the key's purpose.
 
-4. Choose the scopes for your key. We recommended selecting only the scopes required for the API endpoints you really need. This is a security best practice. You can always modify the scopes later if you need to.
+4. Choose the scopes for your key. You can select a preset for common use cases or manually choose individual scopes. We recommend selecting only the scopes you need. You can always modify them later.
 
 5. At the top of the list, you should see your brand new key. **Immediately** copy its value, as you'll **never** see it again after refreshing the page.
+
+Available scope presets include:
+
+- **Local feature flag evaluation** - Read access to feature flags
+- **Source map upload** - Organization read and error tracking write access
+- **Zapier integration** - Scopes needed for the Zapier integration
+- **n8n integration** - Scopes needed for the n8n integration
+- **Performing analytics queries** - Read access to run queries
+- **Endpoint execution** - Read access to endpoints
+- **Project & user management** - Project write and organization member management
+- **MCP Server** - Scopes for the PostHog MCP server
+- **Read-only access** - Read access to all scopes
+- **All access** - Full read and write access to everything
 
 You can create up to 10 personal API keys. Personal API keys are deleted when a user is deleted.
 
