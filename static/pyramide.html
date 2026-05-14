@@ -147,7 +147,7 @@
   }
   .hero-trust .stars { color: var(--yellow); letter-spacing: 1px; }
 
-  /* Invite code mockup card (the product preview) */
+  /* "Get your code" scratch-off CTA card — entire card is a clickable link */
   .invite-card {
     margin-top: 26px;
     background: var(--paper);
@@ -156,6 +156,20 @@
     box-shadow: 0 3px 0 0 var(--border);
     padding: 18px 20px;
     max-width: 480px;
+    display: block;
+    text-decoration: none;
+    color: var(--text);
+    cursor: pointer;
+    transition: transform 80ms ease, box-shadow 80ms ease;
+  }
+  .invite-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 0 0 var(--border);
+    color: var(--text);
+  }
+  .invite-card:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 0 var(--border);
   }
   .invite-card .label {
     font-size: 11px; font-weight: 700;
@@ -163,25 +177,47 @@
     color: var(--text-soft);
     display: flex; align-items: center; gap: 6px;
   }
-  .invite-card .label .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #29D940; border: 1px solid var(--border); animation: blink 2s infinite; }
-  .invite-card .code-row {
-    display: flex; gap: 8px; align-items: center; margin-top: 8px;
+  .invite-card .label .live-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #29D940; border: 1px solid var(--border);
+    animation: blink 2s infinite;
   }
-  .invite-code {
-    flex: 1;
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 17px; font-weight: 700;
-    color: var(--text);
-    background: var(--accent);
-    padding: 10px 12px;
+
+  /* Silver-foil scratch surface (lottery-card vibe) */
+  .scratch-surface {
+    margin-top: 10px; position: relative;
+    height: 60px;
     border-radius: 4px;
     border: 1.5px dashed var(--border);
-    letter-spacing: 0.02em;
-    text-align: center;
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    background:
+      repeating-linear-gradient(45deg,
+        rgba(255,255,255,0.22) 0,
+        rgba(255,255,255,0.22) 2px,
+        transparent 2px, transparent 7px),
+      linear-gradient(135deg,
+        #A8A8B5 0%, #C8C8D2 28%, #E1E0E6 50%,
+        #C8C8D2 72%, #A8A8B5 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(0,0,0,0.08);
   }
+  .scratch-surface::before {
+    content: "← SCRATCH TO REVEAL YOUR CODE";
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Open Runde', sans-serif;
+    font-weight: 700; font-size: 13px;
+    letter-spacing: 0.14em;
+    color: rgba(21,21,21,0.6);
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+  }
+  .scratch-surface::after {
+    content: "👆";
+    position: absolute; right: 14px; top: 50%;
+    transform: translateY(-50%) rotate(-14deg);
+    font-size: 22px;
+  }
+  .invite-card:hover .scratch-surface { filter: brightness(1.04); }
   .invite-meta {
     display: flex; gap: 14px;
     margin-top: 12px;
@@ -457,10 +493,19 @@
   .compare-row .name { font-size: 14px; color: rgba(238,239,233,0.85); font-weight: 500; }
   .compare-row .name b { color: var(--bg); font-weight: 700; }
   .compare-row .amt {
-    font-size: 22px; font-weight: 700;
-    color: var(--bg); font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
+    font-size: 13px; font-weight: 700;
+    color: var(--bg);
+    text-transform: uppercase; letter-spacing: 0.14em;
+    background: rgba(238,239,233,0.08);
+    border: 1px solid rgba(238,239,233,0.25);
+    padding: 4px 10px; border-radius: 999px;
+    flex-shrink: 0;
   }
-  .compare-row.ent .amt { color: var(--yellow); font-size: 30px; }
+  .compare-row.ent .amt {
+    color: var(--yellow);
+    border-color: rgba(220,147,0,0.5);
+    background: rgba(220,147,0,0.1);
+  }
   .compare-row.ent .name b { color: var(--yellow); }
   .compare-note { font-size: 11px; color: rgba(238,239,233,0.55); margin-top: 14px; line-height: 1.5; }
 
@@ -677,22 +722,19 @@
           enterprise customer</b>. Pyramide<sup>*</sup> piggybacks on your PostHog instance for attribution.
         </p>
 
-        <div class="invite-card">
-          <div class="label"><span class="live-dot"></span> Your invite code is ready</div>
-          <div class="code-row">
-            <div class="invite-code">PYRAMIDE-7K2X-LOOT</div>
-            <button class="btn">Copy</button>
-            <button class="btn btn-yellow">Share ↗</button>
-          </div>
+        <a href="https://app.pyramide.io/claim" class="invite-card">
+          <div class="label"><span class="live-dot"></span> Your code is waiting for you</div>
+          <div class="scratch-surface"></div>
           <div class="invite-meta">
-            <span>Tier: <b>Starter · L1</b></span>
-            <span>Earned: <b>$0</b></span>
-            <span>Invites sent: <b>0 / ∞</b></span>
+            <span>Free forever</span>
+            <span>·</span>
+            <span>No card required</span>
+            <span>·</span>
+            <span>Takes ~5 seconds</span>
           </div>
-        </div>
+        </a>
 
         <div class="hero-ctas">
-          <a href="#cta" class="btn btn-yellow btn-lg">Generate my code — free</a>
           <a href="#how" class="btn btn-lg">See how it works ↓</a>
         </div>
         <div class="hero-trust">
@@ -917,20 +959,22 @@
         <div class="pattern"></div>
         <div>
           <span class="eyebrow">★ Enterprise multiplier ★</span>
-          <h2>Refer one enterprise customer.<br/><span class="accent">Skip the next 100 friends.</span></h2>
+          <h2>Refer one enterprise.<br/><span class="accent">Skip the next 100 friends.</span></h2>
           <p class="lede">
-            Friends and family are fine and everything but the real money is in <b>500-seat
-            companies signing an annual contract</b>. Pyramide<sup>*</sup> stacks an <b>enterprise multiplier</b>
-            on top of your tier rate. One CTO is worth a hundred cousins. Math is a beautiful thing.
+            Friends are fine. The real returns come from <b>500-seat companies on annual
+            contracts</b>, <b>accelerator cohorts</b> dropping thirty startups in your lap at
+            once, and anyone with "VP", "Chief", or "Director&nbsp;of&nbsp;Procurement" in
+            their title. One CTO is worth a hundred cousins. One YC&nbsp;batch is worth
+            several CTOs.
           </p>
           <div class="enterprise-stats">
             <div class="enterprise-stat">
               <div class="num">10×</div>
-              <div class="lbl">Payout multiplier vs. a normal recruit</div>
+              <div class="lbl">Multiplier on enterprise leads vs. a regular recruit</div>
             </div>
             <div class="enterprise-stat">
-              <div class="num">$5,000+</div>
-              <div class="lbl">Per qualified enterprise referral, any tier</div>
+              <div class="num">30+</div>
+              <div class="lbl">Companies in a single accelerator cohort intro</div>
             </div>
             <div class="enterprise-stat">
               <div class="num">∞ levels</div>
@@ -938,25 +982,25 @@
             </div>
             <div class="enterprise-stat">
               <div class="num">No cap</div>
-              <div class="lbl">Refer 50 enterprises, earn 50× the fortune</div>
+              <div class="lbl">Refer all the enterprises. We won't stop you.</div>
             </div>
           </div>
         </div>
         <div class="comparison">
-          <h5 style="color: rgba(238,239,233,0.8); margin-bottom: 8px;">Side-by-side math</h5>
+          <h5 style="color: rgba(238,239,233,0.8); margin-bottom: 8px;">What counts as enterprise</h5>
           <div class="compare-row">
-            <span class="name"><b>Your dentist</b> signs up<br/><small style="color: rgba(238,239,233,0.55);">(Starter L3 commission)</small></span>
-            <span class="amt">$8</span>
+            <span class="name"><b>Annual-contract companies</b><br/><small style="color: rgba(238,239,233,0.55);">100+ seats, multi-year preferred</small></span>
+            <span class="amt">solid</span>
           </div>
           <div class="compare-row">
-            <span class="name"><b>50 friends</b> sign up<br/><small style="color: rgba(238,239,233,0.55);">(Platinum L3 commission, avg)</small></span>
-            <span class="amt">$4,750</span>
+            <span class="name"><b>Accelerator cohorts</b><br/><small style="color: rgba(238,239,233,0.55);">YC, Techstars — every portfolio co counts</small></span>
+            <span class="amt">jackpot</span>
           </div>
           <div class="compare-row ent">
-            <span class="name"><b>1 enterprise customer</b> signs<br/><small style="color: rgba(238,239,233,0.55);">(any tier, with 10× multiplier)</small></span>
-            <span class="amt">$5,000+</span>
+            <span class="name"><b>VPs, Chiefs, anyone with budget</b><br/><small style="color: rgba(238,239,233,0.55);">also: that guy with the podcast (somehow)</small></span>
+            <span class="amt">legendary</span>
           </div>
-          <p class="compare-note">Enterprise = company with 100+ seats on annual contract. Verified by Pyramide<sup>*</sup>'s compliance hedgehog before payout clears.</p>
+          <p class="compare-note">Verified by Pyramide<sup>*</sup>'s compliance hedgehog before payout clears.</p>
         </div>
       </div>
     </div>
