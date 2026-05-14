@@ -79,6 +79,16 @@ To enable it, click the **Options** dropdown next to the chart type, then check 
 
 This works with day-level intervals. For hour, minute, week, or month intervals, weekend filtering is not applied since those buckets span multiple days or would lose all data on weekend days.
 
+## Sort breakdown series order
+
+When a trends insight uses a [breakdown](/docs/product-analytics/trends/breakdowns), you can control how breakdown series are ordered using the **Series order** picker in the **Options** dropdown.
+
+- **Aggregate value** (default) - Series are ordered by total value, largest first. The same breakdown values may appear in different positions across charts depending on which has the highest aggregate in each.
+
+- **Name (A–Z)** - Series are ordered alphabetically by breakdown value. This keeps the order consistent across multiple charts on a dashboard, even when they have different aggregate values.
+
+Alphabetical ordering is useful when you have a dashboard with multiple trends charts that share breakdown values (like survey responses or category names) and you want bars or lines to stack in the same order across all charts. Combined with [result color customization](/docs/product-analytics/color-themes#associating-results-with-a-color), this keeps your dashboard visually consistent.
+
 ## Set goal lines
 
 You can add goal lines to any trend line insight by clicking on **Advanced Options**, then **+ Add goal line**, and then entering a value. This is helpful for highlighting quarterly KPIs, limits, and more.
