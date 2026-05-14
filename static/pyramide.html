@@ -183,35 +183,34 @@
     animation: blink 2s infinite;
   }
 
-  /* Silver-foil scratch surface (lottery-card vibe) */
+  /* Scratch-off surface — canvas painted on top reveals the code as you drag */
   .scratch-surface {
     margin-top: 10px; position: relative;
     height: 60px;
     border-radius: 4px;
     border: 1.5px dashed var(--border);
     overflow: hidden;
-    background:
-      repeating-linear-gradient(45deg,
-        rgba(255,255,255,0.22) 0,
-        rgba(255,255,255,0.22) 2px,
-        transparent 2px, transparent 7px),
-      linear-gradient(135deg,
-        #A8A8B5 0%, #C8C8D2 28%, #E1E0E6 50%,
-        #C8C8D2 72%, #A8A8B5 100%);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(0,0,0,0.08);
+    background: var(--accent);
   }
-  .scratch-surface::before {
-    content: "← SCRATCH TO REVEAL YOUR CODE";
+  .scratch-code {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Open Runde', sans-serif;
-    font-weight: 700; font-size: 13px;
-    letter-spacing: 0.14em;
-    color: rgba(21,21,21,0.6);
-    text-transform: uppercase;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-weight: 700; font-size: 18px;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    pointer-events: none;
   }
-  .invite-card:hover .scratch-surface { filter: brightness(1.04); }
+  .scratch-canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    cursor: grab;
+    touch-action: none;
+    transition: opacity 500ms ease-out;
+  }
+  .scratch-canvas:active { cursor: grabbing; }
+  .invite-card.unlocked .scratch-canvas { opacity: 0; pointer-events: none; }
+  .invite-card.unlocked .scratch-callout { opacity: 0; transition: opacity 400ms; }
 
   /* Hand-drawn arrow callout pointing at the scratch card (PostHog playful style) */
   .scratch-wrap { position: relative; margin-top: 36px; }
@@ -689,16 +688,19 @@
 
 <svg width="0" height="0" style="position: absolute;" aria-hidden="true">
   <defs>
+    <!-- Hand-drawn-feeling filter — turbulence-based wobble, tuned for the big pyramid -->
+    <filter id="hand-drawn" x="-3%" y="-3%" width="106%" height="106%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="5" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/>
+    </filter>
+
     <symbol id="pyramide-mark" viewBox="0 0 64 64">
-      <!-- Hand-drawn-feeling pyramid character (PostHog illustration style) -->
-      <!-- Pyramid body — chunky rounded outline, slight curves rather than perfectly straight edges -->
+      <!-- Clean brand mark — chunky rounded outline, no filter -->
       <path d="M 31 9 Q 32 8 33 9 L 56 51 Q 57 54 54 54 L 10 54 Q 7 54 8 51 Z"
             fill="#F54E00" stroke="#151515" stroke-width="3.5"
             stroke-linejoin="round" stroke-linecap="round"/>
-      <!-- Asymmetric dot eyes (right one slightly higher — gives it character) -->
       <circle cx="25" cy="42" r="2.8" fill="#151515"/>
       <circle cx="39" cy="40.5" r="2.8" fill="#151515"/>
-      <!-- Small wonky smile -->
       <path d="M 27 47.5 Q 32.5 50 37.5 47" stroke="#151515" stroke-width="2.5"
             fill="none" stroke-linecap="round"/>
     </symbol>
@@ -730,10 +732,13 @@
         </p>
 
         <div class="scratch-wrap">
-          <span class="scratch-callout">↓ this is the button</span>
-          <a href="https://app.pyramide.io/claim" class="invite-card">
+          <span class="scratch-callout">↓ scratch to claim</span>
+          <a href="https://app.pyramide.io/claim" class="invite-card" id="invite-card">
             <div class="label"><span class="live-dot"></span> Your code is waiting for you</div>
-            <div class="scratch-surface"></div>
+            <div class="scratch-surface">
+              <span class="scratch-code">PYRAMIDE-7K2X-LOOT</span>
+              <canvas class="scratch-canvas" aria-label="Scratch the silver surface to reveal your invite code"></canvas>
+            </div>
             <div class="invite-meta">
               <span>Free forever</span>
               <span>·</span>
@@ -768,7 +773,7 @@
     <span><span class="dot"></span> Lottie M. cashed out $9,432 in merch credit last week</span>
     <span><span class="dot"></span> James in Phoenix just hit Platinum L4</span>
     <span><span class="dot"></span> "I quit my job for this" — Anonymous Sapphire</span>
-    <span><span class="dot"></span> 1 enterprise customer referred today (+$5,000)</span>
+    <span><span class="dot"></span> 1 enterprise customer referred today (a CTO, apparently)</span>
     <span><span class="dot"></span> Sarah unlocked Emerald in 14 days</span>
     <span><span class="dot"></span> 2,184 people generated a code today</span>
     <span><span class="dot"></span> Marcus's downline is now 4,096 members deep</span>
@@ -776,7 +781,7 @@
     <span><span class="dot"></span> Lottie M. cashed out $9,432 in merch credit last week</span>
     <span><span class="dot"></span> James in Phoenix just hit Platinum L4</span>
     <span><span class="dot"></span> "I quit my job for this" — Anonymous Sapphire</span>
-    <span><span class="dot"></span> 1 enterprise customer referred today (+$5,000)</span>
+    <span><span class="dot"></span> 1 enterprise customer referred today (a CTO, apparently)</span>
     <span><span class="dot"></span> Sarah unlocked Emerald in 14 days</span>
     <span><span class="dot"></span> 2,184 people generated a code today</span>
     <span><span class="dot"></span> Marcus's downline is now 4,096 members deep</span>
@@ -1049,12 +1054,15 @@
         -->
         <svg viewBox="0 0 480 470" class="pyramid-svg" aria-hidden="true">
 
-          <!-- Pyramid: 5 stacked layers, chunky black monoline outline -->
-          <polygon points="240,40 270,110 210,110"        fill="#F54E00" stroke="#151515" stroke-width="3.5" stroke-linejoin="round"/>
-          <polygon points="210,110 270,110 306,184 174,184" fill="#1D4AFF" stroke="#151515" stroke-width="3.5" stroke-linejoin="round"/>
-          <polygon points="174,184 306,184 342,258 138,258" fill="#1F9D6A" stroke="#151515" stroke-width="3.5" stroke-linejoin="round"/>
-          <polygon points="138,258 342,258 378,332 102,332" fill="#B8B8C8" stroke="#151515" stroke-width="3.5" stroke-linejoin="round"/>
-          <polygon points="102,332 378,332 414,406  66,406" fill="#FDFDF8" stroke="#151515" stroke-width="3.5" stroke-linejoin="round"/>
+          <!-- Pyramid: 5 stacked layers, wrapped in the hand-drawn filter so only the
+               polygon outlines get the marker-wobble. Text labels stay crisp. -->
+          <g filter="url(#hand-drawn)">
+            <polygon points="240,40 270,110 210,110"        fill="#F54E00" stroke="#151515" stroke-width="3.5" stroke-linejoin="round"/>
+            <polygon points="210,110 270,110 306,184 174,184" fill="#1D4AFF" stroke="#151515" stroke-width="3.5" stroke-linejoin="round"/>
+            <polygon points="174,184 306,184 342,258 138,258" fill="#1F9D6A" stroke="#151515" stroke-width="3.5" stroke-linejoin="round"/>
+            <polygon points="138,258 342,258 378,332 102,332" fill="#B8B8C8" stroke="#151515" stroke-width="3.5" stroke-linejoin="round"/>
+            <polygon points="102,332 378,332 414,406  66,406" fill="#FDFDF8" stroke="#151515" stroke-width="3.5" stroke-linejoin="round"/>
+          </g>
 
           <!-- Tier names centred inside each layer (apex left empty — too small for text) -->
           <g font-family="Open Runde, sans-serif">
@@ -1261,5 +1269,115 @@
   </div>
 </footer>
 
+
+<script>
+(() => {
+  const card = document.getElementById('invite-card');
+  if (!card) return;
+  const surface = card.querySelector('.scratch-surface');
+  const canvas  = card.querySelector('.scratch-canvas');
+  const ctx     = canvas.getContext('2d', { willReadFrequently: true });
+  let unlocked  = false;
+  let scratching = false;
+  let hasScratched = false; // guard: never auto-unlock before the user actually scratches
+
+  function paint() {
+    const r = surface.getBoundingClientRect();
+    if (!r.width) return;
+    canvas.width  = r.width;
+    canvas.height = r.height;
+    const g = ctx.createLinearGradient(0, 0, r.width, r.height);
+    g.addColorStop(0.00, '#A8A8B5');
+    g.addColorStop(0.30, '#C8C8D2');
+    g.addColorStop(0.50, '#E1E0E6');
+    g.addColorStop(0.72, '#C8C8D2');
+    g.addColorStop(1.00, '#A8A8B5');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, r.width, r.height);
+    ctx.strokeStyle = 'rgba(255,255,255,0.22)';
+    ctx.lineWidth = 1;
+    for (let i = -r.height; i < r.width + r.height; i += 7) {
+      ctx.beginPath();
+      ctx.moveTo(i, 0);
+      ctx.lineTo(i + r.height, r.height);
+      ctx.stroke();
+    }
+    ctx.fillStyle = 'rgba(21,21,21,0.62)';
+    ctx.font = '700 13px "Open Runde", system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('← SCRATCH TO REVEAL YOUR CODE →', r.width / 2, r.height / 2);
+  }
+  // Paint after first layout completes — also re-paint after window load
+  // in case web-fonts settle the grid dimensions. The first paint() before
+  // layout used the wrong (small) width which read as 'already scratched'.
+  requestAnimationFrame(() => requestAnimationFrame(paint));
+  window.addEventListener('load', () => { if (!unlocked) paint(); });
+  window.addEventListener('resize', () => { if (!unlocked) paint(); });
+
+  function pt(e) {
+    const r = canvas.getBoundingClientRect();
+    const t = e.touches ? e.touches[0] : e;
+    return { x: t.clientX - r.left, y: t.clientY - r.top };
+  }
+  function scratchAt(p) {
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 22, 0, Math.PI * 2);
+    ctx.fill();
+    hasScratched = true;
+  }
+  function progress() {
+    if (!hasScratched) return;
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let cleared = 0, sampled = 0;
+    for (let i = 3; i < data.length; i += 16) {
+      sampled++;
+      if (data[i] === 0) cleared++;
+    }
+    if (cleared / sampled > 0.32 && !unlocked) {
+      unlocked = true;
+      card.classList.add('unlocked');
+    }
+  }
+
+  let last = 0;
+  function move(e) {
+    if (!scratching) return;
+    e.preventDefault();
+    scratchAt(pt(e));
+    const now = performance.now();
+    if (now - last > 180) { last = now; progress(); }
+  }
+  function start(e) {
+    if (unlocked) return;
+    scratching = true;
+    e.preventDefault();
+    scratchAt(pt(e));
+  }
+  function end() {
+    if (scratching) { scratching = false; progress(); }
+  }
+
+  canvas.addEventListener('mousedown', start);
+  canvas.addEventListener('touchstart', start, { passive: false });
+  window.addEventListener('mousemove', move);
+  canvas.addEventListener('touchmove', move, { passive: false });
+  window.addEventListener('mouseup', end);
+  window.addEventListener('touchend', end);
+
+  // Block click navigation until enough of the surface is scratched
+  card.addEventListener('click', (e) => {
+    if (!unlocked) e.preventDefault();
+  });
+  // Keyboard accessibility — Enter/Space on the focused link bypasses the scratch
+  card.addEventListener('keydown', (e) => {
+    if ((e.key === 'Enter' || e.key === ' ') && !unlocked) {
+      unlocked = true;
+      card.classList.add('unlocked');
+    }
+  });
+})();
+</script>
 </body>
 </html>
