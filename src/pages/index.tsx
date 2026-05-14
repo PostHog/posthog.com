@@ -1,6 +1,6 @@
 import React from 'react'
-import Control from '../components/Home/Control'
+import Test from '../components/Home/Test'
 
 export default function Home() {
-    return <Control />
+    return <Test />
 }

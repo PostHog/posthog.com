@@ -10,8 +10,8 @@ This page covers requirements and troubleshooting for self-hosted reverse proxie
 
 Your proxy must route requests to these PostHog domains:
 
-| Region | Static assets `/static/*` | Everything else |
-|--------|----------------------------|-----------------|
+| Region | Static assets `/static/*` and config `/array/*` | Everything else |
+|--------|--------------------------------------------------|-----------------|
 | US | `us-assets.i.posthog.com` | `us.i.posthog.com` |
 | EU | `eu-assets.i.posthog.com` | `eu.i.posthog.com` |
 
@@ -120,4 +120,4 @@ You're missing `ui_host` in your SDK config. See [SDK configuration](#sdk-config
 
 ## Still having issues?
 
-For self-hosted proxies, check your proxy's logs and documentation, or ask in the [PostHog community](/community). If you're using the [managed reverse proxy](/docs/advanced/proxy), [contact support](mailto:support@posthog.com).
+For self-hosted proxies, check your proxy's logs and documentation, or ask in the [PostHog community](/community). If you're using the [managed reverse proxy](/docs/advanced/proxy), [contact support](https://app.posthog.com/home#supportModal).

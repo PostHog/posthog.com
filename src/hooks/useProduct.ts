@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import {
     IconThoughtBubble,
+    IconBook,
     IconDashboard,
     IconDownload,
     IconNotebook,
@@ -13,25 +14,22 @@ import {
     IconClock,
     IconPeople,
     IconTerminal,
-    IconGraph,
     IconFunnels,
     IconUserPaths,
     IconCorrelationAnalysis,
     IconRetention,
     IconStickiness,
-    IconHogQL,
-    IconDatabaseBolt,
     IconAsterisk,
     IconAI,
     IconSupport,
-    IconCode,
     IconSpotlight,
-    IconMessage,
     IconTestTube,
     IconListTreeConnected,
     IconSparkles,
     IconTarget,
     IconArrowUpRight,
+    IconTrends,
+    IconCursorClick,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -80,18 +78,18 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'blue',
             category: 'communication',
             slug: 'docs/support',
-            status: 'WIP',
+            status: 'beta',
         },
         {
-            name: 'Coding agent (PostHog Code)',
-            Icon: IconCode,
-            description: 'AI coding agent that understands your product analytics.',
+            name: 'PostHog Code',
+            Icon: IconBook,
+            description: 'AI code editor that knows how people use your product',
             handle: 'posthog_code',
             color: 'brown',
             colorSecondary: 'brown',
             category: 'automation',
-            // slug: 'twig',
-            status: 'WIP',
+            slug: 'code',
+            status: 'beta',
         },
         {
             name: 'QA Swarm',
@@ -110,7 +108,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            name: 'Product tours',
+            name: 'Product Tours',
             Icon: IconSpotlight,
             description: 'Guide users through your product with interactive tours and announcements.',
             handle: 'product_tours',
@@ -118,7 +116,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'salmon',
             category: 'product_engineering',
             slug: 'docs/product-tours',
-            status: 'WIP',
+            status: 'beta',
         },
         {
             name: 'Traces',
@@ -153,7 +151,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'beta',
         },
         {
-            name: 'No-code A/B testing',
+            name: 'No-code A/B Testing',
             Icon: IconTestTube,
             description: 'Run A/B tests without writing code.',
             handle: 'no_code_ab_testing',
@@ -218,9 +216,9 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             slug: 'platform-packages',
         },
         {
-            name: 'User profiles',
+            name: 'Activity timeline',
             Icon: IconPeople,
-            description: 'Analyze multi-seat accounts and other groups.',
+            description: 'Full event history for individuals and multi-seat accounts',
             handle: 'profiles',
             color: 'blue',
             colorSecondary: 'purple',
@@ -617,7 +615,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Graphs & trends',
-            Icon: IconGraph,
+            Icon: IconTrends,
             handle: 'trends',
             color: 'yellow',
             colorSecondary: 'lilac',
@@ -2106,7 +2104,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Heatmaps',
-            Icon: IconClockRewind,
+            Icon: IconCursorClick,
             description: 'See where users click, scroll, and move on your site',
             handle: 'heatmaps',
             color: 'green',
@@ -2646,7 +2644,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             seo: {
                 title: 'PostHog AI - PostHog data stack',
                 description:
-                    "Omnicient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
+                    "Omniscient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
             },
         },
         {

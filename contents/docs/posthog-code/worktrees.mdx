@@ -1,0 +1,82 @@
+---
+title: PostHog Code worktrees
+---
+
+<CalloutBox icon="IconWarning" title="Worktrees are in beta" type="caution">
+
+You may experience unexpected behavior with worktrees in complex development environments. For running parallel agents, we recommend using [cloud tasks](/docs/posthog-code/cloud-runs) instead.
+
+</CalloutBox>
+
+Worktrees give agents a local, isolated checkout inside PostHog Code. Use them when you want an agent to work on a separate branch without touching your current working directory.
+
+## Getting started
+
+To create a worktree:
+
+1. Open the mode selector.
+2. Choose **Worktree**.
+3. Enter your prompt.
+4. Submit the task.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_24_at_10_04_03_AM_96628e61b1.png"
+    classes="rounded"
+    alt="Task mode selector"
+/>
+
+For simple development environments, this is typically all you'll need.
+
+## Environment setup
+
+For more complex projects, you may need extra configuration. PostHog Code supports two files for this:
+
+| File | Use it to |
+|---|---|
+| `.worktreeinclude` | Copy required ignored files into each worktree |
+| `.worktreelink` | Symlink required ignored files or directories into each worktree |
+
+For setup scripts that run when a worktree is created (installing dependencies, running migrations, and so on), see [Local environments](/docs/posthog-code/environments#local-environments).
+
+### `.worktreeinclude`
+
+Worktrees create fresh checkouts of your git repo, so they do not include untracked files like `.env`.
+
+To automatically copy required files, add them to a `.worktreeinclude` file at the root of your project.
+
+Example:
+
+```bash
+# .worktreeinclude
+
+.env
+.env.local
+```
+
+This file uses `.gitignore` syntax. Only matching files that are also ignored by git are copied.
+
+### `.worktreelink`
+
+Some files may be required for your environment but are too heavy to copy, such as a `.flox` directory.
+
+Add these files or directories to `.worktreelink`. PostHog Code creates symlinks for them when a new worktree is created.
+
+Example:
+
+```bash
+# .worktreelink
+
+.flox
+```
+
+This file also uses `.gitignore` syntax. It only creates links to files that are ignored by git.
+
+## How it works
+
+When you create a worktree, PostHog Code:
+
+1. Creates the git worktree with pre/post-checkout hooks disabled
+2. Symlinks the Claude config (`.claude/` directory and `CLAUDE.local.md`)
+3. Creates symlinks from `.worktreelink`
+4. Copies files from `.worktreeinclude`, using CoW copy when possible
+5. Runs and awaits post-checkout hooks

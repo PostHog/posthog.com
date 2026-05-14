@@ -1,0 +1,42 @@
+---
+title: AWS Bedrock LLM analytics installation
+platformLogo: awsBedrock
+showStepsToc: true
+tableOfContents: [
+    {
+        url: 'install-dependencies',
+        value: 'Install dependencies',
+        depth: 1,
+    },
+    {
+        url: 'set-up-the-opentelemetry-exporter',
+        value: 'Set up the OpenTelemetry exporter',
+        depth: 1,
+    },
+    {
+        url: 'instrument-bedrock-calls',
+        value: 'Instrument Bedrock calls',
+        depth: 1,
+    },
+    {
+        url: 'verify-traces-and-generations',
+        value: 'Verify traces and generations',
+        depth: 1,
+    },
+]
+---
+
+<!--
+This page imports shared onboarding content from the main PostHog repo.
+Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/llm-analytics/aws-bedrock.tsx
+See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
+-->
+
+import { AWSBedrockInstallation } from 'onboarding/llm-analytics/aws-bedrock.tsx'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
+import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
+import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
+
+<OnboardingContentWrapper snippets={{ NotableGenerationProperties }}>
+    <AWSBedrockInstallation modifySteps={addNextStepsStep} />
+</OnboardingContentWrapper>

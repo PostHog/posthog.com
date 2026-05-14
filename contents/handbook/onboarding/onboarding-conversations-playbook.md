@@ -60,13 +60,15 @@ Use the following product signals:
 
 ### Checking in
 
+This is where we can have a real impact on product adoption and usage expansion. Think of it as a value-driven "soft cross-sell". 
+
 Don’t just repeat yourself. Avoid rehashing the same observations from your first message. If your earlier advice still hasn’t been implemented, send a small, friendly nudge. Otherwise, bring something new:
 
 - Look at what they’re actively using right now.
 - Infer what they might be trying to measure or achieve as a business.
 
-Help them get to an “aha” moment, and/or suggest one or two features they’d benefit from, but may not have discovered or had time to try.
-PostHog features become more powerful when used together (e.g., funnels/error tracking + session replay + PostHog AI). Share a specific guide, an example, or a Loom video, so the customer doesn’t have to poke around to figure it out.
+Mainly, help them get to an “aha” moment, and/or suggest one or two features they’d benefit from, but may not have discovered or had time to try.
+PostHog features become more powerful when used together (e.g., funnels/error tracking + session replay + PostHog AI). Share a specific guide, an example, or a Loom video, so the customer doesn’t have to poke around to figure it out. You can take some inspiration from [Use Case Selling handbook pages](https://posthog.com/handbook/growth/use-case-selling/use-case-selling).
 
 Lastly, if the customer is trending toward growth (usage, team expansion, increasing volume), it’s okay to mention pre-paid credits and the option of dedicated human support early. Framing it as “when you’re ready” gives them time to consider it and makes a future Sales handoff smoother.
 
@@ -83,11 +85,15 @@ A small, human touch can help here! Use what’s publicly obvious or clearly rel
 
 ## Preparing for the call
 
+**Start from a health check**
+
 Use Vitally and [Metabase](https://posthog.com/handbook/onboarding/metabase-account-analysis) to understand the customer’s current setup. For easier access, you can pin the "Engagement Metric Dashboard" custom trait in Vitally, where you can take a closer look at power users in the organization, the usage of AI or error tracking, and more. 
+
+You can supplement Metabase analysis with the [HogSpy extension](https://github.com/PostHog/hogspy/releases/tag/v1.0.0) to audit the implementation of identify, flags, and experiments.
 
 Then zoom out to learn about their business, their product, and the rest of their stack. The better your context, the faster you’ll get to relevant recommendations.
 
-**Start with their KPIs**
+**Lead with their KPIs**
 
 Use the customer’s KPIs (usually captured in the booking form) to drive your prep. Ask yourself: what would “success” look like for them? Come prepared with 2-3 concrete use cases tied to those KPIs (e.g., a specific insight type, dashboard, funnel, experiment, etc.). [This Handbook page](https://posthog.com/handbook/growth/sales/utilization-by-business-type) can be a good source of inspiration.
 
@@ -97,11 +103,69 @@ Check Wappalyzer (login details in 1Password). It’s not always perfectly accur
 
 It might be a great moment to position PostHog as the place where multiple tools can connect under one hood.
 
-Customers respond well when we’re proactive, especially when we show them a path they hadn’t considered. PostHog is most powerful when features compound, so part of prep is identifying the next adoption step that unlocks more value.
+Customers respond well when we’re proactive, especially when we show them a path they hadn’t considered. PostHog is most powerful when features compound, so part of prep is identifying the next adoption step that unlocks more value. You can take some inspiration from [Use Case Selling handbook pages](https://posthog.com/handbook/growth/use-case-selling/use-case-selling) as well.
 
 **Use AI to broaden your angles**
 
 AI can help you sanity-check assumptions and surface ideas you might miss. Customer-facing teams at PostHog use PostHog AI, Claude (with PostHog + Vitally MCPs), Cursor, or Antigravity. Use it to generate questions, identify likely “aha” moments, and draft call checklists, then apply human judgment to keep it relevant.
+
+You can also run PostHog AI on the customer instance (visible only to us, no cost incurred) to do the account audit. Prompt below.
+
+<details><summary>PostHog AI prompt</summary>
+Analyze the organization across the following dimensions using the last 30 days of data.
+
+1. Instrumentation health
+- What SDKs are sending data? (web, mobile, server-side, etc.)
+- What's the ratio of auto-captured events vs. custom events?
+- Are there any custom events that appear to be duplicates or redundant?
+- Are there events with very low volume that might be broken or deprecated?
+- Are person profiles being created?
+- What's the identified vs. anonymous user ratio?
+
+2. Feature flag usage
+- How many feature flags exist?
+- How many are active vs. stale?
+- Which flags have the most evaluations?
+- Which have the fewest?
+- Are any flags being evaluated server-side vs. client-side?
+- Can you tell?
+- Are there flags that have been at 100% rollout for more than 30 days that could be cleaned up?
+
+3. Product usage patterns
+- What are the top 20 most frequent events?
+- What are the most common user paths? (entry point to key actions)
+- What does retention look like week over week?
+- Are there obvious drop-off points in any user flows?
+- What's the DAU/WAU ratio (stickiness)?
+
+4. Session replay
+- Is session replay active?
+- How many recordings were there in the last 30 days?
+- What's the average session duration?
+- Are there minimum duration filters set, or are very short sessions being recorded?
+- What's the rage click and dead click volume?
+
+5. Underutilized PostHog features
+- Are they using experiments?
+- If not, are there flags that look like they could be experiments?
+- Is web analytics enabled and collecting data?
+- Are surveys being used?
+- Is error tracking / exception capture active?
+- Are any data warehouse sources connected?
+- Are cohorts being used?
+- How many exist?
+
+6. Cost optimization
+- What products are driving the most usage? (events, recordings, flags)
+- Are there any quick wins to reduce noise? (short session filtering, dropping low-value events at ingestion, disabling stale flags)
+
+Summarize findings with a prioritized list of recommendations:
+- what's working well
+- what needs attention
+- what untapped opportunities exist
+
+Follow-up with: Now go look at their business and domain. What should they be doing to get more use and value out of PostHog?
+</details>
 
 ## On the call
 
@@ -129,3 +193,4 @@ AI can help you sanity-check assumptions and surface ideas you might miss. Custo
 - Loop in everybody. If some folks couldn’t attend, include them anyway so they can catch up async.
 - Summarize the call and send resources. Include some extra resources if you feel it would be beneficial as well. For example, our [YouTube playlist](https://www.youtube.com/playlist?list=PLnOY1RYHjDfzBX5wsSUHwLj91xuGnH5Ci%C2%A0) is great!
 - If relevant, give them one quick win. Encourage a small task they can do immediately after the call to lock in value and reinforce learning.
+- Share any feedback or feature requests with the relevant product team. Their responsiveness can help you deliver some customer happiness! It's always great to be able to send a GitHub link to follow in your email. 

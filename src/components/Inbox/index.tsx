@@ -221,22 +221,14 @@ const AskAQuestion = ({ onSubmit }: { onSubmit: () => void }) => {
                 showTopicSelector
                 onSubmit={(_values, _type, data) => {
                     onSubmit()
-                    addToast({
-                        title: 'Question posted',
-                        description: (
-                            <>
-                                Your question has been posted.
-                                <br />
-                                <Link
-                                    className="text-red dark:text-yellow font-semibold"
-                                    to={`/questions/${data.attributes.permalink}`}
-                                >
-                                    View it here
-                                </Link>
-                            </>
-                        ),
-                    })
                     closeWindow(appWindow)
+                    if (data?.attributes?.permalink) {
+                        setTimeout(() => {
+                            navigate(`/questions/${data.attributes.permalink}`, {
+                                state: { askMax: true },
+                            })
+                        }, 0)
+                    }
                 }}
                 initialView="question-form"
                 slug="/questions"
@@ -408,7 +400,7 @@ export default function Inbox(props) {
                         showForward={!websiteMode}
                         showSearch
                         showCustomLeft={websiteMode ? <h2 className="text-primary">Forums</h2> : undefined}
-                        className={websiteMode ? 'border-b border-primary sticky top-[49px] z-20 bg-primary' : ''}
+                        className={websiteMode ? 'border-b border-primary @2xl:sticky top-[49px] z-20 bg-primary' : ''}
                         rightActionButtons={
                             <div className="flex items-center gap-2 flex-wrap">
                                 <OSButton icon={<IconSearch />} onClick={() => openSearch('question')} />
@@ -452,7 +444,7 @@ export default function Inbox(props) {
                             data-scheme="secondary"
                             className={`w-full @2xl:w-64 bg-primary flex-shrink-0 ${
                                 websiteMode
-                                    ? 'h-[calc(100vh-91px)] sticky top-[101px]'
+                                    ? '@2xl:h-[calc(100vh-91px)] @2xl:sticky top-[101px] border-b border-primary @2xl:border-b-0'
                                     : '@2xl:border-r border-primary @2xl:h-full'
                             }`}
                         >

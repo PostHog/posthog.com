@@ -1,0 +1,269 @@
+---
+title: "Next.js: @posthog/next"
+sidebarTitle: "@posthog/next"
+sidebar: Docs
+showTitle: true
+platformLogo: nextjs
+tableOfContents: [
+    {
+        url: 'install-posthognext',
+        value: 'Install @posthog/next',
+        depth: 1,
+    },
+    {
+        url: 'add-your-environment-variables',
+        value: 'Add your environment variables',
+        depth: 1,
+    },
+    {
+        url: 'add-the-middleware',
+        value: 'Add the middleware',
+        depth: 1,
+    },
+    {
+        url: 'wrap-your-app-with-posthogprovider',
+        value: 'Wrap your app with PostHogProvider',
+        depth: 1,
+    },
+    {
+        url: 'access-posthog-in-client-components',
+        value: 'Access PostHog in client components',
+        depth: 1,
+    },
+    {
+        url: 'identify-your-user',
+        value: 'Identify your user',
+        depth: 1,
+    },
+    {
+        url: 'use-posthog-on-the-server',
+        value: 'Use PostHog on the server',
+        depth: 1,
+    },
+    {
+        url: 'further-reading',
+        value: 'Further reading',
+        depth: 1,
+    },
+]
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: true
+  sessionRecording: true
+  featureFlags: true
+  groupAnalytics: true
+  surveys: true
+  llmAnalytics: true
+  errorTracking: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import Tab from "components/Tab"
+import AppProviderSetup from "./_snippets/posthog-next-app-provider.mdx"
+import PagesProviderSetup from "./_snippets/posthog-next-pages-provider.mdx"
+import AppServerSetup from "./_snippets/posthog-next-app-server-setup.mdx"
+import PagesServerSetup from "./_snippets/posthog-next-pages-server-setup.mdx"
+
+<CalloutBox icon="IconInfo" type="fyi" title="Pre-release">
+
+`@posthog/next` is currently in pre-release. The API may change before the stable release. For production apps, see the [standard Next.js setup guide](/docs/libraries/next-js).
+
+</CalloutBox>
+
+`@posthog/next` is a unified package for integrating PostHog into your Next.js app. It provides a simplified interface that handles common patterns out of the box:
+
+- **Synchronized identity across client and server**, so both sides share the same user automatically
+- **Server-side feature flag bootstrapping** so hooks return real values immediately with no flicker
+- **Eager client initialization** ensures PostHog is always available when your components render
+- **Built-in API proxy** that routes SDK traffic through your domain to avoid ad blockers
+- **Automatic event flushing** with no manual `shutdown()` or `flush()` calls needed
+
+This guide covers both the App Router and Pages Router. You'll need a PostHog instance ([Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host)) and a Next.js 13.0.0+ application.
+
+<Steps>
+
+<Step title="Install @posthog/next" badge="required">
+
+<MultiLanguage>
+
+```bash file=npm
+npm install --save @posthog/next
+```
+
+```bash file=Yarn
+yarn add @posthog/next
+```
+
+```bash file=pnpm
+pnpm add @posthog/next
+```
+
+```bash file=Bun
+bun add @posthog/next
+```
+
+</MultiLanguage>
+
+</Step>
+
+<Step title="Add your environment variables" badge="required">
+
+Add these to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project token in your [project settings](https://app.posthog.com/project/settings).
+
+```shell file=.env.local
+NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+```
+
+`NEXT_PUBLIC_POSTHOG_HOST` is optional and defaults to `https://us.i.posthog.com`.
+
+</Step>
+
+<Step title="Add the middleware" badge="recommended">
+
+The middleware seeds an identity cookie on first visit so client and server share the same user, and optionally proxies API requests through your domain.
+
+```ts file=middleware.ts
+import { postHogMiddleware } from '@posthog/next'
+
+export default postHogMiddleware({ proxy: true })
+
+export const config = {
+    matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+}
+```
+
+Setting `proxy: true` routes PostHog API calls through your domain at `/ingest`, which helps avoid ad blockers. You can customize the path prefix by passing `proxy: { pathPrefix: '/analytics' }` instead.
+
+> **Note:** Middleware requires a server runtime and is not available with `output: 'export'` (fully static sites). If you can't use middleware, you can set up a [reverse proxy](/docs/advanced/proxy) separately to route traffic through your domain.
+
+</Step>
+
+<Step title="Wrap your app with PostHogProvider" badge="required">
+
+<Tab.Group tabs={['App router', 'Pages router']}>
+    <Tab.List>
+        <Tab>App router</Tab>
+        <Tab>Pages router</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <AppProviderSetup />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PagesProviderSetup />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+</Step>
+
+<Step checkpoint title="Verify events are captured" subtitle="Confirm that you can see events in your PostHog project">
+
+Visit your app and click around. Within a minute or two, you should see `$pageview` and [autocaptured](/docs/product-analytics/autocapture) events (like clicks) appear in the [activity tab](https://app.posthog.com/activity/explore).
+
+</Step>
+
+<Step title="Access PostHog in client components" badge="required">
+
+All hooks must be used in client components (`'use client'`).
+
+**Capture events:**
+
+```tsx
+'use client'
+import { usePostHog } from '@posthog/next'
+
+export function TrackButton() {
+    const posthog = usePostHog()
+    return <button onClick={() => posthog.capture('button_clicked')}>Track</button>
+}
+```
+
+**Feature Flags:**
+
+```tsx
+'use client'
+import { useFeatureFlag } from '@posthog/next'
+
+export function MyComponent() {
+    const flag = useFeatureFlag('new-feature')
+    return flag?.enabled ? <NewFeature /> : <OldFeature />
+}
+```
+
+**Conditional rendering with `PostHogFeature`:**
+
+```tsx
+'use client'
+import { PostHogFeature } from '@posthog/next'
+
+export function NewBanner() {
+    return (
+        <PostHogFeature flag="show-banner" match={true}>
+            <div>New feature available!</div>
+        </PostHogFeature>
+    )
+}
+```
+
+You can also read [the full `posthog-js` documentation](/docs/libraries/js/features) for all the usable functions.
+
+</Step>
+
+<Step title="Identify your user" badge="recommended">
+
+Call `posthog.identify()` on the client after login to link events to a known user. This connects event captures, [session replays](/docs/session-replay), [LLM traces](/docs/ai-engineering), and [Error Tracking](/docs/error-tracking) to the same person across client and server.
+
+```tsx
+'use client'
+import { usePostHog } from '@posthog/next'
+
+export function LoginButton() {
+    const posthog = usePostHog()
+
+    const handleLogin = async () => {
+        const user = await signIn()
+        posthog.identify(user.id, {
+            email: user.email,
+            name: user.name,
+        })
+    }
+
+    return <button onClick={handleLogin}>Log in</button>
+}
+```
+
+See our guide on [identifying users](/docs/getting-started/identify-users) for more details.
+
+</Step>
+
+<Step title="Use PostHog on the server" badge="recommended">
+
+<Tab.Group tabs={['App router', 'Pages router']}>
+    <Tab.List>
+        <Tab>App router</Tab>
+        <Tab>Pages router</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <AppServerSetup />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PagesServerSetup />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+</Step>
+
+<Step title="Further reading" badge="recommended">
+
+- [How to set up Next.js analytics, Feature Flags, and more](/tutorials/nextjs-analytics)
+- [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
+
+</Step>
+
+</Steps>

@@ -42,7 +42,6 @@ Here are the common tools the Sales, CS, and Onboarding teams use daily.
 - [Scratchpad](https://www.scratchpad.com/) for AI agents and a friendlier SFDC UI (sign up as part of your software budget)
 - [spark](https://sparkmailapp.com/) (app) AI powered inbox
 - [Superhuman](https://superhuman.com/) (app) AI powered inbox
-- [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) (app) for configuring provided YubiKey
 - [Wappalyzer](https://www.wappalyzer.com/) for identifying tech stack on customer sites (also as a Chrome/Firefox extension). Credentials in 1Password
 - [Alfred](https://alfred.app/) / [Raycast](https://www.raycast.com/) for automated workflows. 
 - An IDE, like VS Code, Zed, or Cursor. It will come in handy for coding and development tasks.

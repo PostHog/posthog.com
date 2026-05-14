@@ -93,6 +93,49 @@ You can capture errors in Cloudflare Workers like you would in other Node applic
 
 For more details and a method for automatically capturing errors, see our [error tracking installation docs](/docs/error-tracking/installation).
 
+## Node.js compatibility
+
+`posthog-node` ships a dedicated `workerd` export that avoids Node.js built-ins — it does **not** require `nodejs_compat` on its own. However, other dependencies in your project may need it. If you see missing-module errors at import time, add the compatibility flag to your Wrangler config:
+
+```toml
+compatibility_flags = ["nodejs_compat"]
+```
+
+## Environment variables
+
+Workers historically had no `process.env`, but since April 2025 (compatibility date `2025-04-01`+), `process.env` is populated automatically when using the `nodejs_compat` flag. You can also use `import { env } from 'cloudflare:workers'` to access bindings from anywhere, including top-level scope.
+
+How you access environment variables depends on your framework:
+
+| Framework | Server-side env access |
+|-----------|----------------------|
+| React Router 7 | `context.cloudflare.env.VAR_NAME` (in loaders, actions, middleware) |
+| SvelteKit | `platform.env.VAR_NAME` (in hooks and server routes) |
+| Nuxt | `process.env` works via `unenv` polyfill — but **only inside event handlers**, not at top-level. Prefer `useRuntimeConfig(event)` |
+| Astro 5 | `Astro.locals.runtime.env.VAR_NAME` (in SSR pages and API routes) |
+| Astro 6+ | `import { env } from 'cloudflare:workers'` (direct import; `Astro.locals.runtime` was removed) |
+| Hono | `env.VAR_NAME` from the fetch handler's `env` parameter |
+| Raw Workers | `env.VAR_NAME` from the fetch handler's `env` parameter |
+
+Define variables in `wrangler.toml` under `[vars]` (non-secret) or via `wrangler secret put` (secret).
+
+## Event flushing
+
+Workers isolates are stateless — they may be reused across requests on the same edge location, but have no guaranteed longevity. Use `ctx.waitUntil()` to flush after the response is sent. The `ctx` / `waitUntil` source depends on your framework:
+
+| Framework | waitUntil access |
+|-----------|-----------------|
+| React Router 7 | `context.cloudflare.ctx.waitUntil()` |
+| SvelteKit | `platform.ctx.waitUntil()` |
+| Astro 5 | `Astro.locals.runtime.ctx.waitUntil()` |
+| Astro 6+ | `Astro.locals.cfContext.waitUntil()` |
+| Hono | `c.executionCtx.waitUntil()` |
+| Raw Workers | `ctx.waitUntil()` (the `ExecutionContext` directly) |
+
+As a framework-agnostic alternative, you can `import { waitUntil } from 'cloudflare:workers'` and call it from anywhere.
+
+We recommend creating a new PostHog client per request. Workers may reuse globals across requests on the same isolate, but the shutdown/flush lifecycle makes per-request instantiation safer.
+
 ## Further reading
 
 - [Node.js SDK reference](/docs/libraries/node)

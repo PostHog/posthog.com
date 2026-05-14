@@ -28,7 +28,7 @@ In our consumption-based pricing model, the first way for a customer to reduce s
 
 Beyond optimization, we offer discounts based on four levers:
 
-#### 1. Volume discount (based on credit purchase amount)
+#### 1. Volume discount (based on credit purchase amount - Customers **must** qualify for this discount before receiving discounts 2 through 4)
 - **$25-59k:** 20% base discount
 - **$60-99k:** 25% base discount
 - **$100-249k:** 30% base discount
@@ -119,16 +119,13 @@ You should follow the same [inbound sales process](https://posthog.com/handbook/
 1. Review the customer's average monthly cost
 2. Estimate the prepaid equivalent for 12 months of coverage (e.g. [monthly cost x 12])
 3. Inform them they can take advantage of this offer, which allows them to:
-   - purchase credits equivalent to ~10 months of usage (expiring 10 months after the contract start date), and
+   - purchase credits equivalent to ~12 months of usage (expiring 12 months after the contract start date), and
    - receive ~2 months of additional usage for free, applied before the contract start date.
-4. Check whether buying [monthly cost x 10] gives them a lower [discount rate](https://posthog.com/handbook/growth/sales/contract-rules#discounts)
-5. If so, you should ALSO present the option to buy [monthly cost x12], and they'll receive [monthly cost x14] AND take advantage of the higher discount.
-   - two months of this free usage should again be applied before the contract start date, unless explicitly priced and included under Special Terms.
-7. If the customer wants to purchase fewer credits than either option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
+4. If the customer wants to purchase fewer credits than the option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
 
-All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional, one-time credit (offered to customers in exchange for rolling off the Startup plan) in the amount of USD XXXXX will be applied upon contract start date with the same expiration date."
+All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional credit in the amount of XXXXX (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date."
 
-For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date.
+For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date. In this case, the credits do not need to be called out in the contract, and the opportunity owner can add these credits as a one time credit in billing admin.
 
 ### Margin negative deals
 
@@ -137,6 +134,8 @@ In exceptional circumstances, we may explore providing additional discounts whic
 1. They are a strategic logo we'd like to land as a brand-new customer.
 2. We are taking their business from a competitor.
 3. We are preventing them from churning to a competitor.
+
+For the avoidance of doubt, these types of deals are **very rare** (~1 per year), and not offered to customers with standard usage volumes. 
 
 If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with your manager, who will then clear it with Simon (TAMs/CSMs) or Charles (TAEs).
 
@@ -154,7 +153,7 @@ We do not offer price guarantees for the following reasons:
 
 This request most often comes from procurement teams unfamiliar with our pricing philosophy. Address it proactively in commercial discussions, but if there is push back, reference the above points. As an example:
 
-> "We've dropped Events pricing [X]% over [timeframe]. A price guarantee would have cost you more. We're committed to being the cheapest at every scale—if we're not, tell us. Our prepaid credits for usage based pricing gives budget control without betting against our commitment to low prices."
+> "We've dropped Events pricing [X]% over [timeframe]. A price guarantee would have cost you more. We're committed to matching the cheapest at every scale—if we're not, tell us. Our prepaid credits for usage based pricing gives budget control without betting against our commitment to low prices."
 
 ## Multi-year credit allocation
 
@@ -247,7 +246,7 @@ For any of the above scenarios you should use our [discounting principles](contr
 
 ### When they will end the contract term with credit remaining
 
-We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher spend than the original contract.
+We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher annual spend than the original contract.
 
 ### When a customer doesn't renew their credit purchase
 When a customer chooses not to renew a prepaid credit contract we automatically remove any remaining credits on the expiry date. Their account will then roll onto our standard monthly plan and they'll be charged for usage. It's the customer's responsibility to stop sending us events or cancel their subscription and downgrade to the free tier if they don't want to keep paying.

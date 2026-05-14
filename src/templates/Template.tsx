@@ -127,7 +127,7 @@ export default function Template({ data }) {
                             urls={{
                                 primary:
                                     templateType === 'survey'
-                                        ? `https://app.posthog.com/survey_templates`
+                                        ? `https://app.posthog.com/surveys/guided/new`
                                         : `https://app.posthog.com/dashboard?templateFilter=${title}#newDashboard`,
                                 secondary:
                                     templateType === 'survey'

@@ -94,6 +94,7 @@ const CustomFeaturesSlide = () => {
         'Prompts',
         'Analysis',
         'Customizations',
+        'MCP',
     ]
 
     // Filter to items that should appear in the features slide (labels and features without templates)

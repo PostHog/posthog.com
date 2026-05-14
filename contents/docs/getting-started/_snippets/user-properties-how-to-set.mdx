@@ -113,4 +113,10 @@ import IdentifyFrontendCode from "../../_snippets/identify-frontend-code.mdx"
 
 Person property values can be strings, booleans, numbers, objects, or arrays.  For objects and arrays, you can use [SQL expressions](/docs/sql/expressions) to access nested properties in PostHog.
 
-> **Note:** Person properties are set in the order the events are ingested, and not according to event timestamps. Since we typically ingest events as soon as we receive them, you only need to take this into consideration when you're [importing historical data](/docs/migrate).
+> **Note:** Person properties are set in **ingestion order** (the order PostHog receives and processes events), not by event timestamps. This matters whenever events arrive out of their original order, which can happen during:
+>
+> - [Historical data imports](/docs/migrate)
+> - Mobile apps batching events while the device is offline
+> - Server-side SDKs with delayed flushes or network retries
+>
+> In these cases, a late-arriving event can overwrite a `$set` value or claim a `$set_once` key before the "true first" event is ingested. If ordering matters for your use case, prefer `$set_once` for values that should not change (though note that `$set_once` is still subject to ingestion ordering — the first ingested event claims the key, not necessarily the earliest event by timestamp). Be aware that `$set` always reflects the last *ingested* value, not the last *timestamped* value.

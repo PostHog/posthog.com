@@ -82,13 +82,41 @@ All these differences make it more likely that you'll misinterpret your data. Im
 
   - If the property's value is a date or timestamp, include **_date** or **_timestamp** at the end – e.g., `user_creation_date`, `last_login_timestamp`.
 
-## 4. Version your events
+## 4. Design your distinct IDs carefully
+
+Your `distinct_id` is how PostHog links events to a person. If you get it wrong, you'll either fragment a single user across multiple person profiles or funnel unrelated events into the same one – both of which lead to inaccurate analytics, broken funnels, potentially increased costs, and rate limiting.
+
+The most common mistakes:
+
+- **Using a catch-all ID like `"system"` or `"backend"`** for server-side events that aren't tied to a specific user. This funnels all events into a single person profile, triggering rate limiting and unnecessary costs. Send these events with [person processing disabled](/docs/product-analytics/capture-events#how-to-capture-anonymous-events) instead.
+- **Using different ID formats across platforms** – e.g., `"user-456"` on the web and `"USER-456"` on mobile. PostHog treats these as two separate people.
+- **Not linking anonymous and identified IDs** – if you don't call `identify()` at the right time, pre-login events won't be connected to the logged-in user.
+
+For a full guide on choosing and coordinating distinct IDs across environments, see [identity resolution](/docs/product-analytics/identity-resolution).
+
+## 5. Version your events
 
 As your app evolves, so do the events you track. Implementing a versioning system for events ensures you can easily distinguish between older and newer events, especially when significant changes occur.
 
 For example, if you initially tracked an event as `registration:sign_up_button_click` and later revamped your registration flow, you can introduce a new version of this event `registration_v2:sign_up_button_click`. This way, you preserve historical data on the old event while making it easy to compare the impact of your new changes.
 
-## 5. Prefer backend to frontend tracking
+## 6. Keep event and property names static
+
+Event names and property names should be defined as fixed strings in your code, never generated dynamically. If you interpolate values into event or property names – e.g., `page_viewed_${pageName}` or `button_clicked_${buttonId}` – you'll end up with thousands of unique event definitions that are impossible to filter, group, or analyze.
+
+Instead, use a fixed event name and pass the variable as a property value:
+
+```javascript
+// Bad – creates a new event definition for every page
+posthog.capture(`page_viewed_${pageName}`)
+
+// Good – one event, filterable by page name
+posthog.capture('page_viewed', { page_name: pageName })
+```
+
+The same applies to property names. A property like `feature_${featureName}_used` creates unbounded property definitions. Use a static name like `feature_name` and set the value to the feature. Projects with too many unique property names can also have new property definitions rate limited, meaning new properties stop appearing in filters and breakdowns.
+
+## 7. Prefer backend to frontend tracking
 
 Backend analytics are more reliable than frontend analytics. There are 3 reasons for this:
 
@@ -107,7 +135,26 @@ Where possible, it's a good idea to log events on your server instead of your cl
   - You need accurate data – e.g., the number of users that signed up in the last week.
   - You want to analyze data alongside other business metrics.
 
-## 6. Filter out internal users
+## 8. Be aware of client-side event buffering
+
+PostHog guarantees event ordering in these cases:
+
+- Events with the same `distinct_id` within a single API call are processed in order.
+- Events with the same `distinct_id` across sequential API calls are processed in order, as long as you wait for each response before sending the next call.
+
+PostHog's SDKs handle batching and sequencing internally, so for a single client instance using an official SDK, ordering is not a concern.
+
+Beyond that, events are not guaranteed to arrive in the order they occurred. Most web and server-side events are ingested within 60 seconds of capture, but mobile clients can delay events by hours or even days – for example, when the app is in the background, the device is offline, or the OS defers network activity to save battery. Events for the same user sent from different clients (e.g., a mobile app and a backend server) can also arrive out of order since there's no coordination between API calls from different clients.
+
+PostHog's SDKs flush events as quickly as possible, but delivery timing is ultimately constrained by the device and network. PostHog ingests events in roughly the order they arrive at the API – it does not buffer or reorder events to account for late-arriving mobile data. This means:
+
+- Events from the same user can arrive out of chronological order.
+- An event that happened first might be ingested after one that happened later.
+- Person properties set with `$set` reflect the last *ingested* value, not the last value by timestamp. Similarly, `$set_once` is claimed by the first *ingested* event, not the earliest by timestamp.
+
+Design your analytics with this in mind. Use event timestamps for time-based analysis rather than relying on ingestion order. Avoid building logic that assumes one event will always be processed before another – if ordering matters, build that logic into your application rather than depending on ingestion sequence.
+
+## 9. Filter out internal users
 
 Apps with few users can inadvertently inflate their own metrics by not filtering out their own usage. This leads to a bias in their data. For this reason, it's important to filter out events sent by your own team. 
 
@@ -120,7 +167,7 @@ There are a few ways to do this:
 
 See our guide on [how to filter out internal users](/tutorials/filter-internal-users) for more details on how to do this in PostHog.
 
-## 7. Use the same project for your website and app
+## 10. Use the same project for your website and app
 
 We recommend to track both your marketing site and app in the same [project](/docs/settings/projects). This enables you to do the following:
 

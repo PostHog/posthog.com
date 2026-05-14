@@ -43,7 +43,7 @@ Feature flags can be simple booleans (on/off) or multivariate (returning one of 
 
 The core job of a feature flag is to **[separate deployment from release](/product-engineers/decouple-deployment-from-release)**. You merge code to production whenever it's ready, and control who sees it – and when – through the flag.
 
-In PostHog, feature flags support percentage-based rollouts (ship to 5% of users, then 25%, then everyone), targeting based on [person](/docs/product-analytics/person-properties)or [group](/docs/product-analytics/group-analytics) properties as well as [cohorts](/docs/product-analytics/cohorts). You can also have a flag return a payload with data in any valid JSON type.
+In PostHog, feature flags support percentage-based rollouts (ship to 5% of users, then 25%, then everyone), targeting based on [person](/docs/product-analytics/person-properties)or [group](/docs/product-analytics/group-analytics) properties as well as [cohorts](/docs/data/cohorts). You can also have a flag return a payload with data in any valid JSON type.
 
 **When to use feature flags:**
 
@@ -141,7 +141,7 @@ Here's what that looks like in practice:
 
 **One bill.** Feature flag requests, remote config fetches, and experiment evaluations all count toward the same quota. You get [1M flag requests free per month](/pricing), and everything after that is $0.0001 per request. No separate experiment pricing, no surprise bills from a tool you forgot about.
 
-**Shared analytics context.** Filter any [funnel](/docs/product-analytics/funnels), [trend](/docs/product-analytics/trends), or [path analysis](/docs/product-analytics/paths) by feature flag value. Watch session replays filtered by experiment variant. Create [cohorts](/docs/product-analytics/cohorts) based on flag exposure and track their behavior over time.
+**Shared analytics context.** Filter any [funnel](/docs/product-analytics/funnels), [trend](/docs/product-analytics/trends), or [path analysis](/docs/product-analytics/paths) by feature flag value. Watch session replays filtered by experiment variant. Create [cohorts](/docs/data/cohorts) based on flag exposure and track their behavior over time.
 
 This matters because the alternative – stitching together a feature flag service, an experimentation platform, and an analytics tool – creates data integration work that never ends. 
 

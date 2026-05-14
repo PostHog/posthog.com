@@ -90,7 +90,7 @@ While PostHog uses cookies by default, it can be [configured not to use cookies]
 
 PostHog Cloud is [free to use up to 1 million events per month](/pricing) and 5,000 recordings. Paid plans include support for multiple projects, and advanced features like [A/B and multivariate testing](/manual/experimentation), [correlation analysis](/manual/correlation), [cohorts](/manual/cohorts) and [group analytics](/manual/group-analytics).
 
-<GDPRForm />
+<WizardCTA />
 
 ### 2. Plausible
 
@@ -357,7 +357,7 @@ GoAccess is open source and has no paid tiers.
 - Already using Vercel? Their built-in **Vercel Web Analytics** covers the basics.
 - Sysadmin who lives in the terminal? **GoAccess** analyzes server logs directly.
 
-<GDPRForm />
+<WizardCTA />
 
 ## Frequently asked questions
 

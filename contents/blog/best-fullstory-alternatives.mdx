@@ -82,18 +82,18 @@ Getting started takes minutes with [PostHog's setup wizard](/wizard), which walk
 <details>
 <summary>Main differences between PostHog and FullStory</summary>
 
-- PostHog includes [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), and [LLM analytics](/llm-analytics); FullStory doesn't offer any of these natively.
+- PostHog includes [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), and [LLM observability](/llm-analytics); FullStory doesn't offer any of these natively.
 - PostHog's session replay includes console logs, network monitoring, DOM explorer, and performance metrics; FullStory's replay focuses on frustration signals (rage clicks, dead clicks, error clicks) but lacks developer debugging tools.
 - PostHog uses transparent, usage-based pricing with a generous free tier (1M events, 5,000 replays free); FullStory's paid plan pricing requires contacting sales.
 - PostHog includes a built-in [data warehouse](/data-warehouse) for importing and querying external data from [Stripe](/docs/cdp/sources/stripe), [Hubspot](/docs/cdp/sources/hubspot), [Zendesk](/docs/cdp/sources/zendesk), and more; FullStory's data export options are more limited.
-- PostHog offers [SQL access](/docs/product-analytics/sql) for custom queries; FullStory doesn't support direct SQL querying.
+- PostHog offers [SQL access](/tutorials/hogql-autocapture) for custom queries; FullStory doesn't support direct SQL querying.
 
 </details>
 
 <details>
 <summary>Main similarities between PostHog and FullStory</summary>
 
-- Both support event [autocapture](/docs/autocapture) that starts collecting data immediately after installation.
+- Both support event [autocapture](/docs/product-analytics/autocapture) that starts collecting data immediately after installation.
 - Both include product analytics with funnels, user paths, and conversion tracking.
 - Both offer session replay and heatmaps for understanding user behavior.
 - Both provide user privacy controls and data masking options.
@@ -116,11 +116,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 >
 > PostHog provides all the tools of FullStory and more. Being self-serve with a generous free tier makes it an ideal alternative to try out. PostHog is an especially good fit for SaaS companies needing multiple tools to build the best product possible.
 
-<p>
-  <CallToAction to="https://posthog.com/docs/">
-    Learn more about using PostHog
-  </CallToAction>
-</p>
+<WizardCTA />
 
 ## 2. Smartlook
 
@@ -133,7 +129,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ### What is Smartlook?
 
-[Smartlook](/blog/best-smartlook-alternatives) is an analytics platform that combines session replays with product analytics, visualizations, and crash reports to generate user insights. It focuses on mobile apps with specific tools like mobile heatmaps, native rendering, and wireframe mode.
+[Smartlook](/blog/smartlook-alternatives) is an analytics platform that combines session replays with product analytics, visualizations, and crash reports to generate user insights. It focuses on mobile apps with specific tools like mobile heatmaps, native rendering, and wireframe mode.
 
 Cisco acquired Smartlook in June 2023 to strengthen its AppDynamics and Full-Stack Observability offerings, though Smartlook continues to operate as a standalone product.
 
@@ -655,7 +651,9 @@ We're biased, obviously, but we think PostHog is the perfect FullStory replaceme
 -   You want tools to ship, track, and analyze new features like A/B testing, feature flags, and surveys.
 -   You want to try before you buy (we're self-serve with a [generous free tier](/pricing))
 
-Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
+
+<WizardCTA />
 
 ## Frequently asked questions
 
@@ -676,7 +674,7 @@ Common reasons include: needing features FullStory doesn't offer (like feature f
 <details>
 <summary>What's the best FullStory alternative overall?</summary>
 
-For most teams, **[PostHog](/blog/posthog-vs-fullstory)** is the best alternative. It matches FullStory's session replay and analytics while adding [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), and a built-in [data warehouse](/data-warehouse) – all with transparent pricing and a generous free tier.
+For most teams, **[PostHog](/blog/posthog-vs-fullstory)** is the best alternative. It matches FullStory's session replay and analytics while adding [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [LLM observability](/llm-analytics), and a built-in [data warehouse](/data-warehouse) – all with transparent pricing and a generous free tier.
 
 </details>
 
@@ -764,7 +762,7 @@ Contentsquare [completed its acquisition of Heap](https://contentsquare.com/heap
 <details>
 <summary>What are the best product analytics tools in 2026?</summary>
 
-The top product analytics tools in 2026 include:
+The [top product analytics tools in 2026](/blog/best-product-analytics-tools-for-startups) include:
 
 - **[PostHog](/product-analytics)** – Best all-in-one platform combining product analytics with [web analytics](/web-analytics), [session replay](/session-replay), [A/B testing](/experiments), [feature flags](/feature-flags), and more
 - **[Mixpanel](/blog/posthog-vs-mixpanel)** – Best for self-serve product teams wanting fast, flexible analytics

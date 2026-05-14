@@ -20,20 +20,20 @@ The various PostHog products have been split into the following product groups:
 - Flags (experiments, feature flags, surveys)
 - Data (batch exports, data stack, ingestion, workflows)
 - Replay (replay)
-- Observability + AI & SDK/Implementation (error tracking, PostHog AI, LLM analytics, SDK/Implementation, mobile)
+- Observability + AI & client libraries (error tracking, PostHog AI, LLM analytics, SDK/Implementation, mobile)
 
 **A note on these groupings**: These product groups are based on current ticket volumes. As products grow or new ones launch, we'll split or reorganize them. This structure will evolve with our needs.
 
 ### SME ownership
 
-All technical support engineers share responsibility for:
-- **Analytics products** - this product group is shared as they represent the highest proportion of our tickets.
+All technical support engineers, regardless of SME ownership, work on:
+- **Analytics products** - work for this product group is shared as it represents the highest proportion of our tickets.
 - **Unclassified tickets** - where possible, these tickets should be updated with the correct product group.
 
 Beyond that, we have SMEs who own specific product groups. For each product group, we select one person from EU and one from NA to maintain timezone coverage:
 
 **Flags**
-- EU: <TeamMember name="Ben Lea" photo />, NA: <TeamMember name="Joshua Ordehi" photo />
+- EU: <TeamMember name="Ben Lea" photo />, NA: <TeamMember name="Phillip Ramirez" photo />
 
 **Data**
 - EU: <TeamMember name="Luke Belton" photo />, NA: <TeamMember name="Kyle Swank" photo />
@@ -41,13 +41,16 @@ Beyond that, we have SMEs who own specific product groups. For each product grou
 **Replay**
 - EU: <TeamMember name="Christian Rafferty" photo />, NA: <TeamMember name="Ben Haynes" photo />
 
-**Observability + AI & SDK/Implementation**
+**Observability + AI & client libraries**
 - EU: <TeamMember name="Christiaan Hendriksen" photo />, NA: <TeamMember name="Steven Shults" photo />
+
+**Analytics**
+- EU: <TeamMember name="Xander Jones" photo />
 
 
 ## What SMEs actually do
 
-Being an SME means you're the go-to person for your product group. This breaks down into two key aspects:
+Being an SME means you're the go-to person for your product group. This breaks down into three key aspects:
 
 ### Own the customer perspective
 - Maintain oversight of all tickets in your product group
@@ -61,6 +64,11 @@ Being an SME means you're the go-to person for your product group. This breaks d
 - Keep an eye on their Slack channels to know what's recently shipped and what's being worked on
 - Understand what's on their roadmap
 - Bring customer context to help with their quarterly planning - what bugs are most prominent, what features users want most
+
+### Improve support
+- Look to improve the support experience within your product group
+- Identify ways we can proactively help customers and prevent tickets (e.g. docs, in-app prompts, automatic checks)
+- Look for ways to streamline support operations for your product group (i.e. identify most common investigation steps that could be surfaced onto tickets automatically)
 
 ## How to work as an SME
 

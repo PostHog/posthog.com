@@ -49,6 +49,11 @@ const UploadSymbolSetsPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg',
         },
         {
+            label: 'iOS',
+            url: '/docs/error-tracking/upload-source-maps/ios',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg',
+        },
+        {
             label: 'Rollup',
             url: '/docs/error-tracking/upload-source-maps/rollup',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Rollup_js_c306a2fde3.svg',

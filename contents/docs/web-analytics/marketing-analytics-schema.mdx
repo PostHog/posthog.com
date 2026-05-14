@@ -71,7 +71,7 @@ These columns are available for all platforms in the Marketing Analytics dashboa
 
 Each advertising platform provides data using different field names. PostHog normalizes these into the standard columns above.
 
-<Tab.Group tabs={['Google Ads', 'Meta Ads', 'LinkedIn Ads', 'Bing Ads', 'TikTok Ads', 'Reddit Ads', 'Snapchat Ads']}>
+<Tab.Group tabs={['Google Ads', 'Meta Ads', 'LinkedIn Ads', 'Bing Ads', 'TikTok Ads', 'Reddit Ads', 'Snapchat Ads', 'Pinterest Ads']}>
 <Tab.List>
 <Tab>Google Ads</Tab>
 <Tab>Meta Ads</Tab>
@@ -80,6 +80,7 @@ Each advertising platform provides data using different field names. PostHog nor
 <Tab>TikTok Ads</Tab>
 <Tab>Reddit Ads</Tab>
 <Tab>Snapchat Ads</Tab>
+<Tab>Pinterest Ads</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
@@ -200,7 +201,23 @@ arraySum(x -> JSONExtractFloat(x, 'value'),
 | `Reported Conversion Value` | `conversion_purchases_value` | Value of attributed "PURCHASE" conversion events (micro-units of the Ad Account's currency) | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
 | Date field | `start_time` | Start time of reporting period | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
 
-**Required tables:** `campaigns` and `campaign_stats`
+**Required tables:** `campaigns` and `campaign_stats_daily`
+
+</Tab.Panel>
+<Tab.Panel>
+
+| PostHog Column | Pinterest Ads Field | Notes | Platform Docs |
+|----------------|-------------------|-------|---------------|
+| `Campaign` | `name` | Campaign name | [Pinterest API v5](https://developers.pinterest.com/docs/api/v5/ad_account-campaigns-list/) |
+| `ID` | `id` | Campaign ID | [Pinterest API v5](https://developers.pinterest.com/docs/api/v5/ad_account-campaigns-list/) |
+| `Impressions` | `total_impression` | Total impressions (paid + organic) | [Pinterest API v5 - Analytics](https://developers.pinterest.com/docs/api/v5/ads-analytics/) |
+| `Clicks` | `total_clickthrough` | Total clickthroughs | [Pinterest API v5 - Analytics](https://developers.pinterest.com/docs/api/v5/ads-analytics/) |
+| `Cost` | `spend_in_dollar` | Despite the name, uses the ad account's configured currency (not necessarily USD). Converted from `currency` if available. | [Pinterest API v5 - Analytics](https://developers.pinterest.com/docs/api/v5/ads-analytics/) |
+| `Reported Conversion` | `total_conversions` | Only available if conversion tracking is configured | [Pinterest API v5 - Analytics](https://developers.pinterest.com/docs/api/v5/ads-analytics/) |
+| `Reported Conversion Value` | `total_checkout_value_in_micro_dollar` | Divided by 1,000,000 (stored in micro dollars). Only available if conversion tracking is configured. | [Pinterest API v5 - Analytics](https://developers.pinterest.com/docs/api/v5/ads-analytics/) |
+| Date field | `date` | Reporting date | |
+
+**Required tables:** `campaigns` and `campaign_analytics`
 
 </Tab.Panel>
 </Tab.Panels>
@@ -219,6 +236,7 @@ PostHog converts all monetary values (costs and conversion values) to your [base
 | TikTok Ads | `currency` | Base currency |
 | Reddit Ads | `currency` | Base currency |
 | Snapchat Ads | `currency` | Base currency |
+| Pinterest Ads | `currency` | Base currency |
 
 ## Related documentation
 

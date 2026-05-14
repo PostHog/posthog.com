@@ -1,0 +1,20 @@
+Add `PostHogProvider` and `PostHogPageView` to your `_app`:
+
+```tsx file=pages/_app.tsx
+import type { AppProps } from 'next/app'
+import { PostHogProvider, PostHogPageView } from '@posthog/next/pages'
+
+export default function App({ Component, pageProps }: AppProps) {
+    return (
+        <PostHogProvider
+            apiKey={process.env.NEXT_PUBLIC_POSTHOG_KEY!}
+            clientOptions={{ api_host: '/ingest' }}
+        >
+            <PostHogPageView />
+            <Component {...pageProps} />
+        </PostHogProvider>
+    )
+}
+```
+
+> **Note:** For the Pages Router, import from `@posthog/next/pages` instead of `@posthog/next`.

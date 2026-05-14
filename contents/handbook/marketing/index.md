@@ -6,7 +6,16 @@ showTitle: true
 
 ## How marketing works
 
-Marketing at PostHog is a collaborative effort across several teams. It is also specifically a multi-disciplinary creative team in it's own right. If that's confusing, you can check [Who can help me?](/handbook/marketing/ownership) for more on who to talk to.
+Marketing at PostHog is a collaborative effort across several teams. There are six distinct teams that handle different aspects of marketing:
+
+- **Graphics** – Leads all art, design, illustration, and brand work for PostHog
+- **Website** – Leads all matters related to posthog.com and handles some product design aspects
+- **Marketing** – A multidisciplinary team that handles Product Marketing, Influencers & Partnerships, and other unowned marketing tasks
+- **Editorial** – Leads content, newsletters, and social
+- **YouTube** – Leads video
+- **Docs & Wizard** – Leads on documentation and the wizard
+
+If you're not sure who to talk to, check [Who can help me?](/handbook/marketing/ownership).
 
 ## Marketing values
 

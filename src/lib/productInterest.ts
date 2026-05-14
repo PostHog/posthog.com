@@ -34,6 +34,8 @@ const PRODUCT_SLUGS = new Set([
     'workflows',
     'logs',
     'endpoints',
+    'posthog-code',
+    'inbox',
 ])
 
 function getPostHog() {

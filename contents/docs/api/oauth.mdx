@@ -1,0 +1,102 @@
+---
+title: OAuth integration
+sidebar: Docs
+showTitle: true
+---
+
+PostHog supports [OAuth 2.0](https://datatracker.ietf.org/doc/html/rfc6749) for third-party applications to access PostHog on behalf of users. This page explains how to integrate with PostHog's OAuth system.
+
+## OAuth server endpoints
+
+PostHog's OAuth endpoints are available per-region, as well as through a region-agnostic domain that transparently handles routing between US and EU Cloud:
+
+| Region | Base URL |
+|--------|----------|
+| US Cloud | `https://us.posthog.com` |
+| EU Cloud | `https://eu.posthog.com` |
+| Region-agnostic | `https://oauth.posthog.com` |
+
+If you're building an integration that should work for any PostHog customer regardless of their region, use `https://oauth.posthog.com`. The [well-known metadata endpoint](#client-id-metadata-document-cimd) works the same way for all three domains.
+
+## Client ID Metadata Document (CIMD)
+
+If you're building an application that needs to integrate with PostHog's OAuth, we recommend using the [**Client ID Metadata Document (CIMD)**](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) approach.
+
+With CIMD, you don't pre-register your OAuth client with PostHog. Instead:
+
+1. **Your `client_id` is a URL** on a domain you control (for example, `https://myapp.example.com/oauth-client`).
+2. **You host a metadata document at that URL** – a JSON file describing your client. PostHog fetches this document during the OAuth flow to learn about your application.
+3. **The domain serves as your client's identity**. Users will see the metadata you publish (including the name and, optionally, a logo) on the authorization screen.
+
+### Metadata document contents
+
+The JSON document you host at your `client_id` URL should include at least:
+
+```json
+{
+  "client_id": "https://myapp.example.com/oauth-client",
+  "client_name": "My App",
+  "logo_uri": "https://myapp.example.com/logo.png",
+  "redirect_uris": [
+    "https://myapp.example.com/oauth/callback"
+  ]
+}
+```
+
+- `client_name` (required) – The human-readable name of your application, shown to users on the authorization screen.
+- `logo_uri` (optional) – A URL to a logo image that will be shown alongside the name on the authorization screen.
+- `redirect_uris` (required) – The URLs PostHog is allowed to redirect users to after authorization.
+
+Because the `client_id` is a URL you control, your organization implicitly "owns" it – anyone fetching the URL sees the same metadata, which is how PostHog validates the client identity.
+
+See the [OAuth Client ID Metadata Document draft](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) for the full specification.
+
+## Server metadata discovery
+
+PostHog exposes its OAuth server configuration through the standard well-known metadata endpoint:
+
+- `https://oauth.posthog.com/.well-known/oauth-authorization-server`
+- `https://us.posthog.com/.well-known/oauth-authorization-server`
+- `https://eu.posthog.com/.well-known/oauth-authorization-server`
+
+Example:
+
+```bash
+curl https://oauth.posthog.com/.well-known/oauth-authorization-server
+```
+
+The response contains the endpoints and capabilities you need, including:
+
+- `authorization_endpoint` – Where to send users to authorize
+- `token_endpoint` – Where to exchange codes for tokens
+- `scopes_supported` – Available OAuth scopes (see below)
+- `response_types_supported` – Supported response types
+
+## Supported scopes
+
+The scopes available through OAuth are listed in the `scopes_supported` field of the metadata document and mirror the scopes available for [personal API keys in our REST API](/docs/api). Request only the scopes your application actually needs – this is a security best practice and reduces friction for users on the authorization screen.
+
+## Claiming your OAuth integration
+
+The <SmallTeam slug="growth" /> is working on creating a better, more streamlined process for partners to register and claim OAuth integrations with PostHog. In the meantime, CIMD provides a reliable way to integrate with PostHog's OAuth system without a manual registration step.
+
+If you need to register an official OAuth integration or have questions about the integration process, email **team-growth@posthog.com**.
+
+## Token types
+
+PostHog OAuth uses the following token prefixes:
+
+| Token type | Prefix | Description |
+|------------|--------|-------------|
+| Access token | `pha_` | Short-lived token for API access |
+| Refresh token | `phr_` | Long-lived token to obtain new access tokens |
+
+Both token types are automatically revoked if detected by [GitHub secret scanning](/docs/api#github-secret-scanning).
+
+## Further reading
+
+- [OAuth 2.0 (RFC 6749)](https://datatracker.ietf.org/doc/html/rfc6749) – The core OAuth 2.0 authorization framework
+- [OAuth 2.0 Authorization Server Metadata (RFC 8414)](https://datatracker.ietf.org/doc/html/rfc8414) – Server metadata discovery via `.well-known`
+- [OAuth Client ID Metadata Document](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) – The CIMD specification
+- [API overview](/docs/api) – Learn about PostHog's API authentication options and scopes
+- [Personal API keys](/docs/api#private-endpoint-authentication) – Alternative authentication for scripts and integrations

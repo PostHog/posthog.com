@@ -1,0 +1,113 @@
+---
+title: Trace Reviews
+---
+
+Trace Reviews are the manual review workflow in [LLM analytics](/docs/llm-analytics). They let your team inspect individual [traces](/docs/llm-analytics/traces), apply structured scores, add reasoning, and work through pending traces in queues.
+
+Use Trace Reviews when you want to look closely at real traces from production, understand what actually went wrong, and capture those learnings in a repeatable way. In practice, teams often use reviews to investigate traces surfaced by user feedback, support tickets, errors, new features, or other signals that suggest a trace deserves a human look.
+
+Reviews are also a practical way to find gaps in your [evaluations](/docs/llm-analytics/evaluations). Manual review helps you spot failure modes you have not encoded yet, so you can turn them into better automated checks later.
+
+## How Reviews work
+
+The **Reviews** area in LLM analytics has three parts:
+
+- **Queues** organize traces that still need review.
+- **Reviews** lists saved trace reviews.
+- **Scorers** define the reusable fields reviewers can apply to each trace.
+
+A review is saved per trace, not per generation. Each trace can only have one active review at a time.
+
+If you only need a manual note, you can save a review with reasoning and no scores.
+
+## Scorers
+
+Scorers are reusable review fields. Instead of reviewers typing free-form notes every time, you can define a standard set of fields once and use them across many traces.
+
+PostHog supports three scorer types:
+
+- **Categorical** for labels like `Resolved`, `Escalate`, or `Hallucination`.
+- **Numeric** for scores like confidence, severity, or quality.
+- **Boolean** for yes/no or good/bad style judgments.
+
+Categorical scorers can be either single-select or multi-select. Numeric scorers can optionally enforce a minimum, maximum, and step size. Boolean scorers can use custom labels instead of plain true/false.
+
+Scorers are versioned. When you change a scorer's config, PostHog creates a new version instead of rewriting history. Existing reviews keep the scorer version and config snapshot they were saved with, so old reviews remain stable even if you later rename options, change labels, or archive the scorer.
+
+## Review queues
+
+Review queues are for traces that still need manual review.
+
+They are useful when you want to collect traces first and review them later, for example:
+
+- support escalations
+- traces flagged by user feedback
+- traces flagged by your team
+- traces connected to errors or incidents
+- prompt failures
+- traces using a newly shipped feature
+- high-value customer conversations
+
+To use queues:
+
+1. Create a queue in **LLM analytics** > **Reviews** > **Queues**
+2. Open a trace and click **Add to queue**
+3. Choose an existing queue or create a new one inline
+4. Open the queue later and work through the pending traces
+
+Each pending trace can only be in one active queue at a time.
+
+When you open a trace from a queue, PostHog keeps the queue context so you can:
+
+- go back to the queue
+- move to the previous trace
+- move to the next trace
+
+This makes it easy to review a batch of traces one after another.
+
+Once you save a review for a queued trace, that trace automatically leaves the queue. Queues are for pending work, not for storing completed reviews.
+
+## Reviewing a trace
+
+To review a trace:
+
+1. Open a trace in [Traces](/docs/llm-analytics/traces) or from a review queue
+2. Click **Review**
+3. Select the scorers you want to use for that trace
+4. Fill in the score values
+5. Add optional reasoning or notes
+6. Save the review
+
+You don't need to use every scorer on every trace. Reviewers pick only the scorers that are relevant for the current trace.
+
+You can also edit an existing review later. Updating a review replaces the saved score set with the values you submit, and updates the reviewer and timestamp.
+
+If a trace came from a queue, saving the review removes it from that queue automatically.
+
+## Saved reviews
+
+The **Reviews** tab shows all saved trace reviews in one place.
+
+You can:
+
+- search by trace ID or comment
+- filter reviews by scorer
+- open the underlying trace
+- see the saved score tags, reviewer, comment, and last updated time
+
+If you delete a review, it disappears from the active reviews list and you can create a new active review for that trace later.
+
+## Trace Reviews vs. evaluations
+
+Trace Reviews and [evaluations](/docs/llm-analytics/evaluations) solve different problems:
+
+| | Trace Reviews | Evaluations |
+|---|---|---|
+| **Who runs it** | A human reviewer | An LLM judge or code |
+| **Best for** | Escalations, QA, nuanced judgment, manual spot checks | Automated quality checks and monitoring |
+| **Workflow** | Queues, scorers, and notes | Prompts or code running automatically |
+
+In practice, they work well together:
+
+- Use **evaluations** to score large volumes of LLM output automatically.
+- Use **Trace Reviews** when a person needs to inspect the full trace and make a judgment manually, often leading to new patterns that can be tested via evaluations.

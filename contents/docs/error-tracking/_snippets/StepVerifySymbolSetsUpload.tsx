@@ -3,7 +3,7 @@ import { Step } from '../../../../src/components/Docs/Steps'
 import { CallToAction } from '../../../../src/components/CallToAction'
 
 interface StepVerifySymbolSetsUploadProps {
-    symbolType?: 'source maps' | 'mappings'
+    symbolType?: 'source maps' | 'mappings' | 'dSYMs'
 }
 
 export const StepVerifySymbolSetsUpload: React.FC<StepVerifySymbolSetsUploadProps> = ({
@@ -16,7 +16,7 @@ export const StepVerifySymbolSetsUpload: React.FC<StepVerifySymbolSetsUploadProp
                 className="my-2"
                 size="sm"
                 type="secondary"
-                to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets"
+                to="https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets"
                 external={true}
             >
                 Check symbol sets in PostHog

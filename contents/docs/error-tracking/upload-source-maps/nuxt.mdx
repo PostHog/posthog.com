@@ -5,7 +5,6 @@ showStepsToc: true
 
 import CLIDownload from '../_snippets/cli/download.mdx'
 import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
-import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
 
 ## Nuxt v3.7 and above
 
@@ -73,7 +72,7 @@ Before proceeding, confirm that source maps are being properly uploaded.
 
 You can verify the injection is successful by checking your `.mjs.map` source map files for `//# chunkId=` comments. Make sure to serve these injected files in production, PostHog will check for the `//# chunkId` comments to display the correct stack traces.
 
-<OSButton variant="secondary" asLink className="my-2" size="sm" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external>
+<OSButton variant="secondary" asLink className="my-2" size="sm" to="https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets" external>
     Check symbol sets in PostHog
 </OSButton>
 

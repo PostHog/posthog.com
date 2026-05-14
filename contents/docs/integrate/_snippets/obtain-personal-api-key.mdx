@@ -15,3 +15,15 @@ Personal API keys can enable full access to your account, like logging in with y
 You can create up to 10 personal API keys. Personal API keys are deleted when a user is deleted.
 
 ![How to create an api key](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/api/create-api-key.png)
+
+#### Rolling and upgrading legacy keys
+
+Personal API keys created before February 2024 use legacy PBKDF2 hashing. These keys still work, but use an older, slower hashing method. They display a **Legacy** status tag in the keys table.
+
+To upgrade a legacy key to the modern sha256 hashing format:
+
+1. Click on the key in the keys table to open the edit modal.
+2. Click **Roll key** in the warning banner.
+3. Confirm the action in the dialog.
+
+Rolling a key generates a new key value and invalidates the old one. Update the new key value wherever the old key was used.

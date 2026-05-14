@@ -1,0 +1,45 @@
+---
+title: Write SQL with PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) generates and fixes [HogQL](/docs/hogql) queries from natural language. Describe the data you want, and PostHog AI writes the query – including joins, CTEs, and subqueries – using your project's actual tables and columns.
+
+## How it works
+
+PostHog AI explores your [Data Warehouse](/docs/data-warehouse) schema to find the right tables and columns, writes the HogQL query with the correct syntax, joins, and filters, then runs it and returns results. It knows your schema – including external sources like Stripe, HubSpot, and any linked warehouse tables – so you can query across all your data without memorizing table names.
+
+## Fix broken queries
+
+You can also paste a broken query and ask PostHog AI to fix it. It identifies syntax errors, missing columns, and incorrect joins, then returns the corrected query with an explanation of the error.
+
+## Explore your schema
+
+Not sure what data is available? Ask PostHog AI to list your tables, describe their columns, or show sample data. This is useful when you're working with [external sources](/docs/data-warehouse/sources) that you haven't queried before.
+
+Example prompts for schema exploration:
+
+- "What tables do I have?"
+- "What columns are in the `stripe_subscriptions` table?"
+- "Show me 5 sample rows from `hubspot_contacts`"
+
+## Try it
+
+Select a prompt to try it out in the PostHog app:
+
+- [`Write a SQL query to find the top 10 events by count this week`](https://app.posthog.com/#panel=max:Write%20a%20SQL%20query%20to%20find%20the%20top%2010%20events%20by%20count%20this%20week)
+- [`Fix the syntax error in the query I have open`](https://app.posthog.com/#panel=max:Fix%20the%20syntax%20error%20in%20the%20query%20I%20have%20open)
+- [`List all available tables and their columns`](https://app.posthog.com/#panel=max:List%20all%20available%20tables%20and%20their%20columns)
+- [`Write a query joining events with Stripe subscription data`](https://app.posthog.com/#panel=max:Write%20a%20query%20joining%20events%20with%20Stripe%20subscription%20data)
+- [`Find users who triggered event X but not event Y in the last 30 days`](https://app.posthog.com/#panel=max:Find%20users%20who%20triggered%20event%20X%20but%20not%20event%20Y%20in%20the%20last%2030%20days)
+- [`Create a CTE that calculates weekly active users by cohort`](https://app.posthog.com/#panel=max:Create%20a%20CTE%20that%20calculates%20weekly%20active%20users%20by%20cohort)
+
+## Tips for better results
+
+- **Reference table names** – If you know the table (e.g. `stripe_charges` or `events`), include it in your prompt
+- **Describe the output shape** – "Group by day and show a count" or "Return the top 10 by revenue" helps PostHog AI structure the query
+- **Ask about your schema first** – Exploring your tables before querying helps you write better prompts
+- **Iterate on results** – "Add a filter for paid users" or "Break this down by country" refines the query without starting over
+
+## Get started
+
+To start writing SQL with PostHog AI, [set up PostHog AI](/docs/posthog-ai/start-here).

@@ -12,7 +12,7 @@ The [HTML snippet](/docs/web-analytics/installation/html-snippet) loads `posthog
 
 However, there are a few things which can break the intended auto-update behavior:
 
-- \*\*Invalid changes to the HTML snippet\*\* - Making changes to the HTML snippet, other than those covered in the [config](/docs/libraries/js/config) and [reference](/docs/references/posthog-js) docs, can cause problems. For example: wrapping the snippet in an additional `if (!window.posthog)` check will cause the browser to serve the old SDK from cache, so the browser gets stuck on the first version they loaded (until/unless the end-user does a hard refresh). This error is often a result of LLMs "defensively" trying to prevent the snippet from being loaded twice, even though the snippet already handles that.
+- **Invalid changes to the HTML snippet** - Making changes to the HTML snippet, other than those covered in the [config](/docs/libraries/js/config) and [reference](/docs/references/posthog-js) docs, can cause problems. For example: wrapping the snippet in an additional `if (!window.posthog)` check will cause the browser to serve the old SDK from cache, so the browser gets stuck on the first version they loaded (until/unless the end-user does a hard refresh). This error is often a result of LLMs "defensively" trying to prevent the snippet from being loaded twice, even though the snippet already handles that.
 
 - **Outdated snippet code** - The snippet itself (the loader stub) occasionally needs updating, to make sure you're initializing PostHog in a way that includes more recent bug fixes and improvements. To make sure you're using the most recent version of the snippet, copy the HTML snippet directly from your [project settings](https://app.posthog.com/settings/project-details#snippet) and paste it directly into the `<head>` section of the HTML for your site or app. (Be sure to remove the old version while you're at it.)
 
@@ -58,6 +58,7 @@ Even after you've deployed an updated version of `posthog-js`, some users may co
 - **Service workers** that cache your app's assets may continue serving an old bundle until the service worker itself is updated.
 - **ISP and/or corporate proxy caching** can intercept and serve stale responses before they reach the browser.
 - **Browser extensions** may intercept or modify network requests in ways that prevent updates from loading.
+- **An incorrectly configured reverse proxy** can prevent the latest SDK version from being used, by improperly caching an old version.
 
 One effective way to prevent CDN and proxy caching from impacting the PostHog web SDK HTML snippet is to [deploy a reverse proxy](/docs/advanced/proxy). Our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) sets a cache header of 60 seconds. You can also [roll your own reverse proxy](/docs/advanced/proxy#deploy-your-own-proxy) for full control.
 

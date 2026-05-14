@@ -197,7 +197,7 @@ Finally, set up a `survey sent` event capture when the user clicks the submit bu
     posthog.capture("survey sent", {
       $survey_id: survey.id,
       $survey_name: survey.name,
-      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: textAreaValue,
+      $survey_response: textAreaValue,
       $survey_questions: [
         {
           id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
@@ -258,7 +258,7 @@ const submit = () => {
   posthog.capture("survey sent", {
     $survey_id: survey.id,
     $survey_name: survey.name,
-    $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: textAreaValue,
+    $survey_response: textAreaValue,
     $survey_questions: [
       {
         id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",

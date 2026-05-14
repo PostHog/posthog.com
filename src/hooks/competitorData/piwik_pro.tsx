@@ -17,6 +17,7 @@ export const piwik_pro = {
                 snippet_install: true,
                 traffic_breakdown: true,
                 utm_tracking: true,
+                web_vitals: true,
             },
         },
         product_analytics: {
@@ -69,6 +70,12 @@ export const piwik_pro = {
         },
         heatmaps: {
             available: true,
+        },
+        error_tracking: {
+            available: 'Limited', // https://help.piwik.pro/support/collecting-data/track-javascript-errors/
+        },
+        surveys: {
+            available: false,
         },
     },
     platform: {
