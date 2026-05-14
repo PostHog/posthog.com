@@ -65,24 +65,46 @@ const skills: SkillCardProps[] = [
         iconBg: 'bg-red/10',
     },
     {
-        title: 'Weekly Metrics Digest',
-        type: 'Reporting',
-        tagline: 'You are not, in fact, writing this by hand again.',
+        title: 'Power User Discovery',
+        type: 'Product',
+        tagline: 'Who is actually addicted to your product?',
         description:
-            'Pulls product metrics from PostHog every week, compares to prior week, flags anomalies, posts to Slack.',
-        sideEffect: 'Reclaims about 38 minutes per week. You will spend 12 of them wondering what to do.',
+            'Scores users on frequency, time in app, value actions, and feature breadth. Saves them as a PostHog cohort. Optionally invites the top ten to a user interview.',
+        sideEffect: 'You will discover your power users are not who you assumed they were.',
+        icon: (
+            <svg className="size-5 text-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                <path d="M4 22h16" />
+                <path d="M10 14.66V17c0 .55.47.98.97 1.21C12.15 18.75 13 20.24 13 22" />
+                <path d="M14 14.66V17c0 .55-.47.98-.97 1.21C11.85 18.75 11 20.24 11 22" />
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+            </svg>
+        ),
+        iconBg: 'bg-yellow/10',
+    },
+    {
+        title: 'Important Slack Threads',
+        type: 'Reporting',
+        tagline: 'What you missed this week, in two minutes.',
+        description:
+            'Scans the last 7 days of Slack for the threads that mattered — long, controversial, or unresolved — and flags disagreement and no-decision endings. Skips the GIF chains.',
+        sideEffect: 'You will realize how many decisions were quietly happening without you.',
         icon: (
             <svg className="size-5 text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                <line x1="8" y1="9" x2="16" y2="9" />
+                <line x1="8" y1="13" x2="13" y2="13" />
             </svg>
         ),
         iconBg: 'bg-blue/10',
     },
     {
-        title: 'Competitor Pricing Monitor',
+        title: 'Competitor Changelog Tracker',
         type: 'Growth',
         tagline: 'Watches them, so you don’t have to.',
-        description: 'Checks competitor pricing pages on a schedule. Diffs against last week. Alerts on changes.',
+        description:
+            'Checks 4–8 competitors across blog, jobs, social, and GitHub. Tags every finding as direct, inferred, or corroborated. Hands you a Slack-ready summary.',
         sideEffect: 'You will feel mildly smug on sales calls.',
         icon: (
             <svg className="size-5 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -91,6 +113,20 @@ const skills: SkillCardProps[] = [
             </svg>
         ),
         iconBg: 'bg-orange/10',
+    },
+    {
+        title: 'Weekly Metrics Digest',
+        type: 'Reporting',
+        tagline: 'You are not, in fact, writing this by hand again.',
+        description:
+            'Pulls product metrics from PostHog every week, compares to prior week, flags anomalies, posts to Slack.',
+        sideEffect: 'Reclaims about 38 minutes per week. You will spend 12 of them wondering what to do.',
+        icon: (
+            <svg className="size-5 text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+        ),
+        iconBg: 'bg-green/10',
     },
     {
         title: 'Release Notes Generator',

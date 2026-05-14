@@ -175,7 +175,7 @@ interface InventoryItem {
 const inventoryItems: InventoryItem[] = [
     {
         label: '#auto-reports',
-        caption: <>Slack channel. Hasn't auto-reported since May.</>,
+        caption: <>Slack channel. No auto-reports since May.</>,
         rotation: 'rotate-2',
         accent: 'bg-red/20',
     },
@@ -221,11 +221,11 @@ function PolaroidItem({ item }: { item: InventoryItem }) {
 // ─────────────────────────────────────────────
 
 const scheduledTasks = [
-    { time: 'Every Mon 9am', label: 'Competitor pricing check', color: 'text-blue' },
-    { time: 'Every Fri 4pm', label: 'Weekly metrics digest → Slack', color: 'text-green' },
-    { time: 'On PR merge', label: 'Draft release notes → #product-updates', color: 'text-orange' },
-    { time: 'Daily 8am', label: 'Support ticket triage + priority queue', color: 'text-red' },
-    { time: 'Monthly day 1', label: 'Financial summary → finance@company.com', color: 'text-purple' },
+    { time: 'Every Mon 9am', label: 'Competitor changelog check', color: 'text-orange' },
+    { time: 'Every Fri 4pm', label: 'Important Slack threads → #weekly-digest', color: 'text-blue' },
+    { time: 'Every Fri 5pm', label: 'Weekly metrics digest → Slack', color: 'text-green' },
+    { time: 'Monthly day 1', label: 'PMF survey check + power user cohort', color: 'text-red' },
+    { time: 'On PR merge', label: 'Draft release notes → #releases', color: 'text-purple' },
 ]
 
 function ScheduleCallout() {
@@ -274,8 +274,9 @@ function WorkWaySection() {
                     </div>
 
                     <p className="text-base leading-relaxed mb-6 order-1 text-secondary italic">
-                        Are you tired of copy-pasting Slack comments into ChatGPT every five minutes? Well, ChatGPT
-                        probably is too.
+                        Tired of copy-pasting Slack comments into ChatGPT?
+                        <br />
+                        Well, ChatGPT is sick of it too.
                     </p>
 
                     <div className="order-3 space-y-5 mb-6">
@@ -295,7 +296,9 @@ function WorkWaySection() {
                             <RoughAnnotation type="underline" color="#F54E00" strokeWidth={1.5}>
                                 take these complaints seriously
                             </RoughAnnotation>
-                            {' and solve them. Persistent memory. Scheduled execution. Shareable skills.'}
+                            {
+                                ' and solve them with proper organization, persistent memory, scheduled tasks, and shareable skills.'
+                            }
                         </ChoppyReveal>
                     </p>
                 </div>
@@ -348,9 +351,9 @@ function MockProjectView() {
 
 function MockScheduleView() {
     const tasks = [
-        { schedule: 'Mon 9:00am', name: 'Competitor Pricing Check', status: 'completed', lastRun: '2h ago' },
-        { schedule: 'Daily 8:00am', name: 'Support Ticket Triage', status: 'completed', lastRun: '4h ago' },
-        { schedule: 'Fri 4:00pm', name: 'Weekly Metrics Digest', status: 'pending', lastRun: 'Tomorrow' },
+        { schedule: 'Mon 9:00am', name: 'Competitor Changelog Tracker', status: 'completed', lastRun: '2h ago' },
+        { schedule: 'Fri 4:00pm', name: 'Important Slack Threads', status: 'completed', lastRun: '4h ago' },
+        { schedule: 'Fri 5:00pm', name: 'Weekly Metrics Digest', status: 'pending', lastRun: 'Tomorrow' },
         { schedule: 'On PR merge', name: 'Release Notes Generator', status: 'active', lastRun: 'Watching...' },
     ]
     const statusColors: Record<string, string> = {
@@ -427,9 +430,9 @@ function MockConnectorsView() {
 
 function MockTeamView() {
     const shared = [
-        { name: 'Weekly Metrics Digest', author: 'Sarah (PM)', uses: 12 },
-        { name: 'Competitor Monitor', author: 'Marcus (Growth)', uses: 8 },
-        { name: 'Support Triage', author: 'Jess (CS)', uses: 23 },
+        { name: 'PMF Tracker', author: 'Sarah (PM)', uses: 12 },
+        { name: 'Competitor Changelog Tracker', author: 'Marcus (Growth)', uses: 8 },
+        { name: 'Important Slack Threads', author: 'Jess (Ops)', uses: 23 },
     ]
     return (
         <div className="p-4 @xl:p-8">
