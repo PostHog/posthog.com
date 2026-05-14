@@ -125,13 +125,13 @@ function BriefSection() {
     return (
         <section className="relative mb-12 @xl:mb-20 px-4 @xl:px-8">
             <h2 className="text-2xl @lg:text-3xl font-bold mb-3 leading-tight">
-                "What's the use-case, and <span className="text-red dark:text-yellow">who is PostHog Work for?"</span>
+                "What's the use-case, and <span className="text-red dark:text-yellow">who is it for?"</span>
             </h2>
             <div className="max-w-2xl mb-12 space-y-3 leading-relaxed">
                 <p className="m-0">
-                    PostHog Work is for the non-technical, engineering-adjacent roles that help ship — PMs, PMMs,
-                    designers, ops folks. The people whose work lives everywhere. It gets rid of recurring manual tasks
-                    and context-switching.
+                    PostHog Work is for non-technical, engineering-adjacent roles that help ship — PMs, PMMs, designers,
+                    ops folks. The people whose work lives everywhere. It gets rid of recurring manual tasks and
+                    context-switching.
                 </p>
                 <p className="m-0">
                     You probably work with problem statements and personas for a living, so here's ours.
