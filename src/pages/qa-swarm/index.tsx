@@ -11,12 +11,14 @@ import {
     IconRewindPlay,
     IconRocket,
     IconSparkles,
-    IconTestTube,
     IconToggle,
     IconTrends,
     IconWarning,
     IconX,
 } from '@posthog/icons'
+import QASwarmIcon from 'components/QASwarmIcon'
+import GithubCommentImage from '../../images/qa-swarm/github-comment.png'
+import CheckHogImage from '../../images/qa-swarm/check-hog.png'
 
 const PRODUCT_HANDLE = 'qa_swarm'
 
@@ -34,119 +36,122 @@ type ComparisonRow = {
     values: ComparisonStatus[]
 }
 
-const panelClasses = {
-    purple: 'bg-purple text-white',
-    blue: 'bg-blue text-white',
-    yellow: 'bg-yellow text-black',
-    red: 'bg-red text-white',
-    seagreen: 'bg-seagreen text-white',
-    salmon: 'bg-salmon text-black',
-    lilac: 'bg-lilac text-black',
-}
+type Theme = 'white' | 'purple' | 'blue'
 
-const heroChecklist = [
-    'Opened the sandbox preview for this branch',
-    'Ran the signup and onboarding path',
-    'Verified the highest-volume survey flow still works',
-    'Captured screenshots, a GIF, and run metadata',
-]
-
-const userFlowFeatures: SlideFeature[] = [
+const productionFlowFeatures: SlideFeature[] = [
     {
-        title: 'Production-informed prioritization',
-        description: 'The swarm starts with flows your users already run instead of diff-only guesses.',
+        title: 'Flow prioritization from production data',
+        description: 'The swarm starts with the paths people actually run, not just files that changed.',
         icon: IconTrends,
     },
     {
-        title: 'Critical paths detected automatically',
-        description: 'High-traffic journeys float to the top without manual QA scripts.',
+        title: 'Auto-detected critical paths',
+        description: 'High-traffic journeys float to the top without someone hand-curating a test plan.',
         icon: IconFunnels,
     },
     {
-        title: 'Coverage tied to business impact',
-        description: 'Test effort follows risky product surfaces, not just lines changed.',
+        title: 'Coverage tied to revenue',
+        description: 'Coverage follows the flows that matter to activation, retention, and paid usage.',
         icon: IconRocket,
     },
     {
-        title: 'Less noise, more signal',
-        description: 'Agents spend time where breakage hurts users, revenue, or activation.',
+        title: 'Less churn, more signal',
+        description: 'Agents spend less time proving trivial diffs and more time on risky product behavior.',
         icon: IconSparkles,
     },
 ]
 
 const debugFeatures: SlideFeature[] = [
     {
-        title: 'Live logs during the run',
-        description: 'The failing test can inspect runtime output while the product is still in motion.',
+        title: 'Forms a root-cause hypothesis',
+        description: 'The agent classifies the failure, proposes a likely cause, and tests that theory.',
         icon: IconMessage,
     },
     {
-        title: 'Errors tied to code paths',
-        description: 'Failures connect traces, stack context, and the branch under review.',
+        title: 'Uses live runtime evidence',
+        description: 'Logs, errors, product events, and replay are part of the debug loop while the run is active.',
+        icon: IconWarning,
+    },
+    {
+        title: 'Correlates code and behavior',
+        description: 'The report ties the failing product path back to the code that likely caused it.',
         icon: IconCode,
     },
     {
-        title: 'Replay for every failure',
-        description: 'Agents can see what happened on screen instead of guessing from console text alone.',
+        title: 'Reports an honest verdict',
+        description: 'The output reads like an engineer investigating a bug, not a generic AI summary.',
         icon: IconRewindPlay,
-    },
-    {
-        title: 'Fixes grounded in evidence',
-        description: 'Suggested repairs are based on runtime signals, not a cold read of the diff.',
-        icon: IconWarning,
     },
 ]
 
 const loopFeatures: SlideFeature[] = [
     {
         title: 'Parallel agents per PR',
-        description: 'Multiple agents split the critical paths and investigate in parallel.',
-        icon: IconTestTube,
+        description: 'Independent agents exercise separate scenarios at the same time.',
+        icon: IconSparkles,
     },
     {
-        title: 'Fixes commit back to the branch',
-        description: 'When the swarm can repair an issue, it proposes a concrete code change.',
-        icon: IconCode,
-    },
-    {
-        title: 'Re-runs until must-fix issues clear',
-        description: 'The loop keeps going until the blocking failures are gone.',
+        title: 'Push-driven re-runs',
+        description: 'A new commit supersedes the old swarm instead of queueing stale work against old code.',
         icon: IconRocket,
     },
     {
-        title: 'Findings stay prioritized',
-        description: 'Must-fix regressions stay separate from nice-to-have cleanup.',
-        icon: IconSparkles,
+        title: 'Auto-fix commits to the branch',
+        description: 'When the path is clear, the swarm can patch the branch and verify the result.',
+        icon: IconCode,
+    },
+    {
+        title: 'Must-fix versus nice-to-have',
+        description: 'The output keeps blockers separate from cleanup so engineers know what actually matters.',
+        icon: IconCheck,
+    },
+]
+
+const resultFeatures: SlideFeature[] = [
+    {
+        title: 'PR comment with evidence',
+        description: 'PASS/FAIL, verdict table, screenshots, and metadata all land where review already happens.',
+        icon: IconMessage,
+    },
+    {
+        title: 'Preview URL for the run',
+        description: 'Each run links to the exact sandbox environment that the swarm tested.',
+        icon: IconArrowUpRight,
+    },
+    {
+        title: 'Slack and dashboard visibility',
+        description: 'Teams can see status changes without digging through a separate QA product.',
+        icon: IconDashboard,
     },
 ]
 
 const moatFeatures: SlideFeature[] = [
     {
-        title: 'Analytics drives test priority',
-        description: 'The swarm starts with flows users actually take.',
+        title: 'Product analytics chooses the path',
+        description: 'The swarm starts from what users do in production, not an abstract notion of coverage.',
         icon: IconTrends,
     },
     {
-        title: 'Replay records every run',
-        description: 'Agent behavior is inspectable instead of opaque.',
+        title: 'Session replay records every run',
+        description: 'Agent behavior is inspectable instead of hidden behind an opaque “AI tested this” label.',
         icon: IconRewindPlay,
     },
     {
-        title: 'Errors ground the diagnosis',
-        description: 'Failures connect to the same runtime signals engineers already trust.',
+        title: 'Error tracking grounds the diagnosis',
+        description: 'When something breaks, the same runtime evidence engineers already trust is right there.',
         icon: IconWarning,
     },
     {
-        title: 'Flags expand coverage',
-        description: 'The swarm can test multiple product states instead of only the default path.',
-        icon: IconToggle,
+        title: 'LLM Analytics traces the swarm itself',
+        description: 'Every tool call, every decision, and every agent run is observable in the same system.',
+        icon: IconSparkles,
     },
 ]
 
 const ecosystemFeatures: SlideFeature[] = [
     {
         title: 'Session replay',
-        description: 'Replay every agent test run and see exactly what happened before a failure.',
+        description: 'Replay every agent run and see exactly what happened before a failure.',
         icon: IconRewindPlay,
     },
     {
@@ -161,32 +166,26 @@ const ecosystemFeatures: SlideFeature[] = [
     },
     {
         title: 'Error tracking',
-        description: 'Tie every QA finding back to runtime failures in the same product engineers already use.',
+        description: 'Tie each QA finding back to production-grade runtime evidence.',
         icon: IconWarning,
     },
 ]
 
-const competitorCards = [
-    { name: 'Greptile TREX', tone: 'bg-blue/20 text-blue border-blue/40' },
-    { name: 'Tusk', tone: 'bg-yellow/25 text-yellow border-yellow/40' },
-    { name: 'Checksum', tone: 'bg-red/15 text-red border-red/40' },
-    { name: 'QA Wolf', tone: 'bg-seagreen/20 text-seagreen border-seagreen/40' },
-    { name: 'QA Swarm', tone: 'bg-purple/20 text-purple border-purple/40' },
-]
+const competitorCards = ['Greptile TREX', 'Tusk', 'Checksum', 'QA Wolf', 'QA Swarm']
 
 const comparisonSummary = {
     them: [
         {
             title: 'You already have a dedicated QA function',
-            description: 'A managed service or human-heavy workflow may fit better than agent-driven automation.',
+            description: 'A managed service or human-heavy process may fit better than agent-driven automation.',
         },
         {
             title: 'You do not want production data informing tests',
-            description: 'QA Swarm is opinionated about using real usage and runtime evidence.',
+            description: 'QA Swarm is opinionated about grounding tests in how people actually use the product.',
         },
         {
             title: 'You are not on PostHog',
-            description: 'The core advantage comes from the PostHog data layer underneath.',
+            description: 'The core edge comes from being native to the PostHog data layer.',
         },
     ],
     us: [
@@ -196,7 +195,7 @@ const comparisonSummary = {
         },
         {
             title: 'Auto-fix uses runtime evidence',
-            description: 'Agents debug with logs, errors, events, and replay before proposing changes.',
+            description: 'The agent debugs with logs, errors, events, replay, and traces before it suggests changes.',
         },
         {
             title: 'QA lives with the rest of your product data',
@@ -204,7 +203,7 @@ const comparisonSummary = {
         },
         {
             title: 'It closes the loop',
-            description: 'The goal is not just finding issues. The goal is getting the PR to green.',
+            description: 'The goal is not opening tickets. The goal is getting the PR to green.',
         },
     ],
 }
@@ -247,213 +246,242 @@ const comparisonRows: ComparisonRow[] = [
     },
     {
         feature: 'Hosted preview + QA report',
-        description: 'Shareable preview URL with full evidence',
+        description: 'Shareable preview URL with evidence',
         values: ['check', 'cross', 'cross', 'cross', 'cross'],
     },
     {
-        feature: 'Session replay of agent runs',
-        description: 'Every agent test recorded for debugging',
+        feature: 'Replay of agent runs',
+        description: 'Every agent run recorded for debugging',
         values: ['check', 'cross', 'cross', 'cross', 'warn'],
     },
 ]
 
 const howItWorksSteps = [
-    'PR opens and triggers the QA Swarm workflow',
-    'A sandbox preview spins up for that exact branch',
-    'Agents exercise real user flows and debug with live product signals',
-    'Findings post to the PR, fixes can land, and the run loops until green',
+    'PR opens and triggers QA Swarm through GitHub Actions.',
+    'A sandbox preview starts and the swarm kicks off asynchronously.',
+    'Agents exercise real user paths, debug with live data, and report health gates.',
+    'A new commit cancels the stale run and restarts the loop against the latest code.',
 ]
 
 const yamlSnippet = `name: qa-swarm
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: qa-swarm-\${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
-  validate:
+  qa-swarm:
     runs-on: ubuntu-latest
     steps:
-      - uses: posthog/qa-swarm-action@hackathon
-        with:
-          preview_url: \${{ steps.preview.outputs.url }}
-          product_signals: analytics,replay,errors,flags
-          mode: loop-until-green # placeholder`
+      - uses: actions/checkout@v4
+      - name: Kick off swarm
+        run: qa-swarm run --async --preview \${{ steps.preview.outputs.url }}
+      - name: Poll task status
+        run: qa-swarm wait --require health,coverage,verdict
+      - name: Fail if health gates failed
+        run: qa-swarm assert --all-green`
 
 const waitlistBullets = [
     'Get early access to the first QA Swarm previews.',
     'Help shape the workflow, reporting, and fix loop.',
-    'Try it against real PRs instead of a canned demo.',
+    'Try it on real PRs instead of a canned demo.',
 ]
 
-const SlideShell = ({
-    eyebrow,
-    title,
-    description,
-    tone,
-    children,
-}: {
-    eyebrow: string
-    title: string
-    description: string
-    tone: keyof typeof panelClasses
-    children: React.ReactNode
-}) => {
+const themeClasses: Record<Theme, string> = {
+    white: 'bg-light text-primary',
+    purple: 'bg-gradient-to-br from-[#7B3EF3] via-[#6F37E8] to-[#5E2FCF] text-white',
+    blue: 'bg-gradient-to-br from-[#3D7CFF] via-[#2D67E2] to-[#214FAF] text-white',
+}
+
+const ThemeSlide = ({ theme, children }: { theme: Theme; children: React.ReactNode }) => {
     return (
-        <div className={`h-full p-4 @2xl:p-8 ${panelClasses[tone]}`}>
-            <div className="h-full rounded-2xl bg-primary text-primary shadow-2xl overflow-hidden border border-primary/10">
-                <div className="px-6 py-5 @2xl:px-10 @2xl:py-8 border-b border-primary/10">
-                    <p className="text-sm uppercase tracking-[0.25em] text-secondary mb-2">{eyebrow}</p>
-                    <h2 className="text-3xl @2xl:text-5xl mb-2 @2xl:mb-4 text-balance">{title}</h2>
-                    <p className="text-base @2xl:text-xl text-secondary max-w-4xl mb-0">{description}</p>
-                </div>
-                <div className="p-6 @2xl:p-10 h-[calc(100%-10.5rem)] @2xl:h-[calc(100%-13rem)] overflow-hidden">
-                    {children}
-                </div>
+        <div className={`h-full ${themeClasses[theme]}`}>
+            <div className="mx-auto flex h-full max-w-[1180px] flex-col px-6 py-7 @2xl:px-10 @2xl:py-10">
+                {children}
             </div>
         </div>
     )
 }
 
-const FeatureList = ({ items }: { items: SlideFeature[] }) => {
+const SectionIntro = ({
+    eyebrow,
+    title,
+    description,
+    center = false,
+    inverted = false,
+    compact = false,
+}: {
+    eyebrow: string
+    title: string
+    description: string
+    center?: boolean
+    inverted?: boolean
+    compact?: boolean
+}) => {
+    return (
+        <div className={`${center ? 'text-center items-center' : ''} flex flex-col ${compact ? 'mb-5' : 'mb-7'}`}>
+            <p
+                className={`mb-2 text-sm font-semibold uppercase tracking-[0.22em] ${
+                    inverted ? 'text-white/70' : 'text-secondary'
+                }`}
+            >
+                {eyebrow}
+            </p>
+            <h2 className={`mb-3 text-balance ${center ? 'max-w-4xl' : 'max-w-3xl'} text-4xl @2xl:text-6xl`}>
+                {title}
+            </h2>
+            <p
+                className={`${center ? 'max-w-3xl' : 'max-w-2xl'} text-base @2xl:text-xl ${
+                    inverted ? 'text-white/80' : 'text-secondary'
+                }`}
+            >
+                {description}
+            </p>
+        </div>
+    )
+}
+
+const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+    <div
+        className={`rounded-2xl border border-primary/10 bg-primary shadow-[0_18px_60px_rgba(15,23,42,0.08)] ${className}`}
+    >
+        {children}
+    </div>
+)
+
+const ScreenshotCard = ({
+    src,
+    alt,
+    className = '',
+    imgClassName = '',
+}: {
+    src: string
+    alt: string
+    className?: string
+    imgClassName?: string
+}) => (
+    <Card className={`overflow-hidden ${className}`}>
+        <img src={src} alt={alt} className={`h-full w-full object-cover ${imgClassName}`} />
+    </Card>
+)
+
+const FeatureGrid = ({ items, inverted = false }: { items: SlideFeature[]; inverted?: boolean }) => {
     return (
         <div className="grid @2xl:grid-cols-2 gap-3 @2xl:gap-4">
             {items.map(({ title, description, icon: Icon }) => (
-                <div key={title} className="rounded-xl border border-primary/10 bg-accent p-4 @2xl:p-5">
-                    {Icon && <Icon className="size-6 mb-3 text-purple" />}
-                    <h3 className="text-xl mb-2">{title}</h3>
-                    <p className="text-secondary mb-0">{description}</p>
+                <div
+                    key={title}
+                    className={`rounded-2xl p-4 @2xl:p-5 ${
+                        inverted ? 'bg-white/10 backdrop-blur-sm' : 'bg-accent border border-primary/10'
+                    }`}
+                >
+                    {Icon && <Icon className={`mb-3 size-6 ${inverted ? 'text-white' : 'text-purple'}`} />}
+                    <h3 className={`mb-2 text-xl ${inverted ? 'text-white' : 'text-primary'}`}>{title}</h3>
+                    <p className={`${inverted ? 'text-white/80' : 'text-secondary'} mb-0`}>{description}</p>
                 </div>
             ))}
         </div>
     )
 }
 
-const StatusBadge = ({ label, tone }: { label: string; tone: 'success' | 'failure' }) => (
-    <div
-        className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold ${
-            tone === 'success' ? 'bg-seagreen/15 text-seagreen' : 'bg-red/15 text-red'
-        }`}
-    >
-        <span className={`size-2 rounded-full ${tone === 'success' ? 'bg-seagreen' : 'bg-red'}`} />
-        {label}
-    </div>
-)
+const ComparisonStatusIcon = ({ status }: { status: ComparisonStatus }) => {
+    if (status === 'check') {
+        return <IconCheck className="mx-auto size-4 text-green @2xl:size-5" />
+    }
+    if (status === 'warn') {
+        return <IconWarning className="mx-auto size-4 text-yellow @2xl:size-5" />
+    }
+    return <IconX className="mx-auto size-4 text-red @2xl:size-5" />
+}
 
-const HeroVisual = () => {
+const HeroImageStack = () => {
     return (
-        <div className="relative h-full rounded-2xl bg-gradient-to-br from-purple to-red p-4 @2xl:p-6 overflow-hidden">
-            <div className="absolute inset-x-8 top-6 h-24 rounded-full bg-white/10 blur-3xl" />
-            <div className="relative z-10 flex h-full flex-col justify-end">
-                <div className="mx-auto w-full max-w-5xl rounded-2xl bg-primary text-primary shadow-2xl border border-primary/15 overflow-hidden">
-                    <div className="border-b border-primary/10 px-4 py-3 @2xl:px-6 @2xl:py-4 flex flex-wrap items-center gap-3">
-                        <StatusBadge label="QA Swarm: PASS" tone="success" />
-                        <span className="text-sm text-secondary">
-                            Tested with Playwright on a sandboxed preview of this PR
-                        </span>
-                    </div>
-                    <div className="grid @2xl:grid-cols-[1.4fr_0.9fr] gap-4 p-4 @2xl:p-6">
-                        <div>
-                            <p className="text-sm uppercase tracking-[0.2em] text-secondary mb-3">What I checked</p>
-                            <ul className="m-0 p-0 list-none space-y-2">
-                                {heroChecklist.map((item) => (
-                                    <li key={item} className="flex gap-3 items-start">
-                                        <IconCheck className="size-5 text-seagreen mt-0.5 flex-shrink-0" />
-                                        <span>{item}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="grid grid-cols-2 gap-3 auto-rows-fr">
-                            <div className="rounded-xl bg-accent border border-primary/10 p-3 col-span-2">
-                                <div className="aspect-[16/7] rounded-lg bg-gradient-to-br from-purple/20 to-blue/20 border border-primary/10 relative overflow-hidden">
-                                    <div className="absolute left-4 right-4 bottom-4 flex gap-2">
-                                        <div className="h-2 flex-1 rounded-full bg-primary/20" />
-                                        <div className="h-2 w-16 rounded-full bg-seagreen" />
-                                    </div>
-                                </div>
-                                <p className="text-sm text-secondary mt-2 mb-0">
-                                    GIF placeholder: full flow walkthrough
-                                </p>
-                            </div>
-                            <div className="rounded-xl bg-accent border border-primary/10 p-3">
-                                <div className="aspect-[4/3] rounded-lg bg-gradient-to-br from-yellow/25 to-red/10 border border-primary/10" />
-                                <p className="text-sm text-secondary mt-2 mb-0">Embedded tab note</p>
-                            </div>
-                            <div className="rounded-xl bg-accent border border-primary/10 p-3">
-                                <div className="aspect-[4/3] rounded-lg bg-gradient-to-br from-blue/20 to-seagreen/20 border border-primary/10" />
-                                <p className="text-sm text-secondary mt-2 mb-0">Popover control path</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="border-t border-primary/10 px-4 py-3 @2xl:px-6 text-sm text-secondary">
-                        Run metadata: tested <code>b71394d3bd0</code> against <code>preview-pr58401.posthog.dev</code>
-                    </div>
-                </div>
-            </div>
+        <div className="relative mt-4 flex flex-1 items-end justify-center overflow-hidden">
+            <div className="pointer-events-none absolute inset-x-[10%] bottom-0 h-24 rounded-full bg-white/20 blur-3xl" />
+            <ScreenshotCard
+                src={GithubCommentImage}
+                alt="QA Swarm GitHub comment"
+                className="absolute left-[4%] top-14 hidden w-[28%] -rotate-[9deg] opacity-80 @2xl:block"
+                imgClassName="object-left-top"
+            />
+            <ScreenshotCard
+                src={GithubCommentImage}
+                alt="QA Swarm GitHub comment detail"
+                className="absolute right-[4%] top-20 hidden w-[29%] rotate-[9deg] opacity-80 @2xl:block"
+                imgClassName="object-right-top"
+            />
+            <ScreenshotCard
+                src={GithubCommentImage}
+                alt="QA Swarm GitHub hero screenshot"
+                className="relative z-20 w-full max-w-5xl border border-white/25 shadow-[0_30px_120px_rgba(21,12,50,0.35)]"
+            />
         </div>
     )
 }
 
-const FlowComparisonVisual = () => {
+const ProductionFlowVisual = () => {
     return (
-        <div className="grid @2xl:grid-cols-[0.9fr_1.1fr] gap-4 h-full">
-            <div className="rounded-2xl border border-primary/10 bg-accent p-4 @2xl:p-6">
-                <div className="flex items-center justify-between mb-4">
-                    <div>
-                        <p className="text-sm uppercase tracking-[0.2em] text-secondary mb-1">Diff-based QA</p>
-                        <h3 className="text-2xl mb-0">Tests what changed</h3>
-                    </div>
-                    <StatusBadge label="Narrow coverage" tone="failure" />
-                </div>
-                <div className="space-y-3">
-                    {['survey-editor.tsx', 'position-picker.tsx', 'tabs.tsx'].map((file) => (
-                        <div
-                            key={file}
-                            className="rounded-xl border border-primary/10 bg-primary p-4 flex items-center justify-between"
-                        >
-                            <span className="font-mono text-sm">{file}</span>
-                            <span className="text-sm text-secondary">changed</span>
+        <div className="grid flex-1 gap-5 @2xl:grid-cols-[1.02fr_0.98fr]">
+            <div className="grid gap-4">
+                <Card className="p-5 @2xl:p-6">
+                    <div className="mb-4 flex items-center justify-between">
+                        <div>
+                            <p className="mb-1 text-sm uppercase tracking-[0.18em] text-secondary">Diff-based QA</p>
+                            <h3 className="mb-0 text-2xl">Tests what changed</h3>
                         </div>
-                    ))}
-                </div>
-                <div className="mt-6 rounded-xl border border-dashed border-primary/20 p-4">
-                    <p className="text-secondary mb-0">
-                        Useful, but blind to the rest of the product surface area users actually depend on.
-                    </p>
-                </div>
+                        <span className="rounded-full bg-red/15 px-3 py-1 text-sm font-semibold text-red">Narrow</span>
+                    </div>
+                    <div className="space-y-3">
+                        {['survey-editor.tsx', 'position-picker.tsx', 'tabs.tsx'].map((file) => (
+                            <div
+                                key={file}
+                                className="flex items-center justify-between rounded-xl border border-primary/10 bg-accent px-4 py-3"
+                            >
+                                <span className="font-mono text-sm">{file}</span>
+                                <span className="text-sm text-secondary">changed</span>
+                            </div>
+                        ))}
+                    </div>
+                </Card>
+                <FeatureGrid items={productionFlowFeatures.slice(0, 2)} />
             </div>
-            <div className="rounded-2xl border border-primary/10 bg-primary p-4 @2xl:p-6">
-                <div className="flex items-center justify-between mb-4">
-                    <div>
-                        <p className="text-sm uppercase tracking-[0.2em] text-secondary mb-1">QA Swarm</p>
-                        <h3 className="text-2xl mb-0">Tests what matters in production</h3>
-                    </div>
-                    <StatusBadge label="Real usage coverage" tone="success" />
-                </div>
-                <div className="grid gap-3">
-                    {[
-                        { label: 'Signup', width: 'w-full' },
-                        { label: 'Onboarding', width: 'w-4/5' },
-                        { label: 'Create survey', width: 'w-3/4' },
-                        { label: 'Launch feedback button', width: 'w-2/3' },
-                    ].map(({ label, width }, index) => (
-                        <div key={label} className="rounded-xl border border-primary/10 bg-accent p-4">
-                            <div className="flex items-center justify-between mb-2">
-                                <span className="font-semibold">{label}</span>
-                                <span className="text-sm text-secondary">Top flow #{index + 1}</span>
-                            </div>
-                            <div className="h-3 rounded-full bg-primary/10 overflow-hidden">
-                                <div
-                                    className={`h-full rounded-full bg-gradient-to-r from-purple to-seagreen ${width}`}
-                                />
-                            </div>
+            <div className="grid gap-4">
+                <Card className="p-5 @2xl:p-6">
+                    <div className="mb-4 flex items-center justify-between">
+                        <div>
+                            <p className="mb-1 text-sm uppercase tracking-[0.18em] text-secondary">QA Swarm</p>
+                            <h3 className="mb-0 text-2xl">Tests what users actually do</h3>
                         </div>
-                    ))}
-                </div>
-                <div className="mt-6">
-                    <FeatureList items={userFlowFeatures} />
-                </div>
+                        <span className="rounded-full bg-purple/15 px-3 py-1 text-sm font-semibold text-purple">
+                            Production-informed
+                        </span>
+                    </div>
+                    <div className="space-y-3">
+                        {[
+                            { label: 'Signup', width: 'w-full' },
+                            { label: 'Onboarding', width: 'w-[85%]' },
+                            { label: 'Create survey', width: 'w-[72%]' },
+                            { label: 'Launch feedback button', width: 'w-[64%]' },
+                        ].map(({ label, width }) => (
+                            <div key={label} className="rounded-xl border border-primary/10 bg-accent p-4">
+                                <div className="mb-2 flex items-center justify-between">
+                                    <span className="font-semibold">{label}</span>
+                                    <span className="text-sm text-secondary">Top path</span>
+                                </div>
+                                <div className="h-3 rounded-full bg-primary/10">
+                                    <div
+                                        className={`h-full rounded-full bg-gradient-to-r from-[#7B3EF3] to-[#3D7CFF] ${width}`}
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </Card>
+                <FeatureGrid items={productionFlowFeatures.slice(2)} />
             </div>
         </div>
     )
@@ -461,153 +489,106 @@ const FlowComparisonVisual = () => {
 
 const DebugVisual = () => {
     return (
-        <div className="grid @2xl:grid-cols-[1.1fr_0.9fr] gap-4 h-full">
-            <div className="rounded-2xl border border-primary/10 bg-accent p-4 @2xl:p-6">
-                <div className="flex items-center justify-between mb-4">
-                    <div>
-                        <p className="text-sm uppercase tracking-[0.2em] text-secondary mb-1">Agent debug view</p>
-                        <h3 className="text-2xl mb-0">Failure, replay, and code context</h3>
-                    </div>
-                    <StatusBadge label="Live during run" tone="success" />
-                </div>
-                <div className="grid gap-3">
-                    <div className="rounded-xl border border-primary/10 bg-primary p-4">
-                        <div className="flex items-center justify-between mb-2">
-                            <span className="font-semibold">Runtime error</span>
-                            <span className="text-sm text-red">400ms ago</span>
-                        </div>
-                        <div className="rounded-lg bg-dark p-3 text-sm text-white font-mono">
-                            Error: position controls rendered for embedded survey
-                            <br />
-                            at SurveyEditor.handlePresentationChange
-                        </div>
-                    </div>
-                    <div className="grid @2xl:grid-cols-2 gap-3">
-                        <div className="rounded-xl border border-primary/10 bg-primary p-3">
-                            <div className="aspect-[4/3] rounded-lg bg-gradient-to-br from-blue/20 to-purple/20 border border-primary/10 relative overflow-hidden">
-                                <div className="absolute inset-x-3 bottom-3 h-2 rounded-full bg-primary/20" />
+        <div className="grid flex-1 gap-5 @2xl:grid-cols-[1fr_1fr]">
+            <div className="grid gap-4">
+                <Card className="p-5 @2xl:p-6">
+                    <p className="mb-2 text-sm uppercase tracking-[0.18em] text-secondary">Agent reasoning</p>
+                    <div className="grid gap-3">
+                        {[
+                            ['Observed failure', 'Position controls rendered for embedded survey'],
+                            ['Hypothesis', 'Presentation state leaked between embedded and popover flows'],
+                            ['Validation', 'Replay, logs, and editor state all point to the same branch change'],
+                        ].map(([label, value]) => (
+                            <div key={label} className="rounded-xl border border-primary/10 bg-accent p-4">
+                                <p className="mb-1 text-sm font-semibold text-secondary">{label}</p>
+                                <p className="mb-0">{value}</p>
                             </div>
-                            <p className="text-sm text-secondary mt-2 mb-0">
-                                Replay frame: incorrect Position UI visible
-                            </p>
-                        </div>
-                        <div className="rounded-xl border border-primary/10 bg-primary p-3">
-                            <div className="rounded-lg bg-dark p-3 text-xs text-white font-mono h-full">
-                                if (presentation === 'embedded') {'{'}
-                                <br />
-                                &nbsp;&nbsp;return &lt;EmbeddedNote /&gt;
-                                <br />
-                                {'}'}
-                            </div>
-                        </div>
+                        ))}
                     </div>
-                </div>
+                </Card>
+                <FeatureGrid items={debugFeatures.slice(0, 2)} />
             </div>
-            <FeatureList items={debugFeatures} />
+            <div className="grid gap-4">
+                <Card className="p-5 @2xl:p-6">
+                    <p className="mb-3 text-sm uppercase tracking-[0.18em] text-secondary">Debug workspace</p>
+                    <div className="grid gap-3 @2xl:grid-cols-[0.95fr_1.05fr]">
+                        <div className="rounded-xl border border-primary/10 bg-accent p-4">
+                            <p className="mb-2 font-semibold">Runtime error</p>
+                            <div className="rounded-lg bg-dark p-3 text-sm text-white font-mono">
+                                Error: position controls rendered for embedded survey
+                                <br />
+                                at SurveyEditor.handlePresentationChange
+                            </div>
+                        </div>
+                        <ScreenshotCard
+                            src={GithubCommentImage}
+                            alt="QA Swarm debug evidence"
+                            className="h-full"
+                            imgClassName="object-top"
+                        />
+                    </div>
+                </Card>
+                <FeatureGrid items={debugFeatures.slice(2)} />
+            </div>
         </div>
     )
 }
 
 const LoopVisual = () => {
-    const steps = ['Detect', 'Diagnose', 'Fix', 'Re-test']
-
     return (
-        <div className="grid @2xl:grid-cols-[1.05fr_0.95fr] gap-4 h-full">
-            <div className="rounded-2xl border border-primary/10 bg-accent p-4 @2xl:p-6 flex flex-col justify-center">
+        <div className="grid flex-1 gap-6 @2xl:grid-cols-[1.05fr_0.95fr]">
+            <div className="grid gap-4">
                 <div className="grid grid-cols-2 gap-4">
-                    {steps.map((step, index) => (
-                        <div
-                            key={step}
-                            className="rounded-2xl border border-primary/10 bg-primary p-5 relative min-h-32"
-                        >
-                            <span className="absolute top-4 right-4 text-xs text-secondary">0{index + 1}</span>
-                            <h3 className="text-2xl mb-2">{step}</h3>
-                            <p className="text-secondary mb-0">
-                                {step === 'Detect' && 'Run the paths users depend on.'}
-                                {step === 'Diagnose' && 'Inspect replay, logs, and errors while failing.'}
-                                {step === 'Fix' && 'Patch the branch when the path is clear.'}
-                                {step === 'Re-test' && 'Verify the regression is actually gone.'}
-                            </p>
+                    {[
+                        ['Detect', 'Run the paths users depend on.'],
+                        ['Hypothesize', 'Classify the failure and test a likely cause.'],
+                        ['Fix', 'Patch the branch when the path is clear.'],
+                        ['Re-test', 'Verify the regression is actually gone.'],
+                    ].map(([label, copy], index) => (
+                        <div key={label} className="rounded-2xl bg-white/12 p-5 backdrop-blur-sm">
+                            <span className="mb-3 inline-flex size-8 items-center justify-center rounded-full bg-white/20 text-sm font-semibold">
+                                {index + 1}
+                            </span>
+                            <h3 className="mb-2 text-2xl">{label}</h3>
+                            <p className="mb-0 text-white/80">{copy}</p>
                         </div>
                     ))}
                 </div>
-                <div className="mt-4 rounded-2xl border border-dashed border-seagreen/40 bg-seagreen/10 p-4">
-                    <p className="mb-0 text-lg font-semibold text-seagreen">
-                        Ship green only when the must-fix queue is empty.
+                <div className="rounded-2xl bg-white/12 p-5 backdrop-blur-sm">
+                    <p className="mb-0 text-xl font-semibold">
+                        New push? Cancel the stale run and start again on the latest commit.
                     </p>
                 </div>
             </div>
-            <FeatureList items={loopFeatures} />
+            <FeatureGrid items={loopFeatures} inverted />
         </div>
     )
 }
 
 const ResultsVisual = () => {
     return (
-        <div className="grid @2xl:grid-cols-[1.15fr_0.85fr] gap-4 h-full">
-            <div className="rounded-2xl border border-primary/10 bg-accent p-4 @2xl:p-6">
-                <div className="rounded-2xl border border-primary/10 bg-primary overflow-hidden">
-                    <div className="px-4 py-3 border-b border-primary/10 flex items-center justify-between">
-                        <div>
-                            <p className="text-sm uppercase tracking-[0.2em] text-secondary mb-1">GitHub PR comment</p>
-                            <h3 className="text-2xl mb-0">QA Swarm: FAIL</h3>
-                        </div>
-                        <StatusBadge label="2 must-fix issues" tone="failure" />
-                    </div>
-                    <div className="p-4 grid gap-3">
+        <div className="grid flex-1 gap-5 @2xl:grid-cols-[1.15fr_0.85fr]">
+            <ScreenshotCard src={GithubCommentImage} alt="QA Swarm GitHub comment result" />
+            <div className="grid gap-4">
+                <FeatureGrid items={resultFeatures} />
+                <Card className="p-5">
+                    <p className="mb-2 text-sm uppercase tracking-[0.18em] text-secondary">Run metadata</p>
+                    <div className="grid gap-3">
                         {[
-                            ['Must fix', 'Embedded survey still shows position controls'],
-                            ['Must fix', 'Session replay captured a failed save retry'],
-                            ['Nice to have', 'Popover layout shifted by 8px in preview'],
+                            ['Preview', 'preview-pr58401.posthog.dev'],
+                            ['Branch', 'qa-swarm-landing-page'],
+                            ['Verdict', 'PASS with one coverage gap called out honestly'],
                         ].map(([label, value]) => (
                             <div
-                                key={value}
-                                className="rounded-xl border border-primary/10 bg-accent p-3 flex items-start justify-between gap-3"
+                                key={label}
+                                className="flex items-center justify-between rounded-xl bg-accent px-4 py-3"
                             >
-                                <div>
-                                    <span className="text-sm text-secondary">{label}</span>
-                                    <p className="mb-0">{value}</p>
-                                </div>
-                                {label === 'Nice to have' ? (
-                                    <span className="rounded-full bg-yellow/20 text-yellow px-2 py-1 text-xs font-semibold">
-                                        Later
-                                    </span>
-                                ) : (
-                                    <span className="rounded-full bg-red/15 text-red px-2 py-1 text-xs font-semibold">
-                                        Blocker
-                                    </span>
-                                )}
+                                <span className="text-secondary">{label}</span>
+                                <span className="font-mono text-sm">{value}</span>
                             </div>
                         ))}
                     </div>
-                </div>
-            </div>
-            <div className="grid gap-4">
-                <div className="rounded-2xl border border-primary/10 bg-accent p-4">
-                    <p className="text-sm uppercase tracking-[0.2em] text-secondary mb-2">Hosted preview</p>
-                    <div className="rounded-xl border border-primary/10 bg-primary p-4">
-                        <p className="font-mono text-sm mb-2">preview-pr58401.posthog.dev</p>
-                        <p className="text-secondary mb-0">Sandboxed environment for this exact branch.</p>
-                    </div>
-                </div>
-                <div className="rounded-2xl border border-primary/10 bg-accent p-4">
-                    <p className="text-sm uppercase tracking-[0.2em] text-secondary mb-2">Slack update</p>
-                    <div className="rounded-xl border border-primary/10 bg-primary p-4">
-                        <p className="mb-1 font-semibold">#eng-reviews</p>
-                        <p className="text-secondary mb-0">QA Swarm found 2 must-fix regressions on this PR.</p>
-                    </div>
-                </div>
-                <div className="rounded-2xl border border-primary/10 bg-accent p-4">
-                    <p className="text-sm uppercase tracking-[0.2em] text-secondary mb-2">PostHog Code</p>
-                    <div className="rounded-xl border border-primary/10 bg-primary p-4">
-                        <div className="flex items-center justify-between">
-                            <span>PR #58401</span>
-                            <span className="rounded-full bg-red/15 text-red px-2 py-1 text-xs font-semibold">
-                                Needs work
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                </Card>
             </div>
         </div>
     )
@@ -615,379 +596,348 @@ const ResultsVisual = () => {
 
 const DataLayerVisual = () => {
     const nodes = [
-        { title: 'Product analytics', tone: 'bg-blue/20 border-blue/40 text-blue' },
-        { title: 'Session replay', tone: 'bg-yellow/25 border-yellow/40 text-yellow' },
-        { title: 'Error tracking', tone: 'bg-red/15 border-red/40 text-red' },
-        { title: 'Feature flags', tone: 'bg-seagreen/20 border-seagreen/40 text-seagreen' },
+        ['Product analytics', 'top-0 left-1/2 -translate-x-1/2'],
+        ['Session replay', 'right-0 top-1/2 -translate-y-1/2'],
+        ['LLM Analytics', 'bottom-0 left-1/2 -translate-x-1/2'],
+        ['Error tracking', 'left-0 top-1/2 -translate-y-1/2'],
     ]
 
     return (
-        <div className="grid @2xl:grid-cols-[1fr_0.9fr] gap-4 h-full">
-            <div className="rounded-2xl border border-primary/10 bg-accent p-4 @2xl:p-6 flex items-center justify-center">
-                <div className="relative w-full max-w-3xl aspect-square">
-                    <div className="absolute inset-[28%] rounded-full bg-gradient-to-br from-purple to-red text-white shadow-2xl flex flex-col items-center justify-center text-center p-6">
-                        <IconTestTube className="size-12 mb-3" />
-                        <h3 className="text-3xl mb-2">QA Swarm</h3>
-                        <p className="mb-0 text-white/80">Agents testing with production eyes and ears.</p>
+        <div className="grid flex-1 gap-6 @2xl:grid-cols-[1fr_0.95fr]">
+            <div className="flex items-center justify-center">
+                <div className="relative aspect-square w-full max-w-[460px]">
+                    <div className="absolute inset-[27%] flex flex-col items-center justify-center rounded-full bg-white text-[#6F37E8] shadow-2xl">
+                        <QASwarmIcon className="mb-3 size-16" />
+                        <h3 className="mb-1 text-3xl text-primary">QA Swarm</h3>
+                        <p className="mb-0 max-w-[220px] text-center text-secondary">
+                            Agents with product context and fully traceable runs.
+                        </p>
                     </div>
-                    {nodes.map((node, index) => {
-                        const positions = [
-                            'top-0 left-1/2 -translate-x-1/2',
-                            'right-0 top-1/2 -translate-y-1/2',
-                            'bottom-0 left-1/2 -translate-x-1/2',
-                            'left-0 top-1/2 -translate-y-1/2',
-                        ]
-                        return (
-                            <div
-                                key={node.title}
-                                className={`absolute w-44 rounded-2xl border p-4 text-center shadow-md ${node.tone} ${positions[index]}`}
-                            >
-                                <p className="font-semibold mb-0">{node.title}</p>
-                            </div>
-                        )
-                    })}
+                    {nodes.map(([label, position]) => (
+                        <div
+                            key={label}
+                            className={`absolute w-40 rounded-2xl bg-white/12 px-4 py-4 text-center backdrop-blur-sm ${position}`}
+                        >
+                            <p className="mb-0 font-semibold">{label}</p>
+                        </div>
+                    ))}
                     <div className="absolute inset-0 pointer-events-none">
                         <svg viewBox="0 0 100 100" className="size-full">
-                            <path
-                                d="M50 16 L50 34"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                className="text-primary/30"
-                            />
-                            <path
-                                d="M84 50 L66 50"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                className="text-primary/30"
-                            />
-                            <path
-                                d="M50 84 L50 66"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                className="text-primary/30"
-                            />
-                            <path
-                                d="M16 50 L34 50"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                className="text-primary/30"
-                            />
+                            <path d="M50 18 L50 34" stroke="currentColor" strokeWidth="1.4" className="text-white/35" />
+                            <path d="M82 50 L66 50" stroke="currentColor" strokeWidth="1.4" className="text-white/35" />
+                            <path d="M50 82 L50 66" stroke="currentColor" strokeWidth="1.4" className="text-white/35" />
+                            <path d="M18 50 L34 50" stroke="currentColor" strokeWidth="1.4" className="text-white/35" />
                         </svg>
                     </div>
                 </div>
             </div>
-            <FeatureList items={moatFeatures} />
+            <FeatureGrid items={moatFeatures} inverted />
         </div>
     )
 }
 
 const HowItWorksVisual = () => {
     return (
-        <div className="grid @2xl:grid-cols-[1fr_0.95fr] gap-4 h-full">
-            <div className="rounded-2xl border border-primary/10 bg-accent p-4 @2xl:p-6">
-                <div className="grid gap-3">
-                    {howItWorksSteps.map((step, index) => (
-                        <div
-                            key={step}
-                            className="rounded-xl border border-primary/10 bg-primary p-4 flex gap-4 items-start"
-                        >
-                            <div className="size-10 rounded-full bg-purple text-white flex items-center justify-center font-semibold flex-shrink-0">
+        <div className="grid flex-1 gap-5 @2xl:grid-cols-[0.95fr_1.05fr]">
+            <div className="grid gap-3">
+                {howItWorksSteps.map((step, index) => (
+                    <Card key={step} className="p-5">
+                        <div className="flex gap-4">
+                            <div className="flex size-10 flex-shrink-0 items-center justify-center rounded-full bg-purple text-white font-semibold">
                                 {index + 1}
                             </div>
-                            <p className="mb-0">{step}</p>
+                            <p className="mb-0 pt-1">{step}</p>
                         </div>
-                    ))}
-                </div>
-                <div className="mt-4 rounded-xl border border-dashed border-yellow/40 bg-yellow/15 p-4">
-                    <p className="mb-0 text-secondary">
-                        Placeholder slide: update the workflow details once tonight&apos;s end-to-end run is clearer.
-                    </p>
-                </div>
+                    </Card>
+                ))}
             </div>
-            <div className="rounded-2xl border border-primary/10 bg-primary p-4 @2xl:p-6 overflow-hidden">
-                <p className="text-sm uppercase tracking-[0.2em] text-secondary mb-2">GitHub Actions sketch</p>
-                <pre className="rounded-xl bg-dark text-white p-4 text-xs @2xl:text-sm overflow-auto h-full m-0">
+            <Card className="overflow-hidden bg-[#1F2230] text-white">
+                <div className="border-b border-white/10 px-5 py-4">
+                    <p className="mb-0 text-sm uppercase tracking-[0.18em] text-white/70">GitHub Actions sketch</p>
+                </div>
+                <pre className="m-0 h-full overflow-auto p-5 text-xs @2xl:text-sm">
                     <code>{yamlSnippet}</code>
                 </pre>
-            </div>
+            </Card>
         </div>
     )
 }
 
 const ComparisonSummaryVisual = () => {
     return (
-        <div className="grid gap-4 h-full">
-            <div className="grid grid-cols-2 @2xl:grid-cols-5 gap-3">
-                {competitorCards.map((card) => (
-                    <div key={card.name} className={`rounded-2xl border p-4 text-center font-semibold ${card.tone}`}>
-                        {card.name}
+        <div className="grid flex-1 gap-5">
+            <div className="grid grid-cols-2 gap-3 @2xl:grid-cols-5">
+                {competitorCards.map((name, index) => (
+                    <div
+                        key={name}
+                        className={`rounded-full px-4 py-2 text-center text-sm font-semibold @2xl:text-base ${
+                            index === competitorCards.length - 1
+                                ? 'bg-purple text-white shadow-[0_12px_30px_rgba(123,62,243,0.25)]'
+                                : 'border border-primary/10 bg-accent'
+                        }`}
+                    >
+                        {name}
                     </div>
                 ))}
             </div>
-            <div className="grid @2xl:grid-cols-2 gap-4 flex-1">
-                <div className="rounded-2xl border border-primary/10 bg-accent p-5 @2xl:p-6">
-                    <h3 className="text-2xl mb-4">
+            <div className="grid flex-1 gap-5 @2xl:grid-cols-2">
+                <Card className="p-5 @2xl:p-6">
+                    <h3 className="mb-4 text-2xl">
                         A competitor might suit you better <em>(for now)</em> if...
                     </h3>
                     <div className="grid gap-3">
                         {comparisonSummary.them.map((item) => (
-                            <div key={item.title} className="rounded-xl border border-primary/10 bg-primary p-4">
-                                <h4 className="text-lg mb-1">{item.title}</h4>
+                            <div key={item.title} className="border-b border-primary/10 pb-3 last:border-b-0 last:pb-0">
+                                <h4 className="mb-1 text-lg">{item.title}</h4>
                                 <p className="mb-0 text-secondary">{item.description}</p>
                             </div>
                         ))}
                     </div>
-                </div>
-                <div className="rounded-2xl border border-primary/10 bg-primary p-5 @2xl:p-6">
-                    <h3 className="text-2xl mb-4">Reasons to choose QA Swarm</h3>
+                </Card>
+                <Card className="p-5 @2xl:p-6">
+                    <h3 className="mb-4 text-2xl">Reasons to choose QA Swarm</h3>
                     <div className="grid gap-3">
                         {comparisonSummary.us.map((item) => (
-                            <div key={item.title} className="rounded-xl border border-primary/10 bg-accent p-4">
-                                <h4 className="text-lg mb-1">{item.title}</h4>
+                            <div key={item.title} className="border-b border-primary/10 pb-3 last:border-b-0 last:pb-0">
+                                <h4 className="mb-1 text-lg">{item.title}</h4>
                                 <p className="mb-0 text-secondary">{item.description}</p>
                             </div>
                         ))}
                     </div>
-                </div>
+                </Card>
             </div>
         </div>
     )
-}
-
-const ComparisonStatusIcon = ({ status }: { status: ComparisonStatus }) => {
-    if (status === 'check') {
-        return <IconCheck className="size-5 text-green mx-auto" />
-    }
-    if (status === 'warn') {
-        return <IconWarning className="size-5 text-yellow mx-auto" />
-    }
-    return <IconX className="size-5 text-red mx-auto" />
 }
 
 const FeatureComparisonVisual = () => {
     const headings = ['QA Swarm', 'Greptile TREX', 'Tusk', 'Checksum', 'QA Wolf']
 
     return (
-        <div className="h-full rounded-2xl border border-primary/10 bg-[#2f2d2a] text-white overflow-auto">
-            <table className="w-full border-collapse">
-                <thead>
-                    <tr className="border-b border-white/15">
-                        <th className="text-left px-4 py-4 @2xl:px-6 @2xl:py-5 text-2xl font-semibold">Feature</th>
-                        {headings.map((heading) => (
-                            <th
-                                key={heading}
-                                className="px-2 py-4 @2xl:px-4 @2xl:py-5 text-lg @2xl:text-2xl font-semibold"
-                            >
-                                {heading}
+        <div className="flex flex-1 flex-col">
+            <div className="overflow-hidden rounded-2xl bg-[#2F2D2A] text-white shadow-2xl">
+                <table className="w-full border-collapse">
+                    <thead>
+                        <tr className="border-b border-white/10">
+                            <th className="px-3 py-3 text-left text-base font-semibold @2xl:px-4 @2xl:text-lg">
+                                Feature
                             </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {comparisonRows.map((row) => (
-                        <tr key={row.feature} className="border-b border-white/10 align-top">
-                            <td className="px-4 py-4 @2xl:px-6 @2xl:py-5 max-w-md">
-                                <div className="text-xl @2xl:text-2xl font-semibold">{row.feature}</div>
-                                <div className="text-white/70 italic text-base @2xl:text-xl">{row.description}</div>
-                            </td>
-                            {row.values.map((value, index) => (
-                                <td
-                                    key={`${row.feature}-${index}`}
-                                    className="px-2 py-4 @2xl:px-4 @2xl:py-5 text-center"
+                            {headings.map((heading) => (
+                                <th
+                                    key={heading}
+                                    className={`px-2 py-3 text-center text-xs font-semibold @2xl:px-3 @2xl:text-sm ${
+                                        heading === 'QA Swarm' ? 'bg-white/5' : ''
+                                    }`}
                                 >
-                                    <ComparisonStatusIcon status={value} />
-                                </td>
+                                    {heading}
+                                </th>
                             ))}
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {comparisonRows.map((row) => (
+                            <tr key={row.feature} className="border-b border-white/10 last:border-b-0">
+                                <td className="px-3 py-2.5 align-top @2xl:px-4">
+                                    <div className="text-sm font-semibold @2xl:text-[15px]">{row.feature}</div>
+                                    <div className="text-[11px] leading-snug text-white/65 @2xl:text-xs">
+                                        {row.description}
+                                    </div>
+                                </td>
+                                {row.values.map((value, index) => (
+                                    <td
+                                        key={`${row.feature}-${index}`}
+                                        className={`px-2 py-2.5 text-center ${index === 0 ? 'bg-white/5' : ''}`}
+                                    >
+                                        <ComparisonStatusIcon status={value} />
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }
 
 const EcosystemVisual = () => {
-    return (
-        <div className="grid @2xl:grid-cols-2 gap-4 h-full">
-            {ecosystemFeatures.map(({ title, description, icon: Icon }) => (
-                <div key={title} className="rounded-2xl border border-primary/10 bg-accent p-5 @2xl:p-6">
-                    {Icon && <Icon className="size-8 mb-4 text-purple" />}
-                    <h3 className="text-2xl @2xl:text-3xl mb-3">{title}</h3>
-                    <p className="text-secondary mb-0 text-lg">{description}</p>
-                </div>
-            ))}
-        </div>
-    )
+    return <FeatureGrid items={ecosystemFeatures} inverted />
 }
 
 const WaitlistVisual = () => {
     return (
-        <div className="grid @2xl:grid-cols-[1fr_0.95fr] gap-4 h-full">
-            <div className="rounded-2xl border border-primary/10 bg-primary p-6 @2xl:p-8 flex flex-col justify-between">
-                <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-secondary mb-2">Prototype CTA</p>
-                    <h3 className="text-3xl @2xl:text-5xl mb-4">Join the waitlist</h3>
-                    <p className="text-secondary text-lg max-w-xl">
-                        A visual placeholder for now. Hook this up to the real signup flow once the product name and
-                        route are final.
-                    </p>
+        <div className="grid flex-1 items-center gap-6 @2xl:grid-cols-[0.95fr_1.05fr]">
+            <div>
+                <div className="mb-5 flex items-center gap-3 text-white/90">
+                    <QASwarmIcon className="size-10" />
+                    <span className="text-2xl font-semibold">QA Swarm</span>
                 </div>
-                <div className="rounded-2xl border border-primary/10 bg-accent p-4 @2xl:p-5">
-                    <div className="grid @2xl:grid-cols-[1fr_auto] gap-3">
-                        <input
-                            readOnly
-                            value="dan@company.com"
-                            className="rounded-xl border border-primary/10 bg-primary px-4 py-3 text-primary"
-                        />
-                        <button
-                            type="button"
-                            className="rounded-xl bg-purple text-white px-5 py-3 font-semibold inline-flex items-center justify-center gap-2"
-                        >
-                            Join the waitlist
-                            <IconArrowUpRight className="size-4" />
-                        </button>
-                    </div>
-                    <p className="text-sm text-secondary mt-3 mb-0">
-                        Placeholder form for the internal prototype preview.
-                    </p>
-                </div>
-            </div>
-            <div className="rounded-2xl border border-primary/10 bg-accent p-6 @2xl:p-8">
-                <div className="grid gap-3">
+                <h3 className="mb-4 text-4xl @2xl:text-6xl">Join the waitlist</h3>
+                <p className="mb-6 max-w-xl text-lg text-white/80">
+                    A prototype today. A real product soon. Get early access and help shape how the swarm reports,
+                    debugs, and closes the loop.
+                </p>
+                <div className="mb-6 grid gap-3">
                     {waitlistBullets.map((item) => (
                         <div
                             key={item}
-                            className="rounded-xl border border-primary/10 bg-primary p-4 flex gap-3 items-start"
+                            className="flex items-start gap-3 rounded-2xl bg-white/12 px-4 py-3 backdrop-blur-sm"
                         >
-                            <IconCheck className="size-5 text-seagreen mt-0.5 flex-shrink-0" />
-                            <p className="mb-0">{item}</p>
+                            <IconCheck className="mt-0.5 size-5 flex-shrink-0 text-white" />
+                            <p className="mb-0 text-white/85">{item}</p>
                         </div>
                     ))}
                 </div>
+                <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-3 font-semibold text-purple">
+                    Join the waitlist
+                    <IconArrowUpRight className="size-4" />
+                </div>
+            </div>
+            <div className="flex justify-center">
+                <Card className="w-full max-w-[430px] overflow-hidden bg-white">
+                    <img src={CheckHogImage} alt="Hedgehog holding a checkbox" className="mx-auto w-[280px] pt-8" />
+                    <div className="px-6 pb-6 text-center">
+                        <h4 className="mb-2 text-2xl">Ship with confidence</h4>
+                        <p className="mb-0 text-secondary">
+                            The end state is simple: every PR gets tested, explained, and checked off before it goes
+                            live.
+                        </p>
+                    </div>
+                </Card>
             </div>
         </div>
     )
 }
 
 const HeroSlide = () => (
-    <SlideShell
-        eyebrow="QA Swarm"
-        title="Code generation is cheap. Validation is expensive."
-        description="QA Swarm is a fleet of AI agents that test every PR, debug with live production data, and loop until your code ships green."
-        tone="purple"
-    >
-        <HeroVisual />
-    </SlideShell>
+    <ThemeSlide theme="purple">
+        <div className="flex h-full flex-col items-center">
+            <div className="pt-4 @2xl:pt-8">
+                <div className="mb-4 flex items-center justify-center gap-3 text-white/90">
+                    <QASwarmIcon className="size-10 @2xl:size-12" />
+                    <span className="text-3xl font-semibold @2xl:text-4xl">QA Swarm</span>
+                </div>
+                <h1 className="mx-auto mb-4 max-w-5xl text-center text-5xl font-bold leading-tight text-balance text-white drop-shadow-2xl @2xl:text-7xl">
+                    Test every PR until it ships
+                </h1>
+                <p className="mx-auto mb-0 max-w-3xl text-center text-lg leading-relaxed text-white/80 @2xl:text-2xl">
+                    A fleet of AI agents that test every PR, debug with live production data, and loop until your code
+                    ships green.
+                </p>
+            </div>
+            <HeroImageStack />
+        </div>
+    </ThemeSlide>
 )
 
 const ProductionFlowsSlide = () => (
-    <SlideShell
-        eyebrow="Production-informed coverage"
-        title="Tests what your users actually do"
-        description="Other tools test what changed in the diff. QA Swarm pulls top user flows from PostHog Product Analytics and prioritizes those instead."
-        tone="blue"
-    >
-        <FlowComparisonVisual />
-    </SlideShell>
+    <ThemeSlide theme="white">
+        <SectionIntro
+            eyebrow="Production-informed coverage"
+            title="Tests what your users actually do"
+            description="Other tools test what changed in the diff. QA Swarm pulls top user flows from PostHog Product Analytics and prioritizes those instead."
+        />
+        <ProductionFlowVisual />
+    </ThemeSlide>
 )
 
 const DebugSlide = () => (
-    <SlideShell
-        eyebrow="Grounded investigation"
-        title="Agents debug as they test"
-        description="Each agent has live access to logs, errors, events, and session replay during the run, so failures get diagnosed with evidence instead of vibes."
-        tone="yellow"
-    >
+    <ThemeSlide theme="white">
+        <SectionIntro
+            eyebrow="Grounded debugging"
+            title="Agents debug as they test"
+            description="Each agent has live access to logs, errors, events, and session replay during the run. It forms a hypothesis, tests it, and reports what it found."
+        />
         <DebugVisual />
-    </SlideShell>
+    </ThemeSlide>
 )
 
 const LoopSlide = () => (
-    <SlideShell
-        eyebrow="Find, fix, re-test"
-        title="Loops until green"
-        description="QA Swarm does not stop at reporting bugs. It keeps running the find-fix-retest cycle until the branch is actually ready."
-        tone="red"
-    >
+    <ThemeSlide theme="blue">
+        <SectionIntro
+            eyebrow="Find, fix, re-test"
+            title="Loops until green"
+            description="The swarm runs scenarios in parallel, commits fixes when it can, and restarts against the newest push instead of wasting time on stale runs."
+            inverted
+        />
         <LoopVisual />
-    </SlideShell>
+    </ThemeSlide>
 )
 
 const ResultsSlide = () => (
-    <SlideShell
-        eyebrow="Output where engineers already ship"
-        title="Results where engineers work"
-        description="PR comment. Hosted preview. Slack update. Code dashboard. The artifacts land in the places people already check."
-        tone="seagreen"
-    >
+    <ThemeSlide theme="white">
+        <SectionIntro
+            eyebrow="Output where engineers already work"
+            title="Results where engineers work"
+            description="PR comments with evidence. A hosted preview. Slack updates. A PostHog Code status row. The artifacts land where review already happens."
+        />
         <ResultsVisual />
-    </SlideShell>
+    </ThemeSlide>
 )
 
 const DataLayerSlide = () => (
-    <SlideShell
-        eyebrow="The moat"
-        title="Built on the PostHog data layer"
-        description="QA Swarm is not a standalone tool. The point is that every test can be informed by analytics, replay, errors, and flags already inside PostHog."
-        tone="purple"
-    >
+    <ThemeSlide theme="purple">
+        <SectionIntro
+            eyebrow="The moat"
+            title="Built on the PostHog data layer"
+            description="QA Swarm is not a standalone tool. Every test is informed by analytics, replay, errors, flags, and fully traceable agent runs."
+            inverted
+        />
         <DataLayerVisual />
-    </SlideShell>
+    </ThemeSlide>
 )
 
 const HowItWorksSlide = () => (
-    <SlideShell
-        eyebrow="Technical flow"
-        title="How it works"
-        description="A placeholder technical slide for the prototype. Keep the shape now, then tighten the exact workflow after a real end-to-end run."
-        tone="salmon"
-    >
+    <ThemeSlide theme="white">
+        <SectionIntro
+            eyebrow="Technical flow"
+            title="How it works"
+            description="A real-looking workflow sketch: concurrency cancellation, async kickoff, polling, and explicit health gates before a PR is declared safe."
+        />
         <HowItWorksVisual />
-    </SlideShell>
+    </ThemeSlide>
 )
 
 const ComparisonSummarySlide = () => (
-    <SlideShell
-        eyebrow="Honest comparison"
-        title="PostHog vs..."
-        description="This is the right tool if the team wants production-informed QA inside PostHog, not a generic testing sidecar."
-        tone="lilac"
-    >
+    <ThemeSlide theme="white">
+        <SectionIntro
+            eyebrow="Honest comparison"
+            title="PostHog vs..."
+            description="The right fit if the team wants production-informed QA inside PostHog, not another generic testing sidecar."
+            compact
+        />
         <ComparisonSummaryVisual />
-    </SlideShell>
+    </ThemeSlide>
 )
 
 const FeatureComparisonSlide = () => (
-    <SlideShell
-        eyebrow="Scannable differentiation"
-        title="Feature comparison"
-        description="Prototype matrix based on the competitor comparison you attached. This can be refined later without changing the layout."
-        tone="yellow"
-    >
+    <ThemeSlide theme="white">
+        <SectionIntro
+            eyebrow="Feature comparison"
+            title="Feature comparison"
+            description="Compact by design so the whole matrix fits on the standard presentation canvas."
+            compact
+        />
         <FeatureComparisonVisual />
-    </SlideShell>
+    </ThemeSlide>
 )
 
 const EcosystemSlide = () => (
-    <SlideShell
-        eyebrow="Compound leverage"
-        title="10x better in the PostHog ecosystem"
-        description="QA Swarm gets disproportionately better when it sits inside the rest of PostHog instead of bolting onto the side."
-        tone="blue"
-    >
+    <ThemeSlide theme="blue">
+        <SectionIntro
+            eyebrow="10x better in the PostHog ecosystem"
+            title="10x better in the PostHog ecosystem"
+            description="QA Swarm gets disproportionately better when the rest of PostHog is already there."
+            inverted
+        />
         <EcosystemVisual />
-    </SlideShell>
+    </ThemeSlide>
 )
 
 const WaitlistSlide = () => (
-    <SlideShell
-        eyebrow="Call to action"
-        title="Join the waitlist"
-        description="End on a simple raise-your-hand moment. The interaction is intentionally a placeholder until the final signup destination exists."
-        tone="purple"
-    >
+    <ThemeSlide theme="purple">
         <WaitlistVisual />
-    </SlideShell>
+    </ThemeSlide>
 )
 
 export default function QASwarm(): JSX.Element {
