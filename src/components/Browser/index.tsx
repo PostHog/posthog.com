@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { IconExternal, IconRefresh, IconX } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
@@ -10,24 +10,50 @@ interface BrowserProps {
     minimal?: boolean
 }
 
+// Defence-in-depth: only allow http/https URLs to reach `href` / iframe `src`.
+// Anything else (javascript:, data:, vbscript:, file:, etc.) returns null.
+function sanitizeHttpUrl(input: string): { href: string; host: string; pathAndRest: string } | null {
+    try {
+        const parsed = new URL(input)
+        if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null
+        const href = parsed.toString()
+        return {
+            href,
+            host: parsed.host,
+            pathAndRest: parsed.pathname + parsed.search + parsed.hash,
+        }
+    } catch {
+        return null
+    }
+}
+
 export default function Browser({ url }: BrowserProps): JSX.Element {
     const { appWindow } = useWindow()
     const { setWindowTitle, closeWindow } = useApp()
     const [iframeKey, setIframeKey] = useState(0)
 
-    const displayHost = (() => {
-        try {
-            return new URL(url).host
-        } catch {
-            return url
-        }
-    })()
+    const safeUrl = useMemo(() => sanitizeHttpUrl(url), [url])
 
     useEffect(() => {
         if (appWindow) {
-            setWindowTitle(appWindow, displayHost)
+            setWindowTitle(appWindow, safeUrl?.host || 'Browser')
         }
-    }, [appWindow, displayHost])
+    }, [appWindow, safeUrl?.host])
+
+    if (!safeUrl) {
+        return (
+            <div
+                data-app="Browser"
+                data-scheme="primary"
+                className="@container w-full h-full flex items-center justify-center bg-primary p-6 text-center text-secondary"
+            >
+                <div>
+                    <p className="mb-2 font-semibold text-primary">Can't open this link in a PostHog window.</p>
+                    <p className="text-sm">Only http(s) URLs can be embedded.</p>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div
@@ -45,11 +71,11 @@ export default function Browser({ url }: BrowserProps): JSX.Element {
                     <IconRefresh className="size-4" />
                 </button>
                 <div className="flex-1 truncate text-sm font-mono px-2 py-1 rounded bg-primary border border-primary text-primary">
-                    <span className="text-secondary">{displayHost}</span>
-                    <span className="text-muted">{url.slice(url.indexOf(displayHost) + displayHost.length)}</span>
+                    <span className="text-secondary">{safeUrl.host}</span>
+                    <span className="text-muted">{safeUrl.pathAndRest}</span>
                 </div>
                 <a
-                    href={url}
+                    href={safeUrl.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     title="Open in browser tab"
@@ -71,11 +97,11 @@ export default function Browser({ url }: BrowserProps): JSX.Element {
             </div>
             <iframe
                 key={iframeKey}
-                src={url}
+                src={safeUrl.href}
                 className="flex-1 w-full bg-white"
                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads"
                 referrerPolicy="no-referrer-when-downgrade"
-                title={displayHost}
+                title={safeUrl.host}
             />
         </div>
     )
