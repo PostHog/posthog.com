@@ -116,17 +116,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 debug: 'This slide should feel grounded. The agents form hypotheses, inspect live runtime signals, and then report a reasoned verdict.',
                 loop: 'Emphasize that the swarm is parallel and re-runs against the newest commit. The loop should feel active, not batch-like.',
                 results:
-                    'All of this needs to show up where engineers already work. PR comments, previews, and statuses matter more than a separate dashboard.',
-                'data-layer':
-                    'This is the moat slide. The value is not just agents, it is agents plugged into analytics, replay, errors, flags, and LLM traces.',
+                    'All of this needs to show up where engineers already work. The extra differentiator is that the QA agent itself is traceable in PostHog LLM Analytics.',
                 'how-it-works':
-                    'Keep this one honest and slightly provisional. It should read like a real workflow sketch, not a polished architecture fantasy.',
+                    'Anchor this in the forced-error run. The story is: generate scenarios, hit the error, report it clearly, then auto-fix and re-test.',
                 'comparison-summary':
                     'The tone here should stay direct and fair. This is for teams who want QA informed by real usage inside PostHog.',
                 'feature-comparison':
-                    'This table is meant to be scanned quickly. Keep it compact and above the fold on the standard presentation canvas.',
+                    'This table should emphasize the differentiators: PR-aware service selection, traceability in LLM Analytics, and loop-until-green behavior.',
                 ecosystem:
-                    'The ecosystem slide is about compounding value. QA Swarm gets better because the rest of PostHog is already there.',
+                    'The ecosystem slide should call out why PostHog makes this stronger, especially the ability to inspect the QA agent through LLM traces.',
                 waitlist:
                     'Close with a prototype CTA and the check-hog visual. The page is selling the direction, not final packaging.',
             },

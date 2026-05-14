@@ -40,13 +40,14 @@ type Theme = 'white' | 'purple' | 'blue'
 
 const productionFlowFeatures: SlideFeature[] = [
     {
-        title: 'Flow prioritization from production data',
-        description: 'The swarm starts with the paths people actually run, not just files that changed.',
+        title: 'PR-aware service selection',
+        description:
+            'The swarm picks the right services from the PR and test plan instead of brute-forcing the whole stack.',
         icon: IconTrends,
     },
     {
-        title: 'Auto-detected critical paths',
-        description: 'High-traffic journeys float to the top without someone hand-curating a test plan.',
+        title: 'Auto-generated test scenarios',
+        description: 'It turns the PR diff and runtime context into focused scenarios before it runs anything.',
         icon: IconFunnels,
     },
     {
@@ -73,8 +74,9 @@ const debugFeatures: SlideFeature[] = [
         icon: IconWarning,
     },
     {
-        title: 'Correlates code and behavior',
-        description: 'The report ties the failing product path back to the code that likely caused it.',
+        title: 'LLM traces for the QA agent',
+        description:
+            'Because the MCP stack is agent-driven, developers can inspect the QA agent in PostHog LLM Analytics.',
         icon: IconCode,
     },
     {
@@ -119,8 +121,9 @@ const resultFeatures: SlideFeature[] = [
         icon: IconArrowUpRight,
     },
     {
-        title: 'Slack and dashboard visibility',
-        description: 'Teams can see status changes without digging through a separate QA product.',
+        title: 'Trace the QA agent itself',
+        description:
+            'Inspect reasoning, tool calls, and MCP usage in PostHog LLM Analytics when a run looks suspicious.',
         icon: IconDashboard,
     },
 ]
@@ -137,8 +140,9 @@ const ecosystemFeatures: SlideFeature[] = [
         icon: IconTrends,
     },
     {
-        title: 'Feature flags',
-        description: 'Test both sides of a release instead of trusting the default path.',
+        title: 'LLM Analytics',
+        description:
+            'Trace the QA agent itself so engineers can inspect the exact reasoning and tool usage behind a run.',
         icon: IconToggle,
     },
     {
@@ -192,14 +196,14 @@ const comparisonRows: ComparisonRow[] = [
         values: ['check', 'check', 'check', 'check', 'check'],
     },
     {
-        feature: 'Sandbox preview env',
-        description: 'Isolated environment per PR',
+        feature: 'PR-aware service selection',
+        description: 'Chooses the right services from the PR and generated test plan',
         values: ['check', 'check', 'check', 'check', 'check'],
     },
     {
-        feature: 'AI writes tests',
-        description: 'Generates test code automatically',
-        values: ['check', 'check', 'check', 'check', 'check'],
+        feature: 'LLM traces for QA agent',
+        description: 'Inspect reasoning, tool calls, and MCP usage in PostHog LLM Analytics',
+        values: ['check', 'cross', 'cross', 'cross', 'cross'],
     },
     {
         feature: 'Production data as test source',
@@ -234,10 +238,10 @@ const comparisonRows: ComparisonRow[] = [
 ]
 
 const howItWorksSteps = [
-    'PR opens and triggers QA Swarm through GitHub Actions.',
-    'A sandbox preview starts and the swarm kicks off asynchronously.',
-    'Agents exercise real user paths, debug with live data, and report health gates.',
-    'A new commit cancels the stale run and restarts the loop against the latest code.',
+    'A PR opens with a forced exception after the agent paginates an MCP tool three times.',
+    'QA Swarm generates a test plan and picks the services it actually needs for that PR.',
+    'It runs the scenarios, hits the error, and reports the issue with runtime evidence.',
+    'The agent patches the problem and re-runs until the PR goes green.',
 ]
 
 const yamlSnippet = `name: qa-swarm
@@ -771,7 +775,7 @@ const ProductionFlowsSlide = () => (
         <SectionIntro
             eyebrow="Production-informed coverage"
             title="Tests what your users actually do"
-            description="Other tools test what changed in the diff. QA Swarm pulls top user flows from PostHog Product Analytics and prioritizes those instead."
+            description="Other tools brute-force the environment. QA Swarm reads the PR, generates a test plan, and picks the services and paths that actually matter."
         />
         <ProductionFlowVisual />
     </ThemeSlide>
@@ -782,7 +786,7 @@ const DebugSlide = () => (
         <SectionIntro
             eyebrow="Grounded debugging"
             title="Agents debug as they test"
-            description="Each agent has live access to logs, errors, events, and session replay during the run. It forms a hypothesis, tests it, and reports what it found."
+            description="Each agent has live access to logs, errors, events, replay, and its own LLM traces. It forms a hypothesis, tests it, and shows the work."
         />
         <DebugVisual />
     </ThemeSlide>
@@ -816,7 +820,7 @@ const HowItWorksSlide = () => (
         <SectionIntro
             eyebrow="Technical flow"
             title="How it works"
-            description="A real-looking workflow sketch: concurrency cancellation, async kickoff, polling, and explicit health gates before a PR is declared safe."
+            description="This prototype run used a forced exception after three MCP pagination steps so the agent had something real to detect, report, and auto-fix."
         />
         <HowItWorksVisual />
     </ThemeSlide>
