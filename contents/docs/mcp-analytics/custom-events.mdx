@@ -1,0 +1,102 @@
+---
+title: Custom events and metadata
+---
+
+Sometimes the events the SDK emits out of the box aren't enough. You might want to attach a per-call segment to every event, dump a freeform JSON blob, or emit a fully custom event for something that isn't a tool call. The SDK gives you three hooks for that, in order of increasing invasiveness.
+
+## `eventTags` — indexed string metadata
+
+Use this for low-cardinality, *indexed* metadata you want to filter and group by in PostHog. Keys and values are spread flat on every event the SDK emits, so they appear as top-level properties alongside the `$mcp_*` keys.
+
+```ts
+track(server, {
+  apiKey: process.env.POSTHOG_API_KEY,
+  eventTags: async (request, extra) => ({
+    env: process.env.NODE_ENV ?? "unknown",
+    region: process.env.FLY_REGION ?? "unknown",
+    deploy: process.env.GIT_SHA ?? "unknown",
+  }),
+})
+```
+
+These end up on every event as plain properties:
+
+```json
+{
+  "event": "mcp_tool_call",
+  "properties": {
+    "$mcp_tool_name": "search_events",
+    "env": "production",
+    "region": "iad",
+    "deploy": "a1b2c3d",
+    ...
+  }
+}
+```
+
+**Validation:** tags are strict — keys must be ≤32 characters matching `[a-zA-Z0-9$_.:\- ]`, values must be ≤200 characters with no newlines, and you can supply at most 50 entries per call. Invalid entries are dropped silently and logged to `~/posthog-mcp-analytics.log`. The constraint exists because tags are intended to be indexable, low-cardinality, filterable in the PostHog UI.
+
+## `eventProperties` — freeform JSON
+
+For high-cardinality, structured, or nested data that you don't necessarily want to filter on but do want to keep around — request bodies, internal trace ids, anything that doesn't fit the `eventTags` validation rules:
+
+```ts
+track(server, {
+  apiKey: process.env.POSTHOG_API_KEY,
+  eventProperties: async (request, extra) => ({
+    requestId: extra?.requestInfo?.headers?.["x-request-id"],
+    internalTrace: {
+      upstreamCallId: getCurrentCallId(),
+      shard: getShard(),
+    },
+  }),
+})
+```
+
+These are also spread flat at the top level of the event properties. They can override built-in `$mcp_*` keys — intentional, so you can backfill missing context if you need to.
+
+## `publishCustomEvent` — emit an arbitrary event
+
+When the built-in events don't cover what you need — for example, capturing a feedback signal from your own UI, or recording a domain event that isn't an MCP tool call — use `publishCustomEvent`. It writes onto the same queue as everything else, so it inherits the SDK's redaction, sanitization, and identity logic.
+
+```ts
+import { publishCustomEvent } from "@posthog/mcp"
+
+publishCustomEvent(server, {
+  eventType: "billing/usage_reported",
+  resourceName: "monthly_usage",
+  tags: {
+    plan: "growth",
+    overage: "true",
+  },
+  properties: {
+    units: 12_345,
+    period: "2026-04",
+  },
+})
+```
+
+What comes out the other side:
+
+- The event lands in PostHog as `mcp_billing_usage_reported` (the SDK maps unknown `eventType` values to `mcp_<eventType with slashes replaced by underscores>`).
+- `tags` are flattened onto the event the same way `eventTags` are.
+- `properties` are flattened onto the event the same way `eventProperties` are.
+- The current session id, identity, and any `eventTags`/`eventProperties` callbacks still apply.
+
+You can also pass the session id directly instead of a `server` reference, if you're emitting from a context where you don't hold the server object:
+
+```ts
+publishCustomEvent("ses_2a3f…", {
+  eventType: "mcpcat/custom",
+  properties: { /* ... */ },
+})
+```
+
+## Which one to use
+
+| You want to... | Use |
+|---|---|
+| Tag *every* event with a small set of filterable labels | `eventTags` |
+| Attach freeform JSON to every event | `eventProperties` |
+| Emit a one-off event that isn't an MCP request | `publishCustomEvent` |
+| Attach data to a *specific* tool call (just that one) | Not directly supported — the callbacks run on every event. The SDK doesn't currently expose a per-call hook. |
