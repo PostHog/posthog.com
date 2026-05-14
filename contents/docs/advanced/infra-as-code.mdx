@@ -6,7 +6,7 @@ showTitle: true
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Definitions lets you manage PostHog dashboards, insights, feature flags, and endpoints as TypeScript files in your repo. Commit them alongside your application code and run `npx posthog-definitions apply` to sync them to your project.
+Definitions lets you manage PostHog dashboards, insights, feature flags, actions, cohorts, endpoints, event definitions, property groups, experiments (with holdouts and saved metrics), and project settings as TypeScript files in your repo. Commit them alongside your application code and run `npx posthog-definitions apply` to sync them to your project.
 
 ## Why use this
 
@@ -47,7 +47,7 @@ For CI, set `POSTHOG_PERSONAL_API_KEY` and `POSTHOG_PROJECT_ID` in the environme
 
 <CalloutBox icon="IconInfo" title="API key scopes" type="fyi">
 
-Personal API keys used by `apply` need the `dashboard:write` and `insight:write` scopes. Create or update keys at [Personal API Keys](https://us.posthog.com/settings/user-api-keys).
+Personal API keys used by `apply` need read/write scopes for every resource you define. The full set: `dashboard`, `insight`, `feature_flag`, `action`, `endpoint`, `event_definition` (also covers property groups), `experiment` (also covers experiment holdouts), and `experiment_saved_metric`. Create or update keys at [Personal API Keys](https://us.posthog.com/settings/user-api-keys).
 
 </CalloutBox>
 
@@ -81,7 +81,7 @@ export default dashboard({
 })
 ```
 
-Each file under `posthog/` must `export default` a single dashboard or insight. The `key` is the stable identity – the CLI uses it to match local files to server resources across runs.
+Each file under `posthog/` must `export default` a single resource. The `key` is the stable identity – the CLI uses it to match local files to server resources across runs. Resources go in folders by type: `posthog/dashboards/`, `posthog/insights/`, `posthog/feature-flags/`, `posthog/actions/`, `posthog/cohorts/`, `posthog/endpoints/`, `posthog/events/`, `posthog/experiments/`, and `posthog/project-settings/`.
 
 ## Apply
 
@@ -99,7 +99,7 @@ npx posthog-definitions apply
 
 `apply` is idempotent – re-running with no changes is a no-op.
 
-The CLI only touches resources it created (tagged `iac:dashboards:<key>` or `iac:insights:<key>`). Dashboards and insights you built in the UI are invisible to `apply`: not modified, not deleted, not warned about. You can adopt Definitions one dashboard at a time without risk to the rest of the project.
+The CLI only touches resources it created (tagged `iac:<resource>:<key>`, e.g. `iac:dashboards:growth` or `iac:feature-flags:new-checkout`). Resources you built in the UI are invisible to `apply`: not modified, not deleted, not warned about. You can adopt Definitions one resource at a time without risk to the rest of the project.
 
 By default `apply` never deletes anything. Pass `--prune` to delete IaC-tagged resources whose source files have been removed.
 
@@ -115,11 +115,23 @@ This writes a TypeScript file per dashboard to `posthog/dashboards/`. Review wit
 
 ## What you can define
 
-| Resource | SDK | `apply` |
-| --- | --- | --- |
-| Dashboards | `dashboard()` | ✅ |
-| Insights | `insight()` with `trends()` or `hogql()` | ✅ |
-| Feature flags | `featureFlag()` | Coming soon |
-| Endpoints | `endpoint()` | Coming soon |
+| Resource                 | SDK                                       | `apply` |
+| ------------------------ | ----------------------------------------- | ------- |
+| Dashboards               | `dashboard()` (with `text()`, `button()`) | ✅      |
+| Insights                 | `insight()` with `trends()` or `hogql()`  | ✅      |
+| Feature flags            | `featureFlag()`                           | ✅      |
+| Actions                  | `action()`                                | ✅      |
+| Cohorts                  | `cohort()`                                | ✅      |
+| Endpoints                | `endpoint()`                              | ✅      |
+| Event definitions        | `eventDefinition()`                       | ✅      |
+| Schema property groups   | `propertyGroup()`                         | ✅      |
+| Experiments              | `experiment()`                            | ✅      |
+| Experiment holdouts      | `experimentHoldout()`                     | ✅      |
+| Experiment saved metrics | `experimentSavedMetric()`                 | ✅      |
+| Project settings         | `projectSettings()`                       | ✅      |
 
 `funnel()`, `retention()`, `paths()`, `stickiness()`, and `lifecycle()` query constructors are planned post-MVP.
+
+## Type-safe `capture()`
+
+Event definitions and property groups feed `createTypedPostHog`, which wraps any `posthog-js`-shaped client and type-checks `posthog.capture(name, properties)` at compile time against the same specs synced via `apply`. Rename or remove an event in your definitions and every callsite becomes a TypeScript error.
