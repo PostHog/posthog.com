@@ -1,23 +1,66 @@
 import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
 import Tooltip from 'components/Tooltip'
 import { Link as GatsbyLink } from 'gatsby'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
 import ContextMenu, { ContextMenuItemProps } from 'components/RadixUI/ContextMenu'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
+import Browser from 'components/Browser'
+
+type IframeStatus = 'unknown' | 'checking' | 'allowed' | 'blocked'
+
+const iframeStatusCache = new Map<string, 'allowed' | 'blocked'>()
+const iframeStatusInflight = new Map<string, Promise<'allowed' | 'blocked'>>()
+
+function isCheckableHttpUrl(url: string): boolean {
+    try {
+        const u = new URL(url)
+        return u.protocol === 'http:' || u.protocol === 'https:'
+    } catch {
+        return false
+    }
+}
+
+function fetchIframeStatus(url: string): Promise<'allowed' | 'blocked'> {
+    const cached = iframeStatusCache.get(url)
+    if (cached) return Promise.resolve(cached)
+    const inflight = iframeStatusInflight.get(url)
+    if (inflight) return inflight
+    const request = fetch(`/api/check-iframe?url=${encodeURIComponent(url)}`)
+        .then((r) => (r.ok ? r.json() : { allowed: false }))
+        .then((d: { allowed?: boolean }): 'allowed' | 'blocked' => (d?.allowed ? 'allowed' : 'blocked'))
+        .catch((): 'allowed' | 'blocked' => 'blocked')
+        .then((status) => {
+            iframeStatusCache.set(url, status)
+            iframeStatusInflight.delete(url)
+            return status
+        })
+    iframeStatusInflight.set(url, request)
+    return request
+}
 
 // Helper function to create standard context menu items
-const createStandardMenuItems = (url: string, state?: any, isExternal = false): ContextMenuItemProps[] => {
+const createStandardMenuItems = (
+    url: string,
+    state?: any,
+    isExternal = false,
+    canOpenExternalInWindow = false,
+    openExternalInWindow?: () => void
+): ContextMenuItemProps[] => {
     const fullUrl = url?.startsWith('/') ? `https://posthog.com${url}` : url
 
     return [
         {
             type: 'item',
-            disabled: isExternal,
+            disabled: isExternal && !canOpenExternalInWindow,
             children: isExternal ? (
-                <span>Open in new PostHog window</span>
+                canOpenExternalInWindow ? (
+                    <span onClick={openExternalInWindow}>Open in new PostHog window</span>
+                ) : (
+                    <span>Open in new PostHog window</span>
+                )
             ) : (
                 <Link to={url} state={{ ...state, newWindow: true }} contextMenu={false}>
                     Open in new PostHog window
@@ -111,7 +154,7 @@ export default function Link({
     ...other
 }: Props): JSX.Element {
     const { appWindow } = useWindow()
-    const { posthogInstance, compact } = useApp()
+    const { posthogInstance, compact, addWindow } = useApp()
     const posthog = usePostHog()
     const locationHref = appWindow?.element?.props?.location?.href
     const initialUrl = to || href
@@ -163,11 +206,69 @@ export default function Link({
         !internal || !!external || !!externalNoIcon || (url && !url.startsWith('/') && !url.includes('posthog.com'))
     )
 
+    const checkableExternalUrl = isExternal && url && isCheckableHttpUrl(url) ? url : null
+    const [iframeStatus, setIframeStatus] = useState<IframeStatus>(() =>
+        checkableExternalUrl ? iframeStatusCache.get(checkableExternalUrl) || 'unknown' : 'unknown'
+    )
+    const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+    useEffect(() => {
+        if (!checkableExternalUrl) {
+            setIframeStatus('unknown')
+            return
+        }
+        const cached = iframeStatusCache.get(checkableExternalUrl)
+        if (cached) setIframeStatus(cached)
+    }, [checkableExternalUrl])
+
+    useEffect(
+        () => () => {
+            if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
+        },
+        []
+    )
+
+    const handlePreflightHover = () => {
+        if (!checkableExternalUrl) return
+        if (iframeStatus !== 'unknown') return
+        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
+        hoverTimerRef.current = setTimeout(() => {
+            setIframeStatus('checking')
+            fetchIframeStatus(checkableExternalUrl).then(setIframeStatus)
+        }, 150)
+    }
+
+    const handlePreflightLeave = () => {
+        if (hoverTimerRef.current) {
+            clearTimeout(hoverTimerRef.current)
+            hoverTimerRef.current = null
+        }
+    }
+
+    const openExternalInWindow = checkableExternalUrl
+        ? () => {
+              addWindow(
+                  <Browser
+                      url={checkableExternalUrl}
+                      location={{ pathname: `browser:${checkableExternalUrl}` }}
+                      key={`browser:${checkableExternalUrl}`}
+                      newWindow
+                  />
+              )
+          }
+        : undefined
+
     // Create context menu items
     const menuItems =
         contextMenu && url
             ? [
-                  ...createStandardMenuItems(url, state, isExternal),
+                  ...createStandardMenuItems(
+                      url,
+                      state,
+                      isExternal,
+                      iframeStatus === 'allowed' && !!openExternalInWindow,
+                      openExternalInWindow
+                  ),
                   ...(customMenuItems.length > 0 ? [{ type: 'separator' as const }, ...customMenuItems] : []),
               ]
             : []
@@ -207,6 +308,8 @@ export default function Link({
                 <a
                     rel="noopener noreferrer"
                     onClick={handleClick}
+                    onMouseEnter={handlePreflightHover}
+                    onMouseLeave={handlePreflightLeave}
                     {...other}
                     href={url}
                     className={`${className} group`}
@@ -260,6 +363,8 @@ export default function Link({
                 <a
                     rel="noopener noreferrer"
                     onClick={handleClick}
+                    onMouseEnter={handlePreflightHover}
+                    onMouseLeave={handlePreflightLeave}
                     {...other}
                     href={url}
                     className={`${className} group`}

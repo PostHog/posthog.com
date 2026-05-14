@@ -1043,6 +1043,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    browser: {
+        size: {
+            min: {
+                width: 600,
+                height: 500,
+            },
+            max: {
+                width: 1100,
+                height: 800,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     'media-upload': {
         size: {
             min: {
@@ -1689,6 +1705,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     function getKey(key: string) {
+        if (key?.startsWith('browser:')) return 'browser'
         const experiment = appSettings[key]?.experiment
         if (!experiment?.flag) return key
         const assignedVariant = posthog?.getFeatureFlag?.(experiment?.flag)
