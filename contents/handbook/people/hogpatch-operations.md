@@ -51,7 +51,7 @@ PostHog teammates don’t need an invite to use Hogpatch – the space is open f
 
 ## Understanding how YC founders use Hogpatch
 
-We’re able to curate the best experience for founders by making iterative upgrades with each batch that compound over time. We do this by understanding how the space is _actually_ used across each 12-week cycle. You can follow real-time usage [here](https://www.hogpatch.com/).
+We’re able to curate the best experience for founders by making iterative upgrades with each batch that compound over time. We do this by understanding how the space is _actually_ used across each 12-week cycle. You can follow real-time usage on the [internal tracker](https://www.hogpatch.com/).
 
 At the end of each batch, Judy <TeamMember name="Judy Opperwall" photo /> wraps things up with a retro, documenting what worked and what didn’t. This proposes all the improvements that should be made ahead of welcoming the next wave of YC founders.
 
