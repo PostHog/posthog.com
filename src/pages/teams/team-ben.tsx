@@ -105,7 +105,7 @@ const underConsideration: RoadmapItem[] = [
         description: 'With matching nametags. Sponsor candidates being interviewed.',
     },
     {
-        title: 'At least one Ben on every Zoom call',
+        title: 'At least one Ben on every call',
         description: 'Pending PostHog policy review.',
     },
 ]
