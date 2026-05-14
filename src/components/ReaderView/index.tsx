@@ -604,7 +604,13 @@ const InlineSearch = ({
                 />
             </div>
             {inputValue && (
-                <OSButton size="xs" icon={<IconX />} onClick={handleClear} className="rounded-full !p-1.5" />
+                <OSButton
+                    size="xs"
+                    icon={<IconX />}
+                    onClick={handleClear}
+                    className="rounded-full !p-1.5"
+                    data-sidebar-label
+                />
             )}
         </div>
     )
@@ -780,7 +786,7 @@ const SidebarSearchResults = ({
     })
 
     return (
-        <div className="text-sm space-y-3">
+        <div className="text-sm space-y-3" data-sidebar-label>
             {onPageMatches.length > 0 && (
                 <div>
                     <h4 className="text-[11px] font-semibold text-muted uppercase tracking-wide m-0 mb-1 px-1">
