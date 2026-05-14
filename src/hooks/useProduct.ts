@@ -94,6 +94,22 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'WIP',
         },
         {
+            name: 'QA Swarm',
+            Icon: IconTestTube,
+            description: 'AI agents that test pull requests against real product behavior.',
+            handle: 'qa_swarm',
+            color: 'purple',
+            colorSecondary: 'yellow',
+            category: 'automation',
+            slug: 'qa-swarm',
+            status: 'WIP',
+            seo: {
+                title: 'QA Swarm – AI agents that test what users actually do',
+                description:
+                    'QA Swarm tests every PR, debugs with PostHog production data, and loops until your branch ships green.',
+            },
+        },
+        {
             name: 'Product tours',
             Icon: IconSpotlight,
             description: 'Guide users through your product with interactive tours and announcements.',
