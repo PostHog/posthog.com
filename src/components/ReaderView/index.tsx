@@ -321,7 +321,7 @@ const EditHistoryPopover = ({ commits }: { commits: any[] }) => {
     )
 }
 
-const AppOptionsButton = () => {
+const AppOptionsButton = ({ isMdx }: { isMdx: boolean }) => {
     const { fullWidthContent, setFullWidthContent, setBackgroundImage, backgroundImage } = useReaderView()
 
     const selectedOption =
@@ -345,16 +345,18 @@ const AppOptionsButton = () => {
             contentClassName="w-80"
         >
             <div className="w-full h-full bg-primary text-primary space-y-2">
-                <Fieldset legend="Paragraphs">
-                    <div className="grid grid-cols-2 gap-2">
-                        <ToggleGroup
-                            title="Content width"
-                            options={contentWidthOptions}
-                            value={fullWidthContent ? 'full' : 'fixed'}
-                            onValueChange={handleContentWidthChange}
-                        />
-                    </div>
-                </Fieldset>
+                {isMdx && (
+                    <Fieldset legend="Paragraphs">
+                        <div className="grid grid-cols-2 gap-2">
+                            <ToggleGroup
+                                title="Content width"
+                                options={contentWidthOptions}
+                                value={fullWidthContent ? 'full' : 'fixed'}
+                                onValueChange={handleContentWidthChange}
+                            />
+                        </div>
+                    </Fieldset>
+                )}
 
                 <Fieldset legend="Why not?">
                     <div className="grid grid-cols-2 gap-2">
@@ -878,6 +880,7 @@ interface LeftSidebarProps {
     children: React.ReactNode
     contentRef?: React.RefObject<HTMLElement>
     currentPath?: string
+    isMdx?: boolean
 }
 
 const SIDEBAR_TRANSITION = { type: 'spring' as const, stiffness: 380, damping: 36 }
@@ -1011,6 +1014,7 @@ const LeftSidebar = ({
     children,
     contentRef,
     currentPath,
+    isMdx = false,
 }: LeftSidebarProps) => {
     const { searchQuery } = useSearch()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
@@ -1300,7 +1304,7 @@ const LeftSidebar = ({
                     {displayExpanded && (
                         <div className="ml-auto flex items-center gap-px">
                             <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
-                            <AppOptionsButton />
+                            <AppOptionsButton isMdx={isMdx} />
                         </div>
                     )}
                 </div>
@@ -1484,6 +1488,7 @@ function ReaderViewContent({
                         menuTabs={menuTabs}
                         contentRef={onSearch ? undefined : contentRef}
                         currentPath={appWindow?.path}
+                        isMdx={body?.type === 'mdx'}
                     >
                         {leftSidebar || (!hideMenu && <Menu parent={parent as MenuItem} />)}
                     </LeftSidebar>
