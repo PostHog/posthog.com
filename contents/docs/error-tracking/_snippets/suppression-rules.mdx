@@ -1,4 +1,4 @@
-Autocaptured exceptions can be ignored client-side by [configuring suppression rules](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-suppression-rules) in PostHog settings. You can only filter based on the exception type and message attributes because the stack of an exception may still be minified client-side.
+[Suppression rules](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-suppression-rules) drop matching future exceptions before they are ingested as `$exception` events, so they can reduce your bill. Supported SDKs may apply rules client-side before sending exceptions to PostHog, and PostHog also applies them server-side before storing the event. They do not apply retroactively to exceptions already ingested. You can only filter based on the exception type and message attributes because the stack of an exception may still be minified client-side.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/suppression_rule_light_8db44eb6b1.png"
