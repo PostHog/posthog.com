@@ -1,0 +1,57 @@
+---
+title: Discord alerts
+sidebar: Docs
+showTitle: true
+---
+
+Send a Discord message whenever a monitor changes status – from up to down, or down to up. This keeps your team informed the moment something changes.
+
+## Setting up Discord alerts
+
+1. **Create a Discord webhook**
+
+   In your Discord server:
+   1. Go to **Server Settings** > **Integrations** > **Webhooks**
+   2. Click **New Webhook**
+   3. Name it (e.g., "PostHog Uptime")
+   4. Select the channel where alerts should be posted
+   5. Click **Copy Webhook URL**
+
+   For detailed instructions, see [Discord's webhook guide](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
+
+2. **Connect to PostHog**
+
+   In PostHog:
+   1. Go to [Uptime](https://us.posthog.com/uptime) and click the **Alerts** tab
+   2. Click **New alert**
+   3. Select **Discord** as the destination
+   4. Paste your webhook URL
+   5. Click **Create**
+
+## What you'll receive
+
+When a monitor changes status, PostHog sends a message like:
+
+```
+🔴 **Production API** is now **DOWN**
+https://api.example.com
+```
+
+Or when it recovers:
+
+```
+🟢 **Production API** is now **UP**
+https://api.example.com
+```
+
+The message includes the monitor name, new status, and the URL being monitored.
+
+## How status changes work
+
+PostHog tracks each monitor's status in real time. A status change event (`$uptime_monitor_status_changed`) fires when:
+
+- A monitor's first ping completes (going from unknown to up or down)
+- A monitor that was up fails a ping (after retries)
+- A monitor that was down gets a successful ping
+
+Your alert triggers on these events, so you're notified as soon as something changes.

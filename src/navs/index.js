@@ -4996,6 +4996,33 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Uptime',
+            url: '/docs/uptime',
+            icon: 'IconPulse',
+            color: 'green',
+            description: 'Monitor your endpoints and track availability over time.',
+            children: [
+                {
+                    name: 'Uptime',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/uptime',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Discord alerts',
+                    url: '/docs/uptime/discord-alerts',
+                    icon: 'IconBell',
+                    color: 'purple',
+                },
+            ],
+        },
+        {
             name: 'Surveys',
             url: '/docs/surveys',
             icon: 'IconMessage',

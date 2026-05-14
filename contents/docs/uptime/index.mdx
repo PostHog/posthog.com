@@ -1,0 +1,70 @@
+---
+title: Uptime monitoring
+sidebar: Docs
+showTitle: true
+---
+
+Uptime lets you monitor any HTTP endpoint and track its availability over time. PostHog pings your URLs every five minutes and records whether they respond successfully.
+
+## Why use Uptime
+
+Uptime monitoring helps you:
+
+- Track availability of your production websites, APIs, or services
+- Get notified when an endpoint goes down
+- See historical uptime percentages and response latency
+- Query uptime data with SQL alongside your product analytics
+
+## How it works
+
+1. **Add a monitor** – Enter a name and URL for each endpoint you want to track
+2. **PostHog pings it** – Every five minutes, PostHog sends an HTTP GET request to your URL
+3. **Results are stored** – Each ping records the response status, latency, and outcome (success or failure)
+4. **View your data** – See uptime percentage, average latency, and daily status in the Uptime dashboard
+
+A ping counts as successful if the endpoint returns an HTTP status code below 400. Failed pings (timeouts, connection errors, or 4xx/5xx responses) are retried up to three times before being recorded as a failure.
+
+## Key metrics
+
+| Metric | Description |
+|--------|-------------|
+| **Status** | Current state based on the most recent ping: up, down, or no data |
+| **Uptime (30d)** | Percentage of successful pings over the last 30 days |
+| **Avg latency (24h)** | Average response time in milliseconds for successful pings in the last 24 hours |
+| **Daily buckets** | Per-day status showing whether the monitor was up, degraded (some failures), or down |
+
+## Getting started
+
+To start monitoring:
+
+1. Go to [Uptime](https://us.posthog.com/uptime) in PostHog
+2. Click **New monitor**
+3. Enter a name and the URL you want to monitor
+4. Click **Create**
+
+PostHog begins pinging immediately. You'll see initial results within five minutes.
+
+### Suggested URLs
+
+If you have `$pageview` events, PostHog can suggest URLs to monitor based on the hosts your users visit. Click **Add from suggestions** to see a list of frequently visited hosts that aren't already monitored.
+
+## Alerts
+
+You can send notifications to Discord when a monitor changes status. See [Discord alerts](/docs/uptime/discord-alerts) to set this up.
+
+## Querying uptime data
+
+Uptime data is stored in the `posthog.uptime_pings` table and can be queried with SQL. Open the SQL editor and try:
+
+```sql
+SELECT
+    toDate(timestamp) AS day,
+    round(100 * countIf(outcome = 'success') / count(), 2) AS uptime_pct
+FROM posthog.uptime_pings
+WHERE monitor_id = toUUID('your-monitor-id')
+    AND timestamp >= now() - INTERVAL 30 DAY
+GROUP BY day
+ORDER BY day
+```
+
+From any monitor's detail page, click **Open as SQL insight** to generate a query pre-filled with that monitor's ID.
