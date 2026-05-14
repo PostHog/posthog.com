@@ -77,7 +77,7 @@ Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
 
 9. Select how often you want the alert to be checked (e.g. every hour, every day, every week, every month)
 
-10. Pick who should be notified when the alert is triggered. You can add email recipients, Slack channels, or webhook URLs directly in the alert form.
+10. Pick who should be notified when the alert is triggered. Subscribed users automatically receive in-app notifications when the alert fires. You can also add email recipients, Slack channels, or webhook URLs directly in the alert form.
 
     <ProductScreenshot
       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png"
@@ -158,7 +158,7 @@ Percentage thresholds are only available for relative alerts (as you need to com
 
 <CalloutBox icon="IconFlask" title="Feature preview" type="info">
 
-Anomaly detection alerts are in **beta**. To enable them, go to [Settings > Feature previews](https://us.posthog.com/settings/user-feature-previews) and toggle on **Anomaly Detection Alerts**.
+Anomaly detection alerts are in **beta**. To enable them, go to [Settings > Feature previews](https://app.posthog.com/settings/user-feature-previews) and toggle on **Anomaly Detection Alerts**.
 
 </CalloutBox>
 
@@ -184,51 +184,51 @@ PostHog includes 13 anomaly detection algorithms. For most use cases, **Z-score*
 
 #### Statistical detectors
 
-| Detector | Best for | How it works |
-|----------|----------|--------------|
-| **Z-score** | General purpose | Flags points that are many standard deviations from the rolling mean. Uses first-order differencing by default to handle cyclical data. |
-| **MAD** (Median Absolute Deviation) | Data with outliers | Similar to Z-score but uses median instead of mean, making it more robust to existing outliers. Uses first-order differencing by default. |
-| **IQR** (Interquartile Range) | Skewed distributions | Flags values outside the interquartile range. Less sensitive to distribution shape than Z-score. |
+| Detector                            | Best for             | How it works                                                                                                                              |
+| ----------------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **Z-score**                         | General purpose      | Flags points that are many standard deviations from the rolling mean. Uses first-order differencing by default to handle cyclical data.   |
+| **MAD** (Median Absolute Deviation) | Data with outliers   | Similar to Z-score but uses median instead of mean, making it more robust to existing outliers. Uses first-order differencing by default. |
+| **IQR** (Interquartile Range)       | Skewed distributions | Flags values outside the interquartile range. Less sensitive to distribution shape than Z-score.                                          |
 
 #### Machine learning detectors
 
 These use the [PyOD](https://pyod.readthedocs.io/) library and work well for more complex patterns:
 
-| Detector | Best for | How it works |
-|----------|----------|--------------|
-| **Isolation Forest** | General purpose, high-dimensional | Isolates anomalies by randomly partitioning data. Anomalies require fewer partitions to isolate. |
-| **KNN** (K-Nearest Neighbors) | Cluster-based patterns | Flags points that are far from their nearest neighbors. |
-| **LOF** (Local Outlier Factor) | Variable-density data | Compares a point's local density to its neighbors. Good when "normal" varies across different ranges. |
-| **ECOD** | Fast, no tuning needed | Uses empirical cumulative distribution functions. One of the fastest detectors with no hyperparameters beyond threshold and window. |
-| **COPOD** | Multivariate data | Uses copula-based outlier detection. Fast and parameter-light. |
-| **HBOS** (Histogram-Based Outlier Score) | Fast, large datasets | Builds histograms to estimate density. Very fast but assumes feature independence. |
-| **PCA** (Principal Component Analysis) | Correlated metrics | Projects data into lower dimensions and flags points with high reconstruction error. |
-| **OCSVM** (One-Class SVM) | Complex boundaries | Learns a boundary around normal data. Good when normal data forms an irregular shape. |
+| Detector                                 | Best for                          | How it works                                                                                                                        |
+| ---------------------------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Isolation Forest**                     | General purpose, high-dimensional | Isolates anomalies by randomly partitioning data. Anomalies require fewer partitions to isolate.                                    |
+| **KNN** (K-Nearest Neighbors)            | Cluster-based patterns            | Flags points that are far from their nearest neighbors.                                                                             |
+| **LOF** (Local Outlier Factor)           | Variable-density data             | Compares a point's local density to its neighbors. Good when "normal" varies across different ranges.                               |
+| **ECOD**                                 | Fast, no tuning needed            | Uses empirical cumulative distribution functions. One of the fastest detectors with no hyperparameters beyond threshold and window. |
+| **COPOD**                                | Multivariate data                 | Uses copula-based outlier detection. Fast and parameter-light.                                                                      |
+| **HBOS** (Histogram-Based Outlier Score) | Fast, large datasets              | Builds histograms to estimate density. Very fast but assumes feature independence.                                                  |
+| **PCA** (Principal Component Analysis)   | Correlated metrics                | Projects data into lower dimensions and flags points with high reconstruction error.                                                |
+| **OCSVM** (One-Class SVM)                | Complex boundaries                | Learns a boundary around normal data. Good when normal data forms an irregular shape.                                               |
 
 #### Ensemble detector
 
 The **Ensemble** detector combines two or more of the above detectors with AND/OR logic:
 
-- **AND**: Only fires when *all* sub-detectors agree a point is anomalous. Reduces false positives.
-- **OR**: Fires when *any* sub-detector flags an anomaly. Catches more anomalies but may be noisier.
+- **AND**: Only fires when _all_ sub-detectors agree a point is anomalous. Reduces false positives.
+- **OR**: Fires when _any_ sub-detector flags an anomaly. Catches more anomalies but may be noisier.
 
 ### Configuration
 
 All detectors share these core parameters:
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| **Sensitivity** (threshold) | Anomaly probability cutoff between 0 and 1. Higher values mean fewer alerts. | 0.9 |
-| **Window** | Number of historical data points used for training. | Depends on interval (see below) |
+| Parameter                   | Description                                                                  | Default                         |
+| --------------------------- | ---------------------------------------------------------------------------- | ------------------------------- |
+| **Sensitivity** (threshold) | Anomaly probability cutoff between 0 and 1. Higher values mean fewer alerts. | 0.9                             |
+| **Window**                  | Number of historical data points used for training.                          | Depends on interval (see below) |
 
 Default window sizes based on your alert's check interval:
 
 | Interval | Default window | What it covers |
-|----------|---------------|----------------|
-| Hourly | 168 | 7 days |
-| Daily | 90 | ~3 months |
-| Weekly | 26 | ~6 months |
-| Monthly | 12 | 1 year |
+| -------- | -------------- | -------------- |
+| Hourly   | 168            | 7 days         |
+| Daily    | 90             | ~3 months      |
+| Weekly   | 26             | ~6 months      |
+| Monthly  | 12             | 1 year         |
 
 #### Preprocessing
 
@@ -269,7 +269,7 @@ You can create anomaly detection alerts using [PostHog AI](/docs/posthog-ai/over
 
 ## Notifications
 
-Alerts support email notifications, Slack messages, and webhooks. You can configure these directly when creating or editing an alert.
+When an alert fires, each subscribed user automatically receives an in-app notification. Clicking the notification navigates to the associated insight. In addition to in-app notifications, alerts support email, Slack, and webhook notifications that you can configure when creating or editing an alert.
 
 ### Add Slack or webhook notifications
 
