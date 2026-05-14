@@ -11,7 +11,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import EventForm from 'components/EventForm'
 import { useUser } from 'hooks/useUser'
 import qs from 'qs'
-import { IconPencil, IconTrash } from '@posthog/icons'
+import { IconPencil, IconTrash, IconImage } from '@posthog/icons'
+import { buildEventGeneratorUrl } from '../components/ImageGenerator/integrations/eventLink'
 import { useToast } from '../context/Toast'
 import EventsMap, { LAYER_EVENTS_UPCOMING, LAYER_EVENTS_PAST } from 'components/HogMap/EventsMap'
 import MobileDrawer from 'components/MobileDrawer'
@@ -644,6 +645,14 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                                             )}
                                             {isModerator && (
                                                 <div className="mt-2 flex justify-end gap-1">
+                                                    <OSButton
+                                                        size="md"
+                                                        tooltip="Generate image"
+                                                        icon={<IconImage />}
+                                                        asLink
+                                                        to={buildEventGeneratorUrl(selectedEvent)}
+                                                        state={{ newWindow: true }}
+                                                    />
                                                     <OSButton
                                                         size="md"
                                                         tooltip="Edit this event"

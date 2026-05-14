@@ -236,6 +236,10 @@ export default function TaskBarMenu() {
                                     link: '/art-library',
                                     icon: <IconPalette className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
+                                { label: 'Mesh gradients', link: '/mesh-gradients' },
+                                { label: 'Colors and gradients', link: '/colors' },
+                                { label: 'Image generator', link: '/image-generator' },
+                                // IMPORTANT: Don't forget to also add to src/navs/internalTools.ts
                             ]
                           : []),
                       {
