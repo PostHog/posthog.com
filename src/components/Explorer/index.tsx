@@ -143,13 +143,6 @@ export default function Explorer({
         <div className="@container w-full h-full flex flex-col min-h-1">
             {(!fullScreen || !websiteMode) && (
                 <>
-                    <HeaderBar
-                        {...getHeaderBarProps()}
-                        searchContentRef={searchContainerRef}
-                        rightActionButtons={rightActionButtons}
-                        onSearch={onSearch}
-                        className={!showAddressBar ? 'border-b border-primary' : ''}
-                    />
                     {showAddressBar && (
                         <AddressBar
                             selectOptions={selectOptions}
