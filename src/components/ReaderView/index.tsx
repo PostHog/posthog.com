@@ -1154,7 +1154,7 @@ const LeftSidebar = ({
                         className={`flex-1 min-h-0 flex flex-col w-[250px] [&_[data-sidebar-label]]:transition-opacity [&_[data-sidebar-label]]:duration-200 ${
                             expanded
                                 ? ''
-                                : '[&_[data-sidebar-label]]:opacity-0 [&_a]:!bg-transparent [&_button]:!bg-transparent'
+                                : '[&_[data-sidebar-label]]:opacity-0 [&_a]:!bg-transparent [&_button]:!bg-transparent [&_a]:!border-transparent [&_button]:!border-transparent'
                         }`}
                     >
                         {/* Product slot: width-animates 32 ↔ 234 like the search
