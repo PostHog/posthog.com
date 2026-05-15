@@ -1,13 +1,16 @@
-import type { GeneratorState } from '../../types'
-import { pickRandomTheme } from '../../themes'
+import type { GeneratorState, LogoColor } from '../../types'
+import { getThemeForeground, pickRandomTheme } from '../../themes'
 
 export function eventDefaults(): GeneratorState {
+    const theme = pickRandomTheme(Math.floor(Math.random() * 22))
+    const fg = getThemeForeground(theme)
+    const logoColor: LogoColor = fg === '#fff' ? 'mono-white' : 'mono-black'
     return {
         template: 'event',
         aspect: 'square',
-        theme: pickRandomTheme(Math.floor(Math.random() * 22)),
-        title: { content: 'Event title goes here', maxWidth: 80 },
-        text: { content: '', maxWidth: 70 },
+        theme,
+        title: { content: 'Event title goes here', maxWidth: 70 },
+        text: { content: '', maxWidth: 60 },
         image: {
             source: null,
             size: 100,
@@ -20,12 +23,12 @@ export function eventDefaults(): GeneratorState {
                 id: 'default',
                 type: 'posthog',
                 variant: 'landscape',
-                color: 'mono-white',
-                sizePx: 120,
+                color: logoColor,
+                sizePx: 60,
             },
         ],
-        logoPlacement: 'inline',
-        logoArrangement: { direction: 'row', gap: 32 },
+        logoPlacement: 'overlay',
+        logoArrangement: { direction: 'row', gap: 48 },
         event: {
             date: undefined,
             time: undefined,

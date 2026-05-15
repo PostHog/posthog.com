@@ -60,6 +60,7 @@ export function searchProfiles(profiles: SqueakProfile[], query: string): Squeak
     return scored.map((x) => x.p)
 }
 
-export function profileAvatarUrl(p: SqueakProfile): string | undefined {
-    return p.avatar?.formats?.thumbnail?.url || p.avatar?.url
+export function profileAvatarUrl(p: SqueakProfile, prefer: 'full' | 'thumb' = 'full'): string | undefined {
+    if (prefer === 'thumb') return p.avatar?.formats?.thumbnail?.url || p.avatar?.url
+    return p.avatar?.url || p.avatar?.formats?.thumbnail?.url
 }

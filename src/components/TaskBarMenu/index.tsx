@@ -15,6 +15,9 @@ import {
     IconPlay,
     IconPeople,
     IconPalette,
+    IconImage,
+    IconGridMasonry,
+    IconMagicWand,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
@@ -208,6 +211,18 @@ export default function TaskBarMenu() {
                                 },
                                 {
                                     type: 'item' as const,
+                                    label: 'Art library',
+                                    link: '/art-library',
+                                    icon: <IconImage className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Image generator',
+                                    link: '/image-generator',
+                                    icon: <IconMagicWand className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
                                     label: 'Components',
                                     link: '/components',
                                     icon: <IconCode className="opacity-50 group-hover/item:opacity-75 size-4" />,
@@ -230,15 +245,6 @@ export default function TaskBarMenu() {
                                     link: '/hogwatch',
                                     icon: <IconPlay className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
-                                {
-                                    type: 'item' as const,
-                                    label: 'Art library',
-                                    link: '/art-library',
-                                    icon: <IconPalette className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                },
-                                { label: 'Mesh gradients', link: '/mesh-gradients' },
-                                { label: 'Colors and gradients', link: '/colors' },
-                                { label: 'Image generator', link: '/image-generator' },
                                 // IMPORTANT: Don't forget to also add to src/navs/internalTools.ts
                             ]
                           : []),

@@ -74,6 +74,13 @@ export function getThemeStyle(theme: Theme): React.CSSProperties {
     return bg.startsWith('linear-gradient') ? { background: bg } : { backgroundColor: bg }
 }
 
+export function getThemeForeground(theme: Theme): string {
+    const hex = getThemeHex(theme.name)
+    if (!hex) return '#fff'
+    const { l } = hexToHsl(hex)
+    return l > 65 ? '#F54E00' : '#fff'
+}
+
 function colorDistance(a: { h: number; s: number; l: number }, b: { h: number; s: number; l: number }): number {
     const hueDiff = Math.min(Math.abs(a.h - b.h), 360 - Math.abs(a.h - b.h))
     const satDiff = a.s - b.s

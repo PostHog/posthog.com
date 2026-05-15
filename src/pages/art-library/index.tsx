@@ -12,6 +12,7 @@ export default function ArtLibrary(): JSX.Element {
                 <iframe
                     src="https://posthog-art-library.vercel.app/"
                     className={`w-full h-full border-0 ${websiteMode ? 'min-h-[calc(100vh-103px)]' : ''}`}
+                    allow="clipboard-write"
                 />
             </Explorer>
         </>

@@ -38,18 +38,19 @@ export default function PersonPicker({ state, onChange }: Props) {
             <div className="max-h-72 overflow-y-auto">
                 {results.map((p) => {
                     const isActive = state.image.personId === String(p.squeakId)
-                    const avatar = profileAvatarUrl(p)
+                    const thumb = profileAvatarUrl(p, 'thumb')
+                    const fullAvatar = profileAvatarUrl(p, 'full')
                     return (
                         <button
                             key={p.squeakId}
                             type="button"
-                            onClick={() => select(p.squeakId, p.firstName, p.lastName, p.companyRole, avatar)}
+                            onClick={() => select(p.squeakId, p.firstName, p.lastName, p.companyRole, fullAvatar)}
                             className={`w-full flex items-center gap-2 px-1.5 py-1 rounded text-left leading-tight ${
                                 isActive ? 'bg-accent' : 'hover:bg-accent/50'
                             }`}
                         >
-                            {avatar ? (
-                                <img src={avatar} alt="" className="size-6 rounded-full object-cover" />
+                            {thumb ? (
+                                <img src={thumb} alt="" className="size-6 rounded-full object-cover m-0" />
                             ) : (
                                 <div className="size-6 rounded-full bg-yellow" />
                             )}

@@ -1,22 +1,33 @@
 import React from 'react'
 import type { GeneratorState } from '../../types'
-import { CalendarTile, ImageSlot, LogoRow, TextBlock, TitleBlock, themeBgStyle } from './EventBase'
+import { getThemeForeground } from '../../themes'
+import { CalendarTile, ImageSlot, LogoBar, OVERLAY_BAR_HEIGHT, TextBlock, TitleBlock, themeBgStyle } from './EventBase'
+
+const ACCENT_RED = '#F54E00'
 
 export default function EventSquare({ state }: { state: GeneratorState }) {
+    const fg = getThemeForeground(state.theme)
     return (
-        <div className="w-full h-full relative flex flex-col items-center text-light p-20" style={themeBgStyle(state)}>
-            {state.event?.showCalendar && <CalendarTile date={state.event.date} />}
+        <div className="w-full h-full relative overflow-hidden" style={{ ...themeBgStyle(state), color: fg }}>
+            <CalendarTile date={state.event?.date} accentHex={ACCENT_RED} />
 
-            <div className="flex flex-col items-center w-full mt-8">
-                <TitleBlock state={state} sizePx={88} />
-                <TextBlock state={state} sizePx={36} />
+            <ImageSlot
+                state={state}
+                defaultHeight={1050}
+                rightOffset={-120}
+                bottomOffset={0}
+                nameBadgeBottom={OVERLAY_BAR_HEIGHT + 32}
+                nameBadgeRight={56}
+                nameBadgeSizes={{ name: 38, role: 34 }}
+            />
+
+            <div className="absolute inset-0 flex flex-col p-16">
+                <TitleBlock state={state} sizePx={150} color={fg} />
+                <TextBlock state={state} sizePx={46} color={fg} />
+                {state.logoPlacement === 'inline' && <LogoBar state={state} />}
             </div>
 
-            <div className="flex-1 flex items-center justify-center w-full my-10">
-                <ImageSlot state={state} defaultMaxHeight={420} />
-            </div>
-
-            <LogoRow state={state} />
+            {state.logoPlacement === 'overlay' && <LogoBar state={state} />}
         </div>
     )
 }
