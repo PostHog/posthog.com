@@ -52,7 +52,7 @@ The improvement is largest in the tail, which is the part customers feel the mos
 
 **By HogQL query type:**
 
-The table below covers the ten highest-volume HogQL query types from the May window, ordered by query count.
+The table below covers the ten highest-volume HogQL query types from the May window.
 
 | Query type | p50 (Feb / May) | p90 (Feb / May) | p99 (Feb / May) | p99.9 (Feb / May) |
 |---|---|---|---|---|
