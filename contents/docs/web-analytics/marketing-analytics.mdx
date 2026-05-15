@@ -56,7 +56,7 @@ The marketing costs chart displays your total advertising spend across all confi
 - **Real-time updates** reflect new cost data as it syncs from your configured marketing sources (based on your source sync configuration)
 - **Currency conversion** automatically converts all monetary values (costs and conversion values) to your configured base currency for consistent reporting
 
-### Campaign breakdown
+### Performance breakdown
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/table_white_e64873d2b0.png" 
@@ -65,9 +65,21 @@ The marketing costs chart displays your total advertising spend across all confi
     classes="rounded"
 />
 
-The campaign breakdown table provides detailed performance metrics by individual campaign:
+The breakdown table shows performance metrics at different levels of your ad hierarchy. Use the drill-down selector to choose your level of detail:
 
-- **Campaign**: Campaign identifier from your advertising platform (must match the `utm_campaign` value in your conversion events)
+- **Campaign** (default): View performance aggregated by campaign
+- **Ad group**: Break down performance by ad group within campaigns
+- **Ad**: See metrics for individual ads
+
+<CalloutBox icon="IconInfo" title="Additional tables required for deeper drill-down" type="fyi">
+
+Ad group and ad-level drill-down require additional tables beyond the base campaign tables. If these aren't syncing, you'll see a banner linking to your source sync settings. See the [native sources table](#native-sources) for the required tables at each level.
+
+</CalloutBox>
+
+The breakdown table provides detailed performance metrics:
+
+- **Name**: Identifier for the campaign, ad group, or ad (depending on drill-down level)
 - **Source**: Ad platform name (e.g., `google`, must match the `utm_source` value in your conversion events)
 - **Total cost**: Total spend for the campaign in your base currency
 - **Total clicks**: Number of clicks received during the selected period
@@ -103,18 +115,18 @@ PostHog can automatically sync marketing data from supported advertising platfor
 
 **Supported native sources:**
 
-| Platform | Setup Guide | Required Tables |
-|----------|------------|-----------------|
-| Google Ads | [Setup guide](/docs/cdp/sources/google-ads) | `campaign` and `campaign_overview_stats` |
-| LinkedIn Ads | [Setup guide](/docs/cdp/sources/linkedin-ads) | `campaign_groups` and `campaign_group_stats` |
-| Meta Ads | [Setup guide](/docs/cdp/sources/meta-ads) | `campaigns` and `campaign_stats` |
-| Pinterest Ads | [Setup guide](/docs/cdp/sources/pinterest-ads) | `campaigns` and `campaign_analytics` |
-| TikTok Ads | [Setup guide](/docs/cdp/sources/tiktok-ads) | `campaigns` and `campaign_report` |
-| Reddit Ads | [Setup guide](/docs/cdp/sources/reddit-ads) | `campaigns` and `campaign_report` |
-| Bing Ads | [Setup guide](/docs/cdp/sources/bing-ads) | `campaigns` and `campaign_performance_report` |
-| Snapchat Ads | [Setup guide](/docs/cdp/sources/snapchat-ads) | `campaigns` and `campaign_stats_daily` |
+| Platform | Setup Guide | Campaign Tables | Ad Group Tables | Ad Tables |
+|----------|------------|-----------------|-----------------|-----------|
+| Google Ads | [Setup guide](/docs/cdp/sources/google-ads) | `campaign`, `campaign_overview_stats` | `ad_group`, `ad_group_stats` | `ad`, `ad_stats` |
+| LinkedIn Ads | [Setup guide](/docs/cdp/sources/linkedin-ads) | `campaign_groups`, `campaign_group_stats` | `campaigns`, `campaign_stats` | `creatives`, `creative_stats` |
+| Meta Ads | [Setup guide](/docs/cdp/sources/meta-ads) | `campaigns`, `campaign_stats` | `adsets`, `adset_stats` | `ads`, `ad_stats` |
+| Pinterest Ads | [Setup guide](/docs/cdp/sources/pinterest-ads) | `campaigns`, `campaign_analytics` | `ad_groups`, `ad_group_analytics` | `ads`, `ad_analytics` |
+| TikTok Ads | [Setup guide](/docs/cdp/sources/tiktok-ads) | `campaigns`, `campaign_report` | `ad_groups`, `ad_group_report` | `ads`, `ad_report` |
+| Reddit Ads | [Setup guide](/docs/cdp/sources/reddit-ads) | `campaigns`, `campaign_report` | `ad_groups`, `ad_group_report` | `ads`, `ad_report` |
+| Bing Ads | [Setup guide](/docs/cdp/sources/bing-ads) | `campaigns`, `campaign_performance_report` | `ad_group_performance_report` | `ad_performance_report` |
+| Snapchat Ads | [Setup guide](/docs/cdp/sources/snapchat-ads) | `campaigns`, `campaign_stats_daily` | `ad_squads`, `ad_squad_stats_daily` | `ads`, `ad_stats_daily` |
 
-Each native source automatically handles data formatting and provides the required campaign and performance data. The configuration interface shows which tables are syncing and which still need to be enabled.
+Each native source automatically handles data formatting at the campaign level. To use ad group or ad-level drill-down, sync the additional tables shown above. The configuration interface shows which tables are syncing and which still need to be enabled.
 
 #### Data Warehouse sources
 
