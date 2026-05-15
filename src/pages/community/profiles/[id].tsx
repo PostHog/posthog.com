@@ -1481,7 +1481,7 @@ export default function ProfilePage({ params }: PageProps) {
     }
 
     return (
-        <div data-scheme="secondary" className="h-full bg-primary text-primary flex flex-col">
+        <div data-scheme="secondary" className="pt-4 h-full bg-primary text-primary flex flex-col">
             <SEO title={`${name}'s profile - PostHog`} />
 
             <ScrollArea
