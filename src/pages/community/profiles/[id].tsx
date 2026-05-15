@@ -1481,9 +1481,155 @@ export default function ProfilePage({ params }: PageProps) {
     }
 
     return (
-        <div data-scheme="secondary" className="h-full bg-primary text-primary">
+        <div data-scheme="secondary" className="h-full bg-primary text-primary flex flex-col">
             <SEO title={`${name}'s profile - PostHog`} />
-            <div className="border-b border-primary">
+
+            <ScrollArea
+                className="min-h-0 h-full"
+                style={
+                    values.backgroundImage
+                        ? {
+                              backgroundImage: `url(${values.backgroundImage.url})`,
+                              backgroundSize: values.backgroundImage.backgroundSize || 'auto',
+                              backgroundRepeat: values.backgroundImage.backgroundRepeat || 'no-repeat',
+                              backgroundPosition: values.backgroundImage.backgroundPosition || 'center',
+                          }
+                        : undefined
+                }
+            >
+                <div data-scheme="primary" className="mx-auto max-w-screen-xl px-4 pb-4 @container">
+                    <div className="flex flex-col @2xl:flex-row gap-6 p-4">
+                        <div className="@2xl:max-w-xs w-full flex-shrink-0 pb-4">
+                            <AvatarBlock
+                                profile={profile}
+                                isEditing={isEditing}
+                                name={name}
+                                setFieldValue={setFieldValue}
+                                values={values}
+                                errors={errors}
+                            />
+
+                            {(isEditing ||
+                                profile.reputation != null ||
+                                profile.pineappleOnPizza !== null ||
+                                profile.pronouns ||
+                                profile.location) && (
+                                <Block title="Details">
+                                    <Details
+                                        profile={profile}
+                                        isEditing={isEditing}
+                                        setFieldValue={setFieldValue}
+                                        values={values}
+                                        errors={errors}
+                                        isTeamMember={isTeamMember}
+                                    />
+                                </Block>
+                            )}
+
+                            {(isEditing ||
+                                profile.github ||
+                                profile.twitter ||
+                                profile.linkedin ||
+                                profile.website) && (
+                                <Block title="Links">
+                                    <Links
+                                        errors={errors}
+                                        setFieldValue={setFieldValue}
+                                        formValues={values}
+                                        profile={profile}
+                                        isEditing={isEditing}
+                                    />
+                                </Block>
+                            )}
+
+                            {profile.achievements?.length > 0 && (
+                                <Block title="Achievements" url={`/community/achievements`}>
+                                    <AchievementsGrid
+                                        achievements={profile.achievements}
+                                        profile={profile}
+                                        mutate={mutate}
+                                    />
+                                </Block>
+                            )}
+                            {isEditing && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
+                            {isModerator && isEditing && (
+                                <Block title="Special employee things">
+                                    <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />
+                                </Block>
+                            )}
+                        </div>
+
+                        <div className="flex-grow @container">
+                            <ProfileTabs
+                                profile={profile}
+                                firstName={firstName}
+                                id={id}
+                                isEditing={isEditing}
+                                values={values}
+                                errors={errors}
+                                setFieldValue={setFieldValue}
+                            />
+                            {profile?.teams?.data?.length === 1 ? (
+                                // Single team - use Block (OSFieldset)
+                                <div className="mt-6">
+                                    <Block
+                                        title={`${profile.teams.data[0].attributes.name} Team`}
+                                        url={`/teams/${profile.teams.data[0].attributes.slug}`}
+                                        className="pt-6"
+                                    >
+                                        <div className="grid grid-cols-2 gap-3 @lg:grid-cols-3 @3xl:grid-cols-4 pt-8">
+                                            <TeamMembersList self={data} team={profile.teams.data[0]} />
+                                        </div>
+                                    </Block>
+                                </div>
+                            ) : profile?.teams?.data?.length > 1 ? (
+                                // Multiple teams - use OSTabs
+                                <div className="mt-6" data-scheme="secondary">
+                                    <OSTabs
+                                        tabs={profile.teams.data.map((team) => ({
+                                            value: team.attributes.slug,
+                                            label: <>{team.attributes.name} Team</>,
+                                            content: (
+                                                <div className="grid grid-cols-2 gap-3 @lg:grid-cols-3 @3xl:grid-cols-4">
+                                                    <div className="col-span-full border-b border-primary pb-2 mb-10">
+                                                        <Link
+                                                            to={`/teams/${team.attributes.slug}`}
+                                                            state={{ newWindow: true }}
+                                                            className="group font-bold flex items-center gap-1 hover:underline"
+                                                        >
+                                                            {team.attributes.name} Team
+                                                            <IconArrowUpRight className="size-3 text-muted group-hover:text-secondary" />
+                                                        </Link>
+                                                    </div>
+                                                    <TeamMembersList self={data} team={team} />
+                                                </div>
+                                            ),
+                                        }))}
+                                        defaultValue={profile.teams.data[0].attributes.slug}
+                                        triggerDataScheme="primary"
+                                    />
+                                </div>
+                            ) : null}
+
+                            {profile.amaEnabled && (
+                                <div className="mt-6">
+                                    <Block title="Comments">
+                                        <Questions
+                                            initialView={'question-form'}
+                                            slug={window?.location?.pathname}
+                                            profileId={undefined}
+                                            showForm
+                                            disclaimer={false}
+                                            autoFocus={false}
+                                        />
+                                    </Block>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </ScrollArea>
+            <div className="border-t border-primary sticky bottom-0">
                 <HeaderBar
                     rightActionButtons={
                         isEditing ? (
@@ -1672,151 +1818,6 @@ export default function ProfilePage({ params }: PageProps) {
                     }
                 />
             </div>
-            <ScrollArea
-                className="min-h-0 h-full"
-                style={
-                    values.backgroundImage
-                        ? {
-                              backgroundImage: `url(${values.backgroundImage.url})`,
-                              backgroundSize: values.backgroundImage.backgroundSize || 'auto',
-                              backgroundRepeat: values.backgroundImage.backgroundRepeat || 'no-repeat',
-                              backgroundPosition: values.backgroundImage.backgroundPosition || 'center',
-                          }
-                        : undefined
-                }
-            >
-                <div data-scheme="primary" className="mx-auto max-w-screen-xl px-4 pb-4 @container">
-                    <div className="flex flex-col @2xl:flex-row gap-6 p-4">
-                        <div className="@2xl:max-w-xs w-full flex-shrink-0 pb-4">
-                            <AvatarBlock
-                                profile={profile}
-                                isEditing={isEditing}
-                                name={name}
-                                setFieldValue={setFieldValue}
-                                values={values}
-                                errors={errors}
-                            />
-
-                            {(isEditing ||
-                                profile.reputation != null ||
-                                profile.pineappleOnPizza !== null ||
-                                profile.pronouns ||
-                                profile.location) && (
-                                <Block title="Details">
-                                    <Details
-                                        profile={profile}
-                                        isEditing={isEditing}
-                                        setFieldValue={setFieldValue}
-                                        values={values}
-                                        errors={errors}
-                                        isTeamMember={isTeamMember}
-                                    />
-                                </Block>
-                            )}
-
-                            {(isEditing ||
-                                profile.github ||
-                                profile.twitter ||
-                                profile.linkedin ||
-                                profile.website) && (
-                                <Block title="Links">
-                                    <Links
-                                        errors={errors}
-                                        setFieldValue={setFieldValue}
-                                        formValues={values}
-                                        profile={profile}
-                                        isEditing={isEditing}
-                                    />
-                                </Block>
-                            )}
-
-                            {profile.achievements?.length > 0 && (
-                                <Block title="Achievements" url={`/community/achievements`}>
-                                    <AchievementsGrid
-                                        achievements={profile.achievements}
-                                        profile={profile}
-                                        mutate={mutate}
-                                    />
-                                </Block>
-                            )}
-                            {isEditing && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
-                            {isModerator && isEditing && (
-                                <Block title="Special employee things">
-                                    <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />
-                                </Block>
-                            )}
-                        </div>
-
-                        <div className="flex-grow @container">
-                            <ProfileTabs
-                                profile={profile}
-                                firstName={firstName}
-                                id={id}
-                                isEditing={isEditing}
-                                values={values}
-                                errors={errors}
-                                setFieldValue={setFieldValue}
-                            />
-                            {profile?.teams?.data?.length === 1 ? (
-                                // Single team - use Block (OSFieldset)
-                                <div className="mt-6">
-                                    <Block
-                                        title={`${profile.teams.data[0].attributes.name} Team`}
-                                        url={`/teams/${profile.teams.data[0].attributes.slug}`}
-                                        className="pt-6"
-                                    >
-                                        <div className="grid grid-cols-2 gap-3 @lg:grid-cols-3 @3xl:grid-cols-4 pt-8">
-                                            <TeamMembersList self={data} team={profile.teams.data[0]} />
-                                        </div>
-                                    </Block>
-                                </div>
-                            ) : profile?.teams?.data?.length > 1 ? (
-                                // Multiple teams - use OSTabs
-                                <div className="mt-6" data-scheme="secondary">
-                                    <OSTabs
-                                        tabs={profile.teams.data.map((team) => ({
-                                            value: team.attributes.slug,
-                                            label: <>{team.attributes.name} Team</>,
-                                            content: (
-                                                <div className="grid grid-cols-2 gap-3 @lg:grid-cols-3 @3xl:grid-cols-4">
-                                                    <div className="col-span-full border-b border-primary pb-2 mb-10">
-                                                        <Link
-                                                            to={`/teams/${team.attributes.slug}`}
-                                                            state={{ newWindow: true }}
-                                                            className="group font-bold flex items-center gap-1 hover:underline"
-                                                        >
-                                                            {team.attributes.name} Team
-                                                            <IconArrowUpRight className="size-3 text-muted group-hover:text-secondary" />
-                                                        </Link>
-                                                    </div>
-                                                    <TeamMembersList self={data} team={team} />
-                                                </div>
-                                            ),
-                                        }))}
-                                        defaultValue={profile.teams.data[0].attributes.slug}
-                                        triggerDataScheme="primary"
-                                    />
-                                </div>
-                            ) : null}
-
-                            {profile.amaEnabled && (
-                                <div className="mt-6">
-                                    <Block title="Comments">
-                                        <Questions
-                                            initialView={'question-form'}
-                                            slug={window?.location?.pathname}
-                                            profileId={undefined}
-                                            showForm
-                                            disclaimer={false}
-                                            autoFocus={false}
-                                        />
-                                    </Block>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </ScrollArea>
         </div>
     )
 }
