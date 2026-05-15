@@ -14,6 +14,13 @@ type IframeStatus = 'unknown' | 'checking' | 'allowed' | 'blocked'
 const iframeStatusCache = new Map<string, 'allowed' | 'blocked'>()
 const iframeStatusInflight = new Map<string, Promise<'allowed' | 'blocked'>>()
 
+/**
+ * We call our own `/api/check-iframe` instead of `fetch`ing the external URL in the browser
+ * because `X-Frame-Options` and `Content-Security-Policy: frame-ancestors` are not exposed
+ * to cross-origin JavaScript: they are not CORS-safelisted response headers, and
+ * `fetch(..., { mode: "no-cors" })` only yields an opaque response with no readable headers.
+ * A same-origin endpoint that performs the HEAD/GET server-side is the reliable way to read them.
+ */
 function isCheckableHttpUrl(url: string): boolean {
     try {
         const u = new URL(url)
