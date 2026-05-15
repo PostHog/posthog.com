@@ -34,11 +34,7 @@ A great deal has changed.
 
 The honest way to answer "are PostHog queries actually faster?" is to look at production latency.
 The numbers below compare two weeks of customer-facing queries on our US Cloud cluster, roughly three months apart: one in late February 2026, one in early May 2026.
-
-Note that production traffic moved to a new ClickHouse cluster in mid-January 2026, before this comparison window starts: both the February and the May samples are already running on the new cluster. The hardware change itself was substantial, roughly 3× peak read throughput compared to the old cluster, and that improvement is **not** captured in the latency numbers below. The improvements shown are a separate set of software wins that landed on top of the new cluster, not a measurement of it.
-Earlier optimization work that predates the comparison window is similarly not captured here.
-
-The table below covers the ten highest-volume HogQL query types from the May window.
+The table covers the ten highest-volume HogQL query types from the May window.
 
 | Query type | p50 (Feb / May) | p90 (Feb / May) | p99 (Feb / May) | p99.9 (Feb / May) |
 |---|---|---|---|---|
@@ -52,6 +48,9 @@ The table below covers the ten highest-volume HogQL query types from the May win
 | InsightActorsQuery | 174 / 190 ms (+9%) | 1.10 / 0.88 s (-20%) | 10.4 / 4.9 s (-53%) | 34.2 / 28.9 s (-16%) |
 | LifecycleQuery | 564 / 604 ms (+7%) | 2.44 / 2.03 s (-17%) | 21.1 / 12.0 s (-43%) | 59.5 / 44.5 s (-25%) |
 | WebOverviewQuery | 533 / 507 ms (-5%) | 2.84 / 1.54 s (-46%) | 23.6 / 7.4 s (-69%) | 47.8 / 25.1 s (-47%) |
+
+Note that production traffic moved to a new ClickHouse cluster in mid-January 2026, before this comparison window starts: both the February and the May samples are already running on the new cluster. The hardware change itself was substantial, roughly 3× peak read throughput compared to the old cluster, and that improvement is **not** captured in the latency numbers above. The improvements shown are a separate set of software wins that landed on top of the new cluster, not a measurement of it.
+Earlier optimization work that predates the comparison window is similarly not captured here.
 
 Not everything improved.
 RetentionQuery regressed at p50, p90, and p99, though it improved at p99.9.
