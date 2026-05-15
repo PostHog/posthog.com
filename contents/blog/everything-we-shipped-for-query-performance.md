@@ -38,20 +38,6 @@ The numbers below compare two weeks of customer-facing queries on our US Cloud c
 Note that production traffic moved to a new ClickHouse cluster in mid-January 2026, before this comparison window starts: both the February and the May samples are already running on the new cluster. The hardware change itself was substantial, roughly 3× peak read throughput compared to the old cluster, and that improvement is **not** captured in the latency numbers below. The improvements shown are a separate set of software wins that landed on top of the new cluster, not a measurement of it.
 Earlier optimization work that predates the comparison window is similarly not captured here.
 
-**Cluster-wide, across every customer-facing query, latency dropped at every percentile we measure:**
-
-| Metric | Feb 23 to Mar 1 | May 6 to May 12 | Change |
-|---|---|---|---|
-| p50 query latency | 177 ms | 155 ms | -12% |
-| p90 query latency | 1,104 ms | 753 ms | -32% |
-| p99 query latency | 10.3 s | 5.8 s | -43% |
-| p99.9 query latency | 39.9 s | 25.5 s | -36% |
-
-Over the same window, query volume rose roughly 24% and total data scanned rose roughly 72%, so the latency improvement is set against meaningfully more load on the cluster, not less.
-The improvement is largest in the tail, which is the part customers feel the most: the share of queries that took longer than one second fell from 11.1% to 7.6%, and the share that took longer than ten seconds fell from 1.05% to 0.46%.
-
-**By HogQL query type:**
-
 The table below covers the ten highest-volume HogQL query types from the May window.
 
 | Query type | p50 (Feb / May) | p90 (Feb / May) | p99 (Feb / May) | p99.9 (Feb / May) |
@@ -74,9 +60,6 @@ LifecycleQuery and InsightActorsQuery show a small p50 regression.
 Marketing-analytics queries (not in the top ten by volume above) also regressed across most percentiles.
 The regressions are mostly consistent with workstreams that are in progress but not yet shipped (marketing-analytics preaggregation and lazy computation, both listed under "What is in flight" below, and active improvements to retention).
 Where we have a clear regression we are working on it; we are not going to claim universal wins.
-
-A practical caveat on the cluster-wide table: the way we tag queries from some products expanded significantly in March 2026 (see section 7 on tooling and observability), which shifts the population mix for any individual product's per-product line between the two periods.
-The cluster-wide totals and the per-query-type breakdown above are unaffected by that tagging change, because they aggregate over the underlying query, not the tag.
 
 ## How we approach query performance
 
