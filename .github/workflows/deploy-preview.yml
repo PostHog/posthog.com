@@ -81,6 +81,11 @@ jobs:
                   CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
                   CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
 
+            # Wrangler bundles repo-root `functions/` into the Pages Worker when cwd is the repo root
+            # (see deploy step `workingDirectory`). Fail here if Functions do not compile, before upload.
+            - name: Bundle Cloudflare Pages Functions (verify)
+              run: pnpm exec wrangler pages functions build --project-directory . --outdir /tmp/cf-pages-functions-check
+
             - name: Deploy to Cloudflare Pages
               id: deploy
               uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3
@@ -88,6 +93,7 @@ jobs:
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
                   packageManager: pnpm
+                  workingDirectory: .
                   command: pages deploy public --project-name=posthog-preview --branch=pr-${{ github.event.pull_request.number }}
 
             - name: Get timestamp (final)
