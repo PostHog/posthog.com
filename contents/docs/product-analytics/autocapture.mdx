@@ -497,6 +497,38 @@ posthog.init('<ph_project_token>', {
 
 > **Note:** The PostHog heatmap captures dead clicks for free, collecting only the coordinates of dead clicks to display in heatmaps. Enabling the autocapture of dead clicks here allows for deeper analysis and is priced as a standard product analytics event.
 
+### Excluding elements from dead click detection
+
+Some elements don't cause visible page changes by design – download buttons, file picker triggers, or print dialogs, for example. You can exclude these from dead click detection using the `.ph-no-deadclick` CSS class:
+
+```html
+<button class="ph-no-deadclick">Download PDF</button>
+```
+
+Elements with `.ph-no-capture` are also excluded from dead click detection by default.
+
+The exclusion check walks the DOM tree, so adding the class to a parent element excludes all its children:
+
+```html
+<div class="ph-no-deadclick">
+    <button>Download</button>  <!-- excluded -->
+    <button>Print</button>     <!-- excluded -->
+</div>
+```
+
+For more control, use the `css_selector_ignorelist` option:
+
+```js-web
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    capture_dead_clicks: {
+        css_selector_ignorelist: ['.my-download-button', '[data-no-deadclick]']
+    }
+})
+```
+
+Setting a custom `css_selector_ignorelist` overrides the defaults. An empty array (`[]`) disables all exclusions.
+
 ## Analyzing autocaptured events and properties
 
 Autocapture events and properties can be used like any other [event type](/docs/data/events). You can use them in trends, funnels, cohorts, surveys, and more. Beyond this, they come with some special features:
