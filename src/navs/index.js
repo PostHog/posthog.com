@@ -518,6 +518,66 @@ export const handbookSidebar = [
         ],
     },
     {
+        name: 'Brand',
+        url: '',
+        children: [
+            {
+                name: 'Why our brand matters',
+                url: '/handbook/brand/overview',
+            },
+            {
+                name: 'Brandbook',
+            },
+            {
+                name: 'Brand foundations',
+                url: '/handbook/brand/foundations',
+            },
+            {
+                name: 'Voice & tone',
+                url: '/handbook/brand/tone',
+            },
+            {
+                name: 'Visual identity',
+                url: '/handbook/brand/visual-identity',
+            },
+            {
+                name: 'Design principles',
+                url: '/handbook/brand/design-principles',
+            },
+            {
+                name: 'Brand in practice',
+                url: '/handbook/brand/in-practice',
+            },
+            {
+                name: 'Being a brand ambassador',
+                url: '/handbook/brand/ambassador',
+            },
+            {
+                name: 'Working with vendors',
+                url: '/handbook/brand/vendors',
+            },
+            {
+                name: 'Ownership & approvals',
+                url: '/handbook/brand/approvals',
+            },
+            {
+                name: 'Resources',
+            },
+            {
+                name: 'Quick reference',
+                url: '/handbook/brand/reference',
+            },
+            {
+                name: 'Brand assets',
+                url: '/handbook/brand/assets',
+            },
+            {
+                name: 'Requesting custom art',
+                url: '/handbook/brand/art-requests',
+            },
+        ],
+    },
+    {
         name: 'Content',
         url: '',
         children: [
@@ -953,36 +1013,6 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Graphics',
-        url: '',
-        children: [
-            {
-                name: 'Overview',
-                url: '/handbook/brand/overview',
-            },
-            {
-                name: 'Brand strategy',
-                url: '/handbook/strategy/brand',
-            },
-            {
-                name: 'Art requests',
-                url: '/handbook/brand/art-requests',
-            },
-            {
-                name: 'Logos, brand, and hedgehogs',
-                url: '/handbook/company/brand-assets',
-            },
-            {
-                name: 'Style guide',
-                url: '/handbook/brand/style-guide',
-            },
-            {
-                name: 'Our design philosophy',
-                url: '/handbook/brand/philosophy',
-            },
-        ],
-    },
-    {
         name: 'Growth',
         url: '',
         children: [
@@ -1232,7 +1262,7 @@ export const handbookSidebar = [
         name: 'Sales, CS & Onboarding',
         url: '',
         children: [
-           {
+            {
                 name: 'Overview',
                 url: '',
                 children: [
