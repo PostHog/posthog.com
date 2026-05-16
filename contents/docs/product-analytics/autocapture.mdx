@@ -497,6 +497,12 @@ posthog.init('<ph_project_token>', {
 
 > **Note:** The PostHog heatmap captures dead clicks for free, collecting only the coordinates of dead clicks to display in heatmaps. Enabling the autocapture of dead clicks here allows for deeper analysis and is priced as a standard product analytics event.
 
+### How dead click detection works
+
+Dead click detection automatically ignores clicks inside interactive elements like `a`, `button`, `form`, `input`, `select`, `textarea`, and `label`. Clicking an icon inside a button or a span inside a download link won't trigger a dead click, even if the inner element doesn't cause a page change.
+
+This filtering matches how autocapture attributes clicks to interactive ancestors, reducing false positives from common UI patterns like icon buttons and wrapped links.
+
 ### Excluding elements from dead click detection
 
 Some elements don't cause visible page changes by design – download buttons, file picker triggers, or print dialogs, for example. You can exclude these from dead click detection using the `.ph-no-deadclick` CSS class:
