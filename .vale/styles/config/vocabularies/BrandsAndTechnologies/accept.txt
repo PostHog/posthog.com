@@ -169,6 +169,7 @@ Metabase
 [Mm]etronome
 Microsoft
 Midjourney
+Mintlify
 MinIO
 [Mm]istral
 Mixpanel
