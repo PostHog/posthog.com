@@ -1,8 +1,8 @@
 ---
-title: Run SQL, manage views, and sync sources with MCP
+title: Run SQL, manage views, sync sources, and manage SQL variables with MCP
 ---
 
-The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent run [HogQL](/docs/hogql) queries, manage [Data Warehouse](/docs/data-warehouse) views, sync import sources, and explore your schema directly from your code editor. Query events, create and materialize views, configure Postgres/Stripe/HubSpot imports, and work with warehouse tables – without switching to the PostHog app.
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent run [HogQL](/docs/hogql) queries, manage [Data Warehouse](/docs/data-warehouse) views, sync import sources, manage SQL variables, and explore your schema directly from your code editor. Query events, create and materialize views, configure Postgres/Stripe/HubSpot imports, manage reusable SQL variables, and work with warehouse tables – without switching to the PostHog app.
 
 This works in any MCP client – Cursor, Codex, Claude Code, Windsurf, VS Code, and others.
 
@@ -16,6 +16,7 @@ With MCP, your coding agent can:
 - **Query across sources** – Join PostHog events with Stripe, HubSpot, or any linked warehouse table
 - **Manage views** – Create, update, materialize, and delete saved views in your Data Warehouse programmatically
 - **Manage import sources** – Create, configure, and sync data warehouse sources like Postgres, Stripe, and HubSpot
+- **Manage SQL variables** – Create, update, and delete reusable SQL variables for HogQL queries
 
 ## SQL tools
 
@@ -27,6 +28,16 @@ The MCP server provides these tools for running SQL:
 | `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Returns the query string so you can review or modify it before running. Requires [AI data processing approval](/docs/posthog-ai/allow-access). |
 | `property-definitions`               | List all event and person properties in your project. Useful for understanding what data is available before writing a query.                                                                           |
 | `event-definitions-list`             | List all event definitions in your project with volume and usage data.                                                                                                                                  |
+
+## SQL variable management tools
+
+These tools let you manage [SQL variables](/docs/endpoints/variables) – reusable placeholders you reference in HogQL queries using the `{variables.code_name}` syntax. You can also query the `system.insight_variables` table to list existing variables.
+
+| Tool                   | Description                                                                                                                                                             |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sql-variables-create` | Create a reusable SQL variable for HogQL queries. Provide a name and type. The `code_name` is generated from the name and referenced in SQL as `{variables.code_name}`. |
+| `sql-variables-update` | Update an existing SQL variable by ID. Change the name, type, default value, or allowed values for List variables.                                                      |
+| `sql-variables-delete` | Delete a SQL variable by ID. Queries referencing this variable by `code_name` may stop working after deletion.                                                          |
 
 ## View management tools
 
@@ -105,6 +116,13 @@ For source management:
 - `Trigger a sync for my Postgres source.`
 - `Show me the sync status for all my import schemas.`
 - `Cancel the running sync on the hubspot_contacts table.`
+
+For SQL variable management:
+
+- `Create a SQL variable called "customer_id" with type String and default value "acme-corp".`
+- `Update my "region" SQL variable to have default value "US".`
+- `Delete the SQL variable with ID "019db4bb-7a2b-0000-3539-34b85883a064".`
+- `Query system.insight_variables to list all my SQL variables.`
 
 ## Install the MCP server
 
