@@ -20,8 +20,13 @@ const ChannelPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/twilio_860042a891.png',
         },
         {
-            label: 'Push',
-            badge: 'Coming soon',
+            label: 'Push (APNS)',
+            url: '/docs/workflows/configure-channels?tab=APNS',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/push_8ac7759b08.svg',
+        },
+        {
+            label: 'Push (FCM)',
+            url: '/docs/workflows/configure-channels?tab=FCM',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/push_8ac7759b08.svg',
         },
     ]
