@@ -20,14 +20,31 @@ To do this:
 
 4. Under **Match event and actions**, select **survey sent**.
 
+## Filtering notifications by response content
+
+You can filter notifications so they only fire when responses meet specific criteria. This is useful for reducing noise on high-volume surveys – for example, only notifying on low NPS scores or specific answer choices.
+
+To add response filters, click **Add response filter** in the **Only notify when…** section of the notification setup modal. The available filter options depend on the question type:
+
+| Question type       | Filter options                                                                                                               |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **Rating**          | `is at most`, `is at least`, `equals`, `is between` – input is bounded to the question's scale (0–10 for NPS, 1–N otherwise) |
+| **Open text**       | `has any response`, `contains`, `does not contain`                                                                           |
+| **Single choice**   | `is any of`, `is none of` – select from the question's choices                                                               |
+| **Multiple choice** | `includes any of`, `includes none of` – select from the question's choices                                                   |
+
+When you add multiple filters, they are combined with AND logic – all conditions must be met for the notification to fire.
+
+Response filters only apply to completed responses (`survey sent` events). Notifications for `survey dismissed` events aren't filtered since most answers are missing on partial responses.
+
 ## Available properties
 
 You can extract the following properties from surveys:
 
-| Property | Description |
-|----------|-------------|
-| `event.properties.$survey_name` | The name of the survey |
-| `event.properties.$survey_questions` | An array of objects containing the following survey question properties: `id`, `question`, and `response` |
+| Property                                           | Description                                                                                                                                                                                                                                                              |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `event.properties.$survey_name`                    | The name of the survey                                                                                                                                                                                                                                                   |
+| `event.properties.$survey_questions`               | An array of objects containing the following survey question properties: `id`, `question`, and `response`                                                                                                                                                                |
 | `event.properties.$survey_response_{response_key}` | The response to a specific question. To find `response_key`, go to your survey's **Results** tab and click **Copy response key** on the question card. There's one for each question in your survey. `response_key` is identical to the corresponding survey question ID |
-| `event.properties.$survey_completed` | Whether the survey was completed. Relevant for surveys with partial responses. This will be `true` if the user has answered all questions. |
-| `person.name` or other person properties | The name of the person who responded or other properties |
+| `event.properties.$survey_completed`               | Whether the survey was completed. Relevant for surveys with partial responses. This will be `true` if the user has answered all questions.                                                                                                                               |
+| `person.name` or other person properties           | The name of the person who responded or other properties                                                                                                                                                                                                                 |
