@@ -22,6 +22,7 @@ Workflows are composed of the following components:
 | [Delays](#delays)                     | Wait steps such as "wait 2 days" or "wait until condition is true."                                                                         |
 | [Audience splits](#audience-splits)   | Target and split your users so you can automate some action for them or send a message with more specificity.                               |
 | [PostHog actions](#posthog-actions)   | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow.                             |
+| [AI actions](#ai-actions)             | Enrich events with LLM-powered classification or summarization for downstream branching and automation.                                      |
 | [Output variables](#output-variables) | Store data from step results in workflow variables for use in later steps.                                                                  |
 
 ## Draft and enabled workflows
@@ -197,6 +198,79 @@ When Conversations is enabled, you can trigger workflows using these events:
 | `$conversation_message_received`        | Customer sent a message on a ticket        | `message_id`, `message_content`, `author_type`, `customer_name`, `customer_email` |
 
 All events include the following base properties: `ticket_id`, `ticket_number`, `channel_source`, `status`, and `priority`.
+
+## AI actions
+
+AI actions use LLMs to enrich your workflow data. The LLM output is stored as workflow variables that downstream steps can read, so you can route or branch based on AI-generated insights.
+
+PostHog handles all LLM gateway configuration automatically – you don't need to provide API keys or configure endpoints.
+
+| AI action      | Description                                                                                   | Output variables                                                 |
+| -------------- | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| LLM classify   | Classify content into categories you define, with reasoning                                   | `classification.category`, `classification.reasoning`            |
+| LLM summarize  | Summarize content into a short title and description                                          | `summary.title`, `summary.description`                           |
+
+### LLM classify
+
+The **LLM classify** action sends event data to an LLM and returns a classification result. Use it to categorize support tickets, tag user feedback, or route events based on content.
+
+Configure these inputs:
+
+| Input          | Required | Description                                                                                                                         |
+| -------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Model          | Yes      | The LLM model to use. Defaults to `gpt-5.4-nano`, which balances speed and cost. You can select any model supported by the gateway. |
+| Instructions   | No       | System prompt telling the model how to classify. Example: "Classify this support ticket into one of the listed categories."         |
+| Content        | Yes      | The data to classify. Defaults to the triggering event's name and properties. Supports templating.                                  |
+| Categories     | No       | Comma-separated list of categories (e.g. `billing, support, sales`). When set, the model picks exactly one.                         |
+
+When **Categories** is set, the action returns structured output:
+
+```json
+{
+  "category": "billing",
+  "reasoning": "The user mentioned an invoice problem"
+}
+```
+
+When **Categories** is empty, the model returns free-form classification as `{ "content": "..." }`.
+
+Reference `classification.category` or `classification.reasoning` in downstream conditional branches or dispatches.
+
+### LLM summarize
+
+The **LLM summarize** action generates a concise title and description from event data. Use it to create human-readable summaries for Slack notifications, ticket previews, or dashboard displays.
+
+Configure these inputs:
+
+| Input          | Required | Description                                                                                                                                      |
+| -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Model          | Yes      | The LLM model to use. Defaults to `gpt-5.4-nano`.                                                                                                |
+| Instructions   | No       | System prompt for the summarization. Defaults to generating a short title (under 80 characters) and a 1-2 sentence description.                  |
+| Content        | Yes      | The data to summarize. Defaults to the triggering event's name and properties. Supports templating.                                              |
+
+The action always returns structured output:
+
+```json
+{
+  "title": "Billing question about invoice",
+  "description": "Customer reports an incorrect charge on their monthly invoice and requests a refund."
+}
+```
+
+Reference `summary.title` or `summary.description` in downstream steps.
+
+### Example: Route support tickets by category
+
+1. Create a workflow with an event trigger for `$conversation_ticket_created`
+2. Add an **LLM classify** action with categories: `billing, technical, sales, other`
+3. Add a **Conditional branch** that checks `classification.category`
+4. Route each category to the appropriate Slack channel or assignee
+
+### Example: Summarize events for Slack notifications
+
+1. Create a workflow triggered by a webhook from an external system
+2. Add an **LLM summarize** action to extract the key information
+3. Add a **Slack** dispatch that uses `summary.title` as the message heading and `summary.description` as the body
 
 ## Output variables
 
