@@ -10,7 +10,7 @@ availability:
 
 Alerts enable you to monitor your [insights](/product-analytics) and get notified when something important changes. You can set fixed thresholds (e.g., notify me when unique visitors exceed 5,000) or use [anomaly detection](#anomaly-detection) to automatically flag unusual patterns in your data.
 
-Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
+Alerts are supported on [trends](/docs/product-analytics/trends) and [SQL insights](/docs/product-analytics/sql).
 
 ## How to create an alert
 
@@ -120,7 +120,7 @@ PostHog AI can create alerts on existing insights or generate new trend insights
 
 <CalloutBox icon="IconInfo" title="Note" type="fyi">
 
-PostHog AI can only create alerts on [trends](/docs/product-analytics/trends). Other insight types like funnels and retention don't support alerts.
+PostHog AI can create alerts on [trends](/docs/product-analytics/trends) and [SQL insights](/docs/product-analytics/sql). Other insight types like funnels and retention don't support alerts.
 
 </CalloutBox>
 
@@ -311,6 +311,30 @@ When you set an alert on a trend with a breakdown, the alert will be triggered w
   alt="alert on breakdown"
   classes="rounded"
 />
+
+## Alerts on SQL insights
+
+You can create alerts on [SQL insights](/docs/product-analytics/sql) that return time-series data. SQL alerts support both absolute thresholds and relative change detection.
+
+### Result shape requirements
+
+Your query must return:
+
+- **Exactly one column** of a numeric type (the value to monitor)
+- **One or more rows** (at least two rows for relative alerts that track change over time)
+- **Chronologically ordered** results (include an `ORDER BY` clause for time-series data)
+
+The alert evaluator uses the last row for absolute threshold checks and compares the last two rows for relative change detection.
+
+### Differences from trend alerts
+
+SQL alerts don't include some controls that trend alerts have:
+
+- **No series picker** - SQL alerts monitor the single numeric column returned by your query
+- **No "check ongoing interval"** - SQL alerts evaluate the data as returned by your query
+- **No trend interval selector** - the time grouping is determined by your SQL query
+
+If your query returns an invalid result shape (multiple columns, non-numeric data, or too few rows for relative conditions), the alert enters an error state and you receive a notification.
 
 ## Automatically disabled alerts
 
