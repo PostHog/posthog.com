@@ -21,7 +21,8 @@ The Postgres connector links your database tables to PostHog. You can sync data 
     - **Database:** The name of the database you want like `analytics_db`.
     - **User:** The username with the necessary permissions to access the database.
     - **Password:** The password for the user.
-    - **Schema:** The schema where your tables are located. Leave blank to sync tables from all schemas in your database.
+    - **Schema:** The schema where your tables are located, like `public`.
+    - **Include all schemas:** Enable this toggle to discover and sync tables from all non-system schemas in the database. See [Multi-schema syncing](#multi-schema-syncing) for details.
 4. If you need to connect through an SSH tunnel, enable and configure it (optional):
     - **Tunnel host:** The hostname of your SSH server.
     - **Tunnel port:** The port your SSH server is listening on.
@@ -35,7 +36,7 @@ PostHog starts syncing your data. You can see details and progress in the [sourc
 
 ## Multi-schema syncing
 
-When you leave the **Schema** field blank during setup, PostHog discovers tables across all non-system schemas in your database. Each table appears with its fully qualified name (for example, `public.users` or `analytics.events`) so you can identify which schema it belongs to.
+Enable the **Include all schemas** toggle during setup to sync tables from all non-system schemas in your database. PostHog discovers tables across every schema and displays them with fully qualified names (for example, `public.users` or `analytics.events`) so you can identify which schema each table belongs to.
 
 This lets you sync tables from multiple schemas without creating separate sources for each one.
 
