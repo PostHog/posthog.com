@@ -35,6 +35,8 @@ With it, you can interact with elements to [create actions](/tutorials/how-to-ca
 3. Click **Save** and then **Launch**.
 4. A new window will open with toolbar on your website. Click on the toolbar to interact with it.
 
+> **Note:** The authorized URL must match your site's origin exactly, including the port. For example, if your local dev server runs on `http://localhost:3000`, authorize `http://localhost:3000` – not `http://localhost`. Likewise, if your production site runs on the default `http://example.com` (no port), authorize it without a port. Mismatching the port is a common reason the toolbar does not appear.
+
 <ProductVideo
     videoLight = {setupLight}
     videoDark = {setupDark}
@@ -174,6 +176,18 @@ if (toolbarJSON) {
 #### 2. The toolbar is being blocked by an ad blocker
 
 Ad blockers can block the toolbar from loading or displaying. Turning off your ad blocker should fix the issue in this case.
+
+#### 3. The authorized URL does not match your site's origin (including port)
+
+The toolbar only loads on pages whose origin is in the "Authorized URLs for Toolbar" list. Origins are compared by `protocol + host + port`, so a port mismatch is enough to silently prevent the toolbar from appearing.
+
+Common gotchas:
+
+- Authorized URL is `http://localhost` but your dev server runs on `http://localhost:3000` (or `:8080`, `:5173`, etc.). Fix: authorize the full URL with the port, e.g. `http://localhost:3000`.
+- Authorized URL is `https://example.com:443` but your site serves on `https://example.com` (default port, no explicit port in the URL bar). Fix: drop the explicit `:443`.
+- Authorized URL has a trailing path or query string. Only the origin (`protocol + host + port`) is used for matching; paths are ignored, but extra characters can still be confusing when debugging. Keep the entry as just the origin.
+
+If the toolbar still does not appear after confirming the origin, check the browser console for CSP or CORS errors (see the sections below).
 
 ### Toolbar authentication issue (with reverse proxy)
 
