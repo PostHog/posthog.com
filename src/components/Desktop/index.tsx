@@ -423,7 +423,12 @@ export default function Desktop() {
                     {
                         type: 'item',
                         children: (
-                            <Link to="/about" state={{ newWindow: true }}>
+                            <Link
+                                to="/about"
+                                state={{ newWindow: true }}
+                                contextMenu={false}
+                                className="w-full h-full flex items-center px-2.5 no-underline text-primary"
+                            >
                                 About PostHog
                             </Link>
                         ),
@@ -431,7 +436,12 @@ export default function Desktop() {
                     {
                         type: 'item',
                         children: (
-                            <Link to="/display-options" state={{ newWindow: true }}>
+                            <Link
+                                to="/display-options"
+                                state={{ newWindow: true }}
+                                contextMenu={false}
+                                className="w-full h-full flex items-center px-2.5 no-underline text-primary"
+                            >
                                 Display options
                             </Link>
                         ),
@@ -440,7 +450,12 @@ export default function Desktop() {
                     {
                         type: 'item',
                         children: (
-                            <Link to="/kbd" state={{ newWindow: true }}>
+                            <Link
+                                to="/kbd"
+                                state={{ newWindow: true }}
+                                contextMenu={false}
+                                className="w-full h-full flex items-center px-2.5 no-underline text-primary"
+                            >
                                 Keyboard shortcuts
                             </Link>
                         ),
@@ -448,16 +463,11 @@ export default function Desktop() {
                     },
                     {
                         type: 'item',
-                        children: (
-                            <button
-                                onClick={() => {
-                                    localStorage.removeItem(STORAGE_KEY)
-                                    setIconPositions(generateInitialPositions())
-                                }}
-                            >
-                                Reset icons
-                            </button>
-                        ),
+                        children: <span className="px-2.5">Reset icons</span>,
+                        onClick: () => {
+                            localStorage.removeItem(STORAGE_KEY)
+                            setIconPositions(generateInitialPositions())
+                        },
                     },
                 ]}
             >
