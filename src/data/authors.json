@@ -573,5 +573,13 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/matheusvbatista/",
         "profile_id": 41646
+    },
+    {
+        "handle": "mine-kansu",
+        "name": "Mine Kansu",
+        "role": "Revenue Operations",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/minekansu/",
+        "profile_id": 29862
     }
 ]
