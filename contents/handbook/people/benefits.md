@@ -28,8 +28,6 @@ We do regular [team offsites](/handbook/company/offsites) - recent trips have in
 
 We also encourage people and teams to meet up in person _in addition_ to the offsites. If you are working on a problem that is better worked on in person, then you should do this. Our [expense policy](https://posthog.com/handbook/people/spending-money) is about trusting you to make the best decisions. Travelling can be distracting so we expect you to exercise judgement when doing this.
 
-For any work-related travel, we also use [Project Wren](https://www.wren.co/) for carbon offsetting. 
-
 ## Free merch
 
 People like our merch. If you want more, <PrivateLink url="https://github.com/PostHog/runbooks/blob/main/docs/merch.md"> here's how to get it! </PrivateLink> 
