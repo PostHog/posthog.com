@@ -8,7 +8,7 @@ import SmallTeam from 'components/SmallTeam'
 
 interface Feature {
     title: string
-    description: string
+    description: React.ReactNode
 }
 
 interface FeatureItem {
