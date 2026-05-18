@@ -159,30 +159,6 @@ export const revenueAnalytics = {
             ],
         },
         {
-            title: 'Coming soon',
-            headline: 'Roadmap for revenue analytics',
-            description: "We're actively developing new features based on user feedback.",
-            features: [
-                {
-                    title: 'CAC & CPC metrics',
-                    description:
-                        'Connect your marketing data to track your customer acquisition cost and cost per click',
-                },
-                {
-                    title: 'More integrations',
-                    description: 'Chargebee, RevenueCat, Polar and custom payment platforms',
-                },
-                {
-                    title: 'Advanced forecasting',
-                    description: 'Revenue predictions based on historical data',
-                },
-                {
-                    title: 'Profit tracking',
-                    description: 'Connect cost data for margin analysis',
-                },
-            ],
-        },
-        {
             title: 'MCP',
             headline: 'Query revenue from your editor',
             description:
@@ -206,6 +182,30 @@ export const revenueAnalytics = {
                 },
             ],
             children: <MCPInstall />,
+        },
+        {
+            title: 'Coming soon',
+            headline: 'Roadmap for revenue analytics',
+            description: "We're actively developing new features based on user feedback.",
+            features: [
+                {
+                    title: 'CAC & CPC metrics',
+                    description:
+                        'Connect your marketing data to track your customer acquisition cost and cost per click',
+                },
+                {
+                    title: 'More integrations',
+                    description: 'Chargebee, RevenueCat, Polar and custom payment platforms',
+                },
+                {
+                    title: 'Advanced forecasting',
+                    description: 'Revenue predictions based on historical data',
+                },
+                {
+                    title: 'Profit tracking',
+                    description: 'Connect cost data for margin analysis',
+                },
+            ],
         },
     ],
     questions: [
