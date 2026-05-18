@@ -198,6 +198,21 @@ sequenceDiagram
     PH-->>P: project token + host
 ```
 
+#### Open in PostHog buttons and other deep links
+
+The `requires_auth` flow isn't only for first-time onboarding. Use the same handshake every time you want to deep-link a user from your own dashboard into PostHog (for example, an "Open in PostHog" button on their connected project).
+
+For each click, your backend calls `/account_requests` with the user's email, then you redirect them to the returned `requires_auth.url`. PostHog verifies the browser session matches the email you sent before completing the OAuth handshake.
+
+##### Don't link directly to project URLs
+
+It's tempting to skip the handshake and point your button straight at `https://us.posthog.com/project/<id>`. Don't:
+
+- If the user is logged into PostHog with a different email, they hit a permission error or 404 on a project their current account can't access, with no hint about which email they should be using.
+- If they're logged out, they get the generic PostHog login page with no context about which email to use.
+
+Going through `/account_requests` lets PostHog verify the logged-in user's email matches the one you sent. On mismatch, PostHog prompts them to log out and sign in with the right email before continuing.
+
 ### Step 2: Exchange the code for tokens
 
 Exchange the authorization code for an access token and refresh token. The token endpoint uses standard `application/x-www-form-urlencoded` encoding.
