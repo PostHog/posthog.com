@@ -64,7 +64,7 @@ See: [workflows – start here](https://posthog.com/docs/workflows/start-here).
 
 **LLM Observability**  
 “You’re aiming to increase **{success_rate_metric}** for **{ai_feature}** and keep **{cost_metric}** in check. Turn on LLM Observability: {project_link}. Watch prompts, responses, success rate, and cost per **{n}** prompts. First view to check: {report_link}.”  
-See: [LLM Observability – start here](https://posthog.com/docs/llm-analytics/start-here).
+See: [LLM Observability – start here](https://posthog.com/docs/llm-observability/start-here).
 
 **Heatmaps**  
 “People hesitate on **{page}**, which hurts **{goal}**. Open heatmaps: {project_link}. Compare **{version_or_date_range}** to see what changed. First view: {report_link}. Use this to pick the next tweak.”  

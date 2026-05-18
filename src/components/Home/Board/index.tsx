@@ -408,7 +408,7 @@ const products: Product[] = [
         status: 'Production',
         pricing: {
             cta: {
-                url: '/llm-analytics',
+                url: '/llm-observability',
                 text: 'Learn more',
             },
         },

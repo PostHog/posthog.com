@@ -2,8 +2,8 @@ export const llmAnalyticsFeatures = {
     summary: {
         name: 'LLM Observability',
         description: 'Monitor and debug your LLM-powered features',
-        url: '/llm-analytics',
-        docsUrl: '/docs/llm-analytics',
+        url: '/llm-observability',
+        docsUrl: '/docs/llm-observability',
     },
     features: {
         generation_tracking: {

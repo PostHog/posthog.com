@@ -56,7 +56,7 @@ module.exports = {
             },
             backgroundImage: {
                 ai: 'radial-gradient(at 84% 83%, hsla(195,45%,75%,1) 0px, transparent 50%), radial-gradient(at 66% 38%, rgb(173, 212, 155) 0px, transparent 50%), radial-gradient(at 44% 51%, rgb(226, 219, 167) 0px, transparent 50%), radial-gradient(at 41% 14%, hsla(180,38%,78%,1) 0px, transparent 50%), radial-gradient(at 75% 97%, hsla(155,42%,68%,1) 0px, transparent 50%), radial-gradient(at 68% 35%, hsla(178,45%,65%,1) 0px, transparent 50%), radial-gradient(at 42% 23%, hsla(200,40%,72%,1) 0px, transparent 50%)',
-                'llm-analytics':
+                'llm-observability':
                     'radial-gradient(ellipse 80% 60% at 15% 20%, #DE7AFF 0px, transparent 40%), radial-gradient(ellipse 100% 80% at 85% 15%, #EF7D9B 0px, transparent 35%), radial-gradient(ellipse 70% 100% at 90% 85%, #3795FF 0px, transparent 45%), radial-gradient(ellipse 90% 70% at 10% 90%, #40C8D8 0px, transparent 40%)',
                 'trace-monitoring':
                     'radial-gradient(ellipse 80% 90% at 30% 20%, rgba(77, 64, 216, 0.67) 0%, transparent 60%), radial-gradient(ellipse 90% 75% at 70% 80%, rgba(184, 255, 162, 0.75) 0%, transparent 55%), radial-gradient(ellipse 70% 85% at 10% 60%, rgba(122, 149, 255, 0.7) 0%, transparent 65%)',

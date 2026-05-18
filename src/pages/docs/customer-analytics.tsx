@@ -46,7 +46,7 @@ const phFeatures = [
         title: 'LLM Observability',
         description: 'See how your users are using your LLMs and if they are satisfied with the results.',
         icon: <IconLlmAnalytics className="text-[#681291]" />,
-        url: '/docs/llm-analytics',
+        url: '/docs/llm-observability',
     },
     {
         title: 'Data warehouse',

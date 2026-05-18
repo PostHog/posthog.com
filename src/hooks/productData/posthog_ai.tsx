@@ -209,7 +209,7 @@ export const posthog_ai = {
         {
             title: 'LLM Observability',
             headline: 'LLM Observability',
-            team: 'llm-analytics',
+            team: 'llm-observability',
             layout: 'ai',
             icon: <IconLlmAnalytics className="size-5" />,
             color: 'purple',

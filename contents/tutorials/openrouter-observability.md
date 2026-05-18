@@ -11,7 +11,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox type="fyi" title="New: Simpler options available" icon="IconInfo">
 
-Since publishing this post, we've integrated further with OpenRouter. You can enable the PostHog integration directly through **OpenRouter Broadcast** – no SDK instrumentation required. All your LLM calls will then be tracked automatically in PostHog's LLM Observability. See the [OpenRouter installation docs](/docs/llm-analytics/installation/openrouter) for details.
+Since publishing this post, we've integrated further with OpenRouter. You can enable the PostHog integration directly through **OpenRouter Broadcast** – no SDK instrumentation required. All your LLM calls will then be tracked automatically in PostHog's LLM Observability. See the [OpenRouter installation docs](/docs/llm-observability/installation/openrouter) for details.
 
 </CalloutBox>
 
@@ -177,7 +177,7 @@ Now, when you run `npm run dev` again, you can choose your model, enter your mes
 
 ## 3. Viewing generations in PostHog
 
-After generating a few responses with different models, go to PostHog to access the [LLM Observability dashboard](https://app.posthog.com/llm-analytics) to see:
+After generating a few responses with different models, go to PostHog to access the [LLM Observability dashboard](https://app.posthog.com/llm-observability) to see:
 
 - Overview of all AI interactions
 - Cost breakdowns by model
@@ -192,7 +192,7 @@ After generating a few responses with different models, go to PostHog to access 
   classes="rounded"
 />
 
-Head to the [generations tab](https://app.posthog.com/llm-analytics/generations) to get details on each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
+Head to the [generations tab](https://app.posthog.com/llm-observability/generations) to get details on each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_20_at_14_47_59_2x_d4196d55f8.png"
