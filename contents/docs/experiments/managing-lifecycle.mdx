@@ -12,7 +12,15 @@ After you've analyzed your experiment metrics and determined a winning variant, 
 
 ## Ending an experiment
 
-After you've determined a winning variant, click the **End experiment** button on the experiment page. This lets you choose a variant to keep, roll it out to all users, and end the experiment.
+After you've determined a winning variant, click the **End experiment** button on the experiment page. This lets you choose a variant to keep and end the experiment.
+
+### Choosing a release mode
+
+When you select a variant to ship, you choose how to release it:
+
+- **Roll out to the experiment population** (default) – Serves the winning variant only to users who match the feature flag's existing release conditions. Per-user variant overrides continue to apply. Use this to preserve your targeting rules.
+
+- **Roll out to all users** – Adds a release condition that serves the winning variant to 100% of users, overriding existing release conditions and per-user variant overrides. Use this when you want everyone to see the variant immediately.
 
 When an experiment is ended (or when a variant is shipped while the experiment is still running), the experiment creator receives an in-app notification with the primary metric outcome – either significant or inconclusive. This notification isn't sent if the person ending the experiment is the same person who created it.
 
@@ -62,5 +70,5 @@ Here's how the actions differ:
 | ------------- | ------------------------------------------------ | ----------------- | ------------------------------- | -------- | -------------- |
 | **Running**   | Enabled                                          | Multiple variants | Continues                       | Updating | N/A            |
 | **Pausing**   | Disabled                                         | Control variant   | Stops                           | Fixed    | Yes            |
-| **Ending**    | Modified to roll out chosen variant to all users | Chosen variant    | Continues (chosen variant only) | Fixed    | No             |
+| **Ending**    | Modified to roll out chosen variant (see [release mode](#choosing-a-release-mode)) | Chosen variant    | Continues (chosen variant only) | Fixed    | No             |
 | **Resetting** | Unchanged                                        | Multiple variants | Continues                       | Cleared  | Yes (relaunch) |
