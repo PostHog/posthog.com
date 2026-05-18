@@ -86,6 +86,47 @@ Once you've created property groups and events (either new events you created, o
 
 Events can have multiple property groups, and each group's properties will be included in the generated types.
 
+## Enforcing schemas at ingestion
+
+You can enforce your event schemas at ingestion time by rejecting events that don't match the expected structure. When enforcement is enabled, PostHog validates incoming events against the schema's required properties and their types. Events that are missing required properties or have wrong property types are dropped before ingestion.
+
+To enable schema enforcement:
+
+1. Go to **Data Management** > **Events**
+2. Select an event that has at least one property group attached
+3. In the **Schema** section, check **Reject invalid events**
+
+The **Reject invalid events** checkbox is disabled until at least one property group is attached to the event.
+
+### How validation works
+
+PostHog checks each required property defined in the event's property groups. Validation passes if:
+
+- The property is present in the event
+- The property value matches (or can be coerced to) the expected type
+
+The supported property types and their accepted values are:
+
+| Type | Accepted values |
+|------|----------------|
+| **String** | Any value |
+| **Numeric** | Numbers, numeric strings (e.g., `"42"`) |
+| **Boolean** | `true`/`false`, strings `"true"`/`"false"` |
+| **DateTime** | ISO 8601 date strings, Unix timestamps |
+| **Object** | Objects and arrays |
+
+### Rejected events
+
+When an event fails schema validation, PostHog drops it and logs an [ingestion warning](/docs/data/ingestion-warnings) of type `schema_validation_failed`. The warning includes the event name, the distinct ID, and details about which properties failed validation and why (missing or type mismatch).
+
+You can monitor rejected events in **Data Management** > **Ingestion Warnings**.
+
+<CalloutBox icon="IconWarning" title="Enable enforcement carefully" type="caution">
+
+Enabling enforcement on high-volume events can cause data loss if your instrumentation doesn't match the schema. Start with lower-volume events and monitor [ingestion warnings](/docs/data/ingestion-warnings) before rolling out enforcement more broadly.
+
+</CalloutBox>
+
 ## Downloading your schema with the CLI
 
 The PostHog CLI generates language definitions from your configured schemas.
@@ -231,8 +272,9 @@ The generated typed file provides:
 
 ## Best practices
 
-- **Define events upfront**: Create event definitions before implementing instrumentation to get type safety from day one
-- **Start with your most important events**: Define schemas for critical conversion events first
-- **Use descriptive property groups**: Name groups by their purpose (e.g., "E-commerce Properties", "User Context")
-- **Don't over-schema**: Not every event needs a schema—use them where type safety adds value
-- **Commit generated types**: Always commit `posthog.json` and `posthog-typed.<extension>` to version control so your team stays in sync
+- **Define events upfront** - Create event definitions before implementing instrumentation to get type safety from day one
+- **Start with your most important events** - Define schemas for critical conversion events first
+- **Use descriptive property groups** - Name groups by their purpose (e.g., "E-commerce Properties", "User Context")
+- **Don't over-schema** - Not every event needs a schema — use them where type safety adds value
+- **Commit generated types** - Always commit `posthog.json` and `posthog-typed.<extension>` to version control so your team stays in sync
+- **Enable enforcement gradually** - Start with lower-volume events and monitor [ingestion warnings](/docs/data/ingestion-warnings) before enabling enforcement on high-traffic events
