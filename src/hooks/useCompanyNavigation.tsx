@@ -1,3 +1,5 @@
+import { cn } from '../utils'
+import { useApp } from '../context/App'
 import { navigate } from 'gatsby'
 
 const tabs = [
@@ -53,7 +55,6 @@ const tabs = [
     },
 ]
 
-const tabContainerClassName = 'flex justify-center sticky top-0 z-30'
 const className = 'h-full bg-accent p-2'
 
 export function useCompanyNavigation({ value, content }: { value: string; content: React.ReactNode }): {
@@ -62,6 +63,10 @@ export function useCompanyNavigation({ value, content }: { value: string; conten
     tabContainerClassName: string
     className: string
 } {
+    const { websiteMode } = useApp()
+
+    const tabContainerClassName = cn('flex justify-center z-30', { 'sticky top-0': !websiteMode })
+
     return {
         tabs: tabs.map((tab) => ({
             ...tab,
