@@ -1,0 +1,212 @@
+---
+title: Campaign attribution troubleshooting
+sidebar: Docs
+showTitle: true
+---
+
+This page covers troubleshooting for campaign attribution issues. For general web analytics troubleshooting, see the [main troubleshooting page](/docs/web-analytics/troubleshooting).
+
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+
+## Why are my UTMs showing on pageviews but not on conversions?
+
+If you see UTM parameters on `$pageview` events but conversions aren't attributed correctly, the issue is almost always **identity fragmentation** – not a UTM capture problem.
+
+For campaign attribution to work, the user's [person profile](/docs/data/persons) must stay connected from landing to conversion. A person profile is PostHog's representation of a user, identified by a `distinct_id`. Here's the typical flow:
+
+1. User lands with UTMs
+2. PostHog captures UTMs on `$pageview`
+3. A `distinct_id` is generated
+4. User converts (e.g., `signed_up`)
+5. `identify()` is called
+6. All prior events with that same `distinct_id` get stitched to the person
+
+If the `distinct_id` changes at any point before conversion, attribution breaks.
+
+### Why does the `distinct_id` change?
+
+The `distinct_id` can change when:
+
+- **Storage is cleared or isolated** – Browsers like Safari aggressively clear cookies and localStorage, especially for third-party contexts
+- **Users switch browsers or devices** – Each browser/device gets a new anonymous `distinct_id`
+- **In-app browsers are involved** – Apps like LinkedIn, Instagram, and Facebook use embedded webviews with isolated storage
+- **Persistence is set to memory** – Without persistent storage, every page load creates a new identity
+- **PostHog reinitializes** – Multi-app architectures or SSR apps may create duplicate PostHog instances
+
+When any of these happen before `identify()` is called, the original `distinct_id` (with the UTM data) becomes orphaned from the conversion event.
+
+### How do I check if this is happening?
+
+Run this SQL query to compare landing and conversion events:
+
+```sql
+select
+    event,
+    properties.utm_source,
+    properties.utm_campaign,
+    distinct_id,
+    person_id
+from events
+where timestamp >= today() - 7
+and properties.utm_source = 'linkedin'
+order by timestamp desc
+limit 100
+```
+
+If you see different `distinct_id` or `person_id` values for pageviews and conversions from the same user, you have identity fragmentation.
+
+## Why are users from LinkedIn/Meta ads not being attributed?
+
+This is a common issue when running ads on social media platforms that open links in their native in-app browsers. Here's a typical scenario:
+
+1. A user sees your ad in the LinkedIn mobile app
+2. They tap the link, which opens in LinkedIn's in-app browser (webview)
+3. PostHog captures the `$pageview` with UTM parameters and assigns a `distinct_id`
+4. The user decides to sign up but prefers using their main browser
+5. They tap "Open in Safari" or navigate to your site directly
+6. A new `distinct_id` is created because Safari doesn't share storage with LinkedIn's webview
+7. The conversion event is now tied to a different person profile than the original pageview
+
+In-app browsers (LinkedIn webview, Meta webview, Instagram) cause attribution issues because:
+
+- Storage is isolated from the system browser
+- Cookies aren't shared when users switch to their main browser
+- The `distinct_id` resets on navigation
+- App-to-browser handoffs reset storage
+
+You can detect this by checking user agents containing `linkedin`, `fbav`, or `instagram`. If a large share of your traffic comes from these sources, expect higher identity fragmentation.
+
+The best fix depends on your specific situation, but it usually involves propagating UTMs or the `distinct_id`/session ID as much as possible:
+
+1. Pass UTM parameters through your signup flow (e.g., in hidden form fields or URL parameters)
+2. Identify users as early as possible in the funnel
+3. Use [cross-domain tracking](/tutorials/cross-domain-tracking) if you have separate marketing and app domains
+
+## Why does attribution break when users navigate between pages?
+
+This typically happens when the storage is disconnected on navigation:
+
+**1. Persistence is set to memory**
+
+If `persistence: "memory"` is configured (common when cookie consent isn't granted), each page load creates a new `distinct_id`. Check your config:
+
+```js
+posthog.init("key", {
+  persistence: "localStorage+cookie" // Recommended
+})
+```
+
+**2. PostHog is reset**
+
+PostHog may reinitialize without preserving the `distinct_id` if:
+
+- Your landing page and signup page reload the entire app
+- You're using SSR apps or multi-app architectures
+- You have separate marketing and app codebases
+- You're using two different PostHog instances (e.g., different project tokens for marketing vs app)
+
+Ensure PostHog initializes once and the `distinct_id` persists across pages.
+
+**3. Subdomain mismatch**
+
+If your marketing site is at `marketing.example.com` and your app is at `app.example.com`, cookies must be configured at the root domain level. See [cross-domain tracking](/tutorials/cross-domain-tracking) for setup instructions.
+
+## Why do ad platform clicks not match my attributed conversions?
+
+Ad platforms often count interactions that aren't website visits:
+
+- Likes, shares, and comments
+- Profile clicks
+- Video views
+- Carousel swipes
+
+Not all "clicks" result in a pageview. Expect discrepancies between platform metrics and UTM-based attribution.
+
+## Why is mobile attribution worse than desktop?
+
+Modern iOS and mobile browsers have privacy restrictions that affect tracking:
+
+- Restricted cookie lifetime
+- Isolated webview storage
+- Session storage resets
+- Intelligent Tracking Prevention (ITP)
+
+This disproportionately impacts mobile campaign attribution. Cross-device attribution also fails when:
+
+1. User clicks ad on mobile
+2. Browses anonymously
+3. Signs up later on desktop
+
+Unless you explicitly connect those identities with `identify()`, the mobile pageviews remain separate from the desktop conversion.
+
+## How do I debug identity fragmentation?
+
+Run this query to find cases where the same device has multiple persons:
+
+```sql
+select
+    properties.$ip,
+    properties.$raw_user_agent,
+    uniq(person_id) as persons,
+    uniq(distinct_id) as distinct_ids
+from events
+where timestamp >= today() - 30
+and properties.utm_source = 'linkedin'
+group by properties.$ip, properties.$raw_user_agent
+having persons > 1
+limit 100
+```
+
+If `persons > 1` for the same IP and user agent, you have likely found identity fragmentation. Note that IP and user agent matching is not a guaranteed fingerprint – multiple users can share the same IP (e.g., office networks, VPNs) and user agent combination. However, it's a useful approximation for detecting fragmentation patterns.
+
+You can also compare conversion IPs to ad click IPs. If you see conversions from the same IP/user agent as your ad clicks, the traffic is arriving – it's just not being stitched to the right person.
+
+## How do I fix attribution issues?
+
+**1. Ensure persistence is not memory**
+
+```js
+posthog.init("key", {
+  persistence: "localStorage+cookie"
+})
+```
+
+**2. Identify users early**
+
+Call `identify()` as early as possible in the funnel to reduce anonymous navigation.
+
+**3. Bootstrap across domains**
+
+If you have multiple domains or apps, pass `distinct_id` and `session_id` explicitly. See [cross-domain tracking](/tutorials/cross-domain-tracking).
+
+**4. Minimize page reloads**
+
+Keep users in a single-page flow before conversion when possible.
+
+## When should I raise a support ticket?
+
+Raise a support ticket if:
+
+- UTMs are present on pageviews
+- `distinct_id` changes unexpectedly
+- Identity stitching appears broken despite correct persistence config
+- In-app browser flows consistently fragment identity
+- Subdomain configuration is correct but still failing
+
+Include:
+
+- Example `distinct_id`(s) and `person_id`(s)
+- User agent
+- Campaign name
+- Your persistence config
+- Your domain structure
+
+[Raise a support ticket here](https://app.posthog.com/home#supportModal).
+
+## Solved community questions
+
+<SolvedQuestions
+    topicLabel="Web Analytics"
+/>
