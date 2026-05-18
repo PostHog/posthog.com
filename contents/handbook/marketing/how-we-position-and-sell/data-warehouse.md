@@ -6,6 +6,12 @@ showTitle: true
 
 > **Owner:** [Lizzie Epton (PMM)](/community/profiles/43387)
 
+## Elevator pitch
+
+PostHog's data warehouse stores your product events and business data — Stripe, HubSpot, Salesforce, Zendesk, and 40+ more — in one place, queryable together with SQL (and with PostHog AI to help you write it). And because the warehouse is part of PostHog, every piece of data is immediately available to your analytics, experiments, feature flags, and agents.
+
+Snowflake stores data. PostHog stores data *and* acts on it.
+
 ## The unique belief (in terms of the data warehouse)
 
 PostHog is building the infrastructure for self-driving product development. The [product autonomy loop](/blog/self-driving-product) — signals in, work out, evaluation, repeat — only closes when agents can see the full picture. That means product events *and* business context: revenue, plan tier, support history, CRM data.
@@ -28,12 +34,6 @@ Snowflake, BigQuery, and Databricks are powerful. They're also expensive, comple
 - Teams who only want a warehouse and nothing else — the integrated platform is the point.
 
 ## Messaging
-
-### Elevator pitch
-
-PostHog's data warehouse stores your product events and business data — Stripe, HubSpot, Salesforce, Zendesk, and 40+ more — in one place, queryable together with SQL (and with PostHog AI to help you write it). And because the warehouse is part of PostHog, every piece of data is immediately available to your analytics, experiments, feature flags, and agents.
-
-Snowflake stores data. PostHog stores data *and* acts on it.
 
 ### Message 1: The warehouse is the context layer for your agents
 

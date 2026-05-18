@@ -6,6 +6,12 @@ showTitle: true
 
 > **Owner:** Team
 
+## Elevator pitch
+
+PostHog Feature Flags support boolean flags, multivariate variants, JSON payloads for config changes without deploys, and local evaluation for <50ms latency. Every flag is queryable alongside your analytics and session replay — filter any insight by which flag variant a user saw. And every flag PostHog Code ships is automatically wired into the analytics that measures whether it worked.
+
+LaunchDarkly manages flags. PostHog manages flags *and* shows you the impact of every rollout.
+
 ## The unique belief (in terms of feature flags)
 
 Feature flags started as deployment safety nets — a way to ship code slowly without exposing too much to users. In the [product autonomy loop](/blog/self-driving-product), they're the mechanism through which agents ship code safely. PostHog Code's `instrument-feature-flags` skill wraps every change it opens in a flag by default. The enricher shows stale flags inline in your editor. When an agent ships a fix, the flag is the rollout control.
@@ -29,12 +35,6 @@ Without flags, agents can't ship incrementally. Without incremental shipping, ag
 - Teams who need experimentation without product analytics — Optimizely or VWO handle that use case more simply.
 
 ## Messaging
-
-### Elevator pitch
-
-PostHog Feature Flags support boolean flags, multivariate variants, JSON payloads for config changes without deploys, and local evaluation for <50ms latency. Every flag is queryable alongside your analytics and session replay — filter any insight by which flag variant a user saw. And every flag PostHog Code ships is automatically wired into the analytics that measures whether it worked.
-
-LaunchDarkly manages flags. PostHog manages flags *and* shows you the impact of every rollout.
 
 ### Message 1: Flags that agents write and the enricher can read
 

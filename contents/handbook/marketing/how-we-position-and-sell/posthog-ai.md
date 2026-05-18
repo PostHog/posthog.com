@@ -6,6 +6,12 @@ showTitle: true
 
 > **Owner:** Cleo Lant
 
+## Elevator pitch
+
+PostHog AI understands your full data model — event taxonomy, user properties, cohorts, flags, experiments, warehouse sources. Ask it a question in plain English. It writes the query, runs it, and explains the result. No prompt engineering. No schema briefing. No waiting for a data team ticket to be picked up. It will also speak like a pirate to you on International Speak Like A Pirate Day. 
+
+PostHog AI is wired into PostHog Code via MCP, so it's not just a query interface for humans — it's the intelligence layer that agents use to understand product impact, measure experiment results, and evaluate whether their changes worked. A key part of the product autonomy loop.
+
 ## The unique belief (in terms of PostHog AI)
 
 General-purpose AI is impressive but context-blind. When you ask ChatGPT "why did signups drop last Tuesday?", it doesn't know your event taxonomy, your funnel structure, your user cohorts, or what shipped last Monday. Without an MCP (which PostHog also has) you spend more time explaining the context than getting the answer.
@@ -29,12 +35,6 @@ PostHog AI is different because it already has the context. It knows your event 
 - Teams looking for a general-purpose AI assistant for tasks outside PostHog — PostHog AI is intentionally scoped to product data.
 
 ## Messaging
-
-### Elevator pitch
-
-PostHog AI understands your full data model — event taxonomy, user properties, cohorts, flags, experiments, warehouse sources. Ask it a question in plain English. It writes the query, runs it, and explains the result. No prompt engineering. No schema briefing. No waiting for a data team ticket to be picked up. It will also speak like a pirate to you on International Speak Like A Pirate Day. 
-
-PostHog AI is wired into PostHog Code via MCP, so it's not just a query interface for humans — it's the intelligence layer that agents use to understand product impact, measure experiment results, and evaluate whether their changes worked. A key part of the product autonomy loop.
 
 ### Message 1: The query layer for humans and agents alike
 

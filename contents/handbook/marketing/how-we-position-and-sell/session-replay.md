@@ -6,6 +6,14 @@ showTitle: true
 
 > **Owner:** Replay team
 
+## Elevator pitch
+
+PostHog Session Replay records every user session across web and mobile. From any analytics insight, jump to the sessions behind it. From any error in Error Tracking, watch exactly what the user was doing when it happened. From any rage click pattern, let PostHog Code Inbox research and open a fix PR.
+
+Want to watch sessions manually but overwhelmed by the amount of data? PostHog AI can group and summarize sessions for you, separating signal from noise in an efficient way. 
+
+FullStory and Hotjar record sessions. PostHog records sessions *and* connects them to everything else — your metrics, your errors, your flags, and your agents.
+
 ## The unique belief (in terms of session replay)
 
 Session replay used to be reactive — you watched what went wrong *after* a user complained. In the [product autonomy loop](/blog/self-driving-product), replay is a proactive signal source. PostHog Code's Inbox reads replay patterns — rage clicks, dead ends, unexpected exits — and converts them into researched, prioritized fix PRs before users ever file a ticket.
@@ -27,14 +35,6 @@ The shift is fundamental: replay isn't just evidence of a problem. It's the trig
 - Marketing teams who primarily need heatmaps as the UX research tool — Hotjar is simpler for that specific use case.
 
 ## Messaging
-
-### Elevator pitch
-
-PostHog Session Replay records every user session across web and mobile. From any analytics insight, jump to the sessions behind it. From any error in Error Tracking, watch exactly what the user was doing when it happened. From any rage click pattern, let PostHog Code Inbox research and open a fix PR.
-
-Want to watch sessions manually but overwhelmed by the amount of data? PostHog AI can group and summarize sessions for you, separating signal from noise in an efficient way. 
-
-FullStory and Hotjar record sessions. PostHog records sessions *and* connects them to everything else — your metrics, your errors, your flags, and your agents.
 
 ### Message 1: From graph to session in one click
 

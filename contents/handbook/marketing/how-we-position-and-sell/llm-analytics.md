@@ -6,6 +6,12 @@ showTitle: true
 
 > **Owner:** Cleo Lant
 
+## Elevator pitch
+
+PostHog LLM Analytics tracks every model call — latency, tokens, cost per user, quality signals, errors — alongside the product events and session data from the humans using your AI features. When something goes wrong, you can trace it back to the exact conversation, the exact prompt, and the exact user cohort affected. And because it's PostHog, PostHog Code can read those traces and propose fixes — automatically.
+
+Langfuse shows you the trace. PostHog shows you the trace *and* what it cost you in user retention **and** makes that information queryable to PostHog Code, the self-driving development platform. 
+
 ## The unique belief (in terms of LLM analytics)
 
 Every team building an AI-native product is running two products simultaneously: the product users see, and the AI layer underneath it. That AI layer has its own failure modes — bad prompts, cost explosions, latency spikes, quality regressions — and none of those show up in standard product analytics. That's where LLM analytics comes in!
@@ -28,12 +34,6 @@ If you're building AI features without LLM observability, your agents are flying
 - Enterprises with deeply embedded observability platforms (Datadog) where adding another tool isn't worth the friction.
 
 ## Messaging
-
-### Elevator pitch
-
-PostHog LLM Analytics tracks every model call — latency, tokens, cost per user, quality signals, errors — alongside the product events and session data from the humans using your AI features. When something goes wrong, you can trace it back to the exact conversation, the exact prompt, and the exact user cohort affected. And because it's PostHog, PostHog Code can read those traces and propose fixes — automatically.
-
-Langfuse shows you the trace. PostHog shows you the trace *and* what it cost you in user retention **and** makes that information queryable to PostHog Code, the self-driving development platform. 
 
 ### Message 1: LLM traces as product signals
 

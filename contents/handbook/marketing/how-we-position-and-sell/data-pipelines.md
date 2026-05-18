@@ -6,6 +6,12 @@ showTitle: true
 
 > **Owner:** See [who owns this feature](https://posthog.com/handbook/engineering/feature-ownership)
 
+## Elevator pitch
+
+PostHog's data pipelines move data into and out of PostHog without forcing you to buy a separate CDP, ETL tool, or reverse-ETL service. Sources are free, destinations and batch exports are usage-priced, transformations run on Hog functions inside the same platform that runs your analytics, replay, flags, experiments, warehouse, and agents.
+
+That bundling is the pitch. Segment and Rudderstack only move data. PostHog moves it, lets you act on it, and feeds the agents that act on your behalf — typically 5–10x cheaper than Segment at equivalent volume.
+
 ## The unique belief (in terms of data pipelines)
 
 PostHog is [a doing company](/blog/posthogs-next-chapter). Agents already create the majority of dashboards through PostHog AI and MCP. PostHog Code runs the [product autonomy loop](/blog/self-driving-product): signals in, work out, evaluation, repeat.
@@ -30,12 +36,6 @@ That loop only closes if the agent can see the whole picture. Errors and replays
 - Teams who only want a CDP and don't care about the rest of PostHog — the bundle is the whole point.
 
 ## Messaging
-
-### Elevator pitch
-
-PostHog's data pipelines move data into and out of PostHog without forcing you to buy a separate CDP, ETL tool, or reverse-ETL service. Sources are free, destinations and batch exports are usage-priced, transformations run on Hog functions inside the same platform that runs your analytics, replay, flags, experiments, warehouse, and agents.
-
-That bundling is the pitch. Segment and Rudderstack only move data. PostHog moves it, lets you act on it, and feeds the agents that act on your behalf — typically 5–10x cheaper than Segment at equivalent volume.
 
 ### Message 1: Pipelines are the context layer for self-driving development
 

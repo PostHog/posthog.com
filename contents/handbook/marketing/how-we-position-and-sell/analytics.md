@@ -6,6 +6,12 @@ showTitle: true
 
 > **Owner:** Team Analytics
 
+## Elevator pitch
+
+PostHog Analytics covers funnels, retention, trends, user paths, correlation analysis, and SQL — with autocapture so you never miss the event that mattered. Every graph links directly to the session recordings and feature flag states behind it. And because analytics is built into the same platform as replay, flags, experiments, and the data warehouse, agents can query it mid-loop without switching tools.
+
+Amplitude and Mixpanel tell you what happened. PostHog tells you what happened *and* lets you act on it.
+
 ## The unique belief (in terms of analytics)
 
 PostHog is building the infrastructure for self-driving product development. The [product autonomy loop](/blog/self-driving-product) — signals in, work out, evaluation, repeat — only closes if agents can measure whether their changes worked. Analytics isn't the end of the workflow; it's the  truth the entire system runs on. Every funnel, retention chart, and correlation PostHog generates is a queryable signal. PostHog Code re-queries those same dashboards post-merge to evaluate its own work, or you can manually query the data yourself either via the MCP or with PostHog AI. 
@@ -26,12 +32,6 @@ Analytics is the memory of everything users have done. Self-driving development 
 - Enterprises needing deep data governance without also adopting the broader PostHog platform.
 
 ## Messaging
-
-### Elevator pitch
-
-PostHog Analytics covers funnels, retention, trends, user paths, correlation analysis, and SQL — with autocapture so you never miss the event that mattered. Every graph links directly to the session recordings and feature flag states behind it. And because analytics is built into the same platform as replay, flags, experiments, and the data warehouse, agents can query it mid-loop without switching tools.
-
-Amplitude and Mixpanel tell you what happened. PostHog tells you what happened *and* lets you act on it.
 
 ### Message 1: Analytics that feeds your agents, not just your dashboards
 

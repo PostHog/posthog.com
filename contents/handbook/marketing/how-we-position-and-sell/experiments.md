@@ -6,6 +6,14 @@ showTitle: true
 
 > **Owner:** Experiments Team
 
+## Elevator pitch
+
+PostHog Experiments run on top of Feature Flags, so every experiment is a controlled rollout by default. Multiple metric types — funnels, trends, retention, ratio metrics — let you measure what actually matters, not just what's easy to track. Watch session replays of each variant's users. Measure side effects across your entire product. 
+
+For self-driving development, this means enabling PostHog Code to create experiments and re-query the results automatically - making experiments the evaluation layer for agents.
+
+Most experiment platforms run tests. PostHog runs tests *and* closes the loop from signal to fix to evaluation.
+
 ## The unique belief (in terms of experiments)
 
 In traditional product development, an A/B test is the last step before shipping. In the [self-driving development](/blog/self-driving-product), it will be the evaluation layer. PostHog Code will run experiments automatically after shipping a change — so the same metric that triggered the original signal gets re-queried to verify the fix worked. If the metric didn't move, or moved the wrong way, the agent will flag the change for review or reverts.
@@ -27,14 +35,6 @@ In traditional product development, an A/B test is the last step before shipping
 - Marketing teams running experiments outside the product (ad creative, email subject lines, landing pages).
 
 ## Messaging
-
-### Elevator pitch
-
-PostHog Experiments run on top of Feature Flags, so every experiment is a controlled rollout by default. Multiple metric types — funnels, trends, retention, ratio metrics — let you measure what actually matters, not just what's easy to track. Watch session replays of each variant's users. Measure side effects across your entire product. 
-
-For self-driving development, this means enabling PostHog Code to create experiments and re-query the results automatically - making experiments the evaluation layer for agents.
-
-Most experiment platforms run tests. PostHog runs tests *and* closes the loop from signal to fix to evaluation.
 
 ### Message 1: Experiments as the evaluation layer for agents
 
