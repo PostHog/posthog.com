@@ -210,12 +210,16 @@ export default function PostHogMCPLanding(): JSX.Element {
                                 <li>Full audit log of every query run on your data, by humans or agents</li>
                             </ul>
 
+                            <p>
+                                If you use any of the following PostHog products, chances are you're going to love our
+                                MCP.
+                            </p>
+
                             <ProductList
                                 className="grid gap-4 grid-cols-2 not-prose"
                                 urlPrefix="/docs/"
                                 products={[
                                     'product_analytics',
-                                    'web_analytics',
                                     'session_replay',
                                     'feature_flags',
                                     'experiments',
@@ -224,10 +228,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                     'llm_analytics',
                                     'data_warehouse',
                                     'cdp',
-                                    'revenue_analytics',
                                     'logs',
-                                    'workflows',
-                                    'endpoints',
                                 ]}
                             />
 
