@@ -1,0 +1,70 @@
+---
+title: Business knowledge
+sidebar: Docs
+showTitle: true
+---
+
+Business knowledge lets you upload custom information that the PostHog AI assistant can search when responding to support tickets. This includes product documentation, support policies, internal guides, and FAQs specific to your business.
+
+When enabled, the AI assistant searches your knowledge base before composing a reply to every customer message.
+
+## How it works
+
+1. You add knowledge sources containing information about your business
+2. When a customer sends a message, the AI assistant searches your knowledge base first
+3. If relevant information is found, the assistant uses it to provide more accurate, context-aware responses
+4. The assistant cites the source name so you know where the information came from
+
+## Adding knowledge sources
+
+1. Go to **Support** in PostHog and click **Settings**
+2. Find the **Business knowledge** section
+3. Click **Add source**
+4. Enter a **Name** for the source (e.g., "Refund policy", "Product FAQ")
+5. Enter the **Content** with the information you want the assistant to know
+6. Click **Save**
+
+<CalloutBox icon="IconLightBulb" title="What to include" type="info">
+
+Good candidates for business knowledge:
+
+- Support policies (refund windows, SLA terms, escalation paths)
+- Product documentation specific to your implementation
+- Common troubleshooting steps
+- FAQs and common questions
+- Internal guides your support team uses
+
+</CalloutBox>
+
+## Editing knowledge sources
+
+1. Go to **Support > Settings > Business knowledge**
+2. Click on the source you want to edit
+3. Update the name or content
+4. Click **Save**
+
+Changes take effect for new conversations. The assistant doesn't see updates mid-conversation until it starts a new search.
+
+## Deleting knowledge sources
+
+1. Go to **Support > Settings > Business knowledge**
+2. Click on the source you want to remove
+3. Click **Delete**
+
+## How the assistant uses knowledge
+
+When a customer sends a message, the AI assistant automatically:
+
+1. Searches your knowledge base using keywords from the customer's message
+2. Retrieves relevant chunks of content
+3. Uses that content to inform its response
+4. Cites the source name (e.g., "According to your refund policy...")
+
+The assistant treats knowledge content as reference material, not instructions. It doesn't follow directives embedded in the content.
+
+## Best practices
+
+- **Keep sources focused** - Create separate sources for different topics rather than one large document
+- **Use clear names** - Names appear in citations, so make them descriptive
+- **Update regularly** - Keep policies and procedures current
+- **Be specific** - Include exact details (timeframes, limits, steps) rather than vague guidance

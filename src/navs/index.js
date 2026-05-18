@@ -5299,6 +5299,12 @@ export const docsMenu = {
                     icon: 'IconDecisionTree',
                     color: 'orange',
                 },
+                {
+                    name: 'Business knowledge',
+                    url: '/docs/support/business-knowledge',
+                    icon: 'IconBook',
+                    color: 'orange',
+                },
             ],
         },
         ...[dataPipelines],
