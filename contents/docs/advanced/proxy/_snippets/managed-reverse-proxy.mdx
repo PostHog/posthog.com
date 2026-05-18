@@ -49,13 +49,7 @@ Your proxy status will change from **waiting** → **issuing** → **live**. Thi
 
 PostHog will automatically detect your DNS record and provision an SSL certificate. No further action needed.
 
-<<<<<<< HEAD
 > **Note:** If your proxy stays in **issuing** for more than 30 minutes, run a diagnostic to identify the issue. See [troubleshooting](#troubleshooting) below.
-||||||| 7c28d0386
-> **Note:** If your proxy stays in **issuing** for more than 30 minutes, see [troubleshooting](/docs/advanced/proxy/proxy-reference#troubleshooting).
-=======
-> **Note:** If your proxy stays in **issuing** for more than 30 minutes, see [troubleshooting](#troubleshooting).
->>>>>>> master
 
 </Step>
 
@@ -97,19 +91,12 @@ Confirm events are flowing through your proxy:
 4. Verify the response is `200 OK`
 5. Check the [PostHog app](https://app.posthog.com) to confirm events appear
 
-<<<<<<< HEAD
 If you see errors or events aren't appearing, run a [diagnostic](#troubleshooting) to identify the issue.
-||||||| 7c28d0386
-If you see errors or events aren't appearing, see [troubleshooting](/docs/advanced/proxy/proxy-reference#troubleshooting).
-=======
-If you see errors or events aren't appearing, see [troubleshooting](#troubleshooting).
->>>>>>> master
 
 </Step>
 
 </Steps>
 
-<<<<<<< HEAD
 ## Troubleshooting
 
 If your managed proxy is stuck in **waiting**, **issuing**, or **erroring** state, use the built-in diagnostic tool to identify the issue:
@@ -133,29 +120,6 @@ Each check shows **Pass**, **Fail**, **Warn**, or **Skip** status with specific 
 
 You can also ask Max (PostHog's AI assistant) to diagnose your proxy from the proxy settings page.
 
-||||||| 7c28d0386
-=======
-## Troubleshooting
-
-If your proxy is stuck in **issuing** or shows as **erroring**, use the built-in diagnostic tool to identify the issue.
-
-### Run diagnostics
-
-1. Go to [organization proxy settings](https://app.posthog.com/settings/organization-proxy)
-2. Find your proxy in the list
-3. Click the **⋯** menu and select **Diagnose**
-
-The diagnostic runs these checks:
-
-- **DNS CNAME** – Verifies your CNAME record points to the correct PostHog proxy target
-- **Certificate status** – Checks if SSL certificate provisioning is progressing normally
-- **CAA records** – Scans your DNS tree for CAA records that might block certificate issuance
-- **HTTP-01 challenge** – Tests if the domain verification endpoint is reachable
-- **Live event probe** – Confirms events can flow through the proxy
-- **Certificate expiry** – Warns if an active certificate is expiring soon
-
-Each check shows a status (passed, warning, failed, or skipped) with details and remediation steps when needed.
-
 ### Common issues
 
 **CNAME not configured or pointing to the wrong target**
@@ -178,7 +142,7 @@ The domain verification URL isn't accessible. Make sure:
 
 If you use Cloudflare or a similar DNS provider with proxy features, make sure the proxy is disabled (gray cloud) for your CNAME record.
 
->>>>>>> master
+
 ## FAQ
 
 ### Why does my managed proxy stay in "erroring" state with Cloudflare?
