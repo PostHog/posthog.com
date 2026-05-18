@@ -15,7 +15,8 @@ Products we know will work well if we ship them:
 - Products engineers use at all company stages
   - Think error tracking or feature flags. The [persona doesn't change](/handbook/who-we-build-for#our-current-persona) as the company gets bigger.
   - Especially true if it works for a 2 person startup, because that means we get in first
-- Products that already have a $1bn competitor in the market (e.g. a company with around $100M in revenue)
+- Products that are in extremely fast growing markets
+  - Think LLM Analytics, MCP 
 - Products that are very easy to integrate for our existing customers. 
   - For example, users can enable the product in PostHog without needing to make a code change, or products that built on top of data that people are already collecting in PostHog
 - Products that _you_ are excited to build. 
@@ -25,12 +26,16 @@ Products we know will work well if we ship them:
 Products we're less excited about building:
 - Products where the ICP quickly changes to someone outside the product team, especially teams far removed from engineering
   - For example, a CRM. We'd be more excited about building a customer support tool, as support often is a task that involves engineering.
+- Products that lean into 2020 style products, not 2030 style products
+  - Think lots of UX for humans to use
 
 ## How new products get built
 
 Sometimes the Blitzscale team will decide a new product needs to be built. They'll find someone internally to run it, ideally someone who's been at PostHog for at least 6 months (we tried getting new people to ship new products, but they often struggled to ship quickly).
 
 Other times you might have an idea for a great product we should build. In that case, use the <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal/blob/main/_TEMPLATES/request-for-comments-new-product.md">New Product RFC template</PrivateLink>. You might choose to hack together a prototype of the product to demo and show off, which you should do! Blitzscale only needs to get involved if you want to start working on this product full time. At that point, we are choosing whether to invest a pretty serious amount of money into launching it, so we want to get that right.
+
+The best products are often ones that not everyone thinks is a good idea before launch. For example, Tim was against building Session Replay, and it's probably the thing PostHog is most known for today. To make sure we take big bets, _any_ blitzscale team member can OK a new product being built, even if other blitzscale members disagree. That blitzscale person will be the one who the new team reports to. This way we avoid consensus stopping us from making big bets.
 
 For a complete walkthrough of the product lifecycle, see [releasing new products and features](/handbook/product/releasing-new-products-and-features).
 
