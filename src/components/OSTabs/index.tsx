@@ -229,7 +229,7 @@ export default function OSTabs({
                     </Tabs.List>
                 </div>
                 {tabs.map((tab) => (
-                    <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 h-full">
+                    <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 min-h-0">
                         <TabContentContainer
                             className={`@container bg-primary h-full min-h-0 ${
                                 border ? 'border border-primary rounded-md' : ''
