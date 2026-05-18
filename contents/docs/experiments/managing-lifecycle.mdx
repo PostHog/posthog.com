@@ -58,14 +58,13 @@ This is useful when you need to restart data collection, for example after fixin
 
 Here's how the actions differ:
 
-<<<<<<< HEAD
-| Status | Feature flag | Users see | Exposure tracking | Results | Can resume |
-|--------|----------------------|----------|-----------|---------|---------|
-| **Running** | Enabled | Multiple variants | Continues | Updating | N/A |
-| **Pausing** | Disabled | Control variant | Stops | Fixed | Yes |
-| **Ending** | Modified to roll out chosen variant to all users | Chosen variant | Continues (chosen variant only) | Fixed | No |
-| **Resetting** | Unchanged | Multiple variants | Continues | Cleared | Yes (relaunch) |
-| **Archiving** | Unchanged | Unchanged | Unchanged | Preserved | Yes (unarchive) |
+| Status        | Feature flag                                     | Users see         | Exposure tracking               | Results   | Can resume     |
+| ------------- | ------------------------------------------------ | ----------------- | ------------------------------- | --------- | -------------- |
+| **Running**   | Enabled                                          | Multiple variants | Continues                       | Updating  | N/A            |
+| **Pausing**   | Disabled                                         | Control variant   | Stops                           | Fixed     | Yes            |
+| **Ending**    | Modified to roll out chosen variant to all users | Chosen variant    | Continues (chosen variant only) | Fixed     | No             |
+| **Resetting** | Unchanged                                        | Multiple variants | Continues                       | Cleared   | Yes (relaunch) |
+| **Archiving** | Unchanged                                        | Unchanged         | Unchanged                       | Preserved | Yes (unarchive) |
 
 ## Archiving experiments
 
@@ -82,18 +81,3 @@ To unarchive:
 1. Filter the experiments list to show **Archived** experiments.
 2. Find the experiment you want to restore.
 3. Open the **More** menu on the experiment row or detail page and select **Unarchive experiment**.
-||||||| 7c28d0386
-| Status | Feature flag | Users see | Exposure tracking | Results | Can resume |
-|--------|----------------------|----------|-----------|---------|---------|
-| **Running** | Enabled | Multiple variants | Continues | Updating | N/A |
-| **Pausing** | Disabled | Control variant | Stops | Fixed | Yes |
-| **Ending** | Modified to roll out chosen variant to all users | Chosen variant | Continues (chosen variant only) | Fixed | No |
-| **Resetting** | Unchanged | Multiple variants | Continues | Cleared | Yes (relaunch) |
-=======
-| Status        | Feature flag                                     | Users see         | Exposure tracking               | Results  | Can resume     |
-| ------------- | ------------------------------------------------ | ----------------- | ------------------------------- | -------- | -------------- |
-| **Running**   | Enabled                                          | Multiple variants | Continues                       | Updating | N/A            |
-| **Pausing**   | Disabled                                         | Control variant   | Stops                           | Fixed    | Yes            |
-| **Ending**    | Modified to roll out chosen variant to all users | Chosen variant    | Continues (chosen variant only) | Fixed    | No             |
-| **Resetting** | Unchanged                                        | Multiple variants | Continues                       | Cleared  | Yes (relaunch) |
->>>>>>> master
