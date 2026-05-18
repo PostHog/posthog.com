@@ -43,6 +43,8 @@ Around 1 in 3 internet users use an ad blocker, more in some demographics, with 
 
 Google Analytics is blocked by almost every ad blocker, whereas other analytics tools are not always blocked. Additionally, you can use a [reverse proxy](/docs/advanced/proxy) which makes it harder for ad blockers to block our traffic.
 
+> **Note:** PostHog automatically detects adblockers during SDK onboarding and shows a warning if requests are being blocked. If you see this warning, temporarily disable your adblocker to verify your installation, then set up a [reverse proxy](/docs/advanced/proxy) for production.
+
 **2. Different methods of counting unique users**
 
 *Affects: visitor count*
