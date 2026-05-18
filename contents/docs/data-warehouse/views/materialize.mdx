@@ -34,6 +34,20 @@ For example, if you sync your billing data to Postgres using a cron job daily an
   classes="rounded"
 />
 
+## Monitoring materialization history
+
+You can view the history of materialization jobs for any materialized view. Navigate to [**Models**](https://app.posthog.com/models) and click on a materialized view to open its detail page.
+
+The **Materialization history** section shows a table with the following columns:
+
+- **Status** – Whether the job completed, is running, failed, or was cancelled
+- **Started at** – When the materialization job began
+- **Duration** – How long the job took to complete
+- **Rows** – The number of rows materialized
+- **Error** – Error details if the job failed
+
+This is useful for debugging failed materializations or verifying that scheduled jobs are running as expected.
+
 ## Tips for materializing views
 
 - The purpose of materialization is to speed up queries, so you don't need to materialize views that are already fast.
