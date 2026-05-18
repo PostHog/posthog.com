@@ -170,6 +170,65 @@ This helps the AI prioritize which metrics to highlight in its summary.
 
 Organizations have limits on how many active AI summaries they can have. If you've reached your plan limit, disable an existing AI summary or upgrade your plan to add more.
 
+## AI-generated reports (beta)
+
+Instead of subscribing to a specific insight or dashboard, you can create a subscription that generates a custom report from a natural-language prompt. The AI analyzes your project's event data and delivers a markdown report via email or Slack on your chosen schedule.
+
+<ProductFeatureBadge type="beta" />
+
+<CalloutBox icon="IconInfo" title="Requirements" type="fyi">
+
+AI-generated reports require:
+- AI data processing consent enabled in your organization settings
+- PostHog Cloud (not available for self-hosted deployments)
+
+</CalloutBox>
+
+### Create an AI-generated report subscription
+
+1. Open the dropdown menu on any insight or dashboard and click **Subscribe**, then **Add subscription**.
+2. Under **What to send**, select **AI-generated report (beta)**.
+3. Enter a prompt describing what you want the AI to analyze. For example:
+   - "Which events grew the most week-over-week? Highlight any unusual spikes."
+   - "Summarize user signup trends and identify drop-off points."
+   - "What are the top performing marketing channels this month?"
+4. Choose your delivery destination (email or Slack) and set the schedule.
+5. Click **Create subscription**.
+
+### How it works
+
+When the subscription fires, PostHog:
+
+1. Enriches your prompt with context about your project (top events, timezone, suggested analysis window based on frequency)
+2. Plans a set of HogQL queries to answer your prompt
+3. Runs the queries against your project data
+4. Synthesizes the results into a concise markdown report
+
+Reports open with an executive summary, followed by sections with specific findings. They cite concrete numbers from your data and prioritize clarity over comprehensiveness.
+
+### Writing effective prompts
+
+Your prompt runs on every scheduled delivery, so write it to be reusable:
+
+- **Be specific about what you want to learn** – "Show me the biggest event gains week-over-week" works better than "Tell me about my events"
+- **Mention the metrics or events you care about** – If you want to focus on signups or purchases, say so
+- **Indicate the comparison you want** – Week-over-week, month-over-month, or versus a baseline
+
+Prompts can be up to 4,000 characters.
+
+### Delivery
+
+AI-generated reports are delivered as:
+
+- **Email**: A formatted HTML email with the markdown report rendered inline
+- **Slack**: A message to your chosen channel with the report content. Long reports are threaded to avoid hitting Slack's message length limits.
+
+### Limitations
+
+- AI-generated reports do not include embedded charts or images – they contain text-based analysis only.
+- Webhook delivery is not supported for AI subscriptions.
+- The AI uses HogQL queries under the hood. Complex analysis that requires insight types like funnels or retention may not be fully captured.
+
 ## Next delivery date
 
 Each subscription displays its next scheduled delivery date, so you can see exactly when the next report is sent. This date updates automatically after each delivery.
