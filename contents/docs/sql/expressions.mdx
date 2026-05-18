@@ -70,6 +70,24 @@ Expressions can use operators to filter and combine data. These include:
 - Logical operators like `AND`, `OR`, `IS` or `NOT`
 - Arithmetic operators like `+`, `-`, `*`, `/`
 
+## Column unpacking
+
+The `*COLUMNS(...)` syntax unpacks matching columns into function arguments. This lets you apply functions across multiple columns without listing them individually.
+
+For example, to get the first non-null value from columns `a1` and `a2`:
+
+```sql
+SELECT coalesce(*COLUMNS('a')) AS result FROM (SELECT 1 AS a1, 2 AS a2, 3 AS b1)
+```
+
+You can also pass explicit column names:
+
+```sql
+SELECT coalesce(*COLUMNS(event, timestamp)) FROM events
+```
+
+> **Note:** `*COLUMNS(...)` is only valid inside function arguments. It can't be used as a top-level SELECT item. Use `COLUMNS()` instead for selecting columns directly.
+
 ## Functions and aggregations
 
 You can filter, modify, or aggregate accessed data with [supported ClickHouse functions](/docs/sql/clickhouse-functions) like `dateDiff()` and `concat()` and [aggregations](/docs/hogql/aggregations) like `sumIf()` and `count()`.
