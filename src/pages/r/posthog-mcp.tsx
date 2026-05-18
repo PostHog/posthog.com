@@ -8,6 +8,7 @@ import { ProductVideo } from 'components/ProductVideo'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { SingleCodeBlock } from 'components/CodeBlock'
+import ProductList from 'components/ProductList'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
 import HeygenLogo from 'components/CustomerLogos/HeygenLogo'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
@@ -117,8 +118,6 @@ export default function PostHogMCPLanding(): JSX.Element {
                 <div className={isIdle ? 'quest-idle' : ''}>
                     <QuestLog firstSpeechBubble="Let's wire up your editor!" lastSpeechBubble="Time to start shipping!">
                         <QuestLogItem
-                            title="Start with the Wizard"
-                            subtitle="Set up PostHog in 8 minutes with the Wizard"
                             title="Install the MCP with the Wizard"
                             subtitle="Automatic setup with one command"
                             icon="IconMagicWand"
@@ -210,6 +209,27 @@ export default function PostHogMCPLanding(): JSX.Element {
                                 <li>HogQL (our SQL) and the UI insight builder are there when you need them</li>
                                 <li>Full audit log of every query run on your data, by humans or agents</li>
                             </ul>
+
+                            <ProductList
+                                className="grid gap-4 grid-cols-2 not-prose"
+                                urlPrefix="/docs/"
+                                products={[
+                                    'product_analytics',
+                                    'web_analytics',
+                                    'session_replay',
+                                    'feature_flags',
+                                    'experiments',
+                                    'error_tracking',
+                                    'surveys',
+                                    'llm_analytics',
+                                    'data_warehouse',
+                                    'cdp',
+                                    'revenue_analytics',
+                                    'logs',
+                                    'workflows',
+                                    'endpoints',
+                                ]}
+                            />
 
                             <div className="mt-4">
                                 <CallToAction
