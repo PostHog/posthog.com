@@ -22,8 +22,6 @@ Private endpoints require authentication. There are two ways to authenticate, an
 - **[Personal API keys](/docs/api/personal-api-keys)** – Use these when you're using PostHog from your own scripts, automations, or any integration tied to your own account. This is the right choice if you're just building something for your own project.
 - **[OAuth](/docs/api/oauth)** – Use this when you're building an app that other PostHog users will install or connect to. OAuth lets users grant your app scoped access without sharing their personal API key.
 
-> **Building an app for others to use?** Use OAuth. **Just using PostHog from your own scripts or project?** Use a personal API key.
-
 ## Rate limiting
 
 Private `GET`, `POST`, `PATCH`, `DELETE` endpoints are rate limited. Public POST-only endpoints are **not** rate limited. A rule of thumb for whether rate limits apply is if the personal API key is used for authentication.
