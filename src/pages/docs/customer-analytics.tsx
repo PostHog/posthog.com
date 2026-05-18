@@ -43,7 +43,7 @@ const phFeatures = [
         url: '/docs/feature-flags',
     },
     {
-        title: 'LLM analytics',
+        title: 'LLM Observability',
         description: 'See how your users are using your LLMs and if they are satisfied with the results.',
         icon: <IconLlmAnalytics className="text-[#681291]" />,
         url: '/docs/llm-analytics',

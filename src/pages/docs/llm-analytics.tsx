@@ -30,7 +30,7 @@ export const Content = ({ quickLinks = false }) => {
         <>
             {(quickLinks || compact) && (
                 <QuickLinks
-                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'LLM analytics')?.children}
+                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'LLM Observability')?.children}
                 />
             )}
             <section className="mb-12">
@@ -46,13 +46,13 @@ export const Content = ({ quickLinks = false }) => {
                     />
                     <ResourceItem
                         type="Guide"
-                        title="How to set up LLM analytics for Cohere"
+                        title="How to set up LLM Observability for Cohere"
                         description="Track your Cohere usage, costs, and latency."
                         url="/tutorials/cohere-analytics"
                     />
                     <ResourceItem
                         type="Guide"
-                        title="How to set up LLM analytics for Anthropic's Claude"
+                        title="How to set up LLM Observability for Anthropic's Claude"
                         description="Monitor costs per model, user, and more."
                         url="/tutorials/anthropic-analytics"
                     />
@@ -75,11 +75,11 @@ export const Content = ({ quickLinks = false }) => {
 const LLMAnalytics: React.FC<LLMAnalyticsProps> = ({ data }) => {
     return (
         <ReaderView>
-            <SEO title="LLM Analytics - Documentation - PostHog" />
+            <SEO title="LLM Observability - Documentation - PostHog" />
 
             <Intro
                 subheader="Getting started"
-                title="LLM Analytics"
+                title="LLM Observability"
                 description="Gather data for your AI and LLM products usage and performance."
                 buttonText="Start capturing LLM data"
                 buttonLink="/docs/llm-analytics/start-here"

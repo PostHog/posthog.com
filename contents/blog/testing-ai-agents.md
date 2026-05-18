@@ -12,7 +12,7 @@ featuredImage: >-
 category: Engineering
 tags:
   - Engineering
-  - LLM analytics
+  - LLM Observability
 ---
 
 Software testing used to be relatively straightforward.
@@ -50,7 +50,7 @@ This isn't hard in theory because you just need to feed the same input to the ag
 
 Capturing this reality requires an observability tool for your agent. That way, when a user complains about something, you can pinpoint the exact agent interaction that led to that complaint. As an added benefit, you can now proactively check every trace your agent generates and see what you can improve.
 
-PostHog's [LLM analytics](/docs/llm-analytics/start-here) is one way to build that observability layer.
+PostHog's [LLM Observability](/docs/llm-analytics/start-here) is one way to build that observability layer.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_traces_25e203aa50.png"

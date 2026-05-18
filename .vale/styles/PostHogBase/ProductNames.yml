@@ -12,7 +12,7 @@ swap:
     experimentation: Experimentation
     experiments: Experiments
     feature flags: Feature Flags
-    llm analytics: LLM Analytics
+    llm observability: LLM Observability
     logs: Logs
     marketing analytics: Marketing Analytics
     posthog ai: PostHog AI

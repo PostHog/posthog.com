@@ -13,7 +13,7 @@ const LLMAnalyticsInstallationPlatforms = ({ columns = 2 }: LLMAnalyticsInstalla
         4: '@md:grid-cols-4',
     }
 
-    const platforms = usePlatformList('docs/llm-analytics/installation', 'LLM analytics installation')
+    const platforms = usePlatformList('docs/llm-analytics/installation', 'LLM Observability installation')
 
     return <List className={`grid gap-4 grid-cols-2 ${columnClassMap[columns]} not-prose`} items={platforms} />
 }

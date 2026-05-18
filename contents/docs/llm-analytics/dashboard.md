@@ -1,12 +1,12 @@
 ---
-title: LLM analytics dashboard
+title: LLM Observability dashboard
 availability:
     free: full
     selfServe: full
     enterprise: full
 ---
 
-The [LLM analytics dashboard](https://app.posthog.com/llm-analytics) provides an overview of your LLM usage and performance. Out of the box, it includes insights on:
+The [LLM Observability dashboard](https://app.posthog.com/llm-analytics) provides an overview of your LLM usage and performance. Out of the box, it includes insights on:
 
 - Users
 - Traces
@@ -25,9 +25,9 @@ It can be filtered like any dashboard in PostHog, including by event, person, an
 
 ## Customizing the dashboard
 
-The LLM analytics dashboard is fully customizable. You can add your own insights, add text cards, and more. To customize the dashboard:
+The LLM Observability dashboard is fully customizable. You can add your own insights, add text cards, and more. To customize the dashboard:
 
-1. Head to the [LLM analytics dashboard](https://app.posthog.com/llm-analytics)
+1. Head to the [LLM Observability dashboard](https://app.posthog.com/llm-analytics)
 2. Click the **Edit dashboard** button in the top right
 3. Click the **Add text card** button to add labels, or the **Add insight** button to import insights
 

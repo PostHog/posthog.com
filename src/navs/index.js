@@ -1917,7 +1917,7 @@ export const communityMenu = {
                     ],
                 },
                 {
-                    name: 'LLM Analytics',
+                    name: 'LLM Observability',
                     color: 'purple',
                     icon: 'IconLlmAnalytics',
                     url: '/tutorials/ai-engineering',
@@ -2590,7 +2590,7 @@ export const docsMenu = {
                             url: '/docs/api/invites',
                         },
                         {
-                            name: 'LLM analytics',
+                            name: 'LLM Observability',
                             url: '/docs/api/llm-analytics',
                         },
                         {
@@ -2773,7 +2773,7 @@ export const docsMenu = {
                             ],
                         },
                         {
-                            name: 'LLM Analytics ↗',
+                            name: 'LLM Observability ↗',
                             url: 'https://posthog.com/docs/llm-analytics',
                         },
                         {
@@ -5473,7 +5473,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'LLM Analytics',
+            name: 'LLM Observability',
             url: '/docs/llm-analytics',
             color: '[#681291]',
             colorDark: '[#C170E8]',
@@ -5481,7 +5481,7 @@ export const docsMenu = {
             description: 'Insights for building your AI and LLM products',
             children: [
                 {
-                    name: 'LLM Analytics',
+                    name: 'LLM Observability',
                 },
                 {
                     name: 'Overview',

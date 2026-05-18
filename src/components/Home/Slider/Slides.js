@@ -986,7 +986,7 @@ export const LLMAnalytics = () => {
             containerClasses="!pt-8 mdlg:!py-4 xl:!py-10"
             bgColor="gradient-to-tr from-[#f3e8ff] via-[#f5d0fe] to-[#e0f2fe]"
             textColor="primary"
-            title="LLM analytics"
+            title="LLM Observability"
             flagColor="yellow"
             description="Build AI features with full visibility – both in development and production."
             features={[
@@ -1011,7 +1011,7 @@ export const LLMAnalytics = () => {
                         ) : (
                             <>
                                 <CloudinaryImage
-                                    alt="The PostHog LLM analytics dashboard, showing data on generative AI usage, performance, and costs"
+                                    alt="The PostHog LLM Observability dashboard, showing data on generative AI usage, performance, and costs"
                                     placeholder="none"
                                     quality={100}
                                     objectFit="contain"

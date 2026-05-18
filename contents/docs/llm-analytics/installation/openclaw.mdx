@@ -1,5 +1,5 @@
 ---
-title: OpenClaw LLM analytics installation
+title: OpenClaw LLM Observability installation
 platformIconName: IconOpenClaw
 showStepsToc: true
 tableOfContents: [
@@ -88,13 +88,13 @@ Start (or restart) the OpenClaw gateway for the plugin to take effect:
 node openclaw.mjs gateway
 ```
 
-The PostHog plugin initializes automatically on startup. Once users send messages through any connected channel (Telegram, Slack, Discord, or WebChat), LLM analytics events are captured and sent to PostHog.
+The PostHog plugin initializes automatically on startup. Once users send messages through any connected channel (Telegram, Slack, Discord, or WebChat), LLM Observability events are captured and sent to PostHog.
 
 ## Verify traces and generations
 
 After sending a few messages through your gateway:
 
-1. Go to the [LLM analytics](https://us.posthog.com/llm-analytics) tab in PostHog.
+1. Go to the [LLM Observability](https://us.posthog.com/llm-analytics) tab in PostHog.
 2. You should see traces and generations appearing within a few minutes.
 
 ## Configuration options

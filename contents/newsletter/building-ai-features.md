@@ -238,7 +238,7 @@ The solution? Add suggestions for how they can use your AI-powered features, nud
 
 Beyond issues with humanity and hallucination, sometimes your workflows just break. You need to be able to handle these gracefully with retries and rate limiting.
 
-For real pros, you can also set up [LLM analytics](/llm-analytics), [error tracking](/docs/error-tracking), and [feature flags](/docs/feature-flags) to help. Conveniently we provide all three, which is a weird coincidence.
+For real pros, you can also set up [LLM Observability](/llm-analytics), [error tracking](/docs/error-tracking), and [feature flags](/docs/feature-flags) to help. Conveniently we provide all three, which is a weird coincidence.
 
 ## Improving your feature
 
@@ -272,7 +272,7 @@ As the founder of Superhuman, Rahul Vohra, noted in [Lenny’s Newsletter](https
 
 Some ways to improve this:
 
--   **Be aware of model benchmarks and new model releases.** When a better, faster model releases, test it out and use it. This can often have the biggest boost to both functionality and speed. Use [LLM analytics](/llm-analytics) to test this.
+-   **Be aware of model benchmarks and new model releases.** When a better, faster model releases, test it out and use it. This can often have the biggest boost to both functionality and speed. Use [LLM Observability](/llm-analytics) to test this.
 
 -   **Mix fast and slow models depending on the task.** We use fast models, like `gpt-4.1-mini` and `gpt-4.1-nano`, for title generation, session replay filters, survey summarization, and insight search. We use slow models (like `gpt-4.1`) for schema generation, conversation handling, and context management.
 

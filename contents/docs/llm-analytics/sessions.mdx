@@ -26,12 +26,12 @@ Sessions are useful when you want to:
 
 ## Traces vs Sessions
 
-- **Trace** (`$ai_trace_id`): Groups related AI events (generations, spans, embeddings) together. Required for all LLM analytics events.
+- **Trace** (`$ai_trace_id`): Groups related AI events (generations, spans, embeddings) together. Required for all LLM Observability events.
 - **Session** (`$ai_session_id`): Optional property that groups multiple traces together based on your chosen grouping strategy.
 
 ## How to set a session ID
 
-Set the `$ai_session_id` property when capturing LLM events using the `posthogProperties` (JavaScript) or `posthog_properties` (Python) parameter in PostHog's LLM analytics SDKs. Use any identifier that makes sense for grouping related traces in your application.
+Set the `$ai_session_id` property when capturing LLM events using the `posthogProperties` (JavaScript) or `posthog_properties` (Python) parameter in PostHog's LLM Observability SDKs. Use any identifier that makes sense for grouping related traces in your application.
 
 ## Analyzing sessions
 

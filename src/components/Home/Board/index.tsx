@@ -381,7 +381,7 @@ const products: Product[] = [
         },
     },
     {
-        name: 'LLM analytics',
+        name: 'LLM Observability',
         color: '[#8B0DC8]',
         colorDark: '[#C170E8]',
         Icon: IconLlmAnalytics,

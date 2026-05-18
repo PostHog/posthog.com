@@ -23,7 +23,7 @@ exceptions:
     - experiments # adding because the generic term is too commonly used
     - Feature Flags
     - feature flags # adding because the generic term is too commonly used
-    - LLM Analytics
+    - LLM Observability
     - Logs
     - logs # adding because the generic term is too commonly used
     - Marketing Analytics

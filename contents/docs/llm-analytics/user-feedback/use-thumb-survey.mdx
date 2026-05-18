@@ -79,7 +79,7 @@ function HedgehogBotResponse({ traceId }: { traceId: string }) {
 
 By default, the hook emits a `survey shown` (impression) event on mount.
 
-Duplicate impression events will not impact your ability to see responses within LLM Analytics, but may skew metrics viewed directly from Surveys.
+Duplicate impression events will not impact your ability to see responses within LLM Observability, but may skew metrics viewed directly from Surveys.
 
 To disable this behavior, initialize the hook with `disableAutoShownTracking: true` and manually call `trackShown()` when you consider your survey to be "shown."
 

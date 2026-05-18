@@ -1,14 +1,14 @@
 ---
-title: LLM Analytics basics
+title: LLM Observability basics
 ---
 
 import OSButton from 'components/OSButton'
 
-This page covers how your LLM calls become analytics in PostHog and defines key concepts for LLM Analytics.
+This page covers how your LLM calls become analytics in PostHog and defines key concepts for LLM Observability.
 
 ## How LLM calls become events
 
-PostHog's LLM Analytics works by wrapping your existing LLM provider's SDK to capture requests and responses. Your API calls still go directly to your provider, but the wrapper extracts metadata from each call and sends it to PostHog as an event.
+PostHog's LLM Observability works by wrapping your existing LLM provider's SDK to capture requests and responses. Your API calls still go directly to your provider, but the wrapper extracts metadata from each call and sends it to PostHog as an event.
 
 ```mermaid
 graph LR
