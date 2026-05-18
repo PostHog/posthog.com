@@ -269,7 +269,15 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
         {
             type: 'submenu',
             label: 'New products',
-            items: buildProductMenuItems(newestProducts, allProducts),
+            items: [
+                ...buildProductMenuItems(newestProducts, allProducts),
+                {
+                    type: 'item' as const,
+                    label: 'PostHog Work',
+                    link: '/work',
+                    icon: <Icons.IconPeople className="size-4 text-blue" />,
+                },
+            ],
             icon: <Icons.IconPresent className="size-4 text-blue" />,
             mobileDestination: '/products',
         },
