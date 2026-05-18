@@ -1,0 +1,130 @@
+---
+title: OpenCode LLM analytics installation
+platformIconName: IconOpenCode
+showStepsToc: true
+tableOfContents: [
+    {
+        url: 'prerequisites',
+        value: 'Prerequisites',
+        depth: 1,
+    },
+    {
+        url: 'install-the-plugin',
+        value: 'Install the plugin',
+        depth: 1,
+    },
+    {
+        url: 'configure-posthog',
+        value: 'Configure PostHog',
+        depth: 1,
+    },
+    {
+        url: 'start-opencode',
+        value: 'Start OpenCode',
+        depth: 1,
+    },
+    {
+        url: 'verify-traces-and-generations',
+        value: 'Verify traces and generations',
+        depth: 1,
+    },
+    {
+        url: 'configuration-options',
+        value: 'Configuration options',
+        depth: 1,
+    },
+]
+---
+
+[OpenCode](https://opencode.ai) is an open-source coding agent that runs in your terminal. The `opencode-posthog` plugin captures LLM generations, tool executions, and conversation traces as `$ai_generation`, `$ai_span`, and `$ai_trace` events and sends them to PostHog.
+
+## Prerequisites
+
+You need:
+
+- [OpenCode](https://opencode.ai/docs/) installed
+- A [PostHog account](https://us.posthog.com/signup) with a project API key
+
+## Install the plugin
+
+Add `opencode-posthog` to your `opencode.json`:
+
+```json
+{
+    "$schema": "https://opencode.ai/config.json",
+    "plugin": ["opencode-posthog"]
+}
+```
+
+The package installs automatically at startup and is cached in `~/.cache/opencode/node_modules/`.
+
+## Configure PostHog
+
+Set environment variables with your PostHog project API key and host. You can find these in your [PostHog project settings](https://us.posthog.com/settings/project).
+
+```bash
+export POSTHOG_API_KEY="<ph_project_api_key>"
+export POSTHOG_HOST="<ph_client_api_host>"
+```
+
+All other plugin configuration is also done with environment variables. If `POSTHOG_API_KEY` is not set, the plugin is a no-op.
+
+> **Tip:** You can add these environment variables to your shell profile (for example, `~/.zshrc` or `~/.bashrc`) so they persist across sessions.
+
+## Start OpenCode
+
+Start OpenCode as normal:
+
+```bash
+opencode
+```
+
+The plugin initializes automatically and starts capturing LLM calls, tool executions, and completed prompt traces once OpenCode is running.
+
+## Verify traces and generations
+
+After running a few prompts through OpenCode:
+
+1. Go to the [LLM analytics](https://us.posthog.com/llm-analytics) tab in PostHog.
+2. You should see traces and generations appearing within a few minutes.
+
+## Configuration options
+
+All configuration is done via environment variables:
+
+| Variable | Default | Description |
+|---|---|---|
+| `POSTHOG_API_KEY` | _(required)_ | Your PostHog project API key |
+| `POSTHOG_HOST` | `https://us.i.posthog.com` | PostHog instance URL |
+| `POSTHOG_PRIVACY_MODE` | `false` | Redact all LLM input/output content when `true` |
+| `POSTHOG_ENABLED` | `true` | Set `false` to disable |
+| `POSTHOG_DISTINCT_ID` | machine hostname | The `distinct_id` for all events |
+| `POSTHOG_PROJECT_NAME` | cwd basename | Project name in all events |
+| `POSTHOG_TAGS` | _(none)_ | Custom tags: `key1:val1,key2:val2` |
+| `POSTHOG_MAX_ATTRIBUTE_LENGTH` | `12000` | Max length for serialized tool input/output |
+
+### What gets captured
+
+The plugin captures three types of events:
+
+- **`$ai_generation`**: Every LLM call, including model, provider, token usage, cost, stop reason, and message content in [OpenAI chat format](/docs/llm-analytics/generations).
+- **`$ai_span`**: Each tool execution, including tool name, duration, input and output state, and any error information ([learn more](/docs/llm-analytics/spans)).
+- **`$ai_trace`**: Completed user prompts with total latency, accumulated token counts, and final input and output state ([learn more](/docs/llm-analytics/traces)).
+
+### Privacy mode
+
+When `POSTHOG_PRIVACY_MODE=true`, content fields such as `$ai_input`, `$ai_output_choices`, `$ai_input_state`, and `$ai_output_state` are set to `null`. Token counts, costs, latency, and model metadata are still captured.
+
+Sensitive keys in tool inputs and outputs, including `api_key`, `token`, `secret`, `password`, `authorization`, `credential`, and `private_key`, are automatically redacted regardless of whether privacy mode is enabled.
+
+## Next steps
+
+Now that you're capturing AI conversations, continue with the resources below to learn what else LLM analytics enables within the PostHog platform.
+
+| Resource | Description |
+|----------|-------------|
+| [Basics](/docs/llm-analytics/basics) | Learn the basics of how LLM calls become events in PostHog. |
+| [Generations](/docs/llm-analytics/generations) | Read about the `$ai_generation` event and its properties. |
+| [Traces](/docs/llm-analytics/traces) | Explore the trace hierarchy and how to use it to debug LLM calls. |
+| [Spans](/docs/llm-analytics/spans) | Review spans and their role in representing individual operations. |
+| [Analyze LLM performance](/docs/llm-analytics/dashboard) | Learn how to create dashboards to analyze LLM performance. |
