@@ -119,6 +119,8 @@ export default function PostHogMCPLanding(): JSX.Element {
                         <QuestLogItem
                             title="Start with the Wizard"
                             subtitle="Set up PostHog in 8 minutes with the Wizard"
+                            title="Install the MCP with the Wizard"
+                            subtitle="Automatica setup with one command"
                             icon="IconMagicWand"
                         >
                             <p>
