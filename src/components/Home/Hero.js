@@ -14,7 +14,7 @@ import { motion } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
 import Board from './Board'
 import { useUser } from 'hooks/useUser'
-import IntegrationPrompt from '../IntegrationPrompt'
+import WizardCommand from 'components/WizardCommand'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -335,9 +335,9 @@ export default function Hero() {
                             <motion.div
                                 initial={{ height: 0 }}
                                 animate={{ height: 'auto' }}
-                                className="max-w-screen-lg mx-auto px-5 mt-8"
+                                className="max-w-screen-lg mx-auto px-5 mt-8 flex justify-center"
                             >
-                                <IntegrationPrompt />
+                                <WizardCommand latest={false} slim />
                             </motion.div>
                         )}
                     </div>

@@ -29,7 +29,7 @@ To record from a cross-origin iframe:
 3. Initialize PostHog **on both domains** with an explicit configuration as below:
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     session_recording: {
         // WARNING: Only enable this if you understand the security implications
         recordCrossOriginIframes: true,

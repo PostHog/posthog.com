@@ -37,7 +37,7 @@ If you never want to show a cookie banner, you can set the cookieless mode to `"
 To set this mode, add the following config option to your PostHog initialization:
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     cookieless_mode: 'always', // +
     api_host:'<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>'
@@ -58,7 +58,7 @@ With this:
 To enable this mode, add the following config option to your PostHog initialization:
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     cookieless_mode: 'on_reject', // +
     api_host:'<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>'

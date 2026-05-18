@@ -14,11 +14,12 @@ export const popularProducts = [
 // Newest products to highlight in the menu
 export const newestProducts = [
     'logs',
+    'endpoints',
     'posthog_ai',
     'llm_analytics',
-    'error_tracking',
-    'web_analytics',
     'workflows_emails',
+    'posthog_code',
+    'support',
 ]
 
 // Category ordering for display

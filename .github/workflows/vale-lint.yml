@@ -63,8 +63,10 @@ jobs:
 
             - name: Run Vale on changed files
               id: vale
+              env:
+                  PR_INFO_BASE_REF: ${{ steps.pr-info.outputs.base_ref }}
               run: |
-                  FILES=$(git diff --name-only --diff-filter=ACMR origin/${{ steps.pr-info.outputs.base_ref }}...HEAD -- '*.md' '*.mdx')
+                  FILES=$(git diff --name-only --diff-filter=ACMR "origin/$PR_INFO_BASE_REF...HEAD" -- '*.md' '*.mdx')
                   if [ -z "$FILES" ]; then
                     echo "No markdown files changed, skipping Vale"
                     echo "has_findings=false" >> "$GITHUB_OUTPUT"

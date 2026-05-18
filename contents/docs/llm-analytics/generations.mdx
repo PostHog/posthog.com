@@ -97,13 +97,17 @@ Spans are individual operations within a trace. Some spans represent generations
 
 <Caption>Generations and spans are nested within a trace</Caption>
 
+## Tool calls
+
+When a generation includes tool calls (function calls), PostHog automatically extracts them and displays them as tags on the generation. You can see aggregated tool usage across all your generations in the [Tools](/docs/llm-analytics/tools) tab.
+
 ## Evaluating generations
 
 You can automatically assess the quality of your generations using [evaluations](/docs/llm-analytics/evaluations). Evaluations use an LLM-as-a-judge approach to score outputs based on criteria like relevance, helpfulness, or safety.
 
 ## Sentiment classification
 
-PostHog can classify the sentiment of user messages in your generations as negative, neutral, or positive. Sentiment is computed on-demand using a local model when you view a [trace](/docs/llm-analytics/traces) — no data is sent to third-party services.
+PostHog can classify the sentiment of user messages in your generations as negative, neutral, or positive. Sentiment is computed on-demand using a local model when you view a [trace](/docs/llm-analytics/traces) — no data is sent to third-party services. See [Sentiment classification](/docs/llm-analytics/sentiment) for more details.
 
 ## Event properties
 

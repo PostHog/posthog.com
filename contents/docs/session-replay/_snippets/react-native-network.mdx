@@ -4,7 +4,7 @@ To capture network requests in your recordings, add `captureNetworkTelemetry: tr
 
 ```ts
 export const posthog = new PostHog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   {
     // Enable session recording. Requires enabling in your project settings as well.
     // Default is false.
@@ -14,6 +14,7 @@ export const posthog = new PostHog(
       // Only metric-like data like speed, size, and response code are captured.
       // No data is captured from the request or response body.
       // iOS only
+      // Remote configuration via project settings requires SDK version 4.35.0 or higher.
       captureNetworkTelemetry: true,
       ...
     },

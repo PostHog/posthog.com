@@ -13,7 +13,7 @@ import posthog from "posthog-js";
 
 const app = createApp(App);
 
-posthog.init(import.meta.env.VITE_POSTHOG_KEY || '<ph_project_api_key>', {
+posthog.init(import.meta.env.VITE_POSTHOG_TOKEN || '<ph_project_token>', {
   api_host: import.meta.env.VITE_POSTHOG_HOST || '<ph_client_api_host>',
   defaults: '2026-01-30',
 });

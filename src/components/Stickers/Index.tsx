@@ -30,6 +30,7 @@ const countryFlagMapping: Record<string, keyof typeof AllStickers> = {
     PL: 'StickerFlagPL',
     PR: 'StickerFlagPR',
     PT: 'StickerFlagPT',
+    RO: 'StickerFlagRO',
     RS: 'StickerFlagRS',
     SE: 'StickerFlagSE',
     SI: 'StickerFlagSI',

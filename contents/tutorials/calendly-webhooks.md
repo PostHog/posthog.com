@@ -19,11 +19,11 @@ To showcase the power of webhooks, we are going to capture [Calendly](https://ca
 
 Before we set anything up in Calendly, we set up our webhook handler function in Val Town. This function receives a request from Calendly, parses the JSON, gets the data we want, and then captures an event into PostHog.
 
-To get started, we'll create a secret in Val Town with your PostHog API key. 
+To get started, we'll create a secret in Val Town with your PostHog token. 
 
-You can get your project API key from your [project settings](https://app.posthog.com/project/settings). Next, go to the [secrets page in Val Town](https://www.val.town/settings/secrets), set the key as phProjectAPIKey, the value as your API key from PostHog, and click "Add." This saves the value for us to  reference as `@me.secrets.phProjectAPIKey` later.
+You can get your project token from your [project settings](https://app.posthog.com/project/settings). Next, go to the [secrets page in Val Town](https://www.val.town/settings/secrets), set the key as `phProjectAPIKey`, the value as your token from PostHog, and click "Add." This saves the value for us to reference as `@me.secrets.phProjectAPIKey` later.
 
-![Project API key Val secret](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/calendly-webhooks/secret.png)
+![Project token Val secret](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/calendly-webhooks/secret.png)
 
 Next, we create our function to capture a Calendly webhook. In it, we parse the JSON and modify the data then call the `capturePostHogEvent` function which looks like this:
 

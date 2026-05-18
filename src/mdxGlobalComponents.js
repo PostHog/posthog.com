@@ -8,10 +8,12 @@ import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
+import { HearAboutUsCarousel } from './components/CardStackCarousel/HearAboutUsCarousel'
 import { Images } from './components/Careers/Images'
 import CloudinaryImage from './components/CloudinaryImage'
 import { ComparisonTable } from './components/ComparisonTable'
 import ProductComparisonTable from './components/ProductComparisonTable'
+import ProductList from './components/ProductList'
 import Snippet from '../contents/docs/integrate/snippet.mdx'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
@@ -67,6 +69,9 @@ import { Tweet } from './components/Tweet'
 import { ZendeskTicket } from './components/ZendeskTicket'
 import { CalloutBox } from './components/Docs/CalloutBox'
 import SolvedQuestions from './components/Docs/SolvedQuestions'
+import WistiaEmbed from './components/WistiaEmbed'
+import WizardCommand from './components/WizardCommand'
+import WizardCTA from './components/WizardCTA'
 
 export const shortcodes = {
     ArrayCTA,
@@ -75,11 +80,13 @@ export const shortcodes = {
     CallToAction,
     CalloutBox,
     Caption,
+    HearAboutUsCarousel,
     CloudinaryImage,
     Images,
     ImageSlider,
     ComparisonTable,
     ProductComparisonTable,
+    ProductList,
     Snippet,
     CompensationCalculator,
     ContentViewer,
@@ -137,4 +144,7 @@ export const shortcodes = {
     TaskOwnershipTable,
     RainbowText,
     SolvedQuestions,
+    WistiaEmbed,
+    WizardCommand,
+    WizardCTA,
 }

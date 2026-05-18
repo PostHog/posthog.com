@@ -68,6 +68,8 @@ Software engineers, on the other hand, focus on building features that are gener
 
 [Bob McGrew](https://www.youtube.com/watch?v=Zyw-YA0k3xo), an early executive at Palantir, describes FDEs as the ones who build the rough gravel road for where the product needs to go. Software engineers from the core product team then work on turning that gravel road into a paved superhighway so that the next ten customers can also use it.
 
+![FDE and SWE flowchart](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/fde_swe_diagram_55df712e39.png)
+
 The key difference is that FDEs work on product discovery and development with _one_ customer at a time, and generalizability is a second priority. Software engineers typically build with many users in mind from the start, and thinking about scale is baked into their process.
 
 |  | Forward Deployed Engineer | Software Engineer |

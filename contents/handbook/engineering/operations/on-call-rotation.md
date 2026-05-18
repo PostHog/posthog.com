@@ -51,6 +51,11 @@ Besides knowledge, being on call requires availability – including weekends. I
 
 ## Before going on call
 
+### Mindset
+
+Read: [Jos Visser: Ten things not to worry about regarding oncall](https://josvisser.substack.com/p/ten-things-not-to-worry-about-regarding?r=b67wp&utm_source=posthog&utm_medium=web&triedRedirect=true)
+(Worth the read, even if you're an on-call veteran.)
+
 ### Be prepared
 
 Because the stability of production systems is critical, on-call involves weekends too (unlike Support Hero). More likely than not, nothing will happen over the weekend – but you never know, so the important thing is to keep your laptop at hand.

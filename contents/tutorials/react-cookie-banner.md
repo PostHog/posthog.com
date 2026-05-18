@@ -54,7 +54,7 @@ import './index.css'
 import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
-posthog.init("<ph_project_api_key>", {
+posthog.init("<ph_project_token>", {
   api_host: "<ph_client_api_host>",
   defaults: "<ph_posthog_js_defaults>"
 })
@@ -97,7 +97,7 @@ import './index.css'
 import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
-posthog.init("<ph_project_api_key>", {
+posthog.init("<ph_project_token>", {
   api_host: "<ph_client_api_host>",
   defaults: "<ph_posthog_js_defaults>",
   cookieless_mode: 'on_reject'
@@ -168,7 +168,7 @@ import { PostHogProvider } from '@posthog/react'
 import posthog from 'posthog-js'
 import { Banner } from './Banner'
 
-posthog.init("<ph_project_api_key>", {
+posthog.init("<ph_project_token>", {
   api_host: "<ph_client_api_host>",
   defaults: "<ph_posthog_js_defaults>",
   cookieless_mode: 'on_reject',

@@ -48,7 +48,7 @@ Within five days, we launched [IsGoogleAnalyticsIllegal.com](https://isgoogleana
 
 We decided to share the site on Hacker News, a site that highly values authenticity. If a post has even the slightest whiff of self-promotion, you can be prepared to be torn to shreds.
 
-Thankfully one of our marketing values is “No sneaky shit.” I can’t say it better than it’s already stated [in our Company Handbook](https://posthog.com/handbook/growth/marketing#no-sneaky-shit):
+Thankfully one of our marketing values is “No sneaky shit.” I can’t say it better than it’s already stated [in our Company Handbook](https://posthog.com/handbook/marketing#no-sneaky-shit):
 
 > Our focus customers are technical and acutely aware of the tedious clickbaity marketing tactics that software companies use to try and entice them. Stop. It's patronizing to both the customer and the marketing people creating the content.<br /><br />
 > We will never try to trick someone into using PostHog through spammy marketing tactics. That's a great way to boost vanity signup metrics in the short term before the customer quickly churns out.

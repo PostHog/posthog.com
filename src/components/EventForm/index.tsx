@@ -28,6 +28,7 @@ type EventFormValues = {
     audience: string[]
     speakers: string[]
     private: boolean
+    online: boolean
     speakerTopic?: string
     partners: Array<{ name: string; url?: string }>
     attendees?: number
@@ -48,7 +49,12 @@ const validationSchema = Yup.object().shape({
     startTime: Yup.string().optional(),
     description: Yup.string().optional(),
     link: Yup.string().url('Enter a valid URL').optional(),
-    locationLabel: Yup.string().required('Location is required'),
+    online: Yup.boolean().optional(),
+    locationLabel: Yup.string().when('online', {
+        is: true,
+        then: (schema) => schema.optional(),
+        otherwise: (schema) => schema.required('Location is required'),
+    }),
     format: Yup.array().of(Yup.string()).min(1, 'Select at least one format'),
     audience: Yup.array().of(Yup.string()).min(1, 'Select at least one audience'),
     speakers: Yup.array().of(Yup.string()).optional(),
@@ -83,6 +89,7 @@ const transformEventToFormValues = (event: Event, speakerOptions?: SelectOption[
         audience: event?.audience || [],
         speakers: speakersValues,
         private: Boolean(event?.private),
+        online: Boolean(event?.online),
         speakerTopic: event?.speakerTopic || '',
         partners: (event?.partners && event.partners.length > 0
             ? event.partners.map((p) => ({ name: p.name, url: p.url || '' }))
@@ -156,6 +163,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                   audience: [],
                   speakers: [],
                   private: false,
+                  online: false,
                   speakerTopic: '',
                   partners: [{ name: '', url: '' }],
                   attendees: undefined,
@@ -185,6 +193,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                     description: values.description || undefined,
                     date: dateTime,
                     private: values.private || false,
+                    online: values.online || false,
                     format: values.format,
                     audience: values.audience,
                     speakerTopic: values.speakerTopic || undefined,
@@ -198,7 +207,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                     video: values.video || undefined,
                     presentation: values.presentation || undefined,
                     link: values.link || undefined,
-                    speakers: { connect: values.speakers },
+                    speakers: { set: values.speakers },
                     location: {
                         label: values.locationLabel,
                         lat: values.locationLat ? Number(values.locationLat) : undefined,
@@ -316,37 +325,57 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                         {...formik.getFieldProps('startTime')}
                     />
                 </div>
-                <OSInput
-                    label="Location"
-                    required
-                    direction="column"
-                    placeholder="e.g. Dublin, Ireland"
-                    touched={formik.touched.locationLabel}
-                    error={formik.errors.locationLabel}
-                    {...formik.getFieldProps('locationLabel')}
-                />
-                <div className="grid grid-cols-2 gap-3">
-                    <OSInput
-                        label="Latitude"
-                        type="number"
-                        direction="column"
-                        placeholder="e.g. 39.0968"
-                        {...formik.getFieldProps('locationLat')}
-                    />
-                    <OSInput
-                        label="Longitude"
-                        type="number"
-                        direction="column"
-                        placeholder="e.g. 120.0324"
-                        {...formik.getFieldProps('locationLng')}
+                <div className="flex items-center gap-3">
+                    <Toggle
+                        checked={formik.values.online}
+                        onChange={(checked) => {
+                            formik.setFieldValue('online', checked)
+                            if (checked) {
+                                formik.setFieldValue('locationLabel', '')
+                                formik.setFieldValue('locationLat', undefined)
+                                formik.setFieldValue('locationLng', undefined)
+                                formik.setFieldValue('venueName', '')
+                            }
+                        }}
+                        label="Online only"
+                        position="left"
                     />
                 </div>
-                <OSInput
-                    label="Venue name"
-                    direction="column"
-                    placeholder="e.g. Madison Square Garden"
-                    {...formik.getFieldProps('venueName')}
-                />
+                {!formik.values.online && (
+                    <>
+                        <OSInput
+                            label="Location"
+                            required
+                            direction="column"
+                            placeholder="e.g. Dublin, Ireland"
+                            touched={formik.touched.locationLabel}
+                            error={formik.errors.locationLabel}
+                            {...formik.getFieldProps('locationLabel')}
+                        />
+                        <div className="grid grid-cols-2 gap-3">
+                            <OSInput
+                                label="Latitude"
+                                type="number"
+                                direction="column"
+                                placeholder="e.g. 39.0968"
+                                {...formik.getFieldProps('locationLat')}
+                            />
+                            <OSInput
+                                label="Longitude"
+                                type="number"
+                                direction="column"
+                                placeholder="e.g. 120.0324"
+                                {...formik.getFieldProps('locationLng')}
+                            />
+                        </div>
+                        <OSInput
+                            label="Venue name"
+                            direction="column"
+                            placeholder="e.g. Madison Square Garden"
+                            {...formik.getFieldProps('venueName')}
+                        />
+                    </>
+                )}
                 <CreatableMultiSelect
                     label="Format"
                     options={baseOptions.format}

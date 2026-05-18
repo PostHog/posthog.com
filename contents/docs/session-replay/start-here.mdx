@@ -1,0 +1,214 @@
+---
+title: Getting started with Session Replay
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import SessionReplayInstallationPlatforms from './installation/_snippets/installation-platforms'
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconGraph, IconRewindPlay, IconToggle, IconWarning  } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import AuthAwareOSButton from 'components/OSButton/AuthAwareOSButton'
+
+
+<QuestLog firstSpeechBubble="Hm, what are my users up to?" lastSpeechBubble="Time to integrate Session Replay!">
+
+<QuestLogItem 
+    title="See real user behavior"
+    subtitle="Install the PostHog SDK"
+    icon="IconCode2"
+>
+
+  Install the PostHog SDK and enable [Session Replay](/docs/session-replay) with a couple lines of config. 
+  
+  PostHog automatically captures every click, scroll, input, and page view. Session recording starts the moment a user lands on your page.
+
+  Web and mobile are both supported by our SDKs.
+
+  ### Platforms
+
+  <SessionReplayInstallationPlatforms />
+
+  <OSButton variant="primary" asLink to="/docs/session-replay/installation">
+    Install PostHog SDK
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Inspect replays with dev tools"
+  subtitle="Watch session recordings"
+  icon="IconBrowser"
+>
+
+Every session replay comes with a browser-like DevTools suite that is synced to the recording's timeline. 
+
+It's a full debugging environment with video playback.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/annotated_replay_inspector_ec4ceb5761.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/annotated_replay_inspector_dark_c040e66ee5.png"
+  alt="Session replay activity panel"
+  classes="rounded"
+  padding={false}
+/>
+
+Open the **Activity** panel to inspect each moment.
+
+- Jump to any event in the session's timeline 
+- See console logs, warnings, and errors exactly when they happened
+- Inspect the network waterfall to find slow or failed API calls
+
+<OSButton variant="primary" asLink to="/docs/session-replay/how-to-watch-recordings">
+  Watch session replays
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Create playlists and AI summaries"
+  subtitle="Filter and search replays"
+  icon="IconVideoCamera"
+>
+
+  Session replays are fully enriched with PostHog events and properties, so you can query them like data.
+  
+  Filter by rage clicks, JavaScript errors, custom events, user properties, or feature flag variants. Save them as collections and share playlists with your team.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/light_playlist_annotated_d7f45dda32.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/h_800,c_limit,q_auto,f_auto/dark_playlist_annotated_cf1718f7c6.png"
+    alt="Session replay collection"
+    classes="rounded @md:max-w-[60%] !mx-auto"
+  />
+
+  **Can't watch every recording? PostHog AI can.**
+
+  You can ask PostHog AI to search session replays and create playlists. 
+  
+  Better yet, ask PostHog AI to watch and summarize session recordings for you. 
+
+  <ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/session_summaries_664cfbb85d.mp4"
+    alt="PostHog AI chat summarizing session recordings"
+    classes="rounded border border-primary"
+    autoPlay={true}
+    background={false}
+/>
+
+  Try these PostHog AI prompts:
+
+  - [`Summarize sessions where users dropped off at checkout`](https://app.posthog.com/#panel=max:Summarize%20the%20session%20replays%20where%20users%20dropped%20off%20at%20checkout)
+  - [`What patterns do you see in sessions with rage clicks?`](https://app.posthog.com/#panel=max:What%20patterns%20do%20you%20see%20in%20sessions%20with%20rage%20clicks%3F)
+  - [`What are users struggling with on the pricing page?`](https://app.posthog.com/#panel=max:What%20are%20users%20struggling%20with%20on%20the%20pricing%20page%3F)
+
+
+  <OSButton variant="primary" asLink to="/docs/session-replay/session-summaries-ai">
+    Build collections and AI summaries
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Ship fixes with MCP"
+  subtitle="Debug with AI agents"
+  icon="IconSparkles"
+>
+
+  Use Claude Code, Codex, Cursor, or any MCP-compatible agent with the PostHog [MCP server](/docs/model-context-protocol).
+
+  <ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/mcp_session_replay_1080_de1089e7aa.mp4"
+    alt="PostHog MCP server"
+    classes="rounded border border-primary"
+    autoPlay={true}
+    background={false}
+  />
+
+  With the PostHog MCP, your AI coding agent can query session replay and event data. Find sessions where a specific error occurred, pull the event timeline, and generate a fix in your codebase, all from your terminal or editor. 
+  
+  Bug report to PR, no context switching.
+
+  <OSButton variant="primary" asLink to="/docs/session-replay/search-replays-mcp">
+    Use the PostHog MCP
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Integrate your tech stack"
+  subtitle="Connect product data"
+  icon="IconLogomark"
+>
+
+  ###  <IconGraph className="text-blue w-7 -mt-1 inline-block"/> Product Analytics
+  
+  Click any data point in your funnels, retention charts, or user paths and land directly in a playlist of session replays for the users behind that number. No ID matching between tools, no export, same data layer powering both.
+
+  <ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/session_replay_funnel_1080_ff50e3d9c8.mp4"
+    alt="Session replay funnel"
+    classes="rounded border border-primary"
+    autoPlay={true}
+    background={false}
+  />
+
+  ### <IconToggle className="text-seagreen w-7 -mt-1 inline-block"/> Feature Flags
+  
+  Filter recordings by which feature flag variant a user had. See exactly how users interacted with version A vs. version B. Roll out features or fixes without a full deploy.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/sessionre_play_ff_light_b1a61f74a7.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/session_replay_ff_dark_b72ccea7ba.png"
+    alt="Session replay activity panel"
+    classes="rounded"
+    padding={false}
+  />
+
+  ### <IconWarning className="text-orange w-7 -mt-1 inline-block"/> Error Tracking
+  
+  When an exception fires, jump to the session replay to see exactly what the user was doing before and after the error. No reproduction needed.
+  
+  <ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/Error_tracking_sessions_0b0a535be8.mp4" 
+    alt="Use session replay to investigate errors" 
+    autoPlay={true}
+    loop={true}
+  />
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Use for free"
+  subtitle="Free 5k web + 2.5k mobile recordings/month"
+  icon="IconPiggyBank"
+  idleGlow={true}
+>
+
+PostHog's Session Replay is built to be cost-effective by default, with a generous free tier and transparent usage-based pricing. Since we don't charge per seat, more than 90% of companies use PostHog for free.
+
+## TL;DR 💸
+
+- No credit card required to start
+- First 5K web recordings and 2.5k mobile recordings per month are free
+- Above that we have usage-based pricing starting at $0.005/recording with discounts 
+- Set billing limits to avoid surprise charges
+- See our [pricing page](/docs/session-replay/pricing) for more up-to-date details
+
+--- 
+
+That's it! You're ready to start integrating.
+
+<div className="flex flex-wrap gap-2">
+  <AuthAwareOSButton variant="primary" authenticatedTo="/docs/session-replay/installation" to="https://app.posthog.com/signup">
+    Get started free
+  </AuthAwareOSButton>
+
+  <OSButton variant="secondary" asLink to="/talk-to-a-human" state={{ newWindow: true }}>
+    Talk to a human
+  </OSButton>
+</div>
+
+</QuestLogItem>
+
+</QuestLog>

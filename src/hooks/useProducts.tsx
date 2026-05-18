@@ -20,6 +20,7 @@ import { workflows } from './productData/workflows'
 import { revenueAnalytics } from './productData/revenue_analytics'
 import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
+import { endpoints } from './productData/endpoints'
 
 const initialProducts = [
     productAnalytics,
@@ -37,6 +38,7 @@ const initialProducts = [
     revenueAnalytics,
     logs,
     workflows,
+    endpoints,
 ]
 
 export default function useProducts() {

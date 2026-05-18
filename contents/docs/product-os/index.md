@@ -38,3 +38,5 @@ Product OS comprises things like:
 - [Our infrastructure](/docs/how-posthog-works), which is built upon [ClickHouse](/handbook/engineering/clickhouse), an ultra-fast open-source database system built specifically for real-time data analysis
 
 - The [toolbar](/docs/toolbar), which lets you easily toggle feature flags, access [heatmaps](/docs/toolbar/heatmaps), inspect elements, create [actions](/docs/data/actions), and see where users click
+
+<WizardCTA />

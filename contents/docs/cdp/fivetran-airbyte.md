@@ -36,7 +36,7 @@ PostHog batch exports support all major data warehouses:
 
 For use cases requiring real-time data, consider:
 
-- [Real-time destinations](/docs/cdp/real-time) for streaming data to external systems
+- [Real-time destinations](/docs/cdp/destinations) for streaming data to external systems
 - [Webhooks](/docs/webhooks) for event-driven integrations
 
 ## Migration from ETL tools

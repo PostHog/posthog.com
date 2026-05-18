@@ -55,14 +55,14 @@ Start by installing the `posthog-js` library to get access to the [JavaScript We
 npm install posthog-js
 ```
 
-Then, add your PostHog API key and host to your `nuxt.config.ts` file. You can find your project API key in your [PostHog project settings](https://app.posthog.com/settings/project)
+Then, add your PostHog API key and host to your `nuxt.config.ts` file. You can find your project token in your [PostHog project settings](https://app.posthog.com/settings/project)
 
 ```ts file=nuxt.config.ts
 export default defineNuxtConfig({
  devtools: { enabled: true },
   runtimeConfig: {
     public: {
-      posthogPublicKey: '<ph_project_api_key>',
+      posthogToken: '<ph_project_token>',
       posthogHost: '<ph_client_api_host>',
       posthogDefaults: '<ph_posthog_js_defaults>',
     }
@@ -86,7 +86,7 @@ import posthog from 'posthog-js'
 
 export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
-  const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
+  const posthogClient = posthog.init(runtimeConfig.public.posthogToken, {
     api_host: runtimeConfig.public.posthogHost,
     defaults: runtimeConfig.public.posthogDefaults,
   })
@@ -185,7 +185,7 @@ import { PostHog } from 'posthog-node';
 const { data: titleData, error } = await useAsyncData('titleData', async () => {
   const runtimeConfig = useRuntimeConfig();
   const posthog = new PostHog(
-    runtimeConfig.public.posthogPublicKey,
+    runtimeConfig.public.posthogToken,
     { host: runtimeConfig.public.posthogHost }
   );
 
@@ -222,12 +222,12 @@ import { PostHog } from 'posthog-node';
 const { data: titleData, error } = await useAsyncData('titleData', async () => {
   const runtimeConfig = useRuntimeConfig();
   const posthog = new PostHog(
-    runtimeConfig.public.posthogPublicKey,
+    runtimeConfig.public.posthogToken,
     { host: runtimeConfig.public.posthogHost }
   );
   let returnedValue = 'No cookie';
 
-  const cookies = useCookie(`ph_${runtimeConfig.public.posthogPublicKey}_posthog`);
+  const cookies = useCookie(`ph_${runtimeConfig.public.posthogToken}_posthog`);
   if (cookies && cookies.value) {
     const distinctId = cookies.value.distinct_id;
     const isFlagEnabled = await posthog.isFeatureEnabled('my-cool-flag', distinctId);

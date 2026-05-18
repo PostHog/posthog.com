@@ -8,10 +8,11 @@ Error tracking gives you multiple ways to help you manage issues and work toward
 
 You can update the status of an issue from the issue page under **Status** or issue list. 
 
-All issues are marked **Active** by default, you can mark them as **Resolved** or **Suppressed** to reflect the current state of the issue. These labels are mainly used to communicate amongst your team. 
+All issues are marked **Active** by default. You can update the status to reflect the current state of the issue:
 
-- Resolve issues that are fixed, if they reoccur, the issue is reopened.
-- Suppress issues that you choose not to action. Typically, this is used for issues that are deemed noisy or not helpful.
+- **Active** - The default status for new issues. Use this for issues that need attention.
+- **Resolved** - Mark issues that are fixed. If the issue reoccurs, it's automatically reopened.
+- **Suppressed** - Mark issues you choose not to action. Typically used for noisy or unhelpful issues. Note that suppressing an issue will drop any associated exceptions.
 
 You can also filter issues by status in the issue list:
 
@@ -65,6 +66,17 @@ You can view a session replay for an exception by:
 
 Error tracking issues can also be discovered from the [Logs](https://app.posthog.com/logs) viewer. When [logs are linked to sessions](/docs/logs/link-session-replay), related errors can be viewed in the **Related errors** tab of any log entry. This is useful for investigating backend issues where both logs and errors were captured during the same session.
 
+
+## Bulk actions
+
+Select multiple issues using the checkboxes in the issue list to perform bulk actions. A bulk action bar appears at the top of the list with the following options:
+
+- **Open all** - Opens each selected issue in a new tab
+- **Merge** - Merges two or more selected issues into one
+- **Mark as** - Change the status of all selected issues to active, resolved, or suppressed
+- **Assign** - Assign all selected issues to a teammate
+- **Unassign** - Remove assignees from all selected issues (only appears when at least one selected issue has an assignee)
+- **Hide from search** - Exclude selected issues from the current view
 
 ## Assign issues to teammates
 

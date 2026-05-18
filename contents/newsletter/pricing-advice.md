@@ -47,7 +47,7 @@ This model appeals to companies who ship faster and want flexibility. They need 
 
 In short, **how much** you charge often doesn’t matter as much as **how** you charge. While they’re superficially similar products, how these two products charge leads to a totally different experience, and different sales motions, too.
 
-> **Remember this:** How you price your product should flow from your [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP). Our ICP is high-growth startups that are led by [product engineers](/blog/what-is-a-product-engineer), which is why we’ve chosen a self-serve model and usage-based pricing. It gives product engineers control and they can use as many flags as they please.
+> **Remember this:** How you price your product should flow from your [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP). Our ICP is high-growth startups that are led by [product engineers](/product-engineer/what-is-a-product-engineer), which is why we’ve chosen a self-serve model and usage-based pricing. It gives product engineers control and they can use as many flags as they please.
 
 <NewsletterForm />
 

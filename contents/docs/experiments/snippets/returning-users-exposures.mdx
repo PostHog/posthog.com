@@ -1,0 +1,14 @@
+The `$feature_flag_called` event is deduplicated by the SDK to avoid sending redundant data. In the **web SDK**, this deduplication is per identity by default. Once emitted for a given flag and value, the event is cached across sessions and won't fire again unless `identify` or `reset` is called. If a user checked the feature flag **before** your experiment launched, the event was already cached and won't be re-emitted when the experiment starts. As a result, returning users may not appear as exposed.
+
+> **Note:** Mobile SDKs (iOS, Android, React Native, Flutter) deduplicate per session by default, so this issue does not apply to them.
+
+To fix this in the web SDK, enable `advanced_feature_flags_dedup_per_session` in your [PostHog config](/docs/libraries/js/config#advanced-configuration):
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    advanced_feature_flags_dedup_per_session: true,
+})
+```
+
+When enabled, the deduplication cache resets with each new session, so `$feature_flag_called` is re-emitted for every flag checked in that session. This is especially useful when you launch an experiment on a feature flag that was already being evaluated.

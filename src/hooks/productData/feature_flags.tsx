@@ -2,6 +2,7 @@ import React from 'react'
 import { IconToggle } from '@posthog/icons'
 import CodeBlock from 'components/Home/CodeBlock'
 import Link from 'components/Link'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const featureFlags = {
     Icon: IconToggle,
@@ -13,6 +14,7 @@ export const featureFlags = {
     color: 'seagreen',
     colorSecondary: 'seagreen',
     category: 'product_engineering',
+    wizardSupport: 'In development',
     seo: {
         title: 'Feature Flags – Ship safely and control rollouts with PostHog',
         description:
@@ -216,7 +218,7 @@ export const featureFlags = {
                         instantly.
                     </p>
                     <CodeBlock
-                        code={`posthog.init('<ph_project_api_key>', {
+                        code={`posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   bootstrap: {
@@ -343,6 +345,33 @@ export const featureFlags = {
                         'Test flags in local development or staging by using the same flag key across PostHog projects',
                 },
             ],
+        },
+        {
+            title: 'MCP',
+            headline: 'Manage flags from your editor',
+            description:
+                'Create flags, configure targeting rules, and check rollout status from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            features: [
+                {
+                    title: 'Create flags while building features',
+                    description:
+                        'Create a new feature flag with rollout percentage, targeting rules, and optional multivariate variants.',
+                },
+                {
+                    title: 'Check flags before deploying',
+                    description: 'Get the full definition of flags, including filters, groups, and payloads.',
+                },
+                {
+                    title: 'Clean up stale flags',
+                    description:
+                        'List all active/inactive feature flags in the current project and find dead code to remove.',
+                },
+                {
+                    title: 'Update rollout rules',
+                    description: "Update a flag's rollout percentage, targeting rules, or variants.",
+                },
+            ],
+            children: <MCPInstall />,
         },
     ],
     postHogOnPostHog: {
@@ -506,5 +535,21 @@ export const featureFlags = {
             "Release a feature to 10% of users. Filter all analytics by that flag. Notice conversion dropped? Watch session replays of just those users. See the problem, fix it, roll out wider. This workflow only works when everything's actually integrated.",
         'getting-started':
             'One line to install. Create flag in UI. Add to code. Done. Later: add bootstrapping for instant flags, local evaluation for speed, multivariate for tests. Start simple, grow as needed.',
+        ai: 'The PostHog MCP server lets your AI coding agent create and manage Feature Flags directly from your code editor. Create flags, configure targeting rules, and check rollout status – without switching to the PostHog app.',
+    },
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/FEATURE_FLAGS_hog_95e008723c.png',
+        imageAlt: 'PostHog AI and feature flags',
+        description: 'set up, monitor, and manage feature flags using natural language',
+        skills: [
+            'Configures and modifies flags with simple prompts – including rollout rules, targeting, and variants',
+            'Identifies stale flags to remove from your codebase',
+            'Summarizes rollout rules and targeting in plain english',
+        ],
+        prompts: [
+            'Create a new multivariate feature flag for dark mode',
+            'Show me which flags are currently active in production',
+            'Explain how this flag is configured and who receives each variant',
+        ],
     },
 }

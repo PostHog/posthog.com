@@ -41,6 +41,7 @@ The default mode for creating insights and dashboards.
 **Mode-specific tools:**
 - `create_insight` - Create or edit insights
 - `create_dashboard` / `upsert_dashboard` - Create and manage dashboards
+- `upsert_alert` - Create and edit [alerts](/docs/alerts) on trend insights
 
 ### SQL
 
@@ -81,6 +82,50 @@ A mode for investigating errors and exceptions in your product.
 **Mode-specific tools:**
 - `search_error_tracking_issues` - Search and filter error tracking issues
 
+### LLM analytics
+
+A mode for searching and analyzing [LLM traces](/docs/llm-analytics/traces) to understand model usage, costs, latency, and errors.
+
+**Best for:**
+- Finding and filtering LLM traces by date range, model, or error status
+- Analyzing LLM usage costs and latency
+- Investigating specific traces in detail
+- Monitoring LLM error patterns
+
+**Mode-specific tools:**
+- `search_llm_traces` - Search for traces based on date range, model, error status, and other properties
+
+### Survey
+
+A mode for creating, editing, and analyzing surveys.
+
+**Best for:**
+- Creating NPS, feedback, and custom surveys
+- Targeting surveys by URL, user properties, or feature flags
+- Analyzing survey responses for themes and sentiment
+- Editing and managing existing surveys
+
+**Mode-specific tools:**
+- `create_survey` - Create new surveys with targeting rules
+- `edit_survey` - Modify, stop, or archive existing surveys
+- `analyze_survey_responses` - Extract themes, sentiment, and insights from responses
+
+### Feature flags
+
+A mode for creating and managing feature flags and experiments.
+
+**Best for:**
+- Creating feature flags with rollout percentages
+- Setting up property-based targeting rules
+- Creating A/B test experiments with multivariate flags
+- Analyzing experiment results
+
+**Mode-specific tools:**
+- `create_feature_flag` - Create feature flags with targeting and rollout settings
+- `create_experiment` - Set up A/B tests linked to feature flags
+- `experiment_results_summary` - Analyze experiment results with statistical summaries
+- `experiment_session_replays_summary` - Summarize session recordings across experiment variants
+
 ## Default tools (available in all modes)
 
 Regardless of which mode is active, the agent always has access to:
@@ -91,4 +136,5 @@ Regardless of which mode is active, the agent always has access to:
 | `read_data` | Read data warehouse schema, insights, dashboards, and billing info |
 | `list_data` | Browse PostHog entities with pagination |
 | `search` | Search insights, dashboards, cohorts, actions, experiments, feature flags, notebooks, and more |
+| `web_search` | Search the web for up-to-date information about your product, company, or industry |
 | `switch_mode` | Switch to a different specialized mode |

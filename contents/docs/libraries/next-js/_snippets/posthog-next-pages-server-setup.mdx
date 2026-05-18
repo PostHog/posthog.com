@@ -1,0 +1,47 @@
+Use `getServerSidePostHog` inside `getServerSideProps` to capture events and evaluate feature flags for the current user:
+
+```tsx file=pages/dashboard.tsx
+import type { GetServerSideProps } from 'next'
+import { getServerSidePostHog } from '@posthog/next/pages'
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const posthog = await getServerSidePostHog(ctx)
+
+    const flags = await posthog.getAllFlags()
+    posthog.capture({ event: 'dashboard_viewed' })
+
+    return { props: { showNewDashboard: flags['new-dashboard'] ?? false } }
+}
+```
+
+To bootstrap feature flags and eliminate flicker on page load, pass the flag data through `pageProps`:
+
+```tsx file=pages/dashboard.tsx
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const posthog = await getServerSidePostHog(ctx)
+    const bootstrap = await posthog.getAllFlagsAndPayloads()
+    return { props: { posthogBootstrap: bootstrap } }
+}
+```
+
+**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, you can pass a custom `waitUntil` via `serverOptions` on the `PostHogProvider`, or events will be batched and flushed normally.
+
+Then wire the bootstrap data into the provider:
+
+```tsx file=pages/_app.tsx
+import type { AppProps } from 'next/app'
+import { PostHogProvider, PostHogPageView } from '@posthog/next/pages'
+
+export default function App({ Component, pageProps }: AppProps) {
+    return (
+        <PostHogProvider
+            apiKey={process.env.NEXT_PUBLIC_POSTHOG_KEY!}
+            clientOptions={{ api_host: '/ingest' }}
+            bootstrap={pageProps.posthogBootstrap}
+        >
+            <PostHogPageView />
+            <Component {...pageProps} />
+        </PostHogProvider>
+    )
+}
+```

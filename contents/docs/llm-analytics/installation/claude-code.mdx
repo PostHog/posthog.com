@@ -1,0 +1,165 @@
+---
+title: Claude Code LLM analytics installation
+platformIconName: IconClaudeCode
+showStepsToc: true
+tableOfContents: [
+    {
+        url: 'prerequisites',
+        value: 'Prerequisites',
+        depth: 1,
+    },
+    {
+        url: 'install-the-posthog-plugin',
+        value: 'Install the PostHog plugin',
+        depth: 1,
+    },
+    {
+        url: 'configure-posthog',
+        value: 'Configure PostHog',
+        depth: 1,
+    },
+    {
+        url: 'run-a-session',
+        value: 'Run a session',
+        depth: 1,
+    },
+    {
+        url: 'verify-traces-and-generations',
+        value: 'Verify traces and generations',
+        depth: 1,
+    },
+    {
+        url: 'configuration-options',
+        value: 'Configuration options',
+        depth: 1,
+    },
+]
+---
+
+[Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) is Anthropic's agentic coding tool that lives in your terminal. The [PostHog plugin](https://github.com/PostHog/ai-plugin) automatically captures every Claude Code session as structured LLM analytics events — generations, tool executions, and traces — so you can track costs, debug conversations, and understand how your team uses Claude Code.
+
+This is useful for:
+
+- **Transparency and auditability** — see exactly what Claude did in each session, including every tool call and LLM invocation.
+- **Cost tracking** — monitor token usage and costs across your team.
+- **Team sharing** — give your whole team visibility into coding sessions without sharing terminal access.
+- **Debugging** — trace through multi-step agent runs to understand what went wrong (or right).
+
+## Prerequisites
+
+You need:
+
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) installed
+- A [PostHog account](https://us.posthog.com/signup) with a project API key
+
+## Install the PostHog plugin
+
+Install the PostHog plugin for Claude Code:
+
+```bash
+claude plugin install posthog
+```
+
+This adds a `SessionEnd` hook that automatically parses your session logs and sends events to PostHog when each session finishes.
+
+## Configure PostHog
+
+Set environment variables with your PostHog project API key and enable the integration. You can find your API key in your [PostHog project settings](https://us.posthog.com/settings/project).
+
+```bash
+export POSTHOG_API_KEY="<ph_project_api_key>"
+export POSTHOG_LLMA_CC_ENABLED="true"
+```
+
+> **Tip:** Add these to your shell profile (e.g., `~/.zshrc` or `~/.bashrc`) so they persist across sessions.
+
+Alternatively, you can configure these in your Claude Code settings file (`~/.claude/settings.json` or `.claude/settings.local.json`):
+
+```json
+{
+  "env": {
+    "POSTHOG_API_KEY": "<ph_project_api_key>",
+    "POSTHOG_LLMA_CC_ENABLED": "true"
+  }
+}
+```
+
+If you're on PostHog EU, set the host as well:
+
+```bash
+export POSTHOG_HOST="https://eu.i.posthog.com"
+```
+
+## Run a session
+
+Start Claude Code as normal and use it for a task:
+
+```bash
+claude
+```
+
+When the session ends, the plugin automatically parses the session log file and sends events to PostHog. No changes to your workflow are needed.
+
+## Verify traces and generations
+
+After completing a session:
+
+1. Go to the [LLM analytics](https://us.posthog.com/llm-analytics) tab in PostHog.
+2. You should see traces and generations appearing within a few minutes.
+
+You can also check the status of the last send from within Claude Code:
+
+```
+/posthog:llma-cc-status
+```
+
+## Configuration options
+
+All configuration is done via environment variables:
+
+| Variable | Default | Description |
+|---|---|---|
+| `POSTHOG_API_KEY` | _(required)_ | Your PostHog project API key |
+| `POSTHOG_LLMA_CC_ENABLED` | `false` | Set to `true` to enable the integration |
+| `POSTHOG_HOST` | `https://us.i.posthog.com` | PostHog ingestion host |
+| `POSTHOG_LLMA_PRIVACY_MODE` | `false` | When `true`, LLM input/output content is not sent to PostHog. Token counts, costs, latency, and model metadata are still captured. |
+| `POSTHOG_LLMA_DISTINCT_ID` | git user email | Distinct ID for events. Falls back to `claude-code:{session_id}` if no git email is found. |
+| `POSTHOG_LLMA_TRACE_GROUPING` | `session` | `session`: one trace per Claude Code session. `message`: one trace per user prompt. |
+| `POSTHOG_LLMA_MAX_ATTRIBUTE_LENGTH` | `12000` | Max character length for serialized tool input/output attributes |
+
+### Trace grouping modes
+
+- **`session` (default):** All generations and tool executions within a single Claude Code session are grouped into one trace. Best for understanding full coding sessions end to end.
+- **`message`:** Each user prompt creates a separate trace. Multiple LLM turns within one prompt (e.g., tool-use loops) are grouped under the same trace. Useful when you want finer-grained analysis of individual interactions.
+
+### Privacy mode
+
+When `POSTHOG_LLMA_PRIVACY_MODE=true`, all LLM input/output content, user prompts, tool inputs, and tool outputs are redacted. Token counts, costs, latency, and model metadata are still captured — so you get full cost and performance analytics without exposing sensitive code or conversations.
+
+### Ingesting past sessions
+
+If you want to send data from previous Claude Code sessions that happened before you installed the plugin, use the ingestion command:
+
+```
+/posthog:llma-cc-ingest
+```
+
+### What gets captured
+
+The plugin captures three types of events:
+
+- **`$ai_generation`** — Every LLM call, including model, provider, token usage (input, output, cache read, cache creation), stop reason, and input/output messages (in [OpenAI chat format](/docs/llm-analytics/generations)).
+- **`$ai_span`** — Each tool execution (Bash, Read, Write, Edit, Grep, Glob, MCP tools, etc.), including tool name, input parameters, output result, duration, and error info ([learn more](/docs/llm-analytics/spans)).
+- **`$ai_trace`** — Completed sessions (or prompts, depending on grouping mode) with aggregated token totals and latency ([learn more](/docs/llm-analytics/traces)).
+
+## Next steps
+
+Now that you're capturing Claude Code sessions, continue with the resources below to learn what else LLM analytics enables within the PostHog platform.
+
+| Resource | Description |
+|----------|-------------|
+| [Basics](/docs/llm-analytics/basics) | Learn the basics of how LLM calls become events in PostHog. |
+| [Generations](/docs/llm-analytics/generations) | Read about the `$ai_generation` event and its properties. |
+| [Traces](/docs/llm-analytics/traces) | Explore the trace hierarchy and how to use it to debug LLM calls. |
+| [Spans](/docs/llm-analytics/spans) | Review spans and their role in representing individual operations. |
+| [Analyze LLM performance](/docs/llm-analytics/dashboard) | Learn how to create dashboards to analyze LLM performance. |

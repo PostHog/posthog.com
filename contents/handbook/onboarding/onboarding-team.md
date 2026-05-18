@@ -24,7 +24,7 @@ We also care about net dollar retention for this segment, but we treat it as an 
 
 ### Which customers get onboarding?
 
-The segment consists of customers who self-serve PostHog and generate a forecasted bill of over $100. In practice, because billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $100 forecast), so _most_ accounts > $100 forecast are routed to us. We also handle a couple of other segments:
+The segment consists of customers who self-serve PostHog and generate a forecasted bill of over $500. In practice, because billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $100 forecast), so _most_ accounts > $500 forecast are routed to us. We also handle a couple of other segments:
 
 -   YC program participants at the roll-off of the plan.
 -   Startup customers rolling off, who have generated a first bill in the $500-$1500 range.
@@ -67,30 +67,6 @@ The team-specific tools for this team are:
 - [Onboarding Google Drive](https://drive.google.com/drive/u/0/folders/0ADuSyIJNgdr-Uk9PVA) with all relevant documents.
 - [Alfred workflows](https://github.com/PostHog/company-internal/tree/master/onboarding-team).
 
-### Internal process (Vitally)
-
-**Daily view** (<PrivateLink url="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/d08c5202-bdcd-40b8-aba7-5746c340a35b">link</PrivateLink>)
-
-Sort your view by the “Next Renewal Date” column to reach out to users in a timely manner. Also, keep an eye on “Onboarding Pipeline”. Since our role is focused on proactively providing users with value and setting them up for success, we’ve found it’s best to contact them ~14 days before their bill renews. This gives them enough time to see our email, schedule a call, and implement potential improvements in their setup.
-
-You can add other useful columns to the view, like “Users Count,” “Next Due Task,” “Notes Count,” or who’s assigned to the account.
-
-Maintaining good hygiene and attention to detail is key here. Keep labels up to date and make sure not to miss accounts that were recently added to the segment—they might appear at the top of the list among accounts you’ve already worked through.
-
-Remember to add a short summary from meetings in a Note, and if you need to follow up at some point, create a Task with a due date.
-
-**Kanban view** (<PrivateLink url="https://posthog.vitally-eu.io/hubs/08486fc6-0250-4c4c-abd8-3c5a168fd874/15496ad6-4a4b-4c53-a9ea-b36100c301cb">link</PrivateLink>)
-
-A supplementary view that’s great for getting a general overview of progress.
-
-### Account analysis
-
--   Take a look at the [Metabase primer](https://posthog.com/handbook/onboarding/metabase-account-analysis) and follow the tips included there.
--   Check and get familiar with the [Account health check](https://posthog.com/handbook/cs-and-onboarding/health-tracking) page.
--   Use our docs, and link to relevant information.
--   Check the [Matching PostHog to a business type](https://posthog.com/handbook/growth/sales/utilization-by-business-type) page to understand your customers better in general.
--   Use Wappalyzer (browser or extension) to understand the customer's tech stack better. Credentials available in 1password.
-
 ## How to succeed
 
 ### How to deal with complex technical issues
@@ -112,5 +88,5 @@ Our role is pretty hybrid and lives at the intersection of other teams. As much 
 -   Check recordings in the [Technical product troubleshooting](https://app.buildbetter.app/folders/14593) and [Sales & CS Trainings](https://app.buildbetter.app/folders/18024) BuildBetter folders.
 -   Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh) and [Analytics Exercise](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding-exercise).
 -   Go through the [PostHog curriculum](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum).
--   Check out [Troubleshooting tips](https://posthog.com/handbook/support/troubleshooting-tips) and attend Product Intros that are scheduled periodically.
+-   Check out [Troubleshooting tips](https://posthog.com/handbook/support/troubleshooting-tips) and attend/watch [Product AMAs](https://drive.google.com/drive/u/0/folders/0ANaJ7VgQLiw-Uk9PVA) that are scheduled periodically.
 -   Take [CoachHog](https://coachhog.lovable.app/) for a spin!

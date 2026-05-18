@@ -1,11 +1,12 @@
 ---
 title: 'The best Hotjar alternatives & competitors, compared'
-date: 2025-08-07
+date: 2026-02-24
 author:
     - andy-vandervell
+    - natalia-amorim
 rootpage: /blog
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/clarity-alternatives/clarity-alternatives.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-hotjar/posthog-vs-hotjar.jpg
 featuredImageType: full
 category: General
 tags:
@@ -13,6 +14,12 @@ tags:
 ---
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
+
+For years, [Hotjar](/blog/posthog-vs-hotjar) was synonymous with session replay. It was the tool that made watching real users interact with your site accessible to everyone – engineers, designers, marketers, and founders alike.
+
+But the landscape has changed; session replay is no longer a standalone category – it's become a core feature of broader analytics and developer platforms. Tools like **PostHog**, **Pendo**, and **Sprig** now bundle replays alongside product analytics, feature flags, A/B testing, and more.
+
+Whether you're here because you've outgrown what Hotjar offers or because you want session replay as part of a more complete toolkit, here are the best alternatives.
 
 ## 1. PostHog
 
@@ -30,24 +37,28 @@ import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an all-in-one platform for session replay, heatmaps, product and web analytics, feature flags, A/B testing, error tracking, and user surveys — everything you need to understand your users. This means it's not just an [alternative to Hotjar](/blog/posthog-vs-hotjar), but also tools like [Mixpanel](/blog/best-mixpanel-alternatives), [Sentry](/blog/best-sentry-alternatives), and [LaunchDarkly](/blog/best-launchdarkly-alternatives).
+[PostHog](/) (that's us 👋) is an all-in-one platform for [session replay](/session-replay), [heatmaps](/heatmaps), [user surveys](/surveys), [product](/product-analytics) and [web analytics](/web-analytics), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), and more – everything you need to understand your users. 
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of August 2025, PostHog is used on 4,882 (0.49%) of the top 1 million websites. Hotjar is used by [74,141 of the top 1 million websites](https://trends.builtwith.com/analytics/Hotjar). Typical PostHog users are engineers and product managers at startups, scaleups, and mid-size companies, such as [ElevenLabs](/customers/elevenlabs), Raycast, and Airbus (a bit bigger than a mid-size company but 🤷‍♂️).
+This means it's not just an [alternative to Hotjar](/blog/posthog-vs-hotjar), but also tools like [Mixpanel](/blog/best-mixpanel-alternatives), [Sentry](/blog/best-sentry-alternatives), and [LaunchDarkly](/blog/best-launchdarkly-alternatives).
+
+Typical PostHog users are engineers and product managers at startups, scaleups, and mid-size companies, such as [ElevenLabs](/customers/elevenlabs), [Supabase](/customers/supabase), and [Lovable](/customers/lovable).
 
 #### Key features
 
--   🎥 **Session replays:** Including event timelines, console logs, DOM explorer, network activity. Combine with error tracking to debug issues faster.
--   🔥 **Heatmaps:** Visualize user and rage clicks anywhere on your site, along with scroll depth and clickmaps.
--   📊 **Product analytics:** Analyze funnels, user paths, retention, and trends. Write your own custom queries with SQL.
--   ⛳ **Feature flags & A/B testing:** Rollout features safely, run multivariate A/B tests.
--   📝 **Surveys:** Run custom, targeted, multi-step surveys or use our pre-built customer satisfaction, NPS, and PMF ones.
+- **Session replays:** Including event timelines, console logs, DOM explorer, network activity. Combine with error tracking to debug issues faster.
+- **Heatmaps:** Visualize user and rage clicks anywhere on your site, along with scroll depth and clickmaps.
+- **Product analytics:** Analyze funnels, user paths, retention, and trends. Write your own custom queries with SQL.
+- **Feature flags & A/B testing:** Rollout features safely, run multivariate A/B tests.
+- **Surveys:** Run custom, targeted, multi-step surveys or use our pre-built customer satisfaction, NPS, and PMF ones.
+- **Error tracking:** Monitor exceptions, connect errors to session replays and feature flag changes.
 
 ### How does PostHog compare to Hotjar?
 
-Hotjar is great for web session replays and surveys, but users often rely on other tools for analytics and more. For example, according to BuiltWith, 27% of sites using Hotjar also use an analytics tool like Fullstory (21% of sites use Mixpanel). PostHog can replace them all and has a [generous free tier](/pricing) of 5,000 sessions and 1 million analytics events per month.
+Hotjar (now part of [Contentsquare](/blog/best-contentsquare-alternatives)) is great for web session replays, heatmaps, and surveys, but users often rely on other tools for analytics and more. PostHog can replace them all and has a [generous free tier](/pricing) of 5,000 sessions and 1 million analytics events per month.
 
-On top of this, PostHog provides session replays and surveys for iOS, Android (surveys soon), React Native, and Flutter for mobile apps, making it a great option if you need a [Hotjar-style tool for mobile apps](/blog/hotjar-for-mobile-ios-android-react-native-flutter).
+PostHog also provides session replays and surveys for mobile apps – with native SDKs for iOS, Android, React Native, and Flutter – making it a great option if you need a [Hotjar-style tool for mobile apps](/blog/hotjar-for-mobile-ios-android-react-native-flutter). Contentsquare's mobile replay, by comparison, is limited to Enterprise plans.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
     rows={[
@@ -74,6 +85,29 @@ On top of this, PostHog provides session replays and surveys for iOS, Android (s
         'error_tracking',
     ]}
 />
+</p>
+
+<details>
+<summary>Main differences between PostHog and Hotjar</summary>
+
+- PostHog includes product analytics with funnels, retention, user paths, and SQL access; Hotjar doesn't offer product analytics natively, but it's available on the full Contentsquare platform as a separate product (Heap).
+- PostHog includes error tracking tied to session replays; Hotjar has basic error detection but no full error tracking.
+- PostHog offers mobile session replays and surveys on all plans; Contentsquare's mobile replay is limited to Enterprise plans.
+- Hotjar includes user interviews and usability tests; PostHog does not.
+
+</details>
+
+<details>
+<summary>Main similarities between PostHog and Hotjar</summary>
+
+- Both offer session replay for watching real user sessions on the web.
+- Both include heatmaps for visualizing clicks and scroll depth.
+- Both offer surveys for collecting in-app feedback, NPS, and CSAT scores.
+- Both have free tiers that don't require a credit card to get started.
+- Both support rage click detection to identify user frustration.
+- Both are GDPR and SOC 2 compliant.
+
+</details>
 
 ### Why do companies use PostHog?
 
@@ -89,7 +123,9 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 >
 > PostHog is a broader, more powerful tool than Hotjar. This means more tools and mobile support, but this comes with some extra complexity. The payoff is all your user data in one place and tightly integrated with powerful analytical tools.
 >
-> It also has a [generous free tier](/pricing) for each of its products including 5,000 replays, 1 million events, and 1500 survey responses per month.
+> It also has a [generous free tier](/pricing) for each of its products including 5,000 replays, 1 million events, and 1,500 survey responses per month.
+
+<WizardCTA />
 
 ## 2. Mouseflow
 
@@ -108,16 +144,17 @@ According to data from BuiltWith, 5,897 of the top 1 million websites use Mousef
 
 #### Key features
 
--   🎥 **Session replay:** Watch user sessions to learn what helps and hurts.
--   🛞 **Friction scores:** Identify sessions where users experience frustration.
--   🔥 **Heatmaps:** See where users click and scroll on your website.
--   🗣️ **User feedback:** Gather feedback and ratings from users.
--   📝 **Form analytics:** Reduce abandonment on signup forms.
+- **Session replay:** Watch user sessions to learn what helps and hurts.
+- **Friction scores:** Identify sessions where users experience frustration.
+- **Heatmaps:** See where users click and scroll on your website.
+- **User feedback:** Gather feedback and ratings from users.
+- **Form analytics:** Reduce abandonment on signup forms.
 
 ### How does Mouseflow compare to Hotjar?
 
 Mouseflow is more or less a like-for-like replacement for Hotjar. If you're unhappy with Hotjar but don't want a more advanced product like PostHog, Mouseflow is an obvious alternative.
 
+<p>
 <ProductComparisonTable
     competitors={['mouseflow', 'hotjar']}
     rows={[
@@ -144,6 +181,28 @@ Mouseflow is more or less a like-for-like replacement for Hotjar. If you're unha
         'error_tracking',
     ]}
 />
+</p>
+
+<details>
+<summary>Main differences between Mouseflow and Hotjar</summary>
+
+- Mouseflow includes built-in form analytics for tracking field-level abandonment; Hotjar does not have dedicated form analytics.
+- Mouseflow offers friction scores to automatically surface frustrating sessions; Hotjar relies on rage click detection.
+- Hotjar includes user interviews and usability testing; Mouseflow does not.
+- Mouseflow supports six types of heatmaps (click, move, scroll, attention, geo, live); Hotjar offers click, move, and scroll maps.
+
+</details>
+
+<details>
+<summary>Main similarities between Mouseflow and Hotjar</summary>
+
+- Both offer session replay for watching real user sessions on the web.
+- Both include heatmaps for visualizing clicks and scroll depth.
+- Both offer surveys and feedback widgets for collecting user opinions.
+- Both are designed for non-technical marketing and UX teams.
+- Both offer free tiers with limited session counts.
+
+</details>
 
 ### Why do companies use Mouseflow?
 
@@ -174,21 +233,22 @@ Based on reviews from G2, customers use Mouseflow because:
 
 [Sprig](/blog/best-sprig-alternatives) is a user insights tool that combines surveys, session replays, and heatmaps with AI analysis. Sprig works slightly differently than other tools as it links surveys and session replays together in what it calls studies, normally triggered by specific user events. It doesn't do funnel analysis or other basic analytics, focusing solely on in-product user research.
 
-According to [data from BuiltWith](https://trends.builtwith.com/analytics/Sprig) (August 2025), Sprig is used on 538 of the top 1 million websites, though this figure likely doesn't include apps that aren't accessible via the open web. It's used by large, B2C companies such as PayPal, Coinbase, and Robinhood.
+It's used by large, B2C companies such as PayPal, Coinbase, and Robinhood.
 
 #### Key features
 
--   📝 **Surveys:** Run targeted surveys right in your product and capture real-time insights.
--   🎥 **Session replay:** Capture targeted user journey clips to see what's working.
--   🔥 **Heatmaps:** Get a visual representation of your users' in-product interactions.
--   🤖 **AI analysis:** Surface product issues and opportunities in real time.
+- **Surveys:** Run targeted surveys right in your product and capture real-time insights.
+- **Session replay:** Capture targeted user journey clips to see what's working.
+- **Heatmaps:** Get a visual representation of your users' in-product interactions.
+- **AI analysis:** Surface product issues and opportunities in real time.
 
 ### How does Sprig compare to Hotjar?
 
 Sprig is a decent replacement for Hotjar, especially if you find Hotjar's survey tools lacking. Its support for mobile apps (minus Flutter) is a key differentiator.
 
-Unfortunately, Sprig's pricing is opaque and it's unclear what's available for free or how much their paid tiers cost.
+Sprig now offers three bundles (Research Core, Digital Experience, Digital Behavior), each starting with a limited free plan. Exact pricing for paid tiers requires a demo.
 
+<p>
 <ProductComparisonTable
     competitors={['sprig', 'hotjar']}
     rows={[
@@ -211,6 +271,30 @@ Unfortunately, Sprig's pricing is opaque and it's unclear what's available for f
         'error_tracking',
     ]}
 />
+</p>
+
+<details>
+<summary>Main differences between Sprig and Hotjar</summary>
+
+- Sprig supports mobile app surveys and replays (iOS, Android, React Native); Hotjar/Contentsquare's mobile replay is Enterprise-only.
+- Sprig focuses on event-triggered research studies; Hotjar captures all sessions broadly.
+- Hotjar includes user interviews and usability testing; Sprig focuses on automated surveys and replay-based insights.
+- Hotjar has transparent pricing with a generous free tier; Sprig's paid pricing requires a demo.
+- Hotjar offers zone-based heatmaps with revenue attribution; Sprig has standard heatmaps.
+
+</details>
+
+<details>
+<summary>Main similarities between Sprig and Hotjar</summary>
+
+- Both offer session replay for watching real user sessions.
+- Both include heatmaps for visualizing user interactions on pages.
+- Both offer surveys for collecting in-app feedback and NPS scores.
+- Both provide free tiers to get started.
+- Both target product and UX teams looking for qualitative insights.
+- Both are closed-source, cloud-only platforms.
+
+</details>
 
 ### Why do companies use Sprig?
 
@@ -241,20 +325,21 @@ According to [reviews on G2](https://www.g2.com/products/sprig/reviews), custome
 
 Lucky Orange is a simple analytics tool designed to analyze user behavior on small e-commerce websites using session replays and heatmaps. It also offers built-in form analytics, live chat, surveys, and announcements widgets that are useful for store owners.
 
-Founded in 2010, Lucky Orange is used on 4,125 of the top 1 million websites [according to BuiltWith](https://trends.builtwith.com/analytics/Lucky-Orange), compared to Hotjar's 74,141. Lucky Orange customers are often small online stores or freelance conversion optimization consultants.
+Lucky Orange customers are often small online stores or freelance conversion optimization consultants.
 
 #### Key features
 
--   🎥 **Session replay:** Watch how real users navigate your website.
--   🔥 **Heatmaps:** See where users click and scroll to on pages.
--   🛝 **Conversion funnels:** Basic funnel analysis for tracking conversions.
--   📊 **Dashboards:** Create simple dashboards using pre-defined reports.
--   🤼 **Visitor profiles:** See everything a user has done.
+- **Session replay:** Watch how real users navigate your website.
+- **Heatmaps:** See where users click and scroll to on pages.
+- **Conversion funnels:** Basic funnel analysis for tracking conversions.
+- **Dashboards:** Create simple dashboards using pre-defined reports.
+- **Visitor profiles:** See everything a user has done.
 
 ### How does Lucky Orange compare to Hotjar?
 
 Lucky Orange is a natural alternative to Hotjar as it covers most of the same features, with some slightly better web analytics capacities.
 
+<p>
 <ProductComparisonTable
     competitors={['lucky_orange', 'hotjar']}
     rows={[
@@ -277,6 +362,29 @@ Lucky Orange is a natural alternative to Hotjar as it covers most of the same fe
         'error_tracking',
     ]}
 />
+</p>
+
+<details>
+<summary>Main differences between Lucky Orange and Hotjar</summary>
+
+- Lucky Orange includes a built-in live chat product for real-time customer support; Hotjar does not.
+- Lucky Orange includes form analytics to track field-level abandonment; Hotjar doesn't have dedicated form analytics.
+- Lucky Orange includes all features on every plan; Hotjar gates features behind higher tiers.
+- Hotjar includes user interviews and usability testing; Lucky Orange does not.
+- Hotjar has zone-based heatmaps with revenue attribution; Lucky Orange has standard dynamic heatmaps.
+
+</details>
+
+<details>
+<summary>Main similarities between Lucky Orange and Hotjar</summary>
+
+- Both offer session replay for watching real user sessions.
+- Both include heatmaps for visualizing clicks and scroll depth.
+- Both offer surveys and feedback widgets for collecting user opinions.
+- Both are web-only tools with no native mobile app support.
+- Both are designed for non-technical users and small teams.
+
+</details>
 
 > 💡 **Good to know:** Although Lucky Orange offers a simple dashboarding feature, it doesn't include campaign or session metrics.
 
@@ -307,17 +415,17 @@ According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.ht
 
 ### What is Crazy Egg?
 
-Crazy Egg is a heatmap and optimization platform tool for small business owners and marketers — it's popular among e-commerce businesses who run Shopify stores. It's best for its heatmaps, but it also includes basic replay, A/B testing, and website analytics tools.
+Crazy Egg is a heatmap and optimization platform tool for small business owners and marketers – it's popular among e-commerce businesses who run Shopify stores. It's best for its heatmaps, but it also includes basic replay, A/B testing, and website analytics tools.
 
 It's ideal for nontechnical users who want to optimize their websites and drive conversions.
 
 #### Key features
 
--   🔥 **Heatmaps:** See where people click and where they don't.
--   🎥 **Session replay:** Watch recordings of actual visitors using your website.
--   🧪 **A/B testing:** Simple, no-code A/B tests using multi-armed bandit method.
--   📝 **Surveys:** Collect qualitative feedback.
--   🚨 **Error tracking:** Find out if Errors are preventing your visitors from converting.
+- **Heatmaps:** See where people click and where they don't.
+- **Session replay:** Watch recordings of actual visitors using your website.
+- **A/B testing:** Simple, no-code A/B tests using multi-armed bandit method.
+- **Surveys:** Collect qualitative feedback.
+- **Error tracking:** Find out if errors are preventing your visitors from converting.
 
 ### How does Crazy Egg compare to Hotjar?
 
@@ -325,6 +433,7 @@ Crazy Egg is very similar to Hotjar. It includes many of the same features and i
 
 It does include some additional capacities beyond Hotjar's with web analytics, A/B testing, and error tracking.
 
+<p>
 <ProductComparisonTable
     competitors={['crazy_egg', 'hotjar']}
     rows={[
@@ -347,6 +456,31 @@ It does include some additional capacities beyond Hotjar's with web analytics, A
         'error_tracking',
     ]}
 />
+</p>
+
+<details>
+<summary>Main differences between Crazy Egg and Hotjar</summary>
+
+- Crazy Egg includes built-in A/B testing with a no-code editor; Hotjar/Contentsquare does not.
+- Crazy Egg includes JavaScript error tracking (on Plus plan and above); Hotjar has basic error detection but no dedicated error tracking.
+- Crazy Egg includes basic web analytics and traffic analysis; Hotjar doesn't offer web analytics natively.
+- Hotjar includes user interviews and usability testing; Crazy Egg does not.
+- Hotjar has a free tier; Crazy Egg only offers a 30-day free trial.
+- Crazy Egg requires page-specific setup for heatmaps; Hotjar tracks all pages automatically.
+
+</details>
+
+<details>
+<summary>Main similarities between Crazy Egg and Hotjar</summary>
+
+- Both offer session replay for watching real user sessions.
+- Both include heatmaps for visualizing clicks and scroll depth.
+- Both offer surveys for collecting qualitative feedback.
+- Both are web-only tools with no native mobile app support.
+- Both are designed for non-technical marketing and UX teams.
+- Both support Shopify, WordPress, and other popular CMS integrations.
+
+</details>
 
 ### Why do companies use Crazy Egg?
 
@@ -377,22 +511,21 @@ According to reviews on G2, people use Crazy Egg because:
 
 [Pendo](/blog/posthog-vs-pendo) describes itself as a product experience platform. In addition to session replay and user feedback tools, it offers product analytics, in-app guides, user feedback, and product validation tools. It's mainly used by product managers and customer success teams.
 
-According to [data from BuiltWith](https://trends.builtwith.com/analytics/Pendo), as of August 2025, 3,936 of the top million websites used Pendo, much less than Hotjar's 74,141.
-
 #### Key features
 
--   🎥 **Session replay:** Watch real users use your product.
--   🦮 **In-app guides:** Deliver personalized guidance to customers inside your app.
--   📝 **User feedback:** Capture and analyze customer feedback at scale.
--   📊 **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
--   🛣️ **Product validation and roadmaps:** Plan product improvements and roadmaps.
+- **Session replay:** Watch real users use your product.
+- **In-app guides:** Deliver personalized guidance to customers inside your app.
+- **User feedback:** Capture and analyze customer feedback at scale.
+- **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
+- **Product validation and roadmaps:** Plan product improvements and roadmaps.
 
 ### How does Pendo compare to Hotjar?
 
-Pendo doesn't offer all the features Hotjar does — it lacks heatmaps and scroll maps, for example. But it does offer more comprehensive product analytics features, making it more useful for app developers.
+Pendo doesn't offer all the features Hotjar does – it lacks heatmaps and scroll maps, for example. But it does offer more comprehensive product analytics features, making it more useful for app developers.
 
-It's also one of the few options on this list that offers mobile surveys, but mobile replays are still missing.
+It's also one of the few options on this list that offers both mobile surveys and mobile session replays (added in late 2025), though replays are a paid add-on.
 
+<p>
 <ProductComparisonTable
     competitors={['pendo', 'hotjar']}
     rows={[
@@ -415,6 +548,31 @@ It's also one of the few options on this list that offers mobile surveys, but mo
         'error_tracking',
     ]}
 />
+</p>
+
+<details>
+<summary>Main differences between Pendo and Hotjar</summary>
+
+- Pendo includes product analytics with funnels, retention, and cohort analysis; Hotjar doesn't offer product analytics natively (it's a Contentsquare add-on).
+- Pendo includes in-app guides, tooltips, and onboarding walkthroughs; Hotjar has no in-app adoption tooling.
+- Pendo includes roadmap planning and product validation tools (Pendo Listen); Hotjar does not.
+- Hotjar includes heatmaps and scroll maps; Pendo does not.
+- Hotjar includes user interviews and usability testing; Pendo does not.
+- Hotjar has transparent, self-serve pricing with a free tier; Pendo requires sales conversations.
+
+</details>
+
+<details>
+<summary>Main similarities between Pendo and Hotjar</summary>
+
+- Both offer session replay for watching real user sessions.
+- Both include surveys for collecting in-app feedback and NPS scores.
+- Both target non-technical users like product managers and designers.
+- Both are closed-source, cloud-only platforms.
+- Both support web and mobile apps.
+- Both are GDPR compliant.
+
+</details>
 
 ### Why do companies use Pendo?
 
@@ -443,23 +601,24 @@ According to G2 reviews, customers use Pendo for:
 
 ### What is Microsoft Clarity?
 
-[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) is a 100% free session replay tool that supports basic replay features and heatmaps. It also records rage clicks and dead clicks, and integrates with Google Analytics 4, so you can view your GA data in Clarity.
+[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) is a 100% free session replay tool that supports basic replay features and heatmaps. It also records rage clicks and dead clicks, and integrates with [Google Analytics 4](/blog/posthog-vs-ga4), so you can view your GA data in Clarity.
 
-Unsurprisingly, given it's free, Clarity is very popular. [BuiltWith estimates](https://trends.builtwith.com/analytics/Microsoft-Clarity) over 65,688 of the top 1 million websites use Clarity, making it one of the most popular alternatives, but still well below Hotjar's 74,141.
+Unsurprisingly, given it's free, Clarity is very popular.
 
 #### Key features
 
--   🎥 **Session replay:** Watch user sessions with built-in event timelines
--   🔥 **Heatmaps:** See where users click and how they navigate your website
--   📜 **Scrollmaps:** See how far users scroll and where they dwell
--   🤬 **Frustration signals:** Detect rage and dead clicks
+- **Session replay:** Watch user sessions with built-in event timelines
+- **Heatmaps:** See where users click and how they navigate your website
+- **Scrollmaps:** See how far users scroll and where they dwell
+- **Frustration signals:** Detect rage and dead clicks
 
 ### How does Clarity compare to Hotjar?
 
 Clarity provides a great session replay and heatmap tool to the exclusion of all other features. Some Hotjar users might miss the surveys capabilities though.
 
-It's also free, of course, though it only retains data for 30 days.
+It's also free, of course, though it only retains session replay data for 30 days.
 
+<p>
 <ProductComparisonTable
     competitors={['clarity', 'hotjar']}
     rows={[
@@ -486,6 +645,30 @@ It's also free, of course, though it only retains data for 30 days.
         'error_tracking',
     ]}
 />
+</p>
+
+<details>
+<summary>Main differences between Clarity and Hotjar</summary>
+
+- Clarity is 100% free with unlimited session recordings; Hotjar's free tier is limited and paid plans can be expensive.
+- Clarity integrates natively with Google Analytics 4 and Microsoft's Copilot AI; Hotjar does not.
+- Hotjar includes surveys, feedback widgets, user interviews, and usability testing; Clarity has none of these.
+- Hotjar/Contentsquare has a product analytics add-on (via [Heap](/blog/posthog-vs-heap)) and zone-based heatmaps; Clarity has basic heatmaps only.
+- Clarity only retains session replay data for 30 days; Hotjar retains data longer depending on plan.
+
+</details>
+
+<details>
+<summary>Main similarities between Clarity and Hotjar</summary>
+
+- Both offer session replay for watching real user sessions.
+- Both include heatmaps for visualizing clicks and scroll depth.
+- Both detect rage clicks and frustration signals.
+- Both are web-only tools with no native mobile app replay.
+- Both are designed for non-technical users.
+- Both are GDPR compliant.
+
+</details>
 
 ### Why do companies use Microsoft Clarity?
 
@@ -501,6 +684,34 @@ According to [reviews on G2](https://www.g2.com/products/microsoft-microsoft-cla
 >
 > Being free forever has made Clarity a very popular alternative to Hotjar. While it has some limitations, it covers most bases for small businesses provided you don't need surveys, feedback, or more advanced analytics features.
 
+## Which Hotjar alternative should you choose?
+
+Here's a quick guide based on what you're looking for:
+
+**For engineering-led teams wanting an all-in-one platform:**
+- **PostHog** – [Product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [heatmaps](/heatmaps), [feature flags](/docs/feature-flags), [A/B testing](/docs/experiments), [error tracking](/docs/error-tracking), [surveys](/docs/surveys), and more in one developer platform. Best if you want to replace multiple tools with transparent pricing and mobile support.
+
+**For a like-for-like Hotjar replacement:**
+- **Mouseflow** – Session replays, heatmaps, form analytics, and feedback in a similar package. Best for marketing teams who just want a direct swap.
+
+**For AI-powered user research:**
+- **Sprig** – Combines targeted surveys, session replays, and heatmaps with AI analysis. Best for product and UX teams at B2C companies who want to go beyond Hotjar's qualitative tools.
+- **PostHog** – [PostHog AI](/ai) lets you analyze session replays, survey responses, and analytics data using natural language. Ask questions like "why are users dropping off at checkout?" and get answers grounded in your actual data.
+
+**For small e-commerce and Shopify stores:**
+- **Lucky Orange** – Replays, heatmaps, surveys, live chat, and form analytics. Best for small business owners who want everything in one simple tool.
+- **Crazy Egg** – Heatmaps, A/B testing, surveys, and error tracking. Best if you want to optimize conversions with built-in testing.
+
+**For startups:**
+- **PostHog** – A [generous free tier](/pricing) (1M events, 5K replays, 1,500 survey responses) plus up to [$50k in credits](/startups) for eligible startups. One platform that scales from MVP to growth stage without needing to swap tools.
+- **Microsoft Clarity** – 100% free replays and heatmaps with no usage limits. A good starting point to pair with a dedicated analytics tool as you grow.
+
+**For product managers needing adoption tools:**
+- **Pendo** – Product analytics, session replay, in-app guides, and feedback collection. Best if you need onboarding flows and tooltips alongside your analytics.
+
+**For an 100% free option:**
+- **Microsoft Clarity** – 100% free session replays and heatmaps with unlimited recordings. Best for budget-conscious teams who only need replays and heatmaps.
+
 ## Is PostHog right for you?
 
 Here's the (short) sales pitch.
@@ -509,8 +720,124 @@ We're biased, obviously, but we think PostHog is the perfect Hotjar replacement 
 
 -   You'd like to replace multiple tools with just one.
 -   You want more powerful analytics than Hotjar can offer.
+-   You need mobile session replays and surveys (not just web).
 -   You want to try before you buy (we're self-serve with a [generous free tier](/pricing)).
 
-Check out [our product pages](/session-replay) and [read our docs](/docs) to learn more.
+It's completely free to get started – no credit card required. Our [AI setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>What is Hotjar used for?</summary>
+
+**Hotjar** (now part of Contentsquare) is a behavior analytics tool used by UX designers, product managers, and marketers to understand how users interact with their websites. It provides session replays, heatmaps, surveys, feedback widgets, and user interviews to capture qualitative user data.
+
+</details>
+
+<details>
+<summary>Is Hotjar still available?</summary>
+
+Not as a standalone product. Hotjar merged into Contentsquare as of July 1, 2025. New customers sign up through Contentsquare, and existing Hotjar customers are being migrated to the Contentsquare platform. The core Hotjar tools (heatmaps, recordings, surveys) still exist within Contentsquare's free tier.
+
+</details>
+
+<details>
+<summary>What's the difference between PostHog and Hotjar?</summary>
+
+**PostHog** is an all-in-one developer platform combining product analytics, session replay, heatmaps, feature flags, A/B testing, error tracking, surveys, a data warehousen and more. 
+
+**[Hotjar](/blog/posthog-vs-hotjar)** (now Contentsquare) focuses on qualitative behavior analytics – session replays, heatmaps, surveys, and user interviews. PostHog is built for engineering and product teams who want everything in one place; Hotjar is designed for non-technical UX and marketing teams who want simple visual insights.
+
+</details>
+
+<details>
+<summary>How much does Hotjar cost now?</summary>
+
+Since merging into Contentsquare, Hotjar's tools are now split across three Contentsquare products (Experience Analytics, Voice of Customer, Product Analytics), each with their own plans (Free, Growth, Pro, Enterprise). Contentsquare Growth starts around $40/month, but Pro and Enterprise pricing requires a sales conversation. 
+
+See our [PostHog vs Hotjar comparison](/blog/posthog-vs-hotjar) for a detailed pricing breakdown.
+
+</details>
+
+<details>
+<summary>What's the best free Hotjar alternative?</summary>
+
+**Microsoft Clarity** is the best completely free option – it offers unlimited session replays and heatmaps at no cost, though it lacks surveys and analytics. 
+
+If you want more of the functionality of Hotjar, **PostHog** has a generous free tier: 1 million analytics events, 5,000 session replays, 1,500 survey responses, 1 million feature flag requests, and 100,000 error tracking events per month.
+
+</details>
+
+<details>
+<summary>Which Hotjar alternative is best for mobile apps?</summary>
+
+**PostHog** is the strongest option for mobile, with session replays and surveys across iOS, Android, React Native, and Flutter on all plans (including free). **Sprig** also supports mobile surveys and replays on iOS, Android, and React Native. **Pendo** added mobile replays in late 2025 as a paid add-on. Most other alternatives on this list are web-only.
+
+</details>
+
+<details>
+<summary>Which Hotjar alternative has the best heatmaps?</summary>
+
+For standard click and scroll heatmaps, most tools on this list perform similarly. **Mouseflow** stands out with six heatmap types (click, move, scroll, attention, geo, and live). **Crazy Egg** is known for clean heatmap visualizations and the confetti view. 
+
+For developer teams who want heatmaps integrated with analytics, **PostHog** connects heatmap data to your funnels and user paths.
+
+</details>
+
+<details>
+<summary>Which Hotjar alternative is best for startups?</summary>
+
+**PostHog** is the best option for startups. Beyond the generous free tier, startups can apply for [PostHog for Startups](/startups) to get $50,000 in additional credits. 
+
+**Microsoft Clarity** is a good companion if you just want free replays while getting started.
+
+</details>
+
+<details>
+<summary>Which Hotjar alternative is best for surveys?</summary>
+
+**Sprig** excels at in-product surveys with AI-powered analysis, targeted delivery, and mobile support. **PostHog** offers multi-step surveys with behavioral targeting, pre-built templates (NPS, CSAT, PMF), and 1,500 free responses per month. For simple website feedback, **Lucky Orange** includes unlimited surveys on all plans.
+
+</details>
+
+<details>
+<summary>Does PostHog have heatmaps?</summary>
+
+Yes. PostHog includes [heatmaps](/heatmaps) that visualize clicks (including rage clicks), scroll depth, and mouse movement on your website. Heatmaps are included on all plans, including free.
+
+</details>
+
+<details>
+<summary>What are the best session replay tools in 2026?</summary>
+
+The top session replay tools in 2026 include:
+
+- **[PostHog](/session-replay)** (best all-in-one for engineering teams — replays integrated with analytics, feature flags, and error tracking)
+- **Microsoft Clarity** (best free option with unlimited recordings)
+- **Mouseflow** (best like-for-like Hotjar replacement with form analytics)
+- **Smartlook** (best for mobile-first apps with native rendering and crash reports)
+- **Sprig** (best for AI-powered replay analysis tied to user research)
+- **Pendo** (best for product managers who also need in-app guides)
+
+For a detailed comparison, see our guide to the [best session replay tools](/blog/best-session-replay-tools).
+
+</details>
+
+<details>
+<summary>What are the best product analytics tools in 2026?</summary>
+
+The [top product analytics tools in 2026](/blog/best-product-analytics-tools-for-startups) include:
+
+- **[PostHog](/product-analytics)** (best all-in-one for engineering teams)
+- **Amplitude** (best for enterprise warehouse-native analytics)
+- **Mixpanel** (best for product managers)
+- **Heap** (best for autocapture with minimal setup, also owned by Contentsquare)
+- **Pendo** (best for product managers who also need in-app guides). 
+
+For detailed comparisons, see our guides to [Mixpanel alternatives](/blog/best-mixpanel-alternatives), [Amplitude alternatives](/blog/best-amplitude-alternatives), and [Heap alternatives](/blog/best-heap-alternatives).
+
+</details>
 
 <NewsletterForm />

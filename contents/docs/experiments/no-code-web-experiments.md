@@ -35,7 +35,7 @@ Before creating your experiment, you'll need to add `disable_web_experiments: fa
 
 Add `disable_web_experiments: false` to your PostHog init code like this:
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   disable_web_experiments: false,

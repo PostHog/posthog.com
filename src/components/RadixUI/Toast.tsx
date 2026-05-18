@@ -16,6 +16,7 @@ const Toast = ({
     image,
     verticalAlign = 'items-center',
     onClose,
+    actionClassName = '',
 }: {
     title?: string
     description: string | React.ReactNode
@@ -28,6 +29,7 @@ const Toast = ({
     image?: React.ReactNode
     verticalAlign?: string
     onClose?: () => void
+    actionClassName?: string
 }): JSX.Element => {
     const [open, setOpen] = React.useState(true)
 
@@ -70,7 +72,12 @@ const Toast = ({
                 {image && image}
             </div>
             {(onUndo || onAction) && (
-                <RadixToast.Action onClick={handleAction} className="[grid-area:_action]" asChild altText={actionLabel}>
+                <RadixToast.Action
+                    onClick={handleAction}
+                    className={`[grid-area:_action] ${actionClassName}`}
+                    asChild
+                    altText={actionLabel}
+                >
                     <OSButton size="sm" hover="background" icon={onUndo ? <IconUndo /> : undefined}>
                         {actionAsIcon ? actionAsIcon : actionLabel}
                     </OSButton>

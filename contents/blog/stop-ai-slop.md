@@ -38,7 +38,7 @@ PostHog [evaluations](/docs/llm-analytics/evaluations) use LLM-as-a-judge to aut
 
 _To prevent false negatives, N/A is used when the evaluation prompt is not relevant to the LLM generation. For example, a "mathematical accuracy" evaluation would apply the N/A label to responses that contain no math._
 
-Running evals with AI enables you to batch test hundreds or thousands of traces, then apply human judgement to investigate pass/fail samples. To help you get started, we included five pre-built templates:
+[Running evals with AI enables you to batch test hundreds or thousands of traces](/blog/testing-ai-agents), then apply human judgement to investigate pass/fail samples. To help you get started, we included five pre-built templates:
 
 | Template | What it checks | Best for |
 |----------|---------------|----------|

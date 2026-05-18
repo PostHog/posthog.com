@@ -34,6 +34,8 @@ const PRODUCT_SLUGS = new Set([
     'workflows',
     'logs',
     'endpoints',
+    'posthog-code',
+    'inbox',
 ])
 
 function getPostHog() {
@@ -44,7 +46,7 @@ export function getProductInterests(): string[] {
     const posthog = getPostHog()
     if (!posthog) return []
 
-    const interests = posthog.get_property(PROPERTY_NAME)
+    const interests = posthog?.get_property?.(PROPERTY_NAME)
     if (!interests || !Array.isArray(interests)) return []
     return interests
 }

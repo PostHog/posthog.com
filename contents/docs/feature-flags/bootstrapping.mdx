@@ -19,7 +19,7 @@ To bootstrap PostHog with feature flags, use the `bootstrap` key in the initiali
 <MultiLanguage>
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     bootstrap: {
@@ -38,7 +38,7 @@ import { usePostHog, PostHogProvider } from 'posthog-react-native'
 
 export function MyApp() {
     return (
-        <PostHogProvider apiKey="<ph_project_api_key>" options={{
+        <PostHogProvider apiKey="<ph_project_token>" options={{
             // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
             host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
             bootstrap: {
@@ -96,7 +96,7 @@ The `bootstrap` object has four optional arguments: `distinctID`, `isIdentifiedI
 <MultiLanguage>
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     bootstrap: {
@@ -118,7 +118,7 @@ import { usePostHog, PostHogProvider } from 'posthog-react-native'
 
 export function MyApp() {
     return (
-        <PostHogProvider apiKey="<ph_project_api_key>" options={{
+        <PostHogProvider apiKey="<ph_project_token>" options={{
             // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
             host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
             bootstrap: {

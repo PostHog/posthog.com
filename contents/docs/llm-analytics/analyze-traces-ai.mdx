@@ -1,0 +1,43 @@
+---
+title: Analyze traces with PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) investigates [LLM traces](/docs/llm-analytics), analyzes costs, and monitors quality trends across your AI products using natural language. Ask about token usage, latency, errors, or costs – and PostHog AI queries your trace data to find answers.
+
+## How it works
+
+PostHog AI can query across all your trace data, including:
+
+- **Token usage and costs** – total spend, cost per conversation, cost by model or feature
+- **Latency** – response times, slow calls, p95/p99 latencies
+- **Errors** – failed LLM calls, timeouts, rate limits
+- **Model comparisons** – side-by-side performance across GPT-4, Claude, Gemini, or any model you use
+
+## Built-in AI features for LLM analytics
+
+PostHog also provides dedicated AI features that run automatically on your LLM data. [Trace summarization](/docs/llm-analytics/summarization) generates AI-powered summaries of traces with flow diagrams and key findings, which is useful for understanding complex multi-step conversations without reading every message.
+
+[Sentiment classification](/docs/llm-analytics/sentiment) classifies user messages as positive, neutral, or negative using a local ML model, helping you monitor user satisfaction across your AI features.
+
+## Try it
+
+Select a prompt to try it out in the PostHog app:
+
+- [`Analyze LLM token usage over the past 7 days`](https://app.posthog.com/#panel=max:Analyze%20LLM%20token%20usage%20over%20the%20past%207%20days)
+- [`What are the most expensive LLM calls from today?`](https://app.posthog.com/#panel=max:What%20are%20the%20most%20expensive%20LLM%20calls%20from%20today%3F)
+- [`Show me traces with errors in the last 24 hours`](https://app.posthog.com/#panel=max:Show%20me%20traces%20with%20errors%20in%20the%20last%2024%20hours)
+- [`Compare costs between GPT-4 and Claude across my features`](https://app.posthog.com/#panel=max:Compare%20costs%20between%20GPT-4%20and%20Claude%20across%20my%20features)
+- [`Which features are driving the most LLM spend?`](https://app.posthog.com/#panel=max:Which%20features%20are%20driving%20the%20most%20LLM%20spend%3F)
+- [`Find traces with latency over 5 seconds`](https://app.posthog.com/#panel=max:Find%20traces%20with%20latency%20over%205%20seconds)
+
+## Tips for better results
+
+- **Filter by model** – "Show costs for GPT-4o only" narrows results to a specific model
+- **Set cost thresholds** – "Find conversations that cost more than $0.50" helps you identify expensive calls
+- **Name your features** – If you've tagged traces with feature names, reference them directly (e.g. "costs for the search feature")
+- **Ask about trends** – "How has LLM spend changed over the past 30 days?" gives you a time-series view
+- **Compare models** – "Compare latency between GPT-4 and Claude for the chat feature" helps you evaluate model choices
+
+## Get started
+
+To start analyzing traces with PostHog AI, [set up PostHog AI](/docs/posthog-ai/start-here).

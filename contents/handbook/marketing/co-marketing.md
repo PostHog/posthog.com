@@ -9,12 +9,14 @@ PostHog complements a lot of other software companies. Since we’re active in t
 ### Who takes the lead with co-marketing?
 Sales, engineering, or support will sometimes tag marketing into customer Slack channels where someone mentions co-marketing. There’s no obligation to say yes just because a partner is enthusiastic. If you’re unsure whether something is worth pursuing, ask in the **#team-marketing** Slack channel. 
 
+> The list of partners we are currently doing or planning co-marketing partnerships with is maintained [in this canvas](https://posthog.slack.com/docs/TSS5W8YQZ/F09FD1DS2CD). 
+
 If it does seem promising, a product marketer will take the lead and loop in events or other teams as needed.
 
 What this article doesn’t cover:
-- [Influencers](/handbook/growth/marketing/influencers) and newsletters
+- [Influencers](/handbook/marketing/influencers) and newsletters
 - Rev-share [partners](/handbook/brand/partners) and individual consultants
-- [Sponsorships](/handbook/growth/marketing/open-source-sponsorship)
+- [Sponsorships](/handbook/marketing/open-source-sponsorship)
 
 ## Integrations and CDP destinations
 
@@ -72,7 +74,7 @@ Examples:
 
 If we're signing anything with legal commitments, that needs to go via <PrivateLink url="https://posthog.slack.com/archives/C08MYQX74KH">#legal</PrivateLink>. If it's an informal exchange of perks, you can usually just coordinate directly with the partner company.
 
-If you’re giving PostHog credits, check with the <SmallTeam slug="billing"/> to explore the options. See the [campaigns and coupons](/handbook/growth/marketing/campaigns-and-coupons) handbook entry for more detail.
+If you’re giving PostHog credits, check with the <SmallTeam slug="billing"/> to explore the options. See the [campaigns and coupons](/handbook/marketing/campaigns-and-coupons) handbook entry for more detail.
 
 When a new startup perk goes live:
 - Add the offer to the [PostHog for startups](/startups) page

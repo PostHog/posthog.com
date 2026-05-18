@@ -20,6 +20,7 @@ import TeamMember from 'components/TeamMember'
 import { OverflowXSection } from 'components/OverflowXSection'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
+import SourceConfiguration from 'components/Product/Sources/Configuration'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import { IconWarning, IconCheck, IconX } from '@posthog/icons'
@@ -27,12 +28,14 @@ import IsEU from 'components/IsEU'
 import IsUS from 'components/IsUS'
 import { CallToAction } from 'components/CallToAction'
 import Tooltip from 'components/Tooltip'
+import NewsletterForm from 'components/NewsletterForm'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { useState } from 'react'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Contributor from 'components/Docs/Contributors'
 import { useProductInterestFromPathname } from 'hooks/useProductInterest'
+import slugify from 'slugify'
 
 const DestinationsLibraryCallout = () => {
     return (
@@ -283,21 +286,45 @@ export const TemplateParametersFactory: (params: TemplateParametersProps) => Rea
     return TemplateParameters
 }
 
+type SourceParametersProps = {
+    sourceFields:
+        | {
+              name?: string | null
+              label?: string | null
+              type?: string | null
+              required?: boolean | null
+              caption?: string | null
+              placeholder?: string | null
+          }[]
+        | null
+}
+
+export const SourceParametersFactory: (params: SourceParametersProps) => React.FC = ({ sourceFields }) => {
+    const SourceParameters = () => <SourceConfiguration sourceFields={sourceFields} />
+    return SourceParameters
+}
+
 const A = (props) => <Link {...props} />
 
-export default function Handbook({ data: { post }, pageContext: { breadcrumbBase, tableOfContents } }) {
+export default function Handbook({ data: { post, postHogSource }, pageContext: { breadcrumbBase, tableOfContents } }) {
     const {
         body,
         frontmatter: {
             title,
+            date,
+            tags,
+            contributors,
             seo,
             tableOfContents: frontmatterTableOfContents,
             hideRightSidebar,
             contentMaxWidthClass,
+            showByline,
         },
         fields: { slug, appConfig, templateConfigs, commits },
         excerpt,
     } = post
+
+    const sourceFields = postHogSource?.sourceFields ?? null
 
     // Track product interest for cross-subdomain cookie
     useProductInterestFromPathname(slug)
@@ -319,6 +346,7 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
         TestimonialsTable,
         AppParameters: AppParametersFactory({ config: appConfig }),
         TemplateParameters: TemplateParametersFactory(templateConfigs),
+        SourceParameters: SourceParametersFactory({ sourceFields }),
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
@@ -337,6 +365,7 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
                 </OverflowXSection>
             </p>
         ),
+        NewsletterForm,
         ...shortcodes,
     }
 
@@ -350,7 +379,23 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
                 imageType="absolute"
             />
             <ReaderView
-                body={{ type: 'mdx', content: body }}
+                body={{
+                    type: 'mdx',
+                    content: body,
+                    ...(showByline
+                        ? {
+                              contributors,
+                              date,
+                              tags: tags?.map((tag) => ({
+                                  label: tag,
+                                  url:
+                                      tag === 'Post mortems'
+                                          ? '/handbook/company/post-mortems'
+                                          : `/blog/tags/${slugify(tag, { lower: true })}`,
+                              })),
+                          }
+                        : null),
+                }}
                 title={title}
                 tableOfContents={frontmatterTableOfContents || tableOfContents}
                 mdxComponents={components}
@@ -369,6 +414,16 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
 
 export const query = graphql`
     query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!) {
+        postHogSource(mdx: { id: { eq: $id } }) {
+            sourceFields {
+                name
+                label
+                type
+                required
+                placeholder
+                caption
+            }
+        }
         glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
             nodes {
                 fields {
@@ -446,12 +501,29 @@ export const query = graphql`
                 }
             }
             frontmatter {
+                showByline
                 tableOfContents {
                     depth
                     url
                     value
                 }
                 title
+                date(formatString: "MMM DD, YYYY")
+                tags
+                contributors: authorData {
+                    id
+                    name
+                    profile_id
+                    role
+                    profile {
+                        firstName
+                        lastName
+                        companyRole
+                        avatar {
+                            url
+                        }
+                    }
+                }
                 description
                 showTitle
                 hideRightSidebar

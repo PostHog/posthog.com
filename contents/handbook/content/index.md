@@ -92,7 +92,7 @@ Tips for writing a good post:
 
 - Write a brief summary of the post while sharing as much content as possible in it. [Good example](https://x.com/posthog/status/1851571551314825375).
 
-- Attach an image to the post (don't rely on the link's social graph preview). Again, you can use **Add entry** in the [changelog](/changelog/) to create a nice image.
+- Attach an image to the post (don't rely on the link's social graph preview). Again, you can use **Add entry** in the [changelog](/changelog) to create a nice image.
 
 - Do your best not to sound "corporate" or serious. Authenticity is appreciated on Twitter. Have fun with it!
 
@@ -104,8 +104,8 @@ It's worth sharing in their Slack channels directly as they don't see everything
 
 ### 5. Paid ads + newsletters
 
-You can promote your post by buying sponsored slots in newsletters. <TeamMember name="Ian Vanagas" /> has a list of newsletters and booked slots we can use to promote content. See [sponsorships](/handbook/growth/marketing/open-source-sponsorship) for more.
+You can promote your post by buying sponsored slots in newsletters. <TeamMember name="Ian Vanagas" /> has a list of newsletters and booked slots we can use to promote content. See [sponsorships](/handbook/marketing/open-source-sponsorship) for more.
 
-If you want to run a paid ad campaign on Reddit, Google, or Twitter, see the [paid ads page](/handbook/growth/marketing/paid-ads).
+If you want to run a paid ad campaign on Reddit, Google, or Twitter, see the [paid ads page](/handbook/marketing/paid).
 
 It's a good idea to create an issue highlighting what you'd like to achieve in your campaign. Here's an [example](https://github.com/PostHog/posthog.com/issues/9646).

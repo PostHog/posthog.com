@@ -10,6 +10,9 @@ export const platformFeatures = {
                 name: 'Open source',
                 description: 'Audit code, contribute to roadmap, and build integrations',
             },
+            open_core: {
+                name: 'Open core',
+            },
             reverse_proxy: {
                 name: 'Reverse proxy',
                 description: 'Avoid tracking blockers and capture more data',
@@ -180,6 +183,10 @@ export const platformFeatures = {
                 name: 'Zendesk',
                 description: 'Send and receive data from Zendesk',
             },
+            imports: {
+                name: 'Warehouse import',
+                description: 'Import data from external warehouses and sources like Stripe, HubSpot, and S3 for unified analysis',
+            },
         },
     },
     libraries: {
@@ -205,6 +212,12 @@ export const platformFeatures = {
             },
             ruby: {
                 name: 'Ruby',
+            },
+            python: {
+                name: 'Python',
+            },
+            node: {
+                name: 'Node.js',
             },
         },
     },

@@ -78,7 +78,6 @@ const Layout = ({
     const posthog = usePostHog()
     const { websiteMode } = useApp()
 
-
     useEffect(() => {
         posthog?.register_once({
             utm_source: null,

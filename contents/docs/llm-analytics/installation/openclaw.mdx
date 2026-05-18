@@ -1,0 +1,123 @@
+---
+title: OpenClaw LLM analytics installation
+platformIconName: IconOpenClaw
+showStepsToc: true
+tableOfContents: [
+    {
+        url: 'prerequisites',
+        value: 'Prerequisites',
+        depth: 1,
+    },
+    {
+        url: 'install-the-posthog-plugin',
+        value: 'Install the PostHog plugin',
+        depth: 1,
+    },
+    {
+        url: 'configure-the-plugin',
+        value: 'Configure the plugin',
+        depth: 1,
+    },
+    {
+        url: 'start-the-gateway',
+        value: 'Start the gateway',
+        depth: 1,
+    },
+    {
+        url: 'verify-traces-and-generations',
+        value: 'Verify traces and generations',
+        depth: 1,
+    },
+    {
+        url: 'configuration-options',
+        value: 'Configuration options',
+        depth: 1,
+    },
+]
+---
+
+[OpenClaw](https://github.com/openclaw/openclaw) is a self-hosted AI assistant gateway that connects messaging platforms (Telegram, Slack, Discord, WebChat, and more) to AI models. The [`@posthog/openclaw`](https://github.com/PostHog/posthog-openclaw) plugin captures LLM generations, tool executions, and conversation traces as `$ai_generation`, `$ai_span`, and `$ai_trace` events.
+
+## Prerequisites
+
+You need:
+
+- A running [OpenClaw](https://github.com/openclaw/openclaw) gateway (Node.js >= 22)
+- A [PostHog account](https://us.posthog.com/signup) with a project API key
+
+## Install the PostHog plugin
+
+Install the [`@posthog/openclaw`](https://github.com/PostHog/posthog-openclaw) plugin using the OpenClaw CLI:
+
+```bash
+openclaw plugins install @posthog/openclaw
+```
+
+## Configure the plugin
+
+Add the PostHog plugin to your OpenClaw config file (`~/.openclaw/openclaw.json` or `openclaw.yaml`):
+
+```json
+{
+  "plugins": {
+    "entries": {
+      "posthog": {
+        "enabled": true,
+        "config": {
+          "apiKey": "<ph_project_api_key>",
+          "host": "<ph_client_api_host>"
+        }
+      }
+    }
+  },
+  "diagnostics": {
+    "enabled": true
+  }
+}
+```
+
+You can find your project API key and host in your [PostHog project settings](https://us.posthog.com/settings/project).
+
+> **Note:** `diagnostics.enabled` must be `true` for trace-level events (`$ai_trace`) to be captured. Generation and span events work without it.
+
+## Start the gateway
+
+Start (or restart) the OpenClaw gateway for the plugin to take effect:
+
+```bash
+node openclaw.mjs gateway
+```
+
+The PostHog plugin initializes automatically on startup. Once users send messages through any connected channel (Telegram, Slack, Discord, or WebChat), LLM analytics events are captured and sent to PostHog.
+
+## Verify traces and generations
+
+After sending a few messages through your gateway:
+
+1. Go to the [LLM analytics](https://us.posthog.com/llm-analytics) tab in PostHog.
+2. You should see traces and generations appearing within a few minutes.
+
+## Configuration options
+
+All options go under the `config` key inside the `posthog` plugin entry:
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `apiKey` | `string` | _(required)_ | Your PostHog project API key |
+| `host` | `string` | `https://us.i.posthog.com` | PostHog ingestion host |
+| `privacyMode` | `boolean` | `false` | When enabled, message content (inputs/outputs) is not sent to PostHog. Token counts, latency, model info, and errors are still captured. |
+| `traceGrouping` | `"message"` \| `"session"` | `"message"` | `"message"`: one trace per LLM call cycle. `"session"`: groups all generations in a conversation into one trace. |
+| `sessionWindowMinutes` | `number` | `60` | Minutes of inactivity before starting a new session window. Applies in both trace grouping modes. |
+
+### Trace grouping modes
+
+- **`"message"` (default):** Each agent invocation gets its own trace. Tool-use iterations within one invocation share the same trace. Best for most use cases.
+- **`"session"`:** All generations within a conversation window are grouped into a single trace. A new trace starts after `sessionWindowMinutes` of inactivity. Useful for chat channels (Telegram, Slack) where per-message traces fragment conversation flow.
+
+### What gets captured
+
+The plugin captures three types of events:
+
+- **`$ai_generation`** — Every LLM call, including model, provider, token usage, cost, latency, and input/output messages (in [OpenAI chat format](/docs/llm-analytics/generations)).
+- **`$ai_span`** — Each tool execution, including tool name, input parameters, output result, duration, and parent generation ([learn more](/docs/llm-analytics/spans)).
+- **`$ai_trace`** — Completed message cycles with aggregated token totals and latency ([learn more](/docs/llm-analytics/traces)).

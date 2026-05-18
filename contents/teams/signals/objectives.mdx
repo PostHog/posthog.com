@@ -1,28 +1,57 @@
-## Q1 2026
+## Q2 2026
 
-### Objective 1: Signals & Tasks APIs (for app + Array consumption)
+For reference (internal-only): [Q2 planning doc](https://docs.google.com/document/d/1s8LQVo0UThfDx3VSEMBMp1_nmuENRBaiSDKLcTYuol4/edit?tab=t.0)
 
-What we’ll ship:
-- Scheduled summarization creating signal groups, which are then turned into tasks (Alex)  
-- Way to schedule summarization: (Alex)  
-  - let user provide golden paths  
-  - let user provide features they care about
+Going as far as it takes to make users feel Inbox is not just "cool" - but awesome.
 
-### Objective 2: Video-first session summarization
+Principles:
+- We eat our own dog food - PostHog Inc. has to be a set of happy Inbox users, and we have a path to that
+- Reliabiltity is non-optional - explicitly allocating time to reliability, including devex 
 
-What we’ll ship:
-- Re-architect session summarization to analyze full videos (Michael)  
-- Basic evals, and lots of prompt tuning for quality (Michael)  
-- Models iteration (Gemini 3/Claude instead of o3) (Alex)
+_Ownership will be assigned as we prioritize throughout the quarter. Michael makes sure this happens as team lead._
 
-### Objective 3: Correlating signals across products
+### Objective 1: One PR merged a day
 
-What we’ll ship:
-- To experiment with: 1\. Matching signals based on relevant time ranges, 2\. Vector similarity search between signal types, 3\. Agent to run search tools to correlate signal types  
-- Vector search DB (Olly)
+Self-driving has to deliver concrete code to review and merge:
+- Auto-create PRs
+- Allow users to configure the level of confidence for PR creation
+- Make PostHog Code Inbox UX spark joy
+- Run user interviews
+  - Annika will be running interviews with active PH Code users, we should take part
 
-### Objective 4: Video exports infra for exporting a double-digit % of sessions
+### Objective 2: Prioritization
 
-What we’ll ship:
-- Filter periods of inactivity from Replay and skip them when recording/analyzing (Olly)  
-- Replace Playwright with Puppeteer for better quality/FPS of the videos exported (Olly)
+Serving "One PR merged a day": 
+Prioritization in the inbox has to always surface slam dunks above noise:
+- Making the agent run queries to determine if the problem is in a hot path
+- "Analyze part of session visually" tool for research
+- Seamless PostHog org member→GH user mapping (for owner assignment)
+- Ability to reingest all signals in prod
+  - Plus ability fo filter by pipeline version
+
+### Objective 3: Sources
+
+Specific sources have to result in salient inbox items:
+- PostHog Error Tracking
+- Linear
+- GitHub Issues
+- Zendesk
+- PostHog Support
+- Later in the quarter: Session Replay (much higher-effort w/ Replay team collab)
+  - Michael to write a spec for the person who'll help us ship here
+
+Other teams integrating: on pause until we have confidence in these core sources.
+
+### Objective 4: Experiments
+
+We're in delivery mode with PostHog Code launch, but when we have solid footing there, we should get back into some experimentation. We think we have some ideas that _may_ take the product to the next level, but they need to be actually tested:
+
+- AI PM: Agent as the "product owner" on a product/feature level: On a cron, the agent checks the feature status (metrics, errors etc.) & recommends actions
+- Memory
+- Allow agent to schedule follow-up (esp. for LLMA + replay)
+
+### Non-objective: Pricing
+
+Pricing is not a priority before we feel that the Inbox is indeed _awesome_. We should just keep track of costs to keep an eye:
+
+- Set up Inbox usage/success/costs dashboard

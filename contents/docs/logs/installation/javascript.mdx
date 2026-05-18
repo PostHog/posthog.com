@@ -1,0 +1,142 @@
+---
+title: JavaScript web logs installation
+platformLogo: javascript
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallWebPackageManagers from '../../integrate/_snippets/install-web-package-managers.mdx'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+The PostHog JavaScript web SDK ships with first-class support for Logs. Send structured log records with the `posthog.logger` API or opt in to autocapture of `console.*` calls.
+
+> **Minimum version:** `posthog-js@1.368.0` or later. Run `npm update posthog-js` (or your package manager's equivalent) to update.
+
+<Steps>
+
+<Step title="Install posthog-js" badge="required">
+
+If you haven't already, install `posthog-js` using your package manager:
+
+<InstallWebPackageManagers />
+
+</Step>
+
+<Step title="Configure logs at init" badge="required">
+
+Set your service identity in `posthog.init`. These fields map to standard [OpenTelemetry resource attributes](https://opentelemetry.io/docs/specs/semconv/resource/) and apply to every log record this client sends.
+
+```js-web
+import posthog from 'posthog-js'
+
+posthog.init('<ph_project_token>', {
+  api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  logs: {
+    serviceName: 'checkout-web',
+    environment: 'production',
+    serviceVersion: '1.2.3',
+  },
+})
+```
+
+| Option | Description |
+|--------|-------------|
+| `serviceName` | Identifies the app in the Logs UI. Maps to the OpenTelemetry `service.name` resource attribute. Defaults to `'unknown_service'`. |
+| `environment` | Deployment environment, e.g. `'production'` or `'staging'`. Maps to `deployment.environment`. |
+| `serviceVersion` | Release version, e.g. `'1.2.3'`. Maps to `service.version`. |
+| `resourceAttributes` | Additional OpenTelemetry resource attributes, e.g. `{ 'host.name': 'web-01' }`. |
+| `flushIntervalMs` | How often batched log records are flushed. Defaults to `3000`. |
+| `maxBufferSize` | Buffer size before forcing a flush. Defaults to `100`. |
+| `maxLogsPerInterval` | Rate limit per flush window. Excess records are dropped with a single warning. Defaults to `1000`. |
+
+See the [web SDK config reference](/docs/libraries/js/config#configuring-logs) for the complete list.
+
+</Step>
+
+<Step title="Send structured logs with posthog.logger" badge="recommended">
+
+`posthog.logger` is the declarative path. Each call produces an OTLP log record with a severity level and typed attributes you can filter and query on in the Logs product.
+
+```js-web
+posthog.logger.info('checkout completed', { order_id: 'ord_789', total_cents: 4200 })
+posthog.logger.warn('payment retry', { attempt: 2, gateway: 'stripe' })
+posthog.logger.error('payment failed', { error_code: 'E001', order_id: 'ord_789' })
+```
+
+Available severity levels: `trace`, `debug`, `info`, `warn`, `error`, and `fatal`.
+
+Logger calls don't write to the browser console, they go directly to PostHog as structured records. You can query logs by attribute, such as `total_cents > 1000`, instead of string-searching log output. Nothing extra appears in the user's browser console.
+
+For full control over a log record, including trace correlation, use `posthog.captureLog`:
+
+```js-web
+posthog.captureLog({
+  body: 'checkout completed',
+  level: 'info',
+  attributes: { order_id: 'ord_789', tags: ['checkout', 'v2'] },
+  trace_id: '0af7651916cd43dd8448eb211c80319c', // optional, 32 hex chars
+  span_id: 'b7ad6b7169203331',                   // optional, 16 hex chars
+})
+```
+
+Attribute values can be strings, numbers, booleans, arrays, or plain objects. `null` and `undefined` values are dropped.
+
+</Step>
+
+<Step title="Autocapture console logs" badge="optional">
+
+To forward `console.log`, `console.warn`, `console.error`, and friends without changing your code, set `logs.captureConsoleLogs: true`.
+
+```js-web
+posthog.init('<ph_project_token>', {
+  api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  logs: {
+    captureConsoleLogs: true,
+    serviceName: 'checkout-web',
+  },
+})
+```
+
+> **Warning:** Overriding a system library like `console` has a large blast radius. Everything your app or its dependencies write to the console gets forwarded to PostHog, including:
+>
+> - Debug output referencing passwords, tokens, API keys, or session identifiers
+> - Stack traces containing user input
+> - Third-party library chatter you don't control
+>
+> This can breach data privacy compliance and is difficult to clean up. Before turning it on:
+>
+> 1. Audit what your app and its dependencies currently log.
+> 2. Get sign-off from anyone in your organization whose code runs in the browser.
+> 3. Prefer `posthog.logger` for anything you actually care about – it's structured, queryable, and doesn't pull in unrelated output.
+
+`posthog.logger` and `captureConsoleLogs` are independent and can be enabled together. The logger path emits OTLP records directly; the autocapture path scrapes console strings.
+
+</Step>
+
+<Step title="Link logs to sessions and users" badge="recommended">
+
+When `posthog-js` is initialized, the web SDK automatically attaches the current `distinct_id` and `session_id` to every log record. Log entries appear linked to the matching [Session Replay](/docs/session-replay) and person without any extra setup.
+
+See [Link Session Replay](/docs/logs/link-session-replay) for how this surfaces in the UI, and how to do the equivalent from server-side SDKs.
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, verify log records are flowing:
+
+1. Call `posthog.logger.info('hello from posthog-js')` somewhere your page executes.
+2. Open the [Logs](https://app.posthog.com/logs) interface and filter by the `serviceName` you set above.
+3. Confirm the record shows up with the attributes you sent.
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>

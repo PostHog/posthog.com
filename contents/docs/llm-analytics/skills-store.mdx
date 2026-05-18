@@ -1,0 +1,398 @@
+---
+title: Using the PostHog skills store
+---
+
+Your team's coding agents (Claude Code, Cursor, Codex, Windsurf, and others) all support [MCP](/docs/model-context-protocol). PostHog's skills store gives you a centralized, versioned place to store and share reusable agent skills — following the [Agent Skills specification](https://agentskills.io/specification) — across any tool, for any team member.
+
+> **Shortcut: install the PostHog AI plugin.** The [PostHog AI plugin](https://github.com/PostHog/ai-plugin) ships an official [`skills-store` skill](https://github.com/PostHog/ai-plugin/tree/main/skills/skills-store) — maintained alongside the [canonical version in the PostHog monorepo](https://github.com/PostHog/posthog/tree/master/products/llm_analytics/skills/skills-store) — that teaches your agent exactly how to discover, load, create, and update skills via the PostHog MCP tools. Install the plugin in [Claude Code](/docs/model-context-protocol/claude-code), [Codex](/docs/model-context-protocol/codex), Cursor, or Gemini CLI and your agent already knows how to use the store. The rest of this guide covers the same concepts in case you want to understand what's happening under the hood or roll your own bridge.
+
+## Why use PostHog as your skills store?
+
+- **Works in any MCP-connected agent** — Claude Code, Cursor, Codex, Windsurf, VS Code, and more
+- **Centrally managed** — Update a skill once, every team member gets the latest version on their next fetch
+- **Full version history** — Every edit creates an immutable version, with `base_version` concurrency checks
+- **Bundled files** — Skills can include scripts, references, and assets alongside the instructions
+- **Progressive disclosure** — Agents list skills by description, load bodies on demand, and fetch bundled files only when needed
+- **No vendor lock-in** — Not tied to a specific agent or IDE
+- **Non-engineers can contribute** — Anyone on your team can create and maintain skills through the PostHog UI
+
+## How it works
+
+A PostHog skill follows the [Agent Skills specification](https://agentskills.io/specification): a body of instructions (the equivalent of a `SKILL.md`), plus optional bundled files, structured metadata, and an `allowed_tools` list.
+
+The MCP server exposes the skills store through a dedicated family of tools:
+
+| Tool                | Purpose                                                                           |
+| ------------------- | --------------------------------------------------------------------------------- |
+| `skill-list`        | List all available skills (name + description only)                               |
+| `skill-get`         | Fetch a skill by name — returns the body and a manifest of bundled files          |
+| `skill-file-get`    | Fetch a single bundled file by path (on demand)                                   |
+| `skill-create`      | Store a new skill, optionally with bundled files                                  |
+| `skill-update`      | Publish a new version — provide full `body`, incremental `edits`, or `file_edits` |
+| `skill-file-create` | Add one bundled file to a skill (publishes a new version)                         |
+| `skill-file-delete` | Remove one bundled file from a skill                                              |
+| `skill-file-rename` | Rename one bundled file (move without rewriting content)                          |
+| `skill-duplicate`   | Duplicate an existing skill under a new name                                      |
+
+Agents use these with progressive disclosure: discover by description, fetch the body only when relevant, and pull individual files on demand — rather than loading everything up front.
+
+## Prerequisites
+
+- A PostHog account with LLM analytics enabled
+- The [PostHog MCP server](/docs/model-context-protocol) configured in your coding agent
+
+## Step 1: Create a skill
+
+Let's create a skill called `hog-release-notes` that writes release notes in PostHog's voice.
+
+### Via the PostHog UI
+
+1. Navigate to **LLM analytics** > **Skills**
+2. Click **New skill**
+3. Name it `hog-release-notes`
+4. Add a description that explains _when_ to use the skill — this is what agents use to discover it
+5. Paste your skill body (see example below)
+6. Optionally add bundled files, `allowed_tools`, `license`, `compatibility`, or metadata
+7. Click **Create skill**
+
+### Via MCP
+
+Ask your agent to create the skill:
+
+```text
+Use the PostHog MCP skill-create tool to create a skill named
+"hog-release-notes" with the content I'll provide.
+```
+
+Or call `skill-create` directly:
+
+```json
+{
+  "name": "hog-release-notes",
+  "description": "Write PostHog release notes from recent merged changes. Use when the user asks to draft, generate, or update release notes.",
+  "body": "# Hog release notes writer\n\nYou write release notes for PostHog...",
+  "allowed_tools": ["Bash", "Read", "Grep"],
+  "metadata": { "author": "posthog", "category": "docs" }
+}
+```
+
+### Example skill body
+
+A good skill body gives the agent all the context it needs — where to find information, what format to use, and any project-specific knowledge:
+
+```markdown
+# Hog release notes writer
+
+You write release notes for PostHog. Follow these rules.
+
+## Where to find what's new
+
+- Check the changelog at contents/docs/llm-analytics/changelog.mdx
+  for what's already been published
+- Look at merged PRs since the last changelog entry using
+  `git log --oneline --since="2 weeks ago"`
+- Read PR descriptions and commit messages for context on each change
+- Cross-reference with the GitHub milestone if one exists
+
+## Voice and tone
+
+- Direct and concise — no marketing fluff
+- Technical but approachable
+- Use second person ("you") not third person ("users")
+- Be specific about what changed and why it matters
+
+## Structure for each entry
+
+1. **One-line summary** — What shipped, in plain language
+2. **What it does** — 2-3 sentences on the feature or fix
+3. **How to use it** — Concrete steps or code snippets
+4. **Why we built it** — The problem this solves (one sentence)
+
+## Rules
+
+- Start with a verb (Add, Fix, Improve, Remove)
+- Include links to relevant docs pages
+- If it's a breaking change, lead with that
+- Keep each entry under 200 words
+- Skip dependency bumps and minor refactors
+
+## Output
+
+Write the release notes as markdown, ready to append to the changelog.
+```
+
+The more context you bake into the body, the less you need to explain each time you run the skill.
+
+### Bundled files (optional)
+
+If your skill needs scripts, reference docs, or assets, include them in the same `skill-create` call:
+
+```json
+{
+  "name": "make-fractals",
+  "description": "Generate fractal images as PNGs. Use when the user asks to make, render, or visualize fractals.",
+  "body": "# make-fractals\n\nWhen to use... Workflow... Output contract...",
+  "compatibility": "Requires Python 3.10+ with Pillow and numpy",
+  "allowed_tools": ["Bash", "Write"],
+  "files": [
+    { "path": "scripts/mandelbrot.py", "content": "...", "content_type": "text/x-python" },
+    { "path": "references/primer.md", "content": "# Primer\n...", "content_type": "text/markdown" }
+  ]
+}
+```
+
+The body can reference bundled files by path. Agents pull them with `skill-file-get` only when they actually need them.
+
+## Step 2: Use a skill from any agent
+
+Once a skill exists in PostHog, any team member with the MCP server configured can use it.
+
+### Discover available skills
+
+```text
+Use PostHog MCP to list available skills.
+```
+
+This calls `skill-list` and returns every skill's name + description — never the body. Agents pick the right skill from the description alone, without loading any bodies.
+
+You can also filter:
+
+```text
+Use PostHog MCP to search skills for "release notes".
+```
+
+### Fetch and run a skill
+
+```text
+Use PostHog MCP to fetch "hog-release-notes" and follow its
+instructions to write release notes for the changes in my current branch.
+```
+
+The agent calls `skill-get` with `skill_name: "hog-release-notes"`, receives the body + file manifest, reads the body as its system instructions, and gets to work — fetching any referenced bundled files via `skill-file-get` on demand.
+
+This works identically in Claude Code, Cursor, Codex, or any other MCP-connected agent. The skill lives in PostHog, not in any particular tool.
+
+## Step 3: Set up a bridge skill (optional shortcut)
+
+Step 2 is all you need. If you've installed the [PostHog AI plugin](https://github.com/PostHog/ai-plugin), you can skip this step entirely — the plugin's `skills-store` skill already provides the bridge.
+
+Otherwise, if your agent supports local skills (like Claude Code's `.claude/skills/` directory), you can drop in a tiny DIY bridge that bootstraps into the PostHog skills store. You only need **one** generic bridge:
+
+### Claude Code example
+
+Create a file at `.claude/skills/posthog-skills-store/SKILL.md`:
+
+```markdown
+---
+name: posthog-skills-store
+description: Access and run shared team skills stored in PostHog.
+  Use when the user asks to list, browse, load, or manage PostHog
+  skills, or references "skills store" or "skill store".
+allowed-tools: mcp__posthog__skill-list, mcp__posthog__skill-get,
+  mcp__posthog__skill-file-get, mcp__posthog__skill-create,
+  mcp__posthog__skill-update, mcp__posthog__skill-file-create,
+  mcp__posthog__skill-file-delete, mcp__posthog__skill-file-rename,
+  mcp__posthog__skill-duplicate
+---
+
+# PostHog Skills Store
+
+Fetch the full instructions from PostHog:
+
+1. Call `skill-get(skill_name="skills-store")` to load the latest version
+2. Follow the instructions in the returned body
+```
+
+The bridge is intentionally thin — it just points at the canonical `skills-store` skill in PostHog, where the real instructions live. Updates to that remote skill automatically reach everyone on the team.
+
+One local file, unlimited remote skills. But again, this is purely a convenience — everything the bridge does, you can do by asking your agent to use PostHog MCP skills directly.
+
+## Example: a full session
+
+Here's what using the skills store looks like in practice — from running a skill, to updating it mid-session, to a teammate picking up the changes automatically.
+
+### Running the skill
+
+```text
+> Use PostHog MCP to fetch "hog-release-notes" and generate
+  release notes for the latest changes.
+
+Agent calls skill-get("hog-release-notes"), reads the body, checks
+the changelog, runs git log, reads PR descriptions, and drafts
+the release notes.
+
+✓ Here are the release notes for the last two weeks:
+
+  ## Add skill version diffing
+  You can now compare any two versions of a skill side-by-side...
+  ...
+```
+
+The agent had everything it needed — the body told it where to find what's already published, how to discover what's new, and how to format the output.
+
+### Updating the skill mid-session
+
+After reviewing the output, you decide the skill could be better:
+
+```text
+> Great, but let's update the hog-release-notes skill — add a rule to
+  always include a fun hedgehog fact at the end of each set of
+  release notes.
+
+Agent calls skill-get("hog-release-notes") to fetch the current version,
+adds the new rule to the body, then calls skill-update with the updated
+body and base_version for conflict detection.
+
+✓ Updated "hog-release-notes" to version 2. Added rule:
+  "End each set of release notes with a fun hedgehog fact."
+```
+
+That's it — the skill is updated in PostHog. You can review the diff in the PostHog UI to see exactly what changed.
+
+### A teammate benefits automatically
+
+The next day, a teammate runs the same skill from their own agent (Claude Code, Cursor, or anything with PostHog MCP):
+
+```text
+> Use PostHog MCP to run "hog-release-notes" for this week.
+
+Agent calls skill-get and gets version 2 (the latest), follows the updated
+instructions, and includes a hedgehog fact at the end — without the
+teammate needing to know anything changed.
+```
+
+No sync, no PR, no "hey I updated the skill" message in Slack. The skill evolved, and everyone got the new version on their next fetch.
+
+## Updating and versioning skills
+
+Every `skill-update` publishes a new immutable version.
+
+### Edit a skill
+
+**Via the UI:** open the skill, click **Edit latest**, make changes, and click **Publish version**.
+
+**Via MCP:** ask your agent to update it. Always fetch first so you have the current `base_version`:
+
+```text
+Update the PostHog skill "hog-release-notes" to also include
+a "Known limitations" section in the release notes structure.
+```
+
+The agent calls `skill-get` to read the current version, then `skill-update` with the new body and `base_version`. Fields you don't pass are carried forward. Pick the most surgical primitive for what you're changing — the API offers several so you don't have to round-trip the whole skill to tweak one part.
+
+### Use incremental edits
+
+Instead of rewriting the entire skill body, you can use incremental find/replace edits via the `edits` parameter. This is useful for making small changes without risking accidental drift:
+
+```json
+{
+  "edits": [
+    { "old": "## Old heading", "new": "## New heading" },
+    { "old": "outdated instruction", "new": "updated instruction" }
+  ],
+  "base_version": 2
+}
+```
+
+Each edit must have:
+
+- `old` — the exact text to find (must match exactly once in the body)
+- `new` — the replacement text
+
+Edits are applied sequentially. If `old` matches zero times or more than once, the update fails with an error indicating which edit failed.
+
+You can use either `body` (full replacement) or `edits` (incremental), but not both in the same request.
+
+### Edit a single bundled file
+
+Use `file_edits` to patch one bundled file without resending every file:
+
+```json
+{
+  "skill_name": "hog-release-notes",
+  "file_edits": [
+    {
+      "path": "scripts/changelog.py",
+      "edits": [{ "old": "DAYS = 7", "new": "DAYS = 14" }]
+    }
+  ],
+  "base_version": 2
+}
+```
+
+Non-targeted files carry forward unchanged. `file_edits` cannot add, remove, or rename files — use the per-file tools below for that.
+
+### Add, remove, or rename a file
+
+Use atomic per-file tools when you need to add, delete, or rename a single bundled file. Each publishes a new version:
+
+**Add a file:**
+
+```json
+// skill-file-create
+{
+  "skill_name": "hog-release-notes",
+  "path": "scripts/format.py",
+  "content": "# Formatting helpers...",
+  "base_version": 2
+}
+```
+
+**Delete a file:**
+
+```json
+// skill-file-delete
+{
+  "skill_name": "hog-release-notes",
+  "file_path": "scripts/old-script.py",
+  "base_version": 3
+}
+```
+
+**Rename a file:**
+
+```json
+// skill-file-rename
+{
+  "skill_name": "hog-release-notes",
+  "old_path": "scripts/format.py",
+  "new_path": "scripts/format_v2.py",
+  "base_version": 4
+}
+```
+
+### Replace the whole bundle (rare)
+
+Passing `files` to `skill-update` replaces ALL bundled files — anything not in the array is dropped. Only use this when you intentionally want to wipe and reseed the bundle. For everything else, prefer `file_edits` or the per-file CRUD tools above.
+
+### Review changes
+
+Use the compare view in the PostHog UI to see a diff between any two versions. This is especially useful when an agent has updated a skill — you can review exactly what it changed before the rest of your team picks it up.
+
+### Automatic propagation
+
+Team members get the latest version on their next `skill-get`. No PRs, no syncing, no manual updates — just one source of truth in PostHog.
+
+## Porting a local skill
+
+To move a skill from a local `SKILL.md` directory (e.g. `~/.claude/skills/<name>/` with `scripts/`, `references/`, and `assets/` subdirs) into PostHog:
+
+1. Read the local `SKILL.md` — use its frontmatter for `name`, `description`, `license`, `compatibility`, `allowed_tools`, and `metadata`; the body after the frontmatter becomes `body`
+2. Walk the `scripts/`, `references/`, and `assets/` subdirs and collect each file as `{ path, content, content_type }`
+3. Call `skill-create` with everything in one shot — the skill lands at v1 with its full bundle
+
+The skill is then available to the whole team via `skill-get`.
+
+## Skills vs prompts
+
+PostHog also has a separate [prompts](/docs/llm-analytics/prompts) tool family (`prompt-list`, `prompt-get`, `prompt-create`, `prompt-update`) for plain single-text prompts — LLM system prompts, short reusable text, and anything the SDK fetches at runtime for generations. Skills are the right choice whenever the workflow needs structured metadata, bundled files, or an `allowed_tools` surface. When in doubt, use skills.
+
+## Team workflow tips
+
+- **Use descriptive, kebab-case names** — `review-frontend-pr`, `write-api-docs`, `check-security-headers`
+- **Invest in descriptions** — discovery depends entirely on them; an agent decides whether to load your skill based on its description alone
+- **Discover before you create** — run `skill-list` to see what skills your team already has before creating a duplicate
+- **Port local skills to PostHog** — if you have useful `SKILL.md` files saved locally, move them (with their bundled files) to PostHog so the whole team benefits
+- **Keep skills focused** — one task per skill. A skill that does "everything" is a skill that does nothing well
+- **Don't preload bundled files** — let the agent fetch them on demand via `skill-file-get`; that's the whole point of progressive disclosure
+- **Let agents update skills** — after an agent follows a skill, ask it to suggest improvements, then update via `skill-update`

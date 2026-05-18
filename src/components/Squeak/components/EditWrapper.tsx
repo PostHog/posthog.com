@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useUser } from 'hooks/useUser'
-import { IconCheck, IconX } from '@posthog/icons'
 import RichText from './RichText'
 import { useFormik } from 'formik'
 import transformValues from '../util/transformValues'
 import OSButton from 'components/OSButton'
+import { CurrentQuestionContext } from './Question'
 
 export default function EditWrapper({
     data,
@@ -26,6 +26,7 @@ export default function EditWrapper({
     }
     const [loading, setLoading] = useState(false)
     const { user, getJwt } = useUser()
+    const { mutate } = useContext(CurrentQuestionContext)
     const body = data?.attributes?.body
     const contentID = data?.id
     const { values, setFieldValue, submitForm } = useFormik({
@@ -38,24 +39,56 @@ export default function EditWrapper({
             setLoading(true)
             const jwt = await getJwt()
             const transformedValues = await transformValues(values, user?.profile?.id, jwt)
-            await fetch(
-                `${process.env.GATSBY_SQUEAK_API_HOST}/api/${type === 'reply' ? 'replies' : 'questions'}/${contentID}`,
-                {
-                    method: 'PUT',
-                    headers: {
-                        'content-type': 'application/json',
-                        Authorization: `Bearer ${jwt}`,
-                    },
-                    body: JSON.stringify({
-                        data: {
-                            body: transformedValues.body,
-                        },
-                    }),
-                }
-            )
-            await onSubmit()
-            setLoading(false)
+
+            if (mutate) {
+                mutate((current: any) => {
+                    if (!current) return current
+                    if (type === 'question') {
+                        return {
+                            ...current,
+                            attributes: { ...current.attributes, body: transformedValues.body },
+                        }
+                    }
+                    if (type === 'reply') {
+                        const optimisticReplies = current.attributes.replies?.data?.map((r: any) =>
+                            r.id === contentID
+                                ? { ...r, attributes: { ...r.attributes, body: transformedValues.body } }
+                                : r
+                        )
+                        return {
+                            ...current,
+                            attributes: { ...current.attributes, replies: { data: optimisticReplies } },
+                        }
+                    }
+                    return current
+                }, false)
+            }
+
             handleSetEditing(false)
+
+            try {
+                await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/${
+                        type === 'reply' ? 'replies' : 'questions'
+                    }/${contentID}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json',
+                            Authorization: `Bearer ${jwt}`,
+                        },
+                        body: JSON.stringify({
+                            data: {
+                                body: transformedValues.body,
+                            },
+                        }),
+                    }
+                )
+                await onSubmit()
+            } catch {
+                if (mutate) await mutate()
+            }
+            setLoading(false)
         },
     })
 

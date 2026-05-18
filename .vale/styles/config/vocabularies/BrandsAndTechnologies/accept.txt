@@ -284,6 +284,12 @@ Zapier
 Zendesk
 Zuora
 
+# PostHog internal tools
+hogli
+phrocs
+mprocs
+Turborepo
+
 # Acronyms, languages, frameworks, protocols, etc.
 A/A
 A/B

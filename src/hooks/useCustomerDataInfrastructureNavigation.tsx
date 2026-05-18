@@ -12,6 +12,10 @@ export const customerDataInfrastructureNav = {
             url: '/data-stack',
         },
         {
+            name: 'Is PostHog warehouse native?',
+            url: '/data-stack/warehouse-native',
+        },
+        {
             name: 'Data tools',
         },
         {
