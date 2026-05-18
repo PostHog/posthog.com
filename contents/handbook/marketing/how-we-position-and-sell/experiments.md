@@ -16,7 +16,9 @@ Most experiment platforms run tests. PostHog runs tests *and* closes the loop fr
 
 ## The unique belief (in terms of experiments)
 
-In traditional product development, an A/B test is the last step before shipping. In the [self-driving development](/blog/self-driving-product), it will be the evaluation layer. PostHog Code will run experiments automatically after shipping a change — so the same metric that triggered the original signal gets re-queried to verify the fix worked. If the metric didn't move, or moved the wrong way, the agent will flag the change for review or reverts.
+In traditional product development, an A/B test is the last step before shipping. In [self-driving development](/blog/self-driving-product) they are tactically important because they turn product data into a control system. They let the agent make changes without pretending it has perfect judgment. The agent can be wrong safely, because every change has a measured blast radius and a pass/fail signal.
+
+That’s the PostHog-shaped belief: autonomous coding only becomes trustworthy when the agent can measure whether its own work improved the product.
 
 **Experiments are how the autonomy loop knows whether it's working.** Without experiments, agents can ship changes indefinitely without knowing if anything improved. Experiments are the feedback signal that makes self-driving product development trustworthy — not just fast.
 

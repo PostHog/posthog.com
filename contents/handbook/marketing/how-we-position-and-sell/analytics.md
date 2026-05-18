@@ -47,7 +47,7 @@ Analytics is the memory of everything users have done. Self-driving development 
 
 ### Message 2: Autocapture means you never miss the signal that mattered
 
-**Problem:** Traditional analytics requires instrumentation before you know what to measure. By the time you add the event and gather the data, the need for it is gone. 
+**Problem:** Traditional analytics starts too early and answers too late. You have to instrument an event before you know it matters, then wait around for data after the decision window has closed.
 
 **Solution:** PostHog's autocapture records clicks, pageviews, form submissions, and rage clicks from the moment you install the SDK — no manual instrumentation required. You can always go back and analyze behavior you didn't know you'd need. And installation is easy with the Wizard!
 
