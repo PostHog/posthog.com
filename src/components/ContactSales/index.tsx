@@ -14,6 +14,7 @@ interface ContactSalesProps {
             ctaLocation?: 'top' | 'bottom'
             showToField?: boolean | undefined
             rowPadding?: string
+            secondaryButtons?: { label: string; to: string }[]
         }
         form: {
             fields: {
