@@ -2,8 +2,8 @@
 title: Logging best practices
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-import Tab from 'components/Tab'
+import { CalloutBox } from "components/Docs/CalloutBox";
+import Tab from "components/Tab";
 
 Most logging is bad. Not because people don't log enough. They log too much of the wrong things and too little of the right things. The result is millions of lines that are expensive to store and useless to query.
 
@@ -22,6 +22,7 @@ This guide covers:
 - [Trace and session context](#add-trace-and-session-context)
 - [Schema evolution](#treat-your-log-schema-like-an-api-contract)
 - [What not to log](#what-not-to-log)
+- [Automatic PII scrubbing](#automatic-pii-scrubbing)
 - [Checklist](#logging-checklist)
 
 ## Centralize your logs
@@ -50,7 +51,7 @@ logger.info("Updating database")
 logger.info("Payment complete")
 ```
 
-Six log lines, none of them useful in production at `INFO` level. They tell you what the code *does* (you already know that, you wrote it), not what happened to a specific request.
+Six log lines, none of them useful in production at `INFO` level. They tell you what the code _does_ (you already know that, you wrote it), not what happened to a specific request.
 
 Step-level logs aren't universally wrong. They're valuable at `DEBUG` level for diagnosing race conditions, understanding ordering in concurrent systems, or tracing through complex state machines. The point is: don't make them your default.
 
@@ -86,11 +87,13 @@ In those cases, use a hybrid: emit a wide event at each meaningful stage boundar
 Plain text logs are optimized for writing, not querying. Structured logs (JSON key-value pairs) are the opposite. They're queryable, filterable, and machine-readable.
 
 **Bad:**
+
 ```
 Payment failed for user abc123 - Stripe error: card_declined (amount: $49.99)
 ```
 
 **Good:**
+
 ```json
 {
   "event": "payment.failed",
@@ -111,7 +114,7 @@ PostHog's log search works across all fields in structured logs, so the more con
 
 ## Think in cardinality and dimensionality
 
-Two concepts that separate useful logs from noise. You want both high cardinality *and* high dimensionality. One wide event with 50 fields tells you more than 50 separate log lines with three fields each.
+Two concepts that separate useful logs from noise. You want both high cardinality _and_ high dimensionality. One wide event with 50 fields tells you more than 50 separate log lines with three fields each.
 
 <details>
 <summary>What is cardinality?</summary>
@@ -169,113 +172,113 @@ The implementation details vary by language, but the pattern is always the same.
 <Tab.Panels>
   <Tab.Panel>
 
-  Python's standard `logging` module with the `extra` parameter. The OpenTelemetry SDK (configured in the [installation guide](/docs/logs/installation/python)) picks up these attributes automatically.
+Python's standard `logging` module with the `extra` parameter. The OpenTelemetry SDK (configured in the [installation guide](/docs/logs/installation/python)) picks up these attributes automatically.
 
-  ```python
-  import logging
+```python
+import logging
 
-  logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
-  def handle_checkout(request):
-      attrs = {
-          "event": "checkout",
-          "posthog_distinct_id": request.user.id,
-          "subscription_tier": request.user.tier,
-      }
-
-      cart = get_cart(request.user)
-      attrs.update({
-          "item_count": len(cart.items),
-          "cart_total_cents": cart.total_cents,
-      })
-
-      try:
-          payment = process_payment(cart)
-          attrs.update({
-              "payment_method": payment.method,
-              "provider": payment.provider,
-              "provider_latency_ms": payment.latency_ms,
-              "status": "success",
-          })
-          logger.info("checkout completed", extra=attrs)
-      except PaymentError as e:
-          attrs.update({"status": "failed", "error_type": e.code})
-          logger.error("checkout completed", extra=attrs)
-          raise
-  ```
-
-  </Tab.Panel>
-  <Tab.Panel>
-
-  The OpenTelemetry Logs API with `logger.emit()`. Attributes are passed as a dictionary on each log record. See the [installation guide](/docs/logs/installation/nodejs) for SDK setup.
-
-  ```js
-  import { logs } from "@opentelemetry/api-logs";
-
-  const logger = logs.getLogger("my-app");
-
-  function handleCheckout(req, res) {
-    const attrs = {
-      event: "checkout",
-      posthog_distinct_id: req.user.id,
-      subscription_tier: req.user.tier,
-    };
-
-    const cart = getCart(req.user);
-    Object.assign(attrs, { item_count: cart.items.length, cart_total_cents: cart.totalCents });
-
-    try {
-      const payment = processPayment(cart);
-      Object.assign(attrs, {
-        payment_method: payment.method,
-        provider: payment.provider,
-        provider_latency_ms: payment.latencyMs,
-        status: "success",
-      });
-      logger.emit({ severityText: "INFO", body: "checkout completed", attributes: attrs });
-    } catch (e) {
-      Object.assign(attrs, { status: "failed", error_type: e.code });
-      logger.emit({ severityText: "ERROR", body: "checkout completed", attributes: attrs });
-      throw e;
+def handle_checkout(request):
+    attrs = {
+        "event": "checkout",
+        "posthog_distinct_id": request.user.id,
+        "subscription_tier": request.user.tier,
     }
-  }
-  ```
+
+    cart = get_cart(request.user)
+    attrs.update({
+        "item_count": len(cart.items),
+        "cart_total_cents": cart.total_cents,
+    })
+
+    try:
+        payment = process_payment(cart)
+        attrs.update({
+            "payment_method": payment.method,
+            "provider": payment.provider,
+            "provider_latency_ms": payment.latency_ms,
+            "status": "success",
+        })
+        logger.info("checkout completed", extra=attrs)
+    except PaymentError as e:
+        attrs.update({"status": "failed", "error_type": e.code})
+        logger.error("checkout completed", extra=attrs)
+        raise
+```
 
   </Tab.Panel>
   <Tab.Panel>
 
-  Go's standard `slog` package, bridged to OpenTelemetry via `otelslog` (configured in the [installation guide](/docs/logs/installation/go)). Each `slog.With()` call returns a new logger with additional attributes.
+The OpenTelemetry Logs API with `logger.emit()`. Attributes are passed as a dictionary on each log record. See the [installation guide](/docs/logs/installation/nodejs) for SDK setup.
 
-  ```go
-  func HandleCheckout(w http.ResponseWriter, r *http.Request) {
-      log := slog.With(
-          "event", "checkout",
-          "posthog_distinct_id", r.Context().Value("posthog_distinct_id"),
-      )
+```js
+import { logs } from "@opentelemetry/api-logs";
 
-      cart, _ := getCart(r.Context())
-      log = log.With(
-          "item_count", len(cart.Items),
-          "cart_total_cents", cart.TotalCents,
-      )
+const logger = logs.getLogger("my-app");
 
-      payment, err := processPayment(r.Context(), cart)
-      if err != nil {
-          log.With(
-              "status", "failed",
-              "error_type", err.Code,
-          ).ErrorContext(r.Context(), "checkout completed")
-          return
-      }
+function handleCheckout(req, res) {
+  const attrs = {
+    event: "checkout",
+    posthog_distinct_id: req.user.id,
+    subscription_tier: req.user.tier,
+  };
 
-      log.With(
-          "payment_method", payment.Method,
-          "provider", payment.Provider,
-          "provider_latency_ms", payment.LatencyMs,
-          "status", "success",
-      ).InfoContext(r.Context(), "checkout completed")
+  const cart = getCart(req.user);
+  Object.assign(attrs, { item_count: cart.items.length, cart_total_cents: cart.totalCents });
+
+  try {
+    const payment = processPayment(cart);
+    Object.assign(attrs, {
+      payment_method: payment.method,
+      provider: payment.provider,
+      provider_latency_ms: payment.latencyMs,
+      status: "success",
+    });
+    logger.emit({ severityText: "INFO", body: "checkout completed", attributes: attrs });
+  } catch (e) {
+    Object.assign(attrs, { status: "failed", error_type: e.code });
+    logger.emit({ severityText: "ERROR", body: "checkout completed", attributes: attrs });
+    throw e;
   }
-  ```
+}
+```
+
+  </Tab.Panel>
+  <Tab.Panel>
+
+Go's standard `slog` package, bridged to OpenTelemetry via `otelslog` (configured in the [installation guide](/docs/logs/installation/go)). Each `slog.With()` call returns a new logger with additional attributes.
+
+```go
+func HandleCheckout(w http.ResponseWriter, r *http.Request) {
+    log := slog.With(
+        "event", "checkout",
+        "posthog_distinct_id", r.Context().Value("posthog_distinct_id"),
+    )
+
+    cart, _ := getCart(r.Context())
+    log = log.With(
+        "item_count", len(cart.Items),
+        "cart_total_cents", cart.TotalCents,
+    )
+
+    payment, err := processPayment(r.Context(), cart)
+    if err != nil {
+        log.With(
+            "status", "failed",
+            "error_type", err.Code,
+        ).ErrorContext(r.Context(), "checkout completed")
+        return
+    }
+
+    log.With(
+        "payment_method", payment.Method,
+        "provider", payment.Provider,
+        "provider_latency_ms", payment.LatencyMs,
+        "status", "success",
+    ).InfoContext(r.Context(), "checkout completed")
+}
+```
 
   </Tab.Panel>
 </Tab.Panels>
@@ -299,12 +302,12 @@ If your application crashes before reaching the end of a request (segfault, OOM,
 
 Log levels exist to control signal-to-noise ratio. Use them consistently:
 
-| Level | Use for | Example |
-|-------|---------|---------|
-| `ERROR` | Something failed and needs attention | Payment processing failed, database connection lost |
-| `WARN` | Something unexpected that didn't cause failure | Retry succeeded on third attempt, deprecated API version used |
-| `INFO` | Normal operations worth recording | Request completed, user signed up, deployment finished |
-| `DEBUG` | Detailed info for active debugging | Cache hit/miss ratios, query plans, intermediate state |
+| Level   | Use for                                        | Example                                                       |
+| ------- | ---------------------------------------------- | ------------------------------------------------------------- |
+| `ERROR` | Something failed and needs attention           | Payment processing failed, database connection lost           |
+| `WARN`  | Something unexpected that didn't cause failure | Retry succeeded on third attempt, deprecated API version used |
+| `INFO`  | Normal operations worth recording              | Request completed, user signed up, deployment finished        |
+| `DEBUG` | Detailed info for active debugging             | Cache hit/miss ratios, query plans, intermediate state        |
 
 Two rules of thumb:
 
@@ -360,11 +363,35 @@ Once you adopt wide events, your field names and value formats become dependenci
 
 Some things should never appear in your logs:
 
-- **Secrets:** API keys, passwords, tokens, credit card numbers. If you log these by accident, you now have a security incident *and* a logging problem.
+- **Secrets:** API keys, passwords, tokens, credit card numbers. If you log these by accident, you now have a security incident _and_ a logging problem.
 - **Request and response bodies:** Logging full payloads is one of the fastest ways to blow up storage costs and accidentally capture PII, auth tokens, or sensitive user data. Log the metadata (status code, content length, duration), not the body.
 - **Personal data you don't need:** Full email addresses, IP addresses, or other PII beyond what's required for debugging. If you need to correlate logs to a user but can't store raw identifiers, hash or tokenize them. Check your GDPR, HIPAA, or other compliance requirements, as even fields like `posthog_distinct_id` or `email` may need masking depending on your jurisdiction.
 - **High-frequency health checks:** Load balancer pings and liveness probes generate massive volume with zero debugging value. Exclude them.
 - **Unnecessary duplication:** If a downstream service logs the same event, you don't always need to log it again upstream. That said, when you're debugging a production incident at 2am, having key context from downstream calls in your own service's logs can save you from correlating across multiple systems under pressure. The rule of thumb: don't log a play-by-play of every call you make, but do include the outcome and any data you'd need to debug without switching to another service's logs.
+
+### Automatic PII scrubbing
+
+Even with good practices, sensitive data can slip into logs accidentally. PostHog can automatically redact common PII patterns from your log payloads at ingestion time, before anything is stored.
+
+To enable it, go to [**Settings** > **Logs** > **PII scrubbing**](https://app.posthog.com/settings/environment-logs#logs-pii-scrub) and turn on the toggle.
+
+When enabled, the following patterns are detected and replaced with `{{REDACTED}}`:
+
+- **Bearer tokens** – `Bearer <token>` headers
+- **Stripe secret keys** – keys matching `sk_live_*` or `sk_test_*`
+- **Email addresses**
+- **Credit card numbers** – 13–19 digit runs that pass Luhn validation (with optional spaces or hyphens)
+- **Sensitive attribute keys** – the entire value is redacted when the attribute key contains substrings like `password`, `secret`, `token`, `authorization`, `cookie`, `credential`, `apikey`, `api_key`, `access_token`, `refresh_token`, `bearer`, or `email`
+
+For JSON log bodies, the scrubber recursively walks the structure and applies both key-based and pattern-based redaction.
+
+<CalloutBox icon="IconWarning" title="PII scrubbing is lossy" type="caution">
+
+Redaction replaces matched values with a fixed placeholder. Original values can't be recovered. This is not reversible hashing – once scrubbed, the data is gone.
+
+</CalloutBox>
+
+This feature catches common patterns but isn't exhaustive. Secrets that don't match these shapes, digit runs that fail Luhn validation, and values under keys outside the sensitive list only get generic pattern coverage. Treat PII scrubbing as a safety net, not a replacement for avoiding sensitive data in your logs in the first place.
 
 ## Logging checklist
 
@@ -398,4 +425,5 @@ Use this to audit your existing logging or as a starting point for a new service
 - PII is masked: emails, physical addresses, and credit card numbers are hashed or removed per GDPR/HIPAA requirements
 - Request/response bodies are not logged (to avoid capturing sensitive user data)
 - Field names and value types are treated as a stable schema (changes are communicated)
+- Consider enabling [automatic PII scrubbing](#automatic-pii-scrubbing) as a safety net for accidental leaks
 - [Link logs to Session Replays](/docs/logs/link-session-replay) for full user context
