@@ -62,12 +62,15 @@ When viewing local changes, the file list lets you manage your working tree with
 
 Click the plus button on any line(s) in a diff to open a comment box. Describe the change you want and press `⌘ Cmd` + `⏎ Enter` to send it to the agent. The prompt is sent as a follow-up message on the task, scoped to the file path and line range you selected.
 
+To send a batch of comments to the agent, check **Add to review** before submitting each one, then **Send to agent** when you're ready. This will combine all your feedback into a single agent prompt.
+
 This is the fastest way to ask for tweaks like _"add a null check here"_ or _"this branch is unreachable, remove it"_ without context-switching back to the chat.
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_30_at_1_53_45_PM_b36ff04efd.png"
-    classes="rounded"
-    alt="Inline comment box on a selected range of diff lines"
+<ProductVideo
+    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/batch_review_comments_a1ec602809.mp4" 
+    alt="Send review comments to the agent" 
+    classes="rounded shadow-xl"
+    autoPlay={false}
 />
 
 ## GitHub pull requests
