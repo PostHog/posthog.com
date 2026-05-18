@@ -112,7 +112,7 @@ const planSummary: PlanData[] = [
         intent: 'free' as const,
     },
     {
-        title: 'Pay-as-you-go',
+        title: 'Cheaper',
         subtitle: 'Usage-based pricing after free tier',
         pricePreface: 'Starts at',
         price: '$0',
@@ -280,7 +280,7 @@ export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highl
                             </div>
                             {/* Header */}
                             {mainPlans?.map((plan: BillingV2PlanType, idx: number) => {
-                                // Add border-r to the last plan column (Pay-as-you-go)
+                                // Add border-r to the last plan column (Cheaper)
                                 const isLast = idx === mainPlans.length - 1
                                 const planKey = plan.key || plan.plan_key || `plan-${idx}`
                                 return (

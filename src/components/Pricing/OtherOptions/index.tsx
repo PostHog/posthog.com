@@ -38,7 +38,7 @@ interface ISection {
 
 const sections: ISection[] = [
     {
-        title: 'Enterprise',
+        title: 'More expensive',
         icon: <IconShield className="w-7 h-7" />,
         description: <EnterpriseDescription />,
         cta: {

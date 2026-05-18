@@ -2,7 +2,7 @@ import React from 'react'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { IconInfo } from '@posthog/icons'
 import useProduct from 'hooks/useProduct'
-import ScrollArea from "components/RadixUI/ScrollArea"
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 interface PlanComparisonProps {
     products: any[]
@@ -410,7 +410,7 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
                             <p className="text-secondary">No credit card required</p>
                         </div>
                         <div className="border-b border-primary">
-                            <strong>{paidPlan?.name || 'Pay-as-you-go'}</strong>
+                            <strong>{paidPlan?.name || 'Cheaper'}</strong>
                             <p className="text-secondary">Starts at $0/mo</p>
                         </div>
                         {/* Volume/Usage row - dynamically named based on unit */}
@@ -464,7 +464,9 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
                                             delay={0}
                                         >
                                             <div className="max-w-xs">
-                                                <p className="mb-0 text-[13px] leading-normal">{difference.description}</p>
+                                                <p className="mb-0 text-[13px] leading-normal">
+                                                    {difference.description}
+                                                </p>
                                             </div>
                                         </Tooltip>
                                     )}
@@ -485,7 +487,6 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
                                 </p>
                             </div>
                         )}
-
                     </div>
                     {productInfo?.customPricingContent && productInfo.customPricingContent}
                 </ScrollArea>
