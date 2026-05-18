@@ -4,6 +4,45 @@ title: Monitor and search issues
 
 This guide covers how to find the most relevant, urgent, and impactful issues in your error tracking using the [issues page](https://app.posthog.com/error_tracking).
 
+## Viewing aggregate insights
+
+The **Insights** tab on the [error tracking page](https://app.posthog.com/error_tracking) provides aggregate metrics and trend charts across all your exceptions. Use it to understand the overall health of your application at a glance.
+
+### Summary stats
+
+At the top of the Insights tab, five summary cards display key metrics for your selected date range:
+
+| Metric | Description |
+| --- | --- |
+| Total exceptions | Count of all `$exception` events |
+| Affected users | Number of unique users who experienced exceptions |
+| Total sessions | Number of unique sessions across all events |
+| Sessions with crash | Number of unique sessions that had at least one exception |
+| Crash-free sessions | Percentage of sessions without any exceptions |
+
+### Exception charts
+
+Below the summary stats, three trend charts visualize your exception data over time:
+
+- **Exception volume** - A bar chart showing the number of exceptions per day (or per hour for date ranges under 25 hours).
+- **Affected users** - A line chart showing the number of unique users experiencing exceptions per day.
+- **Crash-free sessions** - A line chart showing the percentage of sessions without any exceptions per day, calculated as `(total sessions - sessions with crash) / total sessions * 100`.
+
+### Filtering insights
+
+The Insights tab shares the same filtering interface as the Issues tab. You can apply:
+
+- **Date range** filters to scope metrics to a specific time period
+- **Quick filters** for common filter patterns
+- **Property filters** on exception event properties, person properties, and cohorts
+- **Test accounts filter** to exclude internal users
+
+All filters are URL encoded, so you can share filtered views with your team by copying the URL.
+
+### Open charts in Product Analytics
+
+Each chart includes an **Open as insight** button that opens the chart as a [Product Analytics](/docs/product-analytics) insight. The date range, test accounts filter, and property filters are retained when opening as an insight. From there, you can add the insight to a [dashboard](/docs/product-analytics/dashboards) for ongoing monitoring.
+
 ## Monitoring issues
 
 When you're monitoring issues in your project, there are generally two common workflows:
