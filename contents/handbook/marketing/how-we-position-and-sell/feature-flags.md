@@ -8,7 +8,7 @@ showTitle: true
 
 ## The unique belief (in terms of feature flags)
 
-Feature flags started as deployment safety nets — a way to ship code slowly without exposing too much to users. In the [product autonomy loop](/blog/self-driving-product), they're the mechanism through which agents ship code safely. PostHog Code's `instrument-feature-flags` skill wraps every change it opens in a flag by default. The enricher shows stale flags inline in your editor. When an agent ships a fix, the flag is the rollout control.
+Feature flags started as deployment safety nets — a way to ship code slowly without exposing too much to users. In the [product autonomy loop](/blog/self-driving-product), they're the mechanism through which agents ship code safely. PostHog Code's `instrument-feature-flags` skill wraps relevant changes it opens in a flag by default. The enricher shows stale flags inline in your editor. When an agent ships a fix, the flag is the rollout control.
 
 **Flags aren't just for humans anymore. They're the guardrails that let agents work autonomously and safely.**
 
