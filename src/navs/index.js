@@ -1510,6 +1510,10 @@ export const handbookSidebar = [
                         name: 'Tracking feature requests',
                         url: '/handbook/cs-and-onboarding/feature-requests',
                     },
+                    {
+                        name: 'Playbook for growing an account',
+                        url: '/handbook/growth/sales/grow-an-account.md',
+                    },
                 ],
             },
             {
