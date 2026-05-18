@@ -10,7 +10,7 @@ showTitle: true
 
 Every team building an AI-native product is running two products simultaneously: the product users see, and the AI layer underneath it. That AI layer has its own failure modes — bad prompts, cost explosions, latency spikes, quality regressions — and none of those show up in standard product analytics. That's where LLM analytics comes in!
 
-PostHog Code already uses LLM traces to navigate and optimize AI features as part of the [product autonomy loop](/blog/self-driving-product). Its built-in `exploring-llm-traces` and `exploring-llm-clusters` skills let agents find patterns in model calls and propose prompt improvements. But that only works if the traces exist. **LLM Analytics is the signal layer that makes AI products self-improving.**
+PostHog Code already uses LLM traces optimize AI features as part of the [product autonomy loop](/blog/self-driving-product). Its built-in `exploring-llm-traces` and `exploring-llm-clusters` skills let agents find patterns in model calls and propose prompt improvements. But that only works if the traces exist. **LLM Analytics is the signal layer that makes AI products self-improving.**
 
 If you're building AI features without LLM observability, your agents are flying blind.
 

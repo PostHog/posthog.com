@@ -12,7 +12,7 @@ Feature flags started as deployment safety nets — a way to ship code slowly wi
 
 **Flags aren't just for humans anymore. They're the guardrails that let agents work autonomously and safely.**
 
-Without flags, agents can't ship incrementally. Without incremental shipping, agents can't evaluate safely. Flags are the atomic unit of the autonomy loop.
+Without flags, agents can't ship incrementally. Without incremental shipping, agents can't evaluate safely. 
 
 ## Who this is for
 
