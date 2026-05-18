@@ -75,14 +75,13 @@ export default function PostHogMCPLanding(): JSX.Element {
                             </CallToAction>
                         </div>
                         <p className="text-sm !mb-0 text-secondary">
-                            With{' '}
+                            With the{' '}
                             <Link to="/docs/model-context-protocol" state={{ newWindow: true }}>
                                 PostHog MCP
                             </Link>
-                            , your AI agents can grab session replays, summarize user behavior, and turn bug reports
-                            into PRs, all from Claude Code, Cursor, Zed, or Windsurf. Instead of manually searching for
-                            insights, building dashboards, and writing SQL queries, just ask your agent to use the
-                            PostHog MCP. No per-seat pricing, no credit card.
+                            , your agents become PostHog geniuses. Instead of manually searching for insights, data, or
+                            trends in the PostHog user interface, just ask your agent to use the PostHog MCP. Works with
+                            Cursor, Codex, Claude Code, Windsurf, VS Code, and others.
                         </p>
                     </div>
                     <div className="flex justify-center">
@@ -123,13 +122,13 @@ export default function PostHogMCPLanding(): JSX.Element {
                             icon="IconMagicWand"
                         >
                             <p>
-                                <strong>PostHog Wizard</strong> is an agentic CLI tool that installs and configures
-                                PostHog for you. The Wizard analyzes your codebase and automagically sets up the right
-                                tools, custom events, and dashboards for your product. All it takes is one line:
+                                <strong>PostHog Wizard</strong> is an agentic CLI tool that installs and configures the
+                                PostHog MCP for you. The Wizard analyzes your codebase and automagically sets up the
+                                right tools, custom events, and dashboards for your product. All it takes is one line:
                             </p>
 
                             <SingleCodeBlock language="bash" showAskAI={false}>
-                                npx @posthog/wizard
+                                npx @posthog/wizard mcp add
                             </SingleCodeBlock>
 
                             <ProductVideo
@@ -139,34 +138,17 @@ export default function PostHogMCPLanding(): JSX.Element {
                                 autoPlay={true}
                             />
 
-                            <p>No schemas to design upfront. No data warehouse to set up.</p>
-
-                            <p className="text-secondary">
-                                <em>
-                                    Prefer to manually set up PostHog in your codebase? Already using PostHog and want
-                                    to wire it into your IDE?
-                                </em>
-                            </p>
-                            <p>
-                                You can still benefit from installing the MCP. Instead of using the Wizard, use the
-                                following in your terminal:
-                            </p>
-
-                            <SingleCodeBlock language="bash" showAskAI={false}>
-                                npx @posthog/wizard mcp add
-                            </SingleCodeBlock>
-
                             <div className="mt-4">
                                 <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
-                                    Set up PostHog with AI
+                                    Start cooking with our MCP
                                 </CallToAction>
                             </div>
                         </QuestLogItem>
 
                         <QuestLogItem title="Talk to me, baby" subtitle="Natural language navigation" icon="IconChat">
                             <p>
-                                Once you connect the PostHog MCP server to Claude, Cursor, or whatever agent you already
-                                use, just ask a question. For example:
+                                Once you connect to the PostHog MCP server, see how Hogpilled your agent has become. For
+                                example:
                             </p>
 
                             <ul>
@@ -210,10 +192,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                 <li>Full audit log of every query run on your data, by humans or agents</li>
                             </ul>
 
-                            <p>
-                                If you use any of the following PostHog products, chances are you're going to love our
-                                MCP.
-                            </p>
+                            <p>If you use any of the following PostHog products, you're going to love our MCP.</p>
 
                             <ProductList
                                 className="grid gap-4 grid-cols-2 not-prose"
@@ -239,7 +218,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                     to="/docs/model-context-protocol"
                                     state={{ newWindow: true }}
                                 >
-                                    Connect the MCP server
+                                    Get your agents Hogpilled
                                 </CallToAction>
                             </div>
                         </QuestLogItem>
@@ -289,7 +268,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                     to="/docs/product-analytics/build-insights-mcp"
                                     state={{ newWindow: true }}
                                 >
-                                    MCP for Analytics
+                                    Deploy MCP for Analytics
                                 </CallToAction>
                             </div>
                         </QuestLogItem>
