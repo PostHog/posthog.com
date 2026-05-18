@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import {
     IconThoughtBubble,
-    IconBook,
     IconDashboard,
     IconDownload,
     IconNotebook,
@@ -14,24 +13,28 @@ import {
     IconClock,
     IconPeople,
     IconTerminal,
+    IconGraph,
     IconFunnels,
     IconUserPaths,
     IconCorrelationAnalysis,
     IconRetention,
     IconStickiness,
+    IconHogQL,
+    IconDatabaseBolt,
     IconAsterisk,
     IconAI,
     IconSupport,
+    IconCode,
     IconSpotlight,
+    IconMessage,
     IconTestTube,
     IconListTreeConnected,
     IconSparkles,
     IconTarget,
     IconArrowUpRight,
-    IconTrends,
-    IconCursorClick,
 } from '@posthog/icons'
 import useProducts from './useProducts'
+import QASwarmIcon from 'components/QASwarmIcon'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -78,21 +81,56 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'blue',
             category: 'communication',
             slug: 'docs/support',
-            status: 'beta',
+            status: 'WIP',
         },
         {
-            name: 'PostHog Code',
-            Icon: IconBook,
-            description: 'AI code editor that knows how people use your product',
+            name: 'Coding agent (PostHog Code)',
+            Icon: IconCode,
+            description: 'AI coding agent that understands your product analytics.',
             handle: 'posthog_code',
             color: 'brown',
             colorSecondary: 'brown',
             category: 'automation',
-            slug: 'code',
-            status: 'beta',
+            // slug: 'twig',
+            status: 'WIP',
         },
         {
-            name: 'Product Tours',
+            name: 'QA Swarm',
+            Icon: QASwarmIcon,
+            description: 'AI agents that test based on what users actually do.',
+            handle: 'qa_swarm',
+            color: 'purple',
+            colorSecondary: 'yellow',
+            category: 'automation',
+            slug: 'qa-swarm',
+            status: 'beta',
+            seo: {
+                title: 'QA Swarm – AI agents that test what users actually do',
+                description:
+                    'QA Swarm tests every PR, debugs with PostHog production data, and loops until your branch ships green.',
+            },
+            presenterNotes: {
+                hero: 'Open with the simple promise first. QA Swarm keeps testing and debugging until the pull request is actually safe to ship.',
+                'production-flows':
+                    'The key contrast here is diff-based QA versus production-informed QA. The claim is not more tests, it is smarter prioritization.',
+                debug: 'This slide should feel grounded. The agents form hypotheses, inspect live runtime signals, and then report a reasoned verdict.',
+                loop: 'Emphasize that the swarm is parallel and re-runs against the newest commit. The loop should feel active, not batch-like.',
+                results:
+                    'All of this needs to show up where engineers already work. The extra differentiator is that the QA agent itself is traceable in PostHog LLM Analytics.',
+                'how-it-works':
+                    'Anchor this in the forced-error run. The story is: generate scenarios, hit the error, report it clearly, then auto-fix and re-test.',
+                'comparison-summary':
+                    'The tone here should stay direct and fair. This is for teams who want QA informed by real usage inside PostHog.',
+                'feature-comparison':
+                    'This table should emphasize the differentiators: PR-aware service selection, traceability in LLM Analytics, and loop-until-green behavior.',
+                ecosystem:
+                    'The ecosystem slide should call out why PostHog makes this stronger, especially the ability to inspect the QA agent through LLM traces.',
+                waitlist:
+                    'Close with a prototype CTA and the check-hog visual. The page is selling the direction, not final packaging.',
+            },
+        },
+        {
+            name: 'Product tours',
             Icon: IconSpotlight,
             description: 'Guide users through your product with interactive tours and announcements.',
             handle: 'product_tours',
@@ -100,7 +138,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'salmon',
             category: 'product_engineering',
             slug: 'docs/product-tours',
-            status: 'beta',
+            status: 'WIP',
         },
         {
             name: 'Traces',
@@ -135,7 +173,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'beta',
         },
         {
-            name: 'No-code A/B Testing',
+            name: 'No-code A/B testing',
             Icon: IconTestTube,
             description: 'Run A/B tests without writing code.',
             handle: 'no_code_ab_testing',
@@ -200,9 +238,9 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             slug: 'platform-packages',
         },
         {
-            name: 'Activity timeline',
+            name: 'User profiles',
             Icon: IconPeople,
-            description: 'Full event history for individuals and multi-seat accounts',
+            description: 'Analyze multi-seat accounts and other groups.',
             handle: 'profiles',
             color: 'blue',
             colorSecondary: 'purple',
@@ -599,7 +637,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Graphs & trends',
-            Icon: IconTrends,
+            Icon: IconGraph,
             handle: 'trends',
             color: 'yellow',
             colorSecondary: 'lilac',
@@ -2088,7 +2126,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Heatmaps',
-            Icon: IconCursorClick,
+            Icon: IconClockRewind,
             description: 'See where users click, scroll, and move on your site',
             handle: 'heatmaps',
             color: 'green',
@@ -2628,7 +2666,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             seo: {
                 title: 'PostHog AI - PostHog data stack',
                 description:
-                    "Omniscient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
+                    "Omnicient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
             },
         },
         {
