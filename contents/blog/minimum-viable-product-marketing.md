@@ -16,9 +16,9 @@ tags:
     - Guides
 ---
 
-PostHog is a much bigger company than when I joined in 2021 as the first product marketer – but while we've more than 10xed since then, the product marketing team has only 4xed. Yet we still somehow [ship more launches per marketer per month](https://newsletter.posthog.com/p/the-hidden-danger-of-shipping-fast) than most companies do in a year. 
+PostHog is a much bigger company than when I joined in 2021 as the first product marketer – but while we've more than 10xed since then, the product marketing team has only 4xed. Yet we still somehow [ship more launches per marketer per month](/newsletter/hidden-danger-of-shipping-fast) than most companies do in a year. 
 
-This is possible because our marketers, like our engineers, [emphasize shipping over collaboration](https://newsletter.posthog.com/p/collaboration-sucks). I call this _minimum viable product marketing_, which is kind of a joke but also kind of not. 
+This is possible because our marketers, like our engineers, [emphasize shipping over collaboration](/newsletter/collaboration-sucks). I call this _minimum viable product marketing_, which is kind of a joke but also kind of not. 
 
 Minimum viable product marketing isn't a clear set of rules. It's an anti-framework informed by years in teams that followed the advice of thought-leaders and that just ended up with a reputation as PowerPoint pushers. Here's how it works for product launches at PostHog. 
 
