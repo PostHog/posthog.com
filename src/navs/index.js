@@ -1516,7 +1516,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Playbook for growing an account',
-                        url: '/handbook/growth/sales/grow-an-account.md',
+                        url: '/handbook/growth/sales/grow-an-account',
                     },
                 ],
             },
