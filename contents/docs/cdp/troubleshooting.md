@@ -16,7 +16,7 @@ This page covers troubleshooting for CDP. For setup, see the [installation guide
 
 3. Check the `Logs` tab to see if there are any errors.
 
-4. Go to the data management tab to check if there any [ingestion warnings](https://us.posthog.com/data-management/ingestion-warnings).
+4. Go to the data management tab to check if there are any [ingestion warnings](https://us.posthog.com/data-management/ingestion-warnings).
 
 5. If the transformation or destination relates to an external service, check that the external service is working correctly. Make a request to the relevant API endpoint. You can also use a tool like [webhook.site](https://webhook.site/) to check that PostHog sends events as expected.
 

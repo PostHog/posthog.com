@@ -24,13 +24,13 @@ You can also use actions to "rename" events by creating an action based on a sin
 
 ## How are actions useful?
 
-Actions are great for analzying related events as if they were one.
+Actions are great for analyzing related events as if they were one.
 
 At PostHog, for example, we track custom events like `insight created`, `insight analyzed`, and `dashboard created`. These are all different ways to interacting with product analytics.
 
 We then combine these and similar events into an action called `Product Analytics Interactions`, which gives us an aggregate view of product analytics usage.
 
-Actions are also useful for tracking conversions on your website. Our website homepage, for example, has several call to actions (CTAs) to signup to PostHog. We combine all these events into a single `Homepage CTA` action, so we can track all clicks from the signup page in a trends insight and run A/B tests with this action as a goal.
+Actions are also useful for tracking conversions on your website. Our website homepage, for example, has several call to actions (CTAs) to sign up to PostHog. We combine all these events into a single `Homepage CTA` action, so we can track all clicks from the signup page in a trends insight and run A/B tests with this action as a goal.
 
 ## How to create an action
 
@@ -107,7 +107,7 @@ The following patterns _are not_ currently supported:
 
 - Wildcard operators (e.g. <code>*</code>, <code>~</code>, <code>|</code>)
 - Combining multiple attribute selectors
-- [Non-alphanumeric classes](https://github.com/PostHog/posthog/issues/15480) (like clases containing `-`, `[]`, `.`)
+- [Non-alphanumeric classes](https://github.com/PostHog/posthog/issues/15480) (like classes containing `-`, `[]`, `.`)
 
 Note that webhooks matching is stricter than query matching, see [issue](https://github.com/PostHog/posthog/issues/20492)
 
