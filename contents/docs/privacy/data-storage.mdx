@@ -45,6 +45,12 @@ When this setting is enabled:
 
 This allows you to enrich your events with location data or filter out bot traffic while ensuring raw IP addresses are not retained in your data.
 
+<CalloutBox type="warning" title="Cookieless server hash mode">
+
+When [Cookieless server hash mode](/docs/privacy/data-collection#cookieless-tracking) is enabled, IP-based transformations like GeoIP enrichment and bot detection will **not** enrich events. In this mode, the IP address is hashed into the distinct ID and stripped before transformations run.
+
+</CalloutBox>
+
 <details>
 <summary>See all default event properties collected</summary>
 
