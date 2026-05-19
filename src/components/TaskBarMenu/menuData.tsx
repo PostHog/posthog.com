@@ -400,6 +400,11 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'How we do AI',
+                    link: '/how-we-ai',
+                },
+                {
+                    type: 'item',
                     label: 'Side project insurance',
                     link: '/side-project-insurance',
                 },
