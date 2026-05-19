@@ -119,7 +119,7 @@ function MCPHeader(): JSX.Element {
                 </div>
                 <div className="shrink-0">
                     <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_3f8bb7a240.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/mcp_hog_05867b6214.png"
                         alt="PostHog hedgehog with a wand"
                         className="w-36 @lg:w-52"
                     />
@@ -187,7 +187,7 @@ function Subfeatures(): JSX.Element {
     const items: SubfeatureItem[] = [
         {
             title: 'In your editor',
-            description: 'Cursor, Claude Code, Codex, Zed, VS Code, PostHog Code. Wherever you build.',
+            description: 'Cursor, Claude, Codex, Zed, VS Code, PostHog Code. Wherever you build.',
             icon: <IconCode />,
             color: 'blue',
         },
@@ -232,7 +232,7 @@ function MCPFaqGrid(): JSX.Element {
         { q: 'Can it remember your event taxonomy?', a: 'Yes. Better than you do.' },
     ]
     return (
-        <div className="not-prose my-6 max-w-lg">
+        <div className="not-prose">
             <div className="border border-primary rounded overflow-hidden">
                 {rows.map((row, idx) => (
                     <div
@@ -250,6 +250,76 @@ function MCPFaqGrid(): JSX.Element {
     )
 }
 
+interface SupportedProduct {
+    label: string
+    url: string
+    icon: React.ReactNode
+}
+
+const supportedProducts: SupportedProduct[] = [
+    { label: 'Product analytics', url: '/product-analytics', icon: <IconGraph /> },
+    { label: 'Web analytics', url: '/web-analytics', icon: <IconPieChart /> },
+    { label: 'Session replay', url: '/session-replay', icon: <IconRewindPlay /> },
+    { label: 'Error tracking', url: '/error-tracking', icon: <IconWarning /> },
+    { label: 'Feature flags', url: '/feature-flags', icon: <IconToggle /> },
+    { label: 'Experiments', url: '/experiments', icon: <IconFlask /> },
+    { label: 'Dashboards', url: '/docs/product-analytics/dashboards', icon: <IconPieChart /> },
+    { label: 'Insights', url: '/docs/product-analytics/insights', icon: <IconGraph /> },
+    { label: 'Cohorts', url: '/docs/data/cohorts', icon: <IconStack /> },
+    { label: 'Surveys', url: '/surveys', icon: <IconMessage /> },
+    { label: 'LLM analytics', url: '/docs/ai-engineering', icon: <IconAI /> },
+    { label: 'Logs', url: '/docs/ai-engineering/observability', icon: <IconTerminal /> },
+    { label: 'Data warehouse', url: '/docs/data-warehouse', icon: <IconDatabase /> },
+    { label: 'CDP / workflows', url: '/docs/cdp', icon: <IconPlug /> },
+    { label: 'Conversations', url: '/docs/support', icon: <IconMessage /> },
+    { label: 'Annotations', url: '/docs/product-analytics/annotations', icon: <IconBook /> },
+    { label: 'Notebooks', url: '/docs/notebooks', icon: <IconBook /> },
+    { label: 'Alerts', url: '/docs/product-analytics/alerts', icon: <IconBolt /> },
+    { label: 'Early access features', url: '/docs/feature-flags/early-access-feature-management', icon: <IconFlask /> },
+    { label: 'HogQL / SQL', url: '/docs/hogql', icon: <IconDatabase /> },
+]
+
+function SupportedProductsSidebar(): JSX.Element {
+    return (
+        <aside className="not-prose bg-accent dark:bg-accent-dark border border-primary rounded-md p-4">
+            <p className="text-[10px] uppercase font-bold tracking-wider text-secondary m-0 mb-1">Supported products</p>
+            <p className="text-[12px] opacity-70 m-0 mb-3 leading-snug">
+                Tools available across these PostHog products.
+            </p>
+            <ul className="list-none p-0 m-0 space-y-1">
+                {supportedProducts.map((product) => (
+                    <li key={product.label}>
+                        <Link
+                            to={product.url}
+                            className="group flex items-center gap-2 py-1 px-1.5 rounded text-[13px] !text-inherit !no-underline hover:bg-white dark:hover:bg-black transition-colors"
+                        >
+                            <span className="size-3.5 text-secondary opacity-75 group-hover:opacity-100 group-hover:text-red dark:group-hover:text-yellow shrink-0">
+                                {product.icon}
+                            </span>
+                            <span className="font-semibold truncate">{product.label}</span>
+                            <IconArrowUpRight className="size-3 opacity-0 group-hover:opacity-50 ml-auto shrink-0" />
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+            <p className="text-[11px] opacity-60 m-0 mt-3 leading-snug">
+                <Link to="/docs/model-context-protocol" className="underline !text-inherit">
+                    See the full tool list →
+                </Link>
+            </p>
+        </aside>
+    )
+}
+
+function MCPCapabilitiesLayout(): JSX.Element {
+    return (
+        <div className="not-prose my-6 grid grid-cols-1 @lg:grid-cols-[1fr,260px] gap-6 items-start">
+            <MCPFaqGrid />
+            <SupportedProductsSidebar />
+        </div>
+    )
+}
+
 interface CapabilityItem {
     title: string
     prompt: string
@@ -260,7 +330,7 @@ interface CapabilityItem {
 const capabilityList: CapabilityItem[] = [
     {
         title: 'Product analytics',
-        prompt: "What's 30-day retention on the new checkout?",
+        prompt: "What's our 30-day user retention?",
         icon: <IconGraph />,
         color: 'blue',
     },
@@ -272,31 +342,31 @@ const capabilityList: CapabilityItem[] = [
     },
     {
         title: 'Session replay',
-        prompt: 'Find a replay where a user rage-clicked the pricing page.',
+        prompt: 'Find a replay where a user got frustrated and rage-clicked.',
         icon: <IconRewindPlay />,
         color: 'yellow',
     },
     {
         title: 'Feature flags',
-        prompt: 'Roll the new-checkout flag out to 10% of users.',
+        prompt: 'List all my feature flags and their rollout percentages.',
         icon: <IconToggle />,
         color: 'seagreen',
     },
     {
         title: 'Experiments',
-        prompt: 'Set up an A/B test for the pricing page.',
+        prompt: 'Summarise the results of my running experiments.',
         icon: <IconFlask />,
         color: 'purple',
     },
     {
         title: 'SQL & warehouse',
-        prompt: 'Run a HogQL query against the events table.',
+        prompt: 'Run a HogQL query to count events from the last 24 hours.',
         icon: <IconDatabase />,
         color: 'red',
     },
     {
         title: 'Web analytics',
-        prompt: 'How much traffic came from Reddit last week?',
+        prompt: 'Which referrers drove the most traffic last week?',
         icon: <IconPieChart />,
         color: 'blue',
     },
@@ -372,20 +442,6 @@ const complaintList: SocialCardProps[] = [
         avatarColor: 'blue',
     },
     {
-        username: 'Priya',
-        handle: 'funnelvision',
-        quote: 'How do I open a funnel again? Asking for the seventh time this week.',
-        platform: 'twitter',
-        avatarColor: 'purple',
-    },
-    {
-        username: 'Theo',
-        handle: 'eventnamer',
-        quote: "Anyone know the event name for sign-up? I'm not finding it. (Yes I searched.)",
-        platform: 'reddit',
-        avatarColor: 'seagreen',
-    },
-    {
         username: 'Sam',
         handle: 'phdrequired',
         quote: 'PostHog is great if you have 6 hours and a PhD in product analytics.',
@@ -401,42 +457,84 @@ const complaintList: SocialCardProps[] = [
     },
 ]
 
-function Complaints(): JSX.Element {
-    const rotations = ['-rotate-1', 'rotate-1', '-rotate-[0.5deg]', 'rotate-[0.5deg]', '-rotate-1', 'rotate-1']
+function ComplaintCard({ c, rotation }: { c: SocialCardProps; rotation: string }): JSX.Element {
     return (
-        <div className="grid grid-cols-1 @sm:grid-cols-2 @lg:grid-cols-3 gap-3 my-6 not-prose">
-            {complaintList.map((c, idx) => (
+        <div
+            className={`bg-white dark:bg-accent-dark border border-primary rounded-md p-3 flex flex-col gap-2 ${rotation} hover:rotate-0 hover:scale-[1.02] transition-transform`}
+        >
+            <div className="flex items-center gap-2">
                 <div
-                    key={c.handle}
-                    className={`bg-white dark:bg-accent-dark border border-primary rounded-md p-3 flex flex-col gap-2 ${
-                        rotations[idx % rotations.length]
-                    } hover:rotate-0 hover:scale-[1.02] transition-transform`}
+                    className={`size-7 rounded-full bg-${c.avatarColor} flex items-center justify-center text-white font-bold text-xs shrink-0`}
                 >
-                    <div className="flex items-center gap-2">
-                        <div
-                            className={`size-7 rounded-full bg-${c.avatarColor} flex items-center justify-center text-white font-bold text-xs shrink-0`}
-                        >
-                            {c.username.charAt(0).toUpperCase()}
-                        </div>
-                        <div className="leading-tight">
-                            <p className="font-semibold text-[13px] m-0">{c.username}</p>
-                            <p className="text-[11px] text-secondary m-0">
-                                {c.platform === 'twitter' ? `@${c.handle}` : `u/${c.handle}`}
-                            </p>
-                        </div>
-                        <span className="ml-auto text-[10px] text-secondary opacity-60 uppercase tracking-wider">
-                            {c.platform === 'twitter' ? '𝕏' : 'Reddit'}
-                        </span>
-                    </div>
-                    <p className="text-[13px] m-0 leading-snug flex-1">"{c.quote}"</p>
-                    <div className="flex items-center gap-1.5 mt-1">
-                        <span className="inline-flex items-center gap-1 bg-yellow text-primary text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-sm tracking-wider">
-                            <IconCheck className="size-2.5" />
-                            Should've used MCP
-                        </span>
-                    </div>
+                    {c.username.charAt(0).toUpperCase()}
                 </div>
+                <div className="leading-tight">
+                    <p className="font-semibold text-[13px] m-0">{c.username}</p>
+                    <p className="text-[11px] text-secondary m-0">
+                        {c.platform === 'twitter' ? `@${c.handle}` : `u/${c.handle}`}
+                    </p>
+                </div>
+                <span className="ml-auto text-[10px] text-secondary opacity-60 uppercase tracking-wider">
+                    {c.platform === 'twitter' ? '𝕏' : 'Reddit'}
+                </span>
+            </div>
+            <p className="text-[13px] m-0 leading-snug flex-1">"{c.quote}"</p>
+            <div className="flex items-center gap-1.5 mt-1">
+                <span className="inline-flex items-center gap-1 bg-yellow text-primary text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-sm tracking-wider">
+                    <IconCheck className="size-2.5" />
+                    Should've used MCP
+                </span>
+            </div>
+        </div>
+    )
+}
+
+function Complaints(): JSX.Element {
+    const rotations = ['-rotate-1', 'rotate-1', '-rotate-[0.5deg]', 'rotate-[0.5deg]']
+    return (
+        <div className="grid grid-cols-1 @sm:grid-cols-2 gap-3 my-6 not-prose">
+            {complaintList.map((c, idx) => (
+                <ComplaintCard key={c.handle} c={c} rotation={rotations[idx % rotations.length]} />
             ))}
+        </div>
+    )
+}
+
+function FutureNoUI(): JSX.Element {
+    const rotations = ['-rotate-1', 'rotate-1', '-rotate-[0.5deg]', 'rotate-[0.5deg]']
+    return (
+        <div className="not-prose my-6 grid grid-cols-1 @lg:grid-cols-[1fr,1fr] gap-6 @lg:gap-8 items-start">
+            <div className="prose dark:prose-invert max-w-none text-[15px] leading-relaxed">
+                <p>
+                    PostHog is a big platform, with a lot of tools. We built the MCP because we kept seeing comments
+                    like the ones over there &mdash; that the UI is overwhelming, or that people didn't realise all the
+                    things PostHog can do.
+                </p>
+                <p>
+                    Even our own marketing team found it{' '}
+                    <Link to="/newsletter/hidden-danger-of-shipping-fast">
+                        hard to keep up with how fast we ship things
+                    </Link>
+                    .
+                </p>
+                <p>
+                    We could have run a big marketing campaign to tell you otherwise. We could have tested a new UI
+                    every week. But what if the future is no UI at all?
+                </p>
+                <p>What if, with the MCP, you don't even need to use PostHog to use PostHog?</p>
+                <div className="mt-5 bg-accent dark:bg-accent-dark border border-primary rounded-md p-4">
+                    <p className="font-bold text-[15px] m-0 mb-1">"But what if I like the PostHog UI?"</p>
+                    <p className="text-[13px] m-0 opacity-80 leading-snug">
+                        You can still log in to PostHog if you want to do things the old-fashioned way. While you're
+                        there, tell <TeamMember name="Adam Leith" photo /> you like it.
+                    </p>
+                </div>
+            </div>
+            <div className="grid grid-cols-1 @sm:grid-cols-2 gap-3">
+                {complaintList.map((c, idx) => (
+                    <ComplaintCard key={c.handle} c={c} rotation={rotations[idx % rotations.length]} />
+                ))}
+            </div>
         </div>
     )
 }
@@ -449,7 +547,7 @@ interface SupportedClient {
 }
 
 const codeEditors: SupportedClient[] = [
-    { label: 'PostHog Code', url: '/code', icon: <IconBook />, comingSoon: true },
+    { label: 'PostHog Code', url: '/code', icon: <IconCursor />, comingSoon: true },
     { label: 'Cursor', url: '/docs/model-context-protocol/cursor', icon: <IconCursor /> },
     { label: 'Claude Code', url: '/docs/model-context-protocol/claude-code', icon: <IconTerminal /> },
     { label: 'Claude Desktop', url: '/docs/model-context-protocol/claude-desktop', icon: <IconMessage /> },
@@ -474,7 +572,7 @@ function PostHogCodeBoxout(): JSX.Element {
             <div className="flex flex-col @sm:flex-row @sm:items-center gap-4">
                 <span className="inline-flex w-10 h-10 shrink-0 items-center justify-center rounded bg-brown/10 text-brown">
                     <span className="w-5 h-5">
-                        <IconBook />
+                        <IconCursor />
                     </span>
                 </span>
                 <div className="flex-1 min-w-0">
@@ -485,8 +583,8 @@ function PostHogCodeBoxout(): JSX.Element {
                         </span>
                     </div>
                     <p className="text-[13px] opacity-75 m-0 leading-snug">
-                        The AI devtool that understands your product, not just your codebase. Built on the MCP, with
-                        signals from your real usage data.
+                        Self-driving development is here. PostHog Code is the only AI devtool that understands your
+                        product, not just your codebase. Currently in private beta.
                     </p>
                 </div>
                 <span className="inline-flex items-center gap-1 text-[12px] font-semibold uppercase tracking-wider shrink-0 group-hover:underline">
@@ -528,12 +626,6 @@ function SupportedClients(): JSX.Element {
                 {platforms.map(renderItem)}
             </ul>
             <PostHogCodeBoxout />
-            <p className="text-[13px] opacity-70 mt-4 mb-0">
-                Not seeing your editor?{' '}
-                <Link to="/docs/model-context-protocol" className="underline">
-                    Manual setup is one config block away.
-                </Link>
-            </p>
         </div>
     )
 }
@@ -544,7 +636,7 @@ function MCPCTA(): JSX.Element {
             <div className="grid grid-cols-1 @sm:grid-cols-[auto,1fr] gap-5 @sm:gap-6 items-center bg-accent dark:bg-accent-dark border border-primary rounded-lg p-5">
                 <div className="relative flex justify-center shrink-0">
                     <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_3f8bb7a240.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/mcp_hog_05867b6214.png"
                         alt="PostHog hedgehog"
                         className="w-32 @sm:w-40"
                     />
@@ -629,11 +721,29 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     { name: 'DemoVideo', kind: 'flow', props: [], Editor: () => <DemoVideo /> },
     { name: 'Subfeatures', kind: 'flow', props: [], Editor: () => <Subfeatures /> },
     { name: 'MCPFaqGrid', kind: 'flow', props: [], Editor: () => <MCPFaqGrid /> },
+    {
+        name: 'MCPCapabilitiesLayout',
+        kind: 'flow',
+        props: [],
+        Editor: () => <MCPCapabilitiesLayout />,
+    },
     { name: 'Capabilities', kind: 'flow', props: [], Editor: () => <Capabilities /> },
     { name: 'Complaints', kind: 'flow', props: [], Editor: () => <Complaints /> },
+    { name: 'FutureNoUI', kind: 'flow', props: [], Editor: () => <FutureNoUI /> },
     { name: 'SupportedClients', kind: 'flow', props: [], Editor: () => <SupportedClients /> },
     { name: 'MCPCTA', kind: 'flow', props: [], Editor: () => <MCPCTA /> },
     { name: 'Hr', kind: 'flow', props: [], Editor: () => <Hr /> },
+    {
+        name: 'TeamMember',
+        kind: 'text',
+        props: [
+            { name: 'name', type: 'string' },
+            { name: 'photo', type: 'string' },
+        ],
+        Editor: ({ name, photo }: { name?: string; photo?: any }) => (
+            <TeamMember name={name || ''} photo={photo !== undefined && photo !== 'false'} />
+        ),
+    },
 ]
 
 export default function MCPPage(): JSX.Element {

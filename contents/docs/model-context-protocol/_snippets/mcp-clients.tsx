@@ -6,7 +6,7 @@ const MCPClients = () => {
         {
             label: 'PostHog Code',
             url: '/code',
-            icon: 'IconBook',
+            icon: 'IconCursor',
             badge: 'Beta',
         },
         {
@@ -27,7 +27,7 @@ const MCPClients = () => {
         {
             label: 'Cursor',
             url: '/docs/model-context-protocol/cursor',
-            icon: 'IconCode',
+            icon: 'IconCursor',
         },
         {
             label: 'VS Code',
