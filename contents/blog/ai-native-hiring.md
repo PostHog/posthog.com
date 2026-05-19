@@ -34,7 +34,7 @@ Here’s the 411:
 5. The person still needs to actually be an [insert job] they can’t just be an ai junkie who fancies being an accounting manager
 6. This isn’t bullet-proof, there are still downsides
 
-## Is this actually any different to normal hiring? 
+## Is hiring for AI-natives actually any different? 
 
 Standard hiring advice for Ops roles is still in the pandemic era. Find people who know what they are doing. Except now, you have to put “comfortable working with AI” on your job descriptions, right? Why else did we all sign off those huge AI budgets, right? If you're good at your job and you use AI to be more productive, great — you're probably 20% faster than the colleague who doesn't.
 
