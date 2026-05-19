@@ -2472,6 +2472,10 @@ export const docsMenu = {
                             url: '/docs/api',
                         },
                         {
+                            name: 'Personal API keys',
+                            url: '/docs/api/personal-api-keys',
+                        },
+                        {
                             name: 'OAuth integration',
                             url: '/docs/api/oauth',
                         },
