@@ -10,8 +10,6 @@ import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import WistiaEmbed from 'components/WistiaEmbed'
-import FeaturesSlide from 'components/Products/Slides/FeaturesSlide'
-import { productAnalytics } from 'hooks/productData/product_analytics'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import YCombinatorLogo from 'components/CustomerLogos/YCombinatorLogo'
 import HasuraLogo from 'components/CustomerLogos/HasuraLogo'
@@ -347,9 +345,78 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                                 question.
                             </p>
 
-                            <div className="h-[600px] not-prose rounded overflow-hidden border border-primary my-4">
-                                <FeaturesSlide features={productAnalytics.features} />
-                            </div>
+                            <h3>Funnels</h3>
+                            <p>
+                                See exactly where users drop off. Correlation analysis automatically surfaces what makes
+                                users convert — without you having to guess. Jump directly from any funnel step to watch
+                                session recordings for those exact users.
+                            </p>
+                            <ProductScreenshot
+                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png"
+                                imageDark={undefined}
+                                alt="Funnel analysis"
+                                classes="rounded"
+                                padding={false}
+                                zoom={undefined}
+                            />
+
+                            <h3>Trends</h3>
+                            <p>
+                                Standard line and bar charts, plus formula mode for ratios like DAU/MAU. Break down by
+                                any property. Built-in sampling for billions of events, so you always get fast answers.
+                            </p>
+                            <ProductScreenshot
+                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-bar.png"
+                                imageDark={undefined}
+                                alt="Trend analysis"
+                                classes="rounded"
+                                padding={false}
+                                zoom={undefined}
+                            />
+
+                            <h3>Retention</h3>
+                            <p>
+                                Define what "return" means for your product and compare cohorts. Click any data point to
+                                see the actual users behind it — way more flexible than standard retention charts.
+                            </p>
+                            <ProductScreenshot
+                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/retention_light_805120c74c.png"
+                                imageDark={undefined}
+                                alt="Retention analysis"
+                                classes="rounded"
+                                padding={false}
+                                zoom={undefined}
+                            />
+
+                            <h3>User paths</h3>
+                            <p>
+                                See the actual routes users take through your product. Start anywhere, end anywhere. Use
+                                wildcards to group similar pages together. Great for finding unexpected behavior you'd
+                                never think to look for.
+                            </p>
+                            <ProductScreenshot
+                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/example-light-mode.png"
+                                imageDark={undefined}
+                                alt="User paths"
+                                classes="rounded"
+                                padding={false}
+                                zoom={undefined}
+                            />
+
+                            <h3>SQL</h3>
+                            <p>
+                                Write HogQL queries directly against your event data. No separate data warehouse needed
+                                — though PostHog works with yours if you have one. Escape the drag-and-drop when you
+                                need full power.
+                            </p>
+                            <ProductScreenshot
+                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1716387676/posthog.com/contents/Screenshot_2024-05-22_at_3.20.17_PM.png"
+                                imageDark={undefined}
+                                alt="HogQL SQL editor"
+                                classes="rounded"
+                                padding={false}
+                                zoom={undefined}
+                            />
 
                             <div className="mt-4">
                                 <CallToAction
