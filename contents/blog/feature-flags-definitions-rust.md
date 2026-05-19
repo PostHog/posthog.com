@@ -1,0 +1,85 @@
+---
+title: 'Moving local flag evaluation from Django to Rust: 24x less CPU, 56x less memory'
+date: 2026-05-18
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+  - patricio-tarantino
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/TODO_replace_with_actual_image.png
+featuredImageType: full
+category: Engineering
+tags:
+  - Inside PostHog
+  - Engineering
+  - Feature flags
+seo: {
+  metaTitle: "Moving local flag evaluation from Django to Rust: 24x less CPU, 56x less memory",
+  metaDescription: "How we moved PostHog's feature flags local evaluation endpoint from Django to Rust, dropping CPU usage by 24x and memory by 56x."
+}
+
+---
+
+I reloaded Grafana three times before I trusted what I was looking at, because the gap between the old numbers and the new ones was bigger than I was expecting. p50 latency had gone from 40ms down to 4ms, CPU usage was sitting at a small fraction of where it used to be, and memory was barely registering at all. We had just finished moving the feature flags local evaluation endpoint from Django to Rust, and despite knowing that it was going to be better – that was the whole reason for this migration – I still wasn't ready for how the comparison ended up looking.
+
+## What local evaluation is
+
+Local evaluation is the endpoint every server-side SDK hits to fetch flag definitions. SDKs poll it every 30 seconds, so it gets a lot of traffic. Until recently it had its own Django deployment, sized for that traffic: about 30 pods on average in US, with autoscaling configured up to 250. Each pod requested 2 CPU cores and 9 GB of memory, so at baseline we were running 60 cores and 270 GB of RAM.
+
+The endpoint reads cached flag definitions out of Redis, checks auth, and returns JSON. There is no flag evaluation logic, and no database queries on the hot path. The Rust feature flags service next door was already serving around 13,000 requests per second on `/flags` and `/decide`, doing the actual compute, so moving the cache read over to live in the same codebase felt overdue.
+
+## Porting the endpoint
+
+Porting the endpoint itself was maybe the easy part, because most of the time went into matching Django's behavior around the edges.
+
+**Auth** was the trickiest one. The view declared what looked like a single authentication method, but Django was quietly stacking more on top through a shared mixin, and I only noticed when Rust started rejecting requests that Django was happily accepting. There was a related quirk underneath: Django was returning 403 (authenticated but not permitted) for some requests where Rust was returning 401 (not authenticated at all). The client outcome is the same either way, but the two status codes are supposed to mean different things, and our dashboards ended up disagreeing about what was actually happening. Matching Django's behavior took a few small changes on the Rust side, but the lesson stuck.
+
+**ETags** were less painful, but the approach is worth mentioning because it's the kind of decision that saves a lot of pain later. Instead of trying to compute our own ETags on the Rust side (which would have required byte-identical serialization with Django), Rust just reads Django's stored ETag straight out of Redis. That side-steps the serialization problem entirely while the two services coexist. Today around 54% of requests come back as 304 Not Modified, so over half of all SDK polls move zero bytes of flag data.
+
+**Billing and rate limiting** were the boring half: same Redis counters, same allowlist, same quota response codes, just reimplemented on the Rust side so we could match Django's outputs request-for-request.
+
+## Splitting the fleet
+
+SDK polling is bursty and predictable. Flag evaluation is spiky and latency-sensitive. Putting both kinds of workload on the same pods felt wrong, so we split the Rust service into two fleets using a `SERVICE_MODE` environment variable. One fleet runs in `flags` mode and serves `/flags` and `/decide`. The other runs in `definitions` mode and serves `/flags/definitions`. Both share the same secret and the same codebase, with the mode just controlling which routes get registered.
+
+## The rollout
+
+The rollout unfolded in layers. We pointed our own internal SDKs at the Rust endpoint first, diffed the responses with curl until we were satisfied, and then used Contour's weighted routing to shift external traffic gradually: 10%, then 50%, then 100% over two days. After that we updated all seven server-side SDKs to poll `/flags/definitions` directly, one PR per SDK, with the old URL still working through a route alias for customers on older versions.
+
+Three small bugs surfaced during the weighted rollout:
+
+1. A missing token parameter that Django had been accepting silently.
+2. The 401-vs-403 mismatch from the auth quirk above, which I caught by lining up the two services' status code rates side by side in Grafana.
+3. A bug in the mixed targeting beta: the Python SDK was reading `aggregation_group_type_index` only at the flag level, so flags that mixed user and group conditions were being treated as person-only, the group conditions were failing locally and falling back to a server-side call. We fixed it in the Python SDK and left the others for follow-up.
+
+All three surfaced while Django was still catching most of the traffic. If we'd cut over in one step on day one, customer support tickets would have done the testing for us.
+
+## The numbers
+
+The Rust definitions fleet now handles around 282 requests per second in US on 5 pods. Each pod requests 500m CPU and a bit under 1 GB of memory – 2.5 cores and around 5 GB total, against the 60 cores and 270 GB we used to spend. That's a 24x reduction in CPU and 56x in memory.
+
+| | Django (before) | Rust (after) |
+|---|---|---|
+| Pods (US, average) | ~30 (peak 43) | 5 |
+| CPU request per pod | 2,000m | 500m |
+| Memory request per pod | 9,000 MB | 954 MB |
+| Total CPU (at avg scale) | 60 cores | 2.5 cores |
+| Total memory (at avg scale) | 270 GB | 4.8 GB |
+| PGBouncer sidecars | Yes | No |
+| Dedicated node pool | Yes (memory-optimized) | No (shared pool) |
+
+Latency improved too. These numbers are measured at the Envoy layer (the time between Envoy receiving the request and getting a response back from the pod), so they don't include client-to-Envoy network time. A customer's SDK sees this plus its own network round-trip on top. Same Prometheus metric (`envoy_cluster_upstream_rq_time`) for both services, so it's apples to apples.
+
+| | Django | Rust | Improvement |
+|---|---|---|---|
+| p50 | 40 ms | 4 ms | **10x faster** |
+| p95 | 95 ms | 20 ms | **4.7x faster** |
+| p99 | 170 ms | 37 ms | **4.6x faster** |
+
+The cache hit rate sits at 99.98%, which means almost every request is served from Redis with zero Postgres on the hot path. The dedicated Karpenter pool of memory-optimized instances is gone.
+
+I keep coming back to the rollout. Being able to shift 10% of traffic, sit with the metrics for a day, and roll back instantly if something looked off is what made this safe to ship fast. If we'd cut over in one step on day one, customer support tickets would have done the testing for me, and I would have been firefighting instead of writing this.
+
+There's [Untangling Tokio and Rayon in production](/blog/untangling-rayon-and-tokio) if you want to read about an earlier optimization on the same Rust service, and [How we built the Rust feature flag service](/blog/feature-flags-service) for the original Django-to-Rust migration that this one builds on.
