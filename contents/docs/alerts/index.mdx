@@ -75,7 +75,7 @@ Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
      classes="rounded"
    />
 
-9. Select how often you want the alert to be checked (e.g. every hour, every day, every week, every month)
+9. Select how often you want the alert to be checked (every 15 minutes, every hour, every day, every week, or every month). The 15-minute interval requires a [platform add-on](/platform-packages).
 
 10. Pick who should be notified when the alert is triggered. Subscribed users automatically receive in-app notifications when the alert fires. You can also add email recipients, Slack channels, or webhook URLs directly in the alert form.
 
@@ -223,12 +223,13 @@ All detectors share these core parameters:
 
 Default window sizes based on your alert's check interval:
 
-| Interval | Default window | What it covers |
-| -------- | -------------- | -------------- |
-| Hourly   | 168            | 7 days         |
-| Daily    | 90             | ~3 months      |
-| Weekly   | 26             | ~6 months      |
-| Monthly  | 12             | 1 year         |
+| Interval   | Default window | What it covers |
+| ---------- | -------------- | -------------- |
+| 15 minutes | 192            | 48 hours       |
+| Hourly     | 168            | 7 days         |
+| Daily      | 90             | ~3 months      |
+| Weekly     | 26             | ~6 months      |
+| Monthly    | 12             | 1 year         |
 
 #### Preprocessing
 
