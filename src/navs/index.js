@@ -1236,7 +1236,7 @@ export const handbookSidebar = [
         name: 'Sales, CS & Onboarding',
         url: '',
         children: [
-           {
+            {
                 name: 'Overview',
                 url: '',
                 children: [
@@ -5529,6 +5529,11 @@ export const docsMenu = {
                         {
                             name: 'Anthropic',
                             url: '/docs/llm-analytics/installation/anthropic',
+                            icon: 'IconAnthropic',
+                        },
+                        {
+                            name: 'Claude Agent SDK',
+                            url: '/docs/llm-analytics/installation/claude-agent-sdk',
                             icon: 'IconAnthropic',
                         },
                         {
