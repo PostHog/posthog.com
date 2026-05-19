@@ -492,7 +492,7 @@ export default function Inbox(props) {
                             data-scheme="secondary"
                             className={`w-full @2xl:w-64 bg-primary flex-shrink-0 ${
                                 websiteMode
-                                    ? '@2xl:h-[calc(100vh-91px)] @2xl:sticky top-[101px] border-b border-primary @2xl:border-b-0'
+                                    ? '@2xl:h-screen @2xl:sticky top-0 border-b border-primary @2xl:border-b-0'
                                     : '@2xl:border-r border-primary @2xl:h-full'
                             }`}
                         >

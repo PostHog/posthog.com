@@ -935,12 +935,14 @@ const LeftSidebar = ({
     currentPath,
     isMdx = false,
 }: LeftSidebarProps) => {
+    const { websiteMode } = useApp()
     const { searchQuery } = useSearch()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
     const hasTabs = !!menuTabs && menuTabs.length > 0
     const initialTab = hasTabs ? menuTabs!.find((t) => t.default)?.value || menuTabs![0].value : ''
     const [activeTab, setActiveTab] = useState(initialTab)
     const activeMenu = hasTabs ? menuTabs!.find((t) => t.value === activeTab)?.menu : null
+    const [height, setHeight] = useState(`100dvh`)
 
     // `isPinned` is the persisted user preference (toggled via the bottom-row
     // toggle button, written to localStorage in ReaderViewContext). When NOT
@@ -1031,12 +1033,29 @@ const LeftSidebar = ({
         toggleNav()
     }
 
+    useEffect(() => {
+        if (websiteMode) {
+            const handleScroll = () => {
+                const scrollAmount = window.scrollY
+                setHeight(`${window.innerHeight - 49 + Math.min(49, scrollAmount)}px`)
+            }
+            handleScroll()
+            window.addEventListener('scroll', handleScroll)
+            window.addEventListener('resize', handleScroll)
+            return () => {
+                window.removeEventListener('scroll', handleScroll)
+                window.removeEventListener('resize', handleScroll)
+            }
+        }
+    }, [websiteMode])
+
     return (
         <aside
             data-scheme="secondary"
             className={`relative flex-shrink-0 transition-[flex-basis] duration-300 ${
                 isPinned ? 'basis-[250px]' : 'basis-12'
-            }`}
+            } ${websiteMode ? 'sticky top-0 z-50' : ''}`}
+            style={websiteMode ? { height } : {}}
         >
             <motion.div
                 initial={false}
