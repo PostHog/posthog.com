@@ -18,7 +18,7 @@ seo:
     metaDescription: 'The right analytics tools for vibe coded apps – product analytics, web analytics, and LLM observability. Compares PostHog, Plausible, Langfuse, and more.'
 ---
 
-If you're vibe coding your way to a product, the temptation is to defer analytics until "later." Don't. There's no point in shipping fast if you don't learn fast, and you can't learn anything from a metrics that aren't being tracked.
+If you're vibe coding your way to a product, the temptation is to defer analytics until "later." Don't. There's no point in shipping fast if you don't learn fast, and you can't learn anything from metrics that aren't being tracked.
 
 The good news is that you don't need a data team to get started; you only need three things: **product analytics** (what users do in your app), **web analytics** (where they came from), and – if you're shipping AI features, which you probably are – **LLM observability** (how your model is actually behaving in production).
 
@@ -45,7 +45,7 @@ This guide is written with that profile in mind: you want analytics that's quick
 
 Because vibe coding makes shipping cheap, but it doesn't [make decisions for you](/founders/product-market-fit-game). 
 
-You can prompt your way to ten features in a weekend, but only data tells you which one users actually care about. Without it, you're shipping into the oblivion – and as products get cheaper to build, the gap between "I have an MVP" and "I have a product people pay for" is more about how navigating the learning curve rather than coding speed.
+You can prompt your way to ten features in a weekend, but only data tells you which one users actually care about. Without it, you're shipping into the oblivion – and as products get cheaper to build, the gap between "I have an MVP" and "I have a product people pay for" is more the product learning curve rather than coding speed.
 
 Analytics is also how you catch the failure modes vibe coding introduces; watching real session replays and tracking real errors is how you find the bugs your AI agent confidently shipped.
 
@@ -98,7 +98,7 @@ Ask Claude Code or Cursor things like *"how many unique users signed up in the l
 
 You can also build cohorts (*"create a dynamic cohort of users who completed checkout more than 5 times in the last 30 days"*), spin up insights and dashboards, or write SQL to dig into edge cases without leaving your editor. 
  
-See the full list of available tools](/docs/model-context-protocol).
+[See the full list of available MCP tools](/docs/model-context-protocol).
 
 </details>
 
@@ -164,7 +164,7 @@ Ask your agent for a *"web analytics weekly digest"* and it'll summarize uniques
 
 Beyond that, you can also explore live traffic (*"who's on the site right now, and what are they looking at?"*), manage path cleaning rules, investigate traffic drops or spikes, schedule recurring email or Slack digests of any dashboard, and run arbitrary SQL queries against your web analytics tables for anything custom.
 
-See the full list of available tools](/docs/model-context-protocol).
+[See the full list of available tools](/docs/model-context-protocol).
 
 </details>
 
@@ -184,7 +184,7 @@ Pricing starts at $15/mo for 100K pageviews. Like Plausible, it doesn't include 
 
 [GA4](/blog/posthog-vs-ga4) is free and still the default for marketing attribution, especially if you're running Google Ads. But it requires a consent management platform under GDPR, samples your data, and the UI can be punishing. For a vibe coded app where speed matters, the compliance overhead alone isn't worth it.
 
-If you're already running Google Ads and need the native integration, keep it. Otherwise, [literally any other option](/blog/best-web-analytics-tools) is better for understanding what's happening on your site.
+If you're already running Google Ads and need the native integration, keep it. Otherwise, [most alternatives](/blog/ga4-alternatives) are better for understanding what's happening on your site.
 
 > For a deeper dive, see our full comparison of [the best web analytics tools for developers](/blog/best-web-analytics-tools).
 
@@ -234,7 +234,7 @@ Ask your agent things like *"what are my total LLM costs by model over the last 
 
 You can also manage [evals](/docs/ai-engineering) (*"create an evaluation that scores responses for hallucination"*), spin up [prompts](/docs/ai-engineering) with versioning, and summarize traces to debug agent runs – useful when you're iterating on prompts and want fast feedback on what's actually shipping.
 
-See the full list of available tools](/docs/model-context-protocol).
+[See the full list of available tools](/docs/model-context-protocol).
 
 </details>
 
@@ -282,6 +282,10 @@ PostHog covers product analytics, web analytics, session replay, feature flags, 
 The [AI setup wizard](/wizard) gets you instrumented in a few minutes and [the MCP server](/docs/model-context-protocol) means you can query your data from Claude Code or Cursor while you're still building.
 
 If you want to take it for a spin, you can [start free](/) – no credit card needed.
+
+And if you want your product to *self-heal* (aka pick up signals from errors, session replays, surveys, and product analytics and automatically turn them into actionable PRs), take a look at [PostHog Code](/code). 
+
+It's the next step beyond reactive analytics: instead of waiting for you to notice a bug or churn signal, it proactively spots them and opens a pull request to fix it.
 
 <WizardCTA />
 
