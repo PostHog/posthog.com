@@ -16,6 +16,7 @@ import { InlineCode } from 'components/InlineCode'
 import { CallToAction } from 'components/CallToAction'
 import ReaderView from 'components/ReaderView'
 import { Heading } from 'components/Heading'
+import MCPCallout from 'components/Docs/MCPCallout'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -661,6 +662,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                         <Heading id={pathID(item.httpVerb, item.pathName)} as="h2">
                                             {generateName(item)}
                                         </Heading>
+                                        <MCPCallout operationId={item.operationId} />
                                         {mdxNode?.body && (
                                             <div className="article-content">
                                                 <div className="text-primary">
