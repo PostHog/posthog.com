@@ -1,11 +1,7 @@
 import { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import React from 'react'
 import { docsMenu, handbookSidebar } from '../../navs'
-import * as PosthogIcons from '@posthog/icons'
-import * as LocalIcons from '../OSIcons/Icons'
-
-// PostHog Icons take precedence; LocalIcons fill in icons not yet in @posthog/icons (e.g. brand logos).
-const Icons = { ...LocalIcons, ...PosthogIcons }
+import * as Icons from '@posthog/icons'
 import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 import Logo from 'components/Logo'
 import { APP_COUNT } from '../../constants'
