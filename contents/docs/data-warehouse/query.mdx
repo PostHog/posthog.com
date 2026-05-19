@@ -8,17 +8,17 @@ availability:
   enterprise: full
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { ProductScreenshot } from "components/ProductScreenshot";
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 PostHog provides the full flexibility of SQL to query your data warehouse using the [SQL editor](/docs/data-warehouse/sql).
 
-To create a query, go to the [SQL editor](https://us.posthog.com/sql). Here you can see and search the schema of all available sources and [PostHog tables](/docs/data-warehouse/sources/posthog) as well as saved views.
+To create a query, go to the [SQL editor](https://app.posthog.com/sql). Here you can see and search the schema of all available sources and [PostHog tables](/docs/data-warehouse/sources/posthog) as well as saved views.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_07_22_2x_f4bfc84ae3.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_07_22_2x_f4bfc84ae3.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_07_45_2x_751fc31300.png"
-  alt="SQL editor" 
+  alt="SQL editor"
   classes="rounded"
 />
 
@@ -29,9 +29,9 @@ Here you can:
 3. Modify your query using [SQL commands](/docs/data-warehouse/sql) and [functions](/docs/data-warehouse/sql/useful-functions) as needed to get the data you want like `select amount / 100 as dollar_charge, status from stripe.prod.charge`.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_19_11_2x_b1d7ce399f.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_18_51_2x_e62db75b67.png" 
-  alt="Querying a source in PostHog" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_19_11_2x_b1d7ce399f.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_18_51_2x_e62db75b67.png"
+  alt="Querying a source in PostHog"
   classes="rounded"
 />
 
@@ -41,7 +41,19 @@ Here you can:
 
 <CalloutBox icon="IconInfo" title="Having trouble writing SQL?" type="fyi">
 
-  [PostHog AI](/docs/posthog-ai) can help write SQL for you. Just click the icon in the corner of your screen and ask it to write or tweak your query for you.
+[PostHog AI](/docs/posthog-ai) can help write SQL for you. Just click the icon in the corner of your screen and ask it to write or tweak your query for you.
+
+</CalloutBox>
+
+## Querying external databases directly
+
+In addition to querying data synced into the PostHog warehouse, you can run live SQL queries against external [PostgreSQL](/docs/cdp/sources/postgres) databases directly from the SQL editor.
+
+When [linking a PostgreSQL source](/docs/cdp/sources/postgres), choose **Query directly** as the access method. This creates a live connection that appears in the SQL editor's connection selector, letting you switch between querying PostHog data and querying your PostgreSQL database.
+
+<CalloutBox icon="IconInfo" title="Direct query limitations" type="fyi">
+
+Direct query sources run queries live against your external database. Data from these sources can't be joined with PostHog data (events, persons, etc.). If you need to combine external data with PostHog data, use the **Sync to warehouse** access method instead.
 
 </CalloutBox>
 
@@ -61,17 +73,17 @@ By clicking on the **Visualization** tab below the query, you can customize the 
 For example, with tables, you can add conditional formatting rules. These enable you to highlight cells based on their value and are set up in the **Conditional formatting** tab.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_01_00_2x_181ae75d28.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_02_28_2x_b3ba2d2d8a.png" 
-  alt="Customizing a SQL visualization" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_01_00_2x_181ae75d28.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_02_28_2x_b3ba2d2d8a.png"
+  alt="Customizing a SQL visualization"
   classes="rounded"
 />
 
 ## Querying multiple sources together
 
-Much of the power of the data warehouse comes from combining multiple sources, like your Stripe or Hubspot data with your product analytics data. Two of the easiest ways of doing this are `WHERE IN` and `JOIN` SQL commands. 
+Much of the power of the data warehouse comes from combining multiple sources, like your Stripe or Hubspot data with your product analytics data. Two of the easiest ways of doing this are `WHERE IN` and `JOIN` SQL commands.
 
-import QueryJoinExample from './_snippets/query-join-example.mdx'
+import QueryJoinExample from "./_snippets/query-join-example.mdx";
 
 <QueryJoinExample />
 
@@ -97,6 +109,6 @@ These metrics are helpful for optimizing queries, especially when working with l
 
 ## Optimizing queries
 
-import OptimalQueries from '../_snippets/optimal-queries.mdx'
+import OptimalQueries from "../_snippets/optimal-queries.mdx";
 
 <OptimalQueries />
