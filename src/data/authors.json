@@ -573,5 +573,13 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/matheusvbatista/",
         "profile_id": 41646
+    },
+    {
+        "handle": "lizzie-epton",
+        "name": "Lizzie Epton",
+        "role": "Developer Marketer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/lizzie-epton/",
+        "profile_id": 43387
     }
 ]
