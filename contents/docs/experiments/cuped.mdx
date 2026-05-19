@@ -1,0 +1,21 @@
+---
+title: CUPED variance reduction
+---
+
+CUPED (Controlled-experiment Using Pre-Experiment Data) is an optional variance reduction method for experiment metrics. It uses each participant's behavior before exposure as a covariate when analyzing their behavior after exposure.
+
+The goal is to remove noise from baseline differences between participants. CUPED doesn't change who is included in the experiment or which post-exposure events count toward the metric. It adjusts the metric estimate used by the stats engine.
+
+## Why enable CUPED
+
+Enable CUPED when the metric is likely to correlate with past behavior, such as revenue, usage volume, or activity counts.
+
+When the pre-experiment data predicts the metric, CUPED can narrow confidence or credible intervals. This can help you detect smaller changes with the same experiment traffic.
+
+CUPED is less useful when participants have little historical data or when past behavior doesn't predict the metric you're testing.
+
+## Performance cost
+
+CUPED needs to scan both experiment-period data and pre-exposure data. This means it has a performance cost compared to analyzing the same metric without CUPED.
+
+Large experiments or long lookback windows can take longer to analyze because PostHog has to scan more data.
