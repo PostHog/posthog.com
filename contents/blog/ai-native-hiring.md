@@ -58,7 +58,7 @@ The ai-native ops manager spins up a slack bot that pushes tasks to owners, nudg
 
 Shoutout <TeamMember name="Tara Alcantarilla-Howard" photo /> and <TeamMember name="Carol Donnelly" photo />.
 
-### Talent partner
+### 2. Talent partner
 
 A traditional talent partner is always on. They're at the coalface internally and externally, managing lots of people, having difficult conversations, smiling through all of it. They work late doing calls to find the right person, chase feedback from hiring managers, and reply to rejected candidates at 11pm. They often burn out, quickly. 
 
