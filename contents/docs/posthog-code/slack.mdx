@@ -54,6 +54,30 @@ Once the agent finishes, you can reply to it by sending a new message in the thr
 
 Right now, only the person that started a task can continue it in the thread. If you want to continue it yourself, you can start a new thread and pass the existing messages as context.
 
+## Emoji cues
+
+The bot signals where your request is in its lifecycle using reactions on your `@PostHog` message and emojis in its own replies. Glance at a busy channel and you can tell what's still in flight without opening every thread.
+
+Reactions on your mention message:
+
+| Emoji | What it means |
+|---|---|
+| `:seedling:` 🌱 | Saw your mention and is spinning up a new task |
+| `:eyes:` 👀 | Forwarding a follow-up to the running agent, or resuming a previous run |
+| `:hedgehog:` 🦔 | The agent finished and posted its reply in the thread |
+| `:x:` ❌ | Something went wrong - usually the sandbox stopped before the message could be delivered |
+
+A stale 🌱 or 👀 gets removed once the bot lands on a terminal 🦔 or ❌, so the reaction on your message always reflects the latest state.
+
+Emojis inside the bot's own messages:
+
+| Emoji | Where it shows up |
+|---|---|
+| `:hourglass_flowing_sand:` ⏳ | In the progress message while the agent works, next to the current stage |
+| `:rocket:` 🚀 | On the "Pull request opened" message once a PR is up |
+| `:hedgehog:` 🦔 | On the "Task completed" header (and when the sandbox is cleaned up afterwards) |
+| `:x:` ❌ | On the "Task failed" header when a run errors out |
+
 ## Routing rules and default repo
 
 If you work across many repos, you can teach the bot how to pick a repo intelligently. Run these as mentions:
