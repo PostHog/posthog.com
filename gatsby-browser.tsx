@@ -7,8 +7,11 @@ import { Provider as ToastProvider } from './src/context/Toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
 import Wrapper from './src/components/Wrapper'
+import KoreanWrapper from './src/pages/ko/components/KoreanWrapper'
 import { Provider } from './src/context/App'
 initKea(false)
+
+const isKoreanPath = (pathname?: string) => pathname === '/ko' || pathname?.startsWith('/ko/')
 
 export const wrapRootElement = ({ element }) => (
     <ToastProvider>
@@ -39,9 +42,11 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
 }
 
 export const wrapPageElement = ({ element, props: { location } }) => {
+    const WrapperComponent = isKoreanPath(location?.pathname) ? KoreanWrapper : Wrapper
+
     return (
         <Provider element={element} location={location}>
-            <Wrapper />
+            <WrapperComponent />
         </Provider>
     )
 }
