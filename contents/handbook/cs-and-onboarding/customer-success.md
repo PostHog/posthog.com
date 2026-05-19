@@ -25,9 +25,29 @@ In order of priority, your objectives should be:
 
 - Evaluate your assigned list for signals and churn risk and prioritize outreach accordingly. Pay extra attention to recent conversations or open support tickets that you can dive head-first into to ensure these customers are cared for. Zendesk, our support ticketing system, allows you to follow tickets and get notified when there are updates, so add yourself to open tickets for any of your assigned customers.
 
+- For inherited accounts, run a technical health audit before your first outreach. Vitally health scores surface engagement signals like usage patterns and billing changes, but they don't tell us much about implementation health. Inherited accounts often have implementation gaps that show up later as engagement decline. See the audit checklist below.
+
 - Set up a Vitally Playbook notification to get alerts when new conversations occur for your book of business, allowing you to keep a pulse on when your customers write in. Use this <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/f811379c-9b0b-4ff4-98d4-654df4f02d40">Playbook Template</PrivateLink> as a reference. You should also set up a Vitally Open Tickets Tracker to view all of your customer's open tickets in a single view. To do this, clone this <PrivateLink url="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/cc9ce419-fa0c-4d78-80e8-25e0760e459d">Open Tickets Tracker</PrivateLink>, remove the existing filters, then add a filter for the assigned CSM, and save to your account.
 
 - Add yourself to all your existing customer Slack channels and invite customers who are not in Slack yet to offer them an easier way to communicate with our team for their needs. Make sure to add Pylon and relevant team members on our side. Adding customers to Slack has the added benefit of giving us an additional communication channel, as email is usually one of the worst ways to reach our ICP (though you should start with email). We've found that informing customers you'll be sending them a Slack Connect invite, then sending the invite, works significantly better than asking customers if they'd like to join us on Slack. A couple of tips to set up [Shared Slack Channels with Customers](/handbook/growth/sales/slack-channels)
+
+## Technical health audit for inherited accounts
+
+When you inherit an account, especially one that hasn't been managed by a PostHog human before, it's worth running a quick implementation audit before reaching out, so you walk into the first conversation with real observations about their setup rather than generic discovery questions. Vitally surfaces engagement signals like usage patterns and billing changes, but it doesn't tell us much about implementation health, and inherited accounts often have implementation gaps that show up later as engagement decline.
+
+A few things worth checking in PostHog:
+
+- Look at the SDK versions on their recent events for `posthog-js` and any backend SDKs they're using. Our docs recommend always running the latest, and customers on older versions are often silently affected by fixes they don't know about. If they're meaningfully behind, that's worth raising on the first call.
+
+- Check `identify()` timing. Our production-ready feature flags docs are explicit that if `identify()` fires after a flag has been evaluated, the flag uses the anonymous ID, and the user can "flip" variants after login. You can check this in HogQL by querying `person_distinct_ids` for multiple anonymous IDs mapped to a single person, which usually means `identify()` is firing late or `posthog.reset()` is being called incorrectly.
+
+- If they're running experiments, this same identity-timing question matters even more. Anonymous-bucketed users re-bucket when they log in — a documented cause of customers reporting "weird" A/B test outcomes, and a much easier conversation to have proactively than reactively.
+
+- Look at their session replay sampling rate. We recommend starting at 100% and tuning down, but high-traffic customers paying for full-sample replay often haven't revisited this since onboarding, so there's usually a good cost-saving conversation to have here.
+
+- If they're paying for error tracking, confirm exception autocapture is actually enabled, either via the toggle in Project Settings → Error Tracking or via `capture_exceptions` in their SDK init. If neither is set, they're paying for a product that isn't capturing anything. Quick win on the first call.
+
+Treat what you find as conversation starters rather than prescriptive recommendations. Lead with the highest-impact item, frame it as a question, and use the audit to learn how they actually use PostHog before suggesting changes. The point isn't to walk in and audit them, but to show up with real context so you're not asking them to spend time educating you on things you could have learned yourself.
 
 ## Tips on success engagement
 
