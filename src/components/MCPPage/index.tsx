@@ -66,7 +66,7 @@ function Q({ text }: { text?: string }): JSX.Element {
 function MCPHeader(): JSX.Element {
     return (
         <header
-            className="relative -mt-4 mb-8 overflow-hidden rounded-t-sm"
+            className="relative not-prose mb-8 overflow-hidden rounded-t-sm"
             style={{
                 width: '100cqw',
                 marginLeft: 'calc(50% - 50cqw)',
@@ -105,7 +105,7 @@ function MCPHeader(): JSX.Element {
                     <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 justify-center @lg:justify-start text-[11px] uppercase font-semibold tracking-wider opacity-60">
                         <span className="inline-flex items-center gap-1">
                             <IconCheck className="size-3" />
-                            Free forever
+                            50+ tools
                         </span>
                         <span className="inline-flex items-center gap-1">
                             <IconCheck className="size-3" />
@@ -113,7 +113,7 @@ function MCPHeader(): JSX.Element {
                         </span>
                         <span className="inline-flex items-center gap-1">
                             <IconCheck className="size-3" />
-                            50+ tools
+                            Certified no-UI
                         </span>
                     </div>
                 </div>
@@ -126,6 +126,21 @@ function MCPHeader(): JSX.Element {
                 </div>
             </div>
         </header>
+    )
+}
+
+function ExplainerVideo(): JSX.Element {
+    return (
+        <div className="not-prose my-6">
+            <p className="text-sm opacity-70 mb-3">
+                Here&apos;s <TeamMember name="Matt Brooker" photo /> explaining the PostHog MCP server.
+            </p>
+            <div className="rounded-md overflow-hidden border border-primary shadow-md">
+                <div className="aspect-video">
+                    <WistiaVideo videoId="tjc4o4lldr" className="!aspect-video" autoPlay={false} />
+                </div>
+            </div>
+        </div>
     )
 }
 
@@ -156,9 +171,7 @@ function DemoVideo(): JSX.Element {
                     />
                 </div>
             </div>
-            <p className="text-center text-xs opacity-60 mt-2 mb-0 italic">
-                Above: querying PostHog from inside Claude Code.
-            </p>
+            <p className="text-center text-xs opacity-60 mt-2 mb-0 italic">Copy, paste, type `debug`, done</p>
         </div>
     )
 }
@@ -446,7 +459,7 @@ const codeEditors: SupportedClient[] = [
     { label: 'Zed', url: '/docs/model-context-protocol/zed', icon: <IconCode /> },
 ]
 
-const platforms: SupportedClient[] = [
+const platforms = [
     { label: 'Lovable', url: '/docs/integrations/lovable', icon: <IconStack /> },
     { label: 'Replit', url: '/docs/integrations/replit', icon: <IconStack /> },
     { label: 'v0', url: '/docs/integrations/v0', icon: <IconStack /> },
@@ -468,7 +481,7 @@ function PostHogCodeBoxout(): JSX.Element {
                     <div className="flex flex-wrap items-center gap-2 mb-1">
                         <p className="font-bold text-base m-0">PostHog Code</p>
                         <span className="text-[10px] font-bold uppercase tracking-wider opacity-90 bg-yellow px-1.5 py-0.5 rounded-sm text-primary">
-                            Coming soon
+                            Beta
                         </span>
                     </div>
                     <p className="text-[13px] opacity-75 m-0 leading-snug">
@@ -496,7 +509,7 @@ function SupportedClients(): JSX.Element {
                 <span className="font-semibold text-[13px]">{client.label}</span>
                 {client.comingSoon ? (
                     <span className="ml-auto text-[9px] font-bold uppercase tracking-wider opacity-90 bg-yellow px-1.5 py-0.5 rounded-sm text-primary">
-                        Coming soon
+                        Beta
                     </span>
                 ) : (
                     <IconArrowUpRight className="size-3 opacity-0 group-hover:opacity-60 ml-auto" />
@@ -612,6 +625,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         ),
     },
     { name: 'MCPHeader', kind: 'flow', props: [], Editor: () => <MCPHeader /> },
+    { name: 'ExplainerVideo', kind: 'flow', props: [], Editor: () => <ExplainerVideo /> },
     { name: 'DemoVideo', kind: 'flow', props: [], Editor: () => <DemoVideo /> },
     { name: 'Subfeatures', kind: 'flow', props: [], Editor: () => <Subfeatures /> },
     { name: 'MCPFaqGrid', kind: 'flow', props: [], Editor: () => <MCPFaqGrid /> },
@@ -654,6 +668,7 @@ export default function MCPPage(): JSX.Element {
                 body={rawBody}
                 mdxBody={mdxBody}
                 maxWidth={900}
+                hasPadding={false}
             />
         </>
     )
