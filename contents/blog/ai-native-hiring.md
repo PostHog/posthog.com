@@ -1,5 +1,5 @@
 ---
-title: We've gone full AI-native in our Ops team and here is why
+title: Being AI-native matters more than being experience
 date: 2026-05-19
 author:
   - fraser-hopper
