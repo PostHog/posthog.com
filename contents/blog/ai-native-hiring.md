@@ -68,7 +68,7 @@ Did you know that people who talk fast usually really succeed at PostHog. Talk f
 
 Shoutout <TeamMember name="Rune Povlsen" photo />.
 
-### Finance manager - accounting
+### 3. Finance manager - accounting
 
 A traditional finance manager on day 30 has created a nice close checklist and has spent 3 days reviewing last month’s financials and written a  management report by hand that needs proof-reading before going out to the company. They spend more time creating financials than helping the business make the content of them better. 
 
