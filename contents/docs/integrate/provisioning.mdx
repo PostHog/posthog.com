@@ -204,7 +204,7 @@ The `requires_auth` flow isn't only for first-time onboarding. Use the same hand
 
 For each click, your backend calls `/account_requests` with the user's email, then you redirect them to the returned `requires_auth.url`. When the logged-in PostHog session matches the email you sent, PostHog completes the OAuth handshake and lands the user in their project.
 
-If the session is for a different PostHog account, PostHog currently drops the user back on their PostHog homepage without a helpful prompt. To make the mismatch case obvious before the click, surface the expected PostHog email in your own UI – for example, a button labeled _"Open in PostHog as user@example.com"_ or a small line of helper text. That gives users a chance to log out and switch accounts before getting confused.
+If the session is for a different PostHog account, PostHog shows an "Account mismatch" page with a one-click "Log out and continue as <expected email>" button that resumes the flow after re-login. To smooth this case even further – so users can self-diagnose before they click – consider also surfacing the expected PostHog email in your own UI, for example a button labeled _"Open in PostHog as user@example.com"_.
 
 ##### Don't link directly to project URLs
 
