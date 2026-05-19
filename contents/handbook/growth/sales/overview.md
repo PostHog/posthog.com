@@ -29,6 +29,8 @@ The Sales team act as genuine partners with our users. We should feel as motivat
 
 - **Technically capable:** We deliver genuinely useful insights about things those customers care about (can be purely PostHog-related, but also general advice). Our ICP are ‘self-servers', so ideally we teach them how to do something, rather than doing it for them. A great support experience is part of this. 
 
+- **Customer context:** We understand how a customer’s business works and what success looks like for them, and use that context to guide recommendations and timing. We succeed when our customers succeed.
+
 - **Speed:** We want to be highly reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate. 
 
 - **Cross sell:** PostHog gets much more powerful as customers adopt [multiple products](/handbook/growth/sales/expansion-and-retention#identifying-cross-sell-opportunities) that all share the underlying data. And they stick around longer. It's a win win. 
