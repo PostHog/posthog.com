@@ -96,7 +96,7 @@ function MCPHeader(): JSX.Element {
                         <span className="text-red dark:text-yellow">Get answers.</span>
                     </h1>
                     <p className="!mt-0 !mb-5 text-base @sm:text-lg italic opacity-80">
-                        The future isn't complicated. It doesn't even have a UI.
+                        We don't think the future has a UI. So we built one without one.
                     </p>
                     <WizardCommand command="mcp add" slim />
                     <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 justify-center @lg:justify-start text-[11px] uppercase font-semibold tracking-wider opacity-60">
@@ -223,14 +223,18 @@ function Subfeatures(): JSX.Element {
 
 function MCPFaqGrid(): JSX.Element {
     const rows = [
-        { q: 'Can it run a funnel?', a: 'Yes.' },
-        { q: 'Can it pull errors by occurrence?', a: 'Yes.' },
-        { q: 'Can it write the SQL?', a: 'Yes.' },
-        { q: 'Can it remember your event taxonomy?', a: 'Yes. Better than you do.' },
+        { q: 'Run a funnel?', a: 'Yes.' },
+        { q: 'Pull errors by occurrence?', a: 'Yes.' },
+        { q: 'Write the SQL?', a: 'Yes.' },
+        { q: 'Spin up an experiment?', a: 'Yes.' },
+        { q: 'Toggle a feature flag?', a: 'Yes.' },
+        { q: 'Find that one weird replay?', a: 'Yes.' },
+        { q: 'Remember your event taxonomy?', a: 'Better than you do.' },
+        { q: 'Make the dashboards obsolete?', a: 'Working on it.' },
     ]
     return (
         <div className="not-prose">
-            <div className="border border-primary rounded overflow-hidden">
+            <div className="border border-primary rounded overflow-hidden bg-white dark:bg-black">
                 {rows.map((row, idx) => (
                     <div
                         key={row.q}
@@ -239,7 +243,7 @@ function MCPFaqGrid(): JSX.Element {
                         }`}
                     >
                         <div className="px-3 py-2 text-sm font-semibold">{row.q}</div>
-                        <div className="px-3 py-2 text-sm font-mono text-secondary min-w-[180px]">{row.a}</div>
+                        <div className="px-3 py-2 text-sm font-mono text-secondary min-w-[140px]">{row.a}</div>
                     </div>
                 ))}
             </div>
@@ -278,30 +282,31 @@ const supportedProducts: SupportedProduct[] = [
 
 function SupportedProductsSidebar(): JSX.Element {
     return (
-        <aside className="not-prose bg-accent dark:bg-accent-dark border border-primary rounded-md p-4">
-            <p className="text-[10px] uppercase font-bold tracking-wider text-secondary m-0 mb-1">Supported products</p>
-            <p className="text-[12px] opacity-70 m-0 mb-3 leading-snug">
-                Tools available across these PostHog products.
-            </p>
-            <ul className="list-none p-0 m-0 space-y-1">
+        <aside className="not-prose bg-accent dark:bg-accent-dark border border-primary rounded-md p-4 h-full flex flex-col">
+            <div className="mb-3">
+                <p className="text-[10px] uppercase font-bold tracking-wider text-secondary m-0 mb-1">
+                    Supported products
+                </p>
+                <p className="text-[12px] opacity-70 m-0 leading-snug">Every PostHog product with MCP tools.</p>
+            </div>
+            <ul className="list-none p-0 m-0 grid grid-cols-2 gap-x-2 gap-y-0.5 flex-1">
                 {supportedProducts.map((product) => (
                     <li key={product.label}>
                         <Link
                             to={product.url}
-                            className="group flex items-center gap-2 py-1 px-1.5 rounded text-[13px] !text-inherit !no-underline hover:bg-white dark:hover:bg-black transition-colors"
+                            className="group flex items-center gap-1.5 py-1 px-1.5 rounded text-[12px] !text-inherit !no-underline hover:bg-white dark:hover:bg-black transition-colors"
                         >
-                            <span className="size-3.5 text-secondary opacity-75 group-hover:opacity-100 group-hover:text-red dark:group-hover:text-yellow shrink-0">
+                            <span className="size-3 text-secondary opacity-75 group-hover:opacity-100 group-hover:text-red dark:group-hover:text-yellow shrink-0">
                                 {product.icon}
                             </span>
                             <span className="font-semibold truncate">{product.label}</span>
-                            <IconArrowUpRight className="size-3 opacity-0 group-hover:opacity-50 ml-auto shrink-0" />
                         </Link>
                     </li>
                 ))}
             </ul>
-            <p className="text-[11px] opacity-60 m-0 mt-3 leading-snug">
-                <Link to="/docs/model-context-protocol" className="underline !text-inherit">
-                    See the full tool list →
+            <p className="text-[11px] opacity-70 m-0 mt-3 pt-3 border-t border-border dark:border-border-dark leading-snug">
+                <Link to="/docs/model-context-protocol" className="font-semibold !text-inherit hover:underline">
+                    See every tool →
                 </Link>
             </p>
         </aside>
@@ -310,7 +315,7 @@ function SupportedProductsSidebar(): JSX.Element {
 
 function MCPCapabilitiesLayout(): JSX.Element {
     return (
-        <div className="not-prose my-6 grid grid-cols-1 @lg:grid-cols-[1fr,260px] gap-6 items-start">
+        <div className="not-prose my-6 grid grid-cols-1 @lg:grid-cols-[minmax(0,1fr),minmax(0,1fr)] gap-4 items-stretch">
             <MCPFaqGrid />
             <SupportedProductsSidebar />
         </div>
@@ -522,8 +527,8 @@ function FutureNoUI(): JSX.Element {
                 <div className="mt-5 bg-accent dark:bg-accent-dark border border-primary rounded-md p-4">
                     <p className="font-bold text-[15px] m-0 mb-1">"But what if I like the PostHog UI?"</p>
                     <p className="text-[13px] m-0 opacity-80 leading-snug">
-                        You can still log in to PostHog if you want to do things the old-fashioned way. While you're
-                        there, tell <TeamMember name="Adam Leith" photo /> you like it.
+                        You can still log in to PostHog with a UI. While you're there, tell{' '}
+                        <TeamMember name="Adam Leith" photo /> you like it.
                     </p>
                 </div>
             </div>
