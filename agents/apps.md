@@ -10,7 +10,7 @@ PostHog.com replicates a desktop-style OS. All pages should use one of these tem
 |------|------------|--------|-------|
 | `<Editor />` | `/customers` | `src/components/Editor/index.tsx` | Google Docs-style page editor. Use `<MDXEditor />` inside to render Markdown content. |
 | `<Reader />` | `/docs/getting-started/send-events`, `/handbook/why-does-posthog-exist`, `/blog/why-os`, `/tutorials/cookieless-tracking` | `src/components/ReaderView/index.tsx` | Up to 3 columns (nav, main, on-page nav) - optional |
-| `<Presentation />` | `/llm-analytics` | `src/components/Presentation/index.tsx` | Sources data from product hooks. Uses slide templates inside presentations. |
+| `<Presentation />` | `/llm-observability` | `src/components/Presentation/index.tsx` | Sources data from product hooks. Uses slide templates inside presentations. |
 | `<Explorer />` | `/products` | `src/components/Explorer/index.tsx` | Grid/list view for browsing items |
 | `<Inbox />` | `/questions` | `src/components/Inbox/index.tsx` | Outlook-style panes |
 | `<Wizard />` | `/vibe-check` | `src/pages/vibe-check/index.tsx` | Slides with navigation and a final screen |
@@ -68,7 +68,7 @@ Shared components used across apps:
 
 ## Product presentation slide templates
 
-**Product pages** (`/llm-analytics`, `/product-analytics`) use slide templates. The various templates (and details for creating custom templates) are documented [in the component's README](src/components/Products/Slides/README.md).
+**Product pages** (`/llm-observability`, `/product-analytics`) use slide templates. The various templates (and details for creating custom templates) are documented [in the component's README](src/components/Products/Slides/README.md).
 
 When creating a new slide, look for (or ask the prompter) for an existing template to use as a base instead of generating custom slides by default.
 

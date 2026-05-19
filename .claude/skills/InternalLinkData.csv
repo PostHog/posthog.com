@@ -596,63 +596,63 @@ Error Tracking,sentry,/tutorials/sentry,Tutorial,Tutorial: sentry
 Error Tracking,nextjs error monitoring,/tutorials/nextjs-error-monitoring,Tutorial,Tutorial: nextjs error monitoring
 Error Tracking,python error tracking,/tutorials/python-error-tracking,Tutorial,Tutorial: python error tracking
 Error Tracking,react error tracking,/tutorials/react-error-tracking,Tutorial,Tutorial: react error tracking
-LLM Analytics,llm analytics,/llm-analytics,Product page,General llm analytics mentions
-LLM Analytics,llm analytics docs,/docs/llm-analytics,Docs,Technical docs references
-LLM Analytics,basics,/docs/llm-analytics/basics,Docs,Basics feature or configuration
-LLM Analytics,calculating costs,/docs/llm-analytics/calculating-costs,Docs,Calculating Costs feature or configuration
-LLM Analytics,clusters,/docs/llm-analytics/clusters,Docs,Clusters feature or configuration
-LLM Analytics,collect user feedback,/docs/llm-analytics/collect-user-feedback,Docs,Collect User Feedback feature or configuration
-LLM Analytics,custom properties,/docs/llm-analytics/custom-properties,Docs,Custom Properties feature or configuration
-LLM Analytics,dashboard,/docs/llm-analytics/dashboard,Docs,Dashboard feature or configuration
-LLM Analytics,embeddings,/docs/llm-analytics/embeddings,Docs,Embeddings feature or configuration
-LLM Analytics,errors,/docs/llm-analytics/errors,Docs,Errors feature or configuration
-LLM Analytics,evaluations,/docs/llm-analytics/evaluations,Docs,Evaluations feature or configuration
-LLM Analytics,generations,/docs/llm-analytics/generations,Docs,Generations feature or configuration
-LLM Analytics,installation,/docs/llm-analytics/installation,Docs,"Setup, getting started, SDKs"
-LLM Analytics,integrations,/docs/llm-analytics/integrations,Docs,Integrations feature or configuration
-LLM Analytics,helicone posthog,/docs/llm-analytics/integrations/helicone-posthog,Docs,Helicone Posthog feature or configuration
-LLM Analytics,keywords ai posthog,/docs/llm-analytics/integrations/keywords-ai-posthog,Docs,Keywords Ai Posthog feature or configuration
-LLM Analytics,langfuse posthog,/docs/llm-analytics/integrations/langfuse-posthog,Docs,Langfuse Posthog feature or configuration
-LLM Analytics,traceloop posthog,/docs/llm-analytics/integrations/traceloop-posthog,Docs,Traceloop Posthog feature or configuration
-LLM Analytics,link error tracking,/docs/llm-analytics/link-error-tracking,Docs,Link Error Tracking feature or configuration
-LLM Analytics,link session replay,/docs/llm-analytics/link-session-replay,Docs,Link Session Replay feature or configuration
-LLM Analytics,privacy mode,/docs/llm-analytics/privacy-mode,Docs,Privacy Mode feature or configuration
-LLM Analytics,prompts,/docs/llm-analytics/prompts,Docs,Prompts feature or configuration
-LLM Analytics,sessions,/docs/llm-analytics/sessions,Docs,Sessions feature or configuration
-LLM Analytics,spans,/docs/llm-analytics/spans,Docs,Spans feature or configuration
-LLM Analytics,start here,/docs/llm-analytics/start-here,Docs,Start Here feature or configuration
-LLM Analytics,summarization,/docs/llm-analytics/summarization,Docs,Summarization feature or configuration
-LLM Analytics,traces,/docs/llm-analytics/traces,Docs,Traces feature or configuration
-LLM Analytics,troubleshooting,/docs/llm-analytics/troubleshooting,Docs,"Debugging, missing data, fixes"
-LLM Analytics,tutorials,/docs/llm-analytics/tutorials,Docs,"Learning resources, how-to content"
-LLM Analytics,manual event capture,/docs/llm-analytics/user-feedback/manual-event-capture,Docs,Manual Event Capture feature or configuration
-LLM Analytics,use thumb survey,/docs/llm-analytics/user-feedback/use-thumb-survey,Docs,Use Thumb Survey feature or configuration
-LLM Analytics,ai,/ai,Product page,Ai feature page
-LLM Analytics,ai engineering docs,/docs/ai-engineering,Docs,Ai Engineering documentation
-LLM Analytics,posthog ai docs,/docs/posthog-ai,Docs,Posthog Ai documentation
-LLM Analytics,llm analytics,/blog/llm-analytics,Blog,Blog: llm analytics
-LLM Analytics,llm,/blog/llm,Blog,Blog: llm
-LLM Analytics,correct llm code generation,/blog/correct-llm-code-generation,Blog,Blog: correct llm code generation
-LLM Analytics,devtools advice agent llm,/blog/devtools-advice-agent-llm,Blog,Blog: devtools advice agent llm
-LLM Analytics,envoy wizard llm agent,/blog/envoy-wizard-llm-agent,Blog,Blog: envoy wizard llm agent
-LLM Analytics,optimizing agent cost,/blog/optimizing-agent-cost,Blog,Blog: optimizing agent cost
-LLM Analytics,ai community answers,/blog/ai-community-answers,Blog,Blog: ai community answers
-LLM Analytics,stop ai slop,/blog/stop-ai-slop,Blog,Blog: stop ai slop
-LLM Analytics,building ai features,/newsletter/building-ai-features,Newsletter,Newsletter: building ai features
-LLM Analytics,ai coding mistakes,/newsletter/ai-coding-mistakes,Newsletter,Newsletter: ai coding mistakes
-LLM Analytics,llm product metrics,/product-engineers/llm-product-metrics,Prod. Engineers,Engineering guide: llm product metrics
-LLM Analytics,llm analytics,/tutorials/llm-analytics,Tutorial,Tutorial: llm analytics
-LLM Analytics,llm observability,/tutorials/llm-observability,Tutorial,Tutorial: llm observability
-LLM Analytics,llm ab tests,/tutorials/llm-ab-tests,Tutorial,Tutorial: llm ab tests
-LLM Analytics,anthropic analytics,/tutorials/anthropic-analytics,Tutorial,Tutorial: anthropic analytics
-LLM Analytics,cohere analytics,/tutorials/cohere-analytics,Tutorial,Tutorial: cohere analytics
-LLM Analytics,openai observability,/tutorials/openai-observability,Tutorial,Tutorial: openai observability
-LLM Analytics,openrouter observability,/tutorials/openrouter-observability,Tutorial,Tutorial: openrouter observability
-LLM Analytics,mcp,/tutorials/mcp,Tutorial,Tutorial: mcp
-LLM Analytics,mcp analytics,/tutorials/mcp-analytics,Tutorial,Tutorial: mcp analytics
-LLM Analytics,deskhog,/tutorials/deskhog,Tutorial,Tutorial: deskhog
-LLM Analytics,deskhog claude tutorial,/tutorials/deskhog-claude-tutorial,Tutorial,Tutorial: deskhog claude tutorial
-LLM Analytics,deskhog cursor tutorial,/tutorials/deskhog-cursor-tutorial,Tutorial,Tutorial: deskhog cursor tutorial
+LLM Observability,llm analytics,/llm-observability,Product page,General llm analytics mentions
+LLM Observability,llm analytics docs,/docs/llm-observability,Docs,Technical docs references
+LLM Observability,basics,/docs/llm-observability/basics,Docs,Basics feature or configuration
+LLM Observability,calculating costs,/docs/llm-observability/calculating-costs,Docs,Calculating Costs feature or configuration
+LLM Observability,clusters,/docs/llm-observability/clusters,Docs,Clusters feature or configuration
+LLM Observability,collect user feedback,/docs/llm-observability/collect-user-feedback,Docs,Collect User Feedback feature or configuration
+LLM Observability,custom properties,/docs/llm-observability/custom-properties,Docs,Custom Properties feature or configuration
+LLM Observability,dashboard,/docs/llm-observability/dashboard,Docs,Dashboard feature or configuration
+LLM Observability,embeddings,/docs/llm-observability/embeddings,Docs,Embeddings feature or configuration
+LLM Observability,errors,/docs/llm-observability/errors,Docs,Errors feature or configuration
+LLM Observability,evaluations,/docs/llm-observability/evaluations,Docs,Evaluations feature or configuration
+LLM Observability,generations,/docs/llm-observability/generations,Docs,Generations feature or configuration
+LLM Observability,installation,/docs/llm-observability/installation,Docs,"Setup, getting started, SDKs"
+LLM Observability,integrations,/docs/llm-observability/integrations,Docs,Integrations feature or configuration
+LLM Observability,helicone posthog,/docs/llm-observability/integrations/helicone-posthog,Docs,Helicone Posthog feature or configuration
+LLM Observability,keywords ai posthog,/docs/llm-observability/integrations/keywords-ai-posthog,Docs,Keywords Ai Posthog feature or configuration
+LLM Observability,langfuse posthog,/docs/llm-observability/integrations/langfuse-posthog,Docs,Langfuse Posthog feature or configuration
+LLM Observability,traceloop posthog,/docs/llm-observability/integrations/traceloop-posthog,Docs,Traceloop Posthog feature or configuration
+LLM Observability,link error tracking,/docs/llm-observability/link-error-tracking,Docs,Link Error Tracking feature or configuration
+LLM Observability,link session replay,/docs/llm-observability/link-session-replay,Docs,Link Session Replay feature or configuration
+LLM Observability,privacy mode,/docs/llm-observability/privacy-mode,Docs,Privacy Mode feature or configuration
+LLM Observability,prompts,/docs/llm-observability/prompts,Docs,Prompts feature or configuration
+LLM Observability,sessions,/docs/llm-observability/sessions,Docs,Sessions feature or configuration
+LLM Observability,spans,/docs/llm-observability/spans,Docs,Spans feature or configuration
+LLM Observability,start here,/docs/llm-observability/start-here,Docs,Start Here feature or configuration
+LLM Observability,summarization,/docs/llm-observability/summarization,Docs,Summarization feature or configuration
+LLM Observability,traces,/docs/llm-observability/traces,Docs,Traces feature or configuration
+LLM Observability,troubleshooting,/docs/llm-observability/troubleshooting,Docs,"Debugging, missing data, fixes"
+LLM Observability,tutorials,/docs/llm-observability/tutorials,Docs,"Learning resources, how-to content"
+LLM Observability,manual event capture,/docs/llm-observability/user-feedback/manual-event-capture,Docs,Manual Event Capture feature or configuration
+LLM Observability,use thumb survey,/docs/llm-observability/user-feedback/use-thumb-survey,Docs,Use Thumb Survey feature or configuration
+LLM Observability,ai,/ai,Product page,Ai feature page
+LLM Observability,ai engineering docs,/docs/ai-engineering,Docs,Ai Engineering documentation
+LLM Observability,posthog ai docs,/docs/posthog-ai,Docs,Posthog Ai documentation
+LLM Observability,llm analytics,/blog/llm-observability,Blog,Blog: llm analytics
+LLM Observability,llm,/blog/llm,Blog,Blog: llm
+LLM Observability,correct llm code generation,/blog/correct-llm-code-generation,Blog,Blog: correct llm code generation
+LLM Observability,devtools advice agent llm,/blog/devtools-advice-agent-llm,Blog,Blog: devtools advice agent llm
+LLM Observability,envoy wizard llm agent,/blog/envoy-wizard-llm-agent,Blog,Blog: envoy wizard llm agent
+LLM Observability,optimizing agent cost,/blog/optimizing-agent-cost,Blog,Blog: optimizing agent cost
+LLM Observability,ai community answers,/blog/ai-community-answers,Blog,Blog: ai community answers
+LLM Observability,stop ai slop,/blog/stop-ai-slop,Blog,Blog: stop ai slop
+LLM Observability,building ai features,/newsletter/building-ai-features,Newsletter,Newsletter: building ai features
+LLM Observability,ai coding mistakes,/newsletter/ai-coding-mistakes,Newsletter,Newsletter: ai coding mistakes
+LLM Observability,llm product metrics,/product-engineers/llm-product-metrics,Prod. Engineers,Engineering guide: llm product metrics
+LLM Observability,llm analytics,/tutorials/llm-observability,Tutorial,Tutorial: llm analytics
+LLM Observability,llm observability,/tutorials/llm-observability,Tutorial,Tutorial: llm observability
+LLM Observability,llm ab tests,/tutorials/llm-ab-tests,Tutorial,Tutorial: llm ab tests
+LLM Observability,anthropic analytics,/tutorials/anthropic-analytics,Tutorial,Tutorial: anthropic analytics
+LLM Observability,cohere analytics,/tutorials/cohere-analytics,Tutorial,Tutorial: cohere analytics
+LLM Observability,openai observability,/tutorials/openai-observability,Tutorial,Tutorial: openai observability
+LLM Observability,openrouter observability,/tutorials/openrouter-observability,Tutorial,Tutorial: openrouter observability
+LLM Observability,mcp,/tutorials/mcp,Tutorial,Tutorial: mcp
+LLM Observability,mcp analytics,/tutorials/mcp-analytics,Tutorial,Tutorial: mcp analytics
+LLM Observability,deskhog,/tutorials/deskhog,Tutorial,Tutorial: deskhog
+LLM Observability,deskhog claude tutorial,/tutorials/deskhog-claude-tutorial,Tutorial,Tutorial: deskhog claude tutorial
+LLM Observability,deskhog cursor tutorial,/tutorials/deskhog-cursor-tutorial,Tutorial,Tutorial: deskhog cursor tutorial
 Revenue Analytics,revenue analytics,/revenue-analytics,Product page,General revenue analytics mentions
 Revenue Analytics,revenue analytics docs,/docs/revenue-analytics,Docs,Technical docs references
 Revenue Analytics,capture revenue events,/docs/revenue-analytics/capture-revenue-events,Docs,Capture Revenue Events feature or configuration

@@ -101,7 +101,7 @@ The loop: **define the question → find the right data source → run the query
 The servers:
 
 - **A database MCP** for application data: the [official Postgres MCP](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres) (a reference implementation; the repo is archived but the server still works) or **[Supabase MCP](https://supabase.com/docs/guides/getting-started/mcp)** if that's your stack. Both can run in read-only mode, which is the right default for production databases.
-- **[PostHog MCP](/docs/model-context-protocol)** for event and product data: query analytics with SQL, pull from your [data warehouse](/data-stack), or analyze [LLM traces and costs](/llm-analytics). Good for "users who did X and then Y" queries.
+- **[PostHog MCP](/docs/model-context-protocol)** for event and product data: query analytics with SQL, pull from your [data warehouse](/data-stack), or analyze [LLM traces and costs](/llm-observability). Good for "users who did X and then Y" queries.
 
 A real prompt: *"Pull MRR by plan tier from Postgres, then break down feature usage by tier from PostHog, and give me a single table comparing them."*
 
@@ -181,7 +181,7 @@ Each server adds tool definitions to your agent's context window, which costs to
 The workflows above show what composes well together. Most startups end up running 3-9 servers, enough to cover daily loops without bloating their agent's context window. Some rough starting points:
 
 - **SaaS startup:** GitHub, a deployment MCP (Vercel/Render/Cloudflare), Linear or Notion, PostHog, Brave Search, Filesystem.
-- **AI-native startup:** Same foundation, but lean on PostHog's [LLM observability](/llm-analytics) for traces and costs, and pick a deployment MCP that supports edge inference (Vercel or Cloudflare).
+- **AI-native startup:** Same foundation, but lean on PostHog's [LLM observability](/llm-observability) for traces and costs, and pick a deployment MCP that supports edge inference (Vercel or Cloudflare).
 - **Operations or content-heavy team:** Notion + Linear/Asana/ClickUp, Slack, a search MCP, and PostHog if you have a product. Skip the dev tooling unless engineers will use it.
 
 Start with two or three, then add more as concrete use cases come up. Resist the urge to install everything just because you can.

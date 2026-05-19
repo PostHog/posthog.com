@@ -381,7 +381,7 @@ const products: Product[] = [
         },
     },
     {
-        name: 'LLM analytics',
+        name: 'LLM Observability',
         color: '[#8B0DC8]',
         colorDark: '[#C170E8]',
         Icon: IconLlmAnalytics,
@@ -408,7 +408,7 @@ const products: Product[] = [
         status: 'Production',
         pricing: {
             cta: {
-                url: '/llm-analytics',
+                url: '/llm-observability',
                 text: 'Learn more',
             },
         },

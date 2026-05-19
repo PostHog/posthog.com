@@ -40,10 +40,10 @@ const phFeatures = [
         url: '/docs/product-analytics/identify',
     },
     {
-        title: 'LLM analytics',
+        title: 'LLM Observability',
         description: 'Debug LLM calls and AI generations with full conversation traces and built-in error tracking.',
         icon: <IconLlmAnalytics className="text-[#681291]" />,
-        url: '/docs/llm-analytics',
+        url: '/docs/llm-observability',
     },
     {
         title: 'Data warehouse',

@@ -61,7 +61,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 <legend><TeamMember name="Abe Basu" photo /></legend>
 
 -   <SmallTeam slug="batch-exports" />
--   <SmallTeam slug="llm-analytics" />
+-   <SmallTeam slug="llm-observability" />
 -   <SmallTeam slug="logs" />
 -   <SmallTeam slug="workflows" />
 

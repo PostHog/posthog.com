@@ -80,7 +80,7 @@ All content should include a "last updated" date so team members know they're wo
 | Surveys/Product tours | Leon        | - |
 | Data pipelines (batch and realtime) | Ryan       | - |
 | Data warehouse | Ryan       | - |
-| LLM Analytics | Leo        | - |
+| LLM Observability | Leo        | - |
 | Workflows | Phil        | - |
 | PostHog Code | Landon     | - |
 | Logs | Sean | - |
