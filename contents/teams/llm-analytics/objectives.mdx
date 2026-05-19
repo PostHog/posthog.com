@@ -1,58 +1,67 @@
-### Q1 2026 objectives
+### Q2 2026 objectives
 
-#### Goal 1: Feature GA Releases
+#### Goal 1: Agent-first LLM Analytics
 
-*Description*: Move several features currently in alpha/beta to general availability.
-
-*What we will ship*:
-- **Evaluations** to GA - online LLM-as-a-Judge evaluations for measuring AI output quality
-- **Prompts** to GA - prompt management directly in PostHog
-- **Clustering** to GA - automatic grouping of similar traces and outputs
-- **Errors** to GA - grouped error tracking for LLM applications
-- **Sessions** to GA - session-level observability
-- **Playground** to GA - interactive testing environment for prompts and models
-- **LLM translation** to GA - translation of non-English LLM traces to English
-- **LLM trace/session summarization** to GA - AI-generated summaries for quick understanding
-
-#### Goal 2: OpenTelemetry & SDK
-
-*Description*: Add OpenTelemetry support and rethink our SDK architecture to better serve diverse integration patterns.
+*Description*: Make LLM Analytics usable directly from agents and developer workflows, not just through the product UI.
 
 *What we will ship*:
-- **OpenTelemetry support** - native Otel integration for teams using OpenTelemetry instrumentation
-- **SDK improvements** - rethink and improve our SDK architecture for better developer experience
+- **MCP tools and skills** - expose core LLM Analytics workflows through MCP tools and reusable skills
+- **Agent-first guides** - documentation and examples for using LLM Analytics without relying on the UI
+- **PostHog AI integration** - bring LLM Analytics capabilities directly into PostHog AI workflows
+- **Agentic search** - help agents search traces and related context more effectively
 
-#### Goal 3: Evals
+#### Goal 2: Proactive LLM Analytics
 
-*Description*: Continue building out our evaluations system to help teams measure AI output quality at scale. This includes expanding how evaluations can be created and run, and improving how results surface actionable insights.
-
-*What we will ship*:
-- **Code-based evaluations** for evaluating LLM outputs using user-defined code evaluators instead of LLM-as-a-Judge
-- **Offline evaluations** based on datasets for consistent, repeatable testing
-- **Alerts and surfacing** to proactively notify teams of evaluation issues via alerts, news feed, and other channels
-
-#### Goal 4: Ingestion Pipeline
-
-*Description*: Complete our new ingestion pipeline optimized for LLM events, enabling better performance and new capabilities.
+*Description*: Turn LLM Analytics into a proactive system that surfaces issues, insights, and next steps instead of acting only as a passive dashboard.
 
 *What we will ship*:
-- **New ingestion pipeline** launch - dedicated pipeline optimized for LLM events
-- **Multimodal support** - ingest and store images, audio, and other media in LLM events
+- **Signals integration** - emit strong LLM Analytics signals into Signals pipeline for the self-driving PostHog by default
+- **Scheduled reports** - generate recurring reports on a defined cadence
+- **Problem detection and recommendations** - automatically identify regressions, anomalies, and failure patterns, then suggest next steps
+- **Priority scoring** - rank issues and traces by likely importance so teams know what to investigate first
 
-#### Goal 5: Docs, Onboarding & Wizard
+#### Goal 3: Full evals stack
 
-*Description*: Make it easier for new users to get started with LLM Analytics across different frameworks and tools.
-
-*What we will ship*:
-- **Framework guides** - documentation for every major LLM framework
-- **Wizard support** - add LLM Analytics to the PostHog setup wizard for seamless onboarding
-
-#### Goal 6: PostHog AI Integration
-
-*Description*: Integrate LLM Analytics capabilities with PostHog AI to enable powerful search and insights across traces.
+*Description*: Build out the full evaluations stack and connect it into a clearer, more complete workflow for teams evaluating AI systems.
 
 *What we will ship*:
-- **Agentic search** - find specific traces using natural language queries and get insights
-- **Find traces via evals** - search for traces based on evaluation results (passing or failing)
-- **Trace/session summarization** via AI - leverage PostHog AI for generating summaries
-- **Trace translation** via AI - use PostHog AI for translating traces into English
+- **Trace-level evaluations** - run evaluations directly against traces
+- **Session-level evaluations** - extend evaluations to broader user and agent sessions where it makes sense
+- **Offline evaluations** - support repeatable dataset-based evaluation workflows
+- **Evals education** - provide better guidance and hand-holding for teams getting started with evaluations
+- **Evals discoverability** - make evaluations easier to find and adopt across the product
+
+#### Goal 4: Product glue
+
+*Description*: Improve the connections between LLM Analytics features and strengthen how LLM Analytics works with the rest of PostHog.
+
+*What we will ship*:
+- **Prompts and experiments integration** - tighter connections between prompt workflows and experimentation
+- **Cross-product workflows** - better glue between LLM Analytics and the rest of PostHog
+- **Feature discoverability** - make it easier for users to find related LLM Analytics capabilities and sub-products
+
+#### Goal 5: Reliability and performance
+
+*Description*: Continue improving the speed, resilience, and overall quality of LLM Analytics, with a particular focus on trace-heavy workflows.
+
+*What we will ship*:
+- **Trace and platform improvements** - ongoing improvements to the speed, resilience, and overall quality of core LLM Analytics workflows
+
+#### Goal 6: Trace and session UI
+
+*Description*: Revamp the single trace and session experience for modern agentic use cases.
+
+*What we will ship*:
+- **Single trace UI refresh** - modernize the trace experience for agent-first workflows
+- **Session UI improvements** - bring the same quality bar to session-level investigation
+- **Simple view** - create a lightweight view for traces
+- **Custom message parsers** - define parsers for different agent and LLM message structures
+
+#### Goal 7: Ingestion pipeline and migration
+
+*Description*: Complete the new ingestion pipeline for multimodal and large-text workloads, and finish the `ai_events` cluster migration.
+
+*What we will ship*:
+- **Multimodal ingestion** - ingest and process images, audio, and other non-text AI inputs
+- **Large-text ingestion** - support larger payloads and richer text-heavy workloads
+- **`ai_events` cluster migration** - complete the migration to the new cluster architecture, which is optimized for point lookups of traces

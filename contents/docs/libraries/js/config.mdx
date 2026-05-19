@@ -98,20 +98,28 @@ But if you need more control, we also provide a `rageclick` config that takes an
 
 ## Configuring logs
 
-The `logs` config controls how browser logs are captured and sent to PostHog via OpenTelemetry.
+The `logs` config controls how browser log records are captured and sent to PostHog via OpenTelemetry. You can send structured records with `posthog.logger` (or `posthog.captureLog` for full control), autocapture `console.*` calls, or both. See the [JavaScript web Logs installation guide](/docs/logs/installation/javascript) for a walkthrough.
 
 | Attribute | Description |
 |-----------|-------------|
-| `captureConsoleLogs`<br/><br/>**Type:** Boolean<br/>**Default:** `undefined` | When enabled, automatically captures `console.log`, `console.warn`, `console.error`, etc. and sends them to PostHog as structured logs. |
-| `serviceName`<br/><br/>**Type:** String<br/>**Default:** `'posthog-browser-logs'` | The service name used in [OpenTelemetry resource attributes](https://opentelemetry.io/docs/specs/otel/resource/semantic_conventions/) for logs. Customize this to distinguish logs from different frontend applications or environments when viewing them in PostHog. |
+| `captureConsoleLogs`<br/><br/>**Type:** Boolean<br/>**Default:** `undefined` | When enabled, automatically captures `console.log`, `console.warn`, `console.error`, and friends, and sends them to PostHog as structured log records. Review your app's console output before enabling – overriding `console` can forward passwords, tokens, or user input written to the console by your code or by third-party libraries. |
+| `serviceName`<br/><br/>**Type:** String<br/>**Default:** `'unknown_service'` | The service name applied to all log records. Maps to the [OpenTelemetry resource attribute](https://opentelemetry.io/docs/specs/semconv/resource/) `service.name`. Set this to distinguish records from different frontend apps or environments when viewing them in PostHog. |
+| `environment`<br/><br/>**Type:** String<br/>**Default:** `undefined` | Deployment environment, e.g. `'production'` or `'staging'`. Maps to the OpenTelemetry resource attribute `deployment.environment`. |
+| `serviceVersion`<br/><br/>**Type:** String<br/>**Default:** `undefined` | Release version, e.g. `'1.2.3'`. Maps to the OpenTelemetry resource attribute `service.version`. |
+| `resourceAttributes`<br/><br/>**Type:** Object<br/>**Default:** `undefined` | Additional OpenTelemetry resource attributes applied to every record, e.g. `{ 'host.name': 'web-01' }`. Named fields above are applied first and can be overridden here. |
+| `flushIntervalMs`<br/><br/>**Type:** Number<br/>**Default:** `3000` | How often batched log records are flushed, in milliseconds. |
+| `maxBufferSize`<br/><br/>**Type:** Number<br/>**Default:** `100` | Buffer size before forcing a flush. |
+| `maxLogsPerInterval`<br/><br/>**Type:** Number<br/>**Default:** `1000` | Rate limit per flush window. Excess records are dropped with a single warning, protecting against runaway loggers flooding the network. |
 
 Example:
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   logs: {
-    serviceName: 'my-frontend-app',
+    serviceName: 'checkout-web',
+    environment: 'production',
+    serviceVersion: '1.2.3',
   },
 })
 ```

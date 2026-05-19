@@ -110,6 +110,34 @@ jobs:
                       |--------|---------|---------|
                       | 🟢 **Ready** | [View preview](${{ steps.deploy.outputs.deployment-url }}) | ${{ steps.timestamp-final.outputs.time }} |
 
+            - name: Notify reviewer on successful builds (Inkeep PRs only)
+              if: success() && contains(github.event.pull_request.user.login, 'inkeep')
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const pr = context.payload.pull_request;
+                      const reviewers = pr.requested_reviewers.map(r => `@${r.login}`).join(', ');
+                      await github.rest.issues.createComment({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: pr.number,
+                        body: `Hey ${reviewers}! This docs PR was generated for you by an agent. You're responsible for reviewing and merging it into production.\n\n1. Review and approve the PR\n2. Merge the PR\n   a. Check the preview env and CI build and merge it yourself\n   b. Enable auto-merge if you're confident in the changes`
+                      });
+
+            - name: Notify reviewer on build failure (Inkeep PRs only)
+              if: failure() && contains(github.event.pull_request.user.login, 'inkeep')
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const pr = context.payload.pull_request;
+                      const reviewers = pr.requested_reviewers.map(r => `@${r.login}`).join(', ');
+                      await github.rest.issues.createComment({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: pr.number,
+                        body: `Hey ${reviewers}! This docs PR was generated for you by an agent. You're responsible for reviewing and merging it into production.\n\nThe deploy preview failed to build. [View logs](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) to see what went wrong. If it looks like a flaky failure, re-run the workflow.`
+                      });
+
             - name: Comment on failure
               if: failure()
               uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4

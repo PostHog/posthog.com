@@ -93,6 +93,40 @@ Unlike the other tables, the `sessions` table stores all its properties as separ
 
 The `sessions` table is heavily used in [web analytics](/docs/web-analytics). It is also useful for [marketing analytics](/docs/web-analytics/marketing-analytics) and [session-based metrics](/tutorials/session-metrics) more broadly.
 
+### `session_replay_features`
+
+The `session_replay_features` table contains aggregated behavioral metrics for [Session Replay](/docs/session-replay) sessions. It's useful for analyzing user interaction patterns, detecting frustration signals like rage clicks and dead clicks, and understanding session quality.
+
+Some of the columns in the `session_replay_features` table are:
+
+| Column                            | Description                                                          |
+| --------------------------------- | -------------------------------------------------------------------- |
+| `session_id`                      | Unique identifier for the session                                    |
+| `distinct_id`                     | Unique identifier for the user                                       |
+| `min_first_timestamp`             | Timestamp of the first event in the session                          |
+| `max_last_timestamp`              | Timestamp of the last event in the session                           |
+| `event_count`                     | Total number of events in the session                                |
+| `click_count`                     | Number of click events                                               |
+| `keypress_count`                  | Number of keypress events                                            |
+| `rage_click_count`                | Number of rage clicks detected                                       |
+| `dead_click_count`                | Number of dead clicks detected                                       |
+| `scroll_event_count`              | Number of scroll events                                              |
+| `total_scroll_magnitude`          | Total scroll distance                                                |
+| `max_scroll_y`                    | Maximum scroll depth reached                                         |
+| `mouse_distance_traveled`         | Total distance traveled by the mouse in pixels                       |
+| `mouse_direction_change_count`    | Number of mouse direction changes                                    |
+| `page_visit_count`                | Number of pages visited                                              |
+| `console_error_count`             | Number of console errors                                             |
+| `console_error_after_click_count` | Console errors that occurred after a click                           |
+| `network_request_count`           | Number of network requests                                           |
+| `network_failed_request_count`    | Number of failed network requests                                    |
+| `max_idle_gap_ms`                 | Maximum idle time between actions in milliseconds                    |
+| `text_selection_count`            | Number of text selections                                            |
+| `unique_url_count`                | Count of unique URLs (requires `uniqExactMerge()` to query)          |
+| `unique_click_target_count`       | Count of unique click targets (requires `uniqExactMerge()` to query) |
+
+> **Note:** The `unique_url_count` and `unique_click_target_count` columns store ClickHouse aggregate function states. Wrap them with `uniqExactMerge()` in your query to get the actual count, e.g. `SELECT uniqExactMerge(unique_url_count) FROM session_replay_features`.
+
 ### `query_log`
 
 The `query_log` table provides access to query execution metadata and performance metrics. You can learn more about it in the [query log data docs](/docs/data/query-log).
@@ -380,3 +414,35 @@ The `system.notebooks` table contains notebook metadata from your project.
 | `version`          | Version number of the notebook                    |
 | `created_at`       | When the notebook was created                     |
 | `last_modified_at` | When the notebook was last modified               |
+
+### `system.support_tickets`
+
+The `system.support_tickets` table contains support ticket data from the Conversations product, created via widget, email, or Slack channels.
+
+| Column                  | Description                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------------------------- |
+| `id`                    | Unique identifier for the ticket (UUID)                                                                 |
+| `team_id`               | Team ID the ticket belongs to                                                                           |
+| `ticket_number`         | Auto-incrementing number, unique per team                                                               |
+| `channel_source`        | Origin channel: `widget`, `email`, or `slack`                                                           |
+| `channel_detail`        | Sub-type: `slack_channel_message`, `slack_bot_mention`, `slack_emoji_reaction`, `widget_embedded`, etc. |
+| `distinct_id`           | PostHog distinct_id linking the ticket to a person                                                      |
+| `status`                | Ticket status: `new`, `open`, `pending`, `on_hold`, or `resolved`                                       |
+| `priority`              | Ticket priority: `low`, `medium`, or `high` (null if unset)                                             |
+| `anonymous_traits`      | JSON containing customer-provided traits (name, email, etc.)                                            |
+| `ai_resolved`           | Whether the ticket was resolved by AI (exposed as integer 0/1)                                          |
+| `escalation_reason`     | Reason the ticket was escalated (if applicable)                                                         |
+| `message_count`         | Total number of messages in the ticket                                                                  |
+| `unread_customer_count` | Number of unread messages for the customer                                                              |
+| `unread_team_count`     | Number of unread messages for the team                                                                  |
+| `last_message_at`       | Timestamp of the most recent message                                                                    |
+| `last_message_text`     | Preview text of the most recent message                                                                 |
+| `email_subject`         | Email subject line (email-originated tickets only)                                                      |
+| `email_from`            | Sender email address (email-originated tickets only)                                                    |
+| `session_id`            | PostHog session ID captured at ticket creation                                                          |
+| `session_context`       | JSON containing session context data (replay URL, current URL, etc.)                                    |
+| `sla_due_at`            | SLA deadline timestamp (null if no SLA set)                                                             |
+| `created_at`            | When the ticket was created                                                                             |
+| `updated_at`            | When the ticket was last updated                                                                        |
+
+Status values: `new` (just created), `open` (being worked on), `pending` (waiting for customer), `on_hold` (paused), `resolved` (completed).

@@ -89,7 +89,7 @@ At **PostHog**, we achieve this in a bunch of different ways:
 
 * **Annual company offsites.** The typical agenda includes a couple of big social events, team dinners, a hackathon, all-hands strategy sessions, company culture exercises, and downtime to socialize and explore.
 
-* **Frequent small team offsites.** In addition to our all-company offsite, all our [small teams](/handbook/team-structure) run at least one annual offsite to focus on specific team goals and intense, in-person collaboration. They often include a hackathon, too, but this varies.
+* **Frequent small team offsites.** In addition to our all-company offsite, all our [small teams](/handbook/team-structure) run at least one annual offsite to focus on specific team goals and intense, in-person collaboration. They often include a [hackathon](/newsletter/hackathons), too, but this varies.
 
 Our goal with all of this is to make our in-person time as intentional as possible. To work on big, specific problems, build bonds that create trust, and make asynchronous work more creative and collaborative.
 

@@ -11,7 +11,7 @@ You hate to do it... but you need to get on a pod or instance to troubleshoot th
 
 ### Prerequisite
 
-Make sure you've followed this [guide](https://github.com/PostHog/posthog-cloud-infra/tree/main/terraform/environments)
+Make sure you've followed this [guide](https://github.com/PostHog/posthog-cloud-infra/blob/main/docs/ACCESS.md)
 to get AWS access. !!! Please follow the whole document !!!
 
 ### Connect to a Kubernetes pod
@@ -28,4 +28,4 @@ python manage.py shell_plus
 ```
 
 ### Connect to an EC2 instance
-Please follow [this guide](https://github.com/PostHog/posthog-cloud-infra/tree/main/terraform/environments#ssh-to-an-instance-via-aws-ssm) to connect via AWS Systems Manager Agent (SSM).
+Please follow [this guide](https://github.com/PostHog/posthog-cloud-infra/blob/main/docs/ACCESS.md#ssh-to-an-instance-via-aws-ssm) to connect via AWS Systems Manager Agent (SSM).

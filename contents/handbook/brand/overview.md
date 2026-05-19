@@ -4,6 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The <SmallTeam slug="website" /> focuses on design and the PostHog website. This includes writing the copy for pages outside of the docs and handbook. This is considered the source of truth for how we talk about our products.
+The Graphics team focuses on creating all illustration and art work for PostHog. As the team responsible for PostHog's visual identity, they have the final say on all such matters, including in regards to brand.
 
-We work closely with the <SmallTeam slug="marketing" /> and <SmallTeam slug="content" />.
+The Graphics team works closely with all teams at PostHog.
+
+This team does not own product design or website design, which are handled by the engineering teams and the <SmallTeam slug="website" /> respectively.

@@ -25,6 +25,7 @@ type LibraryFeatures = {
     surveys?: boolean
     llmAnalytics?: boolean
     errorTracking?: boolean
+    logs?: boolean
 }
 
 export const LibraryComparison = () => {
@@ -57,6 +58,7 @@ export const LibraryComparison = () => {
                     featureFlags
                     groupAnalytics
                     errorTracking
+                    logs
                 }
             }
         }
@@ -78,6 +80,7 @@ export const LibraryComparison = () => {
         { name: 'Feature flags', width: '1fr', align: 'center' as const },
         { name: 'Group analytics', width: '1fr', align: 'center' as const },
         { name: 'Error tracking', width: '1fr', align: 'center' as const },
+        { name: 'Logs', width: '1fr', align: 'center' as const },
     ]
 
     const rows = sdks.nodes
@@ -112,6 +115,9 @@ export const LibraryComparison = () => {
                 },
                 {
                     content: renderAvailability(lib.frontmatter.features?.errorTracking),
+                },
+                {
+                    content: renderAvailability(lib.frontmatter.features?.logs),
                 },
             ],
         }))

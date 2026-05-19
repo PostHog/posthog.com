@@ -38,6 +38,14 @@ When Session replay is enabled it will capture all sessions by default.  As ever
 
 If a customer has Session replay enabled, log in as them and look at their session replay [settings](/docs/session-replay/how-to-control-which-sessions-you-record).  At a minimum we recommend setting the minimum duration to 2 seconds or more but there are other tuning options which they may also benefit from.
 
+## Are they running up-to-date SDKs?
+
+Outdated SDKs miss out on bug fixes, performance improvements, and new features. A customer using a three-year-old SDK will hit issues we've already solved, which can silently erode trust over time.
+
+Check SDK versions using [SDK Doctor](/docs/sdk-doctor) or in Metabase via the `Library version audit` table. At minimum, the SDK sending the bulk of their event volume shouldn't be more than 3 months behind the latest. Monthly updates are the best-practice habit to encourage. Some SDKs have breaking changes between versions, and if so, make sure you make the customer aware about the breaking change.
+
+A light nudge on this also doubles as a natural re-engagement touchpoint for customers you haven't spoken to in a while.
+
 ## Have they implemented tracking incorrectly?
 
 ### Calling identify too often

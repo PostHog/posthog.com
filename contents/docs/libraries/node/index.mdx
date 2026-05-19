@@ -285,7 +285,12 @@ import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-
 For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
 
 ```node
-const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {groups:{'organization': 'google'}, groupProperties:{'organization': {'is_authorized': True}})
+const flags = await client.evaluateFlags('user distinct id', {
+    groups: { organization: 'google' },
+    groupProperties: { organization: { is_authorized: true } },
+})
+
+const flagValue = flags.getFlag('flag-key')
 ```
 
 #### Reloading feature flags
@@ -304,13 +309,14 @@ In multi-worker or edge environments, you can implement custom caching for flag 
 
 ## Experiments (A/B tests)
 
-Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```node
-const variant = await client.getFeatureFlag('experiment-feature-flag-key', 'user_distinct_id')
+const flags = await client.evaluateFlags('user_distinct_id')
+const variant = flags.getFlag('experiment-feature-flag-key')
 
 if (variant === 'variant-name') {
-  // do something
+  // Do something
 }
 ```
 

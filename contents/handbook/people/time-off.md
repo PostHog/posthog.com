@@ -19,24 +19,24 @@ You do not need to get approval for time off from your manager. Instead, we expe
 - Having an entire Small Team off - this means we can't provide support to customers
 - Having the only X people who can do some totally critical task at PostHog off - if this is unavoidable, try to make sure one of you can at least check in if something goes horribly wrong
 
-### How to book time off in PTO by Deel
+### How to book time off in Time Off by Deel
 
 Before you start, make sure that:
-- You have authorized the PTO by Deel app in Slack to connect to your Google Calendar
+- You have authorized the Time Off by Deel app in Slack to connect to your Google Calendar
 - You have subscribed to the [team time off calendar](https://calendar.google.com/calendar/u/0/r?cid=c_52c05ff56171856873941d8a4e612c7d5dc317504b7533b0d22207480bc85763@group.calendar.google.com)
 
 If you don't do this, your holiday won't show up in the team time off calendar.
 
 To book a day off:
-- Book it on the PTO by Deel app in Slack. There are various types of time off you can select. It will be automatically approved and added to the team time off calendar (with the exception of longer term leave.) It will also be added to your manager's personal calendar.
+- Book it on the Time Off by Deel app in Slack. There are various types of time off you can select. It will be automatically approved and added to the team time off calendar (with the exception of longer term leave.) It will also be added to your manager's personal calendar.
 - Do not book directly on deel.com as it does not sync with Slack, and the team will not know you are out. Yes, it is confusing that Deel have two separate systems here.
 - There are four types of time off you can select
    - PTO - this will be the majority of the time for vacation or any other time off that doesn't fit below
    - Out Sick - this is when you're sick and will take time off unexpectedly
    - [Parental Leave](https://posthog.com/handbook/people/time-off#parental-leave)
    - Medical Leave - this is planned time off for you personally, on medical grounds - if it is a family member who requires support meaning you      will be off, this is PTO.
-- Block out your own personal GCal to show that you are out. This is because PTO by Deel _only_ books in an all day event in your calendar to show that you are out. If you don't do this, automated meetings such as interviews or demos might still get booked into your cal.
-- Set an out of office message on your email and have it point to someone else on the team, or hey@posthog.com. PTO by Deel will automatically set your Slack status to out of office and will autorespond to Slack messages.
+- Block out your own personal GCal to show that you are out. This is because Time Off by Deel _only_ books in an all day event in your calendar to show that you are out. If you don't do this, automated meetings such as interviews or demos might still get booked into your cal.
+- Set an out of office message on your email and have it point to someone else on the team, or hey@posthog.com. Time Off by Deel will automatically set your Slack status to out of office and will autorespond to Slack messages.
 
 > Please manually book in public holidays you plan to take off as well. We have team members working in countries all over the world, so it is not practical for us to book these all in on your behalf. Some people also prefer to work on certain days even if they're considered a public holiday in the country they are living in or visiting. In the Time Off by Deel app, you can use the Bulk Add by Region feature to quickly identify and add the public holidays you want off.
 
@@ -58,7 +58,7 @@ Whether you have an appointment with your doctor, school run with your kids, or 
 
 If you are sick, you don't need to work and you will be paid - the upper limit for paid sick leave for your country will be specified in your contract. This is assuming you need a day or two off, then just take them.
 
-Please let your manager know if you need to take off due to illness as soon as you are able to and add it to PTO by Deel. You shouldn't pre-emptively book a bunch of days off sick, as you can't know how long you will actually be sick for and you may trigger the need for a doctor's note (see below). Just book the day or two off that you are sick then add more if you still feel unwell.
+Please let your manager know if you need to take off due to illness as soon as you are able to and add it to Time Off by Deel. You shouldn't pre-emptively book a bunch of days off sick, as you can't know how long you will actually be sick for and you may trigger the need for a doctor's note (see below). Just book the day or two off that you are sick then add more if you still feel unwell.
 
 For extended periods of illness (5+ work days), or if you are going over the limit in your country/[state](https://support.gusto.com/article/106622152100000/Sick-leave-laws-by-state), please speak to Fraser so we can work out a plan. In most countries, we will need a doctor's note from you.
 

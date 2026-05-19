@@ -161,7 +161,7 @@ You can completely opt-out users from data capture. To do this, there are two op
 1. Opt users out by default by setting `optOut` to `true` in your PostHog config:
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_client_api_host>")
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
 config.optOut = true
 PostHogSDK.shared.setup(config)
 ```
@@ -196,7 +196,7 @@ import IOSFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/fe
 
 ## Experiments (A/B tests)
 
-Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```swift
 if (PostHogSDK.shared.getFeatureFlag("experiment-feature-flag-key") as? String == "variant-name") {
@@ -229,7 +229,7 @@ If you're not seeing the expected events being captured, the feature flags being
 You can enable debug mode by setting the `debug` option to `true` in the `PostHogConfig` object. A common pattern is to set this to `true` in development environments only for local development.
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_client_api_host>")
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
 config.debug = true
 PostHogSDK.shared.setup(config)
 ```

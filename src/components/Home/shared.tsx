@@ -81,13 +81,15 @@ export const COL2 = [
     'supabase',
     'mistralai',
     'elevenlabs',
+    'exa',
     'convex',
     'hasura',
-    'exa',
     'raycast',
+    'clerk',
     'resend',
     'greptile',
     'wisprflow',
+    'paper',
     'posthog',
 ]
 
@@ -140,7 +142,20 @@ export const companyAttributes: Record<string, string[]> = {
     planes: ['airbus', 'ukgovt'],
     highValue: ['ukgovt', 'airbus', 'elevenlabs', 'lovable', 'supabase', 'hasura', 'mistralai'],
     caseStudy: ['ycombinator', 'elevenlabs', 'lovable', 'supabase', 'hasura', 'researchgate', 'exa', 'posthog'],
-    easyToYell: ['airbus', 'trust', 'convex', 'raycast', 'resend', 'exa', 'heygen', 'posthog', 'wisprflow', 'ukgovt'],
+    easyToYell: [
+        'airbus',
+        'trust',
+        'convex',
+        'clerk',
+        'raycast',
+        'resend',
+        'exa',
+        'heygen',
+        'posthog',
+        'wisprflow',
+        'paper',
+        'ukgovt',
+    ],
     goodBandName: [
         'elevenlabs',
         'lovable',
@@ -149,9 +164,11 @@ export const companyAttributes: Record<string, string[]> = {
         'startengine',
         'raycast',
         'resend',
+        'clerk',
         'researchgate',
         'nationaldesignstudio',
         'wisprflow',
+        'paper',
         'posthog',
     ],
     explainable: [
@@ -170,6 +187,7 @@ export const companyAttributes: Record<string, string[]> = {
         'trust',
         'lovable',
         'convex',
+        'clerk',
         'hasura',
         'raycast',
         'resend',
@@ -177,6 +195,7 @@ export const companyAttributes: Record<string, string[]> = {
         'heygen',
         'wisprflow',
         'ukgovt',
+        'paper',
         'posthog',
     ],
     realWords: [
@@ -184,13 +203,14 @@ export const companyAttributes: Record<string, string[]> = {
         'convex',
         'trust',
         'lovable',
+        'clerk',
         'elevenlabs',
         'startengine',
         'resend',
         'researchgate',
         'nationaldesignstudio',
         'wisprflow',
-        'posthog',
+        'paper',
     ],
     american: [
         'ycombinator',
@@ -198,6 +218,7 @@ export const companyAttributes: Record<string, string[]> = {
         'trust',
         'supabase',
         'hasura',
+        'clerk',
         'startengine',
         'resend',
         'researchgate',
@@ -206,15 +227,29 @@ export const companyAttributes: Record<string, string[]> = {
         'nationaldesignstudio',
         'wisprflow',
         'greptile',
+        'paper',
         'posthog',
     ],
-    pokemon: ['lovable', 'convex', 'supabase', 'hasura', 'mistralai', 'raycast', 'resend', 'exa', 'heygen', 'greptile'],
+    pokemon: [
+        'lovable',
+        'convex',
+        'supabase',
+        'hasura',
+        'mistralai',
+        'raycast',
+        'resend',
+        'exa',
+        'heygen',
+        'paper',
+        'greptile',
+    ],
     arr: [
         'ycombinator',
         'airbus',
         'elevenlabs',
         'trust',
         'lovable',
+        'clerk',
         'convex',
         'supabase',
         'hasura',
@@ -227,6 +262,7 @@ export const companyAttributes: Record<string, string[]> = {
         'heygen',
         'wisprflow',
         'greptile',
+        'paper',
         'posthog',
     ],
     devTool: [
@@ -237,9 +273,11 @@ export const companyAttributes: Record<string, string[]> = {
         'hasura',
         'mistralai',
         'raycast',
+        'clerk',
         'resend',
         'exa',
         'greptile',
+        'paper',
         'posthog',
     ],
 }
@@ -391,44 +429,36 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
 
     return (
         <>
-            <div className="inline-block">
-                <div className="relative @xl:pt-1 pb-2 @xl:pb-0 @4xl:mt-8">
-                    <div className="@xl:absolute right-0 -top-8">
-                        <OSButton
-                            onClick={toggleBreakdown}
-                            variant="secondary"
-                            size="sm"
-                            className="font-semibold [&_span]:min-w-[146px]"
-                            disabled={isAnimating}
-                        >
-                            {isAnimating ? (
-                                '🔀 Shuffling...'
-                            ) : (
-                                <>
-                                    <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
-                                </>
-                            )}
-                        </OSButton>
-                    </div>
+            <div className="relative @xl:pt-1 pb-2 @xl:pb-0 @4xl:mt-8">
+                <div className="@xl:absolute right-0 -top-8">
+                    <OSButton
+                        onClick={toggleBreakdown}
+                        variant="secondary"
+                        size="sm"
+                        className="font-semibold [&_span]:min-w-[146px]"
+                        disabled={isAnimating}
+                    >
+                        {isAnimating ? (
+                            '🔀 Shuffling...'
+                        ) : (
+                            <>
+                                <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
+                            </>
+                        )}
+                    </OSButton>
                 </div>
-                <OSTable
-                    columns={columns}
-                    rows={rows}
-                    size="sm"
-                    rowAlignment="top"
-                    className={tableClassName || undefined}
-                />
-                <OSButton
-                    asLink
-                    to="/customers"
-                    variant="secondary"
-                    size="md"
-                    className="mt-4"
-                    state={{ newWindow: true }}
-                >
-                    Open customers.mdx
-                </OSButton>
             </div>
+            <OSTable
+                columns={columns}
+                rows={rows}
+                size="sm"
+                rowAlignment="top"
+                width="full"
+                className={tableClassName || undefined}
+            />
+            <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
+                Open customers.mdx
+            </OSButton>
         </>
     )
 }

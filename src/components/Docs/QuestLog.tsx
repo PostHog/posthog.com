@@ -403,8 +403,8 @@ export const QuestLog: React.FC<{
 
     const progressPercentage = hasInitialLoadSettled ? ((selectedQuest + 1) / questItems.length) * 100 : 0
     const spritePosition = hasInitialLoadSettled
-        ? `calc(${((selectedQuest + 1) / questItems.length) * 100}% - 32px)`
-        : 'calc(0% - 10px)'
+        ? `min(calc(100% - 48px), max(1.5rem, calc(${((selectedQuest + 1) / questItems.length) * 100}% - 32px)))`
+        : '1.5rem'
 
     return (
         <ScrollSpyProvider>

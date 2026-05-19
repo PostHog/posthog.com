@@ -29,7 +29,7 @@ Get credentials via MCP: Use the PostHog MCP projects-get tool to discover the p
 Initialize at module top-level in the main App file (NOT inside useEffect):
 
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 posthog.init(POSTHOG_TOKEN, {
   api_host: HOST,

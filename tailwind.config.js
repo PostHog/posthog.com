@@ -407,6 +407,24 @@ module.exports = {
                     '0%, 100%': { transform: 'scale(1)' },
                     '50%': { transform: 'scale(1.03)' },
                 },
+                shimmer: {
+                    '0%': { 'background-position': '200% 0' },
+                    '100%': { 'background-position': '-200% 0' },
+                },
+                'hogfather-roll': {
+                    '0%': { left: '0', transform: 'scaleX(-1) translateY(-75%)' },
+                    '44%': { left: 'calc(100% - 32px)', transform: 'scaleX(-1) translateY(-75%)' },
+                    '46%': { left: 'calc(100% - 32px)', transform: 'scaleX(1) translateY(-75%)' },
+                    '98%': { left: '0', transform: 'scaleX(1) translateY(-75%)' },
+                    '100%': { left: '0', transform: 'scaleX(-1) translateY(-75%)' },
+                },
+                'hogfather-jump': {
+                    '0%': { 'margin-top': '0' },
+                    '30%': { 'margin-top': '-24px' },
+                    '60%': { 'margin-top': '0' },
+                    '80%': { 'margin-top': '-8px' },
+                    '100%': { 'margin-top': '0' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
@@ -430,6 +448,9 @@ module.exports = {
                 'slide-up-fade-out': 'slideUpFadeOut 300ms ease-in forwards',
                 float: 'float 2s ease-in-out infinite',
                 breathe: 'breathe 3s ease-in-out infinite',
+                shimmer: 'shimmer 8s linear infinite',
+                'hogfather-roll': 'hogfather-roll 20s ease-in-out infinite',
+                'hogfather-jump': 'hogfather-jump 400ms ease-out',
             },
             containers: {
                 '2xs': '16rem',
@@ -481,7 +502,6 @@ module.exports = {
             addVariant('wallpaper-parade', 'body[data-wallpaper="parade"] &')
             addVariant('wallpaper-coding-at-night', 'body[data-wallpaper="coding-at-night"] &')
             addVariant('wallpaper-startup-monopoly', 'body[data-wallpaper="startup-monopoly"] &')
-            addVariant('wallpaper-action-figure', 'body[data-wallpaper="action-figure"] &')
         },
     ],
 }

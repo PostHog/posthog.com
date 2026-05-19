@@ -36,7 +36,7 @@ sequenceDiagram
 
 Every flag check is a network round trip. PostHog already has all the data it needs, so you just pass the flag key and a user ID.
 
-With local evaluation, the SDK periodically fetches **flag definitions** from PostHog's `/api/feature_flag/local_evaluation` endpoint in the background. When you check a flag, **you provide the properties** and the SDK evaluates locally — no round trip:
+With local evaluation, the SDK periodically fetches **flag definitions** from PostHog's `/flags/definitions` endpoint in the background. When you check a flag, **you provide the properties** and the SDK evaluates locally — no round trip:
 
 ```mermaid
 sequenceDiagram
@@ -44,7 +44,7 @@ sequenceDiagram
     participant SDK as PostHog SDK
     participant PH as PostHog
     Note over SDK,PH: Background (every 30s)
-    SDK->>PH: GET /local_evaluation
+    SDK->>PH: GET /flags/definitions
     PH-->>SDK: Flag definitions
     Note over App,SDK: At evaluation time
     App->>SDK: flag key + person properties + group properties
@@ -80,166 +80,173 @@ import ConfigureFlagsSecureKey from "../../integrate/_snippets/configure-flags-s
 
 ## Step 3: Evaluate your feature flag
 
-To evaluate the feature flag, call any of the flag related methods, like `getFeatureFlag` or `getAllFlags`, as you normally would. The only difference is that you must provide any `person properties`, `groups` or `group properties` used to evaluate the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) of the flag.
+To evaluate the feature flag, call the flag evaluation method for your SDK. In server-side APIs, evaluate flags once and read values from the returned snapshot. The only difference is that you must provide any `person properties`, `groups`, or `group properties` used to evaluate the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) of the flag.
 
 Then, by default, PostHog attempts to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request to fetch the flag value.
 
 You can disable this behavior by setting `onlyEvaluateLocally` to `true`. In this case, PostHog will **only** attempt to evaluate the flag locally, and return `undefined` / `None` / `nil` if it was unable to.
 
+### Cold start and fallback defaults
+
+When the SDK first starts, it needs up to one polling interval (30 seconds by default) to fetch flag definitions. During this window, local evaluation returns `undefined` / `None` because no definitions are loaded yet. Use per-flag defaults to control what users see during this period:
+
+```javascript
+// Without a default, undefined is falsy — users see nothing
+const variant = posthog.getFeatureFlag('checkout-redesign') || false
+
+// With a per-flag default, you control the experience
+const variant = posthog.getFeatureFlag('checkout-redesign') ?? 'control'
+```
+
+If you deploy frequently or have many short-lived workers, consider using a [shared flag definition cache](/docs/feature-flags/local-evaluation/distributed-environments) so definitions survive restarts and the cold start window is eliminated.
+
 <MultiLanguage>
 
 ```node
-await client.getFeatureFlag(
-    'flag-key',
-    'distinct_id_of_the_user',
-    {
-        // include any person properties, groups, or group properties required to evaluate the flag
-        personProperties: {
-            'property_name': 'value'
-        },
-        groups: {
-            "your_group_type": "your_group_id",
-            "another_group_type": "another_group_id",
-        },
-        groupProperties: {
-            'your_group_type': {
-                'group_property_name': 'value'
-            },
-            'another_group_type': {
-                'group_property_name': 'another value'
-            }
-        },
-        onlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
-    }
-)
+const flags = await client.evaluateFlags('distinct_id_of_the_user', {
+    // Include any person properties, groups, or group properties required to evaluate the flag
+    personProperties: { property_name: 'value' },
+    groups: {
+        your_group_type: 'your_group_id',
+        another_group_type: 'another_group_id',
+    },
+    groupProperties: {
+        your_group_type: { group_property_name: 'value' },
+        another_group_type: { group_property_name: 'another value' },
+    },
+    onlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
+})
+
+const flagValue = flags.getFlag('flag-key')
 ```
 
 ```ruby
-posthog.get_feature_flag(
-    'flag-key',
+flags = posthog.evaluate_flags(
     'distinct_id_of_the_user',
     # Include any person properties, groups, or group properties required to evaluate the flag
-    person_properties: {
-        'property_name': 'value'
-    },
+    person_properties: { property_name: 'value' },
     groups: {
-        'your_group_type': 'your_group_id',
-        'another_group_type': 'another_group_id',
+        your_group_type: 'your_group_id',
+        another_group_type: 'another_group_id',
     },
     group_properties: {
-        'your_group_type': {
-            'group_property_name': 'value'
-        }
-        'another_group_type': {
-            'group_property_name': 'another value'
-        }
+        your_group_type: { group_property_name: 'value' },
+        another_group_type: { group_property_name: 'another value' },
     },
-    only_evaluate_locally: False # Optional. Defaults to False. Set to True if you don't want PostHog to make a server request if it can't evaluate locally
+    only_evaluate_locally: false, # Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
 )
+
+flag_value = flags.get_flag('flag-key')
 ```
 
 ```go
-enabledVariant, err := client.GetFeatureFlag(
-    FeatureFlagPayload{
-        Key:        "flag-key",
-        DistinctId: "distinct_id_of_the_user",
-        // Include any person properties, groups, or group properties required to evaluate the flag
-        Groups: posthog.NewGroups().
-            Set("your_group_type", "your_group_id").
-            Set("another_group_type", "another_group_id"),
-        PersonProperties: posthog.NewProperties().
-            Set("property_name", "value"),
-        GroupProperties: map[string]map[string]interface{}{
-            "your_group_type": {
-                "group_property_name": "value",
-            },
-            "another_group_type": {
-                "group_property_name": "another value",
-            },
-        },
-        OnlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
+flags, err := client.EvaluateFlags(posthog.EvaluateFlagsPayload{
+    DistinctId: "distinct_id_of_the_user",
+    // Include any person properties, groups, or group properties required to evaluate the flag
+    Groups: posthog.NewGroups().
+        Set("your_group_type", "your_group_id").
+        Set("another_group_type", "another_group_id"),
+    PersonProperties: posthog.NewProperties().
+        Set("property_name", "value"),
+    GroupProperties: map[string]posthog.Properties{
+        "your_group_type": posthog.NewProperties().
+            Set("group_property_name", "value"),
+        "another_group_type": posthog.NewProperties().
+            Set("group_property_name", "another value"),
     },
-)
+    OnlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
+})
+if err != nil {
+    // Handle error
+}
+
+flagValue := flags.GetFlag("flag-key")
 ```
 
 ```python
-posthog.get_feature_flag(
-    'flag-key',
-    'distinct_id_of_the_user',
+flags = posthog.evaluate_flags(
+    "distinct_id_of_the_user",
     # Include any person properties, groups, or group properties required to evaluate the flag
-    person_properties={'property_name': 'value'},
+    person_properties={"property_name": "value"},
     groups={
-        'your_group_type': 'your_group_id',
-        'another_group_type': 'another_group_id'
+        "your_group_type": "your_group_id",
+        "another_group_type": "another_group_id",
     },
     group_properties={
-        'your_group_type': {'group_property_name': 'value'},
-        'another_group_type': {'group_property_name': 'another value'}
+        "your_group_type": {"group_property_name": "value"},
+        "another_group_type": {"group_property_name": "another value"},
     },
-    only_evaluate_locally=False # Optional. Defaults to False. Set to True if you don't want PostHog to make a server request if it can't evaluate locally
+    only_evaluate_locally=False,  # Optional. Defaults to False. Set to True if you don't want PostHog to make a server request if it can't evaluate locally.
 )
+
+flag_value = flags.get_flag("flag-key")
 ```
 
 ```php
-PostHog::getFeatureFlag(
-    'flag-key',
-    'distinct_id_of_the_user',
+$flags = PostHog::evaluateFlags(
+    distinctId: 'distinct_id_of_the_user',
     // Include any person properties, groups, or group properties required to evaluate the flag
-    [
+    groups: [
         'your_group_type' => 'your_group_id',
-        'another_group_type' => 'another_group_id'
-    ], // groups
-    ['property_name' => 'value'], // person properties
-    [
+        'another_group_type' => 'another_group_id',
+    ],
+    personProperties: ['property_name' => 'value'],
+    groupProperties: [
         'your_group_type' => ['group_property_name' => 'value'],
-        'another_group_type' => ['group_property_name' => 'another value']
-    ], // group properties
-    false, // only_evaluate_locally, Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
-    true // sendFeatureFlagEvents
+        'another_group_type' => ['group_property_name' => 'another value'],
+    ],
+    onlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
 );
+
+$flagValue = $flags->getFlag('flag-key');
 ```
 
 ```csharp
-await posthog.GetFeatureFlagAsync(
-    "flag-key",
+var flags = await posthog.EvaluateFlagsAsync(
     "distinct_id_of_the_user",
-    options: new FeatureFlagOptions
+    options: new AllFeatureFlagsOptions
     {
         PersonProperties = new()
         {
-            ["property_name"] = "value"
+            ["property_name"] = "value",
         },
         Groups = new()
         {
             new Group("your_group_type", "your_group_id")
             {
-                ["group_property_name"] = "value"
+                ["group_property_name"] = "value",
             },
             new Group("another_group_type", "another_group_id")
             {
-                ["group_property_name"] = "another value"
-            }
-        }
+                ["group_property_name"] = "another value",
+            },
+        },
+        OnlyEvaluateLocally = false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
     }
 );
+
+var flagValue = flags.GetFlag("flag-key");
 ```
 
 ```java
-posthog.getFeatureFlag(
+PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags(
     "distinct_id_of_the_user",
-    "flag-key",
-    PostHogFeatureFlagOptions
-        .builder()
+    PostHogEvaluateFlagsOptions.builder()
         .personProperty("property_name", "value")
         .group("your_group_type", "your_group_id")
         .group("another_group_type", "another_group_id")
         .groupProperty("your_group_type", "group_property_name", "value")
         .groupProperty("another_group_type", "group_property_name", "another value")
-        .build());
+        .onlyEvaluateLocally(false) // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
+        .build()
+);
+
+Object flagValue = flags.getFlag("flag-key");
 ```
 
 ```rust
 use std::collections::HashMap;
+use posthog_rs::EvaluateFlagsOptions;
 use serde_json::json;
 
 // Include any person properties, groups, or group properties required to evaluate the flag
@@ -259,13 +266,18 @@ let mut another_group_props = HashMap::new();
 another_group_props.insert("group_property_name".to_string(), json!("another value"));
 group_props.insert("another_group_type".to_string(), another_group_props);
 
-let flag = client.get_feature_flag(
-    "flag-key".to_string(),
-    "distinct_id_of_the_user".to_string(),
-    Some(groups),
-    Some(person_props),
-    Some(group_props),
+let flags = client.evaluate_flags(
+    "distinct_id_of_the_user",
+    EvaluateFlagsOptions {
+        groups: Some(groups),
+        person_properties: Some(person_props),
+        group_properties: Some(group_props),
+        only_evaluate_locally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
+        ..Default::default()
+    },
 ).await.unwrap();
+
+let flag = flags.get_flag("flag-key");
 ```
 
 </MultiLanguage>

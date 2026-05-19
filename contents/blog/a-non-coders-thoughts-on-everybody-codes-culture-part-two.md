@@ -22,7 +22,7 @@ In my previous post I wrote about the three principles that set me up for succes
 ### Having unrealistic goals
 In my last post [I said it was important to set realistic limits](/blog/a-non-coders-thoughts-on-everybody-codes-culture) and that’s true, at the start.
 
-However, it’s also been important to follow less grounded ideas. One example is the ShuffleHog — an idea I had for a hackathon project which is essentially a shuffle button to help you discover new insights. I thought ShuffleHog was a fun idea, but nobody else latched on to it.
+However, it’s also been important to follow less grounded ideas. One example is the ShuffleHog — an idea I had for [a hackathon project](/newsletter/hackathons) which is essentially a shuffle button to help you discover new insights. I thought ShuffleHog was a fun idea, but nobody else latched on to it.
 
 If I’d stuck to realistic limits, that would be the end of it. I can’t  build a product feature on my own, can I?
 

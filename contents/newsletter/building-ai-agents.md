@@ -29,7 +29,7 @@ To help you build a better agent faster, we’re sharing what we wished we had k
 
 ## 1. Should you build an MCP server instead?
 
-Should you even build an AI agent into your product? The capabilities of agents are unquestionably valuable but this does not mean you need to build a custom one. Making your product accessible to agents is often a better option.
+Should you even build an AI agent into your product? The capabilities of agents are unquestionably valuable but this does not mean you need to build a custom one. [Making your product accessible to agents](/newsletter/agent-first-product-engineering) is often a better option.
 
 Could your agent capabilities just be an [MCP server](/docs/model-context-protocol)? These are simpler to build and require less maintenance, and for us, is used as much as our built-in agent, PostHog AI. For example, 34% of dashboards created by AI were done through our MCP server (18% of all dashboards created).
 

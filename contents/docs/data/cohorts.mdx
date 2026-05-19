@@ -35,11 +35,6 @@ export const createCohortDark =
 
 ## What are cohorts?
 
-<iframe
-  src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=375"
-  className="rounded shadow-xl"
-/>
-
 Cohorts enable you to easily create a list of users who have something in common, such as completing an [action](/docs/data/actions) or having the same [property](/docs/product-analytics/person-properties).
 
 Here are a few examples of the cohorts you can create:
@@ -147,7 +142,7 @@ You have two options when creating a cohort:
 
 ### Static cohorts
 
-Static cohorts are created from insights, by uploading a CSV of users, or by duplicating a dynamic cohort.
+Static cohorts are created from insights, by uploading a CSV of users, by selecting users individually, by duplicating a dynamic cohort, or by defining criteria for a one-time snapshot.
 
 When creating cohorts from CSVs, the [person profile](/docs/data/persons) associated with each row must already exist in PostHog.
 
@@ -224,6 +219,17 @@ For multi-column files, PostHog will extract the user identifiers from the speci
 
 To update the list, you can upload another CSV to add more users. You can also remove users by deleting their [person profile](/docs/data/persons) from the list, noting that this will completely remove the person from PostHog.
 
+#### Create a static cohort from criteria
+
+When creating a new static cohort, you can choose how to populate it using the **Populate from** dropdown:
+
+- **Criteria · One-time snapshot** – Define matching criteria like you would for a dynamic cohort. When you save, PostHog snapshots all people currently matching those criteria into the static cohort. The list is fixed at creation time and won't update as people change.
+- **Upload or add people** – Manually add people by uploading a CSV file or selecting them individually.
+
+This is useful for use cases like survey targeting, where you want a fixed snapshot of people matching certain criteria at a point in time.
+
+> **Note:** Once a static cohort is created from criteria, the criteria are locked and can't be edited. To use different criteria, create a new cohort.
+
 ### Dynamic cohorts
 
 Dynamic cohorts can be based on existing cohorts, and support the following criteria:
@@ -276,7 +282,7 @@ Dynamic cohorts are updated once every 24 hours.
 
 ### Can you use a dynamic cohort as a feature flag target?
 
-You cannot use dynamic cohorts that include behavioral or lifecycle criteria as a feature flag target. To target these dynamic cohorts for a feature flag, A/B test, or survey, you must first duplicate them into a static cohort. Dynamic cohorts with only person property criteria can be used.
+You cannot use dynamic cohorts that include behavioral or lifecycle criteria as a feature flag target. To target these users for a feature flag, A/B test, or survey, you can either duplicate the dynamic cohort as a static cohort or create a new static cohort directly from criteria using the **Criteria · One-time snapshot** option. Dynamic cohorts with only person property criteria can be used directly.
 
 ### Can you use groups in cohorts?
 

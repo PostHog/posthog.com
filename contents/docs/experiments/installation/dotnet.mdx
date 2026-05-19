@@ -24,7 +24,7 @@ import StepEvaluateExperimentResults from './_snippets/step-evaluate-experiment-
 
 Once PostHog is initialized, you should be able to capture events. For your experiment to be meaningful, we need to capture an event that we want to measure, such as a conversion event.
 
-For this tutorial, let's report a conversion event when a clicks a CTA. In server SDKs like Node, this can be called when a specific route is visited or reported from your client side app.
+For this tutorial, let's report a conversion event when a user clicks a CTA. In server SDKs like .NET, this can be called when a specific route is visited or reported from your client side app.
 
 ```csharp
 posthog.Capture("user_distinct_id", "cta clicked");
@@ -55,13 +55,15 @@ posthog.Capture("user_distinct_id", "cta clicked");
 Use the PostHog SDK to call the experiment flag and update how your page renders based on the assigned variant.
 
 ```csharp
-if (await posthog.GetFeatureFlagAsync(
-        "your-experiment-key",
-        "user_distinct_id")
-    is { VariantKey: "test" })
+var flags = await posthog.EvaluateFlagsAsync("user_distinct_id");
+var variant = flags.GetFlag("your-experiment-key")?.VariantKey;
+
+if (variant == "test")
 {
     // Show test variant UI
-} else {
+}
+else
+{
     // Show control variant UI
 }
 ```

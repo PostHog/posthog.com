@@ -41,3 +41,7 @@ Connect PostHog to your LinkedIn Ads account using a LinkedIn account. The Linke
 4. Enter the **Account ID** of the LinkedIn Ads account you want to sync.
 5. Select an existing LinkedIn Ads account, or create a new integration
 6. (Optional) Add a prefix for the table name.
+
+## Configuration
+
+<SourceParameters />

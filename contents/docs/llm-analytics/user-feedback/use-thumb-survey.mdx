@@ -12,16 +12,16 @@ Initialize the hook with the following options:
 
 ```typescript
 export interface UseThumbSurveyOptions {
-    /** ID of the target PostHog survey */
-    surveyId: string
-    /** Configure the position of the pop-up for followup questions, if applicable. Defaults to SurveyPosition.NextToTrigger */
-    displayPosition?: SurveyPosition
-    /** Custom event properties to pass with each survey result */
-    properties?: Record<string, any>
-    /** Callback on thumb button click */
-    onResponse?: (response: 'up' | 'down') => void
-    /** Disable automatically emitting `survey shown` on hook mount. Defaults to false. */
-    disableAutoShownTracking?: boolean
+  /** ID of the target PostHog survey */
+  surveyId: string;
+  /** Configure the position of the pop-up for followup questions, if applicable. Defaults to SurveyPosition.NextToTrigger */
+  displayPosition?: SurveyPosition;
+  /** Custom event properties to pass with each survey result */
+  properties?: Record<string, any>;
+  /** Callback on thumb button click */
+  onResponse?: (response: "up" | "down") => void;
+  /** Disable automatically emitting `survey shown` on hook mount. Defaults to false. */
+  disableAutoShownTracking?: boolean;
 }
 ```
 
@@ -29,14 +29,14 @@ It returns the following interface:
 
 ```typescript
 export interface UseThumbSurveyResult {
-    /** Call this to submit a survey response, with value 'up' or 'down' */
-    respond: (value: 'up' | 'down') => void
-    /** User's response value, available after submission. Not persisted across mounts. */
-    response: 'up' | 'down' | null
-    /** Ref to attach to the trigger element for positioning the followup survey popup */
-    triggerRef: RefCallback<HTMLElement>
-    /** Method to manually trigger a `survey shown` event. Only available when disableAutoShownTracking is true. */
-    trackShown?: () => void
+  /** Call this to submit a survey response, with value 'up' or 'down' */
+  respond: (value: "up" | "down") => void;
+  /** User's response value, available after submission. Not persisted across mounts. */
+  response: "up" | "down" | null;
+  /** Ref to attach to the trigger element for positioning the followup survey popup */
+  triggerRef: RefCallback<HTMLElement>;
+  /** Method to manually trigger a `survey shown` event. Only available when disableAutoShownTracking is true. */
+  trackShown?: () => void;
 }
 ```
 
@@ -44,7 +44,7 @@ A simple usage of this hook, including a followup question pop-up, looks like th
 
 ```typescript
 // requires @posthog/react 1.7.1+ (bundled with posthog-js 1.345.1+)
-import { useThumbSurvey } from 'posthog-js/react/surveys'
+import { useThumbSurvey } from '@posthog/react/surveys'
 
 function HedgehogBotResponse({ traceId }: { traceId: string }) {
   const { respond, response, triggerRef } = useThumbSurvey({
@@ -79,7 +79,7 @@ function HedgehogBotResponse({ traceId }: { traceId: string }) {
 
 By default, the hook emits a `survey shown` (impression) event on mount.
 
-Duplicate impression events will not impact your ability to see responses within LLM Analytics, but may skew metrics viewed directly from Surveys. 
+Duplicate impression events will not impact your ability to see responses within LLM Analytics, but may skew metrics viewed directly from Surveys.
 
 To disable this behavior, initialize the hook with `disableAutoShownTracking: true` and manually call `trackShown()` when you consider your survey to be "shown."
 
@@ -94,6 +94,5 @@ The hook submits survey responses using the legacy index-based tracking for surv
 ## Survey compatibility
 
 To use this hook, your survey **must** begin with a thumbs up/down question. All other surveys features are supported, such as followup questions and question branching.
-
 
 > For more information, see the [hook source here on GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/react/src/hooks/useThumbSurvey.ts), or a [real implementation in the PostHog codebase here](https://github.com/PostHog/posthog/blob/59359b4d13351931d809a64725d0b2147f23c6eb/frontend/src/scenes/surveys/components/question-visualizations/OpenQuestionSummaryV2.tsx#L112).

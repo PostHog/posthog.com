@@ -137,6 +137,39 @@ For monthly subscriptions, you can choose which day to send on:
 
 Combine these with an ordinal position – **first**, **second**, **third**, **fourth**, or **last** – to schedule deliveries like "the first weekday of the month" or "the last Friday of the month."
 
+## AI summaries
+
+You can enable AI-generated summaries for your subscriptions. When enabled, each delivery includes a short AI-generated summary highlighting key changes or takeaways from your data.
+
+For recurring deliveries with previous data, the AI compares the previous and current snapshots to surface:
+
+- Changes in key metrics
+- New trends or reversals in direction
+- The specific step or segment driving the change
+
+For first-time deliveries without previous data, the AI summarizes the current state of your metrics, highlighting notable values and patterns.
+
+### Enable AI summaries
+
+1. Create or edit a subscription from any insight or dashboard.
+2. Toggle **Include an automatic AI summary**.
+
+<CalloutBox icon="IconInfo" title="AI data processing consent required" type="fyi">
+
+Your organization must approve AI data processing before you can enable AI summaries. This consent is managed in your organization settings.
+
+</CalloutBox>
+
+### Add context for the AI
+
+You can optionally provide context to guide the AI's focus in the **Context for the AI summary** field. For example, you might write "This is a daily revenue health check – focus on revenue drop-off and churn signals."
+
+This helps the AI prioritize which metrics to highlight in its summary.
+
+### Plan limits
+
+Organizations have limits on how many active AI summaries they can have. If you've reached your plan limit, disable an existing AI summary or upgrade your plan to add more.
+
 ## Next delivery date
 
 Each subscription displays its next scheduled delivery date, so you can see exactly when the next report is sent. This date updates automatically after each delivery.
@@ -148,3 +181,26 @@ When editing a subscription, a preview of the next delivery date appears below t
 You can manually trigger a test delivery for any subscription. Click the **...** menu on a subscription in the list and select **Test delivery**. This immediately sends the subscription content to the configured target (email or Slack channel) without waiting for the next scheduled delivery.
 
 This is useful for verifying that the subscription is configured correctly and the content looks as expected.
+
+## Automatically disabled subscriptions
+
+PostHog automatically disables subscriptions when delivery can't succeed. This happens when:
+
+- **Slack integration disconnected** – The Slack integration was removed or disconnected from your PostHog organization.
+- **Unsupported delivery channel** – The subscription targets a delivery channel that's no longer supported.
+- **Slack channel access issues** – PostHog can't post to the Slack channel. This includes archived channels, channels the PostHog bot was removed from, channels that no longer exist, or a revoked Slack token.
+
+When a subscription is auto-disabled, the subscription owner receives an email notification explaining the reason. Disabled subscriptions display a **Disabled** tag in the subscriptions list and on the subscriptions page.
+
+Disabled subscriptions don't deliver on their schedule and can't be test-delivered.
+
+### Re-enabling a subscription
+
+To re-enable a disabled subscription:
+
+1. Fix the underlying issue (e.g., reconnect the Slack integration or re-add the PostHog bot to the channel).
+2. Navigate to the subscription and toggle the **Enabled** checkbox back on.
+
+PostHog validates that the issue is resolved before allowing re-enable. If the prerequisite is still broken (e.g., Slack is still disconnected or the bot isn't in the channel), re-enabling is rejected with an error message.
+
+When you successfully re-enable a subscription, PostHog immediately sends a confirmation delivery and sets the next scheduled delivery date.

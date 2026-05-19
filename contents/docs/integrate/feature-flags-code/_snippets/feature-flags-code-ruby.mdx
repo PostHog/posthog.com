@@ -1,87 +1,118 @@
-There are 2 steps to implement feature flags in Ruby:
+There are two steps to implement feature flags in Ruby:
 
-### Step 1: Evaluate the feature flag value
+### Step 1: Evaluate flags once
+
+Call `posthog.evaluate_flags()` once for the user, then read values from the returned snapshot.
 
 #### Boolean feature flags
 
 ```ruby
-is_my_flag_enabled = posthog.is_feature_enabled('flag-key', 'distinct_id_of_your_user')
+flags = posthog.evaluate_flags('distinct_id_of_your_user')
 
-if is_my_flag_enabled
+if flags.enabled?('flag-key')
     # Do something differently for this user
     # Optional: fetch the payload
-    matched_flag_payload = posthog.get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')
+    matched_flag_payload = flags.get_flag_payload('flag-key')
 end
 ```
 
 #### Multivariate feature flags
 
 ```ruby
-enabled_variant = posthog.get_feature_flag('flag-key', 'distinct_id_of_your_user')
+flags = posthog.evaluate_flags('distinct_id_of_your_user')
+
+enabled_variant = flags.get_flag('flag-key')
 
 if enabled_variant == 'variant-key' # replace 'variant-key' with the key of your variant
     # Do something differently for this user
     # Optional: fetch the payload
-    matched_flag_payload = posthog.get_feature_flag_payload('variant-key', 'distinct_id_of_your_user')
+    matched_flag_payload = flags.get_flag_payload('flag-key')
 end
 ```
 
-import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx" 
+`flags.get_flag()` returns the variant string for multivariate flags, `true` for enabled boolean flags, `false` for disabled flags, and `nil` when the flag wasn't returned by the evaluation.
+
+> **Note:** `posthog.is_feature_enabled()`, `posthog.get_feature_flag()`, `posthog.get_feature_flag_payload()`, and `capture(send_feature_flags: true)` still work during the migration period, but they're deprecated. Prefer `evaluate_flags()` for new code.
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
 
 <IncludePropertyInEvents />
 
 There are two methods you can use to include feature flag information in your events:
 
-#### Method 1: Include the `$feature/feature_flag_name` property
+#### Method 1: Pass the evaluated flags snapshot to `capture()`
 
- In the event properties, include `$feature/feature_flag_name: variant_key`:
+Pass the same `flags` object that you used for branching. This attaches the exact flag values from that evaluation and doesn't make another `/flags` request.
+
+```ruby
+flags = posthog.evaluate_flags('distinct_id_of_your_user')
+
+if flags.enabled?('flag-key')
+    # Do something differently for this user
+end
+
+posthog.capture({
+    distinct_id: 'distinct_id_of_your_user',
+    event: 'event_name',
+    flags: flags,
+})
+```
+
+By default, this attaches every flag in the snapshot using `$feature/<flag-key>` properties and `$active_feature_flags`.
+
+To reduce event property bloat, pass a filtered snapshot:
+
+```ruby
+# Attach only flags accessed with enabled?() or get_flag() before this call
+posthog.capture({
+    distinct_id: 'distinct_id_of_your_user',
+    event: 'event_name',
+    flags: flags.only_accessed,
+})
+
+# Attach only specific flags
+posthog.capture({
+    distinct_id: 'distinct_id_of_your_user',
+    event: 'event_name',
+    flags: flags.only(['checkout-flow', 'new-dashboard']),
+})
+```
+
+`only_accessed` is order-dependent. If you call it before accessing any flags with `enabled?()` or `get_flag()`, no feature flag properties are attached.
+
+#### Method 2: Include the `$feature/feature_flag_name` property manually
+
+In the event properties, include `$feature/feature_flag_name: variant_key`:
 
 ```ruby
 posthog.capture({
     distinct_id: 'distinct_id_of_your_user',
     event: 'event_name',
     properties: {
-        '$feature/feature-flag-key': 'variant-key', # replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
-    }
+        # Replace feature-flag-key with your flag key and 'variant-key' with the key of your variant
+        '$feature/feature-flag-key': 'variant-key',
+    },
 })
 ```
 
-#### Method 2: Set `send_feature_flags` to `true`
+### Evaluating only specific flags
 
-import RubySetSendFeatureFlagsTrue from "./feature-flags-code-ruby-set-send-feature-flags-to-true.mdx" 
+By default, `evaluate_flags()` evaluates every flag for the user. If you only need a few flags, pass `flag_keys` to request only those flags:
 
-<RubySetSendFeatureFlagsTrue />
-
-### Fetching all flags for a user
-
-You can fetch all flag values for a single user by calling `get_all_flags()` or `get_all_flags_and_payloads()`.
-
-This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
-
-```ruby  
-posthog.get_all_flags('distinct_id_of_your_user')
-posthog.get_all_flags_and_payloads('distinct_id_of_your_user') 
+```ruby
+flags = posthog.evaluate_flags(
+    'distinct_id_of_your_user',
+    flag_keys: ['checkout-flow', 'new-dashboard'],
+)
 ```
 
 ### Sending `$feature_flag_called` events
 
-Capturing `$feature_flag_called` events enable PostHog to know when a flag was accessed by a user and thus provide [analytics and insights](/docs/product-analytics/insights) on the flag. By default, we send a these event when:
+Capturing `$feature_flag_called` events enables PostHog to know when a flag was accessed by a user and provide [analytics and insights](/docs/product-analytics/insights) on the flag. With `evaluate_flags()`, the SDK sends this event when you call `flags.enabled?()` or `flags.get_flag()` for a flag.
 
-1. You call `posthog.get_feature_flag()` or `posthog.is_feature_enabled()`, AND 
-2. It's a new user, or the value of the flag has changed. 
+The SDK deduplicates these events per `(distinct_id, flag, value)` in a local cache. If you reinitialize the PostHog client, the cache resets and `$feature_flag_called` events may be sent again. PostHog handles duplicates, so duplicate `$feature_flag_called` events don't affect your analytics.
 
-> *Note:* Tracking whether it's a new user or if a flag value has changed happens in a local cache. This means that if you reinitialize the PostHog client, the cache resets as well – causing `$feature_flag_called` events to be sent again when calling `get_feature_flag` or `is_feature_enabled`. PostHog is built to handle this, and so duplicate `$feature_flag_called` events won't affect your analytics.
-
-You can disable automatically capturing `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
-
-To disable it, set the `send_feature_flag_events` argument in your function call, like so:
-
-```ruby
-is_my_flag_enabled = posthog.is_feature_enabled(
-    'flag-key', 
-    'distinct_id_of_your_user', 
-    send_feature_flag_events: true)
-```
+`flags.get_flag_payload()` doesn't send `$feature_flag_called` events and doesn't count as an access for `only_accessed`.
 
 import RubyOverrideServerProperties from './override-server-properties/ruby.mdx'
 
@@ -89,44 +120,11 @@ import RubyOverrideServerProperties from './override-server-properties/ruby.mdx'
 
 ### Request timeout
 
-You can configure the `feature_flag_request_timeout_seconds` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
+You can configure the `feature_flag_request_timeout_seconds` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked if PostHog's servers are too slow to respond. By default, this is set to 3 seconds.
 
 ```ruby
 posthog = PostHog::Client.new({
-   # rest of your configuration...
-   feature_flag_request_timeout_seconds: 3 # Time in seconds. Default is 3.
+    # rest of your configuration...
+    feature_flag_request_timeout_seconds: 3 # Time in seconds. Defaults to 3.
 })
-```
-
-### Error handling
-
-When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
-
-```ruby
-def handle_feature_flag(client, flag_key, distinct_id)
-    begin
-        is_enabled = client.is_feature_enabled(flag_key, distinct_id)
-        puts "Feature flag '#{flag_key}' for user '#{distinct_id}' is #{is_enabled ? 'enabled' : 'disabled'}"
-        return is_enabled
-    rescue => e
-        puts "Error fetching feature flag '#{flag_key}': #{e.message}"
-        # Optionally, you can return a default value or throw the error
-        # return false # Default to disabled
-        raise e
-    end
-end
-
-# Usage example
-try
-    flag_enabled = handle_feature_flag(client, 'new-feature', 'user-123') 
-    if flag_enabled
-        # Implement new feature logic
-    else
-        # Implement old feature logic
-    end
-rescue => e
-    # Handle the error at a higher level
-    puts 'Feature flag check failed, using default behavior'
-    # Implement fallback logic  
-end
 ```

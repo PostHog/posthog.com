@@ -1,0 +1,71 @@
+---
+title: PostHog Code Slack
+---
+
+<CalloutBox icon="IconWarning" title="Slack app is in alpha" type="fyi">
+
+The Slack app is early. Commands, scopes, and behavior are still moving - expect some rough edges and reach out in [Discord](https://discord.gg/posthog) if something looks off.
+
+</CalloutBox>
+
+You can use PostHog Code from the PostHog Slack app to kick off coding tasks from anywhere your team already chats. Mention the bot with `@PostHog`, describe what you want done, and the agent picks up the work and replies in-thread as it runs.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_47_08_PM_b8ba794fdc.png"
+    classes="rounded"
+    alt="A PostHog Code task running in a Slack thread"
+/>
+
+## Install
+
+Head to [PostHog Code → Slack integration](https://app.posthog.com/settings/project-posthog-code) in your project settings and hit the **Add to Slack** button. Slack will ask for a handful of scopes - approve them and the bot lands in your workspace. You'll need to be a project admin to install.
+
+To talk to the bot in a channel, invite it: `/invite @PostHog`. The first time it sees a mention, it matches your Slack email to your PostHog account, so make sure you're signed in to the same org on both sides.
+
+## Start a task
+
+Mention the bot with what you want done:
+
+```
+@PostHog rename the auth middleware to AuthGuard and update all imports
+```
+
+Because PostHog Code has your PostHog project wired up, you can ask for things that mix code and product data - feature flags, experiments, events, and live metrics are all in the agent's context:
+
+```
+@PostHog add a feature flag to the new checkout page and roll it out
+to everyone with an @example.com email address
+```
+
+```
+@PostHog look at our onboarding activation funnel and propose changes
+to the onboarding flow to lift the drop-off between step 2 and step 3
+```
+
+If you have a single repo connected, the task runs against it immediately. If you have several, the bot will open a repo picker - pick one and the task starts.
+
+While the agent is working, you can view its activity in PostHog and once it's done it'll post a final summary of its work to the thread.
+
+## Follow-ups
+
+Reply in the thread to send a follow-up to the running agent. Anything you say while the run is active is forwarded as a new message in the same conversation, so you can steer mid-run ("actually, skip the test files") or answer a question the agent asked.
+
+Once the agent finishes, you can reply to it by sending a new message in the thread with `@PostHog` - this will continue the existing task that PostHog was working on.
+
+Right now, only the person that started a task can continue it in the thread. If you want to continue it yourself, you can start a new thread and pass the existing messages as context.
+
+## Routing rules and default repo
+
+If you work across many repos, you can teach the bot how to pick a repo intelligently. Run these as mentions:
+
+| Command | What it does |
+|---|---|
+| `@PostHog help` | List every command |
+| `@PostHog rules list` | Show your routing rules |
+| `@PostHog rules add "pattern" org/repo` | Route mentions matching `pattern` to a repo |
+| `@PostHog rules remove <#>` | Remove a rule by its number |
+| `@PostHog default repo set org/repo` | Set the default repo for the current channel |
+| `@PostHog default repo show` | Show the default repo for the current channel |
+| `@PostHog default repo clear` | Clear the default repo for the current channel |
+
+Defaults are scoped to the channel you run the command in, so `#frontend` and `#backend` can each pick their own repo without stepping on each other. When a mention comes in, the bot checks routing rules first, falls back to the channel default, and only opens the picker if neither matches.

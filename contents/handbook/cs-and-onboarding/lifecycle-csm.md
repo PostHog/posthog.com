@@ -26,6 +26,8 @@ Some key examples that really help with building trusts with your customers:
 
 - **Go beyond the basics**: In getting started with customers, you focused on getting to know your customers, understanding their business goals, helping with implementation, and optimizing their use. Now is a great time to focus on how you can help them optimize for success. This could be looking at how they're currently engaging with PostHog products, whether there are things they haven't done that might be helpful to implement. For example, have they set up custom tracking funnels for high value metrics, created alerts on customer actions to track, have they tried PostHog AI, or considered implementing other features to augment the data they have (such as error tracking to figure out why conversions drop off). This is a good opportunity to cross sell but also presents an opportunity to help customers understand where they can get more value out of PostHog.
 
+- **Regularly invite new users to the Slack channel**: The more people on the customer side who know you exist, the more of them will come to you when they hit PostHog issues. Monthly is a good cadence – Vitally can show you who's new.
+
 Establishing trust can take time, and your communication style and actions can play a significant role. It may be worth offering recurring calls with your champion to establish more face-to-face contact, as this can help you maintain an ongoing pulse on what's happening.
 
 ### Stage 3: Getting deeply embedded with customers

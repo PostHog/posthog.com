@@ -245,7 +245,7 @@ Autocaptured events display as the autocaptured interaction type in the [activit
 Interaction autocapture is **not enabled by default**. You can enable it by setting `captureElementInteractions` to `true` in the config.
 
 ```swift
-let config = PostHogConfig(apiKey: <ph_project_token>, host: <ph_client_api_host>)
+let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
 
 config.captureElementInteractions = true // Disabled by default
 
@@ -419,7 +419,7 @@ Screen navigation autocapture is not enabled by default. You can enable it by se
 For example, your initialization code might look like this:
 
 ```swift
-let config = PostHogConfig(apiKey: <ph_project_token>, host: <ph_client_api_host>)
+let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
 
 config.captureElementInteractions = true // Disabled by default
 config.captureApplicationLifecycleEvents = true // Disabled by default

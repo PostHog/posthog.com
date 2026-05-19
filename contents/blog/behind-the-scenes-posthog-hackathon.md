@@ -17,7 +17,7 @@ tags:
 
 As a 100% remote company, our annual company hackathon is one of our most important rituals.  
 
-Some of our most important products and features, like session replay and our data warehouse, started as hackathon projects.
+Some of our most important products and features, like session replay and our data warehouse, [started as hackathon projects](/newsletter/hackathons).
 
 We wanted to share this with you, so at our 2025 offsite in Tulum, Mexico we shot this hackathon documentary about one of our... defining features: Hedgehog Mode. 
 

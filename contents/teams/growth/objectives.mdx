@@ -2,49 +2,43 @@
 
 **North star:** 20% of sign ups should happen outside posthog.com/signup
 
-### Make agentic sign ups first-citizen of PostHog
+These are the primary goals the team is prioritizing this quarter.
 
-<TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo /> will be making agentic sign ups a first-class citizen of PostHog.
+<details>
+<summary>Make agentic sign ups first-citizen of PostHog (<TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo />)</summary>
 
-- Agentic onboarding by default
-  - Headless onboarding?
-  - Wizard? Stripe projects? AI-first onboarding?
-  - Wizard should be able to create orgs + projects on its own, no UI clicks
-- Expand it to more partners
-  - Stripe already done!
-  - Vercel
-  - Lovable
-  - Stripe
-  - Supabase
-  - Replit
+- **Rationale:** Agents are increasingly the ones picking and setting up tools. If our sign-up assumes a human clicking through a dashboard, we miss the fastest-growing top of funnel.
+- **Things we could do:** Agentic onboarding by default — headless onboarding, Wizard, Stripe projects, AI-first flows. Wizard should be able to create orgs + projects on its own with no UI clicks. Expand the pattern beyond Stripe (done) to Vercel, Lovable, Supabase, and Replit.
+- **We'll know we're successful when:** An agent can bring a PostHog org and project online through any of our partner surfaces without a human in the loop.
 
-### Allow anyone to integrate/provision an org + project in PostHog
+</details>
 
-<TeamMember name="Rafael Audibert" photo /> and <TeamMember name="Matt Brooker" photo /> will be making it possible for anyone to integrate/provision an org + project in PostHog.
+<details>
+<summary>Allow anyone to integrate/provision an org + project in PostHog (<TeamMember name="Rafael Audibert" photo /> <TeamMember name="Matt Brooker" photo />)</summary>
 
-- Make use of the soon-to-come Partnerships Wrangler
-- Market it as either PostHog Marketplace or PostHog as a platform
-- Review what we need to make with Agentic Provisioning to make it generic (just an API)
-- Write down docs and settle on how to do it
-- Create the right process for applications
-  - Probably involves the Support Hero handling the requests here
+- **Rationale:** Every partner, every embedded platform, and every agentic flow needs a programmatic way to spin up a PostHog org or project. One-off integrations don't scale — a generic path does.
+- **Things we could do:** Lean on the soon-to-come Partnerships Wrangler. Market it as either PostHog Marketplace or PostHog as a platform. Review what Agentic Provisioning needs to become generic (just an API). Write docs and settle on how to do it. Stand up the right application process — probably Support Hero-driven.
+- **We'll know we're successful when:** A partner or agent can provision an org + project through a single public path, with no custom work from us.
 
-### Activation rate across all onboarding experiences should be 60%+
+</details>
 
-<TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo /> <TeamMember name="Rafael Audibert" photo /> will be pushing the activation rate across all onboarding experiences to 60%+.
+<details>
+<summary>Activation rate across all onboarding experiences should be 60%+ (<TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo /> <TeamMember name="Rafael Audibert" photo />)</summary>
 
-- What the "activation metrics" for this is still TBD. We are currently working on "soft activation" - based on individual product's activation - but another goal for this is to figure out alongside PMs what we should count as global activation.
-- Implement channel-specific onboarding experience
-  - Via website (warm lead) or via wizard (lukewarm) or via agentic provisioning (cold) or via Lovable/Replit just adding Analytics automatically (frozen)
-- PostHog Code is a new big acquisition front but the activation rate for those users is likely to be abysmal, we will not focus on that at the moment. Instead, Signals + PostHog Code team will focus on getting PC users to use PostHog.
+- **Rationale:** A single numerical bar pulls every onboarding experience towards the same outcome. Different channels — warm, lukewarm, cold, frozen — need different treatment, and a unified target forces us to treat them as one system.
+- **Things we could do:** Settle the activation metric alongside PMs — we're currently on "soft activation" per-product; global activation is still TBD. Implement channel-specific onboarding: website (warm), Wizard (lukewarm), agentic provisioning (cold), Lovable/Replit auto-adding Analytics (frozen). Explicitly de-scope PostHog Code activation for now — Signals + PostHog Code team will handle that.
+- **We'll know we're successful when:** Measured activation rate across every onboarding surface is 60% or higher.
 
-### Shape the external interface for Signals
+</details>
 
-<TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo /> <TeamMember name="Rafael Audibert" photo /> will be shaping the external interface for Signals.
+<details>
+<summary>Shape the external interface for Signals (<TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo /> <TeamMember name="Rafael Audibert" photo />)</summary>
 
-- Write a spec on what it would look like and validate with partner vibecoding app builders
-- We believe these partners want Signals, but Signals will probably not be ready enough to let us expose this to partners right now, so let's check this is even feasible with partners
-- After that is done, we stop and reflect: how can we make this the next big thing after MCP?
+- **Rationale:** Signals is still early and its external surface isn't settled. Getting the shape right now — before partners depend on it — avoids painful contract breaks later. Partner vibecoding app builders are the most credible early validators.
+- **Things we could do:** Write a spec for the external interface and validate with partner vibecoding app builders. We believe these partners want Signals, but Signals may not be ready to expose yet — first check feasibility. Once that's done, stop and reflect: how do we make this the next big thing after MCP?
+- **We'll know we're successful when:** We have a validated spec and a clear read on whether Signals can be the next big thing after MCP.
+
+</details>
 
 ### Stretch goals
 

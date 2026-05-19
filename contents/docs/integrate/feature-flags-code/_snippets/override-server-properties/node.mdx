@@ -3,27 +3,27 @@ import OverrideServerPropertiesIntro from './override-server-properties-intro.md
 <OverrideServerPropertiesIntro />
 
 ```node
-await client.getFeatureFlag(
-    'flag-key',
-    'distinct_id_of_the_user',
-    {
-        personProperties: {
-            'property_name': 'value'
+const flags = await client.evaluateFlags('distinct_id_of_the_user', {
+    personProperties: {
+        property_name: 'value',
+    },
+    groups: {
+        your_group_type: 'your_group_id',
+        another_group_type: 'your_group_id',
+    },
+    groupProperties: {
+        your_group_type: {
+            group_property_name: 'value',
         },
-        groups: {
-            "your_group_type": "your_group_id",
-            "another_group_type": "your_group_id",
+        another_group_type: {
+            group_property_name: 'value',
         },
-        groupProperties: {
-            'your_group_type': {
-                'group_property_name': 'value'
-            },
-            'another_group_type': {
-                'group_property_name': 'value'
-            } 
-        },
-    }
-)
+    },
+})
+
+if (flags.isEnabled('flag-key')) {
+    // Do something differently for this user
+}
 ```
 
 import OverrideGeoIPPropertiesSDK from './override-geoip-properties-SDKs.mdx'

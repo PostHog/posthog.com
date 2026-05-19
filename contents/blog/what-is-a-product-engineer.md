@@ -84,7 +84,7 @@ Product engineers ideate new ways to make the product better. They then iterate 
 
 > **Product engineers vs growth engineers:** Product engineers experiment to improve a specific product they own. Growth engineers experiment at a higher level, focusing on increasing growth metrics like signups, subscriptions, and revenue across products. Read our [guide to growth engineers](/blog/what-is-a-growth-engineer) and why they're awesome to learn more.
 
-Because they build prototypes and are self-reliant, product engineers often have a history of doing just that. They are more likely to have side projects they’ve built themselves. Some might be former founders or have unorthodox, self-taught backgrounds. They make great teammates in hackathons. [Ghost](https://ghost.org/) looks for these people:
+Because they build prototypes and are self-reliant, product engineers often have a history of doing just that. They are more likely to have side projects they’ve built themselves. Some might be former founders or have unorthodox, self-taught backgrounds. They make great teammates in [hackathons](/newsletter/hackathons). [Ghost](https://ghost.org/) looks for these people:
 
 > “The majority of our team is made up of former founders, freelancers and self-starters who are confident and comfortable working independently and getting things done.”
 

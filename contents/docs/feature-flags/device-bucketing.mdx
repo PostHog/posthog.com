@@ -101,11 +101,8 @@ const variant = await posthog.getFeatureFlag(
 ```
 
 ```python
-variant = posthog.get_feature_flag(
-    "signup-flow-experiment",
-    "user_123",
-    device_id=device_id,
-)
+flags = posthog.evaluate_flags("user_123", device_id=device_id)
+variant = flags.get_flag("signup-flow-experiment")
 ```
 
 </MultiLanguage>
@@ -115,17 +112,24 @@ In the JavaScript web SDK, the anonymous `distinct_id` is usually the same value
 In Python SDK v7.6.0 and above, you can pass `device_id` directly as shown above. The SDK also supports setting `device_id` once per request context and reusing it for all evaluations in that scope:
 
 ```python
-from posthog import get_feature_flag, new_context, set_context_device_id
+import posthog
 
-with new_context():
-    set_context_device_id(device_id)
-    variant = get_feature_flag("signup-flow-experiment", "user_123")
+with posthog.new_context():
+    posthog.set_context_device_id(device_id)
+    flags = posthog.evaluate_flags("user_123")
+    variant = flags.get_flag("signup-flow-experiment")
 ```
 
 ## Shared devices and `reset()`
 
 - `posthog.reset()` keeps `$device_id`. Device-bucketed flags stay stable even after logout.
 - `posthog.reset(true)` creates a new `$device_id`. Use this on shared devices or kiosks when each session should be treated as a new device.
+
+## Device bucketing for experiments
+
+For experiments that span the anonymous-to-identified transition (signup flows, pre-login landing pages), device bucketing is the recommended approach over [flag persistence across authentication](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional).
+
+**Why:** Flag persistence across authentication requires a database lookup on every flag evaluation, doesn't support local evaluation, and has a known issue where flag values can change after `identify()` despite persistence being enabled (posthog-js [#2623](https://github.com/PostHog/posthog-js/issues/2623)). Device bucketing has none of these costs — the `$device_id` stays constant across the anonymous → identified transition, so the hash input doesn't change and the variant stays consistent.
 
 ## Further reading
 

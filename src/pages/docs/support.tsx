@@ -9,7 +9,7 @@ const Support: React.FC = () => {
     return (
         <ReaderView>
             <SEO title="Support - Docs - PostHog" />
-            <CalloutBox icon="IconFlask" title="Support is in private alpha" type="info">
+            <CalloutBox icon="IconFlask" title="Support is in beta" type="info">
                 <p>
                     <strong>Note:</strong> Support is currently in{' '}
                     <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
@@ -59,6 +59,14 @@ const Support: React.FC = () => {
                         title="Slack integration"
                         description="Connect Slack for two-way sync — messages become tickets, replies sync back to threads."
                         url="/docs/support/slack"
+                        Image={undefined}
+                        gatsbyImage={undefined}
+                        type={undefined}
+                    />
+                    <ResourceItem
+                        title="GitHub integration"
+                        description="Connect GitHub repos for two-way sync — issues become tickets, replies sync back as comments."
+                        url="/docs/support/github"
                         Image={undefined}
                         gatsbyImage={undefined}
                         type={undefined}
