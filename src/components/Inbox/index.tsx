@@ -123,7 +123,8 @@ const QuestionRow = ({
     pinned = false,
 }: QuestionRowProps) => {
     const { subject, numReplies, activeAt, replies, profile, permalink, resolved } = question
-    const latestAuthor = replies?.data?.[replies.data.length - 1]?.profile || profile
+    const replyList = Object.values(replies || {})
+    const latestAuthor = (replyList[replyList.length - 1] as any)?.profile || profile
     const active = `/questions/${permalink}` === appWindowPath
 
     return (
