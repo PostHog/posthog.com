@@ -20,6 +20,14 @@ nslookup <your-hostname> 1.1.1.1
 
 Note that when using a browser there are various layers of caching and other logic that could make the resolution work (temporarily) even if its not correctly set up.
 
+### Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint seaweedfs-main 
+
+seaweedfs-main on CentOS may need to be allowed privileged access, this can be done with the following command:
+
+```shell
+docker run --privileged seaweedfs-main
+```
+
 ## FAQ
 
 ### Are the errors I'm seeing important?
