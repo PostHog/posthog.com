@@ -12,6 +12,8 @@ As [described on MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP): _C
 
 If you choose to use a CSP it is important to ensure that PostHog domains are permitted. PostHog is a distributed Cloud service and as such can have different domains that change over time but will always be served from the root domain `posthog.com`. As such you should add `*.posthog.com` to your CSP directive.
 
+> **Want to track CSP violations?** If you want to monitor and analyze when your CSP rules are violated, set up [CSP tracking](/docs/csp-tracking) to send violation reports to PostHog.
+
 ## Content Security Policy directives needed
 
 Depending on how you have installed `posthog-js`, the SDK will dynamically load extra JavaScript assets as necessary. For example, [the snippet](/docs/getting-started/install?tab=snippet) is very small and just loads `array.js`. This requires the `script-src` directive.
