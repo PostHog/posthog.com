@@ -98,7 +98,10 @@ We recently hired for a payroll manager and we asked candidates to build a workf
 
 It’s important at this stage to get the details, you want to see the prompts, the skills files, info on the agents. The details here matter, you also want to make sure they can explain this to you via some kind of recording or live in a call. You want to see fluency of tools as well, we’re not testing on a specific stack. It is a strong signal if the person is using multiple different tools, rather than gating themselves on one, it shows they’ve pushed themselves to learn more. 
 
+
 ## What a company of AI-native hires looks like
+
+Conventional wisom says an ops team is about 8-10% of a well run company. PostHog currently operates at 6% of the business and we don't think we need to grow the team anytime soon. We feel we can do much more with less now. 
 
 The practical result: PostHog's hiring plan for the next 2-3 years is smaller than it would have been a year ago. Not because we're growing slower. Because each ai-native hire is cracked enough that we need fewer of them. What we don't yet know is what people do with the time. The optimistic version is the 3 hours a day you save get reinvested — into building, into learning the fundamentals, into finally writing your own python. the pessimistic version is Parkinson's law eats it and we all just have more meetings.
 
