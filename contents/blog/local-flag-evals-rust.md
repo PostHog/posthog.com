@@ -1,5 +1,5 @@
 ---
-title: 'Moving local flag evaluation from Django to Rust: 24x less CPU, 56x less memory'
+title: 'From 270GB RAM to 5GB: Moving local flag evaluation from Django to Rust'
 date: 2026-05-18
 rootPage: /blog
 sidebar: Blog
