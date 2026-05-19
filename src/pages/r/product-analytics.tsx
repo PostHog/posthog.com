@@ -95,30 +95,22 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             Product analytics that shows you what's actually happening
                         </h1>
                         <p className="text-lg md:text-xl mb-6 text-secondary">
-                            Autocapture from day one. Ask your AI agent to build funnels, track retention, and dig into
-                            user behavior — all without leaving your editor.
+                            Track every user action from day one, then slice it any way you need. Funnels, retention
+                            curves, user paths, lifecycle charts, or raw SQL. Use PostHog MCP to turn your AI agents
+                            into hogpilled analysts. No UI navigating required.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
                             <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
                                 Get started free
                             </CallToAction>
-                            <CallToAction
-                                type="secondary"
-                                size="md"
-                                to="/docs/model-context-protocol"
-                                state={{ newWindow: true }}
-                            >
-                                Install MCP
-                            </CallToAction>
                         </div>
                         <p className="text-sm !mb-0 text-secondary">
-                            With{' '}
+                            Connect{' '}
                             <Link to="/docs/model-context-protocol" state={{ newWindow: true }}>
                                 PostHog MCP
-                            </Link>
-                            , your AI agent can query trends, build funnels, track retention, and turn data into
-                            insights — all from Claude Code, Cursor, Zed, or Windsurf. Free for 1M events/month, no
-                            per-seat pricing, no credit card required.
+                            </Link>{' '}
+                            to Cursor, Claude Code, Codex, or Windsurf and query your product data without leaving your
+                            editor. First 1M events/month are free — no credit card, no per-seat pricing.
                         </p>
                     </div>
                     <div className="flex justify-center">
@@ -525,6 +517,12 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                                     questions={productAnalytics.questions}
                                     tutorialData={contentData}
                                 />
+                            </div>
+
+                            <div className="mt-4">
+                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                    "The only question I have is, how do I start?"
+                                </CallToAction>
                             </div>
                         </QuestLogItem>
 
