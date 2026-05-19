@@ -70,7 +70,7 @@ export default function MDXEditor({
             acc[descriptor.name] = descriptor.Editor
             return acc
         }, {} as Record<string, React.ComponentType<any>>)
-    }, [])
+    }, [jsxComponentDescriptors])
 
     useEffect(() => {
         if (activeEditor) {
@@ -138,7 +138,7 @@ export default function MDXEditor({
             ref={mdxEditorContainerRef}
             style={maxWidth ? { maxWidth, margin: '0 auto' } : undefined}
         >
-            {(isSSR && mdxBody) || websiteMode ? (
+            {mdxBody ? (
                 <MDXProvider components={{ a: Link, ...mdxComponents }}>
                     <MDXRenderer>{mdxBody}</MDXRenderer>
                 </MDXProvider>
