@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - patricio-tarantino
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/TODO_replace_with_actual_image.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10092_Cropped_186c3c9455.png
 featuredImageType: full
 category: Engineering
 tags:
