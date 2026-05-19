@@ -5280,7 +5280,7 @@ export const docsMenu = {
                 {
                     name: 'Inbox management',
                     url: '/docs/support/inbox',
-                    icon: 'IconInbox',
+                    icon: 'IconNotebook',
                     color: 'orange',
                 },
                 {
@@ -5292,13 +5292,13 @@ export const docsMenu = {
                 {
                     name: 'Email channel',
                     url: '/docs/support/email',
-                    icon: 'IconMail',
+                    icon: 'IconLetter',
                     color: 'orange',
                 },
                 {
                     name: 'GitHub integration',
                     url: '/docs/support/github',
-                    icon: 'IconGitHub',
+                    icon: 'IconGithub',
                     color: 'orange',
                 },
                 {
@@ -6429,7 +6429,7 @@ export const docsMenu = {
                 {
                     name: 'Inbox',
                     url: '/docs/posthog-code/inbox',
-                    icon: 'IconInbox',
+                    icon: 'IconNotebook',
                     color: 'yellow',
                     children: [
                         { name: 'Overview', url: '/docs/posthog-code/inbox' },
@@ -6448,7 +6448,7 @@ export const docsMenu = {
                 {
                     name: 'Command Center',
                     url: '/docs/posthog-code/command-center',
-                    icon: 'IconLayoutDashboard',
+                    icon: 'IconDashboard',
                     color: 'orange',
                 },
                 {
@@ -6496,7 +6496,7 @@ export const docsMenu = {
                 {
                     name: 'Worktrees',
                     url: '/docs/posthog-code/worktrees',
-                    icon: 'IconGitFork',
+                    icon: 'IconGitRepository',
                     color: 'orange',
                 },
                 {
