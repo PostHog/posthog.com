@@ -1,6 +1,6 @@
-# Hogcraft audio credits
+# PostHog Code RTS mode — audio credits
 
-Static audio assets for [PostHog Code](https://github.com/PostHog/code)'s Hogcraft mode (the RTS-style agent orchestration UI), served from `https://posthog.com/hogcraft/`.
+Static audio assets for [PostHog Code](https://github.com/PostHog/code)'s RTS mode (an RTS-style agent orchestration UI), served from `https://posthog.com/code-rts/`.
 
 ## Voice lines (`voice/<mode>/<gender>/*.mp3`)
 
@@ -15,4 +15,4 @@ Source script: `notes/hedgemony/voice-lines.json` in the [PostHog Code repo](htt
 
 ## Background music (`bgm.mp3`)
 
-Background music used during Hogcraft mode. Provenance to be confirmed before public ship.
+Background music used during RTS mode. Provenance to be confirmed before public ship.
