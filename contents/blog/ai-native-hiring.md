@@ -50,7 +50,7 @@ Well from an Ops perspective I have three examples:
 * Talent Sourcer 
 * Finance Manager - accounting
 
-### Ops manager
+### 1. Ops manager
 
 A traditional excellent Ops manager is a hero. They are everywhere, they are the glue. Lots of people don’t know why they are great but they know they are important. This person is successful because they care and they are reliable and they can go really wide on tasks but most of it is manual, they think of everything that needs to go on an onboarding checklist, tags the right people and chases them up continually until it’s done. Everybody loves this person. However, things fall through the cracks and they get blocked whilst waiting for others. 
 
