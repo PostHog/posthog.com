@@ -749,6 +749,31 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+        qubhq: {
+        name: 'QubHQ',
+        toolsUsed: ['endpoints', 'error_tracking', 'feature_flags', 'product_analytics', 'session_replay', 'surveys'],
+        industries: ['Ad Tech', 'Hospitality', 'Digital Signage'],
+        users: ['Engineering'],
+        notes: 'A digital menu platform with its own ad network',
+        featured: false,
+        logo: {
+            light: CloudPeekLogo,
+            dark: CloudPeekLogoDark,
+        },
+        height: 10,
+        quotes: {
+            gheorghe_avram: {
+                name: 'Gheorghe Avram',
+                role: 'CTO',
+                image: {
+                    thumb: '/images/customers/craig-hollington.png',
+                },
+                quotes: [
+                    "This is the true power of PostHog, they give us the freedom to use our data wherever we want to, without the complexity of managing the infrastructure.",
+                ],
+            },
+        },
+    },
     raycast: {
         name: 'Raycast',
         toolsUsed: [], // TODO: Add toolsUsed
