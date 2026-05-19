@@ -2,9 +2,7 @@
 title: Pricing
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
-
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 <CalloutBox icon="IconInfo" type="fyi" title="Pricing not yet finalized">
 
@@ -36,6 +34,7 @@ The most effective way to reduce costs is to write efficient queries:
 ### When materialization saves money
 
 Materialization is cost-effective when:
+
 - The endpoint is called frequently (many reads per sync)
 - The underlying query is expensive (scans lots of data)
 - Data freshness requirements allow for periodic syncs
@@ -43,31 +42,26 @@ Materialization is cost-effective when:
 ### When materialization adds cost
 
 Materialization may increase costs when:
+
 - The endpoint is rarely called
 - The query is already fast and cheap
 - You need real-time data
 
-### Sync frequency trade-offs
+### Data freshness trade-offs
 
-Choose a sync frequency that balances freshness with cost:
+[Data freshness](/docs/endpoints/caching#data-freshness) controls how often materialized endpoints refresh and how long non-materialized results are cached. Choose a value that balances freshness with cost:
 
-| Frequency | Best for |
-|-----------|----------|
-| Hourly | High-traffic endpoints where near-real-time matters |
-| Daily | Most customer-facing dashboards |
-| Weekly | Historical reports, slowly-changing data |
+| Data freshness  | Best for                                            |
+| --------------- | --------------------------------------------------- |
+| 15 minutes      | Near-real-time data that changes frequently         |
+| 30 minutes      | Frequently updated dashboards                       |
+| 1 hour          | High-traffic endpoints where near-real-time matters |
+| 6 hours         | Dashboards and reports viewed periodically          |
+| 12 hours        | Data that updates a few times per day               |
+| 1 day (default) | Most customer-facing dashboards                     |
+| 7 days          | Historical reports, slowly-changing data            |
 
-## Caching strategies
-
-Endpoints support [caching](/docs/endpoints/caching) to reduce redundant query execution.
-
-### Setting appropriate cache duration
-
-- **5-15 minutes**: Data that changes frequently but doesn't need to be real-time
-- **1-6 hours**: Dashboards and reports viewed periodically
-- **24 hours**: Historical data or slowly-changing metrics
-
-Longer cache durations reduce costs but show less fresh data.
+Shorter data freshness values mean more frequent syncs and shorter cache windows, which increases compute cost. Longer values reduce costs but serve less fresh data.
 
 ## Monitoring usage
 
