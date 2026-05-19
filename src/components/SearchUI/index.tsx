@@ -81,8 +81,10 @@ const Search = ({
     const handleChange = (hit: Hit) => {
         if (!hit) return
         setSearchOpen(false)
-        navigate(`${hit.fields?.slug || `/${hit.slug}`}`, { state: { newWindow: true } })
         onChange?.()
+        setTimeout(() => {
+            navigate(`${hit.fields?.slug || `/${hit.slug}`}`, { state: { newWindow: true } })
+        }, 0)
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

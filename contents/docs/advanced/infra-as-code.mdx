@@ -1,0 +1,129 @@
+---
+title: Definitions / Infrastructure as code
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+Definitions lets you manage PostHog dashboards, insights, feature flags, actions, cohorts, endpoints, event definitions, property groups, experiments (with holdouts and saved metrics), and project settings as TypeScript files in your repo. Commit them alongside your application code and run `npx posthog-definitions apply` to sync them to your project.
+
+## When this could help
+
+The UI is a fine default. A code-first workflow can help when:
+
+- **You want a PR review trail** for dashboard and flag changes.
+- **You manage more than one project** – e.g. keeping feature flags in sync between a dev project and production so the same keys, variants, and rollout conditions exist in both.
+- **You want an undo button.** `git revert` + `apply` rolls a change back.
+- **Your analytics already live in your repo** and you'd like the dashboards and flags next to them.
+
+<CalloutBox icon="IconFlask" title="Definitions is in alpha" type="fyi">
+
+The SDK surface, CLI flags, and on-disk file format may change between releases. Found a bug or have an idea? [Open a GitHub issue](https://github.com/PostHog/posthog-definitions/issues/new) — we'd love your feedback.
+
+</CalloutBox>
+
+## Install
+
+```bash
+npm install --save-dev @posthog/definitions
+```
+
+The package ships a `posthog-definitions` CLI that runs via `npx`.
+
+## Authenticate
+
+Create a [personal API key](https://us.posthog.com/settings/user-api-keys) (EU: [eu.posthog.com](https://eu.posthog.com/settings/user-api-keys)) with read/write scopes for every resource you define. The full set: `dashboard`, `insight`, `feature_flag`, `action`, `endpoint`, `event_definition` (also covers property groups), `experiment` (also covers experiment holdouts), and `experiment_saved_metric`.
+
+Then set the key and your numeric project ID in a `.env` (or `.envrc`) file:
+
+```bash
+POSTHOG_PERSONAL_API_KEY=phx_...
+POSTHOG_PROJECT_ID=000000
+# POSTHOG_HOST=https://eu.posthog.com   # optional, defaults to us.posthog.com
+```
+
+## Define a dashboard
+
+Create `posthog/dashboards/growth.ts`:
+
+```ts
+import { dashboard, insight, trends, text } from "@posthog/definitions"
+
+const signups = insight({
+  key: "weekly-signups",
+  name: "Weekly signups",
+  query: trends({
+    series: [{ event: "user signed up", math: "total" }],
+    interval: "week",
+    dateRange: { date_from: "-90d" },
+  }),
+})
+
+export default dashboard({
+  key: "growth",
+  name: "Growth",
+  description: "Top-of-funnel and activation",
+  pinned: true,
+  tags: ["growth"],
+  tiles: [
+    { insight: signups, layout: { x: 0, y: 0, w: 6, h: 4 } },
+    text({ body: "Updated weekly.", layout: { x: 0, y: 4, w: 12, h: 1 } }),
+  ],
+})
+```
+
+Each file under `posthog/` must `export default` a single resource. The `key` is the stable identity – the CLI uses it to match local files to server resources across runs. Resources go in folders by type: `posthog/dashboards/`, `posthog/insights/`, `posthog/feature-flags/`, `posthog/actions/`, `posthog/cohorts/`, `posthog/endpoints/`, `posthog/events/`, `posthog/experiments/`, and `posthog/project-settings/`.
+
+## Apply
+
+Preview what would change without making API calls:
+
+```bash
+npx posthog-definitions apply --dry-run
+```
+
+Sync to PostHog:
+
+```bash
+npx posthog-definitions apply
+```
+
+`apply` is idempotent – re-running with no changes is a no-op.
+
+The CLI only touches resources it created (tagged `iac:<resource>:<key>`, e.g. `iac:dashboards:growth` or `iac:feature-flags:new-checkout`). Resources you built in the UI are invisible to `apply`: not modified, not deleted, not warned about. You can adopt Definitions one resource at a time without risk to the rest of the project.
+
+By default `apply` never deletes anything. Pass `--prune` to delete IaC-tagged resources whose source files have been removed.
+
+## Pull
+
+Bootstrap a definitions directory from an existing project:
+
+```bash
+npx posthog-definitions pull
+```
+
+This writes a TypeScript file per resource to the matching folder under `posthog/`. Review with `git diff` before committing – existing files with the same name are overwritten.
+
+## What you can define
+
+| Resource                 | SDK                                       |
+| ------------------------ | ----------------------------------------- |
+| Dashboards               | `dashboard()` (with `text()`, `button()`) |
+| Insights                 | `insight()` with `trends()` or `hogql()`  |
+| Feature flags            | `featureFlag()`                           |
+| Actions                  | `action()`                                |
+| Cohorts                  | `cohort()`                                |
+| Endpoints                | `endpoint()`                              |
+| Event definitions        | `eventDefinition()`                       |
+| Schema property groups   | `propertyGroup()`                         |
+| Experiments              | `experiment()`                            |
+| Experiment holdouts      | `experimentHoldout()`                     |
+| Experiment saved metrics | `experimentSavedMetric()`                 |
+| Project settings         | `projectSettings()`                       |
+
+`funnel()`, `retention()`, `paths()`, `stickiness()`, and `lifecycle()` query constructors are planned post-MVP.
+
+## Type-safe `capture()`
+
+Event definitions and property groups feed `createTypedPostHog`, which wraps any `posthog-js`-shaped client and type-checks `posthog.capture(name, properties)` at compile time against the same specs synced via `apply`. Rename or remove an event in your definitions and every callsite becomes a TypeScript error.

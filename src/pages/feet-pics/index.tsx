@@ -149,6 +149,21 @@ export default function FeetPics(): JSX.Element {
                         className={`size-24`}
                         orientation={isListLayout ? 'row' : 'column'}
                     ></AppLink>
+
+                    <AppLink
+                        label="broken bone (real).jpg"
+                        Icon={
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/h_1000,c_limit,q_auto,f_auto/IMG_7213_487294168e.jpg"
+                                alt="broken bone (real).jpg"
+                                className="w-full h-full object-cover"
+                                imgClassName="size-24"
+                            />
+                        }
+                        background="bg-primary"
+                        className={`size-24`}
+                        orientation={isListLayout ? 'row' : 'column'}
+                    ></AppLink>
                 </div>
             </Explorer>
         </>

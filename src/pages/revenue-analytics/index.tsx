@@ -70,7 +70,7 @@ export default function RevenueAnalytics(): JSX.Element {
     `)
 
     const slides = createSlideConfig({
-        exclude: ['customers', 'pricing', 'posthog-on-posthog'],
+        exclude: ['customers', 'pricing', 'posthog-on-posthog', 'videos'],
         templates: {
             overview: 'stacked',
         },

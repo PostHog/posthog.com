@@ -15,7 +15,7 @@ const MCP_SERVER_CONFIG_NATIVE = {
 // mcp-remote config for clients without native HTTP support (Claude Desktop, Windsurf)
 const MCP_SERVER_CONFIG_LEGACY = {
     command: 'npx',
-    args: ['-y', 'mcp-remote@latest', 'https://mcp.posthog.com/sse'],
+    args: ['-y', 'mcp-remote@latest', 'https://mcp.posthog.com/mcp'],
 }
 
 const EDITOR_CONFIGS = {

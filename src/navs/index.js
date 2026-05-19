@@ -1232,7 +1232,7 @@ export const handbookSidebar = [
         name: 'Sales, CS & Onboarding',
         url: '',
         children: [
-           {
+            {
                 name: 'Overview',
                 url: '',
                 children: [
@@ -1509,6 +1509,10 @@ export const handbookSidebar = [
                     {
                         name: 'Tracking feature requests',
                         url: '/handbook/cs-and-onboarding/feature-requests',
+                    },
+                    {
+                        name: 'Playbook for growing an account',
+                        url: '/handbook/growth/sales/grow-an-account',
                     },
                 ],
             },
@@ -2679,6 +2683,10 @@ export const docsMenu = {
                         {
                             name: 'Browser extensions',
                             url: '/docs/advanced/browser-extension',
+                        },
+                        {
+                            name: 'Definitions / Infrastructure as code',
+                            url: '/docs/advanced/infra-as-code',
                         },
                         {
                             name: 'Enabling beta features',
@@ -5520,6 +5528,11 @@ export const docsMenu = {
                             icon: 'IconAnthropic',
                         },
                         {
+                            name: 'Claude Agent SDK',
+                            url: '/docs/llm-analytics/installation/claude-agent-sdk',
+                            icon: 'IconAnthropic',
+                        },
+                        {
                             name: 'Google',
                             url: '/docs/llm-analytics/installation/google',
                             icon: 'IconGemini',
@@ -6701,6 +6714,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Set up alerts',
+                    url: '/docs/logs/alerts',
+                    icon: 'IconBell',
+                    color: 'red',
+                },
+                {
                     name: 'PostHog AI',
                 },
                 {
@@ -6868,12 +6887,6 @@ export const docsMenu = {
                     url: '/docs/endpoints/internal-tools',
                     icon: 'IconWrench',
                     color: 'orange',
-                },
-                {
-                    name: 'CLI usage',
-                    url: '/docs/endpoints/cli',
-                    icon: 'IconTerminal',
-                    color: 'green',
                 },
                 {
                     name: 'OpenAPI SDK generation',
