@@ -39,6 +39,8 @@ import { useApp } from '../../context/App'
 import Link from 'components/Link'
 import { Select } from 'components/RadixUI/Select'
 import SEO from 'components/seo'
+import SearchProvider, { useSearch } from 'components/Editor/SearchProvider'
+import { InlineSearch, AlgoliaSearchResults } from 'components/Search/InlineSearch'
 dayjs.extend(relativeTime)
 
 const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => {
@@ -98,6 +100,57 @@ const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => 
                 </ScrollArea>
             </div>
         </>
+    )
+}
+
+const SidebarContent = ({
+    onMenuValueChange,
+    onSubmitQuestion,
+}: {
+    onMenuValueChange: (value: string) => void
+    onSubmitQuestion: () => void
+}) => {
+    const { addWindow } = useApp()
+    const { searchQuery } = useSearch()
+    const isSearching = searchQuery.length >= 2
+
+    return (
+        <div className="flex flex-col h-full">
+            <div className="border-b border-primary">
+                <div className="px-2 mt-2 pb-2">
+                    <OSButton
+                        variant="primary"
+                        size="md"
+                        width="full"
+                        onClick={() =>
+                            addWindow(
+                                <AskAQuestion
+                                    newWindow
+                                    location={{ pathname: `ask-a-question` }}
+                                    key={`ask-a-question`}
+                                    onSubmit={onSubmitQuestion}
+                                />
+                            )
+                        }
+                    >
+                        Ask a question
+                    </OSButton>
+                </div>
+            </div>
+            <ScrollArea className="h-full">
+                <InlineSearch
+                    placeholder="Search questions..."
+                    className="p-2 @2xl:pb-0 @2xl:border-b-0 border-b border-primary"
+                />
+                {isSearching ? (
+                    <div className="p-2">
+                        <AlgoliaSearchResults facetFilters={['type:question']} />
+                    </div>
+                ) : (
+                    <Menu onValueChange={onMenuValueChange} />
+                )}
+            </ScrollArea>
+        </div>
     )
 }
 
@@ -394,7 +447,7 @@ export default function Inbox(props) {
             <SEO title={(permalink && question?.attributes.subject) || data?.topic?.label || 'Forums'} />
             {ready ? (
                 <div className="@container w-full h-full flex flex-col">
-                    <HeaderBar
+                    {/* <HeaderBar
                         homeURL={websiteMode ? undefined : '/questions'}
                         showBack={!websiteMode}
                         showForward={!websiteMode}
@@ -432,14 +485,9 @@ export default function Inbox(props) {
                                 ) : null}
                             </div>
                         }
-                    />
+                    /> */}
 
-                    <div
-                        data-scheme="secondary"
-                        className={`flex @2xl:flex-row flex-col flex-grow min-h-0 ${
-                            websiteMode ? '' : 'border-t border-primary'
-                        }`}
-                    >
+                    <div data-scheme="secondary" className={`flex @2xl:flex-row flex-col flex-grow min-h-0`}>
                         <aside
                             data-scheme="secondary"
                             className={`w-full @2xl:w-64 bg-primary flex-shrink-0 ${
@@ -448,9 +496,9 @@ export default function Inbox(props) {
                                     : '@2xl:border-r border-primary @2xl:h-full'
                             }`}
                         >
-                            <ScrollArea className="h-full">
-                                <Menu onValueChange={setMenuValue} />
-                            </ScrollArea>
+                            <SearchProvider>
+                                <SidebarContent onMenuValueChange={setMenuValue} onSubmitQuestion={refresh} />
+                            </SearchProvider>
                         </aside>
                         <main
                             data-scheme="primary"
@@ -591,10 +639,21 @@ export default function Inbox(props) {
                                                 />
                                             )}
 
+                                            <ScrollArea>
+                                                <div className="pb-[64px]">
+                                                    <Question
+                                                        key={permalink}
+                                                        id={permalink}
+                                                        onQuestionReady={(question) => setQuestion(question)}
+                                                        subscribeButton={false}
+                                                        showSlug
+                                                        isInForum={true}
+                                                        onPinTopics={refresh}
+                                                    />
+                                                </div>
+                                            </ScrollArea>
                                             <div
-                                                className={`bg-accent border-y border-primary px-4 py-2 flex gap-2 items-center sticky top-0 z-10 ${
-                                                    sideBySide ? 'border-t-0' : ''
-                                                }`}
+                                                className={`bg-accent border-t border-primary px-4 py-2 flex gap-2 items-center sticky bottom-0 z-10`}
                                             >
                                                 {websiteMode && (
                                                     <OSButton
@@ -696,19 +755,6 @@ export default function Inbox(props) {
                                                     )}
                                                 </div>
                                             </div>
-                                            <ScrollArea>
-                                                <div className="pb-[64px]">
-                                                    <Question
-                                                        key={permalink}
-                                                        id={permalink}
-                                                        onQuestionReady={(question) => setQuestion(question)}
-                                                        subscribeButton={false}
-                                                        showSlug
-                                                        isInForum={true}
-                                                        onPinTopics={refresh}
-                                                    />
-                                                </div>
-                                            </ScrollArea>
                                         </motion.div>
                                     )}
                                 </AnimatePresence>

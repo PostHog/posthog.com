@@ -789,7 +789,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 {!item.minimal && !compact && siteSettings.experience !== 'boring' && (
                                     <>
                                         <div
-                                            className="group absolute top-2 left-1/2 -translate-x-1/2 cursor-move touch-none z-10"
+                                            className="group absolute top-2 left-1/2 -translate-x-1/2 cursor-move touch-none z-50"
                                             onPointerDown={(e) => controls.start(e)}
                                             onDoubleClick={toggleMaximize}
                                         >

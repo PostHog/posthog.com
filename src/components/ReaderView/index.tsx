@@ -8,11 +8,9 @@ import {
     IconGear,
     IconClockRewind,
     IconTextWidthFixed,
-    IconSearch,
     IconSidebarClose,
     IconSidebarOpen,
     IconTableOfContents,
-    IconX,
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Popover } from '../RadixUI/Popover'
@@ -34,9 +32,8 @@ import * as PostHogIcons from '@posthog/icons'
 import * as OSIcons from '../OSIcons/Icons'
 import { getLogo } from '../../constants/logos'
 import SearchProvider, { useSearch } from 'components/Editor/SearchProvider'
+import { InlineSearch } from 'components/Search/InlineSearch'
 import algoliasearch from 'algoliasearch/lite'
-import Mark from 'mark.js'
-import debounce from 'lodash/debounce'
 import { useLocation } from '@reach/router'
 import { getProseClasses, isMarkdownContentPath } from '../../constants'
 import { useWindow } from '../../context/Window'
@@ -531,90 +528,6 @@ const Menu = (props: { parent: MenuItem }) => {
  * to highlight matches directly in the article content. When the query is
  * cleared or the component unmounts, highlights are removed.
  */
-const InlineSearch = ({
-    contentRef,
-    onSearch,
-    placeholder = 'Search this page...',
-}: {
-    contentRef?: React.RefObject<HTMLElement>
-    onSearch?: (search: string) => void
-    placeholder?: string
-}) => {
-    const { searchQuery, setSearchQuery } = useSearch()
-    const [inputValue, setInputValue] = useState(searchQuery)
-    const markedRef = useRef<any>(null)
-
-    useEffect(() => {
-        setInputValue(searchQuery)
-    }, [searchQuery])
-
-    useEffect(() => {
-        if (!contentRef?.current) return
-        if (!markedRef.current) {
-            markedRef.current = new Mark(contentRef.current)
-        }
-        markedRef.current.unmark()
-        if (inputValue) {
-            markedRef.current.mark(inputValue, { separateWordSearch: false })
-        }
-    }, [inputValue])
-
-    useEffect(() => {
-        return () => {
-            markedRef.current?.unmark()
-            markedRef.current = null
-        }
-    }, [])
-
-    const debouncedSetSearchQuery = React.useCallback(
-        debounce((value: string) => {
-            setSearchQuery(value)
-        }, 200),
-        []
-    )
-
-    useEffect(() => {
-        debouncedSetSearchQuery(inputValue)
-    }, [inputValue, debouncedSetSearchQuery])
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value
-        setInputValue(value)
-        onSearch?.(value)
-    }
-
-    const handleClear = () => {
-        onSearch?.('')
-        setSearchQuery('')
-        setInputValue('')
-    }
-
-    return (
-        <div className="flex items-center gap-1">
-            <div className="relative flex-1 min-w-0">
-                <span className="absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none text-secondary inline-flex">
-                    <IconSearch className="size-4" />
-                </span>
-                <input
-                    type="text"
-                    placeholder={placeholder}
-                    className="w-full pl-7 pr-2 py-1 rounded border border-input text-primary text-sm bg-light dark:bg-dark"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                />
-            </div>
-            {inputValue && (
-                <OSButton
-                    size="xs"
-                    icon={<IconX />}
-                    onClick={handleClear}
-                    className="rounded-full !p-1.5"
-                    data-sidebar-label
-                />
-            )}
-        </div>
-    )
-}
 
 interface OnPageMatch {
     id: string
