@@ -89,9 +89,6 @@ function MCPHeader(): JSX.Element {
                             <IconPlug />
                         </span>
                         <span className="text-[12px] font-semibold uppercase tracking-wider opacity-60">MCP</span>
-                        <span className="text-[10px] font-bold opacity-90 bg-yellow px-1.5 py-0.5 rounded-sm uppercase text-primary tracking-wider">
-                            Beta
-                        </span>
                     </div>
                     <h1 className="text-3xl @sm:text-4xl @lg:text-5xl font-bold !leading-[1.05] !mb-3 !mt-0 tracking-tight">
                         Ask questions.
@@ -661,7 +658,7 @@ function MCPCTA(): JSX.Element {
                     </span>
                     <p className="text-xl @sm:text-2xl font-bold m-0 mb-1">Install the MCP</p>
                     <p className="opacity-65 m-0 mb-4 text-[13px]">
-                        Works in Cursor, Claude Code, Codex, VS Code, Zed, and Windsurf.
+                        Works in Cursor, Claude, Codex, PostHog Code, and more.
                     </p>
                     <div className="mb-4">
                         <WizardCommand command="mcp add" slim />
@@ -678,7 +675,6 @@ function MCPCTA(): JSX.Element {
                             external
                             className="inline-flex items-center gap-1 opacity-75 hover:opacity-100 !text-inherit !no-underline"
                         >
-                            <IconGithub className="size-3.5" />
                             View on GitHub
                         </Link>
                         <Link
