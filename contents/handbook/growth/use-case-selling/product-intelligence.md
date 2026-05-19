@@ -27,7 +27,6 @@ This is our bread and butter. Most accounts start here. The risk is they *stay* 
 - **[Revenue Analytics](/docs/revenue-analytics/start-here)** — Business outcome tracking. Connect product usage to [MRR](/docs/revenue-analytics/dashboard#mrr-and-arr), expansion revenue, LTV, and churn. Lets PMs prove that the feature they shipped actually moved the revenue needle. ([Dashboard](/docs/revenue-analytics/dashboard))
 - **[Experiments](/docs/experiments)** — Validate hypotheses with statistical rigor before committing to a full build. A/B test changes against real metrics, not gut feel. Requires [Feature Flags](/docs/feature-flags) for implementation.
 - **[Workflows](/docs/workflows/start-here)** — Onboarding sequences, activation nudges, lifecycle engagement. The action layer: once you've identified a drop-off in analytics, Workflows lets you do something about it automatically. ([Email drip campaigns](/docs/workflows/email-drip-campaign))
-- **[Product Tours](/docs/product-tours/start-here)** *alpha* — In-app guided onboarding, feature adoption prompts. The in-product complement to Workflows' out-of-product engagement. Guide users through the right path at exactly the right moment. ([Creating tours](/docs/product-tours/creating-product-tours))
 - **AI Evals** — For products with AI features: proactively surface where users are struggling based on AI output quality. This is product intelligence driven by AI observability. A bridge product to the [AI/LLM Observability](/handbook/growth/cross-selling/use-case-selling/ai-llm-observability) use case.
 - **[PostHog AI](/docs/posthog-ai/allow-access)** — Natural language querying and insight discovery. Lowers the bar for non-technical product stakeholders to self-serve. A PM asks "why did retention drop last week?" instead of building a custom query. ([Example prompts](/docs/posthog-ai/example-prompts))
 
@@ -47,7 +46,7 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 - Session Replay → Surveys: They're watching replays and forming hypotheses about why users struggle. Surveys let them ask users directly at the moment of friction, then tie responses back to behavior data.
 - Surveys → Experiments: They've identified the problem through analytics, replay, and feedback. Now they want to test a fix. Experiments require Feature Flags, which gets engineering involved (multithreading moment).
 - Experiments → Revenue Analytics: They've validated changes with experiments and want to prove business impact. Revenue Analytics connects product usage to MRR, expansion, and churn.
-- Revenue Analytics → Workflows / Product Tours: They've identified what drives value. Now they want to guide users toward those high-value behaviors automatically, through in-app tours and behavior-triggered engagement sequences.
+- Revenue Analytics → Workflows / Product : They've identified what drives value. Now they want to guide users toward those high-value behaviors automatically, through in-app tours and behavior-triggered engagement sequences.
 
 ### Alternate expansion paths
 
