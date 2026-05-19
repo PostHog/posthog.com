@@ -398,6 +398,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 9,
         featured: true,
     },
+    fastr: {
+        name: 'Fastr',
+        toolsUsed: ['endpoints', 'feature_flags', 'session-replay', 'surveys'],
+        industries: ['E-commerce, MarTech'],
+        users: ['Product', 'Marketing'],
+        notes: 'A conversion rate optimization platform',
+        featured: false,
+        logo: {
+            light: CloudPeekLogo,
+            dark: CloudPeekLogoDark,
+        },
+        height: 10,
+        quotes: {
+            ryan_breen: {
+                name: 'Ryan Breen',
+                role: 'CTO',
+                image: {
+                    thumb: '/images/customers/craig-hollington.png',
+                },
+                quotes: [
+                    "We love that you're nerd-friendly. You love being a kind of white-labeled substrate, just a fantastic platform for us to build on top of.",
+                ],
+            },
+        },
+    },
+    },
     gankster: {
         name: 'Gankster',
         toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
