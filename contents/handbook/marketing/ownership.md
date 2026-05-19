@@ -28,13 +28,14 @@ We generally only have product marketers on teams that _already_ have a product 
 | *Product Analytics* | Mike W | To be hired | Paul D'A |
 | *Web Analytics* | Mike W | To be hired | Paul D'A |
 | *Conversations* | | Too early | James H |
-| *Platform features* | | | Raquel |
-| *MCP* | | Joe** | |
+| *Platform features* | | To be hired (sales-focused PMM) | Raquel |
 | *Experiments* | Ruby | | Raquel |
 | *Feature Flags* | Ruby | | Ben W |
+| *MCP* | | Joe** | |
+| *Integrations* | | Joe** | |
 
 *AI summaries specifically
-**Not a product team at PostHog, but we think it's worth specific marketing focus
+**Not a 'product' team at PostHog, but we think they're worth specific marketing focus
 
 Even if a product already has a product manager, a team is only ready for a product marketer when a proper launch needs preparing for, usually beta or GA. Before that, product teams are responsible for launching their own products, but can ask for help with ad hoc things - see below. It is also fine for a product to have a product manager but not product marketer - we generally focus on heavily investing in 2-3 product areas at a time, so we can do a good job at a handful of things, instead of an average job at many. 
 
