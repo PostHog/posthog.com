@@ -94,18 +94,28 @@ You can:
 - filter reviews by scorer
 - open the underlying trace
 - see the saved score tags, reviewer, comment, and last updated time
+- export reviews for external analysis or reporting
 
 If you delete a review, it disappears from the active reviews list and you can create a new active review for that trace later.
+
+### Exporting reviews
+
+Click the **Export** button next to the review count to export your trace reviews. Exports respect any active search or scorer filters. Two export methods are available:
+
+- **File download** - Export as CSV or XLSX. Use this for large datasets.
+- **Copy to clipboard** - Copy as CSV, JSON, or TSV for quick use. Limited to 5,000 rows.
+
+For datasets larger than 5,000 rows, use the file download option.
 
 ## Trace Reviews vs. evaluations
 
 Trace Reviews and [evaluations](/docs/llm-analytics/evaluations) solve different problems:
 
-| | Trace Reviews | Evaluations |
-|---|---|---|
-| **Who runs it** | A human reviewer | An LLM judge or code |
-| **Best for** | Escalations, QA, nuanced judgment, manual spot checks | Automated quality checks and monitoring |
-| **Workflow** | Queues, scorers, and notes | Prompts or code running automatically |
+|                 | Trace Reviews                                         | Evaluations                             |
+| --------------- | ----------------------------------------------------- | --------------------------------------- |
+| **Who runs it** | A human reviewer                                      | An LLM judge or code                    |
+| **Best for**    | Escalations, QA, nuanced judgment, manual spot checks | Automated quality checks and monitoring |
+| **Workflow**    | Queues, scorers, and notes                            | Prompts or code running automatically   |
 
 In practice, they work well together:
 
