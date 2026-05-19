@@ -145,6 +145,18 @@ group by
    properties.$os
 ```
 
+You can also use `GROUPING SETS` to specify multiple groupings in a single query. This is more efficient than running separate `GROUP BY` queries and combining them with `UNION ALL`. The empty parentheses `()` represent a grand total with no grouping.
+
+```sql
+SELECT
+   event,
+   distinct_id,
+   count(*)
+FROM events
+GROUP BY
+   GROUPING SETS ((event), (distinct_id), ())
+```
+
 ### ORDER BY
 
 Use `ORDER BY` to sort the query results by one or more columns. You can specify order by ascending with `ASC` or descending with `DESC`.
