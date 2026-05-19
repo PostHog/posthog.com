@@ -120,7 +120,7 @@ By simplifying the architecture and eliminating external dependencies like PgBou
 
 If you're using PostHog's feature flags, you're already benefiting from these improvements automatically. No configuration changes, no migration steps – just better performance and reliability.
 
-For even faster flag evaluation, consider enabling [local evaluation](/docs/feature-flags/local-evaluation) for your server-side applications. While this rewrite dramatically improved [our `/flags` endpoint](/docs/api/flags), local evaluation eliminates network round-trips entirely by evaluating flags directly on your server. It's the fastest possible way to evaluate flags, especially for high-traffic applications.
+For even faster flag evaluation, consider enabling [local evaluation](/docs/feature-flags/local-evaluation) for your server-side applications. While this rewrite dramatically improved [our `/flags` endpoint](/docs/api/flags), local evaluation eliminates network round-trips entirely by evaluating flags directly on your server. It's the fastest possible way to evaluate flags, especially for high-traffic applications. We've since [moved the local evaluation endpoint itself to Rust](/blog/local-flag-evals-rust), dropping p50 latency from 40ms to 4ms.
 
 As we continue evolving our feature flag infrastructure, our focus remains on the fundamentals: making flags fast, reliable, and cost-effective. Because the best feature flag service is one you never have to think about.
 

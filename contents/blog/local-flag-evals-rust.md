@@ -16,17 +16,17 @@ tags:
   - Engineering
   - Feature flags
 seo: {
-  metaTitle: "Moving local flag evaluation from Django to Rust: 24x less CPU, 56x less memory",
+  metaTitle: "From 270GB RAM to 5GB: Moving local flag evaluation from Django to Rust",
   metaDescription: "How we moved PostHog's feature flags local evaluation endpoint from Django to Rust, dropping CPU usage by 24x and memory by 56x."
 }
 
 ---
 
-I reloaded Grafana three times before I trusted what I was looking at, because the gap between the old numbers and the new ones was bigger than I was expecting. p50 latency had gone from 40ms down to 4ms, CPU usage was sitting at a small fraction of where it used to be, and memory was barely registering at all. We had just finished moving the feature flags local evaluation endpoint from Django to Rust, and despite knowing that it was going to be better – that was the whole reason for this migration – I still wasn't ready for how the comparison ended up looking.
+I reloaded Grafana three times before I trusted what I was looking at, because the gap between the old numbers and the new ones was bigger than I was expecting. p50 latency had gone from 40ms down to 4ms, CPU usage was sitting at a small fraction of where it used to be, and memory was barely registering at all. We had just finished moving the feature flags [local evaluation](/docs/feature-flags/local-evaluation) endpoint from Django to Rust, and despite knowing that it was going to be better – that was the whole reason for this migration – I still wasn't ready for how the comparison ended up looking.
 
 ## What local evaluation is
 
-Local evaluation is the endpoint every server-side SDK hits to fetch flag definitions. SDKs poll it every 30 seconds, so it gets a lot of traffic. Until recently it had its own Django deployment, sized for that traffic: about 30 pods on average in US, with autoscaling configured up to 250. Each pod requested 2 CPU cores and 9 GB of memory, so at baseline we were running 60 cores and 270 GB of RAM.
+Local evaluation is the endpoint every server-side SDK hits to fetch [feature flag](/feature-flags) definitions. SDKs poll it every 30 seconds, so it gets a lot of traffic. Until recently it had its own Django deployment, sized for that traffic: about 30 pods on average in US, with autoscaling configured up to 250. Each pod requested 2 CPU cores and 9 GB of memory, so at baseline we were running 60 cores and 270 GB of RAM.
 
 The endpoint reads cached flag definitions out of Redis, checks auth, and returns JSON. There is no flag evaluation logic, and no database queries on the hot path. The Rust feature flags service next door was already serving around 13,000 requests per second on `/flags` and `/decide`, doing the actual compute, so moving the cache read over to live in the same codebase felt overdue.
 
