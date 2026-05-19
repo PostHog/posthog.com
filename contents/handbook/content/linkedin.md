@@ -45,7 +45,7 @@ Yes, I realize LinkedIn has a bad reputation, but it’s a popular channel with 
 
 If you post PostHog-related content to LinkedIn more than once per week and **aren't scheduling it in advance**, please:
 
-- Ask Liam to add you as a content admin to the [PostHog LinkedIn page](https://www.linkedin.com/company/posthog/) if you aren't already.
+- Ask <TeamMember name="Liam Graham" photo /> [Liam](https://posthog.com/community/profiles/44190) to add you as a content admin to the [PostHog LinkedIn page](https://www.linkedin.com/company/posthog/) if you aren't already.
 - Immediately after posting, switch your profile to the PostHog page and:
   - React (like, love, insightful, etc.)
   - Repost (the regular "Instantly bring [your] post to others' feeds" option)
