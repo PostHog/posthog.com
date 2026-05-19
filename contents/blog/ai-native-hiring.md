@@ -19,7 +19,9 @@ tags:
   - Hiring 
 ---
 
-In Q2 2026, we finally caved and admitted what we knew for a while. That AI-native candidate are the preferred candidate when it comes to hiring our Ops & Finance roles. Whilst we’d been very pro AI-native candidates for a long time in both our technical & non-technical roles, we finally hit the point where it’s no longer a toss up between seniority & slope, it was all-in on the AI-pilled hiring plan. 
+In Q2 2026 we caved and said what we'd been thinking for a while: when it comes to hiring, ai-native beats experience.
+Not "experienced person who uses ai." Not "senior hire with ai on the jd as a nice-to-have." ai-native, full stop. Years of experience are now the tiebreaker between two ai-native candidates, not the gate that decides who gets to the table.
+Ops & Finance is where I feel it most, so that's the lens we'll use here.
 
 At our Q2 planning, we made the decision that every team member needed to be using agents & LLMs to improve their workflows. This is where the AI-native person cooks. 
 
