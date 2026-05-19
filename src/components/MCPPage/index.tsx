@@ -168,7 +168,9 @@ function DemoVideo(): JSX.Element {
                     />
                 </div>
             </div>
-            <p className="text-center text-xs opacity-60 mt-2 mb-0 italic">Copy, paste, type `debug`, done</p>
+            <p className="text-center text-xs opacity-60 mt-2 mb-0 italic">
+                Paste the error. Type `debug`. That&apos;s it.
+            </p>
         </div>
     )
 }
@@ -183,20 +185,20 @@ interface SubfeatureItem {
 function Subfeatures(): JSX.Element {
     const items: SubfeatureItem[] = [
         {
-            title: 'In your editor',
-            description: 'Cursor, Claude, Codex, Zed, VS Code, PostHog Code. Wherever you build.',
+            title: 'Lives in your editor',
+            description: 'Cursor, Claude, Codex, Zed, VS Code, PostHog Code. Wherever you already work.',
             icon: <IconCode />,
             color: 'blue',
         },
         {
-            title: 'Ask in English',
-            description: 'The MCP picks the right query, runs it against your data, and writes back.',
+            title: 'Speaks plain English',
+            description: 'You ask the question. The MCP figures out the query and answers it.',
             icon: <IconMessage />,
             color: 'purple',
         },
         {
-            title: 'Costs nothing',
-            description: "The MCP doesn't show up on your PostHog bill. Not even on the free plan.",
+            title: 'Costs nothing to use',
+            description: "It doesn't show up on your PostHog bill. Not even on the free plan.",
             icon: <IconHandMoney />,
             color: 'seagreen',
         },
@@ -223,14 +225,17 @@ function Subfeatures(): JSX.Element {
 
 function MCPFaqGrid(): JSX.Element {
     const rows = [
-        { q: 'Run a funnel?', a: 'Yes.' },
-        { q: 'Pull errors by occurrence?', a: 'Yes.' },
-        { q: 'Write the SQL?', a: 'Yes.' },
-        { q: 'Spin up an experiment?', a: 'Yes.' },
-        { q: 'Toggle a feature flag?', a: 'Yes.' },
-        { q: 'Find that one weird replay?', a: 'Yes.' },
-        { q: 'Remember your event taxonomy?', a: 'Better than you do.' },
-        { q: 'Make the dashboards obsolete?', a: 'Working on it.' },
+        { q: 'Run a funnel?', a: 'Yes' },
+        { q: 'Pull errors by occurrence?', a: 'Yes' },
+        { q: 'Write the SQL?', a: 'Yes' },
+        { q: 'Spin up an experiment?', a: 'Yes' },
+        { q: 'Toggle a feature flag?', a: 'Yes' },
+        { q: 'Create a cohort?', a: 'Yes' },
+        { q: 'Build a survey?', a: 'Yes' },
+        { q: 'Check your logs?', a: 'Yes' },
+        { q: 'Find that one weird replay?', a: 'Yes' },
+        { q: 'Remember your event taxonomy?', a: 'More than you' },
+        { q: 'Make the dashboards obsolete?', a: 'Working on it' },
     ]
     return (
         <div className="not-prose">
@@ -508,27 +513,23 @@ function FutureNoUI(): JSX.Element {
         <div className="not-prose my-6 grid grid-cols-1 @lg:grid-cols-[1fr,1fr] gap-6 @lg:gap-8 items-start">
             <div className="prose dark:prose-invert max-w-none text-[15px] leading-relaxed">
                 <p>
-                    PostHog is a big platform, with a lot of tools. We built the MCP because we kept seeing comments
-                    like the ones over there &mdash; that the UI is overwhelming, or that people didn't realise all the
-                    things PostHog can do.
+                    PostHog has a lot of tools. We know &mdash; we built them. We also kept hearing the same thing: the
+                    UI is overwhelming, and most people only use a fraction of what's actually there.
                 </p>
                 <p>
-                    Even our own marketing team found it{' '}
-                    <Link to="/newsletter/hidden-danger-of-shipping-fast">
-                        hard to keep up with how fast we ship things
-                    </Link>
-                    .
+                    Even our own marketing team can&apos;t{' '}
+                    <Link to="/newsletter/hidden-danger-of-shipping-fast">keep up with how fast we ship</Link>.
                 </p>
                 <p>
-                    We could have run a big marketing campaign to tell you otherwise. We could have tested a new UI
-                    every week. But what if the future is no UI at all?
+                    We could have run a campaign telling you the UI is fine. We could have A/B tested a new sidebar
+                    every week. We did neither, because we don&apos;t think the future has a UI at all.
                 </p>
-                <p>What if, with the MCP, you don't even need to use PostHog to use PostHog?</p>
+                <p className="font-semibold">With the MCP, you don&apos;t need to use PostHog to use PostHog.</p>
                 <div className="mt-5 bg-accent dark:bg-accent-dark border border-primary rounded-md p-4">
-                    <p className="font-bold text-[15px] m-0 mb-1">"But what if I like the PostHog UI?"</p>
+                    <p className="font-bold text-[15px] m-0 mb-1">"But I like the PostHog UI."</p>
                     <p className="text-[13px] m-0 opacity-80 leading-snug">
-                        You can still log in to PostHog with a UI. While you're there, tell{' '}
-                        <TeamMember name="Adam Leith" photo /> you like it.
+                        Then carry on. It&apos;s not going anywhere. And while you&apos;re in there, tell{' '}
+                        <TeamMember name="Adam Leith" photo /> &mdash; he&apos;ll be thrilled.
                     </p>
                 </div>
             </div>
@@ -586,7 +587,7 @@ function PostHogCodeBoxout(): JSX.Element {
                     </div>
                     <p className="text-[13px] opacity-75 m-0 leading-snug">
                         Self-driving development is here. PostHog Code is the only AI devtool that understands your
-                        product, not just your codebase. Currently in private beta.
+                        product, not just your codebase. In private beta, sign-up to the waitlist for access soon.
                     </p>
                 </div>
                 <span className="inline-flex items-center gap-1 text-[12px] font-semibold uppercase tracking-wider shrink-0 group-hover:underline">
@@ -663,7 +664,7 @@ function MCPCTA(): JSX.Element {
                     </span>
                     <p className="text-xl @sm:text-2xl font-bold m-0 mb-1">Install the MCP</p>
                     <p className="opacity-65 m-0 mb-4 text-[13px]">
-                        Works in Cursor, Claude, Codex, PostHog Code, and more.
+                        One command. Thirty seconds. Works in Cursor, Claude, Codex, PostHog Code, and friends.
                     </p>
                     <div className="mb-4">
                         <WizardCommand command="mcp add" slim />
