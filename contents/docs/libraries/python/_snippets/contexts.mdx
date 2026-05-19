@@ -60,7 +60,7 @@ with new_context():
 You can disable this nesting behavior by passing `fresh=True` to `new_context`:
 
 ```python
-from posthog import new_context
+from posthog import new_context, tag
 
 with new_context(fresh=True):
     tag("some-key", "value-2")
@@ -98,7 +98,7 @@ You can read more about identifying users in the [user identification documentat
 
 ### Contexts and sessions
 
-Contexts can be associated with a session ID by calling `posthog.set_context_session`. Session IDs must be UUIDv7 strings.
+Contexts can be associated with a session ID by calling `posthog.set_context_session`. When linking backend events to frontend sessions, use the session ID from the frontend SDK (PostHog session IDs are UUIDv7 strings).
 
 ```python
 from posthog import new_context, set_context_session
@@ -162,7 +162,7 @@ with new_context(capture_exceptions=False):
 
 ### Decorating functions
 
-The SDK exposes a function decorator. It takes the same arguments as `new_context` and provides a handy way to mark a whole function as being in a new context. For example:
+The SDK exposes a function decorator. It takes the same `fresh` and `capture_exceptions` arguments as `new_context` and provides a handy way to mark a whole function as being in a new context. For example:
 
 ```python
 from posthog import scoped, identify_context
