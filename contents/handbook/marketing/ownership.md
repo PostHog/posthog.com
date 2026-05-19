@@ -36,7 +36,7 @@ We generally only have product marketers on teams that _already_ have a product 
 *AI summaries specifically
 **Not a product team at PostHog, but we think it's worth specific marketing focus
 
-As a general rule, a product is ready for a product marketer when a proper launch needs preparing for, usually beta or GA. Before that, product teams are responsible for launching their own products, but can ask for help with ad hoc things - see below. It is also fine for a product to have a product manager but not product marketer - we generally focus on heavily investing in 2-3 product areas at a time, so we can do a good job at a handful of things, instead of an average job at many. 
+Even if a product already has a product manager, a team is only ready for a product marketer when a proper launch needs preparing for, usually beta or GA. Before that, product teams are responsible for launching their own products, but can ask for help with ad hoc things - see below. It is also fine for a product to have a product manager but not product marketer - we generally focus on heavily investing in 2-3 product areas at a time, so we can do a good job at a handful of things, instead of an average job at many. 
 
 <details>
 <summary>I need a product marketer, but my team hasn't been assigned one</summary>
