@@ -56,9 +56,7 @@ Right now, only the person that started a task can continue it in the thread. If
 
 ## Emoji cues
 
-The bot signals where your request is in its lifecycle using reactions on your `@PostHog` message and emojis in its own replies. Glance at a busy channel and you can tell what's still in flight without opening every thread.
-
-Reactions on your mention message:
+The bot reacts to your `@PostHog` message as it works through your request, so you can scan a busy channel and see what's still in flight without opening every thread:
 
 | Emoji | What it means |
 |---|---|
@@ -66,7 +64,6 @@ Reactions on your mention message:
 | 👀 `:eyes:` | Forwarding a follow-up to the running agent, or resuming a previous run |
 | 🦔 `:hedgehog:` | The agent finished and posted its reply in the thread |
 | ❌ `:x:` | Something went wrong – usually the sandbox stopped before the message could be delivered |
-
 
 ## Routing rules and default repo
 
