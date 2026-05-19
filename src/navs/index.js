@@ -5216,7 +5216,7 @@ export const docsMenu = {
                 {
                     name: 'Customize styles and layouts',
                     url: '/docs/product-tours/customization',
-                    icon: 'IconColor',
+                    icon: 'IconPalette',
                     color: 'orange',
                 },
                 {
@@ -5275,37 +5275,37 @@ export const docsMenu = {
                     name: 'JavaScript API',
                     url: '/docs/support/javascript-api',
                     icon: 'IconCode',
-                    color: 'orange',
+                    color: 'blue',
                 },
                 {
                     name: 'Inbox management',
                     url: '/docs/support/inbox',
                     icon: 'IconNotebook',
-                    color: 'orange',
+                    color: 'yellow',
                 },
                 {
                     name: 'Slack integration',
                     url: '/docs/support/slack',
-                    icon: 'IconMessage',
-                    color: 'orange',
+                    icon: 'IconChat',
+                    color: 'purple',
                 },
                 {
                     name: 'Email channel',
                     url: '/docs/support/email',
                     icon: 'IconLetter',
-                    color: 'orange',
+                    color: 'red',
                 },
                 {
                     name: 'GitHub integration',
                     url: '/docs/support/github',
                     icon: 'IconGithub',
-                    color: 'orange',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Workflow automation',
                     url: '/docs/support/workflows',
                     icon: 'IconDecisionTree',
-                    color: 'orange',
+                    color: 'green',
                 },
             ],
         },
@@ -6181,7 +6181,7 @@ export const docsMenu = {
                     name: 'B2B mode',
                     featured: true,
                     url: '/docs/customer-analytics/b2b-mode',
-                    icon: 'IconCohort',
+                    icon: 'IconGroups',
                     color: 'red',
                 },
                 {
@@ -6225,7 +6225,7 @@ export const docsMenu = {
                 {
                     name: 'Create usage metrics',
                     url: '/docs/customer-analytics/create-usage-metrics',
-                    icon: 'IconG',
+                    icon: 'IconGraph',
                     color: 'purple',
                     featured: true,
                 },
@@ -6429,7 +6429,7 @@ export const docsMenu = {
                 {
                     name: 'Inbox',
                     url: '/docs/posthog-code/inbox',
-                    icon: 'IconNotebook',
+                    icon: 'IconLetter',
                     color: 'yellow',
                     children: [
                         { name: 'Overview', url: '/docs/posthog-code/inbox' },
@@ -6448,7 +6448,7 @@ export const docsMenu = {
                 {
                     name: 'Command Center',
                     url: '/docs/posthog-code/command-center',
-                    icon: 'IconDashboard',
+                    icon: 'IconGridMasonry',
                     color: 'orange',
                 },
                 {
@@ -6916,7 +6916,7 @@ export const docsMenu = {
                 {
                     name: 'Rate limits',
                     url: '/docs/endpoints/rate-limits',
-                    icon: 'IconGauge',
+                    icon: 'IconDashboard',
                     color: 'red',
                 },
                 {
