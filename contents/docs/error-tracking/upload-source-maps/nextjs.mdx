@@ -37,6 +37,8 @@ showStepsToc: true
 
   ```
 
+  > **Using multiple config wrappers?** `withPostHogConfig` must be the outermost wrapper in your `next.config.js`. If another wrapper (like `withNextIntl` or `withSentryConfig`) wraps `withPostHogConfig`, the PostHog build plugin won't run and source maps won't upload. Put `withPostHogConfig` last so it wraps everything else: `withPostHogConfig(withNextIntl(nextConfig), { ... })`.
+
   Where you should set the following environment variables:
 
   <div className="overflow-x-hidden">
