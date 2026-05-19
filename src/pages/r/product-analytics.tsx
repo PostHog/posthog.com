@@ -120,11 +120,10 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                         </p>
                     </div>
                     <div className="flex justify-center">
-                        {/* Placeholder: replace with final hero image */}
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_light_703f700a5b.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/PRODUCT_ANALYTICS_8b563c9586.png"
                             alt="Product analytics dashboard"
-                            className="w-full max-w-[450px] mx-auto rounded shadow-xl"
+                            className="w-full max-w-[450px] mx-auto"
                         />
                     </div>
                 </div>
