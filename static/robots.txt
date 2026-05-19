@@ -1,10 +1,16 @@
 User-agent: Googlebot
 Disallow: /*.md$
+Disallow: /hogcraft/
 
 User-agent: Bingbot
 Disallow: /*.md$
+Disallow: /hogcraft/
 
 User-agent: DuckDuckBot
 Disallow: /*.md$
+Disallow: /hogcraft/
+
+User-agent: *
+Disallow: /hogcraft/
 
 Sitemap: https://posthog.com/sitemap/sitemap-index.xml 
