@@ -34,7 +34,7 @@ At the start of each quarter, TAMs should prepare their book of business with th
 
 ### Accounts to remove from your book
 
-Before the quarter starts, review each account and remove those that meet any of the following criteria:
+At the end of the current quarter and before the next one starts, review each account and note which ones may be removed that meet any of the following criteria:
 
 - **Churned or dropped below $20k ARR** – unless you have a documented, specific plan to get them above $20k this quarter
 - **On YC Plan** – accounts $20k-$50k on the YC plan will go to the YC role on the CS team. Accounts above $50k should be a candidate for TAM referral if there is growth opportunity.
@@ -56,7 +56,9 @@ If an account is struggling on these dimensions, that's a signal you need to inv
 
 ## Doing the allocation
 
-It's Simon's job, with input from Charles and Team Leads, to review the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3), as well as accounts which need to be handed over from TAE and TAMs. We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in. Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer. Once this has been decided the New Owner trait is populated with one of the following:
+It's Simon's job, with input from Charles and Team Leads, to do the allocation. 
+
+They will review the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3), as well as accounts which need to be handed over from TAE and TAMs, or ones to be removed from books. We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in. Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer. Once this has been decided the New Owner trait is populated with one of the following:
 
 - US TAM
 - US CSM
@@ -74,11 +76,11 @@ At the start of each quarter, Simon (with input from Charles and Team Leads) rev
 3. **TAM books exceeding 15 accounts** – identifying accounts that should move to CSM or another TAM
 4. **CSM accounts with expansion potential** – identifying accounts that should move to a TAM
 
-Once Simon determines whether an account belongs with a TAM or CSM (and which region), the `New Owner` trait is populated, and Team Leads assign the specific team member.
+Once Simon determines whether an account belongs with a TAM or CSM (and which region), the `New Owner` trait is populated, and Team Leads assign the specific team member. Simon and Team Leads will make updates to the proper segments, and it is not in an account owner's power to add or remove Managed segments for designated assignment. 
 
 ### Mid-quarter changes
 
-Account removals should only happen at the end of the quarter so that quota can be calculated correctly. However, accounts can be **added** to your book at any time if you're confident there's growth potential.
+Account removals should only happen at the end of the quarter so that quota can be calculated correctly. However, accounts can be **added** to your book at any time if you're confident there's growth potential. Work with team leads when they are identified to confirm they are a solid addition and prompt assignment.  
 
 If you're assigned an account with a previous owner, work with them on a proper handover. If the customer isn't in a healthy state (usage and engagement-wise), push back and ask the previous owner to get them to a good state first.
 
