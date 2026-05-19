@@ -187,19 +187,19 @@ function Subfeatures(): JSX.Element {
     const items: SubfeatureItem[] = [
         {
             title: 'In your editor',
-            description: 'Cursor, Claude Code, Codex, Zed, VS Code, Windsurf. Wherever you write code.',
+            description: 'Cursor, Claude Code, Codex, Zed, VS Code, PostHog Code. Wherever you build.',
             icon: <IconCode />,
             color: 'blue',
         },
         {
             title: 'Ask in English',
-            description: 'The MCP picks the right query, runs it against your data, and writes the answer back.',
+            description: 'The MCP picks the right query, runs it against your data, and writes back.',
             icon: <IconMessage />,
             color: 'purple',
         },
         {
             title: 'Costs nothing',
-            description: "Connecting to the MCP doesn't show up on your bill. Not on the free plan, not on any plan.",
+            description: "The MCP doesn't show up on your PostHog bill. Not even on the free plan.",
             icon: <IconHandMoney />,
             color: 'seagreen',
         },
