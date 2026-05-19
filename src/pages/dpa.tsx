@@ -731,7 +731,7 @@ function DpaGenerator() {
                             <h3>Security (because we're not mid)</h3>
                             <p>
                                 We keep your data locked down: encryption in transit and at rest, access controls,
-                                regular security reviews, the whole rizz. SOC 2, ISO 27001, HIPAA — we understood the
+                                regular security reviews, the whole rizz. SOC 2 and HIPAA — we understood the
                                 assignment.
                             </p>
 
