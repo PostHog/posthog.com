@@ -16,7 +16,9 @@ import HasuraLogo from 'components/CustomerLogos/HasuraLogo'
 import ContraLogo from 'components/CustomerLogos/ContraLogo'
 import SpeakeasyLogo from 'components/CustomerLogos/SpeakeasyLogo'
 import { IconRewindPlay, IconToggle, IconDatabase } from '@posthog/icons'
-import { PlanComparison } from 'components/Products/Slides'
+import { PlanComparison, QuestionsSlide } from 'components/Products/Slides'
+import { productAnalytics } from 'hooks/productData/product_analytics'
+import { useContentData } from 'hooks/useContentData'
 
 const TOP_COUNT = 8
 const PLATFORM_ORDER = [
@@ -38,6 +40,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
     const [showMore, setShowMore] = useState(false)
     const [isIdle, setIsIdle] = useState(false)
 
+    const contentData = useContentData()
     const allPlatforms = usePlatformList('docs/product-analytics/installation', 'product analytics installation')
     const sortedPlatforms = useMemo(() => {
         const indexed = new Map(allPlatforms.map((p) => [p.url, p]))
@@ -502,6 +505,26 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                                 <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
                                     Get started free
                                 </CallToAction>
+                            </div>
+                        </QuestLogItem>
+
+                        <QuestLogItem
+                            title="Questions engineers ask us"
+                            subtitle="Real questions, answered with tutorials and docs"
+                            icon="IconThoughtBubble"
+                        >
+                            <p>
+                                Real questions from engineers and founders — answered with tutorials, docs, and examples
+                                you can follow step by step.
+                            </p>
+
+                            <div className="h-[750px] not-prose rounded overflow-hidden border border-primary my-4">
+                                <QuestionsSlide
+                                    productName={productAnalytics.name}
+                                    answersDescription="Click any question to get a detailed walkthrough with links to the full tutorial or doc."
+                                    questions={productAnalytics.questions}
+                                    tutorialData={contentData}
+                                />
                             </div>
                         </QuestLogItem>
 
