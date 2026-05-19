@@ -96,7 +96,7 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
 
     // Cache the data if successful
     if (!mcpToolsData.error && mcpToolsData.categories) {
-        await cache.set(MCP_TOOLS_CACHE_KEY, mcpToolsData.categories)
+        await cache.set(MCP_TOOLS_CACHE_KEY, mcpToolsData)
     }
 
     if (process.env.POSTHOG_APP_API_KEY && !(await cache.get(PAGEVIEW_CACHE_KEY))) {
