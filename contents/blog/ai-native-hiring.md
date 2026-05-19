@@ -25,7 +25,8 @@ AI-native sounds lovely, and it also sounds like a buzzword, so this is meant to
 
 ## Why have you actually done this? 
 
-Here’s the 411:- 
+Here’s the 411:
+
 1. AI-native means a team member treat agents and LLMs as their default. This is where they cook. 
 2. Every role we have in Ops & Finance now has to be using AI and automation in their daily workflows
 3. Years of experience do still matter and often correlate to stronger candidates. 
@@ -43,40 +44,41 @@ Hold up, wait a minute. Stop just saying AI and actually tell me what people are
 
 ## What does this look like in reality
 
-Well from an Ops perspective I have three examples:-  
+Well from an Ops perspective I have three examples:
+
 * Ops Manager
 * Talent Sourcer 
 * Finance Manager - accounting
 
 ### Ops manager
 
-A traditional excellent Ops manager is a hero. They are everywhere, they are the glue. Lots of people don’t know why they are great but they know they are important. This person is successful because they care and they are reliable and they can go really wide on tasks but most of it is manual, they think of everything that needs to go on an onboarding checklist, tags the right people and chases them up continually until it’s done. Everybody loves this person. However, things fall through the cracks and they get blocked whilst waiting for others.   
+A traditional excellent Ops manager is a hero. They are everywhere, they are the glue. Lots of people don’t know why they are great but they know they are important. This person is successful because they care and they are reliable and they can go really wide on tasks but most of it is manual, they think of everything that needs to go on an onboarding checklist, tags the right people and chases them up continually until it’s done. Everybody loves this person. However, things fall through the cracks and they get blocked whilst waiting for others. 
 
-The ai-native ops manager spins up a slack bot that pushes tasks to owners, nudges them when something's due, and escalates when it's overdue. They build an offer-letter generator for the talent team that hooks into employment contract generation across the 30+ countries posthog hires in — fully automated, end to end. 
+The ai-native ops manager spins up a slack bot that pushes tasks to owners, nudges them when something's due, and escalates when it's overdue. They build an offer-letter generator for the talent team that hooks into employment contract generation across the 30+ countries posthog hires in — fully automated, end to end.
 
-Shoutout <TeamMember name="Tara Alcantarilla-Howard" photo /> <TeamMember name="Carol Donnelly" photo />
+Shoutout <TeamMember name="Tara Alcantarilla-Howard" photo /> and <TeamMember name="Carol Donnelly" photo />.
 
 ### Talent partner
 
-A traditional talent partner is always on. They're at the coalface internally and externally, managing lots of people, having difficult conversations, smiling through all of it. They work late doing calls to find the right person, chase feedback from hiring managers, and reply to rejected candidates at 11pm. They often burn out, quickly.   
+A traditional talent partner is always on. They're at the coalface internally and externally, managing lots of people, having difficult conversations, smiling through all of it. They work late doing calls to find the right person, chase feedback from hiring managers, and reply to rejected candidates at 11pm. They often burn out, quickly. 
 
-The AI-native talent partner creates a feedback summary generator that takes all the feedback on why we won’t pass somebody, runs it through an agent that knows our tone of voice and delivers solid, friendly and accurate feedback to candidates. They build an Ashby MCP to pull all the qualitative feedback on our strongest performing hires and run analysis in Claude to show us the trends of people that do great at PostHog. They also run the same analysis on hires that have not worked out and how that matched the feedback from our hiring process.  
+The AI-native talent partner creates a feedback summary generator that takes all the feedback on why we won’t pass somebody, runs it through an agent that knows our tone of voice and delivers solid, friendly and accurate feedback to candidates. They build an Ashby MCP to pull all the qualitative feedback on our strongest performing hires and run analysis in Claude to show us the trends of people that do great at PostHog. They also run the same analysis on hires that have not worked out and how that matched the feedback from our hiring process.
 
-Did you know that people who talk fast usually really succeed at PostHog. Talk fast, think fast. We found that out from an AI-native talent partner.   
+Did you know that people who talk fast usually really succeed at PostHog. Talk fast, think fast. We found that out from an AI-native talent partner. 
 
-Shoutout <TeamMember name="Rune Povlsen" photo />
+Shoutout <TeamMember name="Rune Povlsen" photo />.
 
-Finance manager - accounting
+### Finance manager - accounting
 
-A traditional finance manager on day 30 has created a nice close checklist and has spent 3 days reviewing last month’s financials and written a  management report by hand that needs proof-reading before going out to the company. They spend more time creating financials than helping the business make the content of them better.   
+A traditional finance manager on day 30 has created a nice close checklist and has spent 3 days reviewing last month’s financials and written a  management report by hand that needs proof-reading before going out to the company. They spend more time creating financials than helping the business make the content of them better. 
 
-The AI-native finance manager by day 30 has a recurring close-checklist agent that can read the GL, flag variances over a set amount, and post them direct to slack. They’ve also got your ERP hooked up to your MCP and has a dope skill that creates the most fire finance update you’ve seen. They’ve also knocked up an accounts receivable agent that is sending personalised emails following up with overdue invoices andand tagging the right person when it needs a human.. Cash in the bank quicker.  
+The AI-native finance manager by day 30 has a recurring close-checklist agent that can read the GL, flag variances over a set amount, and post them direct to slack. They’ve also got your ERP hooked up to your MCP and has a dope skill that creates the most fire finance update you’ve seen. They’ve also knocked up an accounts receivable agent that is sending personalised emails following up with overdue invoices andand tagging the right person when it needs a human.. Cash in the bank quicker. 
 
-Shoutout <TeamMember name="Janani K" photo /> <TeamMember name="Ahmed Amaar" photo />
+Shoutout <TeamMember name="Janani K" photo /> and <TeamMember name="Ahmed Amaar" photo />.
 
 ## Have you really solved hiring forever, spoiler alert: no
 
-This isn’t some kind of AI-eutopia, there are still risks which we need to take seriously.   
+This isn’t some kind of AI-eutopia, there are still risks which we need to take seriously. 
 
 - When it comes to accounting you still need qualified accountant signoff, and we still need to pass an audit, so we still rely on years of experience and certain credentials. 
 - We also only consider people that also show good judgement when it comes to things like relationships & taste. These things are particularly important at PostHog. 
@@ -90,7 +92,9 @@ Everybody says they are AI-native these days so how do you actually find the cra
 You’ll want to ask questions like: 
 
 - **Walk me a through a workflow you built or replicated**: what does it do? what was the aim for it? how did it improve things (faster, more accurate, less human interaction)? 
+
 - **What’s the best AI workflow you’ve stolen from somebody else?** (Nobody actually knows what we are doing but we all steal the cool stuff from each other) 
+
 - **What’s the biggest failed experiment you’ve had with AI?** You want to assess how much people are pushing themselves. We’ve all failed somewhere, the first board pack my agents created would have had PostHog shutdown.
 
 After these first 3 stages we do our SuperDay. At this stage we want to see that the person can do the role in practice. Here we want to set a task for them to build something for us during the day. 
@@ -105,6 +109,6 @@ The practical result: PostHog's hiring plan for the next 2-3 years is smaller th
 
 we're betting on the optimistic version. the ai-native person has just had an explosion of resourcefulness, and we want a whole company of them.
 
-if that sounds like fun, believe it or not, [we're actually still hiring.](https://posthog.com/careers)
+if that sounds like fun, believe it or not, [we're actually still hiring](/careers).
 
 
