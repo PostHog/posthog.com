@@ -31,7 +31,7 @@ The ideal activation metric strikes a balance: enough companies should reach act
 2. Has done a key event multiple times (such as analyzed 2 insights)
 3. Has done a combination of key events (such as watched 5 recordings, and set a recording filter)
 
-To pick the best activation definion, it's recommended to write the activation queries for multiple potential activation definitions (~5-10), and compare the activation and retention numbers. This leads to a much higher confidence in the activation metric than just picking your best guess.
+To pick the best activation definition, it's recommended to write the activation queries for multiple potential activation definitions (~5-10), and compare the activation and retention numbers. This leads to a much higher confidence in the activation metric than just picking your best guess.
 
 Which definition is the best indicator for long term retention? You want to pick a definition that gets a sizable number of organizations to activate, but also to retain. But be careful: If you pick a activation definition where only 1% activate, and 100% of those 1% retain, your activation metric is too narrow!
 
@@ -39,7 +39,7 @@ Note on the retention / survived definition: For this, it's recommended you pick
 
 If you haven't already, make sure you also track [product intents](/handbook/growth/growth-engineering/product-intents) for your product. It's worth noting that adding new product intents will impact your activation rates (e.g. an existing user intent might be stronger or weaker than an onboarding intent). If you are comparing activation rates historically, it might be worth filtering for intents that rarely change, such as "onboarding product selected".
 
-[Read this blog post](/product-engineers/activation-metrics) for a deep dive into how we first came up with our activation definions.
+[Read this blog post](/product-engineers/activation-metrics) for a deep dive into how we first came up with our activation definitions.
 
 ### Structure of the SQL query
 
@@ -51,7 +51,7 @@ We store the activation logic in SQL queries and not in code to make it easier t
 
 1. Count only the first product intent per organization (since product usage intents can be triggered multiple times by the same org), as well as filter out cross sell product intents
 2. Check if an organization meets the activation definition within 30 days of showing product intent
-3. Check if an organization meets the retetion / survived definition within 3 months of showing product intent
+3. Check if an organization meets the retention / survived definition within 3 months of showing product intent
 
 Here is an example <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01966c82-9958-0000-7959-1728ad7dd6d4">
 materialised view query</PrivateLink>. To write your own, we recommend copying the query and change the product & event filtering criteria as needed.
@@ -61,7 +61,7 @@ materialised view query</PrivateLink>. To write your own, we recommend copying t
 1. Check if a organization is both activated AND retained to be counted in retention / survived
 2. Calculate the conversion percentages from product intent -> activation -> retention / survived
 
-To write your own, we also recommend copying one of the <PrivateLink url="https://us.posthog.com/project/2/insights/ccIWa4br">existing queries</PrivateLink>. All our activation queries follow the same structure, which we should also follow for new products. Once you've found a good definion of activation for your product, please do add the final activation query to <PrivateLink url="https://us.posthog.com/project/2/dashboard/130345">this dashboard</PrivateLink>.
+To write your own, we also recommend copying one of the <PrivateLink url="https://us.posthog.com/project/2/insights/ccIWa4br">existing queries</PrivateLink>. All our activation queries follow the same structure, which we should also follow for new products. Once you've found a good definition of activation for your product, please do add the final activation query to <PrivateLink url="https://us.posthog.com/project/2/dashboard/130345">this dashboard</PrivateLink>.
 
 ## Tracking activation in the code
 

@@ -12,7 +12,7 @@ This handbook page is all the stuff I would tell myself from back then if I coul
 
 Remember that you are new. Learning how to do any creative skill in a specific style takes time. Even the most talented writer in the world would make mistakes adopting PostHog's voice. As the wise old saying goes, "sucking at something is the first step towards being sorta good at something." 
 
-Don't compare your ramp-up speed to peers or people who've been here longer. Comparison is almost meaningless because everyone here has wildly different backgrounds It's why you were hired; it makes us better as a team. You have your own strengths and experiences, so make use of them.
+Don't compare your ramp-up speed to peers or people who've been here longer. Comparison is almost meaningless because everyone here has wildly different backgrounds. It's why you were hired; it makes us better as a team. You have your own strengths and experiences, so make use of them.
 
 While things are still relatively chill early on, read and absorb as much PostHog content as you can: blogs, newsletters, the handbook. Fix typos or update things as you go. Small PRs are genuinely appreciated and noticed.
 

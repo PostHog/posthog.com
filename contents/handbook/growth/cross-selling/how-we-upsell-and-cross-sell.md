@@ -31,7 +31,7 @@ The best way to build that relationship is to help the customer. That could be l
 
 Customers genuinely like PostHog, so engage them like a friendly acquaintance. Being hyper responsive to requests is a great way to build up good will. Another way is to own problems and follow them through to conclusion. Even if support is taking the lead, stay engaged and tie up any loose ends.
 
-Here is a general checklist that should be met before putting a plan to cross-sell.  Specific product motions may have additional pre-requsites. 
+Here is a general checklist that should be met before putting a plan to cross-sell.  Specific product motions may have additional pre-requisites. 
 
 - You have an active relationship with the customer – there are regular touchpoints and they are responsive to your outreach.
 - You understand their product and PostHog implementation. You know which technologies they are using, and how PostHog fits into their setup.

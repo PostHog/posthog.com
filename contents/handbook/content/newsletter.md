@@ -37,7 +37,7 @@ These aren’t rules, just things that have worked well in the past. They provid
 - **Some title formats that have worked well:**
   - Non-obvious lessons / advice [about topic]
   - Mistakes to avoid [doing a thing]
-  - WTF is (thing) and what you should you care?
+  - WTF is (thing) and why should you care?
   - How to think like (person)
   - The magic of (thing)
   - What we learned about (blah) when doing (blah)
@@ -72,7 +72,7 @@ These aren’t rules, just things that have worked well in the past. They provid
 
 - **Be opinionated:** Sitting on the fence isn't interesting. It's ok for people to disagree with you, so avoid too much hedging.
 
-- **Use graphics and charts:** These are great ways for explaining complex ideas and make for great social content. Create bad version and ask Cory to help you make it better.
+- **Use graphics and charts:** These are great ways for explaining complex ideas and make for great social content. Create a bad version and ask Cory to help you make it better.
 
 - **Be fun and lighthearted:** We're writing about building software, not internet safety. Throw in jokes and memes occasionally. Again, footnotes and captions can be useful here.
 

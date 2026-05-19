@@ -29,7 +29,7 @@ As with any startup, the principles that govern these small teams are:
 
 ## Minimal hierarchy
 
-We deliberately keep the number of levels and people managers at PostHog to the absolute minimum we can get away with. This maximizes team member autononomy _and_ increases shipping speed, as you don't need to run things past a manager or wait to get something signed off the vast majority of the time. 
+We deliberately keep the number of levels and people managers at PostHog to the absolute minimum we can get away with. This maximizes team member autonomy _and_ increases shipping speed, as you don't need to run things past a manager or wait to get something signed off the vast majority of the time. 
 
 This means that, if you need something or need to flag an issue, you are strongly encouraged to communicate _directly_ with the person or team working on the thing you care about. We want to avoid people going up and down the org chart via managers as much as possible. 90% of the time, this approach means you'll get what you need faster. 10% of the time, this might cause a tiny bit of confusion if what you are asking for doesn't beautifully align with that team's objectives. We believe that trade-off is ok - we'll figure it out. 
 

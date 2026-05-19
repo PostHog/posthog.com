@@ -500,7 +500,7 @@ Another tip is to use ClickHouse's `LowCardinality` data type modifier on schema
 ### Weak JOIN support
 
 ClickHouse excels at aggregating data from a single table at a time. If you however have a query with JOINs or subqueries, the right-hand-side of the
-JOIN would be loaded into memory first. Thus, you should always have the bigger table on the left side of left-hand-side!
+JOIN would be loaded into memory first. Thus, you should always have the bigger table on the left-hand side!
 
 This means that at scale JOINs can kill performance. Read more on the effect of removing JOINs from our events database here:
 - https://github.com/PostHog/posthog/issues/7962

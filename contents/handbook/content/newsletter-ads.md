@@ -14,7 +14,7 @@ Budget plans can be viewed in this <PrivateLink url="https://docs.google.com/spr
 
 Annoyingly, Substack doesn't have an API, which means that we manually need to upload emails we capture via our website, InstantForm ads, and most other paid marketing channels. This means that we have to manually upload these emails to Substack. <TeamMember name="Andy Vandervell" photo /> does this once a week.
 
-The emails are to PostHog via an event called `newsletter_subscribed`, which are sent to the <PrivateLink url="https://posthog.slack.com/archives/C06V4CW0ZC3">#newsletter-sub-alerts</PrivateLink> in Slack.
+The emails are sent to PostHog via an event called `newsletter_subscribed`, which are sent to the <PrivateLink url="https://posthog.slack.com/archives/C06V4CW0ZC3">#newsletter-sub-alerts</PrivateLink> in Slack.
 
 If you wish to avoid doing this, an alternative is to send users directly to our Substack so they can sign up directly there. The drawback is that we're unable to send conversion events to 3rd parties (e.g. Meta, Reddit), so their algorithms won't know if their targeting is working (and we cannot send them the emails of people who signed up, because privacy).
 

@@ -20,7 +20,7 @@ Currently, there are three ways in which we can send in-app messages.
 
 ## How we use in-app messages
 
-We use each of the three channels above for different purposes, guided by the needs of a message and the level of intrustion. 
+We use each of the three channels above for different purposes, guided by the needs of a message and the level of intrusion. 
 
 - The notification bar is only used for messages which must be urgently communicated to all users, such as messages about service disruption.
 - In-app prompts can be used for a wide variety of purposes, including promotion of new features. However, users will only see one in-app prompt per day and should be targeted to appear only on relevant pages and to relevant users. In-app prompts shouldn't be used to message all users at once, or to direct users to another part of the app.

@@ -46,7 +46,7 @@ Whenever we build a product, like feature flags, or product experimentation, we 
 
 It means that customers who want just one product can compare each of our products to our competitors', seeing that we are cheaper everywhere, improving our self-serve top-of-funnel.
 
-This also makes the value of each product more tangible. Usage and value are not the same thing - willigness to pay is the best indicator of the value our customers are getting from each product.
+This also makes the value of each product more tangible. Usage and value are not the same thing - willingness to pay is the best indicator of the value our customers are getting from each product.
 
 However, when one of our products has a fundamental dependency on another of our products, we should aim to bundle the cost of the dependencies in with the product's pricing so customers only pay once for using a given product.
 

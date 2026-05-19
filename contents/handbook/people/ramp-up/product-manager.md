@@ -38,21 +38,21 @@ This is a rough guide to ramping up as a product manager in PostHog.
 
 
 ## Specialism
-As well as your day job with specific teams, its important we have PMs having company level impact across the following specialisms too.
+As well as your day job with specific teams, it's important we have PMs having company level impact across the following specialisms too.
 
 ### Analytics
-* You're performing analyics on how customers use our products outside of your team's scope
-* This analysis defines how the company priorities what to build across product
+* You're performing analytics on how customers use our products outside of your team's scope
+* This analysis defines how the company prioritizes what to build across product
 * You push the limits of what's possible in PostHog to help us build more advanced tools and you work with SQL to get answers to the most complex queries
 
 ### Customer Research
-* You're always talking with our customers, and you intimately know how their frictions with our products
+* You're always talking with our customers, and you intimately know their frictions with our products
 * You're giving customer insights to every team (in and outside of product) to help them prioritize better
 * You're the first to hear about new opportunities and problems that our customers need solved and you capture this information
 
 ### Growth
 * You work closely with growth engineering and leadership to understand how we can accelerate activation and revenue growth
-* You know inside-out our funnels for growth and provide the context for to make quick changes to validate hypothesis and grow faster
+* You know inside-out our funnels for growth and provide the context to make quick changes to validate hypothesis and grow faster
 
 
 

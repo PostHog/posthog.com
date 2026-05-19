@@ -30,10 +30,10 @@ Sometimes teams want help or advice on their event taxonomy, or creating specifi
 If the user is very new then we usually strongly advise [enabling auto-capture](/docs/product-analytics/autocapture) and [creating an AARRR dashboard](/product-engineers/aarrr-pirate-funnel) as a first step. 
 
 ### Self-hosted help
-[We no longer provide support for self-hosted deployments](/blog/sunsetting-helm-support-posthog). If users contact us for help with self-hosted deployments then we refer them to [our legacy docs](/docs/self-host) and strongly recommend they [migrate to PostHog Cloud]((/docs/migrate/migrate-to-cloud#between-cloud-instances-eg-us-cloud-to-eu-cloud)).
+[We no longer provide support for self-hosted deployments](/blog/sunsetting-helm-support-posthog). If users contact us for help with self-hosted deployments then we refer them to [our legacy docs](/docs/self-host) and strongly recommend they [migrate to PostHog Cloud](/docs/migrate/migrate-to-cloud#between-cloud-instances-eg-us-cloud-to-eu-cloud).
 
 ### Getting more help (from someone else)
-If users need more help than we can reasonably provide, they may ask for external support or partners. **We do not have any official partners** and users should know that any suggestions we may make are not vetted or accreddited in any way. 
+If users need more help than we can reasonably provide, they may ask for external support or partners. **We do not have any official partners** and users should know that any suggestions we may make are not vetted or accredited in any way. 
 
 That said, some users have found success working with the following external partners:
 

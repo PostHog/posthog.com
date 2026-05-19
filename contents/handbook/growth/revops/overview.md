@@ -26,7 +26,7 @@ This means:
 - Finding useful patterns in customer behavior
 - Showing how each team's work affects our customers
 
-Creating views to show total monthly MRR, per product MRR, and per product usage, and filters out the anomalies to make sure make sure analyses are accurate and consistent across teams was one of the early steps we took in this direction. Unifying data from our billing system, Salesforce, and Vitally to have full context on biggest [gainers](https://us.posthog.com/project/2/insights/ZcynB70W) and [losers](https://us.posthog.com/project/2/insights/5V4mvAej) queries to show full context on which customers' spend changed the most was another one to simplify access to this info and quickly take action when needed.
+Creating views to show total monthly MRR, per product MRR, and per product usage, and filters out the anomalies to make sure analyses are accurate and consistent across teams was one of the early steps we took in this direction. Unifying data from our billing system, Salesforce, and Vitally to have full context on biggest [gainers](https://us.posthog.com/project/2/insights/ZcynB70W) and [losers](https://us.posthog.com/project/2/insights/5V4mvAej) queries to show full context on which customers' spend changed the most was another one to simplify access to this info and quickly take action when needed.
 
 
 ### 2. Build for self service
@@ -64,7 +64,7 @@ This ensures everyone across the company uses the same language and measures suc
 
 **Connect the dots:** Help teams understand how their work impacts others, things like:
 - Track how specific marketing campaigns drive upsell and cross sell
-- Measure what corraletes with strong retention rates
+- Measure what correlates with strong retention rates
 - Monitor which product features lead to customers expanding their usage
 
 **Rapid insights:** Build self service tools that help teams quickly answer their own questions:

@@ -119,7 +119,7 @@ Ask your champion how they are currently tackling the common use cases. Identify
 
 For error tracking, these questions are helpful to start the conversation:
 - When an error occurs, how easy is it for you to see exactly which user actions led up to it and how it affected the experience?
-  - Debugging relies often relies on reproducing error	
+  - Debugging often relies on reproducing error	
   - Error Tracking tied directly to replays makes root cause and impact obvious.
 - If you’ve built your own error tracking, how much effort goes into maintaining and correlating it with analytics?
   - Time wasted maintaining infra, blind spots in analysis.

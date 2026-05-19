@@ -75,7 +75,7 @@ Use the built-in Git tab in VS Code to commit and push your changes.
 ### Stopping the server
 
 1. Place your cursor into Terminal and type `Cmd+C` to stop the server.
-1. In the bottom left corner of the window, click **Codspaces: [your codespace name]**, then **Stop current codespace.**
+1. In the bottom left corner of the window, click **Codespaces: [your codespace name]**, then **Stop current codespace.**
 
 ### Notes
 
@@ -329,7 +329,7 @@ tags: ['filters', 'settings']
 
 -   `date`: the date the tutorial was posted
 -   `title`: the title that appears at the top of the tutorial and on the tutorial listing page
--   `author`: the author(s) of the tutorial. Ccrrelates to your handle located in /src/data/authors.json
+-   `author`: the author(s) of the tutorial. Correlates to your handle located in /src/data/authors.json
 -   `featuredTutorial`: determines if tutorial should be featured on the homepage
 -   `featuredVideo`: the iframe src of the video that appears at the top of the tutorial
 -   `featuredImage`: the Cloudinary URL of the image that appears at the top of the tutorial and on the tutorial listing page
