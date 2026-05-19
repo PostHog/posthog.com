@@ -16,6 +16,7 @@ import HasuraLogo from 'components/CustomerLogos/HasuraLogo'
 import ContraLogo from 'components/CustomerLogos/ContraLogo'
 import SpeakeasyLogo from 'components/CustomerLogos/SpeakeasyLogo'
 import { IconRewindPlay, IconToggle, IconDatabase } from '@posthog/icons'
+import { PlanComparison } from 'components/Products/Slides'
 
 const TOP_COUNT = 8
 const PLATFORM_ORDER = [
@@ -530,9 +531,9 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                                 </li>
                             </ul>
 
-                            <hr className="my-6" />
-
-                            <p>That's it! You're ready to start integrating.</p>
+                            <div className="h-[1100px] not-prose rounded overflow-hidden border border-primary my-4">
+                                <PlanComparison products={[]} productHandle="product_analytics" />
+                            </div>
 
                             <div className="flex flex-wrap gap-2 mt-4">
                                 <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
