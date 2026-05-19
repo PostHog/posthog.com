@@ -42,7 +42,7 @@ Configure your project token and host in `appsettings.json`:
 ```json
 {
   "PostHog": {
-    "ProjectApiKey": "<ph_project_token>",
+    "ProjectToken": "<ph_project_token>",
     "HostUrl": "<ph_client_api_host>"
   }
 }
@@ -54,7 +54,7 @@ For non-ASP.NET Core projects, initialize the core client as a singleton:
 using PostHog;
 
 public static readonly PostHogClient PostHog = new(new PostHogOptions {
-    ProjectApiKey = "<ph_project_token>",
+    ProjectToken = "<ph_project_token>",
     HostUrl = new Uri("<ph_client_api_host>"),
 });
 ```
@@ -65,7 +65,7 @@ You can find your project token and instance address in the [project settings](h
 
 <Step title="Capture exceptions" badge="required">
 
-The .NET SDK supports manual exception capture with `CaptureException`. It builds the `$exception` event for you, including exception type, message, stack frames, inner exceptions, aggregate exceptions, source context, and .NET runtime metadata.
+The .NET SDK supports manual exception capture with `CaptureException`. It builds the `$exception` event for you, including exception type, message, stack frames, inner exceptions, aggregate exceptions, source context when available, and .NET runtime metadata.
 
 The examples below assume `posthog` is an `IPostHogClient` from dependency injection, or your singleton `PostHogClient`.
 
@@ -101,13 +101,17 @@ catch (Exception exception)
 }
 ```
 
-You can also attach feature flag values to the exception event:
+You can also attach feature flag values to the exception event with a feature flag snapshot:
 
 ```csharp
+var flags = await posthog.EvaluateFlagsAsync("user_distinct_id");
+
 posthog.CaptureException(
     exception,
     "user_distinct_id",
-    sendFeatureFlags: true
+    properties: null,
+    groups: null,
+    flags: flags
 );
 ```
 

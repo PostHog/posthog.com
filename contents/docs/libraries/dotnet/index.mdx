@@ -37,7 +37,7 @@ import DotNetSendEvents from '../../integrate/send-events/_snippets/send-events-
 
 ## Error tracking
 
-You can manually capture exceptions using `CaptureException`. This sends a `$exception` event with stack frames, inner exceptions, aggregate exceptions, source context, and .NET runtime metadata.
+You can manually capture exceptions using `CaptureException`. This sends a `$exception` event with stack frames, inner exceptions, aggregate exceptions, source context when available, and .NET runtime metadata.
 
 ```csharp
 try
