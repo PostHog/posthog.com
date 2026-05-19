@@ -10,6 +10,7 @@ features:
   userIdentification: true
   featureFlags: true
   groupAnalytics: true
+  errorTracking: true
   surveys: false
   llmAnalytics: false
 ---
@@ -33,6 +34,39 @@ import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx
 import DotNetSendEvents from '../../integrate/send-events/_snippets/send-events-dotnet.mdx'
 
 <DotNetSendEvents />
+
+## Error tracking
+
+You can manually capture exceptions using `CaptureException`. This sends a `$exception` event with stack frames, inner exceptions, aggregate exceptions, source context, and .NET runtime metadata.
+
+```csharp
+try
+{
+    ProcessOrder(orderId);
+}
+catch (Exception exception)
+{
+    posthog.CaptureException(exception, "user_distinct_id");
+}
+```
+
+Add custom properties to include request, tenant, or domain context:
+
+```csharp
+posthog.CaptureException(
+    exception,
+    "user_distinct_id",
+    new Dictionary<string, object>
+    {
+        ["order_id"] = orderId,
+        ["environment"] = "production",
+    }
+);
+```
+
+For the full setup guide, see the [.NET error tracking installation docs](/docs/error-tracking/installation/dotnet).
+
+Automatic exception capture is not available in the .NET SDK yet.
 
 ## Person profiles and properties
 

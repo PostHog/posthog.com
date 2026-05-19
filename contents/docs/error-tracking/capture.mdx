@@ -112,6 +112,18 @@ exception := posthog.NewDefaultException(
 client.Enqueue(exception)
 ```
 
+```csharp file=.NET
+posthog.CaptureException(
+    exception,
+    "user_distinct_id",
+    new Dictionary<string, object>
+    {
+        ["custom_property"] = "custom_value",
+        ["custom_list"] = new[] { "custom_value_1", "custom_value_2" },
+    }
+);
+```
+
 </MultiLanguage>
 
 ## Add exception steps

@@ -4677,6 +4677,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/node',
                         },
                         {
+                            name: '.NET',
+                            url: '/docs/error-tracking/installation/dotnet',
+                        },
+                        {
                             name: 'Ruby',
                             url: '/docs/error-tracking/installation/ruby',
                         },

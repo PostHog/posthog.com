@@ -1,0 +1,179 @@
+---
+title: .NET Error Tracking installation
+platformLogo: dotnet
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<Steps>
+
+<Step title="Install the .NET SDK" badge="required">
+
+For ASP.NET Core projects, install the [PostHog.AspNetCore](/docs/libraries/dotnet) package:
+
+```bash
+dotnet add package PostHog.AspNetCore
+```
+
+For other .NET projects, such as console applications, MAUI, or Blazor, install the core `PostHog` package:
+
+```bash
+dotnet add package PostHog
+```
+
+</Step>
+
+<Step title="Configure PostHog" badge="required">
+
+For ASP.NET Core, add PostHog to your `Program.cs` file:
+
+```csharp
+using PostHog;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.AddPostHog();
+```
+
+Configure your project token and host in `appsettings.json`:
+
+```json
+{
+  "PostHog": {
+    "ProjectApiKey": "<ph_project_token>",
+    "HostUrl": "<ph_client_api_host>"
+  }
+}
+```
+
+For non-ASP.NET Core projects, initialize the core client as a singleton:
+
+```csharp
+using PostHog;
+
+public static readonly PostHogClient PostHog = new(new PostHogOptions {
+    ProjectApiKey = "<ph_project_token>",
+    HostUrl = new Uri("<ph_client_api_host>"),
+});
+```
+
+You can find your project token and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+
+</Step>
+
+<Step title="Capture exceptions" badge="required">
+
+The .NET SDK supports manual exception capture with `CaptureException`. It builds the `$exception` event for you, including exception type, message, stack frames, inner exceptions, aggregate exceptions, source context, and .NET runtime metadata.
+
+The examples below assume `posthog` is an `IPostHogClient` from dependency injection, or your singleton `PostHogClient`.
+
+```csharp
+try
+{
+    ProcessOrder(orderId);
+}
+catch (Exception exception)
+{
+    posthog.CaptureException(exception, "user_distinct_id");
+}
+```
+
+Pass additional properties to add request, tenant, or domain context to the exception:
+
+```csharp
+try
+{
+    ProcessOrder(orderId);
+}
+catch (Exception exception)
+{
+    posthog.CaptureException(
+        exception,
+        "user_distinct_id",
+        new Dictionary<string, object>
+        {
+            ["order_id"] = orderId,
+            ["environment"] = "production",
+        }
+    );
+}
+```
+
+You can also attach feature flag values to the exception event:
+
+```csharp
+posthog.CaptureException(
+    exception,
+    "user_distinct_id",
+    sendFeatureFlags: true
+);
+```
+
+<CalloutBox icon="IconInfo" title="Automatic capture" type="fyi">
+
+Automatic exception capture is not available in the .NET SDK yet. Wrap the code paths you want to monitor and call `CaptureException` from your exception handlers.
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Capture ASP.NET Core request exceptions" badge="recommended">
+
+For ASP.NET Core apps, add middleware to capture unhandled request exceptions and then rethrow them so your existing error handling still runs:
+
+```csharp
+using Microsoft.Extensions.DependencyInjection;
+using PostHog;
+
+app.Use(async (context, next) =>
+{
+    try
+    {
+        await next();
+    }
+    catch (Exception exception)
+    {
+        var posthog = context.RequestServices.GetRequiredService<IPostHogClient>();
+        var distinctId = context.User.Identity?.Name ?? context.TraceIdentifier;
+
+        posthog.CaptureException(
+            exception,
+            distinctId,
+            new Dictionary<string, object>
+            {
+                ["$current_url"] = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}",
+                ["$request_method"] = context.Request.Method,
+                ["$pathname"] = context.Request.Path.ToString(),
+            }
+        );
+
+        throw;
+    }
+});
+```
+
+</Step>
+
+<Step checkpoint title="Verify error tracking" badge="recommended">
+
+Trigger and capture a test exception to confirm events are being sent to PostHog. You should see it appear in the [Error Tracking](https://app.posthog.com/error_tracking) tab.
+
+```csharp
+try
+{
+    throw new InvalidOperationException("Test exception from .NET");
+}
+catch (Exception exception)
+{
+    posthog.CaptureException(exception, "test_user");
+    await posthog.FlushAsync();
+}
+```
+
+For serverless environments, call `FlushAsync()` before the process exits so queued exception events are sent.
+
+</Step>
+
+</Steps>
