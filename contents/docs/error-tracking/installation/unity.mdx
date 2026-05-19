@@ -1,0 +1,142 @@
+---
+title: Unity error tracking installation
+platformLogo: unity
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<Steps>
+
+<Step title="Install the Unity SDK" badge="required">
+
+PostHog is available for Unity through the [Unity Package Manager](https://docs.unity3d.com/Manual/upm-ui.html).
+
+1. Open **Window > Package Manager**.
+2. Click the **+** button and select **Add package from git URL**.
+3. Enter `https://github.com/PostHog/posthog-unity.git?path=com.posthog.unity`.
+
+The Unity SDK requires Unity 2021.3 LTS or later and the .NET Standard 2.1 API Compatibility Level.
+
+</Step>
+
+<Step title="Configure PostHog" badge="required">
+
+The easiest way to configure PostHog is through the Unity Inspector:
+
+1. Go to **Edit > Project Settings > PostHog**.
+2. Enter your **API Key** and select your **Host**.
+3. Keep **Capture Exceptions** enabled.
+
+The settings asset is created at `Assets/Resources/PostHogSettings.asset`. PostHog automatically initializes when your game starts using these settings.
+
+You can also initialize PostHog in code:
+
+```csharp
+using PostHogUnity;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    void Start()
+    {
+        PostHog.Setup(new PostHogConfig
+        {
+            ApiKey = "<ph_project_token>",
+            Host = "<ph_client_api_host>",
+            CaptureExceptions = true,
+            ExceptionDebounceIntervalMs = 1000,
+            CaptureExceptionsInEditor = true
+        });
+    }
+}
+```
+
+You can find your project token and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+
+</Step>
+
+<Step title="Capture exceptions" badge="required">
+
+The Unity SDK captures exception events automatically by default. On most platforms, it captures exceptions reported through Unity's exception logging pipeline. On WebGL, it listens for Unity exception log messages.
+
+Captured events include Unity and C# stack frames when available, exception type, exception message, whether the exception was handled, and Unity SDK metadata.
+
+For handled exceptions, call `CaptureException` manually:
+
+```csharp
+using System;
+using System.Collections.Generic;
+using PostHogUnity;
+
+try
+{
+    SaveGame();
+}
+catch (Exception exception)
+{
+    PostHog.CaptureException(exception, new Dictionary<string, object>
+    {
+        { "scene", UnityEngine.SceneManagement.SceneManager.GetActiveScene().name },
+        { "flow", "save_game" }
+    });
+}
+```
+
+<CalloutBox icon="IconInfo" title="Identified users" type="fyi">
+
+Call `PostHog.IdentifyAsync(...)` after login to link exception events to known users in PostHog.
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Configure error tracking options" badge="optional">
+
+All error tracking options can be set through the Unity Inspector or in `PostHogConfig`:
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `CaptureExceptions` | boolean | `true` | Enables automatic exception capture. |
+| `ExceptionDebounceIntervalMs` | integer | `1000` | Minimum milliseconds between automatic exception captures. Set to `0` to disable debouncing. |
+| `CaptureExceptionsInEditor` | boolean | `true` | Captures exceptions while running in the Unity Editor. |
+
+To disable automatic exception capture:
+
+```csharp
+PostHog.Setup(new PostHogConfig
+{
+    ApiKey = "<ph_project_token>",
+    CaptureExceptions = false
+});
+```
+
+</Step>
+
+<Step checkpoint title="Verify error tracking" badge="recommended">
+
+Trigger a test exception in Play Mode and confirm it appears in the [Error Tracking](https://app.posthog.com/error_tracking) tab.
+
+```csharp
+try
+{
+    throw new InvalidOperationException("Test exception from Unity");
+}
+catch (Exception exception)
+{
+    PostHog.CaptureException(exception);
+    PostHog.Flush();
+}
+```
+
+To test automatic capture, report an exception through Unity's logger:
+
+```csharp
+Debug.LogException(new InvalidOperationException("Automatic test exception from Unity"));
+PostHog.Flush();
+```
+
+</Step>
+
+</Steps>
