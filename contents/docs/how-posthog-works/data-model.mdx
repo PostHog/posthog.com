@@ -19,8 +19,7 @@ Each event contains the following base fields within ClickHouse:
 | **timestamp**         | `DateTime64(6, 'UTC')` | Defaults to timezone.now when the event is captured if not set                                                                                                  |
 | **created_at**        | `DateTime64(6, 'UTC')` | The timestamp for when the event was ingested by our server                                                                                                     |
 | **person_id**         | `UUID`                 | This is the `id` of the [Person](#person) that sent this event                                                                                                  |
-| **person_created_at** | `DateTime64(3)`        | The timestamp of the earliest event associated with this person                                                                                                 |
-| **person_properties** | `VARCHAR`              | A JSON object with all the properties for a user, which can be altered using the `$set`, `$set_once`, and `$unset` arguments                                    |
+| **person_created_at** | `DateTime64(3)`        | The timestamp of the earliest event associated with this person                                                                                                 |                    
 | **group\***           | Various                | Columns used for [group analytics](/manual/group-analytics)                                                                                                     |
 
 Events are _only_ stored within ClickHouse, and once they have been written they can't be changed. This limitation comes from a trade-off in the design of ClickHouse: inserting data and running queries on large tables is extremely fast, but updating or deleting specific rows is generally not efficient.
