@@ -574,6 +574,19 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                         </QuestLogItem>
                     </QuestLog>
                 </div>
+
+                <div className="text-center py-16 mt-4 opacity-60 hover:opacity-100 transition-opacity duration-500">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Frame_10138_5169832152.png"
+                        alt="PostHog hedgehog"
+                        className="mx-auto mb-4"
+                        imgClassName="w-28 h-auto"
+                    />
+                    <p className="text-sm text-secondary italic !mb-1">
+                        You made it to the bottom. That makes you special. At least to us. So here's a special sign.
+                    </p>
+                    <p className="text-sm text-secondary italic !mb-0">Try PostHog Code for free.</p>
+                </div>
             </ReaderView>
         </>
     )
