@@ -16,6 +16,12 @@ Check that your domain is verified and you’ve added the DNS records correctly.
 
 Ensure SPF/DKIM are valid, and consider setting up DMARC.
 
+## Recipient stopped receiving emails?
+
+If a recipient experiences a hard bounce (a permanent delivery failure, such as an invalid email address), PostHog automatically opts them out of future emails. This prevents repeated delivery attempts to addresses that can't receive mail and helps maintain your sender reputation.
+
+If you believe a recipient was incorrectly opted out, check your opt-out list and remove them to re-enable email delivery.
+
 ## Variables not populating?  
 
 Confirm the property exists on the person profile (e.g. `person.name`).
