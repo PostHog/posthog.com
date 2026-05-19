@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 /*
  * One-shot helper to suggest entries for src/data/mcp-rest-mapping.json.
  *
@@ -40,10 +43,7 @@ function get(url, headers = {}) {
 }
 
 async function main() {
-    const [specBody, toolsBody] = await Promise.all([
-        get(SPEC_URL, { Accept: 'application/json' }),
-        get(TOOLS_URL),
-    ])
+    const [specBody, toolsBody] = await Promise.all([get(SPEC_URL, { Accept: 'application/json' }), get(TOOLS_URL)])
 
     let spec
     try {
