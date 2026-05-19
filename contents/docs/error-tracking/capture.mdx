@@ -124,6 +124,17 @@ posthog.CaptureException(
 );
 ```
 
+```csharp file=Unity
+PostHog.CaptureException(
+    exception,
+    new Dictionary<string, object>
+    {
+        { "custom_property", "custom_value" },
+        { "custom_list", new[] { "custom_value_1", "custom_value_2" } },
+    }
+);
+```
+
 </MultiLanguage>
 
 ## Add exception steps

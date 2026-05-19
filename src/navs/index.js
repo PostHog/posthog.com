@@ -4731,6 +4731,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/flutter',
                         },
                         {
+                            name: 'Unity',
+                            url: '/docs/error-tracking/installation/unity',
+                        },
+                        {
                             name: 'Elixir',
                             url: '/docs/error-tracking/installation/elixir',
                         },
