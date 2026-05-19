@@ -1,3 +1,5 @@
 It is **ok** for your **project token** (starts with `phc_`) to be public. It is used to initialize PostHog, capture events, evaluate feature flags, and more, but doesn't have access to your private data.
 
 Your **personal API key** (starts with `phx_`), however, should **NOT** be public as it enables reading and writing potentially private data.
+
+Your **project secret API key** (starts with `phs_`), like the personal API key, should **NOT** be public as it enables accessing private project data.
