@@ -3034,6 +3034,10 @@ export const docsMenu = {
                             url: '/docs/settings/sso',
                         },
                         {
+                            name: 'Content Security Policy tracking',
+                            url: '/docs/csp-tracking',
+                        },
+                        {
                             name: 'Command palette',
                             url: '/docs/cmd-k',
                         },
