@@ -39,11 +39,7 @@ Hold up, wait a minute. Stop just saying AI and actually tell me what people are
 
 ## What does this look like in reality
 
-Well from an Ops perspective I have three examples:
-
-* Ops Manager
-* Talent Sourcer 
-* Finance Manager - accounting
+From an Ops perspective, I have three examples:
 
 ### 1. Ops manager
 
