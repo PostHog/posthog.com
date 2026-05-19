@@ -573,5 +573,13 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/matheusvbatista/",
         "profile_id": 41646
+    },
+    {
+        "handle": "patricio-tarantino",
+        "name": "Patricio Tarantino",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/patricio-posthog",
+        "profile_id": 31566
     }
 ]
