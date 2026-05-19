@@ -21,24 +21,17 @@ tags:
 
 In Q2 2026, we finally caved and admitted what we knew for a while. That AI-native candidate are the preferred candidate when it comes to hiring our Ops & Finance roles. Whilst we’d been very pro AI-native candidates for a long time in both our technical & non-technical roles, we finally hit the point where it’s no longer a toss up between seniority & slope, it was all-in on the AI-pilled hiring plan. 
 
+At our Q2 planning, we made the decision that every team member needed to be using agents & LLMs to improve their workflows. This is where the AI-native person cooks. 
+
 AI-native sounds lovely, and it also sounds like a buzzword, so this is meant to show you what we mean by AI-native and how I am implementing it into Ops & Finance. We’ll also cover the reality that it’s not perfect. 
-
-## Why have you actually done this? 
-
-Here’s the 411:
-
-1. AI-native means a team member treat agents and LLMs as their default. This is where they cook. 
-2. Every role we have in Ops & Finance now has to be using AI and automation in their daily workflows
-3. Years of experience do still matter and often correlate to stronger candidates. 
-4. Years of experience are now used as a tiebreaker between ai-native candidates rather than a moat
-5. The person still needs to actually be an [insert job] they can’t just be an ai junkie who fancies being an accounting manager
-6. This isn’t bullet-proof, there are still downsides
 
 ## Is hiring for AI-natives actually any different? 
 
 Standard hiring advice for Ops roles is still in the pandemic era. Find people who know what they are doing. Except now, you have to put “comfortable working with AI” on your job descriptions, right? Why else did we all sign off those huge AI budgets, right? If you're good at your job and you use AI to be more productive, great — you're probably 20% faster than the colleague who doesn't.
 
 Being AI-native isn’t just a layer on top of a job. It’s a totally different version of it. The AI-native accountant doesn’t do accounting + ai. They produce the same work but 5x faster and with way better controls in place. 
+
+We aren't just letting anybody through the door. The person still needs to actually be an [insert job] they can’t just be an ai junkie who fancies being an accounting manager
 
 Hold up, wait a minute. Stop just saying AI and actually tell me what people are doing. 
 
