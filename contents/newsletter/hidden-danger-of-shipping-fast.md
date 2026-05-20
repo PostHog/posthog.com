@@ -201,7 +201,7 @@ What works better is publishing things that are useful even without your product
 
 Even better, teach the domain you operate in – not just how your product works. Figma, for example, teaches people how to be [better designers](https://www.figma.com/blog/insights/), not just how to use Figma.
 
-Events are another great tactic to build a community adjacent to your product. For example, Lovable's [SheBuilds](https://shebuilds.lovable.app/) hackathon encourages more women to try vibe coding.
+Events are another great tactic to build a community adjacent to your product. For example, Lovable's [SheBuilds](https://shebuilds.lovable.app/) hackathon encourages more women to try [vibe coding](/blog/best-analytics-stack-for-vibe-coded-apps).
 
 > **What this looks like:** HubSpot pioneered inbound marketing by teaching people how to be better marketers before selling them software. For many young professionals, that learning happened years before any purchasing decision – and by then, brand equity was already baked in.
 
