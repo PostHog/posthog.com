@@ -244,6 +244,12 @@ An RFC is likely to be unhelpful as a first step in other circumstances. Specifi
 
 _However_ please write notes on such a call - to ensure everyone _is_ on the same page. This could then be copy pasted into an RFC for transparency's sake / future reference.
 
+### How should I use AI when writing RFCs?
+
+RFCs are the place where we do concentrated, original thinking. This thinking should not be outsourced to AI. Even when given context, AI writes content that is average and unoriginal, difficult to read (adjective-stuffing, anyone?), and places emphasis on the wrong things. RFCs should be largely hand-written, especially sections that define the problem, potential solutions, and question/answer.
+
+AI is still useful in the RFC process, however. Feel free to use AI for research and final draft polish (but please don't have it rewrite the whole thing for you). Analysis and research done by AI can be included in the RFC at the bottom as appendixes. 
+
 ### Top tips for RFCs
 
 -   RFCs can be very short and are often better than making decisions by Slack threads.

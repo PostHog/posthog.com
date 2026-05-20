@@ -23,9 +23,23 @@ Start with a message in the shared Slack channel — the person you worked with 
 
 As things progress, [update the renewal opportunity](/handbook/growth/sales/crm#renewal-pipeline) in Salesforce.
 
+## Unique renewal cases
+
 ### Customers running out of credit early
 
 Credit bot will ping you in Slack if a customer is set to run out of credits before their renewal date. Treat this as an early renewal — same process applies. Make sure the customer has a credit card on file so any overage bills get paid.
+
+### Customers with credits expiring at end of contract
+
+If a customer has a balance when their contract ends, the credits expire and they move to monthly payments. We have [rules](/handbook/growth/sales/contract-rules#when-they-will-end-the-contract-term-with-credit-remaining) to let customers carry over credits on a flat renewal or higher.
+
+If you spot a customer trending this way, reach out early to explain the credit expiry and the options. Use the call to explore projected growth and other use cases. Start the renewal conversation 3 months out so you have time to explore new features and figure out if the carry-over is worth it for them.
+
+### Customers with irregular contracts
+
+Many customers are on legacy contracts that don't follow our [contract rules](/handbook/growth/sales/contract-rules) — non-Net 30 payment terms, unique discounts, legacy pricing, monthly or quarterly payments.
+
+Prioritize migrating these customers to standard pricing and discounts. The conversations may be difficult, but stick to handbook pricing whenever reasonable — and share the handbook directly to back up your point. Use your judgment on when an irregular term is a deal-breaker worth keeping.
 
 ## Renewal discussions
 

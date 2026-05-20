@@ -1,83 +1,118 @@
-There are 2 steps to implement feature flags in PHP:
+There are two steps to implement feature flags in PHP:
 
-### Step 1: Evaluate the feature flag value
+### Step 1: Evaluate flags once
+
+Call `PostHog::evaluateFlags()` once for the user, then read values from the returned snapshot.
 
 #### Boolean feature flags
 
 ```php
-$isMyFlagEnabledForUser = PostHog::isFeatureEnabled('flag-key', 'distinct_id_of_your_user')
+$flags = PostHog::evaluateFlags('distinct_id_of_your_user');
 
-if ($isMyFlagEnabledForUser) {
+if ($flags->isEnabled('flag-key')) {
     // Do something differently for this user
+    // Optional: fetch the payload
+    $matchedFlagPayload = $flags->getFlagPayload('flag-key');
 }
 ```
 
 #### Multivariate feature flags
 
 ```php
-$enabledVariant = PostHog::getFeatureFlag('flag-key', 'distinct_id_of_your_user')
+$flags = PostHog::evaluateFlags('distinct_id_of_your_user');
 
-if ($enabledVariant === 'variant-key') { # replace 'variant-key' with the key of your variant
-    # Do something differently for this user
+$enabledVariant = $flags->getFlag('flag-key');
+
+if ($enabledVariant === 'variant-key') { // replace 'variant-key' with the key of your variant
+    // Do something differently for this user
+    // Optional: fetch the payload
+    $matchedFlagPayload = $flags->getFlagPayload('flag-key');
 }
 ```
 
-import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx" 
+`$flags->getFlag()` returns the variant string for multivariate flags, `true` for enabled boolean flags, `false` for disabled flags, and `null` when the flag wasn't returned by the evaluation.
+
+> **Note:** `PostHog::isFeatureEnabled()`, `PostHog::getFeatureFlag()`, `PostHog::getFeatureFlagPayload()`, and `capture(['send_feature_flags' => true])` still work during the migration period, but they're deprecated. Prefer `evaluateFlags()` for new code.
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
 
 <IncludePropertyInEvents />
 
 There are two methods you can use to include feature flag information in your events:
 
-#### Method 1: Include the `$feature/feature_flag_name` property
+#### Method 1: Pass the evaluated flags snapshot to `capture()`
 
- In the event properties, include `$feature/feature_flag_name: variant_key`:
+Pass the same `flags` object that you used for branching. This attaches the exact flag values from that evaluation and doesn't make another `/flags` request.
 
 ```php
+$flags = PostHog::evaluateFlags('distinct_id_of_your_user');
+
+if ($flags->isEnabled('flag-key')) {
+    // Do something differently for this user
+}
+
 PostHog::capture([
-  'distinctId' => 'distinct_id_of_your_user',
-  'event' => 'event_name',
-  'properties' => [
-    '$feature/feature-flag-key' => 'variant-key' // replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
-  ]
+    'distinctId' => 'distinct_id_of_your_user',
+    'event' => 'event_name',
+    'flags' => $flags,
 ]);
 ```
 
-#### Method 2: Set `send_feature_flags` to `true`
+By default, this attaches every flag in the snapshot using `$feature/<flag-key>` properties and `$active_feature_flags`.
 
-import PHPSetSendFeatureFlagsTrue from "./feature-flags-code-php-set-send-feature-flags-to-true.mdx" 
+To reduce event property bloat, pass a filtered snapshot:
 
-<PHPSetSendFeatureFlagsTrue />
+```php
+// Attach only flags accessed with isEnabled() or getFlag() before this call
+PostHog::capture([
+    'distinctId' => 'distinct_id_of_your_user',
+    'event' => 'event_name',
+    'flags' => $flags->onlyAccessed(),
+]);
 
-### Fetching all flags for a user
+// Attach only specific flags
+PostHog::capture([
+    'distinctId' => 'distinct_id_of_your_user',
+    'event' => 'event_name',
+    'flags' => $flags->only(['checkout-flow', 'new-dashboard']),
+]);
+```
 
-You can fetch all flag values for a single user by calling `getAllFlags()`.
+`onlyAccessed()` is order-dependent. If you call it before accessing any flags with `isEnabled()` or `getFlag()`, no feature flag properties are attached.
 
-This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
+#### Method 2: Include the `$feature/feature_flag_name` property manually
 
-```php  
-PostHog::getAllFlags('distinct_id_of_your_user')
+In the event properties, include `$feature/feature_flag_name: variant_key`:
+
+```php
+PostHog::capture([
+    'distinctId' => 'distinct_id_of_your_user',
+    'event' => 'event_name',
+    'properties' => [
+        // Replace feature-flag-key with your flag key and 'variant-key' with the key of your variant
+        '$feature/feature-flag-key' => 'variant-key',
+    ],
+]);
+```
+
+### Evaluating only specific flags
+
+By default, `evaluateFlags()` evaluates every flag for the user. If you only need a few flags, pass `flagKeys` to request only those flags:
+
+```php
+$flags = PostHog::evaluateFlags(
+    distinctId: 'distinct_id_of_your_user',
+    flagKeys: ['checkout-flow', 'new-dashboard'],
+);
 ```
 
 ### Sending `$feature_flag_called` events
 
-Capturing `$feature_flag_called` events enable PostHog to know when a flag was accessed by a user and thus provide [analytics and insights](/docs/product-analytics/insights) on the flag. By default, we send a these event when:
+Capturing `$feature_flag_called` events enables PostHog to know when a flag was accessed by a user and provide [analytics and insights](/docs/product-analytics/insights) on the flag. With `evaluateFlags()`, the SDK sends this event when you call `$flags->isEnabled()` or `$flags->getFlag()` for a flag.
 
-1. You call `getFeatureFlag()` or `isFeatureEnabled()`, AND 
-2. It's a new user, or the value of the flag has changed. 
+The SDK deduplicates these events per `(distinct_id, flag, value)` in a local cache. If you reinitialize the PostHog client, the cache resets and `$feature_flag_called` events may be sent again. PostHog handles duplicates, so duplicate `$feature_flag_called` events don't affect your analytics.
 
-> *Note:* Tracking whether it's a new user or if a flag value has changed happens in a local cache. This means that if you reinitialize the PostHog client, the cache resets as well – causing `$feature_flag_called` events to be sent again when calling `getFeatureFlag` or `isFeatureEnabled`. PostHog is built to handle this, and so duplicate `$feature_flag_called` events won't affect your analytics.
-
-You can disable automatically capturing `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
-
-To disable it, set the `sendFeatureFlagEvents` argument in your function call, like so:
-
-```php
-$isMyFlagEnabledForUser = PostHog::isFeatureEnabled(
-    key: 'flag-key',
-    distinctId: 'distinct_id_of_your_user',
-    sendFeatureFlagEvents: false
-)
-```
+`$flags->getFlagPayload()` doesn't send `$feature_flag_called` events and doesn't count as an access for `onlyAccessed()`.
 
 import PHPOverrideServerProperties from './override-server-properties/php.mdx'
 
@@ -85,46 +120,13 @@ import PHPOverrideServerProperties from './override-server-properties/php.mdx'
 
 ### Request timeout
 
-You can configure the `feature_flag_request_timeout_ms` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
+You can configure the `feature_flag_request_timeout_ms` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked if PostHog's servers are too slow to respond. By default, this is set to 3 seconds.
 
 ```php
 PostHog::init("<ph_project_token>",
-  [
-    'host' => '<ph_client_api_host>',
-    'feature_flag_request_timeout_ms' => 3000 // Time in milliseconds. Default is 3000 (3 seconds).
-  ]
+    [
+        'host' => '<ph_client_api_host>',
+        'feature_flag_request_timeout_ms' => 3000, // Time in milliseconds. Defaults to 3000 (3 seconds).
+    ]
 );
-```
-
-### Error handling
-
-When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
-
-```php
-function handleFeatureFlag($client, $flagKey, $distinctId) {
-    try {
-        $isEnabled = $client->isFeatureEnabled($flagKey, $distinctId);
-        echo "Feature flag '$flagKey' for user '$distinctId' is " . ($isEnabled ? 'enabled' : 'disabled') . "\n";
-        return $isEnabled;
-    } catch (Exception $e) {
-        echo "Error fetching feature flag '$flagKey': " . $e->getMessage() . "\n";
-        // Optionally, you can return a default value or throw the error
-        // return false; // Default to disabled
-        throw $e;
-    }
-}
-
-// Usage example
-try {
-    $flagEnabled = handleFeatureFlag($client, 'new-feature', 'user-123');
-    if ($flagEnabled) {
-        // Implement new feature logic
-    } else {
-        // Implement old feature logic
-    }
-} catch (Exception $e) {
-    // Handle the error at a higher level
-    echo 'Feature flag check failed, using default behavior';
-    // Implement fallback logic
-}
 ```

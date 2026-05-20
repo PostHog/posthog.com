@@ -160,12 +160,9 @@ ClickHouse specifically is an ideal solution for developer platforms like us. It
 
 Consider the following resources if you want to learn more about ClickHouse and BigQuery’s differences.
 
-- [ClickHouse Documentation](https://clickhouse.com/docs/en/home/)
-- [BigQuery Documentation](https://cloud.google.com/bigquery/docs)
-- [BigQuery Whitepaper](https://github.com/tpn/pdfs/blob/master/BigQuery%20Technical%20Whitepaper%20-%20Google.pdf)
 - [Why PostHog chose ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion)
 - [Andy Pavlo - Vectorized Query Execution](https://www.youtube.com/watch?v=FrspnYbFSxQ)
-- [ClickHouse Cloud](https://clickhouse.com/cloud)
-- [Our comparisons of ClickHouse and Druid](/blog/clickhouse-vs-druid)
+- [In-depth: ClickHouse vs Druid](/blog/clickhouse-vs-druid)
+- [In-depth: ClickHouse vs DuckDB](/blog/duckdb-vs-clickhouse)
 
 <NewsletterForm />

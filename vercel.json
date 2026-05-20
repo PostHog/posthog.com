@@ -56,6 +56,10 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
+        { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
+        { "source": "/docs/api/product-tours", "destination": "/docs/api", "statusCode": 301 },
+        { "source": "/docs/api/product-tours/:path*", "destination": "/docs/api", "statusCode": 301 },
         { "source": "/coupons/:path*", "destination": "https://app.posthog.com/coupons/:path*", "statusCode": 301 },
         { "source": "/handbook/growth/marketing", "destination": "/handbook/marketing", "statusCode": 301 },
         {
@@ -86,6 +90,21 @@
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
         { "source": "/docs/integrate/(client|server)/:path*", "destination": "/docs/integrate/:path*" },
         { "source": "/docs/session-recording/:path*", "destination": "/docs/session-replay/:path*" },
+        {
+            "source": "/docs/posthog-code/inbox/triage",
+            "destination": "/docs/posthog-code/inbox/implementation",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/inbox/triage/",
+            "destination": "/docs/posthog-code/inbox/implementation",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/quick-tour",
+            "destination": "/docs/posthog-code",
+            "statusCode": 301
+        },
         { "source": "/docs/integrations/android-integration", "destination": "/docs/libraries/android" },
         { "source": "/docs/integrations/community", "destination": "/docs/libraries/community" },
         { "source": "/docs/integrations/docusaurus-integration", "destination": "/docs/libraries/docusaurus" },
@@ -1787,6 +1806,7 @@
         { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
+        { "source": "/handbook/brand/process", "destination": "/handbook/engineering/product-design-process" },
         { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" },
         { "source": "/teams/twig", "destination": "/teams/posthog-code" },
         { "source": "/teams/twig/:path*", "destination": "/teams/posthog-code/:path*" },
