@@ -22,8 +22,19 @@ const getMaxDecimalPlaces = (tiers: any[]) =>
         return dot === -1 ? max : Math.max(max, str.length - dot - 1)
     }, 0)
 
+const fireConfettiFromElement = (el: HTMLElement | null) => {
+    if (!el || typeof window === 'undefined') return
+    const rect = el.getBoundingClientRect()
+    const vw = window.innerWidth || 1
+    const vh = window.innerHeight || 1
+    const x = (rect.left + rect.width / 2) / vw
+    const y = (rect.top + rect.height / 2) / vh
+    confetti({ particleCount: 80, spread: 70, origin: { x, y }, disableForReducedMotion: true })
+}
+
 const ProductRateBlock = ({
     name,
+    description,
     billingTiers,
     sliderConfig,
     initialVolume,
@@ -31,6 +42,7 @@ const ProductRateBlock = ({
     onCostChange,
 }: {
     name: string
+    description?: string
     billingTiers: any[]
     sliderConfig: { min: number; max: number; marks: number[] }
     initialVolume: number
@@ -40,10 +52,15 @@ const ProductRateBlock = ({
     const [volume, setVolume] = useState(initialVolume)
     const dp = useMemo(() => getMaxDecimalPlaces(billingTiers), [billingTiers])
 
-    const { total: cost } = useMemo(
-        () => (billingTiers ? calculatePrice(volume, billingTiers) : { total: 0 }),
+    const { total: cost, costByTier } = useMemo(
+        () =>
+            billingTiers
+                ? calculatePrice(volume, billingTiers)
+                : { total: 0, costByTier: [] as { eventsInThisTier: number; tierCost: number }[] },
         [volume, billingTiers]
     )
+
+    const hasFractionalSubtotal = costByTier?.some((t) => t.tierCost % 1 !== 0) ?? false
 
     useEffect(() => {
         onCostChange(cost)
@@ -58,9 +75,10 @@ const ProductRateBlock = ({
     const activeTierIndex = getActiveTierIndex()
 
     const prevTierIndex = useRef<number | null>(null)
+    const tierRefs = useRef<(HTMLSpanElement | null)[]>([])
     useEffect(() => {
         if (prevTierIndex.current !== null && activeTierIndex > prevTierIndex.current) {
-            confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } })
+            fireConfettiFromElement(tierRefs.current[activeTierIndex])
         }
         prevTierIndex.current = activeTierIndex
     }, [activeTierIndex])
@@ -75,75 +93,124 @@ const ProductRateBlock = ({
             <div className="border-b-2 border-dark dark:border-white pb-2 mb-4">
                 <span className="font-bold text-primary">{name}</span>
             </div>
-            <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-6 @2xl:gap-10 items-start">
-                <div className="space-y-px">
-                    {/* Header */}
-                    <div className="flex items-center justify-between px-4 py-2 bg-black/10 dark:bg-white/10 rounded-md font-bold">
-                        <span className="text-sm text-black dark:text-white">Volume</span>
-                        <span className="text-sm text-black dark:text-white">/{unit}</span>
-                    </div>
-                    {/* Rows */}
-                    {billingTiers.map((tier: any, i: number) => {
-                        const isFree = parseFloat(tier.unit_amount_usd) === 0
-                        const isActive = i === activeTierIndex
-                        const prev = i > 0 ? billingTiers[i - 1] : null
-                        const isLast = !tier.up_to
+            <div className="grid grid-cols-1 @2xl:grid-cols-10 gap-6 @2xl:gap-8 items-start">
+                {description && (
+                    <div className="@2xl:col-span-3 text-sm text-primary/80 leading-relaxed">{description}</div>
+                )}
+                <div className={`space-y-6 ${description ? '@2xl:col-span-7' : '@2xl:col-span-10'}`}>
+                    {/* Tier table — collapses to 2 cols on narrow, expands to 12 cols at @md */}
+                    <div className="space-y-px">
+                        {/* Header (hidden on narrow — rows are self-labeling) */}
+                        <div className="hidden @md:grid grid-cols-12 items-center px-4 py-2 bg-black/10 dark:bg-white/10 rounded-md font-bold gap-2">
+                            <span className="col-span-4 text-sm text-black dark:text-white">Allocation</span>
+                            <span className="col-span-3 text-sm text-black dark:text-white">Unit price</span>
+                            <span className="col-span-3 text-sm text-right text-black dark:text-white">
+                                Your selection
+                            </span>
+                            <span className="col-span-2 text-sm text-right text-black dark:text-white">Subtotal</span>
+                        </div>
 
-                        let label = ''
-                        if (i === 0) label = `First ${formatCompactNumber(tier.up_to)}/mo`
-                        else if (isLast) label = `${formatCompactNumber(prev?.up_to)}+`
-                        else label = `${formatCompactNumber(prev?.up_to)} – ${formatCompactNumber(tier.up_to)}`
+                        {billingTiers.map((tier: any, i: number) => {
+                            const isFree = parseFloat(tier.unit_amount_usd) === 0
+                            const isActive = i === activeTierIndex
+                            const prev = i > 0 ? billingTiers[i - 1] : null
+                            const isLast = !tier.up_to
 
-                        return (
-                            <div
-                                key={i}
-                                className={`flex items-center justify-between px-4 py-1.5 rounded-md ${
-                                    isActive ? 'bg-yellow/30 dark:bg-yellow/30 ' : 'transition-colors'
-                                }`}
-                            >
-                                <span className={`text-sm ${isActive ? 'font-bold text-primary' : 'text-primary/70'}`}>
-                                    {label}
-                                </span>
-                                <span
-                                    className={`text-sm font-bold tabular-nums font-mono ${
-                                        isFree ? 'text-green' : isActive ? 'text-primary' : 'text-primary/70'
+                            let label = ''
+                            if (i === 0) label = `First ${formatCompactNumber(tier.up_to)} ${unit}s/mo`
+                            else if (isLast) label = `${formatCompactNumber(prev?.up_to)}+`
+                            else label = `${formatCompactNumber(prev?.up_to)}-${formatCompactNumber(tier.up_to)}`
+
+                            const tierBreakdown = costByTier?.[i]
+                            const tierEvents = tierBreakdown?.eventsInThisTier ?? 0
+                            const tierCost = tierBreakdown?.tierCost ?? 0
+
+                            return (
+                                <div
+                                    key={i}
+                                    className={`grid grid-cols-2 @md:grid-cols-12 items-center gap-x-2 gap-y-1 px-4 py-1.5 rounded-md ${
+                                        isActive ? 'bg-yellow/30 dark:bg-yellow/30 ' : 'transition-colors'
                                     }`}
                                 >
-                                    {isFree ? 'Free' : formatPrice(tier.unit_amount_usd)}
-                                </span>
-                            </div>
-                        )
-                    })}
-                </div>
+                                    {/* Allocation — narrow: row 1 left | @md: col 1 */}
+                                    <span
+                                        ref={(el) => {
+                                            tierRefs.current[i] = el
+                                        }}
+                                        className={`order-1 col-span-1 @md:col-span-4 text-sm ${
+                                            isActive ? 'font-bold text-primary' : 'text-primary/70'
+                                        }`}
+                                    >
+                                        {label}
+                                    </span>
 
-                {/* Right: slider */}
-                <div className="-mr-4">
-                    <div className="flex items-center justify-between mb-2 pr-4">
-                        <div className="flex items-center gap-1.5">
-                            <NumericFormat
-                                inputClassName="bg-primary text-center text-lg font-bold border border-primary hover:border-button dark:border-dark rounded-sm py-1 px-1 min-w-[30px] max-w-[150px]"
-                                value={volume}
-                                thousandSeparator=","
-                                onValueChange={({ floatValue }) => {
-                                    if (floatValue !== undefined) setVolume(Math.round(floatValue))
-                                }}
-                                customInput={AutosizeInput}
-                            />
-                            <span className="text-sm text-primary/60">{unit}s/mo</span>
-                        </div>
-                        <span className="text-base font-bold text-primary tabular-nums">{formatUSD(cost)}</span>
+                                    {/* Your selection — narrow: row 1 right | @md: col 3 */}
+                                    <span
+                                        className={`order-2 @md:order-3 col-span-1 @md:col-span-3 text-sm text-right font-code tabular-nums ${
+                                            isActive ? 'text-primary' : 'text-primary/70'
+                                        }`}
+                                    >
+                                        {tierEvents.toLocaleString()}
+                                    </span>
+
+                                    {/* Price — narrow: row 2 left | @md: col 2 */}
+                                    <span
+                                        className={`order-3 @md:order-2 col-span-1 @md:col-span-3 text-sm tabular-nums ${
+                                            isFree ? 'text-green' : isActive ? 'text-primary' : 'text-primary/70'
+                                        }`}
+                                    >
+                                        {isFree ? (
+                                            <strong>Free</strong>
+                                        ) : (
+                                            <>
+                                                <strong>{formatPrice(tier.unit_amount_usd)}</strong>
+                                                <span className="opacity-70">/{unit}</span>
+                                            </>
+                                        )}
+                                    </span>
+
+                                    {/* Subtotal — narrow: row 2 right | @md: col 4 */}
+                                    <span
+                                        className={`order-4 col-span-1 @md:col-span-2 text-sm text-right font-bold tabular-nums ${
+                                            isActive ? 'text-primary' : 'text-primary/70'
+                                        }`}
+                                    >
+                                        {formatUSD(tierCost, hasFractionalSubtotal)}
+                                    </span>
+                                </div>
+                            )
+                        })}
                     </div>
-                    <LogSlider
-                        stepsInRange={100}
-                        marks={sliderConfig.marks}
-                        min={sliderConfig.min}
-                        max={sliderConfig.max}
-                        onChange={(value) => setVolume(Math.round(sliderCurve(value)))}
-                        value={inverseCurve(volume)}
-                    />
-                    <p className="text-sm text-green font-semibold mt-8">
-                        First {sliderConfig.min.toLocaleString()} {unit}s free –&nbsp;<em>every month!</em>
-                    </p>
+
+                    {/* Slider + input + per-block total (sits below the matrix so the running subtotal trails the breakdown) */}
+                    <div className="pl-4 pr-1">
+                        <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-1.5">
+                                <NumericFormat
+                                    inputClassName="bg-primary text-center text-lg font-bold border border-primary hover:border-button dark:border-dark rounded-sm py-1 px-1 min-w-[30px] max-w-[150px]"
+                                    value={volume}
+                                    thousandSeparator=","
+                                    onValueChange={({ floatValue }) => {
+                                        if (floatValue !== undefined) setVolume(Math.round(floatValue))
+                                    }}
+                                    customInput={AutosizeInput}
+                                />
+                                <span className="text-sm text-primary/60">{unit}s/mo</span>
+                            </div>
+                            <span className="text-base font-bold text-primary tabular-nums">{formatUSD(cost)}</span>
+                        </div>
+                        <LogSlider
+                            stepsInRange={100}
+                            marks={sliderConfig.marks}
+                            min={sliderConfig.min}
+                            max={sliderConfig.max}
+                            onChange={(value) => setVolume(Math.round(sliderCurve(value)))}
+                            value={inverseCurve(volume)}
+                        />
+                        <p className="text-sm text-green font-semibold mt-8 mb-0">
+                            First {sliderConfig.min.toLocaleString()} {unit}s free –&nbsp;<em>every month!</em>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -191,10 +258,11 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
         <section id={id} className="scroll-mt-40 not-prose @container">
             <h2 className="text-3xl font-bold text-primary mt-0 !mb-4">Calculate your cost</h2>
 
-            {/* Main product: rates left, slider right */}
+            {/* Main product */}
             {mainTiers.length > 0 && (
                 <ProductRateBlock
                     name={activeProduct.label || activeProduct.name || productData.label || productData.name}
+                    description={activeProduct.pricingDescription || productData?.pricingDescription}
                     billingTiers={mainTiers}
                     sliderConfig={
                         activeProduct.slider || {
@@ -216,6 +284,7 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
                     <div key={addon.key} className="mt-8">
                         <ProductRateBlock
                             name={addon.label}
+                            description={addon.pricingDescription}
                             billingTiers={addon.tiers}
                             sliderConfig={addon.sliderConfig}
                             initialVolume={addon.volume || addon.sliderConfig?.min || 0}

@@ -39,6 +39,8 @@ export const sessionReplay = {
     wizardSupport: true,
     includeAddonRates: true,
     shortDescription: 'Watch people use your product',
+    pricingDescription:
+        'Web session recordings capture clicks, scrolls, console logs, and network calls so you can replay exactly what users did in your product.',
     seo: {
         title: 'Session Replay – Debug and analyze sessions with PostHog',
         description:
@@ -173,6 +175,8 @@ export const sessionReplay = {
         {
             key: 'mobile_replay',
             label: 'Mobile recordings',
+            pricingDescription:
+                'Replay native iOS, Android, React Native, and Flutter sessions. Billed separately from web recordings with its own free tier.',
             sliderConfig: {
                 marks: [2500, 10000, 50000, 150000, 500000],
                 min: 2500,
