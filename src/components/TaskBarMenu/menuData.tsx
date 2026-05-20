@@ -249,6 +249,13 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
             mobileDestination: '/products',
         },
         {
+            type: 'item',
+            label: 'Agent skills',
+            link: '/skills',
+            icon: <Icons.IconLightBulb className="size-4 text-yellow" />,
+            mobileDestination: '/skills',
+        },
+        {
             type: 'separator',
         },
         {

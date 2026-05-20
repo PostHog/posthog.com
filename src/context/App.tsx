@@ -411,6 +411,22 @@ const appSettings: AppSettings = {
             },
         },
     },
+    '/skills': {
+        size: {
+            min: {
+                width: 900,
+                height: 560,
+            },
+            max: {
+                width: 1200,
+                height: 900,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/session-replay': {
         mesh: 'yellow',
     },
