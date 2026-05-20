@@ -155,6 +155,8 @@ If the package has already been published, you can configure trusted publishing 
 
 This bootstraps npm trusted publishing for the package so future automated releases can publish successfully.
 
+> **Casing matters when configuring the trusted publisher.** npm validates the GitHub organization, repository, and workflow filename against the values GitHub puts in the OIDC token, and those values are case-sensitive. The PostHog GitHub organization is `PostHog` (capital `P` and `H`) — entering `posthog` causes the publish to fail with a misleading `404 Not Found` from npm, even though the package and the workflow exist. Use `PostHog` exactly when setting up or editing the trusted publisher, both via `setup-npm-trusted-publish` and in the npm package settings UI.
+
 ### 7. Update the README
 
 Add a section to your SDK's README explaining that releases are semi-automatic and link to the `#approvals-client-libraries` Slack channel where approval requests are posted.

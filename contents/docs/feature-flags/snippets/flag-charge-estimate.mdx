@@ -20,7 +20,7 @@ For example, if on refresh, you see 2 `/flags` requests per pageview and you hav
 
 ##### Without local evaluation 
 
-If you're not using [local evaluation](/docs/feature-flags/local-evaluation), a request to get feature flags is made every time your backend evaluates flags. For example, in Python, each `posthog.evaluate_flags()` call makes one `/flags` request. Your estimated usage is based on how often you call this code.
+If you're not using [local evaluation](/docs/feature-flags/local-evaluation), a request to get feature flags is made every time your backend evaluates flags. For example, each server-side snapshot evaluation call like `evaluateFlags()` or Python's `posthog.evaluate_flags()` makes one `/flags` request. Your estimated usage is based on how often you call this code.
 
 ##### With local evaluation
 
