@@ -120,13 +120,13 @@ Minimal example for `posthog` content type (one line per event):
   - AWS access key ID
   - AWS secret access key
   - Content Type (choose one of: `amplitude`, `mixpanel`, or `posthog`; your files must match this schema)
-  - Endpoint URL (optional — only needed for [S3-compatible storage](#s3-compatible-storage))
+  - Endpoint URL (optional – only needed for [S3-compatible storage](#s3-compatible-storage))
 
 When using the `amplitude` content type, you can also configure the same Amplitude-specific options available for [direct imports](#direct-imports-mixpanel-amplitude), including whether to import events, generate identify events, and generate group identify events.
 
 ### S3-compatible storage
 
-S3 imports can source data from any S3-compatible blob storage by providing an **Endpoint URL**. The endpoint must be publicly accessible (internal or private IPs are not allowed).
+You can source data from any S3-compatible blob storage by providing an **Endpoint URL**. The endpoint must resolve to a public address – internal or private IPs aren't allowed.
 
 #### Cloudflare R2
 - Set the **Endpoint URL** to `https://<ACCOUNT_ID>.r2.cloudflarestorage.com` (replace `<ACCOUNT_ID>` with your Cloudflare account ID).
