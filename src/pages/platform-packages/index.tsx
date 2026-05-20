@@ -112,10 +112,16 @@ export default function PlatformPackages() {
                                         <p className="text-secondary mb-2">{addon.description}</p>
                                         {plan?.flat_rate && (
                                             <div className="flex items-baseline mt-auto">
-                                                <strong className="text-lg">
-                                                    ${plan.unit_amount_usd.replace('.00', '')}
-                                                </strong>
-                                                <span className="text-sm opacity-60 ml-1">/mo</span>
+                                                {addon.type === 'enterprise' ? (
+                                                    <strong className="text-lg">Contact us</strong>
+                                                ) : (
+                                                    <>
+                                                        <strong className="text-lg">
+                                                            ${plan.unit_amount_usd.replace('.00', '')}
+                                                        </strong>
+                                                        <span className="text-sm opacity-60 ml-1">/mo</span>
+                                                    </>
+                                                )}
                                             </div>
                                         )}
                                     </div>
