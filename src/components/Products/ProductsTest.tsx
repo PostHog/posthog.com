@@ -82,7 +82,7 @@ const sections = [
                 colSpan: 2,
                 columns: [
                     ['feature_flags', 'experiments', 'no_code_ab_testing', 'early_access', 'endpoints', 'webhooks'],
-                    ['workflows_emails', 'surveys', 'product_tours', 'support', 'user_interviews'],
+                    ['workflows_emails', 'surveys', 'support', 'user_interviews'],
                 ],
             },
         ],
