@@ -190,7 +190,6 @@ const productCategories = [
             'workflows_emails',
             'webhooks',
             'endpoints',
-            'product_tours',
             'early_access',
         ],
     },
