@@ -33,7 +33,7 @@ The interesting part for us is the second-order effect: the agent doesn't carry 
 
 ## The hackathon
 
-Every year we run a company-wide [hackathon](/newsletter/hackathons) at our company offsite. A lot of what's now PostHog ([session replay](/session-replay), the [data warehouse](/data-warehouse), [logs](/logs), and more) started this way. Smaller offsites happen throughout the year for individual teams, and this one was a joint offsite for the [Analytics Platform](/teams/analytics-platform) and [Query Performance](/teams/query-performance) teams, in Lisbon. Our hackathon project was: do Karpathy's thing, but for ClickHouse query performance.
+Every year, we run [hackathons](/newsletter/hackathons) at company offsites. A lot of what's now PostHog ([session replay](/session-replay), the [data warehouse](/data-warehouse), [logs](/logs), and more) started this way. At a smaller joint team offsite for the [Analytics Platform](/teams/analytics-platform) and [Query Performance](/teams/query-performance) teams in Lisbon, our hackathon project was to do Karpathy's thing, but for ClickHouse query performance.
 
 The stack we used:
 
