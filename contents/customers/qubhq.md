@@ -11,11 +11,11 @@ The economics work because QubHQ runs its own advertising network. Restaurant ow
 
 There's just one problem with that model: it requires building the kind of ad infrastructure that you usually only find on platforms like Google and Meta, from scratch.
 
-QubHQ, a self-funded startup based in Romania, with a 1.5-person engineering team and no outside investors built their own on [PostHog Endpoints](https://posthog.com/endpoints).
+QubHQ, a self-funded startup based in Romania, with a 1.5-person engineering team and no outside investors built their own on [PostHog Endpoints](/endpoints).
 
 <OSQuote
   customer="qubhq"
-  author="Gheorghe Avram"
+  author="gheorghe_avram"
   quote={2}
 />
 
@@ -65,6 +65,6 @@ Building all of this from scratch: ingestion, processing, filtering, dashboards,
 What's next for QubHQ
 ---------------------
 
-Using the infrastructure they’ve developed, QubHQ plans to expand beyond Romania and into adjacent service-industry products. And, because of some of the heavier real-time bidding workloads, the team is also evaluating PostHog's [Managed Warehouse](https://posthog.com/data-stack/managed-warehouse) to help them scale up.
+Using the infrastructure they’ve developed, QubHQ plans to expand beyond Romania and into adjacent service-industry products. And, because of some of the heavier real-time bidding workloads, the team is also evaluating PostHog's [Managed Warehouse](/data-stack/managed-warehouse) to help them scale up.
 
 For Gheorghe, flexibility is the point of using PostHog. PostHog handles the events layer, feature flags, and error tracking, and whenever QubHQ wants, they can pull data out and run it themselves without re-platforming everything else.
