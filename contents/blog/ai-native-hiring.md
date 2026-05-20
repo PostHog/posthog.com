@@ -44,7 +44,7 @@ Shoutout <TeamMember name="Tara Alcantarilla-Howard" photo /> and <TeamMember na
 
 ### 2. Talent partner
 
-A traditional talent partner is always on. They're at the coalface internally and externally, managing lots of people, having difficult conversations, and smiling through all of it. They work late doing calls to find the right person, chase feedback from hiring managers, and reply to rejected candidates at 11pm. They often burn out quickly. 
+A traditional talent partner is always on. They're on the frontline internally and externally, managing lots of people, having difficult conversations, and smiling through all of it. They work late doing calls to find the right person, chase feedback from hiring managers, and reply to rejected candidates at 11pm. They often burn out quickly. 
 
 The AI-native talent partner creates a feedback summary generator that takes all the feedback on why we won’t pass somebody, runs it through an agent that knows our tone of voice and delivers solid, friendly and accurate feedback to candidates. They use the Ashby MCP server to pull all the qualitative feedback on our strongest performing hires and run analysis in Claude to show us the trends of people that do great at PostHog. They also run the same analysis on hires that have not worked out and how that matched the feedback from our hiring process.
 
