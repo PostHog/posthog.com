@@ -423,7 +423,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
-    },
     gankster: {
         name: 'Gankster',
         toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
@@ -771,31 +770,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 },
                 quotes: [
                     'One thing I have to say is that PostHog’s support is awesome. There’s no outsourced first line or call centers — you get real answers fast, straight from the actual engineers. If you find a bug, they show you the GitHub issue and you can literally watch it get fixed. I love that.',
-                ],
-            },
-        },
-    },
-        qubhq: {
-        name: 'QubHQ',
-        toolsUsed: ['endpoints', 'error_tracking', 'feature_flags', 'product_analytics', 'session_replay', 'surveys'],
-        industries: ['Ad Tech', 'Hospitality', 'Digital Signage'],
-        users: ['Engineering'],
-        notes: 'A digital menu platform with its own ad network',
-        featured: false,
-        logo: {
-            light: CloudPeekLogo,
-            dark: CloudPeekLogoDark,
-        },
-        height: 10,
-        quotes: {
-            gheorghe_avram: {
-                name: 'Gheorghe Avram',
-                role: 'CTO',
-                image: {
-                    thumb: '/images/customers/craig-hollington.png',
-                },
-                quotes: [
-                    "This is the true power of PostHog, they give us the freedom to use our data wherever we want to, without the complexity of managing the infrastructure.",
                 ],
             },
         },
