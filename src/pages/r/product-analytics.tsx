@@ -12,9 +12,9 @@ import { SingleCodeBlock } from 'components/CodeBlock'
 import WistiaEmbed from 'components/WistiaEmbed'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import YCombinatorLogo from 'components/CustomerLogos/YCombinatorLogo'
-import HasuraLogo from 'components/CustomerLogos/HasuraLogo'
-import ContraLogo from 'components/CustomerLogos/ContraLogo'
-import SpeakeasyLogo from 'components/CustomerLogos/SpeakeasyLogo'
+import SupabaseLogo from 'components/CustomerLogos/SupabaseLogo'
+import LovableLogo from 'components/CustomerLogos/LovableLogo'
+import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
 import { IconRewindPlay, IconToggle, IconDatabase } from '@posthog/icons'
 import { PlanComparison, QuestionsSlide } from 'components/Products/Slides'
 import { productAnalytics } from 'hooks/productData/product_analytics'
@@ -91,13 +91,11 @@ export default function ProductAnalyticsLanding(): JSX.Element {
             >
                 <div className="grid grid-cols-1 @lg:grid-cols-[1.2fr_1fr] gap-10 items-center mb-6 max-w-7xl mx-auto">
                     <div>
-                        <h1 className="text-3xl md:text-5xl !mb-4">
-                            Product analytics that shows you what's actually happening
-                        </h1>
+                        <h1 className="text-3xl md:text-5xl !mb-4">Meet your users without leaving your editor</h1>
                         <p className="text-lg md:text-xl mb-6 text-secondary">
-                            Track every user action from day one, then slice it any way you need. Funnels, retention
-                            curves, user paths, lifecycle charts, or raw SQL. Use PostHog MCP to turn your AI agents
-                            into hogpilled analysts. No UI navigating required.
+                            PostHog MCP plugs your product data directly into Claude Code, Cursor, Codex, and Windsurf.
+                            Ask why sign-ups dropped, build a funnel, or write a retention query. All from the same
+                            tools you ship with. No dashboard spelunking required.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
                             <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
@@ -110,7 +108,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                                 PostHog MCP
                             </Link>{' '}
                             to Cursor, Claude Code, Codex, or Windsurf and query your product data without leaving your
-                            editor. First 1M events/month are free — no credit card, no per-seat pricing.
+                            editor. First 1M events/month are free. No credit card, no per-seat pricing.
                         </p>
                     </div>
                     <div className="flex justify-center">
@@ -124,10 +122,10 @@ export default function ProductAnalyticsLanding(): JSX.Element {
 
                 <div className="mb-12 max-w-7xl mx-auto">
                     <div className="flex flex-wrap items-center gap-x-12 gap-y-6 text-primary dark:text-primary-dark">
+                        <SupabaseLogo className="fill-current object-contain max-w-full h-8" />
+                        <LovableLogo className="fill-current object-contain max-w-full h-8" />
+                        <ElevenLabsLogo className="fill-current object-contain max-w-full h-8" />
                         <YCombinatorLogo className="fill-current object-contain max-w-full h-8" />
-                        <HasuraLogo className="fill-current object-contain max-w-full h-8" />
-                        <ContraLogo className="fill-current object-contain max-w-full h-8" />
-                        <SpeakeasyLogo className="fill-current object-contain max-w-full h-8" />
                     </div>
                     <p className="text-xs mt-3 !mb-0">
                         <span className="font-semibold">A few PostHog Product Analytics customers.</span>
