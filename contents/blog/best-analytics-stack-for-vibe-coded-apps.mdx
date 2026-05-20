@@ -1,5 +1,5 @@
 ---
-title: The best analytics tool stack for vibe coded apps
+title: The best analytics tool stack for vibe-coded apps
 date: 2026-05-19
 rootPage: /blog
 sidebar: Blog
@@ -20,19 +20,19 @@ seo:
 
 If you're vibe coding your way to a product, the temptation is to defer analytics until "later." Don't. There's no point in shipping fast if you don't learn fast, and you can't learn anything from metrics that aren't being tracked.
 
-The good news is that you don't need a data team to get started; you only need three things: **product analytics** (what users do in your app), **web analytics** (where they came from), and – if you're shipping AI features, which you probably are – **LLM observability** (how your model is actually behaving in production).
+You don't need a data team to get started; you only need three things: **product analytics** (what users do in your app), **web analytics** (where they came from), and – if you're shipping AI features, which you probably are – **LLM observability** (how your LLM is actually behaving in production).
 
 This guide walks through all three, what to look for in each, and the best tools to use. 
 
 <details>
 <summary>What's a "vibe coded" app?</summary>
 
-The term was coined by Andrej Karpathy in early 2025 and refers to building software by describing what you want in plain language and letting AI write most of the code. By 2026, [92% of US developers use AI coding tools daily](https://www.hostinger.com/blog/vibe-coding-statistics) and [41% of all new code is AI-generated](https://www.taskade.com/blog/state-of-vibe-coding-2026). 
+Vibe coding is building software by describing what you want in plain language and letting AI write most of the code. The term was coined by Andrej Karpathy in early 2025. By 2026, [92% of US developers use AI coding tools daily](https://www.hostinger.com/blog/vibe-coding-statistics) and [41% of all new code is AI-generated](https://www.taskade.com/blog/state-of-vibe-coding-2026). 
 
 Vibe coded apps tend to share a few traits:
 
 - **Built fast**, often by one person or a tiny team, using tools like Cursor, Claude Code, Lovable, v0, Bolt.new, Replit, or Windsurf
-- **Stacked on opinionated infrastructure** (Next.js + Vercel + Supabase for example)
+- **Stacked on opinionated infrastructure** like Next.js + Vercel + Supabase for example
 - **Often AI-native**, with at least one LLM call somewhere in the product
 - **Built by people who don't necessarily have engineering or data infrastructure backgrounds** – [63% of vibe coding users are non-developers](https://www.taskade.com/blog/state-of-vibe-coding-2026)
 
@@ -45,7 +45,7 @@ This guide is written with that profile in mind: you want analytics that's quick
 
 Because vibe coding makes shipping cheap, but it doesn't [make decisions for you](/founders/product-market-fit-game). 
 
-You can prompt your way to ten features in a weekend, but only data tells you which one users actually care about. Without it, you're shipping into the oblivion – and as products get cheaper to build, the gap between "I have an MVP" and "I have a product people pay for" is more the product learning curve rather than coding speed.
+You can prompt your way to ten features in a weekend, but only data tells you which one users actually care about. As products get cheaper to build, the gap between "I have an MVP" and "I have a product people pay for" is more the product learning curve rather than coding speed.
 
 Analytics is also how you catch the failure modes vibe coding introduces; watching real session replays and tracking real errors is how you find the bugs your AI agent confidently shipped.
 
@@ -62,7 +62,7 @@ Analytics is also how you catch the failure modes vibe coding introduces; watchi
 - Of the users who signed up last week, how many came back?
 - Do users from X channel behave differently than users from Y?
 
-If you're vibe coding, this is the layer you most can't skip. You'll be shipping features faster than you can think, and product analytics is the only way to tell which ones are working.
+If you're vibe coding, this is the layer you can't skip. You'll be shipping features faster than you can think, and product analytics is the only way to tell which ones are working.
 
 ### When should vibe coders set up product analytics?
 
@@ -76,25 +76,23 @@ The other reason to set up early: [activation metrics](/product-engineers/activa
 
 1. **PostHog**
 
-[PostHog](/) bundles product analytics with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [LLM observability](/llm-analytics), and more – which means it covers all layers of this guide on its own. The free tier includes 1M events per month, and over 90% of users pay $0.
+[PostHog](/) bundles [product analytics](/product-analytics] with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [LLM observability](/llm-analytics), and more – which means it covers all layers of this guide on its own. The free tier includes 1M events per month, and over 90% of users pay $0.
 
 For vibe coders specifically, three things stand out:
 
-- **[The PostHog wizard](/wizard)** detects your framework and installs the right SDK with one terminal command, so you can literally have your AI agent set it up for you.
+1. **[The PostHog wizard](/wizard)** detects your framework and installs the right SDK with one terminal command, so you can basically vibe code a correct implementation.
 
 <WizardCTA />
 
-- **[Autocapture](/docs/product-analytics/autocapture)** means no tracking plan needed.
-- **[An MCP server](/docs/model-context-protocol)** lets you pipe your PostHog data into Claude Code, Cursor, or any other AI workflow, so you can ask "which feature drove the most retention this week?" in the same place you're writing code.
+2. **[Autocapture](/docs/product-analytics/autocapture)** means no tracking plan needed.
+3. **[An MCP server](/docs/model-context-protocol)** lets you pipe your PostHog data into Claude Code, Cursor, or any other AI workflow, so you can ask "which feature drove the most retention this week?" in the same place you're writing code.
 
-Pricing is per-product and event-based, with [billing limits](/docs/billing/estimating-usage-costs) so you never get a surprise bill. 
-
-Early-stage startups can also apply for the [PostHog for Startups program](/startups) and get $50,000 in credits.
+Pricing is per-product and event-based, with [billing limits](/docs/billing/estimating-usage-costs) so you never get a surprise bill. Early-stage startups can also apply for the [PostHog for Startups program](/startups) and get $50,000 in credits.
 
 <details>
 <summary>Using Product Analytics with the PostHog MCP</summary>
 
-Ask Claude Code or Cursor things like *"how many unique users signed up in the last 7 days, broken down by day?"* or *"what are the most common paths users take after signing up?"* and the agent will run the right [trends](/docs/product-analytics/trends), [funnel](/docs/product-analytics/funnels), or [paths](/docs/product-analytics/paths) query against your data. 
+Ask your MCP client things like *"how many unique users signed up in the last 7 days, broken down by day?"* or *"what are the most common paths users take after signing up?"* and the agent will run the right [trends](/docs/product-analytics/trends), [funnel](/docs/product-analytics/funnels), or [paths](/docs/product-analytics/paths) query against your data. 
 
 You can also build cohorts (*"create a dynamic cohort of users who completed checkout more than 5 times in the last 30 days"*), spin up insights and dashboards, or write SQL to dig into edge cases without leaving your editor. 
  
@@ -206,7 +204,7 @@ It answers questions like:
 
 The first time you ship a feature that calls an LLM API. 
 
-AI features are uniquely good at sneakily costing you money – a single bug in a retry loop can burn through a daily budget overnight, and hallucinations look like working code until a user reports them. 
+AI features burn money quietly – a single bug in a retry loop can burn through a daily budget overnight, and hallucinations look like working code until a user reports them. 
 
 You also want this in place before your launch traffic hits, not after. Debugging a flaky AI feature without traces is significantly harder than just having them from the start.
 
@@ -214,8 +212,8 @@ A few things to look for:
 
 - **Cost and token tracking** per request, per user, per model
 - **Trace visibility** for multi-step workflows (especially if you're building agents)
-- **Evals** – being able to score outputs and catch regressions
-- **Low integration friction** – ideally something that works with raw API calls, not just LangChain
+- **Evals** to score outputs and catch regressions
+- **Low integration friction** so that it works with raw API calls, not just LangChain
 
 ### Best LLM observability tools for vibe coded apps
 
@@ -223,7 +221,7 @@ A few things to look for:
 
 [PostHog's LLM observability](/llm-analytics) tracks cost, latency, token usage, model performance, and output quality alongside your product analytics. The advantage: you can correlate AI feature usage with retention and conversion in the same tool. 
 
-It also includes [evals](/docs/ai-engineering) (so you can score model outputs and catch regressions when you tweak a prompt) and [prompt management](/docs/ai-engineering) (versioning, A/B testing, and rollback for production prompts).
+It also includes [evals](/docs/llm-analytics/evaluations) (so you can score model outputs and catch regressions when you tweak a prompt) and [prompt management](/docs/llm-analytics/prompts) (versioning, A/B testing, and rollback for production prompts).
 
 The free tier includes 100K LLM observability events/mo, and it works with OpenAI, Anthropic, and other major providers through a small SDK wrapper.
 
@@ -232,7 +230,7 @@ The free tier includes 100K LLM observability events/mo, and it works with OpenA
 
 Ask your agent things like *"what are my total LLM costs by model over the last 30 days?"* or *"pull the trace for the slowest generation yesterday"* and get answers without leaving your editor. 
 
-You can also manage [evals](/docs/ai-engineering) (*"create an evaluation that scores responses for hallucination"*), spin up [prompts](/docs/ai-engineering) with versioning, and summarize traces to debug agent runs – useful when you're iterating on prompts and want fast feedback on what's actually shipping.
+You can also manage evals (*"create an evaluation that scores responses for hallucination"*), spin up prompts with versioning, and summarize traces to debug agent runs – useful when you're iterating and want fast feedback on what's actually shipping.
 
 [See the full list of available tools](/docs/model-context-protocol).
 
@@ -283,7 +281,7 @@ The [AI setup wizard](/wizard) gets you instrumented in a few minutes and [the M
 
 If you want to take it for a spin, you can [start free](/) – no credit card needed.
 
-And if you want your product to *self-heal* (aka pick up signals from errors, session replays, surveys, and product analytics and automatically turn them into actionable PRs), take a look at [PostHog Code](/code). 
+And if you want your product to *drive itself* (aka pick up signals from errors, session replays, surveys, and product analytics and automatically turn them into actionable PRs), take a look at [PostHog Code](/code). 
 
 It's the next step beyond reactive analytics: instead of waiting for you to notice a bug or churn signal, it proactively spots them and opens a pull request to fix it.
 
@@ -294,14 +292,14 @@ It's the next step beyond reactive analytics: instead of waiting for you to noti
 <details>
 <summary>Do I really need analytics if I'm just shipping a weekend project?</summary>
 
-If you genuinely don't care whether the project succeeds, no. But the moment you want to know "did anyone actually use this?" or "where did my signups come from?",  that's analytics. And it costs nothing to set up the free tier of [PostHog](/), Plausible's trial, or Helicone's free tier, so the bar to start is very low.
+If you genuinely don't care whether the project succeeds, no. But the moment you want to know "did anyone actually use this?" or "where did my signups come from?", that's analytics. And it costs nothing to set up the free tier of [PostHog](/), Plausible's trial, or Langfuse's free tier, so the bar to start is very low.
 
 </details>
 
 <details>
 <summary>Can my AI agent set up analytics for me?</summary>
 
-Yes. The [PostHog wizard](/wizard) is built for exactly this – paste one terminal command into Cursor or Claude Code, and it'll detect your framework, install the right SDK, and configure tracking. 
+Yes. The [PostHog wizard](/wizard) is built for exactly this – paste and run one terminal command and it'll detect your framework, install the right SDK, and configure tracking. 
 
 Most analytics tools also have clear docs that AI agents handle well.
 
@@ -310,7 +308,7 @@ Most analytics tools also have clear docs that AI agents handle well.
 <details>
 <summary>I'm using Lovable / Bolt / Replit. Will these tools work?</summary>
 
-Yes. PostHog, Plausible, Fathom, and most product analytics tools work via a JavaScript snippet you paste into your site's `<head>` tag, which all major vibe coding platforms support. For LLM observability, Helicone works with a one-line base URL change, and PostHog's LLM observability has a small SDK wrapper around OpenAI and Anthropic clients.
+Yes. PostHog, Plausible, Fathom, and most product analytics tools work via a JavaScript snippet you paste into your site's `<head>` tag, which all major vibe coding platforms support. For LLM observability, Helicone works with a one-line base URL change, and PostHog's LLM observability has a small SDK wrapper around OpenAI, Anthropic, or other providers.
 
 </details>
 
@@ -331,7 +329,7 @@ If you have a single LLM call in a simple flow, you can probably get away with l
 <details>
 <summary>What about error tracking and session replay?</summary>
 
-For vibe coded apps, both are extremely useful – especially because AI-generated code [tends to look correct but isn't always reliable](https://www.hostinger.com/blog/vibe-coding-statistics). 
+For vibe coded apps, both are extremely useful – especially because AI-generated code tends to look correct but isn't always reliable. 
 
 Session replay shows you exactly what users were doing when something broke, and error tracking surfaces the bugs your AI agent confidently shipped. 
 
