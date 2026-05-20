@@ -307,7 +307,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
                 categoryItems.unshift({
                     type: 'item' as const,
                     label: 'MCP',
-                    link: '/docs/model-context-protocol',
+                    link: '/mcp',
                     icon: React.createElement(Icons.IconPlug, { className: 'size-4 text-gray' }),
                 })
             }
@@ -643,6 +643,12 @@ export function useMenuData(): MenuType[] {
                 </>
             ),
             items: [
+                {
+                    type: 'item',
+                    label: 'MCP',
+                    link: '/mcp',
+                    icon: <Icons.IconPlug className="size-4 text-purple" />,
+                },
                 {
                     type: 'item',
                     label: 'DeskHog',
@@ -1125,6 +1131,7 @@ export function useMenuSelectOptions() {
             items: [
                 { value: 'sparks-joy', label: 'Things that spark joy', icon: <IconSparksJoy className="size-4" /> },
                 { value: 'merch', label: 'Merch' },
+                { value: 'mcp', label: 'MCP' },
                 { value: 'deskhog', label: 'DeskHog' },
                 {
                     value: 'trash',
