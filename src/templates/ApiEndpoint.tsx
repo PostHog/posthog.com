@@ -647,6 +647,17 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
 
                     <Endpoints paths={paths} containerRef={contentContainerRef} />
 
+                    {(previousURL || nextURL) && (
+                        <div className="mt-8 flex gap-4">
+                            {previousURL && (
+                                <CallToAction to={previousURL} type="outline">
+                                    ← Previous page
+                                </CallToAction>
+                            )}
+                            {nextURL && <CallToAction to={nextURL}>Next page →</CallToAction>}
+                        </div>
+                    )}
+
                     {items.map((item, index) => {
                         const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
 
