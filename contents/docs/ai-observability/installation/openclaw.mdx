@@ -118,6 +118,6 @@ All options go under the `config` key inside the `posthog` plugin entry:
 
 The plugin captures three types of events:
 
-- **`$ai_generation`** — Every LLM call, including model, provider, token usage, cost, latency, and input/output messages (in [OpenAI chat format](/docs/llm-analytics/generations)).
-- **`$ai_span`** — Each tool execution, including tool name, input parameters, output result, duration, and parent generation ([learn more](/docs/llm-analytics/spans)).
-- **`$ai_trace`** — Completed message cycles with aggregated token totals and latency ([learn more](/docs/llm-analytics/traces)).
+- **`$ai_generation`** — Every LLM call, including model, provider, token usage, cost, latency, and input/output messages (in [OpenAI chat format](/docs/ai-observability/generations)).
+- **`$ai_span`** — Each tool execution, including tool name, input parameters, output result, duration, and parent generation ([learn more](/docs/ai-observability/spans)).
+- **`$ai_trace`** — Completed message cycles with aggregated token totals and latency ([learn more](/docs/ai-observability/traces)).

@@ -33,7 +33,7 @@ Generations are represented using the event name `$ai_generation`. Each generati
 
 PostHog automatically calculates costs by matching your model and provider against pricing data. We use OpenRouter's pricing as our primary source, with fallback to manually maintained pricing for additional models.
 
-You can also [set custom pricing](/docs/llm-analytics/calculating-costs) if you have negotiated rates or use unsupported models.
+You can also [set custom pricing](/docs/ai-observability/calculating-costs) if you have negotiated rates or use unsupported models.
 
 ### Message roles
 
@@ -69,8 +69,8 @@ Here's a breakdown of this hierarchy:
 
 | Term | Definition | Example |
 |------|------------|---------|
-| [Session](/docs/llm-analytics/sessions) | Groups multiple traces together | A user's conversation thread |
-| [Trace](/docs/llm-analytics/traces) | Contains generations and spans for a single request | One chatbot message and response |
-| [Span](/docs/llm-analytics/spans) | Tracks an operation within a trace | A retrieval step or function call |
-| [Generation](/docs/llm-analytics/generations) | An LLM call, tracked as `$ai_generation` events | Sending a prompt to Claude |
-| [Embedding](/docs/llm-analytics/embeddings) | Converts text into vectors | Vectorizing documents for RAG |
+| [Session](/docs/ai-observability/sessions) | Groups multiple traces together | A user's conversation thread |
+| [Trace](/docs/ai-observability/traces) | Contains generations and spans for a single request | One chatbot message and response |
+| [Span](/docs/ai-observability/spans) | Tracks an operation within a trace | A retrieval step or function call |
+| [Generation](/docs/ai-observability/generations) | An LLM call, tracked as `$ai_generation` events | Sending a prompt to Claude |
+| [Embedding](/docs/ai-observability/embeddings) | Converts text into vectors | Vectorizing documents for RAG |

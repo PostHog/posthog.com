@@ -112,9 +112,9 @@ Even with privacy mode off, sensitive keys in tool inputs/outputs (e.g. `api_key
 
 The extension captures three types of events:
 
-- **`$ai_generation`** — Every LLM call, including model, provider, token usage, cost, latency, and input/output messages (in [OpenAI chat format](/docs/llm-analytics/generations)).
-- **`$ai_span`** — Each tool execution (read, write, edit, bash, etc.), including tool name, input parameters, output result, and duration ([learn more](/docs/llm-analytics/spans)).
-- **`$ai_trace`** — Completed agent runs with aggregated token totals and latency ([learn more](/docs/llm-analytics/traces)).
+- **`$ai_generation`** — Every LLM call, including model, provider, token usage, cost, latency, and input/output messages (in [OpenAI chat format](/docs/ai-observability/generations)).
+- **`$ai_span`** — Each tool execution (read, write, edit, bash, etc.), including tool name, input parameters, output result, and duration ([learn more](/docs/ai-observability/spans)).
+- **`$ai_trace`** — Completed agent runs with aggregated token totals and latency ([learn more](/docs/ai-observability/traces)).
 
 ## Next steps
 
@@ -122,8 +122,8 @@ Now that you're capturing AI conversations, continue with the resources below to
 
 | Resource | Description |
 |----------|-------------|
-| [Basics](/docs/llm-analytics/basics) | Learn the basics of how LLM calls become events in PostHog. |
-| [Generations](/docs/llm-analytics/generations) | Read about the `$ai_generation` event and its properties. |
-| [Traces](/docs/llm-analytics/traces) | Explore the trace hierarchy and how to use it to debug LLM calls. |
-| [Spans](/docs/llm-analytics/spans) | Review spans and their role in representing individual operations. |
-| [Analyze LLM performance](/docs/llm-analytics/dashboard) | Learn how to create dashboards to analyze LLM performance. |
+| [Basics](/docs/ai-observability/basics) | Learn the basics of how LLM calls become events in PostHog. |
+| [Generations](/docs/ai-observability/generations) | Read about the `$ai_generation` event and its properties. |
+| [Traces](/docs/ai-observability/traces) | Explore the trace hierarchy and how to use it to debug LLM calls. |
+| [Spans](/docs/ai-observability/spans) | Review spans and their role in representing individual operations. |
+| [Analyze LLM performance](/docs/ai-observability/dashboard) | Learn how to create dashboards to analyze LLM performance. |

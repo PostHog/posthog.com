@@ -8,13 +8,13 @@ import { ProductVideo } from 'components/ProductVideo'
 <details>
 <summary>Requirements</summary>
 
-- **Traces or generations captured** – Set up LLM event capture using the [installation guide](/docs/llm-analytics/installation).
-- **AI data processing enabled** – Your organization must have AI data processing consent enabled, the same requirement as [trace summarization](/docs/llm-analytics/summarization).
+- **Traces or generations captured** – Set up LLM event capture using the [installation guide](/docs/ai-observability/installation).
+- **AI data processing enabled** – Your organization must have AI data processing consent enabled, the same requirement as [trace summarization](/docs/ai-observability/summarization).
 - **Automatic daily runs** – Clustering runs automatically based on your configured [clustering jobs](#managing-clustering-jobs). No manual setup is needed.
 
 </details>
 
-Clusters automatically group similar LLM [traces](/docs/llm-analytics/traces) or [generations](/docs/llm-analytics/generations) together, helping you discover patterns in how users interact with your LLM features without reading every conversation.
+Clusters automatically group similar LLM [traces](/docs/ai-observability/traces) or [generations](/docs/ai-observability/generations) together, helping you discover patterns in how users interact with your LLM features without reading every conversation.
 
 ## Why use clusters?
 
@@ -30,7 +30,7 @@ Clusters automatically group similar LLM [traces](/docs/llm-analytics/traces) or
 3. AI generates a title and description for each cluster.
 4. Metrics like average cost, latency, token usage, and error rate are computed per cluster.
 
-Enabled clustering jobs run automatically during the next scheduled cycle — no manual intervention needed beyond having [traces captured](/docs/llm-analytics/installation).
+Enabled clustering jobs run automatically during the next scheduled cycle — no manual intervention needed beyond having [traces captured](/docs/ai-observability/installation).
 
 ## Viewing clusters
 

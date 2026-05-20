@@ -34,7 +34,7 @@ First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-
 npx create-next-app@latest openai-observability
 ```
 
-After creating your app, go into the newly created `openai-observability` directory and install the PostHog [Node SDK](/docs/libraries/node) and `ai` [package](/docs/llm-analytics/installation) as well as OpenAI's [JavaScript SDK](https://platform.openai.com/docs/libraries/typescript-javascript-library).
+After creating your app, go into the newly created `openai-observability` directory and install the PostHog [Node SDK](/docs/libraries/node) and `ai` [package](/docs/ai-observability/installation) as well as OpenAI's [JavaScript SDK](https://platform.openai.com/docs/libraries/typescript-javascript-library).
 
 ```bash
 cd openai-observability

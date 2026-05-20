@@ -2,7 +2,7 @@
 title: Playground
 ---
 
-The playground lets you test and experiment with LLM prompts directly inside PostHog. Try different models, compare outputs side-by-side, tune parameters, and save your work to [prompt management](/docs/llm-analytics/prompts) or [evaluations](/docs/llm-analytics/evaluations) — all without writing code.
+The playground lets you test and experiment with LLM prompts directly inside PostHog. Try different models, compare outputs side-by-side, tune parameters, and save your work to [prompt management](/docs/prompt-management/prompts) or [evaluations](/docs/ai-evals/evaluations) — all without writing code.
 
 ## Why use the playground?
 
@@ -10,8 +10,8 @@ The playground lets you test and experiment with LLM prompts directly inside Pos
 - **Compare models side-by-side** — Run the same prompt across multiple models at once and compare output quality, latency, and token usage
 - **Tune parameters** — Adjust temperature, top-p, max tokens, reasoning effort, and thinking to see how they affect outputs
 - **Test tool calling** — Define function tools in JSON and see how models respond with tool calls
-- **Replay from traces** — Open any generation from [traces](/docs/llm-analytics/traces) in the playground to reproduce and iterate on real production interactions
-- **Save to prompts or evaluations** — Turn playground experiments into [managed prompts](/docs/llm-analytics/prompts) or [evaluations](/docs/llm-analytics/evaluations) when you're happy with the result
+- **Replay from traces** — Open any generation from [traces](/docs/ai-observability/traces) in the playground to reproduce and iterate on real production interactions
+- **Save to prompts or evaluations** — Turn playground experiments into [managed prompts](/docs/prompt-management/prompts) or [evaluations](/docs/ai-evals/evaluations) when you're happy with the result
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/playground_aa87472f03.png"
@@ -96,11 +96,11 @@ This is useful for:
 
 Click the save menu (prompt management icon next to the system prompt) to save or load prompts:
 
-- **Save as new prompt** — Creates a new [managed prompt](/docs/llm-analytics/prompts) from the current system prompt
-- **Save as new evaluation** — Creates a new [evaluation](/docs/llm-analytics/evaluations) with the prompt and model configuration
+- **Save as new prompt** — Creates a new [managed prompt](/docs/prompt-management/prompts) from the current system prompt
+- **Save as new evaluation** — Creates a new [evaluation](/docs/ai-evals/evaluations) with the prompt and model configuration
 - **Load prompt / Load evaluation** — Load an existing prompt or evaluation into the playground
 
-You can also open the playground directly from the [traces](/docs/llm-analytics/traces), [prompt management](/docs/llm-analytics/prompts), or [evaluations](/docs/llm-analytics/evaluations) pages. When you do, the playground pre-populates the model, system prompt, and messages, and links back to the source so you can save changes directly — publishing a new prompt version or updating the evaluation configuration.
+You can also open the playground directly from the [traces](/docs/ai-observability/traces), [prompt management](/docs/prompt-management/prompts), or [evaluations](/docs/ai-evals/evaluations) pages. When you do, the playground pre-populates the model, system prompt, and messages, and links back to the source so you can save changes directly — publishing a new prompt version or updating the evaluation configuration.
 
 ## Rate limits
 

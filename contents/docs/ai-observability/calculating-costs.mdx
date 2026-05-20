@@ -53,7 +53,7 @@ You can override PostHog's automatic cost calculation by providing custom pricin
 
 ### Option 1: Custom price per token
 
-If you know your pricing per token, you can set the following [custom properties](/docs/llm-analytics/custom-properties) when calling your LLM:
+If you know your pricing per token, you can set the following [custom properties](/docs/ai-observability/custom-properties) when calling your LLM:
 
 - `$ai_input_token_price` (required): Price per input/prompt token
 - `$ai_output_token_price` (required): Price per output/completion token
@@ -126,7 +126,7 @@ Both `$ai_input_token_price` and `$ai_output_token_price` must be provided for c
 
 ### Option 2: Pre-calculated costs
 
-If you're [manually capturing](/docs/llm-analytics/installation/manual-capture) LLM events and have already calculated the total costs yourself, you can send them directly:
+If you're [manually capturing](/docs/ai-observability/installation/manual-capture) LLM events and have already calculated the total costs yourself, you can send them directly:
 
 - `$ai_input_cost_usd`: Total cost for input/prompt tokens in USD
 - `$ai_output_cost_usd`: Total cost for output/completion tokens in USD
