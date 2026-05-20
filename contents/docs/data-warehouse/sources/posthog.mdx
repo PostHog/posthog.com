@@ -287,6 +287,25 @@ The `system.data_warehouse_tables` table contains metadata about data warehouse 
 | `deleted`                 | Whether the table is deleted (1 = yes, 0 = no) |
 | `deleted_at`              | When the table was deleted                     |
 
+### `system.dashboard_tiles`
+
+The `system.dashboard_tiles` table contains metadata about dashboard tiles, including layouts, colors, and linked content.
+
+| Column                   | Description                                                                |
+| ------------------------ | -------------------------------------------------------------------------- |
+| `id`                     | Unique identifier for the tile                                             |
+| `team_id`                | Team ID the tile belongs to                                                |
+| `dashboard_id`           | ID of the parent dashboard                                                 |
+| `insight_id`             | ID of the linked insight (null if tile contains text or button)            |
+| `text_id`                | ID of linked text content (null if tile contains insight or button)        |
+| `button_tile_id`         | ID of linked button content (null if tile contains insight or text)        |
+| `layouts`                | JSON containing tile position and size for each breakpoint                 |
+| `color`                  | Custom color applied to the tile                                           |
+| `show_description`       | Whether the insight description is shown (1 = yes, 0 = no)                 |
+| `transparent_background` | Whether the tile background is transparent (1 = yes, 0 = no)               |
+| `filters_overrides`      | JSON containing dashboard-level filter overrides applied to this tile      |
+| `deleted`                | Whether the tile is deleted (1 = yes, 0 = no)                              |
+
 ### `system.early_access_features`
 
 The `system.early_access_features` table contains early access feature definitions from your project.
