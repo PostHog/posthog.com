@@ -4,6 +4,11 @@ import List from 'components/List'
 const MCPClients = () => {
     const codeEditors = [
         {
+            label: 'PostHog Code',
+            url: '/code',
+            icon: 'IconLogomark',
+        },
+        {
             label: 'Claude Code',
             url: '/docs/model-context-protocol/claude-code',
             icon: 'IconTerminal',
