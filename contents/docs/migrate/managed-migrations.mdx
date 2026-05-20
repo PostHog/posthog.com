@@ -120,8 +120,26 @@ Minimal example for `posthog` content type (one line per event):
   - AWS access key ID
   - AWS secret access key
   - Content Type (choose one of: `amplitude`, `mixpanel`, or `posthog`; your files must match this schema)
+  - Endpoint URL (optional – only needed for [S3-compatible storage](#s3-compatible-storage))
 
 When using the `amplitude` content type, you can also configure the same Amplitude-specific options available for [direct imports](#direct-imports-mixpanel-amplitude), including whether to import events, generate identify events, and generate group identify events.
+
+### S3-compatible storage
+
+You can source data from any S3-compatible blob storage by providing an **Endpoint URL**. The endpoint must resolve to a public address – internal or private IPs aren't allowed.
+
+#### Cloudflare R2
+- Set the **Endpoint URL** to `https://<ACCOUNT_ID>.r2.cloudflarestorage.com` (replace `<ACCOUNT_ID>` with your Cloudflare account ID).
+- For the **Region**, select one of the Cloudflare R2 regions that correspond to your bucket, like "Automatic (AUTO)".
+
+#### MinIO
+- Set the **Endpoint URL** to your MinIO instance's host and port, for example: `https://my-minio-storage:9000`.
+
+#### Google Cloud Storage (GCS)
+1. Create a [Service Account](https://cloud.google.com/iam/docs/service-accounts-create) and grant it the `Storage Object Viewer` role (or a custom role with `storage.objects.get` and `storage.objects.list` permissions) on your bucket.
+2. Create an [HMAC key](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#console) for the Service Account.
+3. Use the HMAC key access key and secret as the **AWS Access Key ID** and **AWS Secret Access Key** respectively.
+4. Set the **Endpoint URL** to `https://storage.googleapis.com`.
 
 ## When to use each method
 
