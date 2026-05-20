@@ -4,13 +4,13 @@ sidebar: Handbook
 showTitle: true
 ---
 
-A non-exhaustive list of why customers churn, and what we can do about it.
+Some recurring reasons customers churn, and what we can do about them.
 
 ## Things we can influence
 
 ### Champion leaves
 
-If our champion was the main user, their departure is high risk. The best defense: increase PostHog's footprint before it happens. More teams using PostHog, more products adopted, more relationships across the org. Build relationships with more than one champion.
+If our champion was the main user, their departure is high risk. The best defense: get more people across the org using PostHog before it happens. More teams using PostHog, more products adopted, more relationships across the org. Build relationships with more than one champion.
 
 ### Champion isn't the decision maker
 
@@ -80,4 +80,4 @@ Nothing we can do.
 
 ### Lack of ICP fit
 
-This is a newer pattern and a tough one. Understand where we underserved them and why it wasn't a fit, then relay feedback to the team.
+This has come up more recently and it's tough. Figure out where we underserved them and why it wasn't a fit, then relay feedback to the team.

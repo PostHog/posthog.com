@@ -4,11 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Customer Success Managers (CSMs) help customers get more value out of PostHog so they stick around. That covers onboarding, training, support, strategy, cost-saving, and advocating for them inside PostHog.
+Customer Success Managers (CSMs) help customers get more value out of PostHog so they stick around. That means helping them onboard, train their team, work through support issues, find cost savings, and advocating for them inside PostHog.
 
 ## Principles
 
-- **Show, don't tell.** Help customers prioritize, deliver bad news early, and stay on top of their inquiries. Under promise, over deliver.
+- **Show, don't tell.** Help customers prioritize their needs, deliver bad news early, and stay on top of their questions. Under promise, over deliver.
 - **Help them save money, even when it costs us short term.** Long-term value matters more.
 - **Be their voice inside PostHog.** Advocacy only works if you're willing to go to bat for them — push product and engineering to understand why a feature matters.
 
