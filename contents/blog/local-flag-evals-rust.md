@@ -17,7 +17,7 @@ tags:
   - Feature flags
 seo: {
   metaTitle: "From 270GB RAM to 5GB: Moving local flag evaluation from Django to Rust",
-  metaDescription: "How we moved PostHog's feature flags local evaluation endpoint from Django to Rust, dropping CPU usage by 24x and memory by 56x."
+  metaDescription: "How we moved PostHog's feature flags local evaluation endpoint from Django to Rust and dropped CPU usage by 24x and memory by 56x."
 }
 
 ---
