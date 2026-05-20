@@ -120,29 +120,10 @@ Minimal example for `posthog` content type (one line per event):
   - AWS access key ID
   - AWS secret access key
   - Content Type (choose one of: `amplitude`, `mixpanel`, or `posthog`; your files must match this schema)
-<<<<<<< HEAD
-  - Endpoint URL (optional, for S3-compatible storage only)
-||||||| ce23260be
-=======
   - Endpoint URL (optional – only needed for [S3-compatible storage](#s3-compatible-storage))
->>>>>>> master
 
 When using the `amplitude` content type, you can also configure the same Amplitude-specific options available for [direct imports](#direct-imports-mixpanel-amplitude), including whether to import events, generate identify events, and generate group identify events.
 
-<<<<<<< HEAD
-### Using S3-compatible storage
-
-S3 imports support S3-compatible storage providers like Cloudflare R2 and MinIO. To import from these providers, specify a custom **Endpoint URL** when setting up your import.
-
-| Provider | Endpoint URL format | Region |
-|----------|-------------------|---------|
-| Cloudflare R2 | `https://<ACCOUNT_ID>.r2.cloudflarestorage.com` | Set to `auto` |
-| MinIO | Your MinIO server URL (e.g., `https://minio.example.com`) | Your configured region |
-
-Leave the **Endpoint URL** field empty when importing from standard AWS S3.
-
-||||||| ce23260be
-=======
 ### S3-compatible storage
 
 You can source data from any S3-compatible blob storage by providing an **Endpoint URL**. The endpoint must resolve to a public address – internal or private IPs aren't allowed.
@@ -160,7 +141,7 @@ You can source data from any S3-compatible blob storage by providing an **Endpoi
 3. Use the HMAC key access key and secret as the **AWS Access Key ID** and **AWS Secret Access Key** respectively.
 4. Set the **Endpoint URL** to `https://storage.googleapis.com`.
 
->>>>>>> master
+
 ## When to use each method
 
 ### Use direct imports when:
