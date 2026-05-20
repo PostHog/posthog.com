@@ -2,7 +2,7 @@
 title: Evaluations
 ---
 
-Evaluations automatically assess the quality of your LLM [generations](/docs/llm-analytics/generations) and return a pass/fail result with reasoning. PostHog supports two types of evaluations:
+Evaluations automatically assess the quality of your LLM [generations](/docs/ai-observability/generations) and return a pass/fail result with reasoning. PostHog supports two types of evaluations:
 
 - **LLM-as-a-judge** – Uses an LLM to score each generation against a prompt you define. Great for nuanced, subjective checks like tone, helpfulness, or hallucination detection.
 - **Code-based (Hog)** – Runs deterministic code you write against each generation. Great for rule-based checks like format validation, keyword detection, or length limits. Free to run with no LLM cost.
@@ -28,7 +28,7 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/llm
 
 ### How they work
 
-When a [generation](/docs/llm-analytics/generations) is captured, PostHog samples it based on your configured rate (0.1% to 100%). If sampled, the generation's input and output are sent to an LLM judge with your evaluation prompt. The judge returns a boolean pass/fail result plus reasoning, which is stored and linked to the original generation.
+When a [generation](/docs/ai-observability/generations) is captured, PostHog samples it based on your configured rate (0.1% to 100%). If sampled, the generation's input and output are sent to an LLM judge with your evaluation prompt. The judge returns a boolean pass/fail result plus reasoning, which is stored and linked to the original generation.
 
 You can optionally filter which generations get evaluated using event properties or person properties. For example, only evaluate generations from production, from a specific model, or above a certain cost threshold. You can also use person properties to exclude internal users or target specific user segments.
 
