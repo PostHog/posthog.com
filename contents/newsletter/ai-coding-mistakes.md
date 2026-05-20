@@ -31,7 +31,7 @@ Sadly, most of the AI coding advice out there isn't written for this scenario. I
 
 ![Treating your big codebase like a small codebase](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Usefulness_of_AI_graphic_da661341d8.png)
 
-Although it's less sexy than vibe coding, being thoughtful about using AI is *more important* in a larger codebase for the following reasons:
+Although it's less sexy than [vibe coding](/blog/best-analytics-stack-for-vibe-coded-apps), being thoughtful about using AI is *more important* in a larger codebase for the following reasons:
 
 - Less of your app fits into the AI tool's context windows, which means you need to be more careful about what goes into it. This is true of both coding and [building AI-powered features](/newsletter/building-ai-features).
 
