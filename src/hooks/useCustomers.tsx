@@ -749,7 +749,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
-        qubhq: {
+    qubhq: {
         name: 'QubHQ',
         toolsUsed: ['endpoints', 'error_tracking', 'feature_flags', 'product_analytics', 'session_replay', 'surveys'],
         industries: ['Ad Tech', 'Hospitality', 'Digital Signage'],
@@ -769,7 +769,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     thumb: '/images/customers/craig-hollington.png',
                 },
                 quotes: [
-                    "This is the true power of PostHog, they give us the freedom to use our data wherever we want to, without the complexity of managing the infrastructure.",
+                    'This is the true power of PostHog, they give us the freedom to use our data wherever we want to, without the complexity of managing the infrastructure.',
                 ],
             },
         },
