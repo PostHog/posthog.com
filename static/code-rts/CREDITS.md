@@ -15,4 +15,4 @@ Source script: `notes/hedgemony/voice-lines.json` in the [PostHog Code repo](htt
 
 ## Background music (`bgm.mp3`)
 
-Background music used during RTS mode. Provenance to be confirmed before public ship.
+Background music used during RTS mode. Contributed by Stephen Schmidt as part of the PostHog Code Barbados hackathon project (May 2026).
