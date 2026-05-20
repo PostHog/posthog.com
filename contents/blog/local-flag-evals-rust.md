@@ -22,7 +22,7 @@ seo: {
 
 ---
 
-I reloaded Grafana three times before I trusted what I was looking at, because the gap between the old numbers and the new ones was bigger than I was expecting. p50 latency had gone from 40ms down to 4ms, CPU usage was sitting at a small fraction of where it used to be, and memory was barely registering at all. We had just finished moving the feature flags [local evaluation](/docs/feature-flags/local-evaluation) endpoint from Django to Rust, and despite knowing that it was going to be better – that was the whole reason for this migration – I still wasn't ready for how the comparison ended up looking.
+I reloaded Grafana three times before I trusted the numbers. p50 latency: 40ms to 4ms. CPU usage: a fraction of before. Memory: barely there. We'd just moved the feature flags [local evaluation](/docs/feature-flags/local-evaluation) endpoint from Django to Rust. I knew it would be better. But I wasn't ready for this.
 
 ## What local evaluation is
 
