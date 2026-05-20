@@ -57,6 +57,26 @@ If ad-hoc meetings are regularly happening, consider improving the agenda of ano
 
 People in customer-facing roles where being on calls is a bigger part of your job don't need to stick to this as much, but please don't loop in engineers to customer calls on these days if you do by default.
 
+#### Exception: cross-team meetings with no other viable slot
+
+In rare cases, a planned recurring meeting genuinely can't fit on a meeting day — typically because the participants span EU and Americas timezones and the only window where everyone is awake at sensible hours falls on a Tuesday or Thursday. This is a narrow exception, not a workaround.
+
+The exception only applies to **cross-team** meetings. Team-level meetings should always be scheduled on a meeting day — finding overlap inside a single team is rarely the problem, and the ad-hoc rule above already covers anything that can't wait.
+
+When you do use the exception, _all_ of the following must hold:
+
+- **Cross-timezone is the reason.** The meeting must be scheduled in the standard EU/Americas overlap window (around 8:30am PDT / 4:30pm GMT). If your slot is outside that window, you don't need the exception — pick a meeting day.
+- **Optional attendance.** Anyone can skip without consequence or follow-up.
+- **Short and time-boxed.** Aim for 30 minutes or less.
+- **Recorded**, so people who skip can catch up.
+- **Agenda shared in advance**, and the group has a dedicated Slack channel where people can contribute async before and continue the discussion afterwards.
+- **No mission-critical communication.** These meetings aren't the venue for critical information at all — share it through normal channels independently of this meeting.
+- **No decisions are made in the meeting.** Decisions happen async, in writing.
+
+A written summary posted afterwards is recommended where it makes sense — it often doesn't for purely presentational meetings.
+
+The whole point of this exception is to **increase participation** in cross-timezone groups. If attendance is dropping, or you're getting enough rescheduling requests, move the meeting to a meeting day — that's the organizer's call.
+
 ### Sprint planning
 
 Each small team runs its own sprint planning meetings on whatever schedule you feel is most useful. Some teams do this on a Monday, others on a Wednesday, and sprints are usually 1-2 weeks long. We split into [Small Teams](/handbook/team-structure) for these. If a product team, your team's exec will also attend.
