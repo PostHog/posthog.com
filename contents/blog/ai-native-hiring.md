@@ -7,9 +7,6 @@ showTitle: true
 rootPage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: >-
- 
-featuredImageType: full
 category: Startups
 tags:
   - Guides
