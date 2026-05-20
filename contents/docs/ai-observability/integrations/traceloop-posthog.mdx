@@ -20,7 +20,7 @@ PostHog natively supports OTel spans from [OpenLLMetry](https://www.traceloop.co
 When you send OpenLLMetry spans to PostHog, they are automatically:
 
 - Classified as `$ai_generation` or `$ai_embedding` events based on the request type
-- Normalized so input/output messages, token usage, and tools map to PostHog's standard LLM analytics properties
+- Normalized so input/output messages, token usage, and tools map to PostHog's standard AI Observability properties
 
 To get started, configure OpenLLMetry to export traces to PostHog's OTel endpoint. See the [OpenLLMetry documentation](https://www.traceloop.com/docs/openllmetry/introduction) for setup instructions specific to your language and framework.
 

@@ -115,9 +115,9 @@ We didn’t have observability and evaluation early and regretted it. We wish we
 
 - Automated scorers like [LLM-as-judge](/blog/stop-ai-slop) and deterministic checks
 
-Basically, [LLM analytics](/llm-analytics).
+Basically, [AI Observability](/llm-analytics).
 
-Unfortunately, LLM analytics alone isn’t enough. Reality is gnarly and to deal with it, our team often looks at real usage.
+Unfortunately, AI Observability alone isn’t enough. Reality is gnarly and to deal with it, our team often looks at real usage.
 
 They run a “traces hour,” where they meet, manually analyze LLM traces (AKA real user interactions), and find areas to improve. [Evals](/docs/ai-evals/evaluations) make the most sense when they stem from these investigations.
 

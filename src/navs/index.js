@@ -1917,7 +1917,7 @@ export const communityMenu = {
                     ],
                 },
                 {
-                    name: 'LLM Analytics',
+                    name: 'AI Observability',
                     color: 'purple',
                     icon: 'IconLlmAnalytics',
                     url: '/tutorials/ai-engineering',
@@ -2590,7 +2590,7 @@ export const docsMenu = {
                             url: '/docs/api/invites',
                         },
                         {
-                            name: 'LLM analytics',
+                            name: 'AI Observability',
                             url: '/docs/api/llm-analytics',
                         },
                         {

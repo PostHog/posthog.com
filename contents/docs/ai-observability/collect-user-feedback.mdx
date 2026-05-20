@@ -19,7 +19,7 @@ To collect user feedback for LLM traces, PostHog provides a native integration w
 
 1. Start by creating a survey for a group of LLM traces.
 2. In your app, collect survey responses with an `$ai_trace_id` property attached to the events.
-3. View user feedback per-trace within LLM Analytics, or view all feedback within [Surveys](https://app.posthog.com/surveys).
+3. View user feedback per-trace within AI Observability, or view all feedback within [Surveys](https://app.posthog.com/surveys).
 
 For the common thumbs up/down use-case, we provide a React hook `useThumbSurvey` to quickly attach a thumb survey and optional followup questions to your existing UI. In other cases, you can manually send survey-related events to attach them to your trace.
 
@@ -53,7 +53,7 @@ If you need more flexibility, or are not building a React app, see [manual feedb
 
 ## Viewing survey responses
 
-You can view survey responses per-trace within LLM Analytics, or per-survey within Surveys.
+You can view survey responses per-trace within AI Observability, or per-survey within Surveys.
 
 ### View all feedback in Surveys
 
@@ -65,7 +65,7 @@ Navigate to [Surveys](https://app.posthog.com/surveys) and open your LLM feedbac
     alt="Survey thumbs up down ratings"
 />
 
-You can also view all responses in a table, and quickly link to the related trace by clicking the LLM Analytics icon:
+You can also view all responses in a table, and quickly link to the related trace by clicking the AI Observability icon:
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_09_at_10_52_04_AM_b4c56f0097.png" 

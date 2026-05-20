@@ -29,13 +29,13 @@ export const Content = ({ quickLinks = false }) => {
                     />
                     <ResourceItem
                         type="Guide"
-                        title="How to set up LLM analytics for Cohere"
+                        title="How to set up AI Observability for Cohere"
                         description="Track your Cohere usage, costs, and latency."
                         url="/tutorials/cohere-analytics"
                     />
                     <ResourceItem
                         type="Guide"
-                        title="How to set up LLM analytics for Anthropic's Claude"
+                        title="How to set up AI Observability for Anthropic's Claude"
                         description="Monitor costs per model, user, and more."
                         url="/tutorials/anthropic-analytics"
                     />
