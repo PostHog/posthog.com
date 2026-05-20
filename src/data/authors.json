@@ -573,5 +573,13 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/matheusvbatista/",
         "profile_id": 41646
+    },
+    {
+        "handle": "fraser-hopper",
+        "name": "Fraser Hopper",
+        "role": "Hog wrangler",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/fraser-hopper-26158056/",
+        "profile_id": 30207
     }
 ]
