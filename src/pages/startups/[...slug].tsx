@@ -131,6 +131,10 @@ export default function Startups(): JSX.Element {
                 // changelogCategory="product-analytics"
                 leftSidebarContent={
                     <>
+                        <p className="text-sm mb-4 px-1">
+                            We help teams build better products. Get credits and partner benefits tailored for anyone
+                            building with AI.
+                        </p>
                         <Accordion
                             data-scheme="primary"
                             className=""
@@ -228,6 +232,10 @@ export default function Startups(): JSX.Element {
                             <h1 className="flex items-center gap-2.5 mb-0 text-2xl">
                                 <Logo className="h-14 relative -top-px" fill="white" /> {titleContent}
                             </h1>
+                            <p className="text-white mt-2 mb-3 max-w-xl">
+                                We help teams build better products — with credits, swag, and an array of partner
+                                benefits perfect for anyone building AI products.
+                            </p>
                             <ul className="prose prose-sm text-white mt-2 mb-4">
                                 <li>{creditValue} in PostHog credits</li>
                                 <li>Exclusive founder merch</li>
@@ -242,7 +250,7 @@ export default function Startups(): JSX.Element {
                         </div>
                     </div>
 
-                    <div className="not-prose grid grid-cols-2 @lg:grid-cols-3 @5xl:grid-cols-5 gap-8 @2xl:gap-4 @3xl:gap-6 px-4 @3xl:px-8 relative -mt-12 max-w-6xl mb-8 @3xl:mb-12">
+                    <div className="not-prose grid grid-cols-2 @lg:grid-cols-3 @5xl:grid-cols-6 gap-8 @2xl:gap-4 @3xl:gap-6 px-4 @3xl:px-8 relative -mt-12 max-w-6xl mb-8 @3xl:mb-12">
                         <div className="bg-[#FFD254] -rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_credits_a8487ef646.png" />
                             <h3 className="text-base my-1 leading-tight">{creditValue} in PostHog credits</h3>
@@ -252,32 +260,35 @@ export default function Startups(): JSX.Element {
                         </div>
                         <div className="bg-[#9BBEC2] p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_merch_b2106b276a.png" />
-                            <h3 className="text-base my-1 leading-tight">Exclusive founder swag</h3>
+                            <h3 className="text-base my-1 leading-tight">$1,500 of founder swag</h3>
                             <p className="text-sm mb-0">
-                                You can never have too many laptop stickers, hats, or free t-shirts, right?
+                                You can never have too many laptop stickers or free PostHog t-shirts.
                             </p>
                         </div>
                         <div className="bg-[#E6B2F8] rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/startup_perk_2_f6a6b9d058.png" />
-                            <h3 className="text-base my-1 leading-tight">Easier incidents with Incident.io</h3>
-                            <p className="text-sm mb-0">
-                                Avoid additional stress by getting $1,500 off a teams plan for Incident.io.
-                            </p>
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startup_perk_2_f6a6b9d058.png" />
+                            <h3 className="text-base my-1 leading-tight">$1,500 off Incident.io</h3>
+                            <p className="text-sm mb-0">Incidents happen. Get $1,500 off a teams plan when they do.</p>
                         </div>
                         <div className="bg-[#C4D9FF] -rotate-2 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_sdks_25358b1af4.png" />
-                            <h3 className="text-base my-1 leading-tight">Better SDKs with Speakeasy</h3>
+                            <h3 className="text-base my-1 leading-tight">50% off with Speakeasy</h3>
                             <p className="text-sm mb-0">
-                                Building an API or SDK? Our pals at Speakeasy have you covered with 50% off for 6
-                                months.
+                                Build MCPs & skills with Speakeasy and get 50% off for 6 months.
                             </p>
                         </div>
                         <div className="bg-[#C4D9FF] -rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_search_3ecaae1574.png" />
-                            <h3 className="text-base my-1 leading-tight">Better search with Chroma</h3>
+                            <h3 className="text-base my-1 leading-tight">$5,000 of Chroma credit</h3>
                             <p className="text-sm mb-0">
-                                Building with AI? Chroma gives you $5,000 of credit for their search and retrieval
-                                service.
+                                Chroma's search infra for AI is fast, serverless, and scalable.
+                            </p>
+                        </div>
+                        <div className="bg-[#b8e0d8] rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_search_3ecaae1574.png" />
+                            <h3 className="text-base my-1 leading-tight">$5,000 of Depot credit</h3>
+                            <p className="text-sm mb-0">
+                                Blazing-fast container builds and remote caching, trusted by us.
                             </p>
                         </div>
                     </div>
