@@ -169,7 +169,7 @@ export default function FeetPics(): JSX.Element {
                         label="employee #30264.jpg"
                         Icon={
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/A004066_R1_19_6_8bd7f1c686.JPG"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/h_1000,c_limit,q_auto,f_auto/A004066_R1_19_6_8bd7f1c686.JPG"
                                 alt="employee #30264.jpg"
                                 className="w-full h-full object-cover"
                                 imgClassName="size-24"
