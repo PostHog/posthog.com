@@ -113,7 +113,9 @@ export default function PlatformPackages() {
                                         {plan?.flat_rate && (
                                             <div className="flex items-baseline mt-auto">
                                                 {addon.type === 'enterprise' ? (
-                                                    <strong className="text-lg">Contact us</strong>
+                                                    <Link to="/talk-to-a-human" className="text-lg font-bold">
+                                                        Contact us
+                                                    </Link>
                                                 ) : (
                                                     <>
                                                         <strong className="text-lg">
