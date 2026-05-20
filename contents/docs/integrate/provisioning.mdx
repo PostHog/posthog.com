@@ -335,20 +335,11 @@ Authenticate with the `access_token` you got from [Step 2](#step-2-exchange-the-
 }
 ```
 
-The returned `url` is valid for 10 minutes and can only be opened once. Use it as the `href` for the "Open in PostHog" button. Don't cache the URL across renders – generate a fresh one per click so the token stays valid.
+The returned `url` is valid for 10 minutes and can only be opened once, so don't pre-render it as the button's `href`. Wire the button click to your backend, call `/deep_links` there, then redirect the user to the returned URL.
 
 #### Requires a trusted partner record
 
 This endpoint is gated on the `provisioning_can_issue_deep_links` flag on your partner record, which is only enabled for partners admin-onboarded by PostHog. If you get a `deep_links_not_enabled` 403, ask PostHog to enable it for your CIMD app.
-
-#### Avoid linking directly to project URLs
-
-Pointing a button straight at `https://us.posthog.com/project/<id>` skips the deep-link handshake and removes PostHog's ability to log the user in correctly:
-
-- If the user is logged into PostHog with a different email, they hit a permission error or 404 on a project their current account can't access.
-- If they're logged out, they get the generic PostHog login page with no context about which email to use.
-
-Going through `/deep_links` mints a session for the right user every time.
 
 ### Rotate project credentials
 
