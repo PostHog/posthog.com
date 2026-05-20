@@ -66,7 +66,12 @@ The reason this hadn't already paged us is that ClickHouse also has a [MinMax sk
 
 That's the kind of bug that hides forever. It's slow, but not "page someone" slow. Every query is affected, so nobody can A/B compare against a "good" version. And the smoking gun lives in the output of `EXPLAIN PLAN indexes=1, json=1`, which nobody runs unless they already suspect something.
 
-In one of the lanes, the autoresearch loop ran the EXPLAIN. It noticed `Partition: Condition='true'` (i.e. no pruning). It tried adding `indexHint()` with bare-timestamp bounds. It tried rewriting the comparison so the field side was bare and the constant carried the timezone. That second approach won, by a lot, and that's what we [shipped](https://github.com/PostHog/posthog/pull/54819):
+In one of the lanes, the autoresearch loop ran the `EXPLAIN`. It noticed `Partition: Condition='true'` (i.e. no pruning) so tried two things: 
+
+1. Adding `indexHint()` with bare-timestamp bounds.
+2. Rewriting the comparison so the field side was bare and the constant carried the timezone. 
+
+The second approach won, by a lot, and that's what we [shipped](https://github.com/PostHog/posthog/pull/54819):
 
 ```sql
 -- Before: planner can't see through toTimeZone
