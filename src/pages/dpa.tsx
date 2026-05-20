@@ -276,9 +276,7 @@ function DpaGenerator() {
                                     Gen Z slang edition
                                 </label>
                                 <br />
-                                <div className="block text-sm opacity-75">
-                                    Compliance, but make it bestie energy
-                                </div>
+                                <div className="block text-sm opacity-75">Compliance, but make it bestie energy</div>
                             </li>
                         </ul>
                     </div>
@@ -731,7 +729,7 @@ function DpaGenerator() {
                             <h3>Security (because we're not mid)</h3>
                             <p>
                                 We keep your data locked down: encryption in transit and at rest, access controls,
-                                regular security reviews, the whole rizz. SOC 2, ISO 27001, HIPAA — we understood the
+                                regular security reviews, the whole rizz. SOC 2 and HIPAA — we understood the
                                 assignment.
                             </p>
 
@@ -745,8 +743,8 @@ function DpaGenerator() {
                             <h3>Sub-processors (the supporting cast)</h3>
                             <p>
                                 We work with a small lineup of other companies (cloud hosting, the usual suspects) to
-                                help run the platform. They're vetted, they're on the same vibe re: data protection,
-                                and we'll keep you posted if anyone new joins the cast.
+                                help run the platform. They're vetted, they're on the same vibe re: data protection, and
+                                we'll keep you posted if anyone new joins the cast.
                             </p>
 
                             <h3>International transfers (passport era)</h3>
@@ -769,9 +767,7 @@ function DpaGenerator() {
                                 keeping screenshots, no clinging to receipts. We move on like grown adults.
                             </p>
 
-                            <p className="font-bold">
-                                Cool? Cool. Sign below and we're locked in 💯
-                            </p>
+                            <p className="font-bold">Cool? Cool. Sign below and we're locked in 💯</p>
 
                             <div className="pb-16">
                                 <SignatureFields />
