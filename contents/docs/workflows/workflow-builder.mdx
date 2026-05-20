@@ -137,11 +137,20 @@ Dispatches are the messages you send, mail, slack, SMS, webhook, or any PostHog 
 
 Delays help you control the timing of your messages. There are 3 types of delays:
 
-| Delay type             | Description                                                                              |
-| ---------------------- | ---------------------------------------------------------------------------------------- |
-| Fixed wait             | Wait for a fixed amount of time (minutes/hours/days).                                    |
-| Wait until condition   | Wait until a specific condition is met (e.g. user has property set to a specific value). |
-| Wait until time window | Wait until a specific time window (e.g. only send on weekdays 9-5).                      |
+| Delay type             | Description                                                                                      |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| Fixed wait             | Wait for a fixed amount of time (minutes/hours/days).                                            |
+| Wait until condition   | Wait until a specific condition is met based on events fired or person property values.          |
+| Wait until time window | Wait until a specific time window (e.g. only send on weekdays 9-5).                              |
+
+### Wait until condition
+
+The wait until condition step pauses a workflow until one of two things happens:
+
+- **Events to wait for** - The workflow continues when any of the specified events fire. Use this to pause until a user takes a specific action, like completing a purchase or viewing a page.
+- **Property conditions** - The workflow continues when the person matches the specified property values. Use this to pause until a user reaches a certain state, like upgrading to a paid plan.
+
+If you configure both, the workflow advances when either condition is satisfied.
 
 You can see an example of a delay in the [email drip campaign](/docs/workflows/email-drip-campaign) tutorial.
 
