@@ -57,10 +57,10 @@ ClickHouse is fast because it can skip work. The events table is `PARTITION BY t
 
 That's not what was happening.
 
-When we added per-team timezone support to HogQL [in April 2023](https://github.com/PostHog/posthog/pull/14968), we did the sensible thing and wrapped every reference to `timestamp` in `toTimeZone(timestamp, team_tz)` so display dates were correct. What we didn't realize is that the ClickHouse query planner can't see through `toTimeZone()`:
+When we added per-team timezone support to HogQL [in April 2023](https://github.com/PostHog/posthog/pull/14968), we did the sensible thing and wrapped every reference to `timestamp` in `toTimeZone(timestamp, team_tz)` so display dates were correct. What we didn't realize is that the ClickHouse query planner can't see through `toTimeZone()`. This meant it couldn't derive bounds on:
 
-- It can't derive bounds on `toYYYYMM(timestamp)` from `toTimeZone(timestamp, tz) >= '2024-03-01'`, so partition pruning was off.
-- It can't derive bounds on `toDate(timestamp)` either, so the primary key was being used for `team_id` and `event` but stopping there.
+- `toYYYYMM(timestamp)` from `toTimeZone(timestamp, tz) >= '2024-03-01'`, so partition pruning was off.
+- `toDate(timestamp)` so the primary key was being used for `team_id` and `event` but stopping there.
 
 The reason this hadn't already paged us is that ClickHouse also has a [MinMax skip index](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree#available-types-of-indices) on `timestamp`. A MinMax index stores the smallest and largest value of a column per "granule" (8,192 rows by default). When you compare `toTimeZone(timestamp, tz)` against a constant, ClickHouse can still evaluate that against each granule's min/max and skip the ones whose range doesn't overlap. This is much weaker than partition pruning, but it works, so queries weren't catastrophically slow, just measurably slower than they should have been.
 
