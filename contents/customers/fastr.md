@@ -15,13 +15,15 @@ That model only works because Faster can spin up new analytics infrastructure fo
   quote={0}
 />
 
-## A new product, built developer-first
+A new product, built developer-first
+------------------------------------
 
 When Faster started designing Faster Optimize, its conversion rate optimization (CRO) and A/B testing product, the question was which back end could keep up with a four-person team that runs almost entirely on AI-driven development. Ryan Breen, Faster's CTO, was exploring tools, PostHog stood out for him immediately.
 
 "You’re nerds, and you’re building a developer-friendly back end for us to build whatever sort of data-powered interfaces we want to build on top of," says Ryan. "I think PostHog are the gold standard for a tool you would want to build on top of."
 
-## A different shape of dashboard for every customer
+A different shape of dashboard for every customer
+-------------------------------------------------
 
 Faster's product flips the usual analytics relationship. Instead of one platform with one dashboard that every customer learns to navigate, every Faster customer has their own.
 
@@ -31,7 +33,8 @@ One feature that Faster has repeatedly used is a session browser that lets a cus
 
 "Endpoints cache well, give us a nice clean surface in front of the data, and we don't have to think about everything we'd need to set up around it if we built a custom API ourselves," says Ryan.
 
-## Spinning up an Endpoint
+Spinning up an Endpoint
+-----------------------
 
 The reason Faster can stamp out a custom dashboard for every customer is their agentic pipeline. Faster's engineers don't click around the PostHog UI. They write Claude skills that go figure out the current PostHog API, generate the endpoints and materialized views a feature needs, and deploy them.
 
@@ -39,7 +42,8 @@ Ryan explains. "When we started consuming endpoints, we needed a lifecycle for m
 
 The reason it works without breaking is that PostHog ships every feature in public, and Claude can keep up with it. "It’s easy for us to ask Claude, go find the bleeding-edge documentation for how this feature works today. That's the nice thing about you guys being so damn transparent about everything you do on GitHub. It’s easy for us to ask Claude, go find the bleeding-edge documentation for how this feature works today, or new configurations that have just been released."
 
-## An analytics platform without data engineers
+An analytics platform without data engineers
+--------------------------------------------
 
 Fastr's customers don't have data engineers waiting to slice their AB test results. They have a marketing team that wants to know whether the last test worked.
 
@@ -47,7 +51,8 @@ That's what shapes the Faster UI. Instead of a chart library, Faster drops custo
 
 Thia model lines up with where Fastr's customers are economically. "A lot of really big businesses don't have a big data team anymore. Where in the past they had 14 data people, now they have two, but they still need a system,'" Ryan says. "T've got a job to do, and that job shouldn't be 'learn your stupid data platform.'"
 
-## What's next for Faster
+What's next for Faster
+----------------------
 
 Faster Optimize is out of early access and onboarding more brands every week. The team is leaning further into per-customer customization, and every new customer means more endpoints spun up by Claude on top of PostHog.
 
