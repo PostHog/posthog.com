@@ -93,6 +93,7 @@ interface AppContextType {
     constraintsRef: React.RefObject<HTMLDivElement>
     taskbarRef: React.RefObject<HTMLDivElement>
     expandWindow: () => void
+    getExpandedDimensions: () => { position: { x: number; y: number }; size: { width: number; height: number } }
     openSignIn: (onSuccess?: (user: User) => void) => void
     openRegister: () => void
     openForgotPassword: () => void
@@ -141,6 +142,7 @@ interface AppContextType {
     searchOpen: boolean
     setSearchOpen: (isOpen: boolean) => void
     updateTaskbarHeight: () => void
+    initialHomepage: boolean
 }
 
 interface AppProviderProps {
@@ -263,6 +265,7 @@ export const Context = createContext<AppContextType>({
     constraintsRef: { current: null },
     taskbarRef: { current: null },
     expandWindow: () => {},
+    getExpandedDimensions: () => ({ position: { x: 0, y: 0 }, size: { width: 0, height: 0 } }),
     openSignIn: () => null,
     openRegister: () => {},
     openForgotPassword: () => {},
@@ -306,6 +309,7 @@ export const Context = createContext<AppContextType>({
     searchOpen: false,
     setSearchOpen: () => {},
     updateTaskbarHeight: () => {},
+    initialHomepage: false,
 })
 
 export interface AppSetting {
@@ -1376,11 +1380,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const paramsWindows = parsed?.windows
     const stateWindows = element.props?.location?.state?.savedWindows
     const posthog = usePostHog()
+    const initialHomepage = location.key === 'initial' && location.pathname === '/' && !isMobile
 
     const [windows, setWindows] = useState<AppWindow[]>(
-        (location.key === 'initial' && location.pathname === '/' && isMobile) || !!paramsWindows
-            ? []
-            : getInitialWindows(element)
+        initialHomepage || !!paramsWindows ? [] : getInitialWindows(element)
     )
     const windowsRef = useRef(windows)
     useEffect(() => {
@@ -1756,27 +1759,31 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     ? { min: settings.size.min, max: settings.size.max }
                     : getWindowBasedSizeConstraints(),
             fixedSize: settings?.size?.fixed || false,
-            fromOrigin: lastClickedElementRect
-                ? {
-                      x: lastClickedElementRect.x - size.width / 2,
-                      y: lastClickedElementRect.y - size.height / 2,
-                  }
-                : undefined,
+            fromOrigin:
+                element.props.location.state?.fromOrigin ||
+                (lastClickedElementRect
+                    ? {
+                          x: lastClickedElementRect.x - size.width / 2,
+                          y: lastClickedElementRect.y - size.height / 2,
+                      }
+                    : undefined),
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[keyToUse],
             location,
-            expanded: false,
-            snapped: false,
+            expanded: element.props.location.state?.expanded || false,
+            snapped: element.props.location.state?.snapped || false,
         }
 
-        // Adjust width if window extends beyond right edge
-        if (newWindow.position.x + newWindow.size.width > (isSSR ? 0 : window.innerWidth) - 20) {
-            newWindow.size.width = isSSR ? 0 : window.innerWidth - newWindow.position.x - 20
-        }
+        if (!newWindow.expanded) {
+            // Adjust width if window extends beyond right edge
+            if (newWindow.position.x + newWindow.size.width > (isSSR ? 0 : window.innerWidth) - 20) {
+                newWindow.size.width = isSSR ? 0 : window.innerWidth - newWindow.position.x - 20
+            }
 
-        // Adjust height if window extends beyond bottom edge
-        if (newWindow.position.y + newWindow.size.height > (isSSR ? 0 : window.innerHeight) - taskbarHeight - 20) {
-            newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
+            // Adjust height if window extends beyond bottom edge
+            if (newWindow.position.y + newWindow.size.height > (isSSR ? 0 : window.innerHeight) - taskbarHeight - 20) {
+                newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
+            }
         }
 
         if (websiteMode && (newWindow.appSettings?.size?.fixed || newWindow.appSettings?.modal)) {
@@ -1967,15 +1974,23 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         })
     }
 
+    const getExpandedDimensions = () => {
+        const taskbarRect = document.querySelector('#taskbar')?.getBoundingClientRect()
+        return {
+            position: { x: taskbarRect?.left || 0, y: 0 },
+            size: {
+                width: isSSR ? 0 : window.innerWidth - (taskbarRect?.left || 0) * 2,
+                height: isSSR ? 0 : window.innerHeight - taskbarHeight - (taskbarRect?.top || 0),
+            },
+        }
+    }
+
     const expandWindow = () => {
         if (!focusedWindow) return
-        const taskbarRect = document.querySelector('#taskbar')?.getBoundingClientRect()
+        const { position, size } = getExpandedDimensions()
         updateWindow(focusedWindow, {
-            position: { x: taskbarRect?.left, y: 0 },
-            size: {
-                width: isSSR ? 0 : window.innerWidth - taskbarRect?.left * 2,
-                height: isSSR ? 0 : window.innerHeight - taskbarHeight - taskbarRect?.top,
-            },
+            position,
+            size,
             previousSize: focusedWindow.size,
             previousPosition: focusedWindow.position,
             expanded: true,
@@ -2033,11 +2048,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     useEffect(() => {
-        if (
-            (location.key === 'initial' && location.pathname === '/' && isMobile) ||
-            paramsWindows ||
-            location.state?.skipPageUpdate
-        ) {
+        if (initialHomepage || paramsWindows || location.state?.skipPageUpdate) {
             return
         }
         updatePages(element)
@@ -2562,6 +2573,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 constraintsRef,
                 taskbarRef,
                 expandWindow,
+                getExpandedDimensions,
                 openSignIn,
                 openRegister,
                 openForgotPassword,
@@ -2594,6 +2606,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 searchOpen,
                 setSearchOpen,
                 updateTaskbarHeight,
+                initialHomepage,
             }}
         >
             {children}

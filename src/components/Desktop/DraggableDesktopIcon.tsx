@@ -70,6 +70,7 @@ export default function DraggableDesktopIcon({ app, initialPosition, onPositionC
 
     return (
         <motion.li
+            data-icon-label={app.label}
             className={`absolute w-28 flex justify-center items-center ${isDragging ? 'z-50' : 'z-10'}`}
             animate={{
                 x: position.x,

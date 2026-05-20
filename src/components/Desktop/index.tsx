@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import { IconDemoThumb, AppIcon, GradientGlyphIcon } from 'components/OSIcons'
@@ -10,11 +10,12 @@ import { Screensaver } from '../Screensaver'
 import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
 import useTheme from '../../hooks/useTheme'
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, animate } from 'framer-motion'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
+import { navigate } from 'gatsby'
 
 declare global {
     interface Window {
@@ -246,6 +247,8 @@ export default function Desktop() {
         websiteMode,
         posthogInstance,
         updateSiteSettings,
+        initialHomepage,
+        getExpandedDimensions,
     } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>(generateInitialPositions())
     const { isInactive, dismiss } = useInactivityDetection({
@@ -254,6 +257,11 @@ export default function Desktop() {
     const [rendered, setRendered] = useState(false)
     const [navVisible, setNavVisible] = useState(false)
     const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+    const [fakeCursorActive, setFakeCursorActive] = useState(false)
+    const cursorX = useMotionValue(0)
+    const cursorY = useMotionValue(0)
+    const cursorScale = useMotionValue(1)
+    const cursorOpacity = useMotionValue(0)
     const { getWallpaperClasses } = useTheme()
     const { addToast } = useToast()
     function generateInitialPositions(columns = 2): IconPositions {
@@ -374,6 +382,116 @@ export default function Desktop() {
             window.dispatchEvent(new CustomEvent('desktopLoaded'))
         }
     }, [])
+
+    const runFakeCursorAnimation = useCallback(() => {
+        if (!initialHomepage || !rendered) return
+
+        const startX = window.innerWidth / 2
+        const startY = window.innerHeight / 2
+
+        cursorX.set(startX)
+        cursorY.set(startY)
+        cursorScale.set(1)
+        cursorOpacity.set(0)
+
+        setFakeCursorActive(true)
+
+        const iconWidth = 112
+        const iconHeight = 75
+        const homePos = iconPositions['Home'] || { x: 0, y: 0 }
+        const container = constraintsRef.current
+        const containerRect = container?.getBoundingClientRect()
+        let targetX = startX
+        let targetY = startY
+        if (containerRect) {
+            targetX = containerRect.left + homePos.x + iconWidth / 2
+            targetY = containerRect.top + homePos.y + iconHeight / 2
+        }
+
+        const homeIconEl = document.querySelector<HTMLElement>('[data-icon-label="Home"]')
+        const zoomHoverEl = homeIconEl?.querySelector<HTMLElement>(':scope > div > div')
+
+        // Fade in → move to icon → hover → click → exit right
+        animate(cursorOpacity, 1, {
+            duration: 0.25,
+            onComplete: () => {
+                let movesDone = 0
+                const onMoveDone = () => {
+                    movesDone++
+                    if (movesDone < 2) return
+                    // Simulate hover
+                    if (zoomHoverEl) zoomHoverEl.style.top = '-0.5px'
+                    setTimeout(() => {
+                        // Click press
+                        if (zoomHoverEl) zoomHoverEl.style.top = '0.5px'
+                        animate(cursorScale, 0.8, {
+                            duration: 0.08,
+                            onComplete: () => {
+                                if (zoomHoverEl) zoomHoverEl.style.top = '-0.5px'
+                                animate(cursorScale, 1, {
+                                    duration: 0.1,
+                                    onComplete: () => {
+                                        if (zoomHoverEl) zoomHoverEl.style.top = ''
+                                        const { position, size } = getExpandedDimensions()
+                                        navigate('/', {
+                                            state: {
+                                                position,
+                                                size,
+                                                expanded: true,
+                                                snapped: false,
+                                                fromOrigin: {
+                                                    x: homePos.x - size.width / 2,
+                                                    y: homePos.y - size.height / 2,
+                                                },
+                                            },
+                                        })
+                                        // Brief pause then exit
+                                        setTimeout(() => {
+                                            animate(cursorX, window.innerWidth + 40, {
+                                                duration: 0.5,
+                                                ease: [0.4, 0, 1, 1],
+                                            })
+                                            animate(cursorOpacity, 0, {
+                                                duration: 0.3,
+                                                delay: 0.2,
+                                                onComplete: () => {
+                                                    setFakeCursorActive(false)
+                                                },
+                                            })
+                                        }, 300)
+                                    },
+                                })
+                            },
+                        })
+                    }, 120)
+                }
+                animate(cursorX, targetX, {
+                    duration: 0.7,
+                    ease: [0.25, 0.1, 0.25, 1],
+                    onComplete: onMoveDone,
+                })
+                animate(cursorY, targetY, {
+                    duration: 0.7,
+                    ease: [0.25, 0.1, 0.25, 1],
+                    onComplete: onMoveDone,
+                })
+            },
+        })
+    }, [initialHomepage, rendered])
+
+    useEffect(() => {
+        if (initialHomepage && rendered) {
+            const timeout = setTimeout(runFakeCursorAnimation, 500)
+            return () => clearTimeout(timeout)
+        }
+    }, [initialHomepage, rendered, runFakeCursorAnimation])
+
+    useEffect(() => {
+        document.documentElement.style.cursor = fakeCursorActive ? 'none' : ''
+        return () => {
+            document.documentElement.style.cursor = ''
+        }
+    }, [fakeCursorActive])
 
     const handlePositionChange = (appLabel: string, position: IconPosition) => {
         const newPositions = { ...iconPositions, [appLabel]: position }
@@ -701,6 +819,21 @@ export default function Desktop() {
                         tweenDuration={1}
                     />
                 </div>
+            )}
+            {fakeCursorActive && (
+                <motion.img
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/james_cursor_default_d6f7983b0a.png"
+                    alt=""
+                    className="fixed top-0 left-0 h-8 pointer-events-none z-[99999]"
+                    style={{
+                        x: cursorX,
+                        y: cursorY,
+                        scale: cursorScale,
+                        opacity: cursorOpacity,
+                        translateX: '-25%',
+                        translateY: '-10%',
+                    }}
+                />
             )}
         </>
     )
