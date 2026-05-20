@@ -225,7 +225,7 @@ I can see exactly how the agent decided which tools to call, what data it gather
 
 ### Prompt management
 
-One thing I quickly realized: hardcoding prompts in source code is a pain when you're iterating on tone and formatting. So I moved all my prompts into [PostHog's prompt management](/docs/prompt-management/prompts). The agent pulls its instructions, style guide, and context templates from PostHog at runtime:
+One thing I quickly realized: hardcoding prompts in source code is a pain when you're iterating on tone and formatting. So I moved all my prompts into [PostHog's prompt management](/docs/prompt-management). The agent pulls its instructions, style guide, and context templates from PostHog at runtime:
 
 - `standup-agent-instructions` - the main system prompt with workflow, formatting rules, and feedback detection
 - `custom-style` - formatting rules that enforce Slack mrkdwn links and match team conventions
@@ -265,7 +265,7 @@ In fairness, most of these are just me giving the agent iteration feedback ("dro
 
 ### Evals
 
-Here's where dogfooding gets real. The agent's biggest formatting headache is Slack's cursed `mrkdwn` syntax - it uses `<url|text>` instead of `[text](url)`, and the agent constantly tries to slip back into regular markdown. So I set up an [evaluation](/docs/ai-evals/evaluations) that automatically checks every generation: "did it use correct Slack-style markdown formatting?"
+Here's where dogfooding gets real. The agent's biggest formatting headache is Slack's cursed `mrkdwn` syntax - it uses `<url|text>` instead of `[text](url)`, and the agent constantly tries to slip back into regular markdown. So I set up an [evaluation](/docs/ai-evals) that automatically checks every generation: "did it use correct Slack-style markdown formatting?"
 
 The eval results summary tells the whole story. Generations that pass tend to use correct Slack mrkdwn links, simple bullets, and plain text headers. The failures? The agent keeps trying to sneak in `**bold**` headers, `[text](url)` markdown links, and occasionally dumps raw JSON outputs. My favorite failure pattern: the agent would use `<link|text>` syntax for headings (correct for links, completely wrong for headers) — Slack doesn't even have heading syntax, so it just needs to use plain text like `Did:`.
 
@@ -390,8 +390,8 @@ The broader lesson here: if you're building AI features, instrument them from da
 PostHog's [AI Observability](/docs/ai-observability) gives you:
 - **[Tracing](/docs/ai-observability/traces)** - See exactly what your agents are doing
 - **[Cost tracking](/docs/ai-observability/calculating-costs)** - Know what you're spending on API calls
-- **[Evals](/docs/ai-evals/evaluations)** - Measure quality systematically
-- **[Prompt management](/docs/prompt-management/prompts)** - Version and iterate on prompts without redeploying
+- **[Evals](/docs/ai-evals)** - Measure quality systematically
+- **[Prompt management](/docs/prompt-management)** - Version and iterate on prompts without redeploying
 - **[Clustering](/docs/ai-observability/clusters)** and **[sentiment](/docs/ai-observability/sentiment)** - Spot patterns in how your agent is used
 - **[User feedback](/docs/ai-observability/collect-user-feedback)** - Link quality signals to specific traces
 
