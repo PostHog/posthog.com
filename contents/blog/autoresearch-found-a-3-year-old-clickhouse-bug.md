@@ -91,7 +91,7 @@ On a 7-day funnel against a real team in production (`load_balancing='in_order'`
 | Trimmed mean (mid 3)  | 4,694 ms     | 2,954 ms     | **−37%** |
 | Skip-index granules   | 60,683       | 23,291       | **−62%** |
 
-The speedup is biggest on queries with short date ranges, because that's where partition pruning matters most. At a 7-day range you can drop most of the partitions if the planner cooperates. Wider ranges have to look at more partitions regardless, so the relative win shrinks: a 90-day query is still faster, just not by 37%. The granule reduction is real on every range; it just translates into a smaller wall-clock improvement when there are more granules to scan in absolute terms.
+The speedup is biggest on queries with short date ranges, because that's where partition pruning matters most. At a 7-day range, you can drop most of the partitions if the planner cooperates. Wider ranges have to look at more partitions regardless, so the relative win shrinks: a 90-day query is still faster, just not by 37%. The granule reduction is real on every range; it just translates into a smaller wall-clock improvement when there are more granules to scan in absolute terms.
 
 The bug had been there since the timezone change landed. About three years.
 
