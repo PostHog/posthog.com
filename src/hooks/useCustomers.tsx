@@ -400,7 +400,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     fastr: {
         name: 'Fastr',
-        toolsUsed: ['endpoints', 'feature_flags', 'session-replay', 'surveys'],
+        toolsUsed: ['endpoints', 'feature_flags', 'session_replay', 'surveys'],
         industries: ['E-commerce, MarTech'],
         users: ['Product', 'Marketing'],
         notes: 'A conversion rate optimization platform',

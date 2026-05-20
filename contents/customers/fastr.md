@@ -11,7 +11,7 @@ That model only works because Faster can spin up new analytics infrastructure fo
 
 <OSQuote
   customer="faster"
-  author="Ryan Breen"
+  author="ryan_breen"
   quote={0}
 />
 
