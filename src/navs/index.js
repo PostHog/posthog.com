@@ -2650,10 +2650,6 @@ export const docsMenu = {
                             url: '/docs/api/surveys',
                         },
                         {
-                            name: 'Product Tours',
-                            url: '/docs/api/product-tours',
-                        },
-                        {
                             name: 'Users',
                             url: '/docs/api/users',
                         },
@@ -4681,6 +4677,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/node',
                         },
                         {
+                            name: '.NET',
+                            url: '/docs/error-tracking/installation/dotnet',
+                        },
+                        {
                             name: 'Ruby',
                             url: '/docs/error-tracking/installation/ruby',
                         },
@@ -4729,6 +4729,10 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/error-tracking/installation/flutter',
+                        },
+                        {
+                            name: 'Unity',
+                            url: '/docs/error-tracking/installation/unity',
                         },
                         {
                             name: 'Elixir',
@@ -5129,109 +5133,6 @@ export const docsMenu = {
                     name: 'Changelog',
                     url: '/docs/surveys/changelog',
                     icon: 'IconRocket',
-                    color: 'purple',
-                },
-            ],
-        },
-        {
-            name: 'Product Tours',
-            url: '/docs/product-tours',
-            icon: 'IconSpotlight',
-            color: 'salmon',
-            description: 'Guide users through your product with interactive tours and announcements',
-            children: [
-                {
-                    name: 'Product Tours',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/product-tours',
-                    icon: 'IconHome',
-                    color: 'salmon',
-                },
-                {
-                    name: 'Getting started',
-                },
-                {
-                    name: 'Start here',
-                    url: '/docs/product-tours/start-here',
-                    icon: 'IconRocket',
-                    featured: true,
-                    color: 'salmon',
-                },
-                {
-                    name: 'Create product tours',
-                    url: '/docs/product-tours/creating-product-tours',
-                    icon: 'IconSpotlight',
-                    color: 'orange',
-                },
-                {
-                    name: 'Make an announcement',
-                    url: '/docs/product-tours/creating-announcements',
-                    icon: 'IconMessage',
-                    color: 'orange',
-                },
-                {
-                    name: 'Launch and manage tours',
-                    url: '/docs/product-tours/managing-tours',
-                    icon: 'IconToggle',
-                    color: 'orange',
-                },
-                {
-                    name: 'Concepts',
-                },
-                {
-                    name: 'Element selection',
-                    url: '/docs/product-tours/element-selection',
-                    icon: 'IconCursorClick',
-                    color: 'orange',
-                },
-                {
-                    name: 'Tour progression',
-                    url: '/docs/product-tours/tour-progression',
-                    icon: 'IconArrowRight',
-                    color: 'orange',
-                },
-                {
-                    name: 'Button actions',
-                    url: '/docs/product-tours/button-actions',
-                    icon: 'IconButton',
-                    color: 'orange',
-                },
-                {
-                    name: 'Localization',
-                    url: '/docs/product-tours/localization',
-                    icon: 'IconGlobe',
-                    color: 'orange',
-                },
-                {
-                    name: 'Guides',
-                },
-                {
-                    name: 'Target users and set display conditions',
-                    url: '/docs/product-tours/targeting',
-                    icon: 'IconTarget',
-                    color: 'orange',
-                },
-                {
-                    name: 'Customize styles and layouts',
-                    url: '/docs/product-tours/customization',
-                    icon: 'IconColor',
-                    color: 'orange',
-                },
-                {
-                    name: 'View and create analytics',
-                    url: '/docs/product-tours/analytics',
-                    icon: 'IconGraph',
-                    color: 'orange',
-                },
-                {
-                    name: 'Resources',
-                },
-                {
-                    name: 'Troubleshooting',
-                    url: '/docs/product-tours/troubleshooting',
-                    icon: 'IconQuestion',
                     color: 'purple',
                 },
             ],
