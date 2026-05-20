@@ -101,7 +101,7 @@ We were hand-feeding slow queries to the agent during the offsite. That doesn't 
 
 1. **Fetch slow queries from `system.query_log`.** The orchestrator that does this lives at [`products/query_performance_ai/orchestrator/slow_queries.py`](https://github.com/PostHog/posthog/blob/master/products/query_performance_ai/orchestrator/slow_queries.py).
 2. **Spin up a sandbox per candidate query**, the same sandboxes we use to run [PostHog Code](/code), our coding agent and product editor (currently in beta).
-3. **Run pi-autoresearch in each sandbox**, each with its own benchmark target and budget.
+3. **Run `pi-autoresearch` in each sandbox**, each with its own benchmark target and budget.
 4. **Have an LLM dedup the suggestions and spawn a PostHog Code session for each surviving idea.** Different sandboxes often land on the same idea, so the LLM collapses those before dispatching. PostHog Code writes the actual change against the real codebase, with tests and benchmarks.
 5. **Post the resulting PRs into our team Slack channel** so a human reviews and merges.
 
