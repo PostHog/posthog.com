@@ -113,15 +113,27 @@ Minimal example for `posthog` content type (one line per event):
 ### Setting up an S3 import
 
 1. **Prepare your data**: Export your events and format them as JSONL (one JSON object per line)
-2. **Upload to S3**: Place your `.jsonl` or `.jsonl.gz` files in an S3 bucket
+2. **Upload to S3**: Place your `.jsonl` or `.jsonl.gz` files in an S3 bucket (or S3-compatible storage)
 3. **Start import**: Provide PostHog with:
   - S3 region
   - S3 bucket name
   - AWS access key ID
   - AWS secret access key
   - Content Type (choose one of: `amplitude`, `mixpanel`, or `posthog`; your files must match this schema)
+  - Endpoint URL (optional, for S3-compatible storage only)
 
 When using the `amplitude` content type, you can also configure the same Amplitude-specific options available for [direct imports](#direct-imports-mixpanel-amplitude), including whether to import events, generate identify events, and generate group identify events.
+
+### Using S3-compatible storage
+
+S3 imports support S3-compatible storage providers like Cloudflare R2 and MinIO. To import from these providers, specify a custom **Endpoint URL** when setting up your import.
+
+| Provider | Endpoint URL format | Region |
+|----------|-------------------|---------|
+| Cloudflare R2 | `https://<ACCOUNT_ID>.r2.cloudflarestorage.com` | Set to `auto` |
+| MinIO | Your MinIO server URL (e.g., `https://minio.example.com`) | Your configured region |
+
+Leave the **Endpoint URL** field empty when importing from standard AWS S3.
 
 ## When to use each method
 
