@@ -21,7 +21,7 @@ A few weeks ago at a team offsite in Lisbon, we pointed an AI agent at our query
 
 By the next morning it had found something embarrassing: for almost three years, every query with a timestamp filter had not been using ClickHouse's primary key correctly. [The fix](https://github.com/PostHog/posthog/pull/54819) cut the number of granules ClickHouse had to scan by 62% on the benchmark query, and made the query itself meaningfully faster. More on the numbers below.
 
-This post is about the setup we used, the bug itself, and what we're building now so this kind of thing happens automatically.
+This post is about the setup we used, the bug itself, and what we're building now so this kind of analysis happens automatically.
 
 ## What's autoresearch?
 
