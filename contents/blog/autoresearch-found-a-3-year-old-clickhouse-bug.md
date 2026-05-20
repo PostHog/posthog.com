@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - robbie-coomber
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/lw-queries.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
 featuredImageType: full
 category: Engineering
 tags:
