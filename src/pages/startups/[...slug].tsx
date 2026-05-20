@@ -6,7 +6,7 @@ import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { IconCheck, IconX, IconStarFilled } from '@posthog/icons'
+import { IconCheck, IconX, IconStarFilled, IconQuestion } from '@posthog/icons'
 import OSTable from 'components/OSTable'
 import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
@@ -131,10 +131,28 @@ export default function Startups(): JSX.Element {
                 // changelogCategory="product-analytics"
                 leftSidebarContent={
                     <>
-                        <p className="text-sm mb-4 px-1">
-                            We help teams build better products. Get credits and partner benefits tailored for anyone
-                            building with AI.
-                        </p>
+                        <Accordion
+                            data-scheme="primary"
+                            className=""
+                            defaultValue="item-0"
+                            items={[
+                                {
+                                    trigger: (
+                                        <>
+                                            <IconQuestion className={`text-green size-5 inline-block`} />
+                                            <span className="flex-1">What is this?</span>
+                                        </>
+                                    ),
+                                    content: (
+                                        <p className="m-0">
+                                            PostHog for Startups helps early-stage teams and founders build better
+                                            products, faster. Get over $50,000 in credits to use across any PostHog
+                                            features, including LLM analytics.
+                                        </p>
+                                    ),
+                                },
+                            ]}
+                        />
                         <Accordion
                             data-scheme="primary"
                             className=""
@@ -176,9 +194,7 @@ export default function Startups(): JSX.Element {
                                     trigger: (
                                         <>
                                             <IconCheck className={`text-green size-5 inline-block`} />
-                                            <span className="flex-1">
-                                                Qualifications for the PostHog startup program
-                                            </span>
+                                            <span className="flex-1">Who is eligible?</span>
                                         </>
                                     ),
                                     content: (
@@ -237,9 +253,9 @@ export default function Startups(): JSX.Element {
                                 benefits perfect for anyone building AI products.
                             </p>
                             <ul className="prose prose-sm text-white mt-2 mb-4">
-                                <li>{creditValue} in PostHog credits</li>
-                                <li>Exclusive founder merch</li>
-                                <li>Partner benefits</li>
+                                <li>{creditValue} in PostHog credits for 12 months</li>
+                                <li>$12,000 in benefits from partners we like</li>
+                                <li>$1,500 of exclusive PostHog merch</li>
                             </ul>
 
                             <OSButton asLink to={applyUrl} variant="primary" size="md" external>
@@ -337,8 +353,9 @@ export default function Startups(): JSX.Element {
                             startup program with free laptop stickers.
                         </p>
 
-                        <div className="overflow-x-auto">
+                        <div>
                             <OSTable
+                                width="full"
                                 columns={[
                                     { name: '', width: 'minmax(200px, 1fr)', align: 'left' },
                                     { name: 'Pendo', width: 'minmax(150px, 200px)', align: 'left' },
@@ -414,7 +431,9 @@ export default function Startups(): JSX.Element {
                                             { content: `${creditValue} credit` },
                                             {
                                                 content: (
-                                                    <span className="font-semibold">{creditValue} credit + perks</span>
+                                                    <span className="font-semibold">
+                                                        {creditValue} credit + $12,000 in partner perks
+                                                    </span>
                                                 ),
                                                 className:
                                                     'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
@@ -589,7 +608,7 @@ export default function Startups(): JSX.Element {
                                     ),
                                 },
                                 {
-                                    trigger: 'How do I get the Incident.io/Speakeasy/Chroma discount?',
+                                    trigger: 'How do I get the Incident.io/Speakeasy/Chroma/Depot discount?',
                                     content: (
                                         <p>
                                             Once you're accepted into the PostHog for Startups program, we'll email you
