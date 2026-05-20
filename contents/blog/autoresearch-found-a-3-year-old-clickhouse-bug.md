@@ -37,7 +37,7 @@ Every year, we run [hackathons](/newsletter/hackathons) at company offsites. A l
 
 The stack we used:
 
-- **[pi](https://pi.dev/)**: a small terminal coding agent built by [Mario Zechner](https://github.com/badlogic) at Earendil. It speaks to whatever LLM you point it at, exposes a small SDK, and is small enough that you can read the entire codebase.
+- **[pi](https://pi.dev/)**: a small terminal coding agent built by [Mario Zechner](https://github.com/badlogic). It speaks to whatever LLM you point it at, exposes a small SDK, and is small enough that you can read the entire codebase.
 
 - **[pi-autoresearch](https://github.com/davebcn87/pi-autoresearch)**: a community extension by `davebcn87` that wires Karpathy's loop into pi. You give it an objective, a baseline, a benchmark command, and a target metric. It iterates, commits each candidate, runs the benchmark, and keeps a journal so the run survives context resets.
 
