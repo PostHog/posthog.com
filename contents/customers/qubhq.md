@@ -19,7 +19,8 @@ QubHQ, a self-funded startup based in Romania, with a 1.5-person engineering tea
   quote={2}
 />
 
-## From beta to production
+From beta to production
+-----------------------
 
 QubHQ started out using PostHog for storing their event data. Ad impressions and clicks are ingested as events from both the frontend and the backend, with PostHog Transformations used to verify backend-emitted events before they hit the database. An important piece of the puzzle when those events directly drive how much advertisers get charged.
 
@@ -27,7 +28,8 @@ QubHQ started out using PostHog for storing their event data. Ad impressions and
 
 When Endpoints landed in beta, it solved the problem. QubHQ has been using it in production ever since, writing the SQL behind the endpoint and feeding back bug reports along the way. Issues got resolved fast even in beta, and that responsiveness made the team comfortable shipping a real revenue-generating product on top of it. Gheorge says, "It allowed us to very easily query the data and sync it regularly, so we can reasonably charge our advertisers based on what and how their ads performed."
 
-## 16 Endpoints, terabytes of data
+16 Endpoints, terabytes of data
+-------------------------------
 
 Today, QubHQ runs roughly 16 SQL endpoints, and they sit at the heart of everything that involves money or performance metrics:
 * The advertiser dashboard, where customers see impressions, clicks, spend, and campaign performance
@@ -41,7 +43,8 @@ The reason this works is that Endpoints don't lock QubHQ into a constrained quer
 
 "I'm a really technical person, and having the power to take my endpoint query, put it in the debug interface, and analyze how things work really helps me do my job even better," Gheorghe says.
 
-## Using the source code
+Using the source code
+---------------------
 
 When QubHQ adopted Endpoints in beta, parts of it weren't fully documented — the feature was still moving fast, and docs were one step behind the engineers.
 
@@ -50,7 +53,8 @@ Gheorghe ran into a question he couldn't answer from the docs, he opened up Post
 That kind of transparency rarely shows up in commercial analytics tools. For Gheorghe, it's one of the most concrete benefits of working with an open-source platform: when documentation lags or support is busy, the code is right there. He's used the same pattern to understand performance characteristics, anticipate upcoming changes, and contribute back through the community.
 
 
-## A self-funded competitive edge
+A self-funded competitive edge
+------------------------------
 
 QubHQ is fully self-funded, they couldn't justify hiring a data engineer or running a separate analytics stack alongside the product. That math determined the whole architecture.
 
@@ -58,7 +62,8 @@ Building all of this from scratch: ingestion, processing, filtering, dashboards,
 
 "Because I built my own advertising network, the ads look like part of my menus," says Gheorghe. "They're so natively and beautifully integrated that they don't offend the customers or the restaurant owners. If we used Google ads, I couldn't do this, and I couldn't offer the same amount of money I'm offering to restaurants right now, because Google would have to take a cut of the revenue."
 
-## What's next for QubHQ
+What's next for QubHQ
+---------------------
 
 Using the infrastructure they’ve developed, QubHQ plans to expand beyond Romania and into adjacent service-industry products. And, because of some of the heavier real-time bidding workloads, the team is also evaluating PostHog's [Managed Warehouse](https://posthog.com/data-stack/managed-warehouse) to help them scale up.
 
