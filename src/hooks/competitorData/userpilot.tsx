@@ -11,6 +11,9 @@ export const userpilot = {
                 autocapture: true,
             },
         },
+        product_tours: {
+            available: true,
+        },
         surveys: {
             available: true,
         },

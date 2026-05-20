@@ -67,6 +67,9 @@ export const heap = {
                 },
             },
         },
+        product_tours: {
+            available: false,
+        },
         web_analytics: {
             available: true,
             features: {

@@ -63,6 +63,9 @@ export const pendo = {
                 },
             },
         },
+        product_tours: {
+            available: true,
+        },
         heatmaps: {
             available: true,
             features: {

@@ -11,6 +11,9 @@ export const chameleon = {
                 autocapture: false,
             },
         },
+        product_tours: {
+            available: true,
+        },
         surveys: {
             available: true,
         },

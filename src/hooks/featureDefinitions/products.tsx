@@ -36,6 +36,10 @@ export const productDescriptions = {
         name: 'Marketing analytics',
         description: 'Track conversion and campaign ROI',
     },
+    product_tours: {
+        name: 'Product tours',
+        description: 'Create guides for new users',
+    },
     support: {
         name: 'Support',
         description: 'Built-in customer support with chat widget and inbox',
