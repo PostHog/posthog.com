@@ -84,9 +84,9 @@ export default function ProductImage({ images, className = '' }: ProductImagePro
 
     return (
         <div className={`relative rounded ${className || currentImage.containerClassName}`}>
-            <button className="flex items-center justify-center w-full">
+            <div className="flex items-center justify-center w-full">
                 <ZoomImage>{content}</ZoomImage>
-            </button>
+            </div>
 
             {hasMultipleImages && (
                 <>
