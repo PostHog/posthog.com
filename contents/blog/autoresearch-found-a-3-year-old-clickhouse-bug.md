@@ -105,6 +105,6 @@ We were hand-feeding slow queries to the agent during the offsite. That doesn't 
 4. **Have an LLM dedup the suggestions and spawn a PostHog Code session for each surviving idea.** Different sandboxes often land on the same idea, so the LLM collapses those before dispatching. PostHog Code writes the actual change against the real codebase, with tests and benchmarks.
 5. **Post the resulting PRs into our team Slack channel** so a human reviews and merges.
 
-If this works, "some queries in our codebase don't use the primary key correctly" becomes a thing the system finds overnight while we're all asleep, not a thing that takes a team offsite to uncover. We'll write up the second-order results once they're real.
+If this works, "some queries in our codebase don't use the primary key correctly" becomes a thing the system finds overnight while we're all asleep, not a thing that takes three years and a team offsite to uncover. We'll write up the second-order results once they're real.
 
 In the meantime, the recipe isn't specific to slow queries. If there's a metric in your system you've been quietly tolerating (speed, memory, cost, accuracy, error rate, anything you can put a number on), build a harness you can run cheaply and don't mind being mean to, point an agent at it, and look at what comes back.
