@@ -6,7 +6,7 @@ import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { IconCheck, IconX } from '@posthog/icons'
+import { IconCheck, IconX, IconStarFilled } from '@posthog/icons'
 import OSTable from 'components/OSTable'
 import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
@@ -331,9 +331,10 @@ export default function Startups(): JSX.Element {
                     </div>
 
                     <div className="m-4 @3xl:m-8 max-w-6xl">
-                        <h2 className="mb-2">Compare others to PostHog's startup programs</h2>
+                        <h2 className="mb-2">How PostHog stacks up</h2>
                         <p className="mb-8">
-                            tl;dr: PostHog has the only startups program with a free laptop sticker...
+                            More credits, fewer limits, and partner perks you won't find elsewhere — plus the only
+                            startup program with free laptop stickers.
                         </p>
 
                         <div className="overflow-x-auto">
@@ -345,10 +346,15 @@ export default function Startups(): JSX.Element {
                                     { name: 'Amplitude', width: 'minmax(150px, 200px)', align: 'left' },
                                     { name: 'Mixpanel', width: 'minmax(150px, 200px)', align: 'left' },
                                     {
-                                        name: 'PostHog',
+                                        name: (
+                                            <span className="flex items-center gap-1.5">
+                                                <IconStarFilled className="size-4 text-yellow" />
+                                                PostHog
+                                            </span>
+                                        ),
                                         width: 'minmax(150px, 200px)',
                                         align: 'left',
-                                        className: '!bg-white dark:!bg-dark',
+                                        className: '!bg-[#FFF6DE] dark:!bg-yellow/20 !border-l-2 !border-l-yellow',
                                     },
                                 ]}
                                 rows={[
@@ -380,7 +386,8 @@ export default function Startups(): JSX.Element {
                                                         <li>&lt;2 years old</li>
                                                     </ul>
                                                 ),
-                                                className: 'bg-light dark:bg-dark',
+                                                className:
+                                                    'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
                                             },
                                         ],
                                     },
@@ -391,7 +398,11 @@ export default function Startups(): JSX.Element {
                                             { content: '1,000 monthly sessions' },
                                             { content: 'One year duration' },
                                             { content: 'One year duration' },
-                                            { content: 'One year duration', className: 'bg-light dark:bg-dark' },
+                                            {
+                                                content: 'One year duration',
+                                                className:
+                                                    'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
+                                            },
                                         ],
                                     },
                                     {
@@ -401,51 +412,60 @@ export default function Startups(): JSX.Element {
                                             { content: 'None' },
                                             { content: '200,000 MTUs' },
                                             { content: `${creditValue} credit` },
-                                            { content: `${creditValue} credit`, className: 'bg-light dark:bg-dark' },
+                                            {
+                                                content: (
+                                                    <span className="font-semibold">{creditValue} credit + perks</span>
+                                                ),
+                                                className:
+                                                    'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
+                                            },
                                         ],
                                     },
                                     {
                                         cells: [
                                             { content: 'Open source product', className: 'font-semibold' },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
                                             {
-                                                content: <IconCheck className="size-5 text-green" />,
-                                                className: 'bg-light dark:bg-dark',
+                                                content: <IconCheck className="size-6 text-green" />,
+                                                className:
+                                                    'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
                                             },
                                         ],
                                     },
                                     {
                                         cells: [
                                             { content: 'Free gifts (OMG stickers)', className: 'font-semibold' },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
                                             {
-                                                content: <IconCheck className="size-5 text-green" />,
-                                                className: 'bg-light dark:bg-dark',
+                                                content: <IconCheck className="size-6 text-green" />,
+                                                className:
+                                                    'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
                                             },
                                         ],
                                     },
                                     {
                                         cells: [
                                             { content: 'Partnership opportunities', className: 'font-semibold' },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
                                             {
-                                                content: <IconCheck className="size-5 text-green" />,
-                                                className: 'bg-light dark:bg-dark',
+                                                content: <IconCheck className="size-6 text-green" />,
+                                                className:
+                                                    'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
                                             },
                                         ],
                                     },
                                 ]}
                                 editable={false}
-                                size="sm"
+                                size="md"
                             />
                         </div>
                     </div>
