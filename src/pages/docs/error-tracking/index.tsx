@@ -43,7 +43,7 @@ const phFeatures = [
         title: 'LLM analytics',
         description: 'Debug LLM calls and AI generations with full conversation traces and built-in error tracking.',
         icon: <IconLlmAnalytics className="text-[#681291]" />,
-        url: '/docs/llm-analytics',
+        url: '/docs/ai-observability',
     },
     {
         title: 'Data warehouse',

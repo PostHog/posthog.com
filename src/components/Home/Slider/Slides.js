@@ -1045,7 +1045,7 @@ export const LLMAnalytics = () => {
             )}
             contentOffset=""
             buttonLabel="Explore"
-            buttonUrl="/docs/llm-analytics"
+            buttonUrl="/docs/ai-observability"
             buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
             buttonChildClasses="!bg-[#fff] border-black/50 !text-black group-hover:text-black"
         />

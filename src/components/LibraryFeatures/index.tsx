@@ -27,7 +27,7 @@ const features = [
     {
         key: 'llmAnalytics',
         name: 'LLM analytics',
-        url: 'https://posthog.com/docs/llm-analytics',
+        url: 'https://posthog.com/docs/ai-observability',
     },
     { key: 'errorTracking', name: 'Error tracking', url: 'https://posthog.com/docs/error-tracking' },
 ] as const
