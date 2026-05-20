@@ -2646,6 +2646,23 @@ article.reader-view-content-container:has(.quest-sidebar) {
     iframe {
         @apply w-full aspect-video; /* attempt to make youtube videos full width with hopefully no negative consequences... */
     }
+
+    /* Strip the link affordance from self-referencing links inside the Reader
+       app's content container. Gatsby Link (via @gatsbyjs/reach-router) auto-
+       adds aria-current="page" when the link's href matches the current
+       pathname, so this rule catches those and renders them as plain text.
+       pointer-events: none is intentional — it also suppresses the link's
+       context menu, glossary tooltip, and hover prefetch on self-links.
+       Currently, in-page anchors (/foo#bar) and child-page links (/foo/bar)
+       don't receive aria-current and are preserved; revisit if Gatsby's
+       router matching behavior changes.
+       Keyboard focus is removed via a companion effect in components/Wrapper. */
+    a[aria-current='page'] {
+        text-decoration: none;
+        pointer-events: none;
+        color: inherit;
+        cursor: default;
+    }
 }
 
 div[data-radix-popper-content-wrapper] {
