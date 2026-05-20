@@ -16,7 +16,7 @@ import YCombinatorLogo from 'components/CustomerLogos/YCombinatorLogo'
 import SupabaseLogo from 'components/CustomerLogos/SupabaseLogo'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
-import { IconRewindPlay, IconToggle, IconDatabase } from '@posthog/icons'
+import { IconRewindPlay, IconToggle, IconDatabase, IconChevronDown } from '@posthog/icons'
 
 const TOP_COUNT = 8
 const PLATFORM_ORDER = [
@@ -37,6 +37,7 @@ const PLATFORM_ORDER = [
 export default function ProductAnalyticsLanding(): JSX.Element {
     const [showMore, setShowMore] = useState(false)
     const [isIdle, setIsIdle] = useState(false)
+    const [openQuestion, setOpenQuestion] = useState<number | null>(null)
 
     const allPlatforms = usePlatformList('docs/product-analytics/installation', 'product analytics installation')
     const sortedPlatforms = useMemo(() => {
@@ -501,6 +502,102 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             </div>
                         </QuestLogItem>
 
+                        <QuestLogItem
+                            title="Questions engineers ask us"
+                            subtitle="Real questions, answered"
+                            icon="IconThoughtBubble"
+                        >
+                            <p>
+                                Real questions from engineers and founders — with links to step-by-step tutorials and
+                                docs.
+                            </p>
+
+                            <div className="not-prose divide-y divide-border">
+                                {[
+                                    {
+                                        question: 'How do I calculate new vs returning users?',
+                                        answer: 'Use the lifecycle insight to break down users by new, returning, and dormant. Click any segment to see who those users are and jump into their sessions.',
+                                        url: '/tutorials/track-new-returning-users',
+                                    },
+                                    {
+                                        question: "What's my churn rate and how can I reduce it?",
+                                        answer: 'Build a retention chart and define what "return" means for your product. Correlation analysis automatically surfaces what churned users did differently — no guesswork.',
+                                        url: '/tutorials/churn-rate',
+                                    },
+                                    {
+                                        question: 'Which features increase user retention?',
+                                        answer: 'Filter your retention chart by feature usage events and compare cohorts. You can also use correlation analysis on retained users to find which actions predict long-term engagement.',
+                                        url: '/tutorials/feature-retention',
+                                    },
+                                    {
+                                        question: 'How can I find my power users?',
+                                        answer: 'Use stickiness to find users who perform key actions most frequently. Create a cohort of those users and compare their behavior against everyone else.',
+                                        url: '/tutorials/power-users#identifying-your-power-user',
+                                    },
+                                    {
+                                        question: 'How are changes improving my activation flow?',
+                                        answer: 'Build a funnel from signup to your activation event and compare conversion before and after a change. Jump from any drop-off step directly into session recordings for those users.',
+                                        url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
+                                    },
+                                    {
+                                        question: 'How do I track ad conversion?',
+                                        answer: 'Capture UTM parameters automatically and break down your signup funnel by utm_source or utm_campaign. See which channels are actually converting, not just sending traffic.',
+                                        url: '/tutorials/performance-marketing',
+                                    },
+                                    {
+                                        question: 'Where do my users spend the most time?',
+                                        answer: 'Use the session metrics insight to measure time on page and time between events. Combine with user paths to see where users go after spending time in key areas.',
+                                        url: '/tutorials/session-metrics',
+                                    },
+                                    {
+                                        question: "Is PostHog's MCP really that great?",
+                                        answer: "We like to think so. It saves you from having to learn the PostHog UI while keeping you in the zone. Don't you want to stay in the zone? The zone's great. You ship. Iterate. Innovate. Ideate. Lots of buzzwords, but that's what the zone is all about, baby!",
+                                        url: '',
+                                    },
+                                ].map((item, i) => (
+                                    <div key={i} className="py-3">
+                                        <button
+                                            onClick={() => setOpenQuestion(openQuestion === i ? null : i)}
+                                            className="w-full text-left flex items-center justify-between gap-4 font-semibold text-sm cursor-pointer hover:text-primary transition-colors"
+                                        >
+                                            <span>{item.question}</span>
+                                            <IconChevronDown
+                                                className={`shrink-0 size-4 transition-transform duration-200 ${
+                                                    openQuestion === i ? 'rotate-180' : ''
+                                                }`}
+                                            />
+                                        </button>
+                                        {openQuestion === i && (
+                                            <div className="mt-2 text-sm">
+                                                <p className="text-secondary !mb-2">{item.answer}</p>
+                                                {item.url && (
+                                                    <>
+                                                        <p className="text-secondary !mb-2">
+                                                            ...or just use the MCP and ask your hogpilled agent to get
+                                                            your answer.
+                                                        </p>
+                                                        <Link
+                                                            to={item.url}
+                                                            state={{ newWindow: true }}
+                                                            className="text-red dark:text-yellow font-semibold text-xs hover:underline"
+                                                        >
+                                                            Read the tutorial →
+                                                        </Link>
+                                                    </>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="mt-6">
+                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                    Get started free
+                                </CallToAction>
+                            </div>
+                        </QuestLogItem>
+
                         <QuestLogItem title="Use for free" subtitle="Free 1M events/mo" icon="IconPiggyBank">
                             <p>
                                 PostHog's Product Analytics is built to be cost-effective by default, with a generous
@@ -546,6 +643,25 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             </div>
                         </QuestLogItem>
                     </QuestLog>
+                </div>
+
+                <div className="text-center py-16 mt-4 opacity-60 hover:opacity-100 transition-opacity duration-500">
+                    <p className="text-sm text-secondary italic !mb-4">
+                        You made it to the bottom. That makes you special. At least to us. So here's a special sign.
+                    </p>
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Frame_10138_5169832152.png"
+                        alt="PostHog hedgehog"
+                        className="mx-auto mb-4"
+                        imgClassName="w-28 h-auto"
+                    />
+                    <p className="text-sm text-secondary italic !mb-0">
+                        Try{' '}
+                        <Link to="/code" className="underline">
+                            PostHog Code
+                        </Link>{' '}
+                        for free. It's very special. Just like you. See for yourself.
+                    </p>
                 </div>
             </ReaderView>
         </>
