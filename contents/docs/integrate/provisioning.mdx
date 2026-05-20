@@ -335,7 +335,7 @@ Authenticate with the `access_token` you got from [Step 2](#step-2-exchange-the-
 }
 ```
 
-The returned `url` is valid for 10 minutes and can only be opened once. Use it as the `href` for the "Open in PostHog" button. Don't cache the URL across renders – generate a fresh one per click so the token stays valid.
+The returned `url` is valid for 10 minutes and can only be opened once, so don't pre-render it as the button's `href`. Wire the button click to your backend, call `/deep_links` there, then redirect the user to the returned URL.
 
 #### Requires a trusted partner record
 
