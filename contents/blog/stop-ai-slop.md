@@ -28,7 +28,7 @@ If you’re shipping anything LLM-powered in production, you need a simple way t
 That's what evaluations are for.
 
 ## Your judge, jury, and execution environment
-PostHog [evaluations](/docs/ai-evals/evaluations) use LLM-as-a-judge to automatically score generative AI outputs against criteria like relevance, helpfulness, or toxicity. 
+PostHog [evaluations](/docs/ai-evals) use LLM-as-a-judge to automatically score generative AI outputs against criteria like relevance, helpfulness, or toxicity. 
 
 **How it works:**
 - Write a short evaluation prompt 

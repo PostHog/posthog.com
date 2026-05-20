@@ -88,7 +88,7 @@ Even though our agent is non-deterministic, you can set up deterministic evaluat
 
 There are more subjective cases where you can't capture what you're trying to evaluate in a piece of code. As a human, you could immediately tell whether a set of inputs and outputs pass the criterion, but you can't write test code to capture that reasoning.
 
-For such complex cases, we can use an LLM to act as an evaluator. This is known as an [LLM-as-a-Judge](/docs/ai-evals/evaluations#llm-as-a-judge-evaluations), and with it, we can capture things like:
+For such complex cases, we can use an LLM to act as an evaluator. This is known as an [LLM-as-a-Judge](/docs/ai-evals), and with it, we can capture things like:
 
 1. The agent addressed the user's query
 2. The agent responded with offensive or unsafe content
@@ -124,7 +124,7 @@ That still leaves one major problem. We now have tests for our agent, just like 
 
 The offline evaluations we run while developing our agent only capture the inputs we have defined in our tests. In reality, users can input a near-infinite range of possibilities. We need a way to capture those inputs, check the equivalent outputs, and run our evaluators on them too. This type of evaluation that runs on production traces coming in is known as "online".
 
-Running your evaluators on all production traces sounds expensive, because it is, especially if you depend on LLM-as-a-Judge evaluators. This is why it's important to use code-based evaluators where possible. At PostHog, code-based evaluators for online evaluations use [Hog](/docs/ai-evals/evaluations#code-based-evaluations-hog). You can't, however, only depend on code-based evaluators, so you can also:
+Running your evaluators on all production traces sounds expensive, because it is, especially if you depend on LLM-as-a-Judge evaluators. This is why it's important to use code-based evaluators where possible. At PostHog, code-based evaluators for online evaluations use [Hog](/docs/ai-evals). You can't, however, only depend on code-based evaluators, so you can also:
 
 1. Use a cheaper LLM-as-a-Judge model that can still capture the intricacies of what you're evaluating
 2. Filter the traces on which you run certain evaluators, for example by feature
@@ -151,7 +151,7 @@ Here are a few ideas:
 
 The PostHog teams working on AI features and agents have a weekly ritual called Traces Hour, where they look at and review traces that have been marked for review throughout the week. They come from all the sources listed above.
 
-PostHog also has [Reviews and Review Queues](/docs/ai-evals/trace-reviews), which help you build these lists of traces and review them one by one.
+PostHog also has [Reviews and Review Queues](/docs/ai-evals), which help you build these lists of traces and review them one by one.
 
 Going through this process will help you and your team find new bad interactions and bugs to fix, which in turn leads to the creation of new evaluators to prevent regressions and detect other user inputs that still fail after your fix is live.
 

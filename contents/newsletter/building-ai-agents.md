@@ -119,7 +119,7 @@ Basically, [AI Observability](/llm-analytics).
 
 Unfortunately, AI Observability alone isn’t enough. Reality is gnarly and to deal with it, our team often looks at real usage.
 
-They run a “traces hour,” where they meet, manually analyze LLM traces (AKA real user interactions), and find areas to improve. [Evals](/docs/ai-evals/evaluations) make the most sense when they stem from these investigations.
+They run a “traces hour,” where they meet, manually analyze LLM traces (AKA real user interactions), and find areas to improve. [Evals](/docs/ai-evals) make the most sense when they stem from these investigations.
 
 Like building any successful product, understanding a user’s experience is critical to building a successful agent.
 
