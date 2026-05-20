@@ -124,6 +124,17 @@ This ensures that only relevant, post-exposure behavior is included in the analy
   alt="Screenshot of conversion window configuration"
 />
 
+### Require completed conversion window
+
+By default, all participants are included in the analysis from the moment they're exposed, even if their conversion or retention window hasn't elapsed yet. This can dilute your metrics – for example, in a 7-day retention experiment, a user exposed 2 days ago would be counted even though they haven't had enough time to be retained.
+
+Enable the **Require completed conversion window** toggle in the experiment **Settings** tab to exclude participants whose conversion or retention window hasn't elapsed yet. This applies to:
+
+- **Funnel, mean, and ratio metrics** with a conversion window set
+- **Retention metrics** using a retention window
+
+You can set the default for this toggle across all new experiments in your [environment's experiment settings](https://app.posthog.com/settings/environment-experiments).
+
 ## Primary and secondary metrics
 
 Each metric can be set as either a **primary** or **secondary** metric. This is just a way of organizing metrics - primary and secondary metrics work the same way.
