@@ -24,6 +24,7 @@ type SelectProps = {
     defaultValue?: string
     onValueChange?: (value: string) => void
     placeholder?: string
+    prefix?: string
     disabled?: boolean
     required?: boolean
     name?: string
@@ -85,6 +86,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
             defaultValue,
             onValueChange,
             placeholder,
+            prefix,
             disabled,
             required,
             name,
@@ -160,6 +162,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                             {selectedItem && (
                                 <span className="flex space-x-1 items-center">
                                     <Icon icon={selectedItem.icon} color={selectedItem.color} className="size-4" />
+                                    {prefix && <span className="text-muted">{prefix}:</span>}
                                     <span className={`${selectedItem.label?.length > 20 ? 'text-xs' : ''}`}>
                                         {selectedItem.label}
                                     </span>

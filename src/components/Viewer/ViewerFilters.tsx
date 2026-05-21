@@ -120,6 +120,7 @@ export default function ViewerFilters({
                             key={`${Object.keys(filters).length}-${filter.label}`}
                             disabled={disableFilterChange}
                             placeholder={filter.label}
+                            prefix={filter.label}
                             defaultValue={resolvedDefault === null ? undefined : resolvedDefault}
                             groups={[
                                 {

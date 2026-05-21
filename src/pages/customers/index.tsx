@@ -180,7 +180,7 @@ export default function Customers(): JSX.Element {
                                 operator: 'includes',
                             },
                             {
-                                label: 'Case study?',
+                                label: 'Case study',
                                 options: [
                                     { label: 'Any', value: undefined },
                                     { label: 'Yes', value: true },
