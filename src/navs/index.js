@@ -5045,6 +5045,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Translating surveys',
+                    url: '/docs/surveys/translations',
+                    icon: 'IconGlobe',
+                    color: 'teal',
+                },
+                {
                     name: 'PostHog AI',
                 },
                 {
