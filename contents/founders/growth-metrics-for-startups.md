@@ -25,9 +25,9 @@ Here's the advice about growth metrics I'd give to founders at companies that do
 
 ## 1. Defining your ICP is not optional
 
-If you pull PostHog's usage data without any filters, you'll see a huge dip every June. Investors often express concern about this at first since, for most companies, that's a red flag.
+If you pull PostHog's retention data without any filters, you'll see a curve that drops hard in the first few months. Investors often flag this as a concern – for most companies, it is one.
 
-But for us, it's fine. Because when you filter for [our actual ICP](/handbook/who-we-build-for) – the people building products at high-growth startup – you see a clean growth trend instead. Turns out it's just all the hobbyists taking a break for the summer:
+But for us, it's not. Hobbyists try PostHog for short-term projects and then bounce – they were never going to stick around. When you filter for [our actual ICP](/handbook/who-we-build-for) – the people building products at high-growth startups – retention is actually healthy:
 
 ![ICP retention](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_08_at_2_53_24_PM_025be5c8e4.png)
 
@@ -35,12 +35,11 @@ That's the power of a strong ICP definition. A lot of founders think of ICP as t
 
 If you don't define your ICP, you'll suffer. And I get why people struggle with it – it requires making a bet on who you're _not_ building for, which feels scary when you're hungry for revenue and worried about ruling anyone out. It's also tempting to keep your ICP broad so you have wiggle room, but a vague ICP is just no ICP. You need to get specific enough that it feels a little uncomfortable.
 
-Defining our ICP is the most important thing we've ever done. The rest of this article is pointless if you don't start with this.
+Defining our ICP is [the most important thing we've ever done](/newsletter/ideal-customer-profile-framework). The rest of this article is pointless if you don't start with this.
 
 We already wrote a lot about how to do this, so I'll link them here instead of repeating them:
 
 - [How we found our Ideal Customer Profile](/founders/creating-ideal-customer-profile) – our co-CEO James on the exact process we ran, including tracking customers who _didn't_ buy
-- [Defining our ICP is the most important thing we ever did](/newsletter/ideal-customer-profile-framework) – a more structured framework with the specific attributes to define and how to test them
 - [The Product-Market Fit Game](/founders/product-market-fit-game) – how ICP and PMF are intertwined, and why you can't find one without the other
 - [How to measure product-market fit](/founders/measure-product-market-fit) – once you have an ICP, how to tell if you actually have fit within it
 
