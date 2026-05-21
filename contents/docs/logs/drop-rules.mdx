@@ -10,29 +10,29 @@ Go to [**Logs** > **Settings**](https://app.posthog.com/logs/settings) to create
 
 PostHog supports three rule types:
 
-- **Drop when matched** - Drop logs that match a regex pattern on a path or attribute
+- **Drop** - Drop logs that match specific filters
 - **Drop by severity** - Sample or drop entire severity levels (debug, info, warn, error)
-- **Rate limit by service** - Cap logs per second for a specific service
+- **Rate limit** - Cap log volume (in KB/s) for logs matching specific filters
 
 Rules are evaluated in priority order. The first matching rule wins.
 
-## Drop when matched
+## Drop
 
-Filter out specific log patterns, like health checks or noisy endpoints.
+Drop all logs that match specific filters, like health checks or noisy services.
 
 1. Go to [**Logs** > **Settings**](https://app.posthog.com/logs/settings) and click **New rule**
-2. Select **Drop when matched** as the rule type
-3. Enter one or more regex patterns to match against
+2. Select **Drop** as the action type
+3. Add filters to match the logs you want to drop
 
-By default, patterns match against the log's path (the first non-empty value among `url.path`, `http.path`, `http.route`, or `path`). To match a different attribute, select **Custom attribute** and enter the attribute key.
+Use the filter bar to build conditions based on any log attribute. Common filters include:
 
-**Example patterns:**
+| Filter | Example | Effect |
+|--------|---------|--------|
+| `service.name` | `equals "health-checker"` | Drop logs from a specific service |
+| `http.route` | `contains "/internal/"` | Drop internal API routes |
+| `container.name` | `is set` | Drop logs from containerized workloads |
 
-| Pattern | Matches |
-|---------|---------|
-| `/healthz` | Health check endpoints |
-| `^/api/internal/` | Internal API routes |
-| `GET /static/` | Static asset requests |
+The **volume preview** shows how many logs would match your filters over the last 24 hours, broken down by service. Use this to verify your rule targets the right logs before saving.
 
 ## Drop by severity
 
@@ -59,52 +59,53 @@ You can also configure **Always keep** conditions to preserve important logs reg
 - **Status code ≥** - Keep logs with HTTP status codes at or above a threshold
 - **Latency >** - Keep logs where request latency exceeds a threshold in milliseconds
 
-## Rate limit by service
+## Rate limit
 
-Cap how many logs per second PostHog stores for a specific service. Logs above the limit are dropped at ingestion.
+Cap log volume (in KB/s) for logs matching specific filters. Logs above the limit are dropped at ingestion.
 
 1. Go to [**Logs** > **Settings**](https://app.posthog.com/logs/settings) and click **New rule**
-2. Select **Rate limit by service** as the rule type
-3. Choose or enter a service name (must match `service.name` exactly, case-sensitive)
-4. Set the **sustained limit** - how many logs per second to store on average
-5. Optionally set the **burst capacity** - how many logs can spike above the sustained rate before dropping begins
-
-The service picker shows services from the last 24 hours. You can also type a service name directly.
+2. Select **Rate limit** as the action type
+3. Set the rate limit in KB/s, MB/s, or GB/s (minimum 1 KB/s, maximum 1 GB/s)
+4. Add filters to specify which logs the rate limit applies to
 
 **How rate limiting works:**
 
-PostHog uses a token bucket algorithm:
+PostHog uses a token bucket algorithm based on log volume (bytes), not count:
 
-- The bucket fills at your sustained rate (e.g., 100 logs/second)
-- The bucket holds up to your burst capacity (defaults to 3× sustained)
-- Each log consumes one token
+- The bucket fills at your configured rate (e.g., 5 MB/s)
+- The bucket holds up to 10× your rate limit as burst capacity
+- Each log consumes tokens based on its size in bytes
 - When the bucket is empty, excess logs are dropped
 
-This allows short traffic spikes while keeping your average volume at or below the sustained rate.
+This allows short traffic spikes while keeping your average volume at or below the configured rate.
+
+The **volume preview** shows matching log volume over the last 24 hours. A dashed line indicates your rate limit threshold – logs above this line would be dropped. If the threshold line is above the chart, no logs would be dropped under current traffic patterns.
 
 **Example:**
 
 | Setting | Value | Effect |
 |---------|-------|--------|
-| Service | `payment-api` | Only affects logs from this service |
-| Sustained limit | 100 logs/sec | Average 100 logs/second stored |
-| Burst capacity | 300 | Up to 300 logs can be stored during short spikes |
+| Rate limit | 5 MB/s | Store up to 5 MB/second of matching logs |
+| Filter | `service.name equals "payment-api"` | Only rate limit this service |
 
-With these settings, if `payment-api` emits 500 logs in one second, the first 300 are stored (drawing from burst capacity) and 200 are dropped. The bucket refills at 100/second, so sustained volume trends toward 100 logs/second.
+With these settings, if `payment-api` emits 10 MB of logs in one second, approximately 5 MB are stored and the rest are dropped.
 
 **Configuration limits:**
 
-- Sustained limit: 1 to 1,000,000 logs/second
-- Burst capacity: must be ≥ sustained limit, up to 60,000,000
+- Rate limit: 1 KB/s to 1 GB/s
+- Burst capacity: automatically set to 10× your rate limit
 
-## Scoping rules
+## Volume preview
 
-All rule types support optional scoping:
+When creating or editing a drop or rate limit rule, a volume preview shows how your filters would affect logs from the last 24 hours.
 
-- **Service name** - Restrict the rule to logs from a specific `service.name`. Required for rate limit rules, optional for others.
-- **Path pattern** - Restrict the rule to logs matching a path regex (not available for rate limit rules)
+The preview displays:
 
-When both are set, both conditions must match for the rule to apply.
+- **Sparkline chart** – matching log volume over time, broken down by service (top 10 services shown)
+- **Total count or volume** – matching logs in the preview period
+- **Dashed threshold line** – for rate limit rules, shows where logs would be dropped
+
+Use this to verify your filters target the right logs before saving.
 
 ## Rule priority
 
