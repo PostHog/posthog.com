@@ -2,7 +2,7 @@ name: Deploy preview to Cloudflare Pages
 
 on:
     pull_request:
-        types: [opened, synchronize, reopened]
+        types: [opened, synchronize, reopened, labeled]
 
 concurrency:
     group: deploy-preview-${{ github.event.pull_request.number }}
@@ -23,7 +23,7 @@ jobs:
 
         steps:
             - name: Find existing comment
-              uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3
+              uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3.1.0
               id: find-comment
               with:
                   issue-number: ${{ github.event.pull_request.number }}
@@ -36,7 +36,7 @@ jobs:
 
             - name: Comment pending
               id: comment
-              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
+              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
               with:
                   issue-number: ${{ github.event.pull_request.number }}
                   comment-id: ${{ steps.find-comment.outputs.comment-id }}
@@ -50,19 +50,20 @@ jobs:
                       | 🟡 **Building** | [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) | ${{ steps.timestamp.outputs.time }} |
 
             - name: Checkout
-              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
             - name: Set up pnpm
               uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
 
             - name: Set up Node.js
-              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
               with:
                   node-version: '22'
                   cache: 'pnpm'
 
             - name: Cache Gatsby
-              uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+              if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-cache') }}
+              uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
               with:
                   path: |
                       .cache
@@ -70,6 +71,12 @@ jobs:
                   key: gatsby-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'gatsby-config.js') }}
                   restore-keys: |
                       gatsby-${{ runner.os }}-
+
+            - name: Clean Gatsby cache
+              if: ${{ contains(github.event.pull_request.labels.*.name, 'no-cache') }}
+              run: |
+                  echo "::warning::Gatsby cache skipped — 'no-cache' label detected. Running a clean build."
+                  rm -rf .cache public
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
@@ -83,7 +90,7 @@ jobs:
 
             - name: Deploy to Cloudflare Pages
               id: deploy
-              uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3
+              uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3.14.1
               with:
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -97,7 +104,7 @@ jobs:
 
             - name: Comment on success
               if: success()
-              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
+              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
               with:
                   issue-number: ${{ github.event.pull_request.number }}
                   comment-id: ${{ steps.comment.outputs.comment-id }}
@@ -110,9 +117,37 @@ jobs:
                       |--------|---------|---------|
                       | 🟢 **Ready** | [View preview](${{ steps.deploy.outputs.deployment-url }}) | ${{ steps.timestamp-final.outputs.time }} |
 
+            - name: Notify reviewer on successful builds (Inkeep PRs only)
+              if: success() && contains(github.event.pull_request.user.login, 'inkeep')
+              uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+              with:
+                  script: |
+                      const pr = context.payload.pull_request;
+                      const reviewers = pr.requested_reviewers.map(r => `@${r.login}`).join(', ');
+                      await github.rest.issues.createComment({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: pr.number,
+                        body: `Hey ${reviewers}! This docs PR was generated for you by an agent. You're responsible for reviewing and merging it into production.\n\n1. Review and approve the PR\n2. Merge the PR\n   a. Check the preview env and CI build and merge it yourself\n   b. Enable auto-merge if you're confident in the changes`
+                      });
+
+            - name: Notify reviewer on build failure (Inkeep PRs only)
+              if: failure() && contains(github.event.pull_request.user.login, 'inkeep')
+              uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+              with:
+                  script: |
+                      const pr = context.payload.pull_request;
+                      const reviewers = pr.requested_reviewers.map(r => `@${r.login}`).join(', ');
+                      await github.rest.issues.createComment({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: pr.number,
+                        body: `Hey ${reviewers}! This docs PR was generated for you by an agent. You're responsible for reviewing and merging it into production.\n\nThe deploy preview failed to build. [View logs](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) to see what went wrong. If it looks like a flaky failure, re-run the workflow.`
+                      });
+
             - name: Comment on failure
               if: failure()
-              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
+              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
               with:
                   issue-number: ${{ github.event.pull_request.number }}
                   comment-id: ${{ steps.comment.outputs.comment-id }}

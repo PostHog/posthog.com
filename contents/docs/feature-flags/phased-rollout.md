@@ -71,7 +71,7 @@ To create a cohort, go to the [cohorts tab](https://app.posthog.com/cohorts) and
 
 Once created, repeat for the rest of your phases. You can then use the cohorts as the release conditions in feature flags and swap them out as the phased rollout progresses.
 
-> **Note:** You cannot use dynamic behavioral or lifecycle cohorts (based on completed events) with feature flags. Read more details in the [feature flag documentation](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag).
+> **Note:** You cannot use dynamic behavioral or lifecycle cohorts (based on completed events) with feature flags. Read more details in the [feature flag documentation](/docs/feature-flags/troubleshooting#why-cant-i-use-a-cohort-with-behavioral-or-lifecycle-filters-in-my-feature-flag).
 
 ## Further reading
 

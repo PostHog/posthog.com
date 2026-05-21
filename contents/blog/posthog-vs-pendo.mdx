@@ -46,7 +46,7 @@ Pendo now includes session replay and user engagement on higher tiers, but still
 
 ### 2. PostHog is built for engineers
 
-We built PostHog for product and engineering teams — especially [engineers with a product focus](/product-engineer/what-is-a-product-engineer). As such, PostHog includes many powerful features that aren't available in tools like Pendo, which are built for more general audiences. It also means you get support from the engineers who _actually build the product_, [extensively documented APIs](/docs/api), and a [SQL query builder](/docs/product-analytics/sql), so you can analyze data how you want.
+We built PostHog for product and engineering teams – especially [engineers with a product focus](/product-engineer/what-is-a-product-engineer). As such, PostHog includes many powerful features that aren't available in tools like Pendo, which are built for more general audiences. It also means you get support from the engineers who _actually build the product_, [extensively documented APIs](/docs/api), and a [SQL query builder](/docs/product-analytics/sql), so you can analyze data how you want.
 
 ### 3. Transparent pricing, generous free tiers
 
@@ -60,7 +60,7 @@ We also default to charging as little as possible while still making a sensible 
 
 ## Comparing PostHog and Pendo
 
-**Pendo** has four pricing tiers — Free, Base, Core, and Ultimate. Pendo's Free plan is limited to 500 monthly active users and doesn't include session replays.
+**Pendo** has four pricing tiers – Free, Base, Core, and Ultimate. Pendo's Free plan is limited to 500 monthly active users and doesn't include session replays.
 
 **PostHog** uses usage-based pricing with a generous free tier – no credit card required, and unlimited teammates on every plan. Every month, you get 1 million events, 5,000 session replays, 1 million feature flag requests, and more for free. After that, you only pay for what you use, and pricing gets cheaper at scale.
 
@@ -72,7 +72,7 @@ Adding a credit card unlocks additional features like advanced paths, correlatio
 - **Surveys**: 1,500 responses/month
 - **Data warehouse**: 1 million synced rows/month + free historical syncs for the first 7 days for each new source
 - **Error tracking**: 100 thousand exceptions/month
-- **LLM analytics**: 100 thousand events/month
+- **LLM observability**: 100 thousand events/month
 - **Logs**: 50GB ingested/month
 - **Workflows**: 10,000 messages per channel/month
 - **PostHog AI**: 2,000 credits/month
@@ -158,7 +158,7 @@ Pendo is built around in-app guides, tooltips, onboarding flows, and collecting 
 
 [**Workflows**](/docs/workflows) is PostHog's no-code automation builder for sending behavior-triggered messages and actions. You can send emails, Slack messages, and SMS (via Twilio), add delays and branching logic, split audiences, and trigger any CDP destination – all based on live product events. Think onboarding drip campaigns, milestone notifications, or Slack alerts when a user hits a key event.
 
-The biggest difference is that Pendo provides tooltips and product tours, which can be set up using its drag-and-drop editor without engineering support. PostHog doesn't offer in-app guides (yet, it's currently in alpha) — instead, it covers user engagement through [Surveys](/surveys) for targeted feedback and [Workflows](/workflows) for behavior-triggered messaging, with deeper integration into your product data.
+The biggest difference is that Pendo provides tooltips and product tours, which can be set up using its drag-and-drop editor without engineering support. PostHog doesn't offer in-app guides – instead, it covers user engagement through [Surveys](/surveys) for targeted feedback and [Workflows](/workflows) for behavior-triggered messaging, with deeper integration into your product data.
 
 ### CDP and integrations
 
@@ -242,7 +242,7 @@ Regulatory compliance can be a critical need for many teams, especially if they 
 
 Pendo and PostHog both support a variety of tracking and implementation options to get your data into their platform. Both platforms enable you to create tracked events manually, as well as offering autocapture to help you get started quickly.
 
-Autocapture is preferred by many users because it's faster to set up, but some argue that it creates too much noise or cost to be useful. We disagree, and it's why PostHog gives you your first million events for free, every month — so you can capture events without worrying about these issues. [It's something we feel quite strongly about](/blog/is-autocapture-still-bad).
+Autocapture is preferred by many users because it's faster to set up, but some argue that it creates too much noise or cost to be useful. We disagree, and it's why PostHog gives you your first million events for free, every month – so you can capture events without worrying about these issues. [It's something we feel quite strongly about](/blog/is-autocapture-still-bad).
 
 <p>
 <ProductComparisonTable
@@ -294,7 +294,7 @@ PostHog supports [a wide range of client and server libraries](/docs/libraries),
 ## Recommendations by team type
 
 **For engineering-led product teams**
-- **PostHog** – SQL access, feature flags with local evaluation, error tracking, LLM analytics, and extensive APIs make it the natural fit for teams where engineers drive product decisions. Open source with a public roadmap means you can see exactly what's coming.
+- **PostHog** – SQL access, feature flags with local evaluation, error tracking, LLM observability, and extensive APIs make it the natural fit for teams where engineers drive product decisions. Open source with a public roadmap means you can see exactly what's coming.
 
 **For non-technical product managers**
 - **Pendo** – Designed for PMs who want to create in-app guides, tooltips, and onboarding flows without writing code. Its visual editor and product validation tools are purpose-built for teams that don't have engineering resources for every in-app change.
@@ -306,7 +306,7 @@ PostHog supports [a wide range of client and server libraries](/docs/libraries),
 - **Pendo** – In-app guides, tooltips, walkthroughs, resource centers, and NPS surveys are Pendo's core strength. PostHog covers [surveys](/surveys) and automated messaging via [Workflows](/workflows), but doesn't have Pendo's visual tooltip builder.
 
 **For teams building AI products**
-- **PostHog** – [LLM analytics](/llm-analytics) tracks model performance, token costs, latency, and traces for engineers debugging and optimizing their AI stack. Pendo's Agent Analytics measures AI agent adoption and user success, but doesn't offer technical LLM observability.
+- **PostHog** – [LLM observability](/llm-analytics) tracks model performance, token costs, latency, and traces for engineers debugging and optimizing their AI stack. Pendo's Agent Analytics measures AI agent adoption and user success, but doesn't offer technical LLM observability.
 
 **For privacy-conscious and regulated organizations**
 - Both are SOC 2 certified, GDPR-ready, and HIPAA-ready, with EU data residency options. **PostHog** adds open source code, cookieless tracking, and a built-in [data warehouse](/docs/data-warehouse) for full data ownership. Pendo offers EU hosting (GCP EU multi-region) but doesn't offer self-hosting.
@@ -326,9 +326,9 @@ PostHog supports [a wide range of client and server libraries](/docs/libraries),
 
 **Pendo** is a product experience platform built for product managers. It combines product analytics with in-app guides, tooltips, onboarding flows, NPS surveys, product validation, and roadmap tools. Session replay is available on Core plans and above. 
 
-**PostHog** is an all-in-one platform built for engineers, combining product analytics with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [surveys](/surveys), [workflows](/workflows), a built-in [data warehouse](/data-warehouse), and more.
+**PostHog** is an all-in-one platform built for engineers, combining product analytics with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [LLM observability](/llm-analytics), [surveys](/surveys), [workflows](/workflows), a built-in [data warehouse](/data-warehouse), and more.
 
-The key difference is focus: **Pendo** is optimized for non-technical PMs who want to create in-app guides and collect feedback without code. **PostHog** is optimized for engineering-led teams who want to measure, experiment, and ship — all from one platform.
+The key difference is focus: **Pendo** is optimized for non-technical PMs who want to create in-app guides and collect feedback without code. **PostHog** is optimized for engineering-led teams who want to measure, experiment, and ship – all from one platform.
 
 </details>
 
@@ -344,7 +344,7 @@ Pendo is a good fit if your team's primary goal is driving feature adoption and 
 <details>
 <summary>Who is PostHog useful for?</summary>
 
-**PostHog** is built primarily for engineers, technical product managers, and product-focused engineering teams. Beyond product analytics, PostHog includes [PostHog AI](/ai), [feature flags](/feature-flags), [A/B testing](/experiments), [session replays](/session-replay) with console logs and network monitoring, [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [surveys](/surveys), [logs](/logs), [workflows](/workflows) for automated messaging, and a built-in [data warehouse](/data-warehouse) — all with SQL access and extensive APIs.
+**PostHog** is built primarily for engineers, technical product managers, and product-focused engineering teams. Beyond product analytics, PostHog includes [PostHog AI](/ai), [feature flags](/feature-flags), [A/B testing](/experiments), [session replays](/session-replay) with console logs and network monitoring, [error tracking](/error-tracking), [LLM observability](/llm-analytics), [surveys](/surveys), [logs](/logs), [workflows](/workflows) for automated messaging, and a built-in [data warehouse](/data-warehouse) – all with SQL access and extensive APIs.
 
 PostHog is a good fit if your team wants a single platform that covers the full build-measure-learn cycle: ship with feature flags, track with analytics, debug with replays and error tracking, iterate with experiments...
 
@@ -353,18 +353,18 @@ PostHog is a good fit if your team wants a single platform that covers the full 
 <details>
 <summary>How much does Pendo cost?</summary>
 
-Pendo uses MAU-based (monthly active users) pricing across four tiers — Free, Base, Core, and Ultimate — but doesn't publish prices publicly. You need to contact their sales team for a quote.
+Pendo uses MAU-based (monthly active users) pricing across four tiers – Free, Base, Core, and Ultimate – but doesn't publish prices publicly. You need to contact their sales team for a quote.
 
 The **Free** tier supports up to 500 MAUs with basic analytics, in-app guides, and branded NPS surveys. **Base** adds one integration and expanded analytics. **Core** adds session replay. **Ultimate** adds NPS (unbranded), product discovery, journey orchestration, and data synchronization. Some features like Pendo Listen (feedback) and additional integrations are available as paid add-ons on lower tiers.
 
-Based on third-party data from Vendr and customer reports, typical Pendo costs range from around $15,000 to $140,000+ per year depending on MAU count, features, and contract terms. Paid plans are annual only — Pendo doesn't offer monthly billing.
+Based on third-party data from Vendr and customer reports, typical Pendo costs range from around $15,000 to $140,000+ per year depending on MAU count, features, and contract terms. Paid plans are annual only – Pendo doesn't offer monthly billing.
 
 </details>
 
 <details>
 <summary>How much does PostHog cost?</summary>
 
-PostHog uses transparent, usage-based [pricing](/pricing). It's free to get started — no credit card required — and every month you get generous free allowances including 1 million analytics events, 5,000 session replays, and 1 million feature flag requests.
+PostHog uses transparent, usage-based [pricing](/pricing). It's free to get started – no credit card required – and every month you get generous free allowances including 1 million analytics events, 5,000 session replays, and 1 million feature flag requests.
 
 After the free tier, you pay only for what you use, and pricing gets cheaper at scale. You can set billing limits per product to avoid surprises, and all pricing is public on the [pricing page](/pricing). Volume discounts and [startup credits of $50k](/startups) are available. In practice, more than 90% of PostHog users stay on the free tier.
 
@@ -373,7 +373,7 @@ After the free tier, you pay only for what you use, and pricing gets cheaper at 
 <details>
 <summary>Do Pendo and PostHog offer free trials?</summary>
 
-**Pendo** offers a free tier (Pendo Free) rather than a time-limited trial. It supports up to 500 MAUs with basic analytics, in-app guides, and branded NPS surveys. Once you exceed 500 MAUs, you can no longer create guides or segments, and usage data is sampled. Pendo does not offer free trials of its paid plans — you need to contact sales.
+**Pendo** offers a free tier (Pendo Free) rather than a time-limited trial. It supports up to 500 MAUs with basic analytics, in-app guides, and branded NPS surveys. Once you exceed 500 MAUs, you can no longer create guides or segments, and usage data is sampled. Pendo does not offer free trials of its paid plans – you need to contact sales.
 
 **PostHog** is free to start with no restrictions on features or time. All users get 1 million events, 5,000 session replays, and 1 million feature flag requests free every month. You can set billing limits to keep usage within the free allowance indefinitely, and there's no Pendo-style branding on free accounts. Adding a credit card unlocks advanced features like correlation analysis and lifecycle insights while still staying on the free tier.
 
@@ -393,23 +393,23 @@ No. Pendo doesn't offer native feature flags, A/B testing, or experimentation. I
 
 No. Pendo doesn't offer error tracking, crash monitoring, or exception handling. You'd need a separate tool like Sentry or Bugsnag for this.
 
-**PostHog** includes native [error tracking](/error-tracking) that connects exceptions and stack traces directly to session replays, user behavior, and feature flag changes — so you can see exactly what a user was doing when an error occurred and whether a specific release caused it.
+**PostHog** includes native [error tracking](/error-tracking) that connects exceptions and stack traces directly to session replays, user behavior, and feature flag changes – so you can see exactly what a user was doing when an error occurred and whether a specific release caused it.
 
 </details>
 
 <details>
-<summary>Does Pendo have LLM analytics?</summary>
+<summary>Does Pendo have LLM observability?</summary>
 
-Pendo offers Agent Analytics for tracking AI agent adoption, conversation effectiveness, and user success — but it's aimed at product managers measuring business impact, not engineers debugging LLM performance.
+Pendo offers Agent Analytics for tracking AI agent adoption, conversation effectiveness, and user success – but it's aimed at product managers measuring business impact, not engineers debugging LLM performance.
 
-**PostHog's** [LLM analytics](/llm-analytics) is developer-focused, tracking traces, token costs, latency, and model performance across your AI stack.
+**PostHog's** [LLM observability](/llm-analytics) is developer-focused, tracking traces, token costs, latency, and model performance across your AI stack.
 
 </details>
 
 <details>
-<summary>Which has better session replay — PostHog or Pendo?</summary>
+<summary>Which has better session replay – PostHog or Pendo?</summary>
 
-**PostHog** has stronger session replay for developers. Beyond watching user sessions, it includes console logs, network request monitoring, a DOM explorer, and performance metrics — so you can debug issues, not just observe behavior. Replays also link directly to error tracking and feature flag evaluations, so you can see exactly what went wrong and which variant a user was on.
+**PostHog** has stronger session replay for developers. Beyond watching user sessions, it includes console logs, network request monitoring, a DOM explorer, and performance metrics – so you can debug issues, not just observe behavior. Replays also link directly to error tracking and feature flag evaluations, so you can see exactly what went wrong and which variant a user was on.
 
 **Pendo** includes session replay on Core plans and above, focused on understanding user journeys alongside in-app guide performance. It doesn't include developer debugging tools. Pendo's free tier doesn't include replay at all; PostHog's free tier includes 5,000 replays/month.
 

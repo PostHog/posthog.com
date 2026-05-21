@@ -1,45 +1,57 @@
-## Q1 2026 Objectives
+## Q2 2026 Objectives
 
-1. **Implement and switch to the new revenue model (eng leads: <TeamMember name="Patricio Tarantino" />, <TeamMember name="Marce Coll" />, revops lead: <TeamMember name="Mine Kansu" />)**
-    - New model implemented, understood and trusted across the team, and easy to work with
-    - Differences vs old model expected and explained
-    - All internal dashboards and investor reports re-implemented based on the new model
+1. **Complete the transition to the new revenue model (eng lead: <TeamMember name="Marce Coll" />, revops lead: <TeamMember name="Mine Kansu" />)**
+    - Initial implementation
+    - Discrepancy hunting and fixing - all understood and fixed or explicitly accepted
+    - All internal dashboards re-implemented on the new model
+    - Investor reporting migrated
+    - Model understood and trusted across the team
+        - Finance signs off on model documentation
+        - Zero revops escalations for routine ARR/MRR questions for 4 weeks after launch
+        - Bonus: self-serve (finance can pull monthly data they need to close the books without billing/revops in the loop)
+    - Stretch goal: revenue model data flowing into Campfire
 
-2. **Make billing the source of truth (leads: <TeamMember name="Pawel Cebula" />, <TeamMember name="Marce Coll" />)**
-    - Write an RFC on this and alternative directions and decide
-    - Implement the chosen direction
+2. **Migrate all credits to an in-house ledger (lead: <TeamMember name="Pawel Cebula" />)**
+    - Implement a double-entry credit ledger
+    - Deploy and run the shadow ledger
+    - Fix unexpected discrepancies
+    - Migrate from customer balance to the ledger
 
-3. **Ship all expected pricing launches and changes (lead:<TeamMember name="Pawel Cebula" />)**
-    - Expected
-        - Workflows (push, sms)
-        - Logs
-        - Data warehouse (storage)
-        - Array
+3. **Ship all expected pricing launches and changes (lead: <TeamMember name="Pawel Cebula" />)**
+    - **PostHog Code**
+        - Seat-based subscriptions (free and paid)
+        - Seat-based subscriptions (free and multiple paid)
+        - Overages and background agents
+    - **Storage and compute**
+        - Data warehouse
         - Endpoints
-    - Blockers
-        - Implement solution to the limit of max 20 subscription items
-        - Enable support for non-incremental usage metrics (e.g. storage for data warehouse, endpoints)
+    - **Workflows**
+        - Channels: Push, SMS
+        - Per-workflow limit exclusion
+    - **Batch exports**
+        - Higher frequency exports
+    - **Logs**
+        - 30 and 90 day retention
 
-4. **Integrate billing and revenue data with Campfire (lead: <TeamMember name="Patricio Tarantino" />)**
-    - Decide on the architecture
-    - Implement API connections
-    - Push data needed for accounting (Stripe objects)
-    - Push data from revenue model
-
-5. **Improve quota limiting stability and accuracy (lead: <TeamMember name="Marce Coll" />)**
-    - Deploy money domain limiting strategy
-    - Align usage and limit calculations in `/billing` API response with money domain limit strategy
-
-6. **Reduce tech debt and improve developer experience (lead: <TeamMember name="Marce Coll" />)**
+4. **Reduce tech debt and improve developer experience (lead: <TeamMember name="Marce Coll" />)**
+    - Improve async task observability and reliability
+    - Upgrade to PostgreSQL 17/18
     - Switch from Nginx to Granian
-    - Improve observability and tracing
-    - Migrate PostgreSQL
-    - Upgrade Stripe API version
 
-7. **Roll out the custom PostHog Org object in Salesforce and update all integrations and lead triggers for smooth transition (lead: <TeamMember name="Mine Kansu" />)**
+5. **Complete the Salesforce org object rollout (lead: <TeamMember name="Abhischek Thottakara" />)**
+    - Deploy deduplication workflow and scripts to production
+    - Complete historical migration to custom org object
+    - Migrate all integrations and lead triggers to new object
+    - Confirm Vitally and Salesforce sync works under the new setup
+    - Document all scripts and workflows in PostHog-owned GitHub repo
 
-8. **Launch an engineering-led outbound motion for high signal leads (lead: <TeamMember name="Abhischek Thottakara" />)**
-    - Source and curate datasets of Entities (Company) and Contacts (Person) (i.e the leads)
-    - Automate qualification of leads based on signals
-    - Automate sequencing and outreach for high signal leads
-    - Improve how we identify and prioritize self-serve orgs & persona's using intent based signals (high potential accounts and high response rate persona)
+6. **Build customer health score v1 in Vitally (lead: <TeamMember name="Mine Kansu" />)**
+    - Define "active user" per product
+    - Define org-level "active customer" rollup logic
+    - Validate definitions against known accounts (healthy, churned, at-risk)
+    - Implement health scores in Vitally
+
+7. **Implement fully automated outbound pipelines (lead: <TeamMember name="Abhischek Thottakara" />)**
+    - Source and score additional leads (LinkedIn followers, Appfigures.com targets, Stripe Propensity Leads)
+    - Generate outbound sequence content using LLM in Clay
+    - Sequence highest scoring targets automatically using Lemlist

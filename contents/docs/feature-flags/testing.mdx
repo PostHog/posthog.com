@@ -19,7 +19,8 @@ To do this:
 2. Ensure the feature flag is enabled by checking the "Enable feature flag" box.
 3. Add a new condition set with the condition to `email = your_email@domain.com`. Set the rollout percentage for this set to 100%.
    
-   - in cases where `email` is not available (such as when your users are logged out), you can use a parameter like `utm_source` and append `?utm_source=your_variant_name` to your URL.
+   - You can also target with `distinct_id equals`. The value field searches persons by name, email, or distinct_id, which is useful when `email` isn't set as a person property but the user is identified.
+   - In cases where `email` is not available (such as when your users are logged out), you can use a parameter like `utm_source` and append `?utm_source=your_variant_name` to your URL.
 
 
 4. If it is a multivariant flag, set the optional override to the variant you want to assign these users to.

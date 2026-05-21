@@ -44,7 +44,7 @@ PostHog is a product development platform that includes:
 - **[Error tracking](/error-tracking):** Monitor exceptions linked to session replays and user behavior.
 - **[Surveys](/surveys):** Targeted, multi-step surveys with NPS, CSAT, and PMF templates.
 - **[Web analytics](/web-analytics):** Traffic sources, pageviews, UTM tracking, and conversion goals.
-- **[LLM analytics](/docs/llm-analytics):** Track token usage, latency, costs, and user feedback across your AI pipelines.
+- **[LLM observability](/docs/llm-analytics):** Track token usage, latency, costs, and user feedback across your AI pipelines.
 - **[Data warehouse](/data-warehouse):** Query your external data sources alongside PostHog data in one place.
 - **[CDP](/cdp):** Send data to and from PostHog with a library of integrations and transformations.
 - **[Logs](/logs):** Capture and search log data alongside your analytics and session replays.
@@ -90,7 +90,7 @@ If one or more of these sounds like you, yes:
  
 - **You're an engineer or technical founder** – PostHog is built for people who like SQL, MCPs, APIs, and open-source code. You'll feel at home.
 - **You're an early-stage startup or solo founder launching your MVP** – The free tier covers most early-stage needs, and [PostHog for Startups](/startups) offers $50k in additional credits. You won't need to swap tools as you scale.
-- **You're building an AI product** – PostHog has first-class support for [LLM analytics](/llm-analytics), error tracking for AI pipelines, and an MCP server that connects your product data to your AI coding tools.
+- **You're building an AI product** – PostHog has first-class support for [LLM observability](/llm-analytics), error tracking for AI pipelines, and an MCP server that connects your product data to your AI coding tools.
 - **You don't want to pay upfront** – No credit card, no sales call, no minimum contract. You only pay when you exceed the [(very generous) free tier](/pricing).
 - **You want one source of truth** – Instead of stitching together multiple tools (Mixpanel, LaunchDarkly, Sentry, and Hotjar), PostHog gives you the same capabilities and keeps all your product data in one place. Start with one product and expand into others without ever having to migrate your data.
 
@@ -154,7 +154,7 @@ Keep reading to explore the alternatives.
 
 1. **Marketing vs. engineering focus:** Amplitude offers multi-touch attribution, predictive forecasting, a CDP, and AI Visibility (which tracks how your brand appears in LLMs), which PostHog doesn't have. PostHog is designed for engineers and product teams: both have MCP servers, but PostHog adds SQL access, open-source code, error tracking, and logs. It also [ships relentlessly](/changelog) – new features land every week, which tends to matter to engineering teams who want their tools to keep up.
 
-2. **AI capabilities:** Both have AI assistants and MCP servers for querying data from tools like Claude and Cursor. Amplitude's AI Feedback stands out for marketing teams – it aggregates and synthesizes user signals from Zendesk, G2, Reddit, app store reviews, and more into prioritized product insights. PostHog has first-class [LLM analytics](/docs/llm-analytics) for AI product teams – tracking token usage, latency, costs, and user feedback across AI pipelines – something Amplitude doesn't have.
+2. **AI capabilities:** Both have AI assistants and MCP servers for querying data from tools like Claude and Cursor. Amplitude's AI Feedback stands out for marketing teams – it aggregates and synthesizes user signals from Zendesk, G2, Reddit, app store reviews, and more into prioritized product insights. PostHog has first-class [LLM observability](/docs/llm-analytics) for AI product teams – tracking token usage, latency, costs, and user feedback across AI pipelines – something Amplitude doesn't have.
 
 3. **Pricing:** 
 
@@ -164,7 +164,7 @@ Keep reading to explore the alternatives.
 
 > #### Bottom line
 >
-> Amplitude is the better choice for growth and marketing teams who need multi-touch attribution and predictive analytics. PostHog is the better choice for engineering and product teams who want session replay, feature flags, error tracking, LLM analytics, and more alongside their core analytics.
+> Amplitude is the better choice for growth and marketing teams who need multi-touch attribution and predictive analytics. PostHog is the better choice for engineering and product teams who want session replay, feature flags, error tracking, LLM observability, and more alongside their core analytics.
 
 ## Mixpanel
 
@@ -218,7 +218,7 @@ Keep reading to explore the alternatives.
 
 ### Key differences
  
-1. **Scope:** Mixpanel and PostHog now overlap more than they used to – both have analytics, session replay, A/B testing, and feature flags. Where PostHog pulls ahead is error tracking, surveys, logs, CDP, LLM analytics, and data warehouse. Where Mixpanel stands out: metric trees (interactive frameworks that map relationships between metrics, connect experiment results to business outcomes, and track goals in a living dashboard), and a funnel and path analysis UI that non-technical users might find more approachable than PostHog's.
+1. **Scope:** Mixpanel and PostHog now overlap more than they used to – both have analytics, session replay, A/B testing, and feature flags. Where PostHog pulls ahead is error tracking, surveys, logs, CDP, LLM observability, and data warehouse. Where Mixpanel stands out: metric trees (interactive frameworks that map relationships between metrics, connect experiment results to business outcomes, and track goals in a living dashboard), and a funnel and path analysis UI that non-technical users might find more approachable than PostHog's.
 
 2. **Developer experience:** PostHog is open source and has an MCP server that lets engineers query their product data directly from AI coding tools like Cursor and Claude. Mixpanel is more accessible to non-technical users but offers less for engineering-led teams who want to inspect the codebase or integrate deeply with their dev tooling.
 

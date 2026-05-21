@@ -26,6 +26,7 @@ For internal guidance on how we handle incidents, see [handling an incident](/ha
 
 ## Public post-mortems
 
+- [Workflow "Wait until condition" steps silently failing](/handbook/company/post-mortems/2026-04-27-workflow-wait-until-condition) – April 27, 2026
 - [Logs data loss](/handbook/company/post-mortems/2026-02-20-posthog-us-logs-data-loss) – February 20, 2026
 - [Feature flags cache degradation](/handbook/company/post-mortems/2026-02-06-feature-flags-cache-degradation) – February 6, 2026
 - [Replay SDK fetch wrapper incident](/handbook/company/post-mortems/2026-01-17-replay-sdk-fetch-wrapper-incident) – January 17, 2026

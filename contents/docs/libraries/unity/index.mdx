@@ -146,7 +146,7 @@ import UnityFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/
 
 ## Experiments (A/B tests)
 
-Since [Experiments](/docs/experiments/manual) use Feature Flags, the code for running an experiment is very similar to the Feature Flags code:
+Since [Experiments](/docs/experiments/start-here) use Feature Flags, the code for running an experiment is very similar to the Feature Flags code:
 
 ```csharp
 var flag = PostHog.GetFeatureFlag("experiment-feature-flag-key");
@@ -161,6 +161,8 @@ It's also possible to [run Experiments without using Feature Flags](/docs/experi
 ## Error Tracking
 
 The Unity SDK automatically captures unhandled exceptions and sends them to PostHog. This is enabled by default.
+
+For the full setup guide, see the [Unity error tracking installation docs](/docs/error-tracking/installation/unity).
 
 ### Manual exception capture
 

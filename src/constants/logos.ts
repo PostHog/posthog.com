@@ -33,6 +33,7 @@ export const LOGOS = {
     crewai: 'https://res.cloudinary.com/dmukukwp6/image/upload/crewai_67ee9f5eb6.svg',
     cloudflareR2: 'https://res.cloudinary.com/dmukukwp6/image/upload/r2_0d79d88d1f.svg',
     cloudfront: 'https://res.cloudinary.com/dmukukwp6/image/upload/Cloud_Front_76c0f62ab5.svg',
+    dedalus: 'https://res.cloudinary.com/dmukukwp6/image/upload/dedalus_labs_logo_e03bb97137.svg',
     deepseek: 'https://res.cloudinary.com/dmukukwp6/image/upload/deepseek_df02608124.svg',
     django: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/django.svg',
     docusaurus:
@@ -89,6 +90,7 @@ export const LOGOS = {
     nodejs: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg',
     nuxt: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nuxt.svg',
     ollama: 'https://res.cloudinary.com/dmukukwp6/image/upload/ollama_a058ab8f46.svg',
+    opentelemetry: 'https://res.cloudinary.com/dmukukwp6/image/upload/opentelemetry_afb29df5ab.svg',
     phoenix: 'https://res.cloudinary.com/dmukukwp6/image/upload/Phoenix_Framework_81f5da0296.svg',
     perplexity: 'https://res.cloudinary.com/dmukukwp6/image/upload/perplexity_1_cb4f143ce1.svg',
     php: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/php.svg',

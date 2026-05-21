@@ -26,7 +26,7 @@ Caddy automatically handles TLS certificates via Let's Encrypt, making setup sim
 All three options accomplish the same goal of routing PostHog through your domain to bypass ad blockers. Choose the one that fits your infrastructure:
 
 - [Option 1: Basic setup](#option-1-basic-setup): Routes all PostHog traffic through a dedicated subdomain like `e.yourdomain.com`. Use this for production deployments where you want a clean, simple proxy.
-- [Option 2: Subpath routing](#option-2-subpath-routing): Routes PostHog through a path on an existing domain like `yourdomain.com/ph-proxy`. Use this when you're running multiple services on the same domain or for local development and testing.
+- [Option 2: Subpath routing](#option-2-subpath-routing): Routes PostHog through a path on an existing domain like `yourdomain.com/yourpath-proxy`. Use this when you're running multiple services on the same domain or for local development and testing.
 - [Option 3: Docker deployment](#option-3-docker-deployment): Same as Option 1, but runs Caddy in a Docker container. Use this if your infrastructure is containerized or you prefer container management.
 
 ## Option 1: Basic setup
@@ -157,7 +157,7 @@ If you see errors, check [troubleshooting](#troubleshooting) below.
 
 ## Option 2: Subpath routing
 
-If you're running other services on the same domain or testing locally, you can proxy PostHog through a subpath like `/ph-proxy`.
+If you're running other services on the same domain or testing locally, you can proxy PostHog through a subpath like `/yourpath-proxy`.
 
 <Steps>
 
@@ -169,7 +169,7 @@ In your working directory, create a file named `Caddyfile`:
 
 ```caddy file=US
 :2015 {
-  handle_path /ph-proxy/static* {
+  handle_path /yourpath-proxy/static* {
     rewrite * /static/{path}
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
@@ -177,7 +177,7 @@ In your working directory, create a file named `Caddyfile`:
     }
   }
 
-  handle_path /ph-proxy/array* {
+  handle_path /yourpath-proxy/array* {
     rewrite * /array/{path}
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
@@ -185,7 +185,7 @@ In your working directory, create a file named `Caddyfile`:
     }
   }
 
-  handle_path /ph-proxy* {
+  handle_path /yourpath-proxy* {
     rewrite * {path}
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
@@ -199,7 +199,7 @@ In your working directory, create a file named `Caddyfile`:
 
 ```caddy file=EU
 :2015 {
-  handle_path /ph-proxy/static* {
+  handle_path /yourpath-proxy/static* {
     rewrite * /static/{path}
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
@@ -207,7 +207,7 @@ In your working directory, create a file named `Caddyfile`:
     }
   }
 
-  handle_path /ph-proxy/array* {
+  handle_path /yourpath-proxy/array* {
     rewrite * /array/{path}
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
@@ -215,7 +215,7 @@ In your working directory, create a file named `Caddyfile`:
     }
   }
 
-  handle_path /ph-proxy* {
+  handle_path /yourpath-proxy* {
     rewrite * {path}
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
@@ -232,12 +232,12 @@ In your working directory, create a file named `Caddyfile`:
 This configuration:
 
 - Listens on port 2015 for local testing (no TLS certificate needed)
-- Routes requests from `/ph-proxy` to PostHog
-- Uses `handle_path` to strip the `/ph-proxy` prefix before forwarding
+- Routes requests from `/yourpath-proxy` to PostHog
+- Uses `handle_path` to strip the `/yourpath-proxy` prefix before forwarding
 - Uses `rewrite` to reconstruct the correct path for PostHog
 - Serves local files from the same directory for testing
 
-The `rewrite` directive is necessary because PostHog expects requests like `/static/array.js` and `/array/{token}/config.js`, not `/ph-proxy/static/array.js`. The `handle_path` directive strips the prefix, then `rewrite` reconstructs the path.
+The `rewrite` directive is necessary because PostHog expects requests like `/static/array.js` and `/array/{token}/config.js`, not `/yourpath-proxy/static/array.js`. The `handle_path` directive strips the prefix, then `rewrite` reconstructs the path.
 
 </Step>
 
@@ -258,7 +258,7 @@ If you want to test your proxy locally, create a file named `home.html` in the s
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 
     posthog.init('<ph_project_token>', {
-      api_host: 'http://localhost:2015/ph-proxy',
+      api_host: 'http://localhost:2015/yourpath-proxy',
       ui_host: 'https://us.posthog.com' // US, or https://eu.posthog.com for EU
     })
   </script>
@@ -278,7 +278,7 @@ Start Caddy from your working directory:
 caddy start
 ```
 
-Open `http://localhost:2015/home.html` in your browser. Check the **Network** tab to verify requests go to `localhost:2015/ph-proxy`. You should see `200 OK` responses.
+Open `http://localhost:2015/home.html` in your browser. Check the **Network** tab to verify requests go to `localhost:2015/yourpath-proxy`. You should see `200 OK` responses.
 
 </Step>
 
@@ -290,14 +290,14 @@ For production deployment, update your application code to use your proxy path:
 
 ```js file=US
 posthog.init('<ph_project_token>', {
-  api_host: 'https://yourdomain.com/ph-proxy',
+  api_host: 'https://yourdomain.com/yourpath-proxy',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
 posthog.init('<ph_project_token>', {
-  api_host: 'https://yourdomain.com/ph-proxy',
+  api_host: 'https://yourdomain.com/yourpath-proxy',
   ui_host: 'https://eu.posthog.com'
 })
 ```
@@ -314,7 +314,7 @@ Confirm events are flowing through your proxy:
 
 1. Open your browser's developer tools and go to the Network tab
 2. Trigger an event in your app, like a page view
-3. Look for a request to your domain with `/ph-proxy` path
+3. Look for a request to your domain with `/yourpath-proxy` path
 4. Verify the response is `200 OK`
 5. Check the [PostHog app](https://app.posthog.com) to confirm events appear
 

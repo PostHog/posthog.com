@@ -1,39 +1,65 @@
 ---
 title: Subscriptions
 availability:
-    features:
-        subscriptions:
-            free: false
-            selfServe: true
-            boost: true
-            scale: true
-            enterprise: true
+  features:
+    subscriptions:
+      free: false
+      selfServe: true
+      boost: true
+      scale: true
+      enterprise: true
 ---
-import AddSlackToWorkspace from '../workflows/_snippets/add-posthog-to-slack-workspace.mdx'
-import AddSlackToChannel from '../workflows/_snippets/add-posthog-to-slack-channel.mdx'
 
-export const newSubscriptionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/new-subscription-button-light-mode.png"
-export const newSubscriptionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/new-subscription-button-dark-mode.png"
-export const slackSubsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/slack_config_light_b5a1c93ad5.png"
-export const slackSubsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/slack_config_dark_3abf83e8fe.png"
-export const slackAddLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-add-light-mode.png"
-export const slackAddDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-add-dark-mode.png"
+import AddSlackToWorkspace from "../workflows/_snippets/add-posthog-to-slack-workspace.mdx";
+import AddSlackToChannel from "../workflows/_snippets/add-posthog-to-slack-channel.mdx";
 
-Subscriptions enable you to send [insights](/docs/product-analytics/insights) or [dashboards](/docs/product-analytics/dashboards) to your email or Slack on a regular basis. 
+export const newSubscriptionLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/new_subscription_light_cbd6321476.png";
+export const newSubscriptionDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/new_subscription_dark_9a2f4906cf.png";
+export const slackSubsLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/slack_config_light_b5a1c93ad5.png";
+export const slackSubsDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/slack_config_dark_3abf83e8fe.png";
+export const slackAddLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-add-light-mode.png";
+export const slackAddDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-add-dark-mode.png";
+
+Subscriptions enable you to send [insights](/docs/product-analytics/insights) or [dashboards](/docs/product-analytics/dashboards) to your email or Slack on a regular basis.
 
 <FeatureAvailability availability={_frontmatter.availability.features.subscriptions} />
 
 > **Looking to subscribe to events or actions?** See our [realtime destination docs](/docs/cdp/destinations) to learn how to send event or action data to webhooks, Slack, and more.
 
-To get started, open the dropdown menu in the top right of any insight or dashboard and click **Subscribe**.
+## Viewing all subscriptions
+
+You can view and manage all your subscriptions in one place by going to the Subscriptions Page. Access it by:
+
+- Using the [command bar](/docs/cmd-k) (Cmd+K or Ctrl+K) and searching for "Subscriptions"
+- Navigating directly to `/subscriptions` in your browser
+
+The subscriptions page shows a paginated table of all subscriptions across your dashboards and insights. You can use tabs to filter by **All subscriptions**, **My subscriptions**, **Dashboard**, or **Insight**.
+
+From here you can:
+
+- **Search** for subscriptions by name
+- **Filter** by delivery channel (email, Slack, or webhook) and creator
+- **Sort** by creation date, next delivery date, title, or creator
+- **Edit** a subscription by navigating to its source insight or dashboard
+- **Test delivery** to immediately send a subscription without waiting for the next scheduled delivery
+- **Delete** subscriptions with an undo option
+
+## Creating a subscription
+
+To create a subscription, click **Subscribe** in the sidebar of any insight or dashboard.
 
 <ProductScreenshot
-    imageLight = {newSubscriptionLight} 
-    imageDark = {newSubscriptionDark}
-    classes="rounded"
-    alt="New Subscription Button"
+  imageLight={newSubscriptionLight}
+  imageDark={newSubscriptionDark}
+  classes="rounded"
+  alt="New Subscription Button"
 />
-
 
 ## Selecting insights for dashboard subscriptions
 
@@ -43,7 +69,6 @@ When creating a subscription for a dashboard, you can select which specific insi
 - New subscriptions automatically pre-select the first six insights from the dashboard.
 - For dashboards with more than 10 insights, a search box appears to help you find specific ones.
 - Selected insights appear in the subscription in the same order as they appear on the dashboard.
-
 
 ## Naming your subscriptions
 
@@ -56,10 +81,10 @@ For Slack subscriptions, the custom name appears in the message header. For exam
 When configuring an email subscription you can subscribe multiple emails at once, whether they are a member of your PostHog team or not and set the frequency of the subscription.
 
 <ProductScreenshot
-    imageLight = 'https://res.cloudinary.com/dmukukwp6/image/upload/v1715288461/posthog.com/contents/images/features/subscriptions/email-light.png' 
-    imageDark = 'https://res.cloudinary.com/dmukukwp6/image/upload/v1715288461/posthog.com/contents/images/features/subscriptions/email-dark.png'
-    classes="rounded"
-    alt="New Subscription Button"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1715288461/posthog.com/contents/images/features/subscriptions/email-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1715288461/posthog.com/contents/images/features/subscriptions/email-dark.png"
+  classes="rounded"
+  alt="New Subscription Button"
 />
 
 Once saved, any emails not already subscribed receives a notification email informing them what you have subscribed them to. You can optionally include a small personalized message that is sent along to them.
@@ -67,34 +92,115 @@ Once saved, any emails not already subscribed receives a notification email info
 ## Slack subscriptions
 
 There are three steps to setting up a Slack subscription:
+
 1. Adding the PostHog Slack app to your workspace
 2. Adding the PostHog Slack app to specific channels
 3. Creating a new Slack subscription in PostHog
 
 ### 1. Adding the PostHog Slack app to your workspace
 
-<AddSlackToWorkspace/>
+<AddSlackToWorkspace />
 
 ### 2. Adding the PostHog Slack app to specific channels
 
-<AddSlackToChannel/>
+<AddSlackToChannel />
 
 ### 3. Creating a new Slack subscription in PostHog
 
-After installing the app, head back to PostHog and add a new subscription. You can do this in any dashboard or insight by clicking the top right menu, then **Subscribe**, and then **Add subscription**.
+After installing the app, head back to PostHog and add a new subscription. You can do this in any dashboard or insight by clicking **Subscribe** in the sidebar, and then **Add subscription**.
 
 <ProductScreenshot
-    imageLight = {slackAddLight} 
-    imageDark = {slackAddDark}
-    classes="rounded"
-    alt="Add to Slack button"
+  imageLight={slackAddLight}
+  imageDark={slackAddDark}
+  classes="rounded"
+  alt="Add to Slack button"
 />
 
 You can then select any channel the app has access to and set a frequency. **Private channels** are only listed if you have already added PostHog to the relevant channel.
 
 <ProductScreenshot
-    imageLight = {slackSubsLight} 
-    imageDark = {slackSubsDark}
-    classes="rounded"
-    alt="Slack channel selection"
+  imageLight={slackSubsLight}
+  imageDark={slackSubsDark}
+  classes="rounded"
+  alt="Slack channel selection"
 />
+
+## Scheduling options
+
+Subscriptions support three frequency options: **daily**, **weekly**, and **monthly**. You can also set a custom interval (e.g. every 2 weeks) and choose the time of day for delivery.
+
+For monthly subscriptions, you can choose which day to send on:
+
+- A specific **weekday** (e.g. Monday, Tuesday)
+- Any **day** of the month (by ordinal position)
+- A **weekday** (Monday–Friday) of the month – useful for business-focused reports that should skip weekends
+
+Combine these with an ordinal position – **first**, **second**, **third**, **fourth**, or **last** – to schedule deliveries like "the first weekday of the month" or "the last Friday of the month."
+
+## AI summaries
+
+You can enable AI-generated summaries for your subscriptions. When enabled, each delivery includes a short AI-generated summary highlighting key changes or takeaways from your data.
+
+For recurring deliveries with previous data, the AI compares the previous and current snapshots to surface:
+
+- Changes in key metrics
+- New trends or reversals in direction
+- The specific step or segment driving the change
+
+For first-time deliveries without previous data, the AI summarizes the current state of your metrics, highlighting notable values and patterns.
+
+### Enable AI summaries
+
+1. Create or edit a subscription from any insight or dashboard.
+2. Toggle **Include an automatic AI summary**.
+
+<CalloutBox icon="IconInfo" title="AI data processing consent required" type="fyi">
+
+Your organization must approve AI data processing before you can enable AI summaries. This consent is managed in your organization settings.
+
+</CalloutBox>
+
+### Add context for the AI
+
+You can optionally provide context to guide the AI's focus in the **Context for the AI summary** field. For example, you might write "This is a daily revenue health check – focus on revenue drop-off and churn signals."
+
+This helps the AI prioritize which metrics to highlight in its summary.
+
+### Plan limits
+
+Organizations have limits on how many active AI summaries they can have. If you've reached your plan limit, disable an existing AI summary or upgrade your plan to add more.
+
+## Next delivery date
+
+Each subscription displays its next scheduled delivery date, so you can see exactly when the next report is sent. This date updates automatically after each delivery.
+
+When editing a subscription, a preview of the next delivery date appears below the scheduling options so you can verify your configuration before saving.
+
+## Testing subscriptions
+
+You can manually trigger a test delivery for any subscription. Click the **...** menu on a subscription in the list and select **Test delivery**. This immediately sends the subscription content to the configured target (email or Slack channel) without waiting for the next scheduled delivery.
+
+This is useful for verifying that the subscription is configured correctly and the content looks as expected.
+
+## Automatically disabled subscriptions
+
+PostHog automatically disables subscriptions when delivery can't succeed. This happens when:
+
+- **Slack integration disconnected** – The Slack integration was removed or disconnected from your PostHog organization.
+- **Unsupported delivery channel** – The subscription targets a delivery channel that's no longer supported.
+- **Slack channel access issues** – PostHog can't post to the Slack channel. This includes archived channels, channels the PostHog bot was removed from, channels that no longer exist, or a revoked Slack token.
+
+When a subscription is auto-disabled, the subscription owner receives an email notification explaining the reason. Disabled subscriptions display a **Disabled** tag in the subscriptions list and on the subscriptions page.
+
+Disabled subscriptions don't deliver on their schedule and can't be test-delivered.
+
+### Re-enabling a subscription
+
+To re-enable a disabled subscription:
+
+1. Fix the underlying issue (e.g., reconnect the Slack integration or re-add the PostHog bot to the channel).
+2. Navigate to the subscription and toggle the **Enabled** checkbox back on.
+
+PostHog validates that the issue is resolved before allowing re-enable. If the prerequisite is still broken (e.g., Slack is still disconnected or the bot isn't in the channel), re-enabling is rejected with an error message.
+
+When you successfully re-enable a subscription, PostHog immediately sends a confirmation delivery and sets the next scheduled delivery date.

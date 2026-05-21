@@ -72,6 +72,16 @@ The one downside to incremental syncing is that deletions of data won't be synce
 
 If you select a nullable field as the replication key, any rows where that field is null are skipped during sync. PostHog displays a warning when you select a nullable field. To avoid missing data, use a non-nullable field as the replication key.
 
+#### Primary key columns
+
+Incremental sync uses primary key columns to deduplicate rows. During source setup, PostHog auto-detects primary keys from your source's metadata (such as `INFORMATION_SCHEMA` constraints). If no constraint is found, it falls back to an `id` column when one exists.
+
+For sources like BigQuery views that don't support primary key constraints, or tables with non-standard primary key names (like `_id`), you can select custom primary key columns during setup. This is available for all managed SQL sources: Postgres, MySQL, MSSQL, Redshift, Snowflake, and BigQuery.
+
+Once the first incremental sync completes, the primary key columns are locked and can't be changed. To modify them, delete the synced data first.
+
+PostHog displays a warning if your selected primary key columns are nullable, since null values can cause deduplication issues.
+
 ### Append only
 
 Append only does what it says on the tin: append rows to your table.
@@ -100,6 +110,14 @@ When you expand each source, you can see:
 If you add new tables to your source database, click **Pull new schemas** to discover them without waiting for the next sync. This only updates the list of available schemas – it doesn't trigger a data sync.
 
 To sync all enabled schemas at once, click **Sync now**. A confirmation dialog appears before the sync starts. This triggers a new sync for every enabled schema that isn't already syncing, so you don't need to sync schemas one by one.
+
+### Managing webhook tables
+
+Webhook-synced tables have special behavior when enabling or disabling them:
+
+- **Disabling a webhook table** - When you turn off syncing for a webhook table, a confirmation dialog warns you that the webhook stops consuming data immediately. Any events sent while the table is disabled are lost.
+
+- **Re-enabling a webhook table** - When you re-enable a previously disabled webhook table, PostHog automatically triggers a full refresh sync. This ensures no data gaps from the period when the webhook was inactive.
 
 <ProductScreenshot
   imageLight={SettingsLight}

@@ -24,6 +24,31 @@ Every team has 2 schedules in [incident.io](https://app.incident.io/posthog/on-c
 * `Support: {team}`
     - This is a weekly or bi-weekly rotation (teams can decide) that covers both who is assigned to the [support hero rotation](/handbook/engineering/operations/support-hero) as well as the out of-hours-escalation for the extreme case
 
+### Manual escalation schedules
+
+In addition to the regular on-call schedules, teams that own production-critical services have a manual escalation schedule in incident.io:
+* `Escalation: {team}`
+    - This is the "everything is broken" escalation path for critical out-of-hours emergencies
+    - Only teams that own production-critical services are required to have this schedule - other teams don't need one
+    - **Everyone relevant on the team should be on this schedule** - it's not a rotation like regular on-call
+    - There should be no gaps in coverage since this is the last resort when normal escalation paths fail
+    - This schedule is triggered manually by whoever is handling an incident when they need additional help
+
+#### When to use manual escalation
+
+Manual escalation should be used when:
+* The primary on-call person is unresponsive or unavailable
+* The situation is critical and requires immediate additional expertise
+* You're the on-call responder and need help from a specific team outside normal working hours
+
+#### How to trigger manual escalation
+
+1. From within an incident in incident.io, use the escalation options to page the relevant `Escalation: {team}` schedule
+2. This will notify all members on that escalation schedule simultaneously
+3. Any available team member can then respond and assist with the incident
+
+> 💡 Manual escalation is a safety net, not a shortcut. Always try the normal escalation paths first before manually escalating to an entire team.
+
 ### Global on-call schedule
 
 [Schedule in incident.io](https://app.incident.io/posthog/on-call/schedules/01K7PNGFNP8ZZSCSTBXKPVWVAZ)
@@ -50,6 +75,11 @@ If you're in a product team, it's tempting to think that service alerts don't ap
 Besides knowledge, being on call requires availability – including weekends. If teams had their own separate rotations, there would be more people on call in total, and each would have to stand by 24/7 as our teams aren't big enough to follow the sun. This would be more stressful because of availability constraints, while being less productive because of the rare alerts being spread across multiple people.
 
 ## Before going on call
+
+### Mindset
+
+Read: [Jos Visser: Ten things not to worry about regarding oncall](https://josvisser.substack.com/p/ten-things-not-to-worry-about-regarding?r=b67wp&utm_source=posthog&utm_medium=web&triedRedirect=true)
+(Worth the read, even if you're an on-call veteran.)
 
 ### Be prepared
 

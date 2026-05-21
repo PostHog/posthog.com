@@ -14,10 +14,10 @@ export const Content = () => {
                 <h2 className="mb-4">Overview</h2>
                 <div>
                     <p>
-                        PostHog logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP).
+                        PostHog Logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP).
                         You don't need any vendor-specific SDKs - just use standard OpenTelemetry libraries to send logs
-                        to PostHog. You can migrate to PostHog logs by configuring your existing OpenTelemetry client to
-                        send logs to PostHog's HTTP endpoint using your project token.
+                        to PostHog. You can migrate to Logs by configuring your existing OpenTelemetry client to send
+                        logs to PostHog's HTTP endpoint using your project token.
                     </p>
 
                     <div className="flex justify-center mb-8">
@@ -25,7 +25,7 @@ export const Content = () => {
                             <ProductScreenshot
                                 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/logs_light_dd81ff5093.png"
                                 imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/logs_dark_d7135f1b22.png"
-                                alt="PostHog logs search interface"
+                                alt="PostHog Logs search interface"
                                 padding={false}
                                 classes="rounded @md:max-w-2xl"
                             />
@@ -36,7 +36,7 @@ export const Content = () => {
             </section>
 
             <section className="mb-8">
-                <h2 className="mb-4 mt-0">Why use PostHog logs?</h2>
+                <h2 className="mb-4 mt-0">Why use PostHog Logs?</h2>
                 <div>
                     <ul>
                         <li>
@@ -58,8 +58,7 @@ export const Content = () => {
                 <h2 className="mb-4 mt-0">How it works</h2>
                 <div>
                     <p>
-                        PostHog logs acts as a generic OTLP receiver that happens to be built by PostHog. The process is
-                        simple:
+                        Logs acts as a generic OTLP receiver that happens to be built by PostHog. The process is simple:
                     </p>
                     <ol>
                         <li>Use standard OpenTelemetry logging APIs in your application</li>
@@ -76,7 +75,8 @@ export const Content = () => {
                 </h2>
                 <p>
                     Every month, the first 50GB is free. After that, pricing is $0.25 per GB up to 300GB ingested, then
-                    $0.15/GB for 300GB+. Have a look at our <Link to="/pricing">pricing page</Link> for more details.
+                    $0.15/GB for 300GB+. Retention is 14 days by default (30 and 90 day options soon). Have a look at
+                    our <Link to="/pricing">pricing page</Link> for more details.
                 </p>
             </section>
 

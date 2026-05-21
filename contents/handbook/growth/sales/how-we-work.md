@@ -160,7 +160,7 @@ These standards are likely to change as the TAE role evolves. Any changes will b
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commission into the above 4 buckets and how you did.
-- In your first 3 months you are expected to retain your existing book and have closed at least one deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+- In your first 3 months you are expected to retain your existing book and have closed at least one deal (either a [cross-sell opportunity](/handbook/growth/cross-selling/tracking-cross-sells) or a prepaid credit conversion) - you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
 
 > Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
 >
@@ -169,6 +169,25 @@ These standards are likely to change as the TAE role evolves. Any changes will b
 If you believe there is a justifiable reason to vary these rules, then in the first instance talk them through with your team lead.  Simon (Charles as backup) will be the decider here.
 
 You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.com/project/2/dashboard/498582) dashboard.
+
+Here is an illustrative example of how quota calculation works. Let's look at a customer's invoice history:
+
+| | Month | Jan | Feb | Mar | Apr | May | Jun |
+|---|---|---|---|---|---|---|---|
+| (A) | Invoice Amount | 2300 | 2200 | 2500 | 2700 | 2800 | 3000 |
+| | Number of Products | 1 | 1 | 1 | 2 | 1 | 3 |
+| (B) | Multiplier | 0.7 | 0.7 | 0.7 | 0.9 | 0.7 | 1.1 |
+| (A × B) | Quota Invoice Amt | 1610 | 1540 | 1750 | 2430 | 1960 | 3300 |
+
+For your Q2 quota calculation:
+
+| Metric | Calculation | Result |
+|---|---|---|
+| Q2 Starting ARR | 4 × (1610 + 1540 + 1750) | 19600 |
+| Q2 Ending ARR | 4 × (2430 + 1960 + 3300) | 30760 |
+| Q2 Quota ARR Diff | 30760 − 19600 | 11160 |
+
+In this example, this customer increases your attainment towards your Q2 quota by $11,160. We do this same calculation for every customer in your book of business to determine the overall attainment towards your quota in a quarter.
 
 ### TAM book of business rules
 

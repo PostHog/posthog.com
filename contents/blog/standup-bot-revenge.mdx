@@ -1,0 +1,419 @@
+---
+date: 2026-04-01
+title: "I hate the standup bot (so I built an agent to do it for me)"
+author:
+  - andy-maguire
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
+featuredImageType: full
+category: Engineering
+tags:
+  - Engineering
+  - LLM analytics
+---
+
+There it is. Staring at me. Sitting there. Goading me.
+
+![The standup bot, taunting me](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/standup_bot_slack_hero_955e94601d.png)
+
+The day is nearly done. I've reviewed PRs, fixed bugs, hopped on quick calls, commanded my agents, and smashed that accept button all day!
+
+And now I'm expected to fill in some stupid Slack thread with my standup updates?
+
+Every time I manually copy-paste into our standup thread, a little part of me dies inside.
+
+We just [passed the Turing test](https://www.reddit.com/r/Futurism/comments/1jpzb8s/an_ai_model_has_officially_passed_the_turing_test/) and here I am copy-pasting GitHub issue URLs into a Slack thread like it's 2010. I'm pulling up tabs, hunting for PR links, navigating all over GitHub, trying to remember what I (my agents) actually did today, and formatting it all nicely in Slack.
+
+After a few months of this, I snapped.
+
+I work on [LLM analytics](/docs/llm-analytics) at PostHog. I spend my days helping people understand what their AI agents are doing. And yet here I am, manually summarizing my GitHub activity like some kind of caveman.
+
+The irony was too much. I decided to build my own agent to beat the standup bot at its own game.
+
+It helps too that this was also the perfect excuse to learn about and play around a little with the [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/).
+
+## The plan
+
+The idea was simple:
+
+1. Build an AI agent that reads my GitHub activity and previous recent standups for context
+2. Have it draft a sensible standup summary in the style I want
+3. Chat with it to refine the draft
+4. Post directly to Slack
+
+And because I'm a shameless dogfooder, this was the perfect excuse to:
+
+- Learn the [OpenAI Agents SDK](https://github.com/openai/openai-agents-python)
+- Dog-food our [OpenAI Agents SDK integration](/docs/llm-analytics/installation/openai-agents) for [`posthog-python`](/docs/libraries/python)
+- Create something I can actually use every day
+- Write this very blog post
+- But most importantly, use AI even if it actually sometimes takes me longer each day than it did before.
+
+![The perfect excuse](https://res.cloudinary.com/dmukukwp6/image/upload/w_280,q_auto,f_auto/tenor_1_9d61025db5.gif)
+
+Let me show you how it all works.
+
+<div className="border-l-4 border-yellow bg-yellow/10 rounded-r p-4 my-6">
+<strong>🌶️ Hot take</strong>
+
+**Agents are the new scripts.** We used to write bash scripts and cron jobs to automate tedious tasks. Now we write agents. Scripts follow rigid rules; agents are more flexible and often that's worth it.
+
+</div>
+
+## The architecture: one agent to rule them all
+
+I'll be honest - I didn't start here. My first version was a [three-agent system](https://github.com/andrewm4894/github-standup-agent/tree/b63e51b/src/github_standup_agent/agents): a [Coordinator](https://github.com/andrewm4894/github-standup-agent/blob/b63e51b/src/github_standup_agent/agents/coordinator.py) that orchestrated the workflow, a [Data Gatherer](https://github.com/andrewm4894/github-standup-agent/blob/b63e51b/src/github_standup_agent/agents/data_gatherer.py) that pulled from GitHub, and a [Summarizer](https://github.com/andrewm4894/github-standup-agent/blob/b63e51b/src/github_standup_agent/agents/summarizer.py) that turned it all into prose. I used the OpenAI Agents SDK's [agents-as-tools](https://openai.github.io/openai-agents-python/agents-as-tools/) pattern so the coordinator could delegate to the others.
+
+It was a mess. Debugging handoffs between agents was painful. The coordinator would sometimes call the wrong sub-agent, or pass incomplete context. The summarizer couldn't see the raw tool call results - only what the coordinator decided to forward. And I needed three separate prompt templates, three model configs, and an `on_handoff` hook just to wire it all together. Way too much complexity for what is fundamentally a simple task.
+
+So I [ripped it all out](https://github.com/andrewm4894/github-standup-agent/commit/45514bafdabd48029dfbd9519fbe54e6ea1b418f) - deleted the coordinator, data gatherer, and summarizer, and collapsed everything into a [single agent](https://github.com/andrewm4894/github-standup-agent/blob/main/src/github_standup_agent/agents/standup_agent.py) with all 18 [tools](https://github.com/andrewm4894/github-standup-agent/tree/main/src/github_standup_agent/tools) directly. The result was 300 fewer lines of code and something that actually worked reliably.
+
+The agent has various tools organized by what they do:
+
+- **GitHub overview** - activity feed and summary stats
+- **GitHub lists** - PRs, issues, commits, reviews, comments (all with date filters)
+- **GitHub details** - drill into specific PRs or issues
+- **Slack** - fetch team standups, publish, confirm before posting
+- **Utilities** - clipboard, file save
+- **Feedback** - capture quality ratings and comments
+
+Here's the actual agent definition:
+
+```python
+def create_standup_agent(
+    model: str = DEFAULT_MODEL,
+    hooks: AgentHooks[StandupContext] | None = None,
+    style_instructions: str | None = None,
+) -> Agent[StandupContext]:
+    instructions = _make_dynamic_instructions(style_instructions)
+
+    return Agent[StandupContext](
+        name="Standup Agent",
+        instructions=instructions,
+        tools=[
+            # GitHub overview tools
+            get_activity_feed,
+            get_activity_summary,
+            # GitHub list tools (with date filters)
+            list_prs,
+            list_issues,
+            list_commits,
+            list_reviews,
+            list_comments,
+            # GitHub assigned items (no date filter)
+            list_assigned_items,
+            # GitHub detail tools
+            get_pr_details,
+            get_issue_details,
+            # Slack tools
+            get_team_slack_standups,
+            publish_standup_to_slack,
+            confirm_slack_publish,
+            set_slack_thread,
+            # Utility tools
+            copy_to_clipboard,
+            save_standup_to_file,
+            # Feedback tools
+            capture_feedback_rating,
+            capture_feedback_text,
+        ],
+        model=model,
+        model_settings=ModelSettings(),
+        hooks=hooks,
+    )
+```
+
+The agent uses **dynamic instructions** that inject the current standup draft, so each refinement iteration has full context without blowing the token budget. A `StandupContext` object tracks collected data across tool calls without stuffing it all into the prompt.
+
+## Stealing my own GitHub activity
+
+The data gathering is powered by the `gh` CLI, which means:
+- No API tokens to manage (just `gh auth login`)
+- Access to everything you can see on GitHub
+- Real-time data, not some stale cache
+
+This approach works great for a small personal agent running locally on your machine. If you were building something multi-user or running it as a service, you'd want proper GitHub API tokens and rate limit handling - but for a daily standup helper? The `gh` CLI is perfect.
+
+Here's what the activity feed looks like when the agent queries it:
+
+```python
+@function_tool
+def get_activity_feed(
+    ctx: RunContextWrapper[StandupContext],
+    days_back: Annotated[int, "Number of days to look back"] = 1,
+) -> str:
+    """
+    Fetch a chronological feed of all GitHub activity for the user.
+
+    Returns a unified list of events including:
+    - Commits pushed
+    - Pull requests opened/merged/closed
+    - Code reviews submitted
+    - Issues opened/closed
+    - Comments on issues and PRs
+    - Branches/tags created
+    """
+    # Uses `gh api /users/{username}/events` under the hood
+    ...
+```
+
+The agent starts with the activity feed to get an overview, then drills down into specific PRs or issues that need more context. It's smart about not fetching redundant data and caches results so subsequent questions don't hit GitHub again.
+
+Example of what the agent actually sees (from a real run):
+
+```
+Activity Feed: 94 events in last 1 day(s)
+Summary: 2 comment, 2 create, 4 issue, 13 pull_request, 26 push, 26 review, 21 review_comment
+
+Events (newest first):
+[2026-04-02 12:42] PUSH PostHog/posthog (master)
+[2026-04-02 12:42] PR MERGED PostHog/posthog#53107 - feat/llma-cluster-mcp-tools
+[2026-04-02 12:25] PR MERGED PostHog/posthog#53189 - feat/mcp-evaluation-test-hog-tool
+[2026-04-02 12:18] REVIEW APPROVED PostHog/posthog#53175 - docs/update-convex-otel-examples
+[2026-04-02 12:11] REVIEW APPROVED PostHog/posthog-js#3321 - fix/convex-remove-use-node
+[2026-04-02 11:58] PR OPENED PostHog/posthog#53190 - fix/llm-prompt-oauth-auth
+[2026-04-02 11:46] PR OPENED PostHog/posthog#53189 - feat/mcp-evaluation-test-hog-tool
+...
+```
+
+## The secret sauce: PostHog LLM analytics
+
+Here's where it gets interesting. Building an agent is one thing. Understanding what it's actually doing? That's where [PostHog LLM analytics](/docs/llm-analytics) comes in.
+
+I instrumented the entire agent with our [OpenAI Agents SDK integration](https://github.com/PostHog/posthog-python/pull/408). Fun fact — it was built during a one-day hackathon at a team onsite in Barcelona, where I also discovered [Calçots](https://en.wikipedia.org/wiki/Cal%C3%A7ot) (highly recommend).
+
+![Me holding a Calçot in Barcelona](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/team_calcots_295b5fff5e.jpg)
+
+<Caption>That's me holding a Calçot. This is relevant to the blog post, I promise.</Caption>
+
+The integration was surprisingly quick to build thanks to the [excellent tracing support](https://openai.github.io/openai-agents-python/tracing/) that OpenAI baked into the Agents SDK. We just needed to extend their `TracingProcessor` to send spans to PostHog instead of their default backend.
+
+```python
+from posthog import Posthog
+from posthog.ai.openai_agents import instrument
+
+posthog_client = Posthog(
+    api_key=os.getenv("POSTHOG_API_KEY"),
+    host="https://us.i.posthog.com",
+)
+
+# This single line instruments the entire agent workflow
+processor = instrument(
+    client=posthog_client,
+    distinct_id=github_username,
+    privacy_mode=False,  # I want to see everything
+    properties={"app": "github-standup-agent"},
+)
+```
+
+That's it. One function call and suddenly I have full visibility into everything. (If you're handling sensitive data, you can enable [privacy mode](/docs/llm-analytics/privacy-mode) to exclude prompts and completions from being stored.)
+
+### Tracing
+
+Every agent run creates a [trace](/docs/llm-analytics/traces) with [spans](/docs/llm-analytics/spans) for:
+- **Agent execution** - which agent ran and for how long
+- **Tool calls** - what tools were called, with what arguments, and what they returned
+- **[LLM generations](/docs/llm-analytics/generations)** - prompts, completions, token usage, and latency
+
+I can see exactly how the agent decided which tools to call, what data it gathered, and how it turned all of that into prose. Each trace also gets an [AI-generated summary](/docs/llm-analytics/summarization) so you can quickly understand what happened without digging into every span:
+
+![Trace view showing the full agent workflow with AI-generated summary](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trace_view_summary_standup_5f1559dc95.png)
+
+### Prompt management
+
+One thing I quickly realized: hardcoding prompts in source code is a pain when you're iterating on tone and formatting. So I moved all my prompts into [PostHog's prompt management](/docs/llm-analytics/prompts). The agent pulls its instructions, style guide, and context templates from PostHog at runtime:
+
+- `standup-agent-instructions` - the main system prompt with workflow, formatting rules, and feedback detection
+- `custom-style` - formatting rules that enforce Slack mrkdwn links and match team conventions
+- `current-standup` - injected dynamically with the latest draft during refinement
+- `chat-context` - contextual template for chat mode sessions
+- `generate-standup` - the one-shot generation prompt
+
+This means I can tweak how the agent writes standups without redeploying anything. And because PostHog tracks prompt versions, I can see exactly which version of the instructions produced which standup - useful when something goes weird.
+
+There's also the "prompts are IP" angle. You might have seen the recent [Claude Code source map situation](https://www.reddit.com/r/ClaudeCode/comments/1s99j2t/followup_claude_codes_source_confirms_the_system/) — a packaging mishap meant the full system prompts ended up in the npm release. These things happen (shipping is hard!), but it's a good reminder that if your prompts are in the source code, they're one accidental publish away from being public. 
+
+For my standup agent it doesn't matter (my half-baked vibecoded prompts are open source anyway), but if yours contain real secret sauce, a prompt store with a local cache is a nice safety net.
+
+### Tool usage
+
+The [tools tab](/docs/llm-analytics/tools) shows me which tools the agent calls most and how long they take. Turns out `get_pr_details` and `get_activity_feed` dominate - you can see `get_pr_details` right at the top with the most calls. That was actually a surprise - the agent was drilling into way more PRs than it needed to. A quick prompt tweak ("only drill into PRs that look significant") cut unnecessary API calls.
+
+![Tools tab showing which tools the standup agent calls most](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/tools_tab_standup_agent_73f8bd6db8.png)
+
+### Clustering
+
+[Clustering](/docs/llm-analytics/clusters) automatically groups similar traces together. For a personal agent like this, the clusters are pretty simple - mostly "standard standup generation" vs "heavy iteration sessions" vs "quick copy-paste runs." But it's useful for spotting patterns in how I use the agent. If you're curious about how the clustering pipeline actually works under the hood, I wrote a [deep dive on how we built it](/blog/llm-analytics-clustering-how-it-works).
+
+### Sentiment
+
+The [sentiment tab](/docs/llm-analytics/sentiment) is more fun. PostHog analyzes the tone of user messages, and looking at my negative ones is... humbling. Some highlights from my standup sessions:
+
+- "bad bad bad!!!!!"
+- "ok this is terrible im going to exit and debug - how can this happen!"
+- "you messed up the links"
+- "bad you are not following the examples or style properly"
+
+In fairness, most of these are just me giving the agent iteration feedback ("drop all the merged words its a bit repetitive", "remove the ask, dont need it") rather than genuine rage. But sentiment analysis doesn't know the difference, and that's actually an interesting insight — what looks like negative user sentiment might just be a user who's actively engaged and iterating. The positive ones are more telling: "ok great stuff send that to slack" and "great love it lets publish to slack" tend to mean the agent actually nailed it first time.
+
+
+![Sentiment tab showing positive and negative standup agent interactions](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/sentiment_tab_standup_agent_8973d72c87.png)
+
+### Evals
+
+Here's where dogfooding gets real. The agent's biggest formatting headache is Slack's cursed `mrkdwn` syntax - it uses `<url|text>` instead of `[text](url)`, and the agent constantly tries to slip back into regular markdown. So I set up an [evaluation](/docs/llm-analytics/evaluations) that automatically checks every generation: "did it use correct Slack-style markdown formatting?"
+
+The eval results summary tells the whole story. Generations that pass tend to use correct Slack mrkdwn links, simple bullets, and plain text headers. The failures? The agent keeps trying to sneak in `**bold**` headers, `[text](url)` markdown links, and occasionally dumps raw JSON outputs. My favorite failure pattern: the agent would use `<link|text>` syntax for headings (correct for links, completely wrong for headers) — Slack doesn't even have heading syntax, so it just needs to use plain text like `Did:`.
+
+![Eval results summary showing passing and failing patterns for Slack markdown formatting](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/eval_results_summary_slack_markdown_330573b666.png)
+
+You can also drill into individual runs to scan each generation's result and reasoning:
+
+![Eval runs showing individual generation results with pass/fail reasoning](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/eval_runs_tab_standup_agent_4ce3da8be5.png)
+
+This is the kind of thing that's nearly impossible to catch systematically without automated evals. I'd notice the odd broken link in Slack, fix the prompt, and think I'd solved it — only for a different formatting issue to pop up the next day. The eval catches all of them and shows me the patterns so I can fix the root cause in the prompt, not just whack-a-mole individual failures.
+
+### User feedback
+
+This one is really just a regular `posthog.capture()` call exposed as a tool - plain old [product analytics](/docs/product-analytics), nothing fancy. The interesting part is that the agent decides *when* to call it. I don't explicitly say "thumbs up" or "thumbs down" — the agent picks up on signals in my messages and fires the event itself:
+
+```python
+@function_tool
+def capture_feedback_rating(
+    ctx: RunContextWrapper[StandupContext],
+    rating: Literal["thumbs_up", "thumbs_down"],
+    comment: str = "",
+) -> str:
+    """Rate the quality of this standup."""
+    posthog.capture(
+        event="$ai_metric",
+        properties={
+            "$ai_trace_id": current_trace_id,
+            "$ai_metric_name": "standup_quality",
+            "$ai_metric_value": 1 if rating == "thumbs_up" else 0,
+            "comment": comment,
+        }
+    )
+```
+
+When I say "ok great stuff send that to slack", the agent infers positive feedback and captures it before publishing. When I say "bad you are not following the examples", it captures negative feedback with my complaint as the comment. I never have to break out of the conversation flow to rate anything — the agent just reads the room.
+
+That feedback is linked to the exact trace with `$ai_trace_id`, so I can go back and see what went wrong on bad runs. Over time, this builds a dataset for understanding what makes a good standup and which prompt versions produce better results.
+
+## The victory lap: posting to Slack
+
+The final piece is actually posting to Slack. Because what's the point of automating standup generation if I still have to copy-paste?
+
+The agent has Slack integration with a two-step confirmation flow (because posting to your team's Slack channel by accident would be... bad):
+
+```
+You: ok great stuff send that to slack
+
+Agent [Standup Agent] starting...
+  Tool: capture_feedback_rating(rating='thumbs_up',
+        comment='User said: "ok great stuff" before asking to send to Slack.')...
+  Tool: publish_standup_to_slack(confirmed=False)...
+Agent [Standup Agent] finished
+
+
+Assistant: Captured the feedback — thanks.
+
+Slack preview is ready (channel #team-llm-analytics, thread 1775052008.434899).
+Reply "yes, publish to slack" (or "confirm publish") and I'll post it.
+
+You: yes
+
+Agent [Standup Agent] starting...
+  Tool: confirm_slack_publish()...
+  Tool: publish_standup_to_slack(confirmed=True)...
+Agent [Standup Agent] finished
+
+Assistant: Published to Slack in today's standup thread.
+
+You: ok thanks i love u
+
+Agent [Standup Agent] starting...
+  Tool: capture_feedback_rating(rating='thumbs_up',
+        comment='User said: "ok thanks i love u" after successful Slack publish.')...
+Agent [Standup Agent] finished
+```
+
+The agent automatically finds the latest standup thread in your configured channel and posts as a reply. No more hunting for the thread. No more copy-paste. Just vibes.
+
+![The final standup posted to Slack](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/standup_bot_output_f9eff991f3.png)
+
+Did I save any time compared to just writing the standup myself? Debatable.
+
+Might there be some AI slop in my updates that slipped through? Most definitely.
+
+Did I get to use AI instead of doing it manually? Yes.
+
+And isn't that all that really matters?
+
+<div className="border-l-4 border-yellow bg-yellow/10 rounded-r p-4 my-6">
+<strong>🌶️ Hot take</strong>
+
+**Human in the loop still matters.** Here's the thing - as soon as I stop manually iterating and approving the standups my agent is generating, it flips into something weirdly anti-social. I'm just sending my teammates auto-generated text. Even if it's 90% accurate and I would have approved it anyway, something feels *off* about fully automating communication with other humans. The approval step isn't just quality control - it's me taking ownership of my words.
+
+</div>
+
+## Try it yourself
+
+The agent is open source, [go check it out](https://github.com/andrewm4894/github-standup-agent) or try it yourself:
+
+```bash
+# Install
+pip install github-standup-agent
+
+# Configure
+standup config
+
+# Generate!
+standup generate
+```
+
+You'll need:
+- Python 3.11+
+- GitHub CLI authenticated (`gh auth login`)
+- OpenAI API key
+- Optional: Slack bot token for posting
+- Optional: PostHog API key for analytics
+
+## Build your own instrumented agent
+
+The broader lesson here: if you're building AI features, instrument them from day one.
+
+PostHog's [LLM analytics](/docs/llm-analytics) gives you:
+- **[Tracing](/docs/llm-analytics/traces)** - See exactly what your agents are doing
+- **[Cost tracking](/docs/llm-analytics/calculating-costs)** - Know what you're spending on API calls
+- **[Evals](/docs/llm-analytics/evaluations)** - Measure quality systematically
+- **[Prompt management](/docs/llm-analytics/prompts)** - Version and iterate on prompts without redeploying
+- **[Clustering](/docs/llm-analytics/clusters)** and **[sentiment](/docs/llm-analytics/sentiment)** - Spot patterns in how your agent is used
+- **[User feedback](/docs/llm-analytics/collect-user-feedback)** - Link quality signals to specific traces
+
+The OpenAI Agents SDK integration is [available in `posthog-python`](https://github.com/PostHog/posthog-python/pull/408). Check out our other integrations for [LangChain](/docs/llm-analytics/installation/langchain), [OpenAI](/docs/llm-analytics/installation/openai), and [many other frameworks](/docs/llm-analytics/installation).
+
+## Stick it to your standup bot
+
+I've been using this agent daily for a few weeks now. It's not perfect - sometimes it misses context or formats things weirdly. But that's the beauty of having full observability: I can see exactly what went wrong and iterate.
+
+<div className="border-l-4 border-yellow bg-yellow/10 rounded-r p-4 my-6">
+<strong>🌶️ Hot take</strong>
+
+**Why are we even doing standups?** Honestly, summarization as a category feels crazy early. The fact that I have to manually aggregate my work across GitHub, Slack, Linear, and Google Docs is absurd. I should just be able to read the "headlines" of my work life each morning - a personalized digest of what matters, generated automatically from all my tools. No one has solved this yet. Maybe standups are just a symptom of our tools not talking to each other. The standup bot isn't the enemy - it's a coping mechanism for a fragmented toolchain.
+
+</div>
+
+The standup bot still messages me at 6 PM. But now I just smile, run `standup generate`, and let my agent do the talking.
+
+F*$k you, standup bot. I win.
+
+## Further reading
+
+- [How we caught our AI agent embezzling tokens](/blog/optimizing-agent-cost) - Lessons on tracking and optimizing agent costs
+- [How we built automatic clustering for LLM traces](/blog/llm-analytics-clustering-how-it-works) - Deep dive into the clustering pipeline
+- [8 learnings from 1 year of agents](/blog/8-learnings-from-1-year-of-agents-posthog-ai) - What we've learned building AI at PostHog

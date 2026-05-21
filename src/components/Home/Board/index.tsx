@@ -515,14 +515,6 @@ const products: Product[] = [
         },
     },
     {
-        name: 'Product tours',
-        Icon: IconMegaphone,
-        color: 'seagreen',
-        types: ['Product'],
-        status: 'Roadmap',
-        roadmapID: 2111,
-    },
-    {
         name: 'Heatmaps',
         Icon: IconApp,
         color: 'yellow',
@@ -579,8 +571,8 @@ const products: Product[] = [
         color: 'blue',
         description: 'Built-in customer support with chat widget and unified inbox.',
         types: ['Support'],
-        status: 'WIP',
-        badge: 'ALPHA',
+        status: 'Production',
+        badge: 'BETA',
         pricing: {
             cta: {
                 url: '/docs/support',

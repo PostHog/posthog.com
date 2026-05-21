@@ -1,5 +1,6 @@
 import React from 'react'
 import { IconPiggyBank } from '@posthog/icons'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const revenueAnalytics = {
     name: 'Revenue Analytics',
@@ -156,6 +157,31 @@ export const revenueAnalytics = {
                     description: 'Add revenue metrics to any dashboard relating to persons/groups',
                 },
             ],
+        },
+        {
+            title: 'MCP',
+            headline: 'Query revenue from your editor',
+            description:
+                'Check MRR, analyze segments, and build revenue dashboards from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            features: [
+                {
+                    title: 'Check revenue impact before shipping',
+                    description: 'Query MRR, ARPU, or plan-level breakdowns before changing pricing logic.',
+                },
+                {
+                    title: 'Spot revenue trends early',
+                    description: 'Compare revenue across periods to catch dips or validate growth.',
+                },
+                {
+                    title: 'Break down revenue by segment',
+                    description: 'See which plans, cohorts, or customer types are driving the most revenue.',
+                },
+                {
+                    title: 'Query Stripe data directly',
+                    description: 'Inspect raw charges, subscriptions, and payment data without leaving your editor.',
+                },
+            ],
+            children: <MCPInstall />,
         },
         {
             title: 'Coming soon',

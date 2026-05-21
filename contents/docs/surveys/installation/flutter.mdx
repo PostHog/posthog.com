@@ -1,5 +1,5 @@
 ---
-title: Flutter surveys installation
+title: Flutter Surveys installation
 platformLogo: flutter
 tableOfContents: []
 ---
@@ -10,10 +10,9 @@ Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/surveys/f
 See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
 -->
 
-import { FlutterSurveysInstallationWrapper } from './_snippets/flutter-surveys-installation-wrapper.tsx'
+import { FlutterSurveysInstallationWrapper } from "./_snippets/surveys-installation-wrapper.tsx";
 
 <FlutterSurveysInstallationWrapper />
-
 
 ## Limitations
 
@@ -25,10 +24,10 @@ import { FlutterSurveysInstallationWrapper } from './_snippets/flutter-surveys-i
 ## Troubleshooting
 
 - Update your SDK and iOS Pods.
-- Make sure to set the minimum platform version to iOS 13.0 in your Podfile.
+- Make sure to set the minimum platform version to iOS 13.0 in your `Podfile`.
 - Make sure you have disabled automatic SDK initialization.
 - Run a clean build if you experience issues.
-- If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation/flutter#step-two-install-posthogobserver).
-  - Using [navigationObservers](/docs/libraries/flutter#capturing-screen-views#using-navigatorobservers)
+- If surveys are not being displayed when triggered, make sure you have installed the [PostHogObserver](/docs/surveys/installation/flutter#step-two-install-posthogobserver).
+  - Using [`navigationObservers`](/docs/libraries/flutter#capturing-screen-views#using-navigatorobservers)
   - Using [go_router](/docs/libraries/flutter#capturing-screen-views#using-go-router)
 - If you are using multiple navigation observers and encounter a log message `[PostHog] Cannot show survey: No valid context found...`, try placing `PosthogObserver` first in the list of observers. We've noticed that order sometimes matters due to potential interference.
