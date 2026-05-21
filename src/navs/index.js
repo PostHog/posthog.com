@@ -4369,6 +4369,16 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'A/B testing prompts',
+                    url: '/docs/experiments/llm-prompt-experiments',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Concepts',
                 },
                 {
@@ -5739,6 +5749,16 @@ export const docsMenu = {
                     name: 'Prompt management',
                     url: '/docs/llm-analytics/prompts',
                     icon: 'IconPencil',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'A/B testing prompts',
+                    url: '/docs/llm-analytics/prompt-experiments',
+                    icon: 'IconFlask',
                     color: 'purple',
                     badge: {
                         title: 'Beta',
