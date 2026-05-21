@@ -85,7 +85,7 @@ Our board meeting deck still uses a title slide with branding circa 2021, but it
 
 ## Events & conference booths
 
-Events are a high-density brand moment where first impressions form in seconds. Booth design, event-specific assets, and staffing guidance live in the [marketing/events handbook](/handbook/marketing/events).
+Events are a high-density brand moment where first impressions form in seconds. Booth design, event-specific assets, and staffing guidance live in the [Marketing events handbook](/handbook/marketing/events).
 
 ## Print materials
 
