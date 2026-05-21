@@ -201,7 +201,7 @@ export const getDiscount = query({
 })
 ```
 
-Because this is a regular Convex query, the React client that subscribes to it will re-render automatically the moment the flag definition changes on your next cron tick.
+Because this is a regular Convex query, the React client that subscribes to it will re-run and re-render automatically the next time the cron refreshes flag definitions (up to your configured interval, one minute in the example above).
 
 If you're running an experiment against a locally-evaluated flag, fire an exposure event yourself from a mutation or action, since local eval can't schedule `capture` from inside a query:
 
@@ -253,7 +253,7 @@ If you want every uncaught exception from your Convex deployment forwarded to Po
 You now have product analytics, feature flags, and error tracking flowing from the Convex side of your stack. A few directions worth exploring:
 
 - **Frontend events.** Install [`posthog-js`](/docs/libraries/js) in your React app and call `posthog.identify()` with the same Convex user ID. PostHog will stitch frontend and backend events into a single person timeline.
-- **LLM analytics for Convex Agent.** If your app uses Convex Agent or any LLM provider, follow the [Convex LLM analytics installation guide](/docs/llm-analytics/installation/convex) to capture generations, costs, and traces.
+- **AI observability for Convex Agent.** If your app uses Convex Agent or any LLM provider, follow the [Convex AI observability installation guide](/docs/ai-observability/installation/convex) to capture generations, costs, and traces.
 - **Pull Convex data into PostHog.** The [Convex data warehouse source](/docs/cdp/sources/convex) syncs your Convex tables to PostHog so you can query them alongside event data using [SQL](/docs/sql).
 - **Session replay.** Add [session replay](/docs/session-replay) on the frontend to see exactly what a user did before an event you captured server-side.
 
