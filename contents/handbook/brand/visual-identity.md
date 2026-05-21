@@ -113,7 +113,7 @@ Used exclusively for quotes in hedgehog artwork – the signs, speech bubbles, a
 - **Left-align body text** by default. Center-align is fine for short marketing headlines and call-outs.
 - **Line height.** The most obvious way for a design to feel not _quite_ right is for the line height to not be dialed in. Take special note of the line height for individual elements where text wraps, as well as the space between associated elements like a title and description. If you have questions, ask in #design-review.
 
-## Illustration & hedgehogs @todo
+## Illustration & hedgehogs
 
 ### Our mascot: Max
 
