@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-The Python SDK provides a Django middleware that automatically wraps all requests with a [context](/docs/libraries/python#contexts). This middleware extracts session, user, and window information from request headers and tags all events captured during the request with relevant metadata.
-||||||| 2b6be744b
-The Python SDK provides a Django middleware that automatically wraps all requests with a [context](/docs/libraries/python#contexts). This middleware extracts session and user information from request headers and tags all events captured during the request with relevant metadata.
-=======
-The Python SDK provides a Django middleware that automatically wraps all requests with a [context](/docs/libraries/python#contexts). This middleware extracts session and user information from each request and tags all events captured during that request with relevant metadata.
->>>>>>> master
+The Python SDK provides a Django middleware that automatically wraps all requests with a [context](/docs/libraries/python#contexts). This middleware extracts session, user, and window information from each request and tags all events captured during that request with relevant metadata.
 
 ### Basic setup
 
@@ -23,30 +17,18 @@ The middleware uses the globally configured `posthog` client by default, so you 
 The middleware automatically extracts and uses:
 
 - **Session ID** from the `X-POSTHOG-SESSION-ID` header, if present
-<<<<<<< HEAD
-- **Distinct ID** from the `X-POSTHOG-DISTINCT-ID` header, if present
-- **Window ID** from the `X-POSTHOG-WINDOW-ID` header, if present
-||||||| 2b6be744b
-- **Distinct ID** from the `X-POSTHOG-DISTINCT-ID` header, if present
-=======
 - **Distinct ID** from the `X-POSTHOG-DISTINCT-ID` header, if present, falling back to the authenticated Django user's `pk` (Django's primary-key alias, which works with custom user models)
+- **Window ID** from the `X-POSTHOG-WINDOW-ID` header, if present
 - **User email** from the authenticated Django user's `email` as `email`
->>>>>>> master
 - **Current URL** as `$current_url`
 - **Request method** as `$request_method`
 - **Request path** as `$request_path`
 - **Forwarded IP address** from `X-Forwarded-For` as `$ip`
 - **User agent** from `User-Agent` as `$user_agent`
 
-<<<<<<< HEAD
-All events captured during the request (including exceptions) will include these properties and be associated with the extracted session, distinct ID, and window.
-||||||| 2b6be744b
-All events captured during the request (including exceptions) will include these properties and be associated with the extracted session and distinct ID.
-=======
-The session and distinct ID headers are sanitized before use. Empty values are ignored, control characters are removed, values are trimmed, and values are capped at 1000 characters.
+The session, distinct ID, and window ID headers are sanitized before use. Empty values are ignored, control characters are removed, values are trimmed, and values are capped at 1000 characters.
 
-All events captured during the request (including exceptions) include these properties and are associated with the extracted session and distinct ID.
->>>>>>> master
+All events captured during the request (including exceptions) include these properties and are associated with the extracted session, distinct ID, and window.
 
 If you are using PostHog on your frontend, the JavaScript Web SDK will add the session, distinct ID, and window ID headers automatically if you enable tracing headers.
 
@@ -154,12 +136,6 @@ POSTHOG_MW_TAG_MAP = clean_tags
 POSTHOG_MW_CAPTURE_EXCEPTIONS = True
 ```
 
-<<<<<<< HEAD
-All events captured within the request context automatically include the configured tags and are associated with the session, user, and window identified from the request headers.
-||||||| 2b6be744b
-All events captured within the request context automatically include the configured tags and are associated with the session and user identified from the request headers.
-=======
-All events captured within the request context automatically include the configured tags and are associated with the session and user identified from the request headers or Django authentication.
+All events captured within the request context automatically include the configured tags and are associated with the session, user, and window identified from the request headers or Django authentication.
 
 The middleware supports both sync (WSGI) and async (ASGI) Django applications. In async mode, it uses Django's `request.auser()` API when available to avoid synchronous user access.
->>>>>>> master
