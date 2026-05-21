@@ -106,6 +106,12 @@ Analytics is the memory of everything users have done. Self-driving development 
 ### "We're already on GA4"
 
 **Answer:** GA4 is a marketing analytics tool and is limited and, frankly, unpopular. PostHog's web analytics tools offer approximate parity with GA4, but with a lot more flexibility.
+ ### "Autocapture is going to explode our event volume and our bill"
+**Answer:** Autocapture is configurable and you can use allow/ignore lists, URL filters, element exclusion via the `ph-no-capture` class, and `before_send` hooks to drop events before they're sent. Pricing is per-event with a 1M/month free floor and no per-seat or per-MTU charges, so you only pay for what you keep. We can model your expected volume before you commit.
+
+### "Our data team lives in Snowflake/BigQuery and we don't want another silo"
+**Answer:** PostHog isn't a silo in either direction. Batch exports send events to Snowflake, BigQuery, Databricks, Redshift, Postgres, S3, or Azure Blob. The data warehouse pulls in from Stripe, HubSpot, Postgres, Snowflake, BigQuery, and 20+ other sources so you can query product events alongside revenue and CRM data in the same HogQL query.
+
 
 ## Selling to enterprise
 
