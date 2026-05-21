@@ -13,7 +13,7 @@ This page doesn't deal with [our Product for Engineers newsletter](https://newsl
 To point users at a page in the PostHog app via email, use this format: `https://app.posthog.com/`. 
 
 For example:
-`https://app.posthog.com/endpoints`
+`https://app.posthog.com/endpoints` instead of `https://app.posthog.com/project/2/endpoints`
 `https://app.posthog.com//logs?activeTab=alerts`
 
 The `app.posthog.com` prefix works for both US and EU instances, and the project path resolves itself for the recipient.
