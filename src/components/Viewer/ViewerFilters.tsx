@@ -68,6 +68,7 @@ export default function ViewerFilters({
     const [filters, setFilters] = useState<Record<string, { value: any; filter: (obj: any, value: any) => boolean }>>(
         {}
     )
+    const [groupValue, setGroupValue] = useState('none')
     const { search } = useLocation()
     const { websiteMode } = useApp()
 
@@ -146,7 +147,7 @@ export default function ViewerFilters({
                         <span className="text-sm font-bold">Group by</span>
                         <Select
                             placeholder="Group by"
-                            defaultValue="none"
+                            value={groupValue}
                             groups={[
                                 {
                                     label: '',
@@ -159,7 +160,10 @@ export default function ViewerFilters({
                                     ],
                                 },
                             ]}
-                            onValueChange={(value) => onGroupChange?.(value)}
+                            onValueChange={(value) => {
+                                setGroupValue(value)
+                                onGroupChange?.(value)
+                            }}
                         />
                     </div>
                 )}
