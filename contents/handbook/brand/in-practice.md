@@ -94,7 +94,7 @@ Print requires additional consideration because you can't iterate after it's shi
 ### General rules for print
 
 - Export at 300 DPI minimum for anything that will be physically produced.
-- CMYK color profile for print. (Note: our brand colors are defined in RGB/hex. Confirm CMYK equivalents with the design team before going to print.) @todo add Pantone colors here.
+- CMYK color profile for print. (Note: our brand colors are defined in RGB/hex. Confirm CMYK equivalents with the design team before going to print.)
 - Bleed and safe zones: Use standard 3mm bleed. Keep critical content at least 5mm inside the trim line.
 - SVG logos always preferred as source; export as PDF for print vendor.
 
