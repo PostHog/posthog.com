@@ -104,7 +104,7 @@ Print requires additional consideration because you can't iterate after it's shi
 - Brochures: Rare. If needed, follow the website's editorial style and make it look handcrafted, not template-y.
 - We've traditionally avoided sell sheets or business cards, but work with the Graphics Team if you need something specific.
 
-### Approval:** All print materials should be reviewed by in #design-review before goito print. Mistakes in print are expensive. [Submit a request](/handbook/brand/art-requests) early.
+### Approval:** All print materials should be reviewed by in #design-review before going to print. Mistakes in print are expensive. [Submit a request](/handbook/brand/art-requests) early.
 
 ## Merch & swag
 
