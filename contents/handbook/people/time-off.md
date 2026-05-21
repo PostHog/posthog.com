@@ -175,4 +175,4 @@ On the run up to your anniversary, our Ops team will send you a link to the gift
 
 #### 5th year anniversary
 
-To mark five years at PostHog, you can get a brand new hedgehog profile illustration drawn to replace the one taken when you joined. Send an updated photo to our Ops team and they'll get it over to our contract illustrator. Once it's ready, the new illustration will be swapped in on your team profile.
+To mark five years at PostHog, you can get a brand new hedgehog profile illustration drawn to replace the one taken when you joined. Send an updated photo to our Graphics team and they'll get it over to our illustrator. Once it's ready, the new illustration will be sent to you.
