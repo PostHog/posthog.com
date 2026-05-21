@@ -62,6 +62,27 @@ import FlagChargeEstimate from "./snippets/flag-charge-estimate.mdx"
 </details>
 
 
+## Limiting which flags are evaluated
+
+If your app only uses a few specific feature flags, you can configure the SDK to request only those flags instead of all eligible ones. This reduces the work done on each `/flags` request.
+
+Use the `flag_keys` config option to specify which flags to evaluate:
+
+```js
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    flag_keys: ['checkout-redesign', 'new-onboarding'],
+})
+```
+
+When `flag_keys` is set:
+- Only the specified flags are evaluated on each `/flags` request
+- Other flags aren't available via `getFeatureFlag()` or `isFeatureEnabled()`
+- Dependencies of requested flags may still be evaluated internally by PostHog
+- An empty array (`[]`) means no flags are evaluated
+
+This is useful when your app only uses a small subset of your project's feature flags. Server-side SDKs also support `flag_keys` via the `evaluate_flags()` method – see [evaluating only specific flags](/docs/integrate/feature-flags-code#evaluating-only-specific-flags) for details.
+
 ## Reducing client-side feature flag requests
 
 In our [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs, you can reduce the cost of feature flags by reducing the number of requests your client makes to fetch feature flag values for your users.
