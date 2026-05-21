@@ -1,5 +1,5 @@
 ---
-date: 2026-05-08
+date: 2026-05-22
 title: "A guide to growth metrics for startups that don't fit in"
 author:
     - mine-kansu
