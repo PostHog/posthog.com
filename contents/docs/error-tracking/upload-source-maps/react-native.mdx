@@ -174,3 +174,19 @@ If you are not using the Expo plugin (step 1), you will need to also disable Use
 **Build fails with `Sandbox: bash deny(1) file-read-data`**
 
 You probably have `{ disableSandboxing: false }` set in your plugin options, or your Xcode project has `ENABLE_USER_SCRIPT_SANDBOXING = YES` set explicitly somewhere that overrides the plugin. Stock Expo projects need the sandbox disabled because several build-phase scripts (Expo's `expo-configure-project.sh`, various CocoaPods-generated scripts) don't declare all their inputs. Either remove the opt-out, or declare inputs on every script phase and keep sandboxing on.
+
+**Upload fails with `content_hash_mismatch`**
+
+This happens when a symbol set with the same identifier already exists but has different content. Common causes include:
+
+1. **Rebuilding the same profile without JS changes** – Minor non-determinism in the build can produce a different content hash even when code hasn't changed. Pass `--skip-on-conflict` to the CLI to keep existing symbols.
+
+2. **Different build profiles uploading to the same project** – Development and preview builds may conflict. Consider using separate PostHog projects for each configuration.
+
+For manual uploads (like EAS Updates), add the flag directly:
+
+```bash
+posthog-cli hermes upload --directory dist --skip-on-conflict
+```
+
+Use `--force` instead if you want to overwrite existing symbols with the new content.

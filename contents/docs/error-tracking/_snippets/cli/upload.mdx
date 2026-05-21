@@ -7,4 +7,11 @@ The CLI will create or reuse the [release](/docs/error-tracking/releases) for th
 
 You can also pass `--build` to record a build number (e.g. `CFBundleVersion` on iOS, `versionCode` on Android) as release metadata. This is optional — when omitted, no build info is recorded.
 
+### Handling re-uploads
+
+If a symbol set with the same identifier already exists with different content, the upload fails by default. This prevents accidentally overwriting production symbol sets. Use one of these flags to control the behavior:
+
+- `--skip-on-conflict` – Keep the existing symbol set and continue. Use this in CI when rebuilding without code changes may produce different hashes.
+- `--force` – Overwrite the existing symbol set with the new content. Use this when you intentionally want to replace previously uploaded symbols (for example, after adding source context to a source-less upload).
+
 > **💡 Tip:** You can use `--delete-after` option to clean up sourcemaps after uploading them.
