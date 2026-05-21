@@ -20,9 +20,18 @@ This page is the single landing point for using PostHog with Convex. Pick the su
 
 The first row is what most teams reach for first. The last two are configured in the Convex dashboard with no PostHog-side setup.
 
-{/*TODO screenshot: Convex dashboard PostHog Logs configuration form (Deployment Settings → Integrations → PostHog Logs). Richard (@richardsolomou) offered to provide this from his Pro account. Drop into contents/images/tutorials/convex/convex-logs-form.png and replace this comment with a <ProductScreenshot /> reference.*/}
-
-{/*TODO screenshot: Convex dashboard PostHog Error Tracking configuration form (Deployment Settings → Integrations → PostHog Error Tracking). Richard (@richardsolomou) offered to provide this from his Pro account. Drop into contents/images/tutorials/convex/convex-error-tracking-form.png and replace this comment with a <ProductScreenshot /> reference.*/}
+<div className="grid grid-cols-2 gap-2">
+    <ProductScreenshot
+        imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260521_mzyo_3d76c9770a.png"
+        alt="Convex dashboard PostHog Logs configuration form"
+        classes="rounded"
+    />
+    <ProductScreenshot
+        imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260521_naki_c0aa94431b.png"
+        alt="Convex dashboard PostHog Error Tracking configuration form"
+        classes="rounded"
+    />
+</div>
 
 ## Get your PostHog project token
 
@@ -288,8 +297,6 @@ Now an event captured from a mutation with `distinctId: userId` and a `$pageview
 If your app calls LLM providers from Convex actions, or uses [`@convex-dev/agent`](https://www.convex.dev/components/agent), pipe the traces into [PostHog AI observability](/docs/ai-observability). You get token counts, latency, and cost per generation, the full request and response transcript for every model call, and groupings by user, model, and agent run.
 
 Setup uses `@posthog/ai` and OpenTelemetry rather than the `@posthog/convex` component. The full installation steps live on the [Convex AI observability installation page](/docs/ai-observability/installation/convex), covering both vanilla Vercel AI SDK or OpenAI calls and `experimental_telemetry` on `@convex-dev/agent`.
-
-{/*TODO screenshot: PostHog AI observability traces view showing a Convex Agent run, with token counts and the conversation transcript. Drop into contents/images/tutorials/convex/llm-analytics-trace.png and replace this comment with a <ProductScreenshot /> reference.*/}
 
 ## Sync Convex tables into PostHog
 
