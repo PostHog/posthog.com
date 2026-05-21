@@ -20,6 +20,7 @@ Live is a continuously updating feed of recent events. Each row includes:
 - **Path** – the URL or pathname requested
 - **Referrer** and **UTM parameters** – where the visitor came from
 - **Country** and **device** – derived from the request
+- **Session Replay** – when [Session Replay](/docs/session-replay) is enabled, each person row shows a play button with the number of recordings from the last 30 minutes. Click it to jump to that person's session recordings.
 
 Use the filter controls at the top of the tab to narrow the feed by host, path, referrer, or any other property. Filters apply to the live stream so you can isolate exactly what you want to watch.
 
@@ -37,12 +38,12 @@ Use Live when you're:
 
 Most analytics work splits into "right now" and "what happened". Live covers the first; the rest of [Web Analytics](/docs/web-analytics/dashboard) covers the second.
 
-| | Live | Web Analytics dashboard |
-|---|---|---|
-| **Latency** | Seconds | Query-time, cached |
-| **Time range** | Last few minutes | Hours, days, months |
-| **Best for** | Launches, campaigns, monitoring, debugging | Trend analysis, reports, retrospectives |
-| **Aggregations** | Stream of individual events | Visitors, sessions, paths, sources |
+|                  | Live                                       | Web Analytics dashboard                 |
+| ---------------- | ------------------------------------------ | --------------------------------------- |
+| **Latency**      | Seconds                                    | Query-time, cached                      |
+| **Time range**   | Last few minutes                           | Hours, days, months                     |
+| **Best for**     | Launches, campaigns, monitoring, debugging | Trend analysis, reports, retrospectives |
+| **Aggregations** | Stream of individual events                | Visitors, sessions, paths, sources      |
 
 For deeper analysis like funnels, retention, or breakdowns, use [Product Analytics](/docs/product-analytics) or the [SQL editor](/docs/sql).
 
@@ -56,3 +57,4 @@ For deeper analysis like funnels, retention, or breakdowns, use [Product Analyti
 
 - [Web Analytics dashboard](/docs/web-analytics/dashboard) – aggregated views over longer time ranges
 - [Troubleshooting](/docs/web-analytics/troubleshooting) – when events aren't showing up
+- [Session Replay](/docs/session-replay) – watch real user sessions to debug issues
