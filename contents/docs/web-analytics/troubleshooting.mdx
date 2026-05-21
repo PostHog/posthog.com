@@ -4,12 +4,14 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ComparisonTable } from "components/ComparisonTable";
+import { ComparisonRow } from "components/ComparisonTable/row";
 
 This page covers troubleshooting for Web Analytics. For setup, see the [installation guides](/docs/web-analytics/installation).
 
 ## Have a question? Ask PostHog AI
+
+PostHog AI can diagnose common Web Analytics setup issues, like partial [reverse proxy](/docs/advanced/proxy) coverage across your domains. Open PostHog AI from the Web Analytics page and ask questions like "Is my web analytics set up correctly?" or "Why are my pageviews low?"
 
 <AskAIInput placeholder="Type your question and hit enter..." />
 
@@ -37,7 +39,7 @@ No, we automatically block bots and crawlers. You can see exactly which ones [we
 
 **1. Ad blockers**
 
-*Affects: visitor count, session count, pageview count*
+_Affects: visitor count, session count, pageview count_
 
 Around 1 in 3 internet users use an ad blocker, more in some demographics, with 25-34 being the highest.
 
@@ -45,23 +47,23 @@ Google Analytics is blocked by almost every ad blocker, whereas other analytics 
 
 **2. Different methods of counting unique users**
 
-*Affects: visitor count*
+_Affects: visitor count_
 
 In PostHog, you can [identify](/docs/product-analytics/identify) anonymous users across with the same distinct ID across visitors and devices they are correctly counted as one user. Analytics tools that don't allow for identifying users would incorrectly count these as multiple users.
 
-Cookieless trackers, like [Plausible](/blog/posthog-vs-plausible) and Vercel, track users by combining a few properties into a hash. This includes the user agent, IP address, and a daily salt. Because the salt changes every day, a user that visits your site 7 days in a row counts as 7 different users in these tools. In PostHog, if the user is identified, or if you are using cookies, they are correctly counted as a single user. 
+Cookieless trackers, like [Plausible](/blog/posthog-vs-plausible) and Vercel, track users by combining a few properties into a hash. This includes the user agent, IP address, and a daily salt. Because the salt changes every day, a user that visits your site 7 days in a row counts as 7 different users in these tools. In PostHog, if the user is identified, or if you are using cookies, they are correctly counted as a single user.
 
 These cookieless trackers also incorrectly count the same user on different devices as different visitors, as the user agent would differ.
 
 **3. Different methods of tracking sessions**
 
-*Affects: session count*
+_Affects: session count_
 
 A [session](/docs/data/sessions) is a grouping of user activity, which starts on the first event (e.g. pageview) and ends after 30 minutes of inactivity. By default, we store the user's current session ID in a cookie. Other tools might have a different timeout period or a different way of storing the session state which can affect the count.
 
 **4. Bot detection**
 
-*Affects: visitor count, session count, pageview count*
+_Affects: visitor count, session count, pageview count_
 
 Some traffic to your site might be bots like search engines crawlers, archivers, or content scrapers. You may want some of these to be able to access your site, but you don't want them to appear in your analytics data. Different tools use different methods, which may result in different visitor or page view counts.
 
@@ -74,11 +76,12 @@ You can also block custom user agents by setting the `custom_blocked_useragents`
 ## Why am I getting a lot of direct traffic?
 
 Direct traffic usually refers to when a user enters the address to your website directly, but it also includes any traffic where the referrer is unknown or impossible to calculate. We use the `document.referrer` property, which might be hidden for a few reasons:
-* Some browsers and privacy extensions strip or hide the referrer, particularly in private browsing or incognito mode.
-* Links opened from an app (for example, a messaging or email app) won't have a referrer set. You can use UTM tags to help attribute links shared this way. Note that many apps, like the iOS Mail app, will strip ad-specific parameters like `gclid`, `fbclid`, etc.
-* Browsers won't include the referrer for links from HTTPS to HTTP.
-* Link tracking or redirection services may result in the original referrer being lost.
-* Websites can specify that the referrer should not be sent, by including the `referrerpolicy` meta tag in the page or `rel="noreferrer"` on the link.
+
+- Some browsers and privacy extensions strip or hide the referrer, particularly in private browsing or incognito mode.
+- Links opened from an app (for example, a messaging or email app) won't have a referrer set. You can use UTM tags to help attribute links shared this way. Note that many apps, like the iOS Mail app, will strip ad-specific parameters like `gclid`, `fbclid`, etc.
+- Browsers won't include the referrer for links from HTTPS to HTTP.
+- Link tracking or redirection services may result in the original referrer being lost.
+- Websites can specify that the referrer should not be sent, by including the `referrerpolicy` meta tag in the page or `rel="noreferrer"` on the link.
 
 > **Note:** If you have auto-tagged traffic set up in Google Ads, parameters set this way do not appear as URL parameters, and therefore aren't available for us to use for attribution. You can set up tracking templates in Google Ads to add query parameters automatically.
 
@@ -91,6 +94,7 @@ This is called self-referral traffic, having a small amount (less than 5%) of se
 For tracking users across different domains or websites, for example a marketing site at `marketing.com` and an app at `app.com`, or in some cases between subdomains, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed. This typically means you need to pass the user's `distinct_id` and `session_id` between domains but check the guide for complete instructions.
 
 This ensures that:
+
 - Campaign attribution is preserved across domain transitions
 - User journeys are tracked accurately from first touch to conversion
 - Analytics data from both sites is associated with the same user profile
@@ -109,7 +113,7 @@ If your users are typically inactive for longer than 30 minutes within one perio
 
 ## Why does PostHog impact my PageSpeed score?
 
-The simple answer: PostHog, like any other web analytics tool, consumes resources (CPU) and execution time to load the resources that make it work. This isn't without cost, but PageSpeed Insights makes this cost seem larger than it actually is. 
+The simple answer: PostHog, like any other web analytics tool, consumes resources (CPU) and execution time to load the resources that make it work. This isn't without cost, but PageSpeed Insights makes this cost seem larger than it actually is.
 
 ### How do we optimize how PostHog loads on your website?
 
@@ -123,11 +127,12 @@ We also optimize our assets specifically for PageSpeed Insights whenever possibl
 
 At a more philosophical level, we question the premise of the question. PageSpeed score isn't an objective judge of quality or performance for the following reasons:
 
-1. **It's not realistic.** PageSpeed judges your website on its performance for an underpowered device with a bad internet connection. For example, on mobile, it uses a broadband speed of ~1.6 Mbps, which is significantly slower than the typical 5-50 Mbps (5G can be faster than this too)**.
-    - You can use PostHog to [autocapture web vitals](/docs/web-analytics/web-vitals) to give you a more realistic picture of your users' experiences.  
+1. **It's not realistic.** PageSpeed judges your website on its performance for an underpowered device with a bad internet connection. For example, on mobile, it uses a broadband speed of ~1.6 Mbps, which is significantly slower than the typical 5-50 Mbps (5G can be faster than this too)\*\*.
+   - You can use PostHog to [autocapture web vitals](/docs/web-analytics/web-vitals) to give you a more realistic picture of your users' experiences.
 
 2. **It doesn't directly impact search rankings.** Although speed matters for user experience, there is no evidence to suggest Google uses data from PageSpeed Insight directly in its search ranking algorithm. [Leaks about the search ranking algorithm](https://ipullrank.com/google-algo-leak) don't mention PageSpeed as important to search rankings. Optimizing your site speed can improve your user experience and lead to more clicks and fewer bounces, which can improve your search rankings, but any positive or negative impact on rankings is based on user behavior, not this arbitrary score.
-  - Google Ads' [Quality Score](https://support.google.com/google-ads/answer/6167118?hl=en) is a similar situation where loading speed and user experience impact your CPC, CTR, impressions, paid ranking, and more. This doesn't mean your PageSpeed score directly impacts these either.
+
+- Google Ads' [Quality Score](https://support.google.com/google-ads/answer/6167118?hl=en) is a similar situation where loading speed and user experience impact your CPC, CTR, impressions, paid ranking, and more. This doesn't mean your PageSpeed score directly impacts these either.
 
 3. **Nearly everyone has “failing” PageSpeed scores.** Large and popular sites, from the New York Times to Shopify have failing PageSpeed scores. For example, the NYT loads 43,906 ms worth of scripts, nearly 100x more than the execution time of PostHog.
 
@@ -139,7 +144,7 @@ At a more philosophical level, we question the premise of the question. PageSpee
 
 2. Move the PostHog snippet down in your header, below other scripts. This can impact loading time.
 
-3. Although we don't recommend it, you could lazy load PostHog by having it trigger on scroll or a timer. This can miss initial events, start session replays later, cause lower event counts, and delay other features. 
+3. Although we don't recommend it, you could lazy load PostHog by having it trigger on scroll or a timer. This can miss initial events, start session replays later, cause lower event counts, and delay other features.
 
 4. Utilize server-side tracking. We have a range of SDKs for backend languages and frameworks you can use to capture events and use the features of PostHog without needing to load any code on the client side.
 
@@ -155,6 +160,4 @@ Ingestion delays can also cause the count not to update as expected.
 
 ## Solved community questions
 
-<SolvedQuestions
-    topicLabel="Web Analytics"
-/>
+<SolvedQuestions topicLabel="Web Analytics" />
