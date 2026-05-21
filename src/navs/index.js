@@ -5726,6 +5726,21 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Trace Reviews',
+                    url: '/docs/ai-observability/trace-reviews',
+                    icon: 'IconCheckCircle',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'Evaluations ↗',
+                    url: 'https://posthog.com/docs/ai-evals',
+                },
+                {
+                    name: 'Prompt management ↗',
+                    url: 'https://posthog.com/docs/prompt-management',
+                },
+                {
                     name: 'PostHog AI',
                 },
                 {
@@ -5869,8 +5884,8 @@ export const docsMenu = {
         {
             name: 'Evaluations',
             url: '/docs/ai-evals',
-            color: '[#F5C03E]',
-            colorDark: '[#FFD75A]',
+            color: '[#681291]',
+            colorDark: '[#C170E8]',
             icon: 'IconTarget',
             description: 'Score and review the quality of your LLM generations',
             children: [
@@ -5898,39 +5913,24 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Trace Reviews',
-                    url: '/docs/ai-evals/trace-reviews',
-                    icon: 'IconCheckCircle',
-                    color: 'green',
-                    featured: true,
+                    name: 'Taggers',
+                    url: '/docs/ai-evals/taggers',
+                    icon: 'IconTag',
+                    color: 'purple',
                 },
                 {
                     name: 'Datasets',
                     url: '/docs/ai-evals/datasets',
                     icon: 'IconStack',
                     color: 'blue',
-                    badge: {
-                        title: 'Coming soon',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Taggers',
-                    url: '/docs/ai-evals/taggers',
-                    icon: 'IconTag',
-                    color: 'purple',
-                    badge: {
-                        title: 'Coming soon',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
             ],
         },
         {
             name: 'Prompt Management',
             url: '/docs/prompt-management',
-            color: '[#9F4CFF]',
-            colorDark: '[#D8A8FF]',
+            color: '[#681291]',
+            colorDark: '[#C170E8]',
             icon: 'IconPencil',
             description: 'Version and ship prompts and reusable agent skills without code deploys',
             children: [
