@@ -51,7 +51,7 @@ It relied on agents answering questions in one shot, so it frequently made mista
 
 FOMO got the better of me and I pushed this in our marketing too early. It felt good enough to be sort of useful, and I felt the pressure of new companies generating gazillions in revenue seemingly overnight – many of them were PostHog customers!
 
-It was a mixed start, but belief remained. We ran regular traces hours, where we looked at LLM calls (hey, you should try [PostHog's LLM Analytics](/llm-analytics)!) and worked out what went wrong when our users had a poor experience. We kept iterating.
+It was a mixed start, but belief remained. We ran regular traces hours, where we looked at LLM calls (hey, you should try [PostHog's AI Observability](/llm-analytics)!) and worked out what went wrong when our users had a poor experience. We kept iterating.
 
 The breakthrough was moving to a single query loop architecture, so the agent could iterate and make sense of all the atomic endpoints from our products. Now, if a graph was empty, the agent would question this and try to figure out if a different event or property was better.
 
