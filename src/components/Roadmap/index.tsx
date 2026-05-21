@@ -547,7 +547,7 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                 },
                 {
                     content: (
-                        <h3 className="text-[15px] m-0 font-normal leading-tight">
+                        <h3 className="!text-[15px] m-0 font-normal leading-tight">
                             <HighlightedText
                                 text={roadmap.attributes.title}
                                 highlights={
