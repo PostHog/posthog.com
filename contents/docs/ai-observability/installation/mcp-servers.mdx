@@ -1,0 +1,210 @@
+---
+title: MCP server instrumentation
+platformIconName: IconNetwork
+showStepsToc: true
+tableOfContents: [
+    {
+        url: 'install-dependencies',
+        value: 'Install dependencies',
+        depth: 1,
+    },
+    {
+        url: 'instrument-your-mcp-server',
+        value: 'Instrument your MCP server',
+        depth: 1,
+    },
+    {
+        url: 'verify-events',
+        value: 'Verify events',
+        depth: 1,
+    },
+    {
+        url: 'configuration-options',
+        value: 'Configuration options',
+        depth: 1,
+    },
+]
+---
+
+The `@posthog/mcp` SDK instruments [Model Context Protocol](https://modelcontextprotocol.io/) servers with PostHog analytics. It captures tool calls, resource access, initialization events, and errors from your MCP server.
+
+When you enable AI tracing, the SDK also emits `$ai_span` events that appear in the PostHog AI Observability UI alongside your LLM generations.
+
+## Install dependencies
+
+Install the SDK in your MCP server project:
+
+<MultiLanguage>
+
+```bash
+npm install @posthog/mcp
+```
+
+```bash
+yarn add @posthog/mcp
+```
+
+```bash
+pnpm add @posthog/mcp
+```
+
+</MultiLanguage>
+
+## Instrument your MCP server
+
+Import the `track` function and call it with your MCP server instance. The SDK wraps request handlers and captures events automatically.
+
+```typescript
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
+import { track } from '@posthog/mcp'
+
+const server = new McpServer({
+  name: 'my-mcp-server',
+  version: '1.0.0',
+})
+
+// Register your tools
+server.tool('search', 'Search for items', { query: z.string() }, async (args) => {
+  // Your tool implementation
+})
+
+// Instrument with PostHog
+track(server, {
+  apiKey: '<ph_project_token>',
+  host: '<ph_client_api_host>',
+  enableAITracing: true, // Emit $ai_span events for AI Observability
+})
+```
+
+The SDK supports both the high-level `McpServer` and the low-level `Server` from the MCP SDK. Calling `track()` multiple times on the same server is safe.
+
+### Emit custom events
+
+Use `publishCustomEvent` to capture custom events through the same pipeline:
+
+```typescript
+import { publishCustomEvent } from '@posthog/mcp'
+
+// The server must already be tracked
+publishCustomEvent(server, {
+  eventName: 'custom_action',
+  properties: {
+    action_type: 'export',
+    items_count: 42,
+  },
+})
+```
+
+## Verify events
+
+After you instrument your server and call a tool, events appear in PostHog:
+
+1. Go to the [**Activity** tab](https://app.posthog.com/activity/explore) in PostHog
+2. Filter for events starting with `$mcp_`
+3. You should see `$mcp_tool_call`, `$mcp_initialize`, and other MCP events
+
+If you enabled `enableAITracing`, `$ai_span` events also appear in the AI Observability dashboard.
+
+### Events captured
+
+| Event | When captured |
+| --- | --- |
+| `$mcp_tool_call` | Every tool invocation |
+| `$mcp_tools_list` | Client lists available tools |
+| `$mcp_initialize` | Client/server handshake |
+| `$mcp_resources_list` | Client lists resources |
+| `$mcp_resource_read` | Resource fetched |
+| `$mcp_prompts_list` | Client lists prompts |
+| `$mcp_prompt_get` | Prompt fetched |
+| `$mcp_custom` | Custom event via `publishCustomEvent()` |
+| `$exception` | Error during any operation |
+| `$ai_span` | Tool call (when `enableAITracing: true`) |
+
+## Configuration options
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `apiKey` | `string` | Required | Your PostHog project token |
+| `host` | `string` | `https://us.i.posthog.com` | PostHog ingestion host |
+| `enableTracing` | `boolean` | `true` | Master switch for event emission |
+| `enableAITracing` | `boolean` | `false` | Emit `$ai_span` events for AI Observability |
+| `context` | `boolean \| { description: string }` | `true` | Inject a `context` parameter into tool schemas for capturing user intent |
+| `identify` | `function` | - | Async callback returning user identity |
+| `eventProperties` | `function` | - | Callback returning custom properties for all events |
+| `redactSensitiveInformation` | `function` | - | Custom redaction callback for sensitive data |
+| `logger` | `function` | - | Callback for SDK debug logs |
+
+### User identification
+
+Pass an `identify` callback to associate events with users:
+
+```typescript
+track(server, {
+  apiKey: '<ph_project_token>',
+  identify: async (request, extra) => {
+    // Return user identity from your auth system
+    const user = await getUserFromSession(extra.sessionId)
+    if (!user) return null
+    
+    return {
+      userId: user.id,
+      userName: user.name,
+      userData: {
+        email: user.email,
+        plan: user.plan,
+      },
+    }
+  },
+})
+```
+
+### Custom event properties
+
+Add properties to every event:
+
+```typescript
+track(server, {
+  apiKey: '<ph_project_token>',
+  eventProperties: (event) => ({
+    server_version: '2.1.0',
+    deployment: process.env.DEPLOYMENT_ENV,
+  }),
+})
+```
+
+### Redacting sensitive data
+
+The SDK automatically redacts common sensitive patterns (API keys, tokens, passwords). Use the `redactSensitiveInformation` callback for custom redaction:
+
+```typescript
+track(server, {
+  apiKey: '<ph_project_token>',
+  redactSensitiveInformation: async (value) => {
+    // Redact custom patterns
+    if (value.includes('SECRET_')) {
+      return '[REDACTED]'
+    }
+    return value
+  },
+})
+```
+
+## Shutdown
+
+Call `shutdown()` on the PostHog client before your server exits to flush pending events:
+
+```typescript
+import { PostHogMCP } from '@posthog/mcp'
+
+const client = new PostHogMCP('<ph_project_token>')
+
+track(server, { client })
+
+// On shutdown
+await client.shutdown()
+```
+
+## Next steps
+
+- [AI Observability overview](/docs/ai-observability) - Learn about tracking LLM usage
+- [Model Context Protocol](https://modelcontextprotocol.io/) - MCP specification and documentation
