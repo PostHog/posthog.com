@@ -10,7 +10,7 @@ This page doesn't deal with [our Product for Engineers newsletter](https://newsl
 
 ## Linking to the PostHog app
 
-To point users at a page in the PostHog app via email, use this format: `https://app.posthog.com/`. 
+To point users at a page in the PostHog app via email, use this format: `https://app.posthog.com/` and do not include the project path. 
 
 For example:
 `https://app.posthog.com/endpoints` instead of `https://app.posthog.com/project/2/endpoints`
