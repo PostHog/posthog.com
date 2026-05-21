@@ -63,7 +63,7 @@ export const endpoints = {
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_light_a436da72f7.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
-            alt: 'LLM Analytics screenshot',
+            alt: 'AI Observability screenshot',
             classes: 'justify-end items-end pl-4 @lg:pl-6',
             imgClasses: 'rounded-tl-md shadow-2xl',
         },
@@ -75,7 +75,7 @@ export const endpoints = {
     // },
     customers: {
         elevenlabs: {
-            headline: 'uses LLM analytics with session replays (and everything else)',
+            headline: 'uses AI Observability with session replays (and everything else)',
             description:
                 'PostHog is amazing. It reins in the chaos to have everything in one place. Otherwise it’s quite overwhelming to try and understand what’s working and what’s not.',
         },
@@ -85,7 +85,7 @@ export const endpoints = {
                 "If you're building a new product, just use PostHog. It's a no-brainer. It's the only all-in-one platform like it for developers.",
         },
         posthog: {
-            headline: 'monitors the usage and performance of PostHog AI with LLM Analytics',
+            headline: 'monitors the usage and performance of PostHog AI with AI Observability',
             description:
                 'We use our own AI observability product to attribute costs, monitor latency and errors, compare models, and iterate on prompts in production.',
         },
@@ -179,7 +179,7 @@ export const endpoints = {
         },
     ],
     // postHogOnPostHog: {
-    //     title: 'How PostHog uses LLM Analytics',
+    //     title: 'How PostHog uses AI Observability',
     //     benefits: [
     //         {
     //             title: 'Analyze costs',
