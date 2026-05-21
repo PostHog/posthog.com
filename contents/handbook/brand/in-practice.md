@@ -55,62 +55,15 @@ Docs are often the first deep experience someone has with PostHog. They need to 
 - When something is limited or has a gotcha, say so. Developers will find it anyway. Don't downplay flaws or product gaps. It creates trust when we're honest. This is why each product page has a section that covers reasons a user might not be a good fit to use a PostHog product.
 - Small personality touches are welcome in introductions and notes – not in the middle of an instruction.
 
-## Blog
+## Blog, newsletters & social media
 
-Every blog post should make an argument. Not "here are some thoughts about X." An actual point of view.
+Every blog post should make an argument. Not "here are some thoughts about X." An actual [point of view](/handbook/content).
 
-### Checklist before publishing
+Social media channels can be more casual and reactive than the website, but they should never feel like a corporate account posting congratulatory content or generic "tips."
 
-- Is there a clear, specific claim in the first paragraph?
-- Would a developer find this actually useful or interesting?
-- Is the headline specific (not "Introducing X" or "How to improve your Y")?
-- Does it avoid jargon stacking?
-- Does it have a conclusion, not just a trailing series of points?
+## Marketing emails
 
-## Social media
-
-PostHog social accounts are a brand expression. They can be more casual and reactive than the website, but they should never feel like a corporate account posting congratulatory content or generic "tips."
-
-### The website X formerly known as Twitter
-
-- Post things that are true and non-obvious.
-- Be opinionated. Tepid takes don't get shared.
-- Engage authentically – don't do the cringe corporate brand engagement thing.
-- Memes are fine when they're actually funny, not when they're the 47th take on a meme template.
-- Product announcements should lead with the *capability*, not the *announcement*.
-
-### LinkedIn
-
-The same PostHog voice applies, but slightly more considered. LinkedIn has a higher tolerance for longer-form content. Use it when you have something substantive to say.
-
-### What to avoid on social
-
-- "We're thrilled to announce..."
-- Engagement bait (polls that exist only to drive interaction)
-- Generic "5 tips for better analytics" content
-- Congratulating yourselves without providing value
-- Posting the same thing verbatim across platforms
-
-## Email & newsletters
-
-### Principles
-
-- Write like a person, from a person. Most PostHog emails should read like they came from an actual human, not an automated marketing sequence. It's okay to poke fun at the boring stuff.
-- Subject lines: specific and honest. Don't promise the email won't deliver.
-- Plain text where possible for transactional emails. HTML where design adds value.
-- No dark patterns – no misleading "RE:" subject lines, no fake personalization.
-
-### Transactional emails (onboarding, notifications, alerts)
-
-- Get to the point immediately.
-- Tell users what happened and what they should do.
-- One call to action per email.
-
-### Marketing emails
-
-- Same voice as the website, slightly more casual.
-- Lead with something valuable or interesting.
-- Keep it short. Developers don't read long marketing emails.
+Same voice as the website, but can be [slightly more casual](/handbook/marketing).
 
 ## Presentations
 
@@ -213,20 +166,10 @@ PostHog has a deliberate strategy of giving merch to people who say nice things 
 
 ## YouTube & video
 
-Video is a growing PostHog channel. The brand principles apply to thumbnails, intros, lower thirds, and everything else.
-
-### Thumbnails
+[Video](/handbook/marketing/video) is a growing PostHog channel. While the video handbook covers our overall approach, we also have specific guidance on thumbnails, which are easy to overlook and do an average job at:
 
 - Bold, readable at small sizes
 - PostHog color palette
 - Illustrated elements preferred over headshot-only
 - Squeak works well for punchy text overlays
 - Hard drop shadow on graphic elements
-
-### On-camera presence
-
-- Same authentic, direct voice as written copy.
-- Don't over-produce. Overly slick production can feel corporate.
-- Real setups > perfectly staged backgrounds.
-
-We produce high quality cinematography but pair it often with fun, quirky overlays to add the human PostHog touch to it.
