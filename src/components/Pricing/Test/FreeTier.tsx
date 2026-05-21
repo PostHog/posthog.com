@@ -92,7 +92,7 @@ export default function FreeTier({ size = 'normal' }: { size?: 'normal' | 'large
                 size={size}
             />
             <FreeTierItem
-                name="LLM analytics"
+                name="AI Observability"
                 allocation="100K events"
                 icon={<Icons.IconLlmAnalytics className={`text-purple size-5 ${size === 'large' && 'size-7'}`} />}
                 size={size}

@@ -5,10 +5,10 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - LLM analytics
+  - AI Observability
 ---
 
-[LlamaIndex](https://www.llamaindex.ai/) is a powerful framework for connecting LLMs with external data sources. By combining PostHog with [Langfuse](https://langfuse.com/), an [open source LLM analytics platform](/blog/best-open-source-llm-observability-tools), you can easily monitor your LLM app.
+[LlamaIndex](https://www.llamaindex.ai/) is a powerful framework for connecting LLMs with external data sources. By combining PostHog with [Langfuse](https://langfuse.com/), an [open source AI Observability platform](/blog/best-open-source-llm-observability-tools), you can easily monitor your LLM app.
 
 In this tutorial, we show you how to set this up by walking you through a simple [RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) chat app.
 
@@ -152,7 +152,7 @@ All steps of the LLM chain are now tracked in Langfuse and you can view them in 
 
 ## 4. Integrate Langfuse with PostHog
 
-Next we [connect Langfuse to PostHog](/docs/llm-analytics/integrations/langfuse-posthog) so that you can combine your LLM trace data with your PostHog analytics. This enables you to answer product questions such as:
+Next we [connect Langfuse to PostHog](/docs/ai-observability/integrations/langfuse-posthog) so that you can combine your LLM trace data with your PostHog analytics. This enables you to answer product questions such as:
 
 - What are my LLM costs by customer, model, and in total?
 - How many of my users are interacting with my LLM features?
@@ -164,7 +164,7 @@ Here's how to connect Langfuse to PostHog:
 2. On the PostHog integration, click **Configure** and paste in your PostHog host and project token (you can find these in your [PostHog project settings](https://us.posthog.com/settings/project)).
 3. Click **Enabled** and then **Save**.
 
-Langfuse will now begin sending your LLM analytics to PostHog once a day.
+Langfuse will now begin sending your AI Observability to PostHog once a day.
 
 <ProductVideo
     videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/langfuse_light_fad1416026.mp4" 
@@ -191,6 +191,6 @@ The last step is to set up a PostHog dashboard so that you can view your LLM ins
 ## Further reading
 
 - [How to set up OpenAI observability](/tutorials/openai-observability)
-- [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics)
+- [How to set up AI Observability for Anthropic's Claude](/tutorials/anthropic-analytics)
 
 <NewsletterForm />
