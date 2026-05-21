@@ -209,9 +209,9 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['platform-features'],
         label: 'feature/notifications',
     },
-    'llm-gateway': {
-        feature: 'LLM gateway',
-        owner: ['llm-gateway'],
+    'ai-gateway': {
+        feature: 'AI gateway',
+        owner: ['ai-gateway'],
         label: false,
     },
     'live-events': {
