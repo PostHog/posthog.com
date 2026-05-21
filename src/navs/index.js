@@ -541,20 +541,12 @@ export const handbookSidebar = [
                 url: '/handbook/brand/visual-identity',
             },
             {
-                name: 'Design principles',
-                url: '/handbook/brand/design-principles',
-            },
-            {
                 name: 'Brand in practice',
                 url: '/handbook/brand/in-practice',
             },
             {
                 name: 'Being a brand ambassador',
                 url: '/handbook/brand/ambassador',
-            },
-            {
-                name: 'Working with vendors',
-                url: '/handbook/brand/vendors',
             },
             {
                 name: 'Ownership & approvals',

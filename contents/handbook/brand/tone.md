@@ -58,51 +58,7 @@ A joke that has to be explained isn't funny. Humor in PostHog copy works when it
 
 When in doubt, just be clear. Clear beats clever, and makes the genuine humor stand out.
 
-## Voice by surface
-
-The PostHog tone is consistent, but the *register* shifts depending on where we're talking.
-
-### Website & marketing copy
-
-Confident, specific, slightly irreverent. This is where the personality comes through most. Be opinionated. Use short sentences. Don't bury the lead.
-
-*Example lead:* "Product analytics – no BI team required"
-
-Not: "Revolutionizing the future of product analytics"
-
-### Documentation
-
-Precise and friendly. The priority is clarity – someone is trying to do a thing and needs help doing it. Wit is welcome when it fits naturally; never force it. Use second person ("you"). Keep it human.
-
-*Example:* "Add this to your `posthog.init()` call. You only need to do this once."
-
-Not: "Users are required to include the following configuration within their initialization method."
-
-### Product UI
-
-Short, helpful, and human. This is where robotic copy hurts most because people see it when they're trying to accomplish something. Every empty state is an opportunity to spark joy and remind the user that there's a human on the other end. In a world where AI is writing most of our code, this is a simple way to connect on a human level.
-
-*Good empty state:* "No recordings yet. Add the snippet to your site to start capturing sessions."
-
-*Bad empty state:* "No data available for the selected time range."
-
-When writing error messages, consider the mental state of the user. If they're annoyed or frustrated, make sure to not exacerbate the situation.
-
-### Blog posts
-
-Have a point of view. Every post should be arguing something. Lead with the argument. Write for the smart developer friend – they'll call you out if you're vague or you say nothing interesting.
-
-### Social media (X, LinkedIn)
-
-More casual than the website, and more specific. The best PostHog social posts are opinionated, shareable, and say something true and non-obvious. Don't post generic "tips and tricks" content. We don't post content just for the sake of having something to fill up the feed. Don't be a company account that congratulates itself.
-
-### Support & success
-
-Warm, direct, and actually helpful. No scripts. No "I have escalated your inquiry to our team." Talk like a person. Own the problem. Move fast. Humor goes a long way here because the expectation is that a response will be formal and robotic.
-
-### GitHub issues, PRs, meta content
-
-This counts too. PostHog engineers writing a feature spec or a changelog entry are doing brand work. Keep it clear, specific, and human.
+For how the voice shifts across surfaces (website, product UI, docs, blog, social, support, GitHub), see [Brand in practice](/handbook/brand/in-practice).
 
 ## Dos and don'ts with examples
 

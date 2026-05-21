@@ -85,34 +85,7 @@ Our board meeting deck still uses a title slide with branding circa 2021, but it
 
 ## Events & conference booths
 
-> We haven't traditionally put stock in conference booths, so this section should be revised as we gain more experience and learn what works and what doesn't.
-
-Events are a high-density brand moment where you're competing with dozens of other booths for attention, and first impressions form in about three seconds.
-
-### Booth design principles
-
-- **Lead with something memorable.** A great illustration or a striking visual element beats a clean, forgettable booth every time.
-- **Use hedgehog art.** This is where Max earns his keep.
-- **Less text, more visual.** People walking by don't read paragraphs. They read one big thing.
-- **The brand aesthetic applies fully.** Don't print your own signs on 8.5x11 with any random font. Work with the Graphics Team to produce something that matches everything else we produce.
-- **Have something to give people.** Merch (see below), stickers especially.
-
-### Event-specific assets
-
-- Banners/backdrops: Use approved templates. Submit an art request if you need something bespoke.
-- Table runners: PostHog color palette, logomark or full logo, or a solid color like black or white.
-- Monitor displays: Looping slide decks or animations should feel handcrafted, not like a screensaver.
-- Signage: Squeak is appropriate here. Bold, uppercase, punchy.
-
-### Staffing & vibe
-
-A brand-perfect booth staffed by people who look like they'd rather be anywhere else doesn't work. The brand includes how your team shows up – engaged, knowledgeable, and genuinely happy to talk shop.
-
-Brief your team before events:
-
-- What are the three things PostHog does that are most relevant to this audience?
-- What should you lead with when someone walks up?
-- What's the honest answer when someone asks about a competitor?
+Events are a high-density brand moment where first impressions form in seconds. Booth design, event-specific assets, and staffing guidance live in the [marketing/events handbook](/handbook/marketing/events).
 
 ## Print materials
 

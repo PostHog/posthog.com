@@ -12,6 +12,8 @@ The test: **remove the logo. Does it still feel like PostHog?** It should.
 
 This identity is also *un-copyable* – because it's a reflection of the people who made it, and it keeps evolving as they do. No design system doc can quite define it, because it's constantly evolving and is subject to the taste of the people creating it.
 
+There's a version of PostHog that could use AI to produce all of its illustrations, icons, and copy. It would be faster and cheaper. It would also be instantly identifiable as not made by humans, and that trust signal would erode. Handcrafted beats generated.
+
 ## Logo
 
 Find logos on our [brand assets](/handbook/brand/assets) page.
@@ -47,26 +49,7 @@ Download all variants at [/handbook/company/brand-assets.md](/handbook/company/b
 
 ## Color system
 
-PostHog uses a deliberately limited palette. Fewer colors, used consistently, create a stronger visual identity than a sprawling palette used inconsistently.
-
-### Primary palette @todo
-
-| Name       | Light mode               | Dark mode                | Notes                     |
-| ---------- | ------------------------ | ------------------------ | ------------------------- |
-| Background | `#EEEFE9`                | `#151515`                | Page/surface background   |
-| Text       | `#151515` at 90% opacity | `#EEEFE9` at 90% opacity | Body text                 |
-| Accent     | `#E5E7E0`                | `#2C2C2C`                | Subtle backgrounds, cards |
-| Divider    | `#D0D1C9`                | `#4B4B4B`                | Dashed dividers, rules    |
-
-### Accent colors @todo
-
-| Name           | Value     | Notes                           |
-| -------------- | --------- | ------------------------------- |
-| Red            | `#F54E00` | Primary accent. Used for links. |
-| Blue           | `#1D4AFF` | Secondary accent.               |
-| Yellow (light) | `#DC9300` | Use in light mode.              |
-| Yellow (dark)  | `#F1A82C` | Use in dark mode.               |
-| Gray           | `#BFBFBC` | Supporting use.                 |
+PostHog uses a deliberately limited palette. Fewer colors, used consistently, create a stronger visual identity than a sprawling palette used inconsistently. For hex values, see [brand assets](/handbook/brand/assets#colors).
 
 ### How to use color
 
@@ -134,20 +117,7 @@ Used exclusively for quotes in hedgehog artwork – the signs, speech bubbles, a
 
 ### Our mascot: Max
 
-Max is our hedgehog mascot. He's a core part of the PostHog visual identity. He's a creative vehicle for translating our personality into something expressive and alive. Use him thoughtfully, not just to fill space.
-
-**Physical characteristics:**
-
-- Beige body with brown spines, arms, and legs
-- Strong black monoline outline, consistent thickness (monoline brush style)
-- No highlights
-- Stubby feet
-- Arms bend only once at the middle – no fingers unless pointing or swearing
-- Snout lines always visible (unless deliberately obscured by a beard or mask)
-- Expression is carried primarily through the eyebrows
-- Always faces left, right, or straight-on – never from behind or in full side profile
-- Shadow: two-tone. One shadow at 100% opacity (use sparingly). One at 24% opacity for depth. Shadows are always `#000000` black.
-- Colors: retro/slightly desaturated palette. No gradients. Small number of shades.
+Max is our hedgehog mascot. He's a core part of the PostHog visual identity. He's a creative vehicle for translating our personality into something expressive and alive. Use him thoughtfully, not just to fill space. For how to draw him, see the [illustration guide in brand assets](/handbook/brand/assets#illustration-guide).
 
 **Do not:**
 

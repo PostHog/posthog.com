@@ -28,6 +28,20 @@ We expand ideas instead of shutting them down. When someone proposes something, 
 **"We can do this better ourselves."**
 The best things get made by people who genuinely care about what they're making. When we ship something, it should feel like *someone made this on purpose* – not like it was generated, templated, or outsourced.
 
+## Taste
+
+Taste is the most important design principle PostHog has. "Polish" is surface-level – smooth gradients, perfect shadows, trendy layouts – the visual equivalent of buzzwords. "Taste" is deeper: making decisions that reflect a real point of view, caring about whether something is *right* and not just *done*, going the extra mile even if only one person notices.
+
+A design with taste looks like *someone made this on purpose,* especially in a world where more people are shipping AI slop.
+
+What taste looks like in practice:
+
+- **Caring about details.** Typography, spacing, alignment, whitespace – these are felt even when not consciously noticed.
+- **Intentionality.** Every element has a reason to be there.
+- **Going the extra mile.** Especially for things most people won't notice (you'd be surprised how many actually do).
+- **Enjoying the work.** When you enjoy making something, it shows.
+- **Knowing when trends are played out.** Our visual identity is nostalgic and distinctive because we deliberately avoided what everyone else was chasing.
+
 ## Brand personality
 
 PostHog should feel:

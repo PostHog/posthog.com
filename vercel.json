@@ -1889,6 +1889,14 @@
             "source": "/handbook/brand/style-guide",
             "destination": "/handbook/brand/visual-identity"
         },
+        {
+            "source": "/handbook/brand/vendors",
+            "destination": "/handbook/brand/assets"
+        },
+        {
+            "source": "/handbook/brand/design-principles",
+            "destination": "/handbook/brand/foundations"
+        },
         { "source": "/login", "destination": "https://app.posthog.com/login" }
     ]
 }

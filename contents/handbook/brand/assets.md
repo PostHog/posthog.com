@@ -19,6 +19,19 @@ We’re really happy people want to build on top of PostHog, but we want to keep
 
 We don't like doing it, but if we spot some name, brand asset or logo usage that are inconsistent with our guidelines or brand, we will reach out to try to get that sorted out, so please try to be thoughtful about branding and try to be consistent with the guidelines we've set out here. If you have questions, please reach out to us at `marketing@posthog.com` for clarification.
 
+## Briefing external vendors
+
+When you bring in an external party to produce brand work – a print vendor, a video production company, a hotel, a conference AV team – send them this guide. Key things to brief them on:
+
+1. The PostHog visual style (see [visual identity](/handbook/brand/visual-identity))
+2. Logo files (provide SVG, not PNG, as source)
+3. Color palette (provide hex values)
+4. Typography (provide font files or specify licensed fonts)
+5. Illustration style (share examples from posthog.com and Figma)
+6. What "not on-brand" looks like (blobs, stock art, generic SaaS layouts)
+
+Avoid pairing the logomark with the "PostHog" wordmark in regular text that isn't part of the logo itself.
+
 ## Logo
 
 If you're looking for the PostHog logo, you came to the right place. Please keep the logo intact. SVG is always preferred as it will infinitely scale with no quality loss.

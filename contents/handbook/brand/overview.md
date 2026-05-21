@@ -37,10 +37,6 @@ Sometimes you may need to tell customers something they don't want to hear - e.g
 
 Be helpful to other companies. We are here to increase the number of successful companies in the world – especially those with high potential that are putting in the work, like YC current batch ones. For example, if a YC company reaches out, take them seriously and buy their product (if it's genuinely valuable and safe to do so) or give direct feedback if not.
 
-## Hacker News premortem
-
-Hacker News is a very intensely logical and critical place – in a good and bad way. If you are doing something think, "How would this go down on Hacker News?" If the answer is "poorly" then change it. This rule of thumb applies to everything, not just stuff literally getting posted there.
-
 ---
 
 ## Things you're probably looking for
