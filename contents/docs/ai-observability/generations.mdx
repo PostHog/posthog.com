@@ -48,7 +48,6 @@ You can expect each generation to have the following properties (in addition to 
 
 <NotableGenerationPropertiesSnippet />
 
-<<<<<<< HEAD:contents/docs/llm-analytics/generations.mdx
 ## Correlating with provider dashboards
 
 PostHog captures provider-specific identifiers so you can jump from a generation event to the matching entry in your provider's logs:
@@ -57,16 +56,11 @@ PostHog captures provider-specific identifiers so you can jump from a generation
 
 - **`$ai_provider_metadata`** – Provider-specific fields that don't fit the shared schema. For OpenAI, this includes `system_fingerprint` (the backend configuration that served the request) and `request_id` (the `x-request-id` header, useful for support tickets).
 
-These properties are captured automatically when using the [OpenAI](/docs/llm-analytics/installation/openai) or [Azure OpenAI](/docs/llm-analytics/installation/azure-openai) wrappers.
+These properties are captured automatically when using the [OpenAI](/docs/ai-observability/installation/openai) or [Azure OpenAI](/docs/ai-observability/installation/azure-openai) wrappers.
 
 ## Custom properties
 
-When calling LLMs with our [SDK wrappers](/docs/llm-analytics/installation), you can also enrich the `$ai_generation` event with your own [custom properties](/docs/llm-analytics/custom-properties) and PostHog attributes like groups and distinct IDs for identified users.
-||||||| 199860d0e:contents/docs/llm-analytics/generations.mdx
-When calling LLMs with our [SDK wrappers](/docs/llm-analytics/installation), you can also enrich the `$ai_generation` event with your own [custom properties](/docs/llm-analytics/custom-properties) and PostHog attributes like groups and distinct IDs for identified users.
-=======
 When calling LLMs with our [SDK wrappers](/docs/ai-observability/installation), you can also enrich the `$ai_generation` event with your own [custom properties](/docs/ai-observability/custom-properties) and PostHog attributes like groups and distinct IDs for identified users.
->>>>>>> master:contents/docs/ai-observability/generations.mdx
 
 <MultiLanguage>
 
