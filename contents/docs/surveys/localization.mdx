@@ -20,21 +20,21 @@ When a survey renders, PostHog determines the user's language through a priority
 2. **Person property `language`** – Language set via `posthog.identify()` or person profile
 3. **User locale** – On web, this is the browser's `navigator.language` setting. On React Native, this is the device locale.
 
-If no translation matches the detected language, the survey displays in its default language.
+If no translation matches the detected language, the survey displays in its original language.
 
 ## Creating translations
 
-### Set the default language
+### Set the original language
 
-First, set the default language for your survey in the editor.
+Start by setting the original language for your survey. This declares what language the survey is written in.
 
-When you set a default language, all existing survey content is mapped to that language. This is used as a fallback when the user's language can't be determined, or when your survey doesn't have a translation for the user's language.
+Open the **Translations** panel and find **Original Language** at the top. This shows the survey's current language (English by default). Click **Change** to select a different language if your survey isn't written in English.
 
-Open the **Translations** panel in the survey editor and enter a language code that represents your survey's default language.
+The original language serves as the fallback when the user's language can't be determined or no matching translation exists.
 
 ### Add a new language
 
-Once the default is set, you can add more languages in the same **Translations** panel.
+Once the original language is set, you can add more languages in the same **Translations** panel.
 
 Enter a new language code, click the plus button to add it, then click the language card to select it.
 
@@ -46,17 +46,26 @@ Once selected, you can edit the translated content for that language. This inclu
 - Thank-you message header and description
 - Close button text
 
-Fields you don't translate fall back to the default language.
+Fields you don't translate fall back to the original language.
 
-## Language code matching
+You can also click **Translate with AI** next to any language to auto-generate translations from your original content. AI-generated fields are highlighted so you can review them before saving.
 
-PostHog uses [BCP 47 language tags](https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag) (like `en`, `es`, `fr-CA`) and performs case-insensitive matching with base-language fallback.
+## Language code requirements
 
-When determining which translation to use, PostHog checks in this order:
+Language codes must be valid [BCP 47 language tags](https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag) like `en`, `es`, or `fr-CA`. PostHog validates codes when you save and rejects:
+
+- **Sentinel words** – `default`, `original`, or `base` aren't valid language codes.
+- **Language names** – Use `en` instead of `english`, `es` instead of `spanish`.
+- **Codes matching your original language** – If your survey is written in English (`en`), you can't add an `en` translation since the original content already covers it.
+- **Invalid formats** – Codes must follow the BCP-47 pattern (2-3 letter language code, optionally followed by region codes).
+
+## Language matching
+
+When determining which translation to show, PostHog performs case-insensitive matching with base-language fallback:
 
 1. **Exact match** – A user with language `en-US` matches a translation with key `en-US`.
 2. **Base match** – If no exact match exists, PostHog checks for the user's "base" language. For example, a user with language `es-MX` matches a translation with key `es`, if no `es-MX` translation exists.
-3. **Fallback** – If neither match succeeds, the survey displays in its default language.
+3. **Fallback** – If neither match succeeds, the survey displays in its original language.
 
 > **Note:** Base matching is one-directional. A user with language `en` won't match a translation keyed `en-US`. We recommend keeping your translation keys as base-only (like `en`) unless you have translations for specific regional dialects.
 
@@ -109,7 +118,7 @@ This works the same way on both web and React Native. It's useful when users hav
 
 When a survey is shown, sent, or dismissed, PostHog includes a `$survey_language` property on the event if a translation was used. The value is the matched language key (for example, `es` or `fr-CA`).
 
-This property is omitted when the survey displays in its default language (no translation match).
+This property is omitted when the survey displays in its original language (no translation match).
 
 You can use this property to:
 
@@ -121,11 +130,18 @@ You can use this property to:
 
 PostHog validates translations before saving to prevent broken surveys from reaching users. Your survey won't save if any of these issues exist:
 
-- **Empty fields** – Translation fields can't be empty. If you don't want to translate a field, leave it blank and it falls back to the default language automatically.
+- **Empty fields** – Translation fields can't be empty. If you don't want to translate a field, leave it blank and it falls back to the original language automatically.
 - **Placeholder text** – When you add a new choice to a multiple choice question, PostHog adds a `[Translation needed]` placeholder to all translations. Replace these with actual translations before saving.
 - **Link URLs** – Link fields must start with `https://` or `mailto:` for security reasons.
+- **Invalid language codes** – See [Language code requirements](#language-code-requirements) above for what codes are accepted.
 
 When validation fails, PostHog shows a warning banner listing which languages and fields need attention. Click the language name in the error message to jump directly to that translation.
+
+### Legacy translation keys
+
+If your survey has translation keys that predate current validation (like `default` or `english`), they appear in a **Legacy translation keys** section with a warning. These keys don't affect users at runtime because the SDK can't match them.
+
+Remove legacy keys using the delete button next to each one. If you need the content, re-add the translation with a valid BCP-47 code first.
 
 ## Which languages should you support?
 
