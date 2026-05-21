@@ -7,7 +7,7 @@
 *What we will ship*:
 - **Horizontally scalable service** - capacity adds by replica count
 - **True-proxy per provider shape** - native OpenAI and Anthropic shapes, no cross-shape translation
-- **Core modules** - auth, rate limiting, routing, cost, quota, dispatch, and the post-call recording path into LLM Analytics
+- **Core modules** - auth, rate limiting, routing, cost, quota, dispatch, and the post-call recording path into AI Observability
 - **Load characterization** - so we can size the fleet from observed throughput
 
 #### Goal 2: Spending controls
@@ -27,7 +27,7 @@
 - **Failover to a hosted equivalent** - Anthropic to Bedrock, OpenAI to Azure
 - **Best-effort model resolution** - so clients we don't control work without custom config
 
-#### Goal 4: Land gateway calls in LLM Analytics
+#### Goal 4: Land gateway calls in AI Observability
 
 *Description*: Every gateway call lands in the existing `$ai_generation` pipeline so traces, evals, and cost analytics work on gateway traffic.
 
@@ -36,9 +36,9 @@
 - **Normalized cached vs billable input split** - one shape across providers
 - **Single cost-calculation path** - converge the two we have today
 
-#### Goal 5: Take ownership of the LLM Analytics Playground
+#### Goal 5: Take ownership of the AI Observability Playground
 
-*Description*: Pick up the [LLM Analytics Playground](/docs/llm-analytics/playground) from <SmallTeam slug="llm-analytics" /> and keep it moving as gateway capabilities grow.
+*Description*: Pick up the [AI Observability Playground](/docs/ai-observability/playground) from <SmallTeam slug="llm-analytics" /> and keep it moving as gateway capabilities grow.
 
 *What we will ship*:
 - **Clean handover** - clear ownership, on-call, and triage path for Playground bugs and requests
