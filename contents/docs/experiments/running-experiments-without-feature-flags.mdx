@@ -11,7 +11,7 @@ This doc walks you through how to set up an experiment without using PostHog's f
 
 ## Step 1: Create your experiment in PostHog
 
-Create a new experiment in the [experiments tab](https://app.posthog.com/experiments) and follow the same steps as you would when [creating a regular one](/docs/experiments/manual#how-to-create-an-experiment-in-posthog).
+Create a new experiment in the [experiments tab](https://app.posthog.com/experiments) and follow the same steps as you would when [creating a regular one](/docs/experiments/creating-an-experiment).
 
 > **Note:** Although you won't be using feature flags directly in your experiment, you still need to name your feature flag key for submitting events so PostHog can calculate your experiment results.
 >
@@ -27,7 +27,7 @@ This step is not necessary if you are using your own feature flag library.
 
 In order to attribute events to their correct experiment variants, you'll need to include a `$feature/experiment_feature_flag_key: variant-name` property when submitting your events. You only need to do this for events that you'd like to track in your experiment.
 
-This is similar to the [same step](/docs/experiments/manual#step-2-server-side-only-add-the-feature-flag-property-to-your-events) when setting up regular experiments. The key difference is that now you need to include this property wherever you capture events for the experiment, not just server-side SDKs.
+This is similar to the [same step](/docs/experiments/adding-experiment-code) when setting up regular experiments. The key difference is that now you need to include this property wherever you capture events for the experiment, not just server-side SDKs.
 
 <MultiLanguage>
 

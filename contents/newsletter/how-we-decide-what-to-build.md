@@ -104,7 +104,7 @@ Testing is part of the decision-making process. Building MVPs of features and pr
 
 2. How much effort will building it take?
 
-All of PostHog’s products (beyond product analytics) were initially built in 1 to 3 person teams at our hackathons. Our newest products like [web analytics](/web-analytics) and the [data warehouse](/data-warehouse) are being built by single-person teams.
+All of PostHog’s products (beyond product analytics) were initially built in 1 to 3 person teams at our [hackathons](/newsletter/hackathons). Our newest products like [web analytics](/web-analytics) and the [data warehouse](/data-warehouse) are being built by single-person teams.
 
 This enables us to get stronger validation on demand before investing further. Companies like [Apple](https://review.firstround.com/six-steps-to-superior-product-prototyping-lessons-from-an-apple-and-oculus-engineer) and [Spotify](https://blog.crisp.se/wp-content/uploads/2013/01/HowSpotifyBuildsProducts.pdf) also rely on this prototyping-heavy style.
 

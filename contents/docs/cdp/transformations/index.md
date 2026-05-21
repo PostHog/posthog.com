@@ -20,6 +20,12 @@ Need more flexibility? Our [custom transformations](/docs/cdp/transformations/cu
 
 **Note**: Transformations don't apply to exceptions we capture as part of error tracking. If you need to run transformation against your exception data, please [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
 
+## Available globals
+
+Transformations run during ingestion, _before_ events are fully ingested and processed. As a result, they only receive the `event` and `project` globals. They do **not** have access to the `person` or `groups` globals that [realtime destinations](/docs/cdp/destinations) can use, since person profiles and group associations haven't been resolved yet at the point a transformation executes.
+
+If your logic depends on person properties or group data, use a [realtime destination](/docs/cdp/destinations) instead.
+
 ## Filtering
 
 Filters enable you to target your transformations, affecting only the kinds of events you chose. Filter by event type, properties, or any SQL statement you can come up with.

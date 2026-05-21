@@ -177,6 +177,7 @@ These mostly come into the sales inbox rather than the contact form. Whilst ther
 -   Make sure all new leads are contacted within 24 hours.
 -   Keep all lead information up-to-date and accurate in Salesforce.
 -   Periodically review lead statuses and update them as needed.
+-   If you are actively working an existing customer as a lead make sure you add yourself as the Account Executive in Vitally (to avoid double assignment).
 
 ## Handling time off (PTO)
 

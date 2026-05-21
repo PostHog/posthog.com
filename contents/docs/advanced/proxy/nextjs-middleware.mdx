@@ -10,6 +10,14 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 <ProxyCallout />
 
+<CalloutBox icon="IconInfo" title="Data transfer costs" type="fyi">
+
+The proxy file runs on every matching request, so all PostHog traffic – events, session recordings, feature flag polls, and SDK assets – passes through it. On Vercel, each invocation counts as an [Edge Request](https://vercel.com/docs/pricing) in addition to the data transfer; other hosts bill it against their compute and bandwidth quotas. Session recordings amplify this (often 1–5 MB per session) and can quickly push a plan over its limits on high-traffic sites.
+
+To avoid these costs, use the [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) (free for PostHog Cloud users) or a provider without egress fees like [Cloudflare Workers](/docs/advanced/proxy/cloudflare).
+
+</CalloutBox>
+
 This guide shows you how to use [Next.js proxy](https://nextjs.org/docs/app/api-reference/file-conventions/proxy) (formerly middleware) as a reverse proxy for PostHog.
 
 <CalloutBox icon="IconInfo" title="Next.js 16 renamed middleware to proxy" type="fyi">

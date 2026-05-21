@@ -34,17 +34,19 @@ _Ben experiments to find more winners:_
 
 Campaigns are all [tracked in Lemlist](https://app.lemlist.com/teams/tea_kvdy3nLu9KEA4QPiD/campaigns-next) - these change week-to-week. 
 
-Manual (Lorena):
+Lorena's focus:
 
-1. Filled contact sales but then went silent, never talked to an AE
-2. Tried PostHog but did not convert - signed up but went inactive, never paid, never talked to an AE (in PostHog Data Warehouse)
-3. Engineers + Engineering Managers who follow us on LinkedIn but are not customers
-4. Event attendees
+1. Engineers + Engineering Managers who follow us on LinkedIn but are not (yet!) customers 
+2. Event attendees - Stripe Sessions/AI Tinkerers São Paulo
+3. Website showed intent -- Clay sheet from PostHog DW
 
-Not started yet:
-1. Closed lost opportunities (new biz _and_ renewals) 5+ months old where reason was 'unresponsive'
-2. Churned accounts that churned 5+ months ago
-3. Companies with recent fundraising activity - good opportunities, but very noisy
+Backlog:
+
+1. Filled contact sales but then went silent, never talked to an AE (next: AE Campaign to warm back up)
+2. Tried PostHog but did not convert - signed up but went inactive, never paid, never talked to an AE in DW (next: more filtering on this list)
+3. Closed lost opportunities (new biz _and_ renewals) 5+ months old where reason was 'unresponsive'
+4. Churned accounts that churned 5+ months ago
+5. Companies with recent fundraising activity - good opportunities, but very noisy
 
 Automated (Abhischek):
 1. [Warmbound](https://app.clay.com/workspaces/268768/workbooks/wb_0t9mfmifwKAqEGkwFC8/tables/t_0ta1652W6yS8tnSyUQF/views/gv_0ta1652BJM69kS4G3P2) - $100-499 MRR at some point in the account's history

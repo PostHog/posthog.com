@@ -47,6 +47,7 @@ import { Select } from 'components/RadixUI/Select'
 import OSInput from 'components/OSForm/input'
 import { useToast } from '../../../context/Toast'
 import HeaderBar from 'components/OSChrome/HeaderBar'
+import LevelBadge from 'components/Squeak/components/LevelBadge'
 import OSButton from 'components/OSButton'
 import { IconNoEntry, IconStrapi } from 'components/OSIcons'
 import Points from 'components/Points'
@@ -433,6 +434,12 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
     }, [values.pronouns])
     return (
         <div className="text-sm space-y-3">
+            {!isEditing && profile.reputation != null && (
+                <p className="flex justify-between items-center m-0">
+                    <span className="font-semibold">Reputation</span>
+                    <LevelBadge points={profile.reputation} />
+                </p>
+            )}
             {!isEditing && (
                 <p className="flex justify-between m-0">
                     {isTeamMember ? (
@@ -1132,6 +1139,11 @@ export default function ProfilePage({ params }: PageProps) {
                             populate: {
                                 image: true,
                                 icon: true,
+                                achievement_group: {
+                                    populate: {
+                                        icon: true,
+                                    },
+                                },
                             },
                         },
                     },
@@ -1686,6 +1698,7 @@ export default function ProfilePage({ params }: PageProps) {
                             />
 
                             {(isEditing ||
+                                profile.reputation != null ||
                                 profile.pineappleOnPizza !== null ||
                                 profile.pronouns ||
                                 profile.location) && (
@@ -1719,19 +1732,11 @@ export default function ProfilePage({ params }: PageProps) {
 
                             {profile.achievements?.length > 0 && (
                                 <Block title="Achievements" url={`/community/achievements`}>
-                                    <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
-                                        {profile.achievements.map(({ achievement, hidden, id }) => (
-                                            <li key={id} className="flex justify-center">
-                                                <Achievement
-                                                    {...achievement.data.attributes}
-                                                    id={id}
-                                                    hidden={hidden}
-                                                    profile={profile}
-                                                    mutate={mutate}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <AchievementsGrid
+                                        achievements={profile.achievements}
+                                        profile={profile}
+                                        mutate={mutate}
+                                    />
                                 </Block>
                             )}
                             {isEditing && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
@@ -1855,6 +1860,116 @@ const TeamMembersList = ({ self, team }) => {
     )
 }
 
+const AchievementTooltipContent = ({ icon, title, description, iconSize = 'size-16' }) => (
+    <>
+        <div className="flex justify-center -mx-1.5 -mt-1 mb-2 py-2 bg-accent/50 rounded">
+            <img className={iconSize} src={icon} />
+        </div>
+        <h4 className="text-lg m-0">{title}</h4>
+        {description && <p className="m-0 mt-1 text-sm">{description}</p>}
+    </>
+)
+
+const AchievementGrouped = ({ items, profile, mutate }) => {
+    const groupData = items[0].achievement.data.attributes.achievement_group.data.attributes
+
+    if (groupData.tiered && items.length === 1) {
+        const { achievement, hidden, id } = items[0]
+        return (
+            <Achievement {...achievement.data.attributes} id={id} hidden={hidden} profile={profile} mutate={mutate} />
+        )
+    }
+
+    return (
+        <Tooltip
+            delay={0}
+            side="bottom"
+            trigger={
+                <span className="relative">
+                    <img className="w-full" src={groupData.icon?.data?.attributes?.url} />
+                    {items.length > 1 && (
+                        <span className="absolute -top-1 -right-1 bg-accent text-primary text-[10px] font-bold rounded-full size-4 flex items-center justify-center border border-primary">
+                            x{items.length}
+                        </span>
+                    )}
+                </span>
+            }
+        >
+            <div className="max-w-[220px] text-left">
+                <AchievementTooltipContent
+                    icon={groupData.icon?.data?.attributes?.url}
+                    title={groupData.Title}
+                    description={groupData.description}
+                    iconSize="size-24"
+                />
+                <div className="border-t border-primary mt-3 pt-2.5">
+                    <p className="text-xs font-semibold opacity-50 m-0 mb-2">Unlocked by</p>
+                    <ul className="m-0 p-0 list-none flex flex-col gap-2">
+                        {items.map(({ achievement, id }, index) => (
+                            <li key={id} className="relative flex items-center gap-2">
+                                <div className="size-7 flex-shrink-0 relative">
+                                    {index < items.length - 1 && (
+                                        <div className="absolute w-px h-full left-1/2 -translate-x-1/2 bg-border dark:bg-border-dark bottom-0 translate-y-1/2" />
+                                    )}
+                                    <img
+                                        className="size-full relative"
+                                        src={achievement.data.attributes.icon?.data?.attributes?.url}
+                                    />
+                                </div>
+                                <div>
+                                    <p className="text-xs font-semibold m-0 leading-tight">
+                                        {achievement.data.attributes.title}
+                                    </p>
+                                    {achievement.data.attributes.description && (
+                                        <p className="text-xs opacity-60 m-0 leading-tight mt-0.5">
+                                            {achievement.data.attributes.description}
+                                        </p>
+                                    )}
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </Tooltip>
+    )
+}
+
+const AchievementsGrid = ({ achievements, profile, mutate }) => {
+    const groups = useMemo(() => {
+        const grouped = achievements.filter((item) => item.achievement?.data?.attributes?.achievement_group?.data)
+        return Object.groupBy(grouped, (item) => item.achievement.data.attributes.achievement_group.data.id)
+    }, [achievements])
+
+    return (
+        <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
+            {achievements.map(({ achievement, hidden, id }) => {
+                if (!achievement?.data) return null
+                const group = achievement.data.attributes?.achievement_group?.data
+                if (group) {
+                    if (groups[group.id][0].id !== id) return null
+                    return (
+                        <li key={`group-${group.id}`} className="flex justify-center">
+                            <AchievementGrouped items={groups[group.id]} profile={profile} mutate={mutate} />
+                        </li>
+                    )
+                }
+                return (
+                    <li key={id} className="flex justify-center">
+                        <Achievement
+                            {...achievement.data.attributes}
+                            id={id}
+                            hidden={hidden}
+                            profile={profile}
+                            mutate={mutate}
+                        />
+                    </li>
+                )
+            })}
+        </ul>
+    )
+}
+
 const Achievement = ({ title, description, image, icon, id, mutate, profile, ...other }) => {
     const { user, getJwt } = useUser()
     const [hidden, setHidden] = useState(other.hidden)
@@ -1915,12 +2030,8 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
                 </ImageContainer>
             }
         >
-            <div className="max-w-[250px] text-left">
-                <div className="mb-4 -mx-2 -mt-2">
-                    <img src={image?.data?.attributes?.url} />
-                </div>
-                <h4 className="text-lg m-0">{title}</h4>
-                <p className="m-0 mt-1 text-sm mb-2">{description}</p>
+            <div className="max-w-[220px] text-left">
+                <AchievementTooltipContent icon={icon?.data?.attributes?.url} title={title} description={description} />
             </div>
         </Tooltip>
     )

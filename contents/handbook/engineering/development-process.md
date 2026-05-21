@@ -115,6 +115,14 @@ Other than that, you know what to do.
 
 ## Creating PRs
 
+When you have a piece of code ready to be reviewed, create a PR. Link the PR to the issue it solves, and add a clear description of what the PR does and how to test it. Follow PR templates if they exist for the area you're working on.
+
+All PRs should be attributable to a human author as far as possible, even if they were assisted by an agent.
+
+Fully automatically generated PRs might come from an agent like PostHog Code or from systems like Dependabot. These PRs are fine, but they should be clearly labelled as such and include a clear description of the changes being made and any relevant context about the generation process. These PRs should in turn never be attributed to a human author, as the changes were not directly or indirectly made by a human.
+
+For external contributors, our [AI contributions policy](https://github.com/PostHog/posthog/blob/master/AI_POLICY.md) covers expectations around AI-assisted PRs.
+
 To make sure our issues are linked correctly to the PRs, you can tag the issue in your commit.
 
 ```bash
@@ -239,7 +247,16 @@ The workflow also runs a smoke test (health check) automatically on PRs that tou
 
 ## Reviewing code
 
-When we review a PR, we'll look at the following things:
+PRs can be written by humans or by agents (like PostHog Code). Either way, every PR needs a review before merging, and a human always merges.
+
+Who should review depends on who wrote the code (see [Creating PRs](#creating-prs)):
+
+-  **Human-authored PRs** can be reviewed by a team member or by Stamphog, our AI approval agent. Stamphog runs deterministic checks first (size, file ownership, tier) and then does an LLM review for approval eligibility and suggestions. If Stamphog approves, a team member can merge.
+-  **Agent-authored PRs** always require a human review since we want at least one human in the loop. A team member must review the PR and approve it before merging.
+
+We encourage the use of AI review agents (Codex, Copilot, Greptile, etc.) on PRs. Their comments and suggestions don't count as an approval, but they catch things humans miss and speed up the review process.
+
+When reviewing a PR, we look at the following things:
 
 -   Does the PR actually solve the issue?
 -   Does the solution make sense?
@@ -258,7 +275,7 @@ Merge anytime. Friday afternoon? Merge.
 
 Our testing, reviewing and building process should be good enough that we're comfortable merging any time.
 
-Always request a review on your pull request by a fellow team member (or leave unassigned for anyone to pick up when available). We avoid self-merge PRs unless it's an emergency fix and no one else is available (especially for posthog.com).
+Always request a review on your pull request (or leave unassigned for anyone to pick up when available). We avoid merging without any review unless it's an emergency fix and no one else is available (especially for posthog.com).
 
 Once you merge a pull request, it will automatically deploy to all environments. The deployment process is documented in our [charts repository](https://github.com/PostHog/charts/blob/main/DEPLOYMENT.md). Check out the `#platform-bots` Slack channel to see how your deploy is progressing. 
 

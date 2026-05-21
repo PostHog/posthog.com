@@ -132,11 +132,24 @@ Each product should have a changelog page in their docs
 | Feature Flags | [/docs/feature-flags/changelog](/docs/feature-flags/changelog) |
 | ... | ... |
 
+### Option 3: Automated drafting via Slack reaction
+
+The <SmallTeam slug="docs-wizard" /> team uses an automated flow to draft changelog entries directly from Slack.
+
+1. React with ✅ on an entry in the `#changelog` Slack channel. We recommend reacting to the top-level message.
+2. This kicks off a Relay workflow where Claude writes the draft in the required format – YAML frontmatter for the Strapi fields, and Markdown for the body.
+3. The draft opens as a new issue in the <PrivateLink url="https://github.com/PostHog/changelog-drafts">changelog-drafts</PrivateLink> repo.
+4. Review the draft in the GitHub issue, edit as needed, then add the `publish` label when it's ready to go.
+5. A GitHub Action POSTs the entry to Strapi. It adds a success or failure label (`synced` or `sync-failed`) and comment to the GitHub issue, and self-closes on success.
+6. The changelog entry will appear on the website on the **next website build**.
+
+Because Claude is writing the initial draft, make sure you review the draft in detail before you add the `publish` label – don't rubber-stamp it.
 
 ## Links and resources
 
 - <PrivateLink url="https://run.relay.app/workflows/cme1t0eno0gih0okphosc9pw0/edit">Relay workflow for PRs</PrivateLink>
 - <PrivateLink url="https://run.relay.app/workflows/cmg9oagij16o70nm34b5z7eur/edit">Relay workflow for feature flag rollouts</PrivateLink>
+- <PrivateLink url="https://run.relay.app/workflows/cmo3adnn905yn0qm0dotagvof/edit">Relay workflow for automated changelog drafts</PrivateLink>
 - <PrivateLink url="https://us.posthog.com/project/2/functions/0199a5e9-75cf-0000-25b0-439a08af8e31">PostHog webhook for feature flag rollouts</PrivateLink>
 - <PrivateLink url="https://api.slack.com/apps/A0A63H6UPRT">Slack bot for posting in #changelog</PrivateLink>
 - <PrivateLink url="https://posthog.slack.com/archives/C099B0YCULT">#changelog Slack channel</PrivateLink>

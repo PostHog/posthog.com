@@ -82,7 +82,6 @@ Here is a overview that shows which of our PMs currently works with which team:
 <legend>Product teams with no PM currently</legend>
 
 -   <SmallTeam slug="conversations" />
--   <SmallTeam slug="customer-analytics" />
 -   <SmallTeam slug="experiments" />
 -   <SmallTeam slug="feature-flags" />
 -   <SmallTeam slug="flags-platform" />

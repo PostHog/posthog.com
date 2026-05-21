@@ -44,3 +44,7 @@ For more information about creating apps in Dev Dashboard see
 
 After these setup steps, your Shopify data will be automatically synced to the PostHog data warehouse. 
 You can see details and progress in the data pipelines [sources tab](https://app.posthog.com/data-management/sources).
+
+## Configuration
+
+<SourceParameters />
