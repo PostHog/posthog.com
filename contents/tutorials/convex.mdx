@@ -10,9 +10,9 @@ tags:
   - error tracking
 ---
 
-[Convex](https://www.convex.dev) handles the database, server functions, and real-time sync for your app. PostHog handles everything you can't see from the database alone: who's signing up, which features they're using, what's failing, what your AI agents are spending, and how it all flows together.
+[Convex](https://www.convex.dev) handles the database, server functions, and real-time sync for your app. PostHog covers what the database doesn't: signups, feature usage, exceptions, AI spend.
 
-This page is the single landing point for using PostHog with Convex. There are several integration surfaces depending on what you want, so use the menu below to jump to the ones you need. You can mix and match: most teams end up using three or four of them together.
+This page is the single landing point for using PostHog with Convex. Pick the surfaces you need from the table below. Most teams use three or four together.
 
 ## Pick what you need
 
@@ -25,7 +25,9 @@ This page is the single landing point for using PostHog with Convex. There are s
 | Forward Convex logs to PostHog Logs | [Convex dashboard log streams](https://docs.convex.dev/production/integrations/log-streams/) (no code) |
 | Forward Convex exceptions to PostHog Error Tracking | [Convex dashboard exception reporting](https://docs.convex.dev/production/integrations/exception-reporting) (no code) |
 
-The first one is what most teams reach for first. The last two are zero-code wins configured entirely in the Convex dashboard, with no setup needed on the PostHog side.
+The first row is what most teams reach for first. The last two are configured in the Convex dashboard with no PostHog-side setup.
+
+{/*TODO screenshot: Convex dashboard "Integrations" tab showing the PostHog Logs and PostHog Error Tracking cards. Richard (@richardsolomou) offered to provide this from his Pro account. Drop into contents/images/tutorials/convex/convex-integrations.png and replace this comment with a <ProductScreenshot /> reference.*/}
 
 ## Get your PostHog project token
 
@@ -38,7 +40,7 @@ Have those ready before starting any of the sections below.
 
 ## Capture events and flags from your Convex code
 
-The [`@posthog/convex`](https://www.npmjs.com/package/@posthog/convex) component lets you capture events, identify users, evaluate feature flags, and forward exceptions directly from your Convex queries, mutations, and actions. This is the surface you reach for when you want analytics tied to specific server-side behavior, not just generic logs.
+The [`@posthog/convex`](https://www.npmjs.com/package/@posthog/convex) component lets you capture events, identify users, evaluate feature flags, and forward exceptions directly from your Convex queries, mutations, and actions. Reach for this surface when you want analytics tied to specific server-side behavior.
 
 ### 1. Install the component
 
@@ -121,11 +123,11 @@ export const updateProfile = mutation({
 })
 ```
 
-Use the same Convex user ID as the `distinctId` everywhere. PostHog stitches events onto a single person timeline by matching distinct IDs across sources, so the contract is just "pass the same string." See [stitching frontend and backend](#stitch-frontend-and-backend-events-together) below for the matching frontend setup.
+Use the same Convex user ID as the `distinctId` everywhere. PostHog stitches events onto a single person timeline by matching distinct IDs across sources. See [stitching frontend and backend](#stitch-frontend-and-backend-events-together) below for the matching frontend setup.
 
 ### 5. Evaluate feature flags
 
-Two evaluation paths, pick the one that fits the flag:
+`@posthog/convex` supports two flag evaluation paths. Pick the one that fits the flag:
 
 - **Local** (`getFeatureFlag`, `isFeatureEnabled`) runs against flag definitions cached on your Convex deployment. Works in queries, mutations, and actions, with no per-call network round-trip. Queries that read a flag re-run reactively when the cached definitions refresh.
 - **Remote** (`evaluateFlag`, `evaluateAllFlags`) hits PostHog's `/flags` endpoint on every call. Action-only, handles every flag (including experience continuity flags and static cohorts that local eval can't reach).
@@ -228,7 +230,7 @@ Use the dashboard destination for catch-all coverage. Use `captureException` her
 
 ## Stitch frontend and backend events together
 
-Convex apps almost always have a frontend talking to a Convex backend. PostHog stitches both sides onto the same person timeline if you use the same `distinctId` everywhere, where "the same" just means the same string.
+Convex apps almost always have a frontend talking to a Convex backend. PostHog stitches both sides onto the same person timeline when you use the same `distinctId` string on both.
 
 Install [`posthog-js`](/docs/libraries/js) and [`@posthog/react`](/docs/libraries/react) in your frontend (the React pattern is shown below, but the [JavaScript SDK](/docs/libraries/js) works the same way for any framework):
 
@@ -259,7 +261,7 @@ createRoot(document.getElementById("root")!).render(
 )
 ```
 
-Then, right after a user signs in via Convex Auth (or Clerk, Auth0, etc.), call `identify` on the frontend with the same Convex user ID your backend uses. The `currentUser` query referenced below is whatever Convex query exposes the authenticated user to your client (the [Convex Auth docs](https://labs.convex.dev/auth/authz#use-authentication-data-in-functions) cover defining it):
+Then, right after a user signs in via Convex Auth (or Clerk, Auth0, etc.), call `identify` on the frontend with the same Convex user ID your backend uses. The `currentUser` query referenced below is whatever Convex query exposes the authenticated user to your client (the [Convex Auth docs](https://labs.convex.dev/auth/authz#use-authentication-state-in-backend-functions) cover defining it):
 
 ```tsx
 // src/components/AuthSync.tsx
@@ -282,15 +284,17 @@ export function AuthSync() {
 }
 ```
 
-Mount `<AuthSync />` once near the root of your app, inside the `<PostHogProvider>` and below your Convex `<Authenticated>` boundary if you have one. The effect is safe before authentication completes since the guard skips the call until `me?._id` is defined.
+Mount `<AuthSync />` once near the root of your app, inside the `<PostHogProvider>` and below your Convex `<Authenticated>` boundary if you have one. The `me?._id` guard skips the `identify` call until the user is authenticated.
 
 Now an event captured from a mutation with `distinctId: userId` and a `$pageview` from the browser with the same user ID land on the same person in PostHog. [Session replays](/docs/session-replay), server-side mutations, exceptions, and logs all land on one timeline for that user.
 
 ## Trace LLM calls and Convex Agent
 
-If your app calls LLM providers from Convex actions, or uses [`@convex-dev/agent`](https://www.convex.dev/components/agent), pipe the traces into [PostHog AI observability](/docs/ai-observability). You get token counts, latency, and cost per generation, plus the full request and response transcript for every model call, all attributable back to the user that triggered it (because the same `distinctId` carries through).
+If your app calls LLM providers from Convex actions, or uses [`@convex-dev/agent`](https://www.convex.dev/components/agent), pipe the traces into [PostHog AI observability](/docs/ai-observability). You get token counts, latency, and cost per generation, the full request and response transcript for every model call, and groupings by user, model, and agent run.
 
 Setup uses `@posthog/ai` and OpenTelemetry rather than the `@posthog/convex` component. The full installation steps live on the [Convex AI observability installation page](/docs/ai-observability/installation/convex), covering both vanilla Vercel AI SDK or OpenAI calls and `experimental_telemetry` on `@convex-dev/agent`.
+
+{/*TODO screenshot: PostHog AI observability traces view showing a Convex Agent run, with token counts and the conversation transcript. Drop into contents/images/tutorials/convex/llm-analytics-trace.png and replace this comment with a <ProductScreenshot /> reference.*/}
 
 ## Sync Convex tables into PostHog
 
