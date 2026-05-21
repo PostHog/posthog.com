@@ -28,7 +28,7 @@ For example, filter `service.name` equals `checkout-api` to scope to one service
 The **Logs** group in the filter picker exposes three top-level fields. All three only support equals and not-equals operators.
 
 - **severity_level** – filter by log severity using a dropdown. Available values: `trace`, `debug`, `info`, `warn`, `error`, `fatal`.
-- **trace_id** – filter logs by their OpenTelemetry trace correlation ID. You can paste the hex format you copy from trace URLs — PostHog converts it to base64 automatically.
+- **trace_id** – filter logs by their OpenTelemetry trace correlation ID. Accepts hex or base64 format trace IDs
 - **span_id** – filter logs by their OpenTelemetry span ID. Accepts hex or base64, same as `trace_id`.
 
 For example, copy a `trace_id` from a trace URL and paste it into the filter to see every log emitted during that trace.
