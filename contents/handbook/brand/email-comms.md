@@ -10,9 +10,20 @@ This page doesn't deal with [our Product for Engineers newsletter](https://newsl
 
 ## Linking to the PostHog app
 
-To point users at a page in the PostHog app via email, don't copy and paste the URL from your own dashboard, e.g. `https://us.posthog.com/project/2/endpoints`. Links need to follow this format: `https://app.posthog.com/endpoints`.
+To point users at a page in the PostHog app via email, use this format: `https://app.posthog.com/`. 
+
+For example:
+`https://app.posthog.com/endpoints`
+`https://app.posthog.com//logs?activeTab=alerts`
 
 The `app.posthog.com` prefix works for both US and EU instances, and the project path resolves itself for the recipient.
+
+To preload a prompt for PostHog AI, use this format:
+`https://app.posthog.com/#panel=max:!Your%20question%20here`
+
+For example:
+`https://app.posthog.com/#panel=max:!What's%20my%20churn%20rate?`
+`https://app.posthog.com/#panel=max:!All%20hail%20hogzilla`
 
 ## Email broadcasts
 We regularly send three types of email broadcasts. 
