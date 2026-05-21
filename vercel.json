@@ -56,8 +56,9 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
-        { "source": "/tutorials/convex", "destination": "/docs/integrations/convex", "statusCode": 301 },
-        { "source": "/tutorials/convex-analytics", "destination": "/docs/integrations/convex", "statusCode": 301 },
+        { "source": "/tutorials/convex", "destination": "/docs/libraries/convex", "statusCode": 301 },
+        { "source": "/tutorials/convex-analytics", "destination": "/docs/libraries/convex", "statusCode": 301 },
+        { "source": "/docs/integrations/convex", "destination": "/docs/libraries/convex", "statusCode": 301 },
         { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
         { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
         { "source": "/docs/api/product-tours", "destination": "/docs/api", "statusCode": 301 },
