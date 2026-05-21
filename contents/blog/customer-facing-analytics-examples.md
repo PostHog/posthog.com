@@ -27,7 +27,6 @@ Endpoints are a way to expose your PostHog data as fast, versioned, authenticate
 
 But, rather than telling you what customer-facing analytics is, we’re going to show you five companies who do it really well, and for each one, we've pulled out what's worth copying.
 
-
 ## 1. Vercel Analytics: Embedded customer usage dashboard
 
 **Vercel** is the textbook case of a dashboard that customers log in to check. Every project deployed on Vercel ships with a Web Analytics panel that surfaces live visitor counts, top pages, referrers, UTM campaigns, and geographic breakdowns. All one click from the deploy button, with no separate tool to install.
