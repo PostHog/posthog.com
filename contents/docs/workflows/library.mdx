@@ -35,8 +35,10 @@ All template types support [Liquid templating](https://shopify.github.io/liquid/
 When using Liquid with existing user properties, you should include a default value if the property could be null or may not exist. For example:
 
 ```liquid
-{{ person.name | default: "there" }}
+{{ person.name | default: 'there' }}
 ```
+
+Use single quotes around the fallback value. The email builder serializes templates to JSON, which escapes double quotes and causes a Liquid `TokenizationError`.
 
 This ensures your message displays correctly even when a property is missing.
 
