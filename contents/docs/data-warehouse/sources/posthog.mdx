@@ -287,6 +287,7 @@ The `system.data_warehouse_tables` table contains metadata about data warehouse 
 | `deleted`                 | Whether the table is deleted (1 = yes, 0 = no) |
 | `deleted_at`              | When the table was deleted                     |
 
+<<<<<<< HEAD
 ### `system.dashboard_tiles`
 
 The `system.dashboard_tiles` table contains metadata about dashboard tiles, including layouts, colors, and linked content.
@@ -306,6 +307,43 @@ The `system.dashboard_tiles` table contains metadata about dashboard tiles, incl
 | `filters_overrides`      | JSON containing dashboard-level filter overrides applied to this tile      |
 | `deleted`                | Whether the tile is deleted (1 = yes, 0 = no)                              |
 
+||||||| 05e15ec26
+=======
+### `system.data_modeling_endpoint_versions`
+
+The `system.data_modeling_endpoint_versions` table contains version history for API endpoints. Each endpoint can have multiple versions with different queries and configurations.
+
+| Column              | Description                                     |
+| ------------------- | ----------------------------------------------- |
+| `id`                | Unique identifier for the endpoint version      |
+| `team_id`           | Team ID the endpoint version belongs to         |
+| `endpoint_id`       | ID of the parent endpoint                       |
+| `version`           | Version number                                  |
+| `description`       | Description of the endpoint version             |
+| `query`             | JSON containing the HogQL query definition      |
+| `cache_age_seconds` | Cache duration in seconds                       |
+| `created_at`        | When the version was created                    |
+| `is_active`         | Whether the version is active (1 = yes, 0 = no) |
+| `columns`           | JSON containing column definitions              |
+
+### `system.data_modeling_endpoints`
+
+The `system.data_modeling_endpoints` table contains metadata about API endpoints in your project. These endpoints expose HogQL query results via REST API.
+
+| Column                 | Description                                       |
+| ---------------------- | ------------------------------------------------- |
+| `id`                   | Unique identifier for the endpoint                |
+| `team_id`              | Team ID the endpoint belongs to                   |
+| `name`                 | Name of the endpoint                              |
+| `is_active`            | Whether the endpoint is active (1 = yes, 0 = no)  |
+| `current_version`      | Current active version number                     |
+| `derived_from_insight` | ID of the insight this endpoint was derived from  |
+| `created_at`           | When the endpoint was created                     |
+| `updated_at`           | When the endpoint was last updated                |
+| `last_executed_at`     | When the endpoint was last executed               |
+| `deleted`              | Whether the endpoint is deleted (1 = yes, 0 = no) |
+
+>>>>>>> master
 ### `system.early_access_features`
 
 The `system.early_access_features` table contains early access feature definitions from your project.
