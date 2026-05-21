@@ -146,12 +146,12 @@ Adoption paths are good to frame products as point in time or natural progressio
 
 Here are some other known examples that aren't necessarily 0 to 1 linear adoption, or working backwards from what a customer is using outside of PostHog: 
 - Data warehouse has continued to receive special attention since the launch of PostHog's related products. 
-  - LLM analytics + data warehouse - enrich LLM analytics with data from other sources like Stripe or Supabase
+  - AI Observability + data warehouse - enrich AI Observability with data from other sources like Stripe or Supabase
   - Customer/Revenue analytics + data warehouse - natural fit between connecting up stripe and enriching data further
   - Read a hot topic on [churn in high growth customers](https://posthog.slack.com/docs/TSS5W8YQZ/F0A0FGBNCNL) for specific advice
 - Feature flag + mobile replay - use for sampling/roll out that is not natively supported by mobile replay
 - Experiments / feature flags + error tracking - insight into errors for new/beta features, and seeing the impact of those errors on conversion rates is valuable
-- Feature flags + LLM analytics - ability to granularly segment features based on cost/engagement of users. i.e. you can release higher cost models to users who have already shown a willingness to spend
+- Feature flags + AI Observability - ability to granularly segment features based on cost/engagement of users. i.e. you can release higher cost models to users who have already shown a willingness to spend
 
 ### Bundle "Features"
 Bundling is another good way to position products by customer type and stage.  The following product stacks match certain types of user needs with value. 
@@ -175,7 +175,7 @@ Bundling is another good way to position products by customer type and stage.  T
 **Ideal for**: B2B businesses focused on LTV/CAC
 
 #### The "vibey AI startup" stack
-**Products**: Analytics + Flags + LLM Analytics + Error tracking
+**Products**: Analytics + Flags + AI Observability + Error tracking
 **Value story**: "Tie user behavior to run cost, launching features that are both user requested and revenue generating"
 **Ideal for:** AI-focused startups optimizing for cost efficiency and user engagement
 
@@ -289,13 +289,13 @@ These questions will naturally surface use cases for session replay, feature fla
 | How do you measure the direct revenue impact of your features? | Work disconnected from business outcomes. | Revenue Analytics ties feature usage to revenue & LTV. |
 | How do you weigh roadmap decisions against revenue impact today? | Guesswork in prioritization. | Revenue Analytics reveals which features drive business outcomes. |
 
-### LLM analytics
+### AI Observability
 
 | Question | Pain Revealed | PostHog Advantage |
 | --- | --- | --- |
-| When your LLM-driven features underperform, how do you pinpoint why? | No clear visibility into model errors or user friction. | LLM Analytics shows usage, performance, and cost data together. |
-| How do you know which LLM features are helping vs hurting users? | No clear way to measure LLM impact on user behavior or business outcomes. | LLM Analytics + Session Replay shows which interactions drive value vs cause drop-offs. |
-| How do you evaluate your LLM analytics in the context of broader product goals? | Standalone tools miss product context. | Integration ties LLM performance to actual product outcomes. |
+| When your LLM-driven features underperform, how do you pinpoint why? | No clear visibility into model errors or user friction. | AI Observability shows usage, performance, and cost data together. |
+| How do you know which LLM features are helping vs hurting users? | No clear way to measure LLM impact on user behavior or business outcomes. | AI Observability + Session Replay shows which interactions drive value vs cause drop-offs. |
+| How do you evaluate your AI Observability in the context of broader product goals? | Standalone tools miss product context. | Integration ties LLM performance to actual product outcomes. |
 
 ### Surveys
 
