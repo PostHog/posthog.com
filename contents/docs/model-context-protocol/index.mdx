@@ -6,6 +6,8 @@ import MCPClients from "./_snippets/mcp-clients.tsx"
 
 The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server enables your AI agents and tools to directly interact with PostHog's products.
 
+The PostHog MCP server is free to use – connecting to it and calling its tools doesn't incur any charges on your PostHog bill.
+
 ## Server URL
 
 `https://mcp.posthog.com/mcp`
@@ -14,7 +16,7 @@ The PostHog authentication server automatically routes you to the correct data r
 
 ## Quick install using the PostHog wizard
 
-Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor**, **Claude Code**, **Claude Desktop**, **Codex**, **VS Code** and **Zed**.
+Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **[PostHog Code](/code)**, **Cursor**, **Claude Code**, **Claude Desktop**, **Codex**, **VS Code** and **Zed**.
 
 ```bash
 npx @posthog/wizard mcp add

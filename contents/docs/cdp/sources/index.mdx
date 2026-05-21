@@ -111,6 +111,14 @@ If you add new tables to your source database, click **Pull new schemas** to dis
 
 To sync all enabled schemas at once, click **Sync now**. A confirmation dialog appears before the sync starts. This triggers a new sync for every enabled schema that isn't already syncing, so you don't need to sync schemas one by one.
 
+### Managing webhook tables
+
+Webhook-synced tables have special behavior when enabling or disabling them:
+
+- **Disabling a webhook table** - When you turn off syncing for a webhook table, a confirmation dialog warns you that the webhook stops consuming data immediately. Any events sent while the table is disabled are lost.
+
+- **Re-enabling a webhook table** - When you re-enable a previously disabled webhook table, PostHog automatically triggers a full refresh sync. This ensures no data gaps from the period when the webhook was inactive.
+
 <ProductScreenshot
   imageLight={SettingsLight}
   imageDark={SettingsDark}

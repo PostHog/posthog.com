@@ -41,6 +41,9 @@ To connect to your Google Sheet, PostHog uses a Google Cloud service account. Th
 
 Once the syncs are complete, you can start using Google Sheets data in PostHog.
 
+## Configuration
+
+<SourceParameters />
 
 ## Incremental and append only syncs
 

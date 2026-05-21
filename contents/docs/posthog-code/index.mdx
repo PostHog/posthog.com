@@ -1,0 +1,201 @@
+---
+title: Quick tour of PostHog Code
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconFlask, IconGraph, IconToggle, IconWarning } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import { DownloadButton } from '../../../src/pages/code'
+
+PostHog Code is a desktop coding agent that understands your product and business, not only your source code. Here's a quick tour of how it works.
+
+<QuestLog firstSpeechBubble="Let's tour PostHog Code!" lastSpeechBubble="You're ready to ship with agents!">
+
+<QuestLogItem
+title="Start your first task"
+subtitle="Required"
+icon="IconTerminal"
+>
+
+A **task** is the unit of work in PostHog Code. Type a prompt, choose where the agent should work, and send it off.
+
+Tasks persist across restarts, can move between your computer and the cloud, and stay tied to a specific repository.
+
+<ProductScreenshot
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/x_0,y_0,w_1340,h_410,c_crop/Screenshot_2026_05_04_at_4_43_01_PM_eea6fe87a8.png"
+classes="rounded"
+alt="Starting a task in PostHog Code"
+/>
+
+| Mode | Where it runs | Best for |
+|---|---|---|
+| **Cloud** | PostHog-managed sandbox | Long-running tasks you want to walk away from |
+| **Local** | Your computer, current branch | Quick, focused changes |
+| **Worktree** | Your computer, dedicated branch and folder | Parallel work on the same repo |
+
+<OSButton variant="primary" asLink to="/docs/posthog-code/tasks">
+  Learn about tasks
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+title="Give the agent PostHog context"
+subtitle="Recommended"
+icon="IconSparkles"
+>
+
+PostHog Code can reason with product data while it works. As you write code or stage a diff, the [enricher](/docs/posthog-code/posthog-integration#enricher) detects PostHog SDK calls and pulls live data from your project.
+
+That gives the agent context like flag rollouts, experiment status, event volume, and error frequency next to the code that emits them.
+
+You can ask the agent product-aware questions that cut across PostHog:
+
+### <IconGraph className="text-blue w-7 -mt-1 inline-block" /> Product Analytics
+
+_"Are we capturing the right events for this new feature roll out, and can we compare adoption to what we shipped before?"_
+
+### <IconWarning className="text-yellow w-7 -mt-1 inline-block" /> Error Tracking
+
+_"This error keeps showing up in production. What's the impact on conversion and revenue? Should we fix it now or defer it?"_
+
+### <IconToggle className="text-seagreen w-7 -mt-1 inline-block" /> Feature Flags
+
+_"Can you add a feature flag to the new checkout page, implement `isFeatureEnabled`, and roll it out to everyone with an `@example.com` email first?"_
+
+### <IconFlask className="text-purple w-7 -mt-1 inline-block" /> Experiments
+
+_"Can you scaffold an experiment with variants, a traffic split, and goal metrics so we can measure this change properly?"_
+
+<OSButton variant="primary" asLink to="/docs/posthog-code/posthog-integration">
+  Learn about the PostHog integration
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+title="Ship your first PR"
+subtitle="Required"
+icon="IconCode"
+>
+
+Every task has a built-in diff panel. Use it to read edits side by side, leave inline feedback, manage staged files, and follow up on PR comments without leaving the app.
+
+<ProductScreenshot
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_112,y_75,w_iw_sub_224,h_ih_sub_222/Screenshot_2026_04_30_at_2_14_45_PM_aec0c02d2b.png"
+classes="rounded"
+alt="Diff panel in PostHog Code"
+/>
+
+When you're happy, click **Create PR**. PostHog Code commits, pushes, generates a title and body that respect your repo's `PULL_REQUEST_TEMPLATE.md`, and opens the PR through the GitHub CLI.
+
+<OSButton variant="primary" asLink to="/docs/posthog-code/code-review">
+  Learn about code review
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+title="Run agents in parallel"
+subtitle="Recommended"
+icon="IconLayoutDashboard"
+>
+
+Open **Command Center** to run multiple agent sessions side by side. Each cell is an independent task with its own conversation, branch, and workspace.
+
+Use it to plan several features in parallel, fan out a batch of small fixes, or watch a long cloud run while you work locally on something else.
+
+<ProductScreenshot
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_05_04_T23_04_17_757_Z_2d9d7b46b7.png"
+classes="rounded"
+alt="Command Center showing multiple agent tasks in a grid"
+/>
+
+<OSButton variant="primary" asLink to="/docs/posthog-code/command-center">
+  Learn about Command Center
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+title="Hand work to the cloud"
+subtitle="Recommended"
+icon="IconCloud"
+>
+
+Cloud runs put tasks in sandboxes managed by PostHog. Close the app, switch networks, or shut your laptop, and the agent keeps going.
+
+<ProductScreenshot
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_05_05_T00_51_48_152_Z_24fe877fde.png"
+classes="rounded"
+alt="Command Center showing multiple agent tasks in a grid"
+/>
+
+When you're ready, hand the task back to local for review. PostHog Code brings over the changes, branch, and conversation history.
+
+<OSButton variant="primary" asLink to="/docs/posthog-code/cloud-runs">
+  Learn about cloud runs
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+title="Kick off tasks from Slack"
+subtitle="Recommended"
+icon="IconChat"
+>
+
+Mention `@PostHog` in any Slack channel, describe what you want done, and the agent picks up the work. It replies in-thread as it runs.
+
+This is useful for fixes that come up while you're away from your computer or when a teammate spots something that should become a coding task.
+
+<ProductScreenshot
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_47_08_PM_b8ba794fdc.png"
+classes="rounded"
+alt="A PostHog Code task running in a Slack thread"
+/>
+
+<OSButton variant="primary" asLink to="/docs/posthog-code/slack">
+  Learn about Slack
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+title="Let Inbox open PRs for you"
+subtitle="Recommended"
+icon="IconInbox"
+>
+
+[Inbox](/docs/posthog-code/inbox) is the autopilot version of PostHog Code. Connect signal sources like Error Tracking, Support tickets, Session Replay, GitHub issues, or Linear issues.
+
+PostHog Code researches each new signal, prioritizes it by user impact, and opens a PR when a code fix is possible. Your job is to review and merge.
+
+<ProductScreenshot
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_112,y_75,w_iw_sub_224,h_ih_sub_222/Screenshot_2026_05_04_at_4_48_19_PM_9652a9fb7c.png"
+classes="rounded"
+alt="The PostHog Code Inbox with researched and actionable reports"
+/>
+
+<OSButton variant="primary" asLink to="/docs/posthog-code/inbox">
+  Tour Inbox
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+title="Try PostHog Code"
+subtitle="Next step"
+icon="IconDownload"
+>
+
+Ready to take it for a spin? Download PostHog Code and connect your first repo. PostHog Code will be available for download in Spring 2026. 
+
+<div className="@container bg-blue/10 border border-blue rounded-md pb-8 pt-0 px-8 shadow-xl">
+  <DownloadButton />
+</div>
+
+</QuestLogItem>
+</QuestLog>

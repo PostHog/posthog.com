@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import {
     IconThoughtBubble,
-    IconCoffee,
+    IconBook,
     IconDashboard,
     IconDownload,
     IconNotebook,
@@ -22,7 +22,6 @@ import {
     IconAsterisk,
     IconAI,
     IconSupport,
-    IconSpotlight,
     IconTestTube,
     IconListTreeConnected,
     IconSparkles,
@@ -82,24 +81,13 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'PostHog Code',
-            Icon: IconCoffee,
+            Icon: IconBook,
             description: 'AI code editor that knows how people use your product',
             handle: 'posthog_code',
             color: 'brown',
             colorSecondary: 'brown',
             category: 'automation',
             slug: 'code',
-            status: 'beta',
-        },
-        {
-            name: 'Product Tours',
-            Icon: IconSpotlight,
-            description: 'Guide users through your product with interactive tours and announcements.',
-            handle: 'product_tours',
-            color: 'salmon',
-            colorSecondary: 'salmon',
-            category: 'product_engineering',
-            slug: 'docs/product-tours',
             status: 'beta',
         },
         {

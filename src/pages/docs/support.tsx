@@ -64,6 +64,14 @@ const Support: React.FC = () => {
                         type={undefined}
                     />
                     <ResourceItem
+                        title="GitHub integration"
+                        description="Connect GitHub repos for two-way sync — issues become tickets, replies sync back as comments."
+                        url="/docs/support/github"
+                        Image={undefined}
+                        gatsbyImage={undefined}
+                        type={undefined}
+                    />
+                    <ResourceItem
                         title="Workflow automation"
                         description="Automate ticket management with workflows — set SLAs, auto-assign, tag, and route tickets."
                         url="/docs/support/workflows"
