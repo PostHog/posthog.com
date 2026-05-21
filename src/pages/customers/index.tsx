@@ -1,12 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
-import Viewer from 'components/Viewer'
+import ReaderView from 'components/ReaderView'
 import ViewerFilters from 'components/Viewer/ViewerFilters'
-import { useValues } from 'kea'
-import { layoutLogic } from 'logic/layoutLogic'
 import OSTable from 'components/OSTable'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useCustomers, Customer as CustomerType } from 'hooks/useCustomers'
 import { IconArrowUpRight } from '@posthog/icons'
 
@@ -149,68 +146,78 @@ export default function Customers(): JSX.Element {
 
     return (
         <>
-            <SEO title="customers.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
-            <Viewer title="customers" type="mdx">
-                <p className="!mt-0 mb-2">Here are some customers who use PostHog.</p>
-                <p className="!mt-0">You can use the filters below to read how they use different products.</p>
-                <ViewerFilters
-                    availableFilters={[
-                        {
-                            label: 'Product',
-                            options: [
-                                { label: 'Any', value: undefined },
-                                ...Array.from(
-                                    new Set(
-                                        customers
-                                            .filter((customer) => customer.toolsUsed?.length)
-                                            .flatMap((customer) => customer.toolsUsed || [])
-                                    )
-                                ).map((tool) => ({
-                                    label: tool,
-                                    value: tool,
-                                })),
-                            ],
-                            filter: (obj, value) => obj['toolsUsed']?.includes(value),
-                            operator: 'includes',
-                        },
-                        {
-                            label: 'Case study?',
-                            options: [
-                                { label: 'Any', value: undefined },
-                                { label: 'Yes', value: true },
-                                { label: 'No', value: false },
-                            ],
-                            filter: (obj, value) => (value ? hasCaseStudy(obj.slug) : !hasCaseStudy(obj.slug)),
-                            operator: 'equals',
-                        },
-                        {
-                            label: 'Featured',
-                            options: [
-                                { label: 'Any', value: undefined },
-                                { label: 'Yes', value: true },
-                                { label: 'No', value: false },
-                            ],
-                            filter: (obj, value) => (value ? isFeatured(obj.slug) : !isFeatured(obj.slug)),
-                            operator: 'equals',
-                            initialValue: true,
-                        },
-                    ]}
-                    dataToFilter={customers}
-                    onFilterChange={handleFilterChange}
-                />
-                <OSTable
-                    className="mt-2"
-                    columns={columns}
-                    width="full"
-                    rows={(filteredCustomers || customers).map((customer: any, index: number) => {
-                        return Customer({
-                            number: index + 1,
-                            customer,
-                            hasCaseStudy,
-                        })
-                    })}
-                />
-            </Viewer>
+            <SEO title="Customers – PostHog" description="" image={`/images/og/customers.jpg`} />
+            <ReaderView
+                hideTitle
+                proseSize="lg"
+                showQuestions={false}
+                hideRightSidebar
+                hideMenu
+                defaultNavVisible={false}
+            >
+                <div className="w-full max-w-5xl mx-auto">
+                    <h1 className="text-2xl font-bold">Customers</h1>
+                    <p className="!mt-0 mb-2">Here are some customers who use PostHog.</p>
+                    <p className="!mt-0">You can use the filters below to read how they use different products.</p>
+                    <ViewerFilters
+                        availableFilters={[
+                            {
+                                label: 'Product',
+                                options: [
+                                    { label: 'Any', value: undefined },
+                                    ...Array.from(
+                                        new Set(
+                                            customers
+                                                .filter((customer) => customer.toolsUsed?.length)
+                                                .flatMap((customer) => customer.toolsUsed || [])
+                                        )
+                                    ).map((tool) => ({
+                                        label: tool,
+                                        value: tool,
+                                    })),
+                                ],
+                                filter: (obj, value) => obj['toolsUsed']?.includes(value),
+                                operator: 'includes',
+                            },
+                            {
+                                label: 'Case study?',
+                                options: [
+                                    { label: 'Any', value: undefined },
+                                    { label: 'Yes', value: true },
+                                    { label: 'No', value: false },
+                                ],
+                                filter: (obj, value) => (value ? hasCaseStudy(obj.slug) : !hasCaseStudy(obj.slug)),
+                                operator: 'equals',
+                            },
+                            {
+                                label: 'Featured',
+                                options: [
+                                    { label: 'Any', value: undefined },
+                                    { label: 'Yes', value: true },
+                                    { label: 'No', value: false },
+                                ],
+                                filter: (obj, value) => (value ? isFeatured(obj.slug) : !isFeatured(obj.slug)),
+                                operator: 'equals',
+                                initialValue: true,
+                            },
+                        ]}
+                        dataToFilter={customers}
+                        onFilterChange={handleFilterChange}
+                    />
+                    <OSTable
+                        className="mt-2"
+                        columns={columns}
+                        width="full"
+                        rows={(filteredCustomers || customers).map((customer: any, index: number) => {
+                            return Customer({
+                                number: index + 1,
+                                customer,
+                                hasCaseStudy,
+                            })
+                        })}
+                    />
+                </div>
+            </ReaderView>
         </>
     )
 }
