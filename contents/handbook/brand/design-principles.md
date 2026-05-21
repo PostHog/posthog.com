@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This is the most important design principle PostHog has.
+Taste is the most important design principle PostHog has.
 
 "Polish" is surface-level. Smooth gradients, perfect shadows, and trendy layouts are the visual equivalent of buzzwords. They look professional because that's what everyone does, but they don't build trust.
 
@@ -12,7 +12,7 @@ This is the most important design principle PostHog has.
 
 Users will overlook the former in exchange for the latter. Not being polished isn't ideal, but it's a symptom of how we operate (speed > perfection) and something we tolerate – even though we strive for both.
 
-A design with taste looks like *someone made this on purpose,* especially in a world of AI slop.
+A design with taste looks like *someone made this on purpose,* especially in a world where more people are shipping AI slop.
 
 What taste looks like in practice:
 
@@ -32,8 +32,6 @@ Every design element should serve a purpose. Ask of each one:
 - Does this add personality?
 
 If the answer is no to all four, remove it.
-
-Decoration without meaning is just noise and makes everything worse.
 
 ## Details matter
 
