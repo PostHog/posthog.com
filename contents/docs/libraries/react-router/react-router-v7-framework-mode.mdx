@@ -135,16 +135,8 @@ import { HydratedRouter } from "react-router/dom";
 import posthog from 'posthog-js'; // +
 import { PostHogProvider } from '@posthog/react'  // +
 
-<<<<<<< HEAD
 posthog.init(import.meta.env.VITE_POSTHOG_KEY, { // +
   api_host: import.meta.env.VITE_POSTHOG_HOST, // +
-||||||| 22359be34
-posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_TOKEN, { // +
-  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST, // +
-=======
-posthog.init(import.meta.env.VITE_POSTHOG_TOKEN, { // +
-  api_host: import.meta.env.VITE_POSTHOG_HOST, // +
->>>>>>> master
   defaults: '2026-01-30', // +
   __add_tracing_headers: [ window.location.host, 'localhost' ], // +
 }); // +
@@ -248,16 +240,8 @@ export interface PostHogContext extends RouterContextProvider {
 }
 
 export const posthogMiddleware: Route.MiddlewareFunction = async ({ request, context }, next) => {
-<<<<<<< HEAD
   const posthog = new PostHog(process.env.VITE_POSTHOG_KEY!, {
     host: process.env.VITE_POSTHOG_HOST!,
-||||||| 22359be34
-  const posthog = new PostHog(process.env.VITE_PUBLIC_POSTHOG_TOKEN!, {
-    host: process.env.VITE_PUBLIC_POSTHOG_HOST!,
-=======
-  const posthog = new PostHog(process.env.VITE_POSTHOG_TOKEN!, {
-    host: process.env.VITE_POSTHOG_HOST!,
->>>>>>> master
     flushAt: 1,
     flushInterval: 0,
   });
