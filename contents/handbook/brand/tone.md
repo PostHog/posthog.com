@@ -39,7 +39,7 @@ These make copy feel weak and corporate. Cut them:
 | "best-in-class"         | show, don't claim                            |
 | "holistic"              | comprehensive, or just describe the parts    |
 | "seamless"              | describe *why* it's easy                     |
-| "synergy"               | (I shouldn't even have to clarify this one.) |
+| "synergy"               | C'mon, really... |
 
 ### Passive voice
 
