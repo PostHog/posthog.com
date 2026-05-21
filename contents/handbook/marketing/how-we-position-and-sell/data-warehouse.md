@@ -18,7 +18,7 @@ PostHog is building the infrastructure for self-driving product development. The
 
 **The data warehouse is where that picture lives.** Every event PostHog captures, every Stripe charge, every HubSpot deal, every Zendesk ticket — it all lands in one place, queryable together. That unified store is what makes PostHog Code meaningful. Agents running the autonomy loop need context. The warehouse is the context layer.
 
-Snowflake, BigQuery, and Databricks are powerful. They're also expensive, complex to operate, and don't connect to your product tools without significant glue. PostHog's warehouse is different: it's integrated, not bolted on. Your data never needs to leave the platform that acts on it.
+Snowflake, BigQuery, and Databricks are powerful. They're also expensive, complex to operate, and don't connect to your product tools without significant glue, which usually has to be owned by a dedicated data team. PostHog's warehouse is different: it's integrated, not bolted on. Your data never needs to leave the platform that acts on it.
 
 ## Who this is for
 
