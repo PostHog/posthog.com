@@ -208,7 +208,7 @@ Each node of the router then has its own conditions to route through to get to t
 
 Ideally all the structure you’ve built up to this point prevents failure, but you still need to [give the AI guardrails](/blog/envoy-wizard-llm-agent) because it _will_ inevitably smash into them.
 
-First, you need to know when something goes wrong, so [implement monitoring](/docs/llm-analytics/start-here) from the beginning. <TeamMember name="Georgiy Tarasov" photo /> from our <SmallTeam slug="posthog-ai" /> relayed how important this is:
+First, you need to know when something goes wrong, so [implement monitoring](/docs/ai-observability/start-here) from the beginning. <TeamMember name="Georgiy Tarasov" photo /> from our <SmallTeam slug="posthog-ai" /> relayed how important this is:
 
 > Monitoring production traces is essential. We even built a [monitoring tool](/llm-analytics) for [dogfooding](/product-engineers/dogfooding), and I wish we had that tool from the beginning. It becomes harder to monitor traces at scale (we’re here), so online evaluations will be helpful (our next priority).
 >
@@ -238,7 +238,7 @@ The solution? Add suggestions for how they can use your AI-powered features, nud
 
 Beyond issues with humanity and hallucination, sometimes your workflows just break. You need to be able to handle these gracefully with retries and rate limiting.
 
-For real pros, you can also set up [LLM analytics](/llm-analytics), [error tracking](/docs/error-tracking), and [feature flags](/docs/feature-flags) to help. Conveniently we provide all three, which is a weird coincidence.
+For real pros, you can also set up [AI Observability](/llm-analytics), [error tracking](/docs/error-tracking), and [feature flags](/docs/feature-flags) to help. Conveniently we provide all three, which is a weird coincidence.
 
 ## Improving your feature
 
@@ -272,7 +272,7 @@ As the founder of Superhuman, Rahul Vohra, noted in [Lenny’s Newsletter](https
 
 Some ways to improve this:
 
--   **Be aware of model benchmarks and new model releases.** When a better, faster model releases, test it out and use it. This can often have the biggest boost to both functionality and speed. Use [LLM analytics](/llm-analytics) to test this.
+-   **Be aware of model benchmarks and new model releases.** When a better, faster model releases, test it out and use it. This can often have the biggest boost to both functionality and speed. Use [AI Observability](/llm-analytics) to test this.
 
 -   **Mix fast and slow models depending on the task.** We use fast models, like `gpt-4.1-mini` and `gpt-4.1-nano`, for title generation, session replay filters, survey summarization, and insight search. We use slow models (like `gpt-4.1`) for schema generation, conversation handling, and context management.
 
