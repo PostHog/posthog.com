@@ -22,7 +22,7 @@ Not everything needs sign-off. Here's a rough guide:
 | Partnerships or third-party co-branding                      | Yes                                                       |
 | Major website changes outside of the handbook, docs, or articles | Yes                                                       |
 
-When in doubt, ask in the #design Slack channel.
+When in doubt, ask in the #design-review Slack channel.
 
 ## Who owns what
 
