@@ -57,7 +57,7 @@ I started by building a Clay automation that checks multiple data sources for ev
 
 One challenge I faced was that most enrichment vendors are built around large enterprise customers. If your ICP is startups or early-stage companies, you'll find a lot of gaps. Clearbit is great for big company data, but it wasn't working for the kinds of companies we care about. We eventually found [Harmonic](https://harmonic.ai/), which indexes startup data for VCs, and it had much better coverage for our segment.
 
-We've since extended the same enrichment data to combine with usage signals that sales looks at (e.g., activation events, invite volume, feature breadth) to score accounts for expansion potential. Strong matches get tagged in Salesforce for outreach, which is how we're expanding our [PLG](/founders/product-led-growth) to PLS motion today.
+We've since extended the same enrichment data to combine with usage signals that sales looks at (e.g., activation events, invite volume, feature breadth) to score accounts for expansion potential. Strong matches get tagged in Salesforce for outreach, which is how we're expanding our [product-led growth](/founders/product-led-growth) motion into product-led sales.
 
 ## 3. Iterate openly
 Once we had systems to query for ICP data, my next step was to actually start measuring our growth in this segment.
