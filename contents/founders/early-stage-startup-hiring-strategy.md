@@ -89,5 +89,6 @@ For example, we found for a recent SRE role that our conversion from application
 - [The ops toolkit for early-stage startups](https://posthog.com/blog/startup-ops-toolkit)
 - [Startups, stop treating engineers like a different species](https://posthog.com/blog/stop-treating-engineers-differently)
 - [How we run our hiring process](/handbook/people/hiring-process) at PostHog
+- [Being AI-native matters more than experience](/blog/ai-native-hiring)
 
 <NewsletterForm />
