@@ -2,7 +2,7 @@
 title: Traces
 ---
 
-import TraceEventSnippet from "./_snippets/trace-event.mdx"
+import TraceEventSnippet from "./_snippets/trace-event.mdx";
 
 Traces are a collection of [generations](/docs/llm-analytics/generations) and [spans](/docs/llm-analytics/spans) that capture a full interaction between a user and an LLM. The [traces tab](https://app.posthog.com/llm-analytics/traces) lists them along with the properties autocaptured by PostHog like the person, total cost, total latency, and more.
 
@@ -12,6 +12,17 @@ Traces are a collection of [generations](/docs/llm-analytics/generations) and [s
 - **Session** (`$ai_session_id`): Optional property that groups multiple traces together based on your chosen grouping strategy.
 
 See the [Sessions](/docs/llm-analytics/sessions) documentation for more details on how to use `$ai_session_id`.
+
+## Filter and search traces
+
+The [traces tab](https://app.posthog.com/llm-analytics/traces) includes a filter bar to narrow down traces by time range, service name, and span properties.
+
+- **Time range** - Select a preset range (last 5 minutes, 30 minutes, 1 hour, 4 hours, 24 hours, or 7 days) or set a custom range. Use the zoom in/out buttons to adjust the window, or click and drag on the sparkline histogram to select a specific time range.
+- **Service name** - Filter traces to one or more services using the service name dropdown.
+- **Property filters** - Add filters on span properties, span attributes, and resource attributes to find specific traces.
+- **Refresh** - Click the refresh button to reload traces with the current filters.
+
+Active filters are persisted in the URL, so you can share a filtered view with teammates.
 
 ## Trace timeline
 
@@ -25,7 +36,6 @@ Clicking on a trace opens a timeline of the interaction with all the generation 
 />
 
 <Caption>A trace presents LLM event data in a timeline, tree-structured view </Caption>
-
 
 ## Conversation display options
 
