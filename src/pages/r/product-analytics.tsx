@@ -129,7 +129,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                 <div className="mb-12 max-w-7xl mx-auto">
                     <div className="flex flex-wrap items-center gap-x-12 gap-y-6 text-primary dark:text-primary-dark">
                         <SupabaseLogo className="fill-current object-contain max-w-full h-8" />
-                        <LovableLogo className="fill-current object-contain max-w-full h-8" />
+                        <LovableLogo className="fill-current object-contain max-w-full h-6" />
                         <ElevenLabsLogo className="fill-current object-contain max-w-full h-8" />
                         <YCombinatorLogo className="fill-current object-contain max-w-full h-8" />
                     </div>
