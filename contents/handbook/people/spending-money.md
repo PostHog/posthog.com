@@ -153,7 +153,7 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
       - US only: use your Brex since we earn cashback
       - UK only: use your Revolut since we claim back the VAT
       - Do not get AppleCare since it doesn't have great value for money
-    - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old or significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
+    - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old, (for engineering machines) has less than 48GB of RAM, or is significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
     - Part of `#team-client-libraries` and need to purchase a phone for testing? Talk to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
 
 #### Yubikey (for specific roles only)
