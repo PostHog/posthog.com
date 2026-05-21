@@ -29,7 +29,7 @@ Analytics is the memory of everything users have done. Self-driving development 
 ### Who this isn't for
 
 - Teams who need advanced cohort modeling and data science workflows — other platforms have more mature statistical tooling here.
-- Enterprises needing deep data governance without also adopting the broader PostHog platform.
+- Enterprises needing deep data governance (e.g. warehouse native requirements) without also adopting the broader PostHog platform.
 
 ## Messaging
 
