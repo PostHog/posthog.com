@@ -21,7 +21,7 @@ To link Postgres:
    - **Database:** The name of the database you want like `analytics_db`.
    - **User:** The username with the necessary permissions to access the database.
    - **Password:** The password for the user.
-   - **Schema:** The schema for your database where your tables are located. The default is `public`.
+   - **Schema:** (Optional) The schema for your database. Leave blank to browse and sync tables from all schemas, or specify one to limit the selection. The default is `public`.
 4. If you need to connect through an SSH tunnel, enable and configure it (optional):
    - **Tunnel host:** The hostname of your SSH server.
    - **Tunnel port:** The port your SSH server is listening on.
@@ -37,6 +37,29 @@ The data warehouse then starts syncing your Postgres data. You can see details a
 
 <SourceParameters />
 
+## Selecting columns
+
+By default, PostHog syncs all columns from each table. To sync only specific columns:
+
+1. During source setup, click **Columns** next to any table in the table picker.
+2. Uncheck columns you don't want to sync.
+3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
+
+You can also change column selection after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Postgres source.
+2. Click **Configure** next to any schema.
+3. Under **Columns**, select which columns to sync.
+
+<CalloutBox icon="IconInfo" title="Adding columns to existing syncs" type="fyi">
+
+When you add columns to a schema using incremental, append, or CDC sync, PostHog prompts you to choose:
+
+- **Sync forward only** - New columns are populated only for future data. Existing rows show `NULL` for the new columns.
+- **Full resync** - Triggers a complete resync to backfill the new columns for all rows.
+
+</CalloutBox>
+
 <CalloutBox icon="IconWarning" title="SSL/TLS required for new sources" type="caution">
 
 PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption for database connections. Ensure your PostgreSQL database supports SSL/TLS connections before linking. Existing sources created before this date are not affected. If you're connecting through an SSH tunnel, you can optionally disable TLS using the **Require TLS through tunnel?** toggle since the tunnel already encrypts the connection.
@@ -44,6 +67,16 @@ PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption fo
 </CalloutBox>
 
 > **Permissions** The Postgres source only requires read permissions on the schemas and tables you intend to sync.
+
+<CalloutBox icon="IconWarning" title="Decimal precision limits" type="caution">
+
+Numeric or decimal columns with values exceeding precision 76 or scale 32 can't be synced. If a sync fails with this error, you have three options:
+
+- Constrain the column with a lower precision/scale
+- Cast the column to text in a view
+- Round the values at the source
+
+</CalloutBox>
 
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).
 

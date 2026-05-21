@@ -381,7 +381,7 @@ const products: Product[] = [
         },
     },
     {
-        name: 'LLM analytics',
+        name: 'AI Observability',
         color: '[#8B0DC8]',
         colorDark: '[#C170E8]',
         Icon: IconLlmAnalytics,
@@ -513,14 +513,6 @@ const products: Product[] = [
                 text: 'Get started',
             },
         },
-    },
-    {
-        name: 'Product tours',
-        Icon: IconMegaphone,
-        color: 'seagreen',
-        types: ['Product'],
-        status: 'Roadmap',
-        roadmapID: 2111,
     },
     {
         name: 'Heatmaps',

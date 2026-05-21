@@ -303,6 +303,44 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 | `host` | The API host (`https://us.posthog.com` or `https://eu.posthog.com`) |
 | `personal_api_key` | A personal API key scoped to this project – use this for the PostHog API |
 
+### Deep linking
+
+For recurring deep links from your application into PostHog – the most common case is an "Open in PostHog" button on a user's connected project – use the deep-link endpoint. Each call returns a short-lived, single-use URL that logs the user into their PostHog project on click. There's no consent screen and no email-mismatch friction: the URL mints a fresh PostHog session for the right user, overriding any other session the browser happens to have.
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/deep_links \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer phx_abc123..." \
+  -H "API-Version: 0.1d" \
+  -d '{
+    "purpose": "dashboard"
+  }'
+```
+
+Authenticate with the `access_token` you got from [Step 2](#step-2-exchange-the-code-for-tokens) – the same Bearer credential you use for `/resources`. The token is scoped to a single team, so the resulting deep link lands the user in the correct project.
+
+**Request fields:**
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `purpose` | string | No | What the deep link should land on. Currently only `dashboard` is supported. Defaults to `dashboard`. |
+
+**Response:**
+
+```json
+{
+  "purpose": "dashboard",
+  "url": "https://us.posthog.com/agentic/login?token=...&team_id=12345",
+  "expires_at": "2026-05-20T21:00:00Z"
+}
+```
+
+The returned `url` is valid for 10 minutes and can only be opened once, so don't pre-render it as the button's `href`. Wire the button click to your backend, call `/deep_links` there, then redirect the user to the returned URL.
+
+#### Requires a trusted partner record
+
+This endpoint is gated on the `provisioning_can_issue_deep_links` flag on your partner record, which is only enabled for partners admin-onboarded by PostHog. If you get a `deep_links_not_enabled` 403, ask PostHog to enable it for your CIMD app.
+
 ### Rotate project credentials
 
 Rotate the project token and create a new personal API key for an existing provisioned project:
