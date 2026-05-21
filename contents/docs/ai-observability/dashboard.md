@@ -6,7 +6,7 @@ availability:
     enterprise: full
 ---
 
-The [AI Observability dashboard](https://app.posthog.com/llm-analytics) provides an overview of your LLM usage and performance. Out of the box, it includes insights on:
+The [AI Observability dashboard](https://app.posthog.com/ai-observability) provides an overview of your LLM usage and performance. Out of the box, it includes insights on:
 
 - Users
 - Traces
@@ -27,7 +27,7 @@ It can be filtered like any dashboard in PostHog, including by event, person, an
 
 The AI Observability dashboard is fully customizable. You can add your own insights, add text cards, and more. To customize the dashboard:
 
-1. Head to the [AI Observability dashboard](https://app.posthog.com/llm-analytics)
+1. Head to the [AI Observability dashboard](https://app.posthog.com/ai-observability)
 2. Click the **Edit dashboard** button in the top right
 3. Click the **Add text card** button to add labels, or the **Add insight** button to import insights
 
@@ -43,4 +43,4 @@ This dashboard is a great starting point for understanding your LLM usage and pe
 - How many of my users are interacting with my LLM features?
 - Are there generation latency spikes?
 
-To dive into specific generation events, click on the [generations](https://app.posthog.com/llm-analytics/generations), [traces](https://app.posthog.com/llm-analytics/traces), or [sentiment](https://app.posthog.com/llm-analytics/sentiment) tabs to explore your LLM data.
+To dive into specific generation events, click on the [generations](https://app.posthog.com/ai-observability/generations), [traces](https://app.posthog.com/ai-observability/traces), or [sentiment](https://app.posthog.com/ai-observability/sentiment) tabs to explore your LLM data.
