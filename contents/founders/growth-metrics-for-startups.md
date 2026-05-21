@@ -1,6 +1,6 @@
 ---
 date: 2026-05-08
-title: "A guide to growth metrics for startups that can't sit still"
+title: "A guide to growth metrics for startups that don't fit in"
 author:
     - mine-kansu
 featuredImage: >-
@@ -18,34 +18,32 @@ Most advice about growth metrics and revenue ops is for businesses that follow c
 
 PostHog, on the other hand, is pretty weird. 90% of our users are indie developers who stay on the free tier for life. We do [usage-based pricing](/founders/pricing-lessons) and literally tell people to pay us less. We also serve free hot dogs at developer conferences.
 
-We've more than 6x'ed our ARR over the two years since I joined. That number in and of itself says a lot, but I also want to talk about the work that went into figuring that number out.
+We've more than 6x'd our ARR over the two years since I joined. That number itself says a lot, but I also want to talk about the work that went into figuring that number out.
 
-Here's all the advice and lessons learned about growth metrics that I'd give to founders at other companies that don't follow the standard playbook.
+Here's the advice about growth metrics I'd give to founders at companies that don't follow the standard playbook.
 
----
 
 ## 1. Defining your ICP is not optional
 
 If you pull PostHog's usage data without any filters, you'll see a huge dip every June. Investors often express concern about this at first since, for most companies, that's a red flag.
 
-But for us, it's fine. Because when you filter for our actual ICP – technical people at mid-market companies – you see a clean growth trend instead. Turns out it's just all the hobbyists taking a break for the summer:
+But for us, it's fine. Because when you filter for [our actual ICP](/handbook/who-we-build-for) – the people building products at high-growth startup – you see a clean growth trend instead. Turns out it's just all the hobbyists taking a break for the summer:
 
 ![ICP retention](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_08_at_2_53_24_PM_025be5c8e4.png)
 
 That's the power of a strong ICP definition. A lot of founders think of ICP as this fuzzy sales and marketing framework, but it's the foundation of your entire business. It ties your product to the market and cascades to every function. You can't skip it.
 
-If you don't define your ICP, you'll suffer. A lot. And I get why people struggle with it – it requires making a bet on who you're _not_ building for, which feels scary when you're hungry for revenue and worried about ruling anyone out. It's also tempting to keep your ICP broad so you have wiggle room, but a vague ICP is just no ICP. You need to get specific enough that it feels a little uncomfortable.
+If you don't define your ICP, you'll suffer. And I get why people struggle with it – it requires making a bet on who you're _not_ building for, which feels scary when you're hungry for revenue and worried about ruling anyone out. It's also tempting to keep your ICP broad so you have wiggle room, but a vague ICP is just no ICP. You need to get specific enough that it feels a little uncomfortable.
 
 Defining our ICP is the most important thing we've ever done. The rest of this article is pointless if you don't start with this.
 
-James and others have already written a lot about how to do this, so I'll link them here instead of repeating them:
+We already wrote a lot about how to do this, so I'll link them here instead of repeating them:
 
-- [How we found our Ideal Customer Profile](/founders/creating-ideal-customer-profile) – James Hawkins on the exact process we ran, including tracking customers who _didn't_ buy
+- [How we found our Ideal Customer Profile](/founders/creating-ideal-customer-profile) – our co-CEO James on the exact process we ran, including tracking customers who _didn't_ buy
 - [Defining our ICP is the most important thing we ever did](/newsletter/ideal-customer-profile-framework) – a more structured framework with the specific attributes to define and how to test them
 - [The Product-Market Fit Game](/founders/product-market-fit-game) – how ICP and PMF are intertwined, and why you can't find one without the other
 - [How to measure product-market fit](/founders/measure-product-market-fit) – once you have an ICP, how to tell if you actually have fit within it
 
----
 
 ## 2. Make customer traits queryable across all functions
 
@@ -55,13 +53,12 @@ Saying "these are the customers we want" is the easy part. Making sure your whol
 
 Operationalizing this is where I spent most of my first year at PostHog.
 
-I started by building a Clay automation that checks multiple data sources for every new signup – company size, industry, funding stage, tech stack – and pushes that data back to PostHog as user properties. It runs automatically, so anyone on the team can slice any insight by ICP match in seconds without having to re-derive who counts.
+I started by building a Clay automation that checks multiple data sources for every new signup – company size, industry, funding stage, tech stack – and pushes that data back to PostHog as person properties. It runs automatically, so anyone on the team can slice any insight by ICP match in seconds without having to re-derive who counts.
 
 One challenge I faced was that most enrichment vendors are built around large enterprise customers. If your ICP is startups or early-stage companies, you'll find a lot of gaps. Clearbit is great for big company data, but it wasn't working for the kinds of companies we care about. We eventually found [Harmonic](https://harmonic.ai/), which indexes startup data for VCs, and it had much better coverage for our segment.
 
 We've since extended the same enrichment data to combine with usage signals that sales looks at (e.g., activation events, invite volume, feature breadth) to score accounts for expansion potential. Strong matches get tagged in Salesforce for outreach, which is how we're expanding our [PLG](/founders/product-led-growth) to PLS motion today.
 
----
 ## 3. Iterate openly
 Once we had systems to query for ICP data, my next step was to actually start measuring our growth in this segment.
 
