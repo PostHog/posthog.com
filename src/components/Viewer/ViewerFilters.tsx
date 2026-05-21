@@ -111,10 +111,14 @@ export default function ViewerFilters({
         <div className="text-sm text-primary gap-1">
             <div className={`flex flex-wrap gap-2 ${websiteMode && WEBSITE_MODE_CLASSES}`}>
                 {availableFilters.map((filter) => {
+                    const filterKey = filter.value ?? filter.label
+                    const activeValue = filters[filterKey]?.value
                     const resolvedDefault =
-                        filter.initialValue === null || filter.initialValue === undefined
-                            ? filters[filter.value ?? filter.label]?.value ?? undefined
-                            : filter.initialValue
+                        activeValue !== undefined
+                            ? activeValue
+                            : filter.initialValue !== null && filter.initialValue !== undefined
+                            ? filter.initialValue
+                            : undefined
                     return (
                         <Select
                             key={`${Object.keys(filters).length}-${filter.label}`}
