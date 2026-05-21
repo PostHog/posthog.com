@@ -8,6 +8,12 @@ Our email communications can be broadly divided into broadcasts (one-off emails 
 
 This page doesn't deal with [our Product for Engineers newsletter](https://newsletter.posthog.com/), which is sent through Substack and managed by the Content & Docs team. 
 
+## Linking to the PostHog app
+
+To point users at a page in the PostHog app via email, don't copy and paste the URL from your own dashboard, e.g. `https://us.posthog.com/project/2/endpoints`. Links need to follow this format: `https://app.posthog.com/endpoints`.
+
+The `app.posthog.com` prefix works for both US and EU instances, and the project path resolves itself for the recipient.
+
 ## Email broadcasts
 We regularly send three types of email broadcasts. 
 
