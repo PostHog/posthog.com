@@ -4,11 +4,26 @@ title: Search logs
 
 Filter logs from the filter bar at the top of the [logs page](https://us.posthog.com/logs). Pick a field, choose an operator, and enter a value. Add as many filters as you need — they're combined with AND.
 
-There are three kinds of fields you can filter on:
+There are four kinds of fields you can filter on:
 
-- **Message** – full-text search over the log body
+- **Logs** – top-level log fields like `message`, `severity_level`, `trace_id`, and `span_id`
 - **Resource attributes** – describe where the log came from, like `service.name`, `host.name`, or `k8s.container.name`
 - **Attributes** – custom key-value context attached to individual log events, like `user_id`, `endpoint`, or `status_code`
+
+## Filter by severity, trace, or span
+
+The **Logs** group in the filter picker exposes four top-level fields:
+
+| Field | What it filters | Notes |
+|-------|-----------------|-------|
+| `message` | The log body | Full-text search with equals, contains, and regex operators |
+| `severity_level` | Log severity | Dropdown with `trace`, `debug`, `info`, `warn`, `error`, `fatal` |
+| `trace_id` | OpenTelemetry trace ID | Accepts hex (from trace URLs) or base64 |
+| `span_id` | OpenTelemetry span ID | Accepts hex or base64 |
+
+`severity_level`, `trace_id`, and `span_id` only support equals and not-equals operators.
+
+**Correlate with traces** – If you're debugging a distributed request, paste the `trace_id` from a trace URL into the filter to find all logs emitted during that trace. Add a `span_id` filter to narrow to a specific operation.
 
 ## Filter on resource attributes and attributes
 
@@ -16,15 +31,15 @@ Resource attributes identify the source of a log (the service, host, or containe
 
 To filter:
 
-1. Click the filter bar and pick a field. Resource attributes and attributes are grouped separately in the picker.
+1. Click the filter bar and pick a field. Logs, resource attributes, and attributes are grouped separately in the picker.
 2. Choose an operator (equals, contains, is set, greater than, etc.).
 3. Enter a value.
 
 For example, filter `service.name` equals `checkout-api` to scope to one service, then add `status_code` equals `500` to narrow to failed requests.
 
-## Full-text search on Message
+## Full-text search on message
 
-To search log bodies, pick the **Message** field from the filter bar. Message supports three operators, each with a negated variant for exclusion:
+To search log bodies, pick **message** from the Logs group in the filter bar. Message supports three operators, each with a negated variant for exclusion:
 
 | Operator | Behavior |
 |----------|----------|
@@ -41,7 +56,7 @@ To search log bodies, pick the **Message** field from the filter bar. Message su
 
 ## Tips
 
-- **Stack filters to narrow down.** Every filter you add is ANDed together — combine a `service.name` filter with a Message contains to scope full-text search to one service.
+- **Stack filters to narrow down.** Every filter you add is ANDed together — combine a `service.name` filter with a `message` contains to scope full-text search to one service.
 - **Start with contains, then tighten.** Contains is case-insensitive and forgiving. Switch to equals only when you need an exact match, or regex when you want OR-style matching in a single filter.
 - **Use regex for alternatives.** Instead of adding three contains filters, use one regex like `(timeout|refused|reset)`.
 - **Structured logs make filtering more powerful.** Key-value context like `user_id`, `endpoint`, and `status_code` becomes an attribute you can filter on directly. See our [logging best practices](/docs/logs/best-practices) for patterns that make logs easier to query.
