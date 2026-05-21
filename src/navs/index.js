@@ -2835,6 +2835,10 @@ export const docsMenu = {
                                     name: 'Platforms',
                                 },
                                 {
+                                    name: 'Convex',
+                                    url: '/docs/integrations/convex',
+                                },
+                                {
                                     name: 'Lovable',
                                     url: '/docs/integrations/lovable',
                                 },

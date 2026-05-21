@@ -66,6 +66,8 @@
             "destination": "/handbook/marketing/positioning/:path*",
             "statusCode": 301
         },
+        { "source": "/tutorials/convex", "destination": "/docs/integrations/convex", "statusCode": 301 },
+        { "source": "/tutorials/convex-analytics", "destination": "/docs/integrations/convex", "statusCode": 301 },
         { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
         { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
         {
