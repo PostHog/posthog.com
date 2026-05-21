@@ -24,7 +24,7 @@ AI-native sounds lovely, but it's also a buzzword. This post is meant to show yo
 
 ## Is hiring for AI-natives actually any different? 
 
-Standard hiring advice for ops roles is still in the pandemic era. Find people who know what they are doing. Except now, you have to put “comfortable working with AI” in your job descriptions, right? Why else did we all sign off those huge AI budgets, right? If you're good at your job and you use AI to be more productive, great – you're probably 20% faster than the colleague who doesn't.
+Standard hiring advice for ops roles is still in the pandemic era. Find people who know what they are doing. Except now, you have to put “comfortable working with AI” in your job descriptions. Why else did we all sign off those huge AI budgets, right? If you're good at your job and you use AI to be more productive, great – you're probably 20% faster than the colleague who doesn't.
 
 Being AI-native isn't just a layer on top of a job. It's a totally different version of it. The AI-native accountant doesn't do accounting + AI. They produce the same work but 5x faster and with way better controls in place. 
 
