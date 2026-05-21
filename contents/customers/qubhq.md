@@ -1,7 +1,7 @@
 title: How QubHQ flipped the digital menu market with PostHog Endpoints
 customer: QubHQ
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/cloudpeek_0b047d9eab.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/QUBS_8c25737523.png
 date: 2026-03-10
 ---
 
