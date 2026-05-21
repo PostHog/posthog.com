@@ -143,6 +143,16 @@ If your skill needs scripts, reference docs, or assets, include them in the same
 
 The body can reference bundled files by path. Agents pull them with `skill-file-get` only when they actually need them.
 
+### Linking to bundled files
+
+You can deep-link directly to a specific bundled file within a skill by adding a `?file=` query parameter to the skill URL:
+
+```text
+https://app.posthog.com/llm-analytics/skills/hog-release-notes?file=references/changelog.md
+```
+
+When someone visits this URL, the file viewer automatically expands, loads the file content, and scrolls it into view. Combine it with `version` to link to a file in a specific skill version — e.g. `?file=scripts/run.py&version=3`. This is useful for sharing a specific reference document or script with a teammate.
+
 ## Step 2: Use a skill from any agent
 
 Once a skill exists in PostHog, any team member with the MCP server configured can use it.
