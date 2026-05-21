@@ -41,7 +41,7 @@ Keep records/logs where possible, especially for later debugging (e.g. knowing t
 
 ### Design for fallback and safe defaults
 
-For actions that send messages or update user data: ensure that if some data is missing (e.g. user email, user property) the workflow safely skips or uses defaults rather than failing or sending bad messages.
+For actions that send messages or update user data: ensure that if some data is missing (e.g. user email, user property) the workflow safely skips or uses defaults rather than failing or sending bad messages. For message templates, see the [Liquid default value tip](/docs/workflows/library#liquid-and-merge-tags) for the recommended syntax.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/error_handling_28a45d2ecf.png"
