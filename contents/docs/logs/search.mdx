@@ -6,14 +6,7 @@ Filter logs from the filter bar at the top of the [logs page](https://app.postho
 
 There are four kinds of fields you can filter on:
 
-<<<<<<< HEAD
 - **Logs** – top-level log fields like `message`, `severity_level`, `trace_id`, and `span_id`
-||||||| 89b548c6b
-- **Message** – full-text search over the log body
-=======
-- **Logs** – top-level log properties: `severity_level`, `trace_id`, and `span_id`
-- **Message** – full-text search over the log body
->>>>>>> master
 - **Resource attributes** – describe where the log came from, like `service.name`, `host.name`, or `k8s.container.name`
 - **Attributes** – custom key-value context attached to individual log events, like `user_id`, `endpoint`, or `status_code`
 
@@ -44,23 +37,7 @@ To filter:
 
 For example, filter `service.name` equals `checkout-api` to scope to one service, then add `status_code` equals `500` to narrow to failed requests.
 
-<<<<<<< HEAD
 ## Full-text search on message
-||||||| 89b548c6b
-## Full-text search on Message
-=======
-## Filter by severity, trace ID, and span ID
-
-The **Logs** group in the filter picker exposes three top-level fields. All three only support equals and not-equals operators.
-
-- **severity_level** – filter by log severity using a dropdown. Available values: `trace`, `debug`, `info`, `warn`, `error`, `fatal`.
-- **trace_id** – filter logs by their OpenTelemetry trace correlation ID. Accepts hex or base64 format trace IDs
-- **span_id** – filter logs by their OpenTelemetry span ID. Accepts hex or base64, same as `trace_id`.
-
-For example, copy a `trace_id` from a trace URL and paste it into the filter to see every log emitted during that trace.
-
-## Full-text search on Message
->>>>>>> master
 
 To search log bodies, pick **message** from the Logs group in the filter bar. Message supports three operators, each with a negated variant for exclusion:
 
