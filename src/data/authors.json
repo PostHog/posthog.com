@@ -613,5 +613,29 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/abigail-richardson-74404a5a/",
         "profile_id": 31138
+    },
+    {
+        "handle": "matt-brooker",
+        "name": "Matt Brooker",
+        "role": "Product Engineer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/mattjbrooker/",
+        "profile_id": 36478
+    },
+    {
+        "handle": "rafael-audibert",
+        "name": "Rafael Audibert",
+        "role": "Product Engineer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/rbaudibert/",
+        "profile_id": 32207
+    },
+    {
+        "handle": "fernando-gomes",
+        "name": "Fernando Gomes",
+        "role": "Product Engineer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/fercgomes/",
+        "profile_id": 42799
     }
 ]
