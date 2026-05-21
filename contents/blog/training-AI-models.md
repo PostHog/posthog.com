@@ -43,13 +43,17 @@ Most tools are focused on providing you with the best code; we want to focus our
 
 The downside is that this involves using data in PostHog to train models.
 
-Most companies would bury this change in a deceptively boring T&Cs update, but we value transparency, so here's what you need to know:
+Most companies would bury this change in a deceptively boring T&Cs update, but we value transparency, so here's what you need to know: 
 
-- We'll anonymize all data before it's used for training
-- We'll only use data that already exists in your PostHog instance
-- We'll do the training ourselves. We won't sell your data to third-party model providers
-- This is optional. You can opt out at any time via TODO LINK HERE. It takes a few seconds to do so
-- **Important:** Users with a BAA, DPA or MSA enterprise agreement will be opted out by default
+- We are opting out users on our EU cloud instance by default
+- We are also opting out users with a BAA, DPA, or MSA agreement
+- We are opting in all other users on our US cloud instance
+- We will anonymize all data before it's used for training
+- We will only use data that already exists in your PostHog instance
+- We will do the training ourselves
+- We won't sell your data to third-parties model providers
+- You can opt out at any time via TODO LINK HERE (admin required)
+- Users who we have opted out by default can choose to opt in the same way
 
 In terms of comms, we are:
 
