@@ -1,0 +1,260 @@
+---
+title: How to add product analytics, feature flags, and error tracking to a Convex app
+date: 2026-05-21
+author:
+  - matt-brooker
+showTitle: true
+tags:
+  - product analytics
+  - feature flags
+  - error tracking
+---
+
+[Convex](https://www.convex.dev) handles the database, server functions, and real-time sync for your app, which leaves the question of how you instrument the parts you can't see: who is signing up, which features they're using, what's breaking in production, and which experiments are working.
+
+This tutorial walks through wiring [PostHog](/) into a Convex backend using the official [`@posthog/convex`](https://www.npmjs.com/package/@posthog/convex) component. By the end you'll be capturing events from queries, mutations, and actions, identifying users against Convex auth, evaluating feature flags, and forwarding exceptions to PostHog error tracking.
+
+## Prerequisites
+
+- A Convex project. If you don't have one yet, follow the [Convex tutorial](https://docs.convex.dev/tutorial/) to spin one up.
+- A PostHog account ([sign up free](https://app.posthog.com/signup)).
+- Node.js 18+ and `pnpm` (or `npm`/`yarn`).
+
+## 1. Install the component
+
+From the root of your Convex project:
+
+```sh
+pnpm add @posthog/convex
+```
+
+Then register the component in `convex/convex.config.ts`:
+
+```ts
+// convex/convex.config.ts
+import { defineApp } from "convex/server"
+import posthog from "@posthog/convex/convex.config.js"
+
+const app = defineApp()
+app.use(posthog)
+
+export default app
+```
+
+## 2. Set your PostHog credentials
+
+Grab your project API key from PostHog under **Settings → Project → General**, then push it to your Convex deployment as an environment variable:
+
+```sh
+npx convex env set POSTHOG_API_KEY phc_your_project_api_key
+npx convex env set POSTHOG_HOST https://us.i.posthog.com
+```
+
+Use `https://eu.i.posthog.com` if your project lives in PostHog's EU region.
+
+If you want local feature flag evaluation (recommended, covered in step 6), also set a [feature flags secure API key](/docs/feature-flags/local-evaluation#step-1-find-your-feature-flags-secure-api-key):
+
+```sh
+npx convex env set POSTHOG_PERSONAL_API_KEY phs_your_feature_flags_secure_api_key
+```
+
+## 3. Initialize the client
+
+Create `convex/posthog.ts`. This file exports a `posthog` instance that every other backend function will import.
+
+```ts
+// convex/posthog.ts
+import { PostHog } from "@posthog/convex"
+import { components } from "./_generated/api"
+
+export const posthog = new PostHog(components.posthog, {
+    apiKey: process.env.POSTHOG_API_KEY,
+    personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY,
+    host: process.env.POSTHOG_HOST,
+})
+```
+
+The constructor captures these values and forwards them to the component's internal actions automatically, so the rest of your code doesn't need to thread them through.
+
+## 4. Capture an event from a mutation
+
+The `capture` method works in mutations and actions. It schedules the PostHog API call via `ctx.scheduler.runAfter`, so it returns immediately and won't block the mutation.
+
+```ts
+// convex/users.ts
+import { mutation } from "./_generated/server"
+import { v } from "convex/values"
+import { posthog } from "./posthog"
+
+export const createUser = mutation({
+    args: { email: v.string(), name: v.string() },
+    handler: async (ctx, args) => {
+        const userId = await ctx.db.insert("users", {
+            email: args.email,
+            name: args.name,
+        })
+
+        await posthog.capture(ctx, {
+            distinctId: userId,
+            event: "user_signed_up",
+            properties: {
+                email: args.email,
+                name: args.name,
+            },
+        })
+
+        return userId
+    },
+})
+```
+
+Open PostHog's [Activity view](https://app.posthog.com/events) and you should see `user_signed_up` arrive within a few seconds.
+
+## 5. Identify users against Convex auth
+
+If you're using [Convex Auth](https://labs.convex.dev/auth) (or Clerk / Auth0 integrations), pull the authenticated identity off the context and use the user's Convex ID as the PostHog `distinctId`. This keeps server-side events stitched to the same person identity you have on the frontend.
+
+```ts
+// convex/profile.ts
+import { mutation } from "./_generated/server"
+import { v } from "convex/values"
+import { getAuthUserId } from "@convex-dev/auth/server"
+import { posthog } from "./posthog"
+
+export const updateProfile = mutation({
+    args: { plan: v.string() },
+    handler: async (ctx, args) => {
+        const userId = await getAuthUserId(ctx)
+        if (userId === null) throw new Error("Not authenticated")
+
+        await ctx.db.patch(userId, { plan: args.plan })
+
+        await posthog.identify(ctx, {
+            distinctId: userId,
+            properties: { plan: args.plan },
+        })
+
+        await posthog.capture(ctx, {
+            distinctId: userId,
+            event: "plan_changed",
+            properties: { plan: args.plan },
+        })
+    },
+})
+```
+
+On the frontend, call [`posthog.identify()`](/docs/product-analytics/identify) with the **same** Convex user ID right after sign-in. PostHog will merge the anonymous pre-login session with the identified user automatically.
+
+## 6. Set up feature flags
+
+`@posthog/convex` supports two evaluation paths:
+
+- **Local evaluation** runs against flag definitions cached on your Convex deployment. It works in queries, mutations, and actions, with no per-call network round-trip, and queries that read flags will re-run reactively when the cached definitions change.
+- **Remote evaluation** hits PostHog's `/flags` endpoint on every call. Action-only, but it handles every flag (including experience continuity flags and static cohorts that local eval can't reach).
+
+To enable local eval, add a cron that refreshes flag definitions on your preferred interval:
+
+```ts
+// convex/crons.ts
+import { cronJobs } from "convex/server"
+import { internalAction } from "./_generated/server"
+import { internal } from "./_generated/api"
+import { posthog } from "./posthog"
+
+export const refreshPosthogFlags = internalAction({
+    args: {},
+    handler: async (ctx) => {
+        await posthog.refreshFlagDefinitions(ctx)
+    },
+})
+
+const crons = cronJobs()
+crons.interval(
+    "refresh posthog feature flag definitions",
+    { minutes: 1 },
+    internal.crons.refreshPosthogFlags
+)
+
+export default crons
+```
+
+Then evaluate flags from a query:
+
+```ts
+// convex/pricing.ts
+import { query } from "./_generated/server"
+import { v } from "convex/values"
+import { posthog } from "./posthog"
+
+export const getDiscount = query({
+    args: { userId: v.string() },
+    handler: async (ctx, args) => {
+        const variant = await posthog.getFeatureFlag(ctx, {
+            key: "discount-campaign",
+            distinctId: args.userId,
+        })
+
+        if (variant === "variant-a") return { discount: 20 }
+        if (variant === "variant-b") return { discount: 10 }
+        return { discount: 0 }
+    },
+})
+```
+
+Because this is a regular Convex query, the React client that subscribes to it will re-render automatically the moment the flag definition changes on your next cron tick.
+
+If you're running an experiment against a locally-evaluated flag, fire an exposure event yourself from a mutation or action, since local eval can't schedule `capture` from inside a query:
+
+```ts
+await posthog.capture(ctx, {
+    event: "$feature_flag_called",
+    distinctId: userId,
+    properties: {
+        $feature_flag: "discount-campaign",
+        $feature_flag_response: variant,
+        locally_evaluated: true,
+    },
+})
+```
+
+For flags that local eval [can't resolve](https://github.com/PostHog/posthog-js/tree/main/packages/convex#local-evaluation--limitations) (experience continuity, static cohorts, missing person properties), use the remote methods (`evaluateFlag`, `evaluateAllFlags`) from an action instead.
+
+## 7. Capture exceptions
+
+Wrap risky calls and forward errors to [PostHog error tracking](/docs/error-tracking):
+
+```ts
+// convex/billing.ts
+import { action } from "./_generated/server"
+import { v } from "convex/values"
+import { posthog } from "./posthog"
+
+export const chargeCard = action({
+    args: { userId: v.string(), amount: v.number() },
+    handler: async (ctx, args) => {
+        try {
+            await callStripe(args.amount)
+        } catch (error) {
+            await posthog.captureException(ctx, {
+                error,
+                distinctId: args.userId,
+                additionalProperties: { amount: args.amount },
+            })
+            throw error
+        }
+    },
+})
+```
+
+If you want every uncaught exception from your Convex deployment forwarded to PostHog without wrapping each call site, enable Convex's first-party PostHog [exception reporting integration](https://docs.convex.dev/production/integrations/exception-reporting#configuring-posthog-error-tracking) from the Convex dashboard. Use `captureException` here when you want to attach custom properties; use the Convex-side integration for catch-all coverage.
+
+## What to do next
+
+You now have product analytics, feature flags, and error tracking flowing from the Convex side of your stack. A few directions worth exploring:
+
+- **Frontend events.** Install [`posthog-js`](/docs/libraries/js) in your React app and call `posthog.identify()` with the same Convex user ID. PostHog will stitch frontend and backend events into a single person timeline.
+- **LLM analytics for Convex Agent.** If your app uses Convex Agent or any LLM provider, follow the [Convex LLM analytics installation guide](/docs/llm-analytics/installation/convex) to capture generations, costs, and traces.
+- **Pull Convex data into PostHog.** The [Convex data warehouse source](/docs/cdp/sources/convex) syncs your Convex tables to PostHog so you can query them alongside event data using [SQL](/docs/sql).
+- **Session replay.** Add [session replay](/docs/session-replay) on the frontend to see exactly what a user did before an event you captured server-side.
+
+Further reading: the [`@posthog/convex` README](https://github.com/PostHog/posthog-js/tree/main/packages/convex) covers the full API including groups, aliases, all-flag evaluation, and the local-vs-remote tradeoffs in depth.
