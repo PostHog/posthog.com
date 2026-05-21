@@ -91,7 +91,7 @@ Used for marketing headlines and informal settings, generally accompanied by hed
 **Usage rules:**
 
 - Always uppercase. No exceptions.
-- Use use the bold variant. No exceptions.
+- Use the bold variant. No exceptions.
 - Never use Squeak without hedgehog art or a deliberate informal context (event signage, stickers, merchandise, splash screens)
 - Never use Squeak for body text, subtitles, or descriptions.
 
