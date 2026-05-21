@@ -6,7 +6,7 @@ showTitle: true
 
 We don't want to be a place where everything has to funnel through a single person or group, but it's also important we maintain consistency as we grow. We try to make this easy with the `#design-review` channel.
 
-## What needs design team approval
+## What needs designer approval
 
 Not everything needs sign-off. Here's a rough guide:
 
