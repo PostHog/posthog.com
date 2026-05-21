@@ -51,7 +51,7 @@ const enterpriseModeProductNames = {
     'Data pipelines': 'CDP/ETL',
     CDP: 'CDP/ETL',
     'Data warehouse': 'Secure data vault',
-    'LLM analytics': 'Artificial intelligence',
+    'AI Observability': 'Artificial intelligence',
 }
 
 const SlideButton = ({ title, lottieSrc, color, colorDark, label, activeSlide, index, placeholderIcon }) => {
