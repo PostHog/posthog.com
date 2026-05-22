@@ -9,7 +9,7 @@ availability:
 sourceId: Github
 ---
 
-The GitHub connector can link issues, pull requests, commits, stargazers, and releases to PostHog.
+The GitHub connector can link issues, pull requests, commits, stargazers, releases, and workflow runs to PostHog.
 
 To link GitHub:
 
