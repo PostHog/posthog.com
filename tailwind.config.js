@@ -86,7 +86,7 @@ module.exports = {
                     'radial-gradient(ellipse 80% 90% at 30% 20%, rgba(17, 126, 208, 0.6) 0%, transparent 60%), radial-gradient(ellipse 90% 75% at 70% 80%, rgba(255, 20, 147, 0.5) 0%, transparent 55%), radial-gradient(ellipse 70% 85% at 10% 60%, rgba(50, 84, 205, 0.4) 0%, transparent 65%)',
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'bullet-light':
-                    'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8"><path fill="%23D0D1C9" d="M4.23 7.704c-2.034 0-3.636-1.602-3.636-3.6 0-1.98 1.602-3.6 3.636-3.6 1.962 0 3.564 1.62 3.564 3.6 0 1.998-1.602 3.6-3.564 3.6Z"/></svg>\')',
+                    'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8"><path opacity="0.3" fill="currentColor" d="M4.23 7.704c-2.034 0-3.636-1.602-3.636-3.6 0-1.98 1.602-3.6 3.636-3.6 1.962 0 3.564 1.62 3.564 3.6 0 1.998-1.602 3.6-3.564 3.6Z"/></svg>\')',
                 'bullet-dark':
                     'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8"><path fill="%234A4C52" d="M4.23 7.704c-2.034 0-3.636-1.602-3.636-3.6 0-1.98 1.602-3.6 3.636-3.6 1.962 0 3.564 1.62 3.564 3.6 0 1.998-1.602 3.6-3.564 3.6Z"/></svg>\')',
                 'bullet-check-light':
