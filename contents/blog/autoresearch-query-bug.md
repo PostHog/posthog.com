@@ -42,9 +42,9 @@ The stack we used:
 - **[`pi-autoresearch`](https://github.com/davebcn87/pi-autoresearch)**: a community extension by `davebcn87` that wires Karpathy's loop into pi. You give it an objective, a baseline, a benchmark command, and a target metric. It iterates, commits each candidate, runs the benchmark, and keeps a journal so the run survives context resets.
 
 - **A campaign orchestration contract** that we wrote on top of `pi-autoresearch`. The basic loop "try something, measure, keep or discard" is too loose when a single ClickHouse query has hundreds of plausible rewrites. Without a structure, an agent can fiddle with a corner of the query until it gives up; with it, you get something closer to how someone would actually run an investigation. We structured each investigation into four parts:
-	1.  A **campaign** with one slow query and one git branch.
-	2. This is broken into **lanes**, optimization directions tied to a suspected bottleneck: predicate ordering, [JSON parsing](/blog/clickhouse-materialized-columns), timezone handling, primary key usage, and so on. Lanes can be paused when they stop yielding signal, split when they turn out to be two ideas, or merged when wins from different lanes turn out to combine.
-	3. A concrete, testable **hypothesis** inside each lane.
+  1.  A **campaign** with one slow query and one git branch.
+  2. This is broken into **lanes**, optimization directions tied to a suspected bottleneck: predicate ordering, [JSON parsing](/blog/clickhouse-materialized-columns), timezone handling, primary key usage, and so on. Lanes can be paused when they stop yielding signal, split when they turn out to be two ideas, or merged when wins from different lanes turn out to combine.
+  3. A concrete, testable **hypothesis** inside each lane.
 	4. An **experiment** inside each hypothesis with one run, benchmark, and verdict. The agent has to do an explicit reflection pass after every experiment instead of letting the loop just hill-climb. 
 
 - **A throwaway ClickHouse test cluster**: this kept iteration speed high. The same data shape as production, anonymized, on cheaper hardware than production but dedicated to the agent. Running on a developer laptop would have been too slow for a useful inner loop; running on production would have meant fighting noisy neighbors and risking interference with customer queries.
@@ -102,9 +102,13 @@ The bug had been there since the timezone change landed. About three years.
 We were hand-feeding slow queries to the agent during the offsite. That doesn't scale. The pipeline we're now building is closer to what you'd actually want:
 
 1. **Fetch slow queries from `system.query_log`.** The orchestrator that does this lives at [`products/query_performance_ai/orchestrator/slow_queries.py`](https://github.com/PostHog/posthog/blob/master/products/query_performance_ai/orchestrator/slow_queries.py).
+
 2. **Spin up a sandbox per candidate query**, the same sandboxes we use to run [PostHog Code](/code), our coding agent and product editor (currently in beta).
+
 3. **Run `pi-autoresearch` in each sandbox**, each with its own benchmark target and budget.
+
 4. **Have an LLM dedup the suggestions and spawn a PostHog Code session for each surviving idea.** Different sandboxes often land on the same idea, so the LLM collapses those before dispatching. PostHog Code writes the actual change against the real codebase, with tests and benchmarks.
+
 5. **Post the resulting PRs into our team Slack channel** so a human reviews and merges.
 
 If this works, "some queries in our codebase don't use the primary key correctly" becomes a thing the system finds overnight while we're all asleep, not a thing that takes three years and a team offsite to uncover. We'll write up the second-order results once they're real.
