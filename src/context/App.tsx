@@ -335,6 +335,7 @@ export interface AppSetting {
     modal?: {
         type: 'standard' | 'side' | 'floating'
     }
+    toolbar?: boolean
     mesh?: 'green' | 'red' | 'yellow' | 'blue' | 'purple'
 }
 
@@ -837,6 +838,7 @@ const appSettings: AppSettings = {
         },
     },
     '/demo': {
+        toolbar: true,
         size: {
             min: {
                 width: 960,

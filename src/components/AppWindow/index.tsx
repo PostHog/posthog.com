@@ -227,6 +227,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const posthog = usePostHog()
     const [view, setView] = useState<'marketing' | 'developer'>('marketing')
     const [hasDeveloperMode, setHasDeveloperMode] = useState(false)
+    const hasToolbar = item.appSettings?.toolbar
     const inView = useMemo(() => {
         const windowsAbove = windows.filter(
             (window) => window !== item && window.zIndex > item.zIndex && !window.minimized
@@ -787,9 +788,12 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 onAnimationComplete={onAnimationComplete}
                             >
                                 {!item.minimal && !compact && siteSettings.experience !== 'boring' && (
-                                    <>
+                                    <div className={`${hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''}`}>
+                                        {hasToolbar && <div className="flex-1" />}
                                         <div
-                                            className="group absolute top-2 left-1/2 -translate-x-1/2 cursor-move touch-none z-50"
+                                            className={`group cursor-move touch-none z-50 ${
+                                                hasToolbar ? '' : 'absolute top-2 left-1/2 -translate-x-1/2'
+                                            }`}
                                             onPointerDown={(e) => controls.start(e)}
                                             onDoubleClick={toggleMaximize}
                                         >
@@ -798,7 +802,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         <div
                                             data-scheme="tertiary"
                                             onDoubleClick={handleDoubleClick}
-                                            className="absolute z-20 right-1 top-1 inline-flex gap-1 items-center py-0.5 pl-1.5 pr-0.5 skin-classic:bg-primary opacity-40 hover:opacity-75 transition-opacity duration-100"
+                                            className={`inline-flex gap-1 items-center py-0.5 pl-1.5 pr-0.5 skin-classic:bg-primary opacity-40 hover:opacity-75 transition-opacity duration-100 ${
+                                                hasToolbar ? 'flex-1 justify-end' : 'absolute z-20 right-1 top-1'
+                                            }`}
                                         >
                                             <div className="flex justify-end">
                                                 {siteSettings.experience !== 'boring' && (
@@ -950,13 +956,13 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                                 </Tooltip>
                                             </div>
                                         </div>
-                                    </>
+                                    </div>
                                 )}
                                 <div
                                     ref={contentRef}
                                     className={`size-full flex-grow ${
                                         chrome
-                                            ? `overflow-hidden border border-white/50 dark:border-white/10 rounded-lg ${
+                                            ? `overflow-hidden rounded-lg ${hasToolbar ? 'rounded-t-none' : ''} ${
                                                   item.expanded
                                                       ? 'rounded-tr-none rounded-tl-none'
                                                       : item.snapped === 'left'
