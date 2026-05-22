@@ -36,7 +36,14 @@ Typical agenda:
 
 We want to try to encourage small teams to get together once each year. These are more focused on work and on creating strong bonds within teams. Ideally they are spaced appropriately through the year in relation to the all-company offsite.
 
-With very few exceptions, team offsites should happen at [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco or the [Hedge House](#hedge-house) in London. Both are designed for it, remove most of the planning friction, and you'll always overlap with other PostHog teams — which is way more fun, and means you'll meet more people.
+We want team offsites to be social events and encourage you to optimize offsites for meeting as many colleagues as is reasonably possible, even if it means spending more money or travelling further. [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco or the [Hedge House](#hedge-house) in London should be the default choice, because:
+
+- They're places where there are already a lot of PostHog people that you can hang out with. The more we have random cross-polination, the more ambitious ideas we'll come up with
+- If most teams do their offsites there, you're much more likely to run into even more people
+- We've put a lot of money and effort into making Hogpatch and Hedge House beautiful spaces that you want to work from
+- SF has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from
+
+You can still grab an AirBnB in any of these places to have more team time if you prefer, over a hotel.
 
 Planning a small team offsite? Kendal’s got you covered.
 Here’s how it works:
