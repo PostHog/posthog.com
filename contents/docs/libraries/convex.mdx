@@ -3,6 +3,8 @@ title: Convex
 platformLogo: convex
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 [Convex](https://www.convex.dev) handles the database, server functions, and real-time sync for your app. PostHog covers what the database doesn't: signups, feature usage, exceptions, AI spend.
 
 This page is the single landing point for using PostHog with Convex. Pick the surfaces you need from the table below. Most teams use three or four together.
@@ -48,9 +50,25 @@ The [`@posthog/convex`](https://www.npmjs.com/package/@posthog/convex) component
 
 ### 1. Install the component
 
-```sh
+<MultiLanguage>
+
+```bash file=npm
+npm install @posthog/convex
+```
+
+```bash file=Yarn
+yarn add @posthog/convex
+```
+
+```bash file=pnpm
 pnpm add @posthog/convex
 ```
+
+```bash file=Bun
+bun add @posthog/convex
+```
+
+</MultiLanguage>
 
 Then register it in `convex/convex.config.ts`:
 
@@ -131,10 +149,10 @@ Use the same Convex user ID as the `distinctId` everywhere. PostHog stitches eve
 
 ### 5. Evaluate feature flags
 
-`@posthog/convex` supports two flag evaluation paths. Pick the one that fits the flag:
+`@posthog/convex` supports two flag evaluation paths. **Default to local evaluation.** It's faster (no network round-trip), works in queries (so reading a flag re-runs your query reactively when the flag changes), and works in mutations and actions too. Only reach for remote evaluation when local can't handle the flag (experience continuity flags, static cohorts, flags whose targeting depends on person properties you don't pass in).
 
-- **Local** (`getFeatureFlag`, `isFeatureEnabled`) runs against flag definitions cached on your Convex deployment. Works in queries, mutations, and actions, with no per-call network round-trip. Queries that read a flag re-run reactively when the cached definitions refresh.
-- **Remote** (`evaluateFlag`, `evaluateAllFlags`) hits PostHog's `/flags` endpoint on every call. Action-only, handles every flag (including experience continuity flags and static cohorts that local eval can't reach).
+- **Local** (`getFeatureFlag`, `isFeatureEnabled`) runs against flag definitions cached on your Convex deployment. Works in queries, mutations, and actions. No per-call network round-trip. Queries re-run reactively when cached definitions refresh.
+- **Remote** (`evaluateFlag`, `evaluateAllFlags`) hits PostHog's `/flags` endpoint on every call. Action-only. Handles every flag, including the ones local can't.
 
 To enable local eval, add a cron that refreshes flag definitions on whatever interval suits you:
 
@@ -201,11 +219,15 @@ await posthog.capture(ctx, {
 })
 ```
 
-For flags that local eval [can't resolve](https://github.com/PostHog/posthog-js/tree/main/packages/convex#local-evaluation--limitations) (experience continuity, static cohorts, missing person properties), use `evaluateFlag` from an action instead.
+<CalloutBox icon="IconInfo" title="When local eval returns null" type="fyi">
+
+A handful of flag types can't be resolved locally (experience continuity flags, static cohorts, flags whose targeting depends on person properties you don't pass in). For those, `getFeatureFlag` returns `null`. Call `evaluateFlag` from an action to hit `/flags` directly. See the [full list of limitations](https://github.com/PostHog/posthog-js/tree/main/packages/convex#local-evaluation--limitations).
+
+</CalloutBox>
 
 ### 6. Capture exceptions with custom properties
 
-If you want every uncaught exception forwarded to PostHog automatically without wrapping each call site, configure Convex's [first-party PostHog Error Tracking destination](https://docs.convex.dev/production/integrations/exception-reporting) in the Convex dashboard. Use `captureException` here when you want to attach custom properties at a specific call site:
+If you want every uncaught exception forwarded to PostHog automatically without wrapping each call site, configure Convex's [first-party PostHog Error Tracking destination](https://docs.convex.dev/production/integrations/exception-reporting) in the Convex dashboard. Use `captureException` when you want to attach custom properties at a specific call site:
 
 ```ts
 // convex/billing.ts
@@ -236,11 +258,27 @@ Use the dashboard destination for catch-all coverage. Use `captureException` her
 
 Convex apps almost always have a frontend talking to a Convex backend. PostHog stitches both sides onto the same person timeline when you use the same `distinctId` string on both.
 
-Install [`posthog-js`](/docs/libraries/js) and [`@posthog/react`](/docs/libraries/react) in your frontend (the React pattern is shown below, but the [JavaScript SDK](/docs/libraries/js) works the same way for any framework):
+Install [`posthog-js`](/docs/libraries/js) and [`@posthog/react`](/docs/libraries/react) in your frontend. The example below is React, but the same identity-stitching technique works with any [JavaScript framework](/docs/libraries) PostHog supports. The only requirement is that you call `posthog.identify()` with the same string the backend uses as `distinctId`.
 
-```sh
+<MultiLanguage>
+
+```bash file=npm
+npm install posthog-js @posthog/react
+```
+
+```bash file=Yarn
+yarn add posthog-js @posthog/react
+```
+
+```bash file=pnpm
 pnpm add posthog-js @posthog/react
 ```
+
+```bash file=Bun
+bun add posthog-js @posthog/react
+```
+
+</MultiLanguage>
 
 Initialize PostHog at the root of your app, the same way you would in any React project:
 
@@ -304,4 +342,3 @@ If you want to query Convex data alongside event data, use the [Convex data ware
 
 Requires a [Convex Professional plan](https://www.convex.dev/pricing). Convex's streaming export API is gated there.
 
-If you hit anything that should be on this page and isn't, [file an issue](https://github.com/PostHog/posthog.com/issues/new).
