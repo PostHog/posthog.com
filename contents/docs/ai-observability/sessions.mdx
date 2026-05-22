@@ -33,6 +33,20 @@ Sessions are useful when you want to:
 
 Set the `$ai_session_id` property when capturing LLM events using the `posthogProperties` (JavaScript) or `posthog_properties` (Python) parameter in PostHog's AI Observability SDKs. Use any identifier that makes sense for grouping related traces in your application.
 
+## Viewing session details
+
+Click any session to open its detail page. The page displays the conversation – all messages exchanged between users and the LLM across the session's traces.
+
+Each conversation turn shows:
+
+- **Input** – The user's message or prompt
+- **Output** – The model's response
+- **Turn metadata** – Latency, cost, timestamp, and error status
+
+Messages that repeat across multiple traces (common when later traces include conversation history) are automatically deduplicated, so you see each message once in chronological order.
+
+To inspect the underlying trace events for a turn, click **Show reasoning**. This reveals all generations, spans, and tool calls that produced that response.
+
 ## Analyzing sessions
 
 Once you've set session IDs on your events, you can analyze them in several ways:
