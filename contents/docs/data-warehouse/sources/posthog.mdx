@@ -161,6 +161,28 @@ The `query_log` table is the only table with data on you and your team's interna
 
 PostHog also provides access to system tables that contain metadata about your PostHog project. These tables are accessed using the `system.` prefix in your queries, like `SELECT * FROM system.actions`.
 
+### `system.accounts`
+
+The `system.accounts` table contains account data from [Customer Analytics](/docs/customer-analytics). Accounts represent organizations or entities using your product, with optional external ID mappings to third-party systems like Stripe, HubSpot, and Salesforce.
+
+| Column               | Description                                                      |
+| -------------------- | ---------------------------------------------------------------- |
+| `id`                 | Unique identifier for the account (UUID)                         |
+| `team_id`            | Team ID the account belongs to                                   |
+| `external_id`        | External identifier for the account                              |
+| `name`               | Name of the account                                              |
+| `properties`         | JSON containing all properties associated with the account       |
+| `stripe_customer_id` | Stripe customer ID (extracted from properties)                   |
+| `hubspot_deal_id`    | HubSpot deal ID (extracted from properties)                      |
+| `billing_id`         | Billing system ID (extracted from properties)                    |
+| `sfdc_id`            | Salesforce ID (extracted from properties)                        |
+| `zendesk_id`         | Zendesk ID (extracted from properties)                           |
+| `created_by_id`      | User ID of the account creator                                   |
+| `created_at`         | When the account was created                                     |
+| `updated_at`         | When the account was last updated                                |
+
+> **Note:** The external ID columns (`stripe_customer_id`, `hubspot_deal_id`, `billing_id`, `sfdc_id`, `zendesk_id`) are extracted from the `properties` JSON field for convenience. You can also access these and other properties directly from `properties`.
+
 ### `system.actions`
 
 The `system.actions` table contains action definitions created in your project.
