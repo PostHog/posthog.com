@@ -47,11 +47,11 @@ The stack we used:
   3. A concrete, testable **hypothesis** inside each lane.
   4. An **experiment** inside each hypothesis with one run, benchmark, and verdict. The agent has to do an explicit reflection pass after every experiment instead of letting the loop just hill-climb. 
 
-- **A throwaway ClickHouse test cluster**: this kept iteration speed high. The same data shape as production, anonymized, on cheaper hardware than production but dedicated to the agent. Running on a developer laptop would have been too slow for a useful inner loop; running on production would have meant fighting noisy neighbors and risking interference with customer queries.
+- **A throwaway ClickHouse test cluster**: this kept iteration speed high and benchmark numbers predictable. The same data shape as production but anonymized and running on cheaper hardware dedicated to the agent. Running on a developer laptop would have been too slow for a useful inner loop; running on production would have meant fighting noisy neighbors and risking interference with customer queries.
 
-The dedicated cluster gives us predictable benchmark numbers without competing with customer workloads. Range-narrowing handles the other half: when a target query times out, the agent halves the range (30 days, 14, 7, 3, 1) until it completes in one to ten seconds, then optimizes against that narrowed version. That window is short enough for fast iteration but long enough that index and partition effects still matter. The current best candidate is periodically retested at the full range; once it completes there, the campaign "graduates" back and continues from the original query.
+Range-narrowing also helped. When a target query times out, the agent halves the range (30 days, 14, 7, 3, 1) until it completes in one to ten seconds, then optimizes against that narrowed version. That window is short enough for fast iteration but long enough that index and partition effects still matter. The current best candidate is periodically retested at the full range; once it completes there, the campaign "graduates" back and continues from the original query.
 
-During the hackathon, we hand-fed it slow queries that we'd grumbled about in the past and ones we found by hand in `system.query_log`. That's the part we're now automating.
+During the hackathon, we hand-fed it slow queries that we'd grumbled about in the past and ones we found by hand in `system.query_log` (we're now automating this now).
 
 ## Discovering our silently broken primary key
 
