@@ -37,6 +37,130 @@ This test can detect and diagnose configuration issues, like invalid credentials
 
 Support for new destinations will be added based on demand. Message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue) or create an [issue in GitHub](https://github.com/PostHog/posthog/issues/new?template=feature_request.yml) to voice your interest in new destinations.
 
+## On-demand file downloads
+
+In addition to scheduled batch exports to destinations, PostHog offers an API for triggering exports on demand and downloading the resulting files directly. This is useful when you need programmatic access to your data without setting up an external destination.
+
+### Key differences from scheduled exports
+
+- **On-demand:** No schedule required. You trigger each export when you need it.
+- **Direct download:** Files are downloaded directly via pre-signed URLs instead of being sent to an external destination.
+- **1-week maximum range:** Each request can cover at most 1 week of data.
+- **Download URLs expire after 1 hour.**
+
+### Supported models and file formats
+
+On-demand file downloads support the same data models as scheduled exports: **events**, **persons**, and **sessions**.
+
+File format options:
+
+| Option        | Values                                    | Default                |
+| ------------- | ----------------------------------------- | ---------------------- |
+| Format        | `Parquet`, `JSONLines`                    | `Parquet`              |
+| Compression   | `zstd`, `gzip`, `brotli`, `lz4`, `snappy` | None                   |
+| Max file size | Any positive integer (MB)                 | No limit (single file) |
+
+Setting `max_size_mb` splits the export into multiple files of at most that size.
+
+### API endpoints
+
+All endpoints are under `/api/environments/{team_id}/file_download_batch_exports/` and require a [personal API key](/docs/api/overview#authentication) for authentication.
+
+#### 1. Create an export
+
+```bash
+POST /api/environments/{team_id}/file_download_batch_exports/
+```
+
+Request body:
+
+```json
+{
+  "model": "events",
+  "file": {
+    "format": "Parquet",
+    "compression": "gzip",
+    "max_size_mb": 100
+  },
+  "data_interval_start": "2025-01-01T00:00:00Z",
+  "data_interval_end": "2025-01-07T00:00:00Z",
+  "include": ["$pageview", "$autocapture"],
+  "exclude": ["$feature_flag_called"]
+}
+```
+
+The `include` and `exclude` fields are only available when `model` is `"events"`. They filter which event types are included in the export.
+
+Returns `202 Accepted` with a run ID:
+
+```json
+{
+  "id": "01961a2c-0001-0000-0000-000000000000"
+}
+```
+
+#### 2. Check export status
+
+```bash
+GET /api/environments/{team_id}/file_download_batch_exports/{run_id}/
+```
+
+The response shape depends on the run status:
+
+- **Starting / Running / Cancelled:**
+
+  ```json
+  { "status": "Running" }
+  ```
+
+- **Completed:**
+
+  ```json
+  {
+    "status": "Completed",
+    "files": ["01961a2c-0002-0000-0000-000000000000", "01961a2c-0003-0000-0000-000000000000"]
+  }
+  ```
+
+- **Failed / FailedRetryable / TimedOut / Terminated:**
+  ```json
+  { "status": "Failed", "error": "Error message" }
+  ```
+
+#### 3. Download files
+
+```bash
+GET /api/environments/{team_id}/file_download_batch_exports/{run_id}/download/{file_id}/
+```
+
+This redirects to a pre-signed S3 URL where you can download the file. The `file_id` comes from the `files` array in the completed status response. You can also pass an integer index (e.g., `0`, `1`) instead of the file UUID, or omit it entirely to download the first file.
+
+### Example workflow
+
+```bash
+# 1. Create an export of events from the last week
+curl -X POST 'https://app.posthog.com/api/environments/{team_id}/file_download_batch_exports/' \
+    -H 'Authorization: Bearer {personal_api_key}' \
+    -H 'Content-Type: application/json' \
+    -d '{
+        "model": "events",
+        "file": { "format": "Parquet" },
+        "data_interval_start": "2025-01-01T00:00:00Z",
+        "data_interval_end": "2025-01-07T00:00:00Z"
+    }'
+# Returns: {"id": "<run_id>"}
+
+# 2. Poll for completion
+curl 'https://app.posthog.com/api/environments/{team_id}/file_download_batch_exports/{run_id}/' \
+    -H 'Authorization: Bearer {personal_api_key}'
+# Returns: {"status": "Completed", "files": ["<file_id>"]}
+
+# 3. Download the file (follows redirect)
+curl -L 'https://app.posthog.com/api/environments/{team_id}/file_download_batch_exports/{run_id}/download/{file_id}/' \
+    -H 'Authorization: Bearer {personal_api_key}' \
+    -o export.parquet
+```
+
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 import PersonsModelNote from "../_snippets/persons-model-note.mdx";
 
