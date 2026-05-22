@@ -19,7 +19,7 @@ tags:
 
 A few weeks ago at a team offsite in Lisbon, we pointed an AI agent at our query engine, fed it slow queries from production, and let it run overnight.
 
-By the next morning it had found something embarrassing: for almost three years, every query with a timestamp filter had not been using ClickHouse's primary key correctly. [The fix](https://github.com/PostHog/posthog/pull/54819) cut the number of granules ClickHouse had to scan by 62% on the benchmark query, and made the query itself meaningfully faster. More on the numbers below.
+By the next morning it had found something embarrassing: for almost three years, every query with a timestamp filter had not been using ClickHouse's primary key correctly. [The fix](https://github.com/PostHog/posthog/pull/54819) cut the number of granules ClickHouse had to scan by 62% on the benchmark query, and made the query itself meaningfully faster. 
 
 This post is about the setup we used, the bug itself, and what we're building now so this kind of analysis happens automatically.
 
@@ -29,9 +29,9 @@ The general idea isn't ours. Andrej Karpathy [packaged it up](https://github.com
 
 Karpathy ran it for two days against a depth-12 nanochat training run and found [about 20 changes that improved validation loss](https://x.com/karpathy/status/2031135152349524125), some of which transferred to a bigger model. The shape isn't new (DeepMind's [FunSearch](https://www.nature.com/articles/s41586-023-06924-6) (2023) and [Sakana's AI Scientist](https://sakana.ai/ai-scientist/) (2024) are earlier examples), but Karpathy's repo is small and concrete enough to inspire you to build your own version in an afternoon.
 
-The interesting part for us is the second-order effect: the agent doesn't carry the bias that comes from living in a codebase. To us, the `toTimeZone()` wrap had just always been there. The kind of code you stop seeing. The agent has no priors. It runs every diagnostic, reads the surrounding ClickHouse and PostHog source for context, and treats a three-year-old expression with the same suspicion as the line you wrote yesterday. A long tail of "that code's just how it is" turns into things you actually look into.
+The interesting part for us is the second-order effect: the agent doesn't carry the bias that comes from living in a codebase. To us, the `toTimeZone()` wrap had just always been there. The kind of code you stop seeing. The agent has no priors. It runs every diagnostic, reads the surrounding ClickHouse and PostHog source for context, and treats a three-year-old expression with the same suspicion as the line you wrote yesterday.
 
-## The hackathon
+## Setting up autoresearch for ClickHouse in a hackathon
 
 Every year, we run [hackathons](/newsletter/hackathons) at company offsites. A lot of what's now PostHog ([session replay](/session-replay), the [data warehouse](/data-warehouse), [logs](/logs), and more) started this way. At a smaller joint team offsite for the [Analytics Platform](/teams/analytics-platform) and [Query Performance](/teams/query-performance) teams in Lisbon, our hackathon project was to do Karpathy's thing, but for ClickHouse query performance.
 
@@ -39,21 +39,23 @@ The stack we used:
 
 - **[pi](https://pi.dev/)**: a small terminal coding agent built by [Mario Zechner](https://github.com/badlogic). It speaks to whatever LLM you point it at, exposes a small SDK, and is small enough that you can read the entire codebase.
 
-- **[pi-autoresearch](https://github.com/davebcn87/pi-autoresearch)**: a community extension by `davebcn87` that wires Karpathy's loop into pi. You give it an objective, a baseline, a benchmark command, and a target metric. It iterates, commits each candidate, runs the benchmark, and keeps a journal so the run survives context resets.
+- **[`pi-autoresearch`](https://github.com/davebcn87/pi-autoresearch)**: a community extension by `davebcn87` that wires Karpathy's loop into pi. You give it an objective, a baseline, a benchmark command, and a target metric. It iterates, commits each candidate, runs the benchmark, and keeps a journal so the run survives context resets.
 
-- **A campaign orchestration contract** that we wrote on top of pi-autoresearch. The basic loop "try something, measure, keep or discard" is too loose when a single ClickHouse query has hundreds of plausible rewrites. We structured each investigation into a **campaign** (one slow query, one git branch), broken into **lanes** (one optimization direction tied to a suspected bottleneck: predicate ordering, JSON parsing, timezone handling, primary key usage, and so on), with **hypotheses** inside each lane (concrete testable ideas) and **experiments** inside each hypothesis (one run, one benchmark, one verdict). Lanes can be paused when they stop yielding signal, split when they turn out to be two ideas, or merged when wins from different lanes turn out to combine. The agent also has to do an explicit reflection pass after every experiment instead of letting the loop just hill-climb. Without the structure, you get an agent that fiddles with one corner of the query until it gives up; with it, you get something closer to how a careful human would actually run an investigation.
+- **A campaign orchestration contract** that we wrote on top of `pi-autoresearch`. The basic loop "try something, measure, keep or discard" is too loose when a single ClickHouse query has hundreds of plausible rewrites. Without a structure, an agent can fiddle with a corner of the query until it gives up; with it, you get something closer to how someone would actually run an investigation. We structured each investigation into four parts:
+	1.  A **campaign** with one slow query and one git branch.
+	2. This is broken into **lanes**, optimization directions tied to a suspected bottleneck: predicate ordering, [JSON parsing](/blog/clickhouse-materialized-columns), timezone handling, primary key usage, and so on. Lanes can be paused when they stop yielding signal, split when they turn out to be two ideas, or merged when wins from different lanes turn out to combine.
+	3. A concrete, testable **hypothesis** inside each lane.
+	4. An **experiment** inside each hypothesis with one run, benchmark, and verdict. The agent has to do an explicit reflection pass after every experiment instead of letting the loop just hill-climb. 
 
-- **A throwaway ClickHouse test cluster**: same data shape as production, anonymized, on cheaper hardware than production but dedicated to the agent. Running on a developer laptop would have been too slow for a useful inner loop; running on production would have meant fighting noisy neighbors and risking interference with customer queries.
-
-Iteration speed mattered. Karpathy could iterate on nanochat on a single GPU because the inner loop was minutes. Our inner loop is a ClickHouse query against tens of billions of rows; if a single benchmark takes a few minutes, an agent that tries 50 things has burned most of the day before you see a result.
+- **A throwaway ClickHouse test cluster**: this kept iteration speed high. The same data shape as production, anonymized, on cheaper hardware than production but dedicated to the agent. Running on a developer laptop would have been too slow for a useful inner loop; running on production would have meant fighting noisy neighbors and risking interference with customer queries.
 
 The dedicated cluster gives us predictable benchmark numbers without competing with customer workloads. Range-narrowing handles the other half: when a target query times out, the agent halves the range (30 days, 14, 7, 3, 1) until it completes in one to ten seconds, then optimizes against that narrowed version. That window is short enough for fast iteration but long enough that index and partition effects still matter. The current best candidate is periodically retested at the full range; once it completes there, the campaign "graduates" back and continues from the original query.
 
-During the hackathon we hand-fed it slow queries that we'd grumbled about in the past and ones we found by hand in `system.query_log`. That's the part we're now automating. More on that below.
+During the hackathon, we hand-fed it slow queries that we'd grumbled about in the past and ones we found by hand in `system.query_log`. That's the part we're now automating.
 
-## The bug: how we silently broke our own primary key
+## Discovering our silently broken primary key
 
-ClickHouse is fast because it can skip work. The events table is `PARTITION BY toYYYYMM(timestamp)` and the primary key is `(team_id, toDate(timestamp), event, …)`. A well-formed query with a timestamp bound should make ClickHouse drop entire months of data and then jump straight to the right week within the months it does have to look at.
+ClickHouse is fast because it can skip work. Our `events` table is `PARTITION BY toYYYYMM(timestamp)` and the primary key is `(team_id, toDate(timestamp), event, …)`. A well-formed query with a timestamp bound should make ClickHouse drop entire months of data and then jump straight to the right week within the months it does have to look at.
 
 That's not what was happening.
 
