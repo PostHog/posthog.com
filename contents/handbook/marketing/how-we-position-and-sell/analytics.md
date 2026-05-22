@@ -97,7 +97,7 @@ Analytics is the memory of everything users have done. Self-driving development 
 
 **Follow-up:** Which features specifically? Let's check what you actually use.
 
-**Answer:** Some Amplitude-specific features are more mature — particularly advanced funnel modeling and data science integrations. But PostHog ships quickly and we can rapidly improve our open source product. We also offer a wide range of features beyond analytics, including replay, flags, error-tracking, and more - each of which can be queried with analytics. The total cost comparison almost always favors PostHog.
+**Answer:** Some Amplitude-specific features are more mature — particularly advanced funnel modeling and data science integrations. But PostHog ships quickly and we can rapidly improve our open source product. We also offer a wide range of features beyond analytics, including replay, flags, error-tracking, and more - each of which can be queried with analytics. The total cost comparison almost always favors PostHog, and while Amplitude may have a handful of extra features it's unlikely they'll be ones you need. 
 
 ### "We need SQL access"
 
