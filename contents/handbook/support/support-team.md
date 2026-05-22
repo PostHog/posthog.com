@@ -7,7 +7,6 @@ showTitle: true
 import WhatMakesUsGreat from './_snippets/what-makes-us-great.mdx'
 import SupportValues from './_snippets/support-values.mdx'
 import WhatWeDo from './_snippets/what-we-do.mdx'
-import WhatWeDontDo from './_snippets/what-we-dont-do.mdx'
 import OurLongTermVision from './_snippets/our-long-term-vision.mdx'
 
 The <SmallTeam slug="support">support team</SmallTeam> exists to help our users succeed with PostHog, and we do that differently than most support teams.
@@ -19,7 +18,5 @@ We're not a ticket-routing operation. We genuinely care about making our users' 
 <SupportValues />
 
 <WhatWeDo />
-
-<WhatWeDontDo />
 
 <OurLongTermVision />
