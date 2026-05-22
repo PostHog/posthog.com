@@ -8,50 +8,51 @@ Welcome to the PostHog Customer Success team! We only hire about 1 in 400 applic
 
 Onboarding here is mostly self-serve - we won't sit you in a room for training for two weeks, and unlike a lot of companies, we'd prefer you get up and running with your book of customers quickly. If you're not sure who's supposed to make something below happen, the person responsible is almost certainly you.
 
-What follows is a rough plan for your first month - use it as a guide, not a contract. The handbook itself is a work in progress, so you'll find gaps as you ramp, things you needed to know that weren't written down. That's normal, and when you find a gap your job is to fill it in so the next person has it easier.
+Below is a rough plan for your first month - use it as a guide, not a contract. The handbook itself is a work in progress, so you'll find gaps as you ramp up, things you needed to know that weren't written down. That's normal, and when you find a gap your job is to fill it in so the next person has it easier.
 
-## Week 1 – systems, demo, immersion
+## Week 1 – how we talk about PostHog
 
-Week 1 is about getting set up and immersed in how we work with customers. Don't worry about being productive yet.
+This week is about getting set up and learning how we talk about PostHog. You'll feel extremely unproductive, and that's fine - the aim is to set yourself up for in-person onboarding in Week 2. Read everything you can, work through the product fundamentals, and come to Week 2 with questions we can work through together.
 
 **Focus on:**
 
 - Setting up the day-to-day tools you'll be using - Vitally, Gong, Slack, Metabase. See [sales and CS tools](/handbook/growth/sales/sales-and-cs-tools).
+- Reading the [CS](/handbook/cs-and-onboarding/) and [sales](/handbook/growth/sales/) sections of the handbook.
 - Preparing your PostHog demo.
 - Picking a recent customer call on BuildBetter to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how PostHog CSMs talk to customers.
-- Nailing the product fundamentals - work through the [curriculum](#posthog-curriculum) further down this page and [getting started with customers](/handbook/cs-and-onboarding/getting-started-with-customers).
+- Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide and work through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise).
 
-**How to think about each product.** As you go through the fundamentals, here's a framework for what you're trying to understand about each one:
+**How to think about each product.** As you go through the fundamentals, for each product you're trying to be able to answer:
 
 - The value add - why a customer would care
-- How it's implemented
-- Implementation quirks worth knowing
+- How it's implemented and implementation quirks worth knowing
 - Signs of poor implementation
 - How it works alongside other PostHog products
-- How to actually get value out of it
+- How to get value out of it
 - What you can do with the MCP
 
-This framework gets more depth in *[structuring product learning when published]*.
+## Week 2 – in-person onboarding, your customers
 
-## Week 2 – in-person onboarding, your accounts
-
-In-person onboarding typically happens this week (3-4 days with the team), where you'll work through systems together and dig into the accounts you'll be receiving.
+In-person onboarding typically happens this week (3-4 days led by your team lead). You'll get your book of customers, work through how to prioritise it, start digging in, and see how all the systems we use come together.
 
 **Focus on:**
 
-- In-person sessions: demo practice, hands-on Vitally and PostHog data, no-stupid-questions.
-- Walking through your book of business with Dana.
-- Getting comfortable in Vitally with people who can answer questions in real time.
-- First exposure to signals - what Vitally tags and alerts are, how the team uses them. You won't be confidently responding to them yet, but that comes over the rest of the month.
+- Walking through your book of business with Dana - prioritisation, where to start, who to reach out to first.
+- Digging into individual customers - what they're using, where they are in the lifecycle, any open issues, recent conversations.
+- Demo practice and feedback.
+- Seeing how the systems we use (Vitally, PostHog data, Pylon, Zendesk) come together day-to-day.
+- A no-stupid-questions session - bring everything you've been wondering about from Week 1.
+- First look at signals - what Vitally tags and alerts are, how the team uses them. You won't be confidently responding to them yet, but that comes over the rest of the month.
 
-## Weeks 3–4 – reach out to your book, learn by doing
+## Weeks 3–4 – start working with your customers
 
-This is when you start actively working with your accounts. The aim is to make first contact across your whole book, and to use each conversation to deepen your product knowledge and sharpen your demo.
+This is when you start working with your customers. Reach out, take the first calls, pick up the questions that come in, and start figuring out what each customer needs from you. You'll learn more about the product as you go, but the main thing in these weeks is starting to be helpful to your customers.
 
 **Focus on:**
 
-- Reaching out to every account in your book to establish contact. For accounts coming from existing owners, schedule a handover.
-- Using every customer touchpoint as fuel for product learning - what are they doing, what isn't working, what should they be doing differently?
+- Reaching out to customers in your book to establish contact, scheduling handovers for any coming from existing owners. [Getting started with customers](/handbook/cs-and-onboarding/getting-started-with-customers) covers the playbook for early outreach and intro calls.
+- Picking up customer questions and tickets as they come in - this is where the bulk of customer work happens. See [handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues) for how tickets flow.
+- Evaluating implementations as you go - is the customer set up well, are they getting value? The [foundation check](/handbook/cs-and-onboarding/foundation-check) and [health check](/handbook/cs-and-onboarding/health-checks) are the structured ways to do this.
 - Refining your demo with each conversation.
 - Starting to respond to Vitally signals on your book - what triggers your attention, what's the right next move? You'll feel confused at first, and that's fine, the goal is to start building a feel for it. *[link: responding-to-signals.md when written]*
 
@@ -68,30 +69,44 @@ This is the bar for end of month 1.
 - Who knows you're there
 - Where the expansion opportunities sit
 
-**You've nailed the fundamentals:**
+**You're up and running with customers:**
 
-- How customers implement PostHog and how to evaluate their setup
-- How to optimise a setup once you can see it
-- The key tools we use day-to-day, especially Vitally
+- Handling tickets and customer questions across the products your book uses, with help when needed
+- Doing demos for those products
+- Evaluating customer implementations and seeing where to improve them
+- Understanding how pricing works and the levers you have for cost optimization
 
-**You're starting to read signals:**
-
-- You know what the Vitally signals are
-- You have a sense of what to do when each one fires
+**You're working with Vitally signals.** You know what the signals are and have a sense of how to prioritise and work through them.
 
 ## Month 2 and beyond
 
-*Still being worked out. Broadly: independent customer work, first save attempts, first cross-sell. We'll guide you as you grow.*
+**By the end of month 2:**
 
-## PostHog curriculum
+- Saved your first 'we're going to churn' - it's going to happen, but you're going to save them!
+- Be independently working with your entire book to solve tricky technical problems with minimal assistance
 
-PostHog has a lot of products! To help you figure out how to start and continue building your knowledge, here's a recommended list of topics to work through. Do not feel as though you need to learn all the products through your first few weeks. Learning is best done working through customer use cases and requests.
+**By the end of month 3:**
 
-Add and modify this list as you work through it! Products are added frequently, likely making this list outdated.
+- On track to consistently hit your retention targets
+- You've suggested and made changes to our systems that enable you to do your job better
+- Think about customer health scores and add/change anything you learn here
 
-### Fundamental
+## Learning PostHog
 
-#### Product analytics
+PostHog has a lot of products, and you can't learn them all upfront, so trying to will just frustrate you. The lenses in Week 1 are the bar for each product you do learn; this section is how to figure out which products to focus on, and what to do when you hit something you don't know.
+
+**Find out what your book actually uses.** Once you have your book of business, you can see this in Vitally in a few places: the product usage widget in the CSM dashboard, the paid products widget in the default 360 dashboard, or the `paid products` trait. These look at paid usage only and won't include free-tier usage, though most of our customers aren't in free tier anyway. There's no point going deep on session replay if none of your customers use it, so use your book to guide what to focus on.
+
+**Start with the foundations, then focus on what your book uses.** A few areas are useful regardless of who your customers are - product analytics, persons, groups, implementation, and billing. Past that, prioritise the products that show up most in your book, that keep coming up in customer conversations, and that have expansion opportunities.
+
+**When you hit something you don't know:**
+
+- Read the [docs](/docs)
+- Post in #team-customer-success
+
+Below is a per-product reading list to work through. Add and modify as you go - products are added frequently and the list goes out of date fast.
+
+### Product analytics
 1. [Quick primer on Product analytics](https://www.loom.com/share/645de3987e4947ba8164b4d7b7cc719b?sid=ae5f8a50-dc56-4cc4-93d5-d398b398d5a0)
 2. [Creating insights](/docs/product-analytics/insights):
    - Trends, Funnels
@@ -109,7 +124,7 @@ Add and modify this list as you work through it! Products are added frequently, 
 5. [Session replay](/docs/session-replay) – masking, cutting costs, filtering
 6. [Toolbar](/docs/toolbar) – [heatmaps](/docs/toolbar/heatmaps), [actions](/docs/toolbar/create-toolbar-actions)
 
-#### Implementation
+### Implementation
 1. How is PostHog implemented?
 2. [Autocapture](/docs/product-analytics/autocapture) – how do you customize autocapture? How do you leverage autocapture?
 3. What are [custom events](/tutorials/event-tracking-guide#setting-up-custom-events)? How do you set [custom properties](/tutorials/event-tracking-guide#2-properties)?
@@ -122,14 +137,12 @@ Add and modify this list as you work through it! Products are added frequently, 
     - [reverse proxy](/docs/advanced/proxy)
     - cookie consent (EU)
 
-#### Billing
+### Billing
 1. [How to estimate costs](/docs/billing/estimating-usage-costs)
 2. [Pre-paid credits](/docs/billing/pre-paid-plans)
 3. [Billing Limits](/docs/billing/limits-alerts)
 
-### Intermediate
-
-#### Feature flags
+### Feature flags
 1. [Creating](/docs/feature-flags/creating-feature-flags) and using them in code
     - How do I ensure flags are loaded before capturing any events?
     - Can you evaluate feature flags using properties that haven't been ingested yet?
@@ -140,7 +153,7 @@ Add and modify this list as you work through it! Products are added frequently, 
 5. Client-side bootstrapping
 6. [Troubleshooting](/docs/feature-flags/common-questions)
 
-#### Experiments
+### Experiments
 1. [Creating an experiment](/docs/experiments/creating-an-experiment) from PostHog UI
 2. Understanding MDE, primary metrics, secondary metrics, interpreting results
 3. [Traffic allocation](/docs/experiments/traffic-allocation) - configuring it and validating it. What are some reasons why 80/20 split may not be an 80/20 split?
@@ -150,7 +163,7 @@ Add and modify this list as you work through it! Products are added frequently, 
     - Implementation requirements
     - Landing page experiments – how to deal with flickering of content when page is first loaded?
 
-#### AI Observability
+### AI Observability
 1. [Implementing with your LLM SDK](/docs/ai-observability/basics)
     - Privacy options
 2. Generations vs traces vs spans vs sessions
@@ -158,7 +171,7 @@ Add and modify this list as you work through it! Products are added frequently, 
     - How do we accommodate custom LLM pricing?
 4. [Insight analysis](/docs/ai-observability/dashboard)
 
-#### Error Tracking
+### Error tracking
 1. [Implementing error tracking](/docs/error-tracking/installation)
 3. [Stack traces](/docs/error-tracking/stack-traces)
     - Uploading source maps
@@ -166,7 +179,7 @@ Add and modify this list as you work through it! Products are added frequently, 
 4. [Exceptions vs issues](/docs/error-tracking/issues-and-exceptions)
     - What is a fingerprint?
 
-#### Other Products and Features
+### Other products and features
 1. Platform add-ons (Boost/Scale/Enterprise/Teams)
 2. [Data pipelines](/docs/cdp)
     - Sources
@@ -176,11 +189,8 @@ Add and modify this list as you work through it! Products are added frequently, 
     - How surveys works with feature flags/experiments
 4. [Workflows](/docs/workflows)
 5. [Logs](/docs/logs)
-
-### Advanced
-
-1. SPA (single page apps)
-2. API
+6. SPA (single page apps)
+7. API
 
 ## Alerting setup (for team leads)
 
