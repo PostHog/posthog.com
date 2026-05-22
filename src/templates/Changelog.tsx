@@ -799,7 +799,8 @@ export default function Changelog({
         if (!id) return null
         return data.allRoadmap.nodes.find((roadmap: RoadmapNode) => roadmap.id === parseInt(id)) || null
     })
-    const { addWindow } = useApp()
+    const { appWindow } = useWindow()
+    const { addWindow, updateWindow } = useApp()
     const { isModerator } = useUser()
     const [windowX, setWindowX] = useState(0)
     const [percentageOfScrollInView, setPercentageOfScrollInView] = useState(0)
@@ -974,6 +975,16 @@ export default function Changelog({
         setActiveRoadmap(roadmap)
     }
 
+    useEffect(() => {
+        if (isModerator) {
+            updateWindow(appWindow, {
+                appSettings: {
+                    toolbar: true,
+                },
+            })
+        }
+    }, [isModerator])
+
     return (
         <>
             <SEO title="Changelog - PostHog" />
@@ -987,7 +998,10 @@ export default function Changelog({
                     description: 'Latest updates and releases',
                 }}
             >
-                <div data-scheme="secondary" className="bg-primary text-primary relative h-full flex">
+                <div
+                    data-scheme="secondary"
+                    className="bg-primary text-primary relative h-full flex border-t border-primary"
+                >
                     <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full">
                         <div className="min-h-0 flex-shrink-0 flex justify-between items-center px-4 mt-2">
                             <Filters

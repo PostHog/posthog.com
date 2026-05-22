@@ -569,6 +569,7 @@ const appSettings: AppSettings = {
         },
     },
     '/talk-to-a-human': {
+        toolbar: true,
         size: {
             min: {
                 width: 500,
@@ -1312,6 +1313,9 @@ const appSettings: AppSettings = {
             fixed: true,
         },
     },
+    '/docs': {
+        toolbar: true,
+    },
 } as const
 
 export interface SiteSettings {
@@ -1836,6 +1840,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             element?: any
             expanded?: boolean
             snapped?: 'left' | 'right' | false
+            appSettings?: AppSetting
         }
     ) => {
         const newAppWindow = {
@@ -1859,6 +1864,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             ...(updates.element ? { element: updates.element } : {}),
             ...(updates.expanded !== undefined ? { expanded: updates.expanded } : {}),
             ...(updates.snapped !== undefined ? { snapped: updates.snapped } : {}),
+            ...(updates.appSettings ? { appSettings: { ...appWindow.appSettings, ...updates.appSettings } } : {}),
         }
         setWindows((windows) => windows.map((w) => (w === appWindow ? newAppWindow : w)))
         return newAppWindow

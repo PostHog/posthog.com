@@ -8,7 +8,7 @@ const formConfig = {
     type: 'lead' as const,
     formOptions: {
         className: 'pb-4 flex flex-col',
-        ctaLocation: 'top' as const,
+        ctaLocation: 'bottom' as const,
         showToField: true,
         rowPadding: 'px-4',
     },
