@@ -15,6 +15,7 @@ With MCP, your coding agent can:
 - **Clean up stale flags** – "Find flags not evaluated in 90 days" and remove the dead code. See [cleaning up stale flags](/docs/feature-flags/cleaning-up-stale-flags) for the full workflow.
 - **Update rollout rules** – "Roll out `dark-mode` to 50%" or "add the beta-testers cohort to the `new-dashboard` flag"
 - **Schedule future flag changes** – "Schedule the `new-checkout` flag to enable at midnight" or "Set up a recurring weekly disable for maintenance windows"
+- **Bulk operations** – "Delete all flags tagged 'deprecated'" or "Add the 'production' tag to these flags" to manage flags in bulk
 
 ## Feature flag tools
 
@@ -27,6 +28,16 @@ The MCP server provides these tools for working with Feature Flags:
 | `feature-flag-get-all`        | List all feature flags in the current project. Filter by active/inactive status.                        |
 | `update-feature-flag`         | Update a flag's rollout percentage, targeting rules, or variants.                                       |
 | `delete-feature-flag`         | Delete a feature flag.                                                                                  |
+
+## Bulk operation tools
+
+These tools operate on multiple feature flags at once:
+
+| Tool                             | Description                                                                                         |
+| -------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `feature-flags-bulk-delete`      | Soft-delete multiple flags in one call. Filter by tags, search, or pass explicit IDs.               |
+| `feature-flags-bulk-keys`        | Resolve flag IDs to their string keys. Useful when you have IDs from other tools and need the keys. |
+| `feature-flags-bulk-update-tags` | Add, remove, or replace tags on multiple flags at once (up to 500).                                 |
 
 ## Scheduled change tools
 
@@ -50,6 +61,12 @@ Try these with your MCP-enabled agent:
 - `Update the dark-mode flag to roll out to 100% of users.`
 - `Create a multivariate flag called button-color with three variants: red, blue, and green.`
 - `Delete the old-pricing-test flag.`
+
+### Bulk operation prompts
+
+- `Delete all feature flags tagged 'deprecated' in this project.`
+- `Add the 'production' tag to flags 123, 456, and 789.`
+- `What are the keys for flag IDs 101, 102, and 103?`
 
 ### Scheduling prompts
 
