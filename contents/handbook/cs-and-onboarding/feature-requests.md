@@ -8,7 +8,7 @@ When working with our customers, they will occasionally ask for features which a
 
 # Urgent vs non-urgent requests
 
-Urgency is a context-driven measure of risk.  A feature request could be defined as _urgent_ if a customer is at risk of churn or otherwise uphappy about the missing feature.  Equally, a feature request from a newly onboarded customer can also serve as a great way to build a solid foundation of trust and showcase how we work at PostHog.  
+Urgency is a context-driven measure of risk.  A feature request could be defined as _urgent_ if a customer is at risk of churn or otherwise unhappy about the missing feature.  Equally, a feature request from a newly onboarded customer can also serve as a great way to build a solid foundation of trust and showcase how we work at PostHog.  
 
 If we determine a feature request to be truly urgent, then we should communicate this to the relevant team in their Slack channel (usually #team-xyz). Adding the urgency, ARR, and tagging the team lead is a good approach to get some focus.  Remember that you still own the customer and may need to follow up with product teams as they don't have the same customer context that you do.  If you are unsure about how urgent a feature request may be, ask in the team Slack channel. Don't create false urgency where there is none. 
 
