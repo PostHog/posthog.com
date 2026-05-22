@@ -14,7 +14,7 @@ If our champion was the main user, their departure is high risk. The best defens
 
 ### Champion isn't the decision maker
 
-A great relationship with a non-decision-maker is good for context, but limits influence over PostHog adoption. Use them to introduce you to people who can actually move things — and remember decision-makers aren't always in leadership roles.
+A great relationship with a non-decision-maker is good for context, but limits influence over PostHog adoption. Use them to introduce you to people who can actually move things — and remember decision-makers aren't always in leadership roles. Ensure team adoption, new feature roll-outs, or other key wins are consistently visible to decision-makers.
 
 ### Customer replaces PostHog
 
@@ -35,7 +35,7 @@ If a customer has struggled to get help or fast responses, turn it around by sta
 
 When you can solve a problem for them, solve it — and explain how, so they can do it themselves next time.
 
-For feature requests, bugs, or anything else you're advocating for internally, circle back proactively. Don't wait for them to follow up. Customers who've had a poor experience care most about communication and follow-through.
+For feature requests, bugs, or anything else you're advocating for internally, circle back proactively. Don't wait for them to follow up. Provide updates if resolution is taking longer. Customers who've had a poor experience care most about communication and follow-through.
 
 ### Customer can't extract value
 

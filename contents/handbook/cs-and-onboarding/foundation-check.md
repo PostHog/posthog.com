@@ -4,7 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-A checklist to run through before a customer discovery call. PostHog only shows you some of this — for backend implementation details, you'll need to ask on the call.
+Prior to a customer discovery call, review session replays of the user to see how they interact with PostHog, and where improvements can be made. Check historic conversations in Vitally, or calls in BuildBetter, for wider context.
+
+For fundamentals, use this checklist to check for common issues before a customer discovery call. PostHog only shows you some of this — for backend implementation details, you'll need to ask on the call.
 
 ## Events and event properties
 
@@ -15,7 +17,7 @@ Two places to look:
 - **Activity** — recent events.
 - **Data management** — custom actions, event definitions, property definitions.
 
-Look for custom actions. Customers without any actions often have their setup wrong. Common patterns: renaming events into something more meaningful (e.g. `purchase_completed` instead of `clicked_purchase_button`), or bundling events like `user signups` or `purchases`.
+Look for custom actions. Customers without any actions often aren't using PostHog effectively. Common patterns: renaming events into something more meaningful (e.g. `purchase_completed` instead of `clicked_purchase_button`), or bundling events like `user signups` or `purchases`.
 
 If a customer has autocapture enabled but no actions defined, that's worth raising with them on the call.
 
