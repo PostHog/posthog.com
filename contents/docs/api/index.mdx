@@ -17,7 +17,7 @@ The API is available for all users and instances. It contains two types of endpo
 
 ## Private endpoint authentication
 
-import InstallAPI from '../integrate/_snippets/install-api.mdx'
+import InstallAPI from "../integrate/_snippets/install-api.mdx";
 
 <InstallAPI />
 
@@ -41,7 +41,7 @@ There are separate limits for different kinds of resources.
 
 These limits apply to **the entire team** (i.e. all users within your PostHog organization). For example, if a script requesting feature flag metadata hits the rate limit, and another user, using a different personal API key, makes a single request to the persons API, this gets rate limited as well.
 
-> At this time, we are not offering higher limits than these, but you may wish to try our [endpoints product](/docs/endpoints), which offers query customization and higher limits. Alternatively, you may be able to use our [batch exports product](/docs/cdp/batch-exports) to pull the data that you need from our events or persons tables on a faster cadence.
+> At this time, we are not offering higher limits than these, but you may wish to try our [endpoints product](/docs/endpoints), which offers query customization and higher limits. Alternatively, you may be able to use our [batch exports product](/docs/cdp/batch-exports) to pull the data that you need from our events or persons tables on a faster cadence. For on-demand file downloads, you can use the file download batch export API (`/api/environments/:team_id/file_download_batch_exports`) to programmatically export events, persons, or sessions data as Parquet or JSONLines files.
 
 ## Responses
 
