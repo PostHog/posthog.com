@@ -34,7 +34,7 @@ Typical agenda:
 
 ## Small team offsites
 
-We want to try to encourage small teams to get together once each year. These are more focused on work and on creating strong bonds within teams. Ideally they are spaced appropriately through the year in relation to the all-company offsite.
+We want to try to encourage small teams to get together once each year. Ideally they are spaced appropriately through the year in relation to the all-company offsite.
 
 We want team offsites to be social events and encourage you to optimize offsites for meeting as many colleagues as is reasonably possible, even if it means spending more money or travelling further. [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco or the [Hedge House](#hedge-house) in London should be the default choice, because:
 
@@ -43,7 +43,9 @@ We want team offsites to be social events and encourage you to optimize offsites
 - We've put a lot of money and effort into making Hogpatch and Hedge House beautiful spaces that you want to work from
 - SF has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from
 
-You can still grab an AirBnB in any of these places to have more team time if you prefer, over a hotel.
+We prefer AirBnBs over hotels, to give your team even more time to hang out, but this is not mandatory.
+
+If you do decide to do a small team offsite somewhere outside of these two hubs, let Kendal know why. That way we can figure out how to make going to the hubs more appealing, or perhaps open new hubs.
 
 Planning a small team offsite? Kendal’s got you covered.
 Here’s how it works:
@@ -96,7 +98,7 @@ You should assign someone on the small team to be responsible for planning the o
 
 ## Hedge House
 
-PostHog runs two Hedge Houses in the UK - a small one in Cambridge and a larger one in London. They are actual houses (yes, with a few bedrooms attached!) designed for small teams to run their offsites, host in-person onboardings, or come together for larger internal events like hackathons. Anyone at PostHog is welcome to use them as much as they like — alongside [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco, these are where you should do team offsites and in-person onboarding.
+PostHog runs two Hedge Houses in the UK - a small one in Cambridge and a larger one in London. They are actual houses (yes, with a few bedrooms attached!) designed for small teams to run their offsites, host in-person onboardings, or come together for larger internal events like hackathons. Anyone at PostHog is welcome to use them as much as they like — alongside [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco, these are where you should default to doing team offsites and in-person onboarding.
 
 ### Cambridge
 Message <TeamMember name="Kendal Ijeh" photo /> to check availability or make a booking at the Cambridge Hedge House.
