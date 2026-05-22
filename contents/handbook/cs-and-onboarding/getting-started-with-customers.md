@@ -56,9 +56,9 @@ Cast a wide net — org owner, org admin, recent ticket raisers, anyone active i
 
 Cover:
 
+- A value nugget — grabs attention and shows you've already done your homework.
 - Who you are and that you're their new CSM.
 - What a CSM does — their dedicated PostHog human, go-to for help, questions, training, and strategic guidance. Many customers misunderstand CSMs as "just support" — distinguish yourself.
-- A value nugget — show you've already done your homework.
 
 ### Value nugget ideas
 
@@ -70,6 +70,7 @@ Pull from Vitally and Metabase to find something specific to mention:
 - Invite to a shared Slack channel.
 - High user count or low engagement — offer a training session.
 - Legacy pricing plan: "We moved off legacy plans over a year ago. I'd like to transition you to standard pricing — happy to walk through the changes."
+- New feature for their use case - Highlight a new PR or functionality for an app you know they use.
 
 If you're inheriting an existing Slack channel, do the intro in Slack.
 
@@ -85,7 +86,7 @@ In Vitally, an account's Active conversations tab is a good place to see how tea
 
 ### No response?
 
-Follow up after 2-3 business days. Try engineering, product, or data folks. Emphasize that you're not selling — you want to understand their use case and help optimize their PostHog integration.
+Follow up after 2-3 business days. Try engineering, product, or data folks. Emphasize that you're not selling — you want to understand their use case and help optimize their PostHog integration. Reach out to users directly, avoid large group messages.
 
 ### Connecting with a champion
 
