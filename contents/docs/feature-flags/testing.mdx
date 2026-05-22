@@ -7,9 +7,30 @@ import {ProductVideo} from 'components/ProductVideo'
 export const OverrideFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/feature-flags/override-feature-flag-light-mode.mp4"
 export const OverrideFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/feature-flags/override-feature-flag-dark-mode.mp4"
 
-Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. There are 3 ways you can do this:
+Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. There are 4 ways you can do this:
 
-## Method 1: Assign a user a specific flag value
+## Method 1: Use the Testing tab
+
+The **Testing** tab on any feature flag page lets you test how the flag evaluates for a specific person. This is useful for debugging why a flag matched or didn't match.
+
+To use the Testing tab:
+
+1. Go to your feature flag.
+2. Click the **Testing** tab.
+3. Search for and select a person from your PostHog instance.
+4. Optionally, set a historical timestamp to evaluate the flag as it existed at that time.
+5. Optionally, provide groups JSON for group-based feature flags.
+6. Click **Test evaluation**.
+
+The results show:
+
+- **Flag result** – The value returned (`true`, `false`, or variant name).
+- **Condition analysis** – A breakdown of each condition showing whether it matched, why, and the rollout percentage.
+- **Person properties** – The properties used in the evaluation, with indicators showing which properties the flag conditions checked.
+
+This helps you understand why a person receives a particular flag value without modifying any release conditions.
+
+## Method 2: Assign a user a specific flag value
 
 For boolean flags, you can roll out the flag to a specific user. For multivariate flags, you can assign a user to a specific variant by **adding an optional override** to your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions). 
 
@@ -33,7 +54,7 @@ To do this:
     classes = "rounded"
 />
 
-## Method 2: Use `posthog.featureFlags.overrideFeatureFlags()`
+## Method 3: Use `posthog.featureFlags.overrideFeatureFlags()`
 
 > **Note:** The `posthog.featureFlags.overrideFeatureFlags()` method is only available in the [JavaScript web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs.
 
@@ -48,7 +69,7 @@ posthog.featureFlags.overrideFeatureFlags( {
 })
 ```
 
-## Method 3: Use the PostHog toolbar
+## Method 4: Use the PostHog toolbar
 
 > **Note:** The [PostHog toolbar](/docs/toolbar) is only available for the [JavaScript web SDK](/docs/libraries/js).
 
