@@ -61,7 +61,3 @@ Have they set up custom dashboards or insights for their own goals (sign-ups, re
 ## Data pipelines for event notifications
 
 Check whether they're using data pipeline destinations (e.g. Slack notifications on specific events). Many customers don't realize this use case exists — it's an easy upsell.
-
-## Query failure rate
-
-Visible in Vitally. A high failure rate means a customer is trying to do something that's not working — bring it up on the discovery call.
