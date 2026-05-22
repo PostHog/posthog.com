@@ -1,20 +1,40 @@
-# Stop adding AI between you and your customers
+---
+title: Stop adding AI between you and your customers
+date: 2026-05-22
+author:
+  - abigail-richardson
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/519290681_b3c074ed_f976_4e91_8c37_498387c9dbe1_a48312c745.png
+category: Startups
+tags:
+  - Guides
+  - Support
+  - AI
+---
 
-"Support is expensive – put a chatbot in front of it." You've heard it a thousand times, and for a while it's where the whole industry was heading. I think it was backwards then, and it gets more backwards by the day. Here's the bet I'd make instead: as AI eats the easy parts of support, the support you contact should be *more* human and more *technical* than ever – an engineer, not a friendly face on top of the machine. The more your customers live inside AI, the more they'll want a technical human the second something breaks.
+"Support is expensive – put a chatbot in front of it." 
+
+You've heard it a thousand times, and for a while it's where the whole industry was heading. I think it was backwards then, and it gets more backwards by the day. 
+
+Here's the bet I'd make instead: as AI eats the easy parts of support, the support you contact should be *more* human and more *technical* than ever – an engineer, not a friendly face on top of the machine. The more your customers live inside AI, the more they'll want a technical human the second something breaks.
 
 ## The evolution of support, in three eras
 
 1. Then. Customers do all their work as humans. They write code, build charts, dig through data, make decisions. When something breaks, they write to a person, and a person writes back. Support is human-to-human because everything is human-to-human.
+
 2. Now. AI starts showing up in customer workflows, but humans still do most of the work. Support, meanwhile, sits where it always has: treated as a cost to keep down. AI hands companies a brand-new lever to pull: stick a chatbot in front of the queue, deflect as many tickets as you can, hire fewer people. AI becomes a wall between the customer and the team.
+
 3. Next – where we're heading. AI does more and more of the customer's actual work. It analyzes the data. It builds the chart. It writes the code. It tells them what to focus on next. The customer's job becomes reviewing AI output, redirecting it, and deciding what to ship.
 
-The industry expectation is that support follows the same curve: more AI work *means* more AI support. I think that's backwards. If your customer spends every working hour talking to an AI, the last thing they want when something finally goes wrong is to talk to another one. They want a person – someone who can actually understand the problem and fix it, and who makes them feel looked after rather than processed.
+The industry expectation is that support follows the same curve: more AI work *means* more AI support. 
+
+I think that's backwards. If your customer spends every working hour talking to an AI, the last thing they want when something finally goes wrong is to talk to another one. They want a person – someone who can actually understand the problem and fix it, and who makes them feel looked after rather than processed.
 
 The deeper customers go into AI, the more those moments call for a human on the other end – and a more technical one than support has ever needed.
 
 ## Why "AI as blocker" was always a bad idea
 
-I've been asked plenty of times what I think of putting AI in front of our support queue. I've always said no. Not because AI isn't useful, it's enormously useful, but because there's a difference between AI as a tool and AI as a gate.
+As our support team lead, I've been asked plenty of times what I think of putting AI in front of our support queue. I've always said no. Not because AI isn't useful, it's enormously useful, but because there's a difference between AI as a tool and AI as a gate.
 
 A gate is something you have to get past, and it frustrates customers. These chatbots only really handle the simple stuff – the questions already answered in the docs – so anyone with a harder problem learns to type "agent" or "human" three times in a row just to reach someone who can actually help. No one is deliberately setting out to frustrate anyone, it's just what happens when a harder problem runs into a wall built for easy ones. I don't think most companies truly realize it's happening. They look at the numbers, see fewer tickets coming in, and read it as a good sign: people must be doing fine. The companies doing this call it "deflection." Customers call it being ignored.
 
@@ -32,27 +52,27 @@ Done well, support is one of the strongest competitive advantages a company has.
 
 If most of the customer's day is AI, what does their support engineer's day look like? Three things, mostly.
 
-#### Explaining why the AI was right
+### 1. Explaining why the AI was right
 
 Sometimes the AI gave a perfectly accurate answer and the customer still wrote in, because the answer didn't *click* for them. Different people learn differently. The job here is to understand the answer deeply enough to rebuild it – the analogy they need, the example from their own data, the diagram nobody else would draw for them. The AI was right. The explanation needed a human – a technical one.
 
-#### Pointing at AI the customer didn't know they had
+### 2. Pointing at AI the customer didn't know they had
 
-A surprising number of tickets are answerable by a tool or skill that already exists and the customer just didn't know was there, or one we've only just shipped – since we're constantly building new tools and skills for features across the platform. "You can ask PostHog AI to do that," "there's already a skill for this," or "you can do this directly in PostHog Code" are all perfectly reasonable responses and a useful signal that we need to do better at making those capabilities discoverable. A human does both at once: solves it for the person in front of them, and notices it's a pattern worth fixing.
+A surprising number of tickets are answerable by a tool or skill that already exists and the customer just didn't know was there, or one we've only just shipped – since we're constantly building new tools and skills for features across the platform. "You can ask [PostHog AI](/ai) to do that," "there's already a skill for this," or "you can do this directly in [PostHog Code](/code)" are all perfectly reasonable responses and a useful signal that we need to do better at making those capabilities discoverable. A human does both at once: solves it for the person in front of them, and notices it's a pattern worth fixing.
 
-#### Diagnosing where the AI fell down
+### 3. Diagnosing where the AI fell down
 
 This is the meatiest of the three, and where I expect most questions will eventually originate. The customer asked AI to do something. AI tried, and it:
 
-- misread the intent
-- didn't have the right tool
-- pulled from a doc that says the wrong thing
-- gave a plausible-sounding answer that's subtly wrong
-- took the action, but broke something you were hoping it wouldn't
-- ran into a genuine bug in the product itself
-- or it just did something weird
+- Misread the intent
+- Didn't have the right tool
+- Pulled from a doc that says the wrong thing
+- Gave a plausible-sounding answer that's subtly wrong
+- Took the action, but broke something you were hoping it wouldn't
+- Ran into a genuine bug in the product itself
+- Or it just did something weird
 
-A support engineer has to figure out *which* of those happened, because each one points somewhere different: a better prompt, a new tool, a doc patch, a bug fix, a model issue, a product gap.
+A support engineer has to figure out *which* of those happened, because each one points somewhere different: a better prompt, a new tool, a doc patch, a bug fix, a model issue, or a product gap.
 
 Nobody wants their support engineer to just paste the AI answer back at them. They've already seen that answer. That's why they wrote in. Underneath it all is the one thing the customer is really after: a real person who understood the problem and cared enough to get it right. Both parts are load-bearing – a technically perfect answer that doesn't land is as useless as a warm one that doesn't actually work.
 
@@ -62,13 +82,13 @@ What's left is the harder part: diagnosis, fixes, and judgment about what actual
 
 ## What we're actually building
 
-The people on our support team are engineers. The job is to understand a problem well enough to fix it yourself, and to be just as good at talking to the human who has it. If a support engineer can create the PR or update the docs, they do – they don't pass that off to an engineering team. That's [the version of support that's worked for us for years](https://newsletter.posthog.com/p/doing-support-makes-you-a-better), and it's the bit I'm least willing to give up.
+The people on our support team are engineers. The job is to understand a problem well enough to fix it yourself, and to be just as good at talking to the human who has it. If a support engineer can create the PR or update the docs, they do – they don't pass that off to an engineering team. That's [the version of support that's worked for us for years](/newsletter/engineers-do-support), and it's the bit I'm least willing to give up.
 
-What's changing is how we *use* AI inside this team. We're moving our support workflow to PostHog's own support product, and the value isn't AI-as-frontline – it's AI-as-context.
+What's changing is how we *use* AI inside this team. We're moving our support workflow to [PostHog's own support product](/docs/support/start-here), and the value isn't AI-as-frontline – it's AI-as-context.
 
 Picture the moment a ticket lands. Without help, an engineer has to dig: who is this person, what org are they in, what plan, what did their session look like just before they wrote in, what page were they on when they submitted the ticket, where were they when the problem actually happened, did they encounter an error, are they part of an experiment or feature flag rollout you're running that's affecting their experience, what had they already tried with PostHog AI before they escalated, and what those LLM traces show. That's twenty minutes of detective work before the *first* useful sentence gets typed back.
 
-With AI, that context arrives with the ticket. Who they are, what they were doing, the page they were on, the last session replay and a summary of it, the errors thrown, the experiments and flags they're part of, their conversation with PostHog AI captured as LLM traces in AI observability, and any relevant application logs. AI is *exceptionally* good at this kind of work: gathering, summarizing, surfacing. Then a human reviews it, sanity-checks it, fills in what's missing, and writes a real response.
+With AI, that context arrives with the ticket. Who they are, what they were doing, the page they were on, the last session replay and [a summary of it](/docs/posthog-ai/session-summaries), the errors thrown, the experiments and flags they're part of, their conversation with PostHog AI captured as [LLM traces in AI observability](/docs/ai-observability/traces), and any relevant [application logs](/logs). AI is *exceptionally* good at this kind of work: gathering, summarizing, surfacing. Then a human reviews it, sanity-checks it, fills in what's missing, and writes a real response.
 
 That's the division of labor I believe in: AI does the context. Humans do the conversation.
 

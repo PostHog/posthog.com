@@ -581,7 +581,7 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/lizzie-epton/",
         "profile_id": 43387
-    },    
+    },
     {
         "handle": "fraser-hopper",
         "name": "Fraser Hopper",
@@ -589,5 +589,13 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/fraser-hopper-26158056/",
         "profile_id": 30207
+    },
+    {
+        "handle": "abigail-richardson",
+        "name": "Abigail Richardson",
+        "role": "Technical Support Engineer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/abigail-richardson-74404a5a/",
+        "profile_id": 31138
     }
 ]
