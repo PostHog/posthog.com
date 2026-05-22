@@ -4,6 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
+import SupportValues from './_snippets/support-values.mdx'
+import WhatWeDo from './_snippets/what-we-do.mdx'
+
 The <SmallTeam slug="support">support team</SmallTeam> exists to help our users succeed with PostHog, and we do that differently than most support teams.
 
 We're not a ticket-routing operation. We genuinely care about making our users' experience exceptional, which we do by being a deeply technical team that takes pride in solving problems ourselves. We write code, ship fixes, update docs, and build internal tooling to deliver that experience. We move fast, stay humble, and believe that great support is about empowering users, not just answering questions.
@@ -12,35 +15,9 @@ We're not a ticket-routing operation. We genuinely care about making our users' 
 
 We communicate clearly and don't hide behind jargon. We're relentlessly curious - pulling at every thread when investigating an issue, and seeing the bigger picture beyond the immediate problem. We're always looking for ways to improve, whether that's our processes, our docs, or our own skills. We're thorough without being slow, thoughtful without overthinking, and we genuinely care about getting things right for our users.
 
-## Our values
+<SupportValues />
 
-### Take ownership
-
-Own your work from start to finish. Be proactive and self-driven. Don't wait to be told what to do. When you see a problem, jump in and solve it. Be resourceful, curious, and hands-on. If something needs doing, figure it out and make it happen. Taking ownership means being accountable for outcomes, not just tasks.
-
-### Delight users
-
-Go beyond solving problems. Create moments that make users' days better. Be genuinely caring, reassuringly human, and empathetic in every interaction. Surprise users with your thoughtfulness and responsiveness. Bring positivity and warmth to technical conversations. When users walk away from an interaction with you, they should feel helped, valued, and hopefully a little bit delighted.
-
-### Stay humble
-
-Check your ego at the door. Take feedback as a gift and be open to learning from anyone, regardless of their experience level or role. Share knowledge freely with the team and communicate with transparency and honesty. We get better together by staying curious, admitting what we don't know, and helping each other grow. No one has all the answers, and that's okay.
-
-### Ship fixes
-
-Be deeply technical and hands-on. Don't just log bugs or pass tickets along - write the fix yourself. Raise PRs for docs improvements, patch code, and solve problems end-to-end. We're engineers who happen to do support, not support agents who escalate to engineers. If you can fix it, ship it. That's what makes PostHog support special.
-
-## What we do
-
-We help users through in-app support (which routes to Zendesk), community questions, and Slack channels for enterprise customers. But we don't stop at answering questions:
-
-- **Ship code:** We write and merge small bug fixes and improvements ourselves.
-- **Improve docs:** We contribute fixes, clarify sections, and add missing information.
-- **Build internal tools:** We create tools like HogHero for internal efficiency, SDK Doctor for proactive customer help, and automations to streamline our work.
-- **Share product feedback:** We surface patterns and pain points we see from users.
-- **Answer community questions:** We respond to questions in our community forums.
-
-We provide support Monday through Friday, 9am GMT to 5pm PST. We focus on being consistently excellent during our coverage hours, with clear expectations set for users.
+<WhatWeDo />
 
 ## What we don't do
 
