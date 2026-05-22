@@ -45,7 +45,7 @@ The stack we used:
   1.  A **campaign** with one slow query and one git branch.
   2. This is broken into **lanes**, optimization directions tied to a suspected bottleneck: predicate ordering, [JSON parsing](/blog/clickhouse-materialized-columns), timezone handling, primary key usage, and so on. Lanes can be paused when they stop yielding signal, split when they turn out to be two ideas, or merged when wins from different lanes turn out to combine.
   3. A concrete, testable **hypothesis** inside each lane.
-	4. An **experiment** inside each hypothesis with one run, benchmark, and verdict. The agent has to do an explicit reflection pass after every experiment instead of letting the loop just hill-climb. 
+  4. An **experiment** inside each hypothesis with one run, benchmark, and verdict. The agent has to do an explicit reflection pass after every experiment instead of letting the loop just hill-climb. 
 
 - **A throwaway ClickHouse test cluster**: this kept iteration speed high. The same data shape as production, anonymized, on cheaper hardware than production but dedicated to the agent. Running on a developer laptop would have been too slow for a useful inner loop; running on production would have meant fighting noisy neighbors and risking interference with customer queries.
 
