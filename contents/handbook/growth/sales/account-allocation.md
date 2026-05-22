@@ -213,6 +213,7 @@ This is the most valuable part of the handover – relationship context doesn't 
 - [ ] **General vibe?** Easy to work with? High-maintenance? Responsive or hard to reach?
 - [ ] **Preferred communication style?** Slack-first? Email? Regular calls or async?
 - [ ] **Has the customer been told about the handover?** If not, agree on how to introduce the new TAM
+- [ ] **What time zone(s) is the customer based out of?** When are you most likely to hear from them?
 
 #### 2. Commercial context
 
@@ -229,6 +230,7 @@ This is the most valuable part of the handover – relationship context doesn't 
 - [ ] **Integration landscape** – what else are they using? Any competitors still in play?
 - [ ] **Product gaps** – feature requests or limitations that are blockers? Note any features with committed delivery timelines from our product teams
 - [ ] **Onboarding completeness** – per the [onboarding checklist](/handbook/growth/sales/account-allocation#product-onboarding), which products are properly onboarded?
+- [ ] **Upcoming initiatives** - any planned or known future projects they'll need our help with or that may contribute to an increase in usage? 
 
 #### 4. Risks & opportunities
 
@@ -280,6 +282,7 @@ CSM accounts should generally be in a steady state — they're using the product
 
 - **One-sided relationship** — is there a pattern of outreach from our side with no customer engagement? If it's been a one-sided conversation, understand why before you take over.
 - **User concentration** — is usage concentrated among fewer than 3 users? That's inherently risky. Have there been attempts to engage beyond those users? If so, why haven't they been successful?
+- **Limited champions** — do we only have one (or two) champions? Similar to having fewer than 3 users, being single-threaded on even the strongest champion introduces risk if they depart for any reason. Have there been attempts to engage with decision-makers? If so, why haven't they been successful?
 
 ### Account documentation
 
