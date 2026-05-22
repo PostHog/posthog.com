@@ -9,23 +9,17 @@ availability:
 sourceId: Postgres
 ---
 
-<<<<<<< HEAD
-The Postgres connector links your database tables to PostHog. You can sync data into PostHog's managed storage or query your Postgres database directly from the SQL editor.
-||||||| f6a9d2ce1
-The Postgres connector can link your database tables to PostHog.
-=======
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
 
-The Postgres connector can link your database tables to PostHog. You can use it for regular scheduled syncs, or enable change data capture (CDC) for near real-time syncs that capture inserts, updates, and deletes.
->>>>>>> master
+The Postgres connector links your database tables to PostHog. You can sync data into PostHog's managed storage or query your Postgres database directly from the SQL editor. You can use it for regular scheduled syncs, or enable change data capture (CDC) for near real-time syncs that capture inserts, updates, and deletes.
 
 ## Linking Postgres
 
 1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab
 2. Click **New source** and select **Postgres**
 3. Enter your database connection details:
-<<<<<<< HEAD
+    - **Connection string:** An optional PostgreSQL connection string.
     - **Host:** The hostname or IP your database server like `db.example.com` or `123.132.1.100`.
     - **Port:** The port your database server is listening to. The default is `5432`.
     - **Database:** The name of the database you want like `analytics_db`.
@@ -33,49 +27,15 @@ The Postgres connector can link your database tables to PostHog. You can use it 
     - **Password:** The password for the user.
     - **Schema:** (Optional) The schema for your database. Leave blank to browse and sync tables from all schemas, or specify one to limit the selection. The default is `public`.
     - **Include all schemas:** Enable this toggle to discover and sync tables from all non-system schemas in the database. See [Multi-schema syncing](#multi-schema-syncing) for details.
-||||||| f6a9d2ce1
-   - **Host:** The hostname or IP your database server like `db.example.com` or `123.132.1.100`.
-   - **Port:** The port your database server is listening to. The default is `5432`.
-   - **Database:** The name of the database you want like `analytics_db`.
-   - **User:** The username with the necessary permissions to access the database.
-   - **Password:** The password for the user.
-   - **Schema:** (Optional) The schema for your database. Leave blank to browse and sync tables from all schemas, or specify one to limit the selection. The default is `public`.
-=======
-   - **Connection string:** An optional PostgreSQL connection string.
-   - **Host:** The hostname or IP your database server like `db.example.com` or `123.132.1.100`.
-   - **Port:** The port your database server is listening to. The default is `5432`.
-   - **Database:** The name of the database you want like `analytics_db`.
-   - **User:** The username with the necessary permissions to access the database.
-   - **Password:** The password for the user.
-   - **Schema:** (Optional) The schema for your database. Leave blank to browse and sync tables from all schemas, or specify one to limit the selection. The default is `public`.
->>>>>>> master
 4. If you need to connect through an SSH tunnel, enable and configure it (optional):
-<<<<<<< HEAD
     - **Tunnel host:** The hostname of your SSH server.
     - **Tunnel port:** The port your SSH server is listening on.
     - **Authentication type:**
       - For password authentication, enter your SSH username and password.
       - For key-based authentication, enter your SSH username, private key, and optional passphrase.
     - **Require TLS through tunnel?** - Whether to require TLS encryption through the SSH tunnel. Enabled by default. Disable if your database doesn't support TLS.
-5. Click **Link**
-||||||| f6a9d2ce1
-   - **Tunnel host:** The hostname of your SSH server.
-   - **Tunnel port:** The port your SSH server is listening on.
-   - **Authentication type:**
-     - For password authentication, enter your SSH username and password.
-     - For key-based authentication, enter your SSH username, private key, and optional passphrase.
-   - **Require TLS through tunnel?** - Whether to require TLS encryption through the SSH tunnel. Enabled by default. Disable if your database does not support TLS.
-5. Click **Link**
-=======
-   - **Tunnel host:** The hostname of your SSH server.
-   - **Tunnel port:** The port your SSH server is listening on.
-   - **Authentication type:**
-     - For password authentication, enter your SSH username and password.
-     - For key-based authentication, enter your SSH username, private key, and optional passphrase.
-   - **Require TLS through tunnel?** - Whether to require TLS encryption through the SSH tunnel. Enabled by default. Disable if your database does not support TLS.
 5. Optional: enable **Change data capture (CDC)** if your database is prepared for logical replication.
 6. Click **Next**, select the tables to sync, choose the sync method for each table, then click **Link**
->>>>>>> master
 
 PostHog starts syncing your data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
 
