@@ -4,37 +4,37 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This is our playbook for new customer success engagement. These are customers who have been with us for a while and we are ready to establish an ongoing relationship with them.
+CSM at PostHog isn't account management or support. It's a specific role with a specific set of things we do that customers actually feel.
 
-The core job of a Customer Success Manager (CSM) is to ensure the longevity of the customer by ensuring their overall success and that they are getting the most value out of using PostHog. This may include helping the customer with onboarding, training, support, strategies, cost-saving, and more. Ultimately, the CSM serves as the customer's champion within the company and advocates on their behalf, and ensures the customer is successful.
+## Who we manage
 
-**Four principles to bear in mind:**
+CSMs cover all customers above $20k ARR. That includes long-time customers whose spend has tipped over the threshold, customers handed over from new business after closing, and customers new to PostHog on an enterprise plan.
 
-- **Establish strong customer relationships** - customer success is built on open and honest connections with customers and empowering their growth. This will often mean having candid conversations, getting in-depth details about what drives their business and what key metrics or goals they are trying to achieve, and being proactive in helping them achieve those goals.
-- **The customer comes first** - Show, not tell. Demonstrate and communicate their value to PostHog, help prioritize their needs, and under promise and over deliver. Always be transparent and honest, and deliver bad news as early as possible. Take responsibility to stay on top of their needs and inquiries, help get support prioritized, and be strategic in your approach to help them achieve their goals.
-- **Provide customer value** - Beyond helping customers get optimal use out of PostHog, help with strategies, cost-saving, or other timely solutions that can benefit their business. We are always looking for ways to help customers save even if it means in the short term we don't make as much. The long term value and care matters more. Offer continual education on new features and create a cadence of communication that is helpful but not intrusive. If you're seeing something that is off, check in with them to see if they are aware of it.
-- **Become the voice of the customer** - Listen with intent and advocate for your customers. You are their champion within the company and should help their voice be heard whether that's creating feedback loops to make them feel heard or get their needs prioritized, or working cross-teams to help product and engineering understand why certain features are important to the customer and their success. Advocacy only works if you're willing to go to bat for your customers.
+## The value of CSM
 
-## Maximizing your chance of success
+Our primary goal is retention. The team target is 120% NRR — see [how we work](/handbook/cs-and-onboarding/how-we-work#how-contractual-bonus-works---technical-csms) for how that's calculated and how it ties to bonus.
 
-As a CSM, you’ll be spending most of your time managing your book of business and investigating churn signals so that there should be **zero surprises** should a business churn. Your first initiative should be focused on establishing a relationship with your book of business and prioritizing your understanding of their business, how they use PostHog today, and where you can add the most value to their business. It helps to approach this from a viewpoint of how you can be most helpful to your book of business as you learn what drives their success.
+We hit that by being genuinely helpful. Recommendations come from what helps the customer, not what's easy to sell.
 
-In order of priority, your objectives should be:
+That requires being proactive, not reactive. The loudest customers will find us anyway; the ones quietly struggling won't. Spotting silent strugglers — through signals, usage data, the things Vitally flags before the customer thinks to ask — is most of the job. If a customer doesn't respond to outreach, try a different angle.
 
-- Create a clear introduction of who you are, what a CSM can do, and what values you can provide for your customers so there’s no confusion. Not everyone is familiar with what a CSM does or is clear on why they should engage with one, especially if your book of business are long time customers who may not have had a dedicated point of contact till now.
+And no two accounts are run the same way. Some need deep ticket involvement. Some need strategic time. Some need one well-timed call a quarter. You decide where to spend your hours based on need and impact.
 
-- Evaluate your assigned list for signals and churn risk and prioritize outreach accordingly. Pay extra attention to recent conversations or open support tickets that you can dive head-first into to ensure these customers are cared for. Zendesk, our support ticketing system, allows you to follow tickets and get notified when there are updates, so add yourself to open tickets for any of your assigned customers.
+## The levers we have
 
-- Set up a Vitally Playbook notification to get alerts when new conversations occur for your book of business, allowing you to keep a pulse on when your customers write in. Use this <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/f811379c-9b0b-4ff4-98d4-654df4f02d40">Playbook Template</PrivateLink> as a reference. You should also set up a Vitally Open Tickets Tracker to view all of your customer's open tickets in a single view. To do this, clone this <PrivateLink url="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/cc9ce419-fa0c-4d78-80e8-25e0760e459d">Open Tickets Tracker</PrivateLink>, remove the existing filters, then add a filter for the assigned CSM, and save to your account.
+The flat list of what CSMs actually do. Deeper guidance lives on linked pages.
 
-- Add yourself to all your existing customer Slack channels and invite customers who are not in Slack yet to offer them an easier way to communicate with our team for their needs. Make sure to add Pylon and relevant team members on our side. Adding customers to Slack has the added benefit of giving us an additional communication channel, as email is usually one of the worst ways to reach our ICP (though you should start with email). We've found that informing customers you'll be sending them a Slack Connect invite, then sending the invite, works significantly better than asking customers if they'd like to join us on Slack. A couple of tips to set up [Shared Slack Channels with Customers](/handbook/growth/sales/slack-channels)
+- **Establishing and building relationships.** Be the person a customer Slacks first when something breaks or when they want to try something new. [Getting started with customers](/handbook/cs-and-onboarding/getting-started-with-customers) covers the first 30 days; the [lifecycle of CSM engagement](/handbook/cs-and-onboarding/lifecycle-csm) covers how the relationship evolves after that.
+- **Implementation and setup.** Getting the right PostHog setup for the customer's use case, and improving what's there. Most customers don't get it right the first time, and a bad setup makes everything else less useful. The [foundation check](/handbook/cs-and-onboarding/foundation-check) and [health check](/handbook/cs-and-onboarding/health-checks) are the two main entry points.
+- **Technical troubleshooting and support.** Debugging customer issues — the broken event, the missing identify call, the misconfigured flag — and answering "how do I do X." CSMs at PostHog are technical; [handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues) is on you by default, not the engineering team.
+- **Finding and navigating friction.** Spotting where a customer is hitting (or about to hit) something painful — a limit, a bug, a mismatch between what they bought and what they need — and working the conversation when they do. Sometimes that's a refund or credit. Sometimes a plan change. Sometimes setting expectations honestly so the customer isn't surprised later. [Churn reasons](/handbook/cs-and-onboarding/churn-reasons) lists the patterns we see most.
+- **Monitoring health.** [Health tracking](/handbook/cs-and-onboarding/health-tracking) is our main signal for who needs attention. Don't just look at the score — look at what changed.
+- **Cost optimization.** Customers often spend more than they need to. Look for over-ingestion, session replay you can sample down, products on a plan they aren't using. We're happy to make less in the short term — the long-term relationship is the trade. *[link: cost-reduction page when landed]*
+- **Running trainings.** [Customer training](/handbook/growth/customer-training) sessions for a customer's team on a specific PostHog area — usually requested by the customer, or proposed when we see a clear gap.
+- **Credit purchases.** Helping customers buy ahead of usage they can predict — annual deals, top-ups, plan changes. [Renewals](/handbook/cs-and-onboarding/renewals) covers the mechanics.
 
-## Tips on success engagement
+## Where to go next
 
-- Highly recommend reviewing our section on [getting people to talk to you](/handbook/growth/sales/getting-people-to-talk-to-you). What we’ve found works really well when establishing an initial connection is to be candid about wanting to learn more about your customer’s business, how they are currently utilizing PostHog, and to get a better understanding of where you may be able to add value for them. Most customers are pretty receptive to wanting to help, especially if it can benefit them in some way, so don’t be afraid to ask directly.
-
-- Review your existing book of business to see how many products each of your customers is currently engaged with so that in your conversations, you can better understand why they may or may not be using certain products or if they find upcoming beta features useful. Make note of how many of them are on specific plans and if there are any opportunities you could help the customer save (always a great topic to help interest customers to engage).
-
-- Don’t focus on a specific champion during your initial outreach. When prioritizing outreach, do look at engaged users and user types but aim to connect with multiple team members. You never know who will be responsive and become your best point of contact. Don’t focus on just reaching out to an identified champion (if one exists).
-
-- On initial engagement calls initiated from you to learn more about the customer, it is helpful to prepare a simple agenda and re-iterate this on the call to make it easier for customers to understand what you'll be discussing, particularly if you're not familiar with their business, and what you hope to get out of the meeting, then wrap up with a summary of any action items you'll be taking to follow up with the customer. This can be a great time to gauge if the customer is interested in setting up a recurring check-in call.
+- Where customers are in their journey and how often to touch them: [lifecycle of CSM engagement](/handbook/cs-and-onboarding/lifecycle-csm).
+- What to do when an account is at churn risk: [churn reasons](/handbook/cs-and-onboarding/churn-reasons).
+- What signals to watch and how to respond: *[link: responding-to-signals.md when written]*.
