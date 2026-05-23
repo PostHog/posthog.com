@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { IconInfo } from '@posthog/icons'
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { LogSlider, LinearSlider, prettyInt } from 'components/Pricing/PricingSlider/Slider'
 
 type Mode = 'remote' | 'local'
@@ -47,10 +47,15 @@ const Label = ({ title, value, tooltip }: { title: string; value: string; toolti
         <div className="flex items-baseline gap-1">
             <span className="text-[14px] font-semibold">{title}</span>
             {tooltip && (
-                <Tooltip placement="top" content={() => <div className="max-w-xs text-sm">{tooltip}</div>}>
-                    <span className="inline-block p-0.5 opacity-60 hover:opacity-100 cursor-help relative -top-px">
-                        <IconInfo className="size-4 inline-block" />
-                    </span>
+                <Tooltip
+                    side="top"
+                    trigger={
+                        <span className="inline-block p-0.5 opacity-60 hover:opacity-100 cursor-help relative -top-px">
+                            <IconInfo className="size-4 inline-block" />
+                        </span>
+                    }
+                >
+                    <div className="max-w-xs text-sm">{tooltip}</div>
                 </Tooltip>
             )}
         </div>
