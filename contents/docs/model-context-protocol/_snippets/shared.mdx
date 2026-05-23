@@ -313,6 +313,25 @@ The MCP server provides **resources**, including framework-specific documentatio
 
 Currently we support Next.js, with more frameworks in progress.
 
+## Rate limits
+
+The MCP server enforces per-token rate limits that match the [standard PostHog API rate limits](/docs/api#rate-limiting):
+
+| Scope | Limit | Window |
+| --- | --- | --- |
+| Burst | 480 requests | 60 seconds |
+| Sustained | 4800 requests | 1 hour |
+
+When you exceed a limit, the server returns HTTP 429 with headers your agent can use to back off:
+
+- `Retry-After` – seconds until the next request should succeed
+- `X-RateLimit-Limit` – the limit that was hit
+- `X-RateLimit-Remaining` – requests remaining in the window (0 when blocked)
+- `X-RateLimit-Reset` – seconds until the window resets
+- `X-RateLimit-Scope` – which limit was hit (`mcp_burst` or `mcp_sustained`)
+
+Rate limits apply per authentication token, not per IP address. If your agent hits a limit, wait for `Retry-After` seconds before retrying.
+
 ## Privacy and support
 
 - **Privacy Policy:** [posthog.com/privacy](/privacy)
