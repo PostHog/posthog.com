@@ -95,7 +95,7 @@ To get a calendar with all your on-call shifts from incident.io go to the [sched
 
 ### Make sure alerts can break through Do Not Disturb
 
-Unlike PagerDuty, the incident.io app does not configure these settings for you on install. By default your phone's Do Not Disturb, Sleep, or Focus mode will silence pages – including the middle-of-the-night ones. Configure both your phone and the incident.io contact so alerts always come through, even when you're not normally on call at night (you may still be escalated to).
+The incident.io app does not configure these settings for you on install. By default your phone's Do Not Disturb, Sleep, or Focus mode will silence pages. Configure both the incident.io app and phone contact so alerts always come through.
 
 #### iOS
 
@@ -103,7 +103,7 @@ Unlike PagerDuty, the incident.io app does not configure these settings for you 
 2. **Enable Emergency Bypass for that contact.** Open the `Contacts` app → `Lists` → `All Contacts`, find `incident.io On-call`, tap `Edit` → `Ringtone` → toggle on `Emergency Bypass`. Repeat for `Text Tone` so SMS pages also break through. On iOS 18+, edit from `All Contacts` rather than the auto-grouped "incident.io" section to avoid a known Apple bug.
 3. **Allow critical notifications.** `Settings` → `incident.io` → `Notifications` → enable `Critical Alerts`. These bypass silent and Focus mode for push notifications.
 4. **Allowlist incident.io in every Focus mode.** `Settings` → `Focus` → for each mode (Sleep, Do Not Disturb, Work, etc.) → `Apps` → add `incident.io` to the allowed list.
-5. **Watch for sound redirects.** Apple Watch pairing, AirPods Announce Notifications, and Screen Time can route incident.io alerts away from your phone speaker – disable the incident.io app in the Watch app's notification list and add incident.io to Screen Time's "Always Allowed" apps.
+5. **Optional: Watch for sound redirects.** Apple Watch pairing, AirPods Announce Notifications, and Screen Time can route incident.io alerts away from your phone speaker – disable the incident.io app in the Watch app's notification list and add incident.io to Screen Time's "Always Allowed" apps.
 
 #### Android
 
