@@ -102,7 +102,7 @@ Unlike PagerDuty, the incident.io app does not configure these settings for you 
 1. **Save the incident.io On-call contact to your phone.** In the incident.io mobile app, go to `Settings` → `Contacts` and enable the toggle to add the contact to your address book.
 2. **Enable Emergency Bypass for that contact.** Open the `Contacts` app → `Lists` → `All Contacts`, find `incident.io On-call`, tap `Edit` → `Ringtone` → toggle on `Emergency Bypass`. Repeat for `Text Tone` so SMS pages also break through. On iOS 18+, edit from `All Contacts` rather than the auto-grouped "incident.io" section to avoid a known Apple bug.
 3. **Allow critical notifications.** `Settings` → `incident.io` → `Notifications` → enable `Critical Alerts`. These bypass silent and Focus mode for push notifications.
-4. **Whitelist incident.io in every Focus mode.** `Settings` → `Focus` → for each mode (Sleep, Do Not Disturb, Work, etc.) → `Apps` → add `incident.io` to the allowed list.
+4. **Allowlist incident.io in every Focus mode.** `Settings` → `Focus` → for each mode (Sleep, Do Not Disturb, Work, etc.) → `Apps` → add `incident.io` to the allowed list.
 5. **Watch for sound redirects.** Apple Watch pairing, AirPods Announce Notifications, and Screen Time can route incident.io alerts away from your phone speaker – disable the incident.io app in the Watch app's notification list and add incident.io to Screen Time's "Always Allowed" apps.
 
 #### Android
@@ -111,7 +111,7 @@ Exact menu paths vary by manufacturer (Pixel, Samsung, OnePlus, etc.), but the s
 
 1. **Grant Do Not Disturb access to the app.** Accept the prompt during incident.io onboarding, or set it manually via `Settings` → `Apps` → `incident.io` → `Special app access` → `Do Not Disturb access`.
 2. **Disable battery and sleep restrictions for the app.** `Settings` → `Apps` → `incident.io` → disable `Pause app activity if unused`, and set `App battery usage` to `Unrestricted`. Otherwise Android may kill the app in the background and you won't get paged.
-3. **Whitelist incident.io in each Do Not Disturb / Focus mode.** On Pixel/stock Android: `Settings` → `Sound & vibration` → `Do Not Disturb` → `Apps` → add `incident.io`. On Samsung: `Settings` → `Modes and routines` → each mode → `Allowed apps` → add `incident.io`.
+3. **Allowlist incident.io in each Do Not Disturb / Focus mode.** On Pixel/stock Android: `Settings` → `Sound & vibration` → `Do Not Disturb` → `Apps` → add `incident.io`. On Samsung: `Settings` → `Modes and routines` → each mode → `Allowed apps` → add `incident.io`.
 4. **Star the incident.io On-call contact and allow starred contacts to bypass DND.** Save and star/favorite the contact, then under `Do Not Disturb` → `People` (or `Exceptions`), allow `Calls` and `Messages` from `Starred contacts`. This lets the phone calls and SMS pages ring through.
 5. **Consider enabling Alarm-style notifications.** In the incident.io app's advanced settings, toggle `Alarm style notifications` and make sure alarms are allowed during Do Not Disturb – this routes pages through the alarm channel, which most phones treat as un-silenceable.
 
