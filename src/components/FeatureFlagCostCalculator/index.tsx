@@ -219,13 +219,13 @@ const CalculatorBody = (): JSX.Element => {
                                 value={prettyInt(serverCount)}
                                 tooltip="Number of server-side processes/pods running the PostHog SDK. Each polls independently."
                             />
-                            <LinearSlider
+                            <LogSlider
                                 min={1}
                                 max={5000}
-                                marks={[1, 100, 1000, 5000]}
-                                stepsInRange={500}
-                                value={serverCount}
-                                onChange={(v) => setServerCount(Math.round(v))}
+                                marks={[1, 10, 100, 1000, 5000]}
+                                stepsInRange={200}
+                                value={Math.log(serverCount)}
+                                onChange={(v) => setServerCount(clamp(Math.round(Math.exp(v)), 1, 5000))}
                             />
                         </div>
 
@@ -235,13 +235,13 @@ const CalculatorBody = (): JSX.Element => {
                                 value={`${pollIntervalSec}s`}
                                 tooltip="How often each server fetches fresh flag definitions. Lower = fresher flags but more billable polls."
                             />
-                            <LinearSlider
+                            <LogSlider
                                 min={10}
                                 max={3600}
-                                marks={[10, 60, 300, 3600]}
-                                stepsInRange={359}
-                                value={pollIntervalSec}
-                                onChange={(v) => setPollIntervalSec(Math.round(v))}
+                                marks={[10, 30, 60, 300, 900, 3600]}
+                                stepsInRange={200}
+                                value={Math.log(pollIntervalSec)}
+                                onChange={(v) => setPollIntervalSec(clamp(Math.round(Math.exp(v)), 10, 3600))}
                             />
                         </div>
 
