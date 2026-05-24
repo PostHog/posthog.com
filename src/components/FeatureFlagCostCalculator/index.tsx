@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { IconInfo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
-import Toggle from 'components/Toggle'
 import { LogSlider, LinearSlider, prettyInt } from 'components/Pricing/PricingSlider/Slider'
 
 type Scale = 'log' | 'linear'
@@ -17,6 +16,11 @@ const LOCAL_EVAL_MULTIPLIER = 10
 const REQUEST_MIN = 1_000
 const REQUEST_MAX = 10_000_000_000
 const REQUEST_MARKS = [1_000, 100_000, 1_000_000, 10_000_000, 100_000_000, 1_000_000_000, 10_000_000_000]
+
+const DEFAULT_MONTHLY_REQUESTS = 10_000_000
+const DEFAULT_SERVER_COUNT = 5
+const DEFAULT_POLL_INTERVAL_SEC = 60
+const DEFAULT_SERVER_SHARE_PCT = 80
 
 const FALLBACK_TIERS: Tier[] = [
     { up_to: 1_000_000, unit_amount_usd: '0' },
@@ -59,7 +63,7 @@ const parseShorthand = (raw: string): number | null => {
 }
 
 const inputClassName =
-    'bg-transparent text-right font-code text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-2 w-full max-w-[120px] focus:outline-none focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark tabular-nums'
+    'bg-transparent text-right font-code text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-2 w-24 focus:outline-none focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark tabular-nums'
 
 const InfoIcon = ({ tooltip }: { tooltip: string }): JSX.Element => (
     <Tooltip content={tooltip} contentContainerClassName="max-w-xs" placement="top">
@@ -100,12 +104,29 @@ const FieldRow = ({ title, tooltip, value, min, max, marks, scale, onChange, suf
     }
 
     return (
-        <div className="grid grid-cols-12 gap-x-4 items-center border-t border-light dark:border-dark py-4">
-            <div className="col-span-12 md:col-span-4 flex items-baseline gap-1">
-                <span className="text-[14px] font-semibold">{title}</span>
-                <InfoIcon tooltip={tooltip} />
+        <div className="py-3">
+            <div className="flex items-baseline justify-between gap-3 mb-2">
+                <span className="text-[14px] font-semibold flex items-baseline gap-1 min-w-0">
+                    <span className="truncate">{title}</span>
+                    <InfoIcon tooltip={tooltip} />
+                </span>
+                <span className="flex items-center gap-1.5 shrink-0">
+                    <input
+                        type="text"
+                        inputMode="numeric"
+                        value={draft}
+                        onChange={(e) => setDraft(e.target.value)}
+                        onBlur={commit}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') (e.target as HTMLInputElement).blur()
+                        }}
+                        aria-label={title}
+                        className={inputClassName}
+                    />
+                    {suffix && <span className="text-[13px] opacity-60 shrink-0">{suffix}</span>}
+                </span>
             </div>
-            <div className="col-span-8 md:col-span-5 pr-2">
+            <div className="px-1 pb-5">
                 {scale === 'log' ? (
                     <LogSlider
                         min={min}
@@ -126,31 +147,50 @@ const FieldRow = ({ title, tooltip, value, min, max, marks, scale, onChange, suf
                     />
                 )}
             </div>
-            <div className="col-span-4 md:col-span-3 flex items-center justify-end gap-1.5">
-                <input
-                    type="text"
-                    inputMode="numeric"
-                    value={draft}
-                    onChange={(e) => setDraft(e.target.value)}
-                    onBlur={commit}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') (e.target as HTMLInputElement).blur()
-                    }}
-                    aria-label={title}
-                    className={inputClassName}
-                />
-                {suffix && <span className="text-[13px] opacity-60 shrink-0">{suffix}</span>}
+        </div>
+    )
+}
+
+type CostCardProps = {
+    title: string
+    description: string
+    cost: number
+    accent: 'neutral' | 'best' | 'warning'
+    badge?: string
+}
+
+const CostCard = ({ title, description, cost, accent, badge }: CostCardProps): JSX.Element => {
+    const accentClass =
+        accent === 'best'
+            ? 'border-green/40 bg-green/5'
+            : accent === 'warning'
+            ? 'border-yellow/40 bg-yellow/10'
+            : 'border-light dark:border-dark bg-accent dark:bg-accent-dark'
+    return (
+        <div className={`flex-1 min-w-0 rounded border p-4 ${accentClass}`}>
+            <div className="flex items-center justify-between gap-2 mb-2">
+                <strong className="text-[13px] uppercase tracking-wide opacity-75">{title}</strong>
+                {badge && (
+                    <span className="text-[11px] font-semibold px-1.5 py-0.5 rounded bg-green/20 text-green shrink-0">
+                        {badge}
+                    </span>
+                )}
             </div>
+            <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-2xl font-bold tabular-nums">{formatUSD(cost)}</span>
+                <span className="opacity-60 text-sm">/mo</span>
+            </div>
+            <p className="text-[12px] opacity-75 m-0 leading-snug">{description}</p>
         </div>
     )
 }
 
 const CalculatorBody = (): JSX.Element => {
-    const [monthlyRequests, setMonthlyRequests] = useState<number>(1_000_000)
-    const [useLocal, setUseLocal] = useState<boolean>(false)
-    const [serverCount, setServerCount] = useState<number>(10)
-    const [pollIntervalSec, setPollIntervalSec] = useState<number>(30)
-    const [serverSidePct, setServerSidePct] = useState<number>(50)
+    const [monthlyRequests, setMonthlyRequests] = useState<number>(DEFAULT_MONTHLY_REQUESTS)
+    const [serverCount, setServerCount] = useState<number>(DEFAULT_SERVER_COUNT)
+    const [pollIntervalSec, setPollIntervalSec] = useState<number>(DEFAULT_POLL_INTERVAL_SEC)
+    const [serverSidePct, setServerSidePct] = useState<number>(DEFAULT_SERVER_SHARE_PCT)
+    const [showAdvanced, setShowAdvanced] = useState<boolean>(false)
     const [tiers, setTiers] = useState<Tier[] | null>(null)
 
     useEffect(() => {
@@ -175,113 +215,103 @@ const CalculatorBody = (): JSX.Element => {
     const localCost = calculatePrice(mixedBillable, activeTiers)
     const savings = remoteCost - localCost
     const savingsPct = remoteCost > 0 ? Math.round((savings / remoteCost) * 100) : 0
-    const localCostsMore = useLocal && localCost > remoteCost
-    const headlineCost = useLocal ? localCost : remoteCost
+    const localCheaper = savings > 0
+    const localCostsMore = savings < 0
+
+    const assumptions = `Assumes ${serverSidePct}% of evaluations server-side, ${serverCount} server${
+        serverCount === 1 ? '' : 's'
+    } polling every ${pollIntervalSec}s.`
 
     return (
-        <div className="not-prose my-8">
-            <div className="flex items-center justify-between gap-3 flex-wrap mb-1">
-                <h4 className="!mb-0 !text-xl">
+        <div className="not-prose my-8 @container border border-light dark:border-dark rounded-md p-4 md:p-5 bg-white/40 dark:bg-accent-dark/40">
+            <div className="mb-3">
+                <h4 className="!mb-1 !text-xl flex items-baseline gap-1">
                     Estimate your monthly cost
-                    <span className="inline-block ml-1 relative -top-0.5">
-                        <InfoIcon tooltip="Estimates use current usage-based pricing tiers. Local evaluation polls count as 10 flag requests each." />
-                    </span>
+                    <InfoIcon tooltip="Estimates use current usage-based pricing tiers. Local evaluation polls count as 10 flag requests each." />
                 </h4>
-                <Toggle
-                    label="Use local evaluation"
-                    position="left"
-                    checked={useLocal}
-                    onChange={setUseLocal}
-                    activeOpacity={false}
-                />
-            </div>
-            <p className="text-sm opacity-75 mb-2">
-                Drag a slider or type a volume to see your monthly bill. Toggle local evaluation to compare against
-                remote-only.
-            </p>
-
-            <div className="border-b border-light dark:border-dark">
-                <FieldRow
-                    title="Monthly flag requests"
-                    tooltip="Total flag evaluation requests across all your apps per month. Estimate as daily active users × ~5 evals/user × 30 days. Accepts shorthand: 500k, 1m, 2.5b."
-                    value={monthlyRequests}
-                    min={REQUEST_MIN}
-                    max={REQUEST_MAX}
-                    marks={REQUEST_MARKS}
-                    scale="log"
-                    onChange={setMonthlyRequests}
-                />
-
-                {useLocal && (
-                    <>
-                        <FieldRow
-                            title="Server fleet size"
-                            tooltip="Number of server-side processes/pods running the PostHog SDK. Each polls independently."
-                            value={serverCount}
-                            min={1}
-                            max={5000}
-                            marks={[1, 10, 100, 1000, 5000]}
-                            scale="log"
-                            onChange={setServerCount}
-                        />
-                        <FieldRow
-                            title="Poll interval"
-                            tooltip="How often each server fetches fresh flag definitions. Lower = fresher flags but more billable polls."
-                            value={pollIntervalSec}
-                            min={10}
-                            max={3600}
-                            marks={[10, 30, 60, 300, 900, 3600]}
-                            scale="log"
-                            onChange={setPollIntervalSec}
-                            suffix="sec"
-                        />
-                        <FieldRow
-                            title="Server-side share of requests"
-                            tooltip="Percentage of evaluations on your servers (eligible for local eval). Browser and mobile evaluations stay remote."
-                            value={serverSidePct}
-                            min={0}
-                            max={100}
-                            marks={[0, 25, 50, 75, 100]}
-                            scale="linear"
-                            onChange={setServerSidePct}
-                            suffix="%"
-                        />
-                    </>
-                )}
+                <p className="text-sm opacity-75 m-0">
+                    See how local evaluation compares to remote at your traffic volume.
+                </p>
             </div>
 
-            <div className="grid grid-cols-12 mt-4 bg-accent dark:bg-accent-dark rounded items-center">
-                <div className="col-span-12 md:col-span-7 p-4">
-                    <strong className="block">Monthly estimate</strong>
-                    <span className="text-sm opacity-75">
-                        {useLocal
-                            ? `${
-                                  savings > 0
-                                      ? `Save ${formatUSD(savings)}/mo (${savingsPct}%) vs remote`
-                                      : savings < 0
-                                      ? `${formatUSD(-savings)}/mo more than remote`
-                                      : 'Same cost as remote'
-                              }`
-                            : 'Remote evaluation — every flag check is a billable request'}
-                    </span>
-                </div>
-                <div className="col-span-12 md:col-span-5 p-4 md:text-right">
-                    <div className="flex md:justify-end items-baseline gap-1">
-                        <span className="text-2xl font-bold">{formatUSD(headlineCost)}</span>
-                        <span className="opacity-60 text-sm">/mo</span>
-                    </div>
-                    {useLocal && savings > 0 && (
-                        <div className="text-sm opacity-75">
-                            Remote-only: <span className="font-code">{formatUSD(remoteCost)}/mo</span>
-                        </div>
-                    )}
-                </div>
+            <FieldRow
+                title="Monthly flag requests"
+                tooltip="Total flag evaluation requests across all your apps per month. Estimate as daily active users × ~5 evals/user × 30 days. Accepts shorthand: 500k, 1m, 2.5b."
+                value={monthlyRequests}
+                min={REQUEST_MIN}
+                max={REQUEST_MAX}
+                marks={REQUEST_MARKS}
+                scale="log"
+                onChange={setMonthlyRequests}
+            />
+
+            <div className="flex flex-col @md:flex-row gap-3 mt-2">
+                <CostCard
+                    title="Remote evaluation"
+                    description="Every flag check is a billable request."
+                    cost={remoteCost}
+                    accent={localCheaper ? 'neutral' : 'best'}
+                />
+                <CostCard
+                    title="Local evaluation"
+                    description={assumptions}
+                    cost={localCost}
+                    accent={localCheaper ? 'best' : localCostsMore ? 'warning' : 'neutral'}
+                    badge={localCheaper && savingsPct > 0 ? `Save ${savingsPct}%` : undefined}
+                />
             </div>
 
             {localCostsMore && (
                 <div className="mt-3 p-3 rounded border border-yellow text-[13px] bg-yellow/10">
-                    <strong>Heads up:</strong> with these settings, local evaluation costs <em>more</em> than remote.
-                    Try a larger poll interval or a smaller fleet.
+                    <strong>Heads up:</strong> at this volume, local evaluation costs <em>more</em>. Try a larger poll
+                    interval, a smaller fleet, or a higher server-side share below.
+                </div>
+            )}
+
+            <button
+                type="button"
+                onClick={() => setShowAdvanced((v) => !v)}
+                className="mt-4 text-[13px] font-semibold opacity-75 hover:opacity-100 inline-flex items-center gap-1"
+                aria-expanded={showAdvanced}
+            >
+                <span className="inline-block w-3 text-center">{showAdvanced ? '−' : '+'}</span>
+                Local evaluation assumptions
+            </button>
+
+            {showAdvanced && (
+                <div className="mt-2 border-t border-light dark:border-dark divide-y divide-light dark:divide-dark">
+                    <FieldRow
+                        title="Server fleet size"
+                        tooltip="Number of server-side processes/pods running the PostHog SDK. Each polls independently."
+                        value={serverCount}
+                        min={1}
+                        max={5000}
+                        marks={[1, 10, 100, 1000, 5000]}
+                        scale="log"
+                        onChange={setServerCount}
+                    />
+                    <FieldRow
+                        title="Poll interval"
+                        tooltip="How often each server fetches fresh flag definitions. Lower = fresher flags but more billable polls."
+                        value={pollIntervalSec}
+                        min={10}
+                        max={3600}
+                        marks={[10, 30, 60, 300, 900, 3600]}
+                        scale="log"
+                        onChange={setPollIntervalSec}
+                        suffix="sec"
+                    />
+                    <FieldRow
+                        title="Server-side share"
+                        tooltip="Percentage of evaluations on your servers (eligible for local eval). Browser and mobile evaluations stay remote."
+                        value={serverSidePct}
+                        min={0}
+                        max={100}
+                        marks={[0, 25, 50, 75, 100]}
+                        scale="linear"
+                        onChange={setServerSidePct}
+                        suffix="%"
+                    />
                 </div>
             )}
 
@@ -295,7 +325,7 @@ export const FeatureFlagCostCalculator = (): JSX.Element | null => {
     useEffect(() => setMounted(true), [])
     if (!mounted) {
         return (
-            <div className="not-prose my-8">
+            <div className="not-prose my-8 border border-light dark:border-dark rounded-md p-4">
                 <h4 className="!mb-2 !text-xl">Estimate your monthly cost</h4>
                 <div className="text-sm opacity-70">Loading…</div>
             </div>
