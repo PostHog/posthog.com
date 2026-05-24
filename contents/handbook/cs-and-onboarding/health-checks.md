@@ -50,7 +50,7 @@ A light nudge on this also doubles as a natural re-engagement touchpoint for cus
 
 ### Calling identify too often
 
-A common pattern is for users to call `posthog.identify()` on every page, or in an endless loop.  Whilst this won't break their tracking (unless they use different distinct IDs in the identify call) they will end up with a drastically inflated event volume.  You can diagnose this by looking at their Metabase usage dashboard in the Key event volume visualization.  If either the volume of $identify or $set events is higher then 5% then something has likely gone wrong in the implementation.
+A common pattern is for users to call `posthog.identify()` on every page, or in an endless loop.  Whilst this won't break their tracking (unless they use different distinct IDs in the identify call) they will end up with a drastically inflated event volume.  You can diagnose this by looking at their Metabase usage dashboard in the Key event volume visualization.  If either the volume of $identify or $set events is higher than 5% then something has likely gone wrong in the implementation.
 
 You should get in touch and let them know that they only need to call `posthog.identify()` [once per session](/docs/product-analytics/identify#best-practices-when-using-identify).
 
@@ -93,7 +93,7 @@ When using either PostHog's managed reverse proxy or deploying a [non-managed re
 
 ### Cookieless tracking
 
-If a customer mentions their user/event count seems to be missing a lot of data from their website, ask them if they have implemented cookie opt-in and to share the part of their code where PostHog is initialized. Some customers may not be aware that we have specific recommendations for how to initiatlize PostHog for [cookieless tracking](/tutorials/cookieless-tracking). 
+If a customer mentions their user/event count seems to be missing a lot of data from their website, ask them if they have implemented cookie opt-in and to share the part of their code where PostHog is initialized. Some customers may not be aware that we have specific recommendations for how to initialize PostHog for [cookieless tracking](/tutorials/cookieless-tracking). 
 
 For example, if they implement PostHog on their website similar to as follows: 
 ```

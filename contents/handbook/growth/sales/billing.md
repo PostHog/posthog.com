@@ -9,7 +9,7 @@ showTitle: true
 
 > This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the <SmallTeam slug="billing" /> and are not self serve. Sales should coordinate with the billing team for any billing modifications, pricing changes, or technical billing tasks rather than attempting to implement these directly.
 
-All PostHog instances talk to a common external **Billing Service**. This service is the single point for managing billing across PostHog Cloud US, PostHog Cloud EU (and ,formerly, self-hosted customers). 
+All PostHog instances talk to a common external **Billing Service**. This service is the single point for managing billing across PostHog Cloud US, PostHog Cloud EU (and, formerly, self-hosted customers). 
 
 The Billing Service is the source of truth for product information, what plans are offered on those products (eg a free vs a paid plan on Session Replay), and feature entitlements on those plans. Our payment provider Stripe is the source of truth for customer information, invoices, and payments. The billing service communicates with Stripe to pull all the relevant information together before responding to customer requests.
 
@@ -189,7 +189,7 @@ When calculating usage limits, discounts are taken into consideration _before_ t
 ### Plans
 > ⚠️ Plan modifications are handled exclusively by the <SmallTeam slug="billing" />. Do not attempt to modify plans directly, contact the billing team for any plan related requests.
 
-You can find a list of available plans in the billing repo. These are found inside `costants/plans`, divided by folder.
+You can find a list of available plans in the billing repo. These are found inside `constants/plans`, divided by folder.
 Each plan can have a list of features, and a price.
 Features are used to infer which features are available in the product, for a customer on that plan.
 You can manually change the plan for a customer by updating the `plans_map` in the billing admin panel.

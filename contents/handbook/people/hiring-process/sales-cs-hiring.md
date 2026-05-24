@@ -7,7 +7,7 @@ hideAnchor: true
 
 ## Sales and Customer Success hiring at PostHog
 
-Our Sales and Customer Success teams look after customers paying $20k a year or more for PostHog, as well as new customers who _may_ end up in that bucket.  The job of the teams is to land and expand usage of PostHog in these customers. We have three roles on the Sales and CS team: 
+Our Sales and Customer Success teams look after customers paying $20k a year or more for PostHog, as well as new customers who _may_ end up in that bucket.  The job of the teams is to land and expand usage of PostHog in these customers. We have four roles on the Sales and CS team: 
 
  - Technical Account Executives focused on closing new business from inbound and outbound leads
  - Technical Account Managers focused on expansion from existing customers and closing new business from product-led leads.

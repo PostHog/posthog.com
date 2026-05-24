@@ -178,7 +178,7 @@ Customers only get an uptime SLA if:
 1. They have subscribed to the Enterprise add-on; or
 2. You agree it with them as a special term as part of their contract if they are spending $100k+ ARR _post_ discount (i.e. $ spend, not credit usage). 
 
-An uptime SLA are not available to customers outside of these cases. You should certainly not agree to an SLA for customers on regular monthly contracts, and even for annual contracts it is not a given - it's one of multiple pieces you may have in play as you negotiate terms (much like a case study).
+An uptime SLA is not available to customers outside of these cases. You should certainly not agree to an SLA for customers on regular monthly contracts, and even for annual contracts it is not a given - it's one of multiple pieces you may have in play as you negotiate terms (much like a case study).
 
 More details on how exactly the uptime SLA works can be found in our [terms](/terms).
 
@@ -278,8 +278,8 @@ PostHog evaluates legal risk assumed against annual revenue received. In other w
 To illustrate with examples:
 
 -   A customer committing to spend just $20k USD annually should not expect significant deviations from PostHog's standard terms. Minor, clarifying edits will be acceptable. We will not spend our time going back and forth for this amount. We may respond to significant changes with a polite, "no," rather than negotiating, to communicate clearly.
--   A customer committing to spend $80k USD annually would be able to request slightly more sigificant deviations from PostHog's standard terms, and we will evaluate the suggested terms through the lens of legal risk assumed against annual revenue received. This will be a negotiation, and we will represent PostHog's position clearly as we go along.
--   A customer committing to spend $160k USD annually (or more) would be able request even more sigificant deviations from PostHog's standard terms, and we will evaluate the suggested terms through the lens of legal risk assumed against annual revenue received. This will be a negotiation, and we will represent PostHog's position clearly as we go along.
+-   A customer committing to spend $80k USD annually would be able to request slightly more significant deviations from PostHog's standard terms, and we will evaluate the suggested terms through the lens of legal risk assumed against annual revenue received. This will be a negotiation, and we will represent PostHog's position clearly as we go along.
+-   A customer committing to spend $160k USD annually (or more) would be able request even more significant deviations from PostHog's standard terms, and we will evaluate the suggested terms through the lens of legal risk assumed against annual revenue received. This will be a negotiation, and we will represent PostHog's position clearly as we go along.
 
 At any potential level of annual spend, PostHog will not proceed under unreasonable legal terms. Certain suggested terms may be non-starters for PostHog.
 

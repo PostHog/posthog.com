@@ -16,7 +16,7 @@ A good starting point is verifying what events the customer is tracking, whether
 
 One of the things to look for is whether the customer has any custom actions setup. This is quite useful and is often a good sign that customers might have their setup wrong if they have not made use of actions. Some common actions to potentially look for are _renaming of events_ that are more useful to the customer or bundling of events that are common such as `user signups` or `purchases`. 
 
-Additionally its worth flagging if a customer has autocapture enabled and no actions setup, that's probably worth flagging with the customer.
+Additionally it's worth flagging if a customer has autocapture enabled and no actions setup, that's probably worth flagging with the customer.
 
 ## Reverse proxy configured
 
@@ -30,9 +30,9 @@ If both methods are unavailable to you because the customer isn't using session 
 
 ## Persons Properties, Group Properties, and Cohorts
 
-Next, we want to look to see if customers are making use of persons properties, check if there are signs they may be over identifying, and if they are making use of cohorts. It is beneficial to understand what sort of person properties the customer is adding, potentially look for signs of properties they might be missing base on what you understand of their business, and the kind of cohorts, if any, they are using. 
+Next, we want to look to see if customers are making use of persons properties, check if there are signs they may be over identifying, and if they are making use of cohorts. It is beneficial to understand what sort of person properties the customer is adding, potentially look for signs of properties they might be missing based on what you understand of their business, and the kind of cohorts, if any, they are using. 
 
-If group analytics is enabled, its worth checking to see if they have group properties set and if the type of properties makes sense. Because group types are limited to five, it's important to make sure the group types are set up in a way that makes sense, and the related persons profile makes sense in the way it's associated with group properties.
+If group analytics is enabled, it's worth checking to see if they have group properties set and if the type of properties makes sense. Because group types are limited to five, it's important to make sure the group types are set up in a way that makes sense, and the related persons profile makes sense in the way it's associated with group properties.
 
 ## Ecommerce Events
 
@@ -54,7 +54,7 @@ Every customer and more specifically, every team, will have a different set of g
 
 ## Are customers using data pipelines for event notifications?
 
-This idea actually came from our own team's use of data pipeline destinations to get notified when specific events occur in Slack. It's a great additional use that could be helpful to companies that didn't consider this use case for data piplines and an easy way to try and upsell.
+This idea actually came from our own team's use of data pipeline destinations to get notified when specific events occur in Slack. It's a great additional use that could be helpful to companies that didn't consider this use case for data pipelines and an easy way to try and upsell.
 
 ## Query failure rate
 

@@ -56,7 +56,7 @@ The following is a guide to share what has worked, and what hasn't for others wh
 ## Conducting meetings
 
 8. **Be flexible.**  
-   Some meetings will last 30 minutes, others 2 hours. Lunch-time slots often work well, you can grab food together, build rapport, and then dig in. If other posthog team members are free and local in the area and want to come along, feel free to bring them too.
+   Some meetings will last 30 minutes, others 2 hours. Lunch-time slots often work well, you can grab food together, build rapport, and then dig in. If other PostHog team members are free and local in the area and want to come along, feel free to bring them too.
 
 9. **Bring merch.**  
    Small things like hats or shirts go a long way. Drop a message in [#merch](https://posthog.slack.com/archives/C04DWKH7DM3) and Kendal can help you place an order.

@@ -172,7 +172,7 @@ Follow-up with: Now go look at their business and domain. What should they be do
 - **Start with a quick discovery (3–5 minutes)**.  What they shared in the booking form may not reflect today’s priorities or the goals of everyone on the call. Confirm what outcome they want by the end of the session.
 - **Have the relevant docs ready**. If you can anticipate the topic of the session, keep the key docs open so you can screen-share them quickly.
 - **Show, don’t tell. Build things live**. If you discuss funnels, dashboards, cohorts, or flags, create one. Save it so the customer can revisit it later.
--**Connect features**. Show how features compound and check [this Handbook page](https://posthog.com/handbook/growth/cross-selling/cross-sell-motions#bundle-features) for inspiration:
+- **Connect features**. Show how features compound and check [this Handbook page](https://posthog.com/handbook/growth/cross-selling/cross-sell-motions#bundle-features) for inspiration:
   - Funnels → drop-off → jump into Session Replay to understand it better and create a cohort
   - Error tracking → watch related replays
   - Experiments → measurable impact → rolling out the winning variant

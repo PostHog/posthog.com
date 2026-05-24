@@ -61,9 +61,9 @@ If a customer is relying on a different source of truth and possibly moving Post
 
 ## Privacy, compliance, or data governance reasons
 
-Some customers require strict privacy, compliance, or data governance controls. In some situations, it might be out of our control in terms of providing a solution that will work e.g. some customers can't store specific data with 3rd party services and must keep all data on prem. It's important we clarify all data controls customers do have with PostHog so they can make as concise of an informed decision as possible regarding where and how PostHog can be used. PostHog is anonymous by default and even among some of our products, such as Session Replay, we mask certain data to protect privacy. Some customers may not be aware of this and assume they can't use certain products. Helping them understand what privacy controls is available will help them be more confident in adopting certain PostHog products in this situation.
+Some customers require strict privacy, compliance, or data governance controls. In some situations, it might be out of our control in terms of providing a solution that will work e.g. some customers can't store specific data with 3rd party services and must keep all data on prem. It's important we clarify all data controls customers do have with PostHog so they can make as concise of an informed decision as possible regarding where and how PostHog can be used. PostHog is anonymous by default and even among some of our products, such as Session Replay, we mask certain data to protect privacy. Some customers may not be aware of this and assume they can't use certain products. Helping them understand what privacy controls are available will help them be more confident in adopting certain PostHog products in this situation.
 
-Even if we don't control local laws, industry rulings, etc., we can help our customers better understanding how to optimize their [data collection](https://posthog.com/docs/privacy/data-collection), [mask information](https://posthog.com/docs/cdp/transformations/template-url-masking), add [privacy controls](https://posthog.com/docs/session-replay/privacy), or follow key compliance practices such as [cookieless tracking](https://posthog.com/tutorials/cookieless-tracking) or [GDPR](https://posthog.com/docs/privacy/gdpr-compliance).
+Even if we don't control local laws, industry rulings, etc., we can help our customers better understand how to optimize their [data collection](https://posthog.com/docs/privacy/data-collection), [mask information](https://posthog.com/docs/cdp/transformations/template-url-masking), add [privacy controls](https://posthog.com/docs/session-replay/privacy), or follow key compliance practices such as [cookieless tracking](https://posthog.com/tutorials/cookieless-tracking) or [GDPR](https://posthog.com/docs/privacy/gdpr-compliance).
 
 As much as we can, we should help customers better understand what they can and can't do with regards to privacy when using PostHog, and what [data deletion](https://posthog.com/docs/privacy/data-storage#data-deletion) methods are available.
 
@@ -71,7 +71,7 @@ As much as we can, we should help customers better understand what they can and 
 
 ## Customer has been acquired
 
-This doesn't necessarily pose as an immediate risk or assume the customer will churn but we've seen many times where a company gets acquired and eventually moves off for a number of reasons. It would be good to learn what risks exists when you've learned that one of your book of business has just been acquired.
+This doesn't necessarily pose as an immediate risk or assume the customer will churn but we've seen many times where a company gets acquired and eventually moves off for a number of reasons. It would be good to learn what risks exist when you've learned that one of your book of business has just been acquired.
 
 ## Customer ceases operations (for any number of reasons)
 

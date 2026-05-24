@@ -18,7 +18,7 @@ This is maintained as <PrivateLink url="https://github.com/PostHog/company-inter
 
 ### Onboarding email
 
-We send an introductory email to all new hires to welcome them to the team and ease them in the some of the essential actions we need them to take. This needs communicating openly, as users may not be able to access the `company-internal` repo yet. So, we send them an email.
+We send an introductory email to all new hires to welcome them to the team and ease them into some of the essential actions we need them to take. This needs communicating openly, as users may not be able to access the `company-internal` repo yet. So, we send them an email.
 
 > Once you've joined PostHog, we will **not** use email for communicating with each other. For example, James or Tim will never ask you to do something critical over email only – they'll always confirm it over Slack, and so will everyone else. Be extremely cautious of direct emails from James, Tim, or other people of PostHog.
 

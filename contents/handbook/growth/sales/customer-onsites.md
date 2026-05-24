@@ -88,7 +88,7 @@ Connect PostHog usage to a metric the exec cares about: "Your team shipped 12 fe
 ## Manufacturing Informal Access
 
 # Why this matters
-The formal sessions are theater - everyone is in meeting mode, and the group is usually to large for real candor. Deeper information comes out over lunch, walking between buildings, or after a drink: you need to create contexts where people forget you're "the vendor" and just talk to you like a colleague.
+The formal sessions are theater - everyone is in meeting mode, and the group is usually too large for real candor. Deeper information comes out over lunch, walking between buildings, or after a drink: you need to create contexts where people forget you're "the vendor" and just talk to you like a colleague.
 
 # Making the invitation
 Bad: "I'd love to take you to dinner to discuss PostHog's roadmap"

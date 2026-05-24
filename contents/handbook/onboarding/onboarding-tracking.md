@@ -21,7 +21,7 @@ The program is guided by a few key principles:
 
 ### Internal process
 
-#### Vitaly views
+#### Vitally views
 
 **Daily view** (<PrivateLink url="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/d08c5202-bdcd-40b8-aba7-5746c340a35b">link</PrivateLink>)
 

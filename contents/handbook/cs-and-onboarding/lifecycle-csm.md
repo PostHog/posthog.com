@@ -34,11 +34,11 @@ Establishing trust can take time, and your communication style and actions can p
 
 At this stage, we're interested in conducting a deep dive and becoming more deeply embedded with their team to work through some of their goals. This could help establish new workflows or setups to gain deeper insights beyond what they've achieved.
 
-Here are a couple examples that have came up previously:
+Here are a couple examples that have come up previously:
 
 - **Building a custom recommendation engine**: An ecommerce customer we were working with had implemented PostHog to track key metrics they cared about but wanted to take it a step further and use us as source of truth in customizing visitor experiences to their site. Each returning visitor would see a custom feed just for them based on prior product views, searches, or purchases. This went way beyond the scope of simply tracking events and building dashboards, and there were potential opportunities to work with the customer here on how to custom track events, push data to their backend, and more.
 
-- **Real time alerts**: A couple customers had high value actions they wanted to track and get real time notifications on. One customer wanted to track product views, present related purchases for upsell, and get notified when a customer didn't complete a purchase. Another wanted to track downloads and figure out when visitors attempt to access a file but runs into an error. This presented opportunies to understand high value signals for our customer and how we can help them implement a custom solution using PostHog to accomplish their goals.
+- **Real time alerts**: A couple customers had high value actions they wanted to track and get real time notifications on. One customer wanted to track product views, present related purchases for upsell, and get notified when a customer didn't complete a purchase. Another wanted to track downloads and figure out when visitors attempt to access a file but runs into an error. This presented opportunities to understand high value signals for our customer and how we can help them implement a custom solution using PostHog to accomplish their goals.
 
 The goal at this stage is to help our customers succeed by getting them the key metrics they care about, and often times, requires us to connect with their team to implement custom code changes at a deeper level to accomplish this. 
 

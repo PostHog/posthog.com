@@ -67,7 +67,7 @@ You'll get monthly expense reports for your direct reports. You have context Fin
 ### Why documentation matters
 Missing receipts and memos create extra work during audit season - auditors will need to dig into those expenses, which means hours of back-and-forth with you about charges from several months ago! A quick receipt upload and memo update now saves everyone time later.
 
-We're legally prohibited from paying personal expenses on behalf of team member, and are at risk of penalties/fines if this happens. 
+We're legally prohibited from paying personal expenses on behalf of a team member, and are at risk of penalties/fines if this happens. 
 
 > The flexible, trust-based policy we have only works when everyone maintains proper documentation. If team members consistently fail to upload receipts and add memos, we'll either need to implement rigid pre-approvals for all spending, or treat repeated violations as performance management issues. Which we really don't want to do!
 
@@ -179,7 +179,7 @@ The cost of introducing new collaborative software is that it creates another pl
 Individual software is down to your personal preference, and we encourage you to share cool software.
 - There are some tools used by team members individually - if they become more widely adopted, it makes sense to have a company account. Talk to [Tara](https://posthog.com/community/profiles/34526) on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ)
 
-You can ask for access to team/company tools by submitted a request in Slack. Find the Zluri app in Slack. type: /accessrequest and press enter. You'll get a pop up that allows you to search for the app you'd like access to. Add any specific information about license level/type if necessary. The request will then be sent to the team member who owns/manages access to the plaftorm. Once they have provided access to the platform, they'll confirm via the Zluri task and you'll also receive confirmation. You should then receive an email invite, or be able to login via SSO depending on the tool. If you do not see a tool in the app that you believe is centrally managed, drop a line in the [#team-people-and-ops] channel
+You can ask for access to team/company tools by submitted a request in Slack. Find the Zluri app in Slack. type: /accessrequest and press enter. You'll get a pop up that allows you to search for the app you'd like access to. Add any specific information about license level/type if necessary. The request will then be sent to the team member who owns/manages access to the platform. Once they have provided access to the platform, they'll confirm via the Zluri task and you'll also receive confirmation. You should then receive an email invite, or be able to login via SSO depending on the tool. If you do not see a tool in the app that you believe is centrally managed, drop a line in the [#team-people-and-ops] channel
 
 - Some tools that you might find useful to know about:
   - [Loom](https://www.loom.com): you'll be added as a _Creator Lite_ which allows you to record 25 videos/mo at up to 5 minutes in length. If you need a full Creator account (unlimited videos, advanced features), specify in your Zluri access request
