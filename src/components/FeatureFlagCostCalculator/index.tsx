@@ -4,6 +4,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { LogSlider, LinearSlider, prettyInt } from 'components/Pricing/PricingSlider/Slider'
 
 type Mode = 'remote' | 'local'
+type Scale = 'log' | 'linear'
 
 type Tier = {
     up_to: number | null
@@ -41,32 +42,42 @@ const calculatePrice = (events: number, tiers: Tier[]): number => {
     return Math.round(total)
 }
 
-const Label = ({ title, value, tooltip }: { title: string; value: string; tooltip?: string }): JSX.Element => (
-    <div className="flex items-baseline justify-between mb-1">
-        <div className="flex items-baseline gap-1">
-            <span className="text-[13px] font-semibold">{title}</span>
-            {tooltip && (
-                <Tooltip
-                    side="top"
-                    trigger={
-                        <span className="inline-block p-0.5 opacity-60 hover:opacity-100 cursor-help relative -top-px">
-                            <IconInfo className="size-3.5 inline-block" />
-                        </span>
-                    }
-                >
-                    <div className="max-w-xs text-sm">{tooltip}</div>
-                </Tooltip>
-            )}
-        </div>
-        <span className="text-[13px] font-mono tabular-nums opacity-80">{value}</span>
-    </div>
+const clamp = (n: number, min: number, max: number): number => Math.max(min, Math.min(max, n))
+
+const parseShorthand = (raw: string): number | null => {
+    const cleaned = raw
+        .replace(/[, _%s]/gi, '')
+        .trim()
+        .toLowerCase()
+    if (!cleaned) return null
+    const match = cleaned.match(/^(\d+(?:\.\d+)?)([kmb])?$/)
+    if (!match) return null
+    const base = parseFloat(match[1])
+    const mult = match[2] === 'k' ? 1_000 : match[2] === 'm' ? 1_000_000 : match[2] === 'b' ? 1_000_000_000 : 1
+    return Math.round(base * mult)
+}
+
+const inputClassName =
+    'bg-transparent text-right font-code text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-2 w-28 focus:outline-none focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark tabular-nums'
+
+const InfoIcon = ({ tooltip }: { tooltip: string }): JSX.Element => (
+    <Tooltip
+        side="top"
+        trigger={
+            <span className="inline-block p-0.5 opacity-60 hover:opacity-100 cursor-help relative -top-px">
+                <IconInfo className="size-3.5 inline-block" />
+            </span>
+        }
+    >
+        <div className="max-w-xs text-sm">{tooltip}</div>
+    </Tooltip>
 )
 
 const ModeToggle = ({ mode, onChange }: { mode: Mode; onChange: (m: Mode) => void }): JSX.Element => (
     <div
         role="radiogroup"
         aria-label="Evaluation mode"
-        className="inline-flex p-0.5 rounded-full border border-light dark:border-dark bg-light dark:bg-dark text-[12px] font-semibold"
+        className="inline-flex p-0.5 rounded-full border border-light dark:border-dark bg-white dark:bg-accent-dark text-[12px] font-semibold"
     >
         {(['remote', 'local'] as Mode[]).map((option) => {
             const checked = mode === option
@@ -90,22 +101,106 @@ const ModeToggle = ({ mode, onChange }: { mode: Mode; onChange: (m: Mode) => voi
     </div>
 )
 
-const parseRequests = (raw: string): number | null => {
-    const cleaned = raw.replace(/[, _]/g, '').trim().toLowerCase()
-    if (!cleaned) return null
-    const match = cleaned.match(/^(\d+(?:\.\d+)?)([kmb])?$/)
-    if (!match) return null
-    const base = parseFloat(match[1])
-    const mult = match[2] === 'k' ? 1_000 : match[2] === 'm' ? 1_000_000 : match[2] === 'b' ? 1_000_000_000 : 1
-    return Math.round(base * mult)
+type NumericFieldProps = {
+    title: string
+    tooltip: string
+    value: number
+    min: number
+    max: number
+    marks: number[]
+    scale: Scale
+    onChange: (n: number) => void
+    suffix?: string
+    formatDisplay?: (n: number) => string
 }
 
-const clamp = (n: number, min: number, max: number): number => Math.max(min, Math.min(max, n))
+const NumericField = ({
+    title,
+    tooltip,
+    value,
+    min,
+    max,
+    marks,
+    scale,
+    onChange,
+    suffix,
+    formatDisplay = prettyInt,
+}: NumericFieldProps): JSX.Element => {
+    const [draft, setDraft] = useState<string>(formatDisplay(value))
 
-const Row = ({ label, value, emphasis = false }: { label: string; value: string; emphasis?: boolean }): JSX.Element => (
+    useEffect(() => {
+        setDraft(formatDisplay(value))
+    }, [value, formatDisplay])
+
+    const commit = (): void => {
+        const parsed = parseShorthand(draft)
+        if (parsed === null) {
+            setDraft(formatDisplay(value))
+            return
+        }
+        const bounded = clamp(parsed, min, max)
+        onChange(bounded)
+        setDraft(formatDisplay(bounded))
+    }
+
+    return (
+        <div>
+            <div className="flex items-center justify-between gap-2 mb-1.5">
+                <div className="flex items-baseline gap-1">
+                    <span className="text-[13px] font-semibold">{title}</span>
+                    <InfoIcon tooltip={tooltip} />
+                </div>
+                <div className="flex items-center gap-1">
+                    <input
+                        type="text"
+                        inputMode="numeric"
+                        value={draft}
+                        onChange={(e) => setDraft(e.target.value)}
+                        onBlur={commit}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') (e.target as HTMLInputElement).blur()
+                        }}
+                        aria-label={title}
+                        className={inputClassName}
+                    />
+                    {suffix && <span className="text-[13px] opacity-60">{suffix}</span>}
+                </div>
+            </div>
+            {scale === 'log' ? (
+                <LogSlider
+                    min={min}
+                    max={max}
+                    marks={marks}
+                    stepsInRange={200}
+                    value={Math.log(value)}
+                    onChange={(v) => onChange(clamp(Math.round(Math.exp(v)), min, max))}
+                />
+            ) : (
+                <LinearSlider
+                    min={min}
+                    max={max}
+                    marks={marks}
+                    stepsInRange={Math.max(100, max - min)}
+                    value={value}
+                    onChange={(v) => onChange(clamp(Math.round(v), min, max))}
+                />
+            )}
+        </div>
+    )
+}
+
+const ResultLine = ({
+    label,
+    value,
+    emphasis = false,
+}: {
+    label: string
+    value: string
+    emphasis?: boolean
+}): JSX.Element => (
     <div className="flex items-baseline justify-between py-1">
-        <span className={emphasis ? 'text-[15px] font-semibold' : 'text-[14px]'}>{label}</span>
-        <span className={`font-mono tabular-nums ${emphasis ? 'text-[15px] font-semibold' : 'text-[14px]'}`}>
+        <span className={emphasis ? 'text-[15px] font-semibold' : 'text-[13px]'}>{label}</span>
+        <span className={`font-code tabular-nums ${emphasis ? 'text-[15px] font-semibold' : 'text-[13px]'}`}>
             {value}
         </span>
     </div>
@@ -113,7 +208,6 @@ const Row = ({ label, value, emphasis = false }: { label: string; value: string;
 
 const CalculatorBody = (): JSX.Element => {
     const [monthlyRequests, setMonthlyRequests] = useState<number>(1_000_000)
-    const [requestsInput, setRequestsInput] = useState<string>(prettyInt(1_000_000))
     const [mode, setMode] = useState<Mode>('remote')
     const [serverCount, setServerCount] = useState<number>(10)
     const [pollIntervalSec, setPollIntervalSec] = useState<number>(30)
@@ -132,21 +226,6 @@ const CalculatorBody = (): JSX.Element => {
             .catch(() => setTiers(FALLBACK_TIERS))
     }, [])
 
-    const updateRequests = (n: number): void => {
-        const bounded = clamp(n, REQUEST_MIN, REQUEST_MAX)
-        setMonthlyRequests(bounded)
-        setRequestsInput(prettyInt(bounded))
-    }
-
-    const handleInputBlur = (): void => {
-        const parsed = parseRequests(requestsInput)
-        if (parsed === null) {
-            setRequestsInput(prettyInt(monthlyRequests))
-            return
-        }
-        updateRequests(parsed)
-    }
-
     const activeTiers = tiers ?? FALLBACK_TIERS
     const pollsPerServerMo = SECONDS_PER_MONTH / pollIntervalSec
     const localBillable = LOCAL_EVAL_MULTIPLIER * pollsPerServerMo * serverCount
@@ -160,118 +239,77 @@ const CalculatorBody = (): JSX.Element => {
     const localCostsMore = mode === 'local' && localCost > remoteCost
 
     return (
-        <div className="border border-light dark:border-dark rounded p-5 my-6 bg-accent dark:bg-accent-dark not-prose">
+        <div className="border border-light dark:border-dark rounded-md p-5 my-6 bg-accent dark:bg-accent-dark not-prose">
             <div className="flex items-center justify-between flex-wrap gap-3 mb-5">
                 <h3 className="!my-0 !text-lg">Feature flag cost calculator</h3>
                 <ModeToggle mode={mode} onChange={setMode} />
             </div>
 
-            <div>
-                <div className="flex items-baseline justify-between mb-1.5 gap-2">
-                    <div className="flex items-baseline gap-1">
-                        <span className="text-[13px] font-semibold">Monthly flag requests</span>
-                        <Tooltip
-                            side="top"
-                            trigger={
-                                <span className="inline-block p-0.5 opacity-60 hover:opacity-100 cursor-help relative -top-px">
-                                    <IconInfo className="size-3.5 inline-block" />
-                                </span>
-                            }
-                        >
-                            <div className="max-w-xs text-sm">
-                                Total flag evaluation requests across all your apps per month. If unsure, estimate as
-                                daily active users × ~5 evals/user × 30 days. Accepts shorthand: 500k, 1m, 2.5b.
-                            </div>
-                        </Tooltip>
-                    </div>
-                    <input
-                        type="text"
-                        inputMode="numeric"
-                        value={requestsInput}
-                        onChange={(e) => setRequestsInput(e.target.value)}
-                        onBlur={handleInputBlur}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter') (e.target as HTMLInputElement).blur()
-                        }}
-                        aria-label="Monthly flag requests"
-                        className="w-32 px-2 py-1 text-right text-[13px] font-mono tabular-nums rounded border border-light dark:border-dark bg-white dark:bg-accent-dark focus:outline-none focus:border-red"
-                    />
-                </div>
-                <LogSlider
-                    min={REQUEST_MIN}
-                    max={REQUEST_MAX}
-                    marks={REQUEST_MARKS}
-                    stepsInRange={200}
-                    value={Math.log(monthlyRequests)}
-                    onChange={(v) => updateRequests(Math.round(Math.exp(v)))}
-                />
-            </div>
+            <NumericField
+                title="Monthly flag requests"
+                tooltip="Total flag evaluation requests across all your apps per month. If unsure, estimate as daily active users × ~5 evals/user × 30 days. Accepts shorthand: 500k, 1m, 2.5b."
+                value={monthlyRequests}
+                min={REQUEST_MIN}
+                max={REQUEST_MAX}
+                marks={REQUEST_MARKS}
+                scale="log"
+                onChange={setMonthlyRequests}
+            />
 
             {mode === 'local' && (
-                <div className="mt-6 pt-4 border-t border-light dark:border-dark">
-                    <div className="text-[11px] font-semibold uppercase tracking-wide opacity-60 mb-3">
+                <div className="mt-6 pt-5 border-t border-light dark:border-dark">
+                    <div className="text-[11px] font-semibold uppercase tracking-wide opacity-60 mb-4">
                         Local evaluation settings
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-                        <div>
-                            <Label
-                                title="Server fleet size"
-                                value={prettyInt(serverCount)}
-                                tooltip="Number of server-side processes/pods running the PostHog SDK. Each polls independently."
-                            />
-                            <LogSlider
-                                min={1}
-                                max={5000}
-                                marks={[1, 10, 100, 1000, 5000]}
-                                stepsInRange={200}
-                                value={Math.log(serverCount)}
-                                onChange={(v) => setServerCount(clamp(Math.round(Math.exp(v)), 1, 5000))}
-                            />
-                        </div>
-
-                        <div>
-                            <Label
-                                title="Poll interval"
-                                value={`${pollIntervalSec}s`}
-                                tooltip="How often each server fetches fresh flag definitions. Lower = fresher flags but more billable polls."
-                            />
-                            <LogSlider
-                                min={10}
-                                max={3600}
-                                marks={[10, 30, 60, 300, 900, 3600]}
-                                stepsInRange={200}
-                                value={Math.log(pollIntervalSec)}
-                                onChange={(v) => setPollIntervalSec(clamp(Math.round(Math.exp(v)), 10, 3600))}
-                            />
-                        </div>
-
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+                        <NumericField
+                            title="Server fleet size"
+                            tooltip="Number of server-side processes/pods running the PostHog SDK. Each polls independently."
+                            value={serverCount}
+                            min={1}
+                            max={5000}
+                            marks={[1, 10, 100, 1000, 5000]}
+                            scale="log"
+                            onChange={setServerCount}
+                        />
+                        <NumericField
+                            title="Poll interval"
+                            tooltip="How often each server fetches fresh flag definitions. Lower = fresher flags but more billable polls."
+                            value={pollIntervalSec}
+                            min={10}
+                            max={3600}
+                            marks={[10, 30, 60, 300, 900, 3600]}
+                            scale="log"
+                            onChange={setPollIntervalSec}
+                            suffix="sec"
+                        />
                         <div className="md:col-span-2">
-                            <Label
+                            <NumericField
                                 title="Server-side share of requests"
-                                value={`${serverSidePct}%`}
                                 tooltip="Percentage of evaluations on your servers (eligible for local eval). Browser and mobile evaluations stay remote."
-                            />
-                            <LinearSlider
+                                value={serverSidePct}
                                 min={0}
                                 max={100}
                                 marks={[0, 25, 50, 75, 100]}
-                                stepsInRange={100}
-                                value={serverSidePct}
-                                onChange={(v) => setServerSidePct(Math.round(v))}
+                                scale="linear"
+                                onChange={setServerSidePct}
+                                suffix="%"
                             />
                         </div>
                     </div>
                 </div>
             )}
 
-            <hr className="my-5 border-light dark:border-dark" />
-
-            <div>
-                <Row label="Remote-only cost" value={`${formatUSD(remoteCost)} / mo`} emphasis={mode === 'remote'} />
+            <div className="mt-6 rounded-md bg-white dark:bg-dark border border-light dark:border-dark p-4">
+                <ResultLine
+                    label="Remote-only cost"
+                    value={`${formatUSD(remoteCost)} / mo`}
+                    emphasis={mode === 'remote'}
+                />
                 {mode === 'local' && (
                     <>
-                        <Row label="With local evaluation" value={`${formatUSD(localCost)} / mo`} emphasis />
-                        <Row
+                        <ResultLine label="With local evaluation" value={`${formatUSD(localCost)} / mo`} emphasis />
+                        <ResultLine
                             label="Estimated savings"
                             value={
                                 savings > 0
@@ -281,19 +319,19 @@ const CalculatorBody = (): JSX.Element => {
                                     : '$0 / mo'
                             }
                         />
-                        <Row label="Annualized savings" value={savings > 0 ? formatUSD(savings * 12) : '—'} />
+                        <ResultLine label="Annualized savings" value={savings > 0 ? formatUSD(savings * 12) : '—'} />
                     </>
                 )}
-
-                {localCostsMore && (
-                    <div className="mt-4 p-3 rounded border border-yellow text-[13px] bg-yellow/10">
-                        <strong>Heads up:</strong> with these settings, local evaluation would cost <em>more</em> than
-                        remote. Try a larger poll interval or a smaller fleet.
-                    </div>
-                )}
-
-                {tiers === null && <div className="mt-3 text-[12px] opacity-60">Loading current pricing tiers…</div>}
             </div>
+
+            {localCostsMore && (
+                <div className="mt-4 p-3 rounded-md border border-yellow text-[13px] bg-yellow/10">
+                    <strong>Heads up:</strong> with these settings, local evaluation would cost <em>more</em> than
+                    remote. Try a larger poll interval or a smaller fleet.
+                </div>
+            )}
+
+            {tiers === null && <div className="mt-3 text-[12px] opacity-60">Loading current pricing tiers…</div>}
         </div>
     )
 }
@@ -303,7 +341,7 @@ export const FeatureFlagCostCalculator = (): JSX.Element | null => {
     useEffect(() => setMounted(true), [])
     if (!mounted) {
         return (
-            <div className="border border-light dark:border-dark rounded p-5 my-6 bg-accent dark:bg-accent-dark not-prose">
+            <div className="border border-light dark:border-dark rounded-md p-5 my-6 bg-accent dark:bg-accent-dark not-prose">
                 <h3 className="!mt-0 !mb-4 !text-lg">Feature flag cost calculator</h3>
                 <div className="text-sm opacity-70">Loading…</div>
             </div>
