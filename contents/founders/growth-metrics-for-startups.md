@@ -61,13 +61,11 @@ We've since extended the same enrichment data to combine with usage signals that
 ## 3. Iterate openly
 Once we had systems to query for ICP data, my next step was to actually start measuring our growth in this segment.
 
-The first version of any metric you build isn't wrong but it may not tell you much about how your business is actually doing. The point isn't to nail it on day one. It's to start with a simple version that everyone in your company understands, then iterate. If your methods are confusing, no one will use the metric.
+The first version of any metric you build isn't wrong but it may not tell you much about how your business is actually doing. The point isn't to nail it on day one. It's to start with a simple version that everyone in your company understands, then iterate. If your methods are confusing, no one will use the metric. We learned this the hard way. Early on, we built a bunch of dashboards broken down every which way. Only a couple ended up being useful. The rest were either ignored, or someone would look at them occasionally and find them stale or confusing.
 
-We learned this the hard way. Early on, we built a bunch of dashboards broken down every which way. Only a couple ended up being useful. The rest were either ignored, or someone would look at them occasionally and find them stale or confusing.
+In practice this iteration looked noisy with ups and downs in our retention numbers every month, someone asking why it moved, me explaining the gap, identifying the pattern, modeling a cleaner version, sharing it back with team, and repeating. This part can feel frustrating because I'd always have to add caveats along the lines of "here's the number, but here's how it would change if we reported it differently." It feels like you're publishing imperfect work over and over. You are. That's the loop.
 
-In practice this looked like noisy ups and downs in our retention numbers every month, someone asking why it moved, me explaining the gap, identifying the pattern, modeling a cleaner version, sharing it back with team, and repeating. This part can feel frustrating because I'd always have to add caveats along the lines of "here's the number, but here's how it would change if we reported it differently." It feels like you're publishing imperfect work over and over. You are. That's the loop.
-
-Here's the kind of pattern only the loop could have surfaced for us: when a customer implemented PostHog incorrectly, they'd sometimes generate a spike in billed events and then churn. That showed up as a great revenue month followed by unexpected loss. This looked like a business problem on paper, but it was really an onboarding one. We only caught it because someone kept asking "why did this number move?" and we kept digging.
+Here's the kind of pattern only the loop could have surfaced for us: when a customer implemented PostHog incorrectly, they'd sometimes generate a spike in billed events and then churn. That showed up as a great revenue expansion followed by unexpected loss. This looked like a business problem on paper, but it was really an onboarding one. We only caught it because someone kept asking "why did this number move?" and we kept digging.
 
 Each cycle gets you closer to a number you can trust. Every "wait why did this move?" is a noise source surfacing, and once you can name it you can do something about it.
 
@@ -90,7 +88,7 @@ For our retention metric, we now use average quarterly MRR, annualized:
 
 Taking the average of three months before annualizing means that a short month — February has three fewer days than March, which creates a mechanical dip in usage-based revenue — no longer distorts the picture. It also smooths out one off spikes from a single big launch or an unusual billing cycle, so the number moves with the actual trend of the business rather than with noise.
 
-We can report it with confidence now. It's segmented for the customers we actually care about, and calibrated to how our business work. This isn't a metric you can come up with from a template. We landed on it because we understand our own business in detail: what counts as noise, what counts as signal, and what investors will push back on. 
+We can report it with confidence now. It's segmented for the customers we actually care about, and calibrated to how our business work. This isn't a template metric. We landed on it because we understand our own business in detail: what counts as noise, what counts as signal, and what investors will push back on. 
 
 What you measure depends a lot on your stage too. If you're pre-revenue, anchor on whatever value you're actually delivering and find the metric closest to it. If you're a classic SaaS it's how often each user actually gets something useful from the product (not just whether they logged in). For an AI company, frequency might not be the right frame at all, it's more about how you define value for those customers.
 
