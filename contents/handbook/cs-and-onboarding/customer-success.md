@@ -38,3 +38,21 @@ In order of priority, your objectives should be:
 - Don’t focus on a specific champion during your initial outreach. When prioritizing outreach, do look at engaged users and user types but aim to connect with multiple team members. You never know who will be responsive and become your best point of contact. Don’t focus on just reaching out to an identified champion (if one exists).
 
 - On initial engagement calls initiated from you to learn more about the customer, it is helpful to prepare a simple agenda and re-iterate this on the call to make it easier for customers to understand what you'll be discussing, particularly if you're not familiar with their business, and what you hope to get out of the meeting, then wrap up with a summary of any action items you'll be taking to follow up with the customer. This can be a great time to gauge if the customer is interested in setting up a recurring check-in call.
+
+## How do I know if a customer is stuck?
+
+Because most of our customers are self-serve, it can be difficult to know if they're struggling before it's too late. Customers will fail silently, and without proactive outreach from CSMs, may churn.
+
+There are some common red flags that may indicate incoming customer churn, including:
+
+- SDK installed but no events being recorded
+  
+- Only one team member active after onboarding (especially if there are additional inactive users on the account)
+  
+- Session Replay enabled without insights or dashboards being created; there are better ways to do things than manually viewing every session replay
+
+- Repeated implementation questions; what's not sticking about the information?
+  
+- Long periods of inactivity after initial setup; they start out strong, then quickly abandon the project
+
+If you notice these or any other signs that a customer is not engaging, do your best to proactively engage them to get them back on track! Use [this guide](/handbook/growth/sales/getting-people-to-talk-to-you) to try to get in front of a customer before they fully give up.
