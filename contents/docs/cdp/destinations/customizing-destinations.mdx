@@ -175,3 +175,5 @@ For more details and inspiration, you can always view the source code of any des
 - **Keep it short:** We have tight controls on execution time, memory usage.
 
 - **Do not perform more than 5 `fetch` calls:** The function will error if you do. If you need to do more than 5 calls, please [contact support](https://us.posthog.com/#panel=support%3Asupport%3Aapps%3A%3Atrue).
+
+- **Don't `fetch` back to PostHog with your project token:** To prevent event-forwarding loops, `fetch()` calls that target `posthog.com` (or a subdomain) with your project's API token in the URL or body are blocked. Use the `postHogCapture()` helper to capture events back into your project from Hog code. For modifying or enriching incoming events, use a [transformation](/docs/cdp/transformations).
