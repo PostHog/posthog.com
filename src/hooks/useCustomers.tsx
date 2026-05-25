@@ -419,6 +419,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 },
                 quotes: [
                     "We love that you're nerd-friendly. You love being a kind of white-labeled substrate, just a fantastic platform for us to build on top of.",
+                    The reason Fastr can stamp out a custom dashboard for every customer is their agentic pipeline. Fastr's engineers don't click around the PostHog UI. They write Claude skills that go figure out the current PostHog API, generate the endpoints and materialized views a feature needs, and deploy them.
+                    That's what shapes the Fastr UI. Instead of a chart library, Fastr drops customers into an AI conversation. They describe the question and the system pulls the answer out of the PostHog data Fastr has wired up for them.
                 ],
             },
         },
