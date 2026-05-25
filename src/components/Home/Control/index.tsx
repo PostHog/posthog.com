@@ -184,14 +184,7 @@ const productCategories = [
     },
     {
         name: 'Feature development',
-        handles: [
-            'posthog_code',
-            'feature_flags',
-            'workflows_emails',
-            'webhooks',
-            'endpoints',
-            'early_access',
-        ],
+        handles: ['posthog_code', 'feature_flags', 'workflows_emails', 'webhooks', 'endpoints', 'early_access'],
     },
     {
         name: 'Debugging & analysis',
