@@ -52,7 +52,7 @@ Three small bugs surfaced during the weighted rollout:
 
 1. A missing token parameter that Django had been accepting silently.
 2. The 401-vs-403 mismatch from the auth quirk above, which I caught by lining up the two services' status code rates side by side in Grafana.
-3. A bug in the mixed targeting beta: the Python SDK was reading `aggregation_group_type_index` only at the flag level, so flags that mixed user and group conditions were being treated as person-only, the group conditions were failing locally and falling back to a server-side call. We fixed it in the Python SDK and left the others for follow-up.
+3. A bug in the mixed targeting beta: the Python SDK was reading `aggregation_group_type_index` only at the flag level, so flags that mixed user and group conditions were treated as person-only. Group conditions failed locally and fell back to a server-side call. We fixed it in the Python SDK and left the others for follow-up.
 
 All three surfaced while Django was still catching most of the traffic. If we'd cut over in one step on day one, customer support tickets would have done the testing for us.
 
