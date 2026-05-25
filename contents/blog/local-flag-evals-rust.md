@@ -70,7 +70,7 @@ The Rust definitions fleet now handles around 282 requests per second in US on 5
 | PGBouncer sidecars | Yes | No |
 | Dedicated node pool | Yes (memory-optimized) | No (shared pool) |
 
-Latency improved, too. These numbers are measured at the Envoy layer (the time between Envoy receiving the request and getting a response back from the pod), so they don't include client-to-Envoy network time. A customer's SDK sees this plus its own network round-trip on top. Since it's the same Prometheus metric (`envoy_cluster_upstream_rq_time`) for both services, it's apples to apples.
+Latency improved too. These are Envoy-layer measurements: pod response time, no client network. A customer's SDK sees this plus its own round-trip. Same Prometheus metric (`envoy_cluster_upstream_rq_time`) for both services, so it's apples to apples.
 
 | | Django | Rust | Improvement |
 |---|---|---|---|
