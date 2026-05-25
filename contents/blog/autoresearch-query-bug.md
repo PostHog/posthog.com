@@ -1,5 +1,5 @@
 ---
-date: 2026-05-22
+date: 2026-05-25
 title: How autoresearch found a 3-year-old bug in our query engine
 rootPage: /blog
 sidebar: Blog
