@@ -12,7 +12,7 @@ tags:
  - Guides
 ---
 
-Web session replay has been a core part of PostHog since our first hackathon way back in 2020, but we only released our first betas for mobile apps in April of 2024.
+Web session replay has been a core part of PostHog since our first hackathon way back in 2020, but we only released our first betas for mobile apps in April 2024.
 
 Why the long wait? 
 
