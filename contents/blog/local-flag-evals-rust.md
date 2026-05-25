@@ -1,6 +1,6 @@
 ---
 title: 'From 270GB RAM to 5GB: Moving local flag evaluation from Django to Rust'
-date: 2026-05-18
+date: 2026-05-25
 rootPage: /blog
 sidebar: Blog
 showTitle: true
