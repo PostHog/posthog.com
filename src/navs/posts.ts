@@ -234,11 +234,11 @@ export const postsMenu: IMenu[] = [
                 tag: 'Cdp',
             },
             {
-                name: 'LLM analytics',
+                name: 'AI Observability',
                 url: '/tutorials/ai-engineering',
                 color: 'purple',
                 icon: 'IconLlmAnalytics',
-                tag: 'LLM analytics',
+                tag: 'AI Observability',
             },
         ],
     },

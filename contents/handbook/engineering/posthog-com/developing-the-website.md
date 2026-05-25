@@ -196,6 +196,8 @@ Everything else (apps, CDP, templates, jobs, API docs, SDK references, paginatio
 
 Pull request previews on Cloudflare Pages use the same minimal build as above: the workflow sets `GATSBY_MINIMAL=true` (see `.github/workflows/deploy-preview.yml`). That keeps preview builds fast.
 
+**Building without cache:** If a preview build is broken due to a stale Gatsby cache, add the `no-cache` label to the PR. This skips cache restore and runs a clean build from scratch. Remove the label when you're done to go back to cached builds.
+
 **Implications for content authors:**
 
 - **Post category indexes are not built** — Routes like `/tutorials`, `/blog`, and `/posts` are not generated in previews. Opening them can fail or show a broken page (for example a blank or error screen in the site shell). This is expected.

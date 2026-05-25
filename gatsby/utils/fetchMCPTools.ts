@@ -8,6 +8,8 @@ const MCP_TOOLS_URL =
 interface MCPTool {
     category?: string
     summary: string
+    description?: string
+    required_scopes?: string[]
 }
 
 interface ToolCategory {
@@ -18,10 +20,20 @@ interface ToolCategory {
     }>
 }
 
-export async function fetchAndProcessMCPTools(): Promise<{
+interface ToolByName {
+    summary: string
+    description?: string
+    category?: string
+    required_scopes?: string[]
+}
+
+export interface MCPToolsData {
     categories: ToolCategory[] | null
+    byName: Record<string, ToolByName> | null
     error: boolean
-}> {
+}
+
+export async function fetchAndProcessMCPTools(): Promise<MCPToolsData> {
     try {
         const response = await fetch(MCP_TOOLS_URL)
 
@@ -33,6 +45,7 @@ export async function fetchAndProcessMCPTools(): Promise<{
 
         // Process the tools into categories
         const toolCategories: Record<string, Array<{ name: string; summary: string }>> = {}
+        const byName: Record<string, ToolByName> = {}
 
         Object.entries(mcpTools).forEach(([toolName, toolDef]) => {
             const category = toolDef.category || 'Uncategorized'
@@ -43,6 +56,12 @@ export async function fetchAndProcessMCPTools(): Promise<{
                 name: toolName,
                 summary: toolDef.summary,
             })
+            byName[toolName] = {
+                summary: toolDef.summary,
+                description: toolDef.description,
+                category: toolDef.category,
+                required_scopes: toolDef.required_scopes,
+            }
         })
 
         // Sort tools within each category alphabetically
@@ -57,18 +76,20 @@ export async function fetchAndProcessMCPTools(): Promise<{
 
         return {
             categories: categoriesArray,
+            byName,
             error: false,
         }
     } catch (error) {
         console.error('Error fetching MCP tools:', error)
         return {
             categories: null,
+            byName: null,
             error: true,
         }
     }
 }
 
-export function writeMCPToolsToFile(data: { categories: ToolCategory[] | null; error: boolean }): void {
+export function writeMCPToolsToFile(data: MCPToolsData): void {
     const mcpToolsPath = path.resolve(__dirname, '../../src/data/mcp-tools.json')
     fs.mkdirSync(path.dirname(mcpToolsPath), { recursive: true })
     fs.writeFileSync(mcpToolsPath, JSON.stringify(data, null, 2))

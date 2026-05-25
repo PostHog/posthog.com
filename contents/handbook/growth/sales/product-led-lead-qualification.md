@@ -108,7 +108,7 @@ For accounts you qualify, see [getting recognized on the deal](/handbook/growth/
 When you qualify a lead, the signals you found during qualification are your conversation starters:
 
 - **Optimization opportunities:** High autocapture percentage, $identify over-calling, session replay without minimum duration. Leading with "I noticed something that could reduce your bill" builds trust fast.
-- **Missing products that fit their use case:** B2B without Group Analytics, mobile app without Mobile Replay, AI product without LLM Analytics, engineering team with flags but no experiments.
+- **Missing products that fit their use case:** B2B without Group Analytics, mobile app without Mobile Replay, AI product without AI Observability, engineering team with flags but no experiments.
 - **Growth anomalies:** A product that just spiked in usage (new product activated, event volume doubling). Screenshot it and include it in your outreach.
 - **Billing page visits:** In the org event stream, filter for `path name contains 'billing'`. Recent billing page views mean they're thinking about cost, which is a natural opening for an annual plan conversation.
 
