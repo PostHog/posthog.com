@@ -12,7 +12,7 @@ tags:
  - Guides
 ---
 
-Web session replay has been a core part of PostHog since our first hackathon way back in 2020, but we only released our first betas for mobile apps in April of this year.
+Web session replay has been a core part of PostHog since our first hackathon way back in 2020, but we only released our first betas for mobile apps in April 2024.
 
 Why the long wait? 
 
@@ -22,7 +22,7 @@ Why the long wait?
 
 3. Building performant and functional replay for mobile apps is way harder than web.
 
-Happily, after several months of hard work from the replay team, we have betas for [iOS](/docs/session-replay/ios), [Android](/docs/session-replay/android), [React Native](/docs/session-replay/react-native), and [Flutter](/docs/session-replay/flutter).
+Happily, after several months of hard work from the replay team, we now have generally available support for [iOS](/docs/session-replay/ios), [Android](/docs/session-replay/android), [React Native](/docs/session-replay/react-native), and [Flutter](/docs/session-replay/flutter).
 
 This post covers how it works and some of the technical challenges we overcame it make it.
 
