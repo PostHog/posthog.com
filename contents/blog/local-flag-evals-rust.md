@@ -26,7 +26,7 @@ I reloaded Grafana three times before I trusted the numbers. p50 latency: 40ms t
 
 ## Local evaluation explained
 
-Local evaluation is the endpoint every server-side SDK hits to fetch [feature flag](/feature-flags) definitions. SDKs poll it every 30 seconds by default, so it gets a lot of traffic. Until recently it had its own Django deployment, sized for that traffic: about 30 pods on average in US, with autoscaling configured up to 250. Each pod requested 2 CPU cores and 9 GB of memory, so at baseline we were running 60 cores and 270 GB of RAM.
+Local evaluation is a configurable endpoint that server-side SDKs hit to fetch [feature flag](/feature-flags) definitions. SDKs poll it every 30 seconds by default, so it gets a lot of traffic. Until recently it had its own Django deployment, sized for that traffic: about 30 pods on average in US, with autoscaling configured up to 250. Each pod requested 2 CPU cores and 9 GB of memory, so at baseline we were running 60 cores and 270 GB of RAM.
 
 The endpoint reads cached flag definitions out of Redis, checks auth, and returns JSON. There is no flag evaluation logic, and no database queries on the hot path. The Rust feature flags service next door was already serving around 13,000 requests per second on `/flags` and `/decide`, doing the actual compute, so moving the cache read over to live in the same codebase felt overdue.
 
