@@ -151,10 +151,11 @@ Don't interrogate the customer — pick a few that are relevant.
 
 ### Prioritization
 
-Take a different approach for monthly vs annual customers:
+Focus on accounts where something is changing, for better or worse, and accounts with renewals on the horizon:
 
-- **Annual plans:** prioritize accounts with renewals in the next 3-4 months.
-- **Monthly plans:** look for significant growth in the last quarter.
+- **Upcoming renewals:** accounts with renewals in the next 3-4 months.
+- **MRR variance:** significant decline or growth in the last quarter.
+- **Low engagement:** customers who aren't using PostHog or engaging with us.
 
 ### Account research
 
