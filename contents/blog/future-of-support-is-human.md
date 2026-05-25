@@ -36,7 +36,7 @@ The deeper customers go into AI, the more problems call for a human on the other
 
 As our support team lead, I've been asked plenty of times what I think of putting AI in front of our support queue. I've always said no. Not because AI isn't useful, but because there's a difference between AI as a tool and AI as a gate.
 
-A gate is something you have to get past, and it frustrates customers. Support chatbots only handle the simple stuff – the questions already answered in the docs – so anyone with a harder problem learns to type "agent" or "human" three times to reach actually help. No one is trying to be deliberately frustrating, it's just what happens when a harder problem runs into a wall built for easy ones. 
+A gate is something you have to get past, and it frustrates customers. Support chatbots only handle the simple stuff – the questions already answered in the docs – so anyone with a harder problem learns to type "agent" or "human" three times to reach actual help. No one is trying to be deliberately frustrating, it's just what happens when a harder problem runs into a wall built for easy ones. 
 
 Most companies don't realize the frustration they're creating. They look at the numbers, see fewer tickets coming in, and read it as a good sign: customers must be doing fine. Companies call it "deflection." Customers call it being ignored.
 
@@ -45,8 +45,6 @@ The result is the same either way: some people get frustrated and give up on rai
 Why do companies let it get that far? Because of a framing that's been around forever: support is a cost line item, something to minimize, alongside cloud spend and office snacks. Support has nearly always been filed under cost and almost never under revenue – and that's the mistake.
 
 The value support creates is nearly impossible to put on a dashboard. A support engineer who genuinely understands your customer can be the reason someone *doesn't* churn – they can take a customer who decided to leave and turn them around, because for once an interaction made them feel understood. That's revenue. It just never shows up with support's name attached. And it runs the other way too: a bad support experience can undo everything else the company does well – the great product, the smooth onboarding, the clever marketing – because the support conversation is the moment a customer finds out whether you actually care when it counts. You can do a hundred things right and one bad interaction undoes it all.
-
-The alternative to a gate isn't no AI – it's optional AI. Let people reach for it when it's the fastest path to an answer, and reach a human the moment they'd prefer one. Same powerful tools, no wall.
 
 Done well, support is one of the strongest competitive advantages a company has. It's the part of the experience people actually remember, and often the reason they stay and tell other people to come along. But it only works that way when customers can reach you. No one recommends a company because they have really great AI support.
 
