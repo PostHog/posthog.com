@@ -46,6 +46,14 @@ If you have a single repo connected, the task runs against it immediately. If yo
 
 While the agent is working, you can view its activity in PostHog and once it's done it'll post a final summary of its work to the thread.
 
+## Personal GitHub integration
+
+Repo-bound tasks – anything that opens a PR – require your personal GitHub integration. This ensures the agent opens pull requests under your identity, not the PostHog app's.
+
+If you haven't connected your personal GitHub, the bot posts a message with a **Connect GitHub** button linking to your integration settings. Connect it, then mention the bot again to continue.
+
+Tasks that don't touch a repo (like answering analytics questions or chatting) work without a personal GitHub connection.
+
 ## Follow-ups
 
 Reply in the thread to send a follow-up to the running agent. Anything you say while the run is active is forwarded as a new message in the same conversation, so you can steer mid-run ("actually, skip the test files") or answer a question the agent asked.
@@ -53,6 +61,8 @@ Reply in the thread to send a follow-up to the running agent. Anything you say w
 Once the agent finishes, you can reply to it by sending a new message in the thread with `@PostHog` - this will continue the existing task that PostHog was working on.
 
 Right now, only the person that started a task can continue it in the thread. If you want to continue it yourself, you can start a new thread and pass the existing messages as context.
+
+If you send a follow-up mention without naming a repo (like "should be there now" after connecting GitHub), the bot checks the last 10 thread messages to find the repo you mentioned earlier. You don't need to repeat the repo name every time.
 
 ## Routing rules and default repo
 
