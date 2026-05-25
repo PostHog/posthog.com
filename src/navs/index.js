@@ -4529,6 +4529,16 @@ export const docsMenu = {
                     name: 'Guides',
                 },
                 {
+                    name: 'A/B testing prompts',
+                    url: '/docs/experiments/llm-prompt-experiments',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Tracking long-term metrics',
                     url: '/docs/experiments/tracking-long-term-metrics',
                     icon: 'IconClock',
@@ -6012,6 +6022,17 @@ export const docsMenu = {
                     icon: 'IconStack',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'A/B testing prompts',
+                    url: '/docs/prompt-management/prompt-experiments',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                    featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
             ],
         },
