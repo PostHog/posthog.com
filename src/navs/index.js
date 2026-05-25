@@ -518,6 +518,58 @@ export const handbookSidebar = [
         ],
     },
     {
+        name: 'Brand',
+        url: '',
+        children: [
+            {
+                name: 'Why our brand matters',
+                url: '/handbook/brand/overview',
+            },
+            {
+                name: 'Brandbook',
+            },
+            {
+                name: 'Brand foundations',
+                url: '/handbook/brand/foundations',
+            },
+            {
+                name: 'Voice & tone',
+                url: '/handbook/brand/tone',
+            },
+            {
+                name: 'Visual identity',
+                url: '/handbook/brand/visual-identity',
+            },
+            {
+                name: 'Brand in practice',
+                url: '/handbook/brand/in-practice',
+            },
+            {
+                name: 'Being a brand ambassador',
+                url: '/handbook/brand/ambassador',
+            },
+            {
+                name: 'Ownership & approvals',
+                url: '/handbook/brand/approvals',
+            },
+            {
+                name: 'Resources',
+            },
+            {
+                name: 'Quick reference',
+                url: '/handbook/brand/reference',
+            },
+            {
+                name: 'Brand assets',
+                url: '/handbook/brand/assets',
+            },
+            {
+                name: 'Requesting custom art',
+                url: '/handbook/brand/art-requests',
+            },
+        ],
+    },
+    {
         name: 'Content',
         url: '',
         children: [
@@ -949,36 +1001,6 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/product-design-process',
                     },
                 ],
-            },
-        ],
-    },
-    {
-        name: 'Graphics',
-        url: '',
-        children: [
-            {
-                name: 'Overview',
-                url: '/handbook/brand/overview',
-            },
-            {
-                name: 'Brand strategy',
-                url: '/handbook/strategy/brand',
-            },
-            {
-                name: 'Art requests',
-                url: '/handbook/brand/art-requests',
-            },
-            {
-                name: 'Logos, brand, and hedgehogs',
-                url: '/handbook/company/brand-assets',
-            },
-            {
-                name: 'Style guide',
-                url: '/handbook/brand/style-guide',
-            },
-            {
-                name: 'Our design philosophy',
-                url: '/handbook/brand/philosophy',
             },
         ],
     },
@@ -2693,6 +2715,10 @@ export const docsMenu = {
                             url: '/docs/getting-started/data-import-export',
                         },
                         {
+                            name: 'Event ingestion filtering',
+                            url: '/docs/data/event-filtering',
+                        },
+                        {
                             name: 'Ingestion warnings',
                             url: '/docs/data/ingestion-warnings',
                         },
@@ -3615,16 +3641,6 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Sampling',
-                    url: '/docs/product-analytics/sampling',
-                    icon: 'IconSampling',
-                    color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Color themes',
                     url: '/docs/product-analytics/color-themes',
                     icon: 'IconPalette',
@@ -4505,6 +4521,16 @@ export const docsMenu = {
                 },
                 {
                     name: 'Guides',
+                },
+                {
+                    name: 'A/B testing prompts',
+                    url: '/docs/experiments/llm-prompt-experiments',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Tracking long-term metrics',
@@ -5963,6 +5989,17 @@ export const docsMenu = {
                     icon: 'IconStack',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'A/B testing prompts',
+                    url: '/docs/prompt-management/prompt-experiments',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                    featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
             ],
         },
