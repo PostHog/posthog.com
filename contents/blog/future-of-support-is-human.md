@@ -82,6 +82,8 @@ What's left is the harder part: diagnosis, fixes, and judgment about what actual
 
 ## What we're actually building
 
+So where do we put AI, if not in front of support? Just about everywhere else. We want customers using PostHog AI as much as they like – increasingly, it's how we expect people to use the product, whether they're asking it questions directly or driving PostHog through the MCP. It's a tool we want in their hands all day. The one place it doesn't belong is between a customer and support. The alternative to a gate isn't no AI – it's optional AI. Let people reach for it when it's the fastest path to an answer, and reach a human the moment they'd prefer one. Same powerful tools, no wall.
+
 The people on our support team are engineers. The job is to understand a problem well enough to fix it yourself, and to be just as good at talking to the human who has it. If a support engineer can create the PR or update the docs, they do – they don't pass that off to an engineering team. That's [the version of support that's worked for us for years](/newsletter/engineers-do-support), and it's the bit I'm least willing to give up.
 
 What's changing is how we *use* AI inside this team. We're moving our support workflow to [PostHog's own support product](/docs/support/start-here), and the value isn't AI-as-frontline – it's AI-as-context.
