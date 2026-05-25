@@ -46,7 +46,7 @@ SDK polling is bursty and predictable. Flag evaluation is spiky and latency-sens
 
 ## The rollout
 
-The rollout unfolded in layers. We pointed our own internal SDKs at the Rust endpoint first, diffed the responses with curl until we were satisfied, and then used Contour's weighted routing to shift external traffic gradually: 10%, then 50%, then 100% over two days. After that we updated all seven server-side SDKs to poll `/flags/definitions` directly, one PR per SDK, with the old URL still working through a route alias for customers on older versions.
+The rollout went in three stages. We pointed our own internal SDKs at the Rust endpoint first, diffed responses with curl, then used Contour's weighted routing to shift external traffic: 10%, then 50%, then 100% over two days. Then we updated all seven server-side SDKs to poll `/flags/definitions` directly, one PR per SDK, with the old URL still working through a route alias for older customers.
 
 Three small bugs surfaced during the weighted rollout:
 
