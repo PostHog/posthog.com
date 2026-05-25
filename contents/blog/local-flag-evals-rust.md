@@ -80,6 +80,6 @@ Latency improved, too. These numbers are measured at the Envoy layer (the time b
 
 The cache hit rate sits at 99.98%, which means almost every request is served from Redis with zero Postgres on the hot path. The dedicated Karpenter pool of memory-optimized instances is gone.
 
-I keep coming back to the rollout. Being able to shift 10% of traffic, sit with the metrics for a day, and roll back instantly if something looked off is what made this safe to ship fast. If we'd cut over in one step on day one, customer support tickets would have done the testing for me, and I would have been firefighting instead of writing this.
+I keep coming back to the rollout. We could shift 10% of traffic, sit with the metrics for a day, and roll back instantly if something looked off. That's what made this safe to ship fast. Cut over in one step and customer support tickets would have done the testing. I'd have been firefighting instead of writing this.
 
 There's [Untangling Tokio and Rayon in production](/blog/untangling-rayon-and-tokio) if you want to read about an earlier optimization on the same Rust service, and [How we built the Rust feature flag service](/blog/feature-flags-service) for the original Django-to-Rust migration that this one builds on.
