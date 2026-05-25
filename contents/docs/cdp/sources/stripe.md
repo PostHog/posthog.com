@@ -43,6 +43,15 @@ If you aren't concerned with giving us more permissions than necessary, you can 
 
 The **Webhooks** write permission is only required if you want PostHog to set up real-time syncing automatically. If you skip it, everything else still works – you'll just need to [create the webhook manually](#creating-the-webhook-manually-in-stripe) later if you decide to enable real-time syncing.
 
+#### Using partial-scope restricted API keys
+
+If you only need to sync specific tables, you can grant just a subset of the permissions above. The schema picker shows which tables your API key can access:
+
+- Tables you have permission for appear normally and can be selected for syncing.
+- Tables without permission display a **Permission missing** warning with the specific reason. These tables are disabled and can't be synced until you grant the missing scope in Stripe.
+
+This lets you follow the principle of least privilege – granting access only to the exact data you need.
+
 If your Stripe account is in a language other than English, we suggest you update it to English before following the steps above to guarantee the correct permissions are set.
 
 3. Paste your API key into PostHog.
