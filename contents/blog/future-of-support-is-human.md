@@ -90,6 +90,8 @@ The people on our support team are engineers. The job is to understand a problem
 
 What's changing is how we *use* AI inside this team. We're moving our support workflow to [PostHog's own support product](/docs/support/start-here), and the value isn't AI-as-frontline – it's AI-as-context.
 
+![Context](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/context_6586c86aef.png)
+
 Picture the moment a ticket lands. Without help, an engineer has to dig: 
 
 - Who is this person and what org are they in? 
