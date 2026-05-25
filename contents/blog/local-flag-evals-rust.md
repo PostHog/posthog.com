@@ -82,4 +82,4 @@ The cache hit rate sits at 99.98%, which means almost every request is served fr
 
 I keep coming back to the rollout. We could shift 10% of traffic, sit with the metrics for a day, and roll back instantly if something looked off. That's what made this safe to ship fast. Cut over in one step and customer support tickets would have done the testing. I'd have been firefighting instead of writing this.
 
-There's [Untangling Tokio and Rayon in production](/blog/untangling-rayon-and-tokio) if you want to read about an earlier optimization on the same Rust service, and [How we built the Rust feature flag service](/blog/feature-flags-service) for the original Django-to-Rust migration that this one builds on.
+_If you want to read more about this topic, check out our blog on [Untangling Tokio and Rayon in production](/blog/untangling-rayon-and-tokio) which covers an earlier optimization on the same service, or [How we made feature flags even faster and more reliable](/blog/even-faster-more-reliable-flags) for the original migration that this one builds on._
