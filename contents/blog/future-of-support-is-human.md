@@ -1,6 +1,6 @@
 ---
 title: Stop adding AI between you and your customers
-date: 2026-05-22
+date: 2026-05-25
 author:
   - abigail-richardson
 featuredImage: >-
