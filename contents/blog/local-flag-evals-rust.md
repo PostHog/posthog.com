@@ -36,7 +36,7 @@ Porting the endpoint itself was maybe the easy part, because most of the time we
 
 **Auth** was trickiest. The endpoint's Django view declared one authentication method, but a shared mixin added more behind the scenes. I noticed when Rust rejected requests that Django accepted. A related quirk: Django returned 403 (authenticated but not permitted) for some requests where Rust returned 401 (not authenticated). Same outcome for the client, but the codes mean different things, and our dashboards disagreed about what was happening. Matching Django's behavior took a few small changes on the Rust side.
 
-**ETags** were less painful, but the approach is worth mentioning because it's the kind of decision that saves a lot of pain later. Instead of trying to compute our own ETags on the Rust side (which would have required byte-identical serialization with Django), Rust just reads Django's stored ETag straight out of Redis. That side-steps the serialization problem entirely while the two services coexist. Today around 54% of requests come back as 304 Not Modified, so over half of all SDK polls move zero bytes of flag data.
+**ETags** were less painful. Instead of computing our own on the Rust side (which would have required byte-identical serialization with Django), Rust reads Django's stored ETag from Redis. That side-steps the serialization problem while the two services coexist. 54% of requests return 304 Not Modified. Over half of all SDK polls move zero bytes of flag data.
 
 **Billing and rate limiting** were the boring half: same Redis counters, same allowlist, same quota response codes, just reimplemented on the Rust side so we could match Django's outputs request-for-request.
 
