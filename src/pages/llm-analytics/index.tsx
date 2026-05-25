@@ -327,7 +327,7 @@ const ProductOSBenefitsSlide = () => {
                 <span className="text-red dark:text-yellow">10x better in the PostHog ecosystem</span>
             </h2>
             <p className="mt-4 text-xl text-center">
-                Sure you can use LLM analytics solo, but it's better with other PostHog products.
+                Sure you can use AI Observability solo, but it's better with other PostHog products.
             </p>
 
             <div className="mt-12">
@@ -437,7 +437,7 @@ export default function LLMAnalytics(): JSX.Element {
         ],
         content: {
             answersDescription: 'Track costs, performance, and usage of your AI features with detailed analytics',
-            answersHeadline: 'What can LLM Analytics help me discover?',
+            answersHeadline: 'What can AI Observability help me discover?',
         },
     })
 

@@ -16,7 +16,7 @@ export const createPlaylistLight =
 export const createPlaylistDark =
   "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/create-playlist-dark-mode.mp4";
 
-To watch recordings, you can visit the [Replay](https://us.posthog.com/replay) page or click on any data point in an insight. This opens a list of persons and displays a **Watch recording** button or **Recordings** tab if available. This is especially useful in [funnels](/docs/product-analytics/funnels), where you can drill down and [watch recordings of users who converted or dropped off](/tutorials/explore-insights-session-recordings).
+To watch recordings, you can visit the [Replay](https://app.posthog.com/replay) page or click on any data point in an insight. This opens a list of persons and displays a **Watch recording** button or **Recordings** tab if available. This is especially useful in [funnels](/docs/product-analytics/funnels), where you can drill down and [watch recordings of users who converted or dropped off](/tutorials/explore-insights-session-recordings).
 
 <ProductVideo
   videoLight={watchRecordingsLight}
@@ -43,25 +43,27 @@ To watch recordings, you can visit the [Replay](https://us.posthog.com/replay) p
 
 7. Change the playback speed, as well as select the option **Skip inactivity** which skips parts of the recording where the user was inactive on the page
 
-8. Play, pause, and seek through the recording. Hold `alt` to switch the seek buttons to seek in 1 millisecond steps
+8. Toggle between **Floating controls** (default, controls overlay the recording and show on hover) and **Pinned controls** (controls sit below the recording and are always visible) using the controls layout toggle in the settings bar. This preference persists across sessions.
 
-9. View AI summary segment markers on the player timeline as colored overlays – green for successful outcomes, red for failures. Click a marker to jump to that moment, or click a segment in the AI summary sidebar to navigate the player.
+9. Play, pause, and seek through the recording. Hold `alt` to switch the seek buttons to seek in 1 millisecond steps
 
-10. Switch the timestamp view between "relative" (seconds in recording), UTC, and project timezone
+10. View AI summary segment markers on the player timeline as colored overlays – green for successful outcomes, red for failures. Click a marker to jump to that moment, or click a segment in the AI summary sidebar to navigate the player.
 
-11. Add comments by pressing **C** or clicking the **Comment** button to share your thoughts with your team
+11. Switch the timestamp view between "relative" (seconds in recording), UTC, and project timezone
 
-12. Add emoji reactions by pressing **e** or clicking the **emoji quick reaction** button
+12. Add comments by pressing **C** or clicking the **Comment** button to share your thoughts with your team. You can also add a comment as a task by clicking **Add as task** to track issues that need to be fixed.
 
-13. Take a screenshot by pressing **s** or clcking the **screenshot** button
+13. Add emoji reactions by pressing **e** or clicking the **emoji quick reaction** button
 
-14. Create a short gif clip around the current timestamp by pressing **x** or the **clip** button
+14. Take a screenshot by pressing **s** or clcking the **screenshot** button
 
-15. Skip to the next recording in a playlist or collection by pressing **n** or the **play next** button
+15. Create a short gif clip around the current timestamp by pressing **x** or the **clip** button
 
-16. Enter cinema mode to focus on the recording by pressing **t** or clicking the cinema mode button
+16. Skip to the next recording in a playlist or collection by pressing **n** or the **play next** button
 
-17. Enter fullscreen mode by pressing **f** or clicking the fullscreen button
+17. Enter cinema mode to focus on the recording by pressing **t** or clicking the cinema mode button
+
+18. Enter fullscreen mode by pressing **f** or clicking the fullscreen button
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/light_player_annotated_b298e2b90e.png"
@@ -158,7 +160,7 @@ To change the events in a saved filter:
 
 If instead, you want to create a more permanent list of replays to watch later, analyze specific behavior, or share with your team, you can create a collection.
 
-To do so, click **+ Add to collection** next to the **Share** button on a replay, search or create a new collection, and then select it. You can share the collection by going to the [collection page](https://us.posthog.com/replay/playlists), finding that collection, and sharing the link to anyone with access to your PostHog project.
+To do so, click **+ Add to collection** next to the **Share** button on a replay, search or create a new collection, and then select it. You can share the collection by going to the [collection page](https://app.posthog.com/replay/playlists), finding that collection, and sharing the link to anyone with access to your PostHog project.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_11_41_58_2x_00e619e6af.png"

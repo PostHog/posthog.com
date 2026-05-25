@@ -103,6 +103,9 @@ To force specific users or audiences to receive specific variants (and their ass
 
 This specifies the conditions a user must meet to access the feature flag and receive a value. Release conditions do not apply to remote config flags.
 
+
+> **Tip:** You can configure [default release conditions](/docs/feature-flags/project-wide-settings#default-release-conditions) in your project settings to pre-populate release conditions when creating new flags. These defaults aren't enforced – you can modify or remove them during flag creation. Default release conditions don't apply to remote config flags.
+
 Condition sets are evaluated from **top to bottom**, and the **first** condition set that matches will be used. A condition matches when all property filters pass and the target falls within the rollout percentage.
 
 By default, release conditions **match by user**, meaning the flag is evaluated based on your distinct ID. You can change this using the **Match by** dropdown:
@@ -121,6 +124,8 @@ Rollout percentages support decimal values with up to two decimal places of prec
 - If you capture identified events, you can target based on [person properties](/docs/product-analytics/person-properties) and [cohorts](/docs/data/cohorts).
 
 - If you enabled group analytics, you can target based on [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties).
+
+When you target a person property of `distinct_id equals`, the value field searches persons by name, email, or distinct_id, so you don't need to paste a raw ID. A person with multiple distinct_ids – for example an anonymous device ID plus an identified email – appears as a separate option per ID, so you can pick the specific one the SDK captures under. The stored filter value is still the literal distinct_id, so flag evaluation is unchanged.
 
 <ProductScreenshot
     imageLight={ReleaseConditionLight}
@@ -254,12 +259,6 @@ If you're not sure which runtime to use, you can use the following guidelines:
 
 ### Evaluation contexts (optional)
 
-<CalloutBox icon="IconWarning" title="Evaluation contexts are in alpha release" type="caution">
-
-Evaluation contexts are currently in alpha release. This feature may not be available in your PostHog instance yet. Contact support if you'd like early access.
-
-</CalloutBox>
-
 Evaluation contexts control where and when a feature flag evaluates at runtime. They have their own dedicated section on the feature flag page, separate from tags.
 
 Add contexts to describe where the flag is used in your application. Some common examples are:
@@ -293,6 +292,42 @@ Tags are a way to categorize and organize your Feature Flags. They are purely or
 
 Tags are separate from [evaluation contexts](#evaluation-contexts-optional), which control where flags evaluate at runtime.
 
+## Editing feature flags
+
+After creating a feature flag, you can edit it directly from the flag's overview page without navigating to a separate edit form.
+
+### Inline editing
+
+Hover over any editable section on the feature flag overview page to reveal an **Edit** button. Click it to enter edit mode for that section. The following sections support inline editing:
+
+| Section | What you can edit |
+|---------|-------------------|
+| **Advanced options** | Tags, evaluation runtime, persistence settings |
+| **Payload** | JSON payload values for boolean flags |
+| **Release conditions** | Targeting rules and rollout percentages |
+| **Variants** | Variant keys, rollout percentages, descriptions, and payloads |
+
+After making changes, click **Save** to apply them or **Cancel** to discard. If you cancel with unsaved changes, a confirmation dialog appears to prevent accidental data loss.
+
+<CalloutBox icon="IconInfo" title="One section at a time" type="fyi">
+
+You can only edit one section at a time. Save or cancel your current edits before editing another section.
+
+</CalloutBox>
+
+### Editing the flag description
+
+The flag description is editable directly from the overview page. Click on the description text to edit it inline. Changes save automatically when you click away.
+
+### Editing the flag key
+
+The flag key is not editable from the overview page because changing it can break SDK calls like `posthog.isFeatureEnabled('your-flag-key')` or `posthog.getFeatureFlag('your-flag-key')`.
+
+To change a flag key, use the full edit form. When you change the key, PostHog shows an inline warning under the key field and requires confirmation before saving.
+
+### Experiment-linked flags
+
+For feature flags linked to an [experiment](/docs/experiments), inline editing is restricted for **variants** and **release conditions** since these are managed by the experiment.
 
 ## Managing and deleting Feature Flags
 

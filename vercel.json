@@ -13,6 +13,19 @@
         {
             "source": "/handbook/:path*",
             "headers": [{ "key": "Vary", "value": "Accept" }]
+        },
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "Content-Security-Policy-Report-Only",
+                    "value": "default-src 'self'; script-src 'self' https://*.posthog.com https://www.youtube.com https://fast.wistia.com https://import-cdn.default.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com https://raw.githubusercontent.com https://obuldanrptloktxcffvn.supabase.co https://cdn.shopify.com https://i.ytimg.com https://embed-ssl.wistia.com https://fast.wistia.com https://cdn.jsdelivr.net https://user-images.githubusercontent.com https://brandbadge.clearbit.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net https://res.cloudinary.com https://fonts.gstatic.com https://r2cdn.perplexity.ai https://fast.wistia.com https://use.typekit.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com https://forms.default.com https://nucleus.default.com https://import-cdn.default.com https://posthog.myshopify.com https://*.algolia.net https://*.algolianet.com https://api.io.inkeep.com https://fast.wistia.net https://fast.wistia.com https://embed-cloudfront.wistia.com https://api.inkeep.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net https://res.cloudinary.com blob:; frame-src 'self' https://www.youtube-nocookie.com https://hogwars.vercel.app https://hedgehog-mode-playground.vercel.app; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; report-uri https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
+                },
+                {
+                    "key": "Reporting-Endpoints",
+                    "value": "posthog=\"https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1\""
+                }
+            ]
         }
     ],
     "rewrites": [
@@ -43,6 +56,10 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
+        { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
+        { "source": "/docs/api/product-tours", "destination": "/docs/api", "statusCode": 301 },
+        { "source": "/docs/api/product-tours/:path*", "destination": "/docs/api", "statusCode": 301 },
         { "source": "/coupons/:path*", "destination": "https://app.posthog.com/coupons/:path*", "statusCode": 301 },
         { "source": "/handbook/growth/marketing", "destination": "/handbook/marketing", "statusCode": 301 },
         {
@@ -64,6 +81,7 @@
         { "source": "/teams/words-and-pictures", "destination": "/teams/website" },
         { "source": "/teams/words-pictures", "destination": "/teams/website" },
         { "source": "/teams/brand-vibes", "destination": "/teams/website" },
+        { "source": "/teams/llm-gateway", "destination": "/teams/ai-gateway" },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
@@ -73,6 +91,21 @@
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
         { "source": "/docs/integrate/(client|server)/:path*", "destination": "/docs/integrate/:path*" },
         { "source": "/docs/session-recording/:path*", "destination": "/docs/session-replay/:path*" },
+        {
+            "source": "/docs/posthog-code/inbox/triage",
+            "destination": "/docs/posthog-code/inbox/implementation",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/inbox/triage/",
+            "destination": "/docs/posthog-code/inbox/implementation",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/quick-tour",
+            "destination": "/docs/posthog-code",
+            "statusCode": 301
+        },
         { "source": "/docs/integrations/android-integration", "destination": "/docs/libraries/android" },
         { "source": "/docs/integrations/community", "destination": "/docs/libraries/community" },
         { "source": "/docs/integrations/docusaurus-integration", "destination": "/docs/libraries/docusaurus" },
@@ -272,8 +305,18 @@
             "source": "/docs/self-host/docs/self-host/postgres-vs-clickhouse",
             "destination": "/docs/self-host/postgres-vs-clickhouse"
         },
-        { "source": "/handbook/people/team-structure/design", "destination": "/handbook/brand/philosophy" },
-        { "source": "/handbook/design/about-design", "destination": "/handbook/brand/philosophy" },
+        {
+            "source": "/handbook/people/team-structure/design",
+            "destination": "/handbook/brand/overview"
+        },
+        {
+            "source": "/handbook/design/about-design",
+            "destination": "/handbook/brand/overview"
+        },
+        {
+            "source": "/handbook/brand/philosophy",
+            "destination": "/handbook/brand/overview"
+        },
         { "source": "/product-features/self-hosted", "destination": "/product-os" },
         { "source": "/product-features/event-autocapture", "destination": "/product-os" },
         { "source": "/product-features/trends", "destination": "/product-analytics" },
@@ -731,7 +774,7 @@
             "source": "/docs/integrate/third-party/google-tag-manager",
             "destination": "/docs/libraries/google-tag-manager"
         },
-        { "source": "/docs/experiments/manual", "destination": "/docs/experiments/installation" },
+        { "source": "/docs/experiments/manual", "destination": "/docs/experiments/start-here" },
         { "source": "/docs/experiments/under-the-hood", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/significance", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/statistics", "destination": "/docs/experiments/statistics-bayesian" },
@@ -986,9 +1029,9 @@
         { "source": "/tutorials/stripe-payment-data", "destination": "/tutorials/stripe-reports" },
         { "source": "/tutorials/delayed-survey", "destination": "/docs/surveys/creating-surveys#customization" },
         { "source": "/tutorials/how-to-connect-patterns-and-posthog", "destination": "/docs/cdp/" },
-        { "source": "/tutorials/monitor-aws-bedrock-calls", "destination": "/docs/llm-analytics" },
-        { "source": "/tutorials/compare-aws-bedrock-prompts", "destination": "/docs/llm-analytics" },
-        { "source": "/tutorials/compare-aws-bedrock-foundational-models", "destination": "/docs/llm-analytics" },
+        { "source": "/tutorials/monitor-aws-bedrock-calls", "destination": "/docs/ai-observability" },
+        { "source": "/tutorials/compare-aws-bedrock-prompts", "destination": "/docs/ai-observability" },
+        { "source": "/tutorials/compare-aws-bedrock-foundational-models", "destination": "/docs/ai-observability" },
         { "source": "/tutorials/chatgpt-analytics", "destination": "/tutorials/openai-observability" },
         { "source": "/tutorials/nextjs-app-directory-analytics", "destination": "/tutorials/nextjs-analytics" },
         { "source": "/tutorials/customer-facing-analytics", "destination": "/tutorials/embedded-analytics" },
@@ -1353,8 +1396,8 @@
             "source": "/blog/gdpr-google-analytics-privacy-shield",
             "destination": "/blog/best-gdpr-compliant-analytics-tools"
         },
-        { "source": "/docs/product-analytics/llms", "destination": "/docs/llm-analytics" },
-        { "source": "/docs/ai-engineering/llms", "destination": "/docs/llm-analytics" },
+        { "source": "/docs/product-analytics/llms", "destination": "/docs/ai-observability" },
+        { "source": "/docs/ai-engineering/llms", "destination": "/docs/ai-observability" },
         { "source": "/docs/product-analytics/trends", "destination": "/docs/product-analytics/trends/overview" },
         {
             "source": "/docs/product-analytics/calendar-heatmap",
@@ -1463,6 +1506,7 @@
         { "source": "/teams/comms", "destination": "/teams/support" },
         { "source": "/docs/session-replay/flutter", "destination": "/docs/session-replay/installation/flutter" },
         { "source": "/teams/customer-comms", "destination": "/teams/support" },
+        { "source": "/teams/customer-analytics", "destination": "/teams/web-analytics" },
         { "source": "/apps", "destination": "/cdp", "statusCode": 302 },
         { "source": "/docs/data-warehouse/setup/azure-blob", "destination": "/docs/cdp/sources/azure-blob" },
         { "source": "/docs/data-warehouse/setup/azure-db", "destination": "/docs/cdp/sources/azure-db" },
@@ -1712,43 +1756,67 @@
         },
         {
             "source": "/docs/ai-engineering/observability",
-            "destination": "/docs/llm-analytics/start-here"
+            "destination": "/docs/ai-observability/start-here"
         },
         {
             "source": "/docs/ai-engineering/llm-insights",
-            "destination": "/docs/llm-analytics/start-here"
+            "destination": "/docs/ai-observability/start-here"
         },
         {
             "source": "/docs/ai-engineering/tutorials",
-            "destination": "/docs/llm-analytics/tutorials"
+            "destination": "/docs/ai-observability/tutorials"
         },
         {
             "source": "/docs/ai-engineering/traces-generations",
-            "destination": "/docs/llm-analytics/generations"
+            "destination": "/docs/ai-observability/generations"
         },
         {
             "source": "/docs/ai-engineering/dashboard",
-            "destination": "/docs/llm-analytics/dashboard"
+            "destination": "/docs/ai-observability/dashboard"
         },
         {
             "source": "/docs/ai-engineering/langfuse-posthog",
-            "destination": "/docs/llm-analytics/integrations/langfuse-posthog"
+            "destination": "/docs/ai-observability/integrations/langfuse-posthog"
         },
         {
             "source": "/docs/ai-engineering/helicone-posthog",
-            "destination": "/docs/llm-analytics/integrations/helicone-posthog"
+            "destination": "/docs/ai-observability/integrations/helicone-posthog"
         },
         {
             "source": "/docs/ai-engineering/keywords-ai-posthog",
-            "destination": "/docs/llm-analytics/integrations/keywords-ai-posthog"
+            "destination": "/docs/ai-observability/integrations/keywords-ai-posthog"
         },
         {
             "source": "/docs/ai-engineering/traceloop-posthog",
-            "destination": "/docs/llm-analytics/integrations/traceloop-posthog"
+            "destination": "/docs/ai-observability/integrations/traceloop-posthog"
         },
         {
             "source": "/docs/llm-analytics/manual-capture",
-            "destination": "/docs/llm-analytics/installation/manual-capture"
+            "destination": "/docs/ai-observability/installation/manual-capture"
+        },
+        {
+            "source": "/docs/llm-analytics/evaluations",
+            "destination": "/docs/ai-evals/evaluations"
+        },
+        {
+            "source": "/docs/llm-analytics/trace-reviews",
+            "destination": "/docs/ai-evals/trace-reviews"
+        },
+        {
+            "source": "/docs/llm-analytics/prompts",
+            "destination": "/docs/prompt-management/prompts"
+        },
+        {
+            "source": "/docs/llm-analytics/skills-store",
+            "destination": "/docs/prompt-management/skills-store"
+        },
+        {
+            "source": "/docs/llm-analytics/:path*",
+            "destination": "/docs/ai-observability/:path*"
+        },
+        {
+            "source": "/docs/llm-analytics",
+            "destination": "/docs/ai-observability"
         },
         {
             "source": "/why",
@@ -1773,6 +1841,7 @@
         { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
+        { "source": "/handbook/brand/process", "destination": "/handbook/engineering/product-design-process" },
         { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" },
         { "source": "/teams/twig", "destination": "/teams/posthog-code" },
         { "source": "/teams/twig/:path*", "destination": "/teams/posthog-code/:path*" },
@@ -1836,21 +1905,27 @@
         },
         { "source": "/professional-services", "destination": "/services" },
         { "source": "/posthug", "destination": "/" },
-        { "source": "/mcp", "destination": "/docs/model-context-protocol" }
-    ],
-    "headers": [
+        { "source": "/mcp", "destination": "/docs/model-context-protocol" },
         {
-            "source": "/(.*)",
-            "headers": [
-                {
-                    "key": "Content-Security-Policy-Report-Only",
-                    "value": "default-src 'self'; script-src 'self' https://*.posthog.com https://www.youtube.com https://fast.wistia.com https://import-cdn.default.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com https://raw.githubusercontent.com https://obuldanrptloktxcffvn.supabase.co https://cdn.shopify.com https://i.ytimg.com https://embed-ssl.wistia.com https://fast.wistia.com https://cdn.jsdelivr.net https://user-images.githubusercontent.com https://brandbadge.clearbit.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net https://res.cloudinary.com https://fonts.gstatic.com https://r2cdn.perplexity.ai https://fast.wistia.com https://use.typekit.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com https://forms.default.com https://nucleus.default.com https://import-cdn.default.com https://posthog.myshopify.com https://*.algolia.net https://*.algolianet.com https://api.io.inkeep.com https://fast.wistia.net https://fast.wistia.com https://embed-cloudfront.wistia.com https://api.inkeep.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net https://res.cloudinary.com blob:; frame-src 'self' https://www.youtube-nocookie.com https://hogwars.vercel.app https://hedgehog-mode-playground.vercel.app; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; report-uri https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
-                },
-                {
-                    "key": "Reporting-Endpoints",
-                    "value": "posthog=\"https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1\""
-                }
-            ]
-        }
+            "source": "/handbook/strategy/brand",
+            "destination": "/handbook/brand/foundations"
+        },
+        {
+            "source": "/handbook/company/brand-assets",
+            "destination": "/handbook/brand/assets"
+        },
+        {
+            "source": "/handbook/brand/style-guide",
+            "destination": "/handbook/brand/visual-identity"
+        },
+        {
+            "source": "/handbook/brand/vendors",
+            "destination": "/handbook/brand/assets"
+        },
+        {
+            "source": "/handbook/brand/design-principles",
+            "destination": "/handbook/brand/foundations"
+        },
+        { "source": "/login", "destination": "https://app.posthog.com/login" }
     ]
 }

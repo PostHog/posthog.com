@@ -630,3 +630,4 @@ bg-performance-monitoring
 
 bg-blue
 bg-lilac
+animate-hogfather-jump

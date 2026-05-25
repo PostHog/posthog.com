@@ -3,12 +3,12 @@ title: Snowflake destination for batch exports
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
-import PersonsModelNote from '../_snippets/persons-model-note.mdx'
+import PersonsModelNote from "../_snippets/persons-model-note.mdx";
 
 With batch exports, data can be exported to a Snowflake database table.
 
@@ -17,7 +17,7 @@ With batch exports, data can be exported to a Snowflake database table.
 1. Click [Data management > Destinations](https://app.posthog.com/data-management/destinations) in the left sidebar.
 2. Click **+ New destination** in the top-right corner.
 3. Search for **Snowflake**.
-4. Click the **+ Create** button. 
+4. Click the **+ Create** button.
 5. Fill in the necessary [configuration details](#snowflake-configuration).
 6. Finalize the creation by clicking on "Create".
 7. Done! The batch export will schedule its first run on the start of the next period.
@@ -32,17 +32,18 @@ PostHog supports two authentication methods for Snowflake:
 ## Snowflake configuration
 
 Configuring a batch export targeting Snowflake requires the following Snowflake-specific configuration values:
-* **Account:** A [Snowflake account identifier](https://docs.snowflake.com/en/user-guide/admin-account-identifier) without the `snowflakecomputing.com` suffix (if any).
-* **User:** A Snowflake user name with permissions to insert data into the provided table and, if the table is meant to be created, permissions to create the table.
-* **Authentication type:** The authentication method to use: password or key pair.
-* **Password:** The password of the Snowflake user provided, if using password authentication.
-* **Private key:** The private key of the Snowflake user provided, if using key pair authentication.
-* **Private key passphrase (optional):** The private key passphrase, if using an encrypted key pair.
-* **Role (optional):** A role to assume for the required permissions.
-* **Database:** The Snowflake database where the table provided to insert data is located (and created if not present).
-* **Schema:** The Snowflake database schema where the table provided to insert data is located (and created if not present).
-* **Table name:** The name of a Snowflake table where to export the data.
-* **Warehouse:** The Snowflake warehouse used for data loading.
+
+- **Account:** A [Snowflake account identifier](https://docs.snowflake.com/en/user-guide/admin-account-identifier) without the `snowflakecomputing.com` suffix (if any).
+- **User:** A Snowflake user name with permissions to insert data into the provided table and, if the table is meant to be created, permissions to create the table.
+- **Authentication type:** The authentication method to use: password or key pair.
+- **Password:** The password of the Snowflake user provided, if using password authentication.
+- **Private key:** The private key of the Snowflake user provided, if using key pair authentication.
+- **Private key passphrase (optional):** The private key passphrase, if using an encrypted key pair.
+- **Role (optional):** A role to assume for the required permissions.
+- **Database:** The Snowflake database where the table provided to insert data is located (and created if not present).
+- **Schema:** The Snowflake database schema where the table provided to insert data is located (and created if not present).
+- **Table name:** The name of a Snowflake table where to export the data.
+- **Warehouse:** The Snowflake warehouse used for data loading.
 
 ### File staging
 
@@ -60,19 +61,20 @@ This section describes the models that can be exported to Snowflake.
 
 This is the default model for Snowflake batch exports. The schema of the model as created in Snowflake is:
 
-| Field           | Type        | Description                                                               |
-|-----------------|-------------|---------------------------------------------------------------------------|
-| uuid            | `STRING`    | The unique ID of the event within PostHog                                 |
-| event           | `STRING`    | The name of the event that was sent                                       |
-| properties      | `VARIANT`   | A JSON object with all the properties sent along with an event            |
-| elements        | `VARIANT`   | This field is present for backwards compatibility but has been deprecated |
-| people_set      | `VARIANT`   | A JSON object with any person properties sent with the `$set` field       |
-| people_set_once | `VARIANT`   | A JSON object with any person properties sent with the `$set_once` field  |
-| distinct_id     | `STRING`    | The `distinct_id` of the user who sent the event                          |
-| team_id         | `INTEGER`   | The `team_id` for the event                                               |
-| ip              | `STRING`    | The IP address that was sent with the event                               |
-| site_url        | `STRING`    | This field is present for backwards compatibility but has been deprecated |
-| timestamp       | `TIMESTAMP` | The timestamp associated with an event                                    |
+| Field                        | Type        | Description                                                               |
+| ---------------------------- | ----------- | ------------------------------------------------------------------------- |
+| uuid                         | `STRING`    | The unique ID of the event within PostHog                                 |
+| event                        | `STRING`    | The name of the event that was sent                                       |
+| properties                   | `VARIANT`   | A JSON object with all the properties sent along with an event            |
+| elements                     | `VARIANT`   | This field is present for backwards compatibility but has been deprecated |
+| people_set                   | `VARIANT`   | A JSON object with any person properties sent with the `$set` field       |
+| people_set_once              | `VARIANT`   | A JSON object with any person properties sent with the `$set_once` field  |
+| distinct_id                  | `STRING`    | The `distinct_id` of the user who sent the event                          |
+| team_id                      | `INTEGER`   | The `team_id` for the event                                               |
+| ip                           | `STRING`    | The IP address that was sent with the event                               |
+| site_url                     | `STRING`    | This field is present for backwards compatibility but has been deprecated |
+| timestamp                    | `TIMESTAMP` | The timestamp associated with an event                                    |
+| snowflake_ingested_timestamp | `TIMESTAMP` | The timestamp when the event was loaded into Snowflake                    |
 
 If the provided table doesn't exist in the provided database and schema, the first batch export run will create it. This is generally the safest option, but you may also create it yourself by running the query:
 
@@ -88,7 +90,8 @@ CREATE TABLE IF NOT EXISTS "{database}"."{schema}"."{table_name}" (
     "team_id" INTEGER,
     "ip" STRING,
     "site_url" STRING,
-    "timestamp" TIMESTAMP
+    "timestamp" TIMESTAMP,
+    "snowflake_ingested_timestamp" TIMESTAMP
 )
 COMMENT = 'PostHog events table'
 ```
@@ -99,15 +102,15 @@ COMMENT = 'PostHog events table'
 
 The schema of the model as created in Snowflake is:
 
-| Field                      | Type      | Description                                                                                          |
-|----------------------------|-----------|------------------------------------------------------------------------------------------------------|
-| team_id                    | `INTEGER` | The id of the project (team) the person belongs to                                                   |
-| distinct_id                | `STRING`  | A `distinct_id` associated with the person                                                           |
-| person_id                  | `STRING`  | The id of the person associated to this (`team_id`, `distinct_id`) pair                              |
-| properties                 | `VARIANT` | A JSON object with all the latest properties of the person                                           |
-| person_version             | `INTEGER` | The version of the person properties associated with a (`team_id`, `distinct_id`) pair               |
-| person_distinct_id_version | `INTEGER` | The version of the person to `distinct_id` mapping associated with a (`team_id`, `distinct_id`) pair |
-| created_at                 | `TIMESTAMP` | The timestamp when the person was created                                                                                          |
+| Field                      | Type        | Description                                                                                          |
+| -------------------------- | ----------- | ---------------------------------------------------------------------------------------------------- |
+| team_id                    | `INTEGER`   | The id of the project (team) the person belongs to                                                   |
+| distinct_id                | `STRING`    | A `distinct_id` associated with the person                                                           |
+| person_id                  | `STRING`    | The id of the person associated to this (`team_id`, `distinct_id`) pair                              |
+| properties                 | `VARIANT`   | A JSON object with all the latest properties of the person                                           |
+| person_version             | `INTEGER`   | The version of the person properties associated with a (`team_id`, `distinct_id`) pair               |
+| person_distinct_id_version | `INTEGER`   | The version of the person to `distinct_id` mapping associated with a (`team_id`, `distinct_id`) pair |
+| created_at                 | `TIMESTAMP` | The timestamp when the person was created                                                            |
 
 The Snowflake table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.
 
@@ -139,20 +142,22 @@ Exporting mutable data (like the persons model) requires executing a merge opera
 1. Creating a stage table.
 2. Inserting new data into the stage table.
 3. Execute a merge operation between existing table and stage table.
-  a. Any rows that match in the final table and for which the stage table's version is higher are updated.
-  b. Any new rows not found in the final table are inserted.
+   a. Any rows that match in the final table and for which the stage table's version is higher are updated.
+   b. Any new rows not found in the final table are inserted.
 4. Drop the stage table.
-
 
 ## FAQ
 
 ### Export is showing up as NULL records in Snowflake
 
 This is most likely because the table's schema is different from what we are sending. To verify, run this command replacing the variables:
+
 ```
 snow sql -q "SELECT GET_DDL('TABLE', '\"<database_name>\".\"<schema_name>\".\"<table_name>\"');" --password='<password>' --account='<account>' --username='<user>' --warehouse='<warehouse>' -x --database='"<database_name>"'
 ```
+
 and check that the output matches this
+
 ```
 +------------------------------------------------------------------------------------------------------------------+
 | GET_DDL('TABLE',                                                                                                 |
@@ -169,7 +174,8 @@ and check that the output matches this
 |         "team_id" NUMBER(38,0),                                                                                  |
 |         "ip" VARCHAR(16777216),                                                                                  |
 |         "site_url" VARCHAR(16777216),                                                                            |
-|         "timestamp" TIMESTAMP_NTZ(9)                                                                             |
+|         "timestamp" TIMESTAMP_NTZ(9),                                                                            |
+|         "snowflake_ingested_timestamp" TIMESTAMP_NTZ(9)                                                           |
 | )COMMENT='PostHog generated events table'                                                                        |
 | ;                                                                                                                |
 +------------------------------------------------------------------------------------------------------------------+
@@ -194,8 +200,9 @@ These examples illustrate how to use the data from batch exports in Snowflake.
 ### Requirements
 
 Two batch exports need to be created:
-* An events model batch export.
-* A persons model batch export.
+
+- An events model batch export.
+- A persons model batch export.
 
 For the purposes of these examples, assume that these two batch exports have already been created and have exported some data to Snowflake in tables `example.events` and `example.persons`.
 

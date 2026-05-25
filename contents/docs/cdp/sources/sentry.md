@@ -32,6 +32,10 @@ To link Sentry:
 4. In PostHog, enter your Sentry **Organization slug** and **Auth Token**.
 5. Click **Next**, choose the tables you want to sync, and then click **Import**.
 
+## Configuration
+
+<SourceParameters />
+
 ## Available datasets and endpoints
 
 The Sentry source currently supports syncing the following datasets and API endpoints:

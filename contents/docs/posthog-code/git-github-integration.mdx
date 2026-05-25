@@ -1,0 +1,89 @@
+---
+title: PostHog Git + GitHub integration
+---
+
+PostHog Code has Git and GitHub support built directly into the UI, so you can perform common operations like committing, pushing, and opening a PR without using the agent.
+
+## Setup
+
+PostHog Code uses the [GitHub CLI](https://cli.github.com) (`gh`) for all GitHub operations. To use PR features, install `gh` and authenticate:
+
+```bash
+gh auth login
+```
+
+If `gh` isn't installed or authenticated, native git operations like commit, push, and branch still work. You'll only lose the GitHub-specific actions.
+
+## The Git menu
+
+The Git menu lives in the bottom of the task panel and adapts to your current state. It shows **Commit** when you have staged changes, **Push** when you're ahead of the remote, **Create PR** when one doesn't exist yet, and so on.
+
+You can do all of the following without handing control to the agent.
+
+### Git
+
+- Create and switch branches
+- Stage and unstage individual files
+- Discard changes to a single file
+- Commit with a manual or auto-generated message
+- Push and publish new branches
+- Sync (pull, then push) to stay up to date with the remote
+- View diffs for staged, unstaged, and branch-level changes, with word-level highlighting, whitespace toggling, and word wrap
+
+### GitHub
+
+- Create a PR in one click (branch, commit, push, open)
+- Open PRs in draft state
+- View changed files and diffs in the review panel
+- See review comments inline against the diff
+- Reply to review comments
+- Change PR state: close, reopen, mark ready for review, or convert back to draft
+
+## Creating a PR
+
+Click **Create PR** and PostHog Code runs the whole sequence in order:
+
+1. Creates a new branch if you're still on main
+2. Generates a commit message (if you left it blank)
+3. Commits your changes
+4. Pushes to the remote, publishing the branch if needed
+5. Generates a PR title and body (if you left them blank)
+6. Opens the PR via the GitHub CLI
+
+If any step fails, previous steps are rolled back so you don't end up in a half-committed state.
+
+Tick **Draft** in the create-PR dialog to open the PR in draft state.
+
+### Auto-generated messages and PR bodies
+
+When you leave the commit message, PR title, or PR body empty, PostHog Code fills them in for you based on:
+
+- The actual diff of your changes
+- Your repo's commit conventions, e.g. conventional commits if detected
+- Existing commits on the branch (for PR titles and bodies)
+- Your `.github/PULL_REQUEST_TEMPLATE.md`, if present
+- A summary of the agent session, when there is one
+
+You can always edit the generated text before submitting.
+
+## Cloud tasks
+
+When a cloud task opens a PR, PostHog Code auto-detects the URL from the agent's output and attaches it to the task. The PR status appears in the task header with the same action menu as a local PR, plus a **Continue locally** button to hand the branch off to your machine.
+
+## Troubleshooting
+
+### Create PR fails at the push step
+
+Check that your branch has a remote configured and that `gh auth status` reports you as authenticated. Force-push is never used. If the remote has diverged, resolve it manually before retrying.
+
+### Generated text is empty
+
+Auto-generated commit messages, PR titles, and PR bodies require network access. When you're offline, fill the fields in by hand. The create-PR flow works the same way.
+
+### PR template is not used
+
+PostHog Code looks for templates in standard GitHub locations like `.github/PULL_REQUEST_TEMPLATE.md`. Templates in non-standard paths won't be picked up.
+
+### Cloud task did not link its PR
+
+PostHog Code extracts the link from the PR URL in the agent's tool output. If the agent opened the PR through a path that hides the URL, the link may not be attached automatically, but the PR still exists on GitHub.

@@ -7,11 +7,13 @@ import ZoomHover from 'components/ZoomHover'
 
 export default function WizardCommand({
     className = '',
+    command = '',
     latest = true,
     slim = false,
     onCopy,
 }: {
     className?: string
+    command?: string
     latest?: boolean
     slim?: boolean
     onCopy?: () => void
@@ -19,7 +21,9 @@ export default function WizardCommand({
     const cloud = useCloud()
     const { addToast } = useToast()
     const [copyKey, setCopyKey] = useState(0)
-    const code = `npx @posthog/wizard${latest ? '@latest' : ''}${cloud ? ` --region ${cloud}` : ''}`
+    const code = `npx @posthog/wizard${latest ? '@latest' : ''}${cloud ? ` --region ${cloud}` : ''}${
+        command ? ` ${command}` : ''
+    }`
 
     const handleCopy = () => {
         navigator.clipboard.writeText(code)

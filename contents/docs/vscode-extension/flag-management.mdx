@@ -1,0 +1,76 @@
+---
+title: Flag management in the VS Code extension
+sidebar: Docs
+showTitle: true
+---
+
+The VS Code extension lets you create, toggle, edit, and manage [feature flags](/docs/feature-flags) without leaving your editor.
+
+## Toggling flags
+
+You can toggle a feature flag on or off from multiple places:
+
+- **CodeLens** — Click the toggle action above a flag call in your code
+- **Right-click context menu** — Right-click on a flag key string and select the toggle option
+- **Sidebar Flags tab** — Click the toggle next to any flag in the list
+
+A confirmation dialog appears before the change is applied to prevent accidental toggles. The change takes effect in PostHog immediately.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_04_08_T00_01_21_431_Z_8c2c911a53.png"
+  alt="PostHog VS Code extension showing feature flag state"
+  classes="rounded"
+/>
+
+## Editing rollout and variants
+
+From the flag detail panel (accessible via **PostHog: Show Flag Detail** or clicking a flag in the sidebar), you can edit:
+
+- **Rollout percentage** — Adjust the percentage of users who see the flag
+- **Variant configuration** — Modify variant names, weights, and distribution
+- **Payloads** — Update the JSON payload associated with each variant
+
+Changes are saved directly to PostHog.
+
+## Creating flags from unrecognized keys
+
+When the extension detects a flag key in your code that doesn't exist in your PostHog project, it shows a **yellow underline warning**. Hover over the warning to see a quick-fix action:
+
+1. Click **Create Feature Flag** in the quick-fix menu
+2. The extension creates the flag in PostHog using the key from your code
+3. The warning disappears after the next sync
+
+This lets you write code with new flags first and create them in PostHog without switching context.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_04_08_T00_02_16_887_Z_9563f497ce.png"
+  alt="PostHog VS Code extension quick-fix to create a feature flag from an unrecognized key"
+  classes="rounded"
+/>
+
+## Generating TypeScript types
+
+The extension can generate TypeScript types from your feature flag payload configurations, giving you type safety when working with flag values.
+
+### All flags at once
+
+Run **PostHog: Generate Flag Types** from the command palette to generate types for all flags in your project that have payload schemas defined.
+
+### Individual flags
+
+Right-click on a flag key in your code and select **PostHog: Generate Type** to generate a type for just that flag's payload.
+
+The generated types reflect the structure of your flag payloads as configured in PostHog.
+
+## Wrapping code in flag checks
+
+Select a block of code, then use the context menu or command palette to **wrap it in a feature flag check**. The extension inserts the appropriate `isFeatureEnabled()` or `getFeatureFlag()` call around your selection, prompting you to choose which flag to use.
+
+## Other flag actions
+
+| Action | How to access | Command |
+|---|---|---|
+| **Copy flag key** | Right-click context menu or CodeLens | `PostHog: Copy Flag Key` |
+| **Open in PostHog** | CodeLens or sidebar — opens the flag in your browser | `PostHog: Open in PostHog` |
+| **Find all references** | Searches your workspace for every usage of a flag key | `PostHog: Find Flag References` |
+| **View flag detail** | Click a flag in the sidebar | `PostHog: Show Flag Detail` |

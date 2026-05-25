@@ -28,6 +28,8 @@ If you use a self-hosted proxy, PostHog can't help troubleshoot configuration is
 
 </CalloutBox>
 
+Proxied traffic – events, session recordings, feature flags, and SDK assets – flows through your provider and counts against their bandwidth and request quotas. On platforms that bill egress or function invocations (Vercel, Netlify, CloudFront, Railway), this can add up for high-traffic sites. The [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) avoids these costs entirely.
+
 Choose your platform and follow the setup guide:
 
 <ProxyPlatforms />

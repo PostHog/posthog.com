@@ -98,14 +98,14 @@ A BAA is available on Mixpanel's Enterprise plan.
 #### Countly and HIPAA compliance
 
 -   **Self-hostable:** <span className="text-green text-lg">✔</span>
--   **BAA available:** <span className="text-red text-lg">✖</span>
+-   **BAA available:** <span className="text-red text-lg">✔</span>
 
-Countly doesn't offer a BAA for HIPAA compliance on its hosted cloud, but it does offer the option to either:
+Countly is a privacy-first platform that supports both BAA-based and full data-control approaches. It offers a BAA for HIPAA compliance on both of its deployment options:
 
-1. Self-host the product on your own.
-2. Deploy it to a private cloud managed by Countly.
+1. Hosted cloud (managed by Countly).
+2. On-premise (self-hosted on your own infrastructure).
 
-This makes Countly a good option if you'd prefer to [self-host your analytics](/blog/best-open-source-analytics-tools).
+This makes Countly a flexible option whether you want a managed BAA-backed deployment or prefer to [self-host your analytics](/blog/best-open-source-analytics-tools) for full data control.
 
 ### 4. Freshpaint
 
@@ -232,7 +232,7 @@ Based on our research, the best HIPAA-compliant analytics tools right now are:
 <details>
   <summary>How is PostHog different from other HIPAA-compliant analytics tools?</summary>
 
-**PostHog** is the only tool in this list that covers the full product development stack – product analytics, web analytics, session replay, feature flags, A/B testing, surveys, error tracking, LLM analytics, logs, and more – all under a single BAA. All products offer generous free tiers and [usage-based billing](/pricing) with no surprise overages.
+**PostHog** is the only tool in this list that covers the full product development stack – product analytics, web analytics, session replay, feature flags, A/B testing, surveys, error tracking, AI Observability, logs, and more – all under a single BAA. All products offer generous free tiers and [usage-based billing](/pricing) with no surprise overages.
 
 That matters for HIPAA compliance because every additional vendor means another BAA to negotiate, another data-sharing agreement to manage, and another potential liability surface.
 

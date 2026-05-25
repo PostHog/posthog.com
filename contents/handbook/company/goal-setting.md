@@ -41,7 +41,7 @@ Add entries under each question with your initials/name like: "- (your name): My
 - Hope
   - What are you most excited about this quarter?
   - What exploration do you want to do?
-  - For Error Tracking/Session Replay/Experiments/Conversations/Experiments/Conversations/Product Analytics/LLM Analytics:
+  - For Error Tracking/Session Replay/Experiments/Conversations/Experiments/Conversations/Product Analytics/AI Observability:
     We want to make PostHog proactive. How do we programmatically emit signals - i.e. research prompts for an agent with code access & PostHog MCP – that will result in quality concrete code changes?
 - Obstruction
   - Is there anything embarrassing about your product?
@@ -61,9 +61,14 @@ Add entries under each question with your initials/name like: "- (your name): My
 
 What themes can we distill from the above HOGS list? What are categories of things we should consider working on? What are other things we might want to consider?
 
+### Other things to consider
+
+- For engineering teams - did you do anything cool last quarter that other engineers could learn from? Consider adding a goal to write about those things on our company blog!
+- Have you done a pricing review for this product in the last year? If not, follow our [RFC template](url/to/template) to do a pricing review this quarter.
+
 ## New goals (15 minutes - do as a team)
 
-This is an example - feel free to adapt as you need. Generally it is a good idea to have at least one person's name against each thing for accountability even if multiple people work on it - shared goals usually results in less getting shipped. 
+This is an example - feel free to adapt as you need. Generally it is a good idea to have at least one person's name against each thing for accountability even if multiple people work on it - shared goals usually results in less getting shipped.
 
 Objective 1: PostHog in the EU
 Motivation: Unblock 1,000s of customers [link to data] who need to keep data in the EU but are not capable of self hosting.

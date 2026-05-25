@@ -1,0 +1,223 @@
+---
+title: Cleaning up stale feature flags
+sidebar: Docs
+showTitle: true
+---
+
+Feature flags accumulate, and you're billed for every active flag even if no code explicitly checks it. The web SDK evaluates all active flags by default on load, and server-side calls to `getAllFlags()` include them too. Flags that are fully rolled out, linked to completed experiments, or simply forgotten keep generating costs while adding clutter to your codebase. Cleaning them up reduces your bill, removes tech debt, and makes your remaining flags easier to reason about.
+
+This guide covers all the ways to find and remove stale flags, from fully manual to fully automated. Pick what fits your workflow. You can also paste this page's URL or contents into any AI coding agent as a prompt to guide the cleanup process.
+
+## What makes a flag stale
+
+PostHog considers a flag stale when it's no longer doing useful work:
+
+- **Not evaluated in 30+ days**, meaning the SDKs aren't checking this flag anymore.
+- **100% rolled out for 30+ days** with no property filters, so it's returning the same value for everyone. The flag check is equivalent to a hardcoded value.
+
+Disabled flags (`active: false`) are not considered stale since they were intentionally turned off.
+
+You can see stale flags in the PostHog UI by filtering the feature flags list to show only stale flags.
+
+## The correct cleanup order
+
+Order of operations matters when cleaning up stale flags. A 100% rollout doesn't mean the flag is safe to disable. If your code still checks it, disabling it in PostHog turns the feature off for everyone. Remove the flag from your code first.
+
+The safe sequence is:
+
+1. **Identify** stale flags in PostHog
+2. **Remove** flag references from your codebase
+3. **Deploy** the code changes
+4. **Disable** the flag in PostHog (now it's a no-op because nothing checks it)
+
+## 1. Finding stale flags
+
+### In the PostHog app
+
+Filter the feature flags list by status to see stale flags. For each flag, you can see when it was last evaluated, its rollout percentage, and whether it's tied to an experiment.
+
+### With PostHog AI
+
+Ask PostHog AI in the app:
+
+```text
+Show me all stale feature flags.
+```
+
+```text
+Which feature flags are fully rolled out and safe to clean up?
+```
+
+PostHog AI can also generate cleanup prompts for your codebase. See [Manage flags with PostHog AI](/docs/feature-flags/manage-flags-ai).
+
+### With the MCP server
+
+If you use an AI coding agent with the [PostHog MCP server](/docs/model-context-protocol), ask it to list stale flags:
+
+```text
+List all stale feature flags in my project.
+```
+
+The MCP server calls `feature-flag-get-all` with `active: "STALE"` and returns the results. This works in any MCP client like Claude Code, Cursor, Windsurf, VS Code, and others. See [Manage flags with MCP](/docs/feature-flags/create-flags-mcp).
+
+## 2. Removing flags from code
+
+Once you know which flags are stale, you need to decide what happens to the code they gate. This depends on the flag's rollout state:
+
+### Fully rolled out flags
+
+The flag was at 100% with no targeting conditions. The enabled code path is the one to keep.
+
+**Before:**
+```js
+if (posthog.isFeatureEnabled('new-checkout')) {
+  renderNewCheckout()
+} else {
+  renderOldCheckout()
+}
+```
+
+**After:**
+```js
+renderNewCheckout()
+```
+
+For multivariate flags, keep the winning variant's code path and remove the rest.
+
+### Not rolled out flags
+
+The flag was at 0% or had no release conditions, so the feature was never active. Keep the else/fallback path.
+
+**Before:**
+```js
+if (posthog.isFeatureEnabled('abandoned-feature')) {
+  renderNewThing()
+} else {
+  renderOldThing()
+}
+```
+
+**After:**
+```js
+renderOldThing()
+```
+
+### Partial rollout flags
+
+The flag had some targeting but wasn't fully rolled out. You'll need to check the flag's intent to decide which code path to keep. These need manual review.
+
+### What to search for
+
+Search your codebase for the flag key as a string. Common SDK patterns:
+
+| Language | Patterns to search for |
+| --- | --- |
+| JavaScript/TypeScript | `isFeatureEnabled('key')`, `getFeatureFlag('key')`, `useFeatureFlag('key')` |
+| Python | `posthog.evaluate_flags(...)` followed by `flags.is_enabled('key')` or `flags.get_flag('key')`, plus older `posthog.feature_enabled('key')` and `posthog.get_feature_flag('key')` calls |
+| Node | `evaluateFlags(...)` followed by `flags.isEnabled('key')` or `flags.getFlag('key')`, plus older `isFeatureEnabled('key')` and `getFeatureFlag('key')` calls |
+| Ruby | `evaluate_flags(...)` followed by `flags.enabled?('key')` or `flags.get_flag('key')`, plus older `is_feature_enabled('key')` and `get_feature_flag('key')` calls |
+| Go | `EvaluateFlags(...)` followed by `flags.IsEnabled("key")` or `flags.GetFlag("key")`, plus older `IsFeatureEnabled("key")` and `GetFeatureFlag("key")` calls |
+| Java | `evaluateFlags(...)` followed by `flags.isEnabled("key")` or `flags.getFlag("key")`, plus older `isFeatureEnabled("key")` and `getFeatureFlag("key")` calls |
+| .NET | `EvaluateFlagsAsync(...)` followed by `flags.IsEnabled("key")` or `flags.GetFlag("key")`, plus older `IsFeatureEnabledAsync("key")` and `GetFeatureFlagAsync("key")` calls |
+| Rust | `evaluate_flags(...)` followed by `flags.is_enabled("key")` or `flags.get_flag("key")`, plus older `is_feature_enabled("key")` and `get_feature_flag("key")` calls |
+| PHP | `evaluateFlags(...)` followed by `$flags->isEnabled('key')` or `$flags->getFlag('key')`, plus older `isFeatureEnabled('key')` and `getFeatureFlag('key')` calls |
+| Other SDKs | Search for the flag key as a string literal |
+
+Also search for the flag key in constants, config files, test fixtures, and comments.
+
+After removing flag references, clean up any dead imports, unused variables, and empty blocks left behind.
+
+### Using the VS Code extension
+
+The [PostHog VS Code extension](/docs/vscode-extension/stale-flag-cleanup) automates this for JavaScript and TypeScript codebases. It uses AST-based scanning to find stale flag references and can remove them while preserving the correct code paths. It handles batch cleanup across multiple files.
+
+The AST-based clean up is not perfect, check the diffs carefully before committing.
+
+### Using an AI coding agent
+
+Update the list of flags to update and paste this prompt into any AI coding agent (Claude Code, Cursor, Copilot, etc.):
+
+```text
+Find and remove all references to these feature flags in the codebase.
+For each flag, search for all usages including isFeatureEnabled,
+getFeatureFlag, useFeatureFlag, evaluateFlags, EvaluateFlags,
+evaluate_flags, IsEnabled, isEnabled, enabled?, is_enabled,
+getFlag, GetFlag, get_flag, get_feature_flag, feature_enabled,
+and the flag key as a string literal in constants and configs.
+
+## Fully rolled out – remove the flag check, KEEP the enabled code path
+- new-checkout
+- beta-dashboard-v2
+
+For each: remove the if-check and keep the body. If there's an else
+branch, remove the else branch entirely.
+
+## Not rolled out – remove the flag check AND the enabled code path
+- abandoned-feature
+
+For each: remove the if-check AND its body. Keep only the else/fallback.
+
+After cleanup, remove any dead code branches and unused imports.
+```
+
+Adapt the flag names, rollout states, and SDK patterns to your codebase.
+
+## 3. Disabling flags in PostHog
+
+After your code changes are deployed and you've verified everything works, disable the cleaned-up flags in PostHog.
+
+**Disable vs delete:**
+- **Disable** (`active: false`) – the flag stops being evaluated but the configuration is preserved. If something was missed in the code cleanup, re-enabling is instant.
+
+- **Delete** – a soft-delete. Keeps the flag list clean, but re-enabling requires recreating the flag. Better for flags you're confident you'll never need again.
+
+### In the PostHog app
+
+Go to feature flags, select the flag, and toggle it off.
+
+### With PostHog AI
+
+```text
+Disable the feature flag "new-checkout".
+```
+
+### With the MCP server
+
+```text
+Disable the feature flag "new-checkout" by setting active to false.
+```
+
+## 4. Automating cleanup with CI
+
+For teams that want periodic automated cleanup, the basic shape is a three-step workflow with a human in the middle:
+
+1. **Propose**: a scheduled job fetches stale flags from the [feature flags API](/docs/api/feature-flags) (`active=STALE`) and produces a list for review as a PR, an issue with checkboxes, a Slack message, or whatever fits your team.
+2. **Decide**: a human picks which flags to actually act on. Default to "skip" so nothing happens unless someone opts in per flag.
+3. **Execute**: a second job reads the approved list and PATCHes each flag to `active: false`. Disabling is reversible; deletion (`deleted: true`) is not, so treat it as a more sensitive operation if you add it.
+
+A few things worth getting right whatever shape you pick:
+
+- **Paginate the API call.** The list endpoint is paginated. If you only fetch the first page you'll silently miss most of your stale flags.
+- **Sort the proposal stably.** Without a stable order, the proposal reshuffles every run and reviewing diffs becomes painful.
+
+### Cleaning up code references
+
+Disabling a flag in PostHog stops it from evaluating, but the flag check stays in your codebase as dead code. Removing it is harder than the API side because it requires deciding, per flag, which code path to keep. A flag at 100% rollout might mean "ship it, remove the old path" or "about to roll back, keep the old path." The API can tell you the rollout state, not the team's intent.
+
+Some patterns teams use:
+
+- **Capture the decision in the same approval step.** When a human approves a flag for cleanup, also have them specify which path to keep. Pass that to whatever does the code edits.
+
+- **AI coding agent with mandatory human review.** Hand the flag list and rollout state to a coding agent (Claude Code, Cursor, Copilot Workspace, etc.) and have it open a *separate* PR with proposed code edits. Don't auto-merge. A human reviews the diff. Keep this PR distinct from the API-disable step so the blast radius of each change is clear.
+
+- **Codeowners-based routing** so the right team gets pinged on the code-cleanup PR.
+
+### Other ideas
+
+- **Annotate flags at creation time.** Add a description or tag like `safe-to-remove-at-100%` or `kill-switch-keep` when you create a flag. Future cleanup runs can read this and either auto-classify the flag or skip it entirely. Costs nothing at creation time and pays back every time the cleanup workflow runs.
+
+- **Skip the human gate for unambiguous cases.** Flags at 0% rollout with zero codebase references are usually safe to disable without review.
+
+- **Tag flags as intentionally dormant** (kill switches, disaster recovery) so they stop appearing in the proposal each week.
+
+- **Track progress over time** by capturing an event from the execute step, so you can chart whether the workflow is actually reducing your stale-flag backlog.

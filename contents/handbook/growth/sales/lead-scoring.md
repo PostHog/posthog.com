@@ -29,28 +29,30 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 
 _Ben experiments to find more winners:_
 1. Emailed sales@ 
-2. Requests for Trust Center access that require an NDA
 
 **BDR team**
 
 Campaigns are all [tracked in Lemlist](https://app.lemlist.com/teams/tea_kvdy3nLu9KEA4QPiD/campaigns-next) - these change week-to-week. 
 
-Manual (Lorena):
-1. Filled contact sales but then went silent, never talked to an AE
-2. Tried PostHog but did not convert - signed up but went inactive (`'Ignored'` in Vitally), never talked to an AE
-3. Engineers + Engineering Managers who follow us on LinkedIn but are not customers
+Lorena's focus:
 
-Not started yet:
-1. Closed lost opportunities (new biz _and_ renewals) 5+ months old where reason was 'unresponsive'
-2. Churned accounts that churned 5+ months ago
-3. Companies with recent fundraising activity - good opportunities, but very noisy
+1. Engineers + Engineering Managers who follow us on LinkedIn but are not (yet!) customers 
+2. Event attendees - Stripe Sessions/AI Tinkerers São Paulo
+3. Website showed intent -- Clay sheet from PostHog DW
+
+Backlog:
+
+1. Filled contact sales but then went silent, never talked to an AE (next: AE Campaign to warm back up)
+2. Tried PostHog but did not convert - signed up but went inactive, never paid, never talked to an AE in DW (next: more filtering on this list)
+3. Closed lost opportunities (new biz _and_ renewals) 5+ months old where reason was 'unresponsive'
+4. Churned accounts that churned 5+ months ago
+5. Companies with recent fundraising activity - good opportunities, but very noisy
 
 Automated (Abhischek):
 1. [Warmbound](https://app.clay.com/workspaces/268768/workbooks/wb_0t9mfmifwKAqEGkwFC8/tables/t_0ta1652W6yS8tnSyUQF/views/gv_0ta1652BJM69kS4G3P2) - $100-499 MRR at some point in the account's history
 2. [Job switchers](https://app.clay.com/workspaces/268768/workbooks/wb_0t97hmjqzXJdsutTGzw/tables/t_0t9bam77eQE4YsqmPSS/views/gv_0t9bam8gorPiig8kgZT)
-
-Not started yet:
-1. High spenders in Stripe network with low usage that doesn't trigger an TAE/TAM
+3. High spenders in Stripe network with <$500 PostHog MRR that doesn't trigger an TAE/TAM lead
+4. (Coming soon) Requests for Trust Center access that require an NDA
 
 Anyone at PostHog can also manually flag an account as a high potential lead. This includes new or low spend accounts with strong net new potential or existing paying customers with credible expansion potential. To create a lead, go to the customer's Vitally record and add a Segment for `AM referral` (product-led sales) or `AE referral` (new business). 
 

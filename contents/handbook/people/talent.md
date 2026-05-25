@@ -23,6 +23,53 @@ As a talent partner, part of the role is to ensure we are removing distractions 
 
 Throughout the recruitment process there are different ways that talent partners can remove distractions.
 
+## Sourcing Talent
+
+Our default recruitment strategy is 100% inbound. We are not an outbound-first recruiting style organization and don't want to become one.
+That said, there are times when sourcing is the right tool for acquiring new candidates. This section explains when to reach for it, how to do it well, and how to know if it's working.
+
+### When To Source
+
+We should source when inbound alone isn't generating enough qualified candidates at the top of the funnel for a specific role. This can happen for many reasons, including:
+* The role requires a niche skill set, and the addressable talent pool is small.
+*  When headcount for a particular role is very high.
+*  A role has been open for 4+ weeks and we're not seeing enough quality applications.
+
+### How We Source
+
+**Be targeted, not generic.** We don't do high-volume spray-and-pray outreach. We'd rather send 15 highly personalized messages than 150 templated auto-messages. Sourcing at PostHog should feel like a curated referral from someone who's done their homework, not a LinkedIn InMail blast.
+
+Practically, this looks like:
+* **Research before you reach out.** Look at what they've built, shipped, written, or contributed to. If you can't find a specific reason to reach out to them beyond "their title matches", don't reach out.
+*  **Lead with what they'd work on, not who we are.** Most sourced messages open with "we are an amazing company..."; this comes across generically and doesn’t always grab attention. Make sure they know it’s a personalized message. Open with the problem they'd solve, or the product they'd help build. Link to the specific small team page they’d work with, a recent GitHub issue, or a shipped feature that's relevant to their background.
+*   **Be transparent about who we are and how we work.** Link to the handbook. Link to the compensation calculator. Link to relevant blog posts. PostHog's transparency is one of our biggest differentiators in recruiting: use it!
+*    **Use the right channel.** LinkedIn is usually our default, but for engineers, consider reaching out via GitHub (if they're active contributors), Twitter/X (if they post about relevant topics), or relevant community forums (HN, specific open source communities). Match the channel to where the person actually is. This can also occasionally be via email.
+
+### What A Good Sourcing Message Looks Like
+
+Here's the kind of thing that *usually* works:
+
+> Hey (name), I was taking a look at your work on (specific project/contribution). We're building (specific thing) at PostHog and it really seems like the kind of problem that needs someone with your background in (specific skill).
+> If you haven’t heard of us at PostHog, we're fully remote, pay transparently, and our entire company handbook is public; you can read exactly how the team you'd join operates before you even start day 1: (link to small team page).
+> If this seems even 1% interesting to you, let me know, and I can set up a call for you with one of our talent partners handling the role!
+
+And here's what doesn't usually work:
+
+> Hi (name), I came across your profile and was impressed! PostHog is a fast-growing product analytics company backed by Y Combinator. We're looking for world-class talent to join our world-class team. Would you be open to a conversation?
+
+The first message is specific and gives the candidate real information. The second is generic and could be about any company hiring any role.
+
+### Sourced Candidates In the Process
+
+Sourced candidates follow a slightly different path at the start of the process. See [Managing sourced candidates](https://posthog.com/handbook/people/hiring-process) for the exact mechanics.
+
+The key difference to keep in mind: sourced candidates didn't come to us; we went to them. 
+
+Some context related to this, to end this sourcing section:
+* **You'll need to invest more in educating sourced candidates about PostHog.** Inbound candidates have usually read the handbook and tried the product on their own. Sourced candidates haven't always done this (but ideally should before their call). This can look like sending more content-heavy emails (linking to the handbook, blog posts, team pages, etc.) and generally doing more "educating" throughout the early stages of the process, to bring sourced candidates up to the same level of context that inbound candidates arrive with naturally.
+* **Expect lower conversion at later stages.** Sourced candidates haven't self-selected the same way inbound candidates have, so their drop-off rates will naturally be higher.
+* **Track it separately.** We should always know what percentage of our hires came from sourcing vs. inbound vs. referrals. 
+
 ## Top of the funnel
 
 Talent partners should be speaking to hiring managers before a job goes live to understand the types of candidate that they should be looking for at the top of the funnel, this part should continue to be honed as you learn more from feedback at the various stages of the process. We want to avoid passing through inappropriate candidates, that waste time. 

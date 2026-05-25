@@ -382,30 +382,29 @@ export const QuestionForm = ({
     }
 
     const handleMessageSubmit = async (values: QuestionFormValues, user: User | null) => {
+        if (!user) {
+            setFormValues(values)
+            setView('auth')
+            return
+        }
+
         setLoading(true)
+        const transformedValues = await transformValues(values, user)
 
-        if (user) {
-            const transformedValues = await transformValues(values, user)
-            let data
-            if (formType === 'question') {
-                data = await createQuestion(transformedValues)
-            }
-
-            if (formType === 'reply' && questionId) {
-                data = await reply(transformedValues.body)
-            }
-
+        if (formType === 'question') {
+            createQuestion(transformedValues).then((data) => {
+                setLoading(false)
+                setView(null)
+                setFormValues(null)
+                onSubmit?.(transformedValues, formType, data)
+            })
+        } else if (formType === 'reply' && questionId && reply) {
             setLoading(false)
             setView(null)
             setFormValues(null)
-
-            if (onSubmit) {
-                await onSubmit(transformedValues, formType, data)
-            }
-        } else {
-            setFormValues(values)
-            setView('auth')
-            setLoading(false)
+            reply(transformedValues.body).then((data) => {
+                onSubmit?.(transformedValues, formType, data)
+            })
         }
     }
 

@@ -1,0 +1,40 @@
+---
+title: Session replays in the VS Code extension
+sidebar: Docs
+showTitle: true
+---
+
+The VS Code extension connects your code to [Session Replay](/docs/session-replay) data, showing you how many sessions and users are triggering events and letting you jump directly to replays in PostHog.
+
+## CodeLens session and user counts
+
+Above each `capture()` call and feature flag check in your code, the extension shows **CodeLens indicators** with:
+
+- **Session count** — How many sessions triggered this event
+- **User count** — How many unique users triggered this event
+
+These counts give you a quick sense of how actively a piece of code is being exercised in production, without needing to check PostHog separately.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_04_07_T23_20_30_804_Z_e9ee908672.png"
+  alt="PostHog VS Code extension event volume sparklines"
+  classes="rounded"
+/>
+
+## Watching sessions
+
+To view session replays for a specific event:
+
+1. Click the **sessions CodeLens** link above a `capture()` call, or
+2. Run **PostHog: Watch Sessions** from the command palette
+
+This opens the relevant session replays in PostHog in your browser, filtered to the event you selected. From there you can watch full session recordings to understand user behavior in context.
+
+## Connecting events to code
+
+The session replay integration works in both directions:
+
+- **Code to replays** — From a `capture()` call in your editor, jump to sessions where that event fired
+- **Flags to replays** — From a feature flag check, see sessions where that flag was evaluated
+
+This makes it easy to go from reading code to understanding how real users interact with that code in production.

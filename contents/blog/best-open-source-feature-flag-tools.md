@@ -47,7 +47,7 @@ Here's how the most popular open-source feature flag tools compare:
 
 ### What is PostHog?
 
-[PostHog](/) is an all-in-one platform, which means it offers [product analytics](/product-analytics), [session replay](/session-replay), [A/B testing](/experiments), [user surveys](/surveys), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), and a lot more in addition to feature flags.
+[PostHog](/) is an all-in-one platform, which means it offers [product analytics](/product-analytics), [session replay](/session-replay), [A/B testing](/experiments), [user surveys](/surveys), [error tracking](/error-tracking), [LLM observability](/llm-analytics), and a lot more in addition to feature flags.
 
 It's a [popular alternative to LaunchDarkly](/blog/best-launchdarkly-alternatives) and analytics tools like [Amplitude](/blog/best-amplitude-alternatives).
 

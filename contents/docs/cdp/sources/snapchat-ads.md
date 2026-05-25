@@ -49,3 +49,7 @@ Connect PostHog to your Snapchat Ads account using a Snapchat account. The Snapc
 4. Enter the **Ad Account ID** of the Snapchat Ads account you want to sync.
 5. Select an existing Snapchat Ads account, or create a new integration.
 6. (Optional) Add a prefix for the table name.
+
+## Configuration
+
+<SourceParameters />
