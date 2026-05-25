@@ -110,7 +110,7 @@ When a customer channel goes completely silent, don't mass-ping — it gets igno
 
 > hey team! thanks for the productive chat earlier today.
 >
-> i owe you a proper follow up on everything we discussed, but couldn't wait to share this discount code ([CUSTOM-CODE]) with ya'll so you can get your fave posthog t shirt on the (hog)house :hog-party-wave:
+> i owe you a proper follow up on everything we discussed, but couldn't wait to share this discount code ([CUSTOM-CODE]) with ya'll so you can get your save posthog t shirt on the (hog)house :hog-party-wave:
 >
 > lovely meeting you all - excited to keep working together :hog-offers-heart:
 > cc @[people who showed interest on the call] - tagging you since you were esp excited about the merch :slightly_smiling_face:
