@@ -1,13 +1,12 @@
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<CalloutBox icon="IconInfo" title="Revenue analytics is in beta" type="fyi">
+<CalloutBox icon="IconWarning" title="Revenue analytics dashboard is being retired" type="warning">
 
-Revenue analytics is currently works best for:
-  
-1. Small to medium-sized companies
-2. Companies with subscription models (mostly SaaS)
+The Revenue analytics dashboard will be removed on or after **June 30th, 2026**.
 
-If you process more than 20,000 transactions per month, or your revenue comes primarily from one-off payments rather than recurring subscriptions, revenue analytics may feel less useful, slower, or provide less insight than expected.
+We're shifting revenue tracking to expose revenue properties on persons and groups across insights, SQL, and profiles. This lets you build the view your team needs – whether that's ecommerce, SaaS, recurring, or one-off revenue – using [Product Analytics insights](/docs/product-analytics/insights), [SQL queries](/docs/data-warehouse/query), or [PostHog AI](/docs/posthog-ai).
+
+Your revenue data and configurations aren't going anywhere. You can keep capturing revenue events and querying revenue data through the data warehouse and managed views.
 
 </CalloutBox>
 
