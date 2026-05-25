@@ -5,7 +5,7 @@ platformLogo: django
 
 import AgentIntegrationSection from "../components/AgentIntegrationSection.mdx"
 
-PostHog makes it easy to get data about traffic and usage of your Django app. Integrating PostHog enables analytics, custom events capture, feature flags, and more.
+PostHog makes it easy to get data about traffic and usage of your Django app. Integrating PostHog enables analytics, custom events capture, feature flags, error tracking, and more.
 
 This guide walks you through integrating PostHog into your Django app using the [Python SDK](/docs/libraries/python).
 
@@ -15,40 +15,50 @@ This guide walks you through integrating PostHog into your Django app using the 
 
 To start, run `pip install posthog` to install PostHog’s Python SDK.
 
-Then, set the PostHog API key and host in your `AppConfig` in your `your_app/apps.py` so that's it's available everywhere:
+> **Note:** Version `7.x` of the PostHog Python SDK requires Python 3.10 or higher.
+
+Then, configure PostHog in your app config so it's initialized when Django starts:
 
 ```python file=your_app/apps.py
 from django.apps import AppConfig
 import posthog
 
 class YourAppConfig(AppConfig):
-    name = "your_app_name"
+    name = 'your_app_name'
+
     def ready(self):
         posthog.api_key = '<ph_project_token>'
         posthog.host = '<ph_client_api_host>'
 ```
 
-You can find your project token and instance address in [your project settings](https://us.posthog.com/project/settings).
-
-Next, if you haven't done so already, make sure you add your `AppConfig` to your `settings.py` under `INSTALLED_APPS`:
+Next, if you haven't done so already, add your `AppConfig` to `INSTALLED_APPS` in `settings.py`:
 
 ```python file=settings.py
 INSTALLED_APPS = [
-    # other apps
-    'your_app_name.apps.MyAppConfig',  # Add your app config
+    # ... other apps
+    'your_app_name.apps.YourAppConfig',
 ]
 ```
 
-Lastly, to access PostHog in any file, simply `import posthog` and call the method you'd like. For example, to capture an event:
+You can find your project token and instance address in [your project settings](https://app.posthog.com/project/settings).
+
+To capture events from any file, import `posthog` and call the method you need. For example:
 
 ```python
 import posthog
+from posthog import identify_context
 
 def some_request(request):
     with posthog.new_context():
-        posthog.identify_context(request.user.id)
+        # Django includes request.user for anonymous visitors too. Only identify
+        # the context when the visitor is logged in.
+        if request.user.is_authenticated:
+            identify_context(str(request.user.pk))
+
         posthog.capture('event_name')
 ```
+
+Events captured without a context or explicit `distinct_id` are sent as [anonymous events](/docs/data/anonymous-vs-identified-events) with an auto-generated `distinct_id`. See the [Python SDK docs](/docs/libraries/python#person-profiles-and-properties) for more details.
 
 ## Identifying users
 

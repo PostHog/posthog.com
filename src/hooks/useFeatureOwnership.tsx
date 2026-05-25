@@ -182,6 +182,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Feed',
         owner: ['growth'],
     },
+    'github-integration': {
+        feature: 'GitHub integration',
+        owner: ['signals'],
+    },
     'group-analytics': {
         feature: 'Group analytics',
         owner: ['web-analytics'],
@@ -209,9 +213,9 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['platform-features'],
         label: 'feature/notifications',
     },
-    'llm-gateway': {
-        feature: 'LLM gateway',
-        owner: ['llm-gateway'],
+    'ai-gateway': {
+        feature: 'AI gateway',
+        owner: ['ai-gateway'],
         label: false,
     },
     'live-events': {
@@ -501,18 +505,21 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
 }
 
 export const useFeatureOwnership = ({ teamSlug }: { teamSlug?: string } = {}): { features: Feature[] } => {
-    const features = Object.entries(FEATURE_DATA).reduce((acc, [key, feature]) => {
-        const featureWithSlug: Feature = {
-            ...feature,
-            slug: key,
-            label: feature.label !== undefined ? feature.label : `feature/${slugify(feature.feature)}`,
-        }
+    const features = Object.entries(FEATURE_DATA).reduce(
+        (acc, [key, feature]) => {
+            const featureWithSlug: Feature = {
+                ...feature,
+                slug: key,
+                label: feature.label !== undefined ? feature.label : `feature/${slugify(feature.feature)}`,
+            }
 
-        return {
-            ...acc,
-            [key]: featureWithSlug,
-        }
-    }, {} as Record<string, Feature>)
+            return {
+                ...acc,
+                [key]: featureWithSlug,
+            }
+        },
+        {} as Record<string, Feature>
+    )
 
     const filteredFeatures = useMemo(() => {
         const sortedFeatures = Object.values(features).sort((a, b) => a.feature.localeCompare(b.feature))
