@@ -72,7 +72,7 @@ All content should include a "last updated" date so team members know they're wo
 | Product Area | SME        | Last Content Update |
 |--------------|------------|---------------------|
 | Product analytics | Ben Smith  | - |
-| Web/Customer/Revenue analytics | Jon        | - |
+| Web/Customer analytics | Jon        | - |
 | Session replay | Dana        | - |
 | Feature flags | Sachin     | - |
 | Experiments | Sachin     | - |

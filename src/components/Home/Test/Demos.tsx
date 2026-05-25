@@ -265,7 +265,6 @@ const Toolkits = () => {
                 'experiments',
                 'error_tracking',
                 'llm_analytics',
-                'revenue_analytics',
             ],
         },
         {

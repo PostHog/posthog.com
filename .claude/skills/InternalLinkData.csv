@@ -653,27 +653,6 @@ LLM Analytics,mcp analytics,/tutorials/mcp-analytics,Tutorial,Tutorial: mcp anal
 LLM Analytics,deskhog,/tutorials/deskhog,Tutorial,Tutorial: deskhog
 LLM Analytics,deskhog claude tutorial,/tutorials/deskhog-claude-tutorial,Tutorial,Tutorial: deskhog claude tutorial
 LLM Analytics,deskhog cursor tutorial,/tutorials/deskhog-cursor-tutorial,Tutorial,Tutorial: deskhog cursor tutorial
-Revenue Analytics,revenue analytics,/revenue-analytics,Product page,General revenue analytics mentions
-Revenue Analytics,revenue analytics docs,/docs/revenue-analytics,Docs,Technical docs references
-Revenue Analytics,capture revenue events,/docs/revenue-analytics/capture-revenue-events,Docs,Capture Revenue Events feature or configuration
-Revenue Analytics,connect to customers,/docs/revenue-analytics/connect-to-customers,Docs,Connect To Customers feature or configuration
-Revenue Analytics,dashboard,/docs/revenue-analytics/dashboard,Docs,Dashboard feature or configuration
-Revenue Analytics,deferred revenue,/docs/revenue-analytics/deferred-revenue,Docs,Deferred Revenue feature or configuration
-Revenue Analytics,managed views,/docs/revenue-analytics/managed-views,Docs,Managed Views feature or configuration
-Revenue Analytics,payment platforms,/docs/revenue-analytics/payment-platforms,Docs,Payment Platforms feature or configuration
-Revenue Analytics,stripe,/docs/revenue-analytics/payment-platforms/stripe,Docs,Stripe feature or configuration
-Revenue Analytics,start here,/docs/revenue-analytics/start-here,Docs,Start Here feature or configuration
-Revenue Analytics,troubleshooting,/docs/revenue-analytics/troubleshooting,Docs,"Debugging, missing data, fixes"
-Revenue Analytics,analytics pricing,/blog/analytics-pricing,Blog,Blog: analytics pricing
-Revenue Analytics,revenue,/newsletter/revenue,Newsletter,Newsletter: revenue
-Revenue Analytics,saas pricing lessons,/newsletter/saas-pricing-lessons,Newsletter,Newsletter: saas pricing lessons
-Revenue Analytics,pricing advice,/newsletter/pricing-advice,Newsletter,Newsletter: pricing advice
-Revenue Analytics,revenue,/founders/revenue,Founders,Founders: revenue
-Revenue Analytics,pricing lessons,/founders/pricing-lessons,Founders,Founders: pricing lessons
-Revenue Analytics,multi product pricing,/founders/multi-product-pricing,Founders,Founders: multi product pricing
-Revenue Analytics,how to treat your pricing like a product,/founders/how-to-treat-your-pricing-like-a-product,Founders,Founders: how to treat your pricing like a product
-Revenue Analytics,startup finance without finance,/founders/startup-finance-without-finance,Founders,Founders: startup finance without finance
-Revenue Analytics,stripe reports,/tutorials/stripe-reports,Tutorial,Tutorial: stripe reports
 Workflows,workflows,/workflows,Product page,General workflows mentions
 Workflows,workflows docs,/docs/workflows,Docs,Technical docs references
 Workflows,best practices,/docs/workflows/best-practices,Docs,Best practices and tips
