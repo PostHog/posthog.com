@@ -24,7 +24,7 @@ seo: {
 
 I reloaded Grafana three times before I trusted the numbers. p50 latency: 40ms to 4ms. CPU usage: a fraction of before. Memory: barely there. We'd just moved the feature flags [local evaluation](/docs/feature-flags/local-evaluation) endpoint from Django to Rust. I knew it would be better. But I wasn't ready for this.
 
-## What local evaluation is
+## Local evaluation explained
 
 Local evaluation is the endpoint every server-side SDK hits to fetch [feature flag](/feature-flags) definitions. SDKs poll it every 30 seconds, so it gets a lot of traffic. Until recently it had its own Django deployment, sized for that traffic: about 30 pods on average in US, with autoscaling configured up to 250. Each pod requested 2 CPU cores and 9 GB of memory, so at baseline we were running 60 cores and 270 GB of RAM.
 
