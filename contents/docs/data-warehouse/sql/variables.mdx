@@ -59,3 +59,43 @@ and timestamp >= {filters.dateRange.from} and timestamp < {filters.dateRange.to}
   alt="Using dashboard filter variables in a SQL query"
   classes="rounded"
 />
+
+## Using date filters with custom tables
+
+When querying PostHog tables like `events`, `sessions`, or `groups`, the `{filters}` placeholder automatically applies dashboard date filters to the standard timestamp field.
+
+For custom SQL queries against data warehouse tables or other custom sources, you need to specify which field should receive date filters using the **Date range field** input in the query editor.
+
+### The `{filters.dateRange}` placeholder
+
+Use `{filters.dateRange}` to apply only the dashboard's date range to your query. This placeholder generates the full date comparison expression using the field you specify:
+
+```sql
+SELECT count() 
+FROM my_warehouse_table 
+WHERE {filters.dateRange}
+```
+
+With a date range field of `created_at` and dashboard dates from January 1-7, this expands to:
+
+```sql
+WHERE created_at >= toDateTime('2024-01-01 00:00:00') 
+  AND created_at < toDateTime('2024-01-07 00:00:00')
+```
+
+You can use nested field names with dot notation like `data.timestamp` or `metadata.created_at`.
+
+### Using `{filters}` with custom tables
+
+The `{filters}` placeholder can also apply date filters to custom tables when a date range field is configured. However, `{filters}` only supports date filtering for custom tables – property filters and test account filters aren't supported and raise an error if the dashboard has them enabled.
+
+If your dashboard uses property or test account filters, use `{filters.dateRange}` instead to apply only the date range.
+
+### When to use each placeholder
+
+| Placeholder | Best for | Supports property filters? |
+|------------|----------|---------------------------|
+| `{filters}` | PostHog tables (`events`, `sessions`, etc.) | Yes |
+| `{filters}` with date range field | Custom tables with date filtering only | No |
+| `{filters.dateRange}` | Custom tables when dashboard has other filters | No |
+| `{filters.dateRange.from}` and `{filters.dateRange.to}` | Manual date comparisons with custom logic | N/A |
