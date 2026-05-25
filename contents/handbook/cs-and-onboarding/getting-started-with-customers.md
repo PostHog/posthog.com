@@ -4,188 +4,186 @@ sidebar: Handbook
 showTitle: true
 ---
 
-As a CSM, it is your responsibility to be the expert on each of your customers, whether or not they choose to engage with you. Obviously, you’ll learn more about customers that you actually talk to, but there are still plenty of ways to get to know an account, learn their use cases, and track their journey from all of the data available.
+When a customer is assigned to you, your job is to understand their business, learn how they use PostHog, and find ways to be useful — whether or not they choose to engage. This page walks through how to research, reach out, and run your first call.
 
-Many customers have never spoken to PostHog – some happily welcome our help, others are strongly independent. In order to be successful as a CSM, we want to understand our customers and be helpful.
+Also read [Get people to talk to you](/handbook/growth/sales/expansion-and-retention#1-get-people-to-talk-to-you) for tactics.
 
-[Get people to talk to you](/handbook/growth/sales/expansion-and-retention#1-get-people-to-talk-to-you) also has good, helpful tactics.
+## 1. Audit the account
 
-# Newly assigned accounts
+Before you reach out, build context. The more you bring to your first conversation, the faster you get to relevant recommendations.
 
-When you're assigned a new customer account, your approach will vary depending on the existing relationship between the customer and PostHog. This guide walks you through some key steps you can take when welcoming new customers to your book.
+### Their business
 
-## Determine which category your customer falls into
-
-### No/low interaction with PostHog humans
-
-These are customers who have been using PostHog but haven't had much direct contact with our team. You should conduct a more thorough assessment before your first call with them. If you haven't done your initial outreach yet, you can also use the assessment to customize your message with a specific tip from your learning.
-
-#### Account and business audit
-
-Start by gathering context about who they are and how they're using PostHog:
-
-**Understanding their business:**
 - What industry are they in? What products do they make?
-- If you have other customers in their industry, does their usage of PostHog fit what you've seen before?
-- For an even deeper dive on their business, the Sales team has a thorough [account planning template](/handbook/growth/sales/account-planning) that they use for cross-sell/expansion that you can take guidance from.
+- If you have other customers in their industry, does their PostHog usage match what you've seen before?
+- For a deeper dive, the Sales team's [account planning template](/handbook/growth/sales/account-planning) is a good reference.
 
-**Reviewing their PostHog setup:**
-- What PostHog products are they using?
-- What PostHog products are they *not* using?
-- Does their setup look complete? Are they paying for products they don't use?
-  - Going over the [customer deployment health check guide](/handbook/cs-and-onboarding/health-checks) will help you answer these questions.
+### Their PostHog setup
+
+- Which PostHog products are they using?
+- Which are they *not* using?
+- Does their setup look complete? Are they paying for products they don't use? Run the [customer deployment health check](/handbook/cs-and-onboarding/health-checks).
 - Review their [product onboarding](/handbook/growth/sales/account-allocation#product-onboarding) status.
 
-**Data management assessment:**
+### Data management
+
 In their project(s), check the data management tab:
+
 - Do they have custom events defined?
-  - If not and they're using autocapture, have they defined [actions](/docs/data/actions)?
-- Do custom events have relevant [properties](/docs/getting-started/send-events#sending-custom-properties-on-an-event) defined?
-- If they're identifying persons or groups, have they defined a meaningful set of properties on those profiles?
+- If they use autocapture, have they defined [actions](/docs/data/actions)?
+- Do custom events have meaningful [properties](/docs/getting-started/send-events#sending-custom-properties-on-an-event)?
+- If they identify persons or groups, are the profile properties meaningful?
 
-Answering these questions helps you identify the most important things to focus on in your initial engagements. Take a look at our [basic account review](https://posthog.com/handbook/cs-and-onboarding/foundation-check) page for additional things to check.
+Also worth running through the [basic account review](/handbook/cs-and-onboarding/foundation-check) checklist.
 
-# Introduce yourself
+## 2. Reach out
 
-Once you've completed your audit, start reaching out. If this is an account that's being handed over from an existing contact:
+How you reach out depends on whether you're inheriting an existing contact or starting cold.
 
-- Review the [Sales > CSM Handover](/handbook/growth/sales/account-allocation#handing-over-customers) process.
-- Get introduced in their existing Slack/Teams channel or via email.
-- Coordinate with the previous point of contact to ensure continuity.
+### Handover from Sales
 
-If you don't have an established contact, introduce yourself to the widest blast range: org owner, org admin, users who have recently raised tickets, and users who have logged in in the last month. Even if there _seems_ to be a point of contact, things probably changed – multi-thread!
+If you're inheriting an existing contact:
 
-Your intro message should:
+- Review the [Sales → CSM Handover](/handbook/growth/sales/account-allocation#handing-over-customers) process.
+- Get introduced in the existing Slack/Teams channel or via email.
+- Coordinate with the previous owner for continuity.
 
--   Introduce yourself as their new CSM
--   Describe the value of CSM – dedicated point of contact, go-to person for help or questions, help the customer use PostHog effectively, e.g., through training or strategic guidance. Many customers misunderstand the CSM role as 'just support', so make sure to distinguish your role as a CSM apart from that.
--   Value nugget: show how you can help by delivering value-add
+### Cold (no established contact)
 
-### Examples of a value nugget
+Cast a wide net — org owner, org admin, recent ticket raisers, anyone active in the last month. Even if there *seems* to be a point of contact, things probably changed — multi-thread by reaching out to several people.
 
-Take a look at your customer's account in Vitally and Metabase to identify ways you can be helpful. Some examples include:
+### Your intro message
 
--   Increase/decrease in events: make sure this is expected and things are implemented correctly
--   Recently opened a support ticket: follow up to make sure their issue is resolved
--   Concrete ways a customer can [optimize their spending](/handbook/cs-and-onboarding/health-checks#are-they-paying-for-things-they-dont-need) or [improve their implementation](/handbook/cs-and-onboarding/health-checks#have-they-implemented-tracking-incorrectly)
--   Invitation to a shared Slack channel so it's easier to connect with our team.
--   Lots of new users or low user engagement: offer a training session on how to use PostHog effectively
--   On a legacy pricing plan: "We've moved off the legacy plan for more than a year, and I'd like to transition you to standard pricing. Happy to discuss the changes."
+Cover:
 
-If there's an established Slack channel you are inheriting, do it in Slack.
+- A value nugget — grabs attention and shows you've already done your homework.
+- Who you are and that you're their new CSM.
+- What a CSM does — their dedicated PostHog human, go-to for help, questions, training, and strategic guidance. Many customers misunderstand CSMs as "just support" — distinguish yourself.
 
-### Example subject lines:
+### Value nugget ideas
 
-You should find what you're comfortable with whilst keeping a sense of PostHog's tone of voice. Some examples include:
+Pull from Vitally and Metabase to find something specific to mention:
 
--   Hello 👋 from your new CSM at PostHog + hook
--   hi from PostHog
--   Checking in from PostHog
+- Event count spike or drop — make sure it's expected and tracking is correct.
+- Recent support ticket — follow up to confirm it's resolved.
+- Concrete ways to [optimize spend](/handbook/cs-and-onboarding/health-checks#are-they-paying-for-things-they-dont-need) or [improve implementation](/handbook/cs-and-onboarding/health-checks#have-they-implemented-tracking-incorrectly).
+- Invite to a shared Slack channel.
+- High user count or low engagement — offer a training session.
+- Legacy pricing plan: "We moved off legacy plans over a year ago. I'd like to transition you to standard pricing — happy to walk through the changes."
+- New feature for their use case - Highlight a new PR or functionality for an app you know they use.
 
-In Vitally, you can see how other team members have reached out to customers in the past by going to an account's Active conversations tab for inspiration.
+If you're inheriting an existing Slack channel, do the intro in Slack.
 
-If there is no response, follow up after 2-3 business days, targeting individuals in the engineering, product, or data team. Emphasize the purpose of your reaching out - you're not trying to sell them something, you want to understand their use case and help optimize their PostHog integration.
+### Subject lines
 
-## Connect with champion
+Find what feels natural to you — keep it in PostHog's voice. Examples:
 
-1-1 email or Slack message
+- "Hello 👋 from your new CSM at PostHog + hook"
+- "hi from PostHog"
+- "Checking in from PostHog"
 
-Aim: start the relationship with a champion, ideally in the engineering, product, or data team
+In Vitally, an account's Active conversations tab is a good place to see how teammates have reached out in the past.
 
-Content: Acknowledge that their time is valuable and that you will not be selling or pitching. You want to understand how to better serve the customer by understanding how they use PostHog. Would they be open for a 15-minute call? Offer to do this async as well.
+### No response?
 
-Pro tip: If they're not already in Slack, don't ask; add them to Slack by sending them a direct invitation. If this is an account without an established Slack channel, you can follow our guide on [shared Slack channels](https://posthog.com/handbook/growth/sales/slack-channels) to set one up.
+Follow up after 2-3 business days. Try engineering, product, or data folks. Emphasize that you're not selling — you want to understand their use case and help optimize their PostHog integration. Reach out to users directly, avoid large group messages.
 
-### Getting-to-know-you discovery call
+### Connecting with a champion
 
-This is one of the most effective ways to learn what you need to know about a customer, as you can ask direct questions and spend a lot of time listening to their responses. A quick call upfront is often better than a month of back-and-forth in Slack.
+Once you've got someone responsive, aim to build a 1-1 relationship — ideally with someone in engineering, product, or data.
 
-Typically, this is a 15-30 minute conversation aimed at establishing rapport, understanding pain points, and beginning to formulate how you can best assist them.
+Acknowledge their time, make clear you're not pitching, and ask for a 15-minute call (async works too).
 
-Your discovery call should help you determine the level of engagement you'll have with the customer going forward. Think through the following questions:
-- What is the goal you want to achieve with this customer? (Keep an eye on them vs. become more deeply embedded as a strategic partner)
-  - Do they need help fixing their current setup?
-  - Do they have plans/interest in implementing new PostHog products?
-    - If the answer to either is yes, you can be their strategic partner and collaborate on setting up a detailed [success plan](/handbook/cs-and-onboarding/onboarding-success-plan).
-  - Some customers may not want to engage deeply, and that is okay; still, continue to monitor their usage/spend and check in with them when appropriate.
+**Pro tip:** if they're not in Slack yet, don't ask — send them a direct invite. For accounts without a shared Slack channel, follow the [shared Slack channels guide](/handbook/growth/sales/slack-channels) to set one up.
 
-### Preparation before your call
+## 3. Your first call
 
-Some things to consider before your call:
+A quick discovery call is one of the most effective ways to learn about a customer. It beats a month of back-and-forth in Slack.
 
-1. Understand the customer’s PostHog usage:
-    1. What products are they using? How are they using it? What metrics do they care about from those products?
-    2. What products are they **not** using? This means products that make sense for them to use, and you want to understand why they aren’t using them.
-        1. For example, product analytics and web analytics are closely coupled. If the customer is using product analytics but not web analytics, understand why. Is there a reason for that? What’s the objection?
-2. Call out feature preview ✨
-    1. Explain what feature preview is and how to enable it
-    2. Recommend PostHog AI as it's usually relevant regardless of customer use case
-    3. Otherwise, recommend new products that the customer likely already has (e.g., Messaging, CRM) – position it as 'You probably already have [product], this is a product we’re trying to launch and would love to see how you would use it / any feedback you have. Keen to relay or rope in the engineering team directly with your feedback.'
-3. Q&A on product
-4. Next steps and ideal catch-up cadence.
+Typically 15-30 minutes. Aim: rapport, pain points, and a sense of where you can help.
 
-#### Additional questions to consider for your call
+### Goals to clarify
 
-Here are some recommended questions you could use. Please do not simply interrogate a customer with each of these questions; this is more of a question bank to use for inspiration!
+Use the call to figure out how deeply you'll work with this customer. Think through:
 
-- What is your role at the company, and what team are you on?
+- What do you want to achieve with this customer? Keep an eye on them, or go deeper as their partner?
+- Do they need help fixing their current setup?
+- Do they have plans to implement new PostHog products?
+
+If they need help or are expanding their use, that's an opening to work with them more closely — collaborate on a detailed [success plan](/handbook/cs-and-onboarding/onboarding-success-plan). Some customers won't want to engage deeply, and that's fine — keep monitoring their usage and check in when appropriate.
+
+### Prep
+
+Before the call:
+
+- **Understand their PostHog usage.** Which products are they using and how? What metrics do they care about? Which products are they *not* using that should make sense for them? E.g. if they use product analytics but not web analytics, understand why.
+- **Show them feature previews.** Recommend PostHog AI (relevant to most customers). Otherwise, recommend new products they likely already use (Messaging, CRM) — frame it as "you probably already have this — we're trying to launch it, would love your feedback."
+- **Leave room for Q&A on the product.**
+- **Plan next steps and an ideal cadence.**
+
+### Question bank
+
+Don't interrogate the customer — pick a few that are relevant.
+
+- What's your role and team?
 - What does your company do?
 - What are your immediate and overall goals?
-- Can you describe your current analytics setup and any specific tools or libraries you use alongside PostHog?
+- Can you describe your current analytics setup and any tools you use alongside PostHog?
 - Which user flows or features do you most want to understand better?
-- Are there any areas you feel like there are blind spots or gaps in understanding?
-- What problems have you encountered with analytics (e.g., ad blockers, data privacy, endpoint reliability)?
-- For your team, what does success look like after implementing a new analytics solution?
+- Any blind spots or gaps in understanding?
+- What problems have you had with analytics (ad blockers, data privacy, endpoint reliability)?
+- What does success look like after implementing a new analytics solution?
 - Are you more comfortable with direct SQL or do you prefer visual dashboards?
 - How do you make decisions about scaling, feature adoption, and pricing flexibility?
-- Who will be the main users of PostHog on your side?
-- Do you have any concerns about compatibility or integration with your current stack?
+- Who are the main users of PostHog on your side?
+- Any concerns about compatibility or integration with your current stack?
 - Anything weird happening in PostHog?
 - What metrics do you deeply care about?
-- Do you feel you are set up for success with your current PostHog setup?
-- Which teams are currently active in using PostHog at your company?
+- Do you feel set up for success with your current PostHog setup?
+- Which teams currently use PostHog at your company?
 - Are there opportunities for other teams to adopt PostHog?
-- Would you mind making introductions to champions on other teams to learn about their use case?
-- [Review and discuss their current implementation](/handbook/cs-and-onboarding/foundation-check) and if they have any concerns.
-- Would training or workshop sessions be useful for you and your team?
+- Could you introduce me to champions on other teams to learn about their use case?
+- [Review their current implementation](/handbook/cs-and-onboarding/foundation-check) — any concerns?
+- Would training or workshops be useful for you and your team?
 - How do you feel about PostHog overall?
 
-# Customer Prioritization
+## 4. Ongoing
 
-- Consider a separate approach for monthly and annual customers:
-  - Annual plans: prioritize accounts with contract renewals in the next 3-4 months
-  - Monthly plans: look for significant growth within the last quarter
-- Accounts with platform packages
-  - Customers on legacy "Teams" add-on ($450/month) could save $200 by switching to the "Boost" add-on if they do not require SAML SSO or managed reserve proxy. The teams add-on has now been split into:
-    - [Boost add-on](/platform-packages#boost-add-on) ($250/month)
-    - [Scale add-on](/platform-packages#scale-add-on) ($750/month)
+### Prioritization
 
-## Analyzing product usage
+Prioritize potential churn risks, low engagement, and accounts where something is changing (for better or worse):
 
-While PostHog itself is (obviously) the gold standard for understanding how customers are using our product, we also make it very easy to view this information within the account context in Vitally and in Metabase.
+- **Upcoming renewals:** accounts with renewals in the next 3-4 months.
+- **Low engagement:** customers who aren't using PostHog or engaging with us.
+- **MRR variance:** significant decline or growth in the last quarter.
 
-We use the PostHog CDP to send product events to Vitally so that we can see which specific users are most active, MAUs on an account, and how many paid products they use.
-We can see more specifics in the Metabase dashboard, as well.
+### Account research
 
-These sources will both help you identify potential cross-sell and upsell opportunities, in the name of helping customers maximize their value in the product.
+A lot of valuable context lives in past conversations:
 
-## Past conversations, tickets, and Slack channels
+- **BuildBetter** — recordings of customer success, sales, and onboarding calls. Use <PrivateLink url="https://app.buildbetter.app/people">People</PrivateLink> to search companies or contacts and see call history, or use direct search / AI chat.
+- **Pylon** — Slack channel history. The <PrivateLink url="https://app.usepylon.com/accounts">account</PrivateLink> page is linked to Salesforce accounts that have a Slack channel. Filter by Owner (mapped to the account owner in Salesforce) to view all Slack/Teams interactions for your accounts.
+- **Vitally** — Zendesk and email conversations under <PrivateLink url="https://posthog.vitally-eu.io/conversations/active/">Active Conversations</PrivateLink>. See who the key contacts have been, who's supported them in the past, and how frequently they raise tickets.
 
-A very valuable part of account research is also reviewing past conversations. This will give you an idea of what level of contact we’ve had, who the main contacts may be, what issues they’ve faced, and so on.
+### Product usage analysis
 
-The key places to look for this information:
+PostHog is the best place to see how customers actually use our product. We also pipe product events to Vitally via the CDP, so you can see active users, MAUs, and which paid products an account uses.
 
-- **BuildBetter**: will contain recordings of customer success, sales, or onboarding calls. Once in BuildBetter, you can use the <PrivateLink url="https://app.buildbetter.app/people">"People"</PrivateLink> data section to search for companies or individual contacts and then see the history of calls, or you can do a direct search or AI chat.
-- **Pylon**: will contain the Slack channel history. You can view the <PrivateLink url="https://app.usepylon.com/accounts">"account"</PrivateLink> page, which is linked to Salesforce accounts for any of your accounts that have a Slack channel. You can filter on "Owner", which should also be mapped to the account owner from Salesforce, which lets you view all Slack or Teams interactions from accounts you own.
-- **Vitally**: will contain Zendesk and email conversations under the <PrivateLink url="https://posthog.vitally-eu.io/conversations/active/">"Active Conversations"</PrivateLink> section. This will allow you to see who the key contacts were, which support, sales, or CS individuals they have worked with in the past, and so on. It's also really helpful to see how frequently they raise tickets and what issues they have faced.
+Metabase has more detail, including cross-sell and upsell signals.
 
-## Get notifications
+### News alerts
 
-We use [Watch Tower](https://gotwatchtower.com/) to monitor news about companies in our book of business and surface what matters. To get started, create an account with your PostHog email. Once in, you can create a list and select to import your book of business from either Vitally or Salesforce.
+We use [Watch Tower](https://gotwatchtower.com/) to track news about companies in your book of business.
 
-Once your book has been imported, it's important to go through and make sure the names are correct, and each entry has the correct domain. Watch Tower uses the domain to understand context about the company you're trying to monitor and both Vitally and Salesforce rarely include domain data accurately.
+To set up:
 
-Finally set up how you like to be notified. Email is the default but you can also set up Slack notifications as well. Once you've ensured your list is updated correctly and notifications are set, every day Watch Tower will scan the news for info relating to any of your companies. If there's a match, you'll get a notification.
+1. Create an account with your PostHog email.
+2. Create a list and import your book from Vitally or Salesforce.
+3. Check that company names and domains are correct — Vitally and Salesforce often have inaccurate domains, and Watch Tower uses the domain for context.
+4. Set up notifications (email by default, Slack also available).
 
-## Recommended approach
-The best recommendation is to find your own rhythm for how you, as an individual, prefer to learn about your customers. There's not a strict playbook. This is a compilation of the most reliable sources of knowledge to use for researching an account.
+Watch Tower will scan the news daily and ping you when there's a match.
+
+## Find your own rhythm
+
+There's no strict playbook. Use whichever sources work best for you.
