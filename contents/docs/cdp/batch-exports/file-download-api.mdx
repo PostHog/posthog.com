@@ -42,6 +42,8 @@ The file download API follows a three-step workflow:
 2. **Poll status** - Check the status of the run until it completes
 3. **Download** - Download the exported file(s)
 
+You can also **cancel** a running export if you no longer need it.
+
 ## API endpoints
 
 All endpoints use the base path:
@@ -146,6 +148,7 @@ GET /api/environments/{project_id}/file_download_batch_exports/{run_id}
 | `Starting` | Export run is initializing |
 | `Running` | Export is in progress |
 | `Completed` | Export finished successfully |
+| `Cancelled` | Export was cancelled by user |
 | `Failed` | Export failed with an error |
 | `FailedRetryable` | Export failed but can be retried |
 | `Terminated` | Export was terminated |
@@ -179,6 +182,32 @@ Returns HTTP 302 redirect to a pre-signed download URL.
 | `Batch export run is still in progress` | Wait for the run to complete before downloading |
 | `Batch export run has failed` | The export failed and no files are available |
 | `No files with index {n}` | The specified file index doesn't exist |
+
+### Cancel an export run
+
+Cancel an in-progress export run. Use this to stop a long-running export that you no longer need.
+
+**Request:**
+
+```bash
+POST /api/environments/{project_id}/file_download_batch_exports/{run_id}/cancel
+```
+
+**Response:**
+
+```json
+{
+    "status": "Cancelled"
+}
+```
+
+Returns the current status of the run after the cancellation request.
+
+**Errors:**
+
+| Error | Description |
+|-------|-------------|
+| `Cannot cancel a run that is in '{status}' status` | Only runs in `Starting` or `Running` status can be cancelled |
 
 ## Complete example
 
