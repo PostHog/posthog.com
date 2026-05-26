@@ -30,7 +30,7 @@ The first area we're interested in is session replay analysis. PostHog AI can al
 
 Another idea I'm especially excited about is synthetic user testing – i.e. using our knowledge of user behavior to identify when users might get confused, or what flows might break, _before you ship_ to production. As coding models improve, many people are seeing test and review workload increase hugely. We want to automate this, so you can focus on your product.
 
-And, if we can get better at predicting user behavior, we should also be able to suggest changes that will improve conversion rates, and reduce user frustration, with greater confidence, saving you time on manual analysis and token usage,
+And, if we can get better at predicting user behavior, we should also be able to suggest changes that will improve conversion rates, and reduce user frustration, with greater confidence, saving you time on manual analysis and token usage.
 
 Our ideas here are experimental. It will take iteration to figure out how to train models effectively, and what data is actually useful. But, so far, every time we've added AI in a way that makes the product simpler or more powerful, it's worked well, so we think it's worth trying.
 
@@ -46,14 +46,15 @@ The downside is that this involves using data in PostHog to train models.
 
 Most companies would bury this change in a deceptively boring T&Cs update, but we value transparency, so here's what you need to know in an internet-friendly numbered list: 
 
-1. We will anonymize all data before it's used for training
-2. Users on our EU cloud instance are opted out by default
-3. Users with an existing agreement that prevents training, such as a BAA, MSA, or similar, are also opted out
-4. All other users on our US cloud instance are opted in by default
-5. You can opt out at any time via your [org settings in PostHog](https://app.posthog.com/settings/organization-details) (admin access required)
-6. We will only use data that already exists in your PostHog instance
+1. Users on our EU cloud instance are opted out by default
+2. So too users with agreements that prevent training (e.g. BAA, MSA, or similar)
+3. All other users on our US cloud instance are opted in by default
+4. We will anonymize all data before it's used for training
+5. We will only use data that already exists in your PostHog instance
+6. We will do all the model training ourselves, which means...
 7. We won't sell or send your data to third-party model providers
-8. We will do all the model training ourselves
+8. You can opt out at any time via your [org settings in PostHog](https://app.posthog.com/settings/organization-details) (admin access required)
+9. Training won't commence until June 29, so there's plenty of time to decide
 
 In terms of comms, we are:
 
