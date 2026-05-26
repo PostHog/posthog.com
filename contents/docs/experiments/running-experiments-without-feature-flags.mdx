@@ -2,8 +2,6 @@
 title: "How to run Experiments without Feature Flags"
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
 You can run Experiments without using PostHog's Feature Flags if you're using a different feature flag library and want to track your experiment results in PostHog.
 
 This doc walks you through how to set up an experiment without using PostHog's Feature Flags.
@@ -12,15 +10,11 @@ This doc walks you through how to set up an experiment without using PostHog's F
 
 Create a new experiment in the [Experiments tab](https://app.posthog.com/experiments) and follow the same steps as you would when [creating a regular experiment](/docs/experiments/creating-an-experiment).
 
-<CalloutBox type="note">
+> **Note:** Although you won't be using PostHog's Feature Flags directly, you still need to name your feature flag key. This key is used to identify which events belong to your experiment when PostHog calculates results.
+>
+> The 'control' variant name is fixed, but you can name other variants whatever you like.
 
-Although you won't be using PostHog's Feature Flags directly, you still need to name your feature flag key. This key is used to identify which events belong to your experiment when PostHog calculates results.
-
-The 'control' variant name is fixed, but you can name other variants whatever you like.
-
-</CalloutBox>
-
-## Step 2: Use your own feature flag system
+## Step 2: Display the variant using your own feature flag system
 
 Your feature flag system handles the variant assignment. PostHog only needs to know which variant was shown to each user through the events you send.
 
@@ -33,11 +27,7 @@ For example:
 - `button_clicked` - if users are exposed when they interact with a feature
 - Any custom event from your application
 
-<CalloutBox type="note">
-
-The exposure event tells PostHog when a user enters the experiment. This is separate from your metric events (which measure the experiment's impact).
-
-</CalloutBox>
+> **Note:** The exposure event tells PostHog when a user enters the experiment. This is separate from your metric events (which measure the experiment's impact).
 
 ## Step 4: Add the variant property to your events
 
@@ -48,11 +38,7 @@ To attribute events to the correct experiment variant, include a `$feature/<expe
 
 The property key format is `$feature/` followed by your experiment's feature flag key. For example, if your experiment's flag key is `new-checkout-flow`, use `$feature/new-checkout-flow` as the property key.
 
-<CalloutBox type="note">
-
-When using PostHog's Feature Flags with our SDKs, this property is added automatically to all events. When using your own feature flag system, you must manually add it.
-
-</CalloutBox>
+> **Note:** When using PostHog's Feature Flags with our SDKs, this property is added automatically to all events. When using your own feature flag system, you must manually add it.
 
 If your experiment's flag key is `new-checkout-flow` and you use `$pageview` as your exposure event:
 
@@ -210,10 +196,10 @@ For each metric event (identified by the `$feature/<flag-key>` property):
 
 ### Multiple variant handling
 
-If a user is exposed to multiple variants (for example, across different devices), PostHog handles this based on your [exposure criteria settings](/docs/experiments/exposures#handling-multiple-exposures):
+If a user is exposed to multiple variants, like when a user jumps across devices, PostHog handles this based on your [exposure criteria settings](/docs/experiments/exposures#handling-multiple-exposures):
 
-- **Exclude from analysis** (default) – Users seeing multiple variants are removed from results
-- **Use first seen variant** – Users are attributed to their first exposed variant
+- **Exclude from analysis** (default): Users seeing multiple variants are removed from results
+- **Use first seen variant**: Users are attributed to their first exposed variant
 
 ### Sample ratio mismatch detection
 
