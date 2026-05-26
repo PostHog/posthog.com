@@ -35,7 +35,7 @@ Sometimes the Blitzscale team will decide a new product needs to be built. They'
 
 Other times you might have an idea for a great product we should build. In that case, use the <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal/blob/main/_TEMPLATES/request-for-comments-new-product.md">New Product RFC template</PrivateLink>. You might choose to hack together a prototype of the product to demo and show off, which you should do! Blitzscale only needs to get involved if you want to start working on this product full time. At that point, we are choosing whether to invest a pretty serious amount of money into launching it, so we want to get that right.
 
-The best products are often ones that not everyone thinks is a good idea before launch. For example, Tim was against building Session Replay, and it's probably the thing PostHog is most known for today. To make sure we take big bets, _any_ blitzscale team member can OK a new product being built, even if other blitzscale members disagree. That blitzscale person will be the one who the new team reports to. This way we avoid consensus stopping us from making big bets.
+The best products are often ones that not everyone thinks is a good idea before launch. For example, Tim was against building Session Replay, and it's one of our most popular products. To make sure we take big bets, _any_ Blitzscale team member can OK a new product being built, even if other Blitzscale members disagree. That Blitzscale person will be the one who the new team reports to. This way we avoid consensus stopping us from making big bets.
 
 For a complete walkthrough of the product lifecycle, see [releasing new products and features](/handbook/product/releasing-new-products-and-features).
 
