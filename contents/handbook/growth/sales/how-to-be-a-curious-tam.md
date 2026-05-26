@@ -15,8 +15,9 @@ These are the kind of questions that a customer may ask you live on a call, or t
 RTFD! Read the handbook/docs is a refrain you will hear often - we strive to document well and if someone tells you to read them, it just means we are proud that we have a single place to go for answers. That said, the product moves fast and you may have specific and/or complicated questions. If that is the case, here are some first steps:
 
 1. Really, read the docs. They are quite thorough and a great place to start.
-2. Review Slack conversations. You can query Slack through the Slack Bot or the [Slack MCP](https://slack.com/help/articles/48855576908307-Guide-to-the-Slack-MCP-server). We're a chatty bunch - odds are good that someone has had a similar question before and you can lean on the response they got.
-3. Ask the product itself - your agent (Claude Code, Codex, etc) generally does a very good job of working out what functionality is available for different products. Just point it at the [official PostHog repo](https://github.com/PostHog/posthog) and ask away!
+2. Ask Max. We have a Slack bot called Ask Max that connects to our documentation and additional context stores built for answering questions about PostHog. 
+3. Review Slack conversations. You can query Slack through the Slack Bot or the [Slack MCP](https://slack.com/help/articles/48855576908307-Guide-to-the-Slack-MCP-server). We're a chatty bunch - odds are good that someone has had a similar question before and you can lean on the response they got.
+4. Ask the product itself - your agent (Claude Code, Codex, etc) generally does a very good job of working out what functionality is available for different products. Just point it at the [official PostHog repo](https://github.com/PostHog/posthog) and ask away!
 4. Ask your *official* Subject Matter Expert - for reference, see the [GTM SME assignments](/handbook/growth/sales/product-enablement).
 
 ### Is this a bug or a feature (or, is this the product or the user)?
