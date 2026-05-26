@@ -354,6 +354,10 @@ Hog's standard library includes the following functions and will expand. To see 
 - `toDate(arg: string | integer): Date` - `arg` must be a string `YYYY-MM-DD` or a Unix timestamp in seconds
 - `toDateTime(arg: string | integer): DateTime` - `arg` must be an ISO timestamp string or a Unix timestamp in seconds
 
+### Random functions
+
+- `randomFloat(): float` - Returns a uniformly random float in [0, 1). Not cryptographically secure.
+
 ### Cryptographic functions
 
 - `md5Hex(arg: string): string`
