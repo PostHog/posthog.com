@@ -1,6 +1,6 @@
 ---
 date: 2026-05-26
-title: Why we want to train AI models
+title: Training our own AI models
 rootPage: /blog
 sidebar: Blog
 showTitle: true
