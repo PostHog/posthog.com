@@ -16,21 +16,21 @@ I've never been more excited about the future of PostHog.
 
 Over the past year, we've started building more AI-powered features into PostHog, like our [AI installation wizard](/wizard), [PostHog AI](/docs/posthog-ai), and our [MCP](/docs/model-context-protocol). They're all wildly popular, but they're only the start.
 
-[PostHog's next chapter](/blog/posthogs-next-chapter) is about building more proactive, self-driving products. Products that surface answers and solutions for you, act on them, and improve over time. This is the vision for [PostHog Code](/code), which is now in beta.
+[PostHog's next chapter](/blog/posthogs-next-chapter) is about building more proactive, self-driving products. Products that surface answers and solutions for you, act on them, and improve over time. 
 
-To enable this and more products like it, we want to try something new. We want to train models on data in PostHog.
+This is the vision for [PostHog Code](/code), which is now in beta. To enable this and more products like it, we want to try something new. 
+
+We want to train models on data in PostHog.
 
 ## What we want to build
 
-We have two goals here:
-1. Make our existing products fit for the future – i.e. the "2030 versions" of what we already do well
-2. Build entirely new products, like PostHog Code, that help teams build better products, faster
+We think there are a bunch of meaningful use cases here that will help users, and fundamentally change the way people think about building better products.
 
-The first area we're interested in is session replay analysis. PostHog AI can already detect issues in replays, but it's expensive and doesn't scale well. We think a model trained on the underlying data used to power replays could make this cheaper, faster, and more accurate. We want replays to be as powerful at scale as they are for diagnosing the problems of individual users, and we think training models will make this possible.
+The first area we're interested in is **session replay analysis**. PostHog AI can already detect issues in replays, but it's expensive and doesn't scale well. We want replays to be as powerful at scale as they are for diagnosing the problems of individual users, and we think a model trained on the underlying data used to power replays will help us achieve this. 
 
-Another idea I'm especially excited about is synthetic user testing – i.e. using our knowledge of user behavior to identify when users might get confused, or what flows might break, _before you ship_ to production. As coding models improve, many people are seeing test and review workload increase hugely. We want to automate this, so you can focus on your product.
+Another idea I'm especially excited about is **synthetic user testing** – i.e. using our knowledge of user behavior to identify when users might get confused, or what flows might break, _before you ship_ to production. As coding models improve, many people are seeing test and review workload increase hugely. We want to automate this, so you can focus on your product.
 
-And, if we can get better at predicting user behavior, we should also be able to suggest changes that will improve conversion rates, and reduce user frustration, with greater confidence, saving you time on manual analysis and token usage.
+And, if we can get better at **predicting user behavior**, we should also be able to suggest changes that will improve conversion rates, and reduce user frustration. If we can automate this work for you, you'll spend less time on manual analysis and burn fewer tokens in the process.
 
 Our ideas here are experimental. It will take iteration to figure out how to train models effectively, and what data is actually useful. But, so far, every time we've added AI in a way that makes the product simpler or more powerful, it's worked well, so we think it's worth trying.
 
