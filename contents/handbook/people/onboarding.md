@@ -43,7 +43,7 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
 
 ## In-person onboarding
 
-Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary. We encourage team leads to consider the Hedgehouse as a location for in-person onboarding. Regardless of location, everyone should have their own bedroom.
+Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary. With very few exceptions (visa issues or excessive travel time), in-person onboarding should happen at [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco or the [Hedge House](/handbook/company/offsites#hedge-house) in London. Both are set up for it, remove most of the planning friction, and you'll always be in the same space as other PostHog teams — which is way more fun, and means you'll meet more people. Regardless of location, everyone should have their own bedroom.
 
 In these cases, the process is:
 
