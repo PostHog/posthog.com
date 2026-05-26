@@ -453,6 +453,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/products/galaxy': {
+        size: {
+            min: {
+                width: 720,
+                height: 540,
+            },
+            max: {
+                width: 1400,
+                height: 1100,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     'home-test': {
         experiment: {
             variant: 'test',

@@ -173,6 +173,7 @@
         "react-country-flag": "^3.0.2",
         "react-dom": "^18.2.0",
         "react-dropzone": "^14.2.3",
+        "react-force-graph-3d": "^1.29.1",
         "react-github-btn": "^1.2.1",
         "react-helmet": "^5.2.1",
         "react-input-autosize": "^3.0.0",
@@ -214,6 +215,7 @@
         "swr": "^2.0.0",
         "tailwind-merge": "^2.0.0",
         "tailwindcss-animated": "^1.1.2",
+        "three": "^0.169.0",
         "tsparticles-preset-stars": "^2.11.0",
         "turndown": "^7.2.2",
         "typescript": "^4.0.2",
@@ -247,6 +249,7 @@
         "@types/react-input-autosize": "^2.2.4",
         "@types/react-scroll": "^1.8.7",
         "@types/react-simple-maps": "^3.0.6",
+        "@types/three": "^0.169.0",
         "@typescript-eslint/parser": "^4.5.0",
         "autoprefixer": "^10.4.7",
         "babel-loader": "^8.2.2",
@@ -275,13 +278,10 @@
     "resolutions": {
         "undici": "5.26.3"
     },
-    "lint-staged": {
-        "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
-        "*.{js,ts,tsx}": "eslint",
-        "*.{md,mdx}": "markdownlint-cli2 --fix"
-    },
-    "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b",
     "pnpm": {
+        "overrides": {
+            "@types/d3-dispatch": "3.0.6"
+        },
         "onlyBuiltDependencies": [
             "@parcel/watcher",
             "core-js",
@@ -302,5 +302,11 @@
             "sharp",
             "tsparticles-engine"
         ]
-    }
+    },
+    "lint-staged": {
+        "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
+        "*.{js,ts,tsx}": "eslint",
+        "*.{md,mdx}": "markdownlint-cli2 --fix"
+    },
+    "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b"
 }

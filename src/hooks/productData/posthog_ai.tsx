@@ -843,18 +843,6 @@ export const posthog_ai = {
             },
         ],
     },
-    pairsWith: [
-        {
-            slug: 'product-analytics',
-            description:
-                'Get your source data into PostHog, then analyze it alongside your product data to unlock new insights and discover new user behaviors.',
-        },
-        {
-            slug: 'data-warehouse',
-            description:
-                'Build a data warehouse in PostHog and then pull in data from all your platforms to one place where it can be easily interrogated.',
-        },
-    ],
     presenterNotes: {
         // overview:
         //     "<strong>Presenter notes:</strong> PostHog AI is an AI agent that lives inside PostHog and actually understands your product data. It's not a chatbot slapped onto a dashboard. You can ask it to build insights, write HogQL queries, summarize session recordings, create surveys, set up feature flags—basically handle the grunt work that normally takes 20 minutes of clicking around. It routes complex tasks to specialized AI agents and uses context from your actual data. The big difference: it's trained on PostHog's data model and your specific setup, so it actually knows what it's doing.",

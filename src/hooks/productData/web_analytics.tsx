@@ -431,22 +431,6 @@ export const webAnalytics = {
         rows: ['web_analytics'],
         excluded_sections: ['platform.libraries', 'platform.developer', 'platform.integrations'],
     },
-    pairsWith: [
-        {
-            slug: 'product-analytics',
-            description: 'Go deeper than a dashboard by building your own insights and SQL queries from scratch.',
-        },
-        {
-            slug: 'session-replay',
-            description:
-                "Get more context by watching what users actually do on your site. Spot the nuances that quantifiable data doesn't tell you.",
-        },
-        {
-            slug: 'surveys',
-            description:
-                'Get even more context by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
-        },
-    ],
     presenterNotes: {
         overview:
             "<strong>Presenter notes:</strong> Google took something great (GA3) and made it worse. So we built what GA3 should have evolved into - simple, privacy-focused, no sampling. Works out of the box. Plus it's part of the whole PostHog platform, so you can jump from a traffic spike to watching recordings of those exact sessions. And no cookies required if you don't want them.",

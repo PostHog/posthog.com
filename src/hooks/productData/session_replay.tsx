@@ -567,21 +567,6 @@ window.posthog.onFeatureFlags(function () {
         rows: ['session_replay', 'heatmaps'],
         excluded_sections: ['platform.integrations', 'platform.libraries', 'platform.developer', 'platform.security'],
     },
-    pairsWith: [
-        {
-            slug: 'product-analytics',
-            description: 'Jump into a playlist of session recordings directly from any time series in a graph',
-        },
-        {
-            slug: 'feature-flags',
-            description: "See which feature flags are enabled for a user's session",
-        },
-        {
-            slug: 'experiments',
-            description:
-                'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
-        },
-    ],
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/SESSION_REPLAY_a3ca565731.png',
         imageAlt: 'PostHog AI and session replay',

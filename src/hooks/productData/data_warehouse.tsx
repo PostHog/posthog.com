@@ -458,24 +458,6 @@ export const dataWarehouse = {
             url: '/tutorials/stripe-reports#usage-by-top-customers',
         },
     ],
-    pairsWith: [
-        {
-            slug: 'product-analytics',
-            description: 'Analyze data from any source independently, or alongside product data.',
-        },
-        {
-            slug: 'feature-flags',
-            description: 'Use synced data to toggle feature flags, trigger A/B experiments, and more.',
-        },
-        {
-            slug: 'experiments',
-            description: 'You can use data warehouse data as primary or secondary metrics in experiments.',
-        },
-        {
-            slug: 'docs/sql',
-            description: 'Create entirely custom queries, join sources, and get the answers you need.',
-        },
-    ],
     presenterNotes: {
         overview:
             '<strong>Presenter notes:</strong> Your product data is lonely inside your data warehouse unless it has all the relevant context you need to make decisions across your entire organization. PostHog\'s Data Warehouse brings them all together so you can answer questions like "What do high-value customers actually do in our product?" No ETL pipelines, no data engineering team required.',

@@ -411,22 +411,6 @@ export const experiments = {
         rows: ['experiments'],
         require_complete_data: true,
     },
-    pairsWith: [
-        {
-            slug: 'product-analytics',
-            description: 'Run analysis based on the value of a test, or build a cohort of users from a test variant',
-        },
-        {
-            slug: 'session-replay',
-            description:
-                "Watch recordings of users in a variant to discover nuances in why they did or didn't complete the goal",
-        },
-        {
-            slug: 'feature-flags',
-            description:
-                'Make changes to the feature flag the experiment uses - including JSON payload for each variant',
-        },
-    ],
     presenterNotes: {
         overview:
             '<strong>Presenter notes:</strong> Test product changes and measure their true impact. Run experiments on funnels like a signup flow, on single events such as revenue, or on advanced metrics like ratios. Track unlimited metrics to see how experiments affect other parts of your app and user journeys. Our Bayesian and frequentist engines provide clear, statistically rigorous results so you can make confident, data-backed decisions.',

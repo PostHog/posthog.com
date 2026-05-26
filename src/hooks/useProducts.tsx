@@ -21,6 +21,7 @@ import { revenueAnalytics } from './productData/revenue_analytics'
 import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
 import { endpoints } from './productData/endpoints'
+import { getPairsWith, getWorksWith } from './productData/relationships'
 
 const initialProducts = [
     productAnalytics,
@@ -67,6 +68,9 @@ export default function useProducts() {
                 freeLimit,
                 startsAt: startsAt && startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt,
                 unit,
+                // Cross-product relationships are sourced from productData/relationships.ts.
+                worksWith: getWorksWith(product.handle),
+                pairsWith: getPairsWith(product.handle),
             }
         })
     )
