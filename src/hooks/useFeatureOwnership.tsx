@@ -505,21 +505,18 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
 }
 
 export const useFeatureOwnership = ({ teamSlug }: { teamSlug?: string } = {}): { features: Feature[] } => {
-    const features = Object.entries(FEATURE_DATA).reduce(
-        (acc, [key, feature]) => {
-            const featureWithSlug: Feature = {
-                ...feature,
-                slug: key,
-                label: feature.label !== undefined ? feature.label : `feature/${slugify(feature.feature)}`,
-            }
+    const features = Object.entries(FEATURE_DATA).reduce((acc, [key, feature]) => {
+        const featureWithSlug: Feature = {
+            ...feature,
+            slug: key,
+            label: feature.label !== undefined ? feature.label : `feature/${slugify(feature.feature)}`,
+        }
 
-            return {
-                ...acc,
-                [key]: featureWithSlug,
-            }
-        },
-        {} as Record<string, Feature>
-    )
+        return {
+            ...acc,
+            [key]: featureWithSlug,
+        }
+    }, {} as Record<string, Feature>)
 
     const filteredFeatures = useMemo(() => {
         const sortedFeatures = Object.values(features).sort((a, b) => a.feature.localeCompare(b.feature))

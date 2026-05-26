@@ -1130,6 +1130,44 @@ export const handbookSidebar = [
                         name: 'Working with the website team',
                         url: '/handbook/marketing/working-with-website',
                     },
+                    {
+                        name: 'How we position and sell PostHog',
+                        url: '/handbook/marketing/how-we-position-and-sell',
+                        children: [
+                            {
+                                name: 'Analytics',
+                                url: '/handbook/marketing/how-we-position-and-sell/analytics',
+                            },
+                            {
+                                name: 'Session replay',
+                                url: '/handbook/marketing/how-we-position-and-sell/session-replay',
+                            },
+                            {
+                                name: 'Feature flags',
+                                url: '/handbook/marketing/how-we-position-and-sell/feature-flags',
+                            },
+                            {
+                                name: 'Experiments',
+                                url: '/handbook/marketing/how-we-position-and-sell/experiments',
+                            },
+                            {
+                                name: 'Data warehouse',
+                                url: '/handbook/marketing/how-we-position-and-sell/data-warehouse',
+                            },
+                            {
+                                name: 'Data pipelines',
+                                url: '/handbook/marketing/how-we-position-and-sell/data-pipelines',
+                            },
+                            {
+                                name: 'LLM analytics',
+                                url: '/handbook/marketing/how-we-position-and-sell/llm-analytics',
+                            },
+                            {
+                                name: 'PostHog AI',
+                                url: '/handbook/marketing/how-we-position-and-sell/posthog-ai',
+                            },
+                        ],
+                    },
                 ],
             },
         ],
@@ -2715,6 +2753,10 @@ export const docsMenu = {
                             url: '/docs/getting-started/data-import-export',
                         },
                         {
+                            name: 'Event ingestion filtering',
+                            url: '/docs/data/event-filtering',
+                        },
+                        {
                             name: 'Ingestion warnings',
                             url: '/docs/data/ingestion-warnings',
                         },
@@ -3637,16 +3679,6 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Sampling',
-                    url: '/docs/product-analytics/sampling',
-                    icon: 'IconSampling',
-                    color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Color themes',
                     url: '/docs/product-analytics/color-themes',
                     icon: 'IconPalette',
@@ -4520,6 +4552,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'CUPED',
+                    url: '/docs/experiments/cuped',
+                    icon: 'IconCalculator',
+                    color: 'orange',
+                },
+                {
                     name: 'Holdouts',
                     url: '/docs/experiments/holdouts',
                     icon: 'IconPeople',
@@ -4527,6 +4565,16 @@ export const docsMenu = {
                 },
                 {
                     name: 'Guides',
+                },
+                {
+                    name: 'A/B testing prompts',
+                    url: '/docs/experiments/llm-prompt-experiments',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Tracking long-term metrics',
@@ -5985,6 +6033,17 @@ export const docsMenu = {
                     icon: 'IconStack',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'A/B testing prompts',
+                    url: '/docs/prompt-management/prompt-experiments',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                    featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
             ],
         },

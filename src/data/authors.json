@@ -575,13 +575,29 @@
         "profile_id": 41646
     },
     {
+        "handle": "patricio-tarantino",
+        "name": "Patricio Tarantino",
+        "role": "Product Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/ptarantino/",
+        "profile_id": 31566
+    },
+    {
+        "handle": "mine-kansu",
+        "name": "Mine Kansu",
+        "role": "Revenue Operations",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/minekansu/",
+        "profile_id": 29862
+    },
+    {
         "handle": "lizzie-epton",
         "name": "Lizzie Epton",
         "role": "Developer Marketer",
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/lizzie-epton/",
         "profile_id": 43387
-    },    
+    },
     {
         "handle": "fraser-hopper",
         "name": "Fraser Hopper",
@@ -589,5 +605,13 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/fraser-hopper-26158056/",
         "profile_id": 30207
+    },
+    {
+        "handle": "abigail-richardson",
+        "name": "Abigail Richardson",
+        "role": "Technical Support Engineer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/abigail-richardson-74404a5a/",
+        "profile_id": 31138
     }
 ]
