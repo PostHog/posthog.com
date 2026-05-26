@@ -316,12 +316,13 @@ print("Download complete!")
 
 You can also create and monitor file download exports using the [PostHog MCP server](/docs/model-context-protocol). This lets AI agents export PostHog data on your behalf.
 
-Two MCP tools are available:
+Three MCP tools are available:
 
 | Tool | Purpose |
 |------|---------|
 | `file-download-batch-exports-create` | Start an on-demand export and return the run ID |
 | `file-download-batch-exports-retrieve` | Check the status of an export and get file IDs when complete |
+| `file-download-batch-exports-cancel-create` | Cancel an in-progress export |
 
 The actual file download still requires a REST HTTP request since MCP doesn't support binary downloads.
 

@@ -286,6 +286,10 @@ The agent will use `file-download-batch-exports-create` to start an on-demand ex
 
 The agent will create a file download export for the sessions model with JSONLines format and gzip compression, poll for completion, and save the resulting file locally.
 
+**Prompt:** "Cancel my running export"
+
+The agent will use `file-download-batch-exports-cancel-create` to stop an in-progress export. Only exports in `Starting` or `Running` status can be cancelled.
+
 ### Early access feature management
 
 **Prompt:** "List all early access features in my project"
