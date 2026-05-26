@@ -58,7 +58,7 @@ A brand isn't just a logo or a tagline. It's every facet of the business, includ
 
 We've had an open approach from the beginning. Letting people look behind the business facade has endeared us to them. By building a cool, irreverent brand around our mission, we've won over a legion of hedgehog fans, some of whom pay us. **They're fans, not customers** – and our advocates shape our brand as much as we do.
 
-### A two-way dialogue means listening, not always agreeing
+### A two-way dialog means listening, not always agreeing
 
 Having a community requires give and take. We give our users a voice, and we respect what that voice says. Sometimes they'll tell us they don't agree with our choices. While our users should influence our brand, they shouldn't dictate how we act.
 
@@ -68,7 +68,7 @@ A recent example is our decision to train an ML model. We expected some backlash
 
 It's earned through trust, transparency, and engagement.
 
-- **The better informed a user, the better informed their purchase – and the better user they'll be.** That's why we share mistakes and learnings freely through [content and editorial](/handbook/content).
+- **The better informed a user, the better informed their purchase – and the better user they'll be.** That's why we share mistakes and lessons freely through [content and editorial](/handbook/content).
 - **Leading a crusade creates a context of higher purpose and meaning.** Anything we do that isn't aligned with our values is a tiny strike against the brand. What we do online and in person should always tie back to the crusade of making really great tools for developers.
 - **Brand attracts talent, too.** People with cool ideas want to work at companies where those ideas will come to life. Use brand to shorten the distance between our users and us.
 
