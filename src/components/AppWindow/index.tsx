@@ -200,6 +200,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         menu: appMenu,
         taskbarRef,
         websiteMode,
+        getExpandedDimensions,
     } = useApp()
     const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
@@ -472,7 +473,13 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
 
     useEffect(() => {
         const handleResize = () => {
-            if (beyondViewport(size)) {
+            if (item.expanded) {
+                const { position: expPos, size: expSize } = getExpandedDimensions()
+                updateWindow(item, {
+                    size: expSize,
+                    position: expPos,
+                })
+            } else if (beyondViewport(size)) {
                 const newSize = {
                     width: Math.min(size.width, window.innerWidth),
                     height: Math.min(size.height, window.innerHeight - taskbarHeight),
