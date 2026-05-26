@@ -1742,6 +1742,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const settings = appSettings[keyToUse]
         const lastClickedElementRect = getLastClickedElementRect()
 
+        const shouldExpand =
+            element.props.location.state?.expanded ?? (element.props.location.pathname !== '/' && !settings?.size)
+        const expandedDimensions = shouldExpand ? getExpandedDimensions() : null
+
         const newWindow: AppWindow = {
             element,
             zIndex: windows.length + 1,
@@ -1756,9 +1760,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 params: element.props.params,
                 path: element.props.location.pathname,
             },
-            size,
+            size: expandedDimensions?.size || size,
             previousSize: size,
-            position,
+            position: expandedDimensions?.position || position,
             previousPosition: position,
             sizeConstraints:
                 settings?.size?.fixed && settings.size
@@ -1776,7 +1780,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[keyToUse],
             location,
-            expanded: element.props.location.state?.expanded || false,
+            expanded: shouldExpand,
             snapped: element.props.location.state?.snapped || false,
         }
 
@@ -1982,12 +1986,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         })
     }
 
-    const getExpandedDimensions = () => {
+    function getExpandedDimensions() {
         const taskbarRect = document.querySelector('#taskbar')?.getBoundingClientRect()
         return {
-            position: { x: taskbarRect?.left || 0, y: 0 },
+            position: { x: taskbarRect?.left || 8, y: 0 },
             size: {
-                width: isSSR ? 0 : window.innerWidth - (taskbarRect?.left || 0) * 2,
+                width: isSSR ? 0 : window.innerWidth - (taskbarRect?.left || 8) * 2,
                 height: isSSR ? 0 : window.innerHeight - taskbarHeight - (taskbarRect?.top || 0),
             },
         }
