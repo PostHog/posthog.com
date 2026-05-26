@@ -87,6 +87,7 @@
         { "source": "/teams/words-pictures", "destination": "/teams/website" },
         { "source": "/teams/brand-vibes", "destination": "/teams/website" },
         { "source": "/teams/llm-gateway", "destination": "/teams/ai-gateway" },
+        { "source": "/teams/llm-analytics", "destination": "/teams/ai-observability" },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
