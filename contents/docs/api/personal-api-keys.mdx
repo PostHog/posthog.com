@@ -1,0 +1,32 @@
+---
+title: Personal API keys
+sidebar: Docs
+showTitle: true
+---
+
+Personal API keys authenticate requests to PostHog's private `GET`, `POST`, `PATCH`, and `DELETE` endpoints. They're the right choice when you're using PostHog from your own scripts, automations, or any integration tied to your own account.
+
+> **Building an app that other PostHog users will install or connect to?** Use [OAuth](/docs/api/oauth) instead so users can grant your app scoped access without sharing their own keys.
+
+import ObtainPersonalAPIKey from '../integrate/_snippets/obtain-personal-api-key.mdx'
+
+<ObtainPersonalAPIKey />
+
+## How to authenticate using the personal API key
+
+There are two options:
+
+1. Use the `Authorization` header and `Bearer` authentication, like so:
+    ```js
+    const headers = {
+        Authorization: `Bearer ${POSTHOG_PERSONAL_API_KEY}`
+    }
+    ```
+2. Put the key in request body, like so:
+    ```js
+    const body = {
+        personal_api_key: POSTHOG_PERSONAL_API_KEY
+    }
+    ```
+
+Any one of these methods works, but only the value encountered first (in the order above) will be used for authentication.
