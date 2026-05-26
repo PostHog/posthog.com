@@ -62,8 +62,23 @@ Once the agent finishes, you can reply to it by sending a new message in the thr
 
 Right now, only the person that started a task can continue it in the thread. If you want to continue it yourself, you can start a new thread and pass the existing messages as context.
 
+<<<<<<< HEAD
 If you send a follow-up mention without naming a repo (like "should be there now" after connecting GitHub), the bot checks the last 10 thread messages to find the repo you mentioned earlier. You don't need to repeat the repo name every time.
 
+||||||| 9bbc683eb
+=======
+## Emoji cues
+
+The bot reacts to your `@PostHog` message as it works through your request, so you can scan a busy channel and see what's still in flight without opening every thread:
+
+| Emoji | What it means |
+|---|---|
+| 🌱 `:seedling:` | Saw your mention and is spinning up a new task |
+| 👀 `:eyes:` | Forwarding a follow-up to the running agent, or resuming a previous run |
+| 🦔 `:hedgehog:` | The agent finished and posted its reply in the thread |
+| ❌ `:x:` | Something went wrong – usually the sandbox stopped before the message could be delivered |
+
+>>>>>>> master
 ## Routing rules and default repo
 
 If you work across many repos, you can teach the bot how to pick a repo intelligently. Run these as mentions:
