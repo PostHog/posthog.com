@@ -26,6 +26,17 @@ const createStandardMenuItems = (url: string, state?: any, isExternal = false): 
         },
         {
             type: 'item',
+            disabled: isExternal,
+            children: isExternal ? (
+                <span>Open in side by side view</span>
+            ) : (
+                <Link to={url} state={{ ...state, newWindow: true, sideBySide: true }} contextMenu={false}>
+                    Open in side by side view
+                </Link>
+            ),
+        },
+        {
+            type: 'item',
             children: (
                 <a href={url} target="_blank" rel="noreferrer">
                     Open in new browser tab

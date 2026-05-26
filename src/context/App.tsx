@@ -1806,6 +1806,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const updatePages = (element: WindowElement) => {
         const existingWindow = windows.find((w) => w.path === element.props.location.pathname)
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
+        const isSideBySide = location?.state?.sideBySide && focusedWindow && !isSSR
+
+        if (isSideBySide) {
+            const rightSnap = getSnapDimensions('right')
+            newWindow.size = rightSnap.size
+            newWindow.position = rightSnap.position
+            newWindow.snapped = 'right'
+            newWindow.expanded = false
+        }
+
         if (siteSettings.experience === 'boring') {
             if (!newWindow.appSettings?.size?.fixed && !newWindow.appSettings?.modal) {
                 return replaceFocusedWindow(newWindow)
@@ -1820,7 +1830,21 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             (element.props.newWindow || location?.state?.newWindow) &&
             !windows.some((w) => w.key === newWindow.key)
         ) {
-            setWindows([...windows, newWindow])
+            if (isSideBySide) {
+                const leftSnap = getSnapDimensions('left')
+                const snappedFocused = {
+                    ...focusedWindow,
+                    previousSize: focusedWindow.size,
+                    previousPosition: focusedWindow.position,
+                    size: leftSnap.size,
+                    position: leftSnap.position,
+                    snapped: 'left' as const,
+                    expanded: false,
+                }
+                setWindows([...windows.map((w) => (w === focusedWindow ? snappedFocused : w)), newWindow])
+            } else {
+                setWindows([...windows, newWindow])
+            }
         } else {
             replaceFocusedWindow(newWindow)
         }
@@ -1963,18 +1987,23 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         )
     }
 
-    const handleSnapToSide = (side: 'left' | 'right') => {
-        if (!constraintsRef.current || !focusedWindow) return
-
+    function getSnapDimensions(side: 'left' | 'right') {
         const taskbarRect = document.querySelector('#taskbar')?.getBoundingClientRect()
         const left = taskbarRect?.left ?? 0
         const top = taskbarRect?.top ?? 0
         const availableWidth = window.innerWidth - left * 2
         const availableHeight = window.innerHeight - taskbarHeight - top
         const finalWidth = availableWidth / 2
-        const x = side === 'left' ? left : left + finalWidth
-        const size = { width: finalWidth, height: availableHeight }
-        const position = { x, y: 0 }
+        return {
+            size: { width: finalWidth, height: availableHeight },
+            position: { x: side === 'left' ? left : left + finalWidth, y: 0 },
+        }
+    }
+
+    const handleSnapToSide = (side: 'left' | 'right') => {
+        if (!constraintsRef.current || !focusedWindow) return
+
+        const { size, position } = getSnapDimensions(side)
 
         updateWindow(focusedWindow, {
             position,
