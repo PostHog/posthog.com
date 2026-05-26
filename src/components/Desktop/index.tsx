@@ -248,7 +248,6 @@ export default function Desktop() {
         posthogInstance,
         updateSiteSettings,
         initialHomepage,
-        getExpandedDimensions,
     } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>(generateInitialPositions())
     const { isInactive, dismiss } = useInactivityDetection({
@@ -386,8 +385,8 @@ export default function Desktop() {
     const runFakeCursorAnimation = useCallback(() => {
         if (!initialHomepage || !rendered) return
 
-        const startX = window.innerWidth / 2
-        const startY = window.innerHeight / 2
+        const startX = window.innerWidth * 0.85
+        const startY = window.innerHeight * 0.8
 
         cursorX.set(startX)
         cursorY.set(startY)
@@ -432,19 +431,12 @@ export default function Desktop() {
                                     duration: 0.1,
                                     onComplete: () => {
                                         if (zoomHoverEl) zoomHoverEl.style.top = ''
-                                        const { position, size } = getExpandedDimensions()
-                                        navigate('/', {
-                                            state: {
-                                                position,
-                                                size,
-                                                expanded: true,
-                                                snapped: false,
-                                                fromOrigin: {
-                                                    x: homePos.x - size.width / 2,
-                                                    y: homePos.y - size.height / 2,
-                                                },
-                                            },
-                                        })
+                                        const homeLink = homeIconEl?.querySelector<HTMLElement>('a[href="/"]')
+                                        if (homeLink) {
+                                            homeLink.click()
+                                        } else {
+                                            navigate('/')
+                                        }
                                         // Brief pause then exit
                                         setTimeout(() => {
                                             animate(cursorX, window.innerWidth + 40, {
@@ -463,16 +455,16 @@ export default function Desktop() {
                                 })
                             },
                         })
-                    }, 120)
+                    }, 350)
                 }
                 animate(cursorX, targetX, {
-                    duration: 0.7,
-                    ease: [0.25, 0.1, 0.25, 1],
+                    duration: 1,
+                    ease: [0.5, 0, 0.3, 1],
                     onComplete: onMoveDone,
                 })
                 animate(cursorY, targetY, {
-                    duration: 0.7,
-                    ease: [0.25, 0.1, 0.25, 1],
+                    duration: 1,
+                    ease: [0.2, 0.8, 0.4, 1],
                     onComplete: onMoveDone,
                 })
             },
