@@ -63,7 +63,7 @@ const parseShorthand = (raw: string): number | null => {
 }
 
 const inputClassName =
-    'bg-transparent text-right font-code text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-2 w-24 focus:outline-none focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark tabular-nums'
+    'bg-transparent text-right font-code text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-2 w-32 focus:outline-none focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark tabular-nums'
 
 const InfoIcon = ({ tooltip }: { tooltip: string }): JSX.Element => (
     <Tooltip content={tooltip} contentContainerClassName="max-w-xs" placement="top">
@@ -123,7 +123,7 @@ const FieldRow = ({ title, tooltip, value, min, max, marks, scale, onChange, suf
                         aria-label={title}
                         className={inputClassName}
                     />
-                    {suffix && <span className="text-[13px] opacity-60 shrink-0">{suffix}</span>}
+                    <span className="text-[13px] opacity-60 shrink-0 w-8 text-left">{suffix ?? ''}</span>
                 </span>
             </div>
             <div className="px-1 pb-5">
