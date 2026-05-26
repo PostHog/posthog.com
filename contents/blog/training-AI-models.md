@@ -63,7 +63,7 @@ In terms of comms, we are:
 - Notifying all our users through in-app notifications (in case you don't read emails)
 - Communicating our plans very publicly (like in this post)
 
-I also want to stress that our goal here is to improve PostHog as a product for our customers, not to expose or sell models trained on your data.
+Our goal here is to improve PostHog as a product for our customers, not to expose or sell models trained on your data.
 
 We're not interested in monetizing your data, we want to use that data to make PostHog a better, more proactive tool for you.
 
