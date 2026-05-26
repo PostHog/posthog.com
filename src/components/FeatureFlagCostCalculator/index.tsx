@@ -63,10 +63,10 @@ const parseShorthand = (raw: string): number | null => {
 }
 
 const fieldWrapperClassName =
-    'flex items-baseline gap-1 border border-light hover:border-button dark:border-dark rounded-sm py-1 px-2 w-32 focus-within:border-red dark:focus-within:border-yellow focus-within:bg-white dark:focus-within:bg-accent-dark'
+    'flex items-baseline gap-1 border border-primary hover:border-input-hover rounded-md py-1.5 px-3 w-32 bg-white dark:bg-accent-dark focus-within:border-red dark:focus-within:border-yellow'
 
 const inputClassName =
-    'bg-transparent text-right font-code text-sm flex-1 min-w-0 focus:outline-none focus:ring-0 tabular-nums'
+    'bg-transparent text-right text-sm flex-1 min-w-0 focus:outline-none focus:ring-0 tabular-nums'
 
 const InfoIcon = ({ tooltip }: { tooltip: string }): JSX.Element => (
     <Tooltip content={tooltip} contentContainerClassName="max-w-xs" placement="top">
