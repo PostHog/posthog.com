@@ -188,7 +188,7 @@ Now, when we run `npm run dev` again and submit an input, we should see a respon
 
 ## 3. Viewing generations in PostHog
 
-Once you generate a few responses, go to PostHog's [AI Observability tab](https://app.posthog.com/llm-analytics) to get an overview of traces, users, costs, and more.
+Once you generate a few responses, go to PostHog's [AI Observability tab](https://app.posthog.com/ai-observability) to get an overview of traces, users, costs, and more.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_14_at_18_28_10_2x_242d0e7bf5.png"
@@ -197,7 +197,7 @@ Once you generate a few responses, go to PostHog's [AI Observability tab](https:
   classes="rounded"
 />
 
-You can also go into more detail by clicking on the [generations tab](https://app.posthog.com/llm-analytics/generations). This shows each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
+You can also go into more detail by clicking on the [generations tab](https://app.posthog.com/ai-observability/generations). This shows each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_14_at_18_33_38_2x_a185b712f0.png"
