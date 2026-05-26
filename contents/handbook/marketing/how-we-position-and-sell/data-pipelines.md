@@ -16,7 +16,7 @@ That bundling is the pitch. Segment and Rudderstack only move data. PostHog move
 
 PostHog is [a doing company](/blog/posthogs-next-chapter). Agents already create the majority of dashboards through PostHog AI and MCP. PostHog Code runs the [product autonomy loop](/blog/self-driving-product): signals in, work out, evaluation, repeat.
 
-That loop only closes if the agent can see the whole picture. Errors and replays don't tell you which customer to prioritize — revenue from Stripe, plan from HubSpot, tickets from Zendesk, spend from Google do. That data lives outside PostHog. So do the systems PostHog needs to push signals into.
+That loop only closes if the agent can see the whole picture. Errors and replays don't tell you which customer to prioritize — revenue from Stripe, plan from HubSpot, tickets from Zendesk, spend from Google do. That data lives outside PostHog. So do some of the systems PostHog may need to push signals into.
 
 **Data pipelines are how PostHog becomes infrastructure for self-driving development.** Sources bring business context in. Destinations and batch exports push enriched signals back out. Without pipelines the autonomy loop is half-blind. Segment and Rudderstack just move data. PostHog moves it *and* runs the agents that act on it.
 
