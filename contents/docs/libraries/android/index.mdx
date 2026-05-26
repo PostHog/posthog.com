@@ -15,6 +15,7 @@ features:
   surveys: false
   llmAnalytics: false
   errorTracking: true
+  logs: true
 ---
 
 It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
@@ -270,6 +271,12 @@ The `name` is a special property which is used in the PostHog UI for the name of
 ## Error tracking
 
 To set up error tracking in your project, follow the [Android installation guide](/docs/error-tracking/installation/android).
+
+## Logs
+
+To set up [logs](/docs/logs) in your Android app, follow the [Android logs installation guide](/docs/logs/installation/android). The SDK exposes `PostHog.logger.{trace,debug,info,warn,error,fatal}` for sending structured records to PostHog Logs, with batching, offline persistence, and a rate cap built in.
+
+> **Minimum version:** `com.posthog:posthog-android@3.46.0` or later.
 
 ## Session replay
 
