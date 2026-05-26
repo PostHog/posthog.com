@@ -30,7 +30,7 @@ This enables you to measure how PostHog Feature Flags impact outcomes tracked in
   alt="Data warehouse metric configuration showing the Timestamp Field, Data Warehouse Join Key, and Events Join Key fields"
 />
 
-<CalloutBox type="info">
+<CalloutBox icon="IconInfo" title="How join keys link your data" type="fyi">
 
 The **Data Warehouse join key** and **Events join key** together determine how PostHog links your Data Warehouse rows to PostHog events.
 
@@ -72,7 +72,7 @@ You can include Data Warehouse tables as steps in funnel metrics. For example, m
 
 All Data Warehouse steps in a funnel must use the **same events join key**. This is a technical requirement of how PostHog queries mixed sources.
 
-<CalloutBox type="caution">
+<CalloutBox icon="IconWarning" title="Funnel steps must share an events join key" type="caution">
 
 **Valid funnel** – All steps use `properties.$user_id`:
 
