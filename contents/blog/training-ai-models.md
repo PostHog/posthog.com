@@ -33,7 +33,7 @@ The first area we're interested in is **session replay analysis**. PostHog AI ca
 
 Another idea I'm especially excited about is **synthetic user testing** – i.e. using our knowledge of user behavior to identify when users might get confused, or what flows might break, _before you ship_ to production. As coding models improve, many people are seeing test and review workload increase hugely. We want to automate this, so you can focus on your product.
 
-And, if we can get better at **predicting user behavior**, we should also be able to suggest changes that will improve conversion rates, and reduce user frustration. If we can automate this work for you, you'll spend less time on manual analysis and burn fewer tokens in the process.
+And, if we can get better at **predicting user behavior**, we should be able to suggest changes that will improve conversion, and reduce user frustration, for features you've already shipped as well. If we can automate this work for you, you'll spend less time on manual analysis and burn fewer tokens in the process.
 
 Our ideas here are experimental. It will take iteration to figure out how to train models effectively, and what data is actually useful. But, so far, every time we've added AI in a way that makes the product simpler or more powerful, it's worked well, so we think it's worth trying.
 
