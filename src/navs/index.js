@@ -6739,6 +6739,7 @@ export const docsMenu = {
                         { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },
                         { name: 'React Native', url: '/docs/logs/installation/react-native' },
                         { name: 'iOS', url: '/docs/logs/installation/ios' },
+                        { name: 'Android', url: '/docs/logs/installation/android' },
                         { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],
