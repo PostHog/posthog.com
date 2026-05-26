@@ -50,7 +50,7 @@ Most companies would bury this change in a deceptively boring T&Cs update, but w
 2. Users on our EU cloud instance are opted out by default
 3. Users with a BAA, DPA, or MSA agreement are also opted out
 4. All other users on our US cloud instance are opted in by default
-5. You can opt out at any time with a single click via TODO LINK HERE (admin required)
+5. You can opt out at any time with a single click via your [org settings in PostHog](https://app.posthog.com/settings/organization-details) (admin access required)
 6. We will only use data that already exists in your PostHog instance
 7. We won't sell or send your data to third-party model providers
 8. We will do all the model training ourselves
