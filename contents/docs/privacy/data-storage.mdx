@@ -45,6 +45,8 @@ When this setting is enabled:
 
 This allows you to enrich your events with location data or filter out bot traffic while ensuring raw IP addresses are not retained in your data.
 
+> **Note:** This does not apply when [Cookieless server hash mode](/tutorials/cookieless-tracking) is enabled. In cookieless mode, the IP is stripped before transformations run, so GeoIP enrichment and bot detection won't enrich your events.
+
 <details>
 <summary>See all default event properties collected</summary>
 

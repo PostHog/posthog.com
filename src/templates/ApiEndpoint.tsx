@@ -16,6 +16,7 @@ import { InlineCode } from 'components/InlineCode'
 import { CallToAction } from 'components/CallToAction'
 import ReaderView from 'components/ReaderView'
 import { Heading } from 'components/Heading'
+import MCPCallout from 'components/Docs/MCPCallout'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -105,7 +106,7 @@ const titleMap: Record<string, string> = {
     hog_functions: 'Hog functions',
     insights: 'Insights',
     invites: 'Invites',
-    llm_analytics: 'LLM analytics',
+    llm_analytics: 'AI Observability',
     llm_prompts: 'LLM prompts',
     members: 'Members',
     notebooks: 'Notebooks',
@@ -646,6 +647,17 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
 
                     <Endpoints paths={paths} containerRef={contentContainerRef} />
 
+                    {(previousURL || nextURL) && (
+                        <div className="mt-8 flex gap-4">
+                            {previousURL && (
+                                <CallToAction to={previousURL} type="outline">
+                                    ← Previous page
+                                </CallToAction>
+                            )}
+                            {nextURL && <CallToAction to={nextURL}>Next page →</CallToAction>}
+                        </div>
+                    )}
+
                     {items.map((item, index) => {
                         const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
 
@@ -661,6 +673,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                         <Heading id={pathID(item.httpVerb, item.pathName)} as="h2">
                                             {generateName(item)}
                                         </Heading>
+                                        <MCPCallout operationId={item.operationId} />
                                         {mdxNode?.body && (
                                             <div className="article-content">
                                                 <div className="text-primary">
