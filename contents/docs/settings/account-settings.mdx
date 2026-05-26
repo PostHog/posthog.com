@@ -69,7 +69,19 @@ If you need to use the application again, you can re-authorize it through the ap
 
 ## Notifications
 
-You can choose which email notifications you receive in [your account settings](https://app.posthog.com/settings/user#notifications) under **Notifications**. You can enable or disable specific notifications with toggles. Product-specific notification, such as [Alerts](/docs/alerts), have separate configurations in each product.
+You can choose which email notifications you receive in [your account settings](https://app.posthog.com/settings/user#notifications) under **Notifications**. You can enable or disable specific notifications with toggles. Product-specific notifications, such as [Alerts](/docs/alerts), have separate configurations in each product.
+
+### Muting individual data pipeline notifications
+
+When you enable pipeline error notifications, PostHog emails you about failures in your [destinations](/docs/cdp/destinations), [transformations](/docs/cdp/transformations), and [batch exports](/docs/cdp/batch-exports). You can mute notifications for specific pipelines while keeping them enabled for others.
+
+To mute a pipeline:
+
+1. Go to [**Account > Notifications**](https://app.posthog.com/settings/user#notifications)
+2. Scroll to **Data pipeline notifications**
+3. Toggle off the pipeline you want to mute
+
+Muted pipelines are listed by name and grouped by project. Per-pipeline muting takes precedence over the global failure-rate threshold, so a muted pipeline won't send notifications regardless of your threshold setting.
 
 ## Theming and customization
 
