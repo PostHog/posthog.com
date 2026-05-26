@@ -90,7 +90,7 @@ This table explains the amount of paid time off, depending on how long you've be
 | 6 - 12 months     | 12 weeks         | 2 - 3 weeks |
 | over 12 months    | up to 24 weeks   | 6 weeks |
 
-> Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  This means that in most cases you will receive the PostHog policy, if you live in a country with more generous parental leave, then you will receive that. This PostHog policy is not designed to be _in addition_ to your specific state/country policy.
+> Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  This means that in most cases you will receive the PostHog policy, if you live in a country with more generous parental leave, then you will receive that. This PostHog policy is not designed to be _in addition_ to your specific state/country policy. PostHog uses the "top up" method to administer paid leave. This means that if you receive any statutory leave, PostHog will top this up to your full pay. 
 
 We only pay the enhanced parental leave in one continuous block.
 
