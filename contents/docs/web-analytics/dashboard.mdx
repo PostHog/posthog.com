@@ -143,7 +143,17 @@ Retention creates a cohort of unique users who performed any event for the first
 
 ## Active hours
 
-The **Active hours** feature displays a heatmap showing either the number of **unique users** or **total pageviews** for **any pageview event**, broken down by hour of the day and day of the week You can switch between these two metrics using the tabs at the top right of the heatmap (**Unique users** or **Total pageviews**).
+The **Active hours** feature displays a heatmap showing either the number of **unique users** or **total pageviews** for **any pageview event**, broken down by hour of the day and day of the week. You can switch between these two metrics using the tabs at the top right of the heatmap (**Unique users** or **Total pageviews**).
+
+### How each metric is counted
+
+The two tabs count activity differently:
+
+- **Unique users** - Uses session-start attribution. Each session counts toward the hour bucket when it started. If a session starts at 11pm and continues past midnight, the user only appears in the 11pm bucket. This matches how visitors are counted in the overview tiles at the top of this dashboard.
+
+- **Total pageviews** - Counts every pageview in the bucket where it occurred. A session spanning 11pm to 1am contributes pageviews to each hour bucket where they happened.
+
+Because of this, unique users may appear lower than you'd expect compared to total pageviews, especially for sessions that span multiple hours.
 
 ### What the heatmap shows:
 - Each **cell** represents the number of unique users or total pageviews during a specific hour of a specific day. Numbers are formatted for readability (e.g., 1.73K for 1,730).
