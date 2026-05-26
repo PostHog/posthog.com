@@ -301,7 +301,7 @@ export default function Startups(): JSX.Element {
                             </p>
                         </div>
                         <div className="bg-[#b8e0d8] rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_search_3ecaae1574.png" />
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/598171862_7fff97b6_15e5_4ff8_8f7c_46148f81efa1_515ee89918.png" />
                             <h3 className="text-base my-1 leading-tight">$5,000 of Depot credit</h3>
                             <p className="text-sm mb-0">
                                 Blazing-fast container builds and remote caching, trusted by us.
