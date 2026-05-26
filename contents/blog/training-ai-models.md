@@ -24,7 +24,10 @@ We want to train models on data in PostHog.
 
 ## What we want to build
 
-We think there are a bunch of meaningful use cases here that will help users, and fundamentally change the way people think about building better products.
+We have two goals here:
+
+1. Make our existing products smarter, more proactive, and useful to you
+2. Build entirely new products, like PostHog Code, that help teams build better products, faster
 
 The first area we're interested in is **session replay analysis**. PostHog AI can already detect issues in replays, but it's expensive and doesn't scale well. We want replays to be as powerful at scale as they are for diagnosing the problems of individual users, and we think a model trained on the underlying data used to power replays will help us achieve this. 
 
