@@ -1,5 +1,5 @@
 ---
-date: 2026-05-20
+date: 2026-05-26
 title: Why we want to train AI models
 rootPage: /blog
 sidebar: Blog
@@ -52,8 +52,8 @@ Most companies would bury this change in a deceptively boring T&Cs update, but w
 4. All other users on our US cloud instance are opted in by default
 5. You can opt out at any time with a single click via TODO LINK HERE (admin required)
 6. We will only use data that already exists in your PostHog instance
-7. We will do the model training ourselves
-8. We won't sell your data to model providers
+7. We won't sell or send your data to third-party model providers
+8. We will do all model training ourselves
 
 In terms of comms, we are:
 
