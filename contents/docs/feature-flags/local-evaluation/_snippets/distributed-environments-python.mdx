@@ -8,7 +8,7 @@ from posthog import FlagDefinitionCacheProvider, FlagDefinitionCacheData
 
 ## The interface
 
-To create a custom cache, implement the `FlagDefinitionCacheProvider` protocol:
+To create a custom cache, implement the `FlagDefinitionCacheProvider` protocol. Methods can be synchronous or async — if a method returns an awaitable, the SDK runs it to completion before continuing.
 
 ```python
 class FlagDefinitionCacheProvider(Protocol):
@@ -64,3 +64,38 @@ posthog = Posthog(
     flag_definition_cache_provider=cache,
 )
 ```
+
+### Async cache providers
+
+If you're using async libraries like `redis.asyncio`, you can implement async methods directly. The SDK runs awaitables on a background event loop:
+
+```python
+import redis.asyncio as redis
+from posthog import FlagDefinitionCacheProvider, FlagDefinitionCacheData
+
+class AsyncRedisFlagCache(FlagDefinitionCacheProvider):
+    def __init__(self, redis_client: redis.Redis, cache_key: str):
+        self._redis = redis_client
+        self._cache_key = cache_key
+
+    async def get_flag_definitions(self) -> Optional[FlagDefinitionCacheData]:
+        cached = await self._redis.get(self._cache_key)
+        if cached:
+            return json.loads(cached)
+        return None
+
+    async def should_fetch_flag_definitions(self) -> bool:
+        # Implement your distributed lock logic here
+        return True
+
+    async def on_flag_definitions_received(self, data: FlagDefinitionCacheData) -> None:
+        await self._redis.set(self._cache_key, json.dumps(data))
+
+    async def shutdown(self) -> None:
+        # Release any locks
+        pass
+```
+
+> **Note:** The SDK runs async provider methods on its own background event loop. Use a dedicated Redis client for the cache provider to avoid sharing connections with your application's event loop.
+
+A complete working example with distributed locking is available in the [posthog-python repository](https://github.com/PostHog/posthog-python/blob/main/examples/async_redis_flag_cache.py).
