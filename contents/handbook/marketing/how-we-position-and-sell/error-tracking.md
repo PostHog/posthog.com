@@ -18,7 +18,7 @@ PostHog's vision is a self-driving product: software that watches itself for bug
 
 Most error tracking tools give you a stack trace, a frequency count, and a release tag. They don't tell you which user hit the error, what they were trying to do, or whether it matters to the business. So engineers triage by error count instead of by user impact, and waste cycles on noisy errors that don't affect anyone real.
 
-Every PostHog exception is a product event with the user attached. Click an error to watch the user's session replay. Filter exceptions by feature flag variant, plan tier, or revenue cohort. See the business impact next to the stack trace. Sentry has the deeper SDK coverage but doesn't know your users, while Bugsnag and Rollbar are similar with good error capture, no product context. PostHog Error Tracking is the only place where every error already knows who hit it, what they were doing, and whether it matters.
+Every PostHog exception is a product event with the user attached. Click an error to watch the user's session replay. Filter exceptions by feature flag variant, plan tier, or revenue cohort. See the business impact next to the stack trace. PostHog Error Tracking is the only place where every error already knows who hit it, what they were doing, and whether it matters.
 
 ## Who this is for
 
