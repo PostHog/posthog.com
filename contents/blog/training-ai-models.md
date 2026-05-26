@@ -29,7 +29,7 @@ We have two goals here:
 1. Make our existing products smarter, more proactive, and useful to you
 2. Build entirely new products, like PostHog Code, that help teams build better products, faster
 
-The first area we're interested in is **session replay analysis**. PostHog AI can already detect issues in replays, but it's expensive and doesn't scale well. We want replays to be as powerful at scale as they are for diagnosing the problems of individual users, and we think a model trained on the underlying data used to power replays will help us achieve this. 
+The first area we're interested in is **session replay analysis**. PostHog AI can already detect issues in replays, but it's expensive and doesn't scale well. We want replays to be as powerful at scale as they are for diagnosing the problems of individual users, and we think a model trained on the underlying data that powers replays will help us achieve this. 
 
 Another idea I'm especially excited about is **synthetic user testing** – i.e. using our knowledge of user behavior to identify when users might get confused, or what flows might break, _before you ship_ to production. As coding models improve, many people are seeing test and review workload increase hugely. We want to automate this, so you can focus on your product.
 
