@@ -46,15 +46,14 @@ The downside is that this involves using data in PostHog to train models.
 
 Most companies would bury this change in a deceptively boring T&Cs update, but we value transparency, so here's what you need to know in an internet-friendly numbered list: 
 
-1. We are opting out users on our EU cloud instance by default
-2. Users with a BAA, DPA, or MSA agreement are also opted out
-3. We are opting in all other users on our US cloud instance
-3. We will anonymize all data before it's used for training
-4. We will only use data that already exists in your PostHog instance
-5. We will do the model training ourselves
-6. We won't sell your data to third-parties model providers
-7. You can opt out at any time with a single click via TODO LINK HERE (admin required)
-8. Users who we have opted out by default can choose to opt in the same way
+1. We will anonymize all data before it's used for training
+2. Users on our EU cloud instance are opted out by default
+3. Users with a BAA, DPA, or MSA agreement are also opted out
+4. All other users on our US cloud instance are opted in by default
+5. You can opt out at any time with a single click via TODO LINK HERE (admin required)
+6. We will only use data that already exists in your PostHog instance
+7. We will do the model training ourselves
+8. We won't sell your data to third-parties model providers
 
 In terms of comms, we are:
 
