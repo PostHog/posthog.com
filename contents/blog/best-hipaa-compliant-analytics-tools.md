@@ -232,7 +232,7 @@ Based on our research, the best HIPAA-compliant analytics tools right now are:
 <details>
   <summary>How is PostHog different from other HIPAA-compliant analytics tools?</summary>
 
-**PostHog** is the only tool in this list that covers the full product development stack – product analytics, web analytics, session replay, feature flags, A/B testing, surveys, error tracking, LLM analytics, logs, and more – all under a single BAA. All products offer generous free tiers and [usage-based billing](/pricing) with no surprise overages.
+**PostHog** is the only tool in this list that covers the full product development stack – product analytics, web analytics, session replay, feature flags, A/B testing, surveys, error tracking, AI Observability, logs, and more – all under a single BAA. All products offer generous free tiers and [usage-based billing](/pricing) with no surprise overages.
 
 That matters for HIPAA compliance because every additional vendor means another BAA to negotiate, another data-sharing agreement to manage, and another potential liability surface.
 
