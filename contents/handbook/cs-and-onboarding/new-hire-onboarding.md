@@ -145,13 +145,13 @@ Add and modify this list as you work through it! Products are added frequently, 
     - Implementation requirements
     - Landing page experiments – how to deal with flickering of content when page is first loaded?
 
-#### LLM Analytics
-1. [Implementing with your LLM SDK](/docs/llm-analytics/basics)
+#### AI Observability
+1. [Implementing with your LLM SDK](/docs/ai-observability/basics)
     - Privacy options
 2. Generations vs traces vs spans vs sessions
-3. [LLM Cost Analysis](/docs/llm-analytics/calculating-costs)
+3. [LLM Cost Analysis](/docs/ai-observability/calculating-costs)
     - How do we accommodate custom LLM pricing?
-4. [Insight analysis](/docs/llm-analytics/dashboard)
+4. [Insight analysis](/docs/ai-observability/dashboard)
 
 #### Error Tracking
 1. [Implementing error tracking](/docs/error-tracking/installation)

@@ -76,11 +76,11 @@ All content should include a "last updated" date so team members know they're wo
 | Session replay | Dana        | - |
 | Feature flags | Sachin     | - |
 | Experiments | Sachin     | - |
-| Error tracking | Christophe | - |
+| Error tracking | Sean M | - |
 | Surveys | Leon        | - |
 | Data pipelines (batch and realtime) | Ryan       | - |
 | Data warehouse | Ryan       | - |
-| LLM Analytics | Leo        | - |
+| AI Observability | Leo        | - |
 | Workflows | Phil        | - |
 | PostHog Code | Landon     | - |
 | Logs | Sean | - |
