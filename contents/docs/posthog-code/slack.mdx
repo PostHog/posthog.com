@@ -54,9 +54,9 @@ Once the agent finishes, you can reply to it by sending a new message in the thr
 
 Right now, only the person that started a task can continue it in the thread. If you want to continue it yourself, you can start a new thread and pass the existing messages as context.
 
-## Routing rules and default repo
+## Routing rules
 
-If you work across many repos, you can teach the bot how to pick a repo intelligently. Run these as mentions:
+If you work across many repos, you can create routing rules to automatically direct certain types of requests to specific repositories. Run these as mentions:
 
 | Command | What it does |
 |---|---|
@@ -64,8 +64,5 @@ If you work across many repos, you can teach the bot how to pick a repo intellig
 | `@PostHog rules list` | Show your routing rules |
 | `@PostHog rules add "pattern" org/repo` | Route mentions matching `pattern` to a repo |
 | `@PostHog rules remove <#>` | Remove a rule by its number |
-| `@PostHog default repo set org/repo` | Set the default repo for the current channel |
-| `@PostHog default repo show` | Show the default repo for the current channel |
-| `@PostHog default repo clear` | Clear the default repo for the current channel |
 
-Defaults are scoped to the channel you run the command in, so `#frontend` and `#backend` can each pick their own repo without stepping on each other. When a mention comes in, the bot checks routing rules first, falls back to the channel default, and only opens the picker if neither matches.
+When you send a message, the bot first checks if any routing rules match. If not, it analyzes your message context to automatically select the most relevant repository from your connected repos. The picker only appears when the bot can't confidently determine which repo to use.
