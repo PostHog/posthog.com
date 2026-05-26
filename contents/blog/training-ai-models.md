@@ -57,7 +57,7 @@ Most companies would bury this change in a deceptively boring T&Cs update, but w
 6. We will do all the model training ourselves, which means...
 7. We won't sell or send your data to third-party model providers
 8. You can opt out at any time via your [org settings in PostHog](https://app.posthog.com/settings/organization-details) (admin access required)
-9. Training won't commence until June 29, so there's plenty of time to decide
+9. Training won't start until June 29, so there's plenty of time to decide
 
 In terms of comms, we are:
 
