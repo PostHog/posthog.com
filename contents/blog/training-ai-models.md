@@ -40,7 +40,7 @@ We've spent a lot of time thinking about this from a user perspective, especiall
 
 The upside is the kinds of improvements described above.
 
-Most tools are focused on providing you with the best code; we want to focus our energy into making your product the best it can be. This is why we describe PostHog Code as a product editor.
+Most tools are focused on providing you with the best code; we want to focus our energy into making your product the best it can be. This is why we describe [PostHog Code](/code) as a product editor.
 
 The downside is that this involves using data in PostHog to train models.
 
