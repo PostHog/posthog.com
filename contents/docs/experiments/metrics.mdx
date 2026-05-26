@@ -99,6 +99,8 @@ You can limit the impact of extreme values by clamping metric data at specified 
 
 This technique is commonly known as **Winsorization** and is especially useful for metrics with highly skewed distributions, such as revenue or total event counts, where a small subset of users can produce unusually high values that distort overall results.
 
+Outlier handling is available for **mean** and **ratio** metrics. For ratio metrics, the numerator and denominator are capped independently—each with its own percentile bounds computed separately across the pooled experiment population. This allows you to, for example, cap outlier revenue values in the numerator while leaving the order count denominator uncapped.
+
 ### Ignoring zeros in percentile calculations
 
 When calculating the upper bound percentile, you can choose to ignore zero values. This is particularly useful when a large number of participants in your experiment don't have the event at all (resulting in a value of 0).
