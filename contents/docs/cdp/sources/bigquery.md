@@ -67,6 +67,18 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
 >
 > then you may need to toggle the switch for manually specifying your region. Regions typically look like `us-east1` or similar.
 
+## Selecting columns
+
+By default, PostHog syncs all columns from each table. You can limit which columns sync to exclude sensitive data like PII or reduce sync time on wide tables.
+
+To sync only specific columns:
+
+1. During source setup, click **Columns** next to any table in the table picker.
+2. Uncheck columns you don't want to sync.
+3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
+
+You can change column selection after setup from the source configuration page.
+
 ## Configuration
 
 <SourceParameters />

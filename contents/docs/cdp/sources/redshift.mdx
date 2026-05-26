@@ -28,6 +28,18 @@ The data warehouse then starts syncing your Redshift data. You can see details a
 
 > **Permissions:** The Redshift source only requires read permissions on the schemas and tables you intend to sync.
 
+## Selecting columns
+
+By default, PostHog syncs all columns from each table. You can limit which columns sync to exclude sensitive data like PII or reduce sync time on wide tables.
+
+To sync only specific columns:
+
+1. During source setup, click **Columns** next to any table in the table picker.
+2. Uncheck columns you don't want to sync.
+3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
+
+You can change column selection after setup from the source configuration page.
+
 ## Configuration
 
 <SourceParameters />
