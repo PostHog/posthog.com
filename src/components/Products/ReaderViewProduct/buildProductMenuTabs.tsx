@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { IconBook, IconPiggyBank, IconPresent } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
+import usePlatformList from 'hooks/docs/usePlatformList'
 import type { MenuTab } from 'components/ReaderView'
 import { docsMenu } from '../../../navs'
 import ProductNav from './ProductNav'
@@ -13,6 +14,52 @@ const TAB_ICON: Record<'product' | 'pricing' | 'docs', React.ReactNode> = {
 }
 
 export type ProductSurface = 'product' | 'pricing' | 'docs'
+
+type DocsMenuItem = {
+    name: string
+    url?: string
+    children?: DocsMenuItem[]
+    [key: string]: unknown
+}
+
+/**
+ * Renders the docs TreeMenu, injecting the install method pages as an
+ * expandable submenu under the "Install" item. The list is sourced from the
+ * product's install MDX pages (`usePlatformList`) so it's never hardcoded in
+ * the nav — keeping a single source of truth. The first child links back to the
+ * main Install page.
+ */
+const DocsTreeMenu = ({
+    items,
+    productName,
+    variant,
+    rootHeading,
+}: {
+    items: DocsMenuItem[]
+    productName: string
+    variant: 'grouped' | 'listed'
+    rootHeading: string
+}) => {
+    const installItem = useMemo(() => items.find((i) => i.url && /\/installation$/.test(i.url)), [items])
+    const installBase = installItem?.url ? installItem.url.replace(/^\//, '') : 'docs/__no-install__/installation'
+    const platforms = usePlatformList(installBase, `${productName.toLowerCase()} installation`, { sortAlpha: true })
+
+    const itemsWithInstall = useMemo(() => {
+        if (!installItem || platforms.length === 0) return items
+        return items.map((i) =>
+            i === installItem
+                ? {
+                      // The main Install page is reached via the parent link itself, so no
+                      // "Overview" child — children are just the per-language pages.
+                      ...i,
+                      children: platforms.map((p) => ({ name: p.label, url: p.url })),
+                  }
+                : i
+        )
+    }, [items, installItem, platforms])
+
+    return <TreeMenu items={itemsWithInstall as any} variant={variant} appearance="sidebar" rootHeading={rootHeading} />
+}
 
 interface BuildProductMenuTabsArgs {
     /**
@@ -39,6 +86,12 @@ interface BuildProductMenuTabsArgs {
     contentRef?: React.RefObject<HTMLElement>
     /** Seeds which tab is active on first render. */
     activeSurface: ProductSurface
+    /**
+     * Optional override for the docs tab rendering style. When omitted, the
+     * style is read from the product's `navStyle` in `docsMenu` so the index
+     * and every interior docs page render the same nav.
+     */
+    navStyle?: 'grouped' | 'listed'
 }
 
 const surfaceBasePath = (productSlug: string, surface: ProductSurface): string => {
@@ -56,7 +109,12 @@ const surfaceBasePath = (productSlug: string, surface: ProductSurface): string =
  * The active tab uses in-page anchor scrolling via `ProductNav` (when
  * `contentRef` is provided); inactive tabs fall back to cross-page links.
  */
-export function buildProductMenuTabs({ productData, contentRef, activeSurface }: BuildProductMenuTabsArgs): MenuTab[] {
+export function buildProductMenuTabs({
+    productData,
+    contentRef,
+    activeSurface,
+    navStyle,
+}: BuildProductMenuTabsArgs): MenuTab[] {
     if (!productData) return []
 
     const { slug: productSlug, name: productName, productMenu = [], pricingMenu = [] } = productData
@@ -64,9 +122,11 @@ export function buildProductMenuTabs({ productData, contentRef, activeSurface }:
     const navProductMenu = productMenu.filter((item) => !item.hideFromNav)
     const navPricingMenu = pricingMenu.filter((item) => !item.hideFromNav)
 
-    const docsChildren =
-        docsMenu.children.find(({ name }: { name: string }) => name.toLowerCase() === productName.toLowerCase())
-            ?.children || []
+    const docsEntry = docsMenu.children.find(
+        ({ name }: { name: string }) => name.toLowerCase() === productName.toLowerCase()
+    )
+    const docsChildren = docsEntry?.children || []
+    const resolvedNavStyle: 'grouped' | 'listed' = navStyle ?? docsEntry?.navStyle ?? 'listed'
 
     const tabs: MenuTab[] = []
 
@@ -111,7 +171,14 @@ export function buildProductMenuTabs({ productData, contentRef, activeSurface }:
             icon: TAB_ICON.docs,
             default: activeSurface === 'docs',
             href: `/docs/${productSlug}`,
-            menu: <TreeMenu items={docsChildren} />,
+            menu: (
+                <DocsTreeMenu
+                    items={docsChildren}
+                    productName={productName}
+                    variant={resolvedNavStyle}
+                    rootHeading={productName}
+                />
+            ),
         })
     }
 

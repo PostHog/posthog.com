@@ -80,6 +80,10 @@
         { "source": "/teams/brand-vibes", "destination": "/teams/website" },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
+        {
+            "source": "/docs/session-replay/pricing",
+            "destination": "/session-replay/pricing"
+        },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/docs/integrate/third-party/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
@@ -1229,7 +1233,6 @@
         { "source": "/product-analytics/roadmap", "destination": "/product-analytics#roadmap" },
         { "source": "/product-analytics/questions", "destination": "/product-analytics#questions" },
 
-        { "source": "/session-replay/pricing", "destination": "/session-replay#pricing" },
         { "source": "/session-replay/customers", "destination": "/session-replay#customers" },
         { "source": "/session-replay/comparisons", "destination": "/session-replay#posthog-vs" },
         { "source": "/session-replay/documentation", "destination": "/session-replay#docs" },

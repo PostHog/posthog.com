@@ -10,6 +10,8 @@ interface ScrollAreaProps {
     style?: React.CSSProperties
     fullWidth?: boolean
     viewportClasses?: string
+    /** Ref to the scrolling viewport node — e.g. to persist/restore scroll position. */
+    viewportRef?: React.Ref<HTMLDivElement>
 }
 
 const ScrollArea = ({
@@ -20,6 +22,7 @@ const ScrollArea = ({
     style,
     fullWidth = false,
     viewportClasses = '',
+    viewportRef,
 }: ScrollAreaProps) => {
     const fadeHeight = fadeOverflow === true ? 8 : fadeOverflow || 0
     const { websiteMode } = useApp()
@@ -32,6 +35,7 @@ const ScrollArea = ({
             style={style}
         >
             <ScrollAreaPrimitive.Viewport
+                ref={viewportRef}
                 className={`size-full ${viewportClasses} ${fadeHeight ? `pb-${fadeHeight}` : ''}`}
             >
                 {fullWidth ? <div className="">{children}</div> : children}

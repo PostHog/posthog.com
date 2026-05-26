@@ -918,6 +918,20 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
     )
 }
 
+/**
+ * Module-level so the sidebar scroll position survives `ReaderView` remounting
+ * on every in-window navigation. Keyed by product/section so the nav feels like
+ * switching tabs instead of reloading from the top on each page.
+ */
+const SIDEBAR_SCROLL_MEMORY = new Map<string, number>()
+
+const sidebarScrollKeyFromPath = (path?: string): string => {
+    if (!path) return 'default'
+    const segs = path.split(/[?#]/)[0].split('/').filter(Boolean)
+    if (segs[0] === 'docs') return `docs:${segs[1] ?? ''}`
+    return segs[0] ?? 'root'
+}
+
 const LeftSidebar = ({
     isNavVisible,
     toggleNav,
@@ -938,6 +952,20 @@ const LeftSidebar = ({
     const { websiteMode } = useApp()
     const { searchQuery } = useSearch()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
+
+    // Persist/restore the menu scroll position across navigations (ReaderView
+    // remounts each page). Keyed by product/section so unrelated sections start fresh.
+    const menuViewportRef = useRef<HTMLDivElement>(null)
+    const sidebarScrollKey = sidebarScrollKeyFromPath(currentPath)
+    useLayoutEffect(() => {
+        const vp = menuViewportRef.current
+        if (!vp) return
+        const saved = SIDEBAR_SCROLL_MEMORY.get(sidebarScrollKey)
+        if (saved != null) vp.scrollTop = saved
+        const onScroll = () => SIDEBAR_SCROLL_MEMORY.set(sidebarScrollKey, vp.scrollTop)
+        vp.addEventListener('scroll', onScroll, { passive: true })
+        return () => vp.removeEventListener('scroll', onScroll)
+    }, [sidebarScrollKey])
     const hasTabs = !!menuTabs && menuTabs.length > 0
     const initialTab = hasTabs ? menuTabs!.find((t) => t.default)?.value || menuTabs![0].value : ''
     const [activeTab, setActiveTab] = useState(initialTab)
@@ -1206,7 +1234,7 @@ const LeftSidebar = ({
                         )}
 
                         <div className="flex-1 min-h-0 flex flex-col">
-                            <ScrollArea className="px-2 pb-2">
+                            <ScrollArea className="px-2 pb-2" viewportRef={menuViewportRef}>
                                 {hasActiveSearch ? (
                                     <SidebarSearchResults contentRef={contentRef} currentPath={currentPath} />
                                 ) : hasTabs ? (
