@@ -283,6 +283,34 @@ with open("export.parquet.zst", "wb") as f:
 print("Download complete!")
 ```
 
+## Using with MCP
+
+You can also create and monitor file download exports using the [PostHog MCP server](/docs/model-context-protocol). This lets AI agents export PostHog data on your behalf.
+
+Two MCP tools are available:
+
+| Tool | Purpose |
+|------|---------|
+| `file-download-batch-exports-create` | Start an on-demand export and return the run ID |
+| `file-download-batch-exports-retrieve` | Check the status of an export and get file IDs when complete |
+
+The actual file download still requires a REST HTTP request since MCP doesn't support binary downloads.
+
+**Example prompt:**
+
+> "Export the last week of pageview events as a gzipped JSONLines file and save it locally"
+
+The agent will:
+1. Call `file-download-batch-exports-create` with the date range and format
+2. Poll `file-download-batch-exports-retrieve` until the export completes
+3. Download the file using the REST endpoint
+
+To filter MCP tools to only file download exports, use:
+
+```text
+https://mcp.posthog.com/mcp?features=file_download
+```
+
 ## Constraints
 
 - **Maximum date range** - The date range (`data_interval_end` minus `data_interval_start`) cannot exceed 1 week

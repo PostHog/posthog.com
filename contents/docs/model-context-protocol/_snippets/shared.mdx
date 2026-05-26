@@ -102,6 +102,7 @@ Available features:
 | `error_tracking`         | [Error monitoring and debugging](/docs/error-tracking)                                 |
 | `events`                 | Event and property definitions                                                         |
 | `experiments`            | [A/B testing experiments](/docs/experiments)                                           |
+| `file_download`          | [On-demand file exports](/docs/cdp/batch-exports/file-download-api)                    |
 | `flags`                  | [Feature flag management](/docs/feature-flags)                                         |
 | `hog_functions`          | [CDP function management](/docs/cdp)                                                   |
 | `hog_function_templates` | CDP function template browsing                                                         |
@@ -274,6 +275,16 @@ The agent will use the `cdp-functions-list` tool with a type filter to return al
 **Prompt:** "Test my webhook destination with a mock purchase event"
 
 The agent will use the `cdp-functions-invocations-create` tool to send a mock event payload to the function and return the execution logs.
+
+### File download exports
+
+**Prompt:** "Export last week's pageview events as a Parquet file"
+
+The agent will use `file-download-batch-exports-create` to start an on-demand export with the events model, Parquet format, and the appropriate date range. It then polls `file-download-batch-exports-retrieve` until the export completes, and downloads the file via the REST endpoint.
+
+**Prompt:** "Download all session data from January 1-7 as gzipped JSONLines"
+
+The agent will create a file download export for the sessions model with JSONLines format and gzip compression, poll for completion, and save the resulting file locally.
 
 ### Early access feature management
 
