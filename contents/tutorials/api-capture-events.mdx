@@ -680,20 +680,20 @@ try {
 
 While possible, we strongly recommend you stick to using our [error tracking](/docs/error-tracking/installation) SDKs instead of manually capturing errors for features like accurate fingerprinting, source-map support, release tracking, and more.
 
-## Capturing LLM analytics events
+## Capturing AI Observability events
 
-It's also possible to capture LLM analytics events using the API. If you're using a language without [SDK support for LLM analytics](/docs/llm-analytics/installation), you can use the API to capture events.
+It's also possible to capture AI Observability events using the API. If you're using a language without [SDK support for AI Observability](/docs/ai-observability/installation), you can use the API to capture events.
 
-To capture LLM analytics, you need to capture 4 types of events:
+To capture AI Observability, you need to capture 4 types of events:
 
 | Event type   | Event name         | Documentation                          |
 |--------------|-------------------|---------------------------------------------|
-| Generations  | `$ai_generation`  | [What are generations?](/docs/llm-analytics/generations) |
-| Spans        | `$ai_span`        | [What are spans?](/docs/llm-analytics/spans)             |
-| Traces       | `$ai_trace`       | [What are traces?](/docs/llm-analytics/traces)            |
-| Embeddings   | `$ai_embedding`   | [What are embeddings?](/docs/llm-analytics/embeddings)    |
+| Generations  | `$ai_generation`  | [What are generations?](/docs/ai-observability/generations) |
+| Spans        | `$ai_span`        | [What are spans?](/docs/ai-observability/spans)             |
+| Traces       | `$ai_trace`       | [What are traces?](/docs/ai-observability/traces)            |
+| Embeddings   | `$ai_embedding`   | [What are embeddings?](/docs/ai-observability/embeddings)    |
 
-You can find more information in our [manual capture guide](/docs/llm-analytics/installation/manual-capture).
+You can find more information in our [manual capture guide](/docs/ai-observability/installation/manual-capture).
 
 ## Further reading
 
@@ -701,6 +701,6 @@ You can find more information in our [manual capture guide](/docs/llm-analytics/
 - [Documentation on our event capture API endpoint](/docs/api/capture)
 - [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
 - [Manual error tracking capture](/docs/error-tracking/installation/manual)
-- [Manual LLM analytics capture](/docs/llm-analytics/installation/manual-capture)
+- [Manual AI Observability capture](/docs/ai-observability/installation/manual-capture)
 
 <NewsletterForm />
