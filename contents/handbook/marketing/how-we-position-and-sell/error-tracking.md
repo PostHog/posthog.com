@@ -10,7 +10,7 @@ showTitle: true
 
 PostHog Error Tracking captures unhandled exceptions from web, mobile, and backend code, groups them into issues, and surfaces them alongside session replays, logs, feature flags, and product analytics in the same platform. Source maps, auto-assignment, spike detection, "Fix with AI" prompts, and Slack / Linear / Jira / GitHub alerts all come built-in. Generous free tier, then usage-priced per exception.
 
-Sentry has deeper error tracking features, like more battle-tested SDKs, longer track record, more granular grouping. PostHog wins on *context*: every exception ties to the user who hit it, the session replay of the moment it broke, and the feature flag they were on. Customers pick PostHog when they want errors linked to product behavior, not when they want pure error-tracking depth.
+Sentry has deeper error tracking features, more battle-tested SDKs, and more granular grouping. PostHog wins on *context*: every exception ties to the user who hit it, the session replay of the moment it broke, and the feature flag they were on. Customers pick PostHog when they want errors linked to product behavior, not when they want pure error-tracking depth.
 
 ## The unique belief
 
@@ -83,7 +83,7 @@ Every PostHog exception is a product event with the user attached. Click an erro
 **Their approach:** The 800-pound gorilla. Sentry is no longer just an error tracker; it now ships Error Monitoring, Logs, Session Replay, Metrics, Tracing, Profiling, Uptime Monitoring, and Cron Monitoring on one platform. AI suite "Seer": debugging agent, Autofix, AI Code Review, plus a Sentry MCP server. Event-based pricing with steep volume discounts – errors drop from $0.000363 to $0.000150 per event at 20M+. Free Developer plan (5K errors, 50 replays); Team starts at $26/mo + pay-as-you-go.
 
 **Where PostHog wins:**
-- Customer wants errors connected to **product analytics, feature flags, and experiments**. Sentry has none of these, despite their platform expansion into logs, replay, and tracing.
+- Customer wants errors connected to **product analytics, feature flags, and experiments**. Sentry has none of these, despite their platform expansion into logs, replay, and tracing (which we also have). 
 - Customer triages by user value, not error volume – PostHog filters by cohort, plan tier, revenue. Sentry's user context is thinner.
 - Customer is product-led, not infra/SRE-led. Sentry's expansion is toward Application Observability and Real User Monitoring; PostHog's is toward product engineering and growth.
 - Customer wants feature flag rollback workflows from the error view – Sentry doesn't have feature flags.
