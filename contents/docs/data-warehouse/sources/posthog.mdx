@@ -270,6 +270,27 @@ The `system.cohort_calculation_history` table tracks cohort calculation runs, us
 | `finished_at` | When the calculation finished                   |
 | `error_code`  | Error code if the calculation failed            |
 
+### `system.dashboard_tiles`
+
+The `system.dashboard_tiles` table contains dashboard tile layout information from your project. Each tile represents a placed element on a dashboard (insight, text, or button).
+
+| Column                   | Description                                               |
+| ------------------------ | --------------------------------------------------------- |
+| `id`                     | Unique identifier for the dashboard tile                  |
+| `team_id`                | Team ID the tile belongs to                               |
+| `dashboard_id`           | ID of the parent dashboard                                |
+| `insight_id`             | ID of the linked insight (if applicable)                  |
+| `text_id`                | ID of the linked text tile (if applicable)                |
+| `button_tile_id`         | ID of the linked button tile (if applicable)              |
+| `layouts`                | JSON containing tile layout and positioning configuration |
+| `color`                  | Color of the tile                                         |
+| `show_description`       | Whether to show the description                           |
+| `transparent_background` | Whether the tile has a transparent background             |
+| `filters_overrides`      | JSON containing filter overrides for the tile             |
+| `deleted`                | Whether the tile is deleted (1 = yes, 0 = no)             |
+
+> **Note:** This table inherits dashboard RBAC permissions. You can only query tiles for dashboards you have access to.
+
 ### `system.data_warehouse_tables`
 
 The `system.data_warehouse_tables` table contains metadata about data warehouse tables in your project.
