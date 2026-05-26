@@ -4514,6 +4514,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'CUPED',
+                    url: '/docs/experiments/cuped',
+                    icon: 'IconCalculator',
+                    color: 'orange',
+                },
+                {
                     name: 'Holdouts',
                     url: '/docs/experiments/holdouts',
                     icon: 'IconPeople',
