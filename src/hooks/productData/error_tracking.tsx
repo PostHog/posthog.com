@@ -321,20 +321,6 @@ export const errorTracking = {
         ],
     },
     integrations: ['ab_experiments', 'product_analytics', 'session_replays'],
-    pairsWith: [
-        {
-            slug: 'session-replay',
-            description: 'Watch exactly how an error occurred for a specific user',
-        },
-        {
-            slug: 'product-analytics',
-            description: 'Analyze trends over time and get alerts when things go wrong',
-        },
-        {
-            slug: 'feature-flags',
-            description: 'Roll back features that cause errors, or test fixes with slow rollouts',
-        },
-    ],
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/ERROR_TRACKING_2f807c123b.png',
         imageAlt: 'PostHog AI and error tracking',

@@ -640,25 +640,6 @@ export const llmAnalytics = {
         rows: ['llm_analytics'],
         excluded_sections: ['platform'],
     },
-    pairsWith: [
-        {
-            slug: 'product-analytics',
-            description: 'Correlate AI usage with user behavior and business metrics',
-        },
-        {
-            slug: 'dashboards',
-            description: 'Build custom dashboards combining LLM and product metrics',
-        },
-        {
-            slug: 'session-replay',
-            description: 'Watch how users interact with AI features in real sessions',
-        },
-        {
-            slug: 'feature-flags',
-            description: 'Roll out AI features gradually and test different models',
-        },
-    ],
-    worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
     presenterNotes: {
         overview:
             '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',

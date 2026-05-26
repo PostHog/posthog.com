@@ -72,7 +72,6 @@ export const productAnalytics = {
         max: MAX_PRODUCT_ANALYTICS,
     },
     volume: 1000000,
-    worksWith: ['session_replay', 'feature_flags', 'surveys'],
     customers: {
         ycombinator: {
             headline: 'gathers 30% more data than with Google Analytics',
@@ -579,22 +578,6 @@ export const productAnalytics = {
             },
         ],
     },
-    pairsWith: [
-        {
-            slug: 'session-replay',
-            description:
-                'Jump into a playlist of session recordings directly from any point in a graph, or segment of a funnel',
-        },
-        {
-            slug: 'feature-flags',
-            description: "See which feature flags are enabled for a user's session",
-        },
-        {
-            slug: 'experiments',
-            description:
-                'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
-        },
-    ],
     presenterNotes: {
         overview:
             "<strong>Presenter notes:</strong> Product analytics tells you what's happening in your product. PostHog is different than others because every product we build is natively integrated. This means you can jump from a graph to a session recording to visually see why something happened. Plus we use autocapture, which tracks every click and pageview automatically. No more realizing you forgot to track something important – you can define events retroactively (we call these 'actions').",

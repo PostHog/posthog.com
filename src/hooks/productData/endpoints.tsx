@@ -286,19 +286,6 @@ export const endpoints = {
         rows: ['endpoints', 'platform.deployment.open_core'],
         excluded_sections: ['platform'],
     },
-    pairsWith: [
-        {
-            slug: 'product-analytics',
-            description:
-                'Create insights in PostHog and expose their results through endpoints. Use trends, funnels, or retention analyses to power dashboards, feeds, or summaries in your application, without rebuilding the query elsewhere.',
-        },
-        {
-            slug: 'data-stack/managed-warehouse',
-            description:
-                'Combine product analytics data with other datasets using SQL in PostHog’s data warehouse. Expose the results through endpoints when you need more control over how data is shaped or joined.',
-        },
-    ],
-    worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
     presenterNotes: {
         overview:
             "<strong>Presenter notes:</strong> Endpoints let you take any insight or SQL query you've already built in PostHog and expose it as a stable API endpoint. Instead of cobbling together your own analytics API or hammering the Query API with ad-hoc requests, you define a query once and get back a URL your application can call repeatedly. The use cases are broad: embedded analytics dashboards for your customers, live metrics on your landing page, data feeds powering recommendations or leaderboards, or internal tools that need product data without the overhead of a custom pipeline. It's a simple three-step workflow – define your data, create the endpoint, retrieve the results – and it's designed to be production-ready from day one, with higher rate limits, optional materialization, caching, versioning, and an OpenAPI spec for every endpoint. During beta, it's completely free to use.",

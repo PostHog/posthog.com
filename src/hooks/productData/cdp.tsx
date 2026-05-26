@@ -162,18 +162,6 @@ export const cdp = {
         },
         rows: ['cdp'],
     },
-    pairsWith: [
-        {
-            slug: 'product-analytics',
-            description:
-                'Get your source data into PostHog, then analyze it alongside your product data to unlock new insights and discover new user behaviors.',
-        },
-        {
-            slug: 'data-warehouse',
-            description:
-                'Build a data warehouse in PostHog and then pull in data from all your platforms to one place where it can be easily interrogated.',
-        },
-    ],
     presenterNotes: {
         overview:
             "Data stuck in silos is useless. Our CDP gets it moving - from anywhere into PostHog, then out to wherever you need it. No complex pipelines, no data engineering. Just connect, transform if needed, and send. It's plumbing that actually works.",

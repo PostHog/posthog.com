@@ -499,22 +499,6 @@ export const featureFlags = {
         rows: ['feature_flags'],
         excluded_sections: ['platform.libraries', 'platform.developer', 'platform.integrations', 'platform.security'],
     },
-    pairsWith: [
-        {
-            slug: 'product-analytics',
-            description:
-                "Run any insight filtered by a flag's value, or group by flag to see usage across a flag's variants",
-        },
-        {
-            slug: 'product-analytics',
-            description: "User paths: See how a flag's value influenced an intended outcome",
-        },
-        {
-            slug: 'session-replay',
-            description:
-                'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
-        },
-    ],
     presenterNotes: {
         overview:
             "<strong>Presenter notes:</strong> Feature flags control who sees what. We fixed the two biggest problems: latency (down from 500ms to under 50ms with local evaluation) and that annoying flicker on page load (bootstrapping makes flags instant). Ship faster, roll back instantly, see the impact in analytics. That's it.",

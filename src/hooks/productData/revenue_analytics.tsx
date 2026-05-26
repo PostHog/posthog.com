@@ -322,20 +322,6 @@ export const revenueAnalytics = {
         ],
         rows: ['revenue_analytics'],
     },
-    pairsWith: [
-        {
-            slug: 'product-analytics',
-            description: 'Analyze revenue alongside user behavior and product usage',
-        },
-        {
-            slug: 'web-analytics',
-            description: 'See revenue attribution by traffic source and campaign',
-        },
-        {
-            slug: 'data-warehouse',
-            description: 'Connect payment platforms for automatic revenue tracking',
-        },
-    ],
     presenterNotes: {
         overview:
             "<strong>Presenter notes:</strong> You already have everything in PostHog: who your customers are, how they use the app, what they like, what they don't. What if you also had how much money they're making and you could use that to power your product decisions? KA-CHOW, REVENUE ANALYTICS IS HERE, EXPLOSION MEME, YEAAAAH",

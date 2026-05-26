@@ -342,29 +342,6 @@ export const workflows = {
             'Generate a SMS sequence to encourage users to complete a survey',
         ],
     },
-    pairsWith: [
-        {
-            slug: 'experiments',
-            description:
-                'Automatically follow up with users from test variants: send feedback surveys, activate successful groups, or roll out winning experiences.',
-        },
-        {
-            slug: 'product-analytics',
-            description:
-                'Trigger automations from real user behavior. Every click, session, or conversion can start a workflow.',
-        },
-        {
-            slug: 'feature-flags',
-            description:
-                'React when a feature is turned on, off, or rolled out to a specific segment. Target messages or follow-ups based on flag variations.',
-        },
-        {
-            slug: 'error-tracking',
-            description:
-                'Trigger alerts or messages when errors spike, or notify engineering teams directly in Slack when exceptions occur.',
-        },
-    ],
-    worksWith: ['experiments', 'product-analytics', 'feature-flags', 'error-tracking'],
     presenterNotes: {
         overview: '',
     },

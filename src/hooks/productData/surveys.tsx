@@ -437,21 +437,6 @@ export const surveys = {
             'Generate a post-purchase feedback survey',
         ],
     },
-    pairsWith: [
-        {
-            slug: 'product-analytics',
-            description: 'Use insights to breakdown average scores, analyze results over time, or find trends.',
-        },
-        {
-            slug: 'feature-flags',
-            description: 'Connect a survey to a feature flag to gather feedback on your latest ideas and tests.',
-        },
-        {
-            slug: 'session-replay',
-            description:
-                "Watch recordings of users completing a survey to understand full context about a user's behavior.",
-        },
-    ],
     presenterNotes: {
         overview:
             "<strong>Presenter notes:</strong> Surveys let you ask users anything right inside your product. No-code for simple stuff, API if you want a custom UI. But what's different about PostHog Surveys is that it works with other PostHog products. See <em>who</em> answered what, watch their session recordings, run analytics on responses. Most survey tools are siloed - ours is part of the whole system that let's you drill in for additional context.",
