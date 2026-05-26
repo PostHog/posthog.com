@@ -17,9 +17,32 @@ The API is available for all users and instances. It contains two types of endpo
 
 ## Private endpoint authentication
 
-import InstallAPI from '../integrate/_snippets/install-api.mdx'
+import InstallAPI from "../integrate/_snippets/install-api.mdx";
 
 <InstallAPI />
+
+### Personal API keys
+
+Personal API keys (prefix `phx_`) are tied to your user account and have access to all projects you can access. They're best for personal scripts, local development, and situations where you need cross-project access.
+
+To create one, go to [**Settings** > **User** > **Personal API keys**](https://app.posthog.com/settings/user-api-keys) and click **Create personal API key**.
+
+### Project secret API keys
+
+Project secret API keys (prefix `phs_`) are scoped to a single project and have limited permissions. They're best for server-side integrations that only need access to specific API endpoints within one project.
+
+**Key differences from personal API keys:**
+
+- Scoped to a single project (not your entire user account)
+- Limited to specific API scopes (currently `endpoint:read` for [Endpoints](/docs/endpoints))
+- Maximum of 10 keys per project
+- Require admin permissions to create
+
+To create one, send a `POST` request to `/api/projects/<project_id>/project_secret_api_keys/` with a `label` and at least one `scopes` entry. You can also list, update, roll, and delete keys through this endpoint.
+
+> **Important:** The full key value is only returned once when you create or roll the key. Store it securely — you can't retrieve it later.
+
+To rotate a key while keeping its label and scopes, use the roll endpoint: `POST /api/projects/<project_id>/project_secret_api_keys/<id>/roll/`. This generates a new key value and invalidates the old one.
 
 ## Rate limiting
 
@@ -157,7 +180,7 @@ You can then just call the `"next"` URL to get the next set of results.
 PostHog partners with GitHub to automatically detect exposed API keys in public repositories. When GitHub detects a leaked key, we take immediate action:
 
 - **Personal API keys** (`phx_`): The key is automatically rolled and the user is notified via email.
-- **Feature flags secure API keys** (`phs_`): Project admins and owners are notified via email so they can rotate the key.
+- **Feature flags secure API keys and project secret API keys** (`phs_`): Project admins and owners are notified via email so they can rotate the key.
 - **OAuth access tokens** (`pha_`): The key and its associated refresh token are automatically revoked and the user is notified via email.
 - **OAuth refresh tokens** (`phr_`): The key and its associated access token are automatically revoked and the user is notified via email.
 
