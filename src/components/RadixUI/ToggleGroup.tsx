@@ -1,8 +1,11 @@
 import React from 'react'
 import { ToggleGroup as RadixToggleGroup } from 'radix-ui'
 
-const toggleGroupItemClasses =
-    'flex-1 flex border border-transparent p-1 items-center justify-center bg-primary leading-4 text-sm font-medium text-primary rounded hover:bg-accent focus:z-10 focus:shadow-[0_0_0_2px] focus:shadow-primary focus:outline-none data-[state=on]:bg-accent data-[state=on]:bg-accent skin-classic:data-[state=on]:border-primary skin-classic:border skin-classic:border-b-3 skin-classic:hover:border-primary skin-classic:hover:border-b-3'
+const toggleGroupItemClasses = {
+    default:
+        'flex-1 flex border border-transparent p-1 items-center justify-center bg-primary leading-4 text-sm font-medium text-primary rounded hover:bg-accent focus:z-10 focus:shadow-[0_0_0_2px] focus:shadow-primary focus:outline-none data-[state=on]:bg-accent data-[state=on]:bg-accent skin-classic:data-[state=on]:border-primary skin-classic:border skin-classic:border-b-3 skin-classic:hover:border-primary skin-classic:hover:border-b-3',
+    sm: 'flex-1 flex border border-transparent p-0.5 items-center justify-center bg-primary leading-4 text-xs font-medium text-primary rounded hover:bg-accent focus:z-10 focus:shadow-[0_0_0_2px] focus:shadow-primary focus:outline-none data-[state=on]:bg-accent data-[state=on]:bg-accent skin-classic:data-[state=on]:border-primary skin-classic:border skin-classic:border-b-3 skin-classic:hover:border-primary skin-classic:hover:border-b-3',
+}
 
 export interface ToggleOption {
     label: React.ReactNode
@@ -18,6 +21,7 @@ export interface ToggleGroupProps {
     value: string
     hideTitle?: boolean
     className?: string
+    size?: 'default' | 'sm'
 }
 
 export const ToggleGroup = ({
@@ -27,6 +31,7 @@ export const ToggleGroup = ({
     value,
     hideTitle = false,
     className = '',
+    size = 'default',
 }: ToggleGroupProps) => {
     const defaultValue = value ? options.find((option) => option.default)?.value || options[0]?.value : undefined
 
@@ -34,7 +39,9 @@ export const ToggleGroup = ({
         <>
             {!hideTitle && <label className="pt-1.5 text-[15px] block mb-1">{title}</label>}
             <RadixToggleGroup.Root
-                className={`flex space-x-px rounded p-1 bg-primary border border-primary ${className}`}
+                className={`flex space-x-px rounded ${
+                    size === 'sm' ? 'p-0.5' : 'p-1'
+                } bg-primary border border-primary ${className}`}
                 type="single"
                 data-scheme="primary"
                 defaultValue={defaultValue}
@@ -45,7 +52,7 @@ export const ToggleGroup = ({
                 {options.map((option) => (
                     <RadixToggleGroup.Item
                         key={option.value}
-                        className={toggleGroupItemClasses}
+                        className={toggleGroupItemClasses[size]}
                         value={option.value}
                         aria-label={typeof option.label === 'string' ? option.label : option.value}
                     >
