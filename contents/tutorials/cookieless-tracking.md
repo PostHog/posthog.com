@@ -24,8 +24,6 @@ This tutorial shows how to configure PostHog's [JavaScript Web SDK](/docs/librar
 
 <GDPRForm />
 
-> **Note:** Before configuring cookieless tracking, you need to enable "Cookieless server hash mode" in your PostHog project settings under Project Settings > Web analytics.
-
 ## If you want to delete your cookie banner
 
 If you never want to show a cookie banner, you can set the cookieless mode to `"always"`. In this mode:
@@ -112,7 +110,7 @@ Nothing comes for free unfortunately. Limiting what PostHog can store in cookies
 
 - **Cache optimizations:** PostHog stores some information in browser storage to load faster, for example, the last loaded values for feature flags. Without this, there can be a delay between the page loading and things like feature flags being available to query (unless flags are [bootstrapped](/docs/feature-flags/bootstrapping)).
 
-- **No GeoIP or bot detection:** When cookieless server hash mode is enabled, IP-based transformations like [GeoIP enrichment](/docs/cdp/transformations/template-geoip) and [bot detection](/docs/cdp/transformations/template-bot-detection) don't enrich your events. The IP address is stripped before these transformations run. This means location data isn't added to events and the world map in Web Analytics won't show data.
+- **No GeoIP or bot detection:** When using cookieless tracking, IP-based transformations like [GeoIP enrichment](/docs/cdp/transformations/template-geoip) and [bot detection](/docs/cdp/transformations/template-bot-detection) don't enrich your events. The IP address is stripped before these transformations run. This means location data isn't added to events and the world map in Web Analytics won't show data.
 
 ## Further reading
 

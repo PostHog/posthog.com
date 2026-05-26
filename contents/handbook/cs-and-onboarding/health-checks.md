@@ -113,9 +113,9 @@ if (cookiePreference === 'accepted') {
 }
 ```
 
-They will not be capturing anything for customers who visit their website and opt-out of cookies or ignore the cookie banner completely. We recommend instead they use the `cookieless_mode` parameter in their initializer as outlined in the [cookieless tracking tutorial](/tutorials/cookieless-tracking). If the customer wants to move forward with implementing cookieless mode, ensure they enable "Cookieless server hash mode" in their project settings under Project Settings > Web analytics.
+They will not be capturing anything for customers who visit their website and opt-out of cookies or ignore the cookie banner completely. We recommend instead they use the `cookieless_mode` parameter in their initializer as outlined in the [cookieless tracking tutorial](/tutorials/cookieless-tracking).
 
-Cookieless mode can help them have more accurate tracking totals because when using cookieless tracking, the PostHog SDK will generate a privacy-preserving hash, calculated on our servers.
+Cookieless mode can help them have more accurate tracking totals because when using cookieless tracking, PostHog generates a privacy-preserving hash on our servers.
 
 ## Are feature flags resilient?
 
