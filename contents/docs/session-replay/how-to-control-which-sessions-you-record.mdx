@@ -208,9 +208,11 @@ You can edit the groups after creating them.
 In your [replay ingestion settings](https://us.posthog.com/settings/project-replay#replay-ingestion), you can set a minimum duration for sessions to be recorded.
 
 Supported on the following SDKs:
+
 - **Web:** posthog-js 1.291.0+
 - **iOS:** 3.53.0+
 - **Android:** 3.44.0+
+- **Flutter:** 5.24.3+
 
 <ProductScreenshot
   imageLight={ImgMinDurationLight}
@@ -275,9 +277,9 @@ This mode is **more accurate** for filtering out short sessions, especially on s
 - **Use legacy mode** if you want to capture as much session data as possible and are okay with potentially missing early parts of sessions after page refreshes
 - **Use strict mode** if you want to ensure you only record sessions where users actually spend the minimum duration on a single page, accepting that you may miss more bouncing users
 
-### iOS and Android behavior
+### iOS, Android, and Flutter behavior
 
-On iOS and Android, minimum duration is enforced using **buffer length**, similar to web strict mode:
+On iOS, Android, and Flutter, minimum duration is enforced using **buffer length**, similar to web strict mode:
 
 - Snapshots are buffered, and PostHog checks the duration of buffered replay data (from the oldest to newest buffered snapshot)
 - Recording starts sending only after that buffered duration reaches the configured minimum duration
