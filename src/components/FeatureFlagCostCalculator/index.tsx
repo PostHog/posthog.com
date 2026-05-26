@@ -62,8 +62,11 @@ const parseShorthand = (raw: string): number | null => {
     return Math.round(base * mult)
 }
 
+const fieldWrapperClassName =
+    'flex items-baseline gap-1 border border-light hover:border-button dark:border-dark rounded-sm py-1 px-2 w-32 focus-within:border-red dark:focus-within:border-yellow focus-within:bg-white dark:focus-within:bg-accent-dark'
+
 const inputClassName =
-    'bg-transparent text-right font-code text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-2 w-32 focus:outline-none focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark tabular-nums'
+    'bg-transparent text-right font-code text-sm flex-1 min-w-0 focus:outline-none focus:ring-0 tabular-nums'
 
 const InfoIcon = ({ tooltip }: { tooltip: string }): JSX.Element => (
     <Tooltip content={tooltip} contentContainerClassName="max-w-xs" placement="top">
@@ -110,7 +113,7 @@ const FieldRow = ({ title, tooltip, value, min, max, marks, scale, onChange, suf
                     <span className="truncate">{title}</span>
                     <InfoIcon tooltip={tooltip} />
                 </span>
-                <span className="flex items-center gap-1.5 shrink-0">
+                <span className={`${fieldWrapperClassName} shrink-0`}>
                     <input
                         type="text"
                         inputMode="numeric"
@@ -123,7 +126,7 @@ const FieldRow = ({ title, tooltip, value, min, max, marks, scale, onChange, suf
                         aria-label={title}
                         className={inputClassName}
                     />
-                    <span className="text-[13px] opacity-60 shrink-0 w-8 text-left">{suffix ?? ''}</span>
+                    {suffix && <span className="text-[13px] opacity-60 shrink-0">{suffix}</span>}
                 </span>
             </div>
             <div className="px-1 pb-5">
