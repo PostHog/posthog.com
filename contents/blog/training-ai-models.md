@@ -48,7 +48,7 @@ Most companies would bury this change in a deceptively boring T&Cs update, but w
 
 1. We will anonymize all data before it's used for training
 2. Users on our EU cloud instance are opted out by default
-3. Users with a BAA or MSA agreement are also opted out
+3. Users with an existing agreement that prevents training, such as a BAA, MSA, or similar, are also opted out
 4. All other users on our US cloud instance are opted in by default
 5. You can opt out at any time via your [org settings in PostHog](https://app.posthog.com/settings/organization-details) (admin access required)
 6. We will only use data that already exists in your PostHog instance
