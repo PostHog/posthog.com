@@ -337,9 +337,21 @@ PostHog automatically disables evaluations and sets them to error status when:
 
 | Error reason             | Cause                                                     | How to resolve                                                                                                                                   |
 | ------------------------ | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+<<<<<<< HEAD
 | **Trial limit reached**  | The 100 free trial evaluation runs have been exhausted.   | Add your own API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/project-ai-observability#ai-observability-byok).       |
+||||||| 740056430
+| **Trial limit reached**  | The 100 free trial evaluation runs have been exhausted.   | Add your own API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok).       |
+=======
+| **Trial limit reached**  | The 100 free trial evaluation runs have been exhausted.   | Add your own API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok).       |
+>>>>>>> master
 | **Model not allowed**    | The selected model isn't available on the trial plan.     | Switch to a trial-allowed model, or add your own provider API key.                                                                               |
+<<<<<<< HEAD
 | **Provider key deleted** | The provider API key used by this evaluation was removed. | Add a new provider API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/project-ai-observability#ai-observability-byok). |
+||||||| 740056430
+| **Provider key deleted** | The provider API key used by this evaluation was removed. | Add a new provider API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok). |
+=======
+| **Provider key deleted** | The provider API key used by this evaluation was removed. | Add a new provider API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok). |
+>>>>>>> master
 
 ### Identifying errored evaluations
 
@@ -361,7 +373,13 @@ Once the issue is resolved, open the evaluation and toggle it back on.
 
 Each evaluation run counts as one AI Observability event toward your quota.
 
+<<<<<<< HEAD
 **LLM judge evaluations** use an LLM to score your generations. Your first 100 evaluation runs are on us so you can try the feature right away. After that, add your own API key from OpenAI, Azure OpenAI, Google Gemini, Anthropic, OpenRouter, Fireworks, or Together AI in [**Settings** > **AI Observability**](https://app.posthog.com/settings/project-ai-observability#ai-observability-byok) to keep running evaluations.
+||||||| 740056430
+**LLM judge evaluations** use an LLM to score your generations. Your first 100 evaluation runs are on us so you can try the feature right away. After that, add your own API key from OpenAI, Azure OpenAI, Google Gemini, Anthropic, OpenRouter, Fireworks, or Together AI in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok) to keep running evaluations.
+=======
+**LLM judge evaluations** use an LLM to score your generations. Your first 100 evaluation runs are on us so you can try the feature right away. After that, add your own API key from OpenAI, Azure OpenAI, Google Gemini, Anthropic, OpenRouter, Fireworks, or Together AI in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok) to keep running evaluations.
+>>>>>>> master
 
 If a provider API key is deleted or an evaluation hits trial limits, PostHog automatically disables the affected evaluations and shows an error status. See [Evaluation status and errors](#evaluation-status-and-errors) for details on error states and how to resolve them.
 
