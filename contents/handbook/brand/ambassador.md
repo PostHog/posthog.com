@@ -52,11 +52,9 @@ It's okay to be helpful or respond to posts from frustrated users, but be mindfu
 
 ## It's not just employees, either
 
-Our users are brand ambassadors too – whether they pay us or not.
+Our users are brand ambassadors too. A brand isn't just a logo or a tagline – it's every facet of the business, including how other people think about it. We can influence that, but never totally control it.
 
-A brand isn't just a logo or a tagline. It's every facet of the business, including how other people think about it. We can influence how people think about PostHog, but we can never totally control it. Modern brand building is a two-way street.
-
-We've had an open approach from the beginning. Letting people look behind the business facade has endeared us to them. By building a cool, irreverent brand around our mission, we've won over a legion of hedgehog fans, some of whom pay us. **They're fans, not customers** – and our advocates shape our brand as much as we do.
+We've had an open approach [from the beginning](/founders/remote-culture). Letting people look behind the business facade has endeared us to them. By building a transparent, weird, and irreverent brand, we've won over a legion of hedgehog fans, some of whom pay us. **They're fans, not customers** – and our advocates shape our brand as much as we do.
 
 ### A two-way dialog means listening, not always agreeing
 
@@ -64,15 +62,13 @@ Having a community requires give and take. We give our users a voice, and we res
 
 A recent example is our decision to train an ML model. We expected some backlash, some support, and some shrugs – and we got all three. We listened, but we still went ahead.
 
-### Brand affinity isn't bought – it's earned
+### Brand affinity isn't bought
 
 It's earned through trust, transparency, and engagement.
 
-- **The better informed a user, the better informed their purchase – and the better user they'll be.** That's why we share mistakes and lessons freely through [content and editorial](/handbook/content).
-- **Leading a crusade creates a context of higher purpose and meaning.** Anything we do that isn't aligned with our values is a tiny strike against the brand. What we do online and in person should always tie back to the crusade of making really great tools for developers.
-- **Brand attracts talent, too.** People with cool ideas want to work at companies where those ideas will come to life. Use brand to shorten the distance between our users and us.
-
-TL;DR: our brand is the collective gut reaction to everything we do – see [the rest of the handbook](/handbook/brand/overview) for what that looks like in practice.
+- **The better informed a user – the better user they'll be.** That's why we share mistakes and lessons freely through [content](/handbook/content).
+- **Use brand to shorten the distance.** What we post online and how we show up in person should always tie back to the mission of making really great tools for developers. As we scale, brand is the thing that will keep us close to [who we're building for](/handbook/who-we-build-for).
+- **Brand attracts talent, too.** People with cool ideas want to work at companies where they can see those ideas actually come to life. 
 
 ## Giving someone the brand ambassador experience
 
