@@ -4,9 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-DemoHog is an internal tool for spinning up a PostHog project filled with realistic, made-up event data. Describe an app in plain English, and it generates events, dashboards, insights, cohorts, Surveys, Feature Flags, Experiments, and (optionally) a hosted demo site wired for Session Replay.
-
-Sign in at [demohog.vercel.app](https://demohog.vercel.app) with your `@posthog.com` Google account (Google OAuth via Supabase).
+[DemoHog](https://demohog.vercel.app) is an internal tool for spinning up a PostHog project filled with realistic, made-up event data. Describe an app in plain English, and it generates events, dashboards, insights, cohorts, Surveys, Feature Flags, Experiments, and (optionally) a hosted demo site wired for Session Replay.
 
 ## When to use it
 
@@ -188,4 +186,4 @@ For prospect sandboxes, create the project in an org the prospect can be invited
 
 ## Getting help
 
-DemoHog is maintained as an internal tool. Code lives in the [demohog repo](https://github.com/PostHog/demohog). Open an issue or ping `#team-growth`.
+DemoHog is maintained as an internal tool. Code lives in the [demohog repo](https://github.com/PostHog/demohog). 
