@@ -668,6 +668,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/slack-app': {
+        size: {
+            min: {
+                width: 750,
+                height: 500,
+            },
+            max: {
+                width: 1000,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/signup': {
         size: {
             min: {
