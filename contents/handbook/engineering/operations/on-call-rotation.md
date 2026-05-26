@@ -24,6 +24,31 @@ Every team has 2 schedules in [incident.io](https://app.incident.io/posthog/on-c
 * `Support: {team}`
     - This is a weekly or bi-weekly rotation (teams can decide) that covers both who is assigned to the [support hero rotation](/handbook/engineering/operations/support-hero) as well as the out of-hours-escalation for the extreme case
 
+### Manual escalation schedules
+
+In addition to the regular on-call schedules, teams that own production-critical services have a manual escalation schedule in incident.io:
+* `Escalation: {team}`
+    - This is the "everything is broken" escalation path for critical out-of-hours emergencies
+    - Only teams that own production-critical services are required to have this schedule - other teams don't need one
+    - **Everyone relevant on the team should be on this schedule** - it's not a rotation like regular on-call
+    - There should be no gaps in coverage since this is the last resort when normal escalation paths fail
+    - This schedule is triggered manually by whoever is handling an incident when they need additional help
+
+#### When to use manual escalation
+
+Manual escalation should be used when:
+* The primary on-call person is unresponsive or unavailable
+* The situation is critical and requires immediate additional expertise
+* You're the on-call responder and need help from a specific team outside normal working hours
+
+#### How to trigger manual escalation
+
+1. From within an incident in incident.io, use the escalation options to page the relevant `Escalation: {team}` schedule
+2. This will notify all members on that escalation schedule simultaneously
+3. Any available team member can then respond and assist with the incident
+
+> 💡 Manual escalation is a safety net, not a shortcut. Always try the normal escalation paths first before manually escalating to an entire team.
+
 ### Global on-call schedule
 
 [Schedule in incident.io](https://app.incident.io/posthog/on-call/schedules/01K7PNGFNP8ZZSCSTBXKPVWVAZ)
@@ -68,6 +93,29 @@ Before going on call, make sure you have the **Incident.io mobile app** [Android
 
 To get a calendar with all your on-call shifts from incident.io go to the [schedules section](https://app.incident.io/posthog/on-call/schedules), select `Sync calendar` at the top right and copy the link for the webcal feed. In google calendar, add a new calendar from URL and paste the link in there.
 
+### Make sure alerts can break through Do Not Disturb
+
+The incident.io app does not configure these settings for you on install. By default your phone's Do Not Disturb, Sleep, or Focus mode will silence pages. Configure both the incident.io app and phone contact so alerts always come through.
+
+#### iOS
+
+1. **Save the incident.io On-call contact to your phone.** In the incident.io mobile app, go to `Settings` → `Contacts` and enable the toggle to add the contact to your address book.
+2. **Enable Emergency Bypass for that contact.** Open the `Contacts` app → `Lists` → `All Contacts`, find `incident.io On-call`, tap `Edit` → `Ringtone` → toggle on `Emergency Bypass`. Repeat for `Text Tone` so SMS pages also break through. On iOS 18+, edit from `All Contacts` rather than the auto-grouped "incident.io" section to avoid a known Apple bug.
+3. **Allow critical notifications.** `Settings` → `incident.io` → `Notifications` → enable `Critical Alerts`. These bypass silent and Focus mode for push notifications.
+4. **Allowlist incident.io in every Focus mode.** `Settings` → `Focus` → for each mode (Sleep, Do Not Disturb, Work, etc.) → `Apps` → add `incident.io` to the allowed list.
+5. **Optional: Watch for sound redirects.** Apple Watch pairing, AirPods Announce Notifications, and Screen Time can route incident.io alerts away from your phone speaker – disable the incident.io app in the Watch app's notification list and add incident.io to Screen Time's "Always Allowed" apps.
+
+#### Android
+
+Exact menu paths vary by manufacturer (Pixel, Samsung, OnePlus, etc.), but the same setup applies:
+
+1. **Grant Do Not Disturb access to the app.** Accept the prompt during incident.io onboarding, or set it manually via `Settings` → `Apps` → `incident.io` → `Special app access` → `Do Not Disturb access`.
+2. **Disable battery and sleep restrictions for the app.** `Settings` → `Apps` → `incident.io` → disable `Pause app activity if unused`, and set `App battery usage` to `Unrestricted`. Otherwise Android may kill the app in the background and you won't get paged.
+3. **Allowlist incident.io in each Do Not Disturb / Focus mode.** On Pixel/stock Android: `Settings` → `Sound & vibration` → `Do Not Disturb` → `Apps` → add `incident.io`. On Samsung: `Settings` → `Modes and routines` → each mode → `Allowed apps` → add `incident.io`.
+4. **Star the incident.io On-call contact and allow starred contacts to bypass DND.** Save and star/favorite the contact, then under `Do Not Disturb` → `People` (or `Exceptions`), allow `Calls` and `Messages` from `Starred contacts`. This lets the phone calls and SMS pages ring through.
+5. **Consider enabling Alarm-style notifications.** In the incident.io app's advanced settings, toggle `Alarm style notifications` and make sure alarms are allowed during Do Not Disturb – this routes pages through the alarm channel, which most phones treat as un-silenceable.
+
+> 💡 Test it! Once configured, put your phone into Do Not Disturb / Sleep mode and ask a teammate to send you a test page (or use the `Send test notification` button in the incident.io app). If you don't hear it, something still isn't right.
 
 ## Make sure your availability is up-to-date
 

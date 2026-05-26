@@ -37,8 +37,7 @@ const MCPCallout: React.FC<MCPCalloutProps> = ({ operationId }) => {
     return (
         <blockquote className="p-4 mb-4 rounded bg-accent border-l-4 border-yellow not-prose">
             <p className="text-sm font-semibold mb-2">
-                Also available via the{' '}
-                <a href="/docs/model-context-protocol">PostHog MCP server</a>:
+                Also available via the <a href="/docs/model-context-protocol">PostHog MCP server</a>:
             </p>
             <ul className="m-0 p-0 list-none space-y-1">
                 {matched.map(({ name, info }) => (

@@ -182,6 +182,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Feed',
         owner: ['growth'],
     },
+    'github-integration': {
+        feature: 'GitHub integration',
+        owner: ['signals'],
+    },
     'group-analytics': {
         feature: 'Group analytics',
         owner: ['web-analytics'],
@@ -209,9 +213,9 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['platform-features'],
         label: 'feature/notifications',
     },
-    'llm-gateway': {
-        feature: 'LLM gateway',
-        owner: ['llm-gateway'],
+    'ai-gateway': {
+        feature: 'AI gateway',
+        owner: ['ai-gateway'],
         label: false,
     },
     'live-events': {

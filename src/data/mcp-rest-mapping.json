@@ -46,7 +46,9 @@
     "environments_external_data_schemas_list": ["external-data-schemas-list"],
     "environments_external_data_schemas_partial_update": ["external-data-schemas-partial-update"],
     "environments_external_data_schemas_retrieve": ["external-data-schemas-retrieve"],
-    "environments_external_data_sources_check_cdc_prerequisites_create": ["external-data-sources-check-cdc-prerequisites-create"],
+    "environments_external_data_sources_check_cdc_prerequisites_create": [
+        "external-data-sources-check-cdc-prerequisites-create"
+    ],
     "environments_external_data_sources_create": ["external-data-sources-create"],
     "environments_external_data_sources_create_webhook_create": ["external-data-sources-create-webhook-create"],
     "environments_external_data_sources_delete_webhook_create": ["external-data-sources-delete-webhook-create"],
@@ -54,7 +56,9 @@
     "environments_external_data_sources_list": ["external-data-sources-list"],
     "environments_external_data_sources_partial_update": ["external-data-sources-partial-update"],
     "environments_external_data_sources_retrieve": ["external-data-sources-retrieve"],
-    "environments_external_data_sources_update_webhook_inputs_create": ["external-data-sources-update-webhook-inputs-create"],
+    "environments_external_data_sources_update_webhook_inputs_create": [
+        "external-data-sources-update-webhook-inputs-create"
+    ],
     "environments_external_data_sources_webhook_info_retrieve": ["external-data-sources-webhook-info-retrieve"],
     "environments_hog_flows_logs_retrieve": ["hog-flows-logs-retrieve"],
     "environments_hog_flows_metrics_retrieve": ["hog-flows-metrics-retrieve"],

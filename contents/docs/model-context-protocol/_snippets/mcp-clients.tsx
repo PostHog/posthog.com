@@ -5,8 +5,8 @@ const MCPClients = () => {
     const codeEditors = [
         {
             label: 'PostHog Code',
-            url: '/code',
-            icon: 'IconLogomark',
+            url: '/docs/posthog-code',
+            icon: 'IconPostHog',
         },
         {
             label: 'Claude Code',
