@@ -3,7 +3,7 @@ export const llmAnalyticsFeatures = {
         name: 'AI Observability',
         description: 'Monitor and debug your LLM-powered features',
         url: '/llm-analytics',
-        docsUrl: '/docs/llm-analytics',
+        docsUrl: '/docs/ai-observability',
     },
     features: {
         generation_tracking: {
