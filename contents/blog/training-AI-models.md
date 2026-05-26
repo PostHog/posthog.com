@@ -19,7 +19,7 @@ We're now working towards building more proactive, self-driving products. Produc
 
 To enable this and more products like it, we want to try something new.
 
-We want to experiment with training models on data in PostHog, so we can build better versions of these kinds of features, and make our existing products smarter and more proactive.
+We want to train models on data in PostHog, so we can build better versions of existing products and entirely new types of products that will help teams build better products, faster.
 
 We think there are a bunch of meaningful use cases here that will help users, while also helping PostHog continue to thrive.
 
