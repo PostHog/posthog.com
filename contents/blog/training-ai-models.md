@@ -71,7 +71,9 @@ Our goal here is to improve PostHog as a product for our customers, not to expos
 
 Put simply, because otherwise we will not have enough data to train a model that's actually useful.
 
-If you choose to opt out, the new features that we're building with these models won't be available to you, as they'll depend on this data. If you're opted out by default (e.g. because you're on our EU cloud instance), you can choose to opt in manually provided any legal agreements you have with us don't exclude this option.
+If you choose to opt out, the new features that we're building with these models won't be available to you, as they'll depend on this data. 
+
+If you're opted out by default (e.g. because you're on our EU cloud instance), you can choose to opt in manually provided any legal agreements you have with us don't exclude this option.
 
 We're choosing to be upfront about this rather than quietly rolling something out, because we think that's the right way to do it.
 
