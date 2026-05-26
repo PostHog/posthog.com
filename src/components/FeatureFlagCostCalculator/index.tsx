@@ -193,7 +193,6 @@ const CalculatorBody = (): JSX.Element => {
     const [serverCount, setServerCount] = useState<number>(DEFAULT_SERVER_COUNT)
     const [pollIntervalSec, setPollIntervalSec] = useState<number>(DEFAULT_POLL_INTERVAL_SEC)
     const [serverSidePct, setServerSidePct] = useState<number>(DEFAULT_SERVER_SHARE_PCT)
-    const [showAdvanced, setShowAdvanced] = useState<boolean>(false)
     const [tiers, setTiers] = useState<Tier[] | null>(null)
 
     useEffect(() => {
@@ -271,52 +270,41 @@ const CalculatorBody = (): JSX.Element => {
                 </div>
             )}
 
-            <button
-                type="button"
-                onClick={() => setShowAdvanced((v) => !v)}
-                className="mt-4 text-[13px] font-semibold opacity-75 hover:opacity-100 inline-flex items-center gap-1"
-                aria-expanded={showAdvanced}
-            >
-                <span className="inline-block w-3 text-center">{showAdvanced ? '−' : '+'}</span>
-                Local evaluation assumptions
-            </button>
-
-            {showAdvanced && (
-                <div className="mt-2 border-t border-light dark:border-dark divide-y divide-light dark:divide-dark">
-                    <FieldRow
-                        title="Server fleet size"
-                        tooltip="Number of server-side processes/pods running the PostHog SDK. Each polls independently."
-                        value={serverCount}
-                        min={1}
-                        max={5000}
-                        marks={[1, 10, 100, 1000, 5000]}
-                        scale="log"
-                        onChange={setServerCount}
-                    />
-                    <FieldRow
-                        title="Poll interval"
-                        tooltip="How often each server fetches fresh flag definitions. Lower = fresher flags but more billable polls."
-                        value={pollIntervalSec}
-                        min={10}
-                        max={3600}
-                        marks={[10, 30, 60, 300, 900, 3600]}
-                        scale="log"
-                        onChange={setPollIntervalSec}
-                        suffix="sec"
-                    />
-                    <FieldRow
-                        title="Server-side share"
-                        tooltip="Percentage of evaluations on your servers (eligible for local eval). Browser and mobile evaluations stay remote."
-                        value={serverSidePct}
-                        min={0}
-                        max={100}
-                        marks={[0, 25, 50, 75, 100]}
-                        scale="linear"
-                        onChange={setServerSidePct}
-                        suffix="%"
-                    />
-                </div>
-            )}
+            <div className="mt-4 border-t border-light dark:border-dark divide-y divide-light dark:divide-dark">
+                <div className="pt-3 text-[13px] font-semibold opacity-75">Local evaluation assumptions</div>
+                <FieldRow
+                    title="Server fleet size"
+                    tooltip="Number of server-side processes/pods running the PostHog SDK. Each polls independently."
+                    value={serverCount}
+                    min={1}
+                    max={5000}
+                    marks={[1, 10, 100, 1000, 5000]}
+                    scale="log"
+                    onChange={setServerCount}
+                />
+                <FieldRow
+                    title="Poll interval"
+                    tooltip="How often each server fetches fresh flag definitions. Lower = fresher flags but more billable polls."
+                    value={pollIntervalSec}
+                    min={10}
+                    max={3600}
+                    marks={[10, 30, 60, 300, 900, 3600]}
+                    scale="log"
+                    onChange={setPollIntervalSec}
+                    suffix="sec"
+                />
+                <FieldRow
+                    title="Server-side share"
+                    tooltip="Percentage of evaluations on your servers (eligible for local eval). Browser and mobile evaluations stay remote."
+                    value={serverSidePct}
+                    min={0}
+                    max={100}
+                    marks={[0, 25, 50, 75, 100]}
+                    scale="linear"
+                    onChange={setServerSidePct}
+                    suffix="%"
+                />
+            </div>
 
             {tiers === null && <div className="mt-3 text-[12px] opacity-60">Loading current pricing tiers…</div>}
         </div>
