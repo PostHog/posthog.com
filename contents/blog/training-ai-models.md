@@ -1,5 +1,5 @@
 ---
-date: 2026-05-26
+date: 2026-05-2y
 title: Training our own AI models
 rootPage: /blog
 sidebar: Blog
@@ -65,7 +65,7 @@ In terms of comms, we are:
 - Notifying all our users through in-app notifications (in case you don't read emails)
 - Communicating our plans very publicly (like in this post)
 
-Our goal here is to improve PostHog as a product for our customers, not to expose or sell models trained on your data, or monetize your data.
+I want to stress that our goal here is to improve PostHog as a product for our customers, not to expose or sell models trained on your data, or monetize your data.
 
 ## Why this is opt out, not opt in
 
@@ -79,4 +79,4 @@ We're choosing to be upfront about this rather than quietly rolling something ou
 
 If you want to talk about this, I'm james at you can guess it.
 
-We're also [hiring AI researchers](/careers), so get in touch if you want to work on this with us.
+We're also [hiring AI researchers](/careers/ai-research-engineer), so get in touch if you want to work on this with us.
