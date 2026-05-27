@@ -1,0 +1,35 @@
+---
+title: PostHog Code open source
+sidebar: Docs
+showTitle: true
+---
+
+PostHog Code is open source under the MIT license. The full source for the desktop app, the agent framework, and the bundled PostHog skills lives at [github.com/PostHog/code](https://github.com/PostHog/code).
+
+## What's open
+
+The repo is a monorepo containing:
+
+| Component | Location |
+|---|---|
+| Desktop app | `apps/code` |
+| Agent framework | `packages/agent` |
+| PostHog enricher | `packages/enricher` |
+| Bundled skills | `apps/code/plugins/posthog/skills` |
+
+## Contributing
+
+We welcome external contributions. To get started:
+
+1. Read [CONTRIBUTING.md](https://github.com/PostHog/code/blob/main/CONTRIBUTING.md) in the repo
+2. Browse issues labeled [`good first issue`](https://github.com/PostHog/code/labels/good%20first%20issue)
+3. Open a PR from a `feat/*` or `fix/*` branch – `pnpm typecheck`, `pnpm lint`, and `pnpm test` should all pass
+4. Drop into the [PostHog Discord](https://discord.gg/posthog) if you want to chat through an idea before writing code
+
+## Reporting bugs
+
+Found something broken? [Open an issue](https://github.com/PostHog/code/issues/new) with the version you're running (visible in **Settings → About**) and steps to reproduce.
+
+## License
+
+PostHog Code is released under the [MIT license](https://github.com/PostHog/code/blob/main/LICENSE).

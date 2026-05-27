@@ -13,7 +13,7 @@ featuredImageType: full
 category: Engineering
 tags:
   - Engineering
-  - LLM analytics
+  - AI Observability
 ---
 
 There it is. Staring at me. Sitting there. Goading me.
@@ -30,7 +30,7 @@ We just [passed the Turing test](https://www.reddit.com/r/Futurism/comments/1jpz
 
 After a few months of this, I snapped.
 
-I work on [LLM analytics](/docs/llm-analytics) at PostHog. I spend my days helping people understand what their AI agents are doing. And yet here I am, manually summarizing my GitHub activity like some kind of caveman.
+I work on [AI Observability](/docs/ai-observability) at PostHog. I spend my days helping people understand what their AI agents are doing. And yet here I am, manually summarizing my GitHub activity like some kind of caveman.
 
 The irony was too much. I decided to build my own agent to beat the standup bot at its own game.
 
@@ -48,7 +48,7 @@ The idea was simple:
 And because I'm a shameless dogfooder, this was the perfect excuse to:
 
 - Learn the [OpenAI Agents SDK](https://github.com/openai/openai-agents-python)
-- Dog-food our [OpenAI Agents SDK integration](/docs/llm-analytics/installation/openai-agents) for [`posthog-python`](/docs/libraries/python)
+- Dog-food our [OpenAI Agents SDK integration](/docs/ai-observability/installation/openai-agents) for [`posthog-python`](/docs/libraries/python)
 - Create something I can actually use every day
 - Write this very blog post
 - But most importantly, use AI even if it actually sometimes takes me longer each day than it did before.
@@ -180,9 +180,9 @@ Events (newest first):
 ...
 ```
 
-## The secret sauce: PostHog LLM analytics
+## The secret sauce: PostHog AI Observability
 
-Here's where it gets interesting. Building an agent is one thing. Understanding what it's actually doing? That's where [PostHog LLM analytics](/docs/llm-analytics) comes in.
+Here's where it gets interesting. Building an agent is one thing. Understanding what it's actually doing? That's where [PostHog AI Observability](/docs/ai-observability) comes in.
 
 I instrumented the entire agent with our [OpenAI Agents SDK integration](https://github.com/PostHog/posthog-python/pull/408). Fun fact — it was built during a one-day hackathon at a team onsite in Barcelona, where I also discovered [Calçots](https://en.wikipedia.org/wiki/Cal%C3%A7ot) (highly recommend).
 
@@ -210,22 +210,22 @@ processor = instrument(
 )
 ```
 
-That's it. One function call and suddenly I have full visibility into everything. (If you're handling sensitive data, you can enable [privacy mode](/docs/llm-analytics/privacy-mode) to exclude prompts and completions from being stored.)
+That's it. One function call and suddenly I have full visibility into everything. (If you're handling sensitive data, you can enable [privacy mode](/docs/ai-observability/privacy-mode) to exclude prompts and completions from being stored.)
 
 ### Tracing
 
-Every agent run creates a [trace](/docs/llm-analytics/traces) with [spans](/docs/llm-analytics/spans) for:
+Every agent run creates a [trace](/docs/ai-observability/traces) with [spans](/docs/ai-observability/spans) for:
 - **Agent execution** - which agent ran and for how long
 - **Tool calls** - what tools were called, with what arguments, and what they returned
-- **[LLM generations](/docs/llm-analytics/generations)** - prompts, completions, token usage, and latency
+- **[LLM generations](/docs/ai-observability/generations)** - prompts, completions, token usage, and latency
 
-I can see exactly how the agent decided which tools to call, what data it gathered, and how it turned all of that into prose. Each trace also gets an [AI-generated summary](/docs/llm-analytics/summarization) so you can quickly understand what happened without digging into every span:
+I can see exactly how the agent decided which tools to call, what data it gathered, and how it turned all of that into prose. Each trace also gets an [AI-generated summary](/docs/ai-observability/summarization) so you can quickly understand what happened without digging into every span:
 
 ![Trace view showing the full agent workflow with AI-generated summary](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trace_view_summary_standup_5f1559dc95.png)
 
 ### Prompt management
 
-One thing I quickly realized: hardcoding prompts in source code is a pain when you're iterating on tone and formatting. So I moved all my prompts into [PostHog's prompt management](/docs/llm-analytics/prompts). The agent pulls its instructions, style guide, and context templates from PostHog at runtime:
+One thing I quickly realized: hardcoding prompts in source code is a pain when you're iterating on tone and formatting. So I moved all my prompts into [PostHog's prompt management](/docs/prompt-management). The agent pulls its instructions, style guide, and context templates from PostHog at runtime:
 
 - `standup-agent-instructions` - the main system prompt with workflow, formatting rules, and feedback detection
 - `custom-style` - formatting rules that enforce Slack mrkdwn links and match team conventions
@@ -241,17 +241,17 @@ For my standup agent it doesn't matter (my half-baked vibecoded prompts are open
 
 ### Tool usage
 
-The [tools tab](/docs/llm-analytics/tools) shows me which tools the agent calls most and how long they take. Turns out `get_pr_details` and `get_activity_feed` dominate - you can see `get_pr_details` right at the top with the most calls. That was actually a surprise - the agent was drilling into way more PRs than it needed to. A quick prompt tweak ("only drill into PRs that look significant") cut unnecessary API calls.
+The [tools tab](/docs/ai-observability/tools) shows me which tools the agent calls most and how long they take. Turns out `get_pr_details` and `get_activity_feed` dominate - you can see `get_pr_details` right at the top with the most calls. That was actually a surprise - the agent was drilling into way more PRs than it needed to. A quick prompt tweak ("only drill into PRs that look significant") cut unnecessary API calls.
 
 ![Tools tab showing which tools the standup agent calls most](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/tools_tab_standup_agent_73f8bd6db8.png)
 
 ### Clustering
 
-[Clustering](/docs/llm-analytics/clusters) automatically groups similar traces together. For a personal agent like this, the clusters are pretty simple - mostly "standard standup generation" vs "heavy iteration sessions" vs "quick copy-paste runs." But it's useful for spotting patterns in how I use the agent. If you're curious about how the clustering pipeline actually works under the hood, I wrote a [deep dive on how we built it](/blog/llm-analytics-clustering-how-it-works).
+[Clustering](/docs/ai-observability/clusters) automatically groups similar traces together. For a personal agent like this, the clusters are pretty simple - mostly "standard standup generation" vs "heavy iteration sessions" vs "quick copy-paste runs." But it's useful for spotting patterns in how I use the agent. If you're curious about how the clustering pipeline actually works under the hood, I wrote a [deep dive on how we built it](/blog/llm-analytics-clustering-how-it-works).
 
 ### Sentiment
 
-The [sentiment tab](/docs/llm-analytics/sentiment) is more fun. PostHog analyzes the tone of user messages, and looking at my negative ones is... humbling. Some highlights from my standup sessions:
+The [sentiment tab](/docs/ai-observability/sentiment) is more fun. PostHog analyzes the tone of user messages, and looking at my negative ones is... humbling. Some highlights from my standup sessions:
 
 - "bad bad bad!!!!!"
 - "ok this is terrible im going to exit and debug - how can this happen!"
@@ -265,7 +265,7 @@ In fairness, most of these are just me giving the agent iteration feedback ("dro
 
 ### Evals
 
-Here's where dogfooding gets real. The agent's biggest formatting headache is Slack's cursed `mrkdwn` syntax - it uses `<url|text>` instead of `[text](url)`, and the agent constantly tries to slip back into regular markdown. So I set up an [evaluation](/docs/llm-analytics/evaluations) that automatically checks every generation: "did it use correct Slack-style markdown formatting?"
+Here's where dogfooding gets real. The agent's biggest formatting headache is Slack's cursed `mrkdwn` syntax - it uses `<url|text>` instead of `[text](url)`, and the agent constantly tries to slip back into regular markdown. So I set up an [evaluation](/docs/ai-evals) that automatically checks every generation: "did it use correct Slack-style markdown formatting?"
 
 The eval results summary tells the whole story. Generations that pass tend to use correct Slack mrkdwn links, simple bullets, and plain text headers. The failures? The agent keeps trying to sneak in `**bold**` headers, `[text](url)` markdown links, and occasionally dumps raw JSON outputs. My favorite failure pattern: the agent would use `<link|text>` syntax for headings (correct for links, completely wrong for headers) — Slack doesn't even have heading syntax, so it just needs to use plain text like `Did:`.
 
@@ -387,15 +387,15 @@ You'll need:
 
 The broader lesson here: if you're building AI features, instrument them from day one.
 
-PostHog's [LLM analytics](/docs/llm-analytics) gives you:
-- **[Tracing](/docs/llm-analytics/traces)** - See exactly what your agents are doing
-- **[Cost tracking](/docs/llm-analytics/calculating-costs)** - Know what you're spending on API calls
-- **[Evals](/docs/llm-analytics/evaluations)** - Measure quality systematically
-- **[Prompt management](/docs/llm-analytics/prompts)** - Version and iterate on prompts without redeploying
-- **[Clustering](/docs/llm-analytics/clusters)** and **[sentiment](/docs/llm-analytics/sentiment)** - Spot patterns in how your agent is used
-- **[User feedback](/docs/llm-analytics/collect-user-feedback)** - Link quality signals to specific traces
+PostHog's [AI Observability](/docs/ai-observability) gives you:
+- **[Tracing](/docs/ai-observability/traces)** - See exactly what your agents are doing
+- **[Cost tracking](/docs/ai-observability/calculating-costs)** - Know what you're spending on API calls
+- **[Evals](/docs/ai-evals)** - Measure quality systematically
+- **[Prompt management](/docs/prompt-management)** - Version and iterate on prompts without redeploying
+- **[Clustering](/docs/ai-observability/clusters)** and **[sentiment](/docs/ai-observability/sentiment)** - Spot patterns in how your agent is used
+- **[User feedback](/docs/ai-observability/collect-user-feedback)** - Link quality signals to specific traces
 
-The OpenAI Agents SDK integration is [available in `posthog-python`](https://github.com/PostHog/posthog-python/pull/408). Check out our other integrations for [LangChain](/docs/llm-analytics/installation/langchain), [OpenAI](/docs/llm-analytics/installation/openai), and [many other frameworks](/docs/llm-analytics/installation).
+The OpenAI Agents SDK integration is [available in `posthog-python`](https://github.com/PostHog/posthog-python/pull/408). Check out our other integrations for [LangChain](/docs/ai-observability/installation/langchain), [OpenAI](/docs/ai-observability/installation/openai), and [many other frameworks](/docs/ai-observability/installation).
 
 ## Stick it to your standup bot
 

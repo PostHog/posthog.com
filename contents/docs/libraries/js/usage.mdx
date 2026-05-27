@@ -380,6 +380,10 @@ It is also possible to manually capture exceptions using the `captureException` 
 posthog.captureException(error, additionalProperties)
 ```
 
+## Logs
+
+The browser SDK ships first-class support for [PostHog Logs](/docs/logs): structured records via `posthog.logger.*` / `posthog.captureLog`, plus optional `console.*` autocapture. For setup, manual flushing, and the full config reference, see the [JavaScript web logs installation guide](/docs/logs/installation/javascript).
+
 ## Amending or sampling events
 
 Since version 1.187.0, you can provide a `before_send` function when initializing the SDK to amend, filter, sample, or reject events before they are sent to PostHog.

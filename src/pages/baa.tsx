@@ -1,159 +1,68 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Layout from 'components/Layout'
 import { heading } from 'components/Home/classes'
 import { SEO } from 'components/seo'
 import { sexyLegalMenu } from '../navs'
-import Tooltip from 'components/Tooltip'
-import { IconInfo, IconRevert, IconSend } from '@posthog/icons'
-import { TrackedCTA } from 'components/CallToAction'
 import Link from 'components/Link'
-import Confetti from 'react-confetti'
-import usePostHog from 'hooks/usePostHog'
 import CloudinaryImage from 'components/CloudinaryImage'
+import Tooltip from 'components/Tooltip'
+
+const APP_LEGAL_URL = 'https://app.posthog.com/legal'
+
+const PlaceholderTooltipContent = () => (
+    <>
+        Generate your BAA at{' '}
+        <a href={APP_LEGAL_URL} target="_blank" rel="noopener noreferrer" className="underline">
+            app.posthog.com/legal
+        </a>{' '}
+        to fill in your details and get it countersigned.
+    </>
+)
+
+const Placeholder = ({ children }: { children: React.ReactNode }) => (
+    <Tooltip content={() => <PlaceholderTooltipContent />} placement="top" className="[&_button]:cursor-auto">
+        <span className="relative">
+            <button type="button">
+                <span className="bg-yellow/40 font-bold px-0.5 py-0.5">{children}</span>
+            </button>
+        </span>
+    </Tooltip>
+)
 
 function BAAGenerator() {
-    const [companyName, setCompanyName] = useState('')
-    const [yourName, setYourName] = useState('')
-    const [yourTitle, setYourTitle] = useState('')
-    const [email, setEmail] = useState('')
-    const [isFormComplete, setIsFormComplete] = useState(false)
-    const [submitted, setSubmitted] = useState(false)
-    const [showConfetti, setShowConfetti] = useState(false)
-
-    const posthog = usePostHog()
-
-    const handleBaaSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        if (typeof posthog === 'undefined') return
-        if (posthog === null) return
-        if (typeof posthog.capture !== 'function') return
-        try {
-            fetch('/api/baa-export-event', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    companyName,
-                    yourName,
-                    yourTitle,
-                    email,
-                    distinctId: posthog?.get_distinct_id?.() || undefined,
-                }),
-            })
-        } catch (e) {
-            // fail silently
-        }
-        setSubmitted(true)
-        setShowConfetti(true)
-        // Hide confetti after 5 seconds
-        setTimeout(() => setShowConfetti(false), 5000)
-    }
-
-    const handleButtonClick = () => {
-        if (typeof posthog === 'undefined') return
-        if (posthog === null) return
-        if (typeof posthog.capture !== 'function') return
-        try {
-            fetch('/api/baa-export-event', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    companyName,
-                    yourName,
-                    yourTitle,
-                    email,
-                    distinctId: posthog?.get_distinct_id?.() || undefined,
-                }),
-            })
-        } catch (e) {
-            // fail silently
-        }
-        setSubmitted(true)
-        setShowConfetti(true)
-        // Hide confetti after 5 seconds
-        setTimeout(() => setShowConfetti(false), 5000)
-        // Smooth scroll to top of page
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-
-    const handleReset = () => {
-        setCompanyName('')
-        setYourName('')
-        setYourTitle('')
-        setEmail('')
-        setSubmitted(false)
-        setShowConfetti(false)
-    }
-
-    useEffect(() => {
-        setIsFormComplete(!!companyName && !!yourName && !!yourTitle && !!email)
-    }, [companyName, yourName, yourTitle, email])
-
     return (
         <Layout
             headerBlur={false}
             parent={sexyLegalMenu}
             activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase().includes('baa'))}
         >
-            {showConfetti && <Confetti recycle={false} numberOfPieces={1000} />}
-            <SEO
-                title="BAA Generator"
-                description="PostHog's Business Associate Agreement (BAA) generator"
-                image={`/images/og/baa.png`}
-            />
+            <SEO title="BAA" description="PostHog's Business Associate Agreement (BAA)" image={`/images/og/baa.png`} />
 
             <header className="print:hidden text-center">
                 <h1 className={`${heading()} overflow-hidden pt-8 pb-1`}>
                     BAA? Try BA<em className="text-red">YAY</em>!
                 </h1>
                 <h2 className="mt-2 text-xl opacity-75 font-semibold leading-tight">
-                    Generate a Business Associate Agreement (BAA) for your organization in seconds.
+                    Read PostHog's Business Associate Agreement (BAA) below — and grab a countersigned copy in seconds.
                 </h2>
             </header>
 
-            <section
-                className={`relative flex flex-col items-center mt-20 max-w-xl mx-auto bg-accent rounded px-8 pb-8 border border-primary mb-24 ${
-                    submitted ? 'block' : 'hidden'
-                }`}
-            >
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/bookworm_f7fd07d80b.png"
-                    alt="Legal hog"
-                    className="w-64"
-                />
-
-                <h1 className="text-3xl font-bold text-green">BAA request received</h1>
-                <p className="text-center">
-                    Thanks for submitting your information. If you subscribe to our Boost, Scale, or Enterprise add-on,
-                    we'll get back to you soon to finalize the agreement.
-                </p>
-                <p className="text-center mb-0">
-                    If you have any questions (or don't hear back), please contact{' '}
-                    <a href="mailto:privacy@posthog.com" className="text-primary underline">
-                        privacy@posthog.com
-                    </a>
-                    .
-                </p>
-            </section>
-
-            <section
-                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 gap-4 ${
-                    submitted ? 'hidden' : 'block'
-                }`}
-            >
+            <section className="grid @3xl:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 gap-4">
                 <div className="@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:py-4 @3xl:max-h-screen @3xl:overflow-auto @3xl:sticky top-0">
-                    <div className="flex justify-between items-center">
-                        <h2 className="mb-1 text-xl">Enter your company details</h2>
-                        <Tooltip content="Reset form" placement="top">
-                            <span className="relative">
-                                <button type="button" className="bg-accent p-1 rounded" onClick={handleReset}>
-                                    <IconRevert className="size-6" />
-                                </button>
-                            </span>
-                        </Tooltip>
-                    </div>
-                    <p className="text-sm mb-2">We'll populate your BAA with this information.</p>
-                    <p className="text-sm">After completing this form, we'll be in touch to finalize the details.</p>
-                    <p className="text-sm">After completing this form, we'll be in touch to finalize the details.</p>
+                    <h2 className="mb-1 text-xl">Want a countersigned BAA?</h2>
+                    <p className="text-sm">
+                        Head to{' '}
+                        <Link to={APP_LEGAL_URL} external className="font-semibold underline">
+                            app.posthog.com/legal
+                        </Link>{' '}
+                        inside your PostHog organization. That's where you generate, sign, and download a real, valid
+                        BAA — countersigned by us.
+                    </p>
+                    <p className="text-sm">
+                        The version below is the exact same agreement, displayed here for your reading pleasure. It's
+                        not binding on its own — it only counts once it's been generated and countersigned through the
+                        app.
+                    </p>
                     <p className="text-sm">
                         Important: You'll need to be subscribed to our{' '}
                         <Link to="/platform-packages#boost-add-on">Boost</Link>,{' '}
@@ -161,179 +70,60 @@ function BAAGenerator() {
                         <Link to="/platform-packages#enterprise-add-on">Enterprise</Link> add-on to get a BAA.
                     </p>
 
-                    {!submitted && (
-                        <form>
-                            <div className="grid grid-cols-5 gap-2 items-center mt-4">
-                                <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="companyName">
-                                    Company name
-                                </label>
-                                <input
-                                    id="companyName"
-                                    type="text"
-                                    placeholder="Company name"
-                                    value={companyName}
-                                    onChange={(e) => setCompanyName(e.target.value)}
-                                    className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-primary text-primary"
-                                    required
-                                />
+                    <Link
+                        to={APP_LEGAL_URL}
+                        external
+                        className="inline-block mt-4 px-4 py-2 rounded bg-red text-white font-semibold no-underline hover:bg-red/90"
+                    >
+                        Generate a BAA in PostHog
+                    </Link>
 
-                                <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="yourName">
-                                    Representative name
-                                </label>
-                                <input
-                                    id="yourName"
-                                    type="text"
-                                    placeholder="Representative name"
-                                    value={yourName}
-                                    onChange={(e) => setYourName(e.target.value)}
-                                    className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-primary text-primary"
-                                    required
-                                />
-
-                                <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="yourTitle">
-                                    Representative title
-                                </label>
-                                <input
-                                    id="yourTitle"
-                                    type="text"
-                                    placeholder="Representative title"
-                                    value={yourTitle}
-                                    onChange={(e) => setYourTitle(e.target.value)}
-                                    className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-primary text-primary"
-                                    required
-                                />
-
-                                <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="email">
-                                    Representative email
-                                </label>
-                                <input
-                                    id="email"
-                                    type="email"
-                                    placeholder="Representative email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-primary text-primary"
-                                    required
-                                />
-                            </div>
-                        </form>
-                    )}
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/bookworm_f7fd07d80b.png"
+                        alt="Legal hog"
+                        className="w-48 mt-8 mx-auto block"
+                    />
                 </div>
 
                 <div className="@3xl:col-span-3 bg-white text-primary dark:text-black px-4 @3xl:px-8 pt-4 pb-24 border-y @3xl:border-y-0 border-primary @3xl:shadow-xl rounded relative">
-                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky top-[57px] @3xl:top-[108px] z-10">
-                        <div className="font-bold dark:text-white text-left">Business Associate Agreement Preview</div>
-                        <Tooltip
-                            content={() => (
-                                <div className="max-w-xs @3xl:max-w-sm print:hidden">
-                                    {isFormComplete ? (
-                                        <>
-                                            <h4 className="text-base mb-1">Ready to send?</h4>
-                                            <p className="mb-0 text-[15px]">
-                                                Clicking this button will submit your information and we'll get in touch
-                                                to finalize the details.
-                                            </p>
-                                        </>
-                                    ) : (
-                                        <>
-                                            Fill out all the fields <br className="@3xl:hidden" />
-                                            to send for signature.
-                                        </>
-                                    )}
-                                </div>
-                            )}
-                            placement="left"
+                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm border-b border-light -mx-8 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky top-[57px] @3xl:top-[108px] z-10 gap-4">
+                        <div className="font-bold dark:text-white text-left">Business Associate Agreement preview</div>
+                        <Link
+                            to={APP_LEGAL_URL}
+                            external
+                            className="px-3 py-1.5 rounded bg-red text-white text-sm font-semibold no-underline hover:bg-red/90 whitespace-nowrap"
                         >
-                            <span className="relative">
-                                <TrackedCTA
-                                    event={{ name: 'submitted BAA' }}
-                                    type="primary"
-                                    size="sm"
-                                    disabled={!isFormComplete}
-                                    onClick={handleButtonClick}
-                                    className="[&>span]:flex [&>span]:items-center [&>span]:gap-2"
-                                >
-                                    <span className="flex items-center gap-2">
-                                        <IconSend className="size-5" />
-                                        <span>Send for signature</span>
-                                    </span>
-                                </TrackedCTA>
-                            </span>
-                        </Tooltip>
+                            Get countersigned BAA
+                        </Link>
                     </div>
                     <div className="pt-8">
+                        <div className="bg-yellow/25 py-3 px-4 text-sm -mx-4 @3xl:-mx-8 mb-6 border-y border-light dark:text-black">
+                            <strong>Heads up:</strong> This is a preview. To make it valid, generate it inside your
+                            PostHog organization at{' '}
+                            <a
+                                href={APP_LEGAL_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline font-semibold"
+                            >
+                                app.posthog.com/legal
+                            </a>{' '}
+                            — that's the version we'll countersign.
+                        </div>
                         <p>
                             This Business Associate Agreement ("Agreement") is entered into by and between
                             <strong>
                                 {' '}
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            Fill out the form <span className="@3xl:hidden">at the top</span>
-                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
-                                            fields
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="relative">
-                                        <button type="button">
-                                            <label
-                                                htmlFor="companyName"
-                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                            >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
-                                            </label>
-                                        </button>
-                                    </span>
-                                </Tooltip>
+                                <Placeholder>[COMPANY NAME]</Placeholder>
                             </strong>{' '}
                             ("Covered Entity") and <strong>PostHog, Inc.</strong> ("Business Associate").
                         </p>
                         <p>
                             This Agreement is effective as of the date signed by Covered Entity's representative,{' '}
-                            <Tooltip
-                                content={() => (
-                                    <>
-                                        Fill out the form <span className="@3xl:hidden">at the top</span>
-                                        <span className="hidden @3xl:inline-block">to the left</span> populate these
-                                        fields
-                                    </>
-                                )}
-                                placement="top"
-                                className="[&_button]:cursor-auto"
-                            >
-                                <span className="relative">
-                                    <button type="button">
-                                        <label htmlFor="yourName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                            {yourName ? yourName : '[REPRESENTATIVE NAME]'}
-                                        </label>
-                                    </button>
-                                </span>
-                            </Tooltip>
-                            , titled
+                            <Placeholder>[REPRESENTATIVE NAME]</Placeholder>, titled
                             <strong>
                                 {' '}
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            Fill out the form <span className="@3xl:hidden">at the top</span>
-                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
-                                            fields
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="relative">
-                                        <button type="button">
-                                            <label htmlFor="yourTitle" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                                {yourTitle ? yourTitle : '[REPRESENTATIVE TITLE]'}
-                                            </label>
-                                        </button>
-                                    </span>
-                                </Tooltip>
+                                <Placeholder>[REPRESENTATIVE TITLE]</Placeholder>
                             </strong>
                             .
                         </p>
@@ -361,21 +151,22 @@ function BAAGenerator() {
                             visibility service more fully described at posthog.com (the "Service"). This BAA will amend
                             the terms of the Agreement to reflect the parties' rights and responsibilities with respect
                             to the processing and security of your Protected Health Information (defined below) under
-                            the Agreement; provided, however, that this BAA, and any obligations relating to compliance 
-                            with HIPAA hereunder, do not apply with respect to any Services (or features or functionality thereof) 
-                            that PostHog designates as not subject to this BAA, as indicated in the applicable service 
-                            interface, guidance, documentation, ordering materials, or otherwise, even if such Services 
-                            involve the processing of PHI . If you are accepting this BAA in your capacity as an employee, consultant or
-                            agent of Customer, you represent that you are an employee, consultant or agent of Customer,
-                            and that you have the authority to bind Customer to this BAA.
+                            the Agreement; provided, however, that this BAA, and any obligations relating to compliance
+                            with HIPAA hereunder, do not apply with respect to any Services (or features or
+                            functionality thereof) that PostHog designates as not subject to this BAA, as indicated in
+                            the applicable service interface, guidance, documentation, ordering materials, or otherwise,
+                            even if such Services involve the processing of PHI . If you are accepting this BAA in your
+                            capacity as an employee, consultant or agent of Customer, you represent that you are an
+                            employee, consultant or agent of Customer, and that you have the authority to bind Customer
+                            to this BAA.
                         </p>
                         <p>
-                            This BAA is only available to customers with the applicable Platform Package, as defined below, and is
-                            effective only if the Customer has the required add-on in place at the time of signing. By
-                            signing this BAA, the Customer represents and warrants that they meet the requirements of and have entered 
-                            into the applicable Platform Package. This BAA shall be null, void, and of no effect if the Customer does not meet
-                            those requirements at the time of signing, regardless of whether this BAA has been
-                            electronically executed.
+                            This BAA is only available to customers with the applicable Platform Package, as defined
+                            below, and is effective only if the Customer has the required add-on in place at the time of
+                            signing. By signing this BAA, the Customer represents and warrants that they meet the
+                            requirements of and have entered into the applicable Platform Package. This BAA shall be
+                            null, void, and of no effect if the Customer does not meet those requirements at the time of
+                            signing, regardless of whether this BAA has been electronically executed.
                         </p>
                         <p>
                             This BAA applies only to PostHog's processing of PHI for Customer in Customer's capacity as
@@ -417,9 +208,9 @@ function BAAGenerator() {
                             PHI.
                         </p>
                         <p>
-                            "Platform Package" shall mean the add-on that the Customer must be paying for to receive coverage 
-                            with a BAA (either the Boost, Scale or Enterprise{' '}
-                        <Link to="/platform-packages">add-on</Link>).
+                            "Platform Package" shall mean the add-on that the Customer must be paying for to receive
+                            coverage with a BAA (either the Boost, Scale or Enterprise{' '}
+                            <Link to="/platform-packages">add-on</Link>).
                         </p>
                         <p>
                             <strong>Customer Assurances.</strong>
@@ -597,77 +388,17 @@ function BAAGenerator() {
 
                                 <p>Representative Name</p>
                                 <p className="border-b border-black">
-                                    <Tooltip
-                                        content={() => (
-                                            <>
-                                                Fill out the form <span className="@3xl:hidden">at the top</span>
-                                                <span className="hidden @3xl:inline-block">to the left</span> populate
-                                                these fields
-                                            </>
-                                        )}
-                                        placement="top"
-                                        className="[&_button]:cursor-auto"
-                                    >
-                                        <span className="relative">
-                                            <button type="button">
-                                                <label
-                                                    htmlFor="yourName"
-                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                                >
-                                                    {yourName ? yourName : '[REPRESENTATIVE NAME]'}
-                                                </label>
-                                            </button>
-                                        </span>
-                                    </Tooltip>
+                                    <Placeholder>[REPRESENTATIVE NAME]</Placeholder>
                                 </p>
 
                                 <p>Title</p>
                                 <p className="border-b border-black">
-                                    <Tooltip
-                                        content={() => (
-                                            <>
-                                                Fill out the form <span className="@3xl:hidden">at the top</span>
-                                                <span className="hidden @3xl:inline-block">to the left</span> populate
-                                                these fields
-                                            </>
-                                        )}
-                                        placement="top"
-                                        className="[&_button]:cursor-auto"
-                                    >
-                                        <span className="relative">
-                                            <button type="button">
-                                                <label
-                                                    htmlFor="yourTitle"
-                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                                >
-                                                    {yourTitle ? yourTitle : '[REPRESENTATIVE TITLE]'}
-                                                </label>
-                                            </button>
-                                        </span>
-                                    </Tooltip>
+                                    <Placeholder>[REPRESENTATIVE TITLE]</Placeholder>
                                 </p>
 
                                 <p>Email</p>
                                 <p className="border-b border-black">
-                                    <Tooltip
-                                        content={() => (
-                                            <>
-                                                Fill out the form <span className="@3xl:hidden">at the top</span>
-                                                <span className="hidden @3xl:inline-block">to the left</span> populate
-                                                these fields
-                                            </>
-                                        )}
-                                        placement="top"
-                                        className="[&_button]:cursor-auto"
-                                    >
-                                        <span className="relative">
-                                            <button type="button">
-                                                <label htmlFor="email" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                                    {email ? email : '[REPRESENTATIVE EMAIL]'}
-                                                </label>
-                                            </button>
-                                        </span>
-                                    </Tooltip>
+                                    <Placeholder>[REPRESENTATIVE EMAIL]</Placeholder>
                                 </p>
 
                                 <p>Date</p>

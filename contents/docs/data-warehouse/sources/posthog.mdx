@@ -30,7 +30,7 @@ Some products have special event names and properties that can be useful to know
 
 - [Autocaptured events](/tutorials/hogql-autocapture) are named `$autocapture` and have the `elements_chain` property.
 
-- [LLM analytics](/docs/llm-analytics) captures events like `$ai_generation`, `$ai_span`, `$ai_embedding` with properties like `$ai_model`, `$ai_input_tokens`, and `$ai_total_cost_usd`.
+- [AI Observability](/docs/ai-observability) captures events like `$ai_generation`, `$ai_span`, `$ai_embedding` with properties like `$ai_model`, `$ai_input_tokens`, and `$ai_total_cost_usd`.
 
 - [Error tracking](/docs/error-tracking) captures `$exception` events with properties like `$exception_list` and `$exception_fingerprint` both with a specific expected schema.
 
@@ -92,6 +92,40 @@ Unlike the other tables, the `sessions` table stores all its properties as separ
 | [View additional session properties](/docs/data/sessions#session-properties) | See [full list](/docs/data/sessions#session-properties) of session properties             |
 
 The `sessions` table is heavily used in [web analytics](/docs/web-analytics). It is also useful for [marketing analytics](/docs/web-analytics/marketing-analytics) and [session-based metrics](/tutorials/session-metrics) more broadly.
+
+### `session_replay_features`
+
+The `session_replay_features` table contains aggregated behavioral metrics for [Session Replay](/docs/session-replay) sessions. It's useful for analyzing user interaction patterns, detecting frustration signals like rage clicks and dead clicks, and understanding session quality.
+
+Some of the columns in the `session_replay_features` table are:
+
+| Column                            | Description                                                          |
+| --------------------------------- | -------------------------------------------------------------------- |
+| `session_id`                      | Unique identifier for the session                                    |
+| `distinct_id`                     | Unique identifier for the user                                       |
+| `min_first_timestamp`             | Timestamp of the first event in the session                          |
+| `max_last_timestamp`              | Timestamp of the last event in the session                           |
+| `event_count`                     | Total number of events in the session                                |
+| `click_count`                     | Number of click events                                               |
+| `keypress_count`                  | Number of keypress events                                            |
+| `rage_click_count`                | Number of rage clicks detected                                       |
+| `dead_click_count`                | Number of dead clicks detected                                       |
+| `scroll_event_count`              | Number of scroll events                                              |
+| `total_scroll_magnitude`          | Total scroll distance                                                |
+| `max_scroll_y`                    | Maximum scroll depth reached                                         |
+| `mouse_distance_traveled`         | Total distance traveled by the mouse in pixels                       |
+| `mouse_direction_change_count`    | Number of mouse direction changes                                    |
+| `page_visit_count`                | Number of pages visited                                              |
+| `console_error_count`             | Number of console errors                                             |
+| `console_error_after_click_count` | Console errors that occurred after a click                           |
+| `network_request_count`           | Number of network requests                                           |
+| `network_failed_request_count`    | Number of failed network requests                                    |
+| `max_idle_gap_ms`                 | Maximum idle time between actions in milliseconds                    |
+| `text_selection_count`            | Number of text selections                                            |
+| `unique_url_count`                | Count of unique URLs (requires `uniqExactMerge()` to query)          |
+| `unique_click_target_count`       | Count of unique click targets (requires `uniqExactMerge()` to query) |
+
+> **Note:** The `unique_url_count` and `unique_click_target_count` columns store ClickHouse aggregate function states. Wrap them with `uniqExactMerge()` in your query to get the actual count, e.g. `SELECT uniqExactMerge(unique_url_count) FROM session_replay_features`.
 
 ### `query_log`
 
@@ -252,6 +286,40 @@ The `system.data_warehouse_tables` table contains metadata about data warehouse 
 | `updated_at`              | When the table was last updated                |
 | `deleted`                 | Whether the table is deleted (1 = yes, 0 = no) |
 | `deleted_at`              | When the table was deleted                     |
+
+### `system.data_modeling_endpoint_versions`
+
+The `system.data_modeling_endpoint_versions` table contains version history for API endpoints. Each endpoint can have multiple versions with different queries and configurations.
+
+| Column              | Description                                     |
+| ------------------- | ----------------------------------------------- |
+| `id`                | Unique identifier for the endpoint version      |
+| `team_id`           | Team ID the endpoint version belongs to         |
+| `endpoint_id`       | ID of the parent endpoint                       |
+| `version`           | Version number                                  |
+| `description`       | Description of the endpoint version             |
+| `query`             | JSON containing the HogQL query definition      |
+| `cache_age_seconds` | Cache duration in seconds                       |
+| `created_at`        | When the version was created                    |
+| `is_active`         | Whether the version is active (1 = yes, 0 = no) |
+| `columns`           | JSON containing column definitions              |
+
+### `system.data_modeling_endpoints`
+
+The `system.data_modeling_endpoints` table contains metadata about API endpoints in your project. These endpoints expose HogQL query results via REST API.
+
+| Column                 | Description                                       |
+| ---------------------- | ------------------------------------------------- |
+| `id`                   | Unique identifier for the endpoint                |
+| `team_id`              | Team ID the endpoint belongs to                   |
+| `name`                 | Name of the endpoint                              |
+| `is_active`            | Whether the endpoint is active (1 = yes, 0 = no)  |
+| `current_version`      | Current active version number                     |
+| `derived_from_insight` | ID of the insight this endpoint was derived from  |
+| `created_at`           | When the endpoint was created                     |
+| `updated_at`           | When the endpoint was last updated                |
+| `last_executed_at`     | When the endpoint was last executed               |
+| `deleted`              | Whether the endpoint is deleted (1 = yes, 0 = no) |
 
 ### `system.early_access_features`
 

@@ -171,7 +171,7 @@ Here are a few habits and behaviors we adopt at PostHog to achieve this:
 
 - **Doing manual trace reviews.** We hold a weekly "traces hour" where we go through real user sessions that have user feedback ratings. For example, we found a case where PostHog AI confidently told a user that feature flags don't support scheduled releases and then backtracked. Automated tests wouldn't have caught that since the agent did respond; the response was just incorrect.
 
-- **Feeding our intuition into a loop.** We then amplify the value of those manual reviews by building [evals](/docs/llm-analytics/evaluations) based on what our human eyes caught – both the good and the bad. Once, we found a session where PostHog AI correctly intervened when it spotted a weird data pattern that the user hadn't noticed. We turned that into an eval case so that future model or prompt changes don't regress the good behaviors we want to keep.
+- **Feeding our intuition into a loop.** We then amplify the value of those manual reviews by building [evals](/docs/ai-evals) based on what our human eyes caught – both the good and the bad. Once, we found a session where PostHog AI correctly intervened when it spotted a weird data pattern that the user hadn't noticed. We turned that into an eval case so that future model or prompt changes don't regress the good behaviors we want to keep.
 
 *Words by Jina Yoon who hereby declares herself agentpilled.*
 

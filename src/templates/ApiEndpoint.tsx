@@ -16,6 +16,7 @@ import { InlineCode } from 'components/InlineCode'
 import { CallToAction } from 'components/CallToAction'
 import ReaderView from 'components/ReaderView'
 import { Heading } from 'components/Heading'
+import MCPCallout from 'components/Docs/MCPCallout'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -105,7 +106,7 @@ const titleMap: Record<string, string> = {
     hog_functions: 'Hog functions',
     insights: 'Insights',
     invites: 'Invites',
-    llm_analytics: 'LLM analytics',
+    llm_analytics: 'AI Observability',
     llm_prompts: 'LLM prompts',
     members: 'Members',
     notebooks: 'Notebooks',
@@ -566,6 +567,7 @@ interface ApiEndpointData {
     data: {
         name: string
         nextURL?: string
+        previousURL?: string
         items: string
         components: string
     }
@@ -582,6 +584,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
     const name = data.data.name
     const title = titleMap[name] || humanReadableName(name)
     const nextURL = data.data.nextURL
+    const previousURL = data.data.previousURL
     const paths = {}
     const components = {
         inlineCode: InlineCode,
@@ -644,6 +647,17 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
 
                     <Endpoints paths={paths} containerRef={contentContainerRef} />
 
+                    {(previousURL || nextURL) && (
+                        <div className="mt-8 flex gap-4">
+                            {previousURL && (
+                                <CallToAction to={previousURL} type="outline">
+                                    ← Previous page
+                                </CallToAction>
+                            )}
+                            {nextURL && <CallToAction to={nextURL}>Next page →</CallToAction>}
+                        </div>
+                    )}
+
                     {items.map((item, index) => {
                         const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
 
@@ -659,6 +673,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                         <Heading id={pathID(item.httpVerb, item.pathName)} as="h2">
                                             {generateName(item)}
                                         </Heading>
+                                        <MCPCallout operationId={item.operationId} />
                                         {mdxNode?.body && (
                                             <div className="article-content">
                                                 <div className="text-primary">
@@ -736,11 +751,14 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                         )
                     })}
 
-                    {nextURL && (
-                        <CallToAction className="mt-8" to={nextURL}>
-                            Next page →
-                        </CallToAction>
-                    )}
+                    <div className="mt-8 flex gap-4">
+                        {previousURL && (
+                            <CallToAction to={previousURL} type="outline">
+                                ← Previous page
+                            </CallToAction>
+                        )}
+                        {nextURL && <CallToAction to={nextURL}>Next page →</CallToAction>}
+                    </div>
                 </div>
             </ReaderView>
         </ScrollSpyProvider>
@@ -767,6 +785,7 @@ export const query = graphql`
             name
             url
             nextURL
+            previousURL
             components
         }
     }

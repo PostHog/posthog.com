@@ -70,7 +70,7 @@ There is also the option to choose a lower tier, high deductible health plan (HD
 
 #### Pension
 
-In the UK, we use [Royal London](https://www.royallondon.com/). Team members contribute 5% and PostHog contributes 4%, but you can opt out if you like. You can also transfer out of the plan as frequently as you want, in case you would rather manage your own private pension. 
+In the UK, we use [Royal London](https://www.royallondon.com/). Team members contribute 5% and PostHog contributes 4%, but you can opt out if you like. You can also transfer out of the plan as frequently as you want, in case you would rather manage your own private pension. If you wish to increase your own pension contributions, you can download the Parallel Employee benefits app and submit the request.
 
 #### Private health insurance
 
