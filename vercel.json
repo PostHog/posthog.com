@@ -830,6 +830,7 @@
         { "source": "/docs/integrate/next-js", "destination": "/docs/libraries/next-js" },
         { "source": "/docs/integrate/sentry", "destination": "/docs/error-tracking" },
         { "source": "/docs/integrate/rudderstack", "destination": "/docs/libraries/rudderstack" },
+        { "source": "/blog/training-AI-models", "destination": "/blog/training-ai-models" },
         { "source": "/docs/integrate/segment", "destination": "/docs/libraries/segment" },
         { "source": "/docs/sdks/ios", "destination": "/docs/libraries/ios" },
         { "source": "/signup/cloud/enterprise", "destination": "/contact-sales" },
