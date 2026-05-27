@@ -9,8 +9,8 @@ author:
   - james-hawkins
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/ai_models_blog_8cc6ccc808.png
 featuredImageType: full
-category: PostHog news
-tags: CEO diaries
+tags:
+ - CEO diaries
 ---
 
 I've never been more excited about the future of PostHog. 
