@@ -20,7 +20,7 @@ const PLATFORM_ORDER = [
     '/docs/error-tracking/installation/python',
     '/docs/error-tracking/installation/manual',
     '/docs/error-tracking/installation/flutter',
-    '/docs/error-tracking/installation/nuxt',
+    '/docs/error-tracking/installation/nuxt-3-7',
     '/docs/error-tracking/installation/angular',
     '/docs/error-tracking/installation/android',
     '/docs/error-tracking/installation/svelte',

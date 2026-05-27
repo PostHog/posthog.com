@@ -16,13 +16,21 @@ showStepsToc: true
   Add the following to your `webpack.config.js` file:
 
   ```js file=webpack.config.js
-  const PostHogPlugin = require('@posthog/webpack-plugin')
+  const { PosthogWebpackPlugin } = require('@posthog/webpack-plugin')
 
   module.exports = {
     // ... your existing config
     plugins: [
+<<<<<<< HEAD
       new PostHogPlugin({
         personalApiKey: process.env.POSTHOG_API_KEY, // Personal API key
+||||||| 564cbfd5e
+      new PostHogPlugin({
+        personalApiKey: process.env.POSTHOG_API_KEY, // Personal API Key
+=======
+      new PosthogWebpackPlugin({
+        personalApiKey: process.env.POSTHOG_API_KEY, // Personal API Key
+>>>>>>> master
         projectId: process.env.POSTHOG_PROJECT_ID, // Project ID
         host: process.env.POSTHOG_HOST, // (optional) defaults to https://us.i.posthog.com
         sourcemaps: { // (optional)

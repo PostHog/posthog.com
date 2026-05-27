@@ -1083,10 +1083,6 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/product-announcements',
                     },
                     {
-                        name: 'Product positioning',
-                        url: '/handbook/marketing/positioning',
-                    },
-                    {
                         name: 'Incident comms',
                         url: '/handbook/marketing/incident-comms',
                     },
@@ -1130,43 +1126,43 @@ export const handbookSidebar = [
                         name: 'Working with the website team',
                         url: '/handbook/marketing/working-with-website',
                     },
+                ],
+            },
+            {
+                name: 'Positioning and selling',
+                url: '/handbook/marketing/positioning',
+                children: [
                     {
-                        name: 'How we position and sell PostHog',
-                        url: '/handbook/marketing/how-we-position-and-sell',
-                        children: [
-                            {
-                                name: 'Analytics',
-                                url: '/handbook/marketing/how-we-position-and-sell/analytics',
-                            },
-                            {
-                                name: 'Session replay',
-                                url: '/handbook/marketing/how-we-position-and-sell/session-replay',
-                            },
-                            {
-                                name: 'Feature flags',
-                                url: '/handbook/marketing/how-we-position-and-sell/feature-flags',
-                            },
-                            {
-                                name: 'Experiments',
-                                url: '/handbook/marketing/how-we-position-and-sell/experiments',
-                            },
-                            {
-                                name: 'Data warehouse',
-                                url: '/handbook/marketing/how-we-position-and-sell/data-warehouse',
-                            },
-                            {
-                                name: 'Data pipelines',
-                                url: '/handbook/marketing/how-we-position-and-sell/data-pipelines',
-                            },
-                            {
-                                name: 'LLM analytics',
-                                url: '/handbook/marketing/how-we-position-and-sell/llm-analytics',
-                            },
-                            {
-                                name: 'PostHog AI',
-                                url: '/handbook/marketing/how-we-position-and-sell/posthog-ai',
-                            },
-                        ],
+                        name: 'Analytics',
+                        url: '/handbook/marketing/positioning/analytics',
+                    },
+                    {
+                        name: 'Session replay',
+                        url: '/handbook/marketing/positioning/session-replay',
+                    },
+                    {
+                        name: 'Feature flags',
+                        url: '/handbook/marketing/positioning/feature-flags',
+                    },
+                    {
+                        name: 'Experiments',
+                        url: '/handbook/marketing/positioning/experiments',
+                    },
+                    {
+                        name: 'Data warehouse',
+                        url: '/handbook/marketing/positioning/data-warehouse',
+                    },
+                    {
+                        name: 'Data pipelines',
+                        url: '/handbook/marketing/positioning/data-pipelines',
+                    },
+                    {
+                        name: 'LLM analytics',
+                        url: '/handbook/marketing/positioning/llm-analytics',
+                    },
+                    {
+                        name: 'PostHog AI',
+                        url: '/handbook/marketing/positioning/posthog-ai',
                     },
                 ],
             },
@@ -1641,6 +1637,10 @@ export const handbookSidebar = [
                     {
                         name: 'Metabase account analysis',
                         url: '/handbook/onboarding/metabase-account-analysis',
+                    },
+                    {
+                        name: 'Creating sandboxes',
+                        url: '/handbook/growth/sales/sandboxes',
                     },
                 ],
             },
@@ -2787,6 +2787,18 @@ export const docsMenu = {
                                 {
                                     name: 'Overview',
                                     url: '/docs/model-context-protocol',
+                                },
+                                {
+                                    name: 'Use cases',
+                                    url: '/docs/model-context-protocol/use-cases',
+                                },
+                                {
+                                    name: 'Tools reference',
+                                    url: '/docs/model-context-protocol/tools',
+                                },
+                                {
+                                    name: 'FAQ and advanced setup',
+                                    url: '/docs/model-context-protocol/faq',
                                 },
                                 {
                                     name: 'Code editors',
@@ -4772,11 +4784,11 @@ export const docsMenu = {
                         },
                         {
                             name: 'Nuxt',
-                            url: '/docs/error-tracking/installation/nuxt',
+                            url: '/docs/error-tracking/installation/nuxt-3-7',
                             children: [
                                 {
                                     name: '3.7 and above',
-                                    url: '/docs/error-tracking/installation/nuxt',
+                                    url: '/docs/error-tracking/installation/nuxt-3-7',
                                 },
                                 {
                                     name: '3.6 and below',
