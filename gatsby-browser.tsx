@@ -35,6 +35,13 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
                 $pathname: prevLocation.pathname,
                 $current_url: prevLocation.href,
             })
+
+            if (isKoreanPath(prevLocation.pathname) && !isKoreanPath(location.pathname)) {
+                window.posthog.capture('ko_navigated_to_english', {
+                    from: prevLocation.pathname,
+                    to: location.pathname,
+                })
+            }
         }
 
         window?.posthog?.capture('$pageview')
