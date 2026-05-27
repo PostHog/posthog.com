@@ -56,6 +56,16 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        {
+            "source": "/handbook/marketing/how-we-position-and-sell",
+            "destination": "/handbook/marketing/positioning",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/marketing/how-we-position-and-sell/:path*",
+            "destination": "/handbook/marketing/positioning/:path*",
+            "statusCode": 301
+        },
         { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
         { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
         {
