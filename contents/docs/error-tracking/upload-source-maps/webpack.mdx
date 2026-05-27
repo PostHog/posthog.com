@@ -21,16 +21,8 @@ showStepsToc: true
   module.exports = {
     // ... your existing config
     plugins: [
-<<<<<<< HEAD
-      new PostHogPlugin({
-        personalApiKey: process.env.POSTHOG_API_KEY, // Personal API key
-||||||| 564cbfd5e
-      new PostHogPlugin({
-        personalApiKey: process.env.POSTHOG_API_KEY, // Personal API Key
-=======
       new PosthogWebpackPlugin({
-        personalApiKey: process.env.POSTHOG_API_KEY, // Personal API Key
->>>>>>> master
+        personalApiKey: process.env.POSTHOG_API_KEY, // Personal API key
         projectId: process.env.POSTHOG_PROJECT_ID, // Project ID
         host: process.env.POSTHOG_HOST, // (optional) defaults to https://us.i.posthog.com
         sourcemaps: { // (optional)
