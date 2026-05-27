@@ -175,7 +175,7 @@ You can see a signed multi-year contract set up in this way by navigating to Doc
 
 Customers only get an uptime SLA if:
 
-1. They have subscribed to the Enterprise add-on; or
+1. They have subscribed to the Enterprise package; or
 2. You agree it with them as a special term as part of their contract if they are spending $100k+ ARR _post_ discount (i.e. $ spend, not credit usage). 
 
 An uptime SLA are not available to customers outside of these cases. You should certainly not agree to an SLA for customers on regular monthly contracts, and even for annual contracts it is not a given - it's one of multiple pieces you may have in play as you negotiate terms (much like a case study).
