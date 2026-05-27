@@ -56,19 +56,14 @@ showStepsToc: true
 
 <CalloutBox icon="IconInfo" title="Using @rollup/plugin-typescript?" type="info">
 
-If your build uses [`@rollup/plugin-typescript`](https://www.npmjs.com/package/@rollup/plugin-typescript), set `sourceMap: true` and `inlineSources: true` in its options so the PostHog plugin receives the source maps it needs to upload:
+If your build uses [`@rollup/plugin-typescript`](https://www.npmjs.com/package/@rollup/plugin-typescript), set `sourceMap: true` and `inlineSources: true` in your `tsconfig.json` so the PostHog plugin receives the source maps it needs to upload:
 
-```js
-import typescript from '@rollup/plugin-typescript'
-
-export default {
-  plugins: [
-    typescript({
-      sourceMap: true,
-      inlineSources: true,
-    }),
-    // ...other plugins, including posthog()
-  ],
+```json file=tsconfig.json
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "inlineSources": true
+  }
 }
 ```
 
