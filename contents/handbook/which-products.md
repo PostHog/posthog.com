@@ -47,7 +47,6 @@ From our [roadmap](/roadmap), here's what we're currently working on:
 - Logs - `#project-logs`
 - Product autonomy - `#team-array`
 - Customer Analytics `#team-web-analytics`
-  - Revenue analytics now included in customer analytics
 - Workflows `#team-workflows`
 
 And these are the products we think we'll focus on next:
