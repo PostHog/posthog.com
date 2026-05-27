@@ -98,7 +98,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             your editor.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
-                            <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                            <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                 Get started free
                             </CallToAction>
                             <CallToAction
@@ -181,7 +181,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             </button>
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                     Install PostHog SDK
                                 </CallToAction>
                             </div>
@@ -437,7 +437,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             />
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                     Install session replay
                                 </CallToAction>
                             </div>
@@ -480,7 +480,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             <p>That's it! You're ready to start integrating.</p>
 
                             <div className="flex flex-wrap gap-2 mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                     Get started free
                                 </CallToAction>
                                 <CallToAction

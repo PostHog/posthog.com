@@ -96,7 +96,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             tools you ship with. No dashboard spelunking required.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
-                            <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                            <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                 Get started free
                             </CallToAction>
                             <CallToAction
@@ -205,7 +205,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             </button>
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                     Get started free
                                 </CallToAction>
                             </div>
@@ -326,7 +326,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             </ul>
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                     Try it yourself — free
                                 </CallToAction>
                             </div>
@@ -496,7 +496,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             />
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                     Get started free
                                 </CallToAction>
                             </div>
@@ -592,7 +592,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             </div>
 
                             <div className="mt-6">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                     Get started free
                                 </CallToAction>
                             </div>
@@ -629,7 +629,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             <p>That's it! You're ready to start integrating.</p>
 
                             <div className="flex flex-wrap gap-2 mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                     Get started free
                                 </CallToAction>
                                 <CallToAction
