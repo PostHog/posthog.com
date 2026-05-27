@@ -1303,7 +1303,7 @@ const FloatingTOC = ({ isTocVisible, toggleToc, tableOfContents, contentRef }: F
     return (
         <aside
             data-scheme="secondary"
-            className={`flex-shrink-0 z-10 flex flex-col bg-primary/75 dark:bg-primary border-l border-primary backdrop-blur transition-[width] duration-300 overflow-hidden ${
+            className={`flex-shrink-0 flex flex-col bg-primary/75 dark:bg-primary border-l border-primary backdrop-blur transition-[width] duration-300 overflow-hidden ${
                 isTocVisible ? 'w-[250px]' : 'w-12'
             }`}
         >
