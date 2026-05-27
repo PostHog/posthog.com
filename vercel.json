@@ -1772,6 +1772,10 @@
             "destination": "/docs/error-tracking/installation/nextjs"
         },
         {
+            "source": "/docs/error-tracking/installation/nuxt",
+            "destination": "/docs/error-tracking/installation/nuxt-3-7"
+        },
+        {
             "source": "/docs/ai-engineering/observability",
             "destination": "/docs/ai-observability/start-here"
         },
