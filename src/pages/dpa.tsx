@@ -278,6 +278,21 @@ function DpaGenerator() {
                                 <br />
                                 <div className="block text-sm opacity-75">Compliance, but make it bestie energy</div>
                             </li>
+                            <li className="pl-7 relative">
+                                <input
+                                    type="radio"
+                                    id="torontomans"
+                                    name="mode"
+                                    value="torontomans"
+                                    className="absolute left-1 top-1"
+                                    onChange={handleModeChange}
+                                />
+                                <label className="font-semibold" htmlFor="torontomans">
+                                    Toronto mans edition
+                                </label>
+                                <br />
+                                <div className="block text-sm opacity-75">Compliance, but make it mandem from the 6</div>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -768,6 +783,93 @@ function DpaGenerator() {
                             </p>
 
                             <p className="font-bold">Cool? Cool. Sign below and we're locked in 💯</p>
+
+                            <div className="pb-16">
+                                <SignatureFields />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`${mode === 'torontomans' ? 'block' : 'hidden'} [&>p]:text-[15px] pb-4`}>
+                        <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 border-t border-light">
+                            <strong>Notice:</strong> Toronto mans translation, my g. Not legally binding on its own —
+                            you still need the real one from{' '}
+                            <a
+                                href={APP_LEGAL_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline font-semibold"
+                            >
+                                app.posthog.com/legal
+                            </a>{' '}
+                            for it to hit different in court.
+                        </div>
+
+                        <div className="@container mx-auto max-w-3xl">
+                            <h2 className="pt-8 pb-0 mt-0">The DPA, Toronto mans edition 🇨🇦</h2>
+
+                            <p>
+                                Ayo wagwan my g, this is where you and PostHog link up and pinky-promise about your
+                                users' ting. No cap, it's giving compliance season fr fr.
+                            </p>
+
+                            <h3>Who's who in the mandem</h3>
+                            <p>
+                                <strong>You</strong> = the controller. Main mans energy — you call the shots on whose
+                                data gets processed and why.
+                                <br />
+                                <strong>Us (PostHog)</strong> = the processor. We're your bredrin handling the data
+                                exactly how you said, on god.
+                            </p>
+
+                            <h3>What we're agreeing on (deadass)</h3>
+                            <p>
+                                You're trusting us with personal data, and we're not gonna do nuttin sus with it. We
+                                only process it for the reasons you tell us, full stop. No side missions, no rebranding
+                                it as "ours" — that'd be straight illegal and not the move, wallahi.
+                            </p>
+
+                            <h3>Security (we're not on the bs)</h3>
+                            <p>
+                                We lock it down proper: encryption in transit and at rest, access controls, regular
+                                security reviews, the whole ting. SOC 2 and HIPAA — we bagged them ones.
+                            </p>
+
+                            <h3>If it goes sideways (the drama)</h3>
+                            <p>
+                                If there's a breach we're letting you know without delay, fam. We're not finna ghost.
+                                You'll hear from us quicker than mans hears about something popping off in the ends,
+                                and we'll give you everything you need to handle your own notification duties.
+                            </p>
+
+                            <h3>Sub-processors (the squad)</h3>
+                            <p>
+                                We work with a small mandem of other companies (cloud hosting, the usual ones) to help
+                                run the platform. They're vetted, they're on the same vibe re: data protection, and
+                                we'll keep you posted if anyone new joins the link-up.
+                            </p>
+
+                            <h3>International transfers (passport ting)</h3>
+                            <p>
+                                If your data needs to cross borders, we use the proper Standard Contractual Clauses
+                                'cause we're not tryna catch heat from no regulator. EU to US? Bet. UK addendum? Say
+                                less. Swiss FDPA? We got you, dawg.
+                            </p>
+
+                            <h3>Your rights, bredrin</h3>
+                            <p>
+                                You can audit us, you can ask us to delete or return data, and you can ask us to help
+                                you answer data subject requests. Just link us — we'll cooperate 'cause we got nuttin
+                                to hide. Open book ting, ahlie.
+                            </p>
+
+                            <h3>When this ends (it's a wrap)</h3>
+                            <p>
+                                When you stop using PostHog, we'll delete or return your data per your instructions. No
+                                keeping receipts, no clinging to old screenshots. We move on like grown mans.
+                            </p>
+
+                            <p className="font-bold">Cool? Bet. Sign below and we're locked in, you dun know 💯</p>
 
                             <div className="pb-16">
                                 <SignatureFields />
