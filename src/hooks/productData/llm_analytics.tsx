@@ -42,7 +42,7 @@ import {
 import MCPInstall from 'components/Products/MCPInstall'
 
 export const llmAnalytics = {
-    name: 'LLM Analytics',
+    name: 'AI Observability',
     Icon: IconLlmAnalytics,
     description: 'Track costs, performance, and usage of your AI features',
     handle: 'llm_analytics',
@@ -59,9 +59,9 @@ export const llmAnalytics = {
     },
     volume: 100000,
     seo: {
-        title: 'LLM Analytics – Observe and optimize AI products in PostHog',
+        title: 'AI Observability – Observe and optimize AI products in PostHog',
         description:
-            'Monitor and optimize AI products with LLM Analytics. Get full observability across every conversation. See model performance, cost, and errors.',
+            'Monitor and optimize AI products with AI Observability. Get full observability across every conversation. See model performance, cost, and errors.',
     },
     overview: {
         title: 'Observe and debug AI in production',
@@ -79,7 +79,7 @@ export const llmAnalytics = {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_desktop_2399cc57d6.png',
             srcMobile: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_mobile_b9565d0690.png',
-            alt: 'LLM analytics dashboard',
+            alt: 'AI Observability dashboard',
             classes: '',
             // imgClasses: 'rounded-tl-md shadow-2xl',
             classesMobile: '',
@@ -88,7 +88,7 @@ export const llmAnalytics = {
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_light_a436da72f7.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
-            alt: 'LLM Analytics screenshot',
+            alt: 'AI Observability screenshot',
             classes: 'justify-end items-end pl-4 @lg:pl-6',
             imgClasses: 'rounded-tl-md shadow-2xl',
         },
@@ -100,7 +100,7 @@ export const llmAnalytics = {
     // },
     customers: {
         elevenlabs: {
-            headline: 'uses LLM analytics with session replays (and everything else)',
+            headline: 'uses AI Observability with session replays (and everything else)',
             description:
                 'PostHog is amazing. It reins in the chaos to have everything in one place. Otherwise it’s quite overwhelming to try and understand what’s working and what’s not.',
         },
@@ -110,7 +110,7 @@ export const llmAnalytics = {
                 "If you're building a new product, just use PostHog. It's a no-brainer. It's the only all-in-one platform like it for developers.",
         },
         posthog: {
-            headline: 'monitors the usage and performance of PostHog AI with LLM Analytics',
+            headline: 'monitors the usage and performance of PostHog AI with AI Observability',
             description:
                 'We use our own AI observability product to attribute costs, monitor latency and errors, compare models, and iterate on prompts in production.',
         },
@@ -129,7 +129,7 @@ export const llmAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_screenshot_ce72bbf715.png',
-                    alt: 'LLM Analytics dashboard',
+                    alt: 'AI Observability dashboard',
                     className: 'justify-center items-center',
                 },
             ],
@@ -144,7 +144,7 @@ export const llmAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/generations_screenshot_56f0f313ae.png',
-                    alt: 'LLM Analytics generations',
+                    alt: 'AI Observability generations',
                     className: 'justify-center items-center',
                 },
             ],
@@ -159,7 +159,7 @@ export const llmAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/trace_screenshot_1e0bdd0ad3.png',
-                    alt: 'LLM Analytics traces',
+                    alt: 'AI Observability traces',
                     className: 'justify-center items-center',
                 },
             ],
@@ -299,7 +299,7 @@ export const llmAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_screenshot_2_d93795cbdc.png',
-                    alt: 'LLM Analytics users',
+                    alt: 'AI Observability users',
                     className: 'justify-center items-center',
                 },
             ],
@@ -314,7 +314,7 @@ export const llmAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/errors_screenshot_e413f3f20b.png',
-                    alt: 'LLM Analytics errors',
+                    alt: 'AI Observability errors',
                     className: 'justify-center items-center',
                 },
             ],
@@ -329,7 +329,7 @@ export const llmAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/sessions_screenshot_d6fc106ce9.png',
-                    alt: 'LLM Analytics sessions',
+                    alt: 'AI Observability sessions',
                     className: 'justify-center items-center',
                 },
             ],
@@ -344,7 +344,7 @@ export const llmAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/playground_screenshot_2_3364a67436.png',
-                    alt: 'LLM Analytics playground',
+                    alt: 'AI Observability playground',
                     className: 'justify-center items-center',
                 },
             ],
@@ -359,7 +359,7 @@ export const llmAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
-                    alt: 'LLM Analytics evaluations',
+                    alt: 'AI Observability evaluations',
                     className: 'justify-center items-center',
                 },
             ],
@@ -373,7 +373,7 @@ export const llmAnalytics = {
         //     images: [
         //         {
         //             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
-        //             alt: 'LLM Analytics prompts',
+        //             alt: 'AI Observability prompts',
         //             className: 'justify-center items-center',
         //         },
         //     ],
@@ -387,7 +387,7 @@ export const llmAnalytics = {
             color: 'blue',
             headline: 'Go beyond basic metrics',
             description:
-                'LLM observability tools tell you "how many calls?" LLM analytics shows how your AI features drive retention, revenue, and engagement.',
+                'LLM observability tools tell you "how many calls?" AI Observability shows how your AI features drive retention, revenue, and engagement.',
             features: [
                 {
                     title: 'Correlation analysis',
@@ -409,7 +409,7 @@ export const llmAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/LLM_features_analysis_500cdd8b92.png',
-                    alt: 'LLM Analytics analysis',
+                    alt: 'AI Observability analysis',
                     className: 'justify-center items-center',
                 },
             ],
@@ -420,7 +420,7 @@ export const llmAnalytics = {
             color: 'seagreen',
             headline: 'Customizations',
             description:
-                'LLM analytics works best when you can analyze prompts, cost, and latency alongside events and metrics that matter to you.',
+                'AI Observability works best when you can analyze prompts, cost, and latency alongside events and metrics that matter to you.',
             features: [
                 {
                     title: 'Custom dashboards and SQL',
@@ -442,7 +442,7 @@ export const llmAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/LLM_features_70ab277d76.png',
-                    alt: 'LLM Analytics analysis',
+                    alt: 'AI Observability analysis',
                     className: 'justify-center items-center p-8',
                 },
             ],
@@ -528,7 +528,7 @@ export const llmAnalytics = {
         },
     ],
     postHogOnPostHog: {
-        title: 'How PostHog uses LLM Analytics',
+        title: 'How PostHog uses AI Observability',
         benefits: [
             {
                 title: 'Analyze costs',
@@ -603,7 +603,7 @@ export const llmAnalytics = {
                     subtitle: 'in addition to other axes',
                 },
                 {
-                    title: 'You want to combine LLM analytics with other tools',
+                    title: 'You want to combine AI Observability with other tools',
                     subtitle: 'like Error Tracking and Session Replay',
                 },
                 {

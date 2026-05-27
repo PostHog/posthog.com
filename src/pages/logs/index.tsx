@@ -79,7 +79,7 @@ export default function Logs(): JSX.Element {
         ],
         content: {
             answersDescription: 'Track costs, performance, and usage of your AI features with detailed analytics',
-            answersHeadline: 'What can LLM Analytics help me discover?',
+            answersHeadline: 'What can AI Observability help me discover?',
         },
     })
 

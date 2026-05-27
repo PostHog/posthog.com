@@ -37,6 +37,27 @@ We recommend purchasing:
 2. **Always register both keys** with every service so the second acts as a backup if you lose one.
 3. **Disable OTP mode** — avoid spamming OTPs if you accidentally touch your YubiKey by installing the [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) or by running `brew install ykman && ykman config usb --disable OTP`
 
+## Mobile device management (MDM)
+
+We use [Fleet](https://fleetdm.com/) to manage all of our laptops. It applies targeted policies that raise the security baseline of every device, including:
+
+- minimum password length
+- screen lock
+- auto-install of software updates
+- auto-provisioning of software like 1Password
+- absence of static SSH keys on the filesystem
+
+We also use Fleet to investigate supply chain attacks, for example to see whether any laptops have been exposed to a malicious package or browser extension.
+
+We chose Fleet because they are open source and a [transparent](https://fleetdm.com/better) company. In the same spirit, all of the policies we provision are stored in git at <PrivateLink url="https://github.com/PostHog/fleet-gitops">PostHog/fleet-gitops</PrivateLink>. Any employee can see the same data our security team sees by clicking the Fleet icon in the macOS menu bar and choosing "My device".
+
+Fleet does not see:
+
+- your screen
+- your messages or photos
+- what you type
+- which URLs you visit
+
 ## SOC 2
 import SOC2 from './_snippets/soc2.mdx'
 

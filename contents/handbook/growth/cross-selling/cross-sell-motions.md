@@ -100,7 +100,7 @@ One way of approaching this that we have seen work is a research -> QBR -> recom
 2. Some sort of engagement (QBRs?) to understand business priorities and tie them to PostHog
 3. Make specific recommendations around what to adopt and how it will help with business priorities
 
-For example, customer B2C SaaS has a business model selling subscription plans. Digging in to understand the differentiators of the plans and reviewing their custom events to ensure they are collecting the appropriate data. Come to the QBR ready to discuss the particulars of their situation. You may or may not have the info you need to make a recommendation on the call, but at the very least, you should have a direction to suggest. You could recommend customer/revenue analytics, experiments for plan adoption, and surveys for user feedback given what you know about their business model.
+For example, customer B2C SaaS has a business model selling subscription plans. Digging in to understand the differentiators of the plans and reviewing their custom events to ensure they are collecting the appropriate data. Come to the QBR ready to discuss the particulars of their situation. You may or may not have the info you need to make a recommendation on the call, but at the very least, you should have a direction to suggest. You could recommend customer analytics, experiments for plan adoption, and surveys for user feedback given what you know about their business model.
 
 > This doesn't always need to be a formal QBR process. Some form of research -> discovery/interaction/recommendation is the basic flow here.
 
@@ -146,12 +146,12 @@ Adoption paths are good to frame products as point in time or natural progressio
 
 Here are some other known examples that aren't necessarily 0 to 1 linear adoption, or working backwards from what a customer is using outside of PostHog: 
 - Data warehouse has continued to receive special attention since the launch of PostHog's related products. 
-  - LLM analytics + data warehouse - enrich LLM analytics with data from other sources like Stripe or Supabase
-  - Customer/Revenue analytics + data warehouse - natural fit between connecting up stripe and enriching data further
+  - AI Observability + data warehouse - enrich AI Observability with data from other sources like Stripe or Supabase
+  - Customer analytics + data warehouse - natural fit between connecting up stripe and enriching data further
   - Read a hot topic on [churn in high growth customers](https://posthog.slack.com/docs/TSS5W8YQZ/F0A0FGBNCNL) for specific advice
 - Feature flag + mobile replay - use for sampling/roll out that is not natively supported by mobile replay
 - Experiments / feature flags + error tracking - insight into errors for new/beta features, and seeing the impact of those errors on conversion rates is valuable
-- Feature flags + LLM analytics - ability to granularly segment features based on cost/engagement of users. i.e. you can release higher cost models to users who have already shown a willingness to spend
+- Feature flags + AI Observability - ability to granularly segment features based on cost/engagement of users. i.e. you can release higher cost models to users who have already shown a willingness to spend
 
 ### Bundle "Features"
 Bundling is another good way to position products by customer type and stage.  The following product stacks match certain types of user needs with value. 
@@ -168,14 +168,8 @@ Bundling is another good way to position products by customer type and stage.  T
 **Value story**: "Roll out safely, catch issues instantly, measure impact scientifically"  
 **Ideal for**: High-velocity teams with continuous deployment
 
-#### The "revenue optimization" stack
-
-**Products**: Analytics + Experiments + Revenue Analytics (via Data Warehouse)  
-**Value story**: "Track user behavior, test pricing changes, measure revenue impact" 
-**Ideal for**: B2B businesses focused on LTV/CAC
-
 #### The "vibey AI startup" stack
-**Products**: Analytics + Flags + LLM Analytics + Error tracking
+**Products**: Analytics + Flags + AI Observability + Error tracking
 **Value story**: "Tie user behavior to run cost, launching features that are both user requested and revenue generating"
 **Ideal for:** AI-focused startups optimizing for cost efficiency and user engagement
 
@@ -261,7 +255,7 @@ These questions will naturally surface use cases for session replay, feature fla
 | --- | --- | --- |
 | When an error occurs, how easy is it for you to see exactly which user actions led up to it and how it affected the experience? | Debugging relies often relies on reproducing error | Error Tracking tied directly to replays makes root cause and impact obvious. |
 | If you’ve built your own error tracking, how much effort goes into maintaining and correlating it with analytics? | Time wasted maintaining infra, blind spots in analysis. | Lightweight SDK that's tightly integrated with other products. |
-| How do you decide which errors to fix first? | Prioritizing by gut feeling or frequency, not business impact. | Error Tracking + Product & Revenue Analytics can show which errors have the greatest impact. |
+| How do you decide which errors to fix first? | Prioritizing by gut feeling or frequency, not business impact. | Error Tracking + Product Analytics can show which errors have the greatest impact. |
 
 > For more recommendations, look at the [Error tracking motions](/handbook/growth/cross-selling/error-tracking-cross-sell)
 
@@ -280,22 +274,15 @@ These questions will naturally surface use cases for session replay, feature fla
 | When launching a new feature, how do you manage risk of rollouts failing? | “Big bang” releases increase risk + stress. | Feature Flags enable safe, gradual rollouts & rollbacks. |
 | How do you measure whether users actually engage with a feature once it’s enabled? | No feedback loop between rollout and usage metrics. | PostHog connects flags directly to analytics & experiments. |
 | What’s your process for debugging an experiment if users drop off unexpectedly? | Experiments may fail without clarity on root cause. | Session Replay + Error Tracking pinpoint where the experience broke down. |
-| How do you currently measure the business impact (e.g., revenue, retention) of an experiment? | Results limited to engagement metrics, missing real business outcomes. | Revenue Analytics + Product Analytics + Data Warehous show both engagement and business impact. |
+| How do you currently measure the business impact (e.g., retention, conversion) of an experiment? | Results limited to engagement metrics, missing real business outcomes. | Product Analytics + Data Warehouse show both engagement and business impact. |
 
-### Customer/Revenue analytics
-
-| Question | Pain Revealed | PostHog Advantage |
-| --- | --- | --- |
-| How do you measure the direct revenue impact of your features? | Work disconnected from business outcomes. | Revenue Analytics ties feature usage to revenue & LTV. |
-| How do you weigh roadmap decisions against revenue impact today? | Guesswork in prioritization. | Revenue Analytics reveals which features drive business outcomes. |
-
-### LLM analytics
+### AI Observability
 
 | Question | Pain Revealed | PostHog Advantage |
 | --- | --- | --- |
-| When your LLM-driven features underperform, how do you pinpoint why? | No clear visibility into model errors or user friction. | LLM Analytics shows usage, performance, and cost data together. |
-| How do you know which LLM features are helping vs hurting users? | No clear way to measure LLM impact on user behavior or business outcomes. | LLM Analytics + Session Replay shows which interactions drive value vs cause drop-offs. |
-| How do you evaluate your LLM analytics in the context of broader product goals? | Standalone tools miss product context. | Integration ties LLM performance to actual product outcomes. |
+| When your LLM-driven features underperform, how do you pinpoint why? | No clear visibility into model errors or user friction. | AI Observability shows usage, performance, and cost data together. |
+| How do you know which LLM features are helping vs hurting users? | No clear way to measure LLM impact on user behavior or business outcomes. | AI Observability + Session Replay shows which interactions drive value vs cause drop-offs. |
+| How do you evaluate your AI Observability in the context of broader product goals? | Standalone tools miss product context. | Integration ties LLM performance to actual product outcomes. |
 
 ### Surveys
 

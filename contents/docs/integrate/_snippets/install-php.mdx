@@ -1,15 +1,7 @@
-Add the following to `composer.json`:
-```json
-{
-    "require": {
-        "posthog/posthog-php": "3.0.*"
-    }
-}
-```
-And then install the dependencies with the command:
+Install the package with Composer:
 
 ```bash
-composer install
+composer require posthog/posthog-php
 ```
 
 In your app, set your project token before making any calls.
@@ -20,6 +12,6 @@ PostHog\PostHog::init("<ph_project_token>",
 );
 ```
 
-> **Note:** As a rule of thumb, we do not recommend having API keys or tokens in plaintext. Setting it as an environment variable is best.
+> **Note:** As a rule of thumb, we do not recommend having API keys or tokens in plaintext. Setting them as environment variables is best. The PHP SDK reads `POSTHOG_API_KEY` and `POSTHOG_HOST` when you omit the project token or host.
 
 You can find your project token and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
