@@ -1530,10 +1530,12 @@ function ReaderViewContent({
                                     )}
                                     {title && !hideTitle && (
                                         <h1
-                                            className={`mx-auto transition-all ${
+                                            className={`transition-all ${
                                                 fullWidthContent || body?.type !== 'mdx'
                                                     ? 'max-w-full'
-                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                                    : contentMaxWidthClass
+                                                    ? contentMaxWidthClass
+                                                    : 'mx-auto max-w-2xl'
                                             }`}
                                         >
                                             {title}
@@ -1541,10 +1543,12 @@ function ReaderViewContent({
                                     )}
                                     {(body?.date || body?.contributors || body?.tags) && (
                                         <div
-                                            className={`flex items-center space-x-2 mb-4 flex-wrap mx-auto transition-all ${
+                                            className={`flex items-center space-x-2 mb-4 flex-wrap transition-all ${
                                                 fullWidthContent || body?.type !== 'mdx'
                                                     ? 'max-w-full'
-                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                                    : contentMaxWidthClass
+                                                    ? contentMaxWidthClass
+                                                    : 'mx-auto max-w-2xl'
                                             }`}
                                         >
                                             {body?.contributors && (
@@ -1573,10 +1577,12 @@ function ReaderViewContent({
                                             <div
                                                 id="mobile-toc"
                                                 data-scheme="secondary"
-                                                className={`@4xl/app-reader:hidden mt-4 mx-auto transition-all ${
+                                                className={`@4xl/app-reader:hidden mt-4 transition-all ${
                                                     fullWidthContent || body?.type !== 'mdx'
                                                         ? 'max-w-full'
-                                                        : contentMaxWidthClass || 'max-w-2xl'
+                                                        : contentMaxWidthClass
+                                                        ? contentMaxWidthClass
+                                                        : 'mx-auto max-w-2xl'
                                                 }`}
                                             >
                                                 <TableOfContents

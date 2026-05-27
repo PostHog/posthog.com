@@ -7,30 +7,13 @@ import SessionReplayInstallationPlatforms from './installation/_snippets/install
 import { IconGraph, IconToggle, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import AuthAwareOSButton from 'components/OSButton/AuthAwareOSButton'
+import ImageAnnotations from 'components/ImageAnnotations'
 
-## See real user behavior
-
-Install the PostHog SDK and enable [Session Replay](/docs/session-replay) with a couple lines of config.
-
-PostHog automatically captures every click, scroll, input, and page view. Session recording starts the moment a user lands on your page.
-
-Web and mobile are both supported by our SDKs.
-
-### Platforms
-
-<SessionReplayInstallationPlatforms />
-
-<OSButton variant="primary" asLink to="/docs/session-replay/installation">
-  Install PostHog SDK
-</OSButton>
-
-## Inspect replays with dev tools
+<ImageAnnotations.FromProduct product="session_replay" screenshot="overview" set="dev-tools" layout="split" title="Inspect replays with dev tools">
 
 Every session replay comes with a browser-like DevTools suite that is synced to the recording's timeline.
 
 It's a full debugging environment with video playback.
-
-<ImageAnnotations.FromProduct product="session_replay" screenshot="overview" set="dev-tools" />
 
 Open the **Activity** panel to inspect each moment.
 
@@ -41,6 +24,8 @@ Open the **Activity** panel to inspect each moment.
 <OSButton variant="primary" asLink to="/docs/session-replay/how-to-watch-recordings">
   Watch session replays
 </OSButton>
+
+</ImageAnnotations.FromProduct>
 
 ## Create playlists and AI summaries
 

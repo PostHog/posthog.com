@@ -1,6 +1,7 @@
 import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { Popover } from 'components/RadixUI/Popover'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { useImageAnnotations, type Annotation } from './index'
 import { useProductScreenshot } from './useProductScreenshot'
 
@@ -39,17 +40,34 @@ function Marker({ annotation, index }: { annotation: Annotation; index: number }
     const scaleClass = isActive ? 'scale-125' : 'scale-100'
 
     if (type === 'numbered') {
+        // Controlled tooltip: open whenever this marker is "active", so hovering
+        // either the marker or its matching key row reveals the details (handy when
+        // the key is scrolled off-screen on a tall image).
         return (
             <div style={anchorStyle} className="z-10">
-                <span
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    className={`flex items-center justify-center size-6 rounded-full bg-red text-white text-[13px] font-semibold shadow-md ring-2 ring-white transition-transform duration-200 ${scaleClass} ${
-                        isActive ? 'shadow-lg' : ''
-                    }`}
+                <Tooltip
+                    open={isActive}
+                    side="top"
+                    contentClassName="max-w-xs"
+                    trigger={
+                        <span
+                            onMouseEnter={() => setHoveredIndex(index)}
+                            onMouseLeave={() => setHoveredIndex(null)}
+                            className={`flex items-center justify-center size-6 rounded-full bg-red text-white text-[13px] font-semibold shadow-md ring-2 ring-white transition-transform duration-200 cursor-default ${scaleClass} ${
+                                isActive ? 'shadow-lg' : ''
+                            }`}
+                        >
+                            {index + 1}
+                        </span>
+                    }
                 >
-                    {index + 1}
-                </span>
+                    <div className="max-w-xs">
+                        <strong className="text-[15px]">{annotation.title}</strong>
+                        {annotation.description && (
+                            <p className="text-sm text-secondary mt-1 mb-0 leading-normal">{annotation.description}</p>
+                        )}
+                    </div>
+                </Tooltip>
             </div>
         )
     }

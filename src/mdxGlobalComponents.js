@@ -27,7 +27,6 @@ import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
 import { HiddenSection } from './components/HiddenSection'
 import { HubSpotForm } from './components/HubSpotForm'
-import ImageAnnotations from './components/ImageAnnotations'
 import ImageSlider from './components/ImageSlider'
 import { KeyboardShortcut } from './components/KeyboardShortcut'
 import { Label } from './components/Label'
@@ -99,7 +98,6 @@ export const shortcodes = {
     GDPRForm,
     HiddenSection,
     HubSpotForm,
-    ImageAnnotations,
     KeyboardShortcut,
     LPCTA,
     Label,

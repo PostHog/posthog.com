@@ -167,7 +167,10 @@ ${item('            ')}
     },
 },
 
-// 2. Render anywhere — the image (light + dark) stays in sync with the hook:
+// 2. Render anywhere — the image (light + dark) stays in sync with the hook.
+//    In MDX, import it at the top of the file first (like Tab):
+import ImageAnnotations from 'components/ImageAnnotations'
+
 <ImageAnnotations.FromProduct product="${productHandle}" screenshot="${screenshotKey}" set="${setName}" />`
         }
 
@@ -197,7 +200,9 @@ ${item('            ')}
 </ImageAnnotations>`
                 : ''
 
-        return `export const annotations = [
+        return `import ImageAnnotations from 'components/ImageAnnotations'
+
+export const annotations = [
 ${item('    ')}
 ]
 
@@ -455,10 +460,11 @@ ${combined}${split}`
                                     <div className="bg-accent border border-primary rounded p-3 text-sm text-primary">
                                         {codeTarget === 'mdx' ? (
                                             <p className="mb-0">
-                                                Paste straight into an <code>.mdx</code> article — no import needed,{' '}
-                                                <code>ImageAnnotations</code> is a global MDX component. The{' '}
+                                                Paste into an <code>.mdx</code> article. The <code>import</code> and{' '}
                                                 <code>export const</code> must stay at the top level (a bare{' '}
-                                                <code>const</code> won't work in MDX).{' '}
+                                                <code>const</code> won't work in MDX, and the namespaced{' '}
+                                                <code>ImageAnnotations.*</code> API needs the import — like{' '}
+                                                <code>Tab</code>).{' '}
                                                 {usesProductRef
                                                     ? 'The image references the product hook, so it stays in sync.'
                                                     : 'Using a pasted URL, so the image is hard-coded here.'}{' '}

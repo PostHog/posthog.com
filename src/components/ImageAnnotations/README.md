@@ -60,11 +60,28 @@ screenshot. Renders the provider, image, and key for you.
 | ------------- | -------------- | ---------------------------------------------------------------------------------- |
 | `product`     | `string`       | Product handle, e.g. `"session_replay"`.                                           |
 | `screenshot`  | `string`       | Key in that product's `screenshots` object, e.g. `"overview"`.                     |
+| `title`       | `ReactNode`    | Section heading. In `split` it sits in the left column next to the image.          |
 | `set`         | `string`       | Name of an annotation set stored at `screenshots[screenshot].annotations[set]`.    |
 | `annotations` | `Annotation[]` | Inline annotations — overrides `set`.                                              |
 | `type`        | `'dots' \| 'numbered'` | Overrides the set's type (defaults to the set's type, then `numbered`).    |
 | `showKey`     | `boolean`      | Force the key on/off (defaults to on for `numbered`).                              |
+| `layout`      | `'stacked' \| 'split'` | `stacked` (default) puts the image above the key. `split` is a responsive 2-column layout: `children` + key on the left, image on the right. |
+| `children`    | `ReactNode`    | Left-column content (the description/prose) in the `split` layout.                |
 | `alt`, `imgClassName`, `className`, `keyTitle` | `string` | Presentation overrides.                                       |
+
+#### Split layout
+
+`layout="split"` arranges the section responsively using `@container/reader-content` queries (the same named container the product slide templates use). Below `@2xl` it stacks **description → image → key**; at/above `@2xl` it's two columns — description top-left, key bottom-left, image filling the right column.
+
+```mdx
+<ImageAnnotations.FromProduct product="session_replay" screenshot="overview" set="dev-tools" layout="split">
+
+Every session replay comes with a browser-like DevTools suite synced to the timeline.
+
+<OSButton variant="primary" asLink to="/docs/session-replay/how-to-watch-recordings">Watch session replays</OSButton>
+
+</ImageAnnotations.FromProduct>
+```
 
 #### Storing annotation sets in a hook
 
@@ -96,12 +113,23 @@ screenshots: {
 
 #### Using in MDX
 
-`ImageAnnotations` is a **global MDX component** (registered in `src/mdxGlobalComponents`),
-so you can use `<ImageAnnotations.FromProduct />` directly in any `.md`/`.mdx` file with no
-import. If you'd rather keep the annotations inline in the file, note that MDX only allows
-ESM — use **`export const`**, not a bare `const`:
+The API is namespaced (`ImageAnnotations.FromProduct`), so — like other dotted MDX
+components such as `Tab` — **import it once** at the top of the `.md`/`.mdx` file. It can't
+be a global shortcode, because MDX compiles member expressions (`ImageAnnotations.X`) to a
+free variable reference that must be in scope.
 
 ```mdx
+import ImageAnnotations from 'components/ImageAnnotations'
+
+<ImageAnnotations.FromProduct product="session_replay" screenshot="overview" set="dev-tools" />
+```
+
+If you'd rather keep the annotations inline in the file, note that MDX only allows ESM —
+use **`export const`**, not a bare `const`:
+
+```mdx
+import ImageAnnotations from 'components/ImageAnnotations'
+
 export const annotations = [{ x: 30, y: 50, title: 'Debug views' }]
 
 <ImageAnnotations.FromProduct product="session_replay" screenshot="overview" annotations={annotations} />
