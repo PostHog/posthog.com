@@ -56,6 +56,16 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        {
+            "source": "/handbook/marketing/how-we-position-and-sell",
+            "destination": "/handbook/marketing/positioning",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/marketing/how-we-position-and-sell/:path*",
+            "destination": "/handbook/marketing/positioning/:path*",
+            "statusCode": 301
+        },
         { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
         { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
         {
@@ -87,6 +97,7 @@
         { "source": "/teams/words-pictures", "destination": "/teams/website" },
         { "source": "/teams/brand-vibes", "destination": "/teams/website" },
         { "source": "/teams/llm-gateway", "destination": "/teams/ai-gateway" },
+        { "source": "/teams/llm-analytics", "destination": "/teams/ai-observability" },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
@@ -1627,6 +1638,7 @@
         { "source": "/docs/cdp/filter-out", "destination": "/docs/cdp/transformations/posthog-filter-out-plugin" },
         { "source": "/docs/web-analytics/revenue-tracking", "destination": "/docs/revenue-analytics" },
         { "source": "/docs/web-analytics/revenue-analytics", "destination": "/docs/revenue-analytics" },
+        { "source": "/revenue-analytics", "destination": "/docs/revenue-analytics" },
         {
             "source": "/startups-alif",
             "destination": "/startups"
@@ -1758,6 +1770,10 @@
         {
             "source": "/docs/error-tracking/nextjs",
             "destination": "/docs/error-tracking/installation/nextjs"
+        },
+        {
+            "source": "/docs/error-tracking/installation/nuxt",
+            "destination": "/docs/error-tracking/installation/nuxt-3-7"
         },
         {
             "source": "/docs/ai-engineering/observability",
