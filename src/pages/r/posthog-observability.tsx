@@ -104,7 +104,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
             >
                 <div className="grid grid-cols-1 @lg:grid-cols-[2fr_0.6fr] gap-10 items-center mb-6 max-w-7xl mx-auto">
                     <div>
-                        <h1 className="text-3xl md:text-5xl !mb-4">A fearsome threesome bundled for debugging.</h1>
+                        <h1 className="text-3xl md:text-5xl !mb-4">A fearsome threesome bundled for debugging</h1>
                         <p className="text-lg md:text-xl mb-2 text-secondary">
                             Error tracking, session replay, and logs in one. An MCP server so you can debug without ever
                             opening a dashboard or learning a UI.
