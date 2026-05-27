@@ -98,6 +98,8 @@ exception := posthog.Exception{
 client.Enqueue(exception)
 ```
 
+For `net/http` apps, use [Go SDK request context](/docs/libraries/go#request-context) to attach request metadata, session IDs, and request-scoped user context to exception events. Wrap handlers with `posthog.NewRequestContextMiddleware`, then enqueue exceptions with `posthog.EnqueueWithContext(r.Context(), client, exception)`.
+
 ### Option B: Automatic capture with slog
 
 The SDK provides a `SlogCaptureHandler` that wraps Go's standard `log/slog` logger and automatically captures log records as exceptions.
