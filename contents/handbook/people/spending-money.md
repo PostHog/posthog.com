@@ -112,7 +112,7 @@ Joining an offsite? _Only use the offsite budget_, not your User Limit - it help
   - You can claim a mileage reimbursement through Brex. **Do not** separately expense fuel.
 - What if I accidentally used the company card for a personal expense?
   - Login to Brex > find the charge > click on 'Repay' > Repay to the bank account details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md)
-  - For Revolut charges, ping [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ)
+  - For Revolut charges, repay to the bank account details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md#repayments-to-revolut)
 - How do I get access to WeWork?
   - We have a company All Access account - ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
 - What if I've received a bill I need Finance to pay?
@@ -153,7 +153,7 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
       - US only: use your Brex since we earn cashback
       - UK only: use your Revolut since we claim back the VAT
       - Do not get AppleCare since it doesn't have great value for money
-    - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old or significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
+    - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old, (for engineering machines) has less than 48GB of RAM, or is significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
     - Part of `#team-client-libraries` and need to purchase a phone for testing? Talk to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
 
 #### Yubikey (for specific roles only)
