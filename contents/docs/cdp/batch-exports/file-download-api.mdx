@@ -343,6 +343,7 @@ https://mcp.posthog.com/mcp?features=file_download
 
 ## Constraints
 
+- **Concurrency limit** - Each team can have at most 20 concurrent on-demand exports running at a time. If you exceed this limit, the API returns HTTP 429 (Too Many Requests) with the error code `too_many_concurrent_file_downloads`. Wait for some exports to complete before starting new ones.
 - **Maximum date range** - The date range (`data_interval_end` minus `data_interval_start`) cannot exceed 1 week
 - **Date ordering** - `data_interval_end` must be after `data_interval_start`
 - **Event filtering** - The `include` and `exclude` parameters only apply to the `events` model
