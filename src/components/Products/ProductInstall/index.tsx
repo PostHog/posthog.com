@@ -33,7 +33,7 @@ const ProductInstall = ({
     const [tab, setTab] = useState<'ai' | 'manual'>('ai')
 
     return (
-        <div className={`@container not-prose ${className}`}>
+        <div className={`not-prose ${className}`}>
             <div className="mb-6 max-w-xs">
                 <ToggleGroup
                     title="Install method"

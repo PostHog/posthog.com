@@ -122,6 +122,25 @@ export const sessionReplay = {
             alt: 'Session replay screenshot',
             imgClasses:
                 'absolute bottom-0 left-0 max-w-[95%] @2xl:max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
+            // Named annotation sets for <ImageAnnotations.FromProduct />. Coordinates are
+            // percentages, authored via the internal tool at /image-annotator.
+            annotations: {
+                'dev-tools': {
+                    type: 'numbered',
+                    items: [
+                        { x: 27.2, y: 9.8, title: 'Debug views' },
+                        { x: 48.9, y: 7.8, title: 'DevTools' },
+                        { x: 32.6, y: 21.6, title: 'Event timeline' },
+                        {
+                            x: 33.7,
+                            y: 41,
+                            title: 'Timeline entries',
+                            description:
+                                'Custom events, DOM autocapture, network calls, console logs, web vitals, errors, PostHog activity',
+                        },
+                    ],
+                },
+            },
         },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg',

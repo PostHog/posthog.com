@@ -38,7 +38,7 @@ type LibraryNode = {
 const sortByName = (a: InstallItem, b: InstallItem) => a.name.localeCompare(b.name)
 
 const subheading = 'text-[11px] font-semibold text-secondary m-0 mb-1'
-const tileGrid = 'columns-1 @md:columns-2 @2xl:columns-3 @4xl:columns-4 gap-x-4 p-0 m-0 gap-y-1'
+const tileGrid = 'grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-4 gap-y-1 p-0 m-0'
 
 const InstallFrameworkGrid = ({
     categories,
@@ -134,7 +134,7 @@ const InstallFrameworkGrid = ({
         isSearching && visibleCategories.every((c) => c.items.every((i) => !i.name.toLowerCase().includes(lowerQuery)))
 
     return (
-        <div className={`@container ${className}`}>
+        <div className={className}>
             {searchable && (
                 <div className="mb-6 max-w-md">
                     <Input
