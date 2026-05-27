@@ -21,6 +21,9 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 - Preparing your PostHog demo.
 - Picking a recent customer call on Gong/BuildBetter to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers.
 - Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide and work through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise). Use the demo environments or your own PostHog project to test different features and use cases.
+  - [Events](/docs/data/events), [persons](/docs/data/persons), and [product analytics](/docs/product-analytics) are the foundation for everything else - start here.
+  - [Session replay](/docs/session-replay), [feature flags](/docs/feature-flags), and [experiments](/docs/experiments) are the next priority. They're PostHog's most mature products with the most overlap with everything else. But let your book guide you - if your customers are all-in on [error tracking](/docs/error-tracking), [logs](/docs/logs), or [AI observability](/docs/ai-observability), that's an opportunity to go deep early.
+  - Learn how to use the [MCP](/docs/ai-engineering) across all products. This is increasingly how customers will interact with PostHog.
 - Exploring Slack. We're public by default, so Slack is one of the richest resources you have. You'll find outreach messages that worked, prior conversations with customers, PostHog history on decisions like pricing changes, and context that didn't make it into the handbook.
 
 **How to think about each product.** As you go through the fundamentals, for each product you're trying to be able to answer:
@@ -101,9 +104,9 @@ This is the bar for end of month 1.
 
 PostHog has a lot of products, and you can't learn them all upfront, so trying to will just frustrate you. The lenses in Week 1 are the bar for each product you do learn; this section is how to figure out which products to focus on, and what to do when you hit something you don't know.
 
-**Find out the products your customers are using.** Once you have your book of business, you can see this in Vitally in a few places: the product usage widget in the CSM dashboard, the paid products widget in the default 360 dashboard, or the `paid products` trait. These look at paid usage only and won't include free-tier usage, though most of our customers aren't in free tier anyway. There's no point going deep on session replay if none of your customers use it, so use your book to guide what to focus on.
+**Find out the products your customers are using.** Once you have your book of business, you can see this in Vitally in a few places: the product usage widget in the CSM dashboard, the paid products widget in the default 360 dashboard, or the `paid products` trait. These look at paid usage only and won't include free-tier usage, though most of our customers aren't in free tier anyway. There's no point going deep on session replay initially if none of your customers use it, so use your book to guide what to prioritise first.
 
-**Start with the foundations, then focus on what your book uses.** A few areas are useful regardless of who your customers are - product analytics, persons, groups, implementation, and billing. Past that, prioritise the products that show up most in your book, that keep coming up in customer conversations, and that have expansion opportunities.
+**Start with the foundations, then focus on what your book uses.** Events, persons, and product analytics are useful regardless of who your customers are. Session replay, feature flags, and experiments are the next priority - they're PostHog's most mature products and have the most overlap with everything else. Past that, prioritise the products that show up most in your book, that keep coming up in customer conversations, and that have expansion opportunities. Implementation, billing, and MCP are worth learning alongside all of the above.
 
 **When you hit something you don't know:**
 
