@@ -22,6 +22,98 @@ window.posthog.LIB_VERSION
 
 You can also check using the [SDK doctor](/docs/sdk-doctor) tool.
 
+## Check the replay status on your events
+
+Recent versions of `posthog-js` attach diagnostic properties to every event that describe what session replay was doing at the moment the event was captured. Reading these is usually the fastest way to figure out _why_ a session wasn't recorded before you start changing settings.
+
+You can query them from the [SQL editor](/docs/sql) for a specific session ID:
+
+```sql
+SELECT
+    properties.$has_recording AS has_recording,
+    properties.$recording_status AS recording_status,
+    properties.$session_recording_start_reason AS start_reason,
+    properties.$sdk_debug_recording_script_not_loaded AS script_blocked,
+    properties.$sdk_debug_replay_url_trigger_status AS url_trigger,
+    properties.$sdk_debug_replay_event_trigger_status AS event_trigger,
+    properties.$sdk_debug_replay_linked_flag_trigger_status AS flag_trigger,
+    properties.$replay_sample_rate AS sample_rate,
+    properties.$lib_version AS sdk_version
+FROM events
+WHERE $session_id = '<your-session-id>'
+ORDER BY timestamp DESC
+LIMIT 1
+```
+
+Always look at the **latest** event in the session — early events may not yet reflect the final state (for example, `$has_recording` only flips to `true` once PostHog has confirmed at least one recording chunk was ingested).
+
+### The three core signals
+
+These three properties together describe replay status. Read them as a set, not in isolation.
+
+| Property | What it tells you |
+| --- | --- |
+| `$has_recording` | `true` once PostHog has confirmed a recording exists for the session. The strongest positive signal. |
+| `$recording_status` | The SDK's current state: `active`, `buffering`, `disabled`, `sampled`, or `paused`. |
+| `$session_recording_start_reason` | Why recording started (or didn't). Useful for distinguishing "we chose not to record" from "we tried but couldn't". |
+
+#### `$recording_status` values
+
+| Value | Meaning |
+| --- | --- |
+| `active` | The SDK is recording and producing snapshots. |
+| `buffering` | The SDK initialized but is waiting for a trigger, minimum duration threshold, or remote config before producing snapshots. |
+| `disabled` | Recording is turned off — either in [your project replay settings](https://us.posthog.com/settings/project-replay) or via SDK config at runtime. |
+| `sampled` | This session was included by the configured replay sample rate — recording started. |
+| `paused` | Recording is temporarily paused for this session (consent gate, programmatic `pause()`, or a max-duration cap). |
+
+#### `$session_recording_start_reason` values
+
+| Value | Meaning |
+| --- | --- |
+| `recording_initialized` | Recording started as soon as the SDK initialized. |
+| `sampling_override` | Recording started because the session was included by the sampling rules. |
+| `sampled_out` | Recording was prevented because the session was excluded by sampling. |
+| `linked_flag_match` | Recording started because a linked feature flag matched. |
+
+### Reading the combination
+
+| `$has_recording` | `$recording_status` | `$session_recording_start_reason` | What it means |
+| --- | --- | --- | --- |
+| `true` | any | any | A recording exists. If you can't find it, the issue is UI filtering, retention, or it's still processing. |
+| `null` / `false` | `active` or `sampled` | `recording_initialized` / `sampling_override` / `linked_flag_match` | Recording is running but PostHog hasn't confirmed ingestion yet, check a later event. |
+| `null` / `false` | `buffering` | any | The SDK is waiting on a [trigger](/docs/session-replay/how-to-control-which-sessions-you-record) or duration threshold, check the trigger status properties. |
+| `null` / `false` | `disabled` | any | Replay is off, either in [project settings](https://us.posthog.com/settings/project-replay) or via SDK config like `disable_session_recording: true`. |
+| `null` / `false` | any | `sampled_out` | Your sample rate excluded this session — increase the sample rate or use a trigger to guarantee capture for important flows. |
+| `null` / `false` | `paused` | any | Recording was paused mid-session — usually a consent flow or a programmatic `posthog.sessionRecording.pause()` call. |
+
+### Lifecycle
+
+A normal session's `$recording_status` typically progresses like this:
+
+```text
+disabled ──── (config or setting turns replay off)
+
+buffering ──► active ──► (recording captured, $has_recording flips to true on later events)
+    │            │
+    │            └──► paused ──► active   (consent flow, programmatic control)
+    │
+    └──► (session ends before a trigger matches, buffer discarded, no recording stored)
+```
+
+`sampled` is an alternative entry point meaning "this session was rolled into the sample" and it behaves like `active` from a capture standpoint.
+
+### Other useful diagnostic properties
+
+| Property | What it tells you |
+| --- | --- |
+| `$sdk_debug_recording_script_not_loaded` | `true` if the `recorder.js` script failed to load. Usually caused by an ad blocker or CSP — see [ad/tracking blockers](#4-adtracking-blockers) below. |
+| `$sdk_debug_replay_url_trigger_status` <br /> `$sdk_debug_replay_event_trigger_status` <br /> `$sdk_debug_replay_linked_flag_trigger_status` | Trigger states: `trigger_disabled` (none configured), `trigger_pending` (configured, waiting to match), or `trigger_matched` (fired). |
+| `$sdk_debug_replay_internal_buffer_length` <br /> `$sdk_debug_replay_flushed_size` | If `buffer_length` keeps growing across the session's events while `flushed_size` stays at `0`, the `POST /s/` upload is being blocked — usually an ad blocker or a misconfigured reverse proxy. |
+| `$replay_sample_rate` <br /> `$replay_minimum_duration` | The sample rate (0.0–1.0) and minimum duration (ms) in effect at capture time. |
+
+If you're on an older SDK version, some of these properties won't be present, `null` means "unknown", not "false". Upgrading `posthog-js` will give you a much fuller picture.
+
 ## Recordings are not being captured
 
 There are a few common reasons that you may not see recordings appear in your project.
