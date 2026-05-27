@@ -265,7 +265,9 @@ For example, you could create a Slack notification that alerts your team wheneve
 
 ### How it works
 
-Activity log notifications are powered by [data pipelines](/docs/cdp). When an activity is logged, PostHog emits an internal `$activity_log_entry_created` event that can trigger your configured destinations. This means you can use the full power of data pipelines, including custom transformations and multiple destinations.
+Activity log notifications are powered by [data pipelines](/docs/cdp). When an activity is logged, PostHog emits an internal `$activity_log_entry_created` event that triggers the notification destinations you configure from the activity logs settings page.
+
+> **Note**: `$activity_log_entry_created` is an internal-only event. It does **not** flow into your project's regular event stream, so you cannot query it from the `events` table, use it in product analytics insights, dashboards, or HogQL, or filter on it from standard [data pipeline destinations](/docs/cdp). It exists solely to drive activity log notifications configured from this settings page. If you need activity log data outside of notifications, use the [activity log API](#api-support), [HogQL on `system.activity_logs`](#query-with-hogql), or [export](#export-options) instead.
 
 ## Filtering and searching
 

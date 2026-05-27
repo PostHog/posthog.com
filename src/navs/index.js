@@ -1130,6 +1130,44 @@ export const handbookSidebar = [
                         name: 'Working with the website team',
                         url: '/handbook/marketing/working-with-website',
                     },
+                    {
+                        name: 'How we position and sell PostHog',
+                        url: '/handbook/marketing/how-we-position-and-sell',
+                        children: [
+                            {
+                                name: 'Analytics',
+                                url: '/handbook/marketing/how-we-position-and-sell/analytics',
+                            },
+                            {
+                                name: 'Session replay',
+                                url: '/handbook/marketing/how-we-position-and-sell/session-replay',
+                            },
+                            {
+                                name: 'Feature flags',
+                                url: '/handbook/marketing/how-we-position-and-sell/feature-flags',
+                            },
+                            {
+                                name: 'Experiments',
+                                url: '/handbook/marketing/how-we-position-and-sell/experiments',
+                            },
+                            {
+                                name: 'Data warehouse',
+                                url: '/handbook/marketing/how-we-position-and-sell/data-warehouse',
+                            },
+                            {
+                                name: 'Data pipelines',
+                                url: '/handbook/marketing/how-we-position-and-sell/data-pipelines',
+                            },
+                            {
+                                name: 'LLM analytics',
+                                url: '/handbook/marketing/how-we-position-and-sell/llm-analytics',
+                            },
+                            {
+                                name: 'PostHog AI',
+                                url: '/handbook/marketing/how-we-position-and-sell/posthog-ai',
+                            },
+                        ],
+                    },
                 ],
             },
         ],
@@ -1603,6 +1641,10 @@ export const handbookSidebar = [
                     {
                         name: 'Metabase account analysis',
                         url: '/handbook/onboarding/metabase-account-analysis',
+                    },
+                    {
+                        name: 'Creating sandboxes',
+                        url: '/handbook/growth/sales/sandboxes',
                     },
                 ],
             },
@@ -2494,6 +2536,10 @@ export const docsMenu = {
                             url: '/docs/api',
                         },
                         {
+                            name: 'Personal API keys',
+                            url: '/docs/api/personal-api-keys',
+                        },
+                        {
                             name: 'OAuth integration',
                             url: '/docs/api/oauth',
                         },
@@ -2715,6 +2761,10 @@ export const docsMenu = {
                             url: '/docs/getting-started/data-import-export',
                         },
                         {
+                            name: 'Event ingestion filtering',
+                            url: '/docs/data/event-filtering',
+                        },
+                        {
                             name: 'Ingestion warnings',
                             url: '/docs/data/ingestion-warnings',
                         },
@@ -2741,6 +2791,18 @@ export const docsMenu = {
                                 {
                                     name: 'Overview',
                                     url: '/docs/model-context-protocol',
+                                },
+                                {
+                                    name: 'Use cases',
+                                    url: '/docs/model-context-protocol/use-cases',
+                                },
+                                {
+                                    name: 'Tools reference',
+                                    url: '/docs/model-context-protocol/tools',
+                                },
+                                {
+                                    name: 'FAQ and advanced setup',
+                                    url: '/docs/model-context-protocol/faq',
                                 },
                                 {
                                     name: 'Code editors',
@@ -3637,16 +3699,6 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Sampling',
-                    url: '/docs/product-analytics/sampling',
-                    icon: 'IconSampling',
-                    color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Color themes',
                     url: '/docs/product-analytics/color-themes',
                     icon: 'IconPalette',
@@ -4518,6 +4570,12 @@ export const docsMenu = {
                     url: '/docs/experiments/statistics-frequentist',
                     icon: 'IconBook',
                     color: 'blue',
+                },
+                {
+                    name: 'CUPED',
+                    url: '/docs/experiments/cuped',
+                    icon: 'IconCalculator',
+                    color: 'orange',
                 },
                 {
                     name: 'Holdouts',
@@ -6697,6 +6755,7 @@ export const docsMenu = {
                         { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },
                         { name: 'React Native', url: '/docs/logs/installation/react-native' },
                         { name: 'iOS', url: '/docs/logs/installation/ios' },
+                        { name: 'Android', url: '/docs/logs/installation/android' },
                         { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],

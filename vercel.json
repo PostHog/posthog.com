@@ -58,6 +58,11 @@
     "redirects": [
         { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
         { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
+        {
+            "source": "/docs/product-analytics/sampling",
+            "destination": "/docs/product-analytics",
+            "statusCode": 301
+        },
         { "source": "/docs/api/product-tours", "destination": "/docs/api", "statusCode": 301 },
         { "source": "/docs/api/product-tours/:path*", "destination": "/docs/api", "statusCode": 301 },
         { "source": "/coupons/:path*", "destination": "https://app.posthog.com/coupons/:path*", "statusCode": 301 },
@@ -82,6 +87,7 @@
         { "source": "/teams/words-pictures", "destination": "/teams/website" },
         { "source": "/teams/brand-vibes", "destination": "/teams/website" },
         { "source": "/teams/llm-gateway", "destination": "/teams/ai-gateway" },
+        { "source": "/teams/llm-analytics", "destination": "/teams/ai-observability" },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
@@ -1622,6 +1628,7 @@
         { "source": "/docs/cdp/filter-out", "destination": "/docs/cdp/transformations/posthog-filter-out-plugin" },
         { "source": "/docs/web-analytics/revenue-tracking", "destination": "/docs/revenue-analytics" },
         { "source": "/docs/web-analytics/revenue-analytics", "destination": "/docs/revenue-analytics" },
+        { "source": "/revenue-analytics", "destination": "/docs/revenue-analytics" },
         {
             "source": "/startups-alif",
             "destination": "/startups"

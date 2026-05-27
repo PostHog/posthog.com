@@ -1,6 +1,6 @@
 ---
 title: The 5 best customer-facing analytics examples (and what to steal from each)
-date: 2026-05-27
+date: 2026-06-01
 rootPage: /blog
 sidebar: Blog
 showTitle: true
