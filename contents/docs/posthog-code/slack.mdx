@@ -75,8 +75,18 @@ If you work across many repos, you can teach the bot how to pick a repo intellig
 | `@PostHog rules list` | Show your routing rules |
 | `@PostHog rules add "pattern" org/repo` | Route mentions matching `pattern` to a repo |
 | `@PostHog rules remove <#>` | Remove a rule by its number |
-| `@PostHog default repo set org/repo` | Set the default repo for the current channel |
-| `@PostHog default repo show` | Show the default repo for the current channel |
-| `@PostHog default repo clear` | Clear the default repo for the current channel |
+| `@PostHog project` | Show which PostHog project your mentions route to |
+| `@PostHog project <id>` | Set your default project for this workspace |
 
 Defaults are scoped to the channel you run the command in, so `#frontend` and `#backend` can each pick their own repo without stepping on each other. When a mention comes in, the bot checks routing rules first, falls back to the channel default, and only opens the picker if neither matches.
+
+## Multi-project workspaces
+
+If your Slack workspace is connected to multiple PostHog projects, mentions route to whichever project you've set as your default. The first time you mention the bot in a multi-project workspace without a default set, it lists the connected projects and asks you to pick one.
+
+| Command | What it does |
+|---|---|
+| `@PostHog project` | Show which PostHog project your mentions route to |
+| `@PostHog project <id>` | Set your default project (the bot remembers this choice) |
+
+Your default is personal – each Slack user can route their mentions to a different project.
