@@ -58,7 +58,7 @@ Fastr's customers don't have data engineers waiting to slice their AB test resul
 
 Ryan says, "There should never be a number that we put in front of you that doesn't have some context, or that wouldn't be a number you care about.” 
 
-Thia model lines up with where Fastr's customers are economically. "A lot of really big businesses don't have a big data team anymore. Where in the past they had 14 data people, now they have two, but they still need a system,'" Ryan says. "T've got a job to do, and that job shouldn't be 'learn your stupid data platform.'"
+This model lines up with where Fastr's customers are economically. "A lot of really big businesses don't have a big data team anymore. Where in the past they had 14 data people, now they have two, but they still need a system,'" Ryan says. "I've got a job to do, and that job shouldn't be 'learn your stupid data platform.'"
 
 Fastr Optimize is out of early access and onboarding more brands every week. The team is leaning further into per-customer customization, and every new customer means more endpoints spun up by Claude on top of PostHog.
 
