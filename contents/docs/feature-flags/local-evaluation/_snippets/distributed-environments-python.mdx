@@ -38,7 +38,7 @@ class FlagDefinitionCacheProvider(Protocol):
         ...
 ```
 
-You can implement these methods as synchronous methods or as `async def` methods. If a method returns an awaitable, the SDK runs it to completion before continuing.
+You can implement these methods as either sync or async methods. If a method returns an awaitable, the SDK runs it to completion before continuing.
 
 > **Note:** If you use an async client that is tied to an event loop, such as `redis.asyncio`, use a client dedicated to this cache provider. The SDK runs async cache provider methods on its own background event loop.
 
