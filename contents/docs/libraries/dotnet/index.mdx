@@ -148,6 +148,35 @@ import DotNetFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets
 
 <DotNetFeatureFlagsCode />
 
+### Evaluation contexts
+
+Configure evaluation contexts to evaluate only flags intended for this application, platform, or product area. For ASP.NET Core apps using `PostHog.AspNetCore`, add them to the `PostHog` configuration section:
+
+```json
+{
+    "PostHog": {
+        "ProjectToken": "<ph_project_token>",
+        "HostUrl": "<ph_client_api_host>",
+        "EvaluationContexts": ["main-app", "api", "backend"]
+    }
+}
+```
+
+For code-based configuration, set `EvaluationContexts` on `PostHogOptions`:
+
+```csharp
+var posthog = new PostHogClient(new PostHogOptions
+{
+    ProjectToken = "<ph_project_token>",
+    HostUrl = new Uri("<ph_client_api_host>"),
+    EvaluationContexts = ["main-app", "api", "backend"],
+});
+```
+
+Remote `/flags` requests from `EvaluateFlagsAsync()` include `evaluation_contexts` when configured. Flags without evaluation contexts continue to evaluate for all SDKs; flags with contexts evaluate only when at least one configured context matches.
+
+For more details, see the [evaluation contexts guide](/docs/feature-flags/evaluation-contexts).
+
 ### Local evaluation
 
 import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"

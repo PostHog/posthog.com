@@ -164,6 +164,15 @@ PostHog posthog = new PostHog.Builder("YOUR_API_KEY")
     .build();
 ```
 
+```csharp
+var posthog = new PostHogClient(new PostHogOptions
+{
+    ProjectToken = "YOUR_API_KEY",
+    HostUrl = new Uri("https://app.posthog.com"),
+    EvaluationContexts = ["main-app", "api", "backend"],
+});
+```
+
 </MultiLanguage>
 
 ## How evaluation works
@@ -319,5 +328,6 @@ Evaluation contexts are supported in the following SDKs:
 | [Node.js](/docs/libraries/node/) | 5.10.0+ | 5.9.6+ |
 | [Android](/docs/libraries/android) | 3.25.0+ | 3.24.0+ |
 | [iOS](/docs/libraries/ios) | 3.34.0+ | 3.33.0+ |
+| [.NET](/docs/libraries/dotnet) | PostHog 2.8.0+ / PostHog.AspNetCore 2.7.0+ | Not supported |
 
 > **Note:** Both parameter names work in newer SDK versions. If you're on an older version that only supports `evaluation_environments`, that will continue to work. We recommend using `evaluation_contexts` for new implementations.
