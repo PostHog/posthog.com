@@ -64,4 +64,4 @@ You can even use [PostHog AI](/docs/posthog-ai) to search for similar errors and
 
 “This is one of the things I love most about PostHog, that you have so many tools in one place and they all work together. It makes it a no-brainer for you to install PostHog early on and then, when you get to the point where you need a new tool or to get serious about your data — everything you need is already there.”
 
-“We’re about to launch a whole suite of AI tools, for example. And it’s so great knowing that [LLM observability](/docs/llm-analytics) is going to be there for us when we’re ready.”
+“We’re about to launch a whole suite of AI tools, for example. And it’s so great knowing that [LLM observability](/docs/ai-observability) is going to be there for us when we’re ready.”

@@ -57,3 +57,16 @@ openssl rand -hex 32
 ```
 
 This `SECRET_KEY` must be passed to PostHog as an environment variable.
+
+## SSRF protection
+
+PostHog has several features – such as webhooks and integrations – that make outbound HTTP requests to URLs supplied (directly or indirectly) by users. Without egress filtering, attackers can abuse these features to perform Server-Side Request Forgery (SSRF) attacks against your own internal network (the cloud metadata service, other internal hosts, private IP ranges, and so on).
+
+PostHog Cloud routes these outbound requests through [Stripe's Smokescreen](https://github.com/stripe/smokescreen), an HTTP proxy that enforces an allowlist at the network layer and rejects connections to private, loopback, link-local, and other sensitive address ranges. This is an infrastructure-level control and is **not part of the self-hosted PostHog deployment**.
+
+If you self-host PostHog, you're responsible for providing your own egress protection. Recommended options:
+
+- Run [Smokescreen](https://github.com/stripe/smokescreen) (or a similar egress proxy) yourself and route PostHog's outbound traffic through it.
+- Restrict outbound traffic from the PostHog containers at the firewall, security group, or VPC level so that internal IP ranges and the cloud metadata service (for example `169.254.169.254`) are unreachable.
+
+Without any of these controls in place, your PostHog instance can reach sensitive internal IP addresses.
