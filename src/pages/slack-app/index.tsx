@@ -17,7 +17,6 @@ import {
     IconCursorClick,
     IconSupport,
     IconBolt,
-    IconBug,
     IconFlag,
     IconWrench,
     IconGitBranch,
@@ -33,28 +32,74 @@ import {
     IconChat,
 } from '@posthog/icons'
 
-const LeftSidebarContent = () => {
-    return <TreeMenu items={productOSNav.children} />
-}
-
 const CONNECT_SLACK_URL = 'https://app.posthog.com/settings/project#integration-slack'
 
-// Highlight phrase used in data-stack-style headings.
-const Highlight = ({ children }: { children: React.ReactNode }) => (
-    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">{children}</span>
+type IconComponent = React.ComponentType<{ className?: string }>
+
+type IconItem = {
+    Icon: IconComponent
+    color: string
+    name: string
+}
+
+type IconGroup = {
+    title: string
+    items: IconItem[]
+}
+
+const LeftSidebarContent = () => <TreeMenu items={productOSNav.children} />
+
+const IconChipRow = ({ items }: { items: IconItem[] }) => (
+    <div className="grid grid-cols-1 @sm:grid-cols-2 @2xl:grid-cols-4 gap-x-1">
+        {items.map(({ Icon, color, name }) => (
+            <span
+                key={name}
+                className="inline-flex items-center gap-1.5 text-primary text-sm whitespace-nowrap font-semibold p-2"
+            >
+                <Icon className={`size-4 ${color}`} />
+                {name}
+            </span>
+        ))}
+    </div>
 )
 
-const shipFixCards = [
+const IconGroupColumns = ({ groups }: { groups: IconGroup[] }) => (
+    <div className="grid grid-cols-1 @sm:grid-cols-2 @xl:grid-cols-3 gap-6 clear-both pt-4">
+        {groups.map((group) => (
+            <div key={group.title} className="flex flex-col gap-3">
+                <div className="text-secondary text-sm border-b border-secondary pb-1">{group.title}</div>
+                <div className="flex flex-col gap-1.5">
+                    {group.items.map(({ Icon, color, name }) => (
+                        <span key={name} className="inline-flex items-center gap-1.5 text-primary text-sm">
+                            <Icon className={`size-4 shrink-0 ${color}`} />
+                            {name}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        ))}
+    </div>
+)
+
+const DottedList = ({ items, bulletClass }: { items: React.ReactNode[]; bulletClass: string }) => (
+    <ul className="mt-3 mb-0 space-y-1 text-sm text-secondary list-none pl-0">
+        {items.map((item, index) => (
+            <li key={index} className="relative pl-5">
+                <span className={`absolute left-1 top-2 size-1.5 rounded-full ${bulletClass}`} />
+                {item}
+            </li>
+        ))}
+    </ul>
+)
+
+const shipFixCards: IconItem[] = [
     { Icon: IconCoffee, color: 'text-brown', name: 'Spec to draft PR' },
     { Icon: IconRefresh, color: 'text-blue', name: 'In-thread iteration' },
     { Icon: IconBolt, color: 'text-yellow', name: 'Multi-step changes' },
     { Icon: IconGitBranch, color: 'text-purple', name: 'Cross-repo work' },
 ]
 
-const choreGroups: {
-    title: string
-    items: { Icon: React.ComponentType<{ className?: string }>; color: string; name: string }[]
-}[] = [
+const choreGroups: IconGroup[] = [
     {
         title: 'Codebase cleanup',
         items: [
@@ -81,10 +126,7 @@ const choreGroups: {
     },
 ]
 
-const contentGroups: {
-    title: string
-    items: { Icon: React.ComponentType<{ className?: string }>; color: string; name: string }[]
-}[] = [
+const contentGroups: IconGroup[] = [
     {
         title: 'Marketing site',
         items: [
@@ -111,7 +153,7 @@ const contentGroups: {
     },
 ]
 
-const pipeDataCards = [
+const pipeDataCards: IconItem[] = [
     { Icon: IconCalendar, color: 'text-blue', name: 'Daily digests' },
     { Icon: IconExternal, color: 'text-purple', name: 'Link unfurls' },
     { Icon: IconBell, color: 'text-yellow', name: 'Event triggers' },
@@ -143,16 +185,7 @@ const featureTabs: TabbedCarouselTab[] = [
                         – the same agent, more room to work.
                     </p>
                 </div>
-                <div className="grid grid-cols-1 @sm:grid-cols-2 @2xl:grid-cols-4 gap-x-1">
-                    {shipFixCards.map(({ Icon, color, name }) => (
-                        <div key={name} className="rounded p-2">
-                            <span className="inline-flex items-center gap-1.5 text-primary text-sm whitespace-nowrap relative top-0">
-                                <Icon className={`size-4 ${color}`} />
-                                <span className="font-semibold">{name}</span>
-                            </span>
-                        </div>
-                    ))}
-                </div>
+                <IconChipRow items={shipFixCards} />
                 <div className="-mx-4 mt-4 leading-[0]">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_ship_a_fix_82a4003b3a.png"
@@ -181,22 +214,7 @@ const featureTabs: TabbedCarouselTab[] = [
                     You know the stuff in your codebase that everyone complains about but nobody fixes? Make a{' '}
                     <code>#papercuts</code> channel and tag <code>@PostHog</code>.
                 </p>
-
-                <div className="grid grid-cols-1 @sm:grid-cols-2 @xl:grid-cols-3 gap-6 clear-both pt-4">
-                    {choreGroups.map((group) => (
-                        <div key={group.title} className="flex flex-col gap-3">
-                            <div className="text-secondary text-sm border-b border-secondary pb-1">{group.title}</div>
-                            <div className="flex flex-col gap-1.5">
-                                {group.items.map(({ Icon, color, name }) => (
-                                    <span key={name} className="inline-flex items-center gap-1.5 text-primary text-sm">
-                                        <Icon className={`size-4 shrink-0 ${color}`} />
-                                        <span>{name}</span>
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                <IconGroupColumns groups={choreGroups} />
             </div>
         ),
     },
@@ -220,16 +238,7 @@ const featureTabs: TabbedCarouselTab[] = [
                         thread.
                     </p>
                 </div>
-                <div className="grid grid-cols-1 @sm:grid-cols-2 @2xl:grid-cols-4 gap-x-1">
-                    {pipeDataCards.map(({ Icon, color, name }) => (
-                        <div key={name} className="rounded p-2">
-                            <span className="inline-flex items-center gap-1.5 text-primary text-sm whitespace-nowrap relative top-0">
-                                <Icon className={`size-4 ${color}`} />
-                                <span className="font-semibold">{name}</span>
-                            </span>
-                        </div>
-                    ))}
-                </div>
+                <IconChipRow items={pipeDataCards} />
                 <div className="-mx-4 mt-4 leading-[0]">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/subscription_insights_50ce62125e.png"
@@ -258,28 +267,98 @@ const featureTabs: TabbedCarouselTab[] = [
                     Works across everything that lives in the same repo your engineers ship from – marketing site, docs,
                     blog, customer stories, changelog, handbook.
                 </p>
-
-                <div className="grid grid-cols-1 @sm:grid-cols-2 @xl:grid-cols-3 gap-6 clear-both pt-4">
-                    {contentGroups.map((group) => (
-                        <div key={group.title} className="flex flex-col gap-3">
-                            <div className="text-secondary text-sm border-b border-secondary pb-1">{group.title}</div>
-                            <div className="flex flex-col gap-1.5">
-                                {group.items.map(({ Icon, color, name }) => (
-                                    <span key={name} className="inline-flex items-center gap-1.5 text-primary text-sm">
-                                        <Icon className={`size-4 shrink-0 ${color}`} />
-                                        <span>{name}</span>
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                <IconGroupColumns groups={contentGroups} />
             </div>
         ),
     },
 ]
 
-const roleCards = [
+type IntroCardProps = {
+    icon: IconComponent
+    iconColor: string
+    bulletClass: string
+    href: string
+    title: string
+    badge: string
+    description: React.ReactNode
+    examples: string[]
+}
+
+const introCards: IntroCardProps[] = [
+    {
+        icon: IconCoffee,
+        iconColor: 'text-brown',
+        bulletClass: 'bg-brown',
+        href: '/code',
+        title: 'PostHog Code',
+        badge: 'Sandboxed',
+        description: (
+            <>
+                Tag <code>@PostHog</code> with a bug, edit, or a feature idea. It spins up a sandboxed environment,
+                plans, edits files, runs the tests, and opens a draft PR.
+            </>
+        ),
+        examples: [
+            '"Fix the flaky billing CI job"',
+            '"Add a retry policy to the webhook worker"',
+            '"Resolve the merge conflicts on PR #1234"',
+        ],
+    },
+    {
+        icon: IconSparkles,
+        iconColor: 'text-blue',
+        bulletClass: 'bg-blue',
+        href: '/ai',
+        title: 'PostHog AI',
+        badge: 'Via MCP',
+        description: (
+            <>
+                Tag <code>@PostHog</code> with any data question. It's the same SQL-writing, statistically-minded
+                assistant as PostHog AI, but it pulls the data into where you're already working.
+            </>
+        ),
+        examples: [
+            '"Why did EU signups drop last week?"',
+            '"Brief me on this customer before my call"',
+            '"Roll out the new dashboard flag to 25%"',
+        ],
+    },
+]
+
+const IntroCard = ({
+    icon: Icon,
+    iconColor,
+    bulletClass,
+    href,
+    title,
+    badge,
+    description,
+    examples,
+}: IntroCardProps) => (
+    <div className="border border-primary rounded-md p-4 bg-primary">
+        <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
+            <Link to={href} className="inline-flex items-center gap-2 font-bold text-primary hover:text-primary">
+                <Icon className={`size-5 shrink-0 ${iconColor}`} />
+                {title} <span className="text-secondary font-normal">in Slack</span>
+            </Link>
+            <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
+                {badge}
+            </span>
+        </div>
+        <p className="mt-0 mb-5 text-base leading-snug">{description}</p>
+        <DottedList items={examples} bulletClass={bulletClass} />
+    </div>
+)
+
+type RoleCard = {
+    icon: IconComponent
+    color: string
+    title: string
+    copy: string
+    examples: string[]
+}
+
+const roleCards: RoleCard[] = [
     {
         icon: IconCode,
         color: 'text-brown',
@@ -380,13 +459,13 @@ const compareRows: CompareRow[] = [
     },
 ]
 
-const compareLinks: Array<{ label: string; url: string }> = [
+const compareLinks: { label: string; url: string }[] = [
     { label: 'PostHog AI', url: '/ai' },
     { label: 'PostHog Slack app', url: '#try' },
     { label: 'PostHog Code', url: '/code' },
 ]
 
-const FAQ_ITEMS = [
+const faqItems = [
     {
         trigger: 'Is it a better coding model?',
         content: (
@@ -474,6 +553,39 @@ const FAQ_ITEMS = [
     },
 ]
 
+const fighterOptions: { icon: IconComponent; iconColor: string; label: React.ReactNode; copy: React.ReactNode }[] = [
+    {
+        icon: IconSparkles,
+        iconColor: 'text-blue',
+        label: (
+            <Link to="/ai" className="font-bold text-primary">
+                PostHog AI
+            </Link>
+        ),
+        copy: "When you're already in the app looking at data – ask it to write the SQL, build the dashboard, or make sense of what you're seeing.",
+    },
+    {
+        icon: IconChat,
+        iconColor: 'text-sky-blue',
+        label: 'PostHog Slack app',
+        copy: (
+            <>
+                For the drive-by stuff – typos, cross-repo checks, whatever lands in <code>#papercuts</code>.
+            </>
+        ),
+    },
+    {
+        icon: IconCoffee,
+        iconColor: 'text-brown',
+        label: (
+            <Link to="/code" className="font-bold text-primary">
+                PostHog Code
+            </Link>
+        ),
+        copy: 'For real engineering work – signals from the inbox, parallel agents, anything where you care about the diff before it ships.',
+    },
+]
+
 export default function SlackAppPage(): JSX.Element {
     return (
         <>
@@ -486,7 +598,8 @@ export default function SlackAppPage(): JSX.Element {
                 <div className="max-w-2xl mx-auto">
                     <div className="text-center mb-4">
                         <h1 className="text-3xl @md/reader-content-container:text-4xl font-bold m-0 mb-2">
-                            Don't @me, <Highlight>@PostHog</Highlight>
+                            Don't @me,{' '}
+                            <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">@PostHog</span>
                         </h1>
                         <p className="text-secondary text-base @md/reader-content-container:text-lg max-w-lg mx-auto m-0">
                             PostHog now lives in Slack. Ask about your product data, debug issues, and generate PRs
@@ -503,7 +616,8 @@ export default function SlackAppPage(): JSX.Element {
                     <hr className="border-t border-primary m-0 mb-6" />
 
                     <h3>
-                        One hog, <Highlight>two jobs</Highlight>
+                        One hog,{' '}
+                        <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">two jobs</span>
                     </h3>
                     <p>
                         <code>@PostHog</code> wraps two competencies – analytics and coding – into a single agent.
@@ -513,75 +627,16 @@ export default function SlackAppPage(): JSX.Element {
                         Connect Slack
                     </CallToAction>
                     <div className="not-prose grid @md/reader-content:grid-cols-2 gap-4 mb-6">
-                        <div className="border border-primary rounded-md p-4 bg-primary">
-                            <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
-                                <Link
-                                    to="/code"
-                                    className="inline-flex items-center gap-2 font-bold text-primary hover:text-primary"
-                                >
-                                    <IconCoffee className="size-5 text-brown shrink-0" />
-                                    PostHog Code <span className="text-secondary font-normal">in Slack</span>
-                                </Link>
-                                <span className="inline-block text-[11px] leading-none uppercase font-bold tracking-wide bg-brown/10 text-brown border border-brown/40 rounded px-1.5 py-1">
-                                    Sandboxed
-                                </span>
-                            </div>
-                            <p className="!mt-0 !mb-5 text-[15px] leading-snug">
-                                Tag <code>@PostHog</code> with a bug, edit, or a feature idea. It spins up a sandboxed
-                                environment, plans, edits files, runs the tests, and opens a draft PR.
-                            </p>
-                            <ul className="mb-0 space-y-1 text-sm text-secondary list-none pl-0">
-                                <li className="relative pl-5">
-                                    <span className="absolute left-1 top-2 size-1.5 rounded-full bg-brown" />
-                                    "Fix the flaky billing CI job"
-                                </li>
-                                <li className="relative pl-5">
-                                    <span className="absolute left-1 top-2 size-1.5 rounded-full bg-brown" />
-                                    "Add a retry policy to the webhook worker"
-                                </li>
-                                <li className="relative pl-5">
-                                    <span className="absolute left-1 top-2 size-1.5 rounded-full bg-brown" />
-                                    "Resolve the merge conflicts on PR #1234"
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="border border-primary rounded-md p-4 bg-primary">
-                            <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
-                                <Link
-                                    to="/ai"
-                                    className="inline-flex items-center gap-2 font-bold text-primary hover:text-primary"
-                                >
-                                    <IconSparkles className="size-5 text-blue shrink-0" />
-                                    PostHog AI <span className="text-secondary font-normal">in Slack</span>
-                                </Link>
-                                <span className="inline-block text-[11px] leading-none uppercase font-bold tracking-wide bg-blue/10 text-blue border border-blue/40 rounded px-1.5 py-1">
-                                    Via MCP
-                                </span>
-                            </div>
-                            <p className="!mt-0 !mb-5 text-[15px] leading-snug">
-                                Tag <code>@PostHog</code> with any data question. It's the same SQL-writing,
-                                statistically-minded assistant as PostHog AI, but it pulls the data into where you're
-                                already working.
-                            </p>
-                            <ul className="mb-0 space-y-1 text-sm text-secondary list-none pl-0">
-                                <li className="relative pl-5">
-                                    <span className="absolute left-1 top-2 size-1.5 rounded-full bg-blue" />
-                                    "Why did EU signups drop last week?"
-                                </li>
-                                <li className="relative pl-5">
-                                    <span className="absolute left-1 top-2 size-1.5 rounded-full bg-blue" />
-                                    "Brief me on this customer before my call"
-                                </li>
-                                <li className="relative pl-5">
-                                    <span className="absolute left-1 top-2 size-1.5 rounded-full bg-blue" />
-                                    "Roll out the new dashboard flag to 25%"
-                                </li>
-                            </ul>
-                        </div>
+                        {introCards.map((card) => (
+                            <IntroCard key={card.title} {...card} />
+                        ))}
                     </div>
 
                     <h3>
-                        A typical run, from <Highlight>@mention to merge</Highlight>
+                        A typical run, from{' '}
+                        <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">
+                            @mention to merge
+                        </span>
                     </h3>
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_chat_1_c6573ce6da.png"
@@ -608,7 +663,8 @@ export default function SlackAppPage(): JSX.Element {
                     </div>
 
                     <h3>
-                        <Highlight>Everyone</Highlight> can code now
+                        <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">Everyone</span> can
+                        code now
                     </h3>
                     <p>
                         It's not just engineers offloading chores. Non-technical team members can describe a problem or
@@ -619,23 +675,17 @@ export default function SlackAppPage(): JSX.Element {
                             <div key={title} className="border border-primary rounded-md p-4 bg-primary">
                                 <div className="flex gap-3 mb-2">
                                     <Icon className={`size-6 shrink-0 mt-1 ${color}`} />
-                                    <h4 className="!mt-0 !mb-0 text-lg font-bold">{title}</h4>
+                                    <h4 className="m-0 text-lg font-bold">{title}</h4>
                                 </div>
-                                <p className="!m-0 text-[15px]">{copy}</p>
-                                <ul className="mt-3 mb-0 space-y-1 text-sm text-secondary list-none pl-0">
-                                    {examples.map((ex) => (
-                                        <li key={ex} className="relative pl-5">
-                                            <span className="absolute left-1 top-2 size-1.5 rounded-full bg-sky-blue" />
-                                            {ex}
-                                        </li>
-                                    ))}
-                                </ul>
+                                <p className="m-0 text-base">{copy}</p>
+                                <DottedList items={examples} bulletClass="bg-sky-blue" />
                             </div>
                         ))}
                     </div>
 
                     <h3>
-                        Choose your <Highlight>fighter</Highlight>
+                        Choose your{' '}
+                        <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">fighter</span>
                     </h3>
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/magnifying_glass_hog_c994f17b25.png"
@@ -644,40 +694,15 @@ export default function SlackAppPage(): JSX.Element {
                         imgClassName="w-full"
                     />
                     <div className="not-prose space-y-3 my-4">
-                        <div>
-                            <p className="!m-0 inline-flex items-center gap-2 font-bold">
-                                <IconSparkles className="size-4 text-blue shrink-0" />
-                                <Link to="/ai" className="font-bold text-primary">
-                                    PostHog AI
-                                </Link>
-                            </p>
-                            <p className="!m-0 mt-1 text-[15px] leading-snug">
-                                When you're already in the app looking at data – ask it to write the SQL, build the
-                                dashboard, or make sense of what you're seeing.
-                            </p>
-                        </div>
-                        <div>
-                            <p className="!m-0 inline-flex items-center gap-2 font-bold">
-                                <IconChat className="size-4 text-sky-blue shrink-0" />
-                                <span>PostHog Slack app</span>
-                            </p>
-                            <p className="!m-0 mt-1 text-[15px] leading-snug">
-                                For the drive-by stuff – typos, cross-repo checks, whatever lands in{' '}
-                                <code>#papercuts</code>.
-                            </p>
-                        </div>
-                        <div>
-                            <p className="!m-0 inline-flex items-center gap-2 font-bold">
-                                <IconCoffee className="size-4 text-brown shrink-0" />
-                                <Link to="/code" className="font-bold text-primary">
-                                    PostHog Code
-                                </Link>
-                            </p>
-                            <p className="!m-0 mt-1 text-[15px] leading-snug">
-                                For real engineering work – signals from the inbox, parallel agents, anything where you
-                                care about the diff before it ships.
-                            </p>
-                        </div>
+                        {fighterOptions.map(({ icon: Icon, iconColor, label, copy }, index) => (
+                            <div key={index}>
+                                <p className="m-0 inline-flex items-center gap-2 font-bold">
+                                    <Icon className={`size-4 shrink-0 ${iconColor}`} />
+                                    {label}
+                                </p>
+                                <p className="m-0 mt-1 text-base leading-snug">{copy}</p>
+                            </div>
+                        ))}
                     </div>
                     <p className="text-sm text-secondary">
                         Building your own? <Link to="/docs/model-context-protocol">PostHog MCP</Link> wires the same
@@ -704,9 +729,7 @@ export default function SlackAppPage(): JSX.Element {
                             rows={compareRows.map((row) => ({
                                 key: row.label,
                                 cells: [
-                                    {
-                                        content: <span className="font-bold text-secondary">{row.label}</span>,
-                                    },
+                                    { content: <span className="font-bold text-secondary">{row.label}</span> },
                                     { content: row.ai },
                                     { content: row.slack },
                                     { content: row.code },
@@ -720,14 +743,17 @@ export default function SlackAppPage(): JSX.Element {
                         className="@lg/reader-content:float-right @lg/reader-content:max-w-xs ml-4 mb-2 mt-2"
                         imgClassName="w-full"
                     />
-                    <div className="not-prose bg-accent border border-primary rounded-md p-4 @md/reader-content:p-6 my-6">
-                        <h3 className="!mt-0 !mb-2 text-2xl font-bold inline-flex items-center gap-2 flex-wrap">
+                    <div
+                        id="try"
+                        className="not-prose bg-accent border border-primary rounded-md p-4 @md/reader-content:p-6 my-6"
+                    >
+                        <h3 className="mt-0 mb-2 text-2xl font-bold inline-flex items-center gap-2 flex-wrap">
                             Try it
-                            <span className="text-xs font-semibold bg-yellow text-primary uppercase tracking-wide px-1.5 py-0.5 rounded-sm">
+                            <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
                                 Beta
                             </span>
                         </h3>
-                        <p className="!mt-0 !mb-4">
+                        <p className="mt-0 mb-4">
                             The PostHog Slack app is free to install, and free to uninstall when you realize this means
                             you can ship production code from your phone (which, frankly, might be too much power for
                             anyone).
@@ -744,7 +770,7 @@ export default function SlackAppPage(): JSX.Element {
                             type="multiple"
                             triggerClassName="!px-3 !py-2"
                             contentClassName="!px-3 !py-2.5 !text-base !leading-relaxed"
-                            items={FAQ_ITEMS}
+                            items={faqItems}
                         />
                     </div>
                 </div>
