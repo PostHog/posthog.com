@@ -26,7 +26,7 @@ Dashboards are the easiest way to track all your most important product and perf
 
 Unlike [notebooks](/docs/notebooks), which are ideal for ad hoc analysis of specific issues, dashboards are designed for tracking common metrics over time.
 
-You can create a new dashboard from scratch, but we also offer numerous [dashboard templates](/templates) for tracking things like [website metrics](/templates/website-dashboard), [product health metrics](/templates/health-dashboard), and [metrics for large language models](/docs/llm-analytics).
+You can create a new dashboard from scratch, but we also offer numerous [dashboard templates](/templates) for tracking things like [website metrics](/templates/website-dashboard), [product health metrics](/templates/health-dashboard), and [metrics for large language models](/docs/ai-observability).
 
 <ProductScreenshot
   imageLight={dashboardLight}
@@ -121,6 +121,8 @@ You could, for example, duplicate a dashboard – click on the '...' menu and cl
 
 Filters can be accessed in SQL insights through the [`filters` variable](/docs/data-warehouse/sql/variables) like `filters.properties` and `filters.breakdown_filter`.
 
+> **Note:** Dashboard property filter overrides are not applied to insights containing [data warehouse series](/docs/data-warehouse/insights). A warning is displayed on the insight card when this happens. Date range overrides still work for all insight types.
+
 ## Dashboard options
 
 ### Editing the layout
@@ -191,7 +193,7 @@ You can toggle the visibility of labels or values on insight charts directly fro
 
 By clicking 'Share' in the top right corner you can:
 
-- Restrict edit access to certain members within a project. Dashboards can be shared either by members with administrator privileges or by the dashboard creator ([platforms add-ons](/platform-packages) required).
+- Restrict edit access to certain members within a project. Dashboards can be shared either by members with administrator privileges or by the dashboard creator ([platform package](/platform-packages) required).
 
 - Create a link to share your dashboard publicly, or embed your dashboard on a website. Read more about this in our [sharing and embedding docs](/docs/product-analytics/sharing).
 

@@ -32,7 +32,7 @@ end
 
 `flags.get_flag()` returns the variant string for multivariate flags, `true` for enabled boolean flags, `false` for disabled flags, and `nil` when the flag wasn't returned by the evaluation.
 
-> **Note:** `posthog.is_feature_enabled()`, `posthog.get_feature_flag()`, `posthog.get_feature_flag_payload()`, and `capture(send_feature_flags: true)` still work during the migration period, but they're deprecated. Prefer `evaluate_flags()` for new code.
+> **Note:** `posthog.is_feature_enabled()`, `posthog.get_feature_flag()`, `posthog.get_feature_flag_result()`, `posthog.get_feature_flag_payload()`, and `capture({ ..., send_feature_flags: true })` still work during the migration period, but they're deprecated. Prefer `evaluate_flags()` for new code.
 
 import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
 
@@ -103,6 +103,28 @@ By default, `evaluate_flags()` evaluates every flag for the user. If you only ne
 flags = posthog.evaluate_flags(
     'distinct_id_of_your_user',
     flag_keys: ['checkout-flow', 'new-dashboard'],
+)
+```
+
+### Evaluating locally only
+
+If you want to skip the remote `/flags` request and only use locally cached definitions, pass `only_evaluate_locally: true`:
+
+```ruby
+flags = posthog.evaluate_flags(
+    'distinct_id_of_your_user',
+    only_evaluate_locally: true,
+)
+```
+
+### Disabling GeoIP for flag evaluation
+
+Pass `disable_geoip: true` to disable GeoIP lookup for remote flag evaluation:
+
+```ruby
+flags = posthog.evaluate_flags(
+    'distinct_id_of_your_user',
+    disable_geoip: true,
 )
 ```
 

@@ -30,18 +30,18 @@ This tutorial shows how to configure PostHog's [JavaScript Web SDK](/docs/librar
 
 If you never want to show a cookie banner, you can set the cookieless mode to `"always"`. In this mode:
 
-* PostHog never stores data in cookies or local/session storage.
-* You cannot call `identify()`, as a distinct ID would be considered Personal Data under GDPR and other similar privacy regulations.
-* PostHog will measure the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers.
+- PostHog never stores data in cookies or local/session storage.
+- You cannot call `identify()`, as a distinct ID would be considered Personal Data under GDPR and other similar privacy regulations.
+- PostHog will measure the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers.
 
 To set this mode, add the following config option to your PostHog initialization:
 
 ```js
-posthog.init('<ph_project_token>', {
-    cookieless_mode: 'always', // +
-    api_host:'<ph_client_api_host>',
-    defaults: '<ph_posthog_js_defaults>'
-})
+posthog.init("<ph_project_token>", {
+  cookieless_mode: "always", // +
+  api_host: "<ph_client_api_host>",
+  defaults: "<ph_posthog_js_defaults>",
+});
 ```
 
 This helps you comply with privacy regulations at the expense of a less detailed data capture.
@@ -51,24 +51,25 @@ This helps you comply with privacy regulations at the expense of a less detailed
 If you want to maintain the full tracking capability of PostHog, you'll need to show a cookie banner and only enable cookies when the user consents. To do this, you can set the cookieless mode to `"on_reject"`, create a cookie banner, and connect it to PostHog's consent management methods.
 
 With this:
-* PostHog never stores data in cookies or local/session storage until the user opts in
-* PostHog doesn't capture any events until after consent is either given or denied.
-* If consent is denied, PostHog will still be able to count those users with a privacy-preserving hash.
+
+- PostHog never stores data in cookies or local/session storage until the user opts in
+- PostHog doesn't capture any events until after consent is either given or denied.
+- If consent is denied, PostHog will still be able to count those users with a privacy-preserving hash.
 
 To enable this mode, add the following config option to your PostHog initialization:
 
 ```js
-posthog.init('<ph_project_token>', {
-    cookieless_mode: 'on_reject', // +
-    api_host:'<ph_client_api_host>',
-    defaults: '<ph_posthog_js_defaults>'
-})
+posthog.init("<ph_project_token>", {
+  cookieless_mode: "on_reject", // +
+  api_host: "<ph_client_api_host>",
+  defaults: "<ph_posthog_js_defaults>",
+});
 ```
 
 Then connect PostHog to your cookie banner and display it when consent is pending:
 
 ```js
-if (posthog.get_explicit_consent_status() === 'pending') {
+if (posthog.get_explicit_consent_status() === "pending") {
   // show a cookie banner
 }
 ```
@@ -77,11 +78,11 @@ Finally, when the user makes a choice, opt them in or out:
 
 ```js
 function handleCookieConsent(consent) {
-   if (consent) {
-     posthog.opt_in_capturing()
-   } else {
-     posthog.opt_out_capturing()
-   }
+  if (consent) {
+    posthog.opt_in_capturing();
+  } else {
+    posthog.opt_out_capturing();
+  }
 }
 ```
 
@@ -99,18 +100,19 @@ A hash is an irreversible function, and a salt is a random value that changes da
 
 This means that whilst the IP address and User Agent are Personal Data, the hash is not considered Personal Data because it is impossible to obtain any Personal Data from the hash.
 
-
 ## Limitations
 
 Nothing comes for free unfortunately. Limiting what PostHog can store in cookies has implications like:
 
-* **Higher user count:** Users that do not give cookie consent appear as different people each day. A new daily salt means that the hash is different. This means high unique user counts beyond one day (like weekly or monthly unique users). Additionally, not being able to `identify()` users means that it is impossible to link together multiple devices or browsers from the same user.
+- **Higher user count:** Users that do not give cookie consent appear as different people each day. A new daily salt means that the hash is different. This means high unique user counts beyond one day (like weekly or monthly unique users). Additionally, not being able to `identify()` users means that it is impossible to link together multiple devices or browsers from the same user.
 
-* **Hash collisions:** Because the hash is based on a limited set of inputs, it is possible that two different users will generate the same hash. This means that two different users could be counted as one user. The most likely scenario would be two users with the same IP address (e.g. in a corporate network) and the same user agent (e.g. using the same browser version on the same OS).
+- **Hash collisions:** Because the hash is based on a limited set of inputs, it is possible that two different users will generate the same hash. This means that two different users could be counted as one user. The most likely scenario would be two users with the same IP address (e.g. in a corporate network) and the same user agent (e.g. using the same browser version on the same OS).
 
-* **Session replay and surveys:** Both are disabled if the user has not given cookie consent. This is because both features rely on storing data in cookies/local storage.
+- **Session replay and surveys:** Both are disabled if the user has not given cookie consent. This is because both features rely on storing data in cookies/local storage.
 
-* **Cache optimizations:** PostHog stores some information in browser storage to load faster, for example, the last loaded values for feature flags. Without this, there can be a delay between the page loading and things like feature flags being available to query (unless flags are [bootstrapped](/docs/feature-flags/bootstrapping)).
+- **Cache optimizations:** PostHog stores some information in browser storage to load faster, for example, the last loaded values for feature flags. Without this, there can be a delay between the page loading and things like feature flags being available to query (unless flags are [bootstrapped](/docs/feature-flags/bootstrapping)).
+
+- **No GeoIP or bot detection:** When cookieless server hash mode is enabled, IP-based transformations like [GeoIP enrichment](/docs/cdp/transformations/template-geoip) and [bot detection](/docs/cdp/transformations/template-bot-detection) don't enrich your events. The IP address is stripped before these transformations run. This means location data isn't added to events and the world map in Web Analytics won't show data.
 
 ## Further reading
 
