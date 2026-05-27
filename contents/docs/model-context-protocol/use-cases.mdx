@@ -125,6 +125,23 @@ Day-to-day operations your team would otherwise do by hand.
   outcome="Updates both tickets in a single call."
 />
 
+### Edit notebooks
+
+Read, update, and build on notebook content without leaving your editor.
+
+<PromptExample
+  prompt="Add a summary section to my investigation notebook explaining the root cause we found."
+  outcome="Reads the notebook content and adds a new paragraph summarizing your findings."
+/>
+<PromptExample
+  prompt="Update the retention chart in my onboarding analysis notebook to show the last 30 days instead of 7."
+  outcome="Finds the retention insight in the notebook and updates its time range."
+/>
+<PromptExample
+  prompt="Create a notebook called 'Q2 Launch Review' with sections for key metrics, experiment results, and next steps."
+  outcome="Creates a structured notebook ready for your launch retrospective."
+/>
+
 ## Multi-step recipes
 
 Single prompts get you a long way, but the real value of MCP comes from chaining tool calls into end-to-end workflows. Drop these sequences into your agent one step at a time – each prompt builds on the context the previous one returned.
