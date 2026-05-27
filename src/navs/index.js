@@ -3225,6 +3225,10 @@ export const docsMenu = {
                             url: '/docs/migrate/migrate-to-cloud',
                         },
                         {
+                            name: 'Merge two projects into one',
+                            url: '/docs/migrate/merge-projects',
+                        },
+                        {
                             name: 'Migrate from Amplitude',
                             url: '/docs/migrate/migrate-from-amplitude',
                         },
