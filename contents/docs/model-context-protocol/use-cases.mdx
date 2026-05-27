@@ -104,6 +104,19 @@ Wire up integrations from a single prompt instead of clicking through the UI.
   outcome="Sends a mock payload and returns execution logs."
 />
 
+### Deliver alerts to Slack or webhooks
+
+Route PostHog alerts to Slack channels or external webhooks via CDP functions.
+
+<PromptExample
+  prompt="Set up Slack notifications for my revenue alert to the #team-analytics channel."
+  outcome="Finds your Slack integration and channel ID, then creates a CDP function that listens for the $insight_alert_firing event filtered to your alert."
+/>
+<PromptExample
+  prompt="Send my signup alert to a webhook at https://example.com/hooks/alerts."
+  outcome="Creates a webhook destination that forwards alert firing events to your URL, including alert details like insight name and breach information."
+/>
+
 ### Manage cohorts, prompts, and support
 
 Day-to-day operations your team would otherwise do by hand.
