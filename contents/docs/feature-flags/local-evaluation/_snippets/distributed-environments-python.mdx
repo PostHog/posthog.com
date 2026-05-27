@@ -11,23 +11,36 @@ from posthog import FlagDefinitionCacheProvider, FlagDefinitionCacheData
 To create a custom cache, implement the `FlagDefinitionCacheProvider` protocol:
 
 ```python
+from typing import Awaitable, Optional, Protocol, Union
+
+
 class FlagDefinitionCacheProvider(Protocol):
-    def get_flag_definitions(self) -> Optional[FlagDefinitionCacheData]:
+    def get_flag_definitions(
+        self,
+    ) -> Union[
+        Optional[FlagDefinitionCacheData], Awaitable[Optional[FlagDefinitionCacheData]]
+    ]:
         """Retrieve cached flag definitions."""
         ...
 
-    def should_fetch_flag_definitions(self) -> bool:
+    def should_fetch_flag_definitions(self) -> Union[bool, Awaitable[bool]]:
         """Determine if this instance should fetch new definitions."""
         ...
 
-    def on_flag_definitions_received(self, data: FlagDefinitionCacheData) -> None:
+    def on_flag_definitions_received(
+        self, data: FlagDefinitionCacheData
+    ) -> Optional[Awaitable[None]]:
         """Store definitions after a successful fetch."""
         ...
 
-    def shutdown(self) -> None:
+    def shutdown(self) -> Optional[Awaitable[None]]:
         """Clean up resources on shutdown."""
         ...
 ```
+
+You can implement these methods as synchronous methods or as `async def` methods. If a method returns an awaitable, the SDK runs it to completion before continuing.
+
+> **Note:** If you use an async client that is tied to an event loop, such as `redis.asyncio`, use a client dedicated to this cache provider. The SDK runs async cache provider methods on its own background event loop.
 
 When the SDK fetches flag definitions from the API, it passes a `FlagDefinitionCacheData` object to `on_flag_definitions_received()` for you to store:
 
@@ -42,10 +55,10 @@ class FlagDefinitionCacheData(TypedDict):
 
 | Method | Purpose | Return value |
 | :----- | :------ | :----------- |
-| `get_flag_definitions()` | Retrieve cached definitions. Called when the poller refreshes. | Cached data, or `None` if cache is empty |
-| `should_fetch_flag_definitions()` | Decide if this instance should fetch. Use for distributed coordination (e.g., locks). | `True` to fetch, `False` to skip |
-| `on_flag_definitions_received(data)` | Store definitions after a successful API fetch. | None |
-| `shutdown()` | Release locks, close connections, clean up resources. | None |
+| `get_flag_definitions()` | Retrieve cached definitions. Called when the poller refreshes. | Cached data, `None` if cache is empty, or an awaitable resolving to either |
+| `should_fetch_flag_definitions()` | Decide if this instance should fetch. Use for distributed coordination (e.g., locks). | `True` to fetch, `False` to skip, or an awaitable resolving to a boolean |
+| `on_flag_definitions_received(data)` | Store definitions after a successful API fetch. | `None` or an awaitable resolving to `None` |
+| `shutdown()` | Release locks, close connections, clean up resources. | `None` or an awaitable resolving to `None` |
 
 > **Note:** All methods may throw errors. The SDK catches and logs them gracefully, ensuring cache provider errors never break flag evaluation.
 
