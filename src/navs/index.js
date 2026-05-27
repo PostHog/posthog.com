@@ -1642,6 +1642,10 @@ export const handbookSidebar = [
                         name: 'Metabase account analysis',
                         url: '/handbook/onboarding/metabase-account-analysis',
                     },
+                    {
+                        name: 'Creating sandboxes',
+                        url: '/handbook/growth/sales/sandboxes',
+                    },
                 ],
             },
             {
