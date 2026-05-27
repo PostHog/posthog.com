@@ -560,7 +560,6 @@ export const generatePricingMd = (products: any[]) => {
         data_warehouse: {
             description:
                 'Query external data sources (Stripe, Hubspot, Postgres, S3, etc.) alongside PostHog data using SQL. No separate warehouse needed.',
-            note: 'Revenue Analytics is included with Data Warehouse at no extra cost.',
         },
         realtime_destinations: {
             description:
