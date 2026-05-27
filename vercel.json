@@ -56,6 +56,7 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/blog/training-AI-models", "destination": "/blog/training-ai-models", "statusCode": 301 },
         { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
         { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
         {
