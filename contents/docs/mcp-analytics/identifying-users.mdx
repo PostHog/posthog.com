@@ -23,8 +23,8 @@ That means events emitted before `identify` returns a user are session-scoped; o
 ```ts
 import { track } from "@posthog/mcp"
 
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
   identify: async (request, extra) => {
     const token = extra?.requestInfo?.headers?.authorization
     if (!token) return null
@@ -47,14 +47,14 @@ track(server, {
 When this returns a non-null identity, the SDK:
 
 1. Switches the event's `distinct_id` to `userId` for that session.
-2. Emits a `posthog_identify` event the first time the identity is observed (or whenever it changes for that session), with the `$set` properties populated from `userName` and `userData`.
+2. Emits a `$identify` event the first time the identity is observed (or whenever it changes for that session), with the `$set` properties populated from `userName` and `userData`.
 3. Caches the identity in a small LRU keyed by session id, so unchanged identities are silently deduped.
 
 ## Identity merges
 
-A single MCP session typically emits a handful of events before any auth handshake completes — for example, `mcp_initialize` may fire before you've resolved the user. Those early events go out anonymous, attributed to the session id.
+A single MCP session typically emits a handful of events before any auth handshake completes — for example, `$mcp_initialize` may fire before you've resolved the user. Those early events go out anonymous, attributed to the session id.
 
-When `identify` eventually returns a user, the SDK emits `posthog_identify` with `$anon_distinct_id` set to the prior session id. PostHog's identity-merging logic then attributes the anonymous events to the identified user. From that point on, events for that session go out under `userId` directly.
+When `identify` eventually returns a user, the SDK emits `$identify` with `$anon_distinct_id` set to the prior session id. PostHog's identity-merging logic then attributes the anonymous events to the identified user. From that point on, events for that session go out under `userId` directly.
 
 This is the same merge model the [Node SDK](/docs/libraries/node) uses — if you've configured Person profile mode or have other strong opinions on identity in your PostHog project, the same rules apply.
 
@@ -73,7 +73,7 @@ SELECT
   properties.$mcp_tool_name AS tool,
   count() AS calls
 FROM events
-WHERE event = 'mcp_tool_call'
+WHERE event = '$mcp_tool_call'
   AND timestamp > now() - INTERVAL 30 DAY
 GROUP BY plan, tool
 ORDER BY calls DESC

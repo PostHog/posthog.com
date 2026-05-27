@@ -17,13 +17,13 @@ If you also instrument your agent with the [LLM analytics SDK](/docs/llm-analyti
 ## Enabling
 
 ```ts
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
   enableAITracing: true,
 })
 ```
 
-With this on, every `mcp_tool_call` event gets a sibling `$ai_span` event sent to PostHog. The two events share `$ai_trace_id` and `$ai_span_id`, so the join is free if you ever want to query them together.
+With this on, every `$mcp_tool_call` event gets a sibling `$ai_span` event sent to PostHog. The two events share `$ai_trace_id` and `$ai_span_id`, so the join is free if you ever want to query them together.
 
 ## What the spans look like
 
@@ -41,7 +41,7 @@ Every `$ai_span` carries:
 | `$ai_output_state` | object | Same content as `$mcp_response` |
 | `$ai_error` | object | Set when `$ai_is_error` is true |
 
-The `mcp_tool_call` event also has `$ai_trace_id` and `$ai_span_id` stamped on it so it can be joined back to the span.
+The `$mcp_tool_call` event also has `$ai_trace_id` and `$ai_span_id` stamped on it so it can be joined back to the span.
 
 ## Joining MCP and AI spans by hand
 
@@ -57,7 +57,7 @@ FROM events c
 INNER JOIN events s
   ON s.event = '$ai_span'
  AND s.properties.$ai_span_id = c.properties.$ai_span_id
-WHERE c.event = 'mcp_tool_call'
+WHERE c.event = '$mcp_tool_call'
   AND c.timestamp > now() - INTERVAL 24 HOUR
 LIMIT 100
 ```

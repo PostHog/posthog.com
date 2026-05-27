@@ -17,8 +17,8 @@ Conversation IDs are off by default and rely on the agent cooperating. Read the 
 ## Enabling
 
 ```ts
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
   enableConversationId: true,
 })
 ```
@@ -35,7 +35,7 @@ The agent's `conversation_id` (when present) always wins. The SDK only mints whe
 
 ```
 {
-  event: "mcp_tool_call",
+  event: "$mcp_tool_call",
   properties: {
     "$session_id": "ses_2a3f…",            // MCP connection
     "$mcp_conversation_id": "c_8b1d…",     // logical conversation
@@ -53,7 +53,7 @@ SELECT
   arrayDistinct(groupArray(properties.$mcp_tool_name)) AS tools_called,
   count() AS tool_calls
 FROM events
-WHERE event = 'mcp_tool_call'
+WHERE event = '$mcp_tool_call'
   AND properties.$mcp_conversation_id IS NOT NULL
   AND timestamp > now() - INTERVAL 7 DAY
 GROUP BY conversation

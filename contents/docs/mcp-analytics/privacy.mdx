@@ -10,25 +10,25 @@ MCP tool calls can carry sensitive payloads — API tokens, customer PII, raw mo
 
 The SDK does not capture:
 
-- Your `apiKey` or any environment variables.
+- Your `projectToken` or any environment variables.
 - The transport itself (TCP/WebSocket frames, MCP framing internals).
 - Tool source code, function references, or closures.
 - The full content of `image` or `audio` content blocks (replaced with a text stub).
 - The content of `resource` blocks with a `blob` payload.
 
-`mcp_tool_call` payloads include `$mcp_parameters` (the request arguments) and `$mcp_response` (the tool's result), after the pipeline below.
+`$mcp_tool_call` payloads include `$mcp_parameters` (the request arguments) and `$mcp_response` (the tool's result), after the pipeline below.
 
 ## The redaction pipeline
 
-Every event runs through three stages before being handed to `posthog-node`:
+Every event runs through three stages before being handed to the PostHog client:
 
 ### 1. Customer redaction (optional)
 
 If you pass `redactSensitiveInformation`, the SDK calls it on every string in the event payload. It's the first stage, so anything you redact here never reaches the sanitizer or the wire.
 
 ```ts
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
   redactSensitiveInformation: async (value) => {
     return value
       .replace(/sk-[A-Za-z0-9]{20,}/g, "[redacted: api key]")
@@ -37,7 +37,7 @@ track(server, {
 })
 ```
 
-A small allowlist of structural fields is **never** passed to your redactor: `sessionId`, the event `id`, `apiKey`, `server`, identify-related fields, `resourceName`, `eventType`, `actorId`, `tags`, and `properties`. The SDK needs those untouched to keep events queryable.
+A small allowlist of structural fields is **never** passed to your redactor: `sessionId`, the event `id`, `server`, identify-related fields, `resourceName`, `eventType`, `actorId`, and `properties`. The SDK needs those untouched to keep events queryable.
 
 ### 2. Automatic sanitization
 
@@ -75,16 +75,25 @@ Until we ship a first-class option, the redactor-returning-`"[redacted]"` trick 
 
 </CalloutBox>
 
-<CalloutBox icon="IconWarning" title="Bringing your own client shifts shutdown to you" type="caution">
+<CalloutBox icon="IconInfo" title="Drain the queue before exit" type="fyi">
 
-When the SDK creates its own `posthog-node` client (because you only passed `apiKey`), it registers `SIGINT`, `SIGTERM`, and `beforeExit` handlers that drain the queue (5-second timeout) and call `shutdown()`. If you pass `posthogClient`, the SDK won't tear down a client it doesn't own — handle lifecycle yourself.
+The SDK queues and batches events asynchronously. Call `shutdown(server)` from your `SIGTERM` / `beforeExit` handler so in-flight events aren't dropped. See [Installation](/docs/mcp-analytics/installation#graceful-shutdown) for the snippet.
 
 </CalloutBox>
 
 ## Buffering and back-pressure
 
-The in-memory queue is capped at 10,000 events; if it overflows, the oldest events are dropped with a warning to the logs. At most five `capture()` calls can be in flight to PostHog at once.
+The in-memory queue is owned by the underlying `@posthog/core` client. If it overflows or fails to flush, events are dropped with a warning surfaced to your `logger`.
 
 ## Logging
 
-The SDK writes operational logs to `~/posthog-mcp-analytics.log` rather than stdout/stderr, because MCP servers commonly speak over stdio. Errors from your `redactSensitiveInformation`, `identify`, `intentFallback`, `eventTags`, and `eventProperties` callbacks are swallowed and logged there — they do not surface to the agent or interrupt tool execution.
+MCP servers commonly speak over stdio, where any write to `console.*` corrupts the protocol stream. The SDK defaults its `logger` to a no-op for that reason — wire your own in development so warnings (failed redactor calls, swallowed `identify` errors, dropped batches) become visible:
+
+```ts
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  logger: (message) => fs.appendFileSync("/tmp/mcp.log", message + "\n"),
+})
+```
+
+Errors thrown from your `redactSensitiveInformation`, `identify`, `intentFallback`, and `eventProperties` callbacks are swallowed and routed to the logger — they never surface to the agent or interrupt tool execution.

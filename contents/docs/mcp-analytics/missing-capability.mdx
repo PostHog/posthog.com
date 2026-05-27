@@ -11,8 +11,8 @@ One of the most valuable signals an MCP server owner can get is: *the agent want
 ## Enabling
 
 ```ts
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
   reportMissing: true,
 })
 ```
@@ -23,7 +23,7 @@ With this on, the SDK registers a virtual tool called `get_more_tools` on your s
 
 When the agent invokes `get_more_tools`, the SDK:
 
-1. Captures the call as a normal `mcp_tool_call` event with `$mcp_tool_name = "get_more_tools"`.
+1. Captures the call as a normal `$mcp_tool_call` event with `$mcp_tool_name = "get_more_tools"`.
 2. Stamps `$mcp_intent` with the agent-supplied `context` describing what the user was trying to do.
 3. Returns a benign response to the agent so it can continue its turn.
 
@@ -35,7 +35,7 @@ SELECT
   properties.$mcp_client_name AS client,
   count() AS times_asked
 FROM events
-WHERE event = 'mcp_tool_call'
+WHERE event = '$mcp_tool_call'
   AND properties.$mcp_tool_name = 'get_more_tools'
   AND timestamp > now() - INTERVAL 30 DAY
 GROUP BY unmet_request, client
@@ -45,19 +45,19 @@ LIMIT 50
 
 ## Complementary signal: advertised but uncalled
 
-`reportMissing` tells you what's *missing*. The `mcp_tools_list` event tells you what's *advertised but ignored* — tools the agent saw but never invoked.
+`reportMissing` tells you what's *missing*. The `$mcp_tools_list` event tells you what's *advertised but ignored* — tools the agent saw but never invoked.
 
 ```sql
 WITH listed AS (
   SELECT DISTINCT arrayJoin(properties.$mcp_listed_tool_names) AS tool_name
   FROM events
-  WHERE event = 'mcp_tools_list'
+  WHERE event = '$mcp_tools_list'
     AND timestamp > now() - INTERVAL 30 DAY
 ),
 called AS (
   SELECT DISTINCT properties.$mcp_tool_name AS tool_name
   FROM events
-  WHERE event = 'mcp_tool_call'
+  WHERE event = '$mcp_tool_call'
     AND timestamp > now() - INTERVAL 30 DAY
 )
 SELECT tool_name AS zombie_tool

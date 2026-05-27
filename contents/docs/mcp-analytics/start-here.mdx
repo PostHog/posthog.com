@@ -11,7 +11,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconInfo" title="MCP analytics is in alpha" type="fyi">
 
-`@posthog/mcp` is published as a `0.0.x` release on npm. We're building it in public — the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet. A Python SDK and a `npx @posthog/wizard mcp-analytics add` installer are on the roadmap.
+`@posthog/mcp` is published as a `0.1.x` release on npm. We're building it in public — the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet. A Python SDK and a `npx @posthog/wizard mcp-analytics add` installer are on the roadmap.
 
 </CalloutBox>
 
@@ -32,7 +32,7 @@ MCP analytics gives you visibility into how AI agents actually use the MCP serve
 - 🧵 The full session, end to end
 - 🚧 Capabilities the agent wished existed (with `reportMissing`)
 
-The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. Install it from npm and call `track()` once at startup:
+The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. Install it from npm and call `instrument()` once at startup:
 
 ```bash
 pnpm add @posthog/mcp
@@ -44,8 +44,8 @@ import { track } from "@posthog/mcp"
 
 const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
 })
 ```
 
@@ -61,11 +61,11 @@ Full installation guide
     icon="IconGraph"
 >
 
-Run your MCP server and connect an agent to it (Claude Desktop, Cursor, Codex, or your own). Within seconds of the first tool call, PostHog will receive `mcp_tool_call`, `mcp_tools_list`, and `mcp_initialize` events — all prefixed with `$mcp_*` so they never collide with anything else in your project.
+Run your MCP server and connect an agent to it (Claude Desktop, Cursor, Codex, or your own). Within seconds of the first tool call, PostHog will receive `$mcp_tool_call`, `$mcp_tools_list`, and `$mcp_initialize` events — all prefixed with `$mcp_*` so they never collide with anything else in your project.
 
-Open the [activity feed](https://us.posthog.com/project/2/activity) and filter for `event = mcp_tool_call`. You should see one row per agent tool invocation, each with `$mcp_tool_name`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, and `$mcp_is_error`.
+Open the [activity feed](https://us.posthog.com/project/2/activity) and filter for `event = $mcp_tool_call`. You should see one row per agent tool invocation, each with `$mcp_tool_name`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, and `$mcp_is_error`.
 
-{/* TODO: ProductScreenshot of mcp_tool_call activity feed once an internal demo project has data */}
+{/* TODO: ProductScreenshot of $mcp_tool_call activity feed once an internal demo project has data */}
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/events">
 See every event the SDK emits
@@ -82,8 +82,8 @@ See every event the SDK emits
 The single most useful signal in MCP analytics is **intent**: the user goal that led the agent to call this tool. The SDK injects a required `context` argument into every tool's schema and captures it as `$mcp_intent`. Your tool implementation never sees it.
 
 ```ts
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
   context: {
     description: "Describe the user's underlying goal in one sentence — not the tool you're calling.",
   },
@@ -93,8 +93,8 @@ track(server, {
 For agents that ignore the schema hint (raw cURL clients, schema-blind crawlers), supply an `intentFallback`. The SDK calls it whenever no `context` argument was passed:
 
 ```ts
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
   intentFallback: (request) => {
     const tool = request.params?.name
     return tool ? `Invoking ${tool}` : null
@@ -126,7 +126,7 @@ Every event is a normal PostHog event, so insights, dashboards, alerts, and SQL 
   How much of your traffic supplies explicit context vs falls back to `intentFallback`?
 
 - ### <IconWrench className="text-orange w-7 -mt-1 inline-block"/> Advertised tools that never get called
-  Find dead surface area by joining `mcp_tools_list` against `mcp_tool_call`.
+  Find dead surface area by joining `$mcp_tools_list` against `$mcp_tool_call`.
 
 {/* TODO: ProductScreenshot of a sample MCP analytics dashboard with the four tiles above */}
 
@@ -145,8 +145,8 @@ Copy-paste queries
 By default each event is attributed to the MCP connection's session id. To attribute calls to a real user — for per-user retention, group analytics, and person properties — wire an `identify` callback:
 
 ```ts
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
   identify: async (request, extra) => {
     const token = extra?.requestInfo?.headers?.authorization
     const user = token ? await resolveUserFromToken(token) : null
@@ -155,7 +155,7 @@ track(server, {
 })
 ```
 
-The SDK emits a `posthog_identify` event the first time it sees a new identity for a session, and PostHog's standard merge takes care of attributing prior anonymous activity.
+The SDK emits a `$identify` event the first time it sees a new identity for a session, and PostHog's standard merge takes care of attributing prior anonymous activity.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/identifying-users">
 Identify users
@@ -172,8 +172,8 @@ Identify users
 The most actionable signal for an MCP server owner is *the agent wanted to do something I don't support*. Enable `reportMissing: true` and the SDK registers a `get_more_tools` virtual tool. When the agent invokes it, you get a queryable feed of unmet asks — straight into your roadmap.
 
 ```ts
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
   reportMissing: true,
 })
 ```
@@ -184,7 +184,7 @@ SELECT
   properties.$mcp_client_name  AS client,
   count()                      AS times_asked
 FROM events
-WHERE event = 'mcp_tool_call'
+WHERE event = '$mcp_tool_call'
   AND properties.$mcp_tool_name = 'get_more_tools'
   AND timestamp > now() - INTERVAL 30 DAY
 GROUP BY unmet_request, client
@@ -206,8 +206,8 @@ Track missing capabilities
 The SDK runs every event through a three-stage pipeline before sending to PostHog: your optional `redactSensitiveInformation` callback, then automatic sanitization (image/audio/binary stubs, sensitive-key masking like `authorization`, `cookie`, `password`, PostHog key patterns), then truncation to fit ingestion limits.
 
 ```ts
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
   redactSensitiveInformation: async (value) =>
     value.replace(/sk-[A-Za-z0-9]{20,}/g, "[redacted: api key]"),
 })

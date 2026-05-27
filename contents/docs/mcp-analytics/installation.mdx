@@ -6,7 +6,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconInfo" title="Alpha SDK" type="fyi">
 
-`@posthog/mcp` is published as a `0.0.x` alpha. Pin a specific version while we iterate — minor versions may include breaking changes to event shape or option names. A wizard-driven install (`npx @posthog/wizard mcp-analytics add`) is on the roadmap and will replace most of this page once it ships.
+`@posthog/mcp` is published as a `0.1.x` alpha. Pin a specific version while we iterate — minor versions may include breaking changes to event shape or option names. A wizard-driven install (`npx @posthog/wizard mcp-analytics add`) is on the roadmap and will replace most of this page once it ships.
 
 </CalloutBox>
 
@@ -14,7 +14,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 - Node.js 18 or later
 - A TypeScript or JavaScript MCP server built on `@modelcontextprotocol/sdk`
-- A PostHog project API key (`phc_…`)
+- A PostHog [project API key](/docs/getting-started/project-token) (`phc_…`)
 
 ## Install
 
@@ -26,7 +26,7 @@ pnpm add @posthog/mcp
 
 ## Wrap your server
 
-`track(server, options)` is the only function you need to call. It's idempotent per server — calling it twice on the same server logs a warning and returns early.
+`instrument(server, options)` is the only function you need to call. It's idempotent per server — calling it twice on the same server logs a warning and returns early.
 
 ### Low-level `Server`
 
@@ -34,30 +34,30 @@ If you registered your tools against the raw protocol `Server` from `@modelconte
 
 ```ts
 import { Server } from "@modelcontextprotocol/sdk/server/index.js"
-import { track } from "@posthog/mcp"
+import { instrument } from "@posthog/mcp"
 
 const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
 // register your tools as usual...
 
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
 })
 ```
 
 ### High-level `McpServer`
 
-If you use the typed `McpServer` wrapper from `@modelcontextprotocol/sdk/server/mcp.js`, pass it in directly — the SDK will unwrap it and also install a proxy on `_registeredTools`, so any tool you register *after* `track()` is also wrapped:
+If you use the typed `McpServer` wrapper from `@modelcontextprotocol/sdk/server/mcp.js`, pass it in directly — the SDK will unwrap it and also install a proxy on `_registeredTools`, so any tool you register *after* `instrument()` is also wrapped:
 
 ```ts
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
-import { track } from "@posthog/mcp"
+import { instrument } from "@posthog/mcp"
 
 const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
 
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
 })
 
 server.tool("search_events", { /* ... */ }, async (args) => {
@@ -67,56 +67,49 @@ server.tool("search_events", { /* ... */ }, async (args) => {
 
 ## Configuration
 
-`track()` accepts these options. Only `apiKey` (or `posthogClient`) is required.
+`instrument()` accepts these options. Only `projectToken` is required.
 
 | Option | Type | Default | What it does |
 |---|---|---|---|
-| `apiKey` | `string` | — | PostHog project API key. Required unless you pass `posthogClient`. |
-| `host` | `string` | `https://us.i.posthog.com` | PostHog ingestion host. Overridden by the `POSTHOG_MCP_ANALYTICS_HOST` env var. |
-| `posthogClient` | `PostHog` | — | An existing `posthog-node` client. Use this if your app already owns one. |
-| `posthogOptions` | `object` | — | Options forwarded to the SDK-managed `posthog-node` client (flush interval, etc). Ignored when `posthogClient` is provided. |
-| `enableTracing` | `boolean` | `true` | Master switch for event emission. Set to `false` to disable all capture without removing the wrapper. |
+| `projectToken` | `string` | — | PostHog project token (`phc_…`). Without it, the SDK initializes but does not send events. |
+| `host` | `string` | `https://us.i.posthog.com` | PostHog ingestion host. |
+| `clientOptions` | `object` | — | Options forwarded to the underlying `@posthog/core` client (flush interval, batch size, custom `fetch`, etc). |
+| `logger` | `(message: string) => void` | no-op | STDIO-safe log sink for SDK-internal warnings. MCP STDIO transports cannot use `console.*`, so the default discards. Wire your own to surface warnings during development. |
+| `enableTracing` | `boolean` | `true` | Master switch for auto-captured events. Set to `false` to disable all automatic capture without removing the wrapper. `publishCustomEvent` still fires when this is off. |
 | `enableAITracing` | `boolean` | `false` | Emit `$ai_span` siblings so MCP tool calls appear in [LLM analytics](/docs/mcp-analytics/ai-tracing). |
 | `context` | `boolean \| { description: string }` | `true` | Inject a required `context` argument into every tool schema. See [Capturing agent intent](/docs/mcp-analytics/intent). |
 | `intentFallback` | `(request, extra) => string \| Promise<string \| null \| undefined>` | — | Called when the agent didn't pass a `context` argument. See [Capturing agent intent](/docs/mcp-analytics/intent). |
 | `enableConversationId` | `boolean` | `false` | Inject an optional `conversation_id` argument into every tool. See [Conversation IDs](/docs/mcp-analytics/conversation-id). |
 | `reportMissing` | `boolean` | `false` | Register the `get_more_tools` virtual tool. See [Missing capability](/docs/mcp-analytics/missing-capability). |
-| `identify` | `async (request, extra) => UserIdentity \| null` | — | Map an MCP request to one of your users. See [Identifying users](/docs/mcp-analytics/identifying-users). |
+| `identify` | `async (request, extra) => UserIdentity \| null \| UserIdentity` | — | Map an MCP request to one of your users. See [Identifying users](/docs/mcp-analytics/identifying-users). |
 | `redactSensitiveInformation` | `async (value: string) => string` | — | Customer-supplied string redactor. Runs on every string field before sanitization. See [Privacy](/docs/mcp-analytics/privacy). |
-| `eventTags` | `async (request, extra) => Record<string, string>` | — | Indexed string metadata spread onto every event. Validated. |
-| `eventProperties` | `async (request, extra) => Record<string, unknown>` | — | Freeform metadata spread onto every event. |
+| `eventProperties` | `async (request, extra) => Record<string, unknown>` | — | Properties merged onto every event. See [Custom events and metadata](/docs/mcp-analytics/custom-events). |
 
-## Environment variables
+## Graceful shutdown
 
-| Variable | Purpose |
-|---|---|
-| `POSTHOG_MCP_ANALYTICS_HOST` | Overrides the `host` option. Useful in CI or when running against a self-hosted PostHog. |
-
-## Bringing your own PostHog client
-
-If your MCP server already initializes `posthog-node`, pass that client to `track()` instead of an API key. The SDK uses your client directly, so flushing, batching, and shutdown handlers stay in your control:
+The SDK queues and batches events asynchronously. Call `shutdown(server)` from your `SIGTERM` / `beforeExit` handler so in-flight events aren't dropped:
 
 ```ts
-import { PostHog } from "posthog-node"
-import { track } from "@posthog/mcp"
+import { instrument, shutdown } from "@posthog/mcp"
 
-const posthog = new PostHog(process.env.POSTHOG_API_KEY ?? "")
+instrument(server, { projectToken: process.env.POSTHOG_PROJECT_TOKEN })
 
-track(server, {
-  posthogClient: posthog,
+process.on("SIGTERM", async () => {
+  await shutdown(server)
+  process.exit(0)
 })
 ```
 
-When the SDK creates its own client (because you only passed `apiKey`), it also registers `SIGINT`, `SIGTERM`, and `beforeExit` handlers that drain the queue (5-second timeout) and call `shutdown()`. If you bring your own client, that lifecycle is yours to manage.
+If you only want to flush without tearing the client down, use `flush(server)` instead.
 
 ## What happens after install
 
 As soon as the wrapper is in place, every MCP request handled by the server emits a PostHog event:
 
-- `mcp_tool_call` per tool invocation
-- `mcp_tools_list` per `tools/list` response
-- `mcp_initialize` per client handshake
-- `mcp_resource_read`, `mcp_resources_list`, `mcp_prompt_get`, `mcp_prompts_list` as applicable
+- `$mcp_tool_call` per tool invocation
+- `$mcp_tools_list` per `tools/list` response
+- `$mcp_initialize` per client handshake
+- `$mcp_resource_read`, `$mcp_resources_list`, `$mcp_prompt_get`, `$mcp_prompts_list` as applicable
 - `$exception` whenever a tool throws or returns `isError: true`
 
 All events share a `$session_id` derived from the MCP protocol session (so the same connection always maps to the same PostHog session). See the [event reference](/docs/mcp-analytics/events) for the full catalog.

@@ -7,7 +7,7 @@ import OSButton from 'components/OSButton'
 
 <CalloutBox icon="IconInfo" title="MCP analytics is in alpha" type="fyi">
 
-`@posthog/mcp` is a TypeScript SDK for instrumenting Model Context Protocol (MCP) servers with PostHog analytics. It's published on npm as a `0.0.x` release while we build it in public. The API, event names, properties, and tracing behavior may change before the SDK reaches `1.0`. Don't depend on it for production reporting yet. Today, only TypeScript MCP servers are supported — a Python SDK is on the roadmap.
+`@posthog/mcp` is a TypeScript SDK for instrumenting Model Context Protocol (MCP) servers with PostHog analytics. It's published on npm as a `0.1.x` release while we build it in public. The API, event names, properties, and tracing behavior may change before the SDK reaches `1.0`. Don't depend on it for production reporting yet. Today, only TypeScript MCP servers are supported — a Python SDK is on the roadmap.
 
 </CalloutBox>
 
@@ -38,11 +38,11 @@ Get started
 
 ## How it works
 
-`track(server, options)` patches your MCP server's request handlers. When the agent calls a tool, the SDK:
+`instrument(server, options)` patches your MCP server's request handlers. When the agent calls a tool, the SDK:
 
 1. Builds a structured event with the tool name, parameters, response, duration, and error state.
 2. Runs the payload through redaction, sanitization (image/audio/binary stubs, sensitive-key masking), and truncation.
-3. Sends it to PostHog through `posthog-node`, batched and flushed automatically.
+3. Sends it to PostHog via [`@posthog/core`](https://github.com/PostHog/posthog-js/tree/main/packages/core), batched and flushed automatically.
 
 Your tool handlers are untouched. The only payload change the agent sees is an optional injected `context` argument (see [Capturing agent intent](/docs/mcp-analytics/intent)) and an optional injected `conversation_id` argument (see [Conversation IDs](/docs/mcp-analytics/conversation-id)).
 
@@ -51,7 +51,7 @@ graph LR
     Agent["AI agent"] -->|tools/call| MCP["Your MCP server"]
     MCP --> Wrapper["@posthog/mcp wrapper"]
     Wrapper --> Handler["Your tool handler"]
-    Wrapper --> Event["mcp_tool_call event"]
+    Wrapper --> Event["$mcp_tool_call event"]
     Event --> PostHog["PostHog"]
 ```
 
@@ -67,8 +67,8 @@ import { track } from "@posthog/mcp"
 
 const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
 })
 ```
 
@@ -87,11 +87,11 @@ Full installation guide
 - **[Identifying users](/docs/mcp-analytics/identifying-users)** — attaching events to your own users
 - **[LLM analytics integration](/docs/mcp-analytics/ai-tracing)** — emit `$ai_span` so MCP traffic appears in LLM analytics
 - **[Missing capability tracking](/docs/mcp-analytics/missing-capability)** — the `get_more_tools` virtual tool
-- **[Custom events and metadata](/docs/mcp-analytics/custom-events)** — `publishCustomEvent`, `eventTags`, `eventProperties`
+- **[Custom events and metadata](/docs/mcp-analytics/custom-events)** — `publishCustomEvent` and `eventProperties`
 - **[Privacy and redaction](/docs/mcp-analytics/privacy)** — what's sanitized automatically, customer redaction hook
 - **[Event and property reference](/docs/mcp-analytics/events)** — every event the SDK emits and what's on it
 - **[Sample queries](/docs/mcp-analytics/queries)** — HogQL recipes for the most common dashboards
 
 ## Building in public
 
-The SDK source lives at [github.com/PostHog/mcp-analytics](https://github.com/PostHog/mcp-analytics). Issues, PRs, and feedback are welcome. We started from a duplicated copy of the MIT-licensed [MCPcat TypeScript SDK](https://github.com/MCPCat/mcpcat-typescript-sdk) — the event schema, identity model, and feature surface have since diverged.
+The SDK source lives in the [`posthog-js` monorepo](https://github.com/PostHog/posthog-js/tree/main/packages/mcp) alongside the rest of PostHog's JavaScript and TypeScript SDKs. Issues, PRs, and feedback are welcome. We started from a duplicated copy of the MIT-licensed [MCPcat TypeScript SDK](https://github.com/MCPCat/mcpcat-typescript-sdk) — the event schema, identity model, and feature surface have since diverged.

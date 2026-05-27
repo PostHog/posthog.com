@@ -9,7 +9,7 @@ Knowing *what* a tool was called is one thing. Knowing *why* the agent called it
 The SDK captures intent as a single property — `$mcp_intent` — that can come from one of two sources:
 
 1. **A `context` argument** the agent passes on every tool call. Captured with `$mcp_intent_source = "context_parameter"`.
-2. **A fallback callback** you supply on `track()`. Captured with `$mcp_intent_source = "inferred"`.
+2. **A fallback callback** you supply on `instrument()`. Captured with `$mcp_intent_source = "inferred"`.
 
 Explicit context always wins. If the agent passes a non-empty `context`, the fallback is not invoked.
 
@@ -52,8 +52,8 @@ What lands in PostHog as `$mcp_intent`:
 If you want to nudge the agent toward a specific style of context (use case, user goal, ticket id, etc.), pass an object:
 
 ```ts
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
   context: {
     description: "Describe the user's underlying goal in one sentence — not the tool you're calling.",
   },
@@ -77,8 +77,8 @@ The SDK does no inference of its own. It doesn't call an LLM. It doesn't inspect
 The cheapest pattern — synchronous, runs on every uncontextualized call. Good default:
 
 ```ts
-track(server, {
-  apiKey: process.env.POSTHOG_API_KEY,
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
   intentFallback: (request) => {
     const tool = request.params?.name
     const args = request.params?.arguments ?? {}
@@ -124,7 +124,7 @@ SELECT
   properties.$mcp_intent_source AS source,
   count() AS calls
 FROM events
-WHERE event = 'mcp_tool_call'
+WHERE event = '$mcp_tool_call'
   AND timestamp > now() - INTERVAL 7 DAY
 GROUP BY source
 ORDER BY calls DESC
