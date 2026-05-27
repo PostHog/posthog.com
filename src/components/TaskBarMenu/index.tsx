@@ -297,7 +297,7 @@ export default function TaskBarMenu() {
                         width: '100%',
                         boxSizing: 'border-box',
                     }}
-                    className={`bg-primary/50 backdrop-blur-3xl skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded pl-0.5 pr-2 ${
+                    className={`bg-primary/50 backdrop-blur-3xl will-change-[transform,backdrop-filter] transform-gpu skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded pl-0.5 pr-2 ${
                         websiteMode ? '' : 'shadow-2xl'
                     } ${
                         windows.some((w) => w.expanded && !w.minimized)

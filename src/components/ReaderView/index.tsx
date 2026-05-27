@@ -1208,7 +1208,7 @@ const LeftSidebar = ({
                                     setTabsAnimating(false)
                                     setAppliedPinned(isPinned)
                                 }}
-                                className={`mx-2 mb-2 flex gap-px flex-shrink-0 ${
+                                className={`mx-2 flex gap-px flex-shrink-0 ${
                                     appliedPinned ? 'flex-row' : 'flex-col items-stretch py-2 border-y border-secondary'
                                 }`}
                                 role="tablist"
@@ -1234,7 +1234,11 @@ const LeftSidebar = ({
                         )}
 
                         <div className="flex-1 min-h-0 flex flex-col">
-                            <ScrollArea className="px-2 pb-2" viewportRef={menuViewportRef}>
+                            <ScrollArea
+                                className="px-2 [mask-image:linear-gradient(to_bottom,transparent_0,black_0.75rem)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_0.75rem)]"
+                                viewportClasses="pt-3"
+                                viewportRef={menuViewportRef}
+                            >
                                 {hasActiveSearch ? (
                                     <SidebarSearchResults contentRef={contentRef} currentPath={currentPath} />
                                 ) : hasTabs ? (

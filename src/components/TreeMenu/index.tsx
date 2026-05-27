@@ -411,8 +411,7 @@ export function TreeMenu(props: TreeMenuProps) {
     // ProductNav-matching look for product docs navs (index + interior pages).
     if (appearance === 'sidebar') {
         return (
-            // `gap-2` divides sections; links within a section stay tight (`gap-px`).
-            <div className="not-prose flex flex-col gap-2">
+            <div className="not-prose flex flex-col gap-4">
                 {sections.map((section, index) => {
                     const isRoot = !section.heading || (rootHeading && section.heading === rootHeading)
 

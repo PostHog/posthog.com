@@ -3849,7 +3849,7 @@ export const docsMenu = {
                     name: 'Session Replay 101',
                 },
                 {
-                    name: 'Use cases',
+                    name: 'Start here',
                     url: '/docs/session-replay',
                     icon: 'IconHome',
                     color: 'seagreen',
