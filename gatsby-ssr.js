@@ -10,7 +10,7 @@ const React = require('react')
 import { initKea, wrapElement } from './kea'
 import { UserProvider } from './src/hooks/useUser'
 import Wrapper from './src/components/Wrapper'
-import KoreanWrapper from './src/pages/ko/components/KoreanWrapper'
+import KoreanWrapper from './src/pages/ko/_components/KoreanWrapper'
 import { Provider } from './src/context/App'
 import { Provider as ToastProvider } from './src/context/Toast'
 
