@@ -38,6 +38,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
     const [showMore, setShowMore] = useState(false)
     const [isIdle, setIsIdle] = useState(false)
     const [openQuestion, setOpenQuestion] = useState<number | null>(null)
+    const [isCopied, setIsCopied] = useState(false)
 
     const allPlatforms = usePlatformList('docs/product-analytics/installation', 'product analytics installation')
     const sortedPlatforms = useMemo(() => {
@@ -102,8 +103,13 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             <CallToAction
                                 type="secondary"
                                 size="md"
-                                to="/docs/model-context-protocol"
-                                state={{ newWindow: true }}
+                                onClick={() => {
+                                    const el = document.getElementById('quest-item-analyze-with-mcp-and-ai')
+                                    if (el) {
+                                        window.history.pushState(null, '', '#quest-item-analyze-with-mcp-and-ai')
+                                        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                    }
+                                }}
                             >
                                 Install MCP
                             </CallToAction>
@@ -300,10 +306,13 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                                 <CallToAction
                                     type="secondary"
                                     size="md"
-                                    to="/docs/model-context-protocol"
-                                    state={{ newWindow: true }}
+                                    onClick={() => {
+                                        navigator.clipboard.writeText('npx @posthog/wizard mcp add')
+                                        setIsCopied(true)
+                                        setTimeout(() => setIsCopied(false), 2500)
+                                    }}
                                 >
-                                    Install MCP
+                                    {isCopied ? 'npx command copied! 🚀' : 'Install MCP'}
                                 </CallToAction>
                             </div>
                         </QuestLogItem>
