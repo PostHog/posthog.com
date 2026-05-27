@@ -42,7 +42,7 @@ The file download API follows a three-step workflow:
 2. **Poll status** - Check the status of the run until it completes
 3. **Download** - Download the exported file(s)
 
-You can also **cancel** a running export if you no longer need it.
+You can also **list** all your export runs to see their statuses, or **cancel** a running export if you no longer need it.
 
 ## API endpoints
 
@@ -101,6 +101,36 @@ POST /api/environments/{project_id}/file_download_batch_exports
 ```
 
 Returns HTTP 202 (Accepted) with the run ID.
+
+### List export runs
+
+List all file download batch export runs for your project.
+
+**Request:**
+
+```bash
+GET /api/environments/{project_id}/file_download_batch_exports
+```
+
+**Response:**
+
+```json
+{
+    "count": 2,
+    "results": [
+        {
+            "id": "01912345-6789-abcd-ef01-234567890abc",
+            "status": "Running"
+        },
+        {
+            "id": "01912345-6789-abcd-ef01-234567890def",
+            "status": "Completed"
+        }
+    ]
+}
+```
+
+Use this endpoint to see all your current exports and their statuses. This is useful for identifying which exports are still running before you hit the [concurrency limit](#constraints).
 
 ### Check export status
 
@@ -316,10 +346,11 @@ print("Download complete!")
 
 You can also create and monitor file download exports using the [PostHog MCP server](/docs/model-context-protocol). This lets AI agents export PostHog data on your behalf.
 
-Three MCP tools are available:
+Four MCP tools are available:
 
 | Tool | Purpose |
 |------|---------|
+| `file-download-batch-exports-list` | List all export runs and their statuses |
 | `file-download-batch-exports-create` | Start an on-demand export and return the run ID |
 | `file-download-batch-exports-retrieve` | Check the status of an export and get file IDs when complete |
 | `file-download-batch-exports-cancel-create` | Cancel an in-progress export |
