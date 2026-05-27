@@ -654,7 +654,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
 
             const products = moveNodesToParent(collection.data.collectionByHandle.products.nodes).filter(
-                (product) => product.status === 'ACTIVE'
+                (product) => product.status === 'ACTIVE' && !!product.featuredMedia
             )
             products.forEach((product) => {
                 product.variants = moveNodesToParent(
@@ -1242,7 +1242,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     await Promise.all([
-        sourceProductUsageStats(),
         createProductDataNode(),
         createRoadmapItems(),
         sourceChangelogVideos(),
