@@ -31,7 +31,7 @@ Sadly, most of the AI coding advice out there isn't written for this scenario. I
 
 ![Treating your big codebase like a small codebase](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Usefulness_of_AI_graphic_da661341d8.png)
 
-Although it's less sexy than vibe coding, being thoughtful about using AI is *more important* in a larger codebase for the following reasons:
+Although it's less sexy than [vibe coding](/blog/best-analytics-stack-for-vibe-coded-apps), being thoughtful about using AI is *more important* in a larger codebase for the following reasons:
 
 - Less of your app fits into the AI tool's context windows, which means you need to be more careful about what goes into it. This is true of both coding and [building AI-powered features](/newsletter/building-ai-features).
 
@@ -134,7 +134,7 @@ Beyond founder mode, what are some specific ways we aim to improve our workflows
 
 - Trying different models with the same tools to figure out which models are good at what. For example, a lot of our engineers find switching to Opus extremely beneficial (over Sonnet) and have been experimenting with Qwen in Cursor.
 
-- Building and dogfooding our own AI engineering tools like [PostHog AI](/docs/posthog-ai), the [PostHog MCP](/docs/model-context-protocol), and [LLM analytics](/docs/llm-analytics). This also means we talk to a lot of teams on the cutting edge of AI engineering like [Lovable](/customers/lovable) and [ElevenLabs](/customers/elevenlabs).
+- Building and dogfooding our own AI engineering tools like [PostHog AI](/docs/posthog-ai), the [PostHog MCP](/docs/model-context-protocol), and [AI Observability](/docs/ai-observability). This also means we talk to a lot of teams on the cutting edge of AI engineering like [Lovable](/customers/lovable) and [ElevenLabs](/customers/elevenlabs).
 
 - Nearly every [hackathon](/newsletter/hackathons) has had AI-related projects being built in it. This gives more of the team opportunities to explore new tools and understand what AI is good/not good at.
 

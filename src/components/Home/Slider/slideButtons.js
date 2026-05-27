@@ -48,7 +48,7 @@ export const slideButtons = [
         placeholderIcon: 'IconDatabase',
     },
     {
-        title: 'LLM analytics',
+        title: 'AI Observability',
         color: '[#8B0DC8]',
         colorDark: '[#C170E8]',
         placeholderIcon: 'IconLlmAnalytics',

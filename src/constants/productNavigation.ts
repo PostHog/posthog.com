@@ -79,7 +79,6 @@ export const productOrder: Record<string, string[]> = {
     analytics: [
         'web_analytics',
         'product_analytics',
-        'revenue_analytics',
         'llm_analytics',
         'custom_dashboards',
         'group_analytics',
