@@ -3846,22 +3846,13 @@ export const docsMenu = {
             navStyle: 'listed',
             children: [
                 {
-                    name: 'Session Replay',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/session-replay',
-                    icon: 'IconHome',
-                    color: 'seagreen',
-                },
-                {
                     name: 'Session Replay 101',
                 },
                 {
                     name: 'Use cases',
-                    url: '/docs/session-replay/start-here',
-                    icon: 'IconListCheck',
-                    color: 'orange',
+                    url: '/docs/session-replay',
+                    icon: 'IconHome',
+                    color: 'seagreen',
                     featured: true,
                 },
                 {
