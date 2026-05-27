@@ -1,5 +1,5 @@
 ---
-date: 2026-05-2y
+date: 2026-05-27
 title: Training our own AI models
 rootPage: /blog
 sidebar: Blog
