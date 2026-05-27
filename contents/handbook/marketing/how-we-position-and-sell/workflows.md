@@ -26,7 +26,7 @@ Zapier and Make have triggers but can't see product data. Customer.io and Braze 
 - **Engineer-led teams building product-led growth motions.** They want to act on product events – onboarding milestones, activation drop-offs, feature usage – without a CDP in the middle.
 - **B2B teams running intent-signal automation.** Triggering sales follow-ups, Slack alerts, or Linear tickets directly from product behavior, not delayed by CRM syncs. ([Croissant does this.](/customers/croissant))
 - **Startups consolidating their messaging stack.** Workflows replaces Zapier + Customer.io + a CDP.
-- **Customers on Customer.io, Iterable, Brevo, or ActiveCampaign for transactional and onboarding email.** Especially when most of the trigger logic already lives in product events. (Suped migrated off Customer.io.)
+- **Customers on Customer.io, Iterable, Brevo, or ActiveCampaign for transactional and onboarding email.** Especially when most of the trigger logic already lives in product events. ([Suped migrated off Customer.io.](/customers/suped)
 - **AI-native teams building agent loops.** PostHog AI already drafts email copy from a prompt; multi-turn, agent-authored workflows ship through MCP.
 
 ### Who this isn't for
