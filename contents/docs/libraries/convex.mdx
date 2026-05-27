@@ -50,6 +50,8 @@ The [`@posthog/convex`](https://www.npmjs.com/package/@posthog/convex) component
 
 ### 1. Install the component
 
+Requires Convex 1.39 or newer.
+
 <MultiLanguage>
 
 ```bash file=npm
@@ -70,15 +72,35 @@ bun add @posthog/convex
 
 </MultiLanguage>
 
-Then register it in `convex/convex.config.ts`:
+Then register it in `convex/convex.config.ts` and forward env vars from your app to the component:
 
 ```ts
 // convex/convex.config.ts
 import { defineApp } from "convex/server"
+import { v } from "convex/values"
 import posthog from "@posthog/convex/convex.config.js"
 
-const app = defineApp()
-app.use(posthog)
+const app = defineApp({
+    env: {
+        // Required. PostHog project token (phc_…).
+        POSTHOG_PROJECT_TOKEN: v.string(),
+        // Optional. PostHog host. Defaults to https://us.i.posthog.com.
+        POSTHOG_HOST: v.optional(v.string()),
+        // Optional. Feature flags secure API key (phs_…) or personal API key (phx_…) for local flag evaluation.
+        POSTHOG_PERSONAL_API_KEY: v.optional(v.string()),
+        // Optional. Cron interval (seconds) for refreshing flag definitions. Defaults to 60.
+        POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS: v.optional(v.string()),
+    },
+})
+
+app.use(posthog, {
+    env: {
+        POSTHOG_PROJECT_TOKEN: app.env.POSTHOG_PROJECT_TOKEN,
+        POSTHOG_HOST: app.env.POSTHOG_HOST,
+        POSTHOG_PERSONAL_API_KEY: app.env.POSTHOG_PERSONAL_API_KEY,
+        POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS: app.env.POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS,
+    },
+})
 
 export default app
 ```
@@ -86,7 +108,7 @@ export default app
 ### 2. Set environment variables
 
 ```sh
-npx convex env set POSTHOG_API_KEY phc_your_project_api_key
+npx convex env set POSTHOG_PROJECT_TOKEN phc_your_project_token
 npx convex env set POSTHOG_HOST https://us.i.posthog.com
 ```
 
@@ -96,21 +118,25 @@ For local feature flag evaluation (covered in step 5), also set a [feature flags
 npx convex env set POSTHOG_PERSONAL_API_KEY phs_your_feature_flags_secure_api_key
 ```
 
+Setting `POSTHOG_PERSONAL_API_KEY` also starts the component's built-in refresh cron that keeps flag definitions up to date. To adjust the polling interval (for example, raise it to 300 seconds for a free-tier dev deployment), set `POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS` and redeploy:
+
+```sh
+npx convex env set POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS 300
+```
+
 ### 3. Initialize the client
 
-Create `convex/posthog.ts`. Every other backend function will import the `posthog` instance from here.
+Create `convex/posthog.ts`. Credentials are handled by the component's env vars, so this file only needs to pass the component reference and optional callbacks:
 
 ```ts
 // convex/posthog.ts
 import { PostHog } from "@posthog/convex"
 import { components } from "./_generated/api"
 
-export const posthog = new PostHog(components.posthog, {
-    apiKey: process.env.POSTHOG_API_KEY,
-    personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY,
-    host: process.env.POSTHOG_HOST,
-})
+export const posthog = new PostHog(components.posthog)
 ```
+
+Every other backend function will import the `posthog` instance from here.
 
 ### 4. Capture events and identify users
 
@@ -154,33 +180,9 @@ Use the same Convex user ID as the `distinctId` everywhere. PostHog stitches eve
 - **Local** (`getFeatureFlag`, `isFeatureEnabled`) runs against flag definitions cached on your Convex deployment. Works in queries, mutations, and actions. No per-call network round-trip. Queries re-run reactively when cached definitions refresh.
 - **Remote** (`evaluateFlag`, `evaluateAllFlags`) hits PostHog's `/flags` endpoint on every call. Action-only. Handles every flag, including the ones local can't.
 
-To enable local eval, add a cron that refreshes flag definitions on whatever interval suits you:
+Local evaluation requires `POSTHOG_PERSONAL_API_KEY` to be set. When configured, the component automatically refreshes flag definitions every 60 seconds (or at the interval you set with `POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS`). If you call a local-eval method without `POSTHOG_PERSONAL_API_KEY`, the client throws an error pointing you to the remote `evaluateFlag` / `evaluateFlagPayload` / `evaluateAllFlags` methods instead.
 
-```ts
-// convex/crons.ts
-import { cronJobs } from "convex/server"
-import { internalAction } from "./_generated/server"
-import { internal } from "./_generated/api"
-import { posthog } from "./posthog"
-
-export const refreshPosthogFlags = internalAction({
-    args: {},
-    handler: async (ctx) => {
-        await posthog.refreshFlagDefinitions(ctx)
-    },
-})
-
-const crons = cronJobs()
-crons.interval(
-    "refresh posthog feature flag definitions",
-    { minutes: 1 },
-    internal.crons.refreshPosthogFlags
-)
-
-export default crons
-```
-
-Then read a flag from a query:
+Read a flag from a query:
 
 ```ts
 // convex/pricing.ts
@@ -203,7 +205,9 @@ export const getDiscount = query({
 })
 ```
 
-Because this is a regular Convex query, the React client that subscribes to it will re-run and re-render automatically the next time the cron refreshes flag definitions (up to your configured interval, one minute in the example above).
+Because this is a regular Convex query, the React client that subscribes to it will re-run and re-render automatically the next time the component's cron refreshes flag definitions.
+
+If you need an immediate refresh between cron ticks (for example, right after creating a flag in development), call `posthog.reloadFeatureFlags(ctx)` from an action.
 
 If you're running an [experiment](/docs/experiments) against a locally-evaluated flag, fire an exposure event yourself from a mutation or action, since local eval can't schedule `capture` from inside a query:
 
