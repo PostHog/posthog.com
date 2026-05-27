@@ -26,7 +26,7 @@ showStepsToc: true
     },
     plugins: [
       posthog({
-        personalApiKey: process.env.POSTHOG_API_KEY, // Personal API Key
+        personalApiKey: process.env.POSTHOG_API_KEY!, // Personal API Key
         projectId: process.env.POSTHOG_PROJECT_ID, // Project ID
         host: process.env.POSTHOG_HOST, // (optional) defaults to https://us.i.posthog.com
         sourcemaps: { // (optional)
@@ -53,6 +53,27 @@ showStepsToc: true
   </div>
 
   If you are using a CI/CD service, make sure these environment variables are added to your project settings, not just your local setup. This enables source maps to be automatically uploaded on your production build.
+
+<CalloutBox icon="IconInfo" title="Using @rollup/plugin-typescript?" type="info">
+
+If your build uses [`@rollup/plugin-typescript`](https://www.npmjs.com/package/@rollup/plugin-typescript), set `sourceMap: true` and `inlineSources: true` in its options so the PostHog plugin receives the source maps it needs to upload:
+
+```js
+import typescript from '@rollup/plugin-typescript'
+
+export default {
+  plugins: [
+    typescript({
+      sourceMap: true,
+      inlineSources: true,
+    }),
+    // ...other plugins, including posthog()
+  ],
+}
+```
+
+</CalloutBox>
+
 </Step>
 
 <Step checkpoint title="Verify source map upload and injection">
