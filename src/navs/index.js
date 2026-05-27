@@ -1646,6 +1646,10 @@ export const handbookSidebar = [
                         name: 'Metabase account analysis',
                         url: '/handbook/onboarding/metabase-account-analysis',
                     },
+                    {
+                        name: 'Creating sandboxes',
+                        url: '/handbook/growth/sales/sandboxes',
+                    },
                 ],
             },
             {
@@ -2791,6 +2795,18 @@ export const docsMenu = {
                                 {
                                     name: 'Overview',
                                     url: '/docs/model-context-protocol',
+                                },
+                                {
+                                    name: 'Use cases',
+                                    url: '/docs/model-context-protocol/use-cases',
+                                },
+                                {
+                                    name: 'Tools reference',
+                                    url: '/docs/model-context-protocol/tools',
+                                },
+                                {
+                                    name: 'FAQ and advanced setup',
+                                    url: '/docs/model-context-protocol/faq',
                                 },
                                 {
                                     name: 'Code editors',

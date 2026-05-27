@@ -1628,6 +1628,7 @@
         { "source": "/docs/cdp/filter-out", "destination": "/docs/cdp/transformations/posthog-filter-out-plugin" },
         { "source": "/docs/web-analytics/revenue-tracking", "destination": "/docs/revenue-analytics" },
         { "source": "/docs/web-analytics/revenue-analytics", "destination": "/docs/revenue-analytics" },
+        { "source": "/revenue-analytics", "destination": "/docs/revenue-analytics" },
         {
             "source": "/startups-alif",
             "destination": "/startups"
