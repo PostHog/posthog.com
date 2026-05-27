@@ -16,16 +16,17 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 
 **Focus on:**
 
-- Setting up the day-to-day tools you'll be using - Vitally, Gong, Slack, Metabase. See [sales and CS tools](/handbook/growth/sales/sales-and-cs-tools).
+- Setting up the day-to-day tools you'll be using - Vitally, Gong, Slack, Metabase. See [sales and CS tools](/handbook/growth/sales/sales-and-cs-tools) for set-up, and start copying other CSM's views and automations (or even better, build your own!)
 - Reading the [CS](/handbook/cs-and-onboarding/) and [sales](/handbook/growth/sales/) sections of the handbook.
 - Preparing your PostHog demo.
 - Picking a recent customer call on Gong/BuildBetter to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers.
-- Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide and work through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise).
+- Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide and work through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise). Use the demo environments or your own PostHog project to test different features and use cases.
 - Exploring Slack. We're public by default, so Slack is one of the richest resources you have. You'll find outreach messages that worked, prior conversations with customers, PostHog history on decisions like pricing changes, and context that didn't make it into the handbook.
 
 **How to think about each product.** As you go through the fundamentals, for each product you're trying to be able to answer:
 
 - The value add - why a customer would care
+- Common use cases to demo
 - How it's implemented and implementation quirks worth knowing
 - Signs of poor implementation
 - How it works alongside other PostHog products
@@ -38,7 +39,7 @@ In-person onboarding typically happens this week (3-4 days led by your team lead
 
 **Focus on:**
 
-- Walking through your book of business with Dana - prioritisation, where to start, who to reach out to first.
+- Walking through your book of business with your team lead - prioritisation, where to start, who to reach out to first.
 - Digging into individual customers - what they're using, where they are in the lifecycle, any open issues, recent conversations.
 - Demo practice and feedback.
 - Seeing how the systems we use (Vitally, PostHog data, Pylon, Zendesk) come together day-to-day.
@@ -57,7 +58,7 @@ This is when you start working with your customers. Reach out, take the first ca
 - Refining your demo with each conversation.
 - Starting to respond to Vitally signals on your book - what triggers your attention, what's the right next move? You'll feel confused at first, and that's fine, the goal is to start building a feel for it. *[link: responding-to-signals.md when written]*
 
-**Ship your first handbook PR.** Somewhere in here you'll hit something that wasn't documented, or that's documented wrong. Write it up and open a PR. The point isn't the PR itself, it's that the handbook only stays useful if everyone adds to it. Not knowing something isn't a failing, but leaving it undocumented for the next person is.
+**Ship your first handbook PR.** Somewhere along the way you'll find a gap or mistake in the handbook, or want to add a new page entirely. Write it up and open a PR. The point isn't the PR itself, it's that the handbook only stays useful if everyone adds to it. Not knowing something isn't a failing, but leaving it undocumented for the next person is.
 
 ## What good looks like at the end of week 4
 
@@ -72,6 +73,7 @@ This is the bar for end of month 1.
 
 **You're up and running with customers:**
 
+- Made contact with every customer in your book of business
 - Handling tickets and customer questions across the products your book uses, with help when needed
 - Doing demos for those products
 - Evaluating customer implementations and seeing where to improve them
@@ -79,12 +81,15 @@ This is the bar for end of month 1.
 
 **You're working with Vitally signals.** You know what the signals are and have a sense of how to prioritise and work through them.
 
+**You're sharing with the team.** You're posting wins, learnings, opportunities for feedback, and anything else valuable in our shared channels. You were hired because we think you can improve our team, so don't be afraid to share opinions and approaches.
+
 ## Month 2 and beyond
 
 **By the end of month 2:**
 
 - Saved your first 'we're going to churn' - it's going to happen, but you're going to save them!
 - Be independently working with your entire book to solve tricky technical problems with minimal assistance
+- Focusing strategically on your customers - engaging with accounts based on risk and growth opportunity, not just reacting to tickets and signals
 
 **By the end of month 3:**
 
