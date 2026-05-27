@@ -80,3 +80,9 @@ If you work across many repos, you can teach the bot how to pick a repo intellig
 | `@PostHog default repo clear` | Clear the default repo for the current channel |
 
 Defaults are scoped to the channel you run the command in, so `#frontend` and `#backend` can each pick their own repo without stepping on each other. When a mention comes in, the bot checks routing rules first, falls back to the channel default, and only opens the picker if neither matches.
+
+## AI credits
+
+Slack tasks consume [AI credits](/docs/posthog-ai/pricing) like other AI features. Every organization gets a monthly free tier, and you can track usage on the [billing page](https://app.posthog.com/organization/billing/usage).
+
+If you exceed your AI credit quota, the bot won't start new tasks or accept follow-ups until you add credits. You'll see a message in the thread directing you to the billing page.
