@@ -38,7 +38,8 @@ The MCP server also provides tools for managing [Data Warehouse views](/docs/dat
 | `view-get`           | Get full details of a specific view by ID, including its HogQL query and run history.                      |
 | `view-create`        | Create a new view from a HogQL query. Upserts by name if a view with the same name exists.                 |
 | `view-update`        | Update a view's name, HogQL query, or sync frequency.                                                      |
-| `view-delete`        | Delete a view (soft delete).                                                                               |
+| `view-delete`        | Delete a view (soft delete). Returns blocking view names if the view has dependencies.                     |
+| `view-dependencies`  | Get upstream and downstream dependency counts, plus blocking view names for deletion.                      |
 | `view-materialize`   | Enable materialization for a view with a 24-hour refresh schedule.                                         |
 | `view-unmaterialize` | Revert a materialized view back to a virtual query.                                                        |
 | `view-run`           | Trigger a manual refresh of a materialized view.                                                           |
