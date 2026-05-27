@@ -18,6 +18,7 @@ import {
     IconSupport,
     IconBolt,
     IconFlag,
+    IconTestTube,
     IconWrench,
     IconGitBranch,
     IconSparkles,
@@ -104,8 +105,9 @@ const choreGroups: IconGroup[] = [
         title: 'Codebase cleanup',
         items: [
             { Icon: IconFlag, color: 'text-blue', name: 'Feature flag removal' },
-            { Icon: IconTrash, color: 'text-red', name: 'Dead code & unused imports' },
+            { Icon: IconTrash, color: 'text-red', name: 'Dead code' },
             { Icon: IconRefresh, color: 'text-purple', name: 'Stale branches' },
+            { Icon: IconCalendar, color: 'text-green', name: "'TO DO from 2022'" },
         ],
     },
     {
@@ -114,6 +116,7 @@ const choreGroups: IconGroup[] = [
             { Icon: IconBolt, color: 'text-yellow', name: 'Dependency bumps' },
             { Icon: IconWarning, color: 'text-salmon', name: 'Type & lint errors' },
             { Icon: IconWrench, color: 'text-yellow', name: 'Flaky CI jobs' },
+            { Icon: IconCode, color: 'text-blue', name: "'// fix this later'" },
         ],
     },
     {
@@ -122,6 +125,7 @@ const choreGroups: IconGroup[] = [
             { Icon: IconGitBranch, color: 'text-purple', name: 'Merge conflicts' },
             { Icon: IconCoffee, color: 'text-brown', name: 'PR descriptions' },
             { Icon: IconBell, color: 'text-blue', name: 'Review-comment triage' },
+            { Icon: IconTestTube, color: 'text-green', name: 'Writing tests' },
         ],
     },
 ]
@@ -171,9 +175,8 @@ const featureTabs: TabbedCarouselTab[] = [
             <div className="rounded pt-4 px-4 bg-primary">
                 <h2 className="mt-0 mb-2 text-2xl font-bold">Ship new features without opening your editor</h2>
                 <p className="text-secondary text-sm">
-                    Tag <code>@PostHog</code> with a feature idea, a half-formed spec, or a paragraph from a Linear
-                    ticket. The bot plans the work, edits files across the repo, and opens a draft PR – then iterates
-                    message-by-message until it actually lands.
+                    Tag <code>@PostHog</code> with a feature idea, half a spec, or meeting notes from standup. The bot
+                    spins up cloud agents to tackle each task, which is a fancy way of saying "not on your laptop".
                 </p>
                 <div className="bg-yellow/10 rounded px-3 border border-yellow mb-4">
                     <p className="text-secondary text-sm my-3">
@@ -181,8 +184,8 @@ const featureTabs: TabbedCarouselTab[] = [
                         <Link to="/code" state={{ newWindow: true }} className="font-semibold">
                             PostHog Code
                         </Link>{' '}
-                        runs deeper refactors, parallel agents across repos, and longer-running tasks from a desktop app
-                        – the same agent, more room to work.
+                        runs parallel agents across repos, and longer-running tasks from a desktop app – the same agent,
+                        more room to work.
                     </p>
                 </div>
                 <IconChipRow items={shipFixCards} />
@@ -204,17 +207,17 @@ const featureTabs: TabbedCarouselTab[] = [
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
             <div className="rounded p-4 pb-6 bg-primary">
-                <h2 className="mt-0 mb-2 text-2xl font-bold">Make the robot do your chores</h2>
+                <h2 className="mt-0 mb-2 text-2xl font-bold">Make a robot do your chores</h2>
                 <p className="text-secondary text-sm">
-                    The engineering grunt work you keep punting on – plus the test failures, CI babysitting, and
-                    review-comment triage that comes after. Fire it all at the bot in parallel threads, and only get
-                    pulled in when something actually needs a human.
-                </p>
-                <p className="text-secondary text-sm">
-                    You know the stuff in your codebase that everyone complains about but nobody fixes? Make a{' '}
-                    <code>#papercuts</code> channel and tag <code>@PostHog</code>.
+                    The engineering grunt work you keep putting off – plus the test failures, CI, and review comments
+                    that comes after. Hand it all to an agent in parallel threads, and only get pulled in when it needs
+                    human approval.
                 </p>
                 <IconGroupColumns groups={choreGroups} />
+                <p className="text-secondary text-sm mt-6">
+                    You know the stuff in your product that everyone complains about but nobody fixes? Make a{' '}
+                    <code>#papercuts</code> channel and tag <code>@PostHog</code>.
+                </p>
             </div>
         ),
     },
@@ -226,11 +229,11 @@ const featureTabs: TabbedCarouselTab[] = [
         progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
         content: (
             <div className="rounded pt-4 px-4 bg-primary">
-                <h2 className="mt-0 mb-2 text-2xl font-bold">Push product data into the channels that care</h2>
+                <h2 className="mt-0 mb-2 text-2xl font-bold">Deliver product data to people who care</h2>
                 <p className="text-secondary text-sm">
-                    Pipe dashboards into channels on a schedule, or fire a custom Slack message every time a PostHog
-                    event matches your filter. Paste a PostHog link in any thread and it unfurls into a rich preview
-                    that respects your project's access permissions.
+                    Pipe product insights into channels on a schedule, or fire a custom Slack message every time a
+                    PostHog event matches your filter. Paste a PostHog link in any thread and it unfurls into a rich
+                    preview that respects your project's access permissions.
                 </p>
                 <div className="bg-yellow/10 rounded px-3 border border-yellow mb-4">
                     <p className="text-secondary text-sm my-3">
@@ -259,15 +262,22 @@ const featureTabs: TabbedCarouselTab[] = [
             <div className="rounded p-4 pb-6 bg-primary">
                 <h2 className="mt-0 mb-2 text-2xl font-bold">Sweep the site for em dashes (ew)</h2>
                 <p className="text-secondary text-sm">
-                    Tag <code>@PostHog</code> with what you want changed and where. The bot finds the file, drafts the
-                    edit in the repo's existing style, and opens a PR with a deploy preview attached. Skim the preview,
-                    request a tweak in-thread, and merge when it reads right.
+                    The stuff you currently DM an engineer about, or just live with. Tag <code>@PostHog</code> with what
+                    to change and where – "fix the typo on the pricing page," "swap this screenshot on /customers." The
+                    bot finds the file, edits in the repo's existing style, and opens a PR. Usually in one shot.
                 </p>
                 <p className="text-secondary text-sm">
-                    Works across everything that lives in the same repo your engineers ship from – marketing site, docs,
-                    blog, customer stories, changelog, handbook.
+                    Copy fixes, blog edits, page tweaks, new tiles, it follows your naming conventions and flags
+                    anything it had to guess at. Now you can ship a PR from the same place you send goose gifs.
                 </p>
                 <IconGroupColumns groups={contentGroups} />
+                <div className="mt-6 leading-[0]">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/slackbot_lizzie_1_a6f77f3495.png"
+                        alt="@PostHog editing content from a Slack thread with Lizzie"
+                        imgClassName="w-full rounded-md shadow-lg border border-primary"
+                    />
+                </div>
             </div>
         ),
     },
@@ -314,7 +324,7 @@ const introCards: IntroCardProps[] = [
         description: (
             <>
                 Tag <code>@PostHog</code> with any data question. It's the same SQL-writing, statistically-minded
-                assistant as PostHog AI, but it pulls the data into where you're already working.
+                assistant as PostHog AI, but it responds where you send work memes.
             </>
         ),
         examples: [
@@ -345,7 +355,7 @@ const IntroCard = ({
                 {badge}
             </span>
         </div>
-        <p className="mt-0 mb-5 text-base leading-snug">{description}</p>
+        <p className="m-0 text-base">{description}</p>
         <DottedList items={examples} bulletClass={bulletClass} />
     </div>
 )
@@ -417,7 +427,10 @@ const compareRows: CompareRow[] = [
         label: 'Where it lives',
         ai: (
             <>
-                Right sidebar in <Link to="https://app.posthog.com">app.posthog.com</Link>
+                Right sidebar in{' '}
+                <Link to="https://app.posthog.com" className="text-red dark:text-yellow font-semibold hover:underline">
+                    app.posthog.com
+                </Link>
             </>
         ),
         slack: 'Any Slack channel or thread',
@@ -426,11 +439,7 @@ const compareRows: CompareRow[] = [
     {
         label: 'How to summon',
         ai: 'Click the sparkle or AI chat window',
-        slack: (
-            <>
-                Tag <code>@PostHog</code>
-            </>
-        ),
+        slack: 'Tag @PostHog',
         code: 'Open the app, start a task',
     },
     {
@@ -453,8 +462,8 @@ const compareRows: CompareRow[] = [
     },
     {
         label: 'Models',
-        ai: "Auto-picked from OpenAI and Anthropic (we tune so you don't have to).",
-        slack: 'Auto-picked. Every @mention runs through a Haiku-powered classifier first.',
+        ai: "Auto-picked from OpenAI and Anthropic, we tune so you don't have to.",
+        slack: "Auto-picked from OpenAI and Anthropic (we tune so you don't have to).",
         code: 'You pick: Claude Code or Codex, with reasoning effort dialed in per task.',
     },
 ]
@@ -467,20 +476,13 @@ const compareLinks: { label: string; url: string }[] = [
 
 const faqItems = [
     {
-        trigger: 'Is it a better coding model?',
+        trigger: 'How does the PostHog Slack app decide when to answer or code?',
         content: (
             <p>
-                No. It runs the same frontier models everyone else does. The difference is context – an agent that can
-                read your funnels, replays, and errors is working from evidence, not guessing at what matters.
-            </p>
-        ),
-    },
-    {
-        trigger: 'Is it an analytics agent or a coding agent?',
-        content: (
-            <p>
-                Both, in one thread. A two-stage classifier looks at every @mention and decides whether it needs repo
-                access (code task) or not (data question). Explore data and build in the same conversation.
+                The PostHog Slack app doesn't have an explicit <code>/ask</code> vs <code>/code</code> toggle. Instead,
+                when you @PostHog mention the bot, it auto-classifies the request. Phrasing your question with
+                product/analytics terms (and avoiding repo/PR/file-extension words) is how you steer it to answer with
+                data instead of a PR.
             </p>
         ),
     },
@@ -494,11 +496,70 @@ const faqItems = [
         ),
     },
     {
-        trigger: 'Will it touch our whole codebase?',
+        trigger: 'What should I prompt the PostHog Slack app to do?',
         content: (
             <p>
-                It only touches repos you connect, and every change goes through a PR you review. Nothing merges without
-                a human saying yes.
+                Fixing typos, grammar, or basic CSS is a common first use case to get familiar with the workflow. Once
+                you see how easy and efficient it is to make changes, try prompting bigger changes, pulling complex data
+                queries, or impressing your customers by building a feature request in the same thread they requested
+                it.
+            </p>
+        ),
+    },
+    {
+        trigger: 'What about projects with multiple repos?',
+        content: (
+            <p>
+                Set a default repo per channel. Or set regex routing rules so the bot picks the right repo from the
+                channel name or the task description. When the bot isn't sure, it opens a picker in-thread. See the{' '}
+                <Link to="/docs/posthog-code/slack" className="text-red dark:text-yellow font-semibold hover:underline">
+                    PostHog Code Slack docs
+                </Link>{' '}
+                for the full command list.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can multiple people drive the same task?',
+        content: (
+            <p>
+                No. The agent will only follow instructions from the individual who originally kicked off the task. If
+                other people add to a thread (e.g., comment, add a file or link), the agent treats it as data to
+                consider, not instructions to obey (it might even tell you to step off).
+            </p>
+        ),
+    },
+    {
+        trigger: 'How are PRs generated with the Slack app credited?',
+        content: (
+            <p>
+                Branches get a <code>posthog-code/</code> prefix, and each commit includes a{' '}
+                <code>Generated-By: PostHog Code</code> line plus a <code>Task-Id</code> so you can trace it back. The
+                author is whoever your GitHub identity is set to in the environment – so the PR shows up under your
+                name, not the bot's.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Does the PostHog Slack app work in DMs?',
+        content: (
+            <p>
+                No. But if you want to @PostHog for quick tasks (or embarrassing questions) without spamming your team,
+                you can add it to a private channel with just you and the bot.
+            </p>
+        ),
+    },
+    {
+        trigger: 'What scopes does the bot ask for?',
+        content: (
+            <p>
+                Standard Slack bot scopes: read messages where it's been invited, post messages, upload files, and
+                resolve user profiles to match Slack accounts to PostHog accounts. It does not read messages from
+                channels it isn't in. See the{' '}
+                <Link to="/docs/libraries/slack" className="text-red dark:text-yellow font-semibold hover:underline">
+                    Slack docs
+                </Link>{' '}
+                for the full list.
             </p>
         ),
     },
@@ -512,43 +573,41 @@ const faqItems = [
         ),
     },
     {
-        trigger: "Won't it try to code every message?",
+        trigger: 'Do I need PostHog Code to use the PostHog Slack app?',
         content: (
             <p>
-                Every @PostHog mention runs through a task classifier and a repo router first. Data questions get
-                answered, not turned into PRs – and a prompt like "make a team photo of us as the Spice Girls" gets
-                correctly classified as non-actionable. (Sorry, Paul.)
-            </p>
-        ),
-    },
-    {
-        trigger: 'Do I need PostHog Code to use it?',
-        content: (
-            <p>
-                No. The Slack app has its own feature flag and isn't gated on a <Link to="/code">PostHog Code</Link>{' '}
+                No. The Slack app has its own feature flag and isn't gated on a{' '}
+                <Link to="/code" className="text-red dark:text-yellow font-semibold hover:underline">
+                    PostHog Code
+                </Link>{' '}
                 subscription. They share the same coding agent under the hood – the Slack app is just the front door if
                 you'd rather work from a thread than a desktop app.
             </p>
         ),
     },
     {
-        trigger: 'How does billing work?',
-        content: (
-            <p>
-                Usage-based, billed through <Link to="/ai">PostHog AI</Link>. The RFC for pricing is still open, so this
-                is the current direction rather than the final word – we'll update this answer once it settles.
-            </p>
-        ),
-    },
-    {
         trigger: 'What are the current limitations?',
         content: (
-            <ul>
-                <li>The sandbox is ephemeral (~6 hours). Long iterations need re-prompting.</li>
-                <li>GitHub auth requires a per-user personal integration – there's a known gap in onboarding.</li>
-                <li>Only the user who started the task can follow up in the thread.</li>
-                <li>The bot reads thread text only – no screenshot input yet.</li>
-            </ul>
+            <>
+                <p>An honest (but non-exhaustive) list:</p>
+                <ul className="list-disc pl-5 space-y-1 [&_li]:!list-disc">
+                    <li>
+                        Sandbox is ephemeral (~6 hours). Long iterations need re-prompting once the sandbox recycles.
+                    </li>
+                    <li>
+                        GitHub auth is per-user via a personal integration. Onboarding has a known gap; first-time setup
+                        is rougher than it should be.
+                    </li>
+                    <li>Only the user who started a task can follow up in-thread.</li>
+                    <li>
+                        No screenshot input yet – the bot reads text only. Paste descriptions instead of images for now.
+                    </li>
+                    <li>
+                        Prompt construction and review-bot trust heuristics are being actively iterated. Behavior may
+                        shift between beta builds.
+                    </li>
+                </ul>
+            </>
         ),
     },
 ]
@@ -568,11 +627,7 @@ const fighterOptions: { icon: IconComponent; iconColor: string; label: React.Rea
         icon: IconChat,
         iconColor: 'text-sky-blue',
         label: 'PostHog Slack app',
-        copy: (
-            <>
-                For the drive-by stuff – typos, cross-repo checks, whatever lands in <code>#papercuts</code>.
-            </>
-        ),
+        copy: "For all the drive-by stuff you'd normally Slack a teammate about (typos, cross-repo checks, quick fixes).",
     },
     {
         icon: IconCoffee,
@@ -646,14 +701,19 @@ export default function SlackAppPage(): JSX.Element {
                     />
                     <p>You don't need to know any of this to use it. But here's what happens after you hit send:</p>
                     <ol>
-                        <li>Reads the thread (text only, for now).</li>
-                        <li>Plans the work, edits files, and runs checks inside a sandboxed environment.</li>
-                        <li>Opens a draft PR with a summary and links it back into the thread.</li>
-                        <li>Iterates on follow-up messages from the original requester.</li>
-                        <li>Watches CI. Reruns failed jobs that look environmental. Doesn't touch workflow files.</li>
+                        <li>The agent scans the thread for relevant content (text only, for now).</li>
+                        <li>It plans the work, edits files, and runs checks inside a sandboxed environment.</li>
+                        <li>It opens a draft PR with a detailed description, and links it back into the thread.</li>
                         <li>
-                            Triages review comments by trust tier – acts on trusted code-review bots, and only addresses
-                            the rest if there's a real underlying regression.
+                            It iterates on follow-up messages from the original requester (and politely declines
+                            commands from your colleagues).
+                        </li>
+                        <li>
+                            It watches CI, reruns failed jobs that look environmental, and doesn't touch workflow files.
+                        </li>
+                        <li>
+                            It automatically triages review comments – acts on trusted code-review bots, and flags other
+                            changes as it babysits.
                         </li>
                     </ol>
                     <div className="clear-both" />
@@ -687,28 +747,29 @@ export default function SlackAppPage(): JSX.Element {
                         Choose your{' '}
                         <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">fighter</span>
                     </h3>
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/magnifying_glass_hog_c994f17b25.png"
-                        alt="A hedgehog inspecting things with a magnifying glass"
-                        className="@lg/reader-content:float-right @lg/reader-content:max-w-[200px] ml-4 mb-2 mt-2"
-                        imgClassName="w-full"
-                    />
-                    <div className="not-prose space-y-3 my-4">
-                        {fighterOptions.map(({ icon: Icon, iconColor, label, copy }, index) => (
-                            <div key={index}>
-                                <p className="m-0 inline-flex items-center gap-2 font-bold">
-                                    <Icon className={`size-4 shrink-0 ${iconColor}`} />
-                                    {label}
-                                </p>
-                                <p className="m-0 mt-1 text-base leading-snug">{copy}</p>
-                            </div>
-                        ))}
+                    <div className="not-prose grid @lg/reader-content:grid-cols-2 gap-6 items-center my-6">
+                        <div className="space-y-4">
+                            {fighterOptions.map(({ icon: Icon, iconColor, label, copy }, index) => (
+                                <div key={index}>
+                                    <p className="m-0 inline-flex items-center gap-2 font-bold text-base">
+                                        <Icon className={`size-5 shrink-0 ${iconColor}`} />
+                                        {label}
+                                    </p>
+                                    <p className="m-0 mt-1 text-base">{copy}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/choose_your_fighter_e62bd78032.png"
+                            alt="Choose your fighter"
+                            className="hidden @lg/reader-content:block"
+                            imgClassName="w-full"
+                        />
                     </div>
                     <p className="text-sm text-secondary">
                         Building your own? <Link to="/docs/model-context-protocol">PostHog MCP</Link> wires the same
                         product context into the editor or agent of your choice.
                     </p>
-                    <div className="clear-both" />
                     <div className="not-prose my-6">
                         <OSTable
                             size="sm"
