@@ -237,12 +237,11 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                         >
                             <p>
                                 <strong>
-                                    Already shipping with Claude Code, Cursor, Codex, or Windsurf? You can basically
-                                    stop here.
+                                    Already shipping with PostHog Code, Claude Code, Cursor, Codex, or Windsurf? Boy
+                                    howdy, you're going to love this.
                                 </strong>{' '}
                                 Wire up the PostHog MCP server and your agent can investigate an exception, pull the
                                 replay of the user who hit it, and tail the surrounding logs — all from your editor.
-                                Everything below this quest is for the curious.
                             </p>
 
                             <h3>Install in 30 seconds</h3>
@@ -298,8 +297,8 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                                 <Link to="/docs/posthog-ai" state={{ newWindow: true }}>
                                     PostHog AI
                                 </Link>{' '}
-                                lives in the app and can search replays, summarize log patterns, and triage error
-                                tracking issues in plain language.
+                                lives in the app and can search replays, summarize log patterns, and triage errors in
+                                plain language.
                             </p>
 
                             <div className="flex flex-wrap gap-2 mt-4">
@@ -318,9 +317,9 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             icon="IconWarning"
                         >
                             <p>
-                                Flip on exception autocapture and PostHog catches <code>$exception</code> events the
-                                moment they're thrown, client- or server-side. Upload your source maps and stack traces
-                                point straight to your original code — file, line, and function.
+                                Autocapture in Error Tracking catches <code>$exception</code> events the moment they're
+                                thrown, client- or server-side. Upload your source maps and stack traces point straight
+                                to your original code — file, line, and function.
                             </p>
 
                             <p>
@@ -366,10 +365,13 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             icon="IconRewindPlay"
                         >
                             <p>
-                                A session replay in PostHog isn't just a video. Open the activity panel and you get
-                                DevTools-level context synced to the timeline: console logs, network requests,
-                                performance data, rage clicks, dead clicks. When a user says "it just broke," you no
-                                longer have to guess.
+                                Rethink what replays look like with PostHog. Sure, you get the video, but you also get
+                                dev-tools level context synced to the timeline: console logs, network requests,
+                                performance data, rage clicks, dead clicks, craaaazy clicks. (Yes, even those.)
+                                <br />
+                                <br />
+                                When a user says "it just broke," you get the full picture with frontend context and
+                                backend visibility.
                             </p>
 
                             <ProductScreenshot
