@@ -14,9 +14,7 @@ Datadog and New Relic are mature but expensive and built for infrastructure team
 
 ## The unique belief
 
-PostHog's vision is a self-driving product: software that watches itself for bugs and conversion drops, then ships the fix while you sleep. That loop needs three things – signals, action, and the *context* that tells which signals actually matter. Most observability tools generate plenty of signals (events, errors, latency, logs) without the product context that makes them actionable.
-
-Logs are the backend half of the signal layer. But most observability tools treat them as text – timestamps, severity, message, search. You find the right log, then bounce to another tool to figure out who was affected, which feature flag was on, or what they were trying to do when it broke. The signal is in the data; the *meaning* is somewhere else.
+PostHog's vision is a self-driving product: software that watches itself for bugs and conversion drops, then ships the fix while you sleep. That loop needs three things – signals, action, and the *context* that tells which signals actually matter. Most observability tools generate a lot of data (events, errors, latency, logs) without the product context that makes them actionable.
 
 Every PostHog log already knows the user. Click any log to jump to the user who hit it – their session replay, their plan, their journey. From there, filter on any attribute you attached at ingest. See which logs hit your top 1% of customers and which hit anonymous bots.
 
