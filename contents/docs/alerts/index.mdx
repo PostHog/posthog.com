@@ -6,9 +6,18 @@ availability:
   free: partial
   selfServe: full
   enterprise: full
+  features:
+    alerts:
+      free: 'Up to 5'
+      selfServe: true
+      boost: true
+      scale: true
+      enterprise: true
 ---
 
 Alerts enable you to monitor your [insights](/product-analytics) and get notified when something important changes. You can set fixed thresholds (e.g., notify me when unique visitors exceed 5,000) or use [anomaly detection](#anomaly-detection) to automatically flag unusual patterns in your data.
+
+<FeatureAvailability availability={_frontmatter.availability.features.alerts} />
 
 Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
 
