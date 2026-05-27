@@ -1,4 +1,4 @@
-Path cleaning rules let you normalize dynamic URLs into consistent patterns, reducing the cardinality of your path data. This makes your web analytics paths, entry paths, exit paths, and path breakdowns more readable and actionable.
+Path cleaning rules let you normalize dynamic URLs into consistent patterns, reducing the cardinality of your path data. This makes your web analytics paths, entry paths, exit paths, outbound clicks, and path breakdowns more readable and actionable.
 
 For example, URLs like `/user/123`, `/user/456`, and `/user/789` can all be cleaned into `/user/:id` so they appear as a single row in your path tables.
 
@@ -25,7 +25,7 @@ Path cleaning solves this by using regex to match these patterns and replace the
 
 ## Configuring path cleaning rules
 
-Path cleaning rules are configured globally in your [project settings](https://us.posthog.com/settings/project-product-analytics#path-cleaning). Once configured, they apply across both web analytics and product analytics.
+Path cleaning rules are configured globally in your [project settings](https://app.posthog.com/settings/project-product-analytics#path-cleaning). Once configured, they apply across both web analytics and product analytics.
 
 Each rule has two parts:
 
@@ -72,7 +72,12 @@ Path cleaning rules apply to the following tiles on the [web analytics dashboard
 - **Top paths** – pageview counts grouped by cleaned path
 - **Entry paths** – first pageview of each session, grouped by cleaned path
 - **Exit paths** – last pageview of each session, grouped by cleaned path
+<<<<<<< HEAD
 - **Outbound clicks** – external URLs users clicked, grouped by cleaned URL
+||||||| 564cbfd5e
+=======
+- **Outbound clicks** – external URLs users clicked to leave your site, grouped by cleaned URL
+>>>>>>> master
 
 Path cleaning also applies when using [trends insights](/docs/product-analytics/trends) with a path breakdown.
 

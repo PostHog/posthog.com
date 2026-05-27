@@ -1,13 +1,9 @@
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<CalloutBox icon="IconInfo" title="Revenue analytics is in beta" type="fyi">
+<CalloutBox icon="IconWarning" title="Revenue analytics is being deprecated" type="caution">
 
-Revenue analytics is currently works best for:
-  
-1. Small to medium-sized companies
-2. Companies with subscription models (mostly SaaS)
+We'll remove the Revenue analytics dashboard on or after **June 30th, 2026**.
 
-If you process more than 20,000 transactions per month, or your revenue comes primarily from one-off payments rather than recurring subscriptions, revenue analytics may feel less useful, slower, or provide less insight than expected.
+We're not stepping away from revenue in PostHog — we're rethinking how it should work. Instead of maintaining a single, opinionated Revenue analytics dashboard, we're focusing on exposing revenue properties on persons and groups so you can use them everywhere: insights, SQL, and persons/groups profiles. Each use case (ecommerce, SaaS, recurring revenue, one-off, services, multi-tenant) can then build the dashboard it actually needs — or have PostHog AI and agents via our MCP build it for you.
 
 </CalloutBox>
-
