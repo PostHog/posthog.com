@@ -102,13 +102,20 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                 contentMaxWidthClass="max-w-5xl"
                 showQuestions={false}
             >
-                <div className="grid grid-cols-1 @lg:grid-cols-[1.2fr_1fr] gap-10 items-center mb-6 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 @lg:grid-cols-[2fr_0.6fr] gap-10 items-center mb-6 max-w-7xl mx-auto">
                     <div>
-                        <h1 className="text-3xl md:text-5xl !mb-4">Observability built for product engineers</h1>
-                        <p className="text-lg md:text-xl mb-6 text-secondary">
-                            Error tracking, session replay, and logs in one tool. One SDK to install all three. One MCP
-                            server so Claude Code, Cursor, or Codex can debug end-to-end without you opening a
-                            dashboard.
+                        <h1 className="text-3xl md:text-5xl !mb-4">A fearsome threesome bundled for debugging.</h1>
+                        <p className="text-lg md:text-xl mb-2 text-secondary">
+                            Error tracking, session replay, and logs in one. An MCP server so you can debug without ever
+                            opening a dashboard or learning a UI.
+                            <br />
+                            Smell that? That's the scent of ruthlessly efficient product.
+                        </p>
+                        <p className="text-xs !mb-6 text-muted italic">
+                            (Of course, you can't really smell it. But let's use the power of the human imagination. If
+                            you are, indeed, smelling something, and it's coming from your machine, you may have a
+                            problem. Like your code might be fire, but your machine may literally be on fire. Consult
+                            with your local fire department.)
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
                             <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
@@ -137,9 +144,9 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                     </div>
                     <div className="flex justify-center">
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/magnifying_glass_hog_c994f17b25.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/bug_catcher_719a67117f.png"
                             alt="PostHog hedgehog with a magnifying glass"
-                            className="w-full max-w-[450px] mx-auto"
+                            className="w-full max-w-[220px] mx-auto"
                         />
                     </div>
                 </div>
