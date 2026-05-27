@@ -1,0 +1,199 @@
+---
+title: PostHog MCP FAQ and advanced setup
+sidebarTitle: FAQ
+sidebar: Docs
+showTitle: true
+---
+
+Everything you need to know about authentication, scoping, filtering, safety, and billing for the PostHog MCP server. If you're just getting started, head to the [overview](/docs/model-context-protocol) or the [use cases](/docs/model-context-protocol/use-cases) page first.
+
+> Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review tool calls before executing them.
+
+## Frequently asked questions
+
+### What is the PostHog MCP server?
+
+The PostHog MCP server is a hosted [Model Context Protocol](https://modelcontextprotocol.io/introduction) endpoint that exposes PostHog's products – feature flags, product analytics, error tracking, experiments, SQL queries, CDP, surveys, and more – as function-calling tools to any MCP-compatible AI agent.
+
+### How much does it cost?
+
+It's free. Connecting to the MCP server and calling its tools doesn't incur any charges on your PostHog bill. Standard PostHog [usage and billing](/docs/billing) still apply to the underlying data your queries consume.
+
+### Which AI clients and editors are supported?
+
+Anything that speaks MCP works. We've tested and documented setup for Claude Code, Claude Desktop, Cursor, Codex, VS Code, Windsurf, and Zed. The [PostHog Wizard](https://github.com/PostHog/wizard) can install the server into most of these in one command.
+
+### Do I need to create an API key?
+
+No, OAuth is the recommended path and works out of the box with the wizard. If your client doesn't support OAuth, you can use a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) with the `MCP Server` preset – see the [API key authentication](#using-an-api-key-instead-of-oauth) section below.
+
+### Where is my data sent?
+
+The MCP server acts as a proxy to your PostHog instance and is automatically routed to the correct region (US or EU) based on the account you sign in with. It does not store your analytics data – queries are executed against your PostHog project and results are returned directly to your AI client.
+
+### Is it safe to let an agent write to my project?
+
+Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review tool calls before executing them. You can also restrict the session to specific tools or feature categories using [tool filtering](#filtering-available-tools), and pin the agent to a specific organization or project to limit blast radius.
+
+## Advanced configuration
+
+### Using an API key instead of OAuth
+
+If your MCP client doesn't support OAuth, you can authenticate manually:
+
+1. Create a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) using the **MCP Server** preset (this scopes access to a specific project)
+2. Add the `Authorization: Bearer YOUR_API_KEY` header to your MCP configuration
+
+Example for Cursor (add to `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+### Pinning to a specific organization or project
+
+If you're building a programmatic integration or want to restrict the MCP session to a specific organization or project, you can pin the context using headers or query parameters.
+
+When you pin the context, the `switch-organization` and `switch-project` tools are automatically excluded from the available tool list:
+
+- When `projectId` is provided: both `switch-organization` and `switch-project` are excluded
+- When only `organizationId` is provided: only `switch-organization` is excluded
+
+**Headers:**
+
+- `x-posthog-organization-id` - Pin to a specific organization
+- `x-posthog-project-id` - Pin to a specific project
+
+**Query parameters:**
+
+- `organization_id` - Pin to a specific organization
+- `project_id` - Pin to a specific project
+
+Example for Cursor (add to `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here",
+        "x-posthog-organization-id": "your_org_id",
+        "x-posthog-project-id": "your_project_id"
+      }
+    }
+  }
+}
+```
+
+### Filtering available tools
+
+You can limit which tools are available using two query parameters, individually or together.
+
+#### Filter by feature category
+
+The `features` parameter exposes all tools belonging to one or more feature categories:
+
+```text
+https://mcp.posthog.com/mcp?features=flags,dashboards,insights
+```
+
+Available features:
+
+| Feature                  | Description                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------- |
+| `workspace`              | Organization and project management                                                    |
+| `actions`                | [Action definitions](/docs/data/actions)                                               |
+| `activity_logs`          | Activity log viewing                                                                   |
+| `alerts`                 | [Alert management](/docs/product-analytics/alerts)                                     |
+| `annotations`            | [Annotation management](/docs/product-analytics/annotations)                           |
+| `cohorts`                | [Cohort management](/docs/data/cohorts)                                                |
+| `conversations`          | [Support ticket management](/docs/support)                                             |
+| `dashboards`             | [Dashboard creation and management](/docs/product-analytics/dashboards)                |
+| `data_schema`            | Data schema exploration                                                                |
+| `data_warehouse`         | [Data warehouse management](/docs/data-warehouse)                                      |
+| `debug`                  | Debug and diagnostic tools                                                             |
+| `docs`                   | PostHog documentation search                                                           |
+| `early_access_features`  | [Early access feature management](/docs/feature-flags/early-access-feature-management) |
+| `error_tracking`         | [Error monitoring and debugging](/docs/error-tracking)                                 |
+| `events`                 | Event and property definitions                                                         |
+| `experiments`            | [A/B testing experiments](/docs/experiments)                                           |
+| `flags`                  | [Feature flag management](/docs/feature-flags)                                         |
+| `hog_functions`          | [CDP function management](/docs/cdp)                                                   |
+| `hog_function_templates` | CDP function template browsing                                                         |
+| `insights`               | [Analytics insights](/docs/product-analytics/insights)                                 |
+| `llm_analytics`          | [LLM analytics evaluations](/docs/ai-engineering)                                      |
+| `prompts`                | [LLM prompt management](/docs/ai-engineering)                                          |
+| `logs`                   | [Log querying](/docs/ai-engineering/observability)                                     |
+| `notebooks`              | [Notebook management](/docs/notebooks)                                                 |
+| `persons`                | [Person and group management](/docs/data/persons)                                      |
+| `reverse_proxy`          | Reverse proxy record management                                                        |
+| `search`                 | Entity search across the project                                                       |
+| `sdk_doctor`             | [SDK health diagnostics](/docs/sdk-doctor)                                             |
+| `sql`                    | SQL query execution                                                                    |
+| `surveys`                | [Survey management](/docs/surveys)                                                     |
+| `workflows`              | [Workflow management](/docs/cdp)                                                       |
+
+> **Note:** Hyphens and underscores are treated as equivalent in feature names (e.g., `error-tracking` and `error_tracking` both work).
+
+#### Filter by tool name
+
+The `tools` parameter exposes specific tools by their exact name. Use the [tools reference](/docs/model-context-protocol/tools) to find the names you need:
+
+```text
+https://mcp.posthog.com/mcp?tools=dashboard-get,feature-flag-get-all,execute-sql
+```
+
+#### Combining both parameters
+
+When both `features` and `tools` are provided, they act as a union — a tool is exposed if it matches a feature category **or** is listed by name. This lets you select a whole feature group and surgically add individual tools from other categories:
+
+```text
+https://mcp.posthog.com/mcp?features=flags&tools=dashboard-get
+```
+
+If neither parameter is specified, all tools are available.
+
+Example for Cursor (add to `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp?features=flags&tools=dashboard-get",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+## Prompts and resources
+
+The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
+
+Currently we support Next.js, with more frameworks in progress.
+
+## Privacy and support
+
+- **Privacy Policy:** [posthog.com/privacy](/privacy)
+- **Terms of Service:** [posthog.com/terms](/terms)
+- **Support:** [posthog.com/questions](/questions) or [in-app support](https://app.posthog.com/home#supportModal)
+
+The MCP server acts as a proxy to your PostHog instance. It does not store your analytics data – all queries are executed against your PostHog project and results are returned directly to your AI client.
+
+## Keep exploring
+
+- [Use cases](/docs/model-context-protocol/use-cases) – example prompts and multi-step recipes
+- [Tools reference](/docs/model-context-protocol/tools) – every tool the MCP server exposes
+- [Overview](/docs/model-context-protocol) – back to the MCP overview and install instructions
