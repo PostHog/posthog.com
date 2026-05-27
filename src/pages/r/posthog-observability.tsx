@@ -12,10 +12,10 @@ import { SingleCodeBlock } from 'components/CodeBlock'
 import WizardCTA from 'components/WizardCTA'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
-import JuiceboxLogo from 'components/CustomerLogos/JuiceboxLogo'
-import ExaLogo from 'components/CustomerLogos/ExaLogo'
-import SupabaseLogo from 'components/CustomerLogos/SupabaseLogo'
-import { IconRewindPlay, IconWarning, IconCode2 } from '@posthog/icons'
+import LovableLogo from 'components/CustomerLogos/LovableLogo'
+import HomeDepotLogo from 'components/CustomerLogos/HomeDepotLogo'
+import MintlifyLogo from 'components/CustomerLogos/MintlifyLogo'
+import { IconRewindPlay, IconWarning, IconCode2, IconChevronDown } from '@posthog/icons'
 
 const TOP_COUNT = 8
 const PLATFORM_ORDER = [
@@ -40,6 +40,19 @@ const PLATFORM_ORDER = [
 export default function PostHogObservabilityLanding(): JSX.Element {
     const [showMore, setShowMore] = useState(false)
     const [isIdle, setIsIdle] = useState(false)
+    const [openQuestion, setOpenQuestion] = useState<number | null>(null)
+
+    const handleScrollToMCP = () => {
+        document.getElementById('quest-item-let-your-ai-agent-debug-for-you')?.scrollIntoView({ behavior: 'smooth' })
+    }
+
+    const [installMCPCopied, setInstallMCPCopied] = useState(false)
+
+    const handleCopyMCP = () => {
+        navigator.clipboard.writeText('npx @posthog/wizard mcp add')
+        setInstallMCPCopied(true)
+        setTimeout(() => setInstallMCPCopied(false), 2000)
+    }
 
     const allPlatforms = usePlatformList('docs/error-tracking/installation', 'observability installation')
     const sortedPlatforms = useMemo(() => {
@@ -98,15 +111,10 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             dashboard.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
-                            <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                            <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                 Get started free
                             </CallToAction>
-                            <CallToAction
-                                type="secondary"
-                                size="md"
-                                to="/docs/model-context-protocol"
-                                state={{ newWindow: true }}
-                            >
+                            <CallToAction type="secondary" size="md" onClick={handleScrollToMCP}>
                                 Install MCP
                             </CallToAction>
                         </div>
@@ -138,10 +146,10 @@ export default function PostHogObservabilityLanding(): JSX.Element {
 
                 <div className="mb-12 max-w-7xl mx-auto">
                     <div className="flex flex-wrap items-center gap-x-12 gap-y-6 text-primary dark:text-primary-dark">
-                        <SupabaseLogo className="fill-current object-contain max-w-full h-8" />
+                        <LovableLogo className="fill-current object-contain max-w-full h-6" />
                         <ElevenLabsLogo className="fill-current object-contain max-w-full h-8" />
-                        <JuiceboxLogo className="fill-current object-contain max-w-full h-8" />
-                        <ExaLogo className="fill-current object-contain max-w-full h-8" />
+                        <HomeDepotLogo className="object-contain max-w-full h-12" />
+                        <MintlifyLogo className="fill-current object-contain max-w-full h-8" />
                     </div>
                     <p className="text-xs mt-3 !mb-0">
                         <span className="font-semibold">A few PostHog customers debugging with us in production.</span>
@@ -209,7 +217,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             </p>
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Get started free
                                 </CallToAction>
                             </div>
@@ -288,15 +296,10 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             </p>
 
                             <div className="flex flex-wrap gap-2 mt-4">
-                                <CallToAction
-                                    type="primary"
-                                    size="md"
-                                    to="/docs/model-context-protocol"
-                                    state={{ newWindow: true }}
-                                >
-                                    Install MCP
+                                <CallToAction type="primary" size="md" onClick={handleCopyMCP}>
+                                    {installMCPCopied ? 'npx command copied! 🚀' : 'Install MCP'}
                                 </CallToAction>
-                                <CallToAction type="secondary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="secondary" size="md" to="https://app.posthog.com/signup">
                                     Get started free
                                 </CallToAction>
                             </div>
@@ -492,8 +495,93 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             </p>
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Try the bundle — free
+                                </CallToAction>
+                            </div>
+                        </QuestLogItem>
+
+                        <QuestLogItem
+                            title="Questions engineers ask us"
+                            subtitle="Real questions, honest answers"
+                            icon="IconThoughtBubble"
+                        >
+                            <p>Things people actually ask before signing up.</p>
+
+                            <div className="not-prose divide-y divide-border">
+                                {[
+                                    {
+                                        question: 'Wait, I thought PostHog was just product analytics?',
+                                        answer: 'We took a long, hard look at the current observability environment and saw what was missing: something that connects customer data with classic observability tools. A few late nights, piña coladas, and AI agent negotiations later, voilà!',
+                                        url: '',
+                                    },
+                                    {
+                                        question: 'How is this different from Sentry + Datadog + FullStory?',
+                                        answer: "Three subscriptions, three UIs, three alert configs, three different ways to spell 'observability' in your Slack messages. PostHog is one SDK, one tool, one bill. And the data is already linked — no CSV exports, no matching session IDs across dashboards.",
+                                        url: '',
+                                    },
+                                    {
+                                        question:
+                                            'Does OTel support mean I can use my existing logging setup and fire away?',
+                                        answer: 'Yes. Point your existing OTel SDK at PostHog, drop in your project token, and your structured logs land alongside everything else. No PostHog-specific packages required.',
+                                        url: '/docs/logs/installation',
+                                    },
+                                    {
+                                        question:
+                                            'Can I use just one of the three, or do I have to commit to all three?',
+                                        answer: "Monogamy is valid. But we've found most engineers end up appreciating all three. Start with one, see how you feel. Once an exception links directly to a session replay with the surrounding log lines attached... going back to a single tool feels limiting.",
+                                        url: '',
+                                    },
+                                    {
+                                        question: 'Is session replay going to make my privacy team panic?',
+                                        answer: "We have PII masking, sampling controls, network request filtering, and fine-grained capture options. Your privacy team can sleep soundly. Your users' passwords will not be in the replay. (We checked.)",
+                                        url: '/docs/session-replay/privacy',
+                                    },
+                                    {
+                                        question: 'What happens when I blow past the free tier?',
+                                        answer: 'Usage-based pricing kicks in — you only pay for what you use. You can set per-product billing limits so there are no surprise charges at the end of the month. Error tracking, session replay, and logs each have their own cap.',
+                                        url: '/pricing',
+                                    },
+                                    {
+                                        question:
+                                            'Can the MCP agent really debug issues without me opening a dashboard?',
+                                        answer: 'We like to think so. Your agent grabs the error, pulls the replay, tails the logs, and hands you a fix. You stay in the zone. The zone is beautiful. The zone is where bugs go to die. The zone is— okay, you get it. Install the MCP.',
+                                        url: '/docs/model-context-protocol',
+                                    },
+                                ].map((item, i) => (
+                                    <div key={i} className="py-3">
+                                        <button
+                                            onClick={() => setOpenQuestion(openQuestion === i ? null : i)}
+                                            className="w-full text-left flex items-center justify-between gap-4 font-semibold text-sm cursor-pointer hover:text-primary transition-colors"
+                                        >
+                                            <span>{item.question}</span>
+                                            <IconChevronDown
+                                                className={`shrink-0 size-4 transition-transform duration-200 ${
+                                                    openQuestion === i ? 'rotate-180' : ''
+                                                }`}
+                                            />
+                                        </button>
+                                        {openQuestion === i && (
+                                            <div className="mt-2 text-sm">
+                                                <p className="text-secondary !mb-2">{item.answer}</p>
+                                                {item.url && (
+                                                    <Link
+                                                        to={item.url}
+                                                        state={{ newWindow: true }}
+                                                        className="text-red dark:text-yellow font-semibold text-xs hover:underline"
+                                                    >
+                                                        Read the docs →
+                                                    </Link>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="mt-6">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
+                                    Get started free
                                 </CallToAction>
                             </div>
                         </QuestLogItem>
@@ -503,10 +591,11 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             subtitle="Generous free tier on all three"
                             icon="IconPiggyBank"
                         >
+                            <p>Good news: no per-seat pricing, no enterprise plan required.</p>
                             <p>
                                 PostHog Observability is built to be cost-effective by default, with a generous free
-                                tier on each product and transparent usage-based pricing. No per-seat charges, no
-                                enterprise gate on features — more than 90% of companies use PostHog for free.
+                                tier on each product and transparent usage-based pricing. More than 90% of companies use
+                                PostHog for free.
                             </p>
 
                             <h2>TL;DR 💸</h2>
@@ -549,7 +638,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             <p>That's it! You're ready to start integrating.</p>
 
                             <div className="flex flex-wrap gap-2 mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Get started free
                                 </CallToAction>
                                 <CallToAction
@@ -563,6 +652,26 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             </div>
                         </QuestLogItem>
                     </QuestLog>
+                </div>
+
+                <div className="text-center py-16 mt-4 opacity-60 hover:opacity-100 transition-opacity duration-500">
+                    <p className="text-sm text-secondary italic !mb-4">
+                        You made it to the bottom. That means you probably read stack traces before filing a bug report.
+                        Mad respect.
+                    </p>
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Frame_10138_5169832152.png"
+                        alt="PostHog hedgehog"
+                        className="mx-auto mb-4"
+                        imgClassName="w-28 h-auto"
+                    />
+                    <p className="text-sm text-secondary italic !mb-0">
+                        Now go install the{' '}
+                        <Link to="/docs/model-context-protocol" className="underline">
+                            PostHog MCP
+                        </Link>{' '}
+                        and let your agent do the debugging. You've earned it.
+                    </p>
                 </div>
             </ReaderView>
         </>
