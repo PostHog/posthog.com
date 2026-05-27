@@ -472,6 +472,7 @@ export default function Tabbed() {
                                             <Link
                                                 to="/talk-to-a-human?edition=enterprise"
                                                 className="text-red dark:text-yellow font-semibold text-sm"
+                                                state={{ newWindow: true }}
                                             >
                                                 Contact us
                                             </Link>
