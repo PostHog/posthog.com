@@ -15,8 +15,6 @@ Instead, `/ko/index.tsx` renders the local `_KoreanHome.tsx` copy with local tra
 This keeps the Korean experiment easy to roll back by removing this directory and the small `/ko` route selection in
 `gatsby-browser.tsx` and `gatsby-ssr.js`, and avoids changing the English homepage test surface.
 
-Translation source: Google Sheet `1Rm9ttecZWmsFCQURJ8xmaWNkvejfmUy80tS5owUwydE`.
-
 Rules:
 
 - Use translated Korean text only when the sheet has a Korean value.
