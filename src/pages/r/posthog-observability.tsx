@@ -129,8 +129,8 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                     </div>
                     <div className="flex justify-center">
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/presentation_55bc6acecd.png"
-                            alt="PostHog Observability"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/magnifying_glass_hog_c994f17b25.png"
+                            alt="PostHog hedgehog with a magnifying glass"
                             className="w-full max-w-[450px] mx-auto"
                         />
                     </div>
