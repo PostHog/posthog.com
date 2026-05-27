@@ -1989,11 +1989,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     function getSnapDimensions(side: 'left' | 'right') {
-        const taskbarRect = document.querySelector('#taskbar')?.getBoundingClientRect()
+        const taskbarRect = isSSR ? null : document.querySelector('#taskbar')?.getBoundingClientRect()
         const left = taskbarRect?.left ?? 0
         const top = taskbarRect?.top ?? 0
-        const availableWidth = window.innerWidth - left * 2
-        const availableHeight = window.innerHeight - taskbarHeight - top
+        const availableWidth = isSSR ? 0 : window.innerWidth - left * 2
+        const availableHeight = isSSR ? 0 : window.innerHeight - taskbarHeight - top
         const finalWidth = availableWidth / 2
         return {
             size: { width: finalWidth, height: availableHeight },
@@ -2017,7 +2017,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     function getExpandedDimensions() {
-        const taskbarRect = document.querySelector('#taskbar')?.getBoundingClientRect()
+        const taskbarRect = isSSR ? null : document.querySelector('#taskbar')?.getBoundingClientRect()
         return {
             position: { x: taskbarRect?.left || 8, y: 0 },
             size: {
@@ -2083,6 +2083,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     const updateTaskbarHeight = () => {
+        if (isSSR) return
         const rect = document.querySelector('#taskbar')?.getBoundingClientRect()
         if (rect && rect.height > 0) {
             setTaskbarHeight(rect.top + rect.height)
