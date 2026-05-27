@@ -50,6 +50,7 @@ Some of the most relevant options are:
 | `enable_recording_console_log`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if console logs should be recorded as part of the session recording. [More information](/docs/session-replay/manual#console-logs-recording).                                                                                                                                                        |
 | `enable_heatmaps`<br/><br/>**Type:** Boolean<br/>**Default:** undefined                                                                                                                    | Determines if heatmap data should be captured.                                                                                                                                                                                                                                                                 |
 | `evaluation_contexts`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined`                                                                                                 | Evaluation context tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation contexts (or no evaluation contexts) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) for more details. Available in version 1.250.0+. The legacy parameter `evaluation_environments` (version 1.270.0+) is also supported for backward compatibility. |
+| `flag_keys`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined`                                                                                                          | Feature flag keys to include in this SDK instance's `/flags` requests. When set, PostHog scopes evaluation and the response to these keys. Dependency flags required to evaluate requested flags may also be evaluated and returned. Leave unset to evaluate all eligible flags. |
 | `external_scripts_inject_target`<br/><br/>**Type:** Enum: `'body'`, `'head'`<br/>**Default:** `'body'` (or `'head'` when `defaults: '2026-01-30'` or later)                           | Controls where PostHog injects external dependency scripts (for session recording, surveys, etc.) in the DOM. Use `'head'` to avoid SSR hydration errors when using frameworks like Next.js, TanStack Router, or other React-based SSR setups. The `'body'` option maintains legacy behavior. This addresses [hydration errors](https://github.com/PostHog/posthog-js/issues/2781) that can occur when PostHog modifies the DOM before the framework completes hydration. |
 | `flags_api_host`<br/><br/>**Type:** String<br/>**Default:** `null`                                                                                                                        | A separate reverse proxy host for feature flag requests. If set, all feature flag evaluation requests will use this host instead of `api_host`. This requires setting up your own [reverse proxy](/docs/advanced/proxy) and creates a logical separation between feature flags and analytics, which can help prevent feature flags from being blocked by ad blockers. See [preventing feature flags from being blocked](/tutorials/flags-adblock-prevention) for more details. |
 | `loaded`<br/><br/>**Type:** Function<br/>**Default:** `function () {}`                                                                                                                    | A function to be called once the PostHog scripts have loaded successfully.                                                                                                                                                                                                                                     |
@@ -64,6 +65,7 @@ Some of the most relevant options are:
 | `property_denylist`<br/><br/>**Type:** Array<br/>**Default:** `[]` | A list of properties that should never be sent with `capture` calls. |
 | `person_profiles`<br/><br/>**Type:** Enum: `always`, `identified_only`<br/>**Default:** `identified_only` | Set whether events should capture identified events and process person profiles. |
 | `rate_limiting`<br/><br/>**Type:** Object<br/>**Default:** `{ events_per_second: 10, events_burst_limit: events_per_second * 10 }` | Controls event rate limiting to help you avoid accidentally sending too many events. `events_per_second` determines how many events can be sent per second on average (default: 10). `events_burst_limit` sets the maximum events that can be sent at once (default: 10 times the `events_per_second` value). |
+| `logs`<br/><br/>**Type:** Object<br/>**Default:** `undefined` | Configuration options for browser logs. See [configuring logs](#configuring-logs) below. |
 | `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | Configuration options for recordings. More details [found here](/docs/session-replay/manual). When `defaults: '2025-11-30'` or later is set, `strictMinimumDuration` is enabled by default, which checks the minimum duration against actual buffer data rather than session duration. |
 | `session_idle_timeout_seconds`<br/><br/>**Type:** Integer<br/>**Default:** `1800` | The maximum amount of time a session can be inactive before it is split into a new session. |
 | `xhr_headers`<br/><br/>**Type:** Object<br/>**Default:** `{}` | Any additional headers you wish to pass with the XHR requests to the PostHog API. |
@@ -94,6 +96,34 @@ But if you need more control, we also provide a `rageclick` config that takes an
 |-----------|-------------|
 | `css_selector_ignorelist`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined` | List of CSS selectors to ignore rage clicks on, e.g. `['.carousel-button', '.next-button']`. Elements matching these selectors (or their parents) won't trigger rage click events. An empty array disables rage click events all together. Providing any value overrides the defaults, so PostHog will *only* ignore the selectors you explicitly provide in the array. |
 | `content_ignorelist`<br/><br/>**Type:** Boolean or Array of Strings<br/>**Default:** `true` when `defaults: '2025-11-30'` or later | Excludes elements from rage click tracking based on their text content or aria-label. When `true`, uses default keywords ['next', 'previous', 'prev', '>', '<']. When set to an array of strings (max 10 items), uses custom keywords. Set to `false` to disable content-based exclusion. Useful for preventing false positives on navigation elements. |
+
+## Configuring logs
+
+The `logs` config controls how browser log records are captured and sent to PostHog via OpenTelemetry. You can send structured records with `posthog.logger` (or `posthog.captureLog` for full control), autocapture `console.*` calls, or both. See the [JavaScript web Logs installation guide](/docs/logs/installation/javascript) for a walkthrough.
+
+| Attribute | Description |
+|-----------|-------------|
+| `captureConsoleLogs`<br/><br/>**Type:** Boolean<br/>**Default:** `undefined` | When enabled, automatically captures `console.log`, `console.warn`, `console.error`, and friends, and sends them to PostHog as structured log records. Review your app's console output before enabling – overriding `console` can forward passwords, tokens, or user input written to the console by your code or by third-party libraries. |
+| `serviceName`<br/><br/>**Type:** String<br/>**Default:** `'unknown_service'` | The service name applied to all log records. Maps to the [OpenTelemetry resource attribute](https://opentelemetry.io/docs/specs/semconv/resource/) `service.name`. Set this to distinguish records from different frontend apps or environments when viewing them in PostHog. |
+| `environment`<br/><br/>**Type:** String<br/>**Default:** `undefined` | Deployment environment, e.g. `'production'` or `'staging'`. Maps to the OpenTelemetry resource attribute `deployment.environment`. |
+| `serviceVersion`<br/><br/>**Type:** String<br/>**Default:** `undefined` | Release version, e.g. `'1.2.3'`. Maps to the OpenTelemetry resource attribute `service.version`. |
+| `resourceAttributes`<br/><br/>**Type:** Object<br/>**Default:** `undefined` | Additional OpenTelemetry resource attributes applied to every record, e.g. `{ 'host.name': 'web-01' }`. Named fields above are applied first and can be overridden here. |
+| `flushIntervalMs`<br/><br/>**Type:** Number<br/>**Default:** `3000` | How often batched log records are flushed, in milliseconds. |
+| `maxBufferSize`<br/><br/>**Type:** Number<br/>**Default:** `100` | Buffer size before forcing a flush. |
+| `maxLogsPerInterval`<br/><br/>**Type:** Number<br/>**Default:** `1000` | Rate limit per flush window. Excess records are dropped with a single warning, protecting against runaway loggers flooding the network. |
+
+Example:
+
+```js
+posthog.init('<ph_project_token>', {
+  api_host: '<ph_client_api_host>',
+  logs: {
+    serviceName: 'checkout-web',
+    environment: 'production',
+    serviceVersion: '1.2.3',
+  },
+})
+```
 
 ## Advanced configuration
 

@@ -302,6 +302,16 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
                 }
             }
 
+            // Prepend MCP link as the first item in 'Utilities, add-ons, & packages'
+            if (category === 'product_os') {
+                categoryItems.unshift({
+                    type: 'item' as const,
+                    label: 'MCP',
+                    link: '/docs/model-context-protocol',
+                    icon: React.createElement(Icons.IconPlug, { className: 'size-4 text-gray' }),
+                })
+            }
+
             items.push({
                 type: 'submenu',
                 label: categoryDisplayNames[category] || category,
@@ -486,6 +496,11 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Blog',
                     link: '/blog',
+                },
+                {
+                    type: 'item',
+                    label: 'Product Engineer Handbook',
+                    link: '/product-engineer',
                 },
                 {
                     type: 'item',
@@ -1001,6 +1016,12 @@ export const SparksJoyItems = {
             link: '/sparks-joy/dictator-or-tech-bro',
             iconName: null,
             customIcon: <IconDictator />,
+        },
+        {
+            label: 'BrickHog',
+            link: '/sparks-joy/brickhog',
+            iconName: 'games' as AppIconName,
+            customIcon: null,
         },
     ],
     notGames: [

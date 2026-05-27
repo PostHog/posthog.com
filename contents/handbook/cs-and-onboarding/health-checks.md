@@ -32,11 +32,26 @@ them that they can save by removing the Group Analytics add-on from the billing 
 
 If they aren't benefitting from Autocapture you should reach out to let them know how best to use it. Alternatively, they can tune or turn it off by following the [Autocapture configuration docs](/docs/product-analytics/autocapture#configuring-autocapture).
 
+### Legacy Teams add-on
+
+Customers on the legacy "Teams" add-on ($450/month) can save $200 by switching to the [Boost add-on](/platform-packages#boost-add-on) ($250/month) if they don't need SAML SSO. The Teams add-on has been split into:
+
+- [Boost add-on](/platform-packages#boost-add-on) ($250/month)
+- [Scale add-on](/platform-packages#scale-add-on) ($750/month)
+
 ### Session replay targeting
 
 When Session replay is enabled it will capture all sessions by default.  As every session is counted for billing purposes, customers may end up with a bunch of low value short recordings and still be paying for them.
 
 If a customer has Session replay enabled, log in as them and look at their session replay [settings](/docs/session-replay/how-to-control-which-sessions-you-record).  At a minimum we recommend setting the minimum duration to 2 seconds or more but there are other tuning options which they may also benefit from.
+
+## Are they running up-to-date SDKs?
+
+Outdated SDKs miss out on bug fixes, performance improvements, and new features. A customer using a three-year-old SDK will hit issues we've already solved, which can silently erode trust over time.
+
+Check SDK versions using [SDK Doctor](/docs/sdk-doctor) or in Metabase via the `Library version audit` table. At minimum, the SDK sending the bulk of their event volume shouldn't be more than 3 months behind the latest. Monthly updates are the best-practice habit to encourage. Some SDKs have breaking changes between versions, and if so, make sure you make the customer aware about the breaking change.
+
+A light nudge on this also doubles as a natural re-engagement touchpoint for customers you haven't spoken to in a while.
 
 ## Have they implemented tracking incorrectly?
 
@@ -105,7 +120,7 @@ Cookieless mode can help them have more accurate tracking totals because when us
 ## Are feature flags resilient?
 
 ### Falling back to working code
-It is important that hitting the flags endpoint does not block an application from otherwise functioning correctly. If the flag fails to load or returns an unexpected value for any reason, such as `None`, `(empty string)`, or `false` you should [always fall back to working code.](/docs/feature-flags/best-practices#9-fallback-to-working-code)
+It is important that hitting the flags endpoint does not block an application from otherwise functioning correctly. If the flag fails to load or returns an unexpected value for any reason, such as `None`, `(empty string)`, or `false` you should [always fall back to working code.](/docs/feature-flags/best-practices#undefined-is-not-flag-is-off-nor-false)
 
 ### Server side local evaluation
 Implementing [Server-side local evaluation](/docs/feature-flags/local-evaluation) will ensure that flags continue to return values regardless of the network status of the flags endpoint. By default, PostHog will attempt to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request to fetch the flag value.

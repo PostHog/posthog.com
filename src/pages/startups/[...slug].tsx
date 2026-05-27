@@ -6,7 +6,7 @@ import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { IconCheck, IconX } from '@posthog/icons'
+import { IconCheck, IconX, IconStarFilled, IconQuestion } from '@posthog/icons'
 import OSTable from 'components/OSTable'
 import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
@@ -110,6 +110,7 @@ export default function Startups(): JSX.Element {
     // Use partner config if available, otherwise use defaults
     const titleContent = partnerConfig ? partnerConfig.title : <span>for startups</span>
     const creditValue = partnerConfig ? partnerConfig.value : '$50,000'
+    const applyUrl = `https://app.posthog.com/startups${partnerSlug ? `/${partnerSlug}` : ''}`
 
     return (
         <>
@@ -138,6 +139,28 @@ export default function Startups(): JSX.Element {
                                 {
                                     trigger: (
                                         <>
+                                            <IconQuestion className={`text-green size-5 inline-block`} />
+                                            <span className="flex-1">What is this?</span>
+                                        </>
+                                    ),
+                                    content: (
+                                        <p className="m-0">
+                                            PostHog for Startups helps early-stage teams and founders build better
+                                            products, faster. Get over $50,000 in credits to use across any PostHog
+                                            features, including LLM analytics.
+                                        </p>
+                                    ),
+                                },
+                            ]}
+                        />
+                        <Accordion
+                            data-scheme="primary"
+                            className=""
+                            defaultValue="item-0"
+                            items={[
+                                {
+                                    trigger: (
+                                        <>
                                             <IconCheck className={`text-green size-5 inline-block`} />
                                             <span className="flex-1">How to apply</span>
                                         </>
@@ -148,11 +171,7 @@ export default function Startups(): JSX.Element {
                                                 <li>Create a PostHog account and add a credit card</li>
                                                 <li>
                                                     After onboarding,{' '}
-                                                    <Link
-                                                        to="https://app.posthog.com/startups"
-                                                        external
-                                                        className="underline font-semibold"
-                                                    >
+                                                    <Link to={applyUrl} external className="underline font-semibold">
                                                         complete this form
                                                     </Link>
                                                 </li>
@@ -175,9 +194,7 @@ export default function Startups(): JSX.Element {
                                     trigger: (
                                         <>
                                             <IconCheck className={`text-green size-5 inline-block`} />
-                                            <span className="flex-1">
-                                                Qualifications for the PostHog startup program
-                                            </span>
+                                            <span className="flex-1">Who is eligible?</span>
                                         </>
                                     ),
                                     content: (
@@ -231,13 +248,17 @@ export default function Startups(): JSX.Element {
                             <h1 className="flex items-center gap-2.5 mb-0 text-2xl">
                                 <Logo className="h-14 relative -top-px" fill="white" /> {titleContent}
                             </h1>
+                            <p className="text-white mt-2 mb-3 max-w-xl">
+                                We help teams build better products — with credits, swag, and an array of partner
+                                benefits perfect for anyone building AI products.
+                            </p>
                             <ul className="prose prose-sm text-white mt-2 mb-4">
-                                <li>{creditValue} in PostHog credits</li>
-                                <li>Exclusive founder merch</li>
-                                <li>Partner benefits</li>
+                                <li>{creditValue} in PostHog credits for 12 months</li>
+                                <li>$12,000 in benefits from partners we like</li>
+                                <li>$1,500 of exclusive PostHog merch</li>
                             </ul>
 
-                            <OSButton asLink to="https://app.posthog.com/startups" variant="primary" size="md" external>
+                            <OSButton asLink to={applyUrl} variant="primary" size="md" external>
                                 Apply now
                             </OSButton>
 
@@ -245,7 +266,7 @@ export default function Startups(): JSX.Element {
                         </div>
                     </div>
 
-                    <div className="not-prose grid grid-cols-2 @lg:grid-cols-3 @5xl:grid-cols-5 gap-8 @2xl:gap-4 @3xl:gap-6 px-4 @3xl:px-8 relative -mt-12 max-w-6xl mb-8 @3xl:mb-12">
+                    <div className="not-prose grid grid-cols-2 @lg:grid-cols-3 @5xl:grid-cols-6 gap-8 @2xl:gap-4 @3xl:gap-6 px-4 @3xl:px-8 relative -mt-12 max-w-6xl mb-8 @3xl:mb-12">
                         <div className="bg-[#FFD254] -rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_credits_a8487ef646.png" />
                             <h3 className="text-base my-1 leading-tight">{creditValue} in PostHog credits</h3>
@@ -255,32 +276,35 @@ export default function Startups(): JSX.Element {
                         </div>
                         <div className="bg-[#9BBEC2] p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_merch_b2106b276a.png" />
-                            <h3 className="text-base my-1 leading-tight">Exclusive founder swag</h3>
+                            <h3 className="text-base my-1 leading-tight">$1,500 of founder swag</h3>
                             <p className="text-sm mb-0">
-                                You can never have too many laptop stickers, hats, or free t-shirts, right?
+                                You can never have too many laptop stickers or free PostHog t-shirts.
                             </p>
                         </div>
                         <div className="bg-[#E6B2F8] rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/startup_perk_2_f6a6b9d058.png" />
-                            <h3 className="text-base my-1 leading-tight">Easier incidents with Incident.io</h3>
-                            <p className="text-sm mb-0">
-                                Avoid additional stress by getting $1,500 off a teams plan for Incident.io.
-                            </p>
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startup_perk_2_f6a6b9d058.png" />
+                            <h3 className="text-base my-1 leading-tight">$1,500 off Incident.io</h3>
+                            <p className="text-sm mb-0">Incidents happen. Get $1,500 off a teams plan when they do.</p>
                         </div>
                         <div className="bg-[#C4D9FF] -rotate-2 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_sdks_25358b1af4.png" />
-                            <h3 className="text-base my-1 leading-tight">Better SDKs with Speakeasy</h3>
+                            <h3 className="text-base my-1 leading-tight">50% off with Speakeasy</h3>
                             <p className="text-sm mb-0">
-                                Building an API or SDK? Our pals at Speakeasy have you covered with 50% off for 6
-                                months.
+                                Build MCPs & skills with Speakeasy and get 50% off for 6 months.
                             </p>
                         </div>
                         <div className="bg-[#C4D9FF] -rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_search_3ecaae1574.png" />
-                            <h3 className="text-base my-1 leading-tight">Better search with Chroma</h3>
+                            <h3 className="text-base my-1 leading-tight">$5,000 of Chroma credit</h3>
                             <p className="text-sm mb-0">
-                                Building with AI? Chroma gives you $5,000 of credit for their search and retrieval
-                                service.
+                                Chroma's search infra for AI is fast, serverless, and scalable.
+                            </p>
+                        </div>
+                        <div className="bg-[#b8e0d8] rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/598171862_7fff97b6_15e5_4ff8_8f7c_46148f81efa1_515ee89918.png" />
+                            <h3 className="text-base my-1 leading-tight">$5,000 of Depot credit</h3>
+                            <p className="text-sm mb-0">
+                                Blazing-fast container builds and remote caching, trusted by us.
                             </p>
                         </div>
                     </div>
@@ -323,13 +347,15 @@ export default function Startups(): JSX.Element {
                     </div>
 
                     <div className="m-4 @3xl:m-8 max-w-6xl">
-                        <h2 className="mb-2">Compare others to PostHog's startup programs</h2>
+                        <h2 className="mb-2">How PostHog stacks up</h2>
                         <p className="mb-8">
-                            tl;dr: PostHog has the only startups program with a free laptop sticker...
+                            More credits, fewer limits, and partner perks you won't find elsewhere — plus the only
+                            startup program with free laptop stickers.
                         </p>
 
-                        <div className="overflow-x-auto">
+                        <div>
                             <OSTable
+                                width="full"
                                 columns={[
                                     { name: '', width: 'minmax(200px, 1fr)', align: 'left' },
                                     { name: 'Pendo', width: 'minmax(150px, 200px)', align: 'left' },
@@ -337,10 +363,15 @@ export default function Startups(): JSX.Element {
                                     { name: 'Amplitude', width: 'minmax(150px, 200px)', align: 'left' },
                                     { name: 'Mixpanel', width: 'minmax(150px, 200px)', align: 'left' },
                                     {
-                                        name: 'PostHog',
+                                        name: (
+                                            <span className="flex items-center gap-1.5">
+                                                <IconStarFilled className="size-4 text-yellow" />
+                                                PostHog
+                                            </span>
+                                        ),
                                         width: 'minmax(150px, 200px)',
                                         align: 'left',
-                                        className: '!bg-white dark:!bg-dark',
+                                        className: '!bg-[#FFF6DE] dark:!bg-yellow/20 !border-l-2 !border-l-yellow',
                                     },
                                 ]}
                                 rows={[
@@ -372,7 +403,8 @@ export default function Startups(): JSX.Element {
                                                         <li>&lt;2 years old</li>
                                                     </ul>
                                                 ),
-                                                className: 'bg-light dark:bg-dark',
+                                                className:
+                                                    'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
                                             },
                                         ],
                                     },
@@ -383,7 +415,11 @@ export default function Startups(): JSX.Element {
                                             { content: '1,000 monthly sessions' },
                                             { content: 'One year duration' },
                                             { content: 'One year duration' },
-                                            { content: 'One year duration', className: 'bg-light dark:bg-dark' },
+                                            {
+                                                content: 'One year duration',
+                                                className:
+                                                    'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
+                                            },
                                         ],
                                     },
                                     {
@@ -393,51 +429,62 @@ export default function Startups(): JSX.Element {
                                             { content: 'None' },
                                             { content: '200,000 MTUs' },
                                             { content: `${creditValue} credit` },
-                                            { content: `${creditValue} credit`, className: 'bg-light dark:bg-dark' },
+                                            {
+                                                content: (
+                                                    <span className="font-semibold">
+                                                        {creditValue} credit + $12,000 in partner perks
+                                                    </span>
+                                                ),
+                                                className:
+                                                    'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
+                                            },
                                         ],
                                     },
                                     {
                                         cells: [
                                             { content: 'Open source product', className: 'font-semibold' },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
                                             {
-                                                content: <IconCheck className="size-5 text-green" />,
-                                                className: 'bg-light dark:bg-dark',
+                                                content: <IconCheck className="size-6 text-green" />,
+                                                className:
+                                                    'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
                                             },
                                         ],
                                     },
                                     {
                                         cells: [
                                             { content: 'Free gifts (OMG stickers)', className: 'font-semibold' },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
                                             {
-                                                content: <IconCheck className="size-5 text-green" />,
-                                                className: 'bg-light dark:bg-dark',
+                                                content: <IconCheck className="size-6 text-green" />,
+                                                className:
+                                                    'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
                                             },
                                         ],
                                     },
                                     {
                                         cells: [
                                             { content: 'Partnership opportunities', className: 'font-semibold' },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
-                                            { content: <IconX className="size-5 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
+                                            { content: <IconX className="size-6 text-red" /> },
                                             {
-                                                content: <IconCheck className="size-5 text-green" />,
-                                                className: 'bg-light dark:bg-dark',
+                                                content: <IconCheck className="size-6 text-green" />,
+                                                className:
+                                                    'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
                                             },
                                         ],
                                     },
                                 ]}
                                 editable={false}
-                                size="sm"
+                                size="md"
                             />
                         </div>
                     </div>
@@ -454,11 +501,7 @@ export default function Startups(): JSX.Element {
                                         <p>
                                             Just sign up to a paid plan in PostHog (you're only charged for usage) and
                                             then fill in this{' '}
-                                            <Link
-                                                to="https://app.posthog.com/startups"
-                                                external
-                                                className="underline font-semibold"
-                                            >
+                                            <Link to={applyUrl} external className="underline font-semibold">
                                                 form
                                             </Link>
                                             . We will apply the credit automatically if you're eligible. If you're
@@ -565,7 +608,7 @@ export default function Startups(): JSX.Element {
                                     ),
                                 },
                                 {
-                                    trigger: 'How do I get the Incident.io/Speakeasy/Chroma discount?',
+                                    trigger: 'How do I get the Incident.io/Speakeasy/Chroma/Depot discount?',
                                     content: (
                                         <p>
                                             Once you're accepted into the PostHog for Startups program, we'll email you

@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { IconRewindPlay, IconX } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
-import { IconDemoThumb, AppIcon, IconChangelogThumb } from 'components/OSIcons'
+import { IconDemoThumb, AppIcon } from 'components/OSIcons'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -44,7 +43,7 @@ export const useProductLinks = () => {
         },
         {
             label: 'Product OS',
-            Icon: <AppIcon name="folder" />,
+            Icon: <AppIcon name="notebook" />,
             url: '/products',
             source: 'desktop',
         },

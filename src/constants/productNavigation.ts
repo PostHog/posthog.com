@@ -12,7 +12,15 @@ export const popularProducts = [
 ]
 
 // Newest products to highlight in the menu
-export const newestProducts = ['logs', 'endpoints', 'posthog_ai', 'llm_analytics', 'workflows_emails']
+export const newestProducts = [
+    'logs',
+    'endpoints',
+    'posthog_ai',
+    'llm_analytics',
+    'workflows_emails',
+    'posthog_code',
+    'support',
+]
 
 // Category ordering for display
 export const categoryOrder = [
@@ -71,7 +79,6 @@ export const productOrder: Record<string, string[]> = {
     analytics: [
         'web_analytics',
         'product_analytics',
-        'revenue_analytics',
         'llm_analytics',
         'custom_dashboards',
         'group_analytics',

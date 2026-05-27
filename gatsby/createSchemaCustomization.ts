@@ -83,6 +83,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       platformIconName: String
       platformSourceType: String
       featuredImageCaption: String
+      sourceId: String
     }
     type TeamData {
       name: String
@@ -333,6 +334,29 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       required: Boolean
       description: String
     }
+    type PostHogSource implements Node @dontInfer {
+      mdx: Mdx @link(by: "frontmatter.sourceId", from: "sourceId")
+      sourceId: String
+      name: String
+      slug: String
+      icon_url: String
+      docsUrl: String
+      unreleased: Boolean
+      beta: Boolean
+      featured: Boolean
+      caption: String
+      sourceFields: [PostHogSourceField]
+      permissionsCaption: String
+      featureFlag: String
+    }
+    type PostHogSourceField {
+      name: String
+      label: String
+      type: String
+      required: Boolean
+      placeholder: String
+      caption: String
+    }
     type SdkReferences implements Node {
       info: SdkReferencesInfo
       referenceId: String
@@ -560,6 +584,21 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 
     createTypes(
         `
+            type AchievementGroupIconAttributes {
+              url: String
+            }
+            type AchievementGroupIconData {
+              attributes: AchievementGroupIconAttributes
+            }
+            type AchievementGroupIcon {
+              data: AchievementGroupIconData
+            }
+            type AchievementGroup implements Node {
+              Title: String
+              description: String
+              tiered: Boolean
+              icon: AchievementGroupIcon
+            }
             type ShopifyCollection implements Node {
               handle: String!
               products: [ShopifyProduct!] @link(by: "shopifyId", from: "products.shopifyId")

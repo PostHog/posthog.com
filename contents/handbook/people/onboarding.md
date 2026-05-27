@@ -43,7 +43,7 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
 
 ## In-person onboarding
 
-Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary. We encourage team leads to consider the Hedgehouse as a location for in-person onboarding. Regardless of location, everyone should have their own bedroom.
+Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary. With very few exceptions (visa issues or excessive travel time), in-person onboarding should happen at [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco or the [Hedge House](/handbook/company/offsites#hedge-house) in London. Both are set up for it, remove most of the planning friction, and you'll always be in the same space as other PostHog teams — which is way more fun, and means you'll meet more people. Regardless of location, everyone should have their own bedroom.
 
 In these cases, the process is:
 
@@ -81,6 +81,13 @@ Your first week can definitely be a bit overwhelming at any new company, so here
 - You should try and set up a few calls with a range of people to introduce yourself
 - You should try and speak to some actual users of your product. Your manager or PM will help you set these up, and this can be a great source of things to work on in your first week.
 - You should dive straight in, fix a typo in the handbook, ship a tiny bug fix, anything to get you going! 
+
+> **If your laptop is delayed:** In rare cases your PostHog-issued laptop may not arrive until several days after your start date. If that happens, you can begin non-sensitive onboarding tasks (reading the handbook, intro calls, etc.) on your personal laptop in the meantime. Treat a personal laptop as less trusted:
+>
+> - Do **not** access production cloud environments (AWS, GCP, etc.) from it.
+> - Do **not** store or handle any secrets on it, including secrets used for local development.
+>
+> Move anything sensitive to your company laptop as soon as it arrives.
 
 ### Engineering
 
