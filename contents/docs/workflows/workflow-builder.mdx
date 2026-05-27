@@ -133,6 +133,35 @@ Dispatches are the messages you send, mail, slack, SMS, webhook, or any PostHog 
 | Webhook          | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section.                           |
 | CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an dispatch step to deliver messages to users or other services. |
 
+### Email engagement events
+
+When you send emails through a workflow, PostHog captures engagement events as standard PostHog events. This lets you build insights, funnels, and dashboards based on how recipients interact with your emails.
+
+To enable this, go to **Settings** > **Workflows** and turn on **Capture email engagement events**.
+
+| Event                        | Description                                        |
+| ---------------------------- | -------------------------------------------------- |
+| `$messaging_email_sent`      | Email was sent successfully                        |
+| `$messaging_email_failed`    | Email failed to send                               |
+| `$messaging_email_delivered` | Email was delivered to the recipient's mail server |
+| `$messaging_email_opened`    | Recipient opened the email                         |
+| `$messaging_email_link_clicked` | Recipient clicked a link in the email           |
+| `$messaging_email_bounced`   | Email bounced (hard or soft bounce)                |
+| `$messaging_email_blocked`   | Email was blocked by the recipient's mail server   |
+
+All events include the following properties:
+
+| Property            | Description                              |
+| ------------------- | ---------------------------------------- |
+| `$workflow_id`      | The ID of the workflow that sent the email |
+| `$messaging_source` | Source of the event (`direct` or `ses`)  |
+
+Depending on the event type, additional properties are included:
+
+- `$messaging_email_sent` and `$messaging_email_failed` include `$email_to` and `$email_subject`
+- `$messaging_email_link_clicked` includes `$link_url`
+- Events from SES webhooks include `$email_to`
+
 ## Delays
 
 Delays help you control the timing of your messages. There are 3 types of delays:
