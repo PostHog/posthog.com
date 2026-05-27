@@ -107,7 +107,7 @@ buffering ──► active ──► (recording captured, $has_recording flips t
 
 | Property | What it tells you |
 | --- | --- |
-| `$sdk_debug_recording_script_not_loaded` | `true` if the `recorder.js` script failed to load. Usually caused by an ad blocker or CSP — see [ad/tracking blockers](#4-adtracking-blockers) below. |
+| `$sdk_debug_recording_script_not_loaded` | `true` if the `recorder.js` script failed to load. Usually caused by an ad blocker or CSP |
 | `$sdk_debug_replay_url_trigger_status` <br /> `$sdk_debug_replay_event_trigger_status` <br /> `$sdk_debug_replay_linked_flag_trigger_status` | Trigger states: `trigger_disabled` (none configured), `trigger_pending` (configured, waiting to match), or `trigger_matched` (fired). |
 | `$sdk_debug_replay_internal_buffer_length` <br /> `$sdk_debug_replay_flushed_size` | If `buffer_length` keeps growing across the session's events while `flushed_size` stays at `0`, the `POST /s/` upload is being blocked — usually an ad blocker or a misconfigured reverse proxy. |
 | `$replay_sample_rate` <br /> `$replay_minimum_duration` | The sample rate (0.0–1.0) and minimum duration (ms) in effect at capture time. |
