@@ -167,7 +167,6 @@ const productCategories = [
         name: 'Analytics',
         handles: [
             'web_analytics',
-            'revenue_analytics',
             'trenationaldesignstudio',
             'funnels',
             'user_paths',

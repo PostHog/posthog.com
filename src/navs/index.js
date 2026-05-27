@@ -1083,10 +1083,6 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/product-announcements',
                     },
                     {
-                        name: 'Product positioning',
-                        url: '/handbook/marketing/positioning',
-                    },
-                    {
                         name: 'Incident comms',
                         url: '/handbook/marketing/incident-comms',
                     },
@@ -1129,6 +1125,44 @@ export const handbookSidebar = [
                     {
                         name: 'Working with the website team',
                         url: '/handbook/marketing/working-with-website',
+                    },
+                ],
+            },
+            {
+                name: 'Positioning and selling',
+                url: '/handbook/marketing/positioning',
+                children: [
+                    {
+                        name: 'Analytics',
+                        url: '/handbook/marketing/positioning/analytics',
+                    },
+                    {
+                        name: 'Session replay',
+                        url: '/handbook/marketing/positioning/session-replay',
+                    },
+                    {
+                        name: 'Feature flags',
+                        url: '/handbook/marketing/positioning/feature-flags',
+                    },
+                    {
+                        name: 'Experiments',
+                        url: '/handbook/marketing/positioning/experiments',
+                    },
+                    {
+                        name: 'Data warehouse',
+                        url: '/handbook/marketing/positioning/data-warehouse',
+                    },
+                    {
+                        name: 'Data pipelines',
+                        url: '/handbook/marketing/positioning/data-pipelines',
+                    },
+                    {
+                        name: 'LLM analytics',
+                        url: '/handbook/marketing/positioning/llm-analytics',
+                    },
+                    {
+                        name: 'PostHog AI',
+                        url: '/handbook/marketing/positioning/posthog-ai',
                     },
                 ],
             },
@@ -1603,6 +1637,10 @@ export const handbookSidebar = [
                     {
                         name: 'Metabase account analysis',
                         url: '/handbook/onboarding/metabase-account-analysis',
+                    },
+                    {
+                        name: 'Creating sandboxes',
+                        url: '/handbook/growth/sales/sandboxes',
                     },
                 ],
             },
@@ -2494,6 +2532,10 @@ export const docsMenu = {
                             url: '/docs/api',
                         },
                         {
+                            name: 'Personal API keys',
+                            url: '/docs/api/personal-api-keys',
+                        },
+                        {
                             name: 'OAuth integration',
                             url: '/docs/api/oauth',
                         },
@@ -2745,6 +2787,18 @@ export const docsMenu = {
                                 {
                                     name: 'Overview',
                                     url: '/docs/model-context-protocol',
+                                },
+                                {
+                                    name: 'Use cases',
+                                    url: '/docs/model-context-protocol/use-cases',
+                                },
+                                {
+                                    name: 'Tools reference',
+                                    url: '/docs/model-context-protocol/tools',
+                                },
+                                {
+                                    name: 'FAQ and advanced setup',
+                                    url: '/docs/model-context-protocol/faq',
                                 },
                                 {
                                     name: 'Code editors',
@@ -4514,6 +4568,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'CUPED',
+                    url: '/docs/experiments/cuped',
+                    icon: 'IconCalculator',
+                    color: 'orange',
+                },
+                {
                     name: 'Holdouts',
                     url: '/docs/experiments/holdouts',
                     icon: 'IconPeople',
@@ -4724,11 +4784,11 @@ export const docsMenu = {
                         },
                         {
                             name: 'Nuxt',
-                            url: '/docs/error-tracking/installation/nuxt',
+                            url: '/docs/error-tracking/installation/nuxt-3-7',
                             children: [
                                 {
                                     name: '3.7 and above',
-                                    url: '/docs/error-tracking/installation/nuxt',
+                                    url: '/docs/error-tracking/installation/nuxt-3-7',
                                 },
                                 {
                                     name: '3.6 and below',
@@ -6691,6 +6751,7 @@ export const docsMenu = {
                         { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },
                         { name: 'React Native', url: '/docs/logs/installation/react-native' },
                         { name: 'iOS', url: '/docs/logs/installation/ios' },
+                        { name: 'Android', url: '/docs/logs/installation/android' },
                         { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],
