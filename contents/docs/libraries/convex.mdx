@@ -39,7 +39,7 @@ The first row is what most teams reach for first. The last two are configured in
 
 Every integration on this page needs the same two values:
 
-- **Project token**, starts with `phc_`. Found in PostHog under **Settings → Project → General → Project API Key**.
+- **Project token**, starts with `phc_`. Found in PostHog under **Settings → Project → General**, labeled **Project token**.
 - **Host**, `https://us.i.posthog.com` for PostHog US Cloud, `https://eu.i.posthog.com` for EU Cloud, or your own URL for self-hosted PostHog.
 
 Have those ready before starting any of the sections below.
@@ -47,6 +47,8 @@ Have those ready before starting any of the sections below.
 ## Capture events and flags from your Convex code
 
 The [`@posthog/convex`](https://www.npmjs.com/package/@posthog/convex) component lets you capture events, identify users, evaluate feature flags, and forward exceptions directly from your Convex queries, mutations, and actions. Reach for this surface when you want analytics tied to specific server-side behavior.
+
+Requires Convex 1.39 or newer, which introduced the typed component env vars this component relies on.
 
 ### 1. Install the component
 
@@ -72,7 +74,13 @@ bun add @posthog/convex
 
 </MultiLanguage>
 
+<<<<<<< HEAD
 Then register it in `convex/convex.config.ts` and forward env vars from your app to the component:
+||||||| b6290bb57
+Then register it in `convex/convex.config.ts`:
+=======
+Register it in `convex/convex.config.ts` and forward your credentials from the app down to the component:
+>>>>>>> matt/convex-tutorial
 
 ```ts
 // convex/convex.config.ts
@@ -80,6 +88,7 @@ import { defineApp } from "convex/server"
 import { v } from "convex/values"
 import posthog from "@posthog/convex/convex.config.js"
 
+<<<<<<< HEAD
 const app = defineApp({
     env: {
         // Required. PostHog project token (phc_…).
@@ -101,11 +110,42 @@ app.use(posthog, {
         POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS: app.env.POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS,
     },
 })
+||||||| b6290bb57
+const app = defineApp()
+app.use(posthog)
+=======
+const app = defineApp({
+    env: {
+        POSTHOG_PROJECT_TOKEN: v.string(),
+        POSTHOG_HOST: v.optional(v.string()),
+        POSTHOG_PERSONAL_API_KEY: v.optional(v.string()),
+        POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS: v.optional(v.string()),
+    },
+})
+
+app.use(posthog, {
+    env: {
+        POSTHOG_PROJECT_TOKEN: app.env.POSTHOG_PROJECT_TOKEN,
+        POSTHOG_HOST: app.env.POSTHOG_HOST,
+        POSTHOG_PERSONAL_API_KEY: app.env.POSTHOG_PERSONAL_API_KEY,
+        POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS: app.env.POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS,
+    },
+})
+>>>>>>> matt/convex-tutorial
 
 export default app
 ```
 
-### 2. Set environment variables
+`POSTHOG_PROJECT_TOKEN` is required at deploy time. The other three are optional:
+
+| Env var | Required | What it does |
+| --- | --- | --- |
+| `POSTHOG_PROJECT_TOKEN` | Yes | Your project token (`phc_`). Sends events and evaluates flags remotely. |
+| `POSTHOG_HOST` | No | Defaults to `https://us.i.posthog.com`. Use `https://eu.i.posthog.com` for EU Cloud or your self-hosted URL. |
+| `POSTHOG_PERSONAL_API_KEY` | No | A [feature flags secure API key](/docs/feature-flags/local-evaluation#step-1-find-your-feature-flags-secure-api-key) (`phs_`, recommended) or personal API key (`phx_`). Setting it enables local flag evaluation and starts the refresh cron. |
+| `POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS` | No | Cron interval for refreshing flag definitions. Defaults to `60`. Raise it on free-tier dev deployments to cut function-call usage. |
+
+### 2. Set your PostHog credentials
 
 ```sh
 npx convex env set POSTHOG_PROJECT_TOKEN phc_your_project_token
@@ -118,15 +158,31 @@ For local feature flag evaluation (covered in step 5), also set a [feature flags
 npx convex env set POSTHOG_PERSONAL_API_KEY phs_your_feature_flags_secure_api_key
 ```
 
+<<<<<<< HEAD
 Setting `POSTHOG_PERSONAL_API_KEY` also starts the component's built-in refresh cron that keeps flag definitions up to date. To adjust the polling interval (for example, raise it to 300 seconds for a free-tier dev deployment), set `POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS` and redeploy:
 
 ```sh
 npx convex env set POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS 300
 ```
 
+||||||| b6290bb57
+=======
+<CalloutBox icon="IconInfo" title="Setting the personal API key starts the cron" type="fyi">
+
+`POSTHOG_PERSONAL_API_KEY` gates the component's built-in refresh cron. The gate is evaluated at deploy time: `npx convex dev` redeploys automatically when you set the var, but production deployments need a manual redeploy for the cron to start. Leaving the var unset means no cron runs at all, so idle dev deployments don't burn function calls.
+
+</CalloutBox>
+
+>>>>>>> matt/convex-tutorial
 ### 3. Initialize the client
 
+<<<<<<< HEAD
 Create `convex/posthog.ts`. Credentials are handled by the component's env vars, so this file only needs to pass the component reference and optional callbacks:
+||||||| b6290bb57
+Create `convex/posthog.ts`. Every other backend function will import the `posthog` instance from here.
+=======
+Create `convex/posthog.ts`. Every other backend function will import the `posthog` instance from here. Credentials live on the component now, so the constructor takes no options:
+>>>>>>> matt/convex-tutorial
 
 ```ts
 // convex/posthog.ts
@@ -175,12 +231,18 @@ Use the same Convex user ID as the `distinctId` everywhere. PostHog stitches eve
 
 ### 5. Evaluate feature flags
 
-`@posthog/convex` supports two flag evaluation paths. **Default to local evaluation.** It's faster (no network round-trip), works in queries (so reading a flag re-runs your query reactively when the flag changes), and works in mutations and actions too. Only reach for remote evaluation when local can't handle the flag (experience continuity flags, static cohorts, flags whose targeting depends on person properties you don't pass in).
+`@posthog/convex` supports two flag evaluation paths. **Default to local evaluation.** It's faster (no network round-trip), works in queries (so a query reading a flag re-runs automatically when the flag changes), and works in mutations and actions too. Only reach for remote evaluation when local can't handle the flag (experience continuity flags, static cohorts, flags whose targeting depends on person properties you don't pass in).
 
-- **Local** (`getFeatureFlag`, `isFeatureEnabled`) runs against flag definitions cached on your Convex deployment. Works in queries, mutations, and actions. No per-call network round-trip. Queries re-run reactively when cached definitions refresh.
-- **Remote** (`evaluateFlag`, `evaluateAllFlags`) hits PostHog's `/flags` endpoint on every call. Action-only. Handles every flag, including the ones local can't.
+- **Local** (`getFeatureFlag`, `isFeatureEnabled`, `getFeatureFlagPayload`, `getAllFlags`) runs against flag definitions cached on your Convex deployment. Works in queries, mutations, and actions. No per-call network round-trip, and a query re-runs automatically when cached definitions refresh. Requires `POSTHOG_PERSONAL_API_KEY`.
+- **Remote** (`evaluateFlag`, `evaluateFlagPayload`, `evaluateAllFlags`) hits PostHog's `/flags` endpoint on every call. Action-only. Handles every flag, including the ones local can't, and needs no personal API key.
 
+<<<<<<< HEAD
 Local evaluation requires `POSTHOG_PERSONAL_API_KEY` to be set. When configured, the component automatically refreshes flag definitions every 60 seconds (or at the interval you set with `POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS`). If you call a local-eval method without `POSTHOG_PERSONAL_API_KEY`, the client throws an error pointing you to the remote `evaluateFlag` / `evaluateFlagPayload` / `evaluateAllFlags` methods instead.
+||||||| b6290bb57
+To enable local eval, add a cron that refreshes flag definitions on whatever interval suits you:
+=======
+Local evaluation runs automatically once `POSTHOG_PERSONAL_API_KEY` is set. The component registers its own cron at deploy time and refreshes flag definitions every minute, so you don't write your own. Tune the cadence with `POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS`. If you call a local-eval method without the key configured, the client throws and points you at the remote `evaluate*` methods.
+>>>>>>> matt/convex-tutorial
 
 Read a flag from a query:
 
@@ -205,9 +267,17 @@ export const getDiscount = query({
 })
 ```
 
+<<<<<<< HEAD
 Because this is a regular Convex query, the React client that subscribes to it will re-run and re-render automatically the next time the component's cron refreshes flag definitions.
 
 If you need an immediate refresh between cron ticks (for example, right after creating a flag in development), call `posthog.reloadFeatureFlags(ctx)` from an action.
+||||||| b6290bb57
+Because this is a regular Convex query, the React client that subscribes to it will re-run and re-render automatically the next time the cron refreshes flag definitions (up to your configured interval, one minute in the example above).
+=======
+Because this is a regular Convex query, the React client that subscribes to it re-runs and re-renders automatically the next time the cron refreshes flag definitions (up to your configured interval, one minute by default).
+
+Need to force a refresh between cron ticks, for example right after creating a flag in development? Call `posthog.reloadFeatureFlags(ctx)` from an action.
+>>>>>>> matt/convex-tutorial
 
 If you're running an [experiment](/docs/experiments) against a locally-evaluated flag, fire an exposure event yourself from a mutation or action, since local eval can't schedule `capture` from inside a query:
 
@@ -330,7 +400,7 @@ export function AuthSync() {
 }
 ```
 
-Mount `<AuthSync />` once near the root of your app, inside the `<PostHogProvider>` and below your Convex `<Authenticated>` boundary if you have one. The `me?._id` guard skips the `identify` call until the user is authenticated.
+Mount `<AuthSync />` once near the root of your app, inside the `<PostHogProvider>` and below your Convex `<Authenticated>` boundary if you have one. The `me?._id` guard skips the `identify` call until authentication completes.
 
 Now an event captured from a mutation with `distinctId: userId` and a `$pageview` from the browser with the same user ID land on the same person in PostHog. [Session replays](/docs/session-replay), server-side mutations, exceptions, and logs all land on one timeline for that user.
 
