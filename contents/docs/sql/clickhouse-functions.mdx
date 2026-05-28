@@ -148,6 +148,8 @@ If the function's name includes a leading underscore, then it's not safe and sim
 - `parseDateTimeBestEffort`
 - `cityHash64`
 - `UUIDv7ToDateTime`
+- `toNullableString`
+- `toUUIDOrDefault`
 
 ## Dates and times
 
@@ -159,6 +161,7 @@ If the function's name includes a leading underscore, then it's not safe and sim
 - `toTimeZone`
 - `timeZoneOf`
 - `timeZoneOffset`
+- `timezone`
 - `toYear`
 - `toQuarter`
 - `toMonth`
@@ -170,6 +173,7 @@ If the function's name includes a leading underscore, then it's not safe and sim
 - `toSecond`
 - `toUnixTimestamp`
 - `toUnixTimestamp64Milli`
+- `fromUnixTimestamp64Milli`
 - `toStartOfInterval`
 - `toStartOfYear`
 - `toStartOfISOYear`
@@ -251,7 +255,11 @@ If the function's name includes a leading underscore, then it's not safe and sim
 - `date_subtract`
 - `date_diff`
 - `make_interval`
-- `make_timestampz`
+- `make_timestamptz`
+- `make_date`
+- `to_char`
+- `to_date`
+- `to_timestamp`
 
 
 ## Strings
@@ -374,6 +382,7 @@ If the function's name includes a leading underscore, then it's not safe and sim
 
 - `if`
 - `multiIf`
+- `throwIf`
 
 ## Mathematical
 
@@ -415,6 +424,7 @@ If the function's name includes a leading underscore, then it's not safe and sim
 - `radians`
 - `factorial`
 - `width_bucket`
+- `rand`
 
 ## Rounding
 
@@ -451,6 +461,7 @@ If the function's name includes a leading underscore, then it's not safe and sim
 - `splitByRegexp`
 - `splitByWhitespace`
 - `splitByNonAlpha`
+- `split_part`
 - `alphaTokens`
 - `extractAllGroups`
 - `ngrams`
@@ -540,8 +551,9 @@ If the function's name includes a leading underscore, then it's not safe and sim
 - `JSONExtractFloat`
 - `JSONExtractBool`
 - `JSONExtractString`
-- `JSONExtractKey`
+- `JSONExtract`
 - `JSONExtractKeys`
+- `JSONExtractKeysAndValues`
 - `JSONExtractRaw`
 - `JSONExtractArrayRaw`
 - `JSONExtractKeysAndValuesRaw`
@@ -555,6 +567,7 @@ If the function's name includes a leading underscore, then it's not safe and sim
 - `pointInEllipses`
 - `pointInPolygon`
 - `geohashDecode`
+- `geohashEncode`
 - `geohashesInBox`
 - `h3IsValid`
 - `h3GetResolution`
@@ -673,3 +686,6 @@ If the function's name includes a leading underscore, then it's not safe and sim
 - `formatReadableSize`
 - `formatReadableQuantity`
 - `formatReadableTimeDelta`
+- `greatest`
+- `least`
+- `languageCodeToName`
