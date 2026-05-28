@@ -22,8 +22,6 @@ If you already keep your project's configuration in a dotenv-style file, you can
 posthog-cli --env-file .env sourcemap upload --directory ./path/to/assets
 ```
 
-The process environment always takes precedence, and the file is only read when the required variables aren't already set. The full order of precedence is CLI arguments, then the process environment, then `--env-file`, then the credentials saved by `posthog-cli login`. Credentials are read from a single source, so `POSTHOG_CLI_HOST` is only used when it comes from the same source that supplied the API key and project ID.
-
 You can also use the `--host` option instead of the `POSTHOG_CLI_HOST` environment variable to target a different PostHog instance or region. For EU users:
 
 ```bash
