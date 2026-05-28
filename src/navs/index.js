@@ -3042,6 +3042,10 @@ export const docsMenu = {
                             ],
                         },
                         {
+                            name: 'Slack app',
+                            url: '/docs/slack-app',
+                        },
+                        {
                             name: 'SDK doctor',
                             url: '/docs/sdk-doctor',
                             children: [
@@ -6538,12 +6542,6 @@ export const docsMenu = {
                     url: '/docs/posthog-code/git-github-integration',
                     icon: 'IconGitBranch',
                     color: 'green',
-                },
-                {
-                    name: 'Slack',
-                    url: '/docs/slack-app',
-                    icon: 'IconChat',
-                    color: 'purple',
                 },
                 {
                     name: 'Code review',
