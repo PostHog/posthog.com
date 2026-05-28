@@ -38,7 +38,7 @@ We want to try to encourage small teams to get together once each year. Ideally 
 
 We want team offsites to be social events and encourage you to optimize offsites for meeting as many colleagues as is reasonably possible, even if it means spending more money or travelling further. [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco or the [Hedge House](#hedge-house) in London should be the default choice, because:
 
-- They're places where there are already a lot of PostHog people that you can hang out with. The more we have random cross-polination, the more ambitious ideas we'll come up with
+- They're places where there are already a lot of PostHog people that you can hang out with. The more we have random cross-pollination, the more ambitious ideas we'll come up with
 - If most teams do their offsites there, you're much more likely to run into even more people
 - We've put a lot of money and effort into making Hogpatch and Hedge House beautiful spaces that you want to work from
 - SF has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from
