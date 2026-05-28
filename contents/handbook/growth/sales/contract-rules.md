@@ -62,7 +62,7 @@ Beyond optimization, we offer discounts based on four levers:
 
 **If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
 
-> You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with <TeamMember name="Ben Bradley" showOnlyFirstName photo /> (TAEs or TAMs) or <TeamMember name="Simon Fisher" showOnlyFirstName photo /> (CSMs or Onboarding), you should assume by default that the deal will not count toward your quota.
+> You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with <TeamMember name="Ben Bradley" showOnlyFirstName photo /> (TAEs or TAMs) or <TeamMember name="Simon Fisher" showOnlyFirstName photo /> (CSMs), you should assume by default that the deal will not count toward your quota.
 
 ### Why we require up-front payment for credit purchases
 
