@@ -507,16 +507,21 @@ module.exports = {
                 100: '1',
                 '-100': '-1',
             },
+            typography: {
+                DEFAULT: {
+                    css: {
+                        '--tw-prose-bullets': 'rgb(var(--text-secondary))',
+                        '--tw-prose-counters': 'rgb(var(--text-secondary))',
+                    },
+                },
+                invert: {
+                    css: {
+                        '--tw-prose-invert-bullets': 'rgb(var(--text-secondary))',
+                        '--tw-prose-invert-counters': 'rgb(var(--text-secondary))',
+                    },
+                },
+            },
         },
-        // typography: {
-        //     DEFAULT: {
-        //         css: {
-        //             h5: {
-        //                 marginBottom: '.25rem',
-        //             },
-        //         },
-        //     },
-        // },
     },
     plugins: [
         require('@tailwindcss/forms'),

@@ -80,7 +80,7 @@ export default function ProductImageAnnotations({
                 {/* Source order (children → image → key) so it stacks as description → image → key on mobile.
                     At @2xl/reader-content it becomes 2 columns: description top-left, key bottom-left, image right. */}
                 <div
-                    className={`grid grid-cols-1 gap-6 @2xl/reader-content:gap-12 @2xl/reader-content:grid-cols-2 @2xl/reader-content:[grid-template-rows:auto_1fr] @2xl/reader-content:items-start ${
+                    className={`grid grid-cols-1 gap-6 @2xl/reader-content:gap-x-12 @2xl/reader-content:grid-cols-2 @2xl/reader-content:[grid-template-rows:auto_1fr] @2xl/reader-content:items-start ${
                         className ?? ''
                     }`}
                 >

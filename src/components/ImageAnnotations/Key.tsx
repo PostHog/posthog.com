@@ -11,9 +11,9 @@ function ImageAnnotationsKey({ title = 'Key', className = '' }: ImageAnnotations
     const { annotations, type, hoveredIndex, setHoveredIndex } = useImageAnnotations()
 
     return (
-        <div className={`bg-accent border border-primary rounded p-4 ${className}`}>
-            {title && <strong className="block mb-3">{title}</strong>}
-            <ul className="list-none p-0 m-0 space-y-2">
+        <div className={`border-y border-primary py-4 ${className}`}>
+            {title && <strong className="block mb-1 text-secondary">{title}</strong>}
+            <ul className="list-none p-0 m-0">
                 {annotations.map((annotation, index) => {
                     const isActive = hoveredIndex === index
                     return (
@@ -21,8 +21,8 @@ function ImageAnnotationsKey({ title = 'Key', className = '' }: ImageAnnotations
                             key={index}
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
-                            className={`flex items-start gap-2.5 rounded p-1.5 -m-1.5 transition-colors cursor-default ${
-                                isActive ? 'bg-primary' : ''
+                            className={`flex items-start gap-2.5 rounded p-1.5 transition-colors cursor-default ${
+                                isActive ? 'bg-primary/50' : ''
                             }`}
                         >
                             <span
