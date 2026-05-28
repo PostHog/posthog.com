@@ -35,7 +35,7 @@ Next, get your PostHog project token and instance address from the getting start
 
 ```bash
 # .env.local
-VITE_POSTHOG_TOKEN=<ph_project_token>
+VITE_POSTHOG_PROJECT_TOKEN=<ph_project_token>
 VITE_POSTHOG_HOST=<ph_client_api_host>
 ```
 
@@ -55,7 +55,7 @@ const options = {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <PostHogProvider apiKey={import.meta.env.VITE_POSTHOG_TOKEN} options={options}>
+    <PostHogProvider apiKey={import.meta.env.VITE_POSTHOG_PROJECT_TOKEN} options={options}>
       <App />
     </PostHogProvider>
   </StrictMode>,
@@ -153,7 +153,7 @@ const options = {
 hydrateRoot(
   document.getElementById('root'),
   <StrictMode>
-    <PostHogProvider apiKey={import.meta.env.VITE_POSTHOG_TOKEN} options={options}>
+    <PostHogProvider apiKey={import.meta.env.VITE_POSTHOG_PROJECT_TOKEN} options={options}>
       <App />
     </PostHogProvider>
   </StrictMode>
@@ -206,7 +206,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Initialize PostHog client
 const client = new PostHog(
-  process.env.VITE_POSTHOG_TOKEN,
+  process.env.VITE_POSTHOG_PROJECT_TOKEN,
   { 
     host: process.env.VITE_POSTHOG_HOST,
     personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY // This one is server-only
@@ -262,7 +262,7 @@ In the route's `try` block, we'll get or create a distinct ID and use it to get 
 try {
   // Get or create distinct ID
   let distinctId = null;
-  const phCookie = req.cookies[`ph_${process.env.VITE_POSTHOG_TOKEN}_posthog`];
+  const phCookie = req.cookies[`ph_${process.env.VITE_POSTHOG_PROJECT_TOKEN}_posthog`];
   if (phCookie) {
     distinctId = JSON.parse(phCookie)['distinct_id'];
   }
@@ -332,7 +332,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Initialize PostHog client
 const client = new PostHog(
-  process.env.VITE_POSTHOG_TOKEN,
+  process.env.VITE_POSTHOG_PROJECT_TOKEN,
   { 
     host: process.env.VITE_POSTHOG_HOST,
     personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY // This one is server-only
@@ -360,7 +360,7 @@ async function createServer() {
     try {
       // Get or create distinct ID
       let distinctId = null;
-      const phCookie = req.cookies[`ph_${process.env.VITE_POSTHOG_TOKEN}_posthog`];
+      const phCookie = req.cookies[`ph_${process.env.VITE_POSTHOG_PROJECT_TOKEN}_posthog`];
       if (phCookie) {
         distinctId = JSON.parse(phCookie)['distinct_id'];
       }
