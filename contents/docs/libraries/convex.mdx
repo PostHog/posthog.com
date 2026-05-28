@@ -132,13 +132,7 @@ npx convex env set POSTHOG_PERSONAL_API_KEY phs_your_feature_flags_secure_api_ke
 
 ### 3. Initialize the client
 
-<<<<<<< HEAD
 Create `convex/posthog.ts`. Credentials are handled by the component's env vars, so this file only needs to pass the component reference and optional callbacks:
-||||||| 9e0bc706a
-Create `convex/posthog.ts`. Every other backend function will import the `posthog` instance from here. Credentials live on the component now, so the constructor takes no options:
-=======
-Create `convex/posthog.ts`. Other backend functions import the `posthog` instance from here. Credentials live on the component, so the constructor just needs the component reference:
->>>>>>> matt/convex-tutorial
 
 ```ts
 // convex/posthog.ts
@@ -219,13 +213,7 @@ export const getDiscount = query({
 
 A React client subscribed to this query re-renders the next time the cron refreshes flag definitions, up to the configured interval (one minute by default).
 
-<<<<<<< HEAD
-If you need an immediate refresh between cron ticks (for example, right after creating a flag in development), call `posthog.reloadFeatureFlags(ctx)` from an action.
-||||||| 9e0bc706a
-Need to force a refresh between cron ticks, for example right after creating a flag in development? Call `posthog.reloadFeatureFlags(ctx)` from an action.
-=======
 To force a refresh between cron ticks (for example, right after creating a flag in development), call `posthog.reloadFeatureFlags(ctx)` from an action.
->>>>>>> matt/convex-tutorial
 
 If you're running an [experiment](/docs/experiments) against a locally-evaluated flag, fire an exposure event yourself from a mutation or action, since local eval can't schedule `capture` from inside a query:
 
