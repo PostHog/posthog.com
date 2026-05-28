@@ -353,6 +353,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['billing', 'platform-features'],
         label: false,
     },
+    'realtime-cohort-calculations': {
+        feature: 'Realtime cohort calculations',
+        owner: ['feature-flags'],
+        label: false,
+    },
     replay: {
         feature: 'Replay',
         owner: ['replay'],
