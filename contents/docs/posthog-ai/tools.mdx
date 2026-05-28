@@ -14,6 +14,9 @@ Here’s a list of tools PostHog AI can access and use.
 | Platform | `read_data` | Read data from PostHog project. |
 | Platform | `read_taxonomy` | Read taxonomy for events and properties. |
 | Platform | `read_data.billing_info` | Check your billing data. |
+| Platform | `list_llm_skills` | List [shared skills](/docs/prompt-management/skills-store) stored for your team. |
+| Platform | `get_llm_skill` | Load a shared skill's body and file manifest. |
+| Platform | `get_llm_skill_file` | Load a bundled file from a shared skill. |
 | Dashboards | `create_dashboard` | Create dashboards with insights based on your requirements. |
 | Dashboards | `edit_current_dashboard` | Add insights to the dashboard you're viewing. |
 | Dashboards | `analyze_dashboard_refresh` | Analyze changes after refreshing a dashboard and summarize significant trends. |
@@ -30,6 +33,9 @@ Here’s a list of tools PostHog AI can access and use.
 | Experiments | `create_experiment` | Create an experiment in seconds. |
 | Feature flags | `create_feature_flag` | Create a feature flag in seconds. |
 | AI Observability | `search_llm_traces` | Search and filter LLM traces by date, model, cost, latency, and errors. |
+| AI Observability | `create_llm_skill` | Create a [shared skill](/docs/prompt-management/skills-store) for a reusable workflow. |
+| AI Observability | `update_llm_skill` | Update a shared skill by publishing a new version. |
+| AI Observability | `archive_llm_skill` | Archive a shared skill to hide it from suggestions. |
 | Notebooks | `create_notebook` | Create notebooks with rich content including markdown, insights, and session replays. |
 | Product analytics | `create_and_query_insight` | Edit the insight you're viewing. |
 | Product analytics | `search.insights` | Search existing insights for answers. |

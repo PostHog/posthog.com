@@ -84,16 +84,20 @@ A mode for investigating errors and exceptions in your product.
 
 ### AI Observability
 
-A mode for searching and analyzing [LLM traces](/docs/ai-observability/traces) to understand model usage, costs, latency, and errors.
+A mode for searching and analyzing [LLM traces](/docs/ai-observability/traces) to understand model usage, costs, latency, and errors. You can also manage [shared agent skills](/docs/prompt-management/skills-store) in this mode.
 
 **Best for:**
 - Finding and filtering LLM traces by date range, model, or error status
 - Analyzing LLM usage costs and latency
 - Investigating specific traces in detail
 - Monitoring LLM error patterns
+- Creating and updating shared skills for the team
 
 **Mode-specific tools:**
 - `search_llm_traces` - Search for traces based on date range, model, error status, and other properties
+- `create_llm_skill` - Create a shared skill to save a reusable workflow
+- `update_llm_skill` - Update a shared skill by publishing a new version
+- `archive_llm_skill` - Archive a shared skill to hide it from suggestions
 
 ### Survey
 
@@ -138,3 +142,6 @@ Regardless of which mode is active, the agent always has access to:
 | `search` | Search insights, dashboards, cohorts, actions, experiments, feature flags, notebooks, and more |
 | `web_search` | Search the web for up-to-date information about your product, company, or industry |
 | `switch_mode` | Switch to a different specialized mode |
+| `list_llm_skills` | List [shared skills](/docs/prompt-management/skills-store) stored for your team |
+| `get_llm_skill` | Load a shared skill's body and file manifest |
+| `get_llm_skill_file` | Load a bundled file from a shared skill |
