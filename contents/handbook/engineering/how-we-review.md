@@ -76,6 +76,12 @@ Not every team has someone available to review your PR right away. Posting in #d
   - There are no tests, no description, or no visual evidence of the change working
   - You're not confident the change is safe — say so. "I can't meaningfully review this, you need someone with more context" is always valid feedback
 
+## Partial reviews
+
+If you were asked to review only one aspect of a PR (e.g. copy, design, infra, security), submit your review as **Comment**, not **Approve**. An Approve from any reviewer clears the review requirement and marks the PR mergeable, so it should mean "I reviewed this against the full checklist above." Reserve Approve for when you actually did.
+
+If multiple reviewers are splitting aspects of a PR, the author is responsible for making sure at least one Approve came from someone who reviewed the code. CODEOWNERS can enforce this on a per-path basis where it matters.
+
 ## Review comment conventions
 
 Use prefixes on your review comments so the author knows what actually needs to change before merging:
