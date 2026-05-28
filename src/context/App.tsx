@@ -1744,7 +1744,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const lastClickedElementRect = getLastClickedElementRect()
 
         const shouldExpand =
-            element.props.location.state?.expanded ?? (element.props.location.pathname !== '/' && !settings?.size)
+            element.props.location.state?.expanded ??
+            (!keyToUse.startsWith('ask-max') && element.props.location.pathname !== '/' && !settings?.size)
         const expandedDimensions = shouldExpand ? getExpandedDimensions() : null
 
         const newWindow: AppWindow = {
