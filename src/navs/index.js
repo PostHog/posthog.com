@@ -6541,7 +6541,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Slack',
-                    url: '/docs/posthog-code/slack',
+                    url: '/docs/slack-app',
                     icon: 'IconChat',
                     color: 'purple',
                 },
