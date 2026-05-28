@@ -41,6 +41,11 @@ interface Annotation {
 | `alt`          | `string` | Alt text.                                                                |
 | `imgClassName` | `string` | Classes on the underlying `<img>`.                                       |
 | `className`    | `string` | Classes on the relative wrapper.                                         |
+| `style`        | `CSSProperties` | Inline styles on the wrapper. Set `maxWidth` to override the default cap. |
+
+Screenshots are uploaded at `@2x`, so by default the image displays at **half its
+natural width** (and is capped to `max-h-[90vh]`), preserving aspect ratio and staying
+responsive. Pass `style={{ maxWidth: … }}` to override the width cap.
 
 ### `<ImageAnnotations.Key>`
 

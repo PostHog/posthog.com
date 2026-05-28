@@ -166,6 +166,62 @@ export const sessionReplay = {
             alt: 'Session replay screenshot',
             classes: 'justify-start items-end pr-4 @lg:pr-6',
             imgClasses: 'rounded-tr-md shadow-2xl',
+            playlist: {
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_light_5919aed63e.png',
+                srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_dark_169d60d6fb.png',
+                annotations: {
+                    playlist: {
+                        type: 'numbered',
+                        items: [
+                            {
+                                x: 3.7,
+                                y: 2.6,
+                                title: 'Filter panel',
+                                description: 'Open the filter panel to find more recordings',
+                            },
+                            {
+                                x: 76.8,
+                                y: 2.6,
+                                title: 'Ask PostHog AI',
+                                description: "Find the recordings you're looking for",
+                            },
+                            {
+                                x: 5.7,
+                                y: 12.7,
+                                title: 'Limit recordings',
+                                description:
+                                    'Choose whether to see all recordings, or to hide ones you or other people have watched',
+                            },
+                            {
+                                x: 71.5,
+                                y: 12.7,
+                                title: 'Timestamp display',
+                                description:
+                                    'Switch time display between "relative" (seconds in recording), UTC, or project timezone',
+                            },
+                            {
+                                x: 31.3,
+                                y: 19.2,
+                                title: 'Sorting',
+                                description: 'Order recordings by timestamp, activity, errors, and more',
+                            },
+                            {
+                                x: 67.5,
+                                y: 19.1,
+                                title: 'Autoplay',
+                                description:
+                                    'Change the autoplay mode for the playlist. Switch it off, or automatically play the next newest or oldest recording.',
+                            },
+                            {
+                                x: 64.5,
+                                y: 29.2,
+                                title: 'Recording details',
+                                description: 'User, browser and OS details, click and keystroke count, initial URL',
+                            },
+                        ],
+                    },
+                },
+            },
         },
         filters: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/filters_light_020d186555.png',

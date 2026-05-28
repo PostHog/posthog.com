@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { Popover } from 'components/RadixUI/Popover'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -120,24 +120,45 @@ function ImageAnnotationsImage({
     const finalSrcDark = srcDark ?? resolved?.srcDark
     const finalAlt = alt ?? resolved?.alt ?? ''
 
+    // Screenshots are uploaded @2x, so default the display to half the natural
+    // width and cap the height to the viewport. Measure the natural width once
+    // the image is available; an explicit `style.maxWidth` still overrides this.
+    const [naturalWidth, setNaturalWidth] = useState<number | null>(null)
+    useEffect(() => {
+        setNaturalWidth(null)
+        if (!finalSrc) return
+        const img = document.createElement('img')
+        img.onload = () => setNaturalWidth(img.naturalWidth)
+        img.src = finalSrc
+    }, [finalSrc])
+
     if (!finalSrc) {
         return null
     }
 
+    const defaultMaxWidth = naturalWidth ? naturalWidth / 2 : undefined
+    // `max-w-full` keeps the image inside the (capped) wrapper; `max-h-[90vh]`
+    // keeps tall screenshots in view. Aspect ratio is preserved since the <img>
+    // renders at its intrinsic size with both maxes applied.
+    const imgClasses = `max-w-full h-auto max-h-[90vh] ${imgClassName}`.trim()
+
     return (
-        <div className={`relative inline-block leading-[0] ${className}`} style={style}>
+        <div
+            className={`relative inline-block leading-[0] max-w-full ${className}`}
+            style={{ maxWidth: defaultMaxWidth, ...style }}
+        >
             <CloudinaryImage
                 src={finalSrc as CloudinarySrc}
                 alt={finalAlt}
                 className={finalSrcDark ? 'dark:hidden w-full' : 'w-full'}
-                imgClassName={imgClassName}
+                imgClassName={imgClasses}
             />
             {finalSrcDark && (
                 <CloudinaryImage
                     src={finalSrcDark as CloudinarySrc}
                     alt={finalAlt}
                     className="hidden dark:inline-block w-full"
-                    imgClassName={imgClassName}
+                    imgClassName={imgClasses}
                 />
             )}
             {annotations.map((annotation, index) => (
