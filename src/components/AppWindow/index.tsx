@@ -670,7 +670,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     item.appSettings?.size?.fixed
                                         ? 'bg-transparent'
                                         : siteSettings.heaterMode
-                                        ? 'bg-primary/75 backdrop-blur-3xl'
+                                        ? 'bg-primary/75 backdrop-blur-3xl will-change-[transform,backdrop-filter] transform-gpu'
                                         : `bg-primary ${meshVariant}`
                                 } ${
                                     siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed

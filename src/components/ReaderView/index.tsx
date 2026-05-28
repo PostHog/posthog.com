@@ -1098,7 +1098,7 @@ const LeftSidebar = ({
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 data-scheme="secondary"
-                className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden bg-primary/75 dark:bg-primary border-r border-primary backdrop-blur ${
+                className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden bg-primary/75 dark:bg-primary border-r border-primary backdrop-blur will-change-[transform,backdrop-filter] transform-gpu ${
                     !isPinned && expanded ? 'z-50 shadow-2xl' : 'z-30'
                 }`}
             >
