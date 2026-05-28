@@ -16,6 +16,8 @@ If you are using the CLI in a CI/CD environment such as GitHub Actions, you can 
 
 </div>
 
+For local development, the CLI also reads these variables from a `.env` or `.env.local` file in your current directory. Process environment variables take precedence over `.env`, which takes precedence over `.env.local`.
+
 You can also use the `--host` option instead of the `POSTHOG_CLI_HOST` environment variable to target a different PostHog instance or region. For EU users:
 
 ```bash
