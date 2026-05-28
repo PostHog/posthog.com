@@ -2354,18 +2354,14 @@ export const docsMenu = {
                             url: '/docs/libraries/cloudflare-workers',
                         },
                         {
-<<<<<<< HEAD
                             name: 'Celery',
                             url: '/docs/libraries/celery',
                         },
                         {
-||||||| 564cbfd5e
-=======
                             name: 'Convex',
                             url: '/docs/libraries/convex',
                         },
                         {
->>>>>>> master
                             name: 'Django',
                             url: '/docs/libraries/django',
                         },
