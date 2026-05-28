@@ -108,7 +108,7 @@ export default function ErrorTrackingLanding(): JSX.Element {
                             <WizardCTA />
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Get started free
                                 </CallToAction>
                             </div>
@@ -148,7 +148,7 @@ export default function ErrorTrackingLanding(): JSX.Element {
                             </button>
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Install PostHog SDK
                                 </CallToAction>
                             </div>
@@ -305,7 +305,7 @@ export default function ErrorTrackingLanding(): JSX.Element {
                             />
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Install error tracking
                                 </CallToAction>
                             </div>
@@ -339,7 +339,7 @@ export default function ErrorTrackingLanding(): JSX.Element {
                             <p>That's it! You're ready to start integrating.</p>
 
                             <div className="flex flex-wrap gap-2 mt-4">
-                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Get started free
                                 </CallToAction>
                                 <CallToAction
