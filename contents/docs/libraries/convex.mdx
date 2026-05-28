@@ -105,8 +105,8 @@ Environment variables:
 ### 2. Set your PostHog credentials
 
 ```sh
-npx convex env set POSTHOG_PROJECT_TOKEN phc_your_project_token
-npx convex env set POSTHOG_HOST https://us.i.posthog.com
+npx convex env set POSTHOG_PROJECT_TOKEN <ph_project_token>
+npx convex env set POSTHOG_HOST <ph_client_api_host>
 ```
 
 For local feature flag evaluation (covered in step 5), also set a [feature flags secure API key](/docs/feature-flags/local-evaluation#step-1-find-your-feature-flags-secure-api-key):
@@ -287,7 +287,7 @@ import posthog from "posthog-js"
 import { PostHogProvider } from "@posthog/react"
 import App from "./App"
 
-posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_TOKEN, {
+posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_PROJECT_TOKEN, {
     api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
 })
 
@@ -326,6 +326,17 @@ export function AuthSync() {
 Mount `<AuthSync />` once near the root of your app, inside the `<PostHogProvider>` and below your Convex `<Authenticated>` boundary if you have one. The `me?._id` guard skips the `identify` call until authentication completes.
 
 [Session replays](/docs/session-replay), server-side mutations, exceptions, and logs all land on one timeline for that user.
+
+<CalloutBox icon="IconInfo" title="Session replays" type="fyi">
+
+Remember you'll also need to configure the environment variables on the frontend to point to your PostHog instance.
+
+```sh
+npx convex env set VITE_PUBLIC_POSTHOG_PROJECT_TOKEN <ph_project_token>
+npx convex env set VITE_PUBLIC_POSTHOG_HOST <ph_client_api_host>
+```
+
+</CalloutBox>
 
 ## Trace LLM calls and Convex Agent
 
