@@ -1350,6 +1350,9 @@ const appSettings: AppSettings = {
     '/docs': {
         toolbar: true,
     },
+    '/merch': {
+        toolbar: true,
+    },
 } as const
 
 export interface SiteSettings {

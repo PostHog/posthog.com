@@ -447,7 +447,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     }, [user])
 
     return (
-        <div className="@container w-full h-full flex flex-col min-h-1">
+        <div className="@container w-full h-full flex flex-col min-h-1 border-t border-primary">
             <HeaderBar
                 showBack={!websiteMode}
                 showForward={!websiteMode}
