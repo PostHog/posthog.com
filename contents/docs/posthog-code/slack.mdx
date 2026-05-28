@@ -22,12 +22,12 @@ You need two integrations: one workspace-wide Slack connection, and a personal G
 
 ### 1. Connect Slack to your project
 
-Head to [PostHog Code → Slack integration](https://app.posthog.com/settings/project-posthog-code) in your project settings and click **Add to Slack**. Approve the requested scopes - you'll need to be a project admin to install.
+Head to **Settings → Integrations** in your PostHog project and click **Add to Slack** in the Slack integration section. Approve the requested scopes - you'll need to be a project admin to install.
 
 <ProductScreenshot
-    imageLight="TODO: upload screenshot of the Slack integration panel in project settings with the Add to Slack button"
+    imageLight="TODO: upload .notes/slack-app-docs-screenshots/integrations-panel.png to Cloudinary"
     classes="rounded"
-    alt="Adding the PostHog Slack app to a project from the Slack integration settings"
+    alt="The Slack integration section in project settings, with the Add to Slack button"
 />
 
 To talk to the bot in a channel, invite it: `/invite @PostHog`. The first time it sees a mention, it matches your Slack email to your PostHog account, so make sure you're signed in to the same org on both sides.
@@ -40,13 +40,19 @@ The bot picked up new OAuth scopes on 2026-05-04 (`app_mentions:read`, `users:re
 
 ### 2. Connect your personal GitHub
 
-PRs are authored under your GitHub identity, not the bot's, which means each teammate who wants to ship code needs to connect their own GitHub account once. Open your [user settings](https://app.posthog.com/settings/user#integrations) and connect GitHub.
+PRs are authored under your GitHub identity, not the bot's, which means each teammate who wants to ship code needs to connect their own GitHub account once. Head to **Settings → Personal integrations** in PostHog and click **Connect GitHub**. You can connect multiple accounts or organizations - the agent uses them for repo access, commit attribution, and pull request authorship.
 
 <ProductScreenshot
-    imageLight="TODO: upload screenshot of the personal GitHub integration in user settings with the Connect button"
+    imageLight="TODO: upload .notes/slack-app-docs-screenshots/personal-github-integration.png to Cloudinary"
     classes="rounded"
-    alt="Connecting a personal GitHub integration from user settings"
+    alt="The Personal integrations page in PostHog settings, with the Connect GitHub button"
 />
+
+<CalloutBox icon="IconInfo" title="GitHub's Save button is disabled?" type="fyi">
+
+If GitHub's **Save** button is greyed out at the end of the install flow, toggle between **All repositories** and **Only select repositories** to wake it up - it's a quirk of the GitHub OAuth UI.
+
+</CalloutBox>
 
 If you start a task before connecting, the agent stops and posts a **Connect GitHub** button in the thread. Click it, finish the OAuth flow, and re-mention the bot - the task picks up where it left off.
 
