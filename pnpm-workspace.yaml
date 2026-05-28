@@ -2,7 +2,7 @@ packages:
     - .
     - plugins/*
 
-minimumReleaseAge: 1440
+minimumReleaseAge: 10080
 minimumReleaseAgeExclude:
     - '@posthog/types'
     - '@posthog/icons'
