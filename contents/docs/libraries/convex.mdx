@@ -5,9 +5,7 @@ platformLogo: convex
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-[Convex](https://www.convex.dev) handles the database, server functions, and real-time sync for your app. PostHog covers what the database doesn't: signups, feature usage, exceptions, AI spend.
-
-This page is the single landing point for using PostHog with Convex. Pick the surfaces you need from the table below. Most teams use three or four together.
+This doc covers using PostHog with [Convex](https://www.convex.dev): capturing events and flags from Convex functions, stitching frontend and backend identities, tracing LLM calls, and syncing Convex tables into PostHog.
 
 ## Pick what you need
 
@@ -19,8 +17,6 @@ This page is the single landing point for using PostHog with Convex. Pick the su
 | Query your Convex tables alongside PostHog event data | [Convex data warehouse source](#sync-convex-tables-into-posthog) |
 | Forward Convex logs to PostHog Logs | [Convex dashboard log streams](https://docs.convex.dev/production/integrations/log-streams/) (no code) |
 | Forward Convex exceptions to PostHog Error Tracking | [Convex dashboard exception reporting](https://docs.convex.dev/production/integrations/exception-reporting) (no code) |
-
-The first row is what most teams reach for first. The last two are configured in the Convex dashboard with no PostHog-side setup.
 
 <div className="grid grid-cols-2 gap-2">
     <ProductScreenshot
@@ -39,16 +35,14 @@ The first row is what most teams reach for first. The last two are configured in
 
 Every integration on this page needs the same two values:
 
-- **Project token**, starts with `phc_`. Found in PostHog under **Settings → Project → General**, labeled **Project token**.
-- **Host**, `https://us.i.posthog.com` for PostHog US Cloud, `https://eu.i.posthog.com` for EU Cloud, or your own URL for self-hosted PostHog.
-
-Have those ready before starting any of the sections below.
+- **Project token** - Starts with `phc_`. Found in PostHog under **Settings** > **Project** > **General**, labeled **Project token**.
+- **Host** - `https://us.i.posthog.com` for PostHog US Cloud, `https://eu.i.posthog.com` for EU Cloud, or your own URL for self-hosted PostHog.
 
 ## Capture events and flags from your Convex code
 
-The [`@posthog/convex`](https://www.npmjs.com/package/@posthog/convex) component lets you capture events, identify users, evaluate feature flags, and forward exceptions directly from your Convex queries, mutations, and actions. Reach for this surface when you want analytics tied to specific server-side behavior.
+The [`@posthog/convex`](https://www.npmjs.com/package/@posthog/convex) component lets you capture events, identify users, evaluate feature flags, and forward exceptions directly from your Convex queries, mutations, and actions.
 
-Requires Convex 1.39 or newer, which introduced the typed component env vars this component relies on.
+Requires Convex 1.39 or newer.
 
 ### 1. Install the component
 
@@ -107,7 +101,7 @@ app.use(posthog, {
 export default app
 ```
 
-`POSTHOG_PROJECT_TOKEN` is required at deploy time. The other three are optional:
+Environment variables:
 
 | Env var | Required | What it does |
 | --- | --- | --- |
@@ -138,7 +132,13 @@ npx convex env set POSTHOG_PERSONAL_API_KEY phs_your_feature_flags_secure_api_ke
 
 ### 3. Initialize the client
 
+<<<<<<< HEAD
 Create `convex/posthog.ts`. Credentials are handled by the component's env vars, so this file only needs to pass the component reference and optional callbacks:
+||||||| 9e0bc706a
+Create `convex/posthog.ts`. Every other backend function will import the `posthog` instance from here. Credentials live on the component now, so the constructor takes no options:
+=======
+Create `convex/posthog.ts`. Other backend functions import the `posthog` instance from here. Credentials live on the component, so the constructor just needs the component reference:
+>>>>>>> matt/convex-tutorial
 
 ```ts
 // convex/posthog.ts
@@ -183,13 +183,13 @@ export const updateProfile = mutation({
 })
 ```
 
-Use the same Convex user ID as the `distinctId` everywhere. PostHog stitches events onto a single person timeline by matching distinct IDs across sources. See [stitching frontend and backend](#stitch-frontend-and-backend-events-together) below for the matching frontend setup.
+Use the same Convex user ID as the `distinctId` everywhere so PostHog can stitch events from every source onto one person. See [stitching frontend and backend](#stitch-frontend-and-backend-events-together) below for the frontend setup.
 
 ### 5. Evaluate feature flags
 
-`@posthog/convex` supports two flag evaluation paths. **Default to local evaluation.** It's faster (no network round-trip), works in queries (so a query reading a flag re-runs automatically when the flag changes), and works in mutations and actions too. Only reach for remote evaluation when local can't handle the flag (experience continuity flags, static cohorts, flags whose targeting depends on person properties you don't pass in).
+`@posthog/convex` supports two flag evaluation paths:
 
-- **Local** (`getFeatureFlag`, `isFeatureEnabled`, `getFeatureFlagPayload`, `getAllFlags`) runs against flag definitions cached on your Convex deployment. Works in queries, mutations, and actions. No per-call network round-trip, and a query re-runs automatically when cached definitions refresh. Requires `POSTHOG_PERSONAL_API_KEY`.
+- **Local** (`getFeatureFlag`, `isFeatureEnabled`, `getFeatureFlagPayload`, `getAllFlags`) runs against flag definitions cached on your Convex deployment. Works in queries, mutations, and actions. No per-call network round-trip, and a query re-runs automatically when cached definitions refresh. Requires `POSTHOG_PERSONAL_API_KEY`. Default to local.
 - **Remote** (`evaluateFlag`, `evaluateFlagPayload`, `evaluateAllFlags`) hits PostHog's `/flags` endpoint on every call. Action-only. Handles every flag, including the ones local can't, and needs no personal API key.
 
 Local evaluation requires `POSTHOG_PERSONAL_API_KEY` to be set. When configured, the component automatically refreshes flag definitions every 60 seconds (or at the interval you set with `POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS`). If you call a local-eval method without `POSTHOG_PERSONAL_API_KEY`, the client throws an error pointing you to the remote `evaluateFlag` / `evaluateFlagPayload` / `evaluateAllFlags` methods instead.
@@ -217,9 +217,15 @@ export const getDiscount = query({
 })
 ```
 
-Because this is a regular Convex query, the React client that subscribes to it re-runs and re-renders automatically the next time the cron refreshes flag definitions (up to your configured interval, one minute by default).
+A React client subscribed to this query re-renders the next time the cron refreshes flag definitions, up to the configured interval (one minute by default).
 
+<<<<<<< HEAD
 If you need an immediate refresh between cron ticks (for example, right after creating a flag in development), call `posthog.reloadFeatureFlags(ctx)` from an action.
+||||||| 9e0bc706a
+Need to force a refresh between cron ticks, for example right after creating a flag in development? Call `posthog.reloadFeatureFlags(ctx)` from an action.
+=======
+To force a refresh between cron ticks (for example, right after creating a flag in development), call `posthog.reloadFeatureFlags(ctx)` from an action.
+>>>>>>> matt/convex-tutorial
 
 If you're running an [experiment](/docs/experiments) against a locally-evaluated flag, fire an exposure event yourself from a mutation or action, since local eval can't schedule `capture` from inside a query:
 
@@ -235,9 +241,9 @@ await posthog.capture(ctx, {
 })
 ```
 
-<CalloutBox icon="IconInfo" title="When local eval returns null" type="fyi">
+<CalloutBox icon="IconInfo" title="When local eval can't reach a verdict" type="fyi">
 
-A handful of flag types can't be resolved locally (experience continuity flags, static cohorts, flags whose targeting depends on person properties you don't pass in). For those, `getFeatureFlag` returns `null`. Call `evaluateFlag` from an action to hit `/flags` directly. See the [full list of limitations](https://github.com/PostHog/posthog-js/tree/main/packages/convex#local-evaluation--limitations).
+A handful of flag types can't be resolved locally (experience continuity flags, static cohorts, flags whose targeting depends on person properties you don't pass in). For those, `getFeatureFlag` returns `undefined`. Call `evaluateFlag` from an action to hit `/flags` directly. See the [full list of limitations](https://github.com/PostHog/posthog-js/tree/main/packages/convex#local-evaluation--limitations).
 
 </CalloutBox>
 
@@ -268,13 +274,11 @@ export const chargeCard = action({
 })
 ```
 
-Use the dashboard destination for catch-all coverage. Use `captureException` here when you need explicit control over the properties on the exception event.
-
 ## Stitch frontend and backend events together
 
-Convex apps almost always have a frontend talking to a Convex backend. PostHog stitches both sides onto the same person timeline when you use the same `distinctId` string on both.
+PostHog stitches frontend and backend events onto the same person when both sides use the same `distinctId` string.
 
-Install [`posthog-js`](/docs/libraries/js) and [`@posthog/react`](/docs/libraries/react) in your frontend. The example below is React, but the same identity-stitching technique works with any [JavaScript framework](/docs/libraries) PostHog supports. The only requirement is that you call `posthog.identify()` with the same string the backend uses as `distinctId`.
+Install [`posthog-js`](/docs/libraries/js) and [`@posthog/react`](/docs/libraries/react) in your frontend. The example below uses React, but any [JavaScript framework](/docs/libraries) PostHog supports works the same way: call `posthog.identify()` with the same string the backend uses as `distinctId`.
 
 <MultiLanguage>
 
@@ -344,11 +348,11 @@ export function AuthSync() {
 
 Mount `<AuthSync />` once near the root of your app, inside the `<PostHogProvider>` and below your Convex `<Authenticated>` boundary if you have one. The `me?._id` guard skips the `identify` call until authentication completes.
 
-Now an event captured from a mutation with `distinctId: userId` and a `$pageview` from the browser with the same user ID land on the same person in PostHog. [Session replays](/docs/session-replay), server-side mutations, exceptions, and logs all land on one timeline for that user.
+[Session replays](/docs/session-replay), server-side mutations, exceptions, and logs all land on one timeline for that user.
 
 ## Trace LLM calls and Convex Agent
 
-If your app calls LLM providers from Convex actions, or uses [`@convex-dev/agent`](https://www.convex.dev/components/agent), pipe the traces into [PostHog AI observability](/docs/ai-observability). You get token counts, latency, and cost per generation, the full request and response transcript for every model call, and groupings by user, model, and agent run.
+If your app calls LLM providers from Convex actions, or uses [`@convex-dev/agent`](https://www.convex.dev/components/agent), pipe the traces into [PostHog AI observability](/docs/ai-observability) to capture generations, traces, spans, token counts, latency, and cost per model call.
 
 Setup uses `@posthog/ai` and OpenTelemetry rather than the `@posthog/convex` component. The full installation steps live on the [Convex AI observability installation page](/docs/ai-observability/installation/convex), covering both vanilla Vercel AI SDK or OpenAI calls and `experimental_telemetry` on `@convex-dev/agent`.
 
@@ -356,5 +360,5 @@ Setup uses `@posthog/ai` and OpenTelemetry rather than the `@posthog/convex` com
 
 If you want to query Convex data alongside event data, use the [Convex data warehouse source](/docs/cdp/sources/convex) to stream your tables into PostHog's warehouse. You can then query them with [SQL](/docs/sql), join them to event data, and build insights over the union.
 
-Requires a [Convex Professional plan](https://www.convex.dev/pricing). Convex's streaming export API is gated there.
+Requires a [Convex Professional plan](https://www.convex.dev/pricing) for Convex's streaming export API.
 
