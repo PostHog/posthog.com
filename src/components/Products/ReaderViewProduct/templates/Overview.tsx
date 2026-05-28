@@ -15,7 +15,7 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
                 {screenshots?.home?.src && (
                     <Glow
                         color={productData?.color}
-                        className="mb-8 @3xl/reader-content:max-w-lg @3xl/reader-content:float-right @3xl/reader-content:ml-8 relative"
+                        className="mb-8 @3xl/reader-content:max-w-lg @4xl/reader-content:max-w-xl @5xl/reader-content:max-w-2xl @3xl/reader-content:float-right @3xl/reader-content:ml-8 relative"
                     >
                         <CloudinaryImage
                             src={screenshots.home.src as `https://res.cloudinary.com/${string}`}

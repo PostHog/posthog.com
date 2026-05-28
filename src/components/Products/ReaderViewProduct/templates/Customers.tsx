@@ -58,7 +58,7 @@ const Customers = ({ id, productData, customers, hasCaseStudy }: SectionComponen
     if (customerLogos.length === 0 && productUsageStats.unique_users == null) return null
 
     return (
-        <section id={id} className="scroll-mt-32 not-prose space-y-6">
+        <section id={id} className="scroll-mt-32 not-prose space-y-6 @5xl/reader-content:-mt-12">
             <h2 className="mb-2">Who uses it?</h2>
 
             {productUsageStats.unique_users != null && productUsageStats.unique_orgs != null && (
@@ -69,14 +69,17 @@ const Customers = ({ id, productData, customers, hasCaseStudy }: SectionComponen
             )}
 
             {customerLogos.length > 0 && (
-                <div className="grid grid-cols-[fit-content(110px)_1fr] gap-2 leading-none @md/reader-content:items-center">
+                <div className="grid grid-cols-[fit-content(110px)_1fr] gap-x-2 gap-y-3 leading-none @md/reader-content:items-baseline @5xl/reader-content:grid-cols-[fit-content(140px)_1fr_fit-content(140px)_1fr] @5xl/reader-content:gap-x-4 @5xl/reader-content:gap-y-6">
                     {customerLogos.map((customer: any) => {
                         const data = customerData[customer.slug]
                         const isCaseStudy = hasCaseStudy(customer.slug)
 
                         return (
                             <>
-                                <div key={customer.slug} className="text-sm leading-none flex justify-end">
+                                <div
+                                    key={customer.slug}
+                                    className="text-sm leading-none flex justify-end @5xl/reader-content:justify-start"
+                                >
                                     {renderLogo(customer)}
                                 </div>
                                 <div>
