@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useApp } from '../../../../context/App'
+import { useApp } from '../../../context/App'
 import AppWindow from 'components/AppWindow'
 import { AnimatePresence, motion } from 'framer-motion'
 import CookieBannerToast from 'components/CookieBanner/ToastVersion'

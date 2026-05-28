@@ -28,9 +28,9 @@ import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
-import KoreanMDXViewer from './_components/KoreanMDXViewer'
-import KoreanHeroCarousel from './_components/KoreanHeroCarousel'
-import { KoreanCustomers, getKoreanSharedDescriptors } from './_components/KoreanHomeShared'
+import KoreanMDXViewer from '../../components/Korean/KoreanMDXViewer'
+import KoreanHeroCarousel from '../../components/Korean/KoreanHeroCarousel'
+import { KoreanCustomers, getKoreanSharedDescriptors } from '../../components/Korean/KoreanHomeShared'
 
 type TranslateFn = (value: string) => string
 type ProductSummary = {
