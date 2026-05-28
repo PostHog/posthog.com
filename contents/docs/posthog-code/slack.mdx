@@ -24,6 +24,12 @@ You need two integrations: one workspace-wide Slack connection, and a personal G
 
 Head to [PostHog Code → Slack integration](https://app.posthog.com/settings/project-posthog-code) in your project settings and click **Add to Slack**. Approve the requested scopes - you'll need to be a project admin to install.
 
+<ProductScreenshot
+    imageLight="TODO: upload screenshot of the Slack integration panel in project settings with the Add to Slack button"
+    classes="rounded"
+    alt="Adding the PostHog Slack app to a project from the Slack integration settings"
+/>
+
 To talk to the bot in a channel, invite it: `/invite @PostHog`. The first time it sees a mention, it matches your Slack email to your PostHog account, so make sure you're signed in to the same org on both sides.
 
 <CalloutBox icon="IconWarning" title="Reconnect if you installed before 2026-05-04" type="caution">
@@ -35,6 +41,12 @@ The bot picked up new OAuth scopes on 2026-05-04 (`app_mentions:read`, `users:re
 ### 2. Connect your personal GitHub
 
 PRs are authored under your GitHub identity, not the bot's, which means each teammate who wants to ship code needs to connect their own GitHub account once. Open your [user settings](https://app.posthog.com/settings/user#integrations) and connect GitHub.
+
+<ProductScreenshot
+    imageLight="TODO: upload screenshot of the personal GitHub integration in user settings with the Connect button"
+    classes="rounded"
+    alt="Connecting a personal GitHub integration from user settings"
+/>
 
 If you start a task before connecting, the agent stops and posts a **Connect GitHub** button in the thread. Click it, finish the OAuth flow, and re-mention the bot - the task picks up where it left off.
 
