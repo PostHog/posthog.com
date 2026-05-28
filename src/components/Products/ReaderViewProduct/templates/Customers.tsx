@@ -69,7 +69,7 @@ const Customers = ({ id, productData, customers, hasCaseStudy }: SectionComponen
             )}
 
             {customerLogos.length > 0 && (
-                <div className="grid grid-cols-[fit-content(110px)_1fr] gap-x-2 gap-y-3 leading-none @md/reader-content:items-baseline @5xl/reader-content:grid-cols-[fit-content(140px)_1fr_fit-content(140px)_1fr] @5xl/reader-content:gap-x-4 @5xl/reader-content:gap-y-6">
+                <div className="grid grid-cols-[fit-content(110px)_1fr] gap-x-2 gap-y-3 leading-none @md/reader-content:items-center @5xl/reader-content:grid-cols-[fit-content(140px)_1fr_fit-content(140px)_1fr] @5xl/reader-content:gap-x-4 @5xl/reader-content:gap-y-6">
                     {customerLogos.map((customer: any) => {
                         const data = customerData[customer.slug]
                         const isCaseStudy = hasCaseStudy(customer.slug)
