@@ -538,7 +538,7 @@ export default function Startups(): JSX.Element {
                                             <Link to="/talk-to-sales" className="underline font-semibold">
                                                 contact us to discuss options
                                             </Link>
-                                            . Credits can be used towards all other aspects of the Boost add-on.
+                                            . Credits can be used towards all other aspects of the Boost package.
                                         </p>
                                     ),
                                 },
@@ -624,7 +624,7 @@ export default function Startups(): JSX.Element {
                                             support to paying customers. Organizations which are part of our startup
                                             plan are therefore not eligible for high priority customer support, and only
                                             qualify for normal priority and community support. This is still the case
-                                            even if you apply your credits towards a platforms add-on.
+                                            even if you apply your credits towards a platform package.
                                         </p>
                                     ),
                                 },

@@ -65,9 +65,9 @@ function BAAGenerator() {
                     </p>
                     <p className="text-sm">
                         Important: You'll need to be subscribed to our{' '}
-                        <Link to="/platform-packages#boost-add-on">Boost</Link>,{' '}
-                        <Link to="/platform-packages#scale-add-on">Scale</Link>, or{' '}
-                        <Link to="/platform-packages#enterprise-add-on">Enterprise</Link> add-on to get a BAA.
+                        <Link to="/platform-packages">Boost</Link>,{' '}
+                        <Link to="/platform-packages">Scale</Link>, or{' '}
+                        <Link to="/platform-packages">Enterprise</Link> package to get a BAA.
                     </p>
 
                     <Link
@@ -162,7 +162,7 @@ function BAAGenerator() {
                         </p>
                         <p>
                             This BAA is only available to customers with the applicable Platform Package, as defined
-                            below, and is effective only if the Customer has the required add-on in place at the time of
+                            below, and is effective only if the Customer has the required package in place at the time of
                             signing. By signing this BAA, the Customer represents and warrants that they meet the
                             requirements of and have entered into the applicable Platform Package. This BAA shall be
                             null, void, and of no effect if the Customer does not meet those requirements at the time of
@@ -208,9 +208,9 @@ function BAAGenerator() {
                             PHI.
                         </p>
                         <p>
-                            "Platform Package" shall mean the add-on that the Customer must be paying for to receive
+                            "Platform Package" shall mean the package that the Customer must be paying for to receive
                             coverage with a BAA (either the Boost, Scale or Enterprise{' '}
-                            <Link to="/platform-packages">add-on</Link>).
+                            <Link to="/platform-packages">package</Link>).
                         </p>
                         <p>
                             <strong>Customer Assurances.</strong>
