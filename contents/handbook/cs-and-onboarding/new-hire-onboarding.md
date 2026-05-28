@@ -162,7 +162,7 @@ Add and modify this list as you work through it! Products are added frequently, 
     - What is a fingerprint?
 
 #### Other Products and Features
-1. Platform add-ons (Boost/Scale/Enterprise/Teams)
+1. Platform packages (Boost/Scale/Enterprise/Teams)
 2. [Data pipelines](/docs/cdp)
     - Sources
     - Destinations

@@ -430,7 +430,7 @@ end
 | `feature_flag_request_timeout_seconds` | Integer | `3` | Timeout, in seconds, for feature flag requests. |
 | `before_send` | Proc | `nil` | Callback that receives the event hash before it is queued or sent. Return a modified event hash, or `nil` to drop the event. |
 
-The `PostHog.init` block supports the options above. Less common core options like `batch_size`, `disable_singleton_warning`, `skip_ssl_verification`, and the experimental `flag_definition_cache_provider` can be passed as an options hash to `PostHog.init(...)`; see the [Ruby SDK docs](/docs/libraries/ruby#configuration) for details.
+The `PostHog.init` block supports the options above. Less common core options like `batch_size`, `disable_singleton_warning`, `skip_ssl_verification`, and `flag_definition_cache_provider` can be passed as an options hash to `PostHog.init(...)`; see the [Ruby SDK docs](/docs/libraries/ruby#configuration) for details.
 
 ### Rails-specific options
 
