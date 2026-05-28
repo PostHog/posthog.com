@@ -305,7 +305,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type ProductDataProductsAddonsPlans {
       contact_support: Boolean
-      unit_amount_usd: Float
+      unit_amount_usd: String
       tiers: [ProductDataProductsPlansTiers]
     }
     type SlackEmoji implements Node {
