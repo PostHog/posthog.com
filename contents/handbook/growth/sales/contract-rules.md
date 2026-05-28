@@ -62,7 +62,7 @@ Beyond optimization, we offer discounts based on four levers:
 
 **If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
 
-> You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with <TeamMember name="Ben Bradley" showOnlyFirstName photo /> (TAEs), <TeamMember name="Simon Fisher" showOnlyFirstName photo /> (TAMs or CSMs), or <TeamMember name="Charles Cook" showOnlyFirstName photo /> (as backup), you should assume by default that the deal will not count toward your quota.
+> You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with <TeamMember name="Ben Bradley" showOnlyFirstName photo /> (TAEs, or as exec backup) or <TeamMember name="Simon Fisher" showOnlyFirstName photo /> (TAMs or CSMs), you should assume by default that the deal will not count toward your quota.
 
 ### Why we require up-front payment for credit purchases
 
@@ -137,7 +137,7 @@ In exceptional circumstances, we may explore providing additional discounts whic
 
 For the avoidance of doubt, these types of deals are **very rare** (~1 per year), and not offered to customers with standard usage volumes. 
 
-If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with your manager, who will then clear it with Simon (TAMs/CSMs) or Charles (TAEs).
+If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with your manager, who will then clear it with Simon (TAMs/CSMs) or Ben (TAEs).
 
 ## Additional credit purchase
 

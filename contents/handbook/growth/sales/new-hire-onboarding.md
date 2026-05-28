@@ -44,7 +44,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
  - Check out some Buildbetter calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
  - Read all of the Sales section in the Handbook, and update it as you learn more.
- - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales.
+ - Meet with [Ben](/community/profiles/30205), the exec responsible for Sales, CS, and Onboarding.
  - Meet with [Simon](/community/profiles/28895), Sales Lead
  - PostHog integration exercise - by the end of week 1:
    - Find/build a blank app which doesn’t yet have PostHog integrated.  You should be able to vibe code something simple with React using Cursor or Lovable.dev
@@ -111,7 +111,7 @@ By the end of month 3:
  - Check out some Buildbetter calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
  - Read all of the Sales section in the Handbook, and update it as you learn more.
- - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales.
+ - Meet with [Ben](/community/profiles/30205), the exec responsible for Sales, CS, and Onboarding.
  - Meet with [Simon](/community/profiles/28895), Sales Lead
  - PostHog integration exercise - by the end of week 1:
    - Find/build a blank app which doesn’t yet have PostHog integrated.  You should be able to vibe code something simple with React using Cursor or Lovable.dev
