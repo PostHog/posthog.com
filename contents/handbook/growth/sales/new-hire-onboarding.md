@@ -42,7 +42,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some Buildbetter calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
- - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
+ - Learn and practise a [demo](https://youtu.be/1FZji2L-LmM) of PostHog.
  - Read all of the Sales section in the Handbook, and update it as you learn more.
  - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales.
  - Meet with [Simon](/community/profiles/28895), Sales Lead
@@ -109,7 +109,7 @@ By the end of month 3:
 
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some Buildbetter calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
- - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
+ - Learn and practise a [demo](https://youtu.be/1FZji2L-LmM) of PostHog.
  - Read all of the Sales section in the Handbook, and update it as you learn more.
  - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales.
  - Meet with [Simon](/community/profiles/28895), Sales Lead
