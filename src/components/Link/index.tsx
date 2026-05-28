@@ -127,6 +127,7 @@ export default function Link({
     const locationHref = appWindow?.element?.props?.location?.href
     const initialUrl = to || href
     const url = resolveRelativeLink(initialUrl, locationHref)
+    const linkState = state?.newWindow && state?.preventScroll === undefined ? { ...state, preventScroll: true } : state
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
     const isPostHogAppUrl = url && /(eu|us|app)\.posthog\.com/.test(url)
     const preview =
@@ -205,12 +206,12 @@ export default function Link({
                             />
                         )}
                     >
-                        <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                        <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                             {children || null}
                         </GatsbyLink>
                     </Tooltip>
                 ) : (
-                    <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                    <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                         {children}
                     </GatsbyLink>
                 )
@@ -258,12 +259,12 @@ export default function Link({
                             />
                         )}
                     >
-                        <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                        <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                             {children || null}
                         </GatsbyLink>
                     </Tooltip>
                 ) : (
-                    <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                    <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                         {children}
                     </GatsbyLink>
                 )

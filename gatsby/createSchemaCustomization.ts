@@ -241,6 +241,15 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type PostCategory implements Node {
       attributes: PostCategoryAttributes
     }
+    type CommunityStats implements Node {
+      topicId: Int
+      topicSlug: String
+      topicLabel: String
+      questions: Int
+      resolved: Int
+      replies: Int
+      helpful: Int
+    }
     type ProductSectionsSectionsFeatures {
       title: String
       description: String

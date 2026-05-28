@@ -48,7 +48,7 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-3">Ask PostHog anything</h2>
+            <h2 className="mb-3">AI prompts</h2>
             {ai?.intro && <p className="text-base text-secondary mb-4">{ai.intro}</p>}
             <ToggleGroup
                 title="View"

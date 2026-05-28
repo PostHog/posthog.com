@@ -408,6 +408,95 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
+    const sourceCommunityStats = async () => {
+        const host = process.env.GATSBY_SQUEAK_API_HOST
+        if (!host) {
+            console.warn('GATSBY_SQUEAK_API_HOST not set. Skipping community stats.')
+            return
+        }
+
+        const notArchived = {
+            $or: [{ archived: { $null: true } }, { archived: { $eq: false } }],
+        }
+
+        const fetchTotal = async (path: 'questions' | 'replies', filters: Record<string, any>) => {
+            const query = qs.stringify(
+                {
+                    filters,
+                    fields: ['id'],
+                    pagination: { pageSize: 1, withCount: true },
+                },
+                { encodeValuesOnly: true }
+            )
+            try {
+                const res = await fetch(`${host}/api/${path}?${query}`).then((r) => r.json() as Promise<any>)
+                return res?.meta?.pagination?.total ?? 0
+            } catch (error) {
+                console.warn(`Failed to fetch community stats (${path}):`, error)
+                return 0
+            }
+        }
+
+        const statsFor = async (topicId: number | null) => {
+            const questionTopicFilter = topicId ? { topics: { id: { $eq: topicId } } } : {}
+            const replyTopicFilter = topicId ? { question: { topics: { id: { $eq: topicId } } } } : {}
+
+            const [questions, resolved, replies, helpful] = await Promise.all([
+                fetchTotal('questions', { ...notArchived, ...questionTopicFilter }),
+                fetchTotal('questions', {
+                    ...notArchived,
+                    ...questionTopicFilter,
+                    resolved: { $eq: true },
+                }),
+                fetchTotal('replies', { ...replyTopicFilter }),
+                fetchTotal('replies', { ...replyTopicFilter, helpful: { $eq: true } }),
+            ])
+
+            return { questions, resolved, replies, helpful }
+        }
+
+        let topics: Array<{ id: number; attributes: { label?: string; slug?: string } }> = []
+        try {
+            const topicsQuery = qs.stringify(
+                {
+                    fields: ['label', 'slug'],
+                    pagination: { pageSize: 200 },
+                },
+                { encodeValuesOnly: true }
+            )
+            const topicsRes = (await fetch(`${host}/api/topics?${topicsQuery}`).then((r) => r.json())) as any
+            topics = topicsRes?.data ?? []
+        } catch (error) {
+            console.warn('Failed to fetch topics for community stats:', error)
+        }
+
+        const targets: Array<{ topicId: number | null; topicSlug: string | null; topicLabel: string | null }> = [
+            { topicId: null, topicSlug: null, topicLabel: null },
+            ...topics.map((t) => ({
+                topicId: t.id,
+                topicSlug: t.attributes?.slug ?? null,
+                topicLabel: t.attributes?.label ?? null,
+            })),
+        ]
+
+        await Promise.all(
+            targets.map(async ({ topicId, topicSlug, topicLabel }) => {
+                const counts = await statsFor(topicId)
+                const data = { topicId, topicSlug, topicLabel, ...counts }
+                createNode({
+                    id: createNodeId(`community-stats-${topicId ?? 'site'}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: 'CommunityStats',
+                        contentDigest: createContentDigest(data),
+                    },
+                    ...data,
+                })
+            })
+        )
+    }
+
     const sourceShopifyNodes = async () => {
         const shopifyURL = process.env.GATSBY_MYSHOPIFY_URL
         const shopifyAdminAPIVersion = process.env.GATSBY_SHOPIFY_ADMIN_API_VERSION
@@ -1246,6 +1335,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         createRoadmapItems(),
         sourceChangelogVideos(),
         sourcePostCategories(),
+        sourceCommunityStats(),
         sourceShopifyNodes(),
         sourceSlackEmojis(),
         sourceG2Reviews(),

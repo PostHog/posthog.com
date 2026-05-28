@@ -55,13 +55,31 @@ export const sessionReplay = {
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        { slug: 'customers', name: 'Who uses it?', group: 'divided', icon: <IconPeople className="size-4" /> },
-        { slug: 'eli5', name: 'What does it do?', group: 'divided', icon: <IconInfo className="size-4" /> },
-        { slug: 'use-cases', name: 'Who is it for?', group: 'divided', icon: <IconMagic className="size-4" /> },
+        {
+            slug: 'customers',
+            name: 'Who uses it?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconPeople className="size-4" />,
+        },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
         { slug: 'demo', name: 'Demo', group: 'divided', icon: <IconPlay className="size-4" /> },
         {
             slug: 'applications',
-            name: 'What can I do with it?',
+            name: 'How do I use it?',
             group: 'divided',
             icon: <IconCursorClick className="size-4" />,
             props: { slides: applications },
@@ -75,14 +93,14 @@ export const sessionReplay = {
         },
         {
             slug: 'ask-anything',
-            name: 'Ask PostHog anything',
+            name: 'AI prompts',
             group: 'divided',
             icon: <IconChat className="size-4" />,
         },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'roadmap', name: 'Roadmap', group: 'divided', icon: <IconMap className="size-4" /> },
         { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        { slug: 'community', name: 'Discussions', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         { slug: 'team', name: 'Team', group: 'divided', icon: <IconShieldPeople className="size-4" /> },
         {
             slug: 'installation',

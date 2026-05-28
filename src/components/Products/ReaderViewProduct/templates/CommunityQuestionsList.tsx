@@ -95,7 +95,7 @@ const Row = ({ question, currentPage }: { question: QuestionData; currentPage?: 
     })
 
     return (
-        <li className="border-b border-primary last:border-b-0">
+        <li className="border-b border-primary first:border-t-0 last:border-b-0">
             <Link
                 state={{ newWindow: true, preventScroll: true }}
                 to={`/questions/${permalink}`}
@@ -156,7 +156,7 @@ const CommunityQuestionsList = ({ questions, isLoading, currentPage, forumUrl }:
 
     if (isLoading && items.length === 0) {
         return (
-            <ul className="m-0 p-0 list-none border-t border-primary">
+            <ul className="m-0 p-0 list-none">
                 {Array.from({ length: 5 }).map((_, i) => (
                     <SkeletonRow key={i} />
                 ))}
@@ -181,7 +181,7 @@ const CommunityQuestionsList = ({ questions, isLoading, currentPage, forumUrl }:
     }
 
     return (
-        <ul className="m-0 p-0 list-none border-t border-primary">
+        <ul className="m-0 p-0 list-none">
             {items.map((question: any) => (
                 <Row key={question.id} question={question} currentPage={currentPage} />
             ))}
