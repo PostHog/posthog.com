@@ -5,9 +5,7 @@ platformLogo: convex
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-This doc covers using PostHog with [Convex](https://www.convex.dev): capturing events and flags from Convex functions, stitching frontend and backend identities, tracing LLM calls, and syncing Convex tables into PostHog.
-
-## Pick what you need
+[Convex](https://www.convex.dev) runs your backend as short-lived isolates, so the usual `posthog-node` shutdown flow doesn't apply. This doc covers what does: capturing events and flags from Convex functions, matching frontend and backend events to the same person, tracing LLM calls, and syncing Convex tables into PostHog.
 
 | You want to | Use |
 | --- | --- |
@@ -119,7 +117,7 @@ npx convex env set POSTHOG_PERSONAL_API_KEY phs_your_feature_flags_secure_api_ke
 
 <CalloutBox icon="IconInfo" title="Setting the personal API key starts the cron" type="fyi">
 
-`POSTHOG_PERSONAL_API_KEY` gates the component's built-in refresh cron. The gate is evaluated at deploy time: `npx convex dev` redeploys automatically when you set the var, but production deployments need a manual redeploy for the cron to start. Leaving the var unset means no cron runs at all, so idle dev deployments don't burn function calls.
+`POSTHOG_PERSONAL_API_KEY` is checked at deploy time, so after setting it in production you need to redeploy for the cron to register. To skip the cron entirely (e.g. on a free-tier dev deployment), leave the var unset.
 
 </CalloutBox>
 
@@ -174,7 +172,7 @@ Use the same Convex user ID as the `distinctId` everywhere so PostHog can stitch
 
 `@posthog/convex` supports two flag evaluation paths:
 
-- **Local** (`getFeatureFlag`, `isFeatureEnabled`, `getFeatureFlagPayload`, `getAllFlags`) runs against flag definitions cached on your Convex deployment. Works in queries, mutations, and actions. No per-call network round-trip, and a query re-runs automatically when cached definitions refresh. Requires `POSTHOG_PERSONAL_API_KEY`. Default to local.
+- **Local** (`getFeatureFlag`, `isFeatureEnabled`, `getFeatureFlagPayload`, `getAllFlags`) runs against flag definitions cached on your Convex deployment. Works in queries, mutations, and actions. No per-call network request, and a query re-runs automatically when cached definitions refresh. Requires `POSTHOG_PERSONAL_API_KEY`. Use this when you can.
 - **Remote** (`evaluateFlag`, `evaluateFlagPayload`, `evaluateAllFlags`) hits PostHog's `/flags` endpoint on every call. Action-only. Handles every flag, including the ones local can't, and needs no personal API key.
 
 Local evaluation runs automatically once `POSTHOG_PERSONAL_API_KEY` is set. The component registers its own cron at deploy time and refreshes flag definitions every minute, so you don't write your own. Tune the cadence with `POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS`. If you call a local-eval method without the key configured, the client throws and points you at the remote `evaluate*` methods.
@@ -331,7 +329,7 @@ Mount `<AuthSync />` once near the root of your app, inside the `<PostHogProvide
 
 ## Trace LLM calls and Convex Agent
 
-If your app calls LLM providers from Convex actions, or uses [`@convex-dev/agent`](https://www.convex.dev/components/agent), pipe the traces into [PostHog AI observability](/docs/ai-observability) to capture generations, traces, spans, token counts, latency, and cost per model call.
+If your app calls LLM providers from Convex actions, or uses [`@convex-dev/agent`](https://www.convex.dev/components/agent), forward the traces to [PostHog AI observability](/docs/ai-observability) to capture generations, traces, spans, token counts, latency, and cost per model call.
 
 Setup uses `@posthog/ai` and OpenTelemetry rather than the `@posthog/convex` component. The full installation steps live on the [Convex AI observability installation page](/docs/ai-observability/installation/convex), covering both vanilla Vercel AI SDK or OpenAI calls and `experimental_telemetry` on `@convex-dev/agent`.
 
@@ -340,4 +338,12 @@ Setup uses `@posthog/ai` and OpenTelemetry rather than the `@posthog/convex` com
 If you want to query Convex data alongside event data, use the [Convex data warehouse source](/docs/cdp/sources/convex) to stream your tables into PostHog's warehouse. You can then query them with [SQL](/docs/sql), join them to event data, and build insights over the union.
 
 Requires a [Convex Professional plan](https://www.convex.dev/pricing) for Convex's streaming export API.
+
+## Further reading
+
+- [`@posthog/convex` README](https://github.com/PostHog/posthog-js/tree/main/packages/convex)
+- [Convex AI observability installation](/docs/ai-observability/installation/convex)
+- [Convex data warehouse source](/docs/cdp/sources/convex)
+- [Convex PostHog log streams](https://docs.convex.dev/production/integrations/log-streams/)
+- [Convex PostHog exception reporting](https://docs.convex.dev/production/integrations/exception-reporting)
 
