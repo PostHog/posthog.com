@@ -57,6 +57,16 @@
     ],
     "redirects": [
         { "source": "/blog/training-AI-models", "destination": "/blog/training-ai-models", "statusCode": 301 },
+        {
+            "source": "/handbook/marketing/how-we-position-and-sell",
+            "destination": "/handbook/marketing/positioning",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/marketing/how-we-position-and-sell/:path*",
+            "destination": "/handbook/marketing/positioning/:path*",
+            "statusCode": 301
+        },
         { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
         { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
         {
@@ -1761,6 +1771,10 @@
         {
             "source": "/docs/error-tracking/nextjs",
             "destination": "/docs/error-tracking/installation/nextjs"
+        },
+        {
+            "source": "/docs/error-tracking/installation/nuxt",
+            "destination": "/docs/error-tracking/installation/nuxt-3-7"
         },
         {
             "source": "/docs/ai-engineering/observability",

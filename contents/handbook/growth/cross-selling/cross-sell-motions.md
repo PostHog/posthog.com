@@ -142,7 +142,7 @@ Adoption paths are good to frame products as point in time or natural progressio
 * **B2B companies → Group analytics:** When tracking company-level metrics becomes critical  
   * "You're currently exporting data to spreadsheets to analyze customer behavior. Group analytics provides those insights natively."
 * **High event volume → Identified events:** When anonymous events limit user journey analysis  
-* **Growing teams → Teams add-on:** When organizations need advanced permissions and SSO  
+* **Growing teams → Boost or Scale package:** When organizations need advanced permissions and SSO  
 
 Here are some other known examples that aren't necessarily 0 to 1 linear adoption, or working backwards from what a customer is using outside of PostHog: 
 - Data warehouse has continued to receive special attention since the launch of PostHog's related products. 
