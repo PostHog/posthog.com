@@ -84,7 +84,6 @@ Here is a overview that shows which of our PMs currently works with which team:
 -   <SmallTeam slug="conversations" />
 -   <SmallTeam slug="experiments" />
 -   <SmallTeam slug="feature-flags" />
--   <SmallTeam slug="flags-platform" />
 
 </fieldset>
 

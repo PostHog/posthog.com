@@ -71,6 +71,12 @@ If you need to use the application again, you can re-authorize it through the ap
 
 You can choose which email notifications you receive in [your account settings](https://app.posthog.com/settings/user#notifications) under **Notifications**. You can enable or disable specific notifications with toggles. Product-specific notification, such as [Alerts](/docs/alerts), have separate configurations in each product.
 
+### Pipeline error notifications
+
+If you have data pipeline error notifications enabled, you can mute notifications for individual pipelines while keeping them enabled for others. This applies to destinations, transformations, batch exports, and legacy plugin destinations.
+
+To configure this, expand **Select pipelines to receive notifications for** under the data pipeline notifications toggle. All pipelines are enabled by default. Uncheck any pipeline you don't want to receive error notifications for.
+
 ## Theming and customization
 
 You can switch between dark and light mode in [your account settings](https://app.posthog.com/settings/user-customization#theme) under **Theme**. You can also quickly toggle theme using the [command palette](/docs/cmd-k) by searching for "dark", "light", or "theme".

@@ -3,7 +3,7 @@ import Tooltip from 'components/Tooltip'
 import { IconCopy, IconInfo, IconLightBulb } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import { calculatePrice, formatUSD } from '../PricingSlider/pricingSliderLogic'
-import { useStaticQuery } from 'gatsby'
+import { Link, useStaticQuery } from 'gatsby'
 import { allProductsData } from '../Pricing'
 import useProducts from 'hooks/useProducts'
 import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
@@ -451,32 +451,50 @@ export default function Tabbed() {
                                                 </span>
                                             </Tooltip>
                                         </div>
-                                        <Toggle
-                                            checked={checked}
-                                            onChange={(checked) =>
-                                                setPlatformAddons(
-                                                    platformAddons.map((addon) => {
-                                                        if (addon.type === type) {
-                                                            return { ...addon, checked }
-                                                        }
-                                                        return addon
-                                                    })
-                                                )
-                                            }
-                                        />
+                                        {type !== 'enterprise' && (
+                                            <Toggle
+                                                checked={checked}
+                                                onChange={(checked) =>
+                                                    setPlatformAddons(
+                                                        platformAddons.map((addon) => {
+                                                            if (addon.type === type) {
+                                                                return { ...addon, checked }
+                                                            }
+                                                            return addon
+                                                        })
+                                                    )
+                                                }
+                                            />
+                                        )}
                                     </div>
                                     <div className="col-span-3 sm:col-span-2 flex justify-between">
-                                        <div>
-                                            <strong className="text-[15px] md:text-base">
-                                                ${platformAddon.price.toLocaleString()}
-                                            </strong>
-                                            <span className="text-sm opacity-70">/mo</span>
-                                        </div>
-                                        <div className="text-right">
-                                            <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
-                                                ${checked ? platformAddon?.price : 0}
-                                            </p>
-                                        </div>
+                                        {type === 'enterprise' ? (
+                                            <Link
+                                                to="/talk-to-a-human?edition=enterprise"
+                                                className="text-red dark:text-yellow font-semibold text-sm"
+                                                state={{ newWindow: true }}
+                                            >
+                                                Contact us
+                                            </Link>
+                                        ) : (
+                                            <>
+                                                <div>
+                                                    <strong className="text-[15px] md:text-base">
+                                                        ${platformAddon.price.toLocaleString()}
+                                                    </strong>
+                                                    <span className="text-sm opacity-70">/mo</span>
+                                                </div>
+                                                <div className="text-right">
+                                                    <p
+                                                        className={`font-semibold m-0 pr-3 ${
+                                                            checked ? '' : 'opacity-50'
+                                                        }`}
+                                                    >
+                                                        ${checked ? platformAddon?.price : 0}
+                                                    </p>
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                             )
