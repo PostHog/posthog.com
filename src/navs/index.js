@@ -3042,16 +3042,16 @@ export const docsMenu = {
                             ],
                         },
                         {
-                            name: 'SDK doctor',
-                            url: '/docs/sdk-doctor',
+                            name: 'SDK Health',
+                            url: '/docs/sdk-health',
                             children: [
                                 {
                                     name: 'Overview',
-                                    url: '/docs/sdk-doctor',
+                                    url: '/docs/sdk-health',
                                 },
                                 {
                                     name: 'Keeping SDKs current',
-                                    url: '/docs/sdk-doctor/keeping-sdks-current',
+                                    url: '/docs/sdk-health/keeping-sdks-current',
                                 },
                             ],
                         },

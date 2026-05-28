@@ -56,6 +56,8 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/docs/sdk-doctor", "destination": "/docs/sdk-health", "statusCode": 301 },
+        { "source": "/docs/sdk-doctor/:path*", "destination": "/docs/sdk-health/:path*", "statusCode": 301 },
         {
             "source": "/handbook/marketing/how-we-position-and-sell",
             "destination": "/handbook/marketing/positioning",
