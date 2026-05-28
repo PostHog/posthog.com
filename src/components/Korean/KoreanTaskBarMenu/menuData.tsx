@@ -1,6 +1,6 @@
 import { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import React from 'react'
-import { docsMenu, handbookSidebar } from '../../../../navs'
+import { docsMenu, handbookSidebar } from '../../../navs'
 import * as Icons from '@posthog/icons'
 import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 import Logo from 'components/Logo'
@@ -26,12 +26,12 @@ import {
     IconDictator,
     IconSparksJoy,
 } from 'components/OSIcons'
-import { useApp } from '../../../../context/App'
+import { useApp } from '../../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
-import { useToast } from '../../../../context/Toast'
+import { useToast } from '../../../context/Toast'
 import usePostHog from 'hooks/usePostHog'
-import { translateKo } from '../../_translations'
+import { translateKo } from '../../../pages/ko/_translations'
 
 interface DocsMenuItem {
     name: string

@@ -18,8 +18,8 @@ import { COL1, COL2, companyAttributes, companyBreakdowns, Image } from 'compone
 import usePostHog from 'hooks/usePostHog'
 import useProducts from 'hooks/useProducts'
 import { useCustomers } from 'hooks/useCustomers'
-import { useApp } from '../../../../context/App'
-import { useWindow } from '../../../../context/Window'
+import { useApp } from '../../../context/App'
+import { useWindow } from '../../../context/Window'
 
 type TranslateFn = (value: string) => string
 type CustomerLogo = { light: string; dark: string } | React.ComponentType<{ className?: string }>

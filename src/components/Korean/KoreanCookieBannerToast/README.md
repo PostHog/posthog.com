@@ -14,4 +14,4 @@ The base cookie toast is emitted from shared site code with English copy. This c
 
 ## Used by
 
-Mounted from `src/pages/ko/components/KoreanDesktop/index.tsx`.
+Mounted from `src/components/Korean/KoreanDesktop/index.tsx`.

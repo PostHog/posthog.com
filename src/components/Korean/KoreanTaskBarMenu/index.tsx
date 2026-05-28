@@ -15,7 +15,7 @@ import {
     IconPlay,
     IconPeople,
 } from '@posthog/icons'
-import { useApp } from '../../../../context/App'
+import { useApp } from '../../../context/App'
 
 import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
@@ -29,7 +29,7 @@ import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { Popover } from 'components/RadixUI/Popover'
 import { SearchUI } from 'components/SearchUI'
-import { translateKo } from '../../_translations'
+import { translateKo } from '../../../pages/ko/_translations'
 
 const translateMenuItem = (item: any): any => {
     if (!item || typeof item !== 'object') {

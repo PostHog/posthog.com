@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { IconX } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { useToast } from '../../../../context/Toast'
+import { useToast } from '../../../context/Toast'
 
 const COOKIE_BANNER_TITLE = 'Legally-required cookie banner'
 

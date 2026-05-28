@@ -3,7 +3,7 @@ import { Tabs } from 'radix-ui'
 import { IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import { OnePlaceSlide, UnderstandUsageSlide, DebugFixSlide, TestRolloutSlide } from './slides'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { translateKo } from '../../_translations'
+import { translateKo } from '../../../pages/ko/_translations'
 
 const SLIDE_DURATION = 5000
 type TranslateFn = (value: string) => string
