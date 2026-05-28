@@ -104,6 +104,10 @@ Clicking on a person in the [People tab](https://app.posthog.com/persons) opens 
 
 - **Events** shows all the events a person has triggered, which you can search and filter to find specific events.
 
+- **Logs** shows all logs associated with the person's distinct IDs. This requires your backend logs to include the person's `distinct_id` (or your team's configured log attribute key) in the log attributes. See [linking logs to session replay](/docs/logs/link-session-replay) for how to include person identity in your logs.
+
+- **Exceptions** shows [error tracking](/docs/error-tracking) issues associated with this person.
+
 - **Recordings** shows all of the session replays a person has generated. Note this is subject to the retention policy of your plan, so people who haven't been active recently may have none.
 
 - **Cohorts** shows all the [cohorts](/docs/data/cohorts) a person belongs to.
