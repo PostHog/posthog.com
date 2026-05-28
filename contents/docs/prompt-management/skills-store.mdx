@@ -145,21 +145,21 @@ The body can reference bundled files by path. Agents pull them with `skill-file-
 
 ### Linking to bundled files
 
-You can deep-link directly to a specific bundled file within a skill by adding a `?file=` query parameter to the skill URL:
+Share a direct link to any bundled file in a skill. When someone opens the link, the file viewer expands, loads the content, and scrolls it into view.
+
+To copy a link, click the link icon next to any file in the skill's file list. If you're viewing a historical version, the URL includes the version number so recipients see the same version.
+
+The URL uses a `?file=` query parameter with the file path:
 
 ```text
 https://app.posthog.com/prompt-management/skills/hog-release-notes?file=references/changelog.md
 ```
 
-When someone visits this URL, the file viewer automatically expands, loads the file content, and scrolls it into view. The `file` parameter takes the exact path shown in the skill's file list.
-
-You can combine the file parameter with version history:
+Add `version` to link to a file in a specific skill version:
 
 ```text
 https://app.posthog.com/llm-analytics/skills/hog-release-notes?file=scripts/format.py&version=2
 ```
-
-This is useful for sharing reference docs or scripts with teammates, or linking to files from external documentation.
 ## Step 2: Use a skill from any agent
 
 Once a skill exists in PostHog, any team member with the MCP server configured can use it.
