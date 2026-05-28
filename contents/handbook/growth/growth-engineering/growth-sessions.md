@@ -14,7 +14,7 @@ We find it's important to bring a mixture of technical people, and those with wi
 * Raquel (Manages lots of engineering teams)
 * Tim (Co-CEO)
 * James (Co-CEO)
-* Charles (Sales/Marketing/Ops Exec)
+* Charles (Marketing/Ops Exec)
 
 ## Running a growth review
 
