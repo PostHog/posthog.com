@@ -16,12 +16,6 @@ If you are using the CLI in a CI/CD environment such as GitHub Actions, you can 
 
 </div>
 
-If you already keep your project's configuration in a dotenv-style file, you can load these variables from it with the `--env-file` option instead of exporting them:
-
-```bash
-posthog-cli --env-file .env sourcemap upload --directory ./path/to/assets
-```
-
 You can also use the `--host` option instead of the `POSTHOG_CLI_HOST` environment variable to target a different PostHog instance or region. For EU users:
 
 ```bash
