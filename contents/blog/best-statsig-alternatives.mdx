@@ -1,6 +1,6 @@
 ---
 title: 'The best Statsig alternatives & competitors, compared'
-date: 2026-05-27
+date: 2026-05-28
 author:
     - andy-vandervell
     - natalia-amorim
@@ -18,12 +18,16 @@ seo:
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
-Replacing Statsig comes down to what you're optimizing for: fast, safe releases; deeper analytics; or no-code web experimentation. Here's a breakdown of the best Statsig alternatives depending on your team's needs.
+In September 2025, OpenAI acquired Statsig for $1.1 billion and made founder Vijaye Raji its CTO of Applications. Then in May 2026, Amplitude announced a strategic partnership to take over Statsig's brand, platform, and customers, while the original team stayed at OpenAI.
+
+For teams that chose Statsig for its rapid pace of innovation, that's reason enough to look around. Replacing it comes down to what you're optimizing for: fast, safe releases; deeper analytics; no-code web experimentation; or something else entirely.
+
+Here's a breakdown of the best Statsig alternatives depending on your team's needs.
 
 <details>
 <summary>Which is the best Statsig alternative for startups?</summary>
 
-**PostHog**: An all-in-one dev tool with [product analytics](/product-analytics), [feature flags](/feature-flags), [experimentation](/experiments), [session replay](/session-replay), and more with a generous free tier and [usage-based pricing](/pricing). Trusted by over 60% of every Y Combinator batch and top startups like [ElevenLabs](/customers/elevenlabs) and [Lovable](/customers/lovable).
+**PostHog**: An all-in-one developer platform with [product analytics](/product-analytics), [feature flags](/feature-flags), [experimentation](/experiments), [session replay](/session-replay), and more with a generous free tier and [usage-based pricing](/pricing). Trusted by over 60% of every Y Combinator batch and top startups like [ElevenLabs](/customers/elevenlabs) and [Lovable](/customers/lovable).
 
 </details>
 
@@ -37,21 +41,41 @@ Replacing Statsig comes down to what you're optimizing for: fast, safe releases;
 <details>
 <summary>Which is best for engineering-led teams that want both flags and analytics?</summary>
 
-**PostHog**: Combines feature flags with custom payloads (like JSON) and local evaluation and multivariate A/B/n testing with a full product analytics suite and session replay. Ideal for engineers who own experimentation and want to dive deeper into their results with fewer integrations.
+**PostHog**: Combines [feature flags](/feature-flags) with custom payloads (like JSON) and local evaluation and [multivariate A/B/n testing](/experiments) with a full [product analytics suite](/product-analytics) and [session replay](/session-replay). Ideal for engineers who own experimentation and want to dive deeper into their results with fewer integrations.
 
 </details>
 
 <details>
 <summary>Which is best for analytics-heavy PM and data teams?</summary>
 
-**Amplitude**: Deep product analytics with integrated experimentation. Great when non-technical users need rich dashboards, reports, and insights alongside A/B testing.
+[Amplitude](/blog/posthog-vs-amplitude): Deep product analytics with integrated experimentation. Great when non-technical users need rich dashboards, reports, and insights alongside A/B testing.
+
+</details>
+
+<details>
+<summary>Which is best for teams building AI features?</summary>
+
+**PostHog**: Built for engineering teams shipping AI products. [AI observability](/ai-observability) captures traces, spans, prompts, token costs, and latency across providers (Anthropic, OpenAI, Google, LangChain, and more). 
+
+Run [evals with LLM-as-a-Judge](/blog/stop-ai-slop) to catch quality regressions, [manage prompts](/docs/llm-analytics/prompts) directly in PostHog with versioning and fetch them at runtime (no redeploys), and use the prompt playground to compare models side-by-side. 
+
+Pair it with feature flags to roll out new models gradually, experiments to A/B test prompt variants, and session replay to see exactly what users saw when the model misbehaved.
 
 </details>
 
 <details>
 <summary>Which is the best tool for marketers and no-code experiments?</summary>
 
-**Optimizely** or **VWO**: Visual editors for web experimentation plus tools for personalization and campaigns. Great for marketing teams who want to run tests without engineering.
+[Optimizely](/blog/posthog-vs-optimizely) or [VWO](/blog/best-vwo-alternatives): Visual editors for web experimentation plus tools for personalization and campaigns. Great for marketing teams who want to run tests without engineering.
+
+</details>
+
+<details>
+<summary>Which is best for self-driving product development?</summary>
+
+[PostHog Code](/code): A desktop coding agent that runs on top of your product data. PostHog Code turns signals from your PostHog stack – recurring errors, frustration in session replays, survey responses, experiment results, etc – into a prioritized task list, then creates PRs with the obvious fixes.
+
+It ships with PostHog skills so the agent already knows your stack, runs tasks in cloud sandboxes so they keep going after you close your laptop, and opens GitHub PRs you can review without leaving the app. Currently in [beta](/blog/self-driving-product).
 
 </details>
 
@@ -72,23 +96,21 @@ For more details, here are our in-depth comparisons of the best Statsig alternat
 
 ### What is PostHog?
 
-PostHog is an open-source, all-in-one developer platform for feature management, A/B testing, product analytics, session replay, user surveys, and more. We also have a [data warehouse](/docs/data-warehouse) to sync and query data from external sources and a [customer data platform (CDP)](/blog/cdp-vs-data-warehouse) to send data to destinations.
+PostHog is an open-source, all-in-one developer platform for [feature management](/docs/feature-flags), [A/B testing](/docs/experiments), [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [AI observability](/docs/ai-observability), [surveys](/docs/surveys), and more. We also have a [data warehouse](/docs/data-warehouse) to sync and query data from external sources and a [customer data platform (CDP)](/blog/cdp-vs-data-warehouse) to send data to destinations.
 
-By combining all these tools into one platform, PostHog eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevenLabs](/customers/elevenlabs) and [Lovable](/customers/lovable), which use PostHog for both feature flags and analytics.
-
-According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), PostHog is used by 4,336 (0.43%) of the top 1 million websites, compared to Statsig's 1,705 (0.17%). This difference is [confirmed by Google Trends](https://trends.google.com/trends/explore?date=today%205-y&q=posthog,statsig) data (minus Statsig's huge spike after being acquired by OpenAI).
+By combining all these tools into one platform, PostHog eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevenLabs](/customers/elevenlabs) and [Lovable](/customers/lovable).
 
 #### Key features
 
--   🧪 **A/B tests:** Experiment in your app with up to nine test variations and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
+- **A/B tests:** Experiment in your app with up to nine test variations and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
 
--   🚩 **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
+- **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
 
--   📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
+- **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
 
--   📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
+- **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
 
--   💬 **Surveys:** Target surveys by event or person properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+- **MCP server:** Connect [Claude Code](/docs/model-context-protocol/claude-code), [Cursor](/docs/model-context-protocol/cursor), [VS Code](/docs/model-context-protocol/vs-code), [Zed](/docs/model-context-protocol/zed), and other MCP clients directly to your PostHog data so your AI agent can manage feature flags, query analytics, investigate errors, update prompts, [and much more](/docs/model-context-protocol/use-cases) without leaving your editor.
 
 ### How does PostHog compare to Statsig?
 
@@ -96,8 +118,9 @@ Statsig and PostHog are similar in some ways, but have different strengths.
 
 PostHog offers more powerful product analytics and session replay features, including support for [event autocapture](/docs/product-analytics/autocapture), writing [custom SQL insights](/docs/product-analytics/sql), and [session replay on mobile apps](/docs/session-replay/mobile). It also supports a handful of feature flag features not available with Statsig and offers user surveys.
 
-Statsig, as its name suggests, is an A/B testing tool first and foremost. While both tools support core testing features, like secondary metrics and multivariate tests, PostHog doesn't offer multi-armed bandit or mutually exclusive experiments.
+Statsig, as its name suggests, is an experimentation tool first and foremost. While both tools support core testing features, like secondary metrics and multivariate tests, PostHog doesn't offer multi-armed bandit or mutually exclusive experiments.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'statsig']}
     rows={[
@@ -121,6 +144,23 @@ Statsig, as its name suggests, is an A/B testing tool first and foremost. While 
         },
     ]}
 />
+</p>
+
+<details>
+<summary>Main differences between PostHog and Statsig</summary>
+- PostHog is fully independent and open source; Statsig was acquired by OpenAI and its brand and customers are currently operated by Amplitude.
+- PostHog has a [built-in data warehouse](/docs/data-warehouse) and [SQL access](/docs/product-analytics/sql) on every plan; Statsig's warehouse-native mode is gated behind its Enterprise tier.
+- PostHog offers an [EU-hosted cloud](/eu) at no extra cost; Statsig's hosted product is US-only 
+- Statsig offers more advanced statistical methods (CUPED, sequential testing, multi-armed bandits); PostHog focuses on the core experimentation workflows.
+</details>
+
+<details>
+<summary>Main similarities between PostHog and Statsig</summary>
+- Both combine feature flags, experiments, and analytics in one platform.
+- Both are built with engineering-led teams in mind.
+- Both support secondary metrics and multivariate testing.
+- Both offer usage-based pricing with a free tier.
+</details>
 
 ### Why do companies use PostHog?
 
@@ -134,7 +174,9 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 
 > #### Bottom line
 >
-> PostHog is an ideal Statsig alternative if you're looking for a more powerful analytics tool that can also serve your A/B testing and feature management needs. It also offers a dedicated EU-hosted cloud at no extra cost.
+> PostHog is an ideal Statsig alternative if you're looking for a more powerful analytics tool that can also serve your A/B testing and feature management needs. It also offers a dedicated EU-hosted cloud at no extra cost – and, unlike Statsig, it's independent and open source.
+
+<WizardCTA />
 
 ## 2. LaunchDarkly
 
@@ -148,22 +190,21 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 
 [LaunchDarkly](/blog/posthog-vs-launchdarkly) is an enterprise feature flag and A/B testing platform. It helps developers de-risk releases, target experiences, and optimize their products. It provides automation and governance features to ensure teams are following [engineering best practices](/docs/feature-flags/best-practices).
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), as of September 2025, 1,052 of the top one million websites use LaunchDarkly, fewer than the 1,705 that use Statsig.
-
 #### Key features
 
--   🚩 **Feature flags:** Control and target the release of features using multi-variate flags with real-time updates and local evaluation.
+- **Feature flags:** Control and target the release of features using multi-variate flags with real-time updates and local evaluation.
 
--   🧪 **Experimentation:** Run A/B/n tests against metric groups and segment. Easily roll out winning variants.
+- **Experimentation:** Run A/B/n tests against metric groups and segment. Easily roll out winning variants.
 
--   🤖 **Automation:** Advanced automations enable teams to not only schedule flag states, but do progressive rollouts and trigger workflows.
+- **Automation:** Advanced automations enable teams to not only schedule flag states, but do progressive rollouts and trigger workflows.
 
--   🔍 **Governance:** Audit flag changes. Get visibility into flag state across platforms. Use roles-based access controls to decide who can access and change flag states.
+- **Governance:** Audit flag changes. Get visibility into flag state across platforms. Use roles-based access controls to decide who can access and change flag states.
 
 ### How does LaunchDarkly compare to Statsig?
 
 LaunchDarkly and Statsig offer similar feature management and A/B testing features, though LaunchDarkly's lack of no code experiments and platform features might make it a less attractive option for non-technical users.
 
+<p>
 <ProductComparisonTable
     competitors={['launchdarkly', 'statsig']}
     rows={[
@@ -187,6 +228,25 @@ LaunchDarkly and Statsig offer similar feature management and A/B testing featur
         },
     ]}
 />
+</p>
+
+<details>
+<summary>Main differences between LaunchDarkly and Statsig</summary>
+- LaunchDarkly is seat-priced even on its free Starter plan (5 seats); Statsig gives every plan, including free, unlimited seats.
+- LaunchDarkly goes deeper on enterprise governance, automation, and role-based access controls; Statsig is more experimentation-focused.
+- Statsig offers no-code experiments and unlimited seats; LaunchDarkly is more developer-oriented and seat-based.
+- LaunchDarkly is independent; Statsig is not.
+
+</details>
+
+<details>
+<summary>Main similarities between LaunchDarkly and Statsig</summary>
+- Both offer robust feature flagging with multivariate flags and local evaluation.
+- Both support A/B/n experimentation with metric tracking.
+- Both provide a wide range of SDKs for easy integration.
+- Both are built primarily for engineering teams.
+
+</details>
 
 ### Why do companies use LaunchDarkly?
 
@@ -212,19 +272,17 @@ According to [G2 reviews](https://www.g2.com/products/launchdarkly/reviews#revie
 
 ### What is Amplitude?
 
-[Amplitude](/blog/best-amplitude-alternatives) was one of the original product analytics tools. Many large enterprise customers, like Ford, NBCUniversal, and Walmart rely on it. In recent years, it's also added A/B testing, feature flags, session replays, and a customer data platform, making it an obvious alternative to Statsig.
-
-Unsurprisingly, given it was founded in 2012, it's much more widely used. According to [BuiltWith](https://trends.builtwith.com/analytics/Amplitude), as of September 2025, 6,310 of the top million sites use Amplitude, compared to Statsig's 1,705.
+[Amplitude](/blog/best-amplitude-alternatives) was one of the original product analytics tools. Many large enterprise customers, like Ford, NBCUniversal, and Walmart rely on it. In recent years, it's also added A/B testing, feature flags, session replays, a customer data platform, and more, making it an obvious alternative to Statsig.
 
 #### Key features
 
--   📈 **Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
+- **Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
 
--   🧪 **A/B testing:** Test new features on specific targets and analyze with primary, secondary, and counter metrics.
+- **A/B testing:** Test new features on specific targets and analyze with primary, secondary, and counter metrics.
 
--   👦 **Customer data platform:** Combine analytics data with third-party tools for data governance, identity resolution, and data federation.
+- **Customer data platform:** Combine analytics data with third-party tools for data governance, identity resolution, and data federation.
 
--   🤖 **AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?"
+- **AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?"
 
 ### How does Amplitude compare to Statsig?
 
@@ -254,6 +312,24 @@ Amplitude is missing some of the more complex statistical features of Statsig, b
     ]}
 />
 
+<details>
+<summary>Main differences between Amplitude and Statsig</summary>
+- Amplitude has much deeper product analytics with funnels, cohorts, and user paths; Statsig's analytics are lighter and experimentation-focused.
+- Statsig offers more advanced experimentation features like CUPED variance reduction and sequential testing; Amplitude's experimentation is more basic.
+- Amplitude is independent; Statsig is owned by OpenAI.
+- Amplitude is geared more toward product and marketing teams; Statsig leans toward engineers.
+
+</details>
+
+<details>
+<summary>Main similarities between Amplitude and Statsig</summary>
+- Both offer A/B testing, feature flags, and analytics in one platform.
+- Both support warehouse-native analytics (Snowflake, BigQuery, Databricks).
+- Both provide session replay alongside their core analytics.
+- Both are trusted by large-scale companies running experiments at volume.
+
+</details>
+
 ### Why do companies use Amplitude?
 
 According to G2 reviews, people like Amplitude because:
@@ -266,7 +342,7 @@ According to G2 reviews, people like Amplitude because:
 
 > #### Bottom line
 >
-> Like PostHog, Amplitude is a good alternative if you value powerful analytics and experimentation in one, though it's less geared to engineers than Statsig or PostHog.
+> Like PostHog, Amplitude is a good alternative if you value powerful analytics and experimentation in one, though it's less geared towards engineers than Statsig or PostHog.
 
 ## 4. Optimizely
 
@@ -280,24 +356,23 @@ According to G2 reviews, people like Amplitude because:
 
 [Optimizely](/blog/posthog-vs-optimizely) is an all-in-one set of tools for marketing and product teams. It offers a combination of content management, marketing, web and feature experiments, and ecommerce optimization tools, all geared toward optimizing web experiences.
 
-As one of the oldest alternatives in this guide, it's also one of the most widely used. According to data from [BuiltWith](https://trends.builtwith.com/analytics/Optimizely), as of September 2025, Optimizely is deployed on 5,523 of the top 1 million websites, compared to Statsig's 1,705. Its popularity has declined in recent years, however, due in large part to greater competition – usage peaked at around 13,000 of the top million websites back in 2017.
-
 #### Key features
 
--   🕸️ **Web experimentation:** Use Optimizely's visual editor and on-page previews to create frontend experiments quickly.
+- **Web experimentation:** Use Optimizely's visual editor and on-page previews to create frontend experiments quickly.
 
--   🧪 **Feature experimentation:** Run targeted experiments anywhere on your stack. View detailed reports on their impact.
+- **Feature experimentation:** Run targeted experiments anywhere on your stack. View detailed reports on their impact.
 
--   🤹 **Project management:** Idea backlogs, workflows, and design tools to coordinate experiments and content.
+- **Project management:** Idea backlogs, workflows, and design tools to coordinate experiments and content.
 
--   📝 **Content management system:** Manage, deliver, and optimize your content in a centralized location.
+- **Content management system:** Manage, deliver, and optimize your content in a centralized location.
 
--   💸 **Ecommerce optimization:** Customize checkout workflow along with CMS and experimentation to create the best possible commerce experience.
+- **Ecommerce optimization:** Customize checkout workflow along with CMS and experimentation to create the best possible commerce experience.
 
 ### How does Optimizely compare to Statsig?
 
 On paper, Optimizely is quite similar to Statsig, but it's more focused on marketing use cases, which is why it splits web experimentation and feature experimentation into two separate products. The former includes a no code, visual editor that's accessible for non-engineers.
 
+<p>
 <ProductComparisonTable
     competitors={['optimizely', 'statsig']}
     rows={[
@@ -326,8 +401,25 @@ On paper, Optimizely is quite similar to Statsig, but it's more focused on marke
         },
     ]}
 />
+</p>
 
 > **Note:** Although Optimizely was acquired by Episerver in 2020, they rebranded the combined company back to Optimizely in 2021.
+
+<details>
+<summary>Main differences between Optimizely and Statsig</summary>
+- Optimizely is a full digital experience platform (DXP) with CMS, commerce, and personalization; Statsig is a focused experimentation and feature management tool.
+- Statsig includes built-in product analytics and session replay; Optimizely relies on integrations with external analytics tools.
+- Statsig is self-serve and free to start with transparent pricing; Optimizely is enterprise sales-led.
+
+</details>
+
+<details>
+<summary>Main similarities between Optimizely and Statsig</summary>
+- Both support advanced experiment configurations like multivariate tests, mutually exclusive experiments, and holdouts.
+- Both have invested in AI tooling for experiment workflows in the last year.
+- Both are owned by larger entities pursuing platform consolidation strategies.
+
+</details>
 
 ### Why do companies use Optimizely?
 
@@ -353,26 +445,25 @@ According to G2 reviews, people are fans of Optimizely because:
 
 ### What is VWO?
 
-[VWO](/blog/best-vwo-alternatives) is a digital optimization platform that aims to maximize conversion with tools like A/B testing, personalization, funnels, heatmaps, session replay, and customer analytics. The platform is home to multiple different products including testing, insights, data, personalize, plan, and web rollouts.
-
-It's a popular tool – according to [BuiltWith](https://trends.builtwith.com/analytics/Visual-Website-Optimizer), as of September 2025 it's used by 10,673 of the top 1 million websites. It's grown noticeably in the last 12 months or so, likely due to customers migrating from [Google Optimize](/blog/optimize-to-posthog), which was shut down in September 2023.
+[VWO](/blog/best-vwo-alternatives) (acquired by AB Tasty) is a digital optimization platform that aims to maximize conversion with tools like A/B testing, personalization, funnels, heatmaps, session replay, and customer analytics. The platform is home to multiple different products including testing, insights, data, personalize, plan, and web rollouts.
 
 #### Key features
 
--   🧪 **A/B testing:** Improve conversion with web, mobile, and server-side A/B testing.
+- **A/B testing:** Improve conversion with web, mobile, and server-side A/B testing.
 
--   💽 **Data platform:** Collect and analyze custom data across your stack.
+- **Data platform:** Collect and analyze custom data across your stack.
 
--   🤔 **Insights:** Understand your users with session recordings, heatmaps, analytics, and surveys.
+- **Insights:** Understand your users with session recordings, heatmaps, analytics, and surveys.
 
--   👔 **Personalization:** Create and tailor user journeys and campaigns to the audience, location, and time.
+- **Personalization:** Create and tailor user journeys and campaigns to the audience, location, and time.
 
--   📋 **Planning:** Ideate and plan optimization campaigns in one location.
+- **Planning:** Ideate and plan optimization campaigns in one location.
 
 ### How does VWO compare to Statsig?
 
 VWO is closer to Optimizely than Statsig, though it offers most of the same features. It doesn't offer a complete product analytics tool, but it does offer basic funnel analysis, heatmaps, session replays, and user surveys as part of its wider platform. Unfortunately, many of these features are only available on their more expensive plans.
 
+<p>
 <ProductComparisonTable
     competitors={['vwo', 'statsig']}
     rows={[
@@ -401,8 +492,7 @@ VWO is closer to Optimizely than Statsig, though it offers most of the same feat
         },
     ]}
 />
-
-> **Note:** Private equity firm Everstone acquired a majority stake in VWO in 2025.
+</p>
 
 ### Why do companies use VWO?
 
@@ -434,20 +524,21 @@ It's a popular choice for companies in strict regulatory environments because it
 
 #### Key features
 
--   🔧 **Warehouse-native:** Designed to integrate seamlessly with your existing data tools like Snowflake or Postgres.
+- **Warehouse-native:** Designed to integrate seamlessly with your existing data tools like Snowflake or Postgres.
 
--   🚩 **Feature flags:** Robust feature-flagging capabilities with custom targeting and scheduling.
+- **Feature flags:** Robust feature-flagging capabilities with custom targeting and scheduling.
 
--   🧪 **A/B testing:** Experimentation suite built on feature flags with a visual editor to optimize UI changes.
+- **A/B testing:** Experimentation suite built on feature flags with a visual editor to optimize UI changes.
 
--   📊 **Analysis:** Use either Bayesian or Frequentist engines. Connect your existing data and do retroactive analysis.
+- **Analysis:** Use either Bayesian or Frequentist engines. Connect your existing data and do retroactive analysis.
 
--   🔌 **Integrations:** Connects with data warehouses and analytics tools, but has limited integrations beyond that.
+- **Integrations:** Connects with data warehouses and analytics tools, but has limited integrations beyond that.
 
 ### How does GrowthBook compare to Statsig?
 
 GrowthBook is a much more focused tool than others on this list. It is primarily a feature flag and experimentation platform, with a visual experiment editor that enables non-engineers to run simple web experiments. Its big differentiator is that it is open source and self-hostable.
 
+<p>
 <ProductComparisonTable
     competitors={['growthbook', 'statsig']}
     rows={[
@@ -476,6 +567,7 @@ GrowthBook is a much more focused tool than others on this list. It is primarily
         },
     ]}
 />
+</p>
 
 ### Why do companies use GrowthBook?
 
