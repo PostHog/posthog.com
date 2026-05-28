@@ -2354,6 +2354,10 @@ export const docsMenu = {
                             url: '/docs/libraries/cloudflare-workers',
                         },
                         {
+                            name: 'Convex',
+                            url: '/docs/libraries/convex',
+                        },
+                        {
                             name: 'Django',
                             url: '/docs/libraries/django',
                         },

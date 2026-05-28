@@ -117,6 +117,61 @@ posthog.capture(
 );
 ```
 
+## Request context
+
+Use request context to apply a distinct ID, session ID, and common properties to all captures inside a request scope. This allows you to associate frontend user activity with backend events, session replay, error tracking, and feature flag evaluation.
+
+```java
+Map<String, Object> headers = new HashMap<>();
+headers.put(
+    PostHogRequestContext.DISTINCT_ID_HEADER,
+    request.getHeader(PostHogRequestContext.DISTINCT_ID_HEADER)
+);
+headers.put(
+    PostHogRequestContext.SESSION_ID_HEADER,
+    request.getHeader(PostHogRequestContext.SESSION_ID_HEADER)
+);
+
+Map<String, Object> properties = new HashMap<>();
+properties.put("$current_url", request.getRequestURL().toString());
+properties.put("$request_method", request.getMethod());
+properties.put("$request_path", request.getRequestURI());
+properties.put("$user_agent", request.getHeader("User-Agent"));
+properties.put("$ip", request.getRemoteAddr());
+
+PostHogRequestContextData context = PostHogRequestContext.fromHeaders(
+    headers,
+    true,
+    properties
+);
+
+try (PostHogRequestContext.Scope ignored = PostHogRequestContext.beginScope(context, true)) {
+    posthog.capture("backend_event");
+    posthog.captureException(error);
+
+    PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags();
+    if (flags.isEnabled("new-checkout")) {
+        // Do something differently for this request
+    }
+}
+```
+
+`fromHeaders()` reads `X-PostHog-Distinct-Id` and `X-PostHog-Session-Id`. Captures inside the scope use the context distinct ID when you don't pass one explicitly. If no distinct ID is available, captures are sent as [personless events](/docs/data/anonymous-vs-identified-events) with an auto-generated UUID. `evaluateFlags()` returns an empty snapshot when no distinct ID is available.
+
+Pass `false` as the second argument to `fromHeaders()` to ignore client-supplied tracing headers while still attaching request metadata:
+
+```java
+PostHogRequestContextData context = PostHogRequestContext.fromHeaders(
+    headers,
+    false,
+    properties
+);
+```
+
+Tracing headers are client-controlled analytics context, not authentication or authorization context. If an event should be server-authoritative, pass an authenticated distinct ID explicitly.
+
+Request context is stored in a `ThreadLocal`. It applies to work on the same thread while the scope is active. If your framework moves work across threads, propagate the context explicitly in your framework integration.
+
 ## Feature flags
 
 import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
