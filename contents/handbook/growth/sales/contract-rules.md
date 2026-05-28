@@ -137,7 +137,7 @@ In exceptional circumstances, we may explore providing additional discounts whic
 
 For the avoidance of doubt, these types of deals are **very rare** (~1 per year), and not offered to customers with standard usage volumes. 
 
-If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with your manager, who will then clear it with Simon (CSMs/Onboarding) or Ben (TAEs/TAMs).
+If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with your manager, who will then clear it with Simon (CSMs) or Ben (TAEs/TAMs).
 
 ## Additional credit purchase
 
