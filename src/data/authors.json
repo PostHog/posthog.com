@@ -605,15 +605,6 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/fraser-hopper-26158056/",
         "profile_id": 30207
-<<<<<<< HEAD
-    },
-    {
-        "handle": "matt-brooker",
-        "name": "Matt Brooker",
-        "role": "Growth Engineer",
-        "profile_id": 36478
-||||||| e958d81f6
-=======
     },
     {
         "handle": "abigail-richardson",
@@ -646,6 +637,5 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/fercgomes/",
         "profile_id": 42799
->>>>>>> matt/convex-tutorial
     }
 ]
