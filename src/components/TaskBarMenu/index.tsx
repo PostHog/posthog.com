@@ -287,9 +287,9 @@ export default function TaskBarMenu() {
                     id="taskbar"
                     data-scheme="primary"
                     data-menu-container
-                    initial={{ rotateX: 90, opacity: 0 }}
-                    animate={rendered ? { rotateX: 0, opacity: 1 } : { rotateX: 90, opacity: 0 }}
-                    transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1], delay: 0.6 }}
+                    initial={websiteMode ? false : { rotateX: 90, opacity: 0 }}
+                    animate={websiteMode ? false : rendered ? { rotateX: 0, opacity: 1 } : { rotateX: 90, opacity: 0 }}
+                    transition={websiteMode ? undefined : { duration: 0.8, ease: [0.34, 1.56, 0.64, 1], delay: 0.6 }}
                     style={{
                         transformOrigin: '50% 50%',
                         transformPerspective: 1200,
