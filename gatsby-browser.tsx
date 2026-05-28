@@ -7,7 +7,7 @@ import { Provider as ToastProvider } from './src/context/Toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
 import Wrapper from './src/components/Wrapper'
-import KoreanWrapper from './src/pages/ko/components/KoreanWrapper'
+import KoreanWrapper from './src/components/Korean/KoreanWrapper'
 import { Provider } from './src/context/App'
 initKea(false)
 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { apps, useProductLinks } from '.'
 import { AppItem, AppLink } from 'components/OSIcons/AppIcon'
 import { motion } from 'framer-motion'
-import { translateKo } from '../../_translations'
+import { translateKo } from '../../../pages/ko/_translations'
 
 const Folder = ({
     items,

@@ -3,7 +3,7 @@ import { IconSearch } from '@posthog/icons'
 import Link from 'components/Link'
 import { APP_COUNT } from 'constants/index'
 import * as Icons from '@posthog/icons'
-import { translateKo } from '../../_translations'
+import { translateKo } from '../../../pages/ko/_translations'
 
 interface Product {
     name: string
