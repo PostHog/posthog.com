@@ -9,12 +9,14 @@ import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import ProductList from 'components/ProductList'
+import WizardCTA from 'components/WizardCTA'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
 import HeygenLogo from 'components/CustomerLogos/HeygenLogo'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
 
 export default function PostHogMCPLanding(): JSX.Element {
     const [isIdle, setIsIdle] = useState(false)
+    const [isCopied, setIsCopied] = useState(false)
 
     useEffect(() => {
         let idleTimer: ReturnType<typeof setTimeout>
@@ -62,14 +64,23 @@ export default function PostHogMCPLanding(): JSX.Element {
                             A product analyst that lives in your editor. Ask anything.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
-                            <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                            <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                 Get started free
                             </CallToAction>
                             <CallToAction
                                 type="secondary"
                                 size="md"
-                                to="/docs/model-context-protocol"
-                                state={{ newWindow: true }}
+                                onClick={() => {
+                                    const el = document.getElementById('quest-item-install-the-mcp-with-the-wizard')
+                                    if (el) {
+                                        window.history.pushState(
+                                            null,
+                                            '',
+                                            '#quest-item-install-the-mcp-with-the-wizard'
+                                        )
+                                        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                    }
+                                }}
                             >
                                 Install MCP
                             </CallToAction>
@@ -127,9 +138,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                 right tools, custom events, and dashboards for your product. All it takes is one line:
                             </p>
 
-                            <SingleCodeBlock language="bash" showAskAI={false}>
-                                npx @posthog/wizard mcp add
-                            </SingleCodeBlock>
+                            <WizardCTA />
 
                             <ProductVideo
                                 videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/mcp_session_replay_1080_de1089e7aa_ee24396774.mp4"
@@ -138,9 +147,25 @@ export default function PostHogMCPLanding(): JSX.Element {
                                 autoPlay={true}
                             />
 
+                            <p className="!mb-2">
+                                <strong>Already using PostHog and just want to add the MCP?</strong>
+                            </p>
+
+                            <SingleCodeBlock language="bash" showAskAI={false}>
+                                npx @posthog/wizard mcp add
+                            </SingleCodeBlock>
+
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
-                                    Start cooking with our MCP
+                                <CallToAction
+                                    type="primary"
+                                    size="md"
+                                    onClick={() => {
+                                        navigator.clipboard.writeText('npx @posthog/wizard mcp add')
+                                        setIsCopied(true)
+                                        setTimeout(() => setIsCopied(false), 2500)
+                                    }}
+                                >
+                                    {isCopied ? 'npx command copied! 🚀' : 'Start cooking with our MCP'}
                                 </CallToAction>
                             </div>
                         </QuestLogItem>
@@ -402,7 +427,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                             <p>That's it! You're ready to start integrating.</p>
 
                             <div className="flex flex-wrap gap-2 mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                     Get started free
                                 </CallToAction>
                                 <CallToAction

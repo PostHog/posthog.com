@@ -9,6 +9,7 @@ import List from 'components/List'
 import { IconGraph, IconRewindPlay, IconToggle } from '@posthog/icons'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import Link from 'components/Link'
+import WizardCTA from 'components/WizardCTA'
 
 const TOP_COUNT = 8
 const PLATFORM_ORDER = [
@@ -94,6 +95,26 @@ export default function ErrorTrackingLanding(): JSX.Element {
                         lastSpeechBubble="Time to start shipping!"
                     >
                         <QuestLogItem
+                            title="Install with the PostHog Wizard"
+                            subtitle="Automatic setup with one command"
+                            icon="IconMagicWand"
+                        >
+                            <p>
+                                <strong>PostHog Wizard</strong> analyzes your codebase and automatically sets up error
+                                tracking, exception autocapture, and dashboards tailored to your product. One command
+                                does it all:
+                            </p>
+
+                            <WizardCTA />
+
+                            <div className="mt-4">
+                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
+                                    Get started free
+                                </CallToAction>
+                            </div>
+                        </QuestLogItem>
+
+                        <QuestLogItem
                             title="Catch errors automatically"
                             subtitle="Capture your first exception"
                             icon="IconCode2"
@@ -127,7 +148,7 @@ export default function ErrorTrackingLanding(): JSX.Element {
                             </button>
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                     Install PostHog SDK
                                 </CallToAction>
                             </div>
@@ -284,7 +305,7 @@ export default function ErrorTrackingLanding(): JSX.Element {
                             />
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                     Install error tracking
                                 </CallToAction>
                             </div>
@@ -318,7 +339,7 @@ export default function ErrorTrackingLanding(): JSX.Element {
                             <p>That's it! You're ready to start integrating.</p>
 
                             <div className="flex flex-wrap gap-2 mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="http://app.posthog.com/sign-up">
                                     Get started free
                                 </CallToAction>
                                 <CallToAction

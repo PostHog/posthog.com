@@ -50,6 +50,7 @@ interface TreeMenuProps {
      * links with no section label or collapse (usually the product name).
      */
     rootHeading?: string
+    activeUrl?: string
 }
 
 /** Genuinely off-site URL — opens in a new browser tab. */
@@ -384,11 +385,11 @@ const renderSectionItems = (
     })
 
 export function TreeMenu(props: TreeMenuProps) {
-    const { watchPath = true, variant = 'listed', appearance = 'os', rootHeading } = props
+    const { watchPath = true, variant = 'listed', appearance = 'os', rootHeading, activeUrl } = props
     const { appWindow } = useWindow()
     const { pathname } = useLocation()
     const [activeItem, setActiveItem] = useState<MenuItem | undefined>(
-        props.activeItem || getActiveItem(props.items || [], pathname)
+        props.activeItem || getActiveItem(props.items || [], activeUrl ?? pathname)
     )
 
     const handleClick = (item: MenuItem) => {
@@ -400,9 +401,9 @@ export function TreeMenu(props: TreeMenuProps) {
 
     useEffect(() => {
         if (watchPath) {
-            setActiveItem(getActiveItem(items || [], appWindow?.path || pathname))
+            setActiveItem(getActiveItem(items || [], activeUrl ?? appWindow?.path ?? pathname))
         }
-    }, [appWindow?.path])
+    }, [appWindow?.path, activeUrl])
 
     if (!items?.length) {
         return <p className="text-sm">No posts available</p>
