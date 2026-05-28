@@ -1,0 +1,58 @@
+---
+title: Manage Workflows with MCP
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent create, manage, and test [Workflows](/docs/workflows) directly from your code editor. Build automation sequences, update configurations, and test executions – without switching to the PostHog app.
+
+This works in any MCP client – Cursor, Codex, Claude Code, Windsurf, VS Code, and others.
+
+## How it works
+
+With MCP, your coding agent can:
+
+- **Create workflows programmatically** – Build event-triggered automations, scheduled jobs, or webhook-driven flows from a prompt
+- **Test workflow execution** – Run test invocations with mock data to verify your workflow behaves correctly before enabling
+- **Update workflow configuration** – Modify triggers, actions, delays, and branching logic
+- **Manage workflow lifecycle** – Archive workflows you no longer need, or disable active ones for maintenance
+
+## Workflow tools
+
+The MCP server provides these tools for working with Workflows:
+
+| Tool | Description |
+|------|-------------|
+| `workflows-list` | List all workflows in the current project with their status, trigger type, and timestamps. |
+| `workflows-get` | Get the full definition of a workflow, including trigger, actions, edges, and variables. |
+| `workflows-create` | Create a new workflow with triggers, actions, delays, and branching logic. |
+| `workflows-update` | Update a workflow's name, description, actions, or status. |
+| `workflows-run` | Test-run a workflow with mock event data to verify execution. |
+
+## MCP guardrails
+
+The MCP server includes guardrails to prevent accidental changes to live workflows:
+
+- **No editing active workflows** – You can't modify a workflow that's currently enabled. Disable it first (set status to `draft`), make your changes, then re-enable.
+- **Archive instead of delete** – Workflows are archived rather than permanently deleted. Set status to `archived` to remove a workflow from active use.
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `List all my workflows and their status.`
+- `Create a workflow that sends a Slack message when a user signs up.`
+- `Show me the full configuration of my onboarding-email workflow.`
+- `Test my welcome-sequence workflow with a mock signup event.`
+- `Disable my maintenance-alerts workflow so I can update it.`
+- `Archive the old-drip-campaign workflow.`
+
+## Install the MCP server
+
+The recommended way to install is with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+The wizard supports Claude, Cursor, Windsurf, VS Code, and more. You can also [configure it manually](/docs/model-context-protocol#manual-install).
+
+See the [MCP server docs](/docs/model-context-protocol) for full setup instructions.

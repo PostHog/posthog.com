@@ -6677,6 +6677,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Manage workflows with MCP',
+                    url: '/docs/workflows/manage-workflows-mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                },
+                {
                     name: 'Best practices',
                     url: '/docs/workflows/best-practices',
                     icon: 'IconStar',
