@@ -3042,10 +3042,6 @@ export const docsMenu = {
                             ],
                         },
                         {
-                            name: 'Slack app',
-                            url: '/docs/slack-app',
-                        },
-                        {
                             name: 'SDK doctor',
                             url: '/docs/sdk-doctor',
                             children: [
@@ -6593,6 +6589,24 @@ export const docsMenu = {
                     url: '/docs/posthog-code/community',
                     icon: 'IconPeople',
                     color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Slack app',
+            icon: 'IconChat',
+            color: 'purple',
+            url: '/docs/slack-app',
+            description: 'Run PostHog from any Slack channel — agent tasks, analytics, and notifications.',
+            children: [
+                {
+                    name: 'Slack app',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/slack-app',
+                    icon: 'IconHome',
+                    color: 'seagreen',
                 },
             ],
         },
