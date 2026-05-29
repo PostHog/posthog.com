@@ -56,7 +56,7 @@ sequenceDiagram
     PH-->>P: { url, expires_at }
     P-->>U: redirect to url
     U->>PH: GET /agentic/login?token=...
-    PH-->>U: redirect to /project/N (session minted)
+    PH-->>U: redirect to path or /project/N (session minted)
 ```
 
 ## Set up as a partner
@@ -337,7 +337,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/deep_links \
   -H "Authorization: Bearer phx_abc123..." \
   -H "API-Version: 0.1d" \
   -d '{
-    "purpose": "dashboard"
+    "path": "/project/12345/replay/019e6d10-c3b0-7000-8000-000000000000"
   }'
 ```
 
@@ -347,7 +347,8 @@ Authenticate with the `access_token` you got from [Step 2](#step-2-exchange-the-
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `purpose` | string | No | What the deep link should land on. Currently only `dashboard` is supported. Defaults to `dashboard`. |
+| `path` | string | No | The in-app path to land on after login, such as `/project/12345/replay/session-id` or `/project/12345/insights/abc123`. Must be a relative path starting with `/`. Omit to land on the project home. |
+| `purpose` | string | No | A free-form label for analytics. Defaults to `dashboard`. |
 
 **Response:**
 
@@ -618,7 +619,7 @@ async function provisionPostHogAccount(email, name) {
 For the "Open in PostHog" button, call this from your click handler with the user's stored `access_token`, then redirect the browser to the returned URL:
 
 ```javascript
-async function getDeepLinkUrl(accessToken) {
+async function getDeepLinkUrl(accessToken, path) {
   const res = await fetch(
     `${BASE_URL}/api/agentic/provisioning/deep_links`,
     {
@@ -628,7 +629,7 @@ async function getDeepLinkUrl(accessToken) {
         Authorization: `Bearer ${accessToken}`,
         'API-Version': '0.1d',
       },
-      body: JSON.stringify({ purpose: 'dashboard' }),
+      body: JSON.stringify({ path }),
     }
   );
 
@@ -642,4 +643,9 @@ async function getDeepLinkUrl(accessToken) {
   const { url } = await res.json();
   return url;
 }
+
+// Examples:
+// getDeepLinkUrl(token, '/project/12345/replay/session-id')  // specific recording
+// getDeepLinkUrl(token, '/project/12345/insights/abc123')    // specific insight
+// getDeepLinkUrl(token)                                       // project home (default)
 ```
