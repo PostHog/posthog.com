@@ -45,6 +45,32 @@ The exposure numbers help you verify that:
 2. The split between variants matches your expected allocation
 3. You have sufficient sample size for meaningful results
 
+## Excluding variants from analysis
+
+You can exclude specific variants from your experiment's statistical calculations while still serving them to users. This is useful when:
+
+- You want to remove an underperforming variant mid-experiment without stopping traffic to it
+- You're using feature flag release conditions to create custom holdout groups
+- You need to focus analysis on a subset of variants
+
+### How to exclude a variant
+
+1. Go to the **Variants** tab on your experiment.
+2. Find the **Analysis** column in the Distribution table.
+3. Toggle off any variant you want to exclude.
+
+Excluded variants:
+
+- Continue receiving traffic according to your configured split
+- Are omitted from all metric calculations and statistical analysis
+- Appear in the exposures panel with an "Excluded from analysis" label
+- Can't include the baseline (control) variant
+- Must leave at least one test variant in analysis
+
+When you exclude or re-include a variant, PostHog recalculates all metrics and exposures to reflect the change.
+
+> **Note:** Holdouts assigned to your experiment are automatically excluded from analysis and can't be toggled.
+
 ## Metric results and determining significance
 
 For each metric you're tracking, PostHog displays a delta chart showing the performance of each variant compared to the control:
