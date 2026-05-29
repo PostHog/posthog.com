@@ -33,6 +33,16 @@ Common validation issues include:
 
 Fix the issues listed in the error message, then try enabling again. Drafts can be archived even if they have validation errors.
 
+## Liquid `TokenizationError` in email templates?
+
+If you see an error like `TokenizationError: unexpected character "\"there\"..."` when saving an email template, the cause is double quotes inside a Liquid expression. The email builder serializes templates to JSON, which escapes double quotes and breaks the Liquid parser.
+
+Use single quotes around string arguments in filters:
+
+```liquid
+{{ person.properties.first_name | default: 'there' }}
+```
+
 ## Variable size limit exceeded?
 
 Workflows have a 5KB limit for storing output variables. If your total variable size exceeds this limit, you'll see an error like:

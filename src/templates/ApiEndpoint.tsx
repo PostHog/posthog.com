@@ -106,7 +106,7 @@ const titleMap: Record<string, string> = {
     hog_functions: 'Hog functions',
     insights: 'Insights',
     invites: 'Invites',
-    llm_analytics: 'LLM analytics',
+    llm_analytics: 'AI Observability',
     llm_prompts: 'LLM prompts',
     members: 'Members',
     notebooks: 'Notebooks',

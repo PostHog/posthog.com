@@ -3,9 +3,9 @@ title: Provisioning API
 sidebarTitle: Provisioning API
 ---
 
-If you're onboarding users from your own product into PostHog, this API lets you skip the signup form. Call three endpoints and you get back a project token, a personal API key, and a host URL – everything you need to start sending events into the user's project. The user still gets a welcome email with a link to set their password and access their dashboard.
+PostHog's provisioning API lets you create PostHog accounts for your users and deep link them into their PostHog project.
 
-It's intended for partners and platform integrations. If you're integrating your own app with your own PostHog account, you probably want [OAuth](/docs/api/oauth) or a [personal API key](/docs/api#private-endpoint-authentication) instead.
+It's intended for partners and platform integrations. If you're integrating your own app with your own PostHog account, you probably want [OAuth](/docs/api/oauth) or a [personal API key](/docs/api/personal-api-keys) instead.
 
 Jump to the [full Node.js example](#full-example) to see the complete flow in code.
 
@@ -13,6 +13,8 @@ Jump to the [full Node.js example](#full-example) to see the complete flow in co
 
 The flow uses OAuth 2.0 with PKCE (Proof Key for Code Exchange), so there are no shared secrets to manage.
 Your application is identified by a metadata document hosted on your domain.
+
+### Onboarding (once per user)
 
 ```
 1. POST /account_requests  →  authorization code
@@ -33,6 +35,28 @@ sequenceDiagram
 
     P->>PH: POST /resources (Bearer token)
     PH-->>P: project token + host
+```
+
+### Deep linking (per click, after onboarding)
+
+Reuses the access token from onboarding to mint a single-use URL that logs the user into their PostHog project.
+
+```
+4. POST /deep_links  →  single-use URL (10 min TTL)
+```
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant P as Partner
+    participant PH as PostHog
+
+    U->>P: clicks "Open in PostHog"
+    P->>PH: POST /deep_links (Bearer access_token)
+    PH-->>P: { url, expires_at }
+    P-->>U: redirect to url
+    U->>PH: GET /agentic/login?token=...
+    PH-->>U: redirect to /project/N (session minted)
 ```
 
 ## Set up as a partner
@@ -585,6 +609,37 @@ async function provisionPostHogAccount(email, name) {
     host: resource.complete.access_configuration.host,
     personalApiKey: resource.complete.access_configuration.personal_api_key,
     projectId: resource.id,
+    accessToken: tokens.access_token,
+    refreshToken: tokens.refresh_token,
   };
+}
+```
+
+For the "Open in PostHog" button, call this from your click handler with the user's stored `access_token`, then redirect the browser to the returned URL:
+
+```javascript
+async function getDeepLinkUrl(accessToken) {
+  const res = await fetch(
+    `${BASE_URL}/api/agentic/provisioning/deep_links`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+        'API-Version': '0.1d',
+      },
+      body: JSON.stringify({ purpose: 'dashboard' }),
+    }
+  );
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(
+      `Deep link request failed (${res.status}): ${err.error?.message || JSON.stringify(err)}`
+    );
+  }
+
+  const { url } = await res.json();
+  return url;
 }
 ```
