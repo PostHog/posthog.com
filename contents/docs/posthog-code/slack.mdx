@@ -65,7 +65,7 @@ The bot reacts to your `@PostHog` message as it works through your request, so y
 | 🦔 `:hedgehog:` | The agent finished and posted its reply in the thread |
 | ❌ `:x:` | Something went wrong – usually the sandbox stopped before the message could be delivered |
 
-## Routing rules and default repo
+## Routing rules
 
 If you work across many repos, you can teach the bot how to pick a repo intelligently. Run these as mentions:
 
@@ -75,10 +75,8 @@ If you work across many repos, you can teach the bot how to pick a repo intellig
 | `@PostHog rules list` | Show your routing rules |
 | `@PostHog rules add "pattern" org/repo` | Route mentions matching `pattern` to a repo |
 | `@PostHog rules remove <#>` | Remove a rule by its number |
-| `@PostHog project` | Show which PostHog project your mentions route to |
-| `@PostHog project <id>` | Set your default project for this workspace |
 
-Defaults are scoped to the channel you run the command in, so `#frontend` and `#backend` can each pick their own repo without stepping on each other. When a mention comes in, the bot checks routing rules first, falls back to the channel default, and only opens the picker if neither matches.
+When a mention comes in, the bot checks routing rules first and only opens the repo picker if no rule matches.
 
 ## Multi-project workspaces
 
@@ -89,4 +87,4 @@ If your Slack workspace is connected to multiple PostHog projects, mentions rout
 | `@PostHog project` | Show which PostHog project your mentions route to |
 | `@PostHog project <id>` | Set your default project (the bot remembers this choice) |
 
-Your default is personal – each Slack user can route their mentions to a different project.
+Your default is personal — each Slack user can route their mentions to a different project.
