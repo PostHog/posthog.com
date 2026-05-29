@@ -1426,6 +1426,10 @@ export const handbookSidebar = [
                         name: 'How we use automation',
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
+                    {
+                        name: 'Engaging unengaged customers',
+                        url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
+                    },
                 ],
             },
             {
