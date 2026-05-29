@@ -22,7 +22,7 @@ For local development, you can load these variables from a dotenv-style file usi
 posthog-cli --env-file .env sourcemap upload ...
 ```
 
-Process environment variables take precedence over the file. Credentials are resolved atomically from a single source, so `POSTHOG_CLI_HOST` from the file cannot redirect a key supplied by the process environment.
+Credentials are resolved in this order: CLI args, then process environment, then `--env-file`, then `~/.posthog/credentials.json` (from `posthog-cli login`). Process environment always takes precedence over file values. Credentials are resolved atomically from a single source – `POSTHOG_CLI_HOST` in a file can't redirect a key supplied by the process environment.
 
 You can also use the `--host` option instead of the `POSTHOG_CLI_HOST` environment variable to target a different PostHog instance or region. For EU users:
 
