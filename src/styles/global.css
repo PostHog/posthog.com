@@ -22,14 +22,6 @@
             @apply no-underline;
         }
 
-        h2 {
-            @apply text-2xl mb-2;
-        }
-
-        h3 {
-            @apply text-xl;
-        }
-
         h4 {
             @apply text-lg;
 
