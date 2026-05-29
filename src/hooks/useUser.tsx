@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
-import { ProfileData } from 'lib/strapi'
+import { ProfileData, SQUEAK_HOST } from 'lib/strapi'
 import usePostHog from './usePostHog'
 import Link from 'components/Link'
 import { useToast } from '../context/Toast'
@@ -147,6 +147,54 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         return jwt || localStorage.getItem('jwt')
     }
 
+    // Shared post-authentication steps once a JWT has been obtained (via password
+    // login or an OAuth provider): hydrate the user, persist the token, and run
+    // the distinct-id link + achievements check.
+    const finalizeLogin = async (token: string): Promise<User> => {
+        const user = await fetchUser(token)
+
+        if (!user) {
+            throw new Error('Failed to fetch user data')
+        }
+
+        localStorage.setItem('jwt', token)
+        setJwt(token)
+
+        try {
+            const distinctId = posthog?.get_distinct_id?.()
+
+            if (distinctId && distinctId !== COOKIELESS_SENTINEL_VALUE) {
+                await fetch(`${SQUEAK_HOST}/api/users/${user.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        distinctId,
+                    }),
+                })
+            }
+
+            fetch(`${SQUEAK_HOST}/api/achievements/check`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    data: {
+                        date: new Date(),
+                    },
+                }),
+            })
+        } catch (error) {
+            console.error(error)
+        }
+
+        return user
+    }
+
     const login = async ({
         email,
         password,
@@ -159,7 +207,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         try {
             posthog?.capture('squeak login start')
 
-            const userRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local`, {
+            const userRes = await fetch(`${SQUEAK_HOST}/api/auth/local`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -176,50 +224,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 throw new Error(userData?.error?.message)
             }
 
-            const user = await fetchUser(userData.jwt)
-
-            if (!user) {
-                throw new Error('Failed to fetch user data')
-            }
+            const user = await finalizeLogin(userData.jwt)
 
             posthog?.capture('squeak login success', {
                 email,
             })
-
-            localStorage.setItem('jwt', userData.jwt)
-            setJwt(userData.jwt)
-
-            try {
-                const distinctId = posthog?.get_distinct_id?.()
-
-                if (distinctId && distinctId !== COOKIELESS_SENTINEL_VALUE) {
-                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/${user.id}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${userData.jwt}`,
-                        },
-                        body: JSON.stringify({
-                            distinctId,
-                        }),
-                    })
-                }
-
-                fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements/check`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${userData.jwt}`,
-                    },
-                    body: JSON.stringify({
-                        data: {
-                            date: new Date(),
-                        },
-                    }),
-                })
-            } catch (error) {
-                console.error(error)
-            }
 
             return user
         } catch (error) {
@@ -280,7 +289,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         try {
             posthog?.capture('squeak signup start')
 
-            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local/register`, {
+            const res = await fetch(`${SQUEAK_HOST}/api/auth/local/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -415,7 +424,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             token = await getJwt()
         }
 
-        const meRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?${meQuery}`, {
+        const meRes = await fetch(`${SQUEAK_HOST}/api/users/me?${meQuery}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -432,7 +441,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
         setUser(meData)
 
-        const notifications = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/notifications`, {
+        const notifications = await fetch(`${SQUEAK_HOST}/api/profile/notifications`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -488,7 +497,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             },
         })
 
-        const profileRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`)
+        const profileRes = await fetch(`${SQUEAK_HOST}/api/profiles?${query}`)
 
         if (!profileRes.ok) {
             throw new Error(`Failed to fetch profile`)
@@ -523,7 +532,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
         const jwt = await getJwt()
 
-        const subscriptionRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+        const subscriptionRes = await fetch(`${SQUEAK_HOST}/api/profiles/${profileID}`, {
             method: 'PUT',
             body: JSON.stringify(body),
             headers: {
@@ -551,7 +560,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                       },
             },
         }
-        const likeRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+        const likeRes = await fetch(`${SQUEAK_HOST}/api/profiles/${profileID}`, {
             method: 'PUT',
             body: JSON.stringify(body),
             headers: {
@@ -596,7 +605,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                       },
             },
         }
-        const likeRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+        const likeRes = await fetch(`${SQUEAK_HOST}/api/profiles/${profileID}`, {
             method: 'PUT',
             body: JSON.stringify(body),
             headers: {
@@ -621,7 +630,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
     const updateNotifications = async (notifications: any) => {
         setNotifications(notifications)
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${user?.profile.id}`, {
+        await fetch(`${SQUEAK_HOST}/api/profiles/${user?.profile.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -639,7 +648,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const profileID = user?.profile?.id
         if (!profileID) return
         const jwt = await getJwt()
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${id}/${vote}`, {
+        await fetch(`${SQUEAK_HOST}/api/replies/${id}/${vote}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -652,7 +661,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const profileID = user?.profile?.id
         if (!profileID) return
         const jwt = await getJwt()
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+        await fetch(`${SQUEAK_HOST}/api/profiles/${profileID}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -690,7 +699,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const profileID = user?.profile?.id
         if (!profileID) return
         const jwt = await getJwt()
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+        await fetch(`${SQUEAK_HOST}/api/profiles/${profileID}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -716,7 +725,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const profileID = user?.profile?.id
         if (!profileID) return
         const jwt = await getJwt()
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/report-spam`, {
+        await fetch(`${SQUEAK_HOST}/api/report-spam`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
