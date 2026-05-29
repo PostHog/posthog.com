@@ -55,7 +55,7 @@ We group them into **monthly financials** (the basics — what we made, what we 
 
 **SaaS magic number** — new ARR earned per $1 of sales & marketing spend. A test of whether our go-to-market spend is paying off. Higher is better — above 1x means we're earning more in new ARR than we're spending to get it.
 
-**Rule of 40** — revenue growth % + profit margin %. Forces the trade-off question: are we growing fast at the expense of profit, or profitable at the expense of growth? Above 40% is the bar.0
+**Rule of 40** — revenue growth % + profit margin %. Forces the trade-off question: are we growing fast at the expense of profit, or profitable at the expense of growth? Above 40% is the bar.
 
 **Cash balance** — cash on hand at the end of the quarter. The most concrete measure of staying default alive. Everyone has a stake. Higher is better, obviously — but the goal isn't to raise more; it's to not need to.
 
