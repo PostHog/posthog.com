@@ -57,7 +57,7 @@ We group them into **monthly financials** (the basics — what we made, what we 
 
 **Rule of 40** — revenue growth % + profit margin %. Forces the trade-off question: are we growing fast at the expense of profit, or profitable at the expense of growth? Above 40% is the bar.
 
-**Cash balance** — cash on hand at the end of the quarter. The most concrete measure of staying default alive. Everyone has a stake. Higher is better, obviously — but the goal isn't to raise more; it's to not need to.
+**Cash balance** — cash on hand at the end of the quarter. The most concrete measure of staying default alive. Everyone has a stake. Higher is better, obviously — but the goal isn't to not raise more; it's to not need to.
 
 **Cash runway (quarters)** — how many quarters our cash lasts at our current burn. The cash balance question, framed against how fast we're spending. Relevant to everyone, especially anyone making hiring or major spend decisions. Longer is better. Default alive means we reach profitability before this hits zero.
 
