@@ -18,17 +18,20 @@ Use this guidance for:
 - Database tables, columns, migrations, queues, jobs, dashboards, and alerts
 - Handbook pages, docs, runbooks, incidents, post-mortems, issues, and PR descriptions
 
-## Default approach
+## How to choose language
 
-1. **Be specific first.** `blocked_email_domains` is clearer than a generic `email_denylist`. `trusted_proxy_ips` is clearer than `proxy_allowlist`.
-2. **Use neutral fallback terms.** If a generic list term is the clearest option, use `allowlist`, `denylist`, or `blocklist`.
-3. **Do not break users for a rename.** Public APIs, SDK options, environment variables, event names, properties, and stored data need aliases, migrations, deprecations, or a compatibility plan.
-4. **Improve old language when it is safe.** UI text, docs, comments, tests, local variables, and private helper names are usually safe to update when you touch nearby code.
-5. **Do not mirror external language unless needed.** If a vendor API, protocol, or file format uses a term, quote it when needed for accuracy, but use our preferred language in PostHog-owned names.
+When you add new names or copy:
+
+- **Be specific first.** `blocked_email_domains` is clearer than a generic `email_denylist`. `trusted_proxy_ips` is clearer than `proxy_allowlist`.
+- **Use neutral fallback terms.** If a generic list term is the clearest option, use `allowlist`, `denylist`, or `blocklist`.
+- **Use common sense.** This page is guidance, not a complete dictionary. Choose language that is clear, specific, and respectful for the context.
+- **Do not mirror external language unless needed.** If a vendor API, protocol, or file format uses a term, quote it when needed for accuracy, but use our preferred language in PostHog-owned names.
+
+For existing names, see [Changing existing code](#changing-existing-code).
 
 ## Preferred language
 
-This table is not exhaustive. Use common sense and choose language that is clear, specific, and respectful for the context.
+This table is not exhaustive.
 
 | Instead of | Prefer | Notes |
 |------------|--------|-------|
@@ -75,6 +78,11 @@ User-facing copy should follow the same pattern:
 ## Changing existing code
 
 Changing old names is valuable, but stability matters more than a tidy diff.
+
+Use these principles for existing names:
+
+- **Do not break users for a rename.** Public APIs, SDK options, environment variables, event names, properties, and stored data need aliases, migrations, deprecations, or a compatibility plan.
+- **Improve old language when it is safe.** UI text, docs, comments, tests, local variables, and private helper names are usually safe to update when you touch nearby code.
 
 Low-risk changes are usually fine when they are near the code you are already touching:
 
