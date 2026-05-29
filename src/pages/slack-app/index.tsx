@@ -457,7 +457,7 @@ const compareRows: CompareRow[] = [
     {
         label: 'Where it runs',
         ai: "None – it's a panel in PostHog Cloud.",
-        slack: 'Ephemeral sandbox (~6 hours, then it disappears).',
+        slack: 'PostHog-managed cloud sandbox.',
         code: 'Local, an isolated worktree, or a PostHog-managed cloud sandbox.',
     },
     {
@@ -535,8 +535,8 @@ const faqItems = [
             <p>
                 Branches get a <code>posthog-code/</code> prefix, and each commit includes a{' '}
                 <code>Generated-By: PostHog Code</code> line plus a <code>Task-Id</code> so you can trace it back. The
-                author is whoever your GitHub identity is set to in the environment – so the PR shows up under your
-                name, not the bot's.
+                author is the bot by default, or you can connect you personal github integration [here](https://app.posthog.com/settings/user-personal-integrations) – so the PR shows up under your
+                name.
             </p>
         ),
     },
