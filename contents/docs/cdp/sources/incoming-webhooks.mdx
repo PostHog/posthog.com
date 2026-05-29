@@ -104,6 +104,26 @@ You can test your webhook by sending a request to the webhook URL. You can use a
 
 Currently you have to save the webhook to test it as it directly hits the endpoint ensuring that the complete flow works.
 
+### Viewing logs and retrying failed requests
+
+The **Activity** section in your webhook source shows logs for each received request, including:
+
+- **Status** - success, failure, or running
+- **Request details** - the received payload
+- **Source event** - link to view the original event
+
+If a request fails, retry it from the logs:
+
+1. Find the failed request in the Activity section
+2. Click the menu (three dots) on that row
+3. Select **Retry event**
+
+To retry multiple failed requests at once:
+
+1. Select **Select for retry** from any row's menu
+2. Check the boxes for all requests you want to retry
+3. Click **Retry selected**
+
 ### Common issues
 
 - 401 Unauthorized - Check that your authorization header matches the configured value
