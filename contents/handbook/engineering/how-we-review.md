@@ -10,14 +10,14 @@ Almost all PRs made to PostHog repositories need a review before merging. We do 
 
 ## Review requirements
 
-PRs can be written by humans or by agents (like PostHog Code). See [Creating PRs](/handbook/engineering/development-process#creating-prs) for how we distinguish AI-assisted human-authored PRs from fully automatically generated agent-authored PRs. Either way, the normal rule is that every PR needs a review before merging, and a human always merges. The only exception is an emergency fix when no one else is available.
+PRs can be written by humans or by agents (like PostHog Code). See [Creating PRs](/handbook/engineering/development-process#creating-prs) for how we distinguish AI-assisted human-authored PRs from fully automatically generated agent-authored PRs. Either way, the normal rule is that every PR needs a review before merging, and a human always merges. If you need an urgent review, ask in the `#dev-stamp-exchange` Slack channel. For true emergencies where no one else is available, an admin can bypass review requirements.
 
 Who should review depends on who wrote the code:
 
 - **Human-authored PRs** can be reviewed by a team member or by Stamphog, our AI approval agent. Stamphog runs deterministic checks first (size, file ownership, tier) and then does an LLM review for approval eligibility and suggestions. Stamphog is the only AI approval agent whose approval can satisfy the review requirement, and only for eligible human-authored PRs, so a team member can merge.
 - **Agent-authored PRs** always require a human review since we want at least one human in the loop. A team member must review the PR and approve it before merging.
 
-We encourage the use of AI review agents (Codex, Copilot, Greptile, etc.) on PRs. Run them when they're useful, whether before opening a PR, while iterating, or before requesting a human review, and respond to or resolve meaningful comments. Other AI or bot review comments and suggestions do not count as approval, but they catch things humans miss and speed up the review process.
+We encourage the use of AI review agents (Codex, Copilot, Greptile, etc.) on PRs. Run them when they're useful, whether before opening a PR, while iterating, or before requesting a human review, and respond to or resolve meaningful comments. Other AI or bot review comments and suggestions do not count as approval, but they catch things humans miss and speed up the review process. Avoid adding more bot reviews when the PR already has automated feedback. Three bots arguing with each other is noisy, unless the extra bot has a niche focus like security.
 
 ## What reviews are for
 
@@ -35,7 +35,7 @@ Reviews also build shared context and collective ownership. They are a chance to
 
 If a change has long-term impact, such as architecture, schema, API, dependency, framework, or build changes, ask or pair with someone who has deeper context before merging. The goal is not to gatekeep, but to understand the tradeoffs and avoid surprising the team later.
 
-If a change affects public behavior, docs, examples, changelogs, APIs, configuration, or defaults, review those as part of the PR too. Changes that need human judgment should get human review rather than relying on Stamphog alone. This is especially important for SDK changes. Our [SDK guidelines](/handbook/engineering/sdks/guidelines) call out that public APIs, configuration, defaults, and behavior that affects customers need human review for ergonomics, platform fit, and long-term support cost.
+If a change affects public behavior, docs, examples, changelogs, APIs, configuration, or defaults, review those as part of the PR too. Changes that need human judgment should get human review rather than relying on bots alone. This is especially important for SDK changes. Our [SDK guidelines](/handbook/engineering/sdks/guidelines) call out that public APIs, configuration, defaults, and behavior that affects customers need human review for ergonomics, platform fit, and long-term support cost.
 
 Don't spend human review cycles on syntax formatting or preferences that a formatter, linter, or bot should catch.
 
@@ -116,6 +116,7 @@ Not every team has someone available to review your PR right away. Posting in #d
 #### What's still expected from the reviewer:
   - Actually read the diff. Don't just hit approve
   - Consider using AI-assisted review tools (e.g. add Copilot as a reviewer) to catch things you might miss
+  - If your approval is intentionally low-context to unblock someone, say that in the review so the author knows to seek deeper help if needed
   - Flag anything that looks off, even if you're not deeply familiar with the area
 
 #### When to push back instead of approving:
