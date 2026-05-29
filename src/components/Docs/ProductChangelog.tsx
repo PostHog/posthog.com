@@ -28,6 +28,7 @@ const productConfigMap: Record<string, ProductConfig> = {
     'data pipelines': { topic: 'CDP', teams: ['batch exports'] },
     workflows: { topic: 'Workflows', teams: ['workflows'] },
     'error tracking': { topic: 'Error tracking', teams: ['error tracking'] },
+    'ai observability': { topic: 'LLM analytics', teams: ['llm analytics'] },
     'llm analytics': { topic: 'LLM analytics', teams: ['llm analytics'] },
     'posthog ai': { topic: 'PostHog AI', teams: ['posthog ai'] },
     endpoints: { topic: 'endpoints' },

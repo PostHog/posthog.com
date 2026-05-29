@@ -12,7 +12,7 @@ featuredImage: >-
 category: Engineering
 tags:
   - Engineering
-  - LLM analytics
+  - AI Observability
 ---
 
 Software testing used to be relatively straightforward.
@@ -50,7 +50,7 @@ This isn't hard in theory because you just need to feed the same input to the ag
 
 Capturing this reality requires an observability tool for your agent. That way, when a user complains about something, you can pinpoint the exact agent interaction that led to that complaint. As an added benefit, you can now proactively check every trace your agent generates and see what you can improve.
 
-PostHog's [LLM analytics](/docs/llm-analytics/start-here) is one way to build that observability layer.
+PostHog's [AI Observability](/docs/ai-observability/start-here) is one way to build that observability layer.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_traces_25e203aa50.png"
@@ -88,7 +88,7 @@ Even though our agent is non-deterministic, you can set up deterministic evaluat
 
 There are more subjective cases where you can't capture what you're trying to evaluate in a piece of code. As a human, you could immediately tell whether a set of inputs and outputs pass the criterion, but you can't write test code to capture that reasoning.
 
-For such complex cases, we can use an LLM to act as an evaluator. This is known as an [LLM-as-a-Judge](/docs/llm-analytics/evaluations#llm-as-a-judge-evaluations), and with it, we can capture things like:
+For such complex cases, we can use an LLM to act as an evaluator. This is known as an [LLM-as-a-Judge](/docs/ai-evals), and with it, we can capture things like:
 
 1. The agent addressed the user's query
 2. The agent responded with offensive or unsafe content
@@ -124,7 +124,7 @@ That still leaves one major problem. We now have tests for our agent, just like 
 
 The offline evaluations we run while developing our agent only capture the inputs we have defined in our tests. In reality, users can input a near-infinite range of possibilities. We need a way to capture those inputs, check the equivalent outputs, and run our evaluators on them too. This type of evaluation that runs on production traces coming in is known as "online".
 
-Running your evaluators on all production traces sounds expensive, because it is, especially if you depend on LLM-as-a-Judge evaluators. This is why it's important to use code-based evaluators where possible. At PostHog, code-based evaluators for online evaluations use [Hog](/docs/llm-analytics/evaluations#code-based-evaluations-hog). You can't, however, only depend on code-based evaluators, so you can also:
+Running your evaluators on all production traces sounds expensive, because it is, especially if you depend on LLM-as-a-Judge evaluators. This is why it's important to use code-based evaluators where possible. At PostHog, code-based evaluators for online evaluations use [Hog](/docs/ai-evals). You can't, however, only depend on code-based evaluators, so you can also:
 
 1. Use a cheaper LLM-as-a-Judge model that can still capture the intricacies of what you're evaluating
 2. Filter the traces on which you run certain evaluators, for example by feature
@@ -143,15 +143,15 @@ We sort of go back to the beginning for this by manually reviewing traces. By no
 Here are a few ideas:
 
 1. Create a thumbs up/down feedback system so your users can flag bad interactions, and look at the traces that have received feedback
-2. Look for error spikes and the [traces that have those errors](/docs/llm-analytics/errors)
+2. Look for error spikes and the [traces that have those errors](/docs/ai-observability/errors)
 3. Look at traces that have been flagged as problematic via a support ticket
-4. If you've shipped a new feature, look for traces that are using that feature, for example by looking at the [traces that have called a specific tool](/docs/llm-analytics/tools) belonging to that feature
-5. If your LLM observability platform supports it, look at traces that have a [negative sentiment](/docs/llm-analytics/sentiment) associated with them
-6. Also if supported, look at outlier traces or small clusters from the [clusters generated for your traces](/docs/llm-analytics/clusters)
+4. If you've shipped a new feature, look for traces that are using that feature, for example by looking at the [traces that have called a specific tool](/docs/ai-observability/tools) belonging to that feature
+5. If your LLM observability platform supports it, look at traces that have a [negative sentiment](/docs/ai-observability/sentiment) associated with them
+6. Also if supported, look at outlier traces or small clusters from the [clusters generated for your traces](/docs/ai-observability/clusters)
 
 The PostHog teams working on AI features and agents have a weekly ritual called Traces Hour, where they look at and review traces that have been marked for review throughout the week. They come from all the sources listed above.
 
-PostHog also has [Reviews and Review Queues](/docs/llm-analytics/trace-reviews), which help you build these lists of traces and review them one by one.
+PostHog also has [Reviews and Review Queues](/docs/ai-evals), which help you build these lists of traces and review them one by one.
 
 Going through this process will help you and your team find new bad interactions and bugs to fix, which in turn leads to the creation of new evaluators to prevent regressions and detect other user inputs that still fail after your fix is live.
 

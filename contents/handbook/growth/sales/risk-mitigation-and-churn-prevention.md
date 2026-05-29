@@ -206,7 +206,7 @@ Escalation means getting support at a higher level, not handing off the account.
 
 - **Engineering involvement:** If there's a technical issue, bug, or feature gap that's driving the churn risk, loop in the relevant engineering team directly. Tag them in Slack, share context, and ask for their help.
 - **Product involvement:** If the customer needs a feature we don't have or is struggling with product limitations, bring in the relevant PM. They may want to join a call to understand the use case.
-- **Leadership involvement:** For strategic accounts or situations that need executive attention (pricing negotiations, product commitments, relationship rescue at the exec level), loop in your team lead. For accounts >$50k ARR at serious risk, involve Charles or Simon to get their perspective and support.
+- **Leadership involvement:** For strategic accounts or situations that need executive attention (pricing negotiations, product commitments, relationship rescue at the exec level), loop in your team lead. For accounts >$50k ARR at serious risk, involve Ben or Simon to get their perspective and support.
 
 The goal of escalation is to get the right people involved to help you save the account, not to pass the problem to someone else. You're still driving the relationship and the recovery plan.
 

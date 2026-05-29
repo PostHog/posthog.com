@@ -1,16 +1,16 @@
 ---
-title: How to set up LLM analytics for Anthropic's Claude
+title: How to set up AI Observability for Anthropic's Claude
 date: 2025-02-06
 author:
   - lior-neu-ner
 tags:
   - product analytics
-  - LLM analytics
+  - AI Observability
 ---
 
 Tracking your Claude usage, costs, and latency is crucial to understanding how your users are interacting with your AI and LLM-powered features.
 
-In this tutorial, we'll build a basic Next.js app, implement the Claude API, and capture these events automatically using PostHog LLM analytics.
+In this tutorial, we'll build a basic Next.js app, implement the Claude API, and capture these events automatically using PostHog AI Observability.
 
 ## 1. Creating a Next.js app
 
@@ -177,16 +177,16 @@ Now, when we run `npm run dev` again and submit an input, we should see a respon
 
 ## 3. Viewing generations in PostHog
 
-Once you generate a few responses, go to PostHog's [LLM analytics tab](https://app.posthog.com/llm-analytics) to get an overview of traces, users, costs, and more.
+Once you generate a few responses, go to PostHog's [AI Observability tab](https://app.posthog.com/ai-observability) to get an overview of traces, users, costs, and more.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_05_at_10_00_08_2x_a4773a9cd5.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_05_at_10_00_30_2x_5aa813c995.png"
-    alt="LLM analytics dashboard"
+    alt="AI Observability dashboard"
     classes="rounded"
 />
 
-You can also go into more detail by clicking on the [generations tab](https://app.posthog.com/llm-analytics/generations). This shows each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
+You can also go into more detail by clicking on the [generations tab](https://app.posthog.com/ai-observability/generations). This shows each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_05_at_10_04_35_2x_2dbca9be6b.png"
@@ -195,10 +195,10 @@ You can also go into more detail by clicking on the [generations tab](https://ap
     classes="rounded"
 />
 
-From here, you can go further by filtering your LLM analytics dashboard, use the `$ai_generation` event to [create insights](/docs/product-analytics/insights), [A/B test models](/tutorials/llm-ab-tests), and more.
+From here, you can go further by filtering your AI Observability dashboard, use the `$ai_generation` event to [create insights](/docs/product-analytics/insights), [A/B test models](/tutorials/llm-ab-tests), and more.
 
 ## Further reading
 
 - [How to set up OpenAI observability](/tutorials/openai-observability)
-- [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
+- [How to set up AI Observability for Cohere](/tutorials/cohere-analytics)
 - [How to monitor LlamaIndex apps with Langfuse and PostHog](/tutorials/monitor-llama-index-with-langfuse)
