@@ -59,7 +59,7 @@ Eligible early-stage companies can apply to [PostHog for Startups](/startups) fo
 
 **PostHog**: Built for engineering teams shipping AI products. [AI observability](/ai-observability) captures traces, spans, prompts, token costs, and latency across providers (Anthropic, OpenAI, Google, LangChain, and more). 
 
-Run [evals with LLM-as-a-Judge](/blog/stop-ai-slop) to catch quality regressions, [manage prompts](/docs/llm-analytics/prompts) directly in PostHog with versioning and fetch them at runtime (no redeploys), and use the prompt playground to compare models side-by-side. 
+Run [evals with LLM-as-a-Judge](/blog/stop-ai-slop) to catch quality regressions, manage prompts directly in PostHog with versioning and fetch them at runtime (no redeploys), and use the prompt playground to compare models side-by-side.
 
 Pair it with feature flags to roll out new models gradually, experiments to A/B test prompt variants, and session replay to see exactly what users saw when the model misbehaved.
 
@@ -152,18 +152,22 @@ Statsig, as its name suggests, is an experimentation tool first and foremost. Wh
 
 <details>
 <summary>Main differences between PostHog and Statsig</summary>
+
 - PostHog is fully independent and open source; Statsig was acquired by OpenAI and its brand and customers are currently operated by Amplitude.
 - PostHog has a [built-in data warehouse](/docs/data-warehouse) and [SQL access](/docs/product-analytics/sql) on every plan; Statsig's warehouse-native mode is gated behind its Enterprise tier.
-- PostHog offers an [EU-hosted cloud](/eu) at no extra cost; Statsig's hosted product is US-only 
+- PostHog offers an [EU-hosted cloud](/eu) at no extra cost; Statsig's hosted product is US-only.
 - Statsig offers more advanced statistical methods (CUPED, sequential testing, multi-armed bandits); PostHog focuses on the core experimentation workflows.
+
 </details>
 
 <details>
 <summary>Main similarities between PostHog and Statsig</summary>
+
 - Both combine feature flags, experiments, and analytics in one platform.
 - Both are built with engineering-led teams in mind.
 - Both support secondary metrics and multivariate testing.
 - Both offer usage-based pricing with a free tier.
+
 </details>
 
 ### Why do companies use PostHog?
@@ -236,6 +240,7 @@ LaunchDarkly and Statsig offer similar feature management and A/B testing featur
 
 <details>
 <summary>Main differences between LaunchDarkly and Statsig</summary>
+
 - LaunchDarkly is seat-priced even on its free Starter plan (5 seats); Statsig gives every plan, including free, unlimited seats.
 - LaunchDarkly goes deeper on enterprise governance, automation, and role-based access controls; Statsig is more experimentation-focused.
 - Statsig offers no-code experiments and unlimited seats; LaunchDarkly is more developer-oriented and seat-based.
@@ -245,6 +250,7 @@ LaunchDarkly and Statsig offer similar feature management and A/B testing featur
 
 <details>
 <summary>Main similarities between LaunchDarkly and Statsig</summary>
+
 - Both offer robust feature flagging with multivariate flags and local evaluation.
 - Both support A/B/n experimentation with metric tracking.
 - Both provide a wide range of SDKs for easy integration.
@@ -318,6 +324,7 @@ Amplitude is missing some of the more complex statistical features of Statsig, b
 
 <details>
 <summary>Main differences between Amplitude and Statsig</summary>
+
 - Amplitude has much deeper product analytics with funnels, cohorts, and user paths; Statsig's analytics are lighter and experimentation-focused.
 - Statsig offers more advanced experimentation features like CUPED variance reduction and sequential testing; Amplitude's experimentation is more basic.
 - Amplitude is independent; Statsig is owned by OpenAI.
@@ -327,6 +334,7 @@ Amplitude is missing some of the more complex statistical features of Statsig, b
 
 <details>
 <summary>Main similarities between Amplitude and Statsig</summary>
+
 - Both offer A/B testing, feature flags, and analytics in one platform.
 - Both support warehouse-native analytics (Snowflake, BigQuery, Databricks).
 - Both provide session replay alongside their core analytics.
@@ -411,6 +419,7 @@ On paper, Optimizely is quite similar to Statsig, but it's more focused on marke
 
 <details>
 <summary>Main differences between Optimizely and Statsig</summary>
+
 - Optimizely is a full digital experience platform (DXP) with CMS, commerce, and personalization; Statsig is a focused experimentation and feature management tool.
 - Statsig includes built-in product analytics and session replay; Optimizely relies on integrations with external analytics tools.
 - Statsig is self-serve and free to start with transparent pricing; Optimizely is enterprise sales-led.
@@ -419,6 +428,7 @@ On paper, Optimizely is quite similar to Statsig, but it's more focused on marke
 
 <details>
 <summary>Main similarities between Optimizely and Statsig</summary>
+
 - Both support advanced experiment configurations like multivariate tests, mutually exclusive experiments, and holdouts.
 - Both have invested in AI tooling for experiment workflows in the last year.
 - Both are owned by larger entities pursuing platform consolidation strategies.
@@ -502,6 +512,7 @@ VWO is closer to Optimizely than Statsig, though it offers most of the same feat
 
 <details>
 <summary>Main differences between VWO and Statsig</summary>
+
 - VWO is built around AI-assisted CRO for marketers. Statsig has been adding AI features, but its center of gravity is still server-side experimentation for engineers.
 - Statsig includes deeper product analytics and warehouse-native experimentation; VWO offers only basic funnel analysis.
 - Many of VWO's insights features are gated behind higher-priced plans; Statsig bundles more into its core offering.
@@ -511,6 +522,7 @@ VWO is closer to Optimizely than Statsig, though it offers most of the same feat
 
 <details>
 <summary>Main similarities between VWO and Statsig</summary>
+
 - Both offer A/B testing with secondary metrics and multivariate support.
 - Both ship an MCP server so AI agents can run experiments and manage flags directly.
 - Both provide some level of session replay and behavioral insights.
@@ -739,6 +751,7 @@ It's completely free to get started – no credit card required. Our [setup wiza
 
 <details>
 <summary>Why look for Statsig alternatives?</summary>
+
 Common reasons include: wanting deeper product analytics, needing other tools Statsig doesn't offer, preferring an open-source or independent platform, or wanting to consolidate experimentation with the rest of your product stack.
 
 </details>
@@ -760,18 +773,21 @@ If minimizing spend is the goal and you can host it, **GrowthBook** self-hosted 
 
 <details>
 <summary>What's the best Statsig alternative overall?</summary>
+
 For most teams, **PostHog** is the best all-around Statsig alternative. It combines [feature flags](/feature-flags) and [A/B testing](/experiments) with [product analytics](/product-analytics), [session replay](/session-replay), [AI observability](/ai-observability), [logs](/logs), [surveys](/surveys), [error tracking](/error-tracking), and more – all open source, independent, and with a [generous free tier](/pricing).
 
 </details>
 
 <details>
 <summary>Which Statsig alternatives are open source?</summary>
+
 **PostHog** is fully open source under the MIT license with a public roadmap. **GrowthBook** is also open source and self-hostable. Most other alternatives – LaunchDarkly, Amplitude, Optimizely, VWO, and Kameleoon – are proprietary.
 
 </details>
 
 <details>
 <summary>Which Statsig alternative is best for feature flags?</summary>
+
 **LaunchDarkly** is the most established enterprise feature management platform, with deep governance and automation. 
 
 **PostHog** offers feature flags with local evaluation, JSON payloads, and instant rollbacks, tightly integrated with analytics and experiments so you can measure impact in one place.
@@ -780,6 +796,7 @@ For most teams, **PostHog** is the best all-around Statsig alternative. It combi
 
 <details>
 <summary>Which Statsig alternative is best for experimentation?</summary>
+
 **PostHog** is ideal if you want experimentation tightly integrated with the rest of your product stack, so you can instantly see how experiments impact funnels, replays, and error rates. 
 
 For marketing-led, no-code web experimentation, **Optimizely**, **VWO**, and **Kameleoon** offer visual editors. 
@@ -790,12 +807,14 @@ For marketing-led, no-code web experimentation, **Optimizely**, **VWO**, and **K
 
 <details>
 <summary>Which Statsig alternative is best for no-code experiments?</summary>
+
 **Optimizely**, **VWO**, and **Kameleoon** all offer no-code visual editors that let marketing teams run web experiments without engineering. VWO and Kameleoon add personalization and heatmaps, while Optimizely bundles content management and ecommerce tooling.
 
 </details>
 
 <details>
 <summary>What other experimentation and feature flag tools are available?</summary>
+
 Beyond the tools in this guide, there are many other options worth considering. 
 
 See our comparisons of the [best LaunchDarkly alternatives](/blog/best-launchdarkly-alternatives), [best Optimizely alternatives](/blog/best-optimizely-alternatives), and [best VWO alternatives](/blog/best-vwo-alternatives) for broader coverage.
