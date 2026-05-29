@@ -9,7 +9,10 @@ availability:
 sourceId: Snowflake
 ---
 
-The data warehouse can link to data in Snowflake. 
+import { CalloutBox } from "components/Docs/CalloutBox";
+import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
+
+The data warehouse can link to data in Snowflake.
 
 Start by going to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab and clicking **New source**. Choose Snowflake and enter the following data:
 
@@ -23,9 +26,9 @@ Start by going to the [Data pipeline page](https://app.posthog.com/data-manageme
 - **Table Prefix:** The optional prefix for your tables in PostHog. For example, if your table name ended up being `menu`, a prefix of `snow_prod_` would create a table in PostHog called `snow_prod_menu`.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_23_at_13_50_56_2x_c31bfa6237.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_23_at_13_50_56_2x_c31bfa6237.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_23_at_13_50_42_2x_aa20de1109.png"
-  alt="Snowflake details" 
+  alt="Snowflake details"
   classes="rounded"
 />
 
@@ -34,9 +37,9 @@ Once added, click **Next**, select the tables you want to sync, as well as the [
 Once done, you can now [query](/docs/data-warehouse/query) your new table using the table name.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_23_at_13_56_32_2x_9c0bc2d35f.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_23_at_13_56_32_2x_9c0bc2d35f.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_23_at_13_56_53_2x_76a2b7f711.png"
-  alt="Snowflake details" 
+  alt="Snowflake details"
   classes="rounded"
 />
 
@@ -44,6 +47,27 @@ Once done, you can now [query](/docs/data-warehouse/query) your new table using 
 
 <SourceParameters />
 
-import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
+## Selecting columns
+
+By default, PostHog syncs all columns from each table. To sync only specific columns:
+
+1. During source setup, click **Columns** next to any table in the table picker.
+2. Uncheck columns you don't want to sync.
+3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
+
+You can also change column selection after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Snowflake source.
+2. Click **Configure** next to any schema.
+3. Under **Columns**, select which columns to sync.
+
+<CalloutBox icon="IconInfo" title="Adding columns to existing syncs" type="fyi">
+
+When you add columns to a schema using incremental or append sync, PostHog prompts you to choose:
+
+- **Sync forward only** - New columns are populated only for future data. Existing rows show `NULL` for the new columns.
+- **Full resync** - Triggers a complete resync to backfill the new columns for all rows.
+
+</CalloutBox>
 
 <InboundIpAddresses />
