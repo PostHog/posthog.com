@@ -373,7 +373,7 @@ export const DocsIndex = () => {
                         <h6 className="text-lg">Feedback</h6>
 
                         <p>
-                            Our docs are perpetually a work in progress. The
+                            Our docs are perpetually a work in progress. The 
                             <SmallTeam slug="content" /> is responsible for what you see here.
                         </p>
                         <p>
