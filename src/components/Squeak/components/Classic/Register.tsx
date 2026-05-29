@@ -73,7 +73,7 @@ const RegisterForm: React.FC = () => {
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
             } else if (values.email.toLowerCase().endsWith('@posthog.com')) {
-                errors.email = 'Your employee account is created automatically. Reset your password to log in.'
+                errors.email = 'Your employee account is created automatically. Sign in with Google instead.'
             }
             if (!values.password) {
                 errors.password = 'Required'
