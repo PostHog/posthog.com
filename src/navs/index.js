@@ -6594,7 +6594,7 @@ export const docsMenu = {
         },
         {
             name: 'Slack app',
-            icon: 'IconChat',
+            icon: 'IconAtSign',
             color: 'purple',
             url: '/docs/slack-app',
             description: 'Run PostHog from any Slack channel — agent tasks, analytics, and notifications.',
