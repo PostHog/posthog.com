@@ -6608,6 +6608,12 @@ export const docsMenu = {
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
+                {
+                    name: 'Pricing',
+                    url: '/docs/slack-app/pricing',
+                    icon: 'IconShield',
+                    color: 'red',
+                },
             ],
         },
         {
