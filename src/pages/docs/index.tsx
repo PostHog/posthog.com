@@ -374,7 +374,7 @@ export const DocsIndex = () => {
 
                         <p>
                             Our docs are perpetually a work in progress. The 
-                            <SmallTeam slug="content" /> is responsible for what you see here.
+                            <SmallTeam slug="docs-wizard" /> is responsible for what you see here.
                         </p>
                         <p>
                             At the end of each page, you can provide feedback about what was (or wasn't) helpful. We
