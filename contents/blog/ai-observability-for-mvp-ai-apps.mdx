@@ -1,0 +1,297 @@
+---
+title: 'Minimum viable AI observability: what to set up when you just shipped your first AI feature'
+date: 2026-05-27
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - natalia-amorim
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+seo:
+    metaTitle: 'AI observability for your MVP'
+    metaDescription: 'A practical guide to LLM observability for early-stage AI apps. What to instrument on day one and what to add as you scale.'
+---
+
+A lot of "LLM observability" content out there is written for teams running production AI at scale: enterprise governance, fancy eval pipelines, dedicated AI platform engineers. Useful if you're there, but wildly over-engineered if you just shipped your first AI feature on a Tuesday.
+
+This guide is for the other half – the solo founders, vibe coders, and small teams who have one or two LLM calls in their app, no data team, and no idea where to start with AI observability. 
+
+The answer isn't to set up everything, but to set up the minimum that keeps you from getting blindsided, skip the stuff that won't pay off yet, and add depth as your product earns it.
+
+Here's what that looks like in practice.
+
+<details>
+<summary>What is AI observability?</summary>
+
+**[AI observability](/docs/ai-observability)** (often used interchangeably with **LLM observability** and **LLM analytics**) is the practice of monitoring what's happening inside the AI features of your app: the prompts you send, the responses you get back, how long calls take, how much they cost, and whether the outputs are any good.
+
+Traditional APM tools ([Datadog](/blog/best-datadog-alternatives), New Relic, [Sentry](/blog/best-sentry-alternatives)) weren't built for this. They can tell you your API call to OpenAI succeeded with a 200, but they can't tell you the response was a hallucination, or that your prompt is costing 3x what it should be. 
+
+AI observability fills that gap.
+
+The core building blocks are:
+
+- **Traces** – the full record of an LLM call (or chain of calls) including inputs, outputs, model, parameters, and timing
+- **Cost and token tracking** – how much each call costs, broken down by model, user, or feature
+- **Evaluations (evals)** – ways to score the *quality* of outputs, not just whether they succeeded
+- **Prompt management** – versioning and iterating on prompts without re-deploying code
+- **Feedback loops** – capturing user signals (thumbs up/down, retries, abandonment) on AI outputs
+
+You don't need all of these on day one. Most MVPs need two.
+
+</details>
+
+<details>
+<summary>Why does my MVP need observability at all?</summary>
+
+Three reasons, in order of how painful they are when you skip them:
+
+1. **AI features burn money and can be sneaky about it** – [trust us, *we know*](/blog/optimizing-agent-cost). A single retry loop bug or a prompt that doubled in length can drain a daily API budget overnight. You won't see this in your traditional product analytics, but you'll see it in your monthly bill.
+2. **AI failures look like working code.** Your function returned a string. The string is wrong. There's no exception, no error log, no red flag in monitoring – just a user reading nonsense. You need a way to catch this that isn't "wait for a tweet dunking on your chatbot."
+3. **You can't improve what you can't see.** When a user says "the AI did something weird," "weird" is not a debuggable input. Without traces, you're guessing.
+
+The good news is that the first version of AI observability is [easy to set up](/wizard), and the free tier of most tools will cover you well past your first thousand users.
+
+</details>
+
+## What to set up on day one
+
+Three things, all of which can be wired up in an afternoon (especially if you're using PostHog, since the Wizard can do all the heavy lifting for you).
+
+<WizardCTA slim/>
+
+### 1. Tracing every LLM call
+
+The foundation of everything else. For each call, capture the full input (prompt + context + parameters), the full output, the model used, the latency, and the token counts.
+
+This is the data you'll use to debug literally everything else: cost questions, latency questions, quality complaints, weird outputs. 
+
+**If you remember nothing else from this guide, set up tracing.**
+
+Most LLM observability tools handle this with a small SDK wrapper around your OpenAI or Anthropic client. Initialize the wrapped client once, use it like the normal SDK, and every call is logged automatically.
+
+```python
+from posthog.ai.openai import OpenAI
+from posthog import Posthog
+ 
+posthog = Posthog(
+    "<ph_project_token>",
+    host="https://us.i.posthog.com"
+)
+ 
+client = OpenAI(
+    api_key="your_openai_api_key",
+    posthog_client=posthog
+)
+```
+
+### 2. Cost tracking
+
+Once tracing is set up, cost tracking comes nearly for free – your tool calculates cost per call from the token counts and model. What you actually need to do is set up alerts so you know when something goes sideways.
+
+At minimum:
+
+- An alert when daily spend exceeds your expected baseline by some multiplier (2x, 3x, whatever feels right)
+- A breakdown by model, so you can spot when something is calling GPT-4 instead of GPT-4o-mini for example
+- A breakdown by user, so one power user (or one abuse case) doesn't tank your margins
+
+Take it from us: the risk of overpaying isn't hypothetical.
+
+When the PostHog team dug into the [cost of our own AI agent](/blog/optimizing-agent-cost) (the PostHog Wizard), we found it was burning tokens on three things we hadn't expected: re-reading files it had already read, redoing work after context compactions, and spawning subagents that didn't reliably terminate. The only reason we caught it was because the cost data was sitting right there in [AI observability](/ai-observability).  Without it, we would've just paid the oversized bill and moved on.
+
+### 3. Error capture
+
+Every LLM call can fail due to things like rate limits, timeouts, content policy violations, malformed responses, retries that quietly retry forever. You want all of these surfaced.
+
+If you already have error tracking set up for the rest of your app ([Sentry](/blog/posthog-vs-sentry), [PostHog error tracking](/error-tracking), etc.), make sure LLM errors are flowing into it. 
+
+If you don't have error tracking yet, [add it](/blog/best-error-tracking-tools-for-developers). [The combination of traces + errors](/docs/ai-observability/link-error-tracking) is how you debug AI features in production without losing your mind.
+
+> **The minimum viable observability stack: traces + cost alerts + error capture.** That's it. If you've shipped this, you're already ahead of most teams running AI features in production.
+
+## What to add later
+
+Here's where most MVP-stage teams over-invest. These are all legitimate practices, they just might not be the right thing to spend your time on when you have less than a thousand users and one AI feature.
+
+### Complex eval suites
+
+You don't need 15 evaluation criteria across five different dimensions of quality, or an ensemble of LLM judges cross-checking each other. You probably don't even need automated evals yet.
+
+[Evals are **essential** eventually](/blog/stop-ai-slop), but at the MVP stage they tend to be premature. Why? Because:
+
+- You don't have enough traffic to make automated scoring statistically meaningful
+- You don't know what "good" looks like for your product yet, so any rubric you write could be wrong
+- You can do better than evals at this scale by *reading your outputs*. Spend 30 minutes a week looking at random traces. You'll catch more than any rubric will.
+
+[Add automated evals](/docs/ai-evals/evaluations) once you have enough generations that you can't read them all (usually a few hundred per day).
+
+### A/B testing prompt variants
+
+[Prompt experimentation](/docs/prompt-management/prompt-experiments) is great, we just shipped it in beta and are genuinely excited about it – you can A/B test up to 10 prompt versions side by side, with cost, latency, and eval pass rate as built-in metrics. 
+
+There's even an agent prompt you can paste into Cursor or Claude Code that wires the whole experiment up for you; we're already running our own experiments on it.
+
+That said: it's a feature to grow into, not a feature to start with. Prompt experimentation is pointless before you have enough traffic to detect a difference between variants. If you have 50 users a day, a 10% lift in quality won't reach statistical significance for months.
+ 
+Until you have meaningful traffic: just ship the better-feeling prompt and move on. Track outputs so you can revert if something breaks. Come back to it once you're seeing a few hundred generations a day and you have a real hypothesis worth testing.
+
+### Heavy prompt management infrastructure
+
+If only one person on the team writes prompts, and you ship prompt changes through your normal code deploys, you don't need a separate prompt management system yet. A `prompts.py` file in your repo is fine.
+
+[Prompt management](/docs/prompt-management/prompts) becomes valuable once (a) multiple people are editing prompts, (b) you want non-engineers to iterate on prompts without a deploy, or (c) you want to version and roll back prompts independently of code. None of those usually apply on day one.
+
+### Custom-built observability infra
+
+Don't do it. You'll spend a month building something half as good as what already exists, then spend the rest of your valuable free time maintaining it instead of shipping your product. 
+
+You can always migrate later, but realistically you won't need to (also, migrations normally suck, so save yourself the headache).
+
+There are free tiers everywhere – [PostHog gives you 100K LLM events/mo free](/ai-observability), Langfuse is free to self-host, [Datadog](/blog/best-datadog-alternatives) includes 40K LLM spans/mo on its free tier... use one of them instead.
+
+> For a deeper dive into free and self-hostable options, see our comparison of [the best open source LLM observability tools](/blog/best-open-source-llm-observability-tools).
+
+### Drift detection, governance dashboards, AI red-teaming pipelines
+
+All cool features. All things you do not need at MVP stage. 
+
+File these mentally under "stuff to revisit when you have a real AI ops function."
+
+## A stage-by-stage cheat sheet
+
+As your product matures, the bar for observability rises. Here's the rough order to layer things in.
+
+<details>
+<summary>Stage 1: You have meaningful traffic (a few hundred generations a day)</summary>
+
+**Add automated evals.** Now you can't read every trace, and you need a way to spot regressions. Start with the simplest version: an [LLM-as-a-judge](/blog/stop-ai-slop) that scores outputs against 2–3 criteria specific to your use case (accuracy, relevance, tone – whatever matters most). Run it on a sample of production traces.
+
+**Add user feedback collection.** Even a simple thumbs up/down on AI outputs is gold for debugging. Pair that signal with the trace and you can quickly find patterns in what users hate.
+
+**[Add session replay](/session-replay).** Watching how users actually react to AI outputs reveals things no metric will. Did they retry? Edit? Copy-paste? Close the tab? See our guide on [the best session replay tools](/blog/best-session-replay-tools) if you don't already have this.
+
+</details>
+
+<details>
+<summary>Stage 2: You have multiple AI features and a small team</summary>
+
+**Add prompt management.** Once more than one person is editing prompts, you want versioning, the ability to roll back, and ideally the ability to update prompts without a deploy. Tools like [PostHog](/ai-observability) or Langfuse handle this natively.
+
+**Connect LLM data to product analytics.** This is where things get genuinely interesting. "Users who hit our AI feature retain at 2x" is the kind of insight that justifies the whole investment. To do this, your LLM observability needs to share a user model with your [product analytics](/product-analytics) – which is one reason [bundled tools](/blog/best-analytics-stack-vibe-coded-apps) tend to win at this stage.
+
+**Add A/B testing for prompts.** Now that you have traffic and a structured way to evaluate, you can run real prompt experiments. Aim for 1-2 high-value tests at a time, not a constant churn of variants.
+
+</details>
+
+<details>
+<summary>Stage 3: You're scaling</summary>
+
+**Add drift monitoring.** Models change (especially if you're on the latest version of an API). Inputs change. Your evals need to keep up. Track quality scores over time and alert on regressions.
+
+**Add cost optimization workflows.** Things like routing simpler requests to cheaper models, caching responses where you can, and identifying users or prompts that are eating budget.
+
+**Add governance.** If you're selling to enterprise, you'll need things like PII redaction, data residency, audit logs, and human-in-the-loop review queues for high-risk outputs. This is where dedicated tools start to earn their keep.
+
+</details>
+
+| Stage | When you're here | What to add |
+|---|---|---|
+| **Day one** | You've shipped any AI feature | Tracing, cost alerts, error capture |
+| **Stage 1** | A few hundred generations a day | Automated evals, user feedback (👍/👎), session replay |
+| **Stage 2** | Multiple AI features, small team | Prompt management, connecting LLM data to product analytics, prompt A/B tests |
+| **Stage 3** | Scaling up, possibly going enterprise | Drift monitoring, cost optimization, governance (PII redaction, audit logs) |
+
+The right tool for "day one" should also support most of "later" without needing to migrate – otherwise you're going to do this all again in six months.
+
+For a deeper comparison of tools available, see our roundup of [the best open source LLM observability tools](/blog/best-open-source-llm-observability-tools).
+
+And if you're earlier in your product journey, our guide to [the best analytics stack for vibe-coded apps](/blog/best-analytics-stack-vibe-coded-apps) covers the whole analytics stack, not just the AI parts.
+
+## Why PostHog works well for this
+
+A quick pitch, since this is our blog afterall:
+
+[PostHog's AI observability](/ai-observability) covers all of the above in one place, with a free tier (100K events/mo) generous enough to get you well past MVP. You get:
+
+- **[Tracing](/docs/ai-observability/traces)** with a small SDK wrapper around OpenAI, Anthropic, and other providers
+- **Cost, latency, and token tracking** by model, user, and feature
+- **[Evaluations](/docs/ai-evals/evaluations)** with LLM-as-a-judge and human review
+- **[Prompt management](/docs/prompt-management/prompts)** with versioning, fetch-at-runtime, and rollback
+- **[Connected product analytics](/product-analytics) ** – the same user IDs flow through, so you can correlate AI usage with retention, conversion, and churn
+- **[Session replay](/docs/ai-observability/link-session-replay)** alongside traces, so you can see exactly what the user was doing when the model misbehaved
+- **An [MCP server](/docs/model-context-protocol)** that lets you query traces, costs, and evals directly from Claude Code or Cursor while you're iterating
+
+If you want to take it for a spin, you can [start free](/) – no credit card needed.
+
+And if you'd rather skip the manual setup entirely, the [PostHog Wizard](/wizard) handles instrumentation for you. 
+
+Paste one command into Cursor or Claude Code and it detects your framework, installs the right SDK, wraps your client, and gets traces, cost data, and errors flowing in a few minutes. 
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>How is AI observability different from regular APM?</summary>
+
+**APM tools** tell you whether your code is running and how fast. They can see that you made an API call to OpenAI and got a 200 back. They can't see *what* the model said, whether it was any good, or how much that specific call cost. 
+
+**AI observability** adds the missing layer: the content of the calls, the quality of the outputs, and the economics of LLM usage.
+
+</details>
+
+<details>
+<summary>Do I need evals on day one?</summary>
+
+No. At MVP scale, manual review beats automated evals. Open your trace list once a day, read 10-20 random outputs, take notes. You'll learn more about what "good" means for your product in a week of doing this than you would from any rubric. 
+
+Once you can't keep up with the volume, that's the signal to set up [automated evals](/blog/stop-ai-slop).
+
+</details>
+
+<details>
+<summary>How much should I expect to spend on observability as a solo founder?</summary>
+
+For most MVPs: nothing; even at a few thousand users, you can usually stay on a free or cheap plan. The thing that costs money is the *LLM calls themselves* – which is exactly why you want cost tracking from day one.
+
+</details>
+
+<details>
+<summary>What if I'm just calling OpenAI directly without a framework?</summary>
+
+That's actually the easiest case. Most observability tools have a wrapper around the OpenAI/Anthropic SDK that captures everything automatically. You don't need LangChain or any other framework to get full observability.
+
+</details>
+
+<details>
+<summary>Do I need separate tools for AI observability and product analytics?</summary>
+
+You can have separate tools, but you'll lose the most interesting insights – like whether your AI feature actually drives retention or conversion. 
+
+Bundled platforms ([PostHog](/) being the obvious example) share a user model across both, so you can ask questions like "do users who use the AI feature stick around longer?" without stitching data sources together.
+
+</details>
+
+<details>
+<summary>When should I switch from a free tier to a paid plan?</summary>
+
+When you hit one of three triggers: (1) your event volume exceeds the free tier, (2) you need a feature that's gated to paid plans (often SSO, EU residency, longer retention), or (3) you need support SLAs to ship to enterprise. 
+
+Otherwise, free tier might work fine well into post-PMF.
+
+</details>
+
+<details>
+<summary>What's the difference between observability and evaluation?</summary>
+
+**Observability** is about *what happened* – the traces, costs, latency, errors. It's descriptive. **Evaluation** is about *whether what happened was good* – scoring outputs against quality criteria. It's prescriptive. You need observability before evaluation makes sense: you can't score outputs you can't see.
+
+</details>
+
+<NewsletterForm />
