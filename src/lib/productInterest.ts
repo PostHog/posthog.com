@@ -29,13 +29,20 @@ const PRODUCT_SLUGS = new Set([
     'error-tracking',
     'surveys',
     'data-warehouse',
-    'ai-observability',
+    'llm-analytics',
     'workflows',
     'logs',
     'endpoints',
     'posthog-code',
     'inbox',
 ])
+
+// URL path slug -> canonical tracking slug. The page lives at /ai-observability but
+// we keep tracking as 'llm-analytics' so existing prod_interest history (and the
+// downstream PROD_INTEREST_TO_PRODUCT map in the PostHog app) keeps matching.
+const SLUG_ALIASES: Record<string, string> = {
+    'ai-observability': 'llm-analytics',
+}
 
 function getPostHog() {
     return typeof window !== 'undefined' ? window.posthog : undefined
@@ -63,14 +70,16 @@ export function showedInterest(slug: string): void {
 export function getProductSlugFromPath(pathname: string): string | null {
     // Landing pages: /product-analytics, /session-replay, etc.
     const landingMatch = pathname.match(/^\/([a-z-]+)\/?$/)
-    if (landingMatch && PRODUCT_SLUGS.has(landingMatch[1])) {
-        return landingMatch[1]
+    if (landingMatch) {
+        const slug = SLUG_ALIASES[landingMatch[1]] ?? landingMatch[1]
+        if (PRODUCT_SLUGS.has(slug)) return slug
     }
 
     // Docs pages: /docs/product-analytics/*, /docs/session-replay/*, etc.
     const docsMatch = pathname.match(/^\/docs\/([a-z-]+)/)
-    if (docsMatch && PRODUCT_SLUGS.has(docsMatch[1])) {
-        return docsMatch[1]
+    if (docsMatch) {
+        const slug = SLUG_ALIASES[docsMatch[1]] ?? docsMatch[1]
+        if (PRODUCT_SLUGS.has(slug)) return slug
     }
 
     return null
