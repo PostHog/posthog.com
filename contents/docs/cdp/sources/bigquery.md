@@ -33,18 +33,18 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
 - For simplicity, you can assign the **BigQuery Data Editor**, **BigQuery Job User**, and **BigQuery Read Session User** roles if it meets your security requirements.
 - Alternatively, create a custom role that includes only these permissions:
 
-    ```
-    bigquery.readsessions.create
-    bigquery.readsessions.getData
-    bigquery.datasets.get
-    bigquery.jobs.create
-    bigquery.tables.get
-    bigquery.tables.list
-    bigquery.tables.getData
-    bigquery.tables.create
-    bigquery.tables.updateData
-    bigquery.tables.delete
-    ```
+  ```
+  bigquery.readsessions.create
+  bigquery.readsessions.getData
+  bigquery.datasets.get
+  bigquery.jobs.create
+  bigquery.tables.get
+  bigquery.tables.list
+  bigquery.tables.getData
+  bigquery.tables.create
+  bigquery.tables.updateData
+  bigquery.tables.delete
+  ```
 
 3. **Generate and download the service account key:**
 
@@ -70,6 +70,25 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
 ## Configuration
 
 <SourceParameters />
+
+## Selecting columns
+
+By default, PostHog syncs all columns from each table. To sync only specific columns:
+
+1. During source setup, click **Columns** next to any table in the table picker.
+2. Uncheck columns you don't want to sync.
+3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
+
+You can also change column selection after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your BigQuery source.
+2. Click **Configure** next to any schema.
+3. Under **Columns**, select which columns to sync.
+
+> **Adding columns to existing syncs:** When you add columns to a schema using incremental or append sync, PostHog prompts you to choose:
+>
+> - **Sync forward only** - New columns are populated only for future data. Existing rows show `NULL` for the new columns.
+> - **Full resync** - Triggers a complete resync to backfill the new columns for all rows.
 
 ## How it works
 
