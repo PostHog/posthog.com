@@ -26,3 +26,45 @@ With the add-on enabled, you can see all insights in the dashboard with data fro
     alt="Customer Analytics B2B mode"
     classes="rounded"
 />
+
+## Accounts table
+
+The Accounts table provides a CRM-style view of your accounts with fields like name, CSM, account executive, and account owner. You can customize which columns appear and add custom data columns.
+
+### Configuring columns
+
+To customize which columns appear in the Accounts table:
+
+1. Click **Configure columns** above the table
+2. Drag and drop columns to reorder them in the **Visible columns** section
+3. Click columns in the **Available columns** section to add them
+4. Click **Save** to apply your changes
+
+Your column configuration is saved per team, so you'll see your customized view when you return.
+
+### Available column categories
+
+Columns are organized into categories:
+
+- **Account properties** - Fields from your account data like name and external ID
+- **Joined tables** - Columns from [data warehouse](/docs/data-warehouse) tables you've linked to accounts, such as tags or notebooks
+- **SQL expression** - Custom [HogQL](/docs/hogql) expressions for calculated columns
+
+### Adding custom SQL expressions
+
+To add a calculated column using HogQL:
+
+1. Open the column configurator
+2. Select **SQL expression** from the category dropdown
+3. Enter your expression, such as:
+   - `properties.industry` - Access account properties
+   - `concat(name, ' (', external_id, ')')` - Combine fields
+4. Click **Add** to include it in visible columns
+
+### Sorting columns
+
+Click any column header to sort the table. Clicking again cycles through ascending, descending, and unsorted order. Sorting resets to the first page of results.
+
+### Resetting to defaults
+
+Click **Reset to defaults** in the column configurator to restore the default column layout.
