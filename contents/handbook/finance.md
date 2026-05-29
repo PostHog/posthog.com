@@ -41,7 +41,7 @@ We group them into **monthly financials** (the basics — what we made, what we 
 
 **Revenue, COGS, gross profit** — the money we made, the cost of delivering it, and what's left. Everyone has a stake, especially product and engineering — they influence both halves of this, what we charge for and what it costs to run. We want revenue and gross profit to grow; COGS grows too (more customers), but ideally, slower than revenue.
 
-**Gross margin** — gross profit as a % of revenue, i.e. what we keep from each revenue dollar after the cost of delivering the product. The cleanest read on whether the product itself is profitable, before any other spend. Most relevant to engineering and FinOps, because COGS is mostly infra, hosting and costs of direct labour. Higher is better; a healthy SaaS business sits at 60–65%. Below that, we're pricing too low or our infra is too expensive.
+**Gross margin** — gross profit as a % of revenue, i.e. what we keep from each revenue dollar after the cost of delivering the product. The cleanest read on whether the product itself is profitable, before any other spend. Most relevant to engineering and FinOps, because COGS is mostly infra, hosting and costs of direct labour. Higher is better; a great SaaS business sits at 75%. Below that, we're pricing too low or our infra is too expensive.
 
 **Bad debt as a % of revenue** — the share of billed revenue we never collect. Tells us about who we're selling to and how tight our billing and collections are. Most relevant to billing, finance, and sales. Lower is better — under 2% is healthy.
 
