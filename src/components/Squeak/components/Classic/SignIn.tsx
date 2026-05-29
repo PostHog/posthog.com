@@ -11,6 +11,7 @@ import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'
 import { useToast } from '../../../../context/Toast'
 import Link from 'components/Link'
+import GoogleButton from './GoogleButton'
 
 const errorMessages: Record<string, string> = {
     'Invalid identifier or password': 'Invalid email or password',
@@ -118,6 +119,12 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                                 Go to app
                             </Link>
                         </p>
+                        <GoogleButton label="Sign in with Google" className="mt-3 mb-2" />
+                        <div className="flex items-center gap-2 text-xs text-muted my-2">
+                            <span className="flex-1 border-t border-border" />
+                            or
+                            <span className="flex-1 border-t border-border" />
+                        </div>
                         <form onSubmit={handleSubmit} className="space-y-2 mb-4">
                             <Input
                                 label="Email"

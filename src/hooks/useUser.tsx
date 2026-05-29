@@ -53,6 +53,7 @@ type UserContextValue = {
     fetchUser: (token?: string | null) => Promise<User | null>
     getJwt: () => Promise<string | null>
     login: (args: { email: string; password: string }) => Promise<User | null | { error: string }>
+    loginWithProvider: (args: { provider: 'google'; accessToken: string }) => Promise<User | null | { error: string }>
     logout: () => Promise<void>
     signUp: (args: {
         email: string
@@ -98,6 +99,7 @@ export const UserContext = createContext<UserContextValue>({
     fetchUser: async () => null,
     getJwt: async () => null,
     login: async () => null,
+    loginWithProvider: async () => null,
     logout: async () => {
         // noop
     },
@@ -235,6 +237,55 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             posthog?.capture('squeak error', {
                 source: 'useUser.login',
                 email,
+                error: JSON.stringify(error),
+            })
+
+            console.error(error)
+
+            if (error instanceof Error) {
+                return { error: error.message }
+            }
+
+            return null
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const loginWithProvider = async ({
+        provider,
+        accessToken,
+    }: {
+        provider: 'google'
+        accessToken: string
+    }): Promise<User | null | { error: string }> => {
+        setIsLoading(true)
+
+        try {
+            posthog?.capture('squeak oauth login start', { provider })
+
+            const res = await fetch(
+                `${SQUEAK_HOST}/api/auth/${provider}/callback?access_token=${encodeURIComponent(accessToken)}`
+            )
+
+            const data = await res.json()
+
+            if (!res.ok) {
+                throw new Error(data?.error?.message)
+            }
+
+            const user = await finalizeLogin(data.jwt)
+
+            posthog?.capture('squeak oauth login success', {
+                provider,
+                email: user.email,
+            })
+
+            return user
+        } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'useUser.loginWithProvider',
+                provider,
                 error: JSON.stringify(error),
             })
 
@@ -747,6 +798,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         isLoading,
         getJwt,
         login,
+        loginWithProvider,
         logout,
         signUp,
         fetchUser,
