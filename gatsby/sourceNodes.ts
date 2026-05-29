@@ -12,6 +12,7 @@ import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
 import dayjs from 'dayjs'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
+const isMinimalBuild = process.env.GATSBY_MINIMAL === 'true'
 
 type ChangelogPlaylistVideo = {
     videoId: string
@@ -1203,7 +1204,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         sourceCloudinaryImages(),
         sourceGithubNodes(),
         fetchWorkflowTemplates(),
-        fetchReferences(),
+        // Minimal PR previews don't create SDK reference pages, so skip this Strapi-backed fetch there.
+        ...(isMinimalBuild ? [] : [fetchReferences()]),
         fetchEvents(),
         fetchAchievements(),
         fetchAchievementGroups(),
