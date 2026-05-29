@@ -34,6 +34,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/incoming-webhooks',
                 },
                 {
+                    name: 'Custom REST',
+                    url: '/docs/cdp/sources/custom-rest',
+                },
+                {
                     name: 'Sources',
                 },
             ],
