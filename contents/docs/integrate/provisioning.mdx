@@ -3,8 +3,9 @@ title: Provisioning API
 sidebarTitle: Provisioning API
 ---
 
-The provisioning API lets partners create PostHog accounts and projects for their users programmatically.
-Instead of sending users to a signup page, you call three endpoints and get back a project API key, a personal API key, and a host URL - everything needed to start sending events.
+PostHog's provisioning API lets you create PostHog accounts for your users and deep link them into their PostHog project.
+
+It's intended for partners and platform integrations. If you're integrating your own app with your own PostHog account, you probably want [OAuth](/docs/api/oauth) or a [personal API key](/docs/api/personal-api-keys) instead.
 
 Jump to the [full Node.js example](#full-example) to see the complete flow in code.
 
@@ -13,10 +14,12 @@ Jump to the [full Node.js example](#full-example) to see the complete flow in co
 The flow uses OAuth 2.0 with PKCE (Proof Key for Code Exchange), so there are no shared secrets to manage.
 Your application is identified by a metadata document hosted on your domain.
 
+### Onboarding (once per user)
+
 ```
 1. POST /account_requests  →  authorization code
 2. POST /oauth/token        →  access + refresh tokens
-3. POST /resources          →  project API key + host
+3. POST /resources          →  project token + host
 ```
 
 ```mermaid
@@ -31,16 +34,36 @@ sequenceDiagram
     PH-->>P: access_token + refresh_token
 
     P->>PH: POST /resources (Bearer token)
-    PH-->>P: project API key + host
+    PH-->>P: project token + host
+```
+
+### Deep linking (per click, after onboarding)
+
+Reuses the access token from onboarding to mint a single-use URL that logs the user into their PostHog project.
+
+```
+4. POST /deep_links  →  single-use URL (10 min TTL)
+```
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant P as Partner
+    participant PH as PostHog
+
+    U->>P: clicks "Open in PostHog"
+    P->>PH: POST /deep_links (Bearer access_token)
+    PH-->>P: { url, expires_at }
+    P-->>U: redirect to url
+    U->>PH: GET /agentic/login?token=...
+    PH-->>U: redirect to /project/N (session minted)
 ```
 
 ## Set up as a partner
 
 ### Host a CIMD metadata document
 
-PostHog uses [Client ID Metadata Documents](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/) (CIMD) for partner registration.
-Instead of a manual signup, you host a JSON document at an HTTPS URL on your domain.
-That URL becomes your `client_id`.
+PostHog uses [Client ID Metadata Documents](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/) (CIMD) for partner registration. There's no signup form to fill out – you host a JSON document at an HTTPS URL on your domain, and that URL becomes your `client_id`.
 
 Create a JSON file at a stable HTTPS URL, for example `https://yourapp.com/.well-known/posthog-client.json`:
 
@@ -68,6 +91,33 @@ PostHog fetches and caches this document automatically.
 Subsequent requests reuse the cached version and refresh it in the background based on your `Cache-Control: max-age` header (clamped between 5 minutes and 24 hours, default 1 hour).
 
 Once your metadata document is live, you can start calling the API. The first request auto-registers your app and returns HTTP 202; retry after a few seconds.
+
+### Link your partner app to a PostHog organization (optional)
+
+By default, a CIMD partner app is unverified and capped at 10 account requests per hour.
+You can link the app to a PostHog organization with a verification token to raise that to 100/hour and surface the partner integration to that org's admins.
+
+1. In PostHog, go to **Organization settings → CIMD verification tokens** and click **Create token**. Copy the `phvt_…` value – it's only shown once.
+2. Add a `posthog_verification_token` field to your CIMD metadata document:
+
+   ```json
+   {
+     "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+     "client_name": "Your App Name",
+     "redirect_uris": ["https://yourapp.com/callbacks/posthog"],
+     "logo_uri": "https://yourapp.com/logo.png",
+     "token_endpoint_auth_method": "none",
+     "grant_types": ["authorization_code"],
+     "response_types": ["code"],
+     "posthog_verification_token": "phvt_..."
+   }
+   ```
+
+3. The next time PostHog refreshes the metadata document, the app is linked to the matching organization and the rate limit is bumped.
+
+The token is only used to prove ownership of the partner app – it isn't sent on API requests.
+You can rotate or revoke a token at any time from the same settings page.
+Revocation clears the link on the next metadata refresh, so a leaked or stale token can't keep an app linked to your org.
 
 ## API reference
 
@@ -169,7 +219,7 @@ sequenceDiagram
     PH-->>P: access_token + refresh_token
 
     P->>PH: POST /resources (Bearer token)
-    PH-->>P: project API key + host
+    PH-->>P: project token + host
 ```
 
 ### Step 2: Exchange the code for tokens
@@ -273,13 +323,51 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 
 | Field | Description |
 |---|---|
-| `api_key` | The project API token - use this to initialize PostHog SDKs |
+| `api_key` | The project token (starts with `phc_`) – use this to initialize PostHog SDKs |
 | `host` | The API host (`https://us.posthog.com` or `https://eu.posthog.com`) |
-| `personal_api_key` | A personal API key scoped to this project - use this for the PostHog API |
+| `personal_api_key` | A personal API key scoped to this project – use this for the PostHog API |
+
+### Deep linking
+
+For recurring deep links from your application into PostHog – the most common case is an "Open in PostHog" button on a user's connected project – use the deep-link endpoint. Each call returns a short-lived, single-use URL that logs the user into their PostHog project on click. There's no consent screen and no email-mismatch friction: the URL mints a fresh PostHog session for the right user, overriding any other session the browser happens to have.
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/deep_links \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer phx_abc123..." \
+  -H "API-Version: 0.1d" \
+  -d '{
+    "purpose": "dashboard"
+  }'
+```
+
+Authenticate with the `access_token` you got from [Step 2](#step-2-exchange-the-code-for-tokens) – the same Bearer credential you use for `/resources`. The token is scoped to a single team, so the resulting deep link lands the user in the correct project.
+
+**Request fields:**
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `purpose` | string | No | What the deep link should land on. Currently only `dashboard` is supported. Defaults to `dashboard`. |
+
+**Response:**
+
+```json
+{
+  "purpose": "dashboard",
+  "url": "https://us.posthog.com/agentic/login?token=...&team_id=12345",
+  "expires_at": "2026-05-20T21:00:00Z"
+}
+```
+
+The returned `url` is valid for 10 minutes and can only be opened once, so don't pre-render it as the button's `href`. Wire the button click to your backend, call `/deep_links` there, then redirect the user to the returned URL.
+
+#### Requires a trusted partner record
+
+This endpoint is gated on the `provisioning_can_issue_deep_links` flag on your partner record, which is only enabled for partners admin-onboarded by PostHog. If you get a `deep_links_not_enabled` 403, ask PostHog to enable it for your CIMD app.
 
 ### Rotate project credentials
 
-Rotate the project API token and create a new personal API key for an existing provisioned project:
+Rotate the project token and create a new personal API key for an existing provisioned project:
 
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/provisioning/resources/12345/rotate_credentials \
@@ -349,11 +437,11 @@ The `scopes` field in the account request controls what permissions the access t
 
 When you provision a new account, the user receives:
 
-- **Welcome email** with a link to set their password
-- **Full dashboard access** at [us.posthog.com](https://us.posthog.com) (or [eu.posthog.com](https://eu.posthog.com) for EU)
-- **Free tier** with generous limits across all PostHog products - no credit card required
+- A welcome email with a link to set their password.
+- Full dashboard access at [us.posthog.com](https://us.posthog.com) (or [eu.posthog.com](https://eu.posthog.com) for EU).
+- The PostHog [free tier](/pricing) across all products – no credit card required.
 
-Your integration gets back the project API key and host needed to start sending events immediately.
+Your integration gets back the project token and host, so you can start sending events the moment the API call returns.
 
 ## Error handling
 
@@ -402,7 +490,11 @@ All provisioning endpoints are rate limited.
 - 100 new client registrations per hour globally
 - 5 new client registrations per domain per hour
 
-**Account requests** (per partner, per hour): defaults to 10/hour for new CIMD partners. Contact PostHog to increase this for higher-volume integrations.
+**Account requests** (per partner, per hour):
+- 10/hour for unverified CIMD partners
+- 100/hour for partners linked to a PostHog organization via a [verification token](#link-your-partner-app-to-a-posthog-organization-optional)
+
+Email [team-growth@posthog.com](mailto:team-growth@posthog.com) if you need a higher limit for production use.
 
 ## Full example
 
@@ -517,6 +609,37 @@ async function provisionPostHogAccount(email, name) {
     host: resource.complete.access_configuration.host,
     personalApiKey: resource.complete.access_configuration.personal_api_key,
     projectId: resource.id,
+    accessToken: tokens.access_token,
+    refreshToken: tokens.refresh_token,
   };
+}
+```
+
+For the "Open in PostHog" button, call this from your click handler with the user's stored `access_token`, then redirect the browser to the returned URL:
+
+```javascript
+async function getDeepLinkUrl(accessToken) {
+  const res = await fetch(
+    `${BASE_URL}/api/agentic/provisioning/deep_links`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+        'API-Version': '0.1d',
+      },
+      body: JSON.stringify({ purpose: 'dashboard' }),
+    }
+  );
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(
+      `Deep link request failed (${res.status}): ${err.error?.message || JSON.stringify(err)}`
+    );
+  }
+
+  const { url } = await res.json();
+  return url;
 }
 ```

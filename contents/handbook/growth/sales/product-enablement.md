@@ -72,15 +72,15 @@ All content should include a "last updated" date so team members know they're wo
 | Product Area | SME        | Last Content Update |
 |--------------|------------|---------------------|
 | Product analytics | Ben Smith  | - |
-| Web/Customer/Revenue analytics | Jon        | - |
+| Web/Customer analytics | Jon        | - |
 | Session replay | Dana        | - |
 | Feature flags | Sachin     | - |
 | Experiments | Sachin     | - |
-| Error tracking | Christophe | - |
-| Surveys/Product tours | Leon        | - |
+| Error tracking | Sean M | - |
+| Enterprise & Platform | Leon        | - |
 | Data pipelines (batch and realtime) | Ryan       | - |
 | Data warehouse | Ryan       | - |
-| LLM Analytics | Leo        | - |
+| AI Observability | Leo        | - |
 | Workflows | Phil        | - |
 | PostHog Code | Landon     | - |
 | Logs | Sean | - |

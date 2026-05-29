@@ -65,7 +65,7 @@ function App() {
       const url = `https://us.posthog.com/api/projects/${projectId}/query/`;
       const headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer phx_1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0tuvwxyz"
+        "Authorization": "Bearer <ph_personal_api_key>"
       };
   
       const payload = {
@@ -138,7 +138,7 @@ function App() {
       const url = `https://us.posthog.com/api/projects/${projectId}/query/`;
       const headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer phx_1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0tuvwxyz"
+        "Authorization": "Bearer <ph_personal_api_key>"
       };
   
       const payload = {

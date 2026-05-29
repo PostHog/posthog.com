@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react'
-import TeamMember from '../components/TeamMember'
 import { PrivateLink } from '../components/PrivateLink'
-import SmallTeam from 'components/SmallTeam'
 
 export interface Feature {
     slug: string
@@ -38,6 +36,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Activity view',
         owner: ['product-analytics'],
         label: 'feature/events',
+    },
+    'agentic-provisioning': {
+        feature: 'Agentic provisioning',
+        owner: ['growth'],
+        label: 'feature/agentic-provisioning',
+    },
+    'ai-gateway': {
+        feature: 'AI gateway',
+        owner: ['ai-gateway'],
+        label: false,
     },
     alerts: {
         feature: 'Alerts',
@@ -109,7 +117,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'currency-rate-dataset': {
         feature: 'Currency rate dataset',
-        owner: ['growth', 'web-analytics'],
+        owner: ['web-analytics'],
         label: 'feature/currency-rate',
     },
     'customer-analytics': {
@@ -178,13 +186,18 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Feature flags',
         owner: ['feature-flags'],
     },
-    feed: {
-        feature: 'Feed',
-        owner: ['growth'],
+    'github-integration': {
+        feature: 'GitHub integration',
+        owner: ['signals'],
     },
     'group-analytics': {
         feature: 'Group analytics',
         owner: ['web-analytics'],
+    },
+    'health-alerts': {
+        feature: 'Health alerts',
+        owner: ['growth'],
+        label: 'feature/health-alerts',
     },
     heatmaps: {
         feature: 'Heatmaps',
@@ -204,15 +217,15 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Insights',
         owner: ['product-analytics'],
     },
+    integrations: {
+        feature: 'Integrations',
+        owner: ['workflows'],
+        label: 'feature/integrations',
+    },
     'internal-messaging': {
         feature: 'Internal messaging (email, notifications)',
         owner: ['platform-features'],
         label: 'feature/notifications',
-    },
-    'llm-gateway': {
-        feature: 'LLM gateway',
-        owner: ['posthog-ai'],
-        label: false,
     },
     'live-events': {
         feature: 'Live events',
@@ -242,6 +255,17 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         ),
         owner: ['platform-features'],
         label: 'feature/notebooks',
+    },
+    oauth: {
+        feature: 'OAuth',
+        owner: ['platform-features', 'growth'],
+        label: 'feature/oauth',
+        notes: (
+            <>
+                Growth owns all of the OAuth Applications + marketplace integrations around it. Platform features owns
+                the concept of authentication.
+            </>
+        ),
     },
     onboarding: {
         feature: 'Onboarding',
@@ -329,6 +353,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['billing', 'platform-features'],
         label: false,
     },
+    'realtime-cohort-calculations': {
+        feature: 'Realtime cohort calculations',
+        owner: ['feature-flags'],
+        label: false,
+    },
     replay: {
         feature: 'Replay',
         owner: ['replay'],
@@ -363,11 +392,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
             </>
         ),
         label: ['feature/libraries', 'feature/mobile'],
-    },
-    'sdks-doctor': {
-        feature: 'SDK doctor',
-        owner: ['growth'],
-        label: 'feature/sdk-doctor',
     },
     search: {
         feature: 'Search',
@@ -408,6 +432,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Signals',
         owner: ['signals'],
         label: 'feature/signals',
+    },
+    signup: {
+        feature: 'Signup',
+        owner: ['growth'],
+        label: 'feature/signup',
     },
     'slack-app': {
         feature: 'Slack app',
@@ -475,6 +504,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     variables: {
         feature: 'Variables',
         owner: ['product-analytics'],
+    },
+    'vscode-extension': {
+        feature: 'VS Code extension',
+        owner: ['growth'],
+        label: 'feature/vscode-extension',
     },
     'web-analytics': {
         feature: 'Web analytics',

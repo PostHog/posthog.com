@@ -8,7 +8,7 @@ import { levelModifier } from './compensation_data/level_modifier'
 import { stepModifier } from './compensation_data/step_modifier'
 import { currencyData } from './compensation_data/currency'
 import { IconInfo, IconMultiply } from '@posthog/icons'
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 
 const formatCur = (val: number, currency = 'USD') => {
     currency = currencyData[currency] ? currency : 'USD'
@@ -18,6 +18,28 @@ const formatCur = (val: number, currency = 'USD') => {
     })
 
     return formatter.format(Math.round(val * (currencyData[currency] || 1))).replace('.00', '')
+}
+
+const InfoTooltip = ({ description }: { description: string }) => {
+    const [open, setOpen] = React.useState(false)
+    return (
+        <Tooltip
+            side="top"
+            open={open}
+            onOpenChange={setOpen}
+            trigger={
+                <button
+                    type="button"
+                    className="inline-block p-0.5 opacity-60 hover:opacity-100 cursor-help relative -top-px -left-0.5"
+                    onClick={() => setOpen((prev) => !prev)}
+                >
+                    <IconInfo className="size-4 inline-block" />
+                </button>
+            }
+        >
+            <p className="max-w-xs m-0 leading-tight">{description}</p>
+        </Tooltip>
+    )
 }
 
 const Section = ({
@@ -38,13 +60,7 @@ const Section = ({
             <div className="flex items-baseline gap-1">
                 {!hideTitle && <h3 className="!text-[15px] !m-0">{title}</h3>}
                 {subtitle && <span className="text-sm text-black/70 dark:text-white/70">{subtitle}</span>}
-                {description && (
-                    <Tooltip placement="top" content={() => <div className="max-w-xs">{description}</div>}>
-                        <span className="inline-block p-0.5 opacity-60 hover:opacity-100 cursor-help relative -top-px -left-0.5">
-                            <IconInfo className="size-4 inline-block" />
-                        </span>
-                    </Tooltip>
-                )}
+                {description && <InfoTooltip description={description} />}
             </div>
             {children}
         </div>
