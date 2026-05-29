@@ -28,6 +28,8 @@ Use this guidance for:
 
 ## Preferred language
 
+This table is not exhaustive. Use common sense and choose language that is clear, specific, and respectful for the context.
+
 | Instead of | Prefer | Notes |
 |------------|--------|-------|
 | `whitelist` | `allowlist`, `permitted`, `included`, `trusted`, or a specific name like `allowed_domains` | Prefer the specific noun over a generic list when possible. |
@@ -41,6 +43,9 @@ Use this guidance for:
 | `dummy` | `placeholder`, `sample`, `test`, `fake`, `stub`, `mock` | Use the term that matches the role in the code or test. |
 | Gendered defaults like `he`, `she`, `his`, or `her` | `they`, `their`, role names, or direct address | In docs, prefer addressing the reader directly with "you". |
 | `guys` | `team`, `folks`, `everyone`, `people` | Use a word that includes the whole group. |
+| `cripple`, `crippled` | `break`, `disable`, `hamper`, `severely limit` | Common in incident write-ups when describing breakages. |
+| `normal`, when describing users or behavior | `typical`, `default`, `common`, `expected` | Calling one group or behavior `normal` can imply others are abnormal. |
+| `suffers from`, `afflicted with` | `has`, `is` | Avoid pathologizing language, particularly in accessibility. For example, write `a user who is colorblind` instead of `a user who suffers from colorblindness`. |
 | Casual uses of `crazy`, `insane`, or `lame` | `unexpected`, `surprising`, `broken`, `high-volume`, `difficult`, `unhelpful` | Describe the behavior or impact instead. |
 
 ## Examples
