@@ -1422,6 +1422,10 @@ export const handbookSidebar = [
                         name: 'How we use automation',
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
+                    {
+                        name: 'Engaging unengaged customers',
+                        url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
+                    },
                 ],
             },
             {
@@ -2352,6 +2356,10 @@ export const docsMenu = {
                         {
                             name: 'Cloudflare Workers',
                             url: '/docs/libraries/cloudflare-workers',
+                        },
+                        {
+                            name: 'Convex',
+                            url: '/docs/libraries/convex',
                         },
                         {
                             name: 'Django',
