@@ -6609,6 +6609,18 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Setup',
+                    url: '/docs/slack-app/setup',
+                    icon: 'IconWrench',
+                    color: 'blue',
+                },
+                {
+                    name: 'Commands',
+                    url: '/docs/slack-app/commands',
+                    icon: 'IconTerminal',
+                    color: 'purple',
+                },
+                {
                     name: 'Pricing',
                     url: '/docs/slack-app/pricing',
                     icon: 'IconShield',
