@@ -95,6 +95,8 @@ Higher-risk changes need a plan:
 - Queue names, topic names, and persisted job payloads
 - Dashboard, alert, or metric names that other teams depend on
 
+For broad, cross-cutting changes, align with [Developer Experience](/handbook/engineering/developer-experience) and the relevant feature owners before starting. They can help plan rollout, CI impact, compatibility, and repository-wide linting changes.
+
 For higher-risk changes, prefer an additive migration:
 
 1. Add the new name.
