@@ -1841,6 +1841,10 @@
             "destination": "/docs/ai-observability"
         },
         {
+            "source": "/llm-analytics",
+            "destination": "/ai-observability"
+        },
+        {
             "source": "/why",
             "destination": "/about"
         },

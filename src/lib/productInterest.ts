@@ -29,7 +29,7 @@ const PRODUCT_SLUGS = new Set([
     'error-tracking',
     'surveys',
     'data-warehouse',
-    'llm-analytics',
+    'ai-observability',
     'workflows',
     'logs',
     'endpoints',
