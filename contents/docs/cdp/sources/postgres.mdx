@@ -33,7 +33,7 @@ To link Postgres:
      - For password authentication, enter your SSH username and password.
      - For key-based authentication, enter your SSH username, private key, and optional passphrase.
    - **Require TLS through tunnel?** - Whether to require TLS encryption through the SSH tunnel. Enabled by default. Disable if your database does not support TLS.
-5. Optional: enable **Change data capture (CDC)** if your database is prepared for logical replication.
+5. Optional: enable **Change data capture (CDC)** if your database is prepared for logical replication. You can also enable CDC later from the Configuration tab.
 6. Click **Next**, select the tables to sync, choose the sync method for each table, then click **Link**
 
 The data warehouse then starts syncing your Postgres data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
@@ -74,6 +74,37 @@ PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption fo
 <InboundIpAddresses />
 
 > **Note:** We currently don't support connections using IPv6, therefore, you may need to enable IPv4 connections to your database. This is required for Supabase, for example.
+
+## Enabling or disabling CDC
+
+You can enable CDC when creating a new Postgres source, or add it later from the **Configuration** tab.
+
+To enable CDC on an existing source:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Postgres source.
+2. Click the **Configuration** tab.
+3. In the CDC section, select your management mode (PostHog-managed or self-managed).
+4. Click **Check prerequisites** to validate your database is ready.
+5. Click **Enable CDC**.
+
+After enabling CDC, you still need to switch individual tables to CDC sync. Go to the **Sync** tab, click **Configure** next to a table, and change its sync method to CDC.
+
+To disable CDC:
+
+1. Go to the **Configuration** tab for your Postgres source.
+2. Click **Disable CDC** and confirm.
+
+Disabling CDC drops the replication slot and publication from your source database. All tables using CDC sync are paused and must be reconfigured with a different sync method before they can sync again. Re-enabling CDC later requires a full resync of those tables.
+
+### Editing CDC settings
+
+Once CDC is enabled, you can adjust WAL lag thresholds from the **Configuration** tab without disabling CDC. The editable settings are:
+
+- **Automatic slot protection** – Whether PostHog drops the slot when lag exceeds the critical threshold (PostHog-managed mode only).
+- **Warning threshold** – The retained WAL size (in MB) that triggers a warning. Default: `1024 MB`.
+- **Critical threshold** – The retained WAL size (in MB) that triggers an error or slot drop. Default: `10240 MB`.
+
+The warning threshold must be lower than the critical threshold.
 
 ## Sync methods
 
@@ -147,7 +178,7 @@ PostHog creates both the consolidated current-state table and the `_cdc` history
 
 ## CDC requirements
 
-PostHog includes a **Check CDC compatibility** step in the source configuration screen. It validates the main prerequisites against your database before the source is created, including PostgreSQL version, logical replication, selected table primary keys, `SELECT` permissions, replication permissions, replication slot capacity, and publication existence for self-managed CDC.
+PostHog includes a **Check CDC compatibility** step during source creation and when enabling CDC on an existing source. It validates the main prerequisites against your database, including PostgreSQL version, logical replication, selected table primary keys, `SELECT` permissions, replication permissions, replication slot capacity, and publication existence for self-managed CDC.
 
 You should still prepare the database before enabling CDC, especially if logical replication is not already enabled.
 
