@@ -12,7 +12,7 @@ import InstallWebPackageManagers from "./install-web-package-managers.mdx"
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      posthogToken: process.env.NUXT_PUBLIC_POSTHOG_TOKEN || '<ph_project_token>',
+      posthogToken: process.env.NUXT_PUBLIC_POSTHOG_PROJECT_TOKEN || '<ph_project_token>',
       posthogHost: process.env.NUXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
       posthogDefaults: '<ph_posthog_js_defaults>',
     },
