@@ -77,7 +77,7 @@ All content should include a "last updated" date so team members know they're wo
 | Feature flags | Sachin     | - |
 | Experiments | Sachin     | - |
 | Error tracking | Sean M | - |
-| Surveys | Leon        | - |
+| Enterprise & Platform | Leon        | - |
 | Data pipelines (batch and realtime) | Ryan       | - |
 | Data warehouse | Ryan       | - |
 | AI Observability | Leo        | - |

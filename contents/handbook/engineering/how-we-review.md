@@ -4,6 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
+<!-- Canonical "how to review a PR" reference: review checklists, turnaround, partial reviews, and comment conventions live here. Shipping/release process and the human-vs-agent review policy live in development-process.md — link to this page from there, don't duplicate the checklist. -->
+
 Almost all PRs made to PostHog repositories will need a review from another engineer. We do this because, almost every time we review a PR, we find a bug, a performance issue, unnecessary code or UX that could have been confusing. Here's how we do it:
 
 ## Before requesting a review
