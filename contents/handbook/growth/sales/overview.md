@@ -78,3 +78,12 @@ Our small team page is maintained on the [Sales & CS team page](/teams/sales-cs)
 - Low ego, and a willingness to turn around even the most disgruntled and unreasonable customer
 - Hands-on people not motivated by managing a team
 - We would want to buy PostHog from them - this is more important than cool logos
+
+## Staying current with what we ship
+
+Being a [power user of PostHog](#sales-team-vision) means knowing what just shipped and what's about to land. Two internal Slack channels make this easy — we recommend everyone on the Sales & CS team joins both:
+
+- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Docs & Wizard team](/teams/docs-wizard) and updated constantly as PRs merge.
+- [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) – what's shipping soon. Owned by the [Marketing team](/teams/marketing) and posted as a daily digest.
+
+Both channels are populated by agentic workflows that scan merged PRs and feature flag changes and summarize them into the channel. Authors can also opt in or out using the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the `posthog/posthog` PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/docs-and-wizard/how-to-publish-changelog).

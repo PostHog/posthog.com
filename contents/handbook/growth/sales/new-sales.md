@@ -351,7 +351,7 @@ Here is minimum checklist of things that we find customers should know how to do
 
 Post-onboarding, you'll want to change gears to start thinking about [retention, expansion and/or cross-sell](/handbook/growth/sales/expansion-and-retention). 
 
-Simon and Charles review accounts every month to see if/when it makes sense to reassign accounts once they've closed. 
+Simon and Ben review accounts every month to see if/when it makes sense to reassign accounts once they've closed. 
 
 ### 7. Closed - lost
 

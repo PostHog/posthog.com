@@ -4,6 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
+<!-- Canonical "how to review a PR" reference: review checklists, turnaround, partial reviews, and comment conventions live here. Shipping/release process and the human-vs-agent review policy live in development-process.md — link to this page from there, don't duplicate the checklist. -->
+
 Almost all PRs made to PostHog repositories will need a review from another engineer. We do this because, almost every time we review a PR, we find a bug, a performance issue, unnecessary code or UX that could have been confusing. Here's how we do it:
 
 ## Before requesting a review
@@ -75,6 +77,12 @@ Not every team has someone available to review your PR right away. Posting in #d
   - The PR is too large or complex to review without context
   - There are no tests, no description, or no visual evidence of the change working
   - You're not confident the change is safe — say so. "I can't meaningfully review this, you need someone with more context" is always valid feedback
+
+## Partial reviews
+
+If you were asked to review only one aspect of a PR (e.g. copy, design, infra, security), submit your review as **Comment**, not **Approve**. An Approve from any reviewer clears the review requirement and marks the PR mergeable, so it should mean "I reviewed this against the full checklist above." Reserve Approve for when you actually did.
+
+If multiple reviewers are splitting aspects of a PR, the author is responsible for making sure at least one Approve came from someone who reviewed the code. CODEOWNERS can enforce this on a per-path basis where it matters.
 
 ## Review comment conventions
 
