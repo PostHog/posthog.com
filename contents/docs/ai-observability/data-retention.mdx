@@ -1,0 +1,32 @@
+---
+title: Data retention
+---
+
+PostHog retains the largest properties on `$ai_` events for 30 days. LLM conversations can be large, so storing these properties long-term is expensive. To keep costs down, PostHog deletes them after 30 days and keeps the rest of the event.
+
+## How retention works
+
+When PostHog ingests an `$ai_` event, the pipeline splits it into two copies:
+
+- A full copy, with every property, goes to the `ai_events` table.
+- A trimmed copy, without the large properties, goes to the `events` table.
+
+The large properties are:
+
+- `$ai_input`
+- `$ai_output`
+- `$ai_output_choices`
+- `$ai_input_state`
+- `$ai_output_state`
+- `$ai_tools`
+
+PostHog deletes the `ai_events` copy after 30 days. The trimmed copy in the `events` table persists like any other Product Analytics event, but it never includes the large properties.
+
+## What this means for you
+
+- To read the large properties, query the `ai_events` table – even for traces less than 30 days old. The `events` table never contains them.
+- After 30 days, the large properties are gone. A trace older than 30 days still appears, but its generations show no input or output content.
+- Metadata such as model, provider, token counts, cost, latency, and trace IDs stays available, so analysis of historical cost, usage, and performance is unaffected.
+- Insights, queries, and filters that don't reference the large properties keep working on data of any age.
+
+To keep raw prompts and completions beyond 30 days, set up a [batch export](/docs/cdp/batch-exports) to your own storage.

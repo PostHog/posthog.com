@@ -5926,6 +5926,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Data retention',
+                    url: '/docs/ai-observability/data-retention',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                },
+                {
                     name: 'Troubleshooting',
                     url: '/docs/ai-observability/troubleshooting',
                     icon: 'IconQuestion',
