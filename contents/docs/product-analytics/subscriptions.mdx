@@ -3,7 +3,7 @@ title: Subscriptions
 availability:
   features:
     subscriptions:
-      free: false
+      free: true
       selfServe: true
       boost: true
       scale: true
@@ -31,6 +31,14 @@ Subscriptions enable you to send [insights](/docs/product-analytics/insights) or
 <FeatureAvailability availability={_frontmatter.availability.features.subscriptions} />
 
 > **Looking to subscribe to events or actions?** See our [realtime destination docs](/docs/cdp/destinations) to learn how to send event or action data to webhooks, Slack, and more.
+
+## Free tier limits
+
+Free plans can create up to five subscriptions. Paid plans have no subscription limit.
+
+When you've reached the limit, the create form is replaced with a prompt to upgrade your plan. Viewing and editing existing subscriptions is never blocked – only creating additional subscriptions past the cap.
+
+Deleting a subscription frees its slot. Restoring a previously deleted subscription counts against the limit again.
 
 ## Viewing all subscriptions
 
