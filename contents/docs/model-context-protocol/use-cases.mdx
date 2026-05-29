@@ -1,0 +1,211 @@
+---
+title: PostHog MCP use cases
+sidebarTitle: Use cases
+sidebar: Docs
+showTitle: true
+---
+
+import PromptExample from "./_snippets/prompt-example.tsx"
+
+Once you've [connected the PostHog MCP server](/docs/model-context-protocol#get-started-in-30-seconds), your agent can read and write across PostHog's products. Here's a tour of the most useful things to ask – click the copy icon next to any prompt to grab it for your own agent, then adapt it to your project.
+
+## Single-prompt examples
+
+### Investigate bugs and errors
+
+Triage and fix issues from your editor instead of context-switching to a browser. See the [error tracking guide](/docs/error-tracking/debug-errors-mcp) and [logs guide](/docs/logs/debug-logs-mcp) for deeper walkthroughs.
+
+<PromptExample
+  prompt="What are the top 5 errors in my project this week?"
+  outcome="Returns error groups ranked by occurrence with affected user counts."
+/>
+<PromptExample
+  prompt="Show me the full stack trace for the most recent crash, then propose a fix."
+  outcome="Pulls the stack trace, error message, and metadata so the agent can suggest code changes."
+/>
+<PromptExample
+  prompt="Show me error logs from the payments service in the last hour."
+  outcome="Filters logs by severity and service, returning timestamps, messages, and trace IDs."
+/>
+<PromptExample
+  prompt="Mark this issue as resolved and assign all future TypeErrors to the backend team."
+  outcome="Updates issue status and creates an assignment rule in one go."
+/>
+
+### Explore product analytics
+
+Ask data questions in plain English and get answers backed by a real PostHog query. See the [analytics guide](/docs/product-analytics/build-insights-mcp) for more.
+
+<PromptExample
+  prompt="How many unique users signed up in the last 7 days, broken down by day?"
+  outcome="Runs a trends query and returns daily counts."
+/>
+<PromptExample
+  prompt="What are the most common paths users take after signing up?"
+  outcome="Executes a paths query that reveals the dominant journeys after the signup event."
+/>
+<PromptExample
+  prompt="Show me the navigation paths from the pricing page to checkout."
+  outcome="Runs a paths query with start and end points to surface the routes that actually convert."
+/>
+
+### Manage feature flags and experiments
+
+Spin up flags, multivariate tests, and full A/B experiments without leaving your code. See the [feature flags guide](/docs/feature-flags/create-flags-mcp) and [experiments guide](/docs/experiments/create-experiments-mcp).
+
+<PromptExample
+  prompt="Create a feature flag called new-checkout-flow enabled for 20% of users."
+  outcome="Creates the flag with a 20% rollout and returns the key and a link to the flag in PostHog."
+/>
+<PromptExample
+  prompt="Create a multivariate flag homepage-hero-test with control at 34%, variant_a at 33%, and variant_b at 33%."
+  outcome="Creates a multivariate flag (variant percentages must be integers summing to 100)."
+/>
+<PromptExample
+  prompt="Create an A/B test for our pricing page that measures conversion to checkout."
+  outcome="Sets up an experiment with control and test variants and a funnel metric."
+/>
+<PromptExample
+  prompt="Create an early access feature called 'Dark Mode' in draft stage."
+  outcome="Creates the feature and auto-links a dark-mode feature flag."
+/>
+
+### Run SQL and HogQL queries
+
+Drop into raw queries when you need precision. See the [SQL guide](/docs/data-warehouse/run-sql-mcp).
+
+<PromptExample
+  prompt="Find all feature flags rolled out to less than 50% of users."
+  outcome="Queries system.feature_flags and filters by rollout percentage."
+/>
+<PromptExample
+  prompt="Find users who triggered signup but didn't complete onboarding in the last 30 days."
+  outcome="Constructs a HogQL query against events with subqueries to identify the gap."
+/>
+<PromptExample
+  prompt="Which cohorts contain users who made a purchase in the last week?"
+  outcome="Cross-references system.cohorts with purchase events."
+/>
+
+### Build CDP destinations and workflows
+
+Wire up integrations from a single prompt instead of clicking through the UI.
+
+<PromptExample
+  prompt="Create a Slack destination that sends a message when users sign up."
+  outcome="Finds the Slack template, then creates a destination function filtered to the signup event."
+/>
+<PromptExample
+  prompt="List all my destination functions and show which ones are enabled."
+  outcome="Returns every destination with its enabled status."
+/>
+<PromptExample
+  prompt="Test my webhook destination with a mock purchase event."
+  outcome="Sends a mock payload and returns execution logs."
+/>
+
+### Manage cohorts, prompts, and support
+
+Day-to-day operations your team would otherwise do by hand.
+
+<PromptExample
+  prompt="Create a dynamic cohort power-users for users who completed the purchase event more than 5 times in the last 30 days."
+  outcome="Creates a behavioral cohort with the criteria you described."
+/>
+<PromptExample
+  prompt="Create a prompt called code-reviewer with instructions for reviewing pull requests."
+  outcome="Adds a new prompt available across all your MCP-connected agents."
+/>
+<PromptExample
+  prompt="List all open support tickets."
+  outcome="Returns open tickets with numbers, priorities, and message counts."
+/>
+<PromptExample
+  prompt="Mark ticket #3 as resolved and set ticket #7 to high priority."
+  outcome="Updates both tickets in a single call."
+/>
+
+## Multi-step recipes
+
+Single prompts get you a long way, but the real value of MCP comes from chaining tool calls into end-to-end workflows. Drop these sequences into your agent one step at a time – each prompt builds on the context the previous one returned.
+
+### Investigate and contain a regression
+
+You've seen an alert about a spike in errors. Triage, ship a kill switch, and clean up – without leaving your editor.
+
+<PromptExample
+  step={1}
+  prompt="Show me the top errors from the last 24 hours, sorted by number of affected users."
+  outcome="Returns the highest-impact issues so you can pick one to dig into."
+/>
+<PromptExample
+  step={2}
+  prompt="Pull the full stack trace and affected sessions for the top issue, then explain the likely root cause."
+  outcome="The agent grabs the trace plus session replays and reasons about what's failing."
+/>
+<PromptExample
+  step={3}
+  prompt="Create a feature flag called disable-broken-checkout rolled out to 100% of users, and wire it into the failing code path in this repo."
+  outcome="Creates the flag in PostHog and writes the guard into your codebase."
+/>
+<PromptExample
+  step={4}
+  prompt="Mark the issue as resolved and create an assignment rule so similar TypeErrors go to the backend team automatically."
+  outcome="Closes the loop on triage and prevents the next incident from going unowned."
+/>
+
+### Launch a feature with full experimentation
+
+Ship a new feature, measure its impact, and gate it behind opt-in access for early adopters – in one conversation.
+
+<PromptExample
+  step={1}
+  prompt="Create a feature flag called new-onboarding-flow and roll it out to 50% of users."
+  outcome="Creates the flag with the rollout configured."
+/>
+<PromptExample
+  step={2}
+  prompt="Create an A/B test on top of new-onboarding-flow that measures completion of the onboarding-completed event."
+  outcome="Sets up an experiment with the flag as the treatment and a funnel metric for completion."
+/>
+<PromptExample
+  step={3}
+  prompt="Create an early access feature called 'New onboarding' in beta stage so users can opt in via our feature previews UI."
+  outcome="Adds the early access entry and links it to the flag for self-service enrollment."
+/>
+<PromptExample
+  step={4}
+  prompt="Create a dashboard called 'Onboarding launch' with the experiment results, daily active users, and the onboarding funnel."
+  outcome="Builds a launch dashboard you can share with the team."
+/>
+
+### Diagnose a conversion drop
+
+Conversion is down – use MCP to figure out where users are dropping off, why, and what to do about it.
+
+<PromptExample
+  step={1}
+  prompt="Run a funnel from pageview on /pricing through clicked-checkout to completed-purchase over the last 14 days."
+  outcome="Identifies which step is bleeding users."
+/>
+<PromptExample
+  step={2}
+  prompt="For users who dropped off at the worst step, run a paths query showing where they went instead."
+  outcome="Surfaces the pages users escape to – often a clue to what's confusing them."
+/>
+<PromptExample
+  step={3}
+  prompt="Are there any errors or slow logs correlated with that drop-off page in the same time window?"
+  outcome="Cross-references error tracking and logs to see if the problem is technical, not just UX."
+/>
+<PromptExample
+  step={4}
+  prompt="Create an alert that pages me if the pricing-to-purchase conversion drops more than 10% week-over-week."
+  outcome="Sets up a guardrail so the next dip doesn't sit undiscovered."
+/>
+
+## Keep exploring
+
+- [Tools reference](/docs/model-context-protocol/tools) – every tool the MCP server exposes, grouped by category
+- [FAQ and advanced setup](/docs/model-context-protocol/faq) – auth, scoping, filtering, and other operational details
+- [Overview](/docs/model-context-protocol) – back to the MCP overview and install instructions

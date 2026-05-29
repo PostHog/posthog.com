@@ -12,7 +12,7 @@ We run two special programs for early-stage teams. The primary place for discuss
 | --------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
 | Eligibility                 | <2 years old, <$5M raised, not acquired               | Must be in YC, <$25m raised                           |
 | Credit                      | $50,000 for 12 months                                 | $50k per year, whilst eligible                        |
-| Can use credit for add-ons? | ⚠️ Yes, but cannot use credit for BAA in Boost add-on | ✅ Yes, and can use credit for BAA in Boost add-on     |
+| Can use credit for add-ons? | ⚠️ Yes, but cannot use credit for BAA in Boost package | ✅ Yes, and can use credit for BAA in Boost package    |
 | Founder merch               | Welcome pack (max 1)                                  | Different welcome pack (max 4)                        |
 | Community                   | —                                                     | Tim's Whatsapp, priority support                      |
 | Apply via…                  | [Startup page](/startups)                             | [Secret YC page](https://app.posthog.com/startups/yc) |
@@ -47,6 +47,8 @@ This program is similar to our startup program but has some key differences for 
 You can find the copy for the latest deal on Bookface in this [doc](https://docs.google.com/document/d/1dmsMxrfWSVhKZY4bQp5QIRiXS2iCvLGJah5EKWOvoeI/edit?tab=t.0#heading=h.o7fhsqrlnheo). To post updates, you need to ask James or Tim to do it.
 
 > This deal is not available to YC alumni, who started another company - if they're eligible, they can apply for PostHog for Startups instead
+
+> This deal is also not available if the YC company has been acquired by a non-YC parent. If an acquisition happens mid-term, existing credits can be honored until expiry but will not auto-renew. The acquiring company can apply for PostHog for Startups if eligible.
 
 > ✅ Credits **can** be used to claim a BAA under the Boost plan.
 

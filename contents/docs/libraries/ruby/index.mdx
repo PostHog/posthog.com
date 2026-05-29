@@ -58,7 +58,7 @@ Available client options:
 | `before_send` | Proc | `nil` | Callback that receives the event hash before it is queued or sent. Return a modified event hash, or `nil` to drop the event. |
 | `disable_singleton_warning` | Boolean | `false` | Suppress warnings about multiple clients with the same API key. Use only when you intentionally need multiple clients. |
 | `skip_ssl_verification` | Boolean | `false` | Disable SSL certificate verification. Intended only for local development or custom deployments. |
-| `flag_definition_cache_provider` | Object | `nil` | Experimental provider for distributed feature flag definition caching. See [distributed flag definition caching](#distributed-flag-definition-caching). |
+| `flag_definition_cache_provider` | Object | `nil` | Provider for distributed feature flag definition caching. See [distributed flag definition caching](#distributed-flag-definition-caching). |
 
 ### Filtering or modifying events before sending
 
@@ -231,7 +231,7 @@ end
 
 ### Distributed flag definition caching
 
-`flag_definition_cache_provider` is an experimental API for sharing locally evaluated feature flag definitions across multiple workers or processes. The provider object must implement:
+`flag_definition_cache_provider` shares locally evaluated feature flag definitions across multiple workers or processes. The provider object must implement:
 
 - `flag_definitions` – returns cached definitions as a hash with `:flags`, `:group_type_mapping`, and `:cohorts`, or `nil` if empty.
 - `should_fetch_flag_definitions?` – returns `true` if this process should fetch fresh definitions from PostHog.
@@ -245,8 +245,6 @@ posthog = PostHog::Client.new({
   flag_definition_cache_provider: my_cache_provider
 })
 ```
-
-Because this API is experimental, it may change in future minor versions.
 
 ### Remote config payloads
 

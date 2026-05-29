@@ -1,10 +1,8 @@
 ---
-title: Lore
+title: PostHog Lore and inside jokes
 sidebar: Handbook
 showTitle: true
 ---
-
-## Lore of PostHog / inside jokes
 
 A beginner's guide to some of our custom Slack emojis and various anecdotes you'll see and hear about.
 
