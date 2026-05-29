@@ -114,4 +114,6 @@ Treat inclusive language like any other naming feedback:
 
 Vale checks handbook and docs content for some inclusive language issues. The shared rule lives in `.vale/styles/PostHogBase/Inclusivity.yml`.
 
+Enable inclusive language linting in codebases whenever the ecosystem supports it. For example, Swift projects that use SwiftLint can enable its [`inclusive_language`](https://realm.github.io/SwiftLint/inclusive_language.html) rule.
+
 If you add a new pattern to this page and want it enforced automatically, update the Vale rule in the same PR. Keep automated checks focused on clear cases with low false positives.
