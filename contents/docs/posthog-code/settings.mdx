@@ -34,6 +34,14 @@ Connect GitHub, toggle which data sources feed your [Inbox](/docs/posthog-code/i
 
 New tasks start in Plan mode by default. You can change this to remember the last-used mode instead. There's also a keep-awake toggle that prevents macOS from sleeping while an agent is running.
 
+## PR babysitting
+
+When a task opens a pull request, PostHog Code can watch CI and re-run the agent to fix failed checks. This is called **PR babysitting**.
+
+The **Babysit PRs by default** toggle in user settings controls whether new tasks opt in automatically. You can override this per-task when creating it, or flip the **Babysit PR** toggle on the task detail page once a PR exists. You can also toggle it via the [Slack `babysit on|off` command](/docs/posthog-code/slack#pr-babysitting).
+
+Turning babysitting on mid-run resets the CI repetition counter, so the agent gets a fresh cap of follow-up attempts.
+
 ## Fun stuff
 
 - **Hedgehog mode** releases a PostHog hedgehog that walks around your screen

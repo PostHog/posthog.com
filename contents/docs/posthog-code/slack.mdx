@@ -65,6 +65,22 @@ The bot reacts to your `@PostHog` message as it works through your request, so y
 | 🦔 `:hedgehog:` | The agent finished and posted its reply in the thread |
 | ❌ `:x:` | Something went wrong – usually the sandbox stopped before the message could be delivered |
 
+## PR babysitting
+
+When a task opens a PR, PostHog Code can watch CI and re-run the agent to fix failed checks. Toggle this mid-run by replying in the task thread:
+
+```
+@PostHog babysit on
+```
+
+```
+@PostHog babysit off
+```
+
+Turning babysitting on resets the CI repetition counter, so the agent gets a fresh cap of follow-up attempts. If the task hasn't opened a PR yet, the command does nothing.
+
+The default for new tasks comes from your [user settings](/docs/posthog-code/settings#pr-babysitting). You can override it per-task at creation time or flip the in-app toggle once a PR exists.
+
 ## Routing rules and default repo
 
 If you work across many repos, you can teach the bot how to pick a repo intelligently. Run these as mentions:
