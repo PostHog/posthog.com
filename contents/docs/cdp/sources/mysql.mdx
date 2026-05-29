@@ -37,6 +37,28 @@ The data warehouse then starts syncing your MySQL data. You can see details and 
 
 <SourceParameters />
 
+## Selecting columns
+
+By default, PostHog syncs all columns from each table. To sync only specific columns:
+
+1. During source setup, click **Columns** next to any table in the table picker.
+2. Uncheck columns you don't want to sync.
+3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
+
+You can also change column selection after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your MySQL source.
+2. Click **Configure** next to any schema.
+3. Under **Columns**, select which columns to sync.
+
+<CalloutBox icon="IconInfo" title="Adding columns to existing syncs" type="fyi">
+
+When you add columns to a schema using incremental or append sync, PostHog prompts you to choose:
+
+- **Sync forward only** - New columns are populated only for future data. Existing rows show `NULL` for the new columns.
+- **Full resync** - Triggers a complete resync to backfill the new columns for all rows.
+
+</CalloutBox>
 <CalloutBox icon="IconWarning" title="Decimal precision limits" type="caution">
 
 Numeric or decimal columns with values exceeding a precision of 76 or scale of 32 cannot be synced. If your sync fails with this error, you have three options:
