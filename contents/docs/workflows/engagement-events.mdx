@@ -1,0 +1,57 @@
+---
+title: Email engagement events
+sidebar: Docs
+showTitle: true
+---
+
+PostHog Workflows can capture email engagement activity as standard PostHog events, in addition to the per-step workflow metrics that are always recorded. Once enabled, every email step in every workflow emits these events for the recipient, so you can build insights, funnels, retention reports, and dashboards from messaging data the same way you would for any other product event.
+
+This is an **opt-in** setting at the project level. By default no engagement events are emitted; existing workflow metrics keep working unchanged.
+
+## Enable engagement events
+
+Go to **Settings → Workflows → Engagement events** and toggle **Capture email engagement events** on. You can also enable it inline from the email step in the workflow builder, the toggle in settings is the same setting.
+
+The setting takes effect immediately for all future email sends in the project. Emails that were already sent before you enabled it won't backfill, but webhook callbacks (opens, clicks, bounces) for those in-flight messages will still produce engagement events going forward.
+
+## Events emitted
+
+Every event below is captured as a standard PostHog event under the recipient's distinct ID. They appear in the event explorer, insights builder, and any other place PostHog events are available.
+
+| Event | When it fires |
+| --- | --- |
+| `$messaging_email_sent` | The workflow handed the email to the upstream provider (e.g. SES, Mailjet) for delivery. |
+| `$messaging_email_delivered` | The upstream provider confirmed the message was accepted by the recipient's mail server. |
+| `$messaging_email_opened` | The recipient opened the email. Detected via the tracking pixel embedded in the HTML body, so requires the recipient's mail client to load remote images. |
+| `$messaging_email_link_clicked` | The recipient clicked a tracked link in the email body. |
+| `$messaging_email_bounced` | The provider reported a hard or soft bounce (invalid address, mailbox full, etc.). |
+| `$messaging_email_blocked` | The recipient marked the email as spam, or the recipient address is on a suppression list. |
+| `$messaging_email_failed` | The send failed for another reason (provider error, malformed request, transient outage). |
+
+Open, click, bounce, block, and failure events depend on the upstream provider sending webhook callbacks to PostHog. If you're using your own SMTP relay without callback support, only `_sent` will fire.
+
+## Building insights from engagement events
+
+Because these are standard events, you can use them anywhere PostHog events are available:
+
+- **Trends**: chart `$messaging_email_opened` over time, broken down by workflow ID or email subject.
+- **Funnels**: measure the path from `$messaging_email_sent` → `$messaging_email_opened` → `$messaging_email_link_clicked` → a downstream product conversion event.
+- **Retention**: cohort recipients who received an email last week and see how many returned to the product.
+- **Dashboards**: combine engagement metrics with revenue or feature-flag exposure to attribute messaging impact.
+
+## Properties on engagement events
+
+Each event carries identifying properties so you can filter and break down by workflow, step, and message:
+
+- `workflow_id` — the HogFlow that sent the email
+- `workflow_action_id` — the specific email step inside the workflow
+- `invocation_id` — the per-recipient send identifier (matches the workflow metrics row)
+- `message_id` — the upstream provider's message identifier (where available)
+
+## Relationship to workflow metrics
+
+Workflow metrics (the per-step success/failure counters you see on the workflow page) keep working exactly as before. Engagement events are an *additional* signal, not a replacement, so you can use both: workflow metrics for operational dashboards inside Workflows, engagement events for cross-product analysis everywhere else in PostHog.
+
+## Privacy and cost
+
+Engagement events count toward your PostHog event ingestion just like any other event. If you send a high volume of email, enabling this can meaningfully increase event volume. You can disable the setting at any time and the workflow will fall back to metrics-only without any other configuration change.
