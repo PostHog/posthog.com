@@ -59,7 +59,7 @@ This is when you start working with your customers. Reach out, take the first ca
 - Picking up customer questions and tickets as they come in - this is where the bulk of customer work happens. See [handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues) for how tickets flow.
 - Evaluating implementations as you go - is the customer set up well, are they getting value? The [foundation check](/handbook/cs-and-onboarding/foundation-check) and [health check](/handbook/cs-and-onboarding/health-checks) are the structured ways to do this.
 - Refining your demo with each conversation.
-- Starting to respond to Vitally signals on your book - what triggers your attention, what's the right next move? You'll feel confused at first, and that's fine, the goal is to start building a feel for it. *[link: responding-to-signals.md when written]*
+- Starting to respond to Vitally signals on your book - what triggers your attention, what's the right next move? You'll feel confused at first, and that's fine, the goal is to start building a feel for it.
 
 **Ship your first handbook PR.** Somewhere along the way you'll find a gap or mistake in the handbook, or want to add a new page entirely. Write it up and open a PR. The point isn't the PR itself, it's that the handbook only stays useful if everyone adds to it. Not knowing something isn't a failing, but leaving it undocumented for the next person is.
 
