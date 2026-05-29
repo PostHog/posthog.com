@@ -1,0 +1,40 @@
+---
+title: PostHog Code settings
+---
+
+PostHog Code surfaces a lot of configuration that you'd normally manage through a CLI or config files. This page calls out the highlights, not every toggle.
+
+## Notifications
+
+Choose how PostHog Code gets your attention when an agent finishes or needs input: push notifications, dock badge, dock bounce, or a completion sound effect. There are 11 sounds to pick from and a volume slider with an inline test button.
+
+## Custom instructions
+
+A freeform text field injected into every agent session. Use it for things like "always write tests" or "prefer functional patterns."
+
+## MCP servers
+
+A built-in marketplace for discovering, installing, and managing MCP servers. Per-tool approval policies let you approve, block, or require confirmation for individual tools.
+
+## Environments
+
+Local environments define setup scripts that run when a new worktree is created, so the agent lands in a project that's already installed and ready. They're stored as TOML and committable, so your team shares the same config.
+
+Cloud environments control network access rules and environment variables for remote sandbox sessions.
+
+## Worktrees
+
+Configure auto-suspension to reclaim disk space from stale worktrees. Set a max active count and an inactivity threshold. Suspended worktrees restore on demand.
+
+## Signals
+
+Connect GitHub, toggle which data sources feed your [Inbox](/docs/posthog-code/inbox), and set a priority threshold (P0 through P4) that controls when the agent auto-starts tasks assigned to you.
+
+## Task defaults
+
+New tasks start in Plan mode by default. You can change this to remember the last-used mode instead. There's also a keep-awake toggle that prevents macOS from sleeping while an agent is running.
+
+## Fun stuff
+
+- **Hedgehog mode** releases a PostHog hedgehog that walks around your screen
+- **Sound effects** range from professional to completely unhinged

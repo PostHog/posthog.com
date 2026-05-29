@@ -18,6 +18,7 @@ interface TreeMenuProps {
     items: MenuItem[]
     activeItem?: MenuItem
     watchPath?: boolean
+    activeUrl?: string
 }
 
 const TreeLink = ({
@@ -70,11 +71,11 @@ const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefi
 }
 
 export function TreeMenu(props: TreeMenuProps) {
-    const { watchPath = true } = props
+    const { watchPath = true, activeUrl } = props
     const { appWindow } = useWindow()
     const { pathname } = useLocation()
     const [activeItem, setActiveItem] = useState<MenuItem | undefined>(
-        props.activeItem || getActiveItem(props.items || [], pathname)
+        props.activeItem || getActiveItem(props.items || [], activeUrl ?? pathname)
     )
 
     const handleClick = (item: MenuItem) => {
@@ -85,9 +86,9 @@ export function TreeMenu(props: TreeMenuProps) {
 
     useEffect(() => {
         if (watchPath) {
-            setActiveItem(getActiveItem(items || [], appWindow?.path || pathname))
+            setActiveItem(getActiveItem(items || [], activeUrl ?? appWindow?.path ?? pathname))
         }
-    }, [appWindow?.path])
+    }, [appWindow?.path, activeUrl])
 
     return (
         <div className="not-prose space-y-px">

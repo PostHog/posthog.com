@@ -1,24 +1,130 @@
-### Boolean feature flags
+There are two steps to implement feature flags in Java:
+
+### Step 1: Evaluate flags once
+
+Call `posthog.evaluateFlags()` once for the user, then read values from the returned snapshot.
+
+#### Boolean feature flags
 
 ```java
-if (posthog.isFeatureEnabled("distinct_id_of_your_user", "flag-key")) {
+PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags("distinct_id_of_your_user");
+
+if (flags.isEnabled("flag-key")) {
     // Do something differently for this user
 
     // Optional: fetch the payload
-    Object matchedFlagPayload = posthog.getFeatureFlagPayload("distinct_id_of_your_user", "flag-key");
+    String matchedFlagPayload = flags.getFlagPayload("flag-key");
 }
 ```
 
-### Multivariate feature flags
+#### Multivariate feature flags
 
 ```java
-if ("variant-key".equals(posthog.getFeatureFlag("distinct_id_of_your_user", "flag-key"))) { // replace 'variant-key' with the key of your variant
+PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags("distinct_id_of_your_user");
+
+Object flagValue = flags.getFlag("flag-key");
+String enabledVariant = flagValue instanceof String ? (String) flagValue : null;
+
+if ("variant-key".equals(enabledVariant)) { // replace "variant-key" with the key of your variant
     // Do something differently for this user
 
     // Optional: fetch the payload
-    Object matchedFlagPayload = posthog.getFeatureFlagPayload("distinct_id_of_your_user", "flag-key");
+    String matchedFlagPayload = flags.getFlagPayload("flag-key");
 }
 ```
+
+`flags.getFlag()` returns the variant string for multivariate flags, `true` for enabled boolean flags, `false` for disabled flags, and `null` when the flag wasn't returned by the evaluation.
+
+> **Note:** `posthog.isFeatureEnabled()`, `posthog.getFeatureFlag()`, `posthog.getFeatureFlagPayload()`, and `PostHogCaptureOptions.builder().appendFeatureFlags(true)` still work during the migration period, but they're deprecated. Prefer `evaluateFlags()` for new code.
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
+
+<IncludePropertyInEvents />
+
+There are two methods you can use to include feature flag information in your events:
+
+#### Method 1: Pass the evaluated flags snapshot to `capture()`
+
+Pass the same `flags` object that you used for branching. This attaches the exact flag values from that evaluation and doesn't make another `/flags` request.
+
+```java
+PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags("distinct_id_of_your_user");
+
+if (flags.isEnabled("flag-key")) {
+    // Do something differently for this user
+}
+
+posthog.capture(
+    "distinct_id_of_your_user",
+    "event_name",
+    PostHogCaptureOptions.builder()
+        .flags(flags)
+        .build()
+);
+```
+
+By default, this attaches every flag in the snapshot using `$feature/<flag-key>` properties and `$active_feature_flags`.
+
+To reduce event property bloat, pass a filtered snapshot:
+
+```java
+// Attach only flags accessed with isEnabled() or getFlag() before this call
+posthog.capture(
+    "distinct_id_of_your_user",
+    "event_name",
+    PostHogCaptureOptions.builder()
+        .flags(flags.onlyAccessed())
+        .build()
+);
+
+// Attach only specific flags
+posthog.capture(
+    "distinct_id_of_your_user",
+    "event_name",
+    PostHogCaptureOptions.builder()
+        .flags(flags.only("checkout-flow", "new-dashboard"))
+        .build()
+);
+```
+
+`onlyAccessed()` is order-dependent. If you call it before accessing any flags with `isEnabled()` or `getFlag()`, no feature flag properties are attached.
+
+#### Method 2: Include the `$feature/feature_flag_name` property manually
+
+In the event properties, include `$feature/feature_flag_name: variant_key`:
+
+```java
+posthog.capture(
+    "distinct_id_of_your_user",
+    "event_name",
+    PostHogCaptureOptions.builder()
+        .property("$feature/feature-flag-key", "variant-key") // replace feature-flag-key with your flag key. Replace "variant-key" with the key of your variant
+        .build()
+);
+```
+
+### Evaluating only specific flags
+
+By default, `evaluateFlags()` evaluates every flag for the user. If you only need a few flags, pass `flagKeys` to request only those flags:
+
+```java
+import java.util.Arrays;
+
+PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags(
+    "distinct_id_of_your_user",
+    PostHogEvaluateFlagsOptions.builder()
+        .flagKeys(Arrays.asList("checkout-flow", "new-dashboard"))
+        .build()
+);
+```
+
+### Sending `$feature_flag_called` events
+
+Capturing `$feature_flag_called` events enables PostHog to know when a flag was accessed by a user and provide [analytics and insights](/docs/product-analytics/insights) on the flag. With `evaluateFlags()`, the SDK sends this event when you call `flags.isEnabled()` or `flags.getFlag()` for a flag.
+
+The SDK deduplicates these events per `(distinct_id, flag, value)` in a local cache. If you reinitialize the PostHog client, the cache resets and `$feature_flag_called` events may be sent again. PostHog handles duplicates, so duplicate `$feature_flag_called` events don't affect your analytics.
+
+`flags.getFlagPayload()` doesn't send `$feature_flag_called` events and doesn't count as an access for `onlyAccessed()`.
 
 import JavaOverrideServerProperties from './override-server-properties/java.mdx'
 

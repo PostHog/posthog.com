@@ -83,6 +83,56 @@ client.Enqueue(posthog.Alias{
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
+## Request context
+
+Use request context to apply a distinct ID, session ID, and common request properties to capture and exception events inside a `net/http` request. This is useful when connecting frontend activity to backend events, session replay, error tracking, and feature flag evaluation.
+
+If you're using PostHog on your frontend, enable tracing headers for your backend domain:
+
+```js
+posthog.init('<ph_project_token>', {
+    __add_tracing_headers: ['your-backend-domain.com']
+})
+```
+
+Then wrap your handler with `NewRequestContextMiddleware` and use the context-aware helpers:
+
+```go
+handler := posthog.NewRequestContextMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+    flags, err := posthog.EvaluateFlagsWithContext(r.Context(), client, posthog.EvaluateFlagsPayload{})
+    if err != nil {
+        // If neither the request context nor payload has a distinct ID,
+        // err is posthog.ErrNoDistinctID.
+    }
+
+    _ = posthog.EnqueueWithContext(r.Context(), client, posthog.Capture{
+        Event: "checkout started",
+        Flags: flags,
+    })
+}))
+```
+
+The middleware adds `$current_url`, `$request_method`, `$request_path`, `$user_agent`, and `$ip` properties. By default, it also reads `X-PostHog-Distinct-Id` and `X-PostHog-Session-Id` as request-scoped defaults. Explicit `DistinctId` values and `$session_id` properties passed to captures take precedence over request context.
+
+If request context is attached but no distinct ID is available, capture and exception events are sent as [personless events](/docs/data/anonymous-vs-identified-events) with an auto-generated UUID and `$process_person_profile: false`. Calls to `Enqueue` without request context still require `DistinctId`. `EvaluateFlagsWithContext` uses the request-scoped distinct ID when `EvaluateFlagsPayload.DistinctId` is empty, but it never generates personless IDs and returns `ErrNoDistinctID` when no distinct ID is available.
+
+Tracing headers are client-controlled analytics context, not authentication or authorization. For security-sensitive server-side decisions, pass an authenticated `DistinctId` explicitly or attach one to the request context:
+
+```go
+ctx := posthog.WithRequestContext(r.Context(), posthog.RequestContext{
+    DistinctId: user.ID,
+})
+```
+
+To ignore tracing headers while keeping request metadata, disable tracing header capture:
+
+```go
+handler := posthog.NewRequestContextMiddleware(
+    next,
+    posthog.WithCaptureTracingHeaders(false),
+)
+```
+
 ## Feature flags
 
 import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
@@ -103,17 +153,18 @@ For details on how to implement local evaluation, see our [local evaluation guid
 
 ## Experiments (A/B tests)
 
-Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 
 ```go
-variant, err := client.GetFeatureFlag(posthog.FeatureFlagPayload{
-    Key:        "experimentfeature-flag-name",
+flags, err := client.EvaluateFlags(posthog.EvaluateFlagsPayload{
     DistinctId: "user_distinct_id",
 })
 if err != nil {
     // Handle error (e.g. capture error and fallback to default behavior)
 }
+variant := flags.GetFlag("experiment-feature-flag-key")
+
 if variant == "variant-name" {
     // Do something
 }

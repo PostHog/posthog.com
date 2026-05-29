@@ -7,12 +7,18 @@ import ArenaLogo from '../components/CustomerLogos/ArenaLogo'
 import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
 import BrainboardLogo from '../components/CustomerLogos/BrainboardLogo'
 import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
+import ClerkLogo from '../components/CustomerLogos/ClerkLogo'
+import CloudPeekLogo from '../images/customers/CloudPeek_Final_Logo_Transparent.png'
+import CloudPeekLogoDark from '../images/customers/CloudPeek_Full_Logo_-_White_Transparent.png'
 import ContraLogo from '../components/CustomerLogos/ContraLogo'
 import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
+import ConvexLogo from '../components/CustomerLogos/ConvexLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
+import ExaLogo from 'components/CustomerLogos/ExaLogo'
 import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
 import GrantableLogo from '../components/CustomerLogos/GrantableLogo'
+import GreptileLogo from '../components/CustomerLogos/GreptileLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
@@ -26,8 +32,10 @@ import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
+import NationalDesignStudioLogo from '../components/CustomerLogos/NationalDesignStudioLogo'
 import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
 import OpenSaucedLogo from '../components/CustomerLogos/OpenSaucedLogo'
+import PaperLogo from '../components/CustomerLogos/PaperLogo'
 import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
 import PostHogLogo from '../components/CustomerLogos/PostHogLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
@@ -38,6 +46,7 @@ import RayfitLogoDark from '../images/customers/rayfitLogodark.png'
 import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
+import ResendLogo from '../components/CustomerLogos/ResendLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
 import SupedLogo from '../images/customers/suped-light.png'
 import SupedLogoDark from '../images/customers/suped-dark.png'
@@ -46,14 +55,16 @@ import SquadSVenturesLogo from '../components/CustomerLogos/SquadSVenturesLogo'
 import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
 import SupabaseLogo from '../components/CustomerLogos/SupabaseLogo'
 import TrustWalletLogo from '../components/CustomerLogos/TrustWalletLogo'
+import UKGovtLogo from '../components/CustomerLogos/UKGovtLogo'
 import VendastaLogo from '../components/CustomerLogos/VendastaLogo'
 import WebshareLogo from '../components/CustomerLogos/WebshareLogo'
+import WisprFlowLogo from 'components/CustomerLogos/WisprFlow'
 import WittyWorksLogo from '../components/CustomerLogos/WittyWorksLogo'
 import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
-import ExaLogo from 'components/CustomerLogos/ExaLogo'
+import JaxxonLogo from 'components/CustomerLogos/JaxxonLogo'
 
 export interface Customer {
     slug: string
@@ -165,7 +176,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         // users: [], // TODO: Add users
         notes: 'They make airplanes',
         logo: AirbusLogo,
-        height: 9,
+        height: 8,
         featured: true,
     },
     assemblyai: {
@@ -241,6 +252,44 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         height: 10,
     },
+    clerk: {
+        name: 'Clerk',
+        toolsUsed: ['feature_flags', 'session_replay', 'product_analytics', 'cdp', 'data_warehouse', 'posthog_ai'],
+        industries: ['SaaS'],
+        // users: ['Product', 'Engineering'],
+        notes: 'Identity and access management',
+        logo: ClerkLogo,
+        featured: true,
+        height: 9,
+    },
+    cloudpeek: {
+        name: 'CloudPeek',
+        toolsUsed: ['logs', 'error_tracking', 'llm_analytics'],
+        industries: ['Cybersecurity'],
+        users: ['Engineering'],
+        notes: 'Agentic AI platform for cybersecurity',
+        featured: false,
+        logo: {
+            light: CloudPeekLogo,
+            dark: CloudPeekLogoDark,
+        },
+        height: 10,
+        quotes: {
+            craig_hollington: {
+                name: 'Craig Hollington',
+                role: 'CTO',
+                image: {
+                    thumb: '/images/customers/craig-hollington.png',
+                },
+                quotes: [
+                    "We're probably five to ten times faster at debugging now, and it's enabled us to collaboratively work on issues as a team in a way we just couldn't before.",
+                    'We spot an exception in Error Tracking and pivot straight into Logs to understand the full context of what went wrong. That link between the two is huge for us.',
+                    "We used to get exception logs come through on PostHog, and then I'd have to log onto the server manually and search our log files which were written locally.",
+                    "We automatically get AI to write triage scripts and fire them to see what works, and then from there we review the log files to see what it did and what it didn't do.",
+                ],
+            },
+        },
+    },
     contra: {
         name: 'Contra',
         toolsUsed: ['feature_flags', 'session_replay', 'product_analytics'],
@@ -249,6 +298,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Creative freelance marketplace',
         logo: ContraLogo,
         featured: false,
+        height: 8,
+    },
+    convex: {
+        name: 'Convex',
+        toolsUsed: [],
+        industries: ['SaaS'],
+        users: [],
+        notes: 'Backend web app platform',
+        logo: ConvexLogo,
+        featured: true,
         height: 8,
     },
     creatify: {
@@ -263,80 +322,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         },
         height: 12,
         featured: false,
-    },
-    elevenlabs: {
-        name: 'ElevenLabs',
-        toolsUsed: ['feature_flags', 'product_analytics', 'surveys'],
-        industries: ['AI'],
-        users: ['Marketing', 'Growth', 'Engineering'],
-        notes: 'AI voice generator',
-        logo: ElevenLabsLogo,
-        height: 8,
-        featured: true,
-    },
-    exa: {
-        name: 'Exa',
-        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
-        industries: ['AI', 'Search'],
-        users: ['Engineering', 'Product'],
-        notes: 'Search API for AI products',
-        logo: ExaLogo,
-        height: 10,
-        featured: true,
-    },
-    gankster: {
-        name: 'Gankster',
-        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
-        industries: ['Gaming'],
-        users: ['Engineering', 'Growth', 'Marketing'],
-        notes: 'Gaming platform',
-        featured: false,
-        logo: GanksterLogo,
-        height: 10,
-    },
-    'great-expectations': {
-        name: 'Great Expectations',
-        toolsUsed: ['product_analytics'],
-        industries: ['SaaS', 'Data'],
-        users: ['Growth', 'Engineering', 'Product', 'Marketing'],
-        notes: 'Data quality SaaS platform',
-        featured: false,
-        // logo: GreatExpectationsLogo, // TODO: Create SVG component
-        legacyLogo: 'https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_light_ce286f1955.png',
-        legacyLogoDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_dark_5a1dba99f7.png',
-    },
-    grantable: {
-        name: 'Grantable',
-        toolsUsed: [
-            'workflows_emails',
-            'feature_flags',
-            'session_replay',
-            'experiments',
-            'product_analytics',
-            'surveys',
-            'error_tracking',
-            'llm_analytics',
-            'data_warehouse',
-        ],
-        industries: ['SaaS'],
-        users: ['Data', 'Product', 'Marketing'],
-        notes: 'AI compliance and grant writing',
-        featured: false,
-        logo: GrantableLogo,
-        height: 6,
-        quotes: {
-            evan_ralliss: {
-                name: 'Evan Ralliss',
-                role: 'Head of Product & Growth',
-                image: {
-                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/evan_rallis_08cffd54f7.jpeg',
-                },
-                products: {
-                    workflows:
-                        'PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.',
-                },
-            },
-        },
     },
     croissant: {
         name: 'Croissant',
@@ -393,29 +378,77 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
-    suped: {
-        name: 'Suped',
-        toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
-        industries: ['SaaS'],
-        users: ['Leadership', 'Product', 'Engineering'],
-        notes: 'Email authentication and deliverability platform',
+    elevenlabs: {
+        name: 'ElevenLabs',
+        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'surveys'],
+        industries: ['AI'],
+        users: ['Marketing', 'Growth', 'Engineering'],
+        notes: 'AI voice generator',
+        logo: ElevenLabsLogo,
+        height: 8,
+        featured: true,
+    },
+    exa: {
+        name: 'Exa',
+        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
+        industries: ['AI', 'Search'],
+        users: ['Engineering', 'Product'],
+        notes: 'Search API for AI products',
+        logo: ExaLogo,
+        height: 9,
+        featured: true,
+    },
+    gankster: {
+        name: 'Gankster',
+        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
+        industries: ['Gaming'],
+        users: ['Engineering', 'Growth', 'Marketing'],
+        notes: 'Gaming platform',
         featured: false,
-        logo: {
-            light: SupedLogo,
-            dark: SupedLogoDark,
-        },
+        logo: GanksterLogo,
+        height: 10,
+    },
+    'great-expectations': {
+        name: 'Great Expectations',
+        toolsUsed: ['product_analytics'],
+        industries: ['SaaS', 'Data'],
+        users: ['Growth', 'Engineering', 'Product', 'Marketing'],
+        notes: 'Data quality SaaS platform',
+        featured: false,
+        // logo: GreatExpectationsLogo, // TODO: Create SVG component
+        legacyLogo: 'https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_light_ce286f1955.png',
+        legacyLogoDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_dark_5a1dba99f7.png',
+    },
+    grantable: {
+        name: 'Grantable',
+        toolsUsed: [
+            'workflows_emails',
+            'feature_flags',
+            'session_replay',
+            'experiments',
+            'product_analytics',
+            'surveys',
+            'error_tracking',
+            'llm_analytics',
+            'data_warehouse',
+        ],
+        industries: ['SaaS'],
+        users: ['Data', 'Product', 'Marketing'],
+        notes: 'AI compliance and grant writing',
+        featured: false,
+        logo: GrantableLogo,
         height: 6,
         quotes: {
-            michael_ko: {
-                name: 'Michael Ko',
-                role: 'Co-founder & CEO',
+            evan_ralliss: {
+                name: 'Evan Ralliss',
+                role: 'Head of Product & Growth',
                 image: {
-                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/suped/michael-suped.png',
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/evan_rallis_08cffd54f7.jpeg',
                 },
-                quotes: [
-                    "Product data was in PostHog, and messaging logic was somewhere else. Every time we wanted to use a new event or property in a campaign, we had to make sure it was synced properly. It's manageable, but it's extra coordination that doesn't really add value.",
-                    "The biggest win is that the data's already there. All our events, all our user properties – we don't have to push them anywhere. We're building automation directly on top of the same events we use for analytics. There's no translation layer.",
-                ],
+                products: {
+                    workflows:
+                        'PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.',
+                },
             },
         },
     },
@@ -445,6 +478,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 ],
             },
         },
+    },
+    greptile: {
+        name: 'Greptile',
+        // toolsUsed: ['product_analytics'],
+        industries: ['SaaS'],
+        // users: ['Engineering', 'Product'],
+        notes: 'AI code reviewer',
+        logo: GreptileLogo,
+        featured: true,
+        height: 10,
     },
     groove: {
         name: 'Groove',
@@ -484,7 +527,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [], // TODO: Add toolsUsed
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
-        notes: 'AI video editor',
+        notes: 'AI video generator',
         logo: HeygenLogo,
         featured: true,
         height: 12,
@@ -520,6 +563,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 ],
             },
         },
+    },
+    jaxxon: {
+        name: 'Jaxxon',
+        // toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
+        industries: ['Fashion'],
+        // users: ['Engineering', 'Leadership', 'Founders'],
+        notes: "Men's chains & accessories",
+        featured: true,
+        logo: JaxxonLogo,
+        height: 12,
     },
     juicebox: {
         name: 'Juicebox',
@@ -561,6 +614,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 12,
         featured: true,
     },
+    nationaldesignstudio: {
+        name: 'National Design Studio',
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
+        notes: 'Design studio of the US Government',
+        logo: NationalDesignStudioLogo,
+        featured: true,
+        height: 11,
+    },
     netdata: {
         name: 'Netdata',
         toolsUsed: ['session_replay', 'product_analytics'],
@@ -591,6 +654,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: OpenSaucedLogo,
         featured: false,
         height: 10,
+    },
+    paper: {
+        name: 'Paper',
+        toolsUsed: ['session_replay'],
+        industries: ['SaaS'],
+        users: ['Leadership', 'Product', 'Engineering'],
+        notes: 'Design tool',
+        logo: PaperLogo,
+        featured: true,
+        height: 11,
     },
     phantom: {
         name: 'Phantom',
@@ -684,7 +757,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'The MacOS Spotlight that Apple should have built',
         logo: RaycastLogo,
         featured: true,
-        height: 12,
+        height: 11,
     },
     rayfit: {
         name: 'RayFit',
@@ -729,6 +802,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: ResearchGateLogo,
         height: 8,
         featured: true,
+    },
+    resend: {
+        name: 'Resend',
+        // toolsUsed: ['product_analytics', 'experiments'],
+        notes: 'Email delivery service',
+        logo: ResendLogo,
+        featured: true,
+        height: 7,
     },
     significa: {
         name: 'Significa',
@@ -796,6 +877,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: true,
         height: 10,
     },
+    suped: {
+        name: 'Suped',
+        toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
+        industries: ['SaaS'],
+        users: ['Leadership', 'Product', 'Engineering'],
+        notes: 'Email authentication and deliverability platform',
+        featured: false,
+        logo: {
+            light: SupedLogo,
+            dark: SupedLogoDark,
+        },
+        height: 6,
+        quotes: {
+            michael_ko: {
+                name: 'Michael Ko',
+                role: 'Co-founder & CEO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/michael_suped_7544dceb29.jpeg',
+                },
+                quotes: [
+                    "Product data was in PostHog, and messaging logic was somewhere else. Every time we wanted to use a new event or property in a campaign, we had to make sure it was synced properly. It's manageable, but it's extra coordination that doesn't really add value.",
+                    "The biggest win is that the data's already there. All our events, all our user properties – we don't have to push them anywhere. We're building automation directly on top of the same events we use for analytics. There's no translation layer.",
+                ],
+            },
+        },
+    },
     startengine: {
         name: 'StartEngine',
         toolsUsed: [], // TODO: Add toolsUsed
@@ -816,6 +923,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: true,
         height: 10,
     },
+    ukgovt: {
+        name: 'UK Government',
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
+        notes: 'Most popular country with a King',
+        logo: UKGovtLogo,
+        featured: true,
+        height: 9,
+    },
     vendasta: {
         name: 'Vendasta',
         toolsUsed: ['experiments', 'cdp'],
@@ -835,6 +952,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: WebshareLogo,
         featured: false,
         height: 10,
+    },
+    wisprflow: {
+        name: 'WisprFlow',
+        //toolsUsed: [''],
+        //industries: ['Devtool'],
+        // users: ['Marketing', 'Leadership', 'Customer Success'],
+        notes: 'AI voice dictation',
+        logo: WisprFlowLogo,
+        featured: true,
+        height: 9,
     },
     wittyworks: {
         name: 'Witty Works',

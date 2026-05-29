@@ -30,7 +30,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
  - Confirm that you have been added as a member to the [PostHog organization in GitHub](https://github.com/PostHog?view_as=member). [Fraser](/community/profiles/30207) can add you if you haven't.
  - Work your way through your GitHub onboarding issue that a member of the <SmallTeam slug="people" /> should have created and sent a link to.
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
- - Check out some [BuildBetter](https://app.buildbetter.app/) and [Gong](https://us-26000.app.gong.io/home?workspace-id=8823646477612786274) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
+ - Check out some [BuildBetter](https://app.buildbetter.app/) and [Gong](https://us-26000.app.gong.io/library/company?workspace-id=8823646477612786274&folder-id=5690024503570726123) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practice a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
    - For familiarization and self-led training, follow the [product curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You work through this with the [HogFlix Demo 3000 project](https://us.posthog.com/project/99423/dashboard), which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
@@ -39,7 +39,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 
 ## Week 2
 
-- Shadow more live calls and listen to more [BuildBetter](https://app.buildbetter.app/) recordings.
+- Shadow more live calls and listen to more [BuildBetter](https://app.buildbetter.app/) recordings. Check out our [Onboarding folder](https://app.buildbetter.app/folders/14521), where you can also find sessions on productivity and workflows.
 - Explore Vitally and [Metabase](https://posthog.com/handbook/onboarding/metabase-account-analysis) – take note of any questions you have to go through during in-person onboarding.
 - Try running through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise) that [Kaya](/community/profiles/34037) designed to test your skills for working with customer accounts.
 - Towards the end of the week, schedule a demo and feedback session with Magda. We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
@@ -74,18 +74,20 @@ Detailed training plan available in the [new hire onboarding checklist](https://
 **By the end of month 1:**
  - You continue learning from the received feedback.
  - You have a good grasp of our internal processes and workflows.
+ - You've embraced PostHog's culture: You're the driver, you take initiative, prioritize your time well, and work independently.
  - You lead customer calls on your own.
- - You convert customers to 'Onboarded'.
+ - You should consistently craft a minimum of 10 outreach messages per day, without compromising on quality, style, or accuracy.
+ - You don't let accounts fall through the cracks before their renewal.
  - You pass well-qualified opportunities to Sales via the `Onboarding referral` segment.
 
 **By the end of month 2:**
  - You're a PostHog power user - most questions you raise can only be answered by product engineers rather than the support team.
- - You fully participate in team discussions and contribute to team projects.
+ - You should show steady growth in both call volume and outreach activity, with a minimum of 15 outreach emails sent per day.
+ - You fully participate in team discussions and contribute to team projects. You raise the bar.
 
 **By the end of month 3:**
  - You've implemented process and system-level changes to make your job better/more effective.
- - You're the driver, you take initiative, prioritize your time well, and work independently.
- - The quality of your outreach is up to the company's standard. 
+ - You surface ideas contributing to the growth of the team.
  - Customers are happy after interacting with you, and you meaningfully contribute to their success.
 
 ### General expectations
@@ -101,6 +103,7 @@ Our customers are always central to our work. There’s time and space to work o
 - Do the [Sales handoff](https://posthog.com/handbook/onboarding/sales-handover) where appropriate and always provide context on the customer.
 - Maintain the hygiene - follow the process in Vitally, add notes, or tasks when necessary. Remember that we share the workspace, so keep the order.
 - You’re the driver, so take initiative. Keep in mind improvements, optimization, process, or content updates as you go. Don’t be afraid to voice your ideas.
+- AI should never be a substitute for learning. Use it to increase efficiency, but don't follow it blindly.
 
 **Communication and ownership**
 
@@ -109,7 +112,7 @@ Our customers are always central to our work. There’s time and space to work o
 - Publish your Sprint planning update on time. It should be done on Monday at the latest, so that others have time to read it before the Sprint planning call.
 - Be yourself and stay human. Don’t send AI-generated emails to customers. 
 - Set an autoresponder in your inbox whenever you take a longer time off, and direct your customers to `onboarding@posthog.com` so that we can pick up your conversations.
-- Share your knowledge! Share what you learnt, or found out - the whole team will benefit from it.
+- Share your knowledge! Share what you learned, or found out - the whole team will benefit from it.
 - Don’t be late for calls. It’s rude, the same as eating on them. 
 - Use the Time Off tool to communicate your absence in advance.
 - Keep your promises. If you promised to follow up with a customer or colleague, or work on a project, do it.
@@ -119,7 +122,7 @@ Our customers are always central to our work. There’s time and space to work o
 
 Everything at PostHog changes really fast. That's how to keep up as a start:
 
-- Follow #tell-posthog-anything daily for general announcements.
+- Follow #tell-posthog-anything and #demo-posthog-anything daily for general announcements.
 - Follow #cs-sales-support channel daily - it's crucial for all folks in customer-facing roles.
 - Stay on top of the #incidents channel to know what’s going on and be able to inform customers.
 - From time to time, it’s worth taking a look at #sales, #customer-success, #team-new-business-sales, #team-product-led-sales to get inspired by new ideas that other customer-facing folks implement, and what’s going on in general 
@@ -127,5 +130,5 @@ Everything at PostHog changes really fast. That's how to keep up as a start:
 - #today-i-learnt set up by Daniel, great for sharing and learning new things.
 - Attend All-hands calls, and if you skip them for any reason, catch up with the recording. It lets you stay on top of the new features we release and our direction.
 - Set a Slack matcher for specific keywords (e.g, “onboarding referral” if you want to see leads we pass to Sales).
-- Slack also has a cool AI Recap feature - it might be helpful.
+- Slack also has a cool AI Recap feature - it might be helpful, same as using Slackbot to find relevant conversations.
 - Don’t let your product knowledge get stale - check docs, use the product.

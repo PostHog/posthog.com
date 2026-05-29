@@ -52,7 +52,6 @@ import {
     IconArrowLeft,
     IconArrowRight,
     IconHeadset,
-    IconPiggyBank,
     IconBell,
     IconArchive,
     IconCheck,
@@ -381,7 +380,7 @@ const products: Product[] = [
         },
     },
     {
-        name: 'LLM analytics',
+        name: 'AI Observability',
         color: '[#8B0DC8]',
         colorDark: '[#C170E8]',
         Icon: IconLlmAnalytics,
@@ -483,46 +482,6 @@ const products: Product[] = [
         roadmapID: 1999,
     },
     {
-        name: 'Revenue analytics',
-        color: '[#36C46F]',
-        Icon: IconPiggyBank,
-        description: 'Track and analyze your revenue metrics to understand your business performance and growth.',
-        types: ['Sales'],
-        features: [
-            { title: 'MRR and Gross Revenue', Icon: IconPiggyBank },
-            { title: 'Breakdowns by country, product, plan, and customer', Icon: IconGlobe },
-            { title: 'Growth/Churn Rate', Icon: IconLineGraph },
-        ],
-        Images: () => {
-            return (
-                <>
-                    <div className="block dark:hidden">
-                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_05_35_288e8e0d6c.png" />
-                    </div>
-                    <div className="hidden dark:block">
-                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_06_29_e4fe61d678.png" />
-                    </div>
-                </>
-            )
-        },
-        status: 'WIP',
-        badge: 'BETA',
-        pricing: {
-            cta: {
-                url: '/docs/revenue-analytics/start-here',
-                text: 'Get started',
-            },
-        },
-    },
-    {
-        name: 'Product tours',
-        Icon: IconMegaphone,
-        color: 'seagreen',
-        types: ['Product'],
-        status: 'Roadmap',
-        roadmapID: 2111,
-    },
-    {
         name: 'Heatmaps',
         Icon: IconApp,
         color: 'yellow',
@@ -579,8 +538,8 @@ const products: Product[] = [
         color: 'blue',
         description: 'Built-in customer support with chat widget and unified inbox.',
         types: ['Support'],
-        status: 'WIP',
-        badge: 'ALPHA',
+        status: 'Production',
+        badge: 'BETA',
         pricing: {
             cta: {
                 url: '/docs/support',

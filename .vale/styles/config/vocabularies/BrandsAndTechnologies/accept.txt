@@ -169,6 +169,7 @@ Metabase
 [Mm]etronome
 Microsoft
 Midjourney
+Mintlify
 MinIO
 [Mm]istral
 Mixpanel
@@ -283,6 +284,12 @@ Zabbix
 Zapier
 Zendesk
 Zuora
+
+# PostHog internal tools
+hogli
+phrocs
+mprocs
+Turborepo
 
 # Acronyms, languages, frameworks, protocols, etc.
 A/A

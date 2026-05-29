@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { IconRewindPlay, IconX } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
-import { IconDemoThumb, AppIcon, IconChangelogThumb } from 'components/OSIcons'
+import { IconDemoThumb, AppIcon } from 'components/OSIcons'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -44,7 +43,7 @@ export const useProductLinks = () => {
         },
         {
             label: 'Product OS',
-            Icon: <AppIcon name="folder" />,
+            Icon: <AppIcon name="notebook" />,
             url: '/products',
             source: 'desktop',
         },
@@ -555,7 +554,6 @@ export default function Desktop() {
                             <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
-                                alt=""
                                 width={1401}
                                 height={1400}
                                 className={`${websiteMode ? '' : 'size-[300px] md:size-[700px]'} dark:hidden`}
@@ -567,11 +565,11 @@ export default function Desktop() {
                                           }
                                         : undefined
                                 }
+                                draggable={false}
                             />
                             <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_dark_opt_15e213413c.png"
-                                alt=""
                                 width={1401}
                                 height={1400}
                                 className={`${websiteMode ? '' : 'size-[300px] md:size-[700px]'} hidden dark:block`}
@@ -583,6 +581,7 @@ export default function Desktop() {
                                           }
                                         : undefined
                                 }
+                                draggable={false}
                             />
                         </div>
                     </div>

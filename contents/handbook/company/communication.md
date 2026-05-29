@@ -156,6 +156,15 @@ Also keep in mind that, as an open source platform, PostHog has contributors who
 
 > [Slackbot](https://slack.com/features/slackbot) is a handy AI agent that can search across the PostHog workspace in Slack to help answer your questions. If you're looking for information or trying to find a past conversation, Slackbot is a great place to start.
 
+**Keeping up with what we ship**
+
+We recommend everyone at PostHog joins these two channels to stay current on what's shipped and what's coming:
+
+- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) — what's just shipped. Owned by the [Docs & Wizard team](/teams/docs-wizard). Updates constantly as PRs merge.
+- [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) — what's shipping soon. Owned by the [Marketing team](/teams/marketing). Posts a daily digest.
+
+Both channels are powered by agentic workflows that scan merged PRs and feature flag changes and summarize them into the relevant channel. PR authors can opt in or out manually via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the `posthog/posthog` PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/docs-and-wizard/how-to-publish-changelog) for more detail.
+
 **Slack etiquette**
 
 Slack is used differently in different organizations. Here are some guidelines for how we use Slack at PostHog:
@@ -165,6 +174,7 @@ Slack is used differently in different organizations. Here are some guidelines f
 3. Make use of threads when responding to a post. This allows informal discussion to take place without notifications being sent to everyone in the channel on every reply.
 4. When possible, summarize multiple thoughts into a single message instead of sending multiple messages sequentially.
 5. You don't need to tell people if you're away from your computer, especially on no-meeting days. There's no general expectation people are available to reply to messages in real time, including in Slack.
+6. Keep your Slack profile up to date with the right information, including the appropriate name eg with surname or surname initial if you share a name with a colleauge.
 
 Channel naming conventions so people don't get confused:
 
@@ -242,6 +252,12 @@ Writing an RFC may be helpful when any of the following is true:
 An RFC is likely to be unhelpful as a first step in other circumstances. Specifically, when you want to ship or suggest a change to something that significantly affects teams outside your own. In this instance, we've seen that RFCS can lead to 10 to 25+ comments, which feels antagonistic (teams having to explain all the context around their strategy down to why this decision is something they perhaps disagree with), and creates a lot of work. A single call in this instance is likely much faster than lots of frustrated people in 1/1s talking about it _and_ the energy/time needed to respond to everything in a long thread.
 
 _However_ please write notes on such a call - to ensure everyone _is_ on the same page. This could then be copy pasted into an RFC for transparency's sake / future reference.
+
+### How should I use AI when writing RFCs?
+
+RFCs are the place where we do concentrated, original thinking. This thinking should not be outsourced to AI. Even when given context, AI writes content that is average and unoriginal, difficult to read (adjective-stuffing, anyone?), and places emphasis on the wrong things. RFCs should be largely hand-written, especially sections that define the problem, potential solutions, and question/answer.
+
+AI is still useful in the RFC process, however. Feel free to use AI for research and final draft polish (but please don't have it rewrite the whole thing for you). Analysis and research done by AI can be included in the RFC at the bottom as appendixes. 
 
 ### Top tips for RFCs
 

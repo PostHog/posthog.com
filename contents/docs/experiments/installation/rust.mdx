@@ -58,13 +58,14 @@ client.capture(event).await.unwrap();
 Use the PostHog SDK to call the experiment flag and update how your page renders based on the assigned variant.
 
 ```rust
-use posthog_rs::FlagValue;
+use posthog_rs::{EvaluateFlagsOptions, FlagValue};
 
-match client.get_feature_flag(
-    "your-experiment-key".to_string(),
-    "user_distinct_id".to_string(),
-    None, None, None
-).await.unwrap() {
+let flags = client.evaluate_flags(
+    "user_distinct_id",
+    EvaluateFlagsOptions::default(),
+).await.unwrap();
+
+match flags.get_flag("your-experiment-key") {
     Some(FlagValue::String(variant)) if variant == "test" => {
         // Show test variant UI
     }

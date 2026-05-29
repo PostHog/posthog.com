@@ -7,6 +7,7 @@ import { useApp } from '../../context/App'
 
 // Competitor data imports
 import { ab_tasty } from '../../hooks/competitorData/ab_tasty'
+import { activecampaign } from 'hooks/competitorData/activecampaign'
 import { adobe_analytics } from '../../hooks/competitorData/adobe_analytics'
 import { airbrake } from '../../hooks/competitorData/airbrake'
 import { amplitude } from '../../hooks/competitorData/amplitude'
@@ -26,6 +27,7 @@ import { counter } from 'hooks/competitorData/counter'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
 import { datadog } from '../../hooks/competitorData/datadog'
 import { devcycle } from '../../hooks/competitorData/devcycle'
+import { drip } from '../../hooks/competitorData/drip'
 import { dynamic_yield } from '../../hooks/competitorData/dynamic_yield'
 import { dynatrace } from '../../hooks/competitorData/dynatrace'
 import { elastic } from '../../hooks/competitorData/elastic'
@@ -35,6 +37,7 @@ import { fivetran } from '../../hooks/competitorData/fivetran'
 import { flagsmith } from '../../hooks/competitorData/flagsmith'
 import { fullstory } from '../../hooks/competitorData/fullstory'
 import { ga4 } from '../../hooks/competitorData/ga4'
+import { getresponse } from '../../hooks/competitorData/getresponse'
 import { glassbox } from '../../hooks/competitorData/glassbox'
 import { glitchtip } from '../../hooks/competitorData/glitchtip'
 import { grafana_loki } from 'hooks/competitorData/grafana_loki'
@@ -46,11 +49,13 @@ import { hightouch } from '../../hooks/competitorData/hightouch'
 import { hotjar } from '../../hooks/competitorData/hotjar'
 import { kameleoon } from '../../hooks/competitorData/kameleoon'
 import { kissmetrics } from '../../hooks/competitorData/kissmetrics'
+import { klaviyo } from 'hooks/competitorData/klaviyo'
 import { langfuse } from '../../hooks/competitorData/langfuse'
 import { langsmith } from '../../hooks/competitorData/langsmith'
 import { launchdarkly } from '../../hooks/competitorData/launchdarkly'
 import { logrocket } from '../../hooks/competitorData/logrocket'
 import { lucky_orange } from '../../hooks/competitorData/lucky_orange'
+import { mailerlite } from 'hooks/competitorData/mailerlite'
 import { matomo } from '../../hooks/competitorData/matomo'
 import { mixpanel } from '../../hooks/competitorData/mixpanel'
 import { microsoft_clarity } from '../../hooks/competitorData/microsoft_clarity'
@@ -58,6 +63,7 @@ import { mouseflow } from '../../hooks/competitorData/mouseflow'
 import { mparticle } from '../../hooks/competitorData/mparticle'
 import { mutiny } from '../../hooks/competitorData/mutiny'
 import { newrelic } from '../../hooks/competitorData/newrelic'
+import { omnisend } from 'hooks/competitorData/omnisend'
 import { openreplay } from '../../hooks/competitorData/openreplay'
 import { optimizely } from '../../hooks/competitorData/optimizely'
 import { pendo } from '../../hooks/competitorData/pendo'
@@ -602,6 +608,7 @@ export default function ProductComparisonTable({
     // Competitor data
     const competitorData: Record<string, any> = {
         ab_tasty,
+        activecampaign,
         adobe_analytics,
         airbrake,
         amplitude,
@@ -623,6 +630,7 @@ export default function ProductComparisonTable({
         devcycle,
         dynamic_yield,
         dynatrace,
+        drip,
         elastic,
         eppo,
         fathom,
@@ -630,6 +638,7 @@ export default function ProductComparisonTable({
         flagsmith,
         fullstory,
         ga4,
+        getresponse,
         glassbox,
         glitchtip,
         grafana_loki,
@@ -641,11 +650,13 @@ export default function ProductComparisonTable({
         hightouch,
         kameleoon,
         kissmetrics,
+        klaviyo,
         langfuse,
         langsmith,
         launchdarkly,
         logrocket,
         lucky_orange,
+        mailerlite,
         matomo,
         mixpanel,
         microsoft_clarity,
@@ -653,6 +664,7 @@ export default function ProductComparisonTable({
         mparticle,
         mutiny,
         newrelic,
+        omnisend,
         openreplay,
         optimizely,
         pendo,

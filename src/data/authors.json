@@ -543,11 +543,99 @@
         "profile_id": 32501
     },
     {
+        "handle": "leonhard-prinz",
+        "name": "Leonhard Prinz",
+        "role": "Technical Account Manager",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/leonhardprinz/",
+        "profile_id": 35333
+    },
+    {
         "handle": "andy-maguire",
         "name": "Andy Maguire",
         "role": "AI Product Engineer",
         "link_type": "github",
         "link_url": "https://github.com/andrewm4894",
         "profile_id": 37401
+    },
+    {
+        "handle": "radu-raicea",
+        "name": "Radu Raicea",
+        "role": "Product Engineer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/raduraicea/",
+        "profile_id": 34711
+    },
+    {
+        "handle": "matheus-batista",
+        "name": "Matheus Batista",
+        "role": "Software Engineer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/matheusvbatista/",
+        "profile_id": 41646
+    },
+    {
+        "handle": "patricio-tarantino",
+        "name": "Patricio Tarantino",
+        "role": "Product Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/ptarantino/",
+        "profile_id": 31566
+    },
+    {
+        "handle": "mine-kansu",
+        "name": "Mine Kansu",
+        "role": "Revenue Operations",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/minekansu/",
+        "profile_id": 29862
+    },
+    {
+        "handle": "lizzie-epton",
+        "name": "Lizzie Epton",
+        "role": "Developer Marketer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/lizzie-epton/",
+        "profile_id": 43387
+    },
+    {
+        "handle": "fraser-hopper",
+        "name": "Fraser Hopper",
+        "role": "Hog wrangler",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/fraser-hopper-26158056/",
+        "profile_id": 30207
+    },
+    {
+        "handle": "abigail-richardson",
+        "name": "Abigail Richardson",
+        "role": "Technical Support Engineer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/abigail-richardson-74404a5a/",
+        "profile_id": 31138
+    },
+    {
+        "handle": "matt-brooker",
+        "name": "Matt Brooker",
+        "role": "Product Engineer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/mattjbrooker/",
+        "profile_id": 36478
+    },
+    {
+        "handle": "rafael-audibert",
+        "name": "Rafael Audibert",
+        "role": "Product Engineer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/rbaudibert/",
+        "profile_id": 32207
+    },
+    {
+        "handle": "fernando-gomes",
+        "name": "Fernando Gomes",
+        "role": "Product Engineer",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/fercgomes/",
+        "profile_id": 42799
     }
 ]
