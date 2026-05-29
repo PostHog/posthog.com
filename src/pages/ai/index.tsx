@@ -158,12 +158,12 @@ export default function PostHogAI(): JSX.Element {
         order: [
             'overview',
             'features',
+            'everywhere',
             'demos',
             'try-it',
             'capabilities',
             'videos',
             'you',
-            'everywhere',
             'roadmap',
             'pricing',
             'getting-started',

@@ -14,7 +14,7 @@ export default function AIEverywhereSlide(): JSX.Element {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-6 @2xl:gap-10 items-start">
+            <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-6 @2xl:gap-10">
                 <div className="relative border border-primary rounded-md bg-accent flex flex-col overflow-hidden">
                     <Link
                         to="/docs/model-context-protocol"
@@ -38,28 +38,29 @@ export default function AIEverywhereSlide(): JSX.Element {
                                 delete it; "how often is this endpoint hit?" before you rewrite it.
                             </li>
                             <li>
-                                <strong>Size the impact</strong> – pull errors, affected users, and replays into the
-                                conversation while you're already there.
+                                <strong>Size the impact</strong> – check who's on a feature flag or how an experiment is
+                                trending before you decide to ramp, hold, or roll back.
                             </li>
                             <li>
                                 <strong>Verify the deploy</strong> – see whether latency, errors, or conversion actually
-                                moved before you write the PR description.
+                                moved before you ship the next thing.
                             </li>
                         </ul>
                     </div>
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_in_claude_5dd8ef4761.png"
+                        className="mt-auto"
                         imgClassName="w-full block"
                     />
                 </div>
 
                 <div className="relative border border-primary rounded-md bg-accent flex flex-col overflow-hidden">
                     <Link
-                        to="/slack-app"
+                        to="/docs/slack-app/"
                         state={{ newWindow: true }}
                         className="absolute top-4 right-4 z-10 inline-flex items-center gap-1 text-sm font-semibold text-red hover:underline"
                     >
-                        Slack app
+                        Slack app docs
                         <IconArrowUpRight className="size-4" />
                     </Link>
                     <div className="p-6 pr-16 pb-4">
@@ -77,9 +78,8 @@ export default function AIEverywhereSlide(): JSX.Element {
                         </p>
                         <ul className="space-y-2 text-xl @2xl:text-base">
                             <li>
-                                <strong>An SQL-fluent product analyst who loves your data</strong> – ask anything and
-                                PostHog AI writes the HogQL, runs it against your real events, and brings the answer
-                                back to the thread.
+                                <strong>Pull product data into a thread</strong> – conduct research and query data to
+                                answer product and customer questions.
                             </li>
                             <li>
                                 <strong>Subscribe to product insights and dashboards</strong> – receive a regular digest
@@ -93,6 +93,7 @@ export default function AIEverywhereSlide(): JSX.Element {
                     </div>
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/subscription_insights_50ce62125e.png"
+                        className="mt-auto"
                         imgClassName="w-full block"
                     />
                 </div>

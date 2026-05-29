@@ -1080,6 +1080,7 @@ const Instrumentation = () => {
 
 const integrationRows: { name: string; logoKey: LogoKey }[] = [
     { name: 'Linear', logoKey: 'linear' },
+    { name: 'Slack', logoKey: 'slack' },
     { name: 'GitHub', logoKey: 'github' },
     { name: 'Granola', logoKey: 'granola' },
     { name: 'Zendesk', logoKey: 'zendesk' },
@@ -1221,42 +1222,48 @@ const TableStakes = () => {
 const SlackAppCallout = () => {
     return (
         <section className="relative mb-12 @2xl:mb-20 px-4 @xl:px-8">
-            <div className="grid @2xl:grid-cols-2 gap-8 @2xl:gap-12 items-center">
-                <div>
-                    <SectionLabel>Also from PostHog</SectionLabel>
-                    <h2 className="text-3xl font-bold mb-3">Prefer Slack? Meet the PostHog Slack app</h2>
-                    <p className="mb-4">
-                        When you're not at your desk, the PostHog Slack app handles drive-by tasks — answer data
-                        questions, triage issues, and kick off PRs without leaving the thread. Same agent muscle as
-                        PostHog Code, with a lower-friction surface for your team.
-                    </p>
-                    <ul className="space-y-2 mb-6">
+            <div className="border border-primary rounded-md bg-accent overflow-hidden">
+                <div className="p-6 @2xl:p-8 grid @2xl:grid-cols-2 gap-6 @2xl:gap-10">
+                    <div>
+                        <p className="text-sm font-semibold uppercase tracking-wide text-secondary mb-2">
+                            While you wait...
+                        </p>
+                        <h2 className="text-2xl font-bold mb-2">PostHog Code in Slack</h2>
+                        <p className="mb-4">
+                            Answer data questions, fix bugs, and kick off PRs by mentioning <code>@PostHog</code>.
+                        </p>
+                        <OSButton asLink to="/slack-app" variant="primary" size="md">
+                            Learn about the Slack app
+                        </OSButton>
+                    </div>
+                    <ul className="space-y-2">
                         <li className="relative pl-5">
                             <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Ask product or data questions in any channel
+                            Ship a fix from a bug report
                         </li>
                         <li className="relative pl-5">
                             <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Mention <code>@PostHog</code> to triage an error or open a PR
+                            Diagnose and fix failing CI
                         </li>
                         <li className="relative pl-5">
                             <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Subscribe channels to scheduled insights and alerts
+                            Rip out a feature flag after rollout
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Fix typos and update content
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Work across repos
                         </li>
                     </ul>
-                    <OSButton asLink to="/slack-app" variant="primary" size="lg">
-                        Learn about the Slack app
-                    </OSButton>
                 </div>
-                <div>
-                    <ZoomImage>
-                        <img
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_chat_1_c6573ce6da.png"
-                            alt="PostHog Slack app screenshot"
-                            className="w-full rounded-md shadow-2xl border border-primary"
-                        />
-                    </ZoomImage>
-                </div>
+                <img
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_update_docs_f0c917f70a.png"
+                    alt="PostHog Slack app screenshot"
+                    className="w-full block"
+                />
             </div>
         </section>
     )
@@ -1593,9 +1600,9 @@ export default function CodePage() {
 
                         <TableStakes />
 
-                        <SlackAppCallout />
-
                         <TLDR ready={postHogWayDone} />
+
+                        <SlackAppCallout />
 
                         <FAQ />
                     </div>
