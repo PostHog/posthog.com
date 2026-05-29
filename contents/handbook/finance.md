@@ -43,7 +43,7 @@ We group them into **monthly financials** (the basics — what we made, what we 
 
 **Gross margin** — gross profit as a % of revenue, i.e. what we keep from each revenue dollar after the cost of delivering the product. The cleanest read on whether the product itself is profitable, before any other spend. Most relevant to engineering and FinOps, because COGS is mostly infra, hosting and costs of direct labour. Higher is better; a great SaaS business sits at 75%. Below that, we're pricing too low or our infra is too expensive.
 
-**Bad debt as a % of revenue** — the share of billed revenue we never collect. Tells us about who we're selling to and how tight our billing and collections are. Most relevant to billing, finance, and sales. Lower is better — under 2% is healthy.
+**Bad debt as a % of revenue** — the share of billed revenue we never collect. Tells us about who we're selling to and how tight our billing and collections are. Most relevant to billing, finance, and sales. Lower is better — under 2% is our limit, under 1% is great.
 
 **Operating expenses (S&M, R&D, G&A)** — the three big spend buckets: sales & marketing, R&D (mostly engineering), and general & admin. Where the money goes to run the business. Direction isn't as simple as "lower is better" — absolute dollars grow as we scale, and that's expected. What we want falling over time is **OpEx as a % of revenue** — that's operating leverage. R&D staying strong is a feature for a product-led company.
 
