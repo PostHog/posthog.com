@@ -217,6 +217,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Insights',
         owner: ['product-analytics'],
     },
+    integrations: {
+        feature: 'Integrations',
+        owner: ['workflows'],
+        label: 'feature/integrations',
+    },
     'internal-messaging': {
         feature: 'Internal messaging (email, notifications)',
         owner: ['platform-features'],
@@ -346,6 +351,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'quota-limiting': {
         feature: 'Quota limiting',
         owner: ['billing', 'platform-features'],
+        label: false,
+    },
+    'realtime-cohort-calculations': {
+        feature: 'Realtime cohort calculations',
+        owner: ['feature-flags'],
         label: false,
     },
     replay: {

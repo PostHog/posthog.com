@@ -247,6 +247,8 @@ The workflow also runs a smoke test (health check) automatically on PRs that tou
 
 ## Reviewing code
 
+<!-- Keep this section to process only: who reviews what (human vs agent, Stamphog). The "what to look for" checklist and review mechanics live in how-we-review.md — link to it, don't duplicate it here. -->
+
 PRs can be written by humans or by agents (like PostHog Code). Either way, every PR needs a review before merging, and a human always merges.
 
 Who should review depends on who wrote the code (see [Creating PRs](#creating-prs)):
@@ -256,18 +258,7 @@ Who should review depends on who wrote the code (see [Creating PRs](#creating-pr
 
 We encourage the use of AI review agents (Codex, Copilot, Greptile, etc.) on PRs. Their comments and suggestions don't count as an approval, but they catch things humans miss and speed up the review process.
 
-When reviewing a PR, we look at the following things:
-
--   Does the PR actually solve the issue?
--   Does the solution make sense?
--   Will the code perform with millions of events/users/actions?
--   Are there tests and do they test the right things?
--   Are there any security flaws?
--   Is the code in line with our [coding conventions](/docs/contribute/coding-conventions)?
-
-Things we do not care about during review:
-
--   Syntax. If we're arguing about syntax, that means we should install a code formatter.
+For what to look for when reviewing, see: [How we review](/handbook/engineering/how-we-review).
 
 ## Merging
 
