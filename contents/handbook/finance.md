@@ -51,7 +51,7 @@ We group them into **monthly financials** (the basics — what we made, what we 
 
 **ARR per employee** — annual recurring revenue ÷ headcount. Tells us whether we're scaling efficiently or just adding people. Higher is better; IPO-stage SaaS sits around $580k.
 
-**Burn multiple** — cash burned per $1 of new ARR. Tells us whether our growth is worth what it costs. Lower is better — under 1x is good, under 0.5x is excellent.
+**Burn multiple** — cash burned per $1 of new ARR. Tells us whether our growth is worth what it costs. Lower is better — under 1x is good, under 0.3x is top quartile.
 
 **SaaS magic number** — new ARR earned per $1 of sales & marketing spend. A test of whether our go-to-market spend is paying off. Higher is better — above 1x means we're earning more in new ARR than we're spending to get it.
 
