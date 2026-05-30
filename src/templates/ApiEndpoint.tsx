@@ -14,6 +14,7 @@ import { shortcodes } from '../mdxGlobalComponents'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import { InlineCode } from 'components/InlineCode'
 import { CallToAction } from 'components/CallToAction'
+import Tooltip from 'components/Tooltip'
 import ReaderView from 'components/ReaderView'
 import { Heading } from 'components/Heading'
 import MCPCallout from 'components/Docs/MCPCallout'
@@ -35,9 +36,13 @@ const SectionDivider = ({ className = '' }) => <hr className={`border-0 border-t
 function Endpoints({
     paths,
     containerRef,
+    nextURL,
+    title,
 }: {
     paths: Record<string, Record<string, unknown>>
     containerRef: React.RefObject<HTMLDivElement>
+    nextURL?: string | null
+    title?: string
 }) {
     return (
         <div>
@@ -71,6 +76,15 @@ function Endpoints({
                     ))}
                 </tbody>
             </table>
+            {nextURL && (
+                <Tooltip content={`More${title ? ` ${title.toLowerCase()}` : ''} endpoints on the next page`} placement="bottom">
+                    <span className="inline-block mt-2">
+                        <CallToAction size="xs" type="secondary" to={nextURL}>
+                            Next page →
+                        </CallToAction>
+                    </span>
+                </Tooltip>
+            )}
         </div>
     )
 }
@@ -645,7 +659,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                         </div>
                     )}
 
-                    <Endpoints paths={paths} containerRef={contentContainerRef} />
+                    <Endpoints paths={paths} containerRef={contentContainerRef} nextURL={nextURL} title={title} />
 
                     {(previousURL || nextURL) && (
                         <div className="mt-8 flex gap-4">
