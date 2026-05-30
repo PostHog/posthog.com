@@ -6710,6 +6710,12 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Email engagement events',
+                    url: '/docs/workflows/engagement-events',
+                    icon: 'IconGraph',
+                    color: 'yellow',
+                },
+                {
                     name: 'Troubleshooting',
                     url: '/docs/workflows/troubleshooting',
                     icon: 'IconQuestion',
