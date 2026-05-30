@@ -118,6 +118,16 @@ A lot of customers self-serve without ever talking to a PostHog human. This mean
 
 Proactively check for common implementation issues, especially for newer accounts or accounts that haven't had a technical review. See [checking the health of a customer's deployment](/handbook/cs-and-onboarding/health-checks) for the full checklist.
 
+**When a customer wants to cut costs**
+
+If a customer expresses interest in reducing their PostHog spend, view it as an opportunity to act in their interest, help them optimize, and stabilize the relationship. The fact that they're telling you is a signal of trust. Deepen that trust by helping them save money (which is a totally reasonable goal to support).
+
+- **First, help them do what they asked, fast.** At this point, the customer already decided that they need to cut costs, so don't lead with discovery questions that may suggest an effort to talk them out of that decision. Take action on their request first. Gather context along the way or after.
+- **Give them actionable ways to reduce spend.** This is where your product expertise comes into play - what are the concrete levers they can pull to reduce spend? [Customer health check](/handbook/cs-and-onboarding/health-checks#are-they-paying-for-things-they-dont-need) is a good starting point to identify opportunities to reduce billing waste.
+- **Be transparent about trade-offs, but frame them as information, not as warnings.** The goal is to help them make an informed decision, not to reopen the question. For example, if they don't want to pay for Product Analytics, let them know we'll stop ingesting events past the free tier. Frame this as "here's what to expect" rather than "are you sure?" Proactively flag non-obvious dependencies between products too; if you’re not sure, do some digging - use [#ask-max](https://posthog.slack.com/archives/C07TQR0V16U), PostHog AI, ask the rest of the sales team, or ask the relevant product team in Slack (and [add some commentary](/handbook/cs-and-onboarding/how-we-work#working-with-engineering-teams) so they can better assist you).
+- **Consider proposing a target spend.** Once you've acted on their initial request, consider aligning on a target monthly spend. You can then work backwards from that goal to improve their implementation and shape how you support them going forward.
+- **Pause any cross-selling or expansion work until they're at their target monthly spend.** You make the call on when the relationship is stable enough to recommend increased adoption of our products, but it's a safe bet to pause on this while they're in the process of lowering their spend.
+
 **Billing waste:**
 
 - **Group Analytics enabled but not implemented.** We have a Vitally risk indicator for this. If they're B2B and could benefit, help them implement it. If not, tell them to remove the add-on.
