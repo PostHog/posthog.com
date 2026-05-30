@@ -1,11 +1,11 @@
 ---
-title: "Import opt-out lists from Customer.io"
+title: "Manage opt-out lists"
 showStepsToc: true
 ---
 
-In this guide we'll walk through importing your **opt-out lists from Customer.io** into PostHog and keeping them in sync.
+Opt-out lists track which recipients have opted out of receiving messages. You can manage opt-outs in PostHog by [adding them manually](#manually-add-opt-outs) or [importing them from Customer.io](#import-opt-outs-from-customerio).
 
-Go to your PostHog app and navigate to **Workflows > Opt-out list**. Click **Import from Customer.io**.
+To view your opt-out lists, go to [**Workflows > Opt-outs**](https://app.posthog.com/workflows/opt-outs) in PostHog.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/3_9e79e42360.png"
@@ -13,6 +13,21 @@ Go to your PostHog app and navigate to **Workflows > Opt-out list**. Click **Imp
   classes="rounded"
   alt="PostHog opt-out list page"
 />
+
+## Manually add opt-outs
+
+To manually add a recipient to an opt-out list:
+
+1. Go to [**Workflows > Opt-outs**](https://app.posthog.com/workflows/opt-outs)
+2. Click the **Add opt-out** button (the **+** icon) on the global or category-specific list
+3. Enter the recipient identifier (e.g. email address) in the modal
+4. Click **Add opt-out** to confirm
+
+This is useful when a customer requests removal from communications through a support ticket or other direct channel.
+
+## Import opt-outs from Customer.io
+
+To import opt-out lists from Customer.io, navigate to your opt-out list and click **Import from Customer.io**.
 
 <Steps>
 
