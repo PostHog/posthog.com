@@ -48,6 +48,8 @@ Entry and end paths show these stats for the first and last pageviews of each se
 
 To get an idea of where users are visiting your site from, you can see top referrers, [channels](/docs/data/channel-type), and [UTMs](/docs/data/utm-segmentation).
 
+Clicking a row in any of these tables filters the dashboard and automatically navigates to a more detailed breakdown. See [drill-down navigation](#drill-down-navigation) for details.
+
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-light.png" 
   imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-dark.png"
@@ -128,6 +130,8 @@ The world map shows where your users are located, but you can also select it to 
   classes="rounded"
 />
 
+Clicking a country, region, or city filters the dashboard and navigates to a more detailed geographic breakdown (Country → Region → City).
+
 ## Retention
 
 Retention creates a cohort of unique users who performed any event for the first time in the last week. It then tracks the percentage of users who return to perform any event in the following weeks. 
@@ -180,5 +184,21 @@ Like other dashboards in PostHog, the web analytics dashboard is filterable. Thi
 This enables you to dive into specific stats for regions, parts of the site, and specific marketing campaigns. 
 
 For more complex queries, you can still use the product analytics tab as usual.
+
+
+## Drill-down navigation
+
+When you click a row in Web Analytics tables, the dashboard automatically navigates to a more detailed breakdown. This creates drill-down chains that let you explore your data hierarchically:
+
+- **Sources:** Channel → Referring Domain → Referring URL
+- **UTMs:** Source → Medium → Campaign → Content → Term
+- **Geography:** Country → Region → City
+- **Devices:** Device Type → Browser → OS → Viewport
+
+For example, clicking a channel like "Organic Search" filters the dashboard and switches to the Referring Domain tab, where you can then click a domain to drill down to specific Referring URLs.
+
+End-of-chain tabs (Referring URL, UTM Term, City, Viewport) apply the filter without switching tabs since there's no deeper level to explore.
+
+> **Note:** Drill-down navigation only triggers when adding a filter. Clicking to remove an existing filter keeps you on the current tab.
 
 And for more on web analytics, check out our [getting started](/docs/web-analytics/getting-started) guide.
