@@ -2,6 +2,304 @@
 title: Taggers
 ---
 
-Taggers automatically classify and label generations so you can filter, group, and analyze your LLM traffic by the categories that matter to your product.
+Taggers automatically classify your LLM [generations](/docs/ai-observability/generations) and attach one or more tag labels to each one, so you can filter, group, and chart your AI traffic by the categories that matter to your product. PostHog supports two types of taggers:
 
-> Full documentation coming soon.
+- **LLM tagger** – Uses an LLM to pick which of your defined tags apply to each generation. Great for nuanced, subjective categorization like topic, intent, or sentiment.
+- **Hog tagger** – Runs deterministic [Hog](/docs/hog) code you write against each generation. Great for rule-based labeling like model family, cost tier, or keyword detection. Free to run with no LLM cost.
+
+## Why use taggers?
+
+- **Slice traffic by what it's actually about** – Group generations by topic, user intent, or feature without writing one-off queries to parse the inputs and outputs.
+- **Spot problem areas faster** – Tag for safety, refusals, or errors, then filter or chart by those tags to see where things go wrong.
+- **Combine with other PostHog data** – `$ai_tag` events show up alongside everything else, so you can build trends, funnels, and dashboards from your tags.
+- **Debug with reasoning** – Every tagger run records the reasoning it used to choose the tags, so you can audit individual decisions.
+
+## Choosing a tagger type
+
+|                 | LLM tagger                                              | Hog tagger                                                 |
+| --------------- | ------------------------------------------------------- | ---------------------------------------------------------- |
+| **Best for**    | Subjective categorization (topic, intent, sentiment)    | Deterministic rule-based labeling (model, cost, keywords) |
+| **Cost**        | LLM API call per tagged generation                      | Free                                                       |
+| **Speed**       | Seconds                                                 | Milliseconds                                               |
+| **Consistency** | May vary between runs                                   | Deterministic – same input always produces same tags       |
+| **Setup**       | Write a prompt and define a list of tags                | Write Hog code                                             |
+
+## Triggers
+
+Unlike evaluations, taggers don't have a global sampling rate. Instead, each tagger has one or more **conditions** that decide which generations get tagged.
+
+A condition is made up of:
+
+- **Property filters** – Event or person property filters (the same filter UI used elsewhere in PostHog). For example, only tag generations from a specific model, environment, or user segment.
+- **Rollout percentage** – A value between 0 and 100 that further samples the matching generations. Use this to start small (e.g. 5% of production traffic) and scale up.
+
+Conditions combine with **OR** logic – a generation is tagged if it matches *any* of the configured conditions. A tagger with no conditions doesn't run.
+
+## LLM taggers
+
+### How they work
+
+When a [generation](/docs/ai-observability/generations) is captured and matches one of the tagger's conditions, PostHog sends the generation's input, output, and your tag definitions to an LLM with your tagger prompt. The LLM returns the subset of tags that apply, and PostHog emits a [`$ai_tag` event](#what-gets-emitted) linked to the original generation.
+
+The LLM is constrained by structured output, so it can only return tag names you defined – it can't invent new ones. You can also configure `min_tags` and `max_tags` to require a specific number of tags per generation.
+
+### What the LLM tagger receives
+
+The LLM tagger prompt is built from:
+
+- Your **prompt** – the instructions you write describing how to choose tags.
+- Your **tag definitions** – each tag's `name` and optional `description`. The description is what the LLM uses to decide whether a tag applies, so a clear one-line description per tag makes a big difference.
+- The generation's **input and output**, formatted the same way as for [LLM judge evaluations](/docs/ai-evals/evaluations#what-the-judge-receives), including the tool catalog and tool call/result correlation when present.
+
+### Configuring the model
+
+Each LLM tagger can pin to a specific model configuration (provider + model + API key). If you don't pin one, the tagger uses your project's default AI Observability model configuration. Use a smaller, cheaper model (e.g. a flash/mini variant) for high-volume taggers and reserve larger models for taggers that need nuance.
+
+### Built-in templates
+
+PostHog ships five pre-built LLM tagger templates to get you started:
+
+| Template       | Example tags                                                                                          |
+| -------------- | ----------------------------------------------------------------------------------------------------- |
+| **Topic**      | `technical-support`, `how-to`, `general-knowledge`, `creative`, `data-analysis`, `code-generation`    |
+| **Intent**     | `question`, `task`, `conversation`, `feedback`, `follow-up`                                           |
+| **Safety**     | `pii`, `medical-advice`, `financial-advice`, `legal-advice`, `controversial`                          |
+| **Complexity** | `simple`, `moderate`, `complex`, `expert`                                                             |
+| **Sentiment**  | `satisfied`, `neutral`, `frustrated`, `urgent`                                                        |
+
+You can use any template as-is, or use it as a starting point and edit the prompt and tag list.
+
+### Creating an LLM tagger
+
+1. Navigate to **AI Evals** > **Taggers**.
+2. Click **New tagger**.
+3. Select **LLM** as the tagger type.
+4. Choose a template or start from scratch.
+5. Configure the tagger:
+   - **Name** – A descriptive name (e.g. "Support ticket topic").
+   - **Prompt** – Instructions for the LLM (templates provide sensible defaults).
+   - **Tags** – Each tag has a `name` (up to 100 characters) and an optional `description` (up to 500 characters). Descriptions help the LLM tag more accurately.
+   - **Min / max tags** – Minimum and maximum number of tags the LLM should return per generation. Leave max empty for no limit.
+   - **Model configuration** *(optional)* – Pin to a specific provider and model.
+   - **Conditions** – At least one condition, each with property filters and a rollout percentage.
+6. Enable the tagger and click **Save**.
+
+### Writing custom prompts
+
+A good LLM tagger prompt:
+
+- Explains what the generations are (e.g. "user messages to a customer support assistant").
+- Tells the LLM how to choose tags (e.g. "pick all that apply" vs. "pick the single best fit").
+- Refers to the tag definitions rather than re-listing them in the prompt – the LLM sees both.
+
+Example custom prompt:
+
+```text
+You are categorizing user messages sent to our customer support assistant.
+
+For each message, pick all tags that apply based on what the user is asking about.
+If none of the tags clearly apply, return an empty list rather than guessing.
+```
+
+## Hog taggers
+
+Hog taggers run [Hog](/docs/hog) code you write against each generation that matches a condition. They execute in milliseconds with zero LLM cost, making them ideal for high-volume, deterministic labeling.
+
+### How they work
+
+1. You write Hog code that inspects the generation and returns the tags it should be assigned.
+2. On save, PostHog compiles your code to bytecode.
+3. When a generation matches one of the tagger's conditions, the code runs against it in PostHog's HogVM with a short execution timeout.
+4. Your code returns a tag name string, a list of tag name strings, or `null` for no tags.
+5. PostHog emits a [`$ai_tag` event](#what-gets-emitted) with the returned tags.
+
+Optionally, you can define a list of allowed tags on a Hog tagger. If you do, returned tags are validated against that list; if you leave it empty, any tag your code returns is accepted as-is.
+
+### Available globals
+
+Your Hog code has access to these variables:
+
+| Variable            | Type             | Description                                                       |
+| ------------------- | ---------------- | ----------------------------------------------------------------- |
+| `input`             | string or object | The LLM input (prompt or messages array)                          |
+| `output`            | string or object | The LLM output (response or choices)                              |
+| `properties`        | object           | All event properties from the generation                          |
+| `event.uuid`        | string           | The event UUID                                                    |
+| `event.event`       | string           | The event name                                                    |
+| `event.distinct_id` | string           | The distinct ID of the person who triggered the generation        |
+| `tags`              | array of strings | The tag names defined on the tagger (the allowed list, if any)    |
+
+### Creating a Hog tagger
+
+1. Navigate to **AI Evals** > **Taggers**.
+2. Click **New tagger**.
+3. Select **Hog** as the tagger type.
+4. Pick a code example or start from scratch.
+5. Write your Hog code in the editor.
+6. Click **Test on sample** to run your code against recent generations and verify it works.
+7. Configure:
+   - **Name** – A descriptive name.
+   - **Tags** *(optional)* – A list of allowed tags. Leave empty to accept any tag your code returns.
+   - **Conditions** – At least one condition, each with property filters and a rollout percentage.
+8. Enable the tagger and click **Save**.
+
+### Writing Hog tagger code
+
+Your code must `return` a string (single tag), an array of strings (multiple tags), or `null` (no tags). Use `print()` statements to record reasoning – the output is captured and stored alongside the tag result.
+
+> **Hog tip:** Use single quotes for strings (`'hello'`), `length()` instead of `len()`, and wrap property access with `ifNull()` to avoid null comparison errors.
+
+**Tag by model family:**
+
+```hog
+let model := lower(ifNull(properties.$ai_model, ''))
+
+if (model ilike '%gpt%' or model ilike '%o1%' or model ilike '%o3%') {
+    return 'openai'
+}
+if (model ilike '%claude%') {
+    return 'anthropic'
+}
+if (model ilike '%gemini%') {
+    return 'google'
+}
+return 'other'
+```
+
+**Tag by cost tier:**
+
+```hog
+let cost := ifNull(properties.$ai_total_cost_usd, 0)
+
+if (cost == 0) {
+    return 'free'
+}
+if (cost < 0.001) {
+    return 'cheap'
+}
+if (cost < 0.01) {
+    return 'moderate'
+}
+return 'expensive'
+```
+
+**Detect refusals and errors in the output:**
+
+```hog
+let outputLower := lower(ifNull(output, ''))
+let foundTags := []
+
+if (outputLower ilike '%i cannot%' or outputLower ilike '%i am unable to%') {
+    foundTags := arrayPushBack(foundTags, 'refusal')
+}
+if (outputLower ilike '%exception%' or outputLower ilike '%traceback%') {
+    foundTags := arrayPushBack(foundTags, 'error')
+}
+
+if (length(foundTags) == 0) {
+    return null
+}
+
+print('Found: ' + toString(foundTags))
+return foundTags
+```
+
+**Tag by response length:**
+
+```hog
+let outputLength := length(ifNull(output, ''))
+
+if (outputLength == 0) {
+    return 'empty'
+}
+if (outputLength < 50) {
+    return 'short'
+}
+if (outputLength > 2000) {
+    return 'long'
+}
+return 'medium'
+```
+
+### Built-in examples
+
+The Hog editor ships with code examples for common patterns to copy and adapt:
+
+- **Keyword matching** – Tag by terms that appear in the output.
+- **Error detection** – Catch exceptions, tracebacks, and refusal phrases.
+- **Response length** – Bucket outputs by character length.
+- **Model-based** – Tag by provider or model family.
+- **Cost tiers** – Bucket generations by `$ai_total_cost_usd`.
+- **Roles found** – Detect which message roles are present in input and output.
+- **Language detection** – Heuristic for which natural language the output is in.
+
+### Testing on sample data
+
+Before saving, click **Test on sample** to run your code against recent generations. This shows:
+
+- The input and output from each sampled generation.
+- The tags your code returned (or `null` if no tags applied).
+- Any `print()` output (reasoning).
+- Any errors in your code.
+
+Testing runs entirely in preview mode – no `$ai_tag` events are emitted and no data is affected.
+
+## What gets emitted
+
+Each tagger run emits a `$ai_tag` event linked to the original generation. The event has these properties:
+
+| Property                | Description                                                       |
+| ----------------------- | ----------------------------------------------------------------- |
+| `$ai_tagger_id`         | UUID of the tagger that produced the result                       |
+| `$ai_tagger_name`       | Human-readable name of the tagger                                 |
+| `$ai_tags`              | JSON array of applied tag name strings                            |
+| `$ai_tag_reasoning`     | Reasoning text – `print()` output for Hog, or the LLM's reasoning |
+| `$ai_trace_id`          | Trace ID of the generation that was tagged                        |
+| `$ai_target_event_id`   | UUID of the `$ai_generation` event that was tagged                |
+
+Because `$ai_tag` events are normal PostHog events, you can use them anywhere – filter generations by tag, build trends or funnels on them, or query them via SQL. For example, to count tags applied over time:
+
+```sql
+SELECT
+    arrayJoin(JSONExtract(properties.$ai_tags, 'Array(String)')) AS tag,
+    count()
+FROM events
+WHERE event = '$ai_tag'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY tag
+ORDER BY count() DESC
+```
+
+## Viewing results
+
+The **Taggers** page lists all your taggers with their recent activity. Click a tagger to see:
+
+- A **Tags over time** chart showing how often each tag is being applied.
+- A **Tag percentage** breakdown of which tags are most common.
+- Individual run history with the tagged generation, applied tags, and reasoning.
+
+You can also filter generations by their tags from the [traces](/docs/ai-observability/traces) and [generations](/docs/ai-observability/generations) views.
+
+## Managing taggers via MCP
+
+You can also manage taggers through the [PostHog MCP server](/docs/model-context-protocol) using AI agents like Claude Code, Cursor, or any MCP-connected tool.
+
+The MCP server provides three tagger tools:
+
+| Tool                  | Description                                                                         |
+| --------------------- | ----------------------------------------------------------------------------------- |
+| `llma-tagger-list`    | List taggers with optional search, enabled filter, and ID filter                    |
+| `llma-tagger-create`  | Create an LLM or Hog tagger (use `enabled=false` while drafting, then enable in UI) |
+| `llma-tagger-test-hog`| Test Hog source against recent `$ai_generation` events without saving the tagger    |
+
+`llma-tagger-test-hog` is especially useful for iterating on Hog code from an agent – it returns per-event input, output, returned tags, reasoning, and any errors for a small sample of recent generations.
+
+## Pricing
+
+Each tagger run counts as one AI Observability event toward your quota.
+
+**LLM taggers** use an LLM to choose tags. A small trial allowance lets you try the feature without configuring a provider. After that, add your own provider API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok) to keep running LLM taggers.
+
+**Hog taggers** have no LLM cost – they run your Hog code directly with no external API calls.
+
+Use condition rollout percentages strategically to balance coverage and cost – start with a low rollout in production, then increase it once you're confident the tagger is producing the labels you want.
