@@ -8,7 +8,21 @@ availability:
   enterprise: full
 ---
 
+import { CalloutBox } from "components/Docs/CalloutBox";
+
 After you've analyzed your experiment metrics and determined a winning variant, you can manage the experiment's lifecycle by ending, pausing, or resetting it.
+
+## Editing experiments
+
+You can edit most experiment settings after creation, including metrics, variants, and release conditions.
+
+<CalloutBox icon="IconInfo" title="Legacy experiment restrictions" type="fyi">
+
+Experiments using legacy metric formats can only have their **name**, **description**, and **end date** edited. All other settings are locked. To update metrics or other settings, create a new experiment using the current metric format.
+
+Legacy [shared metrics](/docs/experiments/metrics#shared-metrics) can't be edited at all. Create a new shared metric instead.
+
+</CalloutBox>
 
 ## Ending an experiment
 
