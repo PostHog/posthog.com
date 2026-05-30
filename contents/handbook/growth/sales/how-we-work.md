@@ -281,3 +281,24 @@ To add Pylon to your customer channel:
 Once enabled, you can add the :ticket: emoji to a Slack thread to create a new Ticket in Zendesk.  Customers can also do this.  Make sure that a Group and Severity are selected or the ticket won't be routed properly.
 
 > It's your job to ensure your customer issues are resolved, make sure you follow up with Support and Engineering if you feel like the issue isn't getting the right level of attention.
+
+### Handling business-impacting customer issues in Slack
+
+Sometimes, a customer Slack thread becomes more than a normal product question. For example, ingestion lag might affect advertising workflows, feature flag reliability might affect releases or experiments, or session replay might raise a privacy concern.
+
+When this happens:
+
+- Acknowledge the specific business impact.
+- Separate immediate mitigation from the longer-term fix.
+- Be clear about what we know and what we do not know.
+- Avoid promising timelines or product changes unless they are confirmed.
+- Ask for the operational details needed to help.
+- Pull in Support, Engineering, or the relevant product team early.
+
+Do not ask the customer to prove that the issue matters. If they say it is business-impacting, treat it that way. Ask for the details needed to reduce the impact.
+
+Examples:
+
+- If ingestion lag affects ad platforms, ask which destinations, events, cohorts, or person properties are affected, and whether they are used for bidding, retargeting, suppression, reporting, or lifecycle campaigns.
+- If session replay might capture passports, licenses, payment details, or other sensitive data, treat it as privacy-critical. Do not recommend recording the flow unless masking or pause/resume behaviour is verified.
+- If feature flags are unreliable, first understand how the customer uses them: rollouts, kill switches, entitlements, A/B tests, holdouts, or remote config. Then review fallback values, local evaluation where appropriate, and whether old flags can be cleaned up.
