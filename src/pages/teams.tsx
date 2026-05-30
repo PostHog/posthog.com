@@ -31,7 +31,7 @@ const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
     const { isModerator } = useUser()
     const { allTeams } = useStaticQuery(graphql`
         {
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
+            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" } }) {
                 nodes {
                     id
                     name
@@ -253,8 +253,19 @@ const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
                                             <div className="w-48">
                                                 <TeamPatch
                                                     name={name}
-                                                    imageUrl={crest?.data?.attributes?.url}
-                                                    {...crestOptions}
+                                                    imageUrl={crest?.data?.attributes?.url || 'https://res.cloudinary.com/dmukukwp6/image/upload/crest_default_0c2e43f05c.png'}
+                                                    {...(crestOptions || {
+                                                        fontSize: 'base',
+                                                        textColor: 'black',
+                                                        textShadow: 'light',
+                                                        frameColor: 'gold',
+                                                        plaqueColor: 'pale-blue',
+                                                        plaque: 'downward-curve',
+                                                        frame: 'half-round',
+                                                        imageScale: '50',
+                                                        imageXOffset: '0',
+                                                        imageYOffset: '0',
+                                                    })}
                                                     className="w-full"
                                                     fontSize="xl"
                                                 />

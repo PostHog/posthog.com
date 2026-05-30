@@ -14,7 +14,7 @@ export const SmallTeams = () => {
         profiles: { totalCount: profilesTotalCount },
     } = useStaticQuery(graphql`
         {
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
+            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" } }) {
                 nodes {
                     id
                     name
@@ -86,7 +86,7 @@ export const SmallTeams = () => {
                                             <CloudinaryImage
                                                 alt={`${name} Team`}
                                                 className="size-8"
-                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/crest_mini_default_def12aa14a.png"
+                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/minicrest_default_4637a5cc4c.png"
                                             />
                                         )}
                                     </div>
