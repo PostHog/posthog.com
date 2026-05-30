@@ -1,0 +1,251 @@
+---
+title: How we score docs quality
+sidebar: Handbook
+showTitle: true
+---
+
+We use a scoring rubric to audit docs quality across product areas. The goal is to catch what slips through Content Writer PRs or when we write docs from scratch. Results surface in a weekly Slack digest that scores each page, and a leaderboard that ranks product areas.
+
+This rubric covers docs pages only. SDK/API reference pages are excluded pending work to improve them.
+
+## Scoring scale
+
+Each check scores **0-2:**
+
+- **0 — Needs work.** Doesn't follow the standard.
+- **1 — Good.** Follows the standard but with gaps to close.
+- **2 — Great.** Fully meets the standard. Ready to ship.
+
+These names are placeholders, they'll be replaced with something more fun when the docs contributor RPG launches. If you have any ideas, please share them!!
+
+## How it's structured
+
+The rubric has three layers:
+
+| Layer | What it evaluates | How it's evaluated | Weight |
+| --- | --- | --- | --- |
+| **Layer 1 - Existing automation** | Vale lint + broken links | Reuses existing tooling, piped in | Low |
+| **Layer 2 - Scriptable checks** | Structure, formatting, components, code conventions | New scoring script, deterministic, no LLM needed | Medium |
+| **Layer 3 - LLM-assessed checks** | Technical accuracy, completeness, voice, task orientation | LLM evaluation | High |
+
+Exact weights will be tuned when we build the scoring script and set pass/fail thresholds.
+
+## Layer 1: Existing automation
+
+### Vale
+
+Uses the existing Vale pipeline. Per page, it surfaces total error count, total warning count, and which rules fired.
+
+The scoring script stores per-rule violation counts in a config file that maps rules to priority tiers, so you can assign custom weights to specific rules later without rearchitecting. All rules are weighted equally by default, at low overall weight.
+
+### Broken links
+
+Uses the existing broken link checker. Per page, it surfaces the count of broken internal and external links.
+
+## Layer 2: Scriptable checks
+
+Eight checks, each scoring 0-2, all traceable to a handbook source and implementable as code that parses the MDX file, its frontmatter, and the sidebar config. These are the checks that are run by the scoring script.
+
+### Page categorization
+
+Does this page fit into one of the six [docs categories](/handbook/docs-and-wizard/writing-product-docs#docs-categories) - Overview, Getting started, Concepts, Guides, PostHog AI, Resources - and is it placed correctly in the sidebar nav?
+
+| Score | Criteria |
+| --- | --- |
+| **0 — Needs work** | Page doesn't map to any category, or lives in the wrong sidebar section |
+| **1 — Good** | Maps to a category but placement is ambiguous (e.g., nested incorrectly) |
+| **2 — Great** | Cleanly placed in the correct sidebar section for its category |
+
+### Required section coverage
+
+Does the page include the sections and elements required for its category? See [Writing product docs](/handbook/docs-and-wizard/writing-product-docs) for the full requirements per category.
+
+| Score | Criteria |
+| --- | --- |
+| **0 — Needs work** | Missing 2+ required elements |
+| **1 — Good** | Missing 1 required element |
+| **2 — Great** | All required elements present |
+
+### Frontmatter completeness
+
+Does the page have valid, complete [frontmatter](/handbook/docs-and-wizard/mdx-and-components#frontmatter) for its type?
+
+| Page type | Required frontmatter |
+| --- | --- |
+| All pages | `title` |
+| Installation pages | `title`, `platformLogo`, `showStepsToc: true` |
+| Start here / Changelog | `title`, `hideRightSidebar: true` |
+
+| Score | Criteria |
+| --- | --- |
+| **0 — Needs work** | Missing `title` or critical fields |
+| **1 — Good** | Has `title` but missing relevant optional fields for its page type |
+| **2 — Great** | All relevant frontmatter fields present and correct |
+
+### Component usage
+
+Does the page use the correct [MDX components](/handbook/docs-and-wizard/mdx-and-components#docs-components) where they should be used?
+
+| Content pattern | Expected component |
+| --- | --- |
+| Sequential instructions | `Steps` with `Step` |
+| Multiple language code examples | `MultiLanguage` |
+| Important warnings/notes | `CalloutBox` |
+| User decision between options | `DecisionTree` |
+| Troubleshooting sections | `AskAIInput` |
+
+| Score | Criteria |
+| --- | --- |
+| **0 — Needs work** | Uses raw HTML/markdown where a required component exists |
+| **1 — Good** | Mostly correct but misses opportunities (e.g., no `MultiLanguage` wrapper) |
+| **2 — Great** | Correct component usage throughout |
+
+### Code example quality
+
+Do code examples follow [PostHog's code conventions](/handbook/docs-and-wizard/docs-style-guide#code)?
+
+- Language tag present on all code blocks
+- `snake_case` for PostHog event and property names, not camelCase
+- ES modules for JS/TS, not CommonJS
+- Realistic examples, not placeholders
+- Magic placeholders used where appropriate (`<ph_project_token>`, `<ph_client_api_host>`)
+
+| Score | Criteria |
+| --- | --- |
+| **0 — Needs work** | Generic placeholder examples, missing language tags, or wrong naming conventions |
+| **1 — Good** | Realistic examples but some convention issues |
+| **2 — Great** | All conventions followed, realistic examples, magic placeholders used |
+
+### Link style compliance
+
+Do links follow [PostHog's link formatting rules](/handbook/docs-and-wizard/docs-style-guide#links)? Broken links are already caught by Layer 1 - this check covers style violations.
+
+- In-app links use `app.posthog.com`, not `us.posthog.com` or `eu.posthog.com`
+- First mention of PostHog terms/features links to their docs page
+
+| Score | Criteria |
+| --- | --- |
+| **0 — Needs work** | Links to wrong PostHog domains |
+| **1 — Good** | Correct domains but missing first-mention links for key terms |
+| **2 — Great** | All link rules followed |
+
+### Formatting compliance
+
+Does the page follow [formatting rules](/handbook/docs-and-wizard/docs-style-guide#formatting-and-structure) that Vale doesn't cover?
+
+- Paragraphs under 4 lines
+- Bold used for structured purposes only: callout labels, definition lists, UI elements, not for general emphasis in prose
+- Consistent list punctuation: all sentences with periods, or all fragments without
+- Headings are descriptive and action-oriented, not noun-only ("How to create a flag" not "Flag creation")
+- Nested UI elements use `>` connector
+
+| Score | Criteria |
+| --- | --- |
+| **0 — Needs work** | Multiple formatting violations (long paragraphs, emphasis-bold in prose, inconsistent lists) |
+| **1 — Good** | Mostly compliant with scattered issues |
+| **2 — Great** | Fully compliant |
+
+### Snippet usage
+
+Is content that appears on 2+ pages extracted into [`_snippets/`](/handbook/docs-and-wizard/mdx-and-components#snippets)?
+
+| Score | Criteria |
+| --- | --- |
+| **0 — Needs work** | Copy-pasted content blocks that exist on other pages and should be snippets |
+| **1 — Good** | Some shared content snippeted but duplication remains |
+| **2 — Great** | All reusable content properly extracted, or page has no reusable content |
+
+## Layer 3: LLM-assessed checks
+
+Four checks that require reading comprehension and product knowledge. These run in the weekly digest pass, using a lot of the subagents we use for the Content Writer, in a different harness.
+
+### Technical accuracy
+
+Does the documented behavior match what the product actually does?
+
+This is the single highest-value check. It catches the core failure mode of rubber-stamped Content Writer PRs: the agent writes something plausible but wrong, and nobody verifies it.
+
+| Score | Criteria |
+| --- | --- |
+| **0 — Needs work** | Documents behavior that doesn't match the product, or includes code that would fail |
+| **1 — Good** | Mostly accurate but some details are outdated or subtly wrong |
+| **2 — Great** | Accurately reflects current product behavior |
+
+### Completeness
+
+Are all user-facing aspects of the topic covered?
+
+| Score | Criteria |
+| --- | --- |
+| **0 — Needs work** | Major features, options, or workflows undocumented, a stub or clearly incomplete |
+| **1 — Good** | Covers the basics but missing important edge cases, configuration options, or related features |
+| **2 — Great** | Thorough coverage for its category type |
+
+### Voice and tone
+
+Does the writing follow the [prose-level voice guidelines](/handbook/docs-and-wizard/docs-style-guide#voice-and-tone) that Vale doesn't catch?
+
+Vale catches specific words. This check catches the patterns: passive voice, future tense ("will display" instead of "displays"), verbose explanations, jargon introduced without definitions or links.
+
+| Score | Criteria |
+| --- | --- |
+| **0 — Needs work** | Predominantly passive voice, future tense, verbose, or full of unexplained jargon |
+| **1 — Good** | Mostly follows voice guidelines but with scattered violations |
+| **2 — Great** | Active voice, present tense, concise, jargon explained or linked on first use |
+
+### Task orientation
+
+*Applies to guides only.*
+
+For guides pages *only*: is the content framed around accomplishing a goal, or just documenting what a feature does?
+
+| Score | Criteria |
+| --- | --- |
+| **0 — Needs work** | Pure feature description organized by internal product structure |
+| **1 — Good** | Some task framing but still mostly feature-oriented |
+| **2 — Great** | Clearly organized around user goals and jobs-to-be-done |
+
+## How scores roll up
+
+Layer 2 and Layer 3 combine for a **0–24 point total**. Layer 1 (Vale errors and broken links) is reported separately as raw counts — it's not folded into the score.
+
+Some checks only apply to certain page types (task orientation only applies to Guides, for example). When a check doesn't apply, it's excluded from the denominator — so percentages reflect only the checks that were actually relevant to that page.
+
+## Digest and leaderboard format
+
+The **Slack digest** reports per page:
+
+```
+Page: /docs/error-tracking/capture
+Owner: Error Tracking team
+Vale: 0 errors, 3 warnings
+Broken links: 0
+Structure: 14/16
+Content: 7/8
+Total: 21/24 88% — Great
+```
+
+The **leaderboard** aggregates by product area:
+
+```
+#1  Error Tracking     92% Great
+#2  Feature Flags      87% Great
+#3  Product Analytics  61% Good
+```
+
+## Thresholds
+
+This will need some tuning after running the baseline checks. Starting point is generally:
+
+- **0-40%** → Needs work
+- **41-79%** → Good
+- **80-100%** → Great
+
+## Scoping notes
+
+_Delete this section before publishing_
+
+- **SDK/API reference pages** — Excluded until reference improvement work is complete. Those have their own standards.
+- **Onboarding/installation pages** — Structural checks apply to MDX stubs. Content checks should target the source TSX in `posthog/posthog`, not the rendered output.
+- **Screenshots** — Excluded from the rubric. Handled separately.
+- **Wizard context library** — Separate system with its own evaluation.
