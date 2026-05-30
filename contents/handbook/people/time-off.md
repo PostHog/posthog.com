@@ -172,3 +172,7 @@ On your 4th anniversary at PostHog as a big thank you for sticking with us, we g
 3. Rimowa luggage set (large trunk, cabin bag, packing cube, toiletries bag)
 
 On the run up to your anniversary, our Ops team will send you a link to the gift options questionnaire and order your 4 year anniversary gift once we receive your completed form. Thank you for making PostHog great!
+
+#### 5th year anniversary
+
+To mark five years at PostHog, you can get a brand new hedgehog profile illustration drawn to replace the one taken when you joined. Send an updated photo to our Graphics team and they'll get it over to our illustrator. Once it's ready, the new illustration will be sent to you.
