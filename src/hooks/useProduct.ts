@@ -98,7 +98,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'seagreen',
             colorSecondary: 'seagreen',
             category: 'ai',
-            slug: 'llm-analytics',
+            slug: 'ai-observability',
         },
         {
             name: 'Generations',
@@ -108,7 +108,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'yellow',
             colorSecondary: 'yellow',
             category: 'ai',
-            slug: 'llm-analytics',
+            slug: 'ai-observability',
             status: 'beta',
         },
         {
@@ -119,7 +119,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'blue',
             colorSecondary: 'blue',
             category: 'ai',
-            slug: 'llm-analytics',
+            slug: 'ai-observability',
             status: 'beta',
         },
         {

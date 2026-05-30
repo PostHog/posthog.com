@@ -928,7 +928,7 @@ function ReaderViewContent({
                                             <a href="/error-tracking">error tracking</a>,{' '}
                                             <a href="/feature-flags">feature flags</a>,{' '}
                                             <a href="/experiments">experiments</a>, <a href="/surveys">surveys</a>,{' '}
-                                            <a href="/llm-analytics">AI Observability</a>, <a href="/logs">logs</a>,{' '}
+                                            <a href="/ai-observability">AI Observability</a>, <a href="/logs">logs</a>,{' '}
                                             <a href="/workflows">workflows</a>, <a href="/endpoints">endpoints</a>,{' '}
                                             <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an{' '}
                                             <a href="/ai">AI product assistant</a> to help debug your code, ship

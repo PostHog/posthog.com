@@ -47,7 +47,7 @@ export const llmAnalytics = {
     description: 'Track costs, performance, and usage of your AI features',
     handle: 'llm_analytics',
     type: 'llm_analytics',
-    slug: 'llm-analytics',
+    slug: 'ai-observability',
     color: 'purple',
     colorSecondary: 'green-2',
     category: 'analytics',
