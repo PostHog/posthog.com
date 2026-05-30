@@ -79,11 +79,18 @@ Here is a overview that shows which of our PMs currently works with which team:
 </fieldset>
 
 <fieldset>
+<legend><TeamMember name="Ruby Childs" photo /></legend>
+
+-   <SmallTeam slug="experiments" />
+-   <SmallTeam slug="feature-flags" />
+
+
+</fieldset>
+
+<fieldset>
 <legend>Product teams with no PM currently</legend>
 
 -   <SmallTeam slug="conversations" />
--   <SmallTeam slug="experiments" />
--   <SmallTeam slug="feature-flags" />
 
 </fieldset>
 
@@ -113,5 +120,5 @@ In Q2 2026, we are working on the following themes:
 
 “Business-as-usual” themes:
 
-- Make sure we standardise best practices & share knowledge as a group of 5 (soon to be 7) without central leadership, and without adding bureaucracy & friction
+- Make sure we standardise best practices & share knowledge as a group of 6 (soon to be 7) without central leadership, and without adding bureaucracy & friction
 - Use our PM brownbags to share how we use AI to be more effective
