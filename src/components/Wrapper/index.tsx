@@ -28,6 +28,19 @@ export default function Wrapper() {
         }
     }, [closingAllWindowsAnimation])
 
+    // Companion to the .reader-content-container a[aria-current='page'] CSS
+    // rule in global.css: that rule visually strips the link, but the <a>
+    // still has href + default tab focus. Without this, keyboard users land
+    // on invisible focus stops and Enter still triggers navigation.
+    // Runs after every render so newly-rendered MDX content is also covered.
+    useEffect(() => {
+        if (typeof document === 'undefined') return
+        document.querySelectorAll('.reader-content-container a[aria-current="page"]').forEach((el) => {
+            el.setAttribute('tabindex', '-1')
+            el.setAttribute('aria-disabled', 'true')
+        })
+    })
+
     return (
         <div
             data-scheme="primary"
