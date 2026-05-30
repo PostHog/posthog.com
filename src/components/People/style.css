@@ -1,0 +1,47 @@
+.people-team-font-size {
+    font-size: clamp(0.8rem, 12cqw, 1.25rem);
+}
+
+.people-team-font-size[data-length='long'] {
+    font-size: clamp(0.8rem, 8.5cqw, 1.25rem);
+}
+
+.people-team-font-size[data-length='extra-long'] {
+    font-size: clamp(0.5rem, 6.5cqw, 1.25rem);
+}
+
+.people-team-font-size[data-mobile-compact='long'] {
+    font-size: clamp(0.7rem, 6.3cqw, 0.95rem);
+    line-height: 0.88;
+}
+
+.people-team-font-size[data-mobile-compact='extra-long'] {
+    font-size: clamp(0.58rem, 5.2cqw, 0.82rem);
+    line-height: 0.86;
+}
+
+@container (min-width: 18rem) {
+    .people-team-font-size[data-mobile-compact='long'][data-length='medium'] {
+        font-size: clamp(0.8rem, 12cqw, 1.25rem);
+    }
+
+    .people-team-font-size[data-mobile-compact='long'][data-length='long'] {
+        font-size: clamp(0.8rem, 8.5cqw, 1.25rem);
+    }
+
+    .people-team-font-size[data-mobile-compact='long'][data-length='extra-long'] {
+        font-size: clamp(0.5rem, 6.5cqw, 1.25rem);
+    }
+
+    .people-team-font-size[data-mobile-compact='extra-long'][data-length='medium'] {
+        font-size: clamp(0.8rem, 12cqw, 1.25rem);
+    }
+
+    .people-team-font-size[data-mobile-compact='extra-long'][data-length='long'] {
+        font-size: clamp(0.8rem, 8.5cqw, 1.25rem);
+    }
+
+    .people-team-font-size[data-mobile-compact='extra-long'][data-length='extra-long'] {
+        font-size: clamp(0.5rem, 6.5cqw, 1.25rem);
+    }
+}

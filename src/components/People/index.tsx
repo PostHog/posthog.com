@@ -17,6 +17,7 @@ import debounce from 'lodash/debounce'
 import { useInView } from 'react-intersection-observer'
 import PeopleMap from 'components/HogMap/PeopleMap'
 import { IconMapPin, IconList } from '@posthog/icons'
+import './style.css'
 
 export const TeamMember = (props: any) => {
     const {
@@ -89,6 +90,27 @@ export const TeamMember = (props: any) => {
         if (length <= config.long) return 'long'
         return 'extra-long'
     }
+
+    const primaryTeamName = teamData[0]?.attributes?.name
+    const teamLabel =
+        teamData.length > 1 ? `${primaryTeamName} Team +${teamData.length - 1}` : `${primaryTeamName} Team`
+    const teamTextLength = primaryTeamName ? getTextLength(teamLabel, 'teamText') : 'medium'
+    const longestTeamWordLength = teamLabel
+        .split(/\s+/)
+        .filter(Boolean)
+        .reduce((max, word) => Math.max(max, word.length), 0)
+    const mobileTeamCompactness =
+        teamLabel.length > 20 || longestTeamWordLength >= 13
+            ? 'extra-long'
+            : teamLabel.length > 14 || longestTeamWordLength >= 10
+            ? 'long'
+            : 'medium'
+    const crestSizeClass =
+        mobileTeamCompactness === 'extra-long'
+            ? 'size-8 @[15rem]:size-10 @[18rem]:size-20'
+            : mobileTeamCompactness === 'long'
+            ? 'size-9 @[15rem]:size-12 @[18rem]:size-20'
+            : 'size-12 @[15rem]:size-16 @[18rem]:size-20'
 
     return (
         <div ref={ref}>
@@ -178,7 +200,7 @@ export const TeamMember = (props: any) => {
                                         {companyRole}
                                     </h4>
                                 </div>
-                                <div className="flex justify-end items-center gap-1 text-sm @[16rem]:text-base pt-1 pr-3 relative top-0 group-hover:-top-12 transition-all text-black -z-10">
+                                <div className="flex justify-end items-center gap-1 text-xs @[16rem]:text-sm @[18rem]:text-base pt-1 pr-3 @[15rem]:pr-16 @[18rem]:pr-20 relative top-0 group-hover:-top-12 transition-all text-black -z-10">
                                     <Stickers country={country} location={location} />{' '}
                                     {country === 'world' ? 'Planet Earth' : location || country}
                                 </div>
@@ -194,21 +216,25 @@ export const TeamMember = (props: any) => {
                             ></div>
                             {teamData.length > 0 ? (
                                 <div
-                                    className={`bg-${color} w-full flex flex-col justify-center px-2 min-h-[30cqh] relative top-[0%] group-hover:top-full transition-all`}
+                                    className={`bg-${color} w-full flex flex-col justify-center px-3 @[18rem]:px-2 min-h-[34cqh] @[18rem]:min-h-[30cqh] relative top-[0%] group-hover:top-full transition-all`}
                                 >
                                     <div className="relative flex h-full items-center">
                                         {/* Show first team */}
-                                        <div className="@container w-full pr-16">
+                                        <div
+                                            className={`@container w-full ${
+                                                mobileTeamCompactness === 'extra-long'
+                                                    ? 'pr-8 @[15rem]:pr-10 @[18rem]:pr-16'
+                                                    : mobileTeamCompactness === 'long'
+                                                    ? 'pr-10 @[15rem]:pr-12 @[18rem]:pr-16'
+                                                    : 'pr-14 @[15rem]:pr-16'
+                                            }`}
+                                        >
                                             <div
-                                                className="team-font-size font-squeak uppercase text-white leading-tight"
-                                                data-length={getTextLength(
-                                                    teamData.length > 1
-                                                        ? `${teamData[0].attributes.name} Team +${teamData.length - 1}`
-                                                        : `${teamData[0].attributes.name} Team`,
-                                                    'teamText'
-                                                )}
+                                                className="people-team-font-size font-squeak uppercase text-white leading-tight"
+                                                data-length={teamTextLength}
+                                                data-mobile-compact={mobileTeamCompactness}
                                             >
-                                                {teamData[0].attributes.name} Team
+                                                {primaryTeamName} Team
                                                 {teamData.length > 1 && (
                                                     <Tooltip
                                                         trigger={
@@ -252,7 +278,7 @@ export const TeamMember = (props: any) => {
                                                 width={160}
                                                 src={teamCrestMap[teamData[0].attributes.name]}
                                                 alt={`${teamData[0].attributes.name} Team`}
-                                                imgClassName="absolute -right-1 bottom-0 size-16 @[15rem]:size-20 object-contain transition-all"
+                                                imgClassName={`absolute -right-1 bottom-0 ${crestSizeClass} object-contain transition-all`}
                                             />
                                         )}
                                     </div>
