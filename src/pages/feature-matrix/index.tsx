@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { navigate } from 'gatsby'
 import OSButton from 'components/OSButton'
 import SEO from 'components/seo'
 import ProductComparisonTable from 'components/ProductComparisonTable'
+import { useUser } from 'hooks/useUser'
 
 // Import product data to get competitor lists
 import { productAnalytics } from 'hooks/productData/product_analytics'
@@ -102,7 +104,19 @@ const tableOfContents = [
     },
 ]
 
-export default function FeatureMatrix(): JSX.Element {
+export default function FeatureMatrix(): JSX.Element | null {
+    const { user, isModerator, isValidating } = useUser()
+
+    useEffect(() => {
+        if (!isValidating && (!user || !isModerator)) {
+            navigate('/')
+        }
+    }, [user, isModerator, isValidating])
+
+    if (isValidating || !user || !isModerator) {
+        return null
+    }
+
     // Helper function to sort competitors with PostHog first
     const sortCompetitors = (competitors: string[]) => {
         return competitors.sort((a, b) => {
@@ -150,6 +164,7 @@ export default function FeatureMatrix(): JSX.Element {
                 title="Feature matrix - PostHog vs the world"
                 description="Complete comparison matrix of PostHog against all competitors across all products and features"
                 image={`/images/og/default.png`}
+                noIndex
             />
             <ReaderView
                 title="Feature matrix"
