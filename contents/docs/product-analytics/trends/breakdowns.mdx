@@ -66,6 +66,8 @@ To breakdown by the combination of browser and operating system, for example, yo
 concat(properties.$browser, ' - ', properties.$os)
 ```
 
+> **Tip:** For complex SQL expressions, add `AS column_name` or `-- column_name` to the end of your expression to use a readable label instead of the raw expression in charts and tables. For example: `sumIf(1, properties.$browser = 'Chrome') AS chrome_count`.
+
 See our [SQL expression docs](/docs/sql/expressions) for more information.
 
 ## Cohorts and breakdowns
