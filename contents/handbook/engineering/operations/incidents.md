@@ -123,6 +123,16 @@ Sometimes, customer communication is required. In this case, the incident lead c
 
 [You can find further production runbooks + specific strategies for debugging outages here (internal)](https://runbooks.posthog.com)
 
+### Force-merging a fix
+
+Occasionally the fastest way to stop the bleeding is to ship a fix that can't wait for the normal review and CI gating. The **Force-merge a PR** Slack app is the sanctioned break-glass way to do this — it merges a PR even when branch protection would otherwise block it.
+
+This is for **exceptional cases only**. Take great care, and only reach for it when a fix is genuinely time-critical and waiting on required reviews or checks would prolong customer impact. Any PostHog employee can use it.
+
+To force-merge, open the shortcuts menu in **#dev** (or start typing `/force-`) and pick **Force-merge a PR**, then enter the repo, the PR number or URL, and a reason. Every force-merge is fully audited — it posts to Slack, comments on the PR with who triggered it and why, and is recorded in a tamper-proof log — so be ready to account for it in the [post-mortem](/handbook/engineering/operations/post-mortems).
+
+For the full list of guardrails and what the app will refuse to merge, see [Break-glass: force-merge a PR](/handbook/engineering/development-process#break-glass-force-merge-a-pr).
+
 ### The PostHog status page
 
 Our [status page](https://status.posthog.com/) is the central hub for all incident communication. You can update it easily using the `/incident statuspage` (`/inc sp`) Slack command.
