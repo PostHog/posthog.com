@@ -108,17 +108,27 @@ Each advertising platform provides data using different field names. PostHog nor
 | `Impressions` | `impressions` | | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/) |
 | `Clicks` | `clicks` | | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/) |
 | `Cost` | `spend` | Converted from `account_currency` if available | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/) |
-| `Reported Conversion` | `actions` array | Extracted by filtering for `purchase` and `omni_purchase` action types, summing `value` field | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/),  [Ads action stats](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/) |
-| `Reported Conversion Value` | `action_values` array | Extracted by filtering for `purchase` and `omni_purchase` action types, summing `value` field | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/),  [Ads action stats](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/) |
+| `Reported Conversion` | `actions` array | Sums conversion counts from omni action types (preferred) with automatic fallback to individual action types. Includes purchases, leads, registrations, app installs, and subscribes. | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/),  [Ads action stats](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/) |
+| `Reported Conversion Value` | `action_values` array | Sums conversion values from omni action types (preferred) with automatic fallback to individual action types. Includes purchases, leads, registrations, app installs, and subscribes. | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/),  [Ads action stats](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/) |
 | Date field | `date_stop` | End date of reporting period | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/) |
 
 **Required tables:** `campaigns` and `campaign_stats`
 
-**Special handling:** Meta stores conversions in JSON arrays. PostHog extracts purchase-related conversions using:
+**Special handling:** Meta stores conversions in JSON arrays. PostHog extracts conversions using a two-tier approach:
+
+1. **Omni action types** (preferred) - Comprehensive metrics that include all channels:
+   - `omni_purchase`, `omni_lead`, `omni_complete_registration`, `omni_app_install`, `omni_subscribe`
+
+2. **Fallback action types** - Used if omni types return no results (for accounts without omnichannel tracking):
+   - Purchase: `purchase`, `offsite_conversion.fb_pixel_purchase`, `app_custom_event.fb_mobile_purchase`
+   - Lead: `lead`, `offsite_conversion.fb_pixel_lead`, `onsite_conversion.lead_grouped`
+   - Registration: `complete_registration`, `offsite_conversion.fb_pixel_complete_registration`, `app_custom_event.fb_mobile_complete_registration`, `offsite_complete_registration_add_meta_leads`
+   - App install: `app_install`, `mobile_app_install`
+   - Subscribe: `subscribe`, `offsite_conversion.fb_pixel_subscribe`
+
+The logic uses omni values when available, otherwise falls back:
 ```sql
-arraySum(x -> JSONExtractFloat(x, 'value'),
-  arrayFilter(x -> JSONExtractString(x, 'action_type') IN ('purchase', 'omni_purchase'),
-    JSONExtractArrayRaw(actions)))
+SUM(if(omni_sum > 0, omni_sum, fallback_sum))
 ```
 
 </Tab.Panel>
