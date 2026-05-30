@@ -22,6 +22,7 @@ import { Drawer } from './components/Drawer'
 import { lib } from './components/Edition/lib'
 import { Emoji } from './components/Emoji'
 import { FeatureAvailability } from './components/FeatureAvailability'
+import { FeatureFlagCostCalculator } from './components/FeatureFlagCostCalculator'
 import FeatureOwnershipTable from './components/FeatureOwnershipTable'
 import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
@@ -94,6 +95,7 @@ export const shortcodes = {
     lib,
     Emoji,
     FeatureAvailability,
+    FeatureFlagCostCalculator,
     FormulaScreenshot,
     GDPRForm,
     HiddenSection,

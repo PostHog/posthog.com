@@ -16,6 +16,7 @@ import { Step, Steps } from './components/Docs/Steps'
 import { ProductChangelog } from './components/Docs/ProductChangelog'
 import { Emoji } from './components/Emoji'
 import { FeatureAvailability } from './components/FeatureAvailability'
+import { FeatureFlagCostCalculator } from './components/FeatureFlagCostCalculator'
 import FeatureOwnershipTable from './components/FeatureOwnershipTable'
 import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
@@ -51,6 +52,7 @@ export const shortcodes = {
     CompensationCalculator,
     Emoji,
     FeatureAvailability,
+    FeatureFlagCostCalculator,
     FormulaScreenshot,
     ImageSlider,
     GDPRForm,
