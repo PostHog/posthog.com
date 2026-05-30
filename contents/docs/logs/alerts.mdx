@@ -2,7 +2,7 @@
 title: Set up log alerts
 ---
 
-import CalloutBox from 'components/Docs/CalloutBox'
+import CalloutBox from "components/Docs/CalloutBox";
 
 <CalloutBox icon="IconInfo" title="Log alerts are coming soon" type="action">
 
@@ -82,28 +82,29 @@ After an alert fires, you can set a cooldown period (in minutes) before another 
 
 The alert list shows a table of all your alerts:
 
-| Column | Description |
-|--------|-------------|
-| **Name** | The alert name. Click to open the alert detail view. |
-| **Status** | Current alert state (see below). |
-| **Threshold** | Summary of the threshold rule (e.g. `> 100 in 10m`). |
-| **Last checked** | When the alert was last evaluated. |
-| **Last 24h** | Sparkline of the alert's state over the last 24 hours. Green = OK, red = firing, orange = resolving/errored, grey = snoozed or disabled. |
-| **Notifications** | Tags for each configured destination. A struck-through bell indicates no destinations. |
-| **Created by** | The user who created the alert. |
-| **Enabled** | Toggle to enable or disable the alert without deleting it. |
-| **⋯** | Edit, view history, snooze, reset (when broken), and delete actions. |
+| Column            | Description                                                                                                                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Name**          | The alert name. Click to open the alert detail view.                                                                                                                                       |
+| **Status**        | Current alert state (see below).                                                                                                                                                           |
+| **Threshold**     | Summary of the threshold rule (e.g. `> 100 in 10m`).                                                                                                                                       |
+| **Last checked**  | When the alert was last evaluated.                                                                                                                                                         |
+| **Next check**    | When the alert is next scheduled to be evaluated. Shows "Pending" if no time is available. Alerts of the same cadence are spread across the evaluation period to distribute database load. |
+| **Last 24h**      | Sparkline of the alert's state over the last 24 hours. Green = OK, red = firing, orange = resolving/errored, grey = snoozed or disabled.                                                   |
+| **Notifications** | Tags for each configured destination. A struck-through bell indicates no destinations.                                                                                                     |
+| **Created by**    | The user who created the alert.                                                                                                                                                            |
+| **Enabled**       | Toggle to enable or disable the alert without deleting it.                                                                                                                                 |
+| **⋯**             | Edit, view history, snooze, reset (when broken), and delete actions.                                                                                                                       |
 
 ### Alert states
 
-| State | Description |
-|-------|-------------|
-| **OK** | The alert condition is not met. |
-| **Firing** | The alert condition is met and notifications are being sent. |
-| **Resolving** | The condition was previously met but is no longer breaching the threshold. |
-| **Errored** | Something went wrong evaluating the alert. |
-| **Snoozed** | The alert is temporarily silenced. |
-| **Broken** | The alert has failed 5 consecutive checks and won't be evaluated again until you [reset it](#reset-a-broken-alert). |
+| State         | Description                                                                                                         |
+| ------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **OK**        | The alert condition is not met.                                                                                     |
+| **Firing**    | The alert condition is met and notifications are being sent.                                                        |
+| **Resolving** | The condition was previously met but is no longer breaching the threshold.                                          |
+| **Errored**   | Something went wrong evaluating the alert.                                                                          |
+| **Snoozed**   | The alert is temporarily silenced.                                                                                  |
+| **Broken**    | The alert has failed 5 consecutive checks and won't be evaluated again until you [reset it](#reset-a-broken-alert). |
 
 ### Edit an alert
 
