@@ -96,11 +96,17 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
                         static
                         className="absolute grid gap-y-2 right-0 bg-accent p-2 border border-input rounded mt-1"
                     >
-                        {categories.map((category) => {
+                        {[...categories]
+                            .sort((a, b) =>
+                                (a?.attributes?.label ?? '').localeCompare(b?.attributes?.label ?? '')
+                            )
+                            .map((category) => {
                             const active = Object.keys(selectedCategories).some(
                                 (selectedCategory) => selectedCategory === category.attributes.label
                             )
-                            const tags = category.attributes.post_tags?.data
+                            const tags = [...(category.attributes.post_tags?.data ?? [])].sort((a, b) =>
+                                (a?.attributes?.label ?? '').localeCompare(b?.attributes?.label ?? '')
+                            )
                             return (
                                 <Menu.Item as="span" key={category.id}>
                                     <button
