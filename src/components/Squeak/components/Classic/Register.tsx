@@ -8,6 +8,7 @@ import Wizard from 'components/Wizard'
 
 import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'
+import GoogleButton from './GoogleButton'
 
 const Input = ({
     label,
@@ -72,7 +73,7 @@ const RegisterForm: React.FC = () => {
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
             } else if (values.email.toLowerCase().endsWith('@posthog.com')) {
-                errors.email = 'Your employee account is created automatically. Reset your password to log in.'
+                errors.email = 'Your employee account is created automatically. Sign in with Google instead.'
             }
             if (!values.password) {
                 errors.password = 'Required'
@@ -133,6 +134,12 @@ const RegisterForm: React.FC = () => {
                     </div>
                     <div data-scheme="primary" className="flex-1">
                         <h3 className="text-base font-semibold leading-tight mb-4">Create your PostHog.com account</h3>
+                        <GoogleButton label="Sign up with Google" className="mb-2" />
+                        <div className="flex items-center gap-2 text-xs text-muted my-2">
+                            <span className="flex-1 border-t border-border" />
+                            or
+                            <span className="flex-1 border-t border-border" />
+                        </div>
                         <form onSubmit={handleSubmit} className="space-y-2 mb-4">
                             <Input
                                 label="First name"
