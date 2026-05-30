@@ -62,6 +62,49 @@ There's a lot more – analytics queries, feature flag and experiment management
 - **[Tools reference](/docs/model-context-protocol/tools)** – every tool the MCP server exposes, grouped by category
 - **[FAQ and advanced setup](/docs/model-context-protocol/faq)** – auth, scoping, filtering, safety, and other operational details
 
+## Calling the MCP server from a Node client
+
+For custom integrations or scripting, you can talk to the MCP server directly from Node using the official MCP SDK's Streamable HTTP transport. Two things people commonly miss:
+
+- Your `Accept` header needs both `application/json` and `text/event-stream` -- the server returns JSON for normal request/response calls and upgrades to an SSE stream for longer-running tool invocations.
+- The SDK's `connect()` handles the full MCP lifecycle for you (`initialize` followed by the `notifications/initialized` notification), so you do not need to send those manually.
+
+```js
+// tools-list.mjs
+import { Client } from '@modelcontextprotocol/sdk/client/index.js'
+import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
+import { ListToolsResultSchema } from '@modelcontextprotocol/sdk/types.js'
+import { URL } from 'node:url'
+
+const AUTH = process.env.POSTHOG_AUTH_HEADER // "Bearer phx_..."
+const MCP_URL = process.env.MCP_URL || 'https://mcp.posthog.com/mcp'
+
+if (!AUTH?.startsWith('Bearer ')) {
+    console.error('Set POSTHOG_AUTH_HEADER="Bearer phx_..."')
+    process.exit(1)
+}
+
+const transport = new StreamableHTTPClientTransport(new URL(MCP_URL), {
+    requestInit: {
+        headers: {
+            Authorization: AUTH,
+            Accept: 'application/json, text/event-stream',
+        },
+    },
+})
+
+const client = new Client({ name: 'example-node-client', version: '0.0.1' })
+
+await client.connect(transport)
+
+const { tools } = await client.request({ method: 'tools/list' }, ListToolsResultSchema)
+console.log('Tools:', tools.length)
+
+await client.close()
+```
+
+Create a [personal API key](/docs/api#personal-api-keys) with the scopes your MCP session needs and export it as `POSTHOG_AUTH_HEADER="Bearer phx_..."` before running the script.
+
 ## Next steps
 
 - [PostHog AI plugin](https://github.com/PostHog/ai-plugin): Install PostHog as a plugin for Claude Code, Codex, Cursor, and Gemini CLI
