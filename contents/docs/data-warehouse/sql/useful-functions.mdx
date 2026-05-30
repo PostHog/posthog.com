@@ -1,12 +1,12 @@
 ---
 title: Useful SQL functions
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
-Our SQL flavor includes many functions to aggregate and manipulate queried data. Below are some examples of some of the most popular SQL functions you can use in your insights. 
+Our SQL flavor includes many functions to aggregate and manipulate queried data. Below are some examples of some of the most popular SQL functions you can use in your insights.
 
 ## Aggregate functions
 
@@ -17,10 +17,10 @@ These aggregate results for columns across all rows. They include:
 - `max()`, `min()`: Finds the maximum or minimum value of a column.
 
 ```sql
-SELECT 
-   avg(properties.$screen_height), 
-   sum(properties.$screen_height), 
-   max(properties.$screen_height), 
+SELECT
+   avg(properties.$screen_height),
+   sum(properties.$screen_height),
+   max(properties.$screen_height),
    min(properties.$screen_height)
 FROM events
 WHERE event = '$pageview' AND properties.$screen_height IS NOT NULL
@@ -49,7 +49,7 @@ You can find a full list of these in [supported ClickHouse functions](/docs/sql/
 - `parseDateTimeBestEffort`: Converts most human-readable dates into a datetime.
 
 ```sql
-SELECT 
+SELECT
    formatDateTime(now(), '%a %b %T') AS current_time,
    toDayOfWeek(now()) AS current_day_of_week,
    dateDiff('day', timestamp, now()) AS days_since_event,
@@ -73,7 +73,7 @@ If you want to access dashboard or insight date filters, you can use the [variab
 - `upper`, `lower`: Converts a string to uppercase or lowercase.
 
 ```sql
-select 
+select
    extract(elements_chain, '[:|"]attr__class="(.*?)"') as class_name,
 	concat(properties.$os, ' version: ', properties.$os_version),
 	replaceRegexpOne(properties.$current_url, '^/', 'site/') AS modified_current_url
@@ -161,8 +161,8 @@ ORDER BY
 You can also use it for art.
 
 ```sql
-select 
-    sparkline(arrayMap(a -> cos(toSecond(timestamp) + a/4), range(100 + 5 * toSecond(timestamp)))) 
+select
+    sparkline(arrayMap(a -> cos(toSecond(timestamp) + a/4), range(100 + 5 * toSecond(timestamp))))
 from events
 ```
 
@@ -171,10 +171,10 @@ from events
 If you have a SemVer version number, you can use the `sortableSemVer()` function to get a version number that you can use for sorting purposes.
 
 SELECT
-    DISTINCT properties.$lib_version
+DISTINCT properties.$lib_version
 FROM events
 WHERE event = '$pageview'
-  AND timestamp >= now() - INTERVAL 1 DAY
+AND timestamp >= now() - INTERVAL 1 DAY
 ORDER BY sortableSemVer(properties.$lib_version) DESC
 LIMIT 10
 
@@ -202,9 +202,75 @@ LIMIT 10
 You can use actions in SQL by using the `matchesAction()` function with the name of your action. For example, to get a count of the action clicked homepage button, you can do:
 
 ```sql
-SELECT count() 
-FROM events 
+SELECT count()
+FROM events
 WHERE matchesAction('clicked homepage button')
+```
+
+### Surveys
+
+Use `getSurveyResponse()` to retrieve survey response values from event properties. It takes a zero-based question index, an optional question ID, and an optional boolean for multiple choice responses.
+
+Use `uniqueSurveySubmissionsFilter()` in a `WHERE` clause to deduplicate survey submissions. It takes a survey ID and optional start/end timestamps.
+
+```sql
+SELECT
+    getSurveyResponse(0) as first_response,
+    getSurveyResponse(1, 'question_abc') as second_response
+FROM events
+WHERE event = 'survey sent'
+    AND uniqueSurveySubmissionsFilter('survey_abc123')
+```
+
+### Currency conversion
+
+Use `convertCurrency()` to convert an amount from one currency to another using exchange rates. It takes a source currency code, target currency code, amount, and an optional timestamp for historical rates.
+
+```sql
+SELECT
+    convertCurrency('USD', 'EUR', 100) as euros_now,
+    convertCurrency('USD', 'GBP', properties.revenue, timestamp) as gbp_at_event_time
+FROM events
+WHERE event = 'purchase'
+```
+
+### Channel attribution
+
+PostHog includes helper functions used internally for [channel type](/docs/data/channel-type) classification. You can also call them directly:
+
+- `lookupDomainType(domain)` - Returns the domain category (e.g., search, social, shopping)
+- `lookupPaidSourceType(source)` - Returns the paid channel type for a traffic source
+- `lookupPaidMediumType(medium)` - Returns the paid channel type for a medium
+- `lookupOrganicSourceType(source)` - Returns the organic channel type for a traffic source
+- `lookupOrganicMediumType(medium)` - Returns the organic channel type for a medium
+
+```sql
+SELECT
+    lookupDomainType(properties.$initial_referring_domain) as domain_type,
+    lookupPaidSourceType(properties.$initial_utm_source) as paid_source_type
+FROM events
+WHERE event = '$pageview'
+```
+
+### Text embeddings
+
+Use `embedText()` to generate a vector embedding for a given text string. This is useful for semantic search and AI applications. It takes a text string and an optional model name.
+
+```sql
+SELECT
+    embedText('user clicked the buy button') as embedding
+FROM (SELECT 1)
+```
+
+### CSP reports
+
+Use `explainCSPReport()` to format Content Security Policy violation reports into a human-readable explanation.
+
+```sql
+SELECT
+    explainCSPReport(properties) as csp_explanation
+FROM events
+WHERE event = '$csp_report'
 ```
 
 ### Translation
@@ -222,7 +288,7 @@ SELECT
 
 ### HTML tags and links
 
-These HTML tags are currently supported, but for security reasons, none of them support attributes right now: 
+These HTML tags are currently supported, but for security reasons, none of them support attributes right now:
 
 - `<div>`, `<p>`, `<span>`, `<pre>`, `<code>`
 - `<em>`, `<strong>`, `<b>`, `<i>`, `<u>`
@@ -234,7 +300,7 @@ These HTML tags are currently supported, but for security reasons, none of them 
 Most useful is the `<a>` tag for creating links. URLs are automatically clickable in the **Table** visualization, but you can also set a custom link using an `<a>` tag.
 
 ```sql
-select 
+select
     properties.$pathname,
     <a href={f'https://posthog.com/{properties.$pathname}'} target='_blank'>Link</a> as link
 from events
