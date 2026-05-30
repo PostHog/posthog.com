@@ -151,6 +151,7 @@
         { "source": "/docs/integrations/segment-integration", "destination": "/docs/libraries/segment" },
         { "source": "/docs/integrations/sentry-integration", "destination": "/docs/error-tracking" },
         { "source": "/docs/integrations/slack", "destination": "/docs/libraries/slack" },
+        { "source": "/docs/posthog-code/slack", "destination": "/docs/slack-app" },
         { "source": "/handbook/company/structure", "destination": "/handbook/people/team-structure/why-small-teams" },
         { "source": "/handbook/people/team", "destination": "/people" },
         { "source": "/handbook/company/team", "destination": "/people" },

@@ -1,0 +1,30 @@
+---
+title: PostHog Slack app pricing
+---
+
+<CalloutBox icon="IconWarning" title="Beta pricing" type="fyi">
+
+The Slack app is in beta. Billing is usage-based through PostHog AI credits and may change as the product matures - check this page again before relying on a specific number for budgeting.
+
+</CalloutBox>
+
+The PostHog Slack app doesn't have its own subscription. The agent that runs behind `@PostHog` mentions consumes **PostHog AI credits** for the LLM work it does - planning a task, editing files, reasoning about your data - so anything billable in Slack rolls up under your existing PostHog AI usage.
+
+For credit mechanics, the free monthly tier, billing limits, and the live pricing calculator, see [PostHog AI pricing](/docs/posthog-ai/pricing).
+
+## What costs credits
+
+Anything the agent does behind an `@PostHog` mention - drafting a PR, answering a data question with the PostHog MCP, summarizing a thread to spec a feature. The same per-token economics that apply to PostHog AI in the app apply here.
+
+## What's free
+
+A lot of the Slack surface is just plumbing and stays free:
+
+- **Subscriptions** to insights and dashboards delivered to Slack channels (see [subscriptions](/docs/product-analytics/subscriptions)).
+- **Event-driven Slack notifications** sent via Data Pipeline destinations (see [Slack destination](/docs/cdp/destinations/slack)).
+- **Link unfurling** for PostHog insight and dashboard URLs.
+- The `@PostHog help`, `rules`, and `project` commands themselves - no LLM call, no credits.
+
+## Tracking and controlling spend
+
+Slack-driven credit usage shows up alongside in-app PostHog AI usage in [billing overview](https://app.posthog.com/organization/billing/overview) and [billing usage](https://app.posthog.com/organization/billing/usage). Set a custom billing limit on PostHog AI to cap spend across both surfaces at once - there's no separate cap for the Slack app.
