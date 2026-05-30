@@ -20,37 +20,8 @@ We try to help engineers from the very beginning, when their product is just bei
 
 ## Our strategy
 
-### 1. Be the source of truth for all product context
+### 1. Get all the data from day 1
 
-Building a successful product is hard; doing so when you don't understand your customers is even harder. It's wild that no one has already provided a complete record of everything engineers need to ship products. This has happened because the entire industry has focused on integration instead of consolidation.
+### 2. Find out what their customers want
 
-Traditionally, as companies scale, their data warehouse becomes the source of truth, and non-warehouse native tools (like product analytics) become less relevant as engineers lose trust in the data they collect, simply because they are misused and divorced from the source of truth. Every company winds up with a huge mess of data spaghetti, with their business logic still spread across dozens or hundreds of tools.
-
-We provide developer infrastructure - by providing _every_ tool engineers need in one place, we can:
-
-- Enhance the utility of all the tools when used together by engineering teams
-- Increase trust in data by eliminating complex data stacks that engineers have to navigate
-- Automate everything better than anyone else can, by using AI across this wider context
-- Continue to provide all the tools engineering teams need as they grow
-
-### 2. Provide every tool engineers need to build successful products
-
-We aim to offer every tool engineering teams need to debug, understand, and improve their products. From session replay for debugging to feature flags for safe deployments, we help engineers ship better code faster.
-
-We can then get our AI to work across all of them together, whilst making every individual tool cheaper than the rest of the market - since we provide so many we can charge less. This means engineers get better tools at a fraction of the cost of piecing together solutions from multiple vendors.
-
-### 3. Get in first
-
-Since developers exist first in a startup, by getting in with them early, we are naturally upstream of every other tool they might have considered using. Although anyone can pick up our products (and lots of mature companies certainly do), this means we can best deliver developer infrastructure to early stage companies, and so should focus there by default.
-
-_Once_ we land a customer, we then let them pull _us_ upmarket as they grow. But not before. We don't want to hire a big enterprise sales team and go upmarket before our existing customers are there. This keeps us efficient and able to stay focused on building tools that engineers actually want to use.
-
-### 4. Automate the iteration process
-
-Because we have all the context on both users and the product, we can automate large chunks of the cycle of shipping -> observing -> iterating.
-
-## Secret master plan
-
-* Ship every tool and all the data that engineering teams need to understand their product and users
-* Use that to speed up the cycle of shipping -> observing -> iterating
-* Eventually, automate the entire cycle
+### 3. Ship it for them
