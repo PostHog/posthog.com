@@ -1,0 +1,162 @@
+---
+title: Translating surveys
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+Surveys can be translated into any number of languages. When a translated survey is shown to a user, PostHog automatically picks the right language based on the user's locale or explicit overrides, falls back to the original text when no translation exists, and records the matched language on every survey event so you can analyze responses by language.
+
+## How translations are picked at display time
+
+When a survey is about to render, the SDK resolves a single language code by checking these signals in order:
+
+1. **Explicit override** set on the SDK config (`overrideDisplayLanguage` / `override_display_language`).
+2. **The `language` person property** set on the user via `identify()`, e.g. `identify("user-1", { language: "fr" })`.
+3. **The device or browser locale** (`navigator.language` on web, `Locale.current` on iOS, `Locale.getDefault()` on Android).
+
+Whichever returns the first non-empty value wins. If none are present, the survey renders in its original language.
+
+Matching against the survey's `translations` dictionary is **case-insensitive** with a **base-language fallback**:
+
+- `fr` matches `fr` exactly.
+- `pt-BR` matches `pt-BR` exactly when present, otherwise falls back to `pt`.
+- `es` does **not** match `es-MX` — base fallback only applies when the user's locale has a region suffix that isn't a direct match.
+
+If the survey has no translation entry for the resolved language (or no translations at all), it renders in its original copy and no language metadata is attached to events.
+
+## Authoring translations in the PostHog app
+
+When creating or editing a survey, you can add translations from the survey editor. Each translatable field gets a per-language override.
+
+<!-- SCREENSHOT: Survey editor with the "Translations" panel open, showing the language picker and the localized fields for `name`, `thankYouMessageHeader`, each question's `question` text, `description`, `buttonText`, choices, and rating bound labels. Light + dark mode. -->
+
+The fields you can translate at the survey level are:
+
+- `name`
+- `thankYouMessageHeader`
+- `thankYouMessageDescription`
+- `thankYouMessageCloseButtonText`
+
+The fields you can translate per question are:
+
+- `question`
+- `description`
+- `buttonText`
+- `link` (link questions only)
+- `lowerBoundLabel` / `upperBoundLabel` (rating questions only)
+- `choices` (single / multiple choice questions only)
+
+Any field you leave empty falls back to the original. So a partial translation (e.g. just translating the question text but not the button text) is fine — the untranslated fields render in the original copy.
+
+> The survey-level `description` field is intentionally not translatable. It is only used as an internal preview and is never shown to end users.
+
+## SDK requirements
+
+Survey translations are supported on the following SDK versions:
+
+| SDK                    | Minimum version |
+| ---------------------- | --------------- |
+| posthog-js             | 1.372.3         |
+| posthog-react-native   | 4.44.0          |
+| posthog-ios            | 3.59.0          |
+| posthog-android        | 3.45.0          |
+
+Older SDKs will render the original (untranslated) survey copy without errors.
+
+## Configuring the display language
+
+In most cases you don't need to do anything in code — the SDK will pick the user's locale automatically. If you want to force a specific language (e.g. your app already has a language picker and you want surveys to follow it), set the override on the SDK config.
+
+### Web
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    override_display_language: 'fr',
+})
+```
+
+You can also update it at runtime:
+
+```js
+posthog.set_config({ override_display_language: 'pt-BR' })
+```
+
+### React Native
+
+```react-native
+import { PostHogProvider } from 'posthog-react-native'
+
+<PostHogProvider
+    apiKey="<ph_project_api_key>"
+    options={{
+        host: '<ph_client_api_host>',
+        overrideDisplayLanguage: 'fr',
+    }}
+>
+    {/* ... */}
+</PostHogProvider>
+```
+
+### iOS
+
+```swift
+let config = PostHogConfig(projectToken: "<ph_project_api_key>", host: "<ph_client_api_host>")
+if #available(iOS 15.0, *) {
+    config.surveys = true
+    config.surveysConfig.overrideDisplayLanguage = "fr"
+}
+PostHogSDK.shared.setup(config)
+```
+
+### Android
+
+```kotlin
+val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>", host = "<ph_client_api_host>").apply {
+    surveys = true
+    surveysConfig.overrideDisplayLanguage = "fr"
+}
+PostHogAndroid.setup(this, config)
+```
+
+## Setting language as a person property
+
+If your app already tracks language as part of the user profile, you can pass it through `identify()` and the SDK will pick it up for surveys automatically:
+
+```js-web
+posthog.identify('user-123', { language: 'pt-BR' })
+```
+
+The same `language` person property works across every SDK. It takes precedence over the device locale, and is overridden by an explicit `overrideDisplayLanguage` / `override_display_language` config.
+
+## Analyzing responses by language
+
+Every survey event captured for a translated survey includes a `$survey_language` property carrying the matched language code (e.g. `"fr"`, `"pt-BR"`, `"pt"` after a base-language fallback). The property is omitted when the survey rendered in its original language (no translation matched).
+
+The `$survey_questions` property on `survey sent` and `survey dismissed` events also reflects the translated question text the user actually saw, so individual responses are easy to read in the event view.
+
+To break down responses by language in an [insight](/docs/product-analytics/insights), filter the `survey sent` event and use `$survey_language` as a breakdown dimension.
+
+<!-- SCREENSHOT: Insight breakdown chart showing "survey sent" event broken down by $survey_language, with bars for each language code. -->
+
+## Frequently asked questions
+
+### What happens if I add translations to a live survey?
+
+Existing in-flight responses are not affected. New impressions immediately render in the user's resolved language once the survey is saved and the SDK refreshes its remote config.
+
+### Does this work with custom survey UI?
+
+Yes. When you implement a custom survey renderer using the `onSurveyShown` / `onSurveyResponse` / `onSurveyClosed` callbacks (iOS and Android), the survey object passed to your delegate already has the translated strings substituted. No additional work is needed on your side.
+
+### Can I translate the same survey into 10 languages?
+
+Yes. There's no limit on the number of language entries per survey. Each language is an independent key in the `translations` map.
+
+### My device is set to `pt-BR` but I only have a `pt` translation — what happens?
+
+The SDK falls back to the base language. `pt-BR` → `pt` matches, and `$survey_language` on captured events is set to `"pt"` (the actual dictionary key that matched, not the requested target).
