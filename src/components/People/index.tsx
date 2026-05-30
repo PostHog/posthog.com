@@ -1,7 +1,8 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { AVATAR_FALLBACK_URL } from 'constants/index'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery, navigate } from 'gatsby'
 import React, { useState, useMemo, useCallback, useEffect } from 'react'
+import { useLocation } from '@reach/router'
 import Link from 'components/Link'
 import { SEO } from '../seo'
 import ReactMarkdown from 'react-markdown'
@@ -286,7 +287,13 @@ interface PeopleProps {
 }
 
 export default function People({ searchTerm, filteredMembers }: PeopleProps = {}) {
+    const location = useLocation()
     const [activeTab, setActiveTab] = useState<'list' | 'map'>('list')
+
+    useEffect(() => {
+        const view = new URLSearchParams(location.search).get('view')
+        setActiveTab(view === 'map' ? 'map' : 'list')
+    }, [location.search])
 
     const {
         team: { teamMembers },
@@ -399,7 +406,18 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
                             value: 'map',
                         },
                     ]}
-                    onValueChange={(value) => setActiveTab(value as 'list' | 'map')}
+                    onValueChange={(value) => {
+                        const tab = value as 'list' | 'map'
+                        setActiveTab(tab)
+                        const params = new URLSearchParams(location.search)
+                        if (tab === 'map') {
+                            params.set('view', 'map')
+                        } else {
+                            params.delete('view')
+                        }
+                        const qs = params.toString()
+                        navigate(qs ? `${location.pathname}?${qs}` : location.pathname, { replace: true })
+                    }}
                     value={activeTab}
                 />
             </div>
