@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Tab as HeadlessTab } from '@headlessui/react'
 import { classNames } from 'lib/utils'
 import Slider from 'components/Slider'
+import useCloud from 'hooks/useCloud'
 
 export const Tab: React.FC & {
     Group: typeof HeadlessTab.Group
@@ -32,7 +33,18 @@ export const Tab: React.FC & {
 }
 
 const TabGroup: typeof HeadlessTab.Group = ({ children, tabs }) => {
-    const [selectedIndex, setSelectedIndex] = useState(0)
+    const cloud = useCloud()
+
+    const getInitialIndex = () => {
+        if (typeof window !== 'undefined' && tabs?.length > 0) {
+            const params = new URLSearchParams(window.location.search)
+            const urlIndex = tabs.indexOf(params.get('tab'))
+            if (urlIndex >= 0) return urlIndex
+        }
+        return 0
+    }
+
+    const [selectedIndex, setSelectedIndex] = useState(getInitialIndex)
     const hasTabs = tabs?.length > 0
 
     const handleChange = (index: number) => {
@@ -45,12 +57,20 @@ const TabGroup: typeof HeadlessTab.Group = ({ children, tabs }) => {
     }
 
     useEffect(() => {
+        console.log('Cloud value in TabGroup:', cloud)
         if (hasTabs && typeof window !== 'undefined') {
             const params = new URLSearchParams(window.location.search)
             const tabIndex = tabs.indexOf(params.get('tab'))
-            if (tabIndex >= 0) setSelectedIndex(tabIndex)
+            if (tabIndex >= 0) {
+                setSelectedIndex(tabIndex)
+            } else if (cloud) {
+                const cloudIndex = tabs.findIndex((tab) => tab?.toLowerCase() === cloud.toLowerCase())
+                if (cloudIndex >= 0) {
+                    setSelectedIndex(cloudIndex)
+                }
+            }
         }
-    }, [])
+    }, [cloud])
 
     return (
         <HeadlessTab.Group selectedIndex={selectedIndex} onChange={handleChange} as="div" className="my-4">
