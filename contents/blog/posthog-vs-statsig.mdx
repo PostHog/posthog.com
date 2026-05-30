@@ -22,15 +22,19 @@ PostHog and Statsig both offer A/B testing and feature flags, but they're differ
 
 -   **Statsig** is a dedicated testing platform that offers advanced statistical methods for running tests. It's ideal for data scientists and growth teams in large enterprises who need to conduct complex A/B testing.
 
--   **PostHog** is an all-in-one platform for engineers and product teams who want a more straightforward approach to experimentation. In addition to A/B testing, it offers [feature flags](/feature-flags), advanced [product analytics](/product-analytics), [session replays](/docs/session-replay), [surveys](/surveys), and more.
+-   **PostHog** is an all-in-one platform for engineers and product teams who want a more straightforward approach to experimentation. In addition to A/B testing, it offers [feature flags](/feature-flags), advanced [product analytics](/product-analytics), [session replays](/docs/session-replay), [surveys](/surveys), and more – all purpose-built to work together, not bolted on through acquisitions.
+
+> **Heads up:** Statsig was acquired by OpenAI in September 2025. In May 2026, Amplitude acquired Statsig's brand and customer base from OpenAI and is now maintaining the product while integrating it into the Amplitude platform.
 
 This post compares their platforms, experimentation features, pricing, and more.
 
 ## How is PostHog different?
 
-### 1. We're an all-in-one platform
+### 1. We're a genuine all-in-one platform
 
-PostHog brings together all the tools engineers need for testing, releasing, and measuring the success of new features. Feature flags and A/B testing are only part of a suite of tools PostHog offers.
+PostHog brings together all the tools engineers need for testing, releasing, and measuring the success of new features – product analytics, web analytics, session replay, feature flags, experiments, surveys, error tracking, and LLM observability – in a single app with a single login. Feature flags and A/B testing are just part of the suite.
+
+Unlike platforms that have grown through acquisitions (and are now stitching Statsig's tooling into a separate product), PostHog was purpose-built from day one to be all-in-one. That means consistent data models, shared event capture, and tools that actually work together instead of feeling like separate apps glued behind a single login.
 
 ![PostHog homepage features](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-statsig/all.png)
 
@@ -46,8 +50,11 @@ We update [our changelog](/changelog) with a recap of new features every week, a
 
 ## Comparing PostHog and Statsig
 
+PostHog and Statsig started in different places. Statsig began as a dedicated A/B testing tool and added analytics, session replay, and feature management as separate modules. PostHog was designed from the start as a unified platform – every product shares the same event pipeline, person profiles, cohorts, and dashboards, so there's nothing to stitch together.
+
 ### Platform
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'statsig']}
     rows={[
@@ -64,6 +71,7 @@ We update [our changelog](/changelog) with a recap of new features every week, a
         'experiments.supported_tests.features.data_warehouse_experiments',
     ]}
 />
+</p>
 
 ### Experimentation
 
@@ -71,8 +79,9 @@ Both tools enable you to run [A/B/n](/tutorials/abn-testing) and [multivariate](
 
 -   **Statsig** offers some more advanced testing techniques, such as multi-armed bandit, mutually exclusive, and holdout tests. It also lets you choose between Bayesian and Frequentist engines, and supports Bonferroni correction.
 
--   **PostHog** provides a more intuitive user interface and simpler setup process, making it ideal for teams who prefer a more straightforward approach to experimentation, and tight integration with its other powerful tools.
+-   **PostHog** provides a more intuitive user interface and simpler setup process, making it ideal for teams who prefer a more straightforward approach to experimentation. Because experiments share the same event pipeline as product analytics, session replay, and surveys, you can dig into _why_ a test won or lost without leaving the platform – no extra integrations or duplicate event definitions required.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'statsig']}
     rows={[
@@ -88,6 +97,7 @@ Both tools enable you to run [A/B/n](/tutorials/abn-testing) and [multivariate](
         'experiments.supported_tests.features.mutually_exclusive_experiments',
     ]}
 />
+</p>
 
 -   **Holdout testing:** It's possible to run a [holdout test](/tutorials/holdout-testing) across multiple A/B tests in PostHog. However, the process is more manual than Statsig's, which has built-in functionality to do this.
 
@@ -95,6 +105,7 @@ Both tools enable you to run [A/B/n](/tutorials/abn-testing) and [multivariate](
 
 While both offer the core features you need, Statsig's feature flags are boolean-based, while PostHog supports [multivariate flags with JSON payloads](/docs/feature-flags/creating-feature-flags#served-value) _and_ boolean flags. This provides greater flexibility in testing and deploying different variations of a feature, making them more suitable for complex rollouts.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'statsig']}
     rows={[
@@ -110,6 +121,7 @@ While both offer the core features you need, Statsig's feature flags are boolean
         'feature_flags.features.remote_config',
     ]}
 />
+</p>
 
 ### Product analytics
 
@@ -117,8 +129,9 @@ Both PostHog and Statsig offer the functionality you expect from product analyti
 
 -   **PostHog** provides deep insights into how users are interacting with your product. It includes features such as lifecycle, stickiness, correlation, and retention analysis.
 
--   **Statsig** does provide some additional insights, such as retention analysis, but its main focus is to use product analytics to set up metrics to run A/B tests on.
+-   **Statsig** does provide some additional insights, such as retention analysis, but its main focus is to use product analytics to set up metrics to run A/B tests on. Analytics in PostHog isn't a downstream feature of experiments – it's a first-class product, built alongside flags, replay, and surveys from day one.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'statsig']}
     rows={[
@@ -137,6 +150,7 @@ Both PostHog and Statsig offer the functionality you expect from product analyti
         'product_analytics.insights.features.sql_editor',
     ]}
 />
+</p>
 
 ### Integrations
 
@@ -144,6 +158,7 @@ Both PostHog and Statsig have a range of integrations that enable them to import
 
 Below is a sample comparison of PostHog and Statsig's integrations. Be sure to checkout [PostHog's full list of integrations](/cdp).
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'statsig']}
     rows={[
@@ -157,11 +172,13 @@ Below is a sample comparison of PostHog and Statsig's integrations. Be sure to c
         'platform.integrations.microsoft_teams',
     ]}
 />
+</p>
 
 ### Security and compliance
 
 Both PostHog and Statsig enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'statsig']}
     rows={[
@@ -176,6 +193,7 @@ Both PostHog and Statsig enable companies to remain secure and compliant with pr
         'feature_flags.management.features.permissioning',
     ]}
 />
+</p>
 
 ## Frequently asked questions
 
