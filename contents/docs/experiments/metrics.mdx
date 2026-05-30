@@ -124,6 +124,14 @@ This ensures that only relevant, post-exposure behavior is included in the analy
   alt="Screenshot of conversion window configuration"
 />
 
+### Only count matured users
+
+When a metric has a custom conversion window, some users may still be within their window when you view results. By default, these in-progress users are included in calculations even though their window hasn't fully elapsed.
+
+Enable **Only count matured users** to exclude these users and only count those whose full conversion window has elapsed. This is an experiment-level setting found in the experiment's **Settings** tab, and it applies to all metrics on the experiment that have a custom time window. Metrics using "experiment duration" are unaffected.
+
+This is useful when you want a cleaner picture of completed conversions without noise from users who are still within their conversion window.
+
 ## Primary and secondary metrics
 
 Each metric can be set as either a **primary** or **secondary** metric. This is just a way of organizing metrics - primary and secondary metrics work the same way.
