@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-The Support inbox is where your team views and responds to customer conversations. Each ticket includes rich context from PostHog to help you understand and resolve issues quickly.
+The Support inbox is where your team views and responds to customer conversations. You can also [create outbound tickets](/docs/support/email#creating-outbound-tickets) to proactively reach out to customers via email. Each ticket includes rich context from PostHog to help you understand and resolve issues quickly.
 
 ## Accessing the inbox
 
@@ -14,16 +14,16 @@ Go to **Support** in the main PostHog navigation to access your inbox.
 
 Each ticket has the following properties:
 
-| Property              | Description                                                         |
-| --------------------- | ------------------------------------------------------------------- |
-| **Ticket number**     | Auto-incremented unique number (e.g., #1, #2, #3)                   |
-| **Status**            | `new`, `open`, `pending`, `on_hold`, `resolved`                     |
-| **Priority**          | `low`, `medium`, `high` (optional)                                  |
-| **Channel**           | Where the ticket came from: `widget`, `slack`, `email`, or `github` |
-| **Assignee**          | User or role responsible for the ticket                             |
-| **Session ID**        | The PostHog session for events and exceptions                       |
-| **Session Replay ID** | The session recording (if replay is enabled)                        |
-| **Distinct ID**       | PostHog distinct_id for person linking                              |
+| Property              | Description                                                                                                                       |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Ticket number**     | Auto-incremented unique number (e.g., #1, #2, #3)                                                                                 |
+| **Status**            | `new`, `open`, `pending`, `on_hold`, `resolved`                                                                                   |
+| **Priority**          | `low`, `medium`, `high` (optional)                                                                                                |
+| **Channel**           | Source channel: `widget`, `slack`, `email`, or `github`. Outbound tickets created via **Compose ticket** use the `email` channel. |
+| **Assignee**          | User or role responsible for the ticket                                                                                           |
+| **Session ID**        | The PostHog session for events and exceptions                                                                                     |
+| **Session Replay ID** | The session recording (if replay is enabled)                                                                                      |
+| **Distinct ID**       | PostHog distinct_id for person linking                                                                                            |
 
 ## Status workflow
 
