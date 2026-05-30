@@ -1,0 +1,100 @@
+---
+title: Event and property reference
+---
+
+This page is the wire-level contract for the `@posthog/mcp` SDK. Every event the SDK emits and every property name it uses is listed here. All property keys are prefixed with `$mcp_*` so they never collide with PostHog autocapture, Web analytics, or other product events.
+
+## Events
+
+| Event name | When it fires | Notable extras |
+|---|---|---|
+| `$mcp_tool_call` | Every `tools/call` request | `$mcp_tool_name`, `$mcp_tool_description`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, `$mcp_is_error`, optionally `$mcp_intent`/`$mcp_intent_source`, optionally `$ai_trace_id`/`$ai_span_id` when AI tracing is on |
+| `$mcp_tools_list` | Every `tools/list` response | `$mcp_listed_tool_names` (string[] of advertised tool names) |
+| `$mcp_initialize` | Every client/server handshake | `$mcp_client_name`, `$mcp_client_version`, `$mcp_server_name`, `$mcp_server_version` |
+| `$mcp_resources_list` | Every `resources/list` request | — |
+| `$mcp_resource_read` | Every `resources/read` request | `$mcp_resource_name`, `$mcp_parameters`, `$mcp_response` |
+| `$mcp_prompts_list` | Every `prompts/list` request | — |
+| `$mcp_prompt_get` | Every `prompts/get` request | `$mcp_resource_name` (the prompt name) |
+| `$mcp_custom` | A call to `publishCustomEvent` | Your `properties`, plus `$mcp_resource_name`, `$mcp_parameters`, `$mcp_response` if you passed them |
+| `$identify` | `identify()` returns a new identity for a session | `$set` populated from `userName` and `userData` |
+| `$exception` | Sibling event whenever a tool errors | `$exception_message`, `$exception_type`, `$exception_stacktrace`, `$exception_source = "backend"`, plus the same `$mcp_*` context as the main event |
+| `$ai_span` | Sibling event to every `$mcp_tool_call` when `enableAITracing: true` | Full `$ai_*` set — see [LLM analytics integration](/docs/mcp-analytics/ai-tracing) |
+
+## Core properties
+
+Present on most `mcp_*` events.
+
+| Wire key | Type | Source |
+|---|---|---|
+| `$session_id` | string | The MCP session id (`ses_<32-hex>`). Derived deterministically from the MCP protocol session id when available; otherwise minted and rotated after 30 minutes of inactivity. |
+| `$mcp_source` | string | Always `"posthog_mcp_analytics"`. Use this to filter out non-MCP events when querying mixed projects. |
+| `$mcp_resource_name` | string | Tool, resource, or prompt name |
+| `$mcp_tool_name` | string | Same as `$mcp_resource_name`, but only on `$mcp_tool_call` |
+| `$mcp_tool_description` | string | The tool's `description` at the moment of the call. Cached from `tools/list` and (for `McpServer`) seeded from `_registeredTools`. Only on `$mcp_tool_call` and the paired `$exception` event. |
+| `$mcp_listed_tool_names` | string[] | Names of tools advertised in a `tools/list` response. Only on `$mcp_tools_list`. Useful for joining against `$mcp_tool_call` via `$session_id` to find tools advertised but never called. |
+| `$mcp_duration_ms` | number (ms) | Wall-clock duration of the tool call |
+| `$mcp_is_error` | boolean | True if the tool threw or returned `isError: true` |
+| `$mcp_server_name` | string | `server._serverInfo.name` |
+| `$mcp_server_version` | string | `server._serverInfo.version` |
+| `$mcp_client_name` | string | `server.getClientVersion().name` |
+| `$mcp_client_version` | string | `server.getClientVersion().version` |
+| `$mcp_intent` | string | From the `context` argument the agent passed, or from your `intentFallback` callback. See [Capturing agent intent](/docs/mcp-analytics/intent). |
+| `$mcp_intent_source` | `"context_parameter" \| "inferred"` | Tells you which path produced the intent. Absent when no intent was captured. |
+| `$mcp_parameters` | object | Sanitized request arguments. Excludes the SDK-injected `context` and `conversation_id` arguments. |
+| `$mcp_response` | object | Sanitized tool result |
+| `$mcp_conversation_id` | string | Present when `enableConversationId` is on. See [Conversation IDs](/docs/mcp-analytics/conversation-id). |
+
+## AI tracing properties
+
+Present on `$ai_span` events and duplicated on the matching `$mcp_tool_call` when `enableAITracing: true`.
+
+| Wire key | Type | Notes |
+|---|---|---|
+| `$ai_session_id` | string | `posthog_mcp_analytics_${sessionId}` — namespaced |
+| `$ai_trace_id` | string | Equals the MCP `$session_id`. Tool calls in one MCP session share this. |
+| `$ai_span_id` | string | Per tool call. Unique. |
+| `$ai_span_name` | string | Tool name |
+| `$ai_is_error` | boolean | Mirrors `$mcp_is_error` |
+| `$ai_latency` | number (**seconds**) | `duration_ms / 1000` — note the unit difference from `$mcp_duration_ms` |
+| `$ai_input_state` | object | Same content as `$mcp_parameters` |
+| `$ai_output_state` | object | Same content as `$mcp_response` |
+| `$ai_error` | object | Set when `$ai_is_error` is true |
+
+## Exception properties
+
+Present on `$exception` events emitted alongside any failed tool call.
+
+| Wire key | Source |
+|---|---|
+| `$exception_source` | Always `"backend"` |
+| `$exception_message` | The error's message |
+| `$exception_type` | The error's name/type |
+| `$exception_stacktrace` | The error's stack trace, sanitized |
+
+Plus `$session_id`, `$mcp_resource_name`, `$mcp_tool_name`, `$mcp_tool_description` (tool calls only), `$mcp_server_*`, and `$mcp_client_*` for context.
+
+## Person properties (`$set`)
+
+Set on `$identify` events when `identify()` returns a user.
+
+| Key | Source |
+|---|---|
+| `name` | `UserIdentity.userName` |
+| (any) | Top-level keys of `UserIdentity.userData` are spread onto `$set` |
+
+## Constants exported from the package
+
+For product code that queries against the SDK's contract, the package exports:
+
+- `POSTHOG_MCP_ANALYTICS_SOURCE` — the constant `"posthog_mcp_analytics"` (matches `$mcp_source`)
+- `PostHogMCPAnalyticsEvent` — enum of canonical event names
+- `PostHogMCPAnalyticsProperty` — enum of canonical property names
+
+Use them instead of hard-coding strings so renames stay typesafe:
+
+```ts
+import { PostHogMCPAnalyticsEvent, PostHogMCPAnalyticsProperty } from "@posthog/mcp"
+
+const event = PostHogMCPAnalyticsEvent.ToolCall            // "$mcp_tool_call"
+const key = PostHogMCPAnalyticsProperty.ToolName           // "$mcp_tool_name"
+```

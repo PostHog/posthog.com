@@ -1,0 +1,77 @@
+---
+title: Viewing MCP traffic in LLM analytics
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+By default, MCP analytics emits `mcp_*` events that you can query through Product analytics, dashboards, and the event explorer. If you'd also like MCP tool calls to show up in [LLM analytics](/docs/llm-analytics) — alongside any `$ai_generation` spans you're already capturing — enable AI tracing.
+
+<CalloutBox icon="IconInfo" title="What this gives you (and what it doesn't)" type="fyi">
+
+`enableAITracing` makes MCP tool calls visible in the LLM analytics UI as `$ai_span` events. It does **not** automatically link them to your agent's LLM generations, because the SDK runs inside your MCP server — it has no visibility into the agent's LLM calls on the other side of the wire.
+
+If you also instrument your agent with the [LLM analytics SDK](/docs/llm-analytics/installation) and propagate `$ai_trace_id` from the agent into the MCP `context` argument (or vice versa), you can join the two sides yourself. Out of the box, the spans are useful as a flat per-session view of MCP activity, not as full distributed traces.
+
+</CalloutBox>
+
+## Enabling
+
+```ts
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  enableAITracing: true,
+})
+```
+
+With this on, every `$mcp_tool_call` event gets a sibling `$ai_span` event sent to PostHog. The two events share `$ai_trace_id` and `$ai_span_id`, so the join is free if you ever want to query them together.
+
+## What the spans look like
+
+Every `$ai_span` carries:
+
+| Wire key | Type | Source |
+|---|---|---|
+| `$ai_session_id` | string | `posthog_mcp_analytics_${sessionId}` — namespaced to avoid collisions with other LLM session ids in the same project |
+| `$ai_trace_id` | string | Equals the MCP `$session_id`. All tool calls in one MCP session share this trace id. |
+| `$ai_span_id` | string | Per tool call (`evt_…`). Unique. |
+| `$ai_span_name` | string | The tool name |
+| `$ai_is_error` | boolean | Mirrors `$mcp_is_error` |
+| `$ai_latency` | number (**seconds**) | `duration_ms / 1000`. Note: different unit from `$mcp_duration_ms`. |
+| `$ai_input_state` | object | Same content as `$mcp_parameters` |
+| `$ai_output_state` | object | Same content as `$mcp_response` |
+| `$ai_error` | object | Set when `$ai_is_error` is true |
+
+The `$mcp_tool_call` event also has `$ai_trace_id` and `$ai_span_id` stamped on it so it can be joined back to the span.
+
+## Joining MCP and AI spans by hand
+
+The LLM analytics UI does this join automatically. If you're writing ad-hoc HogQL:
+
+```sql
+SELECT
+  c.properties.$mcp_tool_name    AS tool,
+  c.properties.$mcp_duration_ms  AS duration_ms,
+  s.properties.$ai_latency       AS ai_latency_s,
+  c.properties.$mcp_intent       AS intent
+FROM events c
+INNER JOIN events s
+  ON s.event = '$ai_span'
+ AND s.properties.$ai_span_id = c.properties.$ai_span_id
+WHERE c.event = '$mcp_tool_call'
+  AND c.timestamp > now() - INTERVAL 24 HOUR
+LIMIT 100
+```
+
+## When to enable
+
+Turn `enableAITracing` on when:
+
+- You want MCP tool activity visible in LLM analytics without building your own dashboards from scratch.
+- You're already running LLM analytics in the same project and want one place to look for everything model-adjacent.
+
+Leave it off when:
+
+- You don't use LLM analytics. The extra `$ai_span` events double your event volume for tool calls.
+- You want strict event-volume control. The `$ai_span` payload duplicates `$mcp_parameters` and `$mcp_response` under different keys.
+
+You can toggle this option at any time — it only affects events emitted after the change.

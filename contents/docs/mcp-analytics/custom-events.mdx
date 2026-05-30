@@ -1,0 +1,81 @@
+---
+title: Custom events and metadata
+---
+
+Sometimes the events the SDK emits out of the box aren't enough. You might want to attach metadata to every event, or emit a fully custom event for something that isn't a tool call. The SDK gives you two hooks for that, in order of increasing invasiveness.
+
+## `eventProperties` — metadata on every event
+
+Pass an `eventProperties` callback to attach extra properties to every event the SDK emits. The callback runs per request, so values can depend on the current call (request id, transport, headers, env, region, deploy SHA, etc).
+
+```ts
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  eventProperties: async (request, extra) => ({
+    $app_version: process.env.GIT_SHA ?? "unknown",
+    $mcp_region: process.env.FLY_REGION ?? "unknown",
+    request_id: extra?.requestInfo?.headers?.["x-request-id"],
+  }),
+})
+```
+
+The returned object is spread flat onto the event's properties alongside the built-in `$mcp_*` keys:
+
+```json
+{
+  "event": "$mcp_tool_call",
+  "properties": {
+    "$mcp_tool_name": "search_events",
+    "$app_version": "a1b2c3d",
+    "$mcp_region": "iad",
+    "request_id": "req_…",
+    "…"
+  }
+}
+```
+
+For a "stamp on everything" use case (the closest analogue to `posthog.register(...)` in other SDKs), just return constants from the callback. The callback is per-event rather than session-persistent, so the values can also vary per request if you need them to.
+
+Attach grouping via the standard PostHog `$groups` key:
+
+```ts
+eventProperties: async () => ({
+  $groups: { organization: orgId, project: projectId },
+})
+```
+
+Returned values must be JSON-serializable. Errors thrown from your callback are swallowed and surfaced to your `logger` — they never interrupt tool execution.
+
+## `publishCustomEvent` — emit an arbitrary event
+
+When the built-in events don't cover what you need — for example, recording a feedback signal from your own UI, or capturing a domain event that isn't an MCP request — use `publishCustomEvent`. It writes onto the same queue as everything else, so it inherits the SDK's redaction, sanitization, identity, and `eventProperties` logic.
+
+```ts
+import { publishCustomEvent } from "@posthog/mcp"
+
+await publishCustomEvent(server, {
+  resourceName: "monthly_usage",
+  message: "User reported overage",
+  properties: {
+    plan: "growth",
+    units: 12_345,
+    period: "2026-04",
+  },
+})
+```
+
+What lands in PostHog:
+
+- A single `$mcp_custom` event with your `properties` merged in.
+- The session id, identity, and any `eventProperties` callback still apply.
+- `publishCustomEvent` is exempt from `enableTracing: false` — explicit user-initiated calls always fire even if auto-capture is off.
+
+The server must already have been passed to `instrument()`. Passing a non-instrumented server throws — there's no implicit setup.
+
+## Which one to use
+
+| You want to... | Use |
+|---|---|
+| Attach the same properties to every auto-captured event | `eventProperties` |
+| Emit a one-off event that isn't an MCP request | `publishCustomEvent` |
+| Attach data to a *specific* tool call (just that one) | Not directly supported — the callbacks run on every event. The SDK doesn't currently expose a per-call hook. |

@@ -1,0 +1,99 @@
+---
+title: Privacy and redaction
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+MCP tool calls can carry sensitive payloads — API tokens, customer PII, raw model output. The SDK applies a layered pipeline before any event leaves your process. This page explains what's stripped automatically, what you can hook into, and what's never sent in the first place.
+
+## What never leaves your process
+
+The SDK does not capture:
+
+- Your `projectToken` or any environment variables.
+- The transport itself (TCP/WebSocket frames, MCP framing internals).
+- Tool source code, function references, or closures.
+- The full content of `image` or `audio` content blocks (replaced with a text stub).
+- The content of `resource` blocks with a `blob` payload.
+
+`$mcp_tool_call` payloads include `$mcp_parameters` (the request arguments) and `$mcp_response` (the tool's result), after the pipeline below.
+
+## The redaction pipeline
+
+Every event runs through three stages before being handed to the PostHog client:
+
+### 1. Customer redaction (optional)
+
+If you pass `redactSensitiveInformation`, the SDK calls it on every string in the event payload. It's the first stage, so anything you redact here never reaches the sanitizer or the wire.
+
+```ts
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  redactSensitiveInformation: async (value) => {
+    return value
+      .replace(/sk-[A-Za-z0-9]{20,}/g, "[redacted: api key]")
+      .replace(/\b[\w.+-]+@[\w-]+\.[\w.-]+\b/g, "[redacted: email]")
+  },
+})
+```
+
+A small allowlist of structural fields is **never** passed to your redactor: `sessionId`, the event `id`, `server`, identify-related fields, `resourceName`, `eventType`, `actorId`, and `properties`. The SDK needs those untouched to keep events queryable.
+
+### 2. Automatic sanitization
+
+After your callback, the SDK runs a deterministic sanitizer:
+
+- **Image/audio content blocks** → replaced with `[image redacted: <mime>]` or `[audio redacted: <mime>]`.
+- **Resource blocks with a `.blob`** → replaced with `[resource redacted: <mime>]`.
+- **Long base64-looking strings (≥10KB)** → replaced with `"[binary data redacted...]"`.
+- **Keys matching the sensitive-key pattern** — `authorization`, `cookie`, `password`, `token`, `secret`, `api_key`, `private_key`, and similar — have their values replaced with `"[redacted]"`.
+- **PostHog API key patterns** (`ph[a-z]_…`) in any string value → replaced with `"[redacted]"`.
+
+This stage is not configurable. It's safety net behavior — if you have stricter requirements, encode them in `redactSensitiveInformation`.
+
+### 3. Truncation
+
+After sanitization, the payload is truncated to fit within PostHog ingestion limits:
+
+- Per-field caps applied to large strings.
+- Recursive normalization: max depth 10, max breadth 100, max string 32 KB.
+- A 100 KB total event budget, with progressive falloff if the budget is exceeded.
+
+If a payload would exceed the budget, the SDK truncates rather than drops. The truncation markers are visible in the captured `$mcp_parameters` / `$mcp_response`.
+
+## Disabling capture entirely
+
+If you only want session/timing metadata and *no* payload, the cleanest option today is a redactor that nukes everything:
+
+```ts
+redactSensitiveInformation: async () => "[redacted]",
+```
+
+<CalloutBox icon="IconInfo" title="A dedicated 'no payload' mode is on the roadmap" type="fyi">
+
+Until we ship a first-class option, the redactor-returning-`"[redacted]"` trick is the supported way to capture only timing and tool metadata.
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="Drain the queue before exit" type="fyi">
+
+The SDK queues and batches events asynchronously. Call `shutdown(server)` from your `SIGTERM` / `beforeExit` handler so in-flight events aren't dropped. See [Installation](/docs/mcp-analytics/installation#graceful-shutdown) for the snippet.
+
+</CalloutBox>
+
+## Buffering and back-pressure
+
+The in-memory queue is owned by the underlying `@posthog/core` client. If it overflows or fails to flush, events are dropped with a warning surfaced to your `logger`.
+
+## Logging
+
+MCP servers commonly speak over stdio, where any write to `console.*` corrupts the protocol stream. The SDK defaults its `logger` to a no-op for that reason — wire your own in development so warnings (failed redactor calls, swallowed `identify` errors, dropped batches) become visible:
+
+```ts
+instrument(server, {
+  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  logger: (message) => fs.appendFileSync("/tmp/mcp.log", message + "\n"),
+})
+```
+
+Errors thrown from your `redactSensitiveInformation`, `identify`, `intentFallback`, and `eventProperties` callbacks are swallowed and routed to the logger — they never surface to the agent or interrupt tool execution.
