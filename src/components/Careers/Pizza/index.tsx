@@ -494,8 +494,8 @@ export const Pizza = () => {
 
             <div>
                 <iframe
-                    title="Does pineapple belong on pizza?"
-                    src="https://www.youtube-nocookie.com/embed/QeU5MmpqBg0?rel=0"
+                    title="Life at PostHog"
+                    src="https://www.youtube-nocookie.com/embed/dGaSxBs3OsU?rel=0"
                     className="w-full aspect-video rounded"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
