@@ -1,0 +1,79 @@
+---
+title: How to connect PostHog and InsForge
+sidebar: Docs
+showTitle: true
+date: 2026-05-29
+author:
+    - sara-miteva
+tags:
+    - integrations
+    - product analytics
+---
+
+[InsForge](https://insforge.dev) is a backend-as-a-service for AI-built apps. This tutorial walks you through linking a PostHog project from the InsForge dashboard, using the embedded analytics views, and sending events from your app with the PostHog SDK.
+
+The integration uses PostHog's [provisioning API](/docs/integrate/provisioning). InsForge documents their side in [their setup guide](https://insforge.dev/blog/insforge-posthog-analytics).
+
+## Prerequisites
+
+- An [InsForge](https://insforge.dev) project
+- A PostHog account (optional – InsForge can create one for you during setup)
+
+## Step 1: Connect PostHog in InsForge
+
+1. Open your InsForge project and go to the **Analytics** tab.
+2. Click **Connect PostHog**.
+
+![Connect PostHog in the InsForge dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_insforge_connect_e484d383bf.avif)
+
+3. Complete the connection flow:
+   - **Existing PostHog account:** approve the OAuth consent screen, choose the organization and project, then return to InsForge. The page reloads when the link is ready.
+   - **New to PostHog:** InsForge provisions a PostHog project via the provisioning API. You receive a welcome email to set a password, but you can use embedded analytics in InsForge before signing in to posthog.com.
+
+4. Open the gear icon and **Analytics Config** to copy your project token, host, and project ID when you need them elsewhere.
+
+![PostHog connected in InsForge](https://res.cloudinary.com/dmukukwp6/image/upload/analytics_connected_new_0f11a6b430.avif)
+
+## Step 2: Use embedded analytics
+
+After connection, the **Analytics** tab shows PostHog data via the [`/query` API](/docs/api/queries) – the same data as on posthog.com, rendered inside InsForge.
+
+- Use the time-range selector at the top to filter every card on the page.
+- Click **Open in PostHog** to open the full PostHog app for deeper analysis.
+
+### Traffic
+
+The **Traffic** tab includes visitor, pageview, and bounce-rate KPIs with trend charts, plus breakdowns for top pages, countries, and device types.
+
+![Traffic analytics in InsForge](https://res.cloudinary.com/dmukukwp6/image/upload/analytics_traffic_7ac8f89668.avif)
+
+### User retention
+
+**User Retention** shows a weekly retention cohort based on `$pageview` events.
+
+![User retention in InsForge](https://res.cloudinary.com/dmukukwp6/image/upload/analytics_retention_cdf0e631f7.avif)
+
+### Session replay
+
+**Session Replay** lists recent recordings. Open a recording in a modal to use the PostHog player without leaving InsForge.
+
+## Step 3: Send events from your app
+
+Connecting the dashboard does not instrument your application. You still need a PostHog SDK to capture product events.
+
+1. In **Analytics Config**, open the **Setup Prompt** tab.
+2. Copy the one-line prompt into Claude Code, Cursor, or another agent that runs the InsForge skill. The skill points to the [PostHog SDK installation wizard](/docs/getting-started/install), which detects your framework, installs the SDK, and configures it with your project token.
+
+For headless or CI setups, run:
+
+```bash
+npx @insforge/cli posthog setup
+```
+
+This runs the same setup flow from the terminal.
+
+## Next steps
+
+- [Capture events](/docs/product-analytics/capture-events) and [identify users](/docs/product-analytics/identify) so retention and funnels reflect real product usage.
+- [Set up embedded analytics](/tutorials/embedded-analytics) in your own product if you want a similar in-app analytics experience.
+- Read the [provisioning API docs](/docs/integrate/provisioning) if you are building a partner integration like InsForge.
