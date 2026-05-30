@@ -9,6 +9,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import CustomRoadmapSlide from 'components/AI/CustomRoadmapSlide'
 import CustomPersonasSlide from 'components/AI/CustomPersonasSlide'
 import CustomCapabilitiesSlide from 'components/AI/CustomCapabilitiesSlide'
+import AIEverywhereSlide from 'components/AI/AIEverywhereSlide'
 import { useWindow } from '../../context/Window'
 import TerminalView from 'components/AI/TerminalView'
 import usePostHog from 'hooks/usePostHog'
@@ -143,6 +144,11 @@ export default function PostHogAI(): JSX.Element {
                 name: 'Advanced modes',
                 component: CustomCapabilitiesSlide,
             },
+            {
+                slug: 'everywhere',
+                name: 'PostHog AI everywhere',
+                component: AIEverywhereSlide,
+            },
             // {
             //     slug: 'manifesto',
             //     name: 'AI manifesto',
@@ -152,6 +158,7 @@ export default function PostHogAI(): JSX.Element {
         order: [
             'overview',
             'features',
+            'everywhere',
             'demos',
             'try-it',
             'capabilities',
