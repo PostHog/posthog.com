@@ -761,6 +761,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/conventions/backend-coding',
                     },
                     {
+                        name: 'Inclusive language',
+                        url: '/handbook/engineering/conventions/inclusive-language',
+                    },
+                    {
                         name: 'Scripts',
                         url: '/handbook/engineering/conventions/scripts',
                     },
