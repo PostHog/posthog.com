@@ -47,7 +47,7 @@ export function WaitlistForm({ autoFocus = false, confetti = true }: { autoFocus
 
     return (
         <form onSubmit={handleSubmit} className="space-y-2">
-            <h3 className="text-lg font-bold mb-2 !mt-0">Join the waitlist</h3>
+            <h3 className="text-lg font-bold mb-2 !mt-0">Join the waitlist.</h3>
             <Input
                 ref={inputRef}
                 autoFocus={autoFocus}
