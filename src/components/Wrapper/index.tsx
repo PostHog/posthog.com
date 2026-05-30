@@ -31,6 +31,7 @@ export default function Wrapper() {
     return (
         <div
             data-scheme="primary"
+            data-menu-container
             className={`${
                 websiteMode
                     ? 'max-w-7xl mx-auto border-x border-primary bg-primary shadow-xl min-h-screen'
