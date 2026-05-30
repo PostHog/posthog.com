@@ -4,45 +4,112 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ComparisonTable } from "components/ComparisonTable";
+import { ComparisonRow } from "components/ComparisonTable/row";
 
 In a nutshell:
 
--   [Web analytics](/web-analytics) is good for tracking and monitoring high-level website metrics like page views, bounce rate, and the top sources of traffic. It's a pre-defined dashboard, so it's easy to quickly dip into and find what you need.
+- [Web analytics](/web-analytics) is good for tracking and monitoring high-level website metrics like page views, bounce rate, and the top sources of traffic. It's a pre-defined dashboard, so it's easy to quickly dip into and find what you need.
 
--   [Product analytics](/product-analytics) is good for diving deep into how specific users, or groups of users, behave. There are [dashboard templates](/templates) to help you get started, but you can build custom insights and dashboards to your precise needs, and use [notebooks](/docs/notebooks) for adhoc analysis.
+- [Product analytics](/product-analytics) is good for diving deep into how specific users, or groups of users, behave. There are [dashboard templates](/templates) to help you get started, but you can build custom insights and dashboards to your precise needs, and use [notebooks](/docs/notebooks) for adhoc analysis.
 
 Here's a quick comparison:
 
 <ComparisonTable column1="Web analytics" column2="Product analytics">
-    <ComparisonRow column1={'One, pre-built'} column2={'Unlimited, customizable'} feature="Dashboards" />
-    <ComparisonRow column1={false} column2={true} feature="Custom insights" />
-    <ComparisonRow column1={'Pageview, pageleave, conversions'} column2={'Any, custom'} feature="Events" />
-    <ComparisonRow column1={'Limited, pre-defined'} column2={'Any, custom'} feature="Properties" />
-    <ComparisonRow
-        column1={'Small teams, marketers'}
-        column2={'Engineering, product, data teams'}
-        feature="Built for"
-    />
-    <ComparisonRow
-        column1={'At-a-glance view of website traffic'}
-        column2={'Analysis of product usage and user behavior'}
-        feature="Use case"
-    />
+  <ComparisonRow
+    column1={"One, pre-built"}
+    column2={"Unlimited, customizable"}
+    feature="Dashboards"
+  />
+  <ComparisonRow column1={false} column2={true} feature="Custom insights" />
+  <ComparisonRow
+    column1={"Pageview, pageleave, conversions"}
+    column2={"Any, custom"}
+    feature="Events"
+  />
+  <ComparisonRow column1={"Limited, pre-defined"} column2={"Any, custom"} feature="Properties" />
+  <ComparisonRow
+    column1={"Small teams, marketers"}
+    column2={"Engineering, product, data teams"}
+    feature="Built for"
+  />
+  <ComparisonRow
+    column1={"At-a-glance view of website traffic"}
+    column2={"Analysis of product usage and user behavior"}
+    feature="Use case"
+  />
 </ComparisonTable>
+
+## Why do the numbers differ?
+
+You might notice that metrics like unique visitors or pageviews show different numbers in web analytics compared to a similar query in product analytics. This is expected and happens because the two tools count things differently.
+
+### Session-based vs event-based counting
+
+Web analytics groups data by **sessions**. If a session has any events within your selected date range, the entire session is included — along with all its metrics and pageviews, even those outside the range. Product analytics counts individual **events** based on when they occurred.
+
+**Example:** A visitor starts browsing your site at 11:55 PM on December 31st and views 3 pages, with the last pageview at 12:05 AM on January 1st.
+
+- **Web analytics** (for Jan 1-7): The session has a pageview on Jan 1, so the entire session is included — including the Dec 31 pageview and full session duration
+- **Product analytics** (for Jan 1-7): Only the pageview at 12:05 AM on Jan 1 is counted because it's the only event that occurred within the range
+
+### Date boundary handling
+
+Web analytics queries for all sessions that have events within your selected date range. It then expands to include the full session data — even parts that fall outside the range — so it can calculate accurate session-level metrics like duration and bounce rate. This means a session that started before (or extends after) your date range will still be included as long as it has at least one event during the range, and all of its pageviews and metrics will be counted.
+
+**Example with sample data:**
+
+Suppose you're looking at data for **February 1st, 2025** and have these pageviews:
+
+| Session | User  | Session start        | Pageview time        | Path       |
+| ------- | ----- | -------------------- | -------------------- | ---------- |
+| A       | Alice | 2025-01-31 23:50 UTC | 2025-01-31 23:50 UTC | /pricing   |
+| A       | Alice | 2025-01-31 23:50 UTC | 2025-02-01 00:05 UTC | /docs      |
+| A       | Alice | 2025-01-31 23:50 UTC | 2025-02-01 00:10 UTC | /signup    |
+| B       | Alice | 2025-02-01 14:00 UTC | 2025-02-01 14:00 UTC | /dashboard |
+| B       | Alice | 2025-02-01 14:00 UTC | 2025-02-01 14:15 UTC | /settings  |
+| C       | Bob   | 2025-02-01 10:00 UTC | 2025-02-01 10:00 UTC | /blog      |
+| C       | Bob   | 2025-02-01 10:00 UTC | 2025-02-01 10:15 UTC | /pricing   |
+| C       | Bob   | 2025-02-01 10:00 UTC | 2025-02-01 10:30 UTC | /demo      |
+| D       | Carol | 2025-02-01 23:55 UTC | 2025-02-01 23:55 UTC | /home      |
+| D       | Carol | 2025-02-01 23:55 UTC | 2025-02-02 00:10 UTC | /features  |
+
+**Web analytics results** (session-based, for Feb 1):
+
+| Metric       | Count | Explanation                                                                                                                                                                                                           |
+| ------------ | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Unique users | 3     | Alice, Bob, Carol. All have sessions with events on Feb 1.                                                                                                                                                            |
+| Pageviews    | 10    | Session A (3) + B (2) + C (3) + D (2). All sessions have events on Feb 1, so the full session data is included — even pageviews outside the range (e.g., Session A's Jan 31 pageview and Session D's Feb 2 pageview). |
+
+**Product analytics results** (event-based, for Feb 1):
+
+| Metric       | Count | Explanation                                                                                                    |
+| ------------ | ----- | -------------------------------------------------------------------------------------------------------------- |
+| Unique users | 3     | Alice, Bob, Carol—all had events on Feb 1.                                                                     |
+| Pageviews    | 8     | Alice: 4 (2 from session A + 2 from B), Bob: 3, Carol: 1. Counts all Feb 1 events regardless of session start. |
+
+The key difference: web analytics includes full session data for any session with events in the range, while product analytics only counts events that occurred during the range. This is why web analytics may show **more** pageviews (it includes events outside the range from qualifying sessions) or **different** user counts depending on session boundaries.
+
+### Which number is "correct"?
+
+Both are correct—they're just measuring different things:
+
+- **Web analytics** answers: "What does the full picture look like for sessions active during this period?"
+- **Product analytics** answers: "How many events occurred during this period?"
+
+For most website metrics, the session-based approach in web analytics gives you a more accurate picture of user behavior. For precise event counting or custom analysis, use product analytics.
 
 ## When should you use web analytics?
 
-Web analytics gives you a single, pre-built [dashboard](https://us.posthog.com/web) for a high-level overview of your site. It's about collecting data in the aggregate, as opposed to tracking specific interactions from specific users.
+Web analytics gives you a single, pre-built [dashboard](https://app.posthog.com/web) for a high-level overview of your site. It's about collecting data in the aggregate, as opposed to tracking specific interactions from specific users.
 
 It can help you figure out which pages and products are most popular and resonate the most with people.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_dark_mode_2024_10_6aa6dc9aeb.png"
-    alt="Web analytics dashboard"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_dark_mode_2024_10_6aa6dc9aeb.png"
+  alt="Web analytics dashboard"
+  classes="rounded"
 />
 
 You can use web analytics to find out:
@@ -156,10 +223,10 @@ For more on web analytics, check out our [getting started](/docs/web-analytics/g
 When you want to dive deeper into user behavior in your app and how they are interacting with features. It gives you insights into metrics such as feature adoption rate, user retention, and churn.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-light-mode.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-dark-mode.png"
-    classes="rounded"
-    alt="Product analytics example"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-light-mode.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-dark-mode.png"
+  classes="rounded"
+  alt="Product analytics example"
 />
 
 You can use product analytics to:
