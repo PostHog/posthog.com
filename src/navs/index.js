@@ -1385,6 +1385,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/tam-excellence',
                     },
                     {
+                        name: 'How to be a curious TAM',
+                        url: '/handbook/growth/sales/how-to-be-a-curious-tam',
+                    },
+                    {
                         name: 'Getting people to talk to you',
                         url: '/handbook/growth/sales/getting-people-to-talk-to-you',
                     },
