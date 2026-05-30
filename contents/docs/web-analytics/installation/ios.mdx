@@ -10,6 +10,35 @@ Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/web-analy
 See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
 -->
 
-import { WAIOSInstallationWrapper } from './_snippets/wa-installation-wrapper.tsx'
+import { WAIOSInstallationWrapper } from "./_snippets/wa-installation-wrapper.tsx";
 
 <WAIOSInstallationWrapper />
+
+## SwiftUI configuration
+
+If you're using SwiftUI lifecycle with `WindowGroup`, initialize PostHog in your app's `init()`:
+
+```swift
+import SwiftUI
+import PostHog
+
+@main
+struct YourGreatApp: App {
+    init() {
+        let POSTHOG_API_KEY = "<ph_project_token>"
+        let POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+
+        let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
+        config.captureScreenViews = true // Enable automatic screen view tracking
+        PostHogSDK.shared.setup(config)
+    }
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+```
+
+For more advanced options, see the [iOS SDK configuration page](/docs/libraries/ios/configuration).
