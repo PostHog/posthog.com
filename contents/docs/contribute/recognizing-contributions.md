@@ -6,7 +6,7 @@ showTitle: true
 
 At PostHog we aim to recognize all contributions made to our open source codebases. We do this largely via automated processes that ensure our contributors are recognized. 
 
-## Pull requests
+# Pull requests
 
 If you submit a Pull Request to a repository under the `PostHog` organization, a bot will automatically send you an email to get in touch with us for a merch code. 
 
