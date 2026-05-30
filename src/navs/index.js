@@ -5712,6 +5712,11 @@ export const docsMenu = {
                             icon: 'IconCode',
                         },
                         {
+                            name: 'OpenCode',
+                            url: '/docs/llm-analytics/installation/opencode',
+                            icon: 'IconOpenCode',
+                        },
+                        {
                             name: 'Claude Code',
                             url: '/docs/ai-observability/installation/claude-code',
                             icon: 'IconClaudeCode',
