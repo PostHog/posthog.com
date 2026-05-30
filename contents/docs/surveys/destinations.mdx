@@ -8,15 +8,34 @@ availability:
   enterprise: full
 ---
 
-It can be useful to send survey responses to external [destinations](/docs/cdp/destinations). For example, you can receive [Slack](/tutorials/slack-surveys) notifications or trigger [Zapier zaps](/tutorials/zapier-surveys) whenever users responds to your survey.
+You can send survey responses to Slack, Discord, Microsoft Teams, or a custom webhook. The easiest way is to add a notification directly from the survey page. For more advanced use cases, you can also use [data pipeline destinations](/docs/cdp/destinations).
 
-To do this:
+## Add a notification from the survey page
+
+To add a notification directly from your survey:
+
+1. Open your survey and go to the **Notifications** tab.
+2. Click **Add notification**.
+3. Choose a destination: **Slack**, **Discord**, **Microsoft Teams**, or **Webhook**.
+4. Configure the destination (e.g., select a Slack channel or enter a webhook URL).
+5. Customize the message template. Use the **quick insert** buttons to add the survey name, respondent details, or individual question responses.
+6. Click **Add notification**.
+
+Notifications created this way are automatically scoped to the current survey and filter for completed submissions by default. If your survey has partial responses enabled, you can toggle **Only notify for full responses** off to receive notifications for partial submissions too.
+
+For Slack notifications, you can also include buttons to view the survey and the respondent's person profile.
+
+After creating a notification, you can open it from the notifications list to use the full [Hog function](/docs/cdp/destinations) editor for deeper customization.
+
+## Use data pipeline destinations
+
+For more advanced use cases like [Zapier zaps](/tutorials/zapier-surveys), you can set up destinations through the data pipeline:
 
 1. Go to the [data pipeline destinations tab](https://app.posthog.com/data-management/destinations).
 
 2. Search for the destination you want and click **+ Create** (or click **Create** on **HTTP Webhook** for custom destinations).
 
-3. Follow the steps to integrate with destination.
+3. Follow the steps to integrate with the destination.
 
 4. Under **Match event and actions**, select **survey sent**.
 
@@ -24,10 +43,10 @@ To do this:
 
 You can extract the following properties from surveys:
 
-| Property | Description |
-|----------|-------------|
-| `event.properties.$survey_name` | The name of the survey |
-| `event.properties.$survey_questions` | An array of objects containing the following survey question properties: `id`, `question`, and `response` |
+| Property                                           | Description                                                                                                                                                                                                                                                              |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `event.properties.$survey_name`                    | The name of the survey                                                                                                                                                                                                                                                   |
+| `event.properties.$survey_questions`               | An array of objects containing the following survey question properties: `id`, `question`, and `response`                                                                                                                                                                |
 | `event.properties.$survey_response_{response_key}` | The response to a specific question. To find `response_key`, go to your survey's **Results** tab and click **Copy response key** on the question card. There's one for each question in your survey. `response_key` is identical to the corresponding survey question ID |
-| `event.properties.$survey_completed` | Whether the survey was completed. Relevant for surveys with partial responses. This will be `true` if the user has answered all questions. |
-| `person.name` or other person properties | The name of the person who responded or other properties |
+| `event.properties.$survey_completed`               | Whether the survey was completed. Relevant for surveys with partial responses. This will be `true` if the user has answered all questions.                                                                                                                               |
+| `person.name` or other person properties           | The name of the person who responded or other properties                                                                                                                                                                                                                 |
