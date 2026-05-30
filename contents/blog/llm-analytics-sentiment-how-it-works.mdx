@@ -1,0 +1,294 @@
+---
+date: '2026-05-19'
+title: 'How we built on-demand sentiment classification for LLM traces'
+author:
+    - andy-maguire
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/LLM_Analytics_Clusters_5a354100e4.png
+featuredImageType: full
+category: PostHog news
+tags:
+    - Product updates
+    - LLM analytics
+---
+
+
+LLM analytics tools are still kinda painful. You end up staring at a list of traces, scrolling through walls of JSON, and asking yourself "okay but where are the _interesting_ ones?".
+
+Our recent [clustering post](/blog/llm-analytics-clustering-how-it-works) was one swing at this problem – let an AI agent group traces by what they're about so the patterns surface themselves. This post is about a much cheaper, simpler swing at the same problem: **sentiment classification**.
+
+If you remember sentiment analysis, you probably remember it as a "first NLP project" sort of thing. Tweets, IMDB reviews, three little classes – positive, neutral, negative. Old school. Pre-LLM. Pre-attention-is-all-you-need, even (depending how far back you go).
+
+It turns out that old school approach is _exactly_ what you want when you're trying to triage a thousand AI agent traces and figure out which ones are worth looking at. You don't need GPT-5 to tell you a user is annoyed. A 60MB encoder model trained on Twitter can do it for free, in milliseconds.
+
+![An angry chatbot exchange](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/angry_chatbot_exchange_blackedout2_e7d4c9762e.png)
+<Caption>The same airline interaction from last time. A classic "negative" if there ever was one.</Caption>
+
+So we shipped [sentiment classification](/docs/llm-analytics/sentiment) for LLM Analytics. Open the Traces tab and every row gets a little colored bar – green-ish if the user sounded happy, red-ish if they sounded frustrated. Click into a trace and you can see per-message sentiment so you can spot exactly where things turned. There's also a [dedicated Sentiment tab](/docs/llm-analytics/sentiment#sentiment-tab) that just shows you the most-positive and most-negative messages in card form.
+
+Here's how the whole thing works under the hood, with links to the code if you want to dig deeper.
+
+## The complete sentiment pipeline
+
+The whole thing is much shorter than the clustering one. There's no embedding, no UMAP, no labeling agent. Just:
+
+1. **Trigger** – Frontend asks for sentiment on the traces/generations currently visible
+2. **Fetch** – HogQL query pulls the relevant `$ai_generation` events
+3. **Extract** – Pull out the user messages (skip tool results, drop the assistant turns)
+4. **Truncate** – Cut each message to ~2000 chars so it fits the model's context
+5. **Classify** – Run a batch through a local ONNX model, get three softmax scores
+6. **Aggregate** – Average across messages to get a per-generation and per-trace score
+7. **Cache** – Stick the result in Redis for 24h so the next view is free
+
+### Design considerations
+
+A few choices we kept coming back to:
+
+- **On-demand, not background** – Clustering runs as a scheduled Temporal workflow because it needs a whole population of traces to find structure. Sentiment is a per-trace thing: you only need to classify what the user is _looking at_. So we trigger it from the frontend when a trace becomes visible, and cache the result. No upfront processing, no pipeline to babysit, no cost on traces nobody opens.
+- **Old school NLP over LLM-as-judge** – We considered using an LLM to score sentiment ("rate this on a scale of 1-5"), and it'd probably be _slightly_ more accurate at the edges. But it'd also be slower, more expensive, less reproducible, and the result wouldn't be obviously better than a model that was literally trained for this one task. Sentiment is a solved problem. Encoder-only transformers from the Cardiff NLP group [have been doing this well since 2022](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest).
+- **ONNX over PyTorch** – The PyTorch version of the model pulls in ~2GB of dependencies. The ONNX-exported version is ~60MB and runs on CPU just fine. For something we're going to load into every LLM analytics worker, that math is easy.
+- **Data privacy** – The model runs entirely on PostHog infrastructure. Your user messages never leave for a third-party LLM provider just to compute a sentiment score. This matters more for sentiment than for clustering, because we're classifying _the actual user input_, not a summary of it.
+- **Per-message, not just per-trace** – We score each user message individually and average for the trace-level number. This is more work but it lets you see _where_ in a conversation things turned negative, which is often the actual interesting signal.
+
+## Step 1: The model
+
+We use [`cardiffnlp/twitter-roberta-base-sentiment-latest`](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest) – a RoBERTa-base model fine-tuned by the Cardiff NLP group on ~124M tweets, with three output classes: `positive`, `neutral`, `negative`.
+
+Why a model trained on tweets? Two reasons:
+
+1. **Short, conversational text is exactly what we're classifying.** User messages to an AI agent ("can you fix this?", "no that's wrong", "thanks!") look a lot more like tweets than like product reviews. The model's training distribution is a much better match for chat-style input than something trained on long-form text.
+2. **It's small, fast, and well-validated.** It's been downloaded millions of times, there's a lot of public eval data on it, and it slots cleanly into the HuggingFace pipeline API.
+
+At build time we export the model to ONNX and bake it into the LLM Analytics Docker image:
+
+```bash
+# bin/download-sentiment-model
+MODEL_NAME = "cardiffnlp/twitter-roberta-base-sentiment-latest"
+MODEL_REVISION = "3216a57f2a0d9c45a2e6c20157c20c49fb4bf9c7"
+
+# Pin the revision so the model can't silently change under us
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, revision=MODEL_REVISION)
+model = ORTModelForSequenceClassification.from_pretrained(
+    MODEL_NAME, revision=MODEL_REVISION, export=True
+)
+model.save_pretrained(CACHE_DIR)
+tokenizer.save_pretrained(CACHE_DIR)
+```
+
+At runtime we load it once per worker process with double-checked locking, so the cold start cost is paid exactly once per pod:
+
+```python
+# Simplified from model.py
+_model_lock = threading.Lock()
+_pipeline_cache = {}
+
+def _load_pipeline():
+    if "pipe" in _pipeline_cache:
+        return _pipeline_cache["pipe"]
+    with _model_lock:
+        if "pipe" in _pipeline_cache:
+            return _pipeline_cache["pipe"]
+        tokenizer = AutoTokenizer.from_pretrained(ONNX_CACHE_DIR)
+        model = ORTModelForSequenceClassification.from_pretrained(ONNX_CACHE_DIR)
+        _pipeline_cache["pipe"] = pipeline(
+            "sentiment-analysis",
+            model=model,
+            tokenizer=tokenizer,
+            top_k=None,           # return all three class scores
+            truncation=True,
+            max_length=512,       # model's hard context limit
+        )
+        return _pipeline_cache["pipe"]
+```
+
+> See the full model loader in <a href="https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/sentiment/model.py" target="_blank" rel="noopener noreferrer"><code>model.py</code></a>.
+
+Pinning `MODEL_REVISION` to a specific git hash on HuggingFace is the sort of thing that feels paranoid until the day the upstream maintainer pushes a quiet update and your sentiment scores all shift. Lock the version, sleep at night.
+
+## Step 2: Fetching the right events
+
+When the frontend asks for sentiment on a batch of traces (up to 5 at a time), we kick off a Temporal workflow that fetches the relevant `$ai_generation` events from ClickHouse via HogQL.
+
+The query has a few small tricks in it:
+
+```sql
+SELECT uuid, ai_input, trace_id
+FROM (
+    SELECT
+        uuid,
+        input AS ai_input,
+        trace_id,
+        row_number() OVER (
+            PARTITION BY trace_id
+            ORDER BY timestamp DESC
+        ) AS rn
+    FROM posthog.ai_events AS ai_events
+    WHERE event = '$ai_generation'
+      AND timestamp >= toDateTime({date_from}, 'UTC')
+      AND timestamp <= toDateTime({date_to}, 'UTC')
+      AND trace_id IN {trace_ids}
+      -- skip huge accumulated conversation histories
+      AND length(input) <= {max_input_chars}
+)
+WHERE rn <= {max_gens_per_trace}
+ORDER BY trace_id, rn
+```
+
+A few things going on here:
+
+- **`row_number() OVER (PARTITION BY trace_id ...)`** caps us at the last 10 generations per trace at the ClickHouse level. We don't need every step of every trace to get a sentiment read – the most recent turns are usually where the interesting signal is.
+- **`length(input) <= max_input_chars`** drops generations with massive accumulated conversation histories (300KB+). In a long conversation, each new generation tends to carry forward the entire prior context, so we lose nothing by skipping these – the earlier, smaller generations already contain the same user messages.
+- **`posthog.ai_events`** is our dedicated LLM events table, optimized for these access patterns. The fallback path rewrites the query back to the regular `events` table for backwards compatibility.
+
+> See <a href="https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/sentiment/data.py" target="_blank" rel="noopener noreferrer"><code>data.py</code></a> for the full fetch implementation.
+
+There's also a more involved two-phase query for the case where you want sentiment on _specific generation UUIDs_ (rather than traces). The `ai_events` table is sorted by `(team_id, trace_id, timestamp)`, so a `WHERE uuid IN (...)` filter without a trace_id constraint forces a fan-out read across every shard. To avoid that we first resolve `uuid → trace_id` off the much-cheaper `events` table (which is sorted by date), then run the heavy `input`-column read with both filters set. Benchmarked about 2.4x faster than the naive single-query version.
+
+## Step 3: Extracting user messages
+
+Once we have the generation events, we need to pull out _just the user messages_. AI agent traces are full of tool calls, tool results, assistant turns, system prompts – none of which are user sentiment.
+
+```python
+# Simplified from extraction.py
+def extract_user_messages_individually(ai_input):
+    """Extract individual user messages from $ai_input, preserving original index."""
+    result = []
+    for i, msg in enumerate(ai_input):
+        if isinstance(msg, dict) and msg.get("role") == "user":
+            # Anthropic sends tool results as user-role messages – skip those
+            if _is_tool_result_message(msg.get("content")):
+                continue
+            text = _extract_content_text(msg.get("content", ""))
+            if text:
+                result.append((i, text))
+    return result[-MAX_USER_MESSAGES:]  # last 50
+```
+
+The two interesting bits:
+
+- **The tool-result filter.** In Anthropic's API format, tool results come back as `role: "user"` messages with `content: [{type: "tool_result", ...}]`. If you don't filter these out, your "user sentiment" gets polluted with raw JSON tool output. Easy bug to miss until you notice your sentiment scores look weirdly neutral.
+- **Preserving the original index.** We return `(original_index, text)` tuples instead of just text. The original index tells us _where_ in the `$ai_input` array each message lived, which lets the frontend match a sentiment score back to a specific message bubble in the UI. This way we don't have to assume any specific normalization on either side.
+
+> See <a href="https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/sentiment/extraction.py" target="_blank" rel="noopener noreferrer"><code>extraction.py</code></a> for the full extraction logic.
+
+### Truncating to fit the context window
+
+The cardiffnlp model has a 512-token context window. Most user messages are way under that, but some aren't (system prompts mashed into user turns, copy-pasted code, long tool descriptions). We truncate to 2000 characters, which is comfortably under 512 tokens for English (~4 chars per token average).
+
+The interesting choice here is _which 2000 characters_:
+
+```python
+def truncate_to_token_limit(text: str, max_chars: int = 2000) -> str:
+    """Keep the LAST max_chars characters of text."""
+    if len(text) <= max_chars:
+        return text
+    return text[-max_chars:]  # tail, not head
+```
+
+We keep the **tail**, not the head. Why? Because in a user message that's a copy-pasted block of code followed by "this is broken, please fix" – the sentiment lives in the last few hundred characters, not the first 2000. Same goes for the "any update on this?" at the end of a long ticket description. The polite framing is at the top, the actual mood is at the bottom.
+
+## Step 4: Classification
+
+This is the boring part, which is exactly the point. We collect all the messages we need to classify across all traces in the batch, then send them through the pipeline in a single batched forward pass:
+
+```python
+# Simplified from activities.py and model.py
+pending = [...]  # all user messages across all traces in the batch
+texts = [p.text for p in pending]
+
+# Single batched ONNX inference
+batch_results = pipe(texts, batch_size=32)
+
+# Each result is a list of {label, score} dicts for all three classes
+# e.g. [{"label": "negative", "score": 0.82},
+#       {"label": "neutral",  "score": 0.15},
+#       {"label": "positive", "score": 0.03}]
+```
+
+The `top_k=None` setting on the pipeline is what gets us the full softmax distribution rather than just the argmax. We want all three scores because the UI shows a continuous bar (max-positive width on one side, max-negative on the other) – not just "this is negative".
+
+For a typical batch of 5 traces × ~10 messages each = 50 classifications, this takes ~100ms on CPU. Once the model is loaded (which happens once per worker lifetime), there's basically no overhead.
+
+## Step 5: Aggregating up
+
+Now we have a sentiment distribution for each individual user message. The frontend wants three layers of result:
+
+- **Per-message**: this exact user turn, for the in-trace UI and the Sentiment tab cards
+- **Per-generation**: this `$ai_generation` event, for the generations table
+- **Per-trace**: the whole conversation, for the traces table
+
+We get from messages to generation to trace by averaging the three-class softmax scores at each level, then taking the argmax:
+
+```python
+# Simplified from utils.py
+def average_score_dicts(score_dicts: list[dict[str, float]]) -> dict[str, float]:
+    """Average a list of {label: score} dicts."""
+    labels = ["positive", "neutral", "negative"]
+    n = len(score_dicts)
+    return {
+        label: round(sum(d.get(label, 0.0) for d in score_dicts) / n, 4)
+        for label in labels
+    }
+
+# Per-generation: average across all user messages in that generation
+gen_scores = average_score_dicts([m["scores"] for m in messages_in_generation])
+gen_label = max(gen_scores, key=gen_scores.get)  # argmax
+
+# Per-trace: average across all user messages in the whole trace
+trace_scores = average_score_dicts(all_message_scores)
+trace_label = max(trace_scores, key=trace_scores.get)
+```
+
+> See <a href="https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/sentiment/utils.py" target="_blank" rel="noopener noreferrer"><code>utils.py</code></a> for the full aggregation logic.
+
+A note on what averaging _doesn't_ tell you: the trace-level score smooths over interesting moments. A conversation that starts neutral, gets really negative in the middle, then ends fine, will look "mostly neutral" overall. That's why the UI also surfaces the max-positive and max-negative scores across all messages in a trace – it's the single most-important per-message signal we expose, separate from the average.
+
+## Step 6: Caching
+
+Sentiment results get cached in Redis for 24 hours, keyed by `llma_sentiment:{level}:{team_id}:{id}`. Two things to note here:
+
+- **Trace-level classifications also dual-write the per-generation cache.** When you classify a trace, you've already done the work to compute each generation's score on the way there – so we cache those too. If you later open the generation directly, it's a cache hit.
+- **24 hours is forever for an immutable event.** LLM events don't change once ingested. The cache TTL could technically be much longer; 24h is a hedge against the day we want to change the model or the aggregation logic and have stale results expire on their own.
+
+## Where it shows up
+
+You don't need to configure anything – sentiment is on by default in [LLM Analytics](/llm-analytics) for any team that has $ai_generation events.
+
+- **Traces table**: every row gets a sentiment bar. Hover for the full breakdown.
+- **Generations table**: same idea at the per-generation level.
+- **Trace detail view**: an overall bar in the header, plus per-generation bars inside the conversation. Click any generation to see per-message sentiment with little colored accents on each user turn.
+- **[Sentiment tab](/docs/llm-analytics/sentiment#sentiment-tab)**: a dedicated browse mode that just shows you the most-positive and most-negative messages as cards. Slide the intensity threshold up to filter to only high-confidence signals. Click a card to deep-link into the relevant trace.
+
+The Sentiment tab is the one I personally use the most – it's the closest thing to a "show me the interesting traces" button. Sort by negative, slide the threshold to 80%+, see what your users are actually upset about. Usually takes about 10 seconds to find at least one thing that's worth filing a bug for.
+
+## Where this fits with the rest of LLM Analytics
+
+This is the second piece of the "help users find interesting stuff faster" puzzle, alongside [clustering](/blog/llm-analytics-clustering-how-it-works). They're complementary:
+
+- **Clustering** answers "what kinds of things are users doing with my AI?" – it's the structural view.
+- **Sentiment** answers "which specific traces should I look at right now?" – it's the triage view.
+
+You can also stack them: filter the clusters view by negative sentiment, or look at how sentiment varies across clusters. ("Hmm, the cluster of users asking about refunds has a 30% negative rate, the cluster asking about features is 5% – maybe we should look at the refund flow.")
+
+Pair this with [evaluations](/docs/llm-analytics/evaluations) (LLM-as-a-judge scoring on specific quality dimensions) and you have three different lenses on the same data: cheap-and-broad (sentiment), structural (clustering), and deep-but-targeted (evals). Each tells you something different.
+
+## Try it now
+
+If you're already using [LLM Analytics](/llm-analytics), sentiment classification is live and runs automatically when you open the Traces, Generations, or Sentiment tabs – no configuration needed. If you're not using LLM Analytics yet, you can [get started in minutes](/docs/llm-analytics/start-here) with SDKs for [OpenAI](/docs/llm-analytics/installation/openai), [Anthropic](/docs/llm-analytics/installation/anthropic), [LangChain](/docs/llm-analytics/installation/langchain), [Vercel AI](/docs/llm-analytics/installation/vercel-ai), and [many more](/docs/llm-analytics/installation).
+
+<p>
+	<CallToAction to="https://app.posthog.com/llm-analytics">
+		Try sentiment in PostHog
+	</CallToAction>
+</p>
+
+## Further reading
+
+- **[Sentiment documentation](/docs/llm-analytics/sentiment)** – Setup guide and feature overview
+- **[Clustering: how it works](/blog/llm-analytics-clustering-how-it-works)** – The structural view that complements sentiment
+- **[Privacy mode](/docs/llm-analytics/privacy-mode)** – Control what trace data gets sent to PostHog
+- **Feedback** – Leave feedback directly on the [sentiment docs page](/docs/llm-analytics/sentiment), email us at team-llm-analytics@posthog.com, or start a thread in the [community](/community)
