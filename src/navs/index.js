@@ -3913,6 +3913,16 @@ export const docsMenu = {
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        {
+                            name: 'General',
+                            url: '/docs/web-analytics/troubleshooting',
+                        },
+                        {
+                            name: 'Campaign attribution',
+                            url: '/docs/web-analytics/campaign-attribution-troubleshooting',
+                        },
+                    ],
                 },
                 {
                     name: 'Changelog',
