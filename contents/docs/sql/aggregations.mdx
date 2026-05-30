@@ -191,3 +191,31 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `json_agg`
 - `string_agg`
 - `every`
+- `percentile_cont`
+- `percentile_disc`
+
+## Ordered-set aggregate functions
+
+The `percentile_cont` and `percentile_disc` functions are ordered-set aggregate functions that use the `WITHIN GROUP (ORDER BY column)` syntax to specify the sort order for the percentile calculation.
+
+**Syntax:**
+
+```sql
+percentile_cont(fraction) WITHIN GROUP (ORDER BY column)
+percentile_disc(fraction) WITHIN GROUP (ORDER BY column)
+```
+
+**Example:**
+
+```sql
+-- Calculate the median (50th percentile)
+SELECT percentile_cont(0.50) WITHIN GROUP (ORDER BY session_duration)
+FROM events
+
+-- Calculate the 95th percentile
+SELECT percentile_cont(0.95) WITHIN GROUP (ORDER BY response_time_ms)
+FROM events
+```
+
+- `percentile_cont` - Returns an interpolated value between adjacent values (continuous distribution)
+- `percentile_disc` - Returns the first value whose position in the ordering equals or exceeds the specified fraction (discrete distribution)
