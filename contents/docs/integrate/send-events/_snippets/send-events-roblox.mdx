@@ -1,5 +1,4 @@
 import SettingProperties from "./setting-properties-text.mdx"
-import NamingTip from "./naming-tip.mdx"
 import Intro from "./intro.mdx"
 
 <Intro />
@@ -10,11 +9,11 @@ On the server, every capture call takes a **subject** as its first argument so y
 local Players = game:GetService("Players")
 
 Players.PlayerAdded:Connect(function(player)
-    PostHog:Capture(player, "user_signed_up")
+    PostHog:Capture(player, "game_joined")
 end)
 ```
 
-<NamingTip />
+> **Tip:** We recommend naming events in an `[object] [verb]` format, where `[object]` is the entity the behavior relates to, and `[verb]` is the behavior itself. For example, `level completed`, `item purchased`, or `quest started`.
 
 The subject can be a `Player`, a numeric `UserId`, a string distinct ID, or `nil` for a server-scoped event that isn't attributed to any player:
 

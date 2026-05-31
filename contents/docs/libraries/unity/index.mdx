@@ -8,7 +8,7 @@ platformLogo: unity
 features:
   eventCapture: true
   userIdentification: true
-  autoCapture: false
+  autoCapture: true
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
@@ -63,9 +63,26 @@ await PostHog.ResetAsync();
 
 ## Anonymous vs identified events
 
-import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
+PostHog captures two types of events: [**anonymous** and **identified**](/docs/data/anonymous-vs-identified-events).
 
-<IdentifiedVsAnonymousIntro />
+**Identified events** let you attribute events to a specific player and attach [person properties](/docs/product-analytics/person-properties). They're best suited for players who have signed in.
+
+Scenarios where you want identified events are:
+
+- Tracking signed-in players across sessions and devices
+- Segmenting your analysis by individual player
+- Following a player's full journey from install through retention
+
+**Anonymous events** have no individually identifiable data. They're best suited for players you haven't identified yet.
+
+Scenarios where you want anonymous events are:
+
+- Players in a guest or pre-login flow
+- Sessions where players never create an account
+
+Under the hood, the key difference is that identified events create a [person profile](/docs/data/persons) and anonymous events do not.
+
+> **Important:** Anonymous events can be up to 4x cheaper to process than identified ones, so we recommend only capturing identified events when needed.
 
 ### Controlling person profiles
 

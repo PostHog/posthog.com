@@ -8,7 +8,7 @@ platformLogo: roblox
 features:
   eventCapture: true
   userIdentification: true
-  autoCapture: false
+  autoCapture: true
   sessionRecording: false
   featureFlags: true
   groupAnalytics: true
@@ -44,21 +44,25 @@ Every player already has a real identity, their Roblox `UserId`, so player event
 ```lua
 PostHog:Identify(player, {
     display_name = player.DisplayName,
-    plan = "premium",
+    level = 12,
 })
 ```
 
 The first argument is a [subject](#capturing-events), so you can also identify by `UserId` or distinct ID. Pass a third argument to set properties only if they aren't already set (`$set_once`):
 
 ```lua
-PostHog:Identify(player, { plan = "premium" }, { first_seen = os.time() })
+PostHog:Identify(player, { favorite_mode = "survival" }, { first_seen = os.time() })
 ```
 
 ## Anonymous vs identified events
 
-import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
+PostHog captures two types of events: [**anonymous** and **identified**](/docs/data/anonymous-vs-identified-events). Identified events are attributed to a person and build a [person profile](/docs/data/persons); anonymous events are not.
 
-<IdentifiedVsAnonymousIntro />
+On Roblox this is simpler than on most platforms. Every player already has a stable identity, their Roblox `UserId`, so events you capture for a player are **identified** and create a person profile automatically. There's no logged-out or guest state to reconcile, and no `reset` to call.
+
+The events that stay **anonymous** are **server-scoped** events you capture with a `nil` subject. These describe the server or experience as a whole (for example `server_started` or `shop_restocked`) rather than any one player, so they don't create a person profile.
+
+> **Tip:** Anonymous events are cheaper to process than identified ones, so capture server-wide telemetry that isn't about a specific player with a `nil` subject rather than attributing it to an arbitrary player.
 
 ### Controlling person profiles
 
@@ -158,8 +162,8 @@ For handled errors you want to report, call `CaptureException` with a subject, a
 local ok, err = pcall(riskyOperation)
 if not ok then
     PostHog:CaptureException(player, err, debug.traceback(), {
-        context = "checkout_flow",
-        item_count = 5,
+        context = "load_world",
+        world = "desert",
     })
 end
 ```

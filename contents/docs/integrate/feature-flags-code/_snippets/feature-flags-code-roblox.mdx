@@ -34,7 +34,7 @@ end
 Read the JSON payload attached to a flag with `GetFeatureFlagPayload`:
 
 ```lua
-local payload = PostHog:GetFeatureFlagPayload(player, "checkout-config")
+local payload = PostHog:GetFeatureFlagPayload(player, "shop-config")
 if payload then
     print(payload.theme, payload.maxItems)
 end
@@ -43,7 +43,7 @@ end
 The payload is also available on the flag object returned by `GetFeatureFlag`:
 
 ```lua
-local flag = PostHog:GetFeatureFlag(player, "checkout-config")
+local flag = PostHog:GetFeatureFlag(player, "shop-config")
 local theme = flag.payload and flag.payload.theme
 ```
 
@@ -67,12 +67,12 @@ Set the person or group properties used to evaluate a player's flags. By default
 ```lua
 -- Person properties for targeting
 PostHog:SetPersonPropertiesForFlags(player, {
-    plan = "premium",
-    beta_user = true,
+    level = 12,
+    is_vip = true,
 })
 
 -- Group properties for targeting
-PostHog:SetGroupPropertiesForFlags(player, "company", {
-    size = "enterprise",
+PostHog:SetGroupPropertiesForFlags(player, "guild", {
+    member_count = 42,
 })
 ```
