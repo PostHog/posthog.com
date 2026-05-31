@@ -113,6 +113,8 @@ export const LOGOS = {
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/rudderstack.svg',
     pinterestAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pinterest_ads_563b842dc5.png',
     revenuecat: 'https://res.cloudinary.com/dmukukwp6/image/upload/logomark_red_background_9ea591e17a.svg',
+    // TODO(roblox): placeholder. Upload the Roblox logo to Cloudinary and replace this URL before publishing.
+    roblox: 'https://res.cloudinary.com/dmukukwp6/image/upload/roblox_PLACEHOLDER_replace_before_publishing.svg',
     rollup: 'https://res.cloudinary.com/dmukukwp6/image/upload/Rollup_js_c306a2fde3.svg',
     ruby: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ruby.svg',
     rust: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/rust.svg',
