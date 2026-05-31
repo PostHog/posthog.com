@@ -1,0 +1,78 @@
+Feature flags in the Roblox SDK are evaluated **per player**, so each flag call takes the player (or another subject) as its first argument. When `preloadFeatureFlags` is enabled (the default), a player's flags are fetched automatically when they join, so they're ready to read for the rest of the session.
+
+### Boolean feature flags
+
+```lua
+if PostHog:IsFeatureEnabled(player, "flag-key") then
+    -- Do something differently for this player
+end
+```
+
+`IsFeatureEnabled` accepts an optional default that's returned when the flag hasn't loaded yet:
+
+```lua
+if PostHog:IsFeatureEnabled(player, "flag-key", false) then
+    -- ...
+end
+```
+
+### Multivariate feature flags
+
+`GetFeatureFlag` returns a table with the flag's `value`, `isEnabled`, `variant`, and `payload`:
+
+```lua
+local flag = PostHog:GetFeatureFlag(player, "flag-key")
+if flag.isEnabled then
+    if flag.variant == "variant-key" then -- Replace with your variant key
+        -- Do something for this variant
+    end
+end
+```
+
+### Feature flag payloads
+
+Read the JSON payload attached to a flag with `GetFeatureFlagPayload`:
+
+```lua
+local payload = PostHog:GetFeatureFlagPayload(player, "shop-config")
+if payload then
+    print(payload.theme, payload.maxItems)
+end
+```
+
+The payload is also available on the flag object returned by `GetFeatureFlag`:
+
+```lua
+local flag = PostHog:GetFeatureFlag(player, "shop-config")
+local theme = flag.payload and flag.payload.theme
+```
+
+### Ensuring flags are loaded before use
+
+When a player joins, the SDK fetches their flags in the background (unless you set `preloadFeatureFlags = false`). For most of a session the flags are available immediately, but the very first read right after a player joins can race the network request.
+
+To force a fresh fetch and wait for it, call `ReloadFeatureFlags`. It **yields** until the request completes and returns whether it succeeded:
+
+```lua
+local ok = PostHog:ReloadFeatureFlags(player)
+if ok then
+    local enabled = PostHog:IsFeatureEnabled(player, "flag-key")
+end
+```
+
+### Overriding properties for flag evaluation
+
+Set the person or group properties used to evaluate a player's flags. By default this reloads their flags; pass `false` as the final argument to skip the reload:
+
+```lua
+-- Person properties for targeting
+PostHog:SetPersonPropertiesForFlags(player, {
+    level = 12,
+    is_vip = true,
+})
+
+-- Group properties for targeting
+PostHog:SetGroupPropertiesForFlags(player, "guild", {
+    member_count = 42,
+})
+```

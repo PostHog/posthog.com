@@ -1,0 +1,63 @@
+import SettingProperties from "./setting-properties-text.mdx"
+import Intro from "./intro.mdx"
+
+<Intro />
+
+On the server, every capture call takes a **subject** as its first argument so you can attribute the event to a specific player. Pass a `Player` and it resolves to their `UserId`:
+
+```lua
+local Players = game:GetService("Players")
+
+Players.PlayerAdded:Connect(function(player)
+    PostHog:Capture(player, "game_joined")
+end)
+```
+
+> **Tip:** We recommend naming events in an `[object] [verb]` format, where `[object]` is the entity the behavior relates to, and `[verb]` is the behavior itself. For example, `level completed`, `item purchased`, or `quest started`.
+
+The subject can be a `Player`, a numeric `UserId`, a string distinct ID, or `nil` for a server-scoped event that isn't attributed to any player:
+
+```lua
+PostHog:Capture(player, "level_completed")  -- a Player
+PostHog:Capture(123456, "level_completed")  -- a UserId
+PostHog:Capture(nil, "shop_restocked")      -- server-scoped, no person profile
+```
+
+<SettingProperties />
+
+```lua
+PostHog:Capture(player, "level_completed", {
+    level = 5,
+    duration_seconds = 92,
+    used_powerup = true,
+})
+```
+
+### Capturing from the client
+
+The same `PostHog` module works in a `LocalScript`, where it acts as a thin relay: calls are sent to the server over a `RemoteEvent` and attributed to the firing player. There's no API key on the client, and no subject argument:
+
+```lua
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local PostHog = require(ReplicatedStorage:WaitForChild("PostHog"))
+
+PostHog:Capture("button_clicked", { button = "play" })
+```
+
+The server validates, rate-limits, and attributes every relayed event, so a client can't spoof another player or send reserved (`$`-prefixed) event names.
+
+### Capturing screen views
+
+Track which screens or menus a player views:
+
+```lua
+PostHog:Screen(player, "Main Menu")
+
+-- With additional properties
+PostHog:Screen(player, "Level Select", {
+    unlocked_levels = 5,
+})
+
+-- From a LocalScript (relayed, no subject)
+PostHog:Screen("Shop")
+```
