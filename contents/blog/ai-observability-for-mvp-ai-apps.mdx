@@ -1,5 +1,5 @@
 ---
-title: 'Minimum viable AI observability: what to set up when you just shipped your first AI feature'
+title: 'Minimum viable AI observability: what to set up after shipping your first AI feature'
 date: 2026-05-27
 rootPage: /blog
 sidebar: Blog
@@ -15,12 +15,12 @@ tags:
     - Comparisons
 seo:
     metaTitle: 'AI observability for your MVP'
-    metaDescription: 'A practical guide to LLM observability for early-stage AI apps. What to instrument on day one and what to add as you scale.'
+    metaDescription: 'A practical guide to LLM observability for early-stage AI apps and startups. What to instrument on day one and what to add as you scale.'
 ---
 
 A lot of "LLM observability" content out there is written for teams running production AI at scale: enterprise governance, fancy eval pipelines, dedicated AI platform engineers. Useful if you're there, but wildly over-engineered if you just shipped your first AI feature on a Tuesday.
 
-This guide is for the other half – the solo founders, vibe coders, and small teams who have one or two LLM calls in their app, no data team, and no idea where to start with AI observability. 
+This guide is for the other half – the small teams, vibe coders, and solo founders who have a couple of agents or LLM calls in their app, no data team, and no idea where to start with AI observability. 
 
 The answer isn't to set up everything, but to set up the minimum that keeps you from getting blindsided, skip the stuff that won't pay off yet, and add depth as your product earns it.
 
@@ -62,7 +62,7 @@ The good news is that the first version of AI observability is [easy to set up](
 
 ## What to set up on day one
 
-Three things, all of which can be wired up in an afternoon (especially if you're using PostHog, since the Wizard can do all the heavy lifting for you).
+Three things, all of which can be wired up in an afternoon (especially if you're using PostHog, since the [Wizard](/wizard) can do all the heavy lifting for you).
 
 <WizardCTA slim/>
 
@@ -82,7 +82,7 @@ from posthog import Posthog
  
 posthog = Posthog(
     "<ph_project_token>",
-    host="https://us.i.posthog.com"
+    host="<ph_client_api_host>"
 )
  
 client = OpenAI(
@@ -93,17 +93,17 @@ client = OpenAI(
 
 ### 2. Cost tracking
 
-Once tracing is set up, cost tracking comes nearly for free – your tool calculates cost per call from the token counts and model. What you actually need to do is set up alerts so you know when something goes sideways.
+Once tracing is set up, cost tracking comes nearly for free – your tool calculates cost per call from the token counts and model. What you actually need to do is set up [alerts](/docs/alerts) so you know when something goes sideways.
 
 At minimum:
 
 - An alert when daily spend exceeds your expected baseline by some multiplier (2x, 3x, whatever feels right)
-- A breakdown by model, so you can spot when something is calling GPT-4 instead of GPT-4o-mini for example
+- A breakdown by model, so you can spot when something is calling `gpt-5.5` instead of `gpt-5.4-mini` for example
 - A breakdown by user, so one power user (or one abuse case) doesn't tank your margins
 
 Take it from us: the risk of overpaying isn't hypothetical.
 
-When the PostHog team dug into the [cost of our own AI agent](/blog/optimizing-agent-cost) (the PostHog Wizard), we found it was burning tokens on three things we hadn't expected: re-reading files it had already read, redoing work after context compactions, and spawning subagents that didn't reliably terminate. The only reason we caught it was because the cost data was sitting right there in [AI observability](/ai-observability).  Without it, we would've just paid the oversized bill and moved on.
+When the PostHog team dug into the [cost of our own AI agent](/blog/optimizing-agent-cost) (the PostHog Wizard), we found it was burning tokens on three things we hadn't expected: re-reading files it had already read, redoing work after context compactions, and spawning subagents that didn't reliably terminate. The only reason we caught it was because the cost data was sitting right there in [AI observability](/ai-observability). Without it, we would've just paid the oversized bill and moved on.
 
 ### 3. Error capture
 
@@ -117,7 +117,7 @@ If you don't have error tracking yet, [add it](/blog/best-error-tracking-tools-f
 
 ## What to add later
 
-Here's where most MVP-stage teams over-invest. These are all legitimate practices, they just might not be the right thing to spend your time on when you have less than a thousand users and one AI feature.
+The following are where most MVP-stage teams over-invest. These are all legitimate practices, they just might not be the right thing to spend your time on when you have less than a thousand users and one AI feature.
 
 ### Complex eval suites
 
@@ -133,7 +133,7 @@ You don't need 15 evaluation criteria across five different dimensions of qualit
 
 ### A/B testing prompt variants
 
-[Prompt experimentation](/docs/prompt-management/prompt-experiments) is great, we just shipped it in beta and are genuinely excited about it – you can A/B test up to 10 prompt versions side by side, with cost, latency, and eval pass rate as built-in metrics. 
+[Prompt experimentation](/docs/prompt-management/prompt-experiments) is great, we just shipped it in beta – you can A/B test up to 10 prompt versions side by side, with cost, latency, and eval pass rate as built-in metrics. 
 
 There's even an agent prompt you can paste into Cursor or Claude Code that wires the whole experiment up for you; we're already running our own experiments on it.
 
@@ -183,7 +183,7 @@ As your product matures, the bar for observability rises. Here's the rough order
 
 **Add prompt management.** Once more than one person is editing prompts, you want versioning, the ability to roll back, and ideally the ability to update prompts without a deploy. Tools like [PostHog](/ai-observability) or Langfuse handle this natively.
 
-**Connect LLM data to product analytics.** This is where things get genuinely interesting. "Users who hit our AI feature retain at 2x" is the kind of insight that justifies the whole investment. To do this, your LLM observability needs to share a user model with your [product analytics](/product-analytics) – which is one reason [bundled tools](/blog/best-analytics-stack-vibe-coded-apps) tend to win at this stage.
+**Connect LLM data to product analytics.** This is where things get interesting. "Users who hit our AI feature retain at 2x" is the kind of insight that justifies the whole investment. To do this, your LLM observability needs to share a user model with your [product analytics](/product-analytics) – which is one reason [bundled tools](/blog/best-analytics-stack-vibe-coded-apps) tend to win at this stage.
 
 **Add A/B testing for prompts.** Now that you have traffic and a structured way to evaluate, you can run real prompt experiments. Aim for 1-2 high-value tests at a time, not a constant churn of variants.
 
@@ -203,9 +203,9 @@ As your product matures, the bar for observability rises. Here's the rough order
 | Stage | When you're here | What to add |
 |---|---|---|
 | **Day one** | You've shipped any AI feature | Tracing, cost alerts, error capture |
-| **Stage 1** | A few hundred generations a day | Automated evals, user feedback (👍/👎), session replay |
-| **Stage 2** | Multiple AI features, small team | Prompt management, connecting LLM data to product analytics, prompt A/B tests |
-| **Stage 3** | Scaling up, possibly going enterprise | Drift monitoring, cost optimization, governance (PII redaction, audit logs) |
+| **Meaningful traffic** | A few hundred generations a day | Automated evals, user feedback (👍/👎), session replay |
+| **Multiple features** | Multiple AI features, small team | Prompt management, connecting LLM data to product analytics, prompt A/B tests |
+| **Scaling** | Scaling up, possibly going enterprise | Drift monitoring, cost optimization, governance (PII redaction, audit logs) |
 
 The right tool for "day one" should also support most of "later" without needing to migrate – otherwise you're going to do this all again in six months.
 
@@ -215,7 +215,7 @@ And if you're earlier in your product journey, our guide to [the best analytics 
 
 ## Why PostHog works well for this
 
-A quick pitch, since this is our blog afterall:
+A quick pitch, since this is our blog after all:
 
 [PostHog's AI observability](/ai-observability) covers all of the above in one place, with a free tier (100K events/mo) generous enough to get you well past MVP. You get:
 
@@ -240,7 +240,7 @@ Paste one command into Cursor or Claude Code and it detects your framework, inst
 <details>
 <summary>How is AI observability different from regular APM?</summary>
 
-**APM tools** tell you whether your code is running and how fast. They can see that you made an API call to OpenAI and got a 200 back. They can't see *what* the model said, whether it was any good, or how much that specific call cost. 
+**APM tools** tell you whether your code is running and how fast. They can see that you made an API call to OpenAI and got a response back. They can't see *what* the model said, whether it was any good, or how much that specific call cost. 
 
 **AI observability** adds the missing layer: the content of the calls, the quality of the outputs, and the economics of LLM usage.
 
@@ -263,7 +263,7 @@ For most MVPs: nothing; even at a few thousand users, you can usually stay on a 
 </details>
 
 <details>
-<summary>What if I'm just calling OpenAI directly without a framework?</summary>
+<summary>What if I'm just calling OpenAI or Anthropic directly without a framework?</summary>
 
 That's actually the easiest case. Most observability tools have a wrapper around the OpenAI/Anthropic SDK that captures everything automatically. You don't need LangChain or any other framework to get full observability.
 
@@ -281,7 +281,11 @@ Bundled platforms ([PostHog](/) being the obvious example) share a user model ac
 <details>
 <summary>When should I switch from a free tier to a paid plan?</summary>
 
-When you hit one of three triggers: (1) your event volume exceeds the free tier, (2) you need a feature that's gated to paid plans (often SSO, EU residency, longer retention), or (3) you need support SLAs to ship to enterprise. 
+When you hit one of three triggers: 
+
+1. Your event volume exceeds the free tier
+2. You need a feature that's gated to paid plans (often SSO, EU residency, longer retention)
+3. You need support SLAs to ship to enterprise. 
 
 Otherwise, free tier might work fine well into post-PMF.
 
