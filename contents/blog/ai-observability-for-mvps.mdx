@@ -12,7 +12,7 @@ featuredImage: >-
 featuredImageType: full
 category: General
 tags:
-    - Comparisons
+    - ai-observability
 seo:
     metaTitle: 'AI observability for your MVP'
     metaDescription: 'A practical guide to LLM observability for early-stage AI apps and startups. What to instrument on day one and what to add as you scale.'
@@ -31,7 +31,7 @@ Here's what that looks like in practice.
 
 **[AI observability](/docs/ai-observability)** (often used interchangeably with **LLM observability** and **LLM analytics**) is the practice of monitoring what's happening inside the AI features of your app: the prompts you send, the responses you get back, how long calls take, how much they cost, and whether the outputs are any good.
 
-Traditional APM tools ([Datadog](/blog/best-datadog-alternatives), New Relic, [Sentry](/blog/best-sentry-alternatives)) weren't built for this. They can tell you your API call to OpenAI succeeded with a 200, but they can't tell you the response was a hallucination, or that your prompt is costing 3x what it should be. 
+Traditional APM tools ([Datadog](/blog/best-datadog-alternatives) or New Relic weren't built for this. They can tell you your API call to OpenAI succeeded with a 200, but they can't tell you the response was a hallucination, or that your prompt is costing 3x what it should be. 
 
 AI observability fills that gap.
 
@@ -72,24 +72,9 @@ The foundation of everything else. For each call, capture the full input (prompt
 
 This is the data you'll use to debug literally everything else: cost questions, latency questions, quality complaints, weird outputs. 
 
-**If you remember nothing else from this guide, set up tracing.**
+**If you remember nothing else from this guide, [set up tracing](/docs/ai-observability/start-here).**
 
 Most LLM observability tools handle this with a small SDK wrapper around your OpenAI or Anthropic client. Initialize the wrapped client once, use it like the normal SDK, and every call is logged automatically.
-
-```python
-from posthog.ai.openai import OpenAI
-from posthog import Posthog
- 
-posthog = Posthog(
-    "<ph_project_token>",
-    host="<ph_client_api_host>"
-)
- 
-client = OpenAI(
-    api_key="your_openai_api_key",
-    posthog_client=posthog
-)
-```
 
 ### 2. Cost tracking
 
