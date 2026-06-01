@@ -1,6 +1,6 @@
 ---
 title: 'The best Statsig alternatives & competitors, compared'
-date: 2026-05-29
+date: 2026-06-01
 author:
     - andy-vandervell
     - natalia-amorim
@@ -27,7 +27,7 @@ Here's a breakdown of the best Statsig alternatives depending on your team's nee
 <details>
 <summary>Which is the best Statsig alternative for startups?</summary>
 
-**PostHog**: An all-in-one developer platform with [product analytics](/product-analytics), [feature flags](/feature-flags), [experimentation](/experiments), [session replay](/session-replay), and more with a generous free tier and [usage-based pricing](/pricing). Trusted by over 60% of every Y Combinator batch and top startups like [ElevenLabs](/customers/elevenlabs) and [Lovable](/customers/lovable).
+**PostHog**: An all-in-one developer platform with  [feature flags](/feature-flags), [experimentation](/experiments), [product analytics](/product-analytics), [session replay](/session-replay), and more with a generous free tier and [usage-based pricing](/pricing). Trusted by over 60% of every Y Combinator batch and top startups like [ElevenLabs](/customers/elevenlabs) and [Lovable](/customers/lovable).
 
 Eligible early-stage companies can apply to [PostHog for Startups](/startups) for $50,000 in additional credits.
 
@@ -59,7 +59,7 @@ Eligible early-stage companies can apply to [PostHog for Startups](/startups) fo
 
 **PostHog**: Built for engineering teams shipping AI products. [AI observability](/ai-observability) captures traces, spans, prompts, token costs, and latency across providers (Anthropic, OpenAI, Google, LangChain, and more). 
 
-Run [evals with LLM-as-a-Judge](/blog/stop-ai-slop) to catch quality regressions, manage prompts directly in PostHog with versioning and fetch them at runtime (no redeploys), and use the prompt playground to compare models side-by-side.
+Run [evals with LLM-as-a-Judge](/blog/stop-ai-slop) to catch quality regressions, [manage prompts directly in PostHog](/docs/prompt-management/prompts) with versioning and fetch them at runtime (no redeploys), and use the prompt playground to compare models side-by-side.
 
 Pair it with feature flags to roll out new models gradually, experiments to A/B test prompt variants, and session replay to see exactly what users saw when the model misbehaved.
 
@@ -153,7 +153,7 @@ Statsig, as its name suggests, is an experimentation tool first and foremost. Wh
 <details>
 <summary>Main differences between PostHog and Statsig</summary>
 
-- PostHog is fully independent and open source; Statsig was acquired by OpenAI and its brand and customers are currently operated by Amplitude.
+- PostHog is fully independent and open source; Statsig was acquired by OpenAI and its brand and customers are currently taken over by Amplitude.
 - PostHog has a [built-in data warehouse](/docs/data-warehouse) and [SQL access](/docs/product-analytics/sql) on every plan; Statsig's warehouse-native mode is gated behind its Enterprise tier.
 - PostHog offers an [EU-hosted cloud](/eu) at no extra cost; Statsig's hosted product is US-only.
 - Statsig offers more advanced statistical methods (CUPED, sequential testing, multi-armed bandits); PostHog focuses on the core experimentation workflows.
@@ -282,7 +282,11 @@ According to [G2 reviews](https://www.g2.com/products/launchdarkly/reviews#revie
 
 ### What is Amplitude?
 
-[Amplitude](/blog/best-amplitude-alternatives) was one of the original product analytics tools. Many large enterprise customers, like Ford, NBCUniversal, and Walmart rely on it. In recent years, it's also added A/B testing, feature flags, session replays, a customer data platform, and more, making it an obvious alternative to Statsig.
+[Amplitude](/blog/best-amplitude-alternatives) was one of the original product analytics tools. Many large enterprise customers, like Ford, NBCUniversal, and Walmart rely on it. In recent years, it's also added A/B testing, feature flags, session replays, a customer data platform, and more.
+
+It's also, as of May 2026, the company operating Statsig's brand and customers, which makes "Amplitude vs. Statsig" a slightly strange comparison going forward. 
+
+For now the two products run separately and many existing Statsig customers will want to know what Amplitude itself looks like as a destination; over time, the experimentation tooling will likely converge.
 
 #### Key features
 
@@ -327,7 +331,6 @@ Amplitude is missing some of the more complex statistical features of Statsig, b
 
 - Amplitude has much deeper product analytics with funnels, cohorts, and user paths; Statsig's analytics are lighter and experimentation-focused.
 - Statsig offers more advanced experimentation features like CUPED variance reduction and sequential testing; Amplitude's experimentation is more basic.
-- Amplitude is independent; Statsig is owned by OpenAI.
 - Amplitude is geared more toward product and marketing teams; Statsig leans toward engineers.
 
 </details>
@@ -459,7 +462,9 @@ According to G2 reviews, people are fans of Optimizely because:
 
 ### What is VWO?
 
-[VWO](/blog/best-vwo-alternatives) (acquired by AB Tasty) is a digital optimization platform that aims to maximize conversion with tools like A/B testing, personalization, funnels, heatmaps, session replay, and customer analytics. The platform is home to multiple different products including testing, insights, data, personalize, plan, and web rollouts.
+[VWO](/blog/best-vwo-alternatives) (merged with AB Tasty) is a digital optimization platform that aims to maximize conversion with tools like A/B testing, personalization, funnels, heatmaps, session replay, and customer analytics. The platform is home to multiple different products including testing, insights, data, personalize, plan, and web rollouts.
+
+> **Note:** Private equity firm Everstone Capital acquired a majority stake in VWO in January 2025. In January 2026, Everstone announced that VWO would merge with AB Tasty, combining into a single digital experience optimization platform.
 
 #### Key features
 
@@ -507,8 +512,6 @@ VWO is closer to Optimizely than Statsig, though it offers most of the same feat
     ]}
 />
 </p>
-
-> **Note:** Private equity firm Everstone Capital acquired a majority stake in VWO in January 2025. In January 2026, Everstone announced that VWO would merge with AB Tasty, combining into a single digital experience optimization platform.
 
 <details>
 <summary>Main differences between VWO and Statsig</summary>
@@ -609,7 +612,7 @@ GrowthBook is a much more focused tool than others on this list. It is primarily
 <summary>Main differences between GrowthBook and Statsig</summary>
 - GrowthBook appeals to regulated and privacy-sensitive companies thanks to self-hosting; Statsig is primarily cloud.
 - GrowthBook is warehouse-native by design, running analysis on your own data; Statsig offers a warehouse-native mode but also has its own hosted analytics.
-- Statsig includes session replay and broader product analytics; GrowthBook focuses on flags and experimentation.
+- Statsig includes session replay and broader product analytics; GrowthBook has product analytics in beta, but focuses mainly on flags and experimentation.
 
 </details>
 
@@ -761,7 +764,9 @@ Common reasons include: wanting deeper product analytics, needing other tools St
 
 It depends on whether you're comparing free tiers, paid plans, or total cost of ownership – and how your team is shaped.
 
-**For free-tier usage**, Statsig itself is hard to beat: 2M events, 50K session replays, and unlimited seats for $0. **PostHog** is the most competitive alternative at this level – 1M events, 5,000 web replays + 2,500 mobile replays, 1M flag requests, and unlimited team members on the free tier, plus $50k in additional credits for [eligible startups](/startups). **GrowthBook**'s free Starter plan also covers unlimited flags and unlimited users on both cloud and self-hosted.
+**For free-tier usage**, Statsig itself is hard to beat: 2M events, 50K session replays, and unlimited seats for $0. **PostHog** is the most competitive alternative at this level – 1M events, 5,000 web replays + 2,500 mobile replays, 1M flag requests, and unlimited team members on the free tier, plus $50k in additional credits for [eligible startups](/startups). **GrowthBook**'s free Starter plan is more constrained – up to 3 users and 1M CDN requests on Cloud, though self-hosted is free for unlimited users.
+
+One caveat on Statsig: pricing on both the free and paid tiers may shift now that Amplitude is operating Statsig's brand and customer base. The current $0 / 2M events / unlimited seats is published today, but is worth re-checking before committing.
 
 **For paid usage**, **GrowthBook** self-hosted has no per-seat fees, which makes it the cheapest option at scale for teams comfortable running their own deployment. **PostHog** uses transparent [usage-based pricing](/pricing) with a public calculator.
 
