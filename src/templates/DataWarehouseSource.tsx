@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import SEO from 'components/seo'
 import ReactMarkdown from 'react-markdown'
 import ReaderView from 'components/ReaderView'
+import SourceConfiguration from 'components/Product/Sources/Configuration'
 import { getProseClasses } from '../constants'
 
 interface SourceField {
@@ -60,28 +61,7 @@ export default function DataWarehouseSource({
                     {sourceFields && sourceFields.length > 0 && (
                         <>
                             <h2>Configuration</h2>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Field</th>
-                                        <th>Type</th>
-                                        <th>Required</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {sourceFields.map((field) => (
-                                        <tr key={field.name}>
-                                            <td>
-                                                <strong>{field.label || field.name}</strong>
-                                            </td>
-                                            <td>
-                                                <code>{field.type}</code>
-                                            </td>
-                                            <td>{field.required ? 'Yes' : 'No'}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            <SourceConfiguration sourceFields={sourceFields} />
                         </>
                     )}
 

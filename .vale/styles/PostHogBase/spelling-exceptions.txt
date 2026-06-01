@@ -104,6 +104,7 @@ fullstack
 fundraise
 fuzzer
 fuzzing
+gainz
 hackathon
 hackathons
 hardcode
@@ -119,6 +120,7 @@ idempotency
 impactful
 innersource
 kanban
+ko
 linter
 lockfile
 lockfiles

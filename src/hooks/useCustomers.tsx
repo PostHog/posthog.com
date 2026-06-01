@@ -928,7 +928,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [], // TODO: Add toolsUsed
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
-        notes: 'Most popular country with a Queen',
+        notes: 'Most popular country with a King',
         logo: UKGovtLogo,
         featured: true,
         height: 9,

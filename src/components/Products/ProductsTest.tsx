@@ -68,7 +68,7 @@ const sections = [
                 label: 'Understand product usage',
                 colSpan: 2,
                 columns: [
-                    ['web_analytics', 'product_analytics', 'revenue_analytics', 'trends'],
+                    ['web_analytics', 'product_analytics', 'trends'],
                     ['funnels', 'user_paths', 'lifecycle', 'heatmaps'],
                     ['llm_traces', 'llm_generations', 'llm_evals', 'activity'],
                 ],
@@ -82,7 +82,7 @@ const sections = [
                 colSpan: 2,
                 columns: [
                     ['feature_flags', 'experiments', 'no_code_ab_testing', 'early_access', 'endpoints', 'webhooks'],
-                    ['workflows_emails', 'surveys', 'product_tours', 'support', 'user_interviews'],
+                    ['workflows_emails', 'surveys', 'support', 'user_interviews'],
                 ],
             },
         ],

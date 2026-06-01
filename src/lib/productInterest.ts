@@ -30,10 +30,11 @@ const PRODUCT_SLUGS = new Set([
     'surveys',
     'data-warehouse',
     'llm-analytics',
-    'revenue-analytics',
     'workflows',
     'logs',
     'endpoints',
+    'posthog-code',
+    'inbox',
 ])
 
 function getPostHog() {

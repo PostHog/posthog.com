@@ -83,7 +83,7 @@ Here's a breakdown of the columns in the table:
 
 - **Column B** shows the size of each individual cohort. As noted earlier, retention insights default to unique users, but they can also use groups.
 
-- **Column C** is 'Week 0' - i.e. the week in which the start event or action first took place. This is always 100% because all users in that cohort must perform the event to be included. This would be 'Hour 0', 'Day 0', or 'Month 0' if you choose a different time period.
+- **Column C** is 'Week 0' - i.e. the week in which the start event or action first took place. This is always 100% because all users in that cohort must perform the event to be included. This would be 'Hour 0', 'Day 0', or 'Month 0' if you choose a different time period. You can [change the starting index](#cohort-label-start-index) to start at 1 instead of 0.
 
 - **Column D** is Week 2 - i.e. the second week after the cohort was created. In this example, 27.4% of the 'May 20 to May 26' cohort retained, or 372 users.
 
@@ -139,6 +139,17 @@ You can choose between two different calculation options for the mean/average re
 1. **Simple**. Calculates the average retention rate across all cohorts by giving equal weight to each cohort, regardless of its size.
 
 2. **Weighted**. Calculates the average retention rate by giving more weight to larger cohorts, accounting for different cohort sizes in the final mean.
+
+### Cohort label start index
+
+By default, retention insights label the first period as "Day 0", "Week 0", or "Month 0" depending on your selected time period. Some teams prefer starting at 1 (e.g., "Day 1", "Week 1") to align with internal KPIs or business conventions.
+
+To change the starting index, click **Options** and find **Cohort labels start at**. Choose between:
+
+- **Period 0** (default) - Labels start at 0 (e.g., "Day 0", "Week 0")
+- **Period 1** - Labels start at 1 (e.g., "Day 1", "Week 1")
+
+The label adapts to your selected retention period (Hour, Day, Week, or Month). This setting only affects display labels in the chart and table – underlying data, calculations, and cohort sizes remain unchanged.
 
 ## Breakdowns
 

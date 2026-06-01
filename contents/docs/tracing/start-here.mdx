@@ -1,0 +1,84 @@
+---
+title: Getting started with Tracing
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+
+> **Note:** Tracing is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
+
+<QuestLog firstSpeechBubble="Let's set up tracing!" lastSpeechBubble="Time to explore your traces!">
+
+<QuestLogItem
+    title="Install an OpenTelemetry trace exporter"
+    subtitle="Required"
+    icon="IconCode"
+>
+
+PostHog Tracing works with any OpenTelemetry client. No PostHog-specific packages are required. Use the OTel SDKs you already have, point your trace exporter at PostHog's HTTP endpoint, and add your project token.
+
+Set these on your OpenTelemetry SDK:
+
+```bash
+OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="<ph_client_api_host>/i/v1/traces"
+OTEL_EXPORTER_OTLP_TRACES_HEADERS="Authorization=Bearer <ph_project_token>"
+OTEL_SERVICE_NAME="my-app"
+```
+
+`<ph_client_api_host>` and `<ph_project_token>` are filled in with your project's values when you're logged in. Use your **project token** (the same one you use for capturing events), not a [personal API key](/docs/api#authentication).
+
+This is a different endpoint from PostHog's AI/LLM tracing (`/i/v0/ai/otel`), which only accepts generative-AI spans. For general application traces, use `/i/v1/traces`.
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Send context-rich spans"
+    subtitle="Required"
+    icon="IconStack"
+>
+
+PostHog ingests spans using OpenTelemetry's standard model: a trace is a tree of spans, each with a `trace_id`, `span_id`, and `parent_span_id`, plus timing, a service name, and attributes.
+
+Wrap the operations you care about – incoming requests, outgoing calls, database queries – in spans, and enrich them with attributes for business context.
+
+```python
+from opentelemetry import trace
+
+tracer = trace.get_tracer("my-app")
+
+with tracer.start_as_current_span("checkout") as span:
+    span.set_attribute("user.id", "123")
+    span.set_attribute("cart.value", 4200)
+    # ... your code ...
+```
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Explore your traces"
+    subtitle="Required"
+    icon="IconListTree"
+>
+
+Once spans are flowing into PostHog, you can:
+
+- **Search and filter spans** by service, status, duration, and attributes
+- **Follow a trace end to end** as a waterfall to see where time goes
+- **Spot slow and failing operations** across your services
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Correlate traces with the rest of PostHog"
+    subtitle="Recommended"
+    icon="IconLogomark"
+>
+
+Tracing is part of PostHog's observability suite and shares the same OpenTelemetry pipeline as [Logs](/docs/logs). Because logs carry `trace_id` and `span_id`, you can pivot from a slow span to the exact log lines emitted during it.
+
+From there, your traces live alongside [Session Replay](/docs/session-replay), [Error Tracking](/docs/error-tracking), and [Product Analytics](/docs/product-analytics) – so you can go from a slow request to the user's session without switching tools.
+
+</QuestLogItem>
+
+</QuestLog>

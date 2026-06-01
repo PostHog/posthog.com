@@ -1017,6 +1017,18 @@ export const SparksJoyItems = {
             iconName: null,
             customIcon: <IconDictator />,
         },
+        {
+            label: 'BrickHog',
+            link: '/sparks-joy/brickhog',
+            iconName: 'games' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: 'HogPatch: The Game',
+            link: '/sparks-joy/hogpatch',
+            iconName: 'games' as AppIconName,
+            customIcon: null,
+        },
     ],
     notGames: [
         {
