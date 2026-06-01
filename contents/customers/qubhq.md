@@ -7,7 +7,7 @@ date: 2026-03-10
 
 Most digital menu companies charge restaurants for the privilege of using their software. [QubHQ](https://qubdigital.cloud/) does the opposite: it gives restaurants a polished menu for free, and pays them a share of ad revenue on top. 
 
-The economics work because QubHQ runs its own advertising network. Restaurant owners get a free product and a small revenue stream. Advertisers get eyeballs at fair prices through QubHQ's real-time bidding system. QubHQ takes a margin in the middle.
+The economics work because QubHQ runs its own advertising network. Restaurant owners get a free product and an additional revenue stream. Advertisers get eyeballs at fair prices through QubHQ's real-time bidding system. QubHQ takes a margin in the middle.
 
 There's just one problem with that model: it requires building the kind of ad infrastructure that you usually only find on platforms like Google and Meta, from scratch.
 
@@ -50,20 +50,18 @@ When QubHQ adopted Endpoints in beta, parts of it weren't fully documented — t
 
 Gheorghe ran into a question he couldn't answer from the docs, he opened up PostHog's source code on GitHub, traced through the relevant module himself, figured out the answer — and then went back and shared his findings publicly on the community forum. The next person to hit the same edge case finds the answer waiting for them.
 
-That kind of transparency rarely shows up in commercial analytics tools. For Gheorghe, it's one of the most concrete benefits of working with an open-source platform: when documentation lags or support is busy, the code is right there. He's used the same pattern to understand performance characteristics, anticipate upcoming changes, and contribute back through the community.
+This kind of open-source transparency is really important to Gheorghe because it lets him unblock himself from technical challenges, as well as contribute to the community. 
 
 
 A self-funded competitive edge
 ------------------------------
 
-QubHQ is fully self-funded, they couldn't justify hiring a data engineer or running a separate analytics stack alongside the product. That math determined the whole architecture.
+QubHQ is fully self-funded, so they couldn't justify hiring a data engineer or running a separate analytics stack alongside the product. That math determined the whole architecture.
 
-Building all of this from scratch: ingestion, processing, filtering, dashboards, would have taken Gheorghe and one part-time collaborator more than six months by his estimate. With PostHog as the backend, the same scope shipped in about a month. Roughly a 6x reduction in time-to-market, with no new infrastructure to maintain.And because QubHQ owns its ad network, the team can revenue-share with restaurant locations and design the ad UI to fit inside the menu rather than around it.
+Building all of this from scratch: ingestion, processing, filtering, dashboards, would have taken Gheorghe and one part-time collaborator more than six months by his estimate. With PostHog it shipped in a month, while also giving Gheorghe the ability to integrate the UI better into the product. 
 
 "Because I built my own advertising network, the ads look like part of my menus," says Gheorghe. "They're so natively and beautifully integrated that they don't offend the customers or the restaurant owners. If we used Google ads, I couldn't do this, and I couldn't offer the same amount of money I'm offering to restaurants right now, because Google would have to take a cut of the revenue."
 
-What's next for QubHQ
----------------------
 
 Using the infrastructure they’ve developed, QubHQ plans to expand beyond Romania and into adjacent service-industry products. And, because of some of the heavier real-time bidding workloads, the team is also evaluating PostHog's [Managed Warehouse](/data-stack/managed-warehouse) to help them scale up.
 
