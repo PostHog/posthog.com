@@ -1422,6 +1422,10 @@ export const handbookSidebar = [
                         name: 'How we use automation',
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
+                    {
+                        name: 'Engaging unengaged customers',
+                        url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
+                    },
                 ],
             },
             {
@@ -5920,6 +5924,12 @@ export const docsMenu = {
                     url: '/docs/ai-observability/demos',
                     icon: 'IconFlask',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Data retention',
+                    url: '/docs/ai-observability/data-retention',
+                    icon: 'IconDatabase',
+                    color: 'blue',
                 },
                 {
                     name: 'Troubleshooting',

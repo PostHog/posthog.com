@@ -39,6 +39,8 @@ If a change affects public behavior, docs, examples, changelogs, APIs, configura
 
 Don't spend human review cycles on syntax formatting or preferences that a formatter, linter, or bot should catch.
 
+> The one sanctioned exception is the break-glass [Force-merge a PR](/handbook/engineering/development-process#break-glass-force-merge-a-pr) Slack app, used in exceptional cases (almost always during an incident) to merge a PR without the normal review and checks. Every use is audited.
+
 ## Before requesting a review
 
 The best way to get a fast, useful review is to make your PR easy to review.
