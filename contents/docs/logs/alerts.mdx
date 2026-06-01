@@ -59,6 +59,12 @@ An alert without a destination has nowhere to send notifications. Add at least o
 
 Destinations are delivered through hog functions under the hood, so they reuse the same infrastructure as other PostHog destinations. The **Notifications** column in the alert list shows a struck-through bell when no destinations are configured.
 
+## Signals for PostHog Code Inbox
+
+When an alert enters the **Firing** or **Broken** state, it automatically emits a signal to [PostHog Code Inbox](/docs/posthog-code/inbox/sources). The signal includes the alert name, threshold, observed count, window, filters, and a direct link to the matching logs. This enables the Inbox research agent to correlate the alert with your codebase and investigate the root cause.
+
+Only **Firing** and **Broken** state changes emit signals. **Resolving** and **Errored** states don't generate signals.
+
 ## Advanced options
 
 ### Reduce noise
