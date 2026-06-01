@@ -177,6 +177,34 @@ This is needed as Flutter renders your app using a browser canvas element.
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
 
+## Flush
+
+import FlushIntro from '../_snippets/flush-intro.mdx'
+
+<FlushIntro />
+
+```dart
+final config = PostHogConfig('<ph_project_token>');
+config.flushAt = 20;
+config.flushInterval = const Duration(seconds: 30);
+```
+
+You can also manually flush the queue:
+
+```dart
+await Posthog().flush();
+```
+
+import FlushBeforeLeaving from '../_snippets/flush-before-leaving.mdx'
+
+<FlushBeforeLeaving />
+
+```dart
+await Posthog().capture(eventName: 'link_opened', properties: properties);
+await Posthog().flush();
+await launchUrl(uri, mode: LaunchMode.externalApplication);
+```
+
 ## Offline behavior
 
 The PostHog Flutter SDK will continue to capture events when the device is offline for Android and Apple platforms. The events are stored in a queue in the device's file storage and are flushed when the device is online.

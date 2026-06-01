@@ -43,6 +43,16 @@ PostHogSDK.shared.capture("logged_out")
 PostHogSDK.shared.flush()
 ```
 
+import FlushBeforeLeaving from '../_snippets/flush-before-leaving.mdx'
+
+<FlushBeforeLeaving />
+
+```swift
+PostHogSDK.shared.capture("link_opened")
+PostHogSDK.shared.flush()
+UIApplication.shared.open(url)
+```
+
 ## Amending, dropping or sampling events
 
 Since version 3.28.0, you can provide a `BeforeSendBlock` function when initializing the SDK to amend, drop or sample events before they are sent to PostHog. 
