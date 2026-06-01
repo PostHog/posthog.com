@@ -2315,6 +2315,14 @@ export const docsMenu = {
                             ],
                         },
                         {
+                            name: 'Roblox',
+                            url: '/docs/libraries/roblox',
+                            badge: {
+                                title: 'Beta',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                            },
+                        },
+                        {
                             name: 'Ruby',
                             url: '/docs/libraries/ruby',
                         },
@@ -4829,6 +4837,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/unity',
                         },
                         {
+                            name: 'Roblox',
+                            url: '/docs/error-tracking/installation/roblox',
+                        },
+                        {
                             name: 'Elixir',
                             url: '/docs/error-tracking/installation/elixir',
                         },
@@ -5926,6 +5938,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Data retention',
+                    url: '/docs/ai-observability/data-retention',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                },
+                {
                     name: 'Troubleshooting',
                     url: '/docs/ai-observability/troubleshooting',
                     icon: 'IconQuestion',
@@ -6544,12 +6562,6 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Slack',
-                    url: '/docs/posthog-code/slack',
-                    icon: 'IconChat',
-                    color: 'purple',
-                },
-                {
                     name: 'Code review',
                     url: '/docs/posthog-code/code-review',
                     icon: 'IconCode',
@@ -6599,6 +6611,42 @@ export const docsMenu = {
                     url: '/docs/posthog-code/community',
                     icon: 'IconPeople',
                     color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Slack app',
+            icon: 'IconAtSign',
+            color: 'purple',
+            url: '/docs/slack-app',
+            description: 'Run PostHog from any Slack channel — agent tasks, analytics, and notifications.',
+            children: [
+                {
+                    name: 'Slack app',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/slack-app',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Setup',
+                    url: '/docs/slack-app/setup',
+                    icon: 'IconWrench',
+                    color: 'blue',
+                },
+                {
+                    name: 'Commands',
+                    url: '/docs/slack-app/commands',
+                    icon: 'IconTerminal',
+                    color: 'purple',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/slack-app/pricing',
+                    icon: 'IconShield',
+                    color: 'red',
                 },
             ],
         },
@@ -6834,6 +6882,34 @@ export const docsMenu = {
                     url: '/docs/logs/changelog',
                     icon: 'IconRocket',
                     color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Tracing',
+            icon: 'IconListTree',
+            color: 'purple',
+            url: '/docs/tracing',
+            description: 'Capture and explore distributed traces with OpenTelemetry.',
+            children: [
+                {
+                    name: 'Tracing',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/tracing',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/tracing/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
                 },
             ],
         },

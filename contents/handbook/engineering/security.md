@@ -12,6 +12,8 @@ Connecting to GitHub requires an SSH key (unless using HTTPS). Traditional SSH k
 
 Use [Secretive](https://github.com/maxgoedjen/secretive/) or [1Password](https://developer.1password.com/docs/ssh/manage-keys/) to generate and store your SSH key. We have a slight preference for Secretive because it stores your key in the macOS Secure Enclave, ensuring the key can never be exported or extracted, even by malware. Always use ECDSA or Ed25519 — don't use RSA.
 
+> **Note:** The default shell on macOS is `zsh`, so the `~/.zshrc` instructions below apply to you unless you've deliberately switched to a different shell. If you're not sure which shell you're using, run `echo $SHELL` in your terminal to check.
+
 #### Setting up with Secretive
 
 1. Open [Secretive](https://github.com/maxgoedjen/secretive/) and click the + button to create a new key.
