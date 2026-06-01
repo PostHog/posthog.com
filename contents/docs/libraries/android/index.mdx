@@ -183,6 +183,8 @@ import FlushIntro from '../_snippets/flush-intro.mdx'
 
 <FlushIntro />
 
+You can also configure the flush interval with `flushIntervalSeconds` (default `30`), after which queued events are sent regardless of how many have been gathered:
+
 ```kotlin
 import com.posthog.android.PostHogAndroidConfig
 
@@ -192,7 +194,7 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
 }
 ```
 
-You can also manually flush the queue:
+You can also manually flush the queue to start sending events immediately instead of waiting for the next batch:
 
 ```kotlin
 import com.posthog.PostHog
@@ -200,15 +202,9 @@ import com.posthog.PostHog
 PostHog.flush() 
 ```
 
-import FlushBeforeLeaving from '../_snippets/flush-before-leaving.mdx'
+import FlushNotes from '../_snippets/flush-notes.mdx'
 
-<FlushBeforeLeaving />
-
-```kotlin
-PostHog.capture(event = "link_opened")
-PostHog.flush()
-startActivity(intent)
-```
+<FlushNotes />
 
 ## Reset after logout
 

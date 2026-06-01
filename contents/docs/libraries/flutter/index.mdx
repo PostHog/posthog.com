@@ -183,27 +183,23 @@ import FlushIntro from '../_snippets/flush-intro.mdx'
 
 <FlushIntro />
 
+You can also configure the flush interval with `flushInterval` (default 30 seconds), after which queued events are sent regardless of how many have been gathered:
+
 ```dart
 final config = PostHogConfig('<ph_project_token>');
 config.flushAt = 20;
 config.flushInterval = const Duration(seconds: 30);
 ```
 
-You can also manually flush the queue:
+You can also manually flush the queue to start sending events immediately instead of waiting for the next batch:
 
 ```dart
 await Posthog().flush();
 ```
 
-import FlushBeforeLeaving from '../_snippets/flush-before-leaving.mdx'
+import FlushNotes from '../_snippets/flush-notes.mdx'
 
-<FlushBeforeLeaving />
-
-```dart
-await Posthog().capture(eventName: 'link_opened', properties: properties);
-await Posthog().flush();
-await launchUrl(uri, mode: LaunchMode.externalApplication);
-```
+<FlushNotes />
 
 ## Offline behavior
 

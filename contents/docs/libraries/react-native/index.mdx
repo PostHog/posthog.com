@@ -229,21 +229,24 @@ import FlushIntro from '../_snippets/flush-intro.mdx'
 
 <FlushIntro />
 
+You can also configure the flush interval with `flushInterval`, in milliseconds (default `10000`), after which queued events are sent regardless of how many have been gathered:
+
+```javascript
+const posthog = new PostHog('<ph_project_token>', {
+  flushAt: 20,
+  flushInterval: 10000,
+})
+```
+
 You can also manually flush the queue. If a flush is already in progress it returns a promise for the existing flush.
 
 ```javascript
 await posthog.flush()
 ```
 
-import FlushBeforeLeaving from '../_snippets/flush-before-leaving.mdx'
+import FlushNotes from '../_snippets/flush-notes.mdx'
 
-<FlushBeforeLeaving />
-
-```javascript
-await posthog.capture('link_opened')
-await posthog.flush()
-await Linking.openURL(url)
-```
+<FlushNotes />
 
 ## Reset after logout
 
