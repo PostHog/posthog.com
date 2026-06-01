@@ -15,17 +15,17 @@ tags:
   - AI
 ---
 
-Some issues surface from product data. [PostHog Code](/code) catches those by monitoring for [signals](/docs/posthog-code/inbox/research) and proactively fixing them. Other issues surface from people, like when a colleague flags a UI thing or a customer mentions a bug. Those are signals too, so why do they tend to end up in the backlog?
+Product data reveals issues. [PostHog Code](/code) catches those by monitoring for [signals](/docs/posthog-code/inbox/research) and proactively fixing them. People also reveal issues, like when a colleague flags a UI thing or a customer mentions a bug. Those are signals too, so why do they tend to end up in the backlog?
 
-Because most of it's boring, and not an urgent thing in front of you. Or it's invisible work, never tagged as someone's job.
+Because most issues are boring, and not an urgent thing in front of you. Or they are invisible work, never tagged as someone's job.
 
-So make it a robot's job. With the PostHog Slack app, you @mention PostHog to "fix this" or "build that". It spins up a sandbox, makes a plan, edits files, runs checks, opens a draft PR, and answers review comments in the thread.
+So make these issues a robot's job. With the PostHog Slack app, you @mention PostHog to "fix this" or "build that". It spins up a sandbox, makes a plan, edits files, runs checks, opens a draft PR, and answers review comments in the thread.
 
 It uses your product data as context by default and follows your repo's rules, so it feels less like a coding tool and more like a clever teammate (it even reacts with [emojis](/docs/slack-app#emoji-cues)). Today it hits beta, so you can @PostHog now, too.
 
 ## @PostHog in the #papercuts channel
 
-[Paul D'Ambra](/community/profiles/30173) (engineer exec) was the first to fall in love with @PostHog. Among other important [blitzscale](/teams/blitzscale) duties, he owns the `#papercuts` Slack channel, where anyone can post the small bugs and nits they hit in the app. He'd been fixing them with PostHog Code like a good engineer. Now he mentions @PostHog in 60% of the total threads.
+[Paul D'Ambra](/community/profiles/30173) was the first to fall in love with @PostHog. Among other important [blitzscale](/teams/blitzscale) duties, he owns the `#papercuts` Slack channel, where anyone can post the small bugs and nits they hit in the app. He'd been fixing them with PostHog Code like a good engineer. Now he mentions @PostHog in 60% of the total threads.
 
 ![Paul mentions @PostHog in #papercuts](https://res.cloudinary.com/dmukukwp6/image/upload/slackbot_papercuts_1_877de83ae8.png)
 
@@ -39,7 +39,7 @@ It uses your product data as context by default and follows your repo's rules, s
 
 ## Real prompts that became actual PRs
 
-It's awesome when a prolific engineer gets even more productive, but what makes @PostHog *really* magical is that it's a force multiplier for every role. Sales, marketing, customer support – anyone can tag the bot with a bug, a papercut, or a feature idea.
+It's awesome when a prolific engineer gets even more productive, but what makes @PostHog *really* magical is that it empowers every role. Sales, marketing, customer support – anyone can tag the bot with a bug, a papercut, or a feature idea.
 
 Here's a few examples of @PostHog usage across the org chart:
 
@@ -85,7 +85,7 @@ Then it went further. In addition to detecting zero [MCP](/docs/model-context-pr
 
 ### The one where it did the logs legwork
 
-[Lucas Ricoy](/community/profiles/33028) (product engineer) asked @PostHog to check whether a recent <Link to="https://github.com/PostHog/posthog/pull/58177" external>PR</Link>, which aimed to tag WebStats queries by strategy for better performance visibility, actually worked. It turned out the logs API was returning stale data (which threw off the bot). But once Lucas confirmed the cutover had happened, the bot not only confirmed the new ones were appearing, but also that one query – `stats_table_path_bounce_query` – was showing up as a bottleneck.
+[Lucas Ricoy](/community/profiles/33028) (product engineer) asked @PostHog to check whether a recent <Link to="https://github.com/PostHog/posthog/pull/58177" external>PR</Link>, which aimed to tag WebStats queries by strategy for better performance visibility, actually worked. The logs API was returning stale data (which threw off the bot), but once Lucas confirmed the cutover had happened, the bot not only confirmed the new ones were appearing, but also that one query – `stats_table_path_bounce_query` – was showing up as a bottleneck.
 
 ![Lucas Ricoy prompts @PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/slackbot_lucas_r_1_cda9922574.png)
 
@@ -144,7 +144,7 @@ The code generation that lands from one sentence prompts are surprisingly good. 
 
 Generating PRs with @PostHog in Slack is so easy it feels illegal, and it's a glimpse at what the [self-driving product](/blog/self-driving-product) means in practice.
 
-But despite being a coding agent, it won't answer every @mention with a PR. That's down to a pleasingly simple guardrail: every @PostHog mention runs through a two-stage classifier before any work happens:
+Despite being a coding agent, it won't answer every @mention with a PR. Every @PostHog mention runs through a two-stage classifier before any work happens:
 
 1. **Task classifier** – Does this request need repo access, or is it analytics/data/config?
 2. **Repo router** – If it does require code generation, which GitHub repo does it go to?
@@ -171,7 +171,7 @@ It's free to install, and free to uninstall when you realize this means you can 
 
 ## FAQ
 
-**Why use this over Cursor, Claude Code, or Codex?** They write code once you prompt them. PostHog is connected to your product data, so you can start from a problem – tag @PostHog with a message like "conversion dropped on signup". It finds the cause in your analytics and replays, explores solutions, and opens a PR to propose a fix. No hopping between a dashboard, a replay tab, and your editor.
+**Why use this over Cursor, Claude Code, or Codex?** Other tools only write code. PostHog is connected to your product data, so you can start from a problem – tag @PostHog with a message like "conversion dropped on signup". It finds the cause in your analytics and replays, explores solutions, and opens a PR to propose a fix. No hopping between a dashboard, a replay tab, and your editor.
 
 **Is it a better coding model?** No. It runs the same frontier models everyone else does. The difference is context – an agent that can read your funnels, replays, and errors is working from evidence, not guessing at what matters.
 
@@ -181,6 +181,6 @@ It's free to install, and free to uninstall when you realize this means you can 
 
 **Will it touch our whole codebase?** It only touches repos you connect, and every change goes through a PR you review. Nothing merges without a human saying yes.
 
-**Do I need to be an engineer to use it?** Not at all! It's a Slack message. People in sales and marketing have merged PRs to our main repo. Describe the problem or idea, and the agent takes it from there.
+**Do I need to be an engineer to use it?** Not at all! It's a Slack message. Our sales and marketing teams regularly use it make fixes to our main app. Describe the problem or idea, and the agent takes it from there.
 
 **Won't it try to code every message?** It classifies each @mention first – code task or data question, and which repo. Data questions get answered, not turned into PRs.
