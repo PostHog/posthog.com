@@ -85,7 +85,7 @@ export const productOrder: Record<string, string[]> = {
         'custom_dashboards',
     ],
     dataviz: ['trends', 'funnels', 'user_paths', 'correlation_analysis', 'retention', 'stickiness', 'lifecycle'],
-    automation: ['posthog_ai', 'workflows', 'webhooks'],
+    automation: ['posthog_ai', 'posthog_slack', 'posthog_code', 'workflows', 'webhooks'],
     communication: ['surveys', 'messaging', 'user-interviews', 'workflows_emails'],
     product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages', 'services'],
 }

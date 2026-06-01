@@ -64,7 +64,7 @@ What themes can we distill from the above HOGS list? What are categories of thin
 ### Other things to consider
 
 - For engineering teams - did you do anything cool last quarter that other engineers could learn from? Consider adding a goal to write about those things on our company blog!
-- Have you done a pricing review for this product in the last year? If not, follow our [RFC template](url/to/template) to do a pricing review this quarter.
+- Have you done a pricing review for this product in the last year? If not, follow our [RFC template](https://github.com/PostHog/requests-for-comments-internal/blob/main/_TEMPLATES/request-for-comments-pricing-review.md) to do a pricing review this quarter.
 
 ## New goals (15 minutes - do as a team)
 

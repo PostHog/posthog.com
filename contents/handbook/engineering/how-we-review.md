@@ -8,6 +8,8 @@ showTitle: true
 
 Almost all PRs made to PostHog repositories will need a review from another engineer. We do this because, almost every time we review a PR, we find a bug, a performance issue, unnecessary code or UX that could have been confusing. Here's how we do it:
 
+> The one sanctioned exception is the break-glass [Force-merge a PR](/handbook/engineering/development-process#break-glass-force-merge-a-pr) Slack app, used in exceptional cases (almost always during an incident) to merge a PR without the normal review and checks. Every use is audited.
+
 ## Before requesting a review
 
 The best way to get a fast, useful review is to make your PR easy to review.

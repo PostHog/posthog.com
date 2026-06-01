@@ -179,11 +179,11 @@ PostHog.isOptOut()
 
 ## Flush
 
-You can set the number of events in the configuration that should queue before flushing.
-Setting this to `1` will send events immediately and will use more battery. The default value for this is `20`.
+import FlushIntro from '../_snippets/flush-intro.mdx'
 
-You can also configure the flush interval. By default we flush all events after `30` seconds,
-no matter how many events have been gathered.
+<FlushIntro />
+
+You can also configure the flush interval with `flushIntervalSeconds` (default `30`), after which queued events are sent regardless of how many have been gathered:
 
 ```kotlin
 import com.posthog.android.PostHogAndroidConfig
@@ -194,13 +194,19 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
 }
 ```
 
-You can also manually flush the queue:
+import FlushManual from '../_snippets/flush-manual.mdx'
+
+<FlushManual />
 
 ```kotlin
 import com.posthog.PostHog
 
 PostHog.flush() 
 ```
+
+import FlushNotes from '../_snippets/flush-notes.mdx'
+
+<FlushNotes />
 
 ## Reset after logout
 
