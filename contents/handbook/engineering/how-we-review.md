@@ -17,13 +17,13 @@ Who should review depends on who wrote the code:
 - **Human-authored PRs** can be reviewed by a team member or by Stamphog, our AI approval agent. Stamphog runs deterministic checks first (size, file ownership, tier) and then does an LLM review for approval eligibility and suggestions. Stamphog is the only AI approval agent whose approval can satisfy the review requirement, and only for eligible human-authored PRs, so a team member can merge.
 - **Agent-authored PRs** always require a human review since we want at least one human in the loop. A team member must review the PR and approve it before merging.
 
-We encourage the use of AI review agents (Codex, Copilot, Greptile, etc.) on PRs. Run them when they're useful, whether before opening a PR, while iterating, or before requesting a human review, and respond to or resolve meaningful comments. Other AI or bot review comments and suggestions do not count as approval, but they catch things humans miss and speed up the review process. Avoid adding more bot reviews when the PR already has automated feedback. Three bots arguing with each other is noisy, unless the extra bot has a niche focus like security.
+We encourage the use of AI review agents (Codex, Copilot, Greptile, etc.) on PRs. Run them when they're useful, whether before opening a PR, while iterating, or before requesting a human review, and respond to or resolve meaningful comments. Other AI review agent comments and suggestions do not count as approval, but they catch things humans miss and speed up the review process. Avoid adding more agent reviews when the PR already has automated feedback. Three agents arguing with each other is noisy, unless the extra agent has a niche focus like security.
 
 ## What reviews are for
 
 Automated reviewers are useful for cheap, repetitive checks: obvious bugs, missing tests, typo-level mistakes, suspicious edge cases, and things that look like lint or static analysis. They reduce noise for humans, but they don't replace human judgment.
 
-Human reviewers should focus on things bots are bad at:
+Human reviewers should focus on things agents are bad at:
 
 - Does this solve the right problem for customers?
 - Is this the right thing to build at all?
@@ -35,9 +35,9 @@ Reviews also build shared context and collective ownership. They are a chance to
 
 If a change has long-term impact, such as architecture, schema, API, dependency, framework, or build changes, ask or pair with someone who has deeper context before merging. The goal is not to gatekeep, but to understand the tradeoffs and avoid surprising the team later.
 
-If a change affects public behavior, docs, examples, changelogs, APIs, configuration, or defaults, review those as part of the PR too. Changes that need human judgment should get human review rather than relying on bots alone. This is especially important for SDK changes. Our [SDK guidelines](/handbook/engineering/sdks/guidelines) call out that public APIs, configuration, defaults, and behavior that affects customers need human review for ergonomics, platform fit, and long-term support cost.
+If a change affects public behavior, docs, examples, changelogs, APIs, configuration, or defaults, review those as part of the PR too. Changes that need human judgment should get human review rather than relying on agents alone. This is especially important for SDK changes. Our [SDK guidelines](/handbook/engineering/sdks/guidelines) call out that public APIs, configuration, defaults, and behavior that affects customers need human review for ergonomics, platform fit, and long-term support cost.
 
-Don't spend human review cycles on syntax formatting or preferences that a formatter, linter, or bot should catch.
+Don't spend human review cycles on syntax formatting or preferences that a formatter, linter, or agent should catch.
 
 > The one sanctioned exception is the break-glass [Force-merge a PR](/handbook/engineering/development-process#break-glass-force-merge-a-pr) Slack app, used in exceptional cases (almost always during an incident) to merge a PR without the normal review and checks. Every use is audited.
 
@@ -47,7 +47,7 @@ The best way to get a fast, useful review is to make your PR easy to review.
 
   - **Keep PRs small.** If your change touches many files or mixes unrelated concerns, break it into a stack of smaller PRs. Smaller PRs get reviewed faster and reviewed better.
   - **Open a draft PR.** This keeps notifications quiet and lets you iterate without pinging reviewers.
-  - **Use AI reviewers** (e.g. Copilot) or your own bot review where useful, and resolve meaningful comments. Iterate until they're only leaving nit-level feedback.
+  - **Use AI reviewers** (e.g. Copilot) or your own agent review where useful, and resolve meaningful comments. Iterate until they're only leaving nit-level feedback.
   - **Self-review your own diff.** Read through it as if you're seeing it for the first time. You'll catch obvious issues before someone else has to.
   - **Write a clear description.** Explain what the change does and why. Link the issue. Explain important tradeoffs or approaches you considered but rejected. If there's context a reviewer needs, put it in the description so they don't have to guess.
   - **Annotate specific lines when useful.** Leave comments on non-obvious code, risky tradeoffs, or places where extra context will help the reviewer.
