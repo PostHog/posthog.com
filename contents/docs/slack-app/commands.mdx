@@ -16,7 +16,9 @@ The full set of commands `@PostHog` accepts, in the same order it lists them whe
 | `@PostHog project <id>` | Set the PostHog project your mentions route to in this workspace |
 | `@PostHog help` | Show the command list |
 
-For repo selection, the bot checks routing rules first. If nothing matches and you have multiple repos, it opens the in-thread picker. If you only have one repo connected, the task runs against it directly. The `project` commands only matter if your Slack workspace is connected to multiple PostHog projects – see [Pick a project](/docs/slack-app/setup#pick-a-project-multi-integration-workspaces).
+For repo selection, the bot checks routing rules first. If nothing matches and you have multiple repos, it opens the in-thread picker. If you only have one repo connected, the task runs against it directly. The `project` commands only matter if your Slack workspace is connected to multiple PostHog projects.
+
+See [Pick a project](/docs/slack-app/setup#pick-a-project-multi-integration-workspaces).
 
 ## Routing rules
 
@@ -31,7 +33,7 @@ When several rules match, the first one in `rules list` wins. Use `@PostHog rule
 
 ## Limitations
 
-An honest (but non-exhaustive) list of things to know before you lean on the Slack app:
+Before you lean on the Slack app, here's a list of things to know:
 
 - **Ephemeral sandbox.** Each task runs in a fresh sandbox that lives roughly six hours. Long iterations need re-prompting once it recycles.
 - **Personal GitHub auth is per user.** Every teammate who wants to ship a PR has to connect their own GitHub once. First-time setup has known rough edges.
