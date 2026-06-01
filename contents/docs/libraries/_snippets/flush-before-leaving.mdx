@@ -1,5 +1,5 @@
 ### Flushing before leaving your app
 
-Because events are batched, an event captured immediately before your app is backgrounded or closed — for example when opening an external app, following a deep link, redirecting to a payment provider, or logging out — may not be sent until the next batch. Delivery is best-effort: events are persisted to the device's file storage on capture, so anything not sent before the operating system suspends the app isn't lost — it's retried automatically the next time the app opens.
+Because events are batched, an event captured immediately before your app moves to the background or is closed – for example when opening an external app, following a deep link, redirecting to a payment provider, or logging out – may not be sent until the next batch. Delivery is best-effort: events are persisted to the device's file storage on capture, so anything not sent before the operating system suspends the app isn't lost – it's retried automatically the next time the app opens.
 
 If a specific event is important to deliver right away, call `flush()` before navigating away:
