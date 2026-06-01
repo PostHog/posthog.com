@@ -6844,6 +6844,34 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Tracing',
+            icon: 'IconListTree',
+            color: 'purple',
+            url: '/docs/tracing',
+            description: 'Capture and explore distributed traces with OpenTelemetry.',
+            children: [
+                {
+                    name: 'Tracing',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/tracing',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/tracing/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+            ],
+        },
+        {
             name: 'Endpoints',
             icon: 'IconCode2',
             color: 'blue',
