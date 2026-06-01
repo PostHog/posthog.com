@@ -16,11 +16,11 @@ The full set of commands `@PostHog` accepts, in the same order it lists them whe
 | `@PostHog project <id>` | Set the PostHog project your mentions route to in this workspace |
 | `@PostHog help` | Show the command list |
 
-For repo selection, the bot checks routing rules first. If nothing matches and you have multiple repos, it opens the in-thread picker. If you only have one repo connected, the task runs against it directly. The `project` commands only matter if your Slack workspace is connected to multiple PostHog projects - see [Pick a project](/docs/slack-app/setup#pick-a-project-multi-integration-workspaces).
+For repo selection, the bot checks routing rules first. If nothing matches and you have multiple repos, it opens the in-thread picker. If you only have one repo connected, the task runs against it directly. The `project` commands only matter if your Slack workspace is connected to multiple PostHog projects – see [Pick a project](/docs/slack-app/setup#pick-a-project-multi-integration-workspaces).
 
 ## Routing rules
 
-Routing rules let you map a mention's content to a specific repo so the agent doesn't have to ask. A rule has a free-text **description** that's matched against the mention and an `org/repo` target it routes to:
+Routing rules let you map a mention's content to a specific repo so the agent doesn't have to ask. A rule has a free-text description that's matched against the mention and an `org/repo` target it routes to:
 
 ```
 @PostHog rules add "frontend bug" posthog/posthog
@@ -36,7 +36,7 @@ An honest (but non-exhaustive) list of things to know before you lean on the Sla
 - **Ephemeral sandbox.** Each task runs in a fresh sandbox that lives roughly six hours. Long iterations need re-prompting once it recycles.
 - **Personal GitHub auth is per user.** Every teammate who wants to ship a PR has to connect their own GitHub once. First-time setup has known rough edges.
 - **Single-author follow-ups.** Only the person who started a task can steer it. Colleagues' messages become context, not instructions.
-- **Text input only.** The agent can't read images yet - paste descriptions instead of screenshots.
+- **Text input only.** The agent can't read images yet – paste descriptions instead of screenshots.
 - **DMs coming soon.** The bot doesn't respond in direct messages yet. For now, add it to a private channel of one if you want a quiet space.
 - **500-repo cap on the picker.** If your team's GitHub install exposes more than 500 repos, the list is truncated. Add a routing rule for repos that fall off the end.
 - **Workflow timeouts.** A single mention has a 10-minute workflow timeout; the repo picker times out after 15 minutes.
