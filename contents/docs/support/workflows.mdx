@@ -34,7 +34,7 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 |----------|------|-------------|
 | `ticket_id` | string (UUID) | The ticket's unique ID |
 | `ticket_number` | int | Human-readable ticket number |
-| `channel_source` | string | `widget`, `email`, or `slack` |
+| `channel_source` | string | `widget`, `email`, `slack`, or `github` |
 | `status` | string | Always `new` for this trigger |
 | `priority` | string or null | `low`, `medium`, `high`, or null |
 | `customer_name` | string | Customer name |
@@ -115,7 +115,7 @@ Fetches the full ticket into workflow variables. Use this when you need fields b
 | `ticket_number` | int | Per-team ticket number |
 | `status` | string | `new`, `open`, `pending`, `on_hold`, `resolved` |
 | `priority` | string or null | `low`, `medium`, `high`, or null |
-| `channel_source` | string | `widget`, `email`, or `slack` |
+| `channel_source` | string | `widget`, `email`, `slack`, or `github` |
 | `distinct_id` | string | Customer's PostHog distinct ID |
 | `created_at` | string (ISO 8601) | When the ticket was created |
 | `updated_at` | string (ISO 8601) | Last update timestamp |
