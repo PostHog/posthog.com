@@ -35,7 +35,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
  - Learn and practice a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
    - For familiarization and self-led training, follow the [product curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You work through this with the [HogFlix Demo 3000 project](https://us.posthog.com/project/99423/dashboard), which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
  - Read all of the Onboarding section in the Handbook as well as the Sales and Customer Success section, and [update it as you learn more](/handbook/company/new-to-github#creating-a-pull-request).
- - Meet with [Charles](/community/profiles/28625), the exec responsible for customer-facing teams, and schedule monthly 1:1s with Simon.
+ - Meet with Ben Bradley, who's responsible for GTM teams.
 
 ## Week 2
 
