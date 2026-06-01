@@ -21,7 +21,7 @@ Because most issues are boring, and not an urgent thing in front of you. Or they
 
 So make these issues a robot's job. With the PostHog Slack app, you @mention PostHog to "fix this" or "build that". It spins up a sandbox, makes a plan, edits files, runs checks, opens a draft PR, and answers review comments in the thread.
 
-It uses your product data as context by default and follows your repo's rules, so it feels less like a coding tool and more like a clever teammate (it even reacts with [emojis](/docs/slack-app#emoji-cues)). Today it hits beta, so you can @PostHog now, too.
+The PostHog Slack app uses your product data as context by default and follows your repo's rules, so it feels less like a coding tool and more like a clever teammate (it even reacts with [emojis](/docs/slack-app#emoji-cues)). Today it hits beta, so you can @PostHog now, too.
 
 ## @PostHog in the #papercuts channel
 
@@ -68,8 +68,6 @@ It's not just code generation. You can tag @PostHog with a data question and it 
 Then it went further. In addition to detecting zero [MCP](/docs/model-context-protocol) activity, it noticed she works across two PostHog projects with replicated feature flag configs. The bot flagged it as odd and suggested Cory ask about that in the interview. Clever robot.
 
 ![Cory Slater prompts @PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/slackbot_cory_s_2_cde3716078.png)
-
-*Want to steal Cory's user interview skill? We're building a skill library with all our best agent skills.*
 
 ### The one where it updated the company handbook
 
@@ -171,16 +169,51 @@ It's free to install, and free to uninstall when you realize this means you can 
 
 ## FAQ
 
-**Why use this over Cursor, Claude Code, or Codex?** Other tools only write code. PostHog is connected to your product data, so you can start from a problem – tag @PostHog with a message like "conversion dropped on signup". It finds the cause in your analytics and replays, explores solutions, and opens a PR to propose a fix. No hopping between a dashboard, a replay tab, and your editor.
+<details>
+  <summary>Why use this over Cursor, Claude Code, or Codex?</summary>
 
-**Is it a better coding model?** No. It runs the same frontier models everyone else does. The difference is context – an agent that can read your funnels, replays, and errors is working from evidence, not guessing at what matters.
+Other tools only write code. PostHog is connected to your product data, so you can start from a problem – tag @PostHog with a message like "conversion dropped on signup". It finds the cause in your analytics and replays, explores solutions, and opens a PR to propose a fix. No hopping between a dashboard, a replay tab, and your editor.
 
-**Is it an analytics agent or coding agent?** Both, in one thread. Explore data and build in the same conversation.
+</details>
 
-**Does it just open a PR and walk away?** No. It sticks with the PR through failing checks and reruns until it's mergeable – we call that babysitting. On a big repo, getting through CI is often more work than the code.
+<details>
+  <summary>Is it a better coding model?</summary>
 
-**Will it touch our whole codebase?** It only touches repos you connect, and every change goes through a PR you review. Nothing merges without a human saying yes.
+No. It runs the same frontier models everyone else does. The difference is context – an agent that can read your funnels, replays, and errors is working from evidence, not guessing at what matters.
 
-**Do I need to be an engineer to use it?** Not at all! It's a Slack message. Our sales and marketing teams regularly use it make fixes to our main app. Describe the problem or idea, and the agent takes it from there.
+</details>
 
-**Won't it try to code every message?** It classifies each @mention first – code task or data question, and which repo. Data questions get answered, not turned into PRs.
+<details>
+  <summary>Is it an analytics agent or coding agent?</summary>
+
+Both, in one thread. Explore data and build in the same conversation.
+
+</details>
+
+<details>
+  <summary>Does it just open a PR and walk away?</summary>
+
+No. It sticks with the PR through failing checks and reruns until it's mergeable – we call that babysitting. On a big repo, getting through CI is often more work than the code.
+
+</details>
+
+<details>
+  <summary>Will it touch our whole codebase?</summary>
+
+It only touches repos you connect, and every change goes through a PR you review. Nothing merges without a human saying yes.
+
+</details>
+
+<details>
+  <summary>Do I need to be an engineer to use it?</summary>
+
+Not at all! It's a Slack message. Our sales and marketing teams regularly use it make fixes to our main app. Describe the problem or idea, and the agent takes it from there.
+
+</details>
+
+<details>
+  <summary>Won't it try to code every message?</summary>
+
+It classifies each @mention first – code task or data question, and which repo. Data questions get answered, not turned into PRs.
+
+</details>
