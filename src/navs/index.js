@@ -1239,6 +1239,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/product-manager-role',
             },
             {
+                name: 'Product manager onboarding',
+                url: '/handbook/product/product-manager-onboarding',
+            },
+            {
                 name: 'Product manager hiring',
                 url: '/handbook/product/product-manager-hiring',
             },
