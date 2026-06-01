@@ -22,7 +22,6 @@ import {
     IconAsterisk,
     IconAI,
     IconSupport,
-    IconSpotlight,
     IconTestTube,
     IconListTreeConnected,
     IconSparkles,
@@ -30,6 +29,7 @@ import {
     IconArrowUpRight,
     IconTrends,
     IconCursorClick,
+    IconChat,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -92,14 +92,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'beta',
         },
         {
-            name: 'Product Tours',
-            Icon: IconSpotlight,
-            description: 'Guide users through your product with interactive tours and announcements.',
-            handle: 'product_tours',
-            color: 'salmon',
-            colorSecondary: 'salmon',
-            category: 'product_engineering',
-            slug: 'docs/product-tours',
+            name: 'PostHog Slack app',
+            Icon: IconChat,
+            description:
+                'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
+            handle: 'posthog_slack',
+            color: 'sky-blue',
+            colorSecondary: 'sky-blue',
+            category: 'product_os',
+            slug: 'slack-app',
             status: 'beta',
         },
         {

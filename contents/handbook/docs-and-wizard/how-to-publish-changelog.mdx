@@ -9,6 +9,22 @@ We have one of the coolest [changelogs](/changelog) on the internet. It's also o
 
 As a company that ships weirdly fast, it's important to share what we're working on with as many people as possible, as often as possible. The changelog is a great way to do that.
 
+## Internal Slack channels
+
+We run two internal Slack channels that surface what we ship and what's about to ship. We recommend that everyone at PostHog joins both.
+
+| Channel | Use it for | Cadence | Owner |
+|---------|------------|---------|-------|
+| [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) | What's just shipped | Updates constantly as PRs merge | <SmallTeam slug="docs-wizard" /> |
+| [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) | What's shipping soon | Daily digest | <SmallTeam slug="marketing" /> |
+
+Both channels are powered by agentic workflows that scan merged PRs and feature flag changes in the `posthog/posthog` repo, classify them, and summarize them into the relevant channel. The `#changelog` channel posts each impactful change as it lands; the `#coming-soon` channel rolls up upcoming work into a single daily digest.
+
+You can also opt a PR into either workflow manually:
+
+- **PR template checkboxes** — the `posthog/posthog` PR template has *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes under **Automatic notifications**. Tick them when you want to override the automated classification.
+- **`@posthog` Slack app** — you can also include or exclude PRs from these workflows via the `@posthog` Slack app, which is handy after the fact (e.g. once a change is in production).
+
 <ProductVideo 
   videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/changelog_handbook_1_8038f2d9d4.mp4"
   autoPlay={false} 
@@ -130,7 +146,7 @@ Each product should have a changelog page in their docs
 | Product Analytics | [/docs/product-analytics/changelog](/docs/product-analytics/changelog) |
 | Session Replay | [/docs/session-replay/changelog](/docs/session-replay/changelog) |
 | Error Tracking | [/docs/error-tracking/changelog](/docs/error-tracking/changelog) |
-| LLM Analytics | [/docs/llm-analytics/changelog](/docs/llm-analytics/changelog) |
+| AI Observability | [/docs/ai-observability/changelog](/docs/ai-observability/changelog) |
 | Feature Flags | [/docs/feature-flags/changelog](/docs/feature-flags/changelog) |
 | ... | ... |
 

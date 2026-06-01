@@ -90,17 +90,17 @@ This table explains the amount of paid time off, depending on how long you've be
 | 6 - 12 months     | 12 weeks         | 2 - 3 weeks |
 | over 12 months    | up to 24 weeks   | 6 weeks |
 
-> Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  This means that in most cases you will receive the PostHog policy, if you live in a country with more generous parental leave, then you will receive that. This PostHog policy is not designed to be _in addition_ to your specific state/country policy.
+> Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  This means that in most cases you will receive the PostHog policy, if you live in a country with more generous parental leave, then you will receive that. This PostHog policy is not designed to be _in addition_ to your specific state/country policy. PostHog uses the "top up" method to administer paid leave. This means that if you receive any statutory leave, PostHog will top this up to your full pay. 
 
 We only pay the enhanced parental leave in one continuous block.
 
-Parental leave isn't supposed to be combined with our unlimited PTO policy here - we aren't prescriptive and will trust your judgement. If you need a longer break after childbirth or a staggered return reach out to Fraser or your manager. But please note that we usually won't allow you do a combination of parental leave plus a long holiday in addition to that to extend your time off.
+Parental leave isn't supposed to be combined with our unlimited PTO policy here - we aren't prescriptive and will trust your judgement. If you need a longer break after childbirth or a staggered return, log it in the Ops platform or speak to your manager. But please note that we usually won't allow you do a combination of parental leave plus a long holiday in addition to that to extend your time off.
 
-Please communicate parental leave to Fraser as soon as you feel comfortable doing so, and in any case at least 4 months before it will begin. They will let the People & Ops team know, who will follow up on any logistical arrangements around salary etc. and any statutory paperwork that needs doing.
+Please log parental leave in the Ops platform as soon as you feel comfortable doing so, and in any case at least 4 months before it will begin. The People & Ops team will follow up on any logistical arrangements around salary etc. and any statutory paperwork that needs doing.
 
 ### Maternity leave
 
-The above is in reference to Paid Time Off (PTO). Maternity leave can be extended using unpaid time off, please work with your team to find a reasonable solution for both your family and your team, and let Fraser know the total amount of time you expect to take off as soon as possible.
+The above is in reference to Paid Time Off (PTO). Maternity leave can be extended using unpaid time off, please work with your team to find a reasonable solution for both your family and your team, and log the total amount of time you expect to take off in the Ops platform as soon as possible.
 
 > For quota-carrying Sales roles taking 12 weeks or longer, your OTE will be calculated by averaging your sales quota attainment for the prior two full quarters (capped at 100% OTE).
 

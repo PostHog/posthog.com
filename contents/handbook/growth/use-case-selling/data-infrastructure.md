@@ -199,7 +199,6 @@ Usually **Data Warehouse** or **Batch Exports**. Two common patterns:
 | If Using... | They Might Need... | Why | Conversation Starter |
 |---|---|---|---|
 | Batch Exports only | Data Warehouse (bring data in) | They're pushing PostHog data out. Bringing business data in would let them do unified analysis in PostHog directly. | "You're exporting PostHog data to Snowflake. What if you could bring your Stripe data *into* PostHog and skip the context-switch?" |
-| Data Warehouse (Stripe connected) | Revenue Analytics | They've connected Stripe data. Revenue Analytics gives them pre-built MRR, LTV, and churn dashboards. | "You've got Stripe connected. Have you seen Revenue Analytics? It gives you MRR, churn, and LTV dashboards out of the box." |
 | Data Pipelines to CRM | Growth & Marketing | They're pushing data to HubSpot/Salesforce. The growth team could use more of the marketing analytics stack. | "You're syncing data to your CRM. Has the marketing team seen Web Analytics and Marketing Analytics for attribution?" |
 | Data Warehouse + Product Analytics | Product Intelligence (for the product team) | They're doing unified data analysis. The product team should be using the full analytics suite. | "Your data team is doing advanced queries. Are your PMs using funnels, retention, and session replay for product decisions?" |
 | Data team in PostHog | Any use case for other teams | Data team is in PostHog and advocates for it. Expand to product, engineering, or growth. | "Your data team loves PostHog. Which other teams could benefit? Product? Engineering? Growth?" |
@@ -208,7 +207,6 @@ Usually **Data Warehouse** or **Batch Exports**. Two common patterns:
  
 - **Data Warehouse docs:** [Data Warehouse](/docs/data-warehouse) · [Sources](/docs/cdp/sources) · [HogQL](/docs/product-analytics/sql)
 - **Data Pipelines docs:** [CDP overview](/docs/cdp) · [Batch exports](/docs/cdp/batch-exports) · [Realtime destinations](/docs/cdp/destinations) · [Transformations](/docs/cdp/transformations)
-- **Revenue Analytics docs:** [Getting started](/docs/revenue-analytics/start-here) · [Dashboard](/docs/revenue-analytics/dashboard)
 - **External data source guides:** [Stripe](/docs/cdp/sources/stripe) · [HubSpot](/docs/cdp/sources/hubspot) · [Salesforce](/docs/cdp/sources/salesforce) · [Postgres](/docs/cdp/sources/postgres)
 - **Batch export guides:** [S3](/docs/cdp/batch-exports/s3) · [Snowflake](/docs/cdp/batch-exports/snowflake) · [BigQuery](/docs/cdp/batch-exports/bigquery)
 

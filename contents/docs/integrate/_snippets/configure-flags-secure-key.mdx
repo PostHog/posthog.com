@@ -45,10 +45,10 @@ func main() {
 ```
 
 ```php
-PostHog::init("<ph_project_token>",
-  ['host' => '<ph_client_api_host>'],
-  null, // or custom http client
- 'your feature flags secure API key from step 1'
+PostHog::init(
+    '<ph_project_token>',
+    ['host' => '<ph_client_api_host>'],
+    personalAPIKey: 'your feature flags secure API key from step 1'
 );
 // NOTE: PHP currently doesn't support a poller, so you'll need to reload flags as and when needed, or re-initialize the posthog client
 ```

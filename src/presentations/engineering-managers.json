@@ -42,7 +42,7 @@
         },
         "llm_analytics": {
             "template": "product",
-            "name": "LLM Analytics",
+            "name": "AI Observability",
             "handle": "llm_analytics",
             "screenshot": "home",
             "title": "Stop wasting money on AI models that don't work",
