@@ -1,6 +1,6 @@
 ---
 title: 'Minimum viable AI observability: what to set up after shipping your first AI feature'
-date: 2026-05-27
+date: 2026-06-01
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -82,7 +82,7 @@ Once tracing is set up, cost tracking comes nearly for free – your tool calcul
 
 At minimum:
 
-- An alert when daily spend exceeds your expected baseline by some multiplier (2x, 3x, whatever feels right)
+- An alert when daily spend exceeds your expected baseline by some multiplier (for example, 2x your 7-day rolling average)
 - A breakdown by model, so you can spot when something is calling `gpt-5.5` instead of `gpt-5.4-mini` for example
 - A breakdown by user, so one power user (or one abuse case) doesn't tank your margins
 
@@ -92,13 +92,19 @@ When the PostHog team dug into the [cost of our own AI agent](/blog/optimizing-a
 
 ### 3. Error capture
 
-Every LLM call can fail due to things like rate limits, timeouts, content policy violations, malformed responses, retries that quietly retry forever. You want all of these surfaced.
+LLM calls fail in more interesting ways than regular API calls. Beyond the usual suspects (rate limits, timeouts, network errors), you'll see things like:
 
-If you already have error tracking set up for the rest of your app ([Sentry](/blog/posthog-vs-sentry), [PostHog error tracking](/error-tracking), etc.), make sure LLM errors are flowing into it. 
+- **Tool-call failures** – the agent tried to call a tool, the tool errored or returned malformed data, and the loop may or may not have recovered
+- **Agent loops that don't terminate** – the model keeps calling itself, spawning subagents, or refusing to exit
+- **Structured output parsing failures** – the model returned valid text but invalid JSON when you expected structured data
+- **Token/context limit errors** – the prompt or conversation overflowed, often silently
+- **Content policy violations** – the provider blocked the response, your code needs to handle it gracefully
 
-If you don't have error tracking yet, [add it](/blog/best-error-tracking-tools-for-developers). [The combination of traces + errors](/docs/ai-observability/link-error-tracking) is how you debug AI features in production without losing your mind.
+You want all of these surfaced. If you already have error tracking set up for the rest of your app, make sure LLM errors are flowing into it.
 
-> **The minimum viable observability stack: traces + cost alerts + error capture.** That's it. If you've shipped this, you're already ahead of most teams running AI features in production.
+If you don't, [add it](/blog/best-error-tracking-tools-for-developers).
+
+The combination of traces + errors + logs is how you debug AI features without losing your mind. Errors tell you something broke; traces tell you what the agent was doing when it broke; logs (tool calls, intermediate state, decisions) tell you why.
 
 ## What to add later
 
@@ -114,7 +120,9 @@ You don't need 15 evaluation criteria across five different dimensions of qualit
 - You don't know what "good" looks like for your product yet, so any rubric you write could be wrong
 - You can do better than evals at this scale by *reading your outputs*. Spend 30 minutes a week looking at random traces. You'll catch more than any rubric will.
 
-[Add automated evals](/docs/ai-evals/evaluations) once you have enough generations that you can't read them all (usually a few hundred per day).
+[Add automated evals](/docs/ai-evals/evaluations) once you have enough generations that you can't read them all (usually a few hundred per day). 
+
+When you're ready, our [beginner's guide to testing AI agents](/blog/testing-ai-agents) walks through what a minimal eval suite actually looks like – a small dataset from real user queries and recent bugs, one or two cheap code-based evaluators, one LLM-as-a-judge for a subjective criterion, and a regular trace review ritual.
 
 ### A/B testing prompt variants
 
@@ -155,9 +163,9 @@ As your product matures, the bar for observability rises. Here's the rough order
 <details>
 <summary>Stage 1: You have meaningful traffic (a few hundred generations a day)</summary>
 
-**Add automated evals.** Now you can't read every trace, and you need a way to spot regressions. Start with the simplest version: an [LLM-as-a-judge](/blog/stop-ai-slop) that scores outputs against 2–3 criteria specific to your use case (accuracy, relevance, tone – whatever matters most). Run it on a sample of production traces.
+**Add automated evals.** Now you can't read every trace, and you need a way to spot regressions. Start with [deterministic, code-based evals](/blog/testing-ai-agents#deterministic-evaluators) where you can – simple checks like "the agent called the right tool," "no forbidden keyword appeared in the output," "no error was raised," or [Levenshtein distance](/blog/testing-ai-agents#deterministic-evaluators) against an expected response. They're cheap, fast, and don't add an LLM dependency to your test pipeline. Only reach for an [LLM-as-a-judge](/blog/stop-ai-slop) when the criterion is genuinely subjective enough that code can't capture it (tone, helpfulness, hallucination detection). Run both on a sample of production traces.
 
-**Add user feedback collection.** Even a simple thumbs up/down on AI outputs is gold for debugging. Pair that signal with the trace and you can quickly find patterns in what users hate.
+**Add user feedback collection.** Even a simple thumbs up/down on AI outputs is gold for debugging. Pair that signal with the trace and you can quickly find patterns in what users hate – [PostHog surveys](/surveys) handle this in-app and tie responses back to the same user.
 
 **[Add session replay](/session-replay).** Watching how users actually react to AI outputs reveals things no metric will. Did they retry? Edit? Copy-paste? Close the tab? See our guide on [the best session replay tools](/blog/best-session-replay-tools) if you don't already have this.
 
@@ -166,11 +174,13 @@ As your product matures, the bar for observability rises. Here's the rough order
 <details>
 <summary>Stage 2: You have multiple AI features and a small team</summary>
 
-**Add prompt management.** Once more than one person is editing prompts, you want versioning, the ability to roll back, and ideally the ability to update prompts without a deploy. Tools like [PostHog](/ai-observability) or Langfuse handle this natively.
+**Move evals online.** Your offline evals only cover inputs you defined. [Online evals](/blog/testing-ai-agents#embracing-the-infinite-possibilities-of-your-agent) run against a sample of live production traces (5-10% is plenty) so you catch things your test set never imagined. Use cheap code-based evaluators for everything you can, and cheaper LLM judges for the subjective stuff.
 
-**Connect LLM data to product analytics.** This is where things get interesting. "Users who hit our AI feature retain at 2x" is the kind of insight that justifies the whole investment. To do this, your LLM observability needs to share a user model with your [product analytics](/product-analytics) – which is one reason [bundled tools](/blog/best-analytics-stack-vibe-coded-apps) tend to win at this stage.
+**Start a trace review ritual.** The PostHog teams working on AI features run a weekly [Traces Hour](/blog/testing-ai-agents#building-evaluations-by-manually-reviewing-traces) where they look at flagged traces (low feedback scores, error spikes, support tickets, outlier clusters) and turn the patterns into new evals. This is where the next generation of evaluators comes from.
 
-**Add A/B testing for prompts.** Now that you have traffic and a structured way to evaluate, you can run real prompt experiments. Aim for 1-2 high-value tests at a time, not a constant churn of variants.
+**Connect LLM data to product analytics.** "Users who hit our AI feature retain at 2x" is the kind of insight that justifies the whole investment. To do this, your LLM observability needs to share a user model with your [product analytics](/product-analytics) – which is one reason [bundled tools](/blog/best-analytics-stack-vibe-coded-apps) tend to win at this stage.
+
+**Consider prompt management (if it fits).** Once more than one person edits prompts, or you want non-engineers to iterate without a deploy, [prompt management](/docs/prompt-management/prompts) starts earning its keep. Many teams never need this – a `prompts.py` file in your repo is fine if you're shipping prompt changes through code anyway.
 
 </details>
 
@@ -184,13 +194,6 @@ As your product matures, the bar for observability rises. Here's the rough order
 **Add governance.** If you're selling to enterprise, you'll need things like PII redaction, data residency, audit logs, and human-in-the-loop review queues for high-risk outputs. This is where dedicated tools start to earn their keep.
 
 </details>
-
-| Stage | When you're here | What to add |
-|---|---|---|
-| **Day one** | You've shipped any AI feature | Tracing, cost alerts, error capture |
-| **Meaningful traffic** | A few hundred generations a day | Automated evals, user feedback (👍/👎), session replay |
-| **Multiple features** | Multiple AI features, small team | Prompt management, connecting LLM data to product analytics, prompt A/B tests |
-| **Scaling** | Scaling up, possibly going enterprise | Drift monitoring, cost optimization, governance (PII redaction, audit logs) |
 
 The right tool for "day one" should also support most of "later" without needing to migrate – otherwise you're going to do this all again in six months.
 
@@ -207,6 +210,7 @@ A quick pitch, since this is our blog after all:
 - **[Tracing](/docs/ai-observability/traces)** with a small SDK wrapper around OpenAI, Anthropic, and other providers
 - **Cost, latency, and token tracking** by model, user, and feature
 - **[Evaluations](/docs/ai-evals/evaluations)** with LLM-as-a-judge and human review
+- **[Error tracking](/error-tracking)** alongside traces, so AI-specific failures (tool calls, parsing errors, loop termination) show up next to the calls that caused them
 - **[Prompt management](/docs/prompt-management/prompts)** with versioning, fetch-at-runtime, and rollback
 - **[Connected product analytics](/product-analytics)** – the same user IDs flow through, so you can correlate AI usage with retention, conversion, and churn
 - **[Session replay](/docs/ai-observability/link-session-replay)** alongside traces, so you can see exactly what the user was doing when the model misbehaved
