@@ -191,7 +191,9 @@ config.flushAt = 20;
 config.flushInterval = const Duration(seconds: 30);
 ```
 
-You can also manually flush the queue to start sending events immediately instead of waiting for the next batch:
+import FlushManual from '../_snippets/flush-manual.mdx'
+
+<FlushManual />
 
 ```dart
 await Posthog().flush();

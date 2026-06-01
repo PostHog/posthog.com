@@ -36,7 +36,9 @@ configuration.flushAt = 1
 configuration.flushIntervalSeconds = 30
 ```
 
-You can also manually flush the queue to start sending events immediately instead of waiting for the next batch:
+import FlushManual from '../_snippets/flush-manual.mdx'
+
+<FlushManual />
 
 ```swift
 PostHogSDK.shared.capture("logged_out")

@@ -194,7 +194,9 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
 }
 ```
 
-You can also manually flush the queue to start sending events immediately instead of waiting for the next batch:
+import FlushManual from '../_snippets/flush-manual.mdx'
+
+<FlushManual />
 
 ```kotlin
 import com.posthog.PostHog

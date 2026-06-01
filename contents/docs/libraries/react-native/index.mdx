@@ -238,11 +238,15 @@ const posthog = new PostHog('<ph_project_token>', {
 })
 ```
 
-You can also manually flush the queue. If a flush is already in progress it returns a promise for the existing flush.
+import FlushManual from '../_snippets/flush-manual.mdx'
+
+<FlushManual />
 
 ```javascript
 await posthog.flush()
 ```
+
+If a flush is already in progress, it returns a promise for the existing flush.
 
 import FlushNotes from '../_snippets/flush-notes.mdx'
 
