@@ -56,7 +56,7 @@ Currently, there are no active security advisories or CVEs. All is well.
   <strong>Severity:</strong> Critical<br />
   <strong>Status:</strong> Resolved</p>
 
-  <p><strong>No customer data was accessed and no action is required.</strong> Our investigation using AWS CloudTrail and Wiz, together with the researchers' confirmation, found that no customer data was viewed, accessed, or modified, and no customer accounts were affected. The incident exposed our internal production credentials, not customer data, and we have rotated those credentials as a precaution.</p>
+  <p><strong>No customer data was accessed and no action is required.</strong> Our investigation using AWS CloudTrail and Wiz, together with the researchers' confirmation, found that no customer data was viewed, accessed, or modified, and no customer accounts were affected. The incident exposed our internal production credentials, not customer data, to security researchers and we have rotated those credentials as a precaution.</p>
 
   <h4>Description</h4>
   <p>A security researcher exploited a known vulnerability (<a href="https://www.cve.org/CVERecord?id=CVE-2026-7899">CVE-2026-7899</a>) in an outdated version of Chromium that we ran via Playwright to generate heatmaps. This Chromium instance ran without a sandbox, which was a legacy configuration we had planned to change but had not yet enabled. The combination of the outdated version and the missing sandbox allowed the researcher to gain a shell on the Kubernetes pod and read credentials stored in the pod's environment variables.</p>
