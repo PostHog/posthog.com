@@ -36,7 +36,7 @@ export default defineNuxtConfig({
     client: true // +
   },
   hooks: {
-    'close': async () => {
+    'nitro:build:public-assets': async () => {
       console.log('Running PostHog sourcemap injection and upload...')
       try {
         execSync("posthog-cli sourcemap inject --directory '.output'", { // +

@@ -1,11 +1,36 @@
 ---
 title: Set up the PostHog Slack app
 sidebarTitle: Setup
+showStepsToc: true
+tableOfContents: [
+    {
+        url: 'connect-slack-to-your-project',
+        value: 'Connect Slack to your project',
+        depth: 1,
+    },
+    {
+        url: 'connect-your-personal-github',
+        value: 'Connect your personal GitHub',
+        depth: 1,
+    },
+    {
+        url: 'pick-a-project',
+        value: 'Pick a project',
+        depth: 1,
+    },
+    {
+        url: 'next-steps',
+        value: 'Next steps',
+        depth: 1,
+    },
+]
 ---
 
 You need two integrations to use `@PostHog` in Slack: one workspace-wide Slack connection per PostHog project (set up by a project admin), and a personal GitHub connection per teammate who wants to ship code.
 
-## 1. Connect Slack to your project
+<Steps>
+
+<Step title="Connect Slack to your project" badge="required">
 
 Head to [**Settings → Integrations**](https://app.posthog.com/settings/project-integrations#selectedSetting=integration-slack&setting=integration-slack) in your PostHog project and click **Add to Slack** in the Slack integration section. Approve the requested scopes – you'll need to be a project admin to install.
 
@@ -23,7 +48,9 @@ The bot picked up new OAuth scopes on 2026-05-04 (`app_mentions:read`, `users:re
 
 </CalloutBox>
 
-## 2. Connect your personal GitHub (mandatory for coding)
+</Step>
+
+<Step title="Connect your personal GitHub" badge="required">
 
 A personal GitHub integration is **required** for the coding agent to run. Without one, the bot refuses to start any repo-bound task and replies in-thread:
 
@@ -47,7 +74,9 @@ If GitHub's **Save** button is greyed out at the end of the install flow, toggle
 
 If you start a task before connecting, the agent stops and posts a **Connect GitHub** button in the thread. Click it, finish the OAuth flow, and re-mention the bot – the task picks up where it left off.
 
-## Pick a project (multi-integration workspaces)
+</Step>
+
+<Step title="Pick a project" badge="optional">
 
 A single Slack workspace can be connected to more than one PostHog project. When that happens, the bot won't guess which project your mention belongs to – it asks you to pick one first:
 
@@ -66,8 +95,14 @@ Pick a project once and the bot remembers it for you across channels and threads
 
 The bot resolves a target with this precedence: thread context (continuing an existing task) → your personal default → workspace-wide default (set by support, no UI yet) → the only connected project → picker. Personal defaults always win over the workspace fallback, so each teammate can route their own mentions independently.
 
-If your workspace is only connected to a single PostHog project, this section doesn't apply – the bot routes there automatically.
+If your workspace is only connected to a single PostHog project, you can skip this step – the bot routes there automatically.
 
-## Next steps
+</Step>
+
+<Step title="Next steps" badge="recommended">
 
 Once both integrations are connected and (if needed) you've picked a project, you're ready to [start a task](/docs/slack-app#start-a-task). The full [command reference](/docs/slack-app/commands) covers everything `@PostHog` accepts.
+
+</Step>
+
+</Steps>

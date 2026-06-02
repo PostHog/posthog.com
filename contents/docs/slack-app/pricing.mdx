@@ -8,13 +8,11 @@ The Slack app is in beta. Billing is usage-based through PostHog AI credits and 
 
 </CalloutBox>
 
-The PostHog Slack app doesn't have its own subscription. The agent that runs behind `@PostHog` mentions consumes **PostHog AI credits** for the LLM work it does – planning a task, editing files, reasoning about your data – so anything billable in Slack rolls up under your existing PostHog AI usage.
+The PostHog Slack app doesn't have its own subscription. The agent that runs behind `@PostHog` mentions consumes **PostHog AI credits** for the LLM work it does. This includes tokens used when planning a task, editing files, reasoning about your data. 
+
+TL;DR: anything billable in Slack rolls up under your existing PostHog AI usage.
 
 For credit mechanics, the free monthly tier, billing limits, and the live pricing calculator, see [PostHog AI pricing](/docs/posthog-ai/pricing).
-
-## What costs credits
-
-Anything the agent does behind an `@PostHog` mention – drafting a PR, answering a data question with the PostHog [MCP](/docs/model-context-protocol), summarizing a thread to spec a feature – consumes resources. The same per-token economics that apply to PostHog AI in the app apply here.
 
 ## What's free
 
@@ -24,6 +22,10 @@ A lot of the Slack surface is just plumbing and stays free:
 - **Event-driven Slack notifications** sent via Data Pipeline destinations (see [Slack destination](/docs/cdp/destinations/slack)).
 - **Link unfurling** for PostHog insight and dashboard URLs.
 - The `@PostHog help`, `rules`, and `project` commands themselves – no LLM call, no credits.
+
+## What costs credits
+
+Anything the agent does behind an `@PostHog` mention – drafting a PR, answering a data question with the PostHog [MCP](/docs/model-context-protocol), summarizing a thread to spec a feature – consumes resources. The same per-token economics that apply to PostHog AI in the app apply here.
 
 ## Tracking and controlling spend
 
