@@ -15,13 +15,13 @@ tags:
   - AI
 ---
 
-Product data reveals issues. [PostHog Code](/code) catches those by monitoring for [signals](/docs/posthog-code/inbox/research) and proactively fixing them. People also reveal issues, like when a colleague flags a UI thing or a customer mentions a bug. Those are signals too, so why do they tend to end up in the backlog?
+Today, we're releasing the PostHog Slack app into beta.
 
-Because most issues are boring, and not an urgent thing in front of you. Or they are invisible work, never tagged as someone's job.
+We built it for those times when a colleague flags an annoying UI quirk, or a customer mentions a bug. The issues that normally end up on a backlog, untouched and ignored.
 
-So make these issues a robot's job. With the PostHog Slack app, you @mention PostHog to "fix this" or "build that". It spins up a sandbox, makes a plan, edits files, runs checks, opens a draft PR, and answers review comments in the thread.
+With the PostHog Slack app, you **@PostHog** to "fix this" or "build that". It spins up a sandbox, makes a plan, edits files, runs checks, opens a draft PR, and answers review comments in the thread.
 
-The PostHog Slack app uses your product data as context by default and follows your repo's rules, so it feels less like a coding tool and more like a clever teammate (it even reacts with [emojis](/docs/slack-app#emoji-cues)). Today it hits beta, so you can @PostHog now, too.
+Powered by [PostHog Code](/code), the PostHog Slack app uses your product data as context by default and follows your repo's rules, so it feels less like a coding tool and more like a clever teammate (it even reacts with [emojis](/docs/slack-app#emoji-cues)).
 
 ## @PostHog in the #papercuts channel
 
@@ -49,15 +49,15 @@ Here's a few examples of @PostHog usage across the org chart:
 
 ![Will Wearing prompts @PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/slackbot_will_w_1_5398cb556b.png)
 
+<Link to="https://github.com/PostHog/posthog" external><code>PostHog/posthog</code></Link> is a massive production repo that most people in a sales role would never feel empowered to touch. Will's PR got merged in less than 24 hours, and the only hiccup was a flaky test (nothing wrong with the code, just CI being CI).
+
+Clearing CI is as much of a job as the code generation itself, and the bot sticks with a PR through red checks and reruns until it's mergeable.
+
 <CalloutBox icon="IconPullRequest" title="The resulting PR" type="fyi">
 
 <Link to="https://github.com/PostHog/posthog/pull/59142" external>PostHog/posthog#59142</Link>
 
 </CalloutBox>
-
-Worth noting: <Link to="https://github.com/PostHog/posthog" external><code>PostHog/posthog</code></Link> is a massive production repo that most people in a sales role would never feel empowered to touch. Will's PR got merged in less than 24 hours, and the only hiccup was a flaky test (nothing wrong with the code, just CI being CI).
-
-Clearing CI is as much of a job as the code generation itself, and the bot sticks with a PR through red checks and reruns until it's mergeable.
 
 ### The one where it prepared for a user interview
 
@@ -129,8 +129,6 @@ If CI fails, it fixes the failure. If you add a review comment, it addresses the
 The code generation that lands from one sentence prompts are surprisingly good. So good that even [Cory Watilo](/community/profiles/30200), our resident webmaster, is pleased to @PostHog.
 
 ![Cory Watilo reacts to @PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/slackbot_cory_w_1_762cab2a86.png)
-
-*(Sure, we could make this stuff up, but we don't have to.)*
 
 <CalloutBox icon="IconPullRequest" title="The resulting PR" type="fyi">
 
