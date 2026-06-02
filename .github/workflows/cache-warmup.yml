@@ -50,3 +50,15 @@ jobs:
               run: pnpm build
               env:
                   GATSBY_MINIMAL: 'true'
+                  # Provide Cloudinary creds so onPreInit crawls the resource list and writes
+                  # .cloudinary-resources.json for preview builds to restore (cloud name comes
+                  # from the committed .env.production).
+                  CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+                  CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+
+            - name: Save Cloudinary metadata cache
+              if: success()
+              uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+              with:
+                  path: .cloudinary-resources.json
+                  key: cloudinary-${{ github.run_id }}
