@@ -61,16 +61,19 @@ jobs:
                   node-version: '22'
                   cache: 'pnpm'
 
-            - name: Cache Gatsby
+            # Restore only — the master cache-warmup job is the sole writer of the shared cache,
+            # so preview builds never persist their (possibly divergent) state back.
+            - name: Restore Gatsby cache
               if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-cache') }}
-              uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+              uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
               with:
                   path: |
                       .cache
                       public
-                  key: gatsby-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'gatsby-config.js') }}
+                  key: gatsby-v2-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'gatsby-config.js') }}-${{ github.run_id }}
                   restore-keys: |
-                      gatsby-${{ runner.os }}-
+                      gatsby-v2-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'gatsby-config.js') }}-
+                      gatsby-v2-${{ runner.os }}-
 
             - name: Clean Gatsby cache
               if: ${{ contains(github.event.pull_request.labels.*.name, 'no-cache') }}
@@ -89,6 +92,14 @@ jobs:
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
+
+            # Always regenerate gatsby-plugin-mdx scopes from the current checkout. The restored
+            # cache's scopes can reference a different MDX module graph, causing webpack
+            # "Can't resolve …mdx" failures when a PR's content differs from the cached snapshot.
+            # (actions/cache's "!" exclude can't drop a subdir of an already-matched parent, so we
+            # delete it here instead.) Harmless no-op under the no-cache label (.cache is gone).
+            - name: Reset gatsby-plugin-mdx scopes
+              run: rm -rf .cache/caches/gatsby-plugin-mdx
 
             - name: Build site
               run: pnpm build
