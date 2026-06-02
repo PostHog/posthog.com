@@ -430,10 +430,10 @@ If you want to exclude a section from rendering, you can use the `excludedSectio
 
 For product pages, this is handled by the `excluded_sections` property in the product's feature definition file.
 
-`/src/hooks/productData/llm_analytics.tsx`:
+`/src/hooks/productData/ai_observability.tsx`:
 
 ```typescript
-export const llmAnalytics = {
+export const aiObservability = {
     ...
     comparison: {
         companies: [
@@ -458,7 +458,7 @@ export const llmAnalytics = {
                 key: 'posthog',
             },
         ],
-        rows: ['llm_analytics'],
+        rows: ['ai_observability'],
         excluded_sections: ['platform'], // or an individual node like 'platform.integrations'
     },
 }
