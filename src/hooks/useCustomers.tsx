@@ -757,8 +757,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'A digital menu platform with its own ad network',
         featured: false,
         logo: {
-            light: qubs-logo-white,
-            dark: qubs-logo-dark,
+            light: https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_white_outline_2x_5430c8f472.png,
+            dark: https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_black_2x_c4ca11cba9.png,
         },
         height: 10,
         quotes: {
@@ -766,7 +766,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 name: 'Gheorghe Avram',
                 role: 'CTO',
                 image: {
-                    thumb: '/images/customers/gheorge-avram.png',
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Gheorghe_headshot_96a950e3d6.png',
                 },
                 quotes: [
                     'This is the true power of PostHog, they give us the freedom to use our data wherever we want to, without the complexity of managing the infrastructure.',
