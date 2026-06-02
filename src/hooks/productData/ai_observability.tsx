@@ -41,13 +41,13 @@ import {
 } from 'components/OSIcons'
 import MCPInstall from 'components/Products/MCPInstall'
 
-export const llmAnalytics = {
+export const aiObservability = {
     name: 'AI Observability',
     Icon: IconLlmAnalytics,
     description: 'Track costs, performance, and usage of your AI features',
-    handle: 'llm_analytics',
-    type: 'llm_analytics',
-    slug: 'llm-analytics',
+    handle: 'ai_observability',
+    type: 'ai_observability',
+    slug: 'ai-observability',
     color: 'purple',
     colorSecondary: 'green-2',
     category: 'analytics',
@@ -637,7 +637,7 @@ export const llmAnalytics = {
                 key: 'posthog',
             },
         ],
-        rows: ['llm_analytics'],
+        rows: ['ai_observability'],
         excluded_sections: ['platform'],
     },
     pairsWith: [

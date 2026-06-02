@@ -565,7 +565,7 @@ export const query = graphql`
                     featureFlags
                     groupAnalytics
                     surveys
-                    llmAnalytics
+                    aiObservability
                     errorTracking
                 }
                 availability {
