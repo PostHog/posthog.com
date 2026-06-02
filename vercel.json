@@ -57,6 +57,11 @@
     ],
     "redirects": [
         {
+            "source": "/blog/autoresearch-query-bug",
+            "destination": "/blog/karpathy-autoresearch-query-engine-bug",
+            "statusCode": 301
+        },
+        {
             "source": "/handbook/marketing/how-we-position-and-sell",
             "destination": "/handbook/marketing/positioning",
             "statusCode": 301
