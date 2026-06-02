@@ -16,7 +16,7 @@ export const newestProducts = [
     'logs',
     'endpoints',
     'posthog_ai',
-    'llm_analytics',
+    'ai_observability',
     'workflows_emails',
     'posthog_code',
     'support',
@@ -79,7 +79,7 @@ export const productOrder: Record<string, string[]> = {
     analytics: [
         'web_analytics',
         'product_analytics',
-        'llm_analytics',
+        'ai_observability',
         'custom_dashboards',
         'group_analytics',
         'custom_dashboards',
