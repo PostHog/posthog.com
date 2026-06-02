@@ -134,7 +134,7 @@ We turned the free allowance for {{ trigger.product_name | default: "a product" 
 
 ## Adding a new event property to Customer.io
 
-We use segments in Customer.io to target broadcasts and campaigns — for example, the onboarding flow targets users based on their product intent and activation. These segments are built from the events and properties that PostHog sends to Customer.io through a data pipeline, so a new event or property has to flow through that pipeline before you can build a segment on it.
+We use Customer.io to target broadcasts and campaigns — for example, the onboarding flow targets users based on their events, as well as segments which define product intent and activation. PostHog sends this information to Customer.io through a data pipeline, so a new event or property has to flow through that pipeline before you can build a segment on it.
 
 To add a new event property:
 
