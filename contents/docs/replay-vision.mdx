@@ -38,10 +38,10 @@ The scanner type is chosen when you create a scanner and determines the shape of
 
 | Type | What it produces | Use it for |
 | --- | --- | --- |
-| **Monitor** | A true/false verdict, with reasoning | Flagging whether a specific condition occurred, e.g. "did the user get stuck with no clear next step?" |
+| **Monitor** | A true/false verdict, with reasoning | Flagging whether a specific condition occurred, e.g. "did someone get stuck with no clear next step?" |
 | **Classifier** | One or more tags from a vocabulary you define | Bucketing sessions, e.g. user intent (`browsing`, `purchasing`, `support`) or outcome (`task_completed`, `task_abandoned`, `blocked_by_error`) |
-| **Scorer** | A numeric score on a scale you define | Rating sessions on a dimension, e.g. a 0–10 frustration score |
-| **Summarizer** | A title and prose summary | Generating a short narrative of what the user did in each session |
+| **Scorer** | A numeric score on a scale you define | Rating sessions on a dimension, e.g. a 0 to 10 frustration score |
+| **Summarizer** | A title and prose summary | Generating a short narrative of what happened in each session |
 
 Every scanner also returns a **confidence** value and, in its reasoning, may include citations that link directly to the relevant moment in the recording's timeline.
 
@@ -49,7 +49,7 @@ Every scanner also returns a **confidence** value and, in its reasoning, may inc
 
 1. Go to **Replay Vision** in the PostHog app and select **New scanner** (or start from a template).
 2. Pick a [scanner type](#scanner-types). Templates are available for common cases – dead-end detection, session summary, user intent, frustration score, and session outcome.
-3. Write a prompt describing what the scanner should look for. Be concrete and avoid speculation – e.g. *"Return true if the user appears stuck on a page — scrolling without engaging, hovering over elements with no clear CTA, or abandoning shortly after arriving."*
+3. Write a prompt describing what the scanner should look for. Be concrete and avoid speculation – e.g. *"Return true if someone appears stuck on a page – scrolling without engaging, hovering over elements with no clear CTA, or abandoning shortly after arriving."*
 4. Configure the type-specific options:
    - **Classifier** – define your tag vocabulary, and optionally allow multiple tags per session or freeform tags.
    - **Scorer** – set the numeric scale (min, max, and an optional label).
@@ -106,7 +106,7 @@ Key properties on each event:
 | `session_id` | The recording that was observed |
 | `triggered_by` | Whether the observation was scheduled or run on-demand |
 | `model_used` | The Gemini model used |
-| `scanner_output_confidence` | The model's confidence (0.0–1.0) |
+| `scanner_output_confidence` | The model's confidence (0.0 to 1.0) |
 | `scanner_output_verdict` | (Monitor) the true/false verdict |
 | `scanner_output_tags` | (Classifier) the assigned tags |
 | `scanner_output_score` | (Scorer) the numeric score |
@@ -139,6 +139,6 @@ When you enable **Signals** on a scanner, notable findings (such as a monitor re
 
 ## Further reading
 
-- [Session replay](/docs/session-replay)
+- [Session Replay](/docs/session-replay)
 - [Summarize sessions with PostHog AI](/docs/session-replay/session-summaries-ai)
 - [Find replays with PostHog AI](/docs/session-replay/find-replays-ai)
