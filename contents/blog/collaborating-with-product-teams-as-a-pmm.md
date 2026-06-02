@@ -15,7 +15,7 @@ tags:
     - Marketing
 ---
 
-Before [Cleo](/community/profiles/36864) and I joined as Product Marketers (PMMs), PostHog only had our [Marketing Lead, Joe](/community/profiles/29070), who was doing PMM work with a bunch of other stuff at the same time. This was the first time teams got dedicated PMMs, and also the first time some of them got to work with a PMM, so we had to find the best way to collaborate with them while respecting [our company culture](/handbook/company/culture).
+Before I joined PostHog, the company wasn't assigning any dedicated product marketers to product teams. Separate products were getting marketing coverage only when there was capacity for that. As a result, many product managers and engineers hadn't worked with a product marketer, so I had to think of the best way to initiate the collaboration while also respecting [our company culture](/handbook/company/culture).
 
 One of the first things you learn when joining PostHog is that [collaboration sucks](https://newsletter.posthog.com/p/collaboration-sucks). You're the driver and you need to ship your own stuff. Collaborate only when necessary.
 
@@ -25,9 +25,9 @@ Well, the relationship between Product Managers (PMs) and PMMs is one of those n
 
 ## Initiate the first contact
 
-When I joined PostHog the team I was supporting was already established, but most of them had never worked with a product marketer before. Many didn't know what one does.
+At the beginning of this quarter, I started to support the [Error Tracking team](/teams/error-tracking). None of the team members, including the product manager, [Cory](/profiles/34160), had never worked with a product marketer before.
 
-I decided I had to make myself visible and prove I could be valuable. So, I made first contact by having a call with the PM, Abe, rather than waiting for them to come to me. 
+I decided I had to make myself visible and prove I could be valuable. So, I made first contact by having a call with Cory, rather than waiting for them to come to me. 
 
 Here's what we talked about:
 
@@ -37,39 +37,59 @@ Here's what we talked about:
 - Where do most users come from?
 - Do you see any obvious marketing opportunities that I should focus on first?
 
-Ask for the customer interview bank, any competitive research they might have, or any other resources that could be helpful for your particular product.
+I also asked for a customer interview bank, any competitive research they might have, or any other resources that could be helpful for this particular product.
 
-Since async is the default way of working in PostHog, I was very careful with scheduling meetings at first. However, the teams got very excited when I announced that I would be supporting their products, and were very eager to meet and give me as much information as they could.
+Since async is the default way of working in PostHog, I was very careful with scheduling meetings at first. However, the team got very excited when I announced that I would be supporting their product, and were very eager to meet and give me as much information as they could.
 
 ![collaborating with PMs](https://res.cloudinary.com/dmukukwp6/image/upload/PM_COLLAB_9b73b35feb.png)
 
 ## Live in your team's channel
 
-If you're using Slack or any similar tool, your team probably has a dedicated channel. This is the most important place you need to check every day, or at least every Monday.
+At PostHog, every team has a dedicated Slack channel, and this is the most important place I check every day. I'm looking for feature updates, messages from the sales people, customer feedback - literally anything that could give me ideas for the next product digest or inspire me to change something in the comms. 
 
-The PMs and the engineers might not always know which feature is marketable. You should follow the threads and figure it out yourself. Jump in wherever you think there's an opportunity, and the team will most likely get excited that you want to show users what they've been working on.
+The PMs and the engineers might not always know which feature is marketable. I can ask the team for updates but they might not remember to always give me the features I can actually talk about. Sometimes, I see potential where they don't. I'm the one following the Slack threads and picking what to add to the comms.
+
+For example, this month, I started doing a monthly product digest for each of my products, where I list things the team has been working on. I had been collecting updates for a while, and when I had enough, I started a thread with the Error Tracking team to make sure I'm not missing anything. 
+
+![error tracking weekly digest thread](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_06_02_at_18_12_04_2x_05bac906cd.png)
+
+I try to jump in wherever I think there's an opportunity, and the team almost always gets excited that I want to show users what they've been working on.
 
 ## Spend time in person & in meetings
 
-PostHog is fully remote, so you usually only meet teammates a couple of times a year. If this is the case with you, try to make the most of those moments. This year we went to Barbados, and I booked some dedicated time with both of my PMs to do a growth review and discuss the parts of the product we want to focus on next.
+PostHog is fully remote, so you usually only meet teammates a couple of times a year. This year we went to Barbados, and I booked some dedicated time with both of my product managers to do a growth review and discuss the parts of the product we want to focus on next. The meetings included:
 
-In addition to the in-person gatherings, you should regularly join your team's sprint planning (or any similar meetings). Even if they are too technical, you should show up and be present. The team should see that you're interested in what they're working on and hear you asking questions. If you feel bad for not contributing, you can always give them a short overview of what you're working on related to their product.
+- Any feedback we have for each other, if we're happy with the collab, and if there's anything we want to change moving forward
+- Looking at the product metrics from the past few months 
+- Figuring out whether we want to focus on acquisition, activation, retention, etc.
+- Big launches coming in the next few months and how we want to approach them
 
-## Loop your PM in on your marketing activities
+In addition to the in-person gatherings, I tend to join my teams' sprint planning meetings. Sometimes, they can be too technical for me, but I still want to show up and be present. I think that the team should see that I'm interested in what they're working on. 
 
-At PostHog, most of us create an individual [quarterly planning issue](https://github.com/issues/assigned?issue=PostHog%7Crequests-for-comments-public%7C524). I regularly send this issue to my PMs to get their thoughts on the things I'm planning to do in the upcoming quarter, related to their product.
+Also, this is the place where I can ask questions about the product, what they're working on, get more technical details, etc. The engineers treat me like an equal and don't roll their eyes when I ask a stupid question (yes, yes, I know there are no stupid questions, but I've experienced many different reactions), which I really appreciate. They are very invested in explaining technical concepts in simple words to me, because if I understand it and present it well to the user, we all win. Sometimes, I also use these meetings to give them a short overview of the marketing efforts we are doing around their product. 
 
-Also, I regularly send them my campaign plans, creative directions, blogs, etc. The core assets are non-negotiable - the PM should always take a look at the product page, launch email, and launch blog.
+## Include your product manager in on your marketing activities
 
-Even if they don't have marketing feedback, they should be in the loop and they should get excited about the way you're promoting their product. Also, sometimes they have competitive research or data that will help you create your assets, and you'll only know this if you share what you're working on and get feedback.
+At PostHog, most of us create an individual [quarterly planning issue](https://github.com/issues/assigned?issue=PostHog%7Crequests-for-comments-public%7C524). I regularly send this issue to my PMs to get their thoughts on the things I'm planning to do in the upcoming quarter, related to their product. This is a great way to see if I'm focusing on the right things and if I'm missing anything.
+
+Also, I regularly send them my campaign plans, creative directions, blogs, etc. The core assets are non-negotiable: the PM should always take a look at the product page, launch email, and launch blog.
+
+For example, before I sent a product digest for the Logs users a few weeks I go, I sent the email preview to [Abe](/community/profiles/34044), the Logs product manager. This is the feedback he had for me: 
+
+![abe logs email feedback](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_06_02_at_18_25_52_2x_d294914bd4.png)
+
+You can also [look at the full issue here](https://github.com/PostHog/requests-for-comments-public/issues/540). 
 
 ## Monthly growth review
 
-Recently, we started doing monthly 1:1 meetings with PMs where we go through the product growth for the last month and try to identify the biggest gaps. For example, for one of the products I was working on, we realized that retention is low, so we decided to start sending monthly updates to users that include everything the team has been working on and what's coming next.
+Recently, we started doing monthly 1:1 meetings with product managers where we go through the [product growth](/handbook/product/per-product-growth-reviews) for the last month and try to identify the biggest gaps. Product managers typically do the review on their own in post it in their team channel. Then, I meet them to discuss the numbers and see what to do next. Some things we cover during these meetings:
 
-## Don't allow yourself to become an afterthought
+- How's the product doing? 
+- Where are users coming from? 
+- Should we pull in the demand gen people and run more ads? Is this product even a good candidate for ads?
+- Are users dropping of? If yes, where? What should we do? 
 
-Yes, you're the one joining an already established team, but you should also express your preferred ways of working. If you notice you're getting included in conversations too late, react. This happened to me when I got pulled in to work on some integration launches. Once engineers started including me early, I had more context, and as a result, we were able to do much more before launch day.
+For example, the growth review for Logs, one of the products I'm working on, showed that a lot of users were interested to get started, but the retention was lower than expected. There were a lot of feature requests, and users didn't know what the team was working on. That's when I decided to start with the product digest and tell users what's new and what's coming in the product they're using. Yes, we have a platform-wide changelog digest, but that one only includes the bigger launches, and sometimes small fixes make a big difference for users. 
 
 ## AI is your friend
 There’s a lot you can automate with AI. Claude has become my go-to spot when I need to know the status of a certain product development, thanks to the Slack MCP. I ask it about feature status, team updates, etc. I do still go to Slack channels, but it’s much easier for me to surface all the context via a prompt. Here are some prompts I’ve used recently: 
