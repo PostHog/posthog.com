@@ -38,11 +38,7 @@ Feature flags are **not** billed based on `$feature_flag_called` events, which a
 
 The number of `/flags` requests and the number of `$feature_flag_called` events are **not** directly related.
 
-<CalloutBox icon="IconInfo" title="Removing flags from code doesn't reduce your bill" type="info">
-
-  Billing is per `/flags` request, not per flag evaluated. Having fewer active flags doesn't reduce costs — what matters is the number of requests made. To reduce your bill, reduce the number of `/flags` requests (see options below), or [remove stale flags](/docs/vscode-extension/stale-flag-cleanup) to keep your project tidy.
-
-</CalloutBox>
+The number of active flags in your project does not affect the cost of each `/flags` request, so deactivating or removing flags has no direct billing impact. What reduces your bill is reducing the number of `/flags` requests themselves (see options below).
 
 ### Creating a billable usage dashboard
 
