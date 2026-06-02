@@ -78,13 +78,13 @@ Here's a practical list of what set the S-tier demos apart from the rest.
 
 14. Do everything in your power to please the demo gods. We even have a [demo setup checklist](/handbook/marketing/speaker-guide#demo-setup-checklist) just for this:
 
-    > - [ ] Use a demo project, not a live account with customer data
-    > - [ ] Disable notifications on your laptop
-    > - [ ] Silence your phone
-    > - [ ] Bookmark your demo URL — don't type it live
-    > - [ ] Know what happens if WiFi dies (screenshots as backup)
-    > - [ ] Zoom your browser to 125–150% so the back row can read it
-    > - [ ] Test the projector before anyone arrives
+    > [ ] Use a demo project, not a live account with customer data
+    > [ ] Disable notifications on your laptop
+    > [ ] Silence your phone
+    > [ ] Bookmark your demo URL — don't type it live
+    > [ ] Know what happens if WiFi dies (screenshots as backup)
+    > [ ] Zoom your browser to 125–150% so the back row can read it
+    > [ ] Test the projector before anyone arrives
 
 15. Use real data wherever possible. Obviously fake data just looks lame.
 
