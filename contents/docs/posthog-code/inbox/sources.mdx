@@ -2,10 +2,10 @@
 title: PostHog Code Inbox signal sources
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-import List from 'components/List'
+import { CalloutBox } from "components/Docs/CalloutBox";
+import List from "components/List";
 
-Inbox uses signal sources to find work worth investigating. A signal can be a production error, a support conversation, a session replay pattern, or an issue from an external tracker.
+Inbox uses signal sources to find work worth investigating. A signal can be a production error, a support conversation, a session replay pattern, a log alert state change, or an issue from an external tracker.
 
 ## Configure sources
 
@@ -15,7 +15,8 @@ Inbox uses signal sources to find work worth investigating. A signal can be a pr
 4. Follow the authentication prompts for external services.
 
 <CalloutBox icon="IconInfo" title="MCP is handled for you" type="fyi">
-    You don't need to configure MCP servers for Inbox sources manually. Once your repository is connected in PostHog Code, research tasks can run automatically.
+  You don't need to configure MCP servers for Inbox sources manually. Once your repository is
+  connected in PostHog Code, research tasks can run automatically.
 </CalloutBox>
 
 ## PostHog sources
@@ -23,41 +24,48 @@ Inbox uses signal sources to find work worth investigating. A signal can be a pr
 These sources are available when the matching PostHog product has data in your project.
 
 <List
-    className="grid gap-4 grid-cols-1 @md:grid-cols-3 not-prose"
-    items={[
-        {
-            label: "Error Tracking",
-            url: "/docs/error-tracking",
-            icon: "IconWarning",
-            description: "New exceptions, reopened issues, and error volume spikes.",
-            lineClamp: 2,
-        },
-        {
-            label: "Support",
-            url: "/docs/support",
-            icon: "IconChat",
-            description: "Actionable items from conversations.",
-            lineClamp: 2,
-        },
-        {
-            label: "Session Replay",
-            url: "/docs/session-replay",
-            icon: "IconRewindPlay",
-            description: "UX friction, unusual behavior, rage clicks.",
-            lineClamp: 2,
-        },
-    ]}
+  className="grid gap-4 grid-cols-1 @md:grid-cols-3 not-prose"
+  items={[
+    {
+      label: "Error Tracking",
+      url: "/docs/error-tracking",
+      icon: "IconWarning",
+      description: "New exceptions, reopened issues, and error volume spikes.",
+      lineClamp: 2,
+    },
+    {
+      label: "Support",
+      url: "/docs/support",
+      icon: "IconChat",
+      description: "Actionable items from conversations.",
+      lineClamp: 2,
+    },
+    {
+      label: "Session Replay",
+      url: "/docs/session-replay",
+      icon: "IconRewindPlay",
+      description: "UX friction, unusual behavior, rage clicks.",
+      lineClamp: 2,
+    },
+    {
+      label: "Logs",
+      url: "/docs/logs",
+      icon: "IconTerminal",
+      description: "Log alerts that fire or break due to threshold breaches.",
+      lineClamp: 2,
+    },
+  ]}
 />
 
 ## External sources
 
 External sources pull issue context into the same Inbox queue as your product signals.
 
-| Source | What Inbox reads | What Inbox does |
-|---|---|---|
-| GitHub Issues | New issues in connected repositories | Starts a research task to find related code and decide whether a fix is possible |
-| Linear | Issue title, description, labels, and linked context | Searches the codebase and keeps the report tied to the original issue |
-| Zendesk | Customer support ticket context | Turns actionable bug reports into researched implementation work |
+| Source        | What Inbox reads                                     | What Inbox does                                                                  |
+| ------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------- |
+| GitHub Issues | New issues in connected repositories                 | Starts a research task to find related code and decide whether a fix is possible |
+| Linear        | Issue title, description, labels, and linked context | Searches the codebase and keeps the report tied to the original issue            |
+| Zendesk       | Customer support ticket context                      | Turns actionable bug reports into researched implementation work                 |
 
 ## What happens next
 

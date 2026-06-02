@@ -1,22 +1,21 @@
 import SettingProperties from "./setting-properties-text.mdx"
-import NamingTip from "./naming-tip.mdx"
 import Intro from "./intro.mdx"
 
 <Intro />
 
 ```csharp
-PostHog.Capture("user_signed_up");
+PostHog.Capture("level_completed");
 ```
 
-<NamingTip />
+> **Tip:** We recommend naming events in an `[object] [verb]` format, where `[object]` is the entity the behavior relates to, and `[verb]` is the behavior itself. For example, `level completed`, `item purchased`, or `quest started`.
 
 <SettingProperties />
 
 ```csharp
-PostHog.Capture("user_signed_up", new Dictionary<string, object>
+PostHog.Capture("level_completed", new Dictionary<string, object>
 {
-    { "login_type", "email" },
-    { "is_free_trial", true }
+    { "level_id", 5 },
+    { "score", 1250 }
 });
 ```
 
