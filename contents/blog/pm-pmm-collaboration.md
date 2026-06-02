@@ -1,5 +1,5 @@
 ---
-title: Collaborating with product teams (as a PMM)
+title: Collaboration sucks, but PMs and PMMs need each other
 date: 2026-05-28
 rootPage: /blog
 sidebar: Blog
