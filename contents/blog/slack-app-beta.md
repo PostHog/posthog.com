@@ -21,7 +21,7 @@ We built it for those times when a colleague flags an annoying UI quirk, or a cu
 
 With the PostHog Slack app, you **@PostHog** to "fix this" or "build that". It spins up a sandbox, makes a plan, edits files, runs checks, opens a draft PR, and answers review comments in the thread.
 
-Powered by [PostHog Code](/code), the PostHog Slack app uses your product data as context by default and follows your repo's rules, so it feels less like a coding tool and more like a clever teammate (it even reacts with [emojis](/docs/slack-app#emoji-cues)).
+The PostHog Slack app uses your product data as context by default and follows your repo's rules, so it feels less like a coding tool and more like a clever teammate (it even reacts with [emojis](/docs/slack-app#emoji-cues)).
 
 ## @PostHog in the #papercuts channel
 
