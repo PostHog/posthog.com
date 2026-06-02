@@ -25,16 +25,16 @@ export const Content = () => {
                 <div>
                     <ul>
                         <li>
-                            <b>OpenTelemetry-compatible</b> – Use standard OpenTelemetry SDKs, no PostHog packages
+                            <b>OpenTelemetry-compatible</b> - Use standard OpenTelemetry SDKs, no PostHog packages
                             required. Works with any compatible client.
                         </li>
                         <li>
-                            <b>Part of the observability suite</b> – Traces share the same pipeline as{' '}
-                            <Link to="/docs/logs">Logs</Link>, and correlate with session replays, errors, and analytics
-                            by <code>trace_id</code>.
+                            <b>Part of the observability suite</b> - Traces use the same OpenTelemetry ingestion as{' '}
+                            <Link to="/docs/logs">Logs</Link>, in the same PostHog project as session replays, errors,
+                            and analytics.
                         </li>
                         <li>
-                            <b>No vendor lock-in</b> – Works with your existing OpenTelemetry setup.
+                            <b>No vendor lock-in</b> - Works with your existing OpenTelemetry setup.
                         </li>
                     </ul>
                 </div>
@@ -56,6 +56,12 @@ export const Content = () => {
             <section className="mb-8">
                 <h2 className="mb-4">Next steps</h2>
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-2">
+                    <ResourceItem
+                        type="Getting started"
+                        title="Why you need tracing"
+                        description="What a trace is, what it shows you that nothing else does, and when it saves you"
+                        url="/docs/tracing/basics"
+                    />
                     <ResourceItem
                         type="Getting started"
                         title="Start here"

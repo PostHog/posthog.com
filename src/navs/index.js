@@ -6911,6 +6911,12 @@ export const docsMenu = {
                     color: 'orange',
                     featured: true,
                 },
+                {
+                    name: 'Why you need tracing',
+                    url: '/docs/tracing/basics',
+                    icon: 'IconBook',
+                    color: 'seagreen',
+                },
             ],
         },
         {
