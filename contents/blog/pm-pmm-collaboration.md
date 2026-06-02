@@ -15,19 +15,19 @@ tags:
     - Marketing
 ---
 
-When I joined PostHog, most product teams had never worked with a product marketer. Marketing was something products got when someone had spare time for it. So, one of my first challenges was to figure out how to start working with teams who didn't know they needed me. 
+When I joined PostHog, most product teams had never worked with a product marketer. Marketing was something separate products got when someone had spare time for it. So, one of my first challenges was to figure out how to start working with teams who didn't know they needed me. 
 
-One of the first things you learn when joining PostHog is that [collaboration sucks](https://newsletter.posthog.com/p/collaboration-sucks). You're the driver and you need to ship your own stuff. Collaborate only when necessary.
+Something you learn quickly at PostHog is that [collaboration sucks](https://newsletter.posthog.com/p/collaboration-sucks). You're the driver and you need to ship your own stuff. Collaborate only when necessary.
 
 ![collaboration sucks](https://res.cloudinary.com/dmukukwp6/image/upload/stop_collaborating_7550066220.webp)
 
-Well, the relationship between Product Managers (PMs) and PMMs is one of those necessary situations when you *need to* collaborate to successfully launch and grow your products. I wanted to share some ways I've learned to do this at PostHog.
+Well, the relationship between product managers and product marketers is one of those necessary situations when you *need to* collaborate to successfully launch and grow your products. I wanted to share some ways I've learned to do this at PostHog.
 
 ## Initiate the first contact
 
 At the beginning of this quarter, I started to support the [Error Tracking team](/teams/error-tracking). None of the team members, including the product manager, [Cory](/profiles/34160), had never worked with a product marketer before.
 
-I decided I had to make myself visible and prove I could be valuable. So, I made first contact by having a call with Cory, rather than waiting for them to come to me. 
+I decided I had to make myself visible and prove I could be valuable. So, I made first contact by scheduling a call with Cory, rather than waiting for them to come to me. 
 
 Here's what we talked about:
 
@@ -45,11 +45,11 @@ Since async is the default way of working in PostHog, I was very careful with sc
 
 ## Live in your team's channel
 
-At PostHog, every team has a dedicated Slack channel, and this is the most important place I check every day. I'm looking for feature updates, messages from the sales people, customer feedback - literally anything that could give me ideas for the next product digest or inspire me to change something in the comms. 
+At PostHog, every team has a dedicated Slack channel, and this is the most important place I check every day. I'm looking for feature updates, messages from the sales people, customer feedback; literally anything that could give me ideas for the next product digest or inspire me to change something in the comms. 
 
-The PMs and the engineers might not always know which feature is marketable. I can ask the team for updates but they might not remember to always give me the features I can actually talk about. Sometimes, I see potential where they don't. I'm the one following the Slack threads and picking what to add to the comms.
+The product managers and the engineers might not always know which feature is marketable. I can ask the team for updates but they might not remember to always give me the features I can actually talk about. Sometimes, I see potential where they don't. I'm the one following the Slack threads and picking what to add to the comms. 
 
-For example, this month, I started doing a monthly product digest for each of my products, where I list things the team has been working on. I had been collecting updates for a while, and when I had enough, I started a thread with the Error Tracking team to make sure I'm not missing anything. 
+For example, this month, I started doing a monthly product digest for each of my products, where I list things the team has been working on. I had been collecting updates from the team channel for a while, and when I had enough, I started a thread with the Error Tracking team to make sure I wasn't missing anything. 
 
 ![error tracking weekly digest thread](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_06_02_at_18_12_04_2x_05bac906cd.png)
 
@@ -66,7 +66,7 @@ PostHog is fully remote, so you usually only meet teammates a couple of times a 
 
 In addition to the in-person gatherings, I tend to join my teams' sprint planning meetings. Sometimes, they can be too technical for me, but I still want to show up and be present. I think that the team should see that I'm interested in what they're working on. 
 
-Also, this is the place where I can ask questions about the product, what they're working on, get more technical details, etc. The engineers treat me like an equal and don't roll their eyes when I ask a stupid question (yes, yes, I know there are no stupid questions, but I've experienced many different reactions), which I really appreciate. They are very invested in explaining technical concepts in simple words to me, because if I understand it and present it well to the user, we all win. Sometimes, I also use these meetings to give them a short overview of the marketing efforts we are doing around their product. 
+Also, this is the place where I can ask questions about the product, what they're working on, get more technical details, etc. The engineers treat me like an equal and don't roll their eyes when I ask a stupid question (yes, yes, I know there are no stupid questions, but I've experienced many different reactions in the past), which I really appreciate. They are very invested in explaining technical concepts in simple words to me, because if I understand it and present it well to the user, we all win. Sometimes, I also use these meetings to give them a short overview of the marketing efforts we are doing around their product. 
 
 ## Include your product manager in on your marketing activities
 
