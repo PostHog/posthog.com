@@ -70,14 +70,12 @@ Once spans are flowing into PostHog, you can:
 </QuestLogItem>
 
 <QuestLogItem
-    title="Correlate traces with the rest of PostHog"
+    title="Part of PostHog's observability suite"
     subtitle="Recommended"
     icon="IconLogomark"
 >
 
-Tracing is part of PostHog's observability suite and shares the same OpenTelemetry pipeline as [Logs](/docs/logs). Because logs carry `trace_id` and `span_id`, you can pivot from a slow span to the exact log lines emitted during it.
-
-From there, your traces live alongside [Session Replay](/docs/session-replay), [Error Tracking](/docs/error-tracking), and [Product Analytics](/docs/product-analytics) – so you can go from a slow request to the user's session without switching tools.
+Tracing uses the same OpenTelemetry-based ingestion as [Logs](/docs/logs), so a single OTel setup covers both. Your traces also live in the same PostHog project as [Session Replay](/docs/session-replay), [Error Tracking](/docs/error-tracking), and [Product Analytics](/docs/product-analytics) – one platform instead of another observability vendor to run.
 
 </QuestLogItem>
 
