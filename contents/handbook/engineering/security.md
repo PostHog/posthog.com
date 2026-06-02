@@ -54,8 +54,10 @@ You can sign commits with either [Secretive](https://github.com/maxgoedjen/secre
 2. Name your key "Git signing key" and select **Notify** in the **Protection Level** dropdown.
 3. Go to **Secretive > Integrations** in the menu bar.
 4. Click **Git Signing** and select "Git signing key" from the **Secret** dropdown.
-5. Copy and paste the `~/.gitconfig` and `~/.gitallowedsigners` snippets into their respective files
+5. Copy and paste the `~/.gitconfig` and `~/.gitallowedsigners` snippets into their respective files.
     - If you already have content in `~/.gitconfig`, merge the new sections into the existing file rather than replacing it.
+    - If you've previously configured commit signing (with a different SSH key, a GPG key, or an older Secretive key), **replace** any existing `signingkey`, `gpgsign`, `gpg.format`, and `allowedSignersFile` entries — don't append duplicates. Git will silently use the last value, but a `.gitconfig` with multiple conflicting `signingkey` lines is hard to reason about. Confirm the active key afterwards with `git config --get user.signingkey`.
+    - The `~/.gitallowedsigners` file is used by `git log --show-signature` for local verification. Each line is `<your-git-email> <key-type> <public-key>`, e.g. `you@posthog.com ecdsa-sha2-nistp256 AAAA... Git-Signing-Key@...`. If you skip it, signing still works but local verification will report `No principal matched`.
 6. Select your shell on the left side of Secretive and set the `SSH_AUTH_SOCK` environment variable as instructed. For zsh, add the following to your `~/.zshrc`:
 
    ```bash
@@ -71,15 +73,19 @@ You can sign commits with either [Secretive](https://github.com/maxgoedjen/secre
    ```
 
 8. Go to your [GitHub SSH keys settings](https://github.com/settings/keys) and add a new SSH key. Paste your public key and set the key type to **Signing Key**.
-9. Test it by creating an empty commit on a new branch:
+    - GitHub treats **Authentication Key** and **Signing Key** as separate roles, even for the same key. If you get **"Key is already in use"**, it most likely means you already added this key as an Authentication Key (from the SSH Keys setup above). The same key can serve both roles — but you have to add it once for each. Add it again with key type **Signing Key**.
+9. **Verify the signature locally before pushing.** Create an empty commit on a new branch:
 
    ```bash
    git commit --allow-empty -m "test signing"
+   git log -1 --format='%GK %G?'
    ```
 
-   Push the branch to GitHub — you should see a green **Verified** badge on the commit.
+   You should see a fingerprint followed by `G` (good signature). The fingerprint must match the **Signing Key** you just added on GitHub — find it at [GitHub SSH keys settings](https://github.com/settings/keys) under the **Signing keys** heading. If it matches an **Authentication key** entry instead, your `user.signingkey` in `~/.gitconfig` is pointing at the wrong file — fix it before pushing.
 
-   ![Signed commit](https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/signed_commit_ea0c0b0cb0.png)
+10. Push the branch to GitHub — you should see a green **Verified** badge on the commit.
+
+    ![Signed commit](https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/signed_commit_ea0c0b0cb0.png)
 
 
 #### Setting up with 1Password
@@ -95,6 +101,15 @@ Once commit signing is configured, enable the option in your [GitHub Profile](ht
 - If using iTerm/Cursor/GitHub Desktop/Sourcetree/etc., you may be endlessly prompted to "access data from other apps". You can fix this by granting the app **Full Disk Access** in **System Settings > Privacy & Security > Full Disk Access**.
 
 - If you are prompted to complete Touch ID each time you commit, your signing key is using a **Protection Level** of **Require Authentication**. Re-follow the instructions above to generate a new signing key with a **Protection Level** of **Notify**.
+
+- **GitHub rejects your push with `GH013: Commits must have verified signatures`** even though the commits look signed locally. The commit was signed with a key GitHub doesn't recognize as a **Signing Key** — usually because (a) the key is only registered as an **Authentication Key**, or (b) your `user.signingkey` points at the wrong file. Confirm with `git log -1 --format='%GK'` and cross-check the fingerprint against [your GitHub keys](https://github.com/settings/keys). Once the right key is registered as a Signing Key, re-sign the existing commit:
+
+   ```bash
+   git commit --amend --no-edit -S
+   git push --force-with-lease
+   ```
+
+   Use `--force-with-lease` rather than plain `--force` — it refuses the push if someone else has pushed to the branch since you last fetched.
 
 ### GitHub Actions
 
