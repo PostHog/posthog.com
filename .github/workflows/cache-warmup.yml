@@ -33,18 +33,27 @@ jobs:
                   node-version: '22'
                   cache: 'pnpm'
 
+            # Rolling key: each warmup saves a fresh cache (unique run_id) so the shared cache
+            # tracks master content instead of freezing on first creation.
             - name: Cache Gatsby
               uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
               with:
                   path: |
                       .cache
                       public
-                  key: gatsby-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'gatsby-config.js') }}
+                  key: gatsby-v2-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'gatsby-config.js') }}-${{ github.run_id }}
                   restore-keys: |
-                      gatsby-${{ runner.os }}-
+                      gatsby-v2-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'gatsby-config.js') }}-
+                      gatsby-v2-${{ runner.os }}-
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
+
+            # Regenerate gatsby-plugin-mdx scopes fresh from the current checkout so a restored
+            # (rolling) cache from an earlier master state can't leave stale scopes that break the
+            # build. Keeps the saved cache coherent for preview builds to restore.
+            - name: Reset gatsby-plugin-mdx scopes
+              run: rm -rf .cache/caches/gatsby-plugin-mdx
 
             - name: Build site
               run: pnpm build
