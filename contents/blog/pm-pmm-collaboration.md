@@ -15,7 +15,7 @@ tags:
     - Marketing
 ---
 
-Before I joined PostHog, the company wasn't assigning any dedicated product marketers to product teams. Separate products were getting marketing coverage only when there was capacity for that. As a result, many product managers and engineers hadn't worked with a product marketer, so I had to think of the best way to initiate the collaboration while also respecting [our company culture](/handbook/company/culture).
+When I joined PostHog, most product teams had never worked with a product marketer. Marketing was something products got when someone had spare time for it. So, one of my first challenges was to figure out how to start working with teams who didn't know they needed me. 
 
 One of the first things you learn when joining PostHog is that [collaboration sucks](https://newsletter.posthog.com/p/collaboration-sucks). You're the driver and you need to ship your own stuff. Collaborate only when necessary.
 
