@@ -4116,7 +4116,7 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/replay-vision',
-                    icon: 'IconHome',
+                    icon: 'IconEye',
                     color: 'seagreen',
                 },
             ],
