@@ -344,7 +344,7 @@ const ProductOSBenefitsSlide = () => {
     )
 }
 
-export default function LLMAnalytics(): JSX.Element {
+export default function aiObservability(): JSX.Element {
     const contentData = useContentData()
 
     // GraphQL query for product data

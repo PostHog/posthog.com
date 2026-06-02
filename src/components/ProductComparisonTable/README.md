@@ -164,7 +164,7 @@ Product pages can exclude certain sections from rendering using the `excluded_se
 
 ```typescript
 // In product data file (e.g., ai_observbaility.tsx)
-export const llmAnalytics = {
+export const aiObservability = {
     comparison: {
         companies: [...],
         rows: ['ai_observability'],
