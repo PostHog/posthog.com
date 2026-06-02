@@ -1,6 +1,6 @@
 ---
-date: 2026-05-29
-title: "How an @mention becomes a PR with the PostHog Slack app"
+date: 2026-06-02
+title: "We put PostHog in Slack and now everyone's an engineer"
 author:
   - cleo-lant
 rootPage: /blog
@@ -15,13 +15,13 @@ tags:
   - AI
 ---
 
-Today, we're releasing the PostHog Slack app into beta.
+Today, we're releasing the [PostHog Slack app](/docs/slack-app/setup) into beta.
 
 We built it for those times when a colleague flags an annoying UI quirk, or a customer mentions a bug. The issues that normally end up on a backlog, untouched and ignored.
 
 With the PostHog Slack app, you **@PostHog** to "fix this" or "build that". It spins up a sandbox, makes a plan, edits files, runs checks, opens a draft PR, and answers review comments in the thread.
 
-The PostHog Slack app uses your product data as context by default and follows your repo's rules, so it feels less like a coding tool and more like a clever teammate (it even reacts with [emojis](/docs/slack-app#emoji-cues)).
+The app uses your product data as context by default and follows your repo's rules, so it feels less like a coding tool and more like a clever teammate (it even reacts with [emojis](/docs/slack-app#emoji-cues)).
 
 ## @PostHog in the #papercuts channel
 
