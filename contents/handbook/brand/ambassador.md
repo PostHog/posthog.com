@@ -50,6 +50,17 @@ It's okay to be helpful or respond to posts from frustrated users, but be mindfu
 
 **The simplest test:** would you be comfortable with a screenshot of that tweet being shared in the `#general` Slack channel? If yes, go for it!
 
+## Our users are brand ambassadors too
+
+Our brand is ultimately owned by the people who use us, talk about us, and advocate for us. We can shape it, but never fully control it.
+
+By building a transparent, weird, and irreverent brand, we've won over a legion of hedgehog fans, some of whom pay us. **They're fans, not customers** – and they shape our brand as much as we do.
+
+- **The better informed a user – the better user they'll be.** That's why we share mistakes and lessons freely through [content](/handbook/content).
+- **Use brand to shorten the distance.** Big companies feel far away. As we grow, everything we post and every room we show up in is a chance to stay close to [who we're building for](/handbook/who-we-build-for).
+- **A two-way dialog means listening, not always agreeing.** We give our users a voice, and we respect what that voice says. Sometimes they'll tell us they don't agree with our choices.
+- **Brand attracts talent.** People with cool ideas want to work at companies where they see cool ideas actually come to life.
+
 ## Giving someone the brand ambassador experience
 
 The best way to create brand ambassadors isn't to ask people to be them, it's to give them an experience so good they can't help but talk about it.

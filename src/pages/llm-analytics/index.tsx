@@ -156,43 +156,43 @@ const NativeIntegrationsSlide = () => {
         {
             logo: OpenAILogo,
             name: 'OpenAI',
-            link: '/docs/llm-analytics/installation/openai',
+            link: '/docs/ai-observability/installation/openai',
         },
         {
             logo: AnthropicLogo,
             name: 'Anthropic',
-            link: '/docs/llm-analytics/installation/anthropic',
+            link: '/docs/ai-observability/installation/anthropic',
         },
         {
             logo: GeminiLogo,
             name: 'Google Gemini',
-            link: '/docs/llm-analytics/installation/google',
+            link: '/docs/ai-observability/installation/google',
         },
         {
             logo: LangChainLogo,
             name: 'LangChain',
-            link: '/docs/llm-analytics/installation/langchain',
+            link: '/docs/ai-observability/installation/langchain',
         },
         {
             logo: VercelLogo,
             name: 'Vercel AI SDK',
-            link: '/docs/llm-analytics/installation/vercel-ai',
+            link: '/docs/ai-observability/installation/vercel-ai',
         },
         {
             logo: OpenRouterLogo,
             name: 'OpenRouter',
-            link: '/docs/llm-analytics/installation/openrouter',
+            link: '/docs/ai-observability/installation/openrouter',
         },
         {
             logoLight: LiteLLMLogoLight,
             logoDark: LiteLLMLogoDark,
             name: 'LiteLLM',
-            link: '/docs/llm-analytics/installation/litellm',
+            link: '/docs/ai-observability/installation/litellm',
         },
         {
             isManualCapture: true,
             name: '</> Manual Capture',
-            link: '/docs/llm-analytics/installation/manual-capture',
+            link: '/docs/ai-observability/installation/manual-capture',
         },
     ]
 
@@ -276,7 +276,7 @@ const NativeIntegrationsSlide = () => {
                             ))}
                         </ul>
                         <Link
-                            to="/docs/llm-analytics/installation/manual-capture"
+                            to="/docs/ai-observability/installation/manual-capture"
                             className="text-lg font-semibold underline inline-flex items-center gap-1 group mt-auto mb-3"
                             state={{ newWindow: true }}
                         >

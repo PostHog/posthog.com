@@ -177,7 +177,7 @@ Now, when you run `npm run dev` again, you can choose your model, enter your mes
 
 ## 3. Viewing generations in PostHog
 
-After generating a few responses with different models, go to PostHog to access the [AI Observability dashboard](https://app.posthog.com/llm-analytics) to see:
+After generating a few responses with different models, go to PostHog to access the [AI Observability dashboard](https://app.posthog.com/ai-observability) to see:
 
 - Overview of all AI interactions
 - Cost breakdowns by model
@@ -192,7 +192,7 @@ After generating a few responses with different models, go to PostHog to access 
   classes="rounded"
 />
 
-Head to the [generations tab](https://app.posthog.com/llm-analytics/generations) to get details on each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
+Head to the [generations tab](https://app.posthog.com/ai-observability/generations) to get details on each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_20_at_14_47_59_2x_d4196d55f8.png"

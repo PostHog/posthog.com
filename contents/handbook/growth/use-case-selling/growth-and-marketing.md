@@ -17,7 +17,7 @@ hideAnchor: false
 - Collect on-site feedback (exit intent, NPS, CSAT) and tie it directly to user behavior
 - Let non-technical marketing users ask questions about their data without waiting for an analyst
 
-> **Guidance:** This is probably the most underserved use case in our current motion. We have the products — [Web Analytics](/docs/web-analytics/getting-started), [Marketing Analytics](/docs/web-analytics/marketing-analytics), [Workflows](/docs/workflows/start-here), [Pipelines](/docs/cdp), [Revenue Analytics](/docs/revenue-analytics/start-here), [Surveys](/docs/surveys/creating-surveys) — but we rarely lead with this story. Marketing teams are spending $10k+/month on Segment, Mixpanel, GA4, and various CDPs to do what PostHog can do in one place. Don't sell individual products here. Sell the consolidation of their marketing data stack.
+> **Guidance:** This is probably the most underserved use case in our current motion. We have the products — [Web Analytics](/docs/web-analytics/getting-started), [Marketing Analytics](/docs/web-analytics/marketing-analytics), [Workflows](/docs/workflows/start-here), [Pipelines](/docs/cdp), [Surveys](/docs/surveys/creating-surveys) — but we rarely lead with this story. Marketing teams are spending $10k+/month on Segment, Mixpanel, GA4, and various CDPs to do what PostHog can do in one place. Don't sell individual products here. Sell the consolidation of their marketing data stack.
 
 ## What PostHog products are relevant?
 
@@ -26,7 +26,6 @@ hideAnchor: false
 - **[Product Analytics](/docs/product-analytics/funnels)** — Conversion [funnels](/docs/product-analytics/funnels), [retention](/docs/product-analytics/retention) curves, [cohort](/docs/data/cohorts) analysis, activation metrics. The layer that connects "they visited the site" to "they became a paying customer." [Lifecycle](/docs/product-analytics/lifecycle) analysis to understand where users are in the journey.
 - **[Workflows](/docs/workflows/start-here)** — Automated engagement sequences triggered by user behavior. Lifecycle emails, re-engagement campaigns, onboarding drips, churn prevention. Act on what analytics reveals instead of just reporting on it. ([Email drip campaign guide](/docs/workflows/email-drip-campaign) · [Configure channels](/docs/workflows/configure-channels))
 - **[Data Pipelines](/docs/cdp)** — Push conversion events and user data to ad platforms (Google, Meta, LinkedIn), CRMs (HubSpot, Salesforce), and data warehouses. Close the loop on campaign optimization by feeding real conversion data back to where it's used. ([Realtime destinations](/docs/cdp/destinations) · [Batch exports](/docs/cdp/batch-exports))
-- **[Revenue Analytics](/docs/revenue-analytics/start-here)** — Track revenue by cohort, plan, feature, and channel. Understand LTV, [MRR](/docs/revenue-analytics/dashboard#mrr-and-arr), expansion revenue, and churn at a user and account level. ([Dashboard](/docs/revenue-analytics/dashboard))
 - **[Surveys](/docs/surveys/creating-surveys)** — On-site feedback, exit-intent surveys, NPS, CSAT, post-purchase surveys. Capture qualitative signal at key moments in the funnel and tie responses to user behavior data.
 - **[Experiments](/docs/experiments)** — A/B test landing pages, pricing pages, onboarding flows, checkout experiences, and activation sequences against real conversion and revenue metrics. This is a key stickiness driver: once a growth team is running experiments, they need engineering to implement the variants, which pulls engineering into PostHog and creates a cross-team dependency.
 - **[Feature Flags](/docs/feature-flags/start-here)** — The implementation layer for experiments. Growth/CRO defines the test; engineering implements it via feature flags. Also used for targeted rollouts to specific user segments, geo-targeting, and progressive delivery of growth initiatives. Feature Flags are the bridge product that connects the growth team's use case to the engineering team's workflow, and opens the door to the [Release Engineering](/handbook/growth/use-case-selling/release-engineering) use case.
@@ -44,7 +43,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 
 ### Primary expansion path
 
-**Web Analytics → Marketing Analytics → Product Analytics (funnels/retention) → Experiments + Feature Flags → Data Pipelines (to CRM/ad platforms) → Workflows → Revenue Analytics → Surveys**
+**Web Analytics → Marketing Analytics → Product Analytics (funnels/retention) → Experiments + Feature Flags → Data Pipelines (to CRM/ad platforms) → Workflows → Surveys**
 
 **The logic of each step:**
 
@@ -53,8 +52,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 - Product Analytics → Experiments + Feature Flags: They've identified drop-off points and want to test fixes. Experiments require Feature Flags, which require engineering to implement. **This is the key multithreading moment:** the growth team defines the hypothesis, engineering implements the flag, and both are now active in PostHog.
 - Experiments → Data Pipelines: They've validated what works, now they need to feed real conversion events back to ad platforms and push user data to their CRM.
 - Pipelines → Workflows: They've been reporting on drop-offs and now want to actually *do something* about them. Automated re-engagement when a user goes cold.
-- Workflows → Revenue Analytics: Engagement is automated, now they want to measure the revenue impact. LTV by channel, revenue attribution to specific campaigns and workflows.
-- Revenue Analytics → Surveys: They're measuring revenue impact and want to add a qualitative layer. "Why did you cancel?" exit surveys. Post-purchase NPS.
+- Workflows → Surveys: Engagement is automated, now they want to add a qualitative layer. "Why did you cancel?" exit surveys. Post-purchase NPS.
 
 ### Alternate expansion paths
 
@@ -70,7 +68,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 
 **Marketing stack consolidation is a real, quantifiable cost savings.** Companies routinely spend $10k+/month across GA4, Segment, Mixpanel, Amplitude, CDPs, and various point solutions. The consolidation argument is concrete: fewer vendor contracts, fewer integrations to maintain, one source of truth for conversion data.
 
-**This use case gives newer products a reason to exist.** Workflows, Marketing Analytics, and Revenue Analytics are all relatively new PostHog products with lower attach rates. Without a use case frame, they're standalone features looking for a buyer. Within Growth and Marketing, each one has a clear role and a natural "next step" in the conversation.
+**This use case gives newer products a reason to exist.** Workflows and Marketing Analytics are relatively new PostHog products with lower attach rates. Without a use case frame, they're standalone features looking for a buyer. Within Growth and Marketing, each one has a clear role and a natural "next step" in the conversation.
 
 **Growth and Marketing creates demand for other use cases.** Once a marketing team is in PostHog and sees the depth of product analytics, they pull in the product team (Product Intelligence). Once the growth team is running experiments, engineering gets involved (Release Engineering). This use case is a wedge into broader platform adoption.
 
@@ -188,7 +186,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 
 ### Our positioning
 
-- **Full-funnel in one platform.** No other tool connects [web traffic](/docs/web-analytics/getting-started) → [channel attribution](/docs/web-analytics/marketing-analytics) → [conversion funnels](/docs/product-analytics/funnels) → user behavior → [revenue](/docs/revenue-analytics/start-here) → [automated engagement](/docs/workflows/start-here) in a single product. GA4 stops at the website. Segment stops at the pipe. Amplitude stops at the dashboard. PostHog goes from first click to lifetime revenue *and* lets you act on it.
+- **Full-funnel in one platform.** No other tool connects [web traffic](/docs/web-analytics/getting-started) → [channel attribution](/docs/web-analytics/marketing-analytics) → [conversion funnels](/docs/product-analytics/funnels) → user behavior → [automated engagement](/docs/workflows/start-here) in a single product. GA4 stops at the website. Segment stops at the pipe. Amplitude stops at the dashboard. PostHog goes from first click to lifetime engagement *and* lets you act on it.
 - **First-party data collection that works.** PostHog's first-party tracking isn't blocked by ad blockers the way GA4 and third-party pixels are. More accurate data, better attribution, higher match rates when syncing conversions to ad platforms.
 - **Analytics + automation in the same tool.** Most analytics platforms show you the drop-off. PostHog lets you fix it with [Workflows](/docs/workflows/start-here) to re-engage users. The insight-to-action loop is closed.
 - **Marketing stack consolidation = real cost savings.** Replace GA4 + Segment + CDP + survey tool + experimentation tool with one platform.
@@ -266,7 +264,6 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 | Product Analytics + Experiments | Workflows | They know what works from experiments and want to operationalize it | "You proved the new onboarding works in an experiment. Now let's automatically nudge every new user toward it." |
 | Experiments + Feature Flags (growth-driven) | Release Engineering (for the eng team) | Engineering is already implementing flags for experiments — they can use those same flags for progressive rollouts | "Your engineering team is already using feature flags for growth experiments. Have they considered using the same infrastructure for all their releases?" |
 | Web Analytics + Product Analytics | Data Pipelines | They're analyzing conversion but not feeding it back to ad platforms or CRM | "You're measuring real conversions — are you sending those back to Meta and Google so their algorithms can optimize?" |
-| Funnels + Workflows | Revenue Analytics | They're driving and automating conversion but need to measure the revenue impact | "You've automated re-engagement. Now let's see which cohorts and channels drive the most LTV." |
 | Any Growth & Marketing products | Session Replay | They see a funnel drop-off but don't know *why* | "Your checkout funnel drops 40% at step 3. Want to watch what users are actually doing at that step?" |
 | Growth & Marketing stack established | Product Intelligence (for the product team) | Marketing/growth is in PostHog — the product team should be too | "Your growth team already uses PostHog for funnels and experiments. Has the product team seen what they can do with cohorts and retention analysis?" |
 
@@ -277,7 +274,6 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 - **Product Analytics docs:** [Funnels](/docs/product-analytics/funnels) · [Retention](/docs/product-analytics/retention) · [Lifecycle](/docs/product-analytics/lifecycle) · [Cohorts](/docs/data/cohorts)
 - **Workflows docs:** [Getting started](/docs/workflows/start-here) · [Email drip campaigns](/docs/workflows/email-drip-campaign) · [Configure channels](/docs/workflows/configure-channels)
 - **Data Pipelines docs:** [CDP overview](/docs/cdp) · [Realtime destinations](/docs/cdp/destinations) · [Batch exports](/docs/cdp/batch-exports) · [HubSpot destination](/docs/cdp/destinations/hubspot)
-- **Revenue Analytics docs:** [Getting started](/docs/revenue-analytics/start-here) · [Dashboard (MRR/ARR)](/docs/revenue-analytics/dashboard#mrr-and-arr)
 - **Surveys docs:** [Creating surveys](/docs/surveys/creating-surveys)
 - **Experiments docs:** [Experiments](/docs/experiments) · [Exposures](/docs/experiments/exposures)
 - **Feature Flags docs:** [Getting started](/docs/feature-flags/start-here)
@@ -285,14 +281,14 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 - **UTM tracking:** [UTM segmentation](/docs/data/utm-segmentation)
 - **Tutorial:** [How to track performance marketing](/tutorials/performance-marketing)
 - **Competitive battlecard:** *To be added: GA4 / Segment / CDP competitive positioning*
-- **Product team:** *To be added: Slack channels for Web Analytics, Marketing Analytics, Workflows, Pipelines, Revenue Analytics teams*
+- **Product team:** *To be added: Slack channels for Web Analytics, Marketing Analytics, Workflows, Pipelines teams*
 
 ## Appendix: Company archetype considerations
 
 | Archetype + Stage | Framing | Key Products | Buyer |
 |---|---|---|---|
 | AI Native — Early | "You need to get users to your AI product, get them activated, and understand what channels work, all without hiring a data team." Speed matters. Experiments are high-value early. | Web Analytics, Product Analytics (funnels), Experiments, Feature Flags, PostHog AI | Founder, first growth hire, GTM engineer |
-| AI Native — Scaled | "You're scaling acquisition and need to optimize spend, automate onboarding, and connect marketing data to product engagement." | Web Analytics, Marketing Analytics, Product Analytics, Experiments, Feature Flags, Pipelines, Workflows, Revenue Analytics | Head of Growth, Growth Engineering Lead |
+| AI Native — Scaled | "You're scaling acquisition and need to optimize spend, automate onboarding, and connect marketing data to product engagement." | Web Analytics, Marketing Analytics, Product Analytics, Experiments, Feature Flags, Pipelines, Workflows | Head of Growth, Growth Engineering Lead |
 | Cloud Native — Early | "You're investing in growth for the first time and want to build it right. One tool for attribution, funnels, experiments, and engagement." | Web Analytics, Product Analytics, Experiments, Feature Flags, Surveys | Founder, first PM, growth engineer |
-| Cloud Native — Scaled | "Your marketing stack is fragmented and expensive. Consolidate attribution, conversion analytics, engagement automation, and experimentation into one platform." Experiments + Feature Flags are the multithreading lever. | Web Analytics, Marketing Analytics, Product Analytics, Experiments, Feature Flags, Pipelines, Workflows, Revenue Analytics | VP Growth, Head of Growth, CRO, Marketing Ops |
-| Cloud Native — Enterprise | "Multiple teams, multiple products, multiple markets, and none of them agree on the numbers. PostHog gives you a single source of truth for acquisition, conversion, and revenue across all properties." | Full stack. Pipelines and Revenue Analytics are especially important. | VP Marketing, CMO, Head of Growth, Marketing Ops |
+| Cloud Native — Scaled | "Your marketing stack is fragmented and expensive. Consolidate attribution, conversion analytics, engagement automation, and experimentation into one platform." Experiments + Feature Flags are the multithreading lever. | Web Analytics, Marketing Analytics, Product Analytics, Experiments, Feature Flags, Pipelines, Workflows | VP Growth, Head of Growth, CRO, Marketing Ops |
+| Cloud Native — Enterprise | "Multiple teams, multiple products, multiple markets, and none of them agree on the numbers. PostHog gives you a single source of truth for acquisition, conversion, and engagement across all properties." | Full stack. Pipelines are especially important. | VP Marketing, CMO, Head of Growth, Marketing Ops |

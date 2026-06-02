@@ -44,11 +44,11 @@ In addition to the weekly sprint planning meeting on a Monday, we do a weekly te
 
 Each TAM is assigned up to 15 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 25 accounts, so staying extremely focused is important.
 
-We use the "AM Managed" Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Simon or Charles), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
+We use the "AM Managed" Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Simon or Ben), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
 
 For Product-led leads we will only add them to your book for quota purposes if you have a solid plan in place for conversion to prepaid credit or cross-product adoption. Account Owners can use the "Leads" Segment in Vitally to separately track these from the main managed book. 
 
-At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense.
+At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Ben will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense.
 
 #### TAM Territory Review
 
@@ -117,7 +117,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 
 There are [cultural](/handbook/company/culture) and [role-based expectations](/handbook/growth/sales/overview) for TAEs at PostHog. We also now have enough data to define minimum performance exceptions for TAEs relative to the annual commmission targets. 
 
-After your ramp period, you should expect to have a performance conversation with your lead and Charles if:
+After your ramp period, you should expect to have a performance conversation with your lead and Ben if:
 
 - You are under 80% of your annual quota, _and_
 - You have finished two consecutive quarters under 70% of your quarterly target
@@ -166,7 +166,7 @@ These standards are likely to change as the TAE role evolves. Any changes will b
 >
 > If you have a customer you converted from monthly to annual under the old, non-usage-based commission plan, you won't _also_ get recognized for additional usage beyond their annual run rate in the first year - no double dipping!
 
-If you believe there is a justifiable reason to vary these rules, then in the first instance talk them through with your team lead.  Simon (Charles as backup) will be the decider here.
+If you believe there is a justifiable reason to vary these rules, then in the first instance talk them through with your team lead.  Simon (Ben as backup) will be the decider here.
 
 You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.com/project/2/dashboard/498582) dashboard.
 
@@ -276,7 +276,7 @@ To add Pylon to your customer channel:
 4. In the popup that appears in the Slack channel, select Customer Channel.
 5. Add yourself as the Account Owner.
 6. Click Enable.
-7. Add Tim, Simon, Charles, and Abigail to the channel.
+7. Add Tim, Simon, Ben, and Abigail to the channel.
 
 Once enabled, you can add the :ticket: emoji to a Slack thread to create a new Ticket in Zendesk.  Customers can also do this.  Make sure that a Group and Severity are selected or the ticket won't be routed properly.
 

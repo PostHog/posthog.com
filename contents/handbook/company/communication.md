@@ -156,6 +156,15 @@ Also keep in mind that, as an open source platform, PostHog has contributors who
 
 > [Slackbot](https://slack.com/features/slackbot) is a handy AI agent that can search across the PostHog workspace in Slack to help answer your questions. If you're looking for information or trying to find a past conversation, Slackbot is a great place to start.
 
+**Keeping up with what we ship**
+
+We recommend everyone at PostHog joins these two channels to stay current on what's shipped and what's coming:
+
+- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) — what's just shipped. Owned by the [Docs & Wizard team](/teams/docs-wizard). Updates constantly as PRs merge.
+- [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) — what's shipping soon. Owned by the [Marketing team](/teams/marketing). Posts a daily digest.
+
+Both channels are powered by agentic workflows that scan merged PRs and feature flag changes and summarize them into the relevant channel. PR authors can opt in or out manually via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the `posthog/posthog` PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/docs-and-wizard/how-to-publish-changelog) for more detail.
+
 **Slack etiquette**
 
 Slack is used differently in different organizations. Here are some guidelines for how we use Slack at PostHog:

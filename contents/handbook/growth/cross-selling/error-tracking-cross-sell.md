@@ -126,7 +126,7 @@ For error tracking, these questions are helpful to start the conversation:
   - Lightweight SDK that's tightly integrated with other products.
 - How do you decide which errors to fix first?
   - Prioritizing by gut feeling or frequency, not business impact.
-  - Error Tracking + Product & Revenue Analytics can show which errors have the greatest impact.
+  - Error Tracking + Product Analytics can show which errors have the greatest impact.
 
 If you’re not sure who the persona should be, ask the product team! 
 

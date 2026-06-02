@@ -236,8 +236,9 @@ function QuestionFormMain({
 
                             {disclaimer && (
                                 <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0 text-primary">
-                                    If you need to share personal info relating to a bug or issue with your account, we
-                                    suggest filing a support ticket in the app.
+                                    [Community questions are independent of PostHog support](/handbook/support/customer-support#community).
+                                    If you have access to support through your PostHog plan, especially if you need to share personal info,
+                                    you can file a support ticket [in the app](https://app.posthog.com#panel=support) instead.
                                 </p>
                             )}
                         </Form>

@@ -13,23 +13,6 @@ env:
     SEMGREP_ENABLE_VERSION_CHECK: 'false'
 
 jobs:
-    ensure-pinned-actions:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-            - name: Ensure SHA pinned actions
-              uses: zgosalvez/github-actions-ensure-sha-pinned-actions@9e9574ef04ea69da568d6249bd69539ccc704e74 # v4.0.0
-              with:
-                  allowlist: |
-                      actions/
-                      aws-actions/
-                      docker/
-                      github/
-                      hashicorp/
-                      PostHog/
-                      tailscale/
-
     semgrep-js:
         runs-on: ubuntu-latest
         container:

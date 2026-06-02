@@ -160,7 +160,7 @@ When you connect eval results to real user behavior, you can see which AI behavi
 If you're already using [AI Observability](/llm-analytics) in PostHog, you can start creating evaluations right away. Your first 100 evaluation runs are on us. After that, you'll need to use your LLM API key. Evals count as regular LLM events (100K events included on our free tier).
 
 <p>
-	<CallToAction to="http://app.posthog.com/llm-analytics/evaluations">
+	<CallToAction to="https://app.posthog.com/ai-evals/evaluations">
 		Try evaluations in PostHog
 	</CallToAction>
 </p>
