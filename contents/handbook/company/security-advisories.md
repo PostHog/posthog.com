@@ -81,7 +81,7 @@ Currently, there are no active security advisories or CVEs. All is well.
   <h4>What we learned</h4>
   <ul>
     <li>A sandbox would have contained the exploit to the browser process rather than letting it reach the pod and its secrets. We should have closed that known gap sooner.</li>
-    <li>Our initial response and status update were slower than they should have been because the incident began on a Friday evening, when fewer responders were immediately available. We're hiring more folks in this time zone to improve our after-hours incident response coverage.</li>
+    <li>Our initial status update was slower than it should have been because the incident began on a Friday evening, when fewer responders were immediately available. We also lacked a playbook for this specific incident type.</li>
     <li>Reducing the number of static, long-lived secrets limits the impact of any future exposure. We already use short-lived, automatically-rotated credentials (such as OIDC and IRSA) wherever we can, but many third-party services still only support static API keys. We'd like to see the industry move further toward short-lived credentials.</li>
     <li>Rotating our secrets is slower and more manual than it should be. We need better documentation of where each secret originates and who is able to rotate it.</li>
     <li>We need better tooling to propagate rotated secrets into running workloads and trigger a redeploy independently of a normal release, so rotation isn't gated on the deploy process.</li>
