@@ -64,10 +64,10 @@ Currently, there are no active security advisories or CVEs. All is well.
 
   <h4>Affected users</h4>
   <ul>
-    <li>This affected our <strong>US Cloud</strong> environment only. EU Cloud was not affected.</li>
-    <li>The exposure was platform-wide in scope (credentials available to the affected workload), not limited to a specific product.</li>
     <li><strong>No customer data was affected.</strong> No customer data was accessed, viewed, or modified, and no customer accounts were compromised. This was confirmed by our investigation using AWS CloudTrail and Wiz, and by the researchers.</li>
     <li><strong>No customer action is required.</strong> We rotated the most critical credentials immediately, and are completing rotation of the remainder as a precaution.</li>
+    <li>This affected our <strong>US Cloud</strong> environment only. EU Cloud was not affected.</li>
+    <li>The exposure was platform-wide in scope (credentials available to the affected workload), not limited to a specific product.</li>
   </ul>
 
   <h4>Resolution</h4>
