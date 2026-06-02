@@ -76,7 +76,68 @@ All inline links from the Substack source must be preserved exactly as-is in the
 
 The only transformation allowed: convert absolute `https://posthog.com/...` links to relative `/...` links.
 
-## Step 3: Run /suggest-links on the new file
+## Step 3: Upload images to Cloudinary
+
+Images in Substack posts must be uploaded to Cloudinary via the posthog.com Strapi backend. Do this before running `/suggest-links`.
+
+### 3a: Get the hero image
+
+Ask the user if they have the hero image file locally. If they provide a path, note it for upload in step 3c. If not, leave the frontmatter `featuredImage` as the placeholder and skip hero upload.
+
+### 3b: Get images from Substack
+
+Fetch the Substack URL again with this prompt:
+> "For each image in the article body, tell me: what tip number, section, or paragraph it appears after, and a brief description of what the image shows. List them in order of appearance."
+
+Also run a second fetch to extract the raw image URLs:
+> "List all image src URLs from the article body in order of appearance. Include only article body images, not avatar or profile images."
+
+### 3c: Authenticate and upload
+
+Ask the user for their **PostHog community credentials** (the account used to sign in at posthog.com/community — not their PostHog app login):
+
+> Please run: `! export SQUEAK_EMAIL=you@posthog.com SQUEAK_PASSWORD=yourpassword`
+
+Once credentials are set, authenticate and upload all images with a shell script:
+
+```bash
+# Authenticate
+JWT=$(curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/auth/local" \
+  -H "Content-Type: application/json" \
+  -d "{\"identifier\":\"${SQUEAK_EMAIL}\",\"password\":\"${SQUEAK_PASSWORD}\"}" \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['jwt'])")
+
+# Upload hero (if local file provided)
+# curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/upload" \
+#   -H "Authorization: Bearer $JWT" \
+#   -F "files=@/path/to/hero.png;filename={slug}-hero.png" \
+#   | python3 -c "import sys,json; d=json.load(sys.stdin); print(d[0]['url'])"
+
+# For each body image: download from Substack S3 URL, then upload
+upload() {
+  local url="$1" name="$2" tmpfile
+  tmpfile=$(mktemp /tmp/${name}.XXXXXX.png)
+  curl -s -L "$url" -o "$tmpfile"
+  curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/upload" \
+    -H "Authorization: Bearer $JWT" \
+    -F "files=@${tmpfile};filename=${name}.png" \
+    | python3 -c "import sys,json; d=json.load(sys.stdin); print(d[0]['url'])"
+  rm -f "$tmpfile"
+}
+```
+
+Name each image descriptively: `{slug}-tip{N}-{description}` (e.g. `how-to-demo-tip4-phone-number`).
+
+The upload response returns a Cloudinary URL in the format:
+`https://res.cloudinary.com/dmukukwp6/image/upload/v.../filename.png`
+
+### 3d: Update the markdown
+
+Replace all `[PLACEHOLDER_...]` and `![PLACEHOLDER: ...](PLACEHOLDER)` entries with the real Cloudinary URLs and descriptive alt text. Use the position mapping from step 3b to insert images in the right places.
+
+**Indentation rule:** Example paragraphs and images that follow a numbered tip and illustrate it should be indented as list continuations (3 spaces for tips 1–9, 4 spaces for tips 10+). Checklists inside a tip should be wrapped in a blockquote (`>`).
+
+## Step 4: Run /suggest-links on the new file
 
 After writing the file, invoke the `/suggest-links` skill passing the path to the new newsletter file as the argument. The skill will:
 
