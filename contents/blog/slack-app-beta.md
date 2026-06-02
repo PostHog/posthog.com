@@ -7,7 +7,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/Template_cover_14_0da4d45933.jpg
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_blog_post_da4d458870.png
 featuredImageType: full
 category: Blog
 tags:
@@ -15,17 +15,19 @@ tags:
   - AI
 ---
 
-Today, we're releasing the [PostHog Slack app](/docs/slack-app/setup) into beta.
+Today, we're releasing the [PostHog Slack app](/slack-app/) into beta.
 
 We built it for those times when a colleague flags an annoying UI quirk, or a customer mentions a bug. The issues that normally end up on a backlog, untouched and ignored.
 
 With the PostHog Slack app, you **@PostHog** to "fix this" or "build that". It spins up a sandbox, makes a plan, edits files, runs checks, opens a draft PR, and answers review comments in the thread.
 
-The app uses your product data as context by default and follows your repo's rules, so it feels less like a coding tool and more like a clever teammate (it even reacts with [emojis](/docs/slack-app#emoji-cues)).
+The bot uses your product data as context and follows your repo's rules. It even reacts with [emojis](/docs/slack-app#emoji-cues) while it works, which makes it feel less like a coding tool and more like chatting with a clever teammate.
+
+Try it yourself → [setup docs](/docs/slack-app/setup) 
 
 ## @PostHog in the #papercuts channel
 
-[Paul D'Ambra](/community/profiles/30173) was the first to fall in love with @PostHog. Among other important [blitzscale](/teams/blitzscale) duties, he owns the `#papercuts` Slack channel, where anyone can post the small bugs and nits they hit in the app. He'd been fixing them with PostHog Code like a good engineer. Now he mentions @PostHog in 60% of the total threads.
+[Paul D'Ambra](/community/profiles/30173) was the first to fall in love with @PostHog. Among other important [blitzscale](/teams/blitzscale) duties, he owns the `#papercuts` Slack channel, where anyone can post the small bugs and nits they hit in the app. He'd been fixing them with PostHog Code like a good engineer. Now he mentions @PostHog in nearly every thread.
 
 ![Paul mentions @PostHog in #papercuts](https://res.cloudinary.com/dmukukwp6/image/upload/slackbot_papercuts_1_877de83ae8.png)
 
@@ -166,6 +168,12 @@ It's free to install, and free to uninstall when you realize this means you can 
 </p>
 
 ## FAQ
+
+<details>
+  <summary>Is it free to use?</summary>
+
+The agent that runs behind @PostHog mentions consumes PostHog AI credits for the LLM work it does. This includes tokens used when planning a task, editing files, reasoning about your data. For credit mechanics, the free monthly tier, billing limits, and the live pricing calculator, see [PostHog AI pricing](/docs/posthog-ai/pricing).
+</details>
 
 <details>
   <summary>Why use this over Cursor, Claude Code, or Codex?</summary>
