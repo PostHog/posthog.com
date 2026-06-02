@@ -34,9 +34,9 @@ Suddenly, all those data problems were solved, Thanos-snapped from existence. He
 
 If you’ve ever taken a databases 101 course, you’ve likely heard lectures on row-based relational databases. Good chance, the professor referred to them as simply *relational databases* or even *normal databases*. 
 
-The majority of popular solutions — MySQL, [Postgres](/blog/duckdb-vs-postgres), [SQLite](/blog/duckdb-vs-sqlite) — are all row-based. In each of these, data / objects are stored as rows, like a phone book. 
+The majority of popular solutions – MySQL, [Postgres](/blog/duckdb-vs-postgres), [SQLite](/blog/duckdb-vs-sqlite) – are all row-based. In each of these, data / objects are stored as rows, like a phone book. 
 
-In contrast, ClickHouse is a *columnar* database. ClickHouse tables in memory are inverted — data is ingested as a column, meaning you’ve a large number of columns and a sizable set of rows.
+In contrast, ClickHouse is a *columnar* database. ClickHouse tables in memory are inverted – data is ingested as a column, meaning you’ve a large number of columns and a sizable set of rows.
 
 Here's what that looks like...
 
