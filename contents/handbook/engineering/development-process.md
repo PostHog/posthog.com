@@ -247,6 +247,8 @@ The workflow also runs a smoke test (health check) automatically on PRs that tou
 
 ## Reviewing code
 
+<!-- Keep this section to process only: who reviews what (human vs agent, Stamphog). The "what to look for" checklist and review mechanics live in how-we-review.md — link to it, don't duplicate it here. -->
+
 PRs can be written by humans or by agents (like PostHog Code). Either way, every PR needs a review before merging, and a human always merges.
 
 Who should review depends on who wrote the code (see [Creating PRs](#creating-prs)):
@@ -256,18 +258,7 @@ Who should review depends on who wrote the code (see [Creating PRs](#creating-pr
 
 We encourage the use of AI review agents (Codex, Copilot, Greptile, etc.) on PRs. Their comments and suggestions don't count as an approval, but they catch things humans miss and speed up the review process.
 
-When reviewing a PR, we look at the following things:
-
--   Does the PR actually solve the issue?
--   Does the solution make sense?
--   Will the code perform with millions of events/users/actions?
--   Are there tests and do they test the right things?
--   Are there any security flaws?
--   Is the code in line with our [coding conventions](/docs/contribute/coding-conventions)?
-
-Things we do not care about during review:
-
--   Syntax. If we're arguing about syntax, that means we should install a code formatter.
+For what to look for when reviewing, see: [How we review](/handbook/engineering/how-we-review).
 
 ## Merging
 
@@ -275,11 +266,26 @@ Merge anytime. Friday afternoon? Merge.
 
 Our testing, reviewing and building process should be good enough that we're comfortable merging any time.
 
-Always request a review on your pull request (or leave unassigned for anyone to pick up when available). We avoid merging without any review unless it's an emergency fix and no one else is available (especially for posthog.com).
+Always request a review on your pull request (or leave unassigned for anyone to pick up when available). We avoid merging without any review unless it's an emergency fix and no one else is available (especially for posthog.com). During an incident, the [Force-merge a PR](#break-glass-force-merge-a-pr) Slack app is the sanctioned break-glass way to merge a PR that branch protection would otherwise block.
 
 Once you merge a pull request, it will automatically deploy to all environments. The deployment process is documented in our [charts repository](https://github.com/PostHog/charts/blob/main/DEPLOYMENT.md). Check out the `#platform-bots` Slack channel to see how your deploy is progressing. 
 
 We're managing deployments with [ArgoCD](http://go/argo) where you can also see individual resources and their status.
+
+### Break-glass: force-merge a PR
+
+Branch protection on the `posthog` repo requires a review and green CI before anyone can merge. In **exceptional cases** — almost always [during an incident](/handbook/engineering/operations/incidents#force-merging-a-fix) — the **Force-merge a PR** Slack app lets any PostHog employee merge a PR that would otherwise be blocked. It bypasses required reviews and checks through a tightly-scoped GitHub App. Take great care: this is a break-glass tool, not a shortcut around code review.
+
+**To use it:** in **#dev**, open the shortcuts menu (or type `/force-`), pick **Force-merge a PR**, and fill in the repo, the PR number or URL, and a reason.
+
+**What it enforces.** The app refuses the merge unless:
+
+- The repo is one it's configured for (today, just `posthog`).
+- The PR is open, not a draft, not already merged, on an allow-listed base branch, and carries no blocking label (e.g. `do-not-merge`).
+- The PR author is a member of the PostHog GitHub org (no fork PRs from external contributors).
+- You're a full Slack workspace member with a `@posthog.com` email.
+
+**Everything is audited.** Each force-merge posts an audit message to Slack, comments on the PR recording who triggered it and the reason, and writes a tamper-proof (object-locked) record, alongside an EventBridge event and a CloudWatch metric that alarms on unusual volume. Accountability is after the fact, so expect to justify any force-merge — and cover it in the [post-mortem](/handbook/engineering/operations/post-mortems) if it was part of an incident.
 
 ### Deploy notification bot
 

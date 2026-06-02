@@ -171,6 +171,8 @@ As a guide, here's what we'd consider reasonable spend:
 - Chair - up to $500
 - Keyboard - up to $250
 
+If you want something more expensive, you can pay personally and submit a reimbursement request on Brex for up to the amount above.
+
 ### Software
 We are _strongly opposed_ to introducing new software that is designed for collaboration by default. There needs to be a very significant upside to introducing a new piece of software to outweigh its cost.
 
