@@ -874,15 +874,11 @@
         { "source": "/roadmap/changelog", "destination": "/changelog" },
         {
             "source": "/blog/posthog-insforge",
-            "destination": "/docs/product-analytics/how-to-connect-posthog-and-insforge"
+            "destination": "/tutorials/how-to-connect-posthog-and-insforge"
         },
         {
-            "source": "/tutorials/how-to-connect-posthog-and-insforge",
-            "destination": "/docs/product-analytics/how-to-connect-posthog-and-insforge"
-        },
-        {
-            "source": "/docs/product-analytics/how-to-connect-posthog-and-insforge.md",
-            "destination": "/docs/product-analytics/how-to-connect-posthog-and-insforge"
+            "source": "/docs/product-analytics/how-to-connect-posthog-and-insforge",
+            "destination": "/tutorials/how-to-connect-posthog-and-insforge"
         },
         { "source": "/blog/posthog-changelog", "destination": "/changelog" },
         { "source": "/roadmap/changelog/2023", "destination": "/changelog" },

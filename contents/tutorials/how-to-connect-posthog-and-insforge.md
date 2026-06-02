@@ -1,12 +1,9 @@
 ---
 title: How to connect PostHog and InsForge
-sidebar: Docs
-showTitle: true
 date: 2026-05-29
 author:
     - sara-miteva
 tags:
-    - integrations
     - product analytics
 ---
 
