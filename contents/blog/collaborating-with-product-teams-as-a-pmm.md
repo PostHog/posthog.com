@@ -21,13 +21,15 @@ One of the first things you learn when joining PostHog is that [collaboration su
 
 ![collaboration sucks](https://res.cloudinary.com/dmukukwp6/image/upload/stop_collaborating_7550066220.webp)
 
-Well, the relationship between Product Managers (PMs) and PMMs is one of those necessary situations when you *need to* collaborate to successfully launch and grow your products. Knowing that collaboration with PMs is one of the biggest pains for a PMM, I wanted to share some collaboration best practices from our experience so far.
+Well, the relationship between Product Managers (PMs) and PMMs is one of those necessary situations when you *need to* collaborate to successfully launch and grow your products. I wanted to share some ways I've learned to do this at PostHog.
 
 ## Initiate the first contact
 
-As a PMM joining a product team that, in most cases, has already been established, you have the difficult task of making yourself visible and proving you came here for a reason. Most engineers, and even PMs, don't get to work with marketing people often, so they don't even know what your job is.
+When I joined PostHog the team I was supporting was already established, but most of them had never worked with a product marketer before. Many didn't know what one does.
 
-That's why I believe you, the PMM, should initiate the first contact. Book a call with your PM (even if you're going to continue to work with them async, the first intro should be a call), tell them what your job is, and ask for more context around the product. Here are some things worth covering in this first meeting:
+I decided I had to make myself visible and prove I could be valuable. So, I made first contact by having a call with the PM, Abe, rather than waiting for them to come to me. 
+
+Here's what we talked about:
 
 - What is the current revenue of the product, and what is the revenue goal (for the quarter, year, etc.)?
 - What is a bigger gap - activation or retention?
