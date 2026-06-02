@@ -142,4 +142,3 @@ To add a new event property:
 2. **Add the event or property to the Customer.io pipeline.** Any action or property we send to Customer.io must be added to the [Customer.io destination in PostHog](https://us.posthog.com/project/2/functions/0191b762-f77d-0000-1956-121a0c25c878). If you try to build a segment on something that isn't in the pipeline, the segment won't populate.
 3. **Create the segment in Customer.io.** A newly added property won't appear in Customer.io's autocomplete when you start typing it. Instead, copy and paste the exact property name, save, and the segment will populate.
 
-> If a segment isn't building as expected, the most common cause is that the underlying event or property hasn't been added to the pipeline yet.
