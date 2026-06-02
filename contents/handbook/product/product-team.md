@@ -41,7 +41,6 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   <SmallTeam slug="posthog-ai" />
 -   <SmallTeam slug="posthog-code" />
--   <SmallTeam slug="signals" />
 
 </fieldset>
 
