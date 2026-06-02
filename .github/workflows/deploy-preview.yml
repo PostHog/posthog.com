@@ -9,12 +9,12 @@ concurrency:
     cancel-in-progress: true
 
 env:
-    NODE_OPTIONS: '--max_old_space_size=8192'
+    NODE_OPTIONS: '--max_old_space_size=12288'
 
 jobs:
     build-and-deploy:
         name: Build & deploy preview
-        runs-on: ubuntu-latest
+        runs-on: depot-ubuntu-latest-8
         timeout-minutes: 45
         if: ${{ !github.event.pull_request.head.repo.fork }}
         permissions:

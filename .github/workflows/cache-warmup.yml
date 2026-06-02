@@ -10,12 +10,12 @@ concurrency:
     cancel-in-progress: true
 
 env:
-    NODE_OPTIONS: '--max_old_space_size=8192'
+    NODE_OPTIONS: '--max_old_space_size=12288'
 
 jobs:
     warm-cache:
         name: Build & cache
-        runs-on: ubuntu-latest
+        runs-on: depot-ubuntu-latest-8
         timeout-minutes: 45
         permissions:
             contents: read
