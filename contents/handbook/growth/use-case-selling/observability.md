@@ -169,7 +169,7 @@ With tracing now in alpha and APM still to come, the path extends: Logging → T
 
 | Pain Point | Impact | Workaround / Solution |
 |---|---|---|
-| Tracing is alpha; no full APM yet | Can't replace Datadog for teams that need full backend observability | Be honest about the roadmap. Distributed tracing is in alpha — usable today but maturing. Position PostHog as complementary for now: errors + replay + analytics + alpha tracing in PostHog, APM in their existing tool. The consolidation play gets stronger as we ship more. |
+| Tracing is alpha; no full APM yet | Can't replace Datadog for teams that need full backend observability | Be honest about the roadmap. Distributed tracing is in alpha, usable today but maturing. Position PostHog as complementary for now: errors + replay + analytics + alpha tracing in PostHog, APM in their existing tool. The consolidation play gets stronger as we ship more. |
 | Logging is beta | Teams expecting production-grade centralized logging may find gaps | Set expectations on maturity. For teams with existing logging (ELK, Papertrail), PostHog logging complements rather than replaces initially. |
 | Error Tracking language/framework support may lag Sentry | Sentry supports a very wide range of languages and frameworks | Check [Error Tracking docs](/docs/error-tracking) for current support. For unsupported frameworks, generic exception capture via the API may work. |
 | No built-in on-call/incident management | Teams wanting PagerDuty-style incident workflows won't find it here | PostHog alerts can trigger webhooks to PagerDuty, Slack, etc. Error Tracking is about detection and context, not incident management workflows. |
