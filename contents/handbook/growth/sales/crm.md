@@ -161,10 +161,13 @@ For support or billing questions submitted via the sales channel, disqualify wit
 
 Billing and finance questions look similar but go to different teams. Route by what the customer is actually asking for:
 
-- **Invoices → billing team** Questions about what an invoice says or what information goes on it — line items, amounts, tax, dates, the entity we bill under, or adding a PO number to an invoice. The <SmallTeam slug="billing" /> owns the invoice itself.
+- **Invoices → billing team** Questions about what an invoice says or what information goes on it — line items, amounts, dates, the entity we bill under, or adding a PO number to an invoice. The <SmallTeam slug="billing" /> owns the invoice itself.
+
 - **Collections → finance team** Anything about getting paid or where an invoice needs to go — requests to upload an invoice to a customer's payment portal (e.g. Zip, Coupa, Ariba), supplier-onboarding or vendor-setup forms, requests for extra documentation or information from us, and chasing overdue payments.
 
 A quick test: if the question can be answered by reading or correcting the invoice, it's **billing**. If it asks us to send the invoice somewhere specific, complete a form, or provide extra information, it's **finance**.
+
+Tax is owned by finance, who handle tax determination and compliance via Anrok. Billing only gets involved when a specific tax amount has to appear as an explicit line item on an invoice. For anything about tax rates, treatment, or whether tax applies, ask finance.
 
 This comes up most with managed customers, where POs and payment notices sit at the intersection of sales, billing, and finance. These often arrive via the sales channel (the contact form or sales@) even though they belong to billing or finance — disqualify and re-route them using the split above rather than working them as leads.
 
