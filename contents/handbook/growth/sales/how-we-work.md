@@ -211,6 +211,8 @@ In this example, this customer increases your attainment towards your Q2 quota b
   - Getting people in who fit our ICP, ie. are easier for us to sell to
 - We aim for a 70/30 split between base/commission when calculating OTE by default.
 
+In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+
 > This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
 
 **Variables**
