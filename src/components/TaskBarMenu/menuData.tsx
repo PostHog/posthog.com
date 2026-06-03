@@ -1023,6 +1023,12 @@ export const SparksJoyItems = {
             iconName: 'games' as AppIconName,
             customIcon: null,
         },
+        {
+            label: 'HogPatch: The Game',
+            link: '/sparks-joy/hogpatch',
+            iconName: 'games' as AppIconName,
+            customIcon: null,
+        },
     ],
     notGames: [
         {

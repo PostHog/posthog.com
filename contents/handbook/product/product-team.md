@@ -61,7 +61,6 @@ Here is a overview that shows which of our PMs currently works with which team:
 <legend><TeamMember name="Abe Basu" photo /></legend>
 
 -   <SmallTeam slug="batch-exports" />
--   <SmallTeam slug="llm-analytics" />
 -   <SmallTeam slug="logs" />
 -   <SmallTeam slug="workflows" />
 
@@ -79,12 +78,20 @@ Here is a overview that shows which of our PMs currently works with which team:
 </fieldset>
 
 <fieldset>
+<legend><TeamMember name="Marco Gancitano" photo /></legend>
+
+-   <SmallTeam slug="ai-observability" />
+-   <SmallTeam slug="ai-gateway" />
+
+
+</fieldset>
+
+<fieldset>
 <legend>Product teams with no PM currently</legend>
 
 -   <SmallTeam slug="conversations" />
 -   <SmallTeam slug="experiments" />
 -   <SmallTeam slug="feature-flags" />
--   <SmallTeam slug="flags-platform" />
 
 </fieldset>
 

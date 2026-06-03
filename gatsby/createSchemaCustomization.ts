@@ -78,6 +78,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       badge: String
       seo: FrontmatterSEO
       hideFromIndex: Boolean
+      lang: String
+      translationOf: String
       price: String
       platformLogo: String
       platformIconName: String

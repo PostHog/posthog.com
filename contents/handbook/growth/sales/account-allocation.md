@@ -56,7 +56,7 @@ If an account is struggling on these dimensions, that's a signal you need to inv
 
 ## Doing the allocation
 
-It's Simon's job, with input from Charles and Team Leads, to review the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3), as well as accounts which need to be handed over from TAE and TAMs. We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in. Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer. Once this has been decided the New Owner trait is populated with one of the following:
+It's Simon's job, with input from Ben and Team Leads, to review the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3), as well as accounts which need to be handed over from TAE and TAMs. We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in. Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer. Once this has been decided the New Owner trait is populated with one of the following:
 
 - US TAM
 - US CSM
@@ -67,7 +67,7 @@ And then it is down to the Team Leads to figure out which team member is taking 
 
 ### Quarterly allocation process
 
-At the start of each quarter, Simon (with input from Charles and Team Leads) reviews:
+At the start of each quarter, Simon (with input from Ben and Team Leads) reviews:
 
 1. **[$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3)** – accounts that need to be assigned
 2. **Accounts flagged for handover** from TAEs, TAMs, and CSMs
@@ -88,13 +88,13 @@ If you're assigned an account with a previous owner, work with them on a proper 
 
 ## Top 40 account management
 
-Our highest-spend customers (~Top 40 by ARR) get special consideration for ownership decisions. Simon and Charles regularly review these accounts to:
+Our highest-spend customers (~Top 40 by ARR) get special consideration for ownership decisions. Simon and Ben regularly review these accounts to:
 
 - **Minimize ownership changes** – frequent handoffs create whiplash for customers and damage relationships
 - **Ensure continuity** – the bar for changing ownership on a Top 40 account is higher than for the rest of the book
 - **Make judgment calls** – sometimes a TAM should keep a "fully expanded" account if the relationship is strong and there's long-term strategic value
 
-For Top 40 accounts, ownership changes (TAM→CSM or CSM→TAM) are decided directly by Simon and Charles, not through the standard Team Lead allocation process.
+For Top 40 accounts, ownership changes (TAM→CSM or CSM→TAM) are decided directly by Simon and Ben, not through the standard Team Lead allocation process.
 
 ---
 

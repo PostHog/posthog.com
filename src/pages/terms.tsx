@@ -945,7 +945,7 @@ function Terms() {
                             PostHog will use commercially reasonable efforts to make the Software available with all
                             material features and services operating and available for use, in each calendar month with
                             an uptime percentage of 99.95% as displayed on status.posthog.com only to those customers
-                            who have purchased the Enterprise add-on or where it has been agreed as a special term in
+                            who have purchased the Enterprise package or where it has been agreed as a special term in
                             your annual contract. Uptime SLAs are not otherwise available to customers as standard. If
                             the uptime percentage for the month is less than 99.95%, we will provide you with credit
                             during the month as below: - 99.90% to 99.94% inclusive - 5% credit - 99.00% to 99.89%

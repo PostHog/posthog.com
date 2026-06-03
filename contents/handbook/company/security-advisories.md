@@ -49,6 +49,59 @@ Currently, there are no active security advisories or CVEs. All is well.
 ## Past advisories
 
 <details>
+  <summary>June 2, 2026 / PSA-2026-00001</summary>
+
+  <p><strong>Date:</strong> June 2, 2026<br />
+  <strong>Advisory:</strong> PSA-2026-00001<br />
+  <strong>Severity:</strong> Critical<br />
+  <strong>Status:</strong> Resolved</p>
+
+  <p><strong>No customer data was accessed and no action is required.</strong> Our investigation using AWS CloudTrail and Wiz, together with the researchers' confirmation, found that no customer data was viewed, accessed, or modified, and no customer accounts were affected. The incident exposed our internal production credentials, not customer data, to security researchers and we have rotated those credentials as a precaution.</p>
+
+  <h4>Description</h4>
+  <p>A security researcher exploited a known vulnerability (<a href="https://www.cve.org/CVERecord?id=CVE-2026-7899">CVE-2026-7899</a>) in an outdated version of Chromium that we ran via Playwright to generate heatmaps. This Chromium instance ran without a sandbox, which was a legacy configuration we had planned to change but had not yet enabled. The combination of the outdated version and the missing sandbox allowed the researcher to gain a shell on the Kubernetes pod and read credentials stored in the pod's environment variables.</p>
+  <p>We were alerted when one of the researchers stored the extracted secrets in a private GitHub gist, triggering GitHub's secret-scanning notifications to the affected providers, including AWS. Based on the researchers' confirmation and our own investigation via AWS CloudTrail and Wiz, no customer data was accessed and the vulnerability was not exploited by anyone other than the researchers. The researchers confirmed that their last access to our environment occurred before we began rotating credentials.</p>
+
+  <h4>Affected users</h4>
+  <ul>
+    <li><strong>No customer data was affected.</strong> No customer data was accessed, viewed, or modified, and no customer accounts were compromised. This was confirmed by our investigation using AWS CloudTrail and Wiz, and by the researchers.</li>
+    <li><strong>No customer action is required.</strong> We rotated the most critical credentials immediately, and are completing rotation of the remainder as a precaution.</li>
+    <li>This affected our <strong>US Cloud</strong> environment only. EU Cloud was not affected.</li>
+    <li>The exposure was platform-wide in scope (credentials available to the affected workload), not limited to a specific product.</li>
+  </ul>
+
+  <h4>Resolution</h4>
+  <ul>
+    <li>We immediately began rotating production credentials, starting with the most critical (including AWS).</li>
+    <li>We updated Playwright and Chromium to the latest version.</li>
+    <li>We have begun moving heatmap generation and other uses of Chromium to an external service so that we no longer run Chromium in our own containers.</li>
+    <li>We are exploring additional container hardening, including removing the shell from these containers entirely.</li>
+  </ul>
+
+  <h4>What we learned</h4>
+  <ul>
+    <li>A sandbox would have contained the exploit to the browser process rather than letting it reach the pod and its secrets. We should have closed that known gap sooner.</li>
+    <li>Our initial status update was slower than it should have been because the incident began on a Friday evening, when fewer responders were immediately available. We also lacked a playbook for this specific incident type.</li>
+    <li>Reducing the number of static, long-lived secrets limits the impact of any future exposure. We already use short-lived, automatically-rotated credentials (such as OIDC and IRSA) wherever we can, but many third-party services still only support static API keys. We'd like to see the industry move further toward short-lived credentials.</li>
+    <li>Rotating our secrets is slower and more manual than it should be. We need better documentation of where each secret originates and who is able to rotate it.</li>
+    <li>We need better tooling to propagate rotated secrets into running workloads and trigger a redeploy independently of a normal release, so rotation isn't gated on the deploy process.</li>
+    <li>Automated secret-scanning notifications from our cloud providers were an effective backstop that alerted us quickly.</li>
+  </ul>
+
+  <h4>Timeline</h4>
+  <ul>
+    <li><strong>Secret-scanning alert received:</strong> May 29, 2026, 23:55 UTC</li>
+    <li><strong>Incident declared:</strong> May 30, 2026, 00:08 UTC</li>
+    <li><strong>Outreach to researcher:</strong> May 30, 2026, 00:16 UTC</li>
+    <li><strong>Began rotating credentials:</strong> May 30, 2026, 00:24 UTC</li>
+    <li><strong>Initial status page update published:</strong> May 30, 2026, 01:04 UTC</li>
+    <li><strong>Researcher confirmed exploit path:</strong> May 30, 2026, 01:37 UTC</li>
+    <li><strong>Initial fix deployed (Chromium/Playwright update):</strong> May 30, 2026, 02:40 UTC</li>
+  </ul>
+
+</details>
+
+<details>
   <summary>August 15, 2025 / PSA-2025-00001</summary>
 
   <p><strong>Date:</strong> August 15, 2025<br />

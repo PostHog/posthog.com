@@ -223,10 +223,7 @@ export default function TeamBenPage(): JSX.Element {
 
     const teamLength = bens.length
     const pineapplePercentage =
-        teamLength > 0 &&
-        Math.round(
-            (bens.filter((p: any) => p.pineappleOnPizza).length / teamLength) * 100
-        )
+        teamLength > 0 && Math.round((bens.filter((p: any) => p.pineappleOnPizza).length / teamLength) * 100)
 
     const heightToHedgehogs = 0
     const hedgehogPercentage = 0

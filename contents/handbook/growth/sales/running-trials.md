@@ -62,7 +62,7 @@ Every trial _should_ include:
 
 ### Days 4-7: Initial validation
 - Additional insights created (trends, funnels, paths)
-- Complimentary products introduced (session replay, error tracking, LLM analytics, data warehouse etc.)
+- Complimentary products introduced (session replay, error tracking, AI Observability, data warehouse etc.)
 - Start to gather initial feedback from test group
 - Start to validate success criteria
 
