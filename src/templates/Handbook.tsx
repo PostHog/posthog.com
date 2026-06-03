@@ -20,6 +20,7 @@ import TeamMember from 'components/TeamMember'
 import { OverflowXSection } from 'components/OverflowXSection'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
+import SourceConfiguration from 'components/Product/Sources/Configuration'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import { IconWarning, IconCheck, IconX } from '@posthog/icons'
@@ -35,6 +36,9 @@ import SidebarSection from 'components/PostLayout/SidebarSection'
 import Contributor from 'components/Docs/Contributors'
 import { useProductInterestFromPathname } from 'hooks/useProductInterest'
 import slugify from 'slugify'
+import usePostHog from 'hooks/usePostHog'
+import { RenderInClient } from 'components/RenderInClient'
+import NotFoundPage from 'components/NotFoundPage'
 
 const DestinationsLibraryCallout = () => {
     return (
@@ -285,9 +289,27 @@ export const TemplateParametersFactory: (params: TemplateParametersProps) => Rea
     return TemplateParameters
 }
 
+type SourceParametersProps = {
+    sourceFields:
+        | {
+              name?: string | null
+              label?: string | null
+              type?: string | null
+              required?: boolean | null
+              caption?: string | null
+              placeholder?: string | null
+          }[]
+        | null
+}
+
+export const SourceParametersFactory: (params: SourceParametersProps) => React.FC = ({ sourceFields }) => {
+    const SourceParameters = () => <SourceConfiguration sourceFields={sourceFields} />
+    return SourceParameters
+}
+
 const A = (props) => <Link {...props} />
 
-export default function Handbook({ data: { post }, pageContext: { breadcrumbBase, tableOfContents } }) {
+export default function Handbook({ data: { post, postHogSource }, pageContext: { breadcrumbBase, tableOfContents } }) {
     const {
         body,
         frontmatter: {
@@ -300,10 +322,15 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
             hideRightSidebar,
             contentMaxWidthClass,
             showByline,
+            featureFlag,
+            noindex,
         },
         fields: { slug, appConfig, templateConfigs, commits },
         excerpt,
     } = post
+
+    const sourceFields = postHogSource?.sourceFields ?? null
+    const posthog = usePostHog()
 
     // Track product interest for cross-subdomain cookie
     useProductInterestFromPathname(slug)
@@ -325,6 +352,7 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
         TestimonialsTable,
         AppParameters: AppParametersFactory({ config: appConfig }),
         TemplateParameters: TemplateParametersFactory(templateConfigs),
+        SourceParameters: SourceParametersFactory({ sourceFields }),
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
@@ -347,6 +375,39 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
         ...shortcodes,
     }
 
+    const readerView = (
+        <ReaderView
+            body={{
+                type: 'mdx',
+                content: body,
+                ...(showByline
+                    ? {
+                          contributors,
+                          date,
+                          tags: tags?.map((tag) => ({
+                              label: tag,
+                              url:
+                                  tag === 'Post mortems'
+                                      ? '/handbook/company/post-mortems'
+                                      : `/blog/tags/${slugify(tag, { lower: true })}`,
+                          })),
+                      }
+                    : null),
+            }}
+            title={title}
+            tableOfContents={frontmatterTableOfContents || tableOfContents}
+            mdxComponents={components}
+            commits={commits}
+            filePath={post.parent?.relativePath}
+            homeURL={breadcrumbBase.url}
+            description={seo?.metaDescription || excerpt}
+            showSurvey
+            hideRightSidebar={hideRightSidebar}
+            contentMaxWidthClass={contentMaxWidthClass}
+            sourceInstanceName={post.parent?.sourceInstanceName}
+        />
+    )
+
     return (
         <>
             <SEO
@@ -355,43 +416,36 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
                 article
                 image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
                 imageType="absolute"
+                // Flag-gated pages are always noindexed: the content ships in the static
+                // HTML, so we at least keep it out of search engines while in beta.
+                noindex={!!noindex || !!featureFlag}
             />
-            <ReaderView
-                body={{
-                    type: 'mdx',
-                    content: body,
-                    ...(showByline
-                        ? {
-                              contributors,
-                              date,
-                              tags: tags?.map((tag) => ({
-                                  label: tag,
-                                  url:
-                                      tag === 'Post mortems'
-                                          ? '/handbook/company/post-mortems'
-                                          : `/blog/tags/${slugify(tag, { lower: true })}`,
-                              })),
-                          }
-                        : null),
-                }}
-                title={title}
-                tableOfContents={frontmatterTableOfContents || tableOfContents}
-                mdxComponents={components}
-                commits={commits}
-                filePath={post.parent?.relativePath}
-                homeURL={breadcrumbBase.url}
-                description={seo?.metaDescription || excerpt}
-                showSurvey
-                hideRightSidebar={hideRightSidebar}
-                contentMaxWidthClass={contentMaxWidthClass}
-                sourceInstanceName={post.parent?.sourceInstanceName}
-            />
+            {featureFlag ? (
+                <RenderInClient
+                    // Render nothing until flags resolve, then show the page only if the
+                    // viewer has the gating flag enabled (otherwise the standard 404).
+                    placeholder={null}
+                    render={() => (posthog?.isFeatureEnabled(featureFlag) ? readerView : <NotFoundPage />)}
+                />
+            ) : (
+                readerView
+            )}
         </>
     )
 }
 
 export const query = graphql`
     query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!) {
+        postHogSource(mdx: { id: { eq: $id } }) {
+            sourceFields {
+                name
+                label
+                type
+                required
+                placeholder
+                caption
+            }
+        }
         glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
             nodes {
                 fields {
@@ -470,6 +524,8 @@ export const query = graphql`
             }
             frontmatter {
                 showByline
+                featureFlag
+                noindex
                 tableOfContents {
                     depth
                     url
@@ -509,7 +565,7 @@ export const query = graphql`
                     featureFlags
                     groupAnalytics
                     surveys
-                    llmAnalytics
+                    aiObservability
                     errorTracking
                 }
                 availability {

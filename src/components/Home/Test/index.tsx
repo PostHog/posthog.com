@@ -215,7 +215,7 @@ const CompanyStageTabs = () => {
                 { handle: 'data_warehouse', text: 'for centralizing data' },
                 { handle: 'error_tracking', text: 'for catching bugs fast' },
                 { handle: 'cdp', text: 'for syncing data everywhere' },
-                { handle: 'llm_analytics', text: 'for monitoring AI features' },
+                { handle: 'ai_observability', text: 'for monitoring AI features' },
             ],
         },
         {

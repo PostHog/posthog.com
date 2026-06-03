@@ -1,10 +1,10 @@
 ---
-title: Run SQL and manage views with MCP
+title: Run SQL, manage views, and sync sources with MCP
 ---
 
-The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent run [HogQL](/docs/hogql) queries, manage [Data Warehouse](/docs/data-warehouse) views, and explore your schema directly from your code editor. Query events, create and materialize views, and work with warehouse tables – without switching to the PostHog app.
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent run [HogQL](/docs/hogql) queries, manage [Data Warehouse](/docs/data-warehouse) views, sync import sources, and explore your schema directly from your code editor. Query events, create and materialize views, configure Postgres/Stripe/HubSpot imports, and work with warehouse tables – without switching to the PostHog app.
 
-This works in any MCP client – Cursor, Windsurf, Claude Code, VS Code, and others.
+This works in any MCP client – Cursor, Codex, Claude Code, Windsurf, VS Code, and others.
 
 ## How it works
 
@@ -15,6 +15,7 @@ With MCP, your coding agent can:
 - **Generate queries from questions** – "Write a HogQL query to find the top users by event count" to get a query you can refine
 - **Query across sources** – Join PostHog events with Stripe, HubSpot, or any linked warehouse table
 - **Manage views** – Create, update, materialize, and delete saved views in your Data Warehouse programmatically
+- **Manage import sources** – Create, configure, and sync data warehouse sources like Postgres, Stripe, and HubSpot
 
 ## SQL tools
 
@@ -43,6 +44,35 @@ The MCP server also provides tools for managing [Data Warehouse views](/docs/dat
 | `view-run`           | Trigger a manual refresh of a materialized view.                                                           |
 | `view-run-history`   | Get the last 5 materialization run statuses for a view.                                                    |
 
+## Source management tools
+
+These tools manage [Data Warehouse](/docs/data-warehouse) import sources – external databases and services that sync data into PostHog:
+
+| Tool                                    | Description                                                                                                                      |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `external-data-sources-list`            | List all configured import sources in the project with connection status and sync details.                                       |
+| `external-data-sources-retrieve`        | Get a single source by ID with full details including all table schemas.                                                         |
+| `external-data-sources-create`          | Create a new source connection. Use `external-data-sources-wizard` first to discover available source types and required fields. |
+| `external-data-sources-partial-update`  | Update a source's prefix, description, or connection credentials.                                                                |
+| `external-data-sources-destroy`         | Delete a source and all its synced data. This can't be undone.                                                                   |
+| `external-data-sources-reload`          | Trigger a sync for all enabled tables in a source.                                                                               |
+| `external-data-sources-refresh-schemas` | Fetch the latest table list from the remote database and add any new tables.                                                     |
+| `external-data-sources-wizard`          | Get configuration metadata for all supported source types (required fields, OAuth flows, etc.).                                  |
+
+## Schema management tools
+
+These tools manage individual table schemas within a data warehouse source:
+
+| Tool                                   | Description                                                                          |
+| -------------------------------------- | ------------------------------------------------------------------------------------ |
+| `external-data-schemas-list`           | List all table schemas across all sources with sync status and configuration.        |
+| `external-data-schemas-retrieve`       | Get a single table schema by ID with full sync details.                              |
+| `external-data-schemas-partial-update` | Update a table's sync type, frequency, incremental field, or enable/disable syncing. |
+| `external-data-schemas-reload`         | Trigger a sync for a single table using its configured sync method.                  |
+| `external-data-schemas-resync`         | Discard all synced data and re-import a table from scratch.                          |
+| `external-data-schemas-cancel`         | Cancel a currently running sync job for a table.                                     |
+| `external-data-schemas-delete-data`    | Delete synced table data from PostHog but keep the schema entry for re-syncing.      |
+
 ## Example prompts
 
 Try these with your MCP-enabled agent:
@@ -67,6 +97,14 @@ For view management:
 - `Materialize my 'revenue_summary' view for faster queries.`
 - `Trigger a refresh of my 'user_metrics' materialized view.`
 - `Show me the run history for my 'sales_data' view.`
+
+For source management:
+
+- `List all my data warehouse sources.`
+- `What tables are available in my Stripe source?`
+- `Trigger a sync for my Postgres source.`
+- `Show me the sync status for all my import schemas.`
+- `Cancel the running sync on the hubspot_contacts table.`
 
 ## Install the MCP server
 

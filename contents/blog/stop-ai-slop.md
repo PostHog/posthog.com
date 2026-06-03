@@ -13,7 +13,7 @@ featuredImageType: full
 category: PostHog news
 tags:
   - Product updates
-  - LLM analytics
+  - AI Observability
 ---
 
 Every time your AI product generates text, code, or images, it's being judged.
@@ -28,7 +28,7 @@ If you’re shipping anything LLM-powered in production, you need a simple way t
 That's what evaluations are for.
 
 ## Your judge, jury, and execution environment
-PostHog [evaluations](/docs/llm-analytics/evaluations) use LLM-as-a-judge to automatically score generative AI outputs against criteria like relevance, helpfulness, or toxicity. 
+PostHog [evaluations](/docs/ai-evals) use LLM-as-a-judge to automatically score generative AI outputs against criteria like relevance, helpfulness, or toxicity. 
 
 **How it works:**
 - Write a short evaluation prompt 
@@ -139,7 +139,7 @@ When you connect eval results to real user behavior, you can see which AI behavi
 
 **The AI product improvement loop:**
 
-**1. [LLM Analytics](/llm-analytics)** shows what your AI is doing
+**1. [AI Observability](/llm-analytics)** shows what your AI is doing
 - See inputs, outputs, latency, tokens, costs, errors
 - Summarize LLM traces and events for quick debugging 
 - Run evals to batch test for issues and opportunities 
@@ -157,10 +157,10 @@ When you connect eval results to real user behavior, you can see which AI behavi
 </div>
 
 ## Try it now
-If you're already using [LLM analytics](/llm-analytics) in PostHog, you can start creating evaluations right away. Your first 100 evaluation runs are on us. After that, you'll need to use your LLM API key. Evals count as regular LLM events (100K events included on our free tier).
+If you're already using [AI Observability](/llm-analytics) in PostHog, you can start creating evaluations right away. Your first 100 evaluation runs are on us. After that, you'll need to use your LLM API key. Evals count as regular LLM events (100K events included on our free tier).
 
 <p>
-	<CallToAction to="http://app.posthog.com/llm-analytics/evaluations">
+	<CallToAction to="https://app.posthog.com/ai-evals/evaluations">
 		Try evaluations in PostHog
 	</CallToAction>
 </p>

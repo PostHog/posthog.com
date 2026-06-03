@@ -18,7 +18,7 @@ jobs:
         steps:
             - name: Check for Inkeep interactions
               id: check_inkeep
-              uses: actions/github-script@v7
+              uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
               with:
                   script: |
                       const prNumber = context.payload.pull_request.number;
@@ -55,7 +55,7 @@ jobs:
 
             - name: Post feedback request
               if: steps.check_inkeep.outputs.result == 'true'
-              uses: actions/github-script@v7
+              uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
               with:
                   script: |
                       const prNumber = context.payload.pull_request.number;

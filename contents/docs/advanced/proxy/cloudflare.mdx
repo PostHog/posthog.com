@@ -10,6 +10,12 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 <ProxyCallout />
 
+<CalloutBox icon="IconInfo" title="Data transfer costs" type="fyi">
+
+Cloudflare Workers has no egress fees and includes a generous free tier (100,000 requests/day), which makes it one of the cheaper self-hosted options for proxying PostHog. Every proxied event, session recording chunk, feature flag poll, and SDK asset request counts toward your [Workers request quota](https://developers.cloudflare.com/workers/platform/pricing/), so monitor usage if you expect to exceed the free tier on high-traffic sites.
+
+</CalloutBox>
+
 This guide shows you how to use [Cloudflare](https://www.cloudflare.com/) as a reverse proxy for PostHog.
 
 ## Prerequisites
