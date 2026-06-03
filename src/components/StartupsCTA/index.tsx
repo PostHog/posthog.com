@@ -15,9 +15,9 @@ export default function StartupsCTA(): JSX.Element {
             <p className="font-semibold mb-1 opacity-75">The PostHog startup program</p>
             <h3 className="text-2xl mt-0 mb-4">
                 Building a startup? Get <span className="text-red dark:text-yellow">$50,000 in credits</span> to build a
-                better product
+                better product.
             </h3>
-            <ul className="p-0 mb-6 grid md:grid-cols-2 gap-2">
+            <ul className="p-0 mb-6 grid @3xl:grid-cols-2 gap-2">
                 <Benefit>$50,000 in PostHog credits for 12 months</Benefit>
                 <Benefit>$1,500 of exclusive PostHog merch</Benefit>
                 <Benefit>Partner perks worth $12,000+</Benefit>
@@ -26,7 +26,7 @@ export default function StartupsCTA(): JSX.Element {
                     Used and recommended by <YC className="w-[100px]" />
                 </li>
             </ul>
-            <CallToAction to="/startups" type="primary" size="sm">
+            <CallToAction to="/startups" type="primary" size="sm" state={{ newWindow: true }}>
                 Apply to PostHog for Startups
             </CallToAction>
         </div>
