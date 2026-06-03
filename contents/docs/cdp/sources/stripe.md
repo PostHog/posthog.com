@@ -35,7 +35,7 @@ If you only take one thing from this page: connect with a restricted API key (wi
 | Resource Type | Required Permissions                                                                                                                                     |
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Core          | **Read** on Balance transaction sources, Charges and refunds, Customers, Disputes, Payment methods, Payouts, Products                                    |
-| Billing       | **Read** on Credit notes, Invoices, Prices, Subscriptions                                                                                                |
+| Billing       | **Read** on Coupons, Credit notes, Invoices, Prices, Subscriptions                                                                                       |
 | Connect       | Click **Read** in the **Connect** header                                                                                                                 |
 | Webhooks      | **Write** on Webhooks (so PostHog can create the real-time sync webhook for you – see [Setting up webhooks](#setting-up-webhooks-for-real-time-syncing)) |
 
@@ -117,10 +117,12 @@ If you'd rather scope the webhook down to just the resources you're syncing, sel
 | Account                    | `account.*`               |
 | BalanceTransaction         | `transfer.*`              |
 | Charge                     | `charge.*`                |
+| Coupon                     | `coupon.*`                |
 | CreditNote                 | `credit_note.*`           |
 | Customer                   | `customer.*`              |
 | CustomerBalanceTransaction | `billing.*`               |
 | CustomerPaymentMethod      | `payment_method.*`        |
+| Discount                   | `customer.discount.*`     |
 | Dispute                    | `dispute.*`               |
 | Invoice                    | `invoice.*`               |
 | InvoiceItem                | `invoiceitem.*`           |
@@ -131,3 +133,11 @@ If you'd rather scope the webhook down to just the resources you're syncing, sel
 | Subscription               | `customer.subscription.*` |
 
 Narrowing events down means you'll need to revisit the webhook any time you enable a new table, which is why we still recommend **All events** unless you have a specific reason not to.
+
+> **Note:** The Discount table is **webhook-only** – Stripe has no API list endpoint for discounts. This means PostHog can't backfill historical discounts; only new `customer.discount.created`, `customer.discount.updated`, and `customer.discount.deleted` events are captured going forward.
+
+### Subscription discount data
+
+The `stripe_subscription` table includes a `discounts` JSON column. When synced via the API, this column contains full Discount objects with embedded Coupon details (`amount_off`, `percent_off`, `duration`, `duration_in_months`). Under webhook-only mode, it contains an array of discount IDs (`di_*`) instead – join to the `stripe_discount` table for full details.
+
+If you have existing subscription data that was synced before this feature was available, re-sync (or reset your pipeline) to get the expanded discount objects.
