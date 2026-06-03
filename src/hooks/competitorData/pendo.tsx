@@ -150,7 +150,7 @@ export const pendo = {
         workflows: {
             available: true,
         },
-        llm_analytics: {
+        ai_observability: {
             available: 'Agent Analytics',
         },
     },

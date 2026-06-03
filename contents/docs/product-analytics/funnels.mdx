@@ -14,39 +14,69 @@ availability:
       selfServe: true
       enterprise: true
 ---
-import { CalloutBox } from 'components/Docs/CalloutBox'
 
-export const newFunnelLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/funnels/new-funnel-light-mode.mp4"
-export const newFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/funnels/new-funnel-dark-mode.mp4"
-export const funnelStepsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-light-mode.png"
-export const funnelStepsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-dark-mode.png"
-export const globalFiltersLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/global-filters-light-mode.png"
-export const globalFiltersDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/global-filters-dark-mode.png"
-export const setFunnelTimeRangeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/set-funnel-time-range-light-mode.png"
-export const setFunnelTimeRangeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/set-funnel-time-range-dark-mode.png"
-export const saveAFunnelLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/funnels/save-a-funnel-light-mode.mp4"
-export const saveAFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/funnels/save-a-funnel-dark-mode.mp4"
-export const personsModalLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/persons-modal-light-mode.png"
-export const personsModalDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/persons-modal-dark-mode.png"
-export const identifyingLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/identifying-drop-offs-light-mode.png"
-export const identifyingDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/identifying-drop-offs-dark-mode.png"
-export const switchToRelativeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/switch-to-relative-drop-off-light-mode.png"
-export const switchToRelativeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/switch-to-relative-drop-off-dark-mode.png"
-export const averageTimeToConvertLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/average-time-to-convert-light-mode.png"
-export const averageTimeToConvertDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/average-time-to-convert-dark-mode.png"
-export const distributionHistogramLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/distribution-histogram-time-to-convert-light-mode.png"
-export const distributionHistogramDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/distribution-histogram-time-to-convert-dark-mode.png"
-export const granularConversionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/granular-conversion-time-distribution-light-mode.png"
-export const granularConversionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/granular-conversion-time-distribution-dark-mode.png"
-export const breakdownByOSLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/breakdown-by-operating-system-light-mode.png"
-export const breakdownByOSDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/breakdown-by-operating-system-dark-mode.png"
-export const funnelStepBreakdownLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-light-mode.png"
-export const funnelStepBreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-dark-mode.png"
-export const converstionOverTimeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/conversion-over-time-using-trends-light-mode.png"
-export const converstionOverTimeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/conversion-over-time-using-trends-dark-mode.png"
-export const funnelsInlineEventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/h_500,c_limit,q_auto,f_auto/funnels_inline_events_light_fd59b44032.png"
-export const funnelsInlineEventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/h_500,c_limit,q_auto,f_auto/funnels_inline_events_dark_f9c82e5cd9.png"
+import { CalloutBox } from "components/Docs/CalloutBox";
 
+export const newFunnelLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/funnels/new-funnel-light-mode.mp4";
+export const newFunnelDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/funnels/new-funnel-dark-mode.mp4";
+export const funnelStepsLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-light-mode.png";
+export const funnelStepsDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-dark-mode.png";
+export const globalFiltersLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/global-filters-light-mode.png";
+export const globalFiltersDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/global-filters-dark-mode.png";
+export const setFunnelTimeRangeLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/set-funnel-time-range-light-mode.png";
+export const setFunnelTimeRangeDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/set-funnel-time-range-dark-mode.png";
+export const saveAFunnelLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/funnels/save-a-funnel-light-mode.mp4";
+export const saveAFunnelDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/funnels/save-a-funnel-dark-mode.mp4";
+export const personsModalLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/persons-modal-light-mode.png";
+export const personsModalDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/persons-modal-dark-mode.png";
+export const identifyingLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/identifying-drop-offs-light-mode.png";
+export const identifyingDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/identifying-drop-offs-dark-mode.png";
+export const switchToRelativeLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/switch-to-relative-drop-off-light-mode.png";
+export const switchToRelativeDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/switch-to-relative-drop-off-dark-mode.png";
+export const averageTimeToConvertLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/average-time-to-convert-light-mode.png";
+export const averageTimeToConvertDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/average-time-to-convert-dark-mode.png";
+export const distributionHistogramLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/distribution-histogram-time-to-convert-light-mode.png";
+export const distributionHistogramDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/distribution-histogram-time-to-convert-dark-mode.png";
+export const granularConversionLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/granular-conversion-time-distribution-light-mode.png";
+export const granularConversionDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/granular-conversion-time-distribution-dark-mode.png";
+export const breakdownByOSLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/breakdown-by-operating-system-light-mode.png";
+export const breakdownByOSDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/breakdown-by-operating-system-dark-mode.png";
+export const funnelStepBreakdownLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-light-mode.png";
+export const funnelStepBreakdownDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-dark-mode.png";
+export const converstionOverTimeLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/conversion-over-time-using-trends-light-mode.png";
+export const converstionOverTimeDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/conversion-over-time-using-trends-dark-mode.png";
+export const funnelsInlineEventsLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/h_500,c_limit,q_auto,f_auto/funnels_inline_events_light_fd59b44032.png";
+export const funnelsInlineEventsDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/h_500,c_limit,q_auto,f_auto/funnels_inline_events_dark_f9c82e5cd9.png";
 
 For every flow in your product, more people will start it than complete it successfully. Funnels enable you to visualize your flows and understand where the friction points are so that you can improve them.
 
@@ -61,30 +91,29 @@ You can learn the following from funnels:
 
 ## How to create a funnel
 
-1. Click [Product Analytics](https://us.posthog.com/insights) on the left sidebar
+1. Click [Product Analytics](https://app.posthog.com/insights) on the left sidebar
 1. Click the **+ New Insights** tab
-1. Select the **Funnel** option in the dropdown 
+1. Select the **Funnel** option in the dropdown
 
 <ProductVideo
-    videoLight = {newFunnelLight} 
-    videoDark = {newFunnelDark}
-    classes="rounded"
-    alt="Create a new funnel insight."
+  videoLight={newFunnelLight}
+  videoDark={newFunnelDark}
+  classes="rounded"
+  alt="Create a new funnel insight."
 />
 
 ### Adding steps
 
-Select the steps to include in your funnel, ideally starting with the first event or action a user will trigger in the flow. 
+Select the steps to include in your funnel, ideally starting with the first event or action a user will trigger in the flow.
 
 Next, add events users must complete to proceed through the funnel, ending with the event you consider the success for this flow. It's best to start with the simplest flow and avoid using optional steps to ensure you don't filter out or skew results.
 
 <ProductScreenshot
-    imageLight = {funnelStepsLight} 
-    imageDark = {funnelStepsDark}
-    classes="rounded"
-    alt="Funnel steps"
+  imageLight={funnelStepsLight}
+  imageDark={funnelStepsDark}
+  classes="rounded"
+  alt="Funnel steps"
 />
-
 
 #### Combine events inline
 
@@ -93,10 +122,10 @@ You can combine multiple events into a single funnel step using inline combinati
 Select the events to include in a step, and they're combined using a logical `OR` – any occurrence of the selected events counts toward that step. This works the same way as [combining events inline in trends](/docs/product-analytics/trends/overview#combine-events-inline).
 
 <ProductScreenshot
-    imageLight = {funnelsInlineEventsLight} 
-    imageDark = {funnelsInlineEventsDark}
-    classes="rounded"
-    alt="Inline events"
+  imageLight={funnelsInlineEventsLight}
+  imageDark={funnelsInlineEventsDark}
+  classes="rounded"
+  alt="Inline events"
 />
 
 By default, funnel steps must be completed **sequentially**, however you are able to change this behavior by selecting one of three different step orders:
@@ -110,20 +139,21 @@ By default, funnel steps must be completed **sequentially**, however you are abl
 If you add multiple steps with the same event type, it will require the user to **trigger that event multiple times**. Think of funnel steps as actions to be performed, not filters to be applied.
 
 For example, adding a `clicked button` step, then a second `clicked button` step that filters for the "Sign Up" button, will require the user to perform **two** distinct button clicks.
+
 </CalloutBox>
 
 ### Filtering steps
 
-To refine your steps, you can filter out events using event, person, or group properties, autocapture elements, or SQL. To do this, click the **filter icon**  next to the step, choose your property, and fill in the details. You can also set a global filter in the **Filters** section in the bottom.
+To refine your steps, you can filter out events using event, person, or group properties, autocapture elements, or SQL. To do this, click the **filter icon** next to the step, choose your property, and fill in the details. You can also set a global filter in the **Filters** section in the bottom.
 
 <ProductScreenshot
-    imageLight = {globalFiltersLight} 
-    imageDark = {globalFiltersDark}
-    classes="rounded"
-    alt="Global filters"
+  imageLight={globalFiltersLight}
+  imageDark={globalFiltersDark}
+  classes="rounded"
+  alt="Global filters"
 />
 
-> **Note**: Using person properties in funnels requires identified events and [person profiles](/docs/data/persons). 
+> **Note**: Using person properties in funnels requires identified events and [person profiles](/docs/data/persons).
 
 ### Excluding steps
 
@@ -135,16 +165,16 @@ These people are completely excluded from the entire funnel.
 
 There are two options for showing conversion rates in a funnel:
 
-1. **Overall conversion** – for each step, this shows the conversion relative to the *first* step.
-2. **Relative to the previous step** – for each step, this shows the conversion relative to the *previous* step.
+1. **Overall conversion** – for each step, this shows the conversion relative to the _first_ step.
+2. **Relative to the previous step** – for each step, this shows the conversion relative to the _previous_ step.
 
 **Overall conversion** is helpful for understanding the entire funnel, whereas **relative conversion** shows you which steps have biggest opportunity for improvement.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/funnel_conversion_types_light_bcc79c205d.png"
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/converesion_funnels_dark_2_793a67ada4.png"
-    classes="rounded"
-    alt="Overall vs relative conversion"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/funnel_conversion_types_light_bcc79c205d.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/converesion_funnels_dark_2_793a67ada4.png"
+  classes="rounded"
+  alt="Overall vs relative conversion"
 />
 
 ### Breakdowns
@@ -153,20 +183,22 @@ To understand how different types of user interact with your funnel, it's helpfu
 
 > **Note:** Only one cohort can be used at a time for funnel breakdowns. This is because users can belong to multiple cohorts, which would produce confusing results.
 
+> **Tip:** When breaking down by `$current_url` or `$pathname`, your [path cleaning rules](/docs/web-analytics/path-cleaning) automatically normalize dynamic URLs (like `/user/123`) into consistent patterns (like `/user/:id`).
+
 The example below shows a breakdown by operating system:
 
 <ProductScreenshot
-    imageLight = {breakdownByOSLight} 
-    imageDark = {breakdownByOSDark}
-    classes="rounded"
-    alt="Breakdown funnel steps by Operating System"
+  imageLight={breakdownByOSLight}
+  imageDark={breakdownByOSDark}
+  classes="rounded"
+  alt="Breakdown funnel steps by Operating System"
 />
 
 <ProductScreenshot
-    imageLight = {funnelStepBreakdownLight} 
-    imageDark = {funnelStepBreakdownDark}
-    classes="rounded"
-    alt="Funnel steps broken down by property"
+  imageLight={funnelStepBreakdownLight}
+  imageDark={funnelStepBreakdownDark}
+  classes="rounded"
+  alt="Funnel steps broken down by property"
 />
 
 #### Attribution types
@@ -235,14 +267,15 @@ With the specific step mode, one person can have more than one property value. F
 
 Then the person would have both `Chrome` and `Firefox` as their breakdown values.
 
-Another common use for `Specific step` is to display only a single URL for pageview steps in the funnel columns. The default, `First touchpoint` uses the first property value seen from all steps, which will include the subdirectory URLs in the breakdown if they appeared in later steps.  
+Another common use for `Specific step` is to display only a single URL for pageview steps in the funnel columns. The default, `First touchpoint` uses the first property value seen from all steps, which will include the subdirectory URLs in the breakdown if they appeared in later steps.
 
-For example, if you've 
-- set your first query step as `Pageview` where `Current URL` `= equals` `https://foo.com/bar`, 
-- and `/bar` has subdirectories (e.g. `https://foo.com/bar/foo1` `https://foo.com/bar/foo2` etc.), 
+For example, if you've
+
+- set your first query step as `Pageview` where `Current URL` `= equals` `https://foo.com/bar`,
+- and `/bar` has subdirectories (e.g. `https://foo.com/bar/foo1` `https://foo.com/bar/foo2` etc.),
 - and `Breakdown by` is set to `Current URL`
 
-but you don't want pages under the subdirectories of `https://foo.com/bar` to appear in the funnel chart.  
+but you don't want pages under the subdirectories of `https://foo.com/bar` to appear in the funnel chart.
 
 In this case, set the `Attribution type` to `Specific step` / `Step 1` to see only `https://foo.com/bar` in the pageview column of the chart.
 
@@ -253,9 +286,13 @@ In this case, set the `Attribution type` to `Specific step` / `Step 1` to see on
 When analyzing funnels, you can specify which event to count if a user performs it multiple times. This is configured in the dropdown for each step of the funnel.
 
 <ProductScreenshot
-    imageLight={"https://res.cloudinary.com/dmukukwp6/image/upload/funnels_first_ever_light_b64bd76a5e.png"}
-    imageDark={"https://res.cloudinary.com/dmukukwp6/image/upload/funnels_first_ever_dark_fe7d879280.png"}
-    alt="First event occurrence"
+  imageLight={
+    "https://res.cloudinary.com/dmukukwp6/image/upload/funnels_first_ever_light_b64bd76a5e.png"
+  }
+  imageDark={
+    "https://res.cloudinary.com/dmukukwp6/image/upload/funnels_first_ever_dark_fe7d879280.png"
+  }
+  alt="First event occurrence"
 />
 
 There are two options for this:
@@ -268,7 +305,7 @@ First-ever occurrence matches only the first time a user performs a specific eve
 
 ##### 2. First occurrence matching filters
 
-First occurrence matching filters matches the first time a user performs an event *that also matches the filters for that funnel step*. Any previous events of the same type that don't match the filters are ignored.
+First occurrence matching filters matches the first time a user performs an event _that also matches the filters for that funnel step_. Any previous events of the same type that don't match the filters are ignored.
 
 **Example:** You have a funnel step looking for pageviews to `/about`. A user first visits `/pricing` and then later visits `/about`. PostHog ignores the `/pricing` view and matches the `/about` view, as it's the first one that fits the step's criteria.
 
@@ -277,10 +314,10 @@ First occurrence matching filters matches the first time a user performs an even
 The graph type dropdown let's you choose between conversion steps, time to convert, and historical trends.
 
 <ProductScreenshot
-    imageLight = {converstionOverTimeLight} 
-    imageDark = {converstionOverTimeDark}
-    classes="rounded"
-    alt="Conversion over time using Trends"
+  imageLight={converstionOverTimeLight}
+  imageDark={converstionOverTimeDark}
+  classes="rounded"
+  alt="Conversion over time using Trends"
 />
 
 Each type serves a unique purpose:
@@ -298,10 +335,10 @@ Each type serves a unique purpose:
 The most common use case for funnels is understanding where people are getting stuck or dropping off in your flow.
 
 <ProductScreenshot
-    imageLight = {identifyingLight} 
-    imageDark = {identifyingDark}
-    classes="rounded"
-    alt="Identifying drop-offs in a funnel"
+  imageLight={identifyingLight}
+  imageDark={identifyingDark}
+  classes="rounded"
+  alt="Identifying drop-offs in a funnel"
 />
 
 There a few ways to identify problem steps:
@@ -316,14 +353,13 @@ Usually the steps with the lowest relative conversion rate are where the largest
 Once you have a funnel drop-off you'd like to explore further, the first step is to find out why users are struggling. There are many ways to get this information, from [talking to users directly](/newsletter/talk-to-users) to [replaying their sessions](/docs/session-replay).
 
 Click on the chart or the linked column values below the funnel to view the individual people who **COMPLETED** or **DROPPED** that step of your funnel.
- 
-<ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1718365074/posthog.com/contents/Screenshot_2024-06-14_at_12.36.24_PM.png" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1718365075/posthog.com/contents/Screenshot_2024-06-14_at_12.36.47_PM.png"
-    classes="rounded"
-    alt="View users in a funnel"
-/>
 
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1718365074/posthog.com/contents/Screenshot_2024-06-14_at_12.36.24_PM.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1718365075/posthog.com/contents/Screenshot_2024-06-14_at_12.36.47_PM.png"
+  classes="rounded"
+  alt="View users in a funnel"
+/>
 
 You can also save this list of users as a [cohort](/docs/data/cohorts) for further analysis.
 
@@ -340,13 +376,13 @@ Click on the **'...'** next to any step in your funnel and, depending on which s
 - before drop off
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1718369751/posthog.com/contents/Screenshot_2024-06-14_at_1.54.52_PM.png" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1718369751/posthog.com/contents/Screenshot_2024-06-14_at_1.55.24_PM.png"
-    classes="rounded"
-    alt="View user paths in a funnel"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1718369751/posthog.com/contents/Screenshot_2024-06-14_at_1.54.52_PM.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1718369751/posthog.com/contents/Screenshot_2024-06-14_at_1.55.24_PM.png"
+  classes="rounded"
+  alt="View user paths in a funnel"
 />
 
-Selecting any option creates a new insight showing the paths users took. This is useful for getting a complete picture of the *real* funnel created by user interactions, rather than the imagined *perfect* funnel engineers and designers have in their head. Spoiler: the *real* funnel and the *perfect* funnel are rarely the same!
+Selecting any option creates a new insight showing the paths users took. This is useful for getting a complete picture of the _real_ funnel created by user interactions, rather than the imagined _perfect_ funnel engineers and designers have in their head. Spoiler: the _real_ funnel and the _perfect_ funnel are rarely the same!
 
 ### Understand seasonality in your conversion rates
 
@@ -370,8 +406,8 @@ Correlation analysis works well when you don't already have a hypothesis for wha
 
 Want to know more about what's possible with Funnels in PostHog? Try these tutorials:
 
--   [Getting started with AARRR](/tutorials/aarrr-framework)
--   [Building an AARRR 'Pirate' Funnel](/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
--   [Building and measuring a sign up funnel with Next.js, Supabase and PostHog](/tutorials/nextjs-supabase-signup-funnel)
+- [Getting started with AARRR](/tutorials/aarrr-framework)
+- [Building an AARRR 'Pirate' Funnel](/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
+- [Building and measuring a sign up funnel with Next.js, Supabase and PostHog](/tutorials/nextjs-supabase-signup-funnel)
 
 Want more? Check our [full list of PostHog tutorials](/tutorials).

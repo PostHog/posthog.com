@@ -17,6 +17,11 @@ jobs:
         #   - https://gh.io/using-larger-runners (GitHub.com only)
         # Consider using larger runners or machines with greater resources for possible analysis time improvements.
         runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+        # Disable CodeQL overlay analysis. Its per-commit overlay-base database caches (~272 MB
+        # each) were pushing the repo's Actions cache over GitHub's 10 GB limit and risked evicting
+        # the Gatsby build cache. Overlay only speeds up CodeQL PR analysis, not our build job.
+        env:
+            CODEQL_OVERLAY_DATABASE_MODE: none
         permissions:
             # required for all workflows
             security-events: write
@@ -33,11 +38,11 @@ jobs:
                       build-mode: none
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v6
+              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
             # Initializes the CodeQL tools for scanning.
             - name: Initialize CodeQL
-              uses: github/codeql-action/init@v4
+              uses: github/codeql-action/init@9e0d7b8d25671d64c341c19c0152d693099fb5ba # v4.35.5
               with:
                   languages: ${{ matrix.language }}
                   build-mode: ${{ matrix.build-mode }}
@@ -54,6 +59,6 @@ jobs:
                   exit 1
 
             - name: Perform CodeQL Analysis
-              uses: github/codeql-action/analyze@v4
+              uses: github/codeql-action/analyze@9e0d7b8d25671d64c341c19c0152d693099fb5ba # v4.35.5
               with:
                   category: '/language:${{matrix.language}}'

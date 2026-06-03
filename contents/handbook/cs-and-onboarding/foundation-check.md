@@ -4,58 +4,62 @@ sidebar: Handbook
 showTitle: true
 ---
 
-When working with our customers, it is important to do a basic account review to get a better understanding of whether we think the customer has things set up correctly. Below is a simple checklist of things to look for, and address on your discovery call with the customer, to get a better idea of whether they are set up for success or not. It's important to note that we can only check for certain things and some things (like backend implementation) will rely on us speaking to the customer to get a better understanding of their implementation. 
+Prior to a customer discovery call, review session replays of the user to see how they interact with PostHog, and where improvements can be made. Check historic conversations in Vitally, or calls in BuildBetter, for wider context.
 
-## Events and events properties
+For fundamentals, use this checklist to check for common issues before a customer discovery call. PostHog only shows you some of this — for backend implementation details, you'll need to ask on the call.
 
-A good starting point is verifying what events the customer is tracking, whether they have custom events set up, is autocapture enabled, and if they're collecting any event properties. These could be custom event properties or they could be autocapture attributes that have been added. Two good starting places to look are:
+## Events and event properties
 
-- **Activity**: this showcases recent events 
+Check what events the customer is tracking, whether they have custom events, whether autocapture is on, and whether they're collecting event properties (custom or autocapture).
 
-- **Data management**: under here, you can find a number of definitions available to look at, to see if the customer may have set up custom actions or defined event and property definitions.
+Two places to look:
 
-One of the things to look for is whether the customer has any custom actions setup. This is quite useful and is often a good sign that customers might have their setup wrong if they have not made use of actions. Some common actions to potentially look for are _renaming of events_ that are more useful to the customer or bundling of events that are common such as `user signups` or `purchases`. 
+- **Activity** — recent events.
+- **Data management** — custom actions, event definitions, property definitions.
 
-Additionally its worth flagging if a customer has autocapture enabled and no actions setup, that's probably worth flagging with the customer.
+Look for custom actions. Customers without any actions often aren't using PostHog effectively. Common patterns: renaming events into something more meaningful (e.g. `purchase_completed` instead of `clicked_purchase_button`), or bundling events like `user signups` or `purchases`.
+
+If a customer has autocapture enabled but no actions defined, that's worth raising with them on the call.
 
 ## Reverse proxy configured
 
-Another good place to start is to see if the customer has reverse proxy setup. There are two ways you can do this:
+Check whether the customer has a reverse proxy set up:
 
-- If the customer is using session replay, you can to the appropriate replay video, select **Activity > Inspector > Doctor**, and search for "config", look for PostHog Config, expand the `api_host` and observe whether the URL shown is showing one of our domains i.e. us.i.posthog.com or eu.i.posthog.com, or one of their domains.
+- **If session replay is on:** open a replay, go to **Activity → Inspector → Doctor**, search "config", expand `api_host`. If you see `us.i.posthog.com` or `eu.i.posthog.com`, no proxy. If you see one of their domains, they have one.
+- **If session replay is off:** add `?__posthog_debug=true` to a URL where PostHog is loaded, open the console, type `posthog.config`, and check the `api_host` property.
+- **If neither works** (no session replay and the site isn't publicly accessible): ask on the discovery call.
 
-- If the customer isn't using session replay, the alternative way you can check this by adding `?__posthog_debug=true` to a URL where PostHog is being called, and pull up console logs and type `posthog.config` and look for the `api_host` property there.
+## Person properties, group properties, and cohorts
 
-If both methods are unavailable to you because the customer isn't using session replay and the hosted site isn't publicly accessible, you can simply ask the customer on the discovery call.
+Check whether the customer is using person properties, whether they might be over-identifying, and whether they're using cohorts.
 
-## Persons Properties, Group Properties, and Cohorts
+Worth a look:
 
-Next, we want to look to see if customers are making use of persons properties, check if there are signs they may be over identifying, and if they are making use of cohorts. It is beneficial to understand what sort of person properties the customer is adding, potentially look for signs of properties they might be missing base on what you understand of their business, and the kind of cohorts, if any, they are using. 
+- What person properties are being added? Are there obvious ones missing for their business?
+- Are they using cohorts? What kind?
+- If group analytics is enabled: do their group types and properties make sense? Group types are limited to five, so they need to be set up intentionally.
 
-If group analytics is enabled, its worth checking to see if they have group properties set and if the type of properties makes sense. Because group types are limited to five, it's important to make sure the group types are set up in a way that makes sense, and the related persons profile makes sense in the way it's associated with group properties.
+## Ecommerce events
 
-## Ecommerce Events
-
-For ecommerce customers specifically, PostHog has a useful guide on [ecommerce events specification](/docs/data/event-spec/ecommerce-events) that is worth checking to see if these customers were aware and have implemented custom events tracking related to the type of events we'd normally like to see (such as `sku`, `product_id`, or `category`).
+For ecommerce customers, check whether they've implemented the [ecommerce events specification](/docs/data/event-spec/ecommerce-events) — events like `sku`, `product_id`, `category`. Many customers don't know it exists.
 
 ## SDK or library version
 
-Make sure customers are using an up to date SDK or Library version. For this, you'll want to click on **Activity**, click on `Configure columns`, then add `Library` and `Library Version` so you can see versions of the SDK they are using. Then you can reference this against our Github repos for the up-to-date SDK versions to check if they are on the latest versions or not.
+Check that the customer is on an up-to-date SDK:
 
-Alternatively, you can go to Metabase, look up the `Library version audit` table and see SDK versions there.
+- In **Activity**, click `Configure columns` and add `Library` and `Library Version`.
+- Or look up the `Library version audit` table in Metabase.
 
-## Sign up for an account when possible
+Compare against the latest versions in our GitHub repos.
 
-If the customer's product offers a free account you can sign up for, do it and go through the workflow. This is a great way to see if events are firing properly, what events are being tracked, and get a rough idea of what might be missing so that you can make recommendations on your discovery call with the customer.
+## Sign up for an account
 
-## What types of dashboards does the customer have set up?
+If the customer's product offers a free account, sign up and walk through the flow. You'll see which events fire, which don't, and what's likely missing.
 
-Every customer and more specifically, every team, will have a different set of goals they deeply care about. What we want to see here is if they've spent time setting up custom dashboards or insights to track specific trends, engagement, conversion metrics, or other key dashboards that indicates they're measuring the right things beyond basic dashboards included by default. This could be things like `user sign ups`, `retention dashboards`, or `free to paid upgrades`. What you want to do is get a feel for the kind of tracking the customer has setup so that on the discovery call, you can understand if this currently aligns with their immediate goals or if there are key metrics they should be looking at but have not setup.
+## Dashboards
 
-## Are customers using data pipelines for event notifications?
+Have they set up custom dashboards or insights for their own goals (sign-ups, retention, free-to-paid), or are they relying on defaults? On the discovery call, you can ask whether what they're tracking matches their priorities.
 
-This idea actually came from our own team's use of data pipeline destinations to get notified when specific events occur in Slack. It's a great additional use that could be helpful to companies that didn't consider this use case for data piplines and an easy way to try and upsell.
+## Data pipelines for event notifications
 
-## Query failure rate
-
-This is a good one to check and is available in Vitally. This usually means the customer is attempting to do something and it didn't work. Great for expanding on the discovery call itself.
+Check whether they're using data pipeline destinations (e.g. Slack notifications on specific events). Many customers don't realize this use case exists — it's an easy upsell.

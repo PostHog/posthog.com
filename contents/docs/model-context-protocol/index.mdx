@@ -1,32 +1,66 @@
 ---
 title: Model Context Protocol (MCP)
+sidebarTitle: MCP server
+sidebar: Docs
+showTitle: true
 ---
-import SharedContent from "./_snippets/shared.mdx"
+
 import MCPClients from "./_snippets/mcp-clients.tsx"
+import PromptExample from "./_snippets/prompt-example.tsx"
 
-The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server enables your AI agents and tools to directly interact with PostHog's products.
+The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server is a free, hosted endpoint that lets your AI agent use PostHog – with just plain text questions your agents can ship a feature flag from a prompt, dig into a stack trace without leaving your editor, run a HogQL query through Claude, triage a support ticket, set up a CDP destination, and much more.
 
-The PostHog MCP server is free to use – connecting to it and calling its tools doesn't incur any charges on your PostHog bill.
+It works with any MCP-compatible client, including [PostHog Code](/code), Claude Code, Claude Desktop, Cursor, Codex, VS Code, Windsurf, and Zed. 
 
-## Server URL
+## Get started in 30 seconds
 
-`https://mcp.posthog.com/mcp`
-
-The PostHog authentication server automatically routes you to the correct data region (US or EU) based on the account you log in with.
-
-## Quick install using the PostHog wizard
-
-Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor**, **Claude Code**, **Claude Desktop**, **Codex**, **VS Code** and **Zed**.
+The fastest way to setup the MCP is the [PostHog Wizard](https://github.com/PostHog/wizard), which installs the MCP server directly into **PostHog Code**, **Cursor**, **Claude Code**, **Claude Desktop**, **Codex**, **VS Code**, and **Zed**:
 
 ```bash
 npx @posthog/wizard mcp add
 ```
 
-We're working on adding more supported tools to the wizard. If you're using another option, you can manually install our MCP server with the instructions for your specific client:
+Using something else? Pick your client to set it up manually:
 
 <MCPClients />
 
-<SharedContent />
+The server URL is `https://mcp.posthog.com/mcp`. The PostHog authentication server automatically routes you to the correct data region (US or EU) based on the account you log in with.
+
+## What can you do with the PostHog MCP?
+
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/mcp_error_tracking_debugging30_6e25828d88.mp4"
+  alt="Using Claude Code to debug and fix errors via the PostHog MCP server"
+  classes="rounded"
+  autoPlay={false}
+/>
+
+<Caption>Using Claude Code to debug and fix errors via the PostHog MCP server</Caption>
+
+Once connected, your agent can read and write across PostHog's products. Here's a taste – triaging errors from inside your editor instead of context-switching to a browser:
+
+<PromptExample
+  prompt="What are the top 5 errors in my project this week?"
+  outcome="Returns error groups ranked by occurrence with affected user counts."
+/>
+<PromptExample
+  prompt="Show me the full stack trace for the most recent crash, then propose a fix."
+  outcome="Pulls the stack trace, error message, and metadata so the agent can suggest code changes."
+/>
+<PromptExample
+  prompt="Mark this issue as resolved and assign all future TypeErrors to the backend team."
+  outcome="Updates issue status and creates an assignment rule in one go."
+/>
+
+There's a lot more – analytics queries, feature flag and experiment management, SQL, CDP destinations, support ticket triage, and multi-step recipes that chain it all together.
+
+**[Browse all use cases →](/docs/model-context-protocol/use-cases)**
+
+## Go deeper
+
+- **[Use cases](/docs/model-context-protocol/use-cases)** – 20+ example prompts and multi-step recipes for the most useful MCP workflows
+- **[Tools reference](/docs/model-context-protocol/tools)** – every tool the MCP server exposes, grouped by category
+- **[FAQ and advanced setup](/docs/model-context-protocol/faq)** – auth, scoping, filtering, safety, and other operational details
 
 ## Next steps
 
@@ -34,7 +68,7 @@ We're working on adding more supported tools to the wizard. If you're using anot
 - [Lovable integration](/docs/integrations/lovable): Set up PostHog in your Lovable project
 - [Replit integration](/docs/integrations/replit): Set up PostHog with Replit Agent
 - [v0 integration](/docs/integrations/v0): Set up PostHog with v0 and the Vercel Flags SDK
-- [PostHog MCP server](https://github.com/PostHog/posthog/tree/master/services/mcp): Check out GitHub repository for the MCP server
+- [PostHog MCP server on GitHub](https://github.com/PostHog/posthog/tree/master/services/mcp): The source for the MCP server
 - [PostHog VS Code extension](/docs/vscode-extension): Inline analytics, flag management, and session replay links in your editor
-- [Model Context Protocol](https://modelcontextprotocol.io/introduction): Learn more about the Model Context Protocol specification
+- [Model Context Protocol](https://modelcontextprotocol.io/introduction): Learn more about the MCP specification
 - [MCP: machine/copy paste](/blog/machine-copy-paste-mcp-intro): What exactly is MCP again?

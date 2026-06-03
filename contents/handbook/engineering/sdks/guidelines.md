@@ -146,6 +146,24 @@ Release cadence is a balance. Giant releases are hard to review, hard to debug, 
 
 The right cadence also depends on the platform and ecosystem. Web and server SDK users can often upgrade quickly through a package manager, but mobile, desktop, game engine, and enterprise customers may deal with app store review, slow adoption, long release trains, or internal approval processes.
 
+### Keep changelogs and version bumps accurate
+
+A changelog is customer-facing release documentation, not just release metadata. For SDKs using changesets, the changelog entry is part of the code change. As the author of a change, you're responsible for writing a meaningful summary and choosing the correct semver bump before the PR lands. Take care to ensure that the entry accurately reflects what changed, who it may affect, and whether customers need to take action. If they do, describe that action clearly.
+
+Use semver, or the ecosystem's closest equivalent:
+
+- **Patch** versions are for backward-compatible bug fixes, security fixes, documentation/package metadata corrections, and internal changes that don't add customer-facing API or behavior. A user should be able to upgrade a patch release without changing their code or expectations.
+- **Minor** versions are for backward-compatible additions or behavior improvements: new public methods, options, integrations, supported platforms, or feature support. Existing code should continue to compile, run, and behave as before.
+- **Major** versions are for breaking changes: removing or renaming public APIs, changing method signatures or return types, changing default behavior in a way customers may rely on, dropping supported platforms/runtime versions, changing persisted data formats without safe migration, or making previously valid configuration invalid. Major version bumps are ideally planned in advance, and should typically be avoided unless absolutely necessary.
+
+If a release does include a breaking change, call it out clearly in the changelog and provide migration guidance. Before introducing a breaking change, consider alternative solutions by asking yourself:
+
+- Could this change have been written in a backward-compatible manner?
+- If this supersedes an existing public API or behavior, should the old one be deprecated first?
+- Can the new behavior be introduced as an opt-in option first, or can the old behavior remain available through a defaulted option or alias?
+- Do we understand who is affected and how hard migration will be?
+- Should this be batched with other breaking changes in the next major release?
+
 ### Document decisions and sharp edges
 
 If an SDK supports only certain platform versions, has unusual threading behavior, drops events under pressure, stores data locally, or handles privacy-sensitive data, write it down.

@@ -22,6 +22,12 @@ import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
 
   <CLIAuthenticate />
 
+  If you already keep your project's configuration in a dotenv-style file, you can load these variables from it with the `--env-file` option instead of exporting them:
+
+  ```bash
+  posthog-cli --env-file .env sourcemap upload --directory ./path/to/assets
+  ```
+
 </Step>
 
 <Step title="Inject" badge="required">

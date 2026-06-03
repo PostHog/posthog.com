@@ -1,7 +1,5 @@
 import React from 'react'
-import { IconPiggyBank } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import Link from 'components/Link'
 
 export const posthog = {
     name: 'PostHog',
@@ -46,7 +44,7 @@ export const posthog = {
             monitoring: {
                 features: {
                     cron_monitoring: false,
-                    distributed_tracing: false,
+                    distributed_tracing: 'Alpha',
                     release_tracking: true,
                     performance_monitoring: true,
                 },
@@ -147,7 +145,7 @@ export const posthog = {
             observability: {
                 features: {
                     metrics: false,
-                    traces: false,
+                    traces: 'Alpha',
                     infra_monitoring: false,
                     alerting: false,
                 },
@@ -190,15 +188,7 @@ export const posthog = {
                 historical_trends: true,
                 include_and_exclude_wildcards: true,
                 max_number_of_steps: '20',
-                monetization_analytics: (
-                    <>
-                        Via{' '}
-                        <Link to="/revenue-analytics" className="group !no-underline" state={{ newWindow: true }}>
-                            <IconPiggyBank className="size-4 inline-block text-green" />{' '}
-                            <span className="group-hover:!underline">Revenue Analytics</span>
-                        </Link>
-                    </>
-                ),
+                monetization_analytics: true,
                 predictive_insights: false,
                 private_insights: true,
                 project_level_permissions: true,
@@ -522,7 +512,7 @@ export const posthog = {
                 built_in_analytics: true,
             },
         },
-        llm_analytics: {
+        ai_observability: {
             available: true,
             features: {
                 alerting: true,
