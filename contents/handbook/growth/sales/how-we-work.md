@@ -44,11 +44,11 @@ In addition to the weekly sprint planning meeting on a Monday, we do a weekly te
 
 Each TAM is assigned up to 15 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 25 accounts, so staying extremely focused is important.
 
-We use the "AM Managed" Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Simon or Charles), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
+We use the "AM Managed" Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Simon or Ben), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
 
 For Product-led leads we will only add them to your book for quota purposes if you have a solid plan in place for conversion to prepaid credit or cross-product adoption. Account Owners can use the "Leads" Segment in Vitally to separately track these from the main managed book. 
 
-At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense.
+At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Ben will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense.
 
 #### TAM Territory Review
 
@@ -117,7 +117,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 
 There are [cultural](/handbook/company/culture) and [role-based expectations](/handbook/growth/sales/overview) for TAEs at PostHog. We also now have enough data to define minimum performance exceptions for TAEs relative to the annual commmission targets. 
 
-After your ramp period, you should expect to have a performance conversation with your lead and Charles if:
+After your ramp period, you should expect to have a performance conversation with your lead and Ben if:
 
 - You are under 80% of your annual quota, _and_
 - You have finished two consecutive quarters under 70% of your quarterly target
@@ -145,7 +145,7 @@ These standards are likely to change as the TAE role evolves. Any changes will b
 - This means you can hit quota by a combo of bringing in new business and expanding existing. Because your target is based on invoiced usage, this means that even if you have an annual customer in your book, you can still expand their usage and get recognized for that.
   - It also means that you are less likely to totally neglect existing customers because if they reduce usage, it hurts your overall ARR figure.
 - We apply a multiplier to each invoice in the calculation based on how many of our primary products they are paying for, to incentivise cross-sell.
-  - Primary products are: Product Analytics, Session Replay, Feature Flags, Surveys, Error Tracking, LLM Analytics, Data Warehouse, CDP Destinations, Workflows, Logs, and PostHog AI.
+  - Primary products are: Product Analytics, Session Replay, Feature Flags, Surveys, Error Tracking, AI Observability, Data Warehouse, CDP Destinations, Workflows, Logs, and PostHog AI.
   - We start off at a base of 0.7x for customers with only 1 paid product, as it represents a bigger churn risk.
   - We then apply an additional 0.2x for each paid product above 1 (ie, 3 paid products = 1.1x)
   - A product is counted as paid if the invoice amount for that product is greater than $200
@@ -160,15 +160,34 @@ These standards are likely to change as the TAE role evolves. Any changes will b
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commission into the above 4 buckets and how you did.
-- In your first 3 months you are expected to retain your existing book and have closed at least one deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+- In your first 3 months you are expected to retain your existing book and have closed at least one deal (either a [cross-sell opportunity](/handbook/growth/cross-selling/tracking-cross-sells) or a prepaid credit conversion) - you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
 
 > Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
 >
 > If you have a customer you converted from monthly to annual under the old, non-usage-based commission plan, you won't _also_ get recognized for additional usage beyond their annual run rate in the first year - no double dipping!
 
-If you believe there is a justifiable reason to vary these rules, then in the first instance talk them through with your team lead.  Simon (Charles as backup) will be the decider here.
+If you believe there is a justifiable reason to vary these rules, then in the first instance talk them through with your team lead.  Simon (Ben as backup) will be the decider here.
 
 You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.com/project/2/dashboard/498582) dashboard.
+
+Here is an illustrative example of how quota calculation works. Let's look at a customer's invoice history:
+
+| | Month | Jan | Feb | Mar | Apr | May | Jun |
+|---|---|---|---|---|---|---|---|
+| (A) | Invoice Amount | 2300 | 2200 | 2500 | 2700 | 2800 | 3000 |
+| | Number of Products | 1 | 1 | 1 | 2 | 1 | 3 |
+| (B) | Multiplier | 0.7 | 0.7 | 0.7 | 0.9 | 0.7 | 1.1 |
+| (A × B) | Quota Invoice Amt | 1610 | 1540 | 1750 | 2430 | 1960 | 3300 |
+
+For your Q2 quota calculation:
+
+| Metric | Calculation | Result |
+|---|---|---|
+| Q2 Starting ARR | 4 × (1610 + 1540 + 1750) | 19600 |
+| Q2 Ending ARR | 4 × (2430 + 1960 + 3300) | 30760 |
+| Q2 Quota ARR Diff | 30760 − 19600 | 11160 |
+
+In this example, this customer increases your attainment towards your Q2 quota by $11,160. We do this same calculation for every customer in your book of business to determine the overall attainment towards your quota in a quarter.
 
 ### TAM book of business rules
 
@@ -191,6 +210,8 @@ You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.co
   - Generating high quality leads
   - Getting people in who fit our ICP, ie. are easier for us to sell to
 - We aim for a 70/30 split between base/commission when calculating OTE by default.
+
+In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
 
 > This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
 
@@ -257,7 +278,7 @@ To add Pylon to your customer channel:
 4. In the popup that appears in the Slack channel, select Customer Channel.
 5. Add yourself as the Account Owner.
 6. Click Enable.
-7. Add Tim, Simon, Charles, and Abigail to the channel.
+7. Add Tim, Simon, Ben, and Abigail to the channel.
 
 Once enabled, you can add the :ticket: emoji to a Slack thread to create a new Ticket in Zendesk.  Customers can also do this.  Make sure that a Group and Severity are selected or the ticket won't be routed properly.
 

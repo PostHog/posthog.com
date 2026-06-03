@@ -67,6 +67,10 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
 >
 > then you may need to toggle the switch for manually specifying your region. Regions typically look like `us-east1` or similar.
 
+## Configuration
+
+<SourceParameters />
+
 ## How it works
 
 PostHog creates and deletes [temporary tables](https://cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) when querying your data. This is necessary for handling large BigQuery tables. Temporary tables help break down large data processing tasks into manageable chunks. However, they incur storage and query costs in BigQuery while they exist. We delete them as soon as the job is done.

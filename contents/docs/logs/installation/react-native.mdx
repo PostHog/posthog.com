@@ -1,0 +1,156 @@
+---
+title: React Native logs installation
+sidebarTitle: React Native
+platformLogo: react
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallReactNative from '../../integrate/_snippets/install-react-native.mdx'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+PostHog's React Native SDK has built-in support for capturing structured logs. Unlike other languages where you wire OpenTelemetry directly, the SDK handles the OTLP encoding, batching, persistence, and lifecycle for you. You just call `posthog.captureLog(...)` or `posthog.logger.{trace,debug,info,warn,error,fatal}(...)`.
+
+> **JavaScript layer only.** Logs are captured from the JavaScript side of your app. Native logs from your iOS or Android code (e.g. `os_log`, `Log.d`) are not collected.
+
+> **Minimum version:** `posthog-react-native@4.44.0` or later. Run `npx expo install posthog-react-native` (Expo) or your package manager's equivalent to update.
+
+<Steps>
+
+<Step title="Install posthog-react-native" badge="required">
+
+If you haven't already, install and initialize `posthog-react-native` using the steps below. For full details, see the [React Native SDK guide](/docs/libraries/react-native).
+
+<InstallReactNative />
+
+</Step>
+
+<Step title="Configure logs in your PostHog options" badge="required">
+
+Add a `logs` block to your PostHog initialization. All fields are optional; defaults are tuned for mobile (cellular bandwidth, battery, OS lifecycle).
+
+```react-native
+import PostHog from 'posthog-react-native'
+
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  logs: {
+    serviceName: 'my-app',          // OTLP service.name – shown in the Logs UI
+    environment: 'production',      // OTLP deployment.environment
+    serviceVersion: '1.2.3',        // OTLP service.version
+  },
+})
+```
+
+</Step>
+
+<Step title="Capture logs" badge="required">
+
+Use `posthog.logger` for the per-level convenience API, or `posthog.captureLog` for full control over level, attributes, and trace context.
+
+```react-native
+// Per-level convenience methods
+posthog.logger.info('checkout completed', { order_id: 'ord_789', amount_cents: 4999 })
+posthog.logger.warn('payment retry', { attempt: 2 })
+posthog.logger.error('payment failed', { code: 'E001' })
+
+// Lower-level API for custom severity / trace context
+posthog.captureLog({
+  body: 'checkout failed',
+  level: 'error',
+  attributes: { order_id: 'ord_789', step: 'auth' },
+  trace_id: '4bf92f3577b34da6a3ce929d0e0e4736',  // optional W3C trace context
+  span_id: '00f067aa0ba902b7',
+})
+```
+
+Records are buffered, batched, persisted to disk, and flushed automatically – every 10 seconds, on AppState change (foreground ↔ background), on buffer fill, or on `posthog.shutdown()`. For an immediate drain, call `await posthog.flushLogs()`.
+
+Each record is automatically tagged with the user's distinct ID, session ID, current screen, app foreground/background state, and active feature flags at the moment of capture.
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+1. Capture a test log from your app:
+   ```react-native
+   posthog.logger.info('hello from RN')
+   await posthog.flushLogs()
+   ```
+2. Open the [PostHog Logs UI](https://app.posthog.com/logs).
+3. Filter by `service.name = 'my-app'` (or whatever value you set above).
+
+You should see your record arrive within a few seconds.
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<Step title="Tune buffering, rate cap, and filtering" badge="optional">
+
+The `logs` config has knobs for high-volume apps:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+  logs: {
+    serviceName: 'my-app',
+    flushIntervalMs: 5000,                       // default 10000ms
+    maxBufferSize: 200,                          // default 100
+    rateCap: { maxLogs: 5000, windowMs: 60000 }, // default 500/10s
+    beforeSend: (record) =>
+      record.body.includes('secret') ? null : record, // redact or drop
+  },
+})
+```
+
+Full configuration reference:
+
+| Field | Default | What it does |
+| --- | --- | --- |
+| `serviceName` | `'unknown_service'` | OTLP `service.name` resource attribute |
+| `serviceVersion` | undefined | OTLP `service.version` resource attribute |
+| `environment` | undefined | OTLP `deployment.environment` resource attribute |
+| `resourceAttributes` | `{}` | Extra OTLP resource attributes |
+| `flushIntervalMs` | `10000` | Periodic flush interval in ms |
+| `maxBufferSize` | `100` | Max records held in memory before eviction |
+| `maxBatchRecordsPerPost` | `50` | Max records per outbound POST (halved on 413) |
+| `rateCap.maxLogs` | `500` | Max records per `windowMs` window |
+| `rateCap.windowMs` | `10000` | Rate-cap window length in ms |
+| `beforeSend` | undefined | Pre-send filter (return `null` to drop) |
+
+Defaults are tuned for cellular-aware mobile apps (~50 logs/sec ceiling, ~16KB max queue file). Raise `rateCap.maxLogs` and `maxBufferSize` for high-volume scenarios.
+
+</Step>
+
+<Step title="Filtering with beforeSend" badge="optional">
+
+The `beforeSend` hook runs synchronously before the rate cap, so dropped records don't consume the per-interval budget. Use it for redaction, sampling, or filtering by level:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  logs: {
+    serviceName: 'my-app',
+    beforeSend: (record) => {
+      // Drop debug logs in production
+      if (record.level === 'debug') return null
+
+      // Redact secrets in the body
+      return {
+        ...record,
+        body: record.body.replace(/api_key=\S+/g, 'api_key=[REDACTED]'),
+      }
+    },
+  },
+})
+```
+
+You can also pass an array of functions to form a chain (evaluated left-to-right). A `null` return from any link short-circuits and drops the record. A throwing filter is caught and skipped – the chain continues with the previous return value, so a buggy filter degrades to a no-op rather than crashing your app.
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>

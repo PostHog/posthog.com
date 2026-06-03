@@ -10,6 +10,7 @@ import { IconGraph, IconToggle, IconWarning } from '@posthog/icons'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
+import WizardCTA from 'components/WizardCTA'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
 import JuiceboxLogo from 'components/CustomerLogos/JuiceboxLogo'
@@ -39,6 +40,7 @@ const PLATFORM_ORDER = [
 export default function SessionReplayLanding(): JSX.Element {
     const [showMore, setShowMore] = useState(false)
     const [isIdle, setIsIdle] = useState(false)
+    const [isCopied, setIsCopied] = useState(false)
 
     const allPlatforms = usePlatformList('docs/session-replay/installation', 'session replay installation')
     const sortedPlatforms = useMemo(() => {
@@ -98,14 +100,25 @@ export default function SessionReplayLanding(): JSX.Element {
                             your editor.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
-                            <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                            <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                 Get started free
                             </CallToAction>
                             <CallToAction
                                 type="secondary"
                                 size="md"
-                                to="/docs/model-context-protocol"
-                                state={{ newWindow: true }}
+                                onClick={() => {
+                                    const el = document.getElementById(
+                                        'quest-item-mcp-debug-without-leaving-your-editor'
+                                    )
+                                    if (el) {
+                                        window.history.pushState(
+                                            null,
+                                            '',
+                                            '#quest-item-mcp-debug-without-leaving-your-editor'
+                                        )
+                                        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                    }
+                                }}
                             >
                                 Install MCP
                             </CallToAction>
@@ -152,6 +165,25 @@ export default function SessionReplayLanding(): JSX.Element {
 
                 <div className={isIdle ? 'quest-idle' : ''}>
                     <QuestLog firstSpeechBubble="Let's watch some sessions!" lastSpeechBubble="Time to start shipping!">
+                        <QuestLogItem
+                            title="Install with the PostHog Wizard"
+                            subtitle="Automatic setup with one command"
+                            icon="IconMagicWand"
+                        >
+                            <p>
+                                <strong>PostHog Wizard</strong> analyzes your codebase and automatically sets up session
+                                replay, autocapture, and dashboards tailored to your product. One command does it all:
+                            </p>
+
+                            <WizardCTA />
+
+                            <div className="mt-4">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
+                                    Get started free
+                                </CallToAction>
+                            </div>
+                        </QuestLogItem>
+
                         <QuestLogItem title="Catch exactly what users do" subtitle="Install the SDK" icon="IconCode2">
                             <p>
                                 Install PostHog and enable session replay in a couple lines of config. PostHog captures
@@ -181,7 +213,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             </button>
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Install PostHog SDK
                                 </CallToAction>
                             </div>
@@ -261,10 +293,13 @@ export default function SessionReplayLanding(): JSX.Element {
                                 <CallToAction
                                     type="primary"
                                     size="md"
-                                    to="/docs/model-context-protocol"
-                                    state={{ newWindow: true }}
+                                    onClick={() => {
+                                        navigator.clipboard.writeText('npx @posthog/wizard mcp add')
+                                        setIsCopied(true)
+                                        setTimeout(() => setIsCopied(false), 2500)
+                                    }}
                                 >
-                                    Install the MCP
+                                    {isCopied ? 'npx command copied! 🚀' : 'Install the MCP'}
                                 </CallToAction>
                                 <CallToAction
                                     type="secondary"
@@ -437,7 +472,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             />
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Install session replay
                                 </CallToAction>
                             </div>
@@ -480,7 +515,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             <p>That's it! You're ready to start integrating.</p>
 
                             <div className="flex flex-wrap gap-2 mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Get started free
                                 </CallToAction>
                                 <CallToAction
