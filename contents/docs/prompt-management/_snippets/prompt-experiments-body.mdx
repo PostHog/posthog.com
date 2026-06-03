@@ -1,0 +1,172 @@
+import CalloutBox from 'components/Docs/CalloutBox'
+import {ProductScreenshot} from 'components/ProductScreenshot'
+
+<CalloutBox icon="IconFlask" title="Prompt experiments are in beta" type="info">
+
+Prompt experiments are currently in beta. If you'd like early access, email [juraj@posthog.com](mailto:juraj@posthog.com).
+
+</CalloutBox>
+
+Prompt experiments let you A/B test two or more versions of the same prompt. PostHog splits your users between the versions, captures cost and latency for every generation, and shows which version wins.
+
+Use this when you have a candidate change to a prompt (a wording tweak, a new instruction, a different system message) and want to validate it against the current version before rolling it out.
+
+## Step 1: Create your prompt versions
+
+You need at least two versions of a prompt before you can create an experiment from it.
+
+1. In **Prompt management** → **Prompts**, open the prompt you want to test (or [create a new one](/docs/prompt-management/prompts#creating-prompts))
+2. If it only has one version, edit the body and save. Every save creates a new immutable version.
+3. Repeat for as many versions as you want to compare (up to 10)
+
+For the rest of this guide, we'll assume a prompt named `my-prompt` with versions `v1` and `v2`.
+
+## Step 2: Create the experiment
+
+1. On the prompt page, click the **Experiments** tab
+2. Click **Create experiment**
+3. In the modal:
+   - Pick the prompt versions you want to compare. The first one is the control variant, the rest are test variants (up to 10).
+   - Pick one or more metric templates: **Cost**, **Latency**, and **Eval pass rate**. Each one becomes a primary metric on the experiment, scoped to events tagged with this prompt name.
+4. Click **Create experiment**
+
+PostHog creates a feature flag with one variant per prompt version, attaches the chosen metrics, and takes you to the new experiment page. The experiment starts as a draft. We'll launch it in Step 4.
+
+export const CreatePromptExperimentModalLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_05_21_at_17_22_46_c167867dc1.png"
+export const CreatePromptExperimentModalDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_05_21_at_17_23_04_6df4d55a60.png"
+
+<ProductScreenshot
+    imageLight={CreatePromptExperimentModalLight}
+    imageDark={CreatePromptExperimentModalDark}
+    alt="Create experiment modal with two prompt versions and three metric templates selected"
+    classes="rounded"
+/>
+
+## Step 3: Wire up your code
+
+Open the **Code** tab on the experiment page. You'll find:
+
+- An **Agent prompt** — paste into Cursor, Claude Code, or any AI coding assistant. The assistant detects your framework, finds where you call the LLM, and wires up the experiment in your project's style.
+- **Python and JavaScript snippets** — copy these if you'd rather set things up manually.
+
+Either way, the resulting code does four things:
+
+1. Reads the variant payload from the experiment's feature flag (`{ "prompt_name": ..., "prompt_version": ... }`) and emits a `$feature_flag_called` exposure event so the experiment can attribute results to a variant.
+2. Fetches the matching prompt version from PostHog and compiles it.
+3. Calls your LLM through PostHog's AI wrapper, which auto-emits a `$ai_generation` event with cost and latency.
+4. Tags the generation with `$ai_prompt_name` and `$ai_prompt_version` so the experiment metric can match it to the right prompt and variant.
+
+<MultiLanguage>
+
+```python file=Python
+import json
+import os
+
+from posthog import Posthog
+from posthog.ai.openai import OpenAI
+from posthog.ai.prompts import Prompts
+
+posthog = Posthog(
+    os.environ["POSTHOG_API_KEY"],
+    host="https://us.posthog.com",  # Replace with your PostHog host
+    personal_api_key=os.environ["POSTHOG_PERSONAL_API_KEY"],
+)
+
+distinct_id = "<your-user-id>"
+flag_key = "<your-flag-key>"
+
+# send_feature_flag_events=True emits the $feature_flag_called exposure event the
+# experiment metric joins against. Without it the results page stays blank.
+payload = posthog.get_feature_flag_payload(flag_key, distinct_id, send_feature_flag_events=True)
+if not payload:
+    raise RuntimeError(f"No payload set for flag {flag_key}")
+if isinstance(payload, str):
+    payload = json.loads(payload)
+
+prompt_name = payload["prompt_name"]
+prompt_version = int(payload["prompt_version"])
+
+prompts = Prompts(posthog)
+prompt = prompts.get(prompt_name, version=prompt_version)
+system_prompt = prompts.compile(prompt, {})
+
+client = OpenAI(api_key=os.environ["OPENAI_API_KEY"], posthog_client=posthog)
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[{"role": "system", "content": system_prompt}],
+    posthog_distinct_id=distinct_id,
+    posthog_properties={
+        "$ai_prompt_name": prompt_name,
+        "$ai_prompt_version": prompt_version,
+    },
+)
+
+print(response.choices[0].message.content)
+```
+
+```javascript file=JavaScript
+import { PostHog } from 'posthog-node'
+import { OpenAI } from '@posthog/ai/openai'
+import { Prompts } from '@posthog/ai/prompts'
+
+const posthog = new PostHog(process.env.POSTHOG_API_KEY, {
+    host: 'https://us.posthog.com', // Replace with your PostHog host
+    personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY,
+})
+
+const distinctId = '<your-user-id>'
+const flagKey = '<your-flag-key>'
+
+// getFeatureFlagResult emits the $feature_flag_called exposure event the experiment
+// metric joins against. Without it the results page stays blank.
+const result = await posthog.getFeatureFlagResult(flagKey, distinctId)
+let payload = result?.payload
+if (!payload) {
+    throw new Error(`No payload set for flag ${flagKey}`)
+}
+if (typeof payload === 'string') {
+    payload = JSON.parse(payload)
+}
+
+const promptName = payload.prompt_name
+const promptVersion = Number(payload.prompt_version)
+
+const prompts = new Prompts(posthog)
+const prompt = await prompts.get(promptName, { version: promptVersion })
+const systemPrompt = prompts.compile(prompt, {})
+
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY, posthog })
+const response = await client.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [{ role: 'system', content: systemPrompt }],
+    posthogDistinctId: distinctId,
+    posthogProperties: {
+        $ai_prompt_name: promptName,
+        $ai_prompt_version: promptVersion,
+    },
+})
+
+console.log(response.choices[0].message.content)
+```
+
+</MultiLanguage>
+
+## Step 4: Launch and read results
+
+Click **Launch experiment** at the top of the experiment page. From now on, every distinct ID that hits your code gets assigned to a variant and routed through the matching prompt version.
+
+Results populate within seconds of the first events landing. Each tile shows the per-variant mean, the sample size, and a confidence interval against the control once you have enough data.
+
+- **Cost** — mean LLM cost per user (`$ai_total_cost_usd` on `$ai_generation`). Goal: decrease.
+- **Latency** — mean LLM latency per user (`$ai_latency`). Goal: decrease.
+- **Eval pass rate** — share of `$ai_evaluation` events that returned a pass, scoped to this prompt. Populates only if you have [LLM evaluations](/docs/ai-evals/evaluations) configured.
+
+export const PromptExperimentResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_05_21_at_17_34_40_5e448cfbdf.png"
+export const PromptExperimentResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_05_21_at_17_34_54_68fa203949.png"
+
+<ProductScreenshot
+    imageLight={PromptExperimentResultsLight}
+    imageDark={PromptExperimentResultsDark}
+    alt="Prompt experiment results page with Cost, Latency, and Eval pass rate metric tiles populated for control and test variants"
+    classes="rounded"
+/>

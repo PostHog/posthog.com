@@ -7,6 +7,7 @@ import { Posts, PostToggle } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
 import CommunityCTA from 'components/CommunityCTA'
+import StartupsCTA from 'components/StartupsCTA'
 import { companyMenu } from '../navs'
 
 const BlogCategory = ({
@@ -14,7 +15,7 @@ const BlogCategory = ({
         allPostsRecent: { edges: allPostsRecent },
         allPostsPopular: { edges: allPostsPopular },
     },
-    pageContext: { category, numPages, currentPage, base },
+    pageContext: { category, slug, numPages, currentPage, base },
 }) => {
     const [allPostsFilter, setAllPostsFilter] = useState<'latest' | 'popular'>('latest')
     const handleToggleChange = (checked: boolean) => {
@@ -34,6 +35,7 @@ const BlogCategory = ({
             <SEO title={`${category} - PostHog`} />
 
             <PostLayout article={false} title="Blog" hideSidebar hideSurvey>
+                {slug === 'startups' && <StartupsCTA />}
                 <Posts
                     titleBorder
                     title={category}

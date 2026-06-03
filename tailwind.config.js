@@ -144,6 +144,7 @@ module.exports = {
                 'blue-2': '#589DF8',
                 'blue-2-dark': '#1E2F46',
                 brown: '#3B2B26',
+                'brown-dark': '#C4A484',
                 'burnt-orange': '#DF6133',
                 'burnt-orange-dark': '#8E2600',
                 orange: '#EB9D2A',

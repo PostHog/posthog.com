@@ -1,0 +1,131 @@
+---
+title: Link logs to a person
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+PostHog can surface every log emitted on behalf of a specific user on that user's profile in the **Logs** tab. The link is attribute-based: each log carries a person identifier as an OpenTelemetry log attribute, and PostHog matches it to a person's `distinct_id`.
+
+## Why link logs to a person?
+
+When logs are linked to a person you can:
+
+- **Debug a specific user's issue**: jump from the person's profile straight to every backend log written while they were active, no service-name guessing.
+- **Trace failures across services**: frontend SDK logs, backend OTel logs, and any other source converge under one identity.
+- **Pivot from logs to other product data**: events, recordings, feature flags, and surveys are all on the same person.
+
+## Prerequisites
+
+- [Logs](/docs/logs) is enabled for your project.
+- A [logging client installed](/docs/logs/installation) on your backend (or you use the JavaScript / React Native SDKs which handle this automatically — see below).
+- Each log record carries the person identifier as an attribute. By default the attribute key is `posthogDistinctId` — the same key the [PostHog JavaScript SDK](/docs/libraries/js) and [React Native SDK](/docs/libraries/react-native) auto-attach.
+
+> **Logs captured client-side:** When you call `posthog.captureLog` / `posthog.logger.*` from the JavaScript web SDK or React Native SDK, the current `distinct_id` is attached as `posthogDistinctId` on every log automatically. No further setup needed.
+
+## Implementation
+
+### Backend (OpenTelemetry)
+
+When you emit logs directly via OpenTelemetry from a backend — Python, Go, Node.js without `posthog.logger`, or your own collector pipeline — add `posthogDistinctId` to each log record's attributes. Set it to the same `distinct_id` you use when calling `posthog.capture`.
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+import { logs } from '@opentelemetry/api-logs'
+
+const logger = logs.getLogger('my-app')
+
+app.post('/api/checkout', async (req, res) => {
+  const userId = req.userId  // ... get your user ID
+
+  logger.emit({
+    severityText: 'info',
+    body: 'Checkout completed',
+    attributes: {
+      posthogDistinctId: userId,    // Links to PostHog person
+      orderId: 'A-123',
+    },
+  })
+
+  res.json({ success: true })
+})
+```
+
+```python file=Python
+import logging
+
+logger = logging.getLogger(__name__)
+
+@app.route('/api/checkout', methods=['POST'])
+def checkout():
+    user_id = current_user.distinct_id
+
+    logger.info(
+        "Checkout completed",
+        extra={
+            "posthogDistinctId": user_id,    # Links to PostHog person
+            "orderId": "A-123",
+        }
+    )
+
+    return jsonify({"success": True})
+```
+
+```go file=Go
+import (
+    "go.opentelemetry.io/otel/attribute"
+    "go.opentelemetry.io/otel/log"
+)
+
+log.Info("Checkout completed",
+    attribute.String("posthogDistinctId", currentUser.DistinctID),  // Links to PostHog person
+    attribute.String("orderId", "A-123"),
+)
+```
+
+</MultiLanguage>
+
+> **Note:** PostHog matches the value against every `distinct_id` we know about for the person, so as long as the value matches **one** of their identifiers, the log will appear on the profile. Identified-after-anonymous flows still link correctly.
+
+### Verifying the link
+
+1. Send a log carrying `posthogDistinctId` set to a known user.
+2. Open that user's profile in the [People tab](https://app.posthog.com/persons).
+3. Open the **Logs** tab. The log appears within a few seconds.
+
+If the log does not appear, check:
+
+- **Attribute key spelling**: `posthogDistinctId` is camelCase with a lowercase `p`. PostHog matches it exactly. `distinct_id`, `posthog_distinct_id`, and `user_id` are not equivalent unless you've explicitly configured one of them — see [Customizing the attribute key](#customizing-the-attribute-key) below.
+- **Attribute value**: must equal one of the person's `distinct_id`s. Prefixed or partial matches are not picked up.
+- **The log's timestamp**: the **Logs** tab respects the date range picker. Extend the range if the log is older than the default window.
+
+## Customizing the attribute key
+
+If your pipeline emits the person identifier under a different key (for example `user.id`, `customerId`, or a legacy `distinct_id`), point PostHog at that key with the `logs_config` endpoint:
+
+```bash
+curl -X PATCH "https://app.posthog.com/api/projects/<PROJECT_ID>/logs_config/" \
+     -H "Authorization: Bearer <PERSONAL_API_KEY>" \
+     -H "Content-Type: application/json" \
+     -d '{"logs_distinct_id_attribute_key": "user.id"}'
+```
+
+Only one key per project. Pick the key your pipeline actually emits — there is no fallback chain, so a log that lacks the configured key is unlinked from any person.
+
+When the key has been customized, the person profile's **Logs** tab shows a small hint above the volume chart indicating which attribute is being used as the person pivot.
+
+## What this does not do
+
+- It does not retroactively re-link old logs after you change the configured key. Logs are matched at query time, so the new key applies as soon as it's saved, but logs ingested under the old key still need to match the configured key to appear on a person profile.
+- It does not link by IP, user-agent, or any other heuristic. Only attribute-value equality.
+- It does not affect ingestion. Logs without the configured attribute are stored normally; they're just not surfaced on any person profile.
+
+## See also
+
+- [Link logs to session replay](/docs/logs/link-session-replay): pair `posthogDistinctId` with `sessionId` to also link to recordings.
+- [Logging best practices](/docs/logs/best-practices)
+- [Person profiles](/docs/data/persons)

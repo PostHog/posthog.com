@@ -9,6 +9,8 @@ PostHog complements a lot of other software companies. Since we’re active in t
 ### Who takes the lead with co-marketing?
 Sales, engineering, or support will sometimes tag marketing into customer Slack channels where someone mentions co-marketing. There’s no obligation to say yes just because a partner is enthusiastic. If you’re unsure whether something is worth pursuing, ask in the **#team-marketing** Slack channel. 
 
+> The list of partners we are currently doing or planning co-marketing partnerships with is maintained [in this canvas](https://posthog.slack.com/docs/TSS5W8YQZ/F09FD1DS2CD). 
+
 If it does seem promising, a product marketer will take the lead and loop in events or other teams as needed.
 
 What this article doesn’t cover:

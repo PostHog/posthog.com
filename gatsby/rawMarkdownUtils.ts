@@ -385,7 +385,7 @@ export const generateLlmsTxt = (pages) => {
     const sectionTitleOverrides: Record<string, string> = {
         'docs-libraries': 'SDKs and Libraries',
         'docs-experiments': 'A/B Testing and Experiments',
-        'docs-llm-analytics': 'LLM Analytics and Observability',
+        'docs-llm-analytics': 'AI Observability',
         'docs-cdp': 'Customer Data Platform (CDP)',
         'docs-api': 'API',
         'docs-hogql': 'HogQL',
@@ -446,7 +446,7 @@ If the wizard doesn't support the framework, see the [SDKs and Libraries](https:
 - **A/B Testing (Experiments)**: Built on feature flags. Create experiments in the PostHog UI, then use \`posthog.getFeatureFlag('experiment-flag')\` to render variants. See the [Experiments docs](https://posthog.com/docs/experiments/adding-experiment-code.md).
 - **Surveys**: In-app surveys configured in the PostHog UI and rendered automatically by \`posthog-js\`. No extra code required for popup surveys. See the [Surveys docs](https://posthog.com/docs/surveys/creating-surveys.md).
 - **Error Tracking**: Capture frontend exceptions with \`posthog.captureException(error)\`. Works automatically when enabled. See the [Error Tracking docs](https://posthog.com/docs/error-tracking/capture.md).
-- **LLM Analytics**: Track LLM API calls, token usage, and costs. Integrations for OpenAI, Anthropic, LangChain, and more. See the [LLM Analytics docs](https://posthog.com/docs/llm-analytics.md).
+- **AI Observability**: Track LLM API calls, token usage, and costs. Integrations for OpenAI, Anthropic, LangChain, and more. See the [AI Observability docs](https://posthog.com/docs/ai-observability.md).
 - **Data Warehouse**: Query external data sources (Stripe, Hubspot, Postgres, S3, etc.) alongside PostHog data using SQL. See the [Data Warehouse docs](https://posthog.com/docs/data-warehouse.md).
 
 **API:** The PostHog API base URL is \`https://us.i.posthog.com\` (US cloud) or \`https://eu.i.posthog.com\` (EU cloud). Use a personal API key (not the project API key) for API access. See the [API docs](https://posthog.com/docs/api.md).
@@ -560,7 +560,6 @@ export const generatePricingMd = (products: any[]) => {
         data_warehouse: {
             description:
                 'Query external data sources (Stripe, Hubspot, Postgres, S3, etc.) alongside PostHog data using SQL. No separate warehouse needed.',
-            note: 'Revenue Analytics is included with Data Warehouse at no extra cost.',
         },
         realtime_destinations: {
             description:

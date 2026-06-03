@@ -41,7 +41,6 @@ const manageQueryHandles = ['data_modeling', 'sql_editor', 'cdp', 'data_warehous
 const analyticsHandles = [
     'web_analytics',
     'product_analytics',
-    'revenue_analytics',
     'trends',
     'funnels',
     'user_paths',
@@ -66,7 +65,7 @@ const rolloutGroups = [
     },
     {
         title: 'Feedback & training',
-        handles: ['surveys', 'product_tours', 'support', 'user_interviews'] as const,
+        handles: ['surveys', 'support', 'user_interviews'] as const,
     },
 ] as const
 
@@ -329,7 +328,6 @@ const productSlots: { handle: string; '@xl': [number, number]; '@2xl': [number, 
     [
         { handle: 'web_analytics', '@xl': [28, 4], '@2xl': [26, 6], '@3xl': [24, 6] },
         { handle: 'product_analytics', '@xl': [18, 22], '@2xl': [16, 22], '@3xl': [14, 22] },
-        { handle: 'revenue_analytics', '@xl': [72, 4], '@2xl': [72, 6], '@3xl': [74, 6] },
         { handle: 'session_replay', '@xl': [10, 36], '@2xl': [10, 38], '@3xl': [10, 40] },
         { handle: 'funnels', '@xl': [7, 6], '@2xl': [5, 59], '@3xl': [6, 60] },
         { handle: 'heatmaps', '@xl': [76, 22], '@2xl': [78, 22], '@3xl': [80, 22] },

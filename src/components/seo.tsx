@@ -15,6 +15,13 @@ interface SEOProps {
     noindex?: boolean
     imageType?: 'absolute' | 'relative'
     updateWindowTitle?: boolean
+    lang?: string
+    languageAlternates?: LanguageAlternate[]
+}
+
+export type LanguageAlternate = {
+    hrefLang: string
+    href: string
 }
 
 export const SEO = ({
@@ -26,6 +33,8 @@ export const SEO = ({
     noindex,
     imageType = 'relative',
     updateWindowTitle = true,
+    lang,
+    languageAlternates,
 }: SEOProps): JSX.Element => {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
@@ -53,10 +62,19 @@ export const SEO = ({
 
     return (
         <Helmet title={seo.title} titleTemplate={titleTemplate}>
+            {lang && <html lang={lang} />}
             {noindex && <meta name="robots" content="noindex" />}
             {seo.description && <meta name="description" content={seo.description} />}
             {seo.image && <meta name="image" content={seo.image} />}
             {<link rel="canonical" href={canonicalUrl ? canonicalUrl : seo.url} />}
+            {languageAlternates?.map(({ hrefLang, href }) => (
+                <link
+                    key={hrefLang}
+                    rel="alternate"
+                    hrefLang={hrefLang}
+                    href={href.startsWith('http') ? href : `${siteUrl}${href.startsWith('/') ? href : `/${href}`}`}
+                />
+            ))}
             {isMarkdownContentPath(pathname) && (
                 <link rel="alternate" type="text/markdown" href={`${siteUrl}${pathname.replace(/\/$/, '')}.md`} />
             )}
