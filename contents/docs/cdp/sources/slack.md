@@ -86,6 +86,40 @@ Because channel message tables rely entirely on webhooks, you need to create a S
 
 PostHog uses the signing secret to verify that incoming events actually came from Slack. Once the webhook is active, new messages in your enabled channels start appearing in their tables.
 
+## Common issues
+
+### Bot not installed
+
+Events won't be sent to PostHog if the Slack app hasn't been installed to your workspace. Even after creating the app and configuring the webhook, you still need to explicitly install it.
+
+To verify:
+
+1. Go to your [Slack app settings](https://api.slack.com/apps).
+2. Select your PostHog data warehouse app.
+3. Click **Settings** > **Install App** in the left sidebar.
+4. Confirm the app shows as installed. If not, click **Install to Workspace** and authorize it.
+
+See Slack's [Installing with OAuth](https://api.slack.com/authentication/oauth-v2) documentation for more details.
+
+### Webhook shows "Doesn't respond"
+
+When you enable Event Subscriptions, Slack sends a verification challenge to your webhook URL. If this initial handshake fails, the status stays stuck on **Doesn't respond**.
+
+To fix this:
+
+1. Go to your [Slack app settings](https://api.slack.com/apps) and select your app.
+2. Click **Features** > **Event Subscriptions** in the left sidebar.
+3. Re-enter or re-paste the Request URL from PostHog's webhook tab.
+4. Slack should show a green **Verified** checkmark.
+
+If verification keeps failing:
+
+- Confirm the webhook URL is correct (copy it fresh from PostHog).
+- Check that your PostHog source is still active and hasn't been deleted.
+- Wait a few seconds and try again – transient network issues can cause failures.
+
+See Slack's [Events API](https://api.slack.com/apis/events-api) documentation for more on how URL verification works.
+
 ## Configuration
 
 <SourceParameters />
