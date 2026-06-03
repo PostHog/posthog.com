@@ -37,12 +37,12 @@ instrument(server, {
     if (!user) return null
 
     return {
-      userId: user.id,                  // becomes distinct_id
-      userName: user.name,              // becomes $set.name
-      userData: {
-        email: user.email,              // becomes $set.email
-        plan: user.plan,                // becomes $set.plan
-        signupDate: user.signupDate,    // becomes $set.signupDate
+      distinctId: user.id,              // becomes distinct_id
+      properties: {                     // written to $set
+        name: user.name,
+        email: user.email,
+        plan: user.plan,
+        signupDate: user.signupDate,
       },
       groups: {                         // becomes $groups on every event
         organization: user.orgId,
@@ -52,25 +52,24 @@ instrument(server, {
 })
 ```
 
-The `UserIdentity` fields map to PostHog as follows:
+This is the same shape as posthog-node's [`identify({ distinctId, properties })`](/docs/libraries/node) — just returned from a per-request callback instead of called imperatively. The fields map to PostHog as follows:
 
-- `userId` → the event's `distinct_id`.
-- `userName` → `$set.name`.
-- Every key of `userData` is spread into `$set` — so to set a person's email, return `userData: { email }`.
+- `distinctId` → the event's `distinct_id`.
+- `properties` → written verbatim to `$set` (so to set a person's name or email, put them here, e.g. `properties: { name, email }`).
 - `groups` (optional `Record<string, string>` of groupType → groupKey) is stamped onto **every** event as `$groups`. You never hand-write `$groups` yourself.
 
 When this returns a non-null identity, the SDK:
 
-1. Switches the event's `distinct_id` to `userId` for that session.
-2. Emits a `$identify` event the first time the identity is observed (or whenever it changes for that session), with the `$set` properties populated from `userName` and `userData`.
+1. Switches the event's `distinct_id` to `distinctId` for that session.
+2. Emits a `$identify` event the first time the identity is observed (or whenever it changes for that session), with `$set` populated from `properties`.
 3. Stamps `$groups` onto subsequent events from the returned `groups` map.
-4. Caches the identity in a small LRU keyed by session id, so unchanged identities are silently deduped.
+4. Caches the identity in a small per-server LRU keyed by session id, so unchanged identities are silently deduped.
 
 ## Identity merges
 
 A single MCP session typically emits a handful of events before any auth handshake completes — for example, `$mcp_initialize` may fire before you've resolved the user. Those early events go out anonymous, attributed to the session id.
 
-When `identify` eventually returns a user, the SDK emits `$identify` with `$anon_distinct_id` set to the prior session id. PostHog's identity-merging logic then attributes the anonymous events to the identified user. From that point on, events for that session go out under `userId` directly.
+When `identify` eventually returns a user, the SDK emits `$identify` with `$anon_distinct_id` set to the prior session id. PostHog's identity-merging logic then attributes the anonymous events to the identified user. From that point on, events for that session go out under `distinctId` directly.
 
 This is the same merge model the [Node SDK](/docs/libraries/node) uses — if you've configured Person profile mode or have other strong opinions on identity in your PostHog project, the same rules apply.
 

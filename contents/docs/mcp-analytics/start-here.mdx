@@ -153,7 +153,7 @@ instrument(server, {
   identify: async (request, extra) => {
     const token = extra?.requestInfo?.headers?.authorization
     const user = token ? await resolveUserFromToken(token) : null
-    return user ? { userId: user.id, userName: user.name } : null
+    return user ? { distinctId: user.id, properties: { name: user.name } } : null
   },
 })
 ```
