@@ -131,6 +131,8 @@ Postgres's client-server model is what makes it good at concurrent multi-user ac
 
 Notably, Postgres is always used as a database. It *has* to spin up a database server, and it *has* to be accessible via a client process. Even if both the client and server are on the same device, this partitioned structure is required. DuckDB, meanwhile, could be used as a database *or* it could be invoked as a library to analyze a data file (like Parquet). Despite having “DB” in a name, DuckDB is often used as a query engine rather than a database. It'll forgo a lot of initialization work in these scenarios, strictly building data structures for the query at-hand. That's exactly how we use it at PostHog – a query engine for [our data warehouse product](/data-stack). 
 
+![DuckDB query interface](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_143762_980111f164.png)
+
 ### Communicating with Postgres (and why we built Duckgres)
 
 Now seems like a great time to bring up the Postgres Wire Protocol as well as our open-source project, Duckgres.
@@ -160,6 +162,8 @@ Postgres scales vertically. You give a single primary node more CPU, memory, and
 Beyond that, you can partition large tables natively, and with third-party extensions like Citus, shard data across multiple nodes. 
 
 DuckDB scales differently because there's no server to scale. As an embedded engine, it scales vertically. A bigger box means faster, bigger queries. It's built to push a single node hard: out-of-core execution lets it process datasets larger than available memory by spilling to disk. Vectorized execution keeps the CPU saturated. In other words, DuckDB has tricks up its sleeve to chomp through calculations.  
+
+![DuckDB single-node scaling diagram](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_143760_cec9142333.png)
 
 Where DuckDB really scales is storage. DuckDB reads directly from columnar files like Parquet sitting in object storage, so your data can grow into terabytes in S3 while DuckDB pulls in only the columns and row groups each query needs. This partitioned storage and compute is massively advantageous in an era where data files are massive and detached object storage is incredibly cheap. 
 

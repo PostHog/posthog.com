@@ -46,6 +46,8 @@ Like SQLite, DuckDB uses a file to persist (e.g. `database.duckdb`). It's incred
 
 What makes DuckDB so appetizing is that it provides incredible analytical performance with no set-up work. It's just attached to a data file (e.g. a Parquet or CSV file) and … works. However, unlike SQLite, DuckDB's primary advantage isn't its "local-ness": it's often analyzing massive data files served over network (in fact, that's how we use it at PostHog for [our data warehouse](/data-stack)). Rather, DuckDB is portable. You have lots and lots of data, you initialize DuckDB, and you can query analytics. It doesn't even need to be a persistent database as it can be used as an ephemeral analytical process (i.e. a data engine). 
 
+![DuckDB query interface](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_143762_980111f164.png)
+
 ## Architecture matchup: SQLite vs DuckDB
 
 Let's talk architecture. Despite both being single-file and embedded, SQLite and DuckDB have different architectures. To [use a familiar analogy](/blog/clickhouse-vs-postgres), they're as different as grapes and grapefruits. 
