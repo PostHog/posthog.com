@@ -8,23 +8,23 @@
 - **MCP tools and skills** - expose core AI Observability workflows through MCP tools and reusable skills
 - **PostHog AI integration** - bring AI Observability capabilities directly into PostHog AI workflows
 
-#### Goal 2: Full evals stack
+#### Goal 2: Eval experience and reliability
 
-*Description*: Build out the full evaluations stack and connect it into a clearer, more complete workflow for teams evaluating AI systems.
+*Description*: Make evaluations easier to run and give teams clearer visibility into where their AI systems fail.
 
 *What we will ship*:
 - **Trace-level evaluations** - run evaluations directly against traces
 - **Session-level evaluations** - extend evaluations to broader user and agent sessions where it makes sense
-- **Online evals from traces and clusters** - create evaluations from traces and clusters
+- **Improve observability of failures** - show errors more transparently
 
-#### Goal 3: Product glue
+#### Goal 3: Prompt management improvements
 
-*Description*: Improve the connections between AI Observability features and strengthen how AI Observability works with the rest of PostHog.
+*Description*: Make prompts easier to organize, scope, and connect to experimentation.
 
 *What we will ship*:
 - **Prompts and experiments integration** - tighter connections between prompt workflows and experimentation
-- **Cross-product workflows** - better glue between AI Observability and the rest of PostHog
 - **Prompt tags** - tag prompts and fetch them by tag for better organization
+- **Private project API keys** - switch prompt management from personal API keys to scoped, private project API keys so prompts aren't tied to an individual user's account
 
 #### Goal 4: Reliability and performance
 
@@ -40,13 +40,11 @@
 *What we will ship*:
 - **Single trace UI refresh** - modernize the trace experience for agent-first workflows
 - **Session UI improvements** - bring the same quality bar to session-level investigation
-- **Simple view** - create a lightweight view for traces
 - **Custom message parsers** - define parsers for different agent and LLM message structures
 
-#### Goal 6: Ingestion pipeline and migration
+#### Goal 6: Cluster migration
 
-*Description*: Complete the new ingestion pipeline for large-text workloads, and finish the `ai_events` cluster migration.
+*Description*: Finish migrating to the new `ai_events` cluster architecture, which is optimized for point lookups of traces.
 
 *What we will ship*:
-- **Large-text ingestion** - support larger payloads and richer text-heavy workloads
 - **`ai_events` cluster migration** - complete the migration to the new cluster architecture, which is optimized for point lookups of traces
