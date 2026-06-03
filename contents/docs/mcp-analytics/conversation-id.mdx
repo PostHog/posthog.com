@@ -18,7 +18,7 @@ Conversation IDs are off by default and rely on the agent cooperating. Read the 
 
 ```ts
 instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  posthog,
   enableConversationId: true,
 })
 ```

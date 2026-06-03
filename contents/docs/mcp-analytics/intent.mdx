@@ -53,7 +53,7 @@ If you want to nudge the agent toward a specific style of context (use case, use
 
 ```ts
 instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  posthog,
   context: {
     description: "Describe the user's underlying goal in one sentence — not the tool you're calling.",
   },
@@ -78,7 +78,7 @@ The cheapest pattern — synchronous, runs on every uncontextualized call. Good 
 
 ```ts
 instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  posthog,
   intentFallback: (request) => {
     const tool = request.params?.name
     const args = request.params?.arguments ?? {}

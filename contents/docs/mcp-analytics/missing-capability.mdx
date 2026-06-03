@@ -12,7 +12,7 @@ One of the most valuable signals an MCP server owner can get is: *the agent want
 
 ```ts
 instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  posthog,
   reportMissing: true,
 })
 ```
@@ -23,8 +23,8 @@ With this on, the SDK registers a virtual tool called `get_more_tools` on your s
 
 When the agent invokes `get_more_tools`, the SDK:
 
-1. Captures the call as a normal `$mcp_tool_call` event with `$mcp_tool_name = "get_more_tools"`.
-2. Stamps `$mcp_intent` with the agent-supplied `context` describing what the user was trying to do.
+1. Emits its own dedicated `$mcp_missing_capability` event — **not** a `$mcp_tool_call`.
+2. Stamps `$mcp_intent` with the agent's reasoning describing what the user was trying to do.
 3. Returns a benign response to the agent so it can continue its turn.
 
 That gives you a queryable feed of unmet asks per server:
@@ -35,8 +35,7 @@ SELECT
   properties.$mcp_client_name AS client,
   count() AS times_asked
 FROM events
-WHERE event = '$mcp_tool_call'
-  AND properties.$mcp_tool_name = 'get_more_tools'
+WHERE event = '$mcp_missing_capability'
   AND timestamp > now() - INTERVAL 30 DAY
 GROUP BY unmet_request, client
 ORDER BY times_asked DESC
@@ -78,9 +77,9 @@ Together, the two queries answer "what tools should I build?" and "what tools sh
 
 </CalloutBox>
 
-<CalloutBox icon="IconWarning" title="Intent source is always `context_parameter`" type="caution">
+<CalloutBox icon="IconInfo" title="It's its own event, not a tool call" type="fyi">
 
-`$mcp_intent_source` will report `"context_parameter"` for every `get_more_tools` call, even though the SDK is what defined the schema. Filter it out of source-attribution queries if it skews the numbers.
+`get_more_tools` emits a dedicated `$mcp_missing_capability` event rather than a `$mcp_tool_call`, so it never pollutes your tool-call volume, error-rate, or intent-source queries. Query it directly via `event = '$mcp_missing_capability'`.
 
 </CalloutBox>
 

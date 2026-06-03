@@ -10,7 +10,7 @@ Pass an `eventProperties` callback to attach extra properties to every event the
 
 ```ts
 instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  posthog,
   eventProperties: async (request, extra) => ({
     $app_version: process.env.GIT_SHA ?? "unknown",
     $mcp_region: process.env.FLY_REGION ?? "unknown",
@@ -46,29 +46,35 @@ eventProperties: async () => ({
 
 Returned values must be JSON-serializable. Errors thrown from your callback are swallowed and surfaced to your `logger` — they never interrupt tool execution.
 
-## `publishCustomEvent` — emit an arbitrary event
+## `capture` — emit an arbitrary event
 
-When the built-in events don't cover what you need — for example, recording a feedback signal from your own UI, or capturing a domain event that isn't an MCP request — use `publishCustomEvent`. It writes onto the same queue as everything else, so it inherits the SDK's redaction, sanitization, identity, and `eventProperties` logic.
+When the built-in events don't cover what you need — for example, recording a feedback signal from your own UI, or capturing a domain event that isn't an MCP request — use `capture`. It writes onto the same queue as everything else, so it inherits the SDK's sanitization, identity, `beforeSend`, and `eventProperties` logic. `capture` returns a promise you can `await`.
+
+The `event` name defaults to `$mcp_custom`. Pass your own `event` name to send an event of that name verbatim — it is **not** `$`-prefixed for you.
 
 ```ts
-import { publishCustomEvent } from "@posthog/mcp"
+import { capture } from "@posthog/mcp"
 
-await publishCustomEvent(server, {
-  resourceName: "monthly_usage",
-  message: "User reported overage",
+// Default event name: $mcp_custom
+await capture(server, {
   properties: {
     plan: "growth",
     units: 12_345,
     period: "2026-04",
   },
 })
+
+// Custom event name sent verbatim as "feedback_submitted"
+await capture(server, {
+  event: "feedback_submitted",
+  properties: { rating: 5 },
+})
 ```
 
 What lands in PostHog:
 
-- A single `$mcp_custom` event with your `properties` merged in.
+- One event — `$mcp_custom` by default, or the verbatim `event` name you passed — with your `properties` merged in.
 - The session id, identity, and any `eventProperties` callback still apply.
-- `publishCustomEvent` is exempt from `enableTracing: false` — explicit user-initiated calls always fire even if auto-capture is off.
 
 The server must already have been passed to `instrument()`. Passing a non-instrumented server throws — there's no implicit setup.
 
@@ -77,5 +83,5 @@ The server must already have been passed to `instrument()`. Passing a non-instru
 | You want to... | Use |
 |---|---|
 | Attach the same properties to every auto-captured event | `eventProperties` |
-| Emit a one-off event that isn't an MCP request | `publishCustomEvent` |
+| Emit a one-off event that isn't an MCP request | `capture` |
 | Attach data to a *specific* tool call (just that one) | Not directly supported — the callbacks run on every event. The SDK doesn't currently expose a per-call hook. |

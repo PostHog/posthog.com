@@ -6028,12 +6028,6 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'LLM analytics integration',
-                    url: '/docs/mcp-analytics/ai-tracing',
-                    icon: 'IconLlmAnalytics',
-                    color: 'purple',
-                },
-                {
                     name: 'Missing capabilities',
                     url: '/docs/mcp-analytics/missing-capability',
                     icon: 'IconWrench',

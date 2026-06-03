@@ -19,10 +19,12 @@ import CalloutBox from 'components/Docs/CalloutBox'
 ## Install
 
 ```bash
-pnpm add @posthog/mcp
-# or npm install @posthog/mcp
-# or yarn add @posthog/mcp
+npm install @posthog/mcp posthog-node
+# or pnpm add @posthog/mcp posthog-node
+# or yarn add @posthog/mcp posthog-node
 ```
+
+You bring your own [`posthog-node`](/docs/libraries/node) client (the same pattern as [`@posthog/ai`](/docs/ai-engineering)) and pass it to `instrument()`. You own its lifecycle — call `posthog.shutdown()` or `posthog.flush()` yourself. If you don't pass a `posthog` client, the SDK installs the wrapper but captures nothing — that's how you turn capture off.
 
 ## Wrap your server
 
@@ -34,16 +36,18 @@ If you registered your tools against the raw protocol `Server` from `@modelconte
 
 ```ts
 import { Server } from "@modelcontextprotocol/sdk/server/index.js"
+import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
 
 const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
-// register your tools as usual...
-
-instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
 })
+
+// register your tools as usual...
+
+instrument(server, { posthog })
 ```
 
 ### High-level `McpServer`
@@ -52,13 +56,16 @@ If you use the typed `McpServer` wrapper from `@modelcontextprotocol/sdk/server/
 
 ```ts
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
+import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
 
 const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
 
-instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+  host: "https://us.i.posthog.com",
 })
+
+instrument(server, { posthog })
 
 server.tool("search_events", { /* ... */ }, async (args) => {
   // your handler runs untouched
@@ -67,40 +74,41 @@ server.tool("search_events", { /* ... */ }, async (args) => {
 
 ## Configuration
 
-`instrument()` accepts these options. Only `projectToken` is required.
+`instrument()` accepts these options. Pass a `posthog` client to actually send events; without one the wrapper installs but captures nothing.
 
 | Option | Type | Default | What it does |
 |---|---|---|---|
-| `projectToken` | `string` | — | PostHog project token (`phc_…`). Without it, the SDK initializes but does not send events. |
-| `host` | `string` | `https://us.i.posthog.com` | PostHog ingestion host. |
-| `clientOptions` | `object` | — | Options forwarded to the underlying `@posthog/core` client (flush interval, batch size, custom `fetch`, etc). |
+| `posthog` | `PostHog` (from `posthog-node`) | — | Your own `posthog-node` client. The SDK sends events through it but does not own its lifecycle — you call `posthog.flush()` / `posthog.shutdown()`. Omit it to disable capture. |
 | `logger` | `(message: string) => void` | no-op | STDIO-safe log sink for SDK-internal warnings. MCP STDIO transports cannot use `console.*`, so the default discards. Wire your own to surface warnings during development. |
-| `enableTracing` | `boolean` | `true` | Master switch for auto-captured events. Set to `false` to disable all automatic capture without removing the wrapper. `publishCustomEvent` still fires when this is off. |
-| `enableAITracing` | `boolean` | `false` | Emit `$ai_span` siblings so MCP tool calls appear in [LLM analytics](/docs/mcp-analytics/ai-tracing). |
+| `enableExceptionAutocapture` | `boolean` | `true` | When `false`, a failed tool call does not emit the `$exception` sibling event. |
 | `context` | `boolean \| { description: string }` | `true` | Inject a required `context` argument into every tool schema. See [Capturing agent intent](/docs/mcp-analytics/intent). |
 | `intentFallback` | `(request, extra) => string \| Promise<string \| null \| undefined>` | — | Called when the agent didn't pass a `context` argument. See [Capturing agent intent](/docs/mcp-analytics/intent). |
 | `enableConversationId` | `boolean` | `false` | Inject an optional `conversation_id` argument into every tool. See [Conversation IDs](/docs/mcp-analytics/conversation-id). |
 | `reportMissing` | `boolean` | `false` | Register the `get_more_tools` virtual tool. See [Missing capability](/docs/mcp-analytics/missing-capability). |
 | `identify` | `async (request, extra) => UserIdentity \| null \| UserIdentity` | — | Map an MCP request to one of your users. See [Identifying users](/docs/mcp-analytics/identifying-users). |
-| `redactSensitiveInformation` | `async (value: string) => string` | — | Customer-supplied string redactor. Runs on every string field before sanitization. See [Privacy](/docs/mcp-analytics/privacy). |
+| `beforeSend` | `(event) => event \| null \| undefined \| Promise<...>` | — | Runs on each fully-built PostHog payload right before send. Return the (possibly mutated) event to send it, or a nullish value to drop it. See [Privacy](/docs/mcp-analytics/privacy). |
 | `eventProperties` | `async (request, extra) => Record<string, unknown>` | — | Properties merged onto every event. See [Custom events and metadata](/docs/mcp-analytics/custom-events). |
 
 ## Graceful shutdown
 
-The SDK queues and batches events asynchronously. Call `shutdown(server)` from your `SIGTERM` / `beforeExit` handler so in-flight events aren't dropped:
+The `posthog-node` client queues and batches events asynchronously, and you own its lifecycle. Call `posthog.shutdown()` from your `SIGTERM` / `beforeExit` handler so in-flight events aren't dropped:
 
 ```ts
-import { instrument, shutdown } from "@posthog/mcp"
+import { PostHog } from "posthog-node"
+import { instrument } from "@posthog/mcp"
 
-instrument(server, { projectToken: process.env.POSTHOG_PROJECT_TOKEN })
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY)
+instrument(server, { posthog })
 
 process.on("SIGTERM", async () => {
-  await shutdown(server)
+  await posthog.shutdown()
   process.exit(0)
 })
 ```
 
-If you only want to flush without tearing the client down, use `flush(server)` instead.
+If you only want to drain the queue without tearing the client down, call `posthog.flush()` instead.
+
+In serverless or edge environments where `SIGTERM` isn't reliable, flush explicitly at the end of each invocation — `await posthog.flush()`, or `ctx.waitUntil(posthog.flush())` on platforms that support it — rather than relying on a shutdown signal.
 
 ## What happens after install
 

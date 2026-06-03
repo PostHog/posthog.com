@@ -112,31 +112,11 @@ SELECT
   properties.$mcp_client_name  AS client,
   count()                      AS times_asked
 FROM events
-WHERE event = '$mcp_tool_call'
-  AND properties.$mcp_tool_name = 'get_more_tools'
+WHERE event = '$mcp_missing_capability'
   AND timestamp > now() - INTERVAL 30 DAY
 GROUP BY unmet_request, client
 ORDER BY times_asked DESC
 LIMIT 50
-```
-
-## Joining `$mcp_tool_call` to its `$ai_span` sibling
-
-The LLM analytics UI handles this join automatically. For ad-hoc queries:
-
-```sql
-SELECT
-  c.properties.$mcp_tool_name    AS tool,
-  c.properties.$mcp_duration_ms  AS duration_ms,
-  s.properties.$ai_latency       AS ai_latency_s,
-  c.properties.$mcp_intent       AS intent
-FROM events c
-INNER JOIN events s
-  ON s.event = '$ai_span'
- AND s.properties.$ai_span_id = c.properties.$ai_span_id
-WHERE c.event = '$mcp_tool_call'
-  AND c.timestamp > now() - INTERVAL 24 HOUR
-LIMIT 100
 ```
 
 ## Tool call volume by client and tool, daily

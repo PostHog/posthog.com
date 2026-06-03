@@ -16,15 +16,19 @@ For each event, the SDK picks `distinct_id` in this order:
 
 That means events emitted before `identify` returns a user are session-scoped; once it returns a user, subsequent events attribute to that user and PostHog's standard identity merge takes over for prior anonymous activity.
 
+## Anonymous sessions don't mint person profiles
+
+Events for sessions with **no** resolved identity are sent with `$process_person_profile: false`. This keeps anonymous MCP sessions from each creating a person profile (which would inflate your person count and billing). Once `identify` resolves an identity for a session, person processing stays on and the events create/update that user's profile as normal.
+
 ## Wiring `identify`
 
 `identify` is an async callback that returns either a `UserIdentity` or `null`. The SDK calls it on each request and caches the result per session, so a stable identity isn't re-resolved on every tool call.
 
 ```ts
-import { track } from "@posthog/mcp"
+import { instrument } from "@posthog/mcp"
 
 instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  posthog,
   identify: async (request, extra) => {
     const token = extra?.requestInfo?.headers?.authorization
     if (!token) return null
@@ -36,19 +40,31 @@ instrument(server, {
       userId: user.id,                  // becomes distinct_id
       userName: user.name,              // becomes $set.name
       userData: {
+        email: user.email,              // becomes $set.email
         plan: user.plan,                // becomes $set.plan
         signupDate: user.signupDate,    // becomes $set.signupDate
+      },
+      groups: {                         // becomes $groups on every event
+        organization: user.orgId,
       },
     }
   },
 })
 ```
 
+The `UserIdentity` fields map to PostHog as follows:
+
+- `userId` → the event's `distinct_id`.
+- `userName` → `$set.name`.
+- Every key of `userData` is spread into `$set` — so to set a person's email, return `userData: { email }`.
+- `groups` (optional `Record<string, string>` of groupType → groupKey) is stamped onto **every** event as `$groups`. You never hand-write `$groups` yourself.
+
 When this returns a non-null identity, the SDK:
 
 1. Switches the event's `distinct_id` to `userId` for that session.
 2. Emits a `$identify` event the first time the identity is observed (or whenever it changes for that session), with the `$set` properties populated from `userName` and `userData`.
-3. Caches the identity in a small LRU keyed by session id, so unchanged identities are silently deduped.
+3. Stamps `$groups` onto subsequent events from the returned `groups` map.
+4. Caches the identity in a small LRU keyed by session id, so unchanged identities are silently deduped.
 
 ## Identity merges
 

@@ -35,18 +35,21 @@ MCP analytics gives you visibility into how AI agents actually use the MCP serve
 The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. Install it from npm and call `instrument()` once at startup:
 
 ```bash
-pnpm add @posthog/mcp
+npm install @posthog/mcp posthog-node
 ```
 
 ```ts
 import { Server } from "@modelcontextprotocol/sdk/server/index.js"
-import { track } from "@posthog/mcp"
+import { PostHog } from "posthog-node"
+import { instrument } from "@posthog/mcp"
 
 const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
-instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+  host: "https://us.i.posthog.com",
 })
+
+instrument(server, { posthog })
 ```
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
@@ -83,7 +86,7 @@ The single most useful signal in MCP analytics is **intent**: the user goal that
 
 ```ts
 instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  posthog,
   context: {
     description: "Describe the user's underlying goal in one sentence — not the tool you're calling.",
   },
@@ -94,7 +97,7 @@ For agents that ignore the schema hint (raw cURL clients, schema-blind crawlers)
 
 ```ts
 instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  posthog,
   intentFallback: (request) => {
     const tool = request.params?.name
     return tool ? `Invoking ${tool}` : null
@@ -146,7 +149,7 @@ By default each event is attributed to the MCP connection's session id. To attri
 
 ```ts
 instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  posthog,
   identify: async (request, extra) => {
     const token = extra?.requestInfo?.headers?.authorization
     const user = token ? await resolveUserFromToken(token) : null
@@ -173,7 +176,7 @@ The most actionable signal for an MCP server owner is *the agent wanted to do so
 
 ```ts
 instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  posthog,
   reportMissing: true,
 })
 ```
@@ -184,8 +187,7 @@ SELECT
   properties.$mcp_client_name  AS client,
   count()                      AS times_asked
 FROM events
-WHERE event = '$mcp_tool_call'
-  AND properties.$mcp_tool_name = 'get_more_tools'
+WHERE event = '$mcp_missing_capability'
   AND timestamp > now() - INTERVAL 30 DAY
 GROUP BY unmet_request, client
 ORDER BY times_asked DESC
@@ -203,13 +205,15 @@ Track missing capabilities
     icon="IconLock"
 >
 
-The SDK runs every event through a three-stage pipeline before sending to PostHog: your optional `redactSensitiveInformation` callback, then automatic sanitization (image/audio/binary stubs, sensitive-key masking like `authorization`, `cookie`, `password`, PostHog key patterns), then truncation to fit ingestion limits.
+The SDK runs every event through automatic sanitization (image/audio/binary stubs, sensitive-key masking like `authorization`, `cookie`, `password`, PostHog key patterns) and truncation to fit ingestion limits. For full control, add a `beforeSend` hook that runs on each built PostHog payload right before it's sent — mutate and return the event to send it, or return a nullish value to drop it.
 
 ```ts
 instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
-  redactSensitiveInformation: async (value) =>
-    value.replace(/sk-[A-Za-z0-9]{20,}/g, "[redacted: api key]"),
+  posthog,
+  beforeSend: (event) => {
+    if (event.event === "$exception") return null // drop exceptions
+    return event
+  },
 })
 ```
 

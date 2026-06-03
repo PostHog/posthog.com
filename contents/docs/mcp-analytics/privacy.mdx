@@ -10,7 +10,7 @@ MCP tool calls can carry sensitive payloads — API tokens, customer PII, raw mo
 
 The SDK does not capture:
 
-- Your `projectToken` or any environment variables.
+- Your PostHog API key or any environment variables.
 - The transport itself (TCP/WebSocket frames, MCP framing internals).
 - Tool source code, function references, or closures.
 - The full content of `image` or `audio` content blocks (replaced with a text stub).
@@ -20,28 +20,11 @@ The SDK does not capture:
 
 ## The redaction pipeline
 
-Every event runs through three stages before being handed to the PostHog client:
+Every event runs through these stages before being sent to PostHog:
 
-### 1. Customer redaction (optional)
+### 1. Automatic sanitization
 
-If you pass `redactSensitiveInformation`, the SDK calls it on every string in the event payload. It's the first stage, so anything you redact here never reaches the sanitizer or the wire.
-
-```ts
-instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
-  redactSensitiveInformation: async (value) => {
-    return value
-      .replace(/sk-[A-Za-z0-9]{20,}/g, "[redacted: api key]")
-      .replace(/\b[\w.+-]+@[\w-]+\.[\w.-]+\b/g, "[redacted: email]")
-  },
-})
-```
-
-A small allowlist of structural fields is **never** passed to your redactor: `sessionId`, the event `id`, `server`, identify-related fields, `resourceName`, `eventType`, `actorId`, and `properties`. The SDK needs those untouched to keep events queryable.
-
-### 2. Automatic sanitization
-
-After your callback, the SDK runs a deterministic sanitizer:
+The SDK runs a deterministic sanitizer:
 
 - **Image/audio content blocks** → replaced with `[image redacted: <mime>]` or `[audio redacted: <mime>]`.
 - **Resource blocks with a `.blob`** → replaced with `[resource redacted: <mime>]`.
@@ -49,9 +32,9 @@ After your callback, the SDK runs a deterministic sanitizer:
 - **Keys matching the sensitive-key pattern** — `authorization`, `cookie`, `password`, `token`, `secret`, `api_key`, `private_key`, and similar — have their values replaced with `"[redacted]"`.
 - **PostHog API key patterns** (`ph[a-z]_…`) in any string value → replaced with `"[redacted]"`.
 
-This stage is not configurable. It's safety net behavior — if you have stricter requirements, encode them in `redactSensitiveInformation`.
+This stage is not configurable. It's safety net behavior — if you have stricter requirements, encode them in `beforeSend`.
 
-### 3. Truncation
+### 2. Truncation
 
 After sanitization, the payload is truncated to fit within PostHog ingestion limits:
 
@@ -61,39 +44,72 @@ After sanitization, the payload is truncated to fit within PostHog ingestion lim
 
 If a payload would exceed the budget, the SDK truncates rather than drops. The truncation markers are visible in the captured `$mcp_parameters` / `$mcp_response`.
 
-## Disabling capture entirely
+### 3. `beforeSend` (optional)
 
-If you only want session/timing metadata and *no* payload, the cleanest option today is a redactor that nukes everything:
+`beforeSend` runs on each fully-built PostHog payload — `{ event, distinct_id, properties }` — right before it's sent, once per emitted event (including the `$exception` sibling). It mirrors the [`beforeSend` hook in `posthog-node`](/docs/libraries/node) and may be sync or async.
+
+- Return the (possibly mutated) event to send it.
+- Return a nullish value (`null`/`undefined`) to **drop** that event.
+- A thrown error also drops that event.
 
 ```ts
-redactSensitiveInformation: async () => "[redacted]",
+instrument(server, {
+  posthog,
+  beforeSend: (event) => {
+    if (event.event === "$exception") return null // drop
+    return event
+  },
+})
 ```
 
-<CalloutBox icon="IconInfo" title="A dedicated 'no payload' mode is on the roadmap" type="fyi">
+Because it runs after sanitization and truncation, anything you mutate here is the final word before the wire.
 
-Until we ship a first-class option, the redactor-returning-`"[redacted]"` trick is the supported way to capture only timing and tool metadata.
+## Exception autocapture
 
-</CalloutBox>
+By default the SDK emits an `$exception` sibling event whenever a tool call fails (throws or returns `isError: true`). Set `enableExceptionAutocapture: false` to suppress that sibling — the `$mcp_tool_call` still records `$mcp_is_error`, but no `$exception` event is sent.
+
+```ts
+instrument(server, {
+  posthog,
+  enableExceptionAutocapture: false,
+})
+```
+
+## Anonymous sessions and person profiles
+
+Events for sessions with no resolved identity are sent with `$process_person_profile: false`, so anonymous MCP sessions don't each mint a person profile. When `identify()` resolves an identity for a session, person processing stays on and events attribute to that user. See [Identifying users](/docs/mcp-analytics/identifying-users).
+
+## Disabling capture entirely
+
+To turn capture off without removing the wrapper, don't pass a `posthog` client to `instrument()` — the SDK installs but sends nothing. If you only want session/timing metadata and *no* payload, drop or strip the payload fields in `beforeSend`:
+
+```ts
+beforeSend: (event) => {
+  delete event.properties.$mcp_parameters
+  delete event.properties.$mcp_response
+  return event
+},
+```
 
 <CalloutBox icon="IconInfo" title="Drain the queue before exit" type="fyi">
 
-The SDK queues and batches events asynchronously. Call `shutdown(server)` from your `SIGTERM` / `beforeExit` handler so in-flight events aren't dropped. See [Installation](/docs/mcp-analytics/installation#graceful-shutdown) for the snippet.
+You own the `posthog-node` client's lifecycle. Call `posthog.shutdown()` (or `posthog.flush()`) from your `SIGTERM` / `beforeExit` handler — or explicitly at the end of each serverless invocation — so in-flight events aren't dropped. See [Installation](/docs/mcp-analytics/installation#graceful-shutdown) for the snippet.
 
 </CalloutBox>
 
 ## Buffering and back-pressure
 
-The in-memory queue is owned by the underlying `@posthog/core` client. If it overflows or fails to flush, events are dropped with a warning surfaced to your `logger`.
+The in-memory queue is owned by the `posthog-node` client you pass in. If it overflows or fails to flush, events are dropped with a warning surfaced to your `logger`.
 
 ## Logging
 
-MCP servers commonly speak over stdio, where any write to `console.*` corrupts the protocol stream. The SDK defaults its `logger` to a no-op for that reason — wire your own in development so warnings (failed redactor calls, swallowed `identify` errors, dropped batches) become visible:
+MCP servers commonly speak over stdio, where any write to `console.*` corrupts the protocol stream. The SDK defaults its `logger` to a no-op for that reason — wire your own in development so warnings (swallowed `identify` errors, dropped batches) become visible:
 
 ```ts
 instrument(server, {
-  projectToken: process.env.POSTHOG_PROJECT_TOKEN,
+  posthog,
   logger: (message) => fs.appendFileSync("/tmp/mcp.log", message + "\n"),
 })
 ```
 
-Errors thrown from your `redactSensitiveInformation`, `identify`, `intentFallback`, and `eventProperties` callbacks are swallowed and routed to the logger — they never surface to the agent or interrupt tool execution.
+Errors thrown from your `beforeSend`, `identify`, `intentFallback`, and `eventProperties` callbacks are swallowed and routed to the logger — they never surface to the agent or interrupt tool execution. (A `beforeSend` that throws additionally drops the event it was inspecting.)
