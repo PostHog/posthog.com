@@ -34,6 +34,10 @@ export interface MenuItem {
     platformLogo?: string
     showChildrenIcons?: boolean
     sortChildrenAlpha?: boolean
+    // When set, this item (and its children) is only shown to users for whom the
+    // named PostHog feature flag is enabled. Gating is client-side only — see
+    // src/hooks/useActiveFeatureFlags.ts and note the static-site caveat.
+    featureFlag?: string
     children?: MenuItem[]
 }
 

@@ -58,8 +58,7 @@
     "redirects": [
         {
             "source": "/blog/autoresearch-query-bug",
-            "destination": "/blog/karpathy-autoresearch-query-engine-bug",
-            "statusCode": 301
+            "destination": "/blog/karpathy-autoresearch-query-engine-bug"
         },
         {
             "source": "/handbook/marketing/how-we-position-and-sell",
@@ -103,6 +102,7 @@
         { "source": "/teams/brand-vibes", "destination": "/teams/website" },
         { "source": "/teams/llm-gateway", "destination": "/teams/ai-gateway" },
         { "source": "/teams/llm-analytics", "destination": "/teams/ai-observability" },
+        { "source": "/aio", "destination": "/ai-observability" },
         { "source": "/teams/flags-platform", "destination": "/teams/feature-flags" },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
@@ -878,6 +878,14 @@
         { "source": "/product-os/features", "destination": "/product-os" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/roadmap/changelog", "destination": "/changelog" },
+        {
+            "source": "/blog/posthog-insforge",
+            "destination": "/tutorials/how-to-connect-posthog-and-insforge"
+        },
+        {
+            "source": "/docs/product-analytics/how-to-connect-posthog-and-insforge",
+            "destination": "/tutorials/how-to-connect-posthog-and-insforge"
+        },
         { "source": "/blog/posthog-changelog", "destination": "/changelog" },
         { "source": "/roadmap/changelog/2023", "destination": "/changelog" },
         { "source": "/changelog/2025", "destination": "/changelog" },
@@ -1845,6 +1853,10 @@
         {
             "source": "/docs/llm-analytics",
             "destination": "/docs/ai-observability"
+        },
+        {
+            "source": "/llm-analytics",
+            "destination": "/ai-observability"
         },
         {
             "source": "/why",
