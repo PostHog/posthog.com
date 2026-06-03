@@ -4095,6 +4095,25 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Replay Vision',
+            url: '/docs/replay-vision',
+            color: 'yellow',
+            icon: 'IconEye',
+            description: 'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
+            featureFlag: 'replay-vision-docs',
+            children: [
+                {
+                    name: 'Replay Vision',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/replay-vision',
+                    icon: 'IconEye',
+                    color: 'seagreen',
+                },
+            ],
+        },
+        {
             name: 'Feature Flags',
             icon: 'IconToggle',
             color: 'seagreen',
@@ -6550,12 +6569,6 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Slack',
-                    url: '/docs/posthog-code/slack',
-                    icon: 'IconChat',
-                    color: 'purple',
-                },
-                {
                     name: 'Code review',
                     url: '/docs/posthog-code/code-review',
                     icon: 'IconCode',
@@ -6605,6 +6618,42 @@ export const docsMenu = {
                     url: '/docs/posthog-code/community',
                     icon: 'IconPeople',
                     color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Slack app',
+            icon: 'IconAtSign',
+            color: 'purple',
+            url: '/docs/slack-app',
+            description: 'Run PostHog from any Slack channel — agent tasks, analytics, and notifications.',
+            children: [
+                {
+                    name: 'Slack app',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/slack-app',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Setup',
+                    url: '/docs/slack-app/setup',
+                    icon: 'IconWrench',
+                    color: 'blue',
+                },
+                {
+                    name: 'Commands',
+                    url: '/docs/slack-app/commands',
+                    icon: 'IconTerminal',
+                    color: 'purple',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/slack-app/pricing',
+                    icon: 'IconShield',
+                    color: 'red',
                 },
             ],
         },
@@ -6799,6 +6848,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Link logs to a person',
+                    url: '/docs/logs/link-person',
+                    icon: 'IconPerson',
+                    color: 'blue',
+                },
+                {
                     name: 'Set up alerts',
                     url: '/docs/logs/alerts',
                     icon: 'IconBell',
@@ -6840,6 +6895,40 @@ export const docsMenu = {
                     url: '/docs/logs/changelog',
                     icon: 'IconRocket',
                     color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Tracing',
+            icon: 'IconListTree',
+            color: 'purple',
+            url: '/docs/tracing',
+            description: 'Capture and explore distributed traces with OpenTelemetry.',
+            children: [
+                {
+                    name: 'Tracing',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/tracing',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/tracing/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Why you need tracing',
+                    url: '/docs/tracing/basics',
+                    icon: 'IconBook',
+                    color: 'seagreen',
                 },
             ],
         },

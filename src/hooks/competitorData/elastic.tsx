@@ -54,7 +54,7 @@ export const elastic = {
                 },
             },
         },
-        llm_analytics: {
+        ai_observability: {
             available: true,
         },
     },

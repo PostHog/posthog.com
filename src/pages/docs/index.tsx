@@ -12,11 +12,14 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { SearchUI } from 'components/SearchUI'
 import SmallTeam from 'components/SmallTeam'
 import { useApp } from '../../context/App'
+import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
 
 // Process docsMenu to extract structure
-const processDocsMenu = () => {
-    const productOSSection = docsMenu.children.find((item) => item.name === 'Product OS')
-    const productSections = docsMenu.children.filter((item) => item.name !== 'Product OS')
+const processDocsMenu = (activeFlags: string[] | null) => {
+    // Drop any flag-gated products the current user can't see before building the grid.
+    const visibleChildren = filterMenuByFlags(docsMenu.children, activeFlags) || []
+    const productOSSection = visibleChildren.find((item) => item.name === 'Product OS')
+    const productSections = visibleChildren.filter((item) => item.name !== 'Product OS')
 
     const featuredIntegrationItems = [
         'Install and configure',
@@ -106,7 +109,8 @@ const renderSectionContent = (children: any[]) => {
 }
 
 export const DocsIndex = () => {
-    const topLevelSections = processDocsMenu()
+    const activeFlags = useActiveFeatureFlags()
+    const topLevelSections = processDocsMenu(activeFlags)
     const [isMac, setIsMac] = React.useState<boolean | undefined>(undefined)
     useEffect(() => {
         setIsMac(typeof window !== 'undefined' && window.navigator.userAgent.toLowerCase().includes('macintosh'))
@@ -373,7 +377,7 @@ export const DocsIndex = () => {
                         <h6 className="text-lg">Feedback</h6>
 
                         <p>
-                            Our docs are perpetually a work in progress. The 
+                            Our docs are perpetually a work in progress. The
                             <SmallTeam slug="docs-wizard" /> is responsible for what you see here.
                         </p>
                         <p>

@@ -512,7 +512,7 @@ export const posthog = {
                 built_in_analytics: true,
             },
         },
-        llm_analytics: {
+        ai_observability: {
             available: true,
             features: {
                 alerting: true,

@@ -12,29 +12,30 @@ Here are the things you should focus on in your first few weeks at PostHog to he
 
 Ramping up is mostly self-serve - we won't sit you down in a room for training for 2 weeks. If you're not sure who is supposed to make something below happen, the person responsible is almost certainly you!
 
-Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-onboarding) for guidance on what _not_ to do when you start. In general, there's a lot of good resources within [sales](/handbook/growth/sales/overview) to reference (as we were previously one team!)
+Below is a rough plan for your first month - use it as a guide, not a contract. The handbook itself is a work in progress, so you'll find gaps as you ramp up, things you needed to know that weren't written down. That's normal, and when you find a gap, your job is to fill it in so the next person has it easier.
 
 ## Day 1
 
 - Familiarize yourself with [how we work at PostHog](/handbook/company/culture).
 - Meet with [Magda](/community/profiles/33065), who will run through this plan and answer any questions you may have. In addition, come equipped to talk about any nuances around how you prefer to work (e.g., schedules, family time, etc.).
 - Setup relevant [tools](/handbook/growth/sales/sales-and-cs-tools) and check out [tools](https://posthog.com/handbook/onboarding/onboarding-team#tooling) specific for the Onboarding team.
-  - Integrate Gmail with Salesforce and Vitally to enable centralized communication history.
 - If you start on a Monday, join your first PostHog All Hands (at 4.30 pm UK/8.30 am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first Onboarding standup.
   - We fill in a GitHub issue every week before this meeting, so we are prepared for the discussion topics. Magda will add your GitHub handle to the template.
-  - Book time with Magda to go over the nuts and bolts of the role - which leads get onboarding, what signals we're looking for, and how to reach out.
 
 ## Rest of week 1
 
+This week is about getting set up and learning how we talk about PostHog. You'll feel extremely unproductive, and that's fine - the aim is to set yourself up for in-person onboarding. Read everything you can, work through the product fundamentals, and gather questions we can work through together.
+
  - Confirm that you have been added as a member to the [PostHog organization in GitHub](https://github.com/PostHog?view_as=member). [Fraser](/community/profiles/30207) can add you if you haven't.
- - Work your way through your GitHub onboarding issue that a member of the <SmallTeam slug="people" /> should have created and sent a link to.
+ - Work your way through your onboarding checklist that a member of the <SmallTeam slug="people" /> should have created and sent a link to.
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some [BuildBetter](https://app.buildbetter.app/) and [Gong](https://us-26000.app.gong.io/library/company?workspace-id=8823646477612786274&folder-id=5690024503570726123) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practice a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
-   - For familiarization and self-led training, follow the [product curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You work through this with the [HogFlix Demo 3000 project](https://us.posthog.com/project/99423/dashboard), which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
- - Read all of the Onboarding section in the Handbook as well as the Sales and Customer Success section, and [update it as you learn more](/handbook/company/new-to-github#creating-a-pull-request).
+   - For familiarization and self-led training, follow the [product framework](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding#learning-posthog). You work through this with the [HogFlix Demo 3000 project](https://us.posthog.com/project/99423/dashboard), which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
+ - Read all of the `Sales, CS & Onboarding` section in the Handbook, and [update it as you learn more](/handbook/company/new-to-github#creating-a-pull-request).
+ - Explore Slack. We're public by default, so Slack is one of the richest resources you have.
  - Meet with Ben Bradley, who's responsible for GTM teams.
 
 ## Week 2
@@ -44,8 +45,13 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 - Try running through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise) that [Kaya](/community/profiles/34037) designed to test your skills for working with customer accounts.
 - Towards the end of the week, schedule a demo and feedback session with Magda. We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products.
-- Book time with Magda for a deep dive on PostHog billing, sales process/routing. This will help you understand how your role fits in the broader context of the customer-facing teams.
-- We'll start routing new leads to you at the end of week 2. Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practice and fail.
+- Learn how to think about each product. As you go through the fundamentals, for each product you're trying to be able to answer:
+  - The value add - why a customer would care
+  - How it's implemented and implementation quirks worth knowing
+  - Signs of poor implementation
+  - How it works alongside other PostHog products
+  - How to get value out of it
+  - What you can do with the MCP
 
 ## In-person onboarding
 
@@ -53,32 +59,37 @@ Ideally, this will happen in Week 2-3, with the company of a few colleagues (dep
 
 - Demo practice session with the team.
 - The data we track on customers in PostHog and some hands-on exercises to get you comfortable using PostHog itself.
-- Deep dive on Vitally and Metabase.
+- Deep dive on Vitally and Metabase, i.e., seeing how the systems we use come together day-to-day.
 - Toolkit and internal processes.
 - No stupid questions session.
 
 Detailed training plan available in the [new hire onboarding checklist](https://docs.google.com/document/d/1DvZm6o3mBeSxwgMh2X8JAuXCLrOCS8sJAVLjC0K9VT8/edit?tab=t.0). This is a checklist for the Manager, you don't have to read it beforehand.
 
+- We'll start routing new leads to you at the end of week 2. Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practice and fail.
+
 ## Weeks 3-4
+
+This is when you start working with your customers. Reach out, take the first calls, pick up the questions that come in, and start figuring out what each customer needs from you. You'll learn more about the product as you go, but the main thing in these weeks is starting to be helpful to your customers.
 
 - You're already reaching out to our customer base.
 - Focus on taking more and more ownership on calls so that team members are just there as a safety net.  
 - Continue to meet with customers - very quickly, you should be doing these solo. The customers you are working with will mostly just be getting started, so you'll see a lot of very familiar patterns emerge.
-- Make sure all your tooling is fully set up.
+- Evaluate implementations as you go - is the customer set up well, are they getting value? The [foundation check](https://posthog.com/handbook/cs-and-onboarding/foundation-check) and [health check](https://posthog.com/handbook/cs-and-onboarding/health-checks) are the structured ways to do this.
 - Set up a call with [Daniel](https://posthog.com/community/profiles/34722) to get a "soft intro" to Vitally playbooks, segments, and our internal metrics. It's not a deep-dive - just getting familiar.
 - Keep working on your product knowledge. You can find a couple of [exercises here](https://posthog.com/handbook/onboarding/onboarding-team#how-to-deepen-your-knowledge).
-
 
 ## How do I know if I'm on track?
 
 **By the end of month 1:**
  - You continue learning from the received feedback.
  - You have a good grasp of our internal processes and workflows.
- - You've embraced PostHog's culture: You're the driver, you take initiative, prioritize your time well, and work independently.
  - You lead customer calls on your own.
  - You should consistently craft a minimum of 10 outreach messages per day, without compromising on quality, style, or accuracy.
  - You don't let accounts fall through the cracks before their renewal.
  - You pass well-qualified opportunities to Sales via the `Onboarding referral` segment.
+ - You shipped your first handbook PR. The point isn't the PR itself; it's that the handbook only stays useful if everyone adds to it. Not knowing something isn't a failing, but leaving it undocumented for the next person is.
+ - You're sharing with the team. You're posting wins, learnings, opportunities for feedback, and anything else valuable in our shared channels. You were hired because we think you can improve our team, so don't be afraid to share opinions and approaches.
+ - You've embraced PostHog's culture: You're the driver, you take initiative, prioritize your time well, and work independently.
 
 **By the end of month 2:**
  - You're a PostHog power user - most questions you raise can only be answered by product engineers rather than the support team.

@@ -18,7 +18,7 @@ import LiteLLMLogoDark from '../../../contents/images/docs/llms/LiteLLM_logo_whi
 import { useCustomers, type Customer } from 'hooks/useCustomers'
 
 // Product configuration - change this to adapt for different products
-const PRODUCT_HANDLE = 'llm_analytics'
+const PRODUCT_HANDLE = 'ai_observability'
 
 export const Subfeature = ({
     title,
@@ -344,7 +344,7 @@ const ProductOSBenefitsSlide = () => {
     )
 }
 
-export default function LLMAnalytics(): JSX.Element {
+export default function aiObservability(): JSX.Element {
     const contentData = useContentData()
 
     // GraphQL query for product data

@@ -147,7 +147,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     '11x': {
         name: '11x',
-        toolsUsed: ['experiments', 'product_analytics', 'llm_analytics', 'cdp'],
+        toolsUsed: ['experiments', 'product_analytics', 'ai_observability', 'cdp'],
         industries: ['AI'],
         users: ['Marketing', 'Leadership', 'Founders', 'Engineering'],
         notes: 'AI SDR',
@@ -264,7 +264,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     cloudpeek: {
         name: 'CloudPeek',
-        toolsUsed: ['logs', 'error_tracking', 'llm_analytics'],
+        toolsUsed: ['logs', 'error_tracking', 'ai_observability'],
         industries: ['Cybersecurity'],
         users: ['Engineering'],
         notes: 'Agentic AI platform for cybersecurity',
@@ -429,7 +429,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'product_analytics',
             'surveys',
             'error_tracking',
-            'llm_analytics',
+            'ai_observability',
             'data_warehouse',
         ],
         industries: ['SaaS'],
@@ -534,7 +534,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     hostai: {
         name: 'HostAI',
-        toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
+        toolsUsed: ['feature_flags', 'product_analytics', 'ai_observability'],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI for vacation rentals managers',
@@ -544,7 +544,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     lovable: {
         name: 'Lovable',
-        toolsUsed: ['llm_analytics', 'experiments', 'feature_flags'],
+        toolsUsed: ['ai_observability', 'experiments', 'feature_flags'],
         industries: ['Devtool'],
         users: ['Engineering'],
         notes: 'AI app & website builder',
@@ -566,7 +566,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     jaxxon: {
         name: 'Jaxxon',
-        // toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
+        // toolsUsed: ['feature_flags', 'product_analytics', 'ai_observability'],
         industries: ['Fashion'],
         // users: ['Engineering', 'Leadership', 'Founders'],
         notes: "Men's chains & accessories",
@@ -576,7 +576,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     juicebox: {
         name: 'Juicebox',
-        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'llm_analytics'],
+        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'ai_observability'],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI recruitment platform',
@@ -985,7 +985,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     zealot: {
         name: 'Zealot',
-        toolsUsed: ['llm_analytics', 'session_replay', 'error_tracking', 'product_analytics'],
+        toolsUsed: ['ai_observability', 'session_replay', 'error_tracking', 'product_analytics'],
         industries: ['Recruitment'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI customer activation platform',
@@ -1033,7 +1033,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     // },
     // wowzer: {
     //     name: 'Wowzer',
-    //     toolsUsed: ['experiments', 'product_analytics', 'surveys', 'llm_analytics'],
+    //     toolsUsed: ['experiments', 'product_analytics', 'surveys', 'ai_observability'],
     //     industries: ['AI'],
     //     users: ['Growth', 'Engineering', 'Product'],
     //     notes: 'AI-powered platform',

@@ -147,7 +147,7 @@ As it's often difficult to right-size the credit needed for a longer term plan a
 
 We do not offer price guarantees for the following reasons:
 
-1. We regularly *lower* prices, which would result in higher costs for customers who've locked in a price
+1. We sometimes lower prices, which would result in higher costs for customers who've locked in a price
 2. We occasionally split or restructure products (e.g. Data Pipelines unbundled), which makes guarantees administratively complex
 3. Customers are in full control of their usage and can thus adjust their spending patterns as needed
 
