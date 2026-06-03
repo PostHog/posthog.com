@@ -1,5 +1,6 @@
 > **Disclaimer:** This is Sara's scheduled task. Please edit it so it fits your needs.
 
+```markdown
 # Weekly Product Digest
 
 Every Monday at 9 AM, build me a **Weekly Product Digest** from my three product Slack channels — #team-logs, #team-replay, and #team-error-tracking — covering the previous 7 days.
@@ -21,3 +22,4 @@ If a section is genuinely empty, show *"Nothing this week"* in italic — don't 
 **After updating the artifact,** post a short chat summary (under 80 words) flagging the 1–3 things I should look at first — anything blocking a launch, anything I'm tagged on, or any decision that affects my plans. End with a reminder that the full digest is in the sidebar.
 
 **If something breaks:** if a channel can't be reached, note it in the footer rather than failing the whole run. If Slack auth is broken, update the artifact with a banner saying Slack needs to be reconnected — don't invent data. Never produce a silently empty dashboard.
+```

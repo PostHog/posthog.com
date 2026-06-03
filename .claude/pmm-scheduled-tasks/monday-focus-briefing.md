@@ -1,5 +1,6 @@
 > **Disclaimer:** This is Sara's scheduled task. Please edit it so it fits your needs.
 
+```markdown
 # Monday Focus Briefing
 
 **Every Monday at 8am, generate my weekly focus briefing.**
@@ -30,3 +31,4 @@ Scan everywhere I made commitments, was tagged, or was assigned work in the **la
 - End with a short **Heads up** section for anything time-sensitive next week.
 
 If a connector errors out, note it briefly and continue with the rest. Run autonomously — don't ask me clarifying questions. Use today's date as the anchor.
+```

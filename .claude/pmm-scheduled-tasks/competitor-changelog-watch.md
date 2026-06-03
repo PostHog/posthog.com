@@ -1,5 +1,6 @@
 > **Disclaimer:** This is Sara's scheduled task. Please edit it so it fits your needs.
 
+````markdown
 # Competitor Changelog Watch
 
 **Run a bi-weekly competitive intelligence watch for me (Sara, PMM @ PostHog).** Focus on the four areas where PostHog competes hardest: **error tracking, logs, session replay, and AI-on-replay ("replay vision")**.
@@ -76,3 +77,4 @@
 ```
 
 Keep the whole digest under ~1000 words. I read this once and decide what to do — be ruthless about signal vs noise. Most competitors will be "Nothing notable" most weeks, and that's the right answer.
+````

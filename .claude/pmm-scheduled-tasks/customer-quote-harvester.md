@@ -1,5 +1,6 @@
 > **Disclaimer:** This is Sara's scheduled task. Please edit it so it fits your needs.
 
+```markdown
 # Customer Quote Harvester
 
 Every other Monday at 9am PT, run a customer quote harvest for me.
@@ -38,3 +39,4 @@ Deliver as a Google Drive doc titled **Customer Quote Bank — \<date range\>** 
 - Coverage notes (channels scanned, surveys reviewed, BuildBetter calls reviewed, what came back empty)
 
 Under 1500 words. Drop the doc link in Slack DM to me when it's ready.
+```
