@@ -36,13 +36,7 @@ The returned object is spread flat onto the event's properties alongside the bui
 
 For a "stamp on everything" use case (the closest analogue to `posthog.register(...)` in other SDKs), just return constants from the callback. The callback is per-event rather than session-persistent, so the values can also vary per request if you need them to.
 
-Attach grouping via the standard PostHog `$groups` key:
-
-```ts
-eventProperties: async () => ({
-  $groups: { organization: orgId, project: projectId },
-})
-```
+For group analytics, return `groups` from your [`identify`](/docs/mcp-analytics/identifying-users) callback rather than hand-writing the `$groups` key — the SDK stamps `$groups` onto every event for the session for you.
 
 Returned values must be JSON-serializable. Errors thrown from your callback are swallowed and surfaced to your `logger` — they never interrupt tool execution.
 
@@ -50,21 +44,11 @@ Returned values must be JSON-serializable. Errors thrown from your callback are 
 
 When the built-in events don't cover what you need — for example, recording a feedback signal from your own UI, or capturing a domain event that isn't an MCP request — use `capture`. It writes onto the same queue as everything else, so it inherits the SDK's sanitization, identity, `beforeSend`, and `eventProperties` logic. `capture` returns a promise you can `await`.
 
-The `event` name defaults to `$mcp_custom`. Pass your own `event` name to send an event of that name verbatim — it is **not** `$`-prefixed for you.
+You name the event. It's sent verbatim — it's your event, so it is **not** `$`-prefixed.
 
 ```ts
 import { capture } from "@posthog/mcp"
 
-// Default event name: $mcp_custom
-await capture(server, {
-  properties: {
-    plan: "growth",
-    units: 12_345,
-    period: "2026-04",
-  },
-})
-
-// Custom event name sent verbatim as "feedback_submitted"
 await capture(server, {
   event: "feedback_submitted",
   properties: { rating: 5 },
@@ -73,7 +57,7 @@ await capture(server, {
 
 What lands in PostHog:
 
-- One event — `$mcp_custom` by default, or the verbatim `event` name you passed — with your `properties` merged in.
+- One event under the verbatim `event` name you passed, with your `properties` merged in.
 - The session id, identity, and any `eventProperties` callback still apply.
 
 The server must already have been passed to `instrument()`. Passing a non-instrumented server throws — there's no implicit setup.
