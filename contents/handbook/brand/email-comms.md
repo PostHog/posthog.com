@@ -132,6 +132,13 @@ Transactional emails feature Liquid code to help personalize their content. All 
 We turned the free allowance for {{ trigger.product_name | default: "a product" }} on {% if trigger.team_name %}{{ trigger.team_name }}{% else %}your account{% endif %} off and on again, giving you another month of free usage.
 ```
 
+## Adding a new event property to Customer.io
 
+We use Customer.io to target broadcasts and campaigns — for example, the onboarding flow targets users based on their events, as well as segments which define product intent and activation. PostHog sends this information to Customer.io through a data pipeline, so a new event or property has to flow through that pipeline before you can build a segment on it.
 
+To add a new event or property:
+
+1. **Confirm the data is tracked in PostHog.** Product intent and activation criteria (such as a product's `product_key` value) are usually set up by the product manager for the relevant product. If the event or property you need isn't being tracked yet, ask the PM to create it in PostHog before going any further.
+2. **Add the event or property to the Customer.io pipeline.** Any action or property we send to Customer.io must be added to the [Customer.io destination in PostHog](https://us.posthog.com/project/2/functions/0191b762-f77d-0000-1956-121a0c25c878). If you try to build a segment on something that isn't in the pipeline, the segment won't populate.
+3. **Create the segment in Customer.io.** A newly added property won't appear in Customer.io's autocomplete when you start typing it. Instead, copy and paste the exact property name, save, and the segment will populate when the data arrives (but this is always worth testing or checking later).
 

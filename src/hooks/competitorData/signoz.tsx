@@ -26,7 +26,7 @@ export const signoz = {
         session_replay: {
             available: false,
         },
-        llm_analytics: {
+        ai_observability: {
             available: true,
         },
         error_tracking: {
