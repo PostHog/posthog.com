@@ -539,11 +539,18 @@ const faqItems = [
     {
         trigger: 'Can multiple people drive the same task?',
         content: (
-            <p>
-                Yes. Anyone in the thread can send follow-ups to the running agent. Every message in the thread is
-                forwarded as a new turn in the same conversation, so teammates can steer mid-run, drop in extra context,
-                or answer a question the agent asked.
-            </p>
+            <>
+                <p>
+                    Yes. Anyone in the thread can send follow-ups to the running agent. Every message in the thread is
+                    forwarded as a new turn in the same conversation, so teammates can steer mid-run, drop in extra
+                    context, or answer a question the agent asked.
+                </p>
+                <p>
+                    Heads up: the resulting PR is still authored under whoever started the task – their personal GitHub
+                    integration is the one wired up – so a teammate's follow-up edits land under the original
+                    requester's name. If you want the PR credited to you, start your own task.
+                </p>
+            </>
         ),
     },
     {
