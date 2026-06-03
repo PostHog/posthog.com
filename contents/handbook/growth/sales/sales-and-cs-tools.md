@@ -39,6 +39,7 @@ Unless otherwise indicated, you can self-serve access requests to the following 
 - [In Your Face](https://www.inyourface.app/) (app) don't miss meeting notifications
 - [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home) 
 - [Loom](https://www.loom.com/) for short videos 
+- [Microsoft Teams](https://teams.microsoft.com) - for linking Slack with Teams when customers only use Teams - ask Simon for access
 - [Scratchpad](https://www.scratchpad.com/) for AI agents and a friendlier SFDC UI
 - [spark](https://sparkmailapp.com/) (app) AI powered inbox
 - [Superhuman](https://superhuman.com/) (app) AI powered inbox
