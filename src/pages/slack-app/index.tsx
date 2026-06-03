@@ -604,7 +604,7 @@ const faqItems = [
         trigger: 'Do I need PostHog Code to use the PostHog Slack app?',
         content: (
             <p>
-                No. The Slack app is generally available and isn't gated on a{' '}
+                No. The Slack app isn't gated on a{' '}
                 <Link
                     to="/code"
                     state={{ newWindow: true }}
