@@ -185,7 +185,8 @@ export const platformFeatures = {
             },
             imports: {
                 name: 'Warehouse import',
-                description: 'Import data from external warehouses and sources like Stripe, HubSpot, and S3 for unified analysis',
+                description:
+                    'Import data from external warehouses and sources like Stripe, HubSpot, and S3 for unified analysis',
             },
         },
     },

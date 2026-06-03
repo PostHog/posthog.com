@@ -13,7 +13,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: true
-  llmAnalytics: false
+  aiObservability: false
   errorTracking: true
 ---
 
@@ -176,6 +176,32 @@ This is needed as Flutter renders your app using a browser canvas element.
 > **Note:** Surveys is supported in Flutter for **Web**, **iOS** and **Android** platforms. 
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
+
+## Flush
+
+import FlushIntro from '../_snippets/flush-intro.mdx'
+
+<FlushIntro />
+
+You can also configure the flush interval with `flushInterval` (default 30 seconds), after which queued events are sent regardless of how many have been gathered:
+
+```dart
+final config = PostHogConfig('<ph_project_token>');
+config.flushAt = 20;
+config.flushInterval = const Duration(seconds: 30);
+```
+
+import FlushManual from '../_snippets/flush-manual.mdx'
+
+<FlushManual />
+
+```dart
+await Posthog().flush();
+```
+
+import FlushNotes from '../_snippets/flush-notes.mdx'
+
+<FlushNotes />
 
 ## Offline behavior
 

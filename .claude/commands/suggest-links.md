@@ -18,7 +18,7 @@ This CSV has columns: `Product`, `Anchor text examples`, `Relative URL`, `Type`,
 
 The `Type` column categorizes links as: Product page, Docs, Blog, Tutorial, Prod. Engineers, Founders, Newsletter, or Competitor comparison.
 
-## Step 3: Analyze and suggest links
+## Step 3: Suggest forward links (new post → other posts)
 
 Scan the content for opportunities to add internal links. For each suggestion, provide:
 
@@ -27,7 +27,7 @@ Scan the content for opportunities to add internal links. For each suggestion, p
 3. **Why** — brief reason this link fits here (based on the "Use when writing about..." context)
 4. **Priority**: High (unlinked mention of a PostHog product/feature), Medium (related concept that would benefit from a link), Low (nice-to-have deeper reading)
 
-### Rules
+### Forward link rules
 
 - **Don't suggest links for text that's already linked.** Parse the markdown and skip any text inside `[...]()` or `<a>` tags.
 - **Prefer product pages** for first/prominent mentions of a PostHog feature (e.g., link "feature flags" to `/feature-flags` not `/docs/feature-flags`). Use docs links for technical/setup references.
@@ -38,9 +38,32 @@ Scan the content for opportunities to add internal links. For each suggestion, p
 - **Aim for 5-15 suggestions** depending on post length. Short posts (< 500 words) might only need 3-5. Long posts (2000+ words) could use 10-15.
 - **Flag if the post has fewer than 3 internal links** — this is below the minimum recommended in the style guide.
 
-## Step 4: Output
+## Step 4: Suggest backlinks (existing posts → new post)
 
-Print the suggestions directly to the console, grouped by priority (High → Medium → Low). Format each suggestion as:
+Find at least 3 existing posts in `contents/` that would naturally link to the new content. For each:
+
+1. Read the candidate file to find the best insertion point — a sentence or paragraph whose topic closely matches a specific section of the new post.
+2. Suggest the exact sentence edit, including the link. **Prefer linking to a specific section anchor** (e.g., `/founders/my-post#section-name`) rather than just the root URL, so readers land in the most relevant part.
+3. Write anchor text that fits naturally into the surrounding sentence. **Do not use the article title as anchor text.** The link should feel like it belongs in the prose, not like a citation. Good examples:
+   - "making those traits [queryable across every team](/founders/growth-metrics-for-startups#2-make-customer-traits-queryable-across-all-functions)"
+   - "[Consistent growth in ICP customers](/founders/growth-metrics-for-startups#4-be-opinionated-but-defensible-with-your-numbers) who pay..."
+   - "tracking growth for [non-standard SaaS models](/founders/growth-metrics-for-startups#3-focus-on-consistency-over-accuracy)"
+
+### Backlink rules
+
+- **Find the most relevant existing posts** by searching for content that discusses the same concepts as the new post's sections. Use `grep` or `Bash` if needed.
+- **Match section to section.** Don't just link to the new post's root — link to the specific `#anchor` that matches the concept being discussed in the existing post. Derive the anchor from the heading text (lowercase, spaces → hyphens, punctuation removed).
+- **Keep it natural.** The backlink should either:
+  - Fit within an existing sentence (preferred), or
+  - Be a brief new sentence that flows naturally from the surrounding paragraph.
+- **Don't add a standalone "further reading" line** unless the existing post already has a "Further reading" section — in that case, a bullet there is fine.
+- **Don't use the new article's title as anchor text.** Describe the concept, not the article.
+
+## Step 5: Output
+
+Print the suggestions directly to the console.
+
+### Forward links, grouped by priority (High → Medium → Low):
 
 ```
 ### High priority
@@ -53,4 +76,16 @@ Print the suggestions directly to the console, grouped by priority (High → Med
 ...
 ```
 
-At the end, include a summary line: "Found X link opportunities (Y high, Z medium, W low). Post currently has N internal links."
+### Backlinks (existing posts → this post):
+
+For each suggested backlink, show:
+
+```
+### Backlinks
+
+- **existing-post.md, line X** — insert after/around: "quoted existing text"
+  → suggested edit: "...surrounding sentence with [natural anchor text](/new-post#section-anchor)..."
+  Why: one-line reason this existing post's topic connects to that section
+```
+
+At the end, include a summary line: "Found X forward link opportunities (Y high, Z medium, W low) and Z backlink opportunities. Post currently has N internal links."

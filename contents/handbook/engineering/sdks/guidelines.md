@@ -14,6 +14,8 @@ Most users never read every option. They install the package, copy the quickstar
 
 Good defaults matter more than lots of configuration. Capture the right context by default, batch sensibly, retry carefully, and avoid making users learn PostHog internals before they see value. Configuration is still important, but it should feel like customization rather than a requirement to get a safe baseline.
 
+A clean install should get developers to first value quickly: install the package, initialize PostHog, and capture a test event or evaluate a feature flag in a few minutes. Quickstarts should work from a new project without hidden setup.
+
 In general, features should be enabled by default unless there's a good reason not to, such as privacy risk, compatibility risk, performance risk, or platform limitations. Users should be able to opt in and out of features, and ideally high-level feature controls should also exist in PostHog project settings through remote config. When the reason is privacy-sensitive data, see [Treat privacy as a product feature](#treat-privacy-as-a-product-feature).
 
 ### Don't break the host application
@@ -21,6 +23,10 @@ In general, features should be enabled by default unless there's a good reason n
 The SDK should never be the reason a customer's app crashes, slows down dramatically, fails to build, or starts behaving strangely.
 
 Prefer graceful degradation over cleverness. If feature flag polling, replay capture, networking, storage, or background work fails, the app should keep running. In most cases, failing silently with useful debug logging is better than surprising the customer at runtime. The logger is our friend here: use it to explain what happened without making the host app pay for it.
+
+Silent failure is not always the right default. Initialization errors, invalid configuration, unsupported hosts, project token problems, and explicit customer-called APIs should surface clear, idiomatic errors when the customer can act on them.
+
+Retries and timeouts should be bounded, predictable, and documented. Avoid retry behavior that surprises customers, creates duplicate work, or hides persistent failures.
 
 If an SDK can't support a platform, framework version, or runtime, make that clear at install time or startup. Don't make customers discover it through confusing production errors.
 
@@ -84,6 +90,8 @@ SDK APIs live for a long time. Once a pattern is copied into thousands of apps, 
 
 Keep the public API small, boring, and hard to misuse. Use options objects for things likely to grow. Avoid exposing internal concepts unless customers need them. Public APIs and configuration options should be unique: don't offer two or more ways to do the same thing unless there's a strong compatibility reason. Duplicate paths confuse humans, documentation, support, and LLMs.
 
+Agents can help spec and drive SDK changes, especially repetitive cross-SDK work. Public APIs, configuration, defaults, and behavior that affects customers still need human review for ergonomics, platform fit, and long-term support cost.
+
 Be careful not to expand the public API by accident. Exported helpers, leaked internal types, undocumented options, and test-only hooks can become APIs customers depend on. Keep internals private where the platform enables it. If something is experimental, say so clearly and consider keeping it behind an internal API until we're confident it should be public.
 
 Prefer additive API changes over breaking ones. It's much easier to add a new method, option, or type than to remove one later. When you need a breaking change, respect the SDK's versioning scheme, make the migration obvious, document it clearly, and release it intentionally.
@@ -122,9 +130,13 @@ Prefer tests that match how customers use the SDK. Add small example apps where 
 
 An SDK without good docs is only half shipped. Keep the quickstart current, show idiomatic examples, and explain common production setup: flushing on shutdown, identifying users, using custom hosts, handling feature flags, and enabling debug logs.
 
+Each SDK should have a troubleshooting page for common install, build, configuration, network, and runtime errors.
+
 Examples should be boring, copy-pasteable, and close to how customers write real production code in that ecosystem.
 
 Public methods, configuration options, and types should have documentation comments in the platform's standard style, such as JSDoc, docstrings, KDoc, or Swift documentation comments. Write them for humans, but remember that LLMs and IDEs parse them too. A good comment explains what the method or option does, when to use it, defaults, side effects, and any privacy or performance caveats.
+
+The public API reference should be complete and current. It should cover public methods, types, configuration options, defaults, side effects, return values, errors, and examples where they help.
 
 ### Release like people depend on it
 
@@ -133,6 +145,24 @@ Because they do. Use semver or the ecosystem's closest equivalent, keep changelo
 Release cadence is a balance. Giant releases are hard to review, hard to debug, and hard to roll back, but releasing every tiny change can also create noise and upgrade fatigue. Prefer coherent releases: small enough to understand, grouped enough to be useful, and clearly documented so customers know whether they should care.
 
 The right cadence also depends on the platform and ecosystem. Web and server SDK users can often upgrade quickly through a package manager, but mobile, desktop, game engine, and enterprise customers may deal with app store review, slow adoption, long release trains, or internal approval processes.
+
+### Keep changelogs and version bumps accurate
+
+A changelog is customer-facing release documentation, not just release metadata. For SDKs using changesets, the changelog entry is part of the code change. As the author of a change, you're responsible for writing a meaningful summary and choosing the correct semver bump before the PR lands. Take care to ensure that the entry accurately reflects what changed, who it may affect, and whether customers need to take action. If they do, describe that action clearly.
+
+Use semver, or the ecosystem's closest equivalent:
+
+- **Patch** versions are for backward-compatible bug fixes, security fixes, documentation/package metadata corrections, and internal changes that don't add customer-facing API or behavior. A user should be able to upgrade a patch release without changing their code or expectations.
+- **Minor** versions are for backward-compatible additions or behavior improvements: new public methods, options, integrations, supported platforms, or feature support. Existing code should continue to compile, run, and behave as before.
+- **Major** versions are for breaking changes: removing or renaming public APIs, changing method signatures or return types, changing default behavior in a way customers may rely on, dropping supported platforms/runtime versions, changing persisted data formats without safe migration, or making previously valid configuration invalid. Major version bumps are ideally planned in advance, and should typically be avoided unless absolutely necessary.
+
+If a release does include a breaking change, call it out clearly in the changelog and provide migration guidance. Before introducing a breaking change, consider alternative solutions by asking yourself:
+
+- Could this change have been written in a backward-compatible manner?
+- If this supersedes an existing public API or behavior, should the old one be deprecated first?
+- Can the new behavior be introduced as an opt-in option first, or can the old behavior remain available through a defaulted option or alias?
+- Do we understand who is affected and how hard migration will be?
+- Should this be batched with other breaking changes in the next major release?
 
 ### Document decisions and sharp edges
 

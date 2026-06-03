@@ -17,6 +17,15 @@ Marketing at PostHog is a collaborative effort across several teams. There are s
 
 If you're not sure who to talk to, check [Who can help me?](/handbook/marketing/ownership).
 
+## Slack channels to know
+
+To keep up with what's shipped and what's about to ship across the company, join:
+
+- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Docs & Wizard team](/teams/docs-wizard) and updated constantly as PRs merge.
+- [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) – what's shipping soon. **Owned by the Marketing team** and posted as a daily digest.
+
+Both channels are populated by agentic workflows that scan merged PRs and feature flag changes in the `posthog/posthog` repo and summarize them into the relevant channel. Engineers can also opt their PR in (or out) manually via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/docs-and-wizard/how-to-publish-changelog) for the full flow.
+
 ## Marketing values
 
 1. Be opinionated
