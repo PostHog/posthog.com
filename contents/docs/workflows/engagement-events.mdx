@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog Workflows can capture email engagement activity as standard PostHog events, in addition to the per-step workflow metrics that are always recorded. Once enabled, every email step in every workflow emits these events for the recipient, so you can build insights, funnels, retention reports, and dashboards from messaging data the same way you would for any other product event.
+PostHog Workflows can capture email engagement activity as standard PostHog events, in addition to the per-step workflow metrics that are always recorded. Once enabled, every email step in every workflow emits these events for the recipient, so you can build insights, funnels, retention reports, and dashboards from workflows data the same way you would for any other product event.
 
 This is an **opt-in** setting at the project level. By default no engagement events are emitted; existing workflow metrics keep working unchanged.
 
@@ -20,13 +20,13 @@ Every event below is captured as a standard PostHog event under the recipient's 
 
 | Event | When it fires |
 | --- | --- |
-| `$messaging_email_sent` | The workflow handed the email to the upstream provider (e.g. SES, Mailjet) for delivery. |
-| `$messaging_email_delivered` | The upstream provider confirmed the message was accepted by the recipient's mail server. |
-| `$messaging_email_opened` | The recipient opened the email. Detected via the tracking pixel embedded in the HTML body, so requires the recipient's mail client to load remote images. |
-| `$messaging_email_link_clicked` | The recipient clicked a tracked link in the email body. |
-| `$messaging_email_bounced` | The provider reported a hard or soft bounce (invalid address, mailbox full, etc.). |
-| `$messaging_email_blocked` | The recipient marked the email as spam, or the recipient address is on a suppression list. |
-| `$messaging_email_failed` | The send failed for another reason (provider error, malformed request, transient outage). |
+| `$workflows_email_sent` | The workflow handed the email to the upstream provider (e.g. SES, Mailjet) for delivery. |
+| `$workflows_email_delivered` | The upstream provider confirmed the message was accepted by the recipient's mail server. |
+| `$workflows_email_opened` | The recipient opened the email. Detected via the tracking pixel embedded in the HTML body, so requires the recipient's mail client to load remote images. |
+| `$workflows_email_link_clicked` | The recipient clicked a tracked link in the email body. |
+| `$workflows_email_bounced` | The provider reported a hard or soft bounce (invalid address, mailbox full, etc.). |
+| `$workflows_email_blocked` | The recipient marked the email as spam, or the recipient address is on a suppression list. |
+| `$workflows_email_failed` | The send failed for another reason (provider error, malformed request, transient outage). |
 
 Open, click, bounce, block, and failure events depend on the upstream provider sending webhook callbacks to PostHog. If you're using your own SMTP relay without callback support, only `_sent` will fire.
 
@@ -34,10 +34,10 @@ Open, click, bounce, block, and failure events depend on the upstream provider s
 
 Because these are standard events, you can use them anywhere PostHog events are available:
 
-- **Trends**: chart `$messaging_email_opened` over time, broken down by workflow ID or email subject.
-- **Funnels**: measure the path from `$messaging_email_sent` → `$messaging_email_opened` → `$messaging_email_link_clicked` → a downstream product conversion event.
+- **Trends**: chart `$workflows_email_opened` over time, broken down by workflow ID or email subject.
+- **Funnels**: measure the path from `$workflows_email_sent` → `$workflows_email_opened` → `$workflows_email_link_clicked` → a downstream product conversion event.
 - **Retention**: cohort recipients who received an email last week and see how many returned to the product.
-- **Dashboards**: combine engagement metrics with revenue or feature-flag exposure to attribute messaging impact.
+- **Dashboards**: combine engagement metrics with revenue or feature-flag exposure to attribute workflows impact.
 
 ## Properties on engagement events
 
