@@ -6848,6 +6848,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Link logs to a person',
+                    url: '/docs/logs/link-person',
+                    icon: 'IconPerson',
+                    color: 'blue',
+                },
+                {
                     name: 'Set up alerts',
                     url: '/docs/logs/alerts',
                     icon: 'IconBell',
