@@ -17,7 +17,7 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 **Focus on:**
 
 - Setting up the day-to-day tools you'll be using - Vitally, Gong, Slack, Metabase. See [sales and CS tools](/handbook/growth/sales/sales-and-cs-tools) for set-up, and start copying other CSM's views and automations (or even better, build your own!)
-- Reading the [CS](/handbook/cs-and-onboarding/) and [sales](/handbook/growth/sales/) sections of the handbook.
+- Reading the [CS](/handbook/cs-and-onboarding/customer-success) and [sales](/handbook/growth/sales/) sections of the handbook.
 - Preparing your PostHog demo.
 - Picking a recent customer call on Gong/BuildBetter to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers.
 - Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide and work through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise). Use the demo environments or your own PostHog project to test different features and use cases.
