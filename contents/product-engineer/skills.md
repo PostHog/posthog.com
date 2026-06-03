@@ -11,7 +11,7 @@ Being a fundamentally sound engineer is table stakes for any aspiring product en
 
 ## 1. How software businesses work
 
-Understanding how a business work gives product engineers the context they need to make good decisions about what to build.
+Understanding how a business works gives product engineers the context they need to make good decisions about what to build.
 
 This starts with understanding basic concepts like [product-market fit](/founders/product-market-fit-game), and the difference between an [ideal customer profile](/newsletter/ideal-customer-profile-framework) and a [user persona](/product-engineers/how-to-create-user-personas). It also includes the business metrics that imply or predict the success of a product, like net revenue retention or [activation](/newsletter/wtf-is-activation).
 
