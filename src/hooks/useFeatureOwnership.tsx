@@ -56,8 +56,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['product-analytics'],
     },
     'background-agents': {
-        feature: 'Background agents',
-        owner: ['posthog-ai'],
+        feature: 'Cloud agents',
+        owner: ['posthog-code'],
         label: 'feature/background-agents',
     },
     'api-structure': {
@@ -242,7 +242,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'mcp-server': {
         feature: 'MCP server',
-        owner: ['posthog-ai'],
+        owner: ['signals'],
         label: 'feature/mcp',
     },
     notebooks: {
@@ -320,7 +320,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'posthog-ai': {
         feature: 'PostHog AI platform',
-        owner: ['posthog-ai'],
+        owner: ['signals'],
         label: 'feature/posthog-ai',
     },
     'posthog-code': {
@@ -440,7 +440,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'slack-app': {
         feature: 'Slack app',
-        owner: ['posthog-ai'],
+        owner: ['signals'],
         label: 'feature/slack-app',
     },
     settings: {

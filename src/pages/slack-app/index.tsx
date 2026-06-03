@@ -32,7 +32,7 @@ import {
     IconWrench,
 } from '@posthog/icons'
 
-const CONNECT_SLACK_URL = 'https://app.posthog.com/settings/project#integration-slack'
+const CONNECT_SLACK_URL = 'https://app.posthog.com/settings/project-integrations#integration-slack'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -304,8 +304,8 @@ type IntroCardProps = {
 const introCards: IntroCardProps[] = [
     {
         icon: IconCoffee,
-        iconColor: 'text-brown',
-        bulletClass: 'bg-brown',
+        iconColor: 'text-brown dark:text-brown-dark',
+        bulletClass: 'bg-brown dark:bg-brown-dark',
         href: '/code',
         title: 'PostHog Code',
         badge: 'Sandboxed',
@@ -657,7 +657,7 @@ const fighterOptions: { icon: IconComponent; iconColor: string; label: React.Rea
     },
     {
         icon: IconCoffee,
-        iconColor: 'text-brown',
+        iconColor: 'text-brown dark:text-brown-dark',
         label: (
             <Link to="/code" state={{ newWindow: true }} className="font-bold text-primary">
                 PostHog Code

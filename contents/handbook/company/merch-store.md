@@ -57,7 +57,7 @@ As always, we expect you to use this with restraint and with your own good judge
 
 ### YC Deal
 
-You can find instructions for this on the dedicated [YC Deal page](/handbook/growth/sales/yc-onboarding).
+You can find instructions for this on the dedicated [YC Deal page](/handbook/brand/startups).
 
 ## Troubleshooting customer orders
 
