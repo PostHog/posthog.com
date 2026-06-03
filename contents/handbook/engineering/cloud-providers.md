@@ -14,8 +14,16 @@ To give someone access
 1. Add the new user to the cloud infra repo (see link above)
 2. Use their email address as their username
 3. Add them to the "Developers" and "DevelopersRO" groups (just use `groups = local.default_groups`)
-4. Add team infra as reviewer. 
+4. Add team infra as reviewer.
 5. Once this is merged, tell them to use http://go/aws to log in
+
+### Elevating permissions via `#aws-access`
+
+To access the dev AWS environment, use the `/awsaccess` slash command in the `#aws-access` Slack channel and fill out the form that appears. Make sure to set up your AWS config file as described in our <PrivateLink url="https://github.com/PostHog/posthog-cloud-infra/blob/main/docs/ACCESS.md">docs</PrivateLink>.
+
+A dedicated `secrets-editor` role is available for managing secrets. Use this role across all AWS environments.
+
+EKS access via `#aws-access` is currently in development. In the near future, expect all AWS access to be managed through the `#aws-access` channel.
 
 ### Permissions errors using AWS CLI
 

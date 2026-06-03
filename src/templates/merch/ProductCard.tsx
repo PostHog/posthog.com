@@ -4,6 +4,7 @@ import { cn } from '../../utils'
 import { ShopifyProduct } from './types'
 import { getProductMetafield, getDisplayTitle } from './utils'
 import { getShopifyImage } from './utils'
+import { useApp } from '../../context/App'
 
 type ProductCardProps = {
     product: ShopifyProduct
@@ -14,7 +15,7 @@ type ProductCardProps = {
 
 export function ProductCard(props: ProductCardProps): React.ReactElement {
     const { className, product, onClick, selected = false } = props
-
+    const { websiteMode } = useApp()
     const subtitle = getProductMetafield(product, 'subtitle')
     const isNew = product.tags?.includes('new')
 
@@ -41,14 +42,14 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
     )
 
     return (
-        <div
+        <button
             className={`group px-2 pt-2 pb-1 border-[1.5px] rounded ${
                 selected ? 'border-blue bg-blue/10' : 'border-transparent'
-            }  relative flex flex-col gap-2 ${className}`}
+            } relative flex flex-col gap-2 ${className}`}
             key={product.shopifyId}
             onClick={onClick}
         >
-            <div className="cursor-default image-wrapper relative">
+            <div className={`${websiteMode ? 'cursor-pointer' : 'cursor-default'} image-wrapper relative`}>
                 {isNew && (
                     <div className="z-10 rotate-12 uppercase text-xs flex text-primary items-center justify-center bg-yellow rounded-full p-2 font-bold aspect-square absolute top-1 right-1 -translate-y-1/2 translate-x-1/2">
                         New
@@ -64,7 +65,7 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                 </div>
             </div>
 
-            <div className="cursor-default mb-2 text-center">
+            <div className={`${websiteMode ? 'cursor-pointer' : 'cursor-default'} mb-2 text-center`}>
                 <h3 className="text-sm font-medium leading-tight">{displayTitle}</h3>
                 {/* <p className="text-[15px] leading-tight mb-1">{subtitle}</p> */}
                 <p className="text-sm text-secondary mb-0">
@@ -80,6 +81,6 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                     )}
                 </p>
             </div>
-        </div>
+        </button>
     )
 }

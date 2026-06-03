@@ -16,7 +16,7 @@ The most common CDPs are [Segment](/docs/libraries/segment) and [RudderStack](/d
 If you don't have a CDP already set up, you might not need one. PostHog has:
 
 - [SDKs](/docs/libraries) and [API](/docs/api/capture) to capture data from anywhere.
-- A [data warehouse](/docs/data-warehouse) to easily import and query data from [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), [Zendesk](/tutorials/zendesk-reports), [S3](docs/data-warehouse/setup/s3), and more.
+- A [data warehouse](/docs/data-warehouse) to easily import and query data from [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), [Zendesk](/tutorials/zendesk-reports), [S3](/docs/data-warehouse/setup/s3), and more.
 - Pre-built and customizable [transformations and destinations](/docs/cdp) for cleaning and sending data to other tools like [webhooks](/docs/cdp/destinations/webhook), [Slack](/docs/cdp/destinations/slack), and more.
 - A suite of dev tools including [SQL querying](/docs/product-analytics/sql) and visualizations.
 
@@ -38,7 +38,7 @@ In general, we recommend starting with PostHog as your CDP using our SDKs, data 
 We have most of the [destinations](/docs/cdp/destinations) you need, but if we don't currently support, you have three options:
 
 1. Use our [custom webhook destination](/docs/cdp/destinations/webhook) or build your own [realtime destinations](/docs/cdp/destinations) to call the 3rd-party API.
-2. Request a new destination by clicking **Can't find what your looking for?** when [creating a new destination](https://us.posthog.com/pipeline/new/destination) in-app and our team will be notified.
+2. Request a new destination by clicking **Can't find what your looking for?** when [creating a new destination](https://app.posthog.com/pipeline/new/destination) in-app and our team will be notified.
 3. Fully transition to a 3rd party CDP.
 
 ```mermaid

@@ -1,0 +1,123 @@
+---
+title: Property filter operators
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+Property filters let you narrow down events, persons, groups, and feature flag targeting using operators on property values. These operators are shared across PostHog features including [Feature Flags](/docs/feature-flags), [Surveys](/docs/surveys), [Cohorts](/docs/data/cohorts), and [Insights](/docs/product-analytics).
+
+## String operators
+
+String operators work on text-based properties. These are the most common operators used in property filters.
+
+| Operator | Description |
+|----------|-------------|
+| `exact` / `is not` | Matches when the property value equals (or does not equal) any value in the list |
+| `contains` / `does not contain` | Matches when the property value contains (or does not contain) the substring |
+| `matches regex` / `does not match regex` | Matches when the property value matches (or does not match) a regular expression |
+
+String properties also support [semver operators](#semver-operators) for comparing version strings like `1.2.3`. These appear alongside the regular string operators in the filter dropdown.
+
+## Numeric operators
+
+Numeric operators work on number-based properties like counts, ages, or amounts.
+
+| Operator | Description |
+|----------|-------------|
+| `equals` / `does not equal` | Matches when the numeric value equals (or does not equal) the specified number |
+| `greater than` / `greater than or equal to` | Matches when the value is above (or at/above) the threshold |
+| `less than` / `less than or equal to` | Matches when the value is below (or at/below) the threshold |
+| `between` / `not between` | Matches when the value is (or is not) within the specified range |
+| `minimum` / `maximum` | Matches based on the minimum or maximum value |
+
+<CalloutBox icon="IconInfo" title="Feature flag limitations" type="fyi">
+
+When using property filters in [Feature Flags](/docs/feature-flags), some numeric operators have limitations:
+
+- **`between` / `not between`** – Not supported for feature flags. Use `greater than or equal to` combined with `less than or equal to` instead.
+- **`minimum` / `maximum`** – Automatically converted to `greater than or equal to` / `less than or equal to`.
+
+These limitations exist because the feature flag evaluation service uses a different backend than other PostHog features.
+
+</CalloutBox>
+
+## Presence operators
+
+Presence operators check whether a property exists on a person or event, regardless of its value.
+
+| Operator | Description |
+|----------|-------------|
+| `is set` | Matches when the property exists and has any value |
+| `is not set` | Matches when the property does not exist or has no value |
+
+## Date operators
+
+Date operators filter based on when something occurred relative to now or compared to a specific date.
+
+| Operator | Description |
+|----------|-------------|
+| `is date before` | Matches when the date is before the specified value |
+| `is date after` | Matches when the date is after the specified value |
+
+Date operators accept the following value formats:
+
+- **Relative dates** – A number and unit offset from now: `-7d` (7 days ago), `30d` (30 days from now), `-1h` (1 hour ago), `-1w` (1 week ago), `-1m` (1 month ago), `-1y` (1 year ago)
+- **ISO 8601 dates** – Standard date format like `2024-01-15`
+- **ISO 8601 datetimes** – Date with time and optional timezone like `2024-01-15T10:30:00Z`
+
+> **Note:** Relative date values with magnitudes of 10,000 or greater (e.g., `10000d`) are rejected as invalid to prevent overflow errors.
+
+## Semver operators
+
+Semver (semantic versioning) operators are additional operators available on string properties that compare values as version strings (e.g., `1.2.3`) instead of plain text. There is no separate semver data type – these operators appear alongside the regular string operators in the filter dropdown, labeled with a `(semver)` suffix.
+
+These are most useful with version-formatted properties like `$app_version` or `$lib_version`. Mobile SDKs automatically include `$app_version` in feature flag evaluation requests – see [property overrides](/docs/feature-flags/property-overrides#default-properties-in-mobile-sdks) for details.
+
+| Operator | Label in UI | Description | Example |
+|----------|-------------|-------------|---------|
+| `=` | equals (semver) | Matches versions exactly equal to the value | `= 1.2.0` matches `1.2.0` only |
+| `≠` | not equals (semver) | Matches versions not equal to the value | `≠ 1.2.0` matches any version except `1.2.0` |
+| `>` | greater than (semver) | Matches versions strictly greater than the value | `> 1.2.0` matches `1.3.0`, `2.0.0` |
+| `>=` | greater than or equal (semver) | Matches versions greater than or equal to the value | `>= 1.2.0` matches `1.2.0`, `1.3.0` |
+| `<` | less than (semver) | Matches versions strictly less than the value | `< 2.0.0` matches `1.9.9`, `1.0.0` |
+| `<=` | less than or equal (semver) | Matches versions less than or equal to the value | `<= 2.0.0` matches `2.0.0`, `1.5.0` |
+| `~` | tilde range (semver) | Matches versions compatible at the patch level | `~ 1.2.3` matches `>=1.2.3` and `<1.3.0` |
+| `^` | caret range (semver) | Matches versions compatible at the minor level | `^ 1.2.3` matches `>=1.2.3` and `<2.0.0` |
+| `*` | wildcard (semver) | Matches any version in the wildcard range | `1.2.*` matches `>=1.2.0` and `<1.3.0` |
+
+> **Note:** The property value should follow semver conventions (e.g., `1.2.3`) for accurate comparisons. Values that don't follow semver format may produce unexpected results.
+
+### Tilde, caret, and wildcard ranges
+
+The tilde `~`, caret `^`, and wildcard `*` operators match a range of versions rather than a single comparison:
+
+- **Tilde `~`** allows patch-level changes. `~1.2.3` matches any version `>=1.2.3` and `<1.3.0`. Use this when you want to allow bug fix updates but not new features.
+
+- **Caret `^`** allows minor-level changes. `^1.2.3` matches any version `>=1.2.3` and `<2.0.0`. Use this when you want to allow new features but not breaking changes.
+
+- **Wildcard `*`** matches any version in the specified position. `1.2.*` matches any version `>=1.2.0` and `<1.3.0`. Use this for simple range matching without specifying exact bounds.
+
+## Cohort operators
+
+Cohort operators are used exclusively with cohort properties to target users based on cohort membership. They cannot be used with person or group properties.
+
+| Operator | Description |
+|----------|-------------|
+| `in` | Matches when you are a member of the specified cohort |
+| `not in` | Matches when you are not a member of the specified cohort |
+
+## Where are property filters used?
+
+Property filters appear throughout PostHog. Some of the most common places include:
+
+- **[Feature Flags](/docs/feature-flags/creating-feature-flags#release-conditions):** Define release conditions that target users based on person, group, or cohort properties.
+- **[Surveys](/docs/surveys/creating-surveys):** Control which users see a survey based on their properties.
+- **[Cohorts](/docs/data/cohorts):** Define dynamic cohort membership using person property criteria.
+- **[Insights](/docs/product-analytics):** Filter event data in trends, funnels, and other analytics views.
+- **[Workflows](/docs/workflows):** Filter which persons or events trigger a workflow based on their properties.
+
+This is not an exhaustive list – property filters are used in many other parts of PostHog wherever you can filter or target based on properties.

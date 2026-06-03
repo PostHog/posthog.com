@@ -217,19 +217,23 @@ export const createTurndownService = (title: string) => {
         },
     })
 
+    const formatHrefForMarkdown = (href: string): string => {
+        if (href.startsWith('/') && !href.startsWith('//')) {
+            const [pathPart, hash] = href.replace(/\.html$/, '').split('#')
+            const pathWithMd = pathPart && !pathPart.endsWith('.md') ? `${pathPart}.md` : pathPart
+            return hash ? `${pathWithMd}#${hash}` : pathWithMd
+        }
+        return href
+    }
+
     turndownService.addRule('processLinks', {
         filter: (node) => {
             return node.nodeName === 'A' && node.getAttribute('href')
         },
         replacement: (content, node) => {
             const href = node.getAttribute('href') || ''
-            if (href.startsWith('/') && !href.startsWith('//')) {
-                const cleanPath = href.replace(/\.html$/, '')
-                if (!cleanPath.endsWith('.md')) {
-                    return `[${content}](${cleanPath}.md)`
-                }
-            }
-            return `[${content}](${href})`
+            const markdownHref = formatHrefForMarkdown(href)
+            return `[${content}](${markdownHref})`
         },
     })
 
@@ -261,6 +265,48 @@ export const createTurndownService = (title: string) => {
         },
     })
 
+    const getTableCellMarkdown = (cell: HTMLElement): string => {
+        const produceMarkdownFromNode = (node: Node): string => {
+            if (node.nodeType === 3) {
+                return node.textContent || ''
+            }
+
+            if (node.nodeType === 1) {
+                const el = node as HTMLElement
+
+                if (el.nodeName === 'A') {
+                    const href = el.getAttribute('href') || ''
+                    const text = (el.textContent || '').trim()
+                    if (!text) {
+                        return ''
+                    }
+                    const markdownHref = formatHrefForMarkdown(href)
+                    return `[${text}](${markdownHref})`
+                }
+
+                let accumulated = ''
+                el.childNodes.forEach((child) => {
+                    accumulated += produceMarkdownFromNode(child)
+                })
+                return accumulated
+            }
+
+            return ''
+        }
+
+        let result = ''
+        cell.childNodes.forEach((child) => {
+            result += produceMarkdownFromNode(child)
+        })
+
+        const text = result.trim()
+        if (!text) {
+            return ''
+        }
+
+        return text.replace(/\\/g, '\\\\').replace(/\|/g, '\\|').replace(/\s+/g, ' ')
+    }
+
     turndownService.addRule('handleTables', {
         filter: (node) => {
             return node.nodeName === 'TABLE'
@@ -273,10 +319,10 @@ export const createTurndownService = (title: string) => {
             if (thead) {
                 const headerRow = thead.querySelector('tr')
                 if (headerRow) {
-                    const headers = Array.from(headerRow.querySelectorAll('th, td')).map((cell) => {
-                        const text = (cell as HTMLElement).textContent?.trim() || ''
-                        return text.replace(/\\/g, '\\\\').replace(/\|/g, '\\|')
-                    })
+                    const headers = Array.from(headerRow.querySelectorAll('th, td'))
+                        .map((cell) => getTableCellMarkdown(cell as HTMLElement))
+                        .filter((text) => text.length > 0)
+
                     if (headers.length > 0) {
                         rows.push('| ' + headers.join(' | ') + ' |')
                         rows.push('| ' + headers.map(() => '---').join(' | ') + ' |')
@@ -286,10 +332,10 @@ export const createTurndownService = (title: string) => {
 
             const bodyRows = Array.from(tbody.querySelectorAll('tr'))
             bodyRows.forEach((row) => {
-                const cells = Array.from(row.querySelectorAll('td, th')).map((cell) => {
-                    const text = (cell as HTMLElement).textContent?.trim() || ''
-                    return text.replace(/\\/g, '\\\\').replace(/\|/g, '\\|').replace(/\n+/g, ' ')
-                })
+                const cells = Array.from(row.querySelectorAll('td, th'))
+                    .map((cell) => getTableCellMarkdown(cell as HTMLElement))
+                    .filter((text) => text.length > 0)
+
                 if (cells.length > 0) {
                     rows.push('| ' + cells.join(' | ') + ' |')
                 }

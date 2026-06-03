@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { useStaticQuery, graphql, Link } from 'gatsby'
+import React, { useEffect } from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
-import { IconLightBulb, IconMegaphone, IconTerminal } from '@posthog/icons'
+import { IconLightBulb } from '@posthog/icons'
 import Cards from 'components/Cards'
 import { PostHogAIExampleCards } from 'components/Cards/data'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import CustomRoadmapSlide from 'components/AI/CustomRoadmapSlide'
 import CustomPersonasSlide from 'components/AI/CustomPersonasSlide'
 import CustomCapabilitiesSlide from 'components/AI/CustomCapabilitiesSlide'
-import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
-import ASCIISlide from 'components/AI/ASCIISlide'
-import Tooltip from 'components/RadixUI/Tooltip'
+import AIEverywhereSlide from 'components/AI/AIEverywhereSlide'
 import { useWindow } from '../../context/Window'
 import TerminalView from 'components/AI/TerminalView'
 import usePostHog from 'hooks/usePostHog'
-import Demos from 'components/Home/Test'
+import Demos from 'components/Home/Test/Demos'
 const PRODUCT_HANDLE = 'posthog_ai'
 
 const CustomDemoSlide = () => {
@@ -146,6 +144,11 @@ export default function PostHogAI(): JSX.Element {
                 name: 'Advanced modes',
                 component: CustomCapabilitiesSlide,
             },
+            {
+                slug: 'everywhere',
+                name: 'PostHog AI everywhere',
+                component: AIEverywhereSlide,
+            },
             // {
             //     slug: 'manifesto',
             //     name: 'AI manifesto',
@@ -155,6 +158,7 @@ export default function PostHogAI(): JSX.Element {
         order: [
             'overview',
             'features',
+            'everywhere',
             'demos',
             'try-it',
             'capabilities',

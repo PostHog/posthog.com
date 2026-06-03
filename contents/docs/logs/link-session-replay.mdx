@@ -16,12 +16,15 @@ By including session IDs and user identity in your logs, you can:
 - **See the full user journey**: Navigate from a log entry directly to the session replay to see what the user was doing
 - **Debug issues faster**: Quickly find and watch the exact session where an error or issue occurred
 - **Correlate logs with user actions**: Match backend log events with actual user experience
+- **View related errors**: See Error Tracking issues that occurred during the same session directly in the log details
 
 ## Prerequisites
 
 - A [logging client installed](/docs/logs/installation) on your backend
-- The [PostHog JavaScript SDK](/docs/libraries/js) on your frontend
+- The [PostHog JavaScript SDK](/docs/libraries/js) on your web frontend, or the [React Native SDK](/docs/libraries/react-native) in your mobile app
 - [Session replay enabled](/docs/session-replay/installation) if you want to link to replays (you can still pass `posthogDistinctId` without session replay to link logs to a user profile)
+
+> **Logs captured client-side:** When you call `posthog.captureLog` / `posthog.logger.*` directly from the JavaScript web SDK or React Native SDK, the current `distinct_id` and `session_id` are attached to every log record automatically. You only need the manual setup below when your backend emits the logs.
 
 ## Implementation
 
@@ -31,8 +34,9 @@ To link logs to session replays, you need to pass the session ID and user identi
 
 In your frontend code, retrieve the current session ID and send it with your API requests:
 
-```javascript
-// In your frontend code
+<MultiLanguage>
+
+```js-web file=JavaScript
 import posthog from 'posthog-js'
 
 // Get the current session ID
@@ -48,6 +52,25 @@ const response = await fetch('/api/chat', {
   })
 })
 ```
+
+```react-native file="React Native"
+import { posthog } from './posthog'
+
+// Get the current session ID
+const sessionId = posthog.getSessionId()
+
+// Send it with your API request
+const response = await fetch('https://api.example.com/chat', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    message: userInput,
+    sessionId,  // Include session ID
+  }),
+})
+```
+
+</MultiLanguage>
 
 ### Backend: Include session ID and user identity in logs
 
@@ -114,14 +137,26 @@ def chat():
 
 Once you've set up session linking, you can navigate from logs to their corresponding session replays:
 
-1. In the [logs view](https://app.posthog.com/logs), find the log entry you're interested in
-2. Click the session replay button to jump directly to the replay
+1. In the [logs view](https://app.posthog.com/logs), click on the log entry you're interested in to open **log details**
+2. In the log details view, click the **View recording** button to open the session replay
 3. Watch the user's interaction in context alongside the backend logs
+
+You can only view recordings for log entries that have an associated session ID.
 
 This linking helps you correlate backend log events with actual frontend user behavior, enabling faster debugging and better understanding of issues as they occur in your application.
 
+## View related errors
+
+When you click on a log entry that has a session ID, you can view related errors in the **Related errors** tab. This tab shows Error Tracking issues that occurred within the same session (within ±6 hours of the log timestamp).
+
+This helps you debug issues by showing errors that happened around the same time as your log entry, giving you a more complete picture of what went wrong.
+
+If no session ID is found in the log entry, the tab displays a message prompting you to link your logs to sessions.
+
 ## See also
 
+- [Link logs to a person](/docs/logs/link-person): same `posthogDistinctId` attribute, surfaced on the person profile's Logs tab.
 - [Session replay installation](/docs/session-replay/installation)
 - [Logs installation](/docs/logs/installation)
 - [Search logs](/docs/logs/search)
+- [Error Tracking](/docs/error-tracking)

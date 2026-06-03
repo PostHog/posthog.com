@@ -18,15 +18,15 @@ We also offer [parental leave](/handbook/people/time-off#parental-leave) for new
 
 As we are fully remote, we provide [all equipment](/handbook/people/spending-money#equipment) you need to have an ergonomic setup at home to be as productive as possible. We provide all team members with a company card for this purpose.
 
-If you ever need change of scenery, we offer a monthly budget towards [coworking or café working](/handbook/people/spending-money#work-space), or [WeWork All Access](https://www.wework.com/solutions/wework-all-access).
+If you ever need change of scenery, co-working or working from a cafe or [WeWork All Access](https://www.wework.com/solutions/wework-all-access) are available, just follow our [expense policy](https://posthog.com/handbook/people/spending-money) e.g. we trust you to do the right thing.
 
 > Please message Kendal to get added to our company WeWork account. 
 
 ## Meeting up 
 
-We do regular [team offsites](/handbook/company/offsites) - recent trips have included Aruba, Iceland, and Portugal! Small Teams also have their own offsites at least once a year. 
+We do regular [team offsites](/handbook/company/offsites) - recent trips have included Mexico, Aruba, Iceland, and Portugal! Small Teams also have their own offsites at least once a year. 
 
-We also give all team members a [$1,500/quarter budget](/handbook/people/spending-money#budget-for-socializing) to meet up in person _in addition_ to the offsite budget
+We also encourage people and teams to meet up in person _in addition_ to the offsites. If you are working on a problem that is better worked on in person, then you should do this. Our [expense policy](https://posthog.com/handbook/people/spending-money) is about trusting you to make the best decisions. Travelling can be distracting so we expect you to exercise judgement when doing this.
 
 For any work-related travel, we also use [Project Wren](https://www.wren.co/) for carbon offsetting. 
 
@@ -35,6 +35,8 @@ For any work-related travel, we also use [Project Wren](https://www.wren.co/) fo
 People like our merch. If you want more, <PrivateLink url="https://github.com/PostHog/runbooks/blob/main/docs/merch.md"> here's how to get it! </PrivateLink> 
 
 As always, we expect you to use this with restraint and with your own good judgement. The merch store should not become your sole source of clothing for your wardrobe, nor where you go any time a friend has a birthday. But sure, go ahead and buy your mom (or yourself) a hat or a hoodie!
+
+Please note that any free merch received outside of your birthday kit, work anniversary kit, or new hire kit is considered a taxable benefit in most jurisdictions and may be subject to tax. If you have questions about how this applies to you, we recommend checking with your local tax advisor.
 
 ## Support open-source projects
 
@@ -56,13 +58,13 @@ We currently offer a [Training budget](/handbook/people/training#training-budget
 
 #### 401k contribution
 
-In the US, our 401k plan is managed by [Guideline](https://www.guideline.com/) and we match up to 4%. 
+In the US, our 401k plan is managed by [Vestwell](https://connect-b.vestwell.com/) and we match up to 4%. 
 
 #### Health care
 
-In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Deel](https://app.deel.com/). We also offer dental and vision insurance via Guardian. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents. Manage your benefits through [Employee Navigator](https://www.employeenavigator.com/).
+In the US, you'll enroll in benefits through [BambooHR](https://posthog.bamboohr.com/login.php) and manage your coverage through [UnitedHealthcare](https://member.uhc.com/) for medical and [Guardian](https://www.guardiananytime.com/) for dental and vision. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents.
 
-We offer the option to opt in to a [Flexible Savings Account (FSA)](https://www.healthcare.gov/have-job-based-coverage/flexible-spending-accounts/), which is a tax-advantaged account that allows you to contribute pre-tax dollars up to $3,050 per year to be used on out-of-pocket medical expenses. The FSA is a "use it or lose it" benefit, so any dollars that are not spent by the end of the year return to the company.  
+We offer the option to opt in to a [Flexible Savings Account (FSA)](https://www.healthcare.gov/have-job-based-coverage/flexible-spending-accounts/), which is a tax-advantaged account that allows you to contribute pre-tax dollars up to $3,400 per year to be used on out-of-pocket medical expenses. The FSA is a "use it or lose it" benefit, so any dollars that are not spent by the end of the year return to the company.  
 
 There is also the option to choose a lower tier, high deductible health plan (HDHP), which will qualify you for a [Health Savings Account (HSA)](https://www.healthcare.gov/glossary/health-savings-account-hsa/) that has further tax benefits beyond what the FSA provides. At the end of the year, any unused money rolls over and the contribution limit resets.
 
@@ -70,7 +72,7 @@ There is also the option to choose a lower tier, high deductible health plan (HD
 
 #### Pension
 
-In the UK, we use [Royal London](https://www.royallondon.com/). Team members contribute 5% and PostHog contributes 4%, but you can opt out if you like. You can also transfer out of the plan as frequently as you want, in case you would rather manage your own private pension. 
+In the UK, we use [Royal London](https://www.royallondon.com/). Team members contribute 5% and PostHog contributes 4%, but you can opt out if you like. You can also transfer out of the plan as frequently as you want, in case you would rather manage your own private pension. If you wish to increase your own pension contributions, you can download the Parallel Employee benefits app and submit the request.
 
 #### Private health insurance
 

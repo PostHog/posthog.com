@@ -14,8 +14,8 @@ You'll also need access to the relevant AWS account.
 
 ## Installation
 
-1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations) tab.
+1. In PostHog, click the [Data pipeline](https://app.posthog.com/data-management/destinations) tab in the left sidebar.
+2. Click the [Destinations](https://app.posthog.com/data-management/destinations) tab.
 3. Search for 'AWS Kinesis' and click **+ Create**.
 4. Add your AWS Access Key ID and Secret Access Key at the configuration step.
 5. Press **Create & Enable** and watch your 'Events' get sent to AWS Kinesis!

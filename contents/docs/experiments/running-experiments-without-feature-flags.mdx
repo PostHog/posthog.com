@@ -1,267 +1,243 @@
 ---
-title: "How to run experiments without feature flags"
+title: "How to run Experiments without Feature Flags"
 ---
 
-You may want to run experiments without using PostHog's feature flags. There are 2 reasons why you may want to do this:
+You can run Experiments without using PostHog's Feature Flags if you're using a different feature flag library and want to track your experiment results in PostHog.
 
-1. You're using a different library for feature flags rather than PostHog's, and you want to run your experiment using this library.
-2. Feature flag support is not yet available in the PostHog SDK that you are using.
-
-This doc walks you through how to set up an experiment without using PostHog's feature flags.
+This doc walks you through how to set up an experiment without using PostHog's Feature Flags.
 
 ## Step 1: Create your experiment in PostHog
 
-Create a new experiment in the [experiments tab](https://app.posthog.com/experiments) and follow the same steps as you would when [creating a regular one](/docs/experiments/manual#how-to-create-an-experiment-in-posthog).
+Create a new experiment in the [Experiments tab](https://app.posthog.com/experiments) and follow the same steps as you would when [creating a regular experiment](/docs/experiments/creating-an-experiment).
 
-> **Note:** Although you won't be using feature flags directly in your experiment, you still need to name your feature flag key for submitting events so PostHog can calculate your experiment results.
+> **Note:** Although you won't be using PostHog's Feature Flags directly, you still need to name your feature flag key. This key is used to identify which events belong to your experiment when PostHog calculates results.
 >
-> Additionally, it's not possible to rename the 'control' variant. You can name the other variants whatever you'd like, though.
+> The 'control' variant name is fixed, but you can name other variants whatever you like.
 
-## Step 2 (optional): Call the `flags` endpoint
+## Step 2: Display the variant using your own feature flag system
 
-If feature flag support is not yet available in your PostHog SDK, but you still want to leverage PostHog's feature flag infrastructure, use the PostHog [API](/docs/api) to call the [`flags`](/docs/api/flags) endpoint. This enables you to calculate the feature flag value for a given user.
+Your feature flag system handles the variant assignment. PostHog only needs to know which variant was shown to each user through the events you send.
 
-This step is not necessary if you are using your own feature flag library.
+## Step 3: Configure a custom exposure event
 
-## Step 3: Add the feature flag property to your events 
+In your experiment settings, set a [custom exposure event](/docs/experiments/exposures#custom-exposure-events) instead of using the default `$feature_flag_called` event. Choose an event that fires when users encounter your experiment.
 
-In order to attribute events to their correct experiment variants, you'll need to include a `$feature/experiment_feature_flag_key: variant-name` property when submitting your events. You only need to do this for events that you'd like to track in your experiment.
+For example:
+- `$pageview` - if users are exposed when they load a page
+- `button_clicked` - if users are exposed when they interact with a feature
+- Any custom event from your application
 
-This is similar to the [same step](/docs/experiments/manual#step-2-server-side-only-add-the-feature-flag-property-to-your-events) when setting up regular experiments. The key difference is that now you need to include this property wherever you capture events for the experiment, not just server-side SDKs.
+> **Note:** The exposure event tells PostHog when a user enters the experiment. This is separate from your metric events (which measure the experiment's impact).
+
+## Step 4: Add the variant property to your events
+
+To attribute events to the correct experiment variant, include a `$feature/<experiment-flag-key>` property with the variant name when capturing events. Add this property to:
+
+1. **Your exposure event** (the event you configured in Step 3)
+2. **Your metric events** (the events measuring experiment success)
+
+The property key format is `$feature/` followed by your experiment's feature flag key. For example, if your experiment's flag key is `new-checkout-flow`, use `$feature/new-checkout-flow` as the property key.
+
+> **Note:** When using PostHog's Feature Flags with our SDKs, this property is added automatically to all events. When using your own feature flag system, you must manually add it.
+
+If your experiment's flag key is `new-checkout-flow` and you use `$pageview` as your exposure event:
 
 <MultiLanguage>
 
 ```js-web
-posthog.capture('event_name_of_your_goal_metric', {
-    "$feature/experiment-feature-flag-key": "variant-name"
+// Get variant from your feature flag system
+const variant = yourFlagSystem.getVariant('new-checkout-flow')
+
+// Send exposure event
+posthog.capture('$pageview', {
+    "$feature/new-checkout-flow": variant  // "control" or "test"
+})
+
+// Later, send metric events with the same property
+posthog.capture('purchase_completed', {
+    "$feature/new-checkout-flow": variant,
+    "revenue": 99.99
 })
 ```
 
 ```react
-posthog.capture('event_name_of_your_goal_metric', {
-    "$feature/experiment-feature-flag-key": "variant-name"
+// Get variant from your feature flag system
+const variant = yourFlagSystem.getVariant('new-checkout-flow')
+
+// Send exposure event
+posthog.capture('$pageview', {
+    "$feature/new-checkout-flow": variant
 })
-```
 
-```react-native
-posthog.capture('event_name_of_your_goal_metric', {
-    "$feature/experiment-feature-flag-key": "variant-name"
+// Later, send metric events
+posthog.capture('purchase_completed', {
+    "$feature/new-checkout-flow": variant,
+    "revenue": 99.99
 })
-```
-
-```android_kotlin
-PostHog.capture(
-    event = "event_name_of_your_goal_metric",
-    properties = mapOf(
-        "\$feature/experiment-feature-flag-key" to "variant-name"
-    )
-)
-```
-
-```ios_swift
-PostHogSDK.shared.capture("event_name_of_your_goal_metric", properties: ["$feature/experiment-feature-flag-key": "variant-name"])
 ```
 
 ```node
+// Get variant from your feature flag system
+const variant = yourFlagSystem.getVariant('new-checkout-flow')
+
+// Send exposure event
 client.capture({
-    distinctId: 'distinct_id',
-    event: 'event_name_of_your_goal_metric',
+    distinctId: 'user_id',
+    event: '$pageview',
     properties: {
-        '$feature/experiment-feature-flag-key': 'variant-name'
-    },
+        '$feature/new-checkout-flow': variant
+    }
+})
+
+// Later, send metric events
+client.capture({
+    distinctId: 'user_id',
+    event: 'purchase_completed',
+    properties: {
+        '$feature/new-checkout-flow': variant,
+        'revenue': 99.99
+    }
 })
 ```
 
 ```python
+# Get variant from your feature flag system
+variant = your_flag_system.get_variant('new-checkout-flow')
+
+# Send exposure event
 posthog.capture(
-    'distinct_id',
-    'event_name_of_your_goal_metric',
+    'user_id',
+    '$pageview',
     {
-        '$feature/experiment-feature-flag-key': 'variant-name'
+        '$feature/new-checkout-flow': variant
+    }
+)
+
+# Later, send metric events
+posthog.capture(
+    'user_id',
+    'purchase_completed',
+    {
+        '$feature/new-checkout-flow': variant,
+        'revenue': 99.99
     }
 )
 ```
 
 ```php
+// Get variant from your feature flag system
+$variant = $yourFlagSystem->getVariant('new-checkout-flow');
+
+// Send exposure event
 PostHog::capture([
-  'distinctId' => 'distinct_id',
-  'event' => 'event_name_of_your_goal_metric',
-  'properties' => [
-    '$feature/experiment-feature-flag-key' => 'variant-name'
-  ]
+    'distinctId' => 'user_id',
+    'event' => '$pageview',
+    'properties' => [
+        '$feature/new-checkout-flow' => $variant
+    ]
+]);
+
+// Later, send metric events
+PostHog::capture([
+    'distinctId' => 'user_id',
+    'event' => 'purchase_completed',
+    'properties' => [
+        '$feature/new-checkout-flow' => $variant,
+        'revenue' => 99.99
+    ]
 ]);
 ```
 
-```ruby
-posthog.capture({
-    distinct_id: 'distinct_id',
-    event: 'event_name_of_your_goal_metric',
-    properties: {
-        '$feature/experiment-feature-flag-key': 'variant-name',
-    }
-})
-```
-
 ```go
+// Get variant from your feature flag system
+variant := yourFlagSystem.GetVariant("new-checkout-flow")
+
+// Send exposure event
 client.Enqueue(posthog.Capture{
-  DistinctId: "distinct_id",
-  Event:      "event_name_of_your_goal_metric",
-  Properties: posthog.NewProperties().
-    Set("$feature/experiment-feature-flag-key", "variant-name"),
+    DistinctId: "user_id",
+    Event:      "$pageview",
+    Properties: posthog.NewProperties().
+        Set("$feature/new-checkout-flow", variant),
 })
-```
 
-```java
-posthog.capture(
-  "distinct_id",
-  "event_name_of_your_goal_metric",
-  new HashMap<String, Object>() {
-    {
-      put("$feature/experiment-feature-flag-key", "variant-name");
-    }
-  }
-);
-```
-
-```csharp
-posthog.Capture(
-  "distinct_id",
-  "event_name_of_your_goal_metric",
-  properties: new() {
-    ["$feature/experiment-feature-flag-key"] = "variant-name"
-  }
-);
+// Later, send metric events
+client.Enqueue(posthog.Capture{
+    DistinctId: "user_id",
+    Event:      "purchase_completed",
+    Properties: posthog.NewProperties().
+        Set("$feature/new-checkout-flow", variant).
+        Set("revenue", 99.99),
+})
 ```
 
 </MultiLanguage>
 
-## Step 4: Send the `$feature_flag_called` event
+## How PostHog processes experiment events
 
-You need to capture the `$feature_flag_called` event. This ensures that we record which experiment variant each user was assigned to. This is also referred to as [exposure logging](/docs/experiments/exposures), and without it you would not be able to analyze your results. 
+Understanding how PostHog calculates experiment results can help you debug issues and ensure your implementation is correct.
 
-You need to include two properties with this event:
+### Exposure tracking
 
-1. `$feature_flag_response`: this is the name of the variant the user has been assigned to e.g., "control" or "test"
-2. `$feature_flag`: This is the key of the feature flag in your experiment.
+When you send your custom exposure event (e.g., `$pageview`), PostHog's exposure query:
 
-**Important:** For accurate results, you must submit this event whenever you retrieve the value of your feature flag.
+1. Filters for events matching your configured exposure event name
+2. Extracts the variant from the `$feature/<flag-key>` property
+3. Records the user's first exposure timestamp per variant
+4. Generates daily exposure counts for each variant
 
-<MultiLanguage>
+### Metric calculation
 
-```js-web
-posthog.capture('$feature_flag_called', {
-    "$feature_flag_response": "variant-name",
-    "$feature_flag": "feature-flag-key"
-})
-```
+For each metric event (identified by the `$feature/<flag-key>` property):
 
-```react
-posthog.capture('$feature_flag_called', {
-    "$feature_flag_response": "variant-name",
-    "$feature_flag": "feature-flag-key"
-})
-```
+1. PostHog checks if a user was exposed to the experiment
+2. Verifies the metric event occurred **after** their first exposure
+3. Attributes the event to the variant specified in `$feature/<flag-key>`
+4. Includes it in the experiment results
 
-```react-native
-posthog.capture('$feature_flag_called', {
-    "$feature_flag_response": "variant-name",
-    "$feature_flag": "feature-flag-key"
-})
-```
+### Multiple variant handling
 
-```android_kotlin
-PostHog.capture(
-    event = "\$feature_flag_called",
-    properties = mapOf(
-        "\$feature_flag_response" to "variant-name",
-        "\$feature_flag" to "feature-flag-key"
-    )
-)
-```
+If a user is exposed to multiple variants, like when a user jumps across devices, PostHog handles this based on your [exposure criteria settings](/docs/experiments/exposures#handling-multiple-exposures):
 
-```ios_swift
-PostHogSDK.shared.capture("$feature_flag_called", properties: [
-    "$feature_flag_response": "variant-name",
-    "$feature_flag": "feature-flag-key"
-])
-```
+- **Exclude from analysis** (default): Users seeing multiple variants are removed from results
+- **Use first seen variant**: Users are attributed to their first exposed variant
 
-```node
-client.capture({
-    distinctId: 'distinct_id',
-    event: '$feature_flag_called',
-    properties: {
-        '$feature_flag_response': 'variant-name',
-        '$feature_flag': 'feature-flag-key'
-    },
-})
-```
+### Sample ratio mismatch detection
 
-```python
-posthog.capture(
-    'distinct_id',
-    '$feature_flag_called',
-    {
-        '$feature_flag_response': 'variant-name',
-        '$feature_flag': 'feature-flag-key'
-    }
-)
-```
+PostHog automatically checks if your exposure distribution matches your configured variant split using a chi-squared test. Once your experiment reaches at least 100 total exposures, PostHog calculates whether the actual distribution differs significantly from expected. If it does (p < 0.001), you'll see a [sample ratio mismatch warning](/docs/experiments/exposures#sample-ratio-mismatch-detection).
 
-```php
-PostHog::capture([
-  'distinctId' => 'distinct_id',
-  'event' => '$feature_flag_called',
-  'properties' => [
-    '$feature_flag_response' => 'variant-name',
-    '$feature_flag' => 'feature-flag-key'
-  ]
-]);
-```
+This helps catch implementation issues like:
+- Inconsistent variant assignment logic
+- Events not being sent for certain variants
+- Ad blockers or network issues affecting specific user groups
 
-```ruby
-posthog.capture({
-    distinct_id: 'distinct_id',
-    event: '$feature_flag_called',
-    properties: {
-        '$feature_flag_response': 'variant-name',
-        '$feature_flag': 'feature-flag-key'
-    }
-})
-```
+## Common issues
 
-```go
-client.Enqueue(posthog.Capture{
-  DistinctId: "distinct_id",
-  Event:      "$feature_flag_called",
-  Properties: posthog.NewProperties().
-    Set("$feature_flag_response", "variant-name").
-    Set("$feature_flag", "feature-flag-key"),
-})
-```
+### Events not appearing in results
 
-```java
-posthog.capture(
-  "distinct_id",
-  "$feature_flag_called",
-  new HashMap<String, Object>() {
-    {
-      put("$feature_flag_response", "variant-name");
-      put("feature_flag", "feature-flag-key");
-    }
-  }
-);
-```
+**Problem:** You're sending events, but they're not showing up in experiment results.
 
-```csharp
-posthog.Capture(
-    "distinct_id",
-    "$feature_flag_called",
-    properties: new() {
-        ["$feature_flag_response"] = "variant-name",
-        ["feature_flag"] = "feature-flag-key"
-    }
-);
-```
+**Solution:** Verify that:
+- Your custom exposure event is being sent (the event you configured in Step 3)
+- Both exposure and metric events include the `$feature/<flag-key>` property with the correct variant value
+- Metric events occur **after** the exposure event (PostHog ignores pre-exposure events)
+- Property values exactly match your experiment's flag key and variant names (including capitalization)
 
-</MultiLanguage>
+### Exposure count is lower than expected
+
+**Problem:** Fewer users are being counted as exposed than you expect.
+
+**Solution:** Check that:
+- Your custom exposure event is firing for all users who see the experiment
+- The `$feature/<flag-key>` property contains a valid variant name
+- You're not filtering out users with test account filters
+- Events are successfully reaching PostHog (check for network issues or ad blockers)
+
+### Uneven variant distribution
+
+**Problem:** Variants don't match your configured split percentages.
+
+**Solution:** Ensure:
+- Your feature flag system is correctly implementing the variant split
+- You're assigning variants consistently per user (not randomly on each evaluation)
+- The `$feature/<flag-key>` value matches the variant names in your experiment setup
+- You haven't changed the variant split mid-experiment

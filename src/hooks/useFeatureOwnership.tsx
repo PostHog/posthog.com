@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react'
-import TeamMember from '../components/TeamMember'
 import { PrivateLink } from '../components/PrivateLink'
-import SmallTeam from 'components/SmallTeam'
 
 export interface Feature {
     slug: string
@@ -39,6 +37,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['product-analytics'],
         label: 'feature/events',
     },
+    'agentic-provisioning': {
+        feature: 'Agentic provisioning',
+        owner: ['growth'],
+        label: 'feature/agentic-provisioning',
+    },
+    'ai-gateway': {
+        feature: 'AI gateway',
+        owner: ['ai-gateway'],
+        label: false,
+    },
     alerts: {
         feature: 'Alerts',
         owner: ['analytics-platform'],
@@ -46,6 +54,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     annotations: {
         feature: 'Annotations',
         owner: ['product-analytics'],
+    },
+    'background-agents': {
+        feature: 'Cloud agents',
+        owner: ['posthog-code'],
+        label: 'feature/background-agents',
     },
     'api-structure': {
         feature: 'API structure',
@@ -104,12 +117,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'currency-rate-dataset': {
         feature: 'Currency rate dataset',
-        owner: ['growth', 'customer-analytics'],
+        owner: ['web-analytics'],
         label: 'feature/currency-rate',
     },
     'customer-analytics': {
         feature: 'Customer Analytics',
-        owner: ['customer-analytics'],
+        owner: ['web-analytics'],
     },
     dashboards: {
         feature: 'Dashboards',
@@ -127,6 +140,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'data-management': {
         feature: 'Data management',
         owner: ['analytics-platform'],
+        notes: <>Owns Actions, Event definitons, Property definitions</>,
     },
     'data-table': {
         feature: 'Data table',
@@ -134,7 +148,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-visualization': {
         feature: 'Data visualization',
-        owner: ['data-stack'],
+        owner: ['product-analytics'],
     },
     'data-pipelines': {
         feature: 'Data pipelines',
@@ -142,8 +156,13 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/pipeline',
     },
     'data-warehouse': {
-        feature: 'Data warehouse',
-        owner: ['data-stack'],
+        feature: 'Managed warehouse',
+        owner: ['managed-warehouse'],
+    },
+    'embedding-worker': {
+        feature: 'Embedding worker',
+        owner: ['signals'],
+        label: false,
     },
     'early-access-features': {
         feature: 'Early access features',
@@ -152,7 +171,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     endpoints: {
         feature: 'Endpoints',
-        owner: ['data-stack'],
+        owner: ['data-modeling'],
     },
     'error-tracking': {
         feature: 'Error tracking',
@@ -167,13 +186,18 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Feature flags',
         owner: ['feature-flags'],
     },
-    feed: {
-        feature: 'Feed',
-        owner: ['growth'],
+    'github-integration': {
+        feature: 'GitHub integration',
+        owner: ['signals'],
     },
     'group-analytics': {
         feature: 'Group analytics',
-        owner: ['customer-analytics'],
+        owner: ['web-analytics'],
+    },
+    'health-alerts': {
+        feature: 'Health alerts',
+        owner: ['growth'],
+        label: 'feature/health-alerts',
     },
     heatmaps: {
         feature: 'Heatmaps',
@@ -192,6 +216,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     insights: {
         feature: 'Insights',
         owner: ['product-analytics'],
+    },
+    integrations: {
+        feature: 'Integrations',
+        owner: ['workflows'],
+        label: 'feature/integrations',
     },
     'internal-messaging': {
         feature: 'Internal messaging (email, notifications)',
@@ -213,7 +242,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'mcp-server': {
         feature: 'MCP server',
-        owner: ['posthog-ai'],
+        owner: ['signals'],
         label: 'feature/mcp',
     },
     notebooks: {
@@ -226,6 +255,17 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         ),
         owner: ['platform-features'],
         label: 'feature/notebooks',
+    },
+    oauth: {
+        feature: 'OAuth',
+        owner: ['platform-features', 'growth'],
+        label: 'feature/oauth',
+        notes: (
+            <>
+                Growth owns all of the OAuth Applications + marketplace integrations around it. Platform features owns
+                the concept of authentication.
+            </>
+        ),
     },
     onboarding: {
         feature: 'Onboarding',
@@ -280,8 +320,13 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'posthog-ai': {
         feature: 'PostHog AI platform',
-        owner: ['posthog-ai'],
+        owner: ['signals'],
         label: 'feature/posthog-ai',
+    },
+    'posthog-code': {
+        feature: 'PostHog Code',
+        owner: ['posthog-code'],
+        label: 'feature/posthog-code',
     },
     'project-homepage': {
         feature: 'Project homepage',
@@ -295,7 +340,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     qaas: {
         feature: 'Queries as a Service',
-        owner: ['data-stack'],
+        owner: ['data-tools'],
         label: 'feature/qaas',
     },
     'query-performance': {
@@ -308,20 +353,30 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['billing', 'platform-features'],
         label: false,
     },
+    'realtime-cohort-calculations': {
+        feature: 'Realtime cohort calculations',
+        owner: ['feature-flags'],
+        label: false,
+    },
     replay: {
         feature: 'Replay',
         owner: ['replay'],
     },
+    'reverse-proxy': {
+        feature: 'Reverse proxy',
+        owner: ['platform-features'],
+        label: 'feature/reverse-proxy',
+    },
     'revenue-analytics': {
         feature: 'Revenue analytics',
-        owner: ['customer-analytics', 'growth'],
+        owner: ['web-analytics'],
     },
     'revenue-data-management': {
         feature: 'Revenue data management',
-        owner: ['customer-analytics', 'growth'],
+        owner: ['web-analytics'],
     },
     sdks: {
-        feature: 'SDKs & client libraries (web, server-side)',
+        feature: 'SDKs & client libraries',
         owner: ['client-libraries'],
         notes: (
             <>
@@ -334,36 +389,9 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                     incident.io schedule
                 </PrivateLink>
                 .
-                <br />
-                <br />
-                <strong>
-                    For Mobile SDK issues, defer to the Mobile folks (@mobile-folks or @client-libraries-folks on Slack)
-                    first.
-                </strong>
             </>
         ),
-        label: 'feature/libraries',
-    },
-    'sdks-doctor': {
-        feature: 'SDK doctor',
-        owner: ['growth'],
-        label: 'feature/sdk-doctor',
-    },
-    'sdks-mobile': {
-        feature: 'SDKs (mobile)',
-        owner: ['client-libraries'],
-        notes: (
-            <>
-                Shared responsibility, with features owned by the relevant small team, or try{' '}
-                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink>.
-                There is an engineer assigned to SDK support on a rotating schedule. Check the{' '}
-                <PrivateLink url="https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MA3TWXS41E7Y5N4AQ">
-                    incident.io schedule
-                </PrivateLink>
-                .
-            </>
-        ),
-        label: 'feature/mobile',
+        label: ['feature/libraries', 'feature/mobile'],
     },
     search: {
         feature: 'Search',
@@ -395,6 +423,26 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['web-analytics'],
         label: 'feature/session-explorer',
     },
+    'session-summaries': {
+        feature: 'Session summaries',
+        owner: ['replay'],
+        label: 'feature/session-summaries',
+    },
+    signals: {
+        feature: 'Signals',
+        owner: ['signals'],
+        label: 'feature/signals',
+    },
+    signup: {
+        feature: 'Signup',
+        owner: ['growth'],
+        label: 'feature/signup',
+    },
+    'slack-app': {
+        feature: 'Slack app',
+        owner: ['signals'],
+        label: 'feature/slack-app',
+    },
     settings: {
         feature: 'Settings structure (personal & project)',
         owner: ['platform-ux'],
@@ -407,11 +455,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sql-editor': {
         feature: 'SQL editor',
-        owner: ['data-stack'],
+        owner: ['data-tools'],
     },
     'sql-insights': {
         feature: 'SQL insights',
-        owner: ['data-stack'],
+        owner: ['product-analytics'],
         label: false,
     },
     sso: {
@@ -456,6 +504,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     variables: {
         feature: 'Variables',
         owner: ['product-analytics'],
+    },
+    'vscode-extension': {
+        feature: 'VS Code extension',
+        owner: ['growth'],
+        label: 'feature/vscode-extension',
     },
     'web-analytics': {
         feature: 'Web analytics',

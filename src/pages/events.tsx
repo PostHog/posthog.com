@@ -14,6 +14,8 @@ import qs from 'qs'
 import { IconPencil, IconTrash } from '@posthog/icons'
 import { useToast } from '../context/Toast'
 import EventsMap, { LAYER_EVENTS_UPCOMING, LAYER_EVENTS_PAST } from 'components/HogMap/EventsMap'
+import MobileDrawer from 'components/MobileDrawer'
+import { useApp } from '../context/App'
 
 export type Event = {
     date: string // YYYY-MM-DD
@@ -40,10 +42,11 @@ export type Event = {
     presentation?: string
     link?: string
     startTime?: string // HH:mm format
+    online?: boolean
     id: number
 }
 
-const transformStrapiEvent = (strapiEvent: any): Event => {
+export const transformStrapiEvent = (strapiEvent: any): Event => {
     const {
         private: isPrivate,
         speakers: speakersData,
@@ -157,7 +160,27 @@ const useEvents = (): { events: Event[]; refreshEvents: () => void; deleteEvent:
     return { events, refreshEvents, deleteEvent }
 }
 
-const EventCard = ({ children, onClose }: { children: React.ReactNode; onClose: () => void }) => {
+const EventCard = ({
+    children,
+    onClose,
+    title,
+    isOpen,
+}: {
+    children: React.ReactNode
+    onClose: () => void
+    title: string
+    isOpen: boolean
+}) => {
+    const { isMobile } = useApp()
+
+    if (isMobile) {
+        return (
+            <MobileDrawer isOpen={isOpen} onClose={onClose} title={title}>
+                {children}
+            </MobileDrawer>
+        )
+    }
+
     return (
         <motion.div
             initial={{ opacity: 0, translateX: '-50%' }}
@@ -178,14 +201,22 @@ const EventCard = ({ children, onClose }: { children: React.ReactNode; onClose: 
     )
 }
 
-function Events() {
+type EventsContentProps = {
+    initialSelectedId?: number
+    initialSelectedEvent?: Event
+}
+
+export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: EventsContentProps) => {
+    const { websiteMode } = useApp()
     const { isModerator } = useUser()
     const { events: eventsData, refreshEvents, deleteEvent } = useEvents()
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('upcoming')
-    const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
+    const [selectedEvent, setSelectedEvent] = useState<Event | null>(initialSelectedEvent || null)
     const [creatingEvent, setCreatingEvent] = useState(false)
     const [editingEvent, setEditingEvent] = useState<boolean>(false)
-    const [pendingSelectedId, setPendingSelectedId] = useState<number | null>(null)
+    const [pendingSelectedId, setPendingSelectedId] = useState<number | null>(
+        initialSelectedEvent?.id ?? initialSelectedId ?? null
+    )
     const [isInitialized, setIsInitialized] = useState(false)
 
     // Generate unique event key
@@ -205,13 +236,13 @@ function Events() {
 
     const displayEvents = activeTab === 'past' ? pastEvents : upcomingEvents
 
-    const handleEventClick = (event: Event, updateHash = true) => {
+    const handleEventClick = (event: Event, updateUrl = true) => {
         setSelectedEvent(event)
         setEditingEvent(false)
         setCreatingEvent(false)
 
-        if (updateHash) {
-            window.history.replaceState(null, '', `#eventId=${event.id}`)
+        if (updateUrl) {
+            window.history.replaceState(null, '', `/events/${event.id}`)
         }
     }
     const handleMapEventClick = (eventOrId: number) => {
@@ -226,7 +257,7 @@ function Events() {
 
     const handleCloseEvent = () => {
         setSelectedEvent(null)
-        window.history.replaceState(null, '', window.location.pathname)
+        window.history.replaceState(null, '', '/events')
     }
 
     // Handle ESC key to close detail panel
@@ -263,7 +294,7 @@ function Events() {
 
     // Initialize from URL hash on page load
     useEffect(() => {
-        if (!isInitialized && eventsData.length > 0) {
+        if (!isInitialized && eventsData.length > 0 && !initialSelectedId && !initialSelectedEvent) {
             const hash = window.location.hash
             const match = hash.match(/#eventId=(\d+)/)
 
@@ -284,67 +315,66 @@ function Events() {
 
             setIsInitialized(true)
         }
-    }, [eventsData, isInitialized])
+    }, [eventsData, isInitialized, initialSelectedEvent, initialSelectedId])
 
     return (
-        <>
-            <SEO
-                title="Cool tech events - PostHog"
-                description="Real-life events for people who like tech and people who build things"
-                image={`/images/og/default.png`}
-            />
-
-            <Explorer
-                template="generic"
-                slug="events"
-                title="Cool tech events"
-                fullScreen
-                viewportClasses="[&>div>div]:h-full"
+        <Explorer
+            template="generic"
+            slug="events"
+            title="Cool tech events"
+            fullScreen
+            viewportClasses="[&>div>div]:h-full"
+            showAddressBar={false}
+        >
+            <div
+                data-scheme="primary"
+                className={`flex flex-col @xl:flex-row text-primary ${websiteMode ? 'h-[calc(100vh-48px)]' : 'h-full'}`}
             >
-                <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
-                    <aside
-                        data-scheme="secondary"
-                        className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary h-full flex flex-col"
-                    >
-                        <div className="border-b border-primary px-4 pt-4 pb-4">
-                            <ToggleGroup
-                                title=""
-                                hideTitle
-                                options={[
-                                    { label: `Upcoming (${upcomingEvents.length})`, value: 'upcoming' },
-                                    { label: `Past (${pastEvents.length})`, value: 'past' },
-                                ]}
-                                onValueChange={(value) => setActiveTab(value as 'past' | 'upcoming')}
-                                value={activeTab}
-                            />
-                        </div>
+                <aside
+                    data-scheme="secondary"
+                    className={`basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary flex flex-col ${
+                        websiteMode ? 'h-[calc(100vh-48px)]' : 'h-full'
+                    }`}
+                >
+                    <div className="border-b border-primary px-4 pt-4 pb-4">
+                        <ToggleGroup
+                            title=""
+                            hideTitle
+                            options={[
+                                { label: `Upcoming (${upcomingEvents.length})`, value: 'upcoming' },
+                                { label: `Past (${pastEvents.length})`, value: 'past' },
+                            ]}
+                            onValueChange={(value) => setActiveTab(value as 'past' | 'upcoming')}
+                            value={activeTab}
+                        />
+                    </div>
 
-                        <ScrollArea className="flex-1">
-                            <div className="p-4 h-96 @xl:h-full">
-                                <div className="space-y-3">
-                                    {isModerator && (
-                                        <OSButton
-                                            variant="primary"
-                                            width="full"
-                                            size="md"
-                                            onClick={() => {
-                                                setCreatingEvent(true)
-                                                setSelectedEvent(null)
-                                                setEditingEvent(false)
-                                            }}
-                                        >
-                                            Add event
-                                        </OSButton>
-                                    )}
-                                    {displayEvents.map((event) => (
-                                        <OSButton
-                                            data-scheme="primary"
-                                            key={getEventKey(event)}
-                                            onClick={() => handleEventClick(event)}
-                                            align="left"
-                                            width="full"
-                                            zoomHover="md"
-                                            className={`bg-primary border border-primary active:bg-primary
+                    <ScrollArea className="flex-1">
+                        <div className="p-4 h-96 @xl:h-full">
+                            <div className="space-y-3">
+                                {isModerator && (
+                                    <OSButton
+                                        variant="primary"
+                                        width="full"
+                                        size="md"
+                                        onClick={() => {
+                                            setCreatingEvent(true)
+                                            setSelectedEvent(null)
+                                            setEditingEvent(false)
+                                        }}
+                                    >
+                                        Add event
+                                    </OSButton>
+                                )}
+                                {displayEvents.map((event) => (
+                                    <OSButton
+                                        data-scheme="primary"
+                                        key={getEventKey(event)}
+                                        onClick={() => handleEventClick(event)}
+                                        align="left"
+                                        width="full"
+                                        zoomHover="md"
+                                        className={`bg-primary border border-primary active:bg-primary
                       
                       ${
                           selectedEvent && getEventKey(selectedEvent) === getEventKey(event)
@@ -352,304 +382,316 @@ function Events() {
                               : 'border-primary'
                       }
                     `}
-                                        >
-                                            <div className="w-full">
-                                                {event.photos && event.photos.length > 0 && (
-                                                    <div className="float-right ml-2 max-w-20">
-                                                        {event.photos[0] && (
-                                                            <img
-                                                                src={event.photos[0].url}
-                                                                alt={`Event photo`}
-                                                                className="w-20 max-h-20 object-cover rounded"
-                                                            />
-                                                        )}
-                                                    </div>
-                                                )}
-                                                <div className="text-secondary text-[13px]">
-                                                    {new Date(event.date).toLocaleDateString('en-US', {
-                                                        month: 'short',
-                                                        day: 'numeric',
-                                                        year: 'numeric',
-                                                    })}
-                                                </div>
-                                                <div className="font-semibold text-sm line-clamp-2">{event.name}</div>
-                                                <div className="text-[13px] text-secondary">
-                                                    <div>{event.location.label}</div>
-
-                                                    {event.vibeScore && (
-                                                        <div className="flex items-center gap-1">
-                                                            {Array.from({ length: event.vibeScore }).map((_, i) => (
-                                                                <span key={i}>🔥</span>
-                                                            ))}
-                                                        </div>
+                                    >
+                                        <div className="w-full">
+                                            {event.photos && event.photos.length > 0 && (
+                                                <div className="float-right ml-2 max-w-20">
+                                                    {event.photos[0] && (
+                                                        <img
+                                                            src={event.photos[0].url}
+                                                            alt={`Event photo`}
+                                                            className="w-20 max-h-20 object-cover rounded"
+                                                        />
                                                     )}
                                                 </div>
+                                            )}
+                                            <div className="text-secondary text-[13px]">
+                                                {new Date(event.date).toLocaleDateString('en-US', {
+                                                    month: 'short',
+                                                    day: 'numeric',
+                                                    year: 'numeric',
+                                                })}
                                             </div>
-                                        </OSButton>
-                                    ))}
-                                </div>
-                            </div>
-                        </ScrollArea>
-                    </aside>
+                                            <div className="font-semibold text-sm line-clamp-2">{event.name}</div>
+                                            <div className="text-[13px] text-secondary">
+                                                <div>{event.location.label}</div>
 
-                    <div className="flex-1 relative h-full border-primary border-t @xl:border-t-0">
-                        <AnimatePresence>
-                            {(editingEvent || creatingEvent) && isModerator ? (
-                                <EventCard
-                                    onClose={() => {
-                                        setCreatingEvent(false)
-                                        setEditingEvent(false)
-                                        handleCloseEvent()
-                                    }}
-                                >
-                                    <div className="p-4">
-                                        <EventForm
-                                            event={editingEvent && selectedEvent ? selectedEvent : undefined}
-                                            onSuccess={() => {
-                                                if (editingEvent) {
-                                                    setEditingEvent(false)
-                                                } else {
-                                                    setCreatingEvent(false)
-                                                }
-                                                refreshEvents()
-                                            }}
-                                        />
-                                    </div>
-                                </EventCard>
-                            ) : (
-                                selectedEvent && (
-                                    <EventCard onClose={handleCloseEvent}>
-                                        <div className="p-4">
-                                            <h2 className="text-xl font-bold mb-1 pr-12">{selectedEvent.name}</h2>
-                                            <div className="mb-2 text-secondary">
-                                                {dayjs(selectedEvent.date).format('MMMM D, YYYY')}
-                                            </div>
-
-                                            <div className="space-y-3 text-sm mb-4">
-                                                {selectedEvent.private && (
-                                                    <div
-                                                        data-scheme="secondary"
-                                                        className="border border-primary bg-primary rounded p-2"
-                                                    >
-                                                        <div className="text-secondary text-[13px]">
-                                                            This event is closed to the public
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                {selectedEvent.startTime && (
-                                                    <div>
-                                                        <div className="text-secondary text-[13px] mb-1">
-                                                            Start time
-                                                        </div>
-                                                        <div>
-                                                            {dayjs(
-                                                                `${selectedEvent.date} ${selectedEvent.startTime}`
-                                                            ).format('h:mm A')}
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Location</div>
-                                                    {selectedEvent.location.venue && (
-                                                        <div className="text-primary font-semibold mt-1">
-                                                            {selectedEvent.location.venue.name}
-                                                        </div>
-                                                    )}
-                                                    <div>{selectedEvent.location.label}</div>
-                                                </div>
-
-                                                {selectedEvent.description && (
-                                                    <div>
-                                                        <div className="text-secondary text-[13px] mb-1">
-                                                            Description
-                                                        </div>
-                                                        <div className="text-sm leading-relaxed">
-                                                            {selectedEvent.description}
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                {selectedEvent.speakers && selectedEvent.speakers.length > 0 && (
-                                                    <div>
-                                                        <div className="text-secondary text-[13px] mb-1">
-                                                            Speaker{selectedEvent.speakers.length > 1 ? 's' : ''}
-                                                        </div>
-                                                        <div className="flex flex-wrap gap-2">
-                                                            {selectedEvent.speakers.map((speaker, i) => (
-                                                                <TeamMember key={i} name={speaker} photo />
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                {selectedEvent.speakerTopic && (
-                                                    <div>
-                                                        <div className="text-secondary text-[13px] mb-1">Topic</div>
-                                                        <div>{selectedEvent.speakerTopic}</div>
-                                                        {selectedEvent.presentation && (
-                                                            <a
-                                                                href={selectedEvent.presentation}
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
-                                                                className="block mt-1 font-semibold underline"
-                                                            >
-                                                                View slide deck
-                                                            </a>
-                                                        )}
-                                                    </div>
-                                                )}
-
-                                                {selectedEvent.format && (
-                                                    <div>
-                                                        <div className="text-secondary text-[13px] mb-1">Format</div>
-                                                        <div>{selectedEvent.format.join(', ')}</div>
-                                                    </div>
-                                                )}
-
-                                                {selectedEvent.audience && selectedEvent.audience.length > 0 && (
-                                                    <div>
-                                                        <div className="text-secondary text-[13px] mb-1">Audience</div>
-                                                        <div>{selectedEvent.audience.join(', ')}</div>
-                                                    </div>
-                                                )}
-
-                                                {selectedEvent.partners && selectedEvent.partners.length > 0 && (
-                                                    <div>
-                                                        <div className="text-secondary text-[13px] mb-1">Partners</div>
-                                                        <div className="flex flex-wrap gap-2">
-                                                            {selectedEvent.partners.map((partner, i) =>
-                                                                partner.url ? (
-                                                                    <a
-                                                                        key={i}
-                                                                        href={partner.url}
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        className="text-orange hover:underline"
-                                                                    >
-                                                                        {partner.name}
-                                                                    </a>
-                                                                ) : (
-                                                                    <span key={i}>{partner.name}</span>
-                                                                )
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                {selectedEvent.attendees && (
-                                                    <div>
-                                                        <div className="text-secondary text-[13px] mb-1">Attendees</div>
-                                                        <div>{selectedEvent.attendees} people</div>
-                                                    </div>
-                                                )}
-
-                                                {selectedEvent.vibeScore && (
-                                                    <div>
-                                                        <div className="text-secondary text-[13px] mb-1">
-                                                            Vibe Score
-                                                        </div>
-                                                        <div className="flex gap-1">
-                                                            {Array.from({ length: selectedEvent.vibeScore }).map(
-                                                                (_, i) => (
-                                                                    <span key={i} className="text-lg">
-                                                                        🔥
-                                                                    </span>
-                                                                )
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                {selectedEvent.photos && selectedEvent.photos.length > 0 && (
-                                                    <div>
-                                                        <div className="text-secondary text-[13px] mb-1">Photos</div>
-                                                        <div className="grid grid-cols-2 gap-2">
-                                                            {selectedEvent.photos.map((photo, i) => (
-                                                                <ZoomImage key={i}>
-                                                                    <img
-                                                                        src={photo.url}
-                                                                        alt={`Event photo ${i + 1}`}
-                                                                        className="w-full h-32 object-cover rounded"
-                                                                    />
-                                                                </ZoomImage>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                {selectedEvent.video && (
-                                                    <div>
-                                                        <div className="text-secondary text-[13px] mb-1">Video</div>
-                                                        <a
-                                                            href={selectedEvent.video}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="text-orange hover:underline text-sm"
-                                                        >
-                                                            Watch video →
-                                                        </a>
-                                                    </div>
-                                                )}
-
-                                                {selectedEvent.link && (
-                                                    <div>
-                                                        <OSButton
-                                                            asLink
-                                                            to={selectedEvent.link}
-                                                            variant={
-                                                                new Date(selectedEvent.date) >=
-                                                                new Date(new Date().toISOString().split('T')[0])
-                                                                    ? 'primary'
-                                                                    : 'secondary'
-                                                            }
-                                                            width="full"
-                                                            size="md"
-                                                            external
-                                                        >
-                                                            View details
-                                                        </OSButton>
-                                                    </div>
-                                                )}
-                                                {isModerator && (
-                                                    <div className="mt-2 flex justify-end gap-1">
-                                                        <OSButton
-                                                            size="md"
-                                                            tooltip="Edit this event"
-                                                            icon={<IconPencil />}
-                                                            onClick={() => {
-                                                                setEditingEvent(true)
-                                                            }}
-                                                        />
-                                                        <OSButton
-                                                            size="md"
-                                                            tooltip="Delete this event"
-                                                            icon={<IconTrash />}
-                                                            onClick={() => {
-                                                                deleteEvent(selectedEvent.id)
-                                                                handleCloseEvent()
-                                                            }}
-                                                        />
+                                                {event.vibeScore && (
+                                                    <div className="flex items-center gap-1">
+                                                        {Array.from({ length: event.vibeScore }).map((_, i) => (
+                                                            <span key={i}>🔥</span>
+                                                        ))}
                                                     </div>
                                                 )}
                                             </div>
                                         </div>
-                                    </EventCard>
-                                )
-                            )}
-                        </AnimatePresence>
+                                    </OSButton>
+                                ))}
+                            </div>
+                        </div>
+                    </ScrollArea>
+                </aside>
 
-                        <EventsMap
-                            layers={activeTab === 'upcoming' ? [LAYER_EVENTS_UPCOMING] : [LAYER_EVENTS_PAST]}
-                            onEventClick={handleMapEventClick}
-                            selectedEventId={selectedEvent?.id || null}
-                        />
-                    </div>
+                <div className="flex-1 relative border-primary border-t @xl:border-t-0">
+                    <AnimatePresence>
+                        {(editingEvent || creatingEvent) && isModerator ? (
+                            <EventCard
+                                isOpen={editingEvent || creatingEvent}
+                                title={editingEvent ? 'Edit event' : 'Add event'}
+                                onClose={() => {
+                                    setCreatingEvent(false)
+                                    setEditingEvent(false)
+                                    handleCloseEvent()
+                                }}
+                            >
+                                <div className="p-4">
+                                    <EventForm
+                                        event={editingEvent && selectedEvent ? selectedEvent : undefined}
+                                        onSuccess={() => {
+                                            if (editingEvent) {
+                                                setEditingEvent(false)
+                                            } else {
+                                                setCreatingEvent(false)
+                                            }
+                                            refreshEvents()
+                                        }}
+                                    />
+                                </div>
+                            </EventCard>
+                        ) : (
+                            selectedEvent && (
+                                <EventCard
+                                    isOpen={!!selectedEvent}
+                                    title={selectedEvent.name}
+                                    onClose={handleCloseEvent}
+                                >
+                                    <div className="p-4">
+                                        <h2 className="text-xl font-bold mb-1 pr-12 @3xl:block hidden">
+                                            {selectedEvent.name}
+                                        </h2>
+                                        <div className="mb-2 text-secondary">
+                                            {dayjs(selectedEvent.date).format('MMMM D, YYYY')}
+                                        </div>
+
+                                        <div className="space-y-3 text-sm mb-4">
+                                            {selectedEvent.private && (
+                                                <div
+                                                    data-scheme="secondary"
+                                                    className="border border-primary bg-primary rounded p-2"
+                                                >
+                                                    <div className="text-secondary text-[13px]">
+                                                        This event is closed to the public
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.startTime && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Start time</div>
+                                                    <div>
+                                                        {dayjs(
+                                                            `${selectedEvent.date} ${selectedEvent.startTime}`
+                                                        ).format('h:mm A')}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            <div>
+                                                <div className="text-secondary text-[13px] mb-1">Location</div>
+                                                {selectedEvent.location.venue && (
+                                                    <div className="text-primary font-semibold mt-1">
+                                                        {selectedEvent.location.venue.name}
+                                                    </div>
+                                                )}
+                                                <div>{selectedEvent.location.label}</div>
+                                            </div>
+
+                                            {selectedEvent.description && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Description</div>
+                                                    <div className="text-sm leading-relaxed">
+                                                        {selectedEvent.description}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.speakers && selectedEvent.speakers.length > 0 && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">
+                                                        Speaker{selectedEvent.speakers.length > 1 ? 's' : ''}
+                                                    </div>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {selectedEvent.speakers.map((speaker, i) => (
+                                                            <TeamMember key={i} name={speaker} photo />
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.speakerTopic && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Topic</div>
+                                                    <div>{selectedEvent.speakerTopic}</div>
+                                                    {selectedEvent.presentation && (
+                                                        <a
+                                                            href={selectedEvent.presentation}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="block mt-1 font-semibold underline"
+                                                        >
+                                                            View slide deck
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.format && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Format</div>
+                                                    <div>{selectedEvent.format.join(', ')}</div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.audience && selectedEvent.audience.length > 0 && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Audience</div>
+                                                    <div>{selectedEvent.audience.join(', ')}</div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.partners && selectedEvent.partners.length > 0 && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Partners</div>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {selectedEvent.partners.map((partner, i) =>
+                                                            partner.url ? (
+                                                                <a
+                                                                    key={i}
+                                                                    href={partner.url}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="text-orange hover:underline"
+                                                                >
+                                                                    {partner.name}
+                                                                </a>
+                                                            ) : (
+                                                                <span key={i}>{partner.name}</span>
+                                                            )
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.attendees && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Attendees</div>
+                                                    <div>{selectedEvent.attendees} people</div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.vibeScore && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Vibe Score</div>
+                                                    <div className="flex gap-1">
+                                                        {Array.from({ length: selectedEvent.vibeScore }).map((_, i) => (
+                                                            <span key={i} className="text-lg">
+                                                                🔥
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.photos && selectedEvent.photos.length > 0 && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Photos</div>
+                                                    <div className="grid grid-cols-2 gap-2">
+                                                        {selectedEvent.photos.map((photo, i) => (
+                                                            <ZoomImage key={i}>
+                                                                <img
+                                                                    src={photo.url}
+                                                                    alt={`Event photo ${i + 1}`}
+                                                                    className="w-full h-32 object-cover rounded"
+                                                                />
+                                                            </ZoomImage>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.video && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Video</div>
+                                                    <a
+                                                        href={selectedEvent.video}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-orange hover:underline text-sm"
+                                                    >
+                                                        Watch video →
+                                                    </a>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.link && (
+                                                <div>
+                                                    <OSButton
+                                                        asLink
+                                                        to={selectedEvent.link}
+                                                        variant={
+                                                            new Date(selectedEvent.date) >=
+                                                            new Date(new Date().toISOString().split('T')[0])
+                                                                ? 'primary'
+                                                                : 'secondary'
+                                                        }
+                                                        width="full"
+                                                        size="md"
+                                                        external
+                                                    >
+                                                        View details
+                                                    </OSButton>
+                                                </div>
+                                            )}
+                                            {isModerator && (
+                                                <div className="mt-2 flex justify-end gap-1">
+                                                    <OSButton
+                                                        size="md"
+                                                        tooltip="Edit this event"
+                                                        icon={<IconPencil />}
+                                                        onClick={() => {
+                                                            setEditingEvent(true)
+                                                        }}
+                                                    />
+                                                    <OSButton
+                                                        size="md"
+                                                        tooltip="Delete this event"
+                                                        icon={<IconTrash />}
+                                                        onClick={() => {
+                                                            deleteEvent(selectedEvent.id)
+                                                            handleCloseEvent()
+                                                        }}
+                                                    />
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </EventCard>
+                            )
+                        )}
+                    </AnimatePresence>
+
+                    <EventsMap
+                        layers={activeTab === 'upcoming' ? [LAYER_EVENTS_UPCOMING] : [LAYER_EVENTS_PAST]}
+                        onEventClick={handleMapEventClick}
+                        selectedEventId={selectedEvent?.id || null}
+                    />
                 </div>
-            </Explorer>
+            </div>
+        </Explorer>
+    )
+}
+
+const EventsPage = () => {
+    return (
+        <>
+            <SEO
+                title="Cool tech events - PostHog"
+                description="Real-life events for people who like tech and people who build things"
+                image={`/images/og/default.png`}
+            />
+            <EventsContent />
         </>
     )
 }
 
-export default Events
+export default EventsPage

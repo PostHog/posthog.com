@@ -12,7 +12,7 @@
  *    title: Elixir error tracking installation
  *    platformLogo: elixir
  *    ---
- * 2. Add to sidebar in src/navs/index.js, the order there = order on page
+ * 2. Add to sidebar in src/navs/index.js (platforms are sorted alphabetically)
  * 3. Done!
  *
  * Remove a platform:
@@ -28,6 +28,9 @@
  * MDX frontmatter format:
  * - platformLogo: Key from `src/constants/logos.ts` (e.g., "stripe", "react", "nodejs")
  * - platformIconName: Icon like "IconCode" (fallback if no logo)
+ * - platformLabel: Optional explicit card label. Overrides the suffix-stripped
+ *   title — use when the auto-derived label is wrong (e.g. provider name
+ *   contains the suffix, like "Fireworks AI" + "AI Observability installation").
  *
  * Usage:
  * const platforms = usePlatformList('docs/error-tracking/installation', 'error tracking installation')
@@ -61,35 +64,44 @@ function collectAllUrls(children: any[], parentUrl: string): string[] {
     return urls
 }
 
-/**
- * Searches for a section with the given URL and returns all descendant URLs
- */
-function findSectionChildren(sections: any[], targetUrl: string): string[] {
-    for (const section of sections) {
-        if (section.url === targetUrl && section.children) {
-            return collectAllUrls(section.children, targetUrl)
-        }
-        if (section.children) {
-            const result = findSectionChildren(section.children, targetUrl)
-            if (result.length > 0) return result
-        }
-    }
-    return []
+interface SidebarSection {
+    urls: string[]
+    sortChildrenAlpha?: boolean
 }
 
 /**
- * Extracts platform URLs from sidebar navigation to determine display order
- * Looks up the section within docsMenu and returns child URLs in order
+ * Searches for a section with the given URL and returns its descendant URLs and config
  */
-function getSidebarOrder(sidebarPath: string): string[] {
+function findSection(sections: any[], targetUrl: string): SidebarSection | null {
+    for (const section of sections) {
+        if (section.url === targetUrl && section.children) {
+            return {
+                urls: collectAllUrls(section.children, targetUrl),
+                sortChildrenAlpha: section.sortChildrenAlpha,
+            }
+        }
+        if (section.children) {
+            const result = findSection(section.children, targetUrl)
+            if (result) return result
+        }
+    }
+    return null
+}
+
+/**
+ * Extracts platform URLs and config from sidebar navigation
+ * Looks up the section within docsMenu and returns child URLs and properties
+ */
+function getSidebarSection(sidebarPath: string): SidebarSection | null {
     const sections: any[] = (docsMenu as any).children || []
     const fullPath = `/${sidebarPath}`
 
-    return findSectionChildren(sections, fullPath)
+    return findSection(sections, fullPath)
 }
 
 interface UsePlatformListOptions {
     platformSourceType?: 'managed' | 'self-hosted'
+    sortAlpha?: boolean
 }
 
 export default function usePlatformList(
@@ -104,6 +116,7 @@ export default function usePlatformList(
                     slug
                     frontmatter {
                         title
+                        platformLabel
                         platformLogo
                         platformIconName
                         platformSourceType
@@ -124,9 +137,12 @@ export default function usePlatformList(
             return true
         })
         .map((node: any) => {
-            let label = node.frontmatter.title
+            // Prefer an explicit `platformLabel` when set — the strip-suffix
+            // fallback breaks when provider names overlap the suffix (e.g.
+            // "Fireworks AI Observability installation" stripping to "Fireworks").
+            let label = node.frontmatter.platformLabel || node.frontmatter.title
 
-            if (titleSuffix) {
+            if (!node.frontmatter.platformLabel && titleSuffix) {
                 // Extract versioning content in title (ex: "(v3.6 and below)")
                 const parenMatch = label.match(/\(([^)]+)\)/)
                 const versionInfo = parenMatch ? ` ${parenMatch[0]}` : ''
@@ -156,11 +172,11 @@ export default function usePlatformList(
             return platform
         })
 
-    const sidebarOrder = getSidebarOrder(basePath)
+    const section = getSidebarSection(basePath)
 
-    if (sidebarOrder.length > 0) {
+    if (section && section.urls.length > 0) {
         // Warn about MDX files that exist but aren't in the sidenav
-        const orphanedFiles = result.filter((platform: Platform) => !sidebarOrder.includes(platform.url))
+        const orphanedFiles = result.filter((platform: Platform) => !section.urls.includes(platform.url))
         if (orphanedFiles.length > 0) {
             console.warn(
                 `[usePlatformList] Found ${orphanedFiles.length} MDX file(s) in "${basePath}" not listed in sidenav:\n` +
@@ -169,15 +185,14 @@ export default function usePlatformList(
             )
         }
 
-        // Filter to only include items that are in the sidebar, then sort by sidebar order
-        return result
-            .filter((platform: Platform) => sidebarOrder.includes(platform.url))
-            .sort((a: Platform, b: Platform) => {
-                const indexA = sidebarOrder.indexOf(a.url)
-                const indexB = sidebarOrder.indexOf(b.url)
-                return indexA - indexB
-            })
+        // Default: follow the sidebar source order from navs/index.js. When `sortAlpha` is passed, sort by label instead.
+        const filtered = result.filter((platform: Platform) => section.urls.includes(platform.url))
+        if (options?.sortAlpha) {
+            return filtered.sort((a: Platform, b: Platform) => a.label.localeCompare(b.label))
+        }
+        const urlOrder = new Map(section.urls.map((url, index) => [url, index]))
+        return filtered.sort((a: Platform, b: Platform) => (urlOrder.get(a.url) ?? 0) - (urlOrder.get(b.url) ?? 0))
     }
 
-    return result
+    return options?.sortAlpha ? result.sort((a: Platform, b: Platform) => a.label.localeCompare(b.label)) : result
 }

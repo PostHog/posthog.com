@@ -35,7 +35,7 @@ Before creating your experiment, you'll need to add `disable_web_experiments: fa
 
 Add `disable_web_experiments: false` to your PostHog init code like this:
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   disable_web_experiments: false,
@@ -58,6 +58,13 @@ Once on your site with the toolbar active:
 4. Select the variant of the experiment you want to modify. In our case, we select the **test** variant.
 5. Click **Add element** and select the element you want to modify. For example, you can select the main signup button on your page.
 6. Use the toolbar to modify the element's text, CSS, or HTML. We'll change the button's text to say "Sign up for free". Importantly, the **Text** field modifies the text of the element. The **CSS** field lets you change the styling of the element. The **HTML** field will override the entire element.
+
+<CalloutBox icon="IconInfo" title="HTML content restrictions" type="fyi">
+
+For security reasons, certain HTML tags and patterns are not allowed in the **Text** and **HTML** fields. Using them will result in a validation error. Restricted content includes `<script>`, `<iframe>`, `<object>`, and `<embed>` tags, as well as `javascript:` protocols and `data:text/html` content.
+
+</CalloutBox>
+
 7. If you'd like to change multiple parts of the page for this version of the experiment, click **Add element** to modify a second, third, or fourth element.
 8. Once done modifying elements for your variants, click **Save experiment**.
 

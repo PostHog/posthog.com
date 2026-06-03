@@ -1,0 +1,10 @@
+extends: existence
+message: "Use the Oxford comma before 'and' or 'or' in a list of three or more items."
+link: https://posthog.com/handbook/content/posthog-style-guide
+level: warning
+scope: sentence
+nonword: true
+tokens:
+    - '(?:\w+,\s\w+)+\s(?:and|or)\s'
+exceptions:
+    - '(?:\w+,\s)+\w+,\s(?:and|or)\s'

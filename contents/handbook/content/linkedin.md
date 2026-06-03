@@ -37,9 +37,22 @@ Yes, I realize LinkedIn has a bad reputation, but it’s a popular channel with 
 
 - Posting daily beats 1-2x/week “perfect” posts. A lot won’t hit, but this will more than pay off for the ones that do.
 
-- If you are posting a changelog update, you can create nice images when clicking **Add entry** in the [changelog](/changelog/). It's under the **Social sharing** header.
+- If you are posting a changelog update, you can create nice images when clicking **Add entry** in the [changelog](/changelog). It's under the **Social sharing** header.
 
 > Thank you to <TeamMember name="Lucas Faria" photo /> for many of these tips.
+
+## Boosting posts from the PostHog brand account
+
+If you post PostHog-related content to LinkedIn more than once per week and **aren't scheduling it in advance**, please:
+
+- Ask <TeamMember name="Liam Graham" photo /> to add you as a content admin to the [PostHog LinkedIn page](https://www.linkedin.com/company/posthog/) if you aren't already.
+- Immediately after posting, switch your profile to the PostHog page and:
+  - React (like, love, insightful, etc.)
+  - Repost (the regular "Instantly bring [your] post to others' feeds" option)
+
+The first couple of hours of a LinkedIn post are critical algorithmically, so sharing from the company page early helps maximize reach.
+
+If you _are_ scheduling content, aim to engage from the brand account within ~an hour of the post going live (e.g. liking comments, adding the supporting article link as a comment). Liam will cover this when possible, but morning GMT posts may fall outside PST working hours.
 
 ## LinkedIn posters and their newsletters
 

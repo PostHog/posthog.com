@@ -1,0 +1,8 @@
+extends: substitution
+message: "Address the reader directly. Use '%s' instead of '%s'."
+link: https://posthog.com/handbook/docs-and-wizard/docs-style-guide
+level: suggestion
+ignorecase: true
+swap:
+    the user: you
+    users can: you can

@@ -9,10 +9,11 @@ type UseMediaLibraryOptions = {
     search?: string
     limit?: number
     revalidateOnFocus?: boolean
+    folderId?: number | null
 }
 
 const query = (offset: number, options?: UseMediaLibraryOptions) => {
-    const { limit = 50, search, tag } = options || {}
+    const { limit = 50, search, tag, folderId } = options || {}
 
     const params: any = {
         pagination: {
@@ -34,6 +35,14 @@ const query = (offset: number, options?: UseMediaLibraryOptions) => {
         filters.tags = {
             id: {
                 $eq: tag,
+            },
+        }
+    }
+
+    if (folderId) {
+        filters.mediaFolder = {
+            id: {
+                $eq: folderId,
             },
         }
     }

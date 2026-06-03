@@ -191,7 +191,7 @@ Once added, you can configure your app by searching for it and then clicking on 
 Once you've done that, the final step is getting the app set up on your site. Go to where you initialize `posthog-js` in your code, and add `opt_in_site_apps: true`. This enable your site apps to inject into your site through the `posthog-js` library. It should look like this:
 
 ```js
-posthog.init("<ph_project_api_key>", { 
+posthog.init("<ph_project_token>", { 
     "api_host": "<ph_client_api_host>",
     "opt_in_site_apps": true 
 })

@@ -10,15 +10,15 @@ availability:
 
 import { Tab } from 'components/Tab'
 
-This page documents the column definitions used in [marketing analytics](/docs/web-analytics/marketing-analytics), including how each metric is calculated and where the data comes from for each advertising platform.
+This page documents the column definitions used in [Marketing Analytics](/docs/web-analytics/marketing-analytics), including how each metric is calculated and where the data comes from for each advertising platform.
 
-## Understanding "Reported" vs PostHog conversions
+## Understanding "reported" vs PostHog conversions
 
-Marketing analytics displays two types of conversion data:
+Marketing Analytics displays two types of conversion data:
 
-1. **Reported conversions** - Conversion data reported directly by the ad platform (Google, Meta, LinkedIn, etc.). These use the platform's own tracking pixel and attribution model.
+1. **Reported conversions** – Conversion data reported directly by the ad platform (Google, Meta, LinkedIn, etc.). These use the platform's own tracking pixel and attribution model.
 
-2. **PostHog conversion goals** - Conversions you define in PostHog using events, actions, or data warehouse tables. These use PostHog's events and your custom attribution rules.
+2. **PostHog conversion goals** – Conversions you define in PostHog using events, actions, or Data Warehouse tables. These use PostHog's events and your custom attribution rules.
 
 **Examples:**
 
@@ -36,7 +36,7 @@ Marketing analytics displays two types of conversion data:
 
 ## Standard columns
 
-These columns are available for all platforms in the marketing analytics dashboard.
+These columns are available for all platforms in the Marketing Analytics dashboard.
 
 ### Display columns
 
@@ -60,9 +60,10 @@ These columns are available for all platforms in the marketing analytics dashboa
 
 | Column | Formula | Description | Higher is... |
 |--------|---------|-------------|--------------|
-| `CPC` | `Cost / Clicks` | Cost per click - average cost for each ad click | Worse |
-| `CTR` | `(Clicks / Impressions) × 100` | Click-through rate - percentage of impressions that resulted in clicks | Better |
-| `Reported ROAS` | `Reported Conversion Value / Cost` | Return on ad spend - revenue generated per dollar spent (as reported by the platform) | Better |
+| `CPC` | `Cost / Clicks` | Cost per click – average cost for each ad click | Worse |
+| `CTR` | `(Clicks / Impressions) × 100` | Click-through rate – percentage of impressions that resulted in clicks | Better |
+| `Reported ROAS` | `Reported Conversion Value / Cost` | Return on ad spend – revenue generated per dollar spent (as reported by the platform) | Better |
+| `Cost per Reported Conversion` | `Cost / Reported Conversions` | Average cost for each conversion reported by the ad platform | Worse |
 
 > **Note:** All calculated metrics are rounded to 2 decimal places. Division by zero returns null.
 
@@ -70,14 +71,16 @@ These columns are available for all platforms in the marketing analytics dashboa
 
 Each advertising platform provides data using different field names. PostHog normalizes these into the standard columns above.
 
-<Tab.Group tabs={['Google Ads', 'Meta Ads', 'LinkedIn Ads', 'Microsoft Ads', 'TikTok Ads', 'Reddit Ads']}>
+<Tab.Group tabs={['Google Ads', 'Meta Ads', 'LinkedIn Ads', 'Bing Ads', 'TikTok Ads', 'Reddit Ads', 'Snapchat Ads', 'Pinterest Ads']}>
 <Tab.List>
 <Tab>Google Ads</Tab>
 <Tab>Meta Ads</Tab>
 <Tab>LinkedIn Ads</Tab>
-<Tab>Microsoft Ads</Tab>
+<Tab>Bing Ads</Tab>
 <Tab>TikTok Ads</Tab>
 <Tab>Reddit Ads</Tab>
+<Tab>Snapchat Ads</Tab>
+<Tab>Pinterest Ads</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
@@ -185,12 +188,44 @@ arraySum(x -> JSONExtractFloat(x, 'value'),
 **Required tables:** `campaigns` and `campaign_report`
 
 </Tab.Panel>
+<Tab.Panel>
+
+| PostHog Column | Snapchat Ads Field | Notes | Platform Docs |
+|----------------|-------------------|-------|---------------|
+| `Campaign` | `name` | Campaign name | [Snapchat Campaigns API](https://developers.snap.com/api/marketing-api/Ads-API/campaigns) |
+| `ID` | `id` | Campaign ID | [Snapchat Campaigns API](https://developers.snap.com/api/marketing-api/Ads-API/campaigns) |
+| `Impressions` | `impressions` | Impression Count | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
+| `Clicks` | `swipes` | Snapchat uses "swipes" as the equivalent of clicks | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
+| `Cost` | `spend` | Divided by 1,000,000 (stored in micros). Converted from `currency` if available. | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
+| `Reported Conversion` | `conversion_purchases` | # of attributed "PURCHASE" conversion events | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
+| `Reported Conversion Value` | `conversion_purchases_value` | Value of attributed "PURCHASE" conversion events (micro-units of the Ad Account's currency) | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
+| Date field | `start_time` | Start time of reporting period | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
+
+**Required tables:** `campaigns` and `campaign_stats_daily`
+
+</Tab.Panel>
+<Tab.Panel>
+
+| PostHog Column | Pinterest Ads Field | Notes | Platform Docs |
+|----------------|-------------------|-------|---------------|
+| `Campaign` | `name` | Campaign name | [Pinterest API v5](https://developers.pinterest.com/docs/api/v5/ad_account-campaigns-list/) |
+| `ID` | `id` | Campaign ID | [Pinterest API v5](https://developers.pinterest.com/docs/api/v5/ad_account-campaigns-list/) |
+| `Impressions` | `total_impression` | Total impressions (paid + organic) | [Pinterest API v5 - Analytics](https://developers.pinterest.com/docs/api/v5/ads-analytics/) |
+| `Clicks` | `total_clickthrough` | Total clickthroughs | [Pinterest API v5 - Analytics](https://developers.pinterest.com/docs/api/v5/ads-analytics/) |
+| `Cost` | `spend_in_dollar` | Despite the name, uses the ad account's configured currency (not necessarily USD). Converted from `currency` if available. | [Pinterest API v5 - Analytics](https://developers.pinterest.com/docs/api/v5/ads-analytics/) |
+| `Reported Conversion` | `total_conversions` | Only available if conversion tracking is configured | [Pinterest API v5 - Analytics](https://developers.pinterest.com/docs/api/v5/ads-analytics/) |
+| `Reported Conversion Value` | `total_checkout_value_in_micro_dollar` | Divided by 1,000,000 (stored in micro dollars). Only available if conversion tracking is configured. | [Pinterest API v5 - Analytics](https://developers.pinterest.com/docs/api/v5/ads-analytics/) |
+| Date field | `date` | Reporting date | |
+
+**Required tables:** `campaigns` and `campaign_analytics`
+
+</Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
 
 ## Currency handling
 
-PostHog converts all costs to your [base currency](/docs/web-analytics/marketing-analytics#base-currency) for consistent reporting across platforms.
+PostHog converts all monetary values (costs and conversion values) to your [base currency](/docs/web-analytics/marketing-analytics#base-currency) for consistent reporting across platforms.
 
 | Platform | Source Currency Field | Default Assumption |
 |----------|----------------------|-------------------|
@@ -200,9 +235,11 @@ PostHog converts all costs to your [base currency](/docs/web-analytics/marketing
 | Bing Ads | `currency_code` | Base currency |
 | TikTok Ads | `currency` | Base currency |
 | Reddit Ads | `currency` | Base currency |
+| Snapchat Ads | `currency` | Base currency |
+| Pinterest Ads | `currency` | Base currency |
 
 ## Related documentation
 
-- [Marketing analytics overview](/docs/web-analytics/marketing-analytics)
+- [Marketing Analytics overview](/docs/web-analytics/marketing-analytics)
 - [Setting up conversion goals](/docs/web-analytics/marketing-analytics#conversion-goals)
 - [Data source configuration](/docs/web-analytics/marketing-analytics#data-source-configuration)

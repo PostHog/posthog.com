@@ -5,6 +5,9 @@ import com.posthog.PostHogOkHttpInterceptor
 import okhttp3.OkHttpClient
 
 private val client = OkHttpClient.Builder()
+    // Support for remote configuration
+    // in the [session replay settings](https://app.posthog.com/settings/project-replay#replay-network)
+    // requires SDK version 3.32.0 or higher.
     .addInterceptor(PostHogOkHttpInterceptor(captureNetworkTelemetry = true))
     .build()
 ```

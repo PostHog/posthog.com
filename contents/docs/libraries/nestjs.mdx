@@ -1,0 +1,156 @@
+---
+title: NestJS
+platformLogo: nestjs
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+PostHog integrates with your [NestJS](https://nestjs.com/) app to enable analytics, custom events capture, Feature Flags, Error Tracking, and more.
+
+This guide walks you through integrating PostHog with your NestJS app using the `PostHogInterceptor`, which provides automatic context propagation and optional exception capture.
+
+## Prerequisites
+
+To follow this guide along, you need:
+
+1. A PostHog instance (either [Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host))
+2. A NestJS application (v8+)
+
+## Installation
+
+Install the `posthog-node` package:
+
+```bash
+npm install posthog-node
+# or
+yarn add posthog-node
+# or
+pnpm add posthog-node
+```
+
+## Setting up the interceptor
+
+The `PostHogInterceptor` is a NestJS interceptor that automatically propagates context (session ID, distinct ID, request metadata) to all `posthog.capture()` calls within a request. It uses `AsyncLocalStorage` under the hood for per-request isolation.
+
+In your `main.ts`, create a PostHog client and register the interceptor globally:
+
+```ts file=main.ts
+import { NestFactory } from '@nestjs/core'
+import { PostHog } from 'posthog-node'
+import { PostHogInterceptor } from 'posthog-node/nestjs'
+import { AppModule } from './app.module'
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule)
+
+  const posthog = new PostHog('<ph_project_token>', {
+    host: '<ph_client_api_host>',
+  })
+
+  app.useGlobalInterceptors(new PostHogInterceptor(posthog))
+
+  await app.listen(3000)
+}
+bootstrap()
+```
+
+### Context propagation
+
+The interceptor reads the following headers from incoming requests and attaches them as context to all PostHog calls within that request:
+
+| Header | Context property | Description |
+|---|---|---|
+| `x-posthog-session-id` | `sessionId` | Links server events to a client session |
+| `x-posthog-distinct-id` | `distinctId` | Identifies you |
+| `x-posthog-window-id` | `$window_id` | Links to a specific browser tab |
+
+It also automatically captures request metadata as properties:
+
+- `$current_url` – the request URL
+- `$request_method` – the HTTP method (GET, POST, etc.)
+- `$request_path` – the request path
+- `$user_agent` – the user agent string
+- `$ip` – the client IP (parsed from `x-forwarded-for` if behind a proxy)
+
+### Sending headers from the client
+
+If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure `__add_tracing_headers` to automatically inject session and identity headers on every request to your NestJS backend:
+
+```js
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    __add_tracing_headers: ['your-nestjs-backend.com']
+})
+```
+
+This automatically adds `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID` headers to all `fetch` and `XMLHttpRequest` calls to the specified hostnames. The `PostHogInterceptor` reads these headers automatically.
+
+### Capturing events in controllers
+
+With the interceptor active, any `posthog.capture()` call within a request automatically includes the propagated context:
+
+```ts file=app.controller.ts
+import { Controller, Get, Post, Body } from '@nestjs/common'
+import { PostHog } from 'posthog-node'
+
+@Controller()
+export class AppController {
+  constructor(private readonly posthog: PostHog) {}
+
+  @Post('checkout')
+  checkout(@Body() body: any) {
+    this.posthog.capture({
+      event: 'checkout_started',
+      // distinctId, sessionId, and request properties
+      // are automatically included from the interceptor context
+    })
+    return { status: 'ok' }
+  }
+}
+```
+
+## Error Tracking
+
+The `PostHogInterceptor` supports optional exception capture. When enabled, it automatically captures unhandled exceptions thrown during request handling and sends them to PostHog [Error Tracking](/docs/error-tracking).
+
+By default, exception capture is **disabled**. To enable it:
+
+```ts file=main.ts
+// Capture server errors (5xx) only (default threshold)
+app.useGlobalInterceptors(
+  new PostHogInterceptor(posthog, { captureExceptions: true })
+)
+```
+
+### Configuring the minimum status to capture
+
+By default, 4xx errors (like `NotFoundException` or `BadRequestException`) are skipped – only 5xx errors are captured. You can lower the threshold:
+
+```ts file=main.ts
+// Also capture 4xx errors
+app.useGlobalInterceptors(
+  new PostHogInterceptor(posthog, {
+    captureExceptions: { minStatusToCapture: 400 },
+  })
+)
+```
+
+<CalloutBox icon="IconInfo" title="How exception capture works">
+
+The interceptor uses an RxJS `catchError` operator to observe exceptions without interfering with NestJS's exception filter pipeline. It:
+
+- Skips exceptions that have already been captured (deduplication)
+- Skips `HttpException`s with a status code below `minStatusToCapture` (default: 500)
+- Re-throws the exception after capturing, so NestJS exception filters still work as expected
+
+</CalloutBox>
+
+For more details on Error Tracking setup, see the [NestJS Error Tracking installation guide](/docs/error-tracking/installation/nestjs).
+
+## Next steps
+
+To read more about how to integrate specific PostHog features into NestJS, have a look at our [Node SDK docs](/docs/libraries/node) for concepts such as:
+
+- [Capturing custom events, setting properties, and more.](/docs/libraries/node#capturing-events)
+- [Setting up Feature Flags including variants and payloads.](/docs/libraries/node#feature-flags)
+- [Using contexts for per-request state management.](/docs/libraries/node#contexts)

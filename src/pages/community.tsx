@@ -3,22 +3,16 @@ import React, { useEffect, useState } from 'react'
 import SEO from 'components/seo'
 import { communityMenu } from '../navs'
 import { useLayoutData } from 'components/Layout/hooks'
-import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import { IconCake, IconCoffee, IconConfetti, IconGlobe, IconHandwave } from '@posthog/icons'
 import { Twitter } from 'components/Icons/Icons'
-import { usePosts } from 'components/Edition/hooks/usePosts'
 import Questions from 'components/InsidePostHog/Questions'
-import { useQuestions } from 'hooks/useQuestions'
 import Markdown from 'components/Squeak/components/Markdown'
 import Newbies from 'components/InsidePostHog/Newbies'
-import PersonCard from 'components/InsidePostHog/PersonCard'
-import WIP from 'components/InsidePostHog/WIP'
 import Anniversaries from 'components/InsidePostHog/Anniversaries'
 import Merch from 'components/InsidePostHog/Merch'
 import Posts from 'components/InsidePostHog/Posts'
-import Newsletter from 'components/InsidePostHog/Newsletter'
 import Changelog from 'components/InsidePostHog/Changelog'
 import FeatureRequests from 'components/InsidePostHog/FeatureRequests'
 import AppStatus from 'components/AppStatus'
@@ -27,8 +21,8 @@ import slugify from 'slugify'
 import uniqBy from 'lodash/uniqBy'
 import { NewsletterForm } from 'components/NewsletterForm'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import OSButton from 'components/OSButton'
+import { useApp } from '../context/App'
 
 const quote =
     // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -236,124 +230,126 @@ const Header = () => {
 }
 
 const Main = () => {
+    const { websiteMode } = useApp()
     const { fullWidthContent } = useLayoutData()
 
     return (
         <section
-            className={`grid @2xl:grid-cols-2 @5xl:grid-cols-[220px_1fr_260px] @7xl:grid-cols-[300px_1fr_300px] gap-6 @7xl:gap-8 mx-auto px-7 @7xl:px-9 pb-8 transition-all ${
-                fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
-            }`}
+            className={`@container w-full px-7 @7xl:px-9 transition-all mx-auto ${
+                fullWidthContent ? '' : 'max-w-[1400px]'
+            } ${websiteMode ? '' : 'pb-8'}`}
         >
-            <aside className="@container order-3 col-span-full border-t border-primary @5xl:col-span-1 @5xl:border-t-0 pt-8 @5xl:pt-0 @5xl:order-none flex flex-col ">
-                <div className="grid @7xl:grid-cols-2 gap-4 @7xl:gap-x-12 @7xl:gap-y-4 divide-y @5xl:divide-y-0 divide-border dark:divide-border-dark">
-                    <PersonSpotlight
-                        title="A note from the editor"
-                        content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Explore our latest posts, community questions, and everything else that's happening in the world of PostHog."
-                        byline="- Andy, Editor-in-Chief"
-                        image={
-                            <div className="h-24 w-24 rounded-full overflow-hidden bg-yellow">
-                                <CloudinaryImage
-                                    width={200}
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/andy_86a7232754.png"
-                                />
-                            </div>
-                        }
-                    />
-
-                    <div className="pt-6 pb-4 px-2">
-                        <CloudinaryImage
-                            className="size-20 float-right"
-                            width={200}
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/detective_hog_9b2bb1da51.png"
-                        />
-                        <p className="mb-2 text-sm">
-                            <em>"{quote}"</em>
-                        </p>
-                        <p className="text-sm opacity-75 mb-0">
-                            <em>- Max, our resident hedgehog</em>
-                        </p>
-                    </div>
-
-                    <SlackPosts />
-
-                    <div className="pt-4">
+            <div className="grid @2xl:grid-cols-2 @5xl:grid-cols-[220px_1fr_260px] @7xl:grid-cols-[300px_1fr_300px] gap-6 @7xl:gap-8">
+                <aside className="@container order-3 col-span-full border-t border-primary @5xl:col-span-1 @5xl:border-t-0 pt-8 @5xl:pt-0 @5xl:order-none flex flex-col ">
+                    <div className="grid @7xl:grid-cols-2 gap-4 @7xl:gap-x-12 @7xl:gap-y-4 divide-y @5xl:divide-y-0 divide-border dark:divide-border-dark">
                         <PersonSpotlight
-                            title="Meet a team member"
-                            content="<p>In a past life, Dana studied medicine. Now she helps teams get started with PostHog as a Technical Customer Success Manager. In her downtime she's a founding member of PostHog's D&D club."
+                            title="A note from the editor"
+                            content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Explore our latest posts, community questions, and everything else that's happening in the world of PostHog."
+                            byline="- Andy, Editor-in-Chief"
                             image={
-                                <div className="h-24 w-24 rounded-full overflow-hidden bg-salmon">
+                                <div className="h-24 w-24 rounded-full overflow-hidden bg-yellow">
                                     <CloudinaryImage
                                         width={200}
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Dana_b1e08c0410_52b3fbeba4.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/andy_86a7232754.png"
                                     />
                                 </div>
                             }
-                            cta={
-                                <OSButton
-                                    asLink
-                                    to="/community/profiles/32545"
-                                    variant="secondary"
-                                    size="md"
-                                    width="full"
-                                    state={{ newWindow: true }}
-                                >
-                                    Learn more about Dana
-                                </OSButton>
-                            }
                         />
-                    </div>
 
-                    <div className="py-4 grid gap-5">
-                        <div>
-                            <h3 className="text-base mb-2">People news</h3>
-
-                            <div className="flex gap-1 items-center mb-2">
-                                <div>
-                                    <IconConfetti className="w-8 h-8 text-muted" />
-                                </div>
-                                <h4 className="font-semibold opacity-75 text-sm mb-0">Welcome to PostHog!</h4>
-                            </div>
-                            <Newbies />
+                        <div className="pt-6 pb-4 px-2">
+                            <CloudinaryImage
+                                className="size-20 float-right"
+                                width={200}
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/detective_hog_9b2bb1da51.png"
+                            />
+                            <p className="mb-2 text-sm">
+                                <em>"{quote}"</em>
+                            </p>
+                            <p className="text-sm opacity-75 mb-0">
+                                <em>- Max, our resident hedgehog</em>
+                            </p>
                         </div>
 
-                        <div>
-                            <div className="flex gap-1 items-center mb-2">
-                                <div>
-                                    <IconCake className="w-8 h-8 text-muted" />
+                        <SlackPosts />
+
+                        <div className="pt-4">
+                            <PersonSpotlight
+                                title="Meet a team member"
+                                content="<p>In a past life, Dana studied medicine. Now she helps teams get started with PostHog as a Technical Customer Success Manager. In her downtime she's a founding member of PostHog's D&D club."
+                                image={
+                                    <div className="h-24 w-24 rounded-full overflow-hidden bg-salmon">
+                                        <CloudinaryImage
+                                            width={200}
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Dana_b1e08c0410_52b3fbeba4.png"
+                                        />
+                                    </div>
+                                }
+                                cta={
+                                    <OSButton
+                                        asLink
+                                        to="/community/profiles/32545"
+                                        variant="secondary"
+                                        size="md"
+                                        width="full"
+                                        state={{ newWindow: true }}
+                                    >
+                                        Learn more about Dana
+                                    </OSButton>
+                                }
+                            />
+                        </div>
+
+                        <div className="py-4 grid gap-5">
+                            <div>
+                                <h3 className="text-base mb-2">People news</h3>
+
+                                <div className="flex gap-1 items-center mb-2">
+                                    <div>
+                                        <IconConfetti className="w-8 h-8 text-muted" />
+                                    </div>
+                                    <h4 className="font-semibold opacity-75 text-sm mb-0">Welcome to PostHog!</h4>
                                 </div>
-                                <h4 className="font-semibold opacity-75 text-sm mb-0">Thanks for being here!</h4>
+                                <Newbies />
                             </div>
 
-                            <Anniversaries />
+                            <div>
+                                <div className="flex gap-1 items-center mb-2">
+                                    <div>
+                                        <IconCake className="w-8 h-8 text-muted" />
+                                    </div>
+                                    <h4 className="font-semibold opacity-75 text-sm mb-0">Thanks for being here!</h4>
+                                </div>
+
+                                <Anniversaries />
+                            </div>
                         </div>
                     </div>
-                </div>
-            </aside>
-            <section className="@container order-1 flex-1 @5xl:order-none @2xl:border-r @2xl:pr-6 @5xl:px-6 @7xl:px-8 @5xl:border-x border-primary">
-                <div
-                    className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 transition-all ${
-                        fullWidthContent ? '' : 'max-w-2xl mx-auto'
-                    }`}
-                >
-                    <Posts />
+                </aside>
+                <section className="@container order-1 flex-1 @5xl:order-none @2xl:border-r @2xl:pr-6 @5xl:px-6 @7xl:px-8 @5xl:border-x border-primary">
+                    <div
+                        className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 transition-all ${
+                            fullWidthContent ? '' : 'max-w-2xl mx-auto'
+                        }`}
+                    >
+                        <Posts />
 
-                    <div className="@container pt-4 pb-0 @3xl:pt-8 @3xl:pb-4">
-                        <NewsletterForm placement="community" />
+                        <div className="@container pt-4 pb-0 @3xl:pt-8 @3xl:pb-4">
+                            <NewsletterForm placement="community" />
+                        </div>
+                        <div className="py-4">
+                            <Changelog />
+                        </div>
                     </div>
-                    <div className="py-4">
-                        <Changelog />
-                    </div>
-                </div>
-            </section>
-            <aside className="order-2 @5xl:order-none flex flex-col gap-4">
-                <Questions />
+                </section>
+                <aside className="order-2 @5xl:order-none flex flex-col gap-4">
+                    <Questions />
 
-                <Merch />
+                    <Merch />
 
-                <div className="pt-4">
-                    <PersonSpotlight
-                        title="Musings from the CEO"
-                        content="<p>nobody will remember:</p>
+                    <div className="pt-4">
+                        <PersonSpotlight
+                            title="Musings from the CEO"
+                            content="<p>nobody will remember:</p>
             <ul>
                 <li>your salary</li>
                 <li>how “busy you were”</li>
@@ -369,37 +365,38 @@ const Main = () => {
                 <li>how you made them feel when you hopped on a quick call</li>
             </ul>
             "
-                        image={
-                            <div className="h-24 w-24 rounded-full overflow-hidden bg-yellow">
-                                <CloudinaryImage
-                                    width={200}
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/james_b841adce96.png"
-                                />
-                            </div>
-                        }
-                        cta={
-                            <div className="mt-4">
-                                <CallToAction
-                                    href="https://x.com/james406"
-                                    width="[calc(100%_+_3px)]"
-                                    type="secondary"
-                                    size="sm"
-                                    externalNoIcon
-                                >
-                                    <div className="flex justify-center items-center gap-1">
-                                        <span>Follow James on</span>
-                                        <Twitter className="h-4 w-4 mr-1 inline-block" />
-                                    </div>
-                                </CallToAction>
-                            </div>
-                        }
-                    />
-                </div>
+                            image={
+                                <div className="h-24 w-24 rounded-full overflow-hidden bg-yellow">
+                                    <CloudinaryImage
+                                        width={200}
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/james_b841adce96.png"
+                                    />
+                                </div>
+                            }
+                            cta={
+                                <div className="mt-4">
+                                    <CallToAction
+                                        href="https://x.com/james406"
+                                        width="[calc(100%_+_3px)]"
+                                        type="secondary"
+                                        size="sm"
+                                        externalNoIcon
+                                    >
+                                        <div className="flex justify-center items-center gap-1">
+                                            <span>Follow James on</span>
+                                            <Twitter className="h-4 w-4 mr-1 inline-block" />
+                                        </div>
+                                    </CallToAction>
+                                </div>
+                            }
+                        />
+                    </div>
 
-                <div className="py-4">
-                    <FeatureRequests />
-                </div>
-            </aside>
+                    <div className="py-4">
+                        <FeatureRequests />
+                    </div>
+                </aside>
+            </div>
         </section>
     )
 }

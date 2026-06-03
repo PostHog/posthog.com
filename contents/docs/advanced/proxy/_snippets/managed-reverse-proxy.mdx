@@ -1,9 +1,15 @@
-import { Steps, Step } from 'components/Docs/Steps'
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { Steps, Step } from "components/Docs/Steps";
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 PostHog's managed reverse proxy routes traffic through our infrastructure. We handle SSL certificates, routing, and maintenance automatically.
 
-This option requires our [platforms add-ons](https://posthog.com/platform-packages) and access to your domain's DNS settings.
+This option is free for all PostHog Cloud users. You just need access to your domain's DNS settings.
+
+<CalloutBox icon="IconInfo" title="Setting up during onboarding?" type="fyi">
+
+If you're onboarding a web-based product like Web Analytics, Surveys, or AI Observability, you'll be guided through managed proxy setup as part of the onboarding flow. The steps below are for setting it up manually from the organization settings.
+
+</CalloutBox>
 
 <Steps>
 
@@ -15,7 +21,7 @@ This option requires our [platforms add-ons](https://posthog.com/platform-packag
 
 <CalloutBox icon="IconInfo" title="Before you start" type="fyi">
 
-Choose a neutral subdomain that doesn't include words like `analytics`, `tracking`, `telemetry`, or `posthog`. Ad blockers target obvious terms.
+Choose a neutral subdomain that doesn't include words like `analytics`, `tracking`, `telemetry`, `posthog`, or `ph`. Ad blockers target these terms. If ad blockers block your domain, the proxy won't achieve its intended effect.
 
 </CalloutBox>
 
@@ -29,7 +35,11 @@ Go to your DNS provider and create a new **CNAME record**:
 2. Set the **Target** to the proxy domain PostHog generated in the previous step. You'll see it in your proxy settings, it looks like `4854cf84789d8596ad01.proxy-us.posthog.com`
 3. Save the record
 
-> **Note:** If you're using Cloudflare, disable proxying on this CNAME record by clicking the cloud icon and set it to **DNS only**. Cloudflare's proxy interferes with PostHog's SSL certificate provisioning.
+<CalloutBox icon="IconWarning" title="Disable DNS provider proxy features" type="caution">
+
+If you're using a DNS provider like Cloudflare that offers proxy options (orange cloud), make sure the proxy is **disabled** (gray cloud) for this CNAME record. Enabling the proxy at your DNS provider may interfere with PostHog's managed reverse proxy functionality and SSL certificate provisioning.
+
+</CalloutBox>
 
 </Step>
 
@@ -39,7 +49,7 @@ Your proxy status will change from **waiting** → **issuing** → **live**. Thi
 
 PostHog will automatically detect your DNS record and provision an SSL certificate. No further action needed.
 
-> **Note:** If your proxy stays in **issuing** for more than 30 minutes, see [troubleshooting](/docs/advanced/proxy/proxy-reference#troubleshooting).
+> **Note:** If your proxy stays in **issuing** for more than 30 minutes, see [troubleshooting](#troubleshooting).
 
 </Step>
 
@@ -50,22 +60,22 @@ Update your PostHog initialization to use your new subdomain:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
-  api_host: 'https://yoursubdomain.myapp.com',
-  ui_host: 'https://us.posthog.com'
-})
+posthog.init("<ph_project_token>", {
+  api_host: "https://yoursubdomain.myapp.com",
+  ui_host: "https://us.posthog.com",
+});
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
-  api_host: 'https://yoursubdomain.myapp.com',
-  ui_host: 'https://eu.posthog.com'
-})
+posthog.init("<ph_project_token>", {
+  api_host: "https://yoursubdomain.myapp.com",
+  ui_host: "https://eu.posthog.com",
+});
 ```
 
 </MultiLanguage>
 
-Replace `yoursubdomain.myapp.com` with your actual subdomain, and provide your **project API key**.
+Replace `yoursubdomain.myapp.com` with your actual subdomain, and provide your **project token**.
 
 Always set both `api_host` (your proxy) and `ui_host` (PostHog's actual domain) so features like the toolbar work correctly.
 
@@ -81,8 +91,82 @@ Confirm events are flowing through your proxy:
 4. Verify the response is `200 OK`
 5. Check the [PostHog app](https://app.posthog.com) to confirm events appear
 
-If you see errors or events aren't appearing, see [troubleshooting](/docs/advanced/proxy/proxy-reference#troubleshooting).
+If you see errors or events aren't appearing, see [troubleshooting](#troubleshooting).
 
 </Step>
 
 </Steps>
+
+## Troubleshooting
+
+If your proxy is stuck in **issuing** or shows as **erroring**, use the built-in diagnostic tool to identify the issue.
+
+### Run diagnostics
+
+1. Go to [organization proxy settings](https://app.posthog.com/settings/organization-proxy)
+2. Find your proxy in the list
+3. Click the **⋯** menu and select **Diagnose**
+
+The diagnostic runs these checks:
+
+- **DNS CNAME** – Verifies your CNAME record points to the correct PostHog proxy target
+- **Certificate status** – Checks if SSL certificate provisioning is progressing normally
+- **CAA records** – Scans your DNS tree for CAA records that might block certificate issuance
+- **HTTP-01 challenge** – Tests if the domain verification endpoint is reachable
+- **Live event probe** – Confirms events can flow through the proxy
+- **Certificate expiry** – Warns if an active certificate is expiring soon
+
+Each check shows a status (passed, warning, failed, or skipped) with details and remediation steps when needed.
+
+### Common issues
+
+**CNAME not configured or pointing to the wrong target**
+
+Add or update your CNAME record at your DNS provider. The diagnostic report shows the exact record value you need.
+
+**CAA records blocking certificate issuance**
+
+Your domain has CAA records that don't authorize PostHog's certificate authority. Add CAA records allowing `pki.goog`, `letsencrypt.org`, and `ssl.com` as shown in the diagnostic report.
+
+**HTTP-01 challenge unreachable**
+
+The domain verification URL isn't accessible. Make sure:
+
+- Port 80 is open and not blocked by a firewall
+- No redirects from HTTP to HTTPS on the verification path
+- No other CDN or proxy is intercepting traffic before it reaches PostHog
+
+**DNS provider proxy enabled**
+
+If you use Cloudflare or a similar DNS provider with proxy features, make sure the proxy is disabled (gray cloud) for your CNAME record.
+
+## FAQ
+
+### Why does my managed proxy stay in "erroring" state with Cloudflare?
+
+If you're using a **Cloudflare Enterprise** zone with **zone hold** enabled, the managed reverse proxy won't work. Zone holds prevent external services from provisioning SSL certificates or verifying DNS for domains in your zone.
+
+You have two options:
+
+1. **Set up a self-hosted proxy instead:** Use [Cloudflare Workers](/docs/advanced/proxy/cloudflare) to create your own reverse proxy. This works with zone holds enabled since you're configuring everything within your own Cloudflare account.
+
+2. **Disable zone hold** (not recommended): Zone holds are typically enabled for security reasons. Disabling them may expose your domain to certain risks. Only consider this if you understand the security implications for your organization.
+
+For most users with Cloudflare Enterprise, option 1 (setting up your own Cloudflare Worker proxy) is the recommended approach.
+
+### For EU Cloud, is managed reverse proxy traffic guaranteed to terminate only at EU Cloudflare edges?
+
+Not strictly guaranteed, but in practice this is usually the case. Cloudflare uses [anycast routing](https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/geographic-traffic-routing/) to terminate connections at the data center closest to the end user, so requests from users in Europe almost always land on EU edges. There are two caveats:
+
+- If your user is physically outside Europe, their request will terminate at a non-EU edge.
+- If the nearest Cloudflare data center is overloaded or unavailable, traffic may be routed to another region.
+
+We do not enable [Regional Services or the Data Localization Suite](https://developers.cloudflare.com/data-localization/) on the managed reverse proxy, so EU-only edge termination is not contractually enforced.
+
+That said, the managed reverse proxy is designed so that **no request content is stored at the edge**, regardless of which data center terminates the connection:
+
+- The Cloudflare Workers we use to forward traffic to our ingestion pipeline do not log requests.
+- Request caching is not enabled.
+- Cloudflare has confirmed to us that they do not retain request logs for this traffic either.
+
+Once traffic reaches PostHog, it is ingested into the region you selected (EU or US Cloud). If strict EU-only termination at the edge is a hard requirement for your compliance posture, we recommend setting up a [self-hosted proxy](/docs/advanced/proxy) on infrastructure you control instead.

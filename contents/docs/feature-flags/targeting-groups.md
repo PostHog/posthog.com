@@ -88,14 +88,14 @@ To do this, start by capturing an event with the entity ID (like server ID).
 ```python
 from posthog import Posthog
 
-posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
+posthog = Posthog('<ph_project_token>', host='<ph_client_api_host>')
 
 posthog.capture(
-  "canada-cloud-1", 
-  "server_identify", 
-  {
-    "server_id": "canada-cloud-1"
-  }
+    "server_identify",
+    distinct_id="canada-cloud-1",
+    properties={
+        "server_id": "canada-cloud-1",
+    },
 )
 ```
 
@@ -106,16 +106,17 @@ Finally, add your feature flag call using your server ID:
 ```python
 from posthog import Posthog
 
-posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
+posthog = Posthog('<ph_project_token>', host='<ph_client_api_host>')
 
-posthog.feature_enabled('server-rollout', 'canada-cloud-1')
+flags = posthog.evaluate_flags("canada-cloud-1")
+flags.is_enabled("server-rollout")
 ```
 
 Now, you can target your server with feature flags. You can use a similar workflow with services, machines, or devices as well as any of our other [backend SDKs](/docs/libraries) or even our [API](/docs/api).
 
 ### One-time property value
 
-A common pattern we use for many of our site apps is show a feature, set a property on the user once the "business code" executes, and check for that property to not show again. This pattern is useful if you want interactions with features or services to only happen once.
+A common pattern we use for many of our site apps is to show a feature, set a property on the user once the "business code" executes, and check for that property to not show again. This pattern is useful if you want interactions with features or services to only happen once.
 
 > 📖 Read a full implementation of this in "[How to set up one-time feature flags](/tutorials/one-time-feature-flags)."
 
@@ -126,27 +127,24 @@ Next, implement the flag and add a capture call after the flag to flip the `is_f
 ```python
 from posthog import Posthog
 
-posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
+posthog = Posthog('<ph_project_token>', host='<ph_client_api_host>')
 
-is_first_interaction = posthog.feature_enabled(
-  'first-interaction', 
-  'ian@posthog.com'
-)
+flags = posthog.evaluate_flags("ian@posthog.com")
+is_first_interaction = flags.is_enabled("first-interaction")
 
-if (is_first_interaction):
-	# Do cool stuff here
-	
-	posthog.capture(
-    'did_cool_stuff',
-    'ian@posthog.com',
-    {
-      'is_first_interaction': False
-    }
-  )
+if is_first_interaction:
+    # Do cool stuff here
 
+    posthog.capture(
+        "did_cool_stuff",
+        distinct_id="ian@posthog.com",
+        properties={
+            "is_first_interaction": False,
+        },
+    )
 ```
 
-The flag now returns `false` meaning the user gets a different experience on all subsequent interactions.
+The flag now returns `false`, meaning the user gets a different experience on all subsequent interactions.
 
 ## Further reading
 

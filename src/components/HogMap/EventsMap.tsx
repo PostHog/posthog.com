@@ -249,7 +249,7 @@ export default function EventsMap({
                               year: 'numeric',
                           })
                         : ''
-                    const href = ev.link || ''
+                    const href = ev.id ? `/events/${ev.id}` : ev.link || ''
                     const name = ev.name || 'Event'
                     const desc = (ev as any).description || ''
                     const label = (ev as any)?.location?.label || 'Event'
@@ -306,7 +306,7 @@ export default function EventsMap({
                               year: 'numeric',
                           })
                         : ''
-                    const href = ev.link || ''
+                    const href = ev.id ? `/events/${ev.id}` : ev.link || ''
                     const name = ev.name || 'Event'
                     const desc = (ev as any).description || ''
                     const label = (ev as any)?.location?.label || 'Event'

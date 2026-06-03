@@ -1,0 +1,141 @@
+---
+title: Who can help me?
+sidebar: Handbook
+showTitle: true
+---
+
+If you have a general marketing question, go to `#group-marketing-and-content` in Slack.
+
+If you need help with the website, go to `#posthogdotcom`.
+
+**Product marketer (PMM) and product manager (PM) assignments**
+
+We generally only have product marketers on teams that _already_ have a product manager. Products without a product manager a) are usually too early for marketing to get involved, and b) distract engineers as they need to spend time briefing the product marketer, vs. shipping more stuff. [Product managers](/handbook/product/product-manager-role) help teams figure out what to build and how much to charge for it, product marketers then help you get as many users as possible. 
+
+| Product | PM | PMM | Blitzscale |
+|---|---|---|---|
+| *Error Tracking* | Cory S | Sara | Paul D'A |
+| *Logs* | Abe | Sara | Ben W |
+| *Workflows* | Abe | Sara | Ben W |
+| *Endpoints* | Anna | Lizzie | Raquel |
+| *Data stack (all teams)* | Anna | Lizzie | Raquel |
+| *PostHog AI* | Annika | Cleo | James H |
+| *PostHog Code* | Annika | Cleo | James H |
+| *Replay* | Cory S | Sara* | Paul D'A |
+| *Surveys* | Cory S | | Surveys |
+| *LLM Analytics* | Marco (new) | To be hired | James H |
+| *LLM Gateway* | Marco (new) | | Ben W |
+| *Product Analytics* | Mike W | To be hired | Paul D'A |
+| *Web Analytics* | Mike W | To be hired | Paul D'A |
+| *Conversations* | | Too early | James H |
+| *Platform features* | | To be hired (sales-focused PMM) | Raquel |
+| *Experiments* | Ruby | | Raquel |
+| *Feature Flags* | Ruby | | Ben W |
+| *MCP* | | Joe** | |
+| *Integrations* | | Joe** | |
+
+*AI summaries specifically
+**Not a 'product' team at PostHog, but we think they're worth specific marketing focus
+
+Even if a product already has a product manager, a team is only ready for a product marketer when a proper launch needs preparing for, usually beta or GA. Before that, product teams are responsible for launching their own products, but can ask for help with ad hoc things - see below. It is also fine for a product to have a product manager but not product marketer - we generally focus on heavily investing in 2-3 product areas at a time, so we can do a good job at a handful of things, instead of an average job at many. 
+
+<details>
+<summary>I need a product marketer, but my team hasn't been assigned one</summary>
+
+Just ask in #group-marketing-and-content in Slack and tag the team lead. 
+</details>
+
+
+<details>
+<summary>I'm interested in running, attending, or speaking at an event</summary>
+
+You should speak to <SmallTeam slug="irl-events" />, our resident party planners. Read the [events strategy handbook](/handbook/marketing/events) for more. 
+</details>
+
+<details>
+<summary>I want to launch my product out of beta</summary>
+
+Speak to <SmallTeam slug="marketing" /> and read about [product launches](/handbook/marketing/product-announcements).
+</details>
+
+<details>
+<summary>I need help with documentation</summary>
+
+Your main contact is the <SmallTeam slug="docs-wizard" />, but please read the [docs ownership handbook](/handbook/docs-and-wizard/docs-ownership) to understand how best to work with them. 
+
+If you just need someone to review something, tag `Team Docs & Wizard` in GitHub.
+</details>
+
+<details>
+<summary>Someone wants to write a guest post / is requesting a backlink etc.</summary>
+
+Unless it's someone huge and important with a real audience, "Mark as spam" and "Move to bin". 
+</details>
+
+<details>
+<summary>Someone wants to partner with us</summary>
+
+Refer them to [our partnerships waitlist](/partnerships) and let <SmallTeam slug="marketing" /> know. 
+</details>
+
+<details>
+<summary>Someone wants us to sponsor them</summary>
+
+If it's an [influencer](/handbook/marketing/influencers), newsletter or podcast, refer them to <TeamMember name="Adlet Smykov" />.
+
+If it's an event, speak to <SmallTeam slug="irl-events" />.
+</details>
+
+<details>
+<summary>I want to create a video, or have a video idea we should try...</summary>
+
+To start with, post ideas in the `#content-and-video-ideas` Slack channel. <TeamMember name="Alex van Leeuwen" /> and <TeamMember name="Jordo Dibb" /> on the content team are your main points of contact here.
+
+Please also read [How we do video at PostHog](/handbook/marketing/video). We're still figuring things out, though, so very interested in suggestions.
+
+If your idea is for PostHog Stories (HogTok), hit up <TeamMember name="Edwin Lim" /> as well.
+</details>
+
+<details>
+<summary>A customer is interested in doing a case study with us</summary>
+
+Speak to <TeamMember name="Joe Martin" />, <TeamMember name="Cleo Lant" />, or <TeamMember name="Sara Miteva" />.
+</details>
+
+<details>
+<summary>A customer has an issue with merch</summary>
+
+Please share in the #merch channel. <TeamMember name="Kendal Hall" /> owns fulfillment issues. <TeamMember name="Lottie Coxon" /> owns merch design and creation. <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" /> own the storefront.
+</details>
+
+<details>
+<summary>I have a question / problem / suggestion for the website</summary>
+
+The website is owned by <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" />. Generally, the best place to ask is the `#posthogdotcom` Slack channel.
+
+For larger pieces of work — a new product page, a significant copy overhaul — read [Working with the website team](/handbook/marketing/working-with-website) for the process to follow.
+</details>
+
+<details>
+<summary>Hey, can we run some paid ads for my product?</summary>
+
+We probably are already, but if you have something specific in mind, ask in the `#team-demand-gen` Slack channel. 
+</details>
+
+<details>
+<summary>I need a new hedgehog design, illustration, or other art asset.</summary>
+
+Read [art and branding requests](/handbook/brand/art-requests) first!
+</details>
+
+<details>
+<summary>I need a font, logo, etc.</summary>
+
+See [Logos, brand, hedgehogs](/handbook/company/brand-assets)
+</details>
+
+<details>
+<summary>A journalist has contacted me</summary>
+
+Direct them to press@posthog.com, where one of Joe, James, Charles, or Tim can respond. They're the only people who should speak to press. See: [Press & PR](/handbook/brand/press)
+</details>

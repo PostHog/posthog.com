@@ -1,0 +1,11 @@
+extends: existence
+message: 'Hi, Andy here... use an en dash ( – ) with spaces. On Mac, holding down the Option and hyphen key will give you an en dash.'
+link: https://posthog.com/handbook/content/posthog-style-guide
+level: error
+nonword: true
+tokens:
+    - — # em dash
+    - '\w–' # en dash missing leading space
+    - '–\w' # en dash missing trailing space
+    - '\w -\s' # spaced hyphen instead of en dash
+    - '\s- \w' # spaced hyphen instead of en dash

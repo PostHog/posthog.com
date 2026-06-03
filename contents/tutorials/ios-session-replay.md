@@ -177,7 +177,7 @@ To add the package dependency to your Xcode project, select `File > Add Package 
 
 ![Add PostHog from Swift Package Manager](https://res.cloudinary.com/dmukukwp6/image/upload/v1720532354/posthog.com/contents/Screenshot_2024-07-09_at_2.32.30_PM.png)
 
-Next, configure your PostHog instance in `didFinishLaunchingWithOptions` inside `AppDelegate`. You can find your project API key and instance address in [your PostHog project settings](https://us.posthog.com/project/settings):
+Next, configure your PostHog instance in `didFinishLaunchingWithOptions` inside `AppDelegate`. You can find your project token and instance address in [your PostHog project settings](https://us.posthog.com/project/settings):
 
 ```swift file=AppDelegate.swift
 import UIKit
@@ -187,7 +187,7 @@ import PostHog
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let POSTHOG_API_KEY = "<ph_project_api_key>"
+        let POSTHOG_API_KEY = "<ph_project_token>"
         let POSTHOG_HOST = "<ph_client_api_host>"  // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
         let configuration = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
         configuration.sessionReplay = true

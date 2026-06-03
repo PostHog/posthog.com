@@ -236,7 +236,7 @@ dependencies:
 # rest of your code
 ```
 
-Next, we configure PostHog using our project API key and instance address. You can find these in [your project settings](https://us.posthog.com/settings/project).
+Next, we configure PostHog using our project token and instance address. You can find these in [your project settings](https://us.posthog.com/settings/project).
 
 ### Android setup
 
@@ -246,7 +246,7 @@ For Android, add your PostHog configuration to your `AndroidManifest.xml` file l
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="your.package.name">
     <application>
         <!-- ... other configuration ... -->
-        <meta-data android:name="com.posthog.posthog.API_KEY" android:value="<ph_project_api_key>" />
+        <meta-data android:name="com.posthog.posthog.API_KEY" android:value="<ph_project_token>" />
         <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_client_api_host>" /> <!-- usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com' -->
         <meta-data android:name="com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="true" />
         <meta-data android:name="com.posthog.posthog.DEBUG" android:value="true" />
@@ -269,7 +269,7 @@ You'll also need to update the minimum Android SDK version to `21` in `android/a
 
 ### iOS setup
 
-For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration with your project API key and instance address to the `Info.plist` file located in the `ios/Runner` directory:
+For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration with your project token and instance address to the `Info.plist` file located in the `ios/Runner` directory:
 
 ```xml file=ios/Runner/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
@@ -278,7 +278,7 @@ For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/gett
 <dict>
 <!-- rest of your configuration -->
   <key>com.posthog.posthog.API_KEY</key>
-  <string><ph_project_api_key></string>
+  <string><ph_project_token></string>
   <key>com.posthog.posthog.POSTHOG_HOST</key>
   <string><ph_client_api_host></string>  <!--  https://us.i.posthog.com or https://eu.i.posthog.com -->
   <key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
@@ -310,7 +310,7 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
 
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host:'<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>'
     })

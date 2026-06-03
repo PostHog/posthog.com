@@ -30,7 +30,7 @@ export default function Feedback() {
           question: "Do you like PostHog?",
         }
       ],
-      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: "Yes!"
+      $survey_response: "Yes!"
     })
   }
 
@@ -123,7 +123,7 @@ export default App;
 
 #### Pre-filling survey responses
 
-You can pre-fill survey answers programmatically by passing prefill data to `displaySurvey` or `renderSurvey`. This works with single choice, multiple choice, and rating questions.
+You can pre-fill survey answers programmatically by passing `initialResponses` to `displaySurvey`. This works with single choice, multiple choice, and rating questions, and is only supported for **popover** surveys.
 
 ```js
 import React from 'react';
@@ -138,10 +138,10 @@ function App() {
   const handleShowPrefilled = () => {
     posthog.displaySurvey(coolSurveyID, {
       displayType: DisplaySurveyType.Popover,
-      prefillData: {
-        0: 'Very Satisfied',      // Single choice (by value)
-        1: 9,                      // Rating
-        2: ['Analytics', 'Flags']  // Multiple choice (array of values)
+      initialResponses: {
+        0: 2,          // Single choice: select the 3rd choice (0-based index)
+        1: 9,          // Rating: pre-fill with a rating of 9
+        2: [0, 2]      // Multiple choice: select the 1st and 3rd choices (0-based indices)
       }
     });
   };
@@ -161,20 +161,20 @@ function App() {
 export default App;
 ```
 
-**Prefill data format:**
+**`initialResponses` format:**
 
 - Keys are question indices (0-based: `0` for first question, `1` for second, etc.)
-- Values depend on question type:
-  - **Single choice**: String matching the exact choice text (e.g., `'Very Satisfied'`)
-  - **Multiple choice**: Array of strings matching choice texts (e.g., `['Analytics', 'Flags']`)
-  - **Rating**: Number within the rating scale (e.g., `9` for a 0-10 scale)
-  - **Open text**: String value for the text field
+- Values use the same format as URL prefill parameters:
+  - **Single choice**: Choice index as a number (e.g., `2` for the 3rd choice)
+  - **Multiple choice**: Array of choice indices (e.g., `[0, 2]` for the 1st and 3rd choices)
+  - **Rating**: Rating value as a number (e.g., `9` for a 0-10 scale)
 
 **Important notes:**
-- Pre-filled values must match exactly with the choice text defined in your survey
-- Invalid values are silently ignored
-- Users can modify pre-filled answers before submitting
-- Question indices are 0-based (first question is `0`, second is `1`, etc.)
+- Only supported for popover surveys — inline surveys will log a warning and ignore the prefill
+- Choice and question indices are 0-based
+- Invalid indices are silently ignored
+- Open text and link questions do not support prefill
+- Pre-filled questions with "Automatically submit on selection" enabled will be skipped, advancing the user to the first non-prefilled question
 
 #### Inline surveys
 

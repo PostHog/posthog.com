@@ -1,15 +1,10 @@
 import React from 'react'
-import Layout from 'components/Layout'
-import ProductProductAnalytics from 'components/Product/ProductAnalytics'
 import Explorer from 'components/Explorer'
-import { Link } from 'gatsby'
-import { CallToAction } from 'components/CallToAction'
-import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-import ProductSidebar from 'components/Explorer/ProductSidebar'
-import Product from 'components/Explorer/Product'
+import { useApp } from '../../../context/App'
 
 export default function DictatorOrTechBro(): JSX.Element {
+    const { websiteMode } = useApp()
     return (
         <>
             <SEO
@@ -27,7 +22,10 @@ export default function DictatorOrTechBro(): JSX.Element {
                 // changelogCategory="product-analytics"
                 fullScreen
             >
-                <iframe src="https://dictatorortechbro.com" className="w-full h-full border-0" />
+                <iframe
+                    src="https://dictatorortechbro.com"
+                    className={`w-full h-full border-0 ${websiteMode ? 'min-h-[calc(100vh-103px)]' : ''}`}
+                />
             </Explorer>
         </>
     )

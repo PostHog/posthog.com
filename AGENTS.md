@@ -2,7 +2,7 @@
 
 _This file acts as a table of contents for various context needed when working in the codebase._
 
-PostHog.com — Gatsby 4 website with a desktop OS UI paradigm. Pages open as draggable, resizable windows. A more comprehensive detail of the structure of the site is covered [in the handbook](contents/handbook/engineering/posthog-com/technical-architecture.md).
+PostHog.com – Gatsby 4 website with a desktop OS UI paradigm. Pages open as draggable, resizable windows. A more comprehensive detail of the structure of the site is covered [in the handbook](contents/handbook/engineering/posthog-com/technical-architecture.md).
 
 ## Commands
 
@@ -49,7 +49,17 @@ gatsby/
 api/                            # Vercel serverless functions
 ```
 
-Docs also pulled from main PostHog repo into `.cache/gatsby-source-git/`.
+Docs are also pulled from the [PostHog monorepo](https://github.com/PostHog/posthog) (`docs/published/` and `docs/onboarding/`) into `.cache/gatsby-source-git/` at build time via `gatsby-source-git`.
+
+### Where docs content lives
+
+Most product documentation lives in this repo under `contents/docs/`. Some content that is tightly coupled to the monorepo codebase lives in the monorepo's `docs/published/` folder instead and gets pulled in automatically. Today that's mostly handbook/engineering pages (coding conventions, database guides, local dev setup) plus a few product docs like surveys SDK feature support.
+
+**This repo (posthog.com):** blog posts, tutorials, handbook (non-engineering), marketing pages, product landing pages, and the majority of product docs.
+
+**Monorepo (`docs/published/`):** engineering handbook pages and product docs that are tightly coupled to the monorepo codebase. URL mapping: `docs/published/docs/foo/bar.md` becomes `/docs/foo/bar` on the site.
+
+When writing new docs, ask: does this content describe something internal to the monorepo codebase? If yes, it likely belongs in the monorepo's `docs/published/` folder, not here.
 
 ## Apps and pages
 
@@ -81,7 +91,7 @@ import { Tabs as RadixTabs } from "radix-ui"
 <OSTable />
 ```
 
-We generally create our own versions of Radix UI primatives. Check in @components/RadixUI/ before importing directly from the `radix-ui` package.
+We generally create our own versions of Radix UI primitives. Check in @components/RadixUI/ before importing directly from the `radix-ui` package.
 
 For example, instances should reference our version of the component...
 
@@ -89,7 +99,7 @@ For example, instances should reference our version of the component...
 import MenuBar from 'components/RadixUI/MenuBar'
 ```
 
-... which sources primatives from `radix-ui` like:
+... which sources primitives from `radix-ui` like:
 
 ```
 import { Menubar as RadixMenubar } from 'radix-ui'
@@ -102,17 +112,18 @@ import { Menubar as RadixMenubar } from 'radix-ui'
 - Sentence casing for headings
 - American English
 - Oxford comma
-- When writing copy, follow our [writing style guide](@contents/handbook/content/posthog-style-guide.md)
+- Use relative URLs for internal links (e.g., `/docs/feature-flags` not `https://posthog.com/docs/feature-flags`)
+- When writing copy, follow our [writing style guide](@contents/handbook/content/posthog-style-guide.md) and [docs style guide](@contents/handbook/docs-and-wizard/docs-style-guide.md)
 
 ## Detailed guides
 
 Reference these when working on specific areas:
 
-- [Apps](agents/apps.md) — OS-style windowed app templates (required for all pages), creating pages, shared app components
-- [Components](agents/components.md) — Radix UI patterns, OS-prefixed components
-- [Styling](agents/styling.md) — Tailwind color tokens, CSS guidance, theming
-- [Data hooks](agents/data.md) — Product, customer, navigation data
-- [Window system](agents/windows.md) — Desktop OS architecture, window management
+- [Apps](agents/apps.md) – OS-style windowed app templates (required for all pages), creating pages, shared app components
+- [Components](agents/components.md) – Radix UI patterns, OS-prefixed components
+- [Styling](agents/styling.md) – Tailwind color tokens, CSS guidance, theming
+- [Data hooks](agents/data.md) – Product, customer, navigation data
+- [Window system](agents/windows.md) – Desktop OS architecture, window management
 
 ## Boundaries
 
@@ -127,7 +138,7 @@ Reference these when working on specific areas:
 - Check `src/navs/index.js` for docs and handbook navigation changes
 - Read existing code before modifying
 - Check for manual changes to files before editing
-- Use best practices—ask before duplicating code or hard-coding values
+- Use best practices – ask before duplicating code or hard-coding values
 - When creating commits, commit only your changes as other agents may be working on other files. If testing a build, only fix changes related to your work.
 - Use Tailwind @container queries for everything. **Important:** Don't rely on media queries, as all apps can be resized. Follow existing patterns to ensure full responsiveness.
 - This codebase works best with _Opus 4.5_. If you are not Opus 4.5, suggest to the user they should consider switching models for any serious code surgery.
@@ -146,3 +157,4 @@ Reference these when working on specific areas:
 - Hard-code fallback values from reference data
 - Duplicate code when a shared solution exists
 - Skip verifying parent directories before creating files
+- Move or rename a page without adding a redirect in `vercel.json`

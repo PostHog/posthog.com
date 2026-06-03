@@ -1,0 +1,50 @@
+### Q2 2026 objectives
+
+#### Goal 1: Agent-first AI Observability
+
+*Description*: Make AI Observability usable directly from agents and developer workflows, not just through the product UI.
+
+*What we will ship*:
+- **MCP tools and skills** - expose core AI Observability workflows through MCP tools and reusable skills
+- **PostHog AI integration** - bring AI Observability capabilities directly into PostHog AI workflows
+
+#### Goal 2: Eval experience and reliability
+
+*Description*: Make evaluations easier to run and give teams clearer visibility into where their AI systems fail.
+
+*What we will ship*:
+- **Trace-level evaluations** - run evaluations directly against traces
+- **Session-level evaluations** - extend evaluations to broader user and agent sessions where it makes sense
+- **Improve observability of failures** - show errors more transparently
+
+#### Goal 3: Prompt management improvements
+
+*Description*: Make prompts easier to organize, scope, and connect to experimentation.
+
+*What we will ship*:
+- **Prompts and experiments integration** - tighter connections between prompt workflows and experimentation
+- **Prompt tags** - tag prompts and fetch them by tag for better organization
+- **Private project API keys** - switch prompt management from personal API keys to scoped, private project API keys so prompts aren't tied to an individual user's account
+
+#### Goal 4: Reliability and performance
+
+*Description*: Continue improving the speed, resilience, and overall quality of AI Observability, with a particular focus on trace-heavy workflows.
+
+*What we will ship*:
+- **Trace and platform improvements** - ongoing improvements to the speed, resilience, and overall quality of core AI Observability workflows
+
+#### Goal 5: Trace and session UI
+
+*Description*: Revamp the single trace and session experience for modern agentic use cases.
+
+*What we will ship*:
+- **Single trace UI refresh** - modernize the trace experience for agent-first workflows
+- **Session UI improvements** - bring the same quality bar to session-level investigation
+- **Custom message parsers** - define parsers for different agent and LLM message structures
+
+#### Goal 6: Cluster migration
+
+*Description*: Finish migrating to the new `ai_events` cluster architecture.
+
+*What we will ship*:
+- **`ai_events` cluster migration** - migrate to new architecture, which is optimized for point lookups of traces

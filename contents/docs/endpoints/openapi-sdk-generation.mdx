@@ -1,0 +1,52 @@
+---
+title: Generate SDKs with OpenAPI
+---
+
+
+
+
+Each endpoint exposes an OpenAPI 3.0 spec that you can use to generate typed SDK clients for your preferred language.
+
+## Getting the spec
+
+Fetch the OpenAPI spec for any endpoint:
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/openapi.json"
+```
+
+The spec includes request schemas (with any variables your endpoint defines), response schemas, and authentication requirements.
+
+## Generating a TypeScript client
+
+Using [@hey-api/openapi-ts](https://github.com/hey-api/openapi-ts):
+
+```bash
+# Save the spec
+curl -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/openapi.json" \
+  > openapi.json
+
+# Generate the client
+npx @hey-api/openapi-ts -i openapi.json -o ./src/posthog-client
+```
+
+## Generating a Python client
+
+Using [openapi-generator](https://openapi-generator.tech/):
+
+```bash
+# Save the spec
+curl -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/openapi.json" \
+  > openapi.json
+
+# Generate the client
+openapi-generator generate -i openapi.json -g python -o ./posthog_client
+```
+
+## Other generators
+
+The spec works with any OpenAPI 3.0 compatible tool. See the [OpenAPI Generator list](https://openapi-generator.tech/docs/generators) for options in other languages.

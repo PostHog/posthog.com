@@ -13,6 +13,7 @@ import { surveys } from 'hooks/productData/surveys'
 import { errorTracking } from 'hooks/productData/error_tracking'
 import { workflows } from 'hooks/productData/workflows'
 import { logs } from 'hooks/productData/logs'
+import { endpoints } from 'hooks/productData/endpoints'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import { internalToolsNav } from '../../navs/internalTools'
@@ -90,6 +91,11 @@ const tableOfContents = [
         depth: 0,
     },
     {
+        value: 'Endpoints',
+        url: 'endpoints',
+        depth: 0,
+    },
+    {
         value: 'Platform',
         url: 'platform',
         depth: 0,
@@ -116,6 +122,7 @@ export default function FeatureMatrix(): JSX.Element {
     const errorTrackingCompetitors = sortCompetitors(errorTracking.comparison.companies.map((c: any) => c.key))
     const workflowsCompetitors = sortCompetitors(workflows.comparison.companies.map((c: any) => c.key))
     const logsCompetitors = sortCompetitors(logs.comparison.companies.map((c: any) => c.key))
+    const endpointsCompetitors = sortCompetitors(endpoints.comparison.companies.map((c: any) => c.key))
     // Get all unique competitors for platform sections (union of all product competitors)
     const allCompetitors = Array.from(
         new Set([
@@ -128,6 +135,7 @@ export default function FeatureMatrix(): JSX.Element {
             ...errorTrackingCompetitors,
             ...workflowsCompetitors,
             ...logsCompetitors,
+            ...endpointsCompetitors,
         ])
     ).sort((a, b) => {
         // Keep posthog first
@@ -190,6 +198,7 @@ export default function FeatureMatrix(): JSX.Element {
                                     'data_warehouse',
                                     'dashboards',
                                     'logs',
+                                    'endpoints',
                                 ]}
                             />
                         </section>
@@ -369,7 +378,17 @@ export default function FeatureMatrix(): JSX.Element {
                             <ProductComparisonTable
                                 width="full"
                                 competitors={logsCompetitors}
-                                rows={['logs', 'logs.pricing.features']}
+                                rows={['logs.features', 'logs.pricing.features']}
+                            />
+                        </section>
+
+                        {/* Endpoints */}
+                        <section id="endpoints">
+                            <h2 className="text-2xl font-semibold mb-4 border-b border-border pb-2">Endpoints</h2>
+                            <ProductComparisonTable
+                                width="full"
+                                competitors={endpointsCompetitors}
+                                rows={['endpoints.features', 'platform.deployment.open_core']}
                             />
                         </section>
 

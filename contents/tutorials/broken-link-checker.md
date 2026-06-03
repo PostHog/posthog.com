@@ -41,7 +41,7 @@ import { useEffect } from 'react'
 
 export default function PHProvider({ children }) {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     })
@@ -114,7 +114,7 @@ When you go to a route that doesn’t exist, like [http://localhost:3000/test](h
 
 Since we want to send our 404s and broken links to somewhere we check frequently, we will set up a Slack webhook to send notifications. We can use our Slack realtime destinations for this.
 
-Start by going to the [data pipeline destinations tab](https://us.posthog.com/pipeline/destinations) and search for the **Slack** destination and click **+ Create**. On the creation screen:
+Start by going to the [data pipeline destinations tab](https://app.posthog.com/data-management/destinations) and search for the **Slack** destination and click **+ Create**. On the creation screen:
 
 1. Follow the steps to integrate with your Slack workspace if you haven't already and then select it.
 

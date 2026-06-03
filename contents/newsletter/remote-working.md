@@ -83,13 +83,13 @@ At **PostHog**, we achieve this in a bunch of different ways:
 
 * **$300 monthly co-working budget**.** This makes it easy for people to meet up and work together if they already live in the same city.
 
-* **$1,500 quarterly meet-up budget** for ad hoc in-person collaboration with colleagues. This can cover flights, accommodation, and other expenses. At PostHog, Paul and Ben used this recently to meet for a week in Italy and ship our new [heatmap and scroll depth feature](/changelog/2024#mouse-and-scroll-depth-tracking-launched).
+* **$1,500 quarterly meet-up budget** for ad hoc in-person collaboration with colleagues. This can cover flights, accommodation, and other expenses. At PostHog, Paul and Ben used this recently to meet for a week in Italy and ship our new [heatmap and scroll depth feature](/changelog?id=2010).
 
 * **In-person onboarding.** When new people join the company, we prioritize organizing an in-person onboarding session as soon as possible. This helps people get to know each other and share important context.
 
 * **Annual company offsites.** The typical agenda includes a couple of big social events, team dinners, a hackathon, all-hands strategy sessions, company culture exercises, and downtime to socialize and explore.
 
-* **Frequent small team offsites.** In addition to our all-company offsite, all our [small teams](/handbook/team-structure) run at least one annual offsite to focus on specific team goals and intense, in-person collaboration. They often include a hackathon, too, but this varies.
+* **Frequent small team offsites.** In addition to our all-company offsite, all our [small teams](/handbook/team-structure) run at least one annual offsite to focus on specific team goals and intense, in-person collaboration. They often include a [hackathon](/newsletter/hackathons), too, but this varies.
 
 Our goal with all of this is to make our in-person time as intentional as possible. To work on big, specific problems, build bonds that create trust, and make asynchronous work more creative and collaborative.
 

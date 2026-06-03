@@ -29,7 +29,7 @@ cd middle-bootstrap
 npm i posthog-js
 ```
 
-Once done, set up a PostHog provider by creating a new file in the `app` folder named `providers.js`. In this file, import `PostHogProvider`, initialize PostHog with your project API key and instance address (from your [project settings](https://app.posthog.com/project/settings)), and set up the provider component.
+Once done, set up a PostHog provider by creating a new file in the `app` folder named `providers.js`. In this file, import `PostHogProvider`, initialize PostHog with your project token and instance address (from your [project settings](https://app.posthog.com/project/settings)), and set up the provider component.
 
 ```js
 // app/providers.js
@@ -38,7 +38,7 @@ import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
-  posthog.init("<ph_project_api_key>", {
+  posthog.init("<ph_project_token>", {
     api_host: "<ph_client_api_host>"
   })
 }
@@ -117,14 +117,14 @@ export const config = {
 };
 ```
 
-Next, use your project API key (found in your [project settings](https://app.posthog.com/project/settings)) to get your cookie. With the cookie, check for the distinct ID or create one if it isn’t found.
+Next, use your project token (found in your [project settings](https://app.posthog.com/project/settings)) to get your cookie. With the cookie, check for the distinct ID or create one if it isn’t found.
 
 ```js
 // middleware.js
 export async function middleware(request) {
 
-  const ph_project_api_key = '<ph_project_api_key>'
-  const ph_cookie_key = `ph_${ph_project_api_key}_posthog`
+  const ph_project_token = '<ph_project_token>'
+  const ph_cookie_key = `ph_${ph_project_token}_posthog`
   const cookie = request.cookies.get(ph_cookie_key);
 
   let distinct_id;
@@ -148,7 +148,7 @@ const requestOptions = {
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
-    api_key: ph_project_api_key,
+    api_key: ph_project_token,
     distinct_id: distinct_id
   })
 };
@@ -169,8 +169,8 @@ import { NextResponse } from 'next/server'
 
 export async function middleware(request) {
 
-  const ph_project_api_key = '<ph_project_api_key>'
-  const ph_cookie_key = `ph_${ph_project_api_key}_posthog`
+  const ph_project_token = '<ph_project_token>'
+  const ph_cookie_key = `ph_${ph_project_token}_posthog`
   const cookie = request.cookies.get(ph_cookie_key);
 
   let distinct_id;
@@ -186,7 +186,7 @@ export async function middleware(request) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      api_key: ph_project_api_key,
+      api_key: ph_project_token,
       distinct_id: distinct_id
     })
   };
@@ -240,7 +240,7 @@ if (typeof window !== 'undefined') {
     bootstrapData = JSON.parse(flags)
   }
 
-  posthog.init("<ph_project_api_key>", {
+  posthog.init("<ph_project_token>", {
     api_host: "<ph_client_api_host>",
     bootstrap: bootstrapData
   })

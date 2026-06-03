@@ -49,6 +49,20 @@ The `onFeatureFlags` callback receives the following parameters:
 
 You won't usually need to use these, but they are useful if you want to be extra careful about feature flags not being loaded yet because of a network error and/or a network timeout (see `feature_flag_request_timeout_ms`).
 
+### Evaluating only specific flags
+
+By default, the JavaScript SDK requests that every eligible feature flag be evaluated for the current user. If you'd only like to evaluate and return a subset of flags, pass `flag_keys` when initializing PostHog:
+
+```js-web
+posthog.init('<ph_project_token>', {
+  api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  flag_keys: ['checkout-flow', 'new-dashboard'],
+})
+```
+
+PostHog scopes evaluation and the response to those keys for this SDK instance. Dependency flags required to evaluate requested flags may also be evaluated and returned. Leave `flag_keys` unset to evaluate all eligible flags.
+
 ### Reloading feature flags
 
 Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call:
@@ -119,7 +133,7 @@ This enables any geolocation-based flags to work without manually setting these 
 You can configure the `feature_flag_request_timeout_ms` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
 
 ```js
-posthog.init('<ph_project_api_key>', { 
+posthog.init('<ph_project_token>', { 
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>'
   feature_flag_request_timeout_ms: 3000 // Time in milliseconds. Default is 3000 (3 seconds).

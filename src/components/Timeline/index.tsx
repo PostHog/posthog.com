@@ -1,5 +1,5 @@
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import { motion } from 'framer-motion'
 
@@ -9,7 +9,7 @@ interface TimelineProps {
     data?: {
         [year: string]: {
             [month: string]: {
-                [period: string]: {
+                [week: string]: {
                     count: number
                 }
             }
@@ -24,8 +24,8 @@ interface TimelineProps {
     roadmapsPercentageFromLeft: number
 }
 
-const PERIOD_BOX_WIDTH = 20
-const PERIOD_BOX_HEIGHT = 10
+const WEEK_BOX_WIDTH = 12
+const WEEK_BOX_HEIGHT = 10
 
 export default function Timeline({
     startYear = 2020,
@@ -187,78 +187,81 @@ export default function Timeline({
         }
     }, [windowX, windowWidth, isDragging])
 
+    // Build flat list of weeks to match changelog structure
+    const weeksToRender = useMemo(() => {
+        const weeks: Array<{
+            year: number
+            month: number
+            week: number
+            isFirstOfMonth: boolean
+            isFirstOfYear: boolean
+        }> = []
+        const now = dayjs()
+        const currentYear = now.year()
+        const currentMonth = now.month() + 1
+        const currentWeek = Math.min(4, Math.ceil(now.date() / 7))
+
+        for (let year = startYear; year <= Math.min(endYear, currentYear); year++) {
+            const lastMonthForYear = year === currentYear ? currentMonth : 12
+            for (let month = 1; month <= lastMonthForYear; month++) {
+                const isCurrentMonth = year === currentYear && month === currentMonth
+                const weeksInMonth = isCurrentMonth ? currentWeek : 4
+
+                for (let week = 1; week <= weeksInMonth; week++) {
+                    // Skip current week if empty
+                    if (isCurrentMonth && week === currentWeek) {
+                        const weekCount = data?.[year]?.[month]?.[week]?.count || 0
+                        if (weekCount === 0) continue
+                    }
+
+                    weeks.push({
+                        year,
+                        month,
+                        week,
+                        isFirstOfMonth: week === 1,
+                        isFirstOfYear: month === 1 && week === 1,
+                    })
+                }
+            }
+        }
+        return weeks
+    }, [startYear, endYear, data])
+
     return (
         <ScrollArea className="[&>div>div]:!table">
             <div className="px-4">
                 <div ref={containerRef} className="flex py-8 relative">
-                    {(() => {
-                        const now = dayjs()
-                        const currentYear = now.year()
-                        const yearsToRender = Array.from(
-                            { length: Math.max(0, Math.min(endYear, currentYear) - startYear + 1) },
-                            (_, i) => startYear + i
-                        )
-                        return yearsToRender
-                    })().map((year, yearIndex) => {
-                        const now = dayjs()
-                        const currentYear = now.year()
-                        const lastMonthForYear = year === currentYear ? now.month() + 1 : 12 // month is 1-12 here
-                        return Array.from({ length: lastMonthForYear }, (_, i) => i + 1).map((month) => {
-                            const isFirstMonth = month === 1
-                            return (
-                                <button
-                                    className="relative flex flex-col gap-1 items-center py-1 px-2 border-r border-primary"
-                                    key={`${year}-${month}`}
-                                    id={`timeline-${month + yearIndex * 12}`}
-                                    onPointerDown={handlePointerDown}
-                                >
-                                    {isFirstMonth && (
-                                        <p className="text-sm m-0 font-semibold absolute -top-6 left-0">{year}</p>
-                                    )}
-                                    <div className="flex gap-3">
-                                        {(() => {
-                                            const now = dayjs()
-                                            const isCurrentMonth = year === now.year() && month === now.month() + 1
-                                            const currentWeek = Math.min(4, Math.ceil(now.date() / 7))
-                                            const currentPeriod = Math.min(2, Math.ceil(currentWeek / 2))
-                                            let periodsToRender: number[]
+                    {weeksToRender.map((weekData, index) => {
+                        const count = data?.[weekData.year]?.[weekData.month]?.[weekData.week]?.count || 0
+                        const color = getAcivityColor(count)
 
-                                            if (isCurrentMonth) {
-                                                // For current month: all periods before current, plus current period if non-empty
-                                                periodsToRender = Array.from(
-                                                    { length: currentPeriod - 1 },
-                                                    (_, i) => i + 1
-                                                )
-                                                const currentPeriodCount =
-                                                    data?.[year]?.[month]?.[currentPeriod]?.count || 0
-                                                if (currentPeriodCount > 0) {
-                                                    periodsToRender.push(currentPeriod)
-                                                }
-                                            } else {
-                                                periodsToRender = [1, 2]
-                                            }
-
-                                            return periodsToRender.map((period) => {
-                                                const count = data?.[year]?.[month]?.[period]?.count || 0
-                                                const color = getAcivityColor(count)
-                                                return (
-                                                    <div
-                                                        style={{ width: PERIOD_BOX_WIDTH, height: PERIOD_BOX_HEIGHT }}
-                                                        className={`rounded-[1px] ${color}`}
-                                                        key={`${year}-${month}-${period}`}
-                                                    />
-                                                )
-                                            })
-                                        })()}
-                                    </div>
+                        return (
+                            <button
+                                className={`relative flex flex-col gap-1 items-center py-1 px-1 ${
+                                    weekData.isFirstOfMonth
+                                        ? 'border-l border-primary ml-1 first:ml-0 first:border-l-0'
+                                        : ''
+                                }`}
+                                key={`${weekData.year}-${weekData.month}-${weekData.week}`}
+                                id={`timeline-${index}`}
+                                onPointerDown={handlePointerDown}
+                            >
+                                {weekData.isFirstOfYear && (
+                                    <p className="text-sm m-0 font-semibold absolute -top-6 left-0">{weekData.year}</p>
+                                )}
+                                <div
+                                    style={{ width: WEEK_BOX_WIDTH, height: WEEK_BOX_HEIGHT }}
+                                    className={`rounded-[1px] ${color}`}
+                                />
+                                {weekData.isFirstOfMonth && (
                                     <p className="text-sm text-primary m-0 font-semibold absolute translate-y-1/2">
                                         {dayjs()
-                                            .month(month - 1)
+                                            .month(weekData.month - 1)
                                             .format('MMM')}
                                     </p>
-                                </button>
-                            )
-                        })
+                                )}
+                            </button>
+                        )
                     })}
                     <motion.div
                         ref={windowRef}

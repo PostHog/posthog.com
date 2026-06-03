@@ -47,6 +47,7 @@ import { Select } from 'components/RadixUI/Select'
 import OSInput from 'components/OSForm/input'
 import { useToast } from '../../../context/Toast'
 import HeaderBar from 'components/OSChrome/HeaderBar'
+import LevelBadge from 'components/Squeak/components/LevelBadge'
 import OSButton from 'components/OSButton'
 import { IconNoEntry, IconStrapi } from 'components/OSIcons'
 import Points from 'components/Points'
@@ -433,6 +434,12 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
     }, [values.pronouns])
     return (
         <div className="text-sm space-y-3">
+            {!isEditing && profile.reputation != null && (
+                <p className="flex justify-between items-center m-0">
+                    <span className="font-semibold">Reputation</span>
+                    <LevelBadge points={profile.reputation} />
+                </p>
+            )}
             {!isEditing && (
                 <p className="flex justify-between m-0">
                     {isTeamMember ? (
@@ -541,9 +548,110 @@ function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
 }
 
+// Also defined in src/pages/team-directory.tsx — update both if changed
+const unisexSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL']
+const femaleSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
+
+const unisexSizeDataIn = {
+    sizes: unisexSizes,
+    rows: [
+        { label: 'Length', values: ['26.25', '27.50', '28.50', '29.50', '30.50', '31.50'] },
+        { label: 'Width', values: ['18.00', '19.50', '21.00', '22.50', '24.00', '25.50'] },
+        { label: 'Sleeve', values: ['16.00', '16.875', '17.75', '18.625', '19.50', '20.375'] },
+    ],
+}
+
+const unisexSizeDataCm = {
+    sizes: unisexSizes,
+    rows: [
+        { label: 'Length', values: ['66', '69', '72', '74', '77', '80'] },
+        { label: 'Width', values: ['45', '49', '53', '57', '60', '64'] },
+        { label: 'Sleeve', values: ['40', '42', '45', '47', '49', '51'] },
+    ],
+}
+
+const womensSizeDataUS = {
+    sizes: femaleSizes,
+    rows: [{ label: 'Fits Sizes', values: ['2-6', '6-10', '10-14', '14-18', '18-22', '23-27'] }],
+}
+
+const womensSizeDataUK = {
+    sizes: femaleSizes,
+    rows: [{ label: 'Fits Sizes', values: ['6-10', '10-14', '14-18', '18-22', '22-26', '27-31'] }],
+}
+
+const UnisexSizeChart = () => {
+    const [unit, setUnit] = useState('in')
+    return (
+        <div className="w-[380px]">
+            <ToggleGroup
+                title="Unit"
+                hideTitle
+                options={[
+                    { label: 'in', value: 'in' },
+                    { label: 'cm', value: 'cm' },
+                ]}
+                value={unit}
+                onValueChange={(value) => value && setUnit(value)}
+                className="mb-2"
+            />
+            <SizeTable data={unit === 'cm' ? unisexSizeDataCm : unisexSizeDataIn} />
+        </div>
+    )
+}
+
+const WomensSizeChart = () => {
+    const [region, setRegion] = useState('US')
+    return (
+        <div>
+            <ToggleGroup
+                title="Region"
+                hideTitle
+                options={[
+                    { label: 'US', value: 'US' },
+                    { label: 'UK', value: 'UK' },
+                ]}
+                value={region}
+                onValueChange={(value) => value && setRegion(value)}
+                className="mb-2"
+            />
+            <SizeTable data={region === 'UK' ? womensSizeDataUK : womensSizeDataUS} />
+        </div>
+    )
+}
+
+const SizeTable = ({ data }: { data: typeof unisexSizeDataIn }) => (
+    <table className="text-xs text-left border-collapse w-full">
+        <thead>
+            <tr>
+                <th className="pr-3 py-1 font-semibold" />
+                {data.sizes.map((s) => (
+                    <th key={s} className="px-2 py-1 font-semibold text-center">
+                        {s}
+                    </th>
+                ))}
+            </tr>
+        </thead>
+        <tbody>
+            {data.rows.map((row) => (
+                <tr key={row.label} className="border-t border-primary">
+                    <td className="pr-3 py-1 font-semibold whitespace-nowrap">{row.label}</td>
+                    {row.values.map((v, i) => (
+                        <td key={i} className="px-2 py-1 text-center">
+                            {v}
+                        </td>
+                    ))}
+                </tr>
+            ))}
+        </tbody>
+    </table>
+)
+
 const ModeratorFields = ({ setFieldValue, values, errors }) => {
     const [heightUnit, setHeightUnit] = useState('in')
     const [height, setHeight] = useState(values.height)
+    const tShirt = values.tShirt || { fit: null, size: null, additionalInfo: null }
+    const availableSizes = tShirt.fit === 'female' ? femaleSizes : tShirt.fit === 'unisex' ? unisexSizes : []
 
     useEffect(() => {
         setFieldValue('height', heightUnit === 'cm' ? convertCentimetersToInches(height) : height)
@@ -616,6 +724,79 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                     ]}
                     value={values.amaEnabled === null ? undefined : values.amaEnabled ? 'yes' : 'no'}
                     onValueChange={(value) => setFieldValue('amaEnabled', value === 'yes' ? true : false)}
+                />
+            </div>
+            <div>
+                <ToggleGroup
+                    title="T-shirt fit"
+                    options={[
+                        { label: 'Unisex', value: 'unisex' },
+                        { label: 'Female', value: 'female' },
+                    ]}
+                    value={tShirt.fit || undefined}
+                    onValueChange={(value) => {
+                        if (!value) return
+                        const newSizes = value === 'female' ? femaleSizes : unisexSizes
+                        setFieldValue('tShirt', {
+                            ...tShirt,
+                            fit: value,
+                            size: newSizes.includes(tShirt.size) ? tShirt.size : null,
+                        })
+                    }}
+                />
+            </div>
+            {tShirt.fit && (
+                <div>
+                    <label className="text-[15px] flex items-center gap-2 mb-1">
+                        T-shirt size
+                        {tShirt.fit === 'unisex' ? (
+                            <Tooltip
+                                delay={0}
+                                side="right"
+                                trigger={
+                                    <span className="text-xs text-secondary hover:text-primary underline cursor-help">
+                                        Unisex size guide
+                                    </span>
+                                }
+                            >
+                                <UnisexSizeChart />
+                            </Tooltip>
+                        ) : (
+                            <Tooltip
+                                delay={0}
+                                side="right"
+                                trigger={
+                                    <span className="text-xs text-secondary hover:text-primary underline cursor-help">
+                                        Women's size guide
+                                    </span>
+                                }
+                            >
+                                <WomensSizeChart />
+                            </Tooltip>
+                        )}
+                    </label>
+                    <ToggleGroup
+                        title="T-shirt size"
+                        hideTitle
+                        options={availableSizes.map((size) => ({ label: size, value: size }))}
+                        value={tShirt.size || undefined}
+                        onValueChange={(value) => {
+                            if (!value) return
+                            setFieldValue('tShirt', { ...tShirt, size: value })
+                        }}
+                    />
+                </div>
+            )}
+            <div>
+                <label className="text-[15px] block mb-1">T-shirt additional info</label>
+                <textarea
+                    className="bg-primary text-primary border border-input rounded px-3 py-1.5 text-[15px] placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-orange/50 w-full resize-y"
+                    name="tShirtAdditionalInfo"
+                    value={tShirt.additionalInfo || ''}
+                    data-scheme="primary"
+                    onChange={(e) => setFieldValue('tShirt', { ...tShirt, additionalInfo: e.target.value })}
+                    placeholder="Any additional notes about t-shirt preferences"
+                    rows={3}
                 />
             </div>
         </div>
@@ -958,6 +1139,11 @@ export default function ProfilePage({ params }: PageProps) {
                             populate: {
                                 image: true,
                                 icon: true,
+                                achievement_group: {
+                                    populate: {
+                                        icon: true,
+                                    },
+                                },
                             },
                         },
                     },
@@ -971,6 +1157,7 @@ export default function ProfilePage({ params }: PageProps) {
                         crest: true,
                     },
                 },
+                tShirt: true,
                 ...(isModerator
                     ? {
                           user: true,
@@ -1128,6 +1315,7 @@ export default function ProfilePage({ params }: PageProps) {
             backgroundImage: profile?.backgroundImage,
             companyRole: profile?.companyRole,
             amaEnabled: profile?.amaEnabled,
+            tShirt: profile?.tShirt || { fit: null, size: null, additionalInfo: null },
         },
         onSubmit: async ({ avatar, images, ...values }) => {
             try {
@@ -1510,6 +1698,7 @@ export default function ProfilePage({ params }: PageProps) {
                             />
 
                             {(isEditing ||
+                                profile.reputation != null ||
                                 profile.pineappleOnPizza !== null ||
                                 profile.pronouns ||
                                 profile.location) && (
@@ -1543,19 +1732,11 @@ export default function ProfilePage({ params }: PageProps) {
 
                             {profile.achievements?.length > 0 && (
                                 <Block title="Achievements" url={`/community/achievements`}>
-                                    <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
-                                        {profile.achievements.map(({ achievement, hidden, id }) => (
-                                            <li key={id} className="flex justify-center">
-                                                <Achievement
-                                                    {...achievement.data.attributes}
-                                                    id={id}
-                                                    hidden={hidden}
-                                                    profile={profile}
-                                                    mutate={mutate}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <AchievementsGrid
+                                        achievements={profile.achievements}
+                                        profile={profile}
+                                        mutate={mutate}
+                                    />
                                 </Block>
                             )}
                             {isEditing && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
@@ -1643,7 +1824,9 @@ export default function ProfilePage({ params }: PageProps) {
 const TeamMembersList = ({ self, team }) => {
     const selfTeammate = team.attributes.profiles.data.find((teammate) => teammate.id === self.id)
     const otherTeammates = team.attributes.profiles.data.filter((teammate) => teammate.id !== self.id)
-    const teammates = [selfTeammate, ...otherTeammates].filter(Boolean)
+    const teammates = [selfTeammate, ...otherTeammates].filter(
+        (teammate) => teammate?.attributes?.startDate && new Date(teammate.attributes.startDate) <= new Date()
+    )
 
     return (
         <>
@@ -1674,6 +1857,116 @@ const TeamMembersList = ({ self, team }) => {
                 )
             })}
         </>
+    )
+}
+
+const AchievementTooltipContent = ({ icon, title, description, iconSize = 'size-16' }) => (
+    <>
+        <div className="flex justify-center -mx-1.5 -mt-1 mb-2 py-2 bg-accent/50 rounded">
+            <img className={iconSize} src={icon} />
+        </div>
+        <h4 className="text-lg m-0">{title}</h4>
+        {description && <p className="m-0 mt-1 text-sm">{description}</p>}
+    </>
+)
+
+const AchievementGrouped = ({ items, profile, mutate }) => {
+    const groupData = items[0].achievement.data.attributes.achievement_group.data.attributes
+
+    if (groupData.tiered && items.length === 1) {
+        const { achievement, hidden, id } = items[0]
+        return (
+            <Achievement {...achievement.data.attributes} id={id} hidden={hidden} profile={profile} mutate={mutate} />
+        )
+    }
+
+    return (
+        <Tooltip
+            delay={0}
+            side="bottom"
+            trigger={
+                <span className="relative">
+                    <img className="w-full" src={groupData.icon?.data?.attributes?.url} />
+                    {items.length > 1 && (
+                        <span className="absolute -top-1 -right-1 bg-accent text-primary text-[10px] font-bold rounded-full size-4 flex items-center justify-center border border-primary">
+                            x{items.length}
+                        </span>
+                    )}
+                </span>
+            }
+        >
+            <div className="max-w-[220px] text-left">
+                <AchievementTooltipContent
+                    icon={groupData.icon?.data?.attributes?.url}
+                    title={groupData.Title}
+                    description={groupData.description}
+                    iconSize="size-24"
+                />
+                <div className="border-t border-primary mt-3 pt-2.5">
+                    <p className="text-xs font-semibold opacity-50 m-0 mb-2">Unlocked by</p>
+                    <ul className="m-0 p-0 list-none flex flex-col gap-2">
+                        {items.map(({ achievement, id }, index) => (
+                            <li key={id} className="relative flex items-center gap-2">
+                                <div className="size-7 flex-shrink-0 relative">
+                                    {index < items.length - 1 && (
+                                        <div className="absolute w-px h-full left-1/2 -translate-x-1/2 bg-border dark:bg-border-dark bottom-0 translate-y-1/2" />
+                                    )}
+                                    <img
+                                        className="size-full relative"
+                                        src={achievement.data.attributes.icon?.data?.attributes?.url}
+                                    />
+                                </div>
+                                <div>
+                                    <p className="text-xs font-semibold m-0 leading-tight">
+                                        {achievement.data.attributes.title}
+                                    </p>
+                                    {achievement.data.attributes.description && (
+                                        <p className="text-xs opacity-60 m-0 leading-tight mt-0.5">
+                                            {achievement.data.attributes.description}
+                                        </p>
+                                    )}
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </Tooltip>
+    )
+}
+
+const AchievementsGrid = ({ achievements, profile, mutate }) => {
+    const groups = useMemo(() => {
+        const grouped = achievements.filter((item) => item.achievement?.data?.attributes?.achievement_group?.data)
+        return Object.groupBy(grouped, (item) => item.achievement.data.attributes.achievement_group.data.id)
+    }, [achievements])
+
+    return (
+        <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
+            {achievements.map(({ achievement, hidden, id }) => {
+                if (!achievement?.data) return null
+                const group = achievement.data.attributes?.achievement_group?.data
+                if (group) {
+                    if (groups[group.id][0].id !== id) return null
+                    return (
+                        <li key={`group-${group.id}`} className="flex justify-center">
+                            <AchievementGrouped items={groups[group.id]} profile={profile} mutate={mutate} />
+                        </li>
+                    )
+                }
+                return (
+                    <li key={id} className="flex justify-center">
+                        <Achievement
+                            {...achievement.data.attributes}
+                            id={id}
+                            hidden={hidden}
+                            profile={profile}
+                            mutate={mutate}
+                        />
+                    </li>
+                )
+            })}
+        </ul>
     )
 }
 
@@ -1737,12 +2030,8 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
                 </ImageContainer>
             }
         >
-            <div className="max-w-[250px] text-left">
-                <div className="mb-4 -mx-2 -mt-2">
-                    <img src={image?.data?.attributes?.url} />
-                </div>
-                <h4 className="text-lg m-0">{title}</h4>
-                <p className="m-0 mt-1 text-sm mb-2">{description}</p>
+            <div className="max-w-[220px] text-left">
+                <AchievementTooltipContent icon={icon?.data?.attributes?.url} title={title} description={description} />
             </div>
         </Tooltip>
     )

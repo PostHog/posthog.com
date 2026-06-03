@@ -15,11 +15,11 @@ import { cdp } from './productData/cdp'
 import { webAnalytics } from './productData/web_analytics'
 import { experiments } from './productData/experiments'
 import { posthog_ai } from './productData/posthog_ai'
-import { llmAnalytics } from './productData/llm_analytics'
+import { aiObservability } from './productData/ai_observability'
 import { workflows } from './productData/workflows'
-import { revenueAnalytics } from './productData/revenue_analytics'
 import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
+import { endpoints } from './productData/endpoints'
 
 const initialProducts = [
     productAnalytics,
@@ -33,10 +33,10 @@ const initialProducts = [
     webAnalytics,
     experiments,
     posthog_ai,
-    llmAnalytics,
-    revenueAnalytics,
+    aiObservability,
     logs,
     workflows,
+    endpoints,
 ]
 
 export default function useProducts() {

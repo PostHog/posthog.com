@@ -9,7 +9,7 @@ Install `posthog-js` using your package manager:
 
 Generate environment files for your project with `ng g environments`. Configure the following environment variables:
 
-- `posthogKey`: Your project API key from your [project settings](https://app.posthog.com/settings/project#variables).
+- `posthogKey`: Your project token from your [project settings](https://app.posthog.com/settings/project#variables).
 - `posthogHost`: Your project's client API host. Usually `https://us.i.posthog.com` for US-based projects and `https://eu.i.posthog.com` for EU-based projects.
 
 <Tab.Group tabs={['Angular v17+', 'Angular v16 and below']}>
@@ -78,7 +78,7 @@ Generate environment files for your project with `ng g environments`. Configure 
   </Tab.Panel>
   <Tab.Panel>
 
-  In your `src/main.ts`, initialize PostHog using your project API key and instance address. You can find both in your [project settings](https://us.posthog.com/project/settings).  
+  In your `src/main.ts`, initialize PostHog using your project token and instance address. You can find both in your [project settings](https://us.posthog.com/project/settings).  
 
   ```ts file=main.ts
   // src/main.ts

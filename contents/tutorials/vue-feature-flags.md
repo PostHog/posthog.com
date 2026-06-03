@@ -79,7 +79,7 @@ import posthog from "posthog-js";
 export default {
   install(app) {
     app.config.globalProperties.$posthog = posthog.init(
-      "<ph_project_api_key>",
+      "<ph_project_token>",
       {
         api_host: "<ph_client_api_host>",
       }
@@ -88,7 +88,7 @@ export default {
 };
 ```
 
-Replace `<ph_project_api_key>` and `<ph_client_api_host>` with your your PostHog API key and host. You can find these in your [project settings](https://us.posthog.com/settings/project).
+Replace `<ph_project_token>` and `<ph_client_api_host>` with your your PostHog API key and host. You can find these in your [project settings](https://us.posthog.com/settings/project).
 
 Finally, activate your plugin in `main.js`:
 
@@ -175,7 +175,7 @@ import posthog from "posthog-js";
 export default {
   install(app) {
     app.config.globalProperties.$posthog = posthog.init(
-      "<ph_project_api_key>",
+      "<ph_project_token>",
       {
         api_host: "<ph_client_api_host>",
         bootstrap: {

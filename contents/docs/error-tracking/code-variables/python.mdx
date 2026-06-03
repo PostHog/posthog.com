@@ -12,7 +12,7 @@ Code variables capture can be enabled globally during PostHog initialization:
 from posthog import Posthog
 
 posthog = Posthog(
-    "<ph_project_api_key>",
+    "<ph_project_token>",
     enable_exception_autocapture=True,
     capture_exception_code_variables=True,
 )
@@ -64,7 +64,7 @@ DEFAULT_CODE_VARIABLES_MASK_PATTERNS = [
 
 ```python
 posthog = Posthog(
-    "<ph_project_api_key>",
+    "<ph_project_token>",
     enable_exception_autocapture=True,
     capture_exception_code_variables=True,
     code_variables_mask_patterns=[
@@ -97,7 +97,7 @@ By default, Python internal variables (starting with `__`) are ignored.
 
 ```python
 posthog = Posthog(
-    "<ph_project_api_key>",
+    "<ph_project_token>",
     enable_exception_autocapture=True,
     capture_exception_code_variables=True,
     code_variables_ignore_patterns=[

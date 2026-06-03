@@ -20,8 +20,8 @@ First, you'll need to create a Twilio account if you don't have one already. The
 
 ## Configuring PostHog's Twilio destination
 
-1. In PostHog, click the **[Data pipeline](https://us.posthog.com/pipeline/overview)** tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=twilio) tab.
+1. In PostHog, click the **[Data pipeline](https://app.posthog.com/data-management/destinations)** tab in the left sidebar.
+2. Click the [Destinations](https://app.posthog.com/data-management/destinations?search=twilio) tab.
 3. Click **New destination** and choose Twilio's **Create** button.
 
 Enter your Account SID, Auth Token, and From Phone Number from Twilio. The recipient phone number can be extracted from your event properties.
@@ -46,7 +46,7 @@ Once you've configured your Twilio destination, click **Start testing** to verif
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destinations on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/webhook/template_twilio.py) is available on GitHub.
+PostHog is open-source and so are all the destinations on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/nodejs/src/cdp/templates/_destinations/twilio/twilio.template.ts) is available on GitHub.
 
 ### What happens if the SMS body exceeds 1600 characters?
 

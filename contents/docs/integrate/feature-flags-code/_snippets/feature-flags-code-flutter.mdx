@@ -31,7 +31,7 @@ This means that for most screens, the feature flags are available immediately â€
 To handle this, you can use the `onFeatureFlags` callback in your config to be notified when flags are loaded:
 
 ```dart
-final config = PostHogConfig('<ph_project_api_key>');
+final config = PostHogConfig('<ph_project_token>');
 config.host = '<ph_client_api_host>';
 config.onFeatureFlags = () async {
   if (await Posthog().isFeatureEnabled('flag-key')) {

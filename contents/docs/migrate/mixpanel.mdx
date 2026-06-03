@@ -32,7 +32,7 @@ To start with, log in to Mixpanel and go to the project with the data you want t
 
 Next, get the details for PostHog.
 
-1. Get your **project API key** from the getting started flow or [your project settings](https://us.posthog.com/settings/project).
+1. Get your **project token** from the getting started flow or [your project settings](https://us.posthog.com/settings/project).
 2. Finally, note your **API host** (either `https://us.i.posthog.com` or `https://eu.i.posthog.com` or a custom domain)
 
 With all this, we are ready to set up the migration tool.
@@ -54,7 +54,7 @@ In our example, that is:
 MIXPANEL_USERNAME=posthog-migrate.a2b789.mp-service-account
 MIXPANEL_PASSWORD=fCPFrpZYdzB9nlZ9kqabZcXuxSLKhjld
 MIXPANEL_PROJECT_ID=2880604
-POSTHOG_PROJECT_KEY=<ph_project_api_key>
+POSTHOG_PROJECT_KEY=<ph_project_token>
 POSTHOG_ENDPOINT=<ph_client_api_host>
 ```
 
