@@ -9,12 +9,12 @@ concurrency:
     cancel-in-progress: true
 
 env:
-    NODE_OPTIONS: '--max_old_space_size=8192'
+    NODE_OPTIONS: '--max_old_space_size=12288'
 
 jobs:
     build-and-deploy:
         name: Build & deploy preview
-        runs-on: ubuntu-latest
+        runs-on: depot-ubuntu-latest-8
         timeout-minutes: 45
         if: ${{ !github.event.pull_request.head.repo.fork }}
         permissions:
@@ -61,22 +61,17 @@ jobs:
                   node-version: '22'
                   cache: 'pnpm'
 
-            - name: Cache Gatsby
-              if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-cache') }}
-              uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+            # Gatsby builds cold (no .cache restore). Restoring a warm .cache across builds with
+            # differing MDX content caused gatsby-plugin-mdx incoherence ("Can't resolve …mdx",
+            # "X is not defined"); cold builds are reliable. We still restore the small Cloudinary
+            # metadata file (produced by the cache-warmup job) to skip the ~140s onPreInit crawl.
+            - name: Restore Cloudinary metadata cache
+              uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
               with:
-                  path: |
-                      .cache
-                      public
-                  key: gatsby-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'gatsby-config.js') }}
+                  path: .cloudinary-resources.json
+                  key: cloudinary-${{ github.run_id }}
                   restore-keys: |
-                      gatsby-${{ runner.os }}-
-
-            - name: Clean Gatsby cache
-              if: ${{ contains(github.event.pull_request.labels.*.name, 'no-cache') }}
-              run: |
-                  echo "::warning::Gatsby cache skipped — 'no-cache' label detected. Running a clean build."
-                  rm -rf .cache public
+                      cloudinary-
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile

@@ -229,7 +229,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                     'experiments',
                                     'error_tracking',
                                     'surveys',
-                                    'llm_analytics',
+                                    'ai_observability',
                                     'data_warehouse',
                                     'cdp',
                                     'logs',
