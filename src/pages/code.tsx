@@ -1219,6 +1219,56 @@ const TableStakes = () => {
     )
 }
 
+const SlackAppCallout = () => {
+    return (
+        <section className="relative mb-12 @2xl:mb-20 px-4 @xl:px-8">
+            <div className="border border-primary rounded-md bg-accent overflow-hidden">
+                <div className="p-6 @2xl:p-8 grid @2xl:grid-cols-2 gap-6 @2xl:gap-10">
+                    <div>
+                        <p className="text-sm font-semibold uppercase tracking-wide text-secondary mb-2">
+                            While you wait...
+                        </p>
+                        <h2 className="text-2xl font-bold mb-2">PostHog Code in Slack</h2>
+                        <p className="mb-4">
+                            Answer data questions, fix bugs, and kick off PRs by mentioning <code>@PostHog</code>.
+                        </p>
+                        <OSButton asLink to="/slack-app" state={{ newWindow: true }} variant="primary" size="md">
+                            About the Slack app
+                        </OSButton>
+                    </div>
+                    <ul className="space-y-2">
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Ship a fix from a bug report
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Diagnose and fix failing CI
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Rip out a feature flag after rollout
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Fix typos and update content
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Work across repos
+                        </li>
+                    </ul>
+                </div>
+                <img
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_update_docs_f0c917f70a.png"
+                    alt="PostHog Slack app screenshot"
+                    className="w-full block"
+                />
+            </div>
+        </section>
+    )
+}
+
 const TLDR = () => {
     return (
         <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
@@ -1551,6 +1601,8 @@ export default function CodePage() {
                         <TableStakes />
 
                         <TLDR ready={postHogWayDone} />
+
+                        <SlackAppCallout />
 
                         <FAQ />
                     </div>
