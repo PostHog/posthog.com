@@ -1,7 +1,7 @@
 export const helicone = {
     name: 'Helicone',
     products: {
-        llm_analytics: {
+        ai_observability: {
             available: true,
             features: {
                 generation_tracking: true,

@@ -1,0 +1,142 @@
+---
+title: Replay Vision
+featureFlag: replay-vision-docs
+noindex: true
+---
+
+Replay Vision uses AI to automatically watch your [session recordings](/docs/session-replay) and turn what it sees into structured, queryable data. You configure **scanners** – named AI probes that describe what to look for – and PostHog applies them to your recordings, producing **observations** you can query, chart, and alert on.
+
+The key idea is that Replay Vision actually *watches the video* of each recording alongside its events. This lets it pick up on visual and behavioral cues – hesitation, confusion, where a user's attention goes – that aren't captured by clicks and pageviews alone. Instead of manually reviewing hundreds of replays to spot a pattern, you describe what matters once and let it run continuously.
+
+<CalloutBox type="fyi" title="Replay Vision is in beta">
+
+Replay Vision is currently in beta and rolling out gradually. Some details below – especially scanner types, quotas, and supported models – may change before general availability.
+
+</CalloutBox>
+
+## How it works
+
+Replay Vision is built around two concepts:
+
+- **Scanner** – a configured AI probe scoped to your project. A scanner has a natural-language prompt describing what to look for, a [scanner type](#scanner-types) that determines what kind of output it produces, a set of recording filters that select which sessions it applies to, and a sampling rate.
+- **Observation** – one application of a scanner to a single recording. Each observation runs the scanner against that session and produces a structured result that's persisted and emitted as a queryable [`$recording_observed` event](#querying-observations-as-events).
+
+When a scanner runs against a recording, PostHog:
+
+1. Renders the recording to a sped-up video (inactive periods are trimmed out).
+2. Sends that video, along with the session's raw events (clicks, pageviews, rage clicks, dead clicks, exceptions, and more), to a Google Gemini model.
+3. Asks the model to produce a structured response matching the scanner's type.
+4. Saves the result as an observation and captures it as a `$recording_observed` event in your project.
+
+Each observation snapshots the scanner's configuration at the time it ran, so editing a scanner later never retroactively changes past observations.
+
+## Scanner types
+
+The scanner type is chosen when you create a scanner and determines the shape of the output. It can't be changed afterwards – to switch types, create a new scanner.
+
+| Type | What it produces | Use it for |
+| --- | --- | --- |
+| **Monitor** | A true/false verdict, with reasoning | Flagging whether a specific condition occurred, e.g. "did someone get stuck with no clear next step?" |
+| **Classifier** | One or more tags from a vocabulary you define | Bucketing sessions, e.g. user intent (`browsing`, `purchasing`, `support`) or outcome (`task_completed`, `task_abandoned`, `blocked_by_error`) |
+| **Scorer** | A numeric score on a scale you define | Rating sessions on a dimension, e.g. a 0 to 10 frustration score |
+| **Summarizer** | A title and prose summary | Generating a short narrative of what happened in each session |
+
+Every scanner also returns a **confidence** value and, in its reasoning, may include citations that link directly to the relevant moment in the recording's timeline.
+
+## Creating a scanner
+
+1. Go to **Replay Vision** in the PostHog app and select **New scanner** (or start from a template).
+2. Pick a [scanner type](#scanner-types). Templates are available for common cases – dead-end detection, session summary, user intent, frustration score, and session outcome.
+3. Write a prompt describing what the scanner should look for. Be concrete and avoid speculation – e.g. *"Return true if someone appears stuck on a page – scrolling without engaging, hovering over elements with no clear CTA, or abandoning shortly after arriving."*
+4. Configure the type-specific options:
+   - **Classifier** – define your tag vocabulary, and optionally allow multiple tags per session or freeform tags.
+   - **Scorer** – set the numeric scale (min, max, and an optional label).
+   - **Summarizer** – set the summary length.
+5. Set **recording filters** to choose which sessions the scanner applies to (by person properties, session properties, cohorts, or events) and a **sampling rate** to control how many matching sessions get scanned.
+6. Optionally enable [Signals](#signals) so notable findings can trigger alerts.
+7. Save. The scanner is enabled by default.
+
+<CalloutBox type="fyi" title="Estimate your usage first">
+
+When configuring a scanner's filters and sampling rate, PostHog estimates how many observations it will generate per month so you can size it against your [quota](#quota-and-limits) before enabling it.
+
+</CalloutBox>
+
+## Running scanners
+
+There are two ways scanners produce observations:
+
+### Automatically on matching sessions
+
+Once a scanner is enabled, PostHog periodically sweeps for new recordings that match the scanner's filters and runs the scanner against a sample of them. This happens in the background – you set up the scanner once and observations accumulate as new matching sessions come in.
+
+Each (scanner, session) pair is only ever observed once, so re-sweeping never produces duplicate observations for the same recording.
+
+### On-demand on a single recording
+
+You can also run a scanner against a specific recording immediately:
+
+- **From the replay player** – open a recording and use the **Scan this recording** action to pick a scanner and run it against the session you're watching.
+- **Via MCP** – use the `vision-scanners-scan-session` [MCP tool](/docs/model-context-protocol) to scan a session programmatically.
+
+<CalloutBox type="caution" title="Some sessions are skipped">
+
+A scanner won't run on a recording that has no replay data, is too short, too inactive, too long, or has no events. These are marked **ineligible** rather than failed, and don't count against your quota.
+
+</CalloutBox>
+
+## Reading results
+
+### In the app
+
+Each scanner has an **Observations** tab listing every observation it's produced, with the result, status, and what triggered it. Open an individual observation to see its full structured output, the reasoning behind it (with clickable citations into the recording timeline), the prompt that produced it, and an embedded player so you can watch the relevant session.
+
+### Querying observations as events
+
+Every successful observation is captured as a `$recording_observed` event in your project, so you can build [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and [alerts](/docs/alerts) on top of Replay Vision output using [SQL](/docs/product-analytics/sql).
+
+Key properties on each event:
+
+| Property | Description |
+| --- | --- |
+| `scanner_name` | Name of the scanner that produced the observation |
+| `scanner_type` | `monitor`, `classifier`, `scorer`, or `summarizer` |
+| `session_id` | The recording that was observed |
+| `triggered_by` | Whether the observation was scheduled or run on-demand |
+| `model_used` | The Gemini model used |
+| `scanner_output_confidence` | The model's confidence (0.0 to 1.0) |
+| `scanner_output_verdict` | (Monitor) the true/false verdict |
+| `scanner_output_tags` | (Classifier) the assigned tags |
+| `scanner_output_score` | (Scorer) the numeric score |
+| `scanner_output_reasoning` | The model's reasoning |
+
+For example, to count monitor sessions flagged true by a "Dead-end pages" scanner over the last week:
+
+```sql
+SELECT
+    toStartOfDay(timestamp) AS day,
+    count() AS flagged_sessions
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Dead-end pages'
+  AND properties.scanner_output_verdict = true
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY day
+ORDER BY day
+```
+
+## Signals
+
+When you enable **Signals** on a scanner, notable findings (such as a monitor returning true, or a scorer crossing a threshold) can surface as actionable [Signals](/docs/signals) – so a human gets notified about important sessions without anyone manually reviewing replays.
+
+## Quota and limits
+
+- Replay Vision observations are subject to a monthly quota per organization. In-progress observations count against the quota, and when it's reached, new observations are skipped until the next calendar month. A usage meter in the app shows your current month's consumption.
+- Replay Vision currently runs on Google Gemini models only.
+- Each recording is observed at most once per scanner.
+
+## Further reading
+
+- [Session Replay](/docs/session-replay)
+- [Summarize sessions with PostHog AI](/docs/session-replay/session-summaries-ai)
+- [Find replays with PostHog AI](/docs/session-replay/find-replays-ai)

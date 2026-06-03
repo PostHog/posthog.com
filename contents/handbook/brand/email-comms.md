@@ -8,6 +8,23 @@ Our email communications can be broadly divided into broadcasts (one-off emails 
 
 This page doesn't deal with [our Product for Engineers newsletter](https://newsletter.posthog.com/), which is sent through Substack and managed by the Content & Docs team. 
 
+## Linking to the PostHog app
+
+To point users at a page in the PostHog app via email, use this format: `https://app.posthog.com/` and do not include the project path. 
+
+For example:
+`https://app.posthog.com/endpoints` instead of `https://app.posthog.com/project/2/endpoints`
+`https://app.posthog.com//logs?activeTab=alerts`
+
+The `app.posthog.com` prefix works for both US and EU instances, and the project path resolves itself for the recipient.
+
+To preload a prompt for PostHog AI, use this format:
+`https://app.posthog.com/#panel=max:!Your%20question%20here`
+
+For example:
+`https://app.posthog.com/#panel=max:!What's%20my%20churn%20rate?`
+`https://app.posthog.com/#panel=max:!All%20hail%20hogzilla`
+
 ## Email broadcasts
 We regularly send three types of email broadcasts. 
 
@@ -102,7 +119,7 @@ There's no way to unsubscribe from these emails, but if you're triggering them w
 We run a series of other small campaigns with smaller volumes. These include:
 
 - **The replay recommender** is a campaign which encourages users who have ingested a large number of unwatched replays to watch some of the recordings. 
-- **Teams upsells & cancellations** are two separate campaigns. The first triggers when a team invites their sixth and ninth team member, suggesting the Teams add-on to boost collaboration. The second triggers when the add-on is disabled, comes from Zach, and requests feedback. 
+- **Teams upsells & cancellations** are two separate campaigns. The first triggers when a team invites their sixth and ninth team member, suggesting the Teams package to boost collaboration. The second triggers when the package is disabled, comes from Zach, and requests feedback. 
 - **G2 review Requester** is described in [Testimonials & G2](/handbook/brand/testimonials)
 - **Startup & YC updates** is a series of campaigns for the startups and YC programs. These broadly notify users when they join the program, and use 50%, 75% and 100% of their available credit. 
 
@@ -115,6 +132,13 @@ Transactional emails feature Liquid code to help personalize their content. All 
 We turned the free allowance for {{ trigger.product_name | default: "a product" }} on {% if trigger.team_name %}{{ trigger.team_name }}{% else %}your account{% endif %} off and on again, giving you another month of free usage.
 ```
 
+## Adding a new event property to Customer.io
 
+We use Customer.io to target broadcasts and campaigns — for example, the onboarding flow targets users based on their events, as well as segments which define product intent and activation. PostHog sends this information to Customer.io through a data pipeline, so a new event or property has to flow through that pipeline before you can build a segment on it.
 
+To add a new event or property:
+
+1. **Confirm the data is tracked in PostHog.** Product intent and activation criteria (such as a product's `product_key` value) are usually set up by the product manager for the relevant product. If the event or property you need isn't being tracked yet, ask the PM to create it in PostHog before going any further.
+2. **Add the event or property to the Customer.io pipeline.** Any action or property we send to Customer.io must be added to the [Customer.io destination in PostHog](https://us.posthog.com/project/2/functions/0191b762-f77d-0000-1956-121a0c25c878). If you try to build a segment on something that isn't in the pipeline, the segment won't populate.
+3. **Create the segment in Customer.io.** A newly added property won't appear in Customer.io's autocomplete when you start typing it. Instead, copy and paste the exact property name, save, and the segment will populate when the data arrives (but this is always worth testing or checking later).
 

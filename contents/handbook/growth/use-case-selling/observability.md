@@ -26,7 +26,8 @@ Separating this from Release Engineering is important because the buyer is often
 - **[Product Analytics](/docs/product-analytics)** — Error correlation with user behavior and business impact. Answer "how many users hit this error?" and "did this error cause drop-off in our conversion funnel?" Connect technical incidents to business outcomes.
 - **[PostHog AI](/docs/posthog-ai/allow-access)** — Natural language incident triage. "What errors spiked in the last hour and which users were affected?" without writing a query. Faster mean time to understanding during incidents. ([Example prompts](/docs/posthog-ai/example-prompts))
 - **Logging** *beta* — Centralized log collection and search. Logs are table stakes for any observability stack. Having logs alongside errors, replays, and analytics means the full debugging context lives in one place.
-- *Roadmap: APM, API tracing* — Not shipped yet. When these arrive, the observability story becomes complete: errors + logs + traces + replay + analytics in one platform.
+- **[Tracing](/docs/tracing)** *alpha* — Distributed tracing over OpenTelemetry (OTLP). Follow a request across services to see what called what and where the time went, in the same project as errors, logs, replays, and analytics.
+- *Roadmap: APM* — Not shipped yet. When full APM arrives, the observability story becomes complete: errors + logs + traces + replay + analytics in one platform.
 
 ## Adoption path and expansion path
 
@@ -50,7 +51,7 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 
 ### Future expansion (roadmap dependent)
 
-As APM and tracing ship, the path extends: Logging → APM → Tracing, completing the full observability stack. Position this honestly: name the vision, be transparent about what's available today vs. what's coming.
+With tracing now in alpha and APM still to come, the path extends: Logging → Tracing → APM, completing the full observability stack. Position this honestly: name the vision, be transparent about what's available today vs. what's coming.
 
 ## Business impact of solving the problem
 
@@ -162,13 +163,13 @@ As APM and tracing ship, the path extends: Logging → APM → Tracing, completi
 | Datadog | Full observability: APM, logs, metrics, errors | Product analytics integration; session replay depth; much cheaper | Complete observability stack (APM, traces, metrics); enterprise-grade; massive ecosystem |
 | New Relic | Full observability: APM, logs, errors, distributed tracing | Product analytics integration; session replay; simpler pricing | Complete observability stack; mature enterprise features |
 
-**Honest assessment:** Our Observability story is credible but incomplete. Error Tracking + Session Replay + Logging is a meaningful starting point, and the connection to product analytics is genuinely differentiated. But we don't have APM or tracing yet. We can't position PostHog as a full Datadog replacement today. The honest pitch is: "For error tracking, we're better than Sentry because of the user context. For full observability, we're building toward it, and in the meantime, the product analytics connection gives you something no other observability tool offers." Be transparent about what's available today vs. what's on the roadmap.
+**Honest assessment:** Our Observability story is credible but incomplete. Error Tracking + Session Replay + Logging is a meaningful starting point, and the connection to product analytics is genuinely differentiated. Distributed tracing is now available in alpha, but we don't have full APM yet. We can't position PostHog as a full Datadog replacement today. The honest pitch is: "For error tracking, we're better than Sentry because of the user context. For full observability, we're building toward it, and in the meantime, the product analytics connection gives you something no other observability tool offers." Be transparent about what's available today vs. what's on the roadmap.
 
 ## Pain points & known limitations
 
 | Pain Point | Impact | Workaround / Solution |
 |---|---|---|
-| No APM or tracing yet | Can't replace Datadog for teams that need full backend observability | Be honest about the roadmap. Position PostHog as complementary for now: errors + replay + analytics in PostHog, APM in their existing tool. The consolidation play gets stronger as we ship more. |
+| Tracing is alpha; no full APM yet | Can't replace Datadog for teams that need full backend observability | Be honest about the roadmap. Distributed tracing is in alpha, usable today but maturing. Position PostHog as complementary for now: errors + replay + analytics + alpha tracing in PostHog, APM in their existing tool. The consolidation play gets stronger as we ship more. |
 | Logging is beta | Teams expecting production-grade centralized logging may find gaps | Set expectations on maturity. For teams with existing logging (ELK, Papertrail), PostHog logging complements rather than replaces initially. |
 | Error Tracking language/framework support may lag Sentry | Sentry supports a very wide range of languages and frameworks | Check [Error Tracking docs](/docs/error-tracking) for current support. For unsupported frameworks, generic exception capture via the API may work. |
 | No built-in on-call/incident management | Teams wanting PagerDuty-style incident workflows won't find it here | PostHog alerts can trigger webhooks to PagerDuty, Slack, etc. Error Tracking is about detection and context, not incident management workflows. |
