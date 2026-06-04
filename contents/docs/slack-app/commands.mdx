@@ -5,16 +5,17 @@ sidebarTitle: Commands
 
 The full set of commands `@PostHog` accepts, in the same order it lists them when you run `@PostHog help`:
 
-| Command | What it does |
-|---|---|
-| `@PostHog <task description>` | Create a task for the agent to work on |
-| `@PostHog rules list` | Show all routing rules |
-| `@PostHog rules add "description" org/repo` | Add a routing rule |
-| `@PostHog rules add "description"` | Add a routing rule (pick repo from list) |
-| `@PostHog rules remove <number(s)>` | Remove routing rules by number (e.g. `remove 1` or `remove 1,2`) |
-| `@PostHog project` | Show which PostHog project your mentions route to in this workspace |
-| `@PostHog project <id>` | Set the PostHog project your mentions route to in this workspace |
-| `@PostHog help` | Show the command list |
+| Command                                     | What it does                                                        |
+| ------------------------------------------- | ------------------------------------------------------------------- |
+| `@PostHog <task description>`               | Create a task for the agent to work on                              |
+| `@PostHog rules list`                       | Show all routing rules                                              |
+| `@PostHog rules add "description" org/repo` | Add a routing rule                                                  |
+| `@PostHog rules add "description"`          | Add a routing rule (pick repo from list)                            |
+| `@PostHog rules remove <number(s)>`         | Remove routing rules by number (e.g. `remove 1` or `remove 1,2`)    |
+| `@PostHog project`                          | Show which PostHog project your mentions route to in this workspace |
+| `@PostHog project <id>`                     | Set the PostHog project your mentions route to in this workspace    |
+| `@PostHog project workspace <id>`           | Set the workspace-wide default project (Slack admins/owners only)   |
+| `@PostHog help`                             | Show the command list                                               |
 
 For repo selection, the bot checks routing rules first. If nothing matches and you have multiple repos, it opens the in-thread picker. If you only have one repo connected, the task runs against it directly. The `project` commands only matter if your Slack workspace is connected to multiple PostHog projects.
 
