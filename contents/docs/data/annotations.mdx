@@ -7,12 +7,17 @@ availability:
   selfServe: full
   enterprise: full
 ---
-import {ProductScreenshot} from 'components/ProductScreenshot'
-export const annotationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/annotations/annotation-hn-light-mode.png"
-export const annotationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/annotations/annotation-hn-dark-mode.png"
-import {ProductVideo} from 'components/ProductVideo'
-export const createAnnotationLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/annotations/create-annotation-light-mode.mp4"
-export const createAnnotationDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/annotations/create-annotation-dark-mode.mp4"
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+export const annotationLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/annotations/annotation-hn-light-mode.png";
+export const annotationDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/annotations/annotation-hn-dark-mode.png";
+import { ProductVideo } from "components/ProductVideo";
+export const createAnnotationLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/annotations/create-annotation-light-mode.mp4";
+export const createAnnotationDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/annotations/create-annotation-dark-mode.mp4";
 
 Annotations enable you to add written notes to a particular day or time on all your insights and dashboards so you can see how changes or incidents impact your metrics.
 
@@ -23,10 +28,10 @@ You can use annotations to mark things like feature updates, version releases, a
 The chart below shows a large spike in website traffic, which has been annotated to explain why that spike occurs. Annotations can be viewed by hovering over them.
 
 <ProductScreenshot
-    imageLight={annotationLight} 
-    imageDark={annotationDark}
-    alt="PostHog Annotations" 
-    classes="rounded"
+  imageLight={annotationLight}
+  imageDark={annotationDark}
+  alt="PostHog Annotations"
+  classes="rounded"
 />
 
 Annotations can be written _after_ the fact, which makes them useful for future reference, or _before_ an event if you want to analyze the future impact of a particular marketing initiative, for example.
@@ -38,12 +43,24 @@ When editing a chart in Trends, Sessions or in a Dashboard, hover your cursor ov
 With your annotation created, it will now be available at the bottom of your chart, and you can also view all of your existing annotations in `/data-management/annotations`.
 
 <ProductVideo
-    videoLight={createAnnotationLight} 
-    videoDark={createAnnotationDark}
-    alt="How to create an annotation in PostHog" 
-    classes="rounded"
+  videoLight={createAnnotationLight}
+  videoDark={createAnnotationDark}
+  alt="How to create an annotation in PostHog"
+  classes="rounded"
 />
 
+## Showing and hiding annotations
+
+You can toggle annotations on or off directly from an insight or dashboard card without opening the full insight editor.
+
+From the insight editor, use the **Show annotations** checkbox in the chart configuration options. From a dashboard, click the **⋯** menu on an insight card and select **Show annotations** or **Hide annotations**.
+
+This is available for:
+
+- **Trends time-series charts** – Line charts, bar charts, and area charts (excludes non-time-series displays like pie charts and tables)
+- **Funnel historical trends** – Funnels using the trends visualization type
+
+Annotations are shown by default. This setting is saved to the insight and applies everywhere it appears.
 
 ## Managing annotations via AI agents
 
@@ -55,6 +72,6 @@ With the [PostHog MCP server](/docs/model-context-protocol) connected, you can a
 - List existing annotations to review what's been marked
 - Retrieve, update, or delete specific annotations
 
-For example, you might prompt: *"Create an annotation for today saying 'Deployed checkout v2.0'"* and the agent will create it in your project.
+For example, you might prompt: _"Create an annotation for today saying 'Deployed checkout v2.0'"_ and the agent will create it in your project.
 
 This is useful for marking deployments directly from your development workflow without switching to the PostHog app.
