@@ -7,13 +7,22 @@ import AuthenticateCLI from '../_snippets/cli/authenticate.mdx'
 import InjectSourceMap from './_snippets/inject-source-map.mdx'
 import UploadSourceMap from './_snippets/upload-source-map.mdx'
 import UploadSymbolSetsPlatforms from '../_snippets/upload-symbol-sets-platforms.tsx'
+import WizardCommand from 'components/WizardCommand'
 
 
 If you serve compiled or minified code, PostHog requires source maps to generate accurate stack traces. 
 
 If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces. 
 
-Choose your platform to view specific instructions.
+<CalloutBox icon="IconSparkles" title="Set this up automatically with the wizard" type="fyi">
+
+If you're using a JavaScript or TypeScript framework, the PostHog [AI wizard](/docs/ai-engineering/ai-wizard) can configure source map uploading for you. Run the wizard command with `upload-source-maps` appended in your project directory:
+
+<WizardCommand command="upload-source-maps" />
+
+Otherwise, choose your platform below for manual instructions.
+
+</CalloutBox>
 
 <UploadSymbolSetsPlatforms />
 
