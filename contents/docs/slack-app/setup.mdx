@@ -2,28 +2,13 @@
 title: Set up the PostHog Slack app
 sidebarTitle: Setup
 showStepsToc: true
-tableOfContents: [
-    {
-        url: 'connect-slack-to-your-project',
-        value: 'Connect Slack to your project',
-        depth: 1,
-    },
-    {
-        url: 'connect-your-personal-github',
-        value: 'Connect your personal GitHub',
-        depth: 1,
-    },
-    {
-        url: 'pick-a-project',
-        value: 'Pick a project',
-        depth: 1,
-    },
-    {
-        url: 'next-steps',
-        value: 'Next steps',
-        depth: 1,
-    },
-]
+tableOfContents:
+  [
+    { url: "connect-slack-to-your-project", value: "Connect Slack to your project", depth: 1 },
+    { url: "connect-your-personal-github", value: "Connect your personal GitHub", depth: 1 },
+    { url: "pick-a-project", value: "Pick a project", depth: 1 },
+    { url: "next-steps", value: "Next steps", depth: 1 },
+  ]
 ---
 
 You need two integrations to use `@PostHog` in Slack: one workspace-wide Slack connection per PostHog project (set up by a project admin), and a personal GitHub connection per teammate who wants to ship code.
@@ -35,9 +20,9 @@ You need two integrations to use `@PostHog` in Slack: one workspace-wide Slack c
 Head to [**Settings → Integrations**](https://app.posthog.com/settings/project-integrations#selectedSetting=integration-slack&setting=integration-slack) in your PostHog project and click **Add to Slack** in the Slack integration section. Approve the requested scopes – you'll need to be a project admin to install.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto,w_800/slack_integration_settings_3396ec1b7d.png"
-    classes="rounded"
-    alt="The Slack integration section in project settings, with the Add to Slack button"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto,w_800/slack_integration_settings_3396ec1b7d.png"
+  classes="rounded"
+  alt="The Slack integration section in project settings, with the Add to Slack button"
 />
 
 To talk to the bot in a channel, @-mention it – Slack will prompt you to invite it – or invite it explicitly with `/invite @PostHog`. The first time it sees a mention, it matches your Slack email to your PostHog account, so make sure you're signed in to the same org on both sides.
@@ -61,9 +46,9 @@ This is a hard block on the whole task, not just the PR step – the agent doesn
 PRs can't be authored under the bot itself – the agent always commits and opens PRs as whichever teammate triggered the task.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto,w_800/personal_github_integration_5e2b3142ba.png"
-    classes="rounded"
-    alt="The Personal integrations page in PostHog settings, with the Connect GitHub button"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto,w_800/personal_github_integration_5e2b3142ba.png"
+  classes="rounded"
+  alt="The Personal integrations page in PostHog settings, with the Connect GitHub button"
 />
 
 <CalloutBox icon="IconInfo" title="GitHub's Save button is disabled?" type="fyi">
@@ -81,6 +66,7 @@ If you start a task before connecting, the agent stops and posts a **Connect Git
 A single Slack workspace can be connected to more than one PostHog project. When that happens, the bot won't guess which project your mention belongs to – it asks you to pick one first:
 
 > This Slack workspace is connected to multiple PostHog projects:
+>
 > 1. Acme · Production (id `42`)
 > 2. Acme · Staging (id `7`)
 >
@@ -88,12 +74,13 @@ A single Slack workspace can be connected to more than one PostHog project. When
 
 Pick a project once and the bot remembers it for you across channels and threads in this workspace.
 
-| Command | What it does |
-|---|---|
-| `@PostHog project` | Show which PostHog project your mentions route to in this workspace, and list the alternatives |
-| `@PostHog project <id>` | Set the PostHog project your mentions route to in this workspace |
+| Command                           | What it does                                                                                   |
+| --------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `@PostHog project`                | Show which PostHog project your mentions route to in this workspace, and list the alternatives |
+| `@PostHog project <id>`           | Set the PostHog project your mentions route to in this workspace                               |
+| `@PostHog project workspace <id>` | Set the workspace-wide default project (Slack admins/owners only)                              |
 
-The bot resolves a target with this precedence: thread context (continuing an existing task) → your personal default → workspace-wide default (set by support, no UI yet) → the only connected project → picker. Personal defaults always win over the workspace fallback, so each teammate can route their own mentions independently.
+The bot resolves a target with this precedence: thread context (continuing an existing task) → your personal default → workspace-wide default (set with `@PostHog project workspace <id>` by a Slack admin) → the only connected project → picker. Personal defaults always win over the workspace fallback, so each teammate can route their own mentions independently.
 
 If your workspace is only connected to a single PostHog project, you can skip this step – the bot routes there automatically.
 
