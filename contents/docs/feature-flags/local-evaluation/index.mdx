@@ -330,7 +330,7 @@ Local evaluation is not possible for flags that:
 2. Are linked to an [early access feature](/docs/feature-flags/early-access-feature-management)
 3. Depend on [static cohorts](/docs/data/cohorts#static-cohorts)
 4. Use the `is_not_set` property operator, since local evaluation can only check properties you provide — it can't determine whether a property is absent on a person.
-5. Have ["Stop evaluation at first matching condition set"](/docs/feature-flags/creating-feature-flags#stop-evaluation-at-first-matching-condition-set) (early exit) enabled. Local evaluation always evaluates all condition groups, even when this setting is enabled. The setting only takes effect when flags are evaluated through the `/flags` endpoint.
+5. Have ["Stop evaluation at first matching condition set"](/docs/feature-flags/creating-feature-flags#stop-evaluation-at-first-matching-condition-set) (early exit) enabled. Local evaluation currently always evaluates all condition groups, even when this setting is enabled. This is a temporary limitation while support is rolled out across SDKs. For now, the setting only takes effect when flags are evaluated through the `/flags` endpoint.
 
 ### Dynamic cohort restrictions
 
