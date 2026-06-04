@@ -163,7 +163,7 @@ If the events are logically part of the same session, e.g. a user starts a purch
 
 ### Automatically sending session IDs
 
-If you enable tracing headers within the JavaScript SDK, PostHog adds session, window, and distinct ID headers to `fetch` and `XMLHttpRequest` calls to your backend. You can enable tracing headers by adding the `tracing_headers` option to your `posthog.init` call:
+If you enable tracing headers within the JavaScript SDK, distinct ID and sessionID will be sent on every request. You can enable tracing headers by adding the `tracing_headers` option to your `posthog.init` call:
 
 ```ts
 posthog.init('<ph_project_token>', {

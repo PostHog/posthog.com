@@ -87,7 +87,7 @@ posthog.init('<ph_project_token>', {
 })
 ```
 
-Use hostnames only, without the protocol or path. This automatically adds `X-POSTHOG-SESSION-ID`, `X-POSTHOG-DISTINCT-ID`, and `X-POSTHOG-WINDOW-ID` headers to `fetch` and `XMLHttpRequest` calls to the specified hostnames. The `PostHogInterceptor` reads these headers automatically to attach session and user context to captured exceptions.
+Use hostnames only, without the protocol or path. This automatically adds `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID` headers to `fetch` and `XMLHttpRequest` calls to the specified hostnames. The `PostHogInterceptor` reads these headers automatically to attach session and user context to captured exceptions.
 
 </Step>
 
