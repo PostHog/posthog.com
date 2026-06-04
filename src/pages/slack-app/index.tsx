@@ -526,7 +526,7 @@ const faqItems = [
                 Set a default repo per channel. Or set regex routing rules so the bot picks the right repo from the
                 channel name or the task description. When the bot isn't sure, it opens a picker in-thread. See the{' '}
                 <Link
-                    to="/docs/posthog-code/slack"
+                    to="/docs/slack-app/commands"
                     state={{ newWindow: true }}
                     className="text-red dark:text-yellow font-semibold hover:underline"
                 >
@@ -539,11 +539,18 @@ const faqItems = [
     {
         trigger: 'Can multiple people drive the same task?',
         content: (
-            <p>
-                No. The agent will only follow instructions from the individual who originally kicked off the task. If
-                other people add to a thread (e.g., comment, add a file or link), the agent treats it as data to
-                consider, not instructions to obey (it might even tell you to step off).
-            </p>
+            <>
+                <p>
+                    Yes. Anyone in the thread can send follow-ups to the running agent. Every message in the thread is
+                    forwarded as a new turn in the same conversation, so teammates can steer mid-run, drop in extra
+                    context, or answer a question the agent asked.
+                </p>
+                <p>
+                    Heads up: the resulting PR is still authored under whoever started the task – their personal GitHub
+                    integration is the one wired up – so a teammate's follow-up edits land under the original
+                    requester's name. If you want the PR credited to you, start your own task.
+                </p>
+            </>
         ),
     },
     {
@@ -551,10 +558,16 @@ const faqItems = [
         content: (
             <p>
                 Branches get a <code>posthog-code/</code> prefix, and each commit includes a{' '}
-                <code>Generated-By: PostHog Code</code> line plus a <code>Task-Id</code> so you can trace it back. The
-                author is the bot by default, or you can connect you personal github integration
-                [here](https://app.posthog.com/settings/user-personal-integrations) – so the PR shows up under your
-                name.
+                <code>Generated-By: PostHog Code</code> line plus a <code>Task-Id</code> so you can trace it back. PRs
+                are authored under your name via your{' '}
+                <Link
+                    to="https://app.posthog.com/settings/user-personal-integrations"
+                    external
+                    className="text-red dark:text-yellow font-semibold hover:underline"
+                >
+                    personal GitHub integration
+                </Link>
+                , which every teammate connects once before they can ship code.
             </p>
         ),
     },
@@ -598,7 +611,7 @@ const faqItems = [
         trigger: 'Do I need PostHog Code to use the PostHog Slack app?',
         content: (
             <p>
-                No. The Slack app has its own feature flag and isn't gated on a{' '}
+                No. The Slack app isn't gated on a{' '}
                 <Link
                     to="/code"
                     state={{ newWindow: true }}
@@ -624,7 +637,6 @@ const faqItems = [
                         GitHub auth is per-user via a personal integration. Onboarding has a known gap; first-time setup
                         is rougher than it should be.
                     </li>
-                    <li>Only the user who started a task can follow up in-thread.</li>
                     <li>
                         No screenshot input yet – the bot reads text only. Paste descriptions instead of images for now.
                     </li>
@@ -734,8 +746,8 @@ export default function SlackAppPage(): JSX.Element {
                         <li>It plans the work, edits files, and runs checks inside a sandboxed environment.</li>
                         <li>It opens a draft PR with a detailed description, and links it back into the thread.</li>
                         <li>
-                            It iterates on follow-up messages from the original requester (and politely declines
-                            commands from your colleagues).
+                            It iterates on follow-up messages from anyone in the thread, so teammates can steer the run
+                            together.
                         </li>
                         <li>
                             It watches CI, reruns failed jobs that look environmental, and doesn't touch workflow files.

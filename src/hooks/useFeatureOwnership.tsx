@@ -475,6 +475,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Subscriptions',
         owner: ['analytics-platform'],
     },
+    support: {
+        feature: 'Support',
+        owner: ['conversations'],
+    },
     surveys: {
         feature: 'Surveys',
         owner: ['surveys'],
