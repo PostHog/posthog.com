@@ -17,23 +17,22 @@ seo:
     metaTitle: 'AI observability: what it is, how it works, and which tools to use'
     metaDescription: 'A comprehensive guide to AI observability: how it differs from traditional APM, what tools like PostHog actually do, and how to pick the right one for your stage.'
 ---
+The problems with AI agents and apps often don't show up in normal monitoring tools:
 
 - The code works, the API calls succeed, but the outputs are off. 
 - The model says the wrong thing. 
 - The agent calls the wrong tool. 
-- The bill is somehow 4x what you expected. 
+- The bill is 4x what you expected. 
 
-None of this shows up in your normal monitoring, because your normal monitoring was built for software that does the same thing every time.
+That's because normal monitoring was built for software that does the same thing every time.
 
-That's the gap **AI observability** fills. It's the layer that watches what your LLMs are actually doing in production – what prompts you sent, what they returned, how long it took, how much it cost, and whether the output was any good.
-
-This guide walks through what AI observability is, the components it's built from, how the tools actually instrument your code, and which ones are worth using depending on your stack and stage.
+This gap is what **AI observability** fills. This guide walks through what AI observability is, the features and data it's built from, and which tools are worth using depending on your stack and stage.
 
 ## What is AI observability?
 
 **AI observability** (often used interchangeably with **LLM observability** and **LLM analytics**) is the practice of monitoring the AI features of your application: prompts, responses, costs, latency, errors, and quality of outputs.
 
-It's a category that didn't really exist until the last couple of years, because the problems it solves didn't exist either. Traditional APM tools like [Datadog](/blog/best-datadog-alternatives) and New Relic were built to monitor software that behaves the same way every time.
+It's a category that barely existed two years ago, because the problems it solves didn't exist either. Traditional APM tools like [Datadog](/blog/best-datadog-alternatives) and New Relic were built to monitor software that behaves the same way every time.
 
 AI features don't.
 
@@ -43,15 +42,14 @@ The short version:
 
 | Traditional APM watches | AI observability watches |
 |---|---|
-| Whether your API call succeeded | What the model actually said |
+| Whether API calls succeed | What the model said |
 | Response times | Token usage and cost per call |
 | Error rates | Quality of outputs (was it a hallucination?) |
 | Service-level metrics | Agent-level metrics (which tools were called, in what order) |
 | Did the code run? | Did the model give a useful answer? |
 
-Both layers are useful and you need both if you're running AI features in production, but they answer different questions.
 
-The data model is different too. APM is built around requests, services, and traces of synchronous code paths. AI observability is built around *generations* (individual LLM calls), traces (the chain of generations and tool calls that make up an agent loop), and spans (the steps inside a trace).
+The data model is different too. APM is built around requests, services, and traces across your application stack. AI observability is built around *generations* (individual LLM calls), traces (the chain of generations and tool calls that make up an agent loop), and spans (the steps inside a trace).
 
 AI observability tools also do things APM tools structurally can't, like [semantic clustering of model outputs](/blog/llm-analytics-clustering-how-it-works), which groups traces by what the model actually said rather than which endpoint was hit. That's a kind of analysis only possible when your monitoring layer understands the content of the calls, not just their shape.
 
@@ -154,13 +152,13 @@ This is the workflow described in detail in [our beginner's guide to testing AI 
 
 The point isn't to cover every possible input (you can't) but to make sure every bad interaction teaches your system something permanent.
 
-## What are the best AI observability tools available
+## What are the best AI observability tools?
 
 There are roughly half a dozen serious tools in this category as of 2026, plus several adjacent options (existing APM tools that added LLM features, ML monitoring tools that pivoted to AI observability). Here's the rundown.
 
 ### 1. PostHog
 
-[PostHog's AI observability](/ai-observability) is bundled with [product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), and more – which means the same user model flows through all of them. 
+[PostHog's AI observability](/ai-observability) is bundled with [product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), and more – which means the same user model connects through all of them. 
 
 You can correlate AI feature usage with retention, [watch session replays of users interacting with your AI features](/docs/ai-observability/link-session-replay), and [trace errors](/docs/ai-observability/link-error-tracking) to specific LLM calls without stitching tools together.
 
@@ -179,7 +177,7 @@ The free tier covers 100K LLM events/mo. EU hosting available. SDKs for OpenAI, 
 
 ### 2. Langfuse
 
-**Langfuse** is the open-source darling of the category. It's MIT-licensed, framework-agnostic, with depth across tracing, evaluations, and prompt management. Acquired by ClickHouse in early 2026.
+**Langfuse** is the open-source darling of the category. It's MIT-licensed, framework-agnostic, with depth across tracing, evaluations, and prompt management. It was acquired by ClickHouse in early 2026.
 
 **Key features:**
 
@@ -207,7 +205,7 @@ The free tier covers 100K LLM events/mo. EU hosting available. SDKs for OpenAI, 
 
 ### 4. Datadog LLM Observability
 
-[Datadog](/blog/best-datadog-alternatives) added LLM Observability as a product line in 2024, and it's evolved into one of the strongest enterprise option for teams already using Datadog for the rest of their stack.
+[Datadog](/blog/best-datadog-alternatives) added LLM Observability as a product line in 2024, and it's evolved into one of the strongest enterprise options for teams already using Datadog for the rest of their stack.
 
 **Key features:**
 
@@ -215,7 +213,9 @@ The free tier covers 100K LLM events/mo. EU hosting available. SDKs for OpenAI, 
 - Built-in evals and a sensitive data scanner for PII redaction
 - Integrates with Datadog's broader observability suite (APM, logs, RUM)
 
-**Best for:** Teams already invested in the Datadog ecosystem who want LLM monitoring in the same pane as their backend services. The catch is pricing: the free tier covers 40K LLM spans/mo, but Datadog automatically activates LLM Observability charges the moment it detects LLM spans, so be careful if you're already on Datadog for other workloads. Hard to justify at the MVP stage.
+**Best for:** Teams already invested in the Datadog ecosystem who want LLM monitoring in the same pane as their backend services. 
+
+The catch is pricing: the free tier covers 40K LLM spans/mo, but Datadog automatically activates LLM Observability charges the moment it detects LLM spans, so be careful if you're already on Datadog for other workloads. Hard to justify at the MVP stage.
 
 ### 5. Portkey
 
@@ -229,7 +229,9 @@ The free tier covers 100K LLM events/mo. EU hosting available. SDKs for OpenAI, 
 - Caching to reduce repeated calls
 - Guardrails for content moderation and PII detection
 
-**Best for:** Teams who want cost tracking and basic logs with minimal setup, or who are juggling multiple LLM providers and want a unified routing layer. The trade-off, as with any proxy-based tool, is that you get less detail than SDK-based tracing for complex multi-step agents. Advanced features (some observability, security, governance) are gated to the cloud product. Free tier covers 10K requests/mo; paid plans start at $49/mo.
+**Best for:** Teams who want cost tracking and basic logs with minimal setup, or who are juggling multiple LLM providers and want a unified routing layer. 
+
+The trade-off, as with any proxy-based tool, is that you get less detail than SDK-based tracing for complex multi-step agents. Advanced features (some observability, security, governance) are gated to the cloud product. Free tier covers 10K requests/mo; paid plans start at $49/mo.
 
 ### 6. Arize Phoenix (and Arize AX)
 
@@ -280,14 +282,14 @@ If you're picking a tool, here's what actually matters:
 - **Cost model.** Per-event, per-user, per-span, seat-based – they all behave differently as you scale. Read the pricing page carefully.
 - **Free tier reality.** "Free" means different things. Check what's actually included, what's gated, and how long data is retained.
 - **Data ownership.** If you're handling sensitive data (PII, regulated industries), self-hosting or EU residency may matter more than features.
-- **Bundled vs unbundled.** Standalone tools are flexible but fragment user context. Bundled platforms ([PostHog](/) being the obvious example) keep everything in one user model, which makes correlation analyses possible.
+- **Bundled vs unbundled.** Standalone tools are flexible but fragment user context. Bundled platforms ([PostHog](/) being the obvious example) keep everything in one user model, which makes correlation analysis possible.
 - **MCP support.** If you're shipping in 2026, your AI tools should let you query their data from Claude Code, Cursor, or other AI workflows. Tools that don't are already feeling dated.
 
 ## Why PostHog works well for AI observability
 
 A quick pitch, since this is our blog:
 
-PostHog covers all six core layers (tracing, costs, errors, evals, feedback, prompts) in one tool, on one free tier (100K events/mo), with the same user model flowing through product analytics, session replay, feature flags, logs, surveys, and more. That means:
+PostHog covers all six core layers (tracing, costs, errors, evals, feedback, prompts) in one tool, on one free tier (100K events/mo), with the same user model connected through product analytics, session replay, feature flags, logs, surveys, and more. That means:
 
 - **Errors and traces in the same place** – when an LLM call fails, you can jump straight from the error to the trace to the user's session
 - **AI usage tied to retention and conversion** – "do users who hit the AI feature stick around longer?" is a query you can actually run, not a hypothetical
@@ -327,7 +329,7 @@ Yes. The PostHog team uses AI observability, error tracking, and [logs](/blog/ho
 <details>
 <summary>Do I need AI observability if I just have one LLM call in my app?</summary>
 
-Yes. The setup is fast, and the free tiers will cover you well past a thousand users. [Here's what to set up if you're at the MVP stage](/blog/ai-observability-for-mvp-ai-apps).
+Yes. The setup is fast, and the free tiers will cover you well past a thousand users. [Here's what to set up if you're at the MVP stage](/blog/ai-observability-for-mvps).
 
 </details>
 
