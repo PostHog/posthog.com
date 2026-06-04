@@ -57,6 +57,11 @@
     ],
     "redirects": [
         {
+            "source": "/slack",
+            "destination": "/slack-app",
+            "statusCode": 301
+        },
+        {
             "source": "/blog/autoresearch-query-bug",
             "destination": "/blog/karpathy-autoresearch-query-engine-bug"
         },
