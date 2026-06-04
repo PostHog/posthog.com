@@ -38,7 +38,7 @@ Feature flags are **not** billed based on `$feature_flag_called` events, which a
 
 The number of `/flags` requests and the number of `$feature_flag_called` events are **not** directly related.
 
-The number of active flags in your project does not affect the cost of each `/flags` request, so deactivating or removing flags has no direct billing impact. What reduces your bill is reducing the number of `/flags` requests themselves (see options below).
+The number of active flags in your project does not affect the cost of each `/flags` request. However, if a `/flags` request evaluates at least one active, billable flag, it still counts as a billable request, even if you aren't explicitly checking that flag in your code. What reduces your bill is reducing billable `/flags` requests, or making sure requests that still happen don't evaluate any active billable flags (see options below).
 
 ### Creating a billable usage dashboard
 
