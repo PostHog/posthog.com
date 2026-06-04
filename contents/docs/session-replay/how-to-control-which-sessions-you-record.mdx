@@ -187,6 +187,8 @@ For example, you could create:
 
 To create a trigger group, go to the [replay ingestion settings page](https://app.posthog.com/replay/settings#selectedSetting=replay-triggers) and click **Add** in the **Trigger groups** section.
 
+If you delete your last trigger group, PostHog automatically replaces it with a default "Record all sessions" group at 100% sampling with no conditions. This keeps your project on trigger groups rather than reverting to legacy recording settings.
+
 ### Migrating from legacy trigger settings
 
 If you have existing legacy trigger settings (URL triggers, event triggers, feature flags, sampling, and match type configured outside of trigger groups), you can automatically convert them to trigger groups.
