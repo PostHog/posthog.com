@@ -2315,14 +2315,6 @@ export const docsMenu = {
                             ],
                         },
                         {
-                            name: 'Roblox',
-                            url: '/docs/libraries/roblox',
-                            badge: {
-                                title: 'Beta',
-                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
-                            },
-                        },
-                        {
                             name: 'Ruby',
                             url: '/docs/libraries/ruby',
                         },
@@ -4103,6 +4095,25 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Replay Vision',
+            url: '/docs/replay-vision',
+            color: 'yellow',
+            icon: 'IconEye',
+            description: 'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
+            featureFlag: 'replay-vision-docs',
+            children: [
+                {
+                    name: 'Replay Vision',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/replay-vision',
+                    icon: 'IconEye',
+                    color: 'seagreen',
+                },
+            ],
+        },
+        {
             name: 'Feature Flags',
             icon: 'IconToggle',
             color: 'seagreen',
@@ -4835,10 +4846,6 @@ export const docsMenu = {
                         {
                             name: 'Unity',
                             url: '/docs/error-tracking/installation/unity',
-                        },
-                        {
-                            name: 'Roblox',
-                            url: '/docs/error-tracking/installation/roblox',
                         },
                         {
                             name: 'Elixir',
@@ -6838,6 +6845,12 @@ export const docsMenu = {
                     name: 'Link Session Replay',
                     url: '/docs/logs/link-session-replay',
                     icon: 'IconRewindPlay',
+                    color: 'blue',
+                },
+                {
+                    name: 'Link logs to a person',
+                    url: '/docs/logs/link-person',
+                    icon: 'IconPerson',
                     color: 'blue',
                 },
                 {

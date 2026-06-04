@@ -113,7 +113,7 @@ This approach balances providing useful context with browser performance — kee
 You can select a [feature flag](/docs/feature-flags) to control whether to record sessions or not. Recordings will only be collected for users when the flag is enabled for them.
 
 1. [Create a boolean or multiple variant flag](/docs/feature-flags/creating-feature-flags) that determines whether to record sessions or not.
-2. Go to the [replay ingestion settings page](https://us.posthog.com/replay/settings#selectedSetting=replay-triggers).
+2. Go to the [replay ingestion settings page](https://app.posthog.com/replay/settings#selectedSetting=replay-triggers).
 3. Link your newly created flag in the **Enable recordings using feature flag**.
 
 <ProductScreenshot
@@ -125,7 +125,7 @@ You can select a [feature flag](/docs/feature-flags) to control whether to recor
 
 ## Sampling
 
-Sampling enables you to record a percentage of all sessions. To set a sampling rate, go to the [replay ingestion settings page](https://us.posthog.com/replay/settings#selectedSetting=replay-triggers).
+Sampling enables you to record a percentage of all sessions. To set a sampling rate, go to the [replay ingestion settings page](https://app.posthog.com/replay/settings#selectedSetting=replay-triggers).
 
 Sampling is supported on the following SDKs:
 
@@ -177,6 +177,8 @@ Trigger groups are a more flexible way to configure recording triggers. Each tri
 
 Multiple trigger groups can be active at the same time. A session is recorded if it matches **any** of your trigger groups. Within a group, conditions are combined based on that group's match type.
 
+> **Note:** Creating, editing, and deleting trigger groups requires project admin permissions. Non-admin project members can view trigger group configurations but cannot modify them.
+
 For example, you could create:
 
 - A group that records all sessions on your checkout page at 100% sample rate
@@ -205,7 +207,7 @@ You can edit the groups after creating them.
 
 ## Minimum duration
 
-In your [replay ingestion settings](https://us.posthog.com/settings/project-replay#replay-ingestion), you can set a minimum duration for sessions to be recorded.
+In your [replay ingestion settings](https://app.posthog.com/settings/project-replay#replay-ingestion), you can set a minimum duration for sessions to be recorded.
 
 Supported on the following SDKs:
 

@@ -131,7 +131,7 @@ git commit -m "Closes #289 add posthog logo to website"
 
 ## Testing code
 
-See: [How we review](/handbook/engineering/how-we-review).
+See: [How we review PRs](/handbook/engineering/how-we-review).
 
 ### Storybook Visual Regression Tests
 
@@ -247,18 +247,7 @@ The workflow also runs a smoke test (health check) automatically on PRs that tou
 
 ## Reviewing code
 
-<!-- Keep this section to process only: who reviews what (human vs agent, Stamphog). The "what to look for" checklist and review mechanics live in how-we-review.md — link to it, don't duplicate it here. -->
-
-PRs can be written by humans or by agents (like PostHog Code). Either way, every PR needs a review before merging, and a human always merges.
-
-Who should review depends on who wrote the code (see [Creating PRs](#creating-prs)):
-
--  **Human-authored PRs** can be reviewed by a team member or by Stamphog, our AI approval agent. Stamphog runs deterministic checks first (size, file ownership, tier) and then does an LLM review for approval eligibility and suggestions. If Stamphog approves, a team member can merge.
--  **Agent-authored PRs** always require a human review since we want at least one human in the loop. A team member must review the PR and approve it before merging.
-
-We encourage the use of AI review agents (Codex, Copilot, Greptile, etc.) on PRs. Their comments and suggestions don't count as an approval, but they catch things humans miss and speed up the review process.
-
-For what to look for when reviewing, see: [How we review](/handbook/engineering/how-we-review).
+For review requirements, checklists, and conventions, see [How we review PRs](/handbook/engineering/how-we-review).
 
 ## Merging
 

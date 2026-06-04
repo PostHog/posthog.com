@@ -87,7 +87,7 @@ Example:
 
 ```
 <iframe
-    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=375"
+    src="https://www.youtube-nocookie.com/embed/1FZji2L-LmM"
     className="rounded shadow-xl"
 />
 ```
@@ -530,7 +530,7 @@ Products are grouped in `sourceValues` order. Plain values (`true`, `"some strin
 <!-- prettier-ignore -->
 ```tsx
 <ProductList
-    products={["product_analytics", "web_analytics", "feature_flags", "llm_analytics"]}
+    products={["product_analytics", "web_analytics", "feature_flags", 'ai_observability']}
     sourceField="wizardSupport"
     sourceValues={[true, { value: "Coming soon", color: "yellow" }]}
 />
@@ -538,7 +538,7 @@ Products are grouped in `sourceValues` order. Plain values (`true`, `"some strin
 
 <ProductList
     className="grid gap-4 grid-cols-2 not-prose"
-    products={["product_analytics", "web_analytics", "feature_flags", "llm_analytics"]}
+    products={["product_analytics", "web_analytics", "feature_flags", 'ai_observability']}
     sourceField="wizardSupport"
     sourceValues={[true, { value: "Coming soon", color: "yellow" }]}
 />

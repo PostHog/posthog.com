@@ -31,11 +31,11 @@ There are several benefits to using ClickHouse over PostgreSQL, such as:
 
 * Migrations: Moving over from another database? ClickHouse enables you to create materialized versions of your data thanks to its advanced engine, resulting in exponentially faster migrations between deployments. In the future, we'll also enable you to more easily migrate between PostHog Cloud and PostHog Self Hosted as both are backed by ClickHouse now.
 
-* Scalability: Clickhouse features a [columnnar database structure](https://clickhouse.tech/docs/en/faq/general/columnar-database/). Because of this, scaling and maintaining a ClickHouse cluster is pretty easy as long as you’re sharding, replicating, and distributing your tables correctly.
+* Scalability: Clickhouse features a [columnnar database structure](https://clickhouse.com/docs/en/faq/general/columnar-database/). Because of this, scaling and maintaining a ClickHouse cluster is pretty easy as long as you’re sharding, replicating, and distributing your tables correctly.
 
 * Deployment: Other database systems depend on a storage layer, a compute layer, and a resource scheduler (like YARN) to be deployed properly. ClickHouse is just one binary. As such, deployment is a breeze.
 
-* Documentation - [ClickHouse’s documentation](https://clickhouse.tech/docs/en/) has come a long way in the last few years, and Altinity, a company that supports the ecosystem, has excellent [documentation](https://docs.altinity.com/) available as well.
+* Documentation - [ClickHouse’s documentation](https://clickhouse.com/docs/en/) has come a long way in the last few years, and Altinity, a company that supports the ecosystem, has excellent [documentation](https://docs.altinity.com/) available as well.
 
 * Fault tolerance - ClickHouse supports native replication, which we use heavily. You can basically have N number of replicas for any given table - all you have to do is name the replica and point it to the metadata location in ZooKeeper.
 

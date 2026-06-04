@@ -78,7 +78,7 @@ Everybody says they are AI-native so how do you actually find the [cracked peopl
 
 We ask questions like: 
 
-- **Walk me a through a workflow you built or replicated**: what does it do? what was the aim for it? how did it improve things (faster, more accurate, less human interaction)? 
+- **Walk me through a workflow you built or replicated**: what does it do? what was the aim for it? how did it improve things (faster, more accurate, less human interaction)? 
 
 - **What’s the best AI workflow you’ve stolen from somebody else?** Nobody actually knows what we are doing but we all steal the cool stuff from each other. 
 
