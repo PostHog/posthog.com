@@ -27,6 +27,14 @@ Head to [**Settings → Integrations**](https://app.posthog.com/settings/project
 
 To talk to the bot in a channel, @-mention it – Slack will prompt you to invite it – or invite it explicitly with `/invite @PostHog`. The first time it sees a mention, it matches your Slack email to your PostHog account, so make sure you're signed in to the same org on both sides.
 
+<CalloutBox icon="IconInfo" title="Slack Connect channels require one-time approval" type="fyi">
+
+In externally-shared (Slack Connect) channels, the bot asks for one-time approval before answering. The first time someone mentions `@PostHog` in a shared channel, the bot posts an ephemeral prompt visible only to the mentioner. An org member clicks **Allow PostHog in this channel** to enable it – after that, mentions in the channel work normally without further prompts.
+
+This prevents the bot from accidentally surfacing data to external members of the channel.
+
+</CalloutBox>
+
 <CalloutBox icon="IconWarning" title="Reconnect if you installed before 2026-05-04" type="caution">
 
 The bot picked up new OAuth scopes on 2026-05-04 (`app_mentions:read`, `users:read`, `users:read.email`, `chat:write`, `channels:history`, `groups:history`, `reactions:write`). If your workspace was connected before that date, head back to **Add to Slack** and re-approve – otherwise the bot will fail with a missing-scope error on the next mention.
