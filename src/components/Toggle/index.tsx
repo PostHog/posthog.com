@@ -26,7 +26,7 @@ export default function Toggle({
     className?: string
 }) {
     return (
-        <span className={`ph-no-rageclick flex space-x-1.5 items-center justify-between ${className}`}>
+        <span className={`flex space-x-1.5 items-center justify-between ${className}`}>
             <Switch.Group>
                 {((position === 'right' && label) || iconLeft) && (
                     <span className="flex items-center">
