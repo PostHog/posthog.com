@@ -48,8 +48,8 @@ Currently, there are no active security advisories or CVEs. All is well.
 
 ## Past advisories
 
-<details>
-  <summary>June 2, 2026 / PSA-2026-00001</summary>
+<details id="PSA-2026-00001">
+  <summary>June 2, 2026 / PSA-2026-00001 <AdvisoryAnchor id="PSA-2026-00001" /></summary>
 
   <p><strong>Date:</strong> June 2, 2026<br />
   <strong>Advisory:</strong> PSA-2026-00001<br />
@@ -101,8 +101,8 @@ Currently, there are no active security advisories or CVEs. All is well.
 
 </details>
 
-<details>
-  <summary>August 15, 2025 / PSA-2025-00001</summary>
+<details id="PSA-2025-00001">
+  <summary>August 15, 2025 / PSA-2025-00001 <AdvisoryAnchor id="PSA-2025-00001" /></summary>
 
   <p><strong>Date:</strong> August 15, 2025<br />
   <strong>Advisory:</strong> PSA-2025-00001<br />
@@ -144,7 +144,12 @@ Currently, there are no active security advisories or CVEs. All is well.
 
 ### Advisory template
 
+Use the advisory code as the `<details>` `id` (and the matching `<AdvisoryAnchor>` `id`) so it can be linked directly. Linking to the anchor (e.g. `/handbook/company/security-advisories#PSA-2025-XXXXX`) auto-expands the advisory.
+
 ```
+<details id="PSA-2025-XXXXX">
+  <summary>August 15, 2025 / PSA-2025-XXXXX <AdvisoryAnchor id="PSA-2025-XXXXX" /></summary>
+
   <p><strong>Date:</strong> August 15, 2025<br />
   <strong>Advisory:</strong> PSA-2025-XXXXX<br />
   <strong>Severity:</strong> Low / Medium / Critical<br />
@@ -173,6 +178,8 @@ Currently, there are no active security advisories or CVEs. All is well.
     <li><strong>Fixed:</strong> January 10, 2024, 00:00 UTC</li>
     <li><strong>Disclosed:</strong> January 10, 2024, 00:00 UTC</li>
   </ul>
+
+</details>
 ```
 
 
