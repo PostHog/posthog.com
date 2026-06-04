@@ -14,15 +14,15 @@ If you serve compiled or minified code, PostHog requires source maps to generate
 
 If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces. 
 
-<CalloutBox icon="IconSparkles" title="Set this up automatically with the wizard" type="fyi">
+## AI wizard
 
-If you're using a JavaScript or TypeScript framework, the PostHog [AI wizard](/docs/ai-engineering/ai-wizard) can configure source map uploading for you. Run the wizard command with `upload-source-maps` appended in your project directory:
+If you're using a JavaScript or TypeScript framework, set up source map uploading automatically with our wizard by running this command in your project directory with your terminal (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
 
 <WizardCommand command="upload-source-maps" />
 
 Otherwise, choose your platform below for manual instructions.
 
-</CalloutBox>
+## Platforms
 
 <UploadSymbolSetsPlatforms />
 
