@@ -32,11 +32,11 @@ Configure posthog-js to automatically inject session headers into requests to yo
 ```javascript
 posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
-  __add_tracing_headers: ['api.your-app.com']  // Your backend hostname(s)
+  tracing_headers: ['api.your-app.com']  // Your backend hostname(s)
 })
 ```
 
-This automatically adds `X-POSTHOG-SESSION-ID` (and `X-POSTHOG-DISTINCT-ID`) headers to all `fetch` and `XMLHttpRequest` calls to the specified hostnames.
+Use hostnames only, without the protocol or path. This automatically adds `X-POSTHOG-SESSION-ID`, `X-POSTHOG-DISTINCT-ID`, and `X-POSTHOG-WINDOW-ID` headers to all `fetch` and `XMLHttpRequest` calls to the specified hostnames.
 
 On your backend, read the header and include it in your LLM tracking:
 
