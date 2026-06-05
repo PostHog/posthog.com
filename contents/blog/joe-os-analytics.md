@@ -45,7 +45,6 @@ When your knight finally dies, you choose their last words, and those words shap
 
 ![joke panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/06_joke_0b212d071d.png) ![moon panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/08_sky_2a93713f2a.png) ![vigil panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/08_sky_2a93713f2a.png)
 
-
 ## Modern coding is mostly copy-and-paste
 
 The whole thing was built in plain English, in conversation with Claude. I'd describe what I wanted — a new panel, a layout tweak, a bug to chase — and it would write the MicroPython, flash it to the device over USB, and read the logs back when something broke. For the bigger pieces, like expanding Vigil, I'd put it in plan mode first, so it thought through the structure before touching a single file. For everything small, I just said the thing and watched it land a few seconds later.
