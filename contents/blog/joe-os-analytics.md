@@ -33,6 +33,7 @@ The panels are deliberately a mix of useful and useless:
 - Three news readers that stream the latest RSS headlines from The Guardian, BBC News, and Rock, Paper, Shotgun.
 - Oblique Strategies — Brian Eno's deck of creative prompts, plus a few dozen I wrote myself to build it out more.
 - A rotating daily joke, a random fractal, and a Sky panel showing the current moon phase, sunrise, and sunset.
+
 <ImageSlider>
 
 ![joke panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/06_joke_0b212d071d.png) 
