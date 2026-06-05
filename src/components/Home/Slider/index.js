@@ -10,7 +10,7 @@ import {
     DataPipeline,
     DataWarehouse,
     WebAnalytics,
-    LLMAnalytics,
+    aiObservability,
 } from './Slides'
 import { useInView } from 'react-intersection-observer'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
@@ -126,7 +126,7 @@ const slides = [
     Surveys,
     DataPipeline,
     DataWarehouse,
-    LLMAnalytics,
+    aiObservability,
 ]
 
 const SlideContainer = ({ children, index, setActiveSlide }) => {

@@ -25,6 +25,14 @@ To link Vitally:
 
 Once the syncs are complete, you can start using Vitally data in PostHog.
 
+## Custom object records
+
+In addition to the standard schemas (accounts, conversations, notes, etc.), PostHog automatically discovers any [custom objects](https://docs.vitally.io/pushing-data-to-vitally/rest-api/custom-objects) in your Vitally workspace and creates a separate schema for each one. These schemas are named `Custom_Object_<machineName>` (e.g., `Custom_Object_featureRequest`) and sync the actual records, not just the definitions.
+
+To sync custom object records, refresh your source schemas. Each custom object appears as a toggleable schema. Once synced, the data lands in a table named `vitally_custom_object_<name>` (e.g., `vitally_custom_object_featurerequest`), which you can query directly in PostHog SQL. Incremental sync is supported via the `updatedAt` field.
+
+> **Note:** The existing `Custom_Objects` schema still syncs custom object definitions (metadata). The new `Custom_Object_<machineName>` schemas sync the underlying records for each object.
+
 ## Configuration
 
 <SourceParameters />

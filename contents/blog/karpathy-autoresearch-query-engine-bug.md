@@ -1,6 +1,6 @@
 ---
 date: 2026-06-01
-title: How autoresearch found a 3-year-old bug in our query engine
+title: Karpathy's Autoresearch found a 3-year-old bug in our query engine (and improved performance by 11%)
 rootPage: /blog
 sidebar: Blog
 showTitle: true
