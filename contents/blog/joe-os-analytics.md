@@ -81,7 +81,6 @@ The more interesting part happened next, through the [PostHog MCP](/docs/model-c
 
 The device now reports boots, which panels I actually visit and for how long, every honour-or-craven choice my knights make, which companions I recruit, where they die, and a temperature and CO2 reading every five minutes. One dashboard tracks device health — errors grouped by where they fired, CO2 plotted against the same thresholds the OS uses to colour its own display. Another dashboard tracks interactions in Vigil.
 
-None of it touched a SQL query or a chart builder. I described what I wanted to know, and the data was waiting for me when I looked.
 
 ## Shipping isn't maintaining
 
