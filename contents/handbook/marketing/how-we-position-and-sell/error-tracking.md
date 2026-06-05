@@ -56,8 +56,8 @@ Every PostHog exception is a product event with the user attached. Click an erro
 **Solution:** PostHog Error Tracking replaces standalone error trackers – same SDK coverage on the languages that matter, with the user, session, replay, and flag context already attached. No CDP middleware, no identity stitching.
 
 **Supporting features:**
-- Native SDKs for Node, Python, Go, Ruby, Rails, Elixir, NestJS; iOS, Android, React Native, Flutter; plus every major frontend framework
-- Source map upload via posthog-cli and @posthog/nextjs-config
+- Native SDKs for Node, Python, PHP, Go, Ruby, Rails, Elixir, NestJS; iOS, Android, React Native, Flutter; plus every major frontend framework
+- Source map upload via posthog-cli or bundlers plugin (support for nextjs, vite, rollup, webpack) and @posthog/nextjs-config
 - Contract buyout for Sentry, Bugsnag, or Rollbar on annual commit
 - Alerts route to Slack, Discord, Linear, Jira, or GitHub with the user context attached
 - Issue management with auto-assignment, suppression rules, and burst protection
