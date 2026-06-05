@@ -1,0 +1,205 @@
+---
+title: PostHog CLI
+sidebar: Docs
+showTitle: true
+---
+
+The PostHog CLI lets you use PostHog from your terminal, local scripts, CI/CD pipelines, and coding agents.
+
+You can use it for existing workflows like uploading source maps, querying data, and downloading schema definitions. You can also use `posthog-cli api` to give agents shell-friendly access to PostHog's [Model Context Protocol (MCP)](/docs/model-context-protocol) tool catalog.
+
+## Install the CLI
+
+Install `posthog-cli` globally:
+
+```bash
+npm install -g @posthog/cli
+```
+
+Or install the latest release with the installer script. This also installs `posthog-cli-update`, which updates the script-installed binary:
+
+```bash
+curl --proto '=https' --tlsv1.2 -LsSf https://github.com/PostHog/posthog/releases/latest/download/posthog-cli-installer.sh | sh
+posthog-cli-update
+```
+
+Check that the CLI is installed:
+
+```bash
+posthog-cli --version
+```
+
+## Authenticate
+
+For local use, log in through your browser:
+
+```bash
+posthog-cli login
+```
+
+This stores a personal API token locally and reuses it for CLI commands, including `posthog-cli api`.
+
+For CI/CD, headless environments, or agents running without a browser, set environment variables instead:
+
+| Environment variable | Description |
+| --- | --- |
+| `POSTHOG_CLI_HOST` | PostHog host to connect to. Defaults to `https://us.posthog.com`. Use `https://eu.posthog.com` for EU Cloud. |
+| `POSTHOG_CLI_PROJECT_ID` | Your PostHog project ID. This is the number in your project URL, such as `12345` in `https://us.posthog.com/project/12345`. |
+| `POSTHOG_CLI_API_KEY` | A personal API key with the scopes required for the commands you run. |
+
+`posthog-cli api` also accepts `POSTHOG_HOST`, `POSTHOG_PROJECT_ID`, and `POSTHOG_API_KEY` if you already use those names in your environment.
+
+For broad agent workflows, create a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) with the **MCP Server** preset. For narrower automation, grant only the scopes needed for the specific command.
+
+## Use existing CLI commands
+
+Existing CLI commands continue to work as before. For example:
+
+```bash
+posthog-cli sourcemap inject --directory ./dist
+posthog-cli sourcemap upload --directory ./dist
+posthog-cli exp schema pull
+posthog-cli exp schema status
+```
+
+See [source map uploads](/docs/error-tracking/upload-source-maps/cli) and [schema management](/docs/product-analytics/schema-management#downloading-your-schema-with-the-cli) for product-specific examples.
+
+## Use PostHog from coding agents
+
+`posthog-cli api` exposes PostHog's MCP tools through a single shell command. This is useful for agents because they can discover the available tool surface progressively instead of loading every tool and schema into context upfront.
+
+The workflow is:
+
+1. Search for the right tool.
+2. Inspect the tool before calling it.
+3. Drill into nested schemas only when needed.
+4. Call the tool with JSON input.
+
+For example:
+
+```bash
+posthog-cli api search feature-flag
+posthog-cli api info feature-flag-get-all
+posthog-cli api schema query-trends series
+posthog-cli api call --json feature-flag-get-all '{"limit":5}'
+```
+
+Use `--dry-run` before mutations:
+
+```bash
+posthog-cli api call --dry-run feature-flags-bulk-delete-create '{"ids":[123]}'
+```
+
+Destructive tools require `--confirm`:
+
+```bash
+posthog-cli api call --confirm --json feature-flags-bulk-delete-create '{"ids":[123]}'
+```
+
+Because the command prints plain text or JSON, agents can pipe output to tools like `jq`, save intermediate results, and chain commands without spending tokens on unrelated schemas.
+
+## Set up agent instructions and skills
+
+If you're using the CLI for agent workflows, run these setup commands from the root of each repo where your agent will work. These steps are important because agents don't automatically know that `posthog-cli api` exists or how PostHog expects them to use it.
+
+Add the managed `AGENTS.md` snippet and install the relevant PostHog agent skills:
+
+```bash
+posthog-cli api agents-md install
+posthog-cli api skill list
+posthog-cli api skill install <skill-id>
+```
+
+The `AGENTS.md` snippet tells agents to use `posthog-cli api` for PostHog tasks and follow the search, inspect, schema, and call workflow. Skills add task-specific instructions for common PostHog workflows.
+
+To write to a non-default agent instructions file, pass `--path`:
+
+```bash
+posthog-cli api agents-md install --path ./AGENTS.md
+```
+
+To see all skills as JSON, pass `--json`:
+
+```bash
+posthog-cli api skill list --json
+```
+
+To replace an already installed skill, use `--force`:
+
+```bash
+posthog-cli api skill install --force <skill-id>
+```
+
+## Run from a local PostHog checkout
+
+If you're testing unreleased CLI changes from a local `PostHog/posthog` repository checkout, build the API CLI bundle first:
+
+```bash
+pnpm install
+pnpm --filter=@posthog/mcp build:cli
+```
+
+Then run the CLI through Cargo from the same checkout:
+
+```bash
+cargo run -- api search feature-flag
+cargo run -- api info feature-flag-get-all
+```
+
+If you're using an installed `posthog-cli` binary with a locally built API CLI bundle, point the binary at the bundle:
+
+```bash
+export POSTHOG_API_CLI_PATH=/path/to/posthog/services/mcp/dist/posthog-api-cli.mjs
+posthog-cli api search feature-flag
+```
+
+If the bundle can't be found, the CLI tells you to run `pnpm --filter=@posthog/mcp build:cli` or set `POSTHOG_API_CLI_PATH`.
+
+## Command reference
+
+```bash
+posthog-cli api tools
+posthog-cli api search <regex>
+posthog-cli api info [--json] <tool>
+posthog-cli api schema <tool> [field.path]
+posthog-cli api call [--json] [--dry-run] [--confirm] <tool> '<json>'
+posthog-cli api skill list [--json]
+posthog-cli api skill install [--force] <skill-id>
+posthog-cli api agents-md install [--path AGENTS.md]
+```
+
+For EU Cloud, either set `POSTHOG_CLI_HOST=https://eu.posthog.com` or pass `--host`:
+
+```bash
+posthog-cli --host https://eu.posthog.com api search feature-flag
+```
+
+## Troubleshooting
+
+### Missing API key
+
+If you see a missing API key error, run `posthog-cli login` or set `POSTHOG_CLI_API_KEY` and `POSTHOG_CLI_PROJECT_ID`.
+
+### Tool not found
+
+Use `search` before calling a tool:
+
+```bash
+posthog-cli api search dashboard
+```
+
+Tool names can change as the PostHog API evolves. Search finds matching names, titles, and descriptions.
+
+### Schema errors
+
+Run `info` before every `call`:
+
+```bash
+posthog-cli api info query-trends
+```
+
+If the schema output includes a nested field you need to populate, inspect that field with `schema`:
+
+```bash
+posthog-cli api schema query-trends series
+```
