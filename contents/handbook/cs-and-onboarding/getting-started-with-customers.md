@@ -71,6 +71,7 @@ Pull from Vitally and Metabase to find something specific to mention:
 - High user count or low engagement — offer a training session.
 - Legacy pricing plan: "We moved off legacy plans over a year ago. I'd like to transition you to standard pricing — happy to walk through the changes."
 - New feature for their use case - Highlight a new PR or functionality for an app you know they use.
+- Examples of how you've helped similar teams can also land well - just make sure it's specific and relevant to their situation. Generic case study drops do the opposite of what you want.
 
 If you're inheriting an existing Slack channel, do the intro in Slack.
 
