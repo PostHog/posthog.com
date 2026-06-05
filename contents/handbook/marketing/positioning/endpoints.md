@@ -24,7 +24,7 @@ Tinybird and custom-built analytics APIs solve the same surface problem. They do
 
 ## Who this is for
 
-* Existing customers already using two or more of these — SQL/Logs, Dashboards, Surveys, Product Analytics
+* Existing customers already using two or more of these — Product Analytics, SQL/Logs, Dashboards, Surveys 
 * If you've heard a customer say any of the following, you should pitch them Endpoints:
    * "We're exporting CSVs and pasting numbers into a slide every Monday."
    * “We want to show our customers their own usage data inside our product."
