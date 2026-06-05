@@ -14,7 +14,7 @@ crosspost:
 seo:
   metaTitle: 'What is distributed tracing? A guide for engineers'
   metaDescription: >-
-    Distributed tracing follows a single request as it travels across the services, databases, and APIs in your system. Here's how traces and spans work, what tracing shows you that logs and metrics can't, and how to set it up.
+    Here's how traces and spans work, what tracing shows you that logs and metrics can't, and how to set it up.
 ---
 
 Modern apps rarely live in one process. A single user action fans out across a web server, a handful of internal services, a queue or two, a database, and a few third-party APIs. When that request is slow or fails, the hard part isn't fixing the bug, it's finding *which* of those hops caused it.
