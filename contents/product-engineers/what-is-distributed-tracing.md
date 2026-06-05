@@ -2,7 +2,7 @@
 title: 'What is distributed tracing? (A guide for engineers)'
 date: 2026-06-05
 author:
-  - ian-vanagas
+  - Daniel Visca
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/happy-hog.png
 featuredImageType: full
