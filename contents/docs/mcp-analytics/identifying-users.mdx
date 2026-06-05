@@ -27,8 +27,7 @@ Events for sessions with **no** resolved identity are sent with `$process_person
 ```ts
 import { instrument } from "@posthog/mcp"
 
-instrument(server, {
-  posthog,
+instrument(server, posthog, {
   identify: async (request, extra) => {
     const token = extra?.requestInfo?.headers?.authorization
     if (!token) return null

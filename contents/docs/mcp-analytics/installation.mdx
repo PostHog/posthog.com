@@ -24,11 +24,11 @@ npm install @posthog/mcp posthog-node
 # or yarn add @posthog/mcp posthog-node
 ```
 
-You bring your own [`posthog-node`](/docs/libraries/node) client (the same pattern as [`@posthog/ai`](/docs/ai-engineering)) and pass it to `instrument()`. You own its lifecycle — call `posthog.shutdown()` or `posthog.flush()` yourself. If you don't pass a `posthog` client, the SDK installs the wrapper but captures nothing — that's how you turn capture off.
+You bring your own [`posthog-node`](/docs/libraries/node) client (the same pattern as [`@posthog/ai`](/docs/ai-engineering)) and pass it to `instrument()` as the required second argument. You own its lifecycle — call `posthog.shutdown()` or `posthog.flush()` yourself.
 
 ## Wrap your server
 
-`instrument(server, options)` is the only function you need to call. It's idempotent per server — calling it twice on the same server logs a warning and returns early.
+`instrument(server, posthog, options?)` is the only function you need to call. The `posthog` client is a required positional argument; `options` is optional. It returns an analytics handle (used for [custom events](/docs/mcp-analytics/custom-events)). It's idempotent per server — calling it twice on the same server logs a warning and returns early.
 
 ### Low-level `Server`
 
@@ -47,7 +47,7 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
 
 // register your tools as usual...
 
-instrument(server, { posthog })
+const analytics = instrument(server, posthog)
 ```
 
 ### High-level `McpServer`
@@ -65,7 +65,7 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
   host: "https://us.i.posthog.com",
 })
 
-instrument(server, { posthog })
+const analytics = instrument(server, posthog)
 
 server.tool("search_events", { /* ... */ }, async (args) => {
   // your handler runs untouched
@@ -74,11 +74,10 @@ server.tool("search_events", { /* ... */ }, async (args) => {
 
 ## Configuration
 
-`instrument()` accepts these options. Pass a `posthog` client to actually send events; without one the wrapper installs but captures nothing.
+The `posthog` client is passed as the required second positional argument — not in this options object. `instrument()` accepts these options as an optional third argument:
 
 | Option | Type | Default | What it does |
 |---|---|---|---|
-| `posthog` | `PostHog` (from `posthog-node`) | — | Your own `posthog-node` client. The SDK sends events through it but does not own its lifecycle — you call `posthog.flush()` / `posthog.shutdown()`. Omit it to disable capture. |
 | `logger` | `(message: string) => void` | no-op | STDIO-safe log sink for SDK-internal warnings. MCP STDIO transports cannot use `console.*`, so the default discards. Wire your own to surface warnings during development. |
 | `enableExceptionAutocapture` | `boolean` | `true` | When `false`, a failed tool call does not emit the `$exception` sibling event. |
 | `context` | `boolean \| { description: string }` | `true` | Inject a required `context` argument into every tool schema. See [Capturing agent intent](/docs/mcp-analytics/intent). |
@@ -98,7 +97,7 @@ import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
 
 const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY)
-instrument(server, { posthog })
+instrument(server, posthog)
 
 process.on("SIGTERM", async () => {
   await posthog.shutdown()

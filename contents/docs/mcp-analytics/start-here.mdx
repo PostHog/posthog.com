@@ -32,7 +32,7 @@ MCP analytics gives you visibility into how AI agents actually use the MCP serve
 - 🧵 The full session, end to end
 - 🚧 Capabilities the agent wished existed (with `reportMissing`)
 
-The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. Install it from npm and call `instrument()` once at startup:
+The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. Install it from npm and call `instrument()` once at startup. You pass your `posthog-node` client as the required second argument:
 
 ```bash
 npm install @posthog/mcp posthog-node
@@ -49,7 +49,7 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
   host: "https://us.i.posthog.com",
 })
 
-instrument(server, { posthog })
+instrument(server, posthog)
 ```
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
@@ -85,8 +85,7 @@ See every event the SDK emits
 The single most useful signal in MCP analytics is **intent**: the user goal that led the agent to call this tool. The SDK injects a required `context` argument into every tool's schema and captures it as `$mcp_intent`. Your tool implementation never sees it.
 
 ```ts
-instrument(server, {
-  posthog,
+instrument(server, posthog, {
   context: {
     description: "Describe the user's underlying goal in one sentence — not the tool you're calling.",
   },
@@ -96,8 +95,7 @@ instrument(server, {
 For agents that ignore the schema hint (raw cURL clients, schema-blind crawlers), supply an `intentFallback`. The SDK calls it whenever no `context` argument was passed:
 
 ```ts
-instrument(server, {
-  posthog,
+instrument(server, posthog, {
   intentFallback: (request) => {
     const tool = request.params?.name
     return tool ? `Invoking ${tool}` : null
@@ -148,8 +146,7 @@ Copy-paste queries
 By default each event is attributed to the MCP connection's session id. To attribute calls to a real user — for per-user retention, group analytics, and person properties — wire an `identify` callback:
 
 ```ts
-instrument(server, {
-  posthog,
+instrument(server, posthog, {
   identify: async (request, extra) => {
     const token = extra?.requestInfo?.headers?.authorization
     const user = token ? await resolveUserFromToken(token) : null
@@ -175,8 +172,7 @@ Identify users
 The most actionable signal for an MCP server owner is *the agent wanted to do something I don't support*. Enable `reportMissing: true` and the SDK registers a `get_more_tools` virtual tool. When the agent invokes it, you get a queryable feed of unmet asks — straight into your roadmap.
 
 ```ts
-instrument(server, {
-  posthog,
+instrument(server, posthog, {
   reportMissing: true,
 })
 ```
@@ -208,8 +204,7 @@ Track missing capabilities
 The SDK runs every event through automatic sanitization (image/audio/binary stubs, sensitive-key masking like `authorization`, `cookie`, `password`, PostHog key patterns) and truncation to fit ingestion limits. For full control, add a `beforeSend` hook that runs on each built PostHog payload right before it's sent — mutate and return the event to send it, or return a nullish value to drop it.
 
 ```ts
-instrument(server, {
-  posthog,
+instrument(server, posthog, {
   beforeSend: (event) => {
     if (event.event === "$exception") return null // drop exceptions
     return event

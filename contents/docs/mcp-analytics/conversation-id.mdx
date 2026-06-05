@@ -17,8 +17,7 @@ Conversation IDs are off by default and rely on the agent cooperating. Read the 
 ## Enabling
 
 ```ts
-instrument(server, {
-  posthog,
+instrument(server, posthog, {
   enableConversationId: true,
 })
 ```

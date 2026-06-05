@@ -53,8 +53,7 @@ If a payload would exceed the budget, the SDK truncates rather than drops. The t
 - A thrown error also drops that event.
 
 ```ts
-instrument(server, {
-  posthog,
+instrument(server, posthog, {
   beforeSend: (event) => {
     if (event.event === "$exception") return null // drop
     return event
@@ -69,8 +68,7 @@ Because it runs after sanitization and truncation, anything you mutate here is t
 By default the SDK emits an `$exception` sibling event whenever a tool call fails (throws or returns `isError: true`). Set `enableExceptionAutocapture: false` to suppress that sibling — the `$mcp_tool_call` still records `$mcp_is_error`, but no `$exception` event is sent.
 
 ```ts
-instrument(server, {
-  posthog,
+instrument(server, posthog, {
   enableExceptionAutocapture: false,
 })
 ```
@@ -81,7 +79,7 @@ Events for sessions with no resolved identity are sent with `$process_person_pro
 
 ## Disabling capture entirely
 
-To turn capture off without removing the wrapper, don't pass a `posthog` client to `instrument()` — the SDK installs but sends nothing. If you only want session/timing metadata and *no* payload, drop or strip the payload fields in `beforeSend`:
+To turn capture off without removing the wrapper, return a nullish value from `beforeSend` to drop every event. If you only want session/timing metadata and *no* payload, drop or strip the payload fields in `beforeSend` instead:
 
 ```ts
 beforeSend: (event) => {
@@ -106,8 +104,7 @@ The in-memory queue is owned by the `posthog-node` client you pass in. If it ove
 MCP servers commonly speak over stdio, where any write to `console.*` corrupts the protocol stream. The SDK defaults its `logger` to a no-op for that reason — wire your own in development so warnings (swallowed `identify` errors, dropped batches) become visible:
 
 ```ts
-instrument(server, {
-  posthog,
+instrument(server, posthog, {
   logger: (message) => fs.appendFileSync("/tmp/mcp.log", message + "\n"),
 })
 ```

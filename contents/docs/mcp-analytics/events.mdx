@@ -17,7 +17,7 @@ This page is the wire-level contract for the `@posthog/mcp` SDK. Every event the
 | `$mcp_resource_read` | Every `resources/read` request | `$mcp_resource_name`, `$mcp_parameters`, `$mcp_response` |
 | `$mcp_prompts_list` | Every `prompts/list` request | — |
 | `$mcp_prompt_get` | Every `prompts/get` request | `$mcp_resource_name` (the prompt name) |
-| _(your event name)_ | A call to `capture(server, { event, properties })` | Sent under the verbatim `event` name you pass (a customer event, not `$`-prefixed), with your `properties` merged in. See [Custom events](/docs/mcp-analytics/custom-events). |
+| _(your event name)_ | A call to `analytics.capture({ event, properties })` | Sent under the verbatim `event` name you pass (a customer event, not `$`-prefixed), with your `properties` merged in. See [Custom events](/docs/mcp-analytics/custom-events). |
 | `$mcp_missing_capability` | The `get_more_tools` virtual tool is invoked (`reportMissing: true`) | The agent's reasoning is captured as `$mcp_intent`. See [Tracking missing capabilities](/docs/mcp-analytics/missing-capability). |
 | `$identify` | `identify()` returns a new identity for a session | `$set` populated from the identity's `properties` |
 | `$exception` | Sibling event whenever a tool errors (unless `enableExceptionAutocapture: false`) | `$exception_list`, `$exception_level`, plus the same `$mcp_*` context as the main event |
