@@ -77,6 +77,8 @@ Claude wrote a small capture client that batches events in memory and ships them
 
 The more interesting part happened next, through the [PostHog MCP](/docs/model-context-protocol). With it, I never had to open the PostHog UI. I just asked, and Claude found my new project, confirmed events were arriving, built two pinned dashboards, and filled them with fifteen [insights](/docs/product-analytics/insights) – all from plain English.
 
+AI collapsed the gap between having an idea and shipping it. The MCP collapsed the gap between shipping it and understanding it — which, for someone like me, is the harder of the two.
+
 ![Vigil dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/vigil_dashboard_1e866cdf61.png)
 
 The device now reports boots, which panels I actually visit and for how long, every honour-or-craven choice my knights make, which companions I recruit, where they die, and a temperature and CO2 reading every five minutes. One dashboard tracks device health — errors grouped by where they fired, CO2 plotted against the same thresholds the OS uses to colour its own display. Another dashboard tracks interactions in Vigil.
