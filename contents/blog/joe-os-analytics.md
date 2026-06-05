@@ -1,6 +1,6 @@
 ---
 date: 2026-06-05
-title: I don't understand the OS I built — so I gave it analytics
+title: I didn't understand the OS I built with AI until the MCP gave it analytics
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - joe-martin
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/this_is_fine_6336efb0ae.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_analytics_fe722d85af.jpg
 featuredImageType: full
 category: Inside PostHog
 tags:
@@ -16,20 +16,17 @@ tags:
   - Guides
 ---
 
-For my birthday I was given a [Pimoroni Presto](https://shop.pimoroni.com/products/presto) — a little developer gadget with a 240×240 touchscreen and not much else. I also got an environment sensor which can track CO2, temperature, and humidity. I wanted to build something for it.
+For my birthday this year I got a [Pimoroni Presto](https://shop.pimoroni.com/products/presto) — a little developer gadget with a 240×240 touchscreen and not much else. I also got an environment sensor which can track CO2, temperature, and humidity. I wanted to build something for it.
 
-The thing is, I'm a marketer, not an engineer. Until I joined PostHog [I couldn't code at all](/blog/a-non-coders-thoughts-on-everybody-codes-culture). I've made effort to learn and slowly got myself to the point where [I could ship product features](https://www.linkedin.com/feed/update/urn:li:activity:7311329717784096770/), but it wasn't until [DeskHog](/deskhog) came along that I saw how AI could supercharge my progress.
+The thing is, I'm not an engineer. I'm a marketer. Until I joined PostHog [I couldn't code at all](/blog/a-non-coders-thoughts-on-everybody-codes-culture). I've made effort to learn and slowly got myself to the point where [I could ship product features](https://www.linkedin.com/feed/update/urn:li:activity:7311329717784096770/), but it wasn't until [DeskHog](/deskhog) came along that I saw how AI could supercharge my progress.
 
 My goal was a desk dashboard that worked at any level of attention. Something I could glance at between meetings and read idly, but that also had deeper things to poke at while I waited for someone to join a call or had lunch.
 
 ## What I built
 
-I call it Joe-OS, because naming things is the one part of software I'm actually qualified for.
+I call it Joe-OS, because naming things is the one part of this I'm actually qualified for.
 
 The Presto runs MicroPython. The top two-thirds of the screen is a carousel of panels; the bottom third permanently shows temperature and CO2 from the sensor, with little sparklines of the last half hour. You move between panels by tapping the corners of the screen.
-
-<!-- 📷 DUMMY IMAGE — replace with a real photo of the Presto running Joe-OS on your desk -->
-![Joe-OS running on the Pimoroni Presto, sitting on a desk](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/joe-os/REPLACE-ME-joe-os-on-desk.jpg)
 
 The panels are deliberately a mix of useful and useless:
 
@@ -40,23 +37,22 @@ The panels are deliberately a mix of useful and useless:
 
 Vigil is the most ambitious part of Joe-OS.
 
-It's a tiny medieval roguelike text adventure about a knight keeping watch over a dying realm. Every turn something happens — a ghoul rises, a house burns, a bandit approaches — and you respond by choosing either an Honorable or a Craven choice. Sometimes you get a third option that opens based on your inventory or companions, each of which has their own simple personality.
+It's a tiny medieval roguelike text adventure about a knight keeping watch over a dying realm. Every turn something happens — a ghoul rises, a house burns, a bandit approaches — and you respond by choosing an Honorable or a Craven option. Sometimes you get a third choice based on your inventory or companions, each of which has their own simple personality.
 
-It runs across five acts and 400-odd hand-written events, with a two-and-a-half minute cooldown between choices during which the world breathes by giving you a slow trickle of flavour events.
+It runs across five acts and 400+ hand-written events, with a two-and-a-half minute cooldown between choices during which the world breathes by giving you a slow trickle of flavour events.
 
-When your knight finally dies, you choose their last words, and those words shape the knight who takes up the watch next. It is, deliberately, not a game you rush. It's something you keep half an eye on while you wait for a meeting to start and games are intended to last weeks.
+When your knight finally dies, you choose their last words, and those words shape the knight who takes up the watch next. It is not a game you rush. It's something you keep half an eye on while you wait for a meeting to start and games are intended to last weeks.
 
-## How I built it
+![joke panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/06_joke_0b212d071d.png) ![moon panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/08_sky_2a93713f2a.png) ![vigil panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/08_sky_2a93713f2a.png)
 
-The whole thing was built in plain English, in conversation with Claude. I'd describe what I wanted — a new panel, a layout tweak, a bug to chase — and it would write the MicroPython, flash it to the device over USB, and read the logs back when something broke. For the bigger pieces, like expanding Vigil, I'd put it in plan mode first, so it thought through the structure before touching a single file. For everything small, I just said the thing and watched it land a few seconds later.
-
-My prompts were not precise. A few were proper specs — _"double the number of events in Vigil and slow it to one choice every two and a half minutes."_ Most were vibes — _"make the moon panel a bit nicer and more in keeping with the aesthetic."_ Some were just _"the clock is five minutes slow,"_ with a photo of the screen attached. The rhythm never changed: ask, flash, see what it actually did, report back. A weekend of that, and I had an OS.
 
 ## Modern coding is mostly copy-and-paste
 
-AI helped me ship this thing, but I didn't always understand the thing I shipped. It broke constantly during the 48 hours it took to build. Sometimes the clock ran five minutes slow. Sometimes the whole device hung on boot and I had no idea why. A news feed once tried to allocate 450KB on a chip that didn't have it and simply gave up.
+The whole thing was built in plain English, in conversation with Claude. I'd describe what I wanted — a new panel, a layout tweak, a bug to chase — and it would write the MicroPython, flash it to the device over USB, and read the logs back when something broke. For the bigger pieces, like expanding Vigil, I'd put it in plan mode first, so it thought through the structure before touching a single file. For everything small, I just said the thing and watched it land a few seconds later.
 
-When that happens, the AI is only as good as what you can tell it. "_It's broken_" isn't as powerful as "_It hangs at the weather fetch, here's the boot log, and the clock is five minutes slow_" gets fixed in a single round.
+Initially my prompts were not precise. Most were vibes — _"make the moon panel a bit nicer and more in keeping with the aesthetic."_ Some were just _"the clock is five minutes slow,"_ with a photo of the screen attached. The rhythm never changed: ask, flash, see what it actually did, report back.
+
+This was a necessary pattern because, while AI helped me ship this thing, I didn't always understand the thing I shipped and the AI is only as good as what you can tell it. "_It's broken_" isn't as powerful as "_It hangs at the weather fetch, here's the boot log for you to debug_"..
 
 The bottleneck in non-technical building isn't building anymore — it's _diagnosis_. And diagnosis is just data you haven't collected yet.
 
@@ -72,8 +68,7 @@ Claude wrote a small capture client that batches events in memory and ships them
 
 The more interesting part happened next, through the [PostHog MCP](/docs/model-context-protocol) — a connector that lets Claude talk to my PostHog project directly. I never opened the PostHog UI. I just asked, and Claude found my new project, confirmed events were arriving, built two pinned dashboards, and filled them with fifteen [insights](/docs/product-analytics/insights) — all from plain English.
 
-<!-- 📷 DUMMY IMAGE — replace with a screenshot of one of the Joe-OS dashboards in PostHog -->
-![One of the auto-built Joe-OS dashboards in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/joe-os/REPLACE-ME-posthog-dashboard.png)
+![Vigil dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/vigil_dashboard_1e866cdf61.png)
 
 The device now reports boots, which panels I actually visit and for how long, every honour-or-craven choice my knights make, which companions I recruit, where they die, and a temperature and CO2 reading every five minutes. One dashboard tracks device health — errors grouped by where they fired, CO2 plotted against the same thresholds the OS uses to colour its own display. Another dashboard tracks interactions in Vigil.
 
