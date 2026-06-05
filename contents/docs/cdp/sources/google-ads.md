@@ -15,6 +15,7 @@ You can sync data from Google Ads reports by configuring it as a source in PostH
 > **Note:** The GeographicStats table is disabled by default because it can load hundreds of millions of rows for active campaigns. You can enable it manually during source configuration if you need geographic performance data.
 
 ## Requirements
+
 - The [Google Ads customer ID](https://support.google.com/google-ads/answer/1704344) of the account you are trying to sync to PostHog.
 - Administrator access to the Google Ads account you want to sync. If you use manager accounts then this is often enough to connect. An manager account is an Ads account type that enables you to manage several Ads accounts under a single login – [see here for more on Google Ads manager accounts](https://support.google.com/google-ads/answer/6139186).
 - During the authentication, make sure you check the necessary scopes.
@@ -35,7 +36,6 @@ You can sync data from Google Ads reports by configuring it as a source in PostH
 
 Connect PostHog to your Google Ads account using a Google account. The Google account must have administrator access to your Google Ads account.
 
-
 1. In PostHog, go to the **[Data pipelines](https://app.posthog.com/data-management/sources)** tab.
 2. Open the **+ New** drop-down menu in the top-right and select **Source**.
 3. Find Google Ads in the sources list and click **Link**.
@@ -46,3 +46,26 @@ Connect PostHog to your Google Ads account using a Google account. The Google ac
 ## Configuration
 
 <SourceParameters />
+
+## Manager (MCC) accounts
+
+If you use a [Google Ads manager account](https://support.google.com/google-ads/answer/6139186) (also called an MCC account) to manage multiple client accounts, you need to configure the source differently. Google Ads doesn't return metrics for manager accounts directly – you must query each client account individually.
+
+To sync data from a client account through a manager account:
+
+1. Enter the **client account's customer ID** (not the manager account ID) in the **Customer ID** field.
+2. Enable the **Using MCC account?** toggle.
+3. Enter the **manager account's customer ID** in the **Managers customer ID** field that appears.
+
+> **Note:** If you enter a manager account ID as the customer ID without enabling the MCC toggle, syncs will fail with the error: "Metrics cannot be requested for a manager account." See [troubleshooting](#troubleshooting) below.
+
+## Troubleshooting
+
+### "Metrics cannot be requested for a manager account"
+
+This error occurs when the source is configured with a manager (MCC) account ID instead of a client account ID. Google Ads doesn't allow querying metrics on manager accounts directly.
+
+To fix this, either:
+
+- Change the **Customer ID** to a client account ID instead of the manager account ID.
+- Or enable the **Using MCC account?** toggle and provide both the manager and client customer IDs (see [Manager (MCC) accounts](#manager-mcc-accounts) above).

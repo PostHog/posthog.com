@@ -111,7 +111,7 @@ import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_trac
 import { experimentsFeatures } from '../../hooks/featureDefinitions/experiments'
 import { featureFlagsFeatures } from '../../hooks/featureDefinitions/feature_flags'
 import { heatmapsFeatures } from '../../hooks/featureDefinitions/heatmaps'
-import { llmAnalyticsFeatures } from '../../hooks/featureDefinitions/llm_analytics'
+import { aiObservabilityFeatures } from '../../hooks/featureDefinitions/ai_observability'
 import { platformFeatures } from '../../hooks/featureDefinitions/platform'
 import { productAnalyticsFeatures } from '../../hooks/featureDefinitions/product_analytics'
 import { productDescriptions } from '../../hooks/featureDefinitions/products'
@@ -167,7 +167,7 @@ export default function ProductComparisonTable({
         experiments: experimentsFeatures,
         feature_flags: featureFlagsFeatures,
         heatmaps: heatmapsFeatures,
-        llm_analytics: llmAnalyticsFeatures,
+        ai_observability: aiObservabilityFeatures,
         platform: platformFeatures,
         product_analytics: productAnalyticsFeatures,
         product_tours: productToursFeatures,

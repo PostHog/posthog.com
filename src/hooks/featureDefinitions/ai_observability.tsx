@@ -1,8 +1,8 @@
-export const llmAnalyticsFeatures = {
+export const aiObservabilityFeatures = {
     summary: {
         name: 'AI Observability',
         description: 'Monitor and debug your LLM-powered features',
-        url: '/llm-analytics',
+        url: '/ai-observability',
         docsUrl: '/docs/ai-observability',
     },
     features: {

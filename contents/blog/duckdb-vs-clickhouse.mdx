@@ -24,9 +24,9 @@ ClickHouse and DuckDB are two heavyweights in the OLAP category. This makes them
 
 In fact, at PostHog, we use both ClickHouse and DuckDB. Today, we want to dissect their precise differences and discuss why an organization like us has appetite for double (OLAP) trouble.
 
-Previously, I'd likened the debate between ClickHouse and Postgres to that [of grapefruits and grapes](/blog/clickhouse-vs-postgres). While the difference between ClickHouse and DuckDB isn't as drastic, it's similar to comparing onions and spring onions: they share a lot in common, but are used for fundamentally different things.
+Previously, I'd likened the debate between ClickHouse and [Postgres](/blog/duckdb-vs-postgres) to that [of grapefruits and grapes](/blog/clickhouse-vs-postgres). While the difference between ClickHouse and DuckDB isn't as drastic, it's similar to comparing onions and spring onions: they share a lot in common, but are used for fundamentally different things.
 
-To provide a high-level "say less" tl;dr (or whatever kids say these days): ClickHouse is a feature-packed, highly-configurable database for fast analytical queries on massive data scaled across multiple instances. DuckDB, meanwhile, is an embeddable, single-node engine that shines in two modes: as a query engine for fast exploratory analytics directly over files (CSVs, Parquet, etc.) or as the "SQLite of OLAP", a lightweight analytical database for datasets that can fit on a single machine.
+To provide a high-level "say less" tl;dr (or whatever kids say these days): ClickHouse is a feature-packed, highly-configurable database for fast analytical queries on massive data scaled across multiple instances. DuckDB, meanwhile, is an embeddable, single-node engine that shines in two modes: as a query engine for fast exploratory analytics directly over files (CSVs, Parquet, etc.) or as the "[SQLite of OLAP](/blog/duckdb-vs-sqlite)", a lightweight analytical database for datasets that can fit on a single machine.
 
 ## DuckDB has two modes
 

@@ -52,7 +52,9 @@ Reply in the thread to send a follow-up to the running agent. Anything you say w
 
 Once the agent finishes, you can reply to it by sending a new message in the thread with `@PostHog` to continue the existing conversation.
 
-Only the person that started a task can drive it. If other people add to a thread (a comment, a file, a link), the agent treats it as context to consider, not a prompt to follow. If you want to take over, start a new thread and paste the existing messages in as context.
+Anyone in the thread can send follow-ups. Each message is forwarded to the running agent as a new turn in the same conversation, so teammates can steer the run together, drop in extra context, or answer a question the agent asked.
+
+Heads up: the resulting PR is still authored under whoever started the task – their personal GitHub integration is the one wired up – so a teammate's follow-up edits land under the original requester's name. If you want the PR credited to you, start your own task.
 
 ## Emoji cues
 

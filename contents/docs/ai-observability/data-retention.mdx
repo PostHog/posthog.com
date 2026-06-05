@@ -24,8 +24,8 @@ PostHog deletes the `ai_events` copy after 30 days. The trimmed copy in the `eve
 
 ## What this means for you
 
-- To read the large properties, query the `ai_events` table – even for traces less than 30 days old. The `events` table never contains them.
-- After 30 days, the events are removed from the `ai_events` table, so a trace older than 30 days still appears, but its generations show no input or output content.
+- To read the large properties, query the `posthog.ai_events` table in the [SQL editor](https://app.posthog.com/sql) – even for traces less than 30 days old. The `events` table never contains them.
+- After 30 days, the events are removed from the `posthog.ai_events` table, so a trace older than 30 days still appears, but its generations show no input or output content.
 - Metadata such as model, provider, token counts, cost, latency, and trace IDs stays available, so analysis of historical cost, usage, and performance is unaffected.
 - Insights, queries, and filters that don't reference the large properties keep working on data of any age.
 
