@@ -371,27 +371,38 @@ Some things should never appear in your logs:
 
 ### Automatic PII scrubbing
 
-Even with good practices, sensitive data can slip into logs accidentally. PostHog can automatically redact common PII patterns from your log payloads at ingestion time, before anything is stored.
+Even with good practices, sensitive data can slip into logs accidentally. PostHog can automatically redact a small set of common patterns from your log payloads at ingestion time, before anything is stored.
 
-To enable it, go to [**Settings** > **Logs** > **PII scrubbing**](https://app.posthog.com/settings/environment-logs#logs-pii-scrub) and turn on the toggle.
+<CalloutBox icon="IconInfo" title="Automatic PII scrubbing is in closed beta" type="warning">
 
-When enabled, the following patterns are detected and replaced with `{{REDACTED}}`:
-
-- **Bearer tokens** – `Bearer <token>` headers
-- **Stripe secret keys** – keys matching `sk_live_*` or `sk_test_*`
-- **Email addresses**
-- **Credit card numbers** – 13–19 digit runs that pass Luhn validation (with optional spaces or hyphens)
-- **Sensitive attribute keys** – the entire value is redacted when the attribute key contains substrings like `password`, `secret`, `token`, `authorization`, `cookie`, `credential`, `apikey`, `api_key`, `access_token`, `refresh_token`, `bearer`, or `email`
-
-For JSON log bodies, the scrubber recursively walks the structure and applies both key-based and pattern-based redaction.
-
-<CalloutBox icon="IconWarning" title="PII scrubbing is lossy" type="caution">
-
-Redaction replaces matched values with a fixed placeholder. Original values can't be recovered. This is not reversible hashing – once scrubbed, the data is gone.
+Automatic PII scrubbing is currently available to internal PostHog teams only while we measure its ingestion overhead. If you'd like early access, please [reach out to us](https://us.posthog.com/project/2/settings/#panel=support%3Asupport%3A%3A%3Afalse) via in-app support.
 
 </CalloutBox>
 
-This feature catches common patterns but isn't exhaustive. Secrets that don't match these shapes, digit runs that fail Luhn validation, and values under keys outside the sensitive list only get generic pattern coverage. Treat PII scrubbing as a safety net, not a replacement for avoiding sensitive data in your logs in the first place.
+Once you have access, enable it under [**Project settings** → **Logs** → **PII scrubbing**](https://app.posthog.com/settings/environment-logs#logs-pii-scrub). The toggle is off by default.
+
+When enabled, the following patterns are detected in each log record's `body` and string-valued `attributes`, and replaced with `{{REDACTED}}`:
+
+- **Bearer tokens** – `Bearer <token>` style credentials. The `Bearer ` prefix is preserved, so the redacted output looks like `Bearer {{REDACTED}}`.
+- **Stripe secret keys** – values matching `sk_live_*` or `sk_test_*` followed by at least 20 alphanumeric characters.
+- **Email addresses** – standard `local@domain.tld` shape.
+
+Scrubbing runs as a single regex pass over the raw `body` string and over each string-valued attribute. It does not parse JSON, does not walk nested structures, and does not redact based on attribute or JSON key names – a value only gets scrubbed if it matches one of the three patterns above. `resource_attributes`, `service_name`, `severity_text`, trace IDs, and other metadata fields are not touched.
+
+<CalloutBox icon="IconWarning" title="Scrubbing is permanent" type="caution">
+
+Redaction happens at ingestion and cannot be reversed. Original values are not retained anywhere – this is not reversible hashing.
+
+</CalloutBox>
+
+A few things this feature explicitly **does not** catch today:
+
+- **Payment card numbers / PANs.** Raw or hyphenated digit runs (for example `4242 4242 4242 4242`) are not redacted.
+- **Secrets identified only by key name.** A value under a key like `password`, `api_key`, or `authorization` is only redacted if the value itself matches a pattern above. The key name alone is not enough.
+- **Numbers or booleans inside JSON.** Only string content is scanned; JSON number and boolean leaves are not redacted.
+- **Anything that doesn't look like one of the three patterns.** Custom token formats, opaque session IDs, addresses, phone numbers, names, IPs, and so on pass through unchanged.
+
+Treat automatic PII scrubbing as a safety net for accidental leaks, not as a substitute for avoiding sensitive data in your logs in the first place.
 
 ## Logging checklist
 
