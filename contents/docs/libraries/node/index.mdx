@@ -263,11 +263,11 @@ posthog.withContext(
 )
 ```
 
-## Express request context
+## Add request context to Express
 
 > Requires `posthog-node` version >= 5.31.0.
 
-If you use Express, you can add request-scoped PostHog context with the built-in middleware helpers. Register `setupExpressRequestContext` before your routes so events captured during a request automatically use the incoming session and distinct ID headers. Register `setupExpressErrorHandler` after your routes if you also want Express errors sent to PostHog Error Tracking.
+If you use Express, add request-scoped PostHog context with the built-in middleware helpers. Register `setupExpressRequestContext` before your routes so events captured during a request automatically use the incoming session and distinct ID headers. Register `setupExpressErrorHandler` after your routes if you want to send Express errors to PostHog Error Tracking.
 
 ```ts file=server.ts
 import express from 'express'
@@ -307,7 +307,7 @@ It also automatically adds request metadata as event properties:
 
 Properties and `distinctId` passed directly to `capture` take precedence over request context.
 
-### Sending headers from the client
+### Send headers from the client
 
 If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure `tracing_headers` to automatically inject session and identity headers on requests to your Express backend:
 

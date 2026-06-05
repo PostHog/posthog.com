@@ -71,7 +71,7 @@ It also automatically captures request metadata as properties:
 - `$user_agent` – the user agent string
 - `$ip` – the client IP (parsed from `x-forwarded-for` if behind a proxy)
 
-### Sending headers from the client
+### Send headers from the client
 
 If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure `tracing_headers` to automatically inject session and identity headers on requests to your NestJS backend:
 
