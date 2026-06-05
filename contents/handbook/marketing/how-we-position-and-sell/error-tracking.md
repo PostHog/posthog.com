@@ -27,7 +27,6 @@ Every PostHog exception is a product event with the user attached. Click an erro
 - **Engineering teams who want to triage by user impact, not error volume.** "This exception is breaking checkout for your top-paying customers" beats "this exception happened 200 times in 5 minutes."
 - **Multi-language stacks running web + mobile + backend.** Native SDKs for Node, Python, Go, Ruby, Rails, Elixir, NestJS; iOS, Android, React Native, Flutter; plus every major frontend framework.
 - **Founders and small engineering teams shipping production code.** Generous free tier; no contract negotiation to start.
-- **Teams running rollouts behind feature flags.** Roll back the flag that caused the spike from the same dashboard.
 
 ### Who this isn't for
 
