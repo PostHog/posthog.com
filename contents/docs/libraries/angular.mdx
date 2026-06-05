@@ -99,13 +99,10 @@ To use PostHog with Angular server-side rendering (SSR), you need to:
 Update your `posthog.service.ts` to restrict the initialization of the PostHog web JS client to the client-side. The web SDK uses methods that are not available on the server side, so we need to check if we're on the client side before initializing PostHog.
 
 ```ts file=posthog.service.ts focusOnLines=5-21
-import { DestroyRef, Injectable, NgZone, Inject } from "@angular/core";
+import { Injectable, NgZone, Inject } from "@angular/core";
 import posthog from "posthog-js";
 import { environment } from "../../environments/environment";
-import { Router } from "@angular/router";
 
-import { isPlatformBrowser } from "@angular/common"; // +
-import { PLATFORM_ID } from "@angular/core"; // +
 import { isPlatformBrowser } from "@angular/common"; // +
 import { PLATFORM_ID } from "@angular/core"; // +
 
@@ -113,8 +110,6 @@ import { PLATFORM_ID } from "@angular/core"; // +
 export class PosthogService {
   constructor(
     private ngZone: NgZone,
-    private router: Router,
-    private destroyRef: DestroyRef,
     @Inject(PLATFORM_ID) private platformId: Object // +
   ) {
     // Only initialize PostHog in browser environment
@@ -179,12 +174,11 @@ app.get('**', async (req, res, next) => {
 
   const distinctId = getDistinctIdFromCookie(headers.cookie);
   let isFeatureEnabled = false;
+  
   const client = new PostHog(
-      const client = new PostHog(
       environment.posthogKey,
       { host: environment.posthogHost }
-  )
-  )
+  );
 
   if (distinctId) {
     client.capture({

@@ -1,18 +1,27 @@
-### Q1 2026 objectives
+### Q2 2026 objectives
 
-* Do everything in the [Query Performance mega-issue](https://github.com/PostHog/posthog/issues/39639) <TeamMember name="Robbie Coomber" photo />
-* Iterate on schema validation <TeamMember name="Sandy Spicer" photo />
-  * Schema in code
-  * Versioning
-* 99.9% uptime for alerts, subscriptions, exports, and query service <TeamMember name="Andy Zhao" photo /><TeamMember name="Vasco de Krijger" photo />
-* Improve query cache stability <TeamMember name="Andy Zhao" photo />
-  * Move to its own redis cluster
-  * Add per-team limits to cache usage and cache warming
-  * Use cluster mode in ElastiCache to enable scaling horizontally
-* Get on top of support / open github issues <TeamMember name="Vasco de Krijger" photo />
-  * Create high priority list of GitHub issues and do them
-* Re-imagine dashboards <FutureTeamMember href="/careers/product-engineer"/>
-  * Let customers define their own dashboard templates
-* Do a hackathon around https://github.com/PostHog/requests-for-comments-internal/pull/941 <TeamMember name="Anna Szell" photo />
-* Terraform provider beta hardening / path to GA <TeamMember name="Vasco de Krijger" photo />
+#### [Dashboard stability and enhancements](https://github.com/PostHog/posthog/issues/51815) <TeamMember name="Matt Pua" photo />
 
+Improve stability of a core product and ensure customers have a good first experience.
+
+- New and expanded tests to prevent unexpected failures
+- Collection of UI/UX changes that make working with dashboards a smoother experience
+- Better controls and components beyond showing just graphs
+
+#### [Improve platform stability and reliability](https://github.com/PostHog/posthog/issues/51810) <TeamMember name="Vasco de Krijger" photo />
+
+Improve the reliability of our system to leave a better experience for our customers.
+
+- A clear definition of "success" for alert checks, subscriptions, exports, and query service
+- Stability improvements to better deal with degraded infrastructure
+- A 99.95% success rate for our background jobs over the last 28 days rolling
+- Anomaly detection to proactively spot regressions
+
+#### [AI-first support for our owned components](https://github.com/PostHog/posthog/issues/51814) <TeamMember name="Vasco de Krijger" photo />
+
+Move along with the market to increase AI adoption and support.
+
+- Signal integration for specific alerts
+- AI suggestions during creation
+- Improved AI onboarding
+- Investigate ways to deal with adjusted usage patterns from AI

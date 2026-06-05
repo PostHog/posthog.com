@@ -26,7 +26,7 @@ Make sure to configure PostHog with your project token, instance address, and op
 ```json
 {
   "PostHog": {
-    "ProjectApiKey": "<ph_project_token>",
+    "ProjectToken": "<ph_project_token>",
     "HostUrl": "<ph_client_api_host>"
   }
 }
@@ -150,7 +150,7 @@ If you're not using dependency injection, you can create a static instance of th
 using PostHog;
 
 public static readonly PostHogClient PostHog = new(new PostHogOptions {
-    ProjectApiKey = "<ph_project_token>",
+    ProjectToken = "<ph_project_token>",
     HostUrl = new Uri("<ph_client_api_host>"),
     PersonalApiKey = Environment.GetEnvironmentVariable(
       "PostHog__PersonalApiKey")

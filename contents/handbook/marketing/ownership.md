@@ -4,17 +4,45 @@ sidebar: Handbook
 showTitle: true
 ---
 
-If you have a general marketing question, go to `#team-marketing` in Slack.
+If you have a general marketing question, go to `#group-marketing-and-content` in Slack.
 
 If you need help with the website, go to `#posthogdotcom`.
 
-Here's a quick guide to who to ask if you want help with a specific marketing activity.
+**Product marketer (PMM) and product manager (PM) assignments**
 
+We generally only have product marketers on teams that _already_ have a product manager. Products without a product manager a) are usually too early for marketing to get involved, and b) distract engineers as they need to spend time briefing the product marketer, vs. shipping more stuff. [Product managers](/handbook/product/product-manager-role) help teams figure out what to build and how much to charge for it, product marketers then help you get as many users as possible. 
+
+| Product | PM | PMM | Blitzscale |
+|---|---|---|---|
+| *Error Tracking* | Cory S | Sara | Paul D'A |
+| *Logs* | Abe | Sara | Ben W |
+| *Workflows* | Abe | Sara | Ben W |
+| *Endpoints* | Anna | Lizzie | Raquel |
+| *Data stack (all teams)* | Anna | Lizzie | Raquel |
+| *PostHog AI* | Annika | Cleo | James H |
+| *PostHog Code* | Annika | Cleo | James H |
+| *Replay* | Cory S | Sara* | Paul D'A |
+| *Surveys* | Cory S | | Surveys |
+| *LLM Analytics* | Marco (new) | To be hired | James H |
+| *LLM Gateway* | Marco (new) | | Ben W |
+| *Product Analytics* | Mike W | To be hired | Paul D'A |
+| *Web Analytics* | Mike W | To be hired | Paul D'A |
+| *Conversations* | | Too early | James H |
+| *Platform features* | | To be hired (sales-focused PMM) | Raquel |
+| *Experiments* | Ruby | | Raquel |
+| *Feature Flags* | Ruby | | Ben W |
+| *MCP* | | Joe** | |
+| *Integrations* | | Joe** | |
+
+*AI summaries specifically
+**Not a 'product' team at PostHog, but we think they're worth specific marketing focus
+
+Even if a product already has a product manager, a team is only ready for a product marketer when a proper launch needs preparing for, usually beta or GA. Before that, product teams are responsible for launching their own products, but can ask for help with ad hoc things - see below. It is also fine for a product to have a product manager but not product marketer - we generally focus on heavily investing in 2-3 product areas at a time, so we can do a good job at a handful of things, instead of an average job at many. 
 
 <details>
-<summary>I need a product marketer, but I don't know which</summary>
+<summary>I need a product marketer, but my team hasn't been assigned one</summary>
 
-Product marketing is part of <SmallTeam slug="marketing" />. You can see which PMM is focused on which team on the <SmallTeam slug="marketing" /> team page. If it's a team which doesn't currently have an assigned marketer, just ask in #team-marketing in Slack and tag the team lead. 
+Just ask in #group-marketing-and-content in Slack and tag the team lead. 
 </details>
 
 
@@ -84,18 +112,20 @@ Please share in the #merch channel. <TeamMember name="Kendal Hall" /> owns fulfi
 <summary>I have a question / problem / suggestion for the website</summary>
 
 The website is owned by <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" />. Generally, the best place to ask is the `#posthogdotcom` Slack channel.
+
+For larger pieces of work — a new product page, a significant copy overhaul — read [Working with the website team](/handbook/marketing/working-with-website) for the process to follow.
 </details>
 
 <details>
 <summary>Hey, can we run some paid ads for my product?</summary>
 
-We probably are already, but if you have something specific in mind, speak to <TeamMember name="Brian Young" />, who is a Growth Marketing Manager embedded in the sales team.
+We probably are already, but if you have something specific in mind, ask in the `#team-demand-gen` Slack channel. 
 </details>
 
 <details>
 <summary>I need a new hedgehog design, illustration, or other art asset.</summary>
 
-Speak to <TeamMember name="Lottie Coxon" /> or <TeamMember name="Daniel Hawkins" />, but please read [Art and branding requests](/handbook/brand/art-requests) first.
+Read [art and branding requests](/handbook/brand/art-requests) first!
 </details>
 
 <details>

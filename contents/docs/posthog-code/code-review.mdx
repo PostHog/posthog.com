@@ -1,0 +1,92 @@
+---
+title: PostHog Code code review
+---
+
+Every task in PostHog Code has a built-in **diff panel** for reviewing the agent's changes before they're committed or merged. You can read through edits, leave inline feedback, manage what's staged, and follow up on PR comments – all without leaving the app.
+
+## Opening the diff panel
+
+The diff stats badge in the task header opens the panel. You can also toggle it with `⌘ Cmd` / `⌃ Ctrl` + `⇧ Shift` + `B`.
+
+The panel has two layouts:
+
+- **Split** – sits beside the task chat, with a draggable divider for resizing
+- **Expanded** – takes over the task view and adds a file tree on the right
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_30_at_1_51_47_PM_2d8dc30419.png"
+    classes="rounded"
+    alt="Diff panel in split view next to a task"
+/>
+
+## Diff sources
+
+The source dropdown in the toolbar controls what you're looking at:
+
+| Source | What it shows |
+|---|---|
+| **Local changes** | Staged and unstaged edits in your working directory |
+| **Branch** | The task's branch compared against the default branch |
+| **Pull request** | Changes in the linked GitHub PR |
+
+PostHog Code picks the most useful source by default based on what's available – local edits if there are any, otherwise the PR or branch.
+
+## Reading diffs
+
+The toolbar's settings menu controls how diffs render:
+
+- **Unified** or **split** view
+- **Word wrap** for long lines
+- **Word diffs** to highlight character-level changes
+- **Hide whitespace** to ignore whitespace-only changes
+- **Show review comments** to inline GitHub PR comments
+
+Generated files (lock files, minified bundles, `node_modules/`, `dist/`, snapshots) and very large diffs are collapsed by default. Click **Load diff** to expand them.
+
+## Staging and reverting
+
+When viewing local changes, the file list lets you manage your working tree without dropping into a terminal:
+
+- **Stage** or **unstage** any file
+- **Discard** all edits to a file
+- **Revert** an individual hunk – hover any block in the diff and click **Revert**
+- **Open** a file in your editor or copy its path
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_30_at_1_53_01_PM_b3b7026703.png"
+    classes="rounded"
+    alt="Changes panel with stage, discard, and open actions"
+/>
+
+## Follow up with the agent from the diff
+
+Click the plus button on any line(s) in a diff to open a comment box. Describe the change you want and press `⌘ Cmd` + `⏎ Enter` to send it to the agent. The prompt is sent as a follow-up message on the task, scoped to the file path and line range you selected.
+
+This is the fastest way to ask for tweaks like _"add a null check here"_ or _"this branch is unreachable, remove it"_ without context-switching back to the chat.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_30_at_1_53_45_PM_b36ff04efd.png"
+    classes="rounded"
+    alt="Inline comment box on a selected range of diff lines"
+/>
+
+## GitHub pull requests
+
+When the task has a linked PR, the diff panel doubles as a PR review surface:
+
+- Existing review comments appear inline next to the code they reference
+- **Reply** posts a response back to GitHub
+- **Fix with agent** sends the comment to the agent with instructions to address it
+- **Ask agent** asks the agent to explain or push back on the comment without making changes
+
+PR status and merge actions live in the task header alongside the diff badge.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_30_at_2_11_04_PM_da25f7ecf7.png"
+    classes="rounded"
+    alt="GitHub PR review comment shown inline with Fix and Ask actions"
+/>
+
+## Next steps
+
+- Learn how the [GitHub integration](/docs/posthog-code/git-github-integration) wires PRs into PostHog Code.

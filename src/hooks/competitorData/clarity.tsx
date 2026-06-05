@@ -114,6 +114,7 @@ export const clarity = {
         deployment: {
             open_source: false,
             self_host: false,
+            eu_hosting: false,
         },
         pricing: {
             free_tier: true,

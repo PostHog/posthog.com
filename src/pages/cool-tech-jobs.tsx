@@ -22,6 +22,8 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Toggle from 'components/Toggle'
 import { Select } from 'components/RadixUI/Select'
+import Tooltip from 'components/Tooltip'
+import { useToast } from '../context/Toast'
 import { StickerEngineerRatio, StickerHourglass } from 'components/Stickers/Index'
 import { StickerDnd, StickerLaptop, StickerPalmTree, StickerPullRequest } from 'components/Stickers/Index'
 import { motion } from 'framer-motion'
@@ -59,6 +61,19 @@ import OSButton from 'components/OSButton'
 import { navigate } from 'gatsby'
 
 dayjs.extend(relativeTime)
+
+const unpublishPendingCompany = async (companyId: number, jwt: string) => {
+    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/pending-companies/${companyId}`, {
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            data: { publishedAt: null },
+        }),
+    })
+}
 
 type JobBoardType = 'ashby' | 'greenhouse' | 'gem' | 'kadoa' | 'other'
 
@@ -477,10 +492,8 @@ const CompanyRows = ({
 
             {/* Companies without jobs (moderators only) */}
             {showCompaniesWithoutJobs && companiesWithoutJobs.length > 0 && (
-                <>
-                    <h2 className="text-xl font-semibold text-muted dark:text-secondary mt-12 mb-6">
-                        Companies with no active RootClasses
-                    </h2>
+                <div>
+                    <h2 className="text-xl font-semibold m-0">Companies with no active jobs</h2>
                     <p className="text-secondary">(Only visible to moderators)</p>
                     {companiesWithoutJobs.map((company, index) => {
                         const { name } = company.attributes
@@ -574,7 +587,7 @@ const CompanyRows = ({
                             </div>
                         )
                     })}
-                </>
+                </div>
             )}
 
             {displayCompanies.length === 0 && !isLoading && (
@@ -772,16 +785,22 @@ const ModeratorInitialView = ({
     onAddNewCompany: () => void
 }) => {
     const { getJwt } = useUser()
+    const { addToast } = useToast()
     const [pendingCompanies, setPendingCompanies] = useState<Company[]>([])
     const [selectedCompany, setSelectedCompany] = useState<Company | null>(null)
+    const [dismissingId, setDismissingId] = useState<number | null>(null)
+    const [loaded, setLoaded] = useState(false)
 
     const getPendingCompanies = async () => {
         const jwt = await getJwt()
-        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/pending-companies?populate=*`, {
-            headers: {
-                Authorization: `Bearer ${jwt}`,
-            },
-        })
+        const response = await fetch(
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/pending-companies?populate=*&sort=createdAt:desc`,
+            {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            }
+        )
         const data = await response.json()
         if (data.data?.length > 0) {
             setPendingCompanies(data.data)
@@ -789,32 +808,95 @@ const ModeratorInitialView = ({
         } else {
             onAddNewCompany()
         }
+        setLoaded(true)
+    }
+
+    const dismissCompany = async (companyId: number) => {
+        const company = pendingCompanies.find((c) => c.id === companyId)
+        if (!confirm(`Are you sure you want to dismiss ${company?.attributes.name || 'this company'}?`)) return
+        setDismissingId(companyId)
+        try {
+            const jwt = await getJwt()
+            await unpublishPendingCompany(companyId, jwt)
+            const remaining = pendingCompanies.filter((c) => c.id !== companyId)
+            setPendingCompanies(remaining)
+            if (selectedCompany?.id === companyId) {
+                setSelectedCompany(remaining[0] || null)
+            }
+            addToast({
+                description: `${company?.attributes.name || 'Company'} dismissed`,
+            })
+            if (remaining.length <= 0) {
+                onAddNewCompany()
+            }
+        } catch (error) {
+            console.error('Error dismissing pending company:', error)
+        } finally {
+            setDismissingId(null)
+        }
     }
 
     useEffect(() => {
         getPendingCompanies()
     }, [])
 
+    if (!loaded) return null
+
     return pendingCompanies.length > 0 ? (
         <div data-scheme="primary">
             <h2 className="mb-2">Companies awaiting approval</h2>
-            <Select
-                value={selectedCompany?.id?.toString()}
-                onValueChange={(value) => {
-                    setSelectedCompany(pendingCompanies.find((company) => company.id.toString() === value) || null)
-                }}
-                placeholder="Continue with a pending company"
-                groups={[
-                    {
-                        label: 'Pending Companies',
-                        items: pendingCompanies.map((company) => ({
-                            label: company.attributes.name,
-                            value: company.id.toString(),
-                        })),
-                    },
-                ]}
-                className="w-full"
-            />
+            <ScrollArea>
+                <ul className="list-none p-0 m-0 space-y-2 pr-2 max-h-80">
+                    {pendingCompanies.map((company) => {
+                        const isSelected = selectedCompany?.id === company.id
+                        const perks = toggleFilters.filter((toggle) => (company.attributes as any)[toggle.key])
+                        return (
+                            <li
+                                key={company.id}
+                                className={`px-2 py-1.5 rounded-md border cursor-pointer ${
+                                    isSelected ? 'border-yellow bg-yellow/10' : 'border-primary bg-accent/50'
+                                }`}
+                                onClick={() => setSelectedCompany(company)}
+                            >
+                                <div className="flex items-center justify-between gap-2">
+                                    <div className="flex-1 min-w-0 flex items-center gap-2">
+                                        <span className="font-semibold text-sm leading-none">
+                                            {company.attributes.name}
+                                        </span>
+                                        <span className="text-xs opacity-40 whitespace-nowrap">
+                                            {dayjs(company.attributes.createdAt).fromNow()}
+                                        </span>
+                                        {perks.length > 0 ? (
+                                            <span className="text-xs font-semibold opacity-60 whitespace-nowrap">
+                                                {perks.length} perk{perks.length === 1 ? '' : 's'}
+                                            </span>
+                                        ) : (
+                                            <span className="text-xs font-semibold opacity-40">No perks</span>
+                                        )}
+                                    </div>
+                                    <OSButton
+                                        icon={
+                                            dismissingId === company.id ? (
+                                                <IconSpinner className="animate-spin" />
+                                            ) : (
+                                                <IconTrash />
+                                            )
+                                        }
+                                        onClick={(e: React.MouseEvent) => {
+                                            e.stopPropagation()
+                                            dismissCompany(company.id)
+                                        }}
+                                        size="sm"
+                                        hover="background"
+                                        disabled={dismissingId === company.id}
+                                        tooltip="Dismiss"
+                                    />
+                                </div>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </ScrollArea>
             {selectedCompany && (
                 <div className="mt-4">
                     <OSButton
@@ -1163,6 +1245,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                             "Thanks for applying to be a part of Cool tech jobs! We'll review your application and get back to you as soon as possible.",
                     })
                 }
+                if (usingPending && company?.id) {
+                    await unpublishPendingCompany(company.id, jwt)
+                }
                 onSuccess?.()
             } catch (error) {
                 setConfirmationMessage({
@@ -1224,34 +1309,51 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
     ) : !isModerator && !disclaimerConfirmed ? (
         <JobBoardIntro onConfirm={() => setDisclaimerConfirmed(true)} />
     ) : confirmationMessage ? (
-        <div
-            className={`p-4 rounded-md border ${
-                confirmationMessage.type === 'success'
-                    ? 'border-green bg-green/20'
-                    : confirmationMessage.type === 'warning'
-                    ? 'border-yellow bg-yellow/20'
-                    : 'border-red bg-red/20'
-            }`}
-        >
-            <h4 className="text-base m-0">{confirmationMessage.title}</h4>
-            <p
-                className="text-sm opacity-70 m-0"
-                dangerouslySetInnerHTML={{ __html: confirmationMessage.description }}
-            />
-            {(confirmationMessage.type === 'error' || confirmationMessage.type === 'warning') &&
-                (canUpdate || !isModerator) && (
-                    <CallToAction
-                        size="sm"
-                        type="secondary"
-                        className="mt-2"
-                        onClick={() => setConfirmationMessage(null)}
-                    >
-                        <span className="flex items-center gap-1">
-                            <IconArrowLeft className="size-4" />
-                            Go back
-                        </span>
-                    </CallToAction>
-                )}
+        <div>
+            {isModerator && !companyId && (
+                <OSButton
+                    icon={<IconArrowLeft />}
+                    onClick={() => {
+                        setConfirmationMessage(null)
+                        setUsingPending(null)
+                        setCompany(null)
+                    }}
+                    size="sm"
+                    hover="background"
+                    className="mb-2"
+                >
+                    Back to pending companies
+                </OSButton>
+            )}
+            <div
+                className={`p-4 rounded-md border ${
+                    confirmationMessage.type === 'success'
+                        ? 'border-green bg-green/20'
+                        : confirmationMessage.type === 'warning'
+                        ? 'border-yellow bg-yellow/20'
+                        : 'border-red bg-red/20'
+                }`}
+            >
+                <h4 className="text-base m-0">{confirmationMessage.title}</h4>
+                <p
+                    className="text-sm opacity-70 m-0"
+                    dangerouslySetInnerHTML={{ __html: confirmationMessage.description }}
+                />
+                {(confirmationMessage.type === 'error' || confirmationMessage.type === 'warning') &&
+                    (canUpdate || !isModerator) && (
+                        <CallToAction
+                            size="sm"
+                            type="secondary"
+                            className="mt-2"
+                            onClick={() => setConfirmationMessage(null)}
+                        >
+                            <span className="flex items-center gap-1">
+                                <IconArrowLeft className="size-4" />
+                                Go back
+                            </span>
+                        </CallToAction>
+                    )}
+            </div>
         </div>
     ) : companyId && !company ? (
         <CompanyFormSkeleton />
@@ -1262,6 +1364,21 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         />
     ) : (
         <form onSubmit={handleSubmit} className="space-y-4 m-0">
+            {isModerator && !companyId && (
+                <div className="-mt-2 -mx-4 pb-2 border-b border-border px-2">
+                    <OSButton
+                        icon={<IconArrowLeft />}
+                        onClick={() => {
+                            setUsingPending(null)
+                            setCompany(null)
+                        }}
+                        size="sm"
+                        hover="background"
+                    >
+                        Back
+                    </OSButton>
+                </div>
+            )}
             <Input
                 label="Company name"
                 placeholder="Bluth Company"
@@ -1512,7 +1629,9 @@ const AddAJobWindow = ({
         <ScrollArea className="min-h-0 h-full [&>div>div]:h-full">
             <div
                 data-scheme="secondary"
-                className={`bg-primary text-primary ${siteSettings.experience === 'boring' ? 'size-full' : 'h-full'}`}
+                className={`bg-primary text-primary ${
+                    siteSettings.experience === 'boring' ? 'size-full' : 'min-h-full'
+                }`}
             >
                 <div className="p-4">
                     <CompanyForm companyId={companyId} onSuccess={onSuccess} />

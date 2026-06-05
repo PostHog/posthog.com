@@ -12,6 +12,7 @@ export const smartlook = {
                 cohorts: true,
                 custom_events: true,
                 custom_properties: true,
+                conditional_recording: false,
                 insights: {
                     available: true,
                     features: {

@@ -33,9 +33,10 @@ import * as OSIcons from '../OSIcons/Icons'
 import { getLogo } from '../../constants/logos'
 import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
-import { getProseClasses, MARKDOWN_CONTENT_PATHS } from '../../constants'
+import { getProseClasses, isMarkdownContentPath } from '../../constants'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
+import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
 import { Questions } from 'components/Squeak'
 import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
@@ -50,7 +51,7 @@ dayjs.extend(relativeTime)
 // Wrapper component that conditionally renders CopyMarkdownActionsDropdown based on whether the markdown URL exists
 const ConditionalMarkdownDropdown = ({ pageUrl }: { pageUrl: string | undefined }) => {
     // Check if path is in allowed content paths
-    const isAllowedPath = pageUrl && MARKDOWN_CONTENT_PATHS.some((path) => pageUrl.includes(path))
+    const isAllowedPath = pageUrl && isMarkdownContentPath(pageUrl)
     const markdownExists = useMarkdownUrlExists(isAllowedPath ? pageUrl : '')
 
     // Don't render if path is not allowed, during loading, or if markdown doesn't exist
@@ -479,9 +480,13 @@ const resolveMenuIcons = (items: MenuItem[] | undefined, resolveIcons = false): 
 
 const Menu = (props: { parent: MenuItem }) => {
     const { setActiveInternalMenu, activeInternalMenu: windowActiveInternalMenu, parent: windowParent } = useWindow()
+    const activeFlags = useActiveFeatureFlags()
 
     const parent = props.parent || windowParent
-    const activeInternalMenu = windowActiveInternalMenu || parent.children?.[0]
+    // Hide any flag-gated products/pages the current user can't see.
+    const visibleChildren = filterMenuByFlags(parent.children, activeFlags)
+    const activeInternalMenu = windowActiveInternalMenu || visibleChildren?.[0]
+    const visibleActiveChildren = filterMenuByFlags(activeInternalMenu?.children, activeFlags)
 
     return (
         <>
@@ -489,7 +494,7 @@ const Menu = (props: { parent: MenuItem }) => {
                 groups={[
                     {
                         label: null,
-                        items: parent.children?.map((menuItem) => {
+                        items: visibleChildren?.map((menuItem) => {
                             return {
                                 value: menuItem.url || menuItem.name,
                                 label: menuItem.name,
@@ -504,7 +509,7 @@ const Menu = (props: { parent: MenuItem }) => {
                 className="w-full mb-2"
                 value={activeInternalMenu?.url || activeInternalMenu?.name}
                 onValueChange={(value) => {
-                    const selectedMenu = parent.children?.find(
+                    const selectedMenu = visibleChildren?.find(
                         (menuItem) => menuItem.url === value || menuItem.name === value
                     )
                     setActiveInternalMenu(selectedMenu)
@@ -514,7 +519,7 @@ const Menu = (props: { parent: MenuItem }) => {
                 }}
                 dataScheme="primary"
             />
-            <TreeMenu key={activeInternalMenu?.url} items={resolveMenuIcons(activeInternalMenu?.children)} />
+            <TreeMenu key={activeInternalMenu?.url} items={resolveMenuIcons(visibleActiveChildren)} />
         </>
     )
 }
@@ -928,7 +933,7 @@ function ReaderViewContent({
                                             <a href="/error-tracking">error tracking</a>,{' '}
                                             <a href="/feature-flags">feature flags</a>,{' '}
                                             <a href="/experiments">experiments</a>, <a href="/surveys">surveys</a>,{' '}
-                                            <a href="/llm-analytics">LLM analytics</a>, <a href="/logs">logs</a>,{' '}
+                                            <a href="/ai-observability">AI Observability</a>, <a href="/logs">logs</a>,{' '}
                                             <a href="/workflows">workflows</a>, <a href="/endpoints">endpoints</a>,{' '}
                                             <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an{' '}
                                             <a href="/ai">AI product assistant</a> to help debug your code, ship

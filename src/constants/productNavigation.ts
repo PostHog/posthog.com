@@ -12,7 +12,15 @@ export const popularProducts = [
 ]
 
 // Newest products to highlight in the menu
-export const newestProducts = ['logs', 'endpoints', 'posthog_ai', 'llm_analytics', 'workflows_emails']
+export const newestProducts = [
+    'logs',
+    'endpoints',
+    'posthog_ai',
+    'ai_observability',
+    'workflows_emails',
+    'posthog_code',
+    'support',
+]
 
 // Category ordering for display
 export const categoryOrder = [
@@ -71,14 +79,13 @@ export const productOrder: Record<string, string[]> = {
     analytics: [
         'web_analytics',
         'product_analytics',
-        'revenue_analytics',
-        'llm_analytics',
+        'ai_observability',
         'custom_dashboards',
         'group_analytics',
         'custom_dashboards',
     ],
     dataviz: ['trends', 'funnels', 'user_paths', 'correlation_analysis', 'retention', 'stickiness', 'lifecycle'],
-    automation: ['posthog_ai', 'workflows', 'webhooks'],
+    automation: ['posthog_ai', 'posthog_slack', 'posthog_code', 'workflows', 'webhooks'],
     communication: ['surveys', 'messaging', 'user-interviews', 'workflows_emails'],
     product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages', 'services'],
 }

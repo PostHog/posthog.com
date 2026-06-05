@@ -108,6 +108,7 @@ export const launchdarkly = {
             targeting: {
                 features: {
                     cohort_integration: true,
+                    custom_targeting: true,
                     exclusion_rules: false,
                     geographic_targeting: true,
                     group_level_experiments: true,
@@ -219,6 +220,9 @@ export const launchdarkly = {
         },
         logs: {
             available: true, // https://launchdarkly.com/docs/home/observability/logs
+        },
+        web_analytics: {
+            available: false,
         },
     },
     platform: {

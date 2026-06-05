@@ -11,7 +11,9 @@ If you see that a customer is spending **more than $1,000 monthly**, evaluate wh
 
 If that's the case, you can pass the account to Sales even **without speaking with the customer first**, as long as you’ve confirmed that the high spend is intentional. The goal is to react quickly to healthy, high-spend accounts—but avoid passing through problematic ones.
 
-Be courteous and **leave a note in Vitally**, providing context on the account (e.g., what you've noticed in Metabase, etc.) to the Sales person assigned to your lead.
+Before you hand off, also consider month-over-month growth. A flat $1.2k account is a very different lead from a $1k account that doubled organically last month. Growth rate matters to the Sales person deciding whether to prioritise the lead, so call it out.
+
+Be courteous and **leave a note in Vitally** with context on the account before handing off. Include what you spotted in Metabase, any relevant billing patterns, and your read on why the spend is legitimate. The Sales person receiving the lead should be able to pick it up without having to dig.
 
 #### Handover during onboarding - engaged customers
 

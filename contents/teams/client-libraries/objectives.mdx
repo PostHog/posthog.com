@@ -14,11 +14,17 @@ What we'll ship:
   * Don’t rely only on reactive feedback from unhappy users
   * Run surveys targeting those customers
 
-* AI improvements
-  * Leverage insights from the wizard team to understand what users are asking from SDKs
-  * Make working with AI to set up and extend SDK usage a smooth and delightful experience
+#### Goal 2: Agent-friendly SDKs (Driver: <TeamMember name="Dustin Byrne" /> <TeamMember name="Manoel Aranda Neto" />)
 
-#### Goal 2: PostHog libraries vNext (Driver: <TeamMember name="Ioannis Josephides" />)
+As more developers rely on AI agents to integrate PostHog products, our SDKs should be easy for agents to understand, configure, instrument, and extend correctly.
+
+What we'll ship:
+
+* Use insights from the wizard team to understand what users and agents are asking SDKs to do
+* Make SDK setup, instrumentation, and extension smooth for AI-assisted workflows
+* Reduce the ambiguity in our SDK interfaces, docs, and examples so agents can produce correct implementations more reliably
+
+#### Goal 3: PostHog libraries vNext (Driver: <TeamMember name="Ioannis Josephides" />)
 
 What we'll ship:
 
@@ -65,7 +71,7 @@ What we'll ship:
 * Flutter desktop support (Windows/Linux) (<TeamMember name="Ioannis Josephides" />)
   * https://github.com/PostHog/posthog-flutter/issues/51
 
-#### Goal 3: Maintaining the SDKs (Driver: <TeamMember name="Manoel Aranda Neto" />)
+#### Goal 4: Maintaining the SDKs (Driver: <TeamMember name="Manoel Aranda Neto" />)
 
 What we'll ship:
 
@@ -78,3 +84,14 @@ What we'll ship:
 * Support and contribute to the new ingestion rate limiting project
   * https://github.com/PostHog/requests-for-comments-internal/pull/1036
 * Migrate and consolidate `/decide`, `/flags`, and `/static/array.js` into a unified remote config (`/static/token/config`)
+* Document SDK design guidelines and best practices under the [SDK handbook page](/handbook/engineering/sdks) to help contributors avoid common pitfalls
+
+#### Goal 5: Logs for Mobile (Driver: <TeamMember name="Anna Garcia" />)
+
+What we'll ship:
+
+* [Add support for collecting and sending app-side logs](https://github.com/PostHog/posthog/issues/40528)
+  * Add support for collecting and sending app-side logs from Android
+  * Add support for collecting and sending app-side logs from iOS
+  * Add support for collecting and sending app-side logs from Flutter
+  * Add support for collecting and sending app-side logs from React Native

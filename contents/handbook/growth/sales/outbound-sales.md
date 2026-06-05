@@ -38,7 +38,7 @@ We’ll call 1-3 ‘warm’ outbound and 4-6 ‘cold’ outbound.
 Our model is:
 
 - TAMs do warm outbound to group 1-2
-- BDRs do warmish outound to groups 3-4
+- BDRs do warmish outound to groups 3-5
 - TAEs do cold outbound to a top 10 list in groups 5-6
 
 Our focus today is on inbound leads, getting much better at warm outbound (we have a huge number of leads that we could be converting better), and experimenting with colder outbound. <TeamMember name="Lorena Viana" /> is leading our experiments today with the <SmallTeam slug="demand-gen" />.

@@ -28,7 +28,7 @@ In our consumption-based pricing model, the first way for a customer to reduce s
 
 Beyond optimization, we offer discounts based on four levers:
 
-#### 1. Volume discount (based on credit purchase amount)
+#### 1. Volume discount (based on credit purchase amount - Customers **must** qualify for this discount before receiving discounts 2 through 4)
 - **$25-59k:** 20% base discount
 - **$60-99k:** 25% base discount
 - **$100-249k:** 30% base discount
@@ -41,6 +41,8 @@ Beyond optimization, we offer discounts based on four levers:
 - **2-year commitment:** +3% additional discount
 - **3-year commitment:** +5% additional discount (doesn't stack)
 - **4-years or more:** Contact us for custom pricing
+
+> Note: This discount lever does not apply to additional credit purchases made within the first half of the term and applies only to the initial order form's credit purchase.
 
 #### 3. Timing of cash discount (additive)
 - **Net 30 (our standard):** No additional discount
@@ -62,7 +64,7 @@ Beyond optimization, we offer discounts based on four levers:
 
 **If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
 
-> You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with <TeamMember name="Ben Bradley" showOnlyFirstName photo /> (TAEs), <TeamMember name="Simon Fisher" showOnlyFirstName photo /> (TAMs or CSMs), or <TeamMember name="Charles Cook" showOnlyFirstName photo /> (as backup), you should assume by default that the deal will not count toward your quota.
+> You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with <TeamMember name="Ben Bradley" showOnlyFirstName photo /> (TAEs or TAMs) or <TeamMember name="Simon Fisher" showOnlyFirstName photo /> (CSMs), you should assume by default that the deal will not count toward your quota.
 
 ### Why we require up-front payment for credit purchases
 
@@ -135,7 +137,9 @@ In exceptional circumstances, we may explore providing additional discounts whic
 2. We are taking their business from a competitor.
 3. We are preventing them from churning to a competitor.
 
-If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with your manager, who will then clear it with Simon (TAMs/CSMs) or Charles (TAEs).
+For the avoidance of doubt, these types of deals are **very rare** (~1 per year), and not offered to customers with standard usage volumes. 
+
+If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with your manager, who will then clear it with Simon (CSMs) or Ben (TAEs/TAMs).
 
 ## Additional credit purchase
 
@@ -145,13 +149,13 @@ As it's often difficult to right-size the credit needed for a longer term plan a
 
 We do not offer price guarantees for the following reasons:
 
-1. We regularly *lower* prices, which would result in higher costs for customers who've locked in a price
+1. We sometimes lower prices, which would result in higher costs for customers who've locked in a price
 2. We occasionally split or restructure products (e.g. Data Pipelines unbundled), which makes guarantees administratively complex
 3. Customers are in full control of their usage and can thus adjust their spending patterns as needed
 
 This request most often comes from procurement teams unfamiliar with our pricing philosophy. Address it proactively in commercial discussions, but if there is push back, reference the above points. As an example:
 
-> "We've dropped Events pricing [X]% over [timeframe]. A price guarantee would have cost you more. We're committed to being the cheapest at every scale—if we're not, tell us. Our prepaid credits for usage based pricing gives budget control without betting against our commitment to low prices."
+> "We've dropped Events pricing [X]% over [timeframe]. A price guarantee would have cost you more. We're committed to matching the cheapest at every scale—if we're not, tell us. Our prepaid credits for usage based pricing gives budget control without betting against our commitment to low prices."
 
 ## Multi-year credit allocation
 
@@ -173,7 +177,7 @@ You can see a signed multi-year contract set up in this way by navigating to Doc
 
 Customers only get an uptime SLA if:
 
-1. They have subscribed to the Enterprise add-on; or
+1. They have subscribed to the Enterprise package; or
 2. You agree it with them as a special term as part of their contract if they are spending $100k+ ARR _post_ discount (i.e. $ spend, not credit usage). 
 
 An uptime SLA are not available to customers outside of these cases. You should certainly not agree to an SLA for customers on regular monthly contracts, and even for annual contracts it is not a given - it's one of multiple pieces you may have in play as you negotiate terms (much like a case study).
@@ -232,7 +236,7 @@ In order to qualify for this, the customer needs to send us the full quote docum
 
 We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/archives/C071PGWKBQS">#sales-alerts</PrivateLink> when a customer is going to run out of credit before their contract term ends, with the estimated runway remaining. The Vitally account owner (AE or CSM) will be tagged in this message. It's best to be proactive here so that the customer is right-sized well before the credit runs out:
 
--   If they will run out of credit or wish to buy more within the **first 6 months** of the contract term, they can still take advantage of their initial discount. You'll need to have them sign a new order form which adds the additional credit, and it should expire on the date of the original order form.
+-   If they will run out of credit or wish to buy more within the **first half** of the contract term (1 year = 6 months, 2 years = 12 months, 3 years = 18 months), they can still take advantage of their initial discount. You'll need to have them sign a new order form which adds the additional credit, and it should expire on the date of the original order form.
     -   Example: Their original order form was signed on 1st January with a 12-month term. Their expansion order form could be signed on 1st June with a 7-month term. Make sure the end date lines up with the end date of the original contract to avoid any issues with the billing server and ARR calculation.
 -   If they will run out of credit with **less than 2 months** remaining on their initial term, as long as they sign a renewal order form to start at the end of the original contract term we will cover their usage for free until the renewal date, assuming the renewal order form is signed before they run out of credit and their new contract amount is equal to or greater than the current contract amount.
 -   If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date. This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
@@ -244,7 +248,7 @@ For any of the above scenarios you should use our [discounting principles](contr
 
 ### When they will end the contract term with credit remaining
 
-We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher spend than the original contract.
+We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher annual spend than the original contract.
 
 ### When a customer doesn't renew their credit purchase
 When a customer chooses not to renew a prepaid credit contract we automatically remove any remaining credits on the expiry date. Their account will then roll onto our standard monthly plan and they'll be charged for usage. It's the customer's responsibility to stop sending us events or cancel their subscription and downgrade to the free tier if they don't want to keep paying.

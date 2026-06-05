@@ -146,7 +146,9 @@ export const SingleCodeBlock = ({ label, language, children, ...props }: SingleC
 const tooltipKey = '// TIP:'
 const highlightKey = '// HIGHLIGHT'
 const diffAddKey = '// +'
+const diffAddKeyHash = '# +'
 const diffRemoveKey = '// -'
+const diffRemoveKeyHash = '# -'
 
 const removeQuotes = (str?: string | null): string | null | undefined => {
     return str?.replace(/['"]/g, '')
@@ -157,7 +159,9 @@ const stripAnnotationComments = (code: string): string => {
         .replace(tooltipKey, '//')
         .replace(highlightKey, '')
         .replace(diffAddKey, '')
+        .replace(diffAddKeyHash, '')
         .replace(diffRemoveKey, '')
+        .replace(diffRemoveKeyHash, '')
         .trim()
 }
 
@@ -271,10 +275,10 @@ export const CodeBlock = ({
             if (line.includes(highlightKey)) {
                 highlightLineNumbers.push(index)
             }
-            if (line.includes(diffAddKey)) {
+            if (line.includes(diffAddKey) || line.includes(diffAddKeyHash)) {
                 diffAddLineNumbers.push(index)
             }
-            if (line.includes(diffRemoveKey)) {
+            if (line.includes(diffRemoveKey) || line.includes(diffRemoveKeyHash)) {
                 diffRemoveLineNumbers.push(index)
             }
         })
@@ -352,7 +356,14 @@ export const CodeBlock = ({
                     <div className="shrink-0 ml-auto flex items-center divide-x divide-border dark:divide-border-dark">
                         {selector === 'dropdown' && languages.length > 1 ? (
                             <div className="relative mr-2">
-                                <Listbox value={currentLanguage} onChange={(language) => onChange(language)}>
+                                <Listbox
+                                    value={currentLanguage}
+                                    onChange={(language) => {
+                                        const index = languages.findIndex((l) => l.language === language.language)
+                                        if (index !== -1) setSelectedIndex(index)
+                                        onChange?.(language)
+                                    }}
+                                >
                                     <Listbox.Button className="flex items-center space-x-1.5 text-gray">
                                         <span>
                                             {currentLanguage.label ||
@@ -424,11 +435,11 @@ export const CodeBlock = ({
                                                     viewBox="0 0 18 18"
                                                     className="w-4 h-4 fill-current"
                                                 >
-                                                    <g clipPath="url(#a)">
+                                                    <g clipPath={`url(#clip-${codeBlockId})`}>
                                                         <path d="M3.079 5.843h2.103V2.419c0-.58.236-1.106.618-1.487A2.1 2.1 0 0 1 7.287.313h7.634c.58 0 1.106.237 1.487.619a2.1 2.1 0 0 1 .618 1.487v7.633a2.1 2.1 0 0 1-.618 1.488 2.1 2.1 0 0 1-1.487.618h-2.103v3.424c0 .58-.236 1.106-.618 1.487a2.1 2.1 0 0 1-1.487.618H3.079c-.58 0-1.106-.236-1.487-.618a2.1 2.1 0 0 1-.618-1.487V7.948c0-.58.236-1.106.618-1.487a2.1 2.1 0 0 1 1.487-.618Zm3.28 0h4.354c.58 0 1.106.236 1.487.618a2.1 2.1 0 0 1 .618 1.487v3.033h2.103a.925.925 0 0 0 .655-.273.926.926 0 0 0 .274-.655V2.418a.925.925 0 0 0-.274-.656.926.926 0 0 0-.655-.273H7.287a.924.924 0 0 0-.655.273.926.926 0 0 0-.273.656v3.424Zm-.586 1.176H3.077a.924.924 0 0 0-.655.274.926.926 0 0 0-.273.655v7.634c0 .254.104.487.273.655.169.169.401.274.655.274h7.634a.924.924 0 0 0 .656-.274.926.926 0 0 0 .273-.655V7.948a.925.925 0 0 0-.273-.655.926.926 0 0 0-.656-.274h-4.94.002Z" />
                                                     </g>
                                                     <defs>
-                                                        <clipPath id="a">
+                                                        <clipPath id={`clip-${codeBlockId}`}>
                                                             <path d="M0 0h18v18H0z" />
                                                         </clipPath>
                                                     </defs>
@@ -581,8 +592,14 @@ export const CodeBlock = ({
                                                         if (token.content.includes(diffAddKey)) {
                                                             token.content = token.content.replace(diffAddKey, '')
                                                         }
+                                                        if (token.content.includes(diffAddKeyHash)) {
+                                                            token.content = token.content.replace(diffAddKeyHash, '')
+                                                        }
                                                         if (token.content.includes(diffRemoveKey)) {
                                                             token.content = token.content.replace(diffRemoveKey, '')
+                                                        }
+                                                        if (token.content.includes(diffRemoveKeyHash)) {
+                                                            token.content = token.content.replace(diffRemoveKeyHash, '')
                                                         }
                                                     })
 

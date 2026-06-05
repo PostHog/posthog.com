@@ -31,7 +31,7 @@ Sadly, most of the AI coding advice out there isn't written for this scenario. I
 
 ![Treating your big codebase like a small codebase](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Usefulness_of_AI_graphic_da661341d8.png)
 
-Although it's less sexy than vibe coding, being thoughtful about using AI is *more important* in a larger codebase for the following reasons:
+Although it's less sexy than [vibe coding](/blog/best-analytics-stack-for-vibe-coded-apps), being thoughtful about using AI is *more important* in a larger codebase for the following reasons:
 
 - Less of your app fits into the AI tool's context windows, which means you need to be more careful about what goes into it. This is true of both coding and [building AI-powered features](/newsletter/building-ai-features).
 
@@ -75,7 +75,7 @@ Of course, engineers have built a whole set of non-AI (😱) tools for preventin
 - IDE tooling like PyCharm, JetBrains' testing suite, and IntelliJ.
 - Style guides and [coding standards](/handbook/engineering/conventions/backend-coding).
 
-Developers, especially [product engineers](/blog/what-is-a-product-engineer), were already relying on tools like these prior to AI. AI has just made these deterministic checks and guardrails even more important.
+Developers, especially [product engineers](/product-engineer/what-is-a-product-engineer), were already relying on tools like these prior to AI. AI has just made these deterministic checks and guardrails even more important.
 
 Like AI, the rise in importance of these tools isn't expected to slow down either. As [Gergely from Pragmatic Engineer](https://newsletter.pragmaticengineer.com/p/software-engineering-with-llms-in-2025) says:
 
@@ -116,7 +116,7 @@ Identifying what AI is and isn't good at also helps you at a meta level. It stop
 
 ## 4. Being content with your existing workflow
 
-A personality trait of a [great product engineer](/blog/what-is-a-product-engineer) is that they are always experimenting. When it comes to AI tools, this is no different. 
+A personality trait of a [great product engineer](/product-engineer/what-is-a-product-engineer) is that they are always experimenting. When it comes to AI tools, this is no different. 
 
 Our team is always testing (and talking about) new tools and approaches. There have been 1,104 messages with the word "Cursor" in our Slack, 187 with "Claude Code." This started early and is led by [our cofounders](/newsletter/how-to-not-breakup-with-your-cofounder). 
 
@@ -134,9 +134,9 @@ Beyond founder mode, what are some specific ways we aim to improve our workflows
 
 - Trying different models with the same tools to figure out which models are good at what. For example, a lot of our engineers find switching to Opus extremely beneficial (over Sonnet) and have been experimenting with Qwen in Cursor.
 
-- Building and dogfooding our own AI engineering tools like [PostHog AI](/docs/posthog-ai), the [PostHog MCP](/docs/model-context-protocol), and [LLM analytics](/docs/llm-analytics). This also means we talk to a lot of teams on the cutting edge of AI engineering like [Lovable](/customers/lovable) and [ElevenLabs](/customers/elevenlabs).
+- Building and dogfooding our own AI engineering tools like [PostHog AI](/docs/posthog-ai), the [PostHog MCP](/docs/model-context-protocol), and [AI Observability](/docs/ai-observability). This also means we talk to a lot of teams on the cutting edge of AI engineering like [Lovable](/customers/lovable) and [ElevenLabs](/customers/elevenlabs).
 
-- Nearly every hackathon has had AI-related projects being built in it. This gives more of the team opportunities to explore new tools and understand what AI is good/not good at.
+- Nearly every [hackathon](/newsletter/hackathons) has had AI-related projects being built in it. This gives more of the team opportunities to explore new tools and understand what AI is good/not good at.
 
 At a more granular level, great engineers are always experimenting with different prompts and references. They are constantly judging the output of these to create the ideal workflow that works for them (this never ends).
 

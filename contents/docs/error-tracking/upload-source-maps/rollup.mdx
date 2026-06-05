@@ -26,7 +26,7 @@ showStepsToc: true
     },
     plugins: [
       posthog({
-        personalApiKey: process.env.POSTHOG_API_KEY, // Personal API Key
+        personalApiKey: process.env.POSTHOG_API_KEY!, // Personal API Key
         projectId: process.env.POSTHOG_PROJECT_ID, // Project ID
         host: process.env.POSTHOG_HOST, // (optional) defaults to https://us.i.posthog.com
         sourcemaps: { // (optional)
@@ -53,6 +53,22 @@ showStepsToc: true
   </div>
 
   If you are using a CI/CD service, make sure these environment variables are added to your project settings, not just your local setup. This enables source maps to be automatically uploaded on your production build.
+
+<CalloutBox icon="IconInfo" title="Using @rollup/plugin-typescript?" type="info">
+
+If your build uses [`@rollup/plugin-typescript`](https://www.npmjs.com/package/@rollup/plugin-typescript), set `sourceMap: true` and `inlineSources: true` in your `tsconfig.json` so the PostHog plugin receives the source maps it needs to upload:
+
+```json file=tsconfig.json
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "inlineSources": true
+  }
+}
+```
+
+</CalloutBox>
+
 </Step>
 
 <Step checkpoint title="Verify source map upload and injection">
@@ -61,7 +77,7 @@ showStepsToc: true
 
 <div className="mt-4 mb-2">
 
-<OSButton variant="secondary" asLink className="mb-2" size="sm" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external>
+<OSButton variant="secondary" asLink className="mb-2" size="sm" to="https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets" external>
     Check symbol sets in PostHog
 </OSButton>
 

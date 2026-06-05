@@ -130,3 +130,21 @@ We occasionally shift our attention to help customers who may need more urgent a
 -   **Event/Feature Flag/Replay/Error tracking spike indicator for OS** - unusually high usage that may point to a misconfiguration and require our assistance.
 
 To help our Revenue team get the forecasting right, we now have a `Payment Risk Assessment` field in the Vitally dashboard, where we can manually mark when we see that the customer is unlikely to pay their invoice.
+
+### Specific cases
+
+#### How to stop automation
+
+There might be some specific situations where you're actively engaged with the customer, and you don't want the email automation to fire off (e.g., the second outreach). You can easily spot when the email automation is scheduled by checking "Onboarding Pipeline Stage Times" widget in the Vitally dashboard. 
+
+To stop the automation, you can flip the account to the `Onboarding Completed` status. This change will block the second outreach, but will still fire the graduation email. 
+
+#### Failed payments
+
+We may get a Failed Payment alert on a customer we still haven't engaged with. In this case, since we're unsure whether the customer is going to stay with us, we don't have to do a deep account analysis. It's enough to remind them to settle the invoice, offer help, and briefly point out obvious spikes and main drivers of the bill. 
+
+It's enough to reach out just once, as the finance team monitors the payments and handles the account deactivation.
+
+Currently, we exclude some subject line keywords, like "payment", "outstanding", and "fail" in the ["Set onboarding initiated" playbook](https://posthog.vitally-eu.io/settings/playbooks/754f037e-892b-435a-a189-9f3da9b922fa) in order to avoid the status change from `New Account` to `Onboarding initiated`. In other words, when you reach out regarding a failed payment, the account should stay as `New Account` and resurface in Vitally's queue before the next renewal, if the customer settles the payment. When that happens, do our regular outreach with a deep account analysis and enroll them in the program.
+
+

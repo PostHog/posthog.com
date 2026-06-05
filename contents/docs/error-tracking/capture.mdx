@@ -28,7 +28,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 ### Automatic exception capture
 
-If you followed one of our guides to [set up error tracking](/docs/error-tracking/installation) and you [enabled exception auto capture](https://app.posthog.com/project/2/error_tracking?activeTab=configuration), you'll have automatic exception capture enabled.
+If you followed one of our guides to [set up error tracking](/docs/error-tracking/installation) and you [enabled exception auto capture](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-exception-autocapture), you'll have automatic exception capture enabled.
 
 For browser SDKs (JavaScript Web, React, Next.js, etc.), you can configure which types of errors are automatically captured using the `capture_exceptions` option:
 
@@ -58,7 +58,7 @@ You can also manually call the exception capture method.
 
 <CalloutBox icon="IconWarning" title="Always use captureException()" type="warning">
 
-Never manually capture `$exception` events using `posthog.capture('$exception', {...})`. Always use `posthog.captureException(error)` instead - it handles the correct event format, stack trace processing, and source map integration automatically.
+Never manually capture `$exception` events using `posthog.capture('$exception', {...})`. Always use `posthog.captureException(error)` instead – it handles the correct event format, stack trace processing, and source map integration automatically.
 
 </CalloutBox>
 
@@ -94,8 +94,8 @@ posthog.capture_exception(
 ```ruby
 posthog.capture_exception(
   e,
-  distinct_id: 'user_distinct_id',
-  properties: {
+  'user_distinct_id',
+  {
     custom_property: 'custom_value',
     custom_list: ['custom_value_1', 'custom_value_2']
   }
@@ -112,7 +112,104 @@ exception := posthog.NewDefaultException(
 client.Enqueue(exception)
 ```
 
+```csharp file=.NET
+posthog.CaptureException(
+    exception,
+    "user_distinct_id",
+    new Dictionary<string, object>
+    {
+        ["custom_property"] = "custom_value",
+        ["custom_list"] = new[] { "custom_value_1", "custom_value_2" },
+    }
+);
+```
+
+```csharp file=Unity
+PostHog.CaptureException(
+    exception,
+    new Dictionary<string, object>
+    {
+        { "custom_property", "custom_value" },
+        { "custom_list", new[] { "custom_value_1", "custom_value_2" } },
+    }
+);
+```
+
 </MultiLanguage>
+
+## Add exception steps
+
+> Available in `posthog-js` 1.370.0 and later.
+
+Exception steps are lightweight breadcrumbs you attach to an exception before calling `captureException(...)`. They are buffered in memory, added to the next exception as `$exception_steps`, and shown in the session timeline.
+
+Use them for high-signal checkpoints like:
+
+- Checkout or onboarding milestones
+- API calls and retries
+- Feature flag decisions
+- Validation checkpoints
+
+### How they work
+
+- Steps are buffered locally until an exception is captured.
+- They are attached to the exception under `$exception_steps`.
+- They are not sent as standalone PostHog events.
+- Buffered steps are also included on automatically captured exceptions.
+
+### Example
+
+```javascript
+posthog.addExceptionStep('checkout_started', {
+  cart_total: 12900,
+  item_count: 3,
+})
+
+posthog.addExceptionStep('payment_attempted', {
+  provider: 'stripe',
+})
+
+try {
+  await confirmCardPayment(clientSecret)
+} catch (error) {
+  posthog.captureException(error, {
+    checkout_id: 'chk_123',
+  })
+}
+```
+
+### Configure limits
+
+The buffer is byte-aware: when the budget is exceeded, the oldest steps are evicted. The default is 32KB.
+
+```javascript
+posthog.init('<ph_project_token>', {
+  api_host: '<ph_api_client_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  error_tracking: {
+    exception_steps: {
+      enabled: true,
+      max_bytes: 32768,
+    },
+  },
+})
+```
+
+### Best practices
+
+- Use short step names that describe a checkpoint or action.
+- Keep payloads small and focused.
+- Avoid sensitive data, raw request bodies, and large nested objects.
+- Use the `before_send` callback to redact exception steps before they are sent.
+- Add steps before the risky operation runs.
+
+### Troubleshooting missing steps
+
+If an exception appears in error tracking but not in the timeline with steps:
+
+- Make sure you called `addExceptionStep(...)` before the failure.
+- Use `captureException(...)` or autocapture, not `posthog.capture('$exception', ...)`.
+- Reduce step payload size if the final event is too large.
 
 ### Error boundaries
 
@@ -201,8 +298,8 @@ begin
 rescue => e
   posthog.capture_exception(
     e,
-    distinct_id: 'user_123',
-    properties: {
+    'user_123',
+    {
       subscription_id: subscription_id,
       # You can also *optionally* override generated properties like fingerprint
       '$exception_fingerprint': 'CustomExceptionGroup'
@@ -359,6 +456,18 @@ import BurstProtection from './_snippets/burst-protection.mdx'
 <BurstProtection />
 
 ## Common problems
+
+### Exception steps don't appear in the session timeline
+
+If you can see the exception in error tracking but not its steps in the timeline, the most common causes are:
+
+- The steps were recorded after the exception was captured.
+- The server-side code didn't have an active request or job scope.
+- The exception wasn't linked to the same user or session as the replay.
+- The step payload was too large and got truncated or dropped.
+
+Start by verifying identification and session linkage, then confirm your steps are being added immediately before the risky operation.
+
 
 ### Don't use `posthog.capture()` for exceptions
 
