@@ -137,5 +137,5 @@ See [Logos, brand, hedgehogs](/handbook/company/brand-assets)
 <details>
 <summary>A journalist has contacted me</summary>
 
-Direct them to press@posthog.com, where one of Joe, James, Charles, or Tim can respond. They're the only people who should speak to press. See: [Press & PR](/handbook/brand/press)
+Direct them to press@posthog.com, where one of Joe, James, Charles, or Tim can respond. They're the only people who should speak to press. See: [Press & PR](/handbook/marketing/press)
 </details>

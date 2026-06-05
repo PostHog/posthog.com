@@ -94,7 +94,7 @@ Issues? Reach out in [#merch Slack](https://posthog.slack.com/archives/C04DWKH7D
 
 ## Monthly Newsletter
 
-We send a short, founder-focused newsletter once per month to all program participants. This is handled as a Customer.io broadcast using [a prebuilt template](/handbook/brand/email-comms).
+We send a short, founder-focused newsletter once per month to all program participants. This is handled as a Customer.io broadcast using [a prebuilt template](/handbook/marketing/email-comms).
 
 ## Credit usage
 
