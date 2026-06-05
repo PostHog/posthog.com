@@ -369,6 +369,13 @@
         "profile_id": 30833
     },
     {
+        "handle": "daniel-visca",
+        "name": "Daniel Visca",
+        "role": "Software Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/DanielVisca"
+    },
+    {
         "handle": "danilo-campos",
         "name": "Danilo Campos",
         "role": "Robopsychologist",

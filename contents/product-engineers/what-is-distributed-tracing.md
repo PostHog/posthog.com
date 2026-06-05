@@ -2,7 +2,7 @@
 title: 'What is distributed tracing? (A guide for engineers)'
 date: 2026-06-05
 author:
-  - Daniel Visca
+  - daniel-visca
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/happy-hog.png
 featuredImageType: full
@@ -25,9 +25,9 @@ This guide covers what distributed tracing is, how traces and spans work, what i
 
 ## What is distributed tracing?
 
-Distributed tracing is a technique for tracking a request as it moves through a distributed system, recording the path it takes and the time it spends at each step. The result, a **trace**, is the complete story of one request: what called what, in what order, and how long each part took.
+[Distributed tracing](/docs/distributed-tracing) is a technique for tracking a request as it moves through a distributed system, recording the path it takes and the time it spends at each step. The result, a **trace**, is the complete story of one request: what called what, in what order, and how long each part took.
 
-It's the third pillar of observability, alongside **logs** (discrete events: "this happened at this time") and **metrics** (aggregates over time: "p99 latency was 800ms"). Logs and metrics tell you *that* something is wrong. Distributed tracing tells you *where*.
+It's the third pillar of observability, alongside [logs](/docs/logs) (discrete events: "this happened at this time") and **metrics** (aggregates over time: "p99 latency was 800ms"). Logs and metrics tell you *that* something is wrong. Distributed tracing tells you *where*.
 
 The word "distributed" matters. Tracing a request inside a single process is useful, but the real payoff comes when a request crosses service boundaries, queues, and network calls, the exact places where it's hardest to reason about what happened. Distributed tracing stitches those separate hops back into one connected view.
 
@@ -57,9 +57,9 @@ Each observability signal answers a different question:
 | Signal | What it tells you | Example |
 |--------|-------------------|---------|
 | **Metrics** | The aggregate shape of behavior | "p99 checkout latency is 3.1s" |
-| **Logs** | What happened at one point | "Inventory service returned 200 with 0 items" |
-| **Errors** | What broke | "TypeError: cannot read property 'price' of undefined" |
-| **Distributed tracing** | How the request flowed and where time went | "Checkout took 3.2s, and 2.8s of it was waiting on the inventory service" |
+| [**Logs**](/docs/logs) | What happened at one point | "Inventory service returned 200 with 0 items" |
+| [**Errors**](/docs/error-tracking) | What broke | "TypeError: cannot read property 'price' of undefined" |
+| [**Distributed tracing**](/docs/distributed-tracing) | How the request flowed and where time went | "Checkout took 3.2s, and 2.8s of it was waiting on the inventory service" |
 
 Metrics tell you something is slow. Logs tell you what happened at individual points, but you have to manually correlate them across services. Errors tell you something threw. Distributed tracing tells you **how the pieces connected, and where the time and failures actually came from**, across every service a request touched.
 
@@ -98,7 +98,7 @@ If you've searched for "tracing" recently, you've probably seen the term used in
 
 - **Distributed tracing** (the subject of this guide) is an APM technique. It traces a request across the services, databases, and APIs of a backend system to find latency and failures. The unit of work is a span; the standard is OpenTelemetry.
 
-- **LLM tracing** (sometimes called AI observability) traces a single call or conversation through an AI application, the prompts, model generations, tool calls, token usage, and cost. The goal is debugging and evaluating LLM behavior, not backend performance.
+- **LLM tracing** (sometimes called [AI observability](/ai-observability)) traces a single call or conversation through an AI application, the prompts, model generations, tool calls, token usage, and cost. The goal is debugging and evaluating LLM behavior, not backend performance.
 
 They share vocabulary, "trace" and "span", because LLM tracing borrowed the model from distributed tracing. But they answer different questions, for different audiences, with different tooling. When this guide says "tracing," it means distributed tracing for application performance. If you're debugging an AI agent or tracking LLM costs, you want [LLM observability](/docs/ai-observability) instead.
 
@@ -110,3 +110,44 @@ The advantage of tracing in PostHog is that your traces live in the same project
 
 - **[Get started with distributed tracing](/docs/distributed-tracing/start-here)**, install an OpenTelemetry exporter and send your first spans
 - **[Why you need distributed tracing](/docs/distributed-tracing/basics)**, a deeper look at what tracing shows you that nothing else does
+
+If you'd rather have an LLM walk you through setup, the PostHog Wizard can install the SDK, drop in your project key, and wire up your first exporter for you:
+
+<WizardCTA />
+
+## FAQ
+
+<details>
+  <summary>What's the difference between tracing and distributed tracing?</summary>
+
+In practice the terms are used interchangeably. "Tracing" originally meant in-process instrumentation that times function calls within a single program. "Distributed tracing" is the same idea extended across service boundaries by propagating a shared trace context, so spans emitted by different services join the same trace. Today, when most people say "tracing" in the context of microservices, they mean distributed tracing.
+
+</details>
+
+<details>
+  <summary>Do I need distributed tracing if I have logs and metrics?</summary>
+
+Logs and metrics tell you *that* something is wrong, distributed tracing tells you *where*. If your system is a single service and a database, you can usually get by with [logs](/docs/logs) and a few metrics. Once a request fans out across multiple services, queues, or third-party APIs, correlating logs by hand stops scaling and you need traces to see the whole flow.
+
+</details>
+
+<details>
+  <summary>How do I set up distributed tracing in PostHog?</summary>
+
+PostHog ingests traces over OpenTelemetry's standard OTLP protocol, so there's no proprietary SDK to install. Instrument your app with the OpenTelemetry libraries for your language, point your trace exporter at PostHog, and add your project token. The [Get started guide](/docs/distributed-tracing/start-here) walks through it end to end.
+
+</details>
+
+<details>
+  <summary>What's the difference between distributed tracing and LLM tracing in PostHog?</summary>
+
+[Distributed tracing](/docs/distributed-tracing) traces a request across the services, databases, and APIs of a backend system. [LLM observability](/docs/ai-observability) traces a single call or conversation through an AI application, including prompts, model generations, tool calls, token usage, and cost. They share vocabulary ("trace" and "span") but solve different problems, and PostHog supports both as separate products.
+
+</details>
+
+<details>
+  <summary>Can I correlate traces with session replays and error events?</summary>
+
+Yes. Because PostHog traces live in the same project as [Session Replay](/docs/session-replay), [Error Tracking](/docs/error-tracking), [Logs](/docs/logs), and [Product Analytics](/docs/product-analytics), you can link a slow or failed trace to the user who experienced it and the session they were in. That's the main reason to keep tracing in the same platform as the rest of your observability data instead of running a separate APM vendor.
+
+</details>
