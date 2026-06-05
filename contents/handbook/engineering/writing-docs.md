@@ -1,5 +1,5 @@
 ---
-title: Writing docs (as an engineer)
+title: Writing docs as an engineer
 sidebar: Handbook
 showTitle: true
 ---
