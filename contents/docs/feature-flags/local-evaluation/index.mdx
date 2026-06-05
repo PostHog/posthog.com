@@ -3,9 +3,9 @@ title: Server-side local evaluation
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
 > **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), [Java](/docs/libraries/java), and [Rust](/docs/libraries/rust) SDKs.
@@ -60,7 +60,7 @@ There are 3 steps to enable local evaluation:
 
 ## Step 1: Find your feature flags secure API key
 
-import ObtainFeatureFlagsSecureAPIKey from "../../integrate/_snippets/obtain-flags-secure-key.mdx"
+import ObtainFeatureFlagsSecureAPIKey from "../../integrate/_snippets/obtain-flags-secure-key.mdx";
 
 <ObtainFeatureFlagsSecureAPIKey />
 
@@ -74,7 +74,7 @@ By default, PostHog fetches these definitions every 30 seconds (or 5 minutes in 
 >
 > This is because one of these requests can compute feature flags for hundreds or thousands of users. It ensures local evaluation is priced fairly while remaining the most cost-effective option (by far!).
 
-import ConfigureFlagsSecureKey from "../../integrate/_snippets/configure-flags-secure-key.mdx"
+import ConfigureFlagsSecureKey from "../../integrate/_snippets/configure-flags-secure-key.mdx";
 
 <ConfigureFlagsSecureKey />
 
@@ -92,10 +92,10 @@ When the SDK first starts, it needs up to one polling interval (30 seconds by de
 
 ```javascript
 // Without a default, undefined is falsy — users see nothing
-const variant = posthog.getFeatureFlag('checkout-redesign') || false
+const variant = posthog.getFeatureFlag("checkout-redesign") || false;
 
 // With a per-flag default, you control the experience
-const variant = posthog.getFeatureFlag('checkout-redesign') ?? 'control'
+const variant = posthog.getFeatureFlag("checkout-redesign") ?? "control";
 ```
 
 If you deploy frequently or have many short-lived workers, consider using a [shared flag definition cache](/docs/feature-flags/local-evaluation/distributed-environments) so definitions survive restarts and the cold start window is eliminated.
@@ -103,21 +103,21 @@ If you deploy frequently or have many short-lived workers, consider using a [sha
 <MultiLanguage>
 
 ```node
-const flags = await client.evaluateFlags('distinct_id_of_the_user', {
-    // Include any person properties, groups, or group properties required to evaluate the flag
-    personProperties: { property_name: 'value' },
-    groups: {
-        your_group_type: 'your_group_id',
-        another_group_type: 'another_group_id',
-    },
-    groupProperties: {
-        your_group_type: { group_property_name: 'value' },
-        another_group_type: { group_property_name: 'another value' },
-    },
-    onlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
-})
+const flags = await client.evaluateFlags("distinct_id_of_the_user", {
+  // Include any person properties, groups, or group properties required to evaluate the flag
+  personProperties: { property_name: "value" },
+  groups: {
+    your_group_type: "your_group_id",
+    another_group_type: "another_group_id",
+  },
+  groupProperties: {
+    your_group_type: { group_property_name: "value" },
+    another_group_type: { group_property_name: "another value" },
+  },
+  onlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally.
+});
 
-const flagValue = flags.getFlag('flag-key')
+const flagValue = flags.getFlag("flag-key");
 ```
 
 ```ruby
@@ -289,7 +289,7 @@ As mentioned in [step 2](#step-2-initialize-posthog-with-your-feature-flags-secu
 <MultiLanguage>
 
 ```node
-await client.reloadFeatureFlags()
+await client.reloadFeatureFlags();
 ```
 
 ```ruby
@@ -330,6 +330,7 @@ Local evaluation is not possible for flags that:
 2. Are linked to an [early access feature](/docs/feature-flags/early-access-feature-management)
 3. Depend on [static cohorts](/docs/data/cohorts#static-cohorts)
 4. Use the `is_not_set` property operator, since local evaluation can only check properties you provide — it can't determine whether a property is absent on a person.
+5. Have ["Stop evaluation at first matching condition set"](/docs/feature-flags/creating-feature-flags#stop-evaluation-at-first-matching-condition-set) (early exit) enabled. Local evaluation currently always evaluates all condition groups, even when this setting is enabled. This is a temporary limitation while support is rolled out across SDKs. For now, the setting only takes effect when flags are evaluated through the `/flags` endpoint.
 
 ### Dynamic cohort restrictions
 

@@ -34,6 +34,10 @@ export interface MenuItem {
     platformLogo?: string
     showChildrenIcons?: boolean
     sortChildrenAlpha?: boolean
+    // When set, this item (and its children) is only shown to users for whom the
+    // named PostHog feature flag is enabled. Gating is client-side only — see
+    // src/hooks/useActiveFeatureFlags.ts and note the static-site caveat.
+    featureFlag?: string
     children?: MenuItem[]
 }
 
@@ -338,6 +342,40 @@ const appSettings: AppSettings = {
             variant: 'control',
             flag: 'homepage-test',
         },
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 960,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
+                if (typeof window === 'undefined') {
+                    return {
+                        x: 0,
+                        y: 0,
+                    }
+                }
+
+                const { x, y } = getDesktopCenterPosition(size)
+                const iconColumnRight = 145
+                const keyboardGardenImageLeft = window.innerWidth - 700
+                if (x + size.width > keyboardGardenImageLeft) {
+                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
+                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
+                    return { x: newX, y }
+                }
+                return { x, y }
+            },
+        },
+    },
+    '/ko': {
         size: {
             min: {
                 width: 700,

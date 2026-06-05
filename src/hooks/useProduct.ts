@@ -29,6 +29,7 @@ import {
     IconArrowUpRight,
     IconTrends,
     IconCursorClick,
+    IconChat,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -91,6 +92,18 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'beta',
         },
         {
+            name: 'PostHog Slack app',
+            Icon: IconChat,
+            description:
+                'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
+            handle: 'posthog_slack',
+            color: 'sky-blue',
+            colorSecondary: 'sky-blue',
+            category: 'product_os',
+            slug: 'slack-app',
+            status: 'beta',
+        },
+        {
             name: 'Traces',
             Icon: IconListTreeConnected,
             description: 'Debug entire AI conversations with full trace visibility.',
@@ -98,7 +111,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'seagreen',
             colorSecondary: 'seagreen',
             category: 'ai',
-            slug: 'llm-analytics',
+            slug: 'ai-observability',
         },
         {
             name: 'Generations',
@@ -108,7 +121,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'yellow',
             colorSecondary: 'yellow',
             category: 'ai',
-            slug: 'llm-analytics',
+            slug: 'ai-observability',
             status: 'beta',
         },
         {
@@ -119,7 +132,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'blue',
             colorSecondary: 'blue',
             category: 'ai',
-            slug: 'llm-analytics',
+            slug: 'ai-observability',
             status: 'beta',
         },
         {

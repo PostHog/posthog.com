@@ -9,10 +9,11 @@ author:
   - james-hawkins
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/ai_models_blog_8cc6ccc808.png
 featuredImageType: full
-category: CEO diaries
+tags:
+ - CEO diaries
 ---
 
-I've never been more excited about the future of PostHog. 
+I really think we're on the verge of some of our best work through the next six months.
 
 Over the past year, we've started building more AI-powered features into PostHog, like our [AI installation wizard](/wizard), [PostHog AI](/docs/posthog-ai), and our [MCP](/docs/model-context-protocol). They're all wildly popular, but they're only the start.
 

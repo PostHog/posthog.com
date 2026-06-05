@@ -25,6 +25,7 @@ import { FeatureAvailability } from './components/FeatureAvailability'
 import FeatureOwnershipTable from './components/FeatureOwnershipTable'
 import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
+import { AdvisoryAnchor } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { HubSpotForm } from './components/HubSpotForm'
 import ImageSlider from './components/ImageSlider'
@@ -96,6 +97,7 @@ export const shortcodes = {
     FeatureAvailability,
     FormulaScreenshot,
     GDPRForm,
+    AdvisoryAnchor,
     HiddenSection,
     HubSpotForm,
     KeyboardShortcut,
