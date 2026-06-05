@@ -31,7 +31,7 @@ It's the third pillar of observability, alongside **logs** (discrete events: "th
 
 The word "distributed" matters. Tracing a request inside a single process is useful, but the real payoff comes when a request crosses service boundaries, queues, and network calls, the exact places where it's hardest to reason about what happened. Distributed tracing stitches those separate hops back into one connected view.
 
-## How distributed tracing works: traces and spans
+## How distributed tracing works
 
 A trace is made up of **spans**. Each span is a single unit of work, like an incoming HTTP request, a database query, or a call to a payment API.
 
@@ -48,7 +48,7 @@ Two ideas make this work across services:
 
 2. **Context propagation.** When one service calls another, it passes the trace context (the trace ID and the current span ID) along with the request, usually in HTTP headers. The receiving service attaches its spans to that same trace. This is the "distributed" part, and it's what separates distributed tracing from simple in-process timing.
 
-The de facto standard for all of this is [OpenTelemetry](https://opentelemetry.io/) (OTel), a vendor-neutral set of APIs, SDKs, and a wire protocol (OTLP) for generating and exporting traces. Instrument with OpenTelemetry once, and you can send your traces to any compatible backend without rewriting your code.
+The industry standard for all of this is [OpenTelemetry](https://opentelemetry.io/), a vendor-neutral set of APIs, SDKs, and a wire protocol (OTLP) for generating and exporting traces. Instrument with OpenTelemetry once, and you can send your traces to any compatible backend without rewriting your code.
 
 ## What distributed tracing shows you that logs and metrics can't
 
@@ -106,7 +106,7 @@ They share vocabulary, "trace" and "span", because LLM tracing borrowed the mode
 
 PostHog supports [distributed tracing](/docs/distributed-tracing) over OpenTelemetry. Because it's a standard OTLP receiver, there's no proprietary SDK: instrument your app with the OpenTelemetry libraries you already use, point your trace exporter at PostHog, and add your project token.
 
-The advantage of tracing in PostHog is that your traces live in the same project as your [session replays](/docs/session-replay), [errors](/docs/error-tracking), [logs](/docs/logs), and [product analytics](/docs/product-analytics). So you don't just see that a request was slow, you can connect it to the user who experienced it and the business impact it had, in one platform instead of another observability vendor to run.
+The advantage of tracing in PostHog is that your traces live in the same project as [Session Replay](/docs/session-replay), [Error Tracking](/docs/error-tracking), [Logs](/docs/logs), and [Product Analytics](/docs/product-analytics). So you don't just see that a request was slow, you can connect it to the user who experienced it and the business impact it had, in one platform instead of another observability vendor to run.
 
 - **[Get started with distributed tracing](/docs/distributed-tracing/start-here)**, install an OpenTelemetry exporter and send your first spans
 - **[Why you need distributed tracing](/docs/distributed-tracing/basics)**, a deeper look at what tracing shows you that nothing else does
