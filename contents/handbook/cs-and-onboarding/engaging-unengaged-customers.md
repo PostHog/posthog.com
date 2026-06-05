@@ -14,7 +14,9 @@ The common thread: **do your homework first, then lead with something specific a
 
 ## Pre-outreach research
 
-Before reaching out, spend 10 minutes understanding where the customer is at. This makes all the difference between a generic check-in and a genuinely helpful conversation.
+Before reaching out, spend at least 10 minutes understanding where the customer is at. This makes all the difference between a generic check-in and a genuinely helpful conversation.
+
+Ideally, you should never enter a call without a backlog of proactive **relevant** topics to burn through if the primary issue is resolved quickly (like a new upcoming products,events, questions about their product). The goal isn't a quick check-in; it's ensuring that every minute the customer spends on a call with us feels insightful and necessary.
 
 ### Review their engagement metrics
 
