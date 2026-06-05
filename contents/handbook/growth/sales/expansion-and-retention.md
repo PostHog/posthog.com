@@ -51,7 +51,7 @@ An overview of how to drive expansion with a customer can be found in the [cross
 
 ## Principles for visiting customers
 
-If you offer to do a meeting in person with a customer, they’ll then feel obliged to introduce you to other people to make good use of your time. Trying to get them to adopt more products can be a good trigger, but generally you should be matching the cadence for in-person meetings with the size of contract (ie. more regular for Very Large, less regular for Large). If necessary you can [request a budget for travel and accommodation](https://posthog.com/handbook/people/spending-money) in Brex.
+If you offer to do a meeting in person with a customer, they’ll then feel obliged to introduce you to other people to make good use of your time. Trying to get them to adopt more products can be a good trigger, but generally you should be matching the cadence for in-person meetings with the size of contract (ie. more regular for Very Large, less regular for Large). If necessary you can [request a budget for travel and accommodation](https://posthog.com/handbook/people/spending-money) in Brex. Even better - if you're meeting one customer, why not two? Ask them to intro you to an engineer friend who would get value from PostHog. If they're fans of the product and you, they'll be glad to do it. 
 
 Generally speaking you should be trying to regularly see customers in your book of business who are $100k+ annually, or could get there. Occasionally you can pull in James/Tim if they are traveling to SF/NY especially, or if the customer is in London. 
 
