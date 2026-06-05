@@ -749,6 +749,40 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    qubs: {
+        name: 'Qubs',
+        toolsUsed: [
+            'endpoints',
+            'error_tracking',
+            'feature_flags',
+            'product_analytics',
+            'session_replay',
+            'surveys',
+            'llm_analytics',
+            'warehouse_sources',
+        ],
+        industries: ['Ad Tech', 'Hospitality', 'Digital Signage'],
+        users: ['Engineering'],
+        notes: 'A digital menu platform with its own ad network',
+        featured: false,
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_white_outline_2x_5430c8f472.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_black_2x_c4ca11cba9.png',
+        },
+        height: 10,
+        quotes: {
+            gheorghe_avram: {
+                name: 'Gheorghe Avram',
+                role: 'CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/Gheorghe_headshot_96a950e3d6.png',
+                },
+                quotes: [
+                    'This is the true power of PostHog, they give us the freedom to use our data wherever we want to, without the complexity of managing the infrastructure.',
+                ],
+            },
+        },
+    },
     raycast: {
         name: 'Raycast',
         toolsUsed: [], // TODO: Add toolsUsed

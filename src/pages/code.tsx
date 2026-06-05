@@ -4,7 +4,7 @@ import Editor from 'components/Editor'
 import { IconArrowUpRight, IconCheck, IconFlask, IconToggle, IconTrends, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { LOGOS, type LogoKey } from 'constants/logos'
+import { LOGOS, type LogoKey, getDarkClassForLogo } from 'constants/logos'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
@@ -1176,7 +1176,9 @@ const TableStakes = () => {
                                     <img
                                         src={LOGOS[row.logoKey]}
                                         alt=""
-                                        className="size-7 shrink-0 object-contain"
+                                        className={`size-7 shrink-0 object-contain ${getDarkClassForLogo(
+                                            LOGOS[row.logoKey]
+                                        )}`}
                                         aria-hidden
                                     />
                                     <p className="m-0 text-base font-bold text-primary">{row.name}</p>

@@ -156,3 +156,17 @@ export type LogoKey = keyof typeof LOGOS
 export function getLogo(key: string): string | undefined {
     return LOGOS[key as LogoKey]
 }
+
+// Logos whose source SVGs have hardcoded dark fills/strokes and render poorly on dark backgrounds.
+// `dark:invert` flips pure-black artwork to white; `dark:hue-rotate-180` preserves the original
+// hue of color elements after inversion (used for logos that mix color with black).
+const LOGO_DARK_CLASS_BY_URL: Record<string, string> = {
+    [LOGOS.ios]: 'dark:invert',
+    [LOGOS.rust]: 'dark:invert',
+    [LOGOS.reactRouter]: 'dark:invert dark:hue-rotate-180',
+}
+
+export function getDarkClassForLogo(url?: string): string {
+    if (!url) return ''
+    return LOGO_DARK_CLASS_BY_URL[url] ?? ''
+}
