@@ -21,6 +21,16 @@ Broadcasts go to every shared customer and partner channel, so they're best rese
 
 Because every customer sees the same message, keep broadcasts infrequent and high-signal. If a message is only relevant to a subset of accounts, it's usually better to let the account owner share it directly.
 
+## Check with Sales before sending
+
+Broadcasts reach live customer and partner channels, and Sales or the TAMs may know of sensitive accounts that should be excluded from a particular comm. Before sending a broadcast, give them a chance to flag any:
+
+1. Share a brief update in <PrivateLink url='https://posthog.slack.com/archives/C01MGUHFH6G'>#sales</PrivateLink> describing the comm you're about to send and who it will reach.
+2. Allow **24 hours** for salespeople and TAMs to respond with any accounts that should be excluded or any other concerns.
+3. If no feedback is received within that window, go ahead and send your comm – you don't need to wait for explicit sign-off or be blocked.
+
+This keeps PMMs unblocked while giving the people closest to our customers a simple way to catch anything sensitive.
+
 ## How to send a broadcast in Pylon
 
 1. Log into the [Pylon admin](https://app.usepylon.com/) using SSO with your PostHog email address.
