@@ -51,7 +51,7 @@ It's a tiny medieval roguelike text adventure about a knight keeping watch over 
 
 It runs across five acts and 400+ hand-written events, with a two-and-a-half minute cooldown between choices during which the world breathes by giving you a slow trickle of flavour events.
 
-When your knight finally dies, you choose their last words, and those words shape the knight who takes up the watch next. It is not a game you rush. It's something you keep half an eye on while you wait for a meeting to start and games are intended to last weeks.
+When your knight finally dies, you choose their last words, and those words shape the knight who takes up the watch next. It is not a game you rush. It's something you keep half an eye on while you wait for meetings to start over the course of weeks.
 
 ![vigil panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/09_vigil_43101400fb.png)
 
