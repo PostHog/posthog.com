@@ -57,7 +57,7 @@ When your knight finally dies, you choose their last words, and those words shap
 
 ## Modern coding is mostly copy-and-paste
 
-The whole thing was built in plain English, in conversation with Claude. I'd describe what I wanted — a new panel, a layout tweak, a bug to chase — and it would write the MicroPython, flash it to the device over USB, and read the logs back when something broke. For the bigger pieces, like expanding Vigil, I'd put it in plan mode first, so it thought through the structure before touching a single file. For everything small, I just said the thing and watched it land a few seconds later.
+The whole thing was built in plain English, in conversation with Claude. I'd describe what I wanted — a new panel, a layout tweak, a bug to chase — and it would write the MicroPython, flash it to the device over USB, and read the logs back when something broke. For the bigger pieces, like expanding Vigil, I'd put it in plan mode first, but for everything small, I just said the thing and watched it land a few seconds later.
 
 Initially my prompts were not precise. Most were vibes — _"make the moon panel a bit nicer and more in keeping with the aesthetic."_ Some were just _"the clock is five minutes slow,"_ with a photo of the screen attached. The rhythm never changed: ask, flash, see what it actually did, report back.
 
@@ -65,7 +65,7 @@ This was a necessary pattern because, while AI helped me ship this thing, I didn
 
 The bottleneck in non-technical building isn't building anymore — it's _diagnosis_. And diagnosis is just data you haven't collected yet.
 
-So the more of my code an AI does, the more I need a backend telling me — and it — what's actually happening. That's the opposite of what you'd assume. You'd think tools like Claude make analytics less necessary. For people like me, they make it _more_.
+So the more of my code an AI writes, the more I need something telling me — and it — what's actually happening. That's the opposite of what you'd assume. You'd think tools like Claude make analytics less necessary. For people like me, they make it _more_.
 
 ## Setting up PostHog
 
@@ -75,7 +75,7 @@ There are a lot of ways to [install PostHog](/wizard), but I did this with one s
 
 Claude wrote a small capture client that batches events in memory and ships them over WiFi without ever blocking the screen, then wired it through the whole OS. I pasted in a project key. That was the entirety of the install experience.
 
-The more interesting part happened next, through the [PostHog MCP](/docs/model-context-protocol) — a connector that lets Claude talk to my PostHog project directly. I never opened the PostHog UI. I just asked, and Claude found my new project, confirmed events were arriving, built two pinned dashboards, and filled them with fifteen [insights](/docs/product-analytics/insights) — all from plain English.
+The more interesting part happened next, through the [PostHog MCP](/docs/model-context-protocol). With it, I never had to open the PostHog UI. I just asked, and Claude found my new project, confirmed events were arriving, built two pinned dashboards, and filled them with fifteen [insights](/docs/product-analytics/insights) – all from plain English.
 
 ![Vigil dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/vigil_dashboard_1e866cdf61.png)
 
