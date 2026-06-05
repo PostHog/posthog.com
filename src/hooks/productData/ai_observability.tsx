@@ -47,6 +47,10 @@ export const aiObservability = {
     description: 'Track costs, performance, and usage of your AI features',
     handle: 'ai_observability',
     type: 'ai_observability',
+    // The billing service still exposes this product under its original type
+    // (`llm_analytics`) from before the "AI Observability" rename. Billing data is
+    // joined on this value so pricing/calculator surfaces can find it.
+    billingType: 'llm_analytics',
     slug: 'ai-observability',
     color: 'purple',
     colorSecondary: 'green-2',
