@@ -85,8 +85,14 @@ None of it touched a SQL query or a chart builder. I described what I wanted to 
 
 ## Shipping isn't maintaining
 
-I'm not going to pretend I'm an engineer now. I do enough of that on LinkedIn. But the gap between "I have an idea" and "it's running on hardware on my desk" has collapsed, and it'll keep collapsing for people like me. It's genuinely exciting.
+I'm not going to pretend I'm an engineer now. I do enough of that on LinkedIn. But the gap between "I have an idea" and "it's running on hardware on my desk" has collapsed, and it'll keep collapsing for people like me.
 
-What hasn't changed is everything that happens after "it works." A thing that runs is not a thing you understand. The instrumentation is what lets me, and the AI I build with, keep something alive that neither of us could have written alone.
+Analytics added via PostHog are part of how that happens. The dashboards and tracking I've implemented can function as just a curiosity — a scoreboard by which I can track my lifetime progress in Vigil and the temperature in my home office. But they also provide so much more as a way for me to enrich my prompts, gather insights, and build more features.
+
+A few things that are already changing because of what I can now see in the data include re-ordering the panels and tweaking the UI. I knew this intuitively, but the data in PostHog showed I opened Vigil more often than anything else. So, I asked Claude to create a shortcut. Now, I can tap the clock from any panel and it'll take me straight back to my knights' dreary adventure. 
+
+Further updates are coming too. Right now, the numbers in Vigil's dashboard suggest I choose the Honorable option far more often than not – which suggests the moral tension I was hoping for isn't landing. When I get time I plan to rewrite many of the story beats, remove the Honor and Craven labels, and make the positions randomize. That way there won't always be an obviously good choice to lean on.
+
+In other words, while the way I build is changing thanks to AI tools like Claude, product analytics remains an important part of the process and helps me decide what I'll build. The instrumentation is what lets me, and the AI I build with, keep something alive that neither of us could have written alone.
 
 Also, my desk now tells me when the CO2 in the room is too high, which explains an enormous amount about my sleepy afternoons.
