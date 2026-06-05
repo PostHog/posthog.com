@@ -18,9 +18,9 @@ PostHog is building the infrastructure for self-driving product development. The
 
 **Endpoints is the egress layer for that loop.** The data is already in PostHog. The hard part was getting it out: building a custom API, maintaining it, versioning it, rate-limiting it, keeping it from breaking when someone tweaked a query. Endpoints removes all of that.
 
-For teams building AI-native products, it goes further. Endpoints exposes PostHog data directly to LLMs, Claude Code, Cursor, and any agent runtime via clean HTTP with no additional infrastructure required. The warehouse stores the context. Endpoints delivers it.
+For teams building AI-native products, it goes further. Endpoints exposes PostHog data directly to your MCP, and any agent runtime via clean HTTP with no additional infrastructure required. The warehouse stores the context. Endpoints delivers it.
 
-Tinybird and custom-built analytics APIs solve the same surface problem. They don't solve the underlying one: the data still isn't in PostHog, which means agents can't query it natively, flags can't act on it, and experiments can't measure it. With Endpoints, the data stays in PostHog, can be used by every PostHog product, and can be shared externally to your PostHog UI too.
+Tinybird and custom-built analytics APIs solve the same surface problem. They don't solve the underlying one: the data still isn't in PostHog, which means agents can't query it natively, flags can't act on it, and experiments can't measure it. With Endpoints, you can use data from any source connected to PostHog, shared externally wherever your customers need to see it, including your MCP.
 
 ## Who this is for
 
@@ -42,7 +42,7 @@ Tinybird and custom-built analytics APIs solve the same surface problem. They do
 
 **Problem:** The data is in PostHog. Getting it out means either exporting CSVs by hand, or building a custom API and owning it forever. That's slow, fragile, and doesn't scale.
 
-**Solution:** Endpoints turns any saved insight or SQL query into a stable, versioned, authenticated URL. Embed it in your product, power an internal dashboard, feed it to an LLM. No backend. No pipelines. No maintenance.
+**Solution:** Endpoints turns any saved insight or SQL query into a stable, versioned, authenticated URL. Embed it in your product, power an internal dashboard, give your MCP access. No backend. No pipelines. No maintenance.
 
 **Supporting features:**
 * Materialized queries for fast response times, even on large datasets
@@ -55,7 +55,7 @@ Tinybird and custom-built analytics APIs solve the same surface problem. They do
 
 **Problem:** Getting PostHog data into a product, report, or customer dashboard used to mean one of three things: file a ticket and wait for engineering, buy another tool (Tinybird, a custom API service), or build and maintain a backend yourself. All of those options are slow, and unavailable to a PM or marketer on a Tuesday afternoon.
 
-**Solution:** Endpoints is self-serve for anyone who can save an insight. PostHog handles the query, the caching, the rate limits, and the schema, you get a URL you can use anywhere. No data science background. No second tool. No custom API to maintain.
+**Solution:** Endpoints is self-serve for anyone who can save an insight. PostHog handles the query, caching, rate limits, and the schema, you get a URL you can use anywhere. No data science background needed or custom API to maintain.
 
 **Supporting features:**
 * We handle the query, cache, rate limits, and schema, you have nothing to build or own
@@ -68,13 +68,12 @@ Tinybird and custom-built analytics APIs solve the same surface problem. They do
 
 **Problem:** Agents running the product autonomy loop need live product signals as context: event counts, funnel states, metric comparisons. Wiring that up today means custom retrieval infrastructure on top of an already complex pipeline.
 
-**Solution:** Endpoints exposes PostHog data over HTTP to any LLM, agent runtime, or MCP-compatible tool. PostHog already has the data. Endpoints makes it fetchable.
+**Solution:** Endpoints exposes PostHog data over HTTP to any agent runtime, or MCP-compatible tool. PostHog already has the data. Endpoints makes it fetchable without exposing your entire database.
 
 **Supporting features:**
-* Clean HTTP - works with any agent runtime, no SDK required
-* Pairs with PostHog's MCP for richer agent context
-* Parameterization for query-time filtering
 * Stable URLs - build agent prompts that reliably resolve to fresh data
+* Clean HTTP - works with any agent runtime, no SDK required
+* Parameterization for query-time filtering
 
 ## Battle cards
 
@@ -84,7 +83,7 @@ Tinybird and custom-built analytics APIs solve the same surface problem. They do
 
 **Where PostHog wins:**
 * Zero additional infrastructure, if you're using PostHog, the data is already there
-* No data movement required, no pipeline into Tinybird, no schema mapping
+* No data movement required, no custom pipeline into Tinybird, no schema mapping
 * Data stays in PostHog, no separate tool to maintain and bill to pay
 
 ### vs Custom-built analytics APIs
@@ -92,7 +91,7 @@ Tinybird and custom-built analytics APIs solve the same surface problem. They do
 **The DIY approach:** Engineers build a purpose-made backend including a query layer, caching, rate limiting, auth, versioning. Fits exactly what the team needs.
 
 **Where PostHog wins:**
-* Endpoints takes minutes, not a sprint
+* Endpoints takes minutes to set up
 * Zero ongoing maintenance, no infrastructure to monitor, scale, or fix
 * Works without an engineer, PMs, marketers, ops leads can ship an Endpoint themselves
 * Versioning, caching, and rate limiting are built in, not bolted on
@@ -115,7 +114,7 @@ Tinybird and custom-built analytics APIs solve the same surface problem. They do
 
 **Follow-up:** Where is your data right now, and what would you need to move it?
 
-**Answer:** Tinybird is a great product if you need to build an analytics API on top of data that lives outside PostHog. If your data is already in PostHog, Endpoints gives you the same outcome, authenticated, cached, rate-limited HTTP endpoints, without a second tool, a data pipeline, or a separate bill. PostHog customers suitable for Endpoints will have data in PostHog already.
+**Answer:** Tinybird is a great product if you need to build an analytics API on top of data that lives outside PostHog. If your data is already in PostHog, Endpoints gives you the same outcome, authenticated, cached, rate-limited HTTP endpoints, without a second tool, a data pipeline, or a separate bill. PostHog customers suitable for Endpoints will have data in PostHog already. With PostHog you can connect all your data sources easily, with Tinybird you need to build a custom pipeline for every data source.
 
 ### "Is it production-ready?"
 
@@ -128,4 +127,3 @@ Enterprise Endpoints conversations follow the same rules as the rest of PostHog:
 The enterprise pitch is the data egress story. Large organizations often have PostHog deployed across multiple teams and use cases, but data still escapes via manual exports and one-off scripts. Endpoints replaces that pattern with something versioned, auditable, and self-serve — without requiring a data engineering queue.
 
 The honest pitch: Endpoints wins when the data is already in PostHog and the team is tired of the work required to get it anywhere else. If a prospect's data isn't in PostHog, the right conversation is data pipelines and the data warehouse first.
-
