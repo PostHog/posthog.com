@@ -176,4 +176,6 @@ Don't push when they push back. Close the loop publicly with a clean "let's put 
 
 ### Strike while energy is high
 
-Same-day follow-ups after calls beat polished follow-ups sent a week later. Small unexpected perks (custom merch codes, personalized touches) sent in the momentum window punch above their weight. Automate it - pipe your BuildBetter notes straight into Claude and send the follow-up before your next task.
+Same-day follow-ups after calls beat polished follow-ups sent a week later. Automate it - pipe your BuildBetter notes straight into Claude and send the follow-up before your next task.
+
+Small unexpected perks (custom merch codes, personalized touches) sent in the momentum window punch above their weight. 
