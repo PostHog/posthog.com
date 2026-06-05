@@ -381,7 +381,7 @@ Once you have access, enable it under [**Project settings** → **Logs** → **P
 
 When enabled, the following patterns are detected in each log record's `body` and string-valued `attributes`, and replaced with `{{REDACTED}}`:
 
-- **Bearer tokens** – `Bearer <token>` style credentials. The `Bearer ` prefix is preserved, so the redacted output looks like `Bearer {{REDACTED}}`.
+- **Bearer tokens** – `Bearer <token>` style credentials. The `Bearer` prefix is preserved, so the redacted output looks like `Bearer {{REDACTED}}`.
 - **Stripe secret keys** – values matching `sk_live_*` or `sk_test_*` followed by at least 20 alphanumeric characters.
 - **Email addresses** – standard `local@domain.tld` shape.
 
