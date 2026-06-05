@@ -54,7 +54,9 @@ It runs across five acts and 400+ hand-written events, with a two-and-a-half min
 
 When your knight finally dies, you choose their last words, and those words shape the knight who takes up the watch next. It is not a game you rush. It's something you keep half an eye on while you wait for meetings to start over the course of weeks.
 
-![vigil panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/09_vigil_43101400fb.png)
+<div className="flex justify-center">
+<img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/09_vigil_43101400fb.png" alt="vigil panel"/>
+</div>
 
 ## Modern coding is mostly copy-and-paste
 
