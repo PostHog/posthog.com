@@ -92,7 +92,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     cli: {
         feature: 'CLI',
-        owner: ['signals'],
+        owner: ['error-tracking'],
     },
     'client-libraries': {
         feature: 'Client libraries',
