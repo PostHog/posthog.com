@@ -39,7 +39,9 @@ The panels are deliberately a mix of useful and useless:
 
 ![moon panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/08_sky_2a93713f2a.png) 
 
-![oblique panel]()
+![rps panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/03_rps_eb3d967928.png)
+
+![oblique panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/04_oblique_7558fce9eb.png)
 
 </ImageSlider>
 
