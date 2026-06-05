@@ -31,7 +31,7 @@ Every PostHog exception is a product event with the user attached. Click an erro
 ### Who this isn't for
 
 - Teams that need full feature parity with Sentry – Sentry has deeper SDK coverage, more mature grouping, and a longer track record.
-- Teams whose primary need is iOS error tracking at full fidelity – the iOS implementation doesn't symbolicate system frames yet, and Swift crashes appear as SIGTRAP.
+- Teams whose primary need is iOS error tracking at full fidelity – the iOS implementation doesn't symbolicate system frames yet
 - Compliance-driven teams needing on-prem deployment, SOC 2 audit trails on every exception, or SIEM-grade indexing – Sentry's enterprise tier and dedicated SIEM tools are more mature here.
 
 ## Messaging
