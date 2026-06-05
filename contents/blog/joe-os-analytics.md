@@ -33,9 +33,17 @@ The panels are deliberately a mix of useful and useless:
 - Three news readers that stream the latest RSS headlines from The Guardian, BBC News, and Rock, Paper, Shotgun.
 - Oblique Strategies — Brian Eno's deck of creative prompts, plus a few dozen I wrote myself to build it out more.
 - A rotating daily joke, a random fractal, and a Sky panel showing the current moon phase, sunrise, and sunset.
-- And Vigil.
+<ImageSlider>
 
-Vigil is the most ambitious part of Joe-OS.
+![joke panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/06_joke_0b212d071d.png) 
+
+![moon panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/08_sky_2a93713f2a.png) 
+
+![oblique panel]()
+
+</ImageSlider>
+
+The most ambitious part of Joe-OS was Vigil
 
 It's a tiny medieval roguelike text adventure about a knight keeping watch over a dying realm. Every turn something happens — a ghoul rises, a house burns, a bandit approaches — and you respond by choosing an Honorable or a Craven option. Sometimes you get a third choice based on your inventory or companions, each of which has their own simple personality.
 
@@ -43,7 +51,7 @@ It runs across five acts and 400+ hand-written events, with a two-and-a-half min
 
 When your knight finally dies, you choose their last words, and those words shape the knight who takes up the watch next. It is not a game you rush. It's something you keep half an eye on while you wait for a meeting to start and games are intended to last weeks.
 
-![joke panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/06_joke_0b212d071d.png) ![moon panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/08_sky_2a93713f2a.png) ![vigil panel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/08_sky_2a93713f2a.png)
+![vigil panel]()
 
 ## Modern coding is mostly copy-and-paste
 
