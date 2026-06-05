@@ -50,19 +50,19 @@ Use descriptive titles along the way rather generic ones like "Background" or "W
 
 The general workflow for a post looks like this:
 
-1. Have an idea
+1. Have an idea.
 
-2. Share in the [`#content-and-video-ideas`](https://posthog.slack.com/archives/C015CRUQR7Y) Slack channel or write up outline or draft
+2. Share in the [`#content-and-video-ideas`](https://posthog.slack.com/archives/C015CRUQR7Y) Slack channel or write up outline or draft.
 
 3. Open pull request of your draft in [posthog.com](https://github.com/PostHog/posthog.com). Blogs go in the [`/contents/blog` folder](https://github.com/PostHog/posthog.com/tree/master/contents/blog) (you can see the format from other blogs there).
 
 4. Get review from someone from the <SmallTeam slug="editorial" /> and (optionally) a relevant teammate.
 
-5. Iterate on feedback (usual 1-2 rounds)
+5. Iterate on feedback (usual 1-2 rounds).
 
-6. Fix formatting and styling details (<SmallTeam slug="editorial" /> can help with this)
+6. Fix formatting and styling details (<SmallTeam slug="editorial" /> can help with this). Check the deployment preview to see how it looks.
 
-7. Merge and it's automatically published on [posthog.com](/blog)
+7. Merge and it's automatically published on [posthog.com](/blog).
 
 Once published, you can share it on social ([LinkedIn](/handbook/content/linkedin), X, Bluesky, etc.), with relevant coworkers, and in relevant communities (like HackerNews, but be careful not to spam or ask for upvotes). This might feel a little cringe, but it's critical for actually getting people to read your writing.
 
