@@ -56,7 +56,7 @@ sequenceDiagram
     PH-->>P: { url, expires_at }
     P-->>U: redirect to url
     U->>PH: GET /agentic/login?token=...
-    PH-->>U: redirect to /project/N (session minted)
+    PH-->>U: redirect to path (session minted)
 ```
 
 ## Set up as a partner
@@ -337,7 +337,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/deep_links \
   -H "Authorization: Bearer phx_abc123..." \
   -H "API-Version: 0.1d" \
   -d '{
-    "purpose": "dashboard"
+    "path": "/project/12345/replay/019e6d10-c3b0-7000-8000-000000000000"
   }'
 ```
 
@@ -347,7 +347,10 @@ Authenticate with the `access_token` you got from [Step 2](#step-2-exchange-the-
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `purpose` | string | No | What the deep link should land on. Currently only `dashboard` is supported. Defaults to `dashboard`. |
+| `path` | string | No | The in-app path to land the user on after login, for example `/project/12345/replay/<recording_id>`. Must be a relative, same-origin path beginning with a single `/`. If omitted, the link lands on the project home (`/project/<team_id>`). |
+| `purpose` | string | No | Free-form label recorded for your own analytics. Defaults to `dashboard`. It does not affect where the link lands – use `path` for that. |
+
+The `path` is validated when the link is minted and again when it's opened. PostHog rejects open-redirect forms (absolute URLs, protocol-relative `//`, backslashes, and `javascript:`) as well as control characters and whitespace. To find the path for a destination, open it in PostHog and copy everything after the host, including the leading `/`.
 
 **Response:**
 
@@ -476,6 +479,7 @@ Common error codes:
 | `expired` | 400 | Account request has expired |
 | `invalid_grant` | 400 | Authorization code is invalid or expired (token endpoint) |
 | `invalid_label_prefix` | 400 | `label_prefix` is not a string, is longer than 25 characters after trimming, or contains control or Unicode format characters |
+| `invalid_path` | 400 | Deep-link `path` is not a relative, same-origin in-app path beginning with a single `/` |
 | `invalid_scope` | 400 | Unrecognized scope requested |
 | `rate_limited` | 429 | Rate limit exceeded |
 | `account_creation_failed` | 500 | Server error during account creation |
@@ -615,10 +619,10 @@ async function provisionPostHogAccount(email, name) {
 }
 ```
 
-For the "Open in PostHog" button, call this from your click handler with the user's stored `access_token`, then redirect the browser to the returned URL:
+For the "Open in PostHog" button, call this from your click handler with the user's stored `access_token`, then redirect the browser to the returned URL. Pass a `path` to land the user on a specific page, or omit it to land on the project home:
 
 ```javascript
-async function getDeepLinkUrl(accessToken) {
+async function getDeepLinkUrl(accessToken, path) {
   const res = await fetch(
     `${BASE_URL}/api/agentic/provisioning/deep_links`,
     {
@@ -628,7 +632,7 @@ async function getDeepLinkUrl(accessToken) {
         Authorization: `Bearer ${accessToken}`,
         'API-Version': '0.1d',
       },
-      body: JSON.stringify({ purpose: 'dashboard' }),
+      body: JSON.stringify(path ? { path } : {}),
     }
   );
 
