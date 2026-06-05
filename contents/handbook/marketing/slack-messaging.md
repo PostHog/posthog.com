@@ -25,8 +25,8 @@ Because every customer sees the same message, keep broadcasts infrequent and hig
 
 Broadcasts reach live customer and partner channels, and Sales or the TAMs may know of sensitive accounts that should be excluded from a particular comm. Always give them a chance to flag any before you send:
 
-1. Share a brief update in <PrivateLink url='https://posthog.slack.com/archives/C01MGUHFH6G'>#sales</PrivateLink> describing the comm you're about to send and who it will reach.
-2. Allow **24 hours** for salespeople and TAMs to respond with any accounts that should be excluded or any other concerns.
+1. Share a brief update in <PrivateLink url='https://posthog.slack.com/archives/C090RCG671C'>#group-cs-sales-support</PrivateLink> describing the comm you're about to send and who it will reach.
+2. Allow at least **24 hours** for salespeople and TAMs to respond with any accounts that should be excluded or any other concerns.
 3. If no feedback is received within that window, go ahead and send your comm – you don't need to wait for explicit sign-off or be blocked.
 
 This step is required, but it keeps PMMs unblocked while giving the people closest to our customers a simple way to catch anything sensitive.
