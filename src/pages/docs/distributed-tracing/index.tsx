@@ -12,16 +12,18 @@ export const Content = () => {
                 <h2 className="mb-4">Overview</h2>
                 <div>
                     <p>
-                        PostHog Tracing is a distributed tracing solution that works with the OpenTelemetry Protocol
-                        (OTLP). You don't need any vendor-specific SDKs. Use standard OpenTelemetry libraries to send
-                        spans to PostHog using your project token.
+                        PostHog Distributed Tracing works with the OpenTelemetry Protocol (OTLP). You don't need any
+                        vendor-specific SDKs. Use standard OpenTelemetry libraries to send spans to PostHog using your
+                        project token.
                     </p>
-                    <p>Tracing is currently in alpha. Setup details may change before general availability.</p>
+                    <p>
+                        Distributed tracing is currently in alpha. Setup details may change before general availability.
+                    </p>
                 </div>
             </section>
 
             <section className="mb-8">
-                <h2 className="mb-4 mt-0">Why use PostHog Tracing?</h2>
+                <h2 className="mb-4 mt-0">Why use PostHog Distributed Tracing?</h2>
                 <div>
                     <ul>
                         <li>
@@ -43,7 +45,7 @@ export const Content = () => {
             <section className="mb-8">
                 <h2 className="mb-4 mt-0">How it works</h2>
                 <div>
-                    <p>Tracing acts as a generic OTLP receiver built by PostHog. Here's how it works:</p>
+                    <p>Distributed tracing acts as a generic OTLP receiver built by PostHog. Here's how it works:</p>
                     <ol>
                         <li>Use standard OpenTelemetry tracing APIs in your application</li>
                         <li>Include your project token in the Authorization header or as a query parameter</li>
@@ -60,13 +62,13 @@ export const Content = () => {
                         type="Getting started"
                         title="Why you need tracing"
                         description="What a trace is, what it shows you that nothing else does, and when it saves you"
-                        url="/docs/tracing/basics"
+                        url="/docs/distributed-tracing/basics"
                     />
                     <ResourceItem
                         type="Getting started"
                         title="Start here"
                         description="A high-level overview of setting up tracing with OpenTelemetry"
-                        url="/docs/tracing/start-here"
+                        url="/docs/distributed-tracing/start-here"
                     />
                     <ResourceItem
                         type="Related"
@@ -80,19 +82,19 @@ export const Content = () => {
     )
 }
 
-const Tracing: React.FC = () => {
+const DistributedTracing: React.FC = () => {
     return (
         <ReaderView>
-            <SEO title="Tracing - Docs - PostHog" />
+            <SEO title="Distributed tracing - Docs - PostHog" />
 
             <div className="mx-auto max-w-4xl">
                 <section className="mb-6">
                     <Intro
                         subheader="Getting started"
-                        title="Tracing"
+                        title="Distributed tracing"
                         description="Capture and explore distributed traces with PostHog and OpenTelemetry."
                         buttonText="Get started!"
-                        buttonLink="/docs/tracing/start-here"
+                        buttonLink="/docs/distributed-tracing/start-here"
                     />
                 </section>
 
@@ -102,4 +104,4 @@ const Tracing: React.FC = () => {
     )
 }
 
-export default Tracing
+export default DistributedTracing

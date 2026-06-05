@@ -1,12 +1,12 @@
 ---
-title: Getting started with Tracing
+title: Getting started with distributed tracing
 hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 
-> **Note:** Tracing is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
+> **Note:** Distributed tracing is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
 
 <QuestLog firstSpeechBubble="Let's set up tracing!" lastSpeechBubble="Time to explore your traces!">
 
@@ -16,7 +16,7 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
     icon="IconCode"
 >
 
-PostHog Tracing works with any OpenTelemetry client. No PostHog-specific packages are required. Use the OTel SDKs you already have, point your trace exporter at PostHog's HTTP endpoint, and add your project token.
+PostHog Distributed Tracing works with any OpenTelemetry client. No PostHog-specific packages are required. Use the OTel SDKs you already have, point your trace exporter at PostHog's HTTP endpoint, and add your project token.
 
 Set these on your OpenTelemetry SDK:
 
@@ -75,7 +75,7 @@ Once spans are flowing into PostHog, you can:
     icon="IconLogomark"
 >
 
-Tracing uses the same OpenTelemetry-based ingestion as [Logs](/docs/logs), so a single OTel setup covers both. Your traces also live in the same PostHog project as [Session Replay](/docs/session-replay), [Error Tracking](/docs/error-tracking), and [Product Analytics](/docs/product-analytics) – one platform instead of another observability vendor to run.
+Distributed tracing uses the same OpenTelemetry-based ingestion as [Logs](/docs/logs), so a single OTel setup covers both. Your traces also live in the same PostHog project as [Session Replay](/docs/session-replay), [Error Tracking](/docs/error-tracking), and [Product Analytics](/docs/product-analytics) – one platform instead of another observability vendor to run.
 
 </QuestLogItem>
 

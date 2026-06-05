@@ -118,6 +118,8 @@
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
         { "source": "/docs/integrate/(client|server)/:path*", "destination": "/docs/integrate/:path*" },
         { "source": "/docs/session-recording/:path*", "destination": "/docs/session-replay/:path*" },
+        { "source": "/docs/tracing", "destination": "/docs/distributed-tracing", "statusCode": 301 },
+        { "source": "/docs/tracing/:path*", "destination": "/docs/distributed-tracing/:path*", "statusCode": 301 },
         {
             "source": "/docs/posthog-code/inbox/triage",
             "destination": "/docs/posthog-code/inbox/implementation",
