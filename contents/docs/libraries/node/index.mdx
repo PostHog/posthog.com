@@ -311,6 +311,8 @@ Properties and `distinctId` passed directly to `capture` take precedence over re
 
 If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure `tracing_headers` to automatically inject session and identity headers on requests to your Express backend:
 
+> Requires `posthog-js` version >= 1.380.0. In earlier versions, this option was named `__add_tracing_headers`.
+
 ```js
 posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
