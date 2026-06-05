@@ -25,7 +25,7 @@ Because every customer sees the same message, keep broadcasts infrequent and hig
 
 1. Log into the [Pylon admin](https://app.usepylon.com/) using SSO with your PostHog email address.
 2. Find the broadcasts feature in the Pylon UI and create a new broadcast.
-3. Select the audience — typically all customer and/or partner Slack channels. Double-check the audience before sending, as the message goes to live customer channels.
+3. Select the audience – typically all customer and/or partner Slack channels. Double-check the audience before sending, as the message goes to live customer channels.
 4. Write your message. Keep it short, friendly, and link out to the [changelog](/changelog), blog post, or docs for the full detail.
 5. Preview, then send.
 
