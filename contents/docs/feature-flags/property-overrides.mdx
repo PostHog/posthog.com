@@ -83,6 +83,20 @@ PostHog.identify(
 val showFeature = PostHog.isFeatureEnabled("enterprise-feature")
 ```
 
+```dart
+// Properties are automatically available for flag evaluation
+await Posthog().identify(
+    userId: 'user-123',
+    userProperties: {
+        'email': 'user@company.com',
+        'plan': 'enterprise',
+    },
+)
+
+// This flag check can use 'plan' immediately
+final showFeature = await Posthog().isFeatureEnabled('enterprise-feature')
+```
+
 </MultiLanguage>
 
 #### From group calls
@@ -133,6 +147,20 @@ PostHog.group(
 
 // Group properties are available for flag evaluation
 val showFeature = PostHog.isFeatureEnabled("enterprise-companies-feature")
+```
+
+```dart
+await Posthog().group(
+    groupType: 'company',
+    groupKey: 'company-123',
+    groupProperties: {
+        'name': 'Acme Inc',
+        'plan': 'enterprise',
+    },
+)
+
+// Group properties are available for flag evaluation
+final showFeature = await Posthog().isFeatureEnabled('enterprise-companies-feature')
 ```
 
 </MultiLanguage>
@@ -203,7 +231,7 @@ This adds the following properties to flag requests:
 
 ### Default properties in mobile SDKs
 
-Mobile SDKs (React Native, iOS, and Android) include common device and app properties in every feature flag evaluation request. The `setDefaultPersonProperties` configuration option controls this behavior and defaults to `true`.
+Mobile SDKs (React Native, iOS, Android, and Flutter) include common device and app properties in every feature flag evaluation request. The `setDefaultPersonProperties` configuration option controls this behavior and defaults to `true`.
 
 | Property | Description |
 |----------|-------------|
@@ -268,6 +296,17 @@ PostHog.setPersonPropertiesForFlags(
 val showFeature = PostHog.isFeatureEnabled("enterprise-feature")
 ```
 
+```dart
+// Set properties for flag evaluation
+await Posthog().setPersonPropertiesForFlags({
+    'plan': 'enterprise',
+    'company_size': 'large',
+})
+
+// Properties persist across flag evaluations
+final showFeature = await Posthog().isFeatureEnabled('enterprise-feature')
+```
+
 </MultiLanguage>
 
 > **Note:** Properties set with `setPersonPropertiesForFlags()` are additive. Each call merges new properties with existing ones rather than replacing them.
@@ -314,6 +353,15 @@ PostHog.setPersonPropertiesForFlags(mapOf("company_size" to "large"), reloadFeat
 PostHog.reloadFeatureFlags()
 ```
 
+```dart
+// Set properties without reloading
+await Posthog().setPersonPropertiesForFlags({'plan': 'enterprise'}, reloadFeatureFlags: false)
+await Posthog().setPersonPropertiesForFlags({'company_size': 'large'}, reloadFeatureFlags: false)
+
+// Manually reload when ready
+await Posthog().reloadFeatureFlags()
+```
+
 </MultiLanguage>
 
 ### Resetting property overrides
@@ -336,6 +384,10 @@ PostHogSDK.shared.resetPersonPropertiesForFlags()
 
 ```kotlin file=Android
 PostHog.resetPersonPropertiesForFlags()
+```
+
+```dart
+await Posthog().resetPersonPropertiesForFlags()
 ```
 
 </MultiLanguage>
@@ -406,6 +458,20 @@ PostHog.resetGroupPropertiesForFlags("company")
 
 // Reset all group properties
 PostHog.resetGroupPropertiesForFlags()
+```
+
+```dart
+// Set group properties for flag evaluation
+await Posthog().setGroupPropertiesForFlags('company', {
+    'plan': 'enterprise',
+    'employee_count': 500,
+})
+
+// Reset group properties for a specific type
+await Posthog().resetGroupPropertiesForFlags(groupType: 'company')
+
+// Reset all group properties
+await Posthog().resetGroupPropertiesForFlags()
 ```
 
 </MultiLanguage>
