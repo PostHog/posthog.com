@@ -61,7 +61,7 @@ The interceptor reads the following headers from incoming requests and attaches 
 | Header | Context property | Description |
 |---|---|---|
 | `x-posthog-session-id` | `sessionId` | Links server events to a client session |
-| `x-posthog-distinct-id` | `distinctId` | Identifies the user |
+| `x-posthog-distinct-id` | `distinctId` | Sets the event distinct ID |
 
 It also automatically captures request metadata as properties:
 

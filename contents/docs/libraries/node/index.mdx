@@ -295,7 +295,7 @@ The request context middleware reads the following incoming headers:
 | Header | Context property | Description |
 |---|---|---|
 | `x-posthog-session-id` | `sessionId` | Links server events to a client session |
-| `x-posthog-distinct-id` | `distinctId` | Identifies the user |
+| `x-posthog-distinct-id` | `distinctId` | Sets the event distinct ID |
 
 It also automatically adds request metadata as event properties:
 
