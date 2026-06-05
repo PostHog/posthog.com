@@ -7,9 +7,9 @@ showTitle: true
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 
-If you have event-like data in a [Data Warehouse](/docs/data-warehouse) table (e.g., purchases, subscriptions, usage records), you can use it directly as a [metric](/docs/experiments/metrics) in your experiment.
+If you have event-like data such as purchases, subscriptions, and usage records in a [Data Warehouse](/docs/data-warehouse) table, you can use it directly as a [metric](/docs/experiments/metrics) in your experiment.
 
-This enables you to measure how PostHog Feature Flags impact outcomes tracked in your external systems – for example, measuring how a checkout redesign affects completed orders stored in your Stripe or Shopify data.
+This enables you to measure how PostHog Feature Flags impact outcomes tracked in your external systems. For example, you can measure how a checkout redesign affects completed orders stored in your Stripe or Shopify data.
 
 ## Setting up a Data Warehouse metric
 
@@ -66,7 +66,13 @@ The join key system bridges PostHog events with your external data:
 
 ## Using Data Warehouse tables in funnels
 
-You can include Data Warehouse tables as steps in funnel metrics. For example, measuring a funnel from viewing a product page (PostHog event) → adding to cart (PostHog event) → completing purchase (Data Warehouse table).
+You can include Data Warehouse tables as steps in funnel metrics. For example, measuring a funnel from viewing a product page:
+
+```mermaid
+flowchart LR
+    A["View product page<br/>(PostHog event)"] --> B["Add to cart<br/>(PostHog event)"]
+    B --> C["Complete purchase<br/>(Data Warehouse table)"]
+```
 
 ### Requirements for Data Warehouse funnel steps
 
@@ -121,7 +127,7 @@ PostHog uses different query patterns depending on the metric type:
 - Aggregates values per variant
 
 **Funnel metrics with Data Warehouse steps:**
-- PostHog uses a UNION ALL pattern to combine PostHog events with Data Warehouse tables
+- PostHog uses a `UNION ALL` pattern to combine PostHog events with Data Warehouse tables
 - Each source (events + each Data Warehouse table) produces a separate sub-query
 - Results are combined and processed by the funnel algorithm
 - This enables mixing PostHog events with external data in a single funnel
@@ -174,7 +180,7 @@ This ensures Data Warehouse metrics follow the same [exposure logic](/docs/exper
 
 ## Best practices
 
-1. **Use consistent identifiers** – If possible, use the same identifier across all your systems (e.g., always use email or always use user_id). This makes join keys simpler.
+1. **Use consistent identifiers** – If possible, use the same identifier across all your systems (e.g., always use email or always use `user_id`). This makes join keys simpler.
 
 2. **Create materialized views for complex queries** – If you need data from multiple tables or complex transformations, create a materialized view in your Data Warehouse first. This improves query performance and simplifies setup.
 
