@@ -38,3 +38,7 @@ To link Salesforce:
 6. Click **Next**
 
 The data warehouse then starts syncing your Salesforce data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
+
+## Configuration
+
+<SourceParameters />

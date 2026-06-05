@@ -22,12 +22,12 @@ export const quickLinks = [
     },
     {
         name: 'Product manual',
-        to: '/docs/experiments/manual',
+        to: '/docs/experiments/start-here',
         description: 'How to run A/B tests with PostHog.',
     },
     {
         name: 'Creating an experiment',
-        to: '/docs/experiments/manual#creating-an-experiment',
+        to: '/docs/experiments/creating-an-experiment',
         description: 'Create an experiment to test a hypothesis.',
     },
     {

@@ -215,7 +215,7 @@ const CompanyStageTabs = () => {
                 { handle: 'data_warehouse', text: 'for centralizing data' },
                 { handle: 'error_tracking', text: 'for catching bugs fast' },
                 { handle: 'cdp', text: 'for syncing data everywhere' },
-                { handle: 'llm_analytics', text: 'for monitoring AI features' },
+                { handle: 'ai_observability', text: 'for monitoring AI features' },
             ],
         },
         {
@@ -280,7 +280,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     { name: 'CTAs', kind: 'flow', props: [], Editor: () => <CTAs /> },
     { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <HeroCarousel /> },
     { name: 'HomeHitCounter', kind: 'flow', props: [], Editor: () => <HomeHitCounter /> },
-    { name: 'Customers', kind: 'flow', props: [], Editor: () => <Customers tableClassName="bg-white" /> },
+    { name: 'Customers', kind: 'flow', props: [], Editor: () => <Customers tableClassName="bg-white dark:bg-dark" /> },
     {
         name: 'Logo',
         kind: 'flow',

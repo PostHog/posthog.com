@@ -51,14 +51,6 @@
             "title": "Track key metrics like NPS & CSAT",
             "description": "<p>Trigger in-app surveys to measure the trends over time, collect user feedback, and get AI summaries of the results.</p>"
         },
-        "revenue_analytics": {
-            "template": "product",
-            "name": "Revenue Analytics",
-            "handle": "revenue_analytics",
-            "screenshot": "overview",
-            "title": "Correlate revenue data with product metrics",
-            "description": "<p>Get a deeper understanding of what drives revenue growth in your product. It’s only a few clicks to integrate most data sources and then you’ll be able to enrich your user data with additional metrics without a data team.</p>"
-        },
         "posthog_ai": {
             "template": "product",
             "name": "PostHog AI",

@@ -19,6 +19,10 @@ The Typeform connector can link data from your Typeform account into PostHog.
 4. Paste your **Personal Access Token**. If your account is on the EU region, set the **API base URL** to `https://api.eu.typeform.com` or `https://api.typeform.eu`.
 5. Click **Next**, choose the tables you want to sync, and then click **Import**.
 
+## Configuration
+
+<SourceParameters />
+
 ## Available datasets and endpoints
 
 The Typeform source currently supports syncing the following datasets and API endpoints:

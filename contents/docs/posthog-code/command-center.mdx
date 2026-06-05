@@ -1,0 +1,25 @@
+---
+title: PostHog Code Command Center
+---
+
+Command Center lets you run multiple agent sessions side by side in a single view. Open it from the lightning bolt in the sidebar.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_05_04_T23_04_17_757_Z_2d9d7b46b7.png"
+    classes="rounded"
+    alt="Command Center showing multiple agent tasks in a grid"
+/>
+
+## Getting started
+
+You'll see a grid of cells. Each cell is an independent agent session with its own conversation, state, and workspace. Click **+ Add task** on any empty cell, drag a task in from the sidebar, or right-click a task and choose **Add to Command Center**.
+
+Pick a grid layout from the toolbar dropdown. Layouts range from a single focused cell up to a 3x3 grid of nine. Your layout and zoom level persist across restarts.
+
+## Task isolation
+
+Every cell is fully independent. You can mix local, worktree, and cloud tasks in the same grid. Stopping or restarting one agent has no effect on the others. Each cell shows the task's status, environment, and repo at a glance so you can spot which agents need attention without clicking in.
+
+## Toolbar
+
+The toolbar shows a live summary of how many agents are running, waiting, or idle. **Stop All** cancels every active agent in the grid. **Clear** empties the whole board.

@@ -152,6 +152,23 @@ Billing depends on how you installed the integration:
 
 See [our pricing page](/pricing) for more details.
 
+## Disconnecting the integration
+
+You can disconnect the Vercel integration from PostHog. This requires organization admin permissions.
+
+1. Go to [**Settings** > **Integrations**](https://app.posthog.com/settings/organization-integrations) in PostHog
+2. Find your Vercel integration
+3. Click **Disconnect**
+4. Confirm the disconnection in the dialog
+
+Disconnecting removes the organization-level integration and all project-level Vercel integrations for your organization. Environment variables already set in Vercel are not removed.
+
+<CalloutBox icon="IconInfo" title="Billing after disconnecting" type="fyi">
+
+- **Add (new account)** – Vercel billing is automatically cancelled when you disconnect.
+- **Link Existing Account** – PostHog billing continues separately. Manage it in your [PostHog billing settings](https://app.posthog.com/organization/billing).
+
+</CalloutBox>
 ## Limitations
 
 - **One organization per Vercel team** - Cannot link multiple PostHog organizations
