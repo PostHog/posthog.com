@@ -46,7 +46,7 @@ Beyond accounts that sales or CS flags, scan the audience yourself for channels 
 2. Find the broadcasts feature in the Pylon UI and create a new broadcast.
 3. Select the audience – typically all customer and/or partner Slack channels. Double-check the audience before sending, as the message goes to live customer channels.
 4. Write your message. Keep it short, friendly, and link out to the [changelog](/changelog), blog post, or docs for the full detail.
-5. **Send the message as yourself, not as PostHog.** Pylon lets you choose the sender – sending from a real person feels more personal and gets a better response than a faceless company message.
+5. **Send the message as yourself, not as PostHog.** Pylon lets you choose the sender - sending from a real person feels more personal and gets a better response than a faceless company message.
 6. Preview, then send.
 
 ## Before you send
