@@ -28,7 +28,7 @@ Broadcasts reach live customer and partner channels, and Sales or the TAMs may k
 1. Share a brief update in <PrivateLink url='https://posthog.slack.com/archives/C090RCG671C'>#group-cs-sales-support</PrivateLink> describing the comm you're about to send and who it will reach.
 2. Allow at least **24 hours** for salespeople and TAMs to respond with any accounts that should be excluded or any other concerns.
 3. **Ping more than once.** A single message is easy to miss. Follow up a couple of times, and give a final heads-up with the scheduled send time (e.g. "this is going out at X") so people have a last chance to flag anything.
-4. If no feedback is received within that window, go ahead and send your comm – you don't need to wait for explicit sign-off or be blocked.
+4. If no feedback is received within that window, go ahead and send - you don't need to wait for explicit sign-off or be blocked.
 
 This step is required, but it keeps PMMs unblocked while giving the people closest to our customers a simple way to catch anything sensitive.
 
