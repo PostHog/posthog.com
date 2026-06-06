@@ -19,7 +19,7 @@ Broadcasts go to every shared customer and partner channel, so they're best rese
 - [Maintenance and incident comms](/handbook/marketing/incident-comms) where customers should be aware of disruption.
 - Invitations to betas, events, or programs aimed at existing customers.
 
-Because every customer sees the same message, keep broadcasts infrequent and high-signal. As a rough guide, **no more than one broadcast every couple of weeks** – it's easy to tip over into spamming people. If a message is only relevant to a subset of accounts, it's usually better to let the account owner share it directly.
+Because every customer sees the same message, keep broadcasts infrequent and high-signal. As a rough guide, **no more than one broadcast every couple of weeks** as it's easy to tip over into spamming people. If a message is only relevant to a subset of accounts, it's usually better to let the account owner share it directly.
 
 ## Check with Sales before sending
 
