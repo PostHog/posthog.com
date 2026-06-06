@@ -37,7 +37,7 @@ This step is required, but it keeps PMMs unblocked while giving the people close
 Beyond accounts that sales or CS flags, scan the audience yourself for channels that shouldn't receive the message:
 
 - **Drop legacy and archived channels.** Pylon's audience often includes old or inactive channels. They're usually obvious from the name – exclude them so the message only lands in live channels.
-- **Check for recent negative sentiment.** It's worth quickly scanning shared customer channels (we use the `#posthog-______` naming convention) for any negative sentiment in the last couple of weeks, and manually excluding those accounts. An LLM can do this sweep for you – e.g. ask it to scan the `#posthog-*` channels and surface any negative sentiment from the last two weeks. This usually turns up a handful worth excluding.
+- **Check for recent negative sentiment.** It's worth quickly asking an LLM to scan the `#posthog-*` channels and surface any negative sentiment from the last two weeks. This usually turns up a handful worth excluding.
 - **Consider excluding people already using the feature.** If the broadcast is nudging people towards something, exclude accounts that already use it – or word the message so it still works for them (e.g. framing it as "in case you missed these features" rather than assuming they haven't seen them).
 
 ## How to send a broadcast in Pylon
