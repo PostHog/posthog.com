@@ -4,7 +4,7 @@ title: Rate limiting
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Rate limits cap how many exception events PostHog ingests, so a single noisy client or runaway issue can't blow through your quota — or your bill. Exceptions received above the configured rate are dropped at ingestion, before they're [stored or billed](/docs/error-tracking/pricing).
+Rate limits cap how many exception events PostHog ingests, so a single noisy client or runaway issue can't blow through your quota – or your bill. Exceptions received above the configured rate are dropped at ingestion, before they're [stored or billed](/docs/error-tracking/pricing).
 
 ## How rate limiting works
 
@@ -12,7 +12,7 @@ PostHog applies rate limits using a token bucket. You set a **maximum number of 
 
 Because dropped exceptions are never ingested, they don't count toward your bill.
 
-There are two types of rate limit. They're applied independently, and you can use either or both. You can configure both in the [error tracking configuration page](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-rate-limits).
+There are two types of rate limit. They're applied independently, and you can use either or both. You can configure both in the [Error Tracking configuration page](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-rate-limits).
 
 ### Project-wide rate limit
 
@@ -27,7 +27,7 @@ This limit applies across your entire project, regardless of which issue an exce
 
 ### Per-issue rate limit
 
-You set a single limit, and PostHog automatically applies it to every issue individually — each issue gets its own bucket. Once an issue exceeds the configured rate, further exceptions for *that issue* are dropped, while exceptions from your other issues keep flowing. Use this to stop a single noisy issue from drowning out everything else.
+You set a single limit, and PostHog automatically applies it to every issue individually – each issue gets its own bucket. Once an issue exceeds the configured rate, further exceptions for *that issue* are dropped, while exceptions from your other issues keep flowing. Use this to stop a single noisy issue from drowning out everything else.
 
 When configuring a per-issue limit, you can pick an issue from your most active issues to preview its recent exception volume against the limit, so you can choose a threshold before saving.
 
@@ -45,10 +45,10 @@ The following options are available for each limit:
 | Option | Description |
 | --- | --- |
 | **Maximum exceptions** | The most exceptions to ingest per window. Leave this empty for no limit. |
-| **Per** | The time window the limit applies over — 15 minutes, 30 minutes, or 1 hour. |
+| **Per** | The time window the limit applies over – 15 minutes, 30 minutes, or 1 hour. |
 
 <CalloutBox icon="IconInfo" title="Rate limits vs. client-side controls" type="fyi">
 
-Rate limits run server-side, at ingestion, and apply to every client sending exceptions to your project. To reduce exceptions before they leave the client, see [burst protection](/docs/error-tracking/capture#burst-protection), [suppression rules](/docs/error-tracking/capture#suppressing-exceptions), and the [`before_send` hook](/docs/error-tracking/capture). For more ways to lower your bill, see [reducing error tracking costs](/docs/error-tracking/pricing).
+Rate limits run server-side, at ingestion, and apply to every client sending exceptions to your project. To reduce exceptions before they leave the client, see [burst protection](/docs/error-tracking/capture#burst-protection), [suppression rules](/docs/error-tracking/capture#suppressing-exceptions), and the [`before_send` hook](/docs/error-tracking/capture). For more ways to lower your bill, see [reducing Error Tracking costs](/docs/error-tracking/pricing).
 
 </CalloutBox>
