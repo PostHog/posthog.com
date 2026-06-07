@@ -23,8 +23,8 @@ We generally only have product marketers on teams that _already_ have a product 
 | *PostHog Code* | Annika | Cleo | James H |
 | *Replay* | Cory S | Sara* | Paul D'A |
 | *Surveys* | Cory S | | Surveys |
-| *LLM Analytics* | Marco (new) | To be hired | James H |
-| *LLM Gateway* | Marco (new) | | Ben W |
+| *AI Observability* | Marco (new) | To be hired | James H |
+| *AI Gateway* | Marco (new) | | Ben W |
 | *Product Analytics* | Mike W | To be hired | Paul D'A |
 | *Web Analytics* | Mike W | To be hired | Paul D'A |
 | *Conversations* | | Too early | James H |
