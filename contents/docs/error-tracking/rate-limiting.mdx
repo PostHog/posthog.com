@@ -27,9 +27,7 @@ This limit applies across your entire project, regardless of which issue an exce
 
 ### Per-issue rate limit
 
-This limit applies to each issue individually. Once an issue exceeds the configured rate, further exceptions for *that issue* are dropped, while exceptions from your other issues keep flowing.
-
-Use this to stop a single noisy issue from drowning out everything else. The per-issue limit is checked before the project-wide limit, so a runaway issue is dropped against its own bucket instead of draining your whole project budget on the way out.
+This limit applies to each issue individually. Once an issue exceeds the configured rate, further exceptions for *that issue* are dropped, while exceptions from your other issues keep flowing. Use this to stop a single noisy issue from drowning out everything else.
 
 When configuring a per-issue limit, you can pick an issue from your most active issues to preview its recent exception volume against the limit, so you can choose a threshold before saving.
 
