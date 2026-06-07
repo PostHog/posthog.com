@@ -12,15 +12,18 @@ PostHog applies rate limits using a token bucket. You set a **maximum number of 
 
 Because dropped exceptions are never ingested, they don't count toward your bill.
 
-{/* SCREENSHOT: rate limiting overview / how the token bucket caps volume */}
-
-There are two types of rate limit. They're applied independently, and you can use either or both.
+There are two types of rate limit. They're applied independently, and you can use either or both. You can configure both in the [error tracking configuration page](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-rate-limits).
 
 ### Project-wide rate limit
 
 This limit applies across your entire project, regardless of which issue an exception belongs to. It acts as a single safety cap on total exception volume.
 
-{/* SCREENSHOT: project-wide rate limit settings + volume chart */}
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_06_07_T14_08_44_937_Z_c8badbee44.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_06_07_T14_04_59_591_Z_1f50e085fa.png"
+    alt="Project-wide rate limit settings"
+    classes="rounded"
+/>
 
 ### Per-issue rate limit
 
@@ -28,13 +31,16 @@ This limit applies to each issue individually. Once an issue exceeds the configu
 
 Use this to stop a single noisy issue from drowning out everything else. The per-issue limit is checked before the project-wide limit, so a runaway issue is dropped against its own bucket instead of draining your whole project budget on the way out.
 
-{/* SCREENSHOT: per-issue rate limit settings with issue list + volume preview */}
+When configuring a per-issue limit, you can pick an issue from your most active issues to preview its recent exception volume against the limit, so you can choose a threshold before saving.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_06_07_T14_09_34_375_Z_d89669f2f6.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_06_07_T14_10_04_339_Z_652b6381b6.png"
+    alt="Per-issue rate limit settings"
+    classes="rounded"
+/>
 
 ## Configuring rate limits
-
-You can configure rate limits in the [error tracking configuration page](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-rate-limits).
-
-{/* SCREENSHOT: rate limits configuration section */}
 
 The following options are available for each limit:
 
@@ -42,10 +48,6 @@ The following options are available for each limit:
 | --- | --- |
 | **Maximum exceptions** | The most exceptions to ingest per window. Leave this empty for no limit. |
 | **Per** | The time window the limit applies over — 15 minutes, 30 minutes, or 1 hour. |
-
-When configuring a per-issue limit, you can pick an issue from your most active issues to preview its recent exception volume against the limit, so you can choose a threshold before saving.
-
-{/* SCREENSHOT: per-issue volume preview chart */}
 
 <CalloutBox icon="IconInfo" title="Rate limits vs. client-side controls" type="fyi">
 
