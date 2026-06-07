@@ -5051,7 +5051,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Rate limit ingestion',
+                    name: 'Rate limiting',
                     url: '/docs/error-tracking/rate-limiting',
                     icon: 'IconThrottle',
                     color: 'orange',
