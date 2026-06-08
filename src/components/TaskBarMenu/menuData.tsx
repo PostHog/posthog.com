@@ -29,7 +29,6 @@ import {
 import { useApp } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { useHedgehogMode } from 'components/HedgehogMode'
-import Toggle from 'components/Toggle'
 import { navigate } from 'gatsby'
 import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
@@ -663,7 +662,21 @@ export function useMenuData(): MenuType[] {
                             node: (
                                 <span className="px-2.5 flex w-full justify-between items-center gap-2">
                                     <span>Hedgehog mode</span>
-                                    <Toggle checked={hedgehogModeEnabled} onChange={() => undefined} />
+                                    {/* Presentational toggle — the whole row is the clickable menu item */}
+                                    <span className="relative inline-flex items-center justify-center h-2 w-8 flex-shrink-0">
+                                        <span
+                                            aria-hidden
+                                            className="pointer-events-none absolute w-full h-full rounded-md bg-[#c4c4c4] dark:bg-[#5A5A5A]"
+                                        />
+                                        <span
+                                            aria-hidden
+                                            className={`pointer-events-none absolute left-0 inline-block h-4 w-4 rounded-full transition-transform ease-in-out duration-200 ${
+                                                hedgehogModeEnabled
+                                                    ? 'translate-x-5 bg-teal'
+                                                    : 'translate-x-0 bg-[#555] dark:bg-[#999]'
+                                            }`}
+                                        />
+                                    </span>
                                 </span>
                             ),
                         },

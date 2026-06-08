@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react'
+import React, { lazy, Suspense, useEffect, useSyncExternalStore } from 'react'
 
 const HedgeHogModeRenderer =
     typeof window !== 'undefined'
@@ -6,34 +6,40 @@ const HedgeHogModeRenderer =
         : () => null
 
 const HEDGEHOG_MODE_STORAGE_KEY = 'hedgehog-mode-enabled'
-const HEDGEHOG_MODE_EVENT = 'hedgehog-mode-changed'
 
-const getHedgehogModeEnabled = () => {
+// localStorage is the source of truth; an external store lets every caller
+// (the menu toggle and the renderer) stay in sync and re-render live, without a
+// reload. The `storage` event keeps separate tabs in sync.
+const listeners = new Set<() => void>()
+
+const getHedgehogModeEnabled = (): boolean => {
     return typeof window !== 'undefined' && localStorage.getItem(HEDGEHOG_MODE_STORAGE_KEY) === 'true'
 }
 
-// Shared across every caller so a toggle in one place (e.g. the menu) updates the
-// renderer live, without a reload. State changes broadcast a window event; the
-// `storage` event keeps it in sync across tabs.
-export const useHedgehogMode = (): [boolean, (enabled: boolean) => void] => {
-    const [hedgehogModeEnabled, setHedgehogModeEnabled] = useState(getHedgehogModeEnabled())
-
-    useEffect(() => {
-        const sync = () => setHedgehogModeEnabled(getHedgehogModeEnabled())
-        window.addEventListener(HEDGEHOG_MODE_EVENT, sync)
-        window.addEventListener('storage', sync)
-        return () => {
-            window.removeEventListener(HEDGEHOG_MODE_EVENT, sync)
-            window.removeEventListener('storage', sync)
-        }
-    }, [])
-
-    const _setHedgehogModeEnabled = (enabled: boolean) => {
-        localStorage.setItem(HEDGEHOG_MODE_STORAGE_KEY, enabled.toString())
-        window.dispatchEvent(new Event(HEDGEHOG_MODE_EVENT))
+const setHedgehogModeEnabledStore = (enabled: boolean): void => {
+    if (typeof window === 'undefined') {
+        return
     }
+    localStorage.setItem(HEDGEHOG_MODE_STORAGE_KEY, enabled.toString())
+    listeners.forEach((listener) => listener())
+}
 
-    return [hedgehogModeEnabled, _setHedgehogModeEnabled]
+const subscribe = (listener: () => void): (() => void) => {
+    listeners.add(listener)
+    window.addEventListener('storage', listener)
+    return () => {
+        listeners.delete(listener)
+        window.removeEventListener('storage', listener)
+    }
+}
+
+export const useHedgehogMode = (): [boolean, (enabled: boolean) => void] => {
+    const hedgehogModeEnabled = useSyncExternalStore(
+        subscribe,
+        getHedgehogModeEnabled,
+        () => false // server snapshot
+    )
+    return [hedgehogModeEnabled, setHedgehogModeEnabledStore]
 }
 
 export default function HedgeHogModeEmbed(): JSX.Element | null {
