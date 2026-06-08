@@ -66,7 +66,7 @@ Watch customer activity for signs they're exploring a product they haven't adopt
 
 **Suggested wording:**
 
-> Hey @[contact], saw you checking out LLM analytics and wanted to share a few things. It occurred to me that our LLM observability suite might be really helpful for your team.
+> Hey @[contact], saw you checking out AI observability and wanted to share a few things. It occurred to me that our LLM observability suite might be really helpful for your team.
 >
 > Not only do you get evals/traces/generations to track model performance, token usage, etc, you can then also connect those things back to PostHog session/user data. Which means you can actually easily run A/B and multivariate tests on things like prompts, models, and so on, while ALSO seeing how the LLM performance/quality have an impact on conversion and funnel.
 >
