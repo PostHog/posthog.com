@@ -3,7 +3,7 @@ title: How Qubs flipped the digital menu market with PostHog Endpoints
 customer: Qubs
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/QUBS_8c25737523.png
-date: 2026-03-10
+date: 2026-06-05
 ---
 
 Most digital menu companies charge restaurants for using their software. [Qubs](https://info.qubs.app) does the opposite: it gives restaurants a polished menu for free, and pays them a share of ad revenue on top. 
