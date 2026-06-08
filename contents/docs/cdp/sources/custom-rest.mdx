@@ -16,42 +16,39 @@ This is useful when:
 - You want to prototype a connection quickly
 - You need to pull data from an internal or niche API
 
-## Prerequisites
+PostHog uses the same sync engine that powers its built-in REST sources (Stripe, Intercom, Chargebee, etc.), handling pagination, authentication, and incremental syncing automatically.
 
 - A PostHog account with the Data Warehouse add-on
 - The base URL and authentication credentials for the API you want to connect
-- On PostHog Cloud, all API URLs must use `https://`
 
-## Create a custom REST source
+1. In PostHog, go to the [Data pipeline sources tab](https://app.posthog.com/data-management/sources).
+2. Click **+ New source** and select **Custom REST source**.
+3. Use the builder to configure your source:
+   - Set the **base URL** for the API
+   - Choose an **authentication** method and enter your credentials:
+     - **Bearer token** – for APIs that use `Authorization: Bearer <token>`
+     - **API key** – for APIs that pass a key via header, query parameter, or cookie
+     - **HTTP Basic** – for username/password authentication
+   - Configure **pagination** if the API returns paginated results
+   - Add one or more **resources** (API endpoints) to sync
+4. Click **Next**. PostHog validates your configuration, checks that the URLs are reachable, and probes the first few endpoints to confirm your credentials work.
+5. Configure sync settings (sync method, frequency) for each resource, then start syncing.
 
-1. In PostHog, go to the [Data pipeline sources tab](https://app.posthog.com/pipeline/new/source).
-2. Click **Custom REST source**.
-3. Fill in the source builder form:
-   - Set the **Base URL** for the API (e.g. `https://api.example.com/v1`).
-   - Choose an **Authentication** method and enter your credentials.
-   - Optionally add **Default headers** that are sent with every request.
-   - Add one or more **Streams** – each stream maps to an API endpoint and becomes a table in your Data Warehouse.
-4. Click **Next**. PostHog validates the configuration, checks that the URLs are reachable, and probes the first few endpoints to confirm your credentials work.
-5. Configure sync settings (sync method, frequency) for each stream, then start syncing.
+<CalloutBox icon="IconWarning" title="Keep credentials secure" type="caution">
 
-> You can expand **Show generated manifest** at the bottom of the builder to inspect the JSON manifest that PostHog generates from your configuration.
+Enter tokens, API keys, and passwords in the dedicated credential fields in the builder. They're stored encrypted and redacted from API responses.
+
+</CalloutBox>
 
 ## Configuration reference
 
-### Base URL
-
-The root URL that all stream paths are resolved against (e.g. `https://api.example.com/v1`). This is required.
-
-### Authentication
-
-Select the authentication method from the **Authentication** dropdown.
-
-| Method              | Fields              | Description                                                                                                                                                            |
+The custom REST source has two main configuration areas: the **client** (connection settings shared across all endpoints) and **resources** (the individual API endpoints to sync). The JSON examples below show the underlying configuration structure that the builder generates.
+| Method | Fields | Description |
 | ------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **No auth**         | –                   | No authentication headers are sent                                                                                                                                     |
-| **Bearer token**    | Token               | Sends `Authorization: Bearer <token>` with every request                                                                                                               |
-| **API key**         | Location, Name, Key | Sends the key as a header, query parameter, or cookie. **Location** controls where the key is placed. **Name** is the header/parameter/cookie name (e.g. `X-API-Key`). |
-| **HTTP basic auth** | Username, Password  | Sends standard HTTP Basic credentials                                                                                                                                  |
+| **No auth** | – | No authentication headers are sent |
+The client configuration sets the base URL, authentication, headers, and default pagination for all resources.
+| **API key** | Location, Name, Key | Sends the key as a header, query parameter, or cookie. **Location** controls where the key is placed. **Name** is the header/parameter/cookie name (e.g. `X-API-Key`). |
+| **HTTP basic auth** | Username, Password | Sends standard HTTP Basic credentials |
 
 ### Default headers
 
@@ -61,6 +58,7 @@ Click **Add header** to add a new header row.
 
 ### Streams
 
+Choose an authentication type in the builder to tell PostHog how to authenticate requests. The actual credential value is entered in the dedicated credential field – not in the configuration.
 Each stream maps to an API endpoint and becomes a table in your Data Warehouse. Click **Add stream** to add more.
 
 | Field                | Description                                                                                                            |
@@ -116,11 +114,11 @@ Enable the **Enable incremental sync** checkbox on a stream to tell PostHog to r
 
 - **Maximum 5 custom sources per team**
 - **Maximum 50 streams per source**
-- Only `GET` and `POST` HTTP methods are supported
+  Enter the password in the **Auth password** field. The `username` is non-secret and is set in the configuration.
 - All URLs must use `https://` on PostHog Cloud
 - URLs pointing to internal or private network hosts are blocked on PostHog Cloud
 
-## Troubleshooting
+Set a default paginator at the client level to apply it to all resources, or override it on individual resource endpoints.
 
 ### Credential validation fails at creation
 
