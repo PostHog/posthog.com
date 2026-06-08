@@ -76,11 +76,13 @@ The response contains the endpoints and capabilities you need, including:
 
 The scopes available through OAuth are listed in the `scopes_supported` field of the metadata document and mirror the scopes available for [personal API keys in our REST API](/docs/api). Request only the scopes your application actually needs – this is a security best practice and reduces friction for users on the authorization screen.
 
-## Claiming your OAuth integration
+## Going live and getting verified
 
 Start with [CIMD](#client-id-metadata-document-cimd). For most integrations, hosting a metadata document on a domain you control is all you need to go live, and your app's name and logo appear on the authorization screen. There's no registration step to wait on.
 
-If you'd like your app marked as a verified integration, which removes the "unverified application" notice shown on the authorization screen, email **team-growth@posthog.com**. The <SmallTeam slug="growth" /> is building a self-serve flow for this.
+Verification is optional and isn't required to go live. If you'd like your app marked as a verified integration, which removes the **unverified application** notice shown on the authorization screen, email [team-growth@posthog.com](mailto:team-growth@posthog.com). The <SmallTeam slug="growth" /> is building a self-serve flow for this.
+
+Have a question while integrating? [Reach out to us](https://posthog.com/talk-to-a-human).
 
 ## Token types
 
