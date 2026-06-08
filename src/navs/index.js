@@ -6941,6 +6941,23 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Install OpenTelemetry tracing',
+                    url: '/docs/distributed-tracing/installation',
+                    icon: 'IconCode',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/distributed-tracing/installation' },
+                        { name: 'Node.js', url: '/docs/distributed-tracing/installation/nodejs' },
+                        { name: 'Python', url: '/docs/distributed-tracing/installation/python' },
+                        { name: 'Go', url: '/docs/distributed-tracing/installation/go' },
+                        { name: 'Java', url: '/docs/distributed-tracing/installation/java' },
+                        { name: '.NET', url: '/docs/distributed-tracing/installation/dotnet' },
+                        { name: 'PHP', url: '/docs/distributed-tracing/installation/php' },
+                        { name: 'Ruby', url: '/docs/distributed-tracing/installation/ruby' },
+                    ],
+                },
+                {
                     name: 'Why you need distributed tracing',
                     url: '/docs/distributed-tracing/basics',
                     icon: 'IconBook',

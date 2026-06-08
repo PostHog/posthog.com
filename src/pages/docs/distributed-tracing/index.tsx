@@ -71,6 +71,12 @@ export const Content = () => {
                         url="/docs/distributed-tracing/start-here"
                     />
                     <ResourceItem
+                        type="Getting started"
+                        title="Installation"
+                        description="Language-specific guides for exporting OpenTelemetry traces to PostHog"
+                        url="/docs/tracing/installation"
+                    />
+                    <ResourceItem
                         type="Related"
                         title="Logs"
                         description="Search and analyze your application logs – traces' sibling in the observability suite"
