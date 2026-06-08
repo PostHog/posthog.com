@@ -254,7 +254,7 @@ Use `setPersonPropertiesForFlags()` to explicitly set properties for flag evalua
 // Set properties for flag evaluation
 posthog.setPersonPropertiesForFlags({
     plan: 'enterprise',
-    company_size: 'large'
+    signup_source: 'organic'
 })
 
 // Properties persist across flag evaluations
@@ -265,7 +265,7 @@ const showFeature = posthog.isFeatureEnabled('enterprise-feature')
 // Set properties for flag evaluation
 posthog.setPersonPropertiesForFlags({
     plan: 'enterprise',
-    company_size: 'large'
+    signup_source: 'organic'
 })
 
 // Properties persist across flag evaluations
@@ -276,7 +276,7 @@ const showFeature = posthog.isFeatureEnabled('enterprise-feature')
 // Set properties for flag evaluation
 PostHogSDK.shared.setPersonPropertiesForFlags([
     "plan": "enterprise",
-    "company_size": "large"
+    "signup_source": "organic"
 ])
 
 // Properties persist across flag evaluations
@@ -288,7 +288,7 @@ let showFeature = PostHogSDK.shared.isFeatureEnabled("enterprise-feature")
 PostHog.setPersonPropertiesForFlags(
     mapOf(
         "plan" to "enterprise",
-        "company_size" to "large"
+        "signup_source" to "organic"
     )
 )
 
@@ -300,7 +300,7 @@ val showFeature = PostHog.isFeatureEnabled("enterprise-feature")
 // Set properties for flag evaluation
 await Posthog().setPersonPropertiesForFlags({
     'plan': 'enterprise',
-    'company_size': 'large',
+    'signup_source': 'organic',
 })
 
 // Properties persist across flag evaluations
@@ -320,7 +320,7 @@ By default, calling `setPersonPropertiesForFlags()` triggers an automatic reload
 ```js file=Web
 // Set properties without reloading
 posthog.setPersonPropertiesForFlags({ plan: 'enterprise' }, false)
-posthog.setPersonPropertiesForFlags({ company_size: 'large' }, false)
+posthog.setPersonPropertiesForFlags({ signup_source: 'organic' }, false)
 
 // Manually reload when ready
 posthog.reloadFeatureFlags()
@@ -329,7 +329,7 @@ posthog.reloadFeatureFlags()
 ```react-native
 // Set properties without reloading
 posthog.setPersonPropertiesForFlags({ plan: 'enterprise' }, false)
-posthog.setPersonPropertiesForFlags({ company_size: 'large' }, false)
+posthog.setPersonPropertiesForFlags({ signup_source: 'organic' }, false)
 
 // Manually reload when ready
 posthog.reloadFeatureFlags()
@@ -338,7 +338,7 @@ posthog.reloadFeatureFlags()
 ```swift file=iOS
 // Set properties without reloading
 PostHogSDK.shared.setPersonPropertiesForFlags(["plan": "enterprise"], reloadFeatureFlags: false)
-PostHogSDK.shared.setPersonPropertiesForFlags(["company_size": "large"], reloadFeatureFlags: false)
+PostHogSDK.shared.setPersonPropertiesForFlags(["signup_source": "organic"], reloadFeatureFlags: false)
 
 // Manually reload when ready
 PostHogSDK.shared.reloadFeatureFlags()
@@ -347,7 +347,7 @@ PostHogSDK.shared.reloadFeatureFlags()
 ```kotlin file=Android
 // Set properties without reloading
 PostHog.setPersonPropertiesForFlags(mapOf("plan" to "enterprise"), reloadFeatureFlags = false)
-PostHog.setPersonPropertiesForFlags(mapOf("company_size" to "large"), reloadFeatureFlags = false)
+PostHog.setPersonPropertiesForFlags(mapOf("signup_source" to "organic"), reloadFeatureFlags = false)
 
 // Manually reload when ready
 PostHog.reloadFeatureFlags()
@@ -356,7 +356,7 @@ PostHog.reloadFeatureFlags()
 ```dart
 // Set properties without reloading
 await Posthog().setPersonPropertiesForFlags({'plan': 'enterprise'}, reloadFeatureFlags: false)
-await Posthog().setPersonPropertiesForFlags({'company_size': 'large'}, reloadFeatureFlags: false)
+await Posthog().setPersonPropertiesForFlags({'signup_source': 'organic'}, reloadFeatureFlags: false)
 
 // Manually reload when ready
 await Posthog().reloadFeatureFlags()
@@ -532,7 +532,7 @@ Server-side SDKs handle property overrides differently. Instead of persistent se
 const flags = await client.evaluateFlags('user-distinct-id', {
     personProperties: {
         plan: 'enterprise',
-        company_size: 'large',
+        signup_source: 'organic',
     },
     groups: {
         company: 'company-123',
@@ -553,7 +553,7 @@ flags = posthog.evaluate_flags(
     "user-distinct-id",
     person_properties={
         "plan": "enterprise",
-        "company_size": "large",
+        "signup_source": "organic",
     },
     groups={
         "company": "company-123",
@@ -574,7 +574,7 @@ $flags = PostHog::evaluateFlags(
     distinctId: 'user-distinct-id',
     personProperties: [
         'plan' => 'enterprise',
-        'company_size' => 'large',
+        'signup_source' => 'organic',
     ],
     groups: [
         'company' => 'company-123',
@@ -595,7 +595,7 @@ flags = posthog.evaluate_flags(
     'user-distinct-id',
     person_properties: {
         plan: 'enterprise',
-        company_size: 'large',
+        signup_source: 'organic',
     },
     groups: {
         company: 'company-123',
@@ -616,7 +616,7 @@ flags, err := client.EvaluateFlags(posthog.EvaluateFlagsPayload{
     DistinctId: "user-distinct-id",
     PersonProperties: posthog.NewProperties().
         Set("plan", "enterprise").
-        Set("company_size", "large"),
+        Set("signup_source", "organic"),
     Groups: posthog.NewGroups().
         Set("company", "company-123"),
     GroupProperties: map[string]posthog.Properties{
@@ -637,7 +637,7 @@ PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags(
     "user-distinct-id",
     PostHogEvaluateFlagsOptions.builder()
         .personProperty("plan", "enterprise")
-        .personProperty("company_size", "large")
+        .personProperty("signup_source", "organic")
         .group("company", "company-123")
         .groupProperty("company", "plan", "enterprise")
         .groupProperty("company", "employee_count", 500)
