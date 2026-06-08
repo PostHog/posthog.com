@@ -246,7 +246,7 @@ curl -X POST https://us.posthog.com/api/agentic/oauth/token \
 ```json
 {
   "token_type": "bearer",
-  "access_token": "phx_abc123...",
+  "access_token": "pha_abc123...",
   "refresh_token": "phr_def456...",
   "expires_in": 3600,
   "account": {
@@ -283,7 +283,7 @@ Use the access token to provision a PostHog project and get credentials.
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer phx_abc123..." \
+  -H "Authorization: Bearer pha_abc123..." \
   -H "API-Version: 0.1d" \
   -d '{
     "service_id": "analytics",
@@ -334,7 +334,7 @@ For recurring deep links from your application into PostHog – the most common 
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/provisioning/deep_links \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer phx_abc123..." \
+  -H "Authorization: Bearer pha_abc123..." \
   -H "API-Version: 0.1d" \
   -d '{
     "purpose": "dashboard"
@@ -372,7 +372,7 @@ Rotate the project token and create a new personal API key for an existing provi
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/provisioning/resources/12345/rotate_credentials \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer phx_abc123..." \
+  -H "Authorization: Bearer pha_abc123..." \
   -H "API-Version: 0.1d" \
   -d '{
     "label_prefix": "Acme Co"
@@ -403,7 +403,7 @@ curl -X POST https://us.posthog.com/api/agentic/oauth/token \
 ```json
 {
   "token_type": "bearer",
-  "access_token": "phx_new_token...",
+  "access_token": "pha_new_token...",
   "refresh_token": "phr_new_refresh...",
   "expires_in": 3600
 }
