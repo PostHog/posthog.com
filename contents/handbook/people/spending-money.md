@@ -106,7 +106,7 @@ Joining an offsite? _Only use the offsite budget_, not your User Limit - it help
     - [Attaching receipts for multiple expenses](https://www.brex.com/support/receipts-for-expenses#attaching-receipts-to-multiple-expenses)
 - What do I do if I have a new tool/enterprise software subscription for the team to use?
   - Add [Janani](https://posthog.com/community/profiles/34497) as the Billing Admin to manage payments.
-- If I'm asked for a billing email for bill payments, what do I use?
+- If I'm asked for a billing email – for bill payments or when signing a vendor contract – what do I use?
   - Use finance@posthog.com
 - What if I'm driving for work-related purposes?
   - You can claim a mileage reimbursement through Brex. **Do not** separately expense fuel.
@@ -170,6 +170,8 @@ As a guide, here's what we'd consider reasonable spend:
 - Desk - up to $500
 - Chair - up to $500
 - Keyboard - up to $250
+
+If you want something more expensive, you can pay personally and submit a reimbursement request on Brex for up to the amount above.
 
 ### Software
 We are _strongly opposed_ to introducing new software that is designed for collaboration by default. There needs to be a very significant upside to introducing a new piece of software to outweigh its cost.

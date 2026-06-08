@@ -69,7 +69,7 @@ Once a customer is locked in on their primary use case, two expansion motions op
  
 Going deeper means continuing to expand within the same use case. It's bringing in more teams and users to adopt the same use case and layering in other products and features to supplement and enhance it.
  
-The use-case playbooks each define a primary expansion path. For [Product Intelligence](/handbook/growth/use-case-selling/product-intelligence), it's Product Analytics → Session Replay → Surveys → Experiments → Revenue Analytics → Workflows. It's not always going to be in that order, but this is generally a trend that we see and makes sense intuitively. Each step solves a natural next problem: "I can see the drop-off" becomes "I can see why users drop off" becomes "I can ask them directly" becomes "I can test a fix" becomes "I can prove it moved revenue" becomes "I can automate the solution."
+The use-case playbooks each define a primary expansion path. For [Product Intelligence](/handbook/growth/use-case-selling/product-intelligence), it's Product Analytics → Session Replay → Surveys → Experiments → Workflows. It's not always going to be in that order, but this is generally a trend that we see and makes sense intuitively. Each step solves a natural next problem: "I can see the drop-off" becomes "I can see why users drop off" becomes "I can ask them directly" becomes "I can test a fix" becomes "I can automate the solution."
  
 Going deeper adds products, but more importantly, each additional product within a use case makes the customer stickier. Replacing one analytics tool is easy. Replacing an analytics + replay + surveys + experiments + workflows stack that's all integrated is a migration nobody wants to do.
  

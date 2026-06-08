@@ -153,3 +153,11 @@ To add an image preview:
 4. Upload an image
 
 Image previews appear when hovering over events in the event selector, such as when choosing events for insights.
+
+## Event deduplication
+
+Every event has a `uuid`. Events that share the same `uuid`, `event` name, `timestamp`, and `distinct_id` are treated as duplicates and are eventually de-duplicated. This matters because failures and retries happen, so your app or one of our SDKs might send the same event more than once.
+
+Most of the time you don't need to think about this. PostHog generates a `uuid` for each event, and client-side SDKs like [JavaScript Web](/docs/libraries/js) set one automatically, so retried events are de-duplicated for you.
+
+You can rely on deduplication to modify events, for example if some events were missing required properties. Sending an event with a `uuid`, `event` name, `timestamp`, and `distinct_id` that matches an already-ingested event lets you upsert it. De-duplication is eventual, as it happens during background [ClickHouse](/docs/how-posthog-works/clickhouse) merges, so duplicates may persist for a while before they're merged.
