@@ -1,6 +1,6 @@
 ### Q2 2026 Objectives
 
-#### AI-first flag management ONLY for PostHog employees (Driver: <TeamMember name="Dylan Martin" />)
+#### AI-first flag management ONLY for PostHog employees (Driver: <TeamMember name="Phil Haack" />)
 
 We have loads of people who work with feature flags internally, so let's dogfood the shit out of this. The bet is that teams will manage their entire feature flag lifecycle (this includes both flag and cohort-based targeting) through AI coding agents without ever opening the PostHog UI (or exclusively through PostHog AI). If agents can create, modify, and reason about flags autonomously, we become the default flags tool in agentic workflows rather than losing to DIY implementations.
 
@@ -21,10 +21,36 @@ This is our most-requested feature. Dynamic cohorts today are computed on a dela
 - Cohort membership change signals for MCP / webhooks
 - Migration path from existing dynamic cohorts
 
-#### Close the targeting functionality gap (Driver: <TeamMember name="Dylan Martin" />)
+#### Close the targeting functionality gap (Driver: <TeamMember name="Phil Haack" />)
 
 User and group targeting in the same flag is the most requested targeting capability we don't fully support. Every time someone hits this wall, they either hack around it or leave. This is table-stakes work that unblocks expansion in accounts already using flags.
 
 **What we'll ship:**
 
 - API and UI support for BOTH user AND group target management
+
+#### Short term reliability and performance — <TeamMember name="Matheus Batista" photo />
+
+**Goal: Reliable remote evaluation with stable, predictable performance.**
+
+- **Define and stick to clear metrics** — p50/90/99 response time, error rate percentage, and availability SLA (e.g. 99.99% per month), equally defined for both remote and local evaluation
+- **Update flags HyperCache** — Pre-compute more operations to reduce memory and CPU during evaluation
+- **Load shedding and request hedging** — Graceful degradation under load
+- **Port local evaluation to Rust** — Move local evaluation to the new flag definitions service
+- **Customer-facing latency and uptime dashboard** — Make key performance metrics publicly visible
+
+#### Move from read-heavy architecture to write-heavy — <TeamMember name="Phil Haack" photo />
+
+**Goal: Decouple flag evaluation from the Persons DB to contain blast radius.**
+
+- **Dedicated Persons Feature Flag Store** — A denormalized store purpose-built for flag evaluation, so we're not dependent on the shared Persons DB
+- **POC for pre-calculated flag evaluation store** — Explore pre-computing flag results so evaluation doesn't require live DB reads
+
+#### Improve deployment confidence and reduce foot guns — <TeamMember name="Patricio Tarantino" photo />
+
+**Goal: Deploy changes safely with confidence, especially concurrency-sensitive changes.**
+
+- **Load tester** — Build a load testing framework for the flags service
+- **Improvements to "side" canary deploys** — Enhance the existing canary deployment approach
+- **Full canary deployment** — Graduate to a full canary deployment model
+- **Argo deployment pipeline** — Work with the ops team on a proper deployment pipeline

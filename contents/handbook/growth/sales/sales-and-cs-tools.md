@@ -14,36 +14,37 @@ Here are the common tools the Sales, CS, and Onboarding teams use daily.
   - [PostHog App + Website](https://us.posthog.com/project/2) reference within PostHog US instance
 - [Pylon](https://usepylon.com/) - use Slack SSO
 - [QuoteHog](https://quote.posthog.net/)
+- [Vitally](https://posthog.vitally-eu.io/) - once you've logged in once with Google ask your Team Lead to upgrade your role to Team Member
 - [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard)
 - [Zoom](https://zoom.com/)
 - *Note: Add yourself to group emails sent to sales@posthog.com or cs@posthog.com by joining the corresponding Google Group ([sales@](https://groups.google.com/a/posthog.com/g/sales/about) or [cs@](https://groups.google.com/a/posthog.com/g/cs/about)). It's important you don't mark these emails as spam as Google will unsubscribe you from these group emails.*
 
-### Tools by invitation
-[Mine](/community/profiles/29862) or [Simon](/community/profiles/28895) can help you out for access or invites for the following tools:
-- [Gong](https://us-26000.app.gong.io/home?workspace-id=8823646477612786274) - ask Simon or your team lead to invite you
+### Tools requiring approval
+You can self-serve access requests to the following tools using Zluri through Slack (type `/zluri` in any channel to start the request)
+- [Gong](https://us-26000.app.gong.io/home?workspace-id=8823646477612786274) - you will need a Zoom pro account as well.
   - Download the [Gong Meeting Manager](https://workspace.google.com/marketplace/app/gong_meeting_manager/779001639133) extension to trigger a user consent page when joining calls
   - Connect your Calendly link (if using one) with the Gong consent page [through this guide on Slack](https://posthog.slack.com/archives/C01MGUHFH6G/p1770157267662229?thread_ts=1770157176.458439&cid=C01MGUHFH6G)
-- [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home) - ask Mine for an invite if needed
-- [PostHog Billing](https://billing.posthog.com) - ask <PrivateLink url='https://posthog.slack.com/archives/C08ERRQT41E'>#team-billing</PrivateLink>
-- [Salesforce](https://posthog.lightning.force.com/) - ask Mine to invite you if not done already
-- [Stripe](https://dashboard.stripe.com/) - ask Simon or Dana to invite you, then sign up using your PostHog email
-- [PandaDoc](https://app.pandadoc.com/) - ask Simon or Dana to invite you
-- [Pitch](https://app.pitch.com/) - ask Simon or Dana to invite you
-- [Vitally](https://posthog.vitally-eu.io/) - use Google SSO, then ask Simon or Dana to upgrade your role so you can create traits and see success metrics
+- [PostHog Billing](https://billing.posthog.com) 
+- [Salesforce](https://posthog.lightning.force.com/) 
+- [Stripe](https://dashboard.stripe.com/)
+- [PandaDoc](https://app.pandadoc.com/)
+- [Pitch](https://app.pitch.com/)
 
 ### Tools that you may find useful and not required
-
+Unless otherwise indicated, you can self-serve access requests to the following tools using Zluri through Slack (type `/zluri` in any channel to start the request)
 - [BuildBetter](https://app.buildbetter.app) for historic meeting recordings
-- [Calendly.com](https://calendly.com/) for shared meeting booking links - ask Simon or Dana to invite you
+- [Calendly.com](https://calendly.com/) for shared meeting booking links
 - [Clay](https://www.clay.com/) for account and contact enrichment
-- [Granola](https://www.granola.ai/) (app) for AI note taking in meetings
+- [Granola](https://www.granola.ai/) (app) for AI note-taking in meetings
 - [In Your Face](https://www.inyourface.app/) (app) don't miss meeting notifications
-- [Loom](https://www.loom.com/) for short videos (Simon can invite you to the company account)
-- [Scratchpad](https://www.scratchpad.com/) for AI agents and a friendlier SFDC UI (sign up as part of your software budget)
+- [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home) 
+- [Loom](https://www.loom.com/) for short videos 
+- [Microsoft Teams](https://teams.microsoft.com) - for linking Slack with Teams when customers only use Teams - ask Simon for access
+- [Scratchpad](https://www.scratchpad.com/) for AI agents and a friendlier SFDC UI
 - [spark](https://sparkmailapp.com/) (app) AI powered inbox
 - [Superhuman](https://superhuman.com/) (app) AI powered inbox
 - [Wappalyzer](https://www.wappalyzer.com/) for identifying tech stack on customer sites (also as a Chrome/Firefox extension). Credentials in 1Password
-- [Alfred](https://alfred.app/) / [Raycast](https://www.raycast.com/) for automated workflows. 
+- [Alfred](https://alfred.app/) / [Raycast](https://www.raycast.com/) for automated workflows. - Just download and install.
 - An IDE, like VS Code, Zed, or Cursor. It will come in handy for coding and development tasks.
 - Your next favorite tool!
 
@@ -53,7 +54,7 @@ Here are the common tools the Sales, CS, and Onboarding teams use daily.
 - <PrivateLink url='https://posthog.slack.com/archives/C09677WV1GW'>#team-new-business-sales</PrivateLink> - the New Business sales team.
 - <PrivateLink url='https://posthog.slack.com/archives/C093XHYMGBE'>#team-product-led-sales</PrivateLink> - the Product-led sales team.
 - <PrivateLink url='https://posthog.slack.com/archives/C098D86DZDZ'>#team-onboarding</PrivateLink> - the Onboarding team.
-- <PrivateLink url='https://posthog.slack.com/archives/C090RCG671C'>#cs-sales-support</PrivateLink> - cross-team discussion for everyone who owns customers.
+- <PrivateLink url='https://posthog.slack.com/archives/C090RCG671C'>#group-cs-sales-support</PrivateLink> - cross-team discussion for everyone who owns customers.
 - <PrivateLink url='https://posthog.slack.com/archives/C01MGUHFH6G'>#sales</PrivateLink> - for general sales topics.
 - <PrivateLink url='https://posthog.slack.com/archives/C03V7SP3Z3K'>#incidents</PrivateLink> - for notifications of incidents which may impact customers.  Make sure you set this to alert you for every message so that you know when something is up.
 - <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink> - automated notifications from Vitally.

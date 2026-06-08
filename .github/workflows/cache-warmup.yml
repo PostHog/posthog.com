@@ -1,8 +1,10 @@
-name: Warm Gatsby cache
+name: Refresh Cloudinary cache
 
 on:
-    push:
-        branches: [master]
+    schedule:
+        # Daily — refresh the Cloudinary metadata cache that preview builds restore.
+        # (Preview builds run Gatsby cold, so this no longer seeds a Gatsby build cache.)
+        - cron: '0 6 * * *'
     workflow_dispatch:
 
 concurrency:
@@ -10,12 +12,12 @@ concurrency:
     cancel-in-progress: true
 
 env:
-    NODE_OPTIONS: '--max_old_space_size=8192'
+    NODE_OPTIONS: '--max_old_space_size=12288'
 
 jobs:
     warm-cache:
-        name: Build & cache
-        runs-on: ubuntu-latest
+        name: Refresh Cloudinary cache
+        runs-on: depot-ubuntu-latest-8
         timeout-minutes: 45
         permissions:
             contents: read
@@ -33,20 +35,24 @@ jobs:
                   node-version: '22'
                   cache: 'pnpm'
 
-            - name: Cache Gatsby
-              uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
-              with:
-                  path: |
-                      .cache
-                      public
-                  key: gatsby-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'gatsby-config.js') }}
-                  restore-keys: |
-                      gatsby-${{ runner.os }}-
-
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
 
+            # Build cold (no Gatsby cache) purely to run onPreInit's Cloudinary crawl, which
+            # writes .cloudinary-resources.json for preview builds to restore.
             - name: Build site
               run: pnpm build
               env:
                   GATSBY_MINIMAL: 'true'
+                  # Provide Cloudinary creds so onPreInit crawls the resource list and writes
+                  # .cloudinary-resources.json for preview builds to restore (cloud name comes
+                  # from the committed .env.production).
+                  CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+                  CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+
+            - name: Save Cloudinary metadata cache
+              if: success()
+              uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+              with:
+                  path: .cloudinary-resources.json
+                  key: cloudinary-${{ github.run_id }}

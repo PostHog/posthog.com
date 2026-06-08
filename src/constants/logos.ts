@@ -113,6 +113,7 @@ export const LOGOS = {
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/rudderstack.svg',
     pinterestAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pinterest_ads_563b842dc5.png',
     revenuecat: 'https://res.cloudinary.com/dmukukwp6/image/upload/logomark_red_background_9ea591e17a.svg',
+    roblox: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Roblox_Corporation_2025_logo_svg_301751b47c.png',
     rollup: 'https://res.cloudinary.com/dmukukwp6/image/upload/Rollup_js_c306a2fde3.svg',
     ruby: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ruby.svg',
     rust: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/rust.svg',
@@ -155,4 +156,18 @@ export type LogoKey = keyof typeof LOGOS
 
 export function getLogo(key: string): string | undefined {
     return LOGOS[key as LogoKey]
+}
+
+// Logos whose source SVGs have hardcoded dark fills/strokes and render poorly on dark backgrounds.
+// `dark:invert` flips pure-black artwork to white; `dark:hue-rotate-180` preserves the original
+// hue of color elements after inversion (used for logos that mix color with black).
+const LOGO_DARK_CLASS_BY_URL: Record<string, string> = {
+    [LOGOS.ios]: 'dark:invert',
+    [LOGOS.rust]: 'dark:invert',
+    [LOGOS.reactRouter]: 'dark:invert dark:hue-rotate-180',
+}
+
+export function getDarkClassForLogo(url?: string): string {
+    if (!url) return ''
+    return LOGO_DARK_CLASS_BY_URL[url] ?? ''
 }

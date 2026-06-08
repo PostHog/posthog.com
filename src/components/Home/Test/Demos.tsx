@@ -264,7 +264,7 @@ const Toolkits = () => {
                 'feature_flags',
                 'experiments',
                 'error_tracking',
-                'llm_analytics',
+                'ai_observability',
             ],
         },
         {
@@ -366,7 +366,7 @@ const CompanyStageTabs = () => {
                             'feature_flags',
                             'error_tracking',
                             'surveys',
-                            'llm_analytics',
+                            'ai_observability',
                         ]}
                     />
                 </div>
@@ -377,7 +377,7 @@ const CompanyStageTabs = () => {
                         productHandles={[
                             'session_replay',
                             'web_analytics',
-                            'llm_analytics',
+                            'ai_observability',
                             'product_analytics',
                             'error_tracking',
                             'experiments',

@@ -44,7 +44,7 @@ The raw event data is aggregated into sufficient statistics for each variant:
   number_of_samples: 1523,           // Users exposed to this variant
   sum: 98.5,                         // Total metric value across all users
   sum_squares: 142.3,                // Sum of squared values (for variance)
-  
+
   // Additional fields for ratio metrics:
   denominator_sum: 205,              // Total denominator value
   denominator_sum_squares: 89.2,     // Sum of squared denominator values
@@ -65,13 +65,16 @@ You can also enable [CUPED variance reduction](/docs/experiments/cuped) to reduc
 Before analysis proceeds, the engine validates the data quality based on metric type:
 
 **All metrics:**
+
 - **Minimum sample size**: Each variant needs at least 50 exposures
 
 **Funnel metrics only:**
+
 - **Minimum conversions**: At least 5 conversions per variant
 - **Normal approximation validity**: For proportions, both `np ≥ 5` and `n(1-p) ≥ 5` are required for the t-test to be valid
 
 **Mean and ratio metrics only:**
+
 - **Non-zero baseline**: The control variant must have a non-zero mean (needed for relative difference calculations like "20% increase")
 
 If any validation fails, the analysis stops and returns appropriate error messages instead of potentially misleading results.
@@ -95,31 +98,39 @@ Variance measures the spread or uncertainty in our data. Think of it as quantify
 Variance is calculated from the actual experiment data. When users in your experiment convert at different rates or have wildly different revenue values, that creates variance. The formulas differ by metric type:
 
 **For funnel metrics**:
+
 ```
 variance = p(1-p)/n
 ```
+
 Where p is the conversion rate and n is the sample size. The variance is highest when p=0.5 (50% conversion rate) and lowest when p is close to 0 or 1.
 
 **For mean metrics**:
+
 ```
 sample_variance = (sum_squares - sum²/n) / (n-1)
 ```
+
 This measures how spread out individual user values are from the average.
 
 **For ratio metrics**:
+
 ```
 Var(M/D) ≈ Var(M)/D² + M²×Var(D)/D⁴ - 2M×Cov(M,D)/D³
 ```
+
 This complex formula accounts for uncertainty in both the numerator and denominator, plus how they vary together.
 
 The pooled variance (comparing treatment vs control) combines the variances from both groups:
 
 **For absolute differences**:
+
 ```
 pooled_variance = treatment_variance/n_treatment + control_variance/n_control
 ```
 
 **For relative differences** (using delta method):
+
 ```
 pooled_variance = treatment_variance/(n_treatment × control_mean²) + (treatment_mean² × control_variance)/(n_control × control_mean⁴)
 ```
@@ -133,6 +144,7 @@ The frequentist approach tests a specific hypothesis about the difference betwee
 #### The null hypothesis
 
 The null hypothesis (H₀) states that there is no difference between the treatment and control:
+
 - H₀: effect_size = 0 (no difference)
 - H₁: effect_size ≠ 0 (there is a difference)
 
@@ -141,11 +153,13 @@ The null hypothesis (H₀) states that there is no difference between the treatm
 PostHog uses Welch's t-test, which handles unequal variances between groups:
 
 **T-statistic calculation**:
+
 ```
 t = (observed_effect - 0) / √(pooled_variance)
 ```
 
 **Degrees of freedom** (Welch-Satterthwaite approximation):
+
 ```
 df = (s₁²/n₁ + s₂²/n₂)² / [(s₁²/n₁)²/(n₁-1) + (s₂²/n₂)²/(n₂-1)]
 ```
@@ -203,6 +217,30 @@ You can choose between 90%, 95%, or 99% confidence levels, which correspond to a
 
 To set the default confidence level for all experiments, go to **Experiments > Settings**. You can also override this for individual experiments in the **Statistics** section of the experiment.
 
+## Sequential testing (beta)
+
+The standard fixed-horizon t-test assumes you check results once at a predetermined sample size. In practice, experimenters check dashboards continuously, which inflates the false positive rate – this is known as the "peeking problem." Sequential testing solves this by producing always-valid p-values and confidence sequences that remain valid no matter how many times you check.
+
+When sequential testing is enabled, PostHog replaces the fixed-horizon t-test with a sequential test based on [Waudby-Smith et al. 2023](https://arxiv.org/abs/2103.06476). Instead of traditional confidence intervals, it produces confidence sequences that are valid at any stopping point. The false positive rate stays bounded by your chosen alpha throughout the entire experiment.
+
+### Trade-offs
+
+The cost of always-valid guarantees is slightly wider confidence intervals compared to the fixed-horizon test. The confidence sequence is narrowest near the tuning parameter sample size and wider at smaller or much larger sample sizes.
+
+Use sequential testing when you plan to monitor results continuously and want to make decisions before a predetermined end date. If you strictly wait for the predetermined duration before checking, the standard fixed-horizon test is more efficient.
+
+### How to enable sequential testing
+
+**Per experiment:** In the experiment's **Statistics** settings, set sequential testing to **Enabled**.
+
+**As a project default:** Go to **Experiments > Settings** and check **Apply sequential testing by default**. Individual experiments can override this default.
+
+### Tuning parameter
+
+The tuning parameter (default: 5,000) controls where along the data-collection timeline the confidence sequence is tightest. Set it close to your expected total sample size for the experiment. A larger value shifts the tightest point to larger sample sizes, while a smaller value optimizes for earlier reads.
+
+You can configure the tuning parameter per experiment when sequential testing is enabled, or set a project-wide default in **Experiments > Settings**.
+
 ## Mathematical formulas reference
 
 ### T-test with Welch-Satterthwaite degrees of freedom
@@ -239,6 +277,7 @@ Since treatment and control are independent, the covariance term equals zero, si
 ### What about multiple variants?
 
 When testing multiple variants (A/B/C/D tests):
+
 - Each variant is compared to control independently
 - The p-value and confidence interval are calculated for each variant vs. control
 - No correction for multiple comparisons is applied by default
@@ -248,7 +287,7 @@ When testing multiple variants (A/B/C/D tests):
 
 At the default significance level (α = 0.05), there's a 5% chance that any single metric shows a significant result when nothing actually changed. The statistical engine itself can produce a false signal from random noise. Think of it like rolling a die: each metric is an independent roll, and each one has a small chance of landing on "significant" by chance.
 
-With 5 metrics, the chance that *at least one* produces a false positive is about 23%. With 10 metrics, it's 40%. PostHog tests each metric independently and doesn't adjust for this, so each result stands on its own.
+With 5 metrics, the chance that _at least one_ produces a false positive is about 23%. With 10 metrics, it's 40%. PostHog tests each metric independently and doesn't adjust for this, so each result stands on its own.
 
 ### More metrics can help, if they're planned
 

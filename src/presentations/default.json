@@ -32,10 +32,10 @@
             "title": "Test new features",
             "description": "<p>Split old and new experiences between users.</p><p>PostHog's statistical models will help you understand which variant of a feature to choose and then safely roll that out to all of your users.</p>"
         },
-        "llm_analytics": {
+        "ai_observability": {
             "template": "product",
             "name": "AI Observability",
-            "handle": "llm_analytics",
+            "handle": "ai_observability",
             "screenshot": "home",
             "title": "AI Observability",
             "description": "Understand how your users consume AI in your product, and monitor performance and cost when using different models."

@@ -9,7 +9,7 @@ tags:
   - sql
 ---
 
-If you're building a B2B2C product, *your users* might want analytics about *their users*. You can provide this with embedded analytics (AKA [customer-facing analytics](/blog/customer-facing-analytics-examples)), events you capture and then display for them.
+If you're building a B2B2C product, *your users* might want analytics about *their users*. You can provide this with embedded analytics (AKA customer-facing analytics), events you capture and then display for them.
 
 This tutorial shows you how to set up embedded analytics by creating a basic Next.js app with PostHog, querying analytics data via PostHog's [queries API](/docs/api/queries), and then displaying it with Recharts.
 

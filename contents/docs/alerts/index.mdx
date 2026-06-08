@@ -64,7 +64,7 @@ Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
      classes="rounded"
    />
 
-7. Set the threshold. This is the value you want to compare the series value against. For example, you can set a value of 5000 in the "more than" field to check when pageviews have exceeded 5k.
+7. Set at least one threshold bound. Enter a value in the **more than** field, the **less than** field, or both. For example, set 5000 in the "more than" field to check when pageviews exceed 5k.
 
 8. (Optional) For relative alerts (**increases by**/**decreases by**), you can set a percentage threshold. It compares the percentage change in the series value to the thresholds you've set.
 
@@ -323,6 +323,7 @@ Common reasons an alert may be auto-disabled:
 - A relative alert condition (**increases by**/**decreases by**) was set on a non-time-series trend (e.g., a pie chart or number)
 - An absolute value alert was configured with a percentage threshold
 - The alert has a missing or invalid check frequency (calculation interval)
+- A threshold alert has no bounds set (neither a lower nor upper value was configured)
 
 <CalloutBox icon="IconWarning" title="Re-enable manually" type="caution">
 

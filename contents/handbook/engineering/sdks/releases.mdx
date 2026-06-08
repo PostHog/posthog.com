@@ -117,6 +117,8 @@ The GitHub App needs to bypass certain protections to push release commits direc
 
 ![Repository PR bypass](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_30_39_537_Z_a60a06feae.png)
 
+> **Check for classic branch protection too.** The steps above exempt the app in a ruleset, but a repository can also have classic branch protection under **Settings** → **Branches** → **Branch protection rules**, which GitHub enforces alongside rulesets and which has its own separate bypass list. If a classic rule requires pull requests, the release still fails with `protected branch 'main' check failed: Changes must be made through a pull request` even after the ruleset exemption. Remove the classic rule, since the ruleset already covers it, or add the app to its bypass settings as well. Older repos are most likely to have this; newer ones tend to be rulesets-only.
+
 ### 5. Grant access to organization secrets
 
 The release workflow needs access to shared organization secrets. Grant your SDK repository access to the below organization secrets in the [organization settings](https://github.com/organizations/PostHog/settings/secrets/actions):
@@ -177,7 +179,7 @@ Create a PR with the new `release.yml` workflow and request a review from `@Post
 
 ## Triggering a release
 
-Once set up, releases are triggered by having a `release` label added to the PR alongside a `changesets`(or matching `bump-*` tag). Once a PR is merged, the environment workflow will kick up and someone from the `@PostHog/client-libraries-approvers` team will have to approve it on `#approval-support-libraries`.
+Once set up, releases are triggered by having a `release` label added to the PR alongside a `changesets`(or matching `bump-*` tag). Once a PR is merged, the environment workflow will kick up and someone from the `@PostHog/client-libraries-approvers` team will have to approve it on `#approvals-client-libraries`.
 
 <CalloutBox type="fyi">
 
