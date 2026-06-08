@@ -8,7 +8,7 @@ date: 2026-03-10
 
 Most conversion rate optimization (CRO) platforms hand every customer the same dashboard. [Fastr](https://getfastr.com/) does the opposite. Each of its customers logs into a dashboard built specifically for their business, with only the metrics they care about, segments tailored to how they think about their audience, and an AI interface that turns business questions into answers in plain English.
 
-That model only works because Fastr can spin up new analytics infrastructure for every customer on demand. With a four-person engineering team, [PostHog Endpoints](/endpoints), materialized views, and AI wiring it all together; Fastr can serve major e-commerce customers.
+That model only works because Fastr can spin up new analytics infrastructure for every customer on demand. With a four-person engineering team, [PostHog Endpoints](/endpoints), materialized views, and an AI first development workflow; Fastr can serve major e-commerce customers.
 
 <OSQuote
   customer="Fastr"
@@ -60,6 +60,6 @@ Ryan says, "There should never be a number that we put in front of you that does
 
 This model lines up with where Fastr's customers are economically. "A lot of really big businesses don't have a big data team anymore. Where in the past they had 14 data people, now they have two, but they still need a system,'" Ryan says. "I've got a job to do, and that job shouldn't be 'learn your stupid data platform.'"
 
-Fastr Optimize is out of early access and onboarding more brands every week. The team is leaning further into per-customer customization, and every new customer means more endpoints spun up by Claude on top of PostHog.
+Fastr Optimize is out of early access and onboarding more brands every week. The team is leaning further into per-customer customization, and every new customer means more endpoints Fastr’s team spins up on top of PostHog.
 
-For Ryan, the bet on PostHog is about giving a small, AI-native team room to move fast without owning the analytics infrastructure underneath. PostHog handles the back end; Claude wires it up; customers get a dashboard that looks like it was custom-built for their business, because it was.
+For Ryan, the bet on PostHog is about giving a small, AI-native team room to move fast without owning the analytics infrastructure underneath. PostHog handles the analytics infrastructure, which interacts with Fastr’s AI-native workflow so that customers get a dashboard that’s custom-built for their business.
