@@ -22,7 +22,7 @@ If you're building an integration that should work for any PostHog customer rega
 
 If you're building an application that needs to integrate with PostHog's OAuth, we recommend using the [**Client ID Metadata Document (CIMD)**](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) approach.
 
-With CIMD, you don't pre-register your OAuth client with PostHog. Instead:
+With CIMD, you don't pre-register your OAuth client or manage a client secret. Instead:
 
 1. **Your `client_id` is a URL** on a domain you control (for example, `https://myapp.example.com/oauth-client`).
 2. **You host a metadata document at that URL** – a JSON file describing your client. PostHog fetches this document during the OAuth flow to learn about your application.
@@ -46,8 +46,6 @@ The JSON document you host at your `client_id` URL should include at least:
 - `client_name` (required) – The human-readable name of your application, shown to users on the authorization screen.
 - `logo_uri` (optional) – A URL to a logo image that will be shown alongside the name on the authorization screen.
 - `redirect_uris` (required) – The URLs PostHog is allowed to redirect users to after authorization.
-
-Because the `client_id` is a URL you control, your organization implicitly "owns" it – anyone fetching the URL sees the same metadata, which is how PostHog validates the client identity.
 
 See the [OAuth Client ID Metadata Document draft](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) for the full specification.
 
