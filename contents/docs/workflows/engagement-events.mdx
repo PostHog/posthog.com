@@ -28,7 +28,7 @@ Every event below is captured as a standard PostHog event under the recipient's 
 | `$workflows_email_blocked` | The recipient marked the email as spam, or the recipient address is on a suppression list. |
 | `$workflows_email_failed` | The send failed for another reason (provider error, malformed request, transient outage). |
 
-Open, click, bounce, block, and failure events depend on the upstream provider sending webhook callbacks to PostHog. If you're using your own SMTP relay without callback support, only `_sent` will fire.
+`$workflows_email_sent` is recorded when the email is handed off for delivery. The delivery, open, click, bounce, and block events depend on the email provider sending event callbacks back to PostHog, so they only appear once those callbacks arrive.
 
 ## Building insights from engagement events
 
@@ -41,12 +41,13 @@ Because these are standard events, you can use them anywhere PostHog events are 
 
 ## Properties on engagement events
 
-Each event carries identifying properties so you can filter and break down by workflow, step, and message:
+Each event carries properties so you can filter and break down by workflow, recipient, and message:
 
-- `workflow_id` — the HogFlow that sent the email
-- `workflow_action_id` — the specific email step inside the workflow
-- `invocation_id` — the per-recipient send identifier (matches the workflow metrics row)
-- `message_id` — the upstream provider's message identifier (where available)
+- `$workflow_id` — the workflow that sent the email (on every event)
+- `$email_to` — the recipient address (on send-time and provider-callback events)
+- `$email_subject` — the email subject (on `$workflows_email_sent` and `$workflows_email_failed`)
+- `$messaging_source` — `direct` or `ses`, on provider-callback events
+- `$link_url` — the clicked link, on `$workflows_email_link_clicked`
 
 ## Relationship to workflow metrics
 
