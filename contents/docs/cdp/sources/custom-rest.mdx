@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-The Custom REST source lets you connect any REST API to PostHog's Data Warehouse without waiting for a dedicated integration. You use the custom REST source builder to configure the API – base URL, authentication, pagination, and the endpoints (resources) you want to sync – and PostHog handles the rest.
+The Custom REST source lets you connect any REST API to PostHog's Data Warehouse without waiting for a dedicated integration. You configure your API connection using the source builder in the PostHog UI – specifying the base URL, authentication, pagination, and the endpoints (streams) you want to sync – and PostHog handles the rest.
 
 This is useful when:
 
@@ -16,366 +16,108 @@ This is useful when:
 - You want to prototype a connection quickly
 - You need to pull data from an internal or niche API
 
-The manifest follows the same shape as the configs that power PostHog's built-in REST sources (Stripe, Intercom, Chargebee, etc.), so the existing sync engine handles pagination, authentication, JSONPath extraction, and incremental syncing automatically.
+## Prerequisites
+
+- A PostHog account with the Data Warehouse add-on
+- The base URL and authentication credentials for the API you want to connect
+- On PostHog Cloud, all API URLs must use `https://`
 
 ## Create a custom REST source
 
-1. In PostHog, go to the [Data pipeline sources tab](https://app.posthog.com/data-management/sources).
-2. Click **+ New source** and select **Custom REST source**.
-3. Paste your JSON manifest into the **Manifest (JSON)** field.
-4. Enter your authentication credentials in the appropriate field:
-   - **Bearer token** – for APIs that use `Authorization: Bearer <token>`
-   - **API key** – for APIs that pass a key via header, query parameter, or cookie
-   - **Auth password** – for HTTP Basic authentication
-5. Click **Next**. PostHog validates the manifest structure, checks that the URLs are reachable, and probes the first few endpoints to confirm your credentials work.
-6. Configure sync settings (sync method, frequency) for each resource, then start syncing.
+1. In PostHog, go to the [Data pipeline sources tab](https://app.posthog.com/pipeline/new/source).
+2. Click **Custom REST source**.
+3. Fill in the source builder form:
+   - Set the **Base URL** for the API (e.g. `https://api.example.com/v1`).
+   - Choose an **Authentication** method and enter your credentials.
+   - Optionally add **Default headers** that are sent with every request.
+   - Add one or more **Streams** – each stream maps to an API endpoint and becomes a table in your Data Warehouse.
+4. Click **Next**. PostHog validates the configuration, checks that the URLs are reachable, and probes the first few endpoints to confirm your credentials work.
+5. Configure sync settings (sync method, frequency) for each stream, then start syncing.
 
-<CalloutBox icon="IconWarning" title="Keep credentials out of the manifest" type="caution">
+> You can expand **Show generated manifest** at the bottom of the builder to inspect the JSON manifest that PostHog generates from your configuration.
 
-Never embed tokens, API keys, or passwords directly in the manifest JSON. Use the dedicated credential fields instead – they're stored encrypted and redacted from API responses.
+## Configuration reference
 
-</CalloutBox>
+### Base URL
 
-## Manifest reference
-
-The manifest is a JSON object with two top-level keys: `client` and `resources`.
-
-```json
-{
-  "client": { ... },
-  "resources": [ ... ]
-}
-```
-
-### Client configuration
-
-The `client` object configures the base URL, authentication, headers, and default pagination for all resources.
-
-| Field       | Type   | Required | Description                                                                              |
-| ----------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
-| `base_url`  | string | Yes      | The base URL all resource paths are resolved against (e.g. `https://api.example.com/v1`) |
-| `auth`      | object | No       | Authentication configuration (see [Authentication](#authentication))                     |
-| `headers`   | object | No       | Custom HTTP headers sent with every request                                              |
-| `paginator` | object | No       | Default pagination strategy for all resources (see [Pagination](#pagination))            |
+The root URL that all stream paths are resolved against (e.g. `https://api.example.com/v1`). This is required.
 
 ### Authentication
 
-Configure the `auth` object inside `client` to tell PostHog how to authenticate requests. The actual credential value is entered in the separate form field – only the non-secret configuration goes here.
+Select the authentication method from the **Authentication** dropdown.
 
-#### Bearer token
+| Method              | Fields              | Description                                                                                                                                                            |
+| ------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **No auth**         | –                   | No authentication headers are sent                                                                                                                                     |
+| **Bearer token**    | Token               | Sends `Authorization: Bearer <token>` with every request                                                                                                               |
+| **API key**         | Location, Name, Key | Sends the key as a header, query parameter, or cookie. **Location** controls where the key is placed. **Name** is the header/parameter/cookie name (e.g. `X-API-Key`). |
+| **HTTP basic auth** | Username, Password  | Sends standard HTTP Basic credentials                                                                                                                                  |
 
-```json
-{
-  "client": {
-    "base_url": "https://api.example.com/v1",
-    "auth": {
-      "type": "bearer"
-    }
-  },
-  "resources": [...]
-}
-```
+### Default headers
 
-Enter the token in the **Bearer token** field.
+Optional key-value pairs sent with every request. Auth headers are added automatically based on your authentication choice – you don't need to duplicate them here.
 
-#### API key
+Click **Add header** to add a new header row.
 
-```json
-{
-  "client": {
-    "base_url": "https://api.example.com/v1",
-    "auth": {
-      "type": "api_key",
-      "name": "X-API-Key",
-      "location": "header"
-    }
-  },
-  "resources": [...]
-}
-```
+### Streams
 
-Enter the key in the **API key** field.
+Each stream maps to an API endpoint and becomes a table in your Data Warehouse. Click **Add stream** to add more.
 
-| Field      | Type   | Description                                                       |
-| ---------- | ------ | ----------------------------------------------------------------- |
-| `name`     | string | The header name, query parameter name, or cookie name for the key |
-| `location` | string | Where to send the key: `header`, `query`, `param`, or `cookie`    |
+| Field                | Description                                                                                                            |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Stream name**      | Table name in PostHog. Must be unique within the source.                                                               |
+| **Primary key**      | Column(s) used for deduplication (comma-separated for composite keys). Defaults to `id`.                               |
+| **Path**             | URL path appended to the base URL (e.g. `/v1/users`).                                                                  |
+| **HTTP method**      | `GET` (default) or `POST`.                                                                                             |
+| **Records JSONPath** | JSONPath that points at the array of rows in each response (e.g. `data`, `items`, `results.data`). Defaults to `data`. |
 
-#### HTTP Basic
+#### Pagination
 
-```json
-{
-  "client": {
-    "base_url": "https://api.example.com/v1",
-    "auth": {
-      "type": "http_basic",
-      "username": "my_username"
-    }
-  },
-  "resources": [...]
-}
-```
+Each stream has a **Paginator** dropdown with the following options:
 
-Enter the password in the **Auth password** field. The `username` is non-secret and goes in the manifest.
+**Single page (no pagination)** – Use when the endpoint returns all data in one response.
 
-### Pagination
+**JSON body next-URL** – The response body contains a URL to the next page.
 
-Set a `paginator` on the `client` to apply it to all resources, or on individual resource endpoints to override the default.
+- **Next-URL JSONPath**: JSONPath to the next page URL in the response body (e.g. `links.next`).
 
-#### Single page
+**Cursor in JSON body** – The response body contains a cursor token you pass back as a query parameter.
 
-No pagination. Use when the endpoint returns all data in one response.
+- **Cursor JSONPath**: JSONPath to the cursor value in the response (e.g. `meta.next_cursor`).
+- **Cursor query param**: Query parameter name to send the cursor value (e.g. `cursor`).
 
-```json
-{ "type": "single_page" }
-```
+**Offset / limit query params** – Classic offset/limit pagination.
 
-#### JSON response (next URL)
+- **Page size**: Number of items per page (defaults to `100`).
+- **Offset param**: Query parameter name for the offset (e.g. `offset`).
+- **Limit param**: Query parameter name for the limit (e.g. `limit`).
 
-The response body contains a URL to the next page.
+**Page number query param** – Page-based pagination.
 
-```json
-{
-  "type": "json_response",
-  "next_url_path": "$.pagination.next"
-}
-```
+- **Page query param**: Query parameter name for the page number (e.g. `page`).
+- **Initial page**: Starting page number (defaults to `1`).
 
-| Field           | Type   | Description                                        |
-| --------------- | ------ | -------------------------------------------------- |
-| `next_url_path` | string | JSONPath to the next page URL in the response body |
+**Link header (RFC 5988)** – Pagination via the HTTP `Link` header.
 
-#### Cursor
-
-The response body contains a cursor token you pass back as a query parameter.
-
-```json
-{
-  "type": "cursor",
-  "cursor_path": "$.meta.cursor",
-  "cursor_param": "after"
-}
-```
-
-| Field          | Type   | Description                                   |
-| -------------- | ------ | --------------------------------------------- |
-| `cursor_path`  | string | JSONPath to the cursor value in the response  |
-| `cursor_param` | string | Query parameter name to send the cursor value |
-
-#### Offset
-
-Classic offset/limit pagination.
-
-```json
-{
-  "type": "offset",
-  "limit": 100,
-  "offset_param": "offset",
-  "limit_param": "limit",
-  "total_path": "$.total"
-}
-```
-
-| Field            | Type    | Description                           |
-| ---------------- | ------- | ------------------------------------- |
-| `limit`          | integer | Number of items per page              |
-| `offset`         | integer | Starting offset (defaults to 0)       |
-| `offset_param`   | string  | Query parameter name for the offset   |
-| `limit_param`    | string  | Query parameter name for the limit    |
-| `total_path`     | string  | JSONPath to the total number of items |
-| `maximum_offset` | integer | Hard cap on the offset value          |
-
-#### Page number
-
-Page-based pagination.
-
-```json
-{
-  "type": "page_number",
-  "page_param": "page",
-  "total_path": "$.total_pages"
-}
-```
-
-| Field          | Type    | Description                                |
-| -------------- | ------- | ------------------------------------------ |
-| `initial_page` | integer | Starting page number                       |
-| `page_param`   | string  | Query parameter name for the page number   |
-| `total_path`   | string  | JSONPath to the total pages or total items |
-| `maximum_page` | integer | Hard cap on the number of pages to fetch   |
-
-#### Header link
-
-Pagination via the HTTP `Link` header (RFC 8288).
-
-```json
-{
-  "type": "header_link",
-  "links_next_key": "next"
-}
-```
-
-| Field            | Type   | Description                                                         |
-| ---------------- | ------ | ------------------------------------------------------------------- |
-| `links_next_key` | string | The `rel` value to follow in the `Link` header (defaults to `next`) |
-
-### Resources
-
-The `resources` array defines the API endpoints to sync. Each resource becomes a table in your Data Warehouse.
-
-| Field         | Type            | Required | Description                                              |
-| ------------- | --------------- | -------- | -------------------------------------------------------- |
-| `name`        | string          | Yes      | Table name in PostHog. Must be unique within the source. |
-| `endpoint`    | object          | Yes      | The API endpoint configuration (see below)               |
-| `primary_key` | string or array | No       | Column(s) used for deduplication during incremental sync |
-| `sort_mode`   | string          | No       | Row ordering from the API: `asc` (default) or `desc`     |
-
-#### Endpoint configuration
-
-| Field           | Type   | Required | Description                                           |
-| --------------- | ------ | -------- | ----------------------------------------------------- |
-| `path`          | string | Yes      | URL path appended to the `base_url` (e.g. `/users`)   |
-| `method`        | string | No       | HTTP method: `GET` (default) or `POST`                |
-| `params`        | object | No       | Query parameters sent with the request                |
-| `json`          | object | No       | JSON request body (for POST requests)                 |
-| `data_selector` | string | No       | JSONPath to extract the data array from the response  |
-| `paginator`     | object | No       | Override the client-level paginator for this endpoint |
-| `incremental`   | object | No       | Incremental sync configuration (see below)            |
+- **rel= key in Link header**: The `rel` value to follow (defaults to `next`).
 
 #### Incremental sync
 
-Configure `incremental` on an endpoint to enable incremental syncing. This tells PostHog how to request only new or updated records.
+Enable the **Enable incremental sync** checkbox on a stream to tell PostHog to request only new or updated records on subsequent syncs.
 
-| Field           | Type   | Description                                                                       |
-| --------------- | ------ | --------------------------------------------------------------------------------- |
-| `cursor_path`   | string | Field path in the response data used as the sync cursor (e.g. `updated_at`)       |
-| `start_param`   | string | Query parameter name to send the cursor value (e.g. `since`)                      |
-| `end_param`     | string | Query parameter for the end of the time window (optional)                         |
-| `initial_value` | string | Starting value for the first sync                                                 |
-| `cursor_type`   | string | Type of the cursor field: `datetime` (default), `integer`, `date`, or `timestamp` |
-
-## Example manifests
-
-### Paginated API with bearer auth
-
-This example syncs users and orders from a fictional API using cursor pagination.
-
-```json
-{
-  "client": {
-    "base_url": "https://api.myservice.com/v2",
-    "auth": {
-      "type": "bearer"
-    },
-    "paginator": {
-      "type": "cursor",
-      "cursor_path": "$.meta.next_cursor",
-      "cursor_param": "cursor"
-    }
-  },
-  "resources": [
-    {
-      "name": "users",
-      "endpoint": {
-        "path": "/users",
-        "params": { "limit": 100 },
-        "data_selector": "$.data"
-      },
-      "primary_key": "id"
-    },
-    {
-      "name": "orders",
-      "endpoint": {
-        "path": "/orders",
-        "params": { "limit": 50 },
-        "data_selector": "$.data",
-        "incremental": {
-          "cursor_path": "updated_at",
-          "start_param": "updated_since",
-          "cursor_type": "datetime"
-        }
-      },
-      "primary_key": "id"
-    }
-  ]
-}
-```
-
-### API key in query parameter
-
-This example uses an API key passed as a query parameter with offset pagination.
-
-```json
-{
-  "client": {
-    "base_url": "https://data.example.com/api",
-    "auth": {
-      "type": "api_key",
-      "name": "apikey",
-      "location": "query"
-    },
-    "paginator": {
-      "type": "offset",
-      "limit": 200,
-      "offset_param": "offset",
-      "limit_param": "limit",
-      "total_path": "$.total_count"
-    }
-  },
-  "resources": [
-    {
-      "name": "contacts",
-      "endpoint": {
-        "path": "/contacts",
-        "data_selector": "$.results"
-      },
-      "primary_key": "contact_id"
-    }
-  ]
-}
-```
-
-### POST-based query endpoint
-
-Some APIs require POST requests to query data.
-
-```json
-{
-  "client": {
-    "base_url": "https://analytics.example.com",
-    "auth": {
-      "type": "bearer"
-    }
-  },
-  "resources": [
-    {
-      "name": "events",
-      "endpoint": {
-        "path": "/query/events",
-        "method": "POST",
-        "json": {
-          "filters": { "status": "active" },
-          "fields": ["id", "name", "created_at"]
-        },
-        "data_selector": "$.results",
-        "paginator": {
-          "type": "json_response",
-          "next_url_path": "$.next_page_url"
-        }
-      },
-      "primary_key": "id"
-    }
-  ]
-}
-```
+| Field                  | Description                                                                                                                                                                                                   |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Cursor JSONPath**    | Field path in the response data used as the sync cursor (e.g. `updated_at`). Required for incremental sync to work.                                                                                           |
+| **Cursor query param** | Query parameter name to send the cursor value (e.g. `since`). Defaults to the cursor JSONPath value.                                                                                                          |
+| **Cursor type**        | Type of the cursor field: `Datetime` (default), `Date`, `Timestamp (epoch)`, or `Integer`.                                                                                                                    |
+| **Upstream row order** | Whether the API returns rows in `Ascending (oldest first)` (default) or `Descending (newest first)` order. Pick "Descending" when the API returns newest rows first – otherwise a resumed sync may skip rows. |
 
 ## Limitations
 
 - **Maximum 5 custom sources per team**
-- **Maximum 50 resources per source**
+- **Maximum 50 streams per source**
 - Only `GET` and `POST` HTTP methods are supported
 - All URLs must use `https://` on PostHog Cloud
-- Credentials must be entered in the dedicated form fields, not inline in the manifest
 - URLs pointing to internal or private network hosts are blocked on PostHog Cloud
 
 ## Troubleshooting
@@ -385,24 +127,20 @@ Some APIs require POST requests to query data.
 PostHog probes the first few endpoints when you create a source. If the API returns HTTP 401 or 403, check that:
 
 - You entered the credential in the correct field (e.g. bearer token vs API key)
-- The `auth.type` in the manifest matches the credential type
-- For `api_key` auth, the `name` and `location` match what the API expects
+- The authentication method you selected matches what the API expects
+- For API key auth, the name and location match what the API expects
 
 Other status codes (404, 429, 5xx) don't block source creation – those errors surface on the first sync instead.
 
-### Manifest validation errors
+### Common configuration issues
 
-Common manifest issues:
-
-- **Missing `base_url`** – The `client.base_url` field is required
-- **Empty `resources`** – You need at least one resource
-- **Duplicate resource names** – Each resource `name` must be unique
-- **Invalid `method`** – Only `GET` and `POST` are supported
-- **Credentials in manifest** – Tokens, API keys, and passwords must go in the dedicated form fields, not in the `auth` object
+- **Missing base URL** – The base URL field is required
+- **Empty streams** – You need at least one stream
+- **Duplicate stream names** – Each stream name must be unique
 
 ### Incremental sync skips rows
 
-If using `sort_mode: "asc"` (the default) and the API doesn't guarantee ascending order by the cursor field, rows can be skipped when a sync is interrupted and resumed. Set `sort_mode` to `"desc"` if the API returns newest records first.
+If using ascending order (the default) and the API doesn't guarantee ascending order by the cursor field, rows can be skipped when a sync is interrupted and resumed. Set **Upstream row order** to "Descending" if the API returns newest records first.
 
 ### Have a question? Ask PostHog AI
 
