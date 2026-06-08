@@ -45,7 +45,7 @@ Each event carries properties so you can filter and break down by workflow, reci
 
 - `$workflow_id` — the workflow that sent the email (on every event)
 - `$email_to` — the recipient address (on send-time and provider-callback events)
-- `$email_subject` — the email subject (on `$workflows_email_sent` and `$workflows_email_failed`)
+- `$email_subject` — the email subject (on the send-time events `$workflows_email_sent` and `$workflows_email_failed`)
 - `$messaging_source` — how the event was captured (`ses` for provider callbacks), on the callback events
 - `$link_url` — the clicked link, on `$workflows_email_link_clicked`
 
