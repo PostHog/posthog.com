@@ -28,6 +28,7 @@ import {
 } from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
+import { useHedgehogMode } from 'components/HedgehogMode'
 import { navigate } from 'gatsby'
 import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
@@ -338,6 +339,7 @@ export function useMenuData(): MenuType[] {
     } = useApp()
     const { addToast } = useToast()
     const posthog = usePostHog()
+    const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
@@ -654,6 +656,33 @@ export function useMenuData(): MenuType[] {
                     label: 'Things that spark joy',
                     icon: <IconSparksJoy className="size-4" />,
                     items: [
+                        {
+                            type: 'item',
+                            onClick: () => setHedgehogModeEnabled(!hedgehogModeEnabled),
+                            node: (
+                                <span className="px-2.5 flex w-full justify-between items-center gap-2">
+                                    <span>Hedgehog mode</span>
+                                    {/* Presentational toggle — the whole row is the clickable menu item */}
+                                    <span className="relative inline-flex items-center justify-center h-2 w-8 flex-shrink-0">
+                                        <span
+                                            aria-hidden
+                                            className="pointer-events-none absolute w-full h-full rounded-md bg-[#c4c4c4] dark:bg-[#5A5A5A]"
+                                        />
+                                        <span
+                                            aria-hidden
+                                            className={`pointer-events-none absolute left-0 inline-block h-4 w-4 rounded-full transition-transform ease-in-out duration-200 ${
+                                                hedgehogModeEnabled
+                                                    ? 'translate-x-5 bg-teal'
+                                                    : 'translate-x-0 bg-[#555] dark:bg-[#999]'
+                                            }`}
+                                        />
+                                    </span>
+                                </span>
+                            ),
+                        },
+                        {
+                            type: 'separator',
+                        },
                         {
                             type: 'item',
                             label: 'Browse all',
