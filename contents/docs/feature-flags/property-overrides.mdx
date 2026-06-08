@@ -44,7 +44,7 @@ posthog.identify('user-123', {
 })
 
 // This flag check can use 'is_beta_user' immediately
-const showFeature = posthog.isFeatureEnabled('enterprise-feature')
+const showFeature = posthog.isFeatureEnabled('beta-feature')
 ```
 
 ```react-native
@@ -55,7 +55,7 @@ posthog.identify('user-123', {
 })
 
 // This flag check can use 'is_beta_user' immediately
-const showFeature = posthog.isFeatureEnabled('enterprise-feature')
+const showFeature = posthog.isFeatureEnabled('beta-feature')
 ```
 
 ```swift file=iOS
@@ -66,7 +66,7 @@ PostHogSDK.shared.identify("user-123", userProperties: [
 ])
 
 // This flag check can use 'is_beta_user' immediately
-let showFeature = PostHogSDK.shared.isFeatureEnabled("enterprise-feature")
+let showFeature = PostHogSDK.shared.isFeatureEnabled("beta-feature")
 ```
 
 ```kotlin file=Android
@@ -80,7 +80,7 @@ PostHog.identify(
 )
 
 // This flag check can use 'is_beta_user' immediately
-val showFeature = PostHog.isFeatureEnabled("enterprise-feature")
+val showFeature = PostHog.isFeatureEnabled("beta-feature")
 ```
 
 ```dart
@@ -94,7 +94,7 @@ await Posthog().identify(
 )
 
 // This flag check can use 'is_beta_user' immediately
-final showFeature = await Posthog().isFeatureEnabled('enterprise-feature')
+final showFeature = await Posthog().isFeatureEnabled('beta-feature')
 ```
 
 </MultiLanguage>
@@ -254,33 +254,33 @@ Use `setPersonPropertiesForFlags()` to explicitly set properties for flag evalua
 // Set properties for flag evaluation
 posthog.setPersonPropertiesForFlags({
     is_beta_user: true,
-    signup_source: 'organic'
+    country: 'US'
 })
 
 // Properties persist across flag evaluations
-const showFeature = posthog.isFeatureEnabled('enterprise-feature')
+const showFeature = posthog.isFeatureEnabled('beta-feature')
 ```
 
 ```react-native
 // Set properties for flag evaluation
 posthog.setPersonPropertiesForFlags({
     is_beta_user: true,
-    signup_source: 'organic'
+    country: 'US'
 })
 
 // Properties persist across flag evaluations
-const showFeature = posthog.isFeatureEnabled('enterprise-feature')
+const showFeature = posthog.isFeatureEnabled('beta-feature')
 ```
 
 ```swift file=iOS
 // Set properties for flag evaluation
 PostHogSDK.shared.setPersonPropertiesForFlags([
     "is_beta_user": true,
-    "signup_source": "organic"
+    "country": "US"
 ])
 
 // Properties persist across flag evaluations
-let showFeature = PostHogSDK.shared.isFeatureEnabled("enterprise-feature")
+let showFeature = PostHogSDK.shared.isFeatureEnabled("beta-feature")
 ```
 
 ```kotlin file=Android
@@ -288,23 +288,23 @@ let showFeature = PostHogSDK.shared.isFeatureEnabled("enterprise-feature")
 PostHog.setPersonPropertiesForFlags(
     mapOf(
         "is_beta_user" to true,
-        "signup_source" to "organic"
+        "country" to "US"
     )
 )
 
 // Properties persist across flag evaluations
-val showFeature = PostHog.isFeatureEnabled("enterprise-feature")
+val showFeature = PostHog.isFeatureEnabled("beta-feature")
 ```
 
 ```dart
 // Set properties for flag evaluation
 await Posthog().setPersonPropertiesForFlags({
     'is_beta_user': true,
-    'signup_source': 'organic',
+    'country': 'US',
 })
 
 // Properties persist across flag evaluations
-final showFeature = await Posthog().isFeatureEnabled('enterprise-feature')
+final showFeature = await Posthog().isFeatureEnabled('beta-feature')
 ```
 
 </MultiLanguage>
@@ -320,7 +320,7 @@ By default, calling `setPersonPropertiesForFlags()` triggers an automatic reload
 ```js file=Web
 // Set properties without reloading
 posthog.setPersonPropertiesForFlags({ is_beta_user: true }, false)
-posthog.setPersonPropertiesForFlags({ signup_source: 'organic' }, false)
+posthog.setPersonPropertiesForFlags({ country: 'US' }, false)
 
 // Manually reload when ready
 posthog.reloadFeatureFlags()
@@ -329,7 +329,7 @@ posthog.reloadFeatureFlags()
 ```react-native
 // Set properties without reloading
 posthog.setPersonPropertiesForFlags({ is_beta_user: true }, false)
-posthog.setPersonPropertiesForFlags({ signup_source: 'organic' }, false)
+posthog.setPersonPropertiesForFlags({ country: 'US' }, false)
 
 // Manually reload when ready
 posthog.reloadFeatureFlags()
@@ -338,7 +338,7 @@ posthog.reloadFeatureFlags()
 ```swift file=iOS
 // Set properties without reloading
 PostHogSDK.shared.setPersonPropertiesForFlags(["is_beta_user": true], reloadFeatureFlags: false)
-PostHogSDK.shared.setPersonPropertiesForFlags(["signup_source": "organic"], reloadFeatureFlags: false)
+PostHogSDK.shared.setPersonPropertiesForFlags(["country": "US"], reloadFeatureFlags: false)
 
 // Manually reload when ready
 PostHogSDK.shared.reloadFeatureFlags()
@@ -347,7 +347,7 @@ PostHogSDK.shared.reloadFeatureFlags()
 ```kotlin file=Android
 // Set properties without reloading
 PostHog.setPersonPropertiesForFlags(mapOf("is_beta_user" to true), reloadFeatureFlags = false)
-PostHog.setPersonPropertiesForFlags(mapOf("signup_source" to "organic"), reloadFeatureFlags = false)
+PostHog.setPersonPropertiesForFlags(mapOf("country" to "US"), reloadFeatureFlags = false)
 
 // Manually reload when ready
 PostHog.reloadFeatureFlags()
@@ -356,7 +356,7 @@ PostHog.reloadFeatureFlags()
 ```dart
 // Set properties without reloading
 await Posthog().setPersonPropertiesForFlags({'is_beta_user': true}, reloadFeatureFlags: false)
-await Posthog().setPersonPropertiesForFlags({'signup_source': 'organic'}, reloadFeatureFlags: false)
+await Posthog().setPersonPropertiesForFlags({'country': 'US'}, reloadFeatureFlags: false)
 
 // Manually reload when ready
 await Posthog().reloadFeatureFlags()
@@ -532,7 +532,7 @@ Server-side SDKs handle property overrides differently. Instead of persistent se
 const flags = await client.evaluateFlags('user-distinct-id', {
     personProperties: {
         is_beta_user: true,
-        signup_source: 'organic',
+        country: 'US',
     },
     groups: {
         company: 'company-123',
@@ -553,7 +553,7 @@ flags = posthog.evaluate_flags(
     "user-distinct-id",
     person_properties={
         "is_beta_user": True,
-        "signup_source": "organic",
+        "country": "US",
     },
     groups={
         "company": "company-123",
@@ -574,7 +574,7 @@ $flags = PostHog::evaluateFlags(
     distinctId: 'user-distinct-id',
     personProperties: [
         'is_beta_user' => true,
-        'signup_source' => 'organic',
+        'country' => 'US',
     ],
     groups: [
         'company' => 'company-123',
@@ -595,7 +595,7 @@ flags = posthog.evaluate_flags(
     'user-distinct-id',
     person_properties: {
         is_beta_user: true,
-        signup_source: 'organic',
+        country: 'US',
     },
     groups: {
         company: 'company-123',
@@ -616,7 +616,7 @@ flags, err := client.EvaluateFlags(posthog.EvaluateFlagsPayload{
     DistinctId: "user-distinct-id",
     PersonProperties: posthog.NewProperties().
         Set("is_beta_user", true).
-        Set("signup_source", "organic"),
+        Set("country", "US"),
     Groups: posthog.NewGroups().
         Set("company", "company-123"),
     GroupProperties: map[string]posthog.Properties{
@@ -637,7 +637,7 @@ PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags(
     "user-distinct-id",
     PostHogEvaluateFlagsOptions.builder()
         .personProperty("is_beta_user", true)
-        .personProperty("signup_source", "organic")
+        .personProperty("country", "US")
         .group("company", "company-123")
         .groupProperty("company", "plan", "enterprise")
         .groupProperty("company", "employee_count", 500)
