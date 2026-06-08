@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-The Custom REST source lets you connect any REST API to PostHog's Data Warehouse without waiting for a dedicated integration. You provide a JSON manifest that describes the API – base URL, authentication, pagination, and the endpoints (resources) you want to sync – and PostHog handles the rest.
+The Custom REST source lets you connect any REST API to PostHog's Data Warehouse without waiting for a dedicated integration. You use the custom REST source builder to configure the API – base URL, authentication, pagination, and the endpoints (resources) you want to sync – and PostHog handles the rest.
 
 This is useful when:
 
@@ -17,12 +17,6 @@ This is useful when:
 - You need to pull data from an internal or niche API
 
 The manifest follows the same shape as the configs that power PostHog's built-in REST sources (Stripe, Intercom, Chargebee, etc.), so the existing sync engine handles pagination, authentication, JSONPath extraction, and incremental syncing automatically.
-
-## Prerequisites
-
-- A PostHog account with the Data Warehouse enabled
-- The base URL and authentication credentials for the API you want to connect
-- On PostHog Cloud, all API URLs must use `https://`
 
 ## Create a custom REST source
 
