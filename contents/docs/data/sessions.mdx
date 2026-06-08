@@ -163,13 +163,15 @@ If the events are logically part of the same session, e.g. a user starts a purch
 
 ### Automatically sending session IDs
 
-If you enable tracing headers within the JavaScript SDK, the session ID will be sent on every request. You can enable tracing headers by adding the `__add_tracing_headers` option to your `posthog.init` call:
+If you enable tracing headers within the JavaScript SDK, distinct ID and sessionID will be sent on every request. You can enable tracing headers by adding the `tracing_headers` option to your `posthog.init` call:
 
 ```ts
 posthog.init('<ph_project_token>', {
-    __add_tracing_headers: ['your-backend-domain.com'] // +
+    tracing_headers: ['your-backend-domain.com'] // +
 })
 ```
+
+Use hostnames only, without the protocol or path. For example, use `api.example.com` instead of `https://api.example.com/v1`.
 
 If you are using the Python SDK with Django, you can add [the middleware integration](/docs/libraries/django#django-contexts-middleware) which correctly extracts the session ID and adds it to every captured event.
 

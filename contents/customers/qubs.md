@@ -1,3 +1,4 @@
+---
 title: How Qubs flipped the digital menu market with PostHog Endpoints
 customer: Qubs
 featuredImage: >-

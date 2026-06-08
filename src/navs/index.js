@@ -2319,6 +2319,14 @@ export const docsMenu = {
                             ],
                         },
                         {
+                            name: 'Roblox',
+                            url: '/docs/libraries/roblox',
+                            badge: {
+                                title: 'Beta',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                            },
+                        },
+                        {
                             name: 'Ruby',
                             url: '/docs/libraries/ruby',
                         },
@@ -4852,6 +4860,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/unity',
                         },
                         {
+                            name: 'Roblox',
+                            url: '/docs/error-tracking/installation/roblox',
+                        },
+                        {
                             name: 'Elixir',
                             url: '/docs/error-tracking/installation/elixir',
                         },
@@ -6903,18 +6915,18 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Tracing',
+            name: 'Distributed tracing',
             icon: 'IconListTree',
             color: 'purple',
-            url: '/docs/tracing',
+            url: '/docs/distributed-tracing',
             description: 'Capture and explore distributed traces with OpenTelemetry.',
             children: [
                 {
-                    name: 'Tracing',
+                    name: 'Distributed tracing',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/tracing',
+                    url: '/docs/distributed-tracing',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
@@ -6923,14 +6935,14 @@ export const docsMenu = {
                 },
                 {
                     name: 'Start here',
-                    url: '/docs/tracing/start-here',
+                    url: '/docs/distributed-tracing/start-here',
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
                 },
                 {
-                    name: 'Why you need tracing',
-                    url: '/docs/tracing/basics',
+                    name: 'Why you need distributed tracing',
+                    url: '/docs/distributed-tracing/basics',
                     icon: 'IconBook',
                     color: 'seagreen',
                 },
