@@ -28,6 +28,8 @@ import {
 } from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
+import { useHedgehogMode } from 'components/HedgehogMode'
+import Toggle from 'components/Toggle'
 import { navigate } from 'gatsby'
 import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
@@ -338,6 +340,7 @@ export function useMenuData(): MenuType[] {
     } = useApp()
     const { addToast } = useToast()
     const posthog = usePostHog()
+    const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
@@ -654,6 +657,19 @@ export function useMenuData(): MenuType[] {
                     label: 'Things that spark joy',
                     icon: <IconSparksJoy className="size-4" />,
                     items: [
+                        {
+                            type: 'item',
+                            onClick: () => setHedgehogModeEnabled(!hedgehogModeEnabled),
+                            node: (
+                                <span className="px-2.5 flex w-full justify-between items-center gap-2">
+                                    <span>Hedgehog mode</span>
+                                    <Toggle checked={hedgehogModeEnabled} onChange={() => undefined} />
+                                </span>
+                            ),
+                        },
+                        {
+                            type: 'separator',
+                        },
                         {
                             type: 'item',
                             label: 'Browse all',
