@@ -411,7 +411,7 @@ curl -X POST https://us.posthog.com/api/agentic/oauth/token \
 }
 ```
 
-Each refresh token is single-use. The response includes a new refresh token for subsequent refreshes. Refreshing can only keep or narrow a token's scopes, never add them — to grant additional scopes, request them in a new account request, and they apply to connections provisioned afterward.
+Each refresh token is single-use. The response includes a new refresh token for subsequent refreshes. Refreshing can only keep or narrow a token's scopes, never add them. To grant additional scopes, request them in a new account request; they apply to connections provisioned afterward.
 
 ### Available scopes
 
