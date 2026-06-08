@@ -12,7 +12,7 @@ This is an **opt-in** setting at the project level. By default no engagement eve
 
 Go to **Settings → Workflows → Engagement events** and toggle **Capture email engagement events** on. You can also enable it inline from the email step in the workflow builder, the toggle in settings is the same setting.
 
-The setting takes effect immediately for all future email sends in the project. Emails that were already sent before you enabled it won't backfill, but webhook callbacks (opens, clicks, bounces) for those in-flight messages will still produce engagement events going forward.
+The setting takes effect within a couple of minutes for future email sends. Emails that were already sent before you enabled it won't backfill, but provider callbacks (opens, clicks, bounces) for those in-flight messages will still produce engagement events once the setting is on.
 
 ## Events emitted
 
@@ -20,12 +20,12 @@ Every event below is captured as a standard PostHog event under the recipient's 
 
 | Event | When it fires |
 | --- | --- |
-| `$workflows_email_sent` | The workflow handed the email to the upstream provider (e.g. SES, Mailjet) for delivery. |
+| `$workflows_email_sent` | The workflow handed the email to the email provider (SES) for delivery. |
 | `$workflows_email_delivered` | The upstream provider confirmed the message was accepted by the recipient's mail server. |
 | `$workflows_email_opened` | The recipient opened the email. Detected via the tracking pixel embedded in the HTML body, so requires the recipient's mail client to load remote images. |
 | `$workflows_email_link_clicked` | The recipient clicked a tracked link in the email body. |
 | `$workflows_email_bounced` | The provider reported a hard or soft bounce (invalid address, mailbox full, etc.). |
-| `$workflows_email_blocked` | The recipient marked the email as spam, or the recipient address is on a suppression list. |
+| `$workflows_email_blocked` | The recipient marked the email as spam (a complaint). |
 | `$workflows_email_failed` | The send failed for another reason (provider error, malformed request, transient outage). |
 
 `$workflows_email_sent` is recorded when the email is handed off for delivery. The delivery, open, click, bounce, and block events depend on the email provider sending event callbacks back to PostHog, so they only appear once those callbacks arrive.
@@ -34,7 +34,7 @@ Every event below is captured as a standard PostHog event under the recipient's 
 
 Because these are standard events, you can use them anywhere PostHog events are available:
 
-- **Trends**: chart `$workflows_email_opened` over time, broken down by workflow ID or email subject.
+- **Trends**: chart `$workflows_email_opened` over time, broken down by `$workflow_id`.
 - **Funnels**: measure the path from `$workflows_email_sent` → `$workflows_email_opened` → `$workflows_email_link_clicked` → a downstream product conversion event.
 - **Retention**: cohort recipients who received an email last week and see how many returned to the product.
 - **Dashboards**: combine engagement metrics with revenue or feature-flag exposure to attribute workflows impact.
@@ -46,7 +46,7 @@ Each event carries properties so you can filter and break down by workflow, reci
 - `$workflow_id` — the workflow that sent the email (on every event)
 - `$email_to` — the recipient address (on send-time and provider-callback events)
 - `$email_subject` — the email subject (on `$workflows_email_sent` and `$workflows_email_failed`)
-- `$messaging_source` — `direct` or `ses`, on provider-callback events
+- `$messaging_source` — how the event was captured (`ses` for provider callbacks), on the callback events
 - `$link_url` — the clicked link, on `$workflows_email_link_clicked`
 
 ## Relationship to workflow metrics
